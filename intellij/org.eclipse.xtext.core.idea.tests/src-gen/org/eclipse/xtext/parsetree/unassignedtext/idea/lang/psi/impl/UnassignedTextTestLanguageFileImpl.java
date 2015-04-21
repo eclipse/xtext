@@ -13,6 +13,7 @@ public final class UnassignedTextTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, UnassignedTextTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return UnassignedTextTestLanguageFileType.INSTANCE;
 	}

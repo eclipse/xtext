@@ -16,6 +16,7 @@ public class EncodingTestLanguageParserDefinition extends AbstractXtextParserDef
 	@Inject 
 	private EncodingTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new EncodingTestLanguageFileImpl(viewProvider);
 	}

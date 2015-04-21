@@ -13,6 +13,7 @@ public final class Bug296889ExTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, Bug296889ExTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return Bug296889ExTestLanguageFileType.INSTANCE;
 	}

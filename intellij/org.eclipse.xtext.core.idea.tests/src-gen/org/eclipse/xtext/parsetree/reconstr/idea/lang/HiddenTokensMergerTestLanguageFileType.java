@@ -16,18 +16,22 @@ public final class HiddenTokensMergerTestLanguageFileType extends LanguageFileTy
 		super(HiddenTokensMergerTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "HiddenTokensMergerTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "HiddenTokensMergerTestLanguage";
 	}

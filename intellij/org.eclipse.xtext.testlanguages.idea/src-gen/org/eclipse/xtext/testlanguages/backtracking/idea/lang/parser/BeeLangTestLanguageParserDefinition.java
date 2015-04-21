@@ -17,6 +17,7 @@ public class BeeLangTestLanguageParserDefinition extends TerminalsParserDefiniti
 	@Inject 
 	private BeeLangTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new BeeLangTestLanguageFileImpl(viewProvider);
 	}

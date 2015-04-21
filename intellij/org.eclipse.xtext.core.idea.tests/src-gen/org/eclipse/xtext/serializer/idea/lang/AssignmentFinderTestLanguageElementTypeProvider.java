@@ -770,10 +770,12 @@ public class AssignmentFinderTestLanguageElementTypeProvider implements IElement
 
 	public static final IGrammarAwareElementType CrossRef_CrossRefCrossRefTerminal2TerminalRuleCall_1_1_0_1_ELEMENT_TYPE = associate(CrossRefFactory.createCrossRef_CrossRefCrossRefTerminal2TerminalRuleCall_1_1_0_1ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

@@ -97,10 +97,12 @@ public class Bug289059TestLanguageElementTypeProvider implements IElementTypePro
 
 	public static final IGrammarAwareElementType UnassignedAction_EnabledKeyword_1_ELEMENT_TYPE = associate(UnassignedActionFactory.createUnassignedAction_EnabledKeyword_1ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

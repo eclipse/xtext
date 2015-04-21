@@ -17,6 +17,7 @@ public class ActionTestLanguageParserDefinition extends TerminalsParserDefinitio
 	@Inject 
 	private ActionTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new ActionTestLanguageFileImpl(viewProvider);
 	}

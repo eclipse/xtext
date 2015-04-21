@@ -1801,10 +1801,12 @@ public class EpatchTestLanguageElementTypeProvider implements IElementTypeProvid
 
 	public static final IGrammarAwareElementType ExpressionExecutable_ExprstrSTRINGTerminalRuleCall_0_ELEMENT_TYPE = associate(ExpressionExecutableFactory.createExpressionExecutable_ExprstrSTRINGTerminalRuleCall_0ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

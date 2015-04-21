@@ -16,6 +16,7 @@ public class GrammarAccessTestLanguageParserDefinition extends TerminalsParserDe
 	@Inject 
 	private GrammarAccessTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new GrammarAccessTestLanguageFileImpl(viewProvider);
 	}

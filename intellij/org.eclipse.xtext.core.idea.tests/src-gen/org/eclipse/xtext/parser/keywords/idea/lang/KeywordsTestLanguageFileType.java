@@ -16,18 +16,22 @@ public final class KeywordsTestLanguageFileType extends LanguageFileType {
 		super(KeywordsTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "KeywordsTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "KeywordsTestLanguage";
 	}

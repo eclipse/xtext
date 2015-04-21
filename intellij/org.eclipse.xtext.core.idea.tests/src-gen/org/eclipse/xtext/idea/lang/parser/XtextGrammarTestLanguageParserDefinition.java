@@ -18,6 +18,7 @@ public class XtextGrammarTestLanguageParserDefinition extends TerminalsParserDef
 	@Inject 
 	private XtextGrammarTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new XtextGrammarTestLanguageFileImpl(viewProvider);
 	}

@@ -112,10 +112,12 @@ public class EnumAndReferenceTestLanguageElementTypeProvider implements IElement
 
 	public static final IGrammarAwareElementType KindOfKeyword_AnotherEnumLiteralAnotherEnumLiteralKeyword_1_0_ELEMENT_TYPE = associate(KindOfKeywordFactory.createKindOfKeyword_AnotherEnumLiteralAnotherEnumLiteralKeyword_1_0ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

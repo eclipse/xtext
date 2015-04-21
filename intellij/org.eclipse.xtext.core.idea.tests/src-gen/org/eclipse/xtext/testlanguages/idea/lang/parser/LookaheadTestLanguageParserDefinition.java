@@ -16,6 +16,7 @@ public class LookaheadTestLanguageParserDefinition extends TerminalsParserDefini
 	@Inject 
 	private LookaheadTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new LookaheadTestLanguageFileImpl(viewProvider);
 	}

@@ -16,18 +16,22 @@ public final class ComplexReconstrTestLanguageFileType extends LanguageFileType 
 		super(ComplexReconstrTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "ComplexReconstrTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "ComplexReconstrTestLanguage";
 	}

@@ -7,6 +7,7 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 
 public class AbstractIgnoreCaseLinkingTestLanguageSyntaxHighlighterFactory extends SingleLazyInstanceSyntaxHighlighterFactory {
 	
+	@Override
     @NotNull
     protected SyntaxHighlighter createHighlighter() {
         return AbstractIgnoreCaseLinkingTestLanguageLanguage.INSTANCE.getInstance(SyntaxHighlighter.class);

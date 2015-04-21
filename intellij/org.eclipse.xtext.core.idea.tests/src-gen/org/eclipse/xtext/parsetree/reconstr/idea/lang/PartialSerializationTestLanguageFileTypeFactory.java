@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class PartialSerializationTestLanguageFileTypeFactory extends FileTypeFactory {
 
+	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
 		consumer.consume(org.eclipse.xtext.parsetree.reconstr.idea.lang.PartialSerializationTestLanguageFileType.INSTANCE, org.eclipse.xtext.parsetree.reconstr.idea.lang.PartialSerializationTestLanguageFileType.DEFAULT_EXTENSION);
 	}

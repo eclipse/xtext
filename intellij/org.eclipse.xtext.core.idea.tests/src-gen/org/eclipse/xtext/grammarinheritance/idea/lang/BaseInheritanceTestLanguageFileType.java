@@ -16,18 +16,22 @@ public final class BaseInheritanceTestLanguageFileType extends LanguageFileType 
 		super(BaseInheritanceTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "BaseInheritanceTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "BaseInheritanceTestLanguage";
 	}

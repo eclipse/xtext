@@ -107,10 +107,12 @@ public class TreeTestLanguageElementTypeProvider implements IElementTypeProvider
 
 	public static final IGrammarAwareElementType Node_RightCurlyBracketSemicolonKeyword_6_ELEMENT_TYPE = associate(NodeFactory.createNode_RightCurlyBracketSemicolonKeyword_6ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

@@ -680,10 +680,12 @@ public class ComplexReconstrTestLanguageElementTypeProvider implements IElementT
 
 	public static final IGrammarAwareElementType TrickyG2_ValINTTerminalRuleCall_1_0_ELEMENT_TYPE = associate(TrickyG2Factory.createTrickyG2_ValINTTerminalRuleCall_1_0ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

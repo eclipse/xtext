@@ -16,18 +16,22 @@ public final class TreeTestLanguageFileType extends LanguageFileType {
 		super(TreeTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "TreeTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "TreeTestLanguage";
 	}

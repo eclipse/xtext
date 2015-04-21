@@ -16,18 +16,22 @@ public final class ElementMatcherTestLanguageFileType extends LanguageFileType {
 		super(ElementMatcherTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "ElementMatcherTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "ElementMatcherTestLanguage";
 	}

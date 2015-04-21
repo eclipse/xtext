@@ -16,18 +16,22 @@ public final class Bug287184TestLanguageFileType extends LanguageFileType {
 		super(Bug287184TestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "Bug287184TestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "Bug287184TestLanguage";
 	}

@@ -89,10 +89,12 @@ public class Bug443221TestLanguageElementTypeProvider implements IElementTypePro
 
 	public static final IGrammarAwareElementType Model_DollarSignKeyword_8_ELEMENT_TYPE = associate(ModelFactory.createModel_DollarSignKeyword_8ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

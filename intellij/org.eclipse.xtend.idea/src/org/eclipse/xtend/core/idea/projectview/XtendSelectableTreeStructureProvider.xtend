@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.idea.projectview
 
-import com.google.inject.Inject
 import com.intellij.ide.projectView.SelectableTreeStructureProvider
 import com.intellij.ide.projectView.ViewSettings
 import com.intellij.ide.util.treeView.AbstractTreeNode
@@ -16,7 +15,6 @@ import com.intellij.psi.PsiElement
 import java.util.Collection
 import org.eclipse.xtend.core.idea.lang.XtendLanguage
 import org.eclipse.xtend.core.idea.lang.psi.impl.XtendFileImpl
-import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClasses
 
 /**
  * @author kosyakov - Initial contribution and API

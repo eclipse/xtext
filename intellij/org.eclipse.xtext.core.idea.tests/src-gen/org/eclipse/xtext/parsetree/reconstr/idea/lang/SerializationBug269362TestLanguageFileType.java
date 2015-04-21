@@ -16,18 +16,22 @@ public final class SerializationBug269362TestLanguageFileType extends LanguageFi
 		super(SerializationBug269362TestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "SerializationBug269362TestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "SerializationBug269362TestLanguage";
 	}

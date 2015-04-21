@@ -13,6 +13,7 @@ public final class LiveContainerBuilderIntegerationTestLanguageFileImpl extends 
 		super(viewProvider, LiveContainerBuilderIntegerationTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return LiveContainerBuilderIntegerationTestLanguageFileType.INSTANCE;
 	}

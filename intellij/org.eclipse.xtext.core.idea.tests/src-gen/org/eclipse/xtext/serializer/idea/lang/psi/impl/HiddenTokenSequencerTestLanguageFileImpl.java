@@ -13,6 +13,7 @@ public final class HiddenTokenSequencerTestLanguageFileImpl extends BaseXtextFil
 		super(viewProvider, HiddenTokenSequencerTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return HiddenTokenSequencerTestLanguageFileType.INSTANCE;
 	}

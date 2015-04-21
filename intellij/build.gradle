@@ -1,7 +1,6 @@
 buildscript {
 	dependencies {
 		classpath "org.xtext:xtext-idea-gradle-plugin:0.3.10"
-		classpath 'org.xtend:xtend-gradle-plugin:+'
 	}
 }
 
@@ -27,20 +26,21 @@ configure(eclipsePluginProjects) {
 }
 
 configure(subprojects - eclipsePluginProjects) {
-	apply plugin: 'org.xtend.xtend'
 	apply plugin: 'org.xtext.idea-component'
 	apply plugin: 'eclipse'
 	
-	sourceSets*.xtendOutputDir = 'xtend-gen'
-	tasks.withType(org.xtend.gradle.tasks.XtendCompile) {
-		options.encoding = 'ISO-8859-1'
-	}
-	
-	configurations.all {
+	configurations.compile {
 		exclude module:'cglib'
 		exclude module:'icu4j'
 		exclude group:'org.ow2.asm'
 		exclude module:'org.eclipse.jdt.core'
+	}
+
+	task debugIdea {
+		dependsOn(runIdea)
+		runIdea.debug = true
+		group = 'intelliJ Idea'
+		description = 'Debugs Intellij IDEA remotely on port 5005 with this project and its dependencies installed'
 	}
 
 	task cleanTestSystem(type: Delete) {
@@ -54,9 +54,7 @@ configure(ideaPluginProjects) {
 
 configure(ideaTestProjects) {
 	sourceSets.test.java.srcDirs ('src', 'src-gen', 'xtend-gen', 'tests')
-	project.afterEvaluate{
-		sourceSets.main.java.srcDirs = []
-	}
+	sourceSets.main.java.srcDirs = []
 	
 	dependencies {
 		testCompile project(':intellij:org.eclipse.xtext.idea.tests')

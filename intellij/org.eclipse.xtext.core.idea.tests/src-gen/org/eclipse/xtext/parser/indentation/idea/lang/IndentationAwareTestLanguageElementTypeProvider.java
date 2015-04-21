@@ -102,10 +102,12 @@ public class IndentationAwareTestLanguageElementTypeProvider implements IElement
 
 	public static final IGrammarAwareElementType TreeNode_DEDENTTerminalRuleCall_1_2_ELEMENT_TYPE = associate(TreeNodeFactory.createTreeNode_DEDENTTerminalRuleCall_1_2ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

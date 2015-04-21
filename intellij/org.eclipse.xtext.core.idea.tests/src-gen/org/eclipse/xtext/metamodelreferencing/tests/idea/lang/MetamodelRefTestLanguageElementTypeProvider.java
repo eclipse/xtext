@@ -100,10 +100,12 @@ public class MetamodelRefTestLanguageElementTypeProvider implements IElementType
 
 	public static final IGrammarAwareElementType MyRule_NameIDTerminalRuleCall_0_ELEMENT_TYPE = associate(MyRuleFactory.createMyRule_NameIDTerminalRuleCall_0ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

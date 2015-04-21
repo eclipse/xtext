@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class XtendFileTypeFactory extends FileTypeFactory {
 
+	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
 		consumer.consume(org.eclipse.xtend.core.idea.lang.XtendFileType.INSTANCE, org.eclipse.xtend.core.idea.lang.XtendFileType.DEFAULT_EXTENSION);
 	}

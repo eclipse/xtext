@@ -13,6 +13,7 @@ public final class OptionalEmptyTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, OptionalEmptyTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return OptionalEmptyTestLanguageFileType.INSTANCE;
 	}

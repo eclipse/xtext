@@ -13,6 +13,7 @@ public final class FowlerDslTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, FowlerDslTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return FowlerDslTestLanguageFileType.INSTANCE;
 	}

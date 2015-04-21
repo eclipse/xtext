@@ -13,6 +13,7 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
@@ -146,6 +147,38 @@ public class NodeModelBasedRegionAccessBuilder {
 		return false;
 	}
 
+	protected EObject findGrammarElement(INode node, EObject obj) {
+		INode current = node;
+		String feature = obj.eContainingFeature().getName();
+		while (current != null) {
+			EObject grammarElement = current.getGrammarElement();
+			Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
+			if (assignment != null && feature.equals(assignment.getFeature()))
+				return grammarElement;
+			if (grammarElement instanceof Action) {
+				Action action = (Action) grammarElement;
+				if (feature.equals(action.getFeature()))
+					return grammarElement;
+				else if (current == node && current instanceof ICompositeNode) {
+					INode child = ((ICompositeNode) current).getFirstChild();
+					while (child instanceof ICompositeNode) {
+						EObject grammarElement2 = child.getGrammarElement();
+						Assignment assignment2 = GrammarUtil.containingAssignment(grammarElement2);
+						if (assignment2 != null && feature.equals(assignment2.getFeature()))
+							return grammarElement2;
+						//						if (child.hasDirectSemanticElement() && child.getSemanticElement() != obj)
+						//							break;
+						child = ((ICompositeNode) child).getFirstChild();
+					}
+				}
+			}
+			if (current.hasDirectSemanticElement() && current.getSemanticElement() != obj)
+				return null;
+			current = current.getParent();
+		}
+		return null;
+	}
+
 	protected void process(INode node, NodeModelBasedRegionAccess access) {
 		NodeEObjectRegion tokens = stack.peek();
 		boolean creator = isEObjectRoot(node);
@@ -155,10 +188,13 @@ public class NodeModelBasedRegionAccessBuilder {
 			stack.push(tokens);
 		}
 		if (tokens.getSemanticElement() == null) {
-			if (node.getParent() == null)
+			if (node.getParent() == null) {
 				tokens.setSemantcElement(resource.getContents().get(0));
-			else if (node.hasDirectSemanticElement())
+				tokens.setGrammarElement(node.getGrammarElement());
+			} else if (node.hasDirectSemanticElement()) {
 				tokens.setSemantcElement(node.getSemanticElement());
+				tokens.setGrammarElement(findGrammarElement(node, tokens.getSemanticElement()));
+			}
 		}
 		if (include(node)) {
 			if (node instanceof ICompositeNode) {
@@ -179,6 +215,12 @@ public class NodeModelBasedRegionAccessBuilder {
 			EObject semanticElement = popped.getSemanticElement();
 			if (semanticElement == null)
 				throw new IllegalStateException();
+			if (!stack.isEmpty() && semanticElement.eContainer() != stack.peek().getSemanticElement())
+				throw new IllegalStateException();
+			EObject grammarElement = popped.getGrammarElement();
+			if (grammarElement == null) {
+				throw new IllegalStateException();
+			}
 			NodeEObjectRegion old = eObjToTokens.put(semanticElement, popped);
 			if (old != null)
 				throw new IllegalStateException();

@@ -17,6 +17,7 @@ public class UnassignedRuleCallTestLanguageParserDefinition extends TerminalsPar
 	@Inject 
 	private UnassignedRuleCallTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new UnassignedRuleCallTestLanguageFileImpl(viewProvider);
 	}

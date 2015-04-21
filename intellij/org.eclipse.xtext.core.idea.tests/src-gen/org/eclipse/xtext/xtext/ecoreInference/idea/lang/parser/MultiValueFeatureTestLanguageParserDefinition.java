@@ -16,6 +16,7 @@ public class MultiValueFeatureTestLanguageParserDefinition extends TerminalsPars
 	@Inject 
 	private MultiValueFeatureTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new MultiValueFeatureTestLanguageFileImpl(viewProvider);
 	}

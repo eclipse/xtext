@@ -175,10 +175,12 @@ public class EnumRulesTestLanguageElementTypeProvider implements IElementTypePro
 
 	public static final IGrammarAwareElementType GeneratedEnum_DifferentNameDifferentLiteralKeyword_1_0_ELEMENT_TYPE = associate(GeneratedEnumFactory.createGeneratedEnum_DifferentNameDifferentLiteralKeyword_1_0ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

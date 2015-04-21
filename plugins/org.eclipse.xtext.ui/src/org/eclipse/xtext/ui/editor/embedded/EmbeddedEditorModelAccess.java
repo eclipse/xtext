@@ -9,6 +9,8 @@ package org.eclipse.xtext.ui.editor.embedded;
 
 import java.util.Collections;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentExtension4;
@@ -16,9 +18,15 @@ import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ISynchronizable;
 import org.eclipse.jface.text.source.AnnotationModel;
 import org.eclipse.jface.text.source.SourceViewer;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
+import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.LazyStringInputStream;
+import org.eclipse.xtext.util.TextRegion;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 /**
  * The model access allows to obtain or manipulate the edited text.
@@ -74,6 +82,16 @@ public class EmbeddedEditorModelAccess {
 		return result;
 	}
 
+	public void updateModel(String model) {
+		IDocument document = this.viewer.getDocument();
+		this.viewer.setRedraw(false);
+		this.viewer.getUndoManager().disconnect();
+		document.set(model);
+		this.viewer.resetVisibleRegion();
+		this.viewer.getUndoManager().connect(this.viewer);
+		this.viewer.setRedraw(true);
+	}
+
 	public void updateModel(String prefix, String editablePart, String suffix) {
 		IDocument document = this.viewer.getDocument();
 		if (this.insertLineBreaks) {
@@ -89,6 +107,35 @@ public class EmbeddedEditorModelAccess {
 		this.viewer.getUndoManager().disconnect();
 		document.set(model);
 		this.viewer.setVisibleRegion(prefix.length(), editablePart.length());
+		this.viewer.getUndoManager().connect(this.viewer);
+		this.viewer.setRedraw(true);
+	}
+	
+	public void updateModel(final String model, final String editablePartUriFragment) {
+		updateModel(model, new IUnitOfWork<ITextRegion, XtextResource>() {
+			@Override
+			public ITextRegion exec(XtextResource state) throws Exception {
+				EObject editablePart = state.getEObject(editablePartUriFragment);
+				ICompositeNode node = NodeModelUtils.findActualNodeFor(editablePart);
+				if (node != null)
+					return new TextRegion(node.getOffset(), node.getLength());
+				return null;
+			}
+		});
+	}
+	
+	public void updateModel(String model, final IUnitOfWork<ITextRegion, XtextResource> editablePartSelector) {
+		XtextDocument document = (XtextDocument) this.viewer.getDocument();
+		this.viewer.setRedraw(false);
+		this.viewer.getUndoManager().disconnect();
+		document.set(model);
+		
+		ITextRegion textRegion = document.readOnly(editablePartSelector);
+		if (textRegion == null) {
+			this.viewer.resetVisibleRegion();
+		} else {
+			this.viewer.setVisibleRegion(textRegion.getOffset(), textRegion.getLength());
+		}
 		this.viewer.getUndoManager().connect(this.viewer);
 		this.viewer.setRedraw(true);
 	}

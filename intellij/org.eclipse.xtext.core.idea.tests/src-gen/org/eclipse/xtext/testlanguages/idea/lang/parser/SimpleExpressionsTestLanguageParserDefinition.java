@@ -17,6 +17,7 @@ public class SimpleExpressionsTestLanguageParserDefinition extends TerminalsPars
 	@Inject 
 	private SimpleExpressionsTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new SimpleExpressionsTestLanguageFileImpl(viewProvider);
 	}

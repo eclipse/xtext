@@ -16,6 +16,7 @@ public class MultiRuleEnumTestLanguageParserDefinition extends TerminalsParserDe
 	@Inject 
 	private MultiRuleEnumTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new MultiRuleEnumTestLanguageFileImpl(viewProvider);
 	}

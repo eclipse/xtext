@@ -16,6 +16,7 @@ public class IgnoreCaseLexerTestLanguageParserDefinition extends AbstractXtextPa
 	@Inject 
 	private IgnoreCaseLexerTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new IgnoreCaseLexerTestLanguageFileImpl(viewProvider);
 	}

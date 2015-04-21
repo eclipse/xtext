@@ -49,10 +49,12 @@ public class Bug419429ElementTypeProvider implements IElementTypeProvider {
 
 	public static final IGrammarAwareElementType EReference_ETypeEClassifierIDTerminalRuleCall_0_1_ELEMENT_TYPE = associate(EReferenceFactory.createEReference_ETypeEClassifierIDTerminalRuleCall_0_1ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

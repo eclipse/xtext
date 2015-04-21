@@ -598,6 +598,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
+    _builder.append("@Override");
+    _builder.newLine();
+    _builder.append("\t");
     _builder.append("public Object createInstance(final String factoryArgument, final String implementationClass) {");
     _builder.newLine();
     _builder.append("\t\t");
@@ -663,6 +666,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append(_simpleName, "");
     _builder.append(" extends BuildProcessParametersProvider {");
     _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Override");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public List<String> getClassPath() {");
@@ -1817,6 +1823,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
+    _builder.append("@Override");
+    _builder.newLine();
+    _builder.append("\t");
     _builder.append("public FileType getFileType() {");
     _builder.newLine();
     _builder.append("\t\t");
@@ -1857,6 +1866,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append(_simpleName, "");
     _builder.append(" extends FileTypeFactory {");
     _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Override");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public void createFileTypes(@NotNull FileTypeConsumer consumer) {");
@@ -1944,6 +1956,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
+    _builder.append("@Override");
+    _builder.newLine();
+    _builder.append("\t");
     _builder.append("public String getDefaultExtension() {");
     _builder.newLine();
     _builder.append("\t\t");
@@ -1952,6 +1967,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Override");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public String getDescription() {");
@@ -1967,6 +1985,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
+    _builder.append("@Override");
+    _builder.newLine();
+    _builder.append("\t");
     _builder.append("public Icon getIcon() {");
     _builder.newLine();
     _builder.append("\t\t");
@@ -1975,6 +1996,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Override");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public String getName() {");
@@ -2393,6 +2417,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     }
     _builder.newLine();
     _builder.append("\t");
+    _builder.append("@Override");
+    _builder.newLine();
+    _builder.append("\t");
     _builder.append("public IFileElementType getFileType() {");
     _builder.newLine();
     _builder.append("\t\t");
@@ -2401,6 +2428,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Override");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public IGrammarAwareElementType findElementType(EObject grammarElement) {");
@@ -2646,6 +2676,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       }
     }
     _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Override");
+    _builder.newLine();
     _builder.append("    ");
     _builder.append("public int getAntlrType(IElementType iElementType) {");
     _builder.newLine();
@@ -2656,6 +2689,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("}");
     _builder.newLine();
     _builder.append("    ");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("@Override");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("public IElementType getIElementType(int antlrType) {");
@@ -2735,6 +2771,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append(" extends SingleLazyInstanceSyntaxHighlighterFactory {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Override");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("@NotNull");
@@ -2904,6 +2943,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       _builder.append(_simpleName_2, "\t");
       _builder.append(" elementTypeProvider;");
       _builder.newLineIfNotEmpty();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Override");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("public PsiFile createFile(FileViewProvider viewProvider) {");
@@ -3109,8 +3151,6 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("}");
     _builder.newLine();
     _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
     _builder.newLine();
     return _builder;
   }

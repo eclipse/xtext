@@ -16,18 +16,22 @@ public final class ConcreteTestLanguageFileType extends LanguageFileType {
 		super(ConcreteTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "ConcreteTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "ConcreteTestLanguage";
 	}

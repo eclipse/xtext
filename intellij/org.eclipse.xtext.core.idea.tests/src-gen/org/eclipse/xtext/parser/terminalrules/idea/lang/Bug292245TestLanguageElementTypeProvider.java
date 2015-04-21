@@ -209,10 +209,12 @@ public class Bug292245TestLanguageElementTypeProvider implements IElementTypePro
 
 	public static final IGrammarAwareElementType Graphical_WSTerminalRuleCall_1_ELEMENT_TYPE = associate(GraphicalFactory.createGraphical_WSTerminalRuleCall_1ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

@@ -16,18 +16,22 @@ public final class RegionAccessTestLanguageFileType extends LanguageFileType {
 		super(RegionAccessTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "RegionAccessTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "RegionAccessTestLanguage";
 	}

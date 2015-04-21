@@ -16,18 +16,22 @@ public final class BeeLangTestLanguageFileType extends LanguageFileType {
 		super(BeeLangTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "BeeLangTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "BeeLangTestLanguage";
 	}

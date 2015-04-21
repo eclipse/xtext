@@ -18,6 +18,7 @@ public class LocationProviderTestLanguageParserDefinition extends TerminalsParse
 	@Inject 
 	private LocationProviderTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new LocationProviderTestLanguageFileImpl(viewProvider);
 	}

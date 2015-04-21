@@ -16,18 +16,22 @@ public final class DummyTestLanguageFileType extends LanguageFileType {
 		super(DummyTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "DummyTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "DummyTestLanguage";
 	}

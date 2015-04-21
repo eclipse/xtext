@@ -18,6 +18,7 @@ public class SDomainParserDefinition extends TerminalsParserDefinition {
 	@Inject 
 	private SDomainElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new SDomainFileImpl(viewProvider);
 	}

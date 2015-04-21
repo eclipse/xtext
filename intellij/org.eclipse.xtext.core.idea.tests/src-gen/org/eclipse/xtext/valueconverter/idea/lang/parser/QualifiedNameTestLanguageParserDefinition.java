@@ -16,6 +16,7 @@ public class QualifiedNameTestLanguageParserDefinition extends TerminalsParserDe
 	@Inject 
 	private QualifiedNameTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new QualifiedNameTestLanguageFileImpl(viewProvider);
 	}

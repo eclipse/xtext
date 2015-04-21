@@ -18,6 +18,7 @@ public class IndexTestLanguageParserDefinition extends TerminalsParserDefinition
 	@Inject 
 	private IndexTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new IndexTestLanguageFileImpl(viewProvider);
 	}

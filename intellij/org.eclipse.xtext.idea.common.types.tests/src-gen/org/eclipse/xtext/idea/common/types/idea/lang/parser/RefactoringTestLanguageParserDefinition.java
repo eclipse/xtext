@@ -18,6 +18,7 @@ public class RefactoringTestLanguageParserDefinition extends TerminalsParserDefi
 	@Inject 
 	private RefactoringTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new RefactoringTestLanguageFileImpl(viewProvider);
 	}

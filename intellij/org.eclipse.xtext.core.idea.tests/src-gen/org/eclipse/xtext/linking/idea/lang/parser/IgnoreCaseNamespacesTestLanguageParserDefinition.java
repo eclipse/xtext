@@ -16,6 +16,7 @@ public class IgnoreCaseNamespacesTestLanguageParserDefinition extends AbstractIg
 	@Inject 
 	private IgnoreCaseNamespacesTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new IgnoreCaseNamespacesTestLanguageFileImpl(viewProvider);
 	}

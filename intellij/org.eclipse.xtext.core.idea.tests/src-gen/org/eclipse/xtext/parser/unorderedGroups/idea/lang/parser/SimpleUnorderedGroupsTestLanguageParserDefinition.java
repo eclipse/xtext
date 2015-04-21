@@ -16,6 +16,7 @@ public class SimpleUnorderedGroupsTestLanguageParserDefinition extends Unordered
 	@Inject 
 	private SimpleUnorderedGroupsTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new SimpleUnorderedGroupsTestLanguageFileImpl(viewProvider);
 	}

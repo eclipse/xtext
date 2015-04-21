@@ -17,6 +17,7 @@ public class UnicodeTestLanguageParserDefinition extends TerminalsParserDefiniti
 	@Inject 
 	private UnicodeTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new UnicodeTestLanguageFileImpl(viewProvider);
 	}

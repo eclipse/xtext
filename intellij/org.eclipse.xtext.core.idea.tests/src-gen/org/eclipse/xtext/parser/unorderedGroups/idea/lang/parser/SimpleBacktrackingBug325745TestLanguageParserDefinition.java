@@ -16,6 +16,7 @@ public class SimpleBacktrackingBug325745TestLanguageParserDefinition extends Bac
 	@Inject 
 	private SimpleBacktrackingBug325745TestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new SimpleBacktrackingBug325745TestLanguageFileImpl(viewProvider);
 	}

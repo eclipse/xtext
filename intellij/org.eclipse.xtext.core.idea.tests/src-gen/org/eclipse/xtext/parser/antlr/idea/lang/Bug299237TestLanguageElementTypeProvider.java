@@ -59,10 +59,12 @@ public class Bug299237TestLanguageElementTypeProvider implements IElementTypePro
 
 	public static final IGrammarAwareElementType Model_SemicolonKeyword_2_ELEMENT_TYPE = associate(ModelFactory.createModel_SemicolonKeyword_2ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

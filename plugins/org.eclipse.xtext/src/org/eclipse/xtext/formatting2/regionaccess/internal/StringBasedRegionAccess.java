@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
@@ -14,6 +15,7 @@ import org.eclipse.xtext.formatting2.regionaccess.IEObjectRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 import org.eclipse.xtext.resource.XtextResource;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 
 /**
@@ -82,6 +84,11 @@ public class StringBasedRegionAccess extends AbstractRegionAccess {
 	@Override
 	public String textForOffset(int offset, int length) {
 		return string.substring(offset, offset + length);
+	}
+
+	@Override
+	public List<IEObjectRegion> regionsForAllEObjects() {
+		return ImmutableList.<IEObjectRegion> copyOf(eObjectToTokens.values());
 	}
 
 }

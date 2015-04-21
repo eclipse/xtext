@@ -18,6 +18,7 @@ public class ImportUriTestLanguageParserDefinition extends TerminalsParserDefini
 	@Inject 
 	private ImportUriTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new ImportUriTestLanguageFileImpl(viewProvider);
 	}

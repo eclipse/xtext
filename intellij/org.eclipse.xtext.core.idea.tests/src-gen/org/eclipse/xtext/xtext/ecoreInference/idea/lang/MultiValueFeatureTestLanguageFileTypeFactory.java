@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class MultiValueFeatureTestLanguageFileTypeFactory extends FileTypeFactory {
 
+	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
 		consumer.consume(org.eclipse.xtext.xtext.ecoreInference.idea.lang.MultiValueFeatureTestLanguageFileType.INSTANCE, org.eclipse.xtext.xtext.ecoreInference.idea.lang.MultiValueFeatureTestLanguageFileType.DEFAULT_EXTENSION);
 	}

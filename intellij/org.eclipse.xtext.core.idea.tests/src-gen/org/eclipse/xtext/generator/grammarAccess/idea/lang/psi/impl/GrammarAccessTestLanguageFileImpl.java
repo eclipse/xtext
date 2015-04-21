@@ -13,6 +13,7 @@ public final class GrammarAccessTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, GrammarAccessTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return GrammarAccessTestLanguageFileType.INSTANCE;
 	}

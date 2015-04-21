@@ -13,6 +13,7 @@ public final class ComplexReconstrTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, ComplexReconstrTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return ComplexReconstrTestLanguageFileType.INSTANCE;
 	}

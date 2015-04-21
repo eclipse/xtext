@@ -492,10 +492,12 @@ public class AssignmentsTestLanguageElementTypeProvider implements IElementTypeP
 
 	public static final IGrammarAwareElementType StringDatatype_STRINGTerminalRuleCall_ELEMENT_TYPE = associate(StringDatatypeFactory.createStringDatatype_STRINGTerminalRuleCallElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

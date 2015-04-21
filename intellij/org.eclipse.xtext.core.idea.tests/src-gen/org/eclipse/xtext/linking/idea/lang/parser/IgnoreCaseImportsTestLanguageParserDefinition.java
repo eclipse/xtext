@@ -16,6 +16,7 @@ public class IgnoreCaseImportsTestLanguageParserDefinition extends AbstractIgnor
 	@Inject 
 	private IgnoreCaseImportsTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new IgnoreCaseImportsTestLanguageFileImpl(viewProvider);
 	}

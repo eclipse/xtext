@@ -16,6 +16,7 @@ public class HiddenTerminalsTestLanguageParserDefinition extends AbstractXtextPa
 	@Inject 
 	private HiddenTerminalsTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new HiddenTerminalsTestLanguageFileImpl(viewProvider);
 	}

@@ -426,10 +426,12 @@ public class HiddenTerminalsTestLanguageElementTypeProvider implements IElementT
 
 	public static final IGrammarAwareElementType InheritingHiddensCall_ValidSemicolonKeyword_1_0_ELEMENT_TYPE = associate(InheritingHiddensCallFactory.createInheritingHiddensCall_ValidSemicolonKeyword_1_0ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

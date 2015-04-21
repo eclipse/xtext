@@ -18,6 +18,7 @@ public class HiddenTokensMergerTestLanguageParserDefinition extends TerminalsPar
 	@Inject 
 	private HiddenTokensMergerTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new HiddenTokensMergerTestLanguageFileImpl(viewProvider);
 	}

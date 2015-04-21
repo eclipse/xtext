@@ -26,10 +26,12 @@ import com.intellij.psi.tree.TokenSet;
 	private static final TokenSet COMMENT_TOKENS = TokenSet.EMPTY;
 	private static final TokenSet STRING_TOKENS = TokenSet.EMPTY;
 
+	@Override
     public int getAntlrType(IElementType iElementType) {
         return ((IndexedElementType)iElementType).getLocalIndex();
     }
     
+    @Override
     public IElementType getIElementType(int antlrType) {
     	return tokenTypes[antlrType];
     }

@@ -16,6 +16,7 @@ public class Bug292245TestLanguageParserDefinition extends AbstractXtextParserDe
 	@Inject 
 	private Bug292245TestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new Bug292245TestLanguageFileImpl(viewProvider);
 	}

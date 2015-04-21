@@ -102,10 +102,12 @@ public class Bug305397ElementTypeProvider implements IElementTypeProvider {
 
 	public static final IGrammarAwareElementType Element_EndKeyword_5_ELEMENT_TYPE = associate(ElementFactory.createElement_EndKeyword_5ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

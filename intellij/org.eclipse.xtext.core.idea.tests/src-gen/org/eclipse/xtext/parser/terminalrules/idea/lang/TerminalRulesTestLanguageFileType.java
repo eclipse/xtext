@@ -16,18 +16,22 @@ public final class TerminalRulesTestLanguageFileType extends LanguageFileType {
 		super(TerminalRulesTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "TerminalRulesTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "TerminalRulesTestLanguage";
 	}

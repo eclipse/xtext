@@ -13,6 +13,7 @@ public final class LiveContainerTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, LiveContainerTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return LiveContainerTestLanguageFileType.INSTANCE;
 	}

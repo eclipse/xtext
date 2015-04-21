@@ -13,6 +13,7 @@ public final class LocationProviderTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, LocationProviderTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return LocationProviderTestLanguageFileType.INSTANCE;
 	}

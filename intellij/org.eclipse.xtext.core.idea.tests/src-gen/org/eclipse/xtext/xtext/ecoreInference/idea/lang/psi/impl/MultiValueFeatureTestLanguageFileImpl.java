@@ -13,6 +13,7 @@ public final class MultiValueFeatureTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, MultiValueFeatureTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return MultiValueFeatureTestLanguageFileType.INSTANCE;
 	}
