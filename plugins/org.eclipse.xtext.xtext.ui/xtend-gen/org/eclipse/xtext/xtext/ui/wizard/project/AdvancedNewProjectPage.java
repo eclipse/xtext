@@ -243,8 +243,8 @@ public class AdvancedNewProjectPage extends WizardPage {
     this.createIdeaProject.setSelection(false);
     this.createWebProject.setSelection(false);
     this.createIdeProject.setSelection(false);
-    this.createFeatureProject.setSelection(true);
-    this.createTestProject.setSelection(true);
+    this.createFeatureProject.setSelection(false);
+    this.createTestProject.setSelection(false);
     this.buildSystem.select(0);
     this.projectLayout.select(0);
     int _indexOfDefaultConfig = this.indexOfDefaultConfig();
