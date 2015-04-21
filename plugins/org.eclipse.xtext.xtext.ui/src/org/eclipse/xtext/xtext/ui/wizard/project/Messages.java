@@ -7,12 +7,10 @@ public class Messages extends NLS {
 	public static String XtextProjectCreator_CreatingProjectsMessage2;
 	public static String NewXtextProjectWizard_WindowTitle;
 	public static String NewRelengProjectWizard_WindowTitle;
-	public static String WizardNewXtextProjectCreationPage_CreateAGeneratorProject;
 	public static String WizardNewXtextProjectCreationPage_TestingSupport;
 	public static String WizardNewXtextProjectCreationPage_Description;
 	public static String WizardNewXtextProjectCreationPage_ErrorMessageLanguageName;
 	public static String WizardNewXtextProjectCreationPage_ErrorMessageProjectName;
-	public static String WizardNewXtextProjectCreationPage_GeneratorConfiguration;
 	public static String WizardNewXtextProjectCreationPage_LabelExtensions;
 	public static String WizardNewXtextProjectCreationPage_LabelLanguage;
 	public static String WizardNewXtextProjectCreationPage_LabelFacets;

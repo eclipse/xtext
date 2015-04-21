@@ -162,11 +162,6 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	protected List<String> getDslProjectRequiredBundles() {
 		List<String> requiredBundles = Lists.newArrayList("org.eclipse.xtext;visibility:=reexport", //$NON-NLS-1$
 				"org.eclipse.equinox.common;bundle-version=\"3.5.0\""); //$NON-NLS-1$
-
-		String[] bundles = getXtextProjectInfo().getWizardContribution().getRequiredBundles();
-		for (String bundleId : bundles) {
-			requiredBundles.add(bundleId.trim() + ";resolution:=optional"); //$NON-NLS-1$
-		}
 		for (String bundleId : getAdditionalRequiredBundles()) {
 			requiredBundles.add(bundleId.trim());
 		}

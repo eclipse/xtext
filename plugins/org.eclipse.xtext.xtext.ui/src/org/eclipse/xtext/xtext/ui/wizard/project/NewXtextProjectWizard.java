@@ -10,8 +10,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.project;
 
-import java.util.Map;
-
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -62,8 +60,6 @@ public class NewXtextProjectWizard extends XtextNewProjectWizard {
 		projectInfo.setLanguageName(mainPage.getLanguageName());
 		projectInfo.setProjectName(mainPage.getProjectName());
 		projectInfo.setWorkingSets(mainPage.getSelectedWorkingSets());
-		Map<String, WizardContribution> contributions = WizardContribution.getFromRegistry();
-		projectInfo.setWizardContribution(contributions.get(advancedPage.getGeneratorConfig()));
 		projectInfo.setProjectsRootLocation(mainPage.getLocationPath());
 		projectInfo.setWorkbench(getWorkbench());
 		projectInfo.setCreateEclipseRuntimeLaunchConfig(!existsEclipseRuntimeLaunchConfig());
