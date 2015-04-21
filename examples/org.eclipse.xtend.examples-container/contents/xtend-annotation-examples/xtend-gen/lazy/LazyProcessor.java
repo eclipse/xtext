@@ -10,14 +10,13 @@ package lazy;
 import com.google.common.base.Objects;
 import org.eclipse.xtend.lib.macro.AbstractFieldProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
-import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend.lib.macro.expression.Expression;
-import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -61,10 +60,9 @@ public class LazyProcessor extends AbstractFieldProcessor {
         field.markAsRead();
         TypeReference _type = field.getType();
         it.setReturnType(_type);
-        final CompilationStrategy _function = new CompilationStrategy() {
+        StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
-          public CharSequence compile(final CompilationStrategy.CompilationContext it) {
-            StringConcatenation _builder = new StringConcatenation();
+          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
             _builder.append("if (");
             String _simpleName = field.getSimpleName();
             _builder.append(_simpleName, "");
@@ -83,10 +81,9 @@ public class LazyProcessor extends AbstractFieldProcessor {
             _builder.append(_simpleName_3, "");
             _builder.append(";");
             _builder.newLineIfNotEmpty();
-            return _builder;
           }
         };
-        it.setBody(_function);
+        it.setBody(_client);
         context.setPrimarySourceElement(it, field);
       }
     };

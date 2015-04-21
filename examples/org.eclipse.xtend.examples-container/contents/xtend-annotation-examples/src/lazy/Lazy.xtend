@@ -45,11 +45,11 @@ class LazyProcessor extends AbstractFieldProcessor {
 		field.declaringType.addMethod('get' + field.simpleName.toFirstUpper) [
 			field.markAsRead
 			returnType = field.type
-			body = ['''
+			body = '''
 				if («field.simpleName»==null)
 				  «field.simpleName» = _init«field.simpleName»();
 				return «field.simpleName»;
-			''']
+			'''
 			primarySourceElement = field
 		]
 	}
