@@ -25,7 +25,7 @@ class DslProjectContributor extends DefaultProjectFactoryContributor {
 		creator.writeToFile(workflow(project.defaultCharset), sourceRoot+"/"+ projectInfo.basePackagePath + "/Generate" + projectInfo.languageNameAbbreviation+".mwe2")
 		creator.writeToFile(grammar, sourceRoot+"/"+ projectInfo.grammarFilePath)
 		creator.writeToFile(wfLaunchConfig,".launch/Generate Language Infrastructure (" + projectInfo.projectName + ").launch")
-		if (projectInfo.createEclipseRuntimeLaunchConfig) {
+		if (projectInfo.createEclipseRuntimeLaunchConfig && projectInfo.isCreateUiProject) {
 			creator.writeToFile(launchConfig,".launch/Launch Runtime Eclipse.launch")
 		}
 	}
@@ -63,9 +63,11 @@ class DslProjectContributor extends DefaultProjectFactoryContributor {
 				directory = "${runtimeProject}/model/generated"
 			}
 			
-			component = DirectoryCleaner {
-				directory = "${runtimeProject}.ui/src-gen"
-			}
+			«IF projectInfo.isCreateUiProject»
+				component = DirectoryCleaner {
+					directory = "${runtimeProject}.ui/src-gen"
+				}
+			«ENDIF»
 			
 			component = DirectoryCleaner {
 				directory = "${runtimeProject}.tests/src-gen"
@@ -73,10 +75,14 @@ class DslProjectContributor extends DefaultProjectFactoryContributor {
 			
 			component = Generator {
 				pathRtProject = runtimeProject
-				pathUiProject = "${runtimeProject}.ui"
-				pathTestProject = "${runtimeProject}.tests"
 				projectNameRt = projectName
-				projectNameUi = "${projectName}.ui"
+				«IF projectInfo.isCreateUiProject»
+					pathUiProject = "${runtimeProject}.ui"
+					projectNameUi = "${projectName}.ui"
+				«ENDIF»
+				«IF projectInfo.isCreateTestProject»
+					pathTestProject = "${runtimeProject}.tests"
+				«ENDIF»
 				encoding = encoding
 				fileHeader = fileHeader
 				language = auto-inject {

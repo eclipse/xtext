@@ -48,8 +48,15 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
       String _plus_5 = (".launch/Generate Language Infrastructure (" + _projectName);
       String _plus_6 = (_plus_5 + ").launch");
       creator.writeToFile(_wfLaunchConfig, _plus_6);
+      boolean _and = false;
       boolean _isCreateEclipseRuntimeLaunchConfig = this.projectInfo.isCreateEclipseRuntimeLaunchConfig();
-      if (_isCreateEclipseRuntimeLaunchConfig) {
+      if (!_isCreateEclipseRuntimeLaunchConfig) {
+        _and = false;
+      } else {
+        boolean _isCreateUiProject = this.projectInfo.isCreateUiProject();
+        _and = _isCreateUiProject;
+      }
+      if (_and) {
         CharSequence _launchConfig = this.launchConfig();
         creator.writeToFile(_launchConfig, ".launch/Launch Runtime Eclipse.launch");
       }
@@ -152,15 +159,21 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
     _builder.newLine();
     _builder.append("\t");
     _builder.newLine();
-    _builder.append("\t");
-    _builder.append("component = DirectoryCleaner {");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("directory = \"${runtimeProject}.ui/src-gen\"");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
+    {
+      boolean _isCreateUiProject = this.projectInfo.isCreateUiProject();
+      if (_isCreateUiProject) {
+        _builder.append("\t");
+        _builder.append("component = DirectoryCleaner {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("\t");
+        _builder.append("directory = \"${runtimeProject}.ui/src-gen\"");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+      }
+    }
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
@@ -181,17 +194,27 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
     _builder.append("pathRtProject = runtimeProject");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("pathUiProject = \"${runtimeProject}.ui\"");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("pathTestProject = \"${runtimeProject}.tests\"");
-    _builder.newLine();
-    _builder.append("\t\t");
     _builder.append("projectNameRt = projectName");
     _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("projectNameUi = \"${projectName}.ui\"");
-    _builder.newLine();
+    {
+      boolean _isCreateUiProject_1 = this.projectInfo.isCreateUiProject();
+      if (_isCreateUiProject_1) {
+        _builder.append("\t\t");
+        _builder.append("pathUiProject = \"${runtimeProject}.ui\"");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("projectNameUi = \"${projectName}.ui\"");
+        _builder.newLine();
+      }
+    }
+    {
+      boolean _isCreateTestProject = this.projectInfo.isCreateTestProject();
+      if (_isCreateTestProject) {
+        _builder.append("\t\t");
+        _builder.append("pathTestProject = \"${runtimeProject}.tests\"");
+        _builder.newLine();
+      }
+    }
     _builder.append("\t\t");
     _builder.append("encoding = encoding");
     _builder.newLine();
