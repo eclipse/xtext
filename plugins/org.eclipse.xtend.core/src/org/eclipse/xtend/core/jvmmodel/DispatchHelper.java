@@ -11,9 +11,9 @@ import static com.google.common.collect.Iterables.*;
 
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -34,6 +34,8 @@ import org.eclipse.xtext.xbase.typesystem.util.ContextualVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.Multimaps2;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -163,12 +165,19 @@ public class DispatchHelper {
 	@Inject
 	private CommonTypeComputationServices services;
 	
+	private static class DispatcherMarker extends AdapterImpl { }
+	
+	public void markAsDispatcherFunction(JvmOperation inferredOperation) {
+		inferredOperation.eAdapters().add(new DispatcherMarker());
+	}
+	
 	public boolean isDispatcherFunction(JvmOperation inferredOperation) {
-		final Iterator<XtendFunction> filter = filter(associations.getSourceElements(inferredOperation), XtendFunction.class).iterator();
-		if (!filter.hasNext())
-			return false;
-		XtendFunction xtendFunction = filter.next();
-		return xtendFunction.isDispatch() && inferredOperation.getSimpleName().equals(xtendFunction.getName());
+		return Iterables.any(inferredOperation.eAdapters(), new Predicate<Object>() {
+			@Override
+			public boolean apply(Object input) {
+				return input instanceof DispatcherMarker;
+			}
+		});
 	}
 	
 	public boolean isDispatchFunction(JvmOperation inferredOperation) {
