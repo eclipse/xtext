@@ -414,6 +414,23 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 				"", editor);
 	}
 	
+	@Test 
+	public void testBug434717_06() throws Exception {
+		XtextEditor editor = openEditor(
+				"genPlainText(Object this){\n" + 
+				"		'''|'''" + 
+				"");
+		pasteText(editor, "\tfoo\r" +
+						  "\t\tbar\r\n"
+						  + "\tfoo");
+		assertState(
+				"genPlainText(Object this){\n" + 
+				"		'''	foo\n" +
+				"				bar\n" +
+				"			foo|'''" + 
+				"", editor);
+	}
+	
 	@Test public void testBug342030_01() throws Exception {
 		XtextEditor editor = openEditor(
 				"genPlainText(Object this){\n" + 
