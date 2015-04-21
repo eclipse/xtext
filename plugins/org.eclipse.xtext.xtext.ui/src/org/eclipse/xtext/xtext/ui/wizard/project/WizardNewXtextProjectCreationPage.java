@@ -49,8 +49,6 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 	private Text languageNameField;
 	private final IStructuredSelection selection;
 	private Text extensionsField;
-	private Combo generatorConfigurationField;
-	private Button createFeatureProject;
 
 	/**
 	 * Constructs a new WizardNewXtextProjectCreationPage.
@@ -78,7 +76,6 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 		setInitialProjectName("org.xtext.example." + projectsuffix); //$NON-NLS-1$
 		super.createControl(parent);
 		createLanguageSelectionGroup((Composite) getControl());
-		createProjectLayoutGroup((Composite) getControl());
 		createWorkingSetGroup((Composite) getControl(), selection, getWorkingSetIdents());
 		setDefaults(projectsuffix);
 		Dialog.applyDialogFont(getControl());
@@ -100,35 +97,7 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 	protected void setDefaults(String projectSuffix) {
 		languageNameField.setText("org.xtext.example." + projectSuffix + ".MyDsl"); //$NON-NLS-1$
 		extensionsField.setText(projectSuffix);
-
-		fillMweSnippet();
 		validatePage();
-	}
-
-	protected void fillMweSnippet() {
-		Map<String, WizardContribution> contributions = WizardContribution.getFromRegistry();
-
-		List<WizardContribution> contrib = newArrayList(contributions.values());
-		Collections.sort(contrib);
-		List<String> names = newArrayList(Iterables.transform(contrib, new Function<WizardContribution, String>() {
-			@Override
-			public String apply(WizardContribution input) {
-				return input.getName();
-			}
-		}));
-		if (generatorConfigurationField != null) {
-			generatorConfigurationField.setItems(names.toArray(new String[names.size()]));
-			generatorConfigurationField.select(indexOfDefault(names));
-		}
-	}
-
-	protected int indexOfDefault(List<String> contributions) {
-		int indexOf = contributions.indexOf(getDefaultConfigName());
-		return indexOf != -1 ? indexOf : 0;
-	}
-
-	protected String getDefaultConfigName() {
-		return "Standard";
 	}
 
 	/**
@@ -213,39 +182,6 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 		extensionsField.addListener(SWT.Modify, modifyListener);
 	}
 
-	protected void createProjectLayoutGroup(Composite parent) {
-		boolean showGeneratorConfigCombo = WizardContribution.getFromRegistry().size() > 1;
-
-		Group layoutGroup = new Group(parent, SWT.NONE);
-		layoutGroup.setFont(parent.getFont());
-		layoutGroup.setText(Messages.WizardNewXtextProjectCreationPage_LabelLayout);
-		layoutGroup.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
-		layoutGroup.setLayout(new GridLayout(1, false));
-
-		Composite composite = new Composite(layoutGroup, SWT.NONE);
-		composite.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
-		composite.setLayout(new GridLayout(showGeneratorConfigCombo ? 2 : 1, false));
-
-		if (showGeneratorConfigCombo) {
-			Label generatorConfigLabel = new Label(composite, SWT.NONE);
-			generatorConfigLabel.setText(Messages.WizardNewXtextProjectCreationPage_GeneratorConfiguration);
-
-			generatorConfigurationField = new Combo(composite, SWT.READ_ONLY);
-			GridData data = new GridData(GridData.FILL_HORIZONTAL);
-			data.horizontalSpan = 1;
-			generatorConfigurationField.setLayoutData(data);
-			generatorConfigurationField.setFont(parent.getFont());
-		}
-
-		createFeatureProject = new Button(composite, SWT.CHECK);
-		createFeatureProject.setText(Messages.WizardNewXtextProjectCreationPage_CreateFeatureLabel);
-		GridData featureGD = new GridData(SWT.FILL, SWT.CENTER, true, false);
-		featureGD.horizontalSpan = 1;
-		createFeatureProject.setLayoutData(featureGD);
-		createFeatureProject.setSelection(true);
-
-	}
-
 	/**
 	 * Returns the supported DSL extensions as a CSV string
 	 */
@@ -255,15 +191,5 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 
 	public String getLanguageName() {
 		return languageNameField.getText();
-	}
-
-	public String getGeneratorConfig() {
-		if (generatorConfigurationField == null)
-			return WizardContribution.getFromRegistry().values().iterator().next().getName();
-		return generatorConfigurationField.getItems()[generatorConfigurationField.getSelectionIndex()];
-	}
-
-	public boolean isCreateFeatureProject() {
-		return createFeatureProject.getSelection();
 	}
 }
