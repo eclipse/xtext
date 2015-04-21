@@ -13,9 +13,13 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DefaultIndentLineAutoEditStrategy;
 import org.eclipse.jface.text.DocumentCommand;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.IDocumentExtension4;
 import org.eclipse.jface.text.IRegion;
 
 /**
+ * This strategy handles a paste of multiline text into a RichtString.
+ * It applies the current indentation to the line 2..n of the pasted text.
+ * 
  * @author Holger Schill - Initial contribution and API
  */
 public class RichStringPartionIndentationStrategy extends DefaultIndentLineAutoEditStrategy {
@@ -24,7 +28,6 @@ public class RichStringPartionIndentationStrategy extends DefaultIndentLineAutoE
 	public void customizeDocumentCommand(IDocument d, DocumentCommand c) {
 		if(c.text.length() > 1){
 			try {
-				String pastedText = c.text;
 				int line = d.getLineOfOffset(c.offset);
 				String lineIndentation = getLineIndentation(d, c.offset);
 				String[] legalLineDelimiters = d.getLegalLineDelimiters();
@@ -33,14 +36,12 @@ public class RichStringPartionIndentationStrategy extends DefaultIndentLineAutoE
 					regex+= Pattern.quote(s);
 				}
 				regex += "]";
-				String[] lines = pastedText.split(regex);
+				String[] lines = c.text.split(regex);
 				String convertedText = lines[0];
 				for(int i = 1; i < lines.length ; i++){
-					String oneLine = lines[i];
-					convertedText += d.getLineDelimiter(line) +  lineIndentation + oneLine;
+					convertedText += ((IDocumentExtension4) d).getDefaultLineDelimiter() +  lineIndentation + lines[i];
 				}
 				c.text = convertedText;
-
 			} catch (BadLocationException e) {
 				super.customizeDocumentCommand(d, c);
 			}
