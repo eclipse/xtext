@@ -118,8 +118,8 @@ class AdvancedNewProjectPage extends WizardPage {
 		createIdeaProject.selection = false
 		createWebProject.selection = false
 		createIdeProject.selection = false
-		createFeatureProject.selection = true
-		createTestProject.selection = true
+		createFeatureProject.selection = false
+		createTestProject.selection = false
 		buildSystem.select(0)
 		projectLayout.select(0)
 		generatorConfigurationField.select(indexOfDefaultConfig)
