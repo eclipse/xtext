@@ -25,7 +25,6 @@ class AdvancedNewProjectPage extends WizardPage {
 	Button createTestProject
 	Combo buildSystem
 	Combo projectLayout
-	Combo generatorConfigurationField
 
 	new(String pageName) {
 		super(pageName)
@@ -72,14 +71,6 @@ class AdvancedNewProjectPage extends WizardPage {
 					items = #["Eclipse", "Maven/Gradle"]
 				]
 			]
-			Group [
-				text = Messages.WizardNewXtextProjectCreationPage_GeneratorConfiguration
-				val contributions = WizardContribution.getFromRegistry.values
-				visible = contributions.size > 1
-				generatorConfigurationField = DropDown [
-					items = contributions.toList.sortInplace.map[name]
-				]
-			]
 		]
 		setDefaults
 	}
@@ -117,16 +108,6 @@ class AdvancedNewProjectPage extends WizardPage {
 		createTestProject.selection = false
 		buildSystem.select(0)
 		projectLayout.select(0)
-		generatorConfigurationField.select(indexOfDefaultConfig)
-	}
-
-	def protected int indexOfDefaultConfig() {
-		val index = generatorConfigurationField.items.indexOf(defaultConfigName)
-		if(index !== -1) index else 0
-	}
-
-	def protected String getDefaultConfigName() {
-		"Standard"
 	}
 	
 	def boolean isCreateUiProject() {
@@ -135,11 +116,6 @@ class AdvancedNewProjectPage extends WizardPage {
 
 	def boolean isCreateTestProject() {
 		createTestProject.selection
-	}
-
-	def String getGeneratorConfig() {
-		val index = generatorConfigurationField.selectionIndex
-		generatorConfigurationField.items.get(index)
 	}
 
 }

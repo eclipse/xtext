@@ -10,12 +10,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.project;
 
-import static com.google.common.collect.Lists.*;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jdt.core.JavaConventions;
@@ -25,8 +19,6 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
@@ -34,9 +26,6 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
-
-import com.google.common.base.Function;
-import com.google.common.collect.Iterables;
 
 /**
  * The main page of the Xtext project wizard.

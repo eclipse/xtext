@@ -7,9 +7,6 @@
  */
 package org.eclipse.xtext.xtext.ui.wizard.project;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
@@ -19,14 +16,9 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.ui.wizard.project.Messages;
-import org.eclipse.xtext.xtext.ui.wizard.project.WizardContribution;
 
 @SuppressWarnings("all")
 public class AdvancedNewProjectPage extends WizardPage {
@@ -43,8 +35,6 @@ public class AdvancedNewProjectPage extends WizardPage {
   private Combo buildSystem;
   
   private Combo projectLayout;
-  
-  private Combo generatorConfigurationField;
   
   public AdvancedNewProjectPage(final String pageName) {
     super(pageName);
@@ -144,35 +134,6 @@ public class AdvancedNewProjectPage extends WizardPage {
           }
         };
         AdvancedNewProjectPage.this.Group(it, _function_2);
-        final Procedure1<Group> _function_3 = new Procedure1<Group>() {
-          @Override
-          public void apply(final Group it) {
-            it.setText(Messages.WizardNewXtextProjectCreationPage_GeneratorConfiguration);
-            Map<String, WizardContribution> _fromRegistry = WizardContribution.getFromRegistry();
-            final Collection<WizardContribution> contributions = _fromRegistry.values();
-            int _size = contributions.size();
-            boolean _greaterThan = (_size > 1);
-            it.setVisible(_greaterThan);
-            final Procedure1<Combo> _function = new Procedure1<Combo>() {
-              @Override
-              public void apply(final Combo it) {
-                List<WizardContribution> _list = IterableExtensions.<WizardContribution>toList(contributions);
-                List<WizardContribution> _sortInplace = ListExtensions.<WizardContribution>sortInplace(_list);
-                final Function1<WizardContribution, String> _function = new Function1<WizardContribution, String>() {
-                  @Override
-                  public String apply(final WizardContribution it) {
-                    return it.getName();
-                  }
-                };
-                List<String> _map = ListExtensions.<WizardContribution, String>map(_sortInplace, _function);
-                it.setItems(((String[])Conversions.unwrapArray(_map, String.class)));
-              }
-            };
-            Combo _DropDown = AdvancedNewProjectPage.this.DropDown(it, _function);
-            AdvancedNewProjectPage.this.generatorConfigurationField = _DropDown;
-          }
-        };
-        AdvancedNewProjectPage.this.Group(it, _function_3);
       }
     };
     Composite _doubleArrow = ObjectExtensions.<Composite>operator_doubleArrow(_composite, _function);
@@ -236,29 +197,6 @@ public class AdvancedNewProjectPage extends WizardPage {
     this.createTestProject.setSelection(false);
     this.buildSystem.select(0);
     this.projectLayout.select(0);
-    int _indexOfDefaultConfig = this.indexOfDefaultConfig();
-    this.generatorConfigurationField.select(_indexOfDefaultConfig);
-  }
-  
-  protected int indexOfDefaultConfig() {
-    int _xblockexpression = (int) 0;
-    {
-      String[] _items = this.generatorConfigurationField.getItems();
-      String _defaultConfigName = this.getDefaultConfigName();
-      final int index = ((List<String>)Conversions.doWrapArray(_items)).indexOf(_defaultConfigName);
-      int _xifexpression = (int) 0;
-      if ((index != (-1))) {
-        _xifexpression = index;
-      } else {
-        _xifexpression = 0;
-      }
-      _xblockexpression = _xifexpression;
-    }
-    return _xblockexpression;
-  }
-  
-  protected String getDefaultConfigName() {
-    return "Standard";
   }
   
   public boolean isCreateUiProject() {
@@ -267,15 +205,5 @@ public class AdvancedNewProjectPage extends WizardPage {
   
   public boolean isCreateTestProject() {
     return this.createTestProject.getSelection();
-  }
-  
-  public String getGeneratorConfig() {
-    String _xblockexpression = null;
-    {
-      final int index = this.generatorConfigurationField.getSelectionIndex();
-      String[] _items = this.generatorConfigurationField.getItems();
-      _xblockexpression = _items[index];
-    }
-    return _xblockexpression;
   }
 }

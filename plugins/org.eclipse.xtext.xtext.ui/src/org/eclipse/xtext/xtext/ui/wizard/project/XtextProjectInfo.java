@@ -31,7 +31,6 @@ public class XtextProjectInfo implements IProjectInfo {
 	private IWorkingSet[] workingSets;
 	private IWorkbench workbench;
 	private IPath projectsRootLocation;
-	private WizardContribution wizardContribution;
 	private boolean createEclipseRuntimeLaunchConfig;
 	private boolean createUiProject;
 
@@ -41,14 +40,6 @@ public class XtextProjectInfo implements IProjectInfo {
 
 	public void setCreateEclipseRuntimeLaunchConfig(boolean createEclipseRuntimeLaunchConfig) {
 		this.createEclipseRuntimeLaunchConfig = createEclipseRuntimeLaunchConfig;
-	}
-
-	public void setWizardContribution(WizardContribution wizardContribution) {
-		this.wizardContribution = wizardContribution;
-	}
-
-	public WizardContribution getWizardContribution() {
-		return wizardContribution;
 	}
 
 	public void setEncoding(String encoding) {
