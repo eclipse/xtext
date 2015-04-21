@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.project;
 
+import static com.google.common.collect.Lists.*;
 import static java.util.Collections.*;
 
 import java.lang.reflect.InvocationTargetException;
@@ -81,8 +82,9 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, getCreateModelProjectMessage(), getMonitorTicks());
 
 		IProject project = createDslProject(subMonitor.newChild(1));
-		createDslUiProject(subMonitor.newChild(1));
-
+		if (getXtextProjectInfo().isCreateUiProject()) {
+			createDslUiProject(subMonitor.newChild(1));
+		}
 		if (getXtextProjectInfo().isCreateTestProject()) {
 			createTestProject(subMonitor.newChild(1));
 		}
@@ -241,7 +243,10 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		factory.addProjectNatures("org.eclipse.pde.FeatureNature");
 		factory.addBuilderIds("org.eclipse.pde.FeatureBuilder");
 		factory.addBundle(getXtextProjectInfo().getProjectName());
-		factory.addBundle(getXtextProjectInfo().getUiProjectName());
+		if (getXtextProjectInfo().isCreateUiProject()) {
+			factory.addBundle(getXtextProjectInfo().getUiProjectName());
+		}
+		
 		factory.addWorkingSets(Arrays.asList(getXtextProjectInfo().getWorkingSets()));
 	}
 
@@ -266,12 +271,16 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	}
 
 	protected List<String> getTestProjectRequiredBundles() {
-		List<String> requiredBundles = Lists.newArrayList(getXtextProjectInfo().getProjectName(), getXtextProjectInfo()
-				.getUiProjectName(), "org.eclipse.core.runtime", //$NON-NLS-1$
-				"org.eclipse.xtext.junit4", //$NON-NLS-1$
-				"org.eclipse.xtext.xbase.lib", //$NON-NLS-1$
-				"org.eclipse.ui.workbench;resolution:=optional" //$NON-NLS-1$
-		); //$NON-NLS-1$
+		List<String> requiredBundles = newArrayList(
+			getXtextProjectInfo().getProjectName(),
+			"org.eclipse.xtext.junit4",
+			"org.eclipse.xtext.xbase.lib"
+		);
+		if (getXtextProjectInfo().isCreateUiProject()) {
+			requiredBundles.add(getXtextProjectInfo().getUiProjectName());
+			requiredBundles.add("org.eclipse.core.runtime");
+			requiredBundles.add("org.eclipse.ui.workbench;resolution:=optional");
+		}
 		return requiredBundles;
 	}
 
