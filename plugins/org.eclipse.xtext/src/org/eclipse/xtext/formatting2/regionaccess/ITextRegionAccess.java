@@ -147,7 +147,7 @@ public interface ITextRegionAccess {
 	 * @return a text region that reaches from the beginning of its first semantic region to the end of its last
 	 *         semantic region.
 	 */
-	IEObjectRegion regionForEObject(EObject object); // TODO: should be semantic region?
+	IEObjectRegion regionForEObject(EObject object);
 
 	/**
 	 * @return returns the first {@link ISemanticRegion} that represents the value of {@code owner.eGet(feature)}. May
@@ -175,6 +175,10 @@ public interface ITextRegionAccess {
 	 *         belongs to the provided 'EObject'. RuleCalls of child-EObjects are not considered. May be null.
 	 */
 	ISemanticRegion regionForRuleCallTo(EObject owner, AbstractRule rule);
+
+	ISemanticRegion regionForRuleCall(EObject owner, RuleCall ruleCall);
+
+	List<ISemanticRegion> regionsForRuleCalls(EObject owner, RuleCall... ruleCalls);
 
 	List<IEObjectRegion> regionsForAllEObjects();
 
