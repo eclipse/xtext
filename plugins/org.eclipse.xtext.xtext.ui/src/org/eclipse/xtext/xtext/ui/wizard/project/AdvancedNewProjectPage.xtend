@@ -18,8 +18,14 @@ import org.eclipse.swt.widgets.Group
 
 class AdvancedNewProjectPage extends WizardPage {
 
+	Button createEclipsePlugin
+	Button createIdeaPlugin
+	Button createWebIntegration
+	Button createIdeSupport
 	Button createFeatureProject
 	Button createTestProject
+	Combo buildSystem
+	Combo projectLayout
 	Combo generatorConfigurationField
 
 	new(String pageName) {
@@ -34,11 +40,41 @@ class AdvancedNewProjectPage extends WizardPage {
 			layout = new GridLayout(1, false)
 			Group [
 				text = Messages.WizardNewXtextProjectCreationPage_LabelFacets
+				createEclipsePlugin = CheckBox [
+					text = "Eclipse Plugin"
+					enabled = false
+				]
+				createIdeaPlugin = CheckBox [
+					text = "IntelliJ IDEA Plugin"
+					enabled = false
+				]
+				createWebIntegration = CheckBox [
+					text = "Web Integration"
+					enabled = false
+				]
+				createIdeSupport = CheckBox [
+					text = "Generic IDE Support"
+					enabled = false
+				]
 				createFeatureProject = CheckBox [
 					text = Messages.WizardNewXtextProjectCreationPage_CreateFeatureLabel
 				]
 				createTestProject = CheckBox [
-					text = Messages.WizardNewXtextProjectCreationPage_CreateATestProject
+					text = Messages.WizardNewXtextProjectCreationPage_TestingSupport
+				]
+			]
+			Group [
+				text = "Build System"
+				buildSystem = DropDown[
+					enabled = false
+					items = #["None", "Maven", "Gradle"]
+				]
+			]
+			Group [
+				text = "Project Layout"
+				projectLayout = DropDown[
+					enabled = false
+					items = #["Eclipse", "Maven/Gradle"]
 				]
 			]
 			Group [
@@ -79,8 +115,14 @@ class AdvancedNewProjectPage extends WizardPage {
 	}
 
 	def protected setDefaults() {
+		createEclipsePlugin.selection = true
+		createIdeaPlugin.selection = false
+		createWebIntegration.selection = false
+		createIdeSupport.selection = false
 		createFeatureProject.selection = true
 		createTestProject.selection = true
+		buildSystem.select(0)
+		projectLayout.select(0)
 		generatorConfigurationField.select(indexOfDefaultConfig)
 	}
 

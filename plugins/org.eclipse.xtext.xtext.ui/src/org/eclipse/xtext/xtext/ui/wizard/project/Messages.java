@@ -10,7 +10,7 @@ public class Messages extends NLS {
 	public static String NewXtextProjectWizard_WindowTitle;
 	public static String NewRelengProjectWizard_WindowTitle;
 	public static String WizardNewXtextProjectCreationPage_CreateAGeneratorProject;
-	public static String WizardNewXtextProjectCreationPage_CreateATestProject;
+	public static String WizardNewXtextProjectCreationPage_TestingSupport;
 	public static String WizardNewXtextProjectCreationPage_Description;
 	public static String WizardNewXtextProjectCreationPage_ErrorMessageLanguageName;
 	public static String WizardNewXtextProjectCreationPage_ErrorMessageProjectName;

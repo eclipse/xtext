@@ -30,9 +30,21 @@ import org.eclipse.xtext.xtext.ui.wizard.project.WizardContribution;
 
 @SuppressWarnings("all")
 public class AdvancedNewProjectPage extends WizardPage {
+  private Button createEclipsePlugin;
+  
+  private Button createIdeaPlugin;
+  
+  private Button createWebIntegration;
+  
+  private Button createIdeSupport;
+  
   private Button createFeatureProject;
   
   private Button createTestProject;
+  
+  private Combo buildSystem;
+  
+  private Combo projectLayout;
   
   private Combo generatorConfigurationField;
   
@@ -59,23 +71,91 @@ public class AdvancedNewProjectPage extends WizardPage {
             final Procedure1<Button> _function = new Procedure1<Button>() {
               @Override
               public void apply(final Button it) {
-                it.setText(Messages.WizardNewXtextProjectCreationPage_CreateFeatureLabel);
+                it.setText("Eclipse Plugin");
+                it.setEnabled(false);
               }
             };
             Button _CheckBox = AdvancedNewProjectPage.this.CheckBox(it, _function);
-            AdvancedNewProjectPage.this.createFeatureProject = _CheckBox;
+            AdvancedNewProjectPage.this.createEclipsePlugin = _CheckBox;
             final Procedure1<Button> _function_1 = new Procedure1<Button>() {
               @Override
               public void apply(final Button it) {
-                it.setText(Messages.WizardNewXtextProjectCreationPage_CreateATestProject);
+                it.setText("IntelliJ IDEA Plugin");
+                it.setEnabled(false);
               }
             };
             Button _CheckBox_1 = AdvancedNewProjectPage.this.CheckBox(it, _function_1);
-            AdvancedNewProjectPage.this.createTestProject = _CheckBox_1;
+            AdvancedNewProjectPage.this.createIdeaPlugin = _CheckBox_1;
+            final Procedure1<Button> _function_2 = new Procedure1<Button>() {
+              @Override
+              public void apply(final Button it) {
+                it.setText("Web Integration");
+                it.setEnabled(false);
+              }
+            };
+            Button _CheckBox_2 = AdvancedNewProjectPage.this.CheckBox(it, _function_2);
+            AdvancedNewProjectPage.this.createWebIntegration = _CheckBox_2;
+            final Procedure1<Button> _function_3 = new Procedure1<Button>() {
+              @Override
+              public void apply(final Button it) {
+                it.setText("Generic IDE Support");
+                it.setEnabled(false);
+              }
+            };
+            Button _CheckBox_3 = AdvancedNewProjectPage.this.CheckBox(it, _function_3);
+            AdvancedNewProjectPage.this.createIdeSupport = _CheckBox_3;
+            final Procedure1<Button> _function_4 = new Procedure1<Button>() {
+              @Override
+              public void apply(final Button it) {
+                it.setText(Messages.WizardNewXtextProjectCreationPage_CreateFeatureLabel);
+              }
+            };
+            Button _CheckBox_4 = AdvancedNewProjectPage.this.CheckBox(it, _function_4);
+            AdvancedNewProjectPage.this.createFeatureProject = _CheckBox_4;
+            final Procedure1<Button> _function_5 = new Procedure1<Button>() {
+              @Override
+              public void apply(final Button it) {
+                it.setText(Messages.WizardNewXtextProjectCreationPage_TestingSupport);
+              }
+            };
+            Button _CheckBox_5 = AdvancedNewProjectPage.this.CheckBox(it, _function_5);
+            AdvancedNewProjectPage.this.createTestProject = _CheckBox_5;
           }
         };
         AdvancedNewProjectPage.this.Group(it, _function);
         final Procedure1<Group> _function_1 = new Procedure1<Group>() {
+          @Override
+          public void apply(final Group it) {
+            it.setText("Build System");
+            final Procedure1<Combo> _function = new Procedure1<Combo>() {
+              @Override
+              public void apply(final Combo it) {
+                it.setEnabled(false);
+                it.setItems(new String[] { "None", "Maven", "Gradle" });
+              }
+            };
+            Combo _DropDown = AdvancedNewProjectPage.this.DropDown(it, _function);
+            AdvancedNewProjectPage.this.buildSystem = _DropDown;
+          }
+        };
+        AdvancedNewProjectPage.this.Group(it, _function_1);
+        final Procedure1<Group> _function_2 = new Procedure1<Group>() {
+          @Override
+          public void apply(final Group it) {
+            it.setText("Project Layout");
+            final Procedure1<Combo> _function = new Procedure1<Combo>() {
+              @Override
+              public void apply(final Combo it) {
+                it.setEnabled(false);
+                it.setItems(new String[] { "Eclipse", "Maven/Gradle" });
+              }
+            };
+            Combo _DropDown = AdvancedNewProjectPage.this.DropDown(it, _function);
+            AdvancedNewProjectPage.this.projectLayout = _DropDown;
+          }
+        };
+        AdvancedNewProjectPage.this.Group(it, _function_2);
+        final Procedure1<Group> _function_3 = new Procedure1<Group>() {
           @Override
           public void apply(final Group it) {
             it.setText(Messages.WizardNewXtextProjectCreationPage_GeneratorConfiguration);
@@ -103,7 +183,7 @@ public class AdvancedNewProjectPage extends WizardPage {
             AdvancedNewProjectPage.this.generatorConfigurationField = _DropDown;
           }
         };
-        AdvancedNewProjectPage.this.Group(it, _function_1);
+        AdvancedNewProjectPage.this.Group(it, _function_3);
       }
     };
     Composite _doubleArrow = ObjectExtensions.<Composite>operator_doubleArrow(_composite, _function);
@@ -160,8 +240,14 @@ public class AdvancedNewProjectPage extends WizardPage {
   }
   
   protected void setDefaults() {
+    this.createEclipsePlugin.setSelection(true);
+    this.createIdeaPlugin.setSelection(false);
+    this.createWebIntegration.setSelection(false);
+    this.createIdeSupport.setSelection(false);
     this.createFeatureProject.setSelection(true);
     this.createTestProject.setSelection(true);
+    this.buildSystem.select(0);
+    this.projectLayout.select(0);
     int _indexOfDefaultConfig = this.indexOfDefaultConfig();
     this.generatorConfigurationField.select(_indexOfDefaultConfig);
   }
