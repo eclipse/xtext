@@ -10,15 +10,15 @@ package org.eclipse.xtext.xbase.idea.jvm;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMirrorElement;
-import com.intellij.psi.impl.source.PsiMethodImpl;
+import com.intellij.psi.impl.source.PsiParameterImpl;
 import org.eclipse.xtext.xbase.idea.jvm.JvmPsiElementExtensions;
 
 /**
  * @author kosyakov - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class JvmPsiMethodImpl extends PsiMethodImpl implements PsiMirrorElement {
-  public JvmPsiMethodImpl(final ASTNode node) {
+public class JvmPsiParameterImpl extends PsiParameterImpl implements PsiMirrorElement {
+  public JvmPsiParameterImpl(final ASTNode node) {
     super(node);
   }
   

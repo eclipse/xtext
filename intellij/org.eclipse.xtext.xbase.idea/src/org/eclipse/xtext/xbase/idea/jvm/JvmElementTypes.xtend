@@ -18,11 +18,38 @@ import com.intellij.psi.impl.source.tree.java.EnumConstantElement
 import com.intellij.psi.impl.source.tree.java.EnumConstantInitializerElement
 import com.intellij.psi.impl.source.tree.java.FieldElement
 import com.intellij.psi.impl.source.tree.java.MethodElement
+import com.intellij.psi.impl.source.tree.java.ParameterElement
 
 /**
  * @author kosyakov - Initial contribution and API
  */
-interface JvmStubElementTypes {
+interface JvmElementTypes {
+	val PARAMETER = new JavaClassElementType('PARAMETER') {
+
+		override createCompositeNode() {
+			new ParameterElement(JavaElementType.PARAMETER) {
+
+				override protected createPsiNoLock() {
+					new JvmPsiParameterImpl(this)
+				}
+
+			}
+		}
+
+	}
+	val RECEIVER_PARAMETER = new JavaClassElementType('RECEIVER_PARAMETER') {
+
+		override createCompositeNode() {
+			new ParameterElement(JavaElementType.RECEIVER_PARAMETER) {
+
+				override protected createPsiNoLock() {
+					new JvmPsiReceiverParameterImpl(this)
+				}
+
+			}
+		}
+
+	}
 	val CLASS = new JavaClassElementType('CLASS') {
 
 		override createCompositeNode() {
@@ -104,11 +131,11 @@ interface JvmStubElementTypes {
 
 		override createCompositeNode() {
 			new EnumConstantElement() {
-				
+
 				override protected createPsiNoLock() {
 					new JvmPsiEnumConstantImpl(this)
 				}
-				
+
 			}
 		}
 

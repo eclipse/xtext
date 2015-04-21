@@ -29,6 +29,7 @@ import com.intellij.psi.PsiIdentifier;
 import com.intellij.psi.PsiInvalidElementAccessException;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.PsiMethod;
+import com.intellij.psi.PsiMirrorElement;
 import com.intellij.psi.PsiModifierList;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.PsiReferenceList;
@@ -56,7 +57,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
  * @author kosyakov - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class JvmPsiClass implements PsiClass, UserDataHolderEx {
+public class JvmPsiClass implements PsiClass, UserDataHolderEx, PsiMirrorElement {
   @Accessors
   private PsiClass stub;
   
@@ -134,6 +135,11 @@ public class JvmPsiClass implements PsiClass, UserDataHolderEx {
   public <T extends Object> boolean replace(final Key<T> key, final T oldValue, final T newValue) {
     PsiClass _delegate = this.getDelegate();
     return ((UserDataHolderEx) _delegate).<T>replace(key, oldValue, newValue);
+  }
+  
+  @Override
+  public PsiElement getPrototype() {
+    return this;
   }
   
   @Pure

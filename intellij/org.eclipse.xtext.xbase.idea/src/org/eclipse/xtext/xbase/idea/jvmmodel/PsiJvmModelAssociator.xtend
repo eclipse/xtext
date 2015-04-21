@@ -9,28 +9,19 @@ package org.eclipse.xtext.xbase.idea.jvmmodel
 
 import com.google.inject.Inject
 import com.google.inject.Provider
-import com.intellij.psi.PsiClass
-import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiMethod
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.common.types.JvmDeclaredType
-import org.eclipse.xtext.common.types.JvmExecutable
-import org.eclipse.xtext.common.types.JvmField
-import org.eclipse.xtext.common.types.JvmFormalParameter
-import org.eclipse.xtext.psi.IPsiModelAssociations
 import org.eclipse.xtext.psi.IPsiModelAssociator
 import org.eclipse.xtext.psi.PsiElementProvider
+import org.eclipse.xtext.xbase.idea.jvm.PsiJvmFileImpl
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
 
-import static extension org.eclipse.xtext.xbase.idea.jvm.JvmPsiElementExtensions.*
+import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 
 class PsiJvmModelAssociator extends JvmModelAssociator {
 
 	@Inject
 	extension IPsiModelAssociator
-
-	@Inject
-	extension IPsiModelAssociations
 
 	@Inject
 	Provider<JvmPsiClassProvider> psiClassProviderProvider
@@ -52,42 +43,21 @@ class PsiJvmModelAssociator extends JvmModelAssociator {
 	}
 
 	protected def PsiElementProvider createPsiElementProvider(EObject sourceElement, EObject jvmElement) {
-		switch jvmElement {
-			JvmDeclaredType case jvmElement.declaringType == null:
-				psiClassProviderProvider.get => [ provider |
-					provider.jvmDeclaredType = jvmElement
+		[
+			val root = jvmElement.rootContainer
+			val psiClass = if (root instanceof JvmDeclaredType) {
+					val provider = psiClassProviderProvider.get
+					provider.jvmDeclaredType = root
 					provider.sourceElement = sourceElement
-				]
-			JvmDeclaredType:
-				[
-					val psiClass = jvmElement.declaringType.psiElement
-					if (psiClass instanceof PsiClass)
-						psiClass.innerClasses.findByJvmElement(jvmElement)
-				]
-			JvmExecutable:
-				[
-					val psiClass = jvmElement.declaringType.psiElement
-					if (psiClass instanceof PsiClass)
-						psiClass.methods.findByJvmElement(jvmElement)
-				]
-			JvmField:
-				[
-					val psiClass = jvmElement.declaringType.psiElement
-					if (psiClass instanceof PsiClass)
-						psiClass.fields.findByJvmElement(jvmElement)
-				]
-			JvmFormalParameter:
-				[
-					val psiMethod = jvmElement.eContainer.psiElement
-					if (psiMethod instanceof PsiMethod)
-						psiMethod.parameterList.parameters.findByJvmElement(jvmElement)
-				]
-		}
-	}
-
-	protected def findByJvmElement(PsiElement[] elements, EObject jvmElement) {
-		elements.findFirst [ element |
-			element.jvmElement == jvmElement
+					provider.get
+				}
+			if (root == jvmElement) {
+				return psiClass
+			}
+			val psiFile = psiClass.containingFile
+			if (psiFile instanceof PsiJvmFileImpl) {
+				psiFile.mapping.get(jvmElement)
+			}
 		]
 	}
 

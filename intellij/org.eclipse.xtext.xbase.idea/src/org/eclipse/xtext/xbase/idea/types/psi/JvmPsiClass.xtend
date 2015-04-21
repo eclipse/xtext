@@ -17,11 +17,12 @@ import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.service.OperationCanceledError
 
 import static extension org.eclipse.xtext.xbase.idea.types.psi.LoadingTypeResourcePhase.*
+import com.intellij.psi.PsiMirrorElement
 
 /**
  * @author kosyakov - Initial contribution and API
  */
-class JvmPsiClass implements PsiClass, UserDataHolderEx {
+class JvmPsiClass implements PsiClass, UserDataHolderEx, PsiMirrorElement {
 
 	@Accessors
 	PsiClass stub
@@ -70,6 +71,10 @@ class JvmPsiClass implements PsiClass, UserDataHolderEx {
 
 	override <T> replace(Key<T> key, T oldValue, T newValue) {
 		(delegate as UserDataHolderEx).replace(key, oldValue, newValue)
+	}
+	
+	override getPrototype() {
+		this
 	}
 
 }

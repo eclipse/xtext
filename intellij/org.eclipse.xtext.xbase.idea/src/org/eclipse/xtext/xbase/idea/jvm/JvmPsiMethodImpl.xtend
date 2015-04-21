@@ -9,11 +9,12 @@ package org.eclipse.xtext.xbase.idea.jvm
 
 import com.intellij.lang.ASTNode
 import com.intellij.psi.impl.source.PsiMethodImpl
+import com.intellij.psi.PsiMirrorElement
 
 /**
  * @author kosyakov - Initial contribution and API
  */
-class JvmPsiMethodImpl extends PsiMethodImpl {
+class JvmPsiMethodImpl extends PsiMethodImpl implements PsiMirrorElement {
 	
 	new(ASTNode node) {
 		super(node)
@@ -21,6 +22,10 @@ class JvmPsiMethodImpl extends PsiMethodImpl {
 
 	override getNavigationElement() {
 		JvmPsiElementExtensions.getNavigationElement(this) ?: super.navigationElement
+	}
+	
+	override getPrototype() {
+		this
 	}
 	
 }

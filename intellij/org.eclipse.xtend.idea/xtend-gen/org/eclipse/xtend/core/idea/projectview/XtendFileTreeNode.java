@@ -14,11 +14,11 @@ import com.intellij.ide.projectView.impl.nodes.ClassTreeNode;
 import com.intellij.ide.projectView.impl.nodes.PsiFileNode;
 import com.intellij.ide.util.treeView.AbstractTreeNode;
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiFile;
 import java.util.Collection;
 import org.eclipse.xtend.core.idea.lang.XtendLanguage;
 import org.eclipse.xtend.core.idea.lang.psi.impl.XtendFileImpl;
-import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass;
 import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClasses;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -46,16 +46,16 @@ public class XtendFileTreeNode extends PsiFileNode {
   @Override
   public Collection<AbstractTreeNode> getChildrenImpl() {
     XtendFileImpl _xtendFile = this.getXtendFile();
-    Iterable<JvmPsiClass> _psiClasses = this._jvmPsiClasses.getPsiClasses(_xtendFile);
-    final Function1<JvmPsiClass, ClassTreeNode> _function = new Function1<JvmPsiClass, ClassTreeNode>() {
+    Iterable<PsiClass> _psiClasses = this._jvmPsiClasses.getPsiClasses(_xtendFile);
+    final Function1<PsiClass, ClassTreeNode> _function = new Function1<PsiClass, ClassTreeNode>() {
       @Override
-      public ClassTreeNode apply(final JvmPsiClass psiClass) {
+      public ClassTreeNode apply(final PsiClass psiClass) {
         Project _project = XtendFileTreeNode.this.getProject();
         ViewSettings _settings = XtendFileTreeNode.this.getSettings();
         return new ClassTreeNode(_project, psiClass, _settings);
       }
     };
-    Iterable<ClassTreeNode> _map = IterableExtensions.<JvmPsiClass, ClassTreeNode>map(_psiClasses, _function);
+    Iterable<ClassTreeNode> _map = IterableExtensions.<PsiClass, ClassTreeNode>map(_psiClasses, _function);
     Iterable<AbstractTreeNode> _filter = Iterables.<AbstractTreeNode>filter(_map, AbstractTreeNode.class);
     return IterableExtensions.<AbstractTreeNode>toList(_filter);
   }

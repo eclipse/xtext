@@ -37,7 +37,7 @@ public abstract class AbstractJvmTypeProvider implements IJvmTypeProvider, Resou
 	 * @noinstantiate This class is not intended to be instantiated by clients.
 	 * @since 2.4
 	 */
-	protected static class ClassNameVariants extends AbstractIterator<String> {
+	public static class ClassNameVariants extends AbstractIterator<String> {
 
 		private StringBuilder buffer;
 		private int index;

@@ -20,7 +20,6 @@ import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiJvmModelAssociations;
-import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass;
 import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClasses;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -77,8 +76,8 @@ public class PsiJvmModelAssociationsTests extends LightXtendTest {
     _builder.newLine();
     this.configureByText(_builder.toString());
     BaseXtextFile _xtextFile = this.getXtextFile();
-    Iterable<JvmPsiClass> _psiClasses = this._jvmPsiClasses.getPsiClasses(_xtextFile);
-    final JvmPsiClass psiClass = IterableExtensions.<JvmPsiClass>head(_psiClasses);
+    Iterable<PsiClass> _psiClasses = this._jvmPsiClasses.getPsiClasses(_xtextFile);
+    final PsiClass psiClass = IterableExtensions.<PsiClass>head(_psiClasses);
     Set<PsiElement> _sourceElements = this._iPsiJvmModelAssociations.getSourceElements(psiClass);
     PsiElement _head = IterableExtensions.<PsiElement>head(_sourceElements);
     TestCase.assertNotNull(_head);

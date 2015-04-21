@@ -15,18 +15,20 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElementFinder;
 import com.intellij.psi.search.GlobalSearchScope;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import org.eclipse.xtext.common.types.access.impl.AbstractJvmTypeProvider;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex;
-import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass;
 import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClasses;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 
 @SuppressWarnings("all")
 public class JvmTypesElementFinder extends PsiElementFinder {
@@ -55,22 +57,55 @@ public class JvmTypesElementFinder extends PsiElementFinder {
   
   @Override
   public PsiClass[] findClasses(final String qualifiedName, final GlobalSearchScope scope) {
-    ArrayList<JvmPsiClass> _xblockexpression = null;
-    {
-      final ArrayList<JvmPsiClass> result = CollectionLiterals.<JvmPsiClass>newArrayList();
-      Collection<BaseXtextFile> _get = this.exportedObjectQualifiedNameIndex.get(qualifiedName, this.project, scope);
-      for (final BaseXtextFile xtextFile : _get) {
-        Language _language = xtextFile.getLanguage();
-        boolean _equals = Objects.equal(_language, this.language);
-        if (_equals) {
-          String[] _split = qualifiedName.split("\\.");
-          QualifiedName _create = QualifiedName.create(_split);
-          Iterable<JvmPsiClass> _psiClassesByQualifiedName = this._jvmPsiClasses.getPsiClassesByQualifiedName(xtextFile, _create);
-          Iterables.<JvmPsiClass>addAll(result, _psiClassesByQualifiedName);
-        }
+    Iterable<String> _variants = this.getVariants(qualifiedName);
+    final Function1<String, Iterable<PsiClass>> _function = new Function1<String, Iterable<PsiClass>>() {
+      @Override
+      public Iterable<PsiClass> apply(final String it) {
+        return JvmTypesElementFinder.this.doFindClasses(it, scope);
       }
-      _xblockexpression = result;
+    };
+    Iterable<Iterable<PsiClass>> _map = IterableExtensions.<String, Iterable<PsiClass>>map(_variants, _function);
+    return ((PsiClass[])Conversions.unwrapArray(Iterables.<PsiClass>concat(_map), PsiClass.class));
+  }
+  
+  protected Iterable<PsiClass> doFindClasses(final String variant, final GlobalSearchScope scope) {
+    Iterable<PsiClass> _xblockexpression = null;
+    {
+      final QualifiedName qualifiedName = this.toQualifiedName(variant);
+      Iterable<BaseXtextFile> _findFiles = this.findFiles(variant, scope);
+      final Function1<BaseXtextFile, Iterable<PsiClass>> _function = new Function1<BaseXtextFile, Iterable<PsiClass>>() {
+        @Override
+        public Iterable<PsiClass> apply(final BaseXtextFile it) {
+          return JvmTypesElementFinder.this._jvmPsiClasses.getPsiClassesByQualifiedName(it, qualifiedName);
+        }
+      };
+      Iterable<Iterable<PsiClass>> _map = IterableExtensions.<BaseXtextFile, Iterable<PsiClass>>map(_findFiles, _function);
+      _xblockexpression = Iterables.<PsiClass>concat(_map);
     }
-    return ((PsiClass[])Conversions.unwrapArray(_xblockexpression, PsiClass.class));
+    return _xblockexpression;
+  }
+  
+  protected Iterable<String> getVariants(final String qualifiedName) {
+    AbstractJvmTypeProvider.ClassNameVariants _classNameVariants = new AbstractJvmTypeProvider.ClassNameVariants(qualifiedName);
+    Iterable<String> _iterable = IteratorExtensions.<String>toIterable(_classNameVariants);
+    return Iterables.<String>concat(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(qualifiedName)), _iterable);
+  }
+  
+  protected QualifiedName toQualifiedName(final String variant) {
+    String[] _split = variant.split("\\.");
+    return QualifiedName.create(_split);
+  }
+  
+  protected Iterable<BaseXtextFile> findFiles(final String qualifiedName, final GlobalSearchScope scope) {
+    String _string = qualifiedName.toString();
+    Collection<BaseXtextFile> _get = this.exportedObjectQualifiedNameIndex.get(_string, this.project, scope);
+    final Function1<BaseXtextFile, Boolean> _function = new Function1<BaseXtextFile, Boolean>() {
+      @Override
+      public Boolean apply(final BaseXtextFile xtextFile) {
+        Language _language = xtextFile.getLanguage();
+        return Boolean.valueOf(Objects.equal(_language, JvmTypesElementFinder.this.language));
+      }
+    };
+    return IterableExtensions.<BaseXtextFile>filter(_get, _function);
   }
 }

@@ -100,13 +100,13 @@ public abstract class BaseXtextFile extends PsiFileBase {
 		return (IXtextLanguage) getLanguage();
 	}
 	
-	public Resource getResource() {
-		Resource resource = doGetResource();
+	public XtextResource getResource() {
+		XtextResource resource = doGetResource();
 		installDerivedState(resource);
 		return resource;
 	}
     
-    protected Resource doGetResource() {
+    protected XtextResource doGetResource() {
     	synchronized(resourceCacheLock) {
     		return CachedValuesManager.getManager(getProject()).<XtextResource, BaseXtextFile>getCachedValue(this, new CachedValueProvider<XtextResource>() {
 

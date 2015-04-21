@@ -9,11 +9,12 @@ package org.eclipse.xtext.xbase.idea.jvm
 
 import com.intellij.lang.ASTNode
 import com.intellij.psi.impl.source.PsiAnnotationMethodImpl
+import com.intellij.psi.PsiMirrorElement
 
 /**
  * @author kosyakov - Initial contribution and API
  */
-class JvmPsiAnnotationMethodImpl extends PsiAnnotationMethodImpl {
+class JvmPsiAnnotationMethodImpl extends PsiAnnotationMethodImpl implements PsiMirrorElement {
 	
 	new(ASTNode node) {
 		super(node)
@@ -21,6 +22,10 @@ class JvmPsiAnnotationMethodImpl extends PsiAnnotationMethodImpl {
 
 	override getNavigationElement() {
 		JvmPsiElementExtensions.getNavigationElement(this) ?: super.navigationElement
+	}
+	
+	override getPrototype() {
+		this
 	}
 	
 }

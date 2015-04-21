@@ -30,11 +30,15 @@ configure(subprojects - eclipsePluginProjects) {
 	apply plugin: 'eclipse'
 	project.apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
 	
-	configurations.compile {
+	configurations.all {
 		exclude module:'cglib'
 		exclude module:'icu4j'
 		exclude group:'org.ow2.asm'
 		exclude module:'org.eclipse.jdt.core'
+	}
+
+	task cleanTestSystem(type: Delete) {
+		delete "${ideaDevelopment.ideaHome}/test-system"
 	}
 }
 

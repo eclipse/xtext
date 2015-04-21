@@ -32,7 +32,6 @@ import com.intellij.psi.PsiFile;
 import com.intellij.util.Consumer;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Keyword;
@@ -270,7 +269,7 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
       @Override
       public XtextResource compute() {
         PsiFile _originalFile = parameters.getOriginalFile();
-        Resource _resource = ((BaseXtextFile) _originalFile).getResource();
+        XtextResource _resource = ((BaseXtextFile) _originalFile).getResource();
         return ((XtextResource) _resource);
       }
     };

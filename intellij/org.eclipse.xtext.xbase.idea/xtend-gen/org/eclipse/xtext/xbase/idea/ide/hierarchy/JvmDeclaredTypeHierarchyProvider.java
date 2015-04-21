@@ -16,12 +16,12 @@ import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import org.eclipse.xtext.idea.actionSystem.DataContextExtensions;
 import org.eclipse.xtext.idea.extensions.IdeaProjectExtensions;
-import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass;
 import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClasses;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -35,7 +35,7 @@ public class JvmDeclaredTypeHierarchyProvider extends JavaTypeHierarchyProvider 
   
   @Override
   public PsiElement getTarget(@NotNull final DataContext dataContext) {
-    JvmPsiClass _xblockexpression = null;
+    PsiClass _xblockexpression = null;
     {
       final Project project = DataContextExtensions.getProject(dataContext);
       boolean _equals = Objects.equal(project, null);
@@ -46,8 +46,8 @@ public class JvmDeclaredTypeHierarchyProvider extends JavaTypeHierarchyProvider 
       boolean _equals_1 = Objects.equal(editor, null);
       if (_equals_1) {
         PsiElement _psiElement = DataContextExtensions.getPsiElement(dataContext);
-        Iterable<JvmPsiClass> _psiClasses = this._jvmPsiClasses.getPsiClasses(_psiElement);
-        return IterableExtensions.<JvmPsiClass>head(_psiClasses);
+        Iterable<PsiClass> _psiClasses = this._jvmPsiClasses.getPsiClasses(_psiElement);
+        return IterableExtensions.<PsiClass>head(_psiClasses);
       }
       PsiDocumentManager _psiDocumentManager = IdeaProjectExtensions.getPsiDocumentManager(project);
       Document _document = editor.getDocument();
@@ -57,8 +57,8 @@ public class JvmDeclaredTypeHierarchyProvider extends JavaTypeHierarchyProvider 
         return null;
       }
       PsiElement _targetElement = this.getTargetElement(editor);
-      Iterable<JvmPsiClass> _psiClasses_1 = this._jvmPsiClasses.getPsiClasses(_targetElement);
-      final JvmPsiClass psiClass = IterableExtensions.<JvmPsiClass>head(_psiClasses_1);
+      Iterable<PsiClass> _psiClasses_1 = this._jvmPsiClasses.getPsiClasses(_targetElement);
+      final PsiClass psiClass = IterableExtensions.<PsiClass>head(_psiClasses_1);
       boolean _notEquals = (!Objects.equal(psiClass, null));
       if (_notEquals) {
         return psiClass;
@@ -66,8 +66,8 @@ public class JvmDeclaredTypeHierarchyProvider extends JavaTypeHierarchyProvider 
       CaretModel _caretModel = editor.getCaretModel();
       final int offset = _caretModel.getOffset();
       PsiElement _findElementAt = file.findElementAt(offset);
-      Iterable<JvmPsiClass> _findPsiClasses = this._jvmPsiClasses.findPsiClasses(_findElementAt);
-      _xblockexpression = IterableExtensions.<JvmPsiClass>head(_findPsiClasses);
+      Iterable<PsiClass> _findPsiClasses = this._jvmPsiClasses.findPsiClasses(_findElementAt);
+      _xblockexpression = IterableExtensions.<PsiClass>head(_findPsiClasses);
     }
     return _xblockexpression;
   }
