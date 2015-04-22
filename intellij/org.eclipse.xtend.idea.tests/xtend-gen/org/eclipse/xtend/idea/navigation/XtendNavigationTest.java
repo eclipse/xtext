@@ -896,16 +896,19 @@ public class XtendNavigationTest extends LightXtendTest {
       return null;
     }
     if ((element instanceof PsiNamedEObject)) {
-      PsiEObjectIdentifier _nameIdentifier = ((PsiNamedEObject)element).getNameIdentifier();
-      TextRange _textRange = null;
-      if (_nameIdentifier!=null) {
-        _textRange=_nameIdentifier.getTextRange();
+      final PsiEObjectIdentifier nameIdentifier = ((PsiNamedEObject)element).getNameIdentifier();
+      boolean _notEquals = (!Objects.equal(nameIdentifier, null));
+      if (_notEquals) {
+        PsiNamedEObject _xifexpression = null;
+        TextRange _textRange = nameIdentifier.getTextRange();
+        boolean _equals_1 = Objects.equal(_textRange, identifierRange);
+        if (_equals_1) {
+          _xifexpression = ((PsiNamedEObject)element);
+        } else {
+          _xifexpression = null;
+        }
+        return _xifexpression;
       }
-      boolean _equals_1 = Objects.equal(_textRange, identifierRange);
-      if (_equals_1) {
-        return element;
-      }
-      return null;
     }
     PsiElement _parent = element.getParent();
     return this.findPsiNamedEObject(_parent, identifierRange);

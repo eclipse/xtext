@@ -2,6 +2,8 @@ dependencies {
 	testCompile project(':intellij:org.eclipse.xtext.idea.tests')
 	testCompile project(":plugins:org.eclipse.xtend.lib")
 	testCompile project(':tests:org.eclipse.xtext.common.types.tests')
+	testCompile 'org.eclipse.emf:org.eclipse.emf.mwe2.launch:2.7.1'
+	testCompile 'org.eclipse.emf:org.eclipse.emf.mwe2.runtime:2.7.1'
 }
 
 ideaDevelopment {

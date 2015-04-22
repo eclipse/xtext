@@ -15,23 +15,14 @@ Export-Package: org.eclipse.xtext.idea.common.types,
  org.eclipse.xtext.idea.common.types.parser.antlr.internal
 Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.xbase;resolution:=optional,
- org.eclipse.xtext.generator;resolution:=optional,
- org.eclipse.xtext.idea.generator;resolution:=optional,
  org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional,
- org.eclipse.emf.codegen.ecore;resolution:=optional,
- org.eclipse.emf.mwe.utils;resolution:=optional,
- org.eclipse.emf.mwe2.launch;resolution:=optional,
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
  org.eclipse.xtext.common.types,
  org.antlr.runtime,
  org.eclipse.xtext.common.types.tests,
- org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional,
- org.eclipse.xtext.ui,
- org.eclipse.xtext.ui.shared,
- org.eclipse.ui.editors,
- org.eclipse.ui,
- org.eclipse.xtext.common.types.ui
+ org.eclipse.xtext.idea.generator,
+ org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: org.apache.log4j

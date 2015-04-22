@@ -3,7 +3,6 @@ package org.eclipse.xtext.testlanguages.idea.lang.parser;
 import org.eclipse.xtext.testlanguages.idea.lang.TestLanguageElementTypeProvider;
 import org.eclipse.xtext.testlanguages.idea.lang.psi.impl.TestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
-import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -25,12 +24,6 @@ public class TestLanguageParserDefinition extends AbstractXtextParserDefinition 
 	@Override
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
-		IElementType elementType = node.getElementType();
-		if (elementType == elementTypeProvider.getAbstractRule_ChoiceRuleParserRuleCall_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getChoiceRule_NameIDTerminalRuleCall_2_0ElementType()
-			);
-		}
 		return super.createElement(node);
 	}
 

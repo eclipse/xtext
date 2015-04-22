@@ -4,7 +4,6 @@ import org.eclipse.xtext.psi.impl.PsiEObjectReference;
 import org.eclipse.xtext.index.idea.lang.IndexTestLanguageElementTypeProvider;
 import org.eclipse.xtext.index.idea.lang.psi.impl.IndexTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
-import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -27,26 +26,6 @@ public class IndexTestLanguageParserDefinition extends AbstractXtextParserDefini
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
 		IElementType elementType = node.getElementType();
-		if (elementType == elementTypeProvider.getElement_NamespaceParserRuleCall_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getNamespace_NameQualifiedNameParserRuleCall_0_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getType_EntityParserRuleCall_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getEntity_NameIDTerminalRuleCall_1_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getType_DatatypeParserRuleCall_1ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getDatatype_NameIDTerminalRuleCall_1_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getEntity_PropertiesPropertyParserRuleCall_3_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getProperty_NameIDTerminalRuleCall_1_0ElementType()
-			);
-		}
 		if (elementType == elementTypeProvider.getProperty_TypeTypeCrossReference_0_0ElementType()) {
 			return new PsiEObjectReference(node);
 		}

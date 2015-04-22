@@ -2,7 +2,7 @@ org.eclipse.xtext.parser.terminalrules.idea.lang.psi.impl.Bug317840TestLanguageF
   org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)(0,12)
     org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ElementsElementParserRuleCall_0_ELEMENT_TYPE)(0,11)
       PsiElement(Element_ElementKeyword_0_ELEMENT_TYPE)('element')(0,7)
-      org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Element_FirstNamedParserRuleCall_1_0_ELEMENT_TYPE)(7,11)
+      org.eclipse.xtext.psi.impl.PsiEObjectImpl(Element_FirstNamedParserRuleCall_1_0_ELEMENT_TYPE)(7,11)
         org.eclipse.xtext.psi.impl.PsiEObjectImpl(Named_NameNAMEParserRuleCall_0_ELEMENT_TYPE)(7,11)
           PsiWhiteSpace(' ')(7,8)
           PsiElement(NAME_IDTerminalRuleCall_0_ELEMENT_TYPE)('a')(8,9)

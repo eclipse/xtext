@@ -4,7 +4,6 @@ import org.eclipse.xtext.psi.impl.PsiEObjectReference;
 import org.eclipse.xtext.valueconverter.idea.lang.Bug250313ElementTypeProvider;
 import org.eclipse.xtext.valueconverter.idea.lang.psi.impl.Bug250313FileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
-import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -27,16 +26,6 @@ public class Bug250313ParserDefinition extends AbstractXtextParserDefinition {
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
 		IElementType elementType = node.getElementType();
-		if (elementType == elementTypeProvider.getChild_Child1ParserRuleCall_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getChild1_NameIDTerminalRuleCall_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getChild_Child2ParserRuleCall_1ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getChild2_NameSTRINGTerminalRuleCall_0ElementType()
-			);
-		}
 		if (elementType == elementTypeProvider.getModel_RefChild1CrossReference_8_1_1_0_0ElementType()) {
 			return new PsiEObjectReference(node);
 		}

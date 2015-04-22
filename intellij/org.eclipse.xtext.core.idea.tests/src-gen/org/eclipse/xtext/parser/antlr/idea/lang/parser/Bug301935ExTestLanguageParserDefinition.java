@@ -3,7 +3,6 @@ package org.eclipse.xtext.parser.antlr.idea.lang.parser;
 import org.eclipse.xtext.parser.antlr.idea.lang.Bug301935ExTestLanguageElementTypeProvider;
 import org.eclipse.xtext.parser.antlr.idea.lang.psi.impl.Bug301935ExTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
-import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -25,12 +24,6 @@ public class Bug301935ExTestLanguageParserDefinition extends AbstractXtextParser
 	@Override
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
-		IElementType elementType = node.getElementType();
-		if (elementType == elementTypeProvider.getDelegateModel_ModelParserRuleCallElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getModel_NameIDTerminalRuleCall_0_0ElementType()
-			);
-		}
 		return super.createElement(node);
 	}
 

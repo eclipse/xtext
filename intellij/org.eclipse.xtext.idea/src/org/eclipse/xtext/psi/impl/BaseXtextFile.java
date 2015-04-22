@@ -29,9 +29,11 @@ import org.eclipse.xtext.idea.resource.PsiToEcoreTransformator;
 import org.eclipse.xtext.idea.resource.ResourceDescriptionAdapter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.impl.SyntheticCompositeNode;
 import org.eclipse.xtext.psi.PsiEObject;
 import org.eclipse.xtext.psi.stubs.ExportedObject;
 import org.eclipse.xtext.psi.stubs.XtextFileStub;
+import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
 import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.EObjectDescription;
@@ -55,6 +57,7 @@ import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.CachedValue;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
@@ -134,9 +137,34 @@ public abstract class BaseXtextFile extends PsiFileBase {
 	}
 	
 	public List<ASTNode> getASTNodes(INode node) {
-		List<ASTNode> astNodes = PsiToEcoreAdapter.get(getResource()).getReverseNodesMapping().get(node);
+		INode originalNode = findOriginalNode(node);
+		List<ASTNode> astNodes = PsiToEcoreAdapter.get(getResource()).getReverseNodesMapping().get(originalNode);
+		return filterASTNodes(node, astNodes);
+	}
+
+	protected INode findOriginalNode(INode node) {
+		if (node instanceof SyntheticCompositeNode) {
+			return findOriginalNode(node.getParent());
+		}
+		return node;
+	}
+
+	protected List<ASTNode> filterASTNodes(INode node, List<ASTNode> astNodes) {
 		if (astNodes == null) {
 			return emptyList();
+		}
+		if (node instanceof SyntheticCompositeNode) {
+			List<ASTNode> result = new ArrayList<ASTNode>();
+			for (ASTNode astNode : astNodes) {
+				IElementType elementType = astNode.getElementType();
+				if (elementType instanceof IGrammarAwareElementType) {
+					IGrammarAwareElementType grammarAwareElementType = (IGrammarAwareElementType) elementType;
+					if (grammarAwareElementType.getGrammarElement() == node.getGrammarElement()) {
+						result.add(astNode);
+					}
+				}
+			}
+			return result;
 		}
 		return astNodes;
 	}

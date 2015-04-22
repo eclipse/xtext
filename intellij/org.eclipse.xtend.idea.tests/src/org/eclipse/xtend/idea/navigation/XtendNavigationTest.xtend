@@ -516,10 +516,13 @@ class XtendNavigationTest extends LightXtendTest {
 			return null
 		}
 		if (element instanceof PsiNamedEObject) {
-			if (element.nameIdentifier?.textRange == identifierRange) {
-				return element
+			val nameIdentifier = element.nameIdentifier
+			if (nameIdentifier != null) {
+				return if (nameIdentifier.textRange == identifierRange)
+					element
+				else
+					null
 			}
-			return null
 		}
 		return element.parent.findPsiNamedEObject(identifierRange)
 	}

@@ -1,5 +1,5 @@
 org.eclipse.xtext.parser.terminalrules.idea.lang.psi.impl.UnicodeTestLanguageFileImpl:a.unicodetestlanguage(0,3)
   org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)(0,3)
     org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_StringsAbstractStringParserRuleCall_0_ELEMENT_TYPE)(0,3)
-      org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(AbstractString_GStringParserRuleCall_0_ELEMENT_TYPE)(0,3)
+      org.eclipse.xtext.psi.impl.PsiEObjectImpl(AbstractString_GStringParserRuleCall_0_ELEMENT_TYPE)(0,3)
         PsiElement(GString_NameGERMAN_STRINGTerminalRuleCall_0_ELEMENT_TYPE)('ÄÖÜ')(0,3)
