@@ -12,6 +12,9 @@ import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.text.undo.DocumentUndoManagerRegistry;
+import org.eclipse.text.undo.IDocumentUndoManager;
+import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.XtextProjectHelper;
@@ -61,6 +64,29 @@ public class RealXtextDocumentModifyTest extends AbstractEditorTest {
 			}
 		});
 		assertEquals("Reconciler should have notified IXtextModelListener", 1, changeCounter[0]);
+	}
+	
+	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=465082
+	@Test public void testCompositeSemanticModificationProducesOnlyOneUndoableCommand() throws Exception {
+		String grammar = "grammar foo.G\n" 
+				+ "generate foo \"http://foo.net/foo\"\n"
+				+ "Foo returns X: 'foo';\n" 
+				+ "Bar returns Y: 'bar';"; 
+		IXtextDocument document = createDocument(grammar);
+		IDocumentUndoManager undoManager = DocumentUndoManagerRegistry.getDocumentUndoManager(document);
+		document.modify(new IUnitOfWork.Void<XtextResource>() {
+			@Override
+			public void process(XtextResource state) throws Exception {
+				Grammar grammar = (Grammar) state.getContents().get(0);
+				grammar.getRules().get(0).setName("Foo1");
+				grammar.getRules().get(1).setName("Bar1");
+			}
+		});
+		assertEquals(grammar.replace("Foo", "Foo1").replace("Bar", "Bar1"), document.get());
+		assertTrue(undoManager.undoable());
+		undoManager.undo();
+		assertEquals(grammar, document.get());
+		assertFalse(undoManager.undoable());
 	}
 
 	private IXtextDocument createDocument(String grammar) throws Exception {

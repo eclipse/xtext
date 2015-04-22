@@ -36,7 +36,9 @@ plugins.withId('eclipse') {
 		classpath.entries = classpath.entries.unique()
 	}
 	eclipseProject.enabled = false
+	cleanEclipseProject.enabled = false
 	eclipseJdt.enabled = false
+	cleanEclipseJdt.enabled = false
 }
 
 apply from: "$rootDir/gradle/unroll-dependencies.gradle"

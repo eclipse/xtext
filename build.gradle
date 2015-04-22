@@ -18,7 +18,6 @@ allprojects {
 	repositories.addAll(rootProject.buildscript.repositories)
 	
 	plugins.withType(JavaPlugin) {
-		project.apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
 		sourceCompatibility = 1.6
 		tasks.withType(JavaCompile) {
 			options.encoding = 'ISO-8859-1'

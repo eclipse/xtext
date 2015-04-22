@@ -1,0 +1,6 @@
+apply plugin: 'war'
+
+dependencies {
+    compile project(':web:org.eclipse.xtext.web')
+    providedCompile group: 'javax.servlet', name: 'servlet-api', version: '2.5'
+}

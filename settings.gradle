@@ -10,8 +10,10 @@ include 'maven'
 	}
 }
 
-new File(settingsDir, "intellij").listFiles().findAll {
-	it.isDirectory() && it.name.startsWith("org.eclipse")
-}.each {
-	include "intellij:${it.name}"
+['intellij', 'web'].each {folder -> 
+	new File(settingsDir, folder).listFiles().findAll {
+		it.isDirectory() && it.name.startsWith("org.eclipse")
+	}.each {
+		include "${folder}:${it.name}"
+	}
 }
