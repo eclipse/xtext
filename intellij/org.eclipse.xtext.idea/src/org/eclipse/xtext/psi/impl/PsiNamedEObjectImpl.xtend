@@ -16,18 +16,13 @@ import org.eclipse.xtext.psi.PsiEObjectFactory
 import org.eclipse.xtext.psi.PsiNamedEObject
 import org.eclipse.xtext.psi.stubs.PsiNamedEObjectStub
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType
-import org.eclipse.xtext.resource.ILocationInFileProvider
 
 import static extension org.eclipse.xtext.GrammarUtil.*
-import org.eclipse.xtext.service.OperationCanceledError
 
 class PsiNamedEObjectImpl<T extends PsiNamedEObjectStub<?>> extends PsiEObjectImpl<T> implements PsiNamedEObject {
 
 	@Inject
 	extension PsiEObjectFactory psiEObjectFactory
-
-	@Inject
-	extension ILocationInFileProvider locationInFileProvider
 
 	val IGrammarAwareElementType nameType
 
@@ -65,10 +60,6 @@ class PsiNamedEObjectImpl<T extends PsiNamedEObjectStub<?>> extends PsiEObjectIm
 		containingFile.text.substring(startIndex, endIndex)
 	}
 
-	override getTextOffset() {
-		significantTextRegion.offset
-	}
-
 	override PsiNamedEObject setName(String name) throws IncorrectOperationException {
 		val nameNode = findNameNode
 		if (nameType.grammarElement.terminalRuleCall) {
@@ -86,17 +77,6 @@ class PsiNamedEObjectImpl<T extends PsiNamedEObjectStub<?>> extends PsiEObjectIm
 	 */
 	def protected findNameNode() {
 		node.findChildByType(nameType)
-	}
-
-	/** 
-	 * @return
-	 */
-	def protected getSignificantTextRegion() {
-		try {
-			EObject.significantTextRegion
-		} catch (OperationCanceledError e) {
-			throw e.wrapped
-		}
 	}
 
 }
