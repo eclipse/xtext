@@ -557,6 +557,96 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
+  public void testNonExplicitDispatchCases() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def dispatch testFunction1(CharSequence i) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("42");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("protected def _testFunction1(String s) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("s.length");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.Arrays;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("protected int _testFunction1(final CharSequence i) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return 42;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("protected int _testFunction1(final String s) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return s.length();");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public int testFunction1(final CharSequence s) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("if (s instanceof String) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("return _testFunction1((String)s);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("} else if (s != null) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("return _testFunction1(s);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("} else {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("throw new IllegalArgumentException(\"Unhandled parameter types: \" +");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("Arrays.<Object>asList(s).toString());");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
   /**
    * Do not throw an exception for inherited dispatch methods.
    */

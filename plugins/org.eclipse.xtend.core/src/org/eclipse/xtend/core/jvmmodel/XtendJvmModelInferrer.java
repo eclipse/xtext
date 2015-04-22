@@ -482,6 +482,7 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 			});
 			JvmOperation operation = deriveGenericDispatchOperationSignature(localOperations, target);
 			if (operation != null) {
+				dispatchHelper.markAsDispatcherFunction(operation);
 				operation.setSimpleName(signature.getSimpleName());
 				operation.setReturnType(jvmTypesBuilder.inferredType());
 			}
