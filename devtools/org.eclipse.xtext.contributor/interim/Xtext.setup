@@ -298,6 +298,8 @@
       <requirement
           name="org.eclipse.emf.sdk.feature.group"/>
       <requirement
+          name="org.eclipse.emf.mwe2.language.sdk.feature.group"/>
+      <requirement
           name="org.junit"
           versionRange="4.11.0"/>
       <requirement
