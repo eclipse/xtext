@@ -364,11 +364,11 @@ class XtendNavigationTest extends LightXtendTest {
 				
 					def static void main(String ... args) {
 						new «REFERENCE_OFFSET»Greeter(args.head)
-					}
+					}«NAVIGATION_ELEMENT_START_OFFSET»
 				
-					«NAVIGATION_ELEMENT_START_OFFSET»new«NAVIGATION_ELEMENT_END_OFFSET»(String name) {
+					new(String name) {
 						println(name)
-					}
+					}«NAVIGATION_ELEMENT_END_OFFSET»
 				
 				}
 			''',
