@@ -49,19 +49,18 @@ class ExternalizedProcessor extends AbstractClassProcessor implements CodeGenera
 				docComment = initializer
 				static = true
 				val params = parameters
-				body = [
-					'''
+				body = '''
 						try {
 							String msg = RESOURCE_BUNDLE.getString("«field.simpleName»");
 							«IF formats.length > 0»
-								msg = «toJavaCode(MessageFormat.newTypeReference())».format(msg,«params.map[simpleName].join(",")»);
+								msg = «MessageFormat».format(msg,«params.map[simpleName].join(",")»);
 							«ENDIF»
 							return msg;
-						} catch («toJavaCode(MissingResourceException.newTypeReference())» e) {
+						} catch («MissingResourceException» e) {
 							// TODO error logging
 							return "«initializer»";
 						}
-					''']
+				'''
 				primarySourceElement = field
 			]
 		}
@@ -72,7 +71,7 @@ class ExternalizedProcessor extends AbstractClassProcessor implements CodeGenera
 			static = true
 			final = true
 			type = ResourceBundle.newTypeReference
-			initializer = ['''ResourceBundle.getBundle("«annotatedClass.qualifiedName»")''']
+			initializer = '''ResourceBundle.getBundle("«annotatedClass.qualifiedName»")'''
 			primarySourceElement = annotatedClass
 		]
 
