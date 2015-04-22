@@ -7,9 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server.model
 
+import com.google.inject.Singleton
 import org.eclipse.xtext.web.server.InvalidRequestException
 import org.eclipse.xtext.web.server.data.UpdateDocumentResult
 
+@Singleton
 class UpdateDocumentService {
 	
 	def updateFullText(XtextDocument document, String fullText, String requiredStateId, String newStateId)

@@ -7,12 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server.persistence
 
-import com.google.inject.Inject
-import com.google.inject.Provider
 import com.google.inject.Singleton
 import java.io.IOException
-import org.eclipse.xtext.parser.IEncodingProvider
-import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.web.server.ISessionStore
 import org.eclipse.xtext.web.server.InvalidRequestException
 import org.eclipse.xtext.web.server.data.JsonObject
@@ -24,24 +20,15 @@ import static extension org.eclipse.xtext.web.server.ISessionStore.Extensions.*
 @Singleton
 class ResourcePersistenceService {
 	
-	@Inject Provider<XtextResourceSet> resourceSetProvider
-	
-	@Inject IEncodingProvider encodingProvider
-	
-	@Inject XtextDocument.CreationLock creationLock
-	
 	def load(String resourceId, IServerResourceHandler resourceHandler, ISessionStore sessionStore)
 			throws InvalidRequestException {
-		val document = synchronized (creationLock) {
-			sessionStore.get(XtextDocument -> resourceId, [
-				val resourceSet = resourceSetProvider.get()
-				try {
-					resourceHandler.get(resourceId, resourceSet)
-				} catch (IOException ioe) {
-					throw new InvalidRequestException(404, 'The requested resource was not found.')
-				}
-			])
-		}
+		val document = sessionStore.get(XtextDocument -> resourceId, [
+			try {
+				resourceHandler.get(resourceId)
+			} catch (IOException ioe) {
+				throw new InvalidRequestException(404, 'The requested resource was not found.')
+			}
+		])
 		document.readOnly[ access |
 			val result = new ResourceContent(access.text)
 			result.dirty = access.dirty
@@ -52,9 +39,8 @@ class ResourcePersistenceService {
 	
 	def revert(String resourceId, String newStateId, IServerResourceHandler resourceHandler, ISessionStore sessionStore)
 			throws InvalidRequestException {
-		val resourceSet = resourceSetProvider.get()
 		try {
-			val document = resourceHandler.get(resourceId, resourceSet)
+			val document = resourceHandler.get(resourceId)
 			document.modify[ access |
 				sessionStore.put(XtextDocument -> resourceId, document)
 				access.stateId = newStateId
@@ -73,7 +59,7 @@ class ResourcePersistenceService {
 		document.modify[ access |
 			access.checkStateId(requiredStateId)
 			try {
-				resourceHandler.put(access, encodingProvider)
+				resourceHandler.put(access)
 				access.dirty = false
 			} catch (IOException ioe) {
 				throw new InvalidRequestException(404, ioe.message)

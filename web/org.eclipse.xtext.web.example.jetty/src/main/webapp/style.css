@@ -1,0 +1,65 @@
+html {
+	height: 100%;
+}
+
+body {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	font: 15px Helvetica,sans-serif;
+}
+
+.container {
+	display: block;
+	position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+	width: 640px;
+	margin: 20px;
+}
+
+.xtext-editor {
+	display: block;
+	position: absolute;
+    top: 0;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+	padding: 4px;
+	border: 1px solid #aaa;
+}
+
+.status-wrapper {
+	display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+	height: 20px;
+	margin-top: 10px;
+}
+
+.button-wrapper {
+	display: block;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 640px;
+	margin: 20px;
+}
+
+.dirty {
+	background-color: #88e;
+}
+
+#dirty-indicator {
+	display: inline;
+	color: #e8e8e8;
+	padding: 1px 8px 1px 8px;
+	border: 1px solid #ccc;
+}
+
+#status {
+	display: inline;
+}

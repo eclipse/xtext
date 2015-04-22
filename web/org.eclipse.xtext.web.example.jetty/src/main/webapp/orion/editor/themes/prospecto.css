@@ -1,0 +1,57 @@
+.prospecto {
+	color: #333;
+}
+.prospecto.textview {
+	background-color: white;
+}
+.prospecto .ruler.annotations {
+	background-color: white;
+}
+.prospecto .ruler.lines {
+	background-color: white;
+}
+.prospecto .ruler.folding {
+	background-color: white;
+}
+.prospecto .ruler.overview {
+	background-color: white;
+}
+.prospecto .rulerLines {
+	color: silver;
+}
+.prospecto .rulerLines.even {
+	color: silver;
+}
+.prospecto .rulerLines.odd {
+	color: silver;
+}
+.prospecto .annotationLine.currentLine {
+	background-color: #EAF2FE;
+}
+.prospecto .entity-name-tag {
+	color: #CC4C07;
+}
+.prospecto .entity-other-attribute-name {
+	color: cadetBlue;
+}
+.prospecto .string-quoted {
+	color: #446FBD;
+}
+.prospecto .meta.annotation.currentLine {
+	background-color: #EAF2FE;
+}
+.prospecto .keyword {
+	color: #CC4C07;
+}
+.prospecto .string {
+	color: #446FBD;
+}
+.prospecto .comment {
+	color: #3C802C;
+}
+.prospecto .comment.block.documentation {
+	color: #3C802C;
+}
+.prospecto .keyword.other.documentation.markup {
+	color: #3C802C;
+}

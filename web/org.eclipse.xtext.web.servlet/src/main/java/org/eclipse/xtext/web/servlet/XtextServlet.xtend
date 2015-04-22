@@ -9,22 +9,24 @@ package org.eclipse.xtext.web.servlet
 
 import com.google.common.collect.Maps
 import com.google.gson.Gson
+import com.google.inject.Injector
 import java.io.IOException
 import java.util.Collections
 import java.util.Map
-import javax.inject.Inject
 import javax.servlet.ServletException
 import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
+import org.eclipse.emf.common.util.URI
+import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.web.server.InvalidRequestException
 import org.eclipse.xtext.web.server.XtextServiceDispatcher
 
 class XtextServlet extends HttpServlet {
 	
-	@Inject Gson gson
+	val serviceProviderRegistry = IResourceServiceProvider.Registry.INSTANCE
 	
-	@Inject XtextServiceDispatcher serviceDispatcher
+	val gson = new Gson
 	
 	override protected service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
@@ -35,8 +37,7 @@ class XtextServlet extends HttpServlet {
 	}
 	
 	override protected doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		val sessionStore = new HttpServletSessionStore(req.session)
-		val service = serviceDispatcher.getService(req.pathInfo ?: '', getParameterMap(req), sessionStore)
+		val service = getService(req)
 		if (service.hasSideEffects || service.hasTextInput) {
 			// Send error 405 (method not allowed)
 			super.doGet(req, resp)
@@ -46,8 +47,7 @@ class XtextServlet extends HttpServlet {
 	}
 	
 	override protected doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		val sessionStore = new HttpServletSessionStore(req.session)
-		val service = serviceDispatcher.getService(req.pathInfo ?: '', getParameterMap(req), sessionStore)
+		val service = getService(req)
 		if (service.type != 'update') {
 			// Send error 405 (method not allowed)
 			super.doPut(req, resp)
@@ -57,14 +57,29 @@ class XtextServlet extends HttpServlet {
 	}
 	
 	override protected doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		val sessionStore = new HttpServletSessionStore(req.session)
-		val service = serviceDispatcher.getService(req.pathInfo ?: '', getParameterMap(req), sessionStore)
+		val service = getService(req)
 		if (!service.hasSideEffects && !service.hasTextInput || service.type == 'update') {
 			// Send error 405 (method not allowed)
 			super.doPost(req, resp)
 		} else {
 			doService(service, resp)
 		}
+	}
+	
+	protected def doService(XtextServiceDispatcher.ServiceDescriptor service, HttpServletResponse resp) {
+		val result = service.service.apply()
+		resp.setStatus(HttpServletResponse.SC_OK)
+		resp.setContentType("text/x-json;charset=UTF-8")
+		resp.setHeader("Cache-Control", "no-cache")
+		resp.writer.write(gson.toJson(result))
+	}
+	
+	protected def getService(HttpServletRequest req) {
+		val sessionStore = new HttpServletSessionStore(req.session)
+		val parameters = getParameterMap(req)
+		val injector = getInjector(parameters)
+		val serviceDispatcher = injector.getInstance(XtextServiceDispatcher)
+		return serviceDispatcher.getService(req.pathInfo ?: '', parameters, sessionStore)
 	}
 	
 	protected def getParameterMap(HttpServletRequest req) {
@@ -74,12 +89,20 @@ class XtextServlet extends HttpServlet {
 		return Collections.unmodifiableMap(result)
 	}
 	
-	protected def doService(XtextServiceDispatcher.ServiceDescriptor service, HttpServletResponse resp) {
-		val result = service.service.apply()
-		resp.setStatus(HttpServletResponse.SC_OK)
-		resp.setContentType("text/x-json;charset=UTF-8")
-		resp.setHeader("Cache-Control", "no-cache")
-		resp.writer.write(gson.toJson(result))
+	protected def getInjector(Map<String, String> parameters) throws InvalidRequestException {
+		var IResourceServiceProvider resourceServiceProvider
+		
+		val emfURI = URI.createURI(parameters.get('resource') ?: '')
+		val contentType = parameters.get('contentType')
+		if (contentType === null)
+			resourceServiceProvider = serviceProviderRegistry.getResourceServiceProvider(emfURI)
+		else
+			resourceServiceProvider = serviceProviderRegistry.getResourceServiceProvider(emfURI, contentType)
+		
+		if (resourceServiceProvider == null)
+			throw new InvalidRequestException(400, 'Unable to identify the resource type.')
+		
+		return resourceServiceProvider.get(Injector)
 	}
 	
 }
