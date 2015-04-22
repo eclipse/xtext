@@ -100,7 +100,7 @@ public class Activator extends Plugin {
 			}
 			return true;
 		} catch (Throwable e) {
-			log.warn("Disabling JDT use. : " + e.getMessage());
+			log.info("Disabling JDT use. : " + e.getMessage());
 			log.debug(e.getMessage(), e);
 		}
 		return false;
