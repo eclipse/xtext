@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.web.server.persistence;
 
+import com.google.inject.Provider;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -29,11 +30,18 @@ public class FileResourceHandler implements IServerResourceHandler {
   @Inject
   private IResourceBaseProvider resourceBaseProvider;
   
+  @Inject
+  private Provider<XtextResourceSet> resourceSetProvider;
+  
+  @Inject
+  private IEncodingProvider encodingProvider;
+  
   @Override
-  public XtextDocument get(final String resourceId, final XtextResourceSet resourceSet) throws IOException {
+  public XtextDocument get(final String resourceId) throws IOException {
     try {
       try {
         final URI uri = this.resourceBaseProvider.getFileURI(resourceId);
+        final XtextResourceSet resourceSet = this.resourceSetProvider.get();
         Resource _resource = resourceSet.getResource(uri, true);
         final XtextResource resource = ((XtextResource) _resource);
         return new XtextDocument(resource, resourceId);
@@ -51,7 +59,7 @@ public class FileResourceHandler implements IServerResourceHandler {
   }
   
   @Override
-  public void put(final XtextDocument.ReadAccess documentAccess, final IEncodingProvider encodingProvider) throws IOException {
+  public void put(final XtextDocument.ReadAccess documentAccess) throws IOException {
     try {
       try {
         XtextDocument _document = documentAccess.getDocument();
@@ -61,7 +69,7 @@ public class FileResourceHandler implements IServerResourceHandler {
         ResourceSet _resourceSet = _resource.getResourceSet();
         URIConverter _uRIConverter = _resourceSet.getURIConverter();
         final OutputStream outputStream = _uRIConverter.createOutputStream(uri);
-        String _encoding = encodingProvider.getEncoding(uri);
+        String _encoding = this.encodingProvider.getEncoding(uri);
         final OutputStreamWriter writer = new OutputStreamWriter(outputStream, _encoding);
         String _text = documentAccess.getText();
         writer.write(_text);

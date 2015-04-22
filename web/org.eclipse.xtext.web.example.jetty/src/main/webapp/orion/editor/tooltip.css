@@ -1,0 +1,60 @@
+.tooltipTheme.textview {
+	background-color: InfoBackground !important;
+	color: InfoText !important;
+}
+
+.tooltipTheme .textviewScroll {
+	padding: 0;
+}
+
+/* Styles for the view tooltips */
+.textviewTooltip {
+	font-family: "Consolas", "Monaco", "Vera Mono", monospace;
+	font-size: 12px;
+	background-color: InfoBackground;
+	color: InfoText;
+	padding: 2px;
+	border-radius: 4px;
+	border: 1px solid black;
+	z-index: 100;
+	position: fixed;
+	overflow: hidden;
+}
+
+.textviewTooltip em {
+	font-style: normal;
+	font-weight: bold;
+}
+
+.textviewTooltip span {
+	vertical-align: baseline;
+}
+
+.textviewTooltip .tooltipRow {
+	display: table-row;
+}
+
+.textviewTooltip .tooltipImage {
+	display: inline-block;
+	vertical-align: middle;
+	padding: 1px;
+}
+
+.textviewTooltip .tooltipTitle {
+	padding-left: 3px;
+	vertical-align: middle;
+}
+
+.tooltipTheme .annotationLine.currentLine {
+	background-color: transparent !important;
+}
+
+.textviewTooltip .commandButton {
+	border: 0;
+	background-color: inherit;
+	color: #3333CC;
+}
+
+.textviewTooltip .commandButton:not(.dropdownTrigger){
+  text-transform: initial; 
+}

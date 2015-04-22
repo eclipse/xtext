@@ -7,12 +7,8 @@
  */
 package org.eclipse.xtext.web.server.persistence;
 
-import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import java.io.IOException;
-import org.eclipse.xtext.parser.IEncodingProvider;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.web.server.ISessionStore;
 import org.eclipse.xtext.web.server.InvalidRequestException;
@@ -27,51 +23,33 @@ import org.eclipse.xtext.xbase.lib.Pair;
 @Singleton
 @SuppressWarnings("all")
 public class ResourcePersistenceService {
-  @Inject
-  private Provider<XtextResourceSet> resourceSetProvider;
-  
-  @Inject
-  private IEncodingProvider encodingProvider;
-  
-  @Inject
-  private XtextDocument.CreationLock creationLock;
-  
   public ResourceContent load(final String resourceId, final IServerResourceHandler resourceHandler, final ISessionStore sessionStore) throws InvalidRequestException {
     ResourceContent _xblockexpression = null;
     {
-      XtextDocument _xsynchronizedexpression = null;
-      synchronized (this.creationLock) {
-        Pair<Class<XtextDocument>, String> _mappedTo = Pair.<Class<XtextDocument>, String>of(XtextDocument.class, resourceId);
-        final Function0<XtextDocument> _function = new Function0<XtextDocument>() {
-          @Override
-          public XtextDocument apply() {
+      Pair<Class<XtextDocument>, String> _mappedTo = Pair.<Class<XtextDocument>, String>of(XtextDocument.class, resourceId);
+      final Function0<XtextDocument> _function = new Function0<XtextDocument>() {
+        @Override
+        public XtextDocument apply() {
+          try {
+            XtextDocument _xtrycatchfinallyexpression = null;
             try {
-              XtextDocument _xblockexpression = null;
-              {
-                final XtextResourceSet resourceSet = ResourcePersistenceService.this.resourceSetProvider.get();
-                XtextDocument _xtrycatchfinallyexpression = null;
-                try {
-                  _xtrycatchfinallyexpression = resourceHandler.get(resourceId, resourceSet);
-                } catch (final Throwable _t) {
-                  if (_t instanceof IOException) {
-                    final IOException ioe = (IOException)_t;
-                    throw new InvalidRequestException(404, "The requested resource was not found.");
-                  } else {
-                    throw Exceptions.sneakyThrow(_t);
-                  }
-                }
-                _xblockexpression = _xtrycatchfinallyexpression;
+              _xtrycatchfinallyexpression = resourceHandler.get(resourceId);
+            } catch (final Throwable _t) {
+              if (_t instanceof IOException) {
+                final IOException ioe = (IOException)_t;
+                throw new InvalidRequestException(404, "The requested resource was not found.");
+              } else {
+                throw Exceptions.sneakyThrow(_t);
               }
-              return _xblockexpression;
-            } catch (Throwable _e) {
-              throw Exceptions.sneakyThrow(_e);
             }
+            return _xtrycatchfinallyexpression;
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
           }
-        };
-        _xsynchronizedexpression = ISessionStore.Extensions.<XtextDocument>get(sessionStore, _mappedTo, _function);
-      }
-      final XtextDocument document = _xsynchronizedexpression;
-      final IUnitOfWork<ResourceContent, XtextDocument.ReadAccess> _function = new IUnitOfWork<ResourceContent, XtextDocument.ReadAccess>() {
+        }
+      };
+      final XtextDocument document = ISessionStore.Extensions.<XtextDocument>get(sessionStore, _mappedTo, _function);
+      final IUnitOfWork<ResourceContent, XtextDocument.ReadAccess> _function_1 = new IUnitOfWork<ResourceContent, XtextDocument.ReadAccess>() {
         @Override
         public ResourceContent exec(final XtextDocument.ReadAccess access) throws Exception {
           String _text = access.getText();
@@ -83,47 +61,42 @@ public class ResourcePersistenceService {
           return result;
         }
       };
-      _xblockexpression = document.<ResourceContent>readOnly(_function);
+      _xblockexpression = document.<ResourceContent>readOnly(_function_1);
     }
     return _xblockexpression;
   }
   
   public ResourceContent revert(final String resourceId, final String newStateId, final IServerResourceHandler resourceHandler, final ISessionStore sessionStore) throws InvalidRequestException {
-    ResourceContent _xblockexpression = null;
-    {
-      final XtextResourceSet resourceSet = this.resourceSetProvider.get();
-      ResourceContent _xtrycatchfinallyexpression = null;
-      try {
-        ResourceContent _xblockexpression_1 = null;
-        {
-          final XtextDocument document = resourceHandler.get(resourceId, resourceSet);
-          final IUnitOfWork<ResourceContent, XtextDocument.ModifyAccess> _function = new IUnitOfWork<ResourceContent, XtextDocument.ModifyAccess>() {
-            @Override
-            public ResourceContent exec(final XtextDocument.ModifyAccess access) throws Exception {
-              Pair<Class<XtextDocument>, String> _mappedTo = Pair.<Class<XtextDocument>, String>of(XtextDocument.class, resourceId);
-              sessionStore.put(_mappedTo, document);
-              access.setStateId(newStateId);
-              access.setDirty(false);
-              String _text = access.getText();
-              final ResourceContent result = new ResourceContent(_text);
-              result.setStateId(newStateId);
-              return result;
-            }
-          };
-          _xblockexpression_1 = document.<ResourceContent>modify(_function);
-        }
-        _xtrycatchfinallyexpression = _xblockexpression_1;
-      } catch (final Throwable _t) {
-        if (_t instanceof IOException) {
-          final IOException ioe = (IOException)_t;
-          throw new InvalidRequestException(404, "The requested resource was not found.");
-        } else {
-          throw Exceptions.sneakyThrow(_t);
-        }
+    ResourceContent _xtrycatchfinallyexpression = null;
+    try {
+      ResourceContent _xblockexpression = null;
+      {
+        final XtextDocument document = resourceHandler.get(resourceId);
+        final IUnitOfWork<ResourceContent, XtextDocument.ModifyAccess> _function = new IUnitOfWork<ResourceContent, XtextDocument.ModifyAccess>() {
+          @Override
+          public ResourceContent exec(final XtextDocument.ModifyAccess access) throws Exception {
+            Pair<Class<XtextDocument>, String> _mappedTo = Pair.<Class<XtextDocument>, String>of(XtextDocument.class, resourceId);
+            sessionStore.put(_mappedTo, document);
+            access.setStateId(newStateId);
+            access.setDirty(false);
+            String _text = access.getText();
+            final ResourceContent result = new ResourceContent(_text);
+            result.setStateId(newStateId);
+            return result;
+          }
+        };
+        _xblockexpression = document.<ResourceContent>modify(_function);
       }
-      _xblockexpression = _xtrycatchfinallyexpression;
+      _xtrycatchfinallyexpression = _xblockexpression;
+    } catch (final Throwable _t) {
+      if (_t instanceof IOException) {
+        final IOException ioe = (IOException)_t;
+        throw new InvalidRequestException(404, "The requested resource was not found.");
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
-    return _xblockexpression;
+    return _xtrycatchfinallyexpression;
   }
   
   public JsonObject save(final XtextDocument document, final IServerResourceHandler resourceHandler, final String requiredStateId) throws InvalidRequestException {
@@ -132,7 +105,7 @@ public class ResourcePersistenceService {
       public JsonObject exec(final XtextDocument.ModifyAccess access) throws Exception {
         access.checkStateId(requiredStateId);
         try {
-          resourceHandler.put(access, ResourcePersistenceService.this.encodingProvider);
+          resourceHandler.put(access);
           access.setDirty(false);
         } catch (final Throwable _t) {
           if (_t instanceof IOException) {

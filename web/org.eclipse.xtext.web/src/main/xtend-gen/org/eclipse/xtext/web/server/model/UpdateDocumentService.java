@@ -7,11 +7,13 @@
  */
 package org.eclipse.xtext.web.server.model;
 
+import com.google.inject.Singleton;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.data.UpdateDocumentResult;
 import org.eclipse.xtext.web.server.model.XtextDocument;
 
+@Singleton
 @SuppressWarnings("all")
 public class UpdateDocumentService {
   public UpdateDocumentResult updateFullText(final XtextDocument document, final String fullText, final String requiredStateId, final String newStateId) throws InvalidRequestException {

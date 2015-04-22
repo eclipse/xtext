@@ -9,19 +9,18 @@ package org.eclipse.xtext.web.server;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Optional;
-import com.google.inject.Injector;
+import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 import java.io.IOException;
 import java.util.Map;
 import java.util.StringTokenizer;
-import javax.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.IResourceFactory;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
@@ -46,6 +45,7 @@ import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
+@Singleton
 @SuppressWarnings("all")
 public class XtextServiceDispatcher {
   @Accessors
@@ -95,52 +95,70 @@ public class XtextServiceDispatcher {
     }
   }
   
-  private final IResourceServiceProvider.Registry serviceProviderRegistry = IResourceServiceProvider.Registry.INSTANCE;
+  @Inject
+  private ResourcePersistenceService resourcePersistenceService;
+  
+  @Inject
+  private UpdateDocumentService updateDocumentService;
+  
+  @Inject
+  private ValidationService validationService;
+  
+  @Inject
+  private ContentAssistService contentAssistService;
   
   @Inject
   private IServerResourceHandler resourceHandler;
+  
+  @Inject
+  private Provider<XtextResourceSet> resourceSetProvider;
+  
+  @Inject
+  private FileExtensionProvider fileExtensionProvider;
+  
+  @Inject
+  private IResourceFactory resourceFactory;
   
   public XtextServiceDispatcher.ServiceDescriptor getService(final String path, final Map<String, String> parameters, final ISessionStore sessionStore) throws InvalidRequestException {
     XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
     {
       final String requestType = this.getRequestType(path, parameters);
-      final Injector injector = this.getInjector(parameters);
       XtextServiceDispatcher.ServiceDescriptor _switchResult = null;
       boolean _matched = false;
       if (!_matched) {
         if (Objects.equal(requestType, "load")) {
           _matched=true;
-          _switchResult = this.getLoadResourceService(false, parameters, injector, sessionStore);
+          _switchResult = this.getLoadResourceService(false, parameters, sessionStore);
         }
       }
       if (!_matched) {
         if (Objects.equal(requestType, "revert")) {
           _matched=true;
-          _switchResult = this.getLoadResourceService(true, parameters, injector, sessionStore);
+          _switchResult = this.getLoadResourceService(true, parameters, sessionStore);
         }
       }
       if (!_matched) {
         if (Objects.equal(requestType, "save")) {
           _matched=true;
-          _switchResult = this.getSaveResourceService(parameters, injector, sessionStore);
+          _switchResult = this.getSaveResourceService(parameters, sessionStore);
         }
       }
       if (!_matched) {
         if (Objects.equal(requestType, "update")) {
           _matched=true;
-          _switchResult = this.getUpdateDocumentService(parameters, injector, sessionStore);
+          _switchResult = this.getUpdateDocumentService(parameters, sessionStore);
         }
       }
       if (!_matched) {
         if (Objects.equal(requestType, "validation")) {
           _matched=true;
-          _switchResult = this.getValidationService(parameters, injector, sessionStore);
+          _switchResult = this.getValidationService(parameters, sessionStore);
         }
       }
       if (!_matched) {
         if (Objects.equal(requestType, "content-assist")) {
           _matched=true;
-          _switchResult = this.getContentAssistService(parameters, injector, sessionStore);
+          _switchResult = this.getContentAssistService(parameters, sessionStore);
         }
       }
       if (!_matched) {
@@ -155,31 +173,6 @@ public class XtextServiceDispatcher {
       _xblockexpression = ObjectExtensions.<XtextServiceDispatcher.ServiceDescriptor>operator_doubleArrow(_switchResult, _function);
     }
     return _xblockexpression;
-  }
-  
-  protected Injector getInjector(final Map<String, String> parameters) throws InvalidRequestException {
-    IResourceServiceProvider resourceServiceProvider = null;
-    String _elvis = null;
-    String _get = parameters.get("resource");
-    if (_get != null) {
-      _elvis = _get;
-    } else {
-      _elvis = "";
-    }
-    final URI emfURI = URI.createURI(_elvis);
-    final String contentType = parameters.get("contentType");
-    if ((contentType == null)) {
-      IResourceServiceProvider _resourceServiceProvider = this.serviceProviderRegistry.getResourceServiceProvider(emfURI);
-      resourceServiceProvider = _resourceServiceProvider;
-    } else {
-      IResourceServiceProvider _resourceServiceProvider_1 = this.serviceProviderRegistry.getResourceServiceProvider(emfURI, contentType);
-      resourceServiceProvider = _resourceServiceProvider_1;
-    }
-    boolean _equals = Objects.equal(resourceServiceProvider, null);
-    if (_equals) {
-      throw new InvalidRequestException(400, "Unable to identify the resource type.");
-    }
-    return resourceServiceProvider.<Injector>get(Injector.class);
   }
   
   protected String getRequestType(final String contextPath, final Map<String, String> parameters) {
@@ -200,10 +193,9 @@ public class XtextServiceDispatcher {
     return _elvis;
   }
   
-  protected XtextServiceDispatcher.ServiceDescriptor getLoadResourceService(final boolean revert, final Map<String, String> parameters, final Injector injector, final ISessionStore sessionStore) throws InvalidRequestException {
+  protected XtextServiceDispatcher.ServiceDescriptor getLoadResourceService(final boolean revert, final Map<String, String> parameters, final ISessionStore sessionStore) throws InvalidRequestException {
     XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
     {
-      final ResourcePersistenceService service = injector.<ResourcePersistenceService>getInstance(ResourcePersistenceService.class);
       final String resourceId = parameters.get("resource");
       if ((resourceId == null)) {
         throw new InvalidRequestException(400, "The parameter \'resource\' is required.");
@@ -219,10 +211,11 @@ public class XtextServiceDispatcher {
                 JsonObject _xifexpression = null;
                 if (revert) {
                   String _get = parameters.get("newState");
-                  ResourceContent _revert = service.revert(resourceId, _get, XtextServiceDispatcher.this.resourceHandler, sessionStore);
+                  ResourceContent _revert = XtextServiceDispatcher.this.resourcePersistenceService.revert(resourceId, _get, 
+                    XtextServiceDispatcher.this.resourceHandler, sessionStore);
                   _xifexpression = XtextServiceDispatcher.this.forRequestId(_revert, parameters);
                 } else {
-                  ResourceContent _load = service.load(resourceId, XtextServiceDispatcher.this.resourceHandler, sessionStore);
+                  ResourceContent _load = XtextServiceDispatcher.this.resourcePersistenceService.load(resourceId, XtextServiceDispatcher.this.resourceHandler, sessionStore);
                   _xifexpression = XtextServiceDispatcher.this.forRequestId(_load, parameters);
                 }
                 return _xifexpression;
@@ -240,11 +233,10 @@ public class XtextServiceDispatcher {
     return _xblockexpression;
   }
   
-  protected XtextServiceDispatcher.ServiceDescriptor getSaveResourceService(final Map<String, String> parameters, final Injector injector, final ISessionStore sessionStore) throws InvalidRequestException {
+  protected XtextServiceDispatcher.ServiceDescriptor getSaveResourceService(final Map<String, String> parameters, final ISessionStore sessionStore) throws InvalidRequestException {
     XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
     {
-      final ResourcePersistenceService service = injector.<ResourcePersistenceService>getInstance(ResourcePersistenceService.class);
-      final XtextDocument document = this.getDocument(parameters, injector, sessionStore);
+      final XtextDocument document = this.getDocument(parameters, sessionStore);
       final String requiredStateId = parameters.get("requiredState");
       XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
       final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
@@ -254,7 +246,7 @@ public class XtextServiceDispatcher {
             @Override
             public JsonObject apply() {
               try {
-                JsonObject _save = service.save(document, XtextServiceDispatcher.this.resourceHandler, requiredStateId);
+                JsonObject _save = XtextServiceDispatcher.this.resourcePersistenceService.save(document, XtextServiceDispatcher.this.resourceHandler, requiredStateId);
                 return XtextServiceDispatcher.this.forRequestId(_save, parameters);
               } catch (Throwable _e) {
                 throw Exceptions.sneakyThrow(_e);
@@ -272,8 +264,7 @@ public class XtextServiceDispatcher {
     return _xblockexpression;
   }
   
-  protected XtextServiceDispatcher.ServiceDescriptor getUpdateDocumentService(final Map<String, String> parameters, final Injector injector, final ISessionStore sessionStore) throws InvalidRequestException {
-    final UpdateDocumentService service = injector.<UpdateDocumentService>getInstance(UpdateDocumentService.class);
+  protected XtextServiceDispatcher.ServiceDescriptor getUpdateDocumentService(final Map<String, String> parameters, final ISessionStore sessionStore) throws InvalidRequestException {
     final String resourceId = parameters.get("resource");
     if ((resourceId == null)) {
       throw new InvalidRequestException(400, "The parameter \'resource\' is required.");
@@ -285,7 +276,7 @@ public class XtextServiceDispatcher {
         try {
           XtextDocument _xifexpression = null;
           if ((fullText != null)) {
-            _xifexpression = XtextServiceDispatcher.this.getFullTextDocument(fullText, resourceId, injector, sessionStore);
+            _xifexpression = XtextServiceDispatcher.this.getFullTextDocument(fullText, resourceId, sessionStore);
           } else {
             throw new InvalidRequestException(404, "The requested resource was not found.");
           }
@@ -295,7 +286,7 @@ public class XtextServiceDispatcher {
         }
       }
     };
-    final XtextDocument document = this.getResourceDocument(resourceId, injector, sessionStore, _function);
+    final XtextDocument document = this.getResourceDocument(resourceId, sessionStore, _function);
     final String requiredStateId = parameters.get("requiredState");
     final String newStateId = parameters.get("newState");
     XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
@@ -326,7 +317,7 @@ public class XtextServiceDispatcher {
         @Override
         public JsonObject apply() {
           try {
-            UpdateDocumentResult _updateDeltaText = service.updateDeltaText(document, deltaText, (deltaOffset).intValue(), (deltaReplaceLength).intValue(), requiredStateId, newStateId);
+            UpdateDocumentResult _updateDeltaText = XtextServiceDispatcher.this.updateDocumentService.updateDeltaText(document, deltaText, (deltaOffset).intValue(), (deltaReplaceLength).intValue(), requiredStateId, newStateId);
             return XtextServiceDispatcher.this.forRequestId(_updateDeltaText, parameters);
           } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
@@ -339,7 +330,7 @@ public class XtextServiceDispatcher {
         @Override
         public JsonObject apply() {
           try {
-            return service.updateFullText(document, fullText, requiredStateId, newStateId);
+            return XtextServiceDispatcher.this.updateDocumentService.updateFullText(document, fullText, requiredStateId, newStateId);
           } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
           }
@@ -350,11 +341,10 @@ public class XtextServiceDispatcher {
     return result;
   }
   
-  protected XtextServiceDispatcher.ServiceDescriptor getValidationService(final Map<String, String> parameters, final Injector injector, final ISessionStore sessionStore) throws InvalidRequestException {
+  protected XtextServiceDispatcher.ServiceDescriptor getValidationService(final Map<String, String> parameters, final ISessionStore sessionStore) throws InvalidRequestException {
     XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
     {
-      final ValidationService service = injector.<ValidationService>getInstance(ValidationService.class);
-      final XtextDocument document = this.getDocument(parameters, injector, sessionStore);
+      final XtextDocument document = this.getDocument(parameters, sessionStore);
       final String requiredStateId = parameters.get("requiredState");
       XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
       final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
@@ -364,7 +354,7 @@ public class XtextServiceDispatcher {
             @Override
             public JsonObject apply() {
               try {
-                ValidationResult _validate = service.validate(document, requiredStateId);
+                ValidationResult _validate = XtextServiceDispatcher.this.validationService.validate(document, requiredStateId);
                 return XtextServiceDispatcher.this.forRequestId(_validate, parameters);
               } catch (Throwable _e) {
                 throw Exceptions.sneakyThrow(_e);
@@ -381,13 +371,12 @@ public class XtextServiceDispatcher {
     return _xblockexpression;
   }
   
-  protected XtextServiceDispatcher.ServiceDescriptor getContentAssistService(final Map<String, String> parameters, final Injector injector, final ISessionStore sessionStore) throws InvalidRequestException {
+  protected XtextServiceDispatcher.ServiceDescriptor getContentAssistService(final Map<String, String> parameters, final ISessionStore sessionStore) throws InvalidRequestException {
     XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
     {
-      final ContentAssistService service = injector.<ContentAssistService>getInstance(ContentAssistService.class);
       Optional<Integer> _of = Optional.<Integer>of(Integer.valueOf(0));
       final Integer offset = this.getInt(parameters, "caretOffset", _of);
-      final XtextDocument document = this.getDocument(parameters, injector, sessionStore);
+      final XtextDocument document = this.getDocument(parameters, sessionStore);
       Optional<Integer> _of_1 = Optional.<Integer>of(Integer.valueOf(0));
       final Integer selectionStart = this.getInt(parameters, "selectionStart", _of_1);
       Optional<Integer> _of_2 = Optional.<Integer>of(Integer.valueOf(0));
@@ -403,7 +392,7 @@ public class XtextServiceDispatcher {
             @Override
             public JsonObject apply() {
               try {
-                ContentAssistResult _createProposals = service.createProposals(document, selection, (offset).intValue(), requiredStateId);
+                ContentAssistResult _createProposals = XtextServiceDispatcher.this.contentAssistService.createProposals(document, selection, (offset).intValue(), requiredStateId);
                 return XtextServiceDispatcher.this.forRequestId(_createProposals, parameters);
               } catch (Throwable _e) {
                 throw Exceptions.sneakyThrow(_e);
@@ -420,12 +409,12 @@ public class XtextServiceDispatcher {
     return _xblockexpression;
   }
   
-  protected XtextDocument getDocument(final Map<String, String> parameters, final Injector injector, final ISessionStore sessionStore) throws InvalidRequestException {
+  protected XtextDocument getDocument(final Map<String, String> parameters, final ISessionStore sessionStore) throws InvalidRequestException {
     boolean _containsKey = parameters.containsKey("fullText");
     if (_containsKey) {
       String _get = parameters.get("fullText");
       String _get_1 = parameters.get("resource");
-      return this.getFullTextDocument(_get, _get_1, injector, sessionStore);
+      return this.getFullTextDocument(_get, _get_1, sessionStore);
     } else {
       boolean _containsKey_1 = parameters.containsKey("resource");
       if (_containsKey_1) {
@@ -440,28 +429,26 @@ public class XtextServiceDispatcher {
             }
           }
         };
-        return this.getResourceDocument(_get_2, injector, sessionStore, _function);
+        return this.getResourceDocument(_get_2, sessionStore, _function);
       } else {
         throw new InvalidRequestException(400, "At least one of the parameters \'resource\' and \'fullText\' must be specified.");
       }
     }
   }
   
-  protected XtextDocument getFullTextDocument(final String fullText, final String resourceId, final Injector injector, final ISessionStore sessionStore) {
+  protected XtextDocument getFullTextDocument(final String fullText, final String resourceId, final ISessionStore sessionStore) {
     try {
-      final XtextResourceSet resourceSet = injector.<XtextResourceSet>getInstance(XtextResourceSet.class);
+      final XtextResourceSet resourceSet = this.resourceSetProvider.get();
       String _elvis = null;
       if (resourceId != null) {
         _elvis = resourceId;
       } else {
-        FileExtensionProvider _instance = injector.<FileExtensionProvider>getInstance(FileExtensionProvider.class);
-        String _primaryFileExtension = _instance.getPrimaryFileExtension();
+        String _primaryFileExtension = this.fileExtensionProvider.getPrimaryFileExtension();
         String _plus = ("fullText." + _primaryFileExtension);
         _elvis = _plus;
       }
       final URI uri = URI.createURI(_elvis);
-      IResourceFactory _instance_1 = injector.<IResourceFactory>getInstance(IResourceFactory.class);
-      Resource _createResource = _instance_1.createResource(uri);
+      Resource _createResource = this.resourceFactory.createResource(uri);
       final XtextResource resource = ((XtextResource) _createResource);
       EList<Resource> _resources = resourceSet.getResources();
       _resources.add(resource);
@@ -478,28 +465,24 @@ public class XtextServiceDispatcher {
     }
   }
   
-  protected XtextDocument getResourceDocument(final String resourceId, final Injector injector, final ISessionStore sessionStore, final Provider<XtextDocument> alternativeDocumentProvider) {
-    injector.<XtextDocument.CreationLock>getInstance(XtextDocument.CreationLock.class);
-    synchronized (injector.<XtextDocument.CreationLock>getInstance(XtextDocument.CreationLock.class)) {
-      Pair<Class<XtextDocument>, String> _mappedTo = Pair.<Class<XtextDocument>, String>of(XtextDocument.class, resourceId);
-      final Function0<XtextDocument> _function = new Function0<XtextDocument>() {
-        @Override
-        public XtextDocument apply() {
-          try {
-            final XtextResourceSet resourceSet = injector.<XtextResourceSet>getInstance(XtextResourceSet.class);
-            return XtextServiceDispatcher.this.resourceHandler.get(resourceId, resourceSet);
-          } catch (final Throwable _t) {
-            if (_t instanceof IOException) {
-              final IOException ioe = (IOException)_t;
-              return alternativeDocumentProvider.get();
-            } else {
-              throw Exceptions.sneakyThrow(_t);
-            }
+  protected XtextDocument getResourceDocument(final String resourceId, final ISessionStore sessionStore, final Provider<XtextDocument> alternativeDocumentProvider) {
+    Pair<Class<XtextDocument>, String> _mappedTo = Pair.<Class<XtextDocument>, String>of(XtextDocument.class, resourceId);
+    final Function0<XtextDocument> _function = new Function0<XtextDocument>() {
+      @Override
+      public XtextDocument apply() {
+        try {
+          return XtextServiceDispatcher.this.resourceHandler.get(resourceId);
+        } catch (final Throwable _t) {
+          if (_t instanceof IOException) {
+            final IOException ioe = (IOException)_t;
+            return alternativeDocumentProvider.get();
+          } else {
+            throw Exceptions.sneakyThrow(_t);
           }
         }
-      };
-      return ISessionStore.Extensions.<XtextDocument>get(sessionStore, _mappedTo, _function);
-    }
+      }
+    };
+    return ISessionStore.Extensions.<XtextDocument>get(sessionStore, _mappedTo, _function);
   }
   
   protected Integer getInt(final Map<String, String> parameters, final String key, final Optional<Integer> defaultValue) throws InvalidRequestException {

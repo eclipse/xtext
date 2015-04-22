@@ -8,17 +8,16 @@
 package org.eclipse.xtext.web.server
 
 import com.google.common.base.Optional
-import com.google.inject.Injector
+import com.google.inject.Inject
 import com.google.inject.Provider
+import com.google.inject.Singleton
 import java.io.IOException
 import java.util.Map
 import java.util.StringTokenizer
-import javax.inject.Inject
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.resource.FileExtensionProvider
 import org.eclipse.xtext.resource.IResourceFactory
-import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.util.StringInputStream
@@ -33,6 +32,7 @@ import org.eclipse.xtext.web.server.validation.ValidationService
 
 import static extension org.eclipse.xtext.web.server.ISessionStore.Extensions.*
 
+@Singleton
 class XtextServiceDispatcher {
 	
 	@Accessors
@@ -43,50 +43,36 @@ class XtextServiceDispatcher {
 		boolean hasTextInput
 	}
 	
-	val serviceProviderRegistry = IResourceServiceProvider.Registry.INSTANCE
-	
+	@Inject ResourcePersistenceService resourcePersistenceService
+	@Inject UpdateDocumentService updateDocumentService
+	@Inject ValidationService validationService
+	@Inject ContentAssistService contentAssistService
 	@Inject IServerResourceHandler resourceHandler
-	// TODO constructor injection
+	@Inject Provider<XtextResourceSet> resourceSetProvider
+	@Inject FileExtensionProvider fileExtensionProvider
+	@Inject IResourceFactory resourceFactory
 	
 	def getService(String path, Map<String, String> parameters, ISessionStore sessionStore) throws InvalidRequestException {
 		val requestType = getRequestType(path, parameters)
-		val injector = getInjector(parameters)
 		
 		switch requestType {
 			case 'load':
-				getLoadResourceService(false, parameters, injector, sessionStore)
+				getLoadResourceService(false, parameters, sessionStore)
 			case 'revert':
-				getLoadResourceService(true, parameters, injector, sessionStore)
+				getLoadResourceService(true, parameters, sessionStore)
 			case 'save':
-				getSaveResourceService(parameters, injector, sessionStore)
+				getSaveResourceService(parameters, sessionStore)
 			case 'update':
-				getUpdateDocumentService(parameters, injector, sessionStore)
+				getUpdateDocumentService(parameters, sessionStore)
 			case 'validation':
-				getValidationService(parameters, injector, sessionStore)
+				getValidationService(parameters, sessionStore)
 			case 'content-assist':
-				getContentAssistService(parameters, injector, sessionStore)
+				getContentAssistService(parameters, sessionStore)
 			default:
 				throw new InvalidRequestException(400, 'The request type \'' + requestType + '\' is not supported.')
 		} => [
 			type = requestType
 		]
-	}
-	
-	// TODO move to servlet
-	protected def getInjector(Map<String, String> parameters) throws InvalidRequestException {
-		var IResourceServiceProvider resourceServiceProvider
-		
-		val emfURI = URI.createURI(parameters.get('resource') ?: '')
-		val contentType = parameters.get('contentType')
-		if (contentType === null)
-			resourceServiceProvider = serviceProviderRegistry.getResourceServiceProvider(emfURI)
-		else
-			resourceServiceProvider = serviceProviderRegistry.getResourceServiceProvider(emfURI, contentType)
-		
-		if (resourceServiceProvider == null)
-			throw new InvalidRequestException(400, 'Unable to identify the resource type.')
-		
-		return resourceServiceProvider.get(Injector)
 	}
 	
 	protected def getRequestType(String contextPath, Map<String, String> parameters) {
@@ -98,48 +84,47 @@ class XtextServiceDispatcher {
 		return parameters.get('requestType') ?: ''
 	}
 	
-	protected def getLoadResourceService(boolean revert, Map<String, String> parameters, Injector injector,
+	protected def getLoadResourceService(boolean revert, Map<String, String> parameters,
 			ISessionStore sessionStore) throws InvalidRequestException {
-		val service = injector.getInstance(ResourcePersistenceService)
 		val resourceId = parameters.get('resource')
 		if (resourceId === null)
 			throw new InvalidRequestException(400, 'The parameter \'resource\' is required.')
 		new ServiceDescriptor => [
 			service = [
 				if (revert)
-					service.revert(resourceId, parameters.get('newState'), resourceHandler, sessionStore).forRequestId(parameters)
+					resourcePersistenceService.revert(resourceId, parameters.get('newState'),
+						resourceHandler, sessionStore).forRequestId(parameters)
 				else
-					service.load(resourceId, resourceHandler, sessionStore).forRequestId(parameters)
+					resourcePersistenceService.load(resourceId, resourceHandler,
+						sessionStore).forRequestId(parameters)
 			]
 			hasSideEffects = revert
 		]
 	}
 	
-	protected def getSaveResourceService(Map<String, String> parameters, Injector injector, ISessionStore sessionStore)
+	protected def getSaveResourceService(Map<String, String> parameters, ISessionStore sessionStore)
 			throws InvalidRequestException {
-		val service = injector.getInstance(ResourcePersistenceService)
-		val document = getDocument(parameters, injector, sessionStore)
+		val document = getDocument(parameters, sessionStore)
 		val requiredStateId = parameters.get('requiredState')
 		new ServiceDescriptor => [
 			service = [
-				service.save(document, resourceHandler, requiredStateId).forRequestId(parameters)
+				resourcePersistenceService.save(document, resourceHandler, requiredStateId).forRequestId(parameters)
 			]
 			hasSideEffects = true
 			hasTextInput = parameters.containsKey('fullText')
 		]
 	}
 	
-	protected def getUpdateDocumentService(Map<String, String> parameters, Injector injector, ISessionStore sessionStore)
+	protected def getUpdateDocumentService(Map<String, String> parameters, ISessionStore sessionStore)
 			throws InvalidRequestException {
-		val service = injector.getInstance(UpdateDocumentService)
 		val resourceId = parameters.get('resource')
 		if (resourceId === null)
 			throw new InvalidRequestException(400, 'The parameter \'resource\' is required.')
 		val fullText = parameters.get('fullText')
-		val document = getResourceDocument(resourceId, injector, sessionStore, [
+		val document = getResourceDocument(resourceId, sessionStore, [
 			// If the resource does not exist, create a dummy resource for the given full text
 			if (fullText !== null)
-				getFullTextDocument(fullText, resourceId, injector, sessionStore)
+				getFullTextDocument(fullText, resourceId, sessionStore)
 			else
 				throw new InvalidRequestException(404, 'The requested resource was not found.')
 		])
@@ -160,53 +145,51 @@ class XtextServiceDispatcher {
 			if (deltaReplaceLength < 0)
 				throw new InvalidRequestException(400, 'The parameter \'deltaReplaceLength\' must not be negative.')
 			result.service = [
-				service.updateDeltaText(document, deltaText, deltaOffset, deltaReplaceLength,
+				updateDocumentService.updateDeltaText(document, deltaText, deltaOffset, deltaReplaceLength,
 					requiredStateId, newStateId).forRequestId(parameters)
 			]
 		} else {
 			result.service = [
-				service.updateFullText(document, fullText, requiredStateId, newStateId)
+				updateDocumentService.updateFullText(document, fullText, requiredStateId, newStateId)
 			]
 		}
 		return result
 	}
 	
-	protected def getValidationService(Map<String, String> parameters, Injector injector, ISessionStore sessionStore)
+	protected def getValidationService(Map<String, String> parameters, ISessionStore sessionStore)
 			throws InvalidRequestException {
-		val service = injector.getInstance(ValidationService)
-		val document = getDocument(parameters, injector, sessionStore)
+		val document = getDocument(parameters, sessionStore)
 		val requiredStateId = parameters.get('requiredState')
 		new ServiceDescriptor => [
 			service = [
-				service.validate(document, requiredStateId).forRequestId(parameters)
+				validationService.validate(document, requiredStateId).forRequestId(parameters)
 			]
 			hasTextInput = parameters.containsKey('fullText')
 		]
 	}
 	
-	protected def getContentAssistService(Map<String, String> parameters, Injector injector, ISessionStore sessionStore)
+	protected def getContentAssistService(Map<String, String> parameters, ISessionStore sessionStore)
 			throws InvalidRequestException {
-		val service = injector.getInstance(ContentAssistService)
 		val offset = parameters.getInt('caretOffset', Optional.of(0))
-		val document = getDocument(parameters, injector, sessionStore)
+		val document = getDocument(parameters, sessionStore)
 		val selectionStart = parameters.getInt('selectionStart', Optional.of(0))
 		val selectionEnd = parameters.getInt('selectionEnd', Optional.of(0))
 		val selection = new TextRegion(selectionStart, Math.max(selectionEnd - selectionStart, 0))
 		val requiredStateId = parameters.get('requiredState')
 		new ServiceDescriptor => [
 			service = [
-				service.createProposals(document, selection, offset, requiredStateId).forRequestId(parameters)
+				contentAssistService.createProposals(document, selection, offset, requiredStateId).forRequestId(parameters)
 			]
 			hasTextInput = parameters.containsKey('fullText')
 		]
 	}
 	
-	protected def getDocument(Map<String, String> parameters, Injector injector, ISessionStore sessionStore)
+	protected def getDocument(Map<String, String> parameters, ISessionStore sessionStore)
 			throws InvalidRequestException {
 		if (parameters.containsKey('fullText')) {
-			return getFullTextDocument(parameters.get('fullText'), parameters.get('resource'), injector, sessionStore)
+			return getFullTextDocument(parameters.get('fullText'), parameters.get('resource'), sessionStore)
 		} else if (parameters.containsKey('resource')) {
-			return getResourceDocument(parameters.get('resource'), injector, sessionStore, [
+			return getResourceDocument(parameters.get('resource'), sessionStore, [
 				throw new InvalidRequestException(404, 'The requested resource was not found.')
 			])
 		} else {
@@ -214,10 +197,10 @@ class XtextServiceDispatcher {
 		}
 	}
 	
-	protected def getFullTextDocument(String fullText, String resourceId, Injector injector, ISessionStore sessionStore) {
-		val resourceSet = injector.getInstance(XtextResourceSet)
-		val uri = URI.createURI(resourceId ?: 'fullText.' + injector.getInstance(FileExtensionProvider).primaryFileExtension)
-		val resource = injector.getInstance(IResourceFactory).createResource(uri) as XtextResource
+	protected def getFullTextDocument(String fullText, String resourceId, ISessionStore sessionStore) {
+		val resourceSet = resourceSetProvider.get()
+		val uri = URI.createURI(resourceId ?: 'fullText.' + fileExtensionProvider.primaryFileExtension)
+		val resource = resourceFactory.createResource(uri) as XtextResource
 		resourceSet.resources.add(resource)
 		resource.load(new StringInputStream(fullText), null)
 		val document = new XtextDocument(resource, resourceId)
@@ -226,19 +209,15 @@ class XtextServiceDispatcher {
 		return document
 	}
 	
-	protected def getResourceDocument(String resourceId, Injector injector, ISessionStore sessionStore,
+	protected def getResourceDocument(String resourceId, ISessionStore sessionStore,
 			Provider<XtextDocument> alternativeDocumentProvider) {
-		// TODO bind lock to session
-		synchronized (injector.getInstance(XtextDocument.CreationLock)) {
-			return sessionStore.get(XtextDocument -> resourceId, [
-				try {
-					val resourceSet = injector.getInstance(XtextResourceSet)
-					return resourceHandler.get(resourceId, resourceSet)
-				} catch (IOException ioe) {
-					return alternativeDocumentProvider.get()
-				}
-			])
-		}
+		return sessionStore.get(XtextDocument -> resourceId, [
+			try {
+				return resourceHandler.get(resourceId)
+			} catch (IOException ioe) {
+				return alternativeDocumentProvider.get()
+			}
+		])
 	}
 	
 	protected def getInt(Map<String, String> parameters, String key, Optional<Integer> defaultValue)

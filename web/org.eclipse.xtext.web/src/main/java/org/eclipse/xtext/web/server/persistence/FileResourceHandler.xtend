@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server.persistence
 
+import com.google.inject.Provider
 import java.io.IOException
 import java.io.OutputStreamWriter
 import javax.inject.Inject
@@ -20,9 +21,14 @@ class FileResourceHandler implements IServerResourceHandler {
 	
 	@Inject IResourceBaseProvider resourceBaseProvider
 	
-	override get(String resourceId, XtextResourceSet resourceSet) throws IOException {
+	@Inject Provider<XtextResourceSet> resourceSetProvider
+	
+	@Inject IEncodingProvider encodingProvider
+	
+	override get(String resourceId) throws IOException {
 		try {
 			val uri = resourceBaseProvider.getFileURI(resourceId)
+			val resourceSet = resourceSetProvider.get()
 			val resource = resourceSet.getResource(uri, true) as XtextResource
 			return new XtextDocument(resource, resourceId)
 		} catch (WrappedException exception) {
@@ -30,7 +36,7 @@ class FileResourceHandler implements IServerResourceHandler {
 		}
 	}
 	
-	override put(XtextDocument.ReadAccess documentAccess, IEncodingProvider encodingProvider) throws IOException {
+	override put(XtextDocument.ReadAccess documentAccess) throws IOException {
 		try {
 			val uri = resourceBaseProvider.getFileURI(documentAccess.document.resourceId)
 			val outputStream = documentAccess.resource.resourceSet.URIConverter.createOutputStream(uri)
