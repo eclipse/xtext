@@ -55,3 +55,7 @@ configure(ideaTestProjects) {
 		exclude {it.name.endsWith('Delegate.class')}
 	}
 }
+
+task check {
+	dependsOn subprojects*.check
+}
