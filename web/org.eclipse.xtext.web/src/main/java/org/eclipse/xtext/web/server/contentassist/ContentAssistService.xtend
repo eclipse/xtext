@@ -20,8 +20,6 @@ import org.eclipse.xtext.web.server.InvalidRequestException
 import org.eclipse.xtext.web.server.data.ContentAssistResult
 import org.eclipse.xtext.web.server.model.XtextDocument
 
-import static extension java.util.Collections.*
-
 @Singleton
 class ContentAssistService {
 	

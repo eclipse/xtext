@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.web.server.servlet
+package org.eclipse.xtext.web.servlet
 
 import com.google.common.collect.Maps
 import com.google.gson.Gson

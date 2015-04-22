@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.web.server.servlet;
+package org.eclipse.xtext.web.servlet;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Maps;
@@ -26,7 +26,7 @@ import javax.servlet.http.HttpSession;
 import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.web.server.data.JsonObject;
-import org.eclipse.xtext.web.server.servlet.HttpServletSessionStore;
+import org.eclipse.xtext.web.servlet.HttpServletSessionStore;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
