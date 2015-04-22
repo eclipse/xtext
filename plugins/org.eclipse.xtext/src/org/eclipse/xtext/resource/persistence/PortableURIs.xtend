@@ -89,7 +89,7 @@ class PortableURIs {
 	def URI toPortableURI(StorageAwareResource sourceResource, URI targetURI) {
 		val to = sourceResource.resourceSet.getResource(targetURI.trimFragment, false)?.getEObject(targetURI.fragment)
 		// if it points to some registered ecore, there's no resourceSet and the result is not portable 
-		if (to == null || to.eResource.resourceSet != null) {
+		if (to == null || to.eResource?.resourceSet != null) {
 			val result = toPortableURI(sourceResource, to);
 			if (result != null) {
 				return result
