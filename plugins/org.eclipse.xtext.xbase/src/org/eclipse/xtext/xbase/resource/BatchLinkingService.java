@@ -34,6 +34,8 @@ public class BatchLinkingService {
 	 * @param context the current instance that owns the referenced proxy.
 	 * @param reference the {@link EReference} that has the proxy value.
 	 * @param uriFragment the lazy linking fragment.
+	 * 
+	 * @return the resolved object for the given context or <code>null</code> if it couldn't be resolved
 	 */
 	public EObject resolveBatched(EObject context, EReference reference, String uriFragment) {
 		return resolveBatched(context, reference, uriFragment, CancelIndicator.NullImpl);
@@ -48,13 +50,18 @@ public class BatchLinkingService {
 	 * @param reference the {@link EReference} that has the proxy value.
 	 * @param uriFragment the lazy linking fragment.
 	 * @param monitor used to cancel type resolution
+	 * 
+	 * @return the resolved object for the given context or <code>null</code> if it couldn't be resolved
 	 * @since 2.7
 	 */
 	public EObject resolveBatched(EObject context, EReference reference, String uriFragment, CancelIndicator monitor) {
 		if (reference.isMany())
 			throw new IllegalArgumentException("Not yet implemented for #many references");
 		batchTypeResolver.resolveTypes(context, monitor);
-		return (EObject) context.eGet(reference, false);
+		EObject result = (EObject) context.eGet(reference, false);
+		if (result.eIsProxy())
+			return null;
+		return result;
 	}
 
 	/**
