@@ -69,11 +69,13 @@ class DslProjectContributor extends DefaultProjectFactoryContributor {
 				}
 			«ENDIF»
 			
-			component = DirectoryCleaner {
-				directory = "${runtimeProject}.tests/src-gen"
-			}
+			«IF projectInfo.isCreateTestProject»
+				component = DirectoryCleaner {
+					directory = "${runtimeProject}.tests/src-gen"
+				}
+			«ENDIF»
 			
-			component = Generator {
+			component = Generator auto-inject {
 				pathRtProject = runtimeProject
 				projectNameRt = projectName
 				«IF projectInfo.isCreateUiProject»
@@ -83,8 +85,6 @@ class DslProjectContributor extends DefaultProjectFactoryContributor {
 				«IF projectInfo.isCreateTestProject»
 					pathTestProject = "${runtimeProject}.tests"
 				«ENDIF»
-				encoding = encoding
-				fileHeader = fileHeader
 				language = auto-inject {
 					uri = grammarURI
 			
@@ -94,10 +94,6 @@ class DslProjectContributor extends DefaultProjectFactoryContributor {
 					// generates Java API for the generated EPackages
 					fragment = ecore.EMFGeneratorFragment auto-inject {}
 			
-					// the old serialization component
-					// fragment = parseTreeConstructor.ParseTreeConstructorFragment auto-inject {}
-			
-					// serializer 2.0
 					fragment = serializer.SerializerFragment auto-inject {
 						generateStub = false
 					}
@@ -118,57 +114,55 @@ class DslProjectContributor extends DefaultProjectFactoryContributor {
 					//    composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
 					}
 			
-					// old scoping and exporting API
-					// fragment = scoping.ImportURIScopingFragment auto-inject {}
-					// fragment = exporting.SimpleNamesFragment auto-inject {}
-			
 					// scoping and exporting API
 					fragment = scoping.ImportNamespacesScopingFragment auto-inject {}
 					fragment = exporting.QualifiedNamesFragment auto-inject {}
-					fragment = builder.BuilderIntegrationFragment auto-inject {}
 			
 					// generator API
 					fragment = generator.GeneratorFragment auto-inject {}
 			
 					// formatter API
 					fragment = formatting.FormatterFragment auto-inject {}
-			
-					// labeling API
-					fragment = labeling.LabelProviderFragment auto-inject {}
-			
-					// outline API
-					fragment = outline.OutlineTreeProviderFragment auto-inject {}
-					fragment = outline.QuickOutlineFragment auto-inject {}
-			
-					// quickfix API
-					fragment = quickfix.QuickfixProviderFragment auto-inject {}
-			
-					// content assist API
-					fragment = contentAssist.ContentAssistFragment auto-inject {}
-			
-					// generates a more lightweight Antlr parser and lexer tailored for content assist
-					fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}
-			
-					// generates junit test support classes into Generator#pathTestProject
-					fragment = junit.Junit4Fragment auto-inject {}
-			
-					// rename refactoring
-					fragment = refactoring.RefactorElementNameFragment auto-inject {}
-			
-					// provides the necessary bindings for java types integration
-					fragment = types.TypesGeneratorFragment auto-inject {}
-			
-					// generates the required bindings only if the grammar inherits from Xbase
-					fragment = xbase.XbaseGeneratorFragment auto-inject {}
 					
-					// generates the required bindings only if the grammar inherits from Xtype
-					fragment = xbase.XtypeGeneratorFragment auto-inject {}
-			
-					// provides a preference page for template proposals
-					fragment = templates.CodetemplatesGeneratorFragment auto-inject {}
-			
-					// provides a compare view
-					fragment = compare.CompareFragment auto-inject {}
+					«IF projectInfo.isCreateTestProject»
+						// generates junit test support classes into Generator#pathTestProject
+						fragment = junit.Junit4Fragment auto-inject {}
+					«ENDIF»
+					
+					«IF projectInfo.isCreateUiProject»
+						fragment = builder.BuilderIntegrationFragment auto-inject {}
+						// labeling API
+						fragment = labeling.LabelProviderFragment auto-inject {}
+						
+						// outline API
+						fragment = outline.OutlineTreeProviderFragment auto-inject {}
+						fragment = outline.QuickOutlineFragment auto-inject {}
+
+						// quickfix API
+						fragment = quickfix.QuickfixProviderFragment auto-inject {}
+
+						// content assist API
+						fragment = contentAssist.ContentAssistFragment auto-inject {}
+
+						// generates a more lightweight Antlr parser and lexer tailored for content assist
+						fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}
+						// provides a preference page for template proposals
+						fragment = templates.CodetemplatesGeneratorFragment auto-inject {}
+
+						// rename refactoring
+						fragment = refactoring.RefactorElementNameFragment auto-inject {}
+
+						// provides a compare view
+						fragment = compare.CompareFragment auto-inject {}
+					«ENDIF»
+						// provides the necessary bindings for java types integration
+						fragment = types.TypesGeneratorFragment auto-inject {}
+				
+						// generates the required bindings only if the grammar inherits from Xbase
+						fragment = xbase.XbaseGeneratorFragment auto-inject {}
+						
+						// generates the required bindings only if the grammar inherits from Xtype
+						fragment = xbase.XtypeGeneratorFragment auto-inject {}
 				}
 			}
 		}

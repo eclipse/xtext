@@ -81,14 +81,17 @@ public class Junit4Fragment extends AbstractGeneratorFragment {
 	 */
 	@Override
 	public String[] getRequiredBundlesTests(Grammar grammar) {
-		return new String[] {
-				getNaming().getProjectNameRt(),
-				getNaming().getProjectNameUi(),
-				"org.eclipse.core.runtime",
-				"org.eclipse.xtext.junit4",
-				"org.eclipse.xtext.xbase.lib",
-				"org.eclipse.ui.workbench;resolution:=optional"
-		};
+		List<String> bundles = Lists.newArrayList(
+			getNaming().getProjectNameRt(),
+			"org.eclipse.xtext.junit4",
+			"org.eclipse.xtext.xbase.lib"
+		);
+		if (getNaming().hasUI()) {
+			bundles.add(getNaming().getProjectNameUi());
+			bundles.add("org.eclipse.core.runtime");
+			bundles.add("org.eclipse.ui.workbench;resolution:=optional");
+		}
+		return bundles.toArray(new String[bundles.size()]);
 	}
 
 	/**
