@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.editor.model.edit;
 
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocumentListener;
+import org.eclipse.jface.text.RewriteSessionEditProcessor;
 import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.XtextResource;
@@ -57,7 +58,8 @@ public class ReconcilingUnitOfWork<T> implements IUnitOfWork<T, XtextResource> {
 			if (edit != null) {
 				if(documentChangeListener.hasDocumentChanged()) 
 					throw new IllegalStateException("Cannot modify document textually and semantically within the same unit of work");
-				edit.apply(document);
+				RewriteSessionEditProcessor processor = new RewriteSessionEditProcessor(document, edit, TextEdit.UPDATE_REGIONS | TextEdit.CREATE_UNDO);
+				processor.performEdits();
 			}
 		} catch (RuntimeException e) {
 			document.set(original);

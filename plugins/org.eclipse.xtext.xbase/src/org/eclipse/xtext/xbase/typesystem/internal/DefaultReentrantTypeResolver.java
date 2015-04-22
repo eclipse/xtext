@@ -139,8 +139,8 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 			resolving = true;
 			return resolve(monitor);
 		} catch(Throwable e) {
+			clear();
 			if (operationCanceledManager.isOperationCanceledException(e)) {
-				clear();
 				operationCanceledManager.propagateAsErrorIfCancelException(e);
 			}
 			throw Throwables.propagate(e);
