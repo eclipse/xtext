@@ -15,3 +15,5 @@ new File(settingsDir, "intellij").listFiles().findAll {
 }.each {
 	include "intellij:${it.name}"
 }
+
+include 'web:org.eclipse.xtext.web'
