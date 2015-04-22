@@ -9,7 +9,6 @@ package org.eclipse.xtext.idea.tests;
 
 import com.google.common.base.Objects;
 import java.util.List;
-import java.util.function.Consumer;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
@@ -69,9 +68,9 @@ public class TestDecoratorProcessor extends AbstractClassProcessor {
       }
     };
     List<MethodDeclaration> _sortBy = IterableExtensions.<MethodDeclaration, String>sortBy(_filter_1, _function_3);
-    final Consumer<MethodDeclaration> _function_4 = new Consumer<MethodDeclaration>() {
+    final Procedure1<MethodDeclaration> _function_4 = new Procedure1<MethodDeclaration>() {
       @Override
-      public void accept(final MethodDeclaration declaredMethod) {
+      public void apply(final MethodDeclaration declaredMethod) {
         String _simpleName = declaredMethod.getSimpleName();
         final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
           @Override
@@ -93,6 +92,6 @@ public class TestDecoratorProcessor extends AbstractClassProcessor {
         cls.addMethod(_simpleName, _function);
       }
     };
-    _sortBy.forEach(_function_4);
+    IterableExtensions.<MethodDeclaration>forEach(_sortBy, _function_4);
   }
 }

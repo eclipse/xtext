@@ -26,7 +26,6 @@ import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.idea.build.daemon.XtextBuildDaemon;
@@ -37,6 +36,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -102,9 +102,9 @@ public class DaemonConnector {
           final ClassLoader classLoader = _class.getClassLoader();
           if ((classLoader instanceof URLClassLoader)) {
             URL[] _uRLs = ((URLClassLoader)classLoader).getURLs();
-            final Consumer<URL> _function = new Consumer<URL>() {
+            final Procedure1<URL> _function = new Procedure1<URL>() {
               @Override
-              public void accept(final URL it) {
+              public void apply(final URL it) {
                 try {
                   String _protocol = it.getProtocol();
                   boolean _equals = Objects.equal(_protocol, "file");
@@ -119,7 +119,7 @@ public class DaemonConnector {
                 }
               }
             };
-            ((List<URL>)Conversions.doWrapArray(_uRLs)).forEach(_function);
+            IterableExtensions.<URL>forEach(((Iterable<URL>)Conversions.doWrapArray(_uRLs)), _function);
           }
           final ArrayList<String> command = CollectionLiterals.<String>newArrayList();
           command.add(java);

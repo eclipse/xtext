@@ -37,6 +37,17 @@ configure(subprojects - eclipsePluginProjects) {
 		exclude module:'org.eclipse.jdt.core'
 	}
 
+	task debugIdea {
+		dependsOn(runIdea)
+		runIdea.debug = true
+		group = 'intelliJ Idea'
+		description = 'Debugs Intellij IDEA remotely on port 5005 with this project and its dependencies installed'
+	}
+
+	assembleSandbox {
+		if (!isBuildServer) classes.from 'bin'
+	}
+
 	task cleanTestSystem(type: Delete) {
 		delete "${ideaDevelopment.ideaHome}/test-system"
 	}

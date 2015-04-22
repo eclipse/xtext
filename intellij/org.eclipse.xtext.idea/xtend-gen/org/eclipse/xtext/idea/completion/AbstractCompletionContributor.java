@@ -30,7 +30,6 @@ import com.intellij.openapi.util.Computable;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.Consumer;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.eclipse.xtend.lib.annotations.Data;
@@ -46,6 +45,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -195,20 +195,20 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
     int _offset = parameters.getOffset();
     XtextResource _resource = this.getResource(parameters);
     final ContentAssistContext[] contexts = delegate.create(_text, _selection, _offset, _resource);
-    final java.util.function.Consumer<ContentAssistContext> _function = new java.util.function.Consumer<ContentAssistContext>() {
+    final Procedure1<ContentAssistContext> _function = new Procedure1<ContentAssistContext>() {
       @Override
-      public void accept(final ContentAssistContext c) {
+      public void apply(final ContentAssistContext c) {
         ImmutableList<AbstractElement> _firstSetGrammarElements = c.getFirstSetGrammarElements();
-        final java.util.function.Consumer<AbstractElement> _function = new java.util.function.Consumer<AbstractElement>() {
+        final Procedure1<AbstractElement> _function = new Procedure1<AbstractElement>() {
           @Override
-          public void accept(final AbstractElement e) {
+          public void apply(final AbstractElement e) {
             AbstractCompletionContributor.this.createProposal(e, c, parameters, result);
           }
         };
-        _firstSetGrammarElements.forEach(_function);
+        IterableExtensions.<AbstractElement>forEach(_firstSetGrammarElements, _function);
       }
     };
-    ((List<ContentAssistContext>)Conversions.doWrapArray(contexts)).forEach(_function);
+    IterableExtensions.<ContentAssistContext>forEach(((Iterable<ContentAssistContext>)Conversions.doWrapArray(contexts)), _function);
   }
   
   protected ContentAssistContextFactory getParserBasedDelegate() {

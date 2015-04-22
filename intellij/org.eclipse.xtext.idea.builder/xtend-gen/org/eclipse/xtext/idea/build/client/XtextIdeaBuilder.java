@@ -18,7 +18,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Consumer;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.ISetup;
@@ -30,6 +29,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.jetbrains.jps.ModuleChunk;
 import org.jetbrains.jps.ProjectPaths;
 import org.jetbrains.jps.builders.DirtyFilesHolder;
@@ -212,17 +212,17 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
     ModuleBuildTarget _representativeTarget = chunk.representativeTarget();
     final JpsModule module = _representativeTarget.getModule();
     List<String> _outputDirs = result.getOutputDirs();
-    final Consumer<String> _function = new Consumer<String>() {
+    final Procedure1<String> _function = new Procedure1<String>() {
       @Override
-      public void accept(final String it) {
+      public void apply(final String it) {
         XtextIdeaBuilder.this.createSourceRoot(it, module);
       }
     };
-    _outputDirs.forEach(_function);
+    IterableExtensions.<String>forEach(_outputDirs, _function);
     List<String> _dirtyFiles = result.getDirtyFiles();
-    final Consumer<String> _function_1 = new Consumer<String>() {
+    final Procedure1<String> _function_1 = new Procedure1<String>() {
       @Override
-      public void accept(final String it) {
+      public void apply(final String it) {
         try {
           File _file = new File(it);
           FSOperations.markDirty(context, CompilationRound.CURRENT, _file);
@@ -237,11 +237,11 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
         }
       }
     };
-    _dirtyFiles.forEach(_function_1);
+    IterableExtensions.<String>forEach(_dirtyFiles, _function_1);
     List<String> _deletedFiles = result.getDeletedFiles();
-    final Consumer<String> _function_2 = new Consumer<String>() {
+    final Procedure1<String> _function_2 = new Procedure1<String>() {
       @Override
-      public void accept(final String it) {
+      public void apply(final String it) {
         try {
           File _file = new File(it);
           FSOperations.markDeleted(context, _file);
@@ -256,7 +256,7 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
         }
       }
     };
-    _deletedFiles.forEach(_function_2);
+    IterableExtensions.<String>forEach(_deletedFiles, _function_2);
   }
   
   private void reportIssue(final Protocol.BuildIssue it, final CompileContext context) {

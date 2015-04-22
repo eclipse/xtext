@@ -12,16 +12,15 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Consumer;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class IdeaModuleConfig extends ProjectConfig {
@@ -44,9 +43,9 @@ public class IdeaModuleConfig extends ProjectConfig {
       if (_isEmpty) {
         ModuleRootManager _instance = ModuleRootManager.getInstance(this.module);
         VirtualFile[] _sourceRoots = _instance.getSourceRoots();
-        final Consumer<VirtualFile> _function = new Consumer<VirtualFile>() {
+        final Procedure1<VirtualFile> _function = new Procedure1<VirtualFile>() {
           @Override
-          public void accept(final VirtualFile root) {
+          public void apply(final VirtualFile root) {
             final Project project = IdeaModuleConfig.this.module.getProject();
             VirtualFile _baseDir = project.getBaseDir();
             String _name = IdeaModuleConfig.this.module.getName();
@@ -66,7 +65,7 @@ public class IdeaModuleConfig extends ProjectConfig {
             mappings.put(_path, _path_1);
           }
         };
-        ((List<VirtualFile>)Conversions.doWrapArray(_sourceRoots)).forEach(_function);
+        IterableExtensions.<VirtualFile>forEach(((Iterable<VirtualFile>)Conversions.doWrapArray(_sourceRoots)), _function);
       }
       _xblockexpression = mappings;
     }
