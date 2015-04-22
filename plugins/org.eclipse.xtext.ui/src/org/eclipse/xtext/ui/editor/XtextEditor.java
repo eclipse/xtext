@@ -278,8 +278,9 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 		setSourceViewerConfiguration(sourceViewerConfiguration);
 
 		sourceViewerConfiguration.setEditor(this);
-
-		setPreferenceStore(preferenceStoreAccess.getContextPreferenceStore(input));
+		
+		// Bug 464591 all editor presentation settings (font/color) handled here are in the InstanceScope only
+		setPreferenceStore(preferenceStoreAccess.getPreferenceStore());
 
 		// NOTE: Outline CANNOT be initialized here, since we do not have access
 		// to the source viewer yet (it will be created later).
@@ -599,8 +600,7 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 		super.handlePreferenceStoreChanged(event);
 		if (getSourceViewer() == null)
 			return;
-		// TODO (dennis) move preference store constants to ui.core or create a
-		// handlePrefStoreChanged service
+	
 		boolean tokenStyleChanged = event.getProperty().contains(".syntaxColorer.tokenStyles");
 		if (tokenStyleChanged) {
 			textAttributeProvider.propertyChange(event);
