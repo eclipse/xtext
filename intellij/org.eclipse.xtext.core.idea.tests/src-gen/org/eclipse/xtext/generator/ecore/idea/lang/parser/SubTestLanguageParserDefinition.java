@@ -3,7 +3,6 @@ package org.eclipse.xtext.generator.ecore.idea.lang.parser;
 import org.eclipse.xtext.generator.ecore.idea.lang.SubTestLanguageElementTypeProvider;
 import org.eclipse.xtext.generator.ecore.idea.lang.psi.impl.SubTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
-import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -25,17 +24,6 @@ public class SubTestLanguageParserDefinition extends AbstractXtextParserDefiniti
 	@Override
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
-		IElementType elementType = node.getElementType();
-		if (elementType == elementTypeProvider.getSubMain_AnotherAnotherSuperMainParserRuleCall_3_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getAnotherSuperMain_NameIDTerminalRuleCall_1_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getSubMain_SuperMainsSuperMainParserRuleCall_1_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getSuperMain_NameIDTerminalRuleCall_1_0ElementType()
-			);
-		}
 		return super.createElement(node);
 	}
 

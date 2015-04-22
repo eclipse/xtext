@@ -713,7 +713,8 @@ public class PsiNamedEObjectTest extends LightCodeInsightFixtureTestCase {
       this.myFixture.configureByText("aaa.sdomain", text);
       TargetElementUtilBase _instance = TargetElementUtilBase.getInstance();
       Editor _editor = this.myFixture.getEditor();
-      final PsiElement targetElement = _instance.findTargetElement(_editor, TargetElementUtilBase.ELEMENT_NAME_ACCEPTED, caretOffset);
+      final PsiElement targetElement = _instance.findTargetElement(_editor, 
+        TargetElementUtilBase.ELEMENT_NAME_ACCEPTED, caretOffset);
       PsiNamedEObject _xifexpression = null;
       if ((targetElement instanceof PsiNamedEObject)) {
         _xifexpression = ((PsiNamedEObject)targetElement);

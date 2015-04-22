@@ -3,7 +3,6 @@ package org.eclipse.xtext.parser.antlr.idea.lang.parser;
 import org.eclipse.xtext.parser.antlr.idea.lang.Bug296889ExTestLanguageElementTypeProvider;
 import org.eclipse.xtext.parser.antlr.idea.lang.psi.impl.Bug296889ExTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
-import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -25,22 +24,6 @@ public class Bug296889ExTestLanguageParserDefinition extends AbstractXtextParser
 	@Override
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
-		IElementType elementType = node.getElementType();
-		if (elementType == elementTypeProvider.getPreop_ExprVariableParserRuleCall_2_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getVariable_NameIDTerminalRuleCall_1_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getVariable_VariableAction_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getVariable_NameIDTerminalRuleCall_1_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getPostop_VariableParserRuleCall_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getVariable_NameIDTerminalRuleCall_1_0ElementType()
-			);
-		}
 		return super.createElement(node);
 	}
 

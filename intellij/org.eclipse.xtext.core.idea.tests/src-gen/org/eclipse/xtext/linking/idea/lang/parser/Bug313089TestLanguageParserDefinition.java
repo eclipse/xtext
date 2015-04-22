@@ -4,7 +4,6 @@ import org.eclipse.xtext.psi.impl.PsiEObjectReference;
 import org.eclipse.xtext.linking.idea.lang.Bug313089TestLanguageElementTypeProvider;
 import org.eclipse.xtext.linking.idea.lang.psi.impl.Bug313089TestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
-import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -27,28 +26,6 @@ public class Bug313089TestLanguageParserDefinition extends AbstractXtextParserDe
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
 		IElementType elementType = node.getElementType();
-		if (elementType == elementTypeProvider.getFoo_BarBarParserRuleCall_1_0_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getBar_NameIDTerminalRuleCall_1_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getBar_BarAction_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getBar_NameIDTerminalRuleCall_1_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getFoo_BazBazParserRuleCall_1_1_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getBaz_NameIDTerminalRuleCall_1_0ElementType(),
-				elementTypeProvider.getBaz_NameIDTerminalRuleCall_2_2_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getBaz_BazChildAction_2_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getBaz_NameIDTerminalRuleCall_1_0ElementType(),
-				elementTypeProvider.getBaz_NameIDTerminalRuleCall_2_2_0ElementType()
-			);
-		}
 		if (elementType == elementTypeProvider.getFoo_RefFooCrossReference_2_0ElementType()) {
 			return new PsiEObjectReference(node);
 		}

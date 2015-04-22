@@ -11,10 +11,9 @@ import com.google.inject.Inject
 import com.intellij.extapi.psi.StubBasedPsiElementBase
 import com.intellij.icons.AllIcons
 import com.intellij.lang.ASTNode
-import com.intellij.openapi.util.TextRange
 import com.intellij.psi.stubs.IStubElementType
-import com.intellij.psi.stubs.StubElement
 import com.intellij.psi.tree.IElementType
+import com.intellij.util.IncorrectOperationException
 import javax.swing.Icon
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
@@ -24,19 +23,28 @@ import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.GrammarUtil
 import org.eclipse.xtext.idea.lang.IXtextLanguage
 import org.eclipse.xtext.nodemodel.INode
-import org.eclipse.xtext.psi.PsiEObject
+import org.eclipse.xtext.psi.PsiEObjectFactory
+import org.eclipse.xtext.psi.PsiNamedEObject
+import org.eclipse.xtext.psi.stubs.PsiNamedEObjectStub
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType
 import org.eclipse.xtext.resource.ILocationInFileProvider
 import org.eclipse.xtext.service.OperationCanceledError
+import org.eclipse.xtext.util.SimpleAttributeResolver
 
-class PsiEObjectImpl<T extends StubElement> extends StubBasedPsiElementBase<T> implements PsiEObject {
+import static extension org.eclipse.xtext.GrammarUtil.*
+import static extension org.eclipse.xtext.nodemodel.util.NodeModelUtils.*
+
+class PsiEObjectImpl<T extends PsiNamedEObjectStub<?>> extends StubBasedPsiElementBase<T> implements PsiNamedEObject {
+
+	@Inject
+	extension PsiEObjectFactory psiEObjectFactory
 
 	@Inject
 	protected extension ILocationInFileProvider locationInFileProvider
 	
 	final IElementType elementType
 
-	protected new(T stub, IStubElementType nodeType) {
+	protected new(T stub, IStubElementType<?, ?> nodeType) {
 		super(stub, nodeType)
 		this.elementType = nodeType
 		getXtextLanguage().injectMembers(this)
@@ -114,6 +122,61 @@ class PsiEObjectImpl<T extends StubElement> extends StubBasedPsiElementBase<T> i
 		var StringBuilder builder = new StringBuilder(getClass().getName())
 		builder.append("(").append(elementType).append(")")
 		return builder.toString()
+	}
+
+	override getNameIdentifier() {
+		val nameNode = findNameNode
+		if (nameNode == null) {
+			return null
+		}
+		new PsiEObjectIdentifierImpl(nameNode.psi)
+	}
+
+	override getName() {
+		val stub = stub
+		if (stub != null) {
+			return stub.name
+		}
+		val nameIdentifier = nameIdentifier
+		if (nameIdentifier == null) {
+			return null
+		}
+		nameIdentifier.text
+	}
+
+	override PsiNamedEObject setName(String name) throws IncorrectOperationException {
+		val nameNode = findNameNode
+		if (nameNode == null) {
+			return this
+		}
+		if (nameType.grammarElement.terminalRuleCall) {
+			val newNameNode = name.createLeafIdentifier(nameNode)
+			nameNode.treeParent.replaceChild(nameNode, newNameNode)
+		} else {
+			val newNameNode = name.createCompositeIdentifier(this.name, nameNode).firstChildNode
+			nameNode.replaceAllChildrenToChildrenOf(newNameNode)
+		}
+		this
+	}
+	
+	protected def getNameType() {
+		findNameNode?.elementType as IGrammarAwareElementType
+	}
+
+	protected def findNameNode() {
+		val treeNode = INode
+		if (!treeNode.hasDirectSemanticElement) {
+			return null
+		}
+		val nameAttribute = SimpleAttributeResolver.NAME_RESOLVER.getAttribute(treeNode.semanticElement)
+		if (nameAttribute == null) {
+			return null
+		}
+		val nameAttributeNode = EObject.findNodesForFeature(nameAttribute).head
+		val nameNode = xtextFile.getASTNodes(nameAttributeNode).head
+		if (nameNode?.treeParent == node) {
+			nameNode
+		}
 	}
 
 	override getTextOffset() {

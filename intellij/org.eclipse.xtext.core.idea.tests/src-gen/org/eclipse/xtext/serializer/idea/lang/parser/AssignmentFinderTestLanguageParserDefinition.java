@@ -4,7 +4,6 @@ import org.eclipse.xtext.psi.impl.PsiEObjectReference;
 import org.eclipse.xtext.serializer.idea.lang.AssignmentFinderTestLanguageElementTypeProvider;
 import org.eclipse.xtext.serializer.idea.lang.psi.impl.AssignmentFinderTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
-import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -27,12 +26,6 @@ public class AssignmentFinderTestLanguageParserDefinition extends AbstractXtextP
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
 		IElementType elementType = node.getElementType();
-		if (elementType == elementTypeProvider.getModel_CrossRefCrossRefParserRuleCall_9_1_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getCrossRef_NameTerminal1TerminalRuleCall_0_0_0ElementType(),
-				elementTypeProvider.getCrossRef_NameTerminal2TerminalRuleCall_0_0_1ElementType()
-			);
-		}
 		if (elementType == elementTypeProvider.getCrossRef_CrossRefCrossRefCrossReference_1_0_0ElementType()) {
 			return new PsiEObjectReference(node);
 		}

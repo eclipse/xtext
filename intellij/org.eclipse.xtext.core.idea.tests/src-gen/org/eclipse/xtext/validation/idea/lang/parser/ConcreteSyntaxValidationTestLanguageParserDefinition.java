@@ -24,7 +24,6 @@ public class ConcreteSyntaxValidationTestLanguageParserDefinition extends Abstra
 	@Override
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
-		IElementType elementType = node.getElementType();
 		return super.createElement(node);
 	}
 
