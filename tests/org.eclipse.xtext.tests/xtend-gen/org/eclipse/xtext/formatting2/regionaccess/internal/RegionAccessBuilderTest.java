@@ -35,7 +35,7 @@ import org.junit.runner.RunWith;
 @InjectWith(RegionAccessTestLanguageInjectorProvider.class)
 @RunWith(XtextRunner.class)
 @SuppressWarnings("all")
-public class RegionAccessTest {
+public class RegionAccessBuilderTest {
   @Inject
   private ParseHelper<Root> parseHelper;
   
