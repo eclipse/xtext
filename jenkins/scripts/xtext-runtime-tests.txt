@@ -1,4 +1,5 @@
 importtargetdefinition  -DuseMirror=false -A "${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests/tests-buildserver.target
+importprefs -F ${checkout.location}/releng/org.eclipse.xtext.releng/releng/buckminster.workspace.epf
 
 resolve "${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests/xtext-test.mspec"
 
