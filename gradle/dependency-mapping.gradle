@@ -19,7 +19,7 @@ ext.toDependency = { requirement ->
 		return [group:'com.google.inject', name:'guice', version:versions.'google-inject.version']
 	}
 	if (requirement.name == 'org.antlr.runtime') {
-		return [group:'org.antlr', name:'antlr-runtime', version:versions.'google-inject.version']
+		return [group:'org.antlr', name:'antlr-runtime', version:versions.'antlr.version']
 	}
 	if (requirement.name == 'org.eclipse.equinox.common') {
 		return [group:'org.eclipse.equinox', name:'common', version:versions.'equinox-common-version']
