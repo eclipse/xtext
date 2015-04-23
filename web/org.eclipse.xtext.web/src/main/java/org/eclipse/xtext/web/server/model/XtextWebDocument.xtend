@@ -14,8 +14,9 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork
 import com.google.inject.Singleton
 import org.eclipse.xtext.web.server.InvalidRequestException
 
-// TODO XtextWebDocument
-class XtextDocument {
+import static org.eclipse.xtext.web.server.InvalidRequestException.Type.*
+
+class XtextWebDocument {
 	
 	@Accessors(PUBLIC_GETTER)
 	val String resourceId
@@ -38,7 +39,11 @@ class XtextDocument {
 	new(XtextResource resource, String resourceId) {
 		this.resource = resource
 		this.resourceId = resourceId
-		this.text = resource.parseResult?.rootNode?.text ?: ''
+		refresh()
+	}
+	
+	protected def refresh() {
+		text = resource.parseResult?.rootNode?.text ?: ''
 	}
 	
 	def <T> T readOnly(IUnitOfWork<T, ReadAccess> work) {
@@ -60,9 +65,9 @@ class XtextDocument {
 	}
 	
 	static class ReadAccess {
-		protected val XtextDocument document
+		protected val XtextWebDocument document
 		
-		private new(XtextDocument document) {
+		private new(XtextWebDocument document) {
 			this.document = document
 		}
 		
@@ -84,7 +89,7 @@ class XtextDocument {
 		
 		def checkStateId(String requiredStateId) throws InvalidRequestException {
 			if (requiredStateId !== null && requiredStateId != document.stateId) {
-				throw new InvalidRequestException(409, 'The given state id does not match the current state.')
+				throw new InvalidRequestException(INVALID_DOCUMENT_STATE, 'The given state id does not match the current state.')
 			}
 		}
 		
@@ -95,14 +100,18 @@ class XtextDocument {
 	
 	static class ModifyAccess extends ReadAccess {
 		
-		private new(XtextDocument document) {
+		private new(XtextWebDocument document) {
 			super(document)
 		}
 		
-		// TODO use resource update
 		def setText(String text) {
 			document.resource.reparse(text)
-			document.text = text
+			document.refresh()
+		}
+		
+		def updateText(String text, int offset, int replaceLength) {
+			document.resource.update(offset, replaceLength, text)
+			document.refresh()
 		}
 		
 		def setStateId(String stateId) {

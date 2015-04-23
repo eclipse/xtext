@@ -17,8 +17,7 @@ import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory
 import org.eclipse.xtext.util.ITextRegion
 import org.eclipse.xtext.web.server.InvalidRequestException
-import org.eclipse.xtext.web.server.data.ContentAssistResult
-import org.eclipse.xtext.web.server.model.XtextDocument
+import org.eclipse.xtext.web.server.model.XtextWebDocument
 
 @Singleton
 class ContentAssistService {
@@ -27,7 +26,7 @@ class ContentAssistService {
 	
 	val pool = Executors.newFixedThreadPool(3)
 	
-	def createProposals(XtextDocument document, ITextRegion selection, int offset, String requiredStateId)
+	def createProposals(XtextWebDocument document, ITextRegion selection, int offset, String requiredStateId)
 			throws InvalidRequestException {
 		val contextFactory = contextFactoryProvider.get() => [it.pool = pool]
 		val contexts = document.readOnly[ access |

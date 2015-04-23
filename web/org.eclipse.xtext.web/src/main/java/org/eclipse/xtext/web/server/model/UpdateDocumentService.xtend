@@ -9,12 +9,11 @@ package org.eclipse.xtext.web.server.model
 
 import com.google.inject.Singleton
 import org.eclipse.xtext.web.server.InvalidRequestException
-import org.eclipse.xtext.web.server.data.UpdateDocumentResult
 
 @Singleton
 class UpdateDocumentService {
 	
-	def updateFullText(XtextDocument document, String fullText, String requiredStateId, String newStateId)
+	def updateFullText(XtextWebDocument document, String fullText, String requiredStateId, String newStateId)
 			throws InvalidRequestException {
 		document.modify[ access |
 			access.checkStateId(requiredStateId)
@@ -22,38 +21,20 @@ class UpdateDocumentService {
 			if (newStateId !== null) {
 				access.stateId = newStateId
 			}
-			val result = new UpdateDocumentResult
-			result.stateId = access.stateId
-			return result
+			return new DocumentStateResult(access.stateId)
 		]
 	}
 	
-	def updateDeltaText(XtextDocument document, String deltaText, int offset, int replaceLength,
+	def updateDeltaText(XtextWebDocument document, String deltaText, int offset, int replaceLength,
 			String requiredStateId, String newStateId) throws InvalidRequestException {
 		document.modify[ access |
 			access.checkStateId(requiredStateId)
-			applyDelta(access, deltaText, offset, replaceLength)
+			access.updateText(deltaText, offset, replaceLength)
 			if (newStateId !== null) {
 				access.stateId = newStateId
 			}
-			val result = new UpdateDocumentResult
-			result.stateId = access.stateId
-			return result
+			return new DocumentStateResult(access.stateId)
 		]
-	}
-	
-	protected def applyDelta(XtextDocument.ModifyAccess access, String deltaText, int deltaOffset, int deltaReplaceLength) {
-		val currentText = access.text
-		var String newText
-		if (deltaOffset == 0 && deltaReplaceLength >= currentText.length)
-			newText = deltaText
-		else if (deltaOffset == 0)
-			newText = deltaText + currentText.substring(deltaReplaceLength)
-		else if (deltaOffset + deltaReplaceLength >= currentText.length)
-			newText = currentText.substring(0, deltaOffset) + deltaText
-		else
-			newText = currentText.substring(0, deltaOffset) + deltaText + currentText.substring(deltaOffset + deltaReplaceLength)
-		access.text = newText
 	}
 	
 }

@@ -22,6 +22,8 @@ import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.web.server.InvalidRequestException
 import org.eclipse.xtext.web.server.XtextServiceDispatcher
 
+import static org.eclipse.xtext.web.server.InvalidRequestException.Type.*
+
 class XtextServlet extends HttpServlet {
 	
 	val serviceProviderRegistry = IResourceServiceProvider.Registry.INSTANCE
@@ -32,7 +34,12 @@ class XtextServlet extends HttpServlet {
 		try {
 			super.service(req, resp)
 		} catch (InvalidRequestException exception) {
-			resp.sendError(exception.statusCode, exception.message)
+			val statusCode = switch exception.type {
+				case RESOURCE_NOT_FOUND: 404
+				case INVALID_DOCUMENT_STATE: 409
+				default: 400
+			}
+			resp.sendError(statusCode, exception.message)
 		}
 	}
 	
@@ -100,7 +107,7 @@ class XtextServlet extends HttpServlet {
 			resourceServiceProvider = serviceProviderRegistry.getResourceServiceProvider(emfURI, contentType)
 		
 		if (resourceServiceProvider == null)
-			throw new InvalidRequestException(400, 'Unable to identify the resource type.')
+			throw new InvalidRequestException(UNKNOWN_LANGUAGE, 'Unable to identify the Xtext language.')
 		
 		return resourceServiceProvider.get(Injector)
 	}

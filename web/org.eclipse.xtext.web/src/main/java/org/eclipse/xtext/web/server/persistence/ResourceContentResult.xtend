@@ -5,14 +5,15 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.web.server.data
+package org.eclipse.xtext.web.server.persistence
 
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.web.server.IServiceResult
 
 @Accessors
 @FinalFieldsConstructor
-class ResourceContent extends JsonObject {
+class ResourceContentResult implements IServiceResult {
 	
 	val String fullText
 	

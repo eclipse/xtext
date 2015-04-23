@@ -5,13 +5,8 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.web.server.data
+package org.eclipse.xtext.web.server
 
-import org.eclipse.xtend.lib.annotations.Accessors
-
-@Accessors
-class UpdateDocumentResult extends JsonObject {
-	
-	String stateId
+interface IServiceResult {
 	
 }

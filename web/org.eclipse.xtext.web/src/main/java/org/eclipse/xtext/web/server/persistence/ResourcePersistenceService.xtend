@@ -11,9 +11,10 @@ import com.google.inject.Singleton
 import java.io.IOException
 import org.eclipse.xtext.web.server.ISessionStore
 import org.eclipse.xtext.web.server.InvalidRequestException
-import org.eclipse.xtext.web.server.data.JsonObject
-import org.eclipse.xtext.web.server.data.ResourceContent
-import org.eclipse.xtext.web.server.model.XtextDocument
+import org.eclipse.xtext.web.server.model.DocumentStateResult
+import org.eclipse.xtext.web.server.model.XtextWebDocument
+
+import static org.eclipse.xtext.web.server.InvalidRequestException.Type.*
 
 import static extension org.eclipse.xtext.web.server.ISessionStore.Extensions.*
 
@@ -22,15 +23,15 @@ class ResourcePersistenceService {
 	
 	def load(String resourceId, IServerResourceHandler resourceHandler, ISessionStore sessionStore)
 			throws InvalidRequestException {
-		val document = sessionStore.get(XtextDocument -> resourceId, [
+		val document = sessionStore.get(XtextWebDocument -> resourceId, [
 			try {
 				resourceHandler.get(resourceId)
 			} catch (IOException ioe) {
-				throw new InvalidRequestException(404, 'The requested resource was not found.')
+				throw new InvalidRequestException(RESOURCE_NOT_FOUND, 'The requested resource was not found.')
 			}
 		])
 		document.readOnly[ access |
-			val result = new ResourceContent(access.text)
+			val result = new ResourceContentResult(access.text)
 			result.dirty = access.dirty
 			result.stateId = access.stateId
 			return result
@@ -42,19 +43,19 @@ class ResourcePersistenceService {
 		try {
 			val document = resourceHandler.get(resourceId)
 			document.modify[ access |
-				sessionStore.put(XtextDocument -> resourceId, document)
+				sessionStore.put(XtextWebDocument -> resourceId, document)
 				access.stateId = newStateId
 				access.dirty = false
-				val result = new ResourceContent(access.text)
+				val result = new ResourceContentResult(access.text)
 				result.stateId = newStateId
 				return result
 			]
 		} catch (IOException ioe) {
-			throw new InvalidRequestException(404, 'The requested resource was not found.')
+			throw new InvalidRequestException(RESOURCE_NOT_FOUND, 'The requested resource was not found.')
 		}
 	}
 	
-	def save(XtextDocument document, IServerResourceHandler resourceHandler, String requiredStateId)
+	def save(XtextWebDocument document, IServerResourceHandler resourceHandler, String requiredStateId)
 			throws InvalidRequestException {
 		document.modify[ access |
 			access.checkStateId(requiredStateId)
@@ -62,9 +63,9 @@ class ResourcePersistenceService {
 				resourceHandler.put(access)
 				access.dirty = false
 			} catch (IOException ioe) {
-				throw new InvalidRequestException(404, ioe.message)
+				throw new InvalidRequestException(RESOURCE_NOT_FOUND, ioe.message)
 			}
-			return new JsonObject
+			return new DocumentStateResult(access.stateId)
 		]
 	}
 	

@@ -21,6 +21,7 @@ interface ISessionStore {
 		override remove(Object key) {}
 	}
 	
+	// TODO include locking
 	static class Extensions {
 		static def <T> get(ISessionStore sessionStore, Object key, ()=>T factory) {
 			val sessionValue = sessionStore.get(key)
