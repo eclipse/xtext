@@ -15,6 +15,7 @@ import com.google.inject.binder.LinkedBindingBuilder;
 import com.google.inject.binder.ScopedBindingBuilder;
 import com.google.inject.name.Named;
 import com.google.inject.name.Names;
+import javax.servlet.annotation.WebServlet;
 import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
@@ -30,6 +31,7 @@ import org.eclipse.xtext.web.server.persistence.ResourceBaseProviderImpl;
 import org.eclipse.xtext.web.servlet.XtextServlet;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
+@WebServlet(name = "Xtext Services", urlPatterns = "/xtext-services/*")
 @SuppressWarnings("all")
 public class MyXtextServlet extends XtextServlet {
   public static class EntitiesIdeModule extends AbstractGenericModule {
