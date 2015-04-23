@@ -13,8 +13,10 @@ import com.google.inject.Provider;
 import java.lang.reflect.AccessibleObject;
 import java.util.Collections;
 import java.util.List;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContexts;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
+import org.eclipse.xtend.core.macro.declaration.JvmAnnotationReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
@@ -46,6 +48,8 @@ import org.eclipse.xtend.lib.macro.services.AnnotationReferenceBuildContext;
 import org.eclipse.xtend.lib.macro.services.AnnotationReferenceProvider;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
+import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -205,6 +209,70 @@ public class DeclarationsTest extends AbstractXtendTestCase {
         Object _value = anno.getValue("annotation2Value");
         AnnotationTypeDeclaration _annotationTypeDeclaration_1 = ((AnnotationReference) _value).getAnnotationTypeDeclaration();
         Assert.assertEquals(_annotationTypeDeclaration, _annotationTypeDeclaration_1);
+      }
+    };
+    this.asCompilationUnit(_validFile, _function);
+  }
+  
+  /**
+   * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=465007
+   */
+  @Test
+  public void testAnnotation4() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class MyClass {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@test.Annotation2 String foo");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@test.Annotation2(\"hubble\") String foo2");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@test.Annotation2(value=\"hubble\") String foo3");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    XtendFile _validFile = this.validFile(_builder);
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
+      public void apply(final CompilationUnitImpl it) {
+        TypeLookupImpl _typeLookup = it.getTypeLookup();
+        MutableClassDeclaration _findClass = _typeLookup.findClass("MyClass");
+        Iterable<? extends MutableFieldDeclaration> _declaredFields = _findClass.getDeclaredFields();
+        MutableFieldDeclaration _head = IterableExtensions.head(_declaredFields);
+        Iterable<? extends AnnotationReference> _annotations = _head.getAnnotations();
+        final AnnotationReference anno = IterableExtensions.head(_annotations);
+        AnnotationReferenceProvider _annotationReferenceProvider = it.getAnnotationReferenceProvider();
+        final AnnotationReference copied = _annotationReferenceProvider.newAnnotationReference(anno);
+        JvmAnnotationReference _delegate = ((JvmAnnotationReferenceImpl) copied).getDelegate();
+        EList<JvmAnnotationValue> _explicitValues = _delegate.getExplicitValues();
+        boolean _isEmpty = _explicitValues.isEmpty();
+        Assert.assertTrue(_isEmpty);
+        TypeLookupImpl _typeLookup_1 = it.getTypeLookup();
+        MutableClassDeclaration _findClass_1 = _typeLookup_1.findClass("MyClass");
+        Iterable<? extends MutableFieldDeclaration> _declaredFields_1 = _findClass_1.getDeclaredFields();
+        MutableFieldDeclaration _get = ((MutableFieldDeclaration[])Conversions.unwrapArray(_declaredFields_1, MutableFieldDeclaration.class))[1];
+        Iterable<? extends AnnotationReference> _annotations_1 = _get.getAnnotations();
+        final AnnotationReference anno2 = IterableExtensions.head(_annotations_1);
+        AnnotationReferenceProvider _annotationReferenceProvider_1 = it.getAnnotationReferenceProvider();
+        final AnnotationReference copied2 = _annotationReferenceProvider_1.newAnnotationReference(anno2);
+        JvmAnnotationReference _delegate_1 = ((JvmAnnotationReferenceImpl) copied2).getDelegate();
+        EList<JvmAnnotationValue> _explicitValues_1 = _delegate_1.getExplicitValues();
+        int _size = _explicitValues_1.size();
+        Assert.assertEquals(1, _size);
+        TypeLookupImpl _typeLookup_2 = it.getTypeLookup();
+        MutableClassDeclaration _findClass_2 = _typeLookup_2.findClass("MyClass");
+        Iterable<? extends MutableFieldDeclaration> _declaredFields_2 = _findClass_2.getDeclaredFields();
+        MutableFieldDeclaration _get_1 = ((MutableFieldDeclaration[])Conversions.unwrapArray(_declaredFields_2, MutableFieldDeclaration.class))[2];
+        Iterable<? extends AnnotationReference> _annotations_2 = _get_1.getAnnotations();
+        final AnnotationReference anno3 = IterableExtensions.head(_annotations_2);
+        AnnotationReferenceProvider _annotationReferenceProvider_2 = it.getAnnotationReferenceProvider();
+        final AnnotationReference copied3 = _annotationReferenceProvider_2.newAnnotationReference(anno3);
+        JvmAnnotationReference _delegate_2 = ((JvmAnnotationReferenceImpl) copied3).getDelegate();
+        EList<JvmAnnotationValue> _explicitValues_2 = _delegate_2.getExplicitValues();
+        int _size_1 = _explicitValues_2.size();
+        Assert.assertEquals(1, _size_1);
       }
     };
     this.asCompilationUnit(_validFile, _function);

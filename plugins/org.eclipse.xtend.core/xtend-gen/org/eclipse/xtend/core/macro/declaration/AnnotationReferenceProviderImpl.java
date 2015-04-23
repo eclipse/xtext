@@ -222,14 +222,21 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
           }
         };
         final AnnotationReferenceBuildContextImpl buildContext = ObjectExtensions.<AnnotationReferenceBuildContextImpl>operator_doubleArrow(_annotationReferenceBuildContextImpl, _function);
-        EList<JvmAnnotationValue> _values = baseJvmAnnotationReference.getValues();
+        EList<JvmAnnotationValue> _explicitValues = baseJvmAnnotationReference.getExplicitValues();
         final Function1<JvmAnnotationValue, String> _function_1 = new Function1<JvmAnnotationValue, String>() {
           @Override
           public String apply(final JvmAnnotationValue it) {
-            return it.getValueName();
+            String _elvis = null;
+            String _valueName = it.getValueName();
+            if (_valueName != null) {
+              _elvis = _valueName;
+            } else {
+              _elvis = "value";
+            }
+            return _elvis;
           }
         };
-        List<String> _map = ListExtensions.<JvmAnnotationValue, String>map(_values, _function_1);
+        List<String> _map = ListExtensions.<JvmAnnotationValue, String>map(_explicitValues, _function_1);
         for (final String valueName : _map) {
           {
             final Object value = ((JvmAnnotationReferenceImpl)annotationReference).getValue(valueName);
