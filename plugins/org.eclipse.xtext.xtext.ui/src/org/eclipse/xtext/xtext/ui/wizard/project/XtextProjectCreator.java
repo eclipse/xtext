@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.project;
 
+import static com.google.common.collect.Lists.*;
 import static java.util.Collections.*;
 
 import java.lang.reflect.InvocationTargetException;
@@ -25,7 +26,6 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.wizards.newresource.BasicNewResourceWizard;
 import org.eclipse.xtext.ui.XtextProjectHelper;
-import org.eclipse.xtext.ui.util.FeatureProjectFactory;
 import org.eclipse.xtext.ui.util.IProjectFactoryContributor;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.ui.util.ProjectFactory;
@@ -68,8 +68,6 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 
 	@Inject
 	private Provider<PluginProjectFactory> projectFactoryProvider;
-	@Inject
-	private Provider<FeatureProjectFactory> featureProjFactoryProvider;
 
 	protected XtextProjectInfo getXtextProjectInfo() {
 		return (XtextProjectInfo) getProjectInfo();
@@ -81,13 +79,11 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, getCreateModelProjectMessage(), getMonitorTicks());
 
 		IProject project = createDslProject(subMonitor.newChild(1));
-		createDslUiProject(subMonitor.newChild(1));
-
+		if (getXtextProjectInfo().isCreateUiProject()) {
+			createDslUiProject(subMonitor.newChild(1));
+		}
 		if (getXtextProjectInfo().isCreateTestProject()) {
 			createTestProject(subMonitor.newChild(1));
-		}
-		if (getXtextProjectInfo().isCreateFeatureProject()) {
-			createFeatureProject(subMonitor.newChild(1));
 		}
 
 		IFile dslGrammarFile = project.getFile(getModelFolderName() + "/" + getXtextProjectInfo().getGrammarFilePath());
@@ -98,19 +94,12 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	protected int getMonitorTicks() {
 		int ticks = 2;
 		ticks = getXtextProjectInfo().isCreateTestProject() ? ticks + 1 : ticks;
-		if (getXtextProjectInfo().isCreateFeatureProject()) {
-			ticks++;
-		}
 		return ticks;
 	}
 
 	@Override
 	protected PluginProjectFactory createProjectFactory() {
 		return projectFactoryProvider.get();
-	}
-
-	protected FeatureProjectFactory createFeatureFactory() {
-		return featureProjFactoryProvider.get();
 	}
 
 	@Override
@@ -173,11 +162,6 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	protected List<String> getDslProjectRequiredBundles() {
 		List<String> requiredBundles = Lists.newArrayList("org.eclipse.xtext;visibility:=reexport", //$NON-NLS-1$
 				"org.eclipse.equinox.common;bundle-version=\"3.5.0\""); //$NON-NLS-1$
-
-		String[] bundles = getXtextProjectInfo().getWizardContribution().getRequiredBundles();
-		for (String bundleId : bundles) {
-			requiredBundles.add(bundleId.trim() + ";resolution:=optional"); //$NON-NLS-1$
-		}
 		for (String bundleId : getAdditionalRequiredBundles()) {
 			requiredBundles.add(bundleId.trim());
 		}
@@ -227,24 +211,6 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		return new TestProjectContributor(getXtextProjectInfo());
 	}
 
-	protected IProject createFeatureProject(SubMonitor monitor) throws CoreException {
-		FeatureProjectFactory factory = createFeatureFactory();
-		configureFeatureProjectFactory(factory);
-		return factory.createProject(monitor, null);
-	}
-
-	protected void configureFeatureProjectFactory(FeatureProjectFactory factory) {
-		factory.setProjectName(getXtextProjectInfo().getFeatureProjectName());
-		factory.setLocation(getXtextProjectInfo().getFeatureProjectLocation());
-		factory.setFeatureLabel(String.format(Messages.XtextProjectCreator_FeatureLabel, getXtextProjectInfo()
-				.getLanguageNameAbbreviation()));
-		factory.addProjectNatures("org.eclipse.pde.FeatureNature");
-		factory.addBuilderIds("org.eclipse.pde.FeatureBuilder");
-		factory.addBundle(getXtextProjectInfo().getProjectName());
-		factory.addBundle(getXtextProjectInfo().getUiProjectName());
-		factory.addWorkingSets(Arrays.asList(getXtextProjectInfo().getWorkingSets()));
-	}
-
 	protected void configureTestProjectFactory(PluginProjectFactory factory) {
 		configureProjectFactory(factory);
 		factory.addFolders(singletonList(XTEND_GEN_ROOT));
@@ -266,12 +232,16 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	}
 
 	protected List<String> getTestProjectRequiredBundles() {
-		List<String> requiredBundles = Lists.newArrayList(getXtextProjectInfo().getProjectName(), getXtextProjectInfo()
-				.getUiProjectName(), "org.eclipse.core.runtime", //$NON-NLS-1$
-				"org.eclipse.xtext.junit4", //$NON-NLS-1$
-				"org.eclipse.xtext.xbase.lib", //$NON-NLS-1$
-				"org.eclipse.ui.workbench;resolution:=optional" //$NON-NLS-1$
-		); //$NON-NLS-1$
+		List<String> requiredBundles = newArrayList(
+			getXtextProjectInfo().getProjectName(),
+			"org.eclipse.xtext.junit4",
+			"org.eclipse.xtext.xbase.lib"
+		);
+		if (getXtextProjectInfo().isCreateUiProject()) {
+			requiredBundles.add(getXtextProjectInfo().getUiProjectName());
+			requiredBundles.add("org.eclipse.core.runtime");
+			requiredBundles.add("org.eclipse.ui.workbench;resolution:=optional");
+		}
 		return requiredBundles;
 	}
 

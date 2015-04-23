@@ -10,8 +10,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.project;
 
-import java.util.Map;
-
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -32,6 +30,7 @@ import com.google.inject.Inject;
 public class NewXtextProjectWizard extends XtextNewProjectWizard {
 
 	private WizardNewXtextProjectCreationPage mainPage;
+	private AdvancedNewProjectPage advancedPage;
 
 	/**
 	 * Constructs a new wizard
@@ -47,20 +46,20 @@ public class NewXtextProjectWizard extends XtextNewProjectWizard {
 	public void addPages() {
 		super.addPages();
 		mainPage = new WizardNewXtextProjectCreationPage("mainPage", this.selection); //$NON-NLS-1$
+		advancedPage = new AdvancedNewProjectPage("advancedPage");
 		addPage(mainPage);
+		addPage(advancedPage);
 	}
 
 	@Override
 	protected IProjectInfo getProjectInfo() {
 		XtextProjectInfo projectInfo = createProjectInfo();
-		projectInfo.setCreateTestProject(true);
-		projectInfo.setCreateFeatureProject(mainPage.isCreateFeatureProject());
+		projectInfo.setCreateUiProject(advancedPage.isCreateUiProject());
+		projectInfo.setCreateTestProject(advancedPage.isCreateTestProject());
 		projectInfo.setFileExtension(mainPage.getFileExtensions());
 		projectInfo.setLanguageName(mainPage.getLanguageName());
 		projectInfo.setProjectName(mainPage.getProjectName());
 		projectInfo.setWorkingSets(mainPage.getSelectedWorkingSets());
-		Map<String, WizardContribution> contributions = WizardContribution.getFromRegistry();
-		projectInfo.setWizardContribution(contributions.get(mainPage.getGeneratorConfig()));
 		projectInfo.setProjectsRootLocation(mainPage.getLocationPath());
 		projectInfo.setWorkbench(getWorkbench());
 		projectInfo.setCreateEclipseRuntimeLaunchConfig(!existsEclipseRuntimeLaunchConfig());
