@@ -18,6 +18,11 @@ public interface ISessionStore {
     }
     
     @Override
+    public <T extends Object> T get(final Object key, final Function0<? extends T> factory) {
+      return null;
+    }
+    
+    @Override
     public void put(final Object key, final Object value) {
     }
     
@@ -26,20 +31,9 @@ public interface ISessionStore {
     }
   }
   
-  public static class Extensions {
-    public static <T extends Object> T get(final ISessionStore sessionStore, final Object key, final Function0<? extends T> factory) {
-      final T sessionValue = sessionStore.<T>get(key);
-      if ((sessionValue != null)) {
-        return sessionValue;
-      } else {
-        final T factoryValue = factory.apply();
-        sessionStore.put(key, factoryValue);
-        return factoryValue;
-      }
-    }
-  }
-  
   public abstract <T extends Object> T get(final Object key);
+  
+  public abstract <T extends Object> T get(final Object key, final Function0<? extends T> factory);
   
   public abstract void put(final Object key, final Object value);
   

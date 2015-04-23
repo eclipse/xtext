@@ -8,43 +8,46 @@
 package org.eclipse.xtext.web.server.model;
 
 import com.google.inject.Singleton;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.model.DocumentStateResult;
-import org.eclipse.xtext.web.server.model.XtextWebDocument;
+import org.eclipse.xtext.web.server.model.IXtextWebDocument;
+import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess;
 
 @Singleton
 @SuppressWarnings("all")
 public class UpdateDocumentService {
-  public DocumentStateResult updateFullText(final XtextWebDocument document, final String fullText, final String requiredStateId, final String newStateId) throws InvalidRequestException {
-    final IUnitOfWork<DocumentStateResult, XtextWebDocument.ModifyAccess> _function = new IUnitOfWork<DocumentStateResult, XtextWebDocument.ModifyAccess>() {
+  public DocumentStateResult updateFullText(final XtextWebDocumentAccess document, final String fullText) throws InvalidRequestException {
+    final CancelableUnitOfWork<DocumentStateResult, IXtextWebDocument> _function = new CancelableUnitOfWork<DocumentStateResult, IXtextWebDocument>() {
       @Override
-      public DocumentStateResult exec(final XtextWebDocument.ModifyAccess access) throws Exception {
-        access.checkStateId(requiredStateId);
-        access.setText(fullText);
-        if ((newStateId != null)) {
-          access.setStateId(newStateId);
-        }
-        String _stateId = access.getStateId();
+      public DocumentStateResult exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
+        it.setText(fullText);
+        UpdateDocumentService.this.postParse(it, cancelIndicator);
+        String _stateId = it.getStateId();
         return new DocumentStateResult(_stateId);
       }
     };
     return document.<DocumentStateResult>modify(_function);
   }
   
-  public DocumentStateResult updateDeltaText(final XtextWebDocument document, final String deltaText, final int offset, final int replaceLength, final String requiredStateId, final String newStateId) throws InvalidRequestException {
-    final IUnitOfWork<DocumentStateResult, XtextWebDocument.ModifyAccess> _function = new IUnitOfWork<DocumentStateResult, XtextWebDocument.ModifyAccess>() {
+  public DocumentStateResult updateDeltaText(final XtextWebDocumentAccess document, final String deltaText, final int offset, final int replaceLength) throws InvalidRequestException {
+    final CancelableUnitOfWork<DocumentStateResult, IXtextWebDocument> _function = new CancelableUnitOfWork<DocumentStateResult, IXtextWebDocument>() {
       @Override
-      public DocumentStateResult exec(final XtextWebDocument.ModifyAccess access) throws Exception {
-        access.checkStateId(requiredStateId);
-        access.updateText(deltaText, offset, replaceLength);
-        if ((newStateId != null)) {
-          access.setStateId(newStateId);
-        }
-        String _stateId = access.getStateId();
+      public DocumentStateResult exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
+        it.updateText(deltaText, offset, replaceLength);
+        UpdateDocumentService.this.postParse(it, cancelIndicator);
+        String _stateId = it.getStateId();
         return new DocumentStateResult(_stateId);
       }
     };
     return document.<DocumentStateResult>modify(_function);
+  }
+  
+  protected void postParse(final IXtextWebDocument document, final CancelIndicator cancelIndicator) {
+    XtextResource _resource = document.getResource();
+    EcoreUtil2.resolveLazyCrossReferences(_resource, cancelIndicator);
   }
 }

@@ -12,19 +12,20 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.web.server.InvalidRequestException;
-import org.eclipse.xtext.web.server.model.XtextWebDocument;
+import org.eclipse.xtext.web.server.model.IXtextWebDocument;
+import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess;
 import org.eclipse.xtext.web.server.validation.ValidationResult;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @Singleton
 @SuppressWarnings("all")
@@ -32,17 +33,12 @@ public class ValidationService {
   @Inject
   private IResourceValidator resourceValidator;
   
-  public ValidationResult validate(final XtextWebDocument document, final String requiredStateId) throws InvalidRequestException {
-    final IUnitOfWork<List<Issue>, XtextWebDocument.ReadAccess> _function = new IUnitOfWork<List<Issue>, XtextWebDocument.ReadAccess>() {
+  public ValidationResult validate(final XtextWebDocumentAccess document) throws InvalidRequestException {
+    final CancelableUnitOfWork<List<Issue>, IXtextWebDocument> _function = new CancelableUnitOfWork<List<Issue>, IXtextWebDocument>() {
       @Override
-      public List<Issue> exec(final XtextWebDocument.ReadAccess access) throws Exception {
-        List<Issue> _xblockexpression = null;
-        {
-          access.checkStateId(requiredStateId);
-          XtextResource _resource = access.getResource();
-          _xblockexpression = ValidationService.this.resourceValidator.validate(_resource, CheckMode.ALL, CancelIndicator.NullImpl);
-        }
-        return _xblockexpression;
+      public List<Issue> exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
+        XtextResource _resource = it.getResource();
+        return ValidationService.this.resourceValidator.validate(_resource, CheckMode.ALL, cancelIndicator);
       }
     };
     final List<Issue> issues = document.<List<Issue>>readOnly(_function);
@@ -55,9 +51,9 @@ public class ValidationService {
       }
     };
     Iterable<Issue> _filter = IterableExtensions.<Issue>filter(issues, _function_1);
-    final Consumer<Issue> _function_2 = new Consumer<Issue>() {
+    final Procedure1<Issue> _function_2 = new Procedure1<Issue>() {
       @Override
-      public void accept(final Issue issue) {
+      public void apply(final Issue issue) {
         ArrayList<ValidationResult.Entry> _entries = result.getEntries();
         String _message = issue.getMessage();
         Severity _severity = issue.getSeverity();
@@ -72,7 +68,7 @@ public class ValidationService {
         _entries.add(_entry);
       }
     };
-    _filter.forEach(_function_2);
+    IterableExtensions.<Issue>forEach(_filter, _function_2);
     return result;
   }
   

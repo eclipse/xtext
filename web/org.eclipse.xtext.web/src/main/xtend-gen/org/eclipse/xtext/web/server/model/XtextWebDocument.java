@@ -7,118 +7,28 @@
  */
 package org.eclipse.xtext.web.server.model;
 
-import com.google.common.base.Objects;
-import com.google.inject.Singleton;
-import java.util.concurrent.locks.ReentrantLock;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.eclipse.xtext.web.server.InvalidRequestException;
+import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
-public class XtextWebDocument {
-  public static class ReadAccess {
-    protected final XtextWebDocument document;
-    
-    private ReadAccess(final XtextWebDocument document) {
-      this.document = document;
-    }
-    
-    public XtextWebDocument getDocument() {
-      return this.document;
-    }
-    
-    public XtextResource getResource() {
-      return this.document.resource;
-    }
-    
-    public String getText() {
-      return this.document.text;
-    }
-    
-    public String getStateId() {
-      return this.document.stateId;
-    }
-    
-    public void checkStateId(final String requiredStateId) throws InvalidRequestException {
-      boolean _and = false;
-      if (!(requiredStateId != null)) {
-        _and = false;
-      } else {
-        boolean _notEquals = (!Objects.equal(requiredStateId, this.document.stateId));
-        _and = _notEquals;
-      }
-      if (_and) {
-        throw new InvalidRequestException(InvalidRequestException.Type.INVALID_DOCUMENT_STATE, "The given state id does not match the current state.");
-      }
-    }
-    
-    public boolean isDirty() {
-      return this.document.dirty;
-    }
-  }
-  
-  public static class ModifyAccess extends XtextWebDocument.ReadAccess {
-    private ModifyAccess(final XtextWebDocument document) {
-      super(document);
-    }
-    
-    public String setText(final String text) {
-      try {
-        String _xblockexpression = null;
-        {
-          this.document.resource.reparse(text);
-          _xblockexpression = this.document.refresh();
-        }
-        return _xblockexpression;
-      } catch (Throwable _e) {
-        throw Exceptions.sneakyThrow(_e);
-      }
-    }
-    
-    public String updateText(final String text, final int offset, final int replaceLength) {
-      String _xblockexpression = null;
-      {
-        this.document.resource.update(offset, replaceLength, text);
-        _xblockexpression = this.document.refresh();
-      }
-      return _xblockexpression;
-    }
-    
-    public String setStateId(final String stateId) {
-      return this.document.stateId = stateId;
-    }
-    
-    public boolean setDirty(final boolean dirty) {
-      return this.document.dirty = dirty;
-    }
-  }
-  
-  @Singleton
-  public static class CreationLock {
-  }
-  
+public class XtextWebDocument implements IXtextWebDocument {
   @Accessors(AccessorType.PUBLIC_GETTER)
   private final String resourceId;
   
+  @Accessors(AccessorType.PUBLIC_GETTER)
   private final XtextResource resource;
   
+  @Accessors(AccessorType.PUBLIC_GETTER)
   private String text;
   
-  private String stateId;
-  
+  @Accessors
   private boolean dirty;
-  
-  private final ReentrantLock lock = new ReentrantLock();
-  
-  private final XtextWebDocument.ReadAccess readOnlyAccess = new XtextWebDocument.ReadAccess(this);
-  
-  private final XtextWebDocument.ModifyAccess modifyAccess = new XtextWebDocument.ModifyAccess(this);
   
   public XtextWebDocument(final XtextResource resource, final String resourceId) {
     this.resource = resource;
@@ -126,7 +36,7 @@ public class XtextWebDocument {
     this.refresh();
   }
   
-  protected String refresh() {
+  protected void refresh() {
     String _elvis = null;
     IParseResult _parseResult = this.resource.getParseResult();
     ICompositeNode _rootNode = null;
@@ -142,49 +52,64 @@ public class XtextWebDocument {
     } else {
       _elvis = "";
     }
-    return this.text = _elvis;
+    this.text = _elvis;
+    final long stateId = this.computeStateId(this.text);
+    this.resource.setModificationStamp(stateId);
   }
   
-  public <T extends Object> T readOnly(final IUnitOfWork<T, XtextWebDocument.ReadAccess> work) {
+  @Override
+  public String getStateId() {
+    long _modificationStamp = this.resource.getModificationStamp();
+    return Long.toString(_modificationStamp, 16);
+  }
+  
+  protected long computeStateId(final String text) {
+    long hash = 0l;
+    for (int i = 0; (i < text.length()); i++) {
+      char _charAt = text.charAt(i);
+      long _plus = ((31 * hash) + _charAt);
+      hash = _plus;
+    }
+    return hash;
+  }
+  
+  @Override
+  public void setText(final String text) {
     try {
-      T _xblockexpression = null;
-      {
-        this.lock.lock();
-        T _xtrycatchfinallyexpression = null;
-        try {
-          _xtrycatchfinallyexpression = work.exec(this.readOnlyAccess);
-        } finally {
-          this.lock.unlock();
-        }
-        _xblockexpression = _xtrycatchfinallyexpression;
-      }
-      return _xblockexpression;
+      this.resource.reparse(text);
+      this.refresh();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  public <T extends Object> T modify(final IUnitOfWork<T, XtextWebDocument.ModifyAccess> work) {
-    try {
-      T _xblockexpression = null;
-      {
-        this.lock.lock();
-        T _xtrycatchfinallyexpression = null;
-        try {
-          _xtrycatchfinallyexpression = work.exec(this.modifyAccess);
-        } finally {
-          this.lock.unlock();
-        }
-        _xblockexpression = _xtrycatchfinallyexpression;
-      }
-      return _xblockexpression;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  @Override
+  public void updateText(final String text, final int offset, final int replaceLength) {
+    this.resource.update(offset, replaceLength, text);
+    this.refresh();
   }
   
   @Pure
   public String getResourceId() {
     return this.resourceId;
+  }
+  
+  @Pure
+  public XtextResource getResource() {
+    return this.resource;
+  }
+  
+  @Pure
+  public String getText() {
+    return this.text;
+  }
+  
+  @Pure
+  public boolean isDirty() {
+    return this.dirty;
+  }
+  
+  public void setDirty(final boolean dirty) {
+    this.dirty = dirty;
   }
 }

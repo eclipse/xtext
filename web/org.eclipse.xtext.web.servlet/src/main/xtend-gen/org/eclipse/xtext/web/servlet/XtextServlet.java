@@ -17,7 +17,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Consumer;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,6 +32,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class XtextServlet extends HttpServlet {
@@ -181,16 +181,16 @@ public class XtextServlet extends HttpServlet {
       }
     };
     Iterable<Map.Entry<String, String[]>> _filter = IterableExtensions.<Map.Entry<String, String[]>>filter(_entrySet, _function);
-    final Consumer<Map.Entry<String, String[]>> _function_1 = new Consumer<Map.Entry<String, String[]>>() {
+    final Procedure1<Map.Entry<String, String[]>> _function_1 = new Procedure1<Map.Entry<String, String[]>>() {
       @Override
-      public void accept(final Map.Entry<String, String[]> it) {
+      public void apply(final Map.Entry<String, String[]> it) {
         String _key = it.getKey();
         String[] _value = it.getValue();
         String _get = _value[0];
         result.put(_key, _get);
       }
     };
-    _filter.forEach(_function_1);
+    IterableExtensions.<Map.Entry<String, String[]>>forEach(_filter, _function_1);
     return Collections.<String, String>unmodifiableMap(result);
   }
   

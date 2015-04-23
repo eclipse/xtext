@@ -9,11 +9,14 @@ package org.eclipse.xtext.web.server.persistence;
 
 import com.google.inject.Singleton;
 import java.io.IOException;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.web.server.ISessionStore;
 import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.model.DocumentStateResult;
+import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 import org.eclipse.xtext.web.server.model.XtextWebDocument;
+import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess;
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler;
 import org.eclipse.xtext.web.server.persistence.ResourceContentResult;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -27,11 +30,11 @@ public class ResourcePersistenceService {
     ResourceContentResult _xblockexpression = null;
     {
       Pair<Class<XtextWebDocument>, String> _mappedTo = Pair.<Class<XtextWebDocument>, String>of(XtextWebDocument.class, resourceId);
-      final Function0<XtextWebDocument> _function = new Function0<XtextWebDocument>() {
+      final Function0<IXtextWebDocument> _function = new Function0<IXtextWebDocument>() {
         @Override
-        public XtextWebDocument apply() {
+        public IXtextWebDocument apply() {
           try {
-            XtextWebDocument _xtrycatchfinallyexpression = null;
+            IXtextWebDocument _xtrycatchfinallyexpression = null;
             try {
               _xtrycatchfinallyexpression = resourceHandler.get(resourceId);
             } catch (final Throwable _t) {
@@ -48,44 +51,46 @@ public class ResourcePersistenceService {
           }
         }
       };
-      final XtextWebDocument document = ISessionStore.Extensions.<XtextWebDocument>get(sessionStore, _mappedTo, _function);
-      final IUnitOfWork<ResourceContentResult, XtextWebDocument.ReadAccess> _function_1 = new IUnitOfWork<ResourceContentResult, XtextWebDocument.ReadAccess>() {
+      final IXtextWebDocument document = sessionStore.<IXtextWebDocument>get(_mappedTo, _function);
+      XtextWebDocumentAccess _xtextWebDocumentAccess = new XtextWebDocumentAccess(document);
+      final CancelableUnitOfWork<ResourceContentResult, IXtextWebDocument> _function_1 = new CancelableUnitOfWork<ResourceContentResult, IXtextWebDocument>() {
         @Override
-        public ResourceContentResult exec(final XtextWebDocument.ReadAccess access) throws Exception {
-          String _text = access.getText();
+        public ResourceContentResult exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
+          String _text = it.getText();
           final ResourceContentResult result = new ResourceContentResult(_text);
-          boolean _isDirty = access.isDirty();
+          boolean _isDirty = it.isDirty();
           result.setDirty(_isDirty);
-          String _stateId = access.getStateId();
+          String _stateId = it.getStateId();
           result.setStateId(_stateId);
           return result;
         }
       };
-      _xblockexpression = document.<ResourceContentResult>readOnly(_function_1);
+      _xblockexpression = _xtextWebDocumentAccess.<ResourceContentResult>readOnly(_function_1);
     }
     return _xblockexpression;
   }
   
-  public ResourceContentResult revert(final String resourceId, final String newStateId, final IServerResourceHandler resourceHandler, final ISessionStore sessionStore) throws InvalidRequestException {
+  public ResourceContentResult revert(final String resourceId, final IServerResourceHandler resourceHandler, final ISessionStore sessionStore) throws InvalidRequestException {
     ResourceContentResult _xtrycatchfinallyexpression = null;
     try {
       ResourceContentResult _xblockexpression = null;
       {
-        final XtextWebDocument document = resourceHandler.get(resourceId);
-        final IUnitOfWork<ResourceContentResult, XtextWebDocument.ModifyAccess> _function = new IUnitOfWork<ResourceContentResult, XtextWebDocument.ModifyAccess>() {
+        final IXtextWebDocument document = resourceHandler.get(resourceId);
+        XtextWebDocumentAccess _xtextWebDocumentAccess = new XtextWebDocumentAccess(document);
+        final CancelableUnitOfWork<ResourceContentResult, IXtextWebDocument> _function = new CancelableUnitOfWork<ResourceContentResult, IXtextWebDocument>() {
           @Override
-          public ResourceContentResult exec(final XtextWebDocument.ModifyAccess access) throws Exception {
+          public ResourceContentResult exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
             Pair<Class<XtextWebDocument>, String> _mappedTo = Pair.<Class<XtextWebDocument>, String>of(XtextWebDocument.class, resourceId);
             sessionStore.put(_mappedTo, document);
-            access.setStateId(newStateId);
-            access.setDirty(false);
-            String _text = access.getText();
+            it.setDirty(false);
+            String _text = it.getText();
             final ResourceContentResult result = new ResourceContentResult(_text);
-            result.setStateId(newStateId);
+            String _stateId = it.getStateId();
+            result.setStateId(_stateId);
             return result;
           }
         };
-        _xblockexpression = document.<ResourceContentResult>modify(_function);
+        _xblockexpression = _xtextWebDocumentAccess.<ResourceContentResult>modify(_function);
       }
       _xtrycatchfinallyexpression = _xblockexpression;
     } catch (final Throwable _t) {
@@ -99,14 +104,13 @@ public class ResourcePersistenceService {
     return _xtrycatchfinallyexpression;
   }
   
-  public DocumentStateResult save(final XtextWebDocument document, final IServerResourceHandler resourceHandler, final String requiredStateId) throws InvalidRequestException {
-    final IUnitOfWork<DocumentStateResult, XtextWebDocument.ModifyAccess> _function = new IUnitOfWork<DocumentStateResult, XtextWebDocument.ModifyAccess>() {
+  public DocumentStateResult save(final XtextWebDocumentAccess document, final IServerResourceHandler resourceHandler) throws InvalidRequestException {
+    final CancelableUnitOfWork<DocumentStateResult, IXtextWebDocument> _function = new CancelableUnitOfWork<DocumentStateResult, IXtextWebDocument>() {
       @Override
-      public DocumentStateResult exec(final XtextWebDocument.ModifyAccess access) throws Exception {
-        access.checkStateId(requiredStateId);
+      public DocumentStateResult exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
         try {
-          resourceHandler.put(access);
-          access.setDirty(false);
+          resourceHandler.put(it);
+          it.setDirty(false);
         } catch (final Throwable _t) {
           if (_t instanceof IOException) {
             final IOException ioe = (IOException)_t;
@@ -116,7 +120,7 @@ public class ResourcePersistenceService {
             throw Exceptions.sneakyThrow(_t);
           }
         }
-        String _stateId = access.getStateId();
+        String _stateId = it.getStateId();
         return new DocumentStateResult(_stateId);
       }
     };

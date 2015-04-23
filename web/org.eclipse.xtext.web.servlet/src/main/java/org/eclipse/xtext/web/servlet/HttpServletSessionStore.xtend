@@ -20,6 +20,19 @@ class HttpServletSessionStore implements ISessionStore {
 		session.getAttribute(key.toString) as T
 	}
 	
+	override <T> get(Object key, ()=>T factory) {
+		synchronized (session) {
+			val sessionValue = get(key)
+			if (sessionValue !== null) {
+				return sessionValue
+			} else {
+				val factoryValue = factory.apply
+				put(key, factoryValue)
+				return factoryValue
+			}
+		}
+	}
+	
 	override put(Object key, Object value) {
 		session.setAttribute(key.toString, value)
 	}

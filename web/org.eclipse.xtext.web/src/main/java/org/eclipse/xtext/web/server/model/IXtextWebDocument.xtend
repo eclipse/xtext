@@ -5,23 +5,26 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.web.server
+package org.eclipse.xtext.web.server.model
 
-interface ISessionStore {
+import org.eclipse.xtext.resource.XtextResource
+
+interface IXtextWebDocument {
 	
-	def <T> T get(Object key)
+	def XtextResource getResource()
 	
-	def <T> T get(Object key, ()=>T factory)
+	def String getResourceId()
 	
-	def void put(Object key, Object value)
+	def String getText()
 	
-	def void remove(Object key)
+	def String getStateId()
 	
-	static class NullImpl implements ISessionStore {
-		override <T> get(Object key) {}
-		override <T> get(Object key, ()=>T factory) {}
-		override put(Object key, Object value) {}
-		override remove(Object key) {}
-	}
+	def boolean isDirty()
+	
+	def void setText(String text)
+	
+	def void updateText(String text, int offset, int replaceLength)
+	
+	def void setDirty(boolean dirty)
 	
 }

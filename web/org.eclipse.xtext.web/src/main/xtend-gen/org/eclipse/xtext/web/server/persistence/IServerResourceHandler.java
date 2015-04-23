@@ -9,24 +9,24 @@ package org.eclipse.xtext.web.server.persistence;
 
 import com.google.inject.ImplementedBy;
 import java.io.IOException;
-import org.eclipse.xtext.web.server.model.XtextWebDocument;
+import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 
 @ImplementedBy(IServerResourceHandler.NullImpl.class)
 @SuppressWarnings("all")
 public interface IServerResourceHandler {
   public static class NullImpl implements IServerResourceHandler {
     @Override
-    public XtextWebDocument get(final String resourceId) throws IOException {
+    public IXtextWebDocument get(final String resourceId) throws IOException {
       throw new IOException("This server does not support resource handling.");
     }
     
     @Override
-    public void put(final XtextWebDocument.ReadAccess documentAccess) throws IOException {
+    public void put(final IXtextWebDocument document) throws IOException {
       throw new IOException("This server does not support resource handling.");
     }
   }
   
-  public abstract XtextWebDocument get(final String resourceId) throws IOException;
+  public abstract IXtextWebDocument get(final String resourceId) throws IOException;
   
-  public abstract void put(final XtextWebDocument.ReadAccess documentAccess) throws IOException;
+  public abstract void put(final IXtextWebDocument document) throws IOException;
 }

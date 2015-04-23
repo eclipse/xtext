@@ -14,6 +14,7 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -22,11 +23,13 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ITextRegion;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
-import org.eclipse.xtext.web.server.model.XtextWebDocument;
+import org.eclipse.xtext.web.server.model.IXtextWebDocument;
+import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -40,7 +43,7 @@ public class ContentAssistService {
   
   private final ExecutorService pool = Executors.newFixedThreadPool(3);
   
-  public ContentAssistResult createProposals(final XtextWebDocument document, final ITextRegion selection, final int offset, final String requiredStateId) throws InvalidRequestException {
+  public ContentAssistResult createProposals(final XtextWebDocumentAccess document, final ITextRegion selection, final int offset) throws InvalidRequestException {
     ContentAssistContextFactory _get = this.contextFactoryProvider.get();
     final Procedure1<ContentAssistContextFactory> _function = new Procedure1<ContentAssistContextFactory>() {
       @Override
@@ -49,17 +52,12 @@ public class ContentAssistService {
       }
     };
     final ContentAssistContextFactory contextFactory = ObjectExtensions.<ContentAssistContextFactory>operator_doubleArrow(_get, _function);
-    final IUnitOfWork<ContentAssistContext[], XtextWebDocument.ReadAccess> _function_1 = new IUnitOfWork<ContentAssistContext[], XtextWebDocument.ReadAccess>() {
+    final CancelableUnitOfWork<ContentAssistContext[], IXtextWebDocument> _function_1 = new CancelableUnitOfWork<ContentAssistContext[], IXtextWebDocument>() {
       @Override
-      public ContentAssistContext[] exec(final XtextWebDocument.ReadAccess access) throws Exception {
-        ContentAssistContext[] _xblockexpression = null;
-        {
-          access.checkStateId(requiredStateId);
-          String _text = access.getText();
-          XtextResource _resource = access.getResource();
-          _xblockexpression = contextFactory.create(_text, selection, offset, _resource);
-        }
-        return _xblockexpression;
+      public ContentAssistContext[] exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
+        String _text = it.getText();
+        XtextResource _resource = it.getResource();
+        return contextFactory.create(_text, selection, offset, _resource);
       }
     };
     final ContentAssistContext[] contexts = document.<ContentAssistContext[]>readOnly(_function_1);
@@ -79,7 +77,7 @@ public class ContentAssistService {
         return _proposal.compareTo(_proposal_1);
       }
     };
-    _entries.sort(_function_2);
+    Collections.<ContentAssistResult.Entry>sort(_entries, _function_2);
     return result;
   }
   

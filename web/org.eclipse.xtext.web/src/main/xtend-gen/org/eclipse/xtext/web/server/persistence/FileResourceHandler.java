@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 import org.eclipse.xtext.web.server.model.XtextWebDocument;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler;
@@ -37,7 +38,7 @@ public class FileResourceHandler implements IServerResourceHandler {
   private IEncodingProvider encodingProvider;
   
   @Override
-  public XtextWebDocument get(final String resourceId) throws IOException {
+  public IXtextWebDocument get(final String resourceId) throws IOException {
     try {
       try {
         final URI uri = this.resourceBaseProvider.getFileURI(resourceId);
@@ -59,19 +60,18 @@ public class FileResourceHandler implements IServerResourceHandler {
   }
   
   @Override
-  public void put(final XtextWebDocument.ReadAccess documentAccess) throws IOException {
+  public void put(final IXtextWebDocument document) throws IOException {
     try {
       try {
-        XtextWebDocument _document = documentAccess.getDocument();
-        String _resourceId = _document.getResourceId();
+        String _resourceId = document.getResourceId();
         final URI uri = this.resourceBaseProvider.getFileURI(_resourceId);
-        XtextResource _resource = documentAccess.getResource();
+        XtextResource _resource = document.getResource();
         ResourceSet _resourceSet = _resource.getResourceSet();
         URIConverter _uRIConverter = _resourceSet.getURIConverter();
         final OutputStream outputStream = _uRIConverter.createOutputStream(uri);
         String _encoding = this.encodingProvider.getEncoding(uri);
         final OutputStreamWriter writer = new OutputStreamWriter(outputStream, _encoding);
-        String _text = documentAccess.getText();
+        String _text = document.getText();
         writer.write(_text);
         writer.close();
       } catch (final Throwable _t) {

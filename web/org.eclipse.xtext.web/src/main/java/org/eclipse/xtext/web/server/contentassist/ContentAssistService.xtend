@@ -10,6 +10,7 @@ package org.eclipse.xtext.web.server.contentassist
 import com.google.inject.Inject
 import com.google.inject.Provider
 import com.google.inject.Singleton
+import java.util.Collections
 import java.util.concurrent.Executors
 import org.eclipse.xtext.AbstractElement
 import org.eclipse.xtext.Keyword
@@ -17,7 +18,7 @@ import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory
 import org.eclipse.xtext.util.ITextRegion
 import org.eclipse.xtext.web.server.InvalidRequestException
-import org.eclipse.xtext.web.server.model.XtextWebDocument
+import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess
 
 @Singleton
 class ContentAssistService {
@@ -26,12 +27,11 @@ class ContentAssistService {
 	
 	val pool = Executors.newFixedThreadPool(3)
 	
-	def createProposals(XtextWebDocument document, ITextRegion selection, int offset, String requiredStateId)
+	def createProposals(XtextWebDocumentAccess document, ITextRegion selection, int offset)
 			throws InvalidRequestException {
 		val contextFactory = contextFactoryProvider.get() => [it.pool = pool]
-		val contexts = document.readOnly[ access |
-			access.checkStateId(requiredStateId)
-			contextFactory.create(access.text, selection, offset, access.resource)
+		val contexts = document.readOnly[ it, cancelIndicator |
+			contextFactory.create(text, selection, offset, resource)
 		]
 		val result = new ContentAssistResult
 		for (context : contexts) {
@@ -39,7 +39,7 @@ class ContentAssistService {
 				createProposal(element, context, result)
 			}
 		}
-		result.entries.sort[a, b | a.proposal.compareTo(b.proposal)]
+		Collections.sort(result.entries, [a, b | a.proposal.compareTo(b.proposal)])
 		return result
 	}
 

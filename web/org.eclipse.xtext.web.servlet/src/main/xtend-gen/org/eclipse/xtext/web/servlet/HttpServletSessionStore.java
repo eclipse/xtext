@@ -10,6 +10,7 @@ package org.eclipse.xtext.web.servlet;
 import javax.servlet.http.HttpSession;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.web.server.ISessionStore;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 
 @FinalFieldsConstructor
 @SuppressWarnings("all")
@@ -21,6 +22,23 @@ public class HttpServletSessionStore implements ISessionStore {
     String _string = key.toString();
     Object _attribute = this.session.getAttribute(_string);
     return ((T) _attribute);
+  }
+  
+  @Override
+  public <T extends Object> T get(final Object key, final Function0<? extends T> factory) {
+    /* this.session; */
+    synchronized (this.session) {
+      {
+        final T sessionValue = this.<T>get(key);
+        if ((sessionValue != null)) {
+          return sessionValue;
+        } else {
+          final T factoryValue = factory.apply();
+          this.put(key, factoryValue);
+          return factoryValue;
+        }
+      }
+    }
   }
   
   @Override

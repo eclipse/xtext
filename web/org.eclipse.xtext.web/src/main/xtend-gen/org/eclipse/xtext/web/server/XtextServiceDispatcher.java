@@ -29,8 +29,10 @@ import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.web.server.ISessionStore;
 import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistService;
+import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 import org.eclipse.xtext.web.server.model.UpdateDocumentService;
 import org.eclipse.xtext.web.server.model.XtextWebDocument;
+import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess;
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler;
 import org.eclipse.xtext.web.server.persistence.ResourceContentResult;
 import org.eclipse.xtext.web.server.persistence.ResourcePersistenceService;
@@ -207,9 +209,7 @@ public class XtextServiceDispatcher {
               try {
                 ResourceContentResult _xifexpression = null;
                 if (revert) {
-                  String _get = parameters.get("newState");
-                  _xifexpression = XtextServiceDispatcher.this.resourcePersistenceService.revert(resourceId, _get, 
-                    XtextServiceDispatcher.this.resourceHandler, sessionStore);
+                  _xifexpression = XtextServiceDispatcher.this.resourcePersistenceService.revert(resourceId, XtextServiceDispatcher.this.resourceHandler, sessionStore);
                 } else {
                   _xifexpression = XtextServiceDispatcher.this.resourcePersistenceService.load(resourceId, XtextServiceDispatcher.this.resourceHandler, sessionStore);
                 }
@@ -231,8 +231,7 @@ public class XtextServiceDispatcher {
   protected XtextServiceDispatcher.ServiceDescriptor getSaveResourceService(final Map<String, String> parameters, final ISessionStore sessionStore) throws InvalidRequestException {
     XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
     {
-      final XtextWebDocument document = this.getDocument(parameters, sessionStore);
-      final String requiredStateId = parameters.get("requiredState");
+      final XtextWebDocumentAccess document = this.getDocumentAccess(parameters, sessionStore);
       XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
       final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
         @Override
@@ -241,7 +240,7 @@ public class XtextServiceDispatcher {
             @Override
             public IServiceResult apply() {
               try {
-                return XtextServiceDispatcher.this.resourcePersistenceService.save(document, XtextServiceDispatcher.this.resourceHandler, requiredStateId);
+                return XtextServiceDispatcher.this.resourcePersistenceService.save(document, XtextServiceDispatcher.this.resourceHandler);
               } catch (Throwable _e) {
                 throw Exceptions.sneakyThrow(_e);
               }
@@ -264,7 +263,6 @@ public class XtextServiceDispatcher {
       throw new InvalidRequestException(InvalidRequestException.Type.INVALID_PARAMETERS, "The parameter \'resource\' is required.");
     }
     final String fullText = parameters.get("fullText");
-    final String requiredStateId = parameters.get("requiredState");
     final Provider<XtextWebDocument> _function = new Provider<XtextWebDocument>() {
       @Override
       public XtextWebDocument get() {
@@ -281,8 +279,9 @@ public class XtextServiceDispatcher {
         }
       }
     };
-    final XtextWebDocument document = this.getResourceDocument(resourceId, requiredStateId, sessionStore, _function);
-    final String newStateId = parameters.get("newState");
+    IXtextWebDocument _resourceDocument = this.getResourceDocument(resourceId, sessionStore, _function);
+    String _get = parameters.get("requiredStateId");
+    final XtextWebDocumentAccess document = new XtextWebDocumentAccess(_resourceDocument, _get);
     XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
     final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function_1 = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
       @Override
@@ -311,7 +310,7 @@ public class XtextServiceDispatcher {
         @Override
         public IServiceResult apply() {
           try {
-            return XtextServiceDispatcher.this.updateDocumentService.updateDeltaText(document, deltaText, (deltaOffset).intValue(), (deltaReplaceLength).intValue(), requiredStateId, newStateId);
+            return XtextServiceDispatcher.this.updateDocumentService.updateDeltaText(document, deltaText, (deltaOffset).intValue(), (deltaReplaceLength).intValue());
           } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
           }
@@ -323,7 +322,7 @@ public class XtextServiceDispatcher {
         @Override
         public IServiceResult apply() {
           try {
-            return XtextServiceDispatcher.this.updateDocumentService.updateFullText(document, fullText, requiredStateId, newStateId);
+            return XtextServiceDispatcher.this.updateDocumentService.updateFullText(document, fullText);
           } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
           }
@@ -337,8 +336,7 @@ public class XtextServiceDispatcher {
   protected XtextServiceDispatcher.ServiceDescriptor getValidationService(final Map<String, String> parameters, final ISessionStore sessionStore) throws InvalidRequestException {
     XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
     {
-      final XtextWebDocument document = this.getDocument(parameters, sessionStore);
-      final String requiredStateId = parameters.get("requiredState");
+      final XtextWebDocumentAccess document = this.getDocumentAccess(parameters, sessionStore);
       XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
       final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
         @Override
@@ -347,7 +345,7 @@ public class XtextServiceDispatcher {
             @Override
             public IServiceResult apply() {
               try {
-                return XtextServiceDispatcher.this.validationService.validate(document, requiredStateId);
+                return XtextServiceDispatcher.this.validationService.validate(document);
               } catch (Throwable _e) {
                 throw Exceptions.sneakyThrow(_e);
               }
@@ -368,14 +366,13 @@ public class XtextServiceDispatcher {
     {
       Optional<Integer> _of = Optional.<Integer>of(Integer.valueOf(0));
       final Integer offset = this.getInt(parameters, "caretOffset", _of);
-      final XtextWebDocument document = this.getDocument(parameters, sessionStore);
+      final XtextWebDocumentAccess document = this.getDocumentAccess(parameters, sessionStore);
       Optional<Integer> _of_1 = Optional.<Integer>of(offset);
       final Integer selectionStart = this.getInt(parameters, "selectionStart", _of_1);
       Optional<Integer> _of_2 = Optional.<Integer>of(selectionStart);
       final Integer selectionEnd = this.getInt(parameters, "selectionEnd", _of_2);
       int _max = Math.max(((selectionEnd).intValue() - (selectionStart).intValue()), 0);
       final TextRegion selection = new TextRegion((selectionStart).intValue(), _max);
-      final String requiredStateId = parameters.get("requiredState");
       XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
       final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
         @Override
@@ -384,7 +381,7 @@ public class XtextServiceDispatcher {
             @Override
             public IServiceResult apply() {
               try {
-                return XtextServiceDispatcher.this.contentAssistService.createProposals(document, selection, (offset).intValue(), requiredStateId);
+                return XtextServiceDispatcher.this.contentAssistService.createProposals(document, selection, (offset).intValue());
               } catch (Throwable _e) {
                 throw Exceptions.sneakyThrow(_e);
               }
@@ -400,17 +397,16 @@ public class XtextServiceDispatcher {
     return _xblockexpression;
   }
   
-  protected XtextWebDocument getDocument(final Map<String, String> parameters, final ISessionStore sessionStore) throws InvalidRequestException {
+  protected XtextWebDocumentAccess getDocumentAccess(final Map<String, String> parameters, final ISessionStore sessionStore) throws InvalidRequestException {
+    final String resourceId = parameters.get("resource");
+    IXtextWebDocument document = null;
     boolean _containsKey = parameters.containsKey("fullText");
     if (_containsKey) {
       String _get = parameters.get("fullText");
-      String _get_1 = parameters.get("resource");
-      return this.getFullTextDocument(_get, _get_1, sessionStore);
+      XtextWebDocument _fullTextDocument = this.getFullTextDocument(_get, resourceId, sessionStore);
+      document = _fullTextDocument;
     } else {
-      boolean _containsKey_1 = parameters.containsKey("resource");
-      if (_containsKey_1) {
-        String _get_2 = parameters.get("resource");
-        String _get_3 = parameters.get("requiredState");
+      if ((resourceId != null)) {
         final Provider<XtextWebDocument> _function = new Provider<XtextWebDocument>() {
           @Override
           public XtextWebDocument get() {
@@ -421,11 +417,14 @@ public class XtextServiceDispatcher {
             }
           }
         };
-        return this.getResourceDocument(_get_2, _get_3, sessionStore, _function);
+        IXtextWebDocument _resourceDocument = this.getResourceDocument(resourceId, sessionStore, _function);
+        document = _resourceDocument;
       } else {
         throw new InvalidRequestException(InvalidRequestException.Type.INVALID_PARAMETERS, "At least one of the parameters \'resource\' and \'fullText\' must be specified.");
       }
     }
+    String _get_1 = parameters.get("requiredStateId");
+    return new XtextWebDocumentAccess(document, _get_1);
   }
   
   protected XtextWebDocument getFullTextDocument(final String fullText, final String resourceId, final ISessionStore sessionStore) {
@@ -457,11 +456,11 @@ public class XtextServiceDispatcher {
     }
   }
   
-  protected XtextWebDocument getResourceDocument(final String resourceId, final String requiredStateId, final ISessionStore sessionStore, final Provider<XtextWebDocument> alternativeDocumentProvider) {
+  protected IXtextWebDocument getResourceDocument(final String resourceId, final ISessionStore sessionStore, final Provider<XtextWebDocument> alternativeDocumentProvider) {
     Pair<Class<XtextWebDocument>, String> _mappedTo = Pair.<Class<XtextWebDocument>, String>of(XtextWebDocument.class, resourceId);
-    final Function0<XtextWebDocument> _function = new Function0<XtextWebDocument>() {
+    final Function0<IXtextWebDocument> _function = new Function0<IXtextWebDocument>() {
       @Override
-      public XtextWebDocument apply() {
+      public IXtextWebDocument apply() {
         try {
           return XtextServiceDispatcher.this.resourceHandler.get(resourceId);
         } catch (final Throwable _t) {
@@ -474,7 +473,7 @@ public class XtextServiceDispatcher {
         }
       }
     };
-    return ISessionStore.Extensions.<XtextWebDocument>get(sessionStore, _mappedTo, _function);
+    return sessionStore.<IXtextWebDocument>get(_mappedTo, _function);
   }
   
   protected Integer getInt(final Map<String, String> parameters, final String key, final Optional<Integer> defaultValue) throws InvalidRequestException {
