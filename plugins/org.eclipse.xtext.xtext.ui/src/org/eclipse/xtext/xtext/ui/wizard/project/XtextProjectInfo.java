@@ -31,9 +31,8 @@ public class XtextProjectInfo implements IProjectInfo {
 	private IWorkingSet[] workingSets;
 	private IWorkbench workbench;
 	private IPath projectsRootLocation;
-	private WizardContribution wizardContribution;
 	private boolean createEclipseRuntimeLaunchConfig;
-	private boolean createFeatureProject;
+	private boolean createUiProject;
 
 	public boolean isCreateEclipseRuntimeLaunchConfig() {
 		return createEclipseRuntimeLaunchConfig;
@@ -43,20 +42,20 @@ public class XtextProjectInfo implements IProjectInfo {
 		this.createEclipseRuntimeLaunchConfig = createEclipseRuntimeLaunchConfig;
 	}
 
-	public void setWizardContribution(WizardContribution wizardContribution) {
-		this.wizardContribution = wizardContribution;
-	}
-
-	public WizardContribution getWizardContribution() {
-		return wizardContribution;
-	}
-
 	public void setEncoding(String encoding) {
 		this.encoding = encoding;
 	}
 
 	public String getEncoding() {
 		return encoding;
+	}
+	
+	public void setCreateUiProject(boolean createUiProject) {
+		this.createUiProject = createUiProject;
+	}
+	
+	public boolean isCreateUiProject() {
+		return createUiProject;
 	}
 
 	public boolean isCreateTestProject() {
@@ -65,14 +64,6 @@ public class XtextProjectInfo implements IProjectInfo {
 
 	public void setCreateTestProject(boolean createTestProject) {
 		this.createTestProject = createTestProject;
-	}
-
-	public boolean isCreateFeatureProject() {
-		return createFeatureProject;
-	}
-
-	public void setCreateFeatureProject(boolean createFeatureProject) {
-		this.createFeatureProject = createFeatureProject;
 	}
 
 	public String getFileExtension() {
