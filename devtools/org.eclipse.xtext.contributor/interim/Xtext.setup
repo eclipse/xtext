@@ -264,6 +264,8 @@
     <requirement
         name="edu.umd.cs.findbugs.plugin.eclipse.feature.group"
         optional="true"/>
+    <requirement
+        name="org.eclipse.wst.jsdt.feature.feature.group"/>
     <repository
         url="http://download.eclipse.org/modeling/emft/b3/updates-4.3"/>
     <repository
@@ -446,7 +448,7 @@
               project="org.eclipse.xtext"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@projects[name='core']/@setupTasks.0/@workingSets.8 //@projects[name='core']/@setupTasks.0/@workingSets.5 //@projects[name='core']/@setupTasks.0/@workingSets.2 //@projects[name='core']/@setupTasks.0/@workingSets.4 //@projects[name='core']/@setupTasks.0/@workingSets.3 //@projects[name='core']/@setupTasks.0/@workingSets.6 //@projects[name='core']/@setupTasks.0/@workingSets.10 //@projects[name='core']/@setupTasks.0/@workingSets.0 //@projects[name='core']/@setupTasks.0/@workingSets.7 //@projects[name='core']/@setupTasks.0/@workingSets.11"/>
+              excludedWorkingSet="//@projects[name='core']/@setupTasks.0/@workingSets.8 //@projects[name='core']/@setupTasks.0/@workingSets.5 //@projects[name='core']/@setupTasks.0/@workingSets.2 //@projects[name='core']/@setupTasks.0/@workingSets.4 //@projects[name='core']/@setupTasks.0/@workingSets.3 //@projects[name='core']/@setupTasks.0/@workingSets.6 //@projects[name='core']/@setupTasks.0/@workingSets.10 //@projects[name='core']/@setupTasks.0/@workingSets.0 //@projects[name='core']/@setupTasks.0/@workingSets.7 //@projects[name='core']/@setupTasks.0/@workingSets.11 //@projects[name='core']/@setupTasks.0/@workingSets.12"/>
           <operand
               xsi:type="predicates:NaturePredicate"
               nature="org.eclipse.pde.PluginNature"/>
@@ -593,6 +595,19 @@
               project="intellij"/>
         </predicate>
       </workingSet>
+      <workingSet
+          name="Web"
+          id="">
+        <predicate
+            xsi:type="predicates:AndPredicate">
+          <operand
+              xsi:type="predicates:NamePredicate"
+              pattern=".*\.web.*|^web$"/>
+          <operand
+              xsi:type="predicates:RepositoryPredicate"
+              project="org.eclipse.xtext"/>
+        </predicate>
+      </workingSet>
     </setupTask>
     <setupTask
         xsi:type="setup.targlets:TargletTask">
@@ -681,12 +696,23 @@
         <sourceLocator
             rootFolder="${git.clone.xtext.location/intellij}"
             locateNestedProjects="true"/>
+        <sourceLocator
+            rootFolder="${git.clone.xtext.location/web}"/>
         <description>Maven Dependencies</description>
       </setupTask>
       <setupTask
           xsi:type="launching:LaunchTask"
           id="refresh-gradle-dependencies"
           launcher="/intellij/refresh-gradle-dependencies.launch">
+        <description>
+          Refreshes the .classpath files for the Gradle projects
+          Downloads Intellij IDEA if needed
+        </description>
+      </setupTask>
+      <setupTask
+          xsi:type="launching:LaunchTask"
+          id="refresh-gradle-dependencies-web"
+          launcher="/web/refresh-gradle-dependencies.launch">
         <description>
           Refreshes the .classpath files for the Gradle projects
           Downloads Intellij IDEA if needed
