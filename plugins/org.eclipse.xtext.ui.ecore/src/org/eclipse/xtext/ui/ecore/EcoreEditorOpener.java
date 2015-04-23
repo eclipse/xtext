@@ -21,10 +21,12 @@ public class EcoreEditorOpener extends LanguageSpecificURIEditorOpener {
 	@Override
 	protected void selectAndReveal(IEditorPart openEditor, URI uri,
 			EReference crossReference, int indexInList, boolean select) {
-		EcoreEditor ecoreEditor = (EcoreEditor) openEditor.getAdapter(EcoreEditor.class);
-		if (ecoreEditor != null) {
-			EObject eObject = ecoreEditor.getEditingDomain().getResourceSet().getEObject(uri, true);
-			ecoreEditor.setSelectionToViewer(Collections.singletonList(eObject));
+		if (uri.fragment() != null) {
+			EcoreEditor ecoreEditor = (EcoreEditor) openEditor.getAdapter(EcoreEditor.class);
+			if (ecoreEditor != null) {
+				EObject eObject = ecoreEditor.getEditingDomain().getResourceSet().getEObject(uri, true);
+				ecoreEditor.setSelectionToViewer(Collections.singletonList(eObject));
+			}
 		}
 	}
 
