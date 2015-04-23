@@ -13,10 +13,9 @@ import org.eclipse.xtext.web.server.ISessionStore
 import org.eclipse.xtext.web.server.InvalidRequestException
 import org.eclipse.xtext.web.server.model.DocumentStateResult
 import org.eclipse.xtext.web.server.model.XtextWebDocument
+import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess
 
 import static org.eclipse.xtext.web.server.InvalidRequestException.Type.*
-
-import static extension org.eclipse.xtext.web.server.ISessionStore.Extensions.*
 
 @Singleton
 class ResourcePersistenceService {
@@ -30,24 +29,23 @@ class ResourcePersistenceService {
 				throw new InvalidRequestException(RESOURCE_NOT_FOUND, 'The requested resource was not found.')
 			}
 		])
-		document.readOnly[ access |
-			val result = new ResourceContentResult(access.text)
-			result.dirty = access.dirty
-			result.stateId = access.stateId
+		new XtextWebDocumentAccess(document).readOnly[ it, cancelIndicator |
+			val result = new ResourceContentResult(text)
+			result.dirty = dirty
+			result.stateId = stateId
 			return result
 		]
 	}
 	
-	def revert(String resourceId, String newStateId, IServerResourceHandler resourceHandler, ISessionStore sessionStore)
+	def revert(String resourceId, IServerResourceHandler resourceHandler, ISessionStore sessionStore)
 			throws InvalidRequestException {
 		try {
 			val document = resourceHandler.get(resourceId)
-			document.modify[ access |
+			new XtextWebDocumentAccess(document).modify[ it, cancelIndicator |
 				sessionStore.put(XtextWebDocument -> resourceId, document)
-				access.stateId = newStateId
-				access.dirty = false
-				val result = new ResourceContentResult(access.text)
-				result.stateId = newStateId
+				dirty = false
+				val result = new ResourceContentResult(text)
+				result.stateId = stateId
 				return result
 			]
 		} catch (IOException ioe) {
@@ -55,17 +53,16 @@ class ResourcePersistenceService {
 		}
 	}
 	
-	def save(XtextWebDocument document, IServerResourceHandler resourceHandler, String requiredStateId)
+	def save(XtextWebDocumentAccess document, IServerResourceHandler resourceHandler)
 			throws InvalidRequestException {
-		document.modify[ access |
-			access.checkStateId(requiredStateId)
+		document.modify[ it, cancelIndicator |
 			try {
-				resourceHandler.put(access)
-				access.dirty = false
+				resourceHandler.put(it)
+				dirty = false
 			} catch (IOException ioe) {
 				throw new InvalidRequestException(RESOURCE_NOT_FOUND, ioe.message)
 			}
-			return new DocumentStateResult(access.stateId)
+			return new DocumentStateResult(stateId)
 		]
 	}
 	

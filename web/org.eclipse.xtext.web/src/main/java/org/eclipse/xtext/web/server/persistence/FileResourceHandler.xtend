@@ -16,6 +16,7 @@ import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.web.server.model.XtextWebDocument
+import org.eclipse.xtext.web.server.model.IXtextWebDocument
 
 class FileResourceHandler implements IServerResourceHandler {
 	
@@ -36,12 +37,12 @@ class FileResourceHandler implements IServerResourceHandler {
 		}
 	}
 	
-	override put(XtextWebDocument.ReadAccess documentAccess) throws IOException {
+	override put(IXtextWebDocument document) throws IOException {
 		try {
-			val uri = resourceBaseProvider.getFileURI(documentAccess.document.resourceId)
-			val outputStream = documentAccess.resource.resourceSet.URIConverter.createOutputStream(uri)
+			val uri = resourceBaseProvider.getFileURI(document.resourceId)
+			val outputStream = document.resource.resourceSet.URIConverter.createOutputStream(uri)
 			val writer = new OutputStreamWriter(outputStream, encodingProvider.getEncoding(uri))
-			writer.write(documentAccess.text)
+			writer.write(document.text)
 			writer.close
 		} catch (WrappedException exception) {
 			throw exception.cause

@@ -7,34 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server.model
 
-import java.util.concurrent.locks.ReentrantLock
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.resource.XtextResource
-import org.eclipse.xtext.util.concurrent.IUnitOfWork
-import com.google.inject.Singleton
-import org.eclipse.xtext.web.server.InvalidRequestException
 
-import static org.eclipse.xtext.web.server.InvalidRequestException.Type.*
-
-class XtextWebDocument {
+class XtextWebDocument implements IXtextWebDocument {
 	
 	@Accessors(PUBLIC_GETTER)
 	val String resourceId
 	
+	@Accessors(PUBLIC_GETTER)
 	val XtextResource resource
 	
+	@Accessors(PUBLIC_GETTER)
 	String text
 	
-	// TODO generate on server?
-	String stateId
-	
+	@Accessors
 	boolean dirty
-	
-	val lock = new ReentrantLock
-	
-	val readOnlyAccess = new ReadAccess(this)
-	
-	val modifyAccess = new ModifyAccess(this)
 	
 	new(XtextResource resource, String resourceId) {
 		this.resource = resource
@@ -44,86 +32,30 @@ class XtextWebDocument {
 	
 	protected def refresh() {
 		text = resource.parseResult?.rootNode?.text ?: ''
+		val stateId = computeStateId(text)
+		resource.modificationStamp = stateId
 	}
 	
-	def <T> T readOnly(IUnitOfWork<T, ReadAccess> work) {
-		lock.lock()
-		try {
-			work.exec(readOnlyAccess)
-		} finally {
-			lock.unlock()
-		}
+	override getStateId() {
+		return Long.toString(resource.modificationStamp, 16)
 	}
 	
-	def <T> T modify(IUnitOfWork<T, ModifyAccess> work) {
-		lock.lock()
-		try {
-			work.exec(modifyAccess)
-		} finally {
-			lock.unlock()
-		}
+    protected def computeStateId(String text) {
+    	var hash = 0l
+        for (var i = 0; i < text.length; i++) {
+            hash = 31 * hash + text.charAt(i)
+        }
+        return hash
+    }
+		
+	override setText(String text) {
+		resource.reparse(text)
+		refresh()
 	}
 	
-	static class ReadAccess {
-		protected val XtextWebDocument document
-		
-		private new(XtextWebDocument document) {
-			this.document = document
-		}
-		
-		def getDocument() {
-			document
-		}
-		
-		def getResource() {
-			document.resource
-		}
-		
-		def getText() {
-			document.text
-		}
-		
-		def getStateId() {
-			document.stateId
-		}
-		
-		def checkStateId(String requiredStateId) throws InvalidRequestException {
-			if (requiredStateId !== null && requiredStateId != document.stateId) {
-				throw new InvalidRequestException(INVALID_DOCUMENT_STATE, 'The given state id does not match the current state.')
-			}
-		}
-		
-		def isDirty() {
-			document.dirty
-		}
+	override updateText(String text, int offset, int replaceLength) {
+		resource.update(offset, replaceLength, text)
+		refresh()
 	}
-	
-	static class ModifyAccess extends ReadAccess {
-		
-		private new(XtextWebDocument document) {
-			super(document)
-		}
-		
-		def setText(String text) {
-			document.resource.reparse(text)
-			document.refresh()
-		}
-		
-		def updateText(String text, int offset, int replaceLength) {
-			document.resource.update(offset, replaceLength, text)
-			document.refresh()
-		}
-		
-		def setStateId(String stateId) {
-			document.stateId = stateId
-		}
-		
-		def setDirty(boolean dirty) {
-			document.dirty = dirty
-		}
-	}
-	
-	@Singleton
-	static class CreationLock {}
 	
 }
