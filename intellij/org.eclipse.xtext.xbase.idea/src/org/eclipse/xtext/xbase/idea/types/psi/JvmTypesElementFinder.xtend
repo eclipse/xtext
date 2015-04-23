@@ -16,6 +16,8 @@ import org.eclipse.xtext.idea.lang.IXtextLanguage
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex
 
+// TODO make this a shared service
+// currently we mix language specific and language independent aspects here
 class JvmTypesElementFinder extends PsiElementFinder {
 
 	@Inject
@@ -35,14 +37,19 @@ class JvmTypesElementFinder extends PsiElementFinder {
 	}
 
 	override findClass(String qualifiedName, GlobalSearchScope scope) {
-		findClasses(qualifiedName, scope).head
+		// avoid wrapping / array creation
+		doFindClasses(qualifiedName, scope).head
 	}
 
 	override findClasses(String qualifiedName, GlobalSearchScope scope) {
-		qualifiedName.variants.map[doFindClasses(scope)].flatten
+		doFindClasses(qualifiedName, scope)
+	}
+	
+	def protected doFindClasses(String qualifiedName, GlobalSearchScope scope) {
+		qualifiedName.variants.map[doFindClassesByVariant(scope)].flatten
 	}
 
-	protected def doFindClasses(String variant, GlobalSearchScope scope) {
+	protected def doFindClassesByVariant(String variant, GlobalSearchScope scope) {
 		val qualifiedName = variant.toQualifiedName
 		variant.findFiles(scope).map [
 			getPsiClassesByQualifiedName(qualifiedName)
@@ -50,7 +57,7 @@ class JvmTypesElementFinder extends PsiElementFinder {
 	}
 
 	protected def getVariants(String qualifiedName) {
-		#[qualifiedName] + new ClassNameVariants(qualifiedName).toIterable
+		#[qualifiedName] + [new ClassNameVariants(qualifiedName)]
 	}
 
 	protected def toQualifiedName(String variant) {
@@ -58,7 +65,7 @@ class JvmTypesElementFinder extends PsiElementFinder {
 	}
 
 	protected def findFiles(String qualifiedName, GlobalSearchScope scope) {
-		exportedObjectQualifiedNameIndex.get(qualifiedName.toString, project, scope).filter [ xtextFile |
+		exportedObjectQualifiedNameIndex.get(qualifiedName, project, scope).filter [ xtextFile |
 			xtextFile.language == language
 		]
 	}

@@ -18,6 +18,7 @@ import com.intellij.psi.PsiMethod;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.PsiShortNamesCache;
 import com.intellij.util.ArrayUtil;
+import com.intellij.util.CommonProcessors;
 import com.intellij.util.Processor;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.HashSet;
@@ -33,10 +34,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 
 @SuppressWarnings("all")
 public class JvmTypesShortNamesCache extends PsiShortNamesCache {
-  private final static PsiMethod[] NO_METHODS = {};
-  
-  private final static PsiField[] NO_FIELDS = {};
-  
   @Inject
   @Extension
   private JvmPsiClasses _jvmPsiClasses;
@@ -61,8 +58,13 @@ public class JvmTypesShortNamesCache extends PsiShortNamesCache {
   
   @Override
   public void getAllClassNames(final HashSet<String> dest) {
-    String[] _allClassNames = this.getAllClassNames();
-    Iterables.<String>addAll(dest, ((Iterable<? extends String>)Conversions.doWrapArray(_allClassNames)));
+    CommonProcessors.CollectProcessor<String> _collectProcessor = new CommonProcessors.CollectProcessor<String>(dest);
+    this.processAllClassNames(_collectProcessor);
+  }
+  
+  @Override
+  public boolean processAllClassNames(final Processor<String> processor) {
+    return this.jvmDeclaredTypeShortNameIndex.processAllKeys(this.project, processor);
   }
   
   @Override
@@ -87,8 +89,12 @@ public class JvmTypesShortNamesCache extends PsiShortNamesCache {
   public PsiClass[] getClassesByName(final String name, final GlobalSearchScope scope) {
     ArrayList<PsiClass> _xblockexpression = null;
     {
-      final ArrayList<PsiClass> result = CollectionLiterals.<PsiClass>newArrayList();
       final Collection<BaseXtextFile> xtextFiles = this.jvmDeclaredTypeShortNameIndex.get(name, this.project, scope);
+      boolean _isEmpty = xtextFiles.isEmpty();
+      if (_isEmpty) {
+        return PsiClass.EMPTY_ARRAY;
+      }
+      final ArrayList<PsiClass> result = CollectionLiterals.<PsiClass>newArrayList();
       for (final BaseXtextFile xtextFile : xtextFiles) {
         Language _language = xtextFile.getLanguage();
         boolean _equals = Objects.equal(_language, this.language);
@@ -104,22 +110,22 @@ public class JvmTypesShortNamesCache extends PsiShortNamesCache {
   
   @Override
   public PsiField[] getFieldsByName(final String name, final GlobalSearchScope scope) {
-    return JvmTypesShortNamesCache.NO_FIELDS;
+    return PsiField.EMPTY_ARRAY;
   }
   
   @Override
   public PsiField[] getFieldsByNameIfNotMoreThan(final String name, final GlobalSearchScope scope, final int maxCount) {
-    return JvmTypesShortNamesCache.NO_FIELDS;
+    return PsiField.EMPTY_ARRAY;
   }
   
   @Override
   public PsiMethod[] getMethodsByName(final String name, final GlobalSearchScope scope) {
-    return JvmTypesShortNamesCache.NO_METHODS;
+    return PsiMethod.EMPTY_ARRAY;
   }
   
   @Override
   public PsiMethod[] getMethodsByNameIfNotMoreThan(final String name, final GlobalSearchScope scope, final int maxCount) {
-    return JvmTypesShortNamesCache.NO_METHODS;
+    return PsiMethod.EMPTY_ARRAY;
   }
   
   @Override

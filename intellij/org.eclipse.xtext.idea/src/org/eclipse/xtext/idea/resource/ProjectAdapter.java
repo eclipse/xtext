@@ -14,6 +14,7 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 
 import com.intellij.openapi.project.Project;
 
+// TODO set as classpath URI context instead
 public class ProjectAdapter extends AdapterImpl {
 
 	private final Project project;

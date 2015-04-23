@@ -28,6 +28,8 @@ class PsiJvmFileImpl extends PsiJavaFileBaseImpl {
 	}
 
 	override isPhysical() {
+		// Generated Java code has to be marked as physical in order to make Java services work
+		// downside: IntelliJ tries to modify these
 		true
 	}
 
