@@ -87,8 +87,11 @@ public abstract class FormattableDocument implements IFormattableDocument {
 	@Override
 	public <T extends EObject> T append(T owner, Procedure1<? super IHiddenRegionFormatter> after) {
 		if (owner != null) {
-			IHiddenRegion gap = getTextRegionAccess().trailingHiddenRegion(owner);
-			set(gap, after);
+			IEObjectRegion region = getTextRegionAccess().regionForEObject(owner);
+			if (region != null) {
+				IHiddenRegion gap = region.getNextHiddenRegion();
+				set(gap, after);
+			}
 		}
 		return owner;
 	}
@@ -170,10 +173,8 @@ public abstract class FormattableDocument implements IFormattableDocument {
 
 	@Override
 	public void formatConditionally(EObject owner, ISubFormatter... formatters) {
-		ITextRegionAccess access = getTextRegionAccess();
-		int offset = access.leadingHiddenRegion(owner).getEndOffset();
-		int length = access.trailingHiddenRegion(owner).getOffset() - offset;
-		formatConditionally(offset, length, formatters);
+		IEObjectRegion region = getTextRegionAccess().regionForEObject(owner);
+		formatConditionally(region.getOffset(), region.getLength(), formatters);
 	}
 
 	@Override
@@ -220,8 +221,11 @@ public abstract class FormattableDocument implements IFormattableDocument {
 	@Override
 	public <T extends EObject> T prepend(T owner, Procedure1<? super IHiddenRegionFormatter> before) {
 		if (owner != null) {
-			IHiddenRegion gap = getTextRegionAccess().leadingHiddenRegion(owner);
-			set(gap, before);
+			IEObjectRegion region = getTextRegionAccess().regionForEObject(owner);
+			if (region != null) {
+				IHiddenRegion gap = region.getPreviousHiddenRegion();
+				set(gap, before);
+			}
 		}
 		return owner;
 	}

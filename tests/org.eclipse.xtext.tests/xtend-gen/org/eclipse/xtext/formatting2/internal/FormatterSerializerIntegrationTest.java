@@ -30,6 +30,7 @@ import org.eclipse.xtext.formatting2.internal.FormatterTestLanguageStandaloneSet
 import org.eclipse.xtext.formatting2.internal.formattertestlanguage.FormattertestlanguageFactory;
 import org.eclipse.xtext.formatting2.internal.formattertestlanguage.IDList;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
+import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionsFinder;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.resource.IResourceFactory;
@@ -72,14 +73,15 @@ public class FormatterSerializerIntegrationTest {
   
   public static class Formatter extends AbstractFormatter2 {
     protected void _format(final IDList model, @Extension final IFormattableDocument document) {
-      ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(model, "idlist");
+      ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(model);
+      ISemanticRegion _keyword = _regionFor.keyword("idlist");
       final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
         @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.setSpace("  ");
         }
       };
-      document.append(_regionForKeyword, _function);
+      document.append(_keyword, _function);
     }
     
     public void format(final Object model, final IFormattableDocument document) {

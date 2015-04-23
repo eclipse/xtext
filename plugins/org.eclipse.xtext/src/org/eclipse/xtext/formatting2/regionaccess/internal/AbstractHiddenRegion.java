@@ -15,6 +15,7 @@ import org.eclipse.xtext.formatting2.regionaccess.IComment;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegionPart;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
+import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionFinder;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 import org.eclipse.xtext.formatting2.regionaccess.IWhitespace;
@@ -150,5 +151,15 @@ public abstract class AbstractHiddenRegion extends AbstractTextSegment implement
 	@Override
 	public String toString() {
 		return new TextRegionAccessToString().withOrigin(this).hightlightOrigin().toString();
+	}
+
+	@Override
+	public ISemanticRegionFinder immediatelyFollowing() {
+		return new SemanticRegionMatcher(getNextSemanticRegion());
+	}
+
+	@Override
+	public ISemanticRegionFinder immediatelyPreceding() {
+		return new SemanticRegionMatcher(getPreviousSemanticRegion());
 	}
 }

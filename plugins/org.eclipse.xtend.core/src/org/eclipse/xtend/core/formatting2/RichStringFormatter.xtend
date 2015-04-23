@@ -28,8 +28,11 @@ import org.eclipse.xtext.formatting2.IFormattableDocument
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatting
 import org.eclipse.xtext.formatting2.ITextReplacer
 import org.eclipse.xtext.formatting2.internal.HiddenRegionReplacer
+import org.eclipse.xtext.formatting2.regionaccess.IEObjectRegion
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionExtensions
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment
+import org.eclipse.xtext.formatting2.regionaccess.internal.NodeEObjectRegion
 import org.eclipse.xtext.formatting2.regionaccess.internal.TextSegment
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XbasePackage
@@ -51,19 +54,19 @@ import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
 		@Inject RichStringProcessor richStringProcessor
 
 		def RichStringFormatter create(ITextRegionAccess regionAccess) {
-			new RichStringFormatter(this, regionAccess)
+			new RichStringFormatter(this, regionAccess.extensions)
 		}
 	}
 
 	val Factory factory
-	val extension ITextRegionAccess
+	val extension ITextRegionExtensions
 
 	def dispatch void format(RichString richString, IFormattableDocument doc) {
 		if (EcoreUtil2.getContainerOfType(richString.eContainer, RichString) != null)
 			return;
-		if (richString.hasSyntaxError)
+		if (richString.regionForEObject.hasSyntaxError)
 			return;
-		val impl = new RichStringToLineModel(_iTextRegionAccess, richString)
+		val impl = new RichStringToLineModel(textRegionAccess, richString)
 		factory.richStringProcessor.process(richString, impl, new DefaultIndentationHandler())
 		impl.finish()
 
@@ -103,6 +106,20 @@ import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
 			}
 		}
 	}
+	
+	def protected dispatch boolean hasSyntaxError(IEObjectRegion region) {
+		false
+	}
+
+	def protected dispatch boolean hasSyntaxError(NodeEObjectRegion region) {
+		// TODO: remove if https://bugs.eclipse.org/bugs/show_bug.cgi?id=465299 gets fixed 
+		val i = region.node.getAsTreeIterable().iterator();
+		while (i.hasNext()) {
+			if (i.next().getSyntaxErrorMessage() != null)
+				return true;
+		}
+		return false;
+	}
 
 	def protected setNewLines(IFormattableDocument doc, int offset, int length, int indentationIncrease,
 		int indentationDecrease, int newLines) {
@@ -113,7 +130,7 @@ import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
 			it.newLinesDefault = newLines
 			it.newLinesMax = newLines
 		]
-		val replacer = doc.formatter.createWhitespaceReplacer(new TextSegment(_iTextRegionAccess, offset, length), fmt)
+		val replacer = doc.formatter.createWhitespaceReplacer(new TextSegment(textRegionAccess, offset, length), fmt)
 		doc.addReplacer(replacer)
 	}
 
@@ -121,7 +138,7 @@ import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
 		val fmt = doc.formatter.createHiddenRegionFormatting => [
 			it.space = space
 		]
-		val replacer = doc.formatter.createWhitespaceReplacer(new TextSegment(_iTextRegionAccess, offset, length), fmt)
+		val replacer = doc.formatter.createWhitespaceReplacer(new TextSegment(textRegionAccess, offset, length), fmt)
 		doc.addReplacer(replacer)
 	}
 
@@ -157,37 +174,37 @@ import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
 	}
 
 	def dispatch void format(RichStringIf expr, extension IFormattableDocument doc) {
-		expr.regionForKeyword("IF").prepend[noSpace].append[oneSpace]
+		expr.regionFor.keyword("IF").prepend[noSpace].append[oneSpace]
 		expr.elseIfs.last.append[noSpace]
 		formatIntoSingleLine(doc, expr.^if)
 		format(expr.then, doc)
 		for (elseif : expr.elseIfs)
 			format(elseif, doc)
-		expr.regionForKeyword("ELSE").surround[noSpace]
+		expr.regionFor.keyword("ELSE").surround[noSpace]
 		format(expr.^else, doc)
-		expr.regionForKeyword("ENDIF").surround[noSpace]
+		expr.regionFor.keyword("ENDIF").surround[noSpace]
 	}
 
 	def dispatch void format(RichStringElseIf expr, extension IFormattableDocument doc) {
-		expr.regionForKeyword("ELSEIF").prepend[noSpace].append[oneSpace]
+		expr.regionFor.keyword("ELSEIF").prepend[noSpace].append[oneSpace]
 		expr.^if.append[noSpace]
 		formatIntoSingleLine(doc, expr.^if)
 	}
 
 	def dispatch void format(RichStringForLoop expr, extension IFormattableDocument doc) {
-		expr.regionForKeyword("FOR").prepend[noSpace].append[oneSpace]
-		expr.regionForKeyword(":").prepend[oneSpace].append[oneSpace]
+		expr.regionFor.keyword("FOR").prepend[noSpace].append[oneSpace]
+		expr.regionFor.keyword(":").prepend[oneSpace].append[oneSpace]
 		formatIntoSingleLine(doc, expr.declaredParam)
 		formatIntoSingleLine(doc, expr.forExpression)
 		format(expr.eachExpression, doc)
-		expr.regionForKeyword("BEFORE").surround[oneSpace]
+		expr.regionFor.keyword("BEFORE").surround[oneSpace]
 		formatIntoSingleLine(doc, expr.before)
-		expr.regionForKeyword("SEPARATOR").surround[oneSpace]
+		expr.regionFor.keyword("SEPARATOR").surround[oneSpace]
 		formatIntoSingleLine(doc, expr.separator)
-		expr.regionForKeyword("AFTER").surround[oneSpace]
+		expr.regionFor.keyword("AFTER").surround[oneSpace]
 		formatIntoSingleLine(doc, expr.after)
 		expr.eachExpression.prepend[noSpace]
-		expr.regionForKeyword("ENDFOR").surround[noSpace]
+		expr.regionFor.keyword("ENDFOR").surround[noSpace]
 	}
 }
 
@@ -249,7 +266,7 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
 		// println("announceNextLiteral()")
 		if (lastLiteralEndOffset > 0 && contentStartOffset < 0)
 			contentStartOffset = lastLiteralEndOffset
-		val node = nodeModelAccess.regionForFeature(object, XbasePackage.Literals.XSTRING_LITERAL__VALUE)
+		val node = nodeModelAccess.regionForEObject(object).regionFor.feature(XbasePackage.Literals.XSTRING_LITERAL__VALUE)
 		if (node != null) {
 			offset = node.offset + node.literalPrefixLenght
 			lastLiteralEndOffset = node.endOffset - node.literalPostfixLenght

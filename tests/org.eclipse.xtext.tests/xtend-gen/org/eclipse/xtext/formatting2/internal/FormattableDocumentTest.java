@@ -25,7 +25,8 @@ import org.eclipse.xtext.formatting2.internal.formattertestlanguage.IDList;
 import org.eclipse.xtext.formatting2.internal.formattertestlanguage.KWList;
 import org.eclipse.xtext.formatting2.internal.services.FormatterTestLanguageGrammarAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
-import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionsFinder;
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionExtensions;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
@@ -61,15 +62,16 @@ public class FormattableDocumentTest {
         it.setToBeFormatted(_builder);
         final GenericFormatter<IDList> _function = new GenericFormatter<IDList>() {
           @Override
-          protected void format(final IDList model, @Extension final ITextRegionAccess regions, @Extension final IFormattableDocument document) {
-            ISemanticRegion _regionForKeyword = regions.regionForKeyword(model, "idlist");
+          protected void format(final IDList model, @Extension final ITextRegionExtensions regions, @Extension final IFormattableDocument document) {
+            ISemanticRegionsFinder _regionFor = regions.regionFor(model);
+            ISemanticRegion _keyword = _regionFor.keyword("idlist");
             final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
               @Override
               public void apply(final IHiddenRegionFormatter it) {
                 it.oneSpace();
               }
             };
-            document.append(_regionForKeyword, _function);
+            document.append(_keyword, _function);
           }
         };
         it.setFormatter(_function);
@@ -100,9 +102,10 @@ public class FormattableDocumentTest {
         it.setToBeFormatted(_builder);
         final GenericFormatter<IDList> _function_1 = new GenericFormatter<IDList>() {
           @Override
-          protected void format(final IDList model, @Extension final ITextRegionAccess regions, @Extension final IFormattableDocument document) {
+          protected void format(final IDList model, @Extension final ITextRegionExtensions regions, @Extension final IFormattableDocument document) {
+            ISemanticRegionsFinder _regionFor = regions.regionFor(model);
             TerminalRule _iDRule = FormattableDocumentTest.this._formatterTestLanguageGrammarAccess.getIDRule();
-            List<ISemanticRegion> _regionsForRuleCallsTo = regions.regionsForRuleCallsTo(model, _iDRule);
+            List<ISemanticRegion> _ruleCallsTo = _regionFor.ruleCallsTo(_iDRule);
             final Procedure1<ISemanticRegion> _function = new Procedure1<ISemanticRegion>() {
               @Override
               public void apply(final ISemanticRegion it) {
@@ -116,7 +119,7 @@ public class FormattableDocumentTest {
                 document.prepend(it, _function);
               }
             };
-            IterableExtensions.<ISemanticRegion>forEach(_regionsForRuleCallsTo, _function);
+            IterableExtensions.<ISemanticRegion>forEach(_ruleCallsTo, _function);
           }
         };
         it.setFormatter(_function_1);
@@ -151,8 +154,9 @@ public class FormattableDocumentTest {
         it.setToBeFormatted(_builder);
         final GenericFormatter<KWList> _function_1 = new GenericFormatter<KWList>() {
           @Override
-          protected void format(final KWList model, @Extension final ITextRegionAccess regions, @Extension final IFormattableDocument document) {
-            ISemanticRegion _regionForKeyword = regions.regionForKeyword(model, "kwlist");
+          protected void format(final KWList model, @Extension final ITextRegionExtensions regions, @Extension final IFormattableDocument document) {
+            ISemanticRegionsFinder _regionFor = regions.regionFor(model);
+            ISemanticRegion _keyword = _regionFor.keyword("kwlist");
             final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
               @Override
               public void apply(final IHiddenRegionFormatter it) {
@@ -160,8 +164,9 @@ public class FormattableDocumentTest {
                 it.oneSpace();
               }
             };
-            document.append(_regionForKeyword, _function);
-            ISemanticRegion _regionForKeyword_1 = regions.regionForKeyword(model, "kw1");
+            document.append(_keyword, _function);
+            ISemanticRegionsFinder _regionFor_1 = regions.regionFor(model);
+            ISemanticRegion _keyword_1 = _regionFor_1.keyword("kw1");
             final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
               @Override
               public void apply(final IHiddenRegionFormatter it) {
@@ -169,8 +174,9 @@ public class FormattableDocumentTest {
                 it.oneSpace();
               }
             };
-            document.append(_regionForKeyword_1, _function_1);
-            ISemanticRegion _regionForKeyword_2 = regions.regionForKeyword(model, "kw2");
+            document.append(_keyword_1, _function_1);
+            ISemanticRegionsFinder _regionFor_2 = regions.regionFor(model);
+            ISemanticRegion _keyword_2 = _regionFor_2.keyword("kw2");
             final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
               @Override
               public void apply(final IHiddenRegionFormatter it) {
@@ -178,8 +184,9 @@ public class FormattableDocumentTest {
                 it.oneSpace();
               }
             };
-            document.append(_regionForKeyword_2, _function_2);
-            ISemanticRegion _regionForKeyword_3 = regions.regionForKeyword(model, "kw3");
+            document.append(_keyword_2, _function_2);
+            ISemanticRegionsFinder _regionFor_3 = regions.regionFor(model);
+            ISemanticRegion _keyword_3 = _regionFor_3.keyword("kw3");
             final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
               @Override
               public void apply(final IHiddenRegionFormatter it) {
@@ -187,8 +194,9 @@ public class FormattableDocumentTest {
                 it.oneSpace();
               }
             };
-            document.append(_regionForKeyword_3, _function_3);
-            ISemanticRegion _regionForKeyword_4 = regions.regionForKeyword(model, "kw4");
+            document.append(_keyword_3, _function_3);
+            ISemanticRegionsFinder _regionFor_4 = regions.regionFor(model);
+            ISemanticRegion _keyword_4 = _regionFor_4.keyword("kw4");
             final Procedure1<IHiddenRegionFormatter> _function_4 = new Procedure1<IHiddenRegionFormatter>() {
               @Override
               public void apply(final IHiddenRegionFormatter it) {
@@ -196,7 +204,7 @@ public class FormattableDocumentTest {
                 it.newLine();
               }
             };
-            document.append(_regionForKeyword_4, _function_4);
+            document.append(_keyword_4, _function_4);
           }
         };
         it.setFormatter(_function_1);
@@ -231,49 +239,53 @@ public class FormattableDocumentTest {
         it.setToBeFormatted(_builder);
         final GenericFormatter<KWList> _function_1 = new GenericFormatter<KWList>() {
           @Override
-          protected void format(final KWList model, @Extension final ITextRegionAccess regions, @Extension final IFormattableDocument document) {
+          protected void format(final KWList model, @Extension final ITextRegionExtensions regions, @Extension final IFormattableDocument document) {
             final ISubFormatter _function = new ISubFormatter() {
               @Override
               public void format(final IFormattableSubDocument doc) throws FormattingNotApplicableException {
                 @Extension
                 final IFormattableSubDocument fits = doc.requireFitsInLine();
-                ISemanticRegion _regionForKeyword = regions.regionForKeyword(model, "kwlist");
+                ISemanticRegionsFinder _regionFor = regions.regionFor(model);
+                ISemanticRegion _keyword = _regionFor.keyword("kwlist");
                 final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
                   @Override
                   public void apply(final IHiddenRegionFormatter it) {
                     it.oneSpace();
                   }
                 };
-                fits.append(_regionForKeyword, _function);
-                ISemanticRegion _regionForKeyword_1 = regions.regionForKeyword(model, "kw1");
+                fits.append(_keyword, _function);
+                ISemanticRegionsFinder _regionFor_1 = regions.regionFor(model);
+                ISemanticRegion _keyword_1 = _regionFor_1.keyword("kw1");
                 final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
                   @Override
                   public void apply(final IHiddenRegionFormatter it) {
                     it.oneSpace();
                   }
                 };
-                fits.append(_regionForKeyword_1, _function_1);
+                fits.append(_keyword_1, _function_1);
               }
             };
             final ISubFormatter _function_1 = new ISubFormatter() {
               @Override
               public void format(@Extension final IFormattableSubDocument doc) throws FormattingNotApplicableException {
-                ISemanticRegion _regionForKeyword = regions.regionForKeyword(model, "kwlist");
+                ISemanticRegionsFinder _regionFor = regions.regionFor(model);
+                ISemanticRegion _keyword = _regionFor.keyword("kwlist");
                 final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
                   @Override
                   public void apply(final IHiddenRegionFormatter it) {
                     it.newLine();
                   }
                 };
-                doc.append(_regionForKeyword, _function);
-                ISemanticRegion _regionForKeyword_1 = regions.regionForKeyword(model, "kw1");
+                doc.append(_keyword, _function);
+                ISemanticRegionsFinder _regionFor_1 = regions.regionFor(model);
+                ISemanticRegion _keyword_1 = _regionFor_1.keyword("kw1");
                 final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
                   @Override
                   public void apply(final IHiddenRegionFormatter it) {
                     it.newLine();
                   }
                 };
-                doc.append(_regionForKeyword_1, _function_1);
+                doc.append(_keyword_1, _function_1);
               }
             };
             document.formatConditionally(model, _function, _function_1);
@@ -311,49 +323,53 @@ public class FormattableDocumentTest {
         it.setToBeFormatted(_builder);
         final GenericFormatter<KWList> _function_1 = new GenericFormatter<KWList>() {
           @Override
-          protected void format(final KWList model, @Extension final ITextRegionAccess regions, @Extension final IFormattableDocument document) {
+          protected void format(final KWList model, @Extension final ITextRegionExtensions regions, @Extension final IFormattableDocument document) {
             final ISubFormatter _function = new ISubFormatter() {
               @Override
               public void format(final IFormattableSubDocument doc) throws FormattingNotApplicableException {
                 @Extension
                 final IFormattableSubDocument fits = doc.requireFitsInLine();
-                ISemanticRegion _regionForKeyword = regions.regionForKeyword(model, "kwlist");
+                ISemanticRegionsFinder _regionFor = regions.regionFor(model);
+                ISemanticRegion _keyword = _regionFor.keyword("kwlist");
                 final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
                   @Override
                   public void apply(final IHiddenRegionFormatter it) {
                     it.oneSpace();
                   }
                 };
-                fits.append(_regionForKeyword, _function);
-                ISemanticRegion _regionForKeyword_1 = regions.regionForKeyword(model, "kw1");
+                fits.append(_keyword, _function);
+                ISemanticRegionsFinder _regionFor_1 = regions.regionFor(model);
+                ISemanticRegion _keyword_1 = _regionFor_1.keyword("kw1");
                 final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
                   @Override
                   public void apply(final IHiddenRegionFormatter it) {
                     it.oneSpace();
                   }
                 };
-                fits.append(_regionForKeyword_1, _function_1);
+                fits.append(_keyword_1, _function_1);
               }
             };
             final ISubFormatter _function_1 = new ISubFormatter() {
               @Override
               public void format(@Extension final IFormattableSubDocument doc) throws FormattingNotApplicableException {
-                ISemanticRegion _regionForKeyword = regions.regionForKeyword(model, "kwlist");
+                ISemanticRegionsFinder _regionFor = regions.regionFor(model);
+                ISemanticRegion _keyword = _regionFor.keyword("kwlist");
                 final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
                   @Override
                   public void apply(final IHiddenRegionFormatter it) {
                     it.newLine();
                   }
                 };
-                doc.append(_regionForKeyword, _function);
-                ISemanticRegion _regionForKeyword_1 = regions.regionForKeyword(model, "kw1");
+                doc.append(_keyword, _function);
+                ISemanticRegionsFinder _regionFor_1 = regions.regionFor(model);
+                ISemanticRegion _keyword_1 = _regionFor_1.keyword("kw1");
                 final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
                   @Override
                   public void apply(final IHiddenRegionFormatter it) {
                     it.newLine();
                   }
                 };
-                doc.append(_regionForKeyword_1, _function_1);
+                doc.append(_keyword_1, _function_1);
               }
             };
             document.formatConditionally(model, _function, _function_1);

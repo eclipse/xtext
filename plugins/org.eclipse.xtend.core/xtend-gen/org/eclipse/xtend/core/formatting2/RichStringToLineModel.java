@@ -21,7 +21,9 @@ import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.formatting2.regionaccess.IEObjectRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
+import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionsFinder;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 import org.eclipse.xtext.xbase.XExpression;
@@ -153,7 +155,9 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
     if (((this.lastLiteralEndOffset > 0) && (this.contentStartOffset < 0))) {
       this.contentStartOffset = this.lastLiteralEndOffset;
     }
-    final ISemanticRegion node = this.nodeModelAccess.regionForFeature(object, XbasePackage.Literals.XSTRING_LITERAL__VALUE);
+    IEObjectRegion _regionForEObject = this.nodeModelAccess.regionForEObject(object);
+    ISemanticRegionsFinder _regionFor = _regionForEObject.getRegionFor();
+    final ISemanticRegion node = _regionFor.feature(XbasePackage.Literals.XSTRING_LITERAL__VALUE);
     boolean _notEquals = (!Objects.equal(node, null));
     if (_notEquals) {
       int _offset = node.getOffset();

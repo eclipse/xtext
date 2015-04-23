@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.debug;
 
+import static org.eclipse.xtext.formatting2.regionaccess.internal.TextRegions.*;
+
 import java.util.List;
 
 import org.eclipse.xtext.formatting2.regionaccess.ILineRegion;
@@ -14,7 +16,6 @@ import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionRewriter;
 import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
-import org.eclipse.xtext.formatting2.regionaccess.internal.TextRegions;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
@@ -81,9 +82,9 @@ public class TextRegionsWithTitleToString {
 			List<ITextSegment> segments = Lists.newArrayList();
 			for (Item item : items)
 				segments.add(item.getRegion());
-			ITextSegment impactRegion = TextRegions.merge(segments);
-			List<ILineRegion> expandToLines = access.expandToLines(impactRegion, getLeadingLines(), getTrailingLines());
-			return TextRegions.merge(expandToLines);
+			ITextSegment impactRegion = merge(segments);
+			List<ILineRegion> expandToLines = expandToLines(impactRegion, getLeadingLines(), getTrailingLines());
+			return merge(expandToLines);
 		}
 		return null;
 	}

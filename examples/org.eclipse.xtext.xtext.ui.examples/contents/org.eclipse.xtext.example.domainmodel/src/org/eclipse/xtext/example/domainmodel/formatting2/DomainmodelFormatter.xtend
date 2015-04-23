@@ -33,9 +33,9 @@ class DomainmodelFormatter extends XbaseFormatter {
 	}
 
 	def dispatch void format(PackageDeclaration pkg, extension IFormattableDocument document) {
-		val open = pkg.regionForKeyword("{")
-		val close = pkg.regionForKeyword("}")
-		pkg.regionForFeature(ABSTRACT_ELEMENT__NAME).surround[oneSpace]
+		val open = pkg.regionFor.keyword("{")
+		val close = pkg.regionFor.keyword("}")
+		pkg.regionFor.feature(ABSTRACT_ELEMENT__NAME).surround[oneSpace]
 		open.append[newLine]
 		interior(open, close)[indent]
 		for (AbstractElement element : pkg.elements) {
@@ -45,9 +45,9 @@ class DomainmodelFormatter extends XbaseFormatter {
 	}
 
 	def dispatch void format(Entity entity, extension IFormattableDocument document) {
-		val open = entity.regionForKeyword("{")
-		val close = entity.regionForKeyword("}")
-		entity.regionForFeature(ABSTRACT_ELEMENT__NAME).surround[oneSpace]
+		val open = entity.regionFor.keyword("{")
+		val close = entity.regionFor.keyword("}")
+		entity.regionFor.feature(ABSTRACT_ELEMENT__NAME).surround[oneSpace]
 		entity.superType.surround[oneSpace]
 		open.append[newLine]
 		interior(open, close)[indent]
@@ -59,26 +59,26 @@ class DomainmodelFormatter extends XbaseFormatter {
 	}
 
 	def dispatch void format(Property property, extension IFormattableDocument document) {
-		property.regionForKeyword(":").surround[noSpace]
+		property.regionFor.keyword(":").surround[noSpace]
 		format(property.type, document);
 	}
 
 	def dispatch void format(Operation operation, extension IFormattableDocument document) {
-		operation.regionForKeyword("op").append[oneSpace]
-		operation.regionForKeyword("(").surround[noSpace]
+		operation.regionFor.keyword("op").append[oneSpace]
+		operation.regionFor.keyword("(").surround[noSpace]
 		if (!operation.params.isEmpty) {
-			for (comma : operation.regionsForKeywords(","))
+			for (comma : operation.regionFor.keywords(","))
 				comma.prepend[noSpace].append[oneSpace]
 			for (params : operation.params)
 				format(params, document);
-			operation.regionForKeyword(")").prepend[noSpace]
+			operation.regionFor.keyword(")").prepend[noSpace]
 		}
 		if (operation.type != null) {
-			operation.regionForKeyword(")").append[noSpace]
+			operation.regionFor.keyword(")").append[noSpace]
 			operation.type.prepend[noSpace].append[oneSpace]
 			format(operation.type, document);
 		} else {
-			operation.regionForKeyword(")").append[oneSpace]
+			operation.regionFor.keyword(")").append[oneSpace]
 		}
 		format(operation.body, document);
 	}

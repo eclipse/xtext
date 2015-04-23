@@ -12,11 +12,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.formatting2.regionaccess.IAstRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IComment;
 import org.eclipse.xtext.formatting2.regionaccess.IEObjectRegion;
@@ -120,11 +122,14 @@ public class TextRegionAccessToString {
 		Multimap<IHiddenRegion, IEObjectRegion> hiddens = LinkedListMultimap.create();
 		List<String> errors = Lists.newArrayList();
 		ITextRegionAccess access = list.get(0).getTextRegionAccess();
-		List<IEObjectRegion> objects = access.regionsForAllEObjects();
-		for (IEObjectRegion obj : objects) {
+		TreeIterator<EObject> all = EcoreUtil2.eAll(access.regionForRootEObject().getSemanticElement());
+		while (all.hasNext()) {
+			EObject element = all.next();
+			IEObjectRegion obj = access.regionForEObject(element);
+			if (obj == null)
+				continue;
 			IHiddenRegion previous = obj.getPreviousHiddenRegion();
 			IHiddenRegion next = obj.getNextHiddenRegion();
-			EObject element = obj.getSemanticElement();
 			if (previous == null)
 				errors.add("ERROR: " + EmfFormatter.objPath(element) + " has no leading HiddenRegion.");
 			else

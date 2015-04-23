@@ -14,6 +14,7 @@ import org.eclipse.xtext.formatting2.AbstractFormatter2;
 import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionExtensions;
 import org.eclipse.xtext.resource.XtextResource;
 
 /**
@@ -25,10 +26,11 @@ public abstract class GenericFormatter<T extends EObject> extends AbstractFormat
   protected void _format(final EObject obj, final IFormattableDocument document) {
     FormatterRequest _request = this.getRequest();
     ITextRegionAccess _textRegionAccess = _request.getTextRegionAccess();
-    this.format(((T) obj), _textRegionAccess, document);
+    ITextRegionExtensions _extensions = _textRegionAccess.getExtensions();
+    this.format(((T) obj), _extensions, document);
   }
   
-  protected abstract void format(final T model, final ITextRegionAccess regionAccess, final IFormattableDocument document);
+  protected abstract void format(final T model, final ITextRegionExtensions regionAccess, final IFormattableDocument document);
   
   public void format(final Object obj, final IFormattableDocument document) {
     if (obj instanceof XtextResource) {

@@ -17,18 +17,18 @@ import org.eclipse.xtext.xbase.formatting2.XbaseFormatter
 class XbaseWithAnnotationsFormatter extends XbaseFormatter {
 
 	def dispatch void format(XAnnotation ann, extension IFormattableDocument document) {
-		ann.regionForKeyword("@").append[noSpace]
-		ann.regionForKeyword("(").surround[noSpace]
+		ann.regionFor.keyword("@").append[noSpace]
+		ann.regionFor.keyword("(").surround[noSpace]
 		if (ann.value != null) {
 			ann.value.format(document)
-			ann.regionForKeyword(")").prepend[noSpace]
+			ann.regionFor.keyword(")").prepend[noSpace]
 		} else if (!ann.elementValuePairs.empty) {
 			for (pair : ann.elementValuePairs) {
-				pair.regionForKeyword("=").surround[noSpace]
+				pair.regionFor.keyword("=").surround[noSpace]
 				pair.value.format(document)
-				pair.immediatelyFollowingKeyword(",").prepend[noSpace].append[oneSpace]
+				pair.immediatelyFollowing.keyword(",").prepend[noSpace].append[oneSpace]
 			}
-			ann.regionForKeyword(")").prepend[noSpace]
+			ann.regionFor.keyword(")").prepend[noSpace]
 		}
 	}
 

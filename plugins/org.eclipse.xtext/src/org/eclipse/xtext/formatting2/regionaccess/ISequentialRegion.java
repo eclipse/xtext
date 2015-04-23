@@ -8,14 +8,22 @@
 package org.eclipse.xtext.formatting2.regionaccess;
 
 /**
- * <p>Common interface for {@link IHiddenRegion} and {@link ISemanticRegion}.</p>
+ * <p>
+ * Common interface for {@link IHiddenRegion} and {@link ISemanticRegion}.
+ * </p>
  * 
- * <p>{@link IHiddenRegion} and {@link ISemanticRegion} are arranged strictly alternating in a linked list. This interface
- * provides the method to navigate that list.</p>
+ * <p>
+ * {@link IHiddenRegion} and {@link ISemanticRegion} are arranged strictly alternating in a linked list. This interface
+ * provides the method to navigate that list.
+ * </p>
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public interface ISequentialRegion extends ITextSegment {
+
+	ISemanticRegionFinder immediatelyFollowing();
+
+	ISemanticRegionFinder immediatelyPreceding();
 
 	IHiddenRegion getNextHiddenRegion();
 

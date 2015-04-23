@@ -29,6 +29,7 @@ import org.eclipse.xtext.formatting2.internal.TextReplacerContext;
 import org.eclipse.xtext.formatting2.internal.TextReplacerMerger;
 import org.eclipse.xtext.formatting2.internal.WhitespaceReplacer;
 import org.eclipse.xtext.formatting2.regionaccess.IComment;
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionExtensions;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegionPart;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
@@ -126,9 +127,9 @@ import com.google.common.collect.Lists;
  * </p>
  * 
  * <p>
- * The methods {@code regionForFeature()} and {@code regionForKeyword} are extension methods:
- * {@link ITextRegionAccess#regionForFeature(EObject, EStructuralFeature)} and
- * {@link ITextRegionAccess#regionForKeyword(EObject, String)}. They return an {@link ISemanticRegion}.
+ * The methods {@code regionForFeature()} and {@code regionForKeyword} are extension methods: {link
+ * ITextRegionAccess#regionForFeature(EObject, EStructuralFeature)} and {link
+ * ITextRegionAccess#regionForKeyword(EObject, String)}. They return an {@link ISemanticRegion}.
  * </p>
  * 
  * <p>
@@ -163,7 +164,7 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 	 * Offer subclasses access to the methods from {@link ITextRegionAccess} as extension methods.
 	 */
 	@Extension
-	protected ITextRegionAccess regionAccess;
+	protected ITextRegionExtensions textRegionExtensions;
 
 	private FormatterRequest request = null;
 
@@ -297,17 +298,21 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 		return request;
 	}
 
+	public ITextRegionAccess getTextRegionAccess() {
+		return request.getTextRegionAccess();
+	}
+
 	/**
 	 * Overwrite this method to initialize member fields before {@link #format(Object, IFormattableDocument)} is called.
 	 */
 	protected void initalize(FormatterRequest request) {
 		this.request = request;
-		this.regionAccess = request.getTextRegionAccess();
+		this.textRegionExtensions = request.getTextRegionAccess().getExtensions();
 	}
 
 	protected List<ITextReplacement> postProcess(IFormattableDocument document, List<ITextReplacement> replacements) {
 		List<ITextSegment> expected = Lists.newArrayList();
-		IHiddenRegion current = regionAccess.regionForRootEObject().getPreviousHiddenRegion();
+		IHiddenRegion current = getTextRegionAccess().regionForRootEObject().getPreviousHiddenRegion();
 		while (current != null) {
 			if (current.isUndefined())
 				expected.addAll(current.getMergedSpaces());
@@ -339,7 +344,7 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 	 */
 	protected void reset() {
 		this.request = null;
-		this.regionAccess = null;
+		this.textRegionExtensions = null;
 	}
 
 }
