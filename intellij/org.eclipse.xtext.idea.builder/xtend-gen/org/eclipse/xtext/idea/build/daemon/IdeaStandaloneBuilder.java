@@ -7,9 +7,11 @@
  */
 package org.eclipse.xtext.idea.build.daemon;
 
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.builder.standalone.IIssueHandler;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder;
+import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.idea.build.daemon.BuildDaemonFileSystemAccess;
 import org.eclipse.xtext.idea.build.daemon.IdeaIssueHandler;
@@ -38,5 +40,10 @@ public class IdeaStandaloneBuilder extends IncrementalStandaloneBuilder {
       _xblockexpression = fsa;
     }
     return _xblockexpression;
+  }
+  
+  @Override
+  protected void beforeGenerate(final Resource resource, final IFileSystemAccess fileSystemAccess) {
+    this.buildResultCollector.setCurrentResource(resource);
   }
 }

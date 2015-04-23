@@ -11,6 +11,10 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.idea.build.net.ObjectChannel
 import org.eclipse.xtext.idea.build.net.Protocol.BuildIssueMessage
 import org.eclipse.xtext.idea.build.net.Protocol.BuildResultMessage
+import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtext.idea.build.net.Protocol.GeneratedFile
+import static extension org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs.*
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -23,12 +27,21 @@ class XtextBuildResultCollector {
 	@Accessors
 	ObjectChannel output
 	
+	URI currentSourceURI
+	
+	def setCurrentResource(Resource resource) {
+		this.currentSourceURI = resource.URI	
+	}
+		
 	def addIssue(BuildIssueMessage issue) {
 		output.writeObject(issue)
 	}
 	
 	def addChangedFile(String path) {
-		buildResult.dirtyFiles += path
+		buildResult.generatedFiles += new GeneratedFile => [
+			sourceFiles += currentSourceURI.toString
+			file = path.asFileURI.toString
+		]
 	} 
 	
 	def addOutputDir(String outputDir) {

@@ -81,11 +81,11 @@ class Indexer {
 		val allAffected = <URI>newHashSet
 		allAffected += directlyAffected
 		if (isConsiderJava) 
-			javaSupport.installLocalOnlyTypeProvider(request.sourceRoots + request.classPath, resourceSet)
+			javaSupport.installLocalOnlyTypeProvider(request.sourceRoots  + request.outputs + request.classPath, resourceSet)
 		preIndexChangedResources(directlyAffected, newIndex, request, context)
 		if(isConsiderJava) {
-			val stubsClassesDir = javaSupport.generateAndCompileJavaStubs(directlyAffected, newIndex, request, context)
-			javaSupport.installTypeProvider(request.sourceRoots + request.classPath + #[stubsClassesDir], resourceSet)
+			val preCompiledClasses = javaSupport.preCompileJavaFiles(directlyAffected, newIndex, request, context)
+			javaSupport.installTypeProvider(#[preCompiledClasses] + request.sourceRoots  + request.outputs + request.classPath, resourceSet)
 		}
 	
 		LOG.info("Indexing changed and added files")
@@ -95,6 +95,7 @@ class Indexer {
 		while (!toBeIndexed.empty) {
 			allAffected.addAll(toBeIndexed)
 			toBeIndexed.executeClustered [ Resource resource |
+				LOG.info('Indexing ' + resource.URI)
 				currentDeltas += resource.addToIndex(false, newIndex, context)
 				null
 			]

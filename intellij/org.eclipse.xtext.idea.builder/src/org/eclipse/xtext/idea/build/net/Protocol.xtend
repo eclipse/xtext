@@ -12,6 +12,7 @@ import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.jetbrains.jps.incremental.messages.BuildMessage
 import org.eclipse.xtend.lib.annotations.EqualsHashCode
+import groovy.transform.EqualsAndHashCode
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -24,6 +25,7 @@ class Protocol {
 		List<String> dirtyFiles	= newArrayList
 		List<String> deletedFiles = newArrayList
 		List<String> classpath = newArrayList
+		List<String> outputs = newArrayList
 		List<String> sourceRoots = newArrayList
 		String baseDir
 		String encoding
@@ -32,9 +34,16 @@ class Protocol {
 	@Accessors
 	@EqualsHashCode
 	static class BuildResultMessage implements Serializable {
-		List<String> dirtyFiles = newArrayList		
+		List<GeneratedFile> generatedFiles = newArrayList		
 		List<String> deletedFiles = newArrayList
 		List<String> outputDirs = newArrayList
+	}
+	
+	@Accessors
+	@EqualsAndHashCode
+	static class GeneratedFile implements Serializable {
+		String file
+		List<String> sourceFiles = newArrayList
 	}
 	
 	@Accessors
@@ -48,7 +57,7 @@ class Protocol {
 	static class BuildIssueMessage implements Serializable {
 		BuildMessage.Kind kind
 		String message
-		String path
+		String uriToProblem
 		int startOffset
 		int endOffset
 		int locationOffset

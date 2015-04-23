@@ -10,7 +10,6 @@ package org.eclipse.xtext.idea.build.daemon
 import com.google.inject.Guice
 import com.google.inject.Inject
 import com.google.inject.Provider
-import java.io.File
 import java.net.InetAddress
 import java.net.InetSocketAddress
 import java.net.ServerSocket
@@ -25,11 +24,13 @@ import org.apache.log4j.TTCCLayout
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder
 import org.eclipse.xtext.idea.build.net.ObjectChannel
+import org.eclipse.xtext.idea.build.net.Protocol.BuildFailureMessage
 import org.eclipse.xtext.idea.build.net.Protocol.BuildRequestMessage
 
 import static org.eclipse.xtext.idea.build.daemon.XtextBuildDaemon.*
-import org.eclipse.xtext.idea.build.net.Protocol.BuildFailureMessage
-import static extension org.eclipse.emf.common.util.URI.*
+
+import static extension org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs.*
+import org.eclipse.xtext.idea.build.daemon.IdeaBuilderResourceDescriptionsProvider.ModuleAdapter
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -150,6 +151,7 @@ class XtextBuildDaemon {
 				}
 				return false
 			} catch(Exception exc) {
+				LOG.error('Build failed', exc)
 				channel.writeObject(new BuildFailureMessage => [
 					message = exc.message
 				])
@@ -160,24 +162,22 @@ class XtextBuildDaemon {
 		def build(BuildRequestMessage request) {
 			resultCollector.output = channel
 			val buildRequest = new BuildRequest => [
-				baseDir = request.baseDir.toFile
+				baseDir = request.baseDir.asURI
 				defaultEncoding = request.encoding
-				classPath = request.classpath.map[toFile]
-				sourceRoots = request.sourceRoots.map[toFile]
-				dirtyFiles = request.dirtyFiles.map[createFileURI]
-				deletedFiles = request.deletedFiles.map[createFileURI]
+				classPath = request.classpath.map[asURI]
+				outputs = request.outputs.map[asURI]
+				sourceRoots = request.sourceRoots.map[asURI]
+				dirtyFiles = request.dirtyFiles.map[asURI]
+				deletedFiles = request.deletedFiles.map[asURI]
 				failOnValidationError = false
 			]
 			val builder = builderFactory.create(buildRequest, XtextLanguages.getLanguageAccesses) as IdeaStandaloneBuilder
 			builder => [
+				context.resourceSet.eAdapters.add(new ModuleAdapter(request.baseDir))
 				buildResultCollector = resultCollector
 				launch
 			]
 			resultCollector.buildResult
-		}
-		
-		private def toFile(String path) {
-			new File(path)
 		}
 	}
 }

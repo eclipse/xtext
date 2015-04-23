@@ -18,6 +18,7 @@ import static org.junit.Assert.*
 import org.eclipse.xtext.idea.build.net.Protocol.BuildIssueMessage
 import org.eclipse.xtext.idea.build.net.Protocol.BuildResultMessage
 import org.jetbrains.jps.incremental.messages.BuildMessage
+import org.eclipse.xtext.idea.build.net.Protocol.GeneratedFile
 
 /**
  * @author Jan Koehnlein
@@ -72,6 +73,7 @@ class ObjectChannelTest {
 			dirtyFiles += 'dirty.txt'
 			deletedFiles += 'deleted.txt'
 			classpath += 'foo.jar'
+			outputs += 'bin/' 
 			sourceRoots += 'src'
 			baseDir = 'bar'
 			encoding = 'UTF-8'
@@ -81,7 +83,7 @@ class ObjectChannelTest {
 		val issue = new BuildIssueMessage => [
 			kind = BuildMessage.Kind.ERROR
 			message = 'So ja nu nich!' 
-			path = 'foo'
+			uriToProblem = 'foo'
 			startOffset = 42
 			endOffset = 43
 			locationOffset = 42
@@ -91,7 +93,10 @@ class ObjectChannelTest {
 		bob.writeObject(issue)
 		assertEquals(issue, alice.readObject)
 		val result = new BuildResultMessage => [
-			dirtyFiles += 'foo.txt'
+			generatedFiles += new GeneratedFile => [
+			 	file = 'foo.txt'
+			 	sourceFiles += 'dirty.txt'
+			]
 			deletedFiles += 'deleted.txt'
 			outputDirs += 'bin' 
 		]

@@ -52,8 +52,8 @@ public class IdeaIssueHandler implements IIssueHandler {
             String _message = issue.getMessage();
             it.setMessage(_message);
             URI _uriToProblem = issue.getUriToProblem();
-            String _path = _uriToProblem.path();
-            it.setPath(_path);
+            String _string = _uriToProblem.toString();
+            it.setUriToProblem(_string);
             Integer _offset = issue.getOffset();
             it.setStartOffset((_offset).intValue());
             Integer _offset_1 = issue.getOffset();

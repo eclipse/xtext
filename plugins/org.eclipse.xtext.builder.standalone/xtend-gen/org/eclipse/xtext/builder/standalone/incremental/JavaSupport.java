@@ -8,20 +8,22 @@
 package org.eclipse.xtext.builder.standalone.incremental;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import com.google.common.io.Files;
 import com.google.inject.Inject;
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Collections;
 import java.util.List;
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.compiler.IJavaCompiler;
 import org.eclipse.xtext.builder.standalone.incremental.BuildContext;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
+import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
@@ -59,87 +61,61 @@ public class JavaSupport {
   @Inject
   private AbstractFileSystemAccess commonFileAccess;
   
-  public void installLocalOnlyTypeProvider(final Iterable<File> classPathRoots, final XtextResourceSet resourceSet) {
+  public void installLocalOnlyTypeProvider(final Iterable<URI> classPathRoots, final XtextResourceSet resourceSet) {
     JavaSupport.LOG.info("Installing type provider for local types only");
     final URLClassLoader classLoader = this.createURLClassLoader(classPathRoots);
     new ClasspathTypeProvider(classLoader, resourceSet, null, this.typeResourceServices);
     resourceSet.setClasspathURIContext(classLoader);
   }
   
-  public void installTypeProvider(final Iterable<File> classPathRoots, final XtextResourceSet resSet) {
+  public void installTypeProvider(final Iterable<URI> classPathRoots, final XtextResourceSet resSet) {
     JavaSupport.LOG.info("Installing type provider with stubs");
     final URLClassLoader classLoader = this.createURLClassLoader(classPathRoots);
     new ClasspathTypeProvider(classLoader, resSet, this.typeAccess, this.typeResourceServices);
     resSet.setClasspathURIContext(classLoader);
   }
   
-  protected URLClassLoader createURLClassLoader(final Iterable<File> classPathEntries) {
-    final Function1<File, URL> _function = new Function1<File, URL>() {
+  protected URLClassLoader createURLClassLoader(final Iterable<URI> classPathEntries) {
+    final Function1<URI, URL> _function = new Function1<URI, URL>() {
       @Override
-      public URL apply(final File it) {
+      public URL apply(final URI it) {
         try {
-          URI _uRI = it.toURI();
-          return _uRI.toURL();
+          String _string = it.toString();
+          return new URL(_string);
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
       }
     };
-    final Iterable<URL> classPathUrls = IterableExtensions.<File, URL>map(classPathEntries, _function);
+    final Iterable<URL> classPathUrls = IterableExtensions.<URI, URL>map(classPathEntries, _function);
     return new URLClassLoader(((URL[])Conversions.unwrapArray(classPathUrls, URL.class)));
   }
   
-  public File generateAndCompileJavaStubs(final Iterable<org.eclipse.emf.common.util.URI> changedResources, final ResourceDescriptionsData newIndex, final BuildRequest request, @Extension final BuildContext context) {
-    File _xblockexpression = null;
-    {
-      final File stubsDir = this.generateStubs(changedResources, newIndex, request, context);
-      _xblockexpression = this.compileStubs(stubsDir, request);
-    }
-    return _xblockexpression;
-  }
-  
-  protected File generateStubs(final Iterable<org.eclipse.emf.common.util.URI> changedResources, final ResourceDescriptionsData newIndex, final BuildRequest request, @Extension final BuildContext context) {
+  public URI preCompileJavaFiles(final Iterable<URI> changedResources, final ResourceDescriptionsData newIndex, final BuildRequest request, @Extension final BuildContext context) {
     try {
-      final File stubsDir = this.createTempDir("stubs", request);
+      final File stubsDir = this.createTmpDir("stubs", request);
+      final File javaDir = this.createTmpDir("java", request);
       String _absolutePath = stubsDir.getAbsolutePath();
       String _plus = ("Generating stubs into " + _absolutePath);
       JavaSupport.LOG.info(_plus);
-      String _absolutePath_1 = stubsDir.getAbsolutePath();
-      this.commonFileAccess.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT, _absolutePath_1);
-      List<File> _sourceRoots = request.getSourceRoots();
-      final Function1<File, org.eclipse.emf.common.util.URI> _function = new Function1<File, org.eclipse.emf.common.util.URI>() {
-        @Override
-        public org.eclipse.emf.common.util.URI apply(final File it) {
-          org.eclipse.emf.common.util.URI _xblockexpression = null;
-          {
-            String _path = it.getPath();
-            final org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createFileURI(_path);
-            org.eclipse.emf.common.util.URI _xifexpression = null;
-            boolean _hasTrailingPathSeparator = uri.hasTrailingPathSeparator();
-            if (_hasTrailingPathSeparator) {
-              _xifexpression = uri;
-            } else {
-              _xifexpression = uri.appendSegment("");
-            }
-            _xblockexpression = _xifexpression;
-          }
-          return _xblockexpression;
-        }
-      };
-      final List<org.eclipse.emf.common.util.URI> sourceRootURIs = ListExtensions.<File, org.eclipse.emf.common.util.URI>map(_sourceRoots, _function);
-      for (final org.eclipse.emf.common.util.URI resource : changedResources) {
+      String _absolutePath_1 = javaDir.getAbsolutePath();
+      String _plus_1 = ("Copying modified Java files into " + _absolutePath_1);
+      JavaSupport.LOG.info(_plus_1);
+      String _absolutePath_2 = stubsDir.getAbsolutePath();
+      this.commonFileAccess.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT, _absolutePath_2);
+      for (final URI resource : changedResources) {
         String _fileExtension = resource.fileExtension();
         boolean _equals = Objects.equal(_fileExtension, "java");
         if (_equals) {
-          final org.eclipse.emf.common.util.URI relativeURI = this.findSourceRootRelativeURI(resource, sourceRootURIs);
+          final URI relativeURI = FilesAndURIs.findSourceRootRelativeURI(resource, request);
           boolean _equals_1 = Objects.equal(relativeURI, null);
           if (_equals_1) {
             JavaSupport.LOG.error((("Changed java file " + resource) + " is not in any sourceRoot"));
           } else {
-            String _fileString = resource.toFileString();
-            final File source = new File(_fileString);
+            String _asPath = FilesAndURIs.asPath(resource);
+            final File source = new File(_asPath);
             String _string = relativeURI.toString();
-            final File target = new File(stubsDir, _string);
+            final File target = new File(javaDir, _string);
             Files.createParentDirs(target);
             Files.copy(source, target);
           }
@@ -157,84 +133,104 @@ public class JavaSupport {
           }
         }
       }
-      return stubsDir;
+      final File stubsClasses = this.createTmpDir("stubs-classes", request);
+      final File javaClasses = this.createTmpDir("classes", request);
+      this.compile(stubsDir, stubsClasses, request);
+      this.compile(javaDir, javaClasses, request, stubsClasses);
+      return FilesAndURIs.asURI(javaClasses);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  protected org.eclipse.emf.common.util.URI findSourceRootRelativeURI(final org.eclipse.emf.common.util.URI uri, final List<org.eclipse.emf.common.util.URI> sourceRootURIs) {
-    for (final org.eclipse.emf.common.util.URI sourceRootURI : sourceRootURIs) {
-      {
-        final org.eclipse.emf.common.util.URI relativeURI = uri.deresolve(sourceRootURI);
-        boolean _notEquals = (!Objects.equal(relativeURI, uri));
-        if (_notEquals) {
-          return relativeURI;
-        }
-      }
-    }
-    return null;
-  }
-  
-  protected File compileStubs(final File stubsDir, final BuildRequest request) {
-    final File stubsClassesFolder = this.createTempDir("classes", request);
-    List<File> _classPath = request.getClassPath();
+  protected void compile(final File sourceDir, final File targetDir, final BuildRequest request, final File... additionalClassesFolders) {
     final Function1<File, String> _function = new Function1<File, String>() {
       @Override
       public String apply(final File it) {
         return it.getAbsolutePath();
       }
     };
-    List<String> _map = ListExtensions.<File, String>map(_classPath, _function);
-    this.compiler.setClassPath(_map);
-    String _absolutePath = stubsDir.getAbsolutePath();
-    String _plus = ("Compiling stubs located in " + _absolutePath);
-    JavaSupport.LOG.info(_plus);
-    String _absolutePath_1 = stubsDir.getAbsolutePath();
-    final List<String> sourcesToCompile = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(_absolutePath_1));
-    String _join = IterableExtensions.join(sourcesToCompile, ",");
-    String _plus_1 = ("Compiler source roots: " + _join);
-    JavaSupport.LOG.info(_plus_1);
-    final IJavaCompiler.CompilationResult result = this.compiler.compile(sourcesToCompile, stubsClassesFolder);
+    List<String> _map = ListExtensions.<File, String>map(((List<File>)Conversions.doWrapArray(additionalClassesFolders)), _function);
+    List<URI> _outputs = request.getOutputs();
+    final Function1<URI, String> _function_1 = new Function1<URI, String>() {
+      @Override
+      public String apply(final URI it) {
+        return FilesAndURIs.asPath(it);
+      }
+    };
+    List<String> _map_1 = ListExtensions.<URI, String>map(_outputs, _function_1);
+    Iterable<String> _plus = Iterables.<String>concat(_map, _map_1);
+    List<URI> _classPath = request.getClassPath();
+    final Function1<URI, String> _function_2 = new Function1<URI, String>() {
+      @Override
+      public String apply(final URI it) {
+        return FilesAndURIs.asPath(it);
+      }
+    };
+    List<String> _map_2 = ListExtensions.<URI, String>map(_classPath, _function_2);
+    Iterable<String> _plus_1 = Iterables.<String>concat(_plus, _map_2);
+    this.compiler.setClassPath(_plus_1);
+    String _absolutePath = sourceDir.getAbsolutePath();
+    String _plus_2 = ("Pre-compiling java files located in " + _absolutePath);
+    JavaSupport.LOG.info(_plus_2);
+    String _absolutePath_1 = sourceDir.getAbsolutePath();
+    final IJavaCompiler.CompilationResult result = this.compiler.compile(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(_absolutePath_1)), targetDir);
     if (result != null) {
       switch (result) {
         case SKIPPED:
-          JavaSupport.LOG.info("Nothing to compile. Stubs compilation was skipped.");
+          JavaSupport.LOG.info("Nothing to pre-compile.");
           break;
         case FAILED:
-          JavaSupport.LOG.info("Stubs compilation finished with errors.");
+          JavaSupport.LOG.info("Pre-compilation finished with errors. No need to worry. This is normal.");
           break;
         case SUCCEEDED:
-          JavaSupport.LOG.info("Stubs compilation successfully finished.");
+          JavaSupport.LOG.info("Pre-compilation successfully finished.");
           break;
         default:
           break;
       }
     }
-    return stubsClassesFolder;
   }
   
-  protected File createTempDir(final String subDir, final BuildRequest request) {
+  protected File createTmpDir(final String subDir, final BuildRequest request) {
     try {
-      File _tempDir = request.getTempDir();
-      final File file = new File(_tempDir, subDir);
+      URI _baseDir = request.getBaseDir();
+      File _asFile = FilesAndURIs.asFile(_baseDir);
+      final File tmpRoot = new File(_asFile, "xtext-tmp");
       boolean _and = false;
-      boolean _mkdirs = file.mkdirs();
+      boolean _mkdirs = tmpRoot.mkdirs();
       boolean _not = (!_mkdirs);
       if (!_not) {
         _and = false;
       } else {
-        boolean _exists = file.exists();
+        boolean _exists = tmpRoot.exists();
         boolean _not_1 = (!_exists);
         _and = _not_1;
       }
       if (_and) {
-        String _absolutePath = file.getAbsolutePath();
+        String _absolutePath = tmpRoot.getAbsolutePath();
         String _plus = ("Failed to create directory \'" + _absolutePath);
         String _plus_1 = (_plus + "\'");
         throw new IOException(_plus_1);
       }
-      return file;
+      final File tmpDir = new File(tmpRoot, subDir);
+      boolean _and_1 = false;
+      boolean _mkdirs_1 = tmpDir.mkdirs();
+      boolean _not_2 = (!_mkdirs_1);
+      if (!_not_2) {
+        _and_1 = false;
+      } else {
+        boolean _exists_1 = tmpDir.exists();
+        boolean _not_3 = (!_exists_1);
+        _and_1 = _not_3;
+      }
+      if (_and_1) {
+        String _absolutePath_1 = tmpDir.getAbsolutePath();
+        String _plus_2 = ("Failed to create directory \'" + _absolutePath_1);
+        String _plus_3 = (_plus_2 + "\'");
+        throw new IOException(_plus_3);
+      }
+      return tmpDir;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

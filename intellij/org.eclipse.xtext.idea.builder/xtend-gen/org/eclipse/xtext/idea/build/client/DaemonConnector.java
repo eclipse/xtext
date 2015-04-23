@@ -19,7 +19,6 @@ import java.lang.management.RuntimeMXBean;
 import java.net.ConnectException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
-import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.channels.SocketChannel;
@@ -28,6 +27,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
+import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
 import org.eclipse.xtext.idea.build.daemon.XtextBuildDaemon;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -105,17 +105,11 @@ public class DaemonConnector {
             final Procedure1<URL> _function = new Procedure1<URL>() {
               @Override
               public void apply(final URL it) {
-                try {
-                  String _protocol = it.getProtocol();
-                  boolean _equals = Objects.equal(_protocol, "file");
-                  if (_equals) {
-                    URI _uRI = it.toURI();
-                    File _file = new File(_uRI);
-                    String _path = _file.getPath();
-                    classpath.add(_path);
-                  }
-                } catch (Throwable _e) {
-                  throw Exceptions.sneakyThrow(_e);
+                String _protocol = it.getProtocol();
+                boolean _equals = Objects.equal(_protocol, "file");
+                if (_equals) {
+                  String _asPath = FilesAndURIs.asPath(it);
+                  classpath.add(_asPath);
                 }
               }
             };

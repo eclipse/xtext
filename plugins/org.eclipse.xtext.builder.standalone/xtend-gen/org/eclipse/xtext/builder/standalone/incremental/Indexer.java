@@ -11,7 +11,6 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -172,21 +171,25 @@ public class Indexer {
     final HashSet<URI> allAffected = CollectionLiterals.<URI>newHashSet();
     Iterables.<URI>addAll(allAffected, directlyAffected);
     if (isConsiderJava) {
-      List<File> _sourceRoots = request.getSourceRoots();
-      List<File> _classPath = request.getClassPath();
-      Iterable<File> _plus_1 = Iterables.<File>concat(_sourceRoots, _classPath);
+      List<URI> _sourceRoots = request.getSourceRoots();
+      List<URI> _outputs = request.getOutputs();
+      Iterable<URI> _plus_1 = Iterables.<URI>concat(_sourceRoots, _outputs);
+      List<URI> _classPath = request.getClassPath();
+      Iterable<URI> _plus_2 = Iterables.<URI>concat(_plus_1, _classPath);
       XtextResourceSet _resourceSet_1 = context.getResourceSet();
-      this.javaSupport.installLocalOnlyTypeProvider(_plus_1, _resourceSet_1);
+      this.javaSupport.installLocalOnlyTypeProvider(_plus_2, _resourceSet_1);
     }
     this.preIndexChangedResources(directlyAffected, newIndex, request, context);
     if (isConsiderJava) {
-      final File stubsClassesDir = this.javaSupport.generateAndCompileJavaStubs(directlyAffected, newIndex, request, context);
-      List<File> _sourceRoots_1 = request.getSourceRoots();
-      List<File> _classPath_1 = request.getClassPath();
-      Iterable<File> _plus_2 = Iterables.<File>concat(_sourceRoots_1, _classPath_1);
-      Iterable<File> _plus_3 = Iterables.<File>concat(_plus_2, Collections.<File>unmodifiableList(CollectionLiterals.<File>newArrayList(stubsClassesDir)));
+      final URI preCompiledClasses = this.javaSupport.preCompileJavaFiles(directlyAffected, newIndex, request, context);
+      List<URI> _sourceRoots_1 = request.getSourceRoots();
+      Iterable<URI> _plus_3 = Iterables.<URI>concat(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(preCompiledClasses)), _sourceRoots_1);
+      List<URI> _outputs_1 = request.getOutputs();
+      Iterable<URI> _plus_4 = Iterables.<URI>concat(_plus_3, _outputs_1);
+      List<URI> _classPath_1 = request.getClassPath();
+      Iterable<URI> _plus_5 = Iterables.<URI>concat(_plus_4, _classPath_1);
       XtextResourceSet _resourceSet_2 = context.getResourceSet();
-      this.javaSupport.installTypeProvider(_plus_3, _resourceSet_2);
+      this.javaSupport.installTypeProvider(_plus_5, _resourceSet_2);
     }
     Indexer.LOG.info("Indexing changed and added files");
     final ArrayList<URI> toBeIndexed = CollectionLiterals.<URI>newArrayList();
@@ -200,6 +203,9 @@ public class Indexer {
           public Object apply(final Resource resource) {
             Object _xblockexpression = null;
             {
+              URI _uRI = resource.getURI();
+              String _plus = ("Indexing " + _uRI);
+              Indexer.LOG.info(_plus);
               DefaultResourceDescriptionDelta _addToIndex = Indexer.this.addToIndex(resource, false, newIndex, context);
               currentDeltas.add(_addToIndex);
               _xblockexpression = null;

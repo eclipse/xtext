@@ -27,7 +27,7 @@ class IdeaIssueHandler implements IIssueHandler {
 			buildResultCollector.addIssue(new BuildIssueMessage() => [
 				kind = issue.kind
 				message = issue.message
-				path = issue.uriToProblem.path
+				uriToProblem = issue.uriToProblem.toString
 				startOffset = issue.offset
 				endOffset = issue.offset + issue.length
 				locationOffset = issue.offset

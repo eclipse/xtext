@@ -8,10 +8,15 @@
 package org.eclipse.xtext.idea.build.daemon;
 
 import java.util.List;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
 import org.eclipse.xtext.idea.build.net.ObjectChannel;
 import org.eclipse.xtext.idea.build.net.Protocol;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
@@ -25,13 +30,33 @@ public class XtextBuildResultCollector {
   @Accessors
   private ObjectChannel output;
   
+  private URI currentSourceURI;
+  
+  public URI setCurrentResource(final Resource resource) {
+    URI _uRI = resource.getURI();
+    return this.currentSourceURI = _uRI;
+  }
+  
   public void addIssue(final Protocol.BuildIssueMessage issue) {
     this.output.writeObject(issue);
   }
   
   public boolean addChangedFile(final String path) {
-    List<String> _dirtyFiles = this.buildResult.getDirtyFiles();
-    return _dirtyFiles.add(path);
+    List<Protocol.GeneratedFile> _generatedFiles = this.buildResult.getGeneratedFiles();
+    Protocol.GeneratedFile _generatedFile = new Protocol.GeneratedFile();
+    final Procedure1<Protocol.GeneratedFile> _function = new Procedure1<Protocol.GeneratedFile>() {
+      @Override
+      public void apply(final Protocol.GeneratedFile it) {
+        List<String> _sourceFiles = it.getSourceFiles();
+        String _string = XtextBuildResultCollector.this.currentSourceURI.toString();
+        _sourceFiles.add(_string);
+        URI _asFileURI = FilesAndURIs.asFileURI(path);
+        String _string_1 = _asFileURI.toString();
+        it.setFile(_string_1);
+      }
+    };
+    Protocol.GeneratedFile _doubleArrow = ObjectExtensions.<Protocol.GeneratedFile>operator_doubleArrow(_generatedFile, _function);
+    return _generatedFiles.add(_doubleArrow);
   }
   
   public boolean addOutputDir(final String outputDir) {

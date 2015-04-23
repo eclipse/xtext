@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.incremental.BuildContext;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
+import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
 import org.eclipse.xtext.mwe.NameBasedFilter;
 import org.eclipse.xtext.mwe.PathTraverser;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -51,9 +52,9 @@ public class ResourceURICollector {
     {
       ResourceURICollector.LOG.info("Collecting source models.");
       final long startedAt = System.currentTimeMillis();
-      List<File> _sourceRoots = request.getSourceRoots();
+      List<URI> _sourceRoots = request.getSourceRoots();
       List<URI> _collectResources = this.collectResources(_sourceRoots, context);
-      List<File> _classPath = request.getClassPath();
+      List<URI> _classPath = request.getClassPath();
       List<URI> _collectResources_1 = this.collectResources(_classPath, context);
       Iterable<URI> _plus = Iterables.<URI>concat(_collectResources, _collectResources_1);
       final Set<URI> result = IterableExtensions.<URI>toSet(_plus);
@@ -67,7 +68,7 @@ public class ResourceURICollector {
     return _xblockexpression;
   }
   
-  protected List<URI> collectResources(final List<File> roots, final BuildContext context) {
+  protected List<URI> collectResources(final List<URI> roots, final BuildContext context) {
     Map<String, LanguageAccess> _languages = context.getLanguages();
     Set<String> _keySet = _languages.keySet();
     Iterable<String> _plus = Iterables.<String>concat(_keySet, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("java")));
@@ -76,13 +77,13 @@ public class ResourceURICollector {
     nameBasedFilter.setRegularExpression(((".*\\.(?:(" + extensions) + "))$"));
     final List<URI> resources = CollectionLiterals.<URI>newArrayList();
     PathTraverser _pathTraverser = new PathTraverser();
-    final Function1<File, String> _function = new Function1<File, String>() {
+    final Function1<URI, String> _function = new Function1<URI, String>() {
       @Override
-      public String apply(final File it) {
-        return it.getAbsolutePath();
+      public String apply(final URI it) {
+        return it.toFileString();
       }
     };
-    List<String> _map = ListExtensions.<File, String>map(roots, _function);
+    List<String> _map = ListExtensions.<URI, String>map(roots, _function);
     List<String> _list = IterableExtensions.<String>toList(_map);
     final Predicate<URI> _function_1 = new Predicate<URI>() {
       @Override
@@ -99,8 +100,8 @@ public class ResourceURICollector {
     Map<String, Collection<URI>> _asMap = modelsFound.asMap();
     final Procedure2<String, Collection<URI>> _function_2 = new Procedure2<String, Collection<URI>>() {
       @Override
-      public void apply(final String uri, final Collection<URI> resource) {
-        final File file = new File(uri);
+      public void apply(final String path, final Collection<URI> resource) {
+        final File file = new File(path);
         boolean _and = false;
         boolean _and_1 = false;
         boolean _notEquals = (!Objects.equal(resource, null));
@@ -151,12 +152,12 @@ public class ResourceURICollector {
         if (_containsKey) {
           return;
         }
-        java.net.URI _uRI = file.toURI();
-        String _plus = ("archive:" + _uRI);
+        URI _asURI = FilesAndURIs.asURI(file);
+        String _plus = ("archive:" + _asURI);
         final String path = (_plus + "!/");
-        final URI uri = URI.createURI(path);
         Map<String, URI> _platformResourceMap_1 = EcorePlugin.getPlatformResourceMap();
-        _platformResourceMap_1.put(name, uri);
+        URI _asURI_1 = FilesAndURIs.asURI(path);
+        _platformResourceMap_1.put(name, _asURI_1);
       }
     } catch (final Throwable _t) {
       if (_t instanceof ZipException) {

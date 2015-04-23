@@ -8,6 +8,7 @@
 package org.eclipse.xtext.builder.standalone.incremental;
 
 import com.google.common.base.Objects;
+import java.io.File;
 import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -35,6 +36,8 @@ public class BuildContext {
   
   private transient ClusteringStorageAwareResourceLoader loader;
   
+  private final File tempDir;
+  
   public <T extends Object> Iterable<T> executeClustered(final Iterable<URI> uri, final Function1<? super Resource, ? extends T> operation) {
     Iterable<T> _xblockexpression = null;
     {
@@ -53,11 +56,12 @@ public class BuildContext {
     return this.languages.get(_fileExtension);
   }
   
-  public BuildContext(final Map<String, LanguageAccess> languages, final XtextResourceSet resourceSet, final IResourceClusteringPolicy clusteringPolicy) {
+  public BuildContext(final Map<String, LanguageAccess> languages, final XtextResourceSet resourceSet, final IResourceClusteringPolicy clusteringPolicy, final File tempDir) {
     super();
     this.languages = languages;
     this.resourceSet = resourceSet;
     this.clusteringPolicy = clusteringPolicy;
+    this.tempDir = tempDir;
   }
   
   @Override
@@ -68,6 +72,7 @@ public class BuildContext {
     result = prime * result + ((this.languages== null) ? 0 : this.languages.hashCode());
     result = prime * result + ((this.resourceSet== null) ? 0 : this.resourceSet.hashCode());
     result = prime * result + ((this.clusteringPolicy== null) ? 0 : this.clusteringPolicy.hashCode());
+    result = prime * result + ((this.tempDir== null) ? 0 : this.tempDir.hashCode());
     return result;
   }
   
@@ -96,6 +101,11 @@ public class BuildContext {
         return false;
     } else if (!this.clusteringPolicy.equals(other.clusteringPolicy))
       return false;
+    if (this.tempDir == null) {
+      if (other.tempDir != null)
+        return false;
+    } else if (!this.tempDir.equals(other.tempDir))
+      return false;
     return true;
   }
   
@@ -106,6 +116,7 @@ public class BuildContext {
     b.add("languages", this.languages);
     b.add("resourceSet", this.resourceSet);
     b.add("clusteringPolicy", this.clusteringPolicy);
+    b.add("tempDir", this.tempDir);
     return b.toString();
   }
   
@@ -122,5 +133,10 @@ public class BuildContext {
   @Pure
   public IResourceClusteringPolicy getClusteringPolicy() {
     return this.clusteringPolicy;
+  }
+  
+  @Pure
+  public File getTempDir() {
+    return this.tempDir;
   }
 }

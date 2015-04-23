@@ -34,6 +34,12 @@ public class BuildDaemonFileSystemAccess extends JavaIoFileSystemAccess {
   }
   
   @Override
+  protected void generateTrace(final String fileName, final String outputConfigName, final CharSequence contents) {
+    super.generateTrace(fileName, outputConfigName, contents);
+    this.markDirty(fileName, outputConfigName);
+  }
+  
+  @Override
   public void generateFile(final String fileName, final CharSequence contents) {
     super.generateFile(fileName, contents);
     this.markDirty(fileName, IFileSystemAccess.DEFAULT_OUTPUT);

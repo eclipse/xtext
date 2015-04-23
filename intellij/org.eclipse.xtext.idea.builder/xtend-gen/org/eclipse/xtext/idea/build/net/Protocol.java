@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.idea.build.net;
 
+import groovy.transform.EqualsAndHashCode;
 import java.io.Serializable;
 import java.util.List;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -28,6 +29,8 @@ public class Protocol {
     private List<String> deletedFiles = CollectionLiterals.<String>newArrayList();
     
     private List<String> classpath = CollectionLiterals.<String>newArrayList();
+    
+    private List<String> outputs = CollectionLiterals.<String>newArrayList();
     
     private List<String> sourceRoots = CollectionLiterals.<String>newArrayList();
     
@@ -60,6 +63,15 @@ public class Protocol {
     
     public void setClasspath(final List<String> classpath) {
       this.classpath = classpath;
+    }
+    
+    @Pure
+    public List<String> getOutputs() {
+      return this.outputs;
+    }
+    
+    public void setOutputs(final List<String> outputs) {
+      this.outputs = outputs;
     }
     
     @Pure
@@ -114,6 +126,11 @@ public class Protocol {
           return false;
       } else if (!this.classpath.equals(other.classpath))
         return false;
+      if (this.outputs == null) {
+        if (other.outputs != null)
+          return false;
+      } else if (!this.outputs.equals(other.outputs))
+        return false;
       if (this.sourceRoots == null) {
         if (other.sourceRoots != null)
           return false;
@@ -140,6 +157,7 @@ public class Protocol {
       result = prime * result + ((this.dirtyFiles== null) ? 0 : this.dirtyFiles.hashCode());
       result = prime * result + ((this.deletedFiles== null) ? 0 : this.deletedFiles.hashCode());
       result = prime * result + ((this.classpath== null) ? 0 : this.classpath.hashCode());
+      result = prime * result + ((this.outputs== null) ? 0 : this.outputs.hashCode());
       result = prime * result + ((this.sourceRoots== null) ? 0 : this.sourceRoots.hashCode());
       result = prime * result + ((this.baseDir== null) ? 0 : this.baseDir.hashCode());
       result = prime * result + ((this.encoding== null) ? 0 : this.encoding.hashCode());
@@ -150,19 +168,19 @@ public class Protocol {
   @Accessors
   @EqualsHashCode
   public static class BuildResultMessage implements Serializable {
-    private List<String> dirtyFiles = CollectionLiterals.<String>newArrayList();
+    private List<Protocol.GeneratedFile> generatedFiles = CollectionLiterals.<Protocol.GeneratedFile>newArrayList();
     
     private List<String> deletedFiles = CollectionLiterals.<String>newArrayList();
     
     private List<String> outputDirs = CollectionLiterals.<String>newArrayList();
     
     @Pure
-    public List<String> getDirtyFiles() {
-      return this.dirtyFiles;
+    public List<Protocol.GeneratedFile> getGeneratedFiles() {
+      return this.generatedFiles;
     }
     
-    public void setDirtyFiles(final List<String> dirtyFiles) {
-      this.dirtyFiles = dirtyFiles;
+    public void setGeneratedFiles(final List<Protocol.GeneratedFile> generatedFiles) {
+      this.generatedFiles = generatedFiles;
     }
     
     @Pure
@@ -193,10 +211,10 @@ public class Protocol {
       if (getClass() != obj.getClass())
         return false;
       Protocol.BuildResultMessage other = (Protocol.BuildResultMessage) obj;
-      if (this.dirtyFiles == null) {
-        if (other.dirtyFiles != null)
+      if (this.generatedFiles == null) {
+        if (other.generatedFiles != null)
           return false;
-      } else if (!this.dirtyFiles.equals(other.dirtyFiles))
+      } else if (!this.generatedFiles.equals(other.generatedFiles))
         return false;
       if (this.deletedFiles == null) {
         if (other.deletedFiles != null)
@@ -216,10 +234,36 @@ public class Protocol {
     public int hashCode() {
       final int prime = 31;
       int result = 1;
-      result = prime * result + ((this.dirtyFiles== null) ? 0 : this.dirtyFiles.hashCode());
+      result = prime * result + ((this.generatedFiles== null) ? 0 : this.generatedFiles.hashCode());
       result = prime * result + ((this.deletedFiles== null) ? 0 : this.deletedFiles.hashCode());
       result = prime * result + ((this.outputDirs== null) ? 0 : this.outputDirs.hashCode());
       return result;
+    }
+  }
+  
+  @Accessors
+  @EqualsAndHashCode
+  public static class GeneratedFile implements Serializable {
+    private String file;
+    
+    private List<String> sourceFiles = CollectionLiterals.<String>newArrayList();
+    
+    @Pure
+    public String getFile() {
+      return this.file;
+    }
+    
+    public void setFile(final String file) {
+      this.file = file;
+    }
+    
+    @Pure
+    public List<String> getSourceFiles() {
+      return this.sourceFiles;
+    }
+    
+    public void setSourceFiles(final List<String> sourceFiles) {
+      this.sourceFiles = sourceFiles;
     }
   }
   
@@ -272,7 +316,7 @@ public class Protocol {
     
     private String message;
     
-    private String path;
+    private String uriToProblem;
     
     private int startOffset;
     
@@ -303,12 +347,12 @@ public class Protocol {
     }
     
     @Pure
-    public String getPath() {
-      return this.path;
+    public String getUriToProblem() {
+      return this.uriToProblem;
     }
     
-    public void setPath(final String path) {
-      this.path = path;
+    public void setUriToProblem(final String uriToProblem) {
+      this.uriToProblem = uriToProblem;
     }
     
     @Pure
@@ -376,10 +420,10 @@ public class Protocol {
           return false;
       } else if (!this.message.equals(other.message))
         return false;
-      if (this.path == null) {
-        if (other.path != null)
+      if (this.uriToProblem == null) {
+        if (other.uriToProblem != null)
           return false;
-      } else if (!this.path.equals(other.path))
+      } else if (!this.uriToProblem.equals(other.uriToProblem))
         return false;
       if (other.startOffset != this.startOffset)
         return false;
@@ -401,7 +445,7 @@ public class Protocol {
       int result = 1;
       result = prime * result + ((this.kind== null) ? 0 : this.kind.hashCode());
       result = prime * result + ((this.message== null) ? 0 : this.message.hashCode());
-      result = prime * result + ((this.path== null) ? 0 : this.path.hashCode());
+      result = prime * result + ((this.uriToProblem== null) ? 0 : this.uriToProblem.hashCode());
       result = prime * result + this.startOffset;
       result = prime * result + this.endOffset;
       result = prime * result + this.locationOffset;

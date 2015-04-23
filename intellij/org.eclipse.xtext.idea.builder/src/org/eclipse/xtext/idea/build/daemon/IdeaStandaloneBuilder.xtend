@@ -9,16 +9,17 @@ package org.eclipse.xtext.idea.build.daemon
 
 //import java.io.File
 //import org.apache.log4j.Logger
+
+import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.builder.standalone.LanguageAccess
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder
+import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 class IdeaStandaloneBuilder extends IncrementalStandaloneBuilder {
-
-//	static val LOG = Logger.getLogger(IdeaStandaloneBuilder)
 
 	XtextBuildResultCollector buildResultCollector
 
@@ -28,18 +29,12 @@ class IdeaStandaloneBuilder extends IncrementalStandaloneBuilder {
 	}
 	
 	override protected configureFileSystemAccess(JavaIoFileSystemAccess fsa, LanguageAccess language) {
-		if(fsa instanceof BuildDaemonFileSystemAccess) {
+		if(fsa instanceof BuildDaemonFileSystemAccess) 
 			fsa.buildResultCollector = buildResultCollector
-		}
 		fsa
 	}
 	
-//	override protected createTempDir(String subDir) {
-//		val tmpDir = new File(request.baseDir, subDir)
-//		if(!tmpDir.exists) 
-//			tmpDir.mkdir
-//		else if(!tmpDir.isDirectory)
-//			LOG.error('Compilation tmpDir ' + tmpDir + ' exists and is a file')
-//		return tmpDir
-//	}
+	override protected beforeGenerate(Resource resource, IFileSystemAccess fileSystemAccess) {
+		buildResultCollector.currentResource = resource
+	}
 }

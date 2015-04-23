@@ -96,8 +96,7 @@ public class ResolvedResourceDescription extends AbstractResourceDescription {
   public Iterable<QualifiedName> getImportedNames() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("getImportedNames ");
-    URI _uRI = this.getURI();
-    _builder.append(_uRI, "");
+    _builder.append(this.URI, "");
     IllegalStateException exception = new IllegalStateException(_builder.toString());
     ResolvedResourceDescription.LOG.error(exception, exception);
     return CollectionLiterals.<QualifiedName>emptyList();
@@ -107,8 +106,7 @@ public class ResolvedResourceDescription extends AbstractResourceDescription {
   public Iterable<IReferenceDescription> getReferenceDescriptions() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("getReferenceDescriptions ");
-    URI _uRI = this.getURI();
-    _builder.append(_uRI, "");
+    _builder.append(this.URI, "");
     IllegalStateException exception = new IllegalStateException(_builder.toString());
     ResolvedResourceDescription.LOG.error(exception, exception);
     return CollectionLiterals.<IReferenceDescription>emptyList();

@@ -101,6 +101,8 @@ public class ObjectChannelTest {
         _deletedFiles.add("deleted.txt");
         List<String> _classpath = it.getClasspath();
         _classpath.add("foo.jar");
+        List<String> _outputs = it.getOutputs();
+        _outputs.add("bin/");
         List<String> _sourceRoots = it.getSourceRoots();
         _sourceRoots.add("src");
         it.setBaseDir("bar");
@@ -117,7 +119,7 @@ public class ObjectChannelTest {
       public void apply(final Protocol.BuildIssueMessage it) {
         it.setKind(BuildMessage.Kind.ERROR);
         it.setMessage("So ja nu nich!");
-        it.setPath("foo");
+        it.setUriToProblem("foo");
         it.setStartOffset(42);
         it.setEndOffset(43);
         it.setLocationOffset(42);
@@ -133,8 +135,18 @@ public class ObjectChannelTest {
     final Procedure1<Protocol.BuildResultMessage> _function_2 = new Procedure1<Protocol.BuildResultMessage>() {
       @Override
       public void apply(final Protocol.BuildResultMessage it) {
-        List<String> _dirtyFiles = it.getDirtyFiles();
-        _dirtyFiles.add("foo.txt");
+        List<Protocol.GeneratedFile> _generatedFiles = it.getGeneratedFiles();
+        Protocol.GeneratedFile _generatedFile = new Protocol.GeneratedFile();
+        final Procedure1<Protocol.GeneratedFile> _function = new Procedure1<Protocol.GeneratedFile>() {
+          @Override
+          public void apply(final Protocol.GeneratedFile it) {
+            it.setFile("foo.txt");
+            List<String> _sourceFiles = it.getSourceFiles();
+            _sourceFiles.add("dirty.txt");
+          }
+        };
+        Protocol.GeneratedFile _doubleArrow = ObjectExtensions.<Protocol.GeneratedFile>operator_doubleArrow(_generatedFile, _function);
+        _generatedFiles.add(_doubleArrow);
         List<String> _deletedFiles = it.getDeletedFiles();
         _deletedFiles.add("deleted.txt");
         List<String> _outputDirs = it.getOutputDirs();

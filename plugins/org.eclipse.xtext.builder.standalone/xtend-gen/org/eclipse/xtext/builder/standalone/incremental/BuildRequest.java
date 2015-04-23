@@ -7,8 +7,6 @@
  */
 package org.eclipse.xtext.builder.standalone.incremental;
 
-import com.google.common.io.Files;
-import java.io.File;
 import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -22,13 +20,13 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Accessors
 @SuppressWarnings("all")
 public class BuildRequest {
-  private File baseDir;
+  private URI baseDir;
   
-  private File tempDir = Files.createTempDir();
+  private List<URI> classPath = CollectionLiterals.<URI>newArrayList();
   
-  private List<File> classPath = CollectionLiterals.<File>newArrayList();
+  private List<URI> sourceRoots = CollectionLiterals.<URI>newArrayList();
   
-  private List<File> sourceRoots = CollectionLiterals.<File>newArrayList();
+  private List<URI> outputs = CollectionLiterals.<URI>newArrayList();
   
   private List<URI> dirtyFiles = CollectionLiterals.<URI>newArrayList();
   
@@ -45,39 +43,39 @@ public class BuildRequest {
   private boolean writeStorageResources = false;
   
   @Pure
-  public File getBaseDir() {
+  public URI getBaseDir() {
     return this.baseDir;
   }
   
-  public void setBaseDir(final File baseDir) {
+  public void setBaseDir(final URI baseDir) {
     this.baseDir = baseDir;
   }
   
   @Pure
-  public File getTempDir() {
-    return this.tempDir;
-  }
-  
-  public void setTempDir(final File tempDir) {
-    this.tempDir = tempDir;
-  }
-  
-  @Pure
-  public List<File> getClassPath() {
+  public List<URI> getClassPath() {
     return this.classPath;
   }
   
-  public void setClassPath(final List<File> classPath) {
+  public void setClassPath(final List<URI> classPath) {
     this.classPath = classPath;
   }
   
   @Pure
-  public List<File> getSourceRoots() {
+  public List<URI> getSourceRoots() {
     return this.sourceRoots;
   }
   
-  public void setSourceRoots(final List<File> sourceRoots) {
+  public void setSourceRoots(final List<URI> sourceRoots) {
     this.sourceRoots = sourceRoots;
+  }
+  
+  @Pure
+  public List<URI> getOutputs() {
+    return this.outputs;
+  }
+  
+  public void setOutputs(final List<URI> outputs) {
+    this.outputs = outputs;
   }
   
   @Pure

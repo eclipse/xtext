@@ -30,6 +30,11 @@ class BuildDaemonFileSystemAccess extends JavaIoFileSystemAccess {
 		markDirty(fileName, outputConfigName)
 	}
 
+	override protected generateTrace(String fileName, String outputConfigName, CharSequence contents) {
+		super.generateTrace(fileName, outputConfigName, contents)
+		markDirty(fileName, outputConfigName)
+	}
+	
 	override generateFile(String fileName, CharSequence contents) {
 		super.generateFile(fileName, contents)
 		markDirty(fileName, DEFAULT_OUTPUT)

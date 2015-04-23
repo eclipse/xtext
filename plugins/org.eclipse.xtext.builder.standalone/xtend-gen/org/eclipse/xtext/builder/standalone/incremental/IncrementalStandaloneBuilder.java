@@ -14,40 +14,41 @@ import java.io.File;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.builder.standalone.ClusteringConfig;
 import org.eclipse.xtext.builder.standalone.IIssueHandler;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.incremental.BuildContext;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
+import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
 import org.eclipse.xtext.builder.standalone.incremental.Indexer;
+import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
-import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.clustering.DisabledClusteringPolicy;
 import org.eclipse.xtext.resource.clustering.DynamicResourceClusteringPolicy;
 import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -100,8 +101,12 @@ public class IncrementalStandaloneBuilder {
           _xifexpression = new DisabledClusteringPolicy();
         }
         final IResourceClusteringPolicy strategy = _xifexpression;
-        XtextResourceSet _get = this.resourceSetProvider.get();
-        final BuildContext context = new BuildContext(languages, _get, strategy);
+        URI _baseDir = request.getBaseDir();
+        File _asFile = FilesAndURIs.asFile(_baseDir);
+        final File tempDir = new File(_asFile, "xtext-tmp");
+        final XtextResourceSet resourceSet = this.resourceSetProvider.get();
+        resourceSet.addLoadOption(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE, Boolean.valueOf(true));
+        final BuildContext context = new BuildContext(languages, resourceSet, strategy, tempDir);
         final IncrementalStandaloneBuilder builder = this.provider.get();
         builder.context = context;
         builder.request = request;
@@ -113,11 +118,11 @@ public class IncrementalStandaloneBuilder {
   
   private final static Logger LOG = Logger.getLogger(IncrementalStandaloneBuilder.class);
   
-  @Accessors({ AccessorType.PROTECTED_SETTER, AccessorType.PROTECTED_GETTER })
+  @Accessors({ AccessorType.PROTECTED_SETTER, AccessorType.PUBLIC_GETTER })
   @Extension
   private BuildContext context;
   
-  @Accessors({ AccessorType.PROTECTED_SETTER, AccessorType.PROTECTED_GETTER })
+  @Accessors({ AccessorType.PROTECTED_SETTER, AccessorType.PUBLIC_GETTER })
   private BuildRequest request;
   
   private File baseDir;
@@ -166,9 +171,10 @@ public class IncrementalStandaloneBuilder {
   
   protected void initialize() {
     File _elvis = null;
-    File _baseDir = this.request.getBaseDir();
-    if (_baseDir != null) {
-      _elvis = _baseDir;
+    URI _baseDir = this.request.getBaseDir();
+    File _asFile = FilesAndURIs.asFile(_baseDir);
+    if (_asFile != null) {
+      _elvis = _asFile;
     } else {
       File _xblockexpression = null;
       {
@@ -209,6 +215,27 @@ public class IncrementalStandaloneBuilder {
     }
   }
   
+  protected boolean cleanup() {
+    try {
+      boolean _xifexpression = false;
+      File _tempDir = this.context.getTempDir();
+      boolean _exists = _tempDir.exists();
+      if (_exists) {
+        boolean _xblockexpression = false;
+        {
+          File _tempDir_1 = this.context.getTempDir();
+          Files.sweepFolder(_tempDir_1);
+          File _tempDir_2 = this.context.getTempDir();
+          _xblockexpression = _tempDir_2.delete();
+        }
+        _xifexpression = _xblockexpression;
+      }
+      return _xifexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   protected boolean validate(final Resource resource) {
     URI _uRI = resource.getURI();
     String _lastSegment = _uRI.lastSegment();
@@ -229,9 +256,7 @@ public class IncrementalStandaloneBuilder {
     String _plus_1 = (_plus + "\'");
     IncrementalStandaloneBuilder.LOG.info(_plus_1);
     URI _uRI_1 = resource.getURI();
-    this.registerCurrentSource(_uRI_1);
-    URI _uRI_2 = resource.getURI();
-    final LanguageAccess access = this.context.getLanguageAccess(_uRI_2);
+    final LanguageAccess access = this.context.getLanguageAccess(_uRI_1);
     final JavaIoFileSystemAccess fileSystemAccess = this.getFileSystemAccess(access);
     boolean _isWriteStorageResources = this.request.isWriteStorageResources();
     if (_isWriteStorageResources) {
@@ -248,75 +273,12 @@ public class IncrementalStandaloneBuilder {
         }
       }
     }
+    this.beforeGenerate(resource, fileSystemAccess);
     IGenerator _generator = access.getGenerator();
     _generator.doGenerate(resource, fileSystemAccess);
   }
   
-  protected void registerCurrentSource(final URI uri) {
-    LanguageAccess _languageAccess = this.context.getLanguageAccess(uri);
-    final JavaIoFileSystemAccess fsa = this.getFileSystemAccess(_languageAccess);
-    List<File> _sourceRoots = this.request.getSourceRoots();
-    final Function1<File, String> _function = new Function1<File, String>() {
-      @Override
-      public String apply(final File it) {
-        String _absolutePath = it.getAbsolutePath();
-        URI _createFileURI = URI.createFileURI(_absolutePath);
-        return _createFileURI.toString();
-      }
-    };
-    List<String> _map = ListExtensions.<File, String>map(_sourceRoots, _function);
-    final Function1<String, Boolean> _function_1 = new Function1<String, Boolean>() {
-      @Override
-      public Boolean apply(final String it) {
-        String _string = uri.toString();
-        return Boolean.valueOf(_string.startsWith(it));
-      }
-    };
-    Iterable<String> _filter = IterableExtensions.<String>filter(_map, _function_1);
-    final Function2<String, String, String> _function_2 = new Function2<String, String, String>() {
-      @Override
-      public String apply(final String longest, final String current) {
-        String _xifexpression = null;
-        int _length = current.length();
-        int _length_1 = longest.length();
-        boolean _greaterThan = (_length > _length_1);
-        if (_greaterThan) {
-          _xifexpression = current;
-        } else {
-          _xifexpression = longest;
-        }
-        return _xifexpression;
-      }
-    };
-    String _reduce = IterableExtensions.<String>reduce(_filter, _function_2);
-    URI _createFileURI = null;
-    if (_reduce!=null) {
-      _createFileURI=URI.createFileURI(_reduce);
-    }
-    final URI absoluteSource = _createFileURI;
-    boolean _equals = Objects.equal(absoluteSource, null);
-    if (_equals) {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("Resource ");
-      _builder.append(uri, "");
-      _builder.append(" is not contained in any of the known source folders ");
-      List<File> _sourceRoots_1 = this.request.getSourceRoots();
-      _builder.append(_sourceRoots_1, "");
-      _builder.append(".");
-      throw new IllegalStateException(_builder.toString());
-    }
-    Map<String, OutputConfiguration> _outputConfigurations = fsa.getOutputConfigurations();
-    Collection<OutputConfiguration> _values = _outputConfigurations.values();
-    for (final OutputConfiguration output : _values) {
-      Set<String> _sourceFolders = output.getSourceFolders();
-      for (final String relativeSource : _sourceFolders) {
-        String _string = absoluteSource.toString();
-        boolean _endsWith = _string.endsWith(relativeSource);
-        if (_endsWith) {
-          fsa.setCurrentSource(relativeSource);
-        }
-      }
-    }
+  protected void beforeGenerate(final Resource resource, final IFileSystemAccess fileSystemAccess) {
   }
   
   private Map<LanguageAccess, JavaIoFileSystemAccess> configuredFsas = CollectionLiterals.<LanguageAccess, JavaIoFileSystemAccess>newHashMap();
@@ -339,7 +301,7 @@ public class IncrementalStandaloneBuilder {
   }
   
   @Pure
-  protected BuildContext getContext() {
+  public BuildContext getContext() {
     return this.context;
   }
   
@@ -348,7 +310,7 @@ public class IncrementalStandaloneBuilder {
   }
   
   @Pure
-  protected BuildRequest getRequest() {
+  public BuildRequest getRequest() {
     return this.request;
   }
   

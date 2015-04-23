@@ -12,7 +12,6 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
-import java.io.File;
 import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -31,16 +30,22 @@ import org.apache.log4j.FileAppender;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.TTCCLayout;
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
+import org.eclipse.xtext.builder.standalone.incremental.BuildContext;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
+import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder;
 import org.eclipse.xtext.idea.build.daemon.BuildDaemonModule;
+import org.eclipse.xtext.idea.build.daemon.IdeaBuilderResourceDescriptionsProvider;
 import org.eclipse.xtext.idea.build.daemon.IdeaStandaloneBuilder;
 import org.eclipse.xtext.idea.build.daemon.XtextBuildResultCollector;
 import org.eclipse.xtext.idea.build.daemon.XtextLanguages;
 import org.eclipse.xtext.idea.build.net.ObjectChannel;
 import org.eclipse.xtext.idea.build.net.Protocol;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -170,6 +175,7 @@ public class XtextBuildDaemon {
       } catch (final Throwable _t) {
         if (_t instanceof Exception) {
           final Exception exc = (Exception)_t;
+          XtextBuildDaemon.LOG.error("Build failed", exc);
           Protocol.BuildFailureMessage _buildFailureMessage = new Protocol.BuildFailureMessage();
           final Procedure1<Protocol.BuildFailureMessage> _function = new Procedure1<Protocol.BuildFailureMessage>() {
             @Override
@@ -196,46 +202,55 @@ public class XtextBuildDaemon {
           @Override
           public void apply(final BuildRequest it) {
             String _baseDir = request.getBaseDir();
-            File _file = Worker.this.toFile(_baseDir);
-            it.setBaseDir(_file);
+            URI _asURI = FilesAndURIs.asURI(_baseDir);
+            it.setBaseDir(_asURI);
             String _encoding = request.getEncoding();
             it.setDefaultEncoding(_encoding);
             List<String> _classpath = request.getClasspath();
-            final Function1<String, File> _function = new Function1<String, File>() {
+            final Function1<String, URI> _function = new Function1<String, URI>() {
               @Override
-              public File apply(final String it) {
-                return Worker.this.toFile(it);
+              public URI apply(final String it) {
+                return FilesAndURIs.asURI(it);
               }
             };
-            List<File> _map = ListExtensions.<String, File>map(_classpath, _function);
+            List<URI> _map = ListExtensions.<String, URI>map(_classpath, _function);
             it.setClassPath(_map);
-            List<String> _sourceRoots = request.getSourceRoots();
-            final Function1<String, File> _function_1 = new Function1<String, File>() {
+            List<String> _outputs = request.getOutputs();
+            final Function1<String, URI> _function_1 = new Function1<String, URI>() {
               @Override
-              public File apply(final String it) {
-                return Worker.this.toFile(it);
+              public URI apply(final String it) {
+                return FilesAndURIs.asURI(it);
               }
             };
-            List<File> _map_1 = ListExtensions.<String, File>map(_sourceRoots, _function_1);
-            it.setSourceRoots(_map_1);
-            List<String> _dirtyFiles = request.getDirtyFiles();
+            List<URI> _map_1 = ListExtensions.<String, URI>map(_outputs, _function_1);
+            it.setOutputs(_map_1);
+            List<String> _sourceRoots = request.getSourceRoots();
             final Function1<String, URI> _function_2 = new Function1<String, URI>() {
               @Override
               public URI apply(final String it) {
-                return URI.createFileURI(it);
+                return FilesAndURIs.asURI(it);
               }
             };
-            List<URI> _map_2 = ListExtensions.<String, URI>map(_dirtyFiles, _function_2);
-            it.setDirtyFiles(_map_2);
-            List<String> _deletedFiles = request.getDeletedFiles();
+            List<URI> _map_2 = ListExtensions.<String, URI>map(_sourceRoots, _function_2);
+            it.setSourceRoots(_map_2);
+            List<String> _dirtyFiles = request.getDirtyFiles();
             final Function1<String, URI> _function_3 = new Function1<String, URI>() {
               @Override
               public URI apply(final String it) {
-                return URI.createFileURI(it);
+                return FilesAndURIs.asURI(it);
               }
             };
-            List<URI> _map_3 = ListExtensions.<String, URI>map(_deletedFiles, _function_3);
-            it.setDeletedFiles(_map_3);
+            List<URI> _map_3 = ListExtensions.<String, URI>map(_dirtyFiles, _function_3);
+            it.setDirtyFiles(_map_3);
+            List<String> _deletedFiles = request.getDeletedFiles();
+            final Function1<String, URI> _function_4 = new Function1<String, URI>() {
+              @Override
+              public URI apply(final String it) {
+                return FilesAndURIs.asURI(it);
+              }
+            };
+            List<URI> _map_4 = ListExtensions.<String, URI>map(_deletedFiles, _function_4);
+            it.setDeletedFiles(_map_4);
             it.setFailOnValidationError(false);
           }
         };
@@ -246,6 +261,12 @@ public class XtextBuildDaemon {
         final Procedure1<IdeaStandaloneBuilder> _function_1 = new Procedure1<IdeaStandaloneBuilder>() {
           @Override
           public void apply(final IdeaStandaloneBuilder it) {
+            BuildContext _context = it.getContext();
+            XtextResourceSet _resourceSet = _context.getResourceSet();
+            EList<Adapter> _eAdapters = _resourceSet.eAdapters();
+            String _baseDir = request.getBaseDir();
+            IdeaBuilderResourceDescriptionsProvider.ModuleAdapter _moduleAdapter = new IdeaBuilderResourceDescriptionsProvider.ModuleAdapter(_baseDir);
+            _eAdapters.add(_moduleAdapter);
             it.setBuildResultCollector(Worker.this.resultCollector);
             it.launch();
           }
@@ -254,10 +275,6 @@ public class XtextBuildDaemon {
         _xblockexpression = this.resultCollector.getBuildResult();
       }
       return _xblockexpression;
-    }
-    
-    private File toFile(final String path) {
-      return new File(path);
     }
   }
   

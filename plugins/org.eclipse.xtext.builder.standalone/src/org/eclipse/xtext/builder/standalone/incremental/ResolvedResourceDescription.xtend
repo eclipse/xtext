@@ -62,14 +62,14 @@ class ResolvedResourceDescription extends AbstractResourceDescription {
 
 	override Iterable<QualifiedName> getImportedNames() {
 		// TODO see https://bugs.eclipse.org/bugs/show_bug.cgi?id=344373
-		var IllegalStateException exception = new IllegalStateException('''getImportedNames «getURI()»''')
+		var IllegalStateException exception = new IllegalStateException('''getImportedNames «URI»''')
 		LOG.error(exception, exception)
 		return emptyList
 	}
 
 	override Iterable<IReferenceDescription> getReferenceDescriptions() {
 		// TODO see https://bugs.eclipse.org/bugs/show_bug.cgi?id=344373
-		var IllegalStateException exception = new IllegalStateException('''getReferenceDescriptions «getURI()»''')
+		var IllegalStateException exception = new IllegalStateException('''getReferenceDescriptions «URI»''')
 		LOG.error(exception, exception)
 		return emptyList
 	}

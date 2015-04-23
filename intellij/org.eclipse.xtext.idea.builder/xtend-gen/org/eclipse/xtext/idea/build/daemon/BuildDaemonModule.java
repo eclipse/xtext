@@ -11,8 +11,10 @@ import com.google.inject.binder.AnnotatedBindingBuilder;
 import org.eclipse.xtext.builder.standalone.IIssueHandler;
 import org.eclipse.xtext.builder.standalone.StandaloneBuilderModule;
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder;
+import org.eclipse.xtext.idea.build.daemon.IdeaBuilderResourceDescriptionsProvider;
 import org.eclipse.xtext.idea.build.daemon.IdeaIssueHandler;
 import org.eclipse.xtext.idea.build.daemon.IdeaStandaloneBuilder;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -29,5 +31,7 @@ public class BuildDaemonModule extends StandaloneBuilderModule {
     super.configure();
     AnnotatedBindingBuilder<IncrementalStandaloneBuilder> _bind = this.<IncrementalStandaloneBuilder>bind(IncrementalStandaloneBuilder.class);
     _bind.to(IdeaStandaloneBuilder.class);
+    AnnotatedBindingBuilder<ResourceDescriptionsProvider> _bind_1 = this.<ResourceDescriptionsProvider>bind(ResourceDescriptionsProvider.class);
+    _bind_1.to(IdeaBuilderResourceDescriptionsProvider.class);
   }
 }

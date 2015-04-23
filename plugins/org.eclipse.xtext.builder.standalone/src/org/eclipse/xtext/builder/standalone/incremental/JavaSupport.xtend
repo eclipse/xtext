@@ -10,8 +10,8 @@ package org.eclipse.xtext.builder.standalone.incremental
 import com.google.inject.Inject
 import java.io.File
 import java.io.IOException
+import java.net.URL
 import java.net.URLClassLoader
-import java.util.List
 import org.apache.log4j.Logger
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.builder.standalone.compiler.IJavaCompiler
@@ -25,6 +25,7 @@ import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 
 import static extension com.google.common.io.Files.*
+import static extension org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs.*
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -39,51 +40,40 @@ class JavaSupport {
 	@Inject IJavaCompiler compiler
 	@Inject AbstractFileSystemAccess commonFileAccess
 
-	def installLocalOnlyTypeProvider(Iterable<File> classPathRoots, XtextResourceSet resourceSet) {
+	def installLocalOnlyTypeProvider(Iterable<URI> classPathRoots, XtextResourceSet resourceSet) {
 		LOG.info("Installing type provider for local types only")
 		val classLoader = createURLClassLoader(classPathRoots)
 		new ClasspathTypeProvider(classLoader, resourceSet, null, typeResourceServices)
 		resourceSet.setClasspathURIContext(classLoader);
 	}
 
-	def void installTypeProvider(Iterable<File> classPathRoots, XtextResourceSet resSet) {
+	def void installTypeProvider(Iterable<URI> classPathRoots, XtextResourceSet resSet) {
 		LOG.info("Installing type provider with stubs")
 		val classLoader = createURLClassLoader(classPathRoots)
 		new ClasspathTypeProvider(classLoader, resSet, typeAccess, typeResourceServices)
 		resSet.setClasspathURIContext(classLoader);
 	}
 
-	def protected URLClassLoader createURLClassLoader(Iterable<File> classPathEntries) {
-		val classPathUrls = classPathEntries.map[toURI.toURL]
+	def protected URLClassLoader createURLClassLoader(Iterable<URI> classPathEntries) {
+		val classPathUrls = classPathEntries.map[new URL(toString)]
 		return new URLClassLoader(classPathUrls)
 	}
-
-	def File generateAndCompileJavaStubs(Iterable<URI> changedResources, ResourceDescriptionsData newIndex,
+	
+	def URI preCompileJavaFiles(Iterable<URI> changedResources, ResourceDescriptionsData newIndex,
 		BuildRequest request, extension BuildContext context) {
-		val stubsDir = generateStubs(changedResources, newIndex, request, context)
-		compileStubs(stubsDir, request)
-	}
-
-	def protected generateStubs(Iterable<URI> changedResources, ResourceDescriptionsData newIndex, BuildRequest request,
-		extension BuildContext context) {
-		val stubsDir = createTempDir("stubs", request)
+		val stubsDir = createTmpDir("stubs", request)
+		val javaDir = createTmpDir("java", request)
 		LOG.info("Generating stubs into " + stubsDir.absolutePath)
+		LOG.info("Copying modified Java files into " + javaDir.absolutePath)
 		commonFileAccess.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT, stubsDir.absolutePath)
-		val sourceRootURIs = request.sourceRoots.map[
-			val uri = URI.createFileURI(path)
-			if(uri.hasTrailingPathSeparator)
-				uri
-			else 
-				uri.appendSegment('')
-		]
 		for(resource: changedResources) {
 			if(resource.fileExtension == 'java') {
-				val relativeURI = resource.findSourceRootRelativeURI(sourceRootURIs)
+				val relativeURI = resource.findSourceRootRelativeURI(request)
 				if(relativeURI == null) {
 					LOG.error('Changed java file ' + resource + ' is not in any sourceRoot')
 				} else {
-					val source = new File(resource.toFileString)
-					val target = new File(stubsDir, relativeURI.toString)
+					val source = new File(resource.asPath)
+					val target = new File(javaDir, relativeURI.toString)
 					target.createParentDirs
 					source.copy(target)
 				}
@@ -91,41 +81,36 @@ class JavaSupport {
 				resource.languageAccess.stubGenerator.doGenerateStubs(commonFileAccess, newIndex.getResourceDescription(resource))
 			}
 		}
-		return stubsDir
+		val stubsClasses = createTmpDir('stubs-classes', request)
+		val javaClasses = createTmpDir('classes', request)
+		stubsDir.compile(stubsClasses, request)
+		javaDir.compile(javaClasses, request, stubsClasses)
+		return javaClasses.asURI
 	}
 
-	def protected findSourceRootRelativeURI(URI uri, List<URI> sourceRootURIs) {
-		for(sourceRootURI: sourceRootURIs) {
-			val relativeURI = uri.deresolve(sourceRootURI)
-			if(relativeURI != uri) 
-				return relativeURI
-		}
-		return null
-	}
-
-	def protected compileStubs(File stubsDir, BuildRequest request) {
-		val stubsClassesFolder = createTempDir("classes", request)
-		compiler.setClassPath(request.classPath.map[absolutePath])
-		LOG.info("Compiling stubs located in " + stubsDir.absolutePath)
-		val sourcesToCompile = #[ stubsDir.absolutePath ]
-		LOG.info("Compiler source roots: " + sourcesToCompile.join(','))
-		val result = compiler.compile(sourcesToCompile, stubsClassesFolder)
+	def protected compile(File sourceDir, File targetDir, BuildRequest request, File... additionalClassesFolders) {
+		compiler.setClassPath(additionalClassesFolders.map[absolutePath] 
+				+ request.outputs.map[asPath] 
+				+ request.classPath.map[asPath])
+		LOG.info("Pre-compiling java files located in " + sourceDir.absolutePath)
+		val result = compiler.compile(#[ sourceDir.absolutePath ], targetDir)
 		switch (result) {
 			case CompilationResult.SKIPPED:
-				LOG.info("Nothing to compile. Stubs compilation was skipped.")
+				LOG.info("Nothing to pre-compile.")
 			case CompilationResult.FAILED:
-				LOG.info("Stubs compilation finished with errors.")
+				LOG.info("Pre-compilation finished with errors. No need to worry. This is normal.")
 			case CompilationResult.SUCCEEDED:
-				LOG.info("Stubs compilation successfully finished.")
+				LOG.info("Pre-compilation successfully finished.")
 		}
-		return stubsClassesFolder
 	}
 
-
-	def protected createTempDir(String subDir, BuildRequest request) {
-		val file = new File(request.tempDir, subDir)
-		if (!file.mkdirs && !file.exists)
-			throw new IOException("Failed to create directory '" + file.absolutePath + "'")
-		return file
+	def protected createTmpDir(String subDir, BuildRequest request) {
+		val tmpRoot = new File(request.baseDir.asFile, 'xtext-tmp')
+		if (!tmpRoot.mkdirs && !tmpRoot.exists)
+			throw new IOException("Failed to create directory '" + tmpRoot.absolutePath + "'")
+		val tmpDir = new File(tmpRoot, subDir)
+		if (!tmpDir.mkdirs && !tmpDir.exists)
+			throw new IOException("Failed to create directory '" + tmpDir.absolutePath + "'")
+		return tmpDir
 	}
 }
