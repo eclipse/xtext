@@ -22,6 +22,7 @@ import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtend.lib.macro.declaration.Visibility
 import org.junit.Test
 import org.eclipse.xtend.core.macro.ActiveAnnotationContexts
+import org.eclipse.xtend.core.macro.declaration.JvmAnnotationReferenceImpl
 
 /**
  * @author Sven Efftinge
@@ -89,6 +90,31 @@ class DeclarationsTest extends AbstractXtendTestCase {
 			])
 			typeLookup.findClass("MyClass").removeAnnotation(anno)
 			assertEquals(typeLookup.findClass("MyClass").declaredFields.head.annotations.head.annotationTypeDeclaration, (anno.getValue('annotation2Value') as AnnotationReference).annotationTypeDeclaration)
+		]
+	}
+	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=465007
+	 */
+	@Test def testAnnotation4() {
+		validFile('''
+			class MyClass {
+				@test.Annotation2 String foo
+				@test.Annotation2("hubble") String foo2
+				@test.Annotation2(value="hubble") String foo3
+			}
+		''').asCompilationUnit [
+			val anno = typeLookup.findClass("MyClass").declaredFields.head.annotations.head
+			val copied = annotationReferenceProvider.newAnnotationReference(anno)
+			assertTrue((copied as JvmAnnotationReferenceImpl).delegate.explicitValues.empty)
+			
+			val anno2 = typeLookup.findClass("MyClass").declaredFields.get(1).annotations.head
+			val copied2 = annotationReferenceProvider.newAnnotationReference(anno2)
+			assertEquals(1, (copied2 as JvmAnnotationReferenceImpl).delegate.explicitValues.size)
+			
+			val anno3 = typeLookup.findClass("MyClass").declaredFields.get(2).annotations.head
+			val copied3 = annotationReferenceProvider.newAnnotationReference(anno3)
+			assertEquals(1, (copied3 as JvmAnnotationReferenceImpl).delegate.explicitValues.size)
 		]
 	}
 	
