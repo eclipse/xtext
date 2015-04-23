@@ -21,8 +21,8 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.web.server.InvalidRequestException;
-import org.eclipse.xtext.web.server.data.ValidationResult;
-import org.eclipse.xtext.web.server.model.XtextDocument;
+import org.eclipse.xtext.web.server.model.XtextWebDocument;
+import org.eclipse.xtext.web.server.validation.ValidationResult;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -32,10 +32,10 @@ public class ValidationService {
   @Inject
   private IResourceValidator resourceValidator;
   
-  public ValidationResult validate(final XtextDocument document, final String requiredStateId) throws InvalidRequestException {
-    final IUnitOfWork<List<Issue>, XtextDocument.ReadAccess> _function = new IUnitOfWork<List<Issue>, XtextDocument.ReadAccess>() {
+  public ValidationResult validate(final XtextWebDocument document, final String requiredStateId) throws InvalidRequestException {
+    final IUnitOfWork<List<Issue>, XtextWebDocument.ReadAccess> _function = new IUnitOfWork<List<Issue>, XtextWebDocument.ReadAccess>() {
       @Override
-      public List<Issue> exec(final XtextDocument.ReadAccess access) throws Exception {
+      public List<Issue> exec(final XtextWebDocument.ReadAccess access) throws Exception {
         List<Issue> _xblockexpression = null;
         {
           access.checkStateId(requiredStateId);

@@ -7,23 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server.persistence
 
+import com.google.inject.ImplementedBy
 import java.io.IOException
-import org.eclipse.xtext.parser.IEncodingProvider
-import org.eclipse.xtext.resource.XtextResourceSet
-import org.eclipse.xtext.web.server.model.XtextDocument
-import org.eclipse.xtext.web.server.model.XtextDocument.ReadAccess
+import org.eclipse.xtext.web.server.model.XtextWebDocument
 
+@ImplementedBy(NullImpl)
 interface IServerResourceHandler {
 	
-	def XtextDocument get(String resourceId, XtextResourceSet resourceSet) throws IOException
+	def XtextWebDocument get(String resourceId) throws IOException
 	
-	def void put(XtextDocument.ReadAccess documentAccess, IEncodingProvider encodingProvider) throws IOException
+	def void put(XtextWebDocument.ReadAccess documentAccess) throws IOException
 	
 	static class NullImpl implements IServerResourceHandler {
-		override get(String resourceId, XtextResourceSet resourceSet) throws IOException {
+		override get(String resourceId) throws IOException {
 			throw new IOException("This server does not support resource handling.")
 		}
-		override put(ReadAccess documentAccess, IEncodingProvider encodingProvider) throws IOException {
+		override put(XtextWebDocument.ReadAccess documentAccess) throws IOException {
 			throw new IOException("This server does not support resource handling.")
 		}
 	}

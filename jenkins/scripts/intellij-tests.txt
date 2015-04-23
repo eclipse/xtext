@@ -1,1 +1,1 @@
-clean compileEclipsePlugins check
+clean compileEclipsePlugins :intellij:check

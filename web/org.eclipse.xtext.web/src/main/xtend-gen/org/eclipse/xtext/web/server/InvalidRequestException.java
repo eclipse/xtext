@@ -13,15 +13,25 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Accessors
 @SuppressWarnings("all")
 public class InvalidRequestException extends Exception {
-  private final int statusCode;
+  public enum Type {
+    INVALID_PARAMETERS,
+    
+    UNKNOWN_LANGUAGE,
+    
+    RESOURCE_NOT_FOUND,
+    
+    INVALID_DOCUMENT_STATE;
+  }
   
-  public InvalidRequestException(final int statusCode, final String message) {
+  private final InvalidRequestException.Type type;
+  
+  public InvalidRequestException(final InvalidRequestException.Type type, final String message) {
     super(message);
-    this.statusCode = statusCode;
+    this.type = type;
   }
   
   @Pure
-  public int getStatusCode() {
-    return this.statusCode;
+  public InvalidRequestException.Type getType() {
+    return this.type;
   }
 }

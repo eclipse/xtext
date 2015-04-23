@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Language" content="en-us">
+	<title>Xtext-Web Domainmodel Example</title>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<script src="requirejs/require.js"></script>
+	<script type="text/javascript">
+		require({
+		  paths: {
+			  text: 'requirejs/text',
+			  i18n: 'requirejs/i18n',
+		      domReady: 'requirejs/domReady',
+		      jquery : 'jquery/jquery'
+		  }
+		});
+		require(["xtext/xtext"], function(xtext) {
+			var editor = xtext.createEditor();
+			editor.xtextServiceErrorListener = function(requestType, xhr, textStatus, errorThrown) {
+				window.alert("Xtext service '" + requestType + "' failed: " + errorThrown);
+			};
+			$("#save-button").click(function() {
+				xtext.invokeService(editor, "save");
+			});
+			$("#revert-button").click(function() {
+				xtext.invokeService(editor, "revert");
+			});
+		});
+	</script>
+</head>
+<body>
+
+<div class="container">
+	<div class="xtext-editor"
+		data-editor-resource-uri="example.dmodel"
+		data-editor-status-element="status"
+		data-editor-dirty-element="dirty-indicator"
+		data-editor-enable-save-action="true"></div>
+	<div class="status-wrapper">
+		<div id="dirty-indicator">modified</div>
+		<div id="status">Welcome to Xtext-Web</div>
+	</div>
+	<div class="button-wrapper">
+		<button id="save-button">Save</button>
+		<button id="revert-button">Revert</button>
+	</div>
+</div>
+
+</body>
+</html>

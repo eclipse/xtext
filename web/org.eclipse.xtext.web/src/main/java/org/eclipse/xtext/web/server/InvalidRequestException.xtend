@@ -13,12 +13,18 @@ import org.eclipse.xtend.lib.annotations.Accessors
 @Accessors
 class InvalidRequestException extends Exception {
 	
-	val int statusCode
+	static enum Type {
+		INVALID_PARAMETERS,
+		UNKNOWN_LANGUAGE,
+		RESOURCE_NOT_FOUND,
+		INVALID_DOCUMENT_STATE
+	}
 	
-	// TODO move status codes to servlet
-	new(int statusCode, String message) {
+	val Type type
+	
+	new(Type type, String message) {
 		super(message)
-		this.statusCode = statusCode
+		this.type = type
 	}
 	
 }

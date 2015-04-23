@@ -1,4 +1,4 @@
-subprojects {
+configure(subprojects.findAll{!it.name.contains('generator')}) {
 	apply plugin: 'java'
 	apply plugin: 'eclipse'
 	apply from: "$rootDir/gradle/unroll-dependencies.gradle"
