@@ -1,22 +1,7 @@
-import org.gradle.api.plugins.jetty.internal.Monitor
-
 apply plugin: 'war'
-apply plugin: 'jetty'
 
 dependencies {
-	compile project(':web:org.eclipse.xtext.web')
 	compile project(':web:org.eclipse.xtext.web.servlet')
 	compile project(':intellij:org.eclipse.xtext.idea.example.entities.ide')
-    compile group: 'org.eclipse.jetty', name: 'jetty-servlet', version: '8.1.16.v20140903'
-}
-
-jettyRun.contextPath = '/'
-jettyRun.daemon = true
-stopPort = 8090
-stopKey = 'Stop'
-
-// https://issues.gradle.org/browse/GRADLE-2263
-[jettyRun, jettyRunWar]*.doLast {
-	Monitor monitor = new Monitor(getStopPort(), getStopKey(), server.getProxiedObject());
-	monitor.start();
+	providedCompile group: 'org.eclipse.jetty', name: 'jetty-annotations', version: '9.2.+'
 }

@@ -1,4 +1,6 @@
-apply plugin: 'war'
+configurations { providedCompile }
+sourceSets.all {compileClasspath += configurations.providedCompile}
+eclipse.classpath.plusConfigurations += [configurations.providedCompile]
 
 dependencies {
     compile project(':web:org.eclipse.xtext.web')
