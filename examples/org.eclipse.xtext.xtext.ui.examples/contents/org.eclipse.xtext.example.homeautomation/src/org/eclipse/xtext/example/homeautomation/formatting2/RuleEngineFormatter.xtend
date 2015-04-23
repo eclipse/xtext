@@ -45,17 +45,17 @@ class RuleEngineFormatter extends XbaseFormatter {
 	}
 
 	def dispatch void format(Device device, extension IFormattableDocument document) {
-		device.regionForFeature(DEVICE__NAME).surround[oneSpace]
-		device.regionForKeyword("be").surround[oneSpace]
+		device.regionFor.feature(DEVICE__NAME).surround[oneSpace]
+		device.regionFor.keyword("be").surround[oneSpace]
 		for (State state : device.getStates()) {
-			state.immediatelyPrecedingKeyword(",").prepend[noSpace].append[oneSpace]
+			state.immediatelyPreceding.keyword(",").prepend[noSpace].append[oneSpace]
 			format(state, document);
 		}
 	}
 
 	def dispatch void format(Rule rule, extension IFormattableDocument document) {
-		rule.regionForFeature(RULE__DESCRIPTION).surround[oneSpace]
-		rule.regionForFeature(RULE__DEVICE_STATE).surround[oneSpace]
+		rule.regionFor.feature(RULE__DESCRIPTION).surround[oneSpace]
+		rule.regionFor.feature(RULE__DEVICE_STATE).surround[oneSpace]
 		rule.thenPart.prepend[newLine]
 		format(rule.thenPart, document);
 	}
@@ -63,7 +63,7 @@ class RuleEngineFormatter extends XbaseFormatter {
 	override dispatch void format(XBlockExpression expr, extension IFormattableDocument document) {
 		expr.surround[indent]
 		for (child : expr.expressions) {
-			val sem = child.immediatelyFollowingKeyword(";")
+			val sem = child.immediatelyFollowing.keyword(";")
 			if (sem != null) {
 				sem.prepend[noSpace]
 				if (child != expr.expressions.last)
@@ -75,8 +75,8 @@ class RuleEngineFormatter extends XbaseFormatter {
 	}
 
 	override dispatch void format(XSwitchExpression expr, extension IFormattableDocument document) {
-		set(expr.^switch.leadingHiddenRegion, expr.trailingHiddenRegion)[indent]
-		expr.regionForKeyword("switch").append[oneSpace]
+		set(expr.^switch.previousHiddenRegion, expr.nextHiddenRegion)[indent]
+		expr.regionFor.keyword("switch").append[oneSpace]
 		expr.^switch.append[newLine].format(document)
 		for (c : expr.cases) {
 			if (c.typeGuard != null && c.^case != null) {
@@ -87,7 +87,7 @@ class RuleEngineFormatter extends XbaseFormatter {
 			} else if (c.^case != null) {
 				c.^case.prepend[oneSpace].append[noSpace]
 			}
-			c.regionForFeature(XCASE_PART__FALL_THROUGH).prepend[noSpace].append[newLine]
+			c.regionFor.feature(XCASE_PART__FALL_THROUGH).prepend[noSpace].append[newLine]
 			c.^case.format(document)
 			if (c == expr.cases.last && expr.^default == null)
 				c.then.formatBody(true, document)
@@ -95,7 +95,7 @@ class RuleEngineFormatter extends XbaseFormatter {
 				c.then.formatBodyParagraph(document)
 		}
 		if (expr.^default != null) {
-			expr.regionForKeyword("default").append[noSpace]
+			expr.regionFor.keyword("default").append[noSpace]
 			expr.^default.formatBody(true, document)
 		}
 	}
@@ -105,7 +105,7 @@ class RuleEngineFormatter extends XbaseFormatter {
 			return;
 		if (expr instanceof XBlockExpression) {
 			expr.prepend[newLine]
-		} else if (forceMultiline || expr.leadingHiddenRegion.isMultiline) {
+		} else if (forceMultiline || expr.previousHiddenRegion.isMultiline) {
 			expr.prepend[newLine].surround[indent]
 		} else {
 			expr.prepend[oneSpace]
@@ -119,7 +119,7 @@ class RuleEngineFormatter extends XbaseFormatter {
 			return;
 		if (expr instanceof XBlockExpression) {
 			expr.surround[newLine]
-		} else if (forceMultiline || expr.leadingHiddenRegion.isMultiline) {
+		} else if (forceMultiline || expr.previousHiddenRegion.isMultiline) {
 			expr.prepend[newLine].surround[indent].append[newLine]
 		} else {
 			expr.surround[oneSpace]
