@@ -21,15 +21,15 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
-public class XtextDocument {
+public class XtextWebDocument {
   public static class ReadAccess {
-    protected final XtextDocument document;
+    protected final XtextWebDocument document;
     
-    private ReadAccess(final XtextDocument document) {
+    private ReadAccess(final XtextWebDocument document) {
       this.document = document;
     }
     
-    public XtextDocument getDocument() {
+    public XtextWebDocument getDocument() {
       return this.document;
     }
     
@@ -54,7 +54,7 @@ public class XtextDocument {
         _and = _notEquals;
       }
       if (_and) {
-        throw new InvalidRequestException(409, "The given state id does not match the current state.");
+        throw new InvalidRequestException(InvalidRequestException.Type.INVALID_DOCUMENT_STATE, "The given state id does not match the current state.");
       }
     }
     
@@ -63,8 +63,8 @@ public class XtextDocument {
     }
   }
   
-  public static class ModifyAccess extends XtextDocument.ReadAccess {
-    private ModifyAccess(final XtextDocument document) {
+  public static class ModifyAccess extends XtextWebDocument.ReadAccess {
+    private ModifyAccess(final XtextWebDocument document) {
       super(document);
     }
     
@@ -73,12 +73,21 @@ public class XtextDocument {
         String _xblockexpression = null;
         {
           this.document.resource.reparse(text);
-          _xblockexpression = this.document.text = text;
+          _xblockexpression = this.document.refresh();
         }
         return _xblockexpression;
       } catch (Throwable _e) {
         throw Exceptions.sneakyThrow(_e);
       }
+    }
+    
+    public String updateText(final String text, final int offset, final int replaceLength) {
+      String _xblockexpression = null;
+      {
+        this.document.resource.update(offset, replaceLength, text);
+        _xblockexpression = this.document.refresh();
+      }
+      return _xblockexpression;
     }
     
     public String setStateId(final String stateId) {
@@ -107,15 +116,19 @@ public class XtextDocument {
   
   private final ReentrantLock lock = new ReentrantLock();
   
-  private final XtextDocument.ReadAccess readOnlyAccess = new XtextDocument.ReadAccess(this);
+  private final XtextWebDocument.ReadAccess readOnlyAccess = new XtextWebDocument.ReadAccess(this);
   
-  private final XtextDocument.ModifyAccess modifyAccess = new XtextDocument.ModifyAccess(this);
+  private final XtextWebDocument.ModifyAccess modifyAccess = new XtextWebDocument.ModifyAccess(this);
   
-  public XtextDocument(final XtextResource resource, final String resourceId) {
+  public XtextWebDocument(final XtextResource resource, final String resourceId) {
     this.resource = resource;
     this.resourceId = resourceId;
+    this.refresh();
+  }
+  
+  protected String refresh() {
     String _elvis = null;
-    IParseResult _parseResult = resource.getParseResult();
+    IParseResult _parseResult = this.resource.getParseResult();
     ICompositeNode _rootNode = null;
     if (_parseResult!=null) {
       _rootNode=_parseResult.getRootNode();
@@ -129,10 +142,10 @@ public class XtextDocument {
     } else {
       _elvis = "";
     }
-    this.text = _elvis;
+    return this.text = _elvis;
   }
   
-  public <T extends Object> T readOnly(final IUnitOfWork<T, XtextDocument.ReadAccess> work) {
+  public <T extends Object> T readOnly(final IUnitOfWork<T, XtextWebDocument.ReadAccess> work) {
     try {
       T _xblockexpression = null;
       {
@@ -151,7 +164,7 @@ public class XtextDocument {
     }
   }
   
-  public <T extends Object> T modify(final IUnitOfWork<T, XtextDocument.ModifyAccess> work) {
+  public <T extends Object> T modify(final IUnitOfWork<T, XtextWebDocument.ModifyAccess> work) {
     try {
       T _xblockexpression = null;
       {

@@ -14,17 +14,15 @@ import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.IResourceValidator
 import org.eclipse.xtext.web.server.InvalidRequestException
-import org.eclipse.xtext.web.server.data.ValidationResult
-import org.eclipse.xtext.web.server.model.XtextDocument
+import org.eclipse.xtext.web.server.model.XtextWebDocument
 
 @Singleton
 class ValidationService {
 	
 	@Inject IResourceValidator resourceValidator
 	
-	def validate(XtextDocument document, String requiredStateId) throws InvalidRequestException {
+	def validate(XtextWebDocument document, String requiredStateId) throws InvalidRequestException {
 		val issues = document.readOnly[ access |
-			// TODO move to getDocument
 			access.checkStateId(requiredStateId)
 			resourceValidator.validate(access.resource, CheckMode.ALL, CancelIndicator.NullImpl)
 		]

@@ -5,18 +5,18 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.web.server.data;
+package org.eclipse.xtext.web.server.validation;
 
 import java.util.ArrayList;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.Data;
-import org.eclipse.xtext.web.server.data.JsonObject;
+import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Accessors
 @SuppressWarnings("all")
-public class ValidationResult extends JsonObject {
+public class ValidationResult implements IServiceResult {
   @Data
   public static class Entry {
     private final String description;

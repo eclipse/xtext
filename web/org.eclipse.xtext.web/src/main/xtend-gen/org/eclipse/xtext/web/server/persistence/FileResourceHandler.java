@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.web.server.model.XtextDocument;
+import org.eclipse.xtext.web.server.model.XtextWebDocument;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -37,14 +37,14 @@ public class FileResourceHandler implements IServerResourceHandler {
   private IEncodingProvider encodingProvider;
   
   @Override
-  public XtextDocument get(final String resourceId) throws IOException {
+  public XtextWebDocument get(final String resourceId) throws IOException {
     try {
       try {
         final URI uri = this.resourceBaseProvider.getFileURI(resourceId);
         final XtextResourceSet resourceSet = this.resourceSetProvider.get();
         Resource _resource = resourceSet.getResource(uri, true);
         final XtextResource resource = ((XtextResource) _resource);
-        return new XtextDocument(resource, resourceId);
+        return new XtextWebDocument(resource, resourceId);
       } catch (final Throwable _t) {
         if (_t instanceof WrappedException) {
           final WrappedException exception = (WrappedException)_t;
@@ -59,10 +59,10 @@ public class FileResourceHandler implements IServerResourceHandler {
   }
   
   @Override
-  public void put(final XtextDocument.ReadAccess documentAccess) throws IOException {
+  public void put(final XtextWebDocument.ReadAccess documentAccess) throws IOException {
     try {
       try {
-        XtextDocument _document = documentAccess.getDocument();
+        XtextWebDocument _document = documentAccess.getDocument();
         String _resourceId = _document.getResourceId();
         final URI uri = this.resourceBaseProvider.getFileURI(_resourceId);
         XtextResource _resource = documentAccess.getResource();

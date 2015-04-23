@@ -25,9 +25,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
-import org.eclipse.xtext.web.server.data.JsonObject;
 import org.eclipse.xtext.web.servlet.HttpServletSessionStore;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
@@ -47,9 +47,26 @@ public class XtextServlet extends HttpServlet {
     } catch (final Throwable _t) {
       if (_t instanceof InvalidRequestException) {
         final InvalidRequestException exception = (InvalidRequestException)_t;
-        int _statusCode = exception.getStatusCode();
+        int _switchResult = (int) 0;
+        InvalidRequestException.Type _type = exception.getType();
+        if (_type != null) {
+          switch (_type) {
+            case RESOURCE_NOT_FOUND:
+              _switchResult = 404;
+              break;
+            case INVALID_DOCUMENT_STATE:
+              _switchResult = 409;
+              break;
+            default:
+              _switchResult = 400;
+              break;
+          }
+        } else {
+          _switchResult = 400;
+        }
+        final int statusCode = _switchResult;
         String _message = exception.getMessage();
-        resp.sendError(_statusCode, _message);
+        resp.sendError(statusCode, _message);
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -116,8 +133,8 @@ public class XtextServlet extends HttpServlet {
   
   protected void doService(final XtextServiceDispatcher.ServiceDescriptor service, final HttpServletResponse resp) {
     try {
-      Function0<? extends JsonObject> _service = service.getService();
-      final JsonObject result = _service.apply();
+      Function0<? extends IServiceResult> _service = service.getService();
+      final IServiceResult result = _service.apply();
       resp.setStatus(HttpServletResponse.SC_OK);
       resp.setContentType("text/x-json;charset=UTF-8");
       resp.setHeader("Cache-Control", "no-cache");
@@ -197,7 +214,7 @@ public class XtextServlet extends HttpServlet {
     }
     boolean _equals = Objects.equal(resourceServiceProvider, null);
     if (_equals) {
-      throw new InvalidRequestException(400, "Unable to identify the resource type.");
+      throw new InvalidRequestException(InvalidRequestException.Type.UNKNOWN_LANGUAGE, "Unable to identify the Xtext language.");
     }
     return resourceServiceProvider.<Injector>get(Injector.class);
   }

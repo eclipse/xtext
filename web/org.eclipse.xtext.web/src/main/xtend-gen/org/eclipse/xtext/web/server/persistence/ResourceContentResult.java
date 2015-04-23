@@ -5,24 +5,24 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.web.server.data;
+package org.eclipse.xtext.web.server.persistence;
 
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
-import org.eclipse.xtext.web.server.data.JsonObject;
+import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @Accessors
 @FinalFieldsConstructor
 @SuppressWarnings("all")
-public class ResourceContent extends JsonObject {
+public class ResourceContentResult implements IServiceResult {
   private final String fullText;
   
   private String stateId;
   
   private boolean dirty;
   
-  public ResourceContent(final String fullText) {
+  public ResourceContentResult(final String fullText) {
     super();
     this.fullText = fullText;
   }

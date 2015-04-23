@@ -25,8 +25,8 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.web.server.InvalidRequestException;
-import org.eclipse.xtext.web.server.data.ContentAssistResult;
-import org.eclipse.xtext.web.server.model.XtextDocument;
+import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
+import org.eclipse.xtext.web.server.model.XtextWebDocument;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -40,7 +40,7 @@ public class ContentAssistService {
   
   private final ExecutorService pool = Executors.newFixedThreadPool(3);
   
-  public ContentAssistResult createProposals(final XtextDocument document, final ITextRegion selection, final int offset, final String requiredStateId) throws InvalidRequestException {
+  public ContentAssistResult createProposals(final XtextWebDocument document, final ITextRegion selection, final int offset, final String requiredStateId) throws InvalidRequestException {
     ContentAssistContextFactory _get = this.contextFactoryProvider.get();
     final Procedure1<ContentAssistContextFactory> _function = new Procedure1<ContentAssistContextFactory>() {
       @Override
@@ -49,9 +49,9 @@ public class ContentAssistService {
       }
     };
     final ContentAssistContextFactory contextFactory = ObjectExtensions.<ContentAssistContextFactory>operator_doubleArrow(_get, _function);
-    final IUnitOfWork<ContentAssistContext[], XtextDocument.ReadAccess> _function_1 = new IUnitOfWork<ContentAssistContext[], XtextDocument.ReadAccess>() {
+    final IUnitOfWork<ContentAssistContext[], XtextWebDocument.ReadAccess> _function_1 = new IUnitOfWork<ContentAssistContext[], XtextWebDocument.ReadAccess>() {
       @Override
-      public ContentAssistContext[] exec(final XtextDocument.ReadAccess access) throws Exception {
+      public ContentAssistContext[] exec(final XtextWebDocument.ReadAccess access) throws Exception {
         ContentAssistContext[] _xblockexpression = null;
         {
           access.checkStateId(requiredStateId);

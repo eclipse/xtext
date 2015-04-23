@@ -15,7 +15,7 @@ import org.eclipse.emf.common.util.WrappedException
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.XtextResourceSet
-import org.eclipse.xtext.web.server.model.XtextDocument
+import org.eclipse.xtext.web.server.model.XtextWebDocument
 
 class FileResourceHandler implements IServerResourceHandler {
 	
@@ -30,13 +30,13 @@ class FileResourceHandler implements IServerResourceHandler {
 			val uri = resourceBaseProvider.getFileURI(resourceId)
 			val resourceSet = resourceSetProvider.get()
 			val resource = resourceSet.getResource(uri, true) as XtextResource
-			return new XtextDocument(resource, resourceId)
+			return new XtextWebDocument(resource, resourceId)
 		} catch (WrappedException exception) {
 			throw exception.cause
 		}
 	}
 	
-	override put(XtextDocument.ReadAccess documentAccess) throws IOException {
+	override put(XtextWebDocument.ReadAccess documentAccess) throws IOException {
 		try {
 			val uri = resourceBaseProvider.getFileURI(documentAccess.document.resourceId)
 			val outputStream = documentAccess.resource.resourceSet.URIConverter.createOutputStream(uri)
