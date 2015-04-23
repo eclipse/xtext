@@ -7,18 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting2.regionaccess.IEObjectRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
-import org.eclipse.xtext.nodemodel.BidiTreeIterator;
-import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
 /**
@@ -50,21 +45,6 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 	}
 
 	@Override
-	public boolean hasSyntaxError() {
-		return getResource().getParseResult().hasSyntaxErrors();
-	}
-
-	@Override
-	public boolean hasSyntaxError(EObject object) {
-		BidiTreeIterator<INode> it = NodeModelUtils.getNode(object).getAsTreeIterable().iterator();
-		while (it.hasNext()) {
-			if (it.next().getSyntaxErrorMessage() != null)
-				return true;
-		}
-		return false;
-	}
-
-	@Override
 	public AbstractEObjectRegion regionForEObject(EObject obj) {
 		return eObjectToTokens.get(obj);
 	}
@@ -80,8 +60,8 @@ public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 	}
 
 	@Override
-	public List<IEObjectRegion> regionsForAllEObjects() {
-		return ImmutableList.<IEObjectRegion> copyOf(eObjectToTokens.values());
+	public boolean hasSyntaxError() {
+		return resource.getParseResult().hasSyntaxErrors();
 	}
 
 }

@@ -66,7 +66,7 @@ public class TextRegionsInTextToString {
 		ITextRegionAccess access = getTextRegionAccess();
 		if (access != null) {
 			ITextSegment impactRegion = TextRegions.merge(this.items);
-			List<ILineRegion> expandToLines = access.expandToLines(impactRegion, getLeadingLines(), getTrailingLines());
+			List<ILineRegion> expandToLines = TextRegions.expandToLines(impactRegion, getLeadingLines(), getTrailingLines());
 			return TextRegions.merge(expandToLines);
 		}
 		return null;

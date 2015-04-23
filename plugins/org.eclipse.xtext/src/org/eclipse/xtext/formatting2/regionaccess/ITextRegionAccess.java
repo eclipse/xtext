@@ -7,16 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.regionaccess;
 
-import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.Action;
-import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.resource.XtextResource;
 
@@ -69,13 +60,7 @@ import org.eclipse.xtext.resource.XtextResource;
  */
 public interface ITextRegionAccess {
 
-	List<ILineRegion> expandToLines(ITextSegment segment, int leadingLinesToAdd, int trailingLinesToAdd);
-
-	/**
-	 * @return the {@link RuleCall} or the assigned {@link Action} that led to the construction of this EObject. For the
-	 *         model's root element, the {@link ParserRule} is returned.
-	 */
-	EObject getInvokingGrammarElement(EObject obj);
+	ITextRegionExtensions getExtensions();
 
 	/**
 	 * @return The {@link XtextResource} that backs the document this class provides access to.
@@ -84,133 +69,18 @@ public interface ITextRegionAccess {
 
 	ITextRegionRewriter getRewriter();
 
-	/**
-	 * @return true, if one or more parse error occurred when parsing the document.
-	 */
-	boolean hasSyntaxError();
+	ILineRegion regionForLineAtOffset(int offset);
 
-	/**
-	 * @return true, if an parse error occurred during parsing of the provided EObject or any of its children.
-	 */
-	boolean hasSyntaxError(EObject object);
-
-	/**
-	 * @return the semantic region representing the 'keyword' that immediately follows the EObject or null.
-	 */
-	ISemanticRegion immediatelyFollowingKeyword(EObject owner, String keyword);
-
-	/**
-	 * @return the semantic region representing the 'keyword' that immediately follows the 'region' or null.
-	 */
-	ISemanticRegion immediatelyFollowingKeyword(ISequentialRegion region, String keyword);
-
-	/**
-	 * @return the semantic region for a keyword located right before the provided EObject. May be null if there is no
-	 *         preceding semantic region or the preceding semantic region does not represent a keyword.
-	 */
-	ISemanticRegion immediatelyPrecedingKeyword(EObject owner);
-
-	/**
-	 * @return the semantic region for a keyword located right before the provided EObject. May be null if there is no
-	 *         preceding semantic region or the preceding semantic region does not represent the provided keyword.
-	 */
-	ISemanticRegion immediatelyPrecedingKeyword(EObject owner, String keyword);
-
-	/**
-	 * @return the semantic region for a keyword located right before the provided region. May be null if there is no
-	 *         preceding semantic region or the preceding semantic region does not represent a keyword.
-	 */
-	ISemanticRegion immediatelyPrecedingKeyword(ISequentialRegion region);
-
-	/**
-	 * @return the semantic region for a keyword located right before the provided region. May be null if there is no
-	 *         preceding semantic region or the preceding semantic region does not represent the provided keyword.
-	 */
-	ISemanticRegion immediatelyPrecedingKeyword(ISequentialRegion region, String keyword);
-
-	/**
-	 * @return true, if the EObject's text range contains a line-wrap ("\n"). The EObject's text range reaches from the
-	 *         beginning of its first semantic region to the end of its last semantic region.
-	 */
-	boolean isMultiline(EObject object);
-
-	/**
-	 * @return the {@link IHiddenRegion} that precedes the EObject's first {@link ISemanticRegion}.
-	 * 
-	 * @see #trailingHiddenRegion(EObject)
-	 */
-	IHiddenRegion leadingHiddenRegion(EObject owner);
-
-	ILineRegion lineForOffset(int offset);
-
-	ITextSegment regionForDocument();
-
-	/**
-	 * @return a text region that reaches from the beginning of its first semantic region to the end of its last
-	 *         semantic region.
-	 */
 	IEObjectRegion regionForEObject(EObject object);
 
-	/**
-	 * @return returns the first {@link ISemanticRegion} that represents the value of {@code owner.eGet(feature)}. May
-	 *         be null.
-	 */
-	ISemanticRegion regionForFeature(EObject owner, EStructuralFeature feature);
-
-	/**
-	 * no containment; returned order same as syntactic oder
-	 */
-	List<ISemanticRegion> regionsForFeatures(EObject owner, EStructuralFeature... features);
-
-	/**
-	 * @return the first {@link ISemanticRegion} that represent 'keyword' and directly belongs to the provided
-	 *         'EObject'. Keywords of child-EObjects are not considered. May be null.
-	 */
-	ISemanticRegion regionForKeyword(EObject owner, String keyword);
-
-	ISemanticRegion regionForKeyword(EObject owner, Keyword keyword);
+	ITextSegment regionForDocument();
 
 	ITextSegment regionForOffset(int offset, int length);
 
 	IEObjectRegion regionForRootEObject();
 
-	/**
-	 * @return the first {@link ISemanticRegion} that represent a RuleCall to the provided AbstractRule and directly
-	 *         belongs to the provided 'EObject'. RuleCalls of child-EObjects are not considered. May be null.
-	 */
-	ISemanticRegion regionForRuleCallTo(EObject owner, AbstractRule rule);
-
-	ISemanticRegion regionForRuleCall(EObject owner, RuleCall ruleCall);
-
-	ISemanticRegion regionForCrossRef(EObject owner, CrossReference crossRef);
-
-	List<ISemanticRegion> regionsForRuleCalls(EObject owner, RuleCall... ruleCalls);
-
-	List<IEObjectRegion> regionsForAllEObjects();
-
-	/**
-	 * @return All {@link ISemanticRegion semantic regions} that represent one of the provided 'keyword's and directly
-	 *         belong to the provided 'EObject'. Keywords of child-EObjects are not considered.
-	 */
-	List<ISemanticRegion> regionsForKeywords(EObject owner, String... keywords);
-
-	List<ISemanticRegion> regionsForKeywords(EObject owner, Keyword... keywords);
-
-	List<ISemanticRegion> regionsForCrossRefs(EObject owner, CrossReference... crossRefs);
-
-	/**
-	 * @return All {@link ISemanticRegion semantic regions} that represent a RuleCall to one of the provided
-	 *         AbstractRules and directly belong to the provided 'EObject'. RuleCalls of child-EObjects are not
-	 *         considered. May be null.
-	 */
-	List<ISemanticRegion> regionsForRuleCallsTo(EObject owner, AbstractRule... rule);
-
 	String textForOffset(int offset, int length);
 
-	/**
-	 * @return the {@link IHiddenRegion} that follows after the EObject's last {@link ISemanticRegion}.
-	 * 
-	 * @see #leadingHiddenRegion(EObject)
-	 */
-	IHiddenRegion trailingHiddenRegion(EObject owner); // rename to nextHiddenRegion; do same with leading()
+	boolean hasSyntaxError();
+
 }

@@ -12,6 +12,7 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
+import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionFinder;
 import org.eclipse.xtext.nodemodel.INode;
 
 /**
@@ -19,9 +20,9 @@ import org.eclipse.xtext.nodemodel.INode;
  */
 public class NodeSemanticRegion extends NodeRegion implements ISemanticRegion {
 
+	private NodeEObjectRegion eObjectTokens;
 	private IHiddenRegion leading;
 	private IHiddenRegion trailing;
-	private NodeEObjectRegion eObjectTokens;
 
 	protected NodeSemanticRegion(NodeModelBasedRegionAccess access, INode node) {
 		super(access, node);
@@ -55,20 +56,30 @@ public class NodeSemanticRegion extends NodeRegion implements ISemanticRegion {
 		return leading != null ? leading.getPreviousSemanticRegion() : null;
 	}
 
-	protected void setLeadingHiddenRegion(IHiddenRegion leading) {
-		this.leading = leading;
+	@Override
+	public EObject getSemanticElement() {
+		return eObjectTokens != null ? eObjectTokens.getSemanticElement() : null;
 	}
 
-	protected void setTrailingHiddenRegion(IHiddenRegion trailing) {
-		this.trailing = trailing;
+	@Override
+	public ISemanticRegionFinder immediatelyFollowing() {
+		return new SemanticRegionMatcher(getNextSemanticRegion());
+	}
+
+	@Override
+	public ISemanticRegionFinder immediatelyPreceding() {
+		return new SemanticRegionMatcher(getPreviousSemanticRegion());
 	}
 
 	protected void setEObjectTokens(NodeEObjectRegion eObjectTokens) {
 		this.eObjectTokens = eObjectTokens;
 	}
 
-	@Override
-	public EObject getSemanticElement() {
-		return eObjectTokens != null ? eObjectTokens.getSemanticElement() : null;
+	protected void setLeadingHiddenRegion(IHiddenRegion leading) {
+		this.leading = leading;
+	}
+
+	protected void setTrailingHiddenRegion(IHiddenRegion trailing) {
+		this.trailing = trailing;
 	}
 }

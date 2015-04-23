@@ -13,6 +13,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting2.regionaccess.IEObjectRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
+import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionFinder;
+import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionsFinder;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 
 import com.google.common.collect.Lists;
@@ -78,7 +80,7 @@ public abstract class AbstractEObjectRegion extends AbstractTextSegment implemen
 	}
 
 	@Override
-	public List<ISemanticRegion> getSemanticLeafRegions() {
+	public List<ISemanticRegion> getSemanticRegions() {
 		return semanticRegions;
 	}
 
@@ -89,6 +91,33 @@ public abstract class AbstractEObjectRegion extends AbstractTextSegment implemen
 
 	public IHiddenRegion getTrailingHiddenRegion() {
 		return nextHidden;
+	}
+
+	@Override
+	public ISemanticRegionFinder immediatelyFollowing() {
+		return new SemanticRegionMatcher(getNextSemanticRegion());
+	}
+
+	@Override
+	public ISemanticRegionFinder immediatelyPreceding() {
+		return new SemanticRegionMatcher(getPreviousSemanticRegion());
+	}
+
+	@Override
+	public ISemanticRegionsFinder getRegionFor() {
+		return new SemanticRegionInIterableFinder(semanticRegions);
+	}
+
+	@Override
+	public Iterable<ISemanticRegion> getAllSemanticRegions() {
+		ISemanticRegion first = previousHidden.getNextSemanticRegion();
+		ISemanticRegion last = nextHidden.getPreviousSemanticRegion();
+		return new SemanticRegionIterable(first, last);
+	}
+
+	@Override
+	public ISemanticRegionsFinder getAllRegionsFor() {
+		return new SemanticRegionInIterableFinder(getAllSemanticRegions());
 	}
 
 	protected void setGrammarElement(EObject grammarElement) {
@@ -106,4 +135,5 @@ public abstract class AbstractEObjectRegion extends AbstractTextSegment implemen
 	protected void setTrailingHiddenRegion(IHiddenRegion trailing) {
 		this.nextHidden = trailing;
 	}
+
 }
