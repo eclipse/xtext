@@ -208,7 +208,10 @@ public class PortableURIs {
       _or = true;
     } else {
       Resource _eResource = to.eResource();
-      ResourceSet _resourceSet_1 = _eResource.getResourceSet();
+      ResourceSet _resourceSet_1 = null;
+      if (_eResource!=null) {
+        _resourceSet_1=_eResource.getResourceSet();
+      }
       boolean _notEquals = (!Objects.equal(_resourceSet_1, null));
       _or = _notEquals;
     }

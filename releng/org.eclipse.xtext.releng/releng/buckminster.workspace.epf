@@ -5,6 +5,7 @@ file_export_version=3.0
 /instance/org.eclipse.debug.ui/org.eclipse.debug.ui.build_before_launch=false
 /instance/org.eclipse.m2e.core/eclipse.m2.globalUpdatePolicy=
 /instance/org.eclipse.m2e.core/eclipse.m2.updateProjects=
+/instance/org.eclipse.m2e.core/eclipse.m2.updateIndexes=false
 /instance/org.eclipse.m2e.core/eclipse.m2.problem.notCoveredMojoExecution=warning
 /instance/org.eclipse.m2e.core/eclipse.m2.problem.outofdateProjectConfig=warning
 /instance/org.eclipse.pde.api.tools/MISSING_EE_DESCRIPTIONS=Warning

@@ -108,7 +108,7 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 	public EObject getEObject(String uriFragment) {
 		synchronized (getLock()) {
 			try {
-				if (getEncoder().isCrossLinkFragment(this, uriFragment)) {
+				if (getEncoder().isCrossLinkFragment(this, uriFragment) && !isLoadedFromStorage()) {
 					if (!getUnresolvableURIFragments().contains(uriFragment)) {
 						Triple<EObject, EReference, INode> triple = getEncoder().decode(this, uriFragment);
 						if (batchLinkingService.isBatchLinkable(triple.getSecond())) {

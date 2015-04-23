@@ -108,7 +108,7 @@ class AnnotationReferenceProviderImpl implements AnnotationReferenceProvider {
 				delegate = newJvmAnnotationReference
 				it.compilationUnit = this.compilationUnit
 			]
-			for (valueName : baseJvmAnnotationReference.values.map[valueName]) {
+			for (valueName : baseJvmAnnotationReference.getExplicitValues.map[valueName ?: "value"]) {
 				val value = annotationReference.getValue(valueName)
 				buildContext.set(valueName, value)
 			}

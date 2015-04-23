@@ -572,12 +572,11 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		if (argument != null) {
 			LightweightTypeReference parameterType = slot.getDeclaredType();
 			if (parameterType == null) {
-				resolveArgumentType(argument, null, state.withNonVoidExpectation());
-			} else {
-				LightweightTypeReference substitutedParameterType = substitutor.substitute(parameterType);
-				AbstractTypeComputationState argumentState = createLinkingTypeComputationState(substitutedParameterType);
-				resolveArgumentType(argument, substitutedParameterType, argumentState);
+				parameterType = state.getReferenceOwner().newUnknownTypeReference();
 			}
+			LightweightTypeReference substitutedParameterType = substitutor.substitute(parameterType);
+			AbstractTypeComputationState argumentState = createLinkingTypeComputationState(substitutedParameterType);
+			resolveArgumentType(argument, substitutedParameterType, argumentState);
 		}
 	}
 
