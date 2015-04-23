@@ -20,12 +20,12 @@ import com.intellij.util.containers.HashSet
 import org.eclipse.xtext.idea.lang.IXtextLanguage
 import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClasses
 import org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex
+import com.intellij.util.CommonProcessors
+import com.intellij.psi.PsiClass
 
+// TODO should this be a shared service?
 class JvmTypesShortNamesCache extends PsiShortNamesCache {
 	
-	static final val PsiMethod[] NO_METHODS = #[]
-    static final val PsiField[] NO_FIELDS = #[]
-    
     @Inject
     extension JvmPsiClasses
     
@@ -47,7 +47,11 @@ class JvmTypesShortNamesCache extends PsiShortNamesCache {
 	}
 	
 	override getAllClassNames(HashSet<String> dest) {
-		dest += allClassNames
+		processAllClassNames(new CommonProcessors.CollectProcessor<String>(dest));
+	}
+	
+	override processAllClassNames(Processor<String> processor) {
+		jvmDeclaredTypeShortNameIndex.processAllKeys(project, processor)
 	}
 	
 	override getAllFieldNames() {
@@ -62,12 +66,13 @@ class JvmTypesShortNamesCache extends PsiShortNamesCache {
 	}
 	
 	override getAllMethodNames(HashSet<String> set) {
-		
 	}
 	
 	override getClassesByName(String name, GlobalSearchScope scope) {
-		val result = newArrayList
 		val xtextFiles = jvmDeclaredTypeShortNameIndex.get(name, project, scope)
+		if (xtextFiles.isEmpty)
+			return PsiClass.EMPTY_ARRAY;
+		val result = newArrayList
 		for (xtextFile : xtextFiles) {
 			if (xtextFile.language == language) {
 				result += xtextFile.getPsiClassesByName(name)
@@ -77,19 +82,19 @@ class JvmTypesShortNamesCache extends PsiShortNamesCache {
 	}
 	
 	override getFieldsByName(String name, GlobalSearchScope scope) {
-		NO_FIELDS
+		PsiField.EMPTY_ARRAY
 	}
 	
 	override getFieldsByNameIfNotMoreThan(String name, GlobalSearchScope scope, int maxCount) {
-		NO_FIELDS
+		PsiField.EMPTY_ARRAY
 	}
 	
 	override getMethodsByName(String name, GlobalSearchScope scope) {
-		NO_METHODS
+		PsiMethod.EMPTY_ARRAY
 	}
 	
 	override getMethodsByNameIfNotMoreThan(String name, GlobalSearchScope scope, int maxCount) {
-		NO_METHODS
+		PsiMethod.EMPTY_ARRAY
 	}
 	
 	override processMethodsWithName(String name, GlobalSearchScope scope, Processor<PsiMethod> processor) {

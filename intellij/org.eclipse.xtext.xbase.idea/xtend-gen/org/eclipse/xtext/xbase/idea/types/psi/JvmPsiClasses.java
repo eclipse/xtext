@@ -132,14 +132,14 @@ public class JvmPsiClasses {
     if (!_matched) {
       if (container instanceof PsiClass) {
         _matched=true;
-        _switchResult = Iterables.<PsiClass>filter(Collections.<PsiClass>unmodifiableList(CollectionLiterals.<PsiClass>newArrayList(((PsiClass)container))), PsiClass.class);
+        _switchResult = Collections.<PsiClass>unmodifiableList(CollectionLiterals.<PsiClass>newArrayList(((PsiClass)container)));
       }
     }
     if (!_matched) {
       if (container instanceof PsiMember) {
         _matched=true;
         PsiClass _containingClass = ((PsiMember)container).getContainingClass();
-        _switchResult = Iterables.<PsiClass>filter(Collections.<PsiClass>unmodifiableList(CollectionLiterals.<PsiClass>newArrayList(_containingClass)), PsiClass.class);
+        _switchResult = Collections.<PsiClass>unmodifiableList(CollectionLiterals.<PsiClass>newArrayList(_containingClass));
       }
     }
     if (!_matched) {
@@ -165,11 +165,15 @@ public class JvmPsiClasses {
     return CollectionLiterals.<PsiClass>emptyList();
   }
   
+  /**
+   * Computes a short name from a qualified name. If the qualified name is a name with a name of a nested type,
+   * only the innermost name is returned as the short name, e.g {@code 'java.util.Map$Entry'.shortName} yields {@code 'Entry'}
+   */
   public String getShortName(final QualifiedName qualifiedName) {
     String _xblockexpression = null;
     {
       final String lastSegment = qualifiedName.getLastSegment();
-      final int index = lastSegment.indexOf("$");
+      final int index = lastSegment.lastIndexOf("$");
       String _xifexpression = null;
       if ((index == (-1))) {
         _xifexpression = lastSegment;

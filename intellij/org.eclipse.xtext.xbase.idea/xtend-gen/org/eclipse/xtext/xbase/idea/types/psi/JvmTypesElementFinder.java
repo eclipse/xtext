@@ -17,6 +17,7 @@ import com.intellij.psi.PsiElementFinder;
 import com.intellij.psi.search.GlobalSearchScope;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import org.eclipse.xtext.common.types.access.impl.AbstractJvmTypeProvider;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -28,7 +29,6 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 
 @SuppressWarnings("all")
 public class JvmTypesElementFinder extends PsiElementFinder {
@@ -51,24 +51,28 @@ public class JvmTypesElementFinder extends PsiElementFinder {
   
   @Override
   public PsiClass findClass(final String qualifiedName, final GlobalSearchScope scope) {
-    PsiClass[] _findClasses = this.findClasses(qualifiedName, scope);
-    return IterableExtensions.<PsiClass>head(((Iterable<PsiClass>)Conversions.doWrapArray(_findClasses)));
+    Iterable<PsiClass> _doFindClasses = this.doFindClasses(qualifiedName, scope);
+    return IterableExtensions.<PsiClass>head(_doFindClasses);
   }
   
   @Override
   public PsiClass[] findClasses(final String qualifiedName, final GlobalSearchScope scope) {
+    return ((PsiClass[])Conversions.unwrapArray(this.doFindClasses(qualifiedName, scope), PsiClass.class));
+  }
+  
+  protected Iterable<PsiClass> doFindClasses(final String qualifiedName, final GlobalSearchScope scope) {
     Iterable<String> _variants = this.getVariants(qualifiedName);
     final Function1<String, Iterable<PsiClass>> _function = new Function1<String, Iterable<PsiClass>>() {
       @Override
       public Iterable<PsiClass> apply(final String it) {
-        return JvmTypesElementFinder.this.doFindClasses(it, scope);
+        return JvmTypesElementFinder.this.doFindClassesByVariant(it, scope);
       }
     };
     Iterable<Iterable<PsiClass>> _map = IterableExtensions.<String, Iterable<PsiClass>>map(_variants, _function);
-    return ((PsiClass[])Conversions.unwrapArray(Iterables.<PsiClass>concat(_map), PsiClass.class));
+    return Iterables.<PsiClass>concat(_map);
   }
   
-  protected Iterable<PsiClass> doFindClasses(final String variant, final GlobalSearchScope scope) {
+  protected Iterable<PsiClass> doFindClassesByVariant(final String variant, final GlobalSearchScope scope) {
     Iterable<PsiClass> _xblockexpression = null;
     {
       final QualifiedName qualifiedName = this.toQualifiedName(variant);
@@ -86,9 +90,13 @@ public class JvmTypesElementFinder extends PsiElementFinder {
   }
   
   protected Iterable<String> getVariants(final String qualifiedName) {
-    AbstractJvmTypeProvider.ClassNameVariants _classNameVariants = new AbstractJvmTypeProvider.ClassNameVariants(qualifiedName);
-    Iterable<String> _iterable = IteratorExtensions.<String>toIterable(_classNameVariants);
-    return Iterables.<String>concat(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(qualifiedName)), _iterable);
+    final Iterable<String> _function = new Iterable<String>() {
+      @Override
+      public Iterator<String> iterator() {
+        return new AbstractJvmTypeProvider.ClassNameVariants(qualifiedName);
+      }
+    };
+    return Iterables.<String>concat(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(qualifiedName)), _function);
   }
   
   protected QualifiedName toQualifiedName(final String variant) {
@@ -97,8 +105,7 @@ public class JvmTypesElementFinder extends PsiElementFinder {
   }
   
   protected Iterable<BaseXtextFile> findFiles(final String qualifiedName, final GlobalSearchScope scope) {
-    String _string = qualifiedName.toString();
-    Collection<BaseXtextFile> _get = this.exportedObjectQualifiedNameIndex.get(_string, this.project, scope);
+    Collection<BaseXtextFile> _get = this.exportedObjectQualifiedNameIndex.get(qualifiedName, this.project, scope);
     final Function1<BaseXtextFile, Boolean> _function = new Function1<BaseXtextFile, Boolean>() {
       @Override
       public Boolean apply(final BaseXtextFile xtextFile) {

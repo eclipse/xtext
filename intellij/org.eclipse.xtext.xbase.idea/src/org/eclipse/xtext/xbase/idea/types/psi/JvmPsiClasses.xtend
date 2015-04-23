@@ -71,9 +71,9 @@ class JvmPsiClasses {
 	def dispatch Iterable<PsiClass> findPsiClasses(PsiElement element) {
 		switch container : element.nearestLogicalContainer {
 			PsiClass:
-				#[container].filter(PsiClass)
+				#[container]
 			PsiMember:
-				#[container.containingClass].filter(PsiClass)
+				#[container.containingClass]
 			default: {
 				val psiClasses = element.psiClasses
 				if (psiClasses.empty)
@@ -88,9 +88,13 @@ class JvmPsiClasses {
 		emptyList
 	}
 
+	/**
+	 * Computes a short name from a qualified name. If the qualified name is a name with a name of a nested type,
+	 * only the innermost name is returned as the short name, e.g {@code 'java.util.Map$Entry'.shortName} yields {@code 'Entry'}
+	 */
 	def getShortName(QualifiedName qualifiedName) {
 		val lastSegment = qualifiedName.lastSegment
-		val index = lastSegment.indexOf('$')
+		val index = lastSegment.lastIndexOf('$')
 		if (index == -1)
 			lastSegment
 		else
