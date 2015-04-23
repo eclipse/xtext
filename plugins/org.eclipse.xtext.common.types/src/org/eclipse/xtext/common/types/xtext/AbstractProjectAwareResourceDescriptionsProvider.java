@@ -27,8 +27,7 @@ import com.google.inject.Inject;
 
 /**
  * This specialization of the {@link ResourceDescriptionsProvider} filters
- * locally defined elements from the resource descriptions that are made available
- * during the indexing phase.
+ * locally defined elements from the resource descriptions during the indexing phase.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Jan Koehnlein - Extracted to be reusable in Maven build
@@ -39,8 +38,7 @@ public abstract class AbstractProjectAwareResourceDescriptionsProvider extends R
 	@Inject CompilerPhases compilerPhases;
 	
 	/**
-	 * In the builder we use the Java representation for any upstream resources, so we filter them out here.
-	 * And if we are in the indexing phase, we don't even want to see the local resources.
+	 * And if we are in the indexing phase, we don't want to see the local resources.
 	 */
 	@Override 
 	public IResourceDescriptions getResourceDescriptions(ResourceSet resourceSet) {
@@ -53,11 +51,9 @@ public abstract class AbstractProjectAwareResourceDescriptionsProvider extends R
 				Predicate<URI> predicate = new Predicate<URI>() {
 					@Override
 					public boolean apply(URI uri) {
-						if (uri == null || uri.segmentCount() < 2 || !uri.isPlatformResource())
-							return false;
-						else 
-							return !uri.segment(1).equals(encodedProjectName);
+						return isProjectLocal(uri, encodedProjectName);
 					}
+
 				};
 				if (result instanceof IShadowedResourceDescriptions) {
 					return new ShadowedFilteringResourceDescriptions(result, predicate);
@@ -69,6 +65,16 @@ public abstract class AbstractProjectAwareResourceDescriptionsProvider extends R
 		return result;
 	}
 	
+	/**
+	 * @singe 2.9
+	 */
+	protected boolean isProjectLocal(URI uri, final String encodedProjectName) {
+		if (uri == null || uri.segmentCount() < 2 || !uri.isPlatformResource())
+			return false;
+		else 
+			return !uri.segment(1).equals(encodedProjectName);
+	}
+
 	protected abstract String getProjectName(ResourceSet resourceSet);
 	
 	/**

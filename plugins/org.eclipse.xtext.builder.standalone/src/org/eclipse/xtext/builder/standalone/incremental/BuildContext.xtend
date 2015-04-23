@@ -14,6 +14,7 @@ import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.builder.standalone.LanguageAccess
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy
+import java.io.File
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -28,6 +29,8 @@ class BuildContext {
 	IResourceClusteringPolicy clusteringPolicy
 	
 	transient ClusteringStorageAwareResourceLoader loader
+	
+	File tempDir
 	
 	def <T> executeClustered(Iterable<URI> uri, (Resource)=>T operation) {
 		if(loader == null) 

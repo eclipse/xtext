@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.plugin.EcorePlugin
 import org.eclipse.xtext.mwe.NameBasedFilter
 import org.eclipse.xtext.mwe.PathTraverser
+import static extension org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs.*
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -35,7 +36,7 @@ class ResourceURICollector {
 		result
 	} 
 	
-	def protected collectResources(List<File> roots, BuildContext context) {
+	def protected collectResources(List<URI> roots, BuildContext context) {
 		val extensions = (context.languages.keySet + #['java']).join("|")
 		val nameBasedFilter = new NameBasedFilter
 
@@ -44,7 +45,7 @@ class ResourceURICollector {
 		val List<URI> resources = newArrayList();
 
 		val modelsFound = new PathTraverser().resolvePathes(
-			roots.map[absolutePath].toList,
+			roots.map[toFileString].toList,
 			[ input |
 				val matches = nameBasedFilter.matches(input)
 				if (matches) {
@@ -54,8 +55,8 @@ class ResourceURICollector {
 				return matches
 			]
 		)
-		modelsFound.asMap.forEach [ uri, resource |
-			val file = new File(uri)
+		modelsFound.asMap.forEach [ path, resource |
+			val file = new File(path)
 			if (resource != null && !file.directory && file.name.endsWith(".jar")) {
 				registerBundle(file)
 			}
@@ -77,9 +78,8 @@ class ResourceURICollector {
 					name = name.substring(0, indexOf);
 				if (EcorePlugin.getPlatformResourceMap().containsKey(name))
 					return;
-				val String path = "archive:" + file.toURI() + "!/";
-				val URI uri = URI.createURI(path);
-				EcorePlugin.getPlatformResourceMap().put(name, uri);
+				val String path = "archive:" + file.asURI + "!/";
+				EcorePlugin.getPlatformResourceMap().put(name, path.asURI);
 			}
 		} catch (ZipException e) {
 			LOG.info("Could not open Jar file " + file.getAbsolutePath() + ".");
