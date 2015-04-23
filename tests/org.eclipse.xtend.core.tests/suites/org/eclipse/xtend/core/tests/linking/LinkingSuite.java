@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.tests.linking;
 
 import org.eclipse.xtend.core.tests.linking.InheritedStaticMethodTest;
+import org.eclipse.xtend.core.tests.typesystem.BatchLinkingServiceTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -29,7 +30,8 @@ import org.junit.runners.Suite.SuiteClasses;
 	LinkingShadowingWithReversedCandidatesTest.class,
 	InferredJvmModelShadowingJavaLinkingWithReversedCandidatesTest.class,
 	InheritedStaticMethodWithReversedCandidatesTest.class,
-	InheritedInstanceMethodWithReversedCandidatesTest.class
+	InheritedInstanceMethodWithReversedCandidatesTest.class,
+	BatchLinkingServiceTest.class
 })
 public class LinkingSuite {
 }
