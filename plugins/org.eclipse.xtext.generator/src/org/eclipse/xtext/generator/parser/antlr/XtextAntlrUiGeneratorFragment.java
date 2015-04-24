@@ -178,9 +178,10 @@ public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragmen
 
 	@Override
 	public String[] getExportedPackagesIde(Grammar grammar) {
-		return new String[] { getNaming().basePackageIde(grammar) + ".contentassist.antlr" };
+		String caAntlrpackage = getNaming().basePackageIde(grammar) + ".contentassist.antlr";
+		return new String[] { caAntlrpackage, caAntlrpackage + ".internal" };
 	}
-	
+
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
 		return ImmutableList.of(getOptions(), partialParsing, getNaming().hasIde());

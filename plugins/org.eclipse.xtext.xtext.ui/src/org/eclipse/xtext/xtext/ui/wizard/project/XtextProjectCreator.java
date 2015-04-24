@@ -12,7 +12,6 @@ import static com.google.common.collect.Lists.*;
 import static java.util.Collections.*;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -51,7 +50,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	};
 
 	protected static final String[] DSL_UI_PROJECT_NATURES = new String[] { JavaCore.NATURE_ID,
-			"org.eclipse.pde.PluginNature",//$NON-NLS-1$
+			"org.eclipse.pde.PluginNature", //$NON-NLS-1$
 			XtextProjectHelper.NATURE_ID };
 
 	protected static final String[] BUILDERS = new String[] { JavaCore.BUILDER_ID, "org.eclipse.pde.ManifestBuilder", //$NON-NLS-1$
@@ -68,32 +67,41 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 
 	@Inject
 	private Provider<PluginProjectFactory> projectFactoryProvider;
+	@Inject
+	private Provider<ProjectFactory> plainProjectFactoryProvider;
 
-	protected XtextProjectInfo getXtextProjectInfo() {
-		return (XtextProjectInfo) getProjectInfo();
+	@Override
+	protected XtextProjectInfo getProjectInfo() {
+		return (XtextProjectInfo) super.getProjectInfo();
 	}
 
 	@Override
-	protected void execute(final IProgressMonitor monitor) throws CoreException, InvocationTargetException,
-			InterruptedException {
+	protected void execute(final IProgressMonitor monitor)
+			throws CoreException, InvocationTargetException, InterruptedException {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, getCreateModelProjectMessage(), getMonitorTicks());
 
 		IProject project = createDslProject(subMonitor.newChild(1));
-		if (getXtextProjectInfo().isCreateUiProject()) {
+		if (getProjectInfo().isCreateUiProject()) {
 			createDslUiProject(subMonitor.newChild(1));
 		}
-		if (getXtextProjectInfo().isCreateTestProject()) {
+		if (getProjectInfo().isCreateTestProject()) {
 			createTestProject(subMonitor.newChild(1));
 		}
+		if (getProjectInfo().isCreateIdeProject()) {
+			createIdeProject(subMonitor.newChild(1));
+		}
+		if (getProjectInfo().isCreateIntellijProject()) {
+			createIntellijProject(subMonitor.newChild(1));
+		}
 
-		IFile dslGrammarFile = project.getFile(getModelFolderName() + "/" + getXtextProjectInfo().getGrammarFilePath());
+		IFile dslGrammarFile = project.getFile(getModelFolderName() + "/" + getProjectInfo().getGrammarFilePath());
 		BasicNewResourceWizard.selectAndReveal(dslGrammarFile, PlatformUI.getWorkbench().getActiveWorkbenchWindow());
 		setResult(dslGrammarFile);
 	}
 
 	protected int getMonitorTicks() {
 		int ticks = 2;
-		ticks = getXtextProjectInfo().isCreateTestProject() ? ticks + 1 : ticks;
+		ticks = getProjectInfo().isCreateTestProject() ? ticks + 1 : ticks;
 		return ticks;
 	}
 
@@ -104,7 +112,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 
 	@Override
 	protected String getCreateModelProjectMessage() {
-		return Messages.XtextProjectCreator_CreatingProjectsMessage2 + getXtextProjectInfo().getProjectName();
+		return Messages.XtextProjectCreator_CreatingProjectsMessage2 + getProjectInfo().getProjectName();
 	}
 
 	protected IProject createDslUiProject(final IProgressMonitor monitor) throws CoreException {
@@ -117,16 +125,17 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		configureProjectFactory(factory);
 		factory.addFolders(singletonList(XTEND_GEN_ROOT));
 		List<String> requiredBundles = getDslUiProjectRequiredBundles();
-		factory.setProjectName(getXtextProjectInfo().getUiProjectName());
+		if (getProjectInfo().isCreateIdeProject()) {
+			requiredBundles.add(getProjectInfo().getIdeProjectName());
+		}
+		factory.setProjectName(getProjectInfo().getUiProjectName());
 		factory.addProjectNatures(getDslUiProjectNatures());
 		factory.addRequiredBundles(requiredBundles);
-		factory.setProjectDefaultCharset(Charsets.UTF_8.name());
-		factory.setLocation(getXtextProjectInfo().getUiProjectLocation());
+		factory.setLocation(getProjectInfo().getUiProjectLocation());
 	}
 
 	protected List<String> getDslUiProjectRequiredBundles() {
-		List<String> requiredBundles = Lists.newArrayList(getXtextProjectInfo().getProjectName()
-				+ ";visibility:=reexport", //$NON-NLS-1$
+		List<String> requiredBundles = Lists.newArrayList(getProjectInfo().getProjectName() + ";visibility:=reexport", //$NON-NLS-1$
 				"org.eclipse.xtext.ui", //$NON-NLS-1$
 				"org.eclipse.ui.editors;bundle-version=\"3.5.0\"", //$NON-NLS-1$
 				"org.eclipse.ui.ide;bundle-version=\"3.5.0\""); //$NON-NLS-1$
@@ -146,12 +155,11 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	protected void configureDslProjectFactory(PluginProjectFactory factory) {
 		configureProjectFactory(factory);
 		factory.addFolders(singletonList(XTEND_GEN_ROOT));
-		factory.setProjectName(getXtextProjectInfo().getProjectName());
+		factory.setProjectName(getProjectInfo().getProjectName());
 		factory.addProjectNatures(getDslProjectNatures());
 		factory.addRequiredBundles(getDslProjectRequiredBundles());
 		factory.addDevelopmentTimeBundles(getDslProjectDevelopmentBundles());
-		factory.setLocation(getXtextProjectInfo().getDslProjectLocation());
-		factory.setProjectDefaultCharset(Charsets.UTF_8.name());
+		factory.setLocation(getProjectInfo().getDslProjectLocation());
 		factory.addContributor(createDslProjectContributor());
 	}
 
@@ -164,6 +172,9 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 				"org.eclipse.equinox.common;bundle-version=\"3.5.0\""); //$NON-NLS-1$
 		for (String bundleId : getAdditionalRequiredBundles()) {
 			requiredBundles.add(bundleId.trim());
+		}
+		if (getProjectInfo().isCreateIntellijProject()) {
+			requiredBundles.add("org.eclipse.xtext.idea.generator");
 		}
 		return requiredBundles;
 	}
@@ -185,10 +196,11 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	@Override
 	protected PluginProjectFactory configureProjectFactory(ProjectFactory factory) {
 		PluginProjectFactory result = (PluginProjectFactory) factory;
-		result.addWorkingSets(Arrays.asList(getXtextProjectInfo().getWorkingSets()));
+		result.addWorkingSets(Lists.newArrayList(getProjectInfo().getWorkingSets()));
 		result.addBuilderIds(getBuilderIDs());
 		result.addImportedPackages(getImportedPackages());
 		result.addFolders(getAllFolders());
+		result.setProjectDefaultCharset(Charsets.UTF_8.name());
 		return result;
 	}
 
@@ -208,37 +220,32 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	}
 
 	private TestProjectContributor createTestProjectContributor() {
-		return new TestProjectContributor(getXtextProjectInfo());
+		return new TestProjectContributor(getProjectInfo());
 	}
 
 	protected void configureTestProjectFactory(PluginProjectFactory factory) {
 		configureProjectFactory(factory);
 		factory.addFolders(singletonList(XTEND_GEN_ROOT));
 		List<String> requiredBundles = getTestProjectRequiredBundles();
-		factory.setProjectName(getXtextProjectInfo().getTestProjectName());
+		factory.setProjectName(getProjectInfo().getTestProjectName());
 		factory.addProjectNatures(getTestProjectNatures());
 		factory.addRequiredBundles(requiredBundles);
 		factory.addImportedPackages(getTestProjectImportedPackages());
-		factory.setProjectDefaultCharset(Charsets.UTF_8.name());
-		factory.setLocation(getXtextProjectInfo().getTestProjectLocation());
+		factory.setLocation(getProjectInfo().getTestProjectLocation());
 	}
 
 	protected List<String> getTestProjectImportedPackages() {
-		return Lists
-				.newArrayList("org.junit;version=\"4.5.0\"", "org.junit.runner;version=\"4.5.0\"",
-						"org.junit.runner.manipulation;version=\"4.5.0\"",
-						"org.junit.runner.notification;version=\"4.5.0\"", "org.junit.runners;version=\"4.5.0\"",
-						"org.junit.runners.model;version=\"4.5.0\"", "org.hamcrest.core");
+		return Lists.newArrayList("org.junit;version=\"4.5.0\"", "org.junit.runner;version=\"4.5.0\"",
+				"org.junit.runner.manipulation;version=\"4.5.0\"", "org.junit.runner.notification;version=\"4.5.0\"",
+				"org.junit.runners;version=\"4.5.0\"", "org.junit.runners.model;version=\"4.5.0\"",
+				"org.hamcrest.core");
 	}
 
 	protected List<String> getTestProjectRequiredBundles() {
-		List<String> requiredBundles = newArrayList(
-			getXtextProjectInfo().getProjectName(),
-			"org.eclipse.xtext.junit4",
-			"org.eclipse.xtext.xbase.lib"
-		);
-		if (getXtextProjectInfo().isCreateUiProject()) {
-			requiredBundles.add(getXtextProjectInfo().getUiProjectName());
+		List<String> requiredBundles = newArrayList(getProjectInfo().getProjectName(), "org.eclipse.xtext.junit4",
+				"org.eclipse.xtext.xbase.lib");
+		if (getProjectInfo().isCreateUiProject()) {
+			requiredBundles.add(getProjectInfo().getUiProjectName());
 			requiredBundles.add("org.eclipse.core.runtime");
 			requiredBundles.add("org.eclipse.ui.workbench;resolution:=optional");
 		}
@@ -264,8 +271,31 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	}
 
 	protected IProjectFactoryContributor createDslProjectContributor() {
-		DslProjectContributor dslProjectContributor = new DslProjectContributor(getXtextProjectInfo());
+		DslProjectContributor dslProjectContributor = new DslProjectContributor(getProjectInfo());
 		dslProjectContributor.setSourceRoot(SRC_ROOT);
 		return dslProjectContributor;
+	}
+
+	private IProject createIntellijProject(SubMonitor monitor) {
+		ProjectFactory factory = plainProjectFactoryProvider.get();
+		factory.setLocation(getProjectInfo().getIdeProjectLocation());
+		factory.setProjectName(getProjectInfo().getIntellijProjectName());
+		factory.setProjectDefaultCharset(Charsets.UTF_8.name());
+		factory.addFolders(getAllFolders());
+		factory.addFolders(singletonList(XTEND_GEN_ROOT));
+		factory.addWorkingSets(Lists.newArrayList(getProjectInfo().getWorkingSets()));
+		factory.addContributor(new IdeaProjectContributor(getProjectInfo()));
+		return factory.createProject(monitor, null);
+	}
+
+	private IProject createIdeProject(SubMonitor monitor) {
+		PluginProjectFactory factory = configureProjectFactory(createProjectFactory());
+		factory.setLocation(getProjectInfo().getIdeProjectLocation());
+		factory.setProjectName(getProjectInfo().getIdeProjectName());
+		List<String> requiredBundles = Lists.newArrayList(getProjectInfo().getProjectName(),
+				"org.eclipse.xtext.ide;visibility:=reexport");
+		factory.addRequiredBundles(requiredBundles);
+		factory.addProjectNatures(getDslUiProjectNatures());
+		return factory.createProject(monitor, null);
 	}
 }
