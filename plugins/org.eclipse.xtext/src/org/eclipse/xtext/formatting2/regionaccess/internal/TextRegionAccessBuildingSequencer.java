@@ -123,7 +123,7 @@ public class TextRegionAccessBuildingSequencer implements ISequenceAcceptor {
 		last.setPrevious(semantic);
 		semantic.setTrailingHiddenRegion(last);
 		if (tokens != null) {
-			tokens.getSemanticLeafRegions().add(semantic);
+			tokens.getSemanticRegions().add(semantic);
 			tokens.setTrailingHiddenRegion(last);
 		}
 	}

@@ -67,7 +67,7 @@ public abstract class AbstractTextSegment implements ITextSegment {
 
 	@Override
 	public List<ILineRegion> getLineRegions() {
-		ILineRegion current = getTextRegionAccess().lineForOffset(getOffset());
+		ILineRegion current = getTextRegionAccess().regionForLineAtOffset(getOffset());
 		List<ILineRegion> result = Lists.newArrayList();
 		int endOffset = getEndOffset();
 		while (current != null) {

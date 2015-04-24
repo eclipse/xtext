@@ -47,7 +47,7 @@ public class NodeModelBasedRegionAccessBuilder {
 			newHidden.setPrevious(newSemantic);
 			newSemantic.setLeadingHiddenRegion(lastHidden);
 			lastHidden.setNext(newSemantic);
-			eObjectTokens.getSemanticLeafRegions().add(newSemantic);
+			eObjectTokens.getSemanticRegions().add(newSemantic);
 			newSemantic.setEObjectTokens(eObjectTokens);
 			lastHidden = newHidden;
 		}

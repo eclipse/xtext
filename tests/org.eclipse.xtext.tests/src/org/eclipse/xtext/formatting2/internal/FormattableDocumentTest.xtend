@@ -33,7 +33,7 @@ class FormattableDocumentTest {
 				idlist  a
 			'''
 			formatter = [ IDList model, extension regions, extension document |
-				model.regionForKeyword("idlist").append[oneSpace]
+				model.regionFor.keyword("idlist").append[oneSpace]
 			]
 			expectation = '''
 				idlist a
@@ -50,7 +50,7 @@ class FormattableDocumentTest {
 				idlist  aaa  bbb  ccc  ddd  eee  fff
 			'''
 			formatter = [ IDList model, extension regions, extension document |
-				model.regionsForRuleCallsTo(IDRule).forEach[prepend[autowrap; oneSpace]]
+				model.regionFor.ruleCallsTo(IDRule).forEach[prepend[autowrap; oneSpace]]
 			]
 			expectation = '''
 				idlist aaa
@@ -69,11 +69,11 @@ class FormattableDocumentTest {
 				kwlist  kw1  kw2  kw3  kw4
 			'''
 			formatter = [ KWList model, extension regions, extension document |
-				model.regionForKeyword("kwlist").append[autowrap(6); oneSpace]
-				model.regionForKeyword("kw1").append[autowrap; oneSpace]
-				model.regionForKeyword("kw2").append[autowrap; oneSpace]
-				model.regionForKeyword("kw3").append[autowrap; oneSpace]
-				model.regionForKeyword("kw4").append[autowrap; newLine]
+				model.regionFor.keyword("kwlist").append[autowrap(6); oneSpace]
+				model.regionFor.keyword("kw1").append[autowrap; oneSpace]
+				model.regionFor.keyword("kw2").append[autowrap; oneSpace]
+				model.regionFor.keyword("kw3").append[autowrap; oneSpace]
+				model.regionFor.keyword("kw4").append[autowrap; newLine]
 			]
 			expectation = '''
 				kwlist
@@ -95,12 +95,12 @@ class FormattableDocumentTest {
 				model.formatConditionally(
 					[ doc |
 						val extension fits = doc.requireFitsInLine
-						model.regionForKeyword("kwlist").append[oneSpace]
-						model.regionForKeyword("kw1").append[oneSpace]
+						model.regionFor.keyword("kwlist").append[oneSpace]
+						model.regionFor.keyword("kw1").append[oneSpace]
 					],
 					[ extension doc |
-						model.regionForKeyword("kwlist").append[newLine]
-						model.regionForKeyword("kw1").append[newLine]
+						model.regionFor.keyword("kwlist").append[newLine]
+						model.regionFor.keyword("kw1").append[newLine]
 					])
 			]
 			expectation = '''
@@ -123,12 +123,12 @@ class FormattableDocumentTest {
 				model.formatConditionally(
 					[ doc |
 						val extension fits = doc.requireFitsInLine
-						model.regionForKeyword("kwlist").append[oneSpace]
-						model.regionForKeyword("kw1").append[oneSpace]
+						model.regionFor.keyword("kwlist").append[oneSpace]
+						model.regionFor.keyword("kw1").append[oneSpace]
 					],
 					[ extension doc |
-						model.regionForKeyword("kwlist").append[newLine]
-						model.regionForKeyword("kw1").append[newLine]
+						model.regionFor.keyword("kwlist").append[newLine]
+						model.regionFor.keyword("kw1").append[newLine]
 					])
 			]
 			expectation = '''
