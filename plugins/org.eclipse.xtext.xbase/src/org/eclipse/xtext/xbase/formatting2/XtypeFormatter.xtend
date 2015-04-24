@@ -25,29 +25,29 @@ import static org.eclipse.xtext.xtype.XtypePackage.Literals.*
 class XtypeFormatter extends AbstractFormatter2 {
 
 	def dispatch void format(XFunctionTypeRef func, extension IFormattableDocument document) {
-		func.regionForKeyword("(").append[noSpace]
+		func.regionFor.keyword("(").append[noSpace]
 		for (param : func.paramTypes) {
 			param.format(document)
-			param.immediatelyFollowingKeyword(",").prepend[noSpace].append[oneSpace]
+			param.immediatelyFollowing.keyword(",").prepend[noSpace].append[oneSpace]
 		}
-		func.regionForKeyword(")").prepend[if(!func.paramTypes.empty) noSpace].append[noSpace]
-		func.regionForKeyword("=>").append[noSpace]
+		func.regionFor.keyword(")").prepend[if(!func.paramTypes.empty) noSpace].append[noSpace]
+		func.regionFor.keyword("=>").append[noSpace]
 		func.returnType.format(document)
 	}
 
 	def dispatch void format(JvmParameterizedTypeReference ref, extension IFormattableDocument document) {
-		ref.regionForKeyword("<").surround[noSpace]
+		ref.regionFor.keyword("<").surround[noSpace]
 		for (arg : ref.arguments) {
 			arg.format(document)
-			arg.immediatelyFollowingKeyword(",").prepend[noSpace].append[oneSpace]
+			arg.immediatelyFollowing.keyword(",").prepend[noSpace].append[oneSpace]
 		}
 		if (!ref.arguments.empty)
-			ref.regionForKeyword(">").prepend[noSpace]
+			ref.regionFor.keyword(">").prepend[noSpace]
 	}
 
 	def dispatch void format(JvmWildcardTypeReference ref, extension IFormattableDocument document) {
 		if (!ref.constraints.empty)
-			ref.regionForKeyword("?").append[oneSpace]
+			ref.regionFor.keyword("?").append[oneSpace]
 		for (c : ref.constraints)
 			c.format(document)
 	}
@@ -70,11 +70,11 @@ class XtypeFormatter extends AbstractFormatter2 {
 	}
 
 	def dispatch void format(XImportDeclaration imp, extension IFormattableDocument document) {
-		imp.regionForKeyword("import").append[oneSpace]
-		imp.regionForFeature(XIMPORT_DECLARATION__STATIC).append[oneSpace]
-		imp.regionForFeature(XIMPORT_DECLARATION__EXTENSION).append[oneSpace]
-		for (node : imp.regionsForKeywords("."))
+		imp.regionFor.keyword("import").append[oneSpace]
+		imp.regionFor.feature(XIMPORT_DECLARATION__STATIC).append[oneSpace]
+		imp.regionFor.feature(XIMPORT_DECLARATION__EXTENSION).append[oneSpace]
+		for (node : imp.regionFor.keywords("."))
 			node.surround[noSpace]
-		imp.regionForKeyword(";").prepend[noSpace]
+		imp.regionFor.keyword(";").prepend[noSpace]
 	}
 }

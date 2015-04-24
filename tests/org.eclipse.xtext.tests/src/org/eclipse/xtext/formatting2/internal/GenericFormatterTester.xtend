@@ -16,6 +16,7 @@ import org.eclipse.xtext.formatting2.IFormattableDocument
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess
 import org.eclipse.xtext.junit4.formatter.FormatterTestRequest
 import org.eclipse.xtext.junit4.formatter.FormatterTester
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionExtensions
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -53,8 +54,8 @@ class GenericFormatterTestRequest extends FormatterTestRequest {
 @Accessors
 abstract class GenericFormatter<T extends EObject> extends AbstractFormatter2 {
 	def dispatch format(EObject obj, IFormattableDocument document) {
-		format(obj as T, request.textRegionAccess, document)
+		format(obj as T, request.textRegionAccess.extensions, document)
 	}
 
-	def protected abstract void format(T model, ITextRegionAccess regionAccess, IFormattableDocument document)
+	def protected abstract void format(T model, ITextRegionExtensions regionAccess, IFormattableDocument document)
 }
