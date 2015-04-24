@@ -649,7 +649,7 @@ class XbaseFormatter extends XtypeFormatter {
 					}
 				],
 				[ doc |
-					val last = expr.formatClosureParams(open, format)[oneSpace]
+					val last = expr.formatClosureParams(open, doc)[oneSpace]
 					formatExpressionsMultiline(children, last, close, doc)
 				])
 		}

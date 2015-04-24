@@ -2321,7 +2321,7 @@ public class XbaseFormatter extends XtypeFormatter {
                   it.oneSpace();
                 }
               };
-              final ISemanticRegion last = XbaseFormatter.this.formatClosureParams(expr, open, format, _function);
+              final ISemanticRegion last = XbaseFormatter.this.formatClosureParams(expr, open, doc, _function);
               XbaseFormatter.this.formatExpressionsMultiline(children, last, close, doc);
             }
           };
