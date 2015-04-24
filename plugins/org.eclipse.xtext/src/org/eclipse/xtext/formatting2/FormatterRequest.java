@@ -22,17 +22,26 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 /**
- * <p>A request tells the formatter what and how to format.</p>
+ * <p>
+ * A request tells the formatter what and how to format.
+ * </p>
  * 
- * <p>When invoking the formatter, the request is passed into {@link IFormatter2#format(FormatterRequest)}.</p>
+ * <p>
+ * When invoking the formatter, the request is passed into {@link IFormatter2#format(FormatterRequest)}.
+ * </p>
  * 
- * <p>A request carries information about:<p>
+ * <p>
+ * A request carries information about:
+ * <p>
  * <ul>
  * <li>The {@link #textRegionAccess} which allows to obtain the to-be-formatted semantic model with text regions.</li>
  * <li>{@link #preferences Preferences} with keys from e.g. {@link FormatterPreferenceKeys}.</li>
- * <li>{@link #regions} that describe how to restrict the text regions for which {@link ITextReplacement replacements} are produced.</li>
- * <li>An option to {@link #allowIdentityEdits()} which will disable automated suppression of text replacements that do not cause changes.</li>
- * <li>A setting for green-field formatting ({@link #formatUndefinedHiddenRegionsOnly}): only format regions that have no whitespace information yet.</li>
+ * <li>{@link #regions} that describe how to restrict the text regions for which {@link ITextReplacement replacements}
+ * are produced.</li>
+ * <li>An option to {@link #allowIdentityEdits()} which will disable automated suppression of text replacements that do
+ * not cause changes.</li>
+ * <li>A setting for green-field formatting ({@link #formatUndefinedHiddenRegionsOnly}): only format regions that have
+ * no whitespace information yet.</li>
  * </ul>
  * 
  * @author Moritz Eysholdt - Initial contribution and API
@@ -41,8 +50,8 @@ import com.google.common.collect.Maps;
 public class FormatterRequest {
 
 	/**
-	 * Restrict the formatter to produce {@link ITextReplacement replacements} inside the specified regions only. If no regions are
-	 * specified, the whole document is formatted.
+	 * Restrict the formatter to produce {@link ITextReplacement replacements} inside the specified regions only. If no
+	 * regions are specified, the whole document is formatted.
 	 */
 	private Collection<ITextRegion> regions = Lists.newArrayList();
 
@@ -82,9 +91,8 @@ public class FormatterRequest {
 	}
 
 	/**
-	 * Sets the {@link #textRegionAccess}. If the region has syntax errors and no explicit
-	 * {@link ExceptionAcceptor} is configured yet, the {@link ExceptionAcceptor#IGNORING ignoring acceptor}
-	 * will be configured.
+	 * Sets the {@link #textRegionAccess}. If the region has syntax errors and no explicit {@link ExceptionAcceptor} is
+	 * configured yet, the {@link ExceptionAcceptor#IGNORING ignoring acceptor} will be configured.
 	 */
 	public FormatterRequest setTextRegionAccess(ITextRegionAccess tokens) {
 		if (tokens.hasSyntaxError() && this.exceptionHandler == null)
@@ -94,9 +102,9 @@ public class FormatterRequest {
 	}
 
 	/**
-	 * Allow the formatter to produce {@link ITextReplacement replacements} that replace regions with text equal to the text of the
-	 * region. Since these replacements do not cause text changes, one usually doens't want to have them in a
-	 * production environment. However, they are useful to test if a formatter considers all significant regions, e.g.
+	 * Allow the formatter to produce {@link ITextReplacement replacements} that replace regions with text equal to the
+	 * text of the region. Since these replacements do not cause text changes, one usually doens't want to have them in
+	 * a production environment. However, they are useful to test if a formatter considers all significant regions, e.g.
 	 * all {@link IHiddenRegion hidden regions}.
 	 */
 	private boolean allowIdentityEdits;
@@ -139,14 +147,14 @@ public class FormatterRequest {
 	}
 
 	/**
-	 * {@link IHiddenRegion Hidden regions} are considered undefined when their whitespace/comments are unknown. This happens for
-	 * regions that emerged between programmatically created (not parsed!) model elements.
+	 * {@link IHiddenRegion Hidden regions} are considered undefined when their whitespace/comments are unknown. This
+	 * happens for regions that emerged between programmatically created (not parsed!) model elements.
 	 * 
 	 * Enable this options if, for example, you serialize a model after applying a quick fix, refactoring or have it
 	 * edited in a graphical editor and you want to keep the whitespace-changes to a minimum.
 	 */
 	private boolean formatUndefinedHiddenRegionsOnly;
-	
+
 	/**
 	 * @see #formatUndefinedHiddenRegionsOnly
 	 */
@@ -163,16 +171,26 @@ public class FormatterRequest {
 	}
 
 	/**
-	 * <p>Exceptions that occur during formatting are passed to this handler. The handler may choose to throw them, log
-	 * them, or ignore them. Formatting continues, unless the handler throws an exception.</p>
+	 * <p>
+	 * Exceptions that occur during formatting are passed to this handler. The handler may choose to throw them, log
+	 * them, or ignore them. Formatting continues, unless the handler throws an exception.
+	 * </p>
 	 * 
-	 * <p>Logging exceptions and continuing formatting is the default behavior.</p>
+	 * <p>
+	 * Logging exceptions and continuing formatting is the default behavior.
+	 * </p>
 	 * 
-	 * <p>Throwing exceptions is useful in unit tests.</p>
+	 * <p>
+	 * Throwing exceptions is useful in unit tests.
+	 * </p>
 	 * 
-	 * <p>Ignoring exceptions is useful when formatting a document with syntax errors.</p>
+	 * <p>
+	 * Ignoring exceptions is useful when formatting a document with syntax errors.
+	 * </p>
 	 * 
-	 * <p>Defaults to the {@link ExceptionAcceptor#LOGGING Logging Acceptor}</p>
+	 * <p>
+	 * Defaults to the {@link ExceptionAcceptor#LOGGING Logging Acceptor}
+	 * </p>
 	 * 
 	 * @see ExceptionAcceptor#LOGGING
 	 * @see ExceptionAcceptor#THROWING

@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
+import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionFinder;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -57,6 +58,16 @@ public class StringSemanticRegion extends StringRegion implements ISemanticRegio
 	@Override
 	public EObject getSemanticElement() {
 		return semanticElement;
+	}
+
+	@Override
+	public ISemanticRegionFinder immediatelyFollowing() {
+		return new SemanticRegionMatcher(getNextSemanticRegion());
+	}
+
+	@Override
+	public ISemanticRegionFinder immediatelyPreceding() {
+		return new SemanticRegionMatcher(getPreviousSemanticRegion());
 	}
 
 	protected void setLeadingHiddenRegion(IHiddenRegion leading) {

@@ -34,6 +34,9 @@ import org.eclipse.xtext.formatting2.ISubFormatter;
 import org.eclipse.xtext.formatting2.regionaccess.IEObjectRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
+import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionFinder;
+import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionsFinder;
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 import org.eclipse.xtext.formatting2.regionaccess.internal.TextSegment;
 import org.eclipse.xtext.resource.XtextResource;
@@ -92,30 +95,35 @@ public class XbaseFormatter extends XtypeFormatter {
   private XbaseGrammarAccess grammar;
   
   protected void _format(final XCollectionLiteral literal, @Extension final IFormattableDocument document) {
-    ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(literal, "#");
+    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(literal);
+    ISemanticRegion _keyword = _regionFor.keyword("#");
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.noSpace();
       }
     };
-    document.append(_regionForKeyword, _function);
+    document.append(_keyword, _function);
     ISemanticRegion _elvis = null;
-    ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(literal, "[");
-    if (_regionForKeyword_1 != null) {
-      _elvis = _regionForKeyword_1;
+    ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(literal);
+    ISemanticRegion _keyword_1 = _regionFor_1.keyword("[");
+    if (_keyword_1 != null) {
+      _elvis = _keyword_1;
     } else {
-      ISemanticRegion _regionForKeyword_2 = this.regionAccess.regionForKeyword(literal, "{");
-      _elvis = _regionForKeyword_2;
+      ISemanticRegionsFinder _regionFor_2 = this.textRegionExtensions.regionFor(literal);
+      ISemanticRegion _keyword_2 = _regionFor_2.keyword("{");
+      _elvis = _keyword_2;
     }
     final ISemanticRegion open = _elvis;
     ISemanticRegion _elvis_1 = null;
-    ISemanticRegion _regionForKeyword_3 = this.regionAccess.regionForKeyword(literal, "]");
-    if (_regionForKeyword_3 != null) {
-      _elvis_1 = _regionForKeyword_3;
+    ISemanticRegionsFinder _regionFor_3 = this.textRegionExtensions.regionFor(literal);
+    ISemanticRegion _keyword_3 = _regionFor_3.keyword("]");
+    if (_keyword_3 != null) {
+      _elvis_1 = _keyword_3;
     } else {
-      ISemanticRegion _regionForKeyword_4 = this.regionAccess.regionForKeyword(literal, "}");
-      _elvis_1 = _regionForKeyword_4;
+      ISemanticRegionsFinder _regionFor_4 = this.textRegionExtensions.regionFor(literal);
+      ISemanticRegion _keyword_4 = _regionFor_4.keyword("}");
+      _elvis_1 = _keyword_4;
     }
     final ISemanticRegion close = _elvis_1;
     EList<XExpression> _elements = literal.getElements();
@@ -156,14 +164,15 @@ public class XbaseFormatter extends XtypeFormatter {
           for (final EObject elem : elements) {
             {
               this.format(elem, format);
-              ISemanticRegion _immediatelyFollowingKeyword = this.regionAccess.immediatelyFollowingKeyword(elem, ",");
+              ISemanticRegionFinder _immediatelyFollowing = this.textRegionExtensions.immediatelyFollowing(elem);
+              ISemanticRegion _keyword = _immediatelyFollowing.keyword(",");
               final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
                 @Override
                 public void apply(final IHiddenRegionFormatter it) {
                   it.noSpace();
                 }
               };
-              ISemanticRegion _prepend = format.prepend(_immediatelyFollowingKeyword, _function_2);
+              ISemanticRegion _prepend = format.prepend(_keyword, _function_2);
               final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
                 @Override
                 public void apply(final IHiddenRegionFormatter it) {
@@ -191,15 +200,17 @@ public class XbaseFormatter extends XtypeFormatter {
         } else {
           IHiddenRegion _previousHiddenRegion_1 = close.getPreviousHiddenRegion();
           final IndentOnceAutowrapFormatter indent = new IndentOnceAutowrapFormatter(_previousHiddenRegion_1);
+          ITextRegionAccess _textRegionAccess = this.getTextRegionAccess();
           int _endOffset = open.getEndOffset();
           int _offset = close.getOffset();
           int _endOffset_1 = open.getEndOffset();
           int _minus = (_offset - _endOffset_1);
-          final TextSegment region = new TextSegment(this.regionAccess, _endOffset, _minus);
+          final TextSegment region = new TextSegment(_textRegionAccess, _endOffset, _minus);
           final SeparatorRegions<EObject, ISemanticRegion> items = new SeparatorRegions<EObject, ISemanticRegion>(region);
           for (final EObject ele : elements) {
-            ISemanticRegion _immediatelyFollowingKeyword = this.regionAccess.immediatelyFollowingKeyword(ele, ",");
-            items.appendWithTrailingSeparator(ele, _immediatelyFollowingKeyword);
+            ISemanticRegionFinder _immediatelyFollowing = this.textRegionExtensions.immediatelyFollowing(ele);
+            ISemanticRegion _keyword = _immediatelyFollowing.keyword(",");
+            items.appendWithTrailingSeparator(ele, _keyword);
           }
           for (final ObjectEntry<EObject, ISemanticRegion> ele_1 : items) {
             {
@@ -271,9 +282,10 @@ public class XbaseFormatter extends XtypeFormatter {
   }
   
   protected void _format(final JvmGenericArrayTypeReference array, @Extension final IFormattableDocument document) {
+    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(array);
     ParserRule _arrayBracketsRule = this.grammar.getArrayBracketsRule();
-    ISemanticRegion _regionForRuleCallTo = this.regionAccess.regionForRuleCallTo(array, _arrayBracketsRule);
-    ArrayBracketsFormattingReplacer _arrayBracketsFormattingReplacer = new ArrayBracketsFormattingReplacer(_regionForRuleCallTo);
+    ISemanticRegion _ruleCallTo = _regionFor.ruleCallTo(_arrayBracketsRule);
+    ArrayBracketsFormattingReplacer _arrayBracketsFormattingReplacer = new ArrayBracketsFormattingReplacer(_ruleCallTo);
     document.addReplacer(_arrayBracketsFormattingReplacer);
     JvmTypeReference _componentType = array.getComponentType();
     this.format(_componentType, document);
@@ -292,22 +304,24 @@ public class XbaseFormatter extends XtypeFormatter {
   }
   
   protected void _format(final XVariableDeclaration expr, @Extension final IFormattableDocument format) {
-    ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(expr, "val");
+    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(expr);
+    ISemanticRegion _keyword = _regionFor.keyword("val");
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
     };
-    format.append(_regionForKeyword, _function);
-    ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(expr, "var");
+    format.append(_keyword, _function);
+    ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(expr);
+    ISemanticRegion _keyword_1 = _regionFor_1.keyword("var");
     final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
     };
-    format.append(_regionForKeyword_1, _function_1);
+    format.append(_keyword_1, _function_1);
     JvmTypeReference _type = expr.getType();
     final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
       @Override
@@ -316,14 +330,15 @@ public class XbaseFormatter extends XtypeFormatter {
       }
     };
     format.<JvmTypeReference>append(_type, _function_2);
-    ISemanticRegion _regionForKeyword_2 = this.regionAccess.regionForKeyword(expr, "=");
+    ISemanticRegionsFinder _regionFor_2 = this.textRegionExtensions.regionFor(expr);
+    ISemanticRegion _keyword_2 = _regionFor_2.keyword("=");
     final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
     };
-    format.surround(_regionForKeyword_2, _function_3);
+    format.surround(_keyword_2, _function_3);
     JvmTypeReference _type_1 = expr.getType();
     this.format(_type_1, format);
     XExpression _right = expr.getRight();
@@ -331,15 +346,17 @@ public class XbaseFormatter extends XtypeFormatter {
   }
   
   protected void _format(final XAssignment expr, @Extension final IFormattableDocument format) {
+    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(expr);
     ParserRule _opSingleAssignRule = this.grammar.getOpSingleAssignRule();
-    ISemanticRegion _regionForRuleCallTo = this.regionAccess.regionForRuleCallTo(expr, _opSingleAssignRule);
+    ISemanticRegion _ruleCallTo = _regionFor.ruleCallTo(_opSingleAssignRule);
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
     };
-    format.surround(_regionForRuleCallTo, _function);
+    format.surround(_ruleCallTo, _function);
+    ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(expr);
     String _xifexpression = null;
     boolean _isExplicitStatic = expr.isExplicitStatic();
     if (_isExplicitStatic) {
@@ -347,14 +364,14 @@ public class XbaseFormatter extends XtypeFormatter {
     } else {
       _xifexpression = ".";
     }
-    ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(expr, _xifexpression);
+    ISemanticRegion _keyword = _regionFor_1.keyword(_xifexpression);
     final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.noSpace();
       }
     };
-    format.surround(_regionForKeyword, _function_1);
+    format.surround(_keyword, _function_1);
     XExpression _assignable = expr.getAssignable();
     this.format(_assignable, format);
     XExpression _value = expr.getValue();
@@ -372,10 +389,10 @@ public class XbaseFormatter extends XtypeFormatter {
   protected void formatBuilderWithLeadingGap(final XClosure closure, @Extension final IFormattableDocument format) {
     boolean _notEquals = (!Objects.equal(closure, null));
     if (_notEquals) {
-      IHiddenRegion _leadingHiddenRegion = this.regionAccess.leadingHiddenRegion(closure);
-      final int offset = _leadingHiddenRegion.getOffset();
-      IHiddenRegion _trailingHiddenRegion = this.regionAccess.trailingHiddenRegion(closure);
-      int _offset = _trailingHiddenRegion.getOffset();
+      IHiddenRegion _previousHiddenRegion = this.textRegionExtensions.previousHiddenRegion(closure);
+      final int offset = _previousHiddenRegion.getOffset();
+      IHiddenRegion _nextHiddenRegion = this.textRegionExtensions.nextHiddenRegion(closure);
+      int _offset = _nextHiddenRegion.getOffset();
       final int length = (_offset - offset);
       final ISubFormatter _function = new ISubFormatter() {
         @Override
@@ -417,7 +434,7 @@ public class XbaseFormatter extends XtypeFormatter {
       XClosure _xblockexpression = null;
       {
         XExpression _last_1 = IterableExtensions.<XExpression>last(params);
-        final EObject grammarElement = this.regionAccess.getInvokingGrammarElement(_last_1);
+        final EObject grammarElement = this.textRegionExtensions.grammarElement(_last_1);
         XClosure _xifexpression_1 = null;
         boolean _or = false;
         boolean _or_1 = false;
@@ -470,38 +487,41 @@ public class XbaseFormatter extends XtypeFormatter {
   }
   
   protected void _format(final XConstructorCall expr, @Extension final IFormattableDocument format) {
-    ISemanticRegion _regionForFeature = this.regionAccess.regionForFeature(expr, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR);
+    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(expr);
+    ISemanticRegion _feature = _regionFor.feature(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR);
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
     };
-    format.prepend(_regionForFeature, _function);
+    format.prepend(_feature, _function);
     EList<JvmTypeReference> _typeArguments = expr.getTypeArguments();
     boolean _isEmpty = _typeArguments.isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
-      ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(expr, "<");
+      ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(expr);
+      ISemanticRegion _keyword = _regionFor_1.keyword("<");
       final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
         @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.noSpace();
         }
       };
-      format.surround(_regionForKeyword, _function_1);
+      format.surround(_keyword, _function_1);
       EList<JvmTypeReference> _typeArguments_1 = expr.getTypeArguments();
       for (final JvmTypeReference arg : _typeArguments_1) {
         {
           this.format(arg, format);
-          ISemanticRegion _immediatelyFollowingKeyword = this.regionAccess.immediatelyFollowingKeyword(arg, ",");
+          ISemanticRegionFinder _immediatelyFollowing = this.textRegionExtensions.immediatelyFollowing(arg);
+          ISemanticRegion _keyword_1 = _immediatelyFollowing.keyword(",");
           final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
             @Override
             public void apply(final IHiddenRegionFormatter it) {
               it.noSpace();
             }
           };
-          ISemanticRegion _prepend = format.prepend(_immediatelyFollowingKeyword, _function_2);
+          ISemanticRegion _prepend = format.prepend(_keyword_1, _function_2);
           final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
             @Override
             public void apply(final IHiddenRegionFormatter it) {
@@ -511,17 +531,20 @@ public class XbaseFormatter extends XtypeFormatter {
           format.append(_prepend, _function_3);
         }
       }
-      ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(expr, ">");
+      ISemanticRegionsFinder _regionFor_2 = this.textRegionExtensions.regionFor(expr);
+      ISemanticRegion _keyword_1 = _regionFor_2.keyword(">");
       final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
         @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.noSpace();
         }
       };
-      format.prepend(_regionForKeyword_1, _function_2);
+      format.prepend(_keyword_1, _function_2);
     }
-    final ISemanticRegion open = this.regionAccess.regionForKeyword(expr, "(");
-    final ISemanticRegion close = this.regionAccess.regionForKeyword(expr, ")");
+    ISemanticRegionsFinder _regionFor_3 = this.textRegionExtensions.regionFor(expr);
+    final ISemanticRegion open = _regionFor_3.keyword("(");
+    ISemanticRegionsFinder _regionFor_4 = this.textRegionExtensions.regionFor(expr);
+    final ISemanticRegion close = _regionFor_4.keyword(")");
     final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
@@ -538,26 +561,28 @@ public class XbaseFormatter extends XtypeFormatter {
     boolean _isEmpty = _typeArguments.isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
-      ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(expr, "<");
+      ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(expr);
+      ISemanticRegion _keyword = _regionFor.keyword("<");
       final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
         @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.noSpace();
         }
       };
-      format.append(_regionForKeyword, _function);
+      format.append(_keyword, _function);
       EList<JvmTypeReference> _typeArguments_1 = expr.getTypeArguments();
       for (final JvmTypeReference arg : _typeArguments_1) {
         {
           this.format(arg, format);
-          ISemanticRegion _immediatelyFollowingKeyword = this.regionAccess.immediatelyFollowingKeyword(arg, ",");
+          ISemanticRegionFinder _immediatelyFollowing = this.textRegionExtensions.immediatelyFollowing(arg);
+          ISemanticRegion _keyword_1 = _immediatelyFollowing.keyword(",");
           final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
             @Override
             public void apply(final IHiddenRegionFormatter it) {
               it.noSpace();
             }
           };
-          ISemanticRegion _prepend = format.prepend(_immediatelyFollowingKeyword, _function_1);
+          ISemanticRegion _prepend = format.prepend(_keyword_1, _function_1);
           final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
             @Override
             public void apply(final IHiddenRegionFormatter it) {
@@ -567,14 +592,15 @@ public class XbaseFormatter extends XtypeFormatter {
           format.append(_prepend, _function_2);
         }
       }
-      ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(expr, ">");
+      ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(expr);
+      ISemanticRegion _keyword_1 = _regionFor_1.keyword(">");
       final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
         @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.noSpace();
         }
       };
-      format.surround(_regionForKeyword_1, _function_1);
+      format.surround(_keyword_1, _function_1);
     }
   }
   
@@ -582,15 +608,17 @@ public class XbaseFormatter extends XtypeFormatter {
     this.formatFeatureCallTypeParameters(expr, format);
     boolean _isExplicitOperationCall = expr.isExplicitOperationCall();
     if (_isExplicitOperationCall) {
-      ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(expr, "(");
+      ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(expr);
+      ISemanticRegion _keyword = _regionFor.keyword("(");
       final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
         @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.noSpace();
         }
       };
-      final ISemanticRegion open = format.prepend(_regionForKeyword, _function);
-      final ISemanticRegion close = this.regionAccess.regionForKeyword(expr, ")");
+      final ISemanticRegion open = format.prepend(_keyword, _function);
+      ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(expr);
+      final ISemanticRegion close = _regionFor_1.keyword(")");
       EList<XExpression> _featureCallArguments = expr.getFeatureCallArguments();
       this.formatFeatureCallParams(_featureCallArguments, open, close, format);
     } else {
@@ -603,7 +631,7 @@ public class XbaseFormatter extends XtypeFormatter {
   
   protected void _format(final XMemberFeatureCall expr, @Extension final IFormattableDocument format) {
     EObject top = expr;
-    IEObjectRegion _regionForEObject = this.regionAccess.regionForEObject(expr);
+    IEObjectRegion _regionForEObject = this.textRegionExtensions.regionForEObject(expr);
     SeparatorRegions<XMemberFeatureCall, ISemanticRegion> calls = new SeparatorRegions<XMemberFeatureCall, ISemanticRegion>(_regionForEObject);
     while ((top instanceof XMemberFeatureCall)) {
       {
@@ -628,22 +656,24 @@ public class XbaseFormatter extends XtypeFormatter {
           _switchResult = ".";
         }
         final String op = _switchResult;
-        final ISemanticRegion separator = this.regionAccess.regionForKeyword(top, op);
+        ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(top);
+        final ISemanticRegion separator = _regionFor.keyword(op);
         calls.prependWithLeadingSeparator(((XMemberFeatureCall)top), separator);
         XExpression _memberCallTarget = ((XMemberFeatureCall)top).getMemberCallTarget();
         top = _memberCallTarget;
       }
     }
     this.format(top, format);
-    IHiddenRegion _trailingHiddenRegion = this.regionAccess.trailingHiddenRegion(expr);
-    final IndentOnceAutowrapFormatter indentOnce = new IndentOnceAutowrapFormatter(_trailingHiddenRegion);
+    IHiddenRegion _nextHiddenRegion = this.textRegionExtensions.nextHiddenRegion(expr);
+    final IndentOnceAutowrapFormatter indentOnce = new IndentOnceAutowrapFormatter(_nextHiddenRegion);
     for (final ObjectEntry<XMemberFeatureCall, ISemanticRegion> entry : calls) {
       {
         final XMemberFeatureCall call = entry.getObject();
         SeparatorEntry<XMemberFeatureCall, ISemanticRegion> _leadingSeparator = entry.getLeadingSeparator();
         final ISemanticRegion operator = _leadingSeparator.getSeparator();
         this.formatFeatureCallTypeParameters(call, format);
-        final ISemanticRegion feature = this.regionAccess.regionForFeature(call, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
+        ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(call);
+        final ISemanticRegion feature = _regionFor.feature(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
         boolean _notEquals = (!Objects.equal(feature, null));
         if (_notEquals) {
           ITextSegment _region = entry.getRegion();
@@ -669,15 +699,17 @@ public class XbaseFormatter extends XtypeFormatter {
           format.append(_prepend, _function_1);
           boolean _isExplicitOperationCall = call.isExplicitOperationCall();
           if (_isExplicitOperationCall) {
-            ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(call, "(");
+            ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(call);
+            ISemanticRegion _keyword = _regionFor_1.keyword("(");
             final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
               @Override
               public void apply(final IHiddenRegionFormatter it) {
                 it.noSpace();
               }
             };
-            final ISemanticRegion open = format.prepend(_regionForKeyword, _function_2);
-            final ISemanticRegion close = this.regionAccess.regionForKeyword(call, ")");
+            final ISemanticRegion open = format.prepend(_keyword, _function_2);
+            ISemanticRegionsFinder _regionFor_2 = this.textRegionExtensions.regionFor(call);
+            final ISemanticRegion close = _regionFor_2.keyword(")");
             EList<XExpression> _memberCallArguments = call.getMemberCallArguments();
             this.formatFeatureCallParams(_memberCallArguments, open, close, format);
           } else {
@@ -696,7 +728,8 @@ public class XbaseFormatter extends XtypeFormatter {
   }
   
   protected AbstractRule binaryOperationPrecedence(final EObject op) {
-    final ISemanticRegion node = this.regionAccess.regionForFeature(op, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
+    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(op);
+    final ISemanticRegion node = _regionFor.feature(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
     boolean _and = false;
     boolean _notEquals = (!Objects.equal(node, null));
     if (!_notEquals) {
@@ -714,20 +747,21 @@ public class XbaseFormatter extends XtypeFormatter {
   
   protected void _format(final XBinaryOperation expr, @Extension final IFormattableDocument format) {
     final AbstractRule precendece = this.binaryOperationPrecedence(expr);
-    IEObjectRegion _regionForEObject = this.regionAccess.regionForEObject(expr);
+    IEObjectRegion _regionForEObject = this.textRegionExtensions.regionForEObject(expr);
     final SeparatorRegions<XBinaryOperation, ISemanticRegion> calls = new SeparatorRegions<XBinaryOperation, ISemanticRegion>(_regionForEObject);
     EObject top = expr;
     while (Objects.equal(this.binaryOperationPrecedence(top), precendece)) {
       {
-        ISemanticRegion _regionForFeature = this.regionAccess.regionForFeature(top, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
-        calls.prependWithLeadingSeparator(((XBinaryOperation) top), _regionForFeature);
+        ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(top);
+        ISemanticRegion _feature = _regionFor.feature(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
+        calls.prependWithLeadingSeparator(((XBinaryOperation) top), _feature);
         XExpression _leftOperand = ((XBinaryOperation) top).getLeftOperand();
         top = _leftOperand;
       }
     }
     this.format(top, format);
-    IHiddenRegion _trailingHiddenRegion = this.regionAccess.trailingHiddenRegion(expr);
-    final IndentOnceAutowrapFormatter indent = new IndentOnceAutowrapFormatter(_trailingHiddenRegion);
+    IHiddenRegion _nextHiddenRegion = this.textRegionExtensions.nextHiddenRegion(expr);
+    final IndentOnceAutowrapFormatter indent = new IndentOnceAutowrapFormatter(_nextHiddenRegion);
     for (final ObjectEntry<XBinaryOperation, ISemanticRegion> ele : calls) {
       {
         SeparatorEntry<XBinaryOperation, ISemanticRegion> _leadingSeparator = ele.getLeadingSeparator();
@@ -815,13 +849,13 @@ public class XbaseFormatter extends XtypeFormatter {
     }
     boolean _or = false;
     XExpression _expression = expr.getExpression();
-    boolean _isMultiline = this.regionAccess.isMultiline(_expression);
+    boolean _isMultiline = this.textRegionExtensions.isMultiline(_expression);
     if (_isMultiline) {
       _or = true;
     } else {
       XExpression _expression_1 = expr.getExpression();
-      IHiddenRegion _leadingHiddenRegion = this.regionAccess.leadingHiddenRegion(_expression_1);
-      boolean _isMultiline_1 = _leadingHiddenRegion.isMultiline();
+      IHiddenRegion _previousHiddenRegion = this.textRegionExtensions.previousHiddenRegion(_expression_1);
+      boolean _isMultiline_1 = _previousHiddenRegion.isMultiline();
       _or = _isMultiline_1;
     }
     final boolean multiline = _or;
@@ -841,11 +875,13 @@ public class XbaseFormatter extends XtypeFormatter {
       _or_1 = multiline;
     }
     if (_or_1) {
-      ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(expr, "synchronized");
-      format.append(_regionForKeyword, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML);
+      ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(expr);
+      ISemanticRegion _keyword = _regionFor.keyword("synchronized");
+      format.append(_keyword, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML);
     } else {
-      ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(expr, "synchronized");
-      format.append(_regionForKeyword_1, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisSL);
+      ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(expr);
+      ISemanticRegion _keyword_1 = _regionFor_1.keyword("synchronized");
+      format.append(_keyword_1, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisSL);
     }
     XExpression _param_1 = expr.getParam();
     this.format(_param_1, format);
@@ -891,11 +927,13 @@ public class XbaseFormatter extends XtypeFormatter {
       _or_1 = multiline;
     }
     if (_or_1) {
-      ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(expr, "if");
-      format.append(_regionForKeyword, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML);
+      ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(expr);
+      ISemanticRegion _keyword = _regionFor.keyword("if");
+      format.append(_keyword, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML);
     } else {
-      ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(expr, "if");
-      format.append(_regionForKeyword_1, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisSL);
+      ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(expr);
+      ISemanticRegion _keyword_1 = _regionFor_1.keyword("if");
+      format.append(_keyword_1, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisSL);
     }
     XExpression _if_1 = expr.getIf();
     this.format(_if_1, format);
@@ -933,14 +971,15 @@ public class XbaseFormatter extends XtypeFormatter {
   }
   
   protected void _format(final XForLoopExpression expr, @Extension final IFormattableDocument format) {
-    ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(expr, "for");
+    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(expr);
+    ISemanticRegion _keyword = _regionFor.keyword("for");
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
     };
-    format.append(_regionForKeyword, _function);
+    format.append(_keyword, _function);
     JvmFormalParameter _declaredParam = expr.getDeclaredParam();
     final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
       @Override
@@ -977,23 +1016,26 @@ public class XbaseFormatter extends XtypeFormatter {
   }
   
   protected void _format(final XBasicForLoopExpression expr, @Extension final IFormattableDocument format) {
-    ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(expr, "for");
+    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(expr);
+    ISemanticRegion _keyword = _regionFor.keyword("for");
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
     };
-    format.append(_regionForKeyword, _function);
-    ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(expr, "(");
+    format.append(_keyword, _function);
+    ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(expr);
+    ISemanticRegion _keyword_1 = _regionFor_1.keyword("(");
     final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.noSpace();
       }
     };
-    format.append(_regionForKeyword_1, _function_1);
-    List<ISemanticRegion> _regionsForKeywords = this.regionAccess.regionsForKeywords(expr, ";");
+    format.append(_keyword_1, _function_1);
+    ISemanticRegionsFinder _regionFor_2 = this.textRegionExtensions.regionFor(expr);
+    List<ISemanticRegion> _keywords = _regionFor_2.keywords(";");
     final Procedure1<ISemanticRegion> _function_2 = new Procedure1<ISemanticRegion>() {
       @Override
       public void apply(final ISemanticRegion it) {
@@ -1014,8 +1056,9 @@ public class XbaseFormatter extends XtypeFormatter {
         format.append(_prepend, _function_1);
       }
     };
-    IterableExtensions.<ISemanticRegion>forEach(_regionsForKeywords, _function_2);
-    List<ISemanticRegion> _regionsForKeywords_1 = this.regionAccess.regionsForKeywords(expr, ",");
+    IterableExtensions.<ISemanticRegion>forEach(_keywords, _function_2);
+    ISemanticRegionsFinder _regionFor_3 = this.textRegionExtensions.regionFor(expr);
+    List<ISemanticRegion> _keywords_1 = _regionFor_3.keywords(",");
     final Procedure1<ISemanticRegion> _function_3 = new Procedure1<ISemanticRegion>() {
       @Override
       public void apply(final ISemanticRegion it) {
@@ -1035,15 +1078,16 @@ public class XbaseFormatter extends XtypeFormatter {
         format.append(_prepend, _function_1);
       }
     };
-    IterableExtensions.<ISemanticRegion>forEach(_regionsForKeywords_1, _function_3);
-    ISemanticRegion _regionForKeyword_2 = this.regionAccess.regionForKeyword(expr, ")");
+    IterableExtensions.<ISemanticRegion>forEach(_keywords_1, _function_3);
+    ISemanticRegionsFinder _regionFor_4 = this.textRegionExtensions.regionFor(expr);
+    ISemanticRegion _keyword_2 = _regionFor_4.keyword(")");
     final Procedure1<IHiddenRegionFormatter> _function_4 = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.noSpace();
       }
     };
-    format.prepend(_regionForKeyword_2, _function_4);
+    format.prepend(_keyword_2, _function_4);
     EList<XExpression> _initExpressions = expr.getInitExpressions();
     final Procedure1<XExpression> _function_5 = new Procedure1<XExpression>() {
       @Override
@@ -1084,8 +1128,9 @@ public class XbaseFormatter extends XtypeFormatter {
   }
   
   protected void _format(final XWhileExpression expr, @Extension final IFormattableDocument format) {
-    ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(expr, "while");
-    format.append(_regionForKeyword, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML);
+    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(expr);
+    ISemanticRegion _keyword = _regionFor.keyword("while");
+    format.append(_keyword, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML);
     XExpression _predicate = expr.getPredicate();
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
       @Override
@@ -1107,8 +1152,9 @@ public class XbaseFormatter extends XtypeFormatter {
   }
   
   protected void _format(final XDoWhileExpression expr, @Extension final IFormattableDocument format) {
-    ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(expr, "while");
-    format.append(_regionForKeyword, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML);
+    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(expr);
+    ISemanticRegion _keyword = _regionFor.keyword("while");
+    format.append(_keyword, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML);
     XExpression _predicate = expr.getPredicate();
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
       @Override
@@ -1130,8 +1176,10 @@ public class XbaseFormatter extends XtypeFormatter {
   }
   
   protected void _format(final XBlockExpression expr, @Extension final IFormattableDocument format) {
-    final ISemanticRegion open = this.regionAccess.regionForKeyword(expr, "{");
-    final ISemanticRegion close = this.regionAccess.regionForKeyword(expr, "}");
+    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(expr);
+    final ISemanticRegion open = _regionFor.keyword("{");
+    ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(expr);
+    final ISemanticRegion close = _regionFor_1.keyword("}");
     EObject _eContainer = expr.eContainer();
     boolean _equals = Objects.equal(_eContainer, null);
     if (_equals) {
@@ -1182,22 +1230,24 @@ public class XbaseFormatter extends XtypeFormatter {
   }
   
   protected void _format(final XTypeLiteral expr, @Extension final IFormattableDocument format) {
-    ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(expr, "typeof");
+    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(expr);
+    ISemanticRegion _keyword = _regionFor.keyword("typeof");
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.noSpace();
       }
     };
-    format.append(_regionForKeyword, _function);
-    ISemanticRegion _regionForFeature = this.regionAccess.regionForFeature(expr, XbasePackage.Literals.XTYPE_LITERAL__TYPE);
+    format.append(_keyword, _function);
+    ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(expr);
+    ISemanticRegion _feature = _regionFor_1.feature(XbasePackage.Literals.XTYPE_LITERAL__TYPE);
     final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.noSpace();
       }
     };
-    ISemanticRegion _prepend = format.prepend(_regionForFeature, _function_1);
+    ISemanticRegion _prepend = format.prepend(_feature, _function_1);
     final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
@@ -1205,9 +1255,10 @@ public class XbaseFormatter extends XtypeFormatter {
       }
     };
     format.append(_prepend, _function_2);
+    ISemanticRegionsFinder _regionFor_2 = this.textRegionExtensions.regionFor(expr);
     ParserRule _arrayBracketsRule = this.grammar.getArrayBracketsRule();
-    List<ISemanticRegion> _regionsForRuleCallsTo = this.regionAccess.regionsForRuleCallsTo(expr, _arrayBracketsRule);
-    for (final ISemanticRegion region : _regionsForRuleCallsTo) {
+    List<ISemanticRegion> _ruleCallsTo = _regionFor_2.ruleCallsTo(_arrayBracketsRule);
+    for (final ISemanticRegion region : _ruleCallsTo) {
       {
         final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
           @Override
@@ -1254,8 +1305,9 @@ public class XbaseFormatter extends XtypeFormatter {
     EList<XCatchClause> _catchClauses = expr.getCatchClauses();
     for (final XCatchClause cc : _catchClauses) {
       {
-        ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(cc, "catch");
-        format.append(_regionForKeyword, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML);
+        ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(cc);
+        ISemanticRegion _keyword = _regionFor.keyword("catch");
+        format.append(_keyword, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML);
         JvmFormalParameter _declaredParam = cc.getDeclaredParam();
         final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
           @Override
@@ -1338,7 +1390,7 @@ public class XbaseFormatter extends XtypeFormatter {
     if (!(!containsBlockExpr)) {
       _and = false;
     } else {
-      boolean _isMultiline = this.regionAccess.isMultiline(expr);
+      boolean _isMultiline = this.textRegionExtensions.isMultiline(expr);
       boolean _not = (!_isMultiline);
       _and = _not;
     }
@@ -1369,7 +1421,7 @@ public class XbaseFormatter extends XtypeFormatter {
       final Function1<XCasePart, Boolean> _function_1 = new Function1<XCasePart, Boolean>() {
         @Override
         public Boolean apply(final XCasePart it) {
-          return Boolean.valueOf(XbaseFormatter.this.regionAccess.isMultiline(it));
+          return Boolean.valueOf(XbaseFormatter.this.textRegionExtensions.isMultiline(it));
         }
       };
       boolean _exists = IterableExtensions.<XCasePart>exists(_cases_2, _function_1);
@@ -1385,16 +1437,19 @@ public class XbaseFormatter extends XtypeFormatter {
       _and_1 = _not_3;
     }
     final boolean caseSL = _and_1;
-    final ISemanticRegion open = this.regionAccess.regionForKeyword(expr, "{");
-    final ISemanticRegion close = this.regionAccess.regionForKeyword(expr, "}");
-    ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(expr, "switch");
+    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(expr);
+    final ISemanticRegion open = _regionFor.keyword("{");
+    ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(expr);
+    final ISemanticRegion close = _regionFor_1.keyword("}");
+    ISemanticRegionsFinder _regionFor_2 = this.textRegionExtensions.regionFor(expr);
+    ISemanticRegion _keyword = _regionFor_2.keyword("switch");
     final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
     };
-    format.append(_regionForKeyword, _function_2);
+    format.append(_keyword, _function_2);
     if (switchSL) {
       final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
         @Override
@@ -1449,14 +1504,15 @@ public class XbaseFormatter extends XtypeFormatter {
       XExpression _default_2 = expr.getDefault();
       boolean _notEquals_1 = (!Objects.equal(_default_2, null));
       if (_notEquals_1) {
-        ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(expr, "default");
+        ISemanticRegionsFinder _regionFor_3 = this.textRegionExtensions.regionFor(expr);
+        ISemanticRegion _keyword_1 = _regionFor_3.keyword("default");
         final Procedure1<IHiddenRegionFormatter> _function_5 = new Procedure1<IHiddenRegionFormatter>() {
           @Override
           public void apply(final IHiddenRegionFormatter it) {
             it.noSpace();
           }
         };
-        format.append(_regionForKeyword_1, _function_5);
+        format.append(_keyword_1, _function_5);
         XExpression _default_3 = expr.getDefault();
         final Procedure1<IHiddenRegionFormatter> _function_6 = new Procedure1<IHiddenRegionFormatter>() {
           @Override
@@ -1521,14 +1577,15 @@ public class XbaseFormatter extends XtypeFormatter {
         XExpression _default_4 = expr.getDefault();
         boolean _notEquals_2 = (!Objects.equal(_default_4, null));
         if (_notEquals_2) {
-          ISemanticRegion _regionForKeyword_2 = this.regionAccess.regionForKeyword(expr, "default");
+          ISemanticRegionsFinder _regionFor_4 = this.textRegionExtensions.regionFor(expr);
+          ISemanticRegion _keyword_2 = _regionFor_4.keyword("default");
           final Procedure1<IHiddenRegionFormatter> _function_9 = new Procedure1<IHiddenRegionFormatter>() {
             @Override
             public void apply(final IHiddenRegionFormatter it) {
               it.newLine();
             }
           };
-          ISemanticRegion _prepend = format.prepend(_regionForKeyword_2, _function_9);
+          ISemanticRegion _prepend = format.prepend(_keyword_2, _function_9);
           final Procedure1<IHiddenRegionFormatter> _function_10 = new Procedure1<IHiddenRegionFormatter>() {
             @Override
             public void apply(final IHiddenRegionFormatter it) {
@@ -1589,14 +1646,15 @@ public class XbaseFormatter extends XtypeFormatter {
             this.format(_case, format);
             XExpression _then = c_2.getThen();
             this.formatBodyParagraph(_then, format);
-            ISemanticRegion _regionForFeature = this.regionAccess.regionForFeature(c_2, XbasePackage.Literals.XCASE_PART__FALL_THROUGH);
+            ISemanticRegionsFinder _regionFor_5 = this.textRegionExtensions.regionFor(c_2);
+            ISemanticRegion _feature = _regionFor_5.feature(XbasePackage.Literals.XCASE_PART__FALL_THROUGH);
             final Procedure1<IHiddenRegionFormatter> _function_15 = new Procedure1<IHiddenRegionFormatter>() {
               @Override
               public void apply(final IHiddenRegionFormatter it) {
                 it.noSpace();
               }
             };
-            ISemanticRegion _prepend_3 = format.prepend(_regionForFeature, _function_15);
+            ISemanticRegion _prepend_3 = format.prepend(_feature, _function_15);
             final Procedure1<IHiddenRegionFormatter> _function_16 = new Procedure1<IHiddenRegionFormatter>() {
               @Override
               public void apply(final IHiddenRegionFormatter it) {
@@ -1609,14 +1667,15 @@ public class XbaseFormatter extends XtypeFormatter {
         XExpression _default_7 = expr.getDefault();
         boolean _notEquals_4 = (!Objects.equal(_default_7, null));
         if (_notEquals_4) {
-          ISemanticRegion _regionForKeyword_3 = this.regionAccess.regionForKeyword(expr, "default");
+          ISemanticRegionsFinder _regionFor_5 = this.textRegionExtensions.regionFor(expr);
+          ISemanticRegion _keyword_3 = _regionFor_5.keyword("default");
           final Procedure1<IHiddenRegionFormatter> _function_15 = new Procedure1<IHiddenRegionFormatter>() {
             @Override
             public void apply(final IHiddenRegionFormatter it) {
               it.noSpace();
             }
           };
-          format.append(_regionForKeyword_3, _function_15);
+          format.append(_keyword_3, _function_15);
           XExpression _default_8 = expr.getDefault();
           this.formatBodyParagraph(_default_8, format);
         }
@@ -1698,7 +1757,8 @@ public class XbaseFormatter extends XtypeFormatter {
   protected ISemanticRegion formatClosureParams(final XClosure expr, final ISemanticRegion open, @Extension final IFormattableDocument format, final Procedure1<? super IHiddenRegionFormatter> init) {
     boolean _isExplicitSyntax = expr.isExplicitSyntax();
     if (_isExplicitSyntax) {
-      final ISemanticRegion last = this.regionAccess.regionForFeature(expr, XbasePackage.Literals.XCLOSURE__EXPLICIT_SYNTAX);
+      ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(expr);
+      final ISemanticRegion last = _regionFor.feature(XbasePackage.Literals.XCLOSURE__EXPLICIT_SYNTAX);
       EList<JvmFormalParameter> _declaredFormalParameters = expr.getDeclaredFormalParameters();
       boolean _isEmpty = _declaredFormalParameters.isEmpty();
       if (_isEmpty) {
@@ -1714,14 +1774,15 @@ public class XbaseFormatter extends XtypeFormatter {
         for (final JvmFormalParameter param : _declaredFormalParameters_1) {
           {
             this.format(param, format);
-            ISemanticRegion _immediatelyFollowingKeyword = this.regionAccess.immediatelyFollowingKeyword(param, ",");
+            ISemanticRegionFinder _immediatelyFollowing = this.textRegionExtensions.immediatelyFollowing(param);
+            ISemanticRegion _keyword = _immediatelyFollowing.keyword(",");
             final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
               @Override
               public void apply(final IHiddenRegionFormatter it) {
                 it.noSpace();
               }
             };
-            ISemanticRegion _prepend = format.prepend(_immediatelyFollowingKeyword, _function_1);
+            ISemanticRegion _prepend = format.prepend(_keyword, _function_1);
             final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
               @Override
               public void apply(final IHiddenRegionFormatter it) {
@@ -1746,21 +1807,25 @@ public class XbaseFormatter extends XtypeFormatter {
   
   protected void _format(final XClosure expr, @Extension final IFormattableDocument format) {
     ISemanticRegion _elvis = null;
-    ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(expr, "[");
-    if (_regionForKeyword != null) {
-      _elvis = _regionForKeyword;
+    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(expr);
+    ISemanticRegion _keyword = _regionFor.keyword("[");
+    if (_keyword != null) {
+      _elvis = _keyword;
     } else {
-      ISemanticRegion _immediatelyPrecedingKeyword = this.regionAccess.immediatelyPrecedingKeyword(expr, "(");
-      _elvis = _immediatelyPrecedingKeyword;
+      ISemanticRegionFinder _immediatelyPreceding = this.textRegionExtensions.immediatelyPreceding(expr);
+      ISemanticRegion _keyword_1 = _immediatelyPreceding.keyword("(");
+      _elvis = _keyword_1;
     }
     final ISemanticRegion open = _elvis;
     ISemanticRegion _elvis_1 = null;
-    ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(expr, "]");
-    if (_regionForKeyword_1 != null) {
-      _elvis_1 = _regionForKeyword_1;
+    ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(expr);
+    ISemanticRegion _keyword_2 = _regionFor_1.keyword("]");
+    if (_keyword_2 != null) {
+      _elvis_1 = _keyword_2;
     } else {
-      ISemanticRegion _immediatelyFollowingKeyword = this.regionAccess.immediatelyFollowingKeyword(expr, ")");
-      _elvis_1 = _immediatelyFollowingKeyword;
+      ISemanticRegionFinder _immediatelyFollowing = this.textRegionExtensions.immediatelyFollowing(expr);
+      ISemanticRegion _keyword_3 = _immediatelyFollowing.keyword(")");
+      _elvis_1 = _keyword_3;
     }
     final ISemanticRegion close = _elvis_1;
     List<XExpression> _switchResult = null;
@@ -1849,7 +1914,8 @@ public class XbaseFormatter extends XtypeFormatter {
               for (final XExpression c : children) {
                 {
                   XbaseFormatter.this.format(c, it);
-                  final ISemanticRegion semicolon = XbaseFormatter.this.regionAccess.immediatelyFollowingKeyword(c, ";");
+                  ISemanticRegionFinder _immediatelyFollowing = XbaseFormatter.this.textRegionExtensions.immediatelyFollowing(c);
+                  final ISemanticRegion semicolon = _immediatelyFollowing.keyword(";");
                   boolean _notEquals = (!Objects.equal(semicolon, null));
                   if (_notEquals) {
                     final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
@@ -1922,8 +1988,8 @@ public class XbaseFormatter extends XtypeFormatter {
       if (forceMultiline) {
         _or = true;
       } else {
-        IHiddenRegion _leadingHiddenRegion = this.regionAccess.leadingHiddenRegion(expr);
-        boolean _isMultiline = _leadingHiddenRegion.isMultiline();
+        IHiddenRegion _previousHiddenRegion = this.textRegionExtensions.previousHiddenRegion(expr);
+        boolean _isMultiline = _previousHiddenRegion.isMultiline();
         _or = _isMultiline;
       }
       if (_or) {
@@ -1967,8 +2033,8 @@ public class XbaseFormatter extends XtypeFormatter {
       if (forceMultiline) {
         _or = true;
       } else {
-        IHiddenRegion _leadingHiddenRegion = this.regionAccess.leadingHiddenRegion(expr);
-        boolean _isMultiline = _leadingHiddenRegion.isMultiline();
+        IHiddenRegion _previousHiddenRegion = this.textRegionExtensions.previousHiddenRegion(expr);
+        boolean _isMultiline = _previousHiddenRegion.isMultiline();
         _or = _isMultiline;
       }
       if (_or) {
@@ -2047,14 +2113,15 @@ public class XbaseFormatter extends XtypeFormatter {
   }
   
   protected void _format(final XInstanceOfExpression expr, @Extension final IFormattableDocument doc) {
-    ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(expr, "instanceof");
+    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(expr);
+    ISemanticRegion _keyword = _regionFor.keyword("instanceof");
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
     };
-    doc.surround(_regionForKeyword, _function);
+    doc.surround(_keyword, _function);
     XExpression _expression = expr.getExpression();
     this.format(_expression, doc);
     JvmTypeReference _type = expr.getType();
@@ -2083,7 +2150,8 @@ public class XbaseFormatter extends XtypeFormatter {
       for (final XExpression child : expressions) {
         {
           this.format(child, format);
-          final ISemanticRegion sem = this.regionAccess.immediatelyFollowingKeyword(child, ";");
+          ISemanticRegionFinder _immediatelyFollowing = this.textRegionExtensions.immediatelyFollowing(child);
+          final ISemanticRegion sem = _immediatelyFollowing.keyword(";");
           boolean _notEquals = (!Objects.equal(sem, null));
           if (_notEquals) {
             final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
@@ -2123,7 +2191,8 @@ public class XbaseFormatter extends XtypeFormatter {
       for (final XExpression child : expressions) {
         {
           this.format(child, format);
-          final ISemanticRegion sem = this.regionAccess.immediatelyFollowingKeyword(child, ";");
+          ISemanticRegionFinder _immediatelyFollowing = this.textRegionExtensions.immediatelyFollowing(child);
+          final ISemanticRegion sem = _immediatelyFollowing.keyword(";");
           boolean _notEquals = (!Objects.equal(sem, null));
           if (_notEquals) {
             final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
@@ -2161,12 +2230,12 @@ public class XbaseFormatter extends XtypeFormatter {
       _and = false;
     } else {
       boolean _or = false;
-      boolean _isMultiline = this.regionAccess.isMultiline(obj);
+      boolean _isMultiline = this.textRegionExtensions.isMultiline(obj);
       if (_isMultiline) {
         _or = true;
       } else {
-        IHiddenRegion _leadingHiddenRegion = this.regionAccess.leadingHiddenRegion(obj);
-        boolean _isMultiline_1 = _leadingHiddenRegion.isMultiline();
+        IHiddenRegion _previousHiddenRegion = this.textRegionExtensions.previousHiddenRegion(obj);
+        boolean _isMultiline_1 = _previousHiddenRegion.isMultiline();
         _or = _isMultiline_1;
       }
       _and = _or;

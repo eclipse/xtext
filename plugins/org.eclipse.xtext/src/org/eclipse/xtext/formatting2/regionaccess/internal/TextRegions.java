@@ -13,6 +13,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.xtext.formatting2.regionaccess.ILineRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 import org.eclipse.xtext.util.ITextRegion;
 
@@ -85,6 +86,21 @@ public class TextRegions {
 				maxEndOffset = endOffset;
 		}
 		return new TextSegment(first.getTextRegionAccess(), minOffset, maxEndOffset - minOffset);
+	}
+
+	public static List<ILineRegion> expandToLines(ITextSegment segment, int leadingLinesToAdd, int trailingLinesToAdd) {
+		List<ILineRegion> lines = Lists.newArrayList(segment.getLineRegions());
+		for (int i = 1; i < leadingLinesToAdd; i++) {
+			ILineRegion line = lines.get(0).getPreviousLine();
+			if (line != null)
+				lines.add(0, line);
+		}
+		for (int i = 1; i < trailingLinesToAdd; i++) {
+			ILineRegion line = lines.get(lines.size() - 1).getNextLine();
+			if (line != null)
+				lines.add(line);
+		}
+		return lines;
 	}
 
 }

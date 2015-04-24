@@ -29,6 +29,7 @@ import org.eclipse.xtext.example.domainmodel.domainmodel.Property;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
+import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionsFinder;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBasicForLoopExpression;
@@ -89,16 +90,19 @@ public class DomainmodelFormatter extends XbaseFormatter {
   }
   
   protected void _format(final PackageDeclaration pkg, @Extension final IFormattableDocument document) {
-    final ISemanticRegion open = this.regionAccess.regionForKeyword(pkg, "{");
-    final ISemanticRegion close = this.regionAccess.regionForKeyword(pkg, "}");
-    ISemanticRegion _regionForFeature = this.regionAccess.regionForFeature(pkg, DomainmodelPackage.Literals.ABSTRACT_ELEMENT__NAME);
+    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(pkg);
+    final ISemanticRegion open = _regionFor.keyword("{");
+    ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(pkg);
+    final ISemanticRegion close = _regionFor_1.keyword("}");
+    ISemanticRegionsFinder _regionFor_2 = this.textRegionExtensions.regionFor(pkg);
+    ISemanticRegion _feature = _regionFor_2.feature(DomainmodelPackage.Literals.ABSTRACT_ELEMENT__NAME);
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
     };
-    document.surround(_regionForFeature, _function);
+    document.surround(_feature, _function);
     final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
@@ -129,16 +133,19 @@ public class DomainmodelFormatter extends XbaseFormatter {
   }
   
   protected void _format(final Entity entity, @Extension final IFormattableDocument document) {
-    final ISemanticRegion open = this.regionAccess.regionForKeyword(entity, "{");
-    final ISemanticRegion close = this.regionAccess.regionForKeyword(entity, "}");
-    ISemanticRegion _regionForFeature = this.regionAccess.regionForFeature(entity, DomainmodelPackage.Literals.ABSTRACT_ELEMENT__NAME);
+    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(entity);
+    final ISemanticRegion open = _regionFor.keyword("{");
+    ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(entity);
+    final ISemanticRegion close = _regionFor_1.keyword("}");
+    ISemanticRegionsFinder _regionFor_2 = this.textRegionExtensions.regionFor(entity);
+    ISemanticRegion _feature = _regionFor_2.feature(DomainmodelPackage.Literals.ABSTRACT_ELEMENT__NAME);
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
     };
-    document.surround(_regionForFeature, _function);
+    document.surround(_feature, _function);
     JvmParameterizedTypeReference _superType = entity.getSuperType();
     final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
       @Override
@@ -179,41 +186,45 @@ public class DomainmodelFormatter extends XbaseFormatter {
   }
   
   protected void _format(final Property property, @Extension final IFormattableDocument document) {
-    ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(property, ":");
+    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(property);
+    ISemanticRegion _keyword = _regionFor.keyword(":");
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.noSpace();
       }
     };
-    document.surround(_regionForKeyword, _function);
+    document.surround(_keyword, _function);
     JvmTypeReference _type = property.getType();
     this.format(_type, document);
   }
   
   protected void _format(final Operation operation, @Extension final IFormattableDocument document) {
-    ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(operation, "op");
+    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(operation);
+    ISemanticRegion _keyword = _regionFor.keyword("op");
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
     };
-    document.append(_regionForKeyword, _function);
-    ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(operation, "(");
+    document.append(_keyword, _function);
+    ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(operation);
+    ISemanticRegion _keyword_1 = _regionFor_1.keyword("(");
     final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.noSpace();
       }
     };
-    document.surround(_regionForKeyword_1, _function_1);
+    document.surround(_keyword_1, _function_1);
     EList<JvmFormalParameter> _params = operation.getParams();
     boolean _isEmpty = _params.isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
-      List<ISemanticRegion> _regionsForKeywords = this.regionAccess.regionsForKeywords(operation, ",");
-      for (final ISemanticRegion comma : _regionsForKeywords) {
+      ISemanticRegionsFinder _regionFor_2 = this.textRegionExtensions.regionFor(operation);
+      List<ISemanticRegion> _keywords = _regionFor_2.keywords(",");
+      for (final ISemanticRegion comma : _keywords) {
         final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
           @Override
           public void apply(final IHiddenRegionFormatter it) {
@@ -233,26 +244,28 @@ public class DomainmodelFormatter extends XbaseFormatter {
       for (final JvmFormalParameter params : _params_1) {
         this.format(params, document);
       }
-      ISemanticRegion _regionForKeyword_2 = this.regionAccess.regionForKeyword(operation, ")");
+      ISemanticRegionsFinder _regionFor_3 = this.textRegionExtensions.regionFor(operation);
+      ISemanticRegion _keyword_2 = _regionFor_3.keyword(")");
       final Procedure1<IHiddenRegionFormatter> _function_4 = new Procedure1<IHiddenRegionFormatter>() {
         @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.noSpace();
         }
       };
-      document.prepend(_regionForKeyword_2, _function_4);
+      document.prepend(_keyword_2, _function_4);
     }
     JvmTypeReference _type = operation.getType();
     boolean _notEquals = (!Objects.equal(_type, null));
     if (_notEquals) {
-      ISemanticRegion _regionForKeyword_3 = this.regionAccess.regionForKeyword(operation, ")");
+      ISemanticRegionsFinder _regionFor_4 = this.textRegionExtensions.regionFor(operation);
+      ISemanticRegion _keyword_3 = _regionFor_4.keyword(")");
       final Procedure1<IHiddenRegionFormatter> _function_5 = new Procedure1<IHiddenRegionFormatter>() {
         @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.noSpace();
         }
       };
-      document.append(_regionForKeyword_3, _function_5);
+      document.append(_keyword_3, _function_5);
       JvmTypeReference _type_1 = operation.getType();
       final Procedure1<IHiddenRegionFormatter> _function_6 = new Procedure1<IHiddenRegionFormatter>() {
         @Override
@@ -271,14 +284,15 @@ public class DomainmodelFormatter extends XbaseFormatter {
       JvmTypeReference _type_2 = operation.getType();
       this.format(_type_2, document);
     } else {
-      ISemanticRegion _regionForKeyword_4 = this.regionAccess.regionForKeyword(operation, ")");
+      ISemanticRegionsFinder _regionFor_5 = this.textRegionExtensions.regionFor(operation);
+      ISemanticRegion _keyword_4 = _regionFor_5.keyword(")");
       final Procedure1<IHiddenRegionFormatter> _function_8 = new Procedure1<IHiddenRegionFormatter>() {
         @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.oneSpace();
         }
       };
-      document.append(_regionForKeyword_4, _function_8);
+      document.append(_keyword_4, _function_8);
     }
     XExpression _body = operation.getBody();
     this.format(_body, document);

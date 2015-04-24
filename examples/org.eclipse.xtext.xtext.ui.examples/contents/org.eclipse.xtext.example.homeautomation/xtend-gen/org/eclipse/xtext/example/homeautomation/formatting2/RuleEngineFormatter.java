@@ -27,6 +27,8 @@ import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
+import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionFinder;
+import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionsFinder;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBasicForLoopExpression;
@@ -100,33 +102,36 @@ public class RuleEngineFormatter extends XbaseFormatter {
   }
   
   protected void _format(final Device device, @Extension final IFormattableDocument document) {
-    ISemanticRegion _regionForFeature = this.regionAccess.regionForFeature(device, RuleEnginePackage.Literals.DEVICE__NAME);
+    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(device);
+    ISemanticRegion _feature = _regionFor.feature(RuleEnginePackage.Literals.DEVICE__NAME);
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
     };
-    document.surround(_regionForFeature, _function);
-    ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(device, "be");
+    document.surround(_feature, _function);
+    ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(device);
+    ISemanticRegion _keyword = _regionFor_1.keyword("be");
     final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
     };
-    document.surround(_regionForKeyword, _function_1);
+    document.surround(_keyword, _function_1);
     EList<State> _states = device.getStates();
     for (final State state : _states) {
       {
-        ISemanticRegion _immediatelyPrecedingKeyword = this.regionAccess.immediatelyPrecedingKeyword(state, ",");
+        ISemanticRegionFinder _immediatelyPreceding = this.textRegionExtensions.immediatelyPreceding(state);
+        ISemanticRegion _keyword_1 = _immediatelyPreceding.keyword(",");
         final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
           @Override
           public void apply(final IHiddenRegionFormatter it) {
             it.noSpace();
           }
         };
-        ISemanticRegion _prepend = document.prepend(_immediatelyPrecedingKeyword, _function_2);
+        ISemanticRegion _prepend = document.prepend(_keyword_1, _function_2);
         final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
           @Override
           public void apply(final IHiddenRegionFormatter it) {
@@ -140,22 +145,24 @@ public class RuleEngineFormatter extends XbaseFormatter {
   }
   
   protected void _format(final Rule rule, @Extension final IFormattableDocument document) {
-    ISemanticRegion _regionForFeature = this.regionAccess.regionForFeature(rule, RuleEnginePackage.Literals.RULE__DESCRIPTION);
+    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(rule);
+    ISemanticRegion _feature = _regionFor.feature(RuleEnginePackage.Literals.RULE__DESCRIPTION);
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
     };
-    document.surround(_regionForFeature, _function);
-    ISemanticRegion _regionForFeature_1 = this.regionAccess.regionForFeature(rule, RuleEnginePackage.Literals.RULE__DEVICE_STATE);
+    document.surround(_feature, _function);
+    ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(rule);
+    ISemanticRegion _feature_1 = _regionFor_1.feature(RuleEnginePackage.Literals.RULE__DEVICE_STATE);
     final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
     };
-    document.surround(_regionForFeature_1, _function_1);
+    document.surround(_feature_1, _function_1);
     XExpression _thenPart = rule.getThenPart();
     final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
       @Override
@@ -180,7 +187,8 @@ public class RuleEngineFormatter extends XbaseFormatter {
     EList<XExpression> _expressions = expr.getExpressions();
     for (final XExpression child : _expressions) {
       {
-        final ISemanticRegion sem = this.regionAccess.immediatelyFollowingKeyword(child, ";");
+        ISemanticRegionFinder _immediatelyFollowing = this.textRegionExtensions.immediatelyFollowing(child);
+        final ISemanticRegion sem = _immediatelyFollowing.keyword(";");
         boolean _notEquals = (!Objects.equal(sem, null));
         if (_notEquals) {
           final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
@@ -224,23 +232,24 @@ public class RuleEngineFormatter extends XbaseFormatter {
   @Override
   protected void _format(final XSwitchExpression expr, @Extension final IFormattableDocument document) {
     XExpression _switch = expr.getSwitch();
-    IHiddenRegion _leadingHiddenRegion = this.regionAccess.leadingHiddenRegion(_switch);
-    IHiddenRegion _trailingHiddenRegion = this.regionAccess.trailingHiddenRegion(expr);
+    IHiddenRegion _previousHiddenRegion = this.textRegionExtensions.previousHiddenRegion(_switch);
+    IHiddenRegion _nextHiddenRegion = this.textRegionExtensions.nextHiddenRegion(expr);
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.indent();
       }
     };
-    document.set(_leadingHiddenRegion, _trailingHiddenRegion, _function);
-    ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(expr, "switch");
+    document.set(_previousHiddenRegion, _nextHiddenRegion, _function);
+    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(expr);
+    ISemanticRegion _keyword = _regionFor.keyword("switch");
     final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
     };
-    document.append(_regionForKeyword, _function_1);
+    document.append(_keyword, _function_1);
     XExpression _switch_1 = expr.getSwitch();
     final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
       @Override
@@ -314,14 +323,15 @@ public class RuleEngineFormatter extends XbaseFormatter {
             }
           }
         }
-        ISemanticRegion _regionForFeature = this.regionAccess.regionForFeature(c, XbasePackage.Literals.XCASE_PART__FALL_THROUGH);
+        ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(c);
+        ISemanticRegion _feature = _regionFor_1.feature(XbasePackage.Literals.XCASE_PART__FALL_THROUGH);
         final Procedure1<IHiddenRegionFormatter> _function_8 = new Procedure1<IHiddenRegionFormatter>() {
           @Override
           public void apply(final IHiddenRegionFormatter it) {
             it.noSpace();
           }
         };
-        ISemanticRegion _prepend_1 = document.prepend(_regionForFeature, _function_8);
+        ISemanticRegion _prepend_1 = document.prepend(_feature, _function_8);
         final Procedure1<IHiddenRegionFormatter> _function_9 = new Procedure1<IHiddenRegionFormatter>() {
           @Override
           public void apply(final IHiddenRegionFormatter it) {
@@ -354,14 +364,15 @@ public class RuleEngineFormatter extends XbaseFormatter {
     XExpression _default = expr.getDefault();
     boolean _notEquals = (!Objects.equal(_default, null));
     if (_notEquals) {
-      ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(expr, "default");
+      ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(expr);
+      ISemanticRegion _keyword_1 = _regionFor_1.keyword("default");
       final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
         @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.noSpace();
         }
       };
-      document.append(_regionForKeyword_1, _function_3);
+      document.append(_keyword_1, _function_3);
       XExpression _default_1 = expr.getDefault();
       this.formatBody(_default_1, true, document);
     }
@@ -386,8 +397,8 @@ public class RuleEngineFormatter extends XbaseFormatter {
       if (forceMultiline) {
         _or = true;
       } else {
-        IHiddenRegion _leadingHiddenRegion = this.regionAccess.leadingHiddenRegion(expr);
-        boolean _isMultiline = _leadingHiddenRegion.isMultiline();
+        IHiddenRegion _previousHiddenRegion = this.textRegionExtensions.previousHiddenRegion(expr);
+        boolean _isMultiline = _previousHiddenRegion.isMultiline();
         _or = _isMultiline;
       }
       if (_or) {
@@ -437,8 +448,8 @@ public class RuleEngineFormatter extends XbaseFormatter {
       if (forceMultiline) {
         _or = true;
       } else {
-        IHiddenRegion _leadingHiddenRegion = this.regionAccess.leadingHiddenRegion(expr);
-        boolean _isMultiline = _leadingHiddenRegion.isMultiline();
+        IHiddenRegion _previousHiddenRegion = this.textRegionExtensions.previousHiddenRegion(expr);
+        boolean _isMultiline = _previousHiddenRegion.isMultiline();
         _or = _isMultiline;
       }
       if (_or) {
