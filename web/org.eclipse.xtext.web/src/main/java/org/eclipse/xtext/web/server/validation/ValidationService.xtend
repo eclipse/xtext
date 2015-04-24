@@ -10,19 +10,19 @@ package org.eclipse.xtext.web.server.validation
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.xtext.diagnostics.Severity
-import org.eclipse.xtext.validation.CheckMode
-import org.eclipse.xtext.validation.IResourceValidator
 import org.eclipse.xtext.web.server.InvalidRequestException
+import org.eclipse.xtext.web.server.model.UpdateDocumentService
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess
 
 @Singleton
 class ValidationService {
 	
-	@Inject IResourceValidator resourceValidator
+	@Inject extension UpdateDocumentService updateDocumentService
 	
 	def validate(XtextWebDocumentAccess document) throws InvalidRequestException {
 		val issues = document.readOnly[ it, cancelIndicator |
-			resourceValidator.validate(resource, CheckMode.ALL, cancelIndicator)
+			processUpdatedDocument(cancelIndicator)
+			return issues
 		]
 		val result = new ValidationResult
 		issues.filter[severity != Severity.IGNORE].forEach[ issue |

@@ -7,7 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server.model
 
+import java.util.Collection
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.validation.Issue
 
 interface IXtextWebDocument {
 	
@@ -19,12 +21,20 @@ interface IXtextWebDocument {
 	
 	def String getStateId()
 	
+	def Collection<Issue> getIssues()
+	
 	def boolean isDirty()
 	
+	def boolean isProcessingCompleted()
+	
 	def void setText(String text)
+	
+	def void createNewStateId()
 	
 	def void updateText(String text, int offset, int replaceLength)
 	
 	def void setDirty(boolean dirty)
+	
+	def void setProcessingCompleted(boolean completed)
 	
 }
