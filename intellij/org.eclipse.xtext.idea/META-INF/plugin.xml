@@ -10,10 +10,23 @@
 	<extensions defaultExtensionNs="com.intellij">
 		<buildProcess.parametersProvider implementation="org.eclipse.xtext.idea.server.XtextBuildProcessParametersProvider" />
 		
+		<psi.treeChangePreprocessor implementation="org.eclipse.xtext.psi.ResourceDescriptionDeltaPreprocessor"/>
+		
 		<problemFileHighlightFilter implementation="org.eclipse.xtext.idea.highlighting.ProblemXtextFileHighlightFilter"/> 
    	</extensions>
 
 	<project-components>
+		<component>
+			<implementation-class>org.eclipse.xtext.idea.resource.ProjectAwareResourceDescriptions</implementation-class>
+		</component>
+		<component>
+      		<interface-class>org.eclipse.xtext.psi.ResourceDescriptionEventSource</interface-class>
+			<implementation-class>org.eclipse.xtext.psi.ResourceDescriptionEventSourceImpl</implementation-class>
+		</component>
+		<component>
+      		<interface-class>org.eclipse.xtext.psi.ResourceDescriptionDeltaQueue</interface-class>
+			<implementation-class>org.eclipse.xtext.psi.ResourceDescriptionDeltaQueueImpl</implementation-class>
+		</component>
 		<component>
 			<implementation-class>org.eclipse.xtext.idea.build.XtextCompilerComponent</implementation-class>
 		</component>

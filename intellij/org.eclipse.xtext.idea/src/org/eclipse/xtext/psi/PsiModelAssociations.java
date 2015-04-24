@@ -135,10 +135,11 @@ public class PsiModelAssociations implements IPsiModelAssociations, IPsiModelAss
 	    	if (eResource == null) {
 	    		return null;
 	    	}
-			BaseXtextFile xtextFile = getBaseXtextFile(eResource.getResourceSet(), uri);
-	    	if (xtextFile == null) {
+			PsiFile psiFile = getPsiFile(uri, eResource.getResourceSet());
+	    	if (!(psiFile instanceof BaseXtextFile)) {
 	    		return null;
 	    	}
+	    	BaseXtextFile xtextFile = (BaseXtextFile) psiFile;
 	    	EObject resolvedObject = xtextFile.getEObject(uri);
 			return PsiAdapter.getPsi(resolvedObject);
     	} catch (OperationCanceledError e) {
@@ -146,8 +147,12 @@ public class PsiModelAssociations implements IPsiModelAssociations, IPsiModelAss
     	}
     }
 
-	protected BaseXtextFile getBaseXtextFile(ResourceSet resourceSet, URI uri) {
+	public PsiFile getPsiFile(URI uri, ResourceSet resourceSet) {
     	Project project = ProjectAdapter.getProject(resourceSet);
+    	return getPsiFile(uri, project);
+	}
+
+	public PsiFile getPsiFile(URI uri, Project project) {
     	if (project == null) {
     		return null;
     	}
@@ -159,7 +164,7 @@ public class PsiModelAssociations implements IPsiModelAssociations, IPsiModelAss
     	if (psiFile == null || !(psiFile instanceof BaseXtextFile)) {
     		return null;
     	}
-    	return (BaseXtextFile) psiFile;
+    	return psiFile;
 	}
     
 	public PsiElement getPsiElement(IEObjectDescription objectDescription, Resource context) {

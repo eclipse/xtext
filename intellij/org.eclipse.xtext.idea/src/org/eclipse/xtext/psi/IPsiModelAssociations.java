@@ -7,11 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.psi;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 
 public interface IPsiModelAssociations {
 	EObject getEObject(PsiElement element);
@@ -19,4 +23,8 @@ public interface IPsiModelAssociations {
 	PsiElement getPsiElement(EObject object);
 
 	PsiElement getPsiElement(IEObjectDescription objectDescription, Resource context);
+	
+	PsiFile getPsiFile(URI uri, ResourceSet context);
+	
+	PsiFile getPsiFile(URI uri, Project project);
 }

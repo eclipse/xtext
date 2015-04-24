@@ -81,12 +81,16 @@ public class ProjectScopeBasedResourceDescriptions extends AbstractScopeBasedSel
   public void setContext(final Notifier ctx) {
     this.context = ctx;
     Project _project = ProjectAdapter.getProject(ctx);
-    this.project = _project;
-    boolean _equals = Objects.equal(this.project, null);
+    this.setProject(_project);
+  }
+  
+  public void setProject(final Project project) {
+    boolean _equals = Objects.equal(project, null);
     if (_equals) {
       throw new IllegalStateException("project is null");
     }
-    GlobalSearchScope _projectScope = GlobalSearchScope.projectScope(this.project);
+    this.project = project;
+    GlobalSearchScope _projectScope = GlobalSearchScope.projectScope(project);
     this.setScope(_projectScope);
   }
   

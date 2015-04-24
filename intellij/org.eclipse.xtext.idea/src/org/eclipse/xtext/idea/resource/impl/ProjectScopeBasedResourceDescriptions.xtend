@@ -56,10 +56,14 @@ class ProjectScopeBasedResourceDescriptions extends AbstractScopeBasedSelectable
 
 	override setContext(Notifier ctx) {
 		this.context = ctx
-		this.project = ProjectAdapter.getProject(ctx)
+		setProject(ProjectAdapter.getProject(ctx))
+	}
+
+	def void setProject(Project project) {
 		if (project == null) {
 			throw new IllegalStateException("project is null")
 		}
+		this.project = project
 		setScope(GlobalSearchScope.projectScope(project))
 	}
 
