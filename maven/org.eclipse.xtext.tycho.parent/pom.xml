@@ -91,6 +91,19 @@
 						<excludeResource>**/*.xtendbin</excludeResource>
 						<excludeResource>**/*._trace</excludeResource>
 					</excludeResources>
+					<dependencies>
+						<dependency>
+							<groupId>org.eclipse.tycho</groupId>
+							<artifactId>tycho-compiler-jdt</artifactId>
+							<version>${tycho-version}</version>
+							<exclusions>
+								<exclusion>
+									<groupId>org.eclipse.tycho</groupId>
+									<artifactId>org.eclipse.jdt.compiler.apt</artifactId>
+								</exclusion>
+							</exclusions>
+						</dependency>
+					</dependencies>
 				</configuration>
 			</plugin>
 			<plugin>
