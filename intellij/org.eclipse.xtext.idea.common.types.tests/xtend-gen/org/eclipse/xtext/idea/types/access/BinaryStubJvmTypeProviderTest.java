@@ -76,14 +76,6 @@ public class BinaryStubJvmTypeProviderTest extends PsiTestCase {
   public void test_ParameterizedTypes_inner_return_02() {
   }
   
-  @Ignore
-  public void testDeprecatedBit_01() {
-  }
-  
-  @Ignore
-  public void testDeprecatedBit_02() {
-  }
-  
   public void testAbstractMethod() throws Exception {
     delegate.testAbstractMethod();
   }
@@ -386,6 +378,14 @@ public class BinaryStubJvmTypeProviderTest extends PsiTestCase {
   
   public void testDefaultTypeAnnotationValue_02() throws Exception {
     delegate.testDefaultTypeAnnotationValue_02();
+  }
+  
+  public void testDeprecatedBit_01() {
+    delegate.testDeprecatedBit_01();
+  }
+  
+  public void testDeprecatedBit_02() {
+    delegate.testDeprecatedBit_02();
   }
   
   public void testDoubleAnnotationValue_01() throws Exception {
