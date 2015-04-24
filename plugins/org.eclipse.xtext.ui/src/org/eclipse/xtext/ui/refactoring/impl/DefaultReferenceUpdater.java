@@ -26,11 +26,11 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.impl.RefactoringCrossReferenceSerializer.RefTextEvaluator;
@@ -114,7 +114,7 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 
 	protected void createReferenceUpdate(EObject referringElement, URI referringResourceURI, EReference reference,
 			int indexInList, EObject newTargetElement, IRefactoringUpdateAcceptor updateAcceptor) {
-		if (!transientValueService.isTransient(referringElement, reference, indexInList)) {
+		if (!transientValueService.isValueInListTransient(referringElement, indexInList, reference)) {
 			ITextRegion referenceTextRegion = locationInFileProvider.getFullTextRegion(referringElement, reference,
 					indexInList);
 			CrossReference crossReference = getCrossReference(referringElement, referenceTextRegion.getOffset());
