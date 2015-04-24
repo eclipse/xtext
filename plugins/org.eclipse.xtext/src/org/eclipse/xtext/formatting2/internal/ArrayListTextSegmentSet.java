@@ -27,14 +27,15 @@ public class ArrayListTextSegmentSet<T> extends TextSegmentSet<T> {
 
 	private final List<T> contents = Lists.newArrayList();
 
-	public ArrayListTextSegmentSet(Function<? super T, ? extends ITextSegment> region, Function<? super T, String> title) {
-		super(region, title);
+	public ArrayListTextSegmentSet(Tracer tracer, Function<? super T, ? extends ITextSegment> region,
+			Function<? super T, String> title) {
+		super(tracer, region, title);
 	}
 
 	@Override
 	public void add(T segment, IMerger<T> merger) throws ConflictingRegionsException {
 		Preconditions.checkNotNull(segment);
-		getTraces().put(segment, new RegionTrace(getTitle(segment), getRegion(segment)));
+		getTracer().trace(segment);
 		if (contents.isEmpty()) {
 			contents.add(segment);
 		} else {
@@ -75,7 +76,7 @@ public class ArrayListTextSegmentSet<T> extends TextSegmentSet<T> {
 				break;
 		}
 		if (conflicting == null) {
-			getTraces().put(segment, new RegionTrace(getTitle(segment), getRegion(segment)));
+			getTracer().trace(segment);
 			contents.add(newIndex, segment);
 		} else {
 			conflicting.add(0, segment);
@@ -84,7 +85,7 @@ public class ArrayListTextSegmentSet<T> extends TextSegmentSet<T> {
 				if (merged != null) {
 					for (int i = high - 1; i > low; i--)
 						contents.remove(i);
-					getTraces().put(merged, new RegionTrace(getTitle(merged), getRegion(merged)));
+					getTracer().trace(merged, "merged");
 					contents.add(low + 1, merged);
 				} else {
 					int segmentLengh = getRegion(segment).getLength();
@@ -95,7 +96,7 @@ public class ArrayListTextSegmentSet<T> extends TextSegmentSet<T> {
 						for (int i = high - 1; i > low; i--)
 							contents.remove(i);
 					if (segmentLengh > totalLength) {
-						getTraces().put(segment, new RegionTrace(getTitle(segment), getRegion(segment)));
+						getTracer().trace(segment);
 						contents.add(low + 1, segment);
 					}
 					handleConflict(conflicting, null);
@@ -119,7 +120,7 @@ public class ArrayListTextSegmentSet<T> extends TextSegmentSet<T> {
 		try {
 			T merged = merger != null ? merger.merge(conflicting) : null;
 			if (merged != null) {
-				getTraces().put(merged, new RegionTrace(getTitle(merged), getRegion(merged)));
+				getTracer().trace(merged, "created by merge");
 				contents.set(index, merged);
 			} else {
 				contents.remove(index);

@@ -59,7 +59,7 @@ public class TextReplacerContext implements ITextReplacerContext {
 	}
 
 	protected TextSegmentSet<ITextReplacement> createTextReplacementsSet() {
-		return new ArrayListTextSegmentSet<ITextReplacement>(Functions.<ITextReplacement> identity(),
+		return new ArrayListTextSegmentSet<ITextReplacement>(Tracer.create(), Functions.<ITextReplacement> identity(),
 				new Function<ITextReplacement, String>() {
 					@Override
 					public String apply(ITextReplacement input) {

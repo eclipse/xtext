@@ -7,16 +7,10 @@
  */
 package org.eclipse.xtext.formatting2.internal;
 
-import com.google.common.base.Function;
-import com.google.common.base.Functions;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.formatting2.internal.ArrayListTextSegmentSet;
 import org.eclipse.xtext.formatting2.internal.TestableTextSegmentSet;
-import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 import org.eclipse.xtext.formatting2.regionaccess.internal.TextSegment;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -25,24 +19,10 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class RegionSetTest {
   private void test(final CharSequence expectation, final Procedure1<? super TestableTextSegmentSet> test) {
-    Function<ITextSegment, ITextSegment> _identity = Functions.<ITextSegment>identity();
-    Function<Object, String> _stringFunction = Functions.toStringFunction();
-    ArrayListTextSegmentSet<ITextSegment> _arrayListTextSegmentSet = new ArrayListTextSegmentSet<ITextSegment>(_identity, _stringFunction);
-    final TestableTextSegmentSet set = new TestableTextSegmentSet(_arrayListTextSegmentSet);
-    try {
-      test.apply(set);
-    } catch (final Throwable _t) {
-      if (_t instanceof Throwable) {
-        final Throwable t = (Throwable)_t;
-        t.printStackTrace();
-        Assert.fail();
-      } else {
-        throw Exceptions.sneakyThrow(_t);
-      }
-    }
-    String _string = expectation.toString();
-    String _string_1 = set.toString();
-    Assert.assertEquals(_string, _string_1);
+    throw new Error("Unresolved compilation problems:"
+      + "\nInvalid number of arguments. The constructor ArrayListTextSegmentSet(Tracer, Function<? super T, ? extends ITextSegment>, Function<? super T, String>) is not applicable for the arguments (Function<Object, Object>,Function<Object, String>)"
+      + "\nType mismatch: cannot convert from Function<Object, Object> to Tracer"
+      + "\nType mismatch: cannot convert from Function<Object, String> to Function<? super ITextSegment, ? extends ITextSegment>");
   }
   
   @Test

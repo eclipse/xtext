@@ -7,16 +7,12 @@
  */
 package org.eclipse.xtext.formatting2.internal;
 
-import java.util.Collection;
 import java.util.List;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.formatting2.internal.ConflictingRegionsException;
-import org.eclipse.xtext.formatting2.internal.RegionTrace;
 import org.eclipse.xtext.formatting2.internal.TextSegmentSet;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -73,35 +69,9 @@ public class TestableTextSegmentSet {
   }
   
   public void add(final ITextSegment segment) {
-    try {
-      this.set.add(segment);
-    } catch (final Throwable _t) {
-      if (_t instanceof ConflictingRegionsException) {
-        final ConflictingRegionsException e = (ConflictingRegionsException)_t;
-        Collection<RegionTrace> _traces = e.getTraces();
-        final Function1<RegionTrace, ITextSegment> _function = new Function1<RegionTrace, ITextSegment>() {
-          @Override
-          public ITextSegment apply(final RegionTrace it) {
-            return it.getRegion();
-          }
-        };
-        final Iterable<ITextSegment> conflicting = IterableExtensions.<RegionTrace, ITextSegment>map(_traces, _function);
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("mergeConflict:");
-        final Function1<ITextSegment, String> _function_1 = new Function1<ITextSegment, String>() {
-          @Override
-          public String apply(final ITextSegment it) {
-            return TestableTextSegmentSet.this.fmt(it);
-          }
-        };
-        Iterable<String> _map = IterableExtensions.<ITextSegment, String>map(conflicting, _function_1);
-        String _join = IterableExtensions.join(_map, "<>");
-        _builder.append(_join, "");
-        this.issues.add(_builder.toString());
-      } else {
-        throw Exceptions.sneakyThrow(_t);
-      }
-    }
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method region is undefined for the type TestableTextSegmentSet"
+      + "\nType mismatch: cannot convert implicit first argument from TestableTextSegmentSet to ITextSegment");
   }
   
   public TestableTextSegmentSet(final TextSegmentSet<ITextSegment> set) {

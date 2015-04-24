@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.internal;
 
-import java.util.IdentityHashMap;
 import java.util.List;
 
 import org.eclipse.xtext.formatting2.IMerger;
@@ -24,10 +23,12 @@ public abstract class TextSegmentSet<T> implements Iterable<T> {
 
 	private final Function<? super T, ? extends ITextSegment> regionGetter;
 	private final Function<? super T, String> titleGetter;
-	private final IdentityHashMap<T, RegionTrace> traces = new IdentityHashMap<T, RegionTrace>();
+	private final Tracer tracer;
 
-	public TextSegmentSet(Function<? super T, ? extends ITextSegment> region, Function<? super T, String> title) {
+	public TextSegmentSet(Tracer tracer, Function<? super T, ? extends ITextSegment> region,
+			Function<? super T, String> title) {
 		super();
+		this.tracer = tracer.fork(this);
 		this.regionGetter = region;
 		this.titleGetter = title;
 	}
@@ -37,11 +38,15 @@ public abstract class TextSegmentSet<T> implements Iterable<T> {
 	}
 
 	public abstract void add(T segment, IMerger<T> merger) throws ConflictingRegionsException;
-	
+
 	public abstract T get(T segment);
 
 	protected ITextSegment getRegion(T t) {
 		return regionGetter.apply(t);
+	}
+
+	public Tracer getTracer() {
+		return tracer;
 	}
 
 	public Function<? super T, ? extends ITextSegment> getRegionAccess() {
@@ -52,14 +57,10 @@ public abstract class TextSegmentSet<T> implements Iterable<T> {
 		return titleGetter.apply(t);
 	}
 
-	public IdentityHashMap<T, RegionTrace> getTraces() {
-		return traces;
-	}
-
 	protected void handleConflict(List<T> conflicts, Exception cause) throws ConflictingRegionsException {
-		List<RegionTrace> causes = Lists.newArrayList();
+		List<Trace> causes = Lists.newArrayList();
 		for (T t : conflicts) {
-			RegionTrace exception = traces.get(t);
+			Trace exception = tracer.get(t);
 			if (exception != null)
 				causes.add(exception);
 		}

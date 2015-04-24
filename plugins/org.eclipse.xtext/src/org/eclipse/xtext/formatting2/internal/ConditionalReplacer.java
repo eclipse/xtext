@@ -23,7 +23,8 @@ public class ConditionalReplacer extends AbstractTextReplacer implements ICompos
 	private final List<ISubFormatter> subFormatters;
 	private final List<ITextReplacer> replacers = Lists.newArrayList();
 
-	public ConditionalReplacer(FormattableDocument document, int offset, int length, List<ISubFormatter> subFormatters) {
+	public ConditionalReplacer(FormattableDocument document, int offset, int length,
+			List<ISubFormatter> subFormatters) {
 		super(document, new TextSegment(document.getTextRegionAccess(), offset, length));
 		Preconditions.checkArgument(subFormatters.size() > 0);
 		this.subFormatters = subFormatters;

@@ -9,7 +9,9 @@ package org.eclipse.xtext.formatting2.internal;
 
 import java.util.Collection;
 
+import org.eclipse.xtext.formatting2.ITextReplacer;
 import org.eclipse.xtext.formatting2.debug.TextRegionsWithTitleToString;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 import org.eclipse.xtext.util.Exceptions;
 
 /**
@@ -19,16 +21,16 @@ public class ConflictingRegionsException extends RuntimeException {
 
 	private static final long serialVersionUID = 3957771424755606694L;
 
-	private final Collection<RegionTrace> traces;
+	private final Collection<Trace> traces;
 
-	public ConflictingRegionsException(String message, Collection<RegionTrace> traces) {
+	public ConflictingRegionsException(String message, Collection<Trace> traces) {
 		this(message, null, traces);
 	}
 
-	public ConflictingRegionsException(String message, Throwable cause, Collection<RegionTrace> traces) {
+	public ConflictingRegionsException(String message, Throwable cause, Collection<Trace> traces) {
 		super(message, cause);
 		this.traces = traces;
-		for (RegionTrace trace : traces)
+		for (Trace trace : traces)
 			Exceptions.addSuppressed(this, trace);
 	}
 
@@ -37,13 +39,18 @@ public class ConflictingRegionsException extends RuntimeException {
 		StringBuilder builder = new StringBuilder();
 		builder.append(super.getMessage() + ".\n");
 		TextRegionsWithTitleToString toStr = new TextRegionsWithTitleToString();
-		for (RegionTrace trace : traces)
-			toStr.add(trace.getMessage(), trace.getRegion());
+		for (Trace trace : traces) {
+			Object object = trace.getObject();
+			if (object instanceof ITextReplacer)
+				toStr.add(trace.getMessage(), ((ITextReplacer) object).getRegion());
+			if (object instanceof ITextSegment)
+				toStr.add(trace.getMessage(), (ITextSegment) object);
+		}
 		builder.append(toStr);
 		return builder.toString();
 	}
 
-	public Collection<RegionTrace> getTraces() {
+	public Collection<Trace> getTraces() {
 		return traces;
 	}
 }

@@ -19,7 +19,7 @@ public class RootDocument extends FormattableDocument {
 	private final AbstractFormatter2 formatter;
 
 	public RootDocument(AbstractFormatter2 formatter) {
-		super();
+		super(Tracer.create());
 		this.formatter = formatter;
 	}
 

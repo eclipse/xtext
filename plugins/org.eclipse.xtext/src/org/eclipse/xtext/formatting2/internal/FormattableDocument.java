@@ -50,10 +50,16 @@ import com.google.common.collect.Sets;
 public abstract class FormattableDocument implements IFormattableDocument {
 
 	private final TextSegmentSet<ITextReplacer> replacers;
+	private final Tracer tracer;
 
-	protected FormattableDocument() {
+	public Tracer getTracer() {
+		return tracer;
+	}
+
+	protected FormattableDocument(Tracer tracer) {
 		super();
-		this.replacers = createTextReplacerSet();
+		this.tracer = tracer.fork(this);
+		this.replacers = createTextReplacerSet(this.tracer);
 	}
 
 	@Override
@@ -159,8 +165,8 @@ public abstract class FormattableDocument implements IFormattableDocument {
 		return context.withDocument(previous.getDocument());
 	}
 
-	protected TextSegmentSet<ITextReplacer> createTextReplacerSet() {
-		return new ArrayListTextSegmentSet<ITextReplacer>(ITextReplacer.GET_REGION,
+	protected TextSegmentSet<ITextReplacer> createTextReplacerSet(Tracer tracer) {
+		return new ArrayListTextSegmentSet<ITextReplacer>(tracer, ITextReplacer.GET_REGION,
 				new Function<ITextReplacer, String>() {
 					@Override
 					public String apply(ITextReplacer input) {

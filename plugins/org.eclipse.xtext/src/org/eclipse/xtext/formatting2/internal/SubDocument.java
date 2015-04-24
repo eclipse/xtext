@@ -19,14 +19,13 @@ import org.eclipse.xtext.formatting2.regionaccess.internal.TextSegment;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class SubDocument extends FormattableDocument implements IFormattableSubDocument,
-		ICompositeTextReplacer {
+public class SubDocument extends FormattableDocument implements IFormattableSubDocument, ICompositeTextReplacer {
 
 	private final IFormattableDocument parent;
 	private final ITextSegment region;
 
 	public SubDocument(ITextSegment region, IFormattableDocument parent) {
-		super();
+		super(((FormattableDocument) parent).getTracer());
 		this.region = region;
 		this.parent = parent;
 	}
