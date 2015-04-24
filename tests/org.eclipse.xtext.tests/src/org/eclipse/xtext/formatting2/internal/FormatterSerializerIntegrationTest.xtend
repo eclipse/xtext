@@ -52,7 +52,7 @@ class FormatterSerializerIntegrationTest {
 
 	static class Formatter extends AbstractFormatter2 {
 		def dispatch format(IDList model, extension IFormattableDocument document) {
-			model.regionForKeyword("idlist").append[space = "  "]
+			model.regionFor.keyword("idlist").append[space = "  "]
 		}
 	}
 
