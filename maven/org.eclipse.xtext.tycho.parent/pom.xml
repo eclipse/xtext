@@ -91,6 +91,7 @@
 						<excludeResource>**/*.xtendbin</excludeResource>
 						<excludeResource>**/*._trace</excludeResource>
 					</excludeResources>
+					</configuration>
 					<dependencies>
 						<dependency>
 							<groupId>org.eclipse.tycho</groupId>
@@ -104,7 +105,6 @@
 							</exclusions>
 						</dependency>
 					</dependencies>
-				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
