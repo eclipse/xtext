@@ -34,7 +34,7 @@ class OutdatedStateManager {
 	/**
 	 * Created a fresh CancelIndicator
 	 */
-	def CancelIndicator newCancelIndiciator(ResourceSet rs) {
+	def CancelIndicator newCancelIndicator(ResourceSet rs) {
 		if (rs instanceof XtextResourceSet) {
 			val boolean cancelationAllowed = this.cancelationAllowed.get 
 			val current = rs.modificationStamp
@@ -64,7 +64,7 @@ class OutdatedStateManager {
 				work.cancelIndicator = if (param === null)
 					[ true ]
 				else
-					param.resourceSet.newCancelIndiciator
+					param.resourceSet.newCancelIndicator
 			} else {
 				cancelationAllowed.set(false)
 			}
