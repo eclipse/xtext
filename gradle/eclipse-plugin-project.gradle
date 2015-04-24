@@ -63,6 +63,9 @@ task configureJarFromBuildProperties {
 }
 
 jar.dependsOn(configureJarFromBuildProperties)
+if (isBuildServer) {
+	jar.dependsOn(':maven:compileEclipsePlugins')
+}
 
 //skip compilation, done by Eclipse/Buckminster
 sourceSets*.java*.srcDirs = []
