@@ -40,5 +40,3 @@ plugins.withId('eclipse') {
 	eclipseJdt.enabled = false
 	cleanEclipseJdt.enabled = false
 }
-
-apply from: "$rootDir/gradle/unroll-dependencies.gradle"

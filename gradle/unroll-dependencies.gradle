@@ -6,21 +6,16 @@
  * on reexports.
  */
 
-def unrollDependencies 
-unrollDependencies = { configuration, notation -> 
-	if (notation instanceof Project) {
-		dependencies.add(configuration, notation) {
-			transitive = false
+project.afterEvaluate {
+	configurations.each {configuration ->
+		configuration.dependencies.toSet().each { dependency ->
+			if (dependency instanceof ProjectDependency) {
+				dependency.transitive = false
+				dependency.dependencyProject.configurations[configuration.name].allDependencies.all {
+					project.dependencies.add(configuration.name, it)
+				}
+			}
 		}
-		notation.configurations[configuration].allDependencies.all {
-			unrollDependencies(configuration, it)
-		}
-	} else if (notation instanceof ProjectDependency) {
-		unrollDependencies(configuration, notation.dependencyProject)
-	} else {
-		dependencies.add(configuration, notation)
 	}
 }
-
-dependencies.ext.compile = unrollDependencies.curry('compile')
-dependencies.ext.testCompile = unrollDependencies.curry('testCompile')
+ 
