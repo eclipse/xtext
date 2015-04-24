@@ -697,7 +697,8 @@
             rootFolder="${git.clone.xtext.location/intellij}"
             locateNestedProjects="true"/>
         <sourceLocator
-            rootFolder="${git.clone.xtext.location/web}"/>
+            rootFolder="${git.clone.xtext.location/web}"
+            locateNestedProjects="true"/>
         <description>Maven Dependencies</description>
       </setupTask>
       <setupTask
