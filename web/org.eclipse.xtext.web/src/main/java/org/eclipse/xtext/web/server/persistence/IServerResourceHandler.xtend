@@ -10,11 +10,12 @@ package org.eclipse.xtext.web.server.persistence
 import com.google.inject.ImplementedBy
 import java.io.IOException
 import org.eclipse.xtext.web.server.model.IXtextWebDocument
+import org.eclipse.xtext.web.server.model.XtextWebDocument
 
 @ImplementedBy(NullImpl)
 interface IServerResourceHandler {
 	
-	def IXtextWebDocument get(String resourceId) throws IOException
+	def XtextWebDocument get(String resourceId) throws IOException
 	
 	def void put(IXtextWebDocument document) throws IOException
 	

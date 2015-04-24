@@ -25,6 +25,8 @@ import org.eclipse.xtext.web.server.model.XtextWebDocument;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class FileResourceHandler implements IServerResourceHandler {
@@ -35,17 +37,27 @@ public class FileResourceHandler implements IServerResourceHandler {
   private Provider<XtextResourceSet> resourceSetProvider;
   
   @Inject
+  private Provider<XtextWebDocument> documentProvider;
+  
+  @Inject
   private IEncodingProvider encodingProvider;
   
   @Override
-  public IXtextWebDocument get(final String resourceId) throws IOException {
+  public XtextWebDocument get(final String resourceId) throws IOException {
     try {
       try {
         final URI uri = this.resourceBaseProvider.getFileURI(resourceId);
         final XtextResourceSet resourceSet = this.resourceSetProvider.get();
         Resource _resource = resourceSet.getResource(uri, true);
         final XtextResource resource = ((XtextResource) _resource);
-        return new XtextWebDocument(resource, resourceId);
+        XtextWebDocument _get = this.documentProvider.get();
+        final Procedure1<XtextWebDocument> _function = new Procedure1<XtextWebDocument>() {
+          @Override
+          public void apply(final XtextWebDocument it) {
+            it.setInput(resource, resourceId);
+          }
+        };
+        return ObjectExtensions.<XtextWebDocument>operator_doubleArrow(_get, _function);
       } catch (final Throwable _t) {
         if (_t instanceof WrappedException) {
           final WrappedException exception = (WrappedException)_t;

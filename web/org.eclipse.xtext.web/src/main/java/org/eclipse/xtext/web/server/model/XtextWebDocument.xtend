@@ -7,16 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server.model
 
+import com.google.inject.Inject
+import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.validation.Issue
 
 class XtextWebDocument implements IXtextWebDocument {
 	
 	@Accessors(PUBLIC_GETTER)
-	val String resourceId
+	val List<Issue> issues = newArrayList
+
+	@Accessors(PUBLIC_GETTER)
+	String resourceId
 	
 	@Accessors(PUBLIC_GETTER)
-	val XtextResource resource
+	XtextResource resource
 	
 	@Accessors(PUBLIC_GETTER)
 	String text
@@ -24,29 +30,26 @@ class XtextWebDocument implements IXtextWebDocument {
 	@Accessors
 	boolean dirty
 	
-	new(XtextResource resource, String resourceId) {
+	@Accessors
+	boolean processingCompleted
+	
+	@Accessors(PACKAGE_GETTER)
+    @Inject DocumentSynchronizer synchronizer
+	
+	def setInput(XtextResource resource, String resourceId) {
 		this.resource = resource
 		this.resourceId = resourceId
 		refresh()
 	}
 	
 	protected def refresh() {
+		issues.clear()
 		text = resource.parseResult?.rootNode?.text ?: ''
-		val stateId = computeStateId(text)
-		resource.modificationStamp = stateId
 	}
 	
 	override getStateId() {
 		return Long.toString(resource.modificationStamp, 16)
 	}
-	
-    protected def computeStateId(String text) {
-    	var hash = 0l
-        for (var i = 0; i < text.length; i++) {
-            hash = 31 * hash + text.charAt(i)
-        }
-        return hash
-    }
 		
 	override setText(String text) {
 		resource.reparse(text)
@@ -56,6 +59,11 @@ class XtextWebDocument implements IXtextWebDocument {
 	override updateText(String text, int offset, int replaceLength) {
 		resource.update(offset, replaceLength, text)
 		refresh()
+	}
+	
+	override createNewStateId() {
+		val newStateId = resource.modificationStamp + 1
+		resource.modificationStamp = newStateId
 	}
 	
 }

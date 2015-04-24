@@ -278,8 +278,19 @@ public class ContentAssistResult implements IServiceResult {
   
   private final ArrayList<ContentAssistResult.Entry> entries = new ArrayList<ContentAssistResult.Entry>();
   
+  private String stateId;
+  
   @Pure
   public ArrayList<ContentAssistResult.Entry> getEntries() {
     return this.entries;
+  }
+  
+  @Pure
+  public String getStateId() {
+    return this.stateId;
+  }
+  
+  public void setStateId(final String stateId) {
+    this.stateId = stateId;
   }
 }

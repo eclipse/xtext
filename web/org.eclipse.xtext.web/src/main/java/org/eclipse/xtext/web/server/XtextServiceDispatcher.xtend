@@ -23,7 +23,6 @@ import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.util.StringInputStream
 import org.eclipse.xtext.util.TextRegion
 import org.eclipse.xtext.web.server.contentassist.ContentAssistService
-import org.eclipse.xtext.web.server.model.IXtextWebDocument
 import org.eclipse.xtext.web.server.model.UpdateDocumentService
 import org.eclipse.xtext.web.server.model.XtextWebDocument
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess
@@ -33,7 +32,6 @@ import org.eclipse.xtext.web.server.validation.ValidationService
 
 import static org.eclipse.xtext.web.server.InvalidRequestException.Type.*
 
-// TODO support compound requests
 @Singleton
 class XtextServiceDispatcher {
 	
@@ -47,10 +45,11 @@ class XtextServiceDispatcher {
 	
 	@Inject ResourcePersistenceService resourcePersistenceService
 	@Inject UpdateDocumentService updateDocumentService
-	@Inject ValidationService validationService
 	@Inject ContentAssistService contentAssistService
+	@Inject ValidationService validationService
 	@Inject IServerResourceHandler resourceHandler
 	@Inject Provider<XtextResourceSet> resourceSetProvider
+	@Inject Provider<XtextWebDocument> documentProvider
 	@Inject FileExtensionProvider fileExtensionProvider
 	@Inject IResourceFactory resourceFactory
 	
@@ -134,7 +133,7 @@ class XtextServiceDispatcher {
 		if (fullText === null) {
 			val deltaText = parameters.get('deltaText')
 			if (deltaText === null)
-				throw new InvalidRequestException(INVALID_PARAMETERS, 'At least one of the parameters \'deltaText\' and \'fullText\' must be specified.')
+				throw new InvalidRequestException(INVALID_PARAMETERS, 'One of the parameters \'deltaText\' and \'fullText\' must be specified.')
 			val deltaOffset = parameters.getInt('deltaOffset', Optional.absent)
 			if (deltaOffset < 0)
 				throw new InvalidRequestException(INVALID_PARAMETERS, 'The parameter \'deltaOffset\' must not be negative.')
@@ -145,11 +144,47 @@ class XtextServiceDispatcher {
 				updateDocumentService.updateDeltaText(document, deltaText, deltaOffset, deltaReplaceLength)
 			]
 		} else {
+			if (parameters.containsKey('deltaText'))
+				throw new InvalidRequestException(INVALID_PARAMETERS, 'The parameters \'deltaText\' and \'fullText\' cannot be set in the same request.')
 			result.service = [
 				updateDocumentService.updateFullText(document, fullText)
 			]
 		}
 		return result
+	}
+	
+	protected def getContentAssistService(Map<String, String> parameters, ISessionStore sessionStore)
+			throws InvalidRequestException {
+		val offset = parameters.getInt('caretOffset', Optional.of(0))
+		val document = getDocumentAccess(parameters, sessionStore)
+		val selectionStart = parameters.getInt('selectionStart', Optional.of(offset))
+		val selectionEnd = parameters.getInt('selectionEnd', Optional.of(selectionStart))
+		val selection = new TextRegion(selectionStart, Math.max(selectionEnd - selectionStart, 0))
+		val deltaText = parameters.get('deltaText')
+		if (deltaText === null) {
+			new ServiceDescriptor => [
+				service = [
+					contentAssistService.createProposals(document, selection, offset)
+				]
+				hasTextInput = parameters.containsKey('fullText')
+			]
+		} else {
+			if (parameters.containsKey('fullText'))
+				throw new InvalidRequestException(INVALID_PARAMETERS, 'The parameters \'deltaText\' and \'fullText\' cannot be set in the same request.')
+			val deltaOffset = parameters.getInt('deltaOffset', Optional.absent)
+			if (deltaOffset < 0)
+				throw new InvalidRequestException(INVALID_PARAMETERS, 'The parameter \'deltaOffset\' must not be negative.')
+			val deltaReplaceLength = parameters.getInt('deltaReplaceLength', Optional.absent)
+			if (deltaReplaceLength < 0)
+				throw new InvalidRequestException(INVALID_PARAMETERS, 'The parameter \'deltaReplaceLength\' must not be negative.')
+			new ServiceDescriptor => [
+				service = [
+					contentAssistService.createProposalsWithUpdate(document, deltaText, deltaOffset, deltaReplaceLength, selection, offset)
+				]
+				hasSideEffects = true
+				hasTextInput = true
+			]
+		}
 	}
 	
 	protected def getValidationService(Map<String, String> parameters, ISessionStore sessionStore)
@@ -163,29 +198,13 @@ class XtextServiceDispatcher {
 		]
 	}
 	
-	protected def getContentAssistService(Map<String, String> parameters, ISessionStore sessionStore)
-			throws InvalidRequestException {
-		val offset = parameters.getInt('caretOffset', Optional.of(0))
-		val document = getDocumentAccess(parameters, sessionStore)
-		val selectionStart = parameters.getInt('selectionStart', Optional.of(offset))
-		val selectionEnd = parameters.getInt('selectionEnd', Optional.of(selectionStart))
-		val selection = new TextRegion(selectionStart, Math.max(selectionEnd - selectionStart, 0))
-		new ServiceDescriptor => [
-			service = [
-				contentAssistService.createProposals(document, selection, offset)
-			]
-			hasTextInput = parameters.containsKey('fullText')
-		]
-	}
-	
 	protected def getDocumentAccess(Map<String, String> parameters, ISessionStore sessionStore)
 			throws InvalidRequestException {
-		val resourceId = parameters.get('resource')
-		var IXtextWebDocument document
+		var XtextWebDocument document
 		if (parameters.containsKey('fullText')) {
-			document = getFullTextDocument(parameters.get('fullText'), resourceId, sessionStore)
-		} else if (resourceId !== null) {
-			document = getResourceDocument(resourceId, sessionStore, [
+			document = getFullTextDocument(parameters.get('fullText'), null, sessionStore)
+		} else if (parameters.containsKey('resource')) {
+			document = getResourceDocument(parameters.get('resource'), sessionStore, [
 				throw new InvalidRequestException(RESOURCE_NOT_FOUND, 'The requested resource was not found.')
 			])
 		} else {
@@ -200,7 +219,8 @@ class XtextServiceDispatcher {
 		val resource = resourceFactory.createResource(uri) as XtextResource
 		resourceSet.resources.add(resource)
 		resource.load(new StringInputStream(fullText), null)
-		val document = new XtextWebDocument(resource, resourceId)
+		val document = documentProvider.get()
+		document.setInput(resource, resourceId)
 		if (resourceId !== null)
 			sessionStore.put(XtextWebDocument -> resourceId, document)
 		return document

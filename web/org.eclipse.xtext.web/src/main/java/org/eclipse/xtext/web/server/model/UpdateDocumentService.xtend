@@ -7,33 +7,50 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server.model
 
+import com.google.inject.Inject
 import com.google.inject.Singleton
-import org.eclipse.xtext.web.server.InvalidRequestException
-import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtext.validation.CheckMode
+import org.eclipse.xtext.validation.IResourceValidator
+import org.eclipse.xtext.web.server.InvalidRequestException
 
 @Singleton
 class UpdateDocumentService {
 	
+	@Inject IResourceValidator resourceValidator
+	
 	def updateFullText(XtextWebDocumentAccess document, String fullText) throws InvalidRequestException {
-		document.modify[ it, cancelIndicator |
-			text = fullText
-			postParse(cancelIndicator)
+		document.modify([ it, cancelIndicator |
+			dirty = true
+			processingCompleted = false
+			createNewStateId()
 			return new DocumentStateResult(stateId)
-		]
+		], new XtextWorkerThread[ it, cancelIndicator |
+			text = fullText
+			processUpdatedDocument(cancelIndicator)
+			return null
+		])
 	}
 	
 	def updateDeltaText(XtextWebDocumentAccess document, String deltaText, int offset, int replaceLength)
 			throws InvalidRequestException {
-		document.modify[ it, cancelIndicator |
-			updateText(deltaText, offset, replaceLength)
-			postParse(cancelIndicator)
+		document.modify([ it, cancelIndicator |
+			dirty = true
+			processingCompleted = false
+			createNewStateId()
 			return new DocumentStateResult(stateId)
-		]
+		], new XtextWorkerThread[ it, cancelIndicator |
+			updateText(deltaText, offset, replaceLength)
+			processUpdatedDocument(cancelIndicator)
+			return null
+		])
 	}
 	
-	protected def postParse(IXtextWebDocument document, CancelIndicator cancelIndicator) {
-		EcoreUtil2.resolveLazyCrossReferences(document.resource, cancelIndicator)
+	def void processUpdatedDocument(IXtextWebDocument it, CancelIndicator cancelIndicator) {
+		if (!processingCompleted) {
+			issues.addAll(resourceValidator.validate(resource, CheckMode.ALL, cancelIndicator))
+			processingCompleted = true
+		}
 	}
 	
 }

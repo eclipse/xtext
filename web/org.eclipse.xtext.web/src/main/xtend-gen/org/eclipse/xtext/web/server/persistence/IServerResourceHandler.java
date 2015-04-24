@@ -10,13 +10,14 @@ package org.eclipse.xtext.web.server.persistence;
 import com.google.inject.ImplementedBy;
 import java.io.IOException;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
+import org.eclipse.xtext.web.server.model.XtextWebDocument;
 
 @ImplementedBy(IServerResourceHandler.NullImpl.class)
 @SuppressWarnings("all")
 public interface IServerResourceHandler {
   public static class NullImpl implements IServerResourceHandler {
     @Override
-    public IXtextWebDocument get(final String resourceId) throws IOException {
+    public XtextWebDocument get(final String resourceId) throws IOException {
       throw new IOException("This server does not support resource handling.");
     }
     
@@ -26,7 +27,7 @@ public interface IServerResourceHandler {
     }
   }
   
-  public abstract IXtextWebDocument get(final String resourceId) throws IOException;
+  public abstract XtextWebDocument get(final String resourceId) throws IOException;
   
   public abstract void put(final IXtextWebDocument document) throws IOException;
 }

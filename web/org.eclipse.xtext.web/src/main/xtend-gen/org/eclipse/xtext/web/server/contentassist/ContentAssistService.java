@@ -29,7 +29,10 @@ import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
+import org.eclipse.xtext.web.server.model.UpdateDocumentService;
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess;
+import org.eclipse.xtext.web.server.model.XtextWorkerThread;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -40,6 +43,10 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class ContentAssistService {
   @Inject
   private Provider<ContentAssistContextFactory> contextFactoryProvider;
+  
+  @Inject
+  @Extension
+  private UpdateDocumentService updateDocumentService;
   
   private final ExecutorService pool = Executors.newFixedThreadPool(3);
   
@@ -60,8 +67,62 @@ public class ContentAssistService {
         return contextFactory.create(_text, selection, offset, _resource);
       }
     };
-    final ContentAssistContext[] contexts = document.<ContentAssistContext[]>readOnly(_function_1);
+    final CancelableUnitOfWork<Object, IXtextWebDocument> _function_2 = new CancelableUnitOfWork<Object, IXtextWebDocument>() {
+      @Override
+      public Object exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
+        ContentAssistService.this.updateDocumentService.processUpdatedDocument(it, cancelIndicator);
+        return null;
+      }
+    };
+    XtextWorkerThread _xtextWorkerThread = new XtextWorkerThread(_function_2);
+    final ContentAssistContext[] contexts = document.<ContentAssistContext[]>priorityReadOnly(_function_1, _xtextWorkerThread);
+    return this.createProposals(contexts, null);
+  }
+  
+  public ContentAssistResult createProposalsWithUpdate(final XtextWebDocumentAccess document, final String deltaText, final int deltaOffset, final int deltaReplaceLength, final ITextRegion textSelection, final int caretOffset) {
+    ContentAssistContextFactory _get = this.contextFactoryProvider.get();
+    final Procedure1<ContentAssistContextFactory> _function = new Procedure1<ContentAssistContextFactory>() {
+      @Override
+      public void apply(final ContentAssistContextFactory it) {
+        it.setPool(ContentAssistService.this.pool);
+      }
+    };
+    final ContentAssistContextFactory contextFactory = ObjectExtensions.<ContentAssistContextFactory>operator_doubleArrow(_get, _function);
+    final String[] stateIdWrapper = new String[1];
+    final CancelableUnitOfWork<ContentAssistContext[], IXtextWebDocument> _function_1 = new CancelableUnitOfWork<ContentAssistContext[], IXtextWebDocument>() {
+      @Override
+      public ContentAssistContext[] exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
+        ContentAssistContext[] _xblockexpression = null;
+        {
+          it.setDirty(true);
+          it.setProcessingCompleted(false);
+          it.createNewStateId();
+          String _stateId = it.getStateId();
+          stateIdWrapper[0] = _stateId;
+          it.updateText(deltaText, deltaOffset, deltaReplaceLength);
+          String _text = it.getText();
+          XtextResource _resource = it.getResource();
+          _xblockexpression = contextFactory.create(_text, textSelection, caretOffset, _resource);
+        }
+        return _xblockexpression;
+      }
+    };
+    final CancelableUnitOfWork<Object, IXtextWebDocument> _function_2 = new CancelableUnitOfWork<Object, IXtextWebDocument>() {
+      @Override
+      public Object exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
+        ContentAssistService.this.updateDocumentService.processUpdatedDocument(it, cancelIndicator);
+        return null;
+      }
+    };
+    XtextWorkerThread _xtextWorkerThread = new XtextWorkerThread(_function_2);
+    final ContentAssistContext[] contexts = document.<ContentAssistContext[]>modify(_function_1, _xtextWorkerThread);
+    String _get_1 = stateIdWrapper[0];
+    return this.createProposals(contexts, _get_1);
+  }
+  
+  protected ContentAssistResult createProposals(final ContentAssistContext[] contexts, final String stateId) {
     final ContentAssistResult result = new ContentAssistResult();
+    result.setStateId(stateId);
     for (final ContentAssistContext context : contexts) {
       ImmutableList<AbstractElement> _firstSetGrammarElements = context.getFirstSetGrammarElements();
       for (final AbstractElement element : _firstSetGrammarElements) {
@@ -69,7 +130,7 @@ public class ContentAssistService {
       }
     }
     ArrayList<ContentAssistResult.Entry> _entries = result.getEntries();
-    final Comparator<ContentAssistResult.Entry> _function_2 = new Comparator<ContentAssistResult.Entry>() {
+    final Comparator<ContentAssistResult.Entry> _function = new Comparator<ContentAssistResult.Entry>() {
       @Override
       public int compare(final ContentAssistResult.Entry a, final ContentAssistResult.Entry b) {
         String _proposal = a.getProposal();
@@ -77,7 +138,7 @@ public class ContentAssistService {
         return _proposal.compareTo(_proposal_1);
       }
     };
-    Collections.<ContentAssistResult.Entry>sort(_entries, _function_2);
+    Collections.<ContentAssistResult.Entry>sort(_entries, _function);
     return result;
   }
   

@@ -1,7 +1,7 @@
 import java.util.List
 
 /*
- * A simple Domain Model example.
+ * A simple Entities example.
  */
 package test {
 	

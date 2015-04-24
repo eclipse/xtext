@@ -7,22 +7,30 @@
  */
 package org.eclipse.xtext.web.server.model;
 
+import com.google.inject.Inject;
+import java.util.List;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.web.server.model.DocumentSynchronizer;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class XtextWebDocument implements IXtextWebDocument {
   @Accessors(AccessorType.PUBLIC_GETTER)
-  private final String resourceId;
+  private final List<Issue> issues = CollectionLiterals.<Issue>newArrayList();
   
   @Accessors(AccessorType.PUBLIC_GETTER)
-  private final XtextResource resource;
+  private String resourceId;
+  
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  private XtextResource resource;
   
   @Accessors(AccessorType.PUBLIC_GETTER)
   private String text;
@@ -30,47 +38,51 @@ public class XtextWebDocument implements IXtextWebDocument {
   @Accessors
   private boolean dirty;
   
-  public XtextWebDocument(final XtextResource resource, final String resourceId) {
-    this.resource = resource;
-    this.resourceId = resourceId;
-    this.refresh();
+  @Accessors
+  private boolean processingCompleted;
+  
+  @Accessors(AccessorType.PACKAGE_GETTER)
+  @Inject
+  private DocumentSynchronizer synchronizer;
+  
+  public String setInput(final XtextResource resource, final String resourceId) {
+    String _xblockexpression = null;
+    {
+      this.resource = resource;
+      this.resourceId = resourceId;
+      _xblockexpression = this.refresh();
+    }
+    return _xblockexpression;
   }
   
-  protected void refresh() {
-    String _elvis = null;
-    IParseResult _parseResult = this.resource.getParseResult();
-    ICompositeNode _rootNode = null;
-    if (_parseResult!=null) {
-      _rootNode=_parseResult.getRootNode();
+  protected String refresh() {
+    String _xblockexpression = null;
+    {
+      this.issues.clear();
+      String _elvis = null;
+      IParseResult _parseResult = this.resource.getParseResult();
+      ICompositeNode _rootNode = null;
+      if (_parseResult!=null) {
+        _rootNode=_parseResult.getRootNode();
+      }
+      String _text = null;
+      if (_rootNode!=null) {
+        _text=_rootNode.getText();
+      }
+      if (_text != null) {
+        _elvis = _text;
+      } else {
+        _elvis = "";
+      }
+      _xblockexpression = this.text = _elvis;
     }
-    String _text = null;
-    if (_rootNode!=null) {
-      _text=_rootNode.getText();
-    }
-    if (_text != null) {
-      _elvis = _text;
-    } else {
-      _elvis = "";
-    }
-    this.text = _elvis;
-    final long stateId = this.computeStateId(this.text);
-    this.resource.setModificationStamp(stateId);
+    return _xblockexpression;
   }
   
   @Override
   public String getStateId() {
     long _modificationStamp = this.resource.getModificationStamp();
     return Long.toString(_modificationStamp, 16);
-  }
-  
-  protected long computeStateId(final String text) {
-    long hash = 0l;
-    for (int i = 0; (i < text.length()); i++) {
-      char _charAt = text.charAt(i);
-      long _plus = ((31 * hash) + _charAt);
-      hash = _plus;
-    }
-    return hash;
   }
   
   @Override
@@ -87,6 +99,18 @@ public class XtextWebDocument implements IXtextWebDocument {
   public void updateText(final String text, final int offset, final int replaceLength) {
     this.resource.update(offset, replaceLength, text);
     this.refresh();
+  }
+  
+  @Override
+  public void createNewStateId() {
+    long _modificationStamp = this.resource.getModificationStamp();
+    final long newStateId = (_modificationStamp + 1);
+    this.resource.setModificationStamp(newStateId);
+  }
+  
+  @Pure
+  public List<Issue> getIssues() {
+    return this.issues;
   }
   
   @Pure
@@ -111,5 +135,19 @@ public class XtextWebDocument implements IXtextWebDocument {
   
   public void setDirty(final boolean dirty) {
     this.dirty = dirty;
+  }
+  
+  @Pure
+  public boolean isProcessingCompleted() {
+    return this.processingCompleted;
+  }
+  
+  public void setProcessingCompleted(final boolean processingCompleted) {
+    this.processingCompleted = processingCompleted;
+  }
+  
+  @Pure
+  DocumentSynchronizer getSynchronizer() {
+    return this.synchronizer;
   }
 }

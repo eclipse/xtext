@@ -11,18 +11,17 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
-import org.eclipse.xtext.validation.CheckMode;
-import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
+import org.eclipse.xtext.web.server.model.UpdateDocumentService;
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess;
 import org.eclipse.xtext.web.server.validation.ValidationResult;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -31,17 +30,18 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @SuppressWarnings("all")
 public class ValidationService {
   @Inject
-  private IResourceValidator resourceValidator;
+  @Extension
+  private UpdateDocumentService updateDocumentService;
   
   public ValidationResult validate(final XtextWebDocumentAccess document) throws InvalidRequestException {
-    final CancelableUnitOfWork<List<Issue>, IXtextWebDocument> _function = new CancelableUnitOfWork<List<Issue>, IXtextWebDocument>() {
+    final CancelableUnitOfWork<Collection<Issue>, IXtextWebDocument> _function = new CancelableUnitOfWork<Collection<Issue>, IXtextWebDocument>() {
       @Override
-      public List<Issue> exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
-        XtextResource _resource = it.getResource();
-        return ValidationService.this.resourceValidator.validate(_resource, CheckMode.ALL, cancelIndicator);
+      public Collection<Issue> exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
+        ValidationService.this.updateDocumentService.processUpdatedDocument(it, cancelIndicator);
+        return it.getIssues();
       }
     };
-    final List<Issue> issues = document.<List<Issue>>readOnly(_function);
+    final Collection<Issue> issues = document.<Collection<Issue>>readOnly(_function);
     final ValidationResult result = new ValidationResult();
     final Function1<Issue, Boolean> _function_1 = new Function1<Issue, Boolean>() {
       @Override

@@ -17,6 +17,8 @@ class ContentAssistResult implements IServiceResult {
 	
 	val entries = new ArrayList<Entry>
 	
+	String stateId
+	
 	@Data
 	static class Entry {
 		String proposal

@@ -24,6 +24,8 @@ class FileResourceHandler implements IServerResourceHandler {
 	
 	@Inject Provider<XtextResourceSet> resourceSetProvider
 	
+	@Inject Provider<XtextWebDocument> documentProvider
+	
 	@Inject IEncodingProvider encodingProvider
 	
 	override get(String resourceId) throws IOException {
@@ -31,7 +33,9 @@ class FileResourceHandler implements IServerResourceHandler {
 			val uri = resourceBaseProvider.getFileURI(resourceId)
 			val resourceSet = resourceSetProvider.get()
 			val resource = resourceSet.getResource(uri, true) as XtextResource
-			return new XtextWebDocument(resource, resourceId)
+			return documentProvider.get() => [
+				setInput(resource, resourceId)
+			]
 		} catch (WrappedException exception) {
 			throw exception.cause
 		}

@@ -7,7 +7,9 @@
  */
 package org.eclipse.xtext.web.server.model;
 
+import java.util.Collection;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.validation.Issue;
 
 @SuppressWarnings("all")
 public interface IXtextWebDocument {
@@ -19,11 +21,19 @@ public interface IXtextWebDocument {
   
   public abstract String getStateId();
   
+  public abstract Collection<Issue> getIssues();
+  
   public abstract boolean isDirty();
   
+  public abstract boolean isProcessingCompleted();
+  
   public abstract void setText(final String text);
+  
+  public abstract void createNewStateId();
   
   public abstract void updateText(final String text, final int offset, final int replaceLength);
   
   public abstract void setDirty(final boolean dirty);
+  
+  public abstract void setProcessingCompleted(final boolean completed);
 }

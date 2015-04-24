@@ -272,7 +272,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		if (resource == null) {
 			return CancelIndicator.NullImpl;
 		}
-		return outdatedStateManager.newCancelIndiciator(resource.getResourceSet());
+		return outdatedStateManager.newCancelIndicator(resource.getResourceSet());
 	}
 	
 	/**

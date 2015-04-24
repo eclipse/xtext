@@ -38,7 +38,7 @@ public class OutdatedStateManager {
   /**
    * Created a fresh CancelIndicator
    */
-  public CancelIndicator newCancelIndiciator(final ResourceSet rs) {
+  public CancelIndicator newCancelIndicator(final ResourceSet rs) {
     CancelIndicator _xifexpression = null;
     if ((rs instanceof XtextResourceSet)) {
       final boolean cancelationAllowed = (this.cancelationAllowed.get()).booleanValue();
@@ -112,7 +112,7 @@ public class OutdatedStateManager {
                 _xifexpression = _function;
               } else {
                 ResourceSet _resourceSet = param.getResourceSet();
-                _xifexpression = this.newCancelIndiciator(_resourceSet);
+                _xifexpression = this.newCancelIndicator(_resourceSet);
               }
               ((CancelableUnitOfWork<?, ?>)work).setCancelIndicator(_xifexpression);
             } else {

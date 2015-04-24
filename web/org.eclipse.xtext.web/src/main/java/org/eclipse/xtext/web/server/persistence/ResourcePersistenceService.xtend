@@ -41,13 +41,10 @@ class ResourcePersistenceService {
 			throws InvalidRequestException {
 		try {
 			val document = resourceHandler.get(resourceId)
-			new XtextWebDocumentAccess(document).modify[ it, cancelIndicator |
-				sessionStore.put(XtextWebDocument -> resourceId, document)
-				dirty = false
-				val result = new ResourceContentResult(text)
-				result.stateId = stateId
-				return result
-			]
+			val result = new ResourceContentResult(document.text)
+			result.stateId = document.stateId
+			sessionStore.put(XtextWebDocument -> resourceId, document)
+			return result
 		} catch (IOException ioe) {
 			throw new InvalidRequestException(RESOURCE_NOT_FOUND, 'The requested resource was not found.')
 		}
@@ -55,7 +52,7 @@ class ResourcePersistenceService {
 	
 	def save(XtextWebDocumentAccess document, IServerResourceHandler resourceHandler)
 			throws InvalidRequestException {
-		document.modify[ it, cancelIndicator |
+		document.readOnly[ it, cancelIndicator |
 			try {
 				resourceHandler.put(it)
 				dirty = false

@@ -30,11 +30,11 @@ public class ResourcePersistenceService {
     ResourceContentResult _xblockexpression = null;
     {
       Pair<Class<XtextWebDocument>, String> _mappedTo = Pair.<Class<XtextWebDocument>, String>of(XtextWebDocument.class, resourceId);
-      final Function0<IXtextWebDocument> _function = new Function0<IXtextWebDocument>() {
+      final Function0<XtextWebDocument> _function = new Function0<XtextWebDocument>() {
         @Override
-        public IXtextWebDocument apply() {
+        public XtextWebDocument apply() {
           try {
-            IXtextWebDocument _xtrycatchfinallyexpression = null;
+            XtextWebDocument _xtrycatchfinallyexpression = null;
             try {
               _xtrycatchfinallyexpression = resourceHandler.get(resourceId);
             } catch (final Throwable _t) {
@@ -51,7 +51,7 @@ public class ResourcePersistenceService {
           }
         }
       };
-      final IXtextWebDocument document = sessionStore.<IXtextWebDocument>get(_mappedTo, _function);
+      final XtextWebDocument document = sessionStore.<XtextWebDocument>get(_mappedTo, _function);
       XtextWebDocumentAccess _xtextWebDocumentAccess = new XtextWebDocumentAccess(document);
       final CancelableUnitOfWork<ResourceContentResult, IXtextWebDocument> _function_1 = new CancelableUnitOfWork<ResourceContentResult, IXtextWebDocument>() {
         @Override
@@ -71,28 +71,15 @@ public class ResourcePersistenceService {
   }
   
   public ResourceContentResult revert(final String resourceId, final IServerResourceHandler resourceHandler, final ISessionStore sessionStore) throws InvalidRequestException {
-    ResourceContentResult _xtrycatchfinallyexpression = null;
     try {
-      ResourceContentResult _xblockexpression = null;
-      {
-        final IXtextWebDocument document = resourceHandler.get(resourceId);
-        XtextWebDocumentAccess _xtextWebDocumentAccess = new XtextWebDocumentAccess(document);
-        final CancelableUnitOfWork<ResourceContentResult, IXtextWebDocument> _function = new CancelableUnitOfWork<ResourceContentResult, IXtextWebDocument>() {
-          @Override
-          public ResourceContentResult exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
-            Pair<Class<XtextWebDocument>, String> _mappedTo = Pair.<Class<XtextWebDocument>, String>of(XtextWebDocument.class, resourceId);
-            sessionStore.put(_mappedTo, document);
-            it.setDirty(false);
-            String _text = it.getText();
-            final ResourceContentResult result = new ResourceContentResult(_text);
-            String _stateId = it.getStateId();
-            result.setStateId(_stateId);
-            return result;
-          }
-        };
-        _xblockexpression = _xtextWebDocumentAccess.<ResourceContentResult>modify(_function);
-      }
-      _xtrycatchfinallyexpression = _xblockexpression;
+      final XtextWebDocument document = resourceHandler.get(resourceId);
+      String _text = document.getText();
+      final ResourceContentResult result = new ResourceContentResult(_text);
+      String _stateId = document.getStateId();
+      result.setStateId(_stateId);
+      Pair<Class<XtextWebDocument>, String> _mappedTo = Pair.<Class<XtextWebDocument>, String>of(XtextWebDocument.class, resourceId);
+      sessionStore.put(_mappedTo, document);
+      return result;
     } catch (final Throwable _t) {
       if (_t instanceof IOException) {
         final IOException ioe = (IOException)_t;
@@ -101,7 +88,6 @@ public class ResourcePersistenceService {
         throw Exceptions.sneakyThrow(_t);
       }
     }
-    return _xtrycatchfinallyexpression;
   }
   
   public DocumentStateResult save(final XtextWebDocumentAccess document, final IServerResourceHandler resourceHandler) throws InvalidRequestException {
@@ -124,6 +110,6 @@ public class ResourcePersistenceService {
         return new DocumentStateResult(_stateId);
       }
     };
-    return document.<DocumentStateResult>modify(_function);
+    return document.<DocumentStateResult>readOnly(_function);
   }
 }
