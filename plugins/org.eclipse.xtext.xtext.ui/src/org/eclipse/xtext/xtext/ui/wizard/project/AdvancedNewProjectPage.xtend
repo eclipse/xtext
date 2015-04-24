@@ -9,6 +9,8 @@ package org.eclipse.xtext.xtext.ui.wizard.project
 
 import org.eclipse.jface.wizard.WizardPage
 import org.eclipse.swt.SWT
+import org.eclipse.swt.events.SelectionAdapter
+import org.eclipse.swt.events.SelectionEvent
 import org.eclipse.swt.layout.GridData
 import org.eclipse.swt.layout.GridLayout
 import org.eclipse.swt.widgets.Button
@@ -43,7 +45,7 @@ class AdvancedNewProjectPage extends WizardPage {
 				]
 				createIdeaProject = CheckBox [
 					text = "IntelliJ IDEA Plugin"
-					enabled = false
+					enabled = true
 				]
 				createWebProject = CheckBox [
 					text = "Web Integration"
@@ -51,7 +53,7 @@ class AdvancedNewProjectPage extends WizardPage {
 				]
 				createIdeProject = CheckBox [
 					text = "Generic IDE Support"
-					enabled = false
+					enabled = true
 				]
 				createTestProject = CheckBox [
 					text = Messages.WizardNewXtextProjectCreationPage_TestingSupport
@@ -72,6 +74,22 @@ class AdvancedNewProjectPage extends WizardPage {
 				]
 			]
 		]
+		val selectionControl = new SelectionAdapter() {
+
+			override widgetSelected(SelectionEvent e) {
+				if (createIdeaProject.equals(e.widget) && createIdeaProject.selection) {
+					createIdeProject.selection = true
+					return
+				}
+				if (createIdeProject.equals(e.widget) && createIdeProject.selection == false) {
+					createIdeaProject.selection = false
+					return
+				}
+			}
+
+		}
+		createIdeaProject.addSelectionListener(selectionControl)
+		createIdeProject.addSelectionListener(selectionControl)
 		setDefaults
 	}
 
@@ -109,13 +127,21 @@ class AdvancedNewProjectPage extends WizardPage {
 		buildSystem.select(0)
 		projectLayout.select(0)
 	}
-	
+
 	def boolean isCreateUiProject() {
 		createUiProject.selection
 	}
 
 	def boolean isCreateTestProject() {
 		createTestProject.selection
+	}
+
+	def boolean isCreateIdeProject() {
+		createIdeProject.selection
+	}
+
+	def boolean isCreateIntellijProject() {
+		createIdeaProject.selection
 	}
 
 }

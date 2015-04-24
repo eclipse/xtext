@@ -22,14 +22,14 @@ public class Ecore2XtextProjectCreator extends XtextProjectCreator {
 
 	@Override
 	protected IProjectFactoryContributor createDslProjectContributor() {
-		Ecore2XtextDslProjectContributor contributor = new Ecore2XtextDslProjectContributor(getXtextProjectInfo());
+		Ecore2XtextDslProjectContributor contributor = new Ecore2XtextDslProjectContributor(getProjectInfo());
 		contributor.setModelFolder(getModelFolderName());
 		return contributor;
 	}
 
 	@Override
 	protected Collection<String> getAdditionalRequiredBundles() {
-		Ecore2XtextProjectInfo ecore2xtextProjectInfo = getXtextProjectInfo();
+		Ecore2XtextProjectInfo ecore2xtextProjectInfo = getProjectInfo();
 		Set<String> result = Sets.newHashSet();
 		for (EPackageInfo packageInfo : ecore2xtextProjectInfo.getEPackageInfos()) {
 			result.add(packageInfo.getBundleID());
@@ -41,7 +41,7 @@ public class Ecore2XtextProjectCreator extends XtextProjectCreator {
 	}
 
 	@Override
-	protected Ecore2XtextProjectInfo getXtextProjectInfo() {
-		return (Ecore2XtextProjectInfo) super.getXtextProjectInfo();
+	protected Ecore2XtextProjectInfo getProjectInfo() {
+		return (Ecore2XtextProjectInfo) super.getProjectInfo();
 	}
 }
