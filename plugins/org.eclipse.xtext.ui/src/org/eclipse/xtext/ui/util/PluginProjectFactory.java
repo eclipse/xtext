@@ -71,7 +71,7 @@ public class PluginProjectFactory extends JavaProjectFactory {
 	@Override
 	protected void enhanceProject(IProject project, SubMonitor subMonitor, Shell shell) throws CoreException {
 		super.enhanceProject(project, subMonitor, shell);
-		if (projectNatures.contains("org.eclipse.pde.PluginNature")) {
+		if (projectNatures != null && projectNatures.contains("org.eclipse.pde.PluginNature")) {
 			createManifest(project, subMonitor.newChild(1));
 			createBuildProperties(project, subMonitor.newChild(1));
 		}
