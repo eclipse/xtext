@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.project;
 
+import java.util.Arrays;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -56,10 +58,12 @@ public class NewXtextProjectWizard extends XtextNewProjectWizard {
 		XtextProjectInfo projectInfo = createProjectInfo();
 		projectInfo.setCreateUiProject(advancedPage.isCreateUiProject());
 		projectInfo.setCreateTestProject(advancedPage.isCreateTestProject());
+		projectInfo.setCreateIdeProject(advancedPage.isCreateIdeProject());
+		projectInfo.setCreateIntellijProject(advancedPage.isCreateIntellijProject());
 		projectInfo.setFileExtension(mainPage.getFileExtensions());
 		projectInfo.setLanguageName(mainPage.getLanguageName());
 		projectInfo.setProjectName(mainPage.getProjectName());
-		projectInfo.setWorkingSets(mainPage.getSelectedWorkingSets());
+		projectInfo.setWorkingSets(Arrays.asList(mainPage.getSelectedWorkingSets()));
 		projectInfo.setProjectsRootLocation(mainPage.getLocationPath());
 		projectInfo.setWorkbench(getWorkbench());
 		projectInfo.setCreateEclipseRuntimeLaunchConfig(!existsEclipseRuntimeLaunchConfig());
