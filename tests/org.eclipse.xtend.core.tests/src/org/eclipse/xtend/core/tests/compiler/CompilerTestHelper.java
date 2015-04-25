@@ -10,31 +10,20 @@ package org.eclipse.xtend.core.tests.compiler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.core.xtend.XtendPackage;
-import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
-import org.eclipse.xtext.validation.Check;
-import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
+import org.eclipse.xtext.xbase.compiler.InMemoryJavaCompiler;
+import org.eclipse.xtext.xbase.compiler.JavaSource;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
-import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
-import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
-import org.eclipse.xtext.xbase.lib.Functions;
 import org.junit.Assert;
 
-import com.google.common.base.Supplier;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
-import compound.IntCompoundExtensions;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -42,7 +31,7 @@ import compound.IntCompoundExtensions;
 public class CompilerTestHelper {
 
 	@Inject
-	private EclipseRuntimeDependentJavaCompiler javaCompiler;
+	private InMemoryJavaCompiler javaCompiler;
 
 	@Inject
 	private ParseHelper<XtendFile> parseHelper;
@@ -58,25 +47,6 @@ public class CompilerTestHelper {
 
 	@Inject
 	private IXtendJvmAssociations associations;
-	
-	public void setUp() {
-		javaCompiler.clearClassPath();
-		javaCompiler.addClassPathOfClass(getClass());
-		javaCompiler.addClassPathOfClass(IntCompoundExtensions.class);
-		javaCompiler.addClassPathOfClass(AbstractXbaseEvaluationTest.class);
-		javaCompiler.addClassPathOfClass(Functions.class);
-		javaCompiler.addClassPathOfClass(StringConcatenation.class);
-		javaCompiler.addClassPathOfClass(Accessors.class);
-		javaCompiler.addClassPathOfClass(javax.inject.Provider.class);
-		javaCompiler.addClassPathOfClass(Provider.class);
-		javaCompiler.addClassPathOfClass(Supplier.class);
-		javaCompiler.addClassPathOfClass(Notifier.class);
-		javaCompiler.addClassPathOfClass(EcorePackage.class);
-		javaCompiler.addClassPathOfClass(XbasePackage.class);
-		javaCompiler.addClassPathOfClass(XtendPackage.class);
-		javaCompiler.addClassPathOfClass(Check.class);
-		javaCompiler.addClassPathOfClass(Assert.class);
-	}
 	
 	public void assertEvaluatesTo(Object object, String string) {
 		final String compileToJavaCode = compileToJavaCode(string);
@@ -144,7 +114,8 @@ public class CompilerTestHelper {
 
 	protected Class<?> compileToClass(String javaCode) {
 		try {
-			Class<?> clazz = javaCompiler.compileToClass("foo.Test", javaCode);
+			Class<?> clazz = 
+					javaCompiler.compile(new JavaSource("foo/Test.java", javaCode)).getClassLoader().loadClass("foo.Test");
 			return clazz;
 		} catch (Exception e) {
 			throw new RuntimeException("Java compilation failed. Java code was : \n" + javaCode, e);
@@ -165,5 +136,8 @@ public class CompilerTestHelper {
 		} catch (Exception e) {
 			throw new RuntimeException("Xtend compilation failed for: " + xtendCode, e);
 		}
+	}
+
+	public void setUp() {
 	}
 }

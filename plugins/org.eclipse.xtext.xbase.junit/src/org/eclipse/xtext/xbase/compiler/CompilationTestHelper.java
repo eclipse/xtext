@@ -14,9 +14,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -83,11 +85,13 @@ import com.google.inject.Provider;
  */
 public class CompilationTestHelper {
 	
+	private final static Logger LOG = Logger.getLogger(CompilationTestHelper.class);
+	
 	public final static String PROJECT_NAME = "myProject";
 	
 	@Inject private TemporaryFolder temporaryFolder;
 	
-	@Inject private OnTheFlyJavaCompiler javaCompiler;
+	@Inject private OnTheFlyJavaCompiler2 javaCompiler;
 	
 	@Inject private Provider<XtextResourceSet> resourceSetProvider;
 	
@@ -151,11 +155,15 @@ public class CompilationTestHelper {
 	/**
 	 * Add the class path entries of the given classes to the java compiler's class path.
 	 */
-	public void setJavaCompilerClassPath(Class<?> ...classes) {
-		javaCompiler.clearClassPath();
-		for (Class<?> clazz : classes) {
-			javaCompiler.addClassPathOfClass(clazz);
-		}
+	public void setJavaCompilerClassPath(@SuppressWarnings("unused") Class<?> ...classes) {
+		LOG.warn("java compiler classpath setup is deprecated. Only classloader based classpathes are supported.");
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public void setJavaCompilerClassPath(ClassLoader classLoader) {
+		this.javaCompiler = new OnTheFlyJavaCompiler2(classLoader);
 	}
 	
 	/**
@@ -266,7 +274,7 @@ public class CompilationTestHelper {
 	}
 	
 	/**
-	 * Physically copies the given files to the currently used worksapce root (a temporary folder).
+	 * Physically copies the given files to the currently used workspace root (a temporary folder).
 	 * @param workspacefilePath the workspace relative path
 	 * @param contents the file contents
 	 */
@@ -318,7 +326,7 @@ public class CompilationTestHelper {
 		@Inject private Provider<RegisteringFileSystemAccess> fileSystemAccessProvider;
 		@Inject	private ElementIssueProvider.Factory elementIssueProviderFactory;
 		
-		private OnTheFlyJavaCompiler javaCompiler;
+		private OnTheFlyJavaCompiler2 javaCompiler;
 		private ResourceSet resourceSet;
 		private List<Resource> sources;
 		private Map<String,OutputConfiguration> outputConfigurations;
@@ -339,7 +347,10 @@ public class CompilationTestHelper {
 			this.sources = sources;
 		}
 		
-		protected void setJavaCompiler(OnTheFlyJavaCompiler javaCompiler) {
+		/**
+		 * @since 2.9
+		 */
+		protected void setJavaCompiler(OnTheFlyJavaCompiler2 javaCompiler) {
 			this.javaCompiler = javaCompiler;
 		}
 		
@@ -537,9 +548,10 @@ public class CompilationTestHelper {
 			if (compiledClasses == null || classLoader==null) {
 				doGenerate();
 				try {
-					org.eclipse.xtext.util.Pair<ClassLoader, Map<String, Class<?>>> compilationResult = javaCompiler.internalCompileToClasses(getGeneratedCode());
-					this.classLoader = compilationResult.getFirst();
-					this.compiledClasses = compilationResult.getSecond();
+					Map<String, Class<?>> compilationResult = javaCompiler.compileToClasses(getGeneratedCode());
+					Iterator<Class<?>> values = compilationResult.values().iterator();
+					this.classLoader = values.hasNext() ? values.next().getClassLoader() : null;
+					this.compiledClasses = compilationResult;
 				} catch (IllegalArgumentException e) {
 					throw new AssertionError(e);
 				}

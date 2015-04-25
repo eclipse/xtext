@@ -22,47 +22,40 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcoreFactory;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtend.core.compiler.XtendCompiler;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendPackage;
-import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
-import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
+import org.eclipse.xtext.xbase.compiler.InMemoryJavaCompiler;
+import org.eclipse.xtext.xbase.compiler.InMemoryJavaCompiler.Result;
+import org.eclipse.xtext.xbase.compiler.JavaSource;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
-import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Pair;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import test.ExtensionMethods;
-import test.SampleBuilder;
-import test.SuperClass;
-import testdata.Properties1;
-
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+
+import test.ExtensionMethods;
+import test.SampleBuilder;
+import test.SuperClass;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -399,7 +392,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"    }\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
-		Class<?> class1 = javaCompiler.compileToClass("Z", javaCode);
+		Class<?> class1 = compileToClass("Z", javaCode);
 		Object object = class1.newInstance();
 		Object closure = class1.getDeclaredMethod("returnClosure").invoke(object);
 		@SuppressWarnings("unchecked")
@@ -407,6 +400,15 @@ public class CompilerTest extends AbstractXtendTestCase {
 		assertEquals("123", castedClosure.apply(123));
 	}
 	
+	private Class<?> compileToClass(String className, String javaCode) {
+		Result result = javaCompiler.compile(new JavaSource(className.replace(".", "/")+".java", javaCode));
+		try {
+			return result.getClassLoader().loadClass(className);
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 	@Test public void testBug362236_02() throws Exception {
 		String code = 
 				"import java.util.List\n" +
@@ -419,7 +421,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"    }\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
-		Class<?> class1 = javaCompiler.compileToClass("Z", javaCode);
+		Class<?> class1 = compileToClass("Z", javaCode);
 		Object object = class1.newInstance();
 		Object closure = class1.getDeclaredMethod("returnClosure").invoke(object);
 		@SuppressWarnings("unchecked")
@@ -439,7 +441,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"    }\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
-		Class<?> class1 = javaCompiler.compileToClass("Z", javaCode);
+		Class<?> class1 = compileToClass("Z", javaCode);
 		Object object = class1.newInstance();
 		Object closure = class1.getDeclaredMethod("returnClosure").invoke(object);
 		@SuppressWarnings("unchecked")
@@ -458,7 +460,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 						"    }\n" + 
 						"}";
 		String javaCode = compileToJavaCode(code);
-		Class<?> class1 = javaCompiler.compileToClass("Z", javaCode);
+		Class<?> class1 = compileToClass("Z", javaCode);
 		Object object = class1.newInstance();
 		Object list = class1.getDeclaredMethod("returnListOfClosures").invoke(object);
 		@SuppressWarnings("unchecked")
@@ -481,7 +483,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"    }\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
-		Class<?> class1 = javaCompiler.compileToClass("Z", javaCode);
+		Class<?> class1 = compileToClass("Z", javaCode);
 		Object object = class1.newInstance();
 		assertTrue((Boolean)class1.getDeclaredMethod("methodOne").invoke(object));
 	}
@@ -494,7 +496,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"	}\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		Class<?> class1 = javaCompiler.compileToClass("Z", javaCode);
+		Class<?> class1 = compileToClass("Z", javaCode);
 		Object object = class1.newInstance();
 		try {
 			class1.getDeclaredMethod("test").invoke(object);
@@ -512,7 +514,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"	}\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		Class<?> class1 = javaCompiler.compileToClass("Z", javaCode);
+		Class<?> class1 = compileToClass("Z", javaCode);
 		Object object = class1.newInstance();
 		assertTrue((Boolean)class1.getDeclaredMethod("test").invoke(object));
 	}
@@ -527,7 +529,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"	}\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		Class<?> class1 = javaCompiler.compileToClass("Z", javaCode);
+		Class<?> class1 = compileToClass("Z", javaCode);
 		Object object = class1.newInstance();
 		assertEquals(RetentionPolicy.RUNTIME, class1.getDeclaredMethod("test").invoke(object));
 	}
@@ -541,7 +543,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"	}\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		Class<?> class1 = javaCompiler.compileToClass("Z", javaCode);
+		Class<?> class1 = compileToClass("Z", javaCode);
 		Object object = class1.newInstance();
 		assertEquals(Collections.EMPTY_SET, class1.getDeclaredMethod("test").invoke(object));
 	}
@@ -565,7 +567,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  }\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		Class<?> class1 = javaCompiler.compileToClass("x.Z", javaCode);
+		Class<?> class1 = compileToClass("x.Z", javaCode);
 		Object object = class1.newInstance();
 		assertEquals(3, class1.getDeclaredMethod("ifExpression_01", String.class).invoke(object, "foo"));
 	}
@@ -581,7 +583,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  }\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		Class<?> class1 = javaCompiler.compileToClass("x.Z", javaCode);
+		Class<?> class1 = compileToClass("x.Z", javaCode);
 		Object object = class1.newInstance();
 		assertFalse((Boolean) class1.getDeclaredMethod("test").invoke(object));
 	}
@@ -593,7 +595,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  def _foo(String x, boolean b) {}\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		Class<?> class1 = javaCompiler.compileToClass("x.Z", javaCode);
+		Class<?> class1 = compileToClass("x.Z", javaCode);
 		assertEquals(2, class1.getDeclaredMethods().length);
 		assertNotNull(class1.getMethod("_foo", new Class<?>[] { Object.class, Boolean.TYPE }));
 		assertNotNull(class1.getMethod("_foo", new Class<?>[] { String.class, Boolean.TYPE }));
@@ -612,7 +614,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  def dispatch foo(String x, boolean b) {}\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		Class<?> class1 = javaCompiler.compileToClass("x.Z", javaCode);
+		Class<?> class1 = compileToClass("x.Z", javaCode);
 		Method method = class1.getMethod("foo", new Class<?>[]{Object.class, Boolean.TYPE});
 		assertNotNull(method);
 	}
@@ -627,7 +629,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  def dispatch create newArrayList foo(String x) {}\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		Class<?> class1 = javaCompiler.compileToClass("x.Z", javaCode);
+		Class<?> class1 = compileToClass("x.Z", javaCode);
 		Method method = class1.getMethod("foo", new Class<?>[]{Object.class});
 		assertNotNull(method);
 		List<?> list = (List<?>) method.invoke(class1.newInstance(), "foo");
@@ -644,7 +646,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  def dispatch create new StringBuilder foo(String x) { append(2) }\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		Class<?> class1 = javaCompiler.compileToClass("x.Z", javaCode);
+		Class<?> class1 = compileToClass("x.Z", javaCode);
 		Method method = class1.getMethod("foo", new Class<?>[]{Object.class});
 		assertNotNull(method);
 		StringBuilder sb = (StringBuilder) method.invoke(class1.newInstance(), "foo");
@@ -669,7 +671,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  }\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	/**
@@ -687,7 +689,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  }\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	/**
@@ -706,7 +708,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  }\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	/**
@@ -724,7 +726,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  }\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	/**
@@ -743,7 +745,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  }\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 
 	/**
@@ -761,7 +763,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  }\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 
 	/**
@@ -787,7 +789,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  }\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	/**
@@ -801,7 +803,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 			"  }\n" +
 			"}\n";
 		String javaCode = compileToJavaCode(code);
-		Class<?> compiledClazz = javaCompiler.compileToClass("x.Z", javaCode);
+		Class<?> compiledClazz = compileToClass("x.Z", javaCode);
 		Object instance = compiledClazz.newInstance();
 		Method method = compiledClazz.getDeclaredMethod("toString", Iterable.class, Functions.Function1.class, String.class);
 		List<String> list = Lists.newArrayList("a", "b");
@@ -827,7 +829,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 			"  }\n" +
 			"}\n";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	/**
@@ -852,7 +854,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 			"  }\n" +
 			"}\n";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	/**
@@ -872,7 +874,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 			"  }\n" +
 			"}\n";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	/**
@@ -897,7 +899,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 			"  }\n" +
 			"}\n";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	/**
@@ -917,7 +919,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 			"  }\n" +
 			"}\n";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	/**
@@ -934,7 +936,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  }\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	/**
@@ -951,7 +953,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  }\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	/**
@@ -968,7 +970,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  }\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	/**
@@ -985,7 +987,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  }\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	/**
@@ -1002,7 +1004,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  }\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	/**
@@ -1019,7 +1021,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  }\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	/**
@@ -1036,7 +1038,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  }\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	/**
@@ -1053,7 +1055,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  }\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	/**
@@ -1070,7 +1072,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  }\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	/**
@@ -1087,7 +1089,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  }\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	@Test public void testBug_350932_11() throws Exception {
@@ -1102,7 +1104,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  }\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	/**
@@ -1119,7 +1121,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  }\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	/**
@@ -1136,7 +1138,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  }\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	/**
@@ -1153,7 +1155,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  }\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	/**
@@ -1168,7 +1170,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  }\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	@Test public void testBug_352705_01() throws Exception {
@@ -1183,7 +1185,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  }\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	@Test public void testBug_352705_02() throws Exception {
@@ -1196,7 +1198,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  }\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	@Test public void testBug_352705_03() throws Exception {
@@ -1209,7 +1211,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  }\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	@Test public void testBug_352844_01() throws Exception {
@@ -1226,7 +1228,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"	}\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	@Test public void testBug_352844_02() throws Exception {
@@ -1243,7 +1245,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"	}\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	@Test public void testBug_352844_03() throws Exception {
@@ -1260,7 +1262,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"	}\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	@Test public void testBug_350831_01() throws Exception {
@@ -1331,7 +1333,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"	}\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 //	static class Z {
@@ -1390,7 +1392,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"	}\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 //	static class Z {
@@ -1430,7 +1432,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"	}\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	@Test public void testBug_352849_02_b() throws Exception {
@@ -1455,7 +1457,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"	}\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	@Test public void testBug_352849_03() throws Exception {
@@ -1482,7 +1484,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"	}\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	@Test public void testBug_352849_04() throws Exception {
@@ -1503,7 +1505,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"	}\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	@Test public void testBug_352849_05() throws Exception {
@@ -1540,7 +1542,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"	}\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 //	static class Z {
@@ -1577,7 +1579,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"	}\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	@Test
@@ -1598,7 +1600,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"	}\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	@Test
@@ -1619,7 +1621,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"	}\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 //	static class Z {
@@ -1652,7 +1654,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"	}\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	@Test public void testBug_396879_01() throws Exception {
@@ -1670,7 +1672,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"	}\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	@Test public void testBug_396879_02() throws Exception {
@@ -1684,7 +1686,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"	}\n" + 
 				"}";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	@Test public void testBug_396879_03() throws Exception {
@@ -1698,7 +1700,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"	}\n" + 
 				"}";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	@Test public void testBug_396879_04() throws Exception {
@@ -1711,7 +1713,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"	}\n" + 
 				"}";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	@Test public void testBug_396879_05() throws Exception {
@@ -1725,7 +1727,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"	}\n" + 
 				"}";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 //	static class Z {
@@ -1764,7 +1766,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"	}\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	@Test public void testBug_352849_08() throws Exception {
@@ -1793,7 +1795,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"	}\n" +
 				"}";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	/**
@@ -1813,7 +1815,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 			"  }\n" +
 			"}\n";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	@Test public void testEscapeCharacterForReservedNames() throws Exception {
@@ -1824,7 +1826,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 			"  }\n" + 
 			"}";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}	
 	
 	@Test public void testSuperCall() throws Exception {
@@ -1854,7 +1856,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  }\n" + 
 				"}";
 		String javaCode = compileToJavaCode(code);
-		Class<?> clazz = javaCompiler.compileToClass("x.Z", javaCode);
+		Class<?> clazz = compileToClass("x.Z", javaCode);
 		Object instance = clazz.newInstance();
 		assertFalse(instance.equals(clazz.newInstance()));
 		assertTrue(instance.equals(instance));
@@ -2092,7 +2094,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				" }" +
 				"}";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	@Test public void testImportNestedTypes_02() throws Exception {
@@ -2105,7 +2107,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				" }" +
 				"}";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 
@@ -2119,7 +2121,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				" }" +
 				"}";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 
@@ -2133,7 +2135,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				" }" +
 				"}";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("x.Z", javaCode);
+		compileToClass("x.Z", javaCode);
 	}
 	
 	@Test public void testInjectedExtensionMethod_01() throws Exception {
@@ -2842,7 +2844,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  }"+
 				"}";
 		String javaCode = compileToJavaCode(code);
-		javaCompiler.compileToClass("foo.Bar", javaCode);
+		compileToClass("foo.Bar", javaCode);
 	}
 	
 	@Test public void testArrayConversion_01() throws Exception {
@@ -3061,7 +3063,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 					"  }\n" +
 					"}");
 			assertTrue(javaCode.contains("Exceptions.sneakyThrow"));
-			javaCompiler.compileToClass("Foo", javaCode);
+			compileToClass("Foo", javaCode);
 		} catch(Exception e) {
 			assertEquals("Bug366525", e.getMessage());
 		}
@@ -3075,7 +3077,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 					"  }\n" +
 					"}");
 			assertFalse(javaCode.contains("Exceptions.sneakyThrow"));
-			javaCompiler.compileToClass("Foo", javaCode);
+			compileToClass("Foo", javaCode);
 		} catch(Exception e) {
 			assertEquals("Bug366525", e.getMessage());
 		}
@@ -3101,7 +3103,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 	}
 	
 	@Inject
-	protected EclipseRuntimeDependentJavaCompiler javaCompiler;
+	protected InMemoryJavaCompiler javaCompiler;
 
 	@Inject
 	protected ParseHelper<XtendFile> parseHelper;
@@ -3120,24 +3122,6 @@ public class CompilerTest extends AbstractXtendTestCase {
 	
 	@Inject
 	protected IGeneratorConfigProvider generatorConfigProvider;
-
-	@Before
-	public void setUp() throws Exception {
-		javaCompiler.clearClassPath();
-		javaCompiler.addClassPathOfClass(getClass());
-		if (getClass() != CompilerTest.class)
-			javaCompiler.addClassPathOfClass(CompilerTest.class);
-		javaCompiler.addClassPathOfClass(StringExtensions.class);
-		javaCompiler.addClassPathOfClass(Notifier.class);
-		javaCompiler.addClassPathOfClass(EcorePackage.class);
-		javaCompiler.addClassPathOfClass(XbasePackage.class);
-		javaCompiler.addClassPathOfClass(XtendPackage.class);
-		javaCompiler.addClassPathOfClass(Inject.class);
-		javaCompiler.addClassPathOfClass(Properties1.class);
-		javaCompiler.addClassPathOfClass(Function.class);
-		javaCompiler.addClassPathOfClass(StringConcatenation.class);
-		javaCompiler.addClassPathOfClass(Accessors.class);
-	}
 	
 	protected void invokeAndExpect2(Object expectation, String xtendclassBody, String methodToInvoke, Object... args)
 			throws Exception {
@@ -3209,7 +3193,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 	protected Class<?> compileJavaCode(String clazzName, String code) {
 		String javaCode = compileToJavaCode(code);
 		try {
-			Class<?> clazz = javaCompiler.compileToClass(clazzName, javaCode);
+			Class<?> clazz = compileToClass(clazzName, javaCode);
 			return clazz;
 		} catch (Exception e) {
 			System.err.println(javaCode);

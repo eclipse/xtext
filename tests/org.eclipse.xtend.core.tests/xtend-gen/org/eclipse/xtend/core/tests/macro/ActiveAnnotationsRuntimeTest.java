@@ -1,7 +1,6 @@
 package org.eclipse.xtend.core.tests.macro;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.io.File;
@@ -20,7 +19,6 @@ import org.eclipse.xtend.core.tests.macro.DelegatingClassloader;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendPackage;
-import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -91,7 +89,8 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
   
   @Before
   public void setUp() {
-    this.compiler.setJavaCompilerClassPath(MutableTypeDeclaration.class, IterableExtensions.class, Lists.class);
+    ClassLoader _classLoader = ActiveAnnotationsRuntimeTest.class.getClassLoader();
+    this.compiler.setJavaCompilerClassPath(_classLoader);
     this.configureFreshWorkspace();
   }
   
@@ -220,6 +219,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
           final DelegatingClassloader classLoader = new DelegatingClassloader(_classLoader, result);
           resourceSet.setClasspathURIContext(classLoader);
           ActiveAnnotationsRuntimeTest.this.processorProvider.setClassLoader(classLoader);
+          ActiveAnnotationsRuntimeTest.this.compiler.setJavaCompilerClassPath(classLoader);
         }
       };
       this.compiler.compile(macroResourceSet, _function);
