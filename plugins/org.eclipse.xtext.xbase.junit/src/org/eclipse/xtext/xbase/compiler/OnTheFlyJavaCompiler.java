@@ -52,7 +52,10 @@ import com.google.inject.Inject;
  * @noreference This class is not intended to be referenced by clients.
  * 
  * @since 2.7
+ * 
+ * @deprecated use {@link InMemoryJavaCompiler}
  */
+@Deprecated
 public class OnTheFlyJavaCompiler {
 
 	static class DelegateOutStream extends OutputStream {
@@ -443,7 +446,6 @@ public class OnTheFlyJavaCompiler {
 				Tuples.pair((Type) paramType2, "p2"));
 	}
 
-	@SuppressWarnings("deprecation")
 	public String getClasspathArgs() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("-classpath ");
