@@ -20,6 +20,7 @@ import org.junit.Test;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Deprecated
 public class OnTheFlyJavaCompilerTest extends Assert {
 	
 	@Rule
