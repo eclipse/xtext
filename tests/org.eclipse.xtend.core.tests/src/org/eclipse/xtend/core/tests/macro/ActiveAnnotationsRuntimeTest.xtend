@@ -1,6 +1,5 @@
 package org.eclipse.xtend.core.tests.macro
 
-import com.google.common.collect.Lists
 import com.google.inject.Inject
 import com.google.inject.Provider
 import java.io.File
@@ -13,7 +12,6 @@ import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
 import org.eclipse.xtend.core.validation.IssueCodes
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendPackage
-import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.diagnostics.Severity
@@ -57,7 +55,7 @@ class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests
 
 	@Before
 	def void setUp() {
-		compiler.setJavaCompilerClassPath(typeof(MutableTypeDeclaration), typeof(IterableExtensions), typeof(Lists))
+		compiler.javaCompilerClassPath = ActiveAnnotationsRuntimeTest.classLoader
 		configureFreshWorkspace()
 	}
 	
@@ -121,6 +119,7 @@ class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests
 			val classLoader = new DelegatingClassloader(getClass().classLoader, result)
 			resourceSet.classpathURIContext = classLoader
 			processorProvider.classLoader = classLoader
+			compiler.javaCompilerClassPath = classLoader 
 		]
 		
 		resourceSet
