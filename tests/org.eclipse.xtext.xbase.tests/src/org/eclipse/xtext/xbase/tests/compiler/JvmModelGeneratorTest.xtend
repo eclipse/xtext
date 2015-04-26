@@ -7,9 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.compiler
 
-import com.google.common.base.Supplier
 import com.google.inject.Inject
-import com.google.inject.Provider
 import foo.TestAnnotation
 import foo.TestAnnotation2
 import foo.TestAnnotations
@@ -29,13 +27,11 @@ import org.eclipse.xtext.junit4.TemporaryFolder
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
-import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler
-import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest
+import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler2
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelCompleter
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.eclipse.xtext.xbase.tests.typesystem.XbaseWithLogicalContainerInjectorProvider
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -50,19 +46,9 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	@Inject TypeReferences references
 	@Inject ValidationTestHelper helper
 	@Inject JvmModelGenerator generator
-	@Inject EclipseRuntimeDependentJavaCompiler javaCompiler
+	@Inject OnTheFlyJavaCompiler2 javaCompiler
 	@Inject TypesFactory typesFactory;
 	@Inject JvmModelCompleter completer
-
-	@Before
-	def void setUp() {
-		javaCompiler.clearClassPath();
-		javaCompiler.addClassPathOfClass(getClass());
-		javaCompiler.addClassPathOfClass(AbstractXbaseEvaluationTest)
-		javaCompiler.addClassPathOfClass(Functions)
-		javaCompiler.addClassPathOfClass(Provider)
-		javaCompiler.addClassPathOfClass(Supplier)
-	} 
 	
 	@Test
 	def void bug390290InnerClassMemberImport() {

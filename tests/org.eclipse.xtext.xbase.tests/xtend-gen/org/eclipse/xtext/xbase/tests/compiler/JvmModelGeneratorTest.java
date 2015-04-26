@@ -8,9 +8,7 @@
 package org.eclipse.xtext.xbase.tests.compiler;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Supplier;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import foo.TestAnnotation;
 import foo.TestAnnotation2;
 import foo.TestAnnotations;
@@ -51,15 +49,13 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
-import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler;
+import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler2;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
-import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelCompleter;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -67,7 +63,6 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.tests.typesystem.XbaseWithLogicalContainerInjectorProvider;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -94,24 +89,13 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
   private JvmModelGenerator generator;
   
   @Inject
-  private OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler javaCompiler;
+  private OnTheFlyJavaCompiler2 javaCompiler;
   
   @Inject
   private TypesFactory typesFactory;
   
   @Inject
   private JvmModelCompleter completer;
-  
-  @Before
-  public void setUp() {
-    this.javaCompiler.clearClassPath();
-    Class<? extends JvmModelGeneratorTest> _class = this.getClass();
-    this.javaCompiler.addClassPathOfClass(_class);
-    this.javaCompiler.addClassPathOfClass(AbstractXbaseEvaluationTest.class);
-    this.javaCompiler.addClassPathOfClass(Functions.class);
-    this.javaCompiler.addClassPathOfClass(Provider.class);
-    this.javaCompiler.addClassPathOfClass(Supplier.class);
-  }
   
   @Test
   public void bug390290InnerClassMemberImport() {

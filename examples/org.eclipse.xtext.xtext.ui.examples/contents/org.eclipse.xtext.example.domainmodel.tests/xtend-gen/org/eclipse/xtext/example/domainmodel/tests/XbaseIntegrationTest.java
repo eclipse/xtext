@@ -1,8 +1,6 @@
 package org.eclipse.xtext.example.domainmodel.tests;
 
-import com.google.common.base.Supplier;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.Iterator;
@@ -16,11 +14,9 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
-import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler;
+import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler2;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions;
-import org.junit.Before;
 import org.junit.runner.RunWith;
 
 /**
@@ -38,7 +34,7 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("all")
 public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
   @Inject
-  private OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler javaCompiler;
+  private OnTheFlyJavaCompiler2 javaCompiler;
   
   @Inject
   private ParseHelper<DomainModel> parseHelper;
@@ -48,17 +44,6 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
   
   @Inject
   private JvmModelGenerator generator;
-  
-  @Before
-  public void initializeClassPath() {
-    Class<? extends XbaseIntegrationTest> _class = this.getClass();
-    this.javaCompiler.addClassPathOfClass(_class);
-    this.javaCompiler.addClassPathOfClass(AbstractXbaseEvaluationTest.class);
-    this.javaCompiler.addClassPathOfClass(Functions.class);
-    this.javaCompiler.addClassPathOfClass(Provider.class);
-    this.javaCompiler.addClassPathOfClass(Supplier.class);
-    this.javaCompiler.addClassPathOfClass(javax.inject.Inject.class);
-  }
   
   @Override
   protected Object invokeXbaseExpression(final String expression) {

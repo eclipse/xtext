@@ -16,7 +16,7 @@ import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
+import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler2;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -27,10 +27,8 @@ import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
-import org.junit.Before;
 import org.junit.runner.RunWith;
 
-import com.google.common.base.Supplier;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -51,7 +49,7 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 	private ValidationTestHelper validationHelper;
 
 	@Inject
-	private EclipseRuntimeDependentJavaCompiler javaCompiler;
+	private OnTheFlyJavaCompiler2 javaCompiler;
 	
 	@Inject
 	private TypeReferences typeReferences;
@@ -62,17 +60,6 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 	@Inject
 	private IResourceScopeCache cache;
 	
-	@Before
-	public void setUp() throws Exception {
-		javaCompiler.clearClassPath();
-		javaCompiler.addClassPathOfClass(getClass());
-		javaCompiler.addClassPathOfClass(AbstractXbaseEvaluationTest.class);
-		javaCompiler.addClassPathOfClass(Functions.class);
-		javaCompiler.addClassPathOfClass(Provider.class);
-		javaCompiler.addClassPathOfClass(javax.inject.Provider.class);
-		javaCompiler.addClassPathOfClass(Supplier.class);
-	}
-
 	@Override
 	protected void assertEvaluatesTo(Object object, String string) {
 		final String compileToJavaCode = compileToJavaCode(string);
