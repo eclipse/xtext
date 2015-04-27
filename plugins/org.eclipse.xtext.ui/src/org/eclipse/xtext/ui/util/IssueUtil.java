@@ -7,7 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.util;
 
+import java.util.Map;
+
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
@@ -24,28 +27,56 @@ import com.google.inject.Inject;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
+ * @author Holger Schill
  */
 public class IssueUtil {
 
 	@Inject(optional=true)
 	private MarkerTypeProvider markerTypeProvider;
 	
+	/**
+	 * Creates an Issue out of a Marker.
+	 * setSyntaxError is unset since the current API does not allow fixing systax errors anyway.
+	 * 
+	 * @param marker The marker to create an issue from
+	 * @return an issue created out of the given marker or <code>null</code>
+	 */
 	public Issue createIssue(IMarker marker) {
 		Issue.IssueImpl issue = new Issue.IssueImpl();
-		issue.setMessage(MarkerUtilities.getMessage(marker));
-		
-		issue.setLineNumber(MarkerUtilities.getLineNumber(marker) - 1);
-		issue.setOffset(MarkerUtilities.getCharStart(marker));
-		issue.setLength(MarkerUtilities.getCharEnd(marker)-MarkerUtilities.getCharStart(marker));
-		
-		issue.setCode(getCode(marker));
-		issue.setData(getIssueData(marker));
-		issue.setUriToProblem(getUriToProblem(marker));
-		issue.setSeverity(getSeverity(marker));
-		
-		issue.setType(getCheckType(marker));
-		// Note, isSyntaxError is unset, but currently the api does not allow fixing
-		// syntax errors anyway.
+		try {
+			Map<String, Object> attributes = marker.getAttributes();
+			String markerType = marker.getType();
+			Object message = attributes.get(IMarker.MESSAGE);
+			issue.setMessage(message  instanceof String ? (String) message : null);
+			Object lineNumber = attributes.get(IMarker.LINE_NUMBER);
+			issue.setLineNumber(lineNumber instanceof Integer ? (Integer) lineNumber -1 : null);
+			Object offset = attributes.get(IMarker.CHAR_START);
+			Object endOffset = attributes.get(IMarker.CHAR_END);
+			if(offset instanceof Integer && endOffset instanceof Integer) {
+				issue.setOffset((Integer) offset);
+				issue.setLength((Integer) endOffset - (Integer) offset); 
+			} else {
+				issue.setOffset(null);
+				issue.setLength(null);
+			}
+			Object code = attributes.get(Issue.CODE_KEY);
+			issue.setCode(code instanceof String ? (String) code:null);
+			Object data = attributes.get(Issue.DATA_KEY);
+			issue.setData(data instanceof String ? Strings.unpack((String) data) : null);
+			Object uri = attributes.get(Issue.URI_KEY);
+			issue.setUriToProblem(uri instanceof String ? URI.createURI((String) uri) : null);
+			Object severity = attributes.get(IMarker.SEVERITY);
+			Severity translatedSeverity = translateSeverity(severity instanceof Integer ? (Integer) severity : 0);
+			if(translatedSeverity == null)
+				new IllegalArgumentException(marker.toString());
+			issue.setSeverity(translatedSeverity);
+			if(markerTypeProvider != null)
+				issue.setType(markerTypeProvider.getCheckType(markerType));
+			else
+				issue.setType(MarkerTypes.toCheckType(markerType));
+		} catch (CoreException e) {
+			return null;
+		}
 		return issue;
 	}
 
@@ -120,7 +151,20 @@ public class IssueUtil {
 	}
 	
 	public Severity getSeverity(IMarker marker) {
-		switch (marker.getAttribute(IMarker.SEVERITY, 0)) {
+		Severity translatedSeverity = translateSeverity(marker.getAttribute(IMarker.SEVERITY, 0));
+		if(translatedSeverity == null)
+			new IllegalArgumentException(marker.toString());
+		return translatedSeverity;
+	}
+
+	/**
+	 * Translates IMarker.SEVERITY to Severity
+	 * @param severity Severity to translate
+	 * @return Translated severity or <code>null</code>
+	 * @since 2.9
+	 */
+	protected Severity translateSeverity(int severity) {
+		switch (severity) {
 			case IMarker.SEVERITY_ERROR:
 				return Severity.ERROR;
 			case IMarker.SEVERITY_WARNING:
@@ -128,7 +172,7 @@ public class IssueUtil {
 			case IMarker.SEVERITY_INFO:
 				return Severity.INFO;
 			default:
-				throw new IllegalArgumentException(marker.toString());
+				return null;
 		}
 	}
 
