@@ -16,7 +16,7 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 
 	SaveResourceService.prototype.saveResource = function(editorContext, params) {
 		var serverData = {
-			contentType : params.contentType,
+			contentType : params.contentType
 		};
 		if (params.sendFullText) {
 			serverData.fullText = editorContext.getText();

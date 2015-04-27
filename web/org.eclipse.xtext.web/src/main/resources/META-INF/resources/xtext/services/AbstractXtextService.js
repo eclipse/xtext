@@ -29,7 +29,7 @@ define(["jquery"], function(jQuery) {
 				if (jQuery.isFunction(success)) {
 					accepted = success(result);
 				}
-				if (accepted) {
+				if (accepted || accepted === undefined) {
 					var listener = editorContext.getEditor().xtextServiceSuccessListener;
 					if (jQuery.isFunction(listener)) {
 						listener(self._requestType, result);

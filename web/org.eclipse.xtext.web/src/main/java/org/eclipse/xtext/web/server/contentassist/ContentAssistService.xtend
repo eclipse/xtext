@@ -12,6 +12,7 @@ import com.google.inject.Provider
 import com.google.inject.Singleton
 import java.util.Collections
 import java.util.concurrent.Executors
+import org.apache.log4j.Logger
 import org.eclipse.xtext.AbstractElement
 import org.eclipse.xtext.Keyword
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext
@@ -25,6 +26,8 @@ import org.eclipse.xtext.web.server.model.XtextWorkerThread
 @Singleton
 class ContentAssistService {
 	
+	val LOG = Logger.getLogger(class)
+	
 	@Inject Provider<ContentAssistContextFactory> contextFactoryProvider
 	
 	@Inject extension UpdateDocumentService updateDocumentService
@@ -33,6 +36,7 @@ class ContentAssistService {
 	
 	def createProposals(XtextWebDocumentAccess document, ITextRegion selection, int offset)
 			throws InvalidRequestException {
+		LOG.trace('Xtext Service: createProposals')
 		val contextFactory = contextFactoryProvider.get() => [it.pool = pool]
 		val contexts = document.priorityReadOnly([ it, cancelIndicator |
 			contextFactory.create(text, selection, offset, resource)
@@ -45,6 +49,7 @@ class ContentAssistService {
 	
 	def createProposalsWithUpdate(XtextWebDocumentAccess document, String deltaText, int deltaOffset,
 			int deltaReplaceLength, ITextRegion textSelection, int caretOffset) {
+		LOG.trace('Xtext Service: createProposalsWithUpdate')
 		val contextFactory = contextFactoryProvider.get() => [it.pool = pool]
 		val stateIdWrapper = ArrayLiterals.newArrayOfSize(1)
 		val contexts = document.modify([ it, cancelIndicator |

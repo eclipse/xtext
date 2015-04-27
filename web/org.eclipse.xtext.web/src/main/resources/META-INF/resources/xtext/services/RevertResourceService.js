@@ -10,16 +10,13 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 	
 	function RevertResourceService(serverUrl, resourceUri) {
 		this.initialize(serverUrl, resourceUri, "revert");
-		this._lastRequestId = 0;
 	};
 
 	RevertResourceService.prototype = new AbstractXtextService();
 
 	RevertResourceService.prototype.revertResource = function(editorContext, params) {
-		var requestId = ++this._lastRequestId;
 		var serverData = {
-			contentType : params.contentType,
-			requestId : requestId
+			contentType : params.contentType
 		};
 		
 		var self = this;
@@ -27,12 +24,10 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 			type : "POST",
 			data : serverData,
 			success : function(result) {
-				if (parseInt(result.requestId, 10) == self._lastRequestId) {
-					editorContext.setText(result.fullText);
-					editorContext.getEditor().getUndoStack().reset();
-					editorContext.markClean(!result.dirty);
-					editorContext.updateServerState(result.fullText, result.stateId);
-				}
+				editorContext.setText(result.fullText);
+				editorContext.getEditor().getUndoStack().reset();
+				editorContext.markClean(!result.dirty);
+				editorContext.updateServerState(result.fullText, result.stateId);
 			}
 		});
 	};

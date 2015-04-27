@@ -9,6 +9,7 @@ package org.eclipse.xtext.web.server.persistence
 
 import com.google.inject.Singleton
 import java.io.IOException
+import org.apache.log4j.Logger
 import org.eclipse.xtext.web.server.ISessionStore
 import org.eclipse.xtext.web.server.InvalidRequestException
 import org.eclipse.xtext.web.server.model.DocumentStateResult
@@ -20,8 +21,11 @@ import static org.eclipse.xtext.web.server.InvalidRequestException.Type.*
 @Singleton
 class ResourcePersistenceService {
 	
+	val LOG = Logger.getLogger(class)
+	
 	def load(String resourceId, IServerResourceHandler resourceHandler, ISessionStore sessionStore)
 			throws InvalidRequestException {
+		LOG.trace('Xtext Service: load')
 		val document = sessionStore.get(XtextWebDocument -> resourceId, [
 			try {
 				resourceHandler.get(resourceId)
@@ -39,6 +43,7 @@ class ResourcePersistenceService {
 	
 	def revert(String resourceId, IServerResourceHandler resourceHandler, ISessionStore sessionStore)
 			throws InvalidRequestException {
+		LOG.trace('Xtext Service: revert')
 		try {
 			val document = resourceHandler.get(resourceId)
 			val result = new ResourceContentResult(document.text)
@@ -52,6 +57,7 @@ class ResourcePersistenceService {
 	
 	def save(XtextWebDocumentAccess document, IServerResourceHandler resourceHandler)
 			throws InvalidRequestException {
+		LOG.trace('Xtext Service: save')
 		document.readOnly[ it, cancelIndicator |
 			try {
 				resourceHandler.put(it)

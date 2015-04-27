@@ -10,16 +10,13 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 	
 	function LoadResourceService(serverUrl, resourceUri) {
 		this.initialize(serverUrl, resourceUri, "load");
-		this._lastRequestId = 0;
 	};
 
 	LoadResourceService.prototype = new AbstractXtextService();
 
 	LoadResourceService.prototype.loadResource = function(editorContext, params) {
-		var requestId = ++this._lastRequestId;
 		var serverData = {
-			contentType : params.contentType,
-			requestId : requestId
+			contentType : params.contentType
 		};
 		
 		var self = this;
@@ -27,12 +24,10 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 			type : "GET",
 			data : serverData,
 			success : function(result) {
-				if (parseInt(result.requestId, 10) == self._lastRequestId) {
-					editorContext.setText(result.fullText);
-					editorContext.getEditor().getUndoStack().reset();
-					editorContext.markClean(!result.dirty);
-					editorContext.updateServerState(result.fullText, result.stateId);
-				}
+				editorContext.setText(result.fullText);
+				editorContext.getEditor().getUndoStack().reset();
+				editorContext.markClean(!result.dirty);
+				editorContext.updateServerState(result.fullText, result.stateId);
 			}
 		});
 	};

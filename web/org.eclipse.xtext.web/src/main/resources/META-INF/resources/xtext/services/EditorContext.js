@@ -24,9 +24,9 @@ define(function() {
 			return this._serverState;
 		},
 		
-		updateServerState : function(currentText, currentState) {
+		updateServerState : function(currentText, currentStateId) {
 			this._serverState.text = currentText;
-			this._serverState.state = currentState;
+			this._serverState.stateId = currentStateId;
 			if (this._serverStateListener) {
 				this._serverStateListener(this._serverState);
 			}
@@ -34,19 +34,6 @@ define(function() {
 		
 		setServerStateListener : function(listener) {
 			this._serverStateListener = listener;
-		},
-		
-		computeState : function(s) {
-			var hash = 0;
-			if (s.length == 0) {
-				return hash;
-			}
-			for (var i = 0; i < s.length; i++) {
-				hash = ((hash << 5) - hash) + s.charCodeAt(i);
-				// Truncate to 32 bit integer
-				hash = hash & hash;
-			}
-			return hash.toString(16);
 		},
 		
 		getCaretOffset : function() {

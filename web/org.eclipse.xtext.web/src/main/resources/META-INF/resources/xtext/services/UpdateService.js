@@ -8,7 +8,14 @@
 
 define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 	
-	function computeDelta(s1, s2, result) {
+	function UpdateService(serverUrl, resourceUri) {
+		this.initialize(serverUrl, resourceUri, "update");
+		this._completionCallbacks = [];
+	};
+	
+	UpdateService.prototype = new AbstractXtextService();
+	
+	UpdateService.prototype.computeDelta = function(s1, s2, result) {
 		var start = 0, s1length = s1.length, s2length = s2.length;
 		while (start < s1length && start < s2length && s1.charCodeAt(start) === s2.charCodeAt(start)) {
 			start++;
@@ -36,72 +43,59 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 		result.deltaReplaceLength = end1 - start + 1;
 	};
 	
-	function UpdateService(serverUrl, resourceUri) {
-		this.initialize(serverUrl, resourceUri, "update");
-	};
+	UpdateService.prototype.onComplete = function(xhr, textStatus) {
+		this._isRunningUpdate = false;
+		var callbacks = this._completionCallbacks;
+		this._completionCallbacks = [];
+		for (callback in callbacks) {
+			callback();
+		}
+	}
 	
-	UpdateService.prototype = new AbstractXtextService();
+	UpdateService.prototype.checkRunningUpdate = function(callback) {
+		if (this._isRunningUpdate) {
+			this._completionCallbacks.push(callback);
+			return true;
+		} else {
+			this._isRunningUpdate = true;
+			return false;
+		}
+	}
 
 	UpdateService.prototype.update = function(editorContext, params) {
-		if (this._runningUpdate) {
-			this._waitingUpdate = params;
+		if (this.checkRunningUpdate(function() { this.update(editorContext, params) })) {
 			return;
 		}
-		this._runningUpdate = true;
-		var self = this;
-		function onComplete(xhr, textStatus) {
-			self._runningUpdate = false;
-			var waitingUpdateParams = self._waitingUpdate;
-			if (waitingUpdateParams !== undefined) {
-				self._waitingUpdate = undefined;
-				self.update(editorContext, waitingUpdateParams);
-			}
-		}
-
+		
 		var serverData = {
 			contentType : params.contentType
 		};
 		var currentText = editorContext.getText();
-		var currentStateId = editorContext.computeState(currentText);
 		var knownServerState = editorContext.getServerState();
 		if (params.sendFullText || knownServerState.text === undefined) {
 			serverData.fullText = currentText;
 		} else {
-			var noUpdateNecessary = true;
-			if (currentText.length !== knownServerState.text.length || currentStateId !== knownServerState.state) {
-				computeDelta(knownServerState.text, currentText, serverData);
-				if (serverData.deltaText !== undefined) {
-					noUpdateNecessary = false;
-					serverData.requiredState = knownServerState.state;
-				}
-			}
-			if (noUpdateNecessary) {
-				onComplete();
+			this.computeDelta(knownServerState.text, currentText, serverData);
+			if (serverData.deltaText === undefined) {
+				this.onComplete();
 				return;
 			}
+			serverData.requiredStateId = knownServerState.stateId;
 		}
-		serverData.newState = currentStateId;
-		
+
+		var self = this;
 		self.sendRequest(editorContext, {
 			type : "PUT",
 			data : serverData,
 			success : function(result) {
-				if (result.stateId == currentStateId) {
-					editorContext.updateServerState(currentText, currentStateId);
-					return true;
-				}
-				return false;
+				editorContext.updateServerState(currentText, result.stateId);
+				return true;
 			},
 			error : function(xhr, textStatus, errorThrown) {
-				if (serverData.requiredState) {
-					// Maybe we have a conflict - try again with full text instead of delta
-					params.sendFullText = true;
-					self._waitingUpdate = params;
-					return true;
-				}
+				// TODO try again?
 				return false;
 			},
-			complete : onComplete
+			complete : self.onComplete
 		});
 	};
 	

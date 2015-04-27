@@ -26,7 +26,7 @@ import org.eclipse.xtext.web.server.persistence.ResourceBaseProviderImpl
 import org.eclipse.xtext.web.servlet.XtextServlet
 import javax.servlet.annotation.WebServlet
 
-@WebServlet(name = "Xtext Services", urlPatterns = "/xtext-services/*")
+@WebServlet(name = "Xtext Services", urlPatterns = "/xtext-service/*")
 class MyXtextServlet extends XtextServlet {
 
 	override init() {
