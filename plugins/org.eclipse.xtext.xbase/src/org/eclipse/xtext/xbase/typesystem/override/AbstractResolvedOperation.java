@@ -92,12 +92,6 @@ public abstract class AbstractResolvedOperation extends AbstractResolvedExecutab
 		return result;
 	}
 
-	protected JvmType getThrowableType(Class<? extends Throwable> type) {
-		ITypeReferenceOwner owner = getContextType().getOwner();
-		JvmType runtimeException = owner.getServices().getTypeReferences().findDeclaredType(type, owner.getContextResourceSet());
-		return runtimeException;
-	}
-	
 	protected boolean isIllegallyDeclaredException(LightweightTypeReference exception, List<IResolvedOperation> overriddenAndImplemented) {
 		for(IResolvedOperation operation: overriddenAndImplemented) {
 			if (operation.getOverrideCheckResult().getDetails().contains(OverrideCheckDetails.EXCEPTION_MISMATCH)) {
