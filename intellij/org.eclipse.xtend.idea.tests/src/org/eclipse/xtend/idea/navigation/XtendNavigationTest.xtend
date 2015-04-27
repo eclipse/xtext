@@ -8,21 +8,20 @@
 package org.eclipse.xtend.idea.navigation
 
 import com.intellij.openapi.util.TextRange
+import com.intellij.psi.PsiAnnotationMethod
+import com.intellij.psi.PsiAnonymousClass
+import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiEnumConstant
+import com.intellij.psi.PsiField
+import com.intellij.psi.PsiMethod
+import com.intellij.psi.PsiParameter
 import com.intellij.psi.impl.DebugUtil
 import java.util.Map
 import org.eclipse.xtend.idea.LightXtendTest
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.psi.PsiEObject
 import org.eclipse.xtext.psi.PsiNamedEObject
-import org.eclipse.xtext.xbase.idea.jvm.JvmPsiAnnotationMethodImpl
-import org.eclipse.xtext.xbase.idea.jvm.JvmPsiAnonymousClass
-import org.eclipse.xtext.xbase.idea.jvm.JvmPsiAnonymousClassImpl
-import org.eclipse.xtext.xbase.idea.jvm.JvmPsiClassImpl
-import org.eclipse.xtext.xbase.idea.jvm.JvmPsiEnumConstantImpl
-import org.eclipse.xtext.xbase.idea.jvm.JvmPsiFieldImpl
-import org.eclipse.xtext.xbase.idea.jvm.JvmPsiMethodImpl
-import org.eclipse.xtext.xbase.idea.jvm.JvmPsiParameterImpl
 import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass
 
 import static org.eclipse.xtend.idea.navigation.NavigationTestData.*
@@ -46,7 +45,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			JvmPsiParameterImpl
+			PsiParameter
 		)
 	}
 
@@ -68,7 +67,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			JvmPsiClassImpl
+			PsiClass
 		)
 	}
 
@@ -150,7 +149,7 @@ class XtendNavigationTest extends LightXtendTest {
 					static class Baz extends «REFERENCE_OFFSET»Bar {}
 				}
 			''',
-			JvmPsiClassImpl
+			PsiClass
 		)
 	}
 
@@ -181,7 +180,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			JvmPsiAnonymousClass
+			PsiAnonymousClass
 		)
 	}
 
@@ -212,7 +211,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			JvmPsiAnonymousClass
+			PsiAnonymousClass
 		)
 	}
 
@@ -274,7 +273,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			JvmPsiAnonymousClass
+			PsiAnonymousClass
 		)
 	}
 
@@ -302,7 +301,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			JvmPsiAnonymousClassImpl
+			PsiAnonymousClass
 		)
 	}
 
@@ -350,7 +349,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			JvmPsiEnumConstantImpl
+			PsiEnumConstant
 		)
 	}
 
@@ -372,7 +371,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			JvmPsiMethodImpl
+			PsiMethod
 		)
 		assertTrue(psiConstructor.constructor)
 	}
@@ -395,7 +394,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			JvmPsiMethodImpl
+			PsiMethod
 		)
 		assertFalse(psiMethod.constructor)
 	}
@@ -418,7 +417,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			JvmPsiAnnotationMethodImpl
+			PsiAnnotationMethod
 		)
 	}
 
@@ -438,7 +437,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			JvmPsiFieldImpl
+			PsiField
 		)
 	}
 

@@ -119,7 +119,7 @@ class JvmPsiClassTest extends LightXtendTest {
 		assertEquals('someMethod', method.name)
 		
 		val psiClass = 'mypackage.Foo'.findJvmPsiClass
-		assertEquals(psiClass.delegate, method.containingClass)
+		assertEquals(psiClass, method.containingClass)
 	}
 
 	def void testMethodBodyWithErrors() {
@@ -150,10 +150,6 @@ class JvmPsiClassTest extends LightXtendTest {
 		''')
 		val psiClass = 'mypackage.Foo'.findJvmPsiClass
 		psiClass.type.loadingTypeResource = true
-		psiClass.psiClassProvider = [
-			fail()
-			null
-		]
 		assertEquals('Foo', psiClass.name)
 		assertEquals('mypackage.Foo', psiClass.qualifiedName)
 		assertNotNull(psiClass.containingFile)
@@ -181,10 +177,6 @@ class JvmPsiClassTest extends LightXtendTest {
 		''')
 		val psiClass = 'mypackage.Foo'.findJvmPsiClass
 		psiClass.type.loadingTypeResource = true
-		psiClass.psiClassProvider = [
-			fail()
-			null
-		]
 
 		assertFalse(psiClass.modifierList.hasModifierProperty(PsiModifier.PUBLIC))
 		assertTrue(psiClass.modifierList.hasModifierProperty(PsiModifier.PACKAGE_LOCAL))
@@ -204,10 +196,6 @@ class JvmPsiClassTest extends LightXtendTest {
 		''')
 		val psiClass = 'mypackage.Foo'.findJvmPsiClass
 		psiClass.type.loadingTypeResource = true
-		psiClass.psiClassProvider = [
-			fail()
-			null
-		]
 		assertTrue(psiClass.interface)
 	}
 
@@ -220,10 +208,6 @@ class JvmPsiClassTest extends LightXtendTest {
 		''')
 		val psiClass = 'mypackage.Foo'.findJvmPsiClass
 		psiClass.type.loadingTypeResource = true
-		psiClass.psiClassProvider = [
-			fail()
-			null
-		]
 		assertTrue(psiClass.enum)
 	}
 
@@ -236,10 +220,6 @@ class JvmPsiClassTest extends LightXtendTest {
 		''')
 		val psiClass = 'mypackage.Foo'.findJvmPsiClass
 		psiClass.type.loadingTypeResource = true
-		psiClass.psiClassProvider = [
-			fail()
-			null
-		]
 		assertTrue(psiClass.annotationType)
 	}
 
@@ -379,7 +359,7 @@ class JvmPsiClassTest extends LightXtendTest {
 		val typeParameter = typeParameters.head
 		assertEquals(0, typeParameter.index)
 		assertEquals('T', typeParameter.name)
-		assertEquals(psiClass.delegate, typeParameter.owner)
+		assertEquals(psiClass, typeParameter.owner)
 
 		val extendsList = typeParameter.extendsList
 		assertEquals(PsiReferenceList.Role.EXTENDS_BOUNDS_LIST, extendsList.role)
