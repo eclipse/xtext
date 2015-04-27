@@ -65,7 +65,6 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -104,23 +103,18 @@ public class JvmPsiClassProvider implements PsiElementProvider {
   
   @Override
   public PsiElement get() {
-    JvmPsiClass _get = this.jvmPsiClassProvider.get();
-    final Procedure1<JvmPsiClass> _function = new Procedure1<JvmPsiClass>() {
+    final JvmPsiClass result = this.jvmPsiClassProvider.get();
+    PsiClass _createStub = this.createStub();
+    result.setStub(_createStub);
+    result.setType(this.jvmDeclaredType);
+    final Provider<PsiClass> _function = new Provider<PsiClass>() {
       @Override
-      public void apply(final JvmPsiClass jvmPsiClass) {
-        PsiClass _createStub = JvmPsiClassProvider.this.createStub();
-        jvmPsiClass.setStub(_createStub);
-        jvmPsiClass.setType(JvmPsiClassProvider.this.jvmDeclaredType);
-        final Provider<PsiClass> _function = new Provider<PsiClass>() {
-          @Override
-          public PsiClass get() {
-            return JvmPsiClassProvider.this.createPsiClass();
-          }
-        };
-        jvmPsiClass.setPsiClassProvider(_function);
+      public PsiClass get() {
+        return JvmPsiClassProvider.this.createPsiClass();
       }
     };
-    return ObjectExtensions.<JvmPsiClass>operator_doubleArrow(_get, _function);
+    result.setPsiClassProvider(_function);
+    return result;
   }
   
   protected PsiClass createPsiClass() {

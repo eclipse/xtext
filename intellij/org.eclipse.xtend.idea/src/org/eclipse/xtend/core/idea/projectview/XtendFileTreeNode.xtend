@@ -35,8 +35,9 @@ class XtendFileTreeNode extends PsiFileNode {
 	}
 
 	override getChildrenImpl() {
+		val viewSettings = settings
 		xtendFile.psiClasses.map [ psiClass |
-			new ClassTreeNode(project, psiClass, settings)
+			new ClassTreeNode(project, psiClass, viewSettings)
 		].filter(AbstractTreeNode).toList
 	}
 

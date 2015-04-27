@@ -36,16 +36,16 @@ public class IssueAnnotator implements Annotator {
 		if (!(element instanceof PsiEObject)) {
 			return;
 		}
+		Language language = element.getLanguage();
+		if (!(language instanceof IXtextLanguage)) {
+			return;
+		}
 		PsiEObject psiEObject = (PsiEObject) element;
 		if (!psiEObject.isRoot()) {
 			return;
 		}
 		Resource resource = psiEObject.getResource();
 		if (resource == null) {
-			return;
-		}
-		Language language = psiEObject.getLanguage();
-		if (!(language instanceof IXtextLanguage)) {
 			return;
 		}
 		IXtextLanguage xtextLanguage = (IXtextLanguage) language;

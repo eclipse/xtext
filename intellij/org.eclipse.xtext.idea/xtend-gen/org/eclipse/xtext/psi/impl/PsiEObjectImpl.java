@@ -276,9 +276,6 @@ public class PsiEObjectImpl<T extends PsiNamedEObjectStub<?>> extends StubBasedP
     return _significantTextRegion.getOffset();
   }
   
-  /**
-   * @return
-   */
   protected ITextRegion getSignificantTextRegion() {
     ITextRegion _xtrycatchfinallyexpression = null;
     try {

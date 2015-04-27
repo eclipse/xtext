@@ -17,6 +17,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiFile;
 import java.util.Collection;
+import java.util.List;
 import org.eclipse.xtend.core.idea.lang.XtendLanguage;
 import org.eclipse.xtend.core.idea.lang.psi.impl.XtendFileImpl;
 import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClasses;
@@ -45,18 +46,22 @@ public class XtendFileTreeNode extends PsiFileNode {
   
   @Override
   public Collection<AbstractTreeNode> getChildrenImpl() {
-    XtendFileImpl _xtendFile = this.getXtendFile();
-    Iterable<PsiClass> _psiClasses = this._jvmPsiClasses.getPsiClasses(_xtendFile);
-    final Function1<PsiClass, ClassTreeNode> _function = new Function1<PsiClass, ClassTreeNode>() {
-      @Override
-      public ClassTreeNode apply(final PsiClass psiClass) {
-        Project _project = XtendFileTreeNode.this.getProject();
-        ViewSettings _settings = XtendFileTreeNode.this.getSettings();
-        return new ClassTreeNode(_project, psiClass, _settings);
-      }
-    };
-    Iterable<ClassTreeNode> _map = IterableExtensions.<PsiClass, ClassTreeNode>map(_psiClasses, _function);
-    Iterable<AbstractTreeNode> _filter = Iterables.<AbstractTreeNode>filter(_map, AbstractTreeNode.class);
-    return IterableExtensions.<AbstractTreeNode>toList(_filter);
+    List<AbstractTreeNode> _xblockexpression = null;
+    {
+      final ViewSettings viewSettings = this.getSettings();
+      XtendFileImpl _xtendFile = this.getXtendFile();
+      Iterable<PsiClass> _psiClasses = this._jvmPsiClasses.getPsiClasses(_xtendFile);
+      final Function1<PsiClass, ClassTreeNode> _function = new Function1<PsiClass, ClassTreeNode>() {
+        @Override
+        public ClassTreeNode apply(final PsiClass psiClass) {
+          Project _project = XtendFileTreeNode.this.getProject();
+          return new ClassTreeNode(_project, psiClass, viewSettings);
+        }
+      };
+      Iterable<ClassTreeNode> _map = IterableExtensions.<PsiClass, ClassTreeNode>map(_psiClasses, _function);
+      Iterable<AbstractTreeNode> _filter = Iterables.<AbstractTreeNode>filter(_map, AbstractTreeNode.class);
+      _xblockexpression = IterableExtensions.<AbstractTreeNode>toList(_filter);
+    }
+    return _xblockexpression;
   }
 }

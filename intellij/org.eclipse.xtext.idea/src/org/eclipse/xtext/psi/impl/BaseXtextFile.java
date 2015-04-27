@@ -115,8 +115,10 @@ public abstract class BaseXtextFile extends PsiFileBase {
 
     			@Override
 				public Result<XtextResource> compute() {
+    				// check whether the cached resource is still up-to-date or will be computed
 					boolean hasUpToDateValue = resourceCache.hasUpToDateValue();
 					XtextResource resource = resourceCache.getValue();
+					// if we reuse an existing resource, we have to relink it
 					if (hasUpToDateValue) {
 						resource.getResourceSet().getResources().retainAll(Collections.singletonList(resource));
 						resource.relink();
@@ -194,6 +196,9 @@ public abstract class BaseXtextFile extends PsiFileBase {
 
 	protected void installResourceDescription(Resource resource) {
 		try {
+			if (compilerPhases.isIndexing(resource)) {
+				throw new IllegalStateException("Was already indexing resource set for " + resource.getURI());
+			}
 			compilerPhases.setIndexing(resource, true);
 			/*
 			 * Avoid deadlocks when a language accesses the index during indexing, 
@@ -204,31 +209,34 @@ public abstract class BaseXtextFile extends PsiFileBase {
 		} catch(OperationCanceledError e) {
 			throw e.getWrapped();
 		} finally {
-			compilerPhases.setIndexing(resource, false);
 			FileBasedIndexImpl.enableUpToDateCheckForCurrentThread();
+			compilerPhases.setIndexing(resource, false);
 		}
 	}
 
 	protected void installDerivedState(Resource resource) {
 		if (resource instanceof DerivedStateAwareResource) {
 			final DerivedStateAwareResource derivedStateAwareResource = (DerivedStateAwareResource) resource;
-			if (derivedStateAwareResource instanceof ISynchronizable<?>) {
-				ISynchronizable<?> synchronizable = (ISynchronizable<?>) derivedStateAwareResource;
-				try {
-					synchronizable.execute(new IUnitOfWork<Void, Object>() {
-
-						@Override
-						public java.lang.Void exec(Object state) throws Exception {
-							doInstallDerivedState(derivedStateAwareResource);
-							return null;
-						}
-						
-					});
-				} catch (Exception e) {
-					Exceptions.sneakyThrow(e);
+			// avoid synchronization of the resource
+			if (!derivedStateAwareResource.isFullyInitialized()) {
+				if (derivedStateAwareResource instanceof ISynchronizable<?>) {
+					ISynchronizable<?> synchronizable = (ISynchronizable<?>) derivedStateAwareResource;
+					try {
+						synchronizable.execute(new IUnitOfWork<Void, Object>() {
+	
+							@Override
+							public java.lang.Void exec(Object state) throws Exception {
+								doInstallDerivedState(derivedStateAwareResource);
+								return null;
+							}
+							
+						});
+					} catch (Exception e) {
+						Exceptions.sneakyThrow(e);
+					}
+				} else {
+					doInstallDerivedState(derivedStateAwareResource);
 				}
-			} else {
-				doInstallDerivedState(derivedStateAwareResource);
 			}
 		}
 	}

@@ -9,8 +9,8 @@ package org.eclipse.xtext.xbase.idea.types.psi
 
 import org.eclipse.emf.common.notify.Notifier
 import org.eclipse.emf.common.notify.impl.AdapterImpl
+import org.eclipse.emf.ecore.util.EcoreUtil
 
-import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 import static extension org.eclipse.xtext.EcoreUtil2.*
 
 /**
@@ -18,30 +18,26 @@ import static extension org.eclipse.xtext.EcoreUtil2.*
  */
 class LoadingTypeResourcePhase extends AdapterImpl {
 
+	static val LoadingTypeResourcePhase INSTANCE = new LoadingTypeResourcePhase()
+
 	override isAdapterForType(Object type) {
-		LoadingTypeResourcePhase == type
+		INSTANCE == type
 	}
 
 	static def isLoadingTypeResource(Notifier ctx) {
 		val resourceSet = ctx.resourceSet
 		if (resourceSet == null) {
 			return false
-		} 
-		resourceSet.eAdapters.getAdapter(LoadingTypeResourcePhase) != null
+		}
+		EcoreUtil.getAdapter(resourceSet.eAdapters, INSTANCE) != null
 	}
 
 	static def void setLoadingTypeResource(Notifier ctx, boolean loadingTypeResource) {
-		val resourceSet = ctx.resourceSet
+		val adapters = ctx.resourceSet.eAdapters
 		if (loadingTypeResource) {
-			resourceSet.eAdapters += new LoadingTypeResourcePhase
+			adapters.add(INSTANCE)
 		} else {
-			val i = resourceSet.eAdapters.iterator
-			while (i.hasNext) {
-				if (i.next.isAdapterForType(LoadingTypeResourcePhase)) {
-					i.remove
-					return
-				}
-			}
+			adapters.remove(INSTANCE)
 		}
 	}
 
