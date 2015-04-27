@@ -48,7 +48,9 @@ public class IssuesProvider {
 					IMarker[] markers;
 					markers = ((IFile) iStorage).findMarkers(EValidator.MARKER, true, 1);
 					for (IMarker iMarker : markers) {
-						result.add(issueUtil.createIssue(iMarker));
+						Issue issue = issueUtil.createIssue(iMarker);
+						if(issue != null)
+							result.add(issue);
 					}
 				} catch (CoreException e) {
 					log.error(e.getMessage(), e);
