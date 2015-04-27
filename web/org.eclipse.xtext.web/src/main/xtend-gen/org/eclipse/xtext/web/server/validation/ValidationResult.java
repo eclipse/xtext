@@ -10,11 +10,13 @@ package org.eclipse.xtext.web.server.validation;
 import java.util.ArrayList;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.Data;
+import org.eclipse.xtend.lib.annotations.ToString;
 import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Accessors
+@ToString
 @SuppressWarnings("all")
 public class ValidationResult implements IServiceResult {
   @Data
@@ -132,5 +134,13 @@ public class ValidationResult implements IServiceResult {
   @Pure
   public ArrayList<ValidationResult.Entry> getEntries() {
     return this.entries;
+  }
+  
+  @Override
+  @Pure
+  public String toString() {
+    ToStringBuilder b = new ToStringBuilder(this);
+    b.add("entries", this.entries);
+    return b.toString();
   }
 }

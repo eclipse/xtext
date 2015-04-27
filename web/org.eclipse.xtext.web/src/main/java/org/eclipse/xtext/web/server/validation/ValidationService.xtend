@@ -9,7 +9,6 @@ package org.eclipse.xtext.web.server.validation
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import org.apache.log4j.Logger
 import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.web.server.InvalidRequestException
 import org.eclipse.xtext.web.server.model.UpdateDocumentService
@@ -18,12 +17,9 @@ import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess
 @Singleton
 class ValidationService {
 	
-	val LOG = Logger.getLogger(class)
-	
 	@Inject extension UpdateDocumentService updateDocumentService
 	
 	def validate(XtextWebDocumentAccess document) throws InvalidRequestException {
-		LOG.trace('Xtext Service: validate')
 		val issues = document.readOnly[ it, cancelIndicator |
 			processUpdatedDocument(cancelIndicator)
 			return issues

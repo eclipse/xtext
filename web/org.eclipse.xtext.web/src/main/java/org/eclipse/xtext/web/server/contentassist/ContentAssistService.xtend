@@ -11,8 +11,7 @@ import com.google.inject.Inject
 import com.google.inject.Provider
 import com.google.inject.Singleton
 import java.util.Collections
-import java.util.concurrent.Executors
-import org.apache.log4j.Logger
+import java.util.concurrent.ExecutorService
 import org.eclipse.xtext.AbstractElement
 import org.eclipse.xtext.Keyword
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext
@@ -21,26 +20,22 @@ import org.eclipse.xtext.util.ITextRegion
 import org.eclipse.xtext.web.server.InvalidRequestException
 import org.eclipse.xtext.web.server.model.UpdateDocumentService
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess
-import org.eclipse.xtext.web.server.model.XtextWorkerThread
 
 @Singleton
 class ContentAssistService {
-	
-	val LOG = Logger.getLogger(class)
 	
 	@Inject Provider<ContentAssistContextFactory> contextFactoryProvider
 	
 	@Inject extension UpdateDocumentService updateDocumentService
 	
-	val pool = Executors.newFixedThreadPool(3)
+	@Inject ExecutorService executorService
 	
 	def createProposals(XtextWebDocumentAccess document, ITextRegion selection, int offset)
 			throws InvalidRequestException {
-		LOG.trace('Xtext Service: createProposals')
-		val contextFactory = contextFactoryProvider.get() => [it.pool = pool]
+		val contextFactory = contextFactoryProvider.get() => [it.pool = executorService]
 		val contexts = document.priorityReadOnly([ it, cancelIndicator |
 			contextFactory.create(text, selection, offset, resource)
-		], new XtextWorkerThread[ it, cancelIndicator |
+		], [ it, cancelIndicator |
 			processUpdatedDocument(cancelIndicator)
 			return null
 		])
@@ -49,8 +44,7 @@ class ContentAssistService {
 	
 	def createProposalsWithUpdate(XtextWebDocumentAccess document, String deltaText, int deltaOffset,
 			int deltaReplaceLength, ITextRegion textSelection, int caretOffset) {
-		LOG.trace('Xtext Service: createProposalsWithUpdate')
-		val contextFactory = contextFactoryProvider.get() => [it.pool = pool]
+		val contextFactory = contextFactoryProvider.get() => [it.pool = executorService]
 		val stateIdWrapper = ArrayLiterals.newArrayOfSize(1)
 		val contexts = document.modify([ it, cancelIndicator |
 			dirty = true
@@ -59,7 +53,7 @@ class ContentAssistService {
 			stateIdWrapper.set(0, stateId)
 			updateText(deltaText, deltaOffset, deltaReplaceLength)
 			contextFactory.create(text, textSelection, caretOffset, resource)
-		], new XtextWorkerThread[ it, cancelIndicator |
+		], [ it, cancelIndicator |
 			processUpdatedDocument(cancelIndicator)
 			return null
 		])

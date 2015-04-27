@@ -25,6 +25,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
@@ -49,12 +50,15 @@ public class XtextServlet extends HttpServlet {
       super.service(req, resp);
     } catch (final Throwable _t) {
       if (_t instanceof InvalidRequestException) {
-        final InvalidRequestException exception = (InvalidRequestException)_t;
-        String _message = exception.getMessage();
-        String _plus = ("Invalid Xtext Request: " + _message);
-        this.LOG.trace(_plus);
+        final InvalidRequestException ire = (InvalidRequestException)_t;
+        String _requestURI = req.getRequestURI();
+        String _plus = ("Invalid request (" + _requestURI);
+        String _plus_1 = (_plus + "): ");
+        String _message = ire.getMessage();
+        String _plus_2 = (_plus_1 + _message);
+        this.LOG.trace(_plus_2);
         int _switchResult = (int) 0;
-        InvalidRequestException.Type _type = exception.getType();
+        InvalidRequestException.Type _type = ire.getType();
         if (_type != null) {
           switch (_type) {
             case RESOURCE_NOT_FOUND:
@@ -71,8 +75,15 @@ public class XtextServlet extends HttpServlet {
           _switchResult = 400;
         }
         final int statusCode = _switchResult;
-        String _message_1 = exception.getMessage();
+        String _message_1 = ire.getMessage();
         resp.sendError(statusCode, _message_1);
+      } else if (_t instanceof OperationCanceledError) {
+        final OperationCanceledError oce = (OperationCanceledError)_t;
+        String _requestURI_1 = req.getRequestURI();
+        String _plus_3 = ("Service canceled (" + _requestURI_1);
+        String _plus_4 = (_plus_3 + ")");
+        this.LOG.trace(_plus_4);
+        resp.sendError(409, "The requested service has been canceled by another request.");
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -139,8 +150,10 @@ public class XtextServlet extends HttpServlet {
   
   protected void doService(final XtextServiceDispatcher.ServiceDescriptor service, final HttpServletResponse resp) {
     try {
+      IServiceResult result = null;
       Function0<? extends IServiceResult> _service = service.getService();
-      final IServiceResult result = _service.apply();
+      IServiceResult _apply = _service.apply();
+      result = _apply;
       resp.setStatus(HttpServletResponse.SC_OK);
       resp.setContentType("text/x-json;charset=UTF-8");
       resp.setHeader("Cache-Control", "no-cache");

@@ -17,8 +17,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import org.apache.log4j.Logger;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
@@ -32,7 +30,6 @@ import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 import org.eclipse.xtext.web.server.model.UpdateDocumentService;
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess;
-import org.eclipse.xtext.web.server.model.XtextWorkerThread;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -42,8 +39,6 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @Singleton
 @SuppressWarnings("all")
 public class ContentAssistService {
-  private final Logger LOG = Logger.getLogger(this.getClass());
-  
   @Inject
   private Provider<ContentAssistContextFactory> contextFactoryProvider;
   
@@ -51,15 +46,15 @@ public class ContentAssistService {
   @Extension
   private UpdateDocumentService updateDocumentService;
   
-  private final ExecutorService pool = Executors.newFixedThreadPool(3);
+  @Inject
+  private ExecutorService executorService;
   
   public ContentAssistResult createProposals(final XtextWebDocumentAccess document, final ITextRegion selection, final int offset) throws InvalidRequestException {
-    this.LOG.trace("Xtext Service: createProposals");
     ContentAssistContextFactory _get = this.contextFactoryProvider.get();
     final Procedure1<ContentAssistContextFactory> _function = new Procedure1<ContentAssistContextFactory>() {
       @Override
       public void apply(final ContentAssistContextFactory it) {
-        it.setPool(ContentAssistService.this.pool);
+        it.setPool(ContentAssistService.this.executorService);
       }
     };
     final ContentAssistContextFactory contextFactory = ObjectExtensions.<ContentAssistContextFactory>operator_doubleArrow(_get, _function);
@@ -71,25 +66,23 @@ public class ContentAssistService {
         return contextFactory.create(_text, selection, offset, _resource);
       }
     };
-    final CancelableUnitOfWork<Object, IXtextWebDocument> _function_2 = new CancelableUnitOfWork<Object, IXtextWebDocument>() {
+    final CancelableUnitOfWork<ContentAssistContext[], IXtextWebDocument> _function_2 = new CancelableUnitOfWork<ContentAssistContext[], IXtextWebDocument>() {
       @Override
-      public Object exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
+      public ContentAssistContext[] exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
         ContentAssistService.this.updateDocumentService.processUpdatedDocument(it, cancelIndicator);
         return null;
       }
     };
-    XtextWorkerThread _xtextWorkerThread = new XtextWorkerThread(_function_2);
-    final ContentAssistContext[] contexts = document.<ContentAssistContext[]>priorityReadOnly(_function_1, _xtextWorkerThread);
+    final ContentAssistContext[] contexts = document.<ContentAssistContext[]>priorityReadOnly(_function_1, _function_2);
     return this.createProposals(contexts, null);
   }
   
   public ContentAssistResult createProposalsWithUpdate(final XtextWebDocumentAccess document, final String deltaText, final int deltaOffset, final int deltaReplaceLength, final ITextRegion textSelection, final int caretOffset) {
-    this.LOG.trace("Xtext Service: createProposalsWithUpdate");
     ContentAssistContextFactory _get = this.contextFactoryProvider.get();
     final Procedure1<ContentAssistContextFactory> _function = new Procedure1<ContentAssistContextFactory>() {
       @Override
       public void apply(final ContentAssistContextFactory it) {
-        it.setPool(ContentAssistService.this.pool);
+        it.setPool(ContentAssistService.this.executorService);
       }
     };
     final ContentAssistContextFactory contextFactory = ObjectExtensions.<ContentAssistContextFactory>operator_doubleArrow(_get, _function);
@@ -119,8 +112,7 @@ public class ContentAssistService {
         return null;
       }
     };
-    XtextWorkerThread _xtextWorkerThread = new XtextWorkerThread(_function_2);
-    final ContentAssistContext[] contexts = document.<ContentAssistContext[]>modify(_function_1, _xtextWorkerThread);
+    final ContentAssistContext[] contexts = document.<ContentAssistContext[]>modify(_function_1, _function_2);
     String _get_1 = stateIdWrapper[0];
     return this.createProposals(contexts, _get_1);
   }

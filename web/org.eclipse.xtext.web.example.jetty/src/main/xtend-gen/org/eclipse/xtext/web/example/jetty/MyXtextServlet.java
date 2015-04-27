@@ -15,7 +15,10 @@ import com.google.inject.binder.LinkedBindingBuilder;
 import com.google.inject.binder.ScopedBindingBuilder;
 import com.google.inject.name.Named;
 import com.google.inject.name.Names;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javax.servlet.annotation.WebServlet;
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
@@ -34,7 +37,15 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 @WebServlet(name = "Xtext Services", urlPatterns = "/xtext-service/*")
 @SuppressWarnings("all")
 public class MyXtextServlet extends XtextServlet {
+  @FinalFieldsConstructor
   public static class EntitiesIdeModule extends AbstractGenericModule {
+    private final ExecutorService executorService;
+    
+    public void configureExecutorService(final Binder binder) {
+      AnnotatedBindingBuilder<ExecutorService> _bind = binder.<ExecutorService>bind(ExecutorService.class);
+      _bind.toInstance(this.executorService);
+    }
+    
     public ScopedBindingBuilder configureContentAssistLexer(final Binder binder) {
       AnnotatedBindingBuilder<Lexer> _bind = binder.<Lexer>bind(Lexer.class);
       Named _named = Names.named(LexerIdeBindings.CONTENT_ASSIST);
@@ -60,22 +71,39 @@ public class MyXtextServlet extends XtextServlet {
     private String getResourceBase() {
       return "./test-files";
     }
+    
+    public EntitiesIdeModule(final ExecutorService executorService) {
+      super();
+      this.executorService = executorService;
+    }
   }
+  
+  private ExecutorService executorService;
   
   @Override
   public void init() {
     try {
+      super.init();
+      ExecutorService _newCachedThreadPool = Executors.newCachedThreadPool();
+      this.executorService = _newCachedThreadPool;
       new EntitiesStandaloneSetup() {
         @Override
         public Injector createInjector() {
           EntitiesRuntimeModule _entitiesRuntimeModule = new EntitiesRuntimeModule();
-          MyXtextServlet.EntitiesIdeModule _entitiesIdeModule = new MyXtextServlet.EntitiesIdeModule();
+          MyXtextServlet.EntitiesIdeModule _entitiesIdeModule = new MyXtextServlet.EntitiesIdeModule(MyXtextServlet.this.executorService);
           return Guice.createInjector(_entitiesRuntimeModule, _entitiesIdeModule);
         }
       }.createInjectorAndDoEMFRegistration();
-      super.init();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  @Override
+  public void destroy() {
+    if ((this.executorService != null)) {
+      this.executorService.shutdown();
+    }
+    super.destroy();
   }
 }

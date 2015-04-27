@@ -14,8 +14,10 @@ import com.google.inject.Singleton
 import java.io.IOException
 import java.util.Map
 import java.util.StringTokenizer
+import org.apache.log4j.Logger
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.annotations.ToString
 import org.eclipse.xtext.resource.FileExtensionProvider
 import org.eclipse.xtext.resource.IResourceFactory
 import org.eclipse.xtext.resource.XtextResource
@@ -36,12 +38,15 @@ import static org.eclipse.xtext.web.server.InvalidRequestException.Type.*
 class XtextServiceDispatcher {
 	
 	@Accessors
+	@ToString
 	static class ServiceDescriptor {
 		String type
 		private ()=>IServiceResult service
 		boolean hasSideEffects
 		boolean hasTextInput
 	}
+	
+	static val LOG = Logger.getLogger(XtextServiceDispatcher)
 	
 	@Inject ResourcePersistenceService resourcePersistenceService
 	@Inject UpdateDocumentService updateDocumentService
@@ -55,6 +60,17 @@ class XtextServiceDispatcher {
 	
 	def getService(String path, Map<String, String> parameters, ISessionStore sessionStore) throws InvalidRequestException {
 		val requestType = getRequestType(path, parameters)
+		if (LOG.traceEnabled) {
+			val stringParams = parameters.entrySet.sortBy[key].join(': ', ', ', '', [
+				if (value.length > 18)
+					key + '=\'' + value.substring(0, 16) + '...\''
+				else if (value.matches('.*\\s+.*'))
+					key + '=\'' + value + '\''
+				else
+					key + '=' + value
+			]).replaceAll('(\\n|\\f|\\r)+', ' ')
+			LOG.trace('xtext-service/' + requestType + stringParams)
+		}
 		
 		switch requestType {
 			case 'load':
@@ -119,11 +135,13 @@ class XtextServiceDispatcher {
 		if (resourceId === null)
 			throw new InvalidRequestException(INVALID_PARAMETERS, 'The parameter \'resource\' is required.')
 		val fullText = parameters.get('fullText')
+		val initializedFromFullText = ArrayLiterals.newBooleanArrayOfSize(1)
 		val document = new XtextWebDocumentAccess(getResourceDocument(resourceId, sessionStore, [
 			// If the resource does not exist, create a dummy resource for the given full text
-			if (fullText !== null)
+			if (fullText !== null) {
+				initializedFromFullText.set(0, true)
 				getFullTextDocument(fullText, resourceId, sessionStore)
-			else
+			} else
 				throw new InvalidRequestException(RESOURCE_NOT_FOUND, 'The requested resource was not found.')
 		]), parameters.get('requiredStateId'))
 		val result = new ServiceDescriptor => [
@@ -147,7 +165,8 @@ class XtextServiceDispatcher {
 			if (parameters.containsKey('deltaText'))
 				throw new InvalidRequestException(INVALID_PARAMETERS, 'The parameters \'deltaText\' and \'fullText\' cannot be set in the same request.')
 			result.service = [
-				updateDocumentService.updateFullText(document, fullText)
+				// If the document has already been initialized with the given text, we don't need to reparse
+				updateDocumentService.updateFullText(document, fullText, !initializedFromFullText.get(0))
 			]
 		}
 		return result

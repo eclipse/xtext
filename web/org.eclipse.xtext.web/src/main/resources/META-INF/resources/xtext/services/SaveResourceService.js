@@ -20,13 +20,25 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 		};
 		if (params.sendFullText) {
 			serverData.fullText = editorContext.getText();
+		} else {
+			var knownServerState = editorContext.getServerState();
+			if (knownServerState.stateId !== undefined) {
+				serverData.requiredStateId = knownServerState.stateId;
+			}
 		}
 		
-		this.sendRequest(editorContext, {
+		var self = this;
+		self.sendRequest(editorContext, {
 			type : "POST",
 			data : serverData,
 			success : function(result) {
 				editorContext.markClean(true);
+			},
+			error : function(xhr, textStatus, errorThrown) {
+				if (xhr.status == 409) {
+					// A conflict with another service occured - retry
+					return self.retry(self.saveResource, editorContext, params);
+				}
 			}
 		});
 	};

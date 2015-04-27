@@ -8,6 +8,7 @@
 package org.eclipse.xtext.web.server.model
 
 import com.google.inject.Inject
+import java.util.concurrent.ExecutorService
 import java.util.concurrent.Semaphore
 import java.util.concurrent.atomic.AtomicInteger
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -21,6 +22,9 @@ package class DocumentSynchronizer implements CancelIndicator {
     val waitingPriorityJobs = new AtomicInteger
 
     @Inject OperationCanceledManager operationCanceledManager
+    
+    @Accessors(PUBLIC_GETTER)
+    @Inject ExecutorService executorService
     
 	@Accessors
     boolean canceled
@@ -40,6 +44,8 @@ package class DocumentSynchronizer implements CancelIndicator {
     }
     
     def releaseLock() {
+    	if (semaphore.availablePermits != 0)
+    		throw new IllegalStateException('Cannot release a lock without acquiring it first.')
     	semaphore.release()
     }
     

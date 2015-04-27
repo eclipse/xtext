@@ -13,12 +13,16 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.StringTokenizer;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtend.lib.annotations.ToString;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
@@ -38,15 +42,19 @@ import org.eclipse.xtext.web.server.persistence.ResourcePersistenceService;
 import org.eclipse.xtext.web.server.validation.ValidationService;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Singleton
 @SuppressWarnings("all")
 public class XtextServiceDispatcher {
   @Accessors
+  @ToString
   public static class ServiceDescriptor {
     private String type;
     
@@ -91,7 +99,20 @@ public class XtextServiceDispatcher {
     public void setHasTextInput(final boolean hasTextInput) {
       this.hasTextInput = hasTextInput;
     }
+    
+    @Override
+    @Pure
+    public String toString() {
+      ToStringBuilder b = new ToStringBuilder(this);
+      b.add("type", this.type);
+      b.add("service", this.service);
+      b.add("hasSideEffects", this.hasSideEffects);
+      b.add("hasTextInput", this.hasTextInput);
+      return b.toString();
+    }
   }
+  
+  private final static Logger LOG = Logger.getLogger(XtextServiceDispatcher.class);
   
   @Inject
   private ResourcePersistenceService resourcePersistenceService;
@@ -124,6 +145,55 @@ public class XtextServiceDispatcher {
     XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
     {
       final String requestType = this.getRequestType(path, parameters);
+      boolean _isTraceEnabled = XtextServiceDispatcher.LOG.isTraceEnabled();
+      if (_isTraceEnabled) {
+        Set<Map.Entry<String, String>> _entrySet = parameters.entrySet();
+        final Function1<Map.Entry<String, String>, String> _function = new Function1<Map.Entry<String, String>, String>() {
+          @Override
+          public String apply(final Map.Entry<String, String> it) {
+            return it.getKey();
+          }
+        };
+        List<Map.Entry<String, String>> _sortBy = IterableExtensions.<Map.Entry<String, String>, String>sortBy(_entrySet, _function);
+        final Function1<Map.Entry<String, String>, CharSequence> _function_1 = new Function1<Map.Entry<String, String>, CharSequence>() {
+          @Override
+          public CharSequence apply(final Map.Entry<String, String> it) {
+            String _xifexpression = null;
+            String _value = it.getValue();
+            int _length = _value.length();
+            boolean _greaterThan = (_length > 18);
+            if (_greaterThan) {
+              String _key = it.getKey();
+              String _plus = (_key + "=\'");
+              String _value_1 = it.getValue();
+              String _substring = _value_1.substring(0, 16);
+              String _plus_1 = (_plus + _substring);
+              _xifexpression = (_plus_1 + "...\'");
+            } else {
+              String _xifexpression_1 = null;
+              String _value_2 = it.getValue();
+              boolean _matches = _value_2.matches(".*\\s+.*");
+              if (_matches) {
+                String _key_1 = it.getKey();
+                String _plus_2 = (_key_1 + "=\'");
+                String _value_3 = it.getValue();
+                String _plus_3 = (_plus_2 + _value_3);
+                _xifexpression_1 = (_plus_3 + "\'");
+              } else {
+                String _key_2 = it.getKey();
+                String _plus_4 = (_key_2 + "=");
+                String _value_4 = it.getValue();
+                _xifexpression_1 = (_plus_4 + _value_4);
+              }
+              _xifexpression = _xifexpression_1;
+            }
+            return _xifexpression;
+          }
+        };
+        String _join = IterableExtensions.<Map.Entry<String, String>>join(_sortBy, ": ", ", ", "", _function_1);
+        final String stringParams = _join.replaceAll("(\\n|\\f|\\r)+", " ");
+        XtextServiceDispatcher.LOG.trace((("xtext-service/" + requestType) + stringParams));
+      }
       XtextServiceDispatcher.ServiceDescriptor _switchResult = null;
       boolean _matched = false;
       if (!_matched) {
@@ -165,13 +235,13 @@ public class XtextServiceDispatcher {
       if (!_matched) {
         throw new InvalidRequestException(InvalidRequestException.Type.INVALID_PARAMETERS, (("The request type \'" + requestType) + "\' is not supported."));
       }
-      final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
+      final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function_2 = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
         @Override
         public void apply(final XtextServiceDispatcher.ServiceDescriptor it) {
           it.type = requestType;
         }
       };
-      _xblockexpression = ObjectExtensions.<XtextServiceDispatcher.ServiceDescriptor>operator_doubleArrow(_switchResult, _function);
+      _xblockexpression = ObjectExtensions.<XtextServiceDispatcher.ServiceDescriptor>operator_doubleArrow(_switchResult, _function_2);
     }
     return _xblockexpression;
   }
@@ -265,13 +335,19 @@ public class XtextServiceDispatcher {
       throw new InvalidRequestException(InvalidRequestException.Type.INVALID_PARAMETERS, "The parameter \'resource\' is required.");
     }
     final String fullText = parameters.get("fullText");
+    final boolean[] initializedFromFullText = new boolean[1];
     final Provider<XtextWebDocument> _function = new Provider<XtextWebDocument>() {
       @Override
       public XtextWebDocument get() {
         try {
           XtextWebDocument _xifexpression = null;
           if ((fullText != null)) {
-            _xifexpression = XtextServiceDispatcher.this.getFullTextDocument(fullText, resourceId, sessionStore);
+            XtextWebDocument _xblockexpression = null;
+            {
+              initializedFromFullText[0] = true;
+              _xblockexpression = XtextServiceDispatcher.this.getFullTextDocument(fullText, resourceId, sessionStore);
+            }
+            _xifexpression = _xblockexpression;
           } else {
             throw new InvalidRequestException(InvalidRequestException.Type.RESOURCE_NOT_FOUND, "The requested resource was not found.");
           }
@@ -328,7 +404,9 @@ public class XtextServiceDispatcher {
         @Override
         public IServiceResult apply() {
           try {
-            return XtextServiceDispatcher.this.updateDocumentService.updateFullText(document, fullText);
+            boolean _get = initializedFromFullText[0];
+            boolean _not = (!_get);
+            return XtextServiceDispatcher.this.updateDocumentService.updateFullText(document, fullText, _not);
           } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
           }

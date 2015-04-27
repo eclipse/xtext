@@ -8,11 +8,13 @@
 package org.eclipse.xtext.web.server.model;
 
 import org.eclipse.xtend.lib.annotations.Data;
+import org.eclipse.xtend.lib.annotations.ToString;
 import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Data
+@ToString
 @SuppressWarnings("all")
 public class DocumentStateResult implements IServiceResult {
   private final String stateId;

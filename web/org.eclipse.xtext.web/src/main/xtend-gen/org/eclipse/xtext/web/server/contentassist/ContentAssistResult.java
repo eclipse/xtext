@@ -10,11 +10,13 @@ package org.eclipse.xtext.web.server.contentassist;
 import java.util.ArrayList;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.Data;
+import org.eclipse.xtend.lib.annotations.ToString;
 import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Accessors
+@ToString
 @SuppressWarnings("all")
 public class ContentAssistResult implements IServiceResult {
   @Data
@@ -292,5 +294,14 @@ public class ContentAssistResult implements IServiceResult {
   
   public void setStateId(final String stateId) {
     this.stateId = stateId;
+  }
+  
+  @Override
+  @Pure
+  public String toString() {
+    ToStringBuilder b = new ToStringBuilder(this);
+    b.add("entries", this.entries);
+    b.add("stateId", this.stateId);
+    return b.toString();
   }
 }

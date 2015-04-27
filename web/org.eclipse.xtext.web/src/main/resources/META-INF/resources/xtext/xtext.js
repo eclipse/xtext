@@ -59,6 +59,8 @@
  * resourceUri {String}
  *     The URI of the resource displayed in the text editor; this option is sent to the server to
  *     communicate required information on the respective resource.
+ * retries = 5 {Integer}
+ *     The number of times a service request is repeated when a conflict with another request occurs.
  * sendFullText = false {Boolean}
  *     Whether the full text shall be sent to the server with each request; use this if you want
  *     the server to run in stateless mode. If the option is inactive, the server state is updated regularly.

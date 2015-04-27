@@ -9,11 +9,14 @@ package org.eclipse.xtext.web.server.persistence;
 
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
+import org.eclipse.xtend.lib.annotations.ToString;
 import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Accessors
 @FinalFieldsConstructor
+@ToString
 @SuppressWarnings("all")
 public class ResourceContentResult implements IServiceResult {
   private final String fullText;
@@ -48,5 +51,15 @@ public class ResourceContentResult implements IServiceResult {
   
   public void setDirty(final boolean dirty) {
     this.dirty = dirty;
+  }
+  
+  @Override
+  @Pure
+  public String toString() {
+    ToStringBuilder b = new ToStringBuilder(this);
+    b.add("fullText", this.fullText);
+    b.add("stateId", this.stateId);
+    b.add("dirty", this.dirty);
+    return b.toString();
   }
 }

@@ -10,6 +10,8 @@ package org.eclipse.xtext.web.example.jetty
 import com.google.inject.Binder
 import com.google.inject.Guice
 import com.google.inject.name.Names
+import java.util.concurrent.ExecutorService
+import javax.servlet.annotation.WebServlet
 import org.eclipse.xtext.ide.LexerIdeBindings
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer
@@ -24,21 +26,37 @@ import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler
 import org.eclipse.xtext.web.server.persistence.ResourceBaseProviderImpl
 import org.eclipse.xtext.web.servlet.XtextServlet
-import javax.servlet.annotation.WebServlet
+import java.util.concurrent.Executors
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
 @WebServlet(name = "Xtext Services", urlPatterns = "/xtext-service/*")
 class MyXtextServlet extends XtextServlet {
+	
+	var ExecutorService executorService
 
 	override init() {
+		super.init()
+		executorService = Executors.newCachedThreadPool
 		new EntitiesStandaloneSetup {
 			override createInjector() {
-				return Guice.createInjector(new EntitiesRuntimeModule, new EntitiesIdeModule)
+				return Guice.createInjector(new EntitiesRuntimeModule, new EntitiesIdeModule(executorService))
 			}
 		}.createInjectorAndDoEMFRegistration
-		super.init()
+	}
+	
+	override destroy() {
+		if (executorService !== null)
+			executorService.shutdown()
+		super.destroy()
 	}
 
+	@FinalFieldsConstructor
 	static class EntitiesIdeModule extends AbstractGenericModule {
+		val ExecutorService executorService
+		
+		def configureExecutorService(Binder binder) {
+			binder.bind(ExecutorService).toInstance(executorService)
+		}
 		
 		def configureContentAssistLexer(Binder binder) {
 			binder.bind(Lexer).annotatedWith(Names.named(LexerIdeBindings.CONTENT_ASSIST)).to(InternalEntitiesLexer)

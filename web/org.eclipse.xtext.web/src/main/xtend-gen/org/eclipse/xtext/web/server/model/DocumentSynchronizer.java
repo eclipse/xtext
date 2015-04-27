@@ -8,8 +8,10 @@
 package org.eclipse.xtext.web.server.model;
 
 import com.google.inject.Inject;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
+import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -24,6 +26,10 @@ class DocumentSynchronizer implements CancelIndicator {
   
   @Inject
   private OperationCanceledManager operationCanceledManager;
+  
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  @Inject
+  private ExecutorService executorService;
   
   @Accessors
   private boolean canceled;
@@ -58,7 +64,17 @@ class DocumentSynchronizer implements CancelIndicator {
   }
   
   public void releaseLock() {
+    int _availablePermits = this.semaphore.availablePermits();
+    boolean _notEquals = (_availablePermits != 0);
+    if (_notEquals) {
+      throw new IllegalStateException("Cannot release a lock without acquiring it first.");
+    }
     this.semaphore.release();
+  }
+  
+  @Pure
+  public ExecutorService getExecutorService() {
+    return this.executorService;
   }
   
   @Pure

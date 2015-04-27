@@ -52,6 +52,23 @@ define(["jquery"], function(jQuery) {
 			settings.async = true;
 			settings.dataType = "json";
 			jQuery.ajax(this._requestUrl, settings);
+		},
+		
+		retry : function(serviceMethod, editorContext, params, additionalArgs) {
+			var retries = params.retries;
+			if (retries === undefined) {
+				retries = 5;
+			}
+			if (retries > 0) {
+				params.retries = retries - 1;
+				var args = [editorContext, params];
+				if (additionalArgs) {
+					args = args.concat(additionalArgs);
+				}
+				serviceMethod.apply(this, args);
+				return true;
+			}
+			return false;
 		}
 	};
 	

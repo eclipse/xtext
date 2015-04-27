@@ -30,6 +30,11 @@ public class InvalidRequestException extends Exception {
     this.type = type;
   }
   
+  public InvalidRequestException(final InvalidRequestException.Type type, final String message, final Throwable cause) {
+    super(message, cause);
+    this.type = type;
+  }
+  
   @Pure
   public InvalidRequestException.Type getType() {
     return this.type;
