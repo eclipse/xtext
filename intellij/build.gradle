@@ -30,7 +30,7 @@ configure(subprojects - eclipsePluginProjects) {
 	apply plugin: 'eclipse'
 	project.apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
 	
-	configurations.all {
+	configurations.compile {
 		exclude module:'cglib'
 		exclude module:'icu4j'
 		exclude group:'org.ow2.asm'

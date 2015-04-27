@@ -105,7 +105,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		bindFactory.addTypeToType('com.intellij.lang.ParserDefinition', grammar.parserDefinitionName)
 		bindFactory.addTypeToTypeSingleton('org.eclipse.xtext.idea.lang.IElementTypeProvider', grammar.elementTypeProviderName)
 		
-		if (grammar.doesUseXbase()) {
+		if (grammar.doesUseXbase) {
 			bindFactory.addTypeToType('org.eclipse.xtext.common.types.access.IJvmTypeProvider.Factory', 'org.eclipse.xtext.xbase.idea.types.access.StubTypeProviderFactory')
 			bindFactory.addTypeToType('org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider', 'org.eclipse.xtext.xbase.idea.types.StubBasedTypeScopeProvider')
 			bindFactory.addTypeToType('org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator', 'org.eclipse.xtext.xbase.idea.jvmmodel.PsiJvmModelAssociator')
@@ -774,12 +774,12 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		import org.eclipse.xtext.idea.lang.IElementTypeProvider;
 		import «grammar.fileImplName»;
 		import «grammar.grammarAccessName»;
-		«IF !grammar.doesUseXbase()»
+		«IF !grammar.doesUseXbase»
 		import org.eclipse.xtext.psi.stubs.XtextFileElementType;
 		«ENDIF»
 		import org.eclipse.xtext.psi.stubs.XtextFileStub;
 		import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
-		«IF grammar.doesUseXbase()»
+		«IF grammar.doesUseXbase»
 		import org.eclipse.xtext.xbase.idea.types.stubs.XtypeFileElementType;
 		«ENDIF»
 		
@@ -787,7 +787,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		
 		public class «grammar.elementTypeProviderName.toSimpleName» implements IElementTypeProvider {
 
-			public static final IFileElementType FILE_TYPE = new «IF grammar.doesUseXbase()»XtypeFileElementType«ELSE»XtextFileElementType«ENDIF»<XtextFileStub<«grammar.fileImplName.toSimpleName»>>(«grammar.languageName.toSimpleName».INSTANCE);
+			public static final IFileElementType FILE_TYPE = new «IF grammar.doesUseXbase»XtypeFileElementType«ELSE»XtextFileElementType«ENDIF»<XtextFileStub<«grammar.fileImplName.toSimpleName»>>(«grammar.languageName.toSimpleName».INSTANCE);
 
 			private static final Map<EObject, IGrammarAwareElementType> GRAMMAR_ELEMENT_TYPE = new HashMap<EObject, IGrammarAwareElementType>();
 
