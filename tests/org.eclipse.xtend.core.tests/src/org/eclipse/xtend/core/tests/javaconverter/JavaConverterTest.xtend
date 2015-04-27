@@ -403,7 +403,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		assertNotNull(xtendClazz)
 	}
 
-	@Test def void testCommentsCase() throws Exception {
+	@Test def void testCommentsCase_01() throws Exception {
 		var xtendCode = toXtendCode(
 			'''
 		/**
@@ -421,7 +421,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 			/**/
 			void doStuff2() {
 				/* some comments */
-				return;
+				return; // rt SL comment
 			}
 		}''')
 		val expected = '''
@@ -441,18 +441,57 @@ class JavaConverterTest extends AbstractXtendTestCase {
 			/**/
 			def package void doStuff2() {
 				/* some comments */
-				return;
+				return;// rt SL comment
+				
 			}
 			
 		}'''
 		assertEquals(expected, xtendCode)
 	}
+	
+	@Test def void testCommentsCase_02() throws Exception {
+		var xtendCode = toXtendCode(
+			'''
+		public class TestComment {
+			String field = "d"; // last SL comment
+		}''')
+		val expected = '''
+		class TestComment {
+			package String field="d"
+			// last SL comment
+			
+		}'''
+		assertEquals(expected, xtendCode)
+	}
 
-	@Test def void testJavadocCase() throws Exception {
+	@Test def void testJavadocCase_01() throws Exception {
 
 		var String xtendCode = j2x.bodyDeclarationToXtend("/**@param p Param p*/public abstract void foo();", null,
 			null).xtendCode
 		assertTrue('''Javadoc Parameter well formed: «xtendCode»''', xtendCode.contains("@param p Param p"))
+	}
+	
+	@Test def void testJavadocCase_02() throws Exception {
+
+		var String xtendCode = 
+		'''
+		/**
+		 * Copyright (c) 2015 - javadocteststring
+		 **/
+		package foo.javadoc;
+			
+		import java.util.Arrays;
+			
+		/**
+		 * Simple value
+		 * @author Dennis Huebner - Initial contribution and API
+		 */
+		public class TestJavadoc {
+		}
+		'''.toXtendCode
+		dump(xtendCode)
+		assertTrue('''Classfile Doc not copied''', xtendCode.contains("javadocteststring"))
+		assertTrue('''Type Javadoc not copied''', xtendCode.contains("@author"))
 	}
 
 	@Test def void testCastCase() throws Exception {
@@ -1458,8 +1497,8 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 		return file(xtendCode, true)
 	}
 
-	def private String toXtendCode(String javaCode) throws Exception {
-		return j2x.toXtend("Temp", javaCode).getXtendCode()
+	def private String toXtendCode(CharSequence javaCode) throws Exception {
+		return j2x.toXtend("Temp", javaCode.toString).getXtendCode()
 	}
 
 	def XtendField field(XtendTypeDeclaration typeDecl, int i) {

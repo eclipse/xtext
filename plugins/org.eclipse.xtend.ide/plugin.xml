@@ -61,7 +61,7 @@
         	class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.javaconverter.PasteJavaCodeHandler" 
         	commandId="org.eclipse.xtend.ide.pasteJavaCode">
            <activeWhen>
-              <reference definitionId="org.eclipse.xtend.core.Xtend.XtextEditor.opened"/>
+              <reference definitionId="org.eclipse.xtend.core.Xtend.Editor.opened"/>
            </activeWhen>
 		</handler>
     </extension>
@@ -225,7 +225,7 @@
       <command
             categoryId="org.eclipse.ui.category.textEditor"
             id="org.eclipse.xtend.ide.pasteJavaCode"
-            name="Paste java">
+            name="Paste Java Code">
       </command>
     </extension>
     <extension point="org.eclipse.ui.menus">
@@ -270,6 +270,28 @@
 					</and>
 				</visibleWhen>
 			</command>
+         </menuContribution>
+          <menuContribution locationURI="popup:#TextEditorContext?after=paste">
+         	<command commandId="org.eclipse.xtend.ide.pasteJavaCode" 
+         		style="push" tooltip="Paste Java Code">
+            	<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtend.core.Xtend.Editor.opened" />
+            	</visibleWhen>
+         	</command>  
+         </menuContribution>
+         <menuContribution
+               locationURI="menu:edit?after=paste">
+            <command
+                  commandId="org.eclipse.xtend.ide.pasteJavaCode"
+                  style="push"
+                  tooltip="Paste Java Code">
+               <visibleWhen
+                     checkEnabled="false">
+                  <reference
+                        definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+                  </reference>
+               </visibleWhen>
+            </command>
          </menuContribution>
     </extension>
 	<extension point="org.eclipse.ui.handlers">
