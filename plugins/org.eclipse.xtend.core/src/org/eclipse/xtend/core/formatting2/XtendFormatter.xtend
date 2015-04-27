@@ -207,7 +207,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 			func.regionFor.keyword(">").prepend[noSpace].append[oneSpace]
 		}
 		val nameNode = func.regionFor.feature(XTEND_FUNCTION__NAME)
-		val open = nameNode.immediatelyFollowing.keyword("(")
+		val open = nameNode?.immediatelyFollowing?.keyword("(")
 		val close = func.regionFor.keyword(")")
 		func.returnType.append[oneSpace]
 		open.prepend[noSpace]
