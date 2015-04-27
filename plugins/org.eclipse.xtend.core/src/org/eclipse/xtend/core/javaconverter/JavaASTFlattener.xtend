@@ -401,6 +401,13 @@ class JavaASTFlattener extends ASTVisitor {
 			body.accept(this)
 			prev = body
 		}
+		if (it.root instanceof CompilationUnit) {
+			val cu = it.root as CompilationUnit
+			cu.commentList.filter[Comment c|!c.docComment && c.notAssigned].forEach [
+				accept(this)
+				assignedComments.add(it)
+			]
+		}
 		decreaseIndent
 		appendLineWrapToBuffer
 		appendToBuffer("}")

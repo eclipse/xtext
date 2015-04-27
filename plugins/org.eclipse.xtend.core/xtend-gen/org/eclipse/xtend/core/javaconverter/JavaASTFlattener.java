@@ -641,6 +641,36 @@ public class JavaASTFlattener extends ASTVisitor {
         prev = body;
       }
     }
+    ASTNode _root = it.getRoot();
+    if ((_root instanceof CompilationUnit)) {
+      ASTNode _root_1 = it.getRoot();
+      final CompilationUnit cu = ((CompilationUnit) _root_1);
+      List _commentList = cu.getCommentList();
+      final Function1<Comment, Boolean> _function = new Function1<Comment, Boolean>() {
+        @Override
+        public Boolean apply(final Comment c) {
+          boolean _and = false;
+          boolean _isDocComment = c.isDocComment();
+          boolean _not = (!_isDocComment);
+          if (!_not) {
+            _and = false;
+          } else {
+            boolean _notAssigned = JavaASTFlattener.this.notAssigned(c);
+            _and = _notAssigned;
+          }
+          return Boolean.valueOf(_and);
+        }
+      };
+      Iterable<Comment> _filter_1 = IterableExtensions.<Comment>filter(_commentList, _function);
+      final Procedure1<Comment> _function_1 = new Procedure1<Comment>() {
+        @Override
+        public void apply(final Comment it) {
+          it.accept(JavaASTFlattener.this);
+          JavaASTFlattener.this.assignedComments.add(it);
+        }
+      };
+      IterableExtensions.<Comment>forEach(_filter_1, _function_1);
+    }
     this.decreaseIndent();
     this.appendLineWrapToBuffer();
     this.appendToBuffer("}");
