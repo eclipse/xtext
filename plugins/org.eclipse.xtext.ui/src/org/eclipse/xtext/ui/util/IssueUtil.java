@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.util;
 
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
@@ -24,28 +25,37 @@ import com.google.inject.Inject;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
+ * @author Holger Schill
  */
 public class IssueUtil {
 
 	@Inject(optional=true)
 	private MarkerTypeProvider markerTypeProvider;
 	
+	/**
+	 * Creates an Issue out of a Marker.
+	 * setSyntaxError is unset since the current API does not allow fixing systax errors anyway.
+	 * 
+	 * @param marker The marker to create an Issue from
+	 * @return an issue create out of the marker or <code>null</code>
+	 */
 	public Issue createIssue(IMarker marker) {
 		Issue.IssueImpl issue = new Issue.IssueImpl();
+		try {
+			// Call marker.getAttributes to make sure to that the CoreException is not logged silently see https://bugs.eclipse.org/bugs/show_bug.cgi?id=465490
+			marker.getAttributes();
+		} catch (CoreException e) {
+			return null;
+		}
 		issue.setMessage(MarkerUtilities.getMessage(marker));
-		
 		issue.setLineNumber(MarkerUtilities.getLineNumber(marker) - 1);
 		issue.setOffset(MarkerUtilities.getCharStart(marker));
 		issue.setLength(MarkerUtilities.getCharEnd(marker)-MarkerUtilities.getCharStart(marker));
-		
 		issue.setCode(getCode(marker));
 		issue.setData(getIssueData(marker));
 		issue.setUriToProblem(getUriToProblem(marker));
 		issue.setSeverity(getSeverity(marker));
-		
 		issue.setType(getCheckType(marker));
-		// Note, isSyntaxError is unset, but currently the api does not allow fixing
-		// syntax errors anyway.
 		return issue;
 	}
 
