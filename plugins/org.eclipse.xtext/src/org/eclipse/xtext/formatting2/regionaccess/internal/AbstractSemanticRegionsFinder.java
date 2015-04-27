@@ -57,6 +57,8 @@ public abstract class AbstractSemanticRegionsFinder implements ISemanticRegionsF
 
 		@Override
 		public boolean apply(ISemanticRegion input) {
+			if (input == null)
+				return false;
 			EObject element = input.getGrammarElement();
 			Assignment assignment = GrammarUtil.containingAssignment(element);
 			if (assignment == null || !name.equals(assignment.getFeature()))
@@ -77,6 +79,8 @@ public abstract class AbstractSemanticRegionsFinder implements ISemanticRegionsF
 
 		@Override
 		public boolean apply(ISemanticRegion input) {
+			if (input == null)
+				return false;
 			return input.getGrammarElement() == grammarElement;
 		}
 
@@ -98,6 +102,8 @@ public abstract class AbstractSemanticRegionsFinder implements ISemanticRegionsF
 
 		@Override
 		public boolean apply(ISemanticRegion input) {
+			if (input == null)
+				return false;
 			return grammarElements.contains(input.getGrammarElement());
 		}
 
@@ -121,6 +127,8 @@ public abstract class AbstractSemanticRegionsFinder implements ISemanticRegionsF
 
 		@Override
 		public boolean apply(ISemanticRegion input) {
+			if (input == null)
+				return false;
 			EObject element = input.getGrammarElement();
 			return element instanceof Keyword && keyword.equals(((Keyword) element).getValue());
 		}
@@ -141,6 +149,8 @@ public abstract class AbstractSemanticRegionsFinder implements ISemanticRegionsF
 
 		@Override
 		public boolean apply(ISemanticRegion input) {
+			if (input == null)
+				return false;
 			EObject element = input.getGrammarElement();
 			return element instanceof Keyword && keywords.contains(((Keyword) element).getValue());
 		}
@@ -161,6 +171,8 @@ public abstract class AbstractSemanticRegionsFinder implements ISemanticRegionsF
 
 		@Override
 		public boolean apply(ISemanticRegion input) {
+			if (input == null)
+				return false;
 			EObject element = input.getGrammarElement();
 			return element instanceof RuleCall && ((RuleCall) element).getRule() == rule;
 		}
@@ -181,6 +193,8 @@ public abstract class AbstractSemanticRegionsFinder implements ISemanticRegionsF
 
 		@Override
 		public boolean apply(ISemanticRegion input) {
+			if (input == null)
+				return false;
 			EObject element = input.getGrammarElement();
 			return element instanceof RuleCall && rules.contains(((RuleCall) element).getRule());
 		}
