@@ -81,8 +81,10 @@ public class IssueUtil {
 	}
 
 	/**
+	 * @deprecated As we are using IMarker.getAttributes() in {@link #createIssue(IMarker)}, we do not call this method any more
 	 * @since 2.3
 	 */
+	@Deprecated
 	protected CheckType getCheckType(IMarker marker) {
 		String markerType = MarkerUtilities.getMarkerType(marker);
 		if (markerTypeProvider != null)
@@ -150,6 +152,10 @@ public class IssueUtil {
 		return null;
 	}
 	
+	/**
+	 * @deprecated As we are using IMarker.getAttributes() in {@link #createIssue(IMarker)}, we do not call this method any more
+	 */
+	@Deprecated
 	public Severity getSeverity(IMarker marker) {
 		Severity translatedSeverity = translateSeverity(marker.getAttribute(IMarker.SEVERITY, 0));
 		if(translatedSeverity == null)
