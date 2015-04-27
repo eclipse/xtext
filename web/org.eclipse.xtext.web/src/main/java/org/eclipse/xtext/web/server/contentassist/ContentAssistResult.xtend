@@ -10,9 +10,11 @@ package org.eclipse.xtext.web.server.contentassist
 import java.util.ArrayList
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.xtend.lib.annotations.ToString
 import org.eclipse.xtext.web.server.IServiceResult
 
 @Accessors
+@ToString
 class ContentAssistResult implements IServiceResult {
 	
 	val entries = new ArrayList<Entry>

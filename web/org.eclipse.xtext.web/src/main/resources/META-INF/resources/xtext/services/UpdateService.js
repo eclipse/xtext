@@ -48,22 +48,27 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 		var callbacks = this._completionCallbacks;
 		this._completionCallbacks = [];
 		for (callback in callbacks) {
-			callback();
+			callback.call();
 		}
 	}
 	
-	UpdateService.prototype.checkRunningUpdate = function(callback) {
+	UpdateService.prototype.checkRunningUpdate = function() {
 		if (this._isRunningUpdate) {
-			this._completionCallbacks.push(callback);
 			return true;
 		} else {
 			this._isRunningUpdate = true;
 			return false;
 		}
 	}
+	
+	UpdateService.prototype.addCompletionCallback = function(callback) {
+		this._completionCallbacks.push(callback);
+	}
 
 	UpdateService.prototype.update = function(editorContext, params) {
-		if (this.checkRunningUpdate(function() { this.update(editorContext, params) })) {
+		if (this.checkRunningUpdate()) {
+			var self = this;
+			this.addCompletionCallback(function() { self.update(editorContext, params) });
 			return;
 		}
 		
@@ -89,13 +94,14 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 			data : serverData,
 			success : function(result) {
 				editorContext.updateServerState(currentText, result.stateId);
-				return true;
 			},
 			error : function(xhr, textStatus, errorThrown) {
-				// TODO try again?
-				return false;
+				if (xhr.status == 409) {
+					// A conflict with another service occured - retry
+					return self.retry(self.update, editorContext, params);
+				}
 			},
-			complete : self.onComplete
+			complete : self.onComplete.bind(self)
 		});
 	};
 	

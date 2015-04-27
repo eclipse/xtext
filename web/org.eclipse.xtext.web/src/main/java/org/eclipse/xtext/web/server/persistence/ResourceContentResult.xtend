@@ -9,10 +9,12 @@ package org.eclipse.xtext.web.server.persistence
 
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtend.lib.annotations.ToString
 import org.eclipse.xtext.web.server.IServiceResult
 
 @Accessors
 @FinalFieldsConstructor
+@ToString
 class ResourceContentResult implements IServiceResult {
 	
 	val String fullText

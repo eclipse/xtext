@@ -22,6 +22,11 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 		if (params.sendFullText) {
 			serverData.fullText = editorContext.getText();
 			httpMethod = "POST";
+		} else {
+			var knownServerState = editorContext.getServerState();
+			if (knownServerState.stateId !== undefined) {
+				serverData.requiredStateId = knownServerState.stateId;
+			}
 		}
 		
 		this.sendRequest(editorContext, {
@@ -39,6 +44,13 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 					});
 				}
 				editorContext.showMarkers(problems)
+			},
+			error : function(xhr, textStatus, errorThrown) {
+				if (xhr.status == 409) {
+					// A conflict with a higher-priority service occured - ignore this, since
+					// validation will be retriggered anyway.
+					return true;
+				}
 			}
 		});
 	};

@@ -27,4 +27,9 @@ class InvalidRequestException extends Exception {
 		this.type = type
 	}
 	
+	new(Type type, String message, Throwable cause) {
+		super(message, cause)
+		this.type = type
+	}
+	
 }

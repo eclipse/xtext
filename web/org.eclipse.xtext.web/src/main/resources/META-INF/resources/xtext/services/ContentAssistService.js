@@ -15,41 +15,49 @@ define(["xtext/services/AbstractXtextService", "orion/Deferred"], function(Abstr
 
 	ContentAssistService.prototype = new AbstractXtextService();
 		
-	ContentAssistService.prototype.computeContentAssist = function(editorContext, params) {
-		var deferred = new Deferred();
+	ContentAssistService.prototype.computeContentAssist = function(editorContext, params, deferred) {
+		if (deferred === undefined) {
+			deferred = new Deferred();
+		}
 		var serverData = {
 			contentType : params.contentType,
-			caretOffset : params.offset,
-			selectionStart : params.selection.start,
-			selectionEnd : params.selection.end
+			caretOffset : params.offset
 		};
+		if (params.selection.start != params.offset || params.selection.end != params.offset) {
+			serverData.selectionStart = params.selection.start;
+			serverData.selectionEnd = params.selection.end;
+		}
 		var currentText = editorContext.getText();
 		var updateServerState = false;
 		var httpMethod = "GET";
+		var onComplete = undefined;
 		if (params.sendFullText) {
 			serverData.fullText = editorContext.getText();
 			httpMethod = "POST";
-		} else if (this._updateService) {
+		} else {
 			var knownServerState = editorContext.getServerState();
-			if (knownServerState.text !== undefined) {
-				if (this._updateService.checkRunningUpdate(function() {
-						this.computeContentAssist(editorContext, params).then(
-							function(value) {deferred.resolve(value)},
-							function(error) {deferred.reject(error)},
-							function(update) {deferred.progress(update)});
-					})) {
+			if (knownServerState.stateId !== undefined) {
+				serverData.requiredStateId = knownServerState.stateId;
+			}
+			if (this._updateService && knownServerState.text !== undefined) {
+				if (this._updateService.checkRunningUpdate()) {
+					var self = this;
+					this._updateService.addCompletionCallback(function() {
+						self.computeContentAssist(editorContext, params, deferred);
+					});
 					return deferred.promise;
 				}
+				onComplete = this._updateService.onComplete.bind(this._updateService);
 				this._updateService.computeDelta(knownServerState.text, currentText, serverData);
 				if (serverData.deltaText !== undefined) {
 					httpMethod = "POST";
-					serverData.requiredStateId = knownServerState.stateId;
 					updateServerState = true;
 				}
 			}
 		}
 		
-		this.sendRequest(editorContext, {
+		var self = this;
+		self.sendRequest(editorContext, {
 			type : httpMethod,
 			data : serverData,
 			success : function(result) {
@@ -69,12 +77,15 @@ define(["xtext/services/AbstractXtextService", "orion/Deferred"], function(Abstr
 					});
 				}
 				deferred.resolve(proposals);
-				return true;
 			},
 			error : function(xhr, textStatus, errorThrown) {
+				if (xhr.status == 409) {
+					// A conflict with another service occured - retry
+					return self.retry(self.computeContentAssist, editorContext, params, [deferred]);
+				}
 				deferred.reject(errorThrown);
-				return false;
-			}
+			},
+			complete: onComplete
 		});
 		return deferred.promise;
 	};
