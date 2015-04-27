@@ -76,6 +76,7 @@ import org.eclipse.xtext.xbase.compiler.DocumentationAdapter
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xtype.XComputedTypeReference
 import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass
+import com.intellij.core.JavaCoreBundle
 
 class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensibleClass {
 
@@ -610,6 +611,8 @@ public class AnnotatableModifierList extends LightModifierList {
 
 public class LightAnnotation extends LightElement implements PsiAnnotation {
 
+	protected static final String CAN_NOT_MODIFY_MESSAGE = JavaCoreBundle.message("psi.error.attempt.to.edit.class.file");
+
 	String qualifiedName
 
 	@Accessors PsiAnnotationOwner owner
@@ -628,15 +631,15 @@ public class LightAnnotation extends LightElement implements PsiAnnotation {
 	}
 
 	override findAttributeValue(String attributeName) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		return null
 	}
 
 	override findDeclaredAttributeValue(String attributeName) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		return null
 	}
 
 	override getNameReferenceElement() {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		return null
 	}
 
 	override getParameterList() {
@@ -644,11 +647,11 @@ public class LightAnnotation extends LightElement implements PsiAnnotation {
 	}
 
 	override <T extends PsiAnnotationMemberValue> setDeclaredAttributeValue(String attributeName, T value) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		throw new IncorrectOperationException(CAN_NOT_MODIFY_MESSAGE);
 	}
 
 	override getMetaData() {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		return null
 	}
 
 }

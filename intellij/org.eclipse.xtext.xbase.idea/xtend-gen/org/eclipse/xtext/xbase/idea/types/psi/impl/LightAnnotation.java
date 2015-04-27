@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.xbase.idea.types.psi.impl;
 
+import com.intellij.core.JavaCoreBundle;
 import com.intellij.lang.Language;
 import com.intellij.psi.PsiAnnotation;
 import com.intellij.psi.PsiAnnotationMemberValue;
@@ -16,11 +17,14 @@ import com.intellij.psi.PsiJavaCodeReferenceElement;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.impl.light.LightElement;
 import com.intellij.psi.meta.PsiMetaData;
+import com.intellij.util.IncorrectOperationException;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class LightAnnotation extends LightElement implements PsiAnnotation {
+  protected final static String CAN_NOT_MODIFY_MESSAGE = JavaCoreBundle.message("psi.error.attempt.to.edit.class.file");
+  
   private String qualifiedName;
   
   @Accessors
@@ -43,17 +47,17 @@ public class LightAnnotation extends LightElement implements PsiAnnotation {
   
   @Override
   public PsiAnnotationMemberValue findAttributeValue(final String attributeName) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    return null;
   }
   
   @Override
   public PsiAnnotationMemberValue findDeclaredAttributeValue(final String attributeName) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    return null;
   }
   
   @Override
   public PsiJavaCodeReferenceElement getNameReferenceElement() {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    return null;
   }
   
   @Override
@@ -63,12 +67,12 @@ public class LightAnnotation extends LightElement implements PsiAnnotation {
   
   @Override
   public <T extends PsiAnnotationMemberValue> T setDeclaredAttributeValue(final String attributeName, final T value) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    throw new IncorrectOperationException(LightAnnotation.CAN_NOT_MODIFY_MESSAGE);
   }
   
   @Override
   public PsiMetaData getMetaData() {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    return null;
   }
   
   @Pure
