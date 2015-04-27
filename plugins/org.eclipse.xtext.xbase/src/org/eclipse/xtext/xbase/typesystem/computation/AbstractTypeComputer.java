@@ -32,6 +32,7 @@ public class AbstractTypeComputer {
 	@Inject
 	private CommonTypeComputationServices services;
 	
+	/* @NotNull */
 	protected LightweightTypeReference getTypeForName(Class<?> clazz, ITypeComputationState state) {
 		ResourceSet resourceSet = state.getReferenceOwner().getContextResourceSet();
 		JvmTypeReference typeReference = services.getTypeReferences().getTypeForName(clazz, resourceSet);
@@ -41,6 +42,7 @@ public class AbstractTypeComputer {
 		return state.getReferenceOwner().toLightweightTypeReference(typeReference);
 	}
 	
+	/* @NotNull */
 	protected LightweightTypeReference getRawTypeForName(Class<?> clazz, ITypeReferenceOwner owner) {
 		JvmType clazzType = findDeclaredType(clazz, owner);
 		if (clazzType == null) {
@@ -50,16 +52,19 @@ public class AbstractTypeComputer {
 		return result;
 	}
 	
+	/* @Nullable */
 	protected <Type extends JvmType> Type findDeclaredType(Class<?> clazz, ITypeComputationState state) {
 		return findDeclaredType(clazz, state.getReferenceOwner());
 	}
 
+	/* @Nullable */
 	protected <Type extends JvmType> Type findDeclaredType(Class<?> clazz, ITypeReferenceOwner owner) {
 		@SuppressWarnings("unchecked")
 		Type result = (Type) services.getTypeReferences().findDeclaredType(clazz, owner.getContextResourceSet());
 		return result;
 	}
 	
+	/* @NotNull */
 	protected LightweightTypeReference getPrimitiveVoid(ITypeComputationState state) {
 		return getRawTypeForName(Void.TYPE, state.getReferenceOwner());
 	}

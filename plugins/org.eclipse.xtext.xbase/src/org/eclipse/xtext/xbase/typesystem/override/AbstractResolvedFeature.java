@@ -73,12 +73,13 @@ public abstract class AbstractResolvedFeature<T extends JvmFeature> implements I
 	}
 
 	protected LightweightTypeReference getResolvedReference(/* @Nullable */ JvmTypeReference unresolved) {
-		if (unresolved == null) {
-			ITypeReferenceOwner owner = getContextType().getOwner();
-			JvmType objectType = owner.getServices().getTypeReferences().findDeclaredType(Object.class, owner.getContextResourceSet());
-			return owner.newParameterizedTypeReference(objectType);
-		}
 		ITypeReferenceOwner owner = getContextType().getOwner();
+		if (unresolved == null) {
+			JvmType objectType = owner.getServices().getTypeReferences().findDeclaredType(Object.class, owner.getContextResourceSet());
+			if (objectType != null)
+				return owner.newParameterizedTypeReference(objectType);
+			return owner.newUnknownTypeReference(Object.class.getName());
+		}
 		LightweightTypeReference unresolvedLightweight = owner.toLightweightTypeReference(unresolved);
 		if (unresolvedLightweight.isPrimitive() || unresolvedLightweight.isPrimitiveVoid())
 			return unresolvedLightweight;

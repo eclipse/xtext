@@ -169,7 +169,11 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 				LightweightTypeReference lowerBoundSubstitute = visited.getLowerBoundSubstitute();
 				if (lowerBoundSubstitute.isAny()) {
 					JvmType objectType = getOwner().getServices().getTypeReferences().findDeclaredType(Object.class, getOwner().getContextResourceSet());
-					result.addUpperBound(getOwner().newParameterizedTypeReference(objectType));
+					if (objectType != null) {
+						result.addUpperBound(getOwner().newParameterizedTypeReference(objectType));
+					} else {
+						result.addUpperBound(getOwner().newUnknownTypeReference(Object.class.getName()));
+					}
 					return result;
 				} else {
 					result.setLowerBound(lowerBoundSubstitute);
