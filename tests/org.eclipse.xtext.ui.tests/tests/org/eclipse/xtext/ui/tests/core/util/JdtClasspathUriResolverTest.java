@@ -25,7 +25,7 @@ public class JdtClasspathUriResolverTest extends AbstractClasspathUriResolverTes
 	public void tearDown() throws Exception {
 		super.tearDown();
 		if (_javaProject != null && _javaProject.exists()) {
-			_javaProject.getJavaProject().getProject().delete(true, null);
+			_javaProject.getProject().delete(true, null);
 		}
 	}
 
@@ -61,6 +61,24 @@ public class JdtClasspathUriResolverTest extends AbstractClasspathUriResolverTes
 		String expectedUri = "platform:/resource/" + TEST_PROJECT_NAME + "/model/" + MODEL_FILE + "#/";
 		URI normalizedUri = _resolver.resolve(_javaProject, classpathUri);
 		assertResourceLoadable(classpathUri, normalizedUri, expectedUri);
+	}
+	
+	@Test public void testClasspathUriForFileInWorkspaceInOtherProjectRoot() throws Exception {
+		_javaProject = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT_NAME);
+		IJavaProject otherProject = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT_NAME + "2");
+		try {
+			JavaProjectSetupUtil.addProjectReference(_javaProject, otherProject);
+			_project = otherProject.getProject();
+			_project.getFolder("model").create(true, true, null);
+			PluginUtil.copyFileToWorkspace(Activator.getInstance(), "/testfiles/" + MODEL_FILE, _project, "model/"
+					+ MODEL_FILE);
+			URI classpathUri = URI.createURI("classpath:/model/" + MODEL_FILE + "#/");
+			String expectedUri = "platform:/resource/" + TEST_PROJECT_NAME + "2/model/" + MODEL_FILE + "#/";
+			URI normalizedUri = _resolver.resolve(_javaProject, classpathUri);
+			assertResourceLoadable(classpathUri, normalizedUri, expectedUri);
+		} finally {
+			otherProject.getProject().delete(true, null);
+		}
 	}
 
 	@Test public void testClasspathUriForFileInJarInWorkspace() throws Exception {
