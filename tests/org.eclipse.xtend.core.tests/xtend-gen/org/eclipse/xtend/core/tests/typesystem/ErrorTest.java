@@ -29,6 +29,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.StringInputStream;
@@ -42,6 +43,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.junit.typesystem.NoJRESmokeTester;
 import org.eclipse.xtext.xbase.junit.typesystem.Oven;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -61,6 +63,17 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class ErrorTest extends AbstractXtendTestCase {
+  public static class ResolveBatchedWithoutJRE extends NoJRESmokeTester {
+    @Inject
+    private IBatchTypeResolver resolver;
+    
+    @Override
+    protected void checkNoErrorsInValidator(final String model, final XtextResource resource) {
+      this.resolver.resolveTypes(resource);
+      super.checkNoErrorsInValidator(model, resource);
+    }
+  }
+  
   @Inject
   private IResourceValidator resourceValidator;
   
@@ -69,6 +82,9 @@ public class ErrorTest extends AbstractXtendTestCase {
   
   @Inject
   private IJvmModelAssociations associations;
+  
+  @Inject
+  private ErrorTest.ResolveBatchedWithoutJRE noJRETester;
   
   @Inject
   @Extension
@@ -3980,6 +3996,25 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_144() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def create \"\" test() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("_createCache_test.clear");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.noJRETester.processFile(_builder.toString());
   }
   
   public XtendFile processWithoutException(final CharSequence input) throws Exception {
