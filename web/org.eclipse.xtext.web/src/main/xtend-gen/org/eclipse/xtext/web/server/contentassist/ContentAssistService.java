@@ -18,6 +18,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import org.apache.log4j.Logger;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
@@ -41,6 +42,8 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @Singleton
 @SuppressWarnings("all")
 public class ContentAssistService {
+  private final Logger LOG = Logger.getLogger(this.getClass());
+  
   @Inject
   private Provider<ContentAssistContextFactory> contextFactoryProvider;
   
@@ -51,6 +54,7 @@ public class ContentAssistService {
   private final ExecutorService pool = Executors.newFixedThreadPool(3);
   
   public ContentAssistResult createProposals(final XtextWebDocumentAccess document, final ITextRegion selection, final int offset) throws InvalidRequestException {
+    this.LOG.trace("Xtext Service: createProposals");
     ContentAssistContextFactory _get = this.contextFactoryProvider.get();
     final Procedure1<ContentAssistContextFactory> _function = new Procedure1<ContentAssistContextFactory>() {
       @Override
@@ -80,6 +84,7 @@ public class ContentAssistService {
   }
   
   public ContentAssistResult createProposalsWithUpdate(final XtextWebDocumentAccess document, final String deltaText, final int deltaOffset, final int deltaReplaceLength, final ITextRegion textSelection, final int caretOffset) {
+    this.LOG.trace("Xtext Service: createProposalsWithUpdate");
     ContentAssistContextFactory _get = this.contextFactoryProvider.get();
     final Procedure1<ContentAssistContextFactory> _function = new Procedure1<ContentAssistContextFactory>() {
       @Override

@@ -17,6 +17,7 @@ import javax.servlet.ServletException
 import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
+import org.apache.log4j.Logger
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.web.server.InvalidRequestException
@@ -26,6 +27,8 @@ import static org.eclipse.xtext.web.server.InvalidRequestException.Type.*
 
 class XtextServlet extends HttpServlet {
 	
+	val LOG = Logger.getLogger(class)
+	
 	val serviceProviderRegistry = IResourceServiceProvider.Registry.INSTANCE
 	
 	val gson = new Gson
@@ -34,6 +37,7 @@ class XtextServlet extends HttpServlet {
 		try {
 			super.service(req, resp)
 		} catch (InvalidRequestException exception) {
+			LOG.trace('Invalid Xtext Request: ' + exception.message)
 			val statusCode = switch exception.type {
 				case RESOURCE_NOT_FOUND: 404
 				case INVALID_DOCUMENT_STATE: 409

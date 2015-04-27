@@ -4,4 +4,5 @@ dependencies {
 	compile project(':web:org.eclipse.xtext.web.servlet')
 	compile project(':intellij:org.eclipse.xtext.idea.example.entities.ide')
 	providedCompile group: 'org.eclipse.jetty', name: 'jetty-annotations', version: '9.2.+'
+	providedCompile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.+'
 }

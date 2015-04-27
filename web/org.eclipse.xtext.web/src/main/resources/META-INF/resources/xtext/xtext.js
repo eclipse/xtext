@@ -116,12 +116,12 @@ define([
 	"xtext/services/RevertResourceService",
 	"xtext/services/SaveResourceService",
 	"xtext/services/UpdateService",
-	"xtext/services/ValidationService",
-	"xtext/services/ContentAssistService"
+	"xtext/services/ContentAssistService",
+	"xtext/services/ValidationService"
 ], function(jQuery, mKeyBinding, mTextView, mTextModel, mTextTheme, mProjModel, mEditor,
 		mEditorFeatures, mContentAssist, mTextStyler, EditorContext, LoadResourceService,
-		RevertResourceService, SaveResourceService, UpdateService, ValidationService,
-		ContentAssistService) {
+		RevertResourceService, SaveResourceService, UpdateService, ContentAssistService,
+		ValidationService) {
 	
 	/**
 	 * Translate a JS option name to an HTML attribute name.
@@ -461,7 +461,7 @@ define([
 		var contentAssist = editor._contentAssist;
 		if (contentAssist) {
 			contentAssist.setEditorContextProvider(editorContextProvider);
-			var contentAssistService = new ContentAssistService(serverUrl, resourceUri);
+			var contentAssistService = new ContentAssistService(serverUrl, resourceUri, updateService);
 			contentAssist.setProviders([{
 				id : "xtext.service",
 				provider : contentAssistService

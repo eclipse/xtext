@@ -31,7 +31,7 @@ import org.eclipse.xtext.web.server.persistence.ResourceBaseProviderImpl;
 import org.eclipse.xtext.web.servlet.XtextServlet;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
-@WebServlet(name = "Xtext Services", urlPatterns = "/xtext-services/*")
+@WebServlet(name = "Xtext Services", urlPatterns = "/xtext-service/*")
 @SuppressWarnings("all")
 public class MyXtextServlet extends XtextServlet {
   public static class EntitiesIdeModule extends AbstractGenericModule {

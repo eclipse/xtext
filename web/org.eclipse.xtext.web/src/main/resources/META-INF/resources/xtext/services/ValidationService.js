@@ -10,16 +10,13 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 	
 	function ValidationService(serverUrl, resourceUri) {
 		this.initialize(serverUrl, resourceUri, "validation");
-		this._lastRequestId = 0;
 	};
 	
 	ValidationService.prototype = new AbstractXtextService();
 
 	ValidationService.prototype.computeProblems = function(editorContext, params) {
-		var requestId = ++this._lastRequestId;
 		var serverData = {
-			contentType : params.contentType,
-			requestId : requestId
+			contentType : params.contentType
 		};
 		var httpMethod = "GET";
 		if (params.sendFullText) {
@@ -27,26 +24,21 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 			httpMethod = "POST";
 		}
 		
-		var self = this;
 		this.sendRequest(editorContext, {
 			type : httpMethod,
 			data : serverData,
 			success : function(result) {
-				if (parseInt(result.requestId, 10) == self._lastRequestId) {
-					var problems = [];
-					for (var i = 0; i < result.entries.length; i++) {
-						var e = result.entries[i];
-						problems.push({
-							description : e.description,
-							start : e.startOffset,
-							end : e.endOffset,
-							severity : e.severity
-						});
-					}
-					editorContext.showMarkers(problems)
-					return true;
+				var problems = [];
+				for (var i = 0; i < result.entries.length; i++) {
+					var e = result.entries[i];
+					problems.push({
+						description : e.description,
+						start : e.startOffset,
+						end : e.endOffset,
+						severity : e.severity
+					});
 				}
-				return false;
+				editorContext.showMarkers(problems)
 			}
 		});
 	};

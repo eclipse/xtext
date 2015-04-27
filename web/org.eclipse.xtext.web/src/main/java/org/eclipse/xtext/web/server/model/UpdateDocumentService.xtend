@@ -9,6 +9,7 @@ package org.eclipse.xtext.web.server.model
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
+import org.apache.log4j.Logger
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.IResourceValidator
@@ -17,9 +18,12 @@ import org.eclipse.xtext.web.server.InvalidRequestException
 @Singleton
 class UpdateDocumentService {
 	
+	val LOG = Logger.getLogger(class)
+	
 	@Inject IResourceValidator resourceValidator
 	
 	def updateFullText(XtextWebDocumentAccess document, String fullText) throws InvalidRequestException {
+		LOG.trace('Xtext Service: updateFullText')
 		document.modify([ it, cancelIndicator |
 			dirty = true
 			processingCompleted = false
@@ -34,6 +38,7 @@ class UpdateDocumentService {
 	
 	def updateDeltaText(XtextWebDocumentAccess document, String deltaText, int offset, int replaceLength)
 			throws InvalidRequestException {
+		LOG.trace('Xtext Service: updateDeltaText')
 		document.modify([ it, cancelIndicator |
 			dirty = true
 			processingCompleted = false

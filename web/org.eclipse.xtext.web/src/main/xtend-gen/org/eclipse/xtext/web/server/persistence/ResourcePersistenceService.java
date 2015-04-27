@@ -9,6 +9,7 @@ package org.eclipse.xtext.web.server.persistence;
 
 import com.google.inject.Singleton;
 import java.io.IOException;
+import org.apache.log4j.Logger;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.web.server.ISessionStore;
@@ -26,9 +27,12 @@ import org.eclipse.xtext.xbase.lib.Pair;
 @Singleton
 @SuppressWarnings("all")
 public class ResourcePersistenceService {
+  private final Logger LOG = Logger.getLogger(this.getClass());
+  
   public ResourceContentResult load(final String resourceId, final IServerResourceHandler resourceHandler, final ISessionStore sessionStore) throws InvalidRequestException {
     ResourceContentResult _xblockexpression = null;
     {
+      this.LOG.trace("Xtext Service: load");
       Pair<Class<XtextWebDocument>, String> _mappedTo = Pair.<Class<XtextWebDocument>, String>of(XtextWebDocument.class, resourceId);
       final Function0<XtextWebDocument> _function = new Function0<XtextWebDocument>() {
         @Override
@@ -71,6 +75,7 @@ public class ResourcePersistenceService {
   }
   
   public ResourceContentResult revert(final String resourceId, final IServerResourceHandler resourceHandler, final ISessionStore sessionStore) throws InvalidRequestException {
+    this.LOG.trace("Xtext Service: revert");
     try {
       final XtextWebDocument document = resourceHandler.get(resourceId);
       String _text = document.getText();
@@ -91,25 +96,30 @@ public class ResourcePersistenceService {
   }
   
   public DocumentStateResult save(final XtextWebDocumentAccess document, final IServerResourceHandler resourceHandler) throws InvalidRequestException {
-    final CancelableUnitOfWork<DocumentStateResult, IXtextWebDocument> _function = new CancelableUnitOfWork<DocumentStateResult, IXtextWebDocument>() {
-      @Override
-      public DocumentStateResult exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
-        try {
-          resourceHandler.put(it);
-          it.setDirty(false);
-        } catch (final Throwable _t) {
-          if (_t instanceof IOException) {
-            final IOException ioe = (IOException)_t;
-            String _message = ioe.getMessage();
-            throw new InvalidRequestException(InvalidRequestException.Type.RESOURCE_NOT_FOUND, _message);
-          } else {
-            throw Exceptions.sneakyThrow(_t);
+    DocumentStateResult _xblockexpression = null;
+    {
+      this.LOG.trace("Xtext Service: save");
+      final CancelableUnitOfWork<DocumentStateResult, IXtextWebDocument> _function = new CancelableUnitOfWork<DocumentStateResult, IXtextWebDocument>() {
+        @Override
+        public DocumentStateResult exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
+          try {
+            resourceHandler.put(it);
+            it.setDirty(false);
+          } catch (final Throwable _t) {
+            if (_t instanceof IOException) {
+              final IOException ioe = (IOException)_t;
+              String _message = ioe.getMessage();
+              throw new InvalidRequestException(InvalidRequestException.Type.RESOURCE_NOT_FOUND, _message);
+            } else {
+              throw Exceptions.sneakyThrow(_t);
+            }
           }
+          String _stateId = it.getStateId();
+          return new DocumentStateResult(_stateId);
         }
-        String _stateId = it.getStateId();
-        return new DocumentStateResult(_stateId);
-      }
-    };
-    return document.<DocumentStateResult>readOnly(_function);
+      };
+      _xblockexpression = document.<DocumentStateResult>readOnly(_function);
+    }
+    return _xblockexpression;
   }
 }

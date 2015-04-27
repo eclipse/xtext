@@ -12,6 +12,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.ArrayList;
 import java.util.Collection;
+import org.apache.log4j.Logger;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
@@ -29,11 +30,14 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @Singleton
 @SuppressWarnings("all")
 public class ValidationService {
+  private final Logger LOG = Logger.getLogger(this.getClass());
+  
   @Inject
   @Extension
   private UpdateDocumentService updateDocumentService;
   
   public ValidationResult validate(final XtextWebDocumentAccess document) throws InvalidRequestException {
+    this.LOG.trace("Xtext Service: validate");
     final CancelableUnitOfWork<Collection<Issue>, IXtextWebDocument> _function = new CancelableUnitOfWork<Collection<Issue>, IXtextWebDocument>() {
       @Override
       public Collection<Issue> exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {

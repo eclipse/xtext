@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.web.server.IServiceResult;
@@ -36,6 +37,8 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class XtextServlet extends HttpServlet {
+  private final Logger LOG = Logger.getLogger(this.getClass());
+  
   private final IResourceServiceProvider.Registry serviceProviderRegistry = IResourceServiceProvider.Registry.INSTANCE;
   
   private final Gson gson = new Gson();
@@ -47,6 +50,9 @@ public class XtextServlet extends HttpServlet {
     } catch (final Throwable _t) {
       if (_t instanceof InvalidRequestException) {
         final InvalidRequestException exception = (InvalidRequestException)_t;
+        String _message = exception.getMessage();
+        String _plus = ("Invalid Xtext Request: " + _message);
+        this.LOG.trace(_plus);
         int _switchResult = (int) 0;
         InvalidRequestException.Type _type = exception.getType();
         if (_type != null) {
@@ -65,8 +71,8 @@ public class XtextServlet extends HttpServlet {
           _switchResult = 400;
         }
         final int statusCode = _switchResult;
-        String _message = exception.getMessage();
-        resp.sendError(statusCode, _message);
+        String _message_1 = exception.getMessage();
+        resp.sendError(statusCode, _message_1);
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
