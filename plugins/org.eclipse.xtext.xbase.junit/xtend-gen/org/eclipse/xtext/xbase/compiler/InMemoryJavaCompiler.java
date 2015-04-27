@@ -43,8 +43,6 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
@@ -239,35 +237,54 @@ public class InMemoryJavaCompiler {
     this.nameEnv = _classLoaderBasedNameEnvironment;
     this.parentClassLoader = parent;
     CompilerOptions _compilerOptions = new CompilerOptions();
-    final Procedure1<CompilerOptions> _function = new Procedure1<CompilerOptions>() {
-      @Override
-      public void apply(final CompilerOptions it) {
-        try {
-          final long jdk = ClassFileConstants.JDK1_6;
-          it.complianceLevel = jdk;
-          it.sourceLevel = jdk;
-          try {
-            Field _field = CompilerOptions.class.getField("originalComplianceLevel");
-            _field.setLong(it, jdk);
-            Field _field_1 = CompilerOptions.class.getField("originalSourceLevel");
-            _field_1.setLong(it, jdk);
-          } catch (final Throwable _t) {
-            if (_t instanceof NoSuchFieldException) {
-              final NoSuchFieldException e = (NoSuchFieldException)_t;
-            } else {
-              throw Exceptions.sneakyThrow(_t);
-            }
-          }
-          it.targetJDK = jdk;
-          it.inlineJsrBytecode = true;
-          it.preserveAllLocalVariables = true;
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
+    this.compilerOptions = _compilerOptions;
+    this.setSourceLevel(ClassFileConstants.JDK1_6);
+    this.setComplianceLevel(ClassFileConstants.JDK1_6);
+    this.compilerOptions.targetJDK = ClassFileConstants.JDK1_6;
+    this.compilerOptions.inlineJsrBytecode = true;
+    this.compilerOptions.preserveAllLocalVariables = true;
+  }
+  
+  /**
+   * sets the source level (see @link(org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants))
+   */
+  public void setSourceLevel(final long jdkVersion) {
+    try {
+      this.compilerOptions.sourceLevel = jdkVersion;
+      try {
+        Field _field = CompilerOptions.class.getField("originalSourceLevel");
+        _field.setLong(this.compilerOptions, jdkVersion);
+      } catch (final Throwable _t) {
+        if (_t instanceof NoSuchFieldException) {
+          final NoSuchFieldException e = (NoSuchFieldException)_t;
+        } else {
+          throw Exceptions.sneakyThrow(_t);
         }
       }
-    };
-    CompilerOptions _doubleArrow = ObjectExtensions.<CompilerOptions>operator_doubleArrow(_compilerOptions, _function);
-    this.compilerOptions = _doubleArrow;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  /**
+   * sets the compliance level (see @link(org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants))
+   */
+  public void setComplianceLevel(final long jdkVersion) {
+    try {
+      this.compilerOptions.complianceLevel = jdkVersion;
+      try {
+        Field _field = CompilerOptions.class.getField("originalComplianceLevel");
+        _field.setLong(this.compilerOptions, jdkVersion);
+      } catch (final Throwable _t) {
+        if (_t instanceof NoSuchFieldException) {
+          final NoSuchFieldException e = (NoSuchFieldException)_t;
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   public InMemoryJavaCompiler.Result compile(final JavaSource... sources) {

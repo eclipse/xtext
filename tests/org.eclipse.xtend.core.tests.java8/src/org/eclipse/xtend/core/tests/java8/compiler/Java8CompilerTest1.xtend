@@ -7,9 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.java8.compiler
 
+import org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants
 import org.eclipse.xtend.core.tests.compiler.CompilerTest
 import org.eclipse.xtend.core.tests.java8.Java8RuntimeInjectorProvider
 import org.eclipse.xtext.junit4.InjectWith
+import org.junit.Before
 import org.junit.Test
 
 /**
@@ -17,6 +19,13 @@ import org.junit.Test
  */
 @InjectWith(Java8RuntimeInjectorProvider)
 class Java8CompilerTest1 extends CompilerTest {
+	
+	@Before
+	def void setUp() {
+		javaCompiler.sourceLevel = ClassFileConstants.JDK1_8
+		javaCompiler.complianceLevel = ClassFileConstants.JDK1_8
+		javaCompiler.compilerOptions.targetJDK = ClassFileConstants.JDK1_8
+	}
 	
 	@Test def testJava8Reduce() {
 		invokeAndExpect2(36, '''

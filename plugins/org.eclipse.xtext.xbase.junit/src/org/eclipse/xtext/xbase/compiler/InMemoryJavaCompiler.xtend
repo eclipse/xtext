@@ -129,21 +129,38 @@ class InMemoryJavaCompiler {
 	@Inject new(ClassLoader parent) {
 		nameEnv = new ClassLoaderBasedNameEnvironment(parent)
 		parentClassLoader = parent
-		compilerOptions = new CompilerOptions => [
-			val jdk = ClassFileConstants.JDK1_6
-			complianceLevel = jdk
-			sourceLevel = jdk
-			// these fields have been introduces in JDT 3.7
-			try {
-				CompilerOptions.getField("originalComplianceLevel").setLong(it, jdk)
-				CompilerOptions.getField("originalSourceLevel").setLong(it, jdk)
-			} catch (NoSuchFieldException e) {
-				// ignore
-			}
-			targetJDK = jdk
-			inlineJsrBytecode = true
-			preserveAllLocalVariables = true
-		]
+		compilerOptions = new CompilerOptions
+		sourceLevel = ClassFileConstants.JDK1_6
+		complianceLevel = ClassFileConstants.JDK1_6
+		compilerOptions.targetJDK = ClassFileConstants.JDK1_6
+		compilerOptions.inlineJsrBytecode = true
+		compilerOptions.preserveAllLocalVariables = true
+	}
+	
+	/**
+	 * sets the source level (see @link(org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants))
+	 */
+	def void setSourceLevel(long jdkVersion){
+		compilerOptions.sourceLevel = jdkVersion
+		// these fields have been introduces in JDT 3.7
+		try {
+			CompilerOptions.getField("originalSourceLevel").setLong(compilerOptions, jdkVersion)
+		} catch (NoSuchFieldException e) {
+			// ignore
+		}
+	}
+	
+	/**
+	 * sets the compliance level (see @link(org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants))
+	 */
+	def void setComplianceLevel(long jdkVersion){
+		compilerOptions.complianceLevel = jdkVersion
+		// these fields have been introduces in JDT 3.7
+		try {
+			CompilerOptions.getField("originalComplianceLevel").setLong(compilerOptions, jdkVersion)
+		} catch (NoSuchFieldException e) {
+			// ignore
+		}
 	}
 	
 	def Result compile(JavaSource... sources) {
