@@ -14,7 +14,6 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.AbstractClassMirror;
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
-import org.eclipse.xtext.xbase.idea.types.psi.LoadingTypeResourcePhase;
 
 @SuppressWarnings("all")
 public class PsiClassMirror extends AbstractClassMirror {
@@ -34,15 +33,9 @@ public class PsiClassMirror extends AbstractClassMirror {
   
   @Override
   public void initialize(final TypeResource typeResource) {
-    final boolean loadingTypeResource = LoadingTypeResourcePhase.isLoadingTypeResource(typeResource);
-    try {
-      LoadingTypeResourcePhase.setLoadingTypeResource(typeResource, true);
-      EList<EObject> _contents = typeResource.getContents();
-      JvmDeclaredType _createType = this.typeFactory.createType(this.psiClass);
-      _contents.add(_createType);
-    } finally {
-      LoadingTypeResourcePhase.setLoadingTypeResource(typeResource, loadingTypeResource);
-    }
+    EList<EObject> _contents = typeResource.getContents();
+    JvmDeclaredType _createType = this.typeFactory.createType(this.psiClass);
+    _contents.add(_createType);
   }
   
   @Override

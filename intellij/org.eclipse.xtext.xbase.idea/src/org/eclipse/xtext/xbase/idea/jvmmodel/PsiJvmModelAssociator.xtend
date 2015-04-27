@@ -8,15 +8,18 @@
 package org.eclipse.xtext.xbase.idea.jvmmodel
 
 import com.google.inject.Inject
-import com.google.inject.Provider
+import com.intellij.psi.PsiClass
+import com.intellij.psi.PsiMethod
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.common.types.JvmDeclaredType
+import org.eclipse.xtext.common.types.JvmExecutable
+import org.eclipse.xtext.common.types.JvmField
+import org.eclipse.xtext.common.types.JvmFormalParameter
+import org.eclipse.xtext.psi.IPsiModelAssociations
 import org.eclipse.xtext.psi.IPsiModelAssociator
 import org.eclipse.xtext.psi.PsiElementProvider
-import org.eclipse.xtext.xbase.idea.jvm.PsiJvmFileImpl
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
-
-import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
+import org.eclipse.xtext.xbase.idea.types.psi.impl.JvmPsiClassImpl
 
 class PsiJvmModelAssociator extends JvmModelAssociator {
 
@@ -24,7 +27,7 @@ class PsiJvmModelAssociator extends JvmModelAssociator {
 	extension IPsiModelAssociator
 
 	@Inject
-	Provider<JvmPsiClassProvider> psiClassProviderProvider
+	extension IPsiModelAssociations psiAssociations
 
 	override associate(EObject sourceElement, EObject jvmElement) {
 		super.associate(sourceElement, jvmElement)
@@ -38,29 +41,56 @@ class PsiJvmModelAssociator extends JvmModelAssociator {
 		super.associatePrimary(sourceElement, jvmElement)
 		val psiElementProvider = createPsiElementProvider(sourceElement, jvmElement)
 		if (psiElementProvider != null) {
-			// TODO double check if this is reasonable - there is no notion of primary 
 			jvmElement.associatePrimary(psiElementProvider)
 		}
 	}
 
-	protected def PsiElementProvider createPsiElementProvider(EObject sourceElement, EObject jvmElement) {
-		[
-			val root = jvmElement.rootContainer
-			val psiClass = if (root instanceof JvmDeclaredType) {
-					// maybe install mapping / adapters here
-					val provider = psiClassProviderProvider.get
-					provider.jvmDeclaredType = root
-					provider.sourceElement = sourceElement
-					provider.get
-				}
-			if (root == jvmElement) {
-				return psiClass
+	def PsiElementProvider createPsiElementProvider(EObject sourceElement, EObject jvmElement) {
+		switch jvmElement {
+			JvmDeclaredType: {
+				return [
+					if (jvmElement.declaringType == null) {
+						new JvmPsiClassImpl(jvmElement, sourceElement.psiElement)
+					} else {
+						val psiClass = psiAssociations.getPsiElement(jvmElement.declaringType) as PsiClass
+						if (psiClass == null)
+							return null
+						psiClass.innerClasses.findFirst [
+							getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY) == jvmElement
+						]
+					}
+				]
 			}
-			val psiFile = psiClass.containingFile
-			if (psiFile instanceof PsiJvmFileImpl) {
-				psiFile.mapping.get(jvmElement)
+			JvmExecutable: {
+				[
+					val psiClass = psiAssociations.getPsiElement(jvmElement.declaringType) as PsiClass
+					if (psiClass == null)
+						return null
+					psiClass.methods.findFirst [
+						getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY) == jvmElement
+					]
+				]
 			}
-		]
+			JvmField: {
+				[
+					val psiClass = psiAssociations.getPsiElement(jvmElement.declaringType) as PsiClass
+					if (psiClass == null)
+						return null
+					psiClass.fields.findFirst [
+						getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY) == jvmElement
+					]
+				]
+			}
+			JvmFormalParameter: {
+				[
+					val psiMethod = psiAssociations.getPsiElement(jvmElement.eContainer) as PsiMethod
+					if (psiMethod == null)
+						return null
+					psiMethod.parameterList.parameters.findFirst [
+						getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY) == jvmElement
+					]
+				]
+			}
+		}
 	}
-
 }

@@ -12,8 +12,15 @@ import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiAnnotationMethod;
+import com.intellij.psi.PsiAnonymousClass;
+import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiEnumConstant;
+import com.intellij.psi.PsiField;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiMethod;
+import com.intellij.psi.PsiParameter;
 import com.intellij.psi.impl.DebugUtil;
 import junit.framework.TestCase;
 import org.eclipse.xtend.idea.LightXtendTest;
@@ -22,14 +29,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.psi.PsiEObject;
 import org.eclipse.xtext.psi.PsiEObjectIdentifier;
 import org.eclipse.xtext.psi.PsiNamedEObject;
-import org.eclipse.xtext.xbase.idea.jvm.JvmPsiAnnotationMethodImpl;
-import org.eclipse.xtext.xbase.idea.jvm.JvmPsiAnonymousClass;
-import org.eclipse.xtext.xbase.idea.jvm.JvmPsiAnonymousClassImpl;
-import org.eclipse.xtext.xbase.idea.jvm.JvmPsiClassImpl;
-import org.eclipse.xtext.xbase.idea.jvm.JvmPsiEnumConstantImpl;
-import org.eclipse.xtext.xbase.idea.jvm.JvmPsiFieldImpl;
-import org.eclipse.xtext.xbase.idea.jvm.JvmPsiMethodImpl;
-import org.eclipse.xtext.xbase.idea.jvm.JvmPsiParameterImpl;
 import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass;
 
 /**
@@ -63,9 +62,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.<JvmPsiParameterImpl>testNavigateTo(
+    this.<PsiParameter>testNavigateTo(
       "mypackage/Greeter.xtend", _builder.toString(), 
-      JvmPsiParameterImpl.class);
+      PsiParameter.class);
   }
   
   public void testNavigateToClass() {
@@ -104,9 +103,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.<JvmPsiClassImpl>testNavigateTo(
+    this.<PsiClass>testNavigateTo(
       "mypackage/Greeter.xtend", _builder.toString(), 
-      JvmPsiClassImpl.class);
+      PsiClass.class);
   }
   
   public void testNavigateToClass_Extends() {
@@ -235,9 +234,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();
-    this.<JvmPsiClassImpl>testNavigateTo(
+    this.<PsiClass>testNavigateTo(
       "mypackage/Foo.xtend", _builder.toString(), 
-      JvmPsiClassImpl.class);
+      PsiClass.class);
   }
   
   public void testNavigateToAnnonymousClass() {
@@ -298,9 +297,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.<JvmPsiAnonymousClass>testNavigateTo(
+    this.<PsiAnonymousClass>testNavigateTo(
       "mypackage/Foo.xtend", _builder.toString(), 
-      JvmPsiAnonymousClass.class);
+      PsiAnonymousClass.class);
   }
   
   public void testNavigateToAnnonymousClass2() {
@@ -361,9 +360,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.<JvmPsiAnonymousClass>testNavigateTo(
+    this.<PsiAnonymousClass>testNavigateTo(
       "mypackage/Foo.xtend", _builder.toString(), 
-      JvmPsiAnonymousClass.class);
+      PsiAnonymousClass.class);
   }
   
   public void testNavigateToAnnonymousClass3() {
@@ -485,9 +484,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.<JvmPsiAnonymousClass>testNavigateTo(
+    this.<PsiAnonymousClass>testNavigateTo(
       "mypackage/Foo.xtend", _builder.toString(), 
-      JvmPsiAnonymousClass.class);
+      PsiAnonymousClass.class);
   }
   
   public void testNavigateToAnnonymousClass5() {
@@ -538,9 +537,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.<JvmPsiAnonymousClassImpl>testNavigateTo(
+    this.<PsiAnonymousClass>testNavigateTo(
       "mypackage/Foo.xtend", _builder.toString(), 
-      JvmPsiAnonymousClassImpl.class);
+      PsiAnonymousClass.class);
   }
   
   public void testNavigateToEnumeration() {
@@ -622,9 +621,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.<JvmPsiEnumConstantImpl>testNavigateTo(
+    this.<PsiEnumConstant>testNavigateTo(
       "mypackage/Foo.xtend", _builder.toString(), 
-      JvmPsiEnumConstantImpl.class);
+      PsiEnumConstant.class);
   }
   
   public void testNavigateToConstructor() {
@@ -661,9 +660,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final JvmPsiMethodImpl psiConstructor = this.<JvmPsiMethodImpl>testNavigateTo(
+    final PsiMethod psiConstructor = this.<PsiMethod>testNavigateTo(
       "mypackage/Greeter.xtend", _builder.toString(), 
-      JvmPsiMethodImpl.class);
+      PsiMethod.class);
     boolean _isConstructor = psiConstructor.isConstructor();
     TestCase.assertTrue(_isConstructor);
   }
@@ -704,9 +703,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final JvmPsiMethodImpl psiMethod = this.<JvmPsiMethodImpl>testNavigateTo(
+    final PsiMethod psiMethod = this.<PsiMethod>testNavigateTo(
       "mypackage/Greeter.xtend", _builder.toString(), 
-      JvmPsiMethodImpl.class);
+      PsiMethod.class);
     boolean _isConstructor = psiMethod.isConstructor();
     TestCase.assertFalse(_isConstructor);
   }
@@ -745,9 +744,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.<JvmPsiAnnotationMethodImpl>testNavigateTo(
+    this.<PsiAnnotationMethod>testNavigateTo(
       "mypackage/MyAnnotation.xtend", _builder.toString(), 
-      JvmPsiAnnotationMethodImpl.class);
+      PsiAnnotationMethod.class);
   }
   
   public void testNavigateToField() {
@@ -779,9 +778,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.<JvmPsiFieldImpl>testNavigateTo(
+    this.<PsiField>testNavigateTo(
       "mypackage/MyAnnotation.xtend", _builder.toString(), 
-      JvmPsiFieldImpl.class);
+      PsiField.class);
   }
   
   public void testNavigateToVariable() {

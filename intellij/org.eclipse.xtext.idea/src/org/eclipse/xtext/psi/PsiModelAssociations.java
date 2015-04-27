@@ -36,7 +36,7 @@ public class PsiModelAssociations implements IPsiModelAssociations, IPsiModelAss
 		
 		private final CompositeElement composite;
 
-		private PsiElementProvider psiElementProvider;
+		private final PsiElementProvider psiElementProvider;
 
 		public PsiAdapter(final PsiElement psiElement) {
 			this(new PsiElementProvider() {
@@ -72,14 +72,10 @@ public class PsiModelAssociations implements IPsiModelAssociations, IPsiModelAss
 			if (composite != null) {
 				return composite.getPsi();
 			}
-			if (psiElement == null) {
+			if (psiElement == null && psiElementProvider != null) {
 				psiElement = psiElementProvider.get();
 			}
 			return psiElement;
-		}
-		
-		public PsiElementProvider getPsiElementProvider() {
-			return psiElementProvider;
 		}
 		
 		public static CompositeElement getComposite(EObject object) {
@@ -164,6 +160,7 @@ public class PsiModelAssociations implements IPsiModelAssociations, IPsiModelAss
 		if (objectDescription == null) {
 			return null;
 		}
+		// TODO maybe use EcoreUtil.resolve on objectDescription.getEObjectOrProxy
 		EObject object = context.getResourceSet().getEObject(objectDescription.getEObjectURI(), true);
 		return getPsiElement(object);
 	}

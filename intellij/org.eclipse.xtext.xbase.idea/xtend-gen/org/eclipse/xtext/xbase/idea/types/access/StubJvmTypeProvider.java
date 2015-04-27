@@ -31,6 +31,7 @@ import org.eclipse.xtext.common.types.access.impl.AbstractRuntimeJvmTypeProvider
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
+import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.idea.extensions.IdeaProjectExtensions;
 import org.eclipse.xtext.psi.IPsiModelAssociator;
 import org.eclipse.xtext.resource.ISynchronizable;
@@ -38,7 +39,6 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.eclipse.xtext.xbase.idea.jvm.JvmPsiClassImpl;
 import org.eclipse.xtext.xbase.idea.types.access.PsiBasedTypeFactory;
 import org.eclipse.xtext.xbase.idea.types.access.PsiClassMirror;
 import org.eclipse.xtext.xbase.idea.types.access.StubURIHelper;
@@ -50,6 +50,8 @@ import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
+  private final static String PRIMITIVES = URIHelperConstants.PRIMITIVES_URI.segment(0);
+  
   @Accessors(AccessorType.PUBLIC_GETTER)
   private final Project project;
   
@@ -226,42 +228,29 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
   
   @Override
   protected IMirror createMirrorForFQN(final String name) {
-    PsiClassMirror _switchResult = null;
-    JavaPsiFacade _javaPsiFacade = IdeaProjectExtensions.getJavaPsiFacade(this.project);
-    GlobalSearchScope _searchScope = this.getSearchScope();
-    PsiClass _findClassWithAlternativeResolvedEnabled = IdeaProjectExtensions.findClassWithAlternativeResolvedEnabled(_javaPsiFacade, name, _searchScope);
-    final PsiClass psiClass = _findClassWithAlternativeResolvedEnabled;
-    boolean _matched = false;
-    if (!_matched) {
-      if (psiClass instanceof JvmPsiClass) {
-        _matched=true;
-      }
-      if (!_matched) {
-        if (psiClass instanceof JvmPsiClassImpl) {
-          _matched=true;
-        }
-      }
-      if (!_matched) {
-        boolean _equals = Objects.equal(psiClass, null);
-        if (_equals) {
-          _matched=true;
-        }
-      }
-      if (!_matched) {
+    PsiClassMirror _xblockexpression = null;
+    {
+      JavaPsiFacade _javaPsiFacade = IdeaProjectExtensions.getJavaPsiFacade(this.project);
+      GlobalSearchScope _searchScope = this.getSearchScope();
+      final PsiClass psiClass = IdeaProjectExtensions.findClassWithAlternativeResolvedEnabled(_javaPsiFacade, name, _searchScope);
+      boolean _or = false;
+      boolean _equals = Objects.equal(psiClass, null);
+      if (_equals) {
+        _or = true;
+      } else {
         PsiClass _containingClass = psiClass.getContainingClass();
         boolean _notEquals = (!Objects.equal(_containingClass, null));
-        if (_notEquals) {
-          _matched=true;
-        }
+        _or = _notEquals;
       }
-      if (_matched) {
-        _switchResult = null;
+      if (_or) {
+        return null;
       }
+      if ((psiClass instanceof JvmPsiClass)) {
+        return null;
+      }
+      _xblockexpression = new PsiClassMirror(psiClass, this.psiClassFactory);
     }
-    if (!_matched) {
-      _switchResult = new PsiClassMirror(psiClass, this.psiClassFactory);
-    }
-    return _switchResult;
+    return _xblockexpression;
   }
   
   protected GlobalSearchScope getSearchScope() {

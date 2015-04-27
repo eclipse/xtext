@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.idea.psi;
 
-import com.google.inject.Provider;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiClassType;
@@ -23,9 +22,9 @@ import com.intellij.psi.PsiTypeParameterList;
 import com.intellij.psi.PsiTypeParameterListOwner;
 import com.intellij.testFramework.UsefulTestCase;
 import junit.framework.TestCase;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass;
 import org.eclipse.xtext.xbase.idea.types.psi.LoadingTypeResourcePhase;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -199,9 +198,8 @@ public class JvmPsiClassTest extends LightXtendTest {
     String _name = method.getName();
     TestCase.assertEquals("someMethod", _name);
     final JvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
-    PsiClass _delegate = psiClass.getDelegate();
     PsiClass _containingClass = method.getContainingClass();
-    TestCase.assertEquals(_delegate, _containingClass);
+    TestCase.assertEquals(psiClass, _containingClass);
   }
   
   public void testMethodBodyWithErrors() {
@@ -243,20 +241,8 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.newLine();
     this.myFixture.addFileToProject("mypackage/Foo.xtend", _builder.toString());
     final JvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
-    JvmDeclaredType _type = psiClass.getType();
+    EClass _type = psiClass.getType();
     LoadingTypeResourcePhase.setLoadingTypeResource(_type, true);
-    final Provider<PsiClass> _function = new Provider<PsiClass>() {
-      @Override
-      public PsiClass get() {
-        Object _xblockexpression = null;
-        {
-          TestCase.fail();
-          _xblockexpression = null;
-        }
-        return ((PsiClass)_xblockexpression);
-      }
-    };
-    psiClass.setPsiClassProvider(_function);
     String _name = psiClass.getName();
     TestCase.assertEquals("Foo", _name);
     String _qualifiedName = psiClass.getQualifiedName();
@@ -299,20 +285,8 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.newLine();
     this.myFixture.addFileToProject("mypackage/Foo.xtend", _builder.toString());
     final JvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
-    JvmDeclaredType _type = psiClass.getType();
+    EClass _type = psiClass.getType();
     LoadingTypeResourcePhase.setLoadingTypeResource(_type, true);
-    final Provider<PsiClass> _function = new Provider<PsiClass>() {
-      @Override
-      public PsiClass get() {
-        Object _xblockexpression = null;
-        {
-          TestCase.fail();
-          _xblockexpression = null;
-        }
-        return ((PsiClass)_xblockexpression);
-      }
-    };
-    psiClass.setPsiClassProvider(_function);
     PsiModifierList _modifierList = psiClass.getModifierList();
     boolean _hasModifierProperty = _modifierList.hasModifierProperty(PsiModifier.PUBLIC);
     TestCase.assertFalse(_hasModifierProperty);
@@ -341,20 +315,8 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.newLine();
     this.myFixture.addFileToProject("mypackage/Foo.xtend", _builder.toString());
     final JvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
-    JvmDeclaredType _type = psiClass.getType();
+    EClass _type = psiClass.getType();
     LoadingTypeResourcePhase.setLoadingTypeResource(_type, true);
-    final Provider<PsiClass> _function = new Provider<PsiClass>() {
-      @Override
-      public PsiClass get() {
-        Object _xblockexpression = null;
-        {
-          TestCase.fail();
-          _xblockexpression = null;
-        }
-        return ((PsiClass)_xblockexpression);
-      }
-    };
-    psiClass.setPsiClassProvider(_function);
     boolean _isInterface = psiClass.isInterface();
     TestCase.assertTrue(_isInterface);
   }
@@ -370,20 +332,8 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.newLine();
     this.myFixture.addFileToProject("mypackage/Foo.xtend", _builder.toString());
     final JvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
-    JvmDeclaredType _type = psiClass.getType();
+    EClass _type = psiClass.getType();
     LoadingTypeResourcePhase.setLoadingTypeResource(_type, true);
-    final Provider<PsiClass> _function = new Provider<PsiClass>() {
-      @Override
-      public PsiClass get() {
-        Object _xblockexpression = null;
-        {
-          TestCase.fail();
-          _xblockexpression = null;
-        }
-        return ((PsiClass)_xblockexpression);
-      }
-    };
-    psiClass.setPsiClassProvider(_function);
     boolean _isEnum = psiClass.isEnum();
     TestCase.assertTrue(_isEnum);
   }
@@ -399,20 +349,8 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.newLine();
     this.myFixture.addFileToProject("mypackage/Foo.xtend", _builder.toString());
     final JvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
-    JvmDeclaredType _type = psiClass.getType();
+    EClass _type = psiClass.getType();
     LoadingTypeResourcePhase.setLoadingTypeResource(_type, true);
-    final Provider<PsiClass> _function = new Provider<PsiClass>() {
-      @Override
-      public PsiClass get() {
-        Object _xblockexpression = null;
-        {
-          TestCase.fail();
-          _xblockexpression = null;
-        }
-        return ((PsiClass)_xblockexpression);
-      }
-    };
-    psiClass.setPsiClassProvider(_function);
     boolean _isAnnotationType = psiClass.isAnnotationType();
     TestCase.assertTrue(_isAnnotationType);
   }
@@ -621,9 +559,8 @@ public class JvmPsiClassTest extends LightXtendTest {
     TestCase.assertEquals(0, _index);
     String _name = typeParameter.getName();
     TestCase.assertEquals("T", _name);
-    PsiClass _delegate = psiClass.getDelegate();
     PsiTypeParameterListOwner _owner = typeParameter.getOwner();
-    TestCase.assertEquals(_delegate, _owner);
+    TestCase.assertEquals(psiClass, _owner);
     final PsiReferenceList extendsList = typeParameter.getExtendsList();
     PsiReferenceList.Role _role = extendsList.getRole();
     TestCase.assertEquals(PsiReferenceList.Role.EXTENDS_BOUNDS_LIST, _role);

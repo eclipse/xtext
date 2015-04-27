@@ -24,18 +24,20 @@ import org.eclipse.xtext.common.types.access.impl.AbstractRuntimeJvmTypeProvider
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess
 import org.eclipse.xtext.common.types.access.impl.TypeResourceServices
+import org.eclipse.xtext.common.types.access.impl.URIHelperConstants
 import org.eclipse.xtext.psi.IPsiModelAssociator
 import org.eclipse.xtext.resource.ISynchronizable
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.service.OperationCanceledError
 import org.eclipse.xtext.util.Strings
-import org.eclipse.xtext.xbase.idea.jvm.JvmPsiClassImpl
-import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass
 
 import static extension org.eclipse.xtend.lib.annotations.AccessorType.*
 import static extension org.eclipse.xtext.idea.extensions.IdeaProjectExtensions.*
+import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass
 
 class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
+
+	val static String PRIMITIVES = URIHelperConstants.PRIMITIVES_URI.segment(0)
 
 	@Accessors(AccessorType.PUBLIC_GETTER)
 	val Project project
@@ -135,15 +137,14 @@ class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 	}
 
 	protected override createMirrorForFQN(String name) {
-		switch psiClass : project.javaPsiFacade.findClassWithAlternativeResolvedEnabled(name, searchScope) {
-			JvmPsiClass,
-			JvmPsiClassImpl,
-			case psiClass == null,
-			case psiClass.containingClass != null:
-				null
-			default:
-				new PsiClassMirror(psiClass, psiClassFactory)
+		val psiClass = project.javaPsiFacade.findClassWithAlternativeResolvedEnabled(name, searchScope)
+		if (psiClass == null || psiClass.containingClass != null) {
+			return null
 		}
+		if (psiClass instanceof JvmPsiClass) {
+			return null
+		}
+		new PsiClassMirror(psiClass, psiClassFactory)
 	}
 
 	protected def getSearchScope() {
