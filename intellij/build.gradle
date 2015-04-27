@@ -1,6 +1,6 @@
 buildscript {
 	dependencies {
-		classpath "org.xtext:xtext-idea-gradle-plugin:0.3.10"
+		classpath "org.xtext:xtext-idea-gradle-plugin:0.3.11"
 	}
 }
 
@@ -10,7 +10,7 @@ def ideaTestProjects = subprojects.findAll{it.name.endsWith('idea.tests')} + pro
 
 apply plugin: 'org.xtext.idea-repository'
 apply plugin: 'org.xtext.idea-aggregator'
-ideaRepository.rootUrl = 'https://hudson.eclipse.org/xtext/job/xtext-intellij/lastSuccessfulBuild/artifact/git-repo/'
+ideaRepository.rootUrl = 'https://hudson.eclipse.org/xtext/job/xtext-intellij/lastSuccessfulBuild/artifact/git-repo/intellij/build/ideaRepository'
 
 allprojects {
 	apply plugin: 'org.xtext.idea-dev'
