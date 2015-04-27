@@ -26,6 +26,7 @@ import org.eclipse.xtext.ui.editor.XtextEditorInfo;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.util.IssueUtil;
+import org.eclipse.xtext.validation.Issue;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterators;
@@ -95,7 +96,10 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 		if(annotationModel != null && !isMarkerStillValid(marker, annotationModel))
 			return emptyResult;
 		
-		final Iterable<IssueResolution> resolutions = getResolutions(getIssueUtil().createIssue(marker), editor.getDocument());
+		Issue issue = getIssueUtil().createIssue(marker);
+		if(issue == null)
+			return emptyResult;
+		final Iterable<IssueResolution> resolutions = getResolutions(issue, editor.getDocument());
 		return getAdaptedResolutions(Lists.newArrayList(resolutions));
 	}
 
