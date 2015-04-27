@@ -7,7 +7,7 @@ import org.eclipse.xtext.xtext.ui.wizard.project.DefaultProjectFactoryContributo
 import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectInfo;
 
 /**
- * Contributes Idea parts to a new dsl test project
+ * Contributes Idea parts to an *.idea project
  * @author Dennis Huebner - Initial contribution and API
  * @since 2.9
  */
@@ -165,5 +165,31 @@ public class IdeaProjectContributor extends DefaultProjectFactoryContributor {
     _builder_1.append("\'");
     _builder_1.newLineIfNotEmpty();
     this.writeToFile(_builder_1, fc, "settings.gradle");
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("To build this project you need to install Gradle.");
+    _builder_2.newLine();
+    _builder_2.append("https://gradle.org/docs/current/userguide/installation.html");
+    _builder_2.newLine();
+    _builder_2.newLine();
+    _builder_2.newLine();
+    _builder_2.append("The following tasks are available:");
+    _builder_2.newLine();
+    _builder_2.append(" ");
+    _builder_2.append("eclipse - generates Eclipse metadata like .project and .classpath, including the IntelliJ libraries");
+    _builder_2.newLine();
+    _builder_2.append(" ");
+    _builder_2.append("test - runs all your unit tests");
+    _builder_2.newLine();
+    _builder_2.append(" ");
+    _builder_2.append("assemble - creates the shippable build outputs. This includes an ideaZip, which packages your plugin in the format that the IDEA plugin manager understands");
+    _builder_2.newLine();
+    _builder_2.append(" ");
+    _builder_2.append("runIdea - starts IntelliJ IDEA with your plugin installed");
+    _builder_2.newLine();
+    _builder_2.newLine();
+    _builder_2.append(" ");
+    _builder_2.append("For more information please read: https://github.com/xtext/xtext-gradle-plugin/tree/master/xtext-idea-gradle-plugin");
+    _builder_2.newLine();
+    this.writeToFile(_builder_2, fc, "readme.txt");
   }
 }
