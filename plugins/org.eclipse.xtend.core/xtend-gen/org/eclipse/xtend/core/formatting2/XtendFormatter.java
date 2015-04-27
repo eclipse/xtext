@@ -618,8 +618,15 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     }
     ISemanticRegionsFinder _regionFor_2 = this.textRegionExtensions.regionFor(func);
     final ISemanticRegion nameNode = _regionFor_2.feature(XtendPackage.Literals.XTEND_FUNCTION__NAME);
-    ISemanticRegionFinder _immediatelyFollowing = nameNode.immediatelyFollowing();
-    final ISemanticRegion open = _immediatelyFollowing.keyword("(");
+    ISemanticRegionFinder _immediatelyFollowing = null;
+    if (nameNode!=null) {
+      _immediatelyFollowing=nameNode.immediatelyFollowing();
+    }
+    ISemanticRegion _keyword_2 = null;
+    if (_immediatelyFollowing!=null) {
+      _keyword_2=_immediatelyFollowing.keyword("(");
+    }
+    final ISemanticRegion open = _keyword_2;
     ISemanticRegionsFinder _regionFor_3 = this.textRegionExtensions.regionFor(func);
     final ISemanticRegion close = _regionFor_3.keyword(")");
     JvmTypeReference _returnType = func.getReturnType();
