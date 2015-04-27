@@ -37,15 +37,21 @@ configure(subprojects - eclipsePluginProjects) {
 		exclude module:'org.eclipse.jdt.core'
 	}
 
-	task debugIdea {
-		dependsOn(runIdea)
-		runIdea.debug = true
-		group = 'intelliJ Idea'
-		description = 'Debugs Intellij IDEA remotely on port 5005 with this project and its dependencies installed'
-	}
+	if (!isBuildServer) {
+		// Disable the java task if not on the build server
+		// This allows to reuse the artifacts from /bin that 
+		// Eclipse produced. They are immediately available and
+		// contain debug information.
+		compileJava.enabled = false
 
-	assembleSandbox {
-		if (!isBuildServer) classes.from 'bin'
+		task copyFromBin(type: Copy) {
+		    from 'bin'
+		    into 'build/classes/main'
+		}
+
+		classes {
+			dependsOn(copyFromBin)
+		}
 	}
 
 	task cleanTestSystem(type: Delete) {

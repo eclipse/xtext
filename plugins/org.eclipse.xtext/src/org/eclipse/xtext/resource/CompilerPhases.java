@@ -13,6 +13,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 
 /**
@@ -24,12 +25,7 @@ public class CompilerPhases {
 	public boolean isIndexing(Notifier ctx) {
 		ResourceSet set = EcoreUtil2.getResourceSet(ctx);
 		if (set != null) {
-			Iterator<Adapter> iterator = set.eAdapters().iterator();
-			while (iterator.hasNext()) {
-				if (iterator.next() instanceof IndexingAdapter) {
-					return true;
-				}
-			}
+			return EcoreUtil.getAdapter(set.eAdapters(), IndexingAdapter.INSTANCE) != null;
 		}
 		return false;
 	}
@@ -37,22 +33,19 @@ public class CompilerPhases {
 	public void setIndexing(Notifier ctx, boolean isIndex) {
 		ResourceSet set = EcoreUtil2.getResourceSet(ctx);
 		if (isIndex) {
-			set.eAdapters().add(new IndexingAdapter());
+			set.eAdapters().add(IndexingAdapter.INSTANCE);
 		} else {
-			Iterator<Adapter> iterator = set.eAdapters().iterator();
-			while (iterator.hasNext()) {
-				if (iterator.next() instanceof IndexingAdapter) {
-					iterator.remove();
-					return;
-				}
-			}
+			set.eAdapters().remove(IndexingAdapter.INSTANCE);
 		}
 	}
 	
-	static class IndexingAdapter extends AdapterImpl {
+	private static class IndexingAdapter extends AdapterImpl {
+		
+		private static final IndexingAdapter INSTANCE = new IndexingAdapter();
+		
 		@Override
 		public boolean isAdapterForType(Object type) {
-			return IndexingAdapter.class.equals(type);
+			return INSTANCE == type;
 		}
 	}
 }

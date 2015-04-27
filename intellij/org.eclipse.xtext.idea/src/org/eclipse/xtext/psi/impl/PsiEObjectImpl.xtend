@@ -183,9 +183,6 @@ class PsiEObjectImpl<T extends PsiNamedEObjectStub<?>> extends StubBasedPsiEleme
 		significantTextRegion.offset
 	}
 
-	/** 
-	 * @return
-	 */
 	def protected getSignificantTextRegion() {
 		try {
 			EObject.significantTextRegion

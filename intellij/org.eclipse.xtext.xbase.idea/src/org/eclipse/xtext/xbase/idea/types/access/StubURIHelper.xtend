@@ -158,6 +158,7 @@ class StubURIHelper implements URIHelperConstants {
 	}
 
 	protected def appendTypeParameterFragment(StringBuilder builder, PsiTypeParameter typeParameter) {
+		// TODO type paraemters of method should be resolved in the produced type
 		switch owner : typeParameter.owner {
 			PsiClass: builder.appendClassFragment(owner)
 			PsiMethod: builder.appendMethodFragment(owner)

@@ -38,6 +38,7 @@ class PsiJvmModelAssociator extends JvmModelAssociator {
 		super.associatePrimary(sourceElement, jvmElement)
 		val psiElementProvider = createPsiElementProvider(sourceElement, jvmElement)
 		if (psiElementProvider != null) {
+			// TODO double check if this is reasonable - there is no notion of primary 
 			jvmElement.associatePrimary(psiElementProvider)
 		}
 	}
@@ -46,6 +47,7 @@ class PsiJvmModelAssociator extends JvmModelAssociator {
 		[
 			val root = jvmElement.rootContainer
 			val psiClass = if (root instanceof JvmDeclaredType) {
+					// maybe install mapping / adapters here
 					val provider = psiClassProviderProvider.get
 					provider.jvmDeclaredType = root
 					provider.sourceElement = sourceElement

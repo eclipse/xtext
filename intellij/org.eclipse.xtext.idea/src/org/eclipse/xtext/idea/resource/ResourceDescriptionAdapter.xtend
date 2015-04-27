@@ -8,50 +8,17 @@
 package org.eclipse.xtext.idea.resource
 
 import org.eclipse.emf.common.notify.impl.AdapterImpl
-import org.eclipse.emf.ecore.EClass
-import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtend.lib.annotations.Delegate
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.resource.XtextResource
 
 @FinalFieldsConstructor
 class ResourceDescriptionAdapter extends AdapterImpl implements IResourceDescription {
 	
+	@Delegate
 	val IResourceDescription delegate
-	
-	override getExportedObjects() {
-		delegate.exportedObjects
-	}
-	
-	override getImportedNames() {
-		delegate.importedNames
-	}
-	
-	override getReferenceDescriptions() {
-		delegate.referenceDescriptions
-	}
-	
-	override getURI() {
-		delegate.URI
-	}
-	
-	override getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
-		delegate.getExportedObjects(type, name, ignoreCase)
-	}
-	
-	override getExportedObjectsByObject(EObject object) {
-		delegate.getExportedObjectsByObject(object)
-	}
-	
-	override getExportedObjectsByType(EClass type) {
-		delegate.getExportedObjectsByType(type)
-	}
-	
-	override isEmpty() {
-		delegate.empty
-	}
 	
 	def static install(Resource it) {
 		remove

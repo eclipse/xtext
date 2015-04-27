@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.idea.types.psi;
 
 import com.google.common.base.Objects;
-import java.util.Iterator;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
@@ -22,9 +21,11 @@ import org.eclipse.xtext.EcoreUtil2;
  */
 @SuppressWarnings("all")
 public class LoadingTypeResourcePhase extends AdapterImpl {
+  private final static LoadingTypeResourcePhase INSTANCE = new LoadingTypeResourcePhase();
+  
   @Override
   public boolean isAdapterForType(final Object type) {
-    return Objects.equal(LoadingTypeResourcePhase.class, type);
+    return Objects.equal(LoadingTypeResourcePhase.INSTANCE, type);
   }
   
   public static boolean isLoadingTypeResource(final Notifier ctx) {
@@ -36,29 +37,19 @@ public class LoadingTypeResourcePhase extends AdapterImpl {
         return false;
       }
       EList<Adapter> _eAdapters = resourceSet.eAdapters();
-      Adapter _adapter = EcoreUtil.getAdapter(_eAdapters, LoadingTypeResourcePhase.class);
+      Adapter _adapter = EcoreUtil.getAdapter(_eAdapters, LoadingTypeResourcePhase.INSTANCE);
       _xblockexpression = (!Objects.equal(_adapter, null));
     }
     return _xblockexpression;
   }
   
   public static void setLoadingTypeResource(final Notifier ctx, final boolean loadingTypeResource) {
-    final ResourceSet resourceSet = EcoreUtil2.getResourceSet(ctx);
+    ResourceSet _resourceSet = EcoreUtil2.getResourceSet(ctx);
+    final EList<Adapter> adapters = _resourceSet.eAdapters();
     if (loadingTypeResource) {
-      EList<Adapter> _eAdapters = resourceSet.eAdapters();
-      LoadingTypeResourcePhase _loadingTypeResourcePhase = new LoadingTypeResourcePhase();
-      _eAdapters.add(_loadingTypeResourcePhase);
+      adapters.add(LoadingTypeResourcePhase.INSTANCE);
     } else {
-      EList<Adapter> _eAdapters_1 = resourceSet.eAdapters();
-      final Iterator<Adapter> i = _eAdapters_1.iterator();
-      while (i.hasNext()) {
-        Adapter _next = i.next();
-        boolean _isAdapterForType = _next.isAdapterForType(LoadingTypeResourcePhase.class);
-        if (_isAdapterForType) {
-          i.remove();
-          return;
-        }
-      }
+      adapters.remove(LoadingTypeResourcePhase.INSTANCE);
     }
   }
 }
