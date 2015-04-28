@@ -10,8 +10,15 @@
 	<idea-version since-build="131"/>
 	<depends>org.eclipse.xtext.idea</depends>
 	<depends>org.eclipse.xtext.xbase.idea</depends>
+	
+	 <actions>
+	     <action id="Xtend.NewType" class="org.eclipse.xtend.core.idea.actions.NewXtendFileAction">
+	        <add-to-group group-id="NewGroup1" anchor="after" relative-to-action="NewClass"/>
+	     </action>
+     </actions>
 
 	<extensions defaultExtensionNs="com.intellij">
+		<createFromTemplateHandler  implementation="org.eclipse.xtend.core.idea.actions.XtendCreateFromTemplateHandler"/>
 		<buildProcess.parametersProvider implementation="org.eclipse.xtend.core.idea.server.XtendBuildProcessParametersProvider"/>
 		
 		<java.elementFinder implementation="org.eclipse.xtend.core.idea.lang.types.psi.XtendJvmTypesElementFinder" order="first, before java"/>
