@@ -27,7 +27,7 @@ class ValidationService {
 		val result = new ValidationResult
 		issues.filter[severity != Severity.IGNORE].forEach[ issue |
 			result.entries += new ValidationResult.Entry(issue.message, issue.severity.translate,
-				issue.lineNumber + 1, issue.offset, issue.offset + issue.length)
+				issue.lineNumber, issue.offset, issue.offset + issue.length)
 		]
 		return result
 	}
