@@ -228,7 +228,7 @@ public class WorkbenchTestHelper extends Assert {
 		return editorInfo.getEditorId();
 	}
 
-	public String getContents(IFile file) throws Exception {
+	public static String getContentsAsString(IFile file) throws Exception {
 		InputStream inputStream = file.getContents();
 		try {
 			byte[] buffer = new byte[2048];
@@ -328,6 +328,7 @@ public class WorkbenchTestHelper extends Assert {
 				mf.getMainAttributes().putValue("Bundle-RequiredExecutionEnvironment", bree.get());
 			}
 		});
+		JavaProjectSetupUtil.addJreClasspathEntry(javaProject, bree.get());
 		return bree.get();
 	}
 	

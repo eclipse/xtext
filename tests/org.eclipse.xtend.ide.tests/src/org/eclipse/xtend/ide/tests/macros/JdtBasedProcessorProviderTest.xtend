@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.macros
 
-import com.google.common.io.CharStreams
-import java.io.InputStreamReader
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IFolder
 import org.eclipse.core.runtime.NullProgressMonitor
@@ -31,7 +29,7 @@ import static extension org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
  * 
  */
 class JdtBasedProcessorProviderTest {
-	
+
 	@After def tearDown() throws Exception {
 		cleanWorkspace();
 	}
@@ -91,7 +89,7 @@ class JdtBasedProcessorProviderTest {
 		waitForBuild(new NullProgressMonitor)
 		assertNoErrorsInWorkspace();
 		
-		val javaCode = CharStreams.toString(new InputStreamReader((file("userProject/xtend-gen/client/SomeClass.java") as IFile).contents))
+		val javaCode = (file("userProject/xtend-gen/client/SomeClass.java") as IFile).contentsAsString
 		Assert.assertTrue(javaCode.contains("HUNKELDUNKEL"))
 	}
 	
@@ -147,7 +145,7 @@ class JdtBasedProcessorProviderTest {
 		waitForBuild(new NullProgressMonitor)
 		assertNoErrorsInWorkspace();
 		
-		val javaCode = CharStreams.toString(new InputStreamReader((file("userProject/xtend-gen/client/SomeClass.java") as IFile).contents))
+		val javaCode = (file("userProject/xtend-gen/client/SomeClass.java") as IFile).contentsAsString
 		Assert.assertTrue(javaCode.contains("HUNKELDUNKEL"))
 	}
 	
@@ -210,7 +208,7 @@ class JdtBasedProcessorProviderTest {
 		waitForBuild(new NullProgressMonitor)
 		assertNoErrorsInWorkspace();
 		
-		val javaCode = CharStreams.toString(new InputStreamReader((file("userProject/xtend-gen/client/SomeClass.java") as IFile).contents))
+		val javaCode = (file("userProject/xtend-gen/client/SomeClass.java") as IFile).contentsAsString
 		Assert.assertTrue(javaCode.contains("HUNKELDUNKEL"))
 	}
 	
@@ -259,7 +257,7 @@ class JdtBasedProcessorProviderTest {
 		waitForBuild(new NullProgressMonitor)
 		assertNoErrorsInWorkspace();
 		
-		val javaCode = CharStreams.toString(new InputStreamReader((file("userProject/xtend-gen/client/SomeClass.java") as IFile).contents))
+		val javaCode = (file("userProject/xtend-gen/client/SomeClass.java") as IFile).contentsAsString
 		Assert.assertTrue(javaCode.contains("classnotfound"))
 	}
 	
