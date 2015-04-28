@@ -31,7 +31,7 @@ class XtendFrameworkType extends FrameworkTypeEx {
 	}
 
 	override getIcon() {
-		XtendIcons.Xtend_16x16
+		XtendIcons.Xtend_ICON
 	}
 
 	override getPresentableName() {

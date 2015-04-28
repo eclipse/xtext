@@ -30,7 +30,7 @@ class XtendLibraryPresentationProvider extends LibraryPresentationProvider<Xtend
 	}
 
 	override getIcon() {
-		XtendIcons.Xtend_16x16
+		XtendIcons.Xtend_ICON
 	}
 
 }
