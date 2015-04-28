@@ -125,6 +125,8 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 	@AfterClass
 	static def void deleteProjects() {
 		cleanWorkspace();
+		macroProject = null
+		userProject = null
 	}
 
 	@After 
