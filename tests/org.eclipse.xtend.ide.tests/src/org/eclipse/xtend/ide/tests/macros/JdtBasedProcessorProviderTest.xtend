@@ -7,27 +7,24 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.macros
 
-import java.io.BufferedInputStream
-import java.io.ByteArrayInputStream
-import java.io.ByteArrayOutputStream
-import java.util.jar.Manifest
+import com.google.common.io.CharStreams
+import java.io.InputStreamReader
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IFolder
 import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.jdt.core.JavaCore
-import org.eclipse.xtext.util.StringInputStream
-import org.junit.After
-import org.junit.Test
-
-import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
-import static extension org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
-import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
-import com.google.common.io.CharStreams
-import java.io.InputStreamReader
-import org.junit.Assert
 import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder
 import org.eclipse.xtext.ui.XtextProjectHelper
+import org.eclipse.xtext.util.StringInputStream
+import org.junit.After
+import org.junit.Assert
+import org.junit.Test
+
+import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
+
+import static extension org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
+import static extension org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -64,7 +61,7 @@ class JdtBasedProcessorProviderTest {
 				}
 			}
 		''')
-		macroProject.addExportedPackage("annotation")
+		macroProject.project.addExportedPackages("annotation")
 		
 		val libProject = JavaCore.create(createPluginProject("libProject"))
 		libProject.newSource("mylib/Lib.xtend", '''
@@ -76,7 +73,7 @@ class JdtBasedProcessorProviderTest {
 				}
 			}
 		''')
-		libProject.addExportedPackage("mylib")
+		libProject.project.addExportedPackages("mylib")
 		waitForAutoBuild()
 				
 		val userProject = JavaCore.create(
@@ -109,7 +106,7 @@ class JdtBasedProcessorProviderTest {
 				}
 			}
 		''')
-		libProject.addExportedPackage("mylib")
+		libProject.project.addExportedPackages("mylib")
 		
 		val macroProject = JavaCore.create(createPluginProject("macroProject", "com.google.inject", "org.eclipse.xtend.lib",
 				"org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "libProject"))
@@ -132,7 +129,7 @@ class JdtBasedProcessorProviderTest {
 				}
 			}
 		''')
-		macroProject.addExportedPackage("annotation")
+		macroProject.project.addExportedPackages("annotation")
 		waitForAutoBuild()
 				
 		val userProject = JavaCore.create(
@@ -274,25 +271,5 @@ class JdtBasedProcessorProviderTest {
 		}
 		result.create(new StringInputStream(contents), true, null)
 		return result
-	}
-
-	def void addExportedPackage(IJavaProject pluginProject, String ... exportedPackages) {
-		val manifestFile = pluginProject.project.getFile("META-INF/MANIFEST.MF")
-		val manifestContent = manifestFile.contents
-		val manifest = try {
-			new Manifest(manifestContent)
-		} finally {
-			manifestContent.close
-		}
-		val attrs = manifest.getMainAttributes()
-		if (attrs.containsKey("Export-Package")) {
-			attrs.putValue("Export-Package", attrs.get("Export-Package") + "," + exportedPackages.join(","))
-		} else {
-			attrs.putValue("Export-Package", exportedPackages.join(","))
-		}
-		val out = new ByteArrayOutputStream()
-		manifest.write(out)
-		val in = new ByteArrayInputStream(out.toByteArray)
-		manifestFile.setContents(new BufferedInputStream(in), true, true, null)
 	}
 }
