@@ -360,10 +360,12 @@ public class DatatypeRulesTestLanguageElementTypeProvider implements IElementTyp
 
 	public static final IGrammarAwareElementType Double_INTTerminalRuleCall_4_2_ELEMENT_TYPE = associate(DoubleFactory.createDouble_INTTerminalRuleCall_4_2ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

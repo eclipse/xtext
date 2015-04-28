@@ -13,6 +13,7 @@ public final class UnassignedRuleCallTestLanguageFileImpl extends BaseXtextFile 
 		super(viewProvider, UnassignedRuleCallTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return UnassignedRuleCallTestLanguageFileType.INSTANCE;
 	}

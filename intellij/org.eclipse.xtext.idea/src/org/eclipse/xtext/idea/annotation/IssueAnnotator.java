@@ -36,16 +36,16 @@ public class IssueAnnotator implements Annotator {
 		if (!(element instanceof PsiEObject)) {
 			return;
 		}
+		Language language = element.getLanguage();
+		if (!(language instanceof IXtextLanguage)) {
+			return;
+		}
 		PsiEObject psiEObject = (PsiEObject) element;
 		if (!psiEObject.isRoot()) {
 			return;
 		}
 		Resource resource = psiEObject.getResource();
 		if (resource == null) {
-			return;
-		}
-		Language language = psiEObject.getLanguage();
-		if (!(language instanceof IXtextLanguage)) {
 			return;
 		}
 		IXtextLanguage xtextLanguage = (IXtextLanguage) language;
@@ -84,7 +84,7 @@ public class IssueAnnotator implements Annotator {
 					public List<Issue> exec(Resource state) throws Exception {
 						return doGetIssues(state, resourceValidator); 
 					}
-					
+
 				});
 			} catch (Throwable e) {
 				Exceptions.sneakyThrow(e);

@@ -16,18 +16,22 @@ public final class BacktrackingLexerTestLanguageFileType extends LanguageFileTyp
 		super(BacktrackingLexerTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "BacktrackingLexerTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "BacktrackingLexerTestLanguage";
 	}

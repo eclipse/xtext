@@ -16,6 +16,7 @@ public class EcoreTerminalsTestLanguageParserDefinition extends AbstractXtextPar
 	@Inject 
 	private EcoreTerminalsTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new EcoreTerminalsTestLanguageFileImpl(viewProvider);
 	}
@@ -23,7 +24,6 @@ public class EcoreTerminalsTestLanguageParserDefinition extends AbstractXtextPar
 	@Override
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
-		IElementType elementType = node.getElementType();
 		return super.createElement(node);
 	}
 

@@ -10,6 +10,7 @@ import com.intellij.openapi.extensions.PluginId;
 
 public class IndexTestLanguageBuildProcessParametersProvider extends BuildProcessParametersProvider {
 
+	@Override
 	public List<String> getClassPath() {
 		PluginId pluginId = PluginId.getId("org.eclipse.xtext.core.idea.tests");
 		File pluginFolder = PluginManager.getPlugin(pluginId).getPath();

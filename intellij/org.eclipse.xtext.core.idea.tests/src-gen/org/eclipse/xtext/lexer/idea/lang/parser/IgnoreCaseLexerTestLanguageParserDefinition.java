@@ -16,6 +16,7 @@ public class IgnoreCaseLexerTestLanguageParserDefinition extends AbstractXtextPa
 	@Inject 
 	private IgnoreCaseLexerTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new IgnoreCaseLexerTestLanguageFileImpl(viewProvider);
 	}
@@ -23,7 +24,6 @@ public class IgnoreCaseLexerTestLanguageParserDefinition extends AbstractXtextPa
 	@Override
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
-		IElementType elementType = node.getElementType();
 		return super.createElement(node);
 	}
 

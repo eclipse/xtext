@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class AbstractTestLanguageFileTypeFactory extends FileTypeFactory {
 
+	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
 		consumer.consume(org.eclipse.xtext.grammarinheritance.idea.lang.AbstractTestLanguageFileType.INSTANCE, org.eclipse.xtext.grammarinheritance.idea.lang.AbstractTestLanguageFileType.DEFAULT_EXTENSION);
 	}

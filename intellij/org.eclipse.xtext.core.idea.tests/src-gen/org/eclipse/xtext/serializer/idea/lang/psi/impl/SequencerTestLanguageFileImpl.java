@@ -13,6 +13,7 @@ public final class SequencerTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, SequencerTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return SequencerTestLanguageFileType.INSTANCE;
 	}

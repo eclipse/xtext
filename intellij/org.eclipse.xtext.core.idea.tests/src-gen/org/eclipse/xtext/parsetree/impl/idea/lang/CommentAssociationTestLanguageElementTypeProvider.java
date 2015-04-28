@@ -97,10 +97,12 @@ public class CommentAssociationTestLanguageElementTypeProvider implements IEleme
 
 	public static final IGrammarAwareElementType Element_NameIDTerminalRuleCall_2_2_0_ELEMENT_TYPE = associate(ElementFactory.createElement_NameIDTerminalRuleCall_2_2_0ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

@@ -13,6 +13,7 @@ public final class QualifiedNameTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, QualifiedNameTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return QualifiedNameTestLanguageFileType.INSTANCE;
 	}

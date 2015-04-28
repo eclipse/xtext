@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class EpatchTestLanguageFileTypeFactory extends FileTypeFactory {
 
+	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
 		consumer.consume(org.eclipse.xtext.parser.epatch.idea.lang.EpatchTestLanguageFileType.INSTANCE, org.eclipse.xtext.parser.epatch.idea.lang.EpatchTestLanguageFileType.DEFAULT_EXTENSION);
 	}

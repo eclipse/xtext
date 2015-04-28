@@ -16,6 +16,7 @@ public class EncodingTestLanguageParserDefinition extends AbstractXtextParserDef
 	@Inject 
 	private EncodingTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new EncodingTestLanguageFileImpl(viewProvider);
 	}
@@ -23,7 +24,6 @@ public class EncodingTestLanguageParserDefinition extends AbstractXtextParserDef
 	@Override
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
-		IElementType elementType = node.getElementType();
 		return super.createElement(node);
 	}
 

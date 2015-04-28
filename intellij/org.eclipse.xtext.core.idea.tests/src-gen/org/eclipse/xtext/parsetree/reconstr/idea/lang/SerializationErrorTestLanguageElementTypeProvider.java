@@ -269,10 +269,12 @@ public class SerializationErrorTestLanguageElementTypeProvider implements IEleme
 
 	public static final IGrammarAwareElementType Indent_RightCurlyBracketKeyword_4_ELEMENT_TYPE = associate(IndentFactory.createIndent_RightCurlyBracketKeyword_4ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

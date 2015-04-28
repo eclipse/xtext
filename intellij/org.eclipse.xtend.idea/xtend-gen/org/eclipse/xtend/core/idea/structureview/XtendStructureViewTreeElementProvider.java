@@ -19,7 +19,6 @@ import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.idea.structureview.IntellijXtendOutlineContext;
 import org.eclipse.xtend.core.idea.structureview.XtendEObjectTreeElement;
 import org.eclipse.xtend.core.idea.structureview.XtendFeatureTreeElement;
@@ -42,6 +41,7 @@ import org.eclipse.xtext.idea.structureview.EObjectTreeElement;
 import org.eclipse.xtext.idea.structureview.EStructuralFeatureTreeElement;
 import org.eclipse.xtext.idea.structureview.XtextFileTreeElement;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -76,7 +76,7 @@ public class XtendStructureViewTreeElementProvider extends DefaultStructureViewT
   @Override
   protected void _buildChildren(final XtextFileTreeElement xtextFileTreeElement) {
     BaseXtextFile _element = xtextFileTreeElement.getElement();
-    Resource _resource = _element.getResource();
+    XtextResource _resource = _element.getResource();
     EList<EObject> _contents = _resource.getContents();
     EObject _head = IterableExtensions.<EObject>head(_contents);
     IntellijXtendOutlineContext _intellijXtendOutlineContext = new IntellijXtendOutlineContext();

@@ -2,8 +2,7 @@ package org.eclipse.xtext.testlanguages.idea.lang.parser;
 
 import org.eclipse.xtext.testlanguages.idea.lang.ActionTestLanguageElementTypeProvider;
 import org.eclipse.xtext.testlanguages.idea.lang.psi.impl.ActionTestLanguageFileImpl;
-import org.eclipse.xtext.common.idea.lang.parser.TerminalsParserDefinition;
-import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
+import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -12,11 +11,12 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 
-public class ActionTestLanguageParserDefinition extends TerminalsParserDefinition {
+public class ActionTestLanguageParserDefinition extends AbstractXtextParserDefinition {
 
 	@Inject 
 	private ActionTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new ActionTestLanguageFileImpl(viewProvider);
 	}
@@ -24,17 +24,6 @@ public class ActionTestLanguageParserDefinition extends TerminalsParserDefinitio
 	@Override
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
-		IElementType elementType = node.getElementType();
-		if (elementType == elementTypeProvider.getModel_ChildParserRuleCall_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getChild_NameIDTerminalRuleCall_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getModel_RightChildParserRuleCall_1_1_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getChild_NameIDTerminalRuleCall_0ElementType()
-			);
-		}
 		return super.createElement(node);
 	}
 

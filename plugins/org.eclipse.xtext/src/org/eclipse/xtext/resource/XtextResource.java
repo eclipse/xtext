@@ -226,6 +226,21 @@ public class XtextResource extends ResourceImpl {
 		super.doUnload();
 		parseResult = null;
 	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public void relink() {
+		if (!isLoaded()) {
+			throw new IllegalStateException("You can't update an unloaded resource.");
+		}
+		try {
+			isUpdating = true;
+			updateInternalState(parseResult, parseResult);
+		} finally {
+			isUpdating = false;
+		}
+	}
 
 	public void update(int offset, int replacedTextLength, String newText) {
 		if (!isLoaded()) {

@@ -285,10 +285,12 @@ public class UnassignedTextTestLanguageElementTypeProvider implements IElementTy
 
 	public static final IGrammarAwareElementType CommonTerminalsRule_ValIDTerminalRuleCall_4_0_ELEMENT_TYPE = associate(CommonTerminalsRuleFactory.createCommonTerminalsRule_ValIDTerminalRuleCall_4_0ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

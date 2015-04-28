@@ -2,7 +2,7 @@ org.eclipse.xtext.idea.sdomain.idea.lang.psi.impl.SDomainFileImpl:SyntaxErrors.s
   org.eclipse.xtext.psi.impl.PsiEObjectImpl(File_ELEMENT_TYPE)(0,7)
     org.eclipse.xtext.psi.impl.PsiEObjectImpl(File_ElementsElementParserRuleCall_0_ELEMENT_TYPE)(0,6)
       org.eclipse.xtext.psi.impl.PsiEObjectImpl(Element_TypeParserRuleCall_1_ELEMENT_TYPE)(0,6)
-        org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Type_EntityParserRuleCall_0_ELEMENT_TYPE)(0,6)
+        org.eclipse.xtext.psi.impl.PsiEObjectImpl(Type_EntityParserRuleCall_0_ELEMENT_TYPE)(0,6)
           PsiElement(Entity_EntityKeyword_0_ELEMENT_TYPE)('entity')(0,6)
     PsiWhiteSpace(' ')(6,7)
     PsiErrorElement:mismatched input '<EOF>' expecting RULE_ID(7,7)

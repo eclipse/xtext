@@ -1,7 +1,7 @@
 package org.eclipse.xtext.parser.epatch.idea;
 
-import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.parser.epatch.EpatchTestLanguageStandaloneSetupGenerated;
+import org.eclipse.xtext.util.Modules2;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;

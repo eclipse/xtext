@@ -158,10 +158,12 @@ public class Bug317840TestLanguageElementTypeProvider implements IElementTypePro
 
 	public static final IGrammarAwareElementType NAME_IDTerminalRuleCall_1_1_ELEMENT_TYPE = associate(NAMEFactory.createNAME_IDTerminalRuleCall_1_1ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

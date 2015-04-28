@@ -25,9 +25,9 @@ import com.intellij.psi.util.PsiMethodUtil;
 import com.intellij.psi.util.PsiTreeUtil;
 import java.util.Set;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
-import org.eclipse.xtext.idea.types.psi.JvmPsiClasses;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiJvmModelAssociations;
+import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClasses;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -200,7 +200,7 @@ public class JvmTypesApplicationConfigurationProducer extends JavaRunConfigurati
       return CollectionLiterals.<PsiElement>emptyList();
     }
     if ((element instanceof BaseXtextFile)) {
-      return this._jvmPsiClasses.getJvmPsiClasses(((BaseXtextFile)element));
+      return this._jvmPsiClasses.getPsiClasses(((BaseXtextFile)element));
     }
     final Set<PsiElement> jvmElements = this._iPsiJvmModelAssociations.getJvmElements(element);
     boolean _isEmpty = jvmElements.isEmpty();

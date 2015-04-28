@@ -3,9 +3,12 @@ package org.eclipse.xtext.idea.extensions;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.IndexNotReadyException;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.LanguageLevelProjectExtension;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.psi.JavaPsiFacade;
 import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiDocumentManager;
+import com.intellij.psi.PsiFileFactory;
 import com.intellij.psi.search.GlobalSearchScope;
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -85,5 +88,17 @@ public class IdeaProjectExtensions {
   
   public static ProjectFileIndex getProjectFileIndex(final Project project) {
     return ProjectFileIndex.SERVICE.getInstance(project);
+  }
+  
+  public static LanguageLevelProjectExtension getLanguageLevelProjectExtension(final Project project) {
+    return LanguageLevelProjectExtension.getInstance(project);
+  }
+  
+  public static PsiFileFactory getPsiFileFactory(final Project project) {
+    return PsiFileFactory.getInstance(project);
+  }
+  
+  public static PsiDocumentManager getPsiDocumentManager(final Project project) {
+    return PsiDocumentManager.getInstance(project);
   }
 }

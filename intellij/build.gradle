@@ -36,6 +36,27 @@ configure(subprojects - eclipsePluginProjects) {
 		exclude group:'org.ow2.asm'
 		exclude module:'org.eclipse.jdt.core'
 	}
+
+	if (!isBuildServer) {
+		// Disable the java task if not on the build server
+		// This allows to reuse the artifacts from /bin that 
+		// Eclipse produced. They are immediately available and
+		// contain debug information.
+		compileJava.enabled = false
+
+		task copyFromBin(type: Copy) {
+		    from 'bin'
+		    into 'build/classes/main'
+		}
+
+		classes {
+			dependsOn(copyFromBin)
+		}
+	}
+
+	task cleanTestSystem(type: Delete) {
+		delete "${ideaDevelopment.ideaHome}/test-system"
+	}
 }
 
 configure(ideaPluginProjects) {

@@ -16,18 +16,22 @@ public final class TransientValuesTestFileType extends LanguageFileType {
 		super(TransientValuesTestLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "TransientValuesTest files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "TransientValuesTest";
 	}

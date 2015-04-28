@@ -16,18 +16,22 @@ public final class SimpleReconstrTestLanguageFileType extends LanguageFileType {
 		super(SimpleReconstrTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "SimpleReconstrTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "SimpleReconstrTestLanguage";
 	}

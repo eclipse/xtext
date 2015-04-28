@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ExBeeLangTestLanguageFileTypeFactory extends FileTypeFactory {
 
+	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
 		consumer.consume(org.eclipse.xtext.testlanguages.backtracking.idea.lang.ExBeeLangTestLanguageFileType.INSTANCE, org.eclipse.xtext.testlanguages.backtracking.idea.lang.ExBeeLangTestLanguageFileType.DEFAULT_EXTENSION);
 	}

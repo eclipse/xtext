@@ -16,18 +16,22 @@ public final class IgnoreCaseImportsTestLanguageFileType extends LanguageFileTyp
 		super(IgnoreCaseImportsTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "IgnoreCaseImportsTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "IgnoreCaseImportsTestLanguage";
 	}

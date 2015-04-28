@@ -13,6 +13,7 @@ public final class ConcreteTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, ConcreteTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return ConcreteTestLanguageFileType.INSTANCE;
 	}

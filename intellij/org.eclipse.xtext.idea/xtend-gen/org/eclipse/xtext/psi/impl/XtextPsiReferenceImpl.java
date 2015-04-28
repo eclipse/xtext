@@ -27,7 +27,6 @@ import java.util.HashMap;
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
@@ -44,6 +43,7 @@ import org.eclipse.xtext.psi.XtextPsiReference;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -256,7 +256,7 @@ public class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> imp
           QualifiedName _name = objectDescription.getName();
           String name = this.qualifiedNameConverter.toString(_name);
           BaseXtextFile _xtextFile = this.myElement.getXtextFile();
-          Resource _resource = _xtextFile.getResource();
+          XtextResource _resource = _xtextFile.getResource();
           PsiElement element = this.psiModelAssociations.getPsiElement(objectDescription, _resource);
           boolean _notEquals = (!Objects.equal(element, null));
           if (_notEquals) {

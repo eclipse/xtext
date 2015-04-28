@@ -13,6 +13,7 @@ public final class SimpleUnorderedGroupsTestLanguageFileImpl extends BaseXtextFi
 		super(viewProvider, SimpleUnorderedGroupsTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return SimpleUnorderedGroupsTestLanguageFileType.INSTANCE;
 	}

@@ -4,7 +4,6 @@ import org.eclipse.xtext.psi.impl.PsiEObjectReference;
 import org.eclipse.xtext.parser.terminalrules.idea.lang.XtextTerminalsTestLanguageElementTypeProvider;
 import org.eclipse.xtext.parser.terminalrules.idea.lang.psi.impl.XtextTerminalsTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
-import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -18,6 +17,7 @@ public class XtextTerminalsTestLanguageParserDefinition extends AbstractXtextPar
 	@Inject 
 	private XtextTerminalsTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new XtextTerminalsTestLanguageFileImpl(viewProvider);
 	}
@@ -26,26 +26,6 @@ public class XtextTerminalsTestLanguageParserDefinition extends AbstractXtextPar
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
 		IElementType elementType = node.getElementType();
-		if (elementType == elementTypeProvider.getAbstractMetamodelDeclaration_GeneratedMetamodelParserRuleCall_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getGeneratedMetamodel_NameIDTerminalRuleCall_1_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getAbstractRule_ParserRuleParserRuleCall_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getParserRule_NameIDTerminalRuleCall_0_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getAbstractRule_TerminalRuleParserRuleCall_1ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getTerminalRule_NameIDTerminalRuleCall_1_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getAbstractRule_EnumRuleParserRuleCall_2ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getEnumRule_NameIDTerminalRuleCall_1_0ElementType()
-			);
-		}
 		if (elementType == elementTypeProvider.getGrammar_UsedGrammarsGrammarCrossReference_2_1_0ElementType()) {
 			return new PsiEObjectReference(node);
 		}

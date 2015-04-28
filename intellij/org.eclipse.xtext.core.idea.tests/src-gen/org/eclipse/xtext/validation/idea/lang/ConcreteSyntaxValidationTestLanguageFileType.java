@@ -16,18 +16,22 @@ public final class ConcreteSyntaxValidationTestLanguageFileType extends Language
 		super(ConcreteSyntaxValidationTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "ConcreteSyntaxValidationTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "ConcreteSyntaxValidationTestLanguage";
 	}

@@ -16,18 +16,22 @@ public final class DatatypeRulesTestLanguageFileType extends LanguageFileType {
 		super(DatatypeRulesTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "DatatypeRulesTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "DatatypeRulesTestLanguage";
 	}

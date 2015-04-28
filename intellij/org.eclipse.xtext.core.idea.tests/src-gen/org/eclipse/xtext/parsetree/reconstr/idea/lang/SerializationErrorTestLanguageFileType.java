@@ -16,18 +16,22 @@ public final class SerializationErrorTestLanguageFileType extends LanguageFileTy
 		super(SerializationErrorTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "SerializationErrorTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "SerializationErrorTestLanguage";
 	}

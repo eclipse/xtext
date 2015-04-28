@@ -16,18 +16,22 @@ public final class RefactoringTestLanguageFileType extends LanguageFileType {
 		super(RefactoringTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "RefactoringTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "RefactoringTestLanguage";
 	}

@@ -249,10 +249,12 @@ public class SimpleExpressionsTestLanguageElementTypeProvider implements IElemen
 
 	public static final IGrammarAwareElementType Parens_RightParenthesisKeyword_2_ELEMENT_TYPE = associate(ParensFactory.createParens_RightParenthesisKeyword_2ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

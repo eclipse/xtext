@@ -13,6 +13,7 @@ public final class IgnoreCaseLexerTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, IgnoreCaseLexerTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return IgnoreCaseLexerTestLanguageFileType.INSTANCE;
 	}

@@ -120,10 +120,12 @@ public class PartialSerializationTestLanguageElementTypeProvider implements IEle
 
 	public static final IGrammarAwareElementType Node_RightParenthesisKeyword_2_2_ELEMENT_TYPE = associate(NodeFactory.createNode_RightParenthesisKeyword_2_2ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

@@ -10,6 +10,7 @@ import com.intellij.openapi.extensions.PluginId;
 
 public class XtextBuildProcessParametersProvider extends BuildProcessParametersProvider {
 
+	@Override
 	public List<String> getClassPath() {
 		PluginId pluginId = PluginId.getId("org.eclipse.xtext.xtext.idea");
 		File pluginFolder = PluginManager.getPlugin(pluginId).getPath();

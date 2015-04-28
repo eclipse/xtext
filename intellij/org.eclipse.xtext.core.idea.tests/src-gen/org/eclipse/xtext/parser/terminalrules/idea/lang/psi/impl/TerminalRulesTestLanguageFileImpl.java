@@ -13,6 +13,7 @@ public final class TerminalRulesTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, TerminalRulesTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return TerminalRulesTestLanguageFileType.INSTANCE;
 	}

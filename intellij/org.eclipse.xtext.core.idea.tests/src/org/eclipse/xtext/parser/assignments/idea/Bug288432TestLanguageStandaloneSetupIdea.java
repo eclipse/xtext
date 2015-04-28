@@ -1,7 +1,7 @@
 package org.eclipse.xtext.parser.assignments.idea;
 
-import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.parser.assignments.Bug288432TestLanguageStandaloneSetupGenerated;
+import org.eclipse.xtext.util.Modules2;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;

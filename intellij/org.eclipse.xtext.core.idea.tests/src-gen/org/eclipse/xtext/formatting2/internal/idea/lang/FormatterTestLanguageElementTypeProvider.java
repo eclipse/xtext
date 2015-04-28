@@ -155,10 +155,12 @@ public class FormatterTestLanguageElementTypeProvider implements IElementTypePro
 
 	public static final IGrammarAwareElementType KWList_Kw5Kw5Keyword_6_0_ELEMENT_TYPE = associate(KWListFactory.createKWList_Kw5Kw5Keyword_6_0ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

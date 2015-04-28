@@ -16,6 +16,7 @@ public class BacktrackingLexerTestLanguageParserDefinition extends AbstractXtext
 	@Inject 
 	private BacktrackingLexerTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new BacktrackingLexerTestLanguageFileImpl(viewProvider);
 	}
@@ -23,7 +24,6 @@ public class BacktrackingLexerTestLanguageParserDefinition extends AbstractXtext
 	@Override
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
-		IElementType elementType = node.getElementType();
 		return super.createElement(node);
 	}
 

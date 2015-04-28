@@ -13,6 +13,7 @@ public final class TreeTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, TreeTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return TreeTestLanguageFileType.INSTANCE;
 	}

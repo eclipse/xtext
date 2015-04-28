@@ -296,10 +296,12 @@ public class BacktrackingBug325745TestLanguageElementTypeProvider implements IEl
 
 	public static final IGrammarAwareElementType SimpleTerm_RefCharIDTerminalRuleCall_1_0_ELEMENT_TYPE = associate(SimpleTermFactory.createSimpleTerm_RefCharIDTerminalRuleCall_1_0ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

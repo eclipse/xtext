@@ -13,6 +13,7 @@ public final class HiddenTokensMergerTestLanguageFileImpl extends BaseXtextFile 
 		super(viewProvider, HiddenTokensMergerTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return HiddenTokensMergerTestLanguageFileType.INSTANCE;
 	}

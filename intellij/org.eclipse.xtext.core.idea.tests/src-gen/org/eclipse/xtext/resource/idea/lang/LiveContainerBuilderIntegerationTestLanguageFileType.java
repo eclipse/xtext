@@ -16,18 +16,22 @@ public final class LiveContainerBuilderIntegerationTestLanguageFileType extends 
 		super(LiveContainerBuilderIntegerationTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "LiveContainerBuilderIntegerationTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "LiveContainerBuilderIntegerationTestLanguage";
 	}

@@ -13,6 +13,7 @@ public final class EntitiesFileImpl extends BaseXtextFile {
 		super(viewProvider, EntitiesLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return EntitiesFileType.INSTANCE;
 	}

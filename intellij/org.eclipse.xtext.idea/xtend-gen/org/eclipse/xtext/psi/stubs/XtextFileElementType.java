@@ -26,10 +26,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
-import org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex;
@@ -47,9 +44,6 @@ public class XtextFileElementType<T extends XtextFileStub<?>> extends IStubFileE
   
   @Inject
   private ExportedObjectQualifiedNameIndex exportedObjectQualifiedNameIndex;
-  
-  @Inject
-  private JvmDeclaredTypeShortNameIndex jvmDeclaredTypeShortNameIndex;
   
   public XtextFileElementType(final Language language) {
     super(language);
@@ -211,22 +205,16 @@ public class XtextFileElementType<T extends XtextFileStub<?>> extends IStubFileE
     if ((stub instanceof XtextFileStub<?>)) {
       List<ExportedObject> _exportedObjects = ((XtextFileStub<?>)stub).getExportedObjects();
       for (final ExportedObject exportedObject : _exportedObjects) {
-        {
-          StubIndexKey<String, BaseXtextFile> _key = this.exportedObjectQualifiedNameIndex.getKey();
-          QualifiedName _qualifiedName = exportedObject.getQualifiedName();
-          String _string = _qualifiedName.toString();
-          sink.<BaseXtextFile, String>occurrence(_key, _string);
-          EClass _eClass = exportedObject.getEClass();
-          boolean _isAssignableFrom = EcoreUtil2.isAssignableFrom(TypesPackage.Literals.JVM_DECLARED_TYPE, _eClass);
-          if (_isAssignableFrom) {
-            StubIndexKey<String, BaseXtextFile> _key_1 = this.jvmDeclaredTypeShortNameIndex.getKey();
-            QualifiedName _qualifiedName_1 = exportedObject.getQualifiedName();
-            String _lastSegment = _qualifiedName_1.getLastSegment();
-            sink.<BaseXtextFile, String>occurrence(_key_1, _lastSegment);
-          }
-        }
+        this.indexExportedObject(exportedObject, sink);
       }
     }
+  }
+  
+  protected void indexExportedObject(final ExportedObject exportedObject, @Extension final IndexSink sink) {
+    StubIndexKey<String, BaseXtextFile> _key = this.exportedObjectQualifiedNameIndex.getKey();
+    QualifiedName _qualifiedName = exportedObject.getQualifiedName();
+    String _string = _qualifiedName.toString();
+    sink.<BaseXtextFile, String>occurrence(_key, _string);
   }
   
   @Override

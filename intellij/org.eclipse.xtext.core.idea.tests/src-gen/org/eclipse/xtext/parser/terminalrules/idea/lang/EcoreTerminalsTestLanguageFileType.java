@@ -16,18 +16,22 @@ public final class EcoreTerminalsTestLanguageFileType extends LanguageFileType {
 		super(EcoreTerminalsTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "EcoreTerminalsTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "EcoreTerminalsTestLanguage";
 	}

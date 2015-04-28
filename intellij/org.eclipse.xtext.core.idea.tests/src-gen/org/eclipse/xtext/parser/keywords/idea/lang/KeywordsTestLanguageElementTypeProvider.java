@@ -119,10 +119,12 @@ public class KeywordsTestLanguageElementTypeProvider implements IElementTypeProv
 
 	public static final IGrammarAwareElementType Model_EighthDKeyword_7_0_ELEMENT_TYPE = associate(ModelFactory.createModel_EighthDKeyword_7_0ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

@@ -11,6 +11,7 @@ import org.eclipse.xtend.core.idea.macro.IdeaProcessorProvider;
 import org.eclipse.xtend.core.idea.presentation.XtendItemPresentationProvider;
 import org.eclipse.xtend.core.idea.structureview.XtendStructureViewBuilder;
 import org.eclipse.xtend.core.idea.validation.XtendIdeaValidator;
+import org.eclipse.xtend.core.linking.Linker;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.ide.common.contentassist.antlr.DisabledInternalLexer;
 import org.eclipse.xtend.ide.common.contentassist.antlr.FlexerBasedContentAssistContextFactory;
@@ -24,6 +25,7 @@ import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 import org.eclipse.xtext.idea.presentation.ItemPresentationProvider;
 import org.eclipse.xtext.idea.structureview.XtextFileAwareStructureViewBuilder;
+import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.parser.antlr.LexerProvider;
 import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
@@ -83,6 +85,10 @@ public class XtendIdeaModule extends AbstractXtendIdeaModule {
 	@org.eclipse.xtext.service.SingletonBinding(eager = true)
 	public Class<? extends XtendIdeaValidator> bindXtendIdeaValidator() {
 		return XtendIdeaValidator.class;
+	}
+
+	public Class<? extends ILinker> bindILinker() {
+		return Linker.class;
 	}
 
 }

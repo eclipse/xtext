@@ -109,7 +109,7 @@ class IdeaPluginClassNames {
 	}
 	
 	def String getSuperParserDefinitionName(Grammar it) {
-		usedGrammars.head?.parserDefinitionName ?: 'org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition'
+		'org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition'
 	}
 	
 	def String getParserDefinitionName(Grammar it) {

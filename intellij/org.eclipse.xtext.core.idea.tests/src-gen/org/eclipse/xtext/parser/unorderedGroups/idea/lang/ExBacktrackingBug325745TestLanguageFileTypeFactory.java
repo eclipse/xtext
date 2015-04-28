@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ExBacktrackingBug325745TestLanguageFileTypeFactory extends FileTypeFactory {
 
+	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
 		consumer.consume(org.eclipse.xtext.parser.unorderedGroups.idea.lang.ExBacktrackingBug325745TestLanguageFileType.INSTANCE, org.eclipse.xtext.parser.unorderedGroups.idea.lang.ExBacktrackingBug325745TestLanguageFileType.DEFAULT_EXTENSION);
 	}

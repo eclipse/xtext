@@ -16,18 +16,22 @@ public final class QualifiedNameTestLanguageFileType extends LanguageFileType {
 		super(QualifiedNameTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "QualifiedNameTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "QualifiedNameTestLanguage";
 	}

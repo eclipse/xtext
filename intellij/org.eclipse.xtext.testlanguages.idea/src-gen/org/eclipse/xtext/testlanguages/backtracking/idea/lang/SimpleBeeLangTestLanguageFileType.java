@@ -16,18 +16,22 @@ public final class SimpleBeeLangTestLanguageFileType extends LanguageFileType {
 		super(SimpleBeeLangTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "SimpleBeeLangTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "SimpleBeeLangTestLanguage";
 	}

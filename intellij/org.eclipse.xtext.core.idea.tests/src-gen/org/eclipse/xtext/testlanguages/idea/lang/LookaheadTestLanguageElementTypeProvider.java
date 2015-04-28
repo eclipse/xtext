@@ -267,10 +267,12 @@ public class LookaheadTestLanguageElementTypeProvider implements IElementTypePro
 
 	public static final IGrammarAwareElementType LookAhead4_XDKeyword_1_0_ELEMENT_TYPE = associate(LookAhead4Factory.createLookAhead4_XDKeyword_1_0ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

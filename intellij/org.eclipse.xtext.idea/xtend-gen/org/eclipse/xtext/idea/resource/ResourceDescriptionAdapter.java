@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend.lib.annotations.Delegate;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -31,57 +32,16 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class ResourceDescriptionAdapter extends AdapterImpl implements IResourceDescription {
+  @Delegate
   private final IResourceDescription delegate;
   
-  @Override
-  public Iterable<IEObjectDescription> getExportedObjects() {
-    return this.delegate.getExportedObjects();
-  }
-  
-  @Override
-  public Iterable<QualifiedName> getImportedNames() {
-    return this.delegate.getImportedNames();
-  }
-  
-  @Override
-  public Iterable<IReferenceDescription> getReferenceDescriptions() {
-    return this.delegate.getReferenceDescriptions();
-  }
-  
-  @Override
-  public URI getURI() {
-    return this.delegate.getURI();
-  }
-  
-  @Override
-  public Iterable<IEObjectDescription> getExportedObjects(final EClass type, final QualifiedName name, final boolean ignoreCase) {
-    return this.delegate.getExportedObjects(type, name, ignoreCase);
-  }
-  
-  @Override
-  public Iterable<IEObjectDescription> getExportedObjectsByObject(final EObject object) {
-    return this.delegate.getExportedObjectsByObject(object);
-  }
-  
-  @Override
-  public Iterable<IEObjectDescription> getExportedObjectsByType(final EClass type) {
-    return this.delegate.getExportedObjectsByType(type);
-  }
-  
-  @Override
-  public boolean isEmpty() {
-    return this.delegate.isEmpty();
-  }
-  
   public static ResourceDescriptionAdapter install(final Resource it) {
-    ResourceDescriptionAdapter _elvis = null;
-    ResourceDescriptionAdapter _get = ResourceDescriptionAdapter.get(it);
-    if (_get != null) {
-      _elvis = _get;
-    } else {
+    ResourceDescriptionAdapter _xblockexpression = null;
+    {
+      ResourceDescriptionAdapter.remove(it);
       ResourceDescriptionAdapter _xifexpression = null;
       if ((it instanceof XtextResource)) {
-        ResourceDescriptionAdapter _xblockexpression = null;
+        ResourceDescriptionAdapter _xblockexpression_1 = null;
         {
           IResourceServiceProvider _resourceServiceProvider = ((XtextResource)it).getResourceServiceProvider();
           @Extension
@@ -95,13 +55,13 @@ public class ResourceDescriptionAdapter extends AdapterImpl implements IResource
               _eAdapters.add(adapter);
             }
           };
-          _xblockexpression = ObjectExtensions.<ResourceDescriptionAdapter>operator_doubleArrow(_resourceDescriptionAdapter, _function);
+          _xblockexpression_1 = ObjectExtensions.<ResourceDescriptionAdapter>operator_doubleArrow(_resourceDescriptionAdapter, _function);
         }
-        _xifexpression = _xblockexpression;
+        _xifexpression = _xblockexpression_1;
       }
-      _elvis = _xifexpression;
+      _xblockexpression = _xifexpression;
     }
-    return _elvis;
+    return _xblockexpression;
   }
   
   public static boolean remove(final Resource it) {
@@ -137,5 +97,37 @@ public class ResourceDescriptionAdapter extends AdapterImpl implements IResource
   public ResourceDescriptionAdapter(final IResourceDescription delegate) {
     super();
     this.delegate = delegate;
+  }
+  
+  public Iterable<IEObjectDescription> getExportedObjects() {
+    return this.delegate.getExportedObjects();
+  }
+  
+  public Iterable<QualifiedName> getImportedNames() {
+    return this.delegate.getImportedNames();
+  }
+  
+  public Iterable<IReferenceDescription> getReferenceDescriptions() {
+    return this.delegate.getReferenceDescriptions();
+  }
+  
+  public URI getURI() {
+    return this.delegate.getURI();
+  }
+  
+  public Iterable<IEObjectDescription> getExportedObjects(final EClass type, final QualifiedName name, final boolean ignoreCase) {
+    return this.delegate.getExportedObjects(type, name, ignoreCase);
+  }
+  
+  public Iterable<IEObjectDescription> getExportedObjectsByObject(final EObject object) {
+    return this.delegate.getExportedObjectsByObject(object);
+  }
+  
+  public Iterable<IEObjectDescription> getExportedObjectsByType(final EClass type) {
+    return this.delegate.getExportedObjectsByType(type);
+  }
+  
+  public boolean isEmpty() {
+    return this.delegate.isEmpty();
   }
 }

@@ -13,6 +13,7 @@ public final class XbaseFileImpl extends BaseXtextFile {
 		super(viewProvider, XbaseLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return XbaseFileType.INSTANCE;
 	}

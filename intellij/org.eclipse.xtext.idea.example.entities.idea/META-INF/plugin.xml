@@ -18,14 +18,11 @@
 		<java.shortNamesCache implementation="org.eclipse.xtext.idea.example.entities.idea.lang.types.EntitiesJvmTypesShortNamesCache"/>
 
 		<stubIndex implementation="org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex"/>
-		<stubIndex implementation="org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex"/>
+		<stubIndex implementation="org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex"/>
 
 		<psi.treeChangePreprocessor implementation="org.eclipse.xtext.idea.example.entities.idea.lang.psi.EntitiesCodeBlockModificationListener"/>
 
 		<referencesSearch implementation="org.eclipse.xtext.idea.example.entities.idea.lang.types.psi.search.EntitiesJvmElementsReferencesSearch"/>
-		<targetElementEvaluator language="org.eclipse.xtext.idea.example.entities.Entities"
-								factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
-								implementationClass="org.eclipse.xtext.idea.jvmmodel.codeInsight.PsiJvmTargetElementEvaluator"/>
 
 		<fileTypeFactory implementation="org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesFileTypeFactory"/>
 		<stubElementTypeHolder class="org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesElementTypeProvider"/>

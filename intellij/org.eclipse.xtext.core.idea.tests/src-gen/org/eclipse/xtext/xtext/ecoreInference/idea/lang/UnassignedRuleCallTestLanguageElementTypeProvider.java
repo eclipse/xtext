@@ -130,10 +130,12 @@ public class UnassignedRuleCallTestLanguageElementTypeProvider implements IEleme
 
 	public static final IGrammarAwareElementType DataTypeRule_STRINGTerminalRuleCall_3_ELEMENT_TYPE = associate(DataTypeRuleFactory.createDataTypeRule_STRINGTerminalRuleCall_3ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

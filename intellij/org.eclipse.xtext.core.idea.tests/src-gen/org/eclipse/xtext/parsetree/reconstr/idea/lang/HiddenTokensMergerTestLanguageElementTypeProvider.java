@@ -624,10 +624,12 @@ public class HiddenTokensMergerTestLanguageElementTypeProvider implements IEleme
 
 	public static final IGrammarAwareElementType Action1Sub2_Sub2Keyword_1_ELEMENT_TYPE = associate(Action1Sub2Factory.createAction1Sub2_Sub2Keyword_1ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

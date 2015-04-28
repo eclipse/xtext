@@ -13,6 +13,7 @@ public final class SDomainFileImpl extends BaseXtextFile {
 		super(viewProvider, SDomainLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return SDomainFileType.INSTANCE;
 	}

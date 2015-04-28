@@ -203,10 +203,12 @@ public class MultiRuleEnumTestLanguageElementTypeProvider implements IElementTyp
 
 	public static final IGrammarAwareElementType EnumRuleC_BBKeyword_2_0_ELEMENT_TYPE = associate(EnumRuleCFactory.createEnumRuleC_BBKeyword_2_0ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
