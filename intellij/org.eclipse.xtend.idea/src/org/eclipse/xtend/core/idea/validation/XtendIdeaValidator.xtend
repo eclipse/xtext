@@ -108,7 +108,7 @@ class XtendIdeaValidator extends AbstractDeclarativeValidator {
 			return null
 		}
 		val extension javaDirectoryService = JavaDirectoryService.instance
-		psiElement.containingFile.parent.package.qualifiedName
+		psiElement.containingFile.originalFile.containingDirectory.package.qualifiedName
 	}
 
 }
