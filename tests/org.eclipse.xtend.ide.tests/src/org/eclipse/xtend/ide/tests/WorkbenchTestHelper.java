@@ -16,9 +16,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
 import org.apache.log4j.Logger;
@@ -62,8 +66,10 @@ import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.compiler.JavaVersion;
 import org.eclipse.xtext.xbase.lib.Functions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -313,25 +319,51 @@ public class WorkbenchTestHelper extends Assert {
 		javaProject.setOptions(options);
 	}
 	
-	public static String changeBree(IJavaProject javaProject, JavaVersion javaVersion) throws Exception {
-		IFile manifest = javaProject.getProject().getFile("META-INF/MANIFEST.MF");
-		InputStream content = manifest.getContents();
-		Manifest mf;
-		try {
-			mf = new Manifest(content);
-		} finally {
-			content.close();
-		}
-		String bree = getBree(javaVersion);
-		mf.getMainAttributes().putValue("Bundle-RequiredExecutionEnvironment", bree);
-		ByteArrayOutputStream stream = new ByteArrayOutputStream();
-		mf.write(stream);
-		manifest.setContents(new ByteArrayInputStream(stream.toByteArray()), true, true, null);
-		JavaProjectSetupUtil.addJreClasspathEntry(javaProject, bree);
-		return bree;
+	public static String changeBree(IJavaProject javaProject, final JavaVersion javaVersion) throws Exception {
+		final AtomicReference<String> bree = new AtomicReference<String>();
+		changeManifest(javaProject.getProject(), new Procedure1<Manifest>() {
+			@Override
+			public void apply(Manifest mf) {
+				bree.set(getBree(javaVersion));
+				mf.getMainAttributes().putValue("Bundle-RequiredExecutionEnvironment", bree.get());
+			}
+		});
+		return bree.get();
 	}
 	
-	public static void addExportedPackages(IProject project, String ... exportedPackages) throws Exception{
+	public static void addExportedPackages(IProject project, final String ... exportedPackages) throws Exception{
+		changeManifest(project, new Procedure1<Manifest>() {
+			@Override
+			public void apply(Manifest mf) {
+				String value = mf.getMainAttributes().getValue("Export-Package");
+				for (String exported : exportedPackages) {
+					if (value == null) {
+						value = exported;
+					} else {
+						value += ","+exported;
+					}
+				}
+				mf.getMainAttributes().putValue("Export-Package", value);
+			}
+		});
+	}
+	
+	public static void removeExportedPackages(IProject project, final String ... exportedPackages) throws Exception{
+		changeManifest(project, new Procedure1<Manifest>() {
+			@Override
+			public void apply(Manifest mf) {
+				Attributes attrs = mf.getMainAttributes();
+				if (attrs.containsKey("Export-Package")) {
+					String[] existingExports = ((String)attrs.get("Export-Package")).split(",");
+					List<String> exportsToKeep = Arrays.asList(existingExports);
+					exportsToKeep.removeAll(Arrays.asList(exportedPackages));
+					attrs.putValue("Export-Package", Joiner.on(',').join(exportsToKeep));
+				}
+			}
+		});
+	}
+	
+	public static void changeManifest(IProject project, Procedure1<Manifest> config) throws Exception {
 		IFile manifest = project.getFile("META-INF/MANIFEST.MF");
 		InputStream content = manifest.getContents();
 		Manifest mf;
@@ -340,15 +372,7 @@ public class WorkbenchTestHelper extends Assert {
 		} finally {
 			content.close();
 		}
-		String value = mf.getMainAttributes().getValue("Export-Package");
-		for (String exported : exportedPackages) {
-			if (value == null) {
-				value = exported;
-			} else {
-				value += ","+exported;
-			}
-		}
-		mf.getMainAttributes().putValue("Export-Package", value);
+		config.apply(mf);
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
 		mf.write(stream);
 		manifest.setContents(new ByteArrayInputStream(stream.toByteArray()), true, true, null);

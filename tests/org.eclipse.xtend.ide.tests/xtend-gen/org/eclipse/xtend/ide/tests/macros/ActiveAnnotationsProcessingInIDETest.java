@@ -3,12 +3,6 @@ package org.eclipse.xtend.ide.tests.macros;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.util.jar.Attributes;
-import java.util.jar.Manifest;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -44,7 +38,6 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -52,7 +45,9 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -206,52 +201,76 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
   @Rule
   public StopwatchRule stopwatch = new StopwatchRule(true);
   
-  @After
-  public void tearDown() throws Exception {
-    this.macroProject = null;
-    this.userProject = null;
-    this.sourceFile = null;
-    IResourcesSetupUtil.cleanWorkspace();
-  }
+  private static IJavaProject macroProject;
   
-  private IJavaProject macroProject;
+  private static IJavaProject userProject;
   
-  private IJavaProject userProject;
-  
-  private IFile sourceFile;
-  
-  @Override
-  public void assertProcessing(final Pair<String, String> macroFile, final Pair<String, String> clientFile, final Procedure1<? super CompilationUnitImpl> expectations) {
+  @BeforeClass
+  public static void createProjects() {
     try {
       IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("macroProject");
       IJavaProject _create = JavaCore.create(_createPluginProject);
-      this.macroProject = _create;
-      String _key = macroFile.getKey();
-      String _value = macroFile.getValue();
-      String _string = _value.toString();
-      this.newSource(this.macroProject, _key, _string);
-      String _key_1 = macroFile.getKey();
-      final int lidx = _key_1.lastIndexOf("/");
-      if ((lidx != (-1))) {
-        String _key_2 = macroFile.getKey();
-        String _substring = _key_2.substring(0, lidx);
-        final String packageName = _substring.replace("/", ".");
-        this.addExportedPackage(this.macroProject, packageName);
-      }
+      ActiveAnnotationsProcessingInIDETest.macroProject = _create;
       IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
         "org.eclipse.xtend.core.tests", 
         "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject");
       IJavaProject _create_1 = JavaCore.create(_createPluginProject_1);
-      this.userProject = _create_1;
-      String _key_3 = clientFile.getKey();
-      String _value_1 = clientFile.getValue();
+      ActiveAnnotationsProcessingInIDETest.userProject = _create_1;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @AfterClass
+  public static void deleteProjects() {
+    try {
+      IResourcesSetupUtil.cleanWorkspace();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @After
+  public void tearDown() throws Exception {
+    this.clientFile.delete(true, null);
+    this.macroFile.delete(true, null);
+    IProject _project = ActiveAnnotationsProcessingInIDETest.macroProject.getProject();
+    WorkbenchTestHelper.removeExportedPackages(_project, this.exportedPackage);
+  }
+  
+  private IFile macroFile;
+  
+  private IFile clientFile;
+  
+  private String exportedPackage;
+  
+  @Override
+  public void assertProcessing(final Pair<String, String> macroContent, final Pair<String, String> clientContent, final Procedure1<? super CompilationUnitImpl> expectations) {
+    try {
+      String _key = macroContent.getKey();
+      String _value = macroContent.getValue();
+      String _string = _value.toString();
+      IFile _newSource = this.newSource(ActiveAnnotationsProcessingInIDETest.macroProject, _key, _string);
+      this.macroFile = _newSource;
+      String _key_1 = macroContent.getKey();
+      final int lidx = _key_1.lastIndexOf("/");
+      if ((lidx != (-1))) {
+        String _key_2 = macroContent.getKey();
+        String _substring = _key_2.substring(0, lidx);
+        String _replace = _substring.replace("/", ".");
+        this.exportedPackage = _replace;
+        IProject _project = ActiveAnnotationsProcessingInIDETest.macroProject.getProject();
+        WorkbenchTestHelper.addExportedPackages(_project, this.exportedPackage);
+      }
+      String _key_3 = clientContent.getKey();
+      String _value_1 = clientContent.getValue();
       String _string_1 = _value_1.toString();
-      IFile _newSource = this.newSource(this.userProject, _key_3, _string_1);
-      this.sourceFile = _newSource;
+      IFile _newSource_1 = this.newSource(ActiveAnnotationsProcessingInIDETest.userProject, _key_3, _string_1);
+      this.clientFile = _newSource_1;
       IResourcesSetupUtil.waitForAutoBuild();
-      IProject _project = this.userProject.getProject();
-      final ResourceSet resourceSet = this.resourceSetProvider.get(_project);
-      IPath _fullPath = this.sourceFile.getFullPath();
+      IProject _project_1 = ActiveAnnotationsProcessingInIDETest.userProject.getProject();
+      final ResourceSet resourceSet = this.resourceSetProvider.get(_project_1);
+      IPath _fullPath = this.clientFile.getFullPath();
       String _string_2 = _fullPath.toString();
       URI _createPlatformResourceURI = URI.createPlatformResourceURI(_string_2, true);
       final Resource resource = resourceSet.getResource(_createPlatformResourceURI, true);
@@ -291,41 +310,6 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
         this.createIfNotExistent(_parent);
         ((IFolder) container).create(true, false, null);
       }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
-  public void addExportedPackage(final IJavaProject pluginProject, final String... exportedPackages) {
-    try {
-      IProject _project = pluginProject.getProject();
-      final IFile manifestFile = _project.getFile("META-INF/MANIFEST.MF");
-      final InputStream manifestContent = manifestFile.getContents();
-      Manifest _xtrycatchfinallyexpression = null;
-      try {
-        _xtrycatchfinallyexpression = new Manifest(manifestContent);
-      } finally {
-        manifestContent.close();
-      }
-      final Manifest manifest = _xtrycatchfinallyexpression;
-      final Attributes attrs = manifest.getMainAttributes();
-      boolean _containsKey = attrs.containsKey("Export-Package");
-      if (_containsKey) {
-        Object _get = attrs.get("Export-Package");
-        String _plus = (_get + ",");
-        String _join = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(exportedPackages)), ",");
-        String _plus_1 = (_plus + _join);
-        attrs.putValue("Export-Package", _plus_1);
-      } else {
-        String _join_1 = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(exportedPackages)), ",");
-        attrs.putValue("Export-Package", _join_1);
-      }
-      final ByteArrayOutputStream out = new ByteArrayOutputStream();
-      manifest.write(out);
-      byte[] _byteArray = out.toByteArray();
-      final ByteArrayInputStream in = new ByteArrayInputStream(_byteArray);
-      BufferedInputStream _bufferedInputStream = new BufferedInputStream(in);
-      manifestFile.setContents(_bufferedInputStream, true, true, null);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
