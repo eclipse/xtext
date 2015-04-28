@@ -2,10 +2,7 @@ package org.eclipse.xtend.ide.tests.macros
 
 import com.google.inject.Inject
 import com.google.inject.Provider
-import java.io.BufferedInputStream
-import java.io.ByteArrayInputStream
-import java.io.ByteArrayOutputStream
-import java.util.jar.Manifest
+import org.eclipse.core.resources.IContainer
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IFolder
 import org.eclipse.emf.common.util.URI
@@ -29,16 +26,16 @@ import org.eclipse.xtext.util.StringInputStream
 import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.IResourceValidator
 import org.junit.After
+import org.junit.AfterClass
+import org.junit.BeforeClass
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static org.junit.Assert.*
-import org.eclipse.core.resources.IContainer
-import org.junit.BeforeClass
-import org.junit.AfterClass
+
+import static extension org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XtendIDEInjectorProvider))
@@ -134,7 +131,7 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 	def void tearDown() throws Exception {
 		clientFile.delete(true, null)
 		macroFile.delete(true, null)
-		macroProject.removeExportedPackage(exportedPackage)
+		macroProject.project.removeExportedPackages(exportedPackage)
 	}
 	
 	IFile macroFile
@@ -148,7 +145,7 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 		val lidx = macroContent.key.lastIndexOf('/')
 		if (lidx != -1) {
 			exportedPackage = macroContent.key.substring(0, lidx).replace('/', '.')
-			macroProject.addExportedPackage(exportedPackage)
+			macroProject.project.addExportedPackages(exportedPackage)
 		}
 		
 		clientFile = userProject.newSource(clientContent.key, clientContent.value.toString)
@@ -175,46 +172,6 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 			createIfNotExistent(container.parent)
 			(container as IFolder).create(true, false, null)
 		}
-	}
-
-	def void addExportedPackage(IJavaProject pluginProject, String ... exportedPackages) {
-		val manifestFile = pluginProject.project.getFile("META-INF/MANIFEST.MF")
-		val manifestContent = manifestFile.contents
-		val manifest = try {
-			new Manifest(manifestContent)
-		} finally {
-			manifestContent.close
-		}
-		val attrs = manifest.getMainAttributes()
-		if (attrs.containsKey("Export-Package")) {
-			attrs.putValue("Export-Package", attrs.get("Export-Package") + "," + exportedPackages.join(","))
-		} else {
-			attrs.putValue("Export-Package", exportedPackages.join(","))
-		}
-		val out = new ByteArrayOutputStream()
-		manifest.write(out)
-		val in = new ByteArrayInputStream(out.toByteArray)
-		manifestFile.setContents(new BufferedInputStream(in), true, true, null)
-	}
-	
-	def void removeExportedPackage(IJavaProject pluginProject, String ... exportedPackages) {
-		val manifestFile = pluginProject.project.getFile("META-INF/MANIFEST.MF")
-		val manifestContent = manifestFile.contents
-		val manifest = try {
-			new Manifest(manifestContent)
-		} finally {
-			manifestContent.close
-		}
-		val attrs = manifest.getMainAttributes()
-		if (attrs.containsKey("Export-Package")) {
-			val exportsToKeep = (attrs.get("Export-Package") as String).split(",")
-			exportsToKeep.removeAll(exportedPackages)
-			attrs.putValue("Export-Package", exportsToKeep.join(","))
-		}
-		val out = new ByteArrayOutputStream()
-		manifest.write(out)
-		val in = new ByteArrayInputStream(out.toByteArray)
-		manifestFile.setContents(new BufferedInputStream(in), true, true, null)
 	}
 
 }

@@ -8,13 +8,8 @@
 package org.eclipse.xtend.ide.tests.macros;
 
 import com.google.common.io.CharStreams;
-import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.jar.Attributes;
-import java.util.jar.Manifest;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -97,7 +92,8 @@ public class JdtBasedProcessorProviderTest {
       _builder.append("}");
       _builder.newLine();
       this.newSource(macroProject, "annotation/MyAA.xtend", _builder.toString());
-      this.addExportedPackage(macroProject, "annotation");
+      IProject _project = macroProject.getProject();
+      WorkbenchTestHelper.addExportedPackages(_project, "annotation");
       IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("libProject");
       final IJavaProject libProject = JavaCore.create(_createPluginProject_1);
       StringConcatenation _builder_1 = new StringConcatenation();
@@ -118,7 +114,8 @@ public class JdtBasedProcessorProviderTest {
       _builder_1.append("}");
       _builder_1.newLine();
       this.newSource(libProject, "mylib/Lib.xtend", _builder_1.toString());
-      this.addExportedPackage(libProject, "mylib");
+      IProject _project_1 = libProject.getProject();
+      WorkbenchTestHelper.addExportedPackages(_project_1, "mylib");
       IResourcesSetupUtil.waitForAutoBuild();
       IProject _createPluginProject_2 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
         "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject", "libProject");
@@ -172,7 +169,8 @@ public class JdtBasedProcessorProviderTest {
       _builder.append("}");
       _builder.newLine();
       this.newSource(libProject, "mylib/Lib.xtend", _builder.toString());
-      this.addExportedPackage(libProject, "mylib");
+      IProject _project = libProject.getProject();
+      WorkbenchTestHelper.addExportedPackages(_project, "mylib");
       IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("macroProject", "com.google.inject", "org.eclipse.xtend.lib", 
         "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "libProject");
       final IJavaProject macroProject = JavaCore.create(_createPluginProject_1);
@@ -212,7 +210,8 @@ public class JdtBasedProcessorProviderTest {
       _builder_1.append("}");
       _builder_1.newLine();
       this.newSource(macroProject, "annotation/MyAA.xtend", _builder_1.toString());
-      this.addExportedPackage(macroProject, "annotation");
+      IProject _project_1 = macroProject.getProject();
+      WorkbenchTestHelper.addExportedPackages(_project_1, "annotation");
       IResourcesSetupUtil.waitForAutoBuild();
       IProject _createPluginProject_2 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
         "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject");
@@ -455,41 +454,6 @@ public class JdtBasedProcessorProviderTest {
       StringInputStream _stringInputStream = new StringInputStream(contents);
       result.create(_stringInputStream, true, null);
       return result;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
-  public void addExportedPackage(final IJavaProject pluginProject, final String... exportedPackages) {
-    try {
-      IProject _project = pluginProject.getProject();
-      final IFile manifestFile = _project.getFile("META-INF/MANIFEST.MF");
-      final InputStream manifestContent = manifestFile.getContents();
-      Manifest _xtrycatchfinallyexpression = null;
-      try {
-        _xtrycatchfinallyexpression = new Manifest(manifestContent);
-      } finally {
-        manifestContent.close();
-      }
-      final Manifest manifest = _xtrycatchfinallyexpression;
-      final Attributes attrs = manifest.getMainAttributes();
-      boolean _containsKey = attrs.containsKey("Export-Package");
-      if (_containsKey) {
-        Object _get = attrs.get("Export-Package");
-        String _plus = (_get + ",");
-        String _join = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(exportedPackages)), ",");
-        String _plus_1 = (_plus + _join);
-        attrs.putValue("Export-Package", _plus_1);
-      } else {
-        String _join_1 = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(exportedPackages)), ",");
-        attrs.putValue("Export-Package", _join_1);
-      }
-      final ByteArrayOutputStream out = new ByteArrayOutputStream();
-      manifest.write(out);
-      byte[] _byteArray = out.toByteArray();
-      final ByteArrayInputStream in = new ByteArrayInputStream(_byteArray);
-      BufferedInputStream _bufferedInputStream = new BufferedInputStream(in);
-      manifestFile.setContents(_bufferedInputStream, true, true, null);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
