@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.macros
 
-import com.google.common.io.CharStreams
-import java.io.InputStreamReader
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IFolder
 import org.eclipse.core.runtime.NullProgressMonitor
@@ -32,7 +30,7 @@ import static extension org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
 class MoreActiveAnnotationsTest {
 
 	@Rule public StopwatchRule stopwatch = new StopwatchRule(true);
-
+	
 	@After def tearDown() throws Exception {
 		cleanWorkspace();
 	}
@@ -336,7 +334,7 @@ class MoreActiveAnnotationsTest {
 		cleanBuild
 		waitForBuild(new NullProgressMonitor)
 		val file = userProject.project.findMember("xtend-gen/client/sub/B.java") as IFile
-		val contents = CharStreams.toString(new InputStreamReader(file.contents))
+		val contents = file.contentsAsString
 		assertEquals('''
 			package client.sub;
 			

@@ -11,6 +11,7 @@ import com.google.common.io.ByteStreams;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -38,6 +39,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -219,10 +221,8 @@ public class WorkspaceScenariosTest {
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
       IProject _project = fileA.getProject();
       final IFile javaB = _project.getFile("xtend-gen/mypack/ClassB.java");
-      InputStream _contents = javaB.getContents();
-      byte[] _byteArray = ByteStreams.toByteArray(_contents);
-      String _string = new String(_byteArray);
-      boolean _contains = _string.contains("anotherMethod(a);");
+      String _contentsAsString = WorkbenchTestHelper.getContentsAsString(javaB);
+      boolean _contains = _contentsAsString.contains("anotherMethod(a);");
       Assert.assertTrue(_contains);
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("package mypack");
@@ -252,10 +252,8 @@ public class WorkspaceScenariosTest {
       fileA.setContents(_stringInputStream, true, true, null);
       IResourcesSetupUtil.waitForAutoBuild();
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
-      InputStream _contents_1 = javaB.getContents();
-      byte[] _byteArray_1 = ByteStreams.toByteArray(_contents_1);
-      String _string_1 = new String(_byteArray_1);
-      boolean _contains_1 = _string_1.contains("a.anotherMethod();");
+      String _contentsAsString_1 = WorkbenchTestHelper.getContentsAsString(javaB);
+      boolean _contains_1 = _contentsAsString_1.contains("a.anotherMethod();");
       Assert.assertTrue(_contains_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -326,6 +324,7 @@ public class WorkspaceScenariosTest {
   public byte[] createJar(final Iterable<? extends Pair<? extends String, ? extends String>> sourceFiles, final Function1<? super String, ? extends Boolean> filter) {
     try {
       final IProject project = WorkbenchTestHelper.createPluginProject("my.temporary.data.project", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.lib");
+      final HashMap<String, InputStream> listOfContents = CollectionLiterals.<String, InputStream>newHashMap();
       try {
         IJavaProject _create = JavaCore.create(project);
         JavaProjectSetupUtil.addSourceFolder(_create, "src");
@@ -338,7 +337,6 @@ public class WorkspaceScenariosTest {
           IResourcesSetupUtil.createFile(_plus, _value);
         }
         IResourcesSetupUtil.waitForAutoBuild();
-        final HashMap<String, InputStream> listOfContents = CollectionLiterals.<String, InputStream>newHashMap();
         final IResourceVisitor _function = new IResourceVisitor() {
           @Override
           public boolean visit(final IResource it) throws CoreException {
@@ -377,6 +375,18 @@ public class WorkspaceScenariosTest {
         final InputStream jarin = JavaProjectSetupUtil.jarInputStream(((Pair<String, InputStream>[])Conversions.unwrapArray(_list, Pair.class)));
         return ByteStreams.toByteArray(jarin);
       } finally {
+        Collection<InputStream> _values = listOfContents.values();
+        final Procedure1<InputStream> _function_2 = new Procedure1<InputStream>() {
+          @Override
+          public void apply(final InputStream it) {
+            try {
+              it.close();
+            } catch (Throwable _e) {
+              throw Exceptions.sneakyThrow(_e);
+            }
+          }
+        };
+        IterableExtensions.<InputStream>forEach(_values, _function_2);
         project.delete(true, true, null);
       }
     } catch (Throwable _e) {
