@@ -328,6 +328,7 @@ public class WorkbenchTestHelper extends Assert {
 				mf.getMainAttributes().putValue("Bundle-RequiredExecutionEnvironment", bree.get());
 			}
 		});
+		JavaProjectSetupUtil.addJreClasspathEntry(javaProject, bree.get());
 		return bree.get();
 	}
 	
