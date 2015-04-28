@@ -9,7 +9,6 @@ package org.eclipse.xtend.idea.navigation
 
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiAnnotationMethod
-import com.intellij.psi.PsiAnonymousClass
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiEnumConstant
@@ -67,7 +66,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			PsiClass
+			PsiMethod // constructor
 		)
 	}
 
@@ -180,7 +179,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			PsiAnonymousClass
+			PsiClass
 		)
 	}
 
@@ -211,7 +210,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			PsiAnonymousClass
+			PsiClass
 		)
 	}
 
@@ -273,7 +272,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			PsiAnonymousClass
+			PsiClass
 		)
 	}
 
@@ -301,7 +300,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			PsiAnonymousClass
+			PsiClass
 		)
 	}
 
@@ -349,7 +348,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			PsiEnumConstant
+			PsiField
 		)
 	}
 
@@ -417,7 +416,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			PsiAnnotationMethod
+			PsiMethod
 		)
 	}
 

@@ -12,11 +12,8 @@ import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiAnnotationMethod;
-import com.intellij.psi.PsiAnonymousClass;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiEnumConstant;
 import com.intellij.psi.PsiField;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiMethod;
@@ -103,9 +100,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.<PsiClass>testNavigateTo(
+    this.<PsiMethod>testNavigateTo(
       "mypackage/Greeter.xtend", _builder.toString(), 
-      PsiClass.class);
+      PsiMethod.class);
   }
   
   public void testNavigateToClass_Extends() {
@@ -297,9 +294,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.<PsiAnonymousClass>testNavigateTo(
+    this.<PsiClass>testNavigateTo(
       "mypackage/Foo.xtend", _builder.toString(), 
-      PsiAnonymousClass.class);
+      PsiClass.class);
   }
   
   public void testNavigateToAnnonymousClass2() {
@@ -360,9 +357,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.<PsiAnonymousClass>testNavigateTo(
+    this.<PsiClass>testNavigateTo(
       "mypackage/Foo.xtend", _builder.toString(), 
-      PsiAnonymousClass.class);
+      PsiClass.class);
   }
   
   public void testNavigateToAnnonymousClass3() {
@@ -484,9 +481,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.<PsiAnonymousClass>testNavigateTo(
+    this.<PsiClass>testNavigateTo(
       "mypackage/Foo.xtend", _builder.toString(), 
-      PsiAnonymousClass.class);
+      PsiClass.class);
   }
   
   public void testNavigateToAnnonymousClass5() {
@@ -537,9 +534,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.<PsiAnonymousClass>testNavigateTo(
+    this.<PsiClass>testNavigateTo(
       "mypackage/Foo.xtend", _builder.toString(), 
-      PsiAnonymousClass.class);
+      PsiClass.class);
   }
   
   public void testNavigateToEnumeration() {
@@ -621,9 +618,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.<PsiEnumConstant>testNavigateTo(
+    this.<PsiField>testNavigateTo(
       "mypackage/Foo.xtend", _builder.toString(), 
-      PsiEnumConstant.class);
+      PsiField.class);
   }
   
   public void testNavigateToConstructor() {
@@ -744,9 +741,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.<PsiAnnotationMethod>testNavigateTo(
+    this.<PsiMethod>testNavigateTo(
       "mypackage/MyAnnotation.xtend", _builder.toString(), 
-      PsiAnnotationMethod.class);
+      PsiMethod.class);
   }
   
   public void testNavigateToField() {

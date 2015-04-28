@@ -12,6 +12,8 @@ import com.intellij.psi.PsiReferenceList
 import org.eclipse.xtend.idea.LightXtendTest
 
 import static extension org.eclipse.xtext.xbase.idea.types.psi.LoadingTypeResourcePhase.*
+import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass
+import org.eclipse.xtext.xbase.idea.jvm.JvmPsiElementExtensions
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -93,6 +95,31 @@ class JvmPsiClassTest extends LightXtendTest {
 		''')
 		myFixture.testHighlighting(true, true, true, xtendFile.virtualFile)
 	}
+	
+	def void testCyclicResolution4() {
+		myFixture.addClass('''
+			package mypackage;
+			
+			public class Bar extends Foo<Bar> {
+			
+				public void someMethod(Bar b) {
+				}
+			
+			}
+		''')
+		val xtendFile = myFixture.addFileToProject('mypackage/Foo.xtend', '''
+			package mypackage
+			
+			class Foo<T extends Bar> {
+			
+				def void callToBar(T bar) {
+					bar.someMethod(bar)
+				}
+			
+			}
+		''')
+		myFixture.testHighlighting(true, true, true, xtendFile.virtualFile)
+	}
 
 	def void testResolution() {
 		myFixture.addFileToProject('mypackage/Foo.xtend', '''
@@ -135,7 +162,7 @@ class JvmPsiClassTest extends LightXtendTest {
 			}
 		''')
 		val psiClass = 'mypackage.Foo'.findJvmPsiClass
-		assertSize(1, psiClass.methods)
+		assertSize(2, psiClass.methods)
 
 		val method = psiClass.findMethodsByName('methodWithErros', false)
 		assertNotNull(method)
@@ -149,7 +176,7 @@ class JvmPsiClassTest extends LightXtendTest {
 			}
 		''')
 		val psiClass = 'mypackage.Foo'.findJvmPsiClass
-		psiClass.type.loadingTypeResource = true
+		psiClass.loadingTypeResource = true
 		assertEquals('Foo', psiClass.name)
 		assertEquals('mypackage.Foo', psiClass.qualifiedName)
 		assertNotNull(psiClass.containingFile)
@@ -176,7 +203,7 @@ class JvmPsiClassTest extends LightXtendTest {
 			}
 		''')
 		val psiClass = 'mypackage.Foo'.findJvmPsiClass
-		psiClass.type.loadingTypeResource = true
+		psiClass.loadingTypeResource = true
 
 		assertFalse(psiClass.modifierList.hasModifierProperty(PsiModifier.PUBLIC))
 		assertTrue(psiClass.modifierList.hasModifierProperty(PsiModifier.PACKAGE_LOCAL))
@@ -195,7 +222,7 @@ class JvmPsiClassTest extends LightXtendTest {
 			}
 		''')
 		val psiClass = 'mypackage.Foo'.findJvmPsiClass
-		psiClass.type.loadingTypeResource = true
+		psiClass.loadingTypeResource = true
 		assertTrue(psiClass.interface)
 	}
 
@@ -207,7 +234,7 @@ class JvmPsiClassTest extends LightXtendTest {
 			}
 		''')
 		val psiClass = 'mypackage.Foo'.findJvmPsiClass
-		psiClass.type.loadingTypeResource = true
+		psiClass.loadingTypeResource = true
 		assertTrue(psiClass.enum)
 	}
 
@@ -219,7 +246,7 @@ class JvmPsiClassTest extends LightXtendTest {
 			}
 		''')
 		val psiClass = 'mypackage.Foo'.findJvmPsiClass
-		psiClass.type.loadingTypeResource = true
+		psiClass.loadingTypeResource = true
 		assertTrue(psiClass.annotationType)
 	}
 
@@ -234,10 +261,8 @@ class JvmPsiClassTest extends LightXtendTest {
 		assertFalse(psiClass.interface)
 		assertFalse(psiClass.annotationType)
 		assertFalse(psiClass.enum)
-		assertEmpty(psiClass.extendsList.referenceElements)
-		assertEmpty(psiClass.extendsList.referencedTypes)
+		assertEquals('java.lang.Object', psiClass.extendsList.referenceElements.head.qualifiedName)
 		assertEmpty(psiClass.fields)
-		assertEmpty(psiClass.methods)
 		assertFalse(psiClass.hasTypeParameters)
 		assertEmpty(psiClass.typeParameterList.typeParameters)
 		assertEmpty(psiClass.typeParameters)
@@ -330,17 +355,20 @@ class JvmPsiClassTest extends LightXtendTest {
 			
 			class Foo {
 			
-			    def foo() {
+			    def m() {
 			    }
 			
 			}
 		''')
 		val psiClass = 'foo.Foo'.findJvmPsiClass
 		val methods = psiClass.methods
-		assertSize(1, methods)
-		val method = methods.head
+		assertSize(2, methods)
+		val method = methods.last
 		assertNotNull(method)
-		assertEquals('foo', method.name)
+		assertEquals('m', method.name)
+		val ctrs = psiClass.constructors
+		assertSize(1, ctrs)
+		assertSame(ctrs.head, methods.head)
 	}
 
 	def testPsiTypeParameterListOwner() {
@@ -372,5 +400,9 @@ class JvmPsiClassTest extends LightXtendTest {
 		assertEquals(typeParameter, psiClass.typeParameterList.typeParameters.head)
 		assertEquals(0, psiClass.typeParameterList.getTypeParameterIndex(typeParameter))
 	}
+	
+	def void setLoadingTypeResource(JvmPsiClass c, boolean b) {
+		JvmPsiElementExtensions.getJvmElement(c).loadingTypeResource = b
+	} 
 
 }
