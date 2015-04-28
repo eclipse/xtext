@@ -225,6 +225,8 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
   public static void deleteProjects() {
     try {
       IResourcesSetupUtil.cleanWorkspace();
+      ActiveAnnotationsProcessingInIDETest.macroProject = null;
+      ActiveAnnotationsProcessingInIDETest.userProject = null;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

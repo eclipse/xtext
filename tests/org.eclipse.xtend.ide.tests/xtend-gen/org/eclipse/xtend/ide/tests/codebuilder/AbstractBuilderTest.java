@@ -26,6 +26,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
+import org.junit.AfterClass;
 import org.junit.Assert;
 
 @SuppressWarnings("all")
@@ -47,15 +48,21 @@ public class AbstractBuilderTest extends AbstractXtendUITestCase {
   @Inject
   private CommonTypeComputationServices services;
   
-  private JvmDeclaredType xtendClass;
+  private static JvmDeclaredType xtendClass;
   
-  private JvmDeclaredType javaClass;
+  private static JvmDeclaredType javaClass;
+  
+  @AfterClass
+  public static void cleanUpTestData() {
+    AbstractBuilderTest.xtendClass = null;
+    AbstractBuilderTest.javaClass = null;
+  }
   
   protected JvmDeclaredType getXtendClass() {
     try {
       JvmDeclaredType _xblockexpression = null;
       {
-        boolean _equals = Objects.equal(this.xtendClass, null);
+        boolean _equals = Objects.equal(AbstractBuilderTest.xtendClass, null);
         if (_equals) {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("class Foo {");
@@ -66,9 +73,9 @@ public class AbstractBuilderTest extends AbstractXtendUITestCase {
           EList<XtendTypeDeclaration> _xtendTypes = _xtendFile.getXtendTypes();
           XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
           JvmGenericType _inferredType = this._iXtendJvmAssociations.getInferredType(((XtendClass) _head));
-          this.xtendClass = _inferredType;
+          AbstractBuilderTest.xtendClass = _inferredType;
         }
-        _xblockexpression = this.xtendClass;
+        _xblockexpression = AbstractBuilderTest.xtendClass;
       }
       return _xblockexpression;
     } catch (Throwable _e) {
@@ -80,7 +87,7 @@ public class AbstractBuilderTest extends AbstractXtendUITestCase {
     try {
       JvmDeclaredType _xblockexpression = null;
       {
-        boolean _equals = Objects.equal(this.javaClass, null);
+        boolean _equals = Objects.equal(AbstractBuilderTest.javaClass, null);
         if (_equals) {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("public class Bar {");
@@ -92,9 +99,9 @@ public class AbstractBuilderTest extends AbstractXtendUITestCase {
           JvmDeclaredType _xtendClass = this.getXtendClass();
           JvmTypeReference _typeForName = this._typeReferences.getTypeForName("Bar", _xtendClass);
           JvmType _type = _typeForName.getType();
-          this.javaClass = ((JvmDeclaredType) _type);
+          AbstractBuilderTest.javaClass = ((JvmDeclaredType) _type);
         }
-        _xblockexpression = this.javaClass;
+        _xblockexpression = AbstractBuilderTest.javaClass;
       }
       return _xblockexpression;
     } catch (Throwable _e) {
