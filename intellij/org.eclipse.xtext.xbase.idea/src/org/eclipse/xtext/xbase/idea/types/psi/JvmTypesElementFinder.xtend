@@ -69,5 +69,14 @@ class JvmTypesElementFinder extends PsiElementFinder {
 			xtextFile.language == language
 		]
 	}
+	
+	override getClassesFilter(GlobalSearchScope scope) {
+		[ psiClass |
+			if (psiClass instanceof JvmPsiClass) {
+				return true
+			}
+			return psiClass.qualifiedName.findClass(scope) == null
+		]
+	}
 
 }

@@ -12,6 +12,7 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.intellij.lang.Language;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Condition;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElementFinder;
 import com.intellij.psi.search.GlobalSearchScope;
@@ -23,6 +24,7 @@ import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex;
+import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass;
 import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClasses;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -114,5 +116,21 @@ public class JvmTypesElementFinder extends PsiElementFinder {
       }
     };
     return IterableExtensions.<BaseXtextFile>filter(_get, _function);
+  }
+  
+  @Override
+  public Condition<PsiClass> getClassesFilter(final GlobalSearchScope scope) {
+    final Condition<PsiClass> _function = new Condition<PsiClass>() {
+      @Override
+      public boolean value(final PsiClass psiClass) {
+        if ((psiClass instanceof JvmPsiClass)) {
+          return true;
+        }
+        String _qualifiedName = psiClass.getQualifiedName();
+        PsiClass _findClass = JvmTypesElementFinder.this.findClass(_qualifiedName, scope);
+        return Objects.equal(_findClass, null);
+      }
+    };
+    return _function;
   }
 }
