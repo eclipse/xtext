@@ -7,9 +7,6 @@
  */
 package org.eclipse.xtend.ide.tests.macros;
 
-import com.google.common.io.CharStreams;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -136,9 +133,7 @@ public class JdtBasedProcessorProviderTest {
       IResourcesSetupUtil.waitForBuild(_nullProgressMonitor);
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
       IResource _file = IResourcesSetupUtil.file("userProject/xtend-gen/client/SomeClass.java");
-      InputStream _contents = ((IFile) _file).getContents();
-      InputStreamReader _inputStreamReader = new InputStreamReader(_contents);
-      final String javaCode = CharStreams.toString(_inputStreamReader);
+      final String javaCode = WorkbenchTestHelper.getContentsAsString(((IFile) _file));
       boolean _contains = javaCode.contains("HUNKELDUNKEL");
       Assert.assertTrue(_contains);
     } catch (Throwable _e) {
@@ -232,9 +227,7 @@ public class JdtBasedProcessorProviderTest {
       IResourcesSetupUtil.waitForBuild(_nullProgressMonitor);
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
       IResource _file = IResourcesSetupUtil.file("userProject/xtend-gen/client/SomeClass.java");
-      InputStream _contents = ((IFile) _file).getContents();
-      InputStreamReader _inputStreamReader = new InputStreamReader(_contents);
-      final String javaCode = CharStreams.toString(_inputStreamReader);
+      final String javaCode = WorkbenchTestHelper.getContentsAsString(((IFile) _file));
       boolean _contains = javaCode.contains("HUNKELDUNKEL");
       Assert.assertTrue(_contains);
     } catch (Throwable _e) {
@@ -347,9 +340,7 @@ public class JdtBasedProcessorProviderTest {
       IResourcesSetupUtil.waitForBuild(_nullProgressMonitor);
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
       IResource _file = IResourcesSetupUtil.file("userProject/xtend-gen/client/SomeClass.java");
-      InputStream _contents = ((IFile) _file).getContents();
-      InputStreamReader _inputStreamReader = new InputStreamReader(_contents);
-      final String javaCode = CharStreams.toString(_inputStreamReader);
+      final String javaCode = WorkbenchTestHelper.getContentsAsString(((IFile) _file));
       boolean _contains = javaCode.contains("HUNKELDUNKEL");
       Assert.assertTrue(_contains);
     } catch (Throwable _e) {
@@ -433,9 +424,7 @@ public class JdtBasedProcessorProviderTest {
       IResourcesSetupUtil.waitForBuild(_nullProgressMonitor);
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
       IResource _file = IResourcesSetupUtil.file("userProject/xtend-gen/client/SomeClass.java");
-      InputStream _contents = ((IFile) _file).getContents();
-      InputStreamReader _inputStreamReader = new InputStreamReader(_contents);
-      final String javaCode = CharStreams.toString(_inputStreamReader);
+      final String javaCode = WorkbenchTestHelper.getContentsAsString(((IFile) _file));
       boolean _contains = javaCode.contains("classnotfound");
       Assert.assertTrue(_contains);
     } catch (Throwable _e) {

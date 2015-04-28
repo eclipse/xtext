@@ -7,9 +7,6 @@
  */
 package org.eclipse.xtend.ide.tests.macros;
 
-import com.google.common.io.CharStreams;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -603,9 +600,7 @@ public class MoreActiveAnnotationsTest {
       IProject _project_1 = userProject.getProject();
       IResource _findMember = _project_1.findMember("xtend-gen/client/sub/B.java");
       final IFile file = ((IFile) _findMember);
-      InputStream _contents = file.getContents();
-      InputStreamReader _inputStreamReader = new InputStreamReader(_contents);
-      final String contents = CharStreams.toString(_inputStreamReader);
+      final String contents = WorkbenchTestHelper.getContentsAsString(file);
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("package client.sub;");
       _builder_3.newLine();

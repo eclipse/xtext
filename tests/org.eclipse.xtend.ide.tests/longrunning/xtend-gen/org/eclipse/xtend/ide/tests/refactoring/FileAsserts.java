@@ -38,7 +38,7 @@ public class FileAsserts {
   
   public void assertFileContains(final IFile file, final String... expectedContents) throws Exception {
     file.refreshLocal(IResource.DEPTH_ZERO, null);
-    final String fileContents = this._workbenchTestHelper.getContents(file);
+    final String fileContents = WorkbenchTestHelper.getContentsAsString(file);
     final Procedure1<String> _function = new Procedure1<String>() {
       @Override
       public void apply(final String expectation) {

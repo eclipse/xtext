@@ -4,7 +4,7 @@ import com.google.inject.Inject
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IResource
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
-
+import static extension org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
 import static org.junit.Assert.*
 
 class FileAsserts {
@@ -25,7 +25,7 @@ class FileAsserts {
 
 	def assertFileContains(IFile file, String... expectedContents) throws Exception {
 		file.refreshLocal(IResource::DEPTH_ZERO, null);
-		val fileContents = getContents(file);
+		val fileContents = getContentsAsString(file);
 		expectedContents.forEach [ expectation |
 			if (!fileContents.contains(expectation)) {
 				assertEquals(expectation, fileContents)

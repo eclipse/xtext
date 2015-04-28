@@ -21,6 +21,8 @@ import org.eclipse.xtext.util.StringInputStream
 import org.junit.Assert
 import org.junit.Test
 
+import static org.junit.Assert.*
+
 import static extension org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
 import static extension org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static extension org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
@@ -107,7 +109,7 @@ class WorkspaceScenariosTest {
 		assertNoErrorsInWorkspace
 		val javaB = fileA.project.getFile("xtend-gen/mypack/ClassB.java")
 		// check that a.anotherMethod is an extension call
-		assertTrue(new String(ByteStreams.toByteArray(javaB.contents)).contains("anotherMethod(a);"))
+		assertTrue(javaB.contentsAsString.contains("anotherMethod(a);"))
 		
 		
 		fileA.setContents(new StringInputStream('''
@@ -125,7 +127,7 @@ class WorkspaceScenariosTest {
 		waitForAutoBuild
 		assertNoErrorsInWorkspace
 		// check that a.anotherMethod is no longer an extension call
-		assertTrue(new String(ByteStreams.toByteArray(javaB.contents)).contains("a.anotherMethod();"))
+		assertTrue(javaB.contentsAsString.contains("a.anotherMethod();"))
 	}
 	
 	protected def IProject createProjectWithJarDependency((String)=>boolean jarFilter) {
@@ -168,6 +170,7 @@ class WorkspaceScenariosTest {
 	
 	def byte[] createJar(Iterable<? extends Pair<? extends String, ? extends String>> sourceFiles, (String)=>boolean filter) {
 		val project = "my.temporary.data.project".createPluginProject('org.eclipse.xtext.xbase.lib', 'org.eclipse.xtend.lib')
+		val listOfContents = <String,InputStream>newHashMap
 		try {
 			JavaCore.create(project).addSourceFolder("src")
 			JavaCore.create(project).addSourceFolder("xtend-gen")
@@ -176,7 +179,6 @@ class WorkspaceScenariosTest {
 			}
 			waitForAutoBuild
 			
-			val listOfContents = <String,InputStream>newHashMap
 			
 			val IResourceVisitor visitor = [
 				if (it instanceof IFile) {
@@ -194,6 +196,7 @@ class WorkspaceScenariosTest {
 			val jarin = jarInputStream(listOfContents.entrySet.map[key->value].toList)
 			return ByteStreams.toByteArray(jarin)
 		} finally {
+			listOfContents.values.forEach[close]
 			project.delete(true, true, null)
 		}
 	}
