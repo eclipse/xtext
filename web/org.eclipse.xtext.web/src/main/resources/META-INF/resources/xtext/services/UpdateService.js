@@ -47,8 +47,8 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 		this._isRunningUpdate = false;
 		var callbacks = this._completionCallbacks;
 		this._completionCallbacks = [];
-		for (callback in callbacks) {
-			callback.call();
+		for (i in callbacks) {
+			callbacks[i]();
 		}
 	}
 	
@@ -93,13 +93,12 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 			type : "PUT",
 			data : serverData,
 			success : function(result) {
-				editorContext.updateServerState(currentText, result.stateId);
-			},
-			error : function(xhr, textStatus, errorThrown) {
-				if (xhr.status == 409) {
+				if (result.conflict) {
 					// A conflict with another service occured - retry
-					return self.retry(self.update, editorContext, params);
+					self.retry(self.update, editorContext, params);
+					return false;
 				}
+				editorContext.updateServerState(currentText, result.stateId);
 			},
 			complete : self.onComplete.bind(self)
 		});

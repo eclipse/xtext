@@ -61,6 +61,11 @@ define(["xtext/services/AbstractXtextService", "orion/Deferred"], function(Abstr
 			type : httpMethod,
 			data : serverData,
 			success : function(result) {
+				if (result.conflict) {
+					// A conflict with another service occured - retry
+					self.retry(self.computeContentAssist, editorContext, params, [deferred]);
+					return false;
+				}
 				if (updateServerState) {
 					editorContext.updateServerState(currentText, result.stateId);
 				}
@@ -79,10 +84,6 @@ define(["xtext/services/AbstractXtextService", "orion/Deferred"], function(Abstr
 				deferred.resolve(proposals);
 			},
 			error : function(xhr, textStatus, errorThrown) {
-				if (xhr.status == 409) {
-					// A conflict with another service occured - retry
-					return self.retry(self.computeContentAssist, editorContext, params, [deferred]);
-				}
 				deferred.reject(errorThrown);
 			},
 			complete: onComplete

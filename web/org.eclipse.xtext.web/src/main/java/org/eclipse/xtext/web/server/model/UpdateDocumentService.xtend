@@ -52,7 +52,6 @@ class UpdateDocumentService {
 	
 	def void processUpdatedDocument(IXtextWebDocument it, CancelIndicator cancelIndicator) {
 		if (!processingCompleted) {
-			Thread.sleep(2000)
 			issues.addAll(resourceValidator.validate(resource, CheckMode.ALL, cancelIndicator))
 			processingCompleted = true
 		}

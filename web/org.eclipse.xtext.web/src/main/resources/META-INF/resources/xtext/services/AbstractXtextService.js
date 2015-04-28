@@ -65,10 +65,12 @@ define(["jquery"], function(jQuery) {
 				if (additionalArgs) {
 					args = args.concat(additionalArgs);
 				}
-				serviceMethod.apply(this, args);
-				return true;
+				return serviceMethod.apply(this, args);
 			}
-			return false;
+			var listener = editorContext.getEditor().xtextServiceErrorListener;
+			if (jQuery.isFunction(listener)) {
+				listener(this._requestType, {}, "error", "The service request failed due to conflicts with other services.");
+			}
 		}
 	};
 	
