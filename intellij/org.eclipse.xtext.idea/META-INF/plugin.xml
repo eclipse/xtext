@@ -8,7 +8,9 @@
 	<idea-version since-build="131"/>
 	
 	<extensions defaultExtensionNs="com.intellij">
-		<buildProcess.parametersProvider implementation="org.eclipse.xtext.idea.server.XtextBuildProcessParametersProvider" /> 
+		<buildProcess.parametersProvider implementation="org.eclipse.xtext.idea.server.XtextBuildProcessParametersProvider" />
+		
+		<problemFileHighlightFilter implementation="org.eclipse.xtext.idea.highlighting.ProblemXtextFileHighlightFilter"/> 
    	</extensions>
 
 	<project-components>
