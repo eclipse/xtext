@@ -74,6 +74,8 @@ define(["xtext/services/AbstractXtextService", "orion/Deferred"], function(Abstr
 					var e = result.entries[i];
 					proposals.push({
 						proposal : e.proposal,
+						prefix : result.prefix,
+						overwrite : true,
 						name : e.name,
 						description : e.description,
 						style : e.style,

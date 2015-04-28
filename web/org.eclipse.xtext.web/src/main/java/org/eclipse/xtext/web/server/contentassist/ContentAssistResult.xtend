@@ -17,9 +17,11 @@ import org.eclipse.xtext.web.server.IServiceResult
 @ToString
 class ContentAssistResult implements IServiceResult {
 	
-	val entries = new ArrayList<Entry>
-	
 	String stateId
+	
+	String prefix
+	
+	val entries = new ArrayList<Entry>
 	
 	@Data
 	static class Entry {
