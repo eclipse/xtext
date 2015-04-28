@@ -31,6 +31,8 @@ class FileResourceHandler implements IServerResourceHandler {
 	override get(String resourceId) throws IOException {
 		try {
 			val uri = resourceBaseProvider.getFileURI(resourceId)
+			if (uri === null)
+				throw new IOException('The requested resource does not exist.')
 			val resourceSet = resourceSetProvider.get()
 			val resource = resourceSet.getResource(uri, true) as XtextResource
 			return documentProvider.get() => [

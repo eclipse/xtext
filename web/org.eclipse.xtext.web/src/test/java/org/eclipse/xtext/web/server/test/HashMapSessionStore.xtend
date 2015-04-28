@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.web.test
+package org.eclipse.xtext.web.server.test
 
 import org.eclipse.xtext.web.server.ISessionStore
 import java.util.HashMap

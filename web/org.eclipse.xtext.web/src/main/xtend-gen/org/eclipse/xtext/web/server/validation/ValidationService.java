@@ -59,12 +59,11 @@ public class ValidationService {
         Severity _severity = issue.getSeverity();
         String _translate = ValidationService.this.translate(_severity);
         Integer _lineNumber = issue.getLineNumber();
-        int _plus = ((_lineNumber).intValue() + 1);
         Integer _offset = issue.getOffset();
         Integer _offset_1 = issue.getOffset();
         Integer _length = issue.getLength();
-        int _plus_1 = ((_offset_1).intValue() + (_length).intValue());
-        ValidationResult.Entry _entry = new ValidationResult.Entry(_message, _translate, Integer.valueOf(_plus), _offset, Integer.valueOf(_plus_1));
+        int _plus = ((_offset_1).intValue() + (_length).intValue());
+        ValidationResult.Entry _entry = new ValidationResult.Entry(_message, _translate, _lineNumber, _offset, Integer.valueOf(_plus));
         _entries.add(_entry);
       }
     };

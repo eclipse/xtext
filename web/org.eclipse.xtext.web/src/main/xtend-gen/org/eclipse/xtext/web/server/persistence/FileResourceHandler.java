@@ -47,6 +47,9 @@ public class FileResourceHandler implements IServerResourceHandler {
     try {
       try {
         final URI uri = this.resourceBaseProvider.getFileURI(resourceId);
+        if ((uri == null)) {
+          throw new IOException("The requested resource does not exist.");
+        }
         final XtextResourceSet resourceSet = this.resourceSetProvider.get();
         Resource _resource = resourceSet.getResource(uri, true);
         final XtextResource resource = ((XtextResource) _resource);
