@@ -1,4 +1,6 @@
 dependencies {
     compile project(':plugins:org.eclipse.xtext.ide')
-    testCompile project(':tests:org.eclipse.xtext.testlanguages')
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile project(':plugins:org.eclipse.xtext.junit4')
+    testCompile project(':intellij:org.eclipse.xtext.idea.example.entities.ide')
 }
