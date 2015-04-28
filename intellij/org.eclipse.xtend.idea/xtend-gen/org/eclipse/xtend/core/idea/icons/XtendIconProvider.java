@@ -25,7 +25,7 @@ public class XtendIconProvider extends IconProvider {
     if (!_matched) {
       if (element instanceof XtendFileImpl) {
         _matched=true;
-        _switchResult = XtendIcons.Xtend_CLASS;
+        _switchResult = XtendIcons.Xtend_ICON;
       }
     }
     return _switchResult;
