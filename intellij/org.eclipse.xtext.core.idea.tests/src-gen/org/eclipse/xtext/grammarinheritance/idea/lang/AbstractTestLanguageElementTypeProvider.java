@@ -194,10 +194,12 @@ public class AbstractTestLanguageElementTypeProvider implements IElementTypeProv
 
 	public static final IGrammarAwareElementType ExtendableParserRule_NameIDTerminalRuleCall_1_0_ELEMENT_TYPE = associate(ExtendableParserRuleFactory.createExtendableParserRule_NameIDTerminalRuleCall_1_0ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

@@ -17,14 +17,11 @@
 		<java.shortNamesCache implementation="org.eclipse.xtext.xbase.idea.lang.types.XbaseJvmTypesShortNamesCache"/>
 
 		<stubIndex implementation="org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex"/>
-		<stubIndex implementation="org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex"/>
+		<stubIndex implementation="org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex"/>
 
 		<psi.treeChangePreprocessor implementation="org.eclipse.xtext.xbase.idea.lang.psi.XbaseCodeBlockModificationListener"/>
 
 		<referencesSearch implementation="org.eclipse.xtext.xbase.idea.lang.types.psi.search.XbaseJvmElementsReferencesSearch"/>
-		<targetElementEvaluator language="org.eclipse.xtext.xbase.Xbase"
-								factoryClass="org.eclipse.xtext.xbase.idea.XbaseExtensionFactory"
-								implementationClass="org.eclipse.xtext.idea.jvmmodel.codeInsight.PsiJvmTargetElementEvaluator"/>
 
 		<fileTypeFactory implementation="org.eclipse.xtext.xbase.idea.lang.XbaseFileTypeFactory"/>
 		<stubElementTypeHolder class="org.eclipse.xtext.xbase.idea.lang.XbaseElementTypeProvider"/>
@@ -65,6 +62,8 @@
 								factoryClass="org.eclipse.xtext.xbase.idea.XbaseExtensionFactory"
 								implementationClass="com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider"/>
 		<hierarchy.referenceProcessor implementation="org.eclipse.xtext.xbase.idea.ide.hierarchy.call.XbaseCallReferenceProcessor"/>
+		
+    	<lang.parserDefinition language="org.eclipse.xtext.jvm.JVM" implementationClass="org.eclipse.xtext.xbase.idea.jvm.JvmParserDefinition"/>
 	</extensions>
 
 </idea-plugin>

@@ -13,6 +13,7 @@ public final class LazyLinkingTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, LazyLinkingTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return LazyLinkingTestLanguageFileType.INSTANCE;
 	}

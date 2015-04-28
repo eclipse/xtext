@@ -451,10 +451,12 @@ public class PartialParserTestLanguageElementTypeProvider implements IElementTyp
 
 	public static final IGrammarAwareElementType Named_NameIDTerminalRuleCall_0_ELEMENT_TYPE = associate(NamedFactory.createNamed_NameIDTerminalRuleCall_0ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

@@ -16,18 +16,22 @@ public final class XtextTerminalsTestLanguageFileType extends LanguageFileType {
 		super(XtextTerminalsTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "XtextTerminalsTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "XtextTerminalsTestLanguage";
 	}

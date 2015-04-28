@@ -16,18 +16,22 @@ public final class FormatterTestLanguageFileType extends LanguageFileType {
 		super(FormatterTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "FormatterTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "FormatterTestLanguage";
 	}

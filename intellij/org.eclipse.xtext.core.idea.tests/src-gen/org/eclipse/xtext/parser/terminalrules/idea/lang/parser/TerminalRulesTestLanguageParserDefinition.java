@@ -16,6 +16,7 @@ public class TerminalRulesTestLanguageParserDefinition extends AbstractXtextPars
 	@Inject 
 	private TerminalRulesTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new TerminalRulesTestLanguageFileImpl(viewProvider);
 	}
@@ -23,7 +24,6 @@ public class TerminalRulesTestLanguageParserDefinition extends AbstractXtextPars
 	@Override
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
-		IElementType elementType = node.getElementType();
 		return super.createElement(node);
 	}
 

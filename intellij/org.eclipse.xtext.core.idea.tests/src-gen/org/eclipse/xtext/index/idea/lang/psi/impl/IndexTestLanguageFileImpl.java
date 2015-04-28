@@ -13,6 +13,7 @@ public final class IndexTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, IndexTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return IndexTestLanguageFileType.INSTANCE;
 	}

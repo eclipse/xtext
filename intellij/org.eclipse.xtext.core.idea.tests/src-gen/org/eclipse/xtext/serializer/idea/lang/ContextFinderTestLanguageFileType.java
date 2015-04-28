@@ -16,18 +16,22 @@ public final class ContextFinderTestLanguageFileType extends LanguageFileType {
 		super(ContextFinderTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "ContextFinderTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "ContextFinderTestLanguage";
 	}

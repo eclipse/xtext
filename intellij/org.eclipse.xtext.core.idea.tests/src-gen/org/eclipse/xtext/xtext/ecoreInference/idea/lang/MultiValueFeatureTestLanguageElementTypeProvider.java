@@ -44,10 +44,12 @@ public class MultiValueFeatureTestLanguageElementTypeProvider implements IElemen
 
 	public static final IGrammarAwareElementType Start_FeatureAIDTerminalRuleCall_0_ELEMENT_TYPE = associate(StartFactory.createStart_FeatureAIDTerminalRuleCall_0ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

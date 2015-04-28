@@ -13,6 +13,7 @@ public final class IndentationAwareTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, IndentationAwareTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return IndentationAwareTestLanguageFileType.INSTANCE;
 	}

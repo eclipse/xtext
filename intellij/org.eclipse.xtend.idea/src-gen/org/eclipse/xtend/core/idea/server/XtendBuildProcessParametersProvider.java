@@ -10,6 +10,7 @@ import com.intellij.openapi.extensions.PluginId;
 
 public class XtendBuildProcessParametersProvider extends BuildProcessParametersProvider {
 
+	@Override
 	public List<String> getClassPath() {
 		PluginId pluginId = PluginId.getId("org.eclipse.xtend.idea");
 		File pluginFolder = PluginManager.getPlugin(pluginId).getPath();

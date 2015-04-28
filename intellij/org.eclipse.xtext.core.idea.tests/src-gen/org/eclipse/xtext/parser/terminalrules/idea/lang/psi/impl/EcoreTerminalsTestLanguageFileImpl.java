@@ -13,6 +13,7 @@ public final class EcoreTerminalsTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, EcoreTerminalsTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return EcoreTerminalsTestLanguageFileType.INSTANCE;
 	}

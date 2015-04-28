@@ -13,6 +13,7 @@ public final class EObjectAtOffsetTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, EObjectAtOffsetTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return EObjectAtOffsetTestLanguageFileType.INSTANCE;
 	}

@@ -7,15 +7,15 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.idea.lang.IElementTypeProvider;
 import org.eclipse.xtext.xbase.idea.lang.psi.impl.XbaseFileImpl;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
-import org.eclipse.xtext.psi.stubs.XtextFileElementType;
 import org.eclipse.xtext.psi.stubs.XtextFileStub;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
+import org.eclipse.xtext.xbase.idea.types.stubs.XtypeFileElementType;
 
 import com.intellij.psi.tree.IFileElementType;
 
 public class XbaseElementTypeProvider implements IElementTypeProvider {
 
-	public static final IFileElementType FILE_TYPE = new XtextFileElementType<XtextFileStub<XbaseFileImpl>>(XbaseLanguage.INSTANCE);
+	public static final IFileElementType FILE_TYPE = new XtypeFileElementType<XtextFileStub<XbaseFileImpl>>(XbaseLanguage.INSTANCE);
 
 	private static final Map<EObject, IGrammarAwareElementType> GRAMMAR_ELEMENT_TYPE = new HashMap<EObject, IGrammarAwareElementType>();
 
@@ -4650,10 +4650,12 @@ public class XbaseElementTypeProvider implements IElementTypeProvider {
 
 	public static final IGrammarAwareElementType QualifiedNameInStaticImport_FullStopKeyword_1_ELEMENT_TYPE = associate(QualifiedNameInStaticImportFactory.createQualifiedNameInStaticImport_FullStopKeyword_1ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

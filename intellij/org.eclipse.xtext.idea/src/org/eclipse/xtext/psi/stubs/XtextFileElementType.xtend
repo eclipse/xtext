@@ -21,10 +21,7 @@ import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EPackage
-import org.eclipse.xtext.EcoreUtil2
-import org.eclipse.xtext.common.types.TypesPackage
 import org.eclipse.xtext.idea.lang.IXtextLanguage
-import org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex
 
@@ -35,9 +32,6 @@ class XtextFileElementType<T extends XtextFileStub<?>> extends IStubFileElementT
 
 	@Inject
 	ExportedObjectQualifiedNameIndex exportedObjectQualifiedNameIndex
-	
-	@Inject
-	JvmDeclaredTypeShortNameIndex jvmDeclaredTypeShortNameIndex
 
 	new(Language language) {
 		super(language)
@@ -125,13 +119,13 @@ class XtextFileElementType<T extends XtextFileStub<?>> extends IStubFileElementT
 	override indexStub(PsiFileStub stub, extension IndexSink sink) {
 		if (stub instanceof XtextFileStub<?>) {
 			for (exportedObject : stub.exportedObjects) {
-				exportedObjectQualifiedNameIndex.key.occurrence(exportedObject.qualifiedName.toString)
-				// FIXME: It should not care about java stuff
-				if (EcoreUtil2.isAssignableFrom(TypesPackage.Literals.JVM_DECLARED_TYPE, exportedObject.EClass)) {
-					jvmDeclaredTypeShortNameIndex.key.occurrence(exportedObject.qualifiedName.lastSegment)
-				}
+				exportedObject.indexExportedObject(sink)
 			}
 		}
+	}
+	
+	protected def indexExportedObject(ExportedObject exportedObject, extension IndexSink sink) {
+		exportedObjectQualifiedNameIndex.key.occurrence(exportedObject.qualifiedName.toString)
 	}
 	
 	override indexStub(T stub, IndexSink sink) {

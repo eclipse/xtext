@@ -160,8 +160,9 @@ public class XtendIdeaValidator extends AbstractDeclarativeValidator {
       @Extension
       final JavaDirectoryService javaDirectoryService = JavaDirectoryService.getInstance();
       PsiFile _containingFile = psiElement.getContainingFile();
-      PsiDirectory _parent = _containingFile.getParent();
-      PsiPackage _package = javaDirectoryService.getPackage(_parent);
+      PsiFile _originalFile = _containingFile.getOriginalFile();
+      PsiDirectory _containingDirectory = _originalFile.getContainingDirectory();
+      PsiPackage _package = javaDirectoryService.getPackage(_containingDirectory);
       _xblockexpression = _package.getQualifiedName();
     }
     return _xblockexpression;

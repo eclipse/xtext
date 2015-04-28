@@ -102,10 +102,12 @@ public class AbstractIgnoreCaseLinkingTestLanguageElementTypeProvider implements
 
 	public static final IGrammarAwareElementType Element_RightCurlyBracketKeyword_4_ELEMENT_TYPE = associate(ElementFactory.createElement_RightCurlyBracketKeyword_4ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

@@ -89,6 +89,7 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 	private void handleCancelation() {
 		allRootedExpressions.clear();
 		sealed = false;
+		next = 0;
 		Arrays.fill(delegates, IResolvedTypes.NULL);
 	}
 	

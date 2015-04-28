@@ -21,10 +21,10 @@ import javax.inject.Provider
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.idea.lang.IElementTypeProvider
+import org.eclipse.xtext.psi.impl.PsiEObjectImpl
+import org.eclipse.xtext.psi.impl.PsiEObjectReference
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType
 import org.jetbrains.annotations.NotNull
-import org.eclipse.xtext.psi.impl.PsiEObjectReference
-import org.eclipse.xtext.psi.impl.PsiEObjectImpl
 
 abstract class AbstractXtextParserDefinition implements ParserDefinition {
 	
@@ -76,10 +76,9 @@ abstract class AbstractXtextParserDefinition implements ParserDefinition {
 	
 	override createElement(ASTNode node) {
 		if (node.elementType.crossReference) {
-			new PsiEObjectReference(node)
-		} else {
-			new PsiEObjectImpl(node)
+			return new PsiEObjectReference(node)
 		}
+		new PsiEObjectImpl(node)
 	}
 	
 	def protected boolean isCrossReference(IElementType type){

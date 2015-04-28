@@ -16,18 +16,22 @@ public final class ActionTestLanguage2FileType extends LanguageFileType {
 		super(ActionTestLanguage2Language.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "ActionTestLanguage2 files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "ActionTestLanguage2";
 	}

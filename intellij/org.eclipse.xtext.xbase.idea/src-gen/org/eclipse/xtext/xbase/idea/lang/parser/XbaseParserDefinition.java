@@ -3,8 +3,7 @@ package org.eclipse.xtext.xbase.idea.lang.parser;
 import org.eclipse.xtext.psi.impl.PsiEObjectReference;
 import org.eclipse.xtext.xbase.idea.lang.XbaseElementTypeProvider;
 import org.eclipse.xtext.xbase.idea.lang.psi.impl.XbaseFileImpl;
-import org.eclipse.xtext.xbase.idea.lang.parser.XtypeParserDefinition;
-import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
+import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -13,11 +12,12 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 
-public class XbaseParserDefinition extends XtypeParserDefinition {
+public class XbaseParserDefinition extends AbstractXtextParserDefinition {
 
 	@Inject 
 	private XbaseElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new XbaseFileImpl(viewProvider);
 	}
@@ -26,58 +26,6 @@ public class XbaseParserDefinition extends XtypeParserDefinition {
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
 		IElementType elementType = node.getElementType();
-		if (elementType == elementTypeProvider.getXExpressionOrVarDeclaration_XVariableDeclarationParserRuleCall_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getXVariableDeclaration_NameValidIDParserRuleCall_2_0_0_1_0ElementType(),
-				elementTypeProvider.getXVariableDeclaration_NameValidIDParserRuleCall_2_1_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getXVariableDeclaration_XVariableDeclarationAction_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getXVariableDeclaration_NameValidIDParserRuleCall_2_0_0_1_0ElementType(),
-				elementTypeProvider.getXVariableDeclaration_NameValidIDParserRuleCall_2_1_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getXClosure_DeclaredFormalParametersJvmFormalParameterParserRuleCall_1_0_0_0_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getJvmFormalParameter_NameValidIDParserRuleCall_1_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getXClosure_DeclaredFormalParametersJvmFormalParameterParserRuleCall_1_0_0_1_1_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getJvmFormalParameter_NameValidIDParserRuleCall_1_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getXShortClosure_DeclaredFormalParametersJvmFormalParameterParserRuleCall_0_0_1_0_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getJvmFormalParameter_NameValidIDParserRuleCall_1_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getXShortClosure_DeclaredFormalParametersJvmFormalParameterParserRuleCall_0_0_1_1_1_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getJvmFormalParameter_NameValidIDParserRuleCall_1_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getXSwitchExpression_DeclaredParamJvmFormalParameterParserRuleCall_2_0_0_0_1_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getJvmFormalParameter_NameValidIDParserRuleCall_1_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getXSwitchExpression_DeclaredParamJvmFormalParameterParserRuleCall_2_1_0_0_0_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getJvmFormalParameter_NameValidIDParserRuleCall_1_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getXForLoopExpression_DeclaredParamJvmFormalParameterParserRuleCall_0_0_3_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getJvmFormalParameter_NameValidIDParserRuleCall_1_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getXCatchClause_DeclaredParamFullJvmFormalParameterParserRuleCall_2_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getFullJvmFormalParameter_NameValidIDParserRuleCall_1_0ElementType()
-			);
-		}
 		if (elementType == elementTypeProvider.getXAssignment_FeatureJvmIdentifiableElementCrossReference_0_1_0ElementType()) {
 			return new PsiEObjectReference(node);
 		}
@@ -124,6 +72,18 @@ public class XbaseParserDefinition extends XtypeParserDefinition {
 			return new PsiEObjectReference(node);
 		}
 		if (elementType == elementTypeProvider.getXTypeLiteral_TypeJvmTypeCrossReference_3_0ElementType()) {
+			return new PsiEObjectReference(node);
+		}
+		if (elementType == elementTypeProvider.getJvmParameterizedTypeReference_TypeJvmTypeCrossReference_0_0ElementType()) {
+			return new PsiEObjectReference(node);
+		}
+		if (elementType == elementTypeProvider.getJvmParameterizedTypeReference_TypeJvmTypeCrossReference_1_4_1_0ElementType()) {
+			return new PsiEObjectReference(node);
+		}
+		if (elementType == elementTypeProvider.getXImportDeclaration_ImportedTypeJvmDeclaredTypeCrossReference_1_0_2_0ElementType()) {
+			return new PsiEObjectReference(node);
+		}
+		if (elementType == elementTypeProvider.getXImportDeclaration_ImportedTypeJvmDeclaredTypeCrossReference_1_1_0ElementType()) {
 			return new PsiEObjectReference(node);
 		}
 		return super.createElement(node);

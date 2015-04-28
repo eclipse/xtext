@@ -115,10 +115,12 @@ public class Bug362902ElementTypeProvider implements IElementTypeProvider {
 
 	public static final IGrammarAwareElementType MyId_IDTerminalRuleCall_ELEMENT_TYPE = associate(MyIdFactory.createMyId_IDTerminalRuleCallElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

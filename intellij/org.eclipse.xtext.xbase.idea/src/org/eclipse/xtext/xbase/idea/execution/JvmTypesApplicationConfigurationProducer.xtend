@@ -14,9 +14,9 @@ import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiMethod
 import org.eclipse.xtext.idea.lang.IXtextLanguage
-import org.eclipse.xtext.idea.types.psi.JvmPsiClasses
 import org.eclipse.xtext.psi.impl.BaseXtextFile
 import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiJvmModelAssociations
+import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClasses
 
 import static extension com.intellij.execution.application.ApplicationConfigurationType.*
 import static extension com.intellij.psi.util.PsiMethodUtil.*
@@ -157,7 +157,7 @@ class JvmTypesApplicationConfigurationProducer extends JavaRunConfigurationProdu
 			return emptyList
 		}
 		if (element instanceof BaseXtextFile) {
-			return element.jvmPsiClasses
+			return element.psiClasses
 		}
 		val jvmElements = element.jvmElements
 		if (!jvmElements.empty) {

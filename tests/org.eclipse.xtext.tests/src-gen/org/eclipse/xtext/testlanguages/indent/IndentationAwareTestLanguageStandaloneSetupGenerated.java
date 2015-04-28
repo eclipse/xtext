@@ -4,17 +4,26 @@
 package org.eclipse.xtext.testlanguages.indent;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.ISetup;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.ISetupExtension;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+
+import java.util.List;
+import java.util.Arrays;
 
 /**
  * Generated from StandaloneSetup.xpt!
  */
 @SuppressWarnings("all")
-public class IndentationAwareTestLanguageStandaloneSetupGenerated implements ISetup {
+public class IndentationAwareTestLanguageStandaloneSetupGenerated implements ISetup, ISetupExtension {
+
+	@Override
+	public List<String> getFileExtensions() {
+		return Arrays.asList("indentationawaretestlanguage");
+	}
 
 	@Override
 	public Injector createInjectorAndDoEMFRegistration() {

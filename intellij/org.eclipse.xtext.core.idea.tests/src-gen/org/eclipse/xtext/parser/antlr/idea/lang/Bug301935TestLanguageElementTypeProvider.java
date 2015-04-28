@@ -122,10 +122,12 @@ public class Bug301935TestLanguageElementTypeProvider implements IElementTypePro
 
 	public static final IGrammarAwareElementType NL_WSTerminalRuleCall_2_ELEMENT_TYPE = associate(NLFactory.createNL_WSTerminalRuleCall_2ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

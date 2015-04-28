@@ -16,18 +16,22 @@ public final class LangATestLanguageFileType extends LanguageFileType {
 		super(LangATestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "LangATestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "LangATestLanguage";
 	}

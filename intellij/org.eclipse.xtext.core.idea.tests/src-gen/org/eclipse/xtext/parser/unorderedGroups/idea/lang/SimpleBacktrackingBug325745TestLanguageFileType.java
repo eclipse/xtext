@@ -16,18 +16,22 @@ public final class SimpleBacktrackingBug325745TestLanguageFileType extends Langu
 		super(SimpleBacktrackingBug325745TestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "SimpleBacktrackingBug325745TestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "SimpleBacktrackingBug325745TestLanguage";
 	}

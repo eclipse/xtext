@@ -69,10 +69,12 @@ public class EcoreFragmentTestLanguageElementTypeProvider implements IElementTyp
 
 	public static final IGrammarAwareElementType Second_FirstFirstIDTerminalRuleCall_2_0_1_ELEMENT_TYPE = associate(SecondFactory.createSecond_FirstFirstIDTerminalRuleCall_2_0_1ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

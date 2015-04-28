@@ -13,7 +13,6 @@ import com.intellij.psi.PsiElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.psi.IPsiModelAssociations;
-import org.eclipse.xtext.psi.PsiEObject;
 import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiLogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -33,14 +32,8 @@ public class PsiLogicalContainerProvider implements IPsiLogicalContainerProvider
   
   @Override
   public PsiElement getNearestLogicalContainer(final PsiElement expr) {
-    PsiElement _xifexpression = null;
-    if ((expr instanceof PsiEObject)) {
-      EObject _eObject = ((PsiEObject)expr).getEObject();
-      _xifexpression = this.getNearestLogicalContainer(_eObject);
-    } else {
-      _xifexpression = null;
-    }
-    return _xifexpression;
+    EObject _eObject = this._iPsiModelAssociations.getEObject(expr);
+    return this.getNearestLogicalContainer(_eObject);
   }
   
   @Override

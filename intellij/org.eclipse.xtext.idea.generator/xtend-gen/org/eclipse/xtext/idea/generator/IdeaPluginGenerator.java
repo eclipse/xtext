@@ -8,8 +8,8 @@
 package org.eclipse.xtext.idea.generator;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
-import com.google.common.collect.LinkedHashMultimap;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -27,13 +27,11 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.BindKey;
@@ -56,6 +54,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
@@ -151,10 +150,10 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     bindFactory.addTypeToTypeSingleton("org.eclipse.xtext.idea.lang.IElementTypeProvider", _elementTypeProviderName);
     boolean _doesUseXbase = XbaseGeneratorFragment.doesUseXbase(grammar);
     if (_doesUseXbase) {
-      bindFactory.addTypeToType("org.eclipse.xtext.common.types.access.IJvmTypeProvider.Factory", "org.eclipse.xtext.idea.types.access.StubTypeProviderFactory");
-      bindFactory.addTypeToType("org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider", "org.eclipse.xtext.idea.types.StubBasedTypeScopeProvider");
-      bindFactory.addTypeToType("org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator", "org.eclipse.xtext.idea.jvmmodel.PsiJvmModelAssociator");
-      bindFactory.addTypeToTypeSingleton("org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex", "org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex");
+      bindFactory.addTypeToType("org.eclipse.xtext.common.types.access.IJvmTypeProvider.Factory", "org.eclipse.xtext.xbase.idea.types.access.StubTypeProviderFactory");
+      bindFactory.addTypeToType("org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider", "org.eclipse.xtext.xbase.idea.types.StubBasedTypeScopeProvider");
+      bindFactory.addTypeToType("org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator", "org.eclipse.xtext.xbase.idea.jvmmodel.PsiJvmModelAssociator");
+      bindFactory.addTypeToTypeSingleton("org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex", "org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex");
       bindFactory.addTypeToType("org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker.Provider", "org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider");
       bindFactory.addTypeToTypeSingleton("com.intellij.ide.hierarchy.type.JavaTypeHierarchyProvider", "org.eclipse.xtext.xbase.idea.ide.hierarchy.JvmDeclaredTypeHierarchyProvider");
       bindFactory.addTypeToTypeSingleton("com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider", "org.eclipse.xtext.xbase.idea.ide.hierarchy.JvmExecutableCallHierarchyProvider");
@@ -598,6 +597,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
+    _builder.append("@Override");
+    _builder.newLine();
+    _builder.append("\t");
     _builder.append("public Object createInstance(final String factoryArgument, final String implementationClass) {");
     _builder.newLine();
     _builder.append("\t\t");
@@ -663,6 +665,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append(_simpleName, "");
     _builder.append(" extends BuildProcessParametersProvider {");
     _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Override");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public List<String> getClassPath() {");
@@ -1139,7 +1144,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("import com.intellij.openapi.project.Project;");
     _builder.newLine();
-    _builder.append("import org.eclipse.xtext.idea.types.JvmTypesShortNamesCache;");
+    _builder.append("import org.eclipse.xtext.xbase.idea.types.JvmTypesShortNamesCache;");
     _builder.newLine();
     _builder.append("import ");
     String _languageName = this._ideaPluginClassNames.getLanguageName(grammar);
@@ -1186,7 +1191,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    _builder.append("import org.eclipse.xtext.idea.types.psi.search.JvmElementsReferencesSearch;");
+    _builder.append("import org.eclipse.xtext.xbase.idea.search.JvmElementsReferencesSearch;");
     _builder.newLine();
     _builder.append("import ");
     String _languageName = this._ideaPluginClassNames.getLanguageName(grammar);
@@ -1235,7 +1240,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("import com.intellij.openapi.project.Project;");
     _builder.newLine();
-    _builder.append("import org.eclipse.xtext.idea.types.psi.JvmTypesElementFinder;");
+    _builder.append("import org.eclipse.xtext.xbase.idea.types.psi.JvmTypesElementFinder;");
     _builder.newLine();
     _builder.append("import ");
     String _languageName = this._ideaPluginClassNames.getLanguageName(grammar);
@@ -1501,7 +1506,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       boolean _doesUseXbase_2 = XbaseGeneratorFragment.doesUseXbase(grammar);
       if (_doesUseXbase_2) {
         _builder.append("\t\t");
-        _builder.append("<stubIndex implementation=\"org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex\"/>");
+        _builder.append("<stubIndex implementation=\"org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex\"/>");
         _builder.newLine();
       }
     }
@@ -1522,10 +1527,6 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
         _builder.append(_jvmElementsReferencesSearch, "\t\t");
         _builder.append("\"/>");
         _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        CharSequence _compileExtension = this.compileExtension(grammar, "targetElementEvaluator", "org.eclipse.xtext.idea.jvmmodel.codeInsight.PsiJvmTargetElementEvaluator");
-        _builder.append(_compileExtension, "\t\t");
-        _builder.newLineIfNotEmpty();
       }
     }
     _builder.newLine();
@@ -1542,25 +1543,25 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("\"/>");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
-    CharSequence _compileExtension_1 = this.compileExtension(grammar, "lang.ast.factory", "org.eclipse.xtext.idea.lang.BaseXtextASTFactory");
-    _builder.append(_compileExtension_1, "\t\t");
+    CharSequence _compileExtension = this.compileExtension(grammar, "lang.ast.factory", "org.eclipse.xtext.idea.lang.BaseXtextASTFactory");
+    _builder.append(_compileExtension, "\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     String _parserDefinitionName = this._ideaPluginClassNames.getParserDefinitionName(grammar);
-    CharSequence _compileExtension_2 = this.compileExtension(grammar, "lang.parserDefinition", _parserDefinitionName);
+    CharSequence _compileExtension_1 = this.compileExtension(grammar, "lang.parserDefinition", _parserDefinitionName);
+    _builder.append(_compileExtension_1, "\t\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    CharSequence _compileExtension_2 = this.compileExtension(grammar, "lang.findUsagesProvider", "org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider");
     _builder.append(_compileExtension_2, "\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
-    CharSequence _compileExtension_3 = this.compileExtension(grammar, "lang.findUsagesProvider", "org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider");
+    CharSequence _compileExtension_3 = this.compileExtension(grammar, "lang.refactoringSupport", "org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider");
     _builder.append(_compileExtension_3, "\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
-    CharSequence _compileExtension_4 = this.compileExtension(grammar, "lang.refactoringSupport", "org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider");
+    CharSequence _compileExtension_4 = this.compileExtension(grammar, "lang.namesValidator", "com.intellij.lang.refactoring.NamesValidator");
     _builder.append(_compileExtension_4, "\t\t");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
-    CharSequence _compileExtension_5 = this.compileExtension(grammar, "lang.namesValidator", "com.intellij.lang.refactoring.NamesValidator");
-    _builder.append(_compileExtension_5, "\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("      \t");
     _builder.append("<lang.syntaxHighlighterFactory key=\"");
@@ -1572,12 +1573,12 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("\" />");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
-    CharSequence _compileExtension_6 = this.compileExtension(grammar, "lang.braceMatcher", "com.intellij.lang.PairedBraceMatcher");
-    _builder.append(_compileExtension_6, "\t\t");
+    CharSequence _compileExtension_5 = this.compileExtension(grammar, "lang.braceMatcher", "com.intellij.lang.PairedBraceMatcher");
+    _builder.append(_compileExtension_5, "\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("      \t");
-    CharSequence _compileExtension_7 = this.compileExtension(grammar, "annotator", "org.eclipse.xtext.idea.annotation.IssueAnnotator");
-    _builder.append(_compileExtension_7, "      \t");
+    CharSequence _compileExtension_6 = this.compileExtension(grammar, "annotator", "org.eclipse.xtext.idea.annotation.IssueAnnotator");
+    _builder.append(_compileExtension_6, "      \t");
     _builder.newLineIfNotEmpty();
     _builder.append("      \t");
     _builder.append("<completion.contributor language=\"");
@@ -1602,20 +1603,20 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("      \t");
-    CharSequence _compileExtension_8 = this.compileExtension(grammar, "lang.psiStructureViewFactory", "com.intellij.lang.PsiStructureViewFactory");
-    _builder.append(_compileExtension_8, "      \t");
+    CharSequence _compileExtension_7 = this.compileExtension(grammar, "lang.psiStructureViewFactory", "com.intellij.lang.PsiStructureViewFactory");
+    _builder.append(_compileExtension_7, "      \t");
     _builder.newLineIfNotEmpty();
     {
       boolean _doesUseXbase_4 = XbaseGeneratorFragment.doesUseXbase(grammar);
       if (_doesUseXbase_4) {
         _builder.newLine();
         _builder.append("\t\t");
-        CharSequence _compileExtension_9 = this.compileExtension(grammar, "typeHierarchyProvider", "com.intellij.ide.hierarchy.type.JavaTypeHierarchyProvider");
-        _builder.append(_compileExtension_9, "\t\t");
+        CharSequence _compileExtension_8 = this.compileExtension(grammar, "typeHierarchyProvider", "com.intellij.ide.hierarchy.type.JavaTypeHierarchyProvider");
+        _builder.append(_compileExtension_8, "\t\t");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
-        CharSequence _compileExtension_10 = this.compileExtension(grammar, "callHierarchyProvider", "com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider");
-        _builder.append(_compileExtension_10, "\t\t");
+        CharSequence _compileExtension_9 = this.compileExtension(grammar, "callHierarchyProvider", "com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider");
+        _builder.append(_compileExtension_9, "\t\t");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("<hierarchy.referenceProcessor implementation=\"");
@@ -1821,6 +1822,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
+    _builder.append("@Override");
+    _builder.newLine();
+    _builder.append("\t");
     _builder.append("public FileType getFileType() {");
     _builder.newLine();
     _builder.append("\t\t");
@@ -1861,6 +1865,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append(_simpleName, "");
     _builder.append(" extends FileTypeFactory {");
     _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Override");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public void createFileTypes(@NotNull FileTypeConsumer consumer) {");
@@ -1948,6 +1955,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
+    _builder.append("@Override");
+    _builder.newLine();
+    _builder.append("\t");
     _builder.append("public String getDefaultExtension() {");
     _builder.newLine();
     _builder.append("\t\t");
@@ -1956,6 +1966,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Override");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public String getDescription() {");
@@ -1971,6 +1984,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
+    _builder.append("@Override");
+    _builder.newLine();
+    _builder.append("\t");
     _builder.append("public Icon getIcon() {");
     _builder.newLine();
     _builder.append("\t\t");
@@ -1979,6 +1995,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Override");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public String getName() {");
@@ -2203,12 +2222,25 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append(_grammarAccessName, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
-    _builder.append("import org.eclipse.xtext.psi.stubs.XtextFileElementType;");
-    _builder.newLine();
+    {
+      boolean _doesUseXbase = XbaseGeneratorFragment.doesUseXbase(grammar);
+      boolean _not = (!_doesUseXbase);
+      if (_not) {
+        _builder.append("import org.eclipse.xtext.psi.stubs.XtextFileElementType;");
+        _builder.newLine();
+      }
+    }
     _builder.append("import org.eclipse.xtext.psi.stubs.XtextFileStub;");
     _builder.newLine();
     _builder.append("import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;");
     _builder.newLine();
+    {
+      boolean _doesUseXbase_1 = XbaseGeneratorFragment.doesUseXbase(grammar);
+      if (_doesUseXbase_1) {
+        _builder.append("import org.eclipse.xtext.xbase.idea.types.stubs.XtypeFileElementType;");
+        _builder.newLine();
+      }
+    }
     _builder.newLine();
     _builder.append("import com.intellij.psi.tree.IFileElementType;");
     _builder.newLine();
@@ -2221,7 +2253,16 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public static final IFileElementType FILE_TYPE = new XtextFileElementType<XtextFileStub<");
+    _builder.append("public static final IFileElementType FILE_TYPE = new ");
+    {
+      boolean _doesUseXbase_2 = XbaseGeneratorFragment.doesUseXbase(grammar);
+      if (_doesUseXbase_2) {
+        _builder.append("XtypeFileElementType");
+      } else {
+        _builder.append("XtextFileElementType");
+      }
+    }
+    _builder.append("<XtextFileStub<");
     String _fileImplName_1 = this._ideaPluginClassNames.getFileImplName(grammar);
     String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_fileImplName_1);
     _builder.append(_simpleName_1, "\t");
@@ -2375,6 +2416,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     }
     _builder.newLine();
     _builder.append("\t");
+    _builder.append("@Override");
+    _builder.newLine();
+    _builder.append("\t");
     _builder.append("public IFileElementType getFileType() {");
     _builder.newLine();
     _builder.append("\t\t");
@@ -2383,6 +2427,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Override");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public IGrammarAwareElementType findElementType(EObject grammarElement) {");
@@ -2628,6 +2675,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       }
     }
     _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Override");
+    _builder.newLine();
     _builder.append("    ");
     _builder.append("public int getAntlrType(IElementType iElementType) {");
     _builder.newLine();
@@ -2638,6 +2688,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("}");
     _builder.newLine();
     _builder.append("    ");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("@Override");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("public IElementType getIElementType(int antlrType) {");
@@ -2718,6 +2771,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Override");
+    _builder.newLine();
     _builder.append("    ");
     _builder.append("@NotNull");
     _builder.newLine();
@@ -2743,63 +2799,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   public CharSequence compileParserDefinition(final Grammar grammar) {
     CharSequence _xblockexpression = null;
     {
-      final LinkedHashMultimap<String, String> namedGrammarElement = LinkedHashMultimap.<String, String>create();
-      TreeIterator<EObject> _eAllContents = grammar.eAllContents();
-      Iterator<RuleCall> _filter = Iterators.<RuleCall>filter(_eAllContents, RuleCall.class);
-      final Function1<RuleCall, Boolean> _function = new Function1<RuleCall, Boolean>() {
-        @Override
-        public Boolean apply(final RuleCall it) {
-          boolean _and = false;
-          boolean _isAssigned = GrammarUtil.isAssigned(it);
-          if (!_isAssigned) {
-            _and = false;
-          } else {
-            Assignment _containingAssignment = GrammarUtil.containingAssignment(it);
-            String _feature = _containingAssignment.getFeature();
-            boolean _equals = Objects.equal(_feature, "name");
-            _and = _equals;
-          }
-          return Boolean.valueOf(_and);
-        }
-      };
-      Iterator<RuleCall> _filter_1 = IteratorExtensions.<RuleCall>filter(_filter, _function);
-      Iterable<RuleCall> _iterable = IteratorExtensions.<RuleCall>toIterable(_filter_1);
-      for (final RuleCall nameRuleCall : _iterable) {
-        TreeIterator<EObject> _eAllContents_1 = grammar.eAllContents();
-        Iterator<RuleCall> _filter_2 = Iterators.<RuleCall>filter(_eAllContents_1, RuleCall.class);
-        final Function1<RuleCall, Boolean> _function_1 = new Function1<RuleCall, Boolean>() {
-          @Override
-          public Boolean apply(final RuleCall it) {
-            AbstractRule _rule = it.getRule();
-            TreeIterator<EObject> _eAllContents = _rule.eAllContents();
-            final Function1<EObject, Boolean> _function = new Function1<EObject, Boolean>() {
-              @Override
-              public Boolean apply(final EObject it) {
-                return Boolean.valueOf(Objects.equal(it, nameRuleCall));
-              }
-            };
-            return Boolean.valueOf(IteratorExtensions.<EObject>exists(_eAllContents, _function));
-          }
-        };
-        Iterator<RuleCall> _filter_3 = IteratorExtensions.<RuleCall>filter(_filter_2, _function_1);
-        Iterable<RuleCall> _iterable_1 = IteratorExtensions.<RuleCall>toIterable(_filter_3);
-        for (final RuleCall ruleCall : _iterable_1) {
-          {
-            String _grammarElementIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(ruleCall);
-            String _grammarElementIdentifier_1 = this._grammarAccessExtensions.grammarElementIdentifier(nameRuleCall);
-            namedGrammarElement.put(_grammarElementIdentifier, _grammarElementIdentifier_1);
-            AbstractRule _rule = ruleCall.getRule();
-            TreeIterator<EObject> _eAllContents_2 = _rule.eAllContents();
-            Iterator<Action> _filter_4 = Iterators.<Action>filter(_eAllContents_2, Action.class);
-            Iterable<Action> _iterable_2 = IteratorExtensions.<Action>toIterable(_filter_4);
-            for (final Action action : _iterable_2) {
-              String _grammarElementIdentifier_2 = this._grammarAccessExtensions.grammarElementIdentifier(action);
-              String _grammarElementIdentifier_3 = this._grammarAccessExtensions.grammarElementIdentifier(nameRuleCall);
-              namedGrammarElement.put(_grammarElementIdentifier_2, _grammarElementIdentifier_3);
-            }
-          }
-        }
-      }
+      final Iterable<CrossReference> crossReferences = this.getCrossReferences(grammar);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package ");
       String _parserDefinitionName = this._ideaPluginClassNames.getParserDefinitionName(grammar);
@@ -2809,16 +2809,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       {
-        TreeIterator<EObject> _eAllContents_2 = grammar.eAllContents();
-        Iterator<CrossReference> _filter_4 = Iterators.<CrossReference>filter(_eAllContents_2, CrossReference.class);
-        final Function1<CrossReference, Boolean> _function_2 = new Function1<CrossReference, Boolean>() {
-          @Override
-          public Boolean apply(final CrossReference it) {
-            return Boolean.valueOf(GrammarUtil.isAssigned(it));
-          }
-        };
-        Iterator<CrossReference> _filter_5 = IteratorExtensions.<CrossReference>filter(_filter_4, _function_2);
-        boolean _isEmpty = IteratorExtensions.isEmpty(_filter_5);
+        boolean _isEmpty = IterableExtensions.isEmpty(crossReferences);
         boolean _not = (!_isEmpty);
         if (_not) {
           _builder.append("import org.eclipse.xtext.psi.impl.PsiEObjectReference;");
@@ -2840,14 +2831,6 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       _builder.append(_superParserDefinitionName, "");
       _builder.append(";");
       _builder.newLineIfNotEmpty();
-      {
-        boolean _isEmpty_1 = namedGrammarElement.isEmpty();
-        boolean _not_1 = (!_isEmpty_1);
-        if (_not_1) {
-          _builder.append("import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;");
-          _builder.newLine();
-        }
-      }
       _builder.newLine();
       _builder.append("import ");
       String _name = Inject.class.getName();
@@ -2888,6 +2871,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("\t");
+      _builder.append("@Override");
+      _builder.newLine();
+      _builder.append("\t");
       _builder.append("public PsiFile createFile(FileViewProvider viewProvider) {");
       _builder.newLine();
       _builder.append("\t\t");
@@ -2910,59 +2896,17 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       _builder.append("\t");
       _builder.append("public PsiElement createElement(ASTNode node) {");
       _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("IElementType elementType = node.getElementType();");
-      _builder.newLine();
       {
-        Set<String> _keySet = namedGrammarElement.keySet();
-        for(final String namedElementType : _keySet) {
+        boolean _isEmpty_1 = IterableExtensions.isEmpty(crossReferences);
+        boolean _not_1 = (!_isEmpty_1);
+        if (_not_1) {
           _builder.append("\t\t");
-          _builder.append("if (elementType == elementTypeProvider.get");
-          _builder.append(namedElementType, "\t\t");
-          _builder.append("ElementType()) {");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("\t");
-          _builder.append("return new PsiNamedEObjectImpl(node,");
-          _builder.newLine();
-          {
-            Set<String> _get = namedGrammarElement.get(namedElementType);
-            boolean _hasElements = false;
-            for(final String nameType : _get) {
-              if (!_hasElements) {
-                _hasElements = true;
-              } else {
-                _builder.appendImmediate(",", "\t\t\t\t");
-              }
-              _builder.append("\t\t");
-              _builder.append("\t\t");
-              _builder.append("elementTypeProvider.get");
-              _builder.append(nameType, "\t\t\t\t");
-              _builder.append("ElementType()");
-              _builder.newLineIfNotEmpty();
-            }
-          }
-          _builder.append("\t\t");
-          _builder.append("\t");
-          _builder.append(");");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("}");
+          _builder.append("IElementType elementType = node.getElementType();");
           _builder.newLine();
         }
       }
       {
-        TreeIterator<EObject> _eAllContents_3 = grammar.eAllContents();
-        Iterator<CrossReference> _filter_6 = Iterators.<CrossReference>filter(_eAllContents_3, CrossReference.class);
-        final Function1<CrossReference, Boolean> _function_3 = new Function1<CrossReference, Boolean>() {
-          @Override
-          public Boolean apply(final CrossReference it) {
-            return Boolean.valueOf(GrammarUtil.isAssigned(it));
-          }
-        };
-        Iterator<CrossReference> _filter_7 = IteratorExtensions.<CrossReference>filter(_filter_6, _function_3);
-        Iterable<CrossReference> _iterable_2 = IteratorExtensions.<CrossReference>toIterable(_filter_7);
-        for(final CrossReference crossReference : _iterable_2) {
+        for(final CrossReference crossReference : crossReferences) {
           _builder.append("\t\t");
           _builder.append("if (elementType == elementTypeProvider.get");
           String _grammarElementIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(crossReference);
@@ -2990,6 +2934,27 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       _xblockexpression = _builder;
     }
     return _xblockexpression;
+  }
+  
+  protected Iterable<CrossReference> getCrossReferences(final Grammar grammar) {
+    List<AbstractRule> _allRules = this._ideaPluginExtension.getAllRules(grammar);
+    final Function1<AbstractRule, Iterable<CrossReference>> _function = new Function1<AbstractRule, Iterable<CrossReference>>() {
+      @Override
+      public Iterable<CrossReference> apply(final AbstractRule it) {
+        TreeIterator<EObject> _eAllContents = it.eAllContents();
+        Iterator<CrossReference> _filter = Iterators.<CrossReference>filter(_eAllContents, CrossReference.class);
+        final Function1<CrossReference, Boolean> _function = new Function1<CrossReference, Boolean>() {
+          @Override
+          public Boolean apply(final CrossReference it) {
+            return Boolean.valueOf(GrammarUtil.isAssigned(it));
+          }
+        };
+        Iterator<CrossReference> _filter_1 = IteratorExtensions.<CrossReference>filter(_filter, _function);
+        return IteratorExtensions.<CrossReference>toIterable(_filter_1);
+      }
+    };
+    List<Iterable<CrossReference>> _map = ListExtensions.<AbstractRule, Iterable<CrossReference>>map(_allRules, _function);
+    return Iterables.<CrossReference>concat(_map);
   }
   
   public CharSequence compileAbstractCompletionContributor(final Grammar grammar) {
@@ -3091,8 +3056,6 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("}");
     _builder.newLine();
     _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
     _builder.newLine();
     return _builder;
   }

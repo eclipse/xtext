@@ -6,7 +6,7 @@ org.eclipse.xtext.parser.antlr.idea.lang.psi.impl.Bug289524TestLanguageFileImpl:
     org.eclipse.xtext.psi.impl.PsiEObjectImpl(ModelElement_ModelElementAction_0_ELEMENT_TYPE)(5,43)
       org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_RefsModelElementParserRuleCall_2_0_ELEMENT_TYPE)(5,5)
         <empty list>
-      org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(ModelElement_ContainmentsContainedParserRuleCall_1_0_0_ELEMENT_TYPE)(5,19)
+      org.eclipse.xtext.psi.impl.PsiEObjectImpl(ModelElement_ContainmentsContainedParserRuleCall_1_0_0_ELEMENT_TYPE)(5,19)
         PsiWhiteSpace(' ')(5,6)
         PsiElement(Contained_ContainmentKeyword_0_ELEMENT_TYPE)('containment')(6,17)
         PsiWhiteSpace(' ')(17,18)

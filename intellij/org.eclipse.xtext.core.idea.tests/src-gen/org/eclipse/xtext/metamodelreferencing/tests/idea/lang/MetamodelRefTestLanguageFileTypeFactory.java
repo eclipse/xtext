@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class MetamodelRefTestLanguageFileTypeFactory extends FileTypeFactory {
 
+	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
 		consumer.consume(org.eclipse.xtext.metamodelreferencing.tests.idea.lang.MetamodelRefTestLanguageFileType.INSTANCE, org.eclipse.xtext.metamodelreferencing.tests.idea.lang.MetamodelRefTestLanguageFileType.DEFAULT_EXTENSION);
 	}

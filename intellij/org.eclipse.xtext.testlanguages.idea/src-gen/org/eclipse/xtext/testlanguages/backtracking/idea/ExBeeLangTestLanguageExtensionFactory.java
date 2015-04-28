@@ -6,6 +6,7 @@ import com.intellij.openapi.extensions.ExtensionFactory;
 
 public class ExBeeLangTestLanguageExtensionFactory implements ExtensionFactory {
 
+	@Override
 	public Object createInstance(final String factoryArgument, final String implementationClass) {
 		Class<?> clazz;
 		try {

@@ -13,6 +13,7 @@ public final class EnumRulesTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, EnumRulesTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return EnumRulesTestLanguageFileType.INSTANCE;
 	}

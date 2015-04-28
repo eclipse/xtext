@@ -429,10 +429,12 @@ public class Bug250313ElementTypeProvider implements IElementTypeProvider {
 
 	public static final IGrammarAwareElementType Child2_NameSTRINGTerminalRuleCall_0_ELEMENT_TYPE = associate(Child2Factory.createChild2_NameSTRINGTerminalRuleCall_0ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

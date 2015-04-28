@@ -13,6 +13,7 @@ public final class ExUnorderedGroupsTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, ExUnorderedGroupsTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return ExUnorderedGroupsTestLanguageFileType.INSTANCE;
 	}

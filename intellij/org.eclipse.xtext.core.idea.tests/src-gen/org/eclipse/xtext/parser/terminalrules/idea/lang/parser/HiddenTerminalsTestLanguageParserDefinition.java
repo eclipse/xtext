@@ -16,6 +16,7 @@ public class HiddenTerminalsTestLanguageParserDefinition extends AbstractXtextPa
 	@Inject 
 	private HiddenTerminalsTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new HiddenTerminalsTestLanguageFileImpl(viewProvider);
 	}
@@ -23,7 +24,6 @@ public class HiddenTerminalsTestLanguageParserDefinition extends AbstractXtextPa
 	@Override
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
-		IElementType elementType = node.getElementType();
 		return super.createElement(node);
 	}
 

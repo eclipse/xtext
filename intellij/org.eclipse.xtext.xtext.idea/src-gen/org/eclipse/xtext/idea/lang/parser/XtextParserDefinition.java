@@ -3,8 +3,7 @@ package org.eclipse.xtext.idea.lang.parser;
 import org.eclipse.xtext.psi.impl.PsiEObjectReference;
 import org.eclipse.xtext.idea.lang.XtextElementTypeProvider;
 import org.eclipse.xtext.idea.lang.psi.impl.XtextFileImpl;
-import org.eclipse.xtext.common.idea.lang.parser.TerminalsParserDefinition;
-import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
+import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -13,11 +12,12 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 
-public class XtextParserDefinition extends TerminalsParserDefinition {
+public class XtextParserDefinition extends AbstractXtextParserDefinition {
 
 	@Inject 
 	private XtextElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new XtextFileImpl(viewProvider);
 	}
@@ -26,27 +26,6 @@ public class XtextParserDefinition extends TerminalsParserDefinition {
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
 		IElementType elementType = node.getElementType();
-		if (elementType == elementTypeProvider.getAbstractMetamodelDeclaration_GeneratedMetamodelParserRuleCall_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getGeneratedMetamodel_NameIDTerminalRuleCall_1_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getAbstractRule_ParserRuleParserRuleCall_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getParserRule_NameIDTerminalRuleCall_0_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getAbstractRule_TerminalRuleParserRuleCall_1ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getTerminalRule_NameIDTerminalRuleCall_1_0_1_0ElementType(),
-				elementTypeProvider.getTerminalRule_NameIDTerminalRuleCall_1_1_0_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getAbstractRule_EnumRuleParserRuleCall_2ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getEnumRule_NameIDTerminalRuleCall_1_0ElementType()
-			);
-		}
 		if (elementType == elementTypeProvider.getGrammar_UsedGrammarsGrammarCrossReference_2_1_0ElementType()) {
 			return new PsiEObjectReference(node);
 		}

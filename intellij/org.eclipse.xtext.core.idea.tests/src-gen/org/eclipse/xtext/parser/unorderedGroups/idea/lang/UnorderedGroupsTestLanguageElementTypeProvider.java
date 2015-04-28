@@ -1368,10 +1368,12 @@ public class UnorderedGroupsTestLanguageElementTypeProvider implements IElementT
 
 	public static final IGrammarAwareElementType UnorderedSerialization_SecondBKeyword_1_2_1_1_0_ELEMENT_TYPE = associate(UnorderedSerializationFactory.createUnorderedSerialization_SecondBKeyword_1_2_1_1_0ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

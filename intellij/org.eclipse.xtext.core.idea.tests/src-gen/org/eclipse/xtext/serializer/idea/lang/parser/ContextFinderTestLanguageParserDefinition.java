@@ -3,7 +3,7 @@ package org.eclipse.xtext.serializer.idea.lang.parser;
 import org.eclipse.xtext.psi.impl.PsiEObjectReference;
 import org.eclipse.xtext.serializer.idea.lang.ContextFinderTestLanguageElementTypeProvider;
 import org.eclipse.xtext.serializer.idea.lang.psi.impl.ContextFinderTestLanguageFileImpl;
-import org.eclipse.xtext.common.idea.lang.parser.TerminalsParserDefinition;
+import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -12,11 +12,12 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 
-public class ContextFinderTestLanguageParserDefinition extends TerminalsParserDefinition {
+public class ContextFinderTestLanguageParserDefinition extends AbstractXtextParserDefinition {
 
 	@Inject 
 	private ContextFinderTestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new ContextFinderTestLanguageFileImpl(viewProvider);
 	}

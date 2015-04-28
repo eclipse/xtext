@@ -52,9 +52,6 @@ import java.util.Arrays;
 @SuppressWarnings("all")
 «classAnnotations()»public class «setupImpl().toSimpleName()» implements ISetup, ISetupExtension {
 
-	/**
-	 * @since 2.9
-	 */
 	@Override
 	public List<String> getFileExtensions() {
 		return Arrays.asList(«FOREACH fileExtensions AS fileExtension SEPARATOR ","»"«fileExtension»"«ENDFOREACH»);

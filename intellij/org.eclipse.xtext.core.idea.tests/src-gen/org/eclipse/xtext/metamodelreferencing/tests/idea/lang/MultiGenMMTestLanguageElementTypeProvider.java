@@ -77,10 +77,12 @@ public class MultiGenMMTestLanguageElementTypeProvider implements IElementTypePr
 
 	public static final IGrammarAwareElementType NameRef_NameSTRINGTerminalRuleCall_0_ELEMENT_TYPE = associate(NameRefFactory.createNameRef_NameSTRINGTerminalRuleCall_0ElementType());
 
+	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
 	}
 
+	@Override
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}

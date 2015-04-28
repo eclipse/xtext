@@ -16,18 +16,22 @@ public final class UnassignedTextTestLanguageFileType extends LanguageFileType {
 		super(UnassignedTextTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "UnassignedTextTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "UnassignedTextTestLanguage";
 	}

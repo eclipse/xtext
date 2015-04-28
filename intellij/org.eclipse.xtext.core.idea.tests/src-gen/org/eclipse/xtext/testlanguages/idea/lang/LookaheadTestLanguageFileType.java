@@ -16,18 +16,22 @@ public final class LookaheadTestLanguageFileType extends LanguageFileType {
 		super(LookaheadTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "LookaheadTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "LookaheadTestLanguage";
 	}

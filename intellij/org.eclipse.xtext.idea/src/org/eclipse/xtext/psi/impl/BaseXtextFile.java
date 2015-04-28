@@ -29,9 +29,11 @@ import org.eclipse.xtext.idea.resource.PsiToEcoreTransformator;
 import org.eclipse.xtext.idea.resource.ResourceDescriptionAdapter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.impl.SyntheticCompositeNode;
 import org.eclipse.xtext.psi.PsiEObject;
 import org.eclipse.xtext.psi.stubs.ExportedObject;
 import org.eclipse.xtext.psi.stubs.XtextFileStub;
+import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
 import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.EObjectDescription;
@@ -55,6 +57,7 @@ import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.CachedValue;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
@@ -73,9 +76,9 @@ public abstract class BaseXtextFile extends PsiFileBase {
     @Inject
     protected Provider<PsiToEcoreTransformator> psiToEcoreTransformatorProvider;
     
-    protected final CachedValue<Resource> resourceCache;
-    
     protected final Object resourceCacheLock;
+    
+    protected final CachedValue<XtextResource> resourceCache;
     
 	protected BaseXtextFile(@NotNull FileViewProvider viewProvider, @NotNull Language language) {
         super(viewProvider, language);
@@ -85,15 +88,12 @@ public abstract class BaseXtextFile extends PsiFileBase {
         	throw new IllegalArgumentException("Expected an Xtext language but got " + language.getDisplayName());
         }
         resourceCacheLock = new Object();
-        resourceCache = CachedValuesManager.getManager(getProject()).createCachedValue(new CachedValueProvider<Resource>() {
+        resourceCache = CachedValuesManager.getManager(getProject()).createCachedValue(new CachedValueProvider<XtextResource>() {
 
 			@Override
-			public com.intellij.psi.util.CachedValueProvider.Result<Resource> compute() {
-				Resource resource = createResource();
-		        installResourceDescription(resource);
-				return Result.create(resource, new Object[] {
-					PsiModificationTracker.MODIFICATION_COUNT
-				});
+			public Result<XtextResource> compute() {
+				XtextResource resource = createResource();
+				return Result.create(resource, BaseXtextFile.this);
 			}
         	
         }, false);
@@ -103,15 +103,34 @@ public abstract class BaseXtextFile extends PsiFileBase {
 		return (IXtextLanguage) getLanguage();
 	}
 	
-	public Resource getResource() {
-		Resource resource = doGetResource();
+	public XtextResource getResource() {
+		XtextResource resource = doGetResource();
 		installDerivedState(resource);
 		return resource;
 	}
     
-    protected Resource doGetResource() {
+    protected XtextResource doGetResource() {
     	synchronized(resourceCacheLock) {
-    		return resourceCache.getValue();
+    		return CachedValuesManager.getManager(getProject()).<XtextResource, BaseXtextFile>getCachedValue(this, new CachedValueProvider<XtextResource>() {
+
+    			@Override
+				public Result<XtextResource> compute() {
+    				// check whether the cached resource is still up-to-date or will be computed
+					boolean hasUpToDateValue = resourceCache.hasUpToDateValue();
+					XtextResource resource = resourceCache.getValue();
+					// if we reuse an existing resource, we have to relink it
+					if (hasUpToDateValue) {
+						resource.getResourceSet().getResources().retainAll(Collections.singletonList(resource));
+						resource.relink();
+					}
+			        installResourceDescription(resource);
+					return Result.create(resource, new Object[] {
+							PsiModificationTracker.MODIFICATION_COUNT, 
+							BaseXtextFile.this
+					});
+				}
+    			
+    		});
     	}
     }
 	
@@ -120,14 +139,39 @@ public abstract class BaseXtextFile extends PsiFileBase {
 	}
 	
 	public List<ASTNode> getASTNodes(INode node) {
-		List<ASTNode> astNodes = PsiToEcoreAdapter.get(getResource()).getReverseNodesMapping().get(node);
+		INode originalNode = findOriginalNode(node);
+		List<ASTNode> astNodes = PsiToEcoreAdapter.get(getResource()).getReverseNodesMapping().get(originalNode);
+		return filterASTNodes(node, astNodes);
+	}
+
+	protected INode findOriginalNode(INode node) {
+		if (node instanceof SyntheticCompositeNode) {
+			return findOriginalNode(node.getParent());
+		}
+		return node;
+	}
+
+	protected List<ASTNode> filterASTNodes(INode node, List<ASTNode> astNodes) {
 		if (astNodes == null) {
 			return emptyList();
+		}
+		if (node instanceof SyntheticCompositeNode) {
+			List<ASTNode> result = new ArrayList<ASTNode>();
+			for (ASTNode astNode : astNodes) {
+				IElementType elementType = astNode.getElementType();
+				if (elementType instanceof IGrammarAwareElementType) {
+					IGrammarAwareElementType grammarAwareElementType = (IGrammarAwareElementType) elementType;
+					if (grammarAwareElementType.getGrammarElement() == node.getGrammarElement()) {
+						result.add(astNode);
+					}
+				}
+			}
+			return result;
 		}
 		return astNodes;
 	}
 
-	protected Resource createResource() {    	
+	protected XtextResource createResource() {    	
     	VirtualFile virtualFile = getViewProvider().getVirtualFile();
         if (virtualFile == null) {
             return null;
@@ -152,6 +196,9 @@ public abstract class BaseXtextFile extends PsiFileBase {
 
 	protected void installResourceDescription(Resource resource) {
 		try {
+			if (compilerPhases.isIndexing(resource)) {
+				throw new IllegalStateException("Was already indexing resource set for " + resource.getURI());
+			}
 			compilerPhases.setIndexing(resource, true);
 			/*
 			 * Avoid deadlocks when a language accesses the index during indexing, 
@@ -162,31 +209,34 @@ public abstract class BaseXtextFile extends PsiFileBase {
 		} catch(OperationCanceledError e) {
 			throw e.getWrapped();
 		} finally {
-			compilerPhases.setIndexing(resource, false);
 			FileBasedIndexImpl.enableUpToDateCheckForCurrentThread();
+			compilerPhases.setIndexing(resource, false);
 		}
 	}
 
 	protected void installDerivedState(Resource resource) {
 		if (resource instanceof DerivedStateAwareResource) {
 			final DerivedStateAwareResource derivedStateAwareResource = (DerivedStateAwareResource) resource;
-			if (derivedStateAwareResource instanceof ISynchronizable<?>) {
-				ISynchronizable<?> synchronizable = (ISynchronizable<?>) derivedStateAwareResource;
-				try {
-					synchronizable.execute(new IUnitOfWork<Void, Object>() {
-
-						@Override
-						public java.lang.Void exec(Object state) throws Exception {
-							doInstallDerivedState(derivedStateAwareResource);
-							return null;
-						}
-						
-					});
-				} catch (Exception e) {
-					Exceptions.sneakyThrow(e);
+			// avoid synchronization of the resource
+			if (!derivedStateAwareResource.isFullyInitialized()) {
+				if (derivedStateAwareResource instanceof ISynchronizable<?>) {
+					ISynchronizable<?> synchronizable = (ISynchronizable<?>) derivedStateAwareResource;
+					try {
+						synchronizable.execute(new IUnitOfWork<Void, Object>() {
+	
+							@Override
+							public java.lang.Void exec(Object state) throws Exception {
+								doInstallDerivedState(derivedStateAwareResource);
+								return null;
+							}
+							
+						});
+					} catch (Exception e) {
+						Exceptions.sneakyThrow(e);
+					}
+				} else {
+					doInstallDerivedState(derivedStateAwareResource);
 				}
-			} else {
-				doInstallDerivedState(derivedStateAwareResource);
 			}
 		}
 	}

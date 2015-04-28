@@ -13,6 +13,7 @@ public final class BacktrackingLexerTestLanguageFileImpl extends BaseXtextFile {
 		super(viewProvider, BacktrackingLexerTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public FileType getFileType() {
 		return BacktrackingLexerTestLanguageFileType.INSTANCE;
 	}

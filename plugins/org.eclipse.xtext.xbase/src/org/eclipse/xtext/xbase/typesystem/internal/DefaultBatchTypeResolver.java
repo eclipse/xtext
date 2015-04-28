@@ -8,7 +8,9 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
@@ -20,6 +22,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -59,7 +62,26 @@ public class DefaultBatchTypeResolver extends AbstractBatchTypeResolver {
 	}
 	
 	protected IReentrantTypeResolver getTypeResolver(EObject object) {
-		Set<EObject> allRootedExpressions = Sets.newHashSet();
+		Set<EObject> allRootedExpressions = new HashSet<EObject>() {
+			private static final long serialVersionUID = 1L;
+			Map<EObject, Throwable> from = Maps.newHashMap();
+			@Override
+			public boolean add(EObject e) {
+				boolean result = super.add(e);
+				if (result) {
+					from.put(e, new Throwable());
+				} else {
+					throw new RuntimeException("Cannot root twice", from.get(e));
+				}
+				return result;
+			}
+			
+			@Override
+			public void clear() {
+				from.clear();
+				super.clear();
+			}
+		};
 		List<EObject> roots = getEntryPoints(object);
 		if (roots.size() == 1) {
 			AbstractRootedReentrantTypeResolver result = createResolver(roots.get(0));

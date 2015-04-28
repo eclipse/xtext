@@ -16,18 +16,22 @@ public final class MultiRuleEnumTestLanguageFileType extends LanguageFileType {
 		super(MultiRuleEnumTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "MultiRuleEnumTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "MultiRuleEnumTestLanguage";
 	}

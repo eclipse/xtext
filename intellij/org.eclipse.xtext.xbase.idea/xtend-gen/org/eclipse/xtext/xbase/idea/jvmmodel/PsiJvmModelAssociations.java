@@ -7,14 +7,13 @@
  */
 package org.eclipse.xtext.xbase.idea.jvmmodel;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.intellij.psi.PsiElement;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.idea.types.psi.impl.JvmPsiClassImpl;
 import org.eclipse.xtext.psi.IPsiModelAssociations;
+import org.eclipse.xtext.xbase.idea.jvm.JvmPsiElementExtensions;
 import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -36,16 +35,8 @@ public class PsiJvmModelAssociations implements IPsiJvmModelAssociations {
   
   @Override
   public Set<PsiElement> getSourceElements(final PsiElement jvmElement) {
-    Set<PsiElement> _xblockexpression = null;
-    {
-      boolean _equals = Objects.equal(jvmElement, null);
-      if (_equals) {
-        return null;
-      }
-      EObject _userData = jvmElement.<EObject>getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY);
-      _xblockexpression = this.getSourceElements(_userData);
-    }
-    return _xblockexpression;
+    EObject _jvmElement = JvmPsiElementExtensions.getJvmElement(jvmElement);
+    return this.getSourceElements(_jvmElement);
   }
   
   @Override
@@ -82,16 +73,8 @@ public class PsiJvmModelAssociations implements IPsiJvmModelAssociations {
   
   @Override
   public PsiElement getPrimarySourceElement(final PsiElement jvmElement) {
-    PsiElement _xblockexpression = null;
-    {
-      boolean _equals = Objects.equal(jvmElement, null);
-      if (_equals) {
-        return null;
-      }
-      EObject _userData = jvmElement.<EObject>getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY);
-      _xblockexpression = this.getPrimarySourceElement(_userData);
-    }
-    return _xblockexpression;
+    EObject _jvmElement = JvmPsiElementExtensions.getJvmElement(jvmElement);
+    return this.getPrimarySourceElement(_jvmElement);
   }
   
   @Override
@@ -114,16 +97,8 @@ public class PsiJvmModelAssociations implements IPsiJvmModelAssociations {
   
   @Override
   public boolean isPrimaryJvmElement(final PsiElement jvmElement) {
-    boolean _xblockexpression = false;
-    {
-      boolean _equals = Objects.equal(jvmElement, null);
-      if (_equals) {
-        return false;
-      }
-      EObject _userData = jvmElement.<EObject>getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY);
-      _xblockexpression = this.isPrimaryJvmElement(_userData);
-    }
-    return _xblockexpression;
+    EObject _jvmElement = JvmPsiElementExtensions.getJvmElement(jvmElement);
+    return this.isPrimaryJvmElement(_jvmElement);
   }
   
   @Override

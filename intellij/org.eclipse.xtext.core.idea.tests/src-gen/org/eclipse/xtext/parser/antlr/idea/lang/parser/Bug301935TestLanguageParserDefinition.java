@@ -16,6 +16,7 @@ public class Bug301935TestLanguageParserDefinition extends AbstractXtextParserDe
 	@Inject 
 	private Bug301935TestLanguageElementTypeProvider elementTypeProvider;
 
+	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new Bug301935TestLanguageFileImpl(viewProvider);
 	}
@@ -23,7 +24,6 @@ public class Bug301935TestLanguageParserDefinition extends AbstractXtextParserDe
 	@Override
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
-		IElementType elementType = node.getElementType();
 		return super.createElement(node);
 	}
 

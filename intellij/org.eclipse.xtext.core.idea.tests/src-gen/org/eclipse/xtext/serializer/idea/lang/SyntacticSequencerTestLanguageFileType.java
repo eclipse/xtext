@@ -16,18 +16,22 @@ public final class SyntacticSequencerTestLanguageFileType extends LanguageFileTy
 		super(SyntacticSequencerTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "SyntacticSequencerTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "SyntacticSequencerTestLanguage";
 	}

@@ -41,7 +41,7 @@ class OperationCanceledManager {
 			throw t;
 		}
 		val opCanceledException = getPlatformOperationCanceledException(t);
-		if (opCanceledException != null)
+		if (opCanceledException !== null)
 			throw new OperationCanceledError(opCanceledException);
 	}
 	

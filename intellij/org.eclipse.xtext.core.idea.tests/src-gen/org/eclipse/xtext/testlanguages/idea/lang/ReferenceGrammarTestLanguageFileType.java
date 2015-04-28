@@ -16,18 +16,22 @@ public final class ReferenceGrammarTestLanguageFileType extends LanguageFileType
 		super(ReferenceGrammarTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "ReferenceGrammarTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "ReferenceGrammarTestLanguage";
 	}

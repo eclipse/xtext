@@ -16,18 +16,22 @@ public final class GrammarAccessTestLanguageFileType extends LanguageFileType {
 		super(GrammarAccessTestLanguageLanguage.INSTANCE);
 	}
 
+	@Override
 	public String getDefaultExtension() {
 		return DEFAULT_EXTENSION;
 	}
 
+	@Override
 	public String getDescription() {
 		return "GrammarAccessTestLanguage files";
 	}
 
+	@Override
 	public Icon getIcon() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return "GrammarAccessTestLanguage";
 	}
