@@ -18,7 +18,7 @@ class XtendIconProvider extends IconProvider {
 
 	override getIcon(PsiElement element, int flags) {
 		switch element {
-			XtendFileImpl : XtendIcons.Xtend_CLASS
+			XtendFileImpl : XtendIcons.Xtend_ICON
 		}
 	}
 
