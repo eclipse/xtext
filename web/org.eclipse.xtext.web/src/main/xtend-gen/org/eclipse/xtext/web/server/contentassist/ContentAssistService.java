@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Keyword;
@@ -30,9 +31,11 @@ import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 import org.eclipse.xtext.web.server.model.UpdateDocumentService;
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -120,14 +123,33 @@ public class ContentAssistService {
   protected ContentAssistResult createProposals(final ContentAssistContext[] contexts, final String stateId) {
     final ContentAssistResult result = new ContentAssistResult();
     result.setStateId(stateId);
+    final Function1<ContentAssistContext, String> _function = new Function1<ContentAssistContext, String>() {
+      @Override
+      public String apply(final ContentAssistContext it) {
+        return it.getPrefix();
+      }
+    };
+    List<String> _map = ListExtensions.<ContentAssistContext, String>map(((List<ContentAssistContext>)Conversions.doWrapArray(contexts)), _function);
+    final Function1<String, Integer> _function_1 = new Function1<String, Integer>() {
+      @Override
+      public Integer apply(final String it) {
+        return Integer.valueOf(it.length());
+      }
+    };
+    final String longestPrefix = IterableExtensions.<String, Integer>maxBy(_map, _function_1);
+    result.setPrefix(longestPrefix);
     for (final ContentAssistContext context : contexts) {
-      ImmutableList<AbstractElement> _firstSetGrammarElements = context.getFirstSetGrammarElements();
-      for (final AbstractElement element : _firstSetGrammarElements) {
-        this.createProposal(element, context, result);
+      String _prefix = context.getPrefix();
+      boolean _equals = Objects.equal(_prefix, longestPrefix);
+      if (_equals) {
+        ImmutableList<AbstractElement> _firstSetGrammarElements = context.getFirstSetGrammarElements();
+        for (final AbstractElement element : _firstSetGrammarElements) {
+          this.createProposal(element, context, result);
+        }
       }
     }
     ArrayList<ContentAssistResult.Entry> _entries = result.getEntries();
-    final Comparator<ContentAssistResult.Entry> _function = new Comparator<ContentAssistResult.Entry>() {
+    final Comparator<ContentAssistResult.Entry> _function_2 = new Comparator<ContentAssistResult.Entry>() {
       @Override
       public int compare(final ContentAssistResult.Entry a, final ContentAssistResult.Entry b) {
         String _proposal = a.getProposal();
@@ -135,7 +157,7 @@ public class ContentAssistService {
         return _proposal.compareTo(_proposal_1);
       }
     };
-    Collections.<ContentAssistResult.Entry>sort(_entries, _function);
+    Collections.<ContentAssistResult.Entry>sort(_entries, _function_2);
     return result;
   }
   
@@ -150,9 +172,17 @@ public class ContentAssistService {
       boolean _xifexpression = false;
       boolean _and = false;
       boolean _and_1 = false;
-      int _length = value.length();
-      boolean _greaterThan = (_length > 1);
-      if (!_greaterThan) {
+      boolean _and_2 = false;
+      String _prefix = context.getPrefix();
+      boolean _startsWith = value.startsWith(_prefix);
+      if (!_startsWith) {
+        _and_2 = false;
+      } else {
+        int _length = value.length();
+        boolean _greaterThan = (_length > 1);
+        _and_2 = _greaterThan;
+      }
+      if (!_and_2) {
         _and_1 = false;
       } else {
         char _charAt = value.charAt(0);

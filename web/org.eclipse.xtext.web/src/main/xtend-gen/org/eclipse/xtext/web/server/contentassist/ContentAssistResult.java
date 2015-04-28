@@ -278,14 +278,11 @@ public class ContentAssistResult implements IServiceResult {
     }
   }
   
-  private final ArrayList<ContentAssistResult.Entry> entries = new ArrayList<ContentAssistResult.Entry>();
-  
   private String stateId;
   
-  @Pure
-  public ArrayList<ContentAssistResult.Entry> getEntries() {
-    return this.entries;
-  }
+  private String prefix;
+  
+  private final ArrayList<ContentAssistResult.Entry> entries = new ArrayList<ContentAssistResult.Entry>();
   
   @Pure
   public String getStateId() {
@@ -296,12 +293,27 @@ public class ContentAssistResult implements IServiceResult {
     this.stateId = stateId;
   }
   
+  @Pure
+  public String getPrefix() {
+    return this.prefix;
+  }
+  
+  public void setPrefix(final String prefix) {
+    this.prefix = prefix;
+  }
+  
+  @Pure
+  public ArrayList<ContentAssistResult.Entry> getEntries() {
+    return this.entries;
+  }
+  
   @Override
   @Pure
   public String toString() {
     ToStringBuilder b = new ToStringBuilder(this);
-    b.add("entries", this.entries);
     b.add("stateId", this.stateId);
+    b.add("prefix", this.prefix);
+    b.add("entries", this.entries);
     return b.toString();
   }
 }
