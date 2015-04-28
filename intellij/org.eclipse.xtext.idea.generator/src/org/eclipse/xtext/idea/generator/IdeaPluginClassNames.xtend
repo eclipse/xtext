@@ -60,6 +60,10 @@ class IdeaPluginClassNames {
 		basePackageName+'.lang.'+it.name.toSimpleName+'FileType'
 	}
 	
+	def String getAbstractFileTypeName(Grammar it) {
+		basePackageName+'.lang.Abstract'+it.name.toSimpleName+'FileType'
+	}
+	
 	def String getFileTypeFactoryName(Grammar it) {
 		basePackageName+'.lang.'+it.name.toSimpleName+'FileTypeFactory'
 	}

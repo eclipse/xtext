@@ -122,7 +122,8 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		ctx.writeFile(outlet_src_gen, '''META-INF/services/«ISetup.name»''', grammar.compileServicesISetup)
 		ctx.writeFile(outlet_src_gen, grammar.abstractCompletionContributor.toJavaPath, grammar.compileAbstractCompletionContributor)
 		ctx.writeFile(outlet_src_gen, grammar.languageName.toJavaPath, grammar.compileLanguage)
-		ctx.writeFile(outlet_src_gen, grammar.fileTypeName.toJavaPath, grammar.compileFileType)
+		ctx.writeFile(outlet_src, grammar.fileTypeName.toXtendPath, grammar.compileFileType)
+		ctx.writeFile(outlet_src_gen, grammar.abstractFileTypeName.toJavaPath, grammar.compileAbstractFileType)
 		ctx.writeFile(outlet_src_gen, grammar.fileTypeFactoryName.toJavaPath, grammar.compileFileTypeFactory)
 		ctx.writeFile(outlet_src_gen, grammar.fileImplName.toJavaPath, grammar.compileFileImpl)
 		ctx.writeFile(outlet_src_gen, grammar.tokenTypeProviderName.toJavaPath, grammar.compileTokenTypeProvider)
@@ -149,11 +150,8 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		output.addOutlet(META_INF_PLUGIN, false, ideaProjectPath + "/META-INF");
 		
 		if (deployable) {
-			output.writeFile(PLUGIN, '''«ideaProjectName».launch''', grammar.compileLaunchIntellij)
 			output.writeFile(META_INF_PLUGIN, "plugin.xml", grammar.compilePluginXml)
 		}
-		output.writeFile(PLUGIN, ".project", grammar.compileProjectXml)
-		output.writeFile(PLUGIN, ".classpath", grammar.compileClasspathXml)
 	}
 	
 	def CharSequence compileGuiceModuleIdeaGenerated(Grammar grammar, Set<Binding> bindings) '''
@@ -479,43 +477,6 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		this.encoding = encoding
 	}
 	
-	def compileClasspathXml(Grammar grammar) '''
-		<?xml version="1.0" encoding="UTF-8"?>
-		<classpath>
-			<classpathentry kind="src" path="src"/>
-			<classpathentry kind="src" path="src-gen"/>
-			<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-			<classpathentry combineaccessrules="false" exported="true" kind="src" path="/org.eclipse.xtext.idea"/>
-			«IF grammar.doesUseXbase()»
-			<classpathentry combineaccessrules="false" exported="true" kind="src" path="/org.eclipse.xtext.xbase.idea"/>
-			«ENDIF»
-			«IF runtimeProjectName != ideaProjectName»
-			<classpathentry combineaccessrules="false" exported="true" kind="src" path="/«runtimeProjectName»"/>
-			«ENDIF»
-			<classpathentry kind="output" path="bin"/>
-		</classpath>
-	'''
-	
-	def compileProjectXml(Grammar grammar) '''
-		<?xml version="1.0" encoding="UTF-8"?>
-		<projectDescription>
-			<name>«ideaProjectName»</name>
-			<comment></comment>
-			<projects>
-			</projects>
-			<buildSpec>
-				<buildCommand>
-					<name>org.eclipse.jdt.core.javabuilder</name>
-					<arguments>
-					</arguments>
-				</buildCommand>
-			</buildSpec>
-			<natures>
-				<nature>org.eclipse.jdt.core.javanature</nature>
-			</natures>
-		</projectDescription>
-	'''
-	
 	def compilePluginXml(Grammar grammar)'''
 		<idea-plugin version="2">
 			<id>«ideaProjectName»</id>
@@ -583,27 +544,6 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 								implementationClass="«implementationClass»"/>
 	'''
 	
-	def compileLaunchIntellij(Grammar grammar)'''
-		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-		<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
-		<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-		<listEntry value="/«ideaProjectName»"/>
-		</listAttribute>
-		<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
-		<listEntry value="4"/>
-		</listAttribute>
-		<booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
-		<listAttribute key="org.eclipse.jdt.launching.CLASSPATH">
-		<listEntry value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#10;&lt;runtimeClasspathEntry containerPath=&quot;org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6&quot; javaProject=&quot;«ideaProjectName»&quot; path=&quot;1&quot; type=&quot;4&quot;/&gt;&#10;"/>
-		</listAttribute>
-		<booleanAttribute key="org.eclipse.jdt.launching.DEFAULT_CLASSPATH" value="false"/>
-		<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.intellij.rt.execution.application.AppMain"/>
-		<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="com.intellij.idea.Main"/>
-		<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="«ideaProjectName»"/>
-		<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xmx512m&#10;-Xms256m&#10;-XX:MaxPermSize=250m&#10;-ea&#10;-Xbootclasspath/a:../intellij-ce/lib/boot.jar&#10;-Didea.plugins.path=./sandbox/plugins&#10;-Didea.smooth.progress=false&#10;-Dapple.laf.useScreenMenuBar=true&#10;-Didea.platform.prefix=Idea&#10;-Didea.launcher.port=7532&#10;-Didea.launcher.bin.path=../intellij-ce/bin&#10;-Dfile.encoding=UTF-8&#10;-classpath ../intellij-ce/lib/idea_rt.jar:../intellij-ce/lib/idea.jar:../intellij-ce/lib/bootstrap.jar:../intellij-ce/lib/extensions.jar:../intellij-ce/lib/util.jar:../intellij-ce/lib/openapi.jar:../intellij-ce/lib/trove4j.jar:../intellij-ce/lib/jdom.jar:../intellij-ce/lib/log4j.jar"/>
-		</launchConfiguration>
-	'''
-	
 	def compilePsiElement(Grammar grammar, AbstractRule rule)'''
 		package «grammar.psiPackageName»;
 		«IF rule.hasMultipleAssigment»
@@ -659,29 +599,30 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		
 			@Override
 			public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-				consumer.consume(«grammar.fileTypeName».INSTANCE, «grammar.fileTypeName».DEFAULT_EXTENSION);
+				consumer.consume(«grammar.fileTypeName».INSTANCE, «grammar.abstractFileTypeName».DEFAULT_EXTENSION);
 			}
 		
 		}
 	'''
 	
-	def compileFileType(Grammar grammar)'''
-		package «grammar.fileTypeName.toPackageName»;
+	def compileAbstractFileType(Grammar grammar)'''
+		package «grammar.abstractFileTypeName.toPackageName»;
 		
 		import javax.swing.Icon;
 		
-		import com.intellij.openapi.fileTypes.LanguageFileType;
+		import org.eclipse.xtext.idea.Icons;
 		import org.jetbrains.annotations.NonNls;
 		
-		public final class «grammar.fileTypeName.toSimpleName» extends LanguageFileType {
+		import com.intellij.lang.Language;
+		import com.intellij.openapi.fileTypes.LanguageFileType;
 		
-			public static final «grammar.fileTypeName.toSimpleName» INSTANCE = new «grammar.fileTypeName.toSimpleName»();
-			
+		public class «grammar.abstractFileTypeName.toSimpleName» extends LanguageFileType {
+		
 			@NonNls 
 			public static final String DEFAULT_EXTENSION = "«fileExtension»";
 		
-			private «grammar.fileTypeName.toSimpleName»() {
-				super(«grammar.languageName.toSimpleName».INSTANCE);
+			protected «grammar.abstractFileTypeName.toSimpleName»(final Language language) {
+				super(language);
 			}
 		
 			@Override
@@ -696,12 +637,26 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		
 			@Override
 			public Icon getIcon() {
-				return null;
+				return Icons.DSL_FILE_TYPE;
 			}
 		
 			@Override
 			public String getName() {
 				return "«grammar.simpleName»";
+			}
+		
+		}
+	'''
+	
+	def compileFileType(Grammar grammar)'''
+		package «grammar.fileTypeName.toPackageName»;
+		
+		class «grammar.fileTypeName.toSimpleName» extends «grammar.abstractFileTypeName.toSimpleName» {
+		
+			public static final «grammar.fileTypeName.toSimpleName» INSTANCE = new «grammar.fileTypeName.toSimpleName»()
+			
+			new() {
+				super(«grammar.languageName.toSimpleName».INSTANCE)
 			}
 		
 		}
