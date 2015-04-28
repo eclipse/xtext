@@ -37,6 +37,8 @@ import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static org.junit.Assert.*
 import org.eclipse.core.resources.IContainer
+import org.junit.BeforeClass
+import org.junit.AfterClass
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XtendIDEInjectorProvider))
@@ -110,36 +112,50 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 	@Inject Provider<CompilationUnitImpl> compilationUnitProvider
 
 	@Rule public StopwatchRule stopwatch = new StopwatchRule(true);
-
-	@After def tearDown() throws Exception {
-		macroProject = null
-		userProject = null
-		sourceFile = null
-		cleanWorkspace();
-	}
-
-	IJavaProject macroProject
-	IJavaProject userProject
-	IFile sourceFile
 	
-	override assertProcessing(Pair<String, String> macroFile, Pair<String, String> clientFile,
-		(CompilationUnitImpl)=>void expectations) {
+	static IJavaProject macroProject
+	static IJavaProject userProject
+	
+	@BeforeClass
+	static def void createProjects() {
 		macroProject = JavaCore.create(createPluginProject("macroProject"))
-		macroProject.newSource(macroFile.key, macroFile.value.toString)
-		val lidx = macroFile.key.lastIndexOf('/')
-		if (lidx != -1) {
-			val packageName = macroFile.key.substring(0, lidx).replace('/', '.')
-			macroProject.addExportedPackage(packageName)
-		}
 		userProject = JavaCore::create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
 				"org.eclipse.xtend.core.tests",
 				"org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"))
-		sourceFile = userProject.newSource(clientFile.key, clientFile.value.toString)
+	}
+	
+	@AfterClass
+	static def void deleteProjects() {
+		cleanWorkspace();
+	}
+
+	@After 
+	def void tearDown() throws Exception {
+		clientFile.delete(true, null)
+		macroFile.delete(true, null)
+		macroProject.removeExportedPackage(exportedPackage)
+	}
+	
+	IFile macroFile
+	IFile clientFile
+	String exportedPackage
+	
+	override assertProcessing(Pair<String, String> macroContent, Pair<String, String> clientContent,
+		(CompilationUnitImpl)=>void expectations) {
+		
+		macroFile = macroProject.newSource(macroContent.key, macroContent.value.toString)
+		val lidx = macroContent.key.lastIndexOf('/')
+		if (lidx != -1) {
+			exportedPackage = macroContent.key.substring(0, lidx).replace('/', '.')
+			macroProject.addExportedPackage(exportedPackage)
+		}
+		
+		clientFile = userProject.newSource(clientContent.key, clientContent.value.toString)
 		waitForAutoBuild()
 		
 		val resourceSet = resourceSetProvider.get(userProject.project)
-		val resource = resourceSet.getResource(URI.createPlatformResourceURI(sourceFile.fullPath.toString, true), true)
+		val resource = resourceSet.getResource(URI.createPlatformResourceURI(clientFile.fullPath.toString, true), true)
 		EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl)
 		validator.validate(resource, CheckMode.FAST_ONLY, CancelIndicator.NullImpl)
 		val unit = compilationUnitProvider.get
@@ -174,6 +190,26 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 			attrs.putValue("Export-Package", attrs.get("Export-Package") + "," + exportedPackages.join(","))
 		} else {
 			attrs.putValue("Export-Package", exportedPackages.join(","))
+		}
+		val out = new ByteArrayOutputStream()
+		manifest.write(out)
+		val in = new ByteArrayInputStream(out.toByteArray)
+		manifestFile.setContents(new BufferedInputStream(in), true, true, null)
+	}
+	
+	def void removeExportedPackage(IJavaProject pluginProject, String ... exportedPackages) {
+		val manifestFile = pluginProject.project.getFile("META-INF/MANIFEST.MF")
+		val manifestContent = manifestFile.contents
+		val manifest = try {
+			new Manifest(manifestContent)
+		} finally {
+			manifestContent.close
+		}
+		val attrs = manifest.getMainAttributes()
+		if (attrs.containsKey("Export-Package")) {
+			val exportsToKeep = (attrs.get("Export-Package") as String).split(",")
+			exportsToKeep.removeAll(exportedPackages)
+			attrs.putValue("Export-Package", exportsToKeep.join(","))
 		}
 		val out = new ByteArrayOutputStream()
 		manifest.write(out)
