@@ -40,7 +40,8 @@ class PsiJvmModelAssociationsTests extends LightXtendTest {
 			}
 		''')
 		val psiClass = xtextFile.psiClasses.head
-		assertNotNull(psiClass.sourceElements.head)
+		val sourceElements = psiClass.sourceElements
+		assertNotNull(sourceElements.toString, sourceElements.head)
 
 		val psiField = psiClass.fields.head
 		assertNotNull(psiField.sourceElements.head)
