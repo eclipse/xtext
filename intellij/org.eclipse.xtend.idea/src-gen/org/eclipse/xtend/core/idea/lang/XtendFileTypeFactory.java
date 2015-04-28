@@ -8,7 +8,7 @@ public class XtendFileTypeFactory extends FileTypeFactory {
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtend.core.idea.lang.XtendFileType.INSTANCE, org.eclipse.xtend.core.idea.lang.XtendFileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtend.core.idea.lang.XtendFileType.INSTANCE, org.eclipse.xtend.core.idea.lang.AbstractXtendFileType.DEFAULT_EXTENSION);
 	}
 
 }

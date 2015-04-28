@@ -18,7 +18,10 @@ class XtendIcons {
 		IconLoader.getIcon(path, XtendIcons)
 	}
 
-	public static val Xtend_16x16 = load("/org/eclipse/xtend/core/idea/icons/xtend_16x16.png")
-
-	public static val Xtend_FILE_16x16 = load("/org/eclipse/xtend/core/idea/icons/xtend_file_16x16.png")
+	public static val Xtend_FILETYPE = load("/icons/xtend_filetype.png")
+	public static val Xtend_CLASS = load("/icons/xtend_class.png")
+	public static val Xtend_INTERFACE = load("/icons/xtend_interface.png")
+	public static val Xtend_ENUM = load("/icons/xtend_enum.png")
+	public static val Xtend_ANNOTATIONTYPE = load("/icons/xtend_annotationtype.png")
+	public static val Xtend_ICON = load("/icons/xtend.png")
 }

@@ -19,7 +19,15 @@ public class XtendIcons {
     return IconLoader.getIcon(path, XtendIcons.class);
   }
   
-  public final static Icon Xtend_16x16 = XtendIcons.load("/org/eclipse/xtend/core/idea/icons/xtend_16x16.png");
+  public final static Icon Xtend_FILETYPE = XtendIcons.load("/icons/xtend_filetype.png");
   
-  public final static Icon Xtend_FILE_16x16 = XtendIcons.load("/org/eclipse/xtend/core/idea/icons/xtend_file_16x16.png");
+  public final static Icon Xtend_CLASS = XtendIcons.load("/icons/xtend_class.png");
+  
+  public final static Icon Xtend_INTERFACE = XtendIcons.load("/icons/xtend_interface.png");
+  
+  public final static Icon Xtend_ENUM = XtendIcons.load("/icons/xtend_enum.png");
+  
+  public final static Icon Xtend_ANNOTATIONTYPE = XtendIcons.load("/icons/xtend_annotationtype.png");
+  
+  public final static Icon Xtend_ICON = XtendIcons.load("/icons/xtend.png");
 }

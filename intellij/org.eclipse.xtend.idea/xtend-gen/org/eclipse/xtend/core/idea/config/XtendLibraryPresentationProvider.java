@@ -34,6 +34,6 @@ public class XtendLibraryPresentationProvider extends LibraryPresentationProvide
   
   @Override
   public Icon getIcon() {
-    return XtendIcons.Xtend_16x16;
+    return XtendIcons.Xtend_ICON;
   }
 }

@@ -36,7 +36,7 @@ public class XtendFrameworkType extends FrameworkTypeEx {
   
   @Override
   public Icon getIcon() {
-    return XtendIcons.Xtend_16x16;
+    return XtendIcons.Xtend_ICON;
   }
   
   @Override

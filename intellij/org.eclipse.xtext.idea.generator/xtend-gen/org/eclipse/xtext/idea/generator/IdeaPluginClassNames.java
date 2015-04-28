@@ -97,6 +97,15 @@ public class IdeaPluginClassNames {
     return (_plus_1 + "FileType");
   }
   
+  public String getAbstractFileTypeName(final Grammar it) {
+    String _basePackageName = this.getBasePackageName(it);
+    String _plus = (_basePackageName + ".lang.Abstract");
+    String _name = it.getName();
+    String _simpleName = this.toSimpleName(_name);
+    String _plus_1 = (_plus + _simpleName);
+    return (_plus_1 + "FileType");
+  }
+  
   public String getFileTypeFactoryName(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".lang.");

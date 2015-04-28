@@ -17,8 +17,8 @@ import org.eclipse.xtend.core.idea.lang.psi.impl.XtendFileImpl
 class XtendIconProvider extends IconProvider {
 
 	override getIcon(PsiElement element, int flags) {
-		if (element instanceof XtendFileImpl) {
-			XtendIcons.Xtend_FILE_16x16
+		switch element {
+			XtendFileImpl : XtendIcons.Xtend_CLASS
 		}
 	}
 

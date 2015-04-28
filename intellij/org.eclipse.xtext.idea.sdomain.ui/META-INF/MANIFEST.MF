@@ -22,5 +22,6 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext.idea.sdomain.ui.contentassist,
  org.eclipse.xtext.idea.sdomain.ui.contentassist.antlr,
  org.eclipse.xtext.idea.sdomain.ui.internal,
- org.eclipse.xtext.idea.sdomain.ui.quickfix
+ org.eclipse.xtext.idea.sdomain.ui.quickfix,
+ org.eclipse.xtext.idea.sdomain.ui.contentassist.antlr.internal
 Bundle-Activator: org.eclipse.xtext.idea.sdomain.ui.internal.SDomainActivator

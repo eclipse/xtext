@@ -186,9 +186,13 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     CharSequence _compileLanguage = this.compileLanguage(grammar);
     ctx.writeFile(outlet_src_gen, _javaPath_3, _compileLanguage);
     String _fileTypeName = this._ideaPluginClassNames.getFileTypeName(grammar);
-    String _javaPath_4 = this._ideaPluginClassNames.toJavaPath(_fileTypeName);
+    String _xtendPath_1 = this._ideaPluginClassNames.toXtendPath(_fileTypeName);
     CharSequence _compileFileType = this.compileFileType(grammar);
-    ctx.writeFile(outlet_src_gen, _javaPath_4, _compileFileType);
+    ctx.writeFile(outlet_src, _xtendPath_1, _compileFileType);
+    String _abstractFileTypeName = this._ideaPluginClassNames.getAbstractFileTypeName(grammar);
+    String _javaPath_4 = this._ideaPluginClassNames.toJavaPath(_abstractFileTypeName);
+    CharSequence _compileAbstractFileType = this.compileAbstractFileType(grammar);
+    ctx.writeFile(outlet_src_gen, _javaPath_4, _compileAbstractFileType);
     String _fileTypeFactoryName = this._ideaPluginClassNames.getFileTypeFactoryName(grammar);
     String _javaPath_5 = this._ideaPluginClassNames.toJavaPath(_fileTypeFactoryName);
     CharSequence _compileFileTypeFactory = this.compileFileTypeFactory(grammar);
@@ -268,18 +272,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     this.addOutlet(output, IdeaPluginGenerator.PLUGIN, false, this.ideaProjectPath);
     this.addOutlet(output, IdeaPluginGenerator.META_INF_PLUGIN, false, (this.ideaProjectPath + "/META-INF"));
     if (this.deployable) {
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append(this.ideaProjectName, "");
-      _builder_1.append(".launch");
-      CharSequence _compileLaunchIntellij = this.compileLaunchIntellij(grammar);
-      this.writeFile(output, IdeaPluginGenerator.PLUGIN, _builder_1.toString(), _compileLaunchIntellij);
       CharSequence _compilePluginXml = this.compilePluginXml(grammar);
       this.writeFile(output, IdeaPluginGenerator.META_INF_PLUGIN, "plugin.xml", _compilePluginXml);
     }
-    CharSequence _compileProjectXml = this.compileProjectXml(grammar);
-    this.writeFile(output, IdeaPluginGenerator.PLUGIN, ".project", _compileProjectXml);
-    CharSequence _compileClasspathXml = this.compileClasspathXml(grammar);
-    this.writeFile(output, IdeaPluginGenerator.PLUGIN, ".classpath", _compileClasspathXml);
   }
   
   public CharSequence compileGuiceModuleIdeaGenerated(final Grammar grammar, final Set<Binding> bindings) {
@@ -1315,105 +1310,6 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     this.encoding = encoding;
   }
   
-  public CharSequence compileClasspathXml(final Grammar grammar) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-    _builder.newLine();
-    _builder.append("<classpath>");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("<classpathentry kind=\"src\" path=\"src\"/>");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("<classpathentry kind=\"src\" path=\"src-gen\"/>");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("<classpathentry kind=\"con\" path=\"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6\"/>");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("<classpathentry combineaccessrules=\"false\" exported=\"true\" kind=\"src\" path=\"/org.eclipse.xtext.idea\"/>");
-    _builder.newLine();
-    {
-      boolean _doesUseXbase = XbaseGeneratorFragment.doesUseXbase(grammar);
-      if (_doesUseXbase) {
-        _builder.append("\t");
-        _builder.append("<classpathentry combineaccessrules=\"false\" exported=\"true\" kind=\"src\" path=\"/org.eclipse.xtext.xbase.idea\"/>");
-        _builder.newLine();
-      }
-    }
-    {
-      boolean _notEquals = (!Objects.equal(this.runtimeProjectName, this.ideaProjectName));
-      if (_notEquals) {
-        _builder.append("\t");
-        _builder.append("<classpathentry combineaccessrules=\"false\" exported=\"true\" kind=\"src\" path=\"/");
-        _builder.append(this.runtimeProjectName, "\t");
-        _builder.append("\"/>");
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    _builder.append("\t");
-    _builder.append("<classpathentry kind=\"output\" path=\"bin\"/>");
-    _builder.newLine();
-    _builder.append("</classpath>");
-    _builder.newLine();
-    return _builder;
-  }
-  
-  public CharSequence compileProjectXml(final Grammar grammar) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-    _builder.newLine();
-    _builder.append("<projectDescription>");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("<name>");
-    _builder.append(this.ideaProjectName, "\t");
-    _builder.append("</name>");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("<comment></comment>");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("<projects>");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("</projects>");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("<buildSpec>");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("<buildCommand>");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("<name>org.eclipse.jdt.core.javabuilder</name>");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("<arguments>");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("</arguments>");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("</buildCommand>");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("</buildSpec>");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("<natures>");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("<nature>org.eclipse.jdt.core.javanature</nature>");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("</natures>");
-    _builder.newLine();
-    _builder.append("</projectDescription>");
-    _builder.newLine();
-    return _builder;
-  }
-  
   public CharSequence compilePluginXml(final Grammar grammar) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<idea-plugin version=\"2\">");
@@ -1658,53 +1554,6 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     return _builder;
   }
   
-  public CharSequence compileLaunchIntellij(final Grammar grammar) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
-    _builder.newLine();
-    _builder.append("<launchConfiguration type=\"org.eclipse.jdt.launching.localJavaApplication\">");
-    _builder.newLine();
-    _builder.append("<listAttribute key=\"org.eclipse.debug.core.MAPPED_RESOURCE_PATHS\">");
-    _builder.newLine();
-    _builder.append("<listEntry value=\"/");
-    _builder.append(this.ideaProjectName, "");
-    _builder.append("\"/>");
-    _builder.newLineIfNotEmpty();
-    _builder.append("</listAttribute>");
-    _builder.newLine();
-    _builder.append("<listAttribute key=\"org.eclipse.debug.core.MAPPED_RESOURCE_TYPES\">");
-    _builder.newLine();
-    _builder.append("<listEntry value=\"4\"/>");
-    _builder.newLine();
-    _builder.append("</listAttribute>");
-    _builder.newLine();
-    _builder.append("<booleanAttribute key=\"org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD\" value=\"true\"/>");
-    _builder.newLine();
-    _builder.append("<listAttribute key=\"org.eclipse.jdt.launching.CLASSPATH\">");
-    _builder.newLine();
-    _builder.append("<listEntry value=\"&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#10;&lt;runtimeClasspathEntry containerPath=&quot;org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6&quot; javaProject=&quot;");
-    _builder.append(this.ideaProjectName, "");
-    _builder.append("&quot; path=&quot;1&quot; type=&quot;4&quot;/&gt;&#10;\"/>");
-    _builder.newLineIfNotEmpty();
-    _builder.append("</listAttribute>");
-    _builder.newLine();
-    _builder.append("<booleanAttribute key=\"org.eclipse.jdt.launching.DEFAULT_CLASSPATH\" value=\"false\"/>");
-    _builder.newLine();
-    _builder.append("<stringAttribute key=\"org.eclipse.jdt.launching.MAIN_TYPE\" value=\"com.intellij.rt.execution.application.AppMain\"/>");
-    _builder.newLine();
-    _builder.append("<stringAttribute key=\"org.eclipse.jdt.launching.PROGRAM_ARGUMENTS\" value=\"com.intellij.idea.Main\"/>");
-    _builder.newLine();
-    _builder.append("<stringAttribute key=\"org.eclipse.jdt.launching.PROJECT_ATTR\" value=\"");
-    _builder.append(this.ideaProjectName, "");
-    _builder.append("\"/>");
-    _builder.newLineIfNotEmpty();
-    _builder.append("<stringAttribute key=\"org.eclipse.jdt.launching.VM_ARGUMENTS\" value=\"-Xmx512m&#10;-Xms256m&#10;-XX:MaxPermSize=250m&#10;-ea&#10;-Xbootclasspath/a:../intellij-ce/lib/boot.jar&#10;-Didea.plugins.path=./sandbox/plugins&#10;-Didea.smooth.progress=false&#10;-Dapple.laf.useScreenMenuBar=true&#10;-Didea.platform.prefix=Idea&#10;-Didea.launcher.port=7532&#10;-Didea.launcher.bin.path=../intellij-ce/bin&#10;-Dfile.encoding=UTF-8&#10;-classpath ../intellij-ce/lib/idea_rt.jar:../intellij-ce/lib/idea.jar:../intellij-ce/lib/bootstrap.jar:../intellij-ce/lib/extensions.jar:../intellij-ce/lib/util.jar:../intellij-ce/lib/openapi.jar:../intellij-ce/lib/trove4j.jar:../intellij-ce/lib/jdom.jar:../intellij-ce/lib/log4j.jar\"/>");
-    _builder.newLine();
-    _builder.append("</launchConfiguration>");
-    _builder.newLine();
-    return _builder;
-  }
-  
   public CharSequence compilePsiElement(final Grammar grammar, final AbstractRule rule) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
@@ -1877,8 +1726,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     String _fileTypeName = this._ideaPluginClassNames.getFileTypeName(grammar);
     _builder.append(_fileTypeName, "\t\t");
     _builder.append(".INSTANCE, ");
-    String _fileTypeName_1 = this._ideaPluginClassNames.getFileTypeName(grammar);
-    _builder.append(_fileTypeName_1, "\t\t");
+    String _abstractFileTypeName = this._ideaPluginClassNames.getAbstractFileTypeName(grammar);
+    _builder.append(_abstractFileTypeName, "\t\t");
     _builder.append(".DEFAULT_EXTENSION);");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -1890,11 +1739,11 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     return _builder;
   }
   
-  public CharSequence compileFileType(final Grammar grammar) {
+  public CharSequence compileAbstractFileType(final Grammar grammar) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _fileTypeName = this._ideaPluginClassNames.getFileTypeName(grammar);
-    String _packageName = this._ideaPluginClassNames.toPackageName(_fileTypeName);
+    String _abstractFileTypeName = this._ideaPluginClassNames.getAbstractFileTypeName(grammar);
+    String _packageName = this._ideaPluginClassNames.toPackageName(_abstractFileTypeName);
     _builder.append(_packageName, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -1902,30 +1751,22 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("import javax.swing.Icon;");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("import com.intellij.openapi.fileTypes.LanguageFileType;");
+    _builder.append("import org.eclipse.xtext.idea.Icons;");
     _builder.newLine();
     _builder.append("import org.jetbrains.annotations.NonNls;");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("public final class ");
-    String _fileTypeName_1 = this._ideaPluginClassNames.getFileTypeName(grammar);
-    String _simpleName = this._ideaPluginClassNames.toSimpleName(_fileTypeName_1);
+    _builder.append("import com.intellij.lang.Language;");
+    _builder.newLine();
+    _builder.append("import com.intellij.openapi.fileTypes.LanguageFileType;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("public class ");
+    String _abstractFileTypeName_1 = this._ideaPluginClassNames.getAbstractFileTypeName(grammar);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(_abstractFileTypeName_1);
     _builder.append(_simpleName, "");
     _builder.append(" extends LanguageFileType {");
     _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public static final ");
-    String _fileTypeName_2 = this._ideaPluginClassNames.getFileTypeName(grammar);
-    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_fileTypeName_2);
-    _builder.append(_simpleName_1, "\t");
-    _builder.append(" INSTANCE = new ");
-    String _fileTypeName_3 = this._ideaPluginClassNames.getFileTypeName(grammar);
-    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(_fileTypeName_3);
-    _builder.append(_simpleName_2, "\t");
-    _builder.append("();");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("@NonNls ");
@@ -1937,19 +1778,15 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("private ");
-    String _fileTypeName_4 = this._ideaPluginClassNames.getFileTypeName(grammar);
-    String _simpleName_3 = this._ideaPluginClassNames.toSimpleName(_fileTypeName_4);
-    _builder.append(_simpleName_3, "\t");
-    _builder.append("() {");
+    _builder.append("protected ");
+    String _abstractFileTypeName_2 = this._ideaPluginClassNames.getAbstractFileTypeName(grammar);
+    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_abstractFileTypeName_2);
+    _builder.append(_simpleName_1, "\t");
+    _builder.append("(final Language language) {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
-    _builder.append("super(");
-    String _languageName = this._ideaPluginClassNames.getLanguageName(grammar);
-    String _simpleName_4 = this._ideaPluginClassNames.toSimpleName(_languageName);
-    _builder.append(_simpleName_4, "\t\t");
-    _builder.append(".INSTANCE);");
-    _builder.newLineIfNotEmpty();
+    _builder.append("super(language);");
+    _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
@@ -1975,8 +1812,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("return \"");
-    String _simpleName_5 = this._ideaPluginExtension.getSimpleName(grammar);
-    _builder.append(_simpleName_5, "\t\t");
+    String _simpleName_2 = this._ideaPluginExtension.getSimpleName(grammar);
+    _builder.append(_simpleName_2, "\t\t");
     _builder.append(" files\";");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -1990,7 +1827,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("public Icon getIcon() {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("return null;");
+    _builder.append("return Icons.DSL_FILE_TYPE;");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -2004,9 +1841,61 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("return \"");
-    String _simpleName_6 = this._ideaPluginExtension.getSimpleName(grammar);
-    _builder.append(_simpleName_6, "\t\t");
+    String _simpleName_3 = this._ideaPluginExtension.getSimpleName(grammar);
+    _builder.append(_simpleName_3, "\t\t");
     _builder.append("\";");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence compileFileType(final Grammar grammar) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package ");
+    String _fileTypeName = this._ideaPluginClassNames.getFileTypeName(grammar);
+    String _packageName = this._ideaPluginClassNames.toPackageName(_fileTypeName);
+    _builder.append(_packageName, "");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("class ");
+    String _fileTypeName_1 = this._ideaPluginClassNames.getFileTypeName(grammar);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(_fileTypeName_1);
+    _builder.append(_simpleName, "");
+    _builder.append(" extends ");
+    String _abstractFileTypeName = this._ideaPluginClassNames.getAbstractFileTypeName(grammar);
+    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_abstractFileTypeName);
+    _builder.append(_simpleName_1, "");
+    _builder.append(" {");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public static final ");
+    String _fileTypeName_2 = this._ideaPluginClassNames.getFileTypeName(grammar);
+    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(_fileTypeName_2);
+    _builder.append(_simpleName_2, "\t");
+    _builder.append(" INSTANCE = new ");
+    String _fileTypeName_3 = this._ideaPluginClassNames.getFileTypeName(grammar);
+    String _simpleName_3 = this._ideaPluginClassNames.toSimpleName(_fileTypeName_3);
+    _builder.append(_simpleName_3, "\t");
+    _builder.append("()");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("super(");
+    String _languageName = this._ideaPluginClassNames.getLanguageName(grammar);
+    String _simpleName_4 = this._ideaPluginClassNames.toSimpleName(_languageName);
+    _builder.append(_simpleName_4, "\t\t");
+    _builder.append(".INSTANCE)");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("}");

@@ -20,10 +20,14 @@ import org.eclipse.xtend.core.idea.lang.psi.impl.XtendFileImpl;
 public class XtendIconProvider extends IconProvider {
   @Override
   public Icon getIcon(final PsiElement element, final int flags) {
-    Icon _xifexpression = null;
-    if ((element instanceof XtendFileImpl)) {
-      _xifexpression = XtendIcons.Xtend_FILE_16x16;
+    Icon _switchResult = null;
+    boolean _matched = false;
+    if (!_matched) {
+      if (element instanceof XtendFileImpl) {
+        _matched=true;
+        _switchResult = XtendIcons.Xtend_CLASS;
+      }
     }
-    return _xifexpression;
+    return _switchResult;
   }
 }
