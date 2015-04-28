@@ -20,8 +20,6 @@ import javax.servlet.http.HttpServletResponse
 import org.apache.log4j.Logger
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.resource.IResourceServiceProvider
-import org.eclipse.xtext.service.OperationCanceledError
-import org.eclipse.xtext.web.server.IServiceResult
 import org.eclipse.xtext.web.server.InvalidRequestException
 import org.eclipse.xtext.web.server.XtextServiceDispatcher
 
@@ -46,9 +44,6 @@ class XtextServlet extends HttpServlet {
 				default: 400
 			}
 			resp.sendError(statusCode, ire.message)
-		} catch (OperationCanceledError oce) {
-			LOG.trace('Service canceled (' + req.requestURI + ')')
-			resp.sendError(409, 'The requested service has been canceled by another request.')
 		}
 	}
 	
@@ -83,8 +78,7 @@ class XtextServlet extends HttpServlet {
 	}
 	
 	protected def doService(XtextServiceDispatcher.ServiceDescriptor service, HttpServletResponse resp) {
-		var IServiceResult result
-		result = service.service.apply()
+		val result = service.service.apply()
 		resp.setStatus(HttpServletResponse.SC_OK)
 		resp.setContentType("text/x-json;charset=UTF-8")
 		resp.setHeader("Cache-Control", "no-cache")

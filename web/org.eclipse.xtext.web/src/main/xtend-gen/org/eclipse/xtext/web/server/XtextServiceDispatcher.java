@@ -13,6 +13,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,11 +28,13 @@ import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.web.server.ISessionStore;
 import org.eclipse.xtext.web.server.InvalidRequestException;
+import org.eclipse.xtext.web.server.ServiceConflictResult;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistService;
 import org.eclipse.xtext.web.server.model.UpdateDocumentService;
 import org.eclipse.xtext.web.server.model.XtextWebDocument;
@@ -278,6 +281,7 @@ public class XtextServiceDispatcher {
           final Function0<IServiceResult> _function = new Function0<IServiceResult>() {
             @Override
             public IServiceResult apply() {
+              IServiceResult _xtrycatchfinallyexpression = null;
               try {
                 ResourceContentResult _xifexpression = null;
                 if (revert) {
@@ -285,10 +289,16 @@ public class XtextServiceDispatcher {
                 } else {
                   _xifexpression = XtextServiceDispatcher.this.resourcePersistenceService.load(resourceId, XtextServiceDispatcher.this.resourceHandler, sessionStore);
                 }
-                return _xifexpression;
-              } catch (Throwable _e) {
-                throw Exceptions.sneakyThrow(_e);
+                _xtrycatchfinallyexpression = _xifexpression;
+              } catch (final Throwable _t) {
+                if (_t instanceof Throwable) {
+                  final Throwable throwable = (Throwable)_t;
+                  _xtrycatchfinallyexpression = XtextServiceDispatcher.this.handleError(it, throwable);
+                } else {
+                  throw Exceptions.sneakyThrow(_t);
+                }
               }
+              return _xtrycatchfinallyexpression;
             }
           };
           it.service = _function;
@@ -311,11 +321,18 @@ public class XtextServiceDispatcher {
           final Function0<IServiceResult> _function = new Function0<IServiceResult>() {
             @Override
             public IServiceResult apply() {
+              IServiceResult _xtrycatchfinallyexpression = null;
               try {
-                return XtextServiceDispatcher.this.resourcePersistenceService.save(document, XtextServiceDispatcher.this.resourceHandler);
-              } catch (Throwable _e) {
-                throw Exceptions.sneakyThrow(_e);
+                _xtrycatchfinallyexpression = XtextServiceDispatcher.this.resourcePersistenceService.save(document, XtextServiceDispatcher.this.resourceHandler);
+              } catch (final Throwable _t) {
+                if (_t instanceof Throwable) {
+                  final Throwable throwable = (Throwable)_t;
+                  _xtrycatchfinallyexpression = XtextServiceDispatcher.this.handleError(it, throwable);
+                } else {
+                  throw Exceptions.sneakyThrow(_t);
+                }
               }
+              return _xtrycatchfinallyexpression;
             }
           };
           it.service = _function;
@@ -375,23 +392,30 @@ public class XtextServiceDispatcher {
         throw new InvalidRequestException(InvalidRequestException.Type.INVALID_PARAMETERS, "One of the parameters \'deltaText\' and \'fullText\' must be specified.");
       }
       Optional<Integer> _absent = Optional.<Integer>absent();
-      final Integer deltaOffset = this.getInt(parameters, "deltaOffset", _absent);
-      if (((deltaOffset).intValue() < 0)) {
+      final int deltaOffset = this.getInt(parameters, "deltaOffset", _absent);
+      if ((deltaOffset < 0)) {
         throw new InvalidRequestException(InvalidRequestException.Type.INVALID_PARAMETERS, "The parameter \'deltaOffset\' must not be negative.");
       }
       Optional<Integer> _absent_1 = Optional.<Integer>absent();
-      final Integer deltaReplaceLength = this.getInt(parameters, "deltaReplaceLength", _absent_1);
-      if (((deltaReplaceLength).intValue() < 0)) {
+      final int deltaReplaceLength = this.getInt(parameters, "deltaReplaceLength", _absent_1);
+      if ((deltaReplaceLength < 0)) {
         throw new InvalidRequestException(InvalidRequestException.Type.INVALID_PARAMETERS, "The parameter \'deltaReplaceLength\' must not be negative.");
       }
       final Function0<IServiceResult> _function_2 = new Function0<IServiceResult>() {
         @Override
         public IServiceResult apply() {
+          IServiceResult _xtrycatchfinallyexpression = null;
           try {
-            return XtextServiceDispatcher.this.updateDocumentService.updateDeltaText(document, deltaText, (deltaOffset).intValue(), (deltaReplaceLength).intValue());
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
+            _xtrycatchfinallyexpression = XtextServiceDispatcher.this.updateDocumentService.updateDeltaText(document, deltaText, deltaOffset, deltaReplaceLength);
+          } catch (final Throwable _t) {
+            if (_t instanceof Throwable) {
+              final Throwable throwable = (Throwable)_t;
+              _xtrycatchfinallyexpression = XtextServiceDispatcher.this.handleError(result, throwable);
+            } else {
+              throw Exceptions.sneakyThrow(_t);
+            }
           }
+          return _xtrycatchfinallyexpression;
         }
       };
       result.service = _function_2;
@@ -403,13 +427,20 @@ public class XtextServiceDispatcher {
       final Function0<IServiceResult> _function_3 = new Function0<IServiceResult>() {
         @Override
         public IServiceResult apply() {
+          IServiceResult _xtrycatchfinallyexpression = null;
           try {
             boolean _get = initializedFromFullText[0];
             boolean _not = (!_get);
-            return XtextServiceDispatcher.this.updateDocumentService.updateFullText(document, fullText, _not);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
+            _xtrycatchfinallyexpression = XtextServiceDispatcher.this.updateDocumentService.updateFullText(document, fullText, _not);
+          } catch (final Throwable _t) {
+            if (_t instanceof Throwable) {
+              final Throwable throwable = (Throwable)_t;
+              _xtrycatchfinallyexpression = XtextServiceDispatcher.this.handleError(result, throwable);
+            } else {
+              throw Exceptions.sneakyThrow(_t);
+            }
           }
+          return _xtrycatchfinallyexpression;
         }
       };
       result.service = _function_3;
@@ -421,14 +452,14 @@ public class XtextServiceDispatcher {
     XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
     {
       Optional<Integer> _of = Optional.<Integer>of(Integer.valueOf(0));
-      final Integer offset = this.getInt(parameters, "caretOffset", _of);
+      final int offset = this.getInt(parameters, "caretOffset", _of);
       final XtextWebDocumentAccess document = this.getDocumentAccess(parameters, sessionStore);
-      Optional<Integer> _of_1 = Optional.<Integer>of(offset);
-      final Integer selectionStart = this.getInt(parameters, "selectionStart", _of_1);
-      Optional<Integer> _of_2 = Optional.<Integer>of(selectionStart);
-      final Integer selectionEnd = this.getInt(parameters, "selectionEnd", _of_2);
-      int _max = Math.max(((selectionEnd).intValue() - (selectionStart).intValue()), 0);
-      final TextRegion selection = new TextRegion((selectionStart).intValue(), _max);
+      Optional<Integer> _of_1 = Optional.<Integer>of(Integer.valueOf(offset));
+      final int selectionStart = this.getInt(parameters, "selectionStart", _of_1);
+      Optional<Integer> _of_2 = Optional.<Integer>of(Integer.valueOf(selectionStart));
+      final int selectionEnd = this.getInt(parameters, "selectionEnd", _of_2);
+      int _max = Math.max((selectionEnd - selectionStart), 0);
+      final TextRegion selection = new TextRegion(selectionStart, _max);
       final String deltaText = parameters.get("deltaText");
       XtextServiceDispatcher.ServiceDescriptor _xifexpression = null;
       if ((deltaText == null)) {
@@ -439,11 +470,18 @@ public class XtextServiceDispatcher {
             final Function0<IServiceResult> _function = new Function0<IServiceResult>() {
               @Override
               public IServiceResult apply() {
+                IServiceResult _xtrycatchfinallyexpression = null;
                 try {
-                  return XtextServiceDispatcher.this.contentAssistService.createProposals(document, selection, (offset).intValue());
-                } catch (Throwable _e) {
-                  throw Exceptions.sneakyThrow(_e);
+                  _xtrycatchfinallyexpression = XtextServiceDispatcher.this.contentAssistService.createProposals(document, selection, offset);
+                } catch (final Throwable _t) {
+                  if (_t instanceof Throwable) {
+                    final Throwable throwable = (Throwable)_t;
+                    _xtrycatchfinallyexpression = XtextServiceDispatcher.this.handleError(it, throwable);
+                  } else {
+                    throw Exceptions.sneakyThrow(_t);
+                  }
                 }
+                return _xtrycatchfinallyexpression;
               }
             };
             it.service = _function;
@@ -460,13 +498,13 @@ public class XtextServiceDispatcher {
             throw new InvalidRequestException(InvalidRequestException.Type.INVALID_PARAMETERS, "The parameters \'deltaText\' and \'fullText\' cannot be set in the same request.");
           }
           Optional<Integer> _absent = Optional.<Integer>absent();
-          final Integer deltaOffset = this.getInt(parameters, "deltaOffset", _absent);
-          if (((deltaOffset).intValue() < 0)) {
+          final int deltaOffset = this.getInt(parameters, "deltaOffset", _absent);
+          if ((deltaOffset < 0)) {
             throw new InvalidRequestException(InvalidRequestException.Type.INVALID_PARAMETERS, "The parameter \'deltaOffset\' must not be negative.");
           }
           Optional<Integer> _absent_1 = Optional.<Integer>absent();
-          final Integer deltaReplaceLength = this.getInt(parameters, "deltaReplaceLength", _absent_1);
-          if (((deltaReplaceLength).intValue() < 0)) {
+          final int deltaReplaceLength = this.getInt(parameters, "deltaReplaceLength", _absent_1);
+          if ((deltaReplaceLength < 0)) {
             throw new InvalidRequestException(InvalidRequestException.Type.INVALID_PARAMETERS, "The parameter \'deltaReplaceLength\' must not be negative.");
           }
           XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor_1 = new XtextServiceDispatcher.ServiceDescriptor();
@@ -476,7 +514,18 @@ public class XtextServiceDispatcher {
               final Function0<IServiceResult> _function = new Function0<IServiceResult>() {
                 @Override
                 public IServiceResult apply() {
-                  return XtextServiceDispatcher.this.contentAssistService.createProposalsWithUpdate(document, deltaText, (deltaOffset).intValue(), (deltaReplaceLength).intValue(), selection, (offset).intValue());
+                  IServiceResult _xtrycatchfinallyexpression = null;
+                  try {
+                    _xtrycatchfinallyexpression = XtextServiceDispatcher.this.contentAssistService.createProposalsWithUpdate(document, deltaText, deltaOffset, deltaReplaceLength, selection, offset);
+                  } catch (final Throwable _t) {
+                    if (_t instanceof Throwable) {
+                      final Throwable throwable = (Throwable)_t;
+                      _xtrycatchfinallyexpression = XtextServiceDispatcher.this.handleError(it, throwable);
+                    } else {
+                      throw Exceptions.sneakyThrow(_t);
+                    }
+                  }
+                  return _xtrycatchfinallyexpression;
                 }
               };
               it.service = _function;
@@ -504,11 +553,18 @@ public class XtextServiceDispatcher {
           final Function0<IServiceResult> _function = new Function0<IServiceResult>() {
             @Override
             public IServiceResult apply() {
+              IServiceResult _xtrycatchfinallyexpression = null;
               try {
-                return XtextServiceDispatcher.this.validationService.validate(document);
-              } catch (Throwable _e) {
-                throw Exceptions.sneakyThrow(_e);
+                _xtrycatchfinallyexpression = XtextServiceDispatcher.this.validationService.validate(document);
+              } catch (final Throwable _t) {
+                if (_t instanceof Throwable) {
+                  final Throwable throwable = (Throwable)_t;
+                  _xtrycatchfinallyexpression = XtextServiceDispatcher.this.handleError(it, throwable);
+                } else {
+                  throw Exceptions.sneakyThrow(_t);
+                }
               }
+              return _xtrycatchfinallyexpression;
             }
           };
           it.service = _function;
@@ -602,7 +658,7 @@ public class XtextServiceDispatcher {
     return sessionStore.<XtextWebDocument>get(_mappedTo, _function);
   }
   
-  protected Integer getInt(final Map<String, String> parameters, final String key, final Optional<Integer> defaultValue) throws InvalidRequestException {
+  protected int getInt(final Map<String, String> parameters, final String key, final Optional<Integer> defaultValue) throws InvalidRequestException {
     final String stringValue = parameters.get(key);
     if ((stringValue == null)) {
       boolean _isPresent = defaultValue.isPresent();
@@ -610,10 +666,11 @@ public class XtextServiceDispatcher {
       if (_not) {
         throw new InvalidRequestException(InvalidRequestException.Type.INVALID_PARAMETERS, (("The parameter \'" + key) + "\' must be specified."));
       }
-      return defaultValue.get();
+      Integer _get = defaultValue.get();
+      return _get.intValue();
     }
     try {
-      return Integer.valueOf(Integer.parseInt(stringValue));
+      return Integer.parseInt(stringValue);
     } catch (final Throwable _t) {
       if (_t instanceof NumberFormatException) {
         final NumberFormatException nfe = (NumberFormatException)_t;
@@ -624,7 +681,7 @@ public class XtextServiceDispatcher {
     }
   }
   
-  protected Boolean getBoolean(final Map<String, String> parameters, final String key, final Optional<Boolean> defaultValue) throws InvalidRequestException {
+  protected boolean getBoolean(final Map<String, String> parameters, final String key, final Optional<Boolean> defaultValue) throws InvalidRequestException {
     final String stringValue = parameters.get(key);
     if ((stringValue == null)) {
       boolean _isPresent = defaultValue.isPresent();
@@ -632,22 +689,67 @@ public class XtextServiceDispatcher {
       if (_not) {
         throw new InvalidRequestException(InvalidRequestException.Type.INVALID_PARAMETERS, (("The parameter \'" + key) + "\' must be specified."));
       }
-      return defaultValue.get();
+      Boolean _get = defaultValue.get();
+      return _get.booleanValue();
     }
     String _lowerCase = stringValue.toLowerCase();
     boolean _matched = false;
     if (!_matched) {
       if (Objects.equal(_lowerCase, "true")) {
         _matched=true;
-        return Boolean.valueOf(true);
+        return true;
       }
     }
     if (!_matched) {
       if (Objects.equal(_lowerCase, "false")) {
         _matched=true;
-        return Boolean.valueOf(false);
+        return false;
       }
     }
     throw new InvalidRequestException(InvalidRequestException.Type.INVALID_PARAMETERS, (("The parameter \'" + key) + "\' must contain a Boolean value."));
+  }
+  
+  protected ServiceConflictResult _handleError(final XtextServiceDispatcher.ServiceDescriptor service, final Throwable throwable) {
+    try {
+      throw throwable;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected ServiceConflictResult _handleError(final XtextServiceDispatcher.ServiceDescriptor service, final OperationCanceledError error) {
+    ServiceConflictResult _xblockexpression = null;
+    {
+      XtextServiceDispatcher.LOG.trace((("Service canceled (" + service.type) + ")"));
+      _xblockexpression = new ServiceConflictResult("canceled");
+    }
+    return _xblockexpression;
+  }
+  
+  protected ServiceConflictResult _handleError(final XtextServiceDispatcher.ServiceDescriptor service, final InvalidRequestException exception) {
+    try {
+      InvalidRequestException.Type _type = exception.getType();
+      boolean _equals = Objects.equal(_type, InvalidRequestException.Type.INVALID_DOCUMENT_STATE);
+      if (_equals) {
+        XtextServiceDispatcher.LOG.trace((("Invalid document state (" + service.type) + ")"));
+        return new ServiceConflictResult("invalidStateId");
+      }
+      throw exception;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected ServiceConflictResult handleError(final XtextServiceDispatcher.ServiceDescriptor service, final Throwable error) {
+    if (error instanceof OperationCanceledError) {
+      return _handleError(service, (OperationCanceledError)error);
+    } else if (error instanceof InvalidRequestException) {
+      return _handleError(service, (InvalidRequestException)error);
+    } else if (error != null) {
+      return _handleError(service, error);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(service, error).toString());
+    }
   }
 }

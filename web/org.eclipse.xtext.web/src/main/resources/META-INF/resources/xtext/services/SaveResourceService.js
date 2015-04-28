@@ -32,13 +32,12 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 			type : "POST",
 			data : serverData,
 			success : function(result) {
-				editorContext.markClean(true);
-			},
-			error : function(xhr, textStatus, errorThrown) {
-				if (xhr.status == 409) {
+				if (result.conflict) {
 					// A conflict with another service occured - retry
-					return self.retry(self.saveResource, editorContext, params);
+					self.retry(self.saveResource, editorContext, params);
+					return false;
 				}
+				editorContext.markClean(true);
 			}
 		});
 	};

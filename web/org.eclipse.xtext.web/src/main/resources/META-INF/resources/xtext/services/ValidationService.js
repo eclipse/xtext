@@ -33,6 +33,11 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 			type : httpMethod,
 			data : serverData,
 			success : function(result) {
+				if (result.conflict) {
+					// A conflict with a higher-priority service occured - ignore this, since
+					// validation will be retriggered anyway.
+					return false;
+				}
 				var problems = [];
 				for (var i = 0; i < result.entries.length; i++) {
 					var e = result.entries[i];
@@ -44,13 +49,6 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 					});
 				}
 				editorContext.showMarkers(problems)
-			},
-			error : function(xhr, textStatus, errorThrown) {
-				if (xhr.status == 409) {
-					// A conflict with a higher-priority service occured - ignore this, since
-					// validation will be retriggered anyway.
-					return true;
-				}
 			}
 		});
 	};

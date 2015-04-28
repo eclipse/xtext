@@ -21,7 +21,6 @@ import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.model.DocumentStateResult;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 
 @Singleton
 @SuppressWarnings("all")
@@ -78,19 +77,14 @@ public class UpdateDocumentService {
   }
   
   public void processUpdatedDocument(final IXtextWebDocument it, final CancelIndicator cancelIndicator) {
-    try {
-      boolean _isProcessingCompleted = it.isProcessingCompleted();
-      boolean _not = (!_isProcessingCompleted);
-      if (_not) {
-        Thread.sleep(2000);
-        Collection<Issue> _issues = it.getIssues();
-        XtextResource _resource = it.getResource();
-        List<Issue> _validate = this.resourceValidator.validate(_resource, CheckMode.ALL, cancelIndicator);
-        _issues.addAll(_validate);
-        it.setProcessingCompleted(true);
-      }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+    boolean _isProcessingCompleted = it.isProcessingCompleted();
+    boolean _not = (!_isProcessingCompleted);
+    if (_not) {
+      Collection<Issue> _issues = it.getIssues();
+      XtextResource _resource = it.getResource();
+      List<Issue> _validate = this.resourceValidator.validate(_resource, CheckMode.ALL, cancelIndicator);
+      _issues.addAll(_validate);
+      it.setProcessingCompleted(true);
     }
   }
 }

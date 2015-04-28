@@ -22,6 +22,7 @@ import org.eclipse.xtext.resource.FileExtensionProvider
 import org.eclipse.xtext.resource.IResourceFactory
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.service.OperationCanceledError
 import org.eclipse.xtext.util.StringInputStream
 import org.eclipse.xtext.util.TextRegion
 import org.eclipse.xtext.web.server.contentassist.ContentAssistService
@@ -108,10 +109,14 @@ class XtextServiceDispatcher {
 			throw new InvalidRequestException(INVALID_PARAMETERS, 'The parameter \'resource\' is required.')
 		new ServiceDescriptor => [
 			service = [
-				if (revert)
-					resourcePersistenceService.revert(resourceId, resourceHandler, sessionStore)
-				else
-					resourcePersistenceService.load(resourceId, resourceHandler, sessionStore)
+				try {
+					if (revert)
+						resourcePersistenceService.revert(resourceId, resourceHandler, sessionStore)
+					else
+						resourcePersistenceService.load(resourceId, resourceHandler, sessionStore)
+				} catch (Throwable throwable) {
+					handleError(throwable)
+				}
 			]
 			hasSideEffects = revert
 		]
@@ -122,7 +127,11 @@ class XtextServiceDispatcher {
 		val document = getDocumentAccess(parameters, sessionStore)
 		new ServiceDescriptor => [
 			service = [
-				resourcePersistenceService.save(document, resourceHandler)
+				try {
+					resourcePersistenceService.save(document, resourceHandler)
+				} catch (Throwable throwable) {
+					handleError(throwable)
+				}
 			]
 			hasSideEffects = true
 			hasTextInput = parameters.containsKey('fullText')
@@ -159,14 +168,22 @@ class XtextServiceDispatcher {
 			if (deltaReplaceLength < 0)
 				throw new InvalidRequestException(INVALID_PARAMETERS, 'The parameter \'deltaReplaceLength\' must not be negative.')
 			result.service = [
-				updateDocumentService.updateDeltaText(document, deltaText, deltaOffset, deltaReplaceLength)
+				try {
+					updateDocumentService.updateDeltaText(document, deltaText, deltaOffset, deltaReplaceLength)
+				} catch (Throwable throwable) {
+					handleError(result, throwable)
+				}
 			]
 		} else {
 			if (parameters.containsKey('deltaText'))
 				throw new InvalidRequestException(INVALID_PARAMETERS, 'The parameters \'deltaText\' and \'fullText\' cannot be set in the same request.')
 			result.service = [
-				// If the document has already been initialized with the given text, we don't need to reparse
-				updateDocumentService.updateFullText(document, fullText, !initializedFromFullText.get(0))
+				try {
+					// If the document has already been initialized with the given text, we don't need to reparse
+					updateDocumentService.updateFullText(document, fullText, !initializedFromFullText.get(0))
+				} catch (Throwable throwable) {
+					handleError(result, throwable)
+				}
 			]
 		}
 		return result
@@ -183,7 +200,11 @@ class XtextServiceDispatcher {
 		if (deltaText === null) {
 			new ServiceDescriptor => [
 				service = [
-					contentAssistService.createProposals(document, selection, offset)
+					try {
+						contentAssistService.createProposals(document, selection, offset)
+					} catch (Throwable throwable) {
+						handleError(throwable)
+					}
 				]
 				hasTextInput = parameters.containsKey('fullText')
 			]
@@ -198,7 +219,12 @@ class XtextServiceDispatcher {
 				throw new InvalidRequestException(INVALID_PARAMETERS, 'The parameter \'deltaReplaceLength\' must not be negative.')
 			new ServiceDescriptor => [
 				service = [
-					contentAssistService.createProposalsWithUpdate(document, deltaText, deltaOffset, deltaReplaceLength, selection, offset)
+					try {
+						contentAssistService.createProposalsWithUpdate(document, deltaText, deltaOffset,
+								deltaReplaceLength, selection, offset)
+					} catch (Throwable throwable) {
+						handleError(throwable)
+					}
 				]
 				hasSideEffects = true
 				hasTextInput = true
@@ -211,7 +237,11 @@ class XtextServiceDispatcher {
 		val document = getDocumentAccess(parameters, sessionStore)
 		new ServiceDescriptor => [
 			service = [
-				validationService.validate(document)
+				try {
+					validationService.validate(document)
+				} catch (Throwable throwable) {
+					handleError(throwable)
+				}
 			]
 			hasTextInput = parameters.containsKey('fullText')
 		]
@@ -263,7 +293,7 @@ class XtextServiceDispatcher {
 			if (!defaultValue.present) {
 				throw new InvalidRequestException(INVALID_PARAMETERS, 'The parameter \'' + key + '\' must be specified.')
 			}
-			return defaultValue.get
+			return defaultValue.get.intValue
 		}
 		try {
 			return Integer.parseInt(stringValue)
@@ -279,7 +309,7 @@ class XtextServiceDispatcher {
 			if (!defaultValue.present) {
 				throw new InvalidRequestException(INVALID_PARAMETERS, 'The parameter \'' + key + '\' must be specified.')
 			}
-			return defaultValue.get
+			return defaultValue.get.booleanValue
 		}
 		switch stringValue.toLowerCase {
 			case 'true': return true
@@ -287,6 +317,25 @@ class XtextServiceDispatcher {
 			default:
 				throw new InvalidRequestException(INVALID_PARAMETERS, 'The parameter \'' + key + '\' must contain a Boolean value.')
 		}
+	}
+	
+	protected def dispatch handleError(ServiceDescriptor service, Throwable throwable) {
+		// The caller is responsible for sending an 'Internal Server Error' message to the client
+		throw throwable
+	}
+	
+	protected def dispatch handleError(ServiceDescriptor service, OperationCanceledError error) {
+		LOG.trace('Service canceled (' + service.type + ')')
+		new ServiceConflictResult('canceled')
+	}
+	
+	protected def dispatch handleError(ServiceDescriptor service, InvalidRequestException exception) {
+		if (exception.type == INVALID_DOCUMENT_STATE) {
+			LOG.trace('Invalid document state (' + service.type + ')')
+			return new ServiceConflictResult('invalidStateId')
+		}
+		// The caller is responsible for translating this exception into a proper error message
+		throw exception
 	}
 	
 }
