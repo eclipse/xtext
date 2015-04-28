@@ -28,7 +28,7 @@ import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.service.OperationCanceledError;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.web.server.IServiceResult;
@@ -143,6 +143,9 @@ public class XtextServiceDispatcher {
   
   @Inject
   private IResourceFactory resourceFactory;
+  
+  @Inject
+  private OperationCanceledManager operationCanceledManager;
   
   public XtextServiceDispatcher.ServiceDescriptor getService(final String path, final Map<String, String> parameters, final ISessionStore sessionStore) throws InvalidRequestException {
     XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
@@ -711,19 +714,15 @@ public class XtextServiceDispatcher {
   
   protected ServiceConflictResult _handleError(final XtextServiceDispatcher.ServiceDescriptor service, final Throwable throwable) {
     try {
+      boolean _isOperationCanceledException = this.operationCanceledManager.isOperationCanceledException(throwable);
+      if (_isOperationCanceledException) {
+        XtextServiceDispatcher.LOG.trace((("Service canceled (" + service.type) + ")"));
+        return new ServiceConflictResult("canceled");
+      }
       throw throwable;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
-  }
-  
-  protected ServiceConflictResult _handleError(final XtextServiceDispatcher.ServiceDescriptor service, final OperationCanceledError error) {
-    ServiceConflictResult _xblockexpression = null;
-    {
-      XtextServiceDispatcher.LOG.trace((("Service canceled (" + service.type) + ")"));
-      _xblockexpression = new ServiceConflictResult("canceled");
-    }
-    return _xblockexpression;
   }
   
   protected ServiceConflictResult _handleError(final XtextServiceDispatcher.ServiceDescriptor service, final InvalidRequestException exception) {
@@ -740,16 +739,14 @@ public class XtextServiceDispatcher {
     }
   }
   
-  protected ServiceConflictResult handleError(final XtextServiceDispatcher.ServiceDescriptor service, final Throwable error) {
-    if (error instanceof OperationCanceledError) {
-      return _handleError(service, (OperationCanceledError)error);
-    } else if (error instanceof InvalidRequestException) {
-      return _handleError(service, (InvalidRequestException)error);
-    } else if (error != null) {
-      return _handleError(service, error);
+  protected ServiceConflictResult handleError(final XtextServiceDispatcher.ServiceDescriptor service, final Throwable exception) {
+    if (exception instanceof InvalidRequestException) {
+      return _handleError(service, (InvalidRequestException)exception);
+    } else if (exception != null) {
+      return _handleError(service, exception);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(service, error).toString());
+        Arrays.<Object>asList(service, exception).toString());
     }
   }
 }

@@ -91,8 +91,14 @@ public class XtextWebDocumentAccess {
 						public void run() {
 							try {
 								asynchronousWork.exec(asyncAccess);
-							} catch (Exception exception) {
-								LOG.error("Error during asynchronous service processing.", exception);
+							} catch (VirtualMachineError exception) {
+								throw exception;
+							} catch (Throwable exception) {
+								if (!synchronizer.getOperationCanceledManager().isOperationCanceledException(exception)) {
+									LOG.error("Error during asynchronous service processing.", exception);
+								} else {
+									LOG.trace("Canceling background process.");
+								}
 							} finally {
 								synchronizer.releaseLock();
 							}

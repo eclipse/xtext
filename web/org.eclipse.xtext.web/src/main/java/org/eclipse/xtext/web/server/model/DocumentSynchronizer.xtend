@@ -21,6 +21,7 @@ package class DocumentSynchronizer implements CancelIndicator {
 	
     val waitingPriorityJobs = new AtomicInteger
 
+	@Accessors(PUBLIC_GETTER)
     @Inject OperationCanceledManager operationCanceledManager
     
     @Accessors(PUBLIC_GETTER)

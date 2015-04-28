@@ -24,6 +24,7 @@ class DocumentSynchronizer implements CancelIndicator {
   
   private final AtomicInteger waitingPriorityJobs = new AtomicInteger();
   
+  @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
   private OperationCanceledManager operationCanceledManager;
   
@@ -70,6 +71,11 @@ class DocumentSynchronizer implements CancelIndicator {
       throw new IllegalStateException("Cannot release a lock without acquiring it first.");
     }
     this.semaphore.release();
+  }
+  
+  @Pure
+  public OperationCanceledManager getOperationCanceledManager() {
+    return this.operationCanceledManager;
   }
   
   @Pure
