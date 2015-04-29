@@ -45,6 +45,18 @@ class Protocol {
 		String file
 		List<String> sourceFiles = newArrayList
 	}
+
+	@Accessors
+	@EqualsAndHashCode
+	static class JavaDependencyRequest implements Serializable {
+		List<String> javaFiles
+	}
+	
+	@Accessors
+	@EqualsAndHashCode
+	static class JavaDependencyResult implements Serializable {
+		List<String> dependentJavaFiles
+	}
 	
 	@Accessors
 	@EqualsHashCode

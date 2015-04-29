@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.build.daemon
 
-import org.eclipse.xtend.lib.annotations.Accessors
+import com.google.inject.Inject
 import org.eclipse.xtext.builder.standalone.IIssueHandler
 import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.idea.build.net.Protocol.BuildIssueMessage
@@ -19,12 +19,12 @@ import org.jetbrains.jps.incremental.messages.BuildMessage.Kind
  */
 class IdeaIssueHandler implements IIssueHandler {
 	
-	@Accessors XtextBuildResultCollector buildResultCollector
+	@Inject extension IBuildSessionSingletons 
 	
 	override handleIssue(Iterable<Issue> issues) {
 		var errorFree = true
 		for(issue: issues.filter[severity != Severity.IGNORE]) {
-			buildResultCollector.addIssue(new BuildIssueMessage() => [
+			objectChannel.writeObject(new BuildIssueMessage() => [
 				kind = issue.kind
 				message = issue.message
 				uriToProblem = issue.uriToProblem.toString

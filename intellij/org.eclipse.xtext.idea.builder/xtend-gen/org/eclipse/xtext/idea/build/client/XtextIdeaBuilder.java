@@ -24,6 +24,7 @@ import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.ISetupExtension;
 import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
 import org.eclipse.xtext.idea.build.client.DaemonConnector;
+import org.eclipse.xtext.idea.build.client.IdeaJavaDependencyFinder;
 import org.eclipse.xtext.idea.build.net.ObjectChannel;
 import org.eclipse.xtext.idea.build.net.Protocol;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -117,6 +118,13 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
               String _message = ((Protocol.BuildFailureMessage)message).getMessage();
               this.reportError(_message, context);
               result = ModuleLevelBuilder.ExitCode.ABORT;
+            }
+          }
+          if (!_matched) {
+            if (message instanceof Protocol.JavaDependencyRequest) {
+              _matched=true;
+              Protocol.JavaDependencyResult _handleJavaDependencyRequest = this.handleJavaDependencyRequest(((Protocol.JavaDependencyRequest)message), context);
+              channel.writeObject(_handleJavaDependencyRequest);
             }
           }
         }
@@ -245,6 +253,39 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
     return _xblockexpression;
   }
   
+  private Protocol.JavaDependencyResult handleJavaDependencyRequest(final Protocol.JavaDependencyRequest request, final CompileContext context) {
+    Protocol.JavaDependencyResult _xblockexpression = null;
+    {
+      final IdeaJavaDependencyFinder dependencyFinder = new IdeaJavaDependencyFinder(context);
+      List<String> _javaFiles = request.getJavaFiles();
+      final Function1<String, URI> _function = new Function1<String, URI>() {
+        @Override
+        public URI apply(final String it) {
+          return FilesAndURIs.asURI(it);
+        }
+      };
+      List<URI> _map = ListExtensions.<String, URI>map(_javaFiles, _function);
+      final Iterable<URI> dependentJavaFiles = dependencyFinder.getDependentJavaFiles(_map);
+      Protocol.JavaDependencyResult _javaDependencyResult = new Protocol.JavaDependencyResult();
+      final Procedure1<Protocol.JavaDependencyResult> _function_1 = new Procedure1<Protocol.JavaDependencyResult>() {
+        @Override
+        public void apply(final Protocol.JavaDependencyResult it) {
+          List<String> _dependentJavaFiles = it.getDependentJavaFiles();
+          final Function1<URI, String> _function = new Function1<URI, String>() {
+            @Override
+            public String apply(final URI it) {
+              return it.toString();
+            }
+          };
+          Iterable<String> _map = IterableExtensions.<URI, String>map(dependentJavaFiles, _function);
+          Iterables.<String>addAll(_dependentJavaFiles, _map);
+        }
+      };
+      _xblockexpression = ObjectExtensions.<Protocol.JavaDependencyResult>operator_doubleArrow(_javaDependencyResult, _function_1);
+    }
+    return _xblockexpression;
+  }
+  
   private void handleBuildResult(final Protocol.BuildResultMessage result, final CompileContext context, final ModuleChunk chunk, final ModuleLevelBuilder.OutputConsumer outputConsumer) {
     final ModuleBuildTarget target = chunk.representativeTarget();
     final JpsModule module = target.getModule();
@@ -252,7 +293,8 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
     final Procedure1<String> _function = new Procedure1<String>() {
       @Override
       public void apply(final String it) {
-        XtextIdeaBuilder.this.createSourceRoot(it, module);
+        URI _asURI = FilesAndURIs.asURI(it);
+        XtextIdeaBuilder.this.createSourceRoot(_asURI, module);
       }
     };
     IterableExtensions.<String>forEach(_outputDirs, _function);
@@ -331,11 +373,10 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
     });
   }
   
-  protected JpsModuleSourceRoot createSourceRoot(final String outputDir, final JpsModule module) {
+  protected JpsModuleSourceRoot createSourceRoot(final URI outputDir, final JpsModule module) {
     JpsModuleSourceRoot _xblockexpression = null;
     {
-      URI _asFileURI = FilesAndURIs.asFileURI(outputDir);
-      final String outletUrl = _asFileURI.toString();
+      final String outletUrl = outputDir.toString();
       JpsModuleSourceRoot _xifexpression = null;
       Iterable<JpsTypedModuleSourceRoot<JavaSourceRootProperties>> _sourceRoots = module.<JavaSourceRootProperties>getSourceRoots(JavaSourceRootType.SOURCE);
       final Function1<JpsTypedModuleSourceRoot<JavaSourceRootProperties>, Boolean> _function = new Function1<JpsTypedModuleSourceRoot<JavaSourceRootProperties>, Boolean>() {

@@ -24,9 +24,11 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.incremental.BuildContext;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
+import org.eclipse.xtext.builder.standalone.incremental.IJavaDependencyFinder;
 import org.eclipse.xtext.builder.standalone.incremental.JavaSupport;
 import org.eclipse.xtext.builder.standalone.incremental.ResolvedResourceDescription;
 import org.eclipse.xtext.builder.standalone.incremental.ResourceURICollector;
+import org.eclipse.xtext.builder.standalone.incremental.Source2GeneratedMapping;
 import org.eclipse.xtext.mwe.ResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -60,6 +62,12 @@ public class Indexer {
   
   @Inject
   private ResourceDescriptionsProvider resourceDescriptionsProvider;
+  
+  @Inject
+  private IJavaDependencyFinder javaDependencyFinder;
+  
+  @Inject
+  private Source2GeneratedMapping source2GeneratedMapping;
   
   private ResourceDescriptionsData index;
   
@@ -216,6 +224,8 @@ public class Indexer {
         context.<Object>executeClustered(toBeIndexed, _function_6);
         toBeIndexed.clear();
         Iterables.<IResourceDescription.Delta>addAll(allDeltas, currentDeltas);
+        if (isConsiderJava) {
+        }
         final Function1<URI, Boolean> _function_7 = new Function1<URI, Boolean>() {
           @Override
           public Boolean apply(final URI it) {

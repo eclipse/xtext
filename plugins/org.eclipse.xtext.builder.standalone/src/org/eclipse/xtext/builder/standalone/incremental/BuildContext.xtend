@@ -28,9 +28,9 @@ class BuildContext {
 	
 	IResourceClusteringPolicy clusteringPolicy
 	
-	transient ClusteringStorageAwareResourceLoader loader
-	
 	File tempDir
+	
+	transient ClusteringStorageAwareResourceLoader loader
 	
 	def <T> executeClustered(Iterable<URI> uri, (Resource)=>T operation) {
 		if(loader == null) 

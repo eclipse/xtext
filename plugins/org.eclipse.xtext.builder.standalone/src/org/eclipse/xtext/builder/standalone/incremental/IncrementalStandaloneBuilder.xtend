@@ -10,20 +10,23 @@ package org.eclipse.xtext.builder.standalone.incremental
 import com.google.inject.Inject
 import com.google.inject.Provider
 import java.io.File
+import java.util.List
 import java.util.Map
 import org.apache.log4j.Logger
+import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.builder.standalone.ClusteringConfig
 import org.eclipse.xtext.builder.standalone.IIssueHandler
 import org.eclipse.xtext.builder.standalone.LanguageAccess
-import org.eclipse.xtext.generator.IFileSystemAccess
+import org.eclipse.xtext.builder.standalone.incremental.TrackingFileSystemAccess.Listener
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.clustering.DisabledClusteringPolicy
 import org.eclipse.xtext.resource.clustering.DynamicResourceClusteringPolicy
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.Files
@@ -32,7 +35,6 @@ import org.eclipse.xtext.validation.CheckMode
 import static org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder.*
 
 import static extension org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs.*
-import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -49,12 +51,20 @@ class IncrementalStandaloneBuilder {
 
 	@Inject Indexer indexer
 	@Inject IIssueHandler issueHandler
+	@Inject Source2GeneratedMapping source2GeneratedMapping
+
+	URI currentResourceURI
 
 	protected new() {
 	}
 
 	def launch() {
 		initialize
+		request.deletedFiles.forEach [
+			source2GeneratedMapping.getGenerated(it).forEach [
+				asFile.delete
+			]
+		]
 		val affectedResources = indexer.computeAndIndexAffected(request, context)
 		val isErrorFree = affectedResources
 			.executeClustered [
@@ -119,11 +129,8 @@ class IncrementalStandaloneBuilder {
 				}
 			}
 		}
-		beforeGenerate(resource, fileSystemAccess)
+		currentResourceURI = resource.URI
 		access.generator.doGenerate(resource, fileSystemAccess)
-	}
-
-	def protected void beforeGenerate(Resource resource, IFileSystemAccess fileSystemAccess) {
 	}
 
 	Map<LanguageAccess, JavaIoFileSystemAccess> configuredFsas = newHashMap()
@@ -139,9 +146,48 @@ class IncrementalStandaloneBuilder {
 	}
 
 	protected def configureFileSystemAccess(JavaIoFileSystemAccess fsa, LanguageAccess language) {
-		fsa
+		new TrackingFileSystemAccess(fsa) => [
+			addListener(new Listener() {
+				override fileAdded(String outputDir, String fileName) {
+					val uri = getURI(outputDir, fileName)
+					source2GeneratedMapping.addSource2Generated(currentResourceURI, uri)
+					listeners.forEach[
+						outputFolderUsed(outputDir.asFileURI)
+						fileGenerated(currentResourceURI, uri)
+					]
+				}
+				
+				override fileDeleted(String outputDir, String fileName) {
+					val uri = getURI(outputDir, fileName)
+					source2GeneratedMapping.deleteGenerated(uri)
+					listeners.forEach[
+						fileDeleted(uri)
+					]
+				}
+
+				private def getURI(String outputDir, String fileName) {
+					asFileURI(outputDir + File.separator + fileName)
+				}
+			})
+		]
+	}
+	
+	static interface FileListener {
+		def void fileGenerated(URI source, URI target)
+		def void outputFolderUsed(URI outputFolder)
+		def void fileDeleted(URI file)
 	}
 
+	List<FileListener> listeners = newArrayList
+
+	def addListener(FileListener listener) {
+		listeners.add(listener)
+	}
+
+	def removeListener(FileListener listener) {
+		listeners.remove(listener)
+	}
+	
 	static class Factory {
 
 		@Inject Provider<IncrementalStandaloneBuilder> provider

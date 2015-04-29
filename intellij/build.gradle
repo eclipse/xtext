@@ -33,7 +33,6 @@ configure(subprojects - eclipsePluginProjects) {
 	configurations.compile {
 		exclude module:'cglib'
 		exclude module:'icu4j'
-		exclude group:'org.ow2.asm'
 		exclude module:'org.eclipse.jdt.core'
 	}
 

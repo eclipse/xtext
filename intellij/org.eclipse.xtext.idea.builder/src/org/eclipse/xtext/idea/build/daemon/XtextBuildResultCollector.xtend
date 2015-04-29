@@ -7,50 +7,47 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.build.daemon
 
-import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.idea.build.net.ObjectChannel
-import org.eclipse.xtext.idea.build.net.Protocol.BuildIssueMessage
-import org.eclipse.xtext.idea.build.net.Protocol.BuildResultMessage
+import com.google.common.collect.HashMultimap
+import com.google.common.collect.Multimap
+import java.util.Set
 import org.eclipse.emf.common.util.URI
-import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder.FileListener
+import org.eclipse.xtext.idea.build.net.Protocol.BuildResultMessage
 import org.eclipse.xtext.idea.build.net.Protocol.GeneratedFile
-import static extension org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs.*
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-class XtextBuildResultCollector {
+class XtextBuildResultCollector implements FileListener {
 	
-	@Accessors(PUBLIC_GETTER)
-	BuildResultMessage buildResult = new BuildResultMessage
-	
-	@Accessors
-	ObjectChannel output
-	
-	URI currentSourceURI
-	
-	def setCurrentResource(Resource resource) {
-		this.currentSourceURI = resource.URI	
-	}
-		
-	def addIssue(BuildIssueMessage issue) {
-		output.writeObject(issue)
-	}
-	
-	def addChangedFile(String path) {
-		buildResult.generatedFiles += new GeneratedFile => [
-			sourceFiles += currentSourceURI.toString
-			file = path.asFileURI.toString
-		]
-	} 
-	
-	def addOutputDir(String outputDir) {
-		if(!buildResult.outputDirs.contains(outputDir)) {
-			buildResult.outputDirs.add(outputDir)
-		} 
-	}
+	Multimap<URI, URI> generatedFile2sourceURI = HashMultimap.create 
 
-	def addDeletedFile(String path) {
-		buildResult.deletedFiles += path
+	Set<URI> outputDirs = newHashSet
+	
+	Set<URI> deletedFiles = newHashSet
+	
+	def getBuildResult() {
+		new BuildResultMessage => [
+			it.deletedFiles += deletedFiles.toString
+			it.outputDirs += outputDirs.toString
+			it.generatedFiles += generatedFile2sourceURI.keySet.map[ generated |
+				new GeneratedFile => [
+					file = generated.toString
+					sourceFiles += generatedFile2sourceURI.get(generated).map[toString]
+				]
+			]						
+		]
+	}
+	
+	override outputFolderUsed(URI outputFolder) {
+		outputDirs += outputFolder
+	}
+	
+	override fileGenerated(URI source, URI target) {
+		generatedFile2sourceURI.put(target, source)
+	}
+	
+	override fileDeleted(URI file) {
+		deletedFiles.add(file)
 	}
 }

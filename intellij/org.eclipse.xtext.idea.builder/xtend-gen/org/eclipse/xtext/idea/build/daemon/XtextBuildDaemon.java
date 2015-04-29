@@ -30,22 +30,17 @@ import org.apache.log4j.FileAppender;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.TTCCLayout;
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
-import org.eclipse.xtext.builder.standalone.incremental.BuildContext;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder;
 import org.eclipse.xtext.idea.build.daemon.BuildDaemonModule;
-import org.eclipse.xtext.idea.build.daemon.IdeaBuilderResourceDescriptionsProvider;
-import org.eclipse.xtext.idea.build.daemon.IdeaStandaloneBuilder;
+import org.eclipse.xtext.idea.build.daemon.IBuildSessionSingletons;
 import org.eclipse.xtext.idea.build.daemon.XtextBuildResultCollector;
 import org.eclipse.xtext.idea.build.daemon.XtextLanguages;
 import org.eclipse.xtext.idea.build.net.ObjectChannel;
 import org.eclipse.xtext.idea.build.net.Protocol;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -151,7 +146,10 @@ public class XtextBuildDaemon {
     private IncrementalStandaloneBuilder.Factory builderFactory;
     
     @Inject
-    private XtextBuildResultCollector resultCollector;
+    private IBuildSessionSingletons.Impl singletons;
+    
+    @Inject
+    private XtextBuildResultCollector xtextBuildResultCollector;
     
     private ObjectChannel channel;
     
@@ -196,9 +194,18 @@ public class XtextBuildDaemon {
     public Protocol.BuildResultMessage build(final Protocol.BuildRequestMessage request) {
       Protocol.BuildResultMessage _xblockexpression = null;
       {
-        this.resultCollector.setOutput(this.channel);
+        final Procedure1<IBuildSessionSingletons.Impl> _function = new Procedure1<IBuildSessionSingletons.Impl>() {
+          @Override
+          public void apply(final IBuildSessionSingletons.Impl it) {
+            it.setObjectChannel(Worker.this.channel);
+            String _baseDir = request.getBaseDir();
+            it.setModuleBaseURL(_baseDir);
+          }
+        };
+        ObjectExtensions.<IBuildSessionSingletons.Impl>operator_doubleArrow(
+          this.singletons, _function);
         BuildRequest _buildRequest = new BuildRequest();
-        final Procedure1<BuildRequest> _function = new Procedure1<BuildRequest>() {
+        final Procedure1<BuildRequest> _function_1 = new Procedure1<BuildRequest>() {
           @Override
           public void apply(final BuildRequest it) {
             String _baseDir = request.getBaseDir();
@@ -254,25 +261,18 @@ public class XtextBuildDaemon {
             it.setFailOnValidationError(false);
           }
         };
-        final BuildRequest buildRequest = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function);
+        final BuildRequest buildRequest = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_1);
         Map<String, LanguageAccess> _languageAccesses = XtextLanguages.getLanguageAccesses();
         IncrementalStandaloneBuilder _create = this.builderFactory.create(buildRequest, _languageAccesses);
-        final IdeaStandaloneBuilder builder = ((IdeaStandaloneBuilder) _create);
-        final Procedure1<IdeaStandaloneBuilder> _function_1 = new Procedure1<IdeaStandaloneBuilder>() {
+        final Procedure1<IncrementalStandaloneBuilder> _function_2 = new Procedure1<IncrementalStandaloneBuilder>() {
           @Override
-          public void apply(final IdeaStandaloneBuilder it) {
-            BuildContext _context = it.getContext();
-            XtextResourceSet _resourceSet = _context.getResourceSet();
-            EList<Adapter> _eAdapters = _resourceSet.eAdapters();
-            String _baseDir = request.getBaseDir();
-            IdeaBuilderResourceDescriptionsProvider.ModuleAdapter _moduleAdapter = new IdeaBuilderResourceDescriptionsProvider.ModuleAdapter(_baseDir);
-            _eAdapters.add(_moduleAdapter);
-            it.setBuildResultCollector(Worker.this.resultCollector);
+          public void apply(final IncrementalStandaloneBuilder it) {
+            it.addListener(Worker.this.xtextBuildResultCollector);
             it.launch();
           }
         };
-        ObjectExtensions.<IdeaStandaloneBuilder>operator_doubleArrow(builder, _function_1);
-        _xblockexpression = this.resultCollector.getBuildResult();
+        ObjectExtensions.<IncrementalStandaloneBuilder>operator_doubleArrow(_create, _function_2);
+        _xblockexpression = this.xtextBuildResultCollector.getBuildResult();
       }
       return _xblockexpression;
     }

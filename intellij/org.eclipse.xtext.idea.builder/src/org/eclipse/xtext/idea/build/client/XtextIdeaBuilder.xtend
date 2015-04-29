@@ -12,6 +12,7 @@ import java.io.File
 import java.io.IOException
 import java.nio.channels.SocketChannel
 import org.apache.log4j.Logger
+import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.ISetup
 import org.eclipse.xtext.ISetupExtension
 import org.eclipse.xtext.idea.build.net.ObjectChannel
@@ -19,6 +20,8 @@ import org.eclipse.xtext.idea.build.net.Protocol.BuildFailureMessage
 import org.eclipse.xtext.idea.build.net.Protocol.BuildIssueMessage
 import org.eclipse.xtext.idea.build.net.Protocol.BuildRequestMessage
 import org.eclipse.xtext.idea.build.net.Protocol.BuildResultMessage
+import org.eclipse.xtext.idea.build.net.Protocol.JavaDependencyRequest
+import org.eclipse.xtext.idea.build.net.Protocol.JavaDependencyResult
 import org.jetbrains.jps.ModuleChunk
 import org.jetbrains.jps.ProjectPaths
 import org.jetbrains.jps.builders.DirtyFilesHolder
@@ -27,7 +30,6 @@ import org.jetbrains.jps.incremental.CompileContext
 import org.jetbrains.jps.incremental.FSOperations
 import org.jetbrains.jps.incremental.ModuleBuildTarget
 import org.jetbrains.jps.incremental.ModuleLevelBuilder
-import org.jetbrains.jps.incremental.ModuleLevelBuilder.OutputConsumer
 import org.jetbrains.jps.incremental.ProjectBuildException
 import org.jetbrains.jps.incremental.fs.CompilationRound
 import org.jetbrains.jps.incremental.messages.BuildMessage
@@ -81,6 +83,9 @@ class XtextIdeaBuilder extends ModuleLevelBuilder {
 						reportError(message.message, context)
 						result = ABORT						
 					}
+					JavaDependencyRequest: {
+						channel.writeObject(message.handleJavaDependencyRequest(context))
+					}
 				}
 			}
 		} catch (Exception exc) {
@@ -92,7 +97,7 @@ class XtextIdeaBuilder extends ModuleLevelBuilder {
 		}
 		return result
 	}
-
+	
 	private def createBuildRequest(ModuleChunk chunk, CompileContext context,
 		DirtyFilesHolder<JavaSourceRootDescriptor, ModuleBuildTarget> dirtyFilesHolder) {
 		val buildRequest = new BuildRequestMessage() => [
@@ -111,12 +116,20 @@ class XtextIdeaBuilder extends ModuleLevelBuilder {
 		buildRequest
 	}
 	
+	private def handleJavaDependencyRequest(JavaDependencyRequest request, CompileContext context) {
+		val dependencyFinder = new IdeaJavaDependencyFinder(context)
+		val dependentJavaFiles = dependencyFinder.getDependentJavaFiles(request.javaFiles.map[asURI])
+		new JavaDependencyResult => [
+			it.dependentJavaFiles += dependentJavaFiles.map[toString]
+		]
+	}
+
 	private def handleBuildResult(BuildResultMessage result, CompileContext context, ModuleChunk chunk,
 		OutputConsumer outputConsumer) {
 		val target = chunk.representativeTarget
 		val module = target.module
 		result.outputDirs.forEach [
-			createSourceRoot(module)
+			asURI.createSourceRoot(module)
 		]
 		result.generatedFiles.forEach [
 			val outputFile = file.asURI.asFile
@@ -150,8 +163,8 @@ class XtextIdeaBuilder extends ModuleLevelBuilder {
 		context.processMessage(new BuildMessage(message, BuildMessage.Kind.ERROR) {})
 	}
 
-	protected def createSourceRoot(String outputDir, JpsModule module) {
-		val outletUrl = outputDir.asFileURI.toString
+	protected def createSourceRoot(URI outputDir, JpsModule module) {
+		val outletUrl = outputDir.toString
 		if (!module.getSourceRoots(JavaSourceRootType.SOURCE).exists[url == outletUrl])
 			module.addSourceRoot(outletUrl, JavaSourceRootType.SOURCE)
 	}

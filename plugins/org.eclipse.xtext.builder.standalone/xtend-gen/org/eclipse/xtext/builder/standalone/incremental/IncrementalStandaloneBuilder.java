@@ -27,7 +27,8 @@ import org.eclipse.xtext.builder.standalone.incremental.BuildContext;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
 import org.eclipse.xtext.builder.standalone.incremental.Indexer;
-import org.eclipse.xtext.generator.IFileSystemAccess;
+import org.eclipse.xtext.builder.standalone.incremental.Source2GeneratedMapping;
+import org.eclipse.xtext.builder.standalone.incremental.TrackingFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.parser.IEncodingProvider;
@@ -60,6 +61,14 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Accessors(AccessorType.PROTECTED_GETTER)
 @SuppressWarnings("all")
 public class IncrementalStandaloneBuilder {
+  public interface FileListener {
+    public abstract void fileGenerated(final URI source, final URI target);
+    
+    public abstract void outputFolderUsed(final URI outputFolder);
+    
+    public abstract void fileDeleted(final URI file);
+  }
+  
   public static class Factory {
     @Inject
     private Provider<IncrementalStandaloneBuilder> provider;
@@ -133,13 +142,34 @@ public class IncrementalStandaloneBuilder {
   @Inject
   private IIssueHandler issueHandler;
   
+  @Inject
+  private Source2GeneratedMapping source2GeneratedMapping;
+  
+  private URI currentResourceURI;
+  
   protected IncrementalStandaloneBuilder() {
   }
   
   public Boolean launch() {
     this.initialize();
+    List<URI> _deletedFiles = this.request.getDeletedFiles();
+    final Procedure1<URI> _function = new Procedure1<URI>() {
+      @Override
+      public void apply(final URI it) {
+        Iterable<URI> _generated = IncrementalStandaloneBuilder.this.source2GeneratedMapping.getGenerated(it);
+        final Procedure1<URI> _function = new Procedure1<URI>() {
+          @Override
+          public void apply(final URI it) {
+            File _asFile = FilesAndURIs.asFile(it);
+            _asFile.delete();
+          }
+        };
+        IterableExtensions.<URI>forEach(_generated, _function);
+      }
+    };
+    IterableExtensions.<URI>forEach(_deletedFiles, _function);
     final Iterable<URI> affectedResources = this.indexer.computeAndIndexAffected(this.request, this.context);
-    final Function1<Resource, Boolean> _function = new Function1<Resource, Boolean>() {
+    final Function1<Resource, Boolean> _function_1 = new Function1<Resource, Boolean>() {
       @Override
       public Boolean apply(final Resource resource) {
         resource.getContents();
@@ -152,8 +182,8 @@ public class IncrementalStandaloneBuilder {
         return Boolean.valueOf(false);
       }
     };
-    Iterable<Boolean> _executeClustered = this.context.<Boolean>executeClustered(affectedResources, _function);
-    final Function2<Boolean, Boolean, Boolean> _function_1 = new Function2<Boolean, Boolean, Boolean>() {
+    Iterable<Boolean> _executeClustered = this.context.<Boolean>executeClustered(affectedResources, _function_1);
+    final Function2<Boolean, Boolean, Boolean> _function_2 = new Function2<Boolean, Boolean, Boolean>() {
       @Override
       public Boolean apply(final Boolean $0, final Boolean $1) {
         boolean _and = false;
@@ -165,7 +195,7 @@ public class IncrementalStandaloneBuilder {
         return Boolean.valueOf(_and);
       }
     };
-    final Boolean isErrorFree = IterableExtensions.<Boolean>reduce(_executeClustered, _function_1);
+    final Boolean isErrorFree = IterableExtensions.<Boolean>reduce(_executeClustered, _function_2);
     return isErrorFree;
   }
   
@@ -273,12 +303,10 @@ public class IncrementalStandaloneBuilder {
         }
       }
     }
-    this.beforeGenerate(resource, fileSystemAccess);
+    URI _uRI_2 = resource.getURI();
+    this.currentResourceURI = _uRI_2;
     IGenerator _generator = access.getGenerator();
     _generator.doGenerate(resource, fileSystemAccess);
-  }
-  
-  protected void beforeGenerate(final Resource resource, final IFileSystemAccess fileSystemAccess) {
   }
   
   private Map<LanguageAccess, JavaIoFileSystemAccess> configuredFsas = CollectionLiterals.<LanguageAccess, JavaIoFileSystemAccess>newHashMap();
@@ -289,15 +317,69 @@ public class IncrementalStandaloneBuilder {
     if (_equals) {
       JavaIoFileSystemAccess _createFileSystemAccess = language.createFileSystemAccess(this.baseDir);
       fsa = _createFileSystemAccess;
-      JavaIoFileSystemAccess _configureFileSystemAccess = this.configureFileSystemAccess(fsa, language);
+      TrackingFileSystemAccess _configureFileSystemAccess = this.configureFileSystemAccess(fsa, language);
       fsa = _configureFileSystemAccess;
       this.configuredFsas.put(language, fsa);
     }
     return fsa;
   }
   
-  protected JavaIoFileSystemAccess configureFileSystemAccess(final JavaIoFileSystemAccess fsa, final LanguageAccess language) {
-    return fsa;
+  protected TrackingFileSystemAccess configureFileSystemAccess(final JavaIoFileSystemAccess fsa, final LanguageAccess language) {
+    abstract class __IncrementalStandaloneBuilder_1 implements TrackingFileSystemAccess.Listener {
+      abstract URI getURI(final String outputDir, final String fileName);
+    }
+    
+    TrackingFileSystemAccess _trackingFileSystemAccess = new TrackingFileSystemAccess(fsa);
+    final Procedure1<TrackingFileSystemAccess> _function = new Procedure1<TrackingFileSystemAccess>() {
+      @Override
+      public void apply(final TrackingFileSystemAccess it) {
+        __IncrementalStandaloneBuilder_1 ___IncrementalStandaloneBuilder_1 = new __IncrementalStandaloneBuilder_1() {
+          @Override
+          public void fileAdded(final String outputDir, final String fileName) {
+            final URI uri = this.getURI(outputDir, fileName);
+            IncrementalStandaloneBuilder.this.source2GeneratedMapping.addSource2Generated(IncrementalStandaloneBuilder.this.currentResourceURI, uri);
+            final Procedure1<IncrementalStandaloneBuilder.FileListener> _function = new Procedure1<IncrementalStandaloneBuilder.FileListener>() {
+              @Override
+              public void apply(final IncrementalStandaloneBuilder.FileListener it) {
+                URI _asFileURI = FilesAndURIs.asFileURI(outputDir);
+                it.outputFolderUsed(_asFileURI);
+                it.fileGenerated(IncrementalStandaloneBuilder.this.currentResourceURI, uri);
+              }
+            };
+            IterableExtensions.<IncrementalStandaloneBuilder.FileListener>forEach(IncrementalStandaloneBuilder.this.listeners, _function);
+          }
+          
+          @Override
+          public void fileDeleted(final String outputDir, final String fileName) {
+            final URI uri = this.getURI(outputDir, fileName);
+            IncrementalStandaloneBuilder.this.source2GeneratedMapping.deleteGenerated(uri);
+            final Procedure1<IncrementalStandaloneBuilder.FileListener> _function = new Procedure1<IncrementalStandaloneBuilder.FileListener>() {
+              @Override
+              public void apply(final IncrementalStandaloneBuilder.FileListener it) {
+                it.fileDeleted(uri);
+              }
+            };
+            IterableExtensions.<IncrementalStandaloneBuilder.FileListener>forEach(IncrementalStandaloneBuilder.this.listeners, _function);
+          }
+          
+          URI getURI(final String outputDir, final String fileName) {
+            return FilesAndURIs.asFileURI(((outputDir + File.separator) + fileName));
+          }
+        };
+        it.addListener(___IncrementalStandaloneBuilder_1);
+      }
+    };
+    return ObjectExtensions.<TrackingFileSystemAccess>operator_doubleArrow(_trackingFileSystemAccess, _function);
+  }
+  
+  private List<IncrementalStandaloneBuilder.FileListener> listeners = CollectionLiterals.<IncrementalStandaloneBuilder.FileListener>newArrayList();
+  
+  public boolean addListener(final IncrementalStandaloneBuilder.FileListener listener) {
+    return this.listeners.add(listener);
+  }
+  
+  public boolean removeListener(final IncrementalStandaloneBuilder.FileListener listener) {
+    return this.listeners.remove(listener);
   }
   
   @Pure
@@ -334,7 +416,22 @@ public class IncrementalStandaloneBuilder {
   }
   
   @Pure
+  protected Source2GeneratedMapping getSource2GeneratedMapping() {
+    return this.source2GeneratedMapping;
+  }
+  
+  @Pure
+  protected URI getCurrentResourceURI() {
+    return this.currentResourceURI;
+  }
+  
+  @Pure
   protected Map<LanguageAccess, JavaIoFileSystemAccess> getConfiguredFsas() {
     return this.configuredFsas;
+  }
+  
+  @Pure
+  protected List<IncrementalStandaloneBuilder.FileListener> getListeners() {
+    return this.listeners;
   }
 }

@@ -34,9 +34,9 @@ public class BuildContext {
   
   private final IResourceClusteringPolicy clusteringPolicy;
   
-  private transient ClusteringStorageAwareResourceLoader loader;
-  
   private final File tempDir;
+  
+  private transient ClusteringStorageAwareResourceLoader loader;
   
   public <T extends Object> Iterable<T> executeClustered(final Iterable<URI> uri, final Function1<? super Resource, ? extends T> operation) {
     Iterable<T> _xblockexpression = null;

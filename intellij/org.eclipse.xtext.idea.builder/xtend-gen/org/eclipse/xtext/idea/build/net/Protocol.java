@@ -268,6 +268,36 @@ public class Protocol {
   }
   
   @Accessors
+  @EqualsAndHashCode
+  public static class JavaDependencyRequest implements Serializable {
+    private List<String> javaFiles;
+    
+    @Pure
+    public List<String> getJavaFiles() {
+      return this.javaFiles;
+    }
+    
+    public void setJavaFiles(final List<String> javaFiles) {
+      this.javaFiles = javaFiles;
+    }
+  }
+  
+  @Accessors
+  @EqualsAndHashCode
+  public static class JavaDependencyResult implements Serializable {
+    private List<String> dependentJavaFiles;
+    
+    @Pure
+    public List<String> getDependentJavaFiles() {
+      return this.dependentJavaFiles;
+    }
+    
+    public void setDependentJavaFiles(final List<String> dependentJavaFiles) {
+      this.dependentJavaFiles = dependentJavaFiles;
+    }
+  }
+  
+  @Accessors
   @EqualsHashCode
   public static class BuildFailureMessage implements Serializable {
     private String message;

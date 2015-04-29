@@ -37,7 +37,11 @@ class Indexer {
 	@Inject CompilerPhases compilerPhases
 
 	@Inject ResourceDescriptionsProvider resourceDescriptionsProvider
+	
+	@Inject IJavaDependencyFinder javaDependencyFinder
 
+	@Inject Source2GeneratedMapping source2GeneratedMapping
+	
 	ResourceDescriptionsData index
 
 	def Iterable<URI> computeAndIndexAffected(BuildRequest request, extension BuildContext context) {
@@ -99,6 +103,11 @@ class Indexer {
 				currentDeltas += resource.addToIndex(false, newIndex, context)
 				null
 			]
+			toBeIndexed.clear
+			allDeltas += currentDeltas
+			if(isConsiderJava) {
+				
+			}
 				// TODO: Java dependencies
 //			if (needsJava) {
 //				val dependentJavaFiles = javaDependencyFinder.getDependentJavaFiles(toBeIndexed.filter [
@@ -107,8 +116,6 @@ class Indexer {
 //			// addJavaDependencies
 ////				toBeIndexed.addAll(DSL deps by java)
 //			}
-			toBeIndexed.clear
-			allDeltas += currentDeltas
 			toBeIndexed.addAll(
 				affectionCandidates.filter [
 					if(fileExtension == 'java')

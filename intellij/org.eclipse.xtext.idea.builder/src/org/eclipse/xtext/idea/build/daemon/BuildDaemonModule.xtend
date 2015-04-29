@@ -8,7 +8,7 @@
 package org.eclipse.xtext.idea.build.daemon
 
 import org.eclipse.xtext.builder.standalone.StandaloneBuilderModule
-import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder
+import org.eclipse.xtext.builder.standalone.incremental.IJavaDependencyFinder
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 
 /**
@@ -22,8 +22,8 @@ class BuildDaemonModule extends StandaloneBuilderModule {
 	
 	override protected configure() {
 		super.configure()
-		bind(IncrementalStandaloneBuilder).to(IdeaStandaloneBuilder)
 		bind(ResourceDescriptionsProvider).to(IdeaBuilderResourceDescriptionsProvider)
+		bind(IJavaDependencyFinder).to(BuildDaemonJavaDependencyFinder)
 	}
 	
 }

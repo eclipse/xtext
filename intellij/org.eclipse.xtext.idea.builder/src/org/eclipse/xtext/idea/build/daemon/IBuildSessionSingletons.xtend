@@ -7,23 +7,25 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.build.daemon
 
-import com.google.inject.Inject
-import org.eclipse.emf.common.util.URI
-import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.xtext.common.types.xtext.AbstractProjectAwareResourceDescriptionsProvider
+import com.google.inject.Singleton
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.idea.build.net.ObjectChannel
+import com.google.inject.ImplementedBy
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-class IdeaBuilderResourceDescriptionsProvider extends AbstractProjectAwareResourceDescriptionsProvider {
+@ImplementedBy(IBuildSessionSingletons.Impl)
+interface IBuildSessionSingletons {
 	
-	@Inject extension IBuildSessionSingletons
+	def ObjectChannel getObjectChannel()
 	
-	override protected isProjectLocal(URI uri, String encodedProjectName) {
-		uri.toString.startsWith(encodedProjectName)
-	}
-	
-	override protected getProjectName(ResourceSet resourceSet) {
-		moduleBaseURL
-	}
+	def String getModuleBaseURL()
+
+	@Singleton
+	@Accessors	
+	class Impl implements IBuildSessionSingletons {
+		ObjectChannel objectChannel
+		String moduleBaseURL
+	} 
 }

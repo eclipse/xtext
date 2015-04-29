@@ -9,12 +9,12 @@
 	<classpathentry kind="src" path="/org.eclipse.xtext.builder.standalone" exported="true"/>
 	<classpathentry kind="src" path="/org.eclipse.xtext.xbase.lib" exported="true"/>
 	<classpathentry kind="src" path="/org.eclipse.xtext" exported="true"/>
+	<classpathentry kind="src" path="/org.eclipse.xtext.common.types" exported="true"/>
+	<classpathentry kind="src" path="/org.eclipse.xtend.lib" exported="true"/>
+	<classpathentry kind="src" path="/org.eclipse.xtext.junit4" exported="true"/>
 	<classpathentry kind="src" path="/org.eclipse.xtext.util" exported="true"/>
 	<classpathentry kind="src" path="/org.eclipse.xtext.smap" exported="true"/>
-	<classpathentry kind="src" path="/org.eclipse.xtend.lib" exported="true"/>
 	<classpathentry kind="src" path="/org.eclipse.xtend.lib.macro" exported="true"/>
-	<classpathentry kind="src" path="/org.eclipse.xtext.common.types" exported="true"/>
-	<classpathentry kind="src" path="/org.eclipse.xtext.junit4" exported="true"/>
 	<classpathentry kind="lib" path="/Users/koehnlein/.m2/repository/org/eclipse/emf/org.eclipse.emf.ecore.xmi/2.11.0-v20150123-0347/org.eclipse.emf.ecore.xmi-2.11.0-v20150123-0347.jar" exported="true"/>
 	<classpathentry sourcepath="/Users/koehnlein/.m2/repository/org/eclipse/emf/org.eclipse.emf.ecore/2.11.0-v20150123-0347/org.eclipse.emf.ecore-2.11.0-v20150123-0347-sources.jar" kind="lib" path="/Users/koehnlein/.m2/repository/org/eclipse/emf/org.eclipse.emf.ecore/2.11.0-v20150123-0347/org.eclipse.emf.ecore-2.11.0-v20150123-0347.jar" exported="true"/>
 	<classpathentry sourcepath="/Users/koehnlein/.gradle/caches/modules-2/files-2.1/org.eclipse.emf/org.eclipse.emf.codegen/2.10.0/9c79cf9eb0ead19e05269539cf37ec26c17fff90/org.eclipse.emf.codegen-2.10.0-sources.jar" kind="lib" path="/Users/koehnlein/.gradle/caches/modules-2/files-2.1/org.eclipse.emf/org.eclipse.emf.codegen/2.10.0/ab49c04e96b44a58d2e13cbc1ffb42c4cc9b613a/org.eclipse.emf.codegen-2.10.0.jar" exported="true"/>
@@ -22,14 +22,15 @@
 	<classpathentry kind="lib" path="/Users/koehnlein/.m2/repository/org/eclipse/emf/org.eclipse.emf.codegen.ecore/2.11.0-v20150123-0357/org.eclipse.emf.codegen.ecore-2.11.0-v20150123-0357.jar" exported="true"/>
 	<classpathentry kind="lib" path="/Users/koehnlein/.m2/repository/org/antlr/antlr-runtime/3.2/antlr-runtime-3.2.jar" exported="true"/>
 	<classpathentry kind="lib" path="/Users/koehnlein/.m2/repository/com/google/inject/guice/3.0/guice-3.0.jar" exported="true"/>
+	<classpathentry kind="lib" path="/Users/koehnlein/.m2/repository/org/ow2/asm/asm/5.0.1/asm-5.0.1.jar" exported="true"/>
 	<classpathentry kind="lib" path="/Users/koehnlein/.m2/repository/org/eclipse/emf/org.eclipse.emf.mwe.core/1.3.10-SNAPSHOT/org.eclipse.emf.mwe.core-1.3.10-SNAPSHOT.jar" exported="true"/>
 	<classpathentry kind="lib" path="/Users/koehnlein/.m2/repository/org/eclipse/emf/org.eclipse.emf.mwe.utils/1.3.10-SNAPSHOT/org.eclipse.emf.mwe.utils-1.3.10-SNAPSHOT.jar" exported="true"/>
 	<classpathentry kind="lib" path="/Users/koehnlein/.m2/repository/org/eclipse/xpand/org.eclipse.xtend/2.1.0-SNAPSHOT/org.eclipse.xtend-2.1.0-SNAPSHOT.jar" exported="true"/>
 	<classpathentry kind="lib" path="/Users/koehnlein/.m2/repository/org/eclipse/xpand/org.eclipse.xtend.typesystem.emf/2.1.0-SNAPSHOT/org.eclipse.xtend.typesystem.emf-2.1.0-SNAPSHOT.jar" exported="true"/>
-	<classpathentry kind="lib" path="/Users/koehnlein/.m2/repository/javax/inject/javax.inject/1/javax.inject-1.jar" exported="true"/>
 	<classpathentry kind="lib" path="/Users/koehnlein/.m2/repository/org/eclipse/equinox/common/3.6.200-v20130402-1505/common-3.6.200-v20130402-1505.jar" exported="true"/>
+	<classpathentry kind="lib" path="/Users/koehnlein/.m2/repository/javax/inject/javax.inject/1/javax.inject-1.jar" exported="true"/>
 	<classpathentry kind="lib" path="/Users/koehnlein/.m2/repository/org/eclipse/emf/org.eclipse.emf.mwe2.lib/2.8.0-SNAPSHOT/org.eclipse.emf.mwe2.lib-2.8.0-SNAPSHOT.jar" exported="true"/>
-	<classpathentry kind="lib" path="/Users/koehnlein/.gradle/caches/modules-2/files-2.1/org.antlr/stringtemplate/3.2/6fe2e3bb57daebd1555494818909f9664376dd6c/stringtemplate-3.2.jar" exported="true"/>
+	<classpathentry kind="lib" path="/Users/koehnlein/.m2/repository/org/antlr/stringtemplate/3.2/stringtemplate-3.2.jar" exported="true"/>
 	<classpathentry kind="lib" path="/Users/koehnlein/.m2/repository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar" exported="true"/>
 	<classpathentry kind="lib" path="/Users/koehnlein/.m2/repository/antlr/antlr/2.7.7/antlr-2.7.7.jar" exported="true"/>
 	<classpathentry sourcepath="/Users/koehnlein/Documents/devel/xtext/git/org.eclipse.xtext/intellij/intellij-ce/sources.zip" kind="lib" path="/Users/koehnlein/Documents/devel/xtext/git/org.eclipse.xtext/intellij/intellij-ce/lib/annotations.jar" exported="true"/>

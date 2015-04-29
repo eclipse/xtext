@@ -30,7 +30,6 @@ import org.eclipse.xtext.idea.build.net.Protocol.BuildRequestMessage
 import static org.eclipse.xtext.idea.build.daemon.XtextBuildDaemon.*
 
 import static extension org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs.*
-import org.eclipse.xtext.idea.build.daemon.IdeaBuilderResourceDescriptionsProvider.ModuleAdapter
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -132,7 +131,9 @@ class XtextBuildDaemon {
 
 		@Inject IncrementalStandaloneBuilder.Factory builderFactory
 
-		@Inject XtextBuildResultCollector resultCollector
+		@Inject IBuildSessionSingletons.Impl singletons
+
+		@Inject XtextBuildResultCollector xtextBuildResultCollector
 
 		ObjectChannel channel
 
@@ -160,7 +161,10 @@ class XtextBuildDaemon {
 		}
 
 		def build(BuildRequestMessage request) {
-			resultCollector.output = channel
+			singletons => [
+				objectChannel = channel
+				moduleBaseURL = request.baseDir
+			]
 			val buildRequest = new BuildRequest => [
 				baseDir = request.baseDir.asURI
 				defaultEncoding = request.encoding
@@ -171,13 +175,11 @@ class XtextBuildDaemon {
 				deletedFiles = request.deletedFiles.map[asURI]
 				failOnValidationError = false
 			]
-			val builder = builderFactory.create(buildRequest, XtextLanguages.getLanguageAccesses) as IdeaStandaloneBuilder
-			builder => [
-				context.resourceSet.eAdapters.add(new ModuleAdapter(request.baseDir))
-				buildResultCollector = resultCollector
+			builderFactory.create(buildRequest, XtextLanguages.getLanguageAccesses) => [
+				addListener(xtextBuildResultCollector)
 				launch
 			]
-			resultCollector.buildResult
+			xtextBuildResultCollector.buildResult
 		}
 	}
 }
