@@ -185,6 +185,7 @@ public class TypeReferences {
 		return result;
 	}
 
+	/* @NotNull */
 	public JvmTypeReference getTypeForName(Class<?> clazz, Notifier context, JvmTypeReference... params) {
 		if (clazz == null)
 			throw new NullPointerException("clazz");

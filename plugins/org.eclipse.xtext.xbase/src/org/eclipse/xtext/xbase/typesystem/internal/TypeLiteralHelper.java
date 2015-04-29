@@ -43,7 +43,7 @@ public class TypeLiteralHelper {
 			ITypeReferenceOwner owner = state.getReferenceOwner();
 			LightweightTypeReference result = getRawTypeForName(Class.class, owner);
 			if (result == null) {
-				return owner.newUnknownTypeReference("Class");
+				return owner.newUnknownTypeReference(Class.class.getName());
 			}
 			LightweightTypeReference argumentType = owner.newParameterizedTypeReference((JvmType) feature);
 			if (argumentType.isPrimitiveVoid()) {

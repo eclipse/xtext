@@ -308,12 +308,22 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 			TypeReferences typeReferences = resolvedTypes.getServices().getTypeReferences();
 			ITypeReferenceOwner owner = resolvedTypes.getReferenceOwner();
 			JvmType arrayList = typeReferences.findDeclaredType(ArrayList.class, createOperation);
+			if (arrayList == null) {
+				return owner.newUnknownTypeReference(ArrayList.class.getName()).toTypeReference();
+			}
 			ParameterizedTypeReference arrayListReference = owner.newParameterizedTypeReference(arrayList);
-			JvmType objectType = typeReferences.findDeclaredType(Object.class, createOperation);
 			WildcardTypeReference wildcard = owner.newWildcardTypeReference();
-			wildcard.addUpperBound(owner.newParameterizedTypeReference(objectType));
+			JvmType objectType = typeReferences.findDeclaredType(Object.class, createOperation);
+			if (objectType != null) {
+				wildcard.addUpperBound(owner.newParameterizedTypeReference(objectType));
+			} else {
+				wildcard.addUpperBound(owner.newUnknownTypeReference(Object.class.getName()));
+			}
 			arrayListReference.addTypeArgument(wildcard);
 			JvmType hashMap = typeReferences.findDeclaredType(HashMap.class, createOperation);
+			if (hashMap == null) {
+				return owner.newUnknownTypeReference(HashMap.class.getName()).toTypeReference();
+			}
 			ParameterizedTypeReference hashMapReference = owner.newParameterizedTypeReference(hashMap);
 			hashMapReference.addTypeArgument(arrayListReference);
 			hashMapReference.addTypeArgument(owner.toLightweightTypeReference(declaredReturnType));

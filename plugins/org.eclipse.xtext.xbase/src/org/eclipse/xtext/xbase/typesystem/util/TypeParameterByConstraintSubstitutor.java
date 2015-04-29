@@ -88,7 +88,10 @@ public class TypeParameterByConstraintSubstitutor extends CustomTypeParameterSub
 				if (!visiting.canVisit(typeParameter)) {
 					WildcardTypeReference result = getOwner().newWildcardTypeReference();
 					JvmType objectType = getOwner().getServices().getTypeReferences().findDeclaredType(Object.class, getOwner().getContextResourceSet());
-					result.addUpperBound(getOwner().newParameterizedTypeReference(objectType));
+					if (objectType != null)
+						result.addUpperBound(getOwner().newParameterizedTypeReference(objectType));
+					else
+						result.addUpperBound(getOwner().newUnknownTypeReference(Object.class.getName()));
 					return result;
 				}
 			}

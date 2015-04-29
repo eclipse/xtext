@@ -128,7 +128,9 @@ public abstract class CustomTypeParameterSubstitutor extends TypeParameterSubsti
 	protected LightweightTypeReference getObjectReference() {
 		ITypeReferenceOwner owner = getOwner();
 		JvmType objectType = owner.getServices().getTypeReferences().findDeclaredType(Object.class, owner.getContextResourceSet());
-		return owner.newParameterizedTypeReference(objectType);
+		if (objectType != null)
+			return owner.newParameterizedTypeReference(objectType);
+		return owner.newUnknownTypeReference(Object.class.getName());
 	}
 
 	/* @Nullable */
