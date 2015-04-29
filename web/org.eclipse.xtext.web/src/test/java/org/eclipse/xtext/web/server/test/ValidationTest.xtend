@@ -7,8 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server.test
 
+import org.eclipse.xtext.web.server.ServiceConflictResult
 import org.eclipse.xtext.web.server.validation.ValidationResult
 import org.junit.Test
+
+import static org.hamcrest.core.IsInstanceOf.*
 
 class ValidationTest extends AbstractWebServerTest {
 	
@@ -71,6 +74,19 @@ class ValidationTest extends AbstractWebServerTest {
 			  )
 			]'''
 		assertEquals(expectedResult, result.toString)
+	}
+	
+	@Test def testIncorrectStateId() {
+		val file = createFile('entity foo {}')
+		val sessionStore = new HashMapSessionStore
+		val validate = dispatcher.getService('/validation', #{
+				'resource' -> file.name,
+				'requiredStateId' -> 'totalerquatsch'
+			}, sessionStore)
+		assertTrue(validate.hasConflict)
+		val result = validate.service.apply()
+		assertThat(result, instanceOf(ServiceConflictResult))
+		assertEquals((result as ServiceConflictResult).conflict, 'invalidStateId')
 	}
 	
 }
