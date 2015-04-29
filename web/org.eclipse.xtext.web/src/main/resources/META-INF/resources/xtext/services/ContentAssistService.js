@@ -8,9 +8,8 @@
 
 define(["xtext/services/AbstractXtextService", "orion/Deferred"], function(AbstractXtextService, Deferred) {
 
-	function ContentAssistService(serverUrl, resourceUri, updateService) {
+	function ContentAssistService(serverUrl, resourceUri) {
 		this.initialize(serverUrl, resourceUri, "content-assist");
-		this._updateService = updateService;
 	}
 
 	ContentAssistService.prototype = new AbstractXtextService();
@@ -28,7 +27,7 @@ define(["xtext/services/AbstractXtextService", "orion/Deferred"], function(Abstr
 			serverData.selectionEnd = params.selection.end;
 		}
 		var currentText = editorContext.getText();
-		var updateServerState = false;
+		var doUpdateServerState = false;
 		var httpMethod = "GET";
 		var onComplete = undefined;
 		if (params.sendFullText) {
@@ -40,7 +39,7 @@ define(["xtext/services/AbstractXtextService", "orion/Deferred"], function(Abstr
 				serverData.requiredStateId = knownServerState.stateId;
 			}
 			if (this._updateService && knownServerState.text !== undefined) {
-				if (this._updateService.checkRunningUpdate()) {
+				if (this._updateService.checkRunningUpdate(true)) {
 					var self = this;
 					this._updateService.addCompletionCallback(function() {
 						self.computeContentAssist(editorContext, params, deferred);
@@ -51,7 +50,7 @@ define(["xtext/services/AbstractXtextService", "orion/Deferred"], function(Abstr
 				this._updateService.computeDelta(knownServerState.text, currentText, serverData);
 				if (serverData.deltaText !== undefined) {
 					httpMethod = "POST";
-					updateServerState = true;
+					doUpdateServerState = true;
 				}
 			}
 		}
@@ -62,12 +61,23 @@ define(["xtext/services/AbstractXtextService", "orion/Deferred"], function(Abstr
 			data : serverData,
 			success : function(result) {
 				if (result.conflict) {
-					// A conflict with another service occured - retry
-					self.retry(self.computeContentAssist, editorContext, params, [deferred]);
+					// This can only happen if the server has lost its session state
+					if (self.increaseRecursionCount(editorContext)) {
+						params.sendFullText = true;
+						self.computeContentAssist(editorContext, params, deferred);
+						return true;
+					}
 					return false;
 				}
-				if (updateServerState) {
-					editorContext.updateServerState(currentText, result.stateId);
+				if (params.sendFullText && result.stateId !== undefined
+						&& result.stateId != editorContext.getServerState().stateId) {
+					doUpdateServerState = true;
+				}
+				if (doUpdateServerState) {
+					var listeners = editorContext.updateServerState(currentText, result.stateId);
+					for (i in listeners) {
+						self._updateService.addCompletionCallback(listeners[i]);
+					}
 				}
 				var proposals = [];
 				for (var i = 0; i < result.entries.length; i++) {

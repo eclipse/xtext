@@ -25,6 +25,13 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 			if (knownServerState.stateId !== undefined) {
 				serverData.requiredStateId = knownServerState.stateId;
 			}
+			if (this._updateService && this._updateService.checkRunningUpdate(false)) {
+				var self = this;
+				this._updateService.addCompletionCallback(function() {
+					self.saveResource(editorContext, params);
+				});
+				return;
+			}
 		}
 		
 		var self = this;
@@ -33,8 +40,15 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 			data : serverData,
 			success : function(result) {
 				if (result.conflict) {
-					// A conflict with another service occured - retry
-					self.retry(self.saveResource, editorContext, params);
+					if (self.increaseRecursionCount(editorContext)) {
+						if (!params.sendFullText && result.conflict == "invalidStateId") {
+							params.sendFullText = true;
+							delete editorContext.getServerState().stateId;
+							self._updateService.update(editorContext, params);
+						}
+						self.saveResource(editorContext, params);
+						return true;
+					}
 					return false;
 				}
 				editorContext.markClean(true);

@@ -12,6 +12,8 @@ define(function() {
 		this._editor = editor;
 		var text = editor.getTextView().getText();
 		this._serverState = {};
+		this._serverStateListeners = [];
+		this._clientServiceState = {};
 	};
 
 	EditorContext.prototype = {
@@ -27,13 +29,19 @@ define(function() {
 		updateServerState : function(currentText, currentStateId) {
 			this._serverState.text = currentText;
 			this._serverState.stateId = currentStateId;
-			if (this._serverStateListener) {
-				this._serverStateListener(this._serverState);
-			}
+			return this._serverStateListeners;
 		},
 		
-		setServerStateListener : function(listener) {
-			this._serverStateListener = listener;
+		addServerStateListener : function(listener) {
+			this._serverStateListeners.push(listener);
+		},
+		
+		getClientServiceState : function() {
+			return this._clientServiceState;
+		},
+		
+		clearClientServiceState : function() {
+			this._clientServiceState = {};
 		},
 		
 		getCaretOffset : function() {
