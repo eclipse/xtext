@@ -10,10 +10,10 @@ package org.eclipse.xtend.idea.psi
 import com.intellij.psi.PsiModifier
 import com.intellij.psi.PsiReferenceList
 import org.eclipse.xtend.idea.LightXtendTest
+import org.eclipse.xtext.xbase.idea.jvm.JvmPsiElementExtensions
+import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass
 
 import static extension org.eclipse.xtext.xbase.idea.types.psi.LoadingTypeResourcePhase.*
-import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass
-import org.eclipse.xtext.xbase.idea.jvm.JvmPsiElementExtensions
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -146,7 +146,7 @@ class JvmPsiClassTest extends LightXtendTest {
 		assertEquals('someMethod', method.name)
 		
 		val psiClass = 'mypackage.Foo'.findJvmPsiClass
-		assertEquals(psiClass, method.containingClass)
+		assertEquals(psiClass.delegate, method.containingClass)
 	}
 
 	def void testMethodBodyWithErrors() {
@@ -387,7 +387,7 @@ class JvmPsiClassTest extends LightXtendTest {
 		val typeParameter = typeParameters.head
 		assertEquals(0, typeParameter.index)
 		assertEquals('T', typeParameter.name)
-		assertEquals(psiClass, typeParameter.owner)
+		assertEquals(psiClass.delegate, typeParameter.owner)
 
 		val extendsList = typeParameter.extendsList
 		assertEquals(PsiReferenceList.Role.EXTENDS_BOUNDS_LIST, extendsList.role)
