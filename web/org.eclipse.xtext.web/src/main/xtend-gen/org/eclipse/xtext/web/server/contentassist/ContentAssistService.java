@@ -123,41 +123,44 @@ public class ContentAssistService {
   protected ContentAssistResult createProposals(final ContentAssistContext[] contexts, final String stateId) {
     final ContentAssistResult result = new ContentAssistResult();
     result.setStateId(stateId);
-    final Function1<ContentAssistContext, String> _function = new Function1<ContentAssistContext, String>() {
-      @Override
-      public String apply(final ContentAssistContext it) {
-        return it.getPrefix();
-      }
-    };
-    List<String> _map = ListExtensions.<ContentAssistContext, String>map(((List<ContentAssistContext>)Conversions.doWrapArray(contexts)), _function);
-    final Function1<String, Integer> _function_1 = new Function1<String, Integer>() {
-      @Override
-      public Integer apply(final String it) {
-        return Integer.valueOf(it.length());
-      }
-    };
-    final String longestPrefix = IterableExtensions.<String, Integer>maxBy(_map, _function_1);
-    result.setPrefix(longestPrefix);
-    for (final ContentAssistContext context : contexts) {
-      String _prefix = context.getPrefix();
-      boolean _equals = Objects.equal(_prefix, longestPrefix);
-      if (_equals) {
-        ImmutableList<AbstractElement> _firstSetGrammarElements = context.getFirstSetGrammarElements();
-        for (final AbstractElement element : _firstSetGrammarElements) {
-          this.createProposal(element, context, result);
+    boolean _isEmpty = ((List<ContentAssistContext>)Conversions.doWrapArray(contexts)).isEmpty();
+    boolean _not = (!_isEmpty);
+    if (_not) {
+      final Function1<ContentAssistContext, String> _function = new Function1<ContentAssistContext, String>() {
+        @Override
+        public String apply(final ContentAssistContext it) {
+          return it.getPrefix();
+        }
+      };
+      List<String> _map = ListExtensions.<ContentAssistContext, String>map(((List<ContentAssistContext>)Conversions.doWrapArray(contexts)), _function);
+      final Function1<String, Integer> _function_1 = new Function1<String, Integer>() {
+        @Override
+        public Integer apply(final String it) {
+          return Integer.valueOf(it.length());
+        }
+      };
+      final String longestPrefix = IterableExtensions.<String, Integer>maxBy(_map, _function_1);
+      for (final ContentAssistContext context : contexts) {
+        String _prefix = context.getPrefix();
+        boolean _equals = Objects.equal(_prefix, longestPrefix);
+        if (_equals) {
+          ImmutableList<AbstractElement> _firstSetGrammarElements = context.getFirstSetGrammarElements();
+          for (final AbstractElement element : _firstSetGrammarElements) {
+            this.createProposal(element, context, result);
+          }
         }
       }
+      ArrayList<ContentAssistResult.Entry> _entries = result.getEntries();
+      final Comparator<ContentAssistResult.Entry> _function_2 = new Comparator<ContentAssistResult.Entry>() {
+        @Override
+        public int compare(final ContentAssistResult.Entry a, final ContentAssistResult.Entry b) {
+          String _proposal = a.getProposal();
+          String _proposal_1 = b.getProposal();
+          return _proposal.compareTo(_proposal_1);
+        }
+      };
+      Collections.<ContentAssistResult.Entry>sort(_entries, _function_2);
     }
-    ArrayList<ContentAssistResult.Entry> _entries = result.getEntries();
-    final Comparator<ContentAssistResult.Entry> _function_2 = new Comparator<ContentAssistResult.Entry>() {
-      @Override
-      public int compare(final ContentAssistResult.Entry a, final ContentAssistResult.Entry b) {
-        String _proposal = a.getProposal();
-        String _proposal_1 = b.getProposal();
-        return _proposal.compareTo(_proposal_1);
-      }
-    };
-    Collections.<ContentAssistResult.Entry>sort(_entries, _function_2);
     return result;
   }
   
@@ -206,8 +209,9 @@ public class ContentAssistService {
       }
       if (_and) {
         ArrayList<ContentAssistResult.Entry> _entries_1 = result.getEntries();
+        String _prefix_1 = context.getPrefix();
         String _value = keyword.getValue();
-        ContentAssistResult.Entry _entry = new ContentAssistResult.Entry(_value, null, null, null);
+        ContentAssistResult.Entry _entry = new ContentAssistResult.Entry(_prefix_1, _value, null, null, null);
         _xifexpression = _entries_1.add(_entry);
       }
       _xblockexpression = _xifexpression;

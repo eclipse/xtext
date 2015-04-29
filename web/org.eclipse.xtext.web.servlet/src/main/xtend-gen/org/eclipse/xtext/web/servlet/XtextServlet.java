@@ -85,15 +85,23 @@ public class XtextServlet extends HttpServlet {
   @Override
   protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
     final XtextServiceDispatcher.ServiceDescriptor service = this.getService(req);
-    boolean _or = false;
-    boolean _isHasSideEffects = service.isHasSideEffects();
-    if (_isHasSideEffects) {
-      _or = true;
+    boolean _and = false;
+    boolean _isHasConflict = service.isHasConflict();
+    boolean _not = (!_isHasConflict);
+    if (!_not) {
+      _and = false;
     } else {
-      boolean _isHasTextInput = service.isHasTextInput();
-      _or = _isHasTextInput;
+      boolean _or = false;
+      boolean _isHasSideEffects = service.isHasSideEffects();
+      if (_isHasSideEffects) {
+        _or = true;
+      } else {
+        boolean _isHasTextInput = service.isHasTextInput();
+        _or = _isHasTextInput;
+      }
+      _and = _or;
     }
-    if (_or) {
+    if (_and) {
       super.doGet(req, resp);
     } else {
       this.doService(service, resp);
@@ -103,9 +111,17 @@ public class XtextServlet extends HttpServlet {
   @Override
   protected void doPut(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
     final XtextServiceDispatcher.ServiceDescriptor service = this.getService(req);
-    String _type = service.getType();
-    boolean _notEquals = (!Objects.equal(_type, "update"));
-    if (_notEquals) {
+    boolean _and = false;
+    boolean _isHasConflict = service.isHasConflict();
+    boolean _not = (!_isHasConflict);
+    if (!_not) {
+      _and = false;
+    } else {
+      String _type = service.getType();
+      boolean _notEquals = (!Objects.equal(_type, "update"));
+      _and = _notEquals;
+    }
+    if (_and) {
       super.doPut(req, resp);
     } else {
       this.doService(service, resp);
@@ -115,25 +131,33 @@ public class XtextServlet extends HttpServlet {
   @Override
   protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
     final XtextServiceDispatcher.ServiceDescriptor service = this.getService(req);
-    boolean _or = false;
     boolean _and = false;
-    boolean _isHasSideEffects = service.isHasSideEffects();
-    boolean _not = (!_isHasSideEffects);
+    boolean _isHasConflict = service.isHasConflict();
+    boolean _not = (!_isHasConflict);
     if (!_not) {
       _and = false;
     } else {
-      boolean _isHasTextInput = service.isHasTextInput();
-      boolean _not_1 = (!_isHasTextInput);
-      _and = _not_1;
+      boolean _or = false;
+      boolean _and_1 = false;
+      boolean _isHasSideEffects = service.isHasSideEffects();
+      boolean _not_1 = (!_isHasSideEffects);
+      if (!_not_1) {
+        _and_1 = false;
+      } else {
+        boolean _isHasTextInput = service.isHasTextInput();
+        boolean _not_2 = (!_isHasTextInput);
+        _and_1 = _not_2;
+      }
+      if (_and_1) {
+        _or = true;
+      } else {
+        String _type = service.getType();
+        boolean _equals = Objects.equal(_type, "update");
+        _or = _equals;
+      }
+      _and = _or;
     }
     if (_and) {
-      _or = true;
-    } else {
-      String _type = service.getType();
-      boolean _equals = Objects.equal(_type, "update");
-      _or = _equals;
-    }
-    if (_or) {
       super.doPost(req, resp);
     } else {
       this.doService(service, resp);

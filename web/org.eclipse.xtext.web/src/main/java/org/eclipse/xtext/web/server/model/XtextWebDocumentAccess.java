@@ -79,7 +79,8 @@ public class XtextWebDocumentAccess {
 			Exceptions.sneakyThrow(exception);
 			return null;
 		} finally {
-			if (asynchronousWork == null || documentAccess == null || Thread.currentThread().isInterrupted()) {
+			if (asynchronousWork == null || documentAccess == null || synchronizer.isCanceled()
+					|| Thread.currentThread().isInterrupted()) {
 				synchronizer.releaseLock();
 			} else {
 				
@@ -91,11 +92,11 @@ public class XtextWebDocumentAccess {
 						public void run() {
 							try {
 								asynchronousWork.exec(asyncAccess);
-							} catch (VirtualMachineError exception) {
-								throw exception;
-							} catch (Throwable exception) {
-								if (!synchronizer.getOperationCanceledManager().isOperationCanceledException(exception)) {
-									LOG.error("Error during asynchronous service processing.", exception);
+							} catch (VirtualMachineError error) {
+								throw error;
+							} catch (Throwable throwable) {
+								if (!synchronizer.getOperationCanceledManager().isOperationCanceledException(throwable)) {
+									LOG.error("Error during asynchronous service processing.", throwable);
 								} else {
 									LOG.trace("Canceling background process.");
 								}
@@ -106,7 +107,7 @@ public class XtextWebDocumentAccess {
 					});
 				} catch (RejectedExecutionException ree) {
 					synchronizer.releaseLock();
-					throw ree;
+					LOG.error("Failed to start background work.", ree);
 				}
 			}
 		}

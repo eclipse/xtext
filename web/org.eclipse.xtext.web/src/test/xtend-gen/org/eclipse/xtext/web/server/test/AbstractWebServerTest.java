@@ -44,6 +44,10 @@ public class AbstractWebServerTest extends AbstractXtextTests {
   
   private XtextServiceDispatcher dispatcher;
   
+  protected EntitiesRuntimeModule getRuntimeModule() {
+    return new EntitiesRuntimeModule();
+  }
+  
   @Override
   public void setUp() {
     try {
@@ -55,9 +59,9 @@ public class AbstractWebServerTest extends AbstractXtextTests {
       this.with(new EntitiesStandaloneSetup() {
         @Override
         public Injector createInjector() {
-          final EntitiesRuntimeModule runtimeModule = new EntitiesRuntimeModule();
           final EntitiesIdeModule ideModule = new EntitiesIdeModule(AbstractWebServerTest.this.executorService, AbstractWebServerTest.this.resourceBaseProvider);
-          return Guice.createInjector(runtimeModule, ideModule);
+          EntitiesRuntimeModule _runtimeModule = AbstractWebServerTest.this.getRuntimeModule();
+          return Guice.createInjector(_runtimeModule, ideModule);
         }
       });
       Injector _injector = this.getInjector();

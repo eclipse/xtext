@@ -16,11 +16,14 @@ import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Accessors
-@ToString
+@ToString(skipNulls = true)
 @SuppressWarnings("all")
 public class ContentAssistResult implements IServiceResult {
   @Data
+  @ToString(skipNulls = true)
   public static class Entry {
+    private final String prefix;
+    
     private final String proposal;
     
     private final String name;
@@ -36,8 +39,9 @@ public class ContentAssistResult implements IServiceResult {
     
     private final ArrayList<ContentAssistResult.EditPosition> editPositions = new ArrayList<ContentAssistResult.EditPosition>();
     
-    public Entry(final String proposal, final String name, final String description, final String style) {
+    public Entry(final String prefix, final String proposal, final String name, final String description, final String style) {
       super();
+      this.prefix = prefix;
       this.proposal = proposal;
       this.name = name;
       this.description = description;
@@ -49,6 +53,7 @@ public class ContentAssistResult implements IServiceResult {
     public int hashCode() {
       final int prime = 31;
       int result = 1;
+      result = prime * result + ((this.prefix== null) ? 0 : this.prefix.hashCode());
       result = prime * result + ((this.proposal== null) ? 0 : this.proposal.hashCode());
       result = prime * result + ((this.name== null) ? 0 : this.name.hashCode());
       result = prime * result + ((this.description== null) ? 0 : this.description.hashCode());
@@ -68,6 +73,11 @@ public class ContentAssistResult implements IServiceResult {
       if (getClass() != obj.getClass())
         return false;
       ContentAssistResult.Entry other = (ContentAssistResult.Entry) obj;
+      if (this.prefix == null) {
+        if (other.prefix != null)
+          return false;
+      } else if (!this.prefix.equals(other.prefix))
+        return false;
       if (this.proposal == null) {
         if (other.proposal != null)
           return false;
@@ -105,6 +115,8 @@ public class ContentAssistResult implements IServiceResult {
     @Pure
     public String toString() {
       ToStringBuilder b = new ToStringBuilder(this);
+      b.skipNulls();
+      b.add("prefix", this.prefix);
       b.add("proposal", this.proposal);
       b.add("name", this.name);
       b.add("description", this.description);
@@ -112,6 +124,11 @@ public class ContentAssistResult implements IServiceResult {
       b.add("textReplacements", this.textReplacements);
       b.add("editPositions", this.editPositions);
       return b.toString();
+    }
+    
+    @Pure
+    public String getPrefix() {
+      return this.prefix;
     }
     
     @Pure
@@ -280,8 +297,6 @@ public class ContentAssistResult implements IServiceResult {
   
   private String stateId;
   
-  private String prefix;
-  
   private final ArrayList<ContentAssistResult.Entry> entries = new ArrayList<ContentAssistResult.Entry>();
   
   @Pure
@@ -294,15 +309,6 @@ public class ContentAssistResult implements IServiceResult {
   }
   
   @Pure
-  public String getPrefix() {
-    return this.prefix;
-  }
-  
-  public void setPrefix(final String prefix) {
-    this.prefix = prefix;
-  }
-  
-  @Pure
   public ArrayList<ContentAssistResult.Entry> getEntries() {
     return this.entries;
   }
@@ -311,8 +317,8 @@ public class ContentAssistResult implements IServiceResult {
   @Pure
   public String toString() {
     ToStringBuilder b = new ToStringBuilder(this);
+    b.skipNulls();
     b.add("stateId", this.stateId);
-    b.add("prefix", this.prefix);
     b.add("entries", this.entries);
     return b.toString();
   }

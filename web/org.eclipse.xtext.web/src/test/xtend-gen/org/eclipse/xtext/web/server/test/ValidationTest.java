@@ -11,6 +11,7 @@ import java.io.File;
 import java.util.Collections;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.web.server.IServiceResult;
+import org.eclipse.xtext.web.server.ServiceConflictResult;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.web.server.test.AbstractWebServerTest;
 import org.eclipse.xtext.web.server.test.HashMapSessionStore;
@@ -19,6 +20,8 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Pair;
+import org.hamcrest.Matcher;
+import org.hamcrest.core.IsInstanceOf;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -166,6 +169,29 @@ public class ValidationTest extends AbstractWebServerTest {
       final String expectedResult = _builder.toString();
       String _string = result.toString();
       Assert.assertEquals(expectedResult, _string);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testIncorrectStateId() {
+    try {
+      final File file = this.createFile("entity foo {}");
+      final HashMapSessionStore sessionStore = new HashMapSessionStore();
+      XtextServiceDispatcher _dispatcher = this.getDispatcher();
+      String _name = file.getName();
+      Pair<String, String> _mappedTo = Pair.<String, String>of("resource", _name);
+      Pair<String, String> _mappedTo_1 = Pair.<String, String>of("requiredStateId", "totalerquatsch");
+      final XtextServiceDispatcher.ServiceDescriptor validate = _dispatcher.getService("/validation", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)), sessionStore);
+      boolean _isHasConflict = validate.isHasConflict();
+      Assert.assertTrue(_isHasConflict);
+      Function0<? extends IServiceResult> _service = validate.getService();
+      final IServiceResult result = _service.apply();
+      Matcher<IServiceResult> _instanceOf = IsInstanceOf.<IServiceResult>instanceOf(ServiceConflictResult.class);
+      Assert.<IServiceResult>assertThat(result, _instanceOf);
+      String _conflict = ((ServiceConflictResult) result).getConflict();
+      Assert.assertEquals(_conflict, "invalidStateId");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

@@ -14,7 +14,6 @@ import javax.servlet.annotation.WebServlet
 import org.eclipse.xtext.idea.example.entities.EntitiesRuntimeModule
 import org.eclipse.xtext.idea.example.entities.EntitiesStandaloneSetup
 import org.eclipse.xtext.web.server.persistence.ResourceBaseProviderImpl
-import org.eclipse.xtext.web.server.test.EntitiesIdeModule
 import org.eclipse.xtext.web.servlet.XtextServlet
 
 @WebServlet(name = "Xtext Services", urlPatterns = "/xtext-service/*")

@@ -38,13 +38,16 @@ class AbstractWebServerTest extends AbstractXtextTests {
 	
 	XtextServiceDispatcher dispatcher
 	
+	protected def getRuntimeModule() {
+		new EntitiesRuntimeModule
+	}
+	
 	override void setUp() {
 		super.setUp()
 		executorService = Executors.newCachedThreadPool
 		resourceBaseProvider = new TestResourceBaseProvider
 		with(new EntitiesStandaloneSetup {
 			override createInjector() {
-				val runtimeModule = new EntitiesRuntimeModule
 				val ideModule = new EntitiesIdeModule(executorService, resourceBaseProvider)
 				return Guice.createInjector(runtimeModule, ideModule)
 			}

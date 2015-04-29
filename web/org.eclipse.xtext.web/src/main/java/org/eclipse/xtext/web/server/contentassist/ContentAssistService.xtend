@@ -63,16 +63,17 @@ class ContentAssistService {
 	protected def createProposals(ContentAssistContext[] contexts, String stateId) {
 		val result = new ContentAssistResult
 		result.stateId = stateId
-		val longestPrefix = contexts.map[prefix].maxBy[length]
-		result.prefix = longestPrefix
-		for (context : contexts) {
-			if (context.prefix == longestPrefix) {
-				for (element : context.firstSetGrammarElements) {
-					createProposal(element, context, result)
+		if (!contexts.empty) {
+			val longestPrefix = contexts.map[prefix].maxBy[length]
+			for (context : contexts) {
+				if (context.prefix == longestPrefix) {
+					for (element : context.firstSetGrammarElements) {
+						createProposal(element, context, result)
+					}
 				}
 			}
+			Collections.sort(result.entries, [a, b | a.proposal.compareTo(b.proposal)])
 		}
-		Collections.sort(result.entries, [a, b | a.proposal.compareTo(b.proposal)])
 		return result
 	}
 
@@ -84,7 +85,7 @@ class ContentAssistService {
 		val value = keyword.value
 		if (value.startsWith(context.prefix) && value.length > 1 && Character.isLetter(value.charAt(0))
 				&& !result.entries.exists[proposal == value]) {
-			result.entries += new ContentAssistResult.Entry(keyword.value, null, null, null)
+			result.entries += new ContentAssistResult.Entry(context.prefix, keyword.value, null, null, null)
 		}
 	}
 	

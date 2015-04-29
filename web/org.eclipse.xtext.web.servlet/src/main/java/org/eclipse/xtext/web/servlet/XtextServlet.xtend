@@ -49,7 +49,7 @@ class XtextServlet extends HttpServlet {
 	
 	override protected doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		val service = getService(req)
-		if (service.hasSideEffects || service.hasTextInput) {
+		if (!service.hasConflict && (service.hasSideEffects || service.hasTextInput)) {
 			// Send error 405 (method not allowed)
 			super.doGet(req, resp)
 		} else {
@@ -59,7 +59,7 @@ class XtextServlet extends HttpServlet {
 	
 	override protected doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		val service = getService(req)
-		if (service.type != 'update') {
+		if (!service.hasConflict && service.type != 'update') {
 			// Send error 405 (method not allowed)
 			super.doPut(req, resp)
 		} else {
@@ -69,7 +69,7 @@ class XtextServlet extends HttpServlet {
 	
 	override protected doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		val service = getService(req)
-		if (!service.hasSideEffects && !service.hasTextInput || service.type == 'update') {
+		if (!service.hasConflict && (!service.hasSideEffects && !service.hasTextInput || service.type == 'update')) {
 			// Send error 405 (method not allowed)
 			super.doPost(req, resp)
 		} else {

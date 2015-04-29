@@ -16,10 +16,11 @@ import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Accessors
-@ToString
+@ToString(skipNulls = true)
 @SuppressWarnings("all")
 public class ValidationResult implements IServiceResult {
   @Data
+  @ToString(skipNulls = true)
   public static class Entry {
     private final String description;
     
@@ -95,6 +96,7 @@ public class ValidationResult implements IServiceResult {
     @Pure
     public String toString() {
       ToStringBuilder b = new ToStringBuilder(this);
+      b.skipNulls();
       b.add("description", this.description);
       b.add("severity", this.severity);
       b.add("line", this.line);
@@ -140,6 +142,7 @@ public class ValidationResult implements IServiceResult {
   @Pure
   public String toString() {
     ToStringBuilder b = new ToStringBuilder(this);
+    b.skipNulls();
     b.add("entries", this.entries);
     return b.toString();
   }

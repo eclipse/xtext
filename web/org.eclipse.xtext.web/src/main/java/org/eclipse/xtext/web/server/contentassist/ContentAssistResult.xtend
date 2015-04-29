@@ -14,17 +14,17 @@ import org.eclipse.xtend.lib.annotations.ToString
 import org.eclipse.xtext.web.server.IServiceResult
 
 @Accessors
-@ToString
+@ToString(skipNulls = true)
 class ContentAssistResult implements IServiceResult {
 	
 	String stateId
 	
-	String prefix
-	
 	val entries = new ArrayList<Entry>
 	
 	@Data
+	@ToString(skipNulls = true)
 	static class Entry {
+		String prefix
 		String proposal
 		String name
 		String description

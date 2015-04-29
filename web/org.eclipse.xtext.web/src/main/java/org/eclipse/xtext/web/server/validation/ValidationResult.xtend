@@ -14,12 +14,13 @@ import org.eclipse.xtend.lib.annotations.ToString
 import org.eclipse.xtext.web.server.IServiceResult
 
 @Accessors
-@ToString
+@ToString(skipNulls = true)
 class ValidationResult implements IServiceResult {
 	
 	val entries = new ArrayList<Entry>
 	
 	@Data
+	@ToString(skipNulls = true)
 	static class Entry {
 		String description
 		String severity 

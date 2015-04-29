@@ -22,7 +22,7 @@ import org.eclipse.xtext.resource.FileExtensionProvider
 import org.eclipse.xtext.resource.IResourceFactory
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.XtextResourceSet
-import org.eclipse.xtext.service.OperationCanceledError
+import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.StringInputStream
 import org.eclipse.xtext.util.TextRegion
 import org.eclipse.xtext.web.server.contentassist.ContentAssistService
@@ -34,7 +34,6 @@ import org.eclipse.xtext.web.server.persistence.ResourcePersistenceService
 import org.eclipse.xtext.web.server.validation.ValidationService
 
 import static org.eclipse.xtext.web.server.InvalidRequestException.Type.*
-import org.eclipse.xtext.service.OperationCanceledManager
 
 @Singleton
 class XtextServiceDispatcher {
@@ -46,6 +45,7 @@ class XtextServiceDispatcher {
 		private ()=>IServiceResult service
 		boolean hasSideEffects
 		boolean hasTextInput
+		boolean hasConflict
 	}
 	
 	static val LOG = Logger.getLogger(XtextServiceDispatcher)
@@ -75,24 +75,37 @@ class XtextServiceDispatcher {
 			LOG.trace('xtext-service/' + requestType + stringParams)
 		}
 		
-		switch requestType {
-			case 'load':
-				getLoadResourceService(false, parameters, sessionStore)
-			case 'revert':
-				getLoadResourceService(true, parameters, sessionStore)
-			case 'save':
-				getSaveResourceService(parameters, sessionStore)
-			case 'update':
-				getUpdateDocumentService(parameters, sessionStore)
-			case 'validation':
-				getValidationService(parameters, sessionStore)
-			case 'content-assist':
-				getContentAssistService(parameters, sessionStore)
-			default:
-				throw new InvalidRequestException(INVALID_PARAMETERS, 'The request type \'' + requestType + '\' is not supported.')
-		} => [
-			type = requestType
-		]
+		try {
+			switch requestType {
+				case 'load':
+					getLoadResourceService(false, parameters, sessionStore)
+				case 'revert':
+					getLoadResourceService(true, parameters, sessionStore)
+				case 'save':
+					getSaveResourceService(parameters, sessionStore)
+				case 'update':
+					getUpdateDocumentService(parameters, sessionStore)
+				case 'validation':
+					getValidationService(parameters, sessionStore)
+				case 'content-assist':
+					getContentAssistService(parameters, sessionStore)
+				default:
+					throw new InvalidRequestException(INVALID_PARAMETERS, 'The request type \'' + requestType + '\' is not supported.')
+			} => [
+				type = requestType
+			]
+		} catch (InvalidRequestException ire) {
+			if (ire.type == INVALID_DOCUMENT_STATE) {
+				LOG.trace('Invalid document state (' + requestType + ')')
+				return new ServiceDescriptor => [
+					type = requestType
+					service = [new ServiceConflictResult('invalidStateId')]
+					hasConflict = true
+				]
+			}
+			// The caller is responsible for translating this exception into a proper error message
+			throw ire
+		}
 	}
 	
 	protected def getRequestType(String contextPath, Map<String, String> parameters) {
