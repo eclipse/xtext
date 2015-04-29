@@ -23,6 +23,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.psi.IPsiModelAssociations;
 import org.eclipse.xtext.psi.IPsiModelAssociator;
 import org.eclipse.xtext.psi.PsiElementProvider;
+import org.eclipse.xtext.xbase.idea.jvm.JvmPsiElementExtensions;
 import org.eclipse.xtext.xbase.idea.types.psi.impl.JvmPsiClassImpl;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -89,8 +90,8 @@ public class PsiJvmModelAssociator extends JvmModelAssociator {
                 final Function1<PsiClass, Boolean> _function = new Function1<PsiClass, Boolean>() {
                   @Override
                   public Boolean apply(final PsiClass it) {
-                    EObject _userData = it.<EObject>getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY);
-                    return Boolean.valueOf(Objects.equal(_userData, jvmElement));
+                    EObject _jvmElement = JvmPsiElementExtensions.getJvmElement(it);
+                    return Boolean.valueOf(Objects.equal(_jvmElement, jvmElement));
                   }
                 };
                 _xblockexpression = IterableExtensions.<PsiClass>findFirst(((Iterable<PsiClass>)Conversions.doWrapArray(_innerClasses)), _function);
@@ -122,8 +123,8 @@ public class PsiJvmModelAssociator extends JvmModelAssociator {
               final Function1<PsiMethod, Boolean> _function = new Function1<PsiMethod, Boolean>() {
                 @Override
                 public Boolean apply(final PsiMethod it) {
-                  EObject _userData = it.<EObject>getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY);
-                  return Boolean.valueOf(Objects.equal(_userData, jvmElement));
+                  EObject _jvmElement = JvmPsiElementExtensions.getJvmElement(it);
+                  return Boolean.valueOf(Objects.equal(_jvmElement, jvmElement));
                 }
               };
               _xblockexpression = IterableExtensions.<PsiMethod>findFirst(((Iterable<PsiMethod>)Conversions.doWrapArray(_methods)), _function);
@@ -153,8 +154,8 @@ public class PsiJvmModelAssociator extends JvmModelAssociator {
               final Function1<PsiField, Boolean> _function = new Function1<PsiField, Boolean>() {
                 @Override
                 public Boolean apply(final PsiField it) {
-                  EObject _userData = it.<EObject>getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY);
-                  return Boolean.valueOf(Objects.equal(_userData, jvmElement));
+                  EObject _jvmElement = JvmPsiElementExtensions.getJvmElement(it);
+                  return Boolean.valueOf(Objects.equal(_jvmElement, jvmElement));
                 }
               };
               _xblockexpression = IterableExtensions.<PsiField>findFirst(((Iterable<PsiField>)Conversions.doWrapArray(_fields)), _function);
@@ -185,8 +186,8 @@ public class PsiJvmModelAssociator extends JvmModelAssociator {
               final Function1<PsiParameter, Boolean> _function = new Function1<PsiParameter, Boolean>() {
                 @Override
                 public Boolean apply(final PsiParameter it) {
-                  EObject _userData = it.<EObject>getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY);
-                  return Boolean.valueOf(Objects.equal(_userData, jvmElement));
+                  EObject _jvmElement = JvmPsiElementExtensions.getJvmElement(it);
+                  return Boolean.valueOf(Objects.equal(_jvmElement, jvmElement));
                 }
               };
               _xblockexpression = IterableExtensions.<PsiParameter>findFirst(((Iterable<PsiParameter>)Conversions.doWrapArray(_parameters)), _function);

@@ -20,15 +20,16 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
+ * @since 2.9
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-class NameConcatHelper {
+public class NameConcatHelper {
 
-	enum NameType {
+	public enum NameType {
 		ID, QUALIFIED, SIMPLE, TO_STRING
 	}
 	
-	static void appendConstraintsName(StringBuilder result, List<JvmTypeConstraint> constraints, char innerClassDelimiter, NameType nameType) {
+	public static void appendConstraintsName(StringBuilder result, List<JvmTypeConstraint> constraints, char innerClassDelimiter, NameType nameType) {
 		if (constraints == null || constraints.isEmpty())
 			return;
 		int wasLength = result.length();
@@ -125,7 +126,7 @@ class NameConcatHelper {
 		}
 	}
 
-	static void appendArguments(StringBuilder result, List<JvmTypeReference> arguments, char innerClassDelimiter, NameType nameType) {
+	public static void appendArguments(StringBuilder result, List<JvmTypeReference> arguments, char innerClassDelimiter, NameType nameType) {
 		if (arguments == null || arguments.isEmpty())
 			return;
 		int wasLength = result.length();

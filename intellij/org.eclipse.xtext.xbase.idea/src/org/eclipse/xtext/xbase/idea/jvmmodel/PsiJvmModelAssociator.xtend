@@ -20,6 +20,7 @@ import org.eclipse.xtext.psi.IPsiModelAssociator
 import org.eclipse.xtext.psi.PsiElementProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
 import org.eclipse.xtext.xbase.idea.types.psi.impl.JvmPsiClassImpl
+import org.eclipse.xtext.xbase.idea.jvm.JvmPsiElementExtensions
 
 class PsiJvmModelAssociator extends JvmModelAssociator {
 
@@ -56,7 +57,7 @@ class PsiJvmModelAssociator extends JvmModelAssociator {
 						if (psiClass == null)
 							return null
 						psiClass.innerClasses.findFirst [
-							getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY) == jvmElement
+							JvmPsiElementExtensions.getJvmElement(it) == jvmElement
 						]
 					}
 				]
@@ -67,7 +68,7 @@ class PsiJvmModelAssociator extends JvmModelAssociator {
 					if (psiClass == null)
 						return null
 					psiClass.methods.findFirst [
-						getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY) == jvmElement
+						JvmPsiElementExtensions.getJvmElement(it) == jvmElement
 					]
 				]
 			}
@@ -77,7 +78,7 @@ class PsiJvmModelAssociator extends JvmModelAssociator {
 					if (psiClass == null)
 						return null
 					psiClass.fields.findFirst [
-						getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY) == jvmElement
+						JvmPsiElementExtensions.getJvmElement(it) == jvmElement
 					]
 				]
 			}
@@ -87,7 +88,7 @@ class PsiJvmModelAssociator extends JvmModelAssociator {
 					if (psiMethod == null)
 						return null
 					psiMethod.parameterList.parameters.findFirst [
-						getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY) == jvmElement
+						JvmPsiElementExtensions.getJvmElement(it) == jvmElement
 					]
 				]
 			}

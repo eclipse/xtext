@@ -22,9 +22,10 @@ import com.intellij.psi.PsiTypeParameterList;
 import com.intellij.psi.PsiTypeParameterListOwner;
 import com.intellij.testFramework.UsefulTestCase;
 import junit.framework.TestCase;
-import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.idea.jvm.JvmPsiElementExtensions;
 import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass;
 import org.eclipse.xtext.xbase.idea.types.psi.LoadingTypeResourcePhase;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -164,6 +165,48 @@ public class JvmPsiClassTest extends LightXtendTest {
     this.myFixture.testHighlighting(true, true, true, _virtualFile);
   }
   
+  public void testCyclicResolution4() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package mypackage;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("public class Bar extends Foo<Bar> {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public void someMethod(Bar b) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.myFixture.addClass(_builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package mypackage");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo<T extends Bar> {");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def void callToBar(T bar) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("bar.someMethod(bar)");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    final PsiFile xtendFile = this.myFixture.addFileToProject("mypackage/Foo.xtend", _builder_1.toString());
+    VirtualFile _virtualFile = xtendFile.getVirtualFile();
+    this.myFixture.testHighlighting(true, true, true, _virtualFile);
+  }
+  
   public void testResolution() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package mypackage");
@@ -225,7 +268,7 @@ public class JvmPsiClassTest extends LightXtendTest {
     this.myFixture.addFileToProject("mypackage/Foo.xtend", _builder.toString());
     final JvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
     PsiMethod[] _methods = psiClass.getMethods();
-    UsefulTestCase.assertSize(1, _methods);
+    UsefulTestCase.assertSize(2, _methods);
     final PsiMethod[] method = psiClass.findMethodsByName("methodWithErros", false);
     TestCase.assertNotNull(method);
   }
@@ -241,8 +284,7 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.newLine();
     this.myFixture.addFileToProject("mypackage/Foo.xtend", _builder.toString());
     final JvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
-    EClass _type = psiClass.getType();
-    LoadingTypeResourcePhase.setLoadingTypeResource(_type, true);
+    this.setLoadingTypeResource(psiClass, true);
     String _name = psiClass.getName();
     TestCase.assertEquals("Foo", _name);
     String _qualifiedName = psiClass.getQualifiedName();
@@ -285,8 +327,7 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.newLine();
     this.myFixture.addFileToProject("mypackage/Foo.xtend", _builder.toString());
     final JvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
-    EClass _type = psiClass.getType();
-    LoadingTypeResourcePhase.setLoadingTypeResource(_type, true);
+    this.setLoadingTypeResource(psiClass, true);
     PsiModifierList _modifierList = psiClass.getModifierList();
     boolean _hasModifierProperty = _modifierList.hasModifierProperty(PsiModifier.PUBLIC);
     TestCase.assertFalse(_hasModifierProperty);
@@ -315,8 +356,7 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.newLine();
     this.myFixture.addFileToProject("mypackage/Foo.xtend", _builder.toString());
     final JvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
-    EClass _type = psiClass.getType();
-    LoadingTypeResourcePhase.setLoadingTypeResource(_type, true);
+    this.setLoadingTypeResource(psiClass, true);
     boolean _isInterface = psiClass.isInterface();
     TestCase.assertTrue(_isInterface);
   }
@@ -332,8 +372,7 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.newLine();
     this.myFixture.addFileToProject("mypackage/Foo.xtend", _builder.toString());
     final JvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
-    EClass _type = psiClass.getType();
-    LoadingTypeResourcePhase.setLoadingTypeResource(_type, true);
+    this.setLoadingTypeResource(psiClass, true);
     boolean _isEnum = psiClass.isEnum();
     TestCase.assertTrue(_isEnum);
   }
@@ -349,8 +388,7 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.newLine();
     this.myFixture.addFileToProject("mypackage/Foo.xtend", _builder.toString());
     final JvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
-    EClass _type = psiClass.getType();
-    LoadingTypeResourcePhase.setLoadingTypeResource(_type, true);
+    this.setLoadingTypeResource(psiClass, true);
     boolean _isAnnotationType = psiClass.isAnnotationType();
     TestCase.assertTrue(_isAnnotationType);
   }
@@ -375,14 +413,11 @@ public class JvmPsiClassTest extends LightXtendTest {
     TestCase.assertFalse(_isEnum);
     PsiReferenceList _extendsList = psiClass.getExtendsList();
     PsiJavaCodeReferenceElement[] _referenceElements = _extendsList.getReferenceElements();
-    UsefulTestCase.assertEmpty(_referenceElements);
-    PsiReferenceList _extendsList_1 = psiClass.getExtendsList();
-    PsiClassType[] _referencedTypes = _extendsList_1.getReferencedTypes();
-    UsefulTestCase.assertEmpty(_referencedTypes);
+    PsiJavaCodeReferenceElement _head = IterableExtensions.<PsiJavaCodeReferenceElement>head(((Iterable<PsiJavaCodeReferenceElement>)Conversions.doWrapArray(_referenceElements)));
+    String _qualifiedName_1 = _head.getQualifiedName();
+    TestCase.assertEquals("java.lang.Object", _qualifiedName_1);
     PsiField[] _fields = psiClass.getFields();
     UsefulTestCase.assertEmpty(_fields);
-    PsiMethod[] _methods = psiClass.getMethods();
-    UsefulTestCase.assertEmpty(_methods);
     boolean _hasTypeParameters = psiClass.hasTypeParameters();
     TestCase.assertFalse(_hasTypeParameters);
     PsiTypeParameterList _typeParameterList = psiClass.getTypeParameterList();
@@ -522,7 +557,7 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.newLine();
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("def foo() {");
+    _builder.append("def m() {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("}");
@@ -533,11 +568,16 @@ public class JvmPsiClassTest extends LightXtendTest {
     this.myFixture.configureByText("Foo.xtend", _builder.toString());
     final JvmPsiClass psiClass = this.findJvmPsiClass("foo.Foo");
     final PsiMethod[] methods = psiClass.getMethods();
-    UsefulTestCase.assertSize(1, methods);
-    final PsiMethod method = IterableExtensions.<PsiMethod>head(((Iterable<PsiMethod>)Conversions.doWrapArray(methods)));
+    UsefulTestCase.assertSize(2, methods);
+    final PsiMethod method = IterableExtensions.<PsiMethod>last(((Iterable<PsiMethod>)Conversions.doWrapArray(methods)));
     TestCase.assertNotNull(method);
     String _name = method.getName();
-    TestCase.assertEquals("foo", _name);
+    TestCase.assertEquals("m", _name);
+    final PsiMethod[] ctrs = psiClass.getConstructors();
+    UsefulTestCase.assertSize(1, ctrs);
+    Object _head = IterableExtensions.<Object>head(((Iterable<Object>)Conversions.doWrapArray(ctrs)));
+    Object _head_1 = IterableExtensions.<Object>head(((Iterable<Object>)Conversions.doWrapArray(methods)));
+    TestCase.assertSame(_head, _head_1);
   }
   
   public void testPsiTypeParameterListOwner() {
@@ -583,5 +623,10 @@ public class JvmPsiClassTest extends LightXtendTest {
     PsiTypeParameterList _typeParameterList_2 = psiClass.getTypeParameterList();
     int _typeParameterIndex = _typeParameterList_2.getTypeParameterIndex(typeParameter);
     TestCase.assertEquals(0, _typeParameterIndex);
+  }
+  
+  public void setLoadingTypeResource(final JvmPsiClass c, final boolean b) {
+    EObject _jvmElement = JvmPsiElementExtensions.getJvmElement(c);
+    LoadingTypeResourcePhase.setLoadingTypeResource(_jvmElement, b);
   }
 }

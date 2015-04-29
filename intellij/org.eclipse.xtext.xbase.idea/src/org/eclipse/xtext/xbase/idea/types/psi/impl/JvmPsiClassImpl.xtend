@@ -8,8 +8,10 @@
 package org.eclipse.xtext.xbase.idea.types.psi.impl
 
 import com.google.inject.Inject
+import com.intellij.core.JavaCoreBundle
 import com.intellij.lang.Language
-import com.intellij.openapi.util.Key
+import com.intellij.lang.java.JavaLanguage
+import com.intellij.psi.JVMElementFactories
 import com.intellij.psi.JavaElementVisitor
 import com.intellij.psi.JavaPsiFacade
 import com.intellij.psi.PsiAnnotation
@@ -44,6 +46,7 @@ import com.intellij.psi.impl.light.LightModifierList
 import com.intellij.psi.impl.light.LightParameter
 import com.intellij.psi.impl.light.LightParameterListBuilder
 import com.intellij.psi.impl.light.LightReferenceListBuilder
+import com.intellij.psi.impl.light.LightTypeParameter
 import com.intellij.psi.impl.light.LightTypeParameterListBuilder
 import com.intellij.psi.impl.light.LightVariableBuilder
 import com.intellij.psi.impl.source.ClassInnerStuffCache
@@ -67,29 +70,30 @@ import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtext.common.types.JvmOperation
+import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator
 import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtext.common.types.impl.NameConcatHelper
 import org.eclipse.xtext.idea.lang.IXtextLanguage
 import org.eclipse.xtext.psi.PsiModelAssociations
 import org.eclipse.xtext.service.OperationCanceledError
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter
+import org.eclipse.xtext.xbase.idea.jvm.JvmPsiElementExtensions
+import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xtype.XComputedTypeReference
-import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass
-import com.intellij.core.JavaCoreBundle
 
 class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensibleClass {
-
-	public static val JVM_ELEMENT_KEY = new Key<EObject>("org.eclipse.xtext.idea.jvm.element")
 
 	@Inject
 	PsiModelAssociations psiAssocations
 	@Inject
 	IJvmModelAssociations jvmAssocations
-
+	
 	val JvmDeclaredType jvmType
 	val PsiElement psiElement
 	val ClassInnerStuffCache membersCache
+	var PsiTypeParameterList typeParameterList
 
 	new(JvmDeclaredType declaredType, PsiElement psiElement) {
 		super(psiElement.manager, psiElement.language)
@@ -99,9 +103,10 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 		if (language instanceof IXtextLanguage) {
 			language.injectMembers(this)
 		}
+		JvmPsiElementExtensions.setJvmElement(this, declaredType)
 		this.membersCache = new ClassInnerStuffCache(this);
 	}
-
+	
 	override getType() {
 		jvmType.eClass
 	}
@@ -131,7 +136,7 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 	}
 
 	override getConstructors() {
-		PsiImplUtil.getConstructors(this)
+		membersCache.constructors
 	}
 
 	override getFields() {
@@ -155,7 +160,7 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 				docComment = f.psiDocComment
 				deprecated = f.deprecated
 				nullableNavigationElement = f.navigationElement
-				putUserData(JVM_ELEMENT_KEY, f)
+				JvmPsiElementExtensions.setJvmElement(it, f)
 			]) as PsiField
 		].toList
 	}
@@ -179,7 +184,7 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 					methodReturnType = m.returnType.toPsiType
 				}
 				nullableNavigationElement = m.navigationElement
-				putUserData(JVM_ELEMENT_KEY, m)
+				JvmPsiElementExtensions.setJvmElement(it, m)
 			]) as PsiMethod
 		].toList
 	}
@@ -197,7 +202,7 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 					addParameter(
 						new LightParameter(parameterName, parameterType, psiElement, language) => [
 							nullableNavigationElement = p.navigationElement
-							putUserData(JVM_ELEMENT_KEY, p)
+							JvmPsiElementExtensions.setJvmElement(it, p)
 						]
 					)
 				}
@@ -314,7 +319,7 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 			val psiElement = psiAssocations.getPsiElement(sourceElement) as PsiNamedElement
 			(new JvmPsiClassImpl(inner, psiElement) => [
 				nullableNavigationElement = inner.navigationElement
-				putUserData(JVM_ELEMENT_KEY, inner)
+				JvmPsiElementExtensions.setJvmElement(it, inner)
 			]) as PsiClass
 		].toList
 	}
@@ -417,17 +422,40 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 	override isDeprecated() {
 		jvmType.isDeprecated
 	}
-
+	
 	override getTypeParameterList() {
-		jvmType.psiTypeParameterList
+		if (typeParameterList === null)
+			return typeParameterList = jvmType.psiTypeParameterList
+		return typeParameterList
 	}
 
 	private def getPsiTypeParameterList(EObject declarator) {
-		new LightTypeParameterListBuilder(manager, language) => [
+		new LightTypeParameterListBuilder(manager, language) => [ builder |
 			if (declarator instanceof JvmTypeParameterDeclarator) {
-				// TODO
+				declarator.typeParameters.forEach [ builder.addParameter(toPsiTypeParameter)]
 			}
 		]
+	}
+	
+	def toPsiTypeParameter(JvmTypeParameter typeParam) {
+		val psiFactory = JVMElementFactories.requireFactory(JavaLanguage.INSTANCE, project)
+		val sb = new StringBuilder()
+		sb.append('public <').append(typeParam.simpleName).append(' ')
+		NameConcatHelper.appendConstraintsName(sb, typeParam.constraints, '.', NameConcatHelper.NameType.QUALIFIED)
+		sb.append('> void m(){}')
+		val psiTypeParam = try {
+			psiFactory.createMethodFromText(sb.toString, null).typeParameters.get(0)
+		} catch(IncorrectOperationException e) {
+			psiFactory.createTypeParameter(typeParam.simpleName, PsiClassType.EMPTY_ARRAY)
+		}
+		// TODO set navigation element et al
+		return new LightTypeParameter(psiTypeParam) {
+			
+			override getOwner() {
+				return JvmPsiClassImpl.this
+			}
+			
+		}
 	}
 
 	override accept(PsiElementVisitor visitor) {
@@ -543,7 +571,10 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 	}
 
 	override hasTypeParameters() {
-		PsiImplUtil.hasTypeParameters(this)
+		if (jvmType instanceof JvmTypeParameterDeclarator) {
+			return !jvmType.typeParameters.empty
+		}
+		return false
 	}
 }
 

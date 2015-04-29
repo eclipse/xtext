@@ -103,7 +103,8 @@ public class PsiModelAssociations implements IPsiModelAssociations, IPsiModelAss
 		
 	}
 	
-    public EObject getEObject(PsiElement element) {
+    @Override
+	public EObject getEObject(PsiElement element) {
     	if (element == null) {
             return null;
         }
@@ -114,7 +115,8 @@ public class PsiModelAssociations implements IPsiModelAssociations, IPsiModelAss
     	return null;
     }
 
-    public PsiElement getPsiElement(EObject object) {
+    @Override
+	public PsiElement getPsiElement(EObject object) {
     	try {
 	    	if (object == null || object.eIsProxy()) {
 	    		return null;
