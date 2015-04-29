@@ -92,7 +92,11 @@ public abstract class BaseXtextFile extends PsiFileBase {
 			@Override
 			public Result<XtextResource> compute() {
 				XtextResource resource = createResource();
-				return Result.create(resource, BaseXtextFile.this);
+				installResourceDescription(resource);
+				return Result.create(resource, new Object[] {
+						PsiModificationTracker.MODIFICATION_COUNT, 
+						BaseXtextFile.this
+				});
 			}
         	
         }, false);
@@ -110,26 +114,7 @@ public abstract class BaseXtextFile extends PsiFileBase {
     
     protected XtextResource doGetResource() {
     	synchronized(resourceCacheLock) {
-    		return CachedValuesManager.getManager(getProject()).<XtextResource, BaseXtextFile>getCachedValue(this, new CachedValueProvider<XtextResource>() {
-
-    			@Override
-				public Result<XtextResource> compute() {
-    				// check whether the cached resource is still up-to-date or will be computed
-					boolean hasUpToDateValue = resourceCache.hasUpToDateValue();
-					XtextResource resource = resourceCache.getValue();
-					// if we reuse an existing resource, we have to relink it
-					if (hasUpToDateValue) {
-						resource.getResourceSet().getResources().retainAll(Collections.singletonList(resource));
-						resource.relink();
-					}
-			        installResourceDescription(resource);
-					return Result.create(resource, new Object[] {
-							PsiModificationTracker.MODIFICATION_COUNT, 
-							BaseXtextFile.this
-					});
-				}
-    			
-    		});
+    		return resourceCache.getValue();
     	}
     }
 	
