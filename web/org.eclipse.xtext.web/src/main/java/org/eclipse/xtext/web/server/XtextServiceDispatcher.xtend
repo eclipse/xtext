@@ -34,6 +34,7 @@ import org.eclipse.xtext.web.server.persistence.ResourcePersistenceService
 import org.eclipse.xtext.web.server.validation.ValidationService
 
 import static org.eclipse.xtext.web.server.InvalidRequestException.Type.*
+import org.eclipse.xtext.service.OperationCanceledManager
 
 @Singleton
 class XtextServiceDispatcher {
@@ -58,6 +59,7 @@ class XtextServiceDispatcher {
 	@Inject Provider<XtextWebDocument> documentProvider
 	@Inject FileExtensionProvider fileExtensionProvider
 	@Inject IResourceFactory resourceFactory
+	@Inject OperationCanceledManager operationCanceledManager
 	
 	def getService(String path, Map<String, String> parameters, ISessionStore sessionStore) throws InvalidRequestException {
 		val requestType = getRequestType(path, parameters)
@@ -321,12 +323,11 @@ class XtextServiceDispatcher {
 	
 	protected def dispatch handleError(ServiceDescriptor service, Throwable throwable) {
 		// The caller is responsible for sending an 'Internal Server Error' message to the client
+		if (operationCanceledManager.isOperationCanceledException(throwable)) {
+			LOG.trace('Service canceled (' + service.type + ')')
+			return new ServiceConflictResult('canceled')
+		}
 		throw throwable
-	}
-	
-	protected def dispatch handleError(ServiceDescriptor service, OperationCanceledError error) {
-		LOG.trace('Service canceled (' + service.type + ')')
-		new ServiceConflictResult('canceled')
 	}
 	
 	protected def dispatch handleError(ServiceDescriptor service, InvalidRequestException exception) {
