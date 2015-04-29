@@ -120,7 +120,7 @@ public class DomainmodelFormatter extends XbaseFormatter {
     EList<AbstractElement> _elements = pkg.getElements();
     for (final AbstractElement element : _elements) {
       {
-        this.format(element, document);
+        document.<AbstractElement>format(element);
         final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
           @Override
           public void apply(final IHiddenRegionFormatter it) {
@@ -173,7 +173,7 @@ public class DomainmodelFormatter extends XbaseFormatter {
     EList<Feature> _features = entity.getFeatures();
     for (final Feature feature : _features) {
       {
-        this.format(feature, document);
+        document.<Feature>format(feature);
         final Procedure1<IHiddenRegionFormatter> _function_4 = new Procedure1<IHiddenRegionFormatter>() {
           @Override
           public void apply(final IHiddenRegionFormatter it) {
@@ -196,7 +196,7 @@ public class DomainmodelFormatter extends XbaseFormatter {
     };
     document.surround(_keyword, _function);
     JvmTypeReference _type = property.getType();
-    this.format(_type, document);
+    document.<JvmTypeReference>format(_type);
   }
   
   protected void _format(final Operation operation, @Extension final IFormattableDocument document) {
@@ -242,7 +242,7 @@ public class DomainmodelFormatter extends XbaseFormatter {
       }
       EList<JvmFormalParameter> _params_1 = operation.getParams();
       for (final JvmFormalParameter params : _params_1) {
-        this.format(params, document);
+        document.<JvmFormalParameter>format(params);
       }
       ISemanticRegionsFinder _regionFor_3 = this.textRegionExtensions.regionFor(operation);
       ISemanticRegion _keyword_2 = _regionFor_3.keyword(")");
@@ -282,7 +282,7 @@ public class DomainmodelFormatter extends XbaseFormatter {
       };
       document.<JvmTypeReference>append(_prepend_1, _function_7);
       JvmTypeReference _type_2 = operation.getType();
-      this.format(_type_2, document);
+      document.<JvmTypeReference>format(_type_2);
     } else {
       ISemanticRegionsFinder _regionFor_5 = this.textRegionExtensions.regionFor(operation);
       ISemanticRegion _keyword_4 = _regionFor_5.keyword(")");
@@ -295,7 +295,7 @@ public class DomainmodelFormatter extends XbaseFormatter {
       document.append(_keyword_4, _function_8);
     }
     XExpression _body = operation.getBody();
-    this.format(_body, document);
+    document.<XExpression>format(_body);
   }
   
   public void format(final Object entity, final IFormattableDocument document) {

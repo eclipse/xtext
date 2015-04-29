@@ -88,16 +88,14 @@ public class RuleEngineFormatter extends XbaseFormatter {
     document.<Model>prepend(model, _function);
     EList<Declaration> _declarations = model.getDeclarations();
     for (final Declaration declaration : _declarations) {
-      {
-        this.format(declaration, document);
-        final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
-          @Override
-          public void apply(final IHiddenRegionFormatter it) {
-            it.setNewLines(1, 1, 2);
-          }
-        };
-        document.<Declaration>append(declaration, _function_1);
-      }
+      Declaration _format = document.<Declaration>format(declaration);
+      final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
+        public void apply(final IHiddenRegionFormatter it) {
+          it.setNewLines(1, 1, 2);
+        }
+      };
+      document.<Declaration>append(_format, _function_1);
     }
   }
   
@@ -122,25 +120,23 @@ public class RuleEngineFormatter extends XbaseFormatter {
     document.surround(_keyword, _function_1);
     EList<State> _states = device.getStates();
     for (final State state : _states) {
-      {
-        ISemanticRegionFinder _immediatelyPreceding = this.textRegionExtensions.immediatelyPreceding(state);
-        ISemanticRegion _keyword_1 = _immediatelyPreceding.keyword(",");
-        final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
-          @Override
-          public void apply(final IHiddenRegionFormatter it) {
-            it.noSpace();
-          }
-        };
-        ISemanticRegion _prepend = document.prepend(_keyword_1, _function_2);
-        final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
-          @Override
-          public void apply(final IHiddenRegionFormatter it) {
-            it.oneSpace();
-          }
-        };
-        document.append(_prepend, _function_3);
-        this.format(state, document);
-      }
+      State _format = document.<State>format(state);
+      ISemanticRegionFinder _immediatelyPreceding = this.textRegionExtensions.immediatelyPreceding(_format);
+      ISemanticRegion _keyword_1 = _immediatelyPreceding.keyword(",");
+      final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
+        public void apply(final IHiddenRegionFormatter it) {
+          it.noSpace();
+        }
+      };
+      ISemanticRegion _prepend = document.prepend(_keyword_1, _function_2);
+      final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
+        public void apply(final IHiddenRegionFormatter it) {
+          it.oneSpace();
+        }
+      };
+      document.append(_prepend, _function_3);
     }
   }
   
@@ -164,15 +160,14 @@ public class RuleEngineFormatter extends XbaseFormatter {
     };
     document.surround(_feature_1, _function_1);
     XExpression _thenPart = rule.getThenPart();
+    XExpression _format = document.<XExpression>format(_thenPart);
     final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.newLine();
       }
     };
-    document.<XExpression>prepend(_thenPart, _function_2);
-    XExpression _thenPart_1 = rule.getThenPart();
-    this.format(_thenPart_1, document);
+    document.<XExpression>prepend(_format, _function_2);
   }
   
   @Override
@@ -224,7 +219,7 @@ public class RuleEngineFormatter extends XbaseFormatter {
             document.<XExpression>append(child, _function_3);
           }
         }
-        this.format(child, document);
+        document.<XExpression>format(child);
       }
     }
   }
@@ -258,7 +253,7 @@ public class RuleEngineFormatter extends XbaseFormatter {
       }
     };
     XExpression _append = document.<XExpression>append(_switch_1, _function_2);
-    this.format(_append, document);
+    document.<XExpression>format(_append);
     EList<XCasePart> _cases = expr.getCases();
     for (final XCasePart c : _cases) {
       {
@@ -340,7 +335,7 @@ public class RuleEngineFormatter extends XbaseFormatter {
         };
         document.append(_prepend_1, _function_9);
         XExpression _case_4 = c.getCase();
-        this.format(_case_4, document);
+        document.<XExpression>format(_case_4);
         boolean _and_1 = false;
         EList<XCasePart> _cases_1 = expr.getCases();
         XCasePart _last = IterableExtensions.<XCasePart>last(_cases_1);
@@ -426,7 +421,7 @@ public class RuleEngineFormatter extends XbaseFormatter {
         doc.<XExpression>prepend(expr, _function_3);
       }
     }
-    this.format(expr, doc);
+    doc.<XExpression>format(expr);
   }
   
   @Override
@@ -484,7 +479,7 @@ public class RuleEngineFormatter extends XbaseFormatter {
         doc.<XExpression>surround(expr, _function_4);
       }
     }
-    this.format(expr, doc);
+    doc.<XExpression>format(expr);
   }
   
   @Override
@@ -510,7 +505,7 @@ public class RuleEngineFormatter extends XbaseFormatter {
       };
       doc.<XExpression>surround(expr, _function_1);
     }
-    this.format(expr, doc);
+    doc.<XExpression>format(expr);
   }
   
   public void format(final Object device, final IFormattableDocument document) {

@@ -57,9 +57,9 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 				pkg.append(blankLinesAfterPackageDecl)
 			}
 		}
-		xtendFile.importSection?.format(format)
+		xtendFile.importSection?.format
 		for (clazz : xtendFile.xtendTypes) {
-			clazz.format(format)
+			clazz.format
 			if (clazz != xtendFile.xtendTypes.last)
 				clazz.append(blankLinesBetweenClasses)
 		}
@@ -71,7 +71,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 		if (target.annotations.isEmpty)
 			return;
 		for (a : target.annotations) {
-			a.format(document)
+			a.format
 			a.append(configKey)
 		}
 	}
@@ -82,11 +82,11 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 		formatTypeParameters(clazz, clazz.typeParameters, format)
 		clazz.regionFor.keyword("class").append[oneSpace]
 		clazz.regionFor.keyword("extends").surround[oneSpace]
-		clazz.^extends.format(format)
+		clazz.^extends.format
 		clazz.regionFor.keyword("implements").surround[oneSpace]
 		for (imp : clazz.^implements) {
 			imp.immediatelyFollowing.keyword(",").prepend[noSpace].append[oneSpace]
-			imp.format(format)
+			imp.format
 		}
 		formatBody(clazz, format)
 	}
@@ -96,7 +96,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 		if (!typeParameters.empty) {
 			member.regionFor.keyword("<").surround[noSpace]
 			for (arg : typeParameters) {
-				arg.format(format)
+				arg.format
 				arg.immediatelyFollowing.keyword(",").prepend[noSpace].append[oneSpace]
 			}
 			member.regionFor.keyword(">").prepend[noSpace]
@@ -112,7 +112,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 			open.append(blankLinesBeforeFirstMember)
 			for (i : 0 .. (type.members.size - 1)) {
 				val current = type.members.get(i)
-				current.format(format)
+				current.format
 				if (i < type.members.size - 1) {
 					val next = type.members.get(i + 1)
 					if (current instanceof XtendField && next instanceof XtendField)
@@ -139,7 +139,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 		interfaze.regionFor.keyword("extends").surround[oneSpace]
 		for (imp : interfaze.extends) {
 			imp.immediatelyFollowing.keyword(",").prepend[noSpace].append[oneSpace]
-			imp.format(format)
+			imp.format
 		}
 		formatBody(interfaze, format)
 	}
@@ -163,7 +163,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 			open.append(blankLinesBeforeFirstMember)
 			for (i : 0 .. (enumeration.members.size - 1)) {
 				val current = enumeration.members.get(i)
-				current.format(format)
+				current.format
 				if (i < enumeration.members.size - 1) {
 					current.immediatelyFollowing.keyword(",").prepend[noSpace].append(blankLinesBetweenEnumLiterals)
 				} else {
@@ -182,7 +182,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 		if (!func.typeParameters.empty) {
 			func.regionFor.keyword("<").append[noSpace]
 			for (arg : func.typeParameters) {
-				arg.format(format)
+				arg.format
 				arg.immediatelyFollowing.keyword(",").prepend[noSpace].append[oneSpace]
 			}
 			func.regionFor.keyword(">").surround([noSpace])
@@ -192,7 +192,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 		close.append(bracesInNewLine)
 		formatCommaSeparatedList(func.parameters, open, close, format)
 
-		func.expression.format(format)
+		func.expression.format
 	}
 
 	def dispatch void format(XtendFunction func, extension IFormattableDocument format) {
@@ -201,7 +201,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 		if (!func.typeParameters.empty) {
 			func.regionFor.keyword("<").append[noSpace]
 			for (arg : func.typeParameters) {
-				arg.format(format)
+				arg.format
 				arg.immediatelyFollowing.keyword(",").prepend[noSpace].append[oneSpace]
 			}
 			func.regionFor.keyword(">").prepend[noSpace].append[oneSpace]
@@ -214,8 +214,8 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 		if (func.expression != null)
 			close.append(bracesInNewLine)
 		formatCommaSeparatedList(func.parameters, open, close, format)
-		func.returnType.format(format)
-		func.expression.format(format)
+		func.returnType.format
+		func.expression.format
 	}
 
 	def dispatch void format(XtendField field, extension IFormattableDocument document) {
@@ -224,13 +224,13 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 		if (field.name != null)
 			field.type.append[oneSpace]
 		field.regionFor.keyword("=").prepend[oneSpace].append[oneSpace]
-		field.type.format(document)
-		field.initialValue.format(document)
+		field.type.format
+		field.initialValue.format
 	}
 
 	def dispatch void format(XtendParameter param, extension IFormattableDocument format) {
 		formatAnnotations(param, format, newLineAfterParameterAnnotations)
-		param.parameterType.format(format)
+		param.parameterType.format
 		val nameNode = param.regionFor.feature(XTEND_PARAMETER__NAME)
 		nameNode.prepend[oneSpace]
 	}

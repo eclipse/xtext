@@ -81,7 +81,7 @@ public class XbaseWithAnnotationsFormatter extends XbaseFormatter {
     boolean _notEquals = (!Objects.equal(_value, null));
     if (_notEquals) {
       XExpression _value_1 = ann.getValue();
-      this.format(_value_1, document);
+      document.<XExpression>format(_value_1);
       ISemanticRegionsFinder _regionFor_2 = this.textRegionExtensions.regionFor(ann);
       ISemanticRegion _keyword_2 = _regionFor_2.keyword(")");
       final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
@@ -109,7 +109,7 @@ public class XbaseWithAnnotationsFormatter extends XbaseFormatter {
             };
             document.surround(_keyword_3, _function_3);
             XExpression _value_2 = pair.getValue();
-            this.format(_value_2, document);
+            document.<XExpression>format(_value_2);
             ISemanticRegionFinder _immediatelyFollowing = this.textRegionExtensions.immediatelyFollowing(pair);
             ISemanticRegion _keyword_4 = _immediatelyFollowing.keyword(",");
             final Procedure1<IHiddenRegionFormatter> _function_4 = new Procedure1<IHiddenRegionFormatter>() {
