@@ -15,6 +15,11 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 	ValidationService.prototype = new AbstractXtextService();
 
 	ValidationService.prototype.computeProblems = function(editorContext, params) {
+		if (editorContext.getClientServiceState().validation) {
+			// Validation has already been triggered by another event
+			return;
+		}
+		
 		var serverData = {
 			contentType : params.contentType
 		};
@@ -27,15 +32,23 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 			if (knownServerState.stateId !== undefined) {
 				serverData.requiredStateId = knownServerState.stateId;
 			}
+			if (this._updateService && this._updateService.checkRunningUpdate(false)) {
+				// An update is currently running - it will retrigger validation on completion
+				return;
+			}
 		}
-		
+
+		var self = this;
 		this.sendRequest(editorContext, {
 			type : httpMethod,
 			data : serverData,
 			success : function(result) {
 				if (result.conflict) {
-					// A conflict with a higher-priority service occured - ignore this, since
-					// validation will be retriggered anyway.
+					if (self.increaseRecursionCount(editorContext)) {
+						delete editorContext.getClientServiceState().validation;
+						self.computeProblems(editorContext, params);
+						return true;
+					}
 					return false;
 				}
 				var problems = [];
@@ -49,6 +62,7 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 					});
 				}
 				editorContext.showMarkers(problems)
+				editorContext.getClientServiceState().validation = "finished";
 			}
 		});
 	};

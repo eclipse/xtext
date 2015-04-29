@@ -17,9 +17,6 @@
 		});
 		require(["xtext/xtext"], function(xtext) {
 			var editor = xtext.createEditor();
-			editor.xtextServiceErrorListener = function(requestType, xhr, textStatus, errorThrown) {
-				window.alert("Xtext service '" + requestType + "' failed: " + errorThrown);
-			};
 			$("#save-button").click(function() {
 				xtext.invokeService(editor, "save");
 			});
@@ -36,7 +33,8 @@
 		data-editor-resource-uri="example.entities"
 		data-editor-status-element="status"
 		data-editor-dirty-element="dirty-indicator"
-		data-editor-enable-save-action="true"></div>
+		data-editor-enable-save-action="true"
+		data-editor-show-error-dialogs="true"></div>
 	<div class="status-wrapper">
 		<div id="dirty-indicator">modified</div>
 		<div id="status">Welcome to Xtext-Web</div>

@@ -61,12 +61,19 @@ public class ContentAssistService {
       }
     };
     final ContentAssistContextFactory contextFactory = ObjectExtensions.<ContentAssistContextFactory>operator_doubleArrow(_get, _function);
+    final String[] stateIdWrapper = new String[1];
     final CancelableUnitOfWork<ContentAssistContext[], IXtextWebDocument> _function_1 = new CancelableUnitOfWork<ContentAssistContext[], IXtextWebDocument>() {
       @Override
       public ContentAssistContext[] exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
-        String _text = it.getText();
-        XtextResource _resource = it.getResource();
-        return contextFactory.create(_text, selection, offset, _resource);
+        ContentAssistContext[] _xblockexpression = null;
+        {
+          String _stateId = it.getStateId();
+          stateIdWrapper[0] = _stateId;
+          String _text = it.getText();
+          XtextResource _resource = it.getResource();
+          _xblockexpression = contextFactory.create(_text, selection, offset, _resource);
+        }
+        return _xblockexpression;
       }
     };
     final CancelableUnitOfWork<ContentAssistContext[], IXtextWebDocument> _function_2 = new CancelableUnitOfWork<ContentAssistContext[], IXtextWebDocument>() {
@@ -77,7 +84,8 @@ public class ContentAssistService {
       }
     };
     final ContentAssistContext[] contexts = document.<ContentAssistContext[]>priorityReadOnly(_function_1, _function_2);
-    return this.createProposals(contexts, null);
+    String _get_1 = stateIdWrapper[0];
+    return this.createProposals(contexts, _get_1);
   }
   
   public ContentAssistResult createProposalsWithUpdate(final XtextWebDocumentAccess document, final String deltaText, final int deltaOffset, final int deltaReplaceLength, final ITextRegion textSelection, final int caretOffset) {

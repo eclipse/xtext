@@ -10,6 +10,7 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 	
 	function UpdateService(serverUrl, resourceUri) {
 		this.initialize(serverUrl, resourceUri, "update");
+		this.setUpdateService(this);
 		this._completionCallbacks = [];
 	};
 	
@@ -52,11 +53,13 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 		}
 	}
 	
-	UpdateService.prototype.checkRunningUpdate = function() {
+	UpdateService.prototype.checkRunningUpdate = function(startRunning) {
 		if (this._isRunningUpdate) {
 			return true;
 		} else {
-			this._isRunningUpdate = true;
+			if (startRunning) {
+				this._isRunningUpdate = true;
+			}
 			return false;
 		}
 	}
@@ -66,7 +69,7 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 	}
 
 	UpdateService.prototype.update = function(editorContext, params) {
-		if (this.checkRunningUpdate()) {
+		if (this.checkRunningUpdate(true)) {
 			var self = this;
 			this.addCompletionCallback(function() { self.update(editorContext, params) });
 			return;
@@ -94,11 +97,18 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 			data : serverData,
 			success : function(result) {
 				if (result.conflict) {
-					// A conflict with another service occured - retry
-					self.retry(self.update, editorContext, params);
+					if (knownServerState.text !== undefined) {
+						delete knownServerState.text;
+						delete knownServerState.stateId;
+						self.update(editorContext, params);
+						return true;
+					}
 					return false;
 				}
-				editorContext.updateServerState(currentText, result.stateId);
+				var listeners = editorContext.updateServerState(currentText, result.stateId);
+				for (i in listeners) {
+					self.addCompletionCallback(listeners[i]);
+				}
 			},
 			complete : self.onComplete.bind(self)
 		});

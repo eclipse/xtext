@@ -59,8 +59,6 @@
  * resourceUri {String}
  *     The URI of the resource displayed in the text editor; this option is sent to the server to
  *     communicate required information on the respective resource.
- * retries = 5 {Integer}
- *     The number of times a service request is repeated when a conflict with another request occurs.
  * sendFullText = false {Boolean}
  *     Whether the full text shall be sent to the server with each request; use this if you want
  *     the server to run in stateless mode. If the option is inactive, the server state is updated regularly.
@@ -70,6 +68,8 @@
  *     Whether to focus the editor after creation.
  * showAnnotationRuler = true {Boolean}
  *     Whether the annotation ruler is shown.
+ * showErrorDialogs = false {Boolean}
+ *     Whether errors should be displayed in popup dialogs.
  * showFoldingRuler = true {Boolean}
  *     Whether the folding ruler is shown.
  * showLinesRuler = true {Boolean}
@@ -317,12 +317,8 @@ define([
 	XtextEditor.prototype.invokeXtextService = function(service, invokeOptions) {
 		throw "The Xtext services have not been configured.";
 	};
-	XtextEditor.prototype.xtextServiceSuccessListener = function(requestType, result) {
-		// This listener does nothing; overwrite this method to react to completed service requests.
-	};
-	XtextEditor.prototype.xtextServiceErrorListener = function(requestType, xhr, textStatus, errorThrown) {
-		console.log("Xtext service '" + requestType + "' failed: " + errorThrown);
-	};
+	XtextEditor.prototype.xtextServiceSuccessListeners = [];
+	XtextEditor.prototype.xtextServiceErrorListeners = [];
 	
 	var publicFunctions = {};
 	
@@ -436,12 +432,17 @@ define([
 		var validationService = new ValidationService(serverUrl, resourceUri);
 		
 		function refreshDocument() {
+			editorContext.clearClientServiceState();
 			validationService.computeProblems(editorContext, _copy(options));
 		}
-		var updateService;
+		var updateService = undefined;
 		if (!options.sendFullText) {
 			updateService = new UpdateService(serverUrl, resourceUri);
-			editorContext.setServerStateListener(refreshDocument);
+			validationService.setUpdateService(updateService);
+			if (saveResourceService !== undefined) {
+				saveResourceService.setUpdateService(updateService);
+			}
+			editorContext.addServerStateListener(refreshDocument);
 		}
 		function modelChangeListener(event) {
 			if (editor._modelChangeTimeout){
@@ -463,7 +464,10 @@ define([
 		var contentAssist = editor._contentAssist;
 		if (contentAssist) {
 			contentAssist.setEditorContextProvider(editorContextProvider);
-			var contentAssistService = new ContentAssistService(serverUrl, resourceUri, updateService);
+			var contentAssistService = new ContentAssistService(serverUrl, resourceUri);
+			if (updateService !== undefined) {
+				contentAssistService.setUpdateService(updateService);
+			}
 			contentAssist.setProviders([{
 				id : "xtext.service",
 				provider : contentAssistService
@@ -487,6 +491,19 @@ define([
 				throw "Service '" + service + "' is not available.";
 			}
 		};
+		if (editor.xtextServiceSuccessListeners === undefined) {
+			editor.xtextServiceSuccessListeners = [];
+		}
+		if (editor.xtextServiceErrorListeners === undefined) {
+			editor.xtextServiceErrorListeners = [];
+		}
+		editor.xtextServiceErrorListeners.push(function(requestType, xhr, textStatus, errorThrown) {
+			if (options.showErrorDialogs) {
+				window.alert("Xtext service '" + requestType + "' failed: " + errorThrown);
+			} else {
+				console.log("Xtext service '" + requestType + "' failed: " + errorThrown);
+			}
+		});
 	}
 	
 	/**

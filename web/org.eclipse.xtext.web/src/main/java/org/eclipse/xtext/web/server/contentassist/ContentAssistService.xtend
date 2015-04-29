@@ -33,13 +33,15 @@ class ContentAssistService {
 	def createProposals(XtextWebDocumentAccess document, ITextRegion selection, int offset)
 			throws InvalidRequestException {
 		val contextFactory = contextFactoryProvider.get() => [it.pool = executorService]
+		val stateIdWrapper = ArrayLiterals.newArrayOfSize(1)
 		val contexts = document.priorityReadOnly([ it, cancelIndicator |
+			stateIdWrapper.set(0, stateId)
 			contextFactory.create(text, selection, offset, resource)
 		], [ it, cancelIndicator |
 			processUpdatedDocument(cancelIndicator)
 			return null
 		])
-		return createProposals(contexts, null)
+		return createProposals(contexts, stateIdWrapper.get(0))
 	}
 	
 	def createProposalsWithUpdate(XtextWebDocumentAccess document, String deltaText, int deltaOffset,
