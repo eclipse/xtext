@@ -30,6 +30,16 @@ public class XtextFileAwareEObjectDescription implements IEObjectDescription {
   @Delegate
   private final IEObjectDescription description;
   
+  @Override
+  public String toString() {
+    String _simpleName = XtextFileAwareEObjectDescription.class.getSimpleName();
+    String _plus = (_simpleName + ":");
+    QualifiedName _qualifiedName = this.description.getQualifiedName();
+    String _plus_1 = (_plus + _qualifiedName);
+    String _plus_2 = (_plus_1 + ":");
+    return (_plus_2 + this.description);
+  }
+  
   public XtextFileAwareEObjectDescription(final BaseXtextFile xtextFile, final IEObjectDescription description) {
     super();
     this.xtextFile = xtextFile;

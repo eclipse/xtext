@@ -137,8 +137,7 @@ public class StubBasedJvmPsiClass implements JvmPsiClass {
   public String toString() {
     String _simpleName = StubBasedJvmPsiClass.class.getSimpleName();
     String _plus = (_simpleName + ":");
-    String _qualifiedName = this.getQualifiedName();
-    return (_plus + _qualifiedName);
+    return (_plus + this.objectDescription);
   }
   
   @Pure

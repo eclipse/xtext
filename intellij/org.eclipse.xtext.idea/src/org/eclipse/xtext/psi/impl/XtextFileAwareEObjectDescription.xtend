@@ -23,5 +23,9 @@ class XtextFileAwareEObjectDescription implements IEObjectDescription {
 
 	@Delegate
 	val IEObjectDescription description
+	
+	override toString() {
+		XtextFileAwareEObjectDescription.simpleName + ':' + description.qualifiedName + ':' + description
+	}
 
 }

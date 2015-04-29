@@ -97,6 +97,7 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 
 	new(JvmDeclaredType declaredType, PsiElement psiElement) {
 		super(psiElement.manager, psiElement.language)
+		
 		this.jvmType = declaredType
 		this.psiElement = psiElement
 		val language = language

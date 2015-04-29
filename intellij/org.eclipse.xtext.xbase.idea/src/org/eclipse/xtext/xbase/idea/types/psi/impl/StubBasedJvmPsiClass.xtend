@@ -70,7 +70,7 @@ class StubBasedJvmPsiClass implements JvmPsiClass {
 	}
 
 	override toString() {
-		StubBasedJvmPsiClass.simpleName + ':' + qualifiedName
+		StubBasedJvmPsiClass.simpleName + ':' + objectDescription
 	}
 
 }
