@@ -98,9 +98,10 @@ public class JavaIoFileSystemAccess extends AbstractFileSystemAccess2 {
 	}
 
 	/**
-	 * @since 2.4
+	 * Since 2.4 protected 
+	 * @since 2.9 public
 	 */
-	protected void generateTrace(String generatedFile, String outputConfigName, CharSequence contents) {
+	public void generateTrace(String generatedFile, String outputConfigName, CharSequence contents) {
 		try {
 			if (contents instanceof ITraceRegionProvider) {
 				String traceFileName = traceFileNameProvider.getTraceFromJava(generatedFile);
