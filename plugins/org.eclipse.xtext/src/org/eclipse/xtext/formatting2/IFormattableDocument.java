@@ -161,4 +161,8 @@ public interface IFormattableDocument {
 
 	<T1 extends ISemanticRegion, T2 extends ISemanticRegion> // 
 	Pair<T1, T2> interior(Pair<T1, T2> pair, Procedure1<? super IHiddenRegionFormatter> init);
+
+	<T extends EObject> T interior(T object, Procedure1<? super IHiddenRegionFormatter> init);
+
+	<T> T format(T obj);
 }
