@@ -15,31 +15,25 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Condition;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElementFinder;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.search.GlobalSearchScope;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import org.eclipse.xtext.common.types.access.impl.AbstractJvmTypeProvider;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
-import org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex;
 import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass;
 import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClasses;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class JvmTypesElementFinder extends PsiElementFinder {
   @Inject
-  @Extension
-  private JvmPsiClasses _jvmPsiClasses;
-  
-  @Inject
-  private ExportedObjectQualifiedNameIndex exportedObjectQualifiedNameIndex;
+  private JvmPsiClasses jvmPsiClasses;
   
   private final Project project;
   
@@ -66,29 +60,30 @@ public class JvmTypesElementFinder extends PsiElementFinder {
     Iterable<String> _variants = this.getVariants(qualifiedName);
     final Function1<String, Iterable<PsiClass>> _function = new Function1<String, Iterable<PsiClass>>() {
       @Override
-      public Iterable<PsiClass> apply(final String it) {
-        return JvmTypesElementFinder.this.doFindClassesByVariant(it, scope);
+      public Iterable<PsiClass> apply(final String variant) {
+        QualifiedName _qualifiedName = JvmTypesElementFinder.this.toQualifiedName(variant);
+        return JvmTypesElementFinder.this.jvmPsiClasses.getPsiClassesByQualifiedName(_qualifiedName, scope);
       }
     };
     Iterable<Iterable<PsiClass>> _map = IterableExtensions.<String, Iterable<PsiClass>>map(_variants, _function);
-    return Iterables.<PsiClass>concat(_map);
-  }
-  
-  protected Iterable<PsiClass> doFindClassesByVariant(final String variant, final GlobalSearchScope scope) {
-    Iterable<PsiClass> _xblockexpression = null;
-    {
-      final QualifiedName qualifiedName = this.toQualifiedName(variant);
-      Iterable<BaseXtextFile> _findFiles = this.findFiles(variant, scope);
-      final Function1<BaseXtextFile, Iterable<PsiClass>> _function = new Function1<BaseXtextFile, Iterable<PsiClass>>() {
-        @Override
-        public Iterable<PsiClass> apply(final BaseXtextFile it) {
-          return JvmTypesElementFinder.this._jvmPsiClasses.getPsiClassesByQualifiedName(it, qualifiedName);
+    Iterable<PsiClass> _flatten = Iterables.<PsiClass>concat(_map);
+    final Function1<PsiClass, Boolean> _function_1 = new Function1<PsiClass, Boolean>() {
+      @Override
+      public Boolean apply(final PsiClass psiClass) {
+        boolean _xblockexpression = false;
+        {
+          final PsiFile containingFile = psiClass.getContainingFile();
+          boolean _xifexpression = false;
+          if ((containingFile instanceof BaseXtextFile)) {
+            Language _language = ((BaseXtextFile)containingFile).getLanguage();
+            _xifexpression = Objects.equal(_language, JvmTypesElementFinder.this.language);
+          }
+          _xblockexpression = _xifexpression;
         }
-      };
-      Iterable<Iterable<PsiClass>> _map = IterableExtensions.<BaseXtextFile, Iterable<PsiClass>>map(_findFiles, _function);
-      _xblockexpression = Iterables.<PsiClass>concat(_map);
-    }
-    return _xblockexpression;
+        return Boolean.valueOf(_xblockexpression);
+      }
+    };
+    return IterableExtensions.<PsiClass>filter(_flatten, _function_1);
   }
   
   protected Iterable<String> getVariants(final String qualifiedName) {
@@ -104,18 +99,6 @@ public class JvmTypesElementFinder extends PsiElementFinder {
   protected QualifiedName toQualifiedName(final String variant) {
     String[] _split = variant.split("\\.");
     return QualifiedName.create(_split);
-  }
-  
-  protected Iterable<BaseXtextFile> findFiles(final String qualifiedName, final GlobalSearchScope scope) {
-    Collection<BaseXtextFile> _get = this.exportedObjectQualifiedNameIndex.get(qualifiedName, this.project, scope);
-    final Function1<BaseXtextFile, Boolean> _function = new Function1<BaseXtextFile, Boolean>() {
-      @Override
-      public Boolean apply(final BaseXtextFile xtextFile) {
-        Language _language = xtextFile.getLanguage();
-        return Boolean.valueOf(Objects.equal(_language, JvmTypesElementFinder.this.language));
-      }
-    };
-    return IterableExtensions.<BaseXtextFile>filter(_get, _function);
   }
   
   @Override

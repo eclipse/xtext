@@ -22,21 +22,19 @@ import com.intellij.util.CommonProcessors;
 import com.intellij.util.Processor;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.HashSet;
-import java.util.ArrayList;
 import java.util.Collection;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClasses;
 import org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class JvmTypesShortNamesCache extends PsiShortNamesCache {
   @Inject
-  @Extension
-  private JvmPsiClasses _jvmPsiClasses;
+  private JvmPsiClasses jvmPsiClasses;
   
   @Inject
   private JvmDeclaredTypeShortNameIndex jvmDeclaredTypeShortNameIndex;
@@ -87,25 +85,23 @@ public class JvmTypesShortNamesCache extends PsiShortNamesCache {
   
   @Override
   public PsiClass[] getClassesByName(final String name, final GlobalSearchScope scope) {
-    ArrayList<PsiClass> _xblockexpression = null;
-    {
-      final Collection<BaseXtextFile> xtextFiles = this.jvmDeclaredTypeShortNameIndex.get(name, this.project, scope);
-      boolean _isEmpty = xtextFiles.isEmpty();
-      if (_isEmpty) {
-        return PsiClass.EMPTY_ARRAY;
-      }
-      final ArrayList<PsiClass> result = CollectionLiterals.<PsiClass>newArrayList();
-      for (final BaseXtextFile xtextFile : xtextFiles) {
+    Collection<BaseXtextFile> _get = this.jvmDeclaredTypeShortNameIndex.get(name, this.project, scope);
+    final Function1<BaseXtextFile, Boolean> _function = new Function1<BaseXtextFile, Boolean>() {
+      @Override
+      public Boolean apply(final BaseXtextFile xtextFile) {
         Language _language = xtextFile.getLanguage();
-        boolean _equals = Objects.equal(_language, this.language);
-        if (_equals) {
-          Iterable<PsiClass> _psiClassesByName = this._jvmPsiClasses.getPsiClassesByName(xtextFile, name);
-          Iterables.<PsiClass>addAll(result, _psiClassesByName);
-        }
+        return Boolean.valueOf(Objects.equal(_language, JvmTypesShortNamesCache.this.language));
       }
-      _xblockexpression = result;
-    }
-    return ((PsiClass[])Conversions.unwrapArray(_xblockexpression, PsiClass.class));
+    };
+    Iterable<BaseXtextFile> _filter = IterableExtensions.<BaseXtextFile>filter(_get, _function);
+    final Function1<BaseXtextFile, Iterable<PsiClass>> _function_1 = new Function1<BaseXtextFile, Iterable<PsiClass>>() {
+      @Override
+      public Iterable<PsiClass> apply(final BaseXtextFile xtextFile) {
+        return JvmTypesShortNamesCache.this.jvmPsiClasses.getPsiClassesByName(xtextFile, name);
+      }
+    };
+    Iterable<Iterable<PsiClass>> _map = IterableExtensions.<BaseXtextFile, Iterable<PsiClass>>map(_filter, _function_1);
+    return ((PsiClass[])Conversions.unwrapArray(Iterables.<PsiClass>concat(_map), PsiClass.class));
   }
   
   @Override

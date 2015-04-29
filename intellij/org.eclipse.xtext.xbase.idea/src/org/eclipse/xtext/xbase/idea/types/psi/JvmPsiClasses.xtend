@@ -12,13 +12,17 @@ import com.google.inject.Singleton
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiMember
-import org.eclipse.xtext.common.types.JvmDeclaredType
+import com.intellij.psi.search.GlobalSearchScope
+import javax.inject.Provider
+import org.eclipse.xtext.idea.resource.ScopeBasedResourceDescriptions
+import org.eclipse.xtext.idea.resource.impl.PsiFileBasedResourceDescription
 import org.eclipse.xtext.naming.QualifiedName
-import org.eclipse.xtext.psi.IPsiModelAssociations
 import org.eclipse.xtext.psi.impl.BaseXtextFile
-import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.resource.IEObjectDescription
+import org.eclipse.xtext.resource.ISelectable
 import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiJvmModelAssociations
 import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiLogicalContainerProvider
+import org.eclipse.xtext.xbase.idea.types.psi.impl.StubBasedJvmPsiClass
 
 import static org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_DECLARED_TYPE
 
@@ -26,38 +30,61 @@ import static org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_DECLARED_
 class JvmPsiClasses {
 
 	@Inject
-	extension IPsiModelAssociations
-
-	@Inject
 	extension IPsiJvmModelAssociations
 
 	@Inject
 	extension IPsiLogicalContainerProvider
 
-	def Iterable<PsiClass> getPsiClassesByName(BaseXtextFile xtextFile, String name) {
-		val resource = xtextFile.resource
+	@Inject
+	Provider<StubBasedJvmPsiClass> stubBasedJvmPsiClassProvider
 
-		resource.resourceDescription.getExportedObjectsByType(JVM_DECLARED_TYPE).filter [ description |
+	@Inject
+	Provider<ScopeBasedResourceDescriptions> resourceDescriptionsProvider
+
+	def getPsiClassesByName(BaseXtextFile xtextFile, String name) {
+		new PsiFileBasedResourceDescription(xtextFile).getPsiClassesByName(name)
+	}
+
+	def getPsiClassesByName(String name, GlobalSearchScope scope) {
+		scope.resourceDescriptions.getPsiClassesByName(name)
+	}
+
+	protected def getPsiClassesByName(ISelectable selectable, String name) {
+		selectable.getExportedObjectsByType(JVM_DECLARED_TYPE).filter [ description |
 			description.qualifiedName.shortName == name
-		].map [ description |
-			description.getPsiElement(resource)
-		].filter(PsiClass)
+		].map [
+			toPsiClass
+		]
 	}
 
-	def Iterable<PsiClass> getPsiClassesByQualifiedName(BaseXtextFile xtextFile, QualifiedName qualifiedName) {
-		val resource = xtextFile.resource
-
-		resource.resourceDescription.getExportedObjects(JVM_DECLARED_TYPE, qualifiedName, false).map [ description |
-			description.getPsiElement(resource)
-		].filter(PsiClass)
-	}
-	
-	protected def getResourceDescription(XtextResource resource) {
-		resource.resourceServiceProvider.resourceDescriptionManager.getResourceDescription(resource)
+	def getPsiClassesByQualifiedName(BaseXtextFile xtextFile, QualifiedName qualifiedName) {
+		new PsiFileBasedResourceDescription(xtextFile).getPsiClassesByQualifiedName(qualifiedName)
 	}
 
-	def Iterable<PsiClass> getPsiClasses(BaseXtextFile it) {
-		resource.contents.filter(JvmDeclaredType).map[psiElement].filter(PsiClass)
+	def getPsiClassesByQualifiedName(QualifiedName qualifiedName, GlobalSearchScope scope) {
+		scope.resourceDescriptions.getPsiClassesByQualifiedName(qualifiedName)
+	}
+
+	protected def getPsiClassesByQualifiedName(ISelectable selectable, QualifiedName qualifiedName) {
+		selectable.getExportedObjects(JVM_DECLARED_TYPE, qualifiedName, false).map [
+			toPsiClass
+		]
+	}
+
+	protected def getResourceDescriptions(GlobalSearchScope scope) {
+		val resourceDescriptions = resourceDescriptionsProvider.get
+		resourceDescriptions.scope = scope
+		resourceDescriptions
+	}
+
+	def getPsiClasses(BaseXtextFile xtextFile) {
+		new PsiFileBasedResourceDescription(xtextFile).getExportedObjectsByType(JVM_DECLARED_TYPE).map[toPsiClass]
+	}
+
+	protected def PsiClass toPsiClass(IEObjectDescription description) {
+		val stubBasedJvmPsiClass = stubBasedJvmPsiClassProvider.get
+		stubBasedJvmPsiClass.objectDescription = description
+		stubBasedJvmPsiClass
 	}
 
 	def Iterable<PsiClass> getPsiClasses(PsiElement element) {

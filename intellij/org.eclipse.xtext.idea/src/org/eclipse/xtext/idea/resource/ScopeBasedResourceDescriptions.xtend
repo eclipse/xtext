@@ -5,25 +5,22 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.idea.containers
+package org.eclipse.xtext.idea.resource
 
+import org.eclipse.xtext.resource.IResourceDescriptions
 import com.intellij.psi.search.GlobalSearchScope
-import org.eclipse.emf.common.util.URI
-import org.eclipse.xtext.idea.resource.AbstractScopeBasedSelectable
-import org.eclipse.xtext.resource.IContainer
 
-class ResolveScopeBasedContainer extends AbstractScopeBasedSelectable implements IContainer {
-
-	override getResourceDescriptionCount() {
-		allXtextVirtualFiles.size
-	}
-
-	override hasResourceDescription(URI uri) {
-		uri.findFile != null
+/**
+ * @author kosyakov - Initial contribution and API
+ */
+class ScopeBasedResourceDescriptions extends AbstractScopeBasedSelectable implements IResourceDescriptions {
+	
+	override getAllResourceDescriptions() {
+		super.resourceDescriptions
 	}
 	
-	override public setScope(GlobalSearchScope resolveScope) {
-		super.setScope(resolveScope)
+	override public setScope(GlobalSearchScope scope) {
+		super.setScope(scope)
 	}
-
+	
 }

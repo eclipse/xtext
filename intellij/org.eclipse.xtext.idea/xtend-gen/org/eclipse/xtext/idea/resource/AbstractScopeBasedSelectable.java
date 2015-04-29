@@ -21,7 +21,6 @@ import com.intellij.psi.search.FileTypeIndex;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.indexing.FileBasedIndex;
-import java.util.ArrayList;
 import java.util.Collection;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -36,11 +35,9 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.ISelectable;
 import org.eclipse.xtext.resource.impl.AbstractCompoundSelectable;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
@@ -58,77 +55,34 @@ public abstract class AbstractScopeBasedSelectable extends AbstractCompoundSelec
   }
   
   public IResourceDescription getResourceDescription(final URI uri) {
-    Object _xblockexpression = null;
-    {
-      final BaseXtextFile psiFile = this.findFile(uri);
-      boolean _notEquals = (!Objects.equal(psiFile, null));
-      if (_notEquals) {
-        return new PsiFileBasedResourceDescription(psiFile);
-      }
-      _xblockexpression = null;
-    }
-    return ((IResourceDescription)_xblockexpression);
+    BaseXtextFile _findFile = this.findFile(uri);
+    return this.toResourceDescription(_findFile);
   }
   
-  public ArrayList<IResourceDescription> getResourceDescriptions() {
-    ArrayList<IResourceDescription> _xblockexpression = null;
+  public Iterable<IResourceDescription> getResourceDescriptions() {
+    Iterable<IResourceDescription> _xblockexpression = null;
     {
       Project _project = this.scope.getProject();
       @Extension
       final PsiManager psiManager = PsiManager.getInstance(_project);
-      final ArrayList<IResourceDescription> descriptions = CollectionLiterals.<IResourceDescription>newArrayList();
-      final Function1<Collection<VirtualFile>, Boolean> _function = new Function1<Collection<VirtualFile>, Boolean>() {
+      Iterable<VirtualFile> _allXtextVirtualFiles = this.getAllXtextVirtualFiles();
+      final Function1<VirtualFile, PsiFile> _function = new Function1<VirtualFile, PsiFile>() {
         @Override
-        public Boolean apply(final Collection<VirtualFile> files) {
-          boolean _xblockexpression = false;
-          {
-            final Function1<VirtualFile, PsiFile> _function = new Function1<VirtualFile, PsiFile>() {
-              @Override
-              public PsiFile apply(final VirtualFile it) {
-                return psiManager.findFile(it);
-              }
-            };
-            Iterable<PsiFile> _map = IterableExtensions.<VirtualFile, PsiFile>map(files, _function);
-            Iterable<BaseXtextFile> _filter = Iterables.<BaseXtextFile>filter(_map, BaseXtextFile.class);
-            for (final BaseXtextFile xtextFile : _filter) {
-              PsiFileBasedResourceDescription _psiFileBasedResourceDescription = new PsiFileBasedResourceDescription(xtextFile);
-              descriptions.add(_psiFileBasedResourceDescription);
-            }
-            _xblockexpression = true;
-          }
-          return Boolean.valueOf(_xblockexpression);
+        public PsiFile apply(final VirtualFile it) {
+          return psiManager.findFile(it);
         }
       };
-      this.processFiles(_function);
-      _xblockexpression = descriptions;
+      Iterable<PsiFile> _map = IterableExtensions.<VirtualFile, PsiFile>map(_allXtextVirtualFiles, _function);
+      Iterable<BaseXtextFile> _filter = Iterables.<BaseXtextFile>filter(_map, BaseXtextFile.class);
+      final Function1<BaseXtextFile, IResourceDescription> _function_1 = new Function1<BaseXtextFile, IResourceDescription>() {
+        @Override
+        public IResourceDescription apply(final BaseXtextFile it) {
+          return AbstractScopeBasedSelectable.this.toResourceDescription(it);
+        }
+      };
+      _xblockexpression = IterableExtensions.<BaseXtextFile, IResourceDescription>map(_filter, _function_1);
     }
     return _xblockexpression;
-  }
-  
-  @Override
-  public boolean isEmpty() {
-    Boolean _xblockexpression = null;
-    {
-      final boolean[] emptinessCheck = { true };
-      final Function1<Collection<VirtualFile>, Boolean> _function = new Function1<Collection<VirtualFile>, Boolean>() {
-        @Override
-        public Boolean apply(final Collection<VirtualFile> files) {
-          boolean _xblockexpression = false;
-          {
-            boolean _isEmpty = files.isEmpty();
-            if (_isEmpty) {
-              return true;
-            }
-            emptinessCheck[0] = false;
-            _xblockexpression = false;
-          }
-          return Boolean.valueOf(_xblockexpression);
-        }
-      };
-      this.processFiles(_function);
-      _xblockexpression = IterableExtensions.<Boolean>head(((Iterable<Boolean>)Conversions.doWrapArray(emptinessCheck)));
-    }
-    return (_xblockexpression).booleanValue();
   }
   
   @Override
@@ -136,21 +90,24 @@ public abstract class AbstractScopeBasedSelectable extends AbstractCompoundSelec
     String _string = qualifiedName.toString();
     Project _project = this.scope.getProject();
     Collection<BaseXtextFile> _get = this.exportedObjectQualifiedNameIndex.get(_string, _project, this.scope);
-    ArrayList<IEObjectDescription> _newArrayList = CollectionLiterals.<IEObjectDescription>newArrayList();
-    final Function2<ArrayList<IEObjectDescription>, BaseXtextFile, ArrayList<IEObjectDescription>> _function = new Function2<ArrayList<IEObjectDescription>, BaseXtextFile, ArrayList<IEObjectDescription>>() {
+    final Function1<BaseXtextFile, Iterable<IEObjectDescription>> _function = new Function1<BaseXtextFile, Iterable<IEObjectDescription>>() {
       @Override
-      public ArrayList<IEObjectDescription> apply(final ArrayList<IEObjectDescription> allDescriptions, final BaseXtextFile xtextFile) {
-        ArrayList<IEObjectDescription> _xblockexpression = null;
-        {
-          final PsiFileBasedResourceDescription resourceDescription = new PsiFileBasedResourceDescription(xtextFile);
-          Iterable<IEObjectDescription> _exportedObjects = resourceDescription.getExportedObjects(type, qualifiedName, ignoreCase);
-          Iterables.<IEObjectDescription>addAll(allDescriptions, _exportedObjects);
-          _xblockexpression = allDescriptions;
-        }
-        return _xblockexpression;
+      public Iterable<IEObjectDescription> apply(final BaseXtextFile it) {
+        IResourceDescription _resourceDescription = AbstractScopeBasedSelectable.this.toResourceDescription(it);
+        return _resourceDescription.getExportedObjects(type, qualifiedName, ignoreCase);
       }
     };
-    return IterableExtensions.<BaseXtextFile, ArrayList<IEObjectDescription>>fold(_get, _newArrayList, _function);
+    Iterable<Iterable<IEObjectDescription>> _map = IterableExtensions.<BaseXtextFile, Iterable<IEObjectDescription>>map(_get, _function);
+    return Iterables.<IEObjectDescription>concat(_map);
+  }
+  
+  protected IResourceDescription toResourceDescription(final BaseXtextFile xtextFile) {
+    PsiFileBasedResourceDescription _xifexpression = null;
+    boolean _notEquals = (!Objects.equal(xtextFile, null));
+    if (_notEquals) {
+      _xifexpression = new PsiFileBasedResourceDescription(xtextFile);
+    }
+    return _xifexpression;
   }
   
   protected BaseXtextFile findFile(final URI uri) {
@@ -172,16 +129,16 @@ public abstract class AbstractScopeBasedSelectable extends AbstractCompoundSelec
     return _xblockexpression;
   }
   
-  protected void processFiles(final Function1<? super Collection<VirtualFile>, ? extends Boolean> acceptor) {
+  protected Iterable<VirtualFile> getAllXtextVirtualFiles() {
     Iterable<FileType> _xtextLanguageFilesTypes = this.getXtextLanguageFilesTypes();
-    for (final FileType fileType : _xtextLanguageFilesTypes) {
-      Collection<VirtualFile> _files = FileTypeIndex.getFiles(fileType, this.scope);
-      Boolean _apply = acceptor.apply(_files);
-      boolean _not = (!(_apply).booleanValue());
-      if (_not) {
-        return;
+    final Function1<FileType, Collection<VirtualFile>> _function = new Function1<FileType, Collection<VirtualFile>>() {
+      @Override
+      public Collection<VirtualFile> apply(final FileType fileType) {
+        return FileTypeIndex.getFiles(fileType, AbstractScopeBasedSelectable.this.scope);
       }
-    }
+    };
+    Iterable<Collection<VirtualFile>> _map = IterableExtensions.<FileType, Collection<VirtualFile>>map(_xtextLanguageFilesTypes, _function);
+    return Iterables.<VirtualFile>concat(_map);
   }
   
   protected Iterable<FileType> getXtextLanguageFilesTypes() {
@@ -198,19 +155,12 @@ public abstract class AbstractScopeBasedSelectable extends AbstractCompoundSelec
   }
   
   protected boolean isXtextLanguage(final FileType fileType) {
-    boolean _switchResult = false;
-    boolean _matched = false;
-    if (!_matched) {
-      if (fileType instanceof LanguageFileType) {
-        _matched=true;
-        Language _language = ((LanguageFileType)fileType).getLanguage();
-        _switchResult = (_language instanceof IXtextLanguage);
-      }
+    boolean _xifexpression = false;
+    if ((fileType instanceof LanguageFileType)) {
+      Language _language = ((LanguageFileType)fileType).getLanguage();
+      _xifexpression = (_language instanceof IXtextLanguage);
     }
-    if (!_matched) {
-      _switchResult = false;
-    }
-    return _switchResult;
+    return _xifexpression;
   }
   
   @Pure
