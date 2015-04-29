@@ -39,7 +39,7 @@ class DomainmodelFormatter extends XbaseFormatter {
 		open.append[newLine]
 		interior(open, close)[indent]
 		for (AbstractElement element : pkg.elements) {
-			format(element, document);
+			element.format
 			element.append[setNewLines(1, 1, 2)]
 		}
 	}
@@ -53,14 +53,14 @@ class DomainmodelFormatter extends XbaseFormatter {
 		interior(open, close)[indent]
 		format(entity.getSuperType(), document);
 		for (Feature feature : entity.features) {
-			format(feature, document);
+			feature.format
 			feature.append[setNewLines(1, 1, 2)]
 		}
 	}
 
 	def dispatch void format(Property property, extension IFormattableDocument document) {
 		property.regionFor.keyword(":").surround[noSpace]
-		format(property.type, document);
+		property.type.format
 	}
 
 	def dispatch void format(Operation operation, extension IFormattableDocument document) {
@@ -70,16 +70,16 @@ class DomainmodelFormatter extends XbaseFormatter {
 			for (comma : operation.regionFor.keywords(","))
 				comma.prepend[noSpace].append[oneSpace]
 			for (params : operation.params)
-				format(params, document);
+				params.format
 			operation.regionFor.keyword(")").prepend[noSpace]
 		}
 		if (operation.type != null) {
 			operation.regionFor.keyword(")").append[noSpace]
 			operation.type.prepend[noSpace].append[oneSpace]
-			format(operation.type, document);
+			operation.type.format
 		} else {
 			operation.regionFor.keyword(")").append[oneSpace]
 		}
-		format(operation.body, document);
+		operation.body.format
 	}
 }

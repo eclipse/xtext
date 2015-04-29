@@ -39,8 +39,7 @@ class RuleEngineFormatter extends XbaseFormatter {
 	def dispatch void format(Model model, extension IFormattableDocument document) {
 		model.prepend[setNewLines(0, 0, 1); noSpace]
 		for (Declaration declaration : model.getDeclarations()) {
-			format(declaration, document);
-			declaration.append[setNewLines(1, 1, 2)]
+			declaration.format.append[setNewLines(1, 1, 2)]
 		}
 	}
 
@@ -48,16 +47,14 @@ class RuleEngineFormatter extends XbaseFormatter {
 		device.regionFor.feature(DEVICE__NAME).surround[oneSpace]
 		device.regionFor.keyword("be").surround[oneSpace]
 		for (State state : device.getStates()) {
-			state.immediatelyPreceding.keyword(",").prepend[noSpace].append[oneSpace]
-			format(state, document);
+			state.format.immediatelyPreceding.keyword(",").prepend[noSpace].append[oneSpace]
 		}
 	}
 
 	def dispatch void format(Rule rule, extension IFormattableDocument document) {
 		rule.regionFor.feature(RULE__DESCRIPTION).surround[oneSpace]
 		rule.regionFor.feature(RULE__DEVICE_STATE).surround[oneSpace]
-		rule.thenPart.prepend[newLine]
-		format(rule.thenPart, document);
+		rule.thenPart.format.prepend[newLine]
 	}
 
 	override dispatch void format(XBlockExpression expr, extension IFormattableDocument document) {
@@ -70,14 +67,14 @@ class RuleEngineFormatter extends XbaseFormatter {
 					sem.append[newLine]
 			} else if (child != expr.expressions.last)
 				child.append[newLine]
-			child.format(document)
+			child.format
 		}
 	}
 
 	override dispatch void format(XSwitchExpression expr, extension IFormattableDocument document) {
 		set(expr.^switch.previousHiddenRegion, expr.nextHiddenRegion)[indent]
 		expr.regionFor.keyword("switch").append[oneSpace]
-		expr.^switch.append[newLine].format(document)
+		expr.^switch.append[newLine].format
 		for (c : expr.cases) {
 			if (c.typeGuard != null && c.^case != null) {
 				c.typeGuard.append[oneSpace]
@@ -88,7 +85,7 @@ class RuleEngineFormatter extends XbaseFormatter {
 				c.^case.prepend[oneSpace].append[noSpace]
 			}
 			c.regionFor.feature(XCASE_PART__FALL_THROUGH).prepend[noSpace].append[newLine]
-			c.^case.format(document)
+			c.^case.format
 			if (c == expr.cases.last && expr.^default == null)
 				c.then.formatBody(true, document)
 			else
@@ -110,7 +107,7 @@ class RuleEngineFormatter extends XbaseFormatter {
 		} else {
 			expr.prepend[oneSpace]
 		}
-		expr.format(doc)
+		expr.format
 	}
 
 	override protected void formatBodyInline(XExpression expr, boolean forceMultiline,
@@ -124,7 +121,7 @@ class RuleEngineFormatter extends XbaseFormatter {
 		} else {
 			expr.surround[oneSpace]
 		}
-		expr.format(doc)
+		expr.format
 	}
 
 	override protected void formatBodyParagraph(XExpression expr, extension IFormattableDocument doc) {
@@ -135,7 +132,7 @@ class RuleEngineFormatter extends XbaseFormatter {
 		} else {
 			expr.surround[oneSpace]
 		}
-		expr.format(doc)
+		expr.format
 	}
 
 }
