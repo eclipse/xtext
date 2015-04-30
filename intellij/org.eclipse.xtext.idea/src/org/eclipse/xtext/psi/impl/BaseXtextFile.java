@@ -48,9 +48,11 @@ import org.jetbrains.annotations.NotNull;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.name.Named;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
+import com.intellij.openapi.util.Key;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
@@ -60,11 +62,12 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.CachedValue;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
-import com.intellij.psi.util.PsiModificationTracker;
 import com.intellij.util.indexing.FileBasedIndexImpl;
 import com.intellij.util.indexing.IndexingDataKeys;
 
 public abstract class BaseXtextFile extends PsiFileBase {
+	
+	public static final String GLOBAL_MODIFICATION_COUNT = "org.eclipse.xtext.psi.impl.BaseXtextFile.globalModificationCounter";
 	
 	@Inject
 	private CompilerPhases compilerPhases;
@@ -78,6 +81,11 @@ public abstract class BaseXtextFile extends PsiFileBase {
     protected final Object resourceCacheLock;
     
     protected final CachedValue<XtextResource> resourceCache;
+    
+    @SuppressWarnings("rawtypes")
+	@Inject
+    @Named(GLOBAL_MODIFICATION_COUNT)
+    protected Key globalModificationCount;
     
 	protected BaseXtextFile(@NotNull FileViewProvider viewProvider, @NotNull Language language) {
         super(viewProvider, language);
@@ -94,7 +102,7 @@ public abstract class BaseXtextFile extends PsiFileBase {
 				XtextResource resource = createResource();
 				installResourceDescription(resource);
 				return Result.create(resource, new Object[] {
-						PsiModificationTracker.MODIFICATION_COUNT, 
+						globalModificationCount, 
 						BaseXtextFile.this
 				});
 			}

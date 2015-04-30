@@ -17,6 +17,8 @@ import com.intellij.lang.PsiStructureViewFactory;
 import com.intellij.lang.refactoring.NamesValidator;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
+import com.intellij.openapi.util.Key;
+import com.intellij.psi.util.PsiModificationTracker;
 import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.bracketmatching.DefaultBracePairProvider;
 import org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider;
@@ -34,6 +36,7 @@ import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.psi.IPsiModelAssociations;
 import org.eclipse.xtext.psi.IPsiModelAssociator;
 import org.eclipse.xtext.psi.PsiModelAssociations;
+import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -106,5 +109,12 @@ public class DefaultIdeaModule extends AbstractGenericModule {
   @SingletonBinding
   public Class<? extends PsiStructureViewFactory> bindPsiStructureViewFactory() {
     return DefaultPsiStructureViewFactory.class;
+  }
+  
+  public void configureGlobalModificationTracker(final Binder binder) {
+    AnnotatedBindingBuilder<Key> _bind = binder.<Key>bind(Key.class);
+    Named _named = Names.named(BaseXtextFile.GLOBAL_MODIFICATION_COUNT);
+    LinkedBindingBuilder<Key> _annotatedWith = _bind.annotatedWith(_named);
+    _annotatedWith.toInstance(PsiModificationTracker.MODIFICATION_COUNT);
   }
 }
