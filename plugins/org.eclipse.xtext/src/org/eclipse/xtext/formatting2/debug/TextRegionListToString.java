@@ -68,14 +68,27 @@ public class TextRegionListToString {
 		List<String> result = Lists.newArrayListWithExpectedSize(items.size());
 		String prefix = Strings.repeat(" ", offsetDigits + lengthDigits + 2);
 		for (Item item : items) {
+			String[] lines = item.text.split("\n");
 			if (item.region != null) {
 				String offset = Strings.padStart(String.valueOf(item.region.getOffset()), offsetDigits, ' ');
 				String length = Strings.padStart(String.valueOf(item.region.getLength()), lengthDigits, ' ');
-				result.add(offset + " " + length + " " + item.text);
+				if (lines.length == 1) {
+					result.add(offset + " " + length + " " + lines[0]);
+				} else {
+					String offsetSpace = Strings.repeat(" ", offsetDigits);
+					String lengthSpace = Strings.repeat(" ", offsetDigits);
+					for (int i = 0; i < lines.length; i++) {
+						String first = i == 0 ? offset : offsetSpace;
+						String second = i == lines.length - 1 ? length : lengthSpace;
+						result.add(first + " " + second + " " + lines[i]);
+					}
+				}
 			} else if (item.indented) {
-				result.add(prefix + item.text);
+				for (int i = 0; i < lines.length; i++)
+					result.add(prefix + lines[i]);
 			} else {
-				result.add(item.text);
+				for (int i = 0; i < lines.length; i++)
+					result.add(lines[i]);
 			}
 		}
 		return Joiner.on("\n").join(result);
