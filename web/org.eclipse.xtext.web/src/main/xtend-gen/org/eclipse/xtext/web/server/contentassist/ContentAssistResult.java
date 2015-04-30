@@ -22,6 +22,12 @@ public class ContentAssistResult implements IServiceResult {
   @Data
   @ToString(skipNulls = true)
   public static class Entry {
+    /**
+     * The type identifier is used internally to group the proposals.
+     */
+    @Accessors
+    private transient String type;
+    
     private final String prefix;
     
     private final String proposal;
@@ -38,6 +44,15 @@ public class ContentAssistResult implements IServiceResult {
     private final ArrayList<ContentAssistResult.TextReplacement> textReplacements = new ArrayList<ContentAssistResult.TextReplacement>();
     
     private final ArrayList<ContentAssistResult.EditPosition> editPositions = new ArrayList<ContentAssistResult.EditPosition>();
+    
+    @Pure
+    public String getType() {
+      return this.type;
+    }
+    
+    public void setType(final String type) {
+      this.type = type;
+    }
     
     public Entry(final String prefix, final String proposal, final String name, final String description, final String style) {
       super();

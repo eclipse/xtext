@@ -24,11 +24,14 @@ class ContentAssistResult implements IServiceResult {
 	@Data
 	@ToString(skipNulls = true)
 	static class Entry {
+		/** The type identifier is used internally to group the proposals. */
+		@Accessors
+		transient String type
+		
 		String prefix
 		String proposal
 		String name
 		String description
-		// String prefix
 		/** Available styles: 'default', 'emphasis', 'noemphasis', 'hr' */
 		String style
 		val textReplacements = new ArrayList<TextReplacement>

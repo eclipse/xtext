@@ -14,7 +14,7 @@ import java.util.concurrent.Executors;
 import javax.servlet.annotation.WebServlet;
 import org.eclipse.xtext.idea.example.entities.EntitiesRuntimeModule;
 import org.eclipse.xtext.idea.example.entities.EntitiesStandaloneSetup;
-import org.eclipse.xtext.web.example.jetty.EntitiesIdeModule;
+import org.eclipse.xtext.web.example.jetty.EntitiesWebModule;
 import org.eclipse.xtext.web.server.persistence.ResourceBaseProviderImpl;
 import org.eclipse.xtext.web.servlet.XtextServlet;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -35,8 +35,8 @@ public class MyXtextServlet extends XtextServlet {
         public Injector createInjector() {
           final EntitiesRuntimeModule runtimeModule = new EntitiesRuntimeModule();
           ResourceBaseProviderImpl _resourceBaseProviderImpl = new ResourceBaseProviderImpl("./test-files");
-          final EntitiesIdeModule ideModule = new EntitiesIdeModule(MyXtextServlet.this.executorService, _resourceBaseProviderImpl);
-          return Guice.createInjector(runtimeModule, ideModule);
+          final EntitiesWebModule webModule = new EntitiesWebModule(MyXtextServlet.this.executorService, _resourceBaseProviderImpl);
+          return Guice.createInjector(runtimeModule, webModule);
         }
       }.createInjectorAndDoEMFRegistration();
     } catch (Throwable _e) {

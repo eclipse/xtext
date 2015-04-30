@@ -48,7 +48,7 @@ class AbstractWebServerTest extends AbstractXtextTests {
 		resourceBaseProvider = new TestResourceBaseProvider
 		with(new EntitiesStandaloneSetup {
 			override createInjector() {
-				val ideModule = new EntitiesIdeModule(executorService, resourceBaseProvider)
+				val ideModule = new EntitiesWebModule(executorService, resourceBaseProvider)
 				return Guice.createInjector(runtimeModule, ideModule)
 			}
 		})

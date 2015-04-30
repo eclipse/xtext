@@ -24,10 +24,12 @@ import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.web.server.persistence.FileResourceHandler;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler;
+import org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker;
+import org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider;
 
 @FinalFieldsConstructor
 @SuppressWarnings("all")
-public class EntitiesIdeModule extends AbstractGenericModule {
+public class EntitiesWebModule extends AbstractGenericModule {
   private final ExecutorService executorService;
   
   private final IResourceBaseProvider resourceBaseProvider;
@@ -44,6 +46,10 @@ public class EntitiesIdeModule extends AbstractGenericModule {
     return _annotatedWith.to(InternalEntitiesLexer.class);
   }
   
+  public Class<? extends IFeatureScopeTracker.Provider> bindIFeatureScopeTrackerProvider() {
+    return OptimizingFeatureScopeTrackerProvider.class;
+  }
+  
   public Class<? extends IContentAssistParser> bindIContentAssistParser() {
     return EntitiesParser.class;
   }
@@ -57,7 +63,7 @@ public class EntitiesIdeModule extends AbstractGenericModule {
     _bind.toInstance(this.resourceBaseProvider);
   }
   
-  public EntitiesIdeModule(final ExecutorService executorService, final IResourceBaseProvider resourceBaseProvider) {
+  public EntitiesWebModule(final ExecutorService executorService, final IResourceBaseProvider resourceBaseProvider) {
     super();
     this.executorService = executorService;
     this.resourceBaseProvider = resourceBaseProvider;

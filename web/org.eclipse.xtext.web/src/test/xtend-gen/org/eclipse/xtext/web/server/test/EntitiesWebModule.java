@@ -27,7 +27,7 @@ import org.eclipse.xtext.web.server.persistence.IServerResourceHandler;
 
 @FinalFieldsConstructor
 @SuppressWarnings("all")
-public class EntitiesIdeModule extends AbstractGenericModule {
+public class EntitiesWebModule extends AbstractGenericModule {
   private final ExecutorService executorService;
   
   private final IResourceBaseProvider resourceBaseProvider;
@@ -57,7 +57,7 @@ public class EntitiesIdeModule extends AbstractGenericModule {
     _bind.toInstance(this.resourceBaseProvider);
   }
   
-  public EntitiesIdeModule(final ExecutorService executorService, final IResourceBaseProvider resourceBaseProvider) {
+  public EntitiesWebModule(final ExecutorService executorService, final IResourceBaseProvider resourceBaseProvider) {
     super();
     this.executorService = executorService;
     this.resourceBaseProvider = resourceBaseProvider;

@@ -172,8 +172,7 @@ public class XtextServlet extends HttpServlet {
       resp.setContentType("text/x-json;charset=UTF-8");
       resp.setHeader("Cache-Control", "no-cache");
       PrintWriter _writer = resp.getWriter();
-      String _json = this.gson.toJson(result);
-      _writer.write(_json);
+      this.gson.toJson(result, _writer);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

@@ -22,7 +22,7 @@ import org.eclipse.xtext.idea.example.entities.EntitiesStandaloneSetup;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
-import org.eclipse.xtext.web.server.test.EntitiesIdeModule;
+import org.eclipse.xtext.web.server.test.EntitiesWebModule;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
@@ -59,7 +59,7 @@ public class AbstractWebServerTest extends AbstractXtextTests {
       this.with(new EntitiesStandaloneSetup() {
         @Override
         public Injector createInjector() {
-          final EntitiesIdeModule ideModule = new EntitiesIdeModule(AbstractWebServerTest.this.executorService, AbstractWebServerTest.this.resourceBaseProvider);
+          final EntitiesWebModule ideModule = new EntitiesWebModule(AbstractWebServerTest.this.executorService, AbstractWebServerTest.this.resourceBaseProvider);
           EntitiesRuntimeModule _runtimeModule = AbstractWebServerTest.this.getRuntimeModule();
           return Guice.createInjector(_runtimeModule, ideModule);
         }

@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.web.example.jetty
+package org.eclipse.xtext.web.server.test
 
 import com.google.inject.Binder
 import com.google.inject.name.Names
@@ -22,7 +22,7 @@ import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler
 
 @FinalFieldsConstructor
-class EntitiesIdeModule extends AbstractGenericModule {
+class EntitiesWebModule extends AbstractGenericModule {
 	
 	val ExecutorService executorService
 	
