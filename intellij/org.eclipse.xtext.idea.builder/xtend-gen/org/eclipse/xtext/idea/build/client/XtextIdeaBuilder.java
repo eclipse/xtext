@@ -300,7 +300,7 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
           String _file = it.getFile();
           URI _asURI = FilesAndURIs.asURI(_file);
           final File outputFile = FilesAndURIs.asFile(_asURI);
-          FSOperations.markDirty(context, CompilationRound.NEXT, outputFile);
+          FSOperations.markDirty(context, CompilationRound.CURRENT, outputFile);
           long _compilationStartStamp = context.getCompilationStartStamp();
           outputFile.setLastModified(_compilationStartStamp);
           String _presentableName = XtextIdeaBuilder.this.getPresentableName();
