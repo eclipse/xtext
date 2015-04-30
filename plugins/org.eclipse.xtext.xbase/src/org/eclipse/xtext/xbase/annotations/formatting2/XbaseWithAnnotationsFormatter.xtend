@@ -20,12 +20,12 @@ class XbaseWithAnnotationsFormatter extends XbaseFormatter {
 		ann.regionFor.keyword("@").append[noSpace]
 		ann.regionFor.keyword("(").surround[noSpace]
 		if (ann.value != null) {
-			ann.value.format(document)
+			ann.value.format
 			ann.regionFor.keyword(")").prepend[noSpace]
 		} else if (!ann.elementValuePairs.empty) {
 			for (pair : ann.elementValuePairs) {
 				pair.regionFor.keyword("=").surround[noSpace]
-				pair.value.format(document)
+				pair.value.format
 				pair.immediatelyFollowing.keyword(",").prepend[noSpace].append[oneSpace]
 			}
 			ann.regionFor.keyword(")").prepend[noSpace]

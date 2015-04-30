@@ -79,7 +79,7 @@ class XbaseFormatter extends XtypeFormatter {
 		} else if (close.previousHiddenRegion.multiline) {
 			open.append[newLine]
 			for (elem : elements) {
-				elem.format(format)
+				elem.format
 				elem.immediatelyFollowing.keyword(",").prepend[noSpace].append[newLine]
 			}
 			elements.last.append[newLine]
@@ -101,7 +101,7 @@ class XbaseFormatter extends XtypeFormatter {
 					sep.append[oneSpace]
 				}
 				sep.prepend[noSpace]
-				ele.object.format(format)
+				ele.object.format
 			}
 			close.prepend[noSpace]
 		}
@@ -109,11 +109,11 @@ class XbaseFormatter extends XtypeFormatter {
 
 	def dispatch void format(JvmGenericArrayTypeReference array, extension IFormattableDocument document) {
 		addReplacer(new ArrayBracketsFormattingReplacer(array.regionFor.ruleCallTo(arrayBracketsRule)))
-		array.componentType.format(document)
+		array.componentType.format
 	}
 
 	def dispatch void format(JvmTypeConstraint constraint, extension IFormattableDocument document) {
-		constraint.typeReference.prepend[oneSpace].format(document)
+		constraint.typeReference.prepend[oneSpace].format
 	}
 
 	def dispatch void format(XVariableDeclaration expr, extension IFormattableDocument format) {
@@ -121,15 +121,15 @@ class XbaseFormatter extends XtypeFormatter {
 		expr.regionFor.keyword("var").append[oneSpace]
 		expr.type.append[oneSpace]
 		expr.regionFor.keyword("=").surround[oneSpace]
-		expr.type.format(format)
-		expr.right.format(format)
+		expr.type.format
+		expr.right.format
 	}
 
 	def dispatch void format(XAssignment expr, extension IFormattableDocument format) {
 		expr.regionFor.ruleCallTo(opSingleAssignRule).surround[oneSpace]
 		expr.regionFor.keyword(if(expr.explicitStatic) '::' else '.').surround[noSpace]
-		expr.assignable.format(format)
-		expr.value.format(format)
+		expr.assignable.format
+		expr.value.format
 	}
 
 	// def protected void formatStaticQualifier(INode node, extension IFormattableDocument document) {
@@ -158,10 +158,10 @@ class XbaseFormatter extends XtypeFormatter {
 			formatConditionally(offset, length, [ doc |
 				val extension it = doc.requireFitsInLine
 				closure.prepend[noSpace]
-				closure.format(it)
+				closure.format
 			], [ extension it |
 				closure.prepend[oneSpace]
-				closure.format(it)
+				closure.format
 			])
 		}
 	}
@@ -186,7 +186,7 @@ class XbaseFormatter extends XtypeFormatter {
 		if (!expr.typeArguments.empty) {
 			expr.regionFor.keyword("<").surround[noSpace]
 			for (arg : expr.typeArguments) {
-				arg.format(format)
+				arg.format
 				arg.immediatelyFollowing.keyword(",").prepend[noSpace].append[oneSpace]
 			}
 			expr.regionFor.keyword(">").prepend[noSpace]
@@ -202,7 +202,7 @@ class XbaseFormatter extends XtypeFormatter {
 		if (!expr.typeArguments.empty) {
 			expr.regionFor.keyword("<").append[noSpace]
 			for (arg : expr.typeArguments) {
-				arg.format(format)
+				arg.format
 				arg.immediatelyFollowing.keyword(",").prepend[noSpace].append[oneSpace]
 			}
 			expr.regionFor.keyword(">").surround[noSpace]
@@ -229,7 +229,7 @@ class XbaseFormatter extends XtypeFormatter {
 			calls.prependWithLeadingSeparator(top, separator)
 			top = top.memberCallTarget
 		}
-		top.format(format)
+		top.format
 		val indentOnce = new IndentOnceAutowrapFormatter(expr.nextHiddenRegion)
 		for (entry : calls) {
 			val call = entry.object
@@ -276,7 +276,7 @@ class XbaseFormatter extends XtypeFormatter {
 				sep.append[oneSpace]
 
 			sep.prepend[oneSpace]
-			ele.object.rightOperand.format(format)
+			ele.object.rightOperand.format
 		}
 	}
 
@@ -299,7 +299,7 @@ class XbaseFormatter extends XtypeFormatter {
 			expr.regionFor.keyword("synchronized").append(whitespaceBetweenKeywordAndParenthesisML)
 		else
 			expr.regionFor.keyword("synchronized").append(whitespaceBetweenKeywordAndParenthesisSL)
-		expr.param.format(format)
+		expr.param.format
 		expr.expression.formatBody(false, format)
 	}
 
@@ -313,14 +313,14 @@ class XbaseFormatter extends XtypeFormatter {
 			expr.regionFor.keyword("if").append(whitespaceBetweenKeywordAndParenthesisML)
 		else
 			expr.regionFor.keyword("if").append(whitespaceBetweenKeywordAndParenthesisSL)
-		expr.^if.format(format)
+		expr.^if.format
 		if (expr.^else == null) {
 			expr.then.formatBody(multiline, format)
 		} else {
 			expr.then.formatBodyInline(multiline, format)
 			if (expr.^else instanceof XIfExpression || !multiline) {
 				expr.^else.prepend[oneSpace]
-				expr.^else.format(format)
+				expr.^else.format
 			} else {
 				expr.^else.formatBody(multiline, format)
 			}
@@ -330,7 +330,7 @@ class XbaseFormatter extends XtypeFormatter {
 	def dispatch void format(XForLoopExpression expr, extension IFormattableDocument format) {
 		expr.regionFor.keyword("for").append[oneSpace]
 		expr.declaredParam.prepend[noSpace].append[oneSpace]
-		expr.forExpression.prepend[oneSpace].append[noSpace].format(format)
+		expr.forExpression.prepend[oneSpace].append[noSpace].format
 		expr.eachExpression.formatBody(true, format)
 	}
 
@@ -340,23 +340,23 @@ class XbaseFormatter extends XtypeFormatter {
 		expr.regionFor.keywords(";").forEach[prepend[noSpace].append[noSpace lowPriority]]
 		expr.regionFor.keywords(",").forEach[prepend[noSpace].append[oneSpace]]
 		expr.regionFor.keyword(")").prepend[noSpace]
-		expr.initExpressions.forEach[it.format(format)]
+		expr.initExpressions.forEach[it.format]
 		expr.expression.prepend[oneSpace]
-		expr.expression.format(format)
+		expr.expression.format
 		expr.updateExpressions.head.prepend[oneSpace]
-		expr.updateExpressions.forEach[it.format(format)]
+		expr.updateExpressions.forEach[it.format]
 		expr.eachExpression.formatBody(true, format)
 	}
 
 	def dispatch void format(XWhileExpression expr, extension IFormattableDocument format) {
 		expr.regionFor.keyword("while").append(whitespaceBetweenKeywordAndParenthesisML)
-		expr.predicate.prepend[noSpace].append[noSpace].format(format)
+		expr.predicate.prepend[noSpace].append[noSpace].format
 		expr.body.formatBody(true, format)
 	}
 
 	def dispatch void format(XDoWhileExpression expr, extension IFormattableDocument format) {
 		expr.regionFor.keyword("while").append(whitespaceBetweenKeywordAndParenthesisML)
-		expr.predicate.prepend[noSpace].append[noSpace].format(format)
+		expr.predicate.prepend[noSpace].append[noSpace].format
 		expr.body.formatBodyInline(true, format)
 	}
 
@@ -393,19 +393,19 @@ class XbaseFormatter extends XtypeFormatter {
 
 	def dispatch void format(XThrowExpression expr, extension IFormattableDocument format) {
 		expr.expression.prepend[oneSpace]
-		expr.expression.format(format)
+		expr.expression.format
 	}
 
 	def dispatch void format(XReturnExpression expr, extension IFormattableDocument format) {
 		expr.expression.prepend[oneSpace]
-		expr.expression.format(format)
+		expr.expression.format
 	}
 
 	def dispatch void format(XTryCatchFinallyExpression expr, extension IFormattableDocument format) {
 		expr.expression.formatBodyInline(true, format)
 		for (cc : expr.catchClauses) {
 			cc.regionFor.keyword("catch").append(whitespaceBetweenKeywordAndParenthesisML)
-			cc.declaredParam.prepend[noSpace].append[noSpace].format(format)
+			cc.declaredParam.prepend[noSpace].append[noSpace].format
 			if (cc != expr.catchClauses.last || expr.finallyExpression != null)
 				cc.expression.formatBodyInline(true, format)
 			else
@@ -416,13 +416,13 @@ class XbaseFormatter extends XtypeFormatter {
 
 	def dispatch void format(JvmFormalParameter expr, extension IFormattableDocument format) {
 		expr.parameterType?.append[oneSpace]
-		expr.parameterType.format(format)
+		expr.parameterType.format
 	}
 
 	def dispatch void format(XExpression expr, extension IFormattableDocument format) {
 		for (obj : expr.eContents)
 			switch (obj) {
-				XExpression: obj.format(format)
+				XExpression: obj.format
 			}
 	}
 
@@ -438,8 +438,8 @@ class XbaseFormatter extends XtypeFormatter {
 			open.prepend[oneSpace]
 			open.append[oneSpace]
 			for (c : expr.cases) {
-				c.^case.format(format)
-				c.then.format(format)
+				c.^case.format
+				c.then.format
 				if (c.then == null) {
 					c.append[oneSpace]
 				} else {
@@ -448,7 +448,7 @@ class XbaseFormatter extends XtypeFormatter {
 			}
 			if (expr.^default != null) {
 				expr.regionFor.keyword("default").append[noSpace]
-				expr.^default.surround[oneSpace].format(format)
+				expr.^default.surround[oneSpace].format
 			}
 		} else if (caseSL) {
 			open.prepend(bracesInNewLine)
@@ -457,15 +457,15 @@ class XbaseFormatter extends XtypeFormatter {
 			}
 			interior(open, close)[indent]
 			for (c : expr.cases) {
-				c.^case.format(format)
-				c.then.format(format)
+				c.^case.format
+				c.then.format
 				c.then.prepend[oneSpace]
 				if (c != expr.cases.last)
 					c.append[newLine]
 			}
 			if (expr.^default != null) {
 				expr.regionFor.keyword("default").prepend[newLine].append[noSpace]
-				expr.^default.prepend[oneSpace].format(format)
+				expr.^default.prepend[oneSpace].format
 			}
 			close.prepend[newLine]
 		} else {
@@ -474,7 +474,7 @@ class XbaseFormatter extends XtypeFormatter {
 				interior(open, close)[indent]
 			}
 			for (c : expr.cases) {
-				c.^case.format(format)
+				c.^case.format
 				c.then.formatBodyParagraph(format)
 				c.regionFor.feature(XCASE_PART__FALL_THROUGH).prepend[noSpace].append[newLine]
 			}
@@ -503,7 +503,7 @@ class XbaseFormatter extends XtypeFormatter {
 				open.append[noSpace]
 			} else {
 				for (param : expr.declaredFormalParameters) {
-					param.format(format)
+					param.format
 					param.immediatelyFollowing.keyword(",").prepend[noSpace].append[oneSpace]
 				}
 				open.append(init)
@@ -540,7 +540,7 @@ class XbaseFormatter extends XtypeFormatter {
 				val last = expr.formatClosureParams(open, it)[noSpace]
 				last.append[noSpace]
 				for (c : children) {
-					c.format(it)
+					c.format
 					val semicolon = c.immediatelyFollowing.keyword(";")
 					if (semicolon != null)
 						semicolon.prepend[noSpace].append[if(c == children.last) noSpace else oneSpace]
@@ -564,7 +564,7 @@ class XbaseFormatter extends XtypeFormatter {
 		} else {
 			expr.prepend[oneSpace]
 		}
-		expr.format(doc)
+		expr.format
 	}
 
 	def protected void formatBodyInline(XExpression expr, boolean forceMultiline, extension IFormattableDocument doc) {
@@ -577,7 +577,7 @@ class XbaseFormatter extends XtypeFormatter {
 		} else {
 			expr.surround[oneSpace]
 		}
-		expr.format(doc)
+		expr.format
 	}
 
 	def protected void formatBodyParagraph(XExpression expr, extension IFormattableDocument doc) {
@@ -588,13 +588,13 @@ class XbaseFormatter extends XtypeFormatter {
 		} else {
 			expr.prepend[newLine].surround[indent].append[newLine]
 		}
-		expr.format(doc)
+		expr.format
 	}
 
 	def dispatch void format(XInstanceOfExpression expr, extension IFormattableDocument doc) {
 		expr.regionFor.keyword("instanceof").surround[oneSpace]
-		expr.expression.format(doc)
-		expr.type.format(doc)
+		expr.expression.format
+		expr.type.format
 	}
 
 	def protected void formatExpressionsMultiline(Collection<? extends XExpression> expressions, ISemanticRegion open,
@@ -605,7 +605,7 @@ class XbaseFormatter extends XtypeFormatter {
 		} else {
 			open.append(blankLinesAroundExpression)
 			for (child : expressions) {
-				child.format(format)
+				child.format
 				val sem = child.immediatelyFollowing.keyword(";")
 				if (sem != null)
 					sem.prepend[noSpace].append(blankLinesAroundExpression)
@@ -622,7 +622,7 @@ class XbaseFormatter extends XtypeFormatter {
 		} else {
 			open.append[oneSpace]
 			for (child : expressions) {
-				child.format(format)
+				child.format
 				val sem = child.immediatelyFollowing.keyword(";")
 				if (sem != null)
 					sem.prepend[noSpace].append[oneSpace]

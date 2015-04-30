@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -29,11 +30,12 @@ import org.eclipse.xtext.formatting2.internal.TextReplacerContext;
 import org.eclipse.xtext.formatting2.internal.TextReplacerMerger;
 import org.eclipse.xtext.formatting2.internal.WhitespaceReplacer;
 import org.eclipse.xtext.formatting2.regionaccess.IComment;
-import org.eclipse.xtext.formatting2.regionaccess.ITextRegionExtensions;
+import org.eclipse.xtext.formatting2.regionaccess.IEObjectRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegionPart;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionExtensions;
 import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 import org.eclipse.xtext.formatting2.regionaccess.internal.TextRegions;
@@ -42,6 +44,7 @@ import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.preferences.ITypedPreferenceValues;
 import org.eclipse.xtext.preferences.TypedPreferenceKey;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.lib.Extension;
 
 import com.google.common.collect.Lists;
@@ -160,13 +163,13 @@ import com.google.common.collect.Lists;
  */
 public abstract class AbstractFormatter2 implements IFormatter2 {
 
+	private FormatterRequest request = null;
+
 	/**
 	 * Offer subclasses access to the methods from {@link ITextRegionAccess} as extension methods.
 	 */
 	@Extension
 	protected ITextRegionExtensions textRegionExtensions;
-
-	private FormatterRequest request = null;
 
 	/**
 	 * Fall-back for types that are not handled by a subclasse's dispatch method.
@@ -310,6 +313,27 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 		this.textRegionExtensions = request.getTextRegionAccess().getExtensions();
 	}
 
+	protected boolean isInRequestedRange(EObject obj) {
+		Collection<ITextRegion> regions = request.getRegions();
+		if (regions.isEmpty())
+			return true;
+		ITextRegionAccess access = request.getTextRegionAccess();
+		IEObjectRegion objRegion = access.regionForEObject(obj);
+		if (objRegion == null)
+			return false;
+		IHiddenRegion previousHidden = objRegion.getPreviousHiddenRegion();
+		IHiddenRegion nextHidden = objRegion.getNextHiddenRegion();
+		int objOffset = previousHidden != null ? previousHidden.getOffset() : 0;
+		int objEnd = nextHidden != null ? nextHidden.getEndOffset() : access.regionForRootEObject().getEndOffset();
+		for (ITextRegion region : regions) {
+			int regionOffset = region.getOffset();
+			int regionEnd = regionOffset + region.getLength();
+			if (regionOffset <= objEnd && regionEnd >= objOffset)
+				return true;
+		}
+		return false;
+	}
+
 	protected List<ITextReplacement> postProcess(IFormattableDocument document, List<ITextReplacement> replacements) {
 		List<ITextSegment> expected = Lists.newArrayList();
 		IHiddenRegion current = getTextRegionAccess().regionForRootEObject().getPreviousHiddenRegion();
@@ -345,6 +369,12 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 	protected void reset() {
 		this.request = null;
 		this.textRegionExtensions = null;
+	}
+
+	public boolean shouldFormat(Object obj, IFormattableDocument document) {
+		if (obj instanceof EObject)
+			return isInRequestedRange((EObject) obj);
+		return true;
 	}
 
 }

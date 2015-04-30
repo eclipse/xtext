@@ -50,7 +50,7 @@ public class XtypeFormatter extends AbstractFormatter2 {
     EList<JvmTypeReference> _paramTypes = func.getParamTypes();
     for (final JvmTypeReference param : _paramTypes) {
       {
-        this.format(param, document);
+        document.<JvmTypeReference>format(param);
         ISemanticRegionFinder _immediatelyFollowing = this.textRegionExtensions.immediatelyFollowing(param);
         ISemanticRegion _keyword_1 = _immediatelyFollowing.keyword(",");
         final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
@@ -100,7 +100,7 @@ public class XtypeFormatter extends AbstractFormatter2 {
     };
     document.append(_keyword_2, _function_3);
     JvmTypeReference _returnType = func.getReturnType();
-    this.format(_returnType, document);
+    document.<JvmTypeReference>format(_returnType);
   }
   
   protected void _format(final JvmParameterizedTypeReference ref, @Extension final IFormattableDocument document) {
@@ -116,7 +116,7 @@ public class XtypeFormatter extends AbstractFormatter2 {
     EList<JvmTypeReference> _arguments = ref.getArguments();
     for (final JvmTypeReference arg : _arguments) {
       {
-        this.format(arg, document);
+        document.<JvmTypeReference>format(arg);
         ISemanticRegionFinder _immediatelyFollowing = this.textRegionExtensions.immediatelyFollowing(arg);
         ISemanticRegion _keyword_1 = _immediatelyFollowing.keyword(",");
         final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
@@ -168,7 +168,7 @@ public class XtypeFormatter extends AbstractFormatter2 {
     }
     EList<JvmTypeConstraint> _constraints_1 = ref.getConstraints();
     for (final JvmTypeConstraint c : _constraints_1) {
-      this.format(c, document);
+      document.<JvmTypeConstraint>format(c);
     }
   }
   
@@ -183,7 +183,7 @@ public class XtypeFormatter extends AbstractFormatter2 {
           }
         };
         document.<JvmTypeConstraint>prepend(c, _function);
-        this.format(c, document);
+        document.<JvmTypeConstraint>format(c);
       }
     }
   }
@@ -192,7 +192,7 @@ public class XtypeFormatter extends AbstractFormatter2 {
     EList<XImportDeclaration> _importDeclarations = section.getImportDeclarations();
     for (final XImportDeclaration imp : _importDeclarations) {
       {
-        this.format(imp, format);
+        format.<XImportDeclaration>format(imp);
         EList<XImportDeclaration> _importDeclarations_1 = section.getImportDeclarations();
         XImportDeclaration _last = IterableExtensions.<XImportDeclaration>last(_importDeclarations_1);
         boolean _notEquals = (!Objects.equal(imp, _last));

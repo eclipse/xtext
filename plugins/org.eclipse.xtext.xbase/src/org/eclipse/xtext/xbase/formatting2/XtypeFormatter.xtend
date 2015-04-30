@@ -27,18 +27,18 @@ class XtypeFormatter extends AbstractFormatter2 {
 	def dispatch void format(XFunctionTypeRef func, extension IFormattableDocument document) {
 		func.regionFor.keyword("(").append[noSpace]
 		for (param : func.paramTypes) {
-			param.format(document)
+			param.format
 			param.immediatelyFollowing.keyword(",").prepend[noSpace].append[oneSpace]
 		}
 		func.regionFor.keyword(")").prepend[if(!func.paramTypes.empty) noSpace].append[noSpace]
 		func.regionFor.keyword("=>").append[noSpace]
-		func.returnType.format(document)
+		func.returnType.format
 	}
 
 	def dispatch void format(JvmParameterizedTypeReference ref, extension IFormattableDocument document) {
 		ref.regionFor.keyword("<").surround[noSpace]
 		for (arg : ref.arguments) {
-			arg.format(document)
+			arg.format
 			arg.immediatelyFollowing.keyword(",").prepend[noSpace].append[oneSpace]
 		}
 		if (!ref.arguments.empty)
@@ -49,19 +49,19 @@ class XtypeFormatter extends AbstractFormatter2 {
 		if (!ref.constraints.empty)
 			ref.regionFor.keyword("?").append[oneSpace]
 		for (c : ref.constraints)
-			c.format(document)
+			c.format
 	}
 
 	def dispatch void format(JvmTypeParameter ref, extension IFormattableDocument document) {
 		for (c : ref.constraints) {
 			c.prepend[oneSpace]
-			c.format(document)
+			c.format
 		}
 	}
 
 	def dispatch format(XImportSection section, extension IFormattableDocument format) {
 		for (imp : section.importDeclarations) {
-			imp.format(format)
+			imp.format
 			if (imp != section.importDeclarations.last)
 				imp.append(blankLinesBetweenImports)
 			else

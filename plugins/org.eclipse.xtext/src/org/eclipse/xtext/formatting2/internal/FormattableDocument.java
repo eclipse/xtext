@@ -33,6 +33,7 @@ import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 import org.eclipse.xtext.preferences.ITypedPreferenceValues;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -172,6 +173,20 @@ public abstract class FormattableDocument implements IFormattableDocument {
 	}
 
 	@Override
+	public <T> T format(T obj) {
+		AbstractFormatter2 formatter = getFormatter();
+		if (formatter.shouldFormat(obj, this)) {
+			try {
+				formatter.format(obj, this);
+			} catch (Exception e) {
+				IAcceptor<Exception> handler = getRequest().getExceptionHandler();
+				handler.accept(e);
+			}
+		}
+		return obj;
+	}
+
+	@Override
 	public void formatConditionally(EObject owner, ISubFormatter... formatters) {
 		IEObjectRegion region = getTextRegionAccess().regionForEObject(owner);
 		formatConditionally(region.getOffset(), region.getLength(), formatters);
@@ -190,6 +205,36 @@ public abstract class FormattableDocument implements IFormattableDocument {
 
 	public ITextRegionAccess getTextRegionAccess() {
 		return getRequest().getTextRegionAccess();
+	}
+
+	@Override
+	public <T1 extends ISemanticRegion, T2 extends ISemanticRegion> // 
+	Pair<T1, T2> interior(Pair<T1, T2> pair, Procedure1<? super IHiddenRegionFormatter> init) {
+		return interior(pair.getKey(), pair.getValue(), init);
+	}
+
+	@Override
+	public <T extends EObject> T interior(T object, Procedure1<? super IHiddenRegionFormatter> init) {
+		if (object != null) {
+			IEObjectRegion objRegion = getTextRegionAccess().regionForEObject(object);
+			if (objRegion != null) {
+				IHiddenRegion previous = objRegion.getPreviousHiddenRegion();
+				IHiddenRegion next = objRegion.getNextHiddenRegion();
+				if (previous != null && next != null && previous != next) {
+					interior(previous.getNextSemanticRegion(), next.getPreviousSemanticRegion(), init);
+				}
+			}
+		}
+		return object;
+	}
+
+	@Override
+	public <T1 extends ISemanticRegion, T2 extends ISemanticRegion> // 
+	Pair<T1, T2> interior(T1 first, T2 second, Procedure1<? super IHiddenRegionFormatter> init) {
+		if (first != null && second != null) {
+			set(first.getNextHiddenRegion(), second.getPreviousHiddenRegion(), init);
+		}
+		return Pair.of(first, second);
 	}
 
 	protected boolean needsAutowrap(ITextReplacerContext wrappable, ITextReplacerContext context, int maxLineWidth) {
@@ -239,18 +284,6 @@ public abstract class FormattableDocument implements IFormattableDocument {
 	}
 
 	@Override
-	public IHiddenRegion set(IHiddenRegion hiddenRegion, Procedure1<? super IHiddenRegionFormatter> init) {
-		if (hiddenRegion != null) {
-			AbstractFormatter2 formatter = getFormatter();
-			IHiddenRegionFormatting formatting = formatter.createHiddenRegionFormatting();
-			init.apply(formatter.createHiddenRegionFormatter(formatting));
-			ITextReplacer replacer = formatter.createHiddenRegionReplacer(hiddenRegion, formatting);
-			addReplacer(replacer);
-		}
-		return hiddenRegion;
-	}
-
-	@Override
 	public Pair<IHiddenRegion, IHiddenRegion> set(IHiddenRegion first, IHiddenRegion second,
 			Procedure1<? super IHiddenRegionFormatter> init) {
 		if (first != null && second != null) {
@@ -264,6 +297,18 @@ public abstract class FormattableDocument implements IFormattableDocument {
 			addReplacer(replacer2);
 		}
 		return Pair.of(first, second);
+	}
+
+	@Override
+	public IHiddenRegion set(IHiddenRegion hiddenRegion, Procedure1<? super IHiddenRegionFormatter> init) {
+		if (hiddenRegion != null) {
+			AbstractFormatter2 formatter = getFormatter();
+			IHiddenRegionFormatting formatting = formatter.createHiddenRegionFormatting();
+			init.apply(formatter.createHiddenRegionFormatter(formatting));
+			ITextReplacer replacer = formatter.createHiddenRegionReplacer(hiddenRegion, formatting);
+			addReplacer(replacer);
+		}
+		return hiddenRegion;
 	}
 
 	@Override
@@ -288,21 +333,6 @@ public abstract class FormattableDocument implements IFormattableDocument {
 	}
 
 	@Override
-	public <T1 extends ISemanticRegion, T2 extends ISemanticRegion> // 
-	Pair<T1, T2> interior(Pair<T1, T2> pair, Procedure1<? super IHiddenRegionFormatter> init) {
-		return interior(pair.getKey(), pair.getValue(), init);
-	}
-
-	@Override
-	public <T1 extends ISemanticRegion, T2 extends ISemanticRegion> // 
-	Pair<T1, T2> interior(T1 first, T2 second, Procedure1<? super IHiddenRegionFormatter> init) {
-		if (first != null && second != null) {
-			set(first.getNextHiddenRegion(), second.getPreviousHiddenRegion(), init);
-		}
-		return Pair.of(first, second);
-	}
-
-	@Override
 	public String toString() {
 		TextRegionsToString toString = new TextRegionsToString();
 		toString.setFrame(this.getRegion());
@@ -316,5 +346,4 @@ public abstract class FormattableDocument implements IFormattableDocument {
 	public IFormattableSubDocument withReplacerFilter(Predicate<? super ITextReplacer> filter) {
 		return new FilteredSubDocument(getRegion(), this, filter);
 	}
-
 }

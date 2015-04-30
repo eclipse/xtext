@@ -163,7 +163,7 @@ public class XbaseFormatter extends XtypeFormatter {
           format.append(open, _function_1);
           for (final EObject elem : elements) {
             {
-              this.format(elem, format);
+              format.<EObject>format(elem);
               ISemanticRegionFinder _immediatelyFollowing = this.textRegionExtensions.immediatelyFollowing(elem);
               ISemanticRegion _keyword = _immediatelyFollowing.keyword(",");
               final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
@@ -266,7 +266,7 @@ public class XbaseFormatter extends XtypeFormatter {
               };
               format.prepend(sep, _function_7);
               EObject _object_1 = ele_1.getObject();
-              this.format(_object_1, format);
+              format.<EObject>format(_object_1);
             }
           }
           final Procedure1<IHiddenRegionFormatter> _function_4 = new Procedure1<IHiddenRegionFormatter>() {
@@ -288,7 +288,7 @@ public class XbaseFormatter extends XtypeFormatter {
     ArrayBracketsFormattingReplacer _arrayBracketsFormattingReplacer = new ArrayBracketsFormattingReplacer(_ruleCallTo);
     document.addReplacer(_arrayBracketsFormattingReplacer);
     JvmTypeReference _componentType = array.getComponentType();
-    this.format(_componentType, document);
+    document.<JvmTypeReference>format(_componentType);
   }
   
   protected void _format(final JvmTypeConstraint constraint, @Extension final IFormattableDocument document) {
@@ -300,7 +300,7 @@ public class XbaseFormatter extends XtypeFormatter {
       }
     };
     JvmTypeReference _prepend = document.<JvmTypeReference>prepend(_typeReference, _function);
-    this.format(_prepend, document);
+    document.<JvmTypeReference>format(_prepend);
   }
   
   protected void _format(final XVariableDeclaration expr, @Extension final IFormattableDocument format) {
@@ -340,9 +340,9 @@ public class XbaseFormatter extends XtypeFormatter {
     };
     format.surround(_keyword_2, _function_3);
     JvmTypeReference _type_1 = expr.getType();
-    this.format(_type_1, format);
+    format.<JvmTypeReference>format(_type_1);
     XExpression _right = expr.getRight();
-    this.format(_right, format);
+    format.<XExpression>format(_right);
   }
   
   protected void _format(final XAssignment expr, @Extension final IFormattableDocument format) {
@@ -373,9 +373,9 @@ public class XbaseFormatter extends XtypeFormatter {
     };
     format.surround(_keyword, _function_1);
     XExpression _assignable = expr.getAssignable();
-    this.format(_assignable, format);
+    format.<XExpression>format(_assignable);
     XExpression _value = expr.getValue();
-    this.format(_value, format);
+    format.<XExpression>format(_value);
   }
   
   protected void formatFeatureCallParams(final List<XExpression> params, final ISemanticRegion open, final ISemanticRegion close, @Extension final IFormattableDocument format) {
@@ -406,7 +406,7 @@ public class XbaseFormatter extends XtypeFormatter {
             }
           };
           it.<XClosure>prepend(closure, _function);
-          XbaseFormatter.this.format(closure, it);
+          it.<XClosure>format(closure);
         }
       };
       final ISubFormatter _function_1 = new ISubFormatter() {
@@ -419,7 +419,7 @@ public class XbaseFormatter extends XtypeFormatter {
             }
           };
           it.<XClosure>prepend(closure, _function);
-          XbaseFormatter.this.format(closure, it);
+          it.<XClosure>format(closure);
         }
       };
       format.formatConditionally(offset, length, _function, _function_1);
@@ -512,7 +512,7 @@ public class XbaseFormatter extends XtypeFormatter {
       EList<JvmTypeReference> _typeArguments_1 = expr.getTypeArguments();
       for (final JvmTypeReference arg : _typeArguments_1) {
         {
-          this.format(arg, format);
+          format.<JvmTypeReference>format(arg);
           ISemanticRegionFinder _immediatelyFollowing = this.textRegionExtensions.immediatelyFollowing(arg);
           ISemanticRegion _keyword_1 = _immediatelyFollowing.keyword(",");
           final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
@@ -573,7 +573,7 @@ public class XbaseFormatter extends XtypeFormatter {
       EList<JvmTypeReference> _typeArguments_1 = expr.getTypeArguments();
       for (final JvmTypeReference arg : _typeArguments_1) {
         {
-          this.format(arg, format);
+          format.<JvmTypeReference>format(arg);
           ISemanticRegionFinder _immediatelyFollowing = this.textRegionExtensions.immediatelyFollowing(arg);
           ISemanticRegion _keyword_1 = _immediatelyFollowing.keyword(",");
           final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
@@ -663,7 +663,7 @@ public class XbaseFormatter extends XtypeFormatter {
         top = _memberCallTarget;
       }
     }
-    this.format(top, format);
+    format.<EObject>format(top);
     IHiddenRegion _nextHiddenRegion = this.textRegionExtensions.nextHiddenRegion(expr);
     final IndentOnceAutowrapFormatter indentOnce = new IndentOnceAutowrapFormatter(_nextHiddenRegion);
     for (final ObjectEntry<XMemberFeatureCall, ISemanticRegion> entry : calls) {
@@ -802,7 +802,7 @@ public class XbaseFormatter extends XtypeFormatter {
         format.prepend(sep, _function_2);
         XBinaryOperation _object_1 = ele.getObject();
         XExpression _rightOperand = _object_1.getRightOperand();
-        this.format(_rightOperand, format);
+        format.<XExpression>format(_rightOperand);
       }
     }
   }
@@ -884,7 +884,7 @@ public class XbaseFormatter extends XtypeFormatter {
       format.append(_keyword_1, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisSL);
     }
     XExpression _param_1 = expr.getParam();
-    this.format(_param_1, format);
+    format.<XExpression>format(_param_1);
     XExpression _expression_3 = expr.getExpression();
     this.formatBody(_expression_3, false, format);
   }
@@ -936,7 +936,7 @@ public class XbaseFormatter extends XtypeFormatter {
       format.append(_keyword_1, XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisSL);
     }
     XExpression _if_1 = expr.getIf();
-    this.format(_if_1, format);
+    format.<XExpression>format(_if_1);
     XExpression _else_1 = expr.getElse();
     boolean _equals = Objects.equal(_else_1, null);
     if (_equals) {
@@ -962,7 +962,7 @@ public class XbaseFormatter extends XtypeFormatter {
         };
         format.<XExpression>prepend(_else_3, _function_2);
         XExpression _else_4 = expr.getElse();
-        this.format(_else_4, format);
+        format.<XExpression>format(_else_4);
       } else {
         XExpression _else_5 = expr.getElse();
         this.formatBody(_else_5, multiline, format);
@@ -1010,7 +1010,7 @@ public class XbaseFormatter extends XtypeFormatter {
       }
     };
     XExpression _append = format.<XExpression>append(_prepend_1, _function_4);
-    this.format(_append, format);
+    format.<XExpression>format(_append);
     XExpression _eachExpression = expr.getEachExpression();
     this.formatBody(_eachExpression, true, format);
   }
@@ -1092,7 +1092,7 @@ public class XbaseFormatter extends XtypeFormatter {
     final Procedure1<XExpression> _function_5 = new Procedure1<XExpression>() {
       @Override
       public void apply(final XExpression it) {
-        XbaseFormatter.this.format(it, format);
+        format.<XExpression>format(it);
       }
     };
     IterableExtensions.<XExpression>forEach(_initExpressions, _function_5);
@@ -1105,7 +1105,7 @@ public class XbaseFormatter extends XtypeFormatter {
     };
     format.<XExpression>prepend(_expression, _function_6);
     XExpression _expression_1 = expr.getExpression();
-    this.format(_expression_1, format);
+    format.<XExpression>format(_expression_1);
     EList<XExpression> _updateExpressions = expr.getUpdateExpressions();
     XExpression _head = IterableExtensions.<XExpression>head(_updateExpressions);
     final Procedure1<IHiddenRegionFormatter> _function_7 = new Procedure1<IHiddenRegionFormatter>() {
@@ -1119,7 +1119,7 @@ public class XbaseFormatter extends XtypeFormatter {
     final Procedure1<XExpression> _function_8 = new Procedure1<XExpression>() {
       @Override
       public void apply(final XExpression it) {
-        XbaseFormatter.this.format(it, format);
+        format.<XExpression>format(it);
       }
     };
     IterableExtensions.<XExpression>forEach(_updateExpressions_1, _function_8);
@@ -1146,7 +1146,7 @@ public class XbaseFormatter extends XtypeFormatter {
       }
     };
     XExpression _append = format.<XExpression>append(_prepend, _function_1);
-    this.format(_append, format);
+    format.<XExpression>format(_append);
     XExpression _body = expr.getBody();
     this.formatBody(_body, true, format);
   }
@@ -1170,7 +1170,7 @@ public class XbaseFormatter extends XtypeFormatter {
       }
     };
     XExpression _append = format.<XExpression>append(_prepend, _function_1);
-    this.format(_append, format);
+    format.<XExpression>format(_append);
     XExpression _body = expr.getBody();
     this.formatBodyInline(_body, true, format);
   }
@@ -1283,7 +1283,7 @@ public class XbaseFormatter extends XtypeFormatter {
     };
     format.<XExpression>prepend(_expression, _function);
     XExpression _expression_1 = expr.getExpression();
-    this.format(_expression_1, format);
+    format.<XExpression>format(_expression_1);
   }
   
   protected void _format(final XReturnExpression expr, @Extension final IFormattableDocument format) {
@@ -1296,7 +1296,7 @@ public class XbaseFormatter extends XtypeFormatter {
     };
     format.<XExpression>prepend(_expression, _function);
     XExpression _expression_1 = expr.getExpression();
-    this.format(_expression_1, format);
+    format.<XExpression>format(_expression_1);
   }
   
   protected void _format(final XTryCatchFinallyExpression expr, @Extension final IFormattableDocument format) {
@@ -1323,7 +1323,7 @@ public class XbaseFormatter extends XtypeFormatter {
           }
         };
         JvmFormalParameter _append = format.<JvmFormalParameter>append(_prepend, _function_1);
-        this.format(_append, format);
+        format.<JvmFormalParameter>format(_append);
         boolean _or = false;
         EList<XCatchClause> _catchClauses_1 = expr.getCatchClauses();
         XCatchClause _last = IterableExtensions.<XCatchClause>last(_catchClauses_1);
@@ -1360,7 +1360,7 @@ public class XbaseFormatter extends XtypeFormatter {
       format.<JvmTypeReference>append(_parameterType, _function);
     }
     JvmTypeReference _parameterType_1 = expr.getParameterType();
-    this.format(_parameterType_1, format);
+    format.<JvmTypeReference>format(_parameterType_1);
   }
   
   protected void _format(final XExpression expr, @Extension final IFormattableDocument format) {
@@ -1370,7 +1370,7 @@ public class XbaseFormatter extends XtypeFormatter {
       if (!_matched) {
         if (obj instanceof XExpression) {
           _matched=true;
-          this.format(obj, format);
+          format.<XExpression>format(((XExpression)obj));
         }
       }
     }
@@ -1469,9 +1469,9 @@ public class XbaseFormatter extends XtypeFormatter {
       for (final XCasePart c : _cases_3) {
         {
           XExpression _case = c.getCase();
-          this.format(_case, format);
+          format.<XExpression>format(_case);
           XExpression _then = c.getThen();
-          this.format(_then, format);
+          format.<XExpression>format(_then);
           XExpression _then_1 = c.getThen();
           boolean _equals = Objects.equal(_then_1, null);
           if (_equals) {
@@ -1521,7 +1521,7 @@ public class XbaseFormatter extends XtypeFormatter {
           }
         };
         XExpression _surround = format.<XExpression>surround(_default_3, _function_6);
-        this.format(_surround, format);
+        format.<XExpression>format(_surround);
       }
     } else {
       if (caseSL) {
@@ -1549,9 +1549,9 @@ public class XbaseFormatter extends XtypeFormatter {
         for (final XCasePart c_1 : _cases_5) {
           {
             XExpression _case = c_1.getCase();
-            this.format(_case, format);
+            format.<XExpression>format(_case);
             XExpression _then = c_1.getThen();
-            this.format(_then, format);
+            format.<XExpression>format(_then);
             XExpression _then_1 = c_1.getThen();
             final Procedure1<IHiddenRegionFormatter> _function_9 = new Procedure1<IHiddenRegionFormatter>() {
               @Override
@@ -1601,7 +1601,7 @@ public class XbaseFormatter extends XtypeFormatter {
             }
           };
           XExpression _prepend_1 = format.<XExpression>prepend(_default_5, _function_11);
-          this.format(_prepend_1, format);
+          format.<XExpression>format(_prepend_1);
         }
         final Procedure1<IHiddenRegionFormatter> _function_12 = new Procedure1<IHiddenRegionFormatter>() {
           @Override
@@ -1643,7 +1643,7 @@ public class XbaseFormatter extends XtypeFormatter {
         for (final XCasePart c_2 : _cases_7) {
           {
             XExpression _case = c_2.getCase();
-            this.format(_case, format);
+            format.<XExpression>format(_case);
             XExpression _then = c_2.getThen();
             this.formatBodyParagraph(_then, format);
             ISemanticRegionsFinder _regionFor_5 = this.textRegionExtensions.regionFor(c_2);
@@ -1773,7 +1773,7 @@ public class XbaseFormatter extends XtypeFormatter {
         EList<JvmFormalParameter> _declaredFormalParameters_1 = expr.getDeclaredFormalParameters();
         for (final JvmFormalParameter param : _declaredFormalParameters_1) {
           {
-            this.format(param, format);
+            format.<JvmFormalParameter>format(param);
             ISemanticRegionFinder _immediatelyFollowing = this.textRegionExtensions.immediatelyFollowing(param);
             ISemanticRegion _keyword = _immediatelyFollowing.keyword(",");
             final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
@@ -1913,7 +1913,7 @@ public class XbaseFormatter extends XtypeFormatter {
               it.append(last, _function_1);
               for (final XExpression c : children) {
                 {
-                  XbaseFormatter.this.format(c, it);
+                  it.<XExpression>format(c);
                   ISemanticRegionFinder _immediatelyFollowing = XbaseFormatter.this.textRegionExtensions.immediatelyFollowing(c);
                   final ISemanticRegion semicolon = _immediatelyFollowing.keyword(";");
                   boolean _notEquals = (!Objects.equal(semicolon, null));
@@ -2017,7 +2017,7 @@ public class XbaseFormatter extends XtypeFormatter {
         doc.<XExpression>prepend(expr, _function_2);
       }
     }
-    this.format(expr, doc);
+    doc.<XExpression>format(expr);
   }
   
   protected void formatBodyInline(final XExpression expr, final boolean forceMultiline, @Extension final IFormattableDocument doc) {
@@ -2069,7 +2069,7 @@ public class XbaseFormatter extends XtypeFormatter {
         doc.<XExpression>surround(expr, _function_3);
       }
     }
-    this.format(expr, doc);
+    doc.<XExpression>format(expr);
   }
   
   protected void formatBodyParagraph(final XExpression expr, @Extension final IFormattableDocument doc) {
@@ -2109,7 +2109,7 @@ public class XbaseFormatter extends XtypeFormatter {
       };
       doc.<XExpression>append(_surround, _function_3);
     }
-    this.format(expr, doc);
+    doc.<XExpression>format(expr);
   }
   
   protected void _format(final XInstanceOfExpression expr, @Extension final IFormattableDocument doc) {
@@ -2123,9 +2123,9 @@ public class XbaseFormatter extends XtypeFormatter {
     };
     doc.surround(_keyword, _function);
     XExpression _expression = expr.getExpression();
-    this.format(_expression, doc);
+    doc.<XExpression>format(_expression);
     JvmTypeReference _type = expr.getType();
-    this.format(_type, doc);
+    doc.<JvmTypeReference>format(_type);
   }
   
   protected void formatExpressionsMultiline(final Collection<? extends XExpression> expressions, final ISemanticRegion open, final ISemanticRegion close, @Extension final IFormattableDocument format) {
@@ -2149,7 +2149,7 @@ public class XbaseFormatter extends XtypeFormatter {
       format.append(open, XbaseFormatterPreferenceKeys.blankLinesAroundExpression);
       for (final XExpression child : expressions) {
         {
-          this.format(child, format);
+          format.<XExpression>format(child);
           ISemanticRegionFinder _immediatelyFollowing = this.textRegionExtensions.immediatelyFollowing(child);
           final ISemanticRegion sem = _immediatelyFollowing.keyword(";");
           boolean _notEquals = (!Objects.equal(sem, null));
@@ -2190,7 +2190,7 @@ public class XbaseFormatter extends XtypeFormatter {
       format.append(open, _function_1);
       for (final XExpression child : expressions) {
         {
-          this.format(child, format);
+          format.<XExpression>format(child);
           ISemanticRegionFinder _immediatelyFollowing = this.textRegionExtensions.immediatelyFollowing(child);
           final ISemanticRegion sem = _immediatelyFollowing.keyword(";");
           boolean _notEquals = (!Objects.equal(sem, null));
