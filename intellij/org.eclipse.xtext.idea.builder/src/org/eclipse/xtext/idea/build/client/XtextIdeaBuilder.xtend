@@ -12,13 +12,15 @@ import java.io.File
 import java.io.IOException
 import java.nio.channels.SocketChannel
 import org.apache.log4j.Logger
-import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.ISetup
 import org.eclipse.xtext.ISetupExtension
-import org.eclipse.xtext.idea.build.daemon.Protocol.BuildIssue
-import org.eclipse.xtext.idea.build.daemon.Protocol.BuildRequest
-import org.eclipse.xtext.idea.build.daemon.Protocol.BuildResult
 import org.eclipse.xtext.idea.build.net.ObjectChannel
+import org.eclipse.xtext.idea.build.net.Protocol.BuildFailureMessage
+import org.eclipse.xtext.idea.build.net.Protocol.BuildIssueMessage
+import org.eclipse.xtext.idea.build.net.Protocol.BuildRequestMessage
+import org.eclipse.xtext.idea.build.net.Protocol.BuildResultMessage
+import org.eclipse.xtext.idea.build.net.Protocol.JavaDependencyRequest
+import org.eclipse.xtext.idea.build.net.Protocol.JavaDependencyResult
 import org.jetbrains.jps.ModuleChunk
 import org.jetbrains.jps.ProjectPaths
 import org.jetbrains.jps.builders.DirtyFilesHolder
@@ -27,18 +29,17 @@ import org.jetbrains.jps.incremental.CompileContext
 import org.jetbrains.jps.incremental.FSOperations
 import org.jetbrains.jps.incremental.ModuleBuildTarget
 import org.jetbrains.jps.incremental.ModuleLevelBuilder
-import org.jetbrains.jps.incremental.ModuleLevelBuilder.OutputConsumer
 import org.jetbrains.jps.incremental.ProjectBuildException
 import org.jetbrains.jps.incremental.fs.CompilationRound
 import org.jetbrains.jps.incremental.messages.BuildMessage
 import org.jetbrains.jps.incremental.messages.CompilerMessage
 import org.jetbrains.jps.incremental.messages.CustomBuilderMessage
-import org.jetbrains.jps.model.java.JavaSourceRootType
-import org.jetbrains.jps.model.module.JpsModule
 import org.jetbrains.jps.service.JpsServiceManager
 
 import static org.jetbrains.jps.incremental.BuilderCategory.*
 import static org.jetbrains.jps.incremental.ModuleLevelBuilder.ExitCode.*
+
+import static extension org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs.*
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -68,55 +69,72 @@ class XtextIdeaBuilder extends ModuleLevelBuilder {
 			while (result == null) {
 				val message = channel.readObject
 				switch message {
-					BuildResult: {
+					BuildResultMessage: {
 						handleBuildResult(message, context, chunk, outputConsumer)
 						result = OK
 					}
-					BuildIssue:
+					BuildIssueMessage: {
 						message.reportIssue(context)
+					}
+					BuildFailureMessage: {
+						reportError(message.message, context)
+						result = ABORT						
+					}
+					JavaDependencyRequest: {
+						channel.writeObject(message.handleJavaDependencyRequest(context))
+					}
 				}
 			}
 		} catch (Exception exc) {
 			LOG.error('Error in build', exc)
-			context.processMessage(new BuildMessage(exc.message, BuildMessage.Kind.ERROR) {
-			})
+			reportError(exc.message, context)
 			result = ABORT
 		} finally {
 			socketChannel?.close
 		}
 		return result
 	}
-
+	
 	private def createBuildRequest(ModuleChunk chunk, CompileContext context,
 		DirtyFilesHolder<JavaSourceRootDescriptor, ModuleBuildTarget> dirtyFilesHolder) {
-		val buildRequest = new BuildRequest()
-		dirtyFilesHolder.processDirtyFiles [ target, file, root |
-			buildRequest.dirtyFiles += file.path
-			true
+		val buildRequest = new BuildRequestMessage() => [
+			dirtyFilesHolder.processDirtyFiles [ target, file, root |
+				dirtyFiles += file.asURI.toString
+				true
+			]
+			deletedFiles += dirtyFilesHolder.getRemovedFiles(chunk.representativeTarget).map[asFileURI.toString]
+			classpath += ProjectPaths.getCompilationClasspath(chunk, true).toList.map[asURI.toString]
+			outputs += ProjectPaths.getOutputPathsWithDependents(chunk).map[asURI.toString]
+			sourceRoots += ProjectPaths.getSourceRootsWithDependents(chunk).keySet.toList.map[asURI.toString]
+			encoding = context.projectDescriptor.encodingConfiguration.
+				getPreferredModuleChunkEncoding(chunk)
+			baseDir = chunk.representativeTarget.module.contentRootsList.urls.map[asURI].findFirst[isFile].toString
 		]
-		buildRequest.deletedFiles += dirtyFilesHolder.getRemovedFiles(chunk.representativeTarget)
-		buildRequest.classpath += ProjectPaths.getCompilationClasspath(chunk, true).toList.map[path]
-		buildRequest.sourceRoots += ProjectPaths.getSourceRootsWithDependents(chunk).keySet.toList.map[path]
-		buildRequest.encoding = context.projectDescriptor.encodingConfiguration.
-			getPreferredModuleChunkEncoding(chunk)
-		buildRequest.baseDir = chunk.representativeTarget.module.contentRootsList.urls.map [
-			URI.createURI(it)
-		].findFirst [
-			isFile
-		].path
 		buildRequest
 	}
-
-	private def handleBuildResult(BuildResult result, CompileContext context, ModuleChunk chunk,
-		OutputConsumer outputConsumer) {
-		val module = chunk.representativeTarget.module
-		result.outputDirs.forEach [
-			createSourceRoot(module)
+	
+	private def handleJavaDependencyRequest(JavaDependencyRequest request, CompileContext context) {
+		val dependencyFinder = new IdeaClassFileDependencyFinder(context)
+		val dependentJavaFiles = dependencyFinder.getDependentJavaFiles(
+			request.dirtyJavaFiles.map[asURI], request.deletedJavaFiles.map[asURI]
+		)
+		new JavaDependencyResult => [
+			it.dependentJavaFiles += dependentJavaFiles.map[toString]
 		]
-		result.dirtyFiles.forEach [
-			FSOperations.markDirty(context, CompilationRound.CURRENT, new File(it))
-			context.processMessage(new CustomBuilderMessage(presentableName, 'generated', it))
-			context.processMessage(new CustomBuilderMessage(presentableName, 'refresh', it))
+	}
+
+	private def handleBuildResult(BuildResultMessage result, CompileContext context, ModuleChunk chunk,
+		OutputConsumer outputConsumer) {
+		val target = chunk.representativeTarget
+		result.generatedFiles.forEach [
+			val outputFile = file.asURI.asFile
+			FSOperations.markDirty(context, CompilationRound.CURRENT, outputFile)
+			// Hack: As we cannot set the JavaSourceRootDescriptor#isGenereatedSource
+			// we have to mark our files as generated by resetting the timestamp.
+			outputFile.lastModified = context.compilationStartStamp
+			context.processMessage(new CustomBuilderMessage(presentableName, 'generated', file))
+			context.processMessage(new CustomBuilderMessage(presentableName, 'refresh', file))
+			outputConsumer.registerOutputFile(target, outputFile, sourceFiles.map[asURI.asPath])
 		]
 		result.deletedFiles.forEach [
 			FSOperations.markDeleted(context, new File(it))
@@ -125,12 +143,12 @@ class XtextIdeaBuilder extends ModuleLevelBuilder {
 		]
 	}
 
-	private def reportIssue(BuildIssue it, CompileContext context) {
+	private def reportIssue(BuildIssueMessage it, CompileContext context) {
 		context.processMessage(new CompilerMessage(
 			presentableName,
 			kind,
 			message,
-			path,
+			uriToProblem.asURI.asPath,
 			startOffset,
 			endOffset,
 			locationOffset,
@@ -138,11 +156,9 @@ class XtextIdeaBuilder extends ModuleLevelBuilder {
 			column
 		))
 	}
-
-	protected def createSourceRoot(String outputDir, JpsModule module) {
-		val outletUrl = URI.createFileURI(outputDir).toString
-		if (!module.getSourceRoots(JavaSourceRootType.SOURCE).exists[url == outletUrl])
-			module.addSourceRoot(outletUrl, JavaSourceRootType.SOURCE)
+	
+	protected def reportError(String message, CompileContext context) {
+		context.processMessage(new BuildMessage(message, BuildMessage.Kind.ERROR) {})
 	}
 
 	override getCompilableFileExtensions() {

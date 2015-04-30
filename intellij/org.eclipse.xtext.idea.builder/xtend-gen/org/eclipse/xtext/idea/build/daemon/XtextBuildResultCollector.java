@@ -7,61 +7,78 @@
  */
 package org.eclipse.xtext.idea.build.daemon;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Multimap;
+import java.util.Collection;
 import java.util.List;
-import org.eclipse.xtend.lib.annotations.AccessorType;
-import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.idea.build.daemon.Protocol;
-import org.eclipse.xtext.idea.build.net.ObjectChannel;
-import org.eclipse.xtext.xbase.lib.Pure;
+import java.util.Set;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder;
+import org.eclipse.xtext.idea.build.net.Protocol;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class XtextBuildResultCollector {
-  @Accessors(AccessorType.PUBLIC_GETTER)
-  private Protocol.BuildResult buildResult = new Protocol.BuildResult();
+public class XtextBuildResultCollector implements IncrementalStandaloneBuilder.FileListener {
+  private Multimap<URI, URI> generatedFile2sourceURI = HashMultimap.<URI, URI>create();
   
-  @Accessors
-  private ObjectChannel output;
+  private Set<URI> deletedFiles = CollectionLiterals.<URI>newHashSet();
   
-  public void addIssue(final Protocol.BuildIssue issue) {
-    this.output.writeObject(issue);
+  public Protocol.BuildResultMessage getBuildResult() {
+    Protocol.BuildResultMessage _buildResultMessage = new Protocol.BuildResultMessage();
+    final Procedure1<Protocol.BuildResultMessage> _function = new Procedure1<Protocol.BuildResultMessage>() {
+      @Override
+      public void apply(final Protocol.BuildResultMessage it) {
+        List<String> _deletedFiles = it.getDeletedFiles();
+        String _string = XtextBuildResultCollector.this.deletedFiles.toString();
+        _deletedFiles.add(_string);
+        List<Protocol.GeneratedFile> _generatedFiles = it.getGeneratedFiles();
+        Set<URI> _keySet = XtextBuildResultCollector.this.generatedFile2sourceURI.keySet();
+        final Function1<URI, Protocol.GeneratedFile> _function = new Function1<URI, Protocol.GeneratedFile>() {
+          @Override
+          public Protocol.GeneratedFile apply(final URI generated) {
+            Protocol.GeneratedFile _generatedFile = new Protocol.GeneratedFile();
+            final Procedure1<Protocol.GeneratedFile> _function = new Procedure1<Protocol.GeneratedFile>() {
+              @Override
+              public void apply(final Protocol.GeneratedFile it) {
+                String _string = generated.toString();
+                it.setFile(_string);
+                List<String> _sourceFiles = it.getSourceFiles();
+                Collection<URI> _get = XtextBuildResultCollector.this.generatedFile2sourceURI.get(generated);
+                final Function1<URI, String> _function = new Function1<URI, String>() {
+                  @Override
+                  public String apply(final URI it) {
+                    return it.toString();
+                  }
+                };
+                Iterable<String> _map = IterableExtensions.<URI, String>map(_get, _function);
+                Iterables.<String>addAll(_sourceFiles, _map);
+              }
+            };
+            return ObjectExtensions.<Protocol.GeneratedFile>operator_doubleArrow(_generatedFile, _function);
+          }
+        };
+        Iterable<Protocol.GeneratedFile> _map = IterableExtensions.<URI, Protocol.GeneratedFile>map(_keySet, _function);
+        Iterables.<Protocol.GeneratedFile>addAll(_generatedFiles, _map);
+      }
+    };
+    return ObjectExtensions.<Protocol.BuildResultMessage>operator_doubleArrow(_buildResultMessage, _function);
   }
   
-  public boolean addChangedFile(final String path) {
-    List<String> _dirtyFiles = this.buildResult.getDirtyFiles();
-    return _dirtyFiles.add(path);
+  @Override
+  public void fileGenerated(final URI source, final URI target) {
+    this.generatedFile2sourceURI.put(target, source);
   }
   
-  public boolean addOutputDir(final String outputDir) {
-    boolean _xifexpression = false;
-    List<String> _outputDirs = this.buildResult.getOutputDirs();
-    boolean _contains = _outputDirs.contains(outputDir);
-    boolean _not = (!_contains);
-    if (_not) {
-      List<String> _outputDirs_1 = this.buildResult.getOutputDirs();
-      _xifexpression = _outputDirs_1.add(outputDir);
-    }
-    return _xifexpression;
-  }
-  
-  public boolean addDeletedFile(final String path) {
-    List<String> _deletedFiles = this.buildResult.getDeletedFiles();
-    return _deletedFiles.add(path);
-  }
-  
-  @Pure
-  public Protocol.BuildResult getBuildResult() {
-    return this.buildResult;
-  }
-  
-  @Pure
-  public ObjectChannel getOutput() {
-    return this.output;
-  }
-  
-  public void setOutput(final ObjectChannel output) {
-    this.output = output;
+  @Override
+  public void fileDeleted(final URI file) {
+    this.deletedFiles.add(file);
   }
 }

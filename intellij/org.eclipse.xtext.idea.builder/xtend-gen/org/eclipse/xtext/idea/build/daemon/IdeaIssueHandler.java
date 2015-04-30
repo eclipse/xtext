@@ -8,18 +8,19 @@
 package org.eclipse.xtext.idea.build.daemon;
 
 import com.google.common.base.Objects;
+import com.google.inject.Inject;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.builder.standalone.IIssueHandler;
 import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.idea.build.daemon.Protocol;
-import org.eclipse.xtext.idea.build.daemon.XtextBuildResultCollector;
+import org.eclipse.xtext.idea.build.daemon.IBuildSessionSingletons;
+import org.eclipse.xtext.idea.build.net.ObjectChannel;
+import org.eclipse.xtext.idea.build.net.Protocol;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.lib.Pure;
 import org.jetbrains.jps.incremental.messages.BuildMessage;
 
 /**
@@ -27,8 +28,9 @@ import org.jetbrains.jps.incremental.messages.BuildMessage;
  */
 @SuppressWarnings("all")
 public class IdeaIssueHandler implements IIssueHandler {
-  @Accessors
-  private XtextBuildResultCollector buildResultCollector;
+  @Inject
+  @Extension
+  private IBuildSessionSingletons _iBuildSessionSingletons;
   
   @Override
   public boolean handleIssue(final Iterable<Issue> issues) {
@@ -43,17 +45,18 @@ public class IdeaIssueHandler implements IIssueHandler {
     Iterable<Issue> _filter = IterableExtensions.<Issue>filter(issues, _function);
     for (final Issue issue : _filter) {
       {
-        Protocol.BuildIssue _buildIssue = new Protocol.BuildIssue();
-        final Procedure1<Protocol.BuildIssue> _function_1 = new Procedure1<Protocol.BuildIssue>() {
+        ObjectChannel _objectChannel = this._iBuildSessionSingletons.getObjectChannel();
+        Protocol.BuildIssueMessage _buildIssueMessage = new Protocol.BuildIssueMessage();
+        final Procedure1<Protocol.BuildIssueMessage> _function_1 = new Procedure1<Protocol.BuildIssueMessage>() {
           @Override
-          public void apply(final Protocol.BuildIssue it) {
+          public void apply(final Protocol.BuildIssueMessage it) {
             BuildMessage.Kind _kind = IdeaIssueHandler.this.getKind(issue);
             it.setKind(_kind);
             String _message = issue.getMessage();
             it.setMessage(_message);
             URI _uriToProblem = issue.getUriToProblem();
-            String _path = _uriToProblem.path();
-            it.setPath(_path);
+            String _string = _uriToProblem.toString();
+            it.setUriToProblem(_string);
             Integer _offset = issue.getOffset();
             it.setStartOffset((_offset).intValue());
             Integer _offset_1 = issue.getOffset();
@@ -67,8 +70,8 @@ public class IdeaIssueHandler implements IIssueHandler {
             it.setColumn(0);
           }
         };
-        Protocol.BuildIssue _doubleArrow = ObjectExtensions.<Protocol.BuildIssue>operator_doubleArrow(_buildIssue, _function_1);
-        this.buildResultCollector.addIssue(_doubleArrow);
+        Protocol.BuildIssueMessage _doubleArrow = ObjectExtensions.<Protocol.BuildIssueMessage>operator_doubleArrow(_buildIssueMessage, _function_1);
+        _objectChannel.writeObject(_doubleArrow);
         boolean _and = false;
         if (!errorFree) {
           _and = false;
@@ -105,14 +108,5 @@ public class IdeaIssueHandler implements IIssueHandler {
       }
     }
     return _switchResult;
-  }
-  
-  @Pure
-  public XtextBuildResultCollector getBuildResultCollector() {
-    return this.buildResultCollector;
-  }
-  
-  public void setBuildResultCollector(final XtextBuildResultCollector buildResultCollector) {
-    this.buildResultCollector = buildResultCollector;
   }
 }

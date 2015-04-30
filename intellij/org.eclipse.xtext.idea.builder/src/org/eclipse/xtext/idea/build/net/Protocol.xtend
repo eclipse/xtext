@@ -5,12 +5,14 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.idea.build.daemon
+package org.eclipse.xtext.idea.build.net
 
 import java.io.Serializable
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.jetbrains.jps.incremental.messages.BuildMessage
+import org.eclipse.xtend.lib.annotations.EqualsHashCode
+import groovy.transform.EqualsAndHashCode
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -18,34 +20,60 @@ import org.jetbrains.jps.incremental.messages.BuildMessage
 class Protocol {
 	
 	@Accessors
-	static class BuildRequest implements Serializable {
+	@EqualsHashCode
+	static class BuildRequestMessage implements Serializable {
 		List<String> dirtyFiles	= newArrayList
 		List<String> deletedFiles = newArrayList
 		List<String> classpath = newArrayList
+		List<String> outputs = newArrayList
 		List<String> sourceRoots = newArrayList
 		String baseDir
 		String encoding
 	}
 	
 	@Accessors
-	static class BuildResult implements Serializable {
-		List<String> dirtyFiles = newArrayList		
+	@EqualsHashCode
+	static class BuildResultMessage implements Serializable {
+		List<GeneratedFile> generatedFiles = newArrayList		
 		List<String> deletedFiles = newArrayList
-		List<String> outputDirs = newArrayList
 	}
 	
 	@Accessors
-	static class BuildIssue implements Serializable {
+	@EqualsAndHashCode
+	static class GeneratedFile implements Serializable {
+		String file
+		List<String> sourceFiles = newArrayList
+	}
+
+	@Accessors
+	@EqualsAndHashCode
+	static class JavaDependencyRequest implements Serializable {
+		List<String> dirtyJavaFiles = newArrayList
+		List<String> deletedJavaFiles = newArrayList
+	}
+	
+	@Accessors
+	@EqualsAndHashCode
+	static class JavaDependencyResult implements Serializable {
+		List<String> dependentJavaFiles = newArrayList
+	}
+	
+	@Accessors
+	@EqualsHashCode
+	static class BuildFailureMessage implements Serializable {
+		String message		
+	}
+	
+	@Accessors
+	@EqualsHashCode
+	static class BuildIssueMessage implements Serializable {
 		BuildMessage.Kind kind
 		String message
-		String path
+		String uriToProblem
 		int startOffset
 		int endOffset
 		int locationOffset
 		int line
 		int column
-	}
-	
-	static class StopServer implements Serializable {
 	}
 }

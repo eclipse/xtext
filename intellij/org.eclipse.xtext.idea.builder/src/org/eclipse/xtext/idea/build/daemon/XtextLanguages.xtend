@@ -47,7 +47,7 @@ class XtextLanguages {
 	static def createLanguageAccess(Injector injector) {
 		val outputConfigurationProvider = injector.getInstance(IOutputConfigurationProvider)
 		val resourceServiceProvider = injector.getInstance(IResourceServiceProvider)
-		return new IdeaLanguageAccess(
+		return new LanguageAccess(
 			outputConfigurationProvider.outputConfigurations.toSet,
 			resourceServiceProvider,
 			true

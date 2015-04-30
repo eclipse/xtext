@@ -38,6 +38,18 @@ import com.google.inject.Inject;
  * @author Moritz Eysholdt
  */
 public class JavaIoFileSystemAccess extends AbstractFileSystemAccess2 {
+	
+	/**
+	 * @since 2.9
+	 * @noextend
+	 * @noimplement
+	 */
+	public static interface IFileCallback {
+		void fileAdded(File file);
+		void fileDeleted(File file);
+	}
+
+	private IFileCallback callBack;
 
 	@Inject
 	private IEncodingProvider encodingProvider;
@@ -75,6 +87,13 @@ public class JavaIoFileSystemAccess extends AbstractFileSystemAccess2 {
 		this.traceSerializer = traceRegionSerializer;
 	}
 
+	/**
+	 * @since 2.9
+	 */
+	public void setCallBack(IFileCallback callBack) {
+		this.callBack = callBack;
+	}
+	
 	@Override
 	public void generateFile(String fileName, String outputConfigName, CharSequence contents) throws RuntimeIOException {
 		File file = getFile(fileName, outputConfigName);
@@ -87,6 +106,8 @@ public class JavaIoFileSystemAccess extends AbstractFileSystemAccess2 {
 			OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), encoding);
 			try {
 				writer.append(postProcess(fileName, outputConfigName, contents, encoding));
+				if(callBack != null) 
+					callBack.fileAdded(file);
 				if (writeTrace)
 					generateTrace(fileName, outputConfigName, contents);
 			} finally {
@@ -97,9 +118,6 @@ public class JavaIoFileSystemAccess extends AbstractFileSystemAccess2 {
 		}
 	}
 
-	/**
-	 * @since 2.4
-	 */
 	protected void generateTrace(String generatedFile, String outputConfigName, CharSequence contents) {
 		try {
 			if (contents instanceof ITraceRegionProvider) {
@@ -109,6 +127,8 @@ public class JavaIoFileSystemAccess extends AbstractFileSystemAccess2 {
 				try {
 					AbstractTraceRegion traceRegion = ((ITraceRegionProvider) contents).getTraceRegion();
 					traceSerializer.writeTraceRegionTo(traceRegion, out);
+					if(callBack != null) 
+						callBack.fileAdded(traceFile);
 				} finally {
 					out.close();
 				}
@@ -198,6 +218,8 @@ public class JavaIoFileSystemAccess extends AbstractFileSystemAccess2 {
 			} finally {
 				try {
 					out.close();
+					if(callBack != null) 
+						callBack.fileAdded(file);
 				} finally {
 					content.close();
 				}

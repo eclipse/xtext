@@ -7,37 +7,40 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.build.daemon
 
-import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.idea.build.daemon.Protocol.BuildIssue
-import org.eclipse.xtext.idea.build.daemon.Protocol.BuildResult
-import org.eclipse.xtext.idea.build.net.ObjectChannel
+import com.google.common.collect.HashMultimap
+import com.google.common.collect.Multimap
+import java.util.Set
+import org.eclipse.emf.common.util.URI
+import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder.FileListener
+import org.eclipse.xtext.idea.build.net.Protocol.BuildResultMessage
+import org.eclipse.xtext.idea.build.net.Protocol.GeneratedFile
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-class XtextBuildResultCollector {
+class XtextBuildResultCollector implements FileListener {
 	
-	@Accessors(PUBLIC_GETTER)
-	BuildResult buildResult = new BuildResult
-	
-	@Accessors
-	ObjectChannel output
-	
-	def addIssue(BuildIssue issue) {
-		output.writeObject(issue)
-	}
-	
-	def addChangedFile(String path) {
-		buildResult.dirtyFiles += path
-	} 
-	
-	def addOutputDir(String outputDir) {
-		if(!buildResult.outputDirs.contains(outputDir)) {
-			buildResult.outputDirs.add(outputDir)
-		} 
-	}
+	Multimap<URI, URI> generatedFile2sourceURI = HashMultimap.create 
 
-	def addDeletedFile(String path) {
-		buildResult.deletedFiles += path
+	Set<URI> deletedFiles = newHashSet
+	
+	def getBuildResult() {
+		new BuildResultMessage => [
+			it.deletedFiles += deletedFiles.toString
+			it.generatedFiles += generatedFile2sourceURI.keySet.map[ generated |
+				new GeneratedFile => [
+					file = generated.toString
+					sourceFiles += generatedFile2sourceURI.get(generated).map[toString]
+				]
+			]						
+		]
+	}
+	
+	override fileGenerated(URI source, URI target) {
+		generatedFile2sourceURI.put(target, source)
+	}
+	
+	override fileDeleted(URI file) {
+		deletedFiles.add(file)
 	}
 }

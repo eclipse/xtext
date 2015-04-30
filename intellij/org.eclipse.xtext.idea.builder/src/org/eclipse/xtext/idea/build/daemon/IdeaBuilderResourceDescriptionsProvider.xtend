@@ -7,30 +7,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.build.daemon
 
-import java.io.File
-import java.util.List
-import org.eclipse.xtend.lib.annotations.Data
-import org.eclipse.xtext.idea.build.daemon.Protocol.BuildRequest
+import com.google.inject.Inject
+import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.xtext.common.types.xtext.AbstractProjectAwareResourceDescriptionsProvider
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@Data
-class XtextBuildParameters {
-
-	List<File> classpath
-	List<File> sourceRoots
-	File baseDir
-	String encoding
-
-	new(BuildRequest request) {
-		classpath =  request.classpath.map[toFile]
-		sourceRoots = request.sourceRoots.map[toFile]
-		baseDir = request.baseDir.toFile
-		encoding = request.encoding
+class IdeaBuilderResourceDescriptionsProvider extends AbstractProjectAwareResourceDescriptionsProvider {
+	
+	@Inject extension IBuildSessionSingletons
+	
+	override protected isProjectLocal(URI uri, String encodedProjectName) {
+		uri.toString.startsWith(encodedProjectName)
 	}
 	
-	protected def toFile(String it) {
-		new File(it)
+	override protected getProjectName(ResourceSet resourceSet) {
+		moduleBaseURL
 	}
 }

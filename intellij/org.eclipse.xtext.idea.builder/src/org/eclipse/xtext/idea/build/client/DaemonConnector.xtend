@@ -22,6 +22,8 @@ import java.util.regex.Pattern
 import org.apache.log4j.Logger
 import org.eclipse.xtext.idea.build.daemon.XtextBuildDaemon
 
+import static extension org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs.*
+
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
@@ -41,7 +43,7 @@ class DaemonConnector {
 			if (portFile.exists) {
 				val line = new BufferedReader(new FileReader(portFile)).readLine
 				val port = Integer.parseInt(line.trim)
-				var socketChannel = SocketChannel.open() 
+				var socketChannel = SocketChannel.open()
 				socketChannel.configureBlocking(true)
 				socketChannel.connect(new InetSocketAddress(InetAddress.getByName('127.0.0.1'), port))
 				return socketChannel
@@ -62,7 +64,7 @@ class DaemonConnector {
 			if (classLoader instanceof URLClassLoader) {
 				classLoader.URLs.forEach [
 					if (protocol == 'file')
-						classpath += new File(toURI).path
+						classpath += asPath
 				]
 			}
 			val command = newArrayList
@@ -81,7 +83,7 @@ class DaemonConnector {
 			val daemonProcess = new ProcessBuilder().command(command).start
 			for (i : 0 .. 200) {
 				try {
-					var socketChannel = SocketChannel.open() 
+					var socketChannel = SocketChannel.open()
 					socketChannel.configureBlocking(true)
 					socketChannel.connect(new InetSocketAddress(InetAddress.getByName('127.0.0.1'), port))
 					writeLockFile(lockFile, port)
