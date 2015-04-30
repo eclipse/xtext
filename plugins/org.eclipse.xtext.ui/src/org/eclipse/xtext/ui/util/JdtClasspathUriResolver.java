@@ -128,7 +128,7 @@ public class JdtClasspathUriResolver implements IClasspathUriResolver {
 			if (resourceFromProjectRoot != null && resourceFromProjectRoot.exists()) {
 				return createPlatformResourceURI(resourceFromProjectRoot);
 			}
-			for(IClasspathEntry entry: javaProject.getRawClasspath()) {
+			for(IClasspathEntry entry: javaProject.getResolvedClasspath(true)) {
 				if (entry.getEntryKind() == IClasspathEntry.CPE_PROJECT) {
 					if (includeAll || entry.isExported()) {
 						IResource referencedProject = project.getWorkspace().getRoot().findMember(entry.getPath());
