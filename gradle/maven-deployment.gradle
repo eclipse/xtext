@@ -43,21 +43,21 @@ configure(deployer) {
 	}
 	
 	licenses {
-		parent.licenses.children().each {parent -> 
+		parent.licenses.children().each {parentLicense -> 
 			license {
-				name = parent.name
-				url = parent.url
+				name = parentLicense.name
+				url = parentLicense.url
 			}
 		}
 	}
 	
 	developers {
-		parent.developers.children().each {parent ->
+		parent.developers.children().each {parentDeveloper ->
 			developer {
-				id = parent.id
-				name = parent.name
-				email = parent.email
-				organization = parent.organization
+				id = parentDeveloper.id
+				name = parentDeveloper.name
+				email = parentDeveloper.email
+				organization = parentDeveloper.organization
 			}
 		}
 	}
