@@ -8,9 +8,9 @@
 package org.eclipse.xtext.builder.standalone.incremental
 
 import java.io.File
-import org.eclipse.emf.common.util.URI
-import java.net.URLClassLoader
 import java.net.URL
+import java.net.URLClassLoader
+import org.eclipse.emf.common.util.URI
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -52,12 +52,28 @@ class FilesAndURIs {
 	}
 	
 	static def findSourceRootRelativeURI(URI uri, BuildRequest request) {
-		for(sourceRootURI: request.sourceRoots) {
-			val relativeURI = uri.deresolve(sourceRootURI)
-			if(relativeURI != uri) 
-				return relativeURI
-		}
-		return null
+		return findRelativeURI(uri, request.sourceRoots)
+	}
+
+	static def findRelativeURI(URI uri, Iterable<URI> baseURIs) {
+		val relativeURIs = baseURIs
+			.map[getRelativeURI(uri)]
+			.filterNull
+		if(relativeURIs.empty) 
+			return null
+		else 
+			return relativeURIs.min[
+				$0.segmentCount - $1.segmentCount
+			]
 	}
 	
+	private static def getRelativeURI(URI prefix, URI uri) {
+		if(uri.scheme != prefix.scheme || uri.segmentCount < prefix.segmentCount || prefix.lastSegment != '') 
+			return null			
+		for(i: 0..<prefix.segmentCount - 1) {
+			if(prefix.segment(i) != uri.segment(i))
+				return null
+		}
+		URI.createURI(uri.segments.subList(prefix.segmentCount -1, uri.segmentCount).join('/'))
+	}
 }
