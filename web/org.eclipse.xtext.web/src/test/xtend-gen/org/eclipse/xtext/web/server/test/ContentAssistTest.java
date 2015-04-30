@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.web.server.test;
 
+import java.io.File;
 import java.util.Collections;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.web.server.IServiceResult;
@@ -54,6 +55,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("ContentAssistResult [");
     _builder.newLine();
     _builder.append("  ");
+    _builder.append("stateId = \"-80000000\"");
+    _builder.newLine();
+    _builder.append("  ");
     _builder.append("entries = ArrayList (");
     _builder.newLine();
     _builder.append("    ");
@@ -63,25 +67,7 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("prefix = \"\"");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("proposal = \"entity\"");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("textReplacements = ArrayList ()");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("editPositions = ArrayList ()");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("],");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("Entry [");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("prefix = \"\"");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("proposal = \"package\"");
+    _builder.append("proposal = \"state\"");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("textReplacements = ArrayList ()");
@@ -96,7 +82,7 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append(")");
     _builder.newLine();
     _builder.append("]");
-    this.assertContentAssistResult("entity foo {} ", 14, _builder.toString());
+    this.assertContentAssistResult("", 0, _builder.toString());
   }
   
   @Test
@@ -105,16 +91,19 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("ContentAssistResult [");
     _builder.newLine();
     _builder.append("  ");
+    _builder.append("stateId = \"-80000000\"");
+    _builder.newLine();
+    _builder.append("  ");
     _builder.append("entries = ArrayList (");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("Entry [");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("prefix = \"ent\"");
+    _builder.append("prefix = \"sta\"");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("proposal = \"entity\"");
+    _builder.append("proposal = \"state\"");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("textReplacements = ArrayList ()");
@@ -129,15 +118,17 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append(")");
     _builder.newLine();
     _builder.append("]");
-    this.assertContentAssistResult("entity foo {}", 3, _builder.toString());
+    this.assertContentAssistResult("sta", 3, _builder.toString());
   }
   
   @Test
   public void testIncorrectStateId() {
     try {
+      final File file = this.createFile("state foo end");
       final HashMapSessionStore sessionStore = new HashMapSessionStore();
       XtextServiceDispatcher _dispatcher = this.getDispatcher();
-      Pair<String, String> _mappedTo = Pair.<String, String>of("fullText", "entity foo {}");
+      String _name = file.getName();
+      Pair<String, String> _mappedTo = Pair.<String, String>of("resource", _name);
       Pair<String, String> _mappedTo_1 = Pair.<String, String>of("caretOffset", "3");
       Pair<String, String> _mappedTo_2 = Pair.<String, String>of("requiredStateId", "totalerquatsch");
       final XtextServiceDispatcher.ServiceDescriptor contentAssist = _dispatcher.getService("/content-assist", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2)), sessionStore);

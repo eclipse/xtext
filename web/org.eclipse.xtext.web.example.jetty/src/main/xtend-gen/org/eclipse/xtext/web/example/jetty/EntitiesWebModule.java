@@ -14,6 +14,7 @@ import com.google.inject.binder.ScopedBindingBuilder;
 import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import java.util.concurrent.ExecutorService;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
@@ -24,15 +25,17 @@ import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.web.server.persistence.FileResourceHandler;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker;
 import org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider;
 
+@Accessors
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class EntitiesWebModule extends AbstractGenericModule {
   private final ExecutorService executorService;
   
-  private final IResourceBaseProvider resourceBaseProvider;
+  private IResourceBaseProvider resourceBaseProvider;
   
   public void configureExecutorService(final Binder binder) {
     AnnotatedBindingBuilder<ExecutorService> _bind = binder.<ExecutorService>bind(ExecutorService.class);
@@ -59,13 +62,28 @@ public class EntitiesWebModule extends AbstractGenericModule {
   }
   
   public void configureResourceBaseProvider(final Binder binder) {
-    AnnotatedBindingBuilder<IResourceBaseProvider> _bind = binder.<IResourceBaseProvider>bind(IResourceBaseProvider.class);
-    _bind.toInstance(this.resourceBaseProvider);
+    if ((this.resourceBaseProvider != null)) {
+      AnnotatedBindingBuilder<IResourceBaseProvider> _bind = binder.<IResourceBaseProvider>bind(IResourceBaseProvider.class);
+      _bind.toInstance(this.resourceBaseProvider);
+    }
   }
   
-  public EntitiesWebModule(final ExecutorService executorService, final IResourceBaseProvider resourceBaseProvider) {
+  public EntitiesWebModule(final ExecutorService executorService) {
     super();
     this.executorService = executorService;
+  }
+  
+  @Pure
+  public ExecutorService getExecutorService() {
+    return this.executorService;
+  }
+  
+  @Pure
+  public IResourceBaseProvider getResourceBaseProvider() {
+    return this.resourceBaseProvider;
+  }
+  
+  public void setResourceBaseProvider(final IResourceBaseProvider resourceBaseProvider) {
     this.resourceBaseProvider = resourceBaseProvider;
   }
 }

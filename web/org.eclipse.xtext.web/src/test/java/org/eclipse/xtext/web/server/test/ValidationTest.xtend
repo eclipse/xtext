@@ -25,37 +25,37 @@ class ValidationTest extends AbstractWebServerTest {
 	}
 	
 	@Test def testSyntaxError() {
-		'entiti foo {}'.assertValidationResult('''
+		'stat foo end'.assertValidationResult('''
 			ValidationResult [
 			  entries = ArrayList (
 			    Entry [
-			      description = "missing EOF at 'entiti'"
+			      description = "missing EOF at 'stat'"
 			      severity = "error"
 			      line = 1
 			      startOffset = 0
-			      endOffset = 6
+			      endOffset = 4
 			    ]
 			  )
 			]''')
 	}
 	
 	@Test def testCrossRefError() {
-		'entity foo { bar : Strink }'.assertValidationResult('''
+		'state foo set x = true end'.assertValidationResult('''
 				ValidationResult [
 				  entries = ArrayList (
 				    Entry [
-				      description = "Couldn't resolve reference to JvmType 'Strink'."
+				      description = "Couldn't resolve reference to Signal 'x'."
 				      severity = "error"
 				      line = 1
-				      startOffset = 19
-				      endOffset = 25
+				      startOffset = 14
+				      endOffset = 15
 				    ]
 				  )
 				]''')
 	}
 	
 	@Test def testValidateFile() {
-		val file = createFile('entiti foo {}')
+		val file = createFile('stat foo end')
 		val sessionStore = new HashMapSessionStore
 		val validate = dispatcher.getService('/validation', #{'resource' -> file.name}, sessionStore)
 		assertFalse(validate.hasSideEffects)
@@ -65,11 +65,11 @@ class ValidationTest extends AbstractWebServerTest {
 			ValidationResult [
 			  entries = ArrayList (
 			    Entry [
-			      description = "missing EOF at 'entiti'"
+			      description = "missing EOF at 'stat'"
 			      severity = "error"
 			      line = 1
 			      startOffset = 0
-			      endOffset = 6
+			      endOffset = 4
 			    ]
 			  )
 			]'''
@@ -77,7 +77,7 @@ class ValidationTest extends AbstractWebServerTest {
 	}
 	
 	@Test def testIncorrectStateId() {
-		val file = createFile('entity foo {}')
+		val file = createFile('state foo end')
 		val sessionStore = new HashMapSessionStore
 		val validate = dispatcher.getService('/validation', #{
 				'resource' -> file.name,

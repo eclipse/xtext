@@ -17,12 +17,12 @@ import java.util.concurrent.Executors;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.idea.example.entities.EntitiesRuntimeModule;
-import org.eclipse.xtext.idea.example.entities.EntitiesStandaloneSetup;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.web.example.statemachine.StatemachineRuntimeModule;
+import org.eclipse.xtext.web.example.statemachine.StatemachineStandaloneSetup;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
-import org.eclipse.xtext.web.server.test.EntitiesWebModule;
+import org.eclipse.xtext.web.server.test.languages.StatemachineWebModule;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
@@ -44,8 +44,8 @@ public class AbstractWebServerTest extends AbstractXtextTests {
   
   private XtextServiceDispatcher dispatcher;
   
-  protected EntitiesRuntimeModule getRuntimeModule() {
-    return new EntitiesRuntimeModule();
+  protected StatemachineRuntimeModule getRuntimeModule() {
+    return new StatemachineRuntimeModule();
   }
   
   @Override
@@ -56,12 +56,13 @@ public class AbstractWebServerTest extends AbstractXtextTests {
       this.executorService = _newCachedThreadPool;
       AbstractWebServerTest.TestResourceBaseProvider _testResourceBaseProvider = new AbstractWebServerTest.TestResourceBaseProvider();
       this.resourceBaseProvider = _testResourceBaseProvider;
-      this.with(new EntitiesStandaloneSetup() {
+      this.with(new StatemachineStandaloneSetup() {
         @Override
         public Injector createInjector() {
-          final EntitiesWebModule ideModule = new EntitiesWebModule(AbstractWebServerTest.this.executorService, AbstractWebServerTest.this.resourceBaseProvider);
-          EntitiesRuntimeModule _runtimeModule = AbstractWebServerTest.this.getRuntimeModule();
-          return Guice.createInjector(_runtimeModule, ideModule);
+          final StatemachineWebModule webModule = new StatemachineWebModule(AbstractWebServerTest.this.executorService);
+          webModule.setResourceBaseProvider(AbstractWebServerTest.this.resourceBaseProvider);
+          StatemachineRuntimeModule _runtimeModule = AbstractWebServerTest.this.getRuntimeModule();
+          return Guice.createInjector(_runtimeModule, webModule);
         }
       });
       Injector _injector = this.getInjector();
@@ -84,7 +85,7 @@ public class AbstractWebServerTest extends AbstractXtextTests {
   
   protected File createFile(final String content) {
     try {
-      final File file = File.createTempFile("test", ".entities");
+      final File file = File.createTempFile("test", ".statemachine");
       String _name = file.getName();
       String _absolutePath = file.getAbsolutePath();
       URI _createFileURI = URI.createFileURI(_absolutePath);

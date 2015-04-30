@@ -59,7 +59,7 @@ public class ValidationTest extends AbstractWebServerTest {
     _builder.append("Entry [");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("description = \"missing EOF at \'entiti\'\"");
+    _builder.append("description = \"missing EOF at \'stat\'\"");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("severity = \"error\"");
@@ -71,7 +71,7 @@ public class ValidationTest extends AbstractWebServerTest {
     _builder.append("startOffset = 0");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("endOffset = 6");
+    _builder.append("endOffset = 4");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("]");
@@ -80,7 +80,7 @@ public class ValidationTest extends AbstractWebServerTest {
     _builder.append(")");
     _builder.newLine();
     _builder.append("]");
-    this.assertValidationResult("entiti foo {}", _builder.toString());
+    this.assertValidationResult("stat foo end", _builder.toString());
   }
   
   @Test
@@ -95,7 +95,7 @@ public class ValidationTest extends AbstractWebServerTest {
     _builder.append("Entry [");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("description = \"Couldn\'t resolve reference to JvmType \'Strink\'.\"");
+    _builder.append("description = \"Couldn\'t resolve reference to Signal \'x\'.\"");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("severity = \"error\"");
@@ -104,10 +104,10 @@ public class ValidationTest extends AbstractWebServerTest {
     _builder.append("line = 1");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("startOffset = 19");
+    _builder.append("startOffset = 14");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("endOffset = 25");
+    _builder.append("endOffset = 15");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("]");
@@ -116,13 +116,13 @@ public class ValidationTest extends AbstractWebServerTest {
     _builder.append(")");
     _builder.newLine();
     _builder.append("]");
-    this.assertValidationResult("entity foo { bar : Strink }", _builder.toString());
+    this.assertValidationResult("state foo set x = true end", _builder.toString());
   }
   
   @Test
   public void testValidateFile() {
     try {
-      final File file = this.createFile("entiti foo {}");
+      final File file = this.createFile("stat foo end");
       final HashMapSessionStore sessionStore = new HashMapSessionStore();
       XtextServiceDispatcher _dispatcher = this.getDispatcher();
       String _name = file.getName();
@@ -145,7 +145,7 @@ public class ValidationTest extends AbstractWebServerTest {
       _builder.append("Entry [");
       _builder.newLine();
       _builder.append("      ");
-      _builder.append("description = \"missing EOF at \'entiti\'\"");
+      _builder.append("description = \"missing EOF at \'stat\'\"");
       _builder.newLine();
       _builder.append("      ");
       _builder.append("severity = \"error\"");
@@ -157,7 +157,7 @@ public class ValidationTest extends AbstractWebServerTest {
       _builder.append("startOffset = 0");
       _builder.newLine();
       _builder.append("      ");
-      _builder.append("endOffset = 6");
+      _builder.append("endOffset = 4");
       _builder.newLine();
       _builder.append("    ");
       _builder.append("]");
@@ -177,7 +177,7 @@ public class ValidationTest extends AbstractWebServerTest {
   @Test
   public void testIncorrectStateId() {
     try {
-      final File file = this.createFile("entity foo {}");
+      final File file = this.createFile("state foo end");
       final HashMapSessionStore sessionStore = new HashMapSessionStore();
       XtextServiceDispatcher _dispatcher = this.getDispatcher();
       String _name = file.getName();

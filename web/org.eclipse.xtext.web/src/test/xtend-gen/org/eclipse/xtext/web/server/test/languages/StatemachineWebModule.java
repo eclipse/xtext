@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.web.server.test;
+package org.eclipse.xtext.web.server.test.languages;
 
 import com.google.inject.Binder;
 import com.google.inject.binder.AnnotatedBindingBuilder;
@@ -14,23 +14,26 @@ import com.google.inject.binder.ScopedBindingBuilder;
 import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import java.util.concurrent.ExecutorService;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
-import org.eclipse.xtext.idea.example.entities.ide.contentassist.antlr.EntitiesParser;
-import org.eclipse.xtext.idea.example.entities.ide.contentassist.antlr.internal.InternalEntitiesLexer;
 import org.eclipse.xtext.service.AbstractGenericModule;
+import org.eclipse.xtext.web.example.statemachine.ide.contentassist.antlr.StatemachineParser;
+import org.eclipse.xtext.web.example.statemachine.ide.contentassist.antlr.internal.InternalStatemachineLexer;
 import org.eclipse.xtext.web.server.persistence.FileResourceHandler;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler;
+import org.eclipse.xtext.xbase.lib.Pure;
 
+@Accessors
 @FinalFieldsConstructor
 @SuppressWarnings("all")
-public class EntitiesWebModule extends AbstractGenericModule {
+public class StatemachineWebModule extends AbstractGenericModule {
   private final ExecutorService executorService;
   
-  private final IResourceBaseProvider resourceBaseProvider;
+  private IResourceBaseProvider resourceBaseProvider;
   
   public void configureExecutorService(final Binder binder) {
     AnnotatedBindingBuilder<ExecutorService> _bind = binder.<ExecutorService>bind(ExecutorService.class);
@@ -41,11 +44,11 @@ public class EntitiesWebModule extends AbstractGenericModule {
     AnnotatedBindingBuilder<Lexer> _bind = binder.<Lexer>bind(Lexer.class);
     Named _named = Names.named(LexerIdeBindings.CONTENT_ASSIST);
     LinkedBindingBuilder<Lexer> _annotatedWith = _bind.annotatedWith(_named);
-    return _annotatedWith.to(InternalEntitiesLexer.class);
+    return _annotatedWith.to(InternalStatemachineLexer.class);
   }
   
   public Class<? extends IContentAssistParser> bindIContentAssistParser() {
-    return EntitiesParser.class;
+    return StatemachineParser.class;
   }
   
   public Class<? extends IServerResourceHandler> bindIServerResourceHandler() {
@@ -53,13 +56,28 @@ public class EntitiesWebModule extends AbstractGenericModule {
   }
   
   public void configureResourceBaseProvider(final Binder binder) {
-    AnnotatedBindingBuilder<IResourceBaseProvider> _bind = binder.<IResourceBaseProvider>bind(IResourceBaseProvider.class);
-    _bind.toInstance(this.resourceBaseProvider);
+    if ((this.resourceBaseProvider != null)) {
+      AnnotatedBindingBuilder<IResourceBaseProvider> _bind = binder.<IResourceBaseProvider>bind(IResourceBaseProvider.class);
+      _bind.toInstance(this.resourceBaseProvider);
+    }
   }
   
-  public EntitiesWebModule(final ExecutorService executorService, final IResourceBaseProvider resourceBaseProvider) {
+  public StatemachineWebModule(final ExecutorService executorService) {
     super();
     this.executorService = executorService;
+  }
+  
+  @Pure
+  public ExecutorService getExecutorService() {
+    return this.executorService;
+  }
+  
+  @Pure
+  public IResourceBaseProvider getResourceBaseProvider() {
+    return this.resourceBaseProvider;
+  }
+  
+  public void setResourceBaseProvider(final IResourceBaseProvider resourceBaseProvider) {
     this.resourceBaseProvider = resourceBaseProvider;
   }
 }

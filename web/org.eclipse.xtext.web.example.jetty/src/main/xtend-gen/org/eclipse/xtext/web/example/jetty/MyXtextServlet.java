@@ -15,6 +15,9 @@ import javax.servlet.annotation.WebServlet;
 import org.eclipse.xtext.idea.example.entities.EntitiesRuntimeModule;
 import org.eclipse.xtext.idea.example.entities.EntitiesStandaloneSetup;
 import org.eclipse.xtext.web.example.jetty.EntitiesWebModule;
+import org.eclipse.xtext.web.example.jetty.StatemachineWebModule;
+import org.eclipse.xtext.web.example.statemachine.StatemachineRuntimeModule;
+import org.eclipse.xtext.web.example.statemachine.StatemachineStandaloneSetup;
 import org.eclipse.xtext.web.server.persistence.ResourceBaseProviderImpl;
 import org.eclipse.xtext.web.servlet.XtextServlet;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -30,12 +33,22 @@ public class MyXtextServlet extends XtextServlet {
       super.init();
       ExecutorService _newCachedThreadPool = Executors.newCachedThreadPool();
       this.executorService = _newCachedThreadPool;
+      final ResourceBaseProviderImpl resourceBaseProvider = new ResourceBaseProviderImpl("./test-files");
+      new StatemachineStandaloneSetup() {
+        @Override
+        public Injector createInjector() {
+          final StatemachineRuntimeModule runtimeModule = new StatemachineRuntimeModule();
+          final StatemachineWebModule webModule = new StatemachineWebModule(MyXtextServlet.this.executorService);
+          webModule.setResourceBaseProvider(resourceBaseProvider);
+          return Guice.createInjector(runtimeModule, webModule);
+        }
+      }.createInjectorAndDoEMFRegistration();
       new EntitiesStandaloneSetup() {
         @Override
         public Injector createInjector() {
           final EntitiesRuntimeModule runtimeModule = new EntitiesRuntimeModule();
-          ResourceBaseProviderImpl _resourceBaseProviderImpl = new ResourceBaseProviderImpl("./test-files");
-          final EntitiesWebModule webModule = new EntitiesWebModule(MyXtextServlet.this.executorService, _resourceBaseProviderImpl);
+          final EntitiesWebModule webModule = new EntitiesWebModule(MyXtextServlet.this.executorService);
+          webModule.setResourceBaseProvider(resourceBaseProvider);
           return Guice.createInjector(runtimeModule, webModule);
         }
       }.createInjectorAndDoEMFRegistration();
