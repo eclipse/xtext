@@ -72,3 +72,12 @@ a:hover {
 #status {
 	display: inline;
 }
+
+.contentassist .proposal-default {
+	color: #888;
+}
+
+.contentassist .proposal-name {
+	color: #000;
+	padding-right: 12px;
+}

@@ -27,8 +27,8 @@ class MyXtextServlet extends XtextServlet {
 		new EntitiesStandaloneSetup {
 			override createInjector() {
 				val runtimeModule = new EntitiesRuntimeModule
-				val ideModule = new EntitiesIdeModule(executorService, new ResourceBaseProviderImpl('./test-files'))
-				return Guice.createInjector(runtimeModule, ideModule)
+				val webModule = new EntitiesWebModule(executorService, new ResourceBaseProviderImpl('./test-files'))
+				return Guice.createInjector(runtimeModule, webModule)
 			}
 		}.createInjectorAndDoEMFRegistration
 	}

@@ -82,7 +82,7 @@ class XtextServlet extends HttpServlet {
 		resp.setStatus(HttpServletResponse.SC_OK)
 		resp.setContentType("text/x-json;charset=UTF-8")
 		resp.setHeader("Cache-Control", "no-cache")
-		resp.writer.write(gson.toJson(result))
+		gson.toJson(result, resp.writer)
 	}
 	
 	protected def getService(HttpServletRequest req) {

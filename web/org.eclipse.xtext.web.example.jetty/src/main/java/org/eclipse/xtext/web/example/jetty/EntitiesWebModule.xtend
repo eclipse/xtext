@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.web.server.test
+package org.eclipse.xtext.web.example.jetty
 
 import com.google.inject.Binder
 import com.google.inject.name.Names
@@ -20,9 +20,11 @@ import org.eclipse.xtext.service.AbstractGenericModule
 import org.eclipse.xtext.web.server.persistence.FileResourceHandler
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler
+import org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker
+import org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider
 
 @FinalFieldsConstructor
-class EntitiesIdeModule extends AbstractGenericModule {
+class EntitiesWebModule extends AbstractGenericModule {
 	
 	val ExecutorService executorService
 	
@@ -34,6 +36,10 @@ class EntitiesIdeModule extends AbstractGenericModule {
 	
 	def configureContentAssistLexer(Binder binder) {
 		binder.bind(Lexer).annotatedWith(Names.named(LexerIdeBindings.CONTENT_ASSIST)).to(InternalEntitiesLexer)
+	}
+	
+	def Class<? extends IFeatureScopeTracker.Provider> bindIFeatureScopeTrackerProvider() {
+		OptimizingFeatureScopeTrackerProvider
 	}
 
 	def Class<? extends IContentAssistParser> bindIContentAssistParser() {

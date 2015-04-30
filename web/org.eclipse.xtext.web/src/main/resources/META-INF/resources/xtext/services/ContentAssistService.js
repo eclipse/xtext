@@ -68,7 +68,7 @@ define(["xtext/services/AbstractXtextService", "orion/Deferred"], function(Abstr
 					return false;
 				}
 				if (onComplete) {
-					if (result.stateId !== undefined) {
+					if (result.stateId !== undefined && result.stateId != editorContext.getServerState().stateId) {
 						var listeners = editorContext.updateServerState(currentText, result.stateId);
 						for (i in listeners) {
 							self._updateService.addCompletionCallback(listeners[i]);
@@ -83,7 +83,7 @@ define(["xtext/services/AbstractXtextService", "orion/Deferred"], function(Abstr
 						proposal : e.proposal,
 						prefix : e.prefix,
 						overwrite : true,
-						name : e.name,
+						name : (e.name ? e.name : e.proposal),
 						description : e.description,
 						style : e.style,
 						additionalEdits : e.textReplacements,
