@@ -27,7 +27,6 @@ define(["xtext/services/AbstractXtextService", "orion/Deferred"], function(Abstr
 			serverData.selectionEnd = params.selection.end;
 		}
 		var currentText = editorContext.getText();
-		var doUpdateServerState = false;
 		var httpMethod = "GET";
 		var onComplete = undefined;
 		if (params.sendFullText) {
@@ -39,18 +38,18 @@ define(["xtext/services/AbstractXtextService", "orion/Deferred"], function(Abstr
 				serverData.requiredStateId = knownServerState.stateId;
 			}
 			if (this._updateService && knownServerState.text !== undefined) {
-				if (this._updateService.checkRunningUpdate(true)) {
+				if (editorContext.getClientServiceState().update == "started") {
 					var self = this;
 					this._updateService.addCompletionCallback(function() {
 						self.computeContentAssist(editorContext, params, deferred);
 					});
 					return deferred.promise;
 				}
+				editorContext.getClientServiceState().update = "started";
 				onComplete = this._updateService.onComplete.bind(this._updateService);
 				this._updateService.computeDelta(knownServerState.text, currentText, serverData);
 				if (serverData.deltaText !== undefined) {
 					httpMethod = "POST";
-					doUpdateServerState = true;
 				}
 			}
 		}
@@ -65,19 +64,17 @@ define(["xtext/services/AbstractXtextService", "orion/Deferred"], function(Abstr
 					if (self.increaseRecursionCount(editorContext)) {
 						params.sendFullText = true;
 						self.computeContentAssist(editorContext, params, deferred);
-						return true;
 					}
 					return false;
 				}
-				if (params.sendFullText && result.stateId !== undefined
-						&& result.stateId != editorContext.getServerState().stateId) {
-					doUpdateServerState = true;
-				}
-				if (doUpdateServerState) {
-					var listeners = editorContext.updateServerState(currentText, result.stateId);
-					for (i in listeners) {
-						self._updateService.addCompletionCallback(listeners[i]);
+				if (onComplete) {
+					if (result.stateId !== undefined) {
+						var listeners = editorContext.updateServerState(currentText, result.stateId);
+						for (i in listeners) {
+							self._updateService.addCompletionCallback(listeners[i]);
+						}
 					}
+					editorContext.getClientServiceState().update = "finished";
 				}
 				var proposals = [];
 				for (var i = 0; i < result.entries.length; i++) {
@@ -96,6 +93,9 @@ define(["xtext/services/AbstractXtextService", "orion/Deferred"], function(Abstr
 				deferred.resolve(proposals);
 			},
 			error : function(xhr, textStatus, errorThrown) {
+				if (onComplete) {
+					delete editorContext.getClientServiceState().update;
+				}
 				deferred.reject(errorThrown);
 			},
 			complete: onComplete

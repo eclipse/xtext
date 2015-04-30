@@ -28,13 +28,13 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 			serverData.fullText = editorContext.getText();
 			httpMethod = "POST";
 		} else {
+			if (editorContext.getClientServiceState().update == "started") {
+				// An update is currently running - it will retrigger validation on completion
+				return;
+			}
 			var knownServerState = editorContext.getServerState();
 			if (knownServerState.stateId !== undefined) {
 				serverData.requiredStateId = knownServerState.stateId;
-			}
-			if (this._updateService && this._updateService.checkRunningUpdate(false)) {
-				// An update is currently running - it will retrigger validation on completion
-				return;
 			}
 		}
 
@@ -47,7 +47,6 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 					if (self.increaseRecursionCount(editorContext)) {
 						delete editorContext.getClientServiceState().validation;
 						self.computeProblems(editorContext, params);
-						return true;
 					}
 					return false;
 				}
@@ -62,7 +61,6 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 					});
 				}
 				editorContext.showMarkers(problems)
-				editorContext.getClientServiceState().validation = "finished";
 			}
 		});
 	};
