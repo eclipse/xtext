@@ -17,7 +17,7 @@ allprojects {
 	
 	ideaDevelopment {
 		ideaHome = "${project(':intellij').projectDir}/intellij-ce"
-		ideaVersion = "140.2683.2"
+		ideaVersion = "141.814.3"
 	}
 }
 

@@ -28,6 +28,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.idea.jvm.JvmPsiElementExtensions;
 import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass;
 import org.eclipse.xtext.xbase.idea.types.psi.LoadingTypeResourcePhase;
+import org.eclipse.xtext.xbase.idea.types.psi.impl.StubBasedJvmPsiClass;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -240,9 +241,10 @@ public class JvmPsiClassTest extends LightXtendTest {
     final PsiMethod method = IterableExtensions.<PsiMethod>head(((Iterable<PsiMethod>)Conversions.doWrapArray(methods)));
     String _name = method.getName();
     TestCase.assertEquals("someMethod", _name);
-    final JvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
+    final StubBasedJvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
+    JvmPsiClass _delegate = psiClass.getDelegate();
     PsiClass _containingClass = method.getContainingClass();
-    TestCase.assertEquals(psiClass, _containingClass);
+    TestCase.assertEquals(_delegate, _containingClass);
   }
   
   public void testMethodBodyWithErrors() {
@@ -266,7 +268,7 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.append("}");
     _builder.newLine();
     this.myFixture.addFileToProject("mypackage/Foo.xtend", _builder.toString());
-    final JvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
+    final StubBasedJvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
     PsiMethod[] _methods = psiClass.getMethods();
     UsefulTestCase.assertSize(2, _methods);
     final PsiMethod[] method = psiClass.findMethodsByName("methodWithErros", false);
@@ -283,7 +285,7 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.append("}");
     _builder.newLine();
     this.myFixture.addFileToProject("mypackage/Foo.xtend", _builder.toString());
-    final JvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
+    final StubBasedJvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
     this.setLoadingTypeResource(psiClass, true);
     String _name = psiClass.getName();
     TestCase.assertEquals("Foo", _name);
@@ -326,7 +328,7 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.append("}");
     _builder.newLine();
     this.myFixture.addFileToProject("mypackage/Foo.xtend", _builder.toString());
-    final JvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
+    final StubBasedJvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
     this.setLoadingTypeResource(psiClass, true);
     PsiModifierList _modifierList = psiClass.getModifierList();
     boolean _hasModifierProperty = _modifierList.hasModifierProperty(PsiModifier.PUBLIC);
@@ -355,7 +357,7 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.append("}");
     _builder.newLine();
     this.myFixture.addFileToProject("mypackage/Foo.xtend", _builder.toString());
-    final JvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
+    final StubBasedJvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
     this.setLoadingTypeResource(psiClass, true);
     boolean _isInterface = psiClass.isInterface();
     TestCase.assertTrue(_isInterface);
@@ -371,7 +373,7 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.append("}");
     _builder.newLine();
     this.myFixture.addFileToProject("mypackage/Foo.xtend", _builder.toString());
-    final JvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
+    final StubBasedJvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
     this.setLoadingTypeResource(psiClass, true);
     boolean _isEnum = psiClass.isEnum();
     TestCase.assertTrue(_isEnum);
@@ -387,7 +389,7 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.append("}");
     _builder.newLine();
     this.myFixture.addFileToProject("mypackage/Foo.xtend", _builder.toString());
-    final JvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
+    final StubBasedJvmPsiClass psiClass = this.findJvmPsiClass("mypackage.Foo");
     this.setLoadingTypeResource(psiClass, true);
     boolean _isAnnotationType = psiClass.isAnnotationType();
     TestCase.assertTrue(_isAnnotationType);
@@ -402,7 +404,7 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.append("}");
     _builder.newLine();
     this.myFixture.configureByText("Foo.xtend", _builder.toString());
-    final JvmPsiClass psiClass = this.findJvmPsiClass("foo.Foo");
+    final StubBasedJvmPsiClass psiClass = this.findJvmPsiClass("foo.Foo");
     String _qualifiedName = psiClass.getQualifiedName();
     TestCase.assertEquals("foo.Foo", _qualifiedName);
     boolean _isInterface = psiClass.isInterface();
@@ -436,7 +438,7 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.append("}");
     _builder.newLine();
     this.myFixture.configureByText("Foo.xtend", _builder.toString());
-    final JvmPsiClass psiClass = this.findJvmPsiClass("foo.Foo");
+    final StubBasedJvmPsiClass psiClass = this.findJvmPsiClass("foo.Foo");
     boolean _isInterface = psiClass.isInterface();
     TestCase.assertTrue(_isInterface);
   }
@@ -450,7 +452,7 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.append("}");
     _builder.newLine();
     this.myFixture.configureByText("Foo.xtend", _builder.toString());
-    final JvmPsiClass psiClass = this.findJvmPsiClass("foo.Foo");
+    final StubBasedJvmPsiClass psiClass = this.findJvmPsiClass("foo.Foo");
     boolean _isAnnotationType = psiClass.isAnnotationType();
     TestCase.assertTrue(_isAnnotationType);
   }
@@ -464,7 +466,7 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.append("}");
     _builder.newLine();
     this.myFixture.configureByText("Foo.xtend", _builder.toString());
-    final JvmPsiClass psiClass = this.findJvmPsiClass("foo.Foo");
+    final StubBasedJvmPsiClass psiClass = this.findJvmPsiClass("foo.Foo");
     boolean _isEnum = psiClass.isEnum();
     TestCase.assertTrue(_isEnum);
   }
@@ -482,7 +484,7 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.append("}");
     _builder.newLine();
     this.myFixture.configureByText("Foo.xtend", _builder.toString());
-    final JvmPsiClass psiClass = this.findJvmPsiClass("foo.Foo");
+    final StubBasedJvmPsiClass psiClass = this.findJvmPsiClass("foo.Foo");
     final PsiReferenceList extendsList = psiClass.getExtendsList();
     PsiReferenceList.Role _role = extendsList.getRole();
     TestCase.assertEquals(PsiReferenceList.Role.EXTENDS_LIST, _role);
@@ -512,7 +514,7 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.append("}");
     _builder.newLine();
     this.myFixture.configureByText("Foo.xtend", _builder.toString());
-    final JvmPsiClass psiClass = this.findJvmPsiClass("foo.Foo");
+    final StubBasedJvmPsiClass psiClass = this.findJvmPsiClass("foo.Foo");
     final PsiReferenceList extendsList = psiClass.getExtendsList();
     PsiReferenceList.Role _role = extendsList.getRole();
     TestCase.assertEquals(PsiReferenceList.Role.EXTENDS_LIST, _role);
@@ -539,7 +541,7 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.append("}");
     _builder.newLine();
     this.myFixture.configureByText("Foo.xtend", _builder.toString());
-    final JvmPsiClass psiClass = this.findJvmPsiClass("foo.Foo");
+    final StubBasedJvmPsiClass psiClass = this.findJvmPsiClass("foo.Foo");
     final PsiField[] fields = psiClass.getFields();
     UsefulTestCase.assertSize(1, fields);
     final PsiField field = IterableExtensions.<PsiField>head(((Iterable<PsiField>)Conversions.doWrapArray(fields)));
@@ -566,7 +568,7 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.append("}");
     _builder.newLine();
     this.myFixture.configureByText("Foo.xtend", _builder.toString());
-    final JvmPsiClass psiClass = this.findJvmPsiClass("foo.Foo");
+    final StubBasedJvmPsiClass psiClass = this.findJvmPsiClass("foo.Foo");
     final PsiMethod[] methods = psiClass.getMethods();
     UsefulTestCase.assertSize(2, methods);
     final PsiMethod method = IterableExtensions.<PsiMethod>last(((Iterable<PsiMethod>)Conversions.doWrapArray(methods)));
@@ -589,7 +591,7 @@ public class JvmPsiClassTest extends LightXtendTest {
     _builder.append("}");
     _builder.newLine();
     this.myFixture.configureByText("Foo.xtend", _builder.toString());
-    final JvmPsiClass psiClass = this.findJvmPsiClass("foo.Foo");
+    final StubBasedJvmPsiClass psiClass = this.findJvmPsiClass("foo.Foo");
     boolean _hasTypeParameters = psiClass.hasTypeParameters();
     TestCase.assertTrue(_hasTypeParameters);
     final PsiTypeParameter[] typeParameters = psiClass.getTypeParameters();
@@ -599,8 +601,9 @@ public class JvmPsiClassTest extends LightXtendTest {
     TestCase.assertEquals(0, _index);
     String _name = typeParameter.getName();
     TestCase.assertEquals("T", _name);
+    JvmPsiClass _delegate = psiClass.getDelegate();
     PsiTypeParameterListOwner _owner = typeParameter.getOwner();
-    TestCase.assertEquals(psiClass, _owner);
+    TestCase.assertEquals(_delegate, _owner);
     final PsiReferenceList extendsList = typeParameter.getExtendsList();
     PsiReferenceList.Role _role = extendsList.getRole();
     TestCase.assertEquals(PsiReferenceList.Role.EXTENDS_BOUNDS_LIST, _role);

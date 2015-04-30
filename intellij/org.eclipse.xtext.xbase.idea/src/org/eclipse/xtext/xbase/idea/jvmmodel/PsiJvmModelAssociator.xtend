@@ -18,9 +18,9 @@ import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.psi.IPsiModelAssociations
 import org.eclipse.xtext.psi.IPsiModelAssociator
 import org.eclipse.xtext.psi.PsiElementProvider
-import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
-import org.eclipse.xtext.xbase.idea.types.psi.impl.JvmPsiClassImpl
 import org.eclipse.xtext.xbase.idea.jvm.JvmPsiElementExtensions
+import org.eclipse.xtext.xbase.idea.types.psi.impl.JvmPsiClassImpl
+import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
 
 class PsiJvmModelAssociator extends JvmModelAssociator {
 

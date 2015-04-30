@@ -14,7 +14,7 @@ import com.intellij.psi.PsiClass;
 import org.eclipse.xtend.core.idea.lang.XtendFileType;
 import org.eclipse.xtext.idea.tests.LibraryUtil;
 import org.eclipse.xtext.idea.tests.LightToolingTest;
-import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass;
+import org.eclipse.xtext.xbase.idea.types.psi.impl.StubBasedJvmPsiClass;
 
 @SuppressWarnings("all")
 public abstract class LightXtendTest extends LightToolingTest {
@@ -27,8 +27,8 @@ public abstract class LightXtendTest extends LightToolingTest {
     LibraryUtil.addXtendLibrary(model);
   }
   
-  protected JvmPsiClass findJvmPsiClass(final String qualifiedName) {
+  protected StubBasedJvmPsiClass findJvmPsiClass(final String qualifiedName) {
     PsiClass _findClass = this.myFixture.findClass(qualifiedName);
-    return ((JvmPsiClass) _findClass);
+    return ((StubBasedJvmPsiClass) _findClass);
   }
 }

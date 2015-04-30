@@ -73,7 +73,11 @@ public class PsiModelAssociations implements IPsiModelAssociations, IPsiModelAss
 				return composite.getPsi();
 			}
 			if (psiElement == null && psiElementProvider != null) {
-				psiElement = psiElementProvider.get();
+				synchronized(psiElementProvider) {
+					if (psiElement == null) {
+						psiElement = psiElementProvider.get();
+					}
+				}
 			}
 			return psiElement;
 		}

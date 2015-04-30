@@ -12,7 +12,6 @@ import com.google.inject.Inject;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
-import java.util.ArrayList;
 import java.util.Collections;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.URI;
@@ -67,7 +66,7 @@ public class ProjectScopeBasedResourceDescriptions extends AbstractScopeBasedSel
   
   @Override
   public Iterable<IResourceDescription> getAllResourceDescriptions() {
-    ArrayList<IResourceDescription> _xblockexpression = null;
+    Iterable<IResourceDescription> _xblockexpression = null;
     {
       boolean _isIndexing = this.isIndexing();
       if (_isIndexing) {

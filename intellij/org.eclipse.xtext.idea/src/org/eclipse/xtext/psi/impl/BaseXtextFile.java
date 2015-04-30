@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.psi.impl;
 
-import static java.util.Collections.emptyList;
+import static java.util.Collections.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -44,7 +44,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.jetbrains.annotations.NotNull;
 
 import com.google.inject.Inject;
@@ -93,7 +92,11 @@ public abstract class BaseXtextFile extends PsiFileBase {
 			@Override
 			public Result<XtextResource> compute() {
 				XtextResource resource = createResource();
-				return Result.create(resource, BaseXtextFile.this);
+				installResourceDescription(resource);
+				return Result.create(resource, new Object[] {
+						PsiModificationTracker.MODIFICATION_COUNT, 
+						BaseXtextFile.this
+				});
 			}
         	
         }, false);
@@ -111,26 +114,7 @@ public abstract class BaseXtextFile extends PsiFileBase {
     
     protected XtextResource doGetResource() {
     	synchronized(resourceCacheLock) {
-    		return CachedValuesManager.getManager(getProject()).<XtextResource, BaseXtextFile>getCachedValue(this, new CachedValueProvider<XtextResource>() {
-
-    			@Override
-				public Result<XtextResource> compute() {
-    				// check whether the cached resource is still up-to-date or will be computed
-					boolean hasUpToDateValue = resourceCache.hasUpToDateValue();
-					XtextResource resource = resourceCache.getValue();
-					// if we reuse an existing resource, we have to relink it
-					if (hasUpToDateValue) {
-						resource.getResourceSet().getResources().retainAll(Collections.singletonList(resource));
-						resource.relink();
-					}
-			        installResourceDescription(resource);
-					return Result.create(resource, new Object[] {
-							PsiModificationTracker.MODIFICATION_COUNT, 
-							BaseXtextFile.this
-					});
-				}
-    			
-    		});
+    		return resourceCache.getValue();
     	}
     }
 	
@@ -311,7 +295,11 @@ public abstract class BaseXtextFile extends PsiFileBase {
 		}
 		IResourceDescription resourceDescription = getResourceDescription();
 		if (resourceDescription != null) {
-			return IterableExtensions.toList(resourceDescription.getExportedObjects());
+			List<IEObjectDescription> exportedObjects = new ArrayList<IEObjectDescription>();
+			for (IEObjectDescription objectDescription : resourceDescription.getExportedObjects()) {
+				exportedObjects.add(new XtextFileAwareEObjectDescription(this, objectDescription));
+			}
+			return exportedObjects;
 		}
 		return Collections.emptyList();
 	}
@@ -320,7 +308,7 @@ public abstract class BaseXtextFile extends PsiFileBase {
 		EFactory factory = eClass.getEPackage().getEFactoryInstance();
 		InternalEObject element = (InternalEObject) factory.create(eClass);
 		element.eSetProxyURI(eObjectURI);
-		return EObjectDescription.create(qualifiedName, element);
+		return new XtextFileAwareEObjectDescription(this, EObjectDescription.create(qualifiedName, element));
 	}
 
 	@Override

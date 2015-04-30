@@ -10,13 +10,11 @@ package org.eclipse.xtext.idea.resource
 import com.google.inject.Inject
 import com.intellij.openapi.fileTypes.FileType
 import com.intellij.openapi.fileTypes.LanguageFileType
-import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.PsiManager
 import com.intellij.psi.search.FileTypeIndex
 import com.intellij.psi.search.FilenameIndex
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.util.indexing.FileBasedIndex
-import java.util.Collection
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -41,43 +39,22 @@ abstract class AbstractScopeBasedSelectable extends AbstractCompoundSelectable {
 	}
 
 	def IResourceDescription getResourceDescription(URI uri) {
-		val psiFile = uri.findFile
-		if (psiFile != null) {
-			return new PsiFileBasedResourceDescription(psiFile)
-		}
-		null
+		uri.findFile.toResourceDescription
 	}
 
 	def getResourceDescriptions() {
 		val extension psiManager = PsiManager.getInstance(scope.project)
-		val descriptions = <IResourceDescription>newArrayList
-		processFiles[ files |
-			for (xtextFile : files.map[findFile].filter(BaseXtextFile)) {
-				descriptions += new PsiFileBasedResourceDescription(xtextFile)
-			}
-			true
-		]
-		descriptions
-	}
-
-	override isEmpty() {
-		val boolean[] emptinessCheck = #[true]
-		processFiles[ files |
-			if (files.empty) {
-				return true
-			}
-			emptinessCheck.set(0, false)
-			false
-		]
-		emptinessCheck.head
+		allXtextVirtualFiles.map[findFile].filter(BaseXtextFile).map[toResourceDescription]
 	}
 
 	override getExportedObjects(EClass type, QualifiedName qualifiedName, boolean ignoreCase) {
-		exportedObjectQualifiedNameIndex.get(qualifiedName.toString, scope.project, scope).fold(newArrayList) [ allDescriptions, xtextFile |
-			val resourceDescription = new PsiFileBasedResourceDescription(xtextFile)
-			allDescriptions += resourceDescription.getExportedObjects(type, qualifiedName, ignoreCase)
-			allDescriptions
-		]
+		exportedObjectQualifiedNameIndex.get(qualifiedName.toString, scope.project, scope).map [
+			toResourceDescription.getExportedObjects(type, qualifiedName, ignoreCase)
+		].flatten
+	}
+
+	protected def IResourceDescription toResourceDescription(BaseXtextFile xtextFile) {
+		if(xtextFile != null) new PsiFileBasedResourceDescription(xtextFile)
 	}
 
 	protected def findFile(URI uri) {
@@ -87,12 +64,8 @@ abstract class AbstractScopeBasedSelectable extends AbstractCompoundSelectable {
 		]
 	}
 
-	protected def processFiles((Collection<VirtualFile>)=>boolean acceptor) {
-		for (FileType fileType : xtextLanguageFilesTypes) {
-			if (!acceptor.apply(FileTypeIndex.getFiles(fileType, scope))) {
-				return
-			}
-		}
+	protected def getAllXtextVirtualFiles() {
+		xtextLanguageFilesTypes.map[fileType|FileTypeIndex.getFiles(fileType, scope)].flatten
 	}
 
 	protected def getXtextLanguageFilesTypes() {
@@ -100,10 +73,7 @@ abstract class AbstractScopeBasedSelectable extends AbstractCompoundSelectable {
 	}
 
 	protected def isXtextLanguage(FileType fileType) {
-		switch fileType {
-			LanguageFileType: fileType.language instanceof IXtextLanguage
-			default: false
-		}
+		if(fileType instanceof LanguageFileType) fileType.language instanceof IXtextLanguage
 	}
 
 }
