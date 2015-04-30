@@ -20,8 +20,8 @@ import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.builder.standalone.ClusteringConfig
 import org.eclipse.xtext.builder.standalone.IIssueHandler
 import org.eclipse.xtext.builder.standalone.LanguageAccess
-import org.eclipse.xtext.builder.standalone.incremental.TrackingFileSystemAccess.Listener
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
+import org.eclipse.xtext.generator.JavaIoFileSystemAccess.IFileCallback
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.clustering.DisabledClusteringPolicy
@@ -60,8 +60,10 @@ class IncrementalStandaloneBuilder {
 
 	def launch() {
 		initialize
+		cleanup
 		request.deletedFiles.forEach [
 			source2GeneratedMapping.getGenerated(it).forEach [
+				LOG.info("Deleting " + it)
 				asFile.delete
 			]
 		]
@@ -146,35 +148,28 @@ class IncrementalStandaloneBuilder {
 	}
 
 	protected def configureFileSystemAccess(JavaIoFileSystemAccess fsa, LanguageAccess language) {
-		new TrackingFileSystemAccess(fsa) => [
-			addListener(new Listener() {
-				override fileAdded(String outputDir, String fileName) {
-					val uri = getURI(outputDir, fileName)
-					source2GeneratedMapping.addSource2Generated(currentResourceURI, uri)
-					listeners.forEach[
-						outputFolderUsed(outputDir.asFileURI)
-						fileGenerated(currentResourceURI, uri)
-					]
-				}
-				
-				override fileDeleted(String outputDir, String fileName) {
-					val uri = getURI(outputDir, fileName)
-					source2GeneratedMapping.deleteGenerated(uri)
-					listeners.forEach[
-						fileDeleted(uri)
-					]
-				}
-
-				private def getURI(String outputDir, String fileName) {
-					asFileURI(outputDir + File.separator + fileName)
-				}
-			})
-		]
+		fsa.setCallBack(new IFileCallback() {
+			override fileAdded(File file) {
+				val uri = file.asURI
+				source2GeneratedMapping.addSource2Generated(currentResourceURI, uri)
+				listeners.forEach[
+					fileGenerated(currentResourceURI, uri)
+				]
+			}
+			
+			override fileDeleted(File file) {
+				val uri = file.asURI
+				source2GeneratedMapping.deleteGenerated(uri)
+				listeners.forEach[
+					fileDeleted(uri)
+				]
+			}
+		})
+		fsa
 	}
 	
 	static interface FileListener {
 		def void fileGenerated(URI source, URI target)
-		def void outputFolderUsed(URI outputFolder)
 		def void fileDeleted(URI file)
 	}
 

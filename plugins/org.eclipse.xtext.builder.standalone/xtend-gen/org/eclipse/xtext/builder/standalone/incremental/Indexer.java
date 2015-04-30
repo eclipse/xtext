@@ -24,12 +24,16 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.incremental.BuildContext;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
-import org.eclipse.xtext.builder.standalone.incremental.IJavaDependencyFinder;
+import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
+import org.eclipse.xtext.builder.standalone.incremental.IClassFileBasedDependencyFinder;
 import org.eclipse.xtext.builder.standalone.incremental.JavaSupport;
 import org.eclipse.xtext.builder.standalone.incremental.ResolvedResourceDescription;
 import org.eclipse.xtext.builder.standalone.incremental.ResourceURICollector;
 import org.eclipse.xtext.builder.standalone.incremental.Source2GeneratedMapping;
+import org.eclipse.xtext.builder.standalone.incremental.TypeResourceDescription;
 import org.eclipse.xtext.mwe.ResourceDescriptionsProvider;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -40,6 +44,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
@@ -64,10 +69,13 @@ public class Indexer {
   private ResourceDescriptionsProvider resourceDescriptionsProvider;
   
   @Inject
-  private IJavaDependencyFinder javaDependencyFinder;
+  private IClassFileBasedDependencyFinder javaDependencyFinder;
   
   @Inject
   private Source2GeneratedMapping source2GeneratedMapping;
+  
+  @Inject
+  private IQualifiedNameConverter qualifiedNameConverter;
   
   private ResourceDescriptionsData index;
   
@@ -81,6 +89,11 @@ public class Indexer {
       _or = _equals;
     }
     final boolean fullBuild = _or;
+    if (fullBuild) {
+      Indexer.LOG.info("Performing full build");
+    } else {
+      Indexer.LOG.info("Performing incremental build");
+    }
     Indexer.LOG.info("Creating new index");
     ResourceDescriptionsData _elvis = null;
     ResourceDescriptionsData _copy = null;
@@ -97,7 +110,6 @@ public class Indexer {
     final ResourceDescriptionsData newIndex = _elvis;
     XtextResourceSet _resourceSet = context.getResourceSet();
     final IResourceDescriptions resourceDescriptions = this.installIndex(_resourceSet, newIndex);
-    final Iterable<URI> allResources = this.uriCollector.collectAllResources(request, context);
     Map<String, LanguageAccess> _languages = context.getLanguages();
     Set<Map.Entry<String, LanguageAccess>> _entrySet = _languages.entrySet();
     final Function1<Map.Entry<String, LanguageAccess>, Boolean> _function = new Function1<Map.Entry<String, LanguageAccess>, Boolean>() {
@@ -108,76 +120,44 @@ public class Indexer {
       }
     };
     Iterable<Map.Entry<String, LanguageAccess>> _filter = IterableExtensions.<Map.Entry<String, LanguageAccess>>filter(_entrySet, _function);
-    final Function1<Map.Entry<String, LanguageAccess>, String> _function_1 = new Function1<Map.Entry<String, LanguageAccess>, String>() {
-      @Override
-      public String apply(final Map.Entry<String, LanguageAccess> it) {
-        return it.getKey();
-      }
-    };
-    Iterable<String> _map = IterableExtensions.<Map.Entry<String, LanguageAccess>, String>map(_filter, _function_1);
-    final Set<String> jvmLanguageExtensions = IterableExtensions.<String>toSet(_map);
+    boolean _isEmpty = IterableExtensions.isEmpty(_filter);
+    final boolean isConsiderJava = (!_isEmpty);
     final HashSet<URI> affectionCandidates = CollectionLiterals.<URI>newHashSet();
     Iterable<URI> directlyAffected = null;
-    boolean isConsiderJava = false;
     if (fullBuild) {
-      directlyAffected = allResources;
-      final Function1<URI, Boolean> _function_2 = new Function1<URI, Boolean>() {
-        @Override
-        public Boolean apply(final URI it) {
-          String _fileExtension = it.fileExtension();
-          return Boolean.valueOf(jvmLanguageExtensions.contains(_fileExtension));
-        }
-      };
-      boolean _exists = IterableExtensions.<URI>exists(allResources, _function_2);
-      isConsiderJava = _exists;
+      Iterable<URI> _collectAllResources = this.uriCollector.collectAllResources(request, context);
+      Set<URI> _set = IterableExtensions.<URI>toSet(_collectAllResources);
+      directlyAffected = _set;
     } else {
       List<URI> _dirtyFiles = request.getDirtyFiles();
       List<URI> _deletedFiles = request.getDeletedFiles();
       Iterable<URI> _plus = Iterables.<URI>concat(_dirtyFiles, _deletedFiles);
       final Set<URI> allModified = IterableExtensions.<URI>toSet(_plus);
-      final Function1<URI, Boolean> _function_3 = new Function1<URI, Boolean>() {
+      Set<URI> _allURIs = this.index.getAllURIs();
+      final Function1<URI, Boolean> _function_1 = new Function1<URI, Boolean>() {
         @Override
         public Boolean apply(final URI it) {
           boolean _contains = allModified.contains(it);
           return Boolean.valueOf((!_contains));
         }
       };
-      Iterable<URI> _filter_1 = IterableExtensions.<URI>filter(allResources, _function_3);
+      Iterable<URI> _filter_1 = IterableExtensions.<URI>filter(_allURIs, _function_1);
       Iterables.<URI>addAll(affectionCandidates, _filter_1);
       List<URI> _dirtyFiles_1 = request.getDirtyFiles();
-      directlyAffected = _dirtyFiles_1;
-      final Function1<URI, Boolean> _function_4 = new Function1<URI, Boolean>() {
+      final Function1<URI, Iterable<URI>> _function_2 = new Function1<URI, Iterable<URI>>() {
         @Override
-        public Boolean apply(final URI it) {
-          String _fileExtension = it.fileExtension();
-          return Boolean.valueOf(jvmLanguageExtensions.contains(_fileExtension));
+        public Iterable<URI> apply(final URI it) {
+          return Indexer.this.getPrimarySources(it);
         }
       };
-      boolean _exists_1 = IterableExtensions.<URI>exists(allModified, _function_4);
-      isConsiderJava = _exists_1;
+      List<Iterable<URI>> _map = ListExtensions.<URI, Iterable<URI>>map(_dirtyFiles_1, _function_2);
+      Iterable<URI> _flatten = Iterables.<URI>concat(_map);
+      Set<URI> _set_1 = IterableExtensions.<URI>toSet(_flatten);
+      directlyAffected = _set_1;
     }
-    Indexer.LOG.info("Removing deleted files from index");
     final ArrayList<IResourceDescription.Delta> currentDeltas = CollectionLiterals.<IResourceDescription.Delta>newArrayList();
-    List<URI> _deletedFiles_1 = request.getDeletedFiles();
-    final Procedure1<URI> _function_5 = new Procedure1<URI>() {
-      @Override
-      public void apply(final URI it) {
-        String _fileExtension = it.fileExtension();
-        boolean _notEquals = (!Objects.equal(_fileExtension, "java"));
-        if (_notEquals) {
-          final IResourceDescription oldDescription = Indexer.this.index.getResourceDescription(it);
-          boolean _notEquals_1 = (!Objects.equal(oldDescription, null));
-          if (_notEquals_1) {
-            DefaultResourceDescriptionDelta _defaultResourceDescriptionDelta = new DefaultResourceDescriptionDelta(oldDescription, null);
-            currentDeltas.add(_defaultResourceDescriptionDelta);
-          }
-          newIndex.removeDescription(it);
-        }
-      }
-    };
-    IterableExtensions.<URI>forEach(_deletedFiles_1, _function_5);
-    final HashSet<URI> allAffected = CollectionLiterals.<URI>newHashSet();
-    Iterables.<URI>addAll(allAffected, directlyAffected);
+    ArrayList<IResourceDescription.Delta> _removeDeletedFilesFromIndex = this.removeDeletedFilesFromIndex(request, newIndex);
+    Iterables.<IResourceDescription.Delta>addAll(currentDeltas, _removeDeletedFilesFromIndex);
     if (isConsiderJava) {
       List<URI> _sourceRoots = request.getSourceRoots();
       List<URI> _outputs = request.getOutputs();
@@ -200,13 +180,85 @@ public class Indexer {
       this.javaSupport.installTypeProvider(_plus_5, _resourceSet_2);
     }
     Indexer.LOG.info("Indexing changed and added files");
-    final ArrayList<URI> toBeIndexed = CollectionLiterals.<URI>newArrayList();
+    final HashSet<URI> allAffected = CollectionLiterals.<URI>newHashSet();
+    Iterables.<URI>addAll(allAffected, directlyAffected);
+    final HashSet<URI> toBeIndexed = CollectionLiterals.<URI>newHashSet();
     Iterables.<URI>addAll(toBeIndexed, directlyAffected);
     final HashSet<IResourceDescription.Delta> allDeltas = CollectionLiterals.<IResourceDescription.Delta>newHashSet();
     while ((!toBeIndexed.isEmpty())) {
       {
+        boolean _and = false;
+        if (!isConsiderJava) {
+          _and = false;
+        } else {
+          _and = (!fullBuild);
+        }
+        if (_and) {
+          final Function1<URI, Iterable<URI>> _function_3 = new Function1<URI, Iterable<URI>>() {
+            @Override
+            public Iterable<URI> apply(final URI it) {
+              return Indexer.this.source2GeneratedMapping.getGenerated(it);
+            }
+          };
+          Iterable<Iterable<URI>> _map_1 = IterableExtensions.<URI, Iterable<URI>>map(toBeIndexed, _function_3);
+          Iterable<URI> _flatten_1 = Iterables.<URI>concat(_map_1);
+          Iterable<URI> _plus_6 = Iterables.<URI>concat(_flatten_1, toBeIndexed);
+          final Function1<URI, Boolean> _function_4 = new Function1<URI, Boolean>() {
+            @Override
+            public Boolean apply(final URI it) {
+              String _fileExtension = it.fileExtension();
+              return Boolean.valueOf(Objects.equal(_fileExtension, "java"));
+            }
+          };
+          Iterable<URI> _filter_2 = IterableExtensions.<URI>filter(_plus_6, _function_4);
+          final Set<URI> affectedJavaFiles = IterableExtensions.<URI>toSet(_filter_2);
+          List<URI> _deletedFiles_1 = request.getDeletedFiles();
+          final Function1<URI, Iterable<URI>> _function_5 = new Function1<URI, Iterable<URI>>() {
+            @Override
+            public Iterable<URI> apply(final URI it) {
+              return Indexer.this.getPrimarySources(it);
+            }
+          };
+          List<Iterable<URI>> _map_2 = ListExtensions.<URI, Iterable<URI>>map(_deletedFiles_1, _function_5);
+          Iterable<URI> _flatten_2 = Iterables.<URI>concat(_map_2);
+          final Function1<URI, Boolean> _function_6 = new Function1<URI, Boolean>() {
+            @Override
+            public Boolean apply(final URI it) {
+              String _fileExtension = it.fileExtension();
+              return Boolean.valueOf(Objects.equal(_fileExtension, "java"));
+            }
+          };
+          final Iterable<URI> deletedPrimaryJavaFiles = IterableExtensions.<URI>filter(_flatten_2, _function_6);
+          final Iterable<URI> dependentJavaFiles = this.javaDependencyFinder.getDependentJavaFiles(affectedJavaFiles, deletedPrimaryJavaFiles);
+          final Function1<URI, Iterable<URI>> _function_7 = new Function1<URI, Iterable<URI>>() {
+            @Override
+            public Iterable<URI> apply(final URI it) {
+              return Indexer.this.getPrimarySources(it);
+            }
+          };
+          Iterable<Iterable<URI>> _map_3 = IterableExtensions.<URI, Iterable<URI>>map(dependentJavaFiles, _function_7);
+          Iterable<URI> _flatten_3 = Iterables.<URI>concat(_map_3);
+          final Function1<URI, Boolean> _function_8 = new Function1<URI, Boolean>() {
+            @Override
+            public Boolean apply(final URI it) {
+              boolean _or = false;
+              String _fileExtension = it.fileExtension();
+              boolean _equals = Objects.equal(_fileExtension, "java");
+              if (_equals) {
+                _or = true;
+              } else {
+                boolean _contains = affectionCandidates.contains(it);
+                _or = _contains;
+              }
+              return Boolean.valueOf(_or);
+            }
+          };
+          Iterable<URI> _filter_3 = IterableExtensions.<URI>filter(_flatten_3, _function_8);
+          Iterables.<URI>addAll(toBeIndexed, _filter_3);
+        }
         allAffected.addAll(toBeIndexed);
-        final Function1<Resource, Object> _function_6 = new Function1<Resource, Object>() {
+        affectionCandidates.removeAll(toBeIndexed);
+        final Function1<Resource, Object> _function_9 = new Function1<Resource, Object>() {
           @Override
           public Object apply(final Resource resource) {
             Object _xblockexpression = null;
@@ -221,12 +273,31 @@ public class Indexer {
             return _xblockexpression;
           }
         };
-        context.<Object>executeClustered(toBeIndexed, _function_6);
-        toBeIndexed.clear();
+        context.<Object>executeClustered(toBeIndexed, _function_9);
+        final Function1<URI, Boolean> _function_10 = new Function1<URI, Boolean>() {
+          @Override
+          public Boolean apply(final URI it) {
+            String _fileExtension = it.fileExtension();
+            return Boolean.valueOf(Objects.equal(_fileExtension, "java"));
+          }
+        };
+        Iterable<URI> _filter_4 = IterableExtensions.<URI>filter(toBeIndexed, _function_10);
+        final Procedure1<URI> _function_11 = new Procedure1<URI>() {
+          @Override
+          public void apply(final URI it) {
+            URI _findSourceRootRelativeURI = FilesAndURIs.findSourceRootRelativeURI(it, request);
+            URI _trimFileExtension = _findSourceRootRelativeURI.trimFileExtension();
+            final String javaPath = _trimFileExtension.toString();
+            String _replace = javaPath.replace("/", ".");
+            final QualifiedName fqn = Indexer.this.qualifiedNameConverter.toQualifiedName(_replace);
+            TypeResourceDescription.ChangedDelta _changedDelta = new TypeResourceDescription.ChangedDelta(fqn);
+            currentDeltas.add(_changedDelta);
+          }
+        };
+        IterableExtensions.<URI>forEach(_filter_4, _function_11);
         Iterables.<IResourceDescription.Delta>addAll(allDeltas, currentDeltas);
-        if (isConsiderJava) {
-        }
-        final Function1<URI, Boolean> _function_7 = new Function1<URI, Boolean>() {
+        toBeIndexed.clear();
+        final Function1<URI, Boolean> _function_12 = new Function1<URI, Boolean>() {
           @Override
           public Boolean apply(final URI it) {
             boolean _xblockexpression = false;
@@ -246,12 +317,11 @@ public class Indexer {
             return Boolean.valueOf(_xblockexpression);
           }
         };
-        Iterable<URI> _filter_2 = IterableExtensions.<URI>filter(affectionCandidates, _function_7);
-        Iterables.<URI>addAll(toBeIndexed, _filter_2);
-        affectionCandidates.removeAll(toBeIndexed);
+        Iterable<URI> _filter_5 = IterableExtensions.<URI>filter(affectionCandidates, _function_12);
+        Iterables.<URI>addAll(toBeIndexed, _filter_5);
         currentDeltas.clear();
-        boolean _isEmpty = toBeIndexed.isEmpty();
-        boolean _not = (!_isEmpty);
+        boolean _isEmpty_1 = toBeIndexed.isEmpty();
+        boolean _not = (!_isEmpty_1);
         if (_not) {
           Indexer.LOG.info("Indexing affected files");
         }
@@ -259,6 +329,50 @@ public class Indexer {
     }
     this.index = newIndex;
     return allAffected;
+  }
+  
+  private Iterable<URI> getPrimarySources(final URI uri) {
+    Iterable<URI> _xblockexpression = null;
+    {
+      final Iterable<URI> sources = this.source2GeneratedMapping.getSource(uri);
+      Iterable<URI> _xifexpression = null;
+      boolean _isEmpty = IterableExtensions.isEmpty(sources);
+      if (_isEmpty) {
+        _xifexpression = Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri));
+      } else {
+        _xifexpression = sources;
+      }
+      _xblockexpression = _xifexpression;
+    }
+    return _xblockexpression;
+  }
+  
+  public ArrayList<IResourceDescription.Delta> removeDeletedFilesFromIndex(final BuildRequest request, final ResourceDescriptionsData newIndex) {
+    Indexer.LOG.info("Removing deleted files from index");
+    final ArrayList<IResourceDescription.Delta> deltas = CollectionLiterals.<IResourceDescription.Delta>newArrayList();
+    List<URI> _deletedFiles = request.getDeletedFiles();
+    final Procedure1<URI> _function = new Procedure1<URI>() {
+      @Override
+      public void apply(final URI it) {
+        String _fileExtension = it.fileExtension();
+        boolean _notEquals = (!Objects.equal(_fileExtension, "java"));
+        if (_notEquals) {
+          IResourceDescription _resourceDescription = null;
+          if (Indexer.this.index!=null) {
+            _resourceDescription=Indexer.this.index.getResourceDescription(it);
+          }
+          final IResourceDescription oldDescription = _resourceDescription;
+          boolean _notEquals_1 = (!Objects.equal(oldDescription, null));
+          if (_notEquals_1) {
+            DefaultResourceDescriptionDelta _defaultResourceDescriptionDelta = new DefaultResourceDescriptionDelta(oldDescription, null);
+            deltas.add(_defaultResourceDescriptionDelta);
+          }
+          newIndex.removeDescription(it);
+        }
+      }
+    };
+    IterableExtensions.<URI>forEach(_deletedFiles, _function);
+    return deltas;
   }
   
   protected Iterable<Object> preIndexChangedResources(final Iterable<URI> directlyAffected, final ResourceDescriptionsData newIndex, final BuildRequest request, @Extension final BuildContext context) {

@@ -19,8 +19,8 @@ import org.eclipse.xtext.builder.standalone.compiler.IJavaCompiler.CompilationRe
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess
 import org.eclipse.xtext.common.types.access.impl.TypeResourceServices
-import org.eclipse.xtext.generator.AbstractFileSystemAccess
 import org.eclipse.xtext.generator.IFileSystemAccess
+import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 
@@ -38,7 +38,7 @@ class JavaSupport {
 	@Inject TypeResourceServices typeResourceServices
 	@Inject IndexedJvmTypeAccess typeAccess
 	@Inject IJavaCompiler compiler
-	@Inject AbstractFileSystemAccess commonFileAccess
+	@Inject JavaIoFileSystemAccess commonFileAccess
 
 	def installLocalOnlyTypeProvider(Iterable<URI> classPathRoots, XtextResourceSet resourceSet) {
 		LOG.info("Installing type provider for local types only")
@@ -65,7 +65,10 @@ class JavaSupport {
 		val javaDir = createTmpDir("java", request)
 		LOG.info("Generating stubs into " + stubsDir.absolutePath)
 		LOG.info("Copying modified Java files into " + javaDir.absolutePath)
-		commonFileAccess.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT, stubsDir.absolutePath)
+		commonFileAccess => [
+			setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT, stubsDir.absolutePath)
+			writeTrace = false
+		] 
 		for(resource: changedResources) {
 			if(resource.fileExtension == 'java') {
 				val relativeURI = resource.findSourceRootRelativeURI(request)

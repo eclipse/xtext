@@ -10,13 +10,15 @@ package org.eclipse.xtext.idea.build.daemon;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
-import org.eclipse.xtext.builder.standalone.incremental.IJavaDependencyFinder;
+import org.eclipse.xtext.builder.standalone.incremental.IClassFileBasedDependencyFinder;
 import org.eclipse.xtext.idea.build.daemon.IBuildSessionSingletons;
 import org.eclipse.xtext.idea.build.net.ObjectChannel;
 import org.eclipse.xtext.idea.build.net.Protocol;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -28,26 +30,46 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class BuildDaemonJavaDependencyFinder implements IJavaDependencyFinder {
+public class BuildDaemonClassFileBasedDependencyFinder implements IClassFileBasedDependencyFinder {
   @Inject
   @Extension
   private IBuildSessionSingletons _iBuildSessionSingletons;
   
   @Override
-  public Iterable<URI> getDependentJavaFiles(final Iterable<URI> javaFiles) {
+  public Iterable<URI> getDependentJavaFiles(final Iterable<URI> dirtyJavaFiles, final Iterable<URI> deletedJavaFiles) {
+    boolean _and = false;
+    boolean _isEmpty = IterableExtensions.isEmpty(dirtyJavaFiles);
+    if (!_isEmpty) {
+      _and = false;
+    } else {
+      boolean _isEmpty_1 = IterableExtensions.isEmpty(deletedJavaFiles);
+      _and = _isEmpty_1;
+    }
+    if (_and) {
+      return Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList());
+    }
     Protocol.JavaDependencyRequest _javaDependencyRequest = new Protocol.JavaDependencyRequest();
     final Procedure1<Protocol.JavaDependencyRequest> _function = new Procedure1<Protocol.JavaDependencyRequest>() {
       @Override
       public void apply(final Protocol.JavaDependencyRequest it) {
-        List<String> _javaFiles = it.getJavaFiles();
+        List<String> _dirtyJavaFiles = it.getDirtyJavaFiles();
         final Function1<URI, String> _function = new Function1<URI, String>() {
           @Override
           public String apply(final URI it) {
             return it.toString();
           }
         };
-        Iterable<String> _map = IterableExtensions.<URI, String>map(javaFiles, _function);
-        Iterables.<String>addAll(_javaFiles, _map);
+        Iterable<String> _map = IterableExtensions.<URI, String>map(dirtyJavaFiles, _function);
+        Iterables.<String>addAll(_dirtyJavaFiles, _map);
+        List<String> _deletedJavaFiles = it.getDeletedJavaFiles();
+        final Function1<URI, String> _function_1 = new Function1<URI, String>() {
+          @Override
+          public String apply(final URI it) {
+            return it.toString();
+          }
+        };
+        Iterable<String> _map_1 = IterableExtensions.<URI, String>map(deletedJavaFiles, _function_1);
+        Iterables.<String>addAll(_deletedJavaFiles, _map_1);
       }
     };
     final Protocol.JavaDependencyRequest request = ObjectExtensions.<Protocol.JavaDependencyRequest>operator_doubleArrow(_javaDependencyRequest, _function);

@@ -10,8 +10,8 @@ package org.eclipse.xtext.idea.build.daemon;
 import com.google.inject.binder.AnnotatedBindingBuilder;
 import org.eclipse.xtext.builder.standalone.IIssueHandler;
 import org.eclipse.xtext.builder.standalone.StandaloneBuilderModule;
-import org.eclipse.xtext.builder.standalone.incremental.IJavaDependencyFinder;
-import org.eclipse.xtext.idea.build.daemon.BuildDaemonJavaDependencyFinder;
+import org.eclipse.xtext.builder.standalone.incremental.IClassFileBasedDependencyFinder;
+import org.eclipse.xtext.idea.build.daemon.BuildDaemonClassFileBasedDependencyFinder;
 import org.eclipse.xtext.idea.build.daemon.IdeaBuilderResourceDescriptionsProvider;
 import org.eclipse.xtext.idea.build.daemon.IdeaIssueHandler;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
@@ -31,7 +31,7 @@ public class BuildDaemonModule extends StandaloneBuilderModule {
     super.configure();
     AnnotatedBindingBuilder<ResourceDescriptionsProvider> _bind = this.<ResourceDescriptionsProvider>bind(ResourceDescriptionsProvider.class);
     _bind.to(IdeaBuilderResourceDescriptionsProvider.class);
-    AnnotatedBindingBuilder<IJavaDependencyFinder> _bind_1 = this.<IJavaDependencyFinder>bind(IJavaDependencyFinder.class);
-    _bind_1.to(BuildDaemonJavaDependencyFinder.class);
+    AnnotatedBindingBuilder<IClassFileBasedDependencyFinder> _bind_1 = this.<IClassFileBasedDependencyFinder>bind(IClassFileBasedDependencyFinder.class);
+    _bind_1.to(BuildDaemonClassFileBasedDependencyFinder.class);
   }
 }

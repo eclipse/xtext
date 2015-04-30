@@ -24,7 +24,7 @@ import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.ISetupExtension;
 import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
 import org.eclipse.xtext.idea.build.client.DaemonConnector;
-import org.eclipse.xtext.idea.build.client.IdeaJavaDependencyFinder;
+import org.eclipse.xtext.idea.build.client.IdeaClassFileDependencyFinder;
 import org.eclipse.xtext.idea.build.net.ObjectChannel;
 import org.eclipse.xtext.idea.build.net.Protocol;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -51,11 +51,7 @@ import org.jetbrains.jps.incremental.messages.BuildMessage;
 import org.jetbrains.jps.incremental.messages.CompilerMessage;
 import org.jetbrains.jps.incremental.messages.CustomBuilderMessage;
 import org.jetbrains.jps.model.JpsUrlList;
-import org.jetbrains.jps.model.java.JavaSourceRootProperties;
-import org.jetbrains.jps.model.java.JavaSourceRootType;
 import org.jetbrains.jps.model.module.JpsModule;
-import org.jetbrains.jps.model.module.JpsModuleSourceRoot;
-import org.jetbrains.jps.model.module.JpsTypedModuleSourceRoot;
 import org.jetbrains.jps.service.JpsServiceManager;
 
 /**
@@ -256,18 +252,26 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
   private Protocol.JavaDependencyResult handleJavaDependencyRequest(final Protocol.JavaDependencyRequest request, final CompileContext context) {
     Protocol.JavaDependencyResult _xblockexpression = null;
     {
-      final IdeaJavaDependencyFinder dependencyFinder = new IdeaJavaDependencyFinder(context);
-      List<String> _javaFiles = request.getJavaFiles();
+      final IdeaClassFileDependencyFinder dependencyFinder = new IdeaClassFileDependencyFinder(context);
+      List<String> _dirtyJavaFiles = request.getDirtyJavaFiles();
       final Function1<String, URI> _function = new Function1<String, URI>() {
         @Override
         public URI apply(final String it) {
           return FilesAndURIs.asURI(it);
         }
       };
-      List<URI> _map = ListExtensions.<String, URI>map(_javaFiles, _function);
-      final Iterable<URI> dependentJavaFiles = dependencyFinder.getDependentJavaFiles(_map);
+      List<URI> _map = ListExtensions.<String, URI>map(_dirtyJavaFiles, _function);
+      List<String> _deletedJavaFiles = request.getDeletedJavaFiles();
+      final Function1<String, URI> _function_1 = new Function1<String, URI>() {
+        @Override
+        public URI apply(final String it) {
+          return FilesAndURIs.asURI(it);
+        }
+      };
+      List<URI> _map_1 = ListExtensions.<String, URI>map(_deletedJavaFiles, _function_1);
+      final Iterable<URI> dependentJavaFiles = dependencyFinder.getDependentJavaFiles(_map, _map_1);
       Protocol.JavaDependencyResult _javaDependencyResult = new Protocol.JavaDependencyResult();
-      final Procedure1<Protocol.JavaDependencyResult> _function_1 = new Procedure1<Protocol.JavaDependencyResult>() {
+      final Procedure1<Protocol.JavaDependencyResult> _function_2 = new Procedure1<Protocol.JavaDependencyResult>() {
         @Override
         public void apply(final Protocol.JavaDependencyResult it) {
           List<String> _dependentJavaFiles = it.getDependentJavaFiles();
@@ -281,32 +285,24 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
           Iterables.<String>addAll(_dependentJavaFiles, _map);
         }
       };
-      _xblockexpression = ObjectExtensions.<Protocol.JavaDependencyResult>operator_doubleArrow(_javaDependencyResult, _function_1);
+      _xblockexpression = ObjectExtensions.<Protocol.JavaDependencyResult>operator_doubleArrow(_javaDependencyResult, _function_2);
     }
     return _xblockexpression;
   }
   
   private void handleBuildResult(final Protocol.BuildResultMessage result, final CompileContext context, final ModuleChunk chunk, final ModuleLevelBuilder.OutputConsumer outputConsumer) {
     final ModuleBuildTarget target = chunk.representativeTarget();
-    final JpsModule module = target.getModule();
-    List<String> _outputDirs = result.getOutputDirs();
-    final Procedure1<String> _function = new Procedure1<String>() {
-      @Override
-      public void apply(final String it) {
-        URI _asURI = FilesAndURIs.asURI(it);
-        XtextIdeaBuilder.this.createSourceRoot(_asURI, module);
-      }
-    };
-    IterableExtensions.<String>forEach(_outputDirs, _function);
     List<Protocol.GeneratedFile> _generatedFiles = result.getGeneratedFiles();
-    final Procedure1<Protocol.GeneratedFile> _function_1 = new Procedure1<Protocol.GeneratedFile>() {
+    final Procedure1<Protocol.GeneratedFile> _function = new Procedure1<Protocol.GeneratedFile>() {
       @Override
       public void apply(final Protocol.GeneratedFile it) {
         try {
           String _file = it.getFile();
           URI _asURI = FilesAndURIs.asURI(_file);
           final File outputFile = FilesAndURIs.asFile(_asURI);
-          FSOperations.markDirty(context, CompilationRound.CURRENT, outputFile);
+          FSOperations.markDirty(context, CompilationRound.NEXT, outputFile);
+          long _compilationStartStamp = context.getCompilationStartStamp();
+          outputFile.setLastModified(_compilationStartStamp);
           String _presentableName = XtextIdeaBuilder.this.getPresentableName();
           String _file_1 = it.getFile();
           CustomBuilderMessage _customBuilderMessage = new CustomBuilderMessage(_presentableName, "generated", _file_1);
@@ -330,9 +326,9 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
         }
       }
     };
-    IterableExtensions.<Protocol.GeneratedFile>forEach(_generatedFiles, _function_1);
+    IterableExtensions.<Protocol.GeneratedFile>forEach(_generatedFiles, _function);
     List<String> _deletedFiles = result.getDeletedFiles();
-    final Procedure1<String> _function_2 = new Procedure1<String>() {
+    final Procedure1<String> _function_1 = new Procedure1<String>() {
       @Override
       public void apply(final String it) {
         try {
@@ -349,7 +345,7 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
         }
       }
     };
-    IterableExtensions.<String>forEach(_deletedFiles, _function_2);
+    IterableExtensions.<String>forEach(_deletedFiles, _function_1);
   }
   
   private void reportIssue(final Protocol.BuildIssueMessage it, final CompileContext context) {
@@ -371,29 +367,6 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
   protected void reportError(final String message, final CompileContext context) {
     context.processMessage(new BuildMessage(message, BuildMessage.Kind.ERROR) {
     });
-  }
-  
-  protected JpsModuleSourceRoot createSourceRoot(final URI outputDir, final JpsModule module) {
-    JpsModuleSourceRoot _xblockexpression = null;
-    {
-      final String outletUrl = outputDir.toString();
-      JpsModuleSourceRoot _xifexpression = null;
-      Iterable<JpsTypedModuleSourceRoot<JavaSourceRootProperties>> _sourceRoots = module.<JavaSourceRootProperties>getSourceRoots(JavaSourceRootType.SOURCE);
-      final Function1<JpsTypedModuleSourceRoot<JavaSourceRootProperties>, Boolean> _function = new Function1<JpsTypedModuleSourceRoot<JavaSourceRootProperties>, Boolean>() {
-        @Override
-        public Boolean apply(final JpsTypedModuleSourceRoot<JavaSourceRootProperties> it) {
-          String _url = it.getUrl();
-          return Boolean.valueOf(Objects.equal(_url, outletUrl));
-        }
-      };
-      boolean _exists = IterableExtensions.<JpsTypedModuleSourceRoot<JavaSourceRootProperties>>exists(_sourceRoots, _function);
-      boolean _not = (!_exists);
-      if (_not) {
-        _xifexpression = module.<JavaSourceRootProperties>addSourceRoot(outletUrl, JavaSourceRootType.SOURCE);
-      }
-      _xblockexpression = _xifexpression;
-    }
-    return _xblockexpression;
   }
   
   @Override

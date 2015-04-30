@@ -98,7 +98,6 @@ class ObjectChannelTest {
 			 	sourceFiles += 'dirty.txt'
 			]
 			deletedFiles += 'deleted.txt'
-			outputDirs += 'bin' 
 		]
 		bob.writeObject(result)
 		assertEquals(result, alice.readObject)

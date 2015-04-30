@@ -12,7 +12,7 @@ import org.eclipse.emf.common.util.URI
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-interface IJavaDependencyFinder {
+interface IClassFileBasedDependencyFinder {
 	
-	def Iterable<URI> getDependentJavaFiles(Iterable<URI> javaFiles) 
+	def Iterable<URI> getDependentJavaFiles(Iterable<URI> dirtyJavaFiles, Iterable<URI> deletedJavaFiles) 
 }

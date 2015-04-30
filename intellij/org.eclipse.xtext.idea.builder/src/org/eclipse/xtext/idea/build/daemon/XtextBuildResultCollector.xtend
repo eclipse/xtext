@@ -22,14 +22,11 @@ class XtextBuildResultCollector implements FileListener {
 	
 	Multimap<URI, URI> generatedFile2sourceURI = HashMultimap.create 
 
-	Set<URI> outputDirs = newHashSet
-	
 	Set<URI> deletedFiles = newHashSet
 	
 	def getBuildResult() {
 		new BuildResultMessage => [
 			it.deletedFiles += deletedFiles.toString
-			it.outputDirs += outputDirs.toString
 			it.generatedFiles += generatedFile2sourceURI.keySet.map[ generated |
 				new GeneratedFile => [
 					file = generated.toString
@@ -37,10 +34,6 @@ class XtextBuildResultCollector implements FileListener {
 				]
 			]						
 		]
-	}
-	
-	override outputFolderUsed(URI outputFolder) {
-		outputDirs += outputFolder
 	}
 	
 	override fileGenerated(URI source, URI target) {

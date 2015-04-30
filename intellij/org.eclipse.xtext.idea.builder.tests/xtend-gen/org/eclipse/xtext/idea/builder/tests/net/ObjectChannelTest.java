@@ -149,8 +149,6 @@ public class ObjectChannelTest {
         _generatedFiles.add(_doubleArrow);
         List<String> _deletedFiles = it.getDeletedFiles();
         _deletedFiles.add("deleted.txt");
-        List<String> _outputDirs = it.getOutputDirs();
-        _outputDirs.add("bin");
       }
     };
     final Protocol.BuildResultMessage result = ObjectExtensions.<Protocol.BuildResultMessage>operator_doubleArrow(_buildResultMessage, _function_2);

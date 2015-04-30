@@ -28,7 +28,6 @@ import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
 import org.eclipse.xtext.builder.standalone.incremental.Indexer;
 import org.eclipse.xtext.builder.standalone.incremental.Source2GeneratedMapping;
-import org.eclipse.xtext.builder.standalone.incremental.TrackingFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.parser.IEncodingProvider;
@@ -63,8 +62,6 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class IncrementalStandaloneBuilder {
   public interface FileListener {
     public abstract void fileGenerated(final URI source, final URI target);
-    
-    public abstract void outputFolderUsed(final URI outputFolder);
     
     public abstract void fileDeleted(final URI file);
   }
@@ -152,6 +149,7 @@ public class IncrementalStandaloneBuilder {
   
   public Boolean launch() {
     this.initialize();
+    this.cleanup();
     List<URI> _deletedFiles = this.request.getDeletedFiles();
     final Procedure1<URI> _function = new Procedure1<URI>() {
       @Override
@@ -160,6 +158,7 @@ public class IncrementalStandaloneBuilder {
         final Procedure1<URI> _function = new Procedure1<URI>() {
           @Override
           public void apply(final URI it) {
+            IncrementalStandaloneBuilder.LOG.info(("Deleting " + it));
             File _asFile = FilesAndURIs.asFile(it);
             _asFile.delete();
           }
@@ -317,59 +316,46 @@ public class IncrementalStandaloneBuilder {
     if (_equals) {
       JavaIoFileSystemAccess _createFileSystemAccess = language.createFileSystemAccess(this.baseDir);
       fsa = _createFileSystemAccess;
-      TrackingFileSystemAccess _configureFileSystemAccess = this.configureFileSystemAccess(fsa, language);
+      JavaIoFileSystemAccess _configureFileSystemAccess = this.configureFileSystemAccess(fsa, language);
       fsa = _configureFileSystemAccess;
       this.configuredFsas.put(language, fsa);
     }
     return fsa;
   }
   
-  protected TrackingFileSystemAccess configureFileSystemAccess(final JavaIoFileSystemAccess fsa, final LanguageAccess language) {
-    abstract class __IncrementalStandaloneBuilder_1 implements TrackingFileSystemAccess.Listener {
-      abstract URI getURI(final String outputDir, final String fileName);
+  protected JavaIoFileSystemAccess configureFileSystemAccess(final JavaIoFileSystemAccess fsa, final LanguageAccess language) {
+    JavaIoFileSystemAccess _xblockexpression = null;
+    {
+      fsa.setCallBack(new JavaIoFileSystemAccess.IFileCallback() {
+        @Override
+        public void fileAdded(final File file) {
+          final URI uri = FilesAndURIs.asURI(file);
+          IncrementalStandaloneBuilder.this.source2GeneratedMapping.addSource2Generated(IncrementalStandaloneBuilder.this.currentResourceURI, uri);
+          final Procedure1<IncrementalStandaloneBuilder.FileListener> _function = new Procedure1<IncrementalStandaloneBuilder.FileListener>() {
+            @Override
+            public void apply(final IncrementalStandaloneBuilder.FileListener it) {
+              it.fileGenerated(IncrementalStandaloneBuilder.this.currentResourceURI, uri);
+            }
+          };
+          IterableExtensions.<IncrementalStandaloneBuilder.FileListener>forEach(IncrementalStandaloneBuilder.this.listeners, _function);
+        }
+        
+        @Override
+        public void fileDeleted(final File file) {
+          final URI uri = FilesAndURIs.asURI(file);
+          IncrementalStandaloneBuilder.this.source2GeneratedMapping.deleteGenerated(uri);
+          final Procedure1<IncrementalStandaloneBuilder.FileListener> _function = new Procedure1<IncrementalStandaloneBuilder.FileListener>() {
+            @Override
+            public void apply(final IncrementalStandaloneBuilder.FileListener it) {
+              it.fileDeleted(uri);
+            }
+          };
+          IterableExtensions.<IncrementalStandaloneBuilder.FileListener>forEach(IncrementalStandaloneBuilder.this.listeners, _function);
+        }
+      });
+      _xblockexpression = fsa;
     }
-    
-    TrackingFileSystemAccess _trackingFileSystemAccess = new TrackingFileSystemAccess(fsa);
-    final Procedure1<TrackingFileSystemAccess> _function = new Procedure1<TrackingFileSystemAccess>() {
-      @Override
-      public void apply(final TrackingFileSystemAccess it) {
-        __IncrementalStandaloneBuilder_1 ___IncrementalStandaloneBuilder_1 = new __IncrementalStandaloneBuilder_1() {
-          @Override
-          public void fileAdded(final String outputDir, final String fileName) {
-            final URI uri = this.getURI(outputDir, fileName);
-            IncrementalStandaloneBuilder.this.source2GeneratedMapping.addSource2Generated(IncrementalStandaloneBuilder.this.currentResourceURI, uri);
-            final Procedure1<IncrementalStandaloneBuilder.FileListener> _function = new Procedure1<IncrementalStandaloneBuilder.FileListener>() {
-              @Override
-              public void apply(final IncrementalStandaloneBuilder.FileListener it) {
-                URI _asFileURI = FilesAndURIs.asFileURI(outputDir);
-                it.outputFolderUsed(_asFileURI);
-                it.fileGenerated(IncrementalStandaloneBuilder.this.currentResourceURI, uri);
-              }
-            };
-            IterableExtensions.<IncrementalStandaloneBuilder.FileListener>forEach(IncrementalStandaloneBuilder.this.listeners, _function);
-          }
-          
-          @Override
-          public void fileDeleted(final String outputDir, final String fileName) {
-            final URI uri = this.getURI(outputDir, fileName);
-            IncrementalStandaloneBuilder.this.source2GeneratedMapping.deleteGenerated(uri);
-            final Procedure1<IncrementalStandaloneBuilder.FileListener> _function = new Procedure1<IncrementalStandaloneBuilder.FileListener>() {
-              @Override
-              public void apply(final IncrementalStandaloneBuilder.FileListener it) {
-                it.fileDeleted(uri);
-              }
-            };
-            IterableExtensions.<IncrementalStandaloneBuilder.FileListener>forEach(IncrementalStandaloneBuilder.this.listeners, _function);
-          }
-          
-          URI getURI(final String outputDir, final String fileName) {
-            return FilesAndURIs.asFileURI(((outputDir + File.separator) + fileName));
-          }
-        };
-        it.addListener(___IncrementalStandaloneBuilder_1);
-      }
-    };
-    return ObjectExtensions.<TrackingFileSystemAccess>operator_doubleArrow(_trackingFileSystemAccess, _function);
+    return _xblockexpression;
   }
   
   private List<IncrementalStandaloneBuilder.FileListener> listeners = CollectionLiterals.<IncrementalStandaloneBuilder.FileListener>newArrayList();

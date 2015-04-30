@@ -28,8 +28,8 @@ import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
 import org.eclipse.xtext.common.types.descriptions.IStubGenerator;
-import org.eclipse.xtext.generator.AbstractFileSystemAccess;
 import org.eclipse.xtext.generator.IFileSystemAccess;
+import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
@@ -40,6 +40,8 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -59,7 +61,7 @@ public class JavaSupport {
   private IJavaCompiler compiler;
   
   @Inject
-  private AbstractFileSystemAccess commonFileAccess;
+  private JavaIoFileSystemAccess commonFileAccess;
   
   public void installLocalOnlyTypeProvider(final Iterable<URI> classPathRoots, final XtextResourceSet resourceSet) {
     JavaSupport.LOG.info("Installing type provider for local types only");
@@ -101,8 +103,16 @@ public class JavaSupport {
       String _absolutePath_1 = javaDir.getAbsolutePath();
       String _plus_1 = ("Copying modified Java files into " + _absolutePath_1);
       JavaSupport.LOG.info(_plus_1);
-      String _absolutePath_2 = stubsDir.getAbsolutePath();
-      this.commonFileAccess.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT, _absolutePath_2);
+      final Procedure1<JavaIoFileSystemAccess> _function = new Procedure1<JavaIoFileSystemAccess>() {
+        @Override
+        public void apply(final JavaIoFileSystemAccess it) {
+          String _absolutePath = stubsDir.getAbsolutePath();
+          it.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT, _absolutePath);
+          it.setWriteTrace(false);
+        }
+      };
+      ObjectExtensions.<JavaIoFileSystemAccess>operator_doubleArrow(
+        this.commonFileAccess, _function);
       for (final URI resource : changedResources) {
         String _fileExtension = resource.fileExtension();
         boolean _equals = Objects.equal(_fileExtension, "java");

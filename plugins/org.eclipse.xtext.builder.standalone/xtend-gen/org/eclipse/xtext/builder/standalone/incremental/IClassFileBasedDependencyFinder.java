@@ -13,6 +13,6 @@ import org.eclipse.emf.common.util.URI;
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("all")
-public interface IJavaDependencyFinder {
-  public abstract Iterable<URI> getDependentJavaFiles(final Iterable<URI> javaFiles);
+public interface IClassFileBasedDependencyFinder {
+  public abstract Iterable<URI> getDependentJavaFiles(final Iterable<URI> dirtyJavaFiles, final Iterable<URI> deletedJavaFiles);
 }

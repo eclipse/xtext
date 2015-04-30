@@ -9,22 +9,25 @@ package org.eclipse.xtext.idea.build.daemon
 
 import com.google.inject.Inject
 import org.eclipse.emf.common.util.URI
-import org.eclipse.xtext.builder.standalone.incremental.IJavaDependencyFinder
 import org.eclipse.xtext.idea.build.net.Protocol.JavaDependencyRequest
 import org.eclipse.xtext.idea.build.net.Protocol.JavaDependencyResult
 
 import static extension org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs.*
+import org.eclipse.xtext.builder.standalone.incremental.IClassFileBasedDependencyFinder
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-class BuildDaemonJavaDependencyFinder implements IJavaDependencyFinder {
+class BuildDaemonClassFileBasedDependencyFinder implements IClassFileBasedDependencyFinder {
 	
 	@Inject extension IBuildSessionSingletons
 	
-	override getDependentJavaFiles(Iterable<URI> javaFiles) {
+	override getDependentJavaFiles(Iterable<URI> dirtyJavaFiles, Iterable<URI> deletedJavaFiles) {
+		if(dirtyJavaFiles.empty && deletedJavaFiles.empty)
+			return #[]
 		val request = new JavaDependencyRequest => [
-			it.javaFiles += javaFiles.map[toString]
+			it.dirtyJavaFiles += dirtyJavaFiles.map[toString]
+			it.deletedJavaFiles += deletedJavaFiles.map[toString]
 		]
 		objectChannel.writeObject(request)
 		val response = objectChannel.readObject()

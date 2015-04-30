@@ -172,8 +172,6 @@ public class Protocol {
     
     private List<String> deletedFiles = CollectionLiterals.<String>newArrayList();
     
-    private List<String> outputDirs = CollectionLiterals.<String>newArrayList();
-    
     @Pure
     public List<Protocol.GeneratedFile> getGeneratedFiles() {
       return this.generatedFiles;
@@ -190,15 +188,6 @@ public class Protocol {
     
     public void setDeletedFiles(final List<String> deletedFiles) {
       this.deletedFiles = deletedFiles;
-    }
-    
-    @Pure
-    public List<String> getOutputDirs() {
-      return this.outputDirs;
-    }
-    
-    public void setOutputDirs(final List<String> outputDirs) {
-      this.outputDirs = outputDirs;
     }
     
     @Override
@@ -221,11 +210,6 @@ public class Protocol {
           return false;
       } else if (!this.deletedFiles.equals(other.deletedFiles))
         return false;
-      if (this.outputDirs == null) {
-        if (other.outputDirs != null)
-          return false;
-      } else if (!this.outputDirs.equals(other.outputDirs))
-        return false;
       return true;
     }
     
@@ -236,7 +220,6 @@ public class Protocol {
       int result = 1;
       result = prime * result + ((this.generatedFiles== null) ? 0 : this.generatedFiles.hashCode());
       result = prime * result + ((this.deletedFiles== null) ? 0 : this.deletedFiles.hashCode());
-      result = prime * result + ((this.outputDirs== null) ? 0 : this.outputDirs.hashCode());
       return result;
     }
   }
@@ -270,22 +253,33 @@ public class Protocol {
   @Accessors
   @EqualsAndHashCode
   public static class JavaDependencyRequest implements Serializable {
-    private List<String> javaFiles;
+    private List<String> dirtyJavaFiles = CollectionLiterals.<String>newArrayList();
+    
+    private List<String> deletedJavaFiles = CollectionLiterals.<String>newArrayList();
     
     @Pure
-    public List<String> getJavaFiles() {
-      return this.javaFiles;
+    public List<String> getDirtyJavaFiles() {
+      return this.dirtyJavaFiles;
     }
     
-    public void setJavaFiles(final List<String> javaFiles) {
-      this.javaFiles = javaFiles;
+    public void setDirtyJavaFiles(final List<String> dirtyJavaFiles) {
+      this.dirtyJavaFiles = dirtyJavaFiles;
+    }
+    
+    @Pure
+    public List<String> getDeletedJavaFiles() {
+      return this.deletedJavaFiles;
+    }
+    
+    public void setDeletedJavaFiles(final List<String> deletedJavaFiles) {
+      this.deletedJavaFiles = deletedJavaFiles;
     }
   }
   
   @Accessors
   @EqualsAndHashCode
   public static class JavaDependencyResult implements Serializable {
-    private List<String> dependentJavaFiles;
+    private List<String> dependentJavaFiles = CollectionLiterals.<String>newArrayList();
     
     @Pure
     public List<String> getDependentJavaFiles() {

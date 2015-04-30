@@ -29,8 +29,6 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class XtextBuildResultCollector implements IncrementalStandaloneBuilder.FileListener {
   private Multimap<URI, URI> generatedFile2sourceURI = HashMultimap.<URI, URI>create();
   
-  private Set<URI> outputDirs = CollectionLiterals.<URI>newHashSet();
-  
   private Set<URI> deletedFiles = CollectionLiterals.<URI>newHashSet();
   
   public Protocol.BuildResultMessage getBuildResult() {
@@ -41,9 +39,6 @@ public class XtextBuildResultCollector implements IncrementalStandaloneBuilder.F
         List<String> _deletedFiles = it.getDeletedFiles();
         String _string = XtextBuildResultCollector.this.deletedFiles.toString();
         _deletedFiles.add(_string);
-        List<String> _outputDirs = it.getOutputDirs();
-        String _string_1 = XtextBuildResultCollector.this.outputDirs.toString();
-        _outputDirs.add(_string_1);
         List<Protocol.GeneratedFile> _generatedFiles = it.getGeneratedFiles();
         Set<URI> _keySet = XtextBuildResultCollector.this.generatedFile2sourceURI.keySet();
         final Function1<URI, Protocol.GeneratedFile> _function = new Function1<URI, Protocol.GeneratedFile>() {
@@ -75,11 +70,6 @@ public class XtextBuildResultCollector implements IncrementalStandaloneBuilder.F
       }
     };
     return ObjectExtensions.<Protocol.BuildResultMessage>operator_doubleArrow(_buildResultMessage, _function);
-  }
-  
-  @Override
-  public void outputFolderUsed(final URI outputFolder) {
-    this.outputDirs.add(outputFolder);
   }
   
   @Override

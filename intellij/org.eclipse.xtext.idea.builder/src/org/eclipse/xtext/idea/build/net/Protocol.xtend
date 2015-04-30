@@ -36,7 +36,6 @@ class Protocol {
 	static class BuildResultMessage implements Serializable {
 		List<GeneratedFile> generatedFiles = newArrayList		
 		List<String> deletedFiles = newArrayList
-		List<String> outputDirs = newArrayList
 	}
 	
 	@Accessors
@@ -49,13 +48,14 @@ class Protocol {
 	@Accessors
 	@EqualsAndHashCode
 	static class JavaDependencyRequest implements Serializable {
-		List<String> javaFiles
+		List<String> dirtyJavaFiles = newArrayList
+		List<String> deletedJavaFiles = newArrayList
 	}
 	
 	@Accessors
 	@EqualsAndHashCode
 	static class JavaDependencyResult implements Serializable {
-		List<String> dependentJavaFiles
+		List<String> dependentJavaFiles = newArrayList
 	}
 	
 	@Accessors
