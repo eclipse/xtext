@@ -14,6 +14,8 @@ import com.intellij.lang.PsiStructureViewFactory
 import com.intellij.lang.refactoring.NamesValidator
 import com.intellij.lexer.Lexer
 import com.intellij.openapi.fileTypes.SyntaxHighlighter
+import com.intellij.openapi.util.Key
+import com.intellij.psi.util.PsiModificationTracker
 import org.eclipse.xtext.ide.LexerIdeBindings
 import org.eclipse.xtext.ide.editor.bracketmatching.DefaultBracePairProvider
 import org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider
@@ -31,6 +33,7 @@ import org.eclipse.xtext.parser.antlr.ITokenDefProvider
 import org.eclipse.xtext.psi.IPsiModelAssociations
 import org.eclipse.xtext.psi.IPsiModelAssociator
 import org.eclipse.xtext.psi.PsiModelAssociations
+import org.eclipse.xtext.psi.impl.BaseXtextFile
 import org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex
 import org.eclipse.xtext.resource.IContainer
 import org.eclipse.xtext.resource.IResourceDescriptions
@@ -99,6 +102,10 @@ class DefaultIdeaModule extends AbstractGenericModule {
 	@SingletonBinding
 	def Class<? extends PsiStructureViewFactory> bindPsiStructureViewFactory() {
 		DefaultPsiStructureViewFactory
+	}
+
+	def void configureGlobalModificationTracker(Binder binder) {
+		binder.bind(Key).annotatedWith(Names.named(BaseXtextFile.GLOBAL_MODIFICATION_COUNT)).toInstance(PsiModificationTracker.MODIFICATION_COUNT)
 	}
 
 }
