@@ -76,7 +76,7 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	
 	@Override
 	public JvmArrayType getType() {
-		JvmType componentType = component.getType();
+		JvmType componentType = component.toJavaType().getType();
 		if (componentType instanceof JvmComponentType) {
 			return Preconditions.checkNotNull(((JvmComponentType) componentType).getArrayType());
 		}
