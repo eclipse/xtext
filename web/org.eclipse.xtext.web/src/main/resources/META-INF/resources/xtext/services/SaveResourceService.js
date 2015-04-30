@@ -21,16 +21,16 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 		if (params.sendFullText) {
 			serverData.fullText = editorContext.getText();
 		} else {
-			var knownServerState = editorContext.getServerState();
-			if (knownServerState.stateId !== undefined) {
-				serverData.requiredStateId = knownServerState.stateId;
-			}
-			if (this._updateService && this._updateService.checkRunningUpdate(false)) {
+			if (editorContext.getClientServiceState().update == "started") {
 				var self = this;
 				this._updateService.addCompletionCallback(function() {
 					self.saveResource(editorContext, params);
 				});
 				return;
+			}
+			var knownServerState = editorContext.getServerState();
+			if (knownServerState.stateId !== undefined) {
+				serverData.requiredStateId = knownServerState.stateId;
 			}
 		}
 		
@@ -42,12 +42,15 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 				if (result.conflict) {
 					if (self.increaseRecursionCount(editorContext)) {
 						if (!params.sendFullText && result.conflict == "invalidStateId") {
+							self._updateService.addCompletionCallback(function() {
+								self.saveResource(editorContext, params);
+							});
 							params.sendFullText = true;
 							delete editorContext.getServerState().stateId;
 							self._updateService.update(editorContext, params);
+						} else {
+							self.saveResource(editorContext, params);
 						}
-						self.saveResource(editorContext, params);
-						return true;
 					}
 					return false;
 				}

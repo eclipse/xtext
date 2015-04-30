@@ -27,7 +27,10 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 				editorContext.setText(result.fullText);
 				editorContext.getEditor().getUndoStack().reset();
 				editorContext.markClean(!result.dirty);
-				editorContext.updateServerState(result.fullText, result.stateId);
+				var listeners = editorContext.updateServerState(result.fullText, result.stateId);
+				for (i in listeners) {
+					listeners[i]();
+				}
 			}
 		});
 	};

@@ -438,7 +438,6 @@ define([
 		var updateService = undefined;
 		if (!options.sendFullText) {
 			updateService = new UpdateService(serverUrl, resourceUri);
-			validationService.setUpdateService(updateService);
 			if (saveResourceService !== undefined) {
 				saveResourceService.setUpdateService(updateService);
 			}

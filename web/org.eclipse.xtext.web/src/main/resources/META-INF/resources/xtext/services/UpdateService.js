@@ -45,22 +45,10 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 	};
 	
 	UpdateService.prototype.onComplete = function(xhr, textStatus) {
-		this._isRunningUpdate = false;
 		var callbacks = this._completionCallbacks;
 		this._completionCallbacks = [];
 		for (i in callbacks) {
 			callbacks[i]();
-		}
-	}
-	
-	UpdateService.prototype.checkRunningUpdate = function(startRunning) {
-		if (this._isRunningUpdate) {
-			return true;
-		} else {
-			if (startRunning) {
-				this._isRunningUpdate = true;
-			}
-			return false;
 		}
 	}
 	
@@ -69,7 +57,7 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 	}
 
 	UpdateService.prototype.update = function(editorContext, params) {
-		if (this.checkRunningUpdate(true)) {
+		if (editorContext.getClientServiceState().update == "started") {
 			var self = this;
 			this.addCompletionCallback(function() { self.update(editorContext, params) });
 			return;
@@ -97,6 +85,7 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 			data : serverData,
 			success : function(result) {
 				if (result.conflict) {
+					// This can only happen if the server has lost its session state
 					if (knownServerState.text !== undefined) {
 						delete knownServerState.text;
 						delete knownServerState.stateId;
