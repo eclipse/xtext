@@ -1,0 +1,46 @@
+/*******************************************************************************
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+grammar org.eclipse.xtext.web.example.statemachine.Statemachine with org.eclipse.xtext.common.Terminals
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+generate statemachine "http://www.eclipse.org/xtext/web/example/Statemachine"
+
+Statemachine :
+	{Statemachine}
+	signals+=Signal*
+	states+=State*;
+
+Signal:
+	(InputSignal | OutputSignal) 'signal' name=ID;
+
+InputSignal:
+	'input';
+
+OutputSignal:
+	'output';
+
+State:
+	'state' name=ID
+		commands+=Command*
+		transitions+=Transition*
+	'end';
+
+Transition:
+	'if' condition=Condition 'goto' state=[State];
+
+Condition:
+	events+=Event ('and' events+=Event)*;
+
+Event:
+	signal=[Signal] '==' state=BOOLEAN;
+
+Command:
+	'set' signal=[Signal] '=' newState=BOOLEAN;
+
+terminal BOOLEAN returns ecore::EBoolean:
+	'true' | 'false';

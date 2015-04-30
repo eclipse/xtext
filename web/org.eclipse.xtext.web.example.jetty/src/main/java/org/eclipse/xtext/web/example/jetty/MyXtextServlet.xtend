@@ -13,6 +13,8 @@ import java.util.concurrent.Executors
 import javax.servlet.annotation.WebServlet
 import org.eclipse.xtext.idea.example.entities.EntitiesRuntimeModule
 import org.eclipse.xtext.idea.example.entities.EntitiesStandaloneSetup
+import org.eclipse.xtext.web.example.statemachine.StatemachineRuntimeModule
+import org.eclipse.xtext.web.example.statemachine.StatemachineStandaloneSetup
 import org.eclipse.xtext.web.server.persistence.ResourceBaseProviderImpl
 import org.eclipse.xtext.web.servlet.XtextServlet
 
@@ -24,10 +26,20 @@ class MyXtextServlet extends XtextServlet {
 	override init() {
 		super.init()
 		executorService = Executors.newCachedThreadPool
+		val resourceBaseProvider = new ResourceBaseProviderImpl('./test-files')
+		new StatemachineStandaloneSetup {
+			override createInjector() {
+				val runtimeModule = new StatemachineRuntimeModule
+				val webModule = new StatemachineWebModule(executorService)
+				webModule.resourceBaseProvider = resourceBaseProvider
+				return Guice.createInjector(runtimeModule, webModule)
+			}
+		}.createInjectorAndDoEMFRegistration
 		new EntitiesStandaloneSetup {
 			override createInjector() {
 				val runtimeModule = new EntitiesRuntimeModule
-				val webModule = new EntitiesWebModule(executorService, new ResourceBaseProviderImpl('./test-files'))
+				val webModule = new EntitiesWebModule(executorService)
+				webModule.resourceBaseProvider = resourceBaseProvider
 				return Guice.createInjector(runtimeModule, webModule)
 			}
 		}.createInjectorAndDoEMFRegistration

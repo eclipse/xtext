@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Xtext Statemachine Web Example - IDE Features
+Bundle-Vendor: Eclipse Modeling Project
+Bundle-Version: 2.9.0.qualifier
+Bundle-SymbolicName: org.eclipse.xtext.web.example.statemachine.ide; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext.web.example.statemachine,
+ org.eclipse.xtext.ide;visibility:=reexport
+Import-Package: org.apache.log4j
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Export-Package: org.eclipse.xtext.web.example.statemachine.ide.contentassist.antlr,
+ org.eclipse.xtext.web.example.statemachine.ide.contentassist.antlr.internal

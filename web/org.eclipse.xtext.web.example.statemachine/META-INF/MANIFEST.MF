@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Xtext Statemachine Web Example - Runtime
+Bundle-Vendor: Eclipse Modeling Project
+Bundle-Version: 2.9.0.qualifier
+Bundle-SymbolicName: org.eclipse.xtext.web.example.statemachine; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext;visibility:=reexport,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.xtext.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.common,
+ org.eclipse.xtext.xbase.lib,
+ org.antlr.runtime
+Import-Package: org.apache.log4j
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Export-Package: org.eclipse.xtext.web.example.statemachine,
+ org.eclipse.xtext.web.example.statemachine.services,
+ org.eclipse.xtext.web.example.statemachine.statemachine,
+ org.eclipse.xtext.web.example.statemachine.statemachine.impl,
+ org.eclipse.xtext.web.example.statemachine.statemachine.util,
+ org.eclipse.xtext.web.example.statemachine.serializer,
+ org.eclipse.xtext.web.example.statemachine.parser.antlr,
+ org.eclipse.xtext.web.example.statemachine.parser.antlr.internal,
+ org.eclipse.xtext.web.example.statemachine.validation,
+ org.eclipse.xtext.web.example.statemachine.scoping,
+ org.eclipse.xtext.web.example.statemachine.generator,
+ org.eclipse.xtext.web.example.statemachine.formatting
+

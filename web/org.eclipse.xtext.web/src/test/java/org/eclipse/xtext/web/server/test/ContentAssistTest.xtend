@@ -28,18 +28,13 @@ class ContentAssistTest extends AbstractWebServerTest {
 	}
 	
 	@Test def testKeywords() {
-		'entity foo {} '.assertContentAssistResult(14, '''
+		''.assertContentAssistResult(0, '''
 			ContentAssistResult [
+			  stateId = "-80000000"
 			  entries = ArrayList (
 			    Entry [
 			      prefix = ""
-			      proposal = "entity"
-			      textReplacements = ArrayList ()
-			      editPositions = ArrayList ()
-			    ],
-			    Entry [
-			      prefix = ""
-			      proposal = "package"
+			      proposal = "state"
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
 			    ]
@@ -48,12 +43,13 @@ class ContentAssistTest extends AbstractWebServerTest {
 	}
 	
 	@Test def testKeywordWithPrefix() {
-		'entity foo {}'.assertContentAssistResult(3, '''
+		'sta'.assertContentAssistResult(3, '''
 			ContentAssistResult [
+			  stateId = "-80000000"
 			  entries = ArrayList (
 			    Entry [
-			      prefix = "ent"
-			      proposal = "entity"
+			      prefix = "sta"
+			      proposal = "state"
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
 			    ]
@@ -62,9 +58,10 @@ class ContentAssistTest extends AbstractWebServerTest {
 	}
 	
 	@Test def testIncorrectStateId() {
+		val file = createFile('state foo end')
 		val sessionStore = new HashMapSessionStore
 		val contentAssist = dispatcher.getService('/content-assist', #{
-				'fullText' -> 'entity foo {}',
+				'resource' -> file.name,
 				'caretOffset' -> '3',
 				'requiredStateId' -> 'totalerquatsch'
 			}, sessionStore)

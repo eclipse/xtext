@@ -15,11 +15,12 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.idea.example.entities.EntitiesRuntimeModule
-import org.eclipse.xtext.idea.example.entities.EntitiesStandaloneSetup
 import org.eclipse.xtext.junit4.AbstractXtextTests
+import org.eclipse.xtext.web.example.statemachine.StatemachineRuntimeModule
+import org.eclipse.xtext.web.example.statemachine.StatemachineStandaloneSetup
 import org.eclipse.xtext.web.server.XtextServiceDispatcher
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider
+import org.eclipse.xtext.web.server.test.languages.StatemachineWebModule
 
 @Accessors(PROTECTED_GETTER)
 class AbstractWebServerTest extends AbstractXtextTests {
@@ -39,17 +40,18 @@ class AbstractWebServerTest extends AbstractXtextTests {
 	XtextServiceDispatcher dispatcher
 	
 	protected def getRuntimeModule() {
-		new EntitiesRuntimeModule
+		new StatemachineRuntimeModule
 	}
 	
 	override void setUp() {
 		super.setUp()
 		executorService = Executors.newCachedThreadPool
 		resourceBaseProvider = new TestResourceBaseProvider
-		with(new EntitiesStandaloneSetup {
+		with(new StatemachineStandaloneSetup {
 			override createInjector() {
-				val ideModule = new EntitiesWebModule(executorService, resourceBaseProvider)
-				return Guice.createInjector(runtimeModule, ideModule)
+				val webModule = new StatemachineWebModule(executorService)
+				webModule.resourceBaseProvider = resourceBaseProvider
+				return Guice.createInjector(runtimeModule, webModule)
 			}
 		})
 		dispatcher = injector.getInstance(XtextServiceDispatcher)
@@ -61,7 +63,7 @@ class AbstractWebServerTest extends AbstractXtextTests {
 	}
 	
 	protected def createFile(String content) {
-		val file = File.createTempFile('test', '.entities')
+		val file = File.createTempFile('test', '.statemachine')
 		resourceBaseProvider.testFiles.put(file.name, URI.createFileURI(file.absolutePath))
 		val writer = new FileWriter(file)
 		writer.write(content)
