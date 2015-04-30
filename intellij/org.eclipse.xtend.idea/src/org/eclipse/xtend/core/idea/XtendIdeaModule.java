@@ -27,6 +27,7 @@ import org.eclipse.xtext.idea.presentation.ItemPresentationProvider;
 import org.eclipse.xtext.idea.structureview.XtextFileAwareStructureViewBuilder;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.parser.antlr.LexerProvider;
+import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
@@ -35,6 +36,8 @@ import org.eclipse.xtext.xbase.idea.filesystem.IdeaWorkspaceConfigProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
+import com.intellij.openapi.util.Key;
+import com.intellij.psi.util.PsiModificationTracker;
 
 public class XtendIdeaModule extends AbstractXtendIdeaModule {
 
@@ -89,6 +92,11 @@ public class XtendIdeaModule extends AbstractXtendIdeaModule {
 
 	public Class<? extends ILinker> bindILinker() {
 		return Linker.class;
+	}
+
+	@Override
+	public void configureGlobalModificationTracker(Binder binder) {
+		binder.bind(Key.class).annotatedWith(Names.named(BaseXtextFile.GLOBAL_MODIFICATION_COUNT)).toInstance(PsiModificationTracker.JAVA_STRUCTURE_MODIFICATION_COUNT);
 	}
 
 }
