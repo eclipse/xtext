@@ -38,13 +38,13 @@ class RegionAccessBuilderTest {
 		'''
 			1 foo
 		'''.toString.trim === '''
-			0 0 Hidden
-			    Start    Simple'foo' via Root
-			0 1 Semantic "1" Simple:'1'
-			1 1 Hidden   " " Whitespace:TerminalRule'WS'
-			2 3 Semantic "foo" Simple:name=ID
-			    End      Simple'foo' via Root
-			5 0 Hidden
+			0 0 H
+			    B Simple'foo'Root
+			0 1 S "1"        Simple:'1'
+			1 1 H " "        Whitespace:TerminalRule'WS'
+			2 3 S "foo"      Simple:name=ID
+			    E Simple'foo'Root
+			5 0 H
 		'''
 	}
 
@@ -52,15 +52,15 @@ class RegionAccessBuilderTest {
 		'''
 			2 foo
 		'''.toString.trim === '''
-			0 0 Hidden
-			    Start    Delegation via Root
-			0 1 Semantic "2" Delegation:'2'
-			1 1 Hidden   " " Whitespace:TerminalRule'WS'
-			    Start    delegate=Delegate'foo' via Delegation:delegate=Delegate
-			2 3 Semantic "foo" Delegate:name=ID
-			    End      delegate=Delegate'foo' via Delegation:delegate=Delegate
-			    End      Delegation via Root
-			5 0 Hidden
+			0 0 H
+			    B Delegation Root
+			0 1 S "2"        Delegation:'2'
+			1 1 H " "        Whitespace:TerminalRule'WS'
+			    B Delegate'foo'Delegation:delegate=Delegate path:Delegation/delegate
+			2 3 S "foo"      Delegate:name=ID
+			    E Delegate'foo'Delegation:delegate=Delegate path:Delegation/delegate
+			    E Delegation Root
+			5 0 H
 		'''
 	}
 
@@ -68,13 +68,13 @@ class RegionAccessBuilderTest {
 		'''
 			3 foo
 		'''.toString.trim === '''
-			0 0 Hidden
-			    Start    Delegate'foo' via Root
-			0 1 Semantic "3" Unassigned:'3'
-			1 1 Hidden   " " Whitespace:TerminalRule'WS'
-			2 3 Semantic "foo" Delegate:name=ID
-			    End      Delegate'foo' via Root
-			5 0 Hidden
+			0 0 H
+			    B Delegate'foo'Root
+			0 1 S "3"        Unassigned:'3'
+			1 1 H " "        Whitespace:TerminalRule'WS'
+			2 3 S "foo"      Delegate:name=ID
+			    E Delegate'foo'Root
+			5 0 H
 		'''
 	}
 
@@ -82,424 +82,428 @@ class RegionAccessBuilderTest {
 		'''
 			4 prefix foo
 		'''.toString.trim === '''
-			 0 0 Hidden
-			     Start    PrefixedUnassigned via Root
-			 0 1 Semantic "4" PrefixedUnassigned:'4'
-			 1 1 Hidden   " " Whitespace:TerminalRule'WS'
-			     Start    delegate=Delegate'foo' via PrefixedUnassigned:delegate=PrefixedDelegate
-			 2 6 Semantic "prefix" PrefixedDelegate:'prefix'
-			 8 1 Hidden   " " Whitespace:TerminalRule'WS'
-			 9 3 Semantic "foo" Delegate:name=ID
-			     End      delegate=Delegate'foo' via PrefixedUnassigned:delegate=PrefixedDelegate
-			     End      PrefixedUnassigned via Root
-			12 0 Hidden
+			 0 0 H
+			     B PrefixedUnassignedRoot
+			 0 1 S "4"        PrefixedUnassigned:'4'
+			 1 1 H " "        Whitespace:TerminalRule'WS'
+			     B Delegate'foo'PrefixedUnassigned:delegate=PrefixedDelegate path:PrefixedUnassigned/delegate
+			 2 6 S "prefix"   PrefixedDelegate:'prefix'
+			 8 1 H " "        Whitespace:TerminalRule'WS'
+			 9 3 S "foo"      Delegate:name=ID
+			     E Delegate'foo'PrefixedUnassigned:delegate=PrefixedDelegate path:PrefixedUnassigned/delegate
+			     E PrefixedUnassignedRoot
+			12 0 H
 		'''
 	}
-	
+
 	@Test def void testExpression1() {
 		'''
 			5 a + b
 		'''.toString.trim === '''
-			0 0 Hidden
-			    Start    Add via Root
-			0 1 Semantic "5" Root:'5'
-			1 1 Hidden   " " Whitespace:TerminalRule'WS'
-			    Start    left=Named'a' via Expression:{Add.left=}
-			2 1 Semantic "a" Primary:name=ID
-			    End      left=Named'a' via Expression:{Add.left=}
-			3 1 Hidden   " " Whitespace:TerminalRule'WS'
-			4 1 Semantic "+" Expression:'+'
-			5 1 Hidden   " " Whitespace:TerminalRule'WS'
-			    Start    right=Named'b' via Expression:right=Primary
-			6 1 Semantic "b" Primary:name=ID
-			    End      right=Named'b' via Expression:right=Primary
-			    End      Add via Root
-			7 0 Hidden
+			0 0 H
+			    B Add        Root
+			0 1 S "5"        Root:'5'
+			1 1 H " "        Whitespace:TerminalRule'WS'
+			    B Named'a'   Expression:{Add.left=} path:Add/left
+			2 1 S "a"        Primary:name=ID
+			    E Named'a'   Expression:{Add.left=} path:Add/left
+			3 1 H " "        Whitespace:TerminalRule'WS'
+			4 1 S "+"        Expression:'+'
+			5 1 H " "        Whitespace:TerminalRule'WS'
+			    B Named'b'   Expression:right=Primary path:Add/right
+			6 1 S "b"        Primary:name=ID
+			    E Named'b'   Expression:right=Primary path:Add/right
+			    E Add        Root
+			7 0 H
 		'''
 	}
-	
+
 	@Test def void testExpression2() {
 		'''
 			5 (a + b) + c
 		'''.toString.trim === '''
-			 0 0 Hidden
-			     Start    Add via Root
-			 0 1 Semantic "5" Root:'5'
-			 1 1 Hidden   " " Whitespace:TerminalRule'WS'
-			     Start    left=Add via Expression:{Add.left=}
-			 2 1 Semantic "(" Parenthesized:'('
-			 3 0 Hidden
-			     Start    left=Named'a' via Expression:{Add.left=}
-			 3 1 Semantic "a" Primary:name=ID
-			     End      left=Named'a' via Expression:{Add.left=}
-			 4 1 Hidden   " " Whitespace:TerminalRule'WS'
-			 5 1 Semantic "+" Expression:'+'
-			 6 1 Hidden   " " Whitespace:TerminalRule'WS'
-			     Start    right=Named'b' via Expression:right=Primary
-			 7 1 Semantic "b" Primary:name=ID
-			     End      right=Named'b' via Expression:right=Primary
-			 8 0 Hidden
-			 8 1 Semantic ")" Parenthesized:')'
-			     End      left=Add via Expression:{Add.left=}
-			 9 1 Hidden   " " Whitespace:TerminalRule'WS'
-			10 1 Semantic "+" Expression:'+'
-			11 1 Hidden   " " Whitespace:TerminalRule'WS'
-			     Start    right=Named'c' via Expression:right=Primary
-			12 1 Semantic "c" Primary:name=ID
-			     End      right=Named'c' via Expression:right=Primary
-			     End      Add via Root
-			13 0 Hidden
+			 0 0 H
+			     B Add        Root
+			 0 1 S "5"        Root:'5'
+			 1 1 H " "        Whitespace:TerminalRule'WS'
+			     B Add        Expression:{Add.left=} path:Add/left
+			 2 1 S "("        Parenthesized:'('
+			 3 0 H
+			     B Named'a'   Expression:{Add.left=} path:Add/left=Add/left
+			 3 1 S "a"        Primary:name=ID
+			     E Named'a'   Expression:{Add.left=} path:Add/left=Add/left
+			 4 1 H " "        Whitespace:TerminalRule'WS'
+			 5 1 S "+"        Expression:'+'
+			 6 1 H " "        Whitespace:TerminalRule'WS'
+			     B Named'b'   Expression:right=Primary path:Add/right=Add/right
+			 7 1 S "b"        Primary:name=ID
+			     E Named'b'   Expression:right=Primary path:Add/right=Add/right
+			 8 0 H
+			 8 1 S ")"        Parenthesized:')'
+			     E Add        Expression:{Add.left=} path:Add/left
+			 9 1 H " "        Whitespace:TerminalRule'WS'
+			10 1 S "+"        Expression:'+'
+			11 1 H " "        Whitespace:TerminalRule'WS'
+			     B Named'c'   Expression:right=Primary path:Add/right
+			12 1 S "c"        Primary:name=ID
+			     E Named'c'   Expression:right=Primary path:Add/right
+			     E Add        Root
+			13 0 H
 		'''
 	}
-	
+
 	@Test def void testMixedUnassignedTerminal() {
 		'''
 			6 (unassigned foo)
 		'''.toString.trim === '''
-			 0  0 Hidden
-			      Start    Action via Root
-			 0  1 Semantic "6" Root:'6'
-			 1  1 Hidden   " " Whitespace:TerminalRule'WS'
-			 2  1 Semantic "(" Mixed:'('
-			 3  0 Hidden
-			 3 10 Semantic "unassigned" Mixed:'unassigned'
-			13  1 Hidden   " " Whitespace:TerminalRule'WS'
-			14  3 Semantic "foo" Mixed:ID
-			17  0 Hidden
-			17  1 Semantic ")" Mixed:')'
-			      End      Action via Root
-			18  0 Hidden
+			 0  0 H
+			      B Action     Root
+			 0  1 S "6"        Root:'6'
+			 1  1 H " "        Whitespace:TerminalRule'WS'
+			 2  1 S "("        Mixed:'('
+			 3  0 H
+			 3 10 S "unass..." Mixed:'unassigned'
+			13  1 H " "        Whitespace:TerminalRule'WS'
+			14  3 S "foo"      Mixed:ID
+			17  0 H
+			17  1 S ")"        Mixed:')'
+			      E Action     Root
+			18  0 H
 		'''
 	}
-	
+
 	@Test def void testMixedUnassignedDatatype1() {
 		'''
 			6 (unassigned datatype foo)
 		'''.toString.trim === '''
-			 0  0 Hidden
-			      Start    Action via Root
-			 0  1 Semantic "6" Root:'6'
-			 1  1 Hidden   " " Whitespace:TerminalRule'WS'
-			 2  1 Semantic "(" Mixed:'('
-			 3  0 Hidden
-			 3 10 Semantic "unassigned" Mixed:'unassigned'
-			13  1 Hidden   " " Whitespace:TerminalRule'WS'
-			14 12 Semantic "datatyp..." Mixed:Datatype
-			26  0 Hidden
-			26  1 Semantic ")" Mixed:')'
-			      End      Action via Root
-			27  0 Hidden
+			 0  0 H
+			      B Action     Root
+			 0  1 S "6"        Root:'6'
+			 1  1 H " "        Whitespace:TerminalRule'WS'
+			 2  1 S "("        Mixed:'('
+			 3  0 H
+			 3 10 S "unass..." Mixed:'unassigned'
+			13  1 H " "        Whitespace:TerminalRule'WS'
+			14 12 S "datat..." Mixed:Datatype
+			26  0 H
+			26  1 S ")"        Mixed:')'
+			      E Action     Root
+			27  0 H
 		'''
 	}
-	
+
 	@Test def void testMixedUnassignedDatatype2() {
 		'''
 			6 (unassigned datatype datatype foo)
 		'''.toString.trim === '''
-			 0  0 Hidden
-			      Start    Action via Root
-			 0  1 Semantic "6" Root:'6'
-			 1  1 Hidden   " " Whitespace:TerminalRule'WS'
-			 2  1 Semantic "(" Mixed:'('
-			 3  0 Hidden
-			 3 10 Semantic "unassigned" Mixed:'unassigned'
-			13  1 Hidden   " " Whitespace:TerminalRule'WS'
-			14 21 Semantic "datatyp..." Mixed:Datatype
-			35  0 Hidden
-			35  1 Semantic ")" Mixed:')'
-			      End      Action via Root
-			36  0 Hidden
+			 0  0 H
+			      B Action     Root
+			 0  1 S "6"        Root:'6'
+			 1  1 H " "        Whitespace:TerminalRule'WS'
+			 2  1 S "("        Mixed:'('
+			 3  0 H
+			 3 10 S "unass..." Mixed:'unassigned'
+			13  1 H " "        Whitespace:TerminalRule'WS'
+			14 21 S "datat..." Mixed:Datatype
+			35  0 H
+			35  1 S ")"        Mixed:')'
+			      E Action     Root
+			36  0 H
 		'''
 	}
-	
+
 	@Test def void testAction() {
 		'''
 			6 ()
 		'''.toString.trim === '''
-			0 0 Hidden
-			    Start    Action via Root
-			0 1 Semantic "6" Root:'6'
-			1 1 Hidden   " " Whitespace:TerminalRule'WS'
-			2 1 Semantic "(" Mixed:'('
-			3 0 Hidden
-			3 1 Semantic ")" Mixed:')'
-			    End      Action via Root
-			4 0 Hidden
+			0 0 H
+			    B Action     Root
+			0 1 S "6"        Root:'6'
+			1 1 H " "        Whitespace:TerminalRule'WS'
+			2 1 S "("        Mixed:'('
+			3 0 H
+			3 1 S ")"        Mixed:')'
+			    E Action     Root
+			4 0 H
 		'''
 	}
-	
+
 	@Test def void testActionDelegate() {
 		'''
 			6 (())
 		'''.toString.trim === '''
-			0 0 Hidden
-			    Start    Action via Root
-			0 1 Semantic "6" Root:'6'
-			1 1 Hidden   " " Whitespace:TerminalRule'WS'
-			2 1 Semantic "(" Mixed:'('
-			3 0 Hidden
-			3 1 Semantic "(" Mixed:'('
-			4 0 Hidden
-			4 1 Semantic ")" Mixed:')'
-			5 0 Hidden
-			5 1 Semantic ")" Mixed:')'
-			    End      Action via Root
-			6 0 Hidden
+			0 0 H
+			    B Action     Root
+			0 1 S "6"        Root:'6'
+			1 1 H " "        Whitespace:TerminalRule'WS'
+			2 1 S "("        Mixed:'('
+			3 0 H
+			3 1 S "("        Mixed:'('
+			4 0 H
+			4 1 S ")"        Mixed:')'
+			5 0 H
+			5 1 S ")"        Mixed:')'
+			    E Action     Root
+			6 0 H
 		'''
 	}
-	
+
 	@Test def void testActionDelegate2() {
 		'''
 			6 ((()))
 		'''.toString.trim === '''
-			0 0 Hidden
-			    Start    Action via Root
-			0 1 Semantic "6" Root:'6'
-			1 1 Hidden   " " Whitespace:TerminalRule'WS'
-			2 1 Semantic "(" Mixed:'('
-			3 0 Hidden
-			3 1 Semantic "(" Mixed:'('
-			4 0 Hidden
-			4 1 Semantic "(" Mixed:'('
-			5 0 Hidden
-			5 1 Semantic ")" Mixed:')'
-			6 0 Hidden
-			6 1 Semantic ")" Mixed:')'
-			7 0 Hidden
-			7 1 Semantic ")" Mixed:')'
-			    End      Action via Root
-			8 0 Hidden
+			0 0 H
+			    B Action     Root
+			0 1 S "6"        Root:'6'
+			1 1 H " "        Whitespace:TerminalRule'WS'
+			2 1 S "("        Mixed:'('
+			3 0 H
+			3 1 S "("        Mixed:'('
+			4 0 H
+			4 1 S "("        Mixed:'('
+			5 0 H
+			5 1 S ")"        Mixed:')'
+			6 0 H
+			6 1 S ")"        Mixed:')'
+			7 0 H
+			7 1 S ")"        Mixed:')'
+			    E Action     Root
+			8 0 H
 		'''
 	}
-	
+
 	@Test def void testAssignmentDelegate2() {
 		'''
 			6 (((foo)))
 		'''.toString.trim === '''
-			 0 0 Hidden
-			     Start    Mixed'foo' via Root
-			 0 1 Semantic "6" Root:'6'
-			 1 1 Hidden   " " Whitespace:TerminalRule'WS'
-			 2 1 Semantic "(" Mixed:'('
-			 3 0 Hidden
-			 3 1 Semantic "(" Mixed:'('
-			 4 0 Hidden
-			 4 1 Semantic "(" Mixed:'('
-			 5 0 Hidden
-			 5 3 Semantic "foo" Mixed:name=ID
-			 8 0 Hidden
-			 8 1 Semantic ")" Mixed:')'
-			 9 0 Hidden
-			 9 1 Semantic ")" Mixed:')'
-			10 0 Hidden
-			10 1 Semantic ")" Mixed:')'
-			     End      Mixed'foo' via Root
-			11 0 Hidden
+			 0 0 H
+			     B Mixed'foo' Root
+			 0 1 S "6"        Root:'6'
+			 1 1 H " "        Whitespace:TerminalRule'WS'
+			 2 1 S "("        Mixed:'('
+			 3 0 H
+			 3 1 S "("        Mixed:'('
+			 4 0 H
+			 4 1 S "("        Mixed:'('
+			 5 0 H
+			 5 3 S "foo"      Mixed:name=ID
+			 8 0 H
+			 8 1 S ")"        Mixed:')'
+			 9 0 H
+			 9 1 S ")"        Mixed:')'
+			10 0 H
+			10 1 S ")"        Mixed:')'
+			     E Mixed'foo' Root
+			11 0 H
 		'''
 	}
-	
+
 	@Test def void testAssignmentChildDelegate2() {
 		'''
 			6 (child(((foo))))
 		'''.toString.trim === '''
-			 0 0 Hidden
-			     Start    Mixed via Root
-			 0 1 Semantic "6" Root:'6'
-			 1 1 Hidden   " " Whitespace:TerminalRule'WS'
-			 2 1 Semantic "(" Mixed:'('
-			 3 0 Hidden
-			 3 5 Semantic "child" Mixed:'child'
-			 8 0 Hidden
-			     Start    eobj=Mixed'foo' via Mixed:eobj=Mixed
-			 8 1 Semantic "(" Mixed:'('
-			 9 0 Hidden
-			 9 1 Semantic "(" Mixed:'('
-			10 0 Hidden
-			10 1 Semantic "(" Mixed:'('
-			11 0 Hidden
-			11 3 Semantic "foo" Mixed:name=ID
-			14 0 Hidden
-			14 1 Semantic ")" Mixed:')'
-			15 0 Hidden
-			15 1 Semantic ")" Mixed:')'
-			16 0 Hidden
-			16 1 Semantic ")" Mixed:')'
-			     End      eobj=Mixed'foo' via Mixed:eobj=Mixed
-			17 0 Hidden
-			17 1 Semantic ")" Mixed:')'
-			     End      Mixed via Root
-			18 0 Hidden
+			 0 0 H
+			     B Mixed      Root
+			 0 1 S "6"        Root:'6'
+			 1 1 H " "        Whitespace:TerminalRule'WS'
+			 2 1 S "("        Mixed:'('
+			 3 0 H
+			 3 5 S "child"    Mixed:'child'
+			 8 0 H
+			     B Mixed'foo' Mixed:eobj=Mixed path:Mixed/eobj
+			 8 1 S "("        Mixed:'('
+			 9 0 H
+			 9 1 S "("        Mixed:'('
+			10 0 H
+			10 1 S "("        Mixed:'('
+			11 0 H
+			11 3 S "foo"      Mixed:name=ID
+			14 0 H
+			14 1 S ")"        Mixed:')'
+			15 0 H
+			15 1 S ")"        Mixed:')'
+			16 0 H
+			16 1 S ")"        Mixed:')'
+			     E Mixed'foo' Mixed:eobj=Mixed path:Mixed/eobj
+			17 0 H
+			17 1 S ")"        Mixed:')'
+			     E Mixed      Root
+			18 0 H
 		'''
 	}
-	
+
 	@Test def void testAssignedDatatype() {
 		'''
 			6 (datatype foo)
 		'''.toString.trim === '''
-			 0  0 Hidden
-			      Start    Mixed via Root
-			 0  1 Semantic "6" Root:'6'
-			 1  1 Hidden   " " Whitespace:TerminalRule'WS'
-			 2  1 Semantic "(" Mixed:'('
-			 3  0 Hidden
-			 3 12 Semantic "datatyp..." Mixed:datatype=Datatype
-			15  0 Hidden
-			15  1 Semantic ")" Mixed:')'
-			      End      Mixed via Root
-			16  0 Hidden
+			 0  0 H
+			      B Mixed      Root
+			 0  1 S "6"        Root:'6'
+			 1  1 H " "        Whitespace:TerminalRule'WS'
+			 2  1 S "("        Mixed:'('
+			 3  0 H
+			 3 12 S "datat..." Mixed:datatype=Datatype
+			15  0 H
+			15  1 S ")"        Mixed:')'
+			      E Mixed      Root
+			16  0 H
 		'''
 	}
-	
+
 	@Test def void testAssignedDatatype2() {
 		'''
 			6 (datatype datatype foo)
 		'''.toString.trim === '''
-			 0  0 Hidden
-			      Start    Mixed via Root
-			 0  1 Semantic "6" Root:'6'
-			 1  1 Hidden   " " Whitespace:TerminalRule'WS'
-			 2  1 Semantic "(" Mixed:'('
-			 3  0 Hidden
-			 3 21 Semantic "datatyp..." Mixed:datatype=Datatype
-			24  0 Hidden
-			24  1 Semantic ")" Mixed:')'
-			      End      Mixed via Root
-			25  0 Hidden
+			 0  0 H
+			      B Mixed      Root
+			 0  1 S "6"        Root:'6'
+			 1  1 H " "        Whitespace:TerminalRule'WS'
+			 2  1 S "("        Mixed:'('
+			 3  0 H
+			 3 21 S "datat..." Mixed:datatype=Datatype
+			24  0 H
+			24  1 S ")"        Mixed:')'
+			      E Mixed      Root
+			25  0 H
 		'''
 	}
-	
+
 	@Test def void testRef() {
 		'''
 			6 (foo) action (ref foo) end
 		'''.toString.trim === '''
-			 0 0 Hidden
-			     Start    AssignedAction via Root
-			 0 1 Semantic "6" Root:'6'
-			 1 1 Hidden   " " Whitespace:TerminalRule'WS'
-			     Start    child=Mixed'foo' via Mixed:{AssignedAction.child=}
-			 2 1 Semantic "(" Mixed:'('
-			 3 0 Hidden
-			 3 3 Semantic "foo" Mixed:name=ID
-			 6 0 Hidden
-			 6 1 Semantic ")" Mixed:')'
-			     End      child=Mixed'foo' via Mixed:{AssignedAction.child=}
-			 7 1 Hidden   " " Whitespace:TerminalRule'WS'
-			 8 6 Semantic "action" Mixed:'action'
-			14 1 Hidden   " " Whitespace:TerminalRule'WS'
-			     Start    body=Mixed via Mixed:body=Mixed
-			15 1 Semantic "(" Mixed:'('
-			16 0 Hidden
-			16 3 Semantic "ref" Mixed:'ref'
-			19 1 Hidden   " " Whitespace:TerminalRule'WS'
-			20 3 Semantic "foo" Mixed:ref=[Mixed|ID]
-			23 0 Hidden
-			23 1 Semantic ")" Mixed:')'
-			     End      body=Mixed via Mixed:body=Mixed
-			24 1 Hidden   " " Whitespace:TerminalRule'WS'
-			25 3 Semantic "end" Mixed:'end'
-			     End      AssignedAction via Root
-			28 0 Hidden
+			 0 0 H
+			     B AssignedActionRoot
+			 0 1 S "6"        Root:'6'
+			 1 1 H " "        Whitespace:TerminalRule'WS'
+			     B Mixed'foo' Mixed:{AssignedAction.child=} path:AssignedAction/child
+			 2 1 S "("        Mixed:'('
+			 3 0 H
+			 3 3 S "foo"      Mixed:name=ID
+			 6 0 H
+			 6 1 S ")"        Mixed:')'
+			     E Mixed'foo' Mixed:{AssignedAction.child=} path:AssignedAction/child
+			 7 1 H " "        Whitespace:TerminalRule'WS'
+			 8 6 S "action"   Mixed:'action'
+			14 1 H " "        Whitespace:TerminalRule'WS'
+			     B Mixed      Mixed:body=Mixed path:AssignedAction/body
+			15 1 S "("        Mixed:'('
+			16 0 H
+			16 3 S "ref"      Mixed:'ref'
+			19 1 H " "        Whitespace:TerminalRule'WS'
+			20 3 S "foo"      Mixed:ref=[Mixed|ID]
+			23 0 H
+			23 1 S ")"        Mixed:')'
+			     E Mixed      Mixed:body=Mixed path:AssignedAction/body
+			24 1 H " "        Whitespace:TerminalRule'WS'
+			25 3 S "end"      Mixed:'end'
+			     E AssignedActionRoot
+			28 0 H
 		'''
 	}
-	
+
 	@Test def void testEnum() {
 		'''
 			6 (lit1)
 		'''.toString.trim === '''
-			0 0 Hidden
-			    Start    Mixed via Root
-			0 1 Semantic "6" Root:'6'
-			1 1 Hidden   " " Whitespace:TerminalRule'WS'
-			2 1 Semantic "(" Mixed:'('
-			3 0 Hidden
-			3 4 Semantic "lit1" Mixed:lit=Enum
-			7 0 Hidden
-			7 1 Semantic ")" Mixed:')'
-			    End      Mixed via Root
-			8 0 Hidden
+			0 0 H
+			    B Mixed      Root
+			0 1 S "6"        Root:'6'
+			1 1 H " "        Whitespace:TerminalRule'WS'
+			2 1 S "("        Mixed:'('
+			3 0 H
+			3 4 S "lit1"     Mixed:lit=Enum
+			7 0 H
+			7 1 S ")"        Mixed:')'
+			    E Mixed      Root
+			8 0 H
 		'''
 	}
-	
+
 	@Test def void testAssignmentAction() {
 		'''
 			6 (foo) action
 		'''.toString.trim === '''
-			 0 0 Hidden
-			     Start    AssignedAction via Root
-			 0 1 Semantic "6" Root:'6'
-			 1 1 Hidden   " " Whitespace:TerminalRule'WS'
-			     Start    child=Mixed'foo' via Mixed:{AssignedAction.child=}
-			 2 1 Semantic "(" Mixed:'('
-			 3 0 Hidden
-			 3 3 Semantic "foo" Mixed:name=ID
-			 6 0 Hidden
-			 6 1 Semantic ")" Mixed:')'
-			     End      child=Mixed'foo' via Mixed:{AssignedAction.child=}
-			 7 1 Hidden   " " Whitespace:TerminalRule'WS'
-			 8 6 Semantic "action" Mixed:'action'
-			     End      AssignedAction via Root
-			14 0 Hidden
+			 0 0 H
+			     B AssignedActionRoot
+			 0 1 S "6"        Root:'6'
+			 1 1 H " "        Whitespace:TerminalRule'WS'
+			     B Mixed'foo' Mixed:{AssignedAction.child=} path:AssignedAction/child
+			 2 1 S "("        Mixed:'('
+			 3 0 H
+			 3 3 S "foo"      Mixed:name=ID
+			 6 0 H
+			 6 1 S ")"        Mixed:')'
+			     E Mixed'foo' Mixed:{AssignedAction.child=} path:AssignedAction/child
+			 7 1 H " "        Whitespace:TerminalRule'WS'
+			 8 6 S "action"   Mixed:'action'
+			     E AssignedActionRoot
+			14 0 H
 		'''
 	}
-	
+
 	@Test def void testAssignmentActionAction() {
 		'''
 			6 (foo) action action
 		'''.toString.trim === '''
-			 0 0 Hidden
-			     Start    AssignedAction via Root
-			 0 1 Semantic "6" Root:'6'
-			 1 1 Hidden   " " Whitespace:TerminalRule'WS'
-			     Start    child=AssignedAction via Mixed:{AssignedAction.child=}
-			     Start    child=Mixed'foo' via Mixed:{AssignedAction.child=}
-			 2 1 Semantic "(" Mixed:'('
-			 3 0 Hidden
-			 3 3 Semantic "foo" Mixed:name=ID
-			 6 0 Hidden
-			 6 1 Semantic ")" Mixed:')'
-			     End      child=Mixed'foo' via Mixed:{AssignedAction.child=}
-			 7 1 Hidden   " " Whitespace:TerminalRule'WS'
-			 8 6 Semantic "action" Mixed:'action'
-			     End      child=AssignedAction via Mixed:{AssignedAction.child=}
-			14 1 Hidden   " " Whitespace:TerminalRule'WS'
-			15 6 Semantic "action" Mixed:'action'
-			     End      AssignedAction via Root
-			21 0 Hidden
+			 0 0 H
+			     B AssignedActionRoot
+			 0 1 S "6"        Root:'6'
+			 1 1 H " "        Whitespace:TerminalRule'WS'
+			     B AssignedActionMixed:{AssignedAction.child=} path:AssignedAction/child
+			     B Mixed'foo' Mixed:{AssignedAction.child=} path:AssignedAction/child=AssignedAction/child
+			 2 1 S "("        Mixed:'('
+			 3 0 H
+			 3 3 S "foo"      Mixed:name=ID
+			 6 0 H
+			 6 1 S ")"        Mixed:')'
+			     E Mixed'foo' Mixed:{AssignedAction.child=} path:AssignedAction/child=AssignedAction/child
+			 7 1 H " "        Whitespace:TerminalRule'WS'
+			 8 6 S "action"   Mixed:'action'
+			     E AssignedActionMixed:{AssignedAction.child=} path:AssignedAction/child
+			14 1 H " "        Whitespace:TerminalRule'WS'
+			15 6 S "action"   Mixed:'action'
+			     E AssignedActionRoot
+			21 0 H
 		'''
 	}
-	
+
 	@Test def void testActionActionAction() {
 		'''
 			6 () action action
 		'''.toString.trim === '''
-			 0 0 Hidden
-			     Start    AssignedAction via Root
-			 0 1 Semantic "6" Root:'6'
-			 1 1 Hidden   " " Whitespace:TerminalRule'WS'
-			     Start    child=AssignedAction via Mixed:{AssignedAction.child=}
-			     Start    child=Action via Mixed:{AssignedAction.child=}
-			 2 1 Semantic "(" Mixed:'('
-			 3 0 Hidden
-			 3 1 Semantic ")" Mixed:')'
-			     End      child=Action via Mixed:{AssignedAction.child=}
-			 4 1 Hidden   " " Whitespace:TerminalRule'WS'
-			 5 6 Semantic "action" Mixed:'action'
-			     End      child=AssignedAction via Mixed:{AssignedAction.child=}
-			11 1 Hidden   " " Whitespace:TerminalRule'WS'
-			12 6 Semantic "action" Mixed:'action'
-			     End      AssignedAction via Root
-			18 0 Hidden
+			 0 0 H
+			     B AssignedActionRoot
+			 0 1 S "6"        Root:'6'
+			 1 1 H " "        Whitespace:TerminalRule'WS'
+			     B AssignedActionMixed:{AssignedAction.child=} path:AssignedAction/child
+			     B Action     Mixed:{AssignedAction.child=} path:AssignedAction/child=AssignedAction/child
+			 2 1 S "("        Mixed:'('
+			 3 0 H
+			 3 1 S ")"        Mixed:')'
+			     E Action     Mixed:{AssignedAction.child=} path:AssignedAction/child=AssignedAction/child
+			 4 1 H " "        Whitespace:TerminalRule'WS'
+			 5 6 S "action"   Mixed:'action'
+			     E AssignedActionMixed:{AssignedAction.child=} path:AssignedAction/child
+			11 1 H " "        Whitespace:TerminalRule'WS'
+			12 6 S "action"   Mixed:'action'
+			     E AssignedActionRoot
+			18 0 H
 		'''
 	}
-	
+
 	private def ===(CharSequence file, CharSequence expectation) {
 		val exp = expectation.toString
 		val obj = parseHelper.parse(file)
 		validationTestHelper.assertNoErrors(obj)
 		val access1 = obj.createFromNodeModel
 		val access2 = obj.serializeToRegions
-		Assert.assertEquals(exp, new TextRegionAccessToString().withRegionAccess(access1).hideColumnExplanation() + "\n")
-		Assert.assertEquals(exp, new TextRegionAccessToString().withRegionAccess(access2).hideColumnExplanation() + "\n")
+		Assert.assertEquals(exp, new TextRegionAccessToString().withRegionAccess(access1).cfg() + "\n")
+		Assert.assertEquals(exp, new TextRegionAccessToString().withRegionAccess(access2).cfg() + "\n")
+	}
+
+	private def TextRegionAccessToString cfg(TextRegionAccessToString toStr) {
+		toStr.hideColumnExplanation().withTextWidth(10)
 	}
 
 	private def createFromNodeModel(EObject obj) {

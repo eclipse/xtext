@@ -71,12 +71,13 @@ public class TextRegionAccessToString {
 		};
 	}
 
-	private static final int TITLE_WIDTH = 9;
-	private static final String EOBJECT_END_PADDED = Strings.padEnd("End", TITLE_WIDTH, ' ');
-	private static final String EOBJECT_START_PADDED = Strings.padEnd("Start", TITLE_WIDTH, ' ');
-	private static final String HIDDEN = "Hidden";
+	private static final int TITLE_WIDTH = 2;
+	private static final String EMPTY_TITLE = Strings.repeat(" ", TITLE_WIDTH);
+	private static final String EOBJECT_BEGIN_PADDED = Strings.padEnd("B", TITLE_WIDTH, ' ');
+	private static final String EOBJECT_END_PADDED = Strings.padEnd("E", TITLE_WIDTH, ' ');
+	private static final String HIDDEN = "H";
 	private static final String HIDDEN_PADDED = Strings.padEnd(HIDDEN, TITLE_WIDTH, ' ');
-	private static final String SEMANTIC_PADDED = Strings.padEnd("Semantic", TITLE_WIDTH, ' ');
+	private static final String SEMANTIC_PADDED = Strings.padEnd("S", TITLE_WIDTH, ' ');
 
 	private Function<AbstractElement, String> grammarToString = new GrammarElementTitleSwitch().showRule()
 			.showAssignments().showQualified();
@@ -86,6 +87,12 @@ public class TextRegionAccessToString {
 	private boolean hightlightOrigin = false;
 
 	private ITextSegment origin;
+
+	private int textWidth = 20;
+
+	public int getTextWidth() {
+		return textWidth;
+	}
 
 	public TextRegionAccessToString hideColumnExplanation() {
 		this.hideColumnExplanation = true;
@@ -105,13 +112,26 @@ public class TextRegionAccessToString {
 		return hightlightOrigin;
 	}
 
-	protected String quote(String string, int maxLength) {
+	protected String quote(String string) {
 		if (string == null)
 			return "null";
-		if (string.length() > maxLength)
-			string = string.substring(0, maxLength - 3) + "...";
-		string = string.replace("\n", "\\n").replace("\r", "\\r");
-		return "\"" + string + "\"";
+		string = string.replace("\n", "\\n").replace("\r", "\\r").replace("\t", "\\t");
+		int textLen = textWidth - 2;
+		if (string.length() > textLen)
+			return "\"" + string.substring(0, textLen - 3) + "...\"";
+		else
+			return Strings.padEnd("\"" + string + "\"", textWidth, ' ');
+	}
+
+	protected String toClassWithName(EObject obj) {
+		String className = obj.eClass().getName();
+		EStructuralFeature nameFeature = obj.eClass().getEStructuralFeature("name");
+		if (nameFeature != null) {
+			Object name = obj.eGet(nameFeature);
+			if (name != null)
+				return className + "'" + name + "'";
+		}
+		return className;
 	}
 
 	@Override
@@ -143,8 +163,9 @@ public class TextRegionAccessToString {
 		}
 		TextRegionListToString result = new TextRegionListToString();
 		if (!hideColumnExplanation) {
-			String explanation = "Columns: 1:offset; 2:length; 3:hidden/semantic; 4: text; 5..n:grammar elements or whispace/comments";
-			result.add(explanation, false);
+			result.add("Columns: 1:offset 2:length 3:kind 4: text 5:grammarElement", false);
+			result.add("Kind: H=IHiddenRegion S=ISemanticRegion B/E=IEObjectRegion", false);
+			result.add("", false);
 		}
 		for (String error : errors)
 			result.add(error, false);
@@ -158,7 +179,7 @@ public class TextRegionAccessToString {
 					boolean p = obj.getNextHiddenRegion().equals(region);
 					boolean n = obj.getPreviousHiddenRegion().equals(region);
 					if (p && n)
-						middle.add("Semantic " + toString(obj));
+						middle.add(EMPTY_TITLE + "Semantic " + toString(obj));
 					else if (p)
 						previous.add(obj);
 					else if (n)
@@ -169,10 +190,9 @@ public class TextRegionAccessToString {
 			}
 			for (IEObjectRegion obj : previous)
 				result.add(EOBJECT_END_PADDED + toString(obj));
-
-			result.add(region, Joiner.on(", ").join(middle));
+			result.add(region, Joiner.on("\n").join(middle));
 			for (IEObjectRegion obj : next)
-				result.add(EOBJECT_START_PADDED + toString(obj));
+				result.add(EOBJECT_BEGIN_PADDED + toString(obj));
 		}
 		return result.toString();
 	}
@@ -190,52 +210,57 @@ public class TextRegionAccessToString {
 	}
 
 	protected String toString(IComment comment) {
-		String text = quote(comment.getText(), 10);
+		String text = quote(comment.getText());
 		String gammar = toString(comment.getGrammarElement());
 		return String.format("%s Comment:%s", text, gammar);
 	}
 
 	protected String toString(IEObjectRegion region) {
 		EObject obj = region.getSemanticElement();
-		StringBuilder builder = new StringBuilder();
-		EStructuralFeature containingFeature = obj.eContainingFeature();
-		if (containingFeature != null) {
-			builder.append(containingFeature.getName());
-			if (containingFeature.isMany()) {
-				int index = ((List<?>) obj.eContainer().eGet(containingFeature)).indexOf(obj);
-				builder.append("[" + index + "]");
-			}
-			builder.append("=");
-		}
-		builder.append(obj.eClass().getName());
-		EStructuralFeature nameFeature = obj.eClass().getEStructuralFeature("name");
-		if (nameFeature != null) {
-			Object name = obj.eGet(nameFeature);
-			if (name != null)
-				builder.append("'" + name + "'");
-		}
+		StringBuilder builder = new StringBuilder(Strings.padEnd(toClassWithName(obj), textWidth + 1, ' '));
 		EObject element = region.getGrammarElement();
 		if (element instanceof AbstractElement)
-			builder.append(" via " + grammarToString.apply((AbstractElement) element));
+			builder.append(grammarToString.apply((AbstractElement) element));
 		else if (element instanceof AbstractRule)
-			builder.append(" via " + ((AbstractRule) element).getName());
+			builder.append(((AbstractRule) element).getName());
 		else
-			builder.append(": ERROR: EObject has no grammar element.");
+			builder.append(": ERROR: No grammar element.");
+		List<String> segments = Lists.newArrayList();
+		EObject current = obj;
+		while (current.eContainer() != null) {
+			EObject container = current.eContainer();
+			EStructuralFeature containingFeature = current.eContainingFeature();
+			StringBuilder segment = new StringBuilder();
+			segment.append(toClassWithName(container));
+			segment.append("/");
+			segment.append(containingFeature.getName());
+			if (containingFeature.isMany()) {
+				int index = ((List<?>) container.eGet(containingFeature)).indexOf(current);
+				segment.append("[" + index + "]");
+			}
+			current = container;
+			segments.add(segment.toString());
+		}
+		if (!segments.isEmpty()) {
+			builder.append(" path:");
+			builder.append(Joiner.on("=").join(segments));
+		}
 		return builder.toString();
 	}
 
-	protected String toString(IHiddenRegion gap) {
-		List<IHiddenRegionPart> whitespaceAndComments = gap.getParts();
-		List<String> children = Lists.newArrayListWithExpectedSize(whitespaceAndComments.size());
-		for (IHiddenRegionPart hidden : gap.getParts())
-			children.add(toString(hidden));
-		if (children.isEmpty())
+	protected String toString(IHiddenRegion hiddens) {
+		List<IHiddenRegionPart> parts = hiddens.getParts();
+		if (parts.isEmpty())
 			return HIDDEN;
-		return HIDDEN_PADDED + Joiner.on(", ").join(children);
+		List<String> children = Lists.newArrayListWithExpectedSize(parts.size());
+		children.add(HIDDEN_PADDED + toString(parts.get(0)));
+		for (int i = 1; i < parts.size(); i++)
+			children.add(EMPTY_TITLE + toString(parts.get(i)));
+		return Joiner.on("\n").join(children);
 	}
 
 	protected String toString(ISemanticRegion token) {
-		String text = quote(token.getText(), 10);
+		String text = quote(token.getText());
 		return String.format("%s%s %s", SEMANTIC_PADDED, text, toString(token.getGrammarElement()));
 	}
 
@@ -261,7 +286,7 @@ public class TextRegionAccessToString {
 	}
 
 	protected String toString(IWhitespace whitespace) {
-		String text = quote(whitespace.getText(), 10);
+		String text = quote(whitespace.getText());
 		String grammar = toString(whitespace.getGrammarElement());
 		return String.format("%s Whitespace:%s", text, grammar);
 	}
@@ -309,6 +334,11 @@ public class TextRegionAccessToString {
 	public TextRegionAccessToString withRegionAccess(ITextRegionAccess access) {
 		this.origin = access.regionForRootEObject();
 		this.hightlightOrigin = false;
+		return this;
+	}
+
+	public TextRegionAccessToString withTextWidth(int width) {
+		this.textWidth = width;
 		return this;
 	}
 
