@@ -30,6 +30,8 @@ import org.junit.Test
 import org.eclipse.xtext.xbase.XIfExpression
 import org.eclipse.xtext.xbase.XCastedExpression
 import org.eclipse.xtext.xbase.junit.typesystem.Oven
+import org.eclipse.xtext.xbase.junit.typesystem.NoJRESmokeTester
+import org.eclipse.xtext.resource.XtextResource
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -44,6 +46,9 @@ class ErrorTest extends AbstractXtendTestCase {
 	
 	@Inject
 	IJvmModelAssociations associations
+	
+	@Inject
+	ResolveBatchedWithoutJRE noJRETester
 	
 	@Inject extension Oven
 	
@@ -2100,11 +2105,33 @@ class ErrorTest extends AbstractXtendTestCase {
 		'''.processWithoutException
 	}
 	
+	@Test
+	def void testErrorModel_144() throws Exception {
+		noJRETester.processFile('''
+			class C {
+				def create "" test() {
+					_createCache_test.clear
+				}
+			}
+		''')
+	}
+	
 	def processWithoutException(CharSequence input) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))
 		resource.load(new StringInputStream(input.toString), null)
 		resourceValidator.validate(resource, CheckMode::ALL, CancelIndicator::NullImpl)
 		return resource.contents.head as XtendFile
+	}
+	
+	static class ResolveBatchedWithoutJRE extends NoJRESmokeTester {
+		
+		@Inject IBatchTypeResolver resolver
+		
+		override protected checkNoErrorsInValidator(String model, XtextResource resource) {
+			resolver.resolveTypes(resource)
+			super.checkNoErrorsInValidator(model, resource)
+		}
+		
 	}
 	
 }
