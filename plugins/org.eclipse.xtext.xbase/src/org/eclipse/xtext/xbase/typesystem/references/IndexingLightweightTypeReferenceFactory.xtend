@@ -125,8 +125,12 @@ class IndexingLightweightTypeReferenceFactory extends LightweightTypeReferenceFa
 		reference.wrapIfNecessary(type)
 	}
 
-	def getJavaLangObjectTypeReference(XFunctionTypeRef reference) {
-		owner.newParameterizedTypeReference(owner.services.typeReferences.findDeclaredType(Object, reference))
+	protected def getJavaLangObjectTypeReference(XFunctionTypeRef reference) {
+		val objectType = owner.services.typeReferences.findDeclaredType(Object, reference)
+		if (objectType != null)
+			return owner.newParameterizedTypeReference(objectType)
+		else
+			return owner.newUnknownTypeReference(Object.name)
 	}
 	
 }

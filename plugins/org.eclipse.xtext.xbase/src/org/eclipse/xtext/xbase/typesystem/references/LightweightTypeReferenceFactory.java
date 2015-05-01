@@ -320,7 +320,7 @@ public class LightweightTypeReferenceFactory extends AbstractXtypeReferenceVisit
 	protected LightweightTypeReference getObjectReference() {
 		JvmType objectType = getObjectType();
 		if (objectType == null) {
-			return owner.newUnknownTypeReference("Object");
+			return owner.newUnknownTypeReference(Object.class.getName());
 		}
 		ParameterizedTypeReference result = owner.newParameterizedTypeReference(objectType);
 		return result;
