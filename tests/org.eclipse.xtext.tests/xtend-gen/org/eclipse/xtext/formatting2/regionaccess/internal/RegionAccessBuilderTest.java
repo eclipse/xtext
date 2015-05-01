@@ -274,13 +274,13 @@ public class RegionAccessBuilderTest {
     _builder_1.append("6 1 H \" \"        Whitespace:TerminalRule\'WS\'");
     _builder_1.newLine();
     _builder_1.append("     ");
-    _builder_1.append("B Named\'b\'   Expression:right=Primary path:Add/right=Add/right");
+    _builder_1.append("B Named\'b\'   Expression:right=Primary path:Add/right=Add/left");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("7 1 S \"b\"        Primary:name=ID");
     _builder_1.newLine();
     _builder_1.append("     ");
-    _builder_1.append("E Named\'b\'   Expression:right=Primary path:Add/right=Add/right");
+    _builder_1.append("E Named\'b\'   Expression:right=Primary path:Add/right=Add/left");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("8 0 H");
