@@ -685,10 +685,14 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 	}
 
 	protected WildcardTypeReference createObjectWildcardReference(ITypeReferenceOwner owner) {
-		JvmType objectType = owner.getServices().getTypeReferences().findDeclaredType(Object.class, owner.getContextResourceSet());
-		LightweightTypeReference objectReference = owner.newParameterizedTypeReference(objectType);
 		WildcardTypeReference result = owner.newWildcardTypeReference();
-		result.addUpperBound(objectReference);
+		JvmType objectType = owner.getServices().getTypeReferences().findDeclaredType(Object.class, owner.getContextResourceSet());
+		if (objectType != null) {
+			LightweightTypeReference objectReference = owner.newParameterizedTypeReference(objectType);
+			result.addUpperBound(objectReference);
+		} else {
+			result.addUpperBound(owner.newUnknownTypeReference(Object.class.getName()));
+		}
 		return result;
 	}
 	

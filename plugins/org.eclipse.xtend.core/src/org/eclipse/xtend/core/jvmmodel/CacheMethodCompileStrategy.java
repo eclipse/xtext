@@ -69,8 +69,15 @@ public class CacheMethodCompileStrategy implements Procedures.Procedure1<ITreeAp
 		JvmDeclaredType containerType = cacheMethod.getDeclaringType();
 		IResolvedTypes resolvedTypes = typeResolver.resolveTypes(containerType);
 		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, containerType);
-		ParameterizedTypeReference listType = owner.newParameterizedTypeReference(typeReferences.findDeclaredType(ArrayList.class, containerType));
-		listType.addTypeArgument(owner.newWildcardTypeReference());
+		JvmType arrayList = typeReferences.findDeclaredType(ArrayList.class, containerType);
+		LightweightTypeReference listType;
+		if (arrayList != null) {
+			ParameterizedTypeReference parameterizedListType = owner.newParameterizedTypeReference(arrayList);
+			parameterizedListType.addTypeArgument(owner.newWildcardTypeReference());
+			listType = parameterizedListType;
+		} else {
+			listType = owner.newUnknownTypeReference("ArrayList");
+		}
 		JvmType collectionLiterals = typeReferences.findDeclaredType(CollectionLiterals.class, containerType);
 		LightweightTypeReference collectionLiteralsTypeRef = null;
 		if (collectionLiterals == null) {
