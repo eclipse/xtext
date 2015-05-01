@@ -135,9 +135,9 @@ class RegionAccessBuilderTest {
 			 4 1 H " "        Whitespace:TerminalRule'WS'
 			 5 1 S "+"        Expression:'+'
 			 6 1 H " "        Whitespace:TerminalRule'WS'
-			     B Named'b'   Expression:right=Primary path:Add/right=Add/right
+			     B Named'b'   Expression:right=Primary path:Add/right=Add/left
 			 7 1 S "b"        Primary:name=ID
-			     E Named'b'   Expression:right=Primary path:Add/right=Add/right
+			     E Named'b'   Expression:right=Primary path:Add/right=Add/left
 			 8 0 H
 			 8 1 S ")"        Parenthesized:')'
 			     E Add        Expression:{Add.left=} path:Add/left
