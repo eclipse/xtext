@@ -7,3 +7,8 @@ dependencies {
 	providedCompile group: 'org.eclipse.jetty', name: 'jetty-annotations', version: '9.2.+'
 	providedCompile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.+'
 }
+
+task jettyRun(type:JavaExec) {
+	classpath = sourceSets.main.runtimeClasspath.filter{it.exists()}
+	main = "org.eclipse.xtext.web.example.jetty.ServerLauncher"
+}
