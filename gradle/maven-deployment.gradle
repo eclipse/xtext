@@ -34,23 +34,23 @@ configure(deployer) {
 [installer, deployer]*.pom*.project {
 	def parentPom = file("$rootDir/maven/org.eclipse.xtext.parent/pom.xml")
 	def parent = new XmlSlurper().parse(parentPom)
-	
+
 	description = parent.description
-	
+
 	scm {
 		url = parent.scm.url
 		connection = parent.scm.connection
 	}
-	
+
 	licenses {
-		parent.licenses.children().each {parentLicense -> 
+		parent.licenses.children().each {parentLicense ->
 			license {
 				name = parentLicense.name
 				url = parentLicense.url
 			}
 		}
 	}
-	
+
 	developers {
 		parent.developers.children().each {parentDeveloper ->
 			developer {
