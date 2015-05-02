@@ -6,9 +6,8 @@ configure(eclipsePluginProjects) {
 
 configure(subprojects - eclipsePluginProjects) {
 	apply plugin: 'java'
-	apply plugin: 'eclipse'
 	apply from: "$rootDir/gradle/maven-deployment.gradle"
-	
+
 	sourceSets {
 		main.java.srcDir 'src/main/xtend-gen'
 		test.java.srcDir 'src/test/xtend-gen'
