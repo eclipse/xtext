@@ -26,5 +26,3 @@ allprojects {
 		}
 	}
 }
-
-eclipse.project.name = 'xtext'

@@ -1,3 +1,4 @@
+rootProject.name = 'xtext'
 include 'jenkins'
 include 'maven'
 
@@ -10,7 +11,7 @@ include 'maven'
 	}
 }
 
-['intellij', 'web'].each {folder -> 
+['intellij', 'web'].each {folder ->
 	new File(settingsDir, folder).listFiles().findAll {
 		it.isDirectory() && it.name.startsWith("org.eclipse")
 	}.each {
