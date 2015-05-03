@@ -2,13 +2,7 @@ allprojects {
 	ext.isBuildServer = System.getenv("JOB_NAME") != null || project.hasProperty('buildServer')
 	buildscript {
 		repositories {
-			if (!isBuildServer) {
-				mavenLocal()
-			}
 			jcenter()
-			maven {
-				url "https://oss.sonatype.org/content/repositories/snapshots/"
-			}
 		}
 	}
 
