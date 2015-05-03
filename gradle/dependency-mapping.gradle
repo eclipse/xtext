@@ -1,20 +1,26 @@
 /**
  * This is where we translate Manifest.MF dependencies to Maven Central dependencies.
  */
-def parentPom = file("$rootDir/maven/org.eclipse.xtext.parent/pom.xml")
-def versions = new XmlSlurper().parse(parentPom).properties
+def versions
+if (rootProject.hasProperty("parentPomVersions")) {
+	versions = rootProject.parentPomVersions
+} else {
+	def parentPom = file("$rootDir/maven/org.eclipse.xtext.parent/pom.xml")
+	versions = new XmlSlurper().parse(parentPom).properties.children().collectEntries{[(it.name()) : it.text()]}
+	rootProject.ext.parentPomVersions = versions
+}
 
-ext.toDependency = { requirement -> 
+ext.toDependency = { requirement ->
 	if (requirement.name.contains('.ui') || requirement.name.contains('.editor')) {
 		return null
 	}
-	def projectDependency = rootProject.project(':plugins').findProject(requirement.name) 
+	def projectDependency = rootProject.project(':plugins').findProject(requirement.name)
 		?: rootProject.project(':tests').findProject(requirement.name)
 		?: rootProject.project(':intellij').findProject(requirement.name)
+		?: rootProject.project(':web').findProject(requirement.name)
 	if (projectDependency) {
 		return projectDependency
 	}
-		
 	if (requirement.name == 'com.google.inject') {
 		return [group:'com.google.inject', name:'guice', version:versions.'google-inject.version']
 	}
