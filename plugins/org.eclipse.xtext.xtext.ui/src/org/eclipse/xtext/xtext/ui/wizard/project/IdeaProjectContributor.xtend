@@ -37,7 +37,7 @@ class IdeaProjectContributor extends DefaultProjectFactoryContributor {
 					url 'https://hudson.eclipse.org/xtext/job/xtext-intellij/lastSuccessfulBuild/artifact/git-repo/intellij/build/ideaRepository/updatePlugins.xml'
 				}
 				pluginDependencies {
-					id 'org.eclipse.xtext.idea'
+					id 'org.eclipse.xtext.idea' version '2.9.0-SNAPSHOT'
 				}
 			}
 			
