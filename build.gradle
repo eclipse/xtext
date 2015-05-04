@@ -5,8 +5,12 @@ allprojects {
 			jcenter()
 		}
 	}
-
-	group = 'org.eclipse.xtext'
+	
+	if (name.startsWith('org.eclipse.xtend')) {
+		group = 'org.eclipse.xtend'
+	} else {
+		group = 'org.eclipse.xtext'
+	}
 	version = '2.9.0-SNAPSHOT'
 
 	repositories.addAll(rootProject.buildscript.repositories)

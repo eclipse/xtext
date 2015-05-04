@@ -43,7 +43,7 @@ configure(subprojects - eclipsePluginProjects) {
 		// contain debug information.
 		compileJava.enabled = false
 
-		task copyFromBin(type: Copy) {
+		task copyFromBin(type: Sync) {
 		    from 'bin'
 		    into 'build/classes/main'
 		}
