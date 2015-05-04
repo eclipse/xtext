@@ -50,7 +50,7 @@
 		<module>../../plugins/org.eclipse.xtend.lib.gwt</module>
 
 	</modules>
-	
+
 	<profiles>
 		<profile>
 			<id>include-unpublished</id>
@@ -69,6 +69,8 @@
 				<module>../../tests/org.eclipse.xtext.xbase.tests</module>
 				<module>../../tests/org.eclipse.xtext.xbase.testlanguages</module>
 				<module>../../tests/org.eclipse.xtext.xbase.testlanguages.ui</module>
+				<module>../../web/org.eclipse.xtext.web.example.statemachine</module>
+				<module>../../web/org.eclipse.xtext.web.example.statemachine.ide</module>
 			</modules>
 		</profile>
 	</profiles>
