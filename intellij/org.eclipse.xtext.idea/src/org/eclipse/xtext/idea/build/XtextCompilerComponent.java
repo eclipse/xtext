@@ -29,6 +29,7 @@ public class XtextCompilerComponent extends AbstractProjectComponent {
 	}
 	
 
+	@Override
 	public void projectOpened() {
 		myProject.getMessageBus().connect().subscribe(CustomBuilderMessageHandler.TOPIC, new RefreshFilesCompilationStatusListener());
 	}
@@ -37,6 +38,7 @@ public class XtextCompilerComponent extends AbstractProjectComponent {
 
 		private final AtomicReference<List<File>> myAffectedFiles = new AtomicReference<List<File>>(new ArrayList<File>());
 
+		@Override
 		public void messageReceived(String builderId, String messageType, String messageText) {
 			if (!"Xtext".equals(builderId)) {
 				return;

@@ -1,7 +1,7 @@
 org.eclipse.xtext.idea.sdomain.idea.lang.psi.impl.SDomainFileImpl:QualifiedNamespace.sdomain(0,9)
   org.eclipse.xtext.psi.impl.PsiEObjectImpl(File_ELEMENT_TYPE)(0,9)
     org.eclipse.xtext.psi.impl.PsiEObjectImpl(File_ElementsElementParserRuleCall_0_ELEMENT_TYPE)(0,9)
-      org.eclipse.xtext.psi.impl.PsiEObjectImpl(Element_NamespaceParserRuleCall_0_ELEMENT_TYPE)(0,9)
+      org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Element_NamespaceParserRuleCall_0_ELEMENT_TYPE)(0,9)
         org.eclipse.xtext.psi.impl.PsiEObjectImpl(Namespace_NameQualifiedNameParserRuleCall_0_0_ELEMENT_TYPE)(0,5)
           PsiElement(QualifiedName_IDTerminalRuleCall_0_ELEMENT_TYPE)('a')(0,1)
           PsiElement(QualifiedName_FullStopKeyword_1_0_ELEMENT_TYPE)('.')(1,2)

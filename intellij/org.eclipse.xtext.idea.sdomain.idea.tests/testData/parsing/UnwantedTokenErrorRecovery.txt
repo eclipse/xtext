@@ -2,7 +2,7 @@ org.eclipse.xtext.idea.sdomain.idea.lang.psi.impl.SDomainFileImpl:UnwantedTokenE
   org.eclipse.xtext.psi.impl.PsiEObjectImpl(File_ELEMENT_TYPE)(0,16)
     org.eclipse.xtext.psi.impl.PsiEObjectImpl(File_ElementsElementParserRuleCall_0_ELEMENT_TYPE)(0,16)
       org.eclipse.xtext.psi.impl.PsiEObjectImpl(Element_TypeParserRuleCall_1_ELEMENT_TYPE)(0,16)
-        org.eclipse.xtext.psi.impl.PsiEObjectImpl(Type_EntityParserRuleCall_0_ELEMENT_TYPE)(0,16)
+        org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Type_EntityParserRuleCall_0_ELEMENT_TYPE)(0,16)
           PsiElement(Entity_EntityKeyword_0_ELEMENT_TYPE)('entity')(0,6)
           PsiWhiteSpace(' ')(6,7)
           PsiElement(Entity_NameIDTerminalRuleCall_1_0_ELEMENT_TYPE)('Foo')(7,10)

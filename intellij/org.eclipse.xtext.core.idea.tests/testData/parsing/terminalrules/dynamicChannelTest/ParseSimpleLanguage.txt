@@ -13,7 +13,7 @@ org.eclipse.xtext.parser.terminalrules.idea.lang.psi.impl.XtextTerminalsTestLang
       PsiWhiteSpace(' ')(17,18)
       PsiElement(GrammarID_IDTerminalRuleCall_1_1_ELEMENT_TYPE)('c')(18,19)
     org.eclipse.xtext.psi.impl.PsiEObjectImpl(Grammar_RulesAbstractRuleParserRuleCall_5_0_ELEMENT_TYPE)(19,64)
-      org.eclipse.xtext.psi.impl.PsiEObjectImpl(AbstractRule_ParserRuleParserRuleCall_0_ELEMENT_TYPE)(19,64)
+      org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(AbstractRule_ParserRuleParserRuleCall_0_ELEMENT_TYPE)(19,64)
         PsiWhiteSpace('\n')(19,20)
         PsiComment(RULE_ML_COMMENT)('/* comment \n*/')(20,34)
         PsiElement(ParserRule_NameIDTerminalRuleCall_0_0_ELEMENT_TYPE)('rulename')(34,42)

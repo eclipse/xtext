@@ -4,6 +4,7 @@ import org.eclipse.xtext.psi.impl.PsiEObjectReference;
 import org.eclipse.xtext.linking.idea.lang.ImportUriTestLanguageElementTypeProvider;
 import org.eclipse.xtext.linking.idea.lang.psi.impl.ImportUriTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -26,6 +27,11 @@ public class ImportUriTestLanguageParserDefinition extends AbstractXtextParserDe
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
 		IElementType elementType = node.getElementType();
+		if (elementType == elementTypeProvider.getMain_TypesTypeParserRuleCall_1_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getType_NameIDTerminalRuleCall_1_0ElementType()
+			);
+		}
 		if (elementType == elementTypeProvider.getType_ExtendsTypeCrossReference_3_0ElementType()) {
 			return new PsiEObjectReference(node);
 		}

@@ -162,6 +162,7 @@ public class PsiModelAssociations implements IPsiModelAssociations, IPsiModelAss
     	return (BaseXtextFile) psiFile;
 	}
     
+	@Override
 	public PsiElement getPsiElement(IEObjectDescription objectDescription, Resource context) {
 		if (objectDescription == null) {
 			return null;

@@ -3,6 +3,7 @@ package org.eclipse.xtext.grammarinheritance.idea.lang.parser;
 import org.eclipse.xtext.grammarinheritance.idea.lang.ConcreteTestLanguageElementTypeProvider;
 import org.eclipse.xtext.grammarinheritance.idea.lang.psi.impl.ConcreteTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -24,6 +25,37 @@ public class ConcreteTestLanguageParserDefinition extends AbstractXtextParserDef
 	@Override
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
+		IElementType elementType = node.getElementType();
+		if (elementType == elementTypeProvider.getAbstractCallOverridenParserRule_ElementsOverridableParserRuleParserRuleCall_1_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getOverridableParserRule_NameIDTerminalRuleCall_1_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getRootRule_OverridableParserRule2ParserRuleCall_3ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getOverridableParserRule2_NameIDTerminalRuleCall_1_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getExtendableParserRule_Subrule1ParserRuleCall_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getSubrule1_NameIDTerminalRuleCall_1_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getExtendableParserRule_Subrule2ParserRuleCall_1ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getSubrule2_NameIDTerminalRuleCall_1_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getExtendableParserRule_Subrule3ParserRuleCall_2ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getSubrule3_NameIDTerminalRuleCall_1_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getConcreteParserRule_ElementsInheritedParserRuleParserRuleCall_3_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getInheritedParserRule_NameIDTerminalRuleCall_1_0ElementType()
+			);
+		}
 		return super.createElement(node);
 	}
 

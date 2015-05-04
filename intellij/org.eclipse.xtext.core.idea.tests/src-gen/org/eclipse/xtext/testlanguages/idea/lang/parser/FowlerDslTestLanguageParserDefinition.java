@@ -4,6 +4,7 @@ import org.eclipse.xtext.psi.impl.PsiEObjectReference;
 import org.eclipse.xtext.testlanguages.idea.lang.FowlerDslTestLanguageElementTypeProvider;
 import org.eclipse.xtext.testlanguages.idea.lang.psi.impl.FowlerDslTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -26,6 +27,21 @@ public class FowlerDslTestLanguageParserDefinition extends AbstractXtextParserDe
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
 		IElementType elementType = node.getElementType();
+		if (elementType == elementTypeProvider.getStatemachine_EventsEventParserRuleCall_1_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getEvent_NameIDTerminalRuleCall_1_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getStatemachine_CommandsCommandParserRuleCall_4_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getCommand_NameIDTerminalRuleCall_0_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getStatemachine_StatesStateParserRuleCall_6_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getState_NameIDTerminalRuleCall_1_0ElementType()
+			);
+		}
 		if (elementType == elementTypeProvider.getState_ActionsCommandCrossReference_2_2_0ElementType()) {
 			return new PsiEObjectReference(node);
 		}

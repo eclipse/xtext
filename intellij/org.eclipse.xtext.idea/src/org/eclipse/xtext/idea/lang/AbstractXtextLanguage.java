@@ -32,10 +32,12 @@ public abstract class AbstractXtextLanguage extends Language implements IXtextLa
 
 	abstract protected Injector getInjector(); 
 	
+	@Override
 	public <T> T getInstance(Class<? extends T> clazz) {
 		return getInjector().getInstance(clazz);
 	}
 	
+	@Override
 	public void injectMembers(Object o) {
 		getInjector().injectMembers(o);
 	}

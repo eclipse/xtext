@@ -9,7 +9,6 @@ package org.eclipse.xtext.psi.stubs;
 
 import com.intellij.psi.stubs.PsiFileStub;
 import com.intellij.psi.stubs.PsiFileStubImpl;
-import com.intellij.psi.tree.IStubFileElementType;
 import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -34,7 +33,7 @@ public class XtextFileStub<T extends BaseXtextFile> extends PsiFileStubImpl<T> i
   }
   
   @Override
-  public IStubFileElementType getType() {
+  public XtextFileElementType<?> getType() {
     return this.type;
   }
   

@@ -3,6 +3,7 @@ package org.eclipse.xtext.parser.indentation.idea.lang.parser;
 import org.eclipse.xtext.parser.indentation.idea.lang.IndentationAwareTestLanguageElementTypeProvider;
 import org.eclipse.xtext.parser.indentation.idea.lang.psi.impl.IndentationAwareTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -24,6 +25,17 @@ public class IndentationAwareTestLanguageParserDefinition extends AbstractXtextP
 	@Override
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
+		IElementType elementType = node.getElementType();
+		if (elementType == elementTypeProvider.getTree_NodesTreeNodeParserRuleCall_1_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getTreeNode_NameIDTerminalRuleCall_0_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getTreeNode_ChildrenTreeNodeParserRuleCall_1_1_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getTreeNode_NameIDTerminalRuleCall_0_0ElementType()
+			);
+		}
 		return super.createElement(node);
 	}
 

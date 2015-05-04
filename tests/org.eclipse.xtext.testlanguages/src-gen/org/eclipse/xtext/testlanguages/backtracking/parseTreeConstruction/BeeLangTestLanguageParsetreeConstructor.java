@@ -5889,11 +5889,14 @@ protected class Expression_AssignmentExpressionParserRuleCall extends RuleCallTo
 
 /************ begin Rule AssignmentExpression ****************
  *
- * org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/xtext/testlanguages/backtracking/BeeLangTestLanguage.xtext#XtextFragmentProvider_org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage/AssignmentExpression'
+ * AssignmentExpression returns Expression:
+ * 	CachedExpression ({AssignmentExpression.leftExpr=current} functionName=AssignmentOperator
+ * 	rightExpr=AssignmentExpression)?;
  *
  **/
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/xtext/testlanguages/backtracking/BeeLangTestLanguage.xtext#/0/@rules.17/@alternatives'
+// CachedExpression ({AssignmentExpression.leftExpr=current} functionName=AssignmentOperator
+// rightExpr=AssignmentExpression)?
 protected class AssignmentExpression_Group extends GroupToken {
 	
 	public AssignmentExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5942,7 +5945,7 @@ protected class AssignmentExpression_Group extends GroupToken {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/xtext/testlanguages/backtracking/BeeLangTestLanguage.xtext#/0/@rules.17/@alternatives/@elements.0'
+// CachedExpression
 protected class AssignmentExpression_CachedExpressionParserRuleCall_0 extends RuleCallToken {
 	
 	public AssignmentExpression_CachedExpressionParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5976,7 +5979,7 @@ protected class AssignmentExpression_CachedExpressionParserRuleCall_0 extends Ru
 	}	
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/xtext/testlanguages/backtracking/BeeLangTestLanguage.xtext#/0/@rules.17/@alternatives/@elements.1'
+// ({AssignmentExpression.leftExpr=current} functionName=AssignmentOperator rightExpr=AssignmentExpression)?
 protected class AssignmentExpression_Group_1 extends GroupToken {
 	
 	public AssignmentExpression_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6005,7 +6008,7 @@ protected class AssignmentExpression_Group_1 extends GroupToken {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/xtext/testlanguages/backtracking/BeeLangTestLanguage.xtext#/0/@rules.17/@alternatives/@elements.1/@elements.0'
+// {AssignmentExpression.leftExpr=current}
 protected class AssignmentExpression_AssignmentExpressionLeftExprAction_1_0 extends ActionToken  {
 
 	public AssignmentExpression_AssignmentExpressionLeftExprAction_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -13895,7 +13898,7 @@ protected class ClosureExpression_Group_2_0_1_1 extends GroupToken {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/xtext/testlanguages/backtracking/BeeLangTestLanguage.xtext#/0/@rules.50/@alternatives/@elements.2/@elements.0/@elements.1/@elements.1/@elements.0'
+// ","
 protected class ClosureExpression_CommaKeyword_2_0_1_1_0 extends KeywordToken  {
 	
 	public ClosureExpression_CommaKeyword_2_0_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -13918,7 +13921,7 @@ protected class ClosureExpression_CommaKeyword_2_0_1_1_0 extends KeywordToken  {
 
 }
 
-// org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/xtext/testlanguages/backtracking/BeeLangTestLanguage.xtext#/0/@rules.50/@alternatives/@elements.2/@elements.0/@elements.1/@elements.1/@elements.1'
+// parameters+=ParameterDeclaration
 protected class ClosureExpression_ParametersAssignment_2_0_1_1_1 extends AssignmentToken  {
 	
 	public ClosureExpression_ParametersAssignment_2_0_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

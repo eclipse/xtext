@@ -3,6 +3,7 @@ package org.eclipse.xtext.parser.unorderedGroups.idea.lang.parser;
 import org.eclipse.xtext.parser.unorderedGroups.idea.lang.ExBacktrackingBug325745TestLanguageElementTypeProvider;
 import org.eclipse.xtext.parser.unorderedGroups.idea.lang.psi.impl.ExBacktrackingBug325745TestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -24,6 +25,12 @@ public class ExBacktrackingBug325745TestLanguageParserDefinition extends Abstrac
 	@Override
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
+		IElementType elementType = node.getElementType();
+		if (elementType == elementTypeProvider.getModel_FieldsElementParserRuleCall_1_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getElement_NameIDTerminalRuleCall_0_0ElementType()
+			);
+		}
 		return super.createElement(node);
 	}
 

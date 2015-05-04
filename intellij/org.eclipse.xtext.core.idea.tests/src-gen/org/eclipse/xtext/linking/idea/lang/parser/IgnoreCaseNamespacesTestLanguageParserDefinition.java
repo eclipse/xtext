@@ -4,6 +4,7 @@ import org.eclipse.xtext.psi.impl.PsiEObjectReference;
 import org.eclipse.xtext.linking.idea.lang.IgnoreCaseNamespacesTestLanguageElementTypeProvider;
 import org.eclipse.xtext.linking.idea.lang.psi.impl.IgnoreCaseNamespacesTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -26,6 +27,16 @@ public class IgnoreCaseNamespacesTestLanguageParserDefinition extends AbstractXt
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
 		IElementType elementType = node.getElementType();
+		if (elementType == elementTypeProvider.getModel_ElementsElementParserRuleCall_1_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getElement_NameIDTerminalRuleCall_0_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getElement_ElementsElementParserRuleCall_3_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getElement_NameIDTerminalRuleCall_0_0ElementType()
+			);
+		}
 		if (elementType == elementTypeProvider.getElement_ReferenceElementCrossReference_1_0ElementType()) {
 			return new PsiEObjectReference(node);
 		}

@@ -14,7 +14,7 @@ import org.eclipse.xtext.psi.PsiEObject;
 
 @SuppressWarnings("all")
 public class PsiEObjectStub extends StubBase<PsiEObject> {
-  protected PsiEObjectStub(final StubElement parent, final IStubElementType elementType) {
+  protected PsiEObjectStub(final StubElement<?> parent, final IStubElementType<?, PsiEObject> elementType) {
     super(parent, elementType);
   }
 }

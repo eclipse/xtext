@@ -4,6 +4,7 @@ import org.eclipse.xtext.psi.impl.PsiEObjectReference;
 import org.eclipse.xtext.testlanguages.idea.lang.ReferenceGrammarTestLanguageElementTypeProvider;
 import org.eclipse.xtext.testlanguages.idea.lang.psi.impl.ReferenceGrammarTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -26,6 +27,37 @@ public class ReferenceGrammarTestLanguageParserDefinition extends AbstractXtextP
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
 		IElementType elementType = node.getElementType();
+		if (elementType == elementTypeProvider.getSpielplatz_KinderKindParserRuleCall_4_0_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getKind_NameIDTerminalRuleCall_2_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getPerson_KindParserRuleCall_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getKind_NameIDTerminalRuleCall_2_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getSpielplatz_ErzieherErwachsenerParserRuleCall_4_1_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getErwachsener_NameIDTerminalRuleCall_2_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getPerson_ErwachsenerParserRuleCall_1ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getErwachsener_NameIDTerminalRuleCall_2_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getSpielplatz_SpielzeugeSpielzeugParserRuleCall_4_2_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getSpielzeug_NameIDTerminalRuleCall_2_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getSpielplatz_FamilieFamilieParserRuleCall_4_3_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getFamilie_NameSTRINGTerminalRuleCall_2_0_1ElementType(),
+				elementTypeProvider.getFamilie_NameIDTerminalRuleCall_2_0_2ElementType()
+			);
+		}
 		if (elementType == elementTypeProvider.getFamilie_MutterErwachsenerCrossReference_3_0ElementType()) {
 			return new PsiEObjectReference(node);
 		}

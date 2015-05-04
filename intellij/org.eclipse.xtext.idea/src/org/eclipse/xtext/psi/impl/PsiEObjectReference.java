@@ -7,16 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.psi.impl;
 
-import org.eclipse.xtext.psi.stubs.PsiNamedEObjectStub;
-
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.stubs.StubElement;
 
-@SuppressWarnings("rawtypes")
-public class PsiEObjectReference<T extends PsiNamedEObjectStub<?>> extends PsiEObjectImpl<T> {
+public class PsiEObjectReference<PsiE extends PsiElement, T extends StubElement<PsiE>> extends PsiEObjectImpl<PsiE, T> {
 
-	protected PsiEObjectReference(T stub, IStubElementType nodeType) {
+	protected PsiEObjectReference(T stub, IStubElementType<T, PsiE> nodeType) {
 		super(stub, nodeType);
 	}
 
