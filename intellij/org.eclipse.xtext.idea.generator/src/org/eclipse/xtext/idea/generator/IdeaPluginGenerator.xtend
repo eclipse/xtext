@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.generator
 
+import com.google.common.collect.LinkedHashMultimap
 import com.google.inject.Guice
 import com.google.inject.Inject
 import java.util.Set
@@ -17,9 +18,11 @@ import org.eclipse.xpand2.output.OutputImpl
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.AbstractElement
 import org.eclipse.xtext.AbstractRule
+import org.eclipse.xtext.Action
 import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.ISetup
+import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.generator.BindFactory
 import org.eclipse.xtext.generator.Binding
 import org.eclipse.xtext.generator.LanguageConfig
@@ -32,6 +35,7 @@ import org.eclipse.xtext.idea.generator.parser.antlr.XtextIDEAGeneratorExtension
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment.*
+import org.eclipse.emf.ecore.EObject
 
 class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	
@@ -891,6 +895,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	
 	def compileParserDefinition(Grammar grammar) {
 		val crossReferences = grammar.crossReferences
+		val namedGrammarElement = grammar.namedGrammarElements
 		
 		'''
 			package «grammar.parserDefinitionName.toPackageName»;
@@ -901,6 +906,9 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			import «grammar.elementTypeProviderName»;
 			import «grammar.fileImplName»;
 			import «grammar.superParserDefinitionName»;
+			«IF !namedGrammarElement.empty»
+				import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
+			«ENDIF»
 			
 			import «Inject.name»;
 			import com.intellij.lang.ASTNode;
@@ -922,9 +930,16 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 				@Override
 				@SuppressWarnings("rawtypes")
 				public PsiElement createElement(ASTNode node) {
-					«IF !crossReferences.empty»
 					IElementType elementType = node.getElementType();
-					«ENDIF»
+					«FOR namedElementType:namedGrammarElement.keySet»
+					if (elementType == elementTypeProvider.get«namedElementType»ElementType()) {
+						return new PsiNamedEObjectImpl(node,
+							«FOR nameType:namedGrammarElement.get(namedElementType) SEPARATOR ','»
+							elementTypeProvider.get«nameType»ElementType()
+							«ENDFOR»
+						);
+					}
+					«ENDFOR»
 					«FOR crossReference : crossReferences»
 					if (elementType == elementTypeProvider.get«crossReference.grammarElementIdentifier»ElementType()) {
 						return new PsiEObjectReference(node);
@@ -941,6 +956,40 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		grammar.allRules.map[
 			eAllContents.filter(CrossReference).filter[assigned].toIterable
 		].flatten
+	}
+	
+	protected def getNamedGrammarElements(Grammar grammar) {
+		val namedGrammarElements = LinkedHashMultimap.<String, String>create
+		for (nameRuleCall : grammar.nameRuleCalls) {
+			val nameRuleCallIdentifier = nameRuleCall.grammarElementIdentifier
+			for (ruleCall : grammar.getRuleCallsWithName(nameRuleCall)) {
+				namedGrammarElements.put(ruleCall.grammarElementIdentifier, nameRuleCallIdentifier)
+				for (action : ruleCall.rule.eAllContents.filter(Action).toIterable) {
+					namedGrammarElements.put(action.grammarElementIdentifier, nameRuleCallIdentifier)
+				}
+			}
+		}
+		namedGrammarElements
+	}
+	
+	protected def getRuleCallsWithName(Grammar grammar, RuleCall nameRuleCall) {
+		grammar.allRules.map[getRuleCallsWithName(nameRuleCall)].flatten
+	}
+	
+	protected def getRuleCallsWithName(EObject element, RuleCall nameRuleCall) {
+		element.eAllContents.filter(RuleCall).filter [
+			rule.eAllContents.exists[it == nameRuleCall]
+		].toIterable
+	}
+	
+	protected def getNameRuleCalls(Grammar grammar) {
+		grammar.allRules.map[nameRuleCalls].flatten
+	}
+	
+	protected def getNameRuleCalls(EObject element) {
+		element.eAllContents.filter(RuleCall).filter [
+			assigned && containingAssignment.feature == 'name'
+		].toIterable
 	}
 	
 	def compileAbstractCompletionContributor(Grammar grammar) '''
