@@ -14,7 +14,9 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
+import org.eclipse.xtext.xbase.typesystem.util.ExpectationTypeParameterHintCollector;
 
 import com.google.inject.Inject;
 
@@ -81,6 +83,16 @@ public class AbstractTypeComputer {
 	 */
 	protected LightweightTypeReference getCommonSuperType(List<LightweightTypeReference> types, ITypeReferenceOwner owner) {
 		return services.getTypeConformanceComputer().getCommonSuperType(types, owner);
+	}
+	
+	protected void deferredBindTypeArgument(/* @Nullable */ LightweightTypeReference declared, LightweightTypeReference actual, ITypeComputationState state) {
+		if (declared != null && actual != null) { 
+			// TODO double check other clients of the ExpectationTypeParameterHintCollector
+			// It may be possible / necessary to use the very same implementation instead of anonymous 
+			// specializations or it may be possible that this specialization is no longer necessary.
+			ExpectationTypeParameterHintCollector collector = new ResolvingTypeParameterHintCollector(state.getReferenceOwner(), BoundTypeArgumentSource.INFERRED);
+			collector.processPairedReferences(declared, actual.getWrapperTypeIfPrimitive());
+		}
 	}
 	
 }

@@ -180,6 +180,7 @@ public class CollectionLiteralsTypeComputer extends AbstractTypeComputer {
 		int allFlags = 0;
 		for(XExpression element: literal.getElements()) {
 			ITypeComputationResult elementTypeResult = computeTypes(element, elementTypeExpectation, state);
+			deferredBindTypeArgument(elementTypeExpectation, elementTypeResult.getActualExpressionType(), state);
 			allFlags |= elementTypeResult.getCheckedConformanceFlags();
 		}
 		if ((allFlags & ConformanceFlags.INCOMPATIBLE) != 0) {
