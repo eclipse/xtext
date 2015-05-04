@@ -30,6 +30,7 @@ import java.io.ByteArrayInputStream
 import java.net.URLConnection
 import java.io.InputStream
 import com.google.inject.Inject
+import org.eclipse.jdt.core.compiler.IProblem
 
 /**
  * 
@@ -170,29 +171,31 @@ class InMemoryJavaCompiler {
 				for (cf : it.getClassFiles()) {
 					result.classMap.put(cf.compoundName.map[String.valueOf(it)].join('.'), cf.bytes)
 				}
-			], new DefaultProblemFactory(){
-				
-				override createProblem(char[] originatingFileName, int problemId, String[] problemArguments, int elaborationId, String[] messageArguments, int severity, int startPosition, int endPosition, int lineNumber, int columnNumber) {
-					val problem = super.createProblem(originatingFileName, problemId, problemArguments, elaborationId, messageArguments, severity, startPosition, endPosition, lineNumber, columnNumber)
-					result.compilationProblems.add(problem)
-					return problem
-				}
-				
-				override createProblem(char[] originatingFileName, int problemId, String[] problemArguments, String[] messageArguments, int severity, int startPosition, int endPosition, int lineNumber, int columnNumber) {
-					val problem = super.createProblem(originatingFileName, problemId, problemArguments, messageArguments, severity, startPosition, endPosition, lineNumber, columnNumber)
-					result.compilationProblems.add(problem)
-					return problem
-				}
-				
-			})
+			], new InMemoryProblemFactory(result))
 		var ICompilationUnit[] units = sources.map[new CompilationUnit(code.toCharArray(), fileName, null)]
 		compiler.compile(units)
 		return result
 	}
 	
-
+	@FinalFieldsConstructor private static class InMemoryProblemFactory extends DefaultProblemFactory {
+		
+		val Result result 
+		
+		override CategorizedProblem createProblem(char[] originatingFileName, int problemId, String[] problemArguments, int elaborationId, String[] messageArguments, int severity, int startPosition, int endPosition, int lineNumber, int columnNumber) {
+			val IProblem problem = super.createProblem(originatingFileName, problemId, problemArguments, elaborationId, messageArguments, severity, startPosition, endPosition, lineNumber, columnNumber)
+			result.compilationProblems.add(problem)
+			return problem as CategorizedProblem
+		}
+		
+		override CategorizedProblem createProblem(char[] originatingFileName, int problemId, String[] problemArguments, String[] messageArguments, int severity, int startPosition, int endPosition, int lineNumber, int columnNumber) {
+			val IProblem problem = super.createProblem(originatingFileName, problemId, problemArguments, messageArguments, severity, startPosition, endPosition, lineNumber, columnNumber)
+			result.compilationProblems.add(problem)
+			return problem as CategorizedProblem
+		}
+	}
+	
 	@FinalFieldsConstructor public static class Result {
-		@Accessors val Set<CategorizedProblem> compilationProblems = newLinkedHashSet()
+		@Accessors val Set<IProblem> compilationProblems = newLinkedHashSet()
 		val classMap = new HashMap<String, byte[]>
 		val ClassLoader parentClassLoader
 

@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
+import org.eclipse.jdt.core.compiler.IProblem;
 import org.eclipse.jdt.internal.compiler.ClassFile;
 import org.eclipse.jdt.internal.compiler.CompilationResult;
 import org.eclipse.jdt.internal.compiler.DefaultErrorHandlingPolicies;
@@ -201,9 +202,33 @@ public class InMemoryJavaCompiler {
   }
   
   @FinalFieldsConstructor
+  private static class InMemoryProblemFactory extends DefaultProblemFactory {
+    private final InMemoryJavaCompiler.Result result;
+    
+    @Override
+    public CategorizedProblem createProblem(final char[] originatingFileName, final int problemId, final String[] problemArguments, final int elaborationId, final String[] messageArguments, final int severity, final int startPosition, final int endPosition, final int lineNumber, final int columnNumber) {
+      final IProblem problem = super.createProblem(originatingFileName, problemId, problemArguments, elaborationId, messageArguments, severity, startPosition, endPosition, lineNumber, columnNumber);
+      this.result.compilationProblems.add(problem);
+      return ((CategorizedProblem) problem);
+    }
+    
+    @Override
+    public CategorizedProblem createProblem(final char[] originatingFileName, final int problemId, final String[] problemArguments, final String[] messageArguments, final int severity, final int startPosition, final int endPosition, final int lineNumber, final int columnNumber) {
+      final IProblem problem = super.createProblem(originatingFileName, problemId, problemArguments, messageArguments, severity, startPosition, endPosition, lineNumber, columnNumber);
+      this.result.compilationProblems.add(problem);
+      return ((CategorizedProblem) problem);
+    }
+    
+    public InMemoryProblemFactory(final InMemoryJavaCompiler.Result result) {
+      super();
+      this.result = result;
+    }
+  }
+  
+  @FinalFieldsConstructor
   public static class Result {
     @Accessors
-    private final Set<CategorizedProblem> compilationProblems = CollectionLiterals.<CategorizedProblem>newLinkedHashSet();
+    private final Set<IProblem> compilationProblems = CollectionLiterals.<IProblem>newLinkedHashSet();
     
     private final HashMap<String, byte[]> classMap = new HashMap<String, byte[]>();
     
@@ -219,7 +244,7 @@ public class InMemoryJavaCompiler {
     }
     
     @Pure
-    public Set<CategorizedProblem> getCompilationProblems() {
+    public Set<IProblem> getCompilationProblems() {
       return this.compilationProblems;
     }
   }
@@ -310,21 +335,8 @@ public class InMemoryJavaCompiler {
         }
       }
     };
-    org.eclipse.jdt.internal.compiler.Compiler compiler = new org.eclipse.jdt.internal.compiler.Compiler(this.nameEnv, _proceedWithAllProblems, _compilerOptions, _function, new DefaultProblemFactory() {
-      @Override
-      public CategorizedProblem createProblem(final char[] originatingFileName, final int problemId, final String[] problemArguments, final int elaborationId, final String[] messageArguments, final int severity, final int startPosition, final int endPosition, final int lineNumber, final int columnNumber) {
-        final CategorizedProblem problem = super.createProblem(originatingFileName, problemId, problemArguments, elaborationId, messageArguments, severity, startPosition, endPosition, lineNumber, columnNumber);
-        result.compilationProblems.add(problem);
-        return problem;
-      }
-      
-      @Override
-      public CategorizedProblem createProblem(final char[] originatingFileName, final int problemId, final String[] problemArguments, final String[] messageArguments, final int severity, final int startPosition, final int endPosition, final int lineNumber, final int columnNumber) {
-        final CategorizedProblem problem = super.createProblem(originatingFileName, problemId, problemArguments, messageArguments, severity, startPosition, endPosition, lineNumber, columnNumber);
-        result.compilationProblems.add(problem);
-        return problem;
-      }
-    });
+    InMemoryJavaCompiler.InMemoryProblemFactory _inMemoryProblemFactory = new InMemoryJavaCompiler.InMemoryProblemFactory(result);
+    org.eclipse.jdt.internal.compiler.Compiler compiler = new org.eclipse.jdt.internal.compiler.Compiler(this.nameEnv, _proceedWithAllProblems, _compilerOptions, _function, _inMemoryProblemFactory);
     final Function1<JavaSource, CompilationUnit> _function_1 = new Function1<JavaSource, CompilationUnit>() {
       @Override
       public CompilationUnit apply(final JavaSource it) {
