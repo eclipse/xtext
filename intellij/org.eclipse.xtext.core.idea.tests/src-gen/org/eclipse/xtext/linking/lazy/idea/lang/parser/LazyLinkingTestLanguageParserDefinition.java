@@ -4,6 +4,7 @@ import org.eclipse.xtext.psi.impl.PsiEObjectReference;
 import org.eclipse.xtext.linking.lazy.idea.lang.LazyLinkingTestLanguageElementTypeProvider;
 import org.eclipse.xtext.linking.lazy.idea.lang.psi.impl.LazyLinkingTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -26,6 +27,21 @@ public class LazyLinkingTestLanguageParserDefinition extends AbstractXtextParser
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
 		IElementType elementType = node.getElementType();
+		if (elementType == elementTypeProvider.getModel_TypesTypeParserRuleCall_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getType_NameIDTerminalRuleCall_1_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getType_PropertiesPropertyParserRuleCall_5_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getProperty_NameIDTerminalRuleCall_1_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getType_UnresolvedProxyPropertyUnresolvedProxyPropertyParserRuleCall_6_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getUnresolvedProxyProperty_NameIDTerminalRuleCall_2_0ElementType()
+			);
+		}
 		if (elementType == elementTypeProvider.getType_ExtendsTypeCrossReference_2_1_0ElementType()) {
 			return new PsiEObjectReference(node);
 		}

@@ -248,7 +248,7 @@ class PsiNamedEObjectTest extends LightCodeInsightFixtureTestCase {
 			}
 		}
 	}
-
+	
 	def void testNamespace_08() {
 		'''
 			import foo
@@ -256,7 +256,7 @@ class PsiNamedEObjectTest extends LightCodeInsightFixtureTestCase {
 			 a.b./* lalala */c {}
 		'''.testNotPsiNamedEObject(' a')
 	}
-
+	
 	def void testNamespace_09() {
 		'''
 			import foo
@@ -264,7 +264,7 @@ class PsiNamedEObjectTest extends LightCodeInsightFixtureTestCase {
 			 a.b./* lalala */c {}
 		'''.testPsiNamedEObject('a.', 'a.b./* lalala */c', 'd.e.f')
 	}
-
+	
 	def void testNamespace_10() {
 		'''
 			import foo
@@ -272,7 +272,7 @@ class PsiNamedEObjectTest extends LightCodeInsightFixtureTestCase {
 			 a.b./* lalala */c {}
 		'''.testPsiNamedEObject('.b', 'a.b./* lalala */c', 'd.e.f')
 	}
-
+	
 	def void testNamespace_11() {
 		'''
 			import foo
@@ -280,7 +280,7 @@ class PsiNamedEObjectTest extends LightCodeInsightFixtureTestCase {
 			 a.b./* lalala */c {}
 		'''.testPsiNamedEObject('b.', 'a.b./* lalala */c', 'd.e.f')
 	}
-
+	
 	def void testNamespace_12() {
 		'''
 			import foo
@@ -288,7 +288,7 @@ class PsiNamedEObjectTest extends LightCodeInsightFixtureTestCase {
 			 a.b./* lalala */c {}
 		'''.testPsiNamedEObject('./* lalala */c', 'a.b./* lalala */c', 'd.e.f')
 	}
-
+	
 	def void testNamespace_13() {
 		'''
 			import foo
@@ -296,7 +296,7 @@ class PsiNamedEObjectTest extends LightCodeInsightFixtureTestCase {
 			 a.b./* lalala */c {}
 		'''.testPsiNamedEObject('/* lalala */c', 'a.b./* lalala */c', 'd.e.f')
 	}
-
+	
 	def void testNamespace_14() {
 		'''
 			import foo
@@ -304,7 +304,7 @@ class PsiNamedEObjectTest extends LightCodeInsightFixtureTestCase {
 			 a.b./* lalala */c {}
 		'''.testPsiNamedEObject('ala */c', 'a.b./* lalala */c', 'd.e.f')
 	}
-
+	
 	def void testNamespace_15() {
 		'''
 			import foo
@@ -312,7 +312,7 @@ class PsiNamedEObjectTest extends LightCodeInsightFixtureTestCase {
 			 a.b./* lalala */c {}
 		'''.testPsiNamedEObject('c ', 'a.b./* lalala */c', 'd.e.f')
 	}
-
+	
 	def void testNamespace_16() {
 		'''
 			import foo
@@ -320,7 +320,7 @@ class PsiNamedEObjectTest extends LightCodeInsightFixtureTestCase {
 			 a.b./* lalala */c {}
 		'''.testPsiNamedEObject(' {}', 'a.b./* lalala */c', 'd.e.f')
 	}
-
+	
 	def void testNamespace_17() {
 		'''
 			import foo
@@ -424,12 +424,8 @@ class PsiNamedEObjectTest extends LightCodeInsightFixtureTestCase {
 		element.nameIdentifier.assertPsiEObjectIdentifier(element, name, nameOffset)
 	}
 
-	protected def assertPsiEObjectIdentifier(
-		PsiEObjectIdentifier identifier,
-		PsiNamedEObject element,
-		String name,
-		int nameOffset
-	) {
+	protected def assertPsiEObjectIdentifier(PsiEObjectIdentifier identifier, PsiNamedEObject element, String name,
+		int nameOffset) {
 		assertNotNull(identifier)
 		assertTrue(identifier.valid)
 		assertEquals(element.containingFile, identifier.containingFile)
@@ -448,11 +444,7 @@ class PsiNamedEObjectTest extends LightCodeInsightFixtureTestCase {
 
 	protected def findPsiNamedEObject(String text, int caretOffset) {
 		myFixture.configureByText('aaa.sdomain', text)
-		val targetElement = TargetElementUtilBase.instance.findTargetElement(
-			myFixture.editor,
-			ELEMENT_NAME_ACCEPTED,
-			caretOffset
-		)
+		val targetElement = TargetElementUtilBase.instance.findTargetElement(myFixture.editor, ELEMENT_NAME_ACCEPTED, caretOffset)
 		if (targetElement instanceof PsiNamedEObject) {
 			targetElement
 		}

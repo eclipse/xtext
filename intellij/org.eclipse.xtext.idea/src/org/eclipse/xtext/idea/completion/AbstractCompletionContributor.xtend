@@ -31,7 +31,6 @@ import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory
 import org.eclipse.xtext.idea.lang.AbstractXtextLanguage
 import org.eclipse.xtext.psi.impl.BaseXtextFile
-import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.TextRegion
 
 abstract class AbstractCompletionContributor extends CompletionContributor {
@@ -98,12 +97,12 @@ abstract class AbstractCompletionContributor extends CompletionContributor {
 
 	protected def getOffsets(CompletionParameters parameters) {
 		runReadAction [
-			(parameters.position.getUserData(CompletionContext.COMPLETION_CONTEXT_KEY) as CompletionContext).offsetMap
+			(parameters.position.getUserData(CompletionContext.COMPLETION_CONTEXT_KEY)).offsetMap
 		]
 	}
 
 	protected def getResource(CompletionParameters parameters) {
-		runReadAction[(parameters.originalFile as BaseXtextFile).resource as XtextResource]
+		runReadAction[(parameters.originalFile as BaseXtextFile).resource]
 	}
 	
 	protected def <T> runReadAction(Computable<T> computable) {

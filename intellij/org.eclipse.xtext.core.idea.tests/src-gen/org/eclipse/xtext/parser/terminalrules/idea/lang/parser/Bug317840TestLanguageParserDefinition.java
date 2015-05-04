@@ -3,6 +3,7 @@ package org.eclipse.xtext.parser.terminalrules.idea.lang.parser;
 import org.eclipse.xtext.parser.terminalrules.idea.lang.Bug317840TestLanguageElementTypeProvider;
 import org.eclipse.xtext.parser.terminalrules.idea.lang.psi.impl.Bug317840TestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -24,6 +25,27 @@ public class Bug317840TestLanguageParserDefinition extends AbstractXtextParserDe
 	@Override
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
+		IElementType elementType = node.getElementType();
+		if (elementType == elementTypeProvider.getElement_FirstNamedParserRuleCall_1_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getNamed_NameNAMEParserRuleCall_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getElement_SecondNamedParserRuleCall_2_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getNamed_NameNAMEParserRuleCall_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getElement_ThirdNamedParserRuleCall_3_0_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getNamed_NameNAMEParserRuleCall_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getElement_ForthNamedParserRuleCall_3_1_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getNamed_NameNAMEParserRuleCall_0ElementType()
+			);
+		}
 		return super.createElement(node);
 	}
 

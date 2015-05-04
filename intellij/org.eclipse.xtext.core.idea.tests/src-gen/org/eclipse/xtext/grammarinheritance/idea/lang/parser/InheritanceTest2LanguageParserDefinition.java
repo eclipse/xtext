@@ -3,6 +3,7 @@ package org.eclipse.xtext.grammarinheritance.idea.lang.parser;
 import org.eclipse.xtext.grammarinheritance.idea.lang.InheritanceTest2LanguageElementTypeProvider;
 import org.eclipse.xtext.grammarinheritance.idea.lang.psi.impl.InheritanceTest2LanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -24,6 +25,12 @@ public class InheritanceTest2LanguageParserDefinition extends AbstractXtextParse
 	@Override
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
+		IElementType elementType = node.getElementType();
+		if (elementType == elementTypeProvider.getModel_ElementsElementParserRuleCall_3_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getElement_NameIDTerminalRuleCall_1_0ElementType()
+			);
+		}
 		return super.createElement(node);
 	}
 

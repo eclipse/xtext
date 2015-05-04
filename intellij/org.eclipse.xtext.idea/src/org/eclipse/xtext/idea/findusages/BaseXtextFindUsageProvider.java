@@ -19,25 +19,30 @@ import com.intellij.psi.PsiNamedElement;
 
 public class BaseXtextFindUsageProvider implements FindUsagesProvider {
 
+	@Override
 	@Nullable
 	public WordsScanner getWordsScanner() {
 		return null;
 	}
 
+	@Override
 	public boolean canFindUsagesFor(@NotNull PsiElement psiElement) {
 		return psiElement instanceof PsiNamedEObject;
 	}
 
+	@Override
 	@Nullable
 	public String getHelpId(@NotNull PsiElement psiElement) {
 		return HelpID.FIND_OTHER_USAGES;
 	}
 
+	@Override
 	@NotNull
 	public String getType(@NotNull PsiElement element) {
 		return "";
 	}
 
+	@Override
 	@NotNull
 	public String getDescriptiveName(@NotNull PsiElement element) {
 		if (element instanceof PsiNamedElement) {
@@ -46,6 +51,7 @@ public class BaseXtextFindUsageProvider implements FindUsagesProvider {
 		return null;
 	}
 
+	@Override
 	@NotNull
 	public String getNodeText(@NotNull PsiElement element, boolean useFullName) {
 		if (element instanceof PsiNamedElement) {

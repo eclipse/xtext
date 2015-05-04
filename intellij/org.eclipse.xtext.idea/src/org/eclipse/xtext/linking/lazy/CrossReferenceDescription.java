@@ -43,7 +43,8 @@ public class CrossReferenceDescription implements ICrossReferenceDescription {
 		return locationInFileProvider.getSignificantTextRegion(context, reference, index);
 	}
 
-    @SuppressWarnings("unchecked")
+    @Override
+	@SuppressWarnings("unchecked")
 	public EObject resolve() {
     	try {
     		Object value = context.eGet(reference);
@@ -56,14 +57,17 @@ public class CrossReferenceDescription implements ICrossReferenceDescription {
     	}
     }
 
-    public Iterable<IEObjectDescription> getVariants() {
+    @Override
+	public Iterable<IEObjectDescription> getVariants() {
     	final Iterable<IEObjectDescription> iterable = getAllElements();
 		return new Iterable<IEObjectDescription>() {
 
+			@Override
 			public Iterator<IEObjectDescription> iterator() {
 				final Iterator<IEObjectDescription> iterator = iterable.iterator();
 				return new Iterator<IEObjectDescription>() {
 
+					@Override
 					public boolean hasNext() {
 						try {
 							return iterator.hasNext();
@@ -75,6 +79,7 @@ public class CrossReferenceDescription implements ICrossReferenceDescription {
 				    	} 
 					}
 
+					@Override
 					public IEObjectDescription next() {
 						try {
 							return iterator.next();
@@ -83,6 +88,7 @@ public class CrossReferenceDescription implements ICrossReferenceDescription {
 				    	}
 					}
 
+					@Override
 					public void remove() {
 						try {
 							iterator.remove();

@@ -83,6 +83,9 @@ public class BaseXtextASTFactory extends DefaultASTFactoryImpl {
 		return false;
 	}
 
+	/**
+	 * @param type may be used by overrides
+	 */
 	protected LeafElement createWhitespace(IElementType type, CharSequence text) {
 		return new PsiWhiteSpaceImpl(text);
 	}

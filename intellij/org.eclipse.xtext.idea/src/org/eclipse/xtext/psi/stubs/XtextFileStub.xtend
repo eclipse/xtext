@@ -29,7 +29,7 @@ class XtextFileStub<T extends BaseXtextFile> extends PsiFileStubImpl<T> implemen
 		this.type = type
 	}
 
-	override getType() {
+	override XtextFileElementType<?> getType() {
 		this.type
 	}
 

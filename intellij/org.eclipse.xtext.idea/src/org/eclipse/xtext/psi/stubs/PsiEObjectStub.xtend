@@ -14,7 +14,7 @@ import org.eclipse.xtext.psi.PsiEObject
 
 class PsiEObjectStub extends StubBase<PsiEObject> {
 	
-	protected new(StubElement parent, IStubElementType elementType) {
+	protected new(StubElement<?> parent, IStubElementType<?, PsiEObject> elementType) {
 		super(parent, elementType)
 	}
 	

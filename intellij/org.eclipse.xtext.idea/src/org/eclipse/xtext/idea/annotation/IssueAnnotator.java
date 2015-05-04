@@ -32,6 +32,7 @@ import com.intellij.psi.PsiElement;
 
 public class IssueAnnotator implements Annotator {
 
+	@Override
 	public void annotate(PsiElement element, AnnotationHolder holder) {
 		if (!(element instanceof PsiEObject)) {
 			return;
@@ -98,6 +99,7 @@ public class IssueAnnotator implements Annotator {
 		try {
 			return resourceValidator.validate(resource, CheckMode.NORMAL_AND_FAST, new CancelIndicator() {
 				
+				@Override
 				public boolean isCanceled() {
 					ProgressIndicatorProvider.checkCanceled();
 					return false;

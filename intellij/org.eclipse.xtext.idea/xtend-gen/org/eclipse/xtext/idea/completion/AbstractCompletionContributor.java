@@ -258,7 +258,7 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
       public OffsetMap compute() {
         PsiElement _position = parameters.getPosition();
         CompletionContext _userData = _position.<CompletionContext>getUserData(CompletionContext.COMPLETION_CONTEXT_KEY);
-        return ((CompletionContext) _userData).getOffsetMap();
+        return _userData.getOffsetMap();
       }
     };
     return this.<OffsetMap>runReadAction(_function);
@@ -269,8 +269,7 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
       @Override
       public XtextResource compute() {
         PsiFile _originalFile = parameters.getOriginalFile();
-        XtextResource _resource = ((BaseXtextFile) _originalFile).getResource();
-        return ((XtextResource) _resource);
+        return ((BaseXtextFile) _originalFile).getResource();
       }
     };
     return this.<XtextResource>runReadAction(_function);

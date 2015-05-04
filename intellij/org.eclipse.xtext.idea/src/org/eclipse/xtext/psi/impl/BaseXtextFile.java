@@ -137,6 +137,7 @@ public abstract class BaseXtextFile extends PsiFileBase {
 	}
 
 	protected INode findOriginalNode(INode node) {
+		// TODO get rid of this dependency on synth nodes
 		if (node instanceof SyntheticCompositeNode) {
 			return findOriginalNode(node.getParent());
 		}
@@ -147,6 +148,7 @@ public abstract class BaseXtextFile extends PsiFileBase {
 		if (astNodes == null) {
 			return emptyList();
 		}
+		// TODO get rid of this dependency on synth nodes
 		if (node instanceof SyntheticCompositeNode) {
 			List<ASTNode> result = new ArrayList<ASTNode>();
 			for (ASTNode astNode : astNodes) {

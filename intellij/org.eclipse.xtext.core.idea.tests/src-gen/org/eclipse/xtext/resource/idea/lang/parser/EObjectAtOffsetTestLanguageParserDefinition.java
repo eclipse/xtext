@@ -4,6 +4,7 @@ import org.eclipse.xtext.psi.impl.PsiEObjectReference;
 import org.eclipse.xtext.resource.idea.lang.EObjectAtOffsetTestLanguageElementTypeProvider;
 import org.eclipse.xtext.resource.idea.lang.psi.impl.EObjectAtOffsetTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -26,6 +27,16 @@ public class EObjectAtOffsetTestLanguageParserDefinition extends AbstractXtextPa
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
 		IElementType elementType = node.getElementType();
+		if (elementType == elementTypeProvider.getAbstractBar_BarParserRuleCall_2ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getBar_NameIDTerminalRuleCall_1_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getModel_FoosFooParserRuleCall_0_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getFoo_NameQualifiedNameWithOtherDelimParserRuleCall_1_0ElementType()
+			);
+		}
 		if (elementType == elementTypeProvider.getAbstractBar_FooFooCrossReference_3_2_0ElementType()) {
 			return new PsiEObjectReference(node);
 		}

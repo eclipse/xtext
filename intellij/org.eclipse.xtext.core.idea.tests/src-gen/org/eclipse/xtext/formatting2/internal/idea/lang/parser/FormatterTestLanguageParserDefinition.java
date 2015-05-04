@@ -24,6 +24,7 @@ public class FormatterTestLanguageParserDefinition extends AbstractXtextParserDe
 	@Override
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
+		IElementType elementType = node.getElementType();
 		return super.createElement(node);
 	}
 

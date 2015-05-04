@@ -4,6 +4,7 @@ import org.eclipse.xtext.psi.impl.PsiEObjectReference;
 import org.eclipse.xtext.testlanguages.idea.lang.PartialParserTestLanguageElementTypeProvider;
 import org.eclipse.xtext.testlanguages.idea.lang.psi.impl.PartialParserTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -26,6 +27,26 @@ public class PartialParserTestLanguageParserDefinition extends AbstractXtextPars
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
 		IElementType elementType = node.getElementType();
+		if (elementType == elementTypeProvider.getNested_NestedSomeContainerParserRuleCall_2_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getSomeContainer_NameIDTerminalRuleCall_1_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getChild_ValueNamedParserRuleCall_3_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getNamed_NameIDTerminalRuleCall_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getFirstConcrete_ValueNamedParserRuleCall_3_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getNamed_NameIDTerminalRuleCall_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getSecondConcrete_ValueNamedParserRuleCall_4_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getNamed_NameIDTerminalRuleCall_0ElementType()
+			);
+		}
 		if (elementType == elementTypeProvider.getFirstConcrete_ReferencedContainerSomeContainerCrossReference_4_0ElementType()) {
 			return new PsiEObjectReference(node);
 		}
