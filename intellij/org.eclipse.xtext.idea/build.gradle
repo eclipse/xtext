@@ -1,8 +1,17 @@
+configurations {
+	builder
+}
+
 dependencies {
 	compile project(":plugins:org.eclipse.xtext.ide")
 	compile project(":plugins:org.eclipse.xtext.xbase")
 	compile project(":plugins:org.eclipse.xtend.lib.macro")
-	compile project(':intellij:org.eclipse.xtext.idea.builder')
 	compile project(':plugins:org.eclipse.xtext.generator')
 	compile project(':plugins:org.eclipse.xtext.ecore')
+
+	builder project(':intellij:org.eclipse.xtext.idea.builder')
+}
+
+assembleSandbox.plugin.into('builder') {
+	from(configurations.builder - configurations.compile)
 }

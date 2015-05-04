@@ -22,7 +22,7 @@ ext.toDependency = { requirement ->
 		return projectDependency
 	}
 	if (requirement.name == 'com.google.inject') {
-		return [group:'com.google.inject', name:'guice', version:versions.'google-inject.version']
+		return [group:'com.google.inject', name:'guice', version:versions.'google-inject.version', classifier:'no_aop']
 	}
 	if (requirement.name == 'org.antlr.runtime') {
 		return [group:'org.antlr', name:'antlr-runtime', version:versions.'antlr.version']

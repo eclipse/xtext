@@ -10,9 +10,12 @@ project.afterEvaluate {
 	configurations.each {configuration ->
 		configuration.dependencies.toSet().each { dependency ->
 			if (dependency instanceof ProjectDependency) {
-				dependency.transitive = false
-				dependency.dependencyProject.configurations[configuration.name].allDependencies.all {
-					project.dependencies.add(configuration.name, it)
+				def upstreamConfiguration = dependency.dependencyProject.configurations.findByName(configuration.name)
+				if (upstreamConfiguration) {
+					dependency.transitive = false
+					upstreamConfiguration.allDependencies.all {
+						project.dependencies.add(configuration.name, it)
+					}
 				}
 			}
 		}

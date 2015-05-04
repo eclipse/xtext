@@ -17,7 +17,10 @@ class XtextBuildProcessParametersProvider extends BuildProcessParametersProvider
 	override getClassPath() {
 		val pluginId = PluginId.getId("org.eclipse.xtext.idea")
 		val plugin = PluginManager.getPlugin(pluginId)
-		new File(plugin.path, 'lib').listFiles.map[absolutePath]
+		val libs = newArrayList
+		libs += new File(plugin.path, 'lib').listFiles.map[absolutePath]
+		libs += new File(plugin.path, 'builder').listFiles.map[absolutePath]
+		libs
 	}
 
 }

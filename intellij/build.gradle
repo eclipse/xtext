@@ -29,12 +29,6 @@ configure(subprojects - eclipsePluginProjects) {
 	apply from: "$rootDir/gradle/eclipse-settings.gradle"
 	project.apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
 
-	configurations.compile {
-		exclude module:'cglib'
-		exclude module:'icu4j'
-		exclude module:'org.eclipse.jdt.core'
-	}
-
 	if (!isBuildServer) {
 		// Disable the java task if not on the build server
 		// This allows to reuse the artifacts from /bin that
@@ -50,6 +44,17 @@ configure(subprojects - eclipsePluginProjects) {
 		classes {
 			dependsOn(copyFromBin)
 		}
+	}
+}
+
+configure(ideaPluginProjects + ideaTestProjects) {
+	configurations.compile {
+		exclude group:'org.ow2.asm'
+		exclude module:'org.eclipse.jdt.core'
+		//TODO these should be excluded higher in the dependency chain
+		exclude module:'aopalliance'
+		exclude module:'asm'
+		exclude module:'cglib'
 	}
 
 	task cleanTestSystem(type: Delete) {
@@ -68,6 +73,7 @@ configure(ideaTestProjects) {
 	dependencies {
 		testCompile project(':intellij:org.eclipse.xtext.idea.tests')
 	}
+
 	test {
 		minHeapSize = "1024m"
 		jvmArgs '-XX:MaxPermSize=256m'
