@@ -73,7 +73,7 @@ public class IdeaProjectContributor extends DefaultProjectFactoryContributor {
     _builder.append("pluginDependencies {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("id \'org.eclipse.xtext.idea\'");
+    _builder.append("id \'org.eclipse.xtext.idea\' version \'2.9.0-SNAPSHOT\'");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
