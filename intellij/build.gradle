@@ -1,6 +1,6 @@
 buildscript {
 	dependencies {
-		classpath "org.xtext:xtext-idea-gradle-plugin:0.3.11"
+		classpath "org.xtext:xtext-idea-gradle-plugin:0.3.14"
 	}
 }
 
@@ -16,7 +16,6 @@ allprojects {
 	apply plugin: 'org.xtext.idea-dev'
 
 	ideaDevelopment {
-		ideaHome = "${project(':intellij').projectDir}/intellij-ce"
 		ideaVersion = "141.814.3"
 	}
 }
