@@ -70,11 +70,3 @@ if (isBuildServer) {
 //skip compilation, done by Eclipse/Maven
 compileJava.enabled = false
 processResources.enabled = false
-
-//skip Eclipse tasks for now
-eclipseProject.enabled = false
-cleanEclipseProject.enabled = false
-eclipseJdt.enabled = false
-cleanEclipseJdt.enabled = false
-eclipseClasspath.enabled = false
-cleanEclipseClasspath.enabled = false

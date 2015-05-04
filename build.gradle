@@ -11,8 +11,6 @@ allprojects {
 
 	repositories.addAll(rootProject.buildscript.repositories)
 
-	apply from: "$rootDir/gradle/eclipse-settings.gradle"
-
 	plugins.withType(JavaPlugin) {
 		project.apply from: "$rootDir/gradle/unroll-dependencies.gradle"
 		sourceCompatibility = 1.6

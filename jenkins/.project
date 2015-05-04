@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
 	<name>jenkins</name>
-	<comment></comment>
-	<projects>
-	</projects>
+	<comment/>
+	<projects/>
 	<natures>
 		<nature>org.springsource.ide.eclipse.gradle.core.nature</nature>
 	</natures>
+	<buildSpec/>
+	<linkedResources/>
 </projectDescription>

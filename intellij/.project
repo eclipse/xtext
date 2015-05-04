@@ -1,18 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>intellij</name>
-	<comment></comment>
-	<projects>
-	</projects>
-	<buildSpec>
-	</buildSpec>
-	<natures>
-		<nature>org.springsource.ide.eclipse.gradle.core.nature</nature>
-	</natures>
 	<filteredResources>
 		<filter>
 			<id>0</id>
-			<name></name>
+			<name/>
 			<type>10</type>
 			<matcher>
 				<id>org.eclipse.ui.ide.multiFilter</id>
@@ -20,4 +11,12 @@
 			</matcher>
 		</filter>
 	</filteredResources>
+	<name>intellij</name>
+	<comment/>
+	<projects/>
+	<natures>
+		<nature>org.springsource.ide.eclipse.gradle.core.nature</nature>
+	</natures>
+	<buildSpec/>
+	<linkedResources/>
 </projectDescription>

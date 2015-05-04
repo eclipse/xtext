@@ -14,7 +14,7 @@ ideaRepository.rootUrl = 'https://hudson.eclipse.org/xtext/job/xtext-intellij/la
 
 allprojects {
 	apply plugin: 'org.xtext.idea-dev'
-	
+
 	ideaDevelopment {
 		ideaHome = "${project(':intellij').projectDir}/intellij-ce"
 		ideaVersion = "141.814.3"
@@ -27,9 +27,9 @@ configure(eclipsePluginProjects) {
 
 configure(subprojects - eclipsePluginProjects) {
 	apply plugin: 'org.xtext.idea-component'
-	apply plugin: 'eclipse'
+	apply from: "$rootDir/gradle/eclipse-settings.gradle"
 	project.apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
-	
+
 	configurations.compile {
 		exclude module:'cglib'
 		exclude module:'icu4j'
@@ -38,7 +38,7 @@ configure(subprojects - eclipsePluginProjects) {
 
 	if (!isBuildServer) {
 		// Disable the java task if not on the build server
-		// This allows to reuse the artifacts from /bin that 
+		// This allows to reuse the artifacts from /bin that
 		// Eclipse produced. They are immediately available and
 		// contain debug information.
 		compileJava.enabled = false
@@ -65,7 +65,7 @@ configure(ideaPluginProjects) {
 configure(ideaTestProjects) {
 	sourceSets.test.java.srcDirs ('src', 'src-gen', 'xtend-gen', 'tests')
 	sourceSets.main.java.srcDirs = []
-	
+
 	dependencies {
 		testCompile project(':intellij:org.eclipse.xtext.idea.tests')
 	}
