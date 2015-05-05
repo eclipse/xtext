@@ -4,7 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.Map;
 import java.util.Set;
-import org.eclipse.jdt.core.compiler.CategorizedProblem;
+import org.eclipse.jdt.core.compiler.IProblem;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.compiler.InMemoryJavaCompiler;
 import org.eclipse.xtext.xbase.compiler.JavaSource;
@@ -38,17 +38,17 @@ public class OnTheFlyJavaCompiler2 {
     JavaSource _javaSource = new JavaSource(_javaFile, code);
     final InMemoryJavaCompiler.Result result = this.inMemoryCompiler.compile(_javaSource);
     try {
-      Set<CategorizedProblem> _compilationProblems = result.getCompilationProblems();
-      final Function1<CategorizedProblem, Boolean> _function = new Function1<CategorizedProblem, Boolean>() {
+      Set<IProblem> _compilationProblems = result.getCompilationProblems();
+      final Function1<IProblem, Boolean> _function = new Function1<IProblem, Boolean>() {
         @Override
-        public Boolean apply(final CategorizedProblem it) {
+        public Boolean apply(final IProblem it) {
           return Boolean.valueOf(it.isError());
         }
       };
-      boolean _exists = IterableExtensions.<CategorizedProblem>exists(_compilationProblems, _function);
+      boolean _exists = IterableExtensions.<IProblem>exists(_compilationProblems, _function);
       if (_exists) {
-        Set<CategorizedProblem> _compilationProblems_1 = result.getCompilationProblems();
-        InputOutput.<Set<CategorizedProblem>>println(_compilationProblems_1);
+        Set<IProblem> _compilationProblems_1 = result.getCompilationProblems();
+        InputOutput.<Set<IProblem>>println(_compilationProblems_1);
       }
       ClassLoader _classLoader = result.getClassLoader();
       return _classLoader.loadClass(classname);
@@ -69,7 +69,7 @@ public class OnTheFlyJavaCompiler2 {
         _builder.append("PROBLEMS : ");
         _builder.newLine();
         _builder.append("\t");
-        Set<CategorizedProblem> _compilationProblems_2 = result.getCompilationProblems();
+        Set<IProblem> _compilationProblems_2 = result.getCompilationProblems();
         String _join = IterableExtensions.join(_compilationProblems_2, "\n");
         _builder.append(_join, "\t");
         _builder.newLineIfNotEmpty();
@@ -99,17 +99,17 @@ public class OnTheFlyJavaCompiler2 {
     Iterable<JavaSource> _map = IterableExtensions.<Map.Entry<String, String>, JavaSource>map(_entrySet, _function);
     final InMemoryJavaCompiler.Result result = this.inMemoryCompiler.compile(((JavaSource[])Conversions.unwrapArray(_map, JavaSource.class)));
     try {
-      Set<CategorizedProblem> _compilationProblems = result.getCompilationProblems();
-      final Function1<CategorizedProblem, Boolean> _function_1 = new Function1<CategorizedProblem, Boolean>() {
+      Set<IProblem> _compilationProblems = result.getCompilationProblems();
+      final Function1<IProblem, Boolean> _function_1 = new Function1<IProblem, Boolean>() {
         @Override
-        public Boolean apply(final CategorizedProblem it) {
+        public Boolean apply(final IProblem it) {
           return Boolean.valueOf(it.isError());
         }
       };
-      boolean _exists = IterableExtensions.<CategorizedProblem>exists(_compilationProblems, _function_1);
+      boolean _exists = IterableExtensions.<IProblem>exists(_compilationProblems, _function_1);
       if (_exists) {
-        Set<CategorizedProblem> _compilationProblems_1 = result.getCompilationProblems();
-        InputOutput.<Set<CategorizedProblem>>println(_compilationProblems_1);
+        Set<IProblem> _compilationProblems_1 = result.getCompilationProblems();
+        InputOutput.<Set<IProblem>>println(_compilationProblems_1);
       }
       final ClassLoader classLoader = result.getClassLoader();
       Set<String> _keySet = sources.keySet();
@@ -148,7 +148,7 @@ public class OnTheFlyJavaCompiler2 {
         _builder.append("PROBLEMS : ");
         _builder.newLine();
         _builder.append("\t");
-        Set<CategorizedProblem> _compilationProblems_2 = result.getCompilationProblems();
+        Set<IProblem> _compilationProblems_2 = result.getCompilationProblems();
         String _join = IterableExtensions.join(_compilationProblems_2, "\n");
         _builder.append(_join, "\t");
         _builder.newLineIfNotEmpty();
