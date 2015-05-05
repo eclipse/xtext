@@ -121,7 +121,7 @@ public class XFunctionTypeRefImplCustom extends XFunctionTypeRefImpl {
 		}
 		{
 			if (!procedure) {
-				JvmTypeReference wrapped = procedure ? getReturnType() : wrapIfNecessary(getReturnType());
+				JvmTypeReference wrapped = wrapIfNecessary(getReturnType());
 				if (wrapped == null || wrapped.eContainer() != null) {
 					JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
 					delegate.setDelegate(wrapped);
@@ -168,7 +168,7 @@ public class XFunctionTypeRefImplCustom extends XFunctionTypeRefImpl {
 				if (!(returnType instanceof JvmWildcardTypeReference)) {
 					JvmWildcardTypeReference returnType = typesFactory.createJvmWildcardTypeReference();
 					JvmUpperBound returnTypeBound = typesFactory.createJvmUpperBound();
-					JvmTypeReference wrapped = procedure ? getReturnType() : wrapIfNecessary(getReturnType());
+					JvmTypeReference wrapped = wrapIfNecessary(getReturnType());
 					if (wrapped == null || wrapped.eContainer() != null) {
 						JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
 						delegate.setDelegate(wrapped);

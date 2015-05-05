@@ -100,7 +100,7 @@ public class RichStringAwareSourceViewer extends XtextSourceViewer {
 
 				// Perform the shift operation.
 				@SuppressWarnings("rawtypes")
-				Map map= (useDefaultPrefixes ? fDefaultPrefixChars : fIndentChars);
+				Map map=  fDefaultPrefixChars;
 					for (int i= 0, j= 0; i < regions.length; i++, j += 2) {
 					String[] prefixes= (String[]) copiedSelectContentTypePlugin(regions[i].getType(), map);
 					if (prefixes != null && prefixes.length > 0 && lines[j] >= 0 && lines[j + 1] >= 0) {

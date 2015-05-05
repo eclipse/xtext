@@ -68,7 +68,7 @@ public class Files {
 		}
 	}
 
-	public static boolean cleanFolder(File parentFolder, final FileFilter filter, boolean continueOnError,
+	public static boolean cleanFolder(final File parentFolder, final FileFilter filter, boolean continueOnError,
 			boolean deleteParentFolder) throws FileNotFoundException {
 		if (!parentFolder.exists()) {
 			throw new FileNotFoundException(parentFolder.getAbsolutePath());
@@ -83,6 +83,9 @@ public class Files {
 			};
 		log.debug("Cleaning folder " + parentFolder.toString());
 		final File[] contents = parentFolder.listFiles(myFilter);
+		if (contents == null) {
+			return true;
+		}
 		for (int j = 0; j < contents.length; j++) {
 			final File file = contents[j];
 			if (file.isDirectory()) {
@@ -97,7 +100,7 @@ public class Files {
 			}
 		}
 		if (deleteParentFolder) {
-			if (parentFolder.list().length==0 && !parentFolder.delete()) {
+			if (parentFolder.list() != null && parentFolder.list().length == 0 && !parentFolder.delete()) {
 				log.error("Couldn't delete " + parentFolder.getAbsolutePath());
 				return false;
 			}
