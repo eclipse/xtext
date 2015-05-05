@@ -1492,7 +1492,7 @@ public class CompilerBug465058Test extends AbstractXtendCompilerTest {
     _builder_1.append("public Object apply() {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("return ((Number)((Number)Bug.this.<Number>head2(new Number[] { Integer.valueOf(1), Double.valueOf(1.0) })));");
+    _builder_1.append("return ((Number)Bug.this.<Number>head2(new Number[] { Integer.valueOf(1), Double.valueOf(1.0) }));");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");
@@ -1642,7 +1642,7 @@ public class CompilerBug465058Test extends AbstractXtendCompilerTest {
     _builder_1.append("public Object apply() {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("return ((Number)((Number)Bug.this.<Number>head2(new Comparable[] { ((Integer) null), ((Double) null) })));");
+    _builder_1.append("return ((Number)Bug.this.<Number>head2(new Comparable[] { ((Integer) null), ((Double) null) }));");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");
@@ -1717,7 +1717,7 @@ public class CompilerBug465058Test extends AbstractXtendCompilerTest {
     _builder_1.append("public Object apply() {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("return ((Number)((Number)Bug.this.<Number>head2(new Comparable[] { Integer.valueOf(1), Double.valueOf(1.0) })));");
+    _builder_1.append("return ((Number)Bug.this.<Number>head2(new Comparable[] { Integer.valueOf(1), Double.valueOf(1.0) }));");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");

@@ -1407,7 +1407,7 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("final Function0<Object> _function = () -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("return ((Number)((Number)this.<Number>head2(new Number[] { Integer.valueOf(1), Double.valueOf(1.0) })));");
+    _builder_1.append("return ((Number)this.<Number>head2(new Number[] { Integer.valueOf(1), Double.valueOf(1.0) }));");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");
@@ -1547,7 +1547,7 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("final Function0<Object> _function = () -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("return ((Number)((Number)this.<Number>head2(new Comparable[] { ((Integer) null), ((Double) null) })));");
+    _builder_1.append("return ((Number)this.<Number>head2(new Comparable[] { ((Integer) null), ((Double) null) }));");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");
@@ -1617,7 +1617,7 @@ public class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("final Function0<Object> _function = () -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("return ((Number)((Number)this.<Number>head2(new Comparable[] { Integer.valueOf(1), Double.valueOf(1.0) })));");
+    _builder_1.append("return ((Number)this.<Number>head2(new Comparable[] { Integer.valueOf(1), Double.valueOf(1.0) }));");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");
