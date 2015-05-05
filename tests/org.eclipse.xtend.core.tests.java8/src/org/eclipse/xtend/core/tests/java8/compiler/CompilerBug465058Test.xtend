@@ -614,7 +614,7 @@ class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			  
 			  public void bar() {
 			    final Function0<Object> _function = () -> {
-			      return ((Number)((Number)this.<Number>head2(new Number[] { Integer.valueOf(1), Double.valueOf(1.0) })));
+			      return ((Number)this.<Number>head2(new Number[] { Integer.valueOf(1), Double.valueOf(1.0) }));
 			    };
 			    this.foo(_function);
 			  }
@@ -674,7 +674,7 @@ class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			  
 			  public void bar() {
 			    final Function0<Object> _function = () -> {
-			      return ((Number)((Number)this.<Number>head2(new Comparable[] { ((Integer) null), ((Double) null) })));
+			      return ((Number)this.<Number>head2(new Comparable[] { ((Integer) null), ((Double) null) }));
 			    };
 			    this.foo(_function);
 			  }
@@ -704,7 +704,7 @@ class CompilerBug465058Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			  
 			  public void bar() {
 			    final Function0<Object> _function = () -> {
-			      return ((Number)((Number)this.<Number>head2(new Comparable[] { Integer.valueOf(1), Double.valueOf(1.0) })));
+			      return ((Number)this.<Number>head2(new Comparable[] { Integer.valueOf(1), Double.valueOf(1.0) }));
 			    };
 			    this.foo(_function);
 			  }
