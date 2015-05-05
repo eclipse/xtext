@@ -335,7 +335,7 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 									label.append(simpleTypeName);
 									label.append("' (");
 									label.append(packageName);
-									if(enclosingTypeNames != null && enclosingTypeNames.length > 0) {
+									if(enclosingTypeNames.length > 0) {
 										for(char[] enclosingTypeName: enclosingTypeNames) {
 											label.append(".");
 											label.append(enclosingTypeName);
@@ -398,7 +398,7 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 									if(!equal(wantedPackageName, new String(packageName))) {
 										label.append(" (");
 										label.append(packageName);
-										if(enclosingTypeNames != null && enclosingTypeNames.length > 0) {
+										if(enclosingTypeNames.length > 0) {
 											for(char[] enclosingTypeName: enclosingTypeNames) {
 												label.append(".");
 												label.append(enclosingTypeName);

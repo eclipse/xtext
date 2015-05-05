@@ -119,8 +119,7 @@ public abstract class AbstractPartialContentAssistParser extends AbstractContent
 					if (skippedAs != null) {
 						result.append(skippedAs);
 					} else {
-						if (appendTextToParse((ICompositeNode) child, offset, skipOptional
-								|| child.getTotalEndOffset() < offset, result)) {
+						if (appendTextToParse((ICompositeNode) child, offset, skipOptional, result)) {
 							return true;
 						}
 					}
