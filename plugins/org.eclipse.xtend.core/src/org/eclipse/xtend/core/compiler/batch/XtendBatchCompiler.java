@@ -10,6 +10,7 @@ import java.io.CharArrayWriter;
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
@@ -47,6 +48,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
+import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -850,36 +852,14 @@ public class XtendBatchCompiler {
 		}
 	}
 
-	// FIXME: use Files#cleanFolder after the maven distro availability of version 2.2.x
 	protected static boolean cleanFolder(File parentFolder, FileFilter filter, boolean continueOnError,
 			boolean deleteParentFolder) {
-		if (!parentFolder.exists()) {
+		try {
+			log.debug("Cleaning folder " + parentFolder.toString());
+			return Files.cleanFolder(parentFolder, null, continueOnError, deleteParentFolder);
+		} catch (FileNotFoundException e) {
 			return true;
 		}
-		if (filter == null)
-			filter = ACCEPT_ALL_FILTER;
-		log.debug("Cleaning folder " + parentFolder.toString());
-		final File[] contents = parentFolder.listFiles(filter);
-		for (int j = 0; j < contents.length; j++) {
-			final File file = contents[j];
-			if (file.isDirectory()) {
-				if (!cleanFolder(file, filter, continueOnError, true) && !continueOnError)
-					return false;
-			} else {
-				if (!file.delete()) {
-					log.error("Couldn't delete " + file.getAbsolutePath());
-					if (!continueOnError)
-						return false;
-				}
-			}
-		}
-		if (deleteParentFolder) {
-			if (parentFolder.list().length == 0 && !parentFolder.delete()) {
-				log.error("Couldn't delete " + parentFolder.getAbsolutePath());
-				return false;
-			}
-		}
-		return true;
 	}
 	
 	@Deprecated
