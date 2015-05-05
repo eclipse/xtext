@@ -2,17 +2,18 @@ package org.eclipse.xtext.xbase.compiler;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.compiler.InMemoryJavaCompiler;
 import org.eclipse.xtext.xbase.compiler.JavaSource;
+import org.eclipse.xtext.xbase.compiler.JavaVersion;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
@@ -27,9 +28,16 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 public class OnTheFlyJavaCompiler2 {
   private InMemoryJavaCompiler inMemoryCompiler;
   
+  /**
+   * Creates a new OnTheFlyCompiler that accepts Java6 compliant code.
+   */
   @Inject
   public OnTheFlyJavaCompiler2(final ClassLoader scope) {
-    InMemoryJavaCompiler _inMemoryJavaCompiler = new InMemoryJavaCompiler(scope);
+    this(scope, JavaVersion.JAVA6);
+  }
+  
+  public OnTheFlyJavaCompiler2(final ClassLoader scope, final JavaVersion version) {
+    InMemoryJavaCompiler _inMemoryJavaCompiler = new InMemoryJavaCompiler(scope, version);
     this.inMemoryCompiler = _inMemoryJavaCompiler;
   }
   
@@ -47,33 +55,51 @@ public class OnTheFlyJavaCompiler2 {
       };
       boolean _exists = IterableExtensions.<CategorizedProblem>exists(_compilationProblems, _function);
       if (_exists) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("Java code compiled with errors:");
+        _builder.newLine();
         Set<CategorizedProblem> _compilationProblems_1 = result.getCompilationProblems();
-        InputOutput.<Set<CategorizedProblem>>println(_compilationProblems_1);
+        final Function1<CategorizedProblem, Boolean> _function_1 = new Function1<CategorizedProblem, Boolean>() {
+          @Override
+          public Boolean apply(final CategorizedProblem it) {
+            return Boolean.valueOf(it.isError());
+          }
+        };
+        Iterable<CategorizedProblem> _filter = IterableExtensions.<CategorizedProblem>filter(_compilationProblems_1, _function_1);
+        String _join = IterableExtensions.join(_filter, "\n");
+        _builder.append(_join, "");
+        _builder.newLineIfNotEmpty();
+        _builder.newLine();
+        _builder.append("Code was:");
+        _builder.newLine();
+        _builder.append(code, "");
+        _builder.newLineIfNotEmpty();
+        throw new IllegalArgumentException(_builder.toString());
       }
       ClassLoader _classLoader = result.getClassLoader();
       return _classLoader.loadClass(classname);
     } catch (final Throwable _t) {
       if (_t instanceof ClassNotFoundException) {
         final ClassNotFoundException e = (ClassNotFoundException)_t;
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("Couldn\'t load \'");
-        _builder.append(classname, "");
-        _builder.append("\' ");
-        _builder.newLineIfNotEmpty();
-        _builder.append("source :");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append(code, "\t");
-        _builder.newLineIfNotEmpty();
-        _builder.newLine();
-        _builder.append("PROBLEMS : ");
-        _builder.newLine();
-        _builder.append("\t");
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("Couldn\'t load \'");
+        _builder_1.append(classname, "");
+        _builder_1.append("\' ");
+        _builder_1.newLineIfNotEmpty();
+        _builder_1.append("source :");
+        _builder_1.newLine();
+        _builder_1.append("\t");
+        _builder_1.append(code, "\t");
+        _builder_1.newLineIfNotEmpty();
+        _builder_1.newLine();
+        _builder_1.append("PROBLEMS : ");
+        _builder_1.newLine();
+        _builder_1.append("\t");
         Set<CategorizedProblem> _compilationProblems_2 = result.getCompilationProblems();
-        String _join = IterableExtensions.join(_compilationProblems_2, "\n");
-        _builder.append(_join, "\t");
-        _builder.newLineIfNotEmpty();
-        throw new IllegalStateException(_builder.toString(), e);
+        String _join_1 = IterableExtensions.join(_compilationProblems_2, "\n");
+        _builder_1.append(_join_1, "\t");
+        _builder_1.newLineIfNotEmpty();
+        throw new IllegalStateException(_builder_1.toString(), e);
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -108,12 +134,36 @@ public class OnTheFlyJavaCompiler2 {
       };
       boolean _exists = IterableExtensions.<CategorizedProblem>exists(_compilationProblems, _function_1);
       if (_exists) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("Java code compiled with errors:");
+        _builder.newLine();
         Set<CategorizedProblem> _compilationProblems_1 = result.getCompilationProblems();
-        InputOutput.<Set<CategorizedProblem>>println(_compilationProblems_1);
+        final Function1<CategorizedProblem, Boolean> _function_2 = new Function1<CategorizedProblem, Boolean>() {
+          @Override
+          public Boolean apply(final CategorizedProblem it) {
+            return Boolean.valueOf(it.isError());
+          }
+        };
+        Iterable<CategorizedProblem> _filter = IterableExtensions.<CategorizedProblem>filter(_compilationProblems_1, _function_2);
+        String _join = IterableExtensions.join(_filter, "\n");
+        _builder.append(_join, "");
+        _builder.newLineIfNotEmpty();
+        _builder.newLine();
+        _builder.append("Code was:");
+        _builder.newLine();
+        _builder.append("=========");
+        _builder.newLine();
+        Collection<String> _values = sources.values();
+        String _join_1 = IterableExtensions.join(_values, "\n=========\n");
+        _builder.append(_join_1, "");
+        _builder.newLineIfNotEmpty();
+        _builder.append("=========");
+        _builder.newLine();
+        throw new IllegalArgumentException(_builder.toString());
       }
       final ClassLoader classLoader = result.getClassLoader();
       Set<String> _keySet = sources.keySet();
-      final Function1<String, Class<?>> _function_2 = new Function1<String, Class<?>>() {
+      final Function1<String, Class<?>> _function_3 = new Function1<String, Class<?>>() {
         @Override
         public Class<?> apply(final String it) {
           try {
@@ -123,36 +173,36 @@ public class OnTheFlyJavaCompiler2 {
           }
         }
       };
-      Iterable<Class<?>> _map_1 = IterableExtensions.<String, Class<?>>map(_keySet, _function_2);
-      final Function1<Class<?>, String> _function_3 = new Function1<Class<?>, String>() {
+      Iterable<Class<?>> _map_1 = IterableExtensions.<String, Class<?>>map(_keySet, _function_3);
+      final Function1<Class<?>, String> _function_4 = new Function1<Class<?>, String>() {
         @Override
         public String apply(final Class<?> it) {
           return it.getName();
         }
       };
-      return IterableExtensions.<String, Class<?>>toMap(_map_1, _function_3);
+      return IterableExtensions.<String, Class<?>>toMap(_map_1, _function_4);
     } catch (final Throwable _t) {
       if (_t instanceof ClassNotFoundException) {
         final ClassNotFoundException e = (ClassNotFoundException)_t;
-        StringConcatenation _builder = new StringConcatenation();
+        StringConcatenation _builder_1 = new StringConcatenation();
         String _message = e.getMessage();
-        _builder.append(_message, "");
-        _builder.append(" ");
-        _builder.newLineIfNotEmpty();
-        _builder.append("source :");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append(sources, "\t");
-        _builder.newLineIfNotEmpty();
-        _builder.newLine();
-        _builder.append("PROBLEMS : ");
-        _builder.newLine();
-        _builder.append("\t");
+        _builder_1.append(_message, "");
+        _builder_1.append(" ");
+        _builder_1.newLineIfNotEmpty();
+        _builder_1.append("source :");
+        _builder_1.newLine();
+        _builder_1.append("\t");
+        _builder_1.append(sources, "\t");
+        _builder_1.newLineIfNotEmpty();
+        _builder_1.newLine();
+        _builder_1.append("PROBLEMS : ");
+        _builder_1.newLine();
+        _builder_1.append("\t");
         Set<CategorizedProblem> _compilationProblems_2 = result.getCompilationProblems();
-        String _join = IterableExtensions.join(_compilationProblems_2, "\n");
-        _builder.append(_join, "\t");
-        _builder.newLineIfNotEmpty();
-        throw new IllegalStateException(_builder.toString(), e);
+        String _join_2 = IterableExtensions.join(_compilationProblems_2, "\n");
+        _builder_1.append(_join_2, "\t");
+        _builder_1.newLineIfNotEmpty();
+        throw new IllegalStateException(_builder_1.toString(), e);
       } else {
         throw Exceptions.sneakyThrow(_t);
       }

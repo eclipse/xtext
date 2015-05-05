@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.compiler;
 
 import com.google.common.base.Objects;
-import com.google.inject.Inject;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,6 +36,7 @@ import org.eclipse.jdt.internal.compiler.problem.DefaultProblemFactory;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.xbase.compiler.JavaSource;
+import org.eclipse.xtext.xbase.compiler.JavaVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -224,31 +224,57 @@ public class InMemoryJavaCompiler {
     }
   }
   
-  private INameEnvironment nameEnv;
+  private final INameEnvironment nameEnv;
   
-  private ClassLoader parentClassLoader;
+  private final ClassLoader parentClassLoader;
   
-  @Accessors
-  private CompilerOptions compilerOptions;
+  private final CompilerOptions compilerOptions;
   
-  @Inject
-  public InMemoryJavaCompiler(final ClassLoader parent) {
+  public InMemoryJavaCompiler(final ClassLoader parent, final JavaVersion javaVersion) {
     InMemoryJavaCompiler.ClassLoaderBasedNameEnvironment _classLoaderBasedNameEnvironment = new InMemoryJavaCompiler.ClassLoaderBasedNameEnvironment(parent);
     this.nameEnv = _classLoaderBasedNameEnvironment;
     this.parentClassLoader = parent;
     CompilerOptions _compilerOptions = new CompilerOptions();
     this.compilerOptions = _compilerOptions;
-    this.setSourceLevel(ClassFileConstants.JDK1_6);
-    this.setComplianceLevel(ClassFileConstants.JDK1_6);
-    this.compilerOptions.targetJDK = ClassFileConstants.JDK1_6;
+    final long classFmt = this.toClassFmt(javaVersion);
+    this.setSourceLevel(classFmt);
+    this.setComplianceLevel(classFmt);
+    this.compilerOptions.targetJDK = classFmt;
     this.compilerOptions.inlineJsrBytecode = true;
     this.compilerOptions.preserveAllLocalVariables = true;
+  }
+  
+  public InMemoryJavaCompiler(final ClassLoader parent, final CompilerOptions compilerOptions) {
+    InMemoryJavaCompiler.ClassLoaderBasedNameEnvironment _classLoaderBasedNameEnvironment = new InMemoryJavaCompiler.ClassLoaderBasedNameEnvironment(parent);
+    this.nameEnv = _classLoaderBasedNameEnvironment;
+    this.parentClassLoader = parent;
+    Map _map = compilerOptions.getMap();
+    CompilerOptions _compilerOptions = new CompilerOptions(_map);
+    this.compilerOptions = _compilerOptions;
+  }
+  
+  private long toClassFmt(final JavaVersion version) {
+    if (version != null) {
+      switch (version) {
+        case JAVA5:
+          return ClassFileConstants.JDK1_5;
+        case JAVA6:
+          return ClassFileConstants.JDK1_6;
+        case JAVA7:
+          return ClassFileConstants.JDK1_7;
+        case JAVA8:
+          return (((ClassFileConstants.MAJOR_VERSION_1_7 + 1) << 16) + ClassFileConstants.MINOR_VERSION_0);
+        default:
+          break;
+      }
+    }
+    return 0;
   }
   
   /**
    * sets the source level (see @link(org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants))
    */
-  public void setSourceLevel(final long jdkVersion) {
+  private void setSourceLevel(final long jdkVersion) {
     try {
       this.compilerOptions.sourceLevel = jdkVersion;
       try {
@@ -269,7 +295,7 @@ public class InMemoryJavaCompiler {
   /**
    * sets the compliance level (see @link(org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants))
    */
-  public void setComplianceLevel(final long jdkVersion) {
+  private void setComplianceLevel(final long jdkVersion) {
     try {
       this.compilerOptions.complianceLevel = jdkVersion;
       try {
@@ -290,7 +316,6 @@ public class InMemoryJavaCompiler {
   public InMemoryJavaCompiler.Result compile(final JavaSource... sources) {
     final InMemoryJavaCompiler.Result result = new InMemoryJavaCompiler.Result(this.parentClassLoader);
     IErrorHandlingPolicy _proceedWithAllProblems = DefaultErrorHandlingPolicies.proceedWithAllProblems();
-    CompilerOptions _compilerOptions = this.getCompilerOptions();
     final ICompilerRequestor _function = new ICompilerRequestor() {
       @Override
       public void acceptResult(final CompilationResult it) {
@@ -310,7 +335,8 @@ public class InMemoryJavaCompiler {
         }
       }
     };
-    org.eclipse.jdt.internal.compiler.Compiler compiler = new org.eclipse.jdt.internal.compiler.Compiler(this.nameEnv, _proceedWithAllProblems, _compilerOptions, _function, new DefaultProblemFactory() {
+    org.eclipse.jdt.internal.compiler.Compiler compiler = new org.eclipse.jdt.internal.compiler.Compiler(this.nameEnv, _proceedWithAllProblems, 
+      this.compilerOptions, _function, new DefaultProblemFactory() {
       @Override
       public CategorizedProblem createProblem(final char[] originatingFileName, final int problemId, final String[] problemArguments, final int elaborationId, final String[] messageArguments, final int severity, final int startPosition, final int endPosition, final int lineNumber, final int columnNumber) {
         final CategorizedProblem problem = super.createProblem(originatingFileName, problemId, problemArguments, elaborationId, messageArguments, severity, startPosition, endPosition, lineNumber, columnNumber);
@@ -337,14 +363,5 @@ public class InMemoryJavaCompiler {
     ICompilationUnit[] units = ((ICompilationUnit[])Conversions.unwrapArray(ListExtensions.<JavaSource, CompilationUnit>map(((List<JavaSource>)Conversions.doWrapArray(sources)), _function_1), ICompilationUnit.class));
     compiler.compile(units);
     return result;
-  }
-  
-  @Pure
-  public CompilerOptions getCompilerOptions() {
-    return this.compilerOptions;
-  }
-  
-  public void setCompilerOptions(final CompilerOptions compilerOptions) {
-    this.compilerOptions = compilerOptions;
   }
 }

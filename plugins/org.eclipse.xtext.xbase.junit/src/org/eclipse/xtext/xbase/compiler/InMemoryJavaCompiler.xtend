@@ -7,6 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler
 
+import java.io.ByteArrayInputStream
+import java.io.InputStream
+import java.net.URL
+import java.net.URLConnection
 import java.util.HashMap
 import java.util.Map
 import java.util.Set
@@ -25,11 +29,6 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.xbase.compiler.InMemoryJavaCompiler.Result
-import java.net.URL
-import java.io.ByteArrayInputStream
-import java.net.URLConnection
-import java.io.InputStream
-import com.google.inject.Inject
 
 /**
  * 
@@ -122,25 +121,41 @@ class InMemoryJavaCompiler {
 		}
 	}
 	
-	INameEnvironment nameEnv
-	ClassLoader parentClassLoader
-	@Accessors CompilerOptions compilerOptions
+	val INameEnvironment nameEnv
+	val ClassLoader parentClassLoader
+	val CompilerOptions compilerOptions
 
-	@Inject new(ClassLoader parent) {
+	new(ClassLoader parent, JavaVersion javaVersion) {
 		nameEnv = new ClassLoaderBasedNameEnvironment(parent)
 		parentClassLoader = parent
 		compilerOptions = new CompilerOptions
-		sourceLevel = ClassFileConstants.JDK1_6
-		complianceLevel = ClassFileConstants.JDK1_6
-		compilerOptions.targetJDK = ClassFileConstants.JDK1_6
+		val classFmt = javaVersion.toClassFmt
+		sourceLevel = classFmt
+		complianceLevel = classFmt
+		compilerOptions.targetJDK = classFmt
 		compilerOptions.inlineJsrBytecode = true
 		compilerOptions.preserveAllLocalVariables = true
+	}
+	
+	new(ClassLoader parent, CompilerOptions compilerOptions) {
+		nameEnv = new ClassLoaderBasedNameEnvironment(parent)
+		parentClassLoader = parent
+		this.compilerOptions = new CompilerOptions(compilerOptions.map)
+	}
+	
+	private def long toClassFmt(JavaVersion version) {
+		switch(version) {
+			case JAVA5: return ClassFileConstants.JDK1_5
+			case JAVA6: return ClassFileConstants.JDK1_6
+			case JAVA7: return ClassFileConstants.JDK1_7
+			case JAVA8: return ((ClassFileConstants.MAJOR_VERSION_1_7 + 1) << 16) + ClassFileConstants.MINOR_VERSION_0 // ClassFileConstants.JDK1_8
+		}
 	}
 	
 	/**
 	 * sets the source level (see @link(org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants))
 	 */
-	def void setSourceLevel(long jdkVersion){
+	private def void setSourceLevel(long jdkVersion){
 		compilerOptions.sourceLevel = jdkVersion
 		// these fields have been introduces in JDT 3.7
 		try {
@@ -153,7 +168,7 @@ class InMemoryJavaCompiler {
 	/**
 	 * sets the compliance level (see @link(org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants))
 	 */
-	def void setComplianceLevel(long jdkVersion){
+	private def void setComplianceLevel(long jdkVersion){
 		compilerOptions.complianceLevel = jdkVersion
 		// these fields have been introduces in JDT 3.7
 		try {
@@ -166,7 +181,7 @@ class InMemoryJavaCompiler {
 	def Result compile(JavaSource... sources) {
 		val Result result = new Result(parentClassLoader)
 		var compiler = new Compiler(nameEnv, DefaultErrorHandlingPolicies.proceedWithAllProblems(),
-			getCompilerOptions(), [
+			compilerOptions, [
 				for (cf : it.getClassFiles()) {
 					result.classMap.put(cf.compoundName.map[String.valueOf(it)].join('.'), cf.bytes)
 				}

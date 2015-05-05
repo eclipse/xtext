@@ -30,7 +30,6 @@ import com.google.inject.Inject;
  */
 public class CompilerTestHelper {
 
-	@Inject
 	private InMemoryJavaCompiler javaCompiler;
 
 	@Inject
@@ -47,6 +46,11 @@ public class CompilerTestHelper {
 
 	@Inject
 	private IXtendJvmAssociations associations;
+	
+	@Inject
+	private void createInMemoryJavaCompiler(ClassLoader classLoader) {
+		javaCompiler = new InMemoryJavaCompiler(classLoader, configprovider.get(null).getJavaSourceVersion());
+	}
 	
 	public void assertEvaluatesTo(Object object, String string) {
 		final String compileToJavaCode = compileToJavaCode(string);

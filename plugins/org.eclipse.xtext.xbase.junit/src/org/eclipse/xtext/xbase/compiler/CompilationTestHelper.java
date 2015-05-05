@@ -101,6 +101,8 @@ public class CompilationTestHelper {
 	
 	@Inject private Provider<Result> resultProvider;
 	
+	@Inject private IGeneratorConfigProvider generatorConfigProvider;
+	
 	private RuntimeWorkspaceConfigProvider configProvider;
 
 	@Inject
@@ -163,7 +165,7 @@ public class CompilationTestHelper {
 	 * @since 2.9
 	 */
 	public void setJavaCompilerClassPath(ClassLoader classLoader) {
-		this.javaCompiler = new OnTheFlyJavaCompiler2(classLoader);
+		this.javaCompiler = new OnTheFlyJavaCompiler2(classLoader, generatorConfigProvider.get(null).getJavaSourceVersion());
 	}
 	
 	/**
