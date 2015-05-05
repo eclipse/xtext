@@ -11,14 +11,14 @@ import com.google.common.collect.HashMultimap
 import com.google.common.collect.Multimap
 import java.util.Set
 import org.eclipse.emf.common.util.URI
-import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder.FileListener
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.idea.build.net.Protocol.BuildResultMessage
 import org.eclipse.xtext.idea.build.net.Protocol.GeneratedFile
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-class XtextBuildResultCollector implements FileListener {
+@Accessors class XtextBuildResultCollector {
 	
 	Multimap<URI, URI> generatedFile2sourceURI = HashMultimap.create 
 
@@ -36,11 +36,4 @@ class XtextBuildResultCollector implements FileListener {
 		]
 	}
 	
-	override fileGenerated(URI source, URI target) {
-		generatedFile2sourceURI.put(target, source)
-	}
-	
-	override fileDeleted(URI file) {
-		deletedFiles.add(file)
-	}
 }

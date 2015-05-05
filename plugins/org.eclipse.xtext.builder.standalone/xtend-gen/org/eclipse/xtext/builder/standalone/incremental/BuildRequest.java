@@ -7,10 +7,17 @@
  */
 package org.eclipse.xtext.builder.standalone.incremental;
 
+import com.google.common.base.Objects;
+import java.io.File;
 import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.builder.standalone.IIssueHandler;
+import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
+import org.eclipse.xtext.builder.standalone.incremental.IndexState;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
@@ -22,6 +29,17 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class BuildRequest {
   private URI baseDir;
   
+  public URI getBaseDir() {
+    boolean _equals = Objects.equal(this.baseDir, null);
+    if (_equals) {
+      final String userDir = System.getProperty("user.dir");
+      File _file = new File(userDir);
+      URI _asURI = FilesAndURIs.asURI(_file);
+      this.baseDir = _asURI;
+    }
+    return this.baseDir;
+  }
+  
   private List<URI> classPath = CollectionLiterals.<URI>newArrayList();
   
   private List<URI> sourceRoots = CollectionLiterals.<URI>newArrayList();
@@ -32,6 +50,22 @@ public class BuildRequest {
   
   private List<URI> deletedFiles = CollectionLiterals.<URI>newArrayList();
   
+  private IIssueHandler issueHandler = new IIssueHandler.DefaultIssueHandler();
+  
+  private Procedure2<? super URI, ? super URI> afterGenerateFile = new Procedure2<URI, URI>() {
+    @Override
+    public void apply(final URI $0, final URI $1) {
+    }
+  };
+  
+  private Procedure1<? super URI> afterDeleteFile = new Procedure1<URI>() {
+    @Override
+    public void apply(final URI it) {
+    }
+  };
+  
+  private IndexState previousState = new IndexState();
+  
   private String defaultEncoding;
   
   private boolean isFullBuild = false;
@@ -41,11 +75,6 @@ public class BuildRequest {
   private boolean debugLog = false;
   
   private boolean writeStorageResources = false;
-  
-  @Pure
-  public URI getBaseDir() {
-    return this.baseDir;
-  }
   
   public void setBaseDir(final URI baseDir) {
     this.baseDir = baseDir;
@@ -94,6 +123,42 @@ public class BuildRequest {
   
   public void setDeletedFiles(final List<URI> deletedFiles) {
     this.deletedFiles = deletedFiles;
+  }
+  
+  @Pure
+  public IIssueHandler getIssueHandler() {
+    return this.issueHandler;
+  }
+  
+  public void setIssueHandler(final IIssueHandler issueHandler) {
+    this.issueHandler = issueHandler;
+  }
+  
+  @Pure
+  public Procedure2<? super URI, ? super URI> getAfterGenerateFile() {
+    return this.afterGenerateFile;
+  }
+  
+  public void setAfterGenerateFile(final Procedure2<? super URI, ? super URI> afterGenerateFile) {
+    this.afterGenerateFile = afterGenerateFile;
+  }
+  
+  @Pure
+  public Procedure1<? super URI> getAfterDeleteFile() {
+    return this.afterDeleteFile;
+  }
+  
+  public void setAfterDeleteFile(final Procedure1<? super URI> afterDeleteFile) {
+    this.afterDeleteFile = afterDeleteFile;
+  }
+  
+  @Pure
+  public IndexState getPreviousState() {
+    return this.previousState;
+  }
+  
+  public void setPreviousState(final IndexState previousState) {
+    this.previousState = previousState;
   }
   
   @Pure

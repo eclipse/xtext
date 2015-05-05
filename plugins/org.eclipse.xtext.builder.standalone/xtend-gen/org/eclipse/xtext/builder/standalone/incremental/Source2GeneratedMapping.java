@@ -9,21 +9,31 @@ package org.eclipse.xtext.builder.standalone.incremental;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import com.google.inject.Singleton;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@Singleton
+@FinalFieldsConstructor
 @SuppressWarnings("all")
 public class Source2GeneratedMapping {
-  private final Multimap<URI, URI> source2generated = HashMultimap.<URI, URI>create();
+  private final Multimap<URI, URI> source2generated;
   
-  private final Multimap<URI, URI> generated2source = HashMultimap.<URI, URI>create();
+  private final Multimap<URI, URI> generated2source;
+  
+  public Source2GeneratedMapping() {
+    this(HashMultimap.<URI, URI>create(), HashMultimap.<URI, URI>create());
+  }
+  
+  public Source2GeneratedMapping copy() {
+    return new Source2GeneratedMapping(this.source2generated, this.generated2source);
+  }
   
   public void addSource2Generated(final URI source, final URI generated) {
     this.source2generated.put(source, generated);
@@ -35,7 +45,10 @@ public class Source2GeneratedMapping {
     this.generated2source.remove(generated, source);
   }
   
-  public void deleteSource(final URI source) {
+  public Set<URI> deleteSource(final URI source) {
+    Iterable<URI> _generated = this.getGenerated(source);
+    Set<URI> _set = IterableExtensions.<URI>toSet(_generated);
+    final HashSet<URI> generated = new HashSet<URI>(_set);
     Collection<URI> _removeAll = this.source2generated.removeAll(source);
     final Procedure1<URI> _function = new Procedure1<URI>() {
       @Override
@@ -44,6 +57,7 @@ public class Source2GeneratedMapping {
       }
     };
     IterableExtensions.<URI>forEach(_removeAll, _function);
+    return generated;
   }
   
   public void deleteGenerated(final URI generated) {
@@ -63,5 +77,11 @@ public class Source2GeneratedMapping {
   
   public Iterable<URI> getSource(final URI generated) {
     return this.generated2source.get(generated);
+  }
+  
+  public Source2GeneratedMapping(final Multimap<URI, URI> source2generated, final Multimap<URI, URI> generated2source) {
+    super();
+    this.source2generated = source2generated;
+    this.generated2source = generated2source;
   }
 }

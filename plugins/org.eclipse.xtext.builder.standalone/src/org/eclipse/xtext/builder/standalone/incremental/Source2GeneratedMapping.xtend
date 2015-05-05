@@ -7,19 +7,28 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.standalone.incremental
 
-import org.eclipse.emf.common.util.URI
 import com.google.common.collect.HashMultimap
 import com.google.common.collect.Multimap
-import com.google.inject.Singleton
+import org.eclipse.emf.common.util.URI
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import java.util.HashSet
+import java.util.Set
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@Singleton
-class Source2GeneratedMapping {
+@FinalFieldsConstructor class Source2GeneratedMapping {
 	
-	val Multimap<URI, URI> source2generated = HashMultimap.create  
-	val Multimap<URI, URI> generated2source = HashMultimap.create  
+	val Multimap<URI, URI> source2generated
+	val Multimap<URI, URI> generated2source
+	
+	new() {
+		this(HashMultimap.create, HashMultimap.create)
+	}
+	  
+	def copy() {
+		new Source2GeneratedMapping(source2generated, generated2source)
+	}
 	
 	def void addSource2Generated(URI source, URI generated) {
 		source2generated.put(source, generated)
@@ -31,10 +40,12 @@ class Source2GeneratedMapping {
 		generated2source.remove(generated, source)
 	}
 	
-	def void deleteSource(URI source) {
+	def Set<URI> deleteSource(URI source) {
+		val generated = new HashSet(getGenerated(source).toSet)
 		source2generated.removeAll(source).forEach[
 			generated2source.remove(source, it)
 		]
+		return generated
 	}
 
 	def void deleteGenerated(URI generated) {
@@ -50,4 +61,5 @@ class Source2GeneratedMapping {
 	def Iterable<URI> getSource(URI generated) {
 		generated2source.get(generated)
 	}
+	
 }

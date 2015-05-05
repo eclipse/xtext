@@ -269,7 +269,7 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
         }
       };
       List<URI> _map_1 = ListExtensions.<String, URI>map(_deletedJavaFiles, _function_1);
-      final Iterable<URI> dependentJavaFiles = dependencyFinder.getDependentJavaFiles(_map, _map_1);
+      final Iterable<? extends URI> dependentJavaFiles = dependencyFinder.getDependentJavaFiles(_map, _map_1);
       Protocol.JavaDependencyResult _javaDependencyResult = new Protocol.JavaDependencyResult();
       final Procedure1<Protocol.JavaDependencyResult> _function_2 = new Procedure1<Protocol.JavaDependencyResult>() {
         @Override
@@ -281,7 +281,7 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
               return it.toString();
             }
           };
-          Iterable<String> _map = IterableExtensions.<URI, String>map(dependentJavaFiles, _function);
+          Iterable<String> _map = IterableExtensions.map(dependentJavaFiles, _function);
           Iterables.<String>addAll(_dependentJavaFiles, _map);
         }
       };

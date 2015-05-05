@@ -9,7 +9,6 @@ package org.eclipse.xtext.idea.build.daemon
 
 import com.google.inject.Guice
 import com.google.inject.Inject
-import com.google.inject.Provider
 import java.net.InetAddress
 import java.net.InetSocketAddress
 import java.net.ServerSocket
@@ -21,11 +20,14 @@ import org.apache.log4j.FileAppender
 import org.apache.log4j.Level
 import org.apache.log4j.Logger
 import org.apache.log4j.TTCCLayout
+import org.eclipse.xtext.builder.standalone.IIssueHandler
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder
+import org.eclipse.xtext.builder.standalone.incremental.IndexState
 import org.eclipse.xtext.idea.build.net.ObjectChannel
 import org.eclipse.xtext.idea.build.net.Protocol.BuildFailureMessage
 import org.eclipse.xtext.idea.build.net.Protocol.BuildRequestMessage
+import org.eclipse.xtext.idea.build.net.Protocol.BuildResultMessage
 
 import static org.eclipse.xtext.idea.build.daemon.XtextBuildDaemon.*
 
@@ -49,7 +51,7 @@ class XtextBuildDaemon {
 		}
 	}
 
-	private static def parse(String... args) {
+	private static def Arguments parse(String... args) {
 		val arguments = new Arguments
 		val i = args.iterator
 		while (i.hasNext) {
@@ -77,9 +79,9 @@ class XtextBuildDaemon {
 	}
 
 	static class Server {
-		@Inject Provider<Worker> workerProvider
+		@Inject Worker worker
 
-		def run(Arguments arguments) {
+		def void run(Arguments arguments) {
 			var ServerSocket serverSocket = null
 			try {
 				LOG.info('Starting xtext build daemon at port ' + arguments.port + '...')
@@ -108,7 +110,7 @@ class XtextBuildDaemon {
 									} else {
 										socketChannel.configureBlocking(true)
 										currentTimeout = arguments.timeout
-										shutdown = workerProvider.get.serve(socketChannel)
+										shutdown = worker.serve(socketChannel)
 									}
 								} finally {
 									socketChannel?.close
@@ -129,15 +131,19 @@ class XtextBuildDaemon {
 
 	static class Worker {
 
-		@Inject IncrementalStandaloneBuilder.Factory builderFactory
+		@Inject IncrementalStandaloneBuilder incrementalBuilder
 
 		@Inject IBuildSessionSingletons.Impl singletons
 
 		@Inject XtextBuildResultCollector xtextBuildResultCollector
+		
+		@Inject IIssueHandler issueHandler
+		
+		IndexState indexState
 
 		ObjectChannel channel
 
-		def serve(SocketChannel socketChannel) {
+		def boolean serve(SocketChannel socketChannel) {
 			channel = new ObjectChannel(socketChannel)
 			try {
 				val msg = channel.readObject
@@ -160,7 +166,7 @@ class XtextBuildDaemon {
 			}
 		}
 
-		def build(BuildRequestMessage request) {
+		def BuildResultMessage build(BuildRequestMessage request) {
 			singletons => [
 				objectChannel = channel
 				moduleBaseURL = request.baseDir
@@ -174,12 +180,24 @@ class XtextBuildDaemon {
 				dirtyFiles = request.dirtyFiles.map[asURI]
 				deletedFiles = request.deletedFiles.map[asURI]
 				failOnValidationError = false
+				
+				if (indexState != null) {
+					previousState = indexState
+				} else {
+					isFullBuild = true
+				}
+				
+				it.issueHandler = issueHandler
+				
+				afterGenerateFile = [ source, target |
+					xtextBuildResultCollector.generatedFile2sourceURI.put(source,target)
+				]
+				afterDeleteFile = [ deleted |
+					xtextBuildResultCollector.deletedFiles.add(deleted)
+				]
 			]
-			builderFactory.create(buildRequest, XtextLanguages.getLanguageAccesses) => [
-				addListener(xtextBuildResultCollector)
-				launch
-			]
-			xtextBuildResultCollector.buildResult
+			indexState = incrementalBuilder.build(buildRequest, XtextLanguages.getLanguageAccesses)
+			return xtextBuildResultCollector.buildResult
 		}
 	}
 }

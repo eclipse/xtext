@@ -10,6 +10,8 @@ package org.eclipse.xtext.builder.standalone.incremental
 import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
+import java.io.File
+import org.eclipse.xtext.builder.standalone.IIssueHandler
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -18,12 +20,26 @@ import org.eclipse.xtend.lib.annotations.Accessors
 @Accessors
 class BuildRequest {
 	URI baseDir
+	
+	def URI getBaseDir() {
+		if (baseDir == null) {
+			val userDir = System.getProperty('user.dir')
+			baseDir = FilesAndURIs.asURI(new File(userDir)) 
+		}
+		return baseDir
+	}
 
 	List<URI> classPath = newArrayList
 	List<URI> sourceRoots = newArrayList
 	List<URI> outputs = newArrayList
 	List<URI> dirtyFiles = newArrayList
 	List<URI> deletedFiles = newArrayList
+	
+	IIssueHandler issueHandler = new IIssueHandler.DefaultIssueHandler()
+	(URI, URI)=>void afterGenerateFile = []
+	(URI)=>void afterDeleteFile = []
+	
+	IndexState previousState = new IndexState
 	
 	String defaultEncoding
 	

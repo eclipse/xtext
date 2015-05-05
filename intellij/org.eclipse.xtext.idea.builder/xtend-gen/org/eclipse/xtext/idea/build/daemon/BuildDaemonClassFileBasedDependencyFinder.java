@@ -36,7 +36,7 @@ public class BuildDaemonClassFileBasedDependencyFinder implements IClassFileBase
   private IBuildSessionSingletons _iBuildSessionSingletons;
   
   @Override
-  public Iterable<URI> getDependentJavaFiles(final Iterable<URI> dirtyJavaFiles, final Iterable<URI> deletedJavaFiles) {
+  public Iterable<? extends URI> getDependentJavaFiles(final Iterable<URI> dirtyJavaFiles, final Iterable<URI> deletedJavaFiles) {
     boolean _and = false;
     boolean _isEmpty = IterableExtensions.isEmpty(dirtyJavaFiles);
     if (!_isEmpty) {
