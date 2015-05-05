@@ -59,6 +59,9 @@ public class CompareInputResourceProvider implements IResourceProvider {
 	}
 
 	protected IResource getResource(ITypedElement typedElement) {
+		if (typedElement == null) {
+			return null;
+		}
 		IResource result = null;
 		if (typedElement instanceof IResourceProvider) {
 			IResourceProvider resourceProvider = (IResourceProvider) typedElement;
