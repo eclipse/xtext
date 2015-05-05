@@ -100,7 +100,8 @@ public class Files {
 			}
 		}
 		if (deleteParentFolder) {
-			if (parentFolder.list() != null && parentFolder.list().length == 0 && !parentFolder.delete()) {
+			String[] children = parentFolder.list();
+			if (children != null && children.length == 0 && !parentFolder.delete()) {
 				log.error("Couldn't delete " + parentFolder.getAbsolutePath());
 				return false;
 			}
