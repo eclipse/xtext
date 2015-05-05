@@ -69,6 +69,13 @@
 	</Match>
 	
 	
+	<!-- Findbugs bug -->
+	<Match>
+		<Class name="~org.eclipse.xtext.xbase.compiler.InMemoryJavaCompiler\$.*" />
+		<Bug pattern="UMAC_UNCALLABLE_METHOD_OF_ANONYMOUS_CLASS" />
+	</Match>
+	
+	
 	<!-- Some Examples:
 	<Match>
 		<Class name="com.foobar.ClassNotToBeAnalyzed" />

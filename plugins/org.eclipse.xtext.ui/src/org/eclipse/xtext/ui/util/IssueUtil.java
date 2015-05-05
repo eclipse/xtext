@@ -68,7 +68,7 @@ public class IssueUtil {
 			Object severity = attributes.get(IMarker.SEVERITY);
 			Severity translatedSeverity = translateSeverity(severity instanceof Integer ? (Integer) severity : 0);
 			if(translatedSeverity == null)
-				new IllegalArgumentException(marker.toString());
+				throw new IllegalArgumentException(marker.toString());
 			issue.setSeverity(translatedSeverity);
 			if(markerTypeProvider != null)
 				issue.setType(markerTypeProvider.getCheckType(markerType));
@@ -159,7 +159,7 @@ public class IssueUtil {
 	public Severity getSeverity(IMarker marker) {
 		Severity translatedSeverity = translateSeverity(marker.getAttribute(IMarker.SEVERITY, 0));
 		if(translatedSeverity == null)
-			new IllegalArgumentException(marker.toString());
+			throw new IllegalArgumentException(marker.toString());
 		return translatedSeverity;
 	}
 
