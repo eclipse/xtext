@@ -3102,7 +3102,6 @@ public class CompilerTest extends AbstractXtendTestCase {
 		assertEquals(Deprecated.class, fooMethod.getParameterAnnotations()[0][0].annotationType());
 	}
 	
-	@Inject
 	protected InMemoryJavaCompiler javaCompiler;
 
 	@Inject
@@ -3122,6 +3121,11 @@ public class CompilerTest extends AbstractXtendTestCase {
 	
 	@Inject
 	protected IGeneratorConfigProvider generatorConfigProvider;
+	
+	@Inject
+	protected void createInMemoryJavaCompiler(ClassLoader classLoader) {
+		javaCompiler = new InMemoryJavaCompiler(classLoader, generatorConfigProvider.get(null).getJavaSourceVersion());
+	}
 	
 	protected void invokeAndExpect2(Object expectation, String xtendclassBody, String methodToInvoke, Object... args)
 			throws Exception {
