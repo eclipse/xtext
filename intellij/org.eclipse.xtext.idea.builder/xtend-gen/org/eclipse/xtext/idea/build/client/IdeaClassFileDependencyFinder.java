@@ -33,7 +33,7 @@ public class IdeaClassFileDependencyFinder implements IClassFileBasedDependencyF
   private final CompileContext context;
   
   @Override
-  public Iterable<URI> getDependentJavaFiles(final Iterable<URI> dirtyJavaFiles, final Iterable<URI> deletedJavaFiles) {
+  public Iterable<? extends URI> getDependentJavaFiles(final Iterable<URI> dirtyJavaFiles, final Iterable<URI> deletedJavaFiles) {
     ProjectDescriptor projectDescriptor = this.context.getProjectDescriptor();
     Mappings globalMappings = projectDescriptor.dataManager.getMappings();
     Mappings delta = globalMappings.createDelta();

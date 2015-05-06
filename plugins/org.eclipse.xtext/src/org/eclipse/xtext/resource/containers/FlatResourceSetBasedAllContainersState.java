@@ -12,12 +12,13 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 
 import com.google.common.collect.Lists;
 
 /**
- * This implementation of {@link IAllContainersState} puts all resources from a {@link ResourceSet} into one single
- * container. Resource that are loaded after this class has been created are also considered.
+ * This implementation of {@link IAllContainersState} looks whether a {@link ResourceDescriptionsData} is installed on the wrapped {@link ResourceSet} 
+ * and delegates to that. If no such adapter is installed it uses the contents of the {@link ResourceSet}. Resource that are loaded after this class has been created are also considered.
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  * @since 2.3
@@ -38,19 +39,15 @@ public class FlatResourceSetBasedAllContainersState extends AdapterImpl implemen
 	}
 
 	@Override
-	public boolean equals(Object arg0) {
-		if (arg0 == null || arg0.getClass() != getClass())
-			return false;
-		FlatResourceSetBasedAllContainersState other = (FlatResourceSetBasedAllContainersState) arg0;
-		return other.resourceSet == resourceSet;
-	}
-
-	@Override
 	public Collection<URI> getContainedURIs(String containerHandle) {
 		if (!HANDLE.equals(containerHandle))
 			return Collections.emptySet();
 		if (resourceSet instanceof XtextResourceSet) {
 			XtextResourceSet xtextResourceSet = (XtextResourceSet) resourceSet;
+			ResourceDescriptionsData descriptionsData = ResourceDescriptionsData.ResourceSetAdapter.findResourceDescriptionsData(resourceSet);
+			if (descriptionsData != null) {
+				return descriptionsData.getAllURIs();
+			}
 			return newArrayList(xtextResourceSet.getNormalizationMap().values());
 		}
 		List<URI> uris = Lists.newArrayListWithCapacity(resourceSet.getResources().size());
@@ -72,11 +69,6 @@ public class FlatResourceSetBasedAllContainersState extends AdapterImpl implemen
 	@Override
 	public List<String> getVisibleContainerHandles(String handle) {
 		return Collections.singletonList(HANDLE);
-	}
-
-	@Override
-	public int hashCode() {
-		return resourceSet == null ? 0 : resourceSet.hashCode();
 	}
 
 	@Override

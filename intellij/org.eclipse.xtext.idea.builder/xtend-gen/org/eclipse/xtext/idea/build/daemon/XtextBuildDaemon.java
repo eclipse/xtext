@@ -8,10 +8,10 @@
 package org.eclipse.xtext.idea.build.daemon;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Multimap;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.Provider;
 import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -31,10 +31,12 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.TTCCLayout;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.builder.standalone.IIssueHandler;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder;
+import org.eclipse.xtext.builder.standalone.incremental.IndexState;
 import org.eclipse.xtext.idea.build.daemon.BuildDaemonModule;
 import org.eclipse.xtext.idea.build.daemon.IBuildSessionSingletons;
 import org.eclipse.xtext.idea.build.daemon.XtextBuildResultCollector;
@@ -47,6 +49,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -63,7 +66,7 @@ public class XtextBuildDaemon {
   
   public static class Server {
     @Inject
-    private Provider<XtextBuildDaemon.Worker> workerProvider;
+    private XtextBuildDaemon.Worker worker;
     
     public void run(final XtextBuildDaemon.Arguments arguments) {
       try {
@@ -102,8 +105,7 @@ public class XtextBuildDaemon {
                       } else {
                         socketChannel.configureBlocking(true);
                         currentTimeout = arguments.timeout;
-                        XtextBuildDaemon.Worker _get = this.workerProvider.get();
-                        boolean _serve = _get.serve(socketChannel);
+                        boolean _serve = this.worker.serve(socketChannel);
                         shutdown = _serve;
                       }
                     } finally {
@@ -143,13 +145,18 @@ public class XtextBuildDaemon {
   
   public static class Worker {
     @Inject
-    private IncrementalStandaloneBuilder.Factory builderFactory;
+    private IncrementalStandaloneBuilder incrementalBuilder;
     
     @Inject
     private IBuildSessionSingletons.Impl singletons;
     
     @Inject
     private XtextBuildResultCollector xtextBuildResultCollector;
+    
+    @Inject
+    private IIssueHandler issueHandler;
+    
+    private IndexState indexState;
     
     private ObjectChannel channel;
     
@@ -192,89 +199,101 @@ public class XtextBuildDaemon {
     }
     
     public Protocol.BuildResultMessage build(final Protocol.BuildRequestMessage request) {
-      Protocol.BuildResultMessage _xblockexpression = null;
-      {
-        final Procedure1<IBuildSessionSingletons.Impl> _function = new Procedure1<IBuildSessionSingletons.Impl>() {
-          @Override
-          public void apply(final IBuildSessionSingletons.Impl it) {
-            it.setObjectChannel(Worker.this.channel);
-            String _baseDir = request.getBaseDir();
-            it.setModuleBaseURL(_baseDir);
+      final Procedure1<IBuildSessionSingletons.Impl> _function = new Procedure1<IBuildSessionSingletons.Impl>() {
+        @Override
+        public void apply(final IBuildSessionSingletons.Impl it) {
+          it.setObjectChannel(Worker.this.channel);
+          String _baseDir = request.getBaseDir();
+          it.setModuleBaseURL(_baseDir);
+        }
+      };
+      ObjectExtensions.<IBuildSessionSingletons.Impl>operator_doubleArrow(
+        this.singletons, _function);
+      BuildRequest _buildRequest = new BuildRequest();
+      final Procedure1<BuildRequest> _function_1 = new Procedure1<BuildRequest>() {
+        @Override
+        public void apply(final BuildRequest it) {
+          String _baseDir = request.getBaseDir();
+          URI _asURI = FilesAndURIs.asURI(_baseDir);
+          it.setBaseDir(_asURI);
+          String _encoding = request.getEncoding();
+          it.setDefaultEncoding(_encoding);
+          List<String> _classpath = request.getClasspath();
+          final Function1<String, URI> _function = new Function1<String, URI>() {
+            @Override
+            public URI apply(final String it) {
+              return FilesAndURIs.asURI(it);
+            }
+          };
+          List<URI> _map = ListExtensions.<String, URI>map(_classpath, _function);
+          it.setClassPath(_map);
+          List<String> _outputs = request.getOutputs();
+          final Function1<String, URI> _function_1 = new Function1<String, URI>() {
+            @Override
+            public URI apply(final String it) {
+              return FilesAndURIs.asURI(it);
+            }
+          };
+          List<URI> _map_1 = ListExtensions.<String, URI>map(_outputs, _function_1);
+          it.setOutputs(_map_1);
+          List<String> _sourceRoots = request.getSourceRoots();
+          final Function1<String, URI> _function_2 = new Function1<String, URI>() {
+            @Override
+            public URI apply(final String it) {
+              return FilesAndURIs.asURI(it);
+            }
+          };
+          List<URI> _map_2 = ListExtensions.<String, URI>map(_sourceRoots, _function_2);
+          it.setSourceRoots(_map_2);
+          List<String> _dirtyFiles = request.getDirtyFiles();
+          final Function1<String, URI> _function_3 = new Function1<String, URI>() {
+            @Override
+            public URI apply(final String it) {
+              return FilesAndURIs.asURI(it);
+            }
+          };
+          List<URI> _map_3 = ListExtensions.<String, URI>map(_dirtyFiles, _function_3);
+          it.setDirtyFiles(_map_3);
+          List<String> _deletedFiles = request.getDeletedFiles();
+          final Function1<String, URI> _function_4 = new Function1<String, URI>() {
+            @Override
+            public URI apply(final String it) {
+              return FilesAndURIs.asURI(it);
+            }
+          };
+          List<URI> _map_4 = ListExtensions.<String, URI>map(_deletedFiles, _function_4);
+          it.setDeletedFiles(_map_4);
+          it.setFailOnValidationError(false);
+          boolean _notEquals = (!Objects.equal(Worker.this.indexState, null));
+          if (_notEquals) {
+            it.setPreviousState(Worker.this.indexState);
+          } else {
+            it.setIsFullBuild(true);
           }
-        };
-        ObjectExtensions.<IBuildSessionSingletons.Impl>operator_doubleArrow(
-          this.singletons, _function);
-        BuildRequest _buildRequest = new BuildRequest();
-        final Procedure1<BuildRequest> _function_1 = new Procedure1<BuildRequest>() {
-          @Override
-          public void apply(final BuildRequest it) {
-            String _baseDir = request.getBaseDir();
-            URI _asURI = FilesAndURIs.asURI(_baseDir);
-            it.setBaseDir(_asURI);
-            String _encoding = request.getEncoding();
-            it.setDefaultEncoding(_encoding);
-            List<String> _classpath = request.getClasspath();
-            final Function1<String, URI> _function = new Function1<String, URI>() {
-              @Override
-              public URI apply(final String it) {
-                return FilesAndURIs.asURI(it);
-              }
-            };
-            List<URI> _map = ListExtensions.<String, URI>map(_classpath, _function);
-            it.setClassPath(_map);
-            List<String> _outputs = request.getOutputs();
-            final Function1<String, URI> _function_1 = new Function1<String, URI>() {
-              @Override
-              public URI apply(final String it) {
-                return FilesAndURIs.asURI(it);
-              }
-            };
-            List<URI> _map_1 = ListExtensions.<String, URI>map(_outputs, _function_1);
-            it.setOutputs(_map_1);
-            List<String> _sourceRoots = request.getSourceRoots();
-            final Function1<String, URI> _function_2 = new Function1<String, URI>() {
-              @Override
-              public URI apply(final String it) {
-                return FilesAndURIs.asURI(it);
-              }
-            };
-            List<URI> _map_2 = ListExtensions.<String, URI>map(_sourceRoots, _function_2);
-            it.setSourceRoots(_map_2);
-            List<String> _dirtyFiles = request.getDirtyFiles();
-            final Function1<String, URI> _function_3 = new Function1<String, URI>() {
-              @Override
-              public URI apply(final String it) {
-                return FilesAndURIs.asURI(it);
-              }
-            };
-            List<URI> _map_3 = ListExtensions.<String, URI>map(_dirtyFiles, _function_3);
-            it.setDirtyFiles(_map_3);
-            List<String> _deletedFiles = request.getDeletedFiles();
-            final Function1<String, URI> _function_4 = new Function1<String, URI>() {
-              @Override
-              public URI apply(final String it) {
-                return FilesAndURIs.asURI(it);
-              }
-            };
-            List<URI> _map_4 = ListExtensions.<String, URI>map(_deletedFiles, _function_4);
-            it.setDeletedFiles(_map_4);
-            it.setFailOnValidationError(false);
-          }
-        };
-        final BuildRequest buildRequest = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_1);
-        Map<String, LanguageAccess> _languageAccesses = XtextLanguages.getLanguageAccesses();
-        IncrementalStandaloneBuilder _create = this.builderFactory.create(buildRequest, _languageAccesses);
-        final Procedure1<IncrementalStandaloneBuilder> _function_2 = new Procedure1<IncrementalStandaloneBuilder>() {
-          @Override
-          public void apply(final IncrementalStandaloneBuilder it) {
-            it.addListener(Worker.this.xtextBuildResultCollector);
-            it.launch();
-          }
-        };
-        ObjectExtensions.<IncrementalStandaloneBuilder>operator_doubleArrow(_create, _function_2);
-        _xblockexpression = this.xtextBuildResultCollector.getBuildResult();
-      }
-      return _xblockexpression;
+          it.setIssueHandler(Worker.this.issueHandler);
+          final Procedure2<URI, URI> _function_5 = new Procedure2<URI, URI>() {
+            @Override
+            public void apply(final URI source, final URI target) {
+              Multimap<URI, URI> _generatedFile2sourceURI = Worker.this.xtextBuildResultCollector.getGeneratedFile2sourceURI();
+              _generatedFile2sourceURI.put(source, target);
+            }
+          };
+          it.setAfterGenerateFile(_function_5);
+          final Procedure1<URI> _function_6 = new Procedure1<URI>() {
+            @Override
+            public void apply(final URI deleted) {
+              Set<URI> _deletedFiles = Worker.this.xtextBuildResultCollector.getDeletedFiles();
+              _deletedFiles.add(deleted);
+            }
+          };
+          it.setAfterDeleteFile(_function_6);
+        }
+      };
+      final BuildRequest buildRequest = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_1);
+      Map<String, LanguageAccess> _languageAccesses = XtextLanguages.getLanguageAccesses();
+      IndexState _build = this.incrementalBuilder.build(buildRequest, _languageAccesses);
+      this.indexState = _build;
+      return this.xtextBuildResultCollector.getBuildResult();
     }
   }
   

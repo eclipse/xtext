@@ -14,19 +14,21 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.idea.build.net.Protocol;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@Accessors
 @SuppressWarnings("all")
-public class XtextBuildResultCollector implements IncrementalStandaloneBuilder.FileListener {
+public class XtextBuildResultCollector {
   private Multimap<URI, URI> generatedFile2sourceURI = HashMultimap.<URI, URI>create();
   
   private Set<URI> deletedFiles = CollectionLiterals.<URI>newHashSet();
@@ -72,13 +74,21 @@ public class XtextBuildResultCollector implements IncrementalStandaloneBuilder.F
     return ObjectExtensions.<Protocol.BuildResultMessage>operator_doubleArrow(_buildResultMessage, _function);
   }
   
-  @Override
-  public void fileGenerated(final URI source, final URI target) {
-    this.generatedFile2sourceURI.put(target, source);
+  @Pure
+  public Multimap<URI, URI> getGeneratedFile2sourceURI() {
+    return this.generatedFile2sourceURI;
   }
   
-  @Override
-  public void fileDeleted(final URI file) {
-    this.deletedFiles.add(file);
+  public void setGeneratedFile2sourceURI(final Multimap<URI, URI> generatedFile2sourceURI) {
+    this.generatedFile2sourceURI = generatedFile2sourceURI;
+  }
+  
+  @Pure
+  public Set<URI> getDeletedFiles() {
+    return this.deletedFiles;
+  }
+  
+  public void setDeletedFiles(final Set<URI> deletedFiles) {
+    this.deletedFiles = deletedFiles;
   }
 }
