@@ -167,7 +167,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			}
 			if (!skipTypeName) {
 				b.append("new ")
-					.append(literalType)
+					.append(literalType.getType()) // append raw type since we cannot create generic arrays
 					.append(" ");
 			}
 			if (literal.getElements().isEmpty()) {
