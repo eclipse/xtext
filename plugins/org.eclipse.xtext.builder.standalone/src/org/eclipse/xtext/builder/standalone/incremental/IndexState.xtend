@@ -7,22 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.standalone.incremental
 
-import org.eclipse.emf.common.util.URI
-import com.google.inject.ImplementedBy
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 
 /**
- * @author Jan Koehnlein - Initial contribution and API
+ * @author Sven Efftinge - Initial contribution and API
  */
-@ImplementedBy(IClassFileBasedDependencyFinder.NullImpl)
-interface IClassFileBasedDependencyFinder {
+@FinalFieldsConstructor @Accessors class IndexState {
 	
-	def Iterable<? extends URI> getDependentJavaFiles(Iterable<URI> dirtyJavaFiles, Iterable<URI> deletedJavaFiles)
+	val ResourceDescriptionsData resourceDescriptions 
+	val Source2GeneratedMapping fileMappings
 	
-	static class NullImpl implements IClassFileBasedDependencyFinder {
-		
-		override getDependentJavaFiles(Iterable<URI> dirtyJavaFiles, Iterable<URI> deletedJavaFiles) {
-			emptyList
-		}
-		
-	} 
+	new () {
+		this(new ResourceDescriptionsData(emptySet),new Source2GeneratedMapping)
+	}
+	
 }
