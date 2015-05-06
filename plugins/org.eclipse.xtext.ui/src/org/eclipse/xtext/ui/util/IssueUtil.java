@@ -57,7 +57,7 @@ public class IssueUtil {
 				issue.setLength((Integer) endOffset - (Integer) offset); 
 			} else {
 				issue.setOffset(-1);
-				issue.setLength(-1);
+				issue.setLength(0);
 			}
 			Object code = attributes.get(Issue.CODE_KEY);
 			issue.setCode(code instanceof String ? (String) code:null);
