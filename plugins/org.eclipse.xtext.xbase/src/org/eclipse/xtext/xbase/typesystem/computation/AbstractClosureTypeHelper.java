@@ -18,10 +18,8 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.impl.XClosureImplCustom;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
-import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
@@ -86,36 +84,7 @@ public abstract class AbstractClosureTypeHelper implements IClosureCandidate {
 
 	protected void deferredBindTypeArgument(/* @Nullable */ LightweightTypeReference declared, LightweightTypeReference actual, final BoundTypeArgumentSource source) {
 		if (declared != null) { 
-			// TODO double check other clients of the ExpectationTypeParameterHintCollector
-			// It may be possible / necessary to use the very same implementation instead of anonymous 
-			// specializations or it may be possible that this specialization is no longer necessary.
-			ExpectationTypeParameterHintCollector collector = new ExpectationTypeParameterHintCollector(expectation.getReferenceOwner()) {
-				
-				class UnboundParameterizedTypeReferencePreserver extends DeferredParameterizedTypeReferenceTraverser {
-					@Override
-					public void doVisitUnboundTypeReference(UnboundTypeReference reference,
-							ParameterizedTypeReference declaration) {
-						if (reference.internalIsResolved() || getOwner().isResolved(reference.getHandle())) {
-							reference.tryResolve();
-							outerVisit(reference, declaration);
-						} else {
-							addHint(reference, declaration);
-						}
-					}
-				}
-				class UnboundArrayTypeReferencePreserver extends DeferredArrayTypeReferenceTraverser {
-					@Override
-					public void doVisitUnboundTypeReference(UnboundTypeReference reference,
-							ArrayTypeReference declaration) {
-						if (reference.internalIsResolved() || getOwner().isResolved(reference.getHandle())) {
-							reference.tryResolve();
-							outerVisit(reference, declaration);
-						} else {
-							addHint(reference, declaration);
-						}
-					}
-				}
-				
+			ExpectationTypeParameterHintCollector collector = new ResolvingTypeParameterHintCollector(expectation.getReferenceOwner(), source) {
 				@Override
 				protected void addHint(UnboundTypeReference typeParameter, LightweightTypeReference reference) {
 					LightweightTypeReference wrapped = reference.getWrapperTypeIfPrimitive();
@@ -123,15 +92,6 @@ public abstract class AbstractClosureTypeHelper implements IClosureCandidate {
 						wrapped = getStricterConstraint(typeParameter, wrapped);
 					}
 					typeParameter.acceptHint(wrapped, source, getOrigin(), getExpectedVariance(), getActualVariance());
-				}
-				
-				@Override
-				protected ParameterizedTypeReferenceTraverser createParameterizedTypeReferenceTraverser() {
-					return new UnboundParameterizedTypeReferencePreserver();
-				}
-				@Override
-				protected ArrayTypeReferenceTraverser createArrayTypeReferenceTraverser() {
-					return new UnboundArrayTypeReferencePreserver();
 				}
 			};
 			collector.processPairedReferences(declared, actual);

@@ -7,28 +7,18 @@
  */
 package org.eclipse.xtend.core.tests.compiler;
 
-import bug380058.Amount;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import java.util.ArrayList;
-import javax.inject.Provider;
-import org.antlr.runtime.Lexer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
-import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.generator.IFilePostProcessor;
-import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.util.IAcceptor;
-import org.eclipse.xtext.util.concurrent.IReadAccess;
-import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
 import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
@@ -38,12 +28,8 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.hamcrest.Matcher;
-import org.hamcrest.core.Is;
 import org.junit.Assert;
 import org.junit.Before;
-import test.Consumer;
-import testdata.Annotation1;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -71,11 +57,11 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
   @Before
   public void setupCompiler() {
     Class<? extends AbstractXtendCompilerTest> _class = this.getClass();
-    final Class<?>[] classes = new Class<?>[] { _class, Amount.class, Consumer.class, Data.class, Inject.class, Provider.class, Lexer.class, InternalXtendLexer.class, IReadAccess.class, CollectionLiterals.class, JvmTypeParameter.class, ITraceRegionProvider.class, XExpression.class, Object.class, Annotation1.class, Lists.class, EObject.class, Matcher.class, Is.class, Assert.class };
-    this.compilationTestHelper.setJavaCompilerClassPath(classes);
+    ClassLoader _classLoader = _class.getClassLoader();
+    this.compilationTestHelper.setJavaCompilerClassPath(_classLoader);
     Class<? extends AbstractXtendCompilerTest> _class_1 = this.getClass();
-    ClassLoader _classLoader = _class_1.getClassLoader();
-    this.processorProvider.setClassLoader(_classLoader);
+    ClassLoader _classLoader_1 = _class_1.getClassLoader();
+    this.processorProvider.setClassLoader(_classLoader_1);
   }
   
   public void assertCompilesTo(final CharSequence input, final CharSequence expected) {

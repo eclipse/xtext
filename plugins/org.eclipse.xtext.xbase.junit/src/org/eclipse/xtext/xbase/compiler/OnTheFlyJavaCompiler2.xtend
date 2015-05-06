@@ -1,9 +1,9 @@
 package org.eclipse.xtext.xbase.compiler
 
-import java.util.Map
-import org.eclipse.xtext.xbase.compiler.InMemoryJavaCompiler.Result
 import com.google.inject.Inject
 import com.google.inject.Singleton
+import java.util.Map
+import org.eclipse.xtext.xbase.compiler.InMemoryJavaCompiler.Result
 
 /** 
  * @author Sven Efftinge - Initial contribution and API
@@ -16,18 +16,31 @@ import com.google.inject.Singleton
 class OnTheFlyJavaCompiler2 {
 	InMemoryJavaCompiler inMemoryCompiler
 
+	/**
+	 * Creates a new OnTheFlyCompiler that accepts Java6 compliant code.
+	 */
 	@Inject
 	new(ClassLoader scope) {
-		inMemoryCompiler = new InMemoryJavaCompiler(scope)
+		this(scope, JavaVersion.JAVA6)
 	}
-
+	
+	new(ClassLoader scope, JavaVersion version) {
+		inMemoryCompiler = new InMemoryJavaCompiler(scope, version)
+	}
+	
 	def Class<?> compileToClass(String classname, String code) {
 		val Result result = inMemoryCompiler.compile(
 			new JavaSource(classname.toJavaFile,
 				code))
 		try {
 			if (result.compilationProblems.exists[error]) {
-				println(result.compilationProblems)
+				throw new IllegalArgumentException('''
+					Java code compiled with errors:
+					«result.compilationProblems.filter[error].join('\n')»
+					
+					Code was:
+					«code»
+				''')
 			}
 			return result.getClassLoader().loadClass(classname)
 		} catch (ClassNotFoundException e) {
@@ -51,7 +64,15 @@ class OnTheFlyJavaCompiler2 {
 		val Result result = inMemoryCompiler.compile(sources.entrySet.map[new JavaSource(key.toJavaFile, value)])
 		try {
 			if (result.compilationProblems.exists[error]) {
-				println(result.compilationProblems)
+				throw new IllegalArgumentException('''
+					Java code compiled with errors:
+					«result.compilationProblems.filter[error].join('\n')»
+					
+					Code was:
+					=========
+					«sources.values.join('\n=========\n')»
+					=========
+				''')
 			}
 			val classLoader = result.getClassLoader()
 			return sources.keySet.map[ classLoader.loadClass(it)].toMap[name]
