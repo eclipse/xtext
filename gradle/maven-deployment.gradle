@@ -25,11 +25,17 @@ def deployer = uploadArchives.repositories.mavenDeployer()
 
 configure(deployer) {
 	beforeDeployment { deployment -> signing.signPom(deployment) }
-	repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/")
-	snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/")
-	if (project.hasProperty('sonatypeUserName') && project.hasProperty('sonatypePassword')) {
-		authentication(userName: sonatypeUserName, password: sonatypePassword)
+	repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+		if (project.hasProperty('sonatypeUserName') && project.hasProperty('sonatypePassword')) {
+			authentication(userName: sonatypeUserName, password: sonatypePassword)
+		}
 	}
+	snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+		if (project.hasProperty('sonatypeUserName') && project.hasProperty('sonatypePassword')) {
+			authentication(userName: sonatypeUserName, password: sonatypePassword)
+		}
+	}
+
 }
 
 [installer, deployer]*.pom*.project {
