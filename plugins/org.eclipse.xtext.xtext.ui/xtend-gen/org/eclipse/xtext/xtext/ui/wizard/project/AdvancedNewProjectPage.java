@@ -79,7 +79,7 @@ public class AdvancedNewProjectPage extends WizardPage {
               @Override
               public void apply(final Button it) {
                 it.setText("Web Integration");
-                it.setEnabled(false);
+                it.setEnabled(true);
               }
             };
             Button _CheckBox_2 = AdvancedNewProjectPage.this.CheckBox(it, _function_2);
@@ -140,38 +140,8 @@ public class AdvancedNewProjectPage extends WizardPage {
     };
     Composite _doubleArrow = ObjectExtensions.<Composite>operator_doubleArrow(_composite, _function);
     this.setControl(_doubleArrow);
-    final SelectionAdapter selectionControl = new SelectionAdapter() {
-      @Override
-      public void widgetSelected(final SelectionEvent e) {
-        boolean _and = false;
-        boolean _equals = AdvancedNewProjectPage.this.createIdeaProject.equals(e.widget);
-        if (!_equals) {
-          _and = false;
-        } else {
-          boolean _selection = AdvancedNewProjectPage.this.createIdeaProject.getSelection();
-          _and = _selection;
-        }
-        if (_and) {
-          AdvancedNewProjectPage.this.createIdeProject.setSelection(true);
-          return;
-        }
-        boolean _and_1 = false;
-        boolean _equals_1 = AdvancedNewProjectPage.this.createIdeProject.equals(e.widget);
-        if (!_equals_1) {
-          _and_1 = false;
-        } else {
-          boolean _selection_1 = AdvancedNewProjectPage.this.createIdeProject.getSelection();
-          boolean _equals_2 = (_selection_1 == false);
-          _and_1 = _equals_2;
-        }
-        if (_and_1) {
-          AdvancedNewProjectPage.this.createIdeaProject.setSelection(false);
-          return;
-        }
-      }
-    };
-    this.createIdeaProject.addSelectionListener(selectionControl);
-    this.createIdeProject.addSelectionListener(selectionControl);
+    this.require(this.createIdeaProject, this.createIdeProject);
+    this.require(this.createWebProject, this.createIdeProject);
     this.setDefaults();
   }
   
@@ -247,5 +217,43 @@ public class AdvancedNewProjectPage extends WizardPage {
   
   public boolean isCreateIntellijProject() {
     return this.createIdeaProject.getSelection();
+  }
+  
+  public boolean isCreateWebProject() {
+    return this.createWebProject.getSelection();
+  }
+  
+  private void require(final Button project, final Button requirement) {
+    final SelectionAdapter selectionControl = new SelectionAdapter() {
+      @Override
+      public void widgetSelected(final SelectionEvent e) {
+        boolean _and = false;
+        boolean _equals = project.equals(e.widget);
+        if (!_equals) {
+          _and = false;
+        } else {
+          boolean _selection = project.getSelection();
+          _and = _selection;
+        }
+        if (_and) {
+          requirement.setSelection(true);
+        } else {
+          boolean _and_1 = false;
+          boolean _equals_1 = requirement.equals(e.widget);
+          if (!_equals_1) {
+            _and_1 = false;
+          } else {
+            boolean _selection_1 = requirement.getSelection();
+            boolean _not = (!_selection_1);
+            _and_1 = _not;
+          }
+          if (_and_1) {
+            project.setSelection(false);
+          }
+        }
+      }
+    };
+    project.addSelectionListener(selectionControl);
+    requirement.addSelectionListener(selectionControl);
   }
 }
