@@ -1,6 +1,6 @@
 buildscript {
 	dependencies {
-		classpath "org.xtext:xtext-idea-gradle-plugin:0.3.14"
+		classpath "org.xtext:xtext-idea-gradle-plugin:0.3.15"
 	}
 }
 
@@ -49,10 +49,9 @@ configure(subprojects - eclipsePluginProjects) {
 
 configure(ideaPluginProjects + ideaTestProjects) {
 	configurations.compile {
-		exclude group:'org.ow2.asm'
+		//TODO this should be excluded by the plugin by default
 		exclude module:'org.eclipse.jdt.core'
-		//TODO these should be excluded higher in the dependency chain
-		exclude module:'asm'
+		//TODO this should be excluded higher in the dependency chain
 		exclude module:'cglib'
 	}
 

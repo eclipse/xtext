@@ -10,6 +10,7 @@ dependencies {
 	compile project(':plugins:org.eclipse.xtext.ecore')
 
 	builder project(':intellij:org.eclipse.xtext.idea.builder')
+	builder "org.ow2.asm:asm:5.0.3"
 }
 
 assembleSandbox.plugin.into('builder') {
