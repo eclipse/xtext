@@ -76,48 +76,48 @@ class ClientHighlightingFragment extends Xtend2GeneratorFragment {
 	}
 	
 	protected def generateJavaScript(Collection<String> keywords) '''
-		define("xtext/Â«langIdÂ»-syntax", ["orion/editor/stylers/lib/syntax"], function(mLib) {
+		define("xtext/«langId»-syntax", ["orion/editor/stylers/lib/syntax"], function(mLib) {
 			var keywords = [
-				Â«FOR kw : keywords.filter[matches('\\w*')].sort SEPARATOR ', 'Â»"Â«kwÂ»"Â«ENDFORÂ»
+				«FOR kw : keywords.filter[matches('\\w*')].sort SEPARATOR ', '»"«kw»"«ENDFOR»
 			];
 		
 			var grammars = [];
 			grammars.push.apply(grammars, mLib.grammars);
 			grammars.push({
-				id: "xtext.Â«langIdÂ»",
-				contentTypes: ["xtext/Â«langIdÂ»"],
+				id: "xtext.«langId»",
+				contentTypes: ["xtext/«langId»"],
 				patterns: [
-					Â«IF grammar.inherits(TERMINALS) || grammar.inherits(XBASE) Â»
+					«IF grammar.inherits(TERMINALS) || grammar.inherits(XBASE) »
 						{include: "orion.lib#string_doubleQuote"},
 						{include: "orion.lib#string_singleQuote"},
 						{include: "orion.c-like#comment_singleLine"},
 						{include: "orion.c-like#comment_block"},
 						{include: "orion.lib#number_decimal"},
-					Â«ENDIFÂ»
-					Â«IF grammar.inherits(XBASE) Â»
+					«ENDIF»
+					«IF grammar.inherits(XBASE) »
 						{include: "orion.lib#number_hex"},
-					Â«ENDIFÂ»
-					Â«IF keywords.contains('{') && keywords.contains('}')Â»
+					«ENDIF»
+					«IF keywords.contains('{') && keywords.contains('}')»
 						{include: "orion.lib#brace_open"},
 						{include: "orion.lib#brace_close"},
-					Â«ENDIFÂ»
-					Â«IF keywords.contains('[') && keywords.contains(']')Â»
+					«ENDIF»
+					«IF keywords.contains('[') && keywords.contains(']')»
 						{include: "orion.lib#bracket_open"},
 						{include: "orion.lib#bracket_close"},
-					Â«ENDIFÂ»
-					Â«IF keywords.contains('(') && keywords.contains(')')Â»
+					«ENDIF»
+					«IF keywords.contains('(') && keywords.contains(')')»
 						{include: "orion.lib#parenthesis_open"},
 						{include: "orion.lib#parenthesis_close"},
-					Â«ENDIFÂ»
+					«ENDIF»
 					{
 						match: "\\b(?:" + keywords.join("|") + ")\\b",
-						name: "keyword.operator.Â«langIdÂ»"
+						name: "keyword.operator.«langId»"
 					}
 				]
 			});
 		
 			return {
-				id: "xtext.Â«langIdÂ»",
+				id: "xtext.«langId»",
 				grammars: grammars,
 				keywords: keywords
 			};
