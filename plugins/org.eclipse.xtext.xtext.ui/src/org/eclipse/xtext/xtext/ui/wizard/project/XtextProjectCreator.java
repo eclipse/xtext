@@ -93,6 +93,9 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		if (getProjectInfo().isCreateIntellijProject()) {
 			createIntellijProject(subMonitor.newChild(1));
 		}
+		if (getProjectInfo().isCreateWebProject()) {
+			createWebProject(subMonitor.newChild(1));
+		}
 
 		IFile dslGrammarFile = project.getFile(getModelFolderName() + "/" + getProjectInfo().getGrammarFilePath());
 		BasicNewResourceWizard.selectAndReveal(dslGrammarFile, PlatformUI.getWorkbench().getActiveWorkbenchWindow());
@@ -175,6 +178,9 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		}
 		if (getProjectInfo().isCreateIntellijProject()) {
 			requiredBundles.add("org.eclipse.xtext.idea.generator");
+		}
+		if (getProjectInfo().isCreateWebProject()) {
+			requiredBundles.add("org.eclipse.xtext.web.generator");
 		}
 		return requiredBundles;
 	}
@@ -285,6 +291,17 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		factory.addFolders(singletonList(XTEND_GEN_ROOT));
 		factory.addWorkingSets(Lists.newArrayList(getProjectInfo().getWorkingSets()));
 		factory.addContributor(new IdeaProjectContributor(getProjectInfo()));
+		return factory.createProject(monitor, null);
+	}
+
+	private IProject createWebProject(SubMonitor monitor) {
+		ProjectFactory factory = plainProjectFactoryProvider.get();
+		factory.setLocation(getProjectInfo().getWebProjectLocation());
+		factory.setProjectName(getProjectInfo().getWebProjectName());
+		factory.setProjectDefaultCharset(Charsets.UTF_8.name());
+		factory.addFolders(ImmutableList.of("src", "src/main", "src/main/java"));
+		factory.addWorkingSets(Lists.newArrayList(getProjectInfo().getWorkingSets()));
+		factory.addContributor(new WebProjectContributor(getProjectInfo()));
 		return factory.createProject(monitor, null);
 	}
 

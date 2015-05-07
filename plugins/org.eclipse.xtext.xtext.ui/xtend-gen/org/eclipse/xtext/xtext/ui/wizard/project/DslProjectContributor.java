@@ -128,6 +128,16 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
         _builder.newLine();
       }
     }
+    {
+      boolean _isCreateWebProject = this.projectInfo.isCreateWebProject();
+      if (_isCreateWebProject) {
+        _builder.append("var javaScriptPath = \"../");
+        String _webProjectName = this.projectInfo.getWebProjectName();
+        _builder.append(_webProjectName, "");
+        _builder.append("/src/main/webapp/xtext\"");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     _builder.append("Workflow {");
     _builder.newLine();
     _builder.append("    ");
@@ -183,8 +193,10 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("\t");
-        _builder.append("directory = \"${runtimeProject}.ui/src-gen\"");
-        _builder.newLine();
+        _builder.append("directory = \"${runtimeProject}.");
+        _builder.append(XtextProjectInfo.UI, "\t\t");
+        _builder.append("/src-gen\"");
+        _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
@@ -200,8 +212,10 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("\t");
-        _builder.append("directory = \"${runtimeProject}.tests/src-gen\"");
-        _builder.newLine();
+        _builder.append("directory = \"${runtimeProject}.");
+        _builder.append(XtextProjectInfo.TESTS, "\t\t");
+        _builder.append("/src-gen\"");
+        _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
@@ -215,8 +229,10 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("\t");
-        _builder.append("directory = \"${runtimeProject}.ide/src-gen\"");
-        _builder.newLine();
+        _builder.append("directory = \"${runtimeProject}.");
+        _builder.append(XtextProjectInfo.IDE, "\t\t");
+        _builder.append("/src-gen\"");
+        _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
@@ -252,30 +268,40 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
       boolean _isCreateUiProject_1 = this.projectInfo.isCreateUiProject();
       if (_isCreateUiProject_1) {
         _builder.append("\t\t");
-        _builder.append("pathUiProject = \"${runtimeProject}.ui\"");
-        _builder.newLine();
+        _builder.append("pathUiProject = \"${runtimeProject}.");
+        _builder.append(XtextProjectInfo.UI, "\t\t");
+        _builder.append("\"");
+        _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
-        _builder.append("projectNameUi = \"${projectName}.ui\"");
-        _builder.newLine();
+        _builder.append("projectNameUi = \"${projectName}.");
+        _builder.append(XtextProjectInfo.UI, "\t\t");
+        _builder.append("\"");
+        _builder.newLineIfNotEmpty();
       }
     }
     {
       boolean _isCreateTestProject_1 = this.projectInfo.isCreateTestProject();
       if (_isCreateTestProject_1) {
         _builder.append("\t\t");
-        _builder.append("pathTestProject = \"${runtimeProject}.tests\"");
-        _builder.newLine();
+        _builder.append("pathTestProject = \"${runtimeProject}.");
+        _builder.append(XtextProjectInfo.TESTS, "\t\t");
+        _builder.append("\"");
+        _builder.newLineIfNotEmpty();
       }
     }
     {
       boolean _isCreateIdeProject_1 = this.projectInfo.isCreateIdeProject();
       if (_isCreateIdeProject_1) {
         _builder.append("\t\t");
-        _builder.append("pathIdeProject = \"${runtimeProject}.ide\"");
-        _builder.newLine();
+        _builder.append("pathIdeProject = \"${runtimeProject}.");
+        _builder.append(XtextProjectInfo.IDE, "\t\t");
+        _builder.append("\"");
+        _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
-        _builder.append("projectNameIde = \"${projectName}.ide\"");
-        _builder.newLine();
+        _builder.append("projectNameIde = \"${projectName}.");
+        _builder.append(XtextProjectInfo.IDE, "\t\t");
+        _builder.append("\"");
+        _builder.newLineIfNotEmpty();
       }
     }
     _builder.append("\t\t");
@@ -431,12 +457,6 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
         _builder.append("\t\t\t");
         _builder.newLine();
         _builder.append("\t\t\t");
-        _builder.append("// generates a more lightweight Antlr parser and lexer tailored for content assist");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}");
-        _builder.newLine();
-        _builder.append("\t\t\t");
         _builder.append("// provides a preference page for template proposals");
         _builder.newLine();
         _builder.append("\t\t\t");
@@ -460,6 +480,24 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
         _builder.newLine();
       }
     }
+    {
+      boolean _or = false;
+      boolean _isCreateUiProject_3 = this.projectInfo.isCreateUiProject();
+      if (_isCreateUiProject_3) {
+        _or = true;
+      } else {
+        boolean _isCreateIdeProject_2 = this.projectInfo.isCreateIdeProject();
+        _or = _isCreateIdeProject_2;
+      }
+      if (_or) {
+        _builder.append("\t\t\t");
+        _builder.append("// generates a more lightweight Antlr parser and lexer tailored for content assist");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}");
+        _builder.newLine();
+      }
+    }
     _builder.append("\t\t\t");
     _builder.append("// provides the necessary bindings for java types integration");
     _builder.newLine();
@@ -480,6 +518,7 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
     _builder.append("\t\t\t");
     _builder.append("fragment = xbase.XtypeGeneratorFragment auto-inject {}");
     _builder.newLine();
+    _builder.newLine();
     {
       boolean _isCreateIntellijProject_2 = this.projectInfo.isCreateIntellijProject();
       if (_isCreateIntellijProject_2) {
@@ -499,6 +538,25 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("fragment = org.eclipse.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {}");
+        _builder.newLine();
+      }
+    }
+    _builder.newLine();
+    {
+      boolean _isCreateWebProject_1 = this.projectInfo.isCreateWebProject();
+      if (_isCreateWebProject_1) {
+        _builder.append("\t\t\t");
+        _builder.append("// JavaScript-based syntax highlighting");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("fragment = org.eclipse.xtext.web.generator.ClientHighlightingFragment auto-inject {");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("\t");
+        _builder.append("javaScriptPath = javaScriptPath");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("}");
         _builder.newLine();
       }
     }
@@ -575,83 +633,93 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
         _builder_2.append("&quot; type=&quot;4&quot;/&gt;&#10;");
         projectsToRefresh = (_projectsToRefresh_1 + _builder_2);
       }
-      boolean _isCreateTestProject = this.projectInfo.isCreateTestProject();
-      if (_isCreateTestProject) {
+      boolean _isCreateWebProject = this.projectInfo.isCreateWebProject();
+      if (_isCreateWebProject) {
         String _projectsToRefresh_2 = projectsToRefresh;
         StringConcatenation _builder_3 = new StringConcatenation();
         _builder_3.append(";&lt;item path=&quot;/");
-        String _testProjectName = this.projectInfo.getTestProjectName();
-        _builder_3.append(_testProjectName, "");
+        String _webProjectName = this.projectInfo.getWebProjectName();
+        _builder_3.append(_webProjectName, "");
         _builder_3.append("&quot; type=&quot;4&quot;/&gt;&#10;");
         projectsToRefresh = (_projectsToRefresh_2 + _builder_3);
       }
-      boolean _isCreateUiProject = this.projectInfo.isCreateUiProject();
-      if (_isCreateUiProject) {
+      boolean _isCreateTestProject = this.projectInfo.isCreateTestProject();
+      if (_isCreateTestProject) {
         String _projectsToRefresh_3 = projectsToRefresh;
         StringConcatenation _builder_4 = new StringConcatenation();
-        _builder_4.append("&lt;item path=&quot;/");
-        String _uiProjectName = this.projectInfo.getUiProjectName();
-        _builder_4.append(_uiProjectName, "");
-        _builder_4.append("&quot; type=&quot;4&quot;/&gt;&#10");
+        _builder_4.append(";&lt;item path=&quot;/");
+        String _testProjectName = this.projectInfo.getTestProjectName();
+        _builder_4.append(_testProjectName, "");
+        _builder_4.append("&quot; type=&quot;4&quot;/&gt;&#10;");
         projectsToRefresh = (_projectsToRefresh_3 + _builder_4);
       }
-      StringConcatenation _builder_5 = new StringConcatenation();
-      _builder_5.append("${working_set:&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&lt;resources&gt;&#10;");
-      _builder_5.append(projectsToRefresh, "");
-      _builder_5.append(";&lt;/resources&gt;}");
-      final String refreshAttr = _builder_5.toString();
+      boolean _isCreateUiProject = this.projectInfo.isCreateUiProject();
+      if (_isCreateUiProject) {
+        String _projectsToRefresh_4 = projectsToRefresh;
+        StringConcatenation _builder_5 = new StringConcatenation();
+        _builder_5.append("&lt;item path=&quot;/");
+        String _uiProjectName = this.projectInfo.getUiProjectName();
+        _builder_5.append(_uiProjectName, "");
+        _builder_5.append("&quot; type=&quot;4&quot;/&gt;&#10");
+        projectsToRefresh = (_projectsToRefresh_4 + _builder_5);
+      }
       StringConcatenation _builder_6 = new StringConcatenation();
-      _builder_6.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
-      _builder_6.newLine();
-      _builder_6.append("<launchConfiguration type=\"org.eclipse.emf.mwe2.launch.Mwe2LaunchConfigurationType\">");
-      _builder_6.newLine();
-      _builder_6.append("<stringAttribute key=\"org.eclipse.debug.core.ATTR_REFRESH_SCOPE\" value=\"");
-      _builder_6.append(refreshAttr, "");
-      _builder_6.append("\"/>");
-      _builder_6.newLineIfNotEmpty();
-      _builder_6.append("<listAttribute key=\"org.eclipse.debug.core.MAPPED_RESOURCE_PATHS\">");
-      _builder_6.newLine();
-      _builder_6.append("<listEntry value=\"/");
+      _builder_6.append("${working_set:&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&lt;resources&gt;&#10;");
+      _builder_6.append(projectsToRefresh, "");
+      _builder_6.append(";&lt;/resources&gt;}");
+      final String refreshAttr = _builder_6.toString();
+      StringConcatenation _builder_7 = new StringConcatenation();
+      _builder_7.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
+      _builder_7.newLine();
+      _builder_7.append("<launchConfiguration type=\"org.eclipse.emf.mwe2.launch.Mwe2LaunchConfigurationType\">");
+      _builder_7.newLine();
+      _builder_7.append("<stringAttribute key=\"org.eclipse.debug.core.ATTR_REFRESH_SCOPE\" value=\"");
+      _builder_7.append(refreshAttr, "");
+      _builder_7.append("\"/>");
+      _builder_7.newLineIfNotEmpty();
+      _builder_7.append("<listAttribute key=\"org.eclipse.debug.core.MAPPED_RESOURCE_PATHS\">");
+      _builder_7.newLine();
+      _builder_7.append("<listEntry value=\"/");
       String _projectName_1 = this.projectInfo.getProjectName();
-      _builder_6.append(_projectName_1, "");
-      _builder_6.append("\"/>");
-      _builder_6.newLineIfNotEmpty();
-      _builder_6.append("</listAttribute>");
-      _builder_6.newLine();
-      _builder_6.append("<listAttribute key=\"org.eclipse.debug.core.MAPPED_RESOURCE_TYPES\">");
-      _builder_6.newLine();
-      _builder_6.append("<listEntry value=\"4\"/>");
-      _builder_6.newLine();
-      _builder_6.append("</listAttribute>");
-      _builder_6.newLine();
-      _builder_6.append("<listAttribute key=\"org.eclipse.debug.ui.favoriteGroups\">");
-      _builder_6.newLine();
-      _builder_6.append("<listEntry value=\"org.eclipse.debug.ui.launchGroup.debug\"/>");
-      _builder_6.newLine();
-      _builder_6.append("<listEntry value=\"org.eclipse.debug.ui.launchGroup.run\"/>");
-      _builder_6.newLine();
-      _builder_6.append("</listAttribute>");
-      _builder_6.newLine();
-      _builder_6.append("<stringAttribute key=\"org.eclipse.jdt.launching.MAIN_TYPE\" value=\"org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher\"/>");
-      _builder_6.newLine();
-      _builder_6.append("<stringAttribute key=\"org.eclipse.jdt.launching.PROGRAM_ARGUMENTS\" value=\"src/");
+      _builder_7.append(_projectName_1, "");
+      _builder_7.append("\"/>");
+      _builder_7.newLineIfNotEmpty();
+      _builder_7.append("</listAttribute>");
+      _builder_7.newLine();
+      _builder_7.append("<listAttribute key=\"org.eclipse.debug.core.MAPPED_RESOURCE_TYPES\">");
+      _builder_7.newLine();
+      _builder_7.append("<listEntry value=\"4\"/>");
+      _builder_7.newLine();
+      _builder_7.append("</listAttribute>");
+      _builder_7.newLine();
+      _builder_7.append("<listAttribute key=\"org.eclipse.debug.ui.favoriteGroups\">");
+      _builder_7.newLine();
+      _builder_7.append("<listEntry value=\"org.eclipse.debug.ui.launchGroup.debug\"/>");
+      _builder_7.newLine();
+      _builder_7.append("<listEntry value=\"org.eclipse.debug.ui.launchGroup.run\"/>");
+      _builder_7.newLine();
+      _builder_7.append("</listAttribute>");
+      _builder_7.newLine();
+      _builder_7.append("<stringAttribute key=\"org.eclipse.jdt.launching.MAIN_TYPE\" value=\"org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher\"/>");
+      _builder_7.newLine();
+      _builder_7.append("<stringAttribute key=\"org.eclipse.jdt.launching.PROGRAM_ARGUMENTS\" value=\"src/");
       String _basePackagePath = this.projectInfo.getBasePackagePath();
-      _builder_6.append(_basePackagePath, "");
-      _builder_6.append("/Generate");
+      _builder_7.append(_basePackagePath, "");
+      _builder_7.append("/Generate");
       String _languageNameAbbreviation = this.projectInfo.getLanguageNameAbbreviation();
-      _builder_6.append(_languageNameAbbreviation, "");
-      _builder_6.append(".mwe2\"/>");
-      _builder_6.newLineIfNotEmpty();
-      _builder_6.append("<stringAttribute key=\"org.eclipse.jdt.launching.PROJECT_ATTR\" value=\"");
+      _builder_7.append(_languageNameAbbreviation, "");
+      _builder_7.append(".mwe2\"/>");
+      _builder_7.newLineIfNotEmpty();
+      _builder_7.append("<stringAttribute key=\"org.eclipse.jdt.launching.PROJECT_ATTR\" value=\"");
       String _projectName_2 = this.projectInfo.getProjectName();
-      _builder_6.append(_projectName_2, "");
-      _builder_6.append("\"/>");
-      _builder_6.newLineIfNotEmpty();
-      _builder_6.append("<stringAttribute key=\"org.eclipse.jdt.launching.VM_ARGUMENTS\" value=\"-Xmx512m\"/>");
-      _builder_6.newLine();
-      _builder_6.append("</launchConfiguration>");
-      _builder_6.newLine();
-      _xblockexpression = _builder_6;
+      _builder_7.append(_projectName_2, "");
+      _builder_7.append("\"/>");
+      _builder_7.newLineIfNotEmpty();
+      _builder_7.append("<stringAttribute key=\"org.eclipse.jdt.launching.VM_ARGUMENTS\" value=\"-Xmx512m\"/>");
+      _builder_7.newLine();
+      _builder_7.append("</launchConfiguration>");
+      _builder_7.newLine();
+      _xblockexpression = _builder_7;
     }
     return _xblockexpression;
   }

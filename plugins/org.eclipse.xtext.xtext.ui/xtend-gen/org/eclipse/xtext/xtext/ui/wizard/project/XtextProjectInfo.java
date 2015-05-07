@@ -27,6 +27,20 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Accessors
 @SuppressWarnings("all")
 public class XtextProjectInfo implements IProjectInfo {
+  public final static String GENERATOR = "generator";
+  
+  public final static String TESTS = "tests";
+  
+  public final static String IDE = "ide";
+  
+  public final static String SDK = "sdk";
+  
+  public final static String UI = "ui";
+  
+  public final static String WEB = "web";
+  
+  public final static String INTELLIJ = "idea";
+  
   private String projectName;
   
   private String languageName;
@@ -49,53 +63,44 @@ public class XtextProjectInfo implements IProjectInfo {
   
   private boolean createIntellijProject;
   
+  private boolean createWebProject;
+  
   private boolean createEclipseRuntimeLaunchConfig;
   
   public String getGeneratorProjectName() {
-    StringConcatenation _builder = new StringConcatenation();
-    String _projectName = this.getProjectName();
-    _builder.append(_projectName, "");
-    _builder.append(".generator");
-    return _builder.toString();
+    return this.asProjectName(XtextProjectInfo.GENERATOR);
   }
   
   public String getTestProjectName() {
-    StringConcatenation _builder = new StringConcatenation();
-    String _projectName = this.getProjectName();
-    _builder.append(_projectName, "");
-    _builder.append(".tests");
-    return _builder.toString();
+    return this.asProjectName(XtextProjectInfo.TESTS);
   }
   
   public String getIdeProjectName() {
-    StringConcatenation _builder = new StringConcatenation();
-    String _projectName = this.getProjectName();
-    _builder.append(_projectName, "");
-    _builder.append(".ide");
-    return _builder.toString();
+    return this.asProjectName(XtextProjectInfo.IDE);
   }
   
   public String getFeatureProjectName() {
-    StringConcatenation _builder = new StringConcatenation();
-    String _projectName = this.getProjectName();
-    _builder.append(_projectName, "");
-    _builder.append(".sdk");
-    return _builder.toString();
+    return this.asProjectName(XtextProjectInfo.SDK);
   }
   
   public String getUiProjectName() {
-    StringConcatenation _builder = new StringConcatenation();
-    String _projectName = this.getProjectName();
-    _builder.append(_projectName, "");
-    _builder.append(".ui");
-    return _builder.toString();
+    return this.asProjectName(XtextProjectInfo.UI);
   }
   
   public String getIntellijProjectName() {
+    return this.asProjectName(XtextProjectInfo.INTELLIJ);
+  }
+  
+  public String getWebProjectName() {
+    return this.asProjectName(XtextProjectInfo.WEB);
+  }
+  
+  private String asProjectName(final String string) {
     StringConcatenation _builder = new StringConcatenation();
     String _projectName = this.getProjectName();
     _builder.append(_projectName, "");
-    _builder.append(".idea");
+    _builder.append(".");
+    _builder.append(string, "");
     return _builder.toString();
   }
   
@@ -205,6 +210,11 @@ public class XtextProjectInfo implements IProjectInfo {
   public IPath getIntellijProjectLocation() {
     String _intellijProjectName = this.getIntellijProjectName();
     return this.asLocation(_intellijProjectName);
+  }
+  
+  public IPath getWebProjectLocation() {
+    String _webProjectName = this.getWebProjectName();
+    return this.asLocation(_webProjectName);
   }
   
   public IPath asLocation(final String projName) {
@@ -319,6 +329,15 @@ public class XtextProjectInfo implements IProjectInfo {
   
   public void setCreateIntellijProject(final boolean createIntellijProject) {
     this.createIntellijProject = createIntellijProject;
+  }
+  
+  @Pure
+  public boolean isCreateWebProject() {
+    return this.createWebProject;
+  }
+  
+  public void setCreateWebProject(final boolean createWebProject) {
+    this.createWebProject = createWebProject;
   }
   
   @Pure
