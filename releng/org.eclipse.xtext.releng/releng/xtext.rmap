@@ -1,147 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rm:rmap xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0"
-	xmlns:rm="http://www.eclipse.org/buckminster/RMap-1.0">
+<rm:rmap xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0" xmlns:rm="http://www.eclipse.org/buckminster/RMap-1.0">
 	<rm:property key="checkout.location" value="${user.home}/git/xtext-master" />
-	<rm:property key="git.clone.dest" value="${checkout.location}" />
 
-	<rm:locator pattern="^org\.eclipse\.xtext\.releng(?:\..+)?$"
-		searchPathRef="releng" />
-	<rm:locator pattern="^org\.eclipse\.xtext\.example(?:\..*)?$"
-		searchPathRef="xtext.examples" />
-	<rm:locator pattern="^org\.eclipse\.xtext\.gmf\.glue$"
-		searchPathRef="xtext.examples" />
+	<rm:locator pattern="^org\.eclipse\.xtext\.releng(?:\..+)?$" searchPathRef="releng" />
+	<rm:locator pattern="^org\.eclipse\.xtext\.example(?:\..*)?$" searchPathRef="xtext.examples" />
+	<rm:locator pattern="^org\.eclipse\.xtext\.gmf\.glue$" searchPathRef="xtext.examples" />
 	<rm:locator pattern="^org\.eclipse\.xtext\.xtext\.ui\.examples\-container$"
 		searchPathRef="bucky.examples.container" />
-	<rm:locator pattern="^org\.eclipse\.xtext\.xtext\.ui\.examples$"
-		searchPathRef="xtext.examples.container" />
-	<rm:locator pattern="^org\.eclipse\.xtext\.web(?:\..*)?$"
-		searchPathRef="xtext-web" />
-	<rm:locator pattern="^org\.eclipse\.xtext(?:\..*)?$"
-		searchPathRef="xtext" />
+	<rm:locator pattern="^org\.eclipse\.xtext\.xtext\.ui\.examples$" searchPathRef="xtext.examples.container" />
+	<rm:locator pattern="^org\.eclipse\.xtext\.web(?:\..*)?$" searchPathRef="xtext-web" />
+	<rm:locator pattern="^org\.eclipse\.xtext(?:\..*)?$" searchPathRef="xtext" />
 
-	<rm:redirect href="xtend.rmap"
-		pattern="^org\.eclipse\.(?:xtend|xtend2)(?:\..+)?$" />
+	<rm:locator pattern="^org\.eclipse\.(?:xtend|xtend2)(?:\..+)?$" searchPathRef="xtend" />
 
 	<rm:searchPath name="xtext">
-		<rm:provider componentTypes="osgi.bundle" readerType="git"
-			mutable="false">
-			<rm:property key="buckminster.mutable" value="false" />
-			<rm:property key="git.remote.uri" value="https://github.com/eclipse/xtext.git" />
-			<rm:property key="git.auto.fetch" value="false" />
-			<rm:uri format="{0},plugins/{1}">
-				<bc:propertyRef key="git.clone.dest" />
+		<rm:provider componentTypes="osgi.bundle" readerType="local" mutable="false">
+			<rm:uri format="{0}/plugins/{1}">
+				<bc:propertyRef key="checkout.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</rm:uri>
 		</rm:provider>
-		<rm:provider componentTypes="osgi.bundle,buckminster"
-			readerType="git" mutable="false">
-			<rm:property key="buckminster.mutable" value="false" />
-			<rm:property key="git.remote.uri" value="https://github.com/eclipse/xtext.git" />
-			<rm:property key="git.auto.fetch" value="false" />
-			<rm:uri format="{0},intellij/{1}">
-				<bc:propertyRef key="git.clone.dest" />
+		<rm:provider componentTypes="osgi.bundle,buckminster" readerType="local" mutable="false">
+			<rm:uri format="{0}/intellij/{1}">
+				<bc:propertyRef key="checkout.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</rm:uri>
 		</rm:provider>
-		<rm:provider componentTypes="eclipse.feature" readerType="git"
-			mutable="false">
-			<rm:property key="buckminster.mutable" value="false" />
-			<rm:property key="git.remote.uri" value="https://github.com/eclipse/xtext.git" />
-			<rm:property key="git.auto.fetch" value="false" />
-			<rm:uri format="{0},features/{1}.feature">
-				<bc:propertyRef key="git.clone.dest" />
+		<rm:provider componentTypes="eclipse.feature" readerType="local" mutable="false">
+			<rm:uri format="{0}/features/{1}.feature">
+				<bc:propertyRef key="checkout.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</rm:uri>
 		</rm:provider>
-		<rm:provider componentTypes="osgi.bundle" readerType="git"
-			mutable="false">
-			<rm:property key="buckminster.mutable" value="false" />
-			<rm:property key="git.remote.uri" value="https://github.com/eclipse/xtext.git" />
-			<rm:property key="git.auto.fetch" value="false" />
-			<rm:uri format="{0},tests/{1}">
-				<bc:propertyRef key="git.clone.dest" />
+		<rm:provider componentTypes="osgi.bundle" readerType="local" mutable="false">
+			<rm:uri format="{0}/tests/{1}">
+				<bc:propertyRef key="checkout.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</rm:uri>
 		</rm:provider>
-		<rm:provider componentTypes="osgi.bundle" readerType="git"
-			mutable="false">
-			<rm:property key="buckminster.mutable" value="false" />
-			<rm:property key="git.remote.uri" value="https://github.com/eclipse/xtext.git" />
-			<rm:property key="git.auto.fetch" value="false" />
-			<rm:uri format="{0},devtools/{1}">
-				<bc:propertyRef key="git.clone.dest" />
+		<rm:provider componentTypes="osgi.bundle" readerType="local" mutable="false">
+			<rm:uri format="{0}/devtools/{1}">
+				<bc:propertyRef key="checkout.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</rm:uri>
 		</rm:provider>
-		<rm:provider componentTypes="osgi.bundle" readerType="git"
-			mutable="false">
-			<rm:property key="buckminster.mutable" value="false" />
-			<rm:property key="git.remote.uri" value="https://github.com/eclipse/xtext.git" />
-			<rm:property key="git.auto.fetch" value="false" />
-			<rm:uri format="{0},docs/{1}">
-				<bc:propertyRef key="git.clone.dest" />
+		<rm:provider componentTypes="osgi.bundle" readerType="local" mutable="false">
+			<rm:uri format="{0}/docs/{1}">
+				<bc:propertyRef key="checkout.location" />
+				<bc:propertyRef key="buckminster.component" />
+			</rm:uri>
+		</rm:provider>
+	</rm:searchPath>
+
+	<rm:searchPath name="xtend">
+		<rm:provider componentTypes="osgi.bundle" readerType="local" mutable="false">
+			<rm:uri format="{0}/plugins/{1}">
+				<bc:propertyRef key="checkout.location" />
+				<bc:propertyRef key="buckminster.component" />
+			</rm:uri>
+		</rm:provider>
+		<rm:provider componentTypes="osgi.bundle" readerType="local" mutable="false">
+			<rm:uri format="{0}/docs/{1}">
+				<bc:propertyRef key="checkout.location" />
+				<bc:propertyRef key="buckminster.component" />
+			</rm:uri>
+		</rm:provider>
+		<rm:provider componentTypes="eclipse.feature" readerType="local" mutable="false">
+			<rm:uri format="{0}/features/{1}.feature">
+				<bc:propertyRef key="checkout.location" />
+				<bc:propertyRef key="buckminster.component" />
+			</rm:uri>
+		</rm:provider>
+		<rm:provider componentTypes="osgi.bundle,buckminster" readerType="local" mutable="false">
+			<rm:uri format="{0}/examples/{1}">
+				<bc:propertyRef key="checkout.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</rm:uri>
 		</rm:provider>
 	</rm:searchPath>
 	<rm:searchPath name="xtext-web">
-		<rm:provider componentTypes="osgi.bundle" readerType="git"
-			mutable="false">
-			<rm:property key="buckminster.mutable" value="false" />
-			<rm:property key="git.remote.uri" value="https://github.com/eclipse/xtext.git" />
-			<rm:property key="git.auto.fetch" value="false" />
-			<rm:uri format="{0},web/{1}">
-				<bc:propertyRef key="git.clone.dest" />
+		<rm:provider componentTypes="osgi.bundle" readerType="local" mutable="false">
+			<rm:uri format="{0}/web/{1}">
+				<bc:propertyRef key="checkout.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</rm:uri>
 		</rm:provider>
 	</rm:searchPath>
 	<rm:searchPath name="xtext.examples">
-		<rm:provider componentTypes="osgi.bundle" readerType="git"
-			mutable="false">
-			<rm:property key="buckminster.mutable" value="false" />
-			<rm:property key="git.remote.uri" value="https://github.com/eclipse/xtext.git" />
-			<rm:property key="git.auto.fetch" value="false" />
-			<rm:uri
-				format="{0},examples/org.eclipse.xtext.xtext.ui.examples/contents/{1}">
-				<bc:propertyRef key="git.clone.dest" />
+		<rm:provider componentTypes="osgi.bundle" readerType="local" mutable="false">
+			<rm:uri format="{0}/examples/org.eclipse.xtext.xtext.ui.examples/contents/{1}">
+				<bc:propertyRef key="checkout.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</rm:uri>
 		</rm:provider>
 	</rm:searchPath>
 	<rm:searchPath name="xtext.examples.container">
-		<rm:provider componentTypes="osgi.bundle" readerType="git"
-			mutable="false">
-			<rm:property key="buckminster.mutable" value="false" />
-			<rm:property key="git.remote.uri" value="https://github.com/eclipse/xtext.git" />
-			<rm:property key="git.auto.fetch" value="false" />
-			<rm:uri format="{0},examples/org.eclipse.xtext.xtext.ui.examples/{1}">
-				<bc:propertyRef key="git.clone.dest" />
+		<rm:provider componentTypes="osgi.bundle" readerType="local" mutable="false">
+			<rm:uri format="{0}/examples/org.eclipse.xtext.xtext.ui.examples/{1}">
+				<bc:propertyRef key="checkout.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</rm:uri>
 		</rm:provider>
 	</rm:searchPath>
 	<rm:searchPath name="bucky.examples.container">
-		<rm:provider componentTypes="buckminster" readerType="git"
-			mutable="false">
-			<rm:property key="buckminster.mutable" value="false" />
-			<rm:property key="git.remote.uri" value="https://github.com/eclipse/xtext.git" />
-			<rm:property key="git.auto.fetch" value="false" />
-			<rm:uri format="{0},examples/org.eclipse.xtext.xtext.ui.examples">
-				<bc:propertyRef key="git.clone.dest" />
-				<bc:propertyRef key="buckminster.component" />
+		<rm:provider componentTypes="buckminster" readerType="local" mutable="false">
+			<rm:uri format="{0}/examples/org.eclipse.xtext.xtext.ui.examples">
+				<bc:propertyRef key="checkout.location" />
 			</rm:uri>
 		</rm:provider>
 	</rm:searchPath>
 
 	<rm:searchPath name="releng">
-		<rm:provider componentTypes="buckminster" readerType="git"
-			mutable="false">
-			<rm:property key="buckminster.mutable" value="false" />
-			<rm:property key="git.remote.uri" value="https://github.com/eclipse/xtext.git" />
-			<rm:property key="git.auto.fetch" value="false" />
-			<rm:uri format="{0},releng/{1}">
-				<bc:propertyRef key="git.clone.dest" />
+		<rm:provider componentTypes="buckminster" readerType="local" mutable="false">
+			<rm:uri format="{0}/releng/{1}">
+				<bc:propertyRef key="checkout.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</rm:uri>
 		</rm:provider>
