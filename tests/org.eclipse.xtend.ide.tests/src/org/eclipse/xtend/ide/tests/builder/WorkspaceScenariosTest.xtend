@@ -8,6 +8,9 @@
 package org.eclipse.xtend.ide.tests.builder
 
 import com.google.common.io.ByteStreams
+import com.google.inject.Inject
+import com.google.inject.Provider
+import com.google.inject.name.Named
 import java.io.ByteArrayInputStream
 import java.io.InputStream
 import org.eclipse.core.resources.IFile
@@ -16,10 +19,15 @@ import org.eclipse.core.resources.IProject
 import org.eclipse.core.resources.IResource
 import org.eclipse.core.resources.IResourceVisitor
 import org.eclipse.jdt.core.JavaCore
-import org.eclipse.ui.texteditor.MarkerUtilities
+import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider
+import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.resource.IResourceDescriptions
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.eclipse.xtext.util.StringInputStream
 import org.junit.Assert
 import org.junit.Test
+import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
 
@@ -30,12 +38,19 @@ import static extension org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@RunWith(XtextRunner)
+@InjectWith(XtendIDEInjectorProvider)
 class WorkspaceScenariosTest {
+	
+	@Inject
+	@Named(ResourceDescriptionsProvider.PERSISTED_DESCRIPTIONS)
+	private Provider<IResourceDescriptions> persistedResourceDescriptions;
 	
 	@Test def void testJarWithEverything() {
 		val project = createProjectWithJarDependency[ false ]
 		try {
 			assertNoErrorsInWorkspace
+			assertEquals(1, persistedResourceDescriptions.get.allResourceDescriptions.length)
 		} finally {
 			project.delete(true, true, null)
 		}
@@ -57,32 +72,13 @@ class WorkspaceScenariosTest {
 				}
 				return true
 			]
-			Assert.assertEquals(3, allXtendMarkers.size)
-			// only Java errors!
-			Assert.assertTrue(allXtendMarkers.forall[MarkerUtilities.getMessage(it).startsWith("Java problem:")])
+			Assert.assertEquals(2, allXtendMarkers.size)
+			assertEquals(1, persistedResourceDescriptions.get.allResourceDescriptions.length)
 		} finally {
 			project.delete(true, true, null)
 		}
 	}
-	
-	@Test def void testJarWithoutXtend() {
-		val project = createProjectWithJarDependency[ !(endsWith('java') || endsWith('class'))]
-		try {
-			assertNoErrorsInWorkspace
-		} finally {
-			project.delete(true, true, null)
-		}
-	}
-	
-	@Test def void testJarWithoutStorage() {
-		val project = createProjectWithJarDependency[ endsWith('bin') ]
-		try {
-			assertNoErrorsInWorkspace
-		} finally {
-			project.delete(true, true, null)
-		}
-	}
-	
+
 	@Test def void testIncrementalChangeOnBidirectionalDep() {
 		"my.project".createPluginProject('org.eclipse.xtext.xbase.lib', 'org.eclipse.xtend.lib')
 		val fileA = 'my.project/src/mypack/ClassA.xtend'.createFile('''
@@ -146,9 +142,7 @@ class WorkspaceScenariosTest {
 		
 		// create a project WITHOUT xtend.lib on classpath
 		val project = "my.project".createPluginProject('org.eclipse.xtext.xbase.lib')
-		val jarFile = project.getFile("mydependency.jar")
-		jarFile.create(new ByteArrayInputStream(jarData), true, null)
-		JavaCore.create(project).addJarToClasspath(jarFile)
+		addJarToProject(project, jarData)
 		
 		"my.project/src/pack/MyClass.xtend".createFile('''
 			package pack
@@ -166,6 +160,12 @@ class WorkspaceScenariosTest {
 		
 		waitForAutoBuild
 		return project
+	}
+	
+	protected def addJarToProject(IProject project, byte[] jarData) {
+		val jarFile = project.getFile("mydependency.jar")
+		jarFile.create(new ByteArrayInputStream(jarData), true, null)
+		JavaCore.create(project).addJarToClasspath(jarFile)
 	}
 	
 	def byte[] createJar(Iterable<? extends Pair<? extends String, ? extends String>> sourceFiles, (String)=>boolean filter) {
