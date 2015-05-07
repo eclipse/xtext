@@ -49,7 +49,7 @@ class AdvancedNewProjectPage extends WizardPage {
 				]
 				createWebProject = CheckBox [
 					text = "Web Integration"
-					enabled = false
+					enabled = true
 				]
 				createIdeProject = CheckBox [
 					text = "Generic IDE Support"
@@ -74,22 +74,9 @@ class AdvancedNewProjectPage extends WizardPage {
 				]
 			]
 		]
-		val selectionControl = new SelectionAdapter() {
 
-			override widgetSelected(SelectionEvent e) {
-				if (createIdeaProject.equals(e.widget) && createIdeaProject.selection) {
-					createIdeProject.selection = true
-					return
-				}
-				if (createIdeProject.equals(e.widget) && createIdeProject.selection == false) {
-					createIdeaProject.selection = false
-					return
-				}
-			}
-
-		}
-		createIdeaProject.addSelectionListener(selectionControl)
-		createIdeProject.addSelectionListener(selectionControl)
+		createIdeaProject.require(createIdeProject)
+		createWebProject.require(createIdeProject)
 		setDefaults
 	}
 
@@ -144,4 +131,21 @@ class AdvancedNewProjectPage extends WizardPage {
 		createIdeaProject.selection
 	}
 
+	def boolean isCreateWebProject() {
+		createWebProject.selection
+	}
+
+	def private require(Button project, Button requirement) {
+		val selectionControl = new SelectionAdapter() {
+			override widgetSelected(SelectionEvent e) {
+				if (project.equals(e.widget) && project.selection) {
+					requirement.selection = true
+				} else if (requirement.equals(e.widget) && !requirement.selection) {
+					project.selection = false
+				}
+			}
+		}
+		project.addSelectionListener(selectionControl)
+		requirement.addSelectionListener(selectionControl)
+	}
 }

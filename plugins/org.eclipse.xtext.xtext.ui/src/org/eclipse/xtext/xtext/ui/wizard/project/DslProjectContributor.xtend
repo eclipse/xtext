@@ -2,7 +2,7 @@ package org.eclipse.xtext.xtext.ui.wizard.project
 
 import org.eclipse.core.resources.IProject
 import org.eclipse.xtext.ui.util.IProjectFactoryContributor.IFileCreator
-
+import static org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectInfo.*
 /**
  * Contributes a workflow file and the grammar to the new DSL project
  * @author Dennis Huebner - Initial contribution and API
@@ -51,6 +51,9 @@ class DslProjectContributor extends DefaultProjectFactoryContributor {
 				var ideaProjectName = "${projectName}.idea"
 				var ideaProjectPath = "../${ideaProjectName}"
 			«ENDIF»
+			«IF projectInfo.createWebProject»
+				var javaScriptPath = "../«projectInfo.webProjectName»/src/main/webapp/xtext"
+			«ENDIF»
 			Workflow {
 			    bean = StandaloneSetup {
 					scanClassPath = true
@@ -70,18 +73,18 @@ class DslProjectContributor extends DefaultProjectFactoryContributor {
 				
 				«IF projectInfo.isCreateUiProject»
 					component = DirectoryCleaner {
-						directory = "${runtimeProject}.ui/src-gen"
+						directory = "${runtimeProject}.«UI»/src-gen"
 					}
 				«ENDIF»
 				
 				«IF projectInfo.isCreateTestProject»
 					component = DirectoryCleaner {
-						directory = "${runtimeProject}.tests/src-gen"
+						directory = "${runtimeProject}.«TESTS»/src-gen"
 					}
 				«ENDIF»
 				«IF projectInfo.isCreateIdeProject»
 					component = DirectoryCleaner {
-						directory = "${runtimeProject}.ide/src-gen"
+						directory = "${runtimeProject}.«IDE»/src-gen"
 					}
 				«ENDIF»
 				«IF projectInfo.isCreateIntellijProject»
@@ -94,15 +97,15 @@ class DslProjectContributor extends DefaultProjectFactoryContributor {
 					pathRtProject = runtimeProject
 					projectNameRt = projectName
 					«IF projectInfo.isCreateUiProject»
-						pathUiProject = "${runtimeProject}.ui"
-						projectNameUi = "${projectName}.ui"
+						pathUiProject = "${runtimeProject}.«UI»"
+						projectNameUi = "${projectName}.«UI»"
 					«ENDIF»
 					«IF projectInfo.isCreateTestProject»
-						pathTestProject = "${runtimeProject}.tests"
+						pathTestProject = "${runtimeProject}.«TESTS»"
 					«ENDIF»
 					«IF projectInfo.isCreateIdeProject»
-						pathIdeProject = "${runtimeProject}.ide"
-						projectNameIde = "${projectName}.ide"
+						pathIdeProject = "${runtimeProject}.«IDE»"
+						projectNameIde = "${projectName}.«IDE»"
 					«ENDIF»
 					language = auto-inject {
 						uri = grammarURI
@@ -163,8 +166,6 @@ class DslProjectContributor extends DefaultProjectFactoryContributor {
 							// content assist API
 							fragment = contentAssist.ContentAssistFragment auto-inject {}
 							
-							// generates a more lightweight Antlr parser and lexer tailored for content assist
-							fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}
 							// provides a preference page for template proposals
 							fragment = templates.CodetemplatesGeneratorFragment auto-inject {}
 							
@@ -174,6 +175,10 @@ class DslProjectContributor extends DefaultProjectFactoryContributor {
 							// provides a compare view
 							fragment = compare.CompareFragment auto-inject {}
 						«ENDIF»
+						«IF  projectInfo.isCreateUiProject || projectInfo.isCreateIdeProject»
+							// generates a more lightweight Antlr parser and lexer tailored for content assist
+							fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}
+						«ENDIF»
 						// provides the necessary bindings for java types integration
 						fragment = types.TypesGeneratorFragment auto-inject {}
 			
@@ -182,12 +187,20 @@ class DslProjectContributor extends DefaultProjectFactoryContributor {
 			
 						// generates the required bindings only if the grammar inherits from Xtype
 						fragment = xbase.XtypeGeneratorFragment auto-inject {}
+
 						«IF projectInfo.createIntellijProject»
 							fragment = org.eclipse.xtext.idea.generator.IdeaPluginGenerator auto-inject {
 								runtimeProjectName = projectName
 								runtimeProjectPath = runtimeProject
 							}
 							fragment = org.eclipse.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {}
+						«ENDIF»
+
+						«IF projectInfo.createWebProject»
+							// JavaScript-based syntax highlighting
+							fragment = org.eclipse.xtext.web.generator.ClientHighlightingFragment auto-inject {
+								javaScriptPath = javaScriptPath
+							}
 						«ENDIF»
 					}
 				}
@@ -217,6 +230,9 @@ class DslProjectContributor extends DefaultProjectFactoryContributor {
 		if (projectInfo.createIntellijProject)
 			projectsToRefresh +=
 				''';&lt;item path=&quot;/«projectInfo.intellijProjectName»&quot; type=&quot;4&quot;/&gt;&#10;'''
+		if (projectInfo.createWebProject)
+			projectsToRefresh +=
+				''';&lt;item path=&quot;/«projectInfo.webProjectName»&quot; type=&quot;4&quot;/&gt;&#10;'''
 		if (projectInfo.createTestProject)
 			projectsToRefresh +=
 				''';&lt;item path=&quot;/«projectInfo.testProjectName»&quot; type=&quot;4&quot;/&gt;&#10;'''
