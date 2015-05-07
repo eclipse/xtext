@@ -216,7 +216,8 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 
 	}
 
-	def contributeXtendCode(IFileCreator fc) {
+	def contributeXtendCode(
+		IFileCreator fc) {
 		'''
 			package «projectInfo.basePackage».«WEB»
 			
@@ -263,7 +264,7 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 			@WebServlet(name = "Xtext Services", urlPatterns = "/xtext-service/*")
 			class «projectInfo.languageNameAbbreviation»XtextServlet extends XtextServlet {
 			
-					ExecutorService executorService
+				ExecutorService executorService
 			
 				override init() {
 					super.init()
@@ -277,7 +278,7 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 					}.createInjectorAndDoEMFRegistration
 				}
 			
-					override destroy() {
+				override destroy() {
 					if (executorService !== null)
 						executorService.shutdown()
 					executorService = null
@@ -285,62 +286,61 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 				}
 			
 			}
-		'''.
-			writeToFile(
-				fc, '''«baseWebPackagePath»/«projectInfo.languageNameAbbreviation»XtextServlet.xtend''')
+		'''.writeToFile(
+			fc, '''«baseWebPackagePath»/«projectInfo.languageNameAbbreviation»XtextServlet.xtend''')
 
 		'''
-				package «projectInfo.basePackage».«WEB»
-				
-				import com.google.inject.Binder
-				import com.google.inject.name.Names
-				import java.util.concurrent.ExecutorService
-				import org.eclipse.xtend.lib.annotations.Accessors
-				import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-				import org.eclipse.xtext.ide.LexerIdeBindings
-				import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser
-				import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer
-				import org.eclipse.xtext.service.AbstractGenericModule
-				import «projectInfo.basePackage».ide.contentassist.antlr.«projectInfo.languageNameAbbreviation»Parser
-				import «projectInfo.basePackage».ide.contentassist.antlr.internal.Internal«projectInfo.languageNameAbbreviation»Lexer
-				import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider
-				
-				@Accessors
-				@FinalFieldsConstructor
-				class «projectInfo.languageNameAbbreviation»WebModule extends AbstractGenericModule {
-				
-						val ExecutorService executorService
-				
-						IResourceBaseProvider resourceBaseProvider
-				
-						def configureExecutorService(Binder binder) {
-						binder.bind(ExecutorService).toInstance(executorService)
-					}
-				
-						def configureContentAssistLexer(Binder binder) {
-						binder.bind(Lexer).annotatedWith(Names.named(LexerIdeBindings.CONTENT_ASSIST)).to(Internal«projectInfo.languageNameAbbreviation»Lexer)
-					}
-				
-						def Class<? extends IContentAssistParser> bindIContentAssistParser() {
-						«projectInfo.languageNameAbbreviation»Parser
-					}
-				
-				//	def Class<? extends IServerResourceHandler> bindIServerResourceHandler() {
-				//		FileResourceHandler
-				//	}
-				
-						def configureResourceBaseProvider(Binder binder) {
-						if (resourceBaseProvider !== null)
-							binder.bind(IResourceBaseProvider).toInstance(resourceBaseProvider)
-					}
-				
+			package «projectInfo.basePackage».«WEB»
+			
+			import com.google.inject.Binder
+			import com.google.inject.name.Names
+			import java.util.concurrent.ExecutorService
+			import org.eclipse.xtend.lib.annotations.Accessors
+			import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+			import org.eclipse.xtext.ide.LexerIdeBindings
+			import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser
+			import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer
+			import org.eclipse.xtext.service.AbstractGenericModule
+			import «projectInfo.basePackage».ide.contentassist.antlr.«projectInfo.languageNameAbbreviation»Parser
+			import «projectInfo.basePackage».ide.contentassist.antlr.internal.Internal«projectInfo.languageNameAbbreviation»Lexer
+			import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider
+			
+			@Accessors
+			@FinalFieldsConstructor
+			class «projectInfo.languageNameAbbreviation»WebModule extends AbstractGenericModule {
+			
+				val ExecutorService executorService
+			
+				IResourceBaseProvider resourceBaseProvider
+			
+				def configureExecutorService(Binder binder) {
+					binder.bind(ExecutorService).toInstance(executorService)
 				}
-			'''.writeToFile(fc, '''«baseWebPackagePath»/«projectInfo.languageNameAbbreviation»WebModule.xtend''')
-
-		}
-
-		def baseWebPackagePath() {
-			return 'src/main/java/' + projectInfo.basePackagePath + '/' + WEB
-		}
+			
+				def configureContentAssistLexer(Binder binder) {
+					binder.bind(Lexer).annotatedWith(Names.named(LexerIdeBindings.CONTENT_ASSIST)).to(Internal«projectInfo.languageNameAbbreviation»Lexer)
+				}
+			
+				def Class<? extends IContentAssistParser> bindIContentAssistParser() {
+					«projectInfo.languageNameAbbreviation»Parser
+				}
+			
+			//	def Class<? extends IServerResourceHandler> bindIServerResourceHandler() {
+			//		FileResourceHandler
+			//	}
+			
+				def configureResourceBaseProvider(Binder binder) {
+					if (resourceBaseProvider !== null)
+						binder.bind(IResourceBaseProvider).toInstance(resourceBaseProvider)
+				}
+			
+			}
+		'''.writeToFile(fc, '''«baseWebPackagePath»/«projectInfo.languageNameAbbreviation»WebModule.xtend''')
 
 	}
+
+	def baseWebPackagePath() {
+		return 'src/main/java/' + projectInfo.basePackagePath + '/' + WEB
+	}
+
+}
