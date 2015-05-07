@@ -52,7 +52,6 @@ configure(ideaPluginProjects + ideaTestProjects) {
 		exclude group:'org.ow2.asm'
 		exclude module:'org.eclipse.jdt.core'
 		//TODO these should be excluded higher in the dependency chain
-		exclude module:'aopalliance'
 		exclude module:'asm'
 		exclude module:'cglib'
 	}
