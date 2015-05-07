@@ -636,7 +636,7 @@ public class WebProjectContributor extends DefaultProjectFactoryContributor {
       _builder_1.append("XtextServlet extends XtextServlet {");
       _builder_1.newLineIfNotEmpty();
       _builder_1.newLine();
-      _builder_1.append("\t\t");
+      _builder_1.append("\t");
       _builder_1.append("ExecutorService executorService");
       _builder_1.newLine();
       _builder_1.newLine();
@@ -683,7 +683,7 @@ public class WebProjectContributor extends DefaultProjectFactoryContributor {
       _builder_1.append("}");
       _builder_1.newLine();
       _builder_1.newLine();
-      _builder_1.append("\t\t");
+      _builder_1.append("\t");
       _builder_1.append("override destroy() {");
       _builder_1.newLine();
       _builder_1.append("\t\t");
@@ -767,15 +767,15 @@ public class WebProjectContributor extends DefaultProjectFactoryContributor {
       _builder_3.append("WebModule extends AbstractGenericModule {");
       _builder_3.newLineIfNotEmpty();
       _builder_3.newLine();
-      _builder_3.append("\t\t");
+      _builder_3.append("\t");
       _builder_3.append("val ExecutorService executorService");
       _builder_3.newLine();
       _builder_3.newLine();
-      _builder_3.append("\t\t");
+      _builder_3.append("\t");
       _builder_3.append("IResourceBaseProvider resourceBaseProvider");
       _builder_3.newLine();
       _builder_3.newLine();
-      _builder_3.append("\t\t");
+      _builder_3.append("\t");
       _builder_3.append("def configureExecutorService(Binder binder) {");
       _builder_3.newLine();
       _builder_3.append("\t\t");
@@ -785,7 +785,7 @@ public class WebProjectContributor extends DefaultProjectFactoryContributor {
       _builder_3.append("}");
       _builder_3.newLine();
       _builder_3.newLine();
-      _builder_3.append("\t\t");
+      _builder_3.append("\t");
       _builder_3.append("def configureContentAssistLexer(Binder binder) {");
       _builder_3.newLine();
       _builder_3.append("\t\t");
@@ -798,7 +798,7 @@ public class WebProjectContributor extends DefaultProjectFactoryContributor {
       _builder_3.append("}");
       _builder_3.newLine();
       _builder_3.newLine();
-      _builder_3.append("\t\t");
+      _builder_3.append("\t");
       _builder_3.append("def Class<? extends IContentAssistParser> bindIContentAssistParser() {");
       _builder_3.newLine();
       _builder_3.append("\t\t");
@@ -817,7 +817,7 @@ public class WebProjectContributor extends DefaultProjectFactoryContributor {
       _builder_3.append("//\t}");
       _builder_3.newLine();
       _builder_3.newLine();
-      _builder_3.append("\t\t");
+      _builder_3.append("\t");
       _builder_3.append("def configureResourceBaseProvider(Binder binder) {");
       _builder_3.newLine();
       _builder_3.append("\t\t");
