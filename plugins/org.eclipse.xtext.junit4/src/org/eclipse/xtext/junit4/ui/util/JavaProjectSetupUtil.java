@@ -374,6 +374,13 @@ public class JavaProjectSetupUtil {
 		addToClasspath(javaProject, newLibraryEntry);
 		return newLibraryEntry;
 	}
+	
+	public static IClasspathEntry addExternalJarToClasspath(IJavaProject javaProject, File file) throws JavaModelException {
+		IClasspathEntry newLibraryEntry = JavaCore.newLibraryEntry(new Path(file.getAbsolutePath()), null, null);
+		addToClasspath(javaProject, newLibraryEntry);
+		return newLibraryEntry;
+	}
+	
 
 	public static File createExternalJar(InputStream data, String nameWithoutJarSuffix) throws IOException,
 			FileNotFoundException {
