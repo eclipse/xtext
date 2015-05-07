@@ -8,6 +8,9 @@
 package org.eclipse.xtend.ide.tests.builder;
 
 import com.google.common.io.ByteStreams;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.inject.name.Named;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -25,13 +28,19 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
+import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.junit4.InjectWith;
+import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
+import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -42,12 +51,19 @@ import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@RunWith(XtextRunner.class)
+@InjectWith(XtendIDEInjectorProvider.class)
 @SuppressWarnings("all")
 public class WorkspaceScenariosTest {
+  @Inject
+  @Named(ResourceDescriptionsProvider.PERSISTED_DESCRIPTIONS)
+  private Provider<IResourceDescriptions> persistedResourceDescriptions;
+  
   @Test
   public void testJarWithEverything() {
     try {
@@ -60,6 +76,10 @@ public class WorkspaceScenariosTest {
       final IProject project = this.createProjectWithJarDependency(_function);
       try {
         IResourcesSetupUtil.assertNoErrorsInWorkspace();
+        IResourceDescriptions _get = this.persistedResourceDescriptions.get();
+        Iterable<IResourceDescription> _allResourceDescriptions = _get.getAllResourceDescriptions();
+        int _length = ((Object[])Conversions.unwrapArray(_allResourceDescriptions, Object.class)).length;
+        Assert.assertEquals(1, _length);
       } finally {
         project.delete(true, true, null);
       }
@@ -107,64 +127,11 @@ public class WorkspaceScenariosTest {
         };
         project.accept(_function_1);
         int _size = allXtendMarkers.size();
-        Assert.assertEquals(3, _size);
-        final Function1<IMarker, Boolean> _function_2 = new Function1<IMarker, Boolean>() {
-          @Override
-          public Boolean apply(final IMarker it) {
-            String _message = MarkerUtilities.getMessage(it);
-            return Boolean.valueOf(_message.startsWith("Java problem:"));
-          }
-        };
-        boolean _forall = IterableExtensions.<IMarker>forall(allXtendMarkers, _function_2);
-        Assert.assertTrue(_forall);
-      } finally {
-        project.delete(true, true, null);
-      }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
-  @Test
-  public void testJarWithoutXtend() {
-    try {
-      final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
-        @Override
-        public Boolean apply(final String it) {
-          boolean _or = false;
-          boolean _endsWith = it.endsWith("java");
-          if (_endsWith) {
-            _or = true;
-          } else {
-            boolean _endsWith_1 = it.endsWith("class");
-            _or = _endsWith_1;
-          }
-          return Boolean.valueOf((!_or));
-        }
-      };
-      final IProject project = this.createProjectWithJarDependency(_function);
-      try {
-        IResourcesSetupUtil.assertNoErrorsInWorkspace();
-      } finally {
-        project.delete(true, true, null);
-      }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
-  @Test
-  public void testJarWithoutStorage() {
-    try {
-      final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
-        @Override
-        public Boolean apply(final String it) {
-          return Boolean.valueOf(it.endsWith("bin"));
-        }
-      };
-      final IProject project = this.createProjectWithJarDependency(_function);
-      try {
-        IResourcesSetupUtil.assertNoErrorsInWorkspace();
+        Assert.assertEquals(2, _size);
+        IResourceDescriptions _get = this.persistedResourceDescriptions.get();
+        Iterable<IResourceDescription> _allResourceDescriptions = _get.getAllResourceDescriptions();
+        int _length = ((Object[])Conversions.unwrapArray(_allResourceDescriptions, Object.class)).length;
+        Assert.assertEquals(1, _length);
       } finally {
         project.delete(true, true, null);
       }
@@ -283,11 +250,7 @@ public class WorkspaceScenariosTest {
       final byte[] jarData = this.createJar(
         Collections.<Pair<? extends String, ? extends String>>unmodifiableList(CollectionLiterals.<Pair<? extends String, ? extends String>>newArrayList(_mappedTo)), jarFilter);
       final IProject project = WorkbenchTestHelper.createPluginProject("my.project", "org.eclipse.xtext.xbase.lib");
-      final IFile jarFile = project.getFile("mydependency.jar");
-      ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(jarData);
-      jarFile.create(_byteArrayInputStream, true, null);
-      IJavaProject _create = JavaCore.create(project);
-      JavaProjectSetupUtil.addJarToClasspath(_create, jarFile);
+      this.addJarToProject(project, jarData);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package pack");
       _builder_1.newLine();
@@ -316,6 +279,22 @@ public class WorkspaceScenariosTest {
       IResourcesSetupUtil.createFile("my.project/src/pack/MyClass.xtend", _builder_1.toString());
       IResourcesSetupUtil.waitForAutoBuild();
       return project;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected IClasspathEntry addJarToProject(final IProject project, final byte[] jarData) {
+    try {
+      IClasspathEntry _xblockexpression = null;
+      {
+        final IFile jarFile = project.getFile("mydependency.jar");
+        ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(jarData);
+        jarFile.create(_byteArrayInputStream, true, null);
+        IJavaProject _create = JavaCore.create(project);
+        _xblockexpression = JavaProjectSetupUtil.addJarToClasspath(_create, jarFile);
+      }
+      return _xblockexpression;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
