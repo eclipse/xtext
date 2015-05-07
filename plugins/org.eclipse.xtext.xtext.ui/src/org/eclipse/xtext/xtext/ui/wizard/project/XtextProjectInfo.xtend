@@ -23,6 +23,15 @@ import org.eclipse.xtext.util.Strings
  */
 @Accessors
 class XtextProjectInfo implements IProjectInfo {
+
+	public static final String GENERATOR = 'generator'
+	public static final String TESTS = 'tests'
+	public static final String IDE = 'ide'
+	public static final String SDK = 'sdk'
+	public static final String UI = 'ui'
+	public static final String WEB = 'web'
+	public static final String INTELLIJ = 'idea'
+
 	String projectName
 	String languageName
 	String fileExtension
@@ -36,30 +45,39 @@ class XtextProjectInfo implements IProjectInfo {
 	boolean createUiProject
 	boolean createIdeProject
 	boolean createIntellijProject
+	boolean createWebProject
 	boolean createEclipseRuntimeLaunchConfig
 
 	def String getGeneratorProjectName() {
-		return '''«getProjectName()».generator''' // $NON-NLS-1$
+		GENERATOR.asProjectName
 	}
 
 	def String getTestProjectName() {
-		return '''«getProjectName()».tests''' // $NON-NLS-1$
+		TESTS.asProjectName
 	}
 
 	def String getIdeProjectName() {
-		return '''«getProjectName()».ide''' // $NON-NLS-1$
+		IDE.asProjectName
 	}
 
 	def String getFeatureProjectName() {
-		return '''«getProjectName()».sdk''' // $NON-NLS-1$;
+		SDK.asProjectName
 	}
 
 	def String getUiProjectName() {
-		return '''«getProjectName()».ui''' // $NON-NLS-1$
+		UI.asProjectName
 	}
 
 	def String getIntellijProjectName() {
-		return '''«getProjectName()».idea''' // $NON-NLS-1$
+		INTELLIJ.asProjectName
+	}
+
+	def String getWebProjectName() {
+		WEB.asProjectName
+	}
+
+	def private String asProjectName(String string) {
+		'''«getProjectName».«string»'''
 	}
 
 	def String getBasePackagePath() {
@@ -120,6 +138,10 @@ class XtextProjectInfo implements IProjectInfo {
 
 	def IPath getIntellijProjectLocation() {
 		return intellijProjectName.asLocation
+	}
+
+	def IPath getWebProjectLocation() {
+		return webProjectName.asLocation
 	}
 
 	def asLocation(String projName) {
