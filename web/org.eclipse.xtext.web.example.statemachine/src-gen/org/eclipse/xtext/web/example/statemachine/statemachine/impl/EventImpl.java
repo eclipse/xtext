@@ -23,7 +23,7 @@ import org.eclipse.xtext.web.example.statemachine.statemachine.StatemachinePacka
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.web.example.statemachine.statemachine.impl.EventImpl#getSignal <em>Signal</em>}</li>
- *   <li>{@link org.eclipse.xtext.web.example.statemachine.statemachine.impl.EventImpl#isState <em>State</em>}</li>
+ *   <li>{@link org.eclipse.xtext.web.example.statemachine.statemachine.impl.EventImpl#isValue <em>Value</em>}</li>
  * </ul>
  *
  * @generated
@@ -41,24 +41,24 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
   protected Signal signal;
 
   /**
-   * The default value of the '{@link #isState() <em>State</em>}' attribute.
+   * The default value of the '{@link #isValue() <em>Value</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isState()
+   * @see #isValue()
    * @generated
    * @ordered
    */
-  protected static final boolean STATE_EDEFAULT = false;
+  protected static final boolean VALUE_EDEFAULT = false;
 
   /**
-   * The cached value of the '{@link #isState() <em>State</em>}' attribute.
+   * The cached value of the '{@link #isValue() <em>Value</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isState()
+   * @see #isValue()
    * @generated
    * @ordered
    */
-  protected boolean state = STATE_EDEFAULT;
+  protected boolean value = VALUE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -129,9 +129,9 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isState()
+  public boolean isValue()
   {
-    return state;
+    return value;
   }
 
   /**
@@ -139,12 +139,12 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setState(boolean newState)
+  public void setValue(boolean newValue)
   {
-    boolean oldState = state;
-    state = newState;
+    boolean oldValue = value;
+    value = newValue;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, StatemachinePackage.EVENT__STATE, oldState, state));
+      eNotify(new ENotificationImpl(this, Notification.SET, StatemachinePackage.EVENT__VALUE, oldValue, value));
   }
 
   /**
@@ -160,8 +160,8 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
       case StatemachinePackage.EVENT__SIGNAL:
         if (resolve) return getSignal();
         return basicGetSignal();
-      case StatemachinePackage.EVENT__STATE:
-        return isState();
+      case StatemachinePackage.EVENT__VALUE:
+        return isValue();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -179,8 +179,8 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
       case StatemachinePackage.EVENT__SIGNAL:
         setSignal((Signal)newValue);
         return;
-      case StatemachinePackage.EVENT__STATE:
-        setState((Boolean)newValue);
+      case StatemachinePackage.EVENT__VALUE:
+        setValue((Boolean)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -199,8 +199,8 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
       case StatemachinePackage.EVENT__SIGNAL:
         setSignal((Signal)null);
         return;
-      case StatemachinePackage.EVENT__STATE:
-        setState(STATE_EDEFAULT);
+      case StatemachinePackage.EVENT__VALUE:
+        setValue(VALUE_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -218,8 +218,8 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
     {
       case StatemachinePackage.EVENT__SIGNAL:
         return signal != null;
-      case StatemachinePackage.EVENT__STATE:
-        return state != STATE_EDEFAULT;
+      case StatemachinePackage.EVENT__VALUE:
+        return value != VALUE_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
@@ -235,8 +235,8 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (state: ");
-    result.append(state);
+    result.append(" (value: ");
+    result.append(value);
     result.append(')');
     return result.toString();
   }

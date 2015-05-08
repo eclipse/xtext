@@ -310,23 +310,27 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleSignal"
-    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:143:1: ruleSignal returns [EObject current=null] : ( ( ruleInputSignal | ruleOutputSignal ) otherlv_2= 'signal' ( (lv_name_3_0= RULE_ID ) ) ) ;
+    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:143:1: ruleSignal returns [EObject current=null] : ( (this_InputSignal_0= ruleInputSignal | this_OutputSignal_1= ruleOutputSignal ) otherlv_2= 'signal' ( (lv_name_3_0= RULE_ID ) ) ) ;
     public final EObject ruleSignal() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_2=null;
         Token lv_name_3_0=null;
+        EObject this_InputSignal_0 = null;
+
+        EObject this_OutputSignal_1 = null;
+
 
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:146:28: ( ( ( ruleInputSignal | ruleOutputSignal ) otherlv_2= 'signal' ( (lv_name_3_0= RULE_ID ) ) ) )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:147:1: ( ( ruleInputSignal | ruleOutputSignal ) otherlv_2= 'signal' ( (lv_name_3_0= RULE_ID ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:146:28: ( ( (this_InputSignal_0= ruleInputSignal | this_OutputSignal_1= ruleOutputSignal ) otherlv_2= 'signal' ( (lv_name_3_0= RULE_ID ) ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:147:1: ( (this_InputSignal_0= ruleInputSignal | this_OutputSignal_1= ruleOutputSignal ) otherlv_2= 'signal' ( (lv_name_3_0= RULE_ID ) ) )
             {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:147:1: ( ( ruleInputSignal | ruleOutputSignal ) otherlv_2= 'signal' ( (lv_name_3_0= RULE_ID ) ) )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:147:2: ( ruleInputSignal | ruleOutputSignal ) otherlv_2= 'signal' ( (lv_name_3_0= RULE_ID ) )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:147:1: ( (this_InputSignal_0= ruleInputSignal | this_OutputSignal_1= ruleOutputSignal ) otherlv_2= 'signal' ( (lv_name_3_0= RULE_ID ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:147:2: (this_InputSignal_0= ruleInputSignal | this_OutputSignal_1= ruleOutputSignal ) otherlv_2= 'signal' ( (lv_name_3_0= RULE_ID ) )
             {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:147:2: ( ruleInputSignal | ruleOutputSignal )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:147:2: (this_InputSignal_0= ruleInputSignal | this_OutputSignal_1= ruleOutputSignal )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -344,34 +348,36 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:148:5: ruleInputSignal
+                    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:148:5: this_InputSignal_0= ruleInputSignal
                     {
                      
                             newCompositeNode(grammarAccess.getSignalAccess().getInputSignalParserRuleCall_0_0()); 
                         
-                    pushFollow(FOLLOW_ruleInputSignal_in_ruleSignal251);
-                    ruleInputSignal();
+                    pushFollow(FOLLOW_ruleInputSignal_in_ruleSignal257);
+                    this_InputSignal_0=ruleInputSignal();
 
                     state._fsp--;
 
                      
+                            current = this_InputSignal_0; 
                             afterParserOrEnumRuleCall();
                         
 
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:157:5: ruleOutputSignal
+                    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:158:5: this_OutputSignal_1= ruleOutputSignal
                     {
                      
                             newCompositeNode(grammarAccess.getSignalAccess().getOutputSignalParserRuleCall_0_1()); 
                         
-                    pushFollow(FOLLOW_ruleOutputSignal_in_ruleSignal272);
-                    ruleOutputSignal();
+                    pushFollow(FOLLOW_ruleOutputSignal_in_ruleSignal284);
+                    this_OutputSignal_1=ruleOutputSignal();
 
                     state._fsp--;
 
                      
+                            current = this_OutputSignal_1; 
                             afterParserOrEnumRuleCall();
                         
 
@@ -380,17 +386,17 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,12,FOLLOW_12_in_ruleSignal284); 
+            otherlv_2=(Token)match(input,12,FOLLOW_12_in_ruleSignal296); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getSignalAccess().getSignalKeyword_1());
                 
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:168:1: ( (lv_name_3_0= RULE_ID ) )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:169:1: (lv_name_3_0= RULE_ID )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:170:1: ( (lv_name_3_0= RULE_ID ) )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:171:1: (lv_name_3_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:169:1: (lv_name_3_0= RULE_ID )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:170:3: lv_name_3_0= RULE_ID
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:171:1: (lv_name_3_0= RULE_ID )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:172:3: lv_name_3_0= RULE_ID
             {
-            lv_name_3_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSignal301); 
+            lv_name_3_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSignal313); 
 
             			newLeafNode(lv_name_3_0, grammarAccess.getSignalAccess().getNameIDTerminalRuleCall_2_0()); 
             		
@@ -431,25 +437,25 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleInputSignal"
-    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:194:1: entryRuleInputSignal returns [String current=null] : iv_ruleInputSignal= ruleInputSignal EOF ;
-    public final String entryRuleInputSignal() throws RecognitionException {
-        String current = null;
+    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:196:1: entryRuleInputSignal returns [EObject current=null] : iv_ruleInputSignal= ruleInputSignal EOF ;
+    public final EObject entryRuleInputSignal() throws RecognitionException {
+        EObject current = null;
 
-        AntlrDatatypeRuleToken iv_ruleInputSignal = null;
+        EObject iv_ruleInputSignal = null;
 
 
         try {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:195:2: (iv_ruleInputSignal= ruleInputSignal EOF )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:196:2: iv_ruleInputSignal= ruleInputSignal EOF
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:197:2: (iv_ruleInputSignal= ruleInputSignal EOF )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:198:2: iv_ruleInputSignal= ruleInputSignal EOF
             {
              newCompositeNode(grammarAccess.getInputSignalRule()); 
-            pushFollow(FOLLOW_ruleInputSignal_in_entryRuleInputSignal343);
+            pushFollow(FOLLOW_ruleInputSignal_in_entryRuleInputSignal354);
             iv_ruleInputSignal=ruleInputSignal();
 
             state._fsp--;
 
-             current =iv_ruleInputSignal.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleInputSignal354); 
+             current =iv_ruleInputSignal; 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleInputSignal364); 
 
             }
 
@@ -467,23 +473,39 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleInputSignal"
-    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:203:1: ruleInputSignal returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : kw= 'input' ;
-    public final AntlrDatatypeRuleToken ruleInputSignal() throws RecognitionException {
-        AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:205:1: ruleInputSignal returns [EObject current=null] : ( () otherlv_1= 'input' ) ;
+    public final EObject ruleInputSignal() throws RecognitionException {
+        EObject current = null;
 
-        Token kw=null;
+        Token otherlv_1=null;
 
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:206:28: (kw= 'input' )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:208:2: kw= 'input'
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:208:28: ( ( () otherlv_1= 'input' ) )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:209:1: ( () otherlv_1= 'input' )
             {
-            kw=(Token)match(input,13,FOLLOW_13_in_ruleInputSignal391); 
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:209:1: ( () otherlv_1= 'input' )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:209:2: () otherlv_1= 'input'
+            {
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:209:2: ()
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:210:5: 
+            {
 
-                    current.merge(kw);
-                    newLeafNode(kw, grammarAccess.getInputSignalAccess().getInputKeyword()); 
+                    current = forceCreateModelElement(
+                        grammarAccess.getInputSignalAccess().getInputSignalAction_0(),
+                        current);
                 
+
+            }
+
+            otherlv_1=(Token)match(input,13,FOLLOW_13_in_ruleInputSignal410); 
+
+                	newLeafNode(otherlv_1, grammarAccess.getInputSignalAccess().getInputKeyword_1());
+                
+
+            }
+
 
             }
 
@@ -502,25 +524,25 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleOutputSignal"
-    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:221:1: entryRuleOutputSignal returns [String current=null] : iv_ruleOutputSignal= ruleOutputSignal EOF ;
-    public final String entryRuleOutputSignal() throws RecognitionException {
-        String current = null;
+    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:227:1: entryRuleOutputSignal returns [EObject current=null] : iv_ruleOutputSignal= ruleOutputSignal EOF ;
+    public final EObject entryRuleOutputSignal() throws RecognitionException {
+        EObject current = null;
 
-        AntlrDatatypeRuleToken iv_ruleOutputSignal = null;
+        EObject iv_ruleOutputSignal = null;
 
 
         try {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:222:2: (iv_ruleOutputSignal= ruleOutputSignal EOF )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:223:2: iv_ruleOutputSignal= ruleOutputSignal EOF
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:228:2: (iv_ruleOutputSignal= ruleOutputSignal EOF )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:229:2: iv_ruleOutputSignal= ruleOutputSignal EOF
             {
              newCompositeNode(grammarAccess.getOutputSignalRule()); 
-            pushFollow(FOLLOW_ruleOutputSignal_in_entryRuleOutputSignal431);
+            pushFollow(FOLLOW_ruleOutputSignal_in_entryRuleOutputSignal446);
             iv_ruleOutputSignal=ruleOutputSignal();
 
             state._fsp--;
 
-             current =iv_ruleOutputSignal.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleOutputSignal442); 
+             current =iv_ruleOutputSignal; 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleOutputSignal456); 
 
             }
 
@@ -538,23 +560,39 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleOutputSignal"
-    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:230:1: ruleOutputSignal returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : kw= 'output' ;
-    public final AntlrDatatypeRuleToken ruleOutputSignal() throws RecognitionException {
-        AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:236:1: ruleOutputSignal returns [EObject current=null] : ( () otherlv_1= 'output' ) ;
+    public final EObject ruleOutputSignal() throws RecognitionException {
+        EObject current = null;
 
-        Token kw=null;
+        Token otherlv_1=null;
 
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:233:28: (kw= 'output' )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:235:2: kw= 'output'
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:239:28: ( ( () otherlv_1= 'output' ) )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:240:1: ( () otherlv_1= 'output' )
             {
-            kw=(Token)match(input,14,FOLLOW_14_in_ruleOutputSignal479); 
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:240:1: ( () otherlv_1= 'output' )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:240:2: () otherlv_1= 'output'
+            {
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:240:2: ()
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:241:5: 
+            {
 
-                    current.merge(kw);
-                    newLeafNode(kw, grammarAccess.getOutputSignalAccess().getOutputKeyword()); 
+                    current = forceCreateModelElement(
+                        grammarAccess.getOutputSignalAccess().getOutputSignalAction_0(),
+                        current);
                 
+
+            }
+
+            otherlv_1=(Token)match(input,14,FOLLOW_14_in_ruleOutputSignal502); 
+
+                	newLeafNode(otherlv_1, grammarAccess.getOutputSignalAccess().getOutputKeyword_1());
+                
+
+            }
+
 
             }
 
@@ -573,7 +611,7 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleState"
-    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:248:1: entryRuleState returns [EObject current=null] : iv_ruleState= ruleState EOF ;
+    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:258:1: entryRuleState returns [EObject current=null] : iv_ruleState= ruleState EOF ;
     public final EObject entryRuleState() throws RecognitionException {
         EObject current = null;
 
@@ -581,17 +619,17 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:249:2: (iv_ruleState= ruleState EOF )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:250:2: iv_ruleState= ruleState EOF
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:259:2: (iv_ruleState= ruleState EOF )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:260:2: iv_ruleState= ruleState EOF
             {
              newCompositeNode(grammarAccess.getStateRule()); 
-            pushFollow(FOLLOW_ruleState_in_entryRuleState518);
+            pushFollow(FOLLOW_ruleState_in_entryRuleState538);
             iv_ruleState=ruleState();
 
             state._fsp--;
 
              current =iv_ruleState; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleState528); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleState548); 
 
             }
 
@@ -609,7 +647,7 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleState"
-    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:257:1: ruleState returns [EObject current=null] : (otherlv_0= 'state' ( (lv_name_1_0= RULE_ID ) ) ( (lv_commands_2_0= ruleCommand ) )* ( (lv_transitions_3_0= ruleTransition ) )* otherlv_4= 'end' ) ;
+    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:267:1: ruleState returns [EObject current=null] : (otherlv_0= 'state' ( (lv_name_1_0= RULE_ID ) ) ( (lv_commands_2_0= ruleCommand ) )* ( (lv_transitions_3_0= ruleTransition ) )* otherlv_4= 'end' ) ;
     public final EObject ruleState() throws RecognitionException {
         EObject current = null;
 
@@ -624,23 +662,23 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:260:28: ( (otherlv_0= 'state' ( (lv_name_1_0= RULE_ID ) ) ( (lv_commands_2_0= ruleCommand ) )* ( (lv_transitions_3_0= ruleTransition ) )* otherlv_4= 'end' ) )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:261:1: (otherlv_0= 'state' ( (lv_name_1_0= RULE_ID ) ) ( (lv_commands_2_0= ruleCommand ) )* ( (lv_transitions_3_0= ruleTransition ) )* otherlv_4= 'end' )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:270:28: ( (otherlv_0= 'state' ( (lv_name_1_0= RULE_ID ) ) ( (lv_commands_2_0= ruleCommand ) )* ( (lv_transitions_3_0= ruleTransition ) )* otherlv_4= 'end' ) )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:271:1: (otherlv_0= 'state' ( (lv_name_1_0= RULE_ID ) ) ( (lv_commands_2_0= ruleCommand ) )* ( (lv_transitions_3_0= ruleTransition ) )* otherlv_4= 'end' )
             {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:261:1: (otherlv_0= 'state' ( (lv_name_1_0= RULE_ID ) ) ( (lv_commands_2_0= ruleCommand ) )* ( (lv_transitions_3_0= ruleTransition ) )* otherlv_4= 'end' )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:261:3: otherlv_0= 'state' ( (lv_name_1_0= RULE_ID ) ) ( (lv_commands_2_0= ruleCommand ) )* ( (lv_transitions_3_0= ruleTransition ) )* otherlv_4= 'end'
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:271:1: (otherlv_0= 'state' ( (lv_name_1_0= RULE_ID ) ) ( (lv_commands_2_0= ruleCommand ) )* ( (lv_transitions_3_0= ruleTransition ) )* otherlv_4= 'end' )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:271:3: otherlv_0= 'state' ( (lv_name_1_0= RULE_ID ) ) ( (lv_commands_2_0= ruleCommand ) )* ( (lv_transitions_3_0= ruleTransition ) )* otherlv_4= 'end'
             {
-            otherlv_0=(Token)match(input,15,FOLLOW_15_in_ruleState565); 
+            otherlv_0=(Token)match(input,15,FOLLOW_15_in_ruleState585); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getStateAccess().getStateKeyword_0());
                 
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:265:1: ( (lv_name_1_0= RULE_ID ) )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:266:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:275:1: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:276:1: (lv_name_1_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:266:1: (lv_name_1_0= RULE_ID )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:267:3: lv_name_1_0= RULE_ID
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:276:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:277:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleState582); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleState602); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getStateAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -660,7 +698,7 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:283:2: ( (lv_commands_2_0= ruleCommand ) )*
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:293:2: ( (lv_commands_2_0= ruleCommand ) )*
             loop4:
             do {
                 int alt4=2;
@@ -673,15 +711,15 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:284:1: (lv_commands_2_0= ruleCommand )
+            	    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:294:1: (lv_commands_2_0= ruleCommand )
             	    {
-            	    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:284:1: (lv_commands_2_0= ruleCommand )
-            	    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:285:3: lv_commands_2_0= ruleCommand
+            	    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:294:1: (lv_commands_2_0= ruleCommand )
+            	    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:295:3: lv_commands_2_0= ruleCommand
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getStateAccess().getCommandsCommandParserRuleCall_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleCommand_in_ruleState608);
+            	    pushFollow(FOLLOW_ruleCommand_in_ruleState628);
             	    lv_commands_2_0=ruleCommand();
 
             	    state._fsp--;
@@ -709,7 +747,7 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:301:3: ( (lv_transitions_3_0= ruleTransition ) )*
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:311:3: ( (lv_transitions_3_0= ruleTransition ) )*
             loop5:
             do {
                 int alt5=2;
@@ -722,15 +760,15 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
 
                 switch (alt5) {
             	case 1 :
-            	    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:302:1: (lv_transitions_3_0= ruleTransition )
+            	    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:312:1: (lv_transitions_3_0= ruleTransition )
             	    {
-            	    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:302:1: (lv_transitions_3_0= ruleTransition )
-            	    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:303:3: lv_transitions_3_0= ruleTransition
+            	    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:312:1: (lv_transitions_3_0= ruleTransition )
+            	    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:313:3: lv_transitions_3_0= ruleTransition
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getStateAccess().getTransitionsTransitionParserRuleCall_3_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleTransition_in_ruleState630);
+            	    pushFollow(FOLLOW_ruleTransition_in_ruleState650);
             	    lv_transitions_3_0=ruleTransition();
 
             	    state._fsp--;
@@ -758,7 +796,7 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_4=(Token)match(input,16,FOLLOW_16_in_ruleState643); 
+            otherlv_4=(Token)match(input,16,FOLLOW_16_in_ruleState663); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getStateAccess().getEndKeyword_4());
                 
@@ -783,7 +821,7 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleTransition"
-    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:331:1: entryRuleTransition returns [EObject current=null] : iv_ruleTransition= ruleTransition EOF ;
+    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:341:1: entryRuleTransition returns [EObject current=null] : iv_ruleTransition= ruleTransition EOF ;
     public final EObject entryRuleTransition() throws RecognitionException {
         EObject current = null;
 
@@ -791,17 +829,17 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:332:2: (iv_ruleTransition= ruleTransition EOF )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:333:2: iv_ruleTransition= ruleTransition EOF
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:342:2: (iv_ruleTransition= ruleTransition EOF )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:343:2: iv_ruleTransition= ruleTransition EOF
             {
              newCompositeNode(grammarAccess.getTransitionRule()); 
-            pushFollow(FOLLOW_ruleTransition_in_entryRuleTransition679);
+            pushFollow(FOLLOW_ruleTransition_in_entryRuleTransition699);
             iv_ruleTransition=ruleTransition();
 
             state._fsp--;
 
              current =iv_ruleTransition; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTransition689); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTransition709); 
 
             }
 
@@ -819,7 +857,7 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTransition"
-    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:340:1: ruleTransition returns [EObject current=null] : (otherlv_0= 'if' ( (lv_condition_1_0= ruleCondition ) ) otherlv_2= 'goto' ( (otherlv_3= RULE_ID ) ) ) ;
+    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:350:1: ruleTransition returns [EObject current=null] : (otherlv_0= 'if' ( (lv_condition_1_0= ruleCondition ) ) otherlv_2= 'goto' ( (otherlv_3= RULE_ID ) ) ) ;
     public final EObject ruleTransition() throws RecognitionException {
         EObject current = null;
 
@@ -832,26 +870,26 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:343:28: ( (otherlv_0= 'if' ( (lv_condition_1_0= ruleCondition ) ) otherlv_2= 'goto' ( (otherlv_3= RULE_ID ) ) ) )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:344:1: (otherlv_0= 'if' ( (lv_condition_1_0= ruleCondition ) ) otherlv_2= 'goto' ( (otherlv_3= RULE_ID ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:353:28: ( (otherlv_0= 'if' ( (lv_condition_1_0= ruleCondition ) ) otherlv_2= 'goto' ( (otherlv_3= RULE_ID ) ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:354:1: (otherlv_0= 'if' ( (lv_condition_1_0= ruleCondition ) ) otherlv_2= 'goto' ( (otherlv_3= RULE_ID ) ) )
             {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:344:1: (otherlv_0= 'if' ( (lv_condition_1_0= ruleCondition ) ) otherlv_2= 'goto' ( (otherlv_3= RULE_ID ) ) )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:344:3: otherlv_0= 'if' ( (lv_condition_1_0= ruleCondition ) ) otherlv_2= 'goto' ( (otherlv_3= RULE_ID ) )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:354:1: (otherlv_0= 'if' ( (lv_condition_1_0= ruleCondition ) ) otherlv_2= 'goto' ( (otherlv_3= RULE_ID ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:354:3: otherlv_0= 'if' ( (lv_condition_1_0= ruleCondition ) ) otherlv_2= 'goto' ( (otherlv_3= RULE_ID ) )
             {
-            otherlv_0=(Token)match(input,17,FOLLOW_17_in_ruleTransition726); 
+            otherlv_0=(Token)match(input,17,FOLLOW_17_in_ruleTransition746); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getTransitionAccess().getIfKeyword_0());
                 
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:348:1: ( (lv_condition_1_0= ruleCondition ) )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:349:1: (lv_condition_1_0= ruleCondition )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:358:1: ( (lv_condition_1_0= ruleCondition ) )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:359:1: (lv_condition_1_0= ruleCondition )
             {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:349:1: (lv_condition_1_0= ruleCondition )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:350:3: lv_condition_1_0= ruleCondition
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:359:1: (lv_condition_1_0= ruleCondition )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:360:3: lv_condition_1_0= ruleCondition
             {
              
             	        newCompositeNode(grammarAccess.getTransitionAccess().getConditionConditionParserRuleCall_1_0()); 
             	    
-            pushFollow(FOLLOW_ruleCondition_in_ruleTransition747);
+            pushFollow(FOLLOW_ruleCondition_in_ruleTransition767);
             lv_condition_1_0=ruleCondition();
 
             state._fsp--;
@@ -873,22 +911,22 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,18,FOLLOW_18_in_ruleTransition759); 
+            otherlv_2=(Token)match(input,18,FOLLOW_18_in_ruleTransition779); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getTransitionAccess().getGotoKeyword_2());
                 
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:370:1: ( (otherlv_3= RULE_ID ) )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:371:1: (otherlv_3= RULE_ID )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:380:1: ( (otherlv_3= RULE_ID ) )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:381:1: (otherlv_3= RULE_ID )
             {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:371:1: (otherlv_3= RULE_ID )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:372:3: otherlv_3= RULE_ID
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:381:1: (otherlv_3= RULE_ID )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:382:3: otherlv_3= RULE_ID
             {
 
             			if (current==null) {
             	            current = createModelElement(grammarAccess.getTransitionRule());
             	        }
                     
-            otherlv_3=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTransition779); 
+            otherlv_3=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTransition799); 
 
             		newLeafNode(otherlv_3, grammarAccess.getTransitionAccess().getStateStateCrossReference_3_0()); 
             	
@@ -919,7 +957,7 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleCondition"
-    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:391:1: entryRuleCondition returns [EObject current=null] : iv_ruleCondition= ruleCondition EOF ;
+    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:401:1: entryRuleCondition returns [EObject current=null] : iv_ruleCondition= ruleCondition EOF ;
     public final EObject entryRuleCondition() throws RecognitionException {
         EObject current = null;
 
@@ -927,17 +965,17 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:392:2: (iv_ruleCondition= ruleCondition EOF )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:393:2: iv_ruleCondition= ruleCondition EOF
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:402:2: (iv_ruleCondition= ruleCondition EOF )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:403:2: iv_ruleCondition= ruleCondition EOF
             {
              newCompositeNode(grammarAccess.getConditionRule()); 
-            pushFollow(FOLLOW_ruleCondition_in_entryRuleCondition815);
+            pushFollow(FOLLOW_ruleCondition_in_entryRuleCondition835);
             iv_ruleCondition=ruleCondition();
 
             state._fsp--;
 
              current =iv_ruleCondition; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleCondition825); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleCondition845); 
 
             }
 
@@ -955,7 +993,7 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleCondition"
-    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:400:1: ruleCondition returns [EObject current=null] : ( ( (lv_events_0_0= ruleEvent ) ) (otherlv_1= 'and' ( (lv_events_2_0= ruleEvent ) ) )* ) ;
+    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:410:1: ruleCondition returns [EObject current=null] : ( ( (lv_events_0_0= ruleEvent ) ) (otherlv_1= 'and' ( (lv_events_2_0= ruleEvent ) ) )* ) ;
     public final EObject ruleCondition() throws RecognitionException {
         EObject current = null;
 
@@ -968,22 +1006,22 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:403:28: ( ( ( (lv_events_0_0= ruleEvent ) ) (otherlv_1= 'and' ( (lv_events_2_0= ruleEvent ) ) )* ) )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:404:1: ( ( (lv_events_0_0= ruleEvent ) ) (otherlv_1= 'and' ( (lv_events_2_0= ruleEvent ) ) )* )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:413:28: ( ( ( (lv_events_0_0= ruleEvent ) ) (otherlv_1= 'and' ( (lv_events_2_0= ruleEvent ) ) )* ) )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:414:1: ( ( (lv_events_0_0= ruleEvent ) ) (otherlv_1= 'and' ( (lv_events_2_0= ruleEvent ) ) )* )
             {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:404:1: ( ( (lv_events_0_0= ruleEvent ) ) (otherlv_1= 'and' ( (lv_events_2_0= ruleEvent ) ) )* )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:404:2: ( (lv_events_0_0= ruleEvent ) ) (otherlv_1= 'and' ( (lv_events_2_0= ruleEvent ) ) )*
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:414:1: ( ( (lv_events_0_0= ruleEvent ) ) (otherlv_1= 'and' ( (lv_events_2_0= ruleEvent ) ) )* )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:414:2: ( (lv_events_0_0= ruleEvent ) ) (otherlv_1= 'and' ( (lv_events_2_0= ruleEvent ) ) )*
             {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:404:2: ( (lv_events_0_0= ruleEvent ) )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:405:1: (lv_events_0_0= ruleEvent )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:414:2: ( (lv_events_0_0= ruleEvent ) )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:415:1: (lv_events_0_0= ruleEvent )
             {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:405:1: (lv_events_0_0= ruleEvent )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:406:3: lv_events_0_0= ruleEvent
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:415:1: (lv_events_0_0= ruleEvent )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:416:3: lv_events_0_0= ruleEvent
             {
              
             	        newCompositeNode(grammarAccess.getConditionAccess().getEventsEventParserRuleCall_0_0()); 
             	    
-            pushFollow(FOLLOW_ruleEvent_in_ruleCondition871);
+            pushFollow(FOLLOW_ruleEvent_in_ruleCondition891);
             lv_events_0_0=ruleEvent();
 
             state._fsp--;
@@ -1005,7 +1043,7 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:422:2: (otherlv_1= 'and' ( (lv_events_2_0= ruleEvent ) ) )*
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:432:2: (otherlv_1= 'and' ( (lv_events_2_0= ruleEvent ) ) )*
             loop6:
             do {
                 int alt6=2;
@@ -1018,22 +1056,22 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
 
                 switch (alt6) {
             	case 1 :
-            	    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:422:4: otherlv_1= 'and' ( (lv_events_2_0= ruleEvent ) )
+            	    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:432:4: otherlv_1= 'and' ( (lv_events_2_0= ruleEvent ) )
             	    {
-            	    otherlv_1=(Token)match(input,19,FOLLOW_19_in_ruleCondition884); 
+            	    otherlv_1=(Token)match(input,19,FOLLOW_19_in_ruleCondition904); 
 
             	        	newLeafNode(otherlv_1, grammarAccess.getConditionAccess().getAndKeyword_1_0());
             	        
-            	    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:426:1: ( (lv_events_2_0= ruleEvent ) )
-            	    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:427:1: (lv_events_2_0= ruleEvent )
+            	    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:436:1: ( (lv_events_2_0= ruleEvent ) )
+            	    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:437:1: (lv_events_2_0= ruleEvent )
             	    {
-            	    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:427:1: (lv_events_2_0= ruleEvent )
-            	    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:428:3: lv_events_2_0= ruleEvent
+            	    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:437:1: (lv_events_2_0= ruleEvent )
+            	    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:438:3: lv_events_2_0= ruleEvent
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getConditionAccess().getEventsEventParserRuleCall_1_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleEvent_in_ruleCondition905);
+            	    pushFollow(FOLLOW_ruleEvent_in_ruleCondition925);
             	    lv_events_2_0=ruleEvent();
 
             	    state._fsp--;
@@ -1085,7 +1123,7 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEvent"
-    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:452:1: entryRuleEvent returns [EObject current=null] : iv_ruleEvent= ruleEvent EOF ;
+    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:462:1: entryRuleEvent returns [EObject current=null] : iv_ruleEvent= ruleEvent EOF ;
     public final EObject entryRuleEvent() throws RecognitionException {
         EObject current = null;
 
@@ -1093,17 +1131,17 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:453:2: (iv_ruleEvent= ruleEvent EOF )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:454:2: iv_ruleEvent= ruleEvent EOF
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:463:2: (iv_ruleEvent= ruleEvent EOF )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:464:2: iv_ruleEvent= ruleEvent EOF
             {
              newCompositeNode(grammarAccess.getEventRule()); 
-            pushFollow(FOLLOW_ruleEvent_in_entryRuleEvent943);
+            pushFollow(FOLLOW_ruleEvent_in_entryRuleEvent963);
             iv_ruleEvent=ruleEvent();
 
             state._fsp--;
 
              current =iv_ruleEvent; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEvent953); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEvent973); 
 
             }
 
@@ -1121,35 +1159,35 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEvent"
-    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:461:1: ruleEvent returns [EObject current=null] : ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '==' ( (lv_state_2_0= RULE_BOOLEAN ) ) ) ;
+    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:471:1: ruleEvent returns [EObject current=null] : ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '==' ( (lv_value_2_0= RULE_BOOLEAN ) ) ) ;
     public final EObject ruleEvent() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
         Token otherlv_1=null;
-        Token lv_state_2_0=null;
+        Token lv_value_2_0=null;
 
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:464:28: ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '==' ( (lv_state_2_0= RULE_BOOLEAN ) ) ) )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:465:1: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '==' ( (lv_state_2_0= RULE_BOOLEAN ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:474:28: ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '==' ( (lv_value_2_0= RULE_BOOLEAN ) ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:475:1: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '==' ( (lv_value_2_0= RULE_BOOLEAN ) ) )
             {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:465:1: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '==' ( (lv_state_2_0= RULE_BOOLEAN ) ) )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:465:2: ( (otherlv_0= RULE_ID ) ) otherlv_1= '==' ( (lv_state_2_0= RULE_BOOLEAN ) )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:475:1: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '==' ( (lv_value_2_0= RULE_BOOLEAN ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:475:2: ( (otherlv_0= RULE_ID ) ) otherlv_1= '==' ( (lv_value_2_0= RULE_BOOLEAN ) )
             {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:465:2: ( (otherlv_0= RULE_ID ) )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:466:1: (otherlv_0= RULE_ID )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:475:2: ( (otherlv_0= RULE_ID ) )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:476:1: (otherlv_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:466:1: (otherlv_0= RULE_ID )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:467:3: otherlv_0= RULE_ID
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:476:1: (otherlv_0= RULE_ID )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:477:3: otherlv_0= RULE_ID
             {
 
             			if (current==null) {
             	            current = createModelElement(grammarAccess.getEventRule());
             	        }
                     
-            otherlv_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEvent998); 
+            otherlv_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEvent1018); 
 
             		newLeafNode(otherlv_0, grammarAccess.getEventAccess().getSignalSignalCrossReference_0_0()); 
             	
@@ -1159,19 +1197,19 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,20,FOLLOW_20_in_ruleEvent1010); 
+            otherlv_1=(Token)match(input,20,FOLLOW_20_in_ruleEvent1030); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getEventAccess().getEqualsSignEqualsSignKeyword_1());
                 
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:482:1: ( (lv_state_2_0= RULE_BOOLEAN ) )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:483:1: (lv_state_2_0= RULE_BOOLEAN )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:492:1: ( (lv_value_2_0= RULE_BOOLEAN ) )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:493:1: (lv_value_2_0= RULE_BOOLEAN )
             {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:483:1: (lv_state_2_0= RULE_BOOLEAN )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:484:3: lv_state_2_0= RULE_BOOLEAN
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:493:1: (lv_value_2_0= RULE_BOOLEAN )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:494:3: lv_value_2_0= RULE_BOOLEAN
             {
-            lv_state_2_0=(Token)match(input,RULE_BOOLEAN,FOLLOW_RULE_BOOLEAN_in_ruleEvent1027); 
+            lv_value_2_0=(Token)match(input,RULE_BOOLEAN,FOLLOW_RULE_BOOLEAN_in_ruleEvent1047); 
 
-            			newLeafNode(lv_state_2_0, grammarAccess.getEventAccess().getStateBOOLEANTerminalRuleCall_2_0()); 
+            			newLeafNode(lv_value_2_0, grammarAccess.getEventAccess().getValueBOOLEANTerminalRuleCall_2_0()); 
             		
 
             	        if (current==null) {
@@ -1179,8 +1217,8 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
             	        }
                    		setWithLastConsumed(
                    			current, 
-                   			"state",
-                    		lv_state_2_0, 
+                   			"value",
+                    		lv_value_2_0, 
                     		"BOOLEAN");
             	    
 
@@ -1210,7 +1248,7 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleCommand"
-    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:508:1: entryRuleCommand returns [EObject current=null] : iv_ruleCommand= ruleCommand EOF ;
+    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:518:1: entryRuleCommand returns [EObject current=null] : iv_ruleCommand= ruleCommand EOF ;
     public final EObject entryRuleCommand() throws RecognitionException {
         EObject current = null;
 
@@ -1218,17 +1256,17 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:509:2: (iv_ruleCommand= ruleCommand EOF )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:510:2: iv_ruleCommand= ruleCommand EOF
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:519:2: (iv_ruleCommand= ruleCommand EOF )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:520:2: iv_ruleCommand= ruleCommand EOF
             {
              newCompositeNode(grammarAccess.getCommandRule()); 
-            pushFollow(FOLLOW_ruleCommand_in_entryRuleCommand1068);
+            pushFollow(FOLLOW_ruleCommand_in_entryRuleCommand1088);
             iv_ruleCommand=ruleCommand();
 
             state._fsp--;
 
              current =iv_ruleCommand; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleCommand1078); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleCommand1098); 
 
             }
 
@@ -1246,40 +1284,40 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleCommand"
-    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:517:1: ruleCommand returns [EObject current=null] : (otherlv_0= 'set' ( (otherlv_1= RULE_ID ) ) otherlv_2= '=' ( (lv_newState_3_0= RULE_BOOLEAN ) ) ) ;
+    // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:527:1: ruleCommand returns [EObject current=null] : (otherlv_0= 'set' ( (otherlv_1= RULE_ID ) ) otherlv_2= '=' ( (lv_newValue_3_0= RULE_BOOLEAN ) ) ) ;
     public final EObject ruleCommand() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
         Token otherlv_1=null;
         Token otherlv_2=null;
-        Token lv_newState_3_0=null;
+        Token lv_newValue_3_0=null;
 
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:520:28: ( (otherlv_0= 'set' ( (otherlv_1= RULE_ID ) ) otherlv_2= '=' ( (lv_newState_3_0= RULE_BOOLEAN ) ) ) )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:521:1: (otherlv_0= 'set' ( (otherlv_1= RULE_ID ) ) otherlv_2= '=' ( (lv_newState_3_0= RULE_BOOLEAN ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:530:28: ( (otherlv_0= 'set' ( (otherlv_1= RULE_ID ) ) otherlv_2= '=' ( (lv_newValue_3_0= RULE_BOOLEAN ) ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:531:1: (otherlv_0= 'set' ( (otherlv_1= RULE_ID ) ) otherlv_2= '=' ( (lv_newValue_3_0= RULE_BOOLEAN ) ) )
             {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:521:1: (otherlv_0= 'set' ( (otherlv_1= RULE_ID ) ) otherlv_2= '=' ( (lv_newState_3_0= RULE_BOOLEAN ) ) )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:521:3: otherlv_0= 'set' ( (otherlv_1= RULE_ID ) ) otherlv_2= '=' ( (lv_newState_3_0= RULE_BOOLEAN ) )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:531:1: (otherlv_0= 'set' ( (otherlv_1= RULE_ID ) ) otherlv_2= '=' ( (lv_newValue_3_0= RULE_BOOLEAN ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:531:3: otherlv_0= 'set' ( (otherlv_1= RULE_ID ) ) otherlv_2= '=' ( (lv_newValue_3_0= RULE_BOOLEAN ) )
             {
-            otherlv_0=(Token)match(input,21,FOLLOW_21_in_ruleCommand1115); 
+            otherlv_0=(Token)match(input,21,FOLLOW_21_in_ruleCommand1135); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getCommandAccess().getSetKeyword_0());
                 
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:525:1: ( (otherlv_1= RULE_ID ) )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:526:1: (otherlv_1= RULE_ID )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:535:1: ( (otherlv_1= RULE_ID ) )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:536:1: (otherlv_1= RULE_ID )
             {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:526:1: (otherlv_1= RULE_ID )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:527:3: otherlv_1= RULE_ID
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:536:1: (otherlv_1= RULE_ID )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:537:3: otherlv_1= RULE_ID
             {
 
             			if (current==null) {
             	            current = createModelElement(grammarAccess.getCommandRule());
             	        }
                     
-            otherlv_1=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleCommand1135); 
+            otherlv_1=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleCommand1155); 
 
             		newLeafNode(otherlv_1, grammarAccess.getCommandAccess().getSignalSignalCrossReference_1_0()); 
             	
@@ -1289,19 +1327,19 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,22,FOLLOW_22_in_ruleCommand1147); 
+            otherlv_2=(Token)match(input,22,FOLLOW_22_in_ruleCommand1167); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getCommandAccess().getEqualsSignKeyword_2());
                 
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:542:1: ( (lv_newState_3_0= RULE_BOOLEAN ) )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:543:1: (lv_newState_3_0= RULE_BOOLEAN )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:552:1: ( (lv_newValue_3_0= RULE_BOOLEAN ) )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:553:1: (lv_newValue_3_0= RULE_BOOLEAN )
             {
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:543:1: (lv_newState_3_0= RULE_BOOLEAN )
-            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:544:3: lv_newState_3_0= RULE_BOOLEAN
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:553:1: (lv_newValue_3_0= RULE_BOOLEAN )
+            // ../org.eclipse.xtext.web.example.statemachine/src-gen/org/eclipse/xtext/web/example/statemachine/parser/antlr/internal/InternalStatemachine.g:554:3: lv_newValue_3_0= RULE_BOOLEAN
             {
-            lv_newState_3_0=(Token)match(input,RULE_BOOLEAN,FOLLOW_RULE_BOOLEAN_in_ruleCommand1164); 
+            lv_newValue_3_0=(Token)match(input,RULE_BOOLEAN,FOLLOW_RULE_BOOLEAN_in_ruleCommand1184); 
 
-            			newLeafNode(lv_newState_3_0, grammarAccess.getCommandAccess().getNewStateBOOLEANTerminalRuleCall_3_0()); 
+            			newLeafNode(lv_newValue_3_0, grammarAccess.getCommandAccess().getNewValueBOOLEANTerminalRuleCall_3_0()); 
             		
 
             	        if (current==null) {
@@ -1309,8 +1347,8 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
             	        }
                    		setWithLastConsumed(
                    			current, 
-                   			"newState",
-                    		lv_newState_3_0, 
+                   			"newValue",
+                    		lv_newValue_3_0, 
                     		"BOOLEAN");
             	    
 
@@ -1349,44 +1387,44 @@ public class InternalStatemachineParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleState_in_ruleStatemachine162 = new BitSet(new long[]{0x0000000000008002L});
     public static final BitSet FOLLOW_ruleSignal_in_entryRuleSignal199 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleSignal209 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInputSignal_in_ruleSignal251 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_ruleOutputSignal_in_ruleSignal272 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleSignal284 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSignal301 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInputSignal_in_entryRuleInputSignal343 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleInputSignal354 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_ruleInputSignal391 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOutputSignal_in_entryRuleOutputSignal431 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleOutputSignal442 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_ruleOutputSignal479 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleState_in_entryRuleState518 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleState528 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_ruleState565 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleState582 = new BitSet(new long[]{0x0000000000230000L});
-    public static final BitSet FOLLOW_ruleCommand_in_ruleState608 = new BitSet(new long[]{0x0000000000230000L});
-    public static final BitSet FOLLOW_ruleTransition_in_ruleState630 = new BitSet(new long[]{0x0000000000030000L});
-    public static final BitSet FOLLOW_16_in_ruleState643 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTransition_in_entryRuleTransition679 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTransition689 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_ruleTransition726 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleCondition_in_ruleTransition747 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_ruleTransition759 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleTransition779 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCondition_in_entryRuleCondition815 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleCondition825 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEvent_in_ruleCondition871 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_19_in_ruleCondition884 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleEvent_in_ruleCondition905 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_ruleEvent_in_entryRuleEvent943 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEvent953 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleEvent998 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_20_in_ruleEvent1010 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_BOOLEAN_in_ruleEvent1027 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCommand_in_entryRuleCommand1068 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleCommand1078 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_ruleCommand1115 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleCommand1135 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_22_in_ruleCommand1147 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_BOOLEAN_in_ruleCommand1164 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInputSignal_in_ruleSignal257 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_ruleOutputSignal_in_ruleSignal284 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_ruleSignal296 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSignal313 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInputSignal_in_entryRuleInputSignal354 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleInputSignal364 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_ruleInputSignal410 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOutputSignal_in_entryRuleOutputSignal446 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleOutputSignal456 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_ruleOutputSignal502 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleState_in_entryRuleState538 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleState548 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_ruleState585 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleState602 = new BitSet(new long[]{0x0000000000230000L});
+    public static final BitSet FOLLOW_ruleCommand_in_ruleState628 = new BitSet(new long[]{0x0000000000230000L});
+    public static final BitSet FOLLOW_ruleTransition_in_ruleState650 = new BitSet(new long[]{0x0000000000030000L});
+    public static final BitSet FOLLOW_16_in_ruleState663 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTransition_in_entryRuleTransition699 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTransition709 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_ruleTransition746 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleCondition_in_ruleTransition767 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_18_in_ruleTransition779 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleTransition799 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCondition_in_entryRuleCondition835 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleCondition845 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEvent_in_ruleCondition891 = new BitSet(new long[]{0x0000000000080002L});
+    public static final BitSet FOLLOW_19_in_ruleCondition904 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleEvent_in_ruleCondition925 = new BitSet(new long[]{0x0000000000080002L});
+    public static final BitSet FOLLOW_ruleEvent_in_entryRuleEvent963 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEvent973 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleEvent1018 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_20_in_ruleEvent1030 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_BOOLEAN_in_ruleEvent1047 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCommand_in_entryRuleCommand1088 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleCommand1098 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_21_in_ruleCommand1135 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleCommand1155 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_22_in_ruleCommand1167 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_BOOLEAN_in_ruleCommand1184 = new BitSet(new long[]{0x0000000000000002L});
 
 }

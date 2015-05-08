@@ -15,6 +15,8 @@
     <genClasses ecoreClass="Statemachine.ecore#//Signal">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Statemachine.ecore#//Signal/name"/>
     </genClasses>
+    <genClasses ecoreClass="Statemachine.ecore#//InputSignal"/>
+    <genClasses ecoreClass="Statemachine.ecore#//OutputSignal"/>
     <genClasses ecoreClass="Statemachine.ecore#//State">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Statemachine.ecore#//State/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Statemachine.ecore#//State/commands"/>
@@ -29,11 +31,11 @@
     </genClasses>
     <genClasses ecoreClass="Statemachine.ecore#//Event">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Statemachine.ecore#//Event/signal"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Statemachine.ecore#//Event/state"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Statemachine.ecore#//Event/value"/>
     </genClasses>
     <genClasses ecoreClass="Statemachine.ecore#//Command">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Statemachine.ecore#//Command/signal"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Statemachine.ecore#//Command/newState"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Statemachine.ecore#//Command/newValue"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -66,6 +66,8 @@ public class StatemachineFactoryImpl extends EFactoryImpl implements Statemachin
     {
       case StatemachinePackage.STATEMACHINE: return createStatemachine();
       case StatemachinePackage.SIGNAL: return createSignal();
+      case StatemachinePackage.INPUT_SIGNAL: return createInputSignal();
+      case StatemachinePackage.OUTPUT_SIGNAL: return createOutputSignal();
       case StatemachinePackage.STATE: return createState();
       case StatemachinePackage.TRANSITION: return createTransition();
       case StatemachinePackage.CONDITION: return createCondition();
@@ -96,6 +98,28 @@ public class StatemachineFactoryImpl extends EFactoryImpl implements Statemachin
   {
     SignalImpl signal = new SignalImpl();
     return signal;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public InputSignal createInputSignal()
+  {
+    InputSignalImpl inputSignal = new InputSignalImpl();
+    return inputSignal;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public OutputSignal createOutputSignal()
+  {
+    OutputSignalImpl outputSignal = new OutputSignalImpl();
+    return outputSignal;
   }
 
   /**

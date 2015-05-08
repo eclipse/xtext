@@ -33,6 +33,21 @@ class ContentAssistTest extends AbstractWebServerTest {
 			  stateId = "-80000000"
 			  entries = ArrayList (
 			    Entry [
+			      type = "keyword"
+			      prefix = ""
+			      proposal = "input"
+			      textReplacements = ArrayList ()
+			      editPositions = ArrayList ()
+			    ],
+			    Entry [
+			      type = "keyword"
+			      prefix = ""
+			      proposal = "output"
+			      textReplacements = ArrayList ()
+			      editPositions = ArrayList ()
+			    ],
+			    Entry [
+			      type = "keyword"
 			      prefix = ""
 			      proposal = "state"
 			      textReplacements = ArrayList ()
@@ -48,6 +63,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			  stateId = "-80000000"
 			  entries = ArrayList (
 			    Entry [
+			      type = "keyword"
 			      prefix = "sta"
 			      proposal = "state"
 			      textReplacements = ArrayList ()

@@ -4,10 +4,10 @@
 'end'=16
 'goto'=18
 'if'=17
-'input'=12
-'output'=13
+'input'=13
+'output'=14
 'set'=21
-'signal'=14
+'signal'=12
 'state'=15
 RULE_ANY_OTHER=11
 RULE_BOOLEAN=5

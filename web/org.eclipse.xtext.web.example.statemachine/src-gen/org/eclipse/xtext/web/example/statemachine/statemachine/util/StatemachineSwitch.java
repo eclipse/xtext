@@ -86,6 +86,22 @@ public class StatemachineSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case StatemachinePackage.INPUT_SIGNAL:
+      {
+        InputSignal inputSignal = (InputSignal)theEObject;
+        T result = caseInputSignal(inputSignal);
+        if (result == null) result = caseSignal(inputSignal);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case StatemachinePackage.OUTPUT_SIGNAL:
+      {
+        OutputSignal outputSignal = (OutputSignal)theEObject;
+        T result = caseOutputSignal(outputSignal);
+        if (result == null) result = caseSignal(outputSignal);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case StatemachinePackage.STATE:
       {
         State state = (State)theEObject;
@@ -153,6 +169,38 @@ public class StatemachineSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseSignal(Signal object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Input Signal</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Input Signal</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseInputSignal(InputSignal object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Output Signal</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Output Signal</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseOutputSignal(OutputSignal object)
   {
     return null;
   }

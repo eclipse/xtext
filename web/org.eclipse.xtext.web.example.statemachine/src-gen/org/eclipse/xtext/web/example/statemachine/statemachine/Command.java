@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.web.example.statemachine.statemachine.Command#getSignal <em>Signal</em>}</li>
- *   <li>{@link org.eclipse.xtext.web.example.statemachine.statemachine.Command#isNewState <em>New State</em>}</li>
+ *   <li>{@link org.eclipse.xtext.web.example.statemachine.statemachine.Command#isNewValue <em>New Value</em>}</li>
  * </ul>
  *
  * @see org.eclipse.xtext.web.example.statemachine.statemachine.StatemachinePackage#getCommand()
@@ -50,29 +50,29 @@ public interface Command extends EObject
   void setSignal(Signal value);
 
   /**
-   * Returns the value of the '<em><b>New State</b></em>' attribute.
+   * Returns the value of the '<em><b>New Value</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>New State</em>' attribute isn't clear,
+   * If the meaning of the '<em>New Value</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>New State</em>' attribute.
-   * @see #setNewState(boolean)
-   * @see org.eclipse.xtext.web.example.statemachine.statemachine.StatemachinePackage#getCommand_NewState()
+   * @return the value of the '<em>New Value</em>' attribute.
+   * @see #setNewValue(boolean)
+   * @see org.eclipse.xtext.web.example.statemachine.statemachine.StatemachinePackage#getCommand_NewValue()
    * @model
    * @generated
    */
-  boolean isNewState();
+  boolean isNewValue();
 
   /**
-   * Sets the value of the '{@link org.eclipse.xtext.web.example.statemachine.statemachine.Command#isNewState <em>New State</em>}' attribute.
+   * Sets the value of the '{@link org.eclipse.xtext.web.example.statemachine.statemachine.Command#isNewValue <em>New Value</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>New State</em>' attribute.
-   * @see #isNewState()
+   * @param value the new value of the '<em>New Value</em>' attribute.
+   * @see #isNewValue()
    * @generated
    */
-  void setNewState(boolean value);
+  void setNewValue(boolean value);
 
 } // Command

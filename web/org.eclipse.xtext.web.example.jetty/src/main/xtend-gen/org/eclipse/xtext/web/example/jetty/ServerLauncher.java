@@ -10,6 +10,7 @@ package org.eclipse.xtext.web.example.jetty;
 import java.net.InetSocketAddress;
 import org.eclipse.jetty.annotations.AnnotationConfiguration;
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.util.log.Slf4jLog;
 import org.eclipse.jetty.webapp.Configuration;
 import org.eclipse.jetty.webapp.MetaInfConfiguration;
 import org.eclipse.jetty.webapp.WebAppContext;
@@ -42,7 +43,25 @@ public class ServerLauncher {
       };
       WebAppContext _doubleArrow = ObjectExtensions.<WebAppContext>operator_doubleArrow(_webAppContext, _function);
       server.setHandler(_doubleArrow);
+      final Slf4jLog log = new Slf4jLog();
       server.start();
+      log.info("Press enter to stop the server...");
+      final Runnable _function_1 = new Runnable() {
+        @Override
+        public void run() {
+          try {
+            final int key = System.in.read();
+            server.stop();
+            if ((key == (-1))) {
+              log.warn("The standard input stream is empty.");
+            }
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      Thread _thread = new Thread(_function_1);
+      _thread.start();
       server.join();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

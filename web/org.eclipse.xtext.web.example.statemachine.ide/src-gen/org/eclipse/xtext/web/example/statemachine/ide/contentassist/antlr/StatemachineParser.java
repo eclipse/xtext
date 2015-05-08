@@ -44,6 +44,8 @@ public class StatemachineParser extends AbstractContentAssistParser {
 					put(grammarAccess.getSignalAccess().getAlternatives_0(), "rule__Signal__Alternatives_0");
 					put(grammarAccess.getStatemachineAccess().getGroup(), "rule__Statemachine__Group__0");
 					put(grammarAccess.getSignalAccess().getGroup(), "rule__Signal__Group__0");
+					put(grammarAccess.getInputSignalAccess().getGroup(), "rule__InputSignal__Group__0");
+					put(grammarAccess.getOutputSignalAccess().getGroup(), "rule__OutputSignal__Group__0");
 					put(grammarAccess.getStateAccess().getGroup(), "rule__State__Group__0");
 					put(grammarAccess.getTransitionAccess().getGroup(), "rule__Transition__Group__0");
 					put(grammarAccess.getConditionAccess().getGroup(), "rule__Condition__Group__0");
@@ -61,9 +63,9 @@ public class StatemachineParser extends AbstractContentAssistParser {
 					put(grammarAccess.getConditionAccess().getEventsAssignment_0(), "rule__Condition__EventsAssignment_0");
 					put(grammarAccess.getConditionAccess().getEventsAssignment_1_1(), "rule__Condition__EventsAssignment_1_1");
 					put(grammarAccess.getEventAccess().getSignalAssignment_0(), "rule__Event__SignalAssignment_0");
-					put(grammarAccess.getEventAccess().getStateAssignment_2(), "rule__Event__StateAssignment_2");
+					put(grammarAccess.getEventAccess().getValueAssignment_2(), "rule__Event__ValueAssignment_2");
 					put(grammarAccess.getCommandAccess().getSignalAssignment_1(), "rule__Command__SignalAssignment_1");
-					put(grammarAccess.getCommandAccess().getNewStateAssignment_3(), "rule__Command__NewStateAssignment_3");
+					put(grammarAccess.getCommandAccess().getNewValueAssignment_3(), "rule__Command__NewValueAssignment_3");
 				}
 			};
 		}

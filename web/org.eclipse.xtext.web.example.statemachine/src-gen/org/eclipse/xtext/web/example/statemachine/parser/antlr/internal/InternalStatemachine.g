@@ -148,8 +148,9 @@ ruleSignal returns [EObject current=null]
     { 
         newCompositeNode(grammarAccess.getSignalAccess().getInputSignalParserRuleCall_0_0()); 
     }
-ruleInputSignal
+    this_InputSignal_0=ruleInputSignal
     { 
+        $current = $this_InputSignal_0.current; 
         afterParserOrEnumRuleCall();
     }
 
@@ -157,8 +158,9 @@ ruleInputSignal
     { 
         newCompositeNode(grammarAccess.getSignalAccess().getOutputSignalParserRuleCall_0_1()); 
     }
-ruleOutputSignal
+    this_OutputSignal_1=ruleOutputSignal
     { 
+        $current = $this_OutputSignal_1.current; 
         afterParserOrEnumRuleCall();
     }
 )	otherlv_2='signal' 
@@ -191,54 +193,62 @@ ruleOutputSignal
 
 
 // Entry rule entryRuleInputSignal
-entryRuleInputSignal returns [String current=null] 
+entryRuleInputSignal returns [EObject current=null] 
 	:
-	{ newCompositeNode(grammarAccess.getInputSignalRule()); } 
+	{ newCompositeNode(grammarAccess.getInputSignalRule()); }
 	 iv_ruleInputSignal=ruleInputSignal 
-	 { $current=$iv_ruleInputSignal.current.getText(); }  
+	 { $current=$iv_ruleInputSignal.current; } 
 	 EOF 
 ;
 
 // Rule InputSignal
-ruleInputSignal returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+ruleInputSignal returns [EObject current=null] 
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-
-	kw='input' 
+((
     {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getInputSignalAccess().getInputKeyword()); 
+        $current = forceCreateModelElement(
+            grammarAccess.getInputSignalAccess().getInputSignalAction_0(),
+            $current);
     }
-
-    ;
+)	otherlv_1='input' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getInputSignalAccess().getInputKeyword_1());
+    }
+)
+;
 
 
 
 
 
 // Entry rule entryRuleOutputSignal
-entryRuleOutputSignal returns [String current=null] 
+entryRuleOutputSignal returns [EObject current=null] 
 	:
-	{ newCompositeNode(grammarAccess.getOutputSignalRule()); } 
+	{ newCompositeNode(grammarAccess.getOutputSignalRule()); }
 	 iv_ruleOutputSignal=ruleOutputSignal 
-	 { $current=$iv_ruleOutputSignal.current.getText(); }  
+	 { $current=$iv_ruleOutputSignal.current; } 
 	 EOF 
 ;
 
 // Rule OutputSignal
-ruleOutputSignal returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+ruleOutputSignal returns [EObject current=null] 
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-
-	kw='output' 
+((
     {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getOutputSignalAccess().getOutputKeyword()); 
+        $current = forceCreateModelElement(
+            grammarAccess.getOutputSignalAccess().getOutputSignalAction_0(),
+            $current);
     }
-
-    ;
+)	otherlv_1='output' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getOutputSignalAccess().getOutputKeyword_1());
+    }
+)
+;
 
 
 
@@ -481,9 +491,9 @@ ruleEvent returns [EObject current=null]
     }
 (
 (
-		lv_state_2_0=RULE_BOOLEAN
+		lv_value_2_0=RULE_BOOLEAN
 		{
-			newLeafNode(lv_state_2_0, grammarAccess.getEventAccess().getStateBOOLEANTerminalRuleCall_2_0()); 
+			newLeafNode(lv_value_2_0, grammarAccess.getEventAccess().getValueBOOLEANTerminalRuleCall_2_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -491,8 +501,8 @@ ruleEvent returns [EObject current=null]
 	        }
        		setWithLastConsumed(
        			$current, 
-       			"state",
-        		lv_state_2_0, 
+       			"value",
+        		lv_value_2_0, 
         		"BOOLEAN");
 	    }
 
@@ -541,9 +551,9 @@ ruleCommand returns [EObject current=null]
     }
 (
 (
-		lv_newState_3_0=RULE_BOOLEAN
+		lv_newValue_3_0=RULE_BOOLEAN
 		{
-			newLeafNode(lv_newState_3_0, grammarAccess.getCommandAccess().getNewStateBOOLEANTerminalRuleCall_3_0()); 
+			newLeafNode(lv_newValue_3_0, grammarAccess.getCommandAccess().getNewValueBOOLEANTerminalRuleCall_3_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -551,8 +561,8 @@ ruleCommand returns [EObject current=null]
 	        }
        		setWithLastConsumed(
        			$current, 
-       			"newState",
-        		lv_newState_3_0, 
+       			"newValue",
+        		lv_newValue_3_0, 
         		"BOOLEAN");
 	    }
 

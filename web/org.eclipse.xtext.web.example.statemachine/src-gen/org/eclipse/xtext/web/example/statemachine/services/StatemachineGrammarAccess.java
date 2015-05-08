@@ -92,26 +92,42 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 
 	public class InputSignalElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "InputSignal");
-		private final Keyword cInputKeyword = (Keyword)rule.eContents().get(1);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cInputSignalAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cInputKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//InputSignal:
-		//	"input";
+		//	{InputSignal} "input";
 		@Override public ParserRule getRule() { return rule; }
 
+		//{InputSignal} "input"
+		public Group getGroup() { return cGroup; }
+
+		//{InputSignal}
+		public Action getInputSignalAction_0() { return cInputSignalAction_0; }
+
 		//"input"
-		public Keyword getInputKeyword() { return cInputKeyword; }
+		public Keyword getInputKeyword_1() { return cInputKeyword_1; }
 	}
 
 	public class OutputSignalElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OutputSignal");
-		private final Keyword cOutputKeyword = (Keyword)rule.eContents().get(1);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cOutputSignalAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cOutputKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//OutputSignal:
-		//	"output";
+		//	{OutputSignal} "output";
 		@Override public ParserRule getRule() { return rule; }
 
+		//{OutputSignal} "output"
+		public Group getGroup() { return cGroup; }
+
+		//{OutputSignal}
+		public Action getOutputSignalAction_0() { return cOutputSignalAction_0; }
+
 		//"output"
-		public Keyword getOutputKeyword() { return cOutputKeyword; }
+		public Keyword getOutputKeyword_1() { return cOutputKeyword_1; }
 	}
 
 	public class StateElements extends AbstractParserRuleElementFinder {
@@ -241,14 +257,14 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 		private final CrossReference cSignalSignalCrossReference_0_0 = (CrossReference)cSignalAssignment_0.eContents().get(0);
 		private final RuleCall cSignalSignalIDTerminalRuleCall_0_0_1 = (RuleCall)cSignalSignalCrossReference_0_0.eContents().get(1);
 		private final Keyword cEqualsSignEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cStateAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cStateBOOLEANTerminalRuleCall_2_0 = (RuleCall)cStateAssignment_2.eContents().get(0);
+		private final Assignment cValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cValueBOOLEANTerminalRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
 		
 		//Event:
-		//	signal=[Signal] "==" state=BOOLEAN;
+		//	signal=[Signal] "==" value=BOOLEAN;
 		@Override public ParserRule getRule() { return rule; }
 
-		//signal=[Signal] "==" state=BOOLEAN
+		//signal=[Signal] "==" value=BOOLEAN
 		public Group getGroup() { return cGroup; }
 
 		//signal=[Signal]
@@ -263,11 +279,11 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 		//"=="
 		public Keyword getEqualsSignEqualsSignKeyword_1() { return cEqualsSignEqualsSignKeyword_1; }
 
-		//state=BOOLEAN
-		public Assignment getStateAssignment_2() { return cStateAssignment_2; }
+		//value=BOOLEAN
+		public Assignment getValueAssignment_2() { return cValueAssignment_2; }
 
 		//BOOLEAN
-		public RuleCall getStateBOOLEANTerminalRuleCall_2_0() { return cStateBOOLEANTerminalRuleCall_2_0; }
+		public RuleCall getValueBOOLEANTerminalRuleCall_2_0() { return cValueBOOLEANTerminalRuleCall_2_0; }
 	}
 
 	public class CommandElements extends AbstractParserRuleElementFinder {
@@ -278,14 +294,14 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 		private final CrossReference cSignalSignalCrossReference_1_0 = (CrossReference)cSignalAssignment_1.eContents().get(0);
 		private final RuleCall cSignalSignalIDTerminalRuleCall_1_0_1 = (RuleCall)cSignalSignalCrossReference_1_0.eContents().get(1);
 		private final Keyword cEqualsSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cNewStateAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cNewStateBOOLEANTerminalRuleCall_3_0 = (RuleCall)cNewStateAssignment_3.eContents().get(0);
+		private final Assignment cNewValueAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cNewValueBOOLEANTerminalRuleCall_3_0 = (RuleCall)cNewValueAssignment_3.eContents().get(0);
 		
 		//Command:
-		//	"set" signal=[Signal] "=" newState=BOOLEAN;
+		//	"set" signal=[Signal] "=" newValue=BOOLEAN;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"set" signal=[Signal] "=" newState=BOOLEAN
+		//"set" signal=[Signal] "=" newValue=BOOLEAN
 		public Group getGroup() { return cGroup; }
 
 		//"set"
@@ -303,11 +319,11 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 		//"="
 		public Keyword getEqualsSignKeyword_2() { return cEqualsSignKeyword_2; }
 
-		//newState=BOOLEAN
-		public Assignment getNewStateAssignment_3() { return cNewStateAssignment_3; }
+		//newValue=BOOLEAN
+		public Assignment getNewValueAssignment_3() { return cNewValueAssignment_3; }
 
 		//BOOLEAN
-		public RuleCall getNewStateBOOLEANTerminalRuleCall_3_0() { return cNewStateBOOLEANTerminalRuleCall_3_0; }
+		public RuleCall getNewValueBOOLEANTerminalRuleCall_3_0() { return cNewValueBOOLEANTerminalRuleCall_3_0; }
 	}
 	
 	
@@ -391,7 +407,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//InputSignal:
-	//	"input";
+	//	{InputSignal} "input";
 	public InputSignalElements getInputSignalAccess() {
 		return pInputSignal;
 	}
@@ -401,7 +417,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//OutputSignal:
-	//	"output";
+	//	{OutputSignal} "output";
 	public OutputSignalElements getOutputSignalAccess() {
 		return pOutputSignal;
 	}
@@ -441,7 +457,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Event:
-	//	signal=[Signal] "==" state=BOOLEAN;
+	//	signal=[Signal] "==" value=BOOLEAN;
 	public EventElements getEventAccess() {
 		return pEvent;
 	}
@@ -451,7 +467,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Command:
-	//	"set" signal=[Signal] "=" newState=BOOLEAN;
+	//	"set" signal=[Signal] "=" newValue=BOOLEAN;
 	public CommandElements getCommandAccess() {
 		return pCommand;
 	}

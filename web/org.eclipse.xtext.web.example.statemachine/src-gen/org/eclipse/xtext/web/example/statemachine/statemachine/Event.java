@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.web.example.statemachine.statemachine.Event#getSignal <em>Signal</em>}</li>
- *   <li>{@link org.eclipse.xtext.web.example.statemachine.statemachine.Event#isState <em>State</em>}</li>
+ *   <li>{@link org.eclipse.xtext.web.example.statemachine.statemachine.Event#isValue <em>Value</em>}</li>
  * </ul>
  *
  * @see org.eclipse.xtext.web.example.statemachine.statemachine.StatemachinePackage#getEvent()
@@ -50,29 +50,29 @@ public interface Event extends EObject
   void setSignal(Signal value);
 
   /**
-   * Returns the value of the '<em><b>State</b></em>' attribute.
+   * Returns the value of the '<em><b>Value</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>State</em>' attribute isn't clear,
+   * If the meaning of the '<em>Value</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>State</em>' attribute.
-   * @see #setState(boolean)
-   * @see org.eclipse.xtext.web.example.statemachine.statemachine.StatemachinePackage#getEvent_State()
+   * @return the value of the '<em>Value</em>' attribute.
+   * @see #setValue(boolean)
+   * @see org.eclipse.xtext.web.example.statemachine.statemachine.StatemachinePackage#getEvent_Value()
    * @model
    * @generated
    */
-  boolean isState();
+  boolean isValue();
 
   /**
-   * Sets the value of the '{@link org.eclipse.xtext.web.example.statemachine.statemachine.Event#isState <em>State</em>}' attribute.
+   * Sets the value of the '{@link org.eclipse.xtext.web.example.statemachine.statemachine.Event#isValue <em>Value</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>State</em>' attribute.
-   * @see #isState()
+   * @param value the new value of the '<em>Value</em>' attribute.
+   * @see #isValue()
    * @generated
    */
-  void setState(boolean value);
+  void setValue(boolean value);
 
 } // Event

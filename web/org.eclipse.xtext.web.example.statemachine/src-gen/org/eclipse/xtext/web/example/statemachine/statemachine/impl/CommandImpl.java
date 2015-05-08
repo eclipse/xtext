@@ -23,7 +23,7 @@ import org.eclipse.xtext.web.example.statemachine.statemachine.StatemachinePacka
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.web.example.statemachine.statemachine.impl.CommandImpl#getSignal <em>Signal</em>}</li>
- *   <li>{@link org.eclipse.xtext.web.example.statemachine.statemachine.impl.CommandImpl#isNewState <em>New State</em>}</li>
+ *   <li>{@link org.eclipse.xtext.web.example.statemachine.statemachine.impl.CommandImpl#isNewValue <em>New Value</em>}</li>
  * </ul>
  *
  * @generated
@@ -41,24 +41,24 @@ public class CommandImpl extends MinimalEObjectImpl.Container implements Command
   protected Signal signal;
 
   /**
-   * The default value of the '{@link #isNewState() <em>New State</em>}' attribute.
+   * The default value of the '{@link #isNewValue() <em>New Value</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isNewState()
+   * @see #isNewValue()
    * @generated
    * @ordered
    */
-  protected static final boolean NEW_STATE_EDEFAULT = false;
+  protected static final boolean NEW_VALUE_EDEFAULT = false;
 
   /**
-   * The cached value of the '{@link #isNewState() <em>New State</em>}' attribute.
+   * The cached value of the '{@link #isNewValue() <em>New Value</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isNewState()
+   * @see #isNewValue()
    * @generated
    * @ordered
    */
-  protected boolean newState = NEW_STATE_EDEFAULT;
+  protected boolean newValue = NEW_VALUE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -129,9 +129,9 @@ public class CommandImpl extends MinimalEObjectImpl.Container implements Command
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isNewState()
+  public boolean isNewValue()
   {
-    return newState;
+    return newValue;
   }
 
   /**
@@ -139,12 +139,12 @@ public class CommandImpl extends MinimalEObjectImpl.Container implements Command
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setNewState(boolean newNewState)
+  public void setNewValue(boolean newNewValue)
   {
-    boolean oldNewState = newState;
-    newState = newNewState;
+    boolean oldNewValue = newValue;
+    newValue = newNewValue;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, StatemachinePackage.COMMAND__NEW_STATE, oldNewState, newState));
+      eNotify(new ENotificationImpl(this, Notification.SET, StatemachinePackage.COMMAND__NEW_VALUE, oldNewValue, newValue));
   }
 
   /**
@@ -160,8 +160,8 @@ public class CommandImpl extends MinimalEObjectImpl.Container implements Command
       case StatemachinePackage.COMMAND__SIGNAL:
         if (resolve) return getSignal();
         return basicGetSignal();
-      case StatemachinePackage.COMMAND__NEW_STATE:
-        return isNewState();
+      case StatemachinePackage.COMMAND__NEW_VALUE:
+        return isNewValue();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -179,8 +179,8 @@ public class CommandImpl extends MinimalEObjectImpl.Container implements Command
       case StatemachinePackage.COMMAND__SIGNAL:
         setSignal((Signal)newValue);
         return;
-      case StatemachinePackage.COMMAND__NEW_STATE:
-        setNewState((Boolean)newValue);
+      case StatemachinePackage.COMMAND__NEW_VALUE:
+        setNewValue((Boolean)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -199,8 +199,8 @@ public class CommandImpl extends MinimalEObjectImpl.Container implements Command
       case StatemachinePackage.COMMAND__SIGNAL:
         setSignal((Signal)null);
         return;
-      case StatemachinePackage.COMMAND__NEW_STATE:
-        setNewState(NEW_STATE_EDEFAULT);
+      case StatemachinePackage.COMMAND__NEW_VALUE:
+        setNewValue(NEW_VALUE_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -218,8 +218,8 @@ public class CommandImpl extends MinimalEObjectImpl.Container implements Command
     {
       case StatemachinePackage.COMMAND__SIGNAL:
         return signal != null;
-      case StatemachinePackage.COMMAND__NEW_STATE:
-        return newState != NEW_STATE_EDEFAULT;
+      case StatemachinePackage.COMMAND__NEW_VALUE:
+        return newValue != NEW_VALUE_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
@@ -235,8 +235,8 @@ public class CommandImpl extends MinimalEObjectImpl.Container implements Command
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (newState: ");
-    result.append(newState);
+    result.append(" (newValue: ");
+    result.append(newValue);
     result.append(')');
     return result.toString();
   }

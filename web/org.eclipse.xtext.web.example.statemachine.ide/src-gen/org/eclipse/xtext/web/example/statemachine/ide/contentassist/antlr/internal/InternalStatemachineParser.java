@@ -29,7 +29,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalStatemachineParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_BOOLEAN", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'input'", "'output'", "'signal'", "'state'", "'end'", "'if'", "'goto'", "'and'", "'=='", "'set'", "'='"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_BOOLEAN", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'signal'", "'input'", "'output'", "'state'", "'end'", "'if'", "'goto'", "'and'", "'=='", "'set'", "'='"
     };
     public static final int RULE_BOOLEAN=5;
     public static final int RULE_ID=4;
@@ -274,21 +274,31 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleInputSignal"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:129:1: ruleInputSignal : ( 'input' ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:129:1: ruleInputSignal : ( ( rule__InputSignal__Group__0 ) ) ;
     public final void ruleInputSignal() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:133:2: ( ( 'input' ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:134:1: ( 'input' )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:133:2: ( ( ( rule__InputSignal__Group__0 ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:134:1: ( ( rule__InputSignal__Group__0 ) )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:134:1: ( 'input' )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:135:1: 'input'
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:134:1: ( ( rule__InputSignal__Group__0 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:135:1: ( rule__InputSignal__Group__0 )
             {
-             before(grammarAccess.getInputSignalAccess().getInputKeyword()); 
-            match(input,12,FOLLOW_12_in_ruleInputSignal215); 
-             after(grammarAccess.getInputSignalAccess().getInputKeyword()); 
+             before(grammarAccess.getInputSignalAccess().getGroup()); 
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:136:1: ( rule__InputSignal__Group__0 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:136:2: rule__InputSignal__Group__0
+            {
+            pushFollow(FOLLOW_rule__InputSignal__Group__0_in_ruleInputSignal214);
+            rule__InputSignal__Group__0();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getInputSignalAccess().getGroup()); 
 
             }
 
@@ -311,20 +321,20 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "entryRuleOutputSignal"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:150:1: entryRuleOutputSignal : ruleOutputSignal EOF ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:148:1: entryRuleOutputSignal : ruleOutputSignal EOF ;
     public final void entryRuleOutputSignal() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:151:1: ( ruleOutputSignal EOF )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:152:1: ruleOutputSignal EOF
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:149:1: ( ruleOutputSignal EOF )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:150:1: ruleOutputSignal EOF
             {
              before(grammarAccess.getOutputSignalRule()); 
-            pushFollow(FOLLOW_ruleOutputSignal_in_entryRuleOutputSignal243);
+            pushFollow(FOLLOW_ruleOutputSignal_in_entryRuleOutputSignal241);
             ruleOutputSignal();
 
             state._fsp--;
 
              after(grammarAccess.getOutputSignalRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleOutputSignal250); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleOutputSignal248); 
 
             }
 
@@ -341,21 +351,31 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleOutputSignal"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:159:1: ruleOutputSignal : ( 'output' ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:157:1: ruleOutputSignal : ( ( rule__OutputSignal__Group__0 ) ) ;
     public final void ruleOutputSignal() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:163:2: ( ( 'output' ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:164:1: ( 'output' )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:161:2: ( ( ( rule__OutputSignal__Group__0 ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:162:1: ( ( rule__OutputSignal__Group__0 ) )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:164:1: ( 'output' )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:165:1: 'output'
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:162:1: ( ( rule__OutputSignal__Group__0 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:163:1: ( rule__OutputSignal__Group__0 )
             {
-             before(grammarAccess.getOutputSignalAccess().getOutputKeyword()); 
-            match(input,13,FOLLOW_13_in_ruleOutputSignal277); 
-             after(grammarAccess.getOutputSignalAccess().getOutputKeyword()); 
+             before(grammarAccess.getOutputSignalAccess().getGroup()); 
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:164:1: ( rule__OutputSignal__Group__0 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:164:2: rule__OutputSignal__Group__0
+            {
+            pushFollow(FOLLOW_rule__OutputSignal__Group__0_in_ruleOutputSignal274);
+            rule__OutputSignal__Group__0();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getOutputSignalAccess().getGroup()); 
 
             }
 
@@ -378,20 +398,20 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "entryRuleState"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:180:1: entryRuleState : ruleState EOF ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:176:1: entryRuleState : ruleState EOF ;
     public final void entryRuleState() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:181:1: ( ruleState EOF )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:182:1: ruleState EOF
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:177:1: ( ruleState EOF )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:178:1: ruleState EOF
             {
              before(grammarAccess.getStateRule()); 
-            pushFollow(FOLLOW_ruleState_in_entryRuleState305);
+            pushFollow(FOLLOW_ruleState_in_entryRuleState301);
             ruleState();
 
             state._fsp--;
 
              after(grammarAccess.getStateRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleState312); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleState308); 
 
             }
 
@@ -408,23 +428,23 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleState"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:189:1: ruleState : ( ( rule__State__Group__0 ) ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:185:1: ruleState : ( ( rule__State__Group__0 ) ) ;
     public final void ruleState() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:193:2: ( ( ( rule__State__Group__0 ) ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:194:1: ( ( rule__State__Group__0 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:189:2: ( ( ( rule__State__Group__0 ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:190:1: ( ( rule__State__Group__0 ) )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:194:1: ( ( rule__State__Group__0 ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:195:1: ( rule__State__Group__0 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:190:1: ( ( rule__State__Group__0 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:191:1: ( rule__State__Group__0 )
             {
              before(grammarAccess.getStateAccess().getGroup()); 
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:196:1: ( rule__State__Group__0 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:196:2: rule__State__Group__0
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:192:1: ( rule__State__Group__0 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:192:2: rule__State__Group__0
             {
-            pushFollow(FOLLOW_rule__State__Group__0_in_ruleState338);
+            pushFollow(FOLLOW_rule__State__Group__0_in_ruleState334);
             rule__State__Group__0();
 
             state._fsp--;
@@ -455,20 +475,20 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "entryRuleTransition"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:208:1: entryRuleTransition : ruleTransition EOF ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:204:1: entryRuleTransition : ruleTransition EOF ;
     public final void entryRuleTransition() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:209:1: ( ruleTransition EOF )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:210:1: ruleTransition EOF
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:205:1: ( ruleTransition EOF )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:206:1: ruleTransition EOF
             {
              before(grammarAccess.getTransitionRule()); 
-            pushFollow(FOLLOW_ruleTransition_in_entryRuleTransition365);
+            pushFollow(FOLLOW_ruleTransition_in_entryRuleTransition361);
             ruleTransition();
 
             state._fsp--;
 
              after(grammarAccess.getTransitionRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTransition372); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTransition368); 
 
             }
 
@@ -485,23 +505,23 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleTransition"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:217:1: ruleTransition : ( ( rule__Transition__Group__0 ) ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:213:1: ruleTransition : ( ( rule__Transition__Group__0 ) ) ;
     public final void ruleTransition() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:221:2: ( ( ( rule__Transition__Group__0 ) ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:222:1: ( ( rule__Transition__Group__0 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:217:2: ( ( ( rule__Transition__Group__0 ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:218:1: ( ( rule__Transition__Group__0 ) )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:222:1: ( ( rule__Transition__Group__0 ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:223:1: ( rule__Transition__Group__0 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:218:1: ( ( rule__Transition__Group__0 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:219:1: ( rule__Transition__Group__0 )
             {
              before(grammarAccess.getTransitionAccess().getGroup()); 
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:224:1: ( rule__Transition__Group__0 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:224:2: rule__Transition__Group__0
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:220:1: ( rule__Transition__Group__0 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:220:2: rule__Transition__Group__0
             {
-            pushFollow(FOLLOW_rule__Transition__Group__0_in_ruleTransition398);
+            pushFollow(FOLLOW_rule__Transition__Group__0_in_ruleTransition394);
             rule__Transition__Group__0();
 
             state._fsp--;
@@ -532,20 +552,20 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "entryRuleCondition"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:236:1: entryRuleCondition : ruleCondition EOF ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:232:1: entryRuleCondition : ruleCondition EOF ;
     public final void entryRuleCondition() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:237:1: ( ruleCondition EOF )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:238:1: ruleCondition EOF
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:233:1: ( ruleCondition EOF )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:234:1: ruleCondition EOF
             {
              before(grammarAccess.getConditionRule()); 
-            pushFollow(FOLLOW_ruleCondition_in_entryRuleCondition425);
+            pushFollow(FOLLOW_ruleCondition_in_entryRuleCondition421);
             ruleCondition();
 
             state._fsp--;
 
              after(grammarAccess.getConditionRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleCondition432); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleCondition428); 
 
             }
 
@@ -562,23 +582,23 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleCondition"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:245:1: ruleCondition : ( ( rule__Condition__Group__0 ) ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:241:1: ruleCondition : ( ( rule__Condition__Group__0 ) ) ;
     public final void ruleCondition() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:249:2: ( ( ( rule__Condition__Group__0 ) ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:250:1: ( ( rule__Condition__Group__0 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:245:2: ( ( ( rule__Condition__Group__0 ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:246:1: ( ( rule__Condition__Group__0 ) )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:250:1: ( ( rule__Condition__Group__0 ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:251:1: ( rule__Condition__Group__0 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:246:1: ( ( rule__Condition__Group__0 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:247:1: ( rule__Condition__Group__0 )
             {
              before(grammarAccess.getConditionAccess().getGroup()); 
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:252:1: ( rule__Condition__Group__0 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:252:2: rule__Condition__Group__0
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:248:1: ( rule__Condition__Group__0 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:248:2: rule__Condition__Group__0
             {
-            pushFollow(FOLLOW_rule__Condition__Group__0_in_ruleCondition458);
+            pushFollow(FOLLOW_rule__Condition__Group__0_in_ruleCondition454);
             rule__Condition__Group__0();
 
             state._fsp--;
@@ -609,20 +629,20 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "entryRuleEvent"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:264:1: entryRuleEvent : ruleEvent EOF ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:260:1: entryRuleEvent : ruleEvent EOF ;
     public final void entryRuleEvent() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:265:1: ( ruleEvent EOF )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:266:1: ruleEvent EOF
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:261:1: ( ruleEvent EOF )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:262:1: ruleEvent EOF
             {
              before(grammarAccess.getEventRule()); 
-            pushFollow(FOLLOW_ruleEvent_in_entryRuleEvent485);
+            pushFollow(FOLLOW_ruleEvent_in_entryRuleEvent481);
             ruleEvent();
 
             state._fsp--;
 
              after(grammarAccess.getEventRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEvent492); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEvent488); 
 
             }
 
@@ -639,23 +659,23 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleEvent"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:273:1: ruleEvent : ( ( rule__Event__Group__0 ) ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:269:1: ruleEvent : ( ( rule__Event__Group__0 ) ) ;
     public final void ruleEvent() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:277:2: ( ( ( rule__Event__Group__0 ) ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:278:1: ( ( rule__Event__Group__0 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:273:2: ( ( ( rule__Event__Group__0 ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:274:1: ( ( rule__Event__Group__0 ) )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:278:1: ( ( rule__Event__Group__0 ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:279:1: ( rule__Event__Group__0 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:274:1: ( ( rule__Event__Group__0 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:275:1: ( rule__Event__Group__0 )
             {
              before(grammarAccess.getEventAccess().getGroup()); 
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:280:1: ( rule__Event__Group__0 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:280:2: rule__Event__Group__0
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:276:1: ( rule__Event__Group__0 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:276:2: rule__Event__Group__0
             {
-            pushFollow(FOLLOW_rule__Event__Group__0_in_ruleEvent518);
+            pushFollow(FOLLOW_rule__Event__Group__0_in_ruleEvent514);
             rule__Event__Group__0();
 
             state._fsp--;
@@ -686,20 +706,20 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "entryRuleCommand"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:292:1: entryRuleCommand : ruleCommand EOF ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:288:1: entryRuleCommand : ruleCommand EOF ;
     public final void entryRuleCommand() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:293:1: ( ruleCommand EOF )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:294:1: ruleCommand EOF
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:289:1: ( ruleCommand EOF )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:290:1: ruleCommand EOF
             {
              before(grammarAccess.getCommandRule()); 
-            pushFollow(FOLLOW_ruleCommand_in_entryRuleCommand545);
+            pushFollow(FOLLOW_ruleCommand_in_entryRuleCommand541);
             ruleCommand();
 
             state._fsp--;
 
              after(grammarAccess.getCommandRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleCommand552); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleCommand548); 
 
             }
 
@@ -716,23 +736,23 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleCommand"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:301:1: ruleCommand : ( ( rule__Command__Group__0 ) ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:297:1: ruleCommand : ( ( rule__Command__Group__0 ) ) ;
     public final void ruleCommand() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:305:2: ( ( ( rule__Command__Group__0 ) ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:306:1: ( ( rule__Command__Group__0 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:301:2: ( ( ( rule__Command__Group__0 ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:302:1: ( ( rule__Command__Group__0 ) )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:306:1: ( ( rule__Command__Group__0 ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:307:1: ( rule__Command__Group__0 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:302:1: ( ( rule__Command__Group__0 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:303:1: ( rule__Command__Group__0 )
             {
              before(grammarAccess.getCommandAccess().getGroup()); 
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:308:1: ( rule__Command__Group__0 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:308:2: rule__Command__Group__0
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:304:1: ( rule__Command__Group__0 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:304:2: rule__Command__Group__0
             {
-            pushFollow(FOLLOW_rule__Command__Group__0_in_ruleCommand578);
+            pushFollow(FOLLOW_rule__Command__Group__0_in_ruleCommand574);
             rule__Command__Group__0();
 
             state._fsp--;
@@ -763,20 +783,20 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Signal__Alternatives_0"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:320:1: rule__Signal__Alternatives_0 : ( ( ruleInputSignal ) | ( ruleOutputSignal ) );
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:316:1: rule__Signal__Alternatives_0 : ( ( ruleInputSignal ) | ( ruleOutputSignal ) );
     public final void rule__Signal__Alternatives_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:324:1: ( ( ruleInputSignal ) | ( ruleOutputSignal ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:320:1: ( ( ruleInputSignal ) | ( ruleOutputSignal ) )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
-            if ( (LA1_0==12) ) {
+            if ( (LA1_0==13) ) {
                 alt1=1;
             }
-            else if ( (LA1_0==13) ) {
+            else if ( (LA1_0==14) ) {
                 alt1=2;
             }
             else {
@@ -787,13 +807,13 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:325:1: ( ruleInputSignal )
+                    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:321:1: ( ruleInputSignal )
                     {
-                    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:325:1: ( ruleInputSignal )
-                    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:326:1: ruleInputSignal
+                    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:321:1: ( ruleInputSignal )
+                    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:322:1: ruleInputSignal
                     {
                      before(grammarAccess.getSignalAccess().getInputSignalParserRuleCall_0_0()); 
-                    pushFollow(FOLLOW_ruleInputSignal_in_rule__Signal__Alternatives_0614);
+                    pushFollow(FOLLOW_ruleInputSignal_in_rule__Signal__Alternatives_0610);
                     ruleInputSignal();
 
                     state._fsp--;
@@ -806,13 +826,13 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:331:6: ( ruleOutputSignal )
+                    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:327:6: ( ruleOutputSignal )
                     {
-                    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:331:6: ( ruleOutputSignal )
-                    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:332:1: ruleOutputSignal
+                    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:327:6: ( ruleOutputSignal )
+                    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:328:1: ruleOutputSignal
                     {
                      before(grammarAccess.getSignalAccess().getOutputSignalParserRuleCall_0_1()); 
-                    pushFollow(FOLLOW_ruleOutputSignal_in_rule__Signal__Alternatives_0631);
+                    pushFollow(FOLLOW_ruleOutputSignal_in_rule__Signal__Alternatives_0627);
                     ruleOutputSignal();
 
                     state._fsp--;
@@ -842,21 +862,21 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Statemachine__Group__0"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:344:1: rule__Statemachine__Group__0 : rule__Statemachine__Group__0__Impl rule__Statemachine__Group__1 ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:340:1: rule__Statemachine__Group__0 : rule__Statemachine__Group__0__Impl rule__Statemachine__Group__1 ;
     public final void rule__Statemachine__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:348:1: ( rule__Statemachine__Group__0__Impl rule__Statemachine__Group__1 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:349:2: rule__Statemachine__Group__0__Impl rule__Statemachine__Group__1
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:344:1: ( rule__Statemachine__Group__0__Impl rule__Statemachine__Group__1 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:345:2: rule__Statemachine__Group__0__Impl rule__Statemachine__Group__1
             {
-            pushFollow(FOLLOW_rule__Statemachine__Group__0__Impl_in_rule__Statemachine__Group__0661);
+            pushFollow(FOLLOW_rule__Statemachine__Group__0__Impl_in_rule__Statemachine__Group__0657);
             rule__Statemachine__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Statemachine__Group__1_in_rule__Statemachine__Group__0664);
+            pushFollow(FOLLOW_rule__Statemachine__Group__1_in_rule__Statemachine__Group__0660);
             rule__Statemachine__Group__1();
 
             state._fsp--;
@@ -880,21 +900,21 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Statemachine__Group__0__Impl"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:356:1: rule__Statemachine__Group__0__Impl : ( () ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:352:1: rule__Statemachine__Group__0__Impl : ( () ) ;
     public final void rule__Statemachine__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:360:1: ( ( () ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:361:1: ( () )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:356:1: ( ( () ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:357:1: ( () )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:361:1: ( () )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:362:1: ()
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:357:1: ( () )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:358:1: ()
             {
              before(grammarAccess.getStatemachineAccess().getStatemachineAction_0()); 
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:363:1: ()
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:365:1: 
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:359:1: ()
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:361:1: 
             {
             }
 
@@ -917,21 +937,21 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Statemachine__Group__1"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:375:1: rule__Statemachine__Group__1 : rule__Statemachine__Group__1__Impl rule__Statemachine__Group__2 ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:371:1: rule__Statemachine__Group__1 : rule__Statemachine__Group__1__Impl rule__Statemachine__Group__2 ;
     public final void rule__Statemachine__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:379:1: ( rule__Statemachine__Group__1__Impl rule__Statemachine__Group__2 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:380:2: rule__Statemachine__Group__1__Impl rule__Statemachine__Group__2
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:375:1: ( rule__Statemachine__Group__1__Impl rule__Statemachine__Group__2 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:376:2: rule__Statemachine__Group__1__Impl rule__Statemachine__Group__2
             {
-            pushFollow(FOLLOW_rule__Statemachine__Group__1__Impl_in_rule__Statemachine__Group__1722);
+            pushFollow(FOLLOW_rule__Statemachine__Group__1__Impl_in_rule__Statemachine__Group__1718);
             rule__Statemachine__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Statemachine__Group__2_in_rule__Statemachine__Group__1725);
+            pushFollow(FOLLOW_rule__Statemachine__Group__2_in_rule__Statemachine__Group__1721);
             rule__Statemachine__Group__2();
 
             state._fsp--;
@@ -955,35 +975,35 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Statemachine__Group__1__Impl"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:387:1: rule__Statemachine__Group__1__Impl : ( ( rule__Statemachine__SignalsAssignment_1 )* ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:383:1: rule__Statemachine__Group__1__Impl : ( ( rule__Statemachine__SignalsAssignment_1 )* ) ;
     public final void rule__Statemachine__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:391:1: ( ( ( rule__Statemachine__SignalsAssignment_1 )* ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:392:1: ( ( rule__Statemachine__SignalsAssignment_1 )* )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:387:1: ( ( ( rule__Statemachine__SignalsAssignment_1 )* ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:388:1: ( ( rule__Statemachine__SignalsAssignment_1 )* )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:392:1: ( ( rule__Statemachine__SignalsAssignment_1 )* )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:393:1: ( rule__Statemachine__SignalsAssignment_1 )*
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:388:1: ( ( rule__Statemachine__SignalsAssignment_1 )* )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:389:1: ( rule__Statemachine__SignalsAssignment_1 )*
             {
              before(grammarAccess.getStatemachineAccess().getSignalsAssignment_1()); 
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:394:1: ( rule__Statemachine__SignalsAssignment_1 )*
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:390:1: ( rule__Statemachine__SignalsAssignment_1 )*
             loop2:
             do {
                 int alt2=2;
                 int LA2_0 = input.LA(1);
 
-                if ( ((LA2_0>=12 && LA2_0<=13)) ) {
+                if ( ((LA2_0>=13 && LA2_0<=14)) ) {
                     alt2=1;
                 }
 
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:394:2: rule__Statemachine__SignalsAssignment_1
+            	    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:390:2: rule__Statemachine__SignalsAssignment_1
             	    {
-            	    pushFollow(FOLLOW_rule__Statemachine__SignalsAssignment_1_in_rule__Statemachine__Group__1__Impl752);
+            	    pushFollow(FOLLOW_rule__Statemachine__SignalsAssignment_1_in_rule__Statemachine__Group__1__Impl748);
             	    rule__Statemachine__SignalsAssignment_1();
 
             	    state._fsp--;
@@ -1020,16 +1040,16 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Statemachine__Group__2"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:404:1: rule__Statemachine__Group__2 : rule__Statemachine__Group__2__Impl ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:400:1: rule__Statemachine__Group__2 : rule__Statemachine__Group__2__Impl ;
     public final void rule__Statemachine__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:408:1: ( rule__Statemachine__Group__2__Impl )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:409:2: rule__Statemachine__Group__2__Impl
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:404:1: ( rule__Statemachine__Group__2__Impl )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:405:2: rule__Statemachine__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__Statemachine__Group__2__Impl_in_rule__Statemachine__Group__2783);
+            pushFollow(FOLLOW_rule__Statemachine__Group__2__Impl_in_rule__Statemachine__Group__2779);
             rule__Statemachine__Group__2__Impl();
 
             state._fsp--;
@@ -1053,20 +1073,20 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Statemachine__Group__2__Impl"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:415:1: rule__Statemachine__Group__2__Impl : ( ( rule__Statemachine__StatesAssignment_2 )* ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:411:1: rule__Statemachine__Group__2__Impl : ( ( rule__Statemachine__StatesAssignment_2 )* ) ;
     public final void rule__Statemachine__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:419:1: ( ( ( rule__Statemachine__StatesAssignment_2 )* ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:420:1: ( ( rule__Statemachine__StatesAssignment_2 )* )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:415:1: ( ( ( rule__Statemachine__StatesAssignment_2 )* ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:416:1: ( ( rule__Statemachine__StatesAssignment_2 )* )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:420:1: ( ( rule__Statemachine__StatesAssignment_2 )* )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:421:1: ( rule__Statemachine__StatesAssignment_2 )*
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:416:1: ( ( rule__Statemachine__StatesAssignment_2 )* )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:417:1: ( rule__Statemachine__StatesAssignment_2 )*
             {
              before(grammarAccess.getStatemachineAccess().getStatesAssignment_2()); 
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:422:1: ( rule__Statemachine__StatesAssignment_2 )*
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:418:1: ( rule__Statemachine__StatesAssignment_2 )*
             loop3:
             do {
                 int alt3=2;
@@ -1079,9 +1099,9 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:422:2: rule__Statemachine__StatesAssignment_2
+            	    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:418:2: rule__Statemachine__StatesAssignment_2
             	    {
-            	    pushFollow(FOLLOW_rule__Statemachine__StatesAssignment_2_in_rule__Statemachine__Group__2__Impl810);
+            	    pushFollow(FOLLOW_rule__Statemachine__StatesAssignment_2_in_rule__Statemachine__Group__2__Impl806);
             	    rule__Statemachine__StatesAssignment_2();
 
             	    state._fsp--;
@@ -1118,21 +1138,21 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Signal__Group__0"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:438:1: rule__Signal__Group__0 : rule__Signal__Group__0__Impl rule__Signal__Group__1 ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:434:1: rule__Signal__Group__0 : rule__Signal__Group__0__Impl rule__Signal__Group__1 ;
     public final void rule__Signal__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:442:1: ( rule__Signal__Group__0__Impl rule__Signal__Group__1 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:443:2: rule__Signal__Group__0__Impl rule__Signal__Group__1
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:438:1: ( rule__Signal__Group__0__Impl rule__Signal__Group__1 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:439:2: rule__Signal__Group__0__Impl rule__Signal__Group__1
             {
-            pushFollow(FOLLOW_rule__Signal__Group__0__Impl_in_rule__Signal__Group__0847);
+            pushFollow(FOLLOW_rule__Signal__Group__0__Impl_in_rule__Signal__Group__0843);
             rule__Signal__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Signal__Group__1_in_rule__Signal__Group__0850);
+            pushFollow(FOLLOW_rule__Signal__Group__1_in_rule__Signal__Group__0846);
             rule__Signal__Group__1();
 
             state._fsp--;
@@ -1156,23 +1176,23 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Signal__Group__0__Impl"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:450:1: rule__Signal__Group__0__Impl : ( ( rule__Signal__Alternatives_0 ) ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:446:1: rule__Signal__Group__0__Impl : ( ( rule__Signal__Alternatives_0 ) ) ;
     public final void rule__Signal__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:454:1: ( ( ( rule__Signal__Alternatives_0 ) ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:455:1: ( ( rule__Signal__Alternatives_0 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:450:1: ( ( ( rule__Signal__Alternatives_0 ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:451:1: ( ( rule__Signal__Alternatives_0 ) )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:455:1: ( ( rule__Signal__Alternatives_0 ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:456:1: ( rule__Signal__Alternatives_0 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:451:1: ( ( rule__Signal__Alternatives_0 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:452:1: ( rule__Signal__Alternatives_0 )
             {
              before(grammarAccess.getSignalAccess().getAlternatives_0()); 
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:457:1: ( rule__Signal__Alternatives_0 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:457:2: rule__Signal__Alternatives_0
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:453:1: ( rule__Signal__Alternatives_0 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:453:2: rule__Signal__Alternatives_0
             {
-            pushFollow(FOLLOW_rule__Signal__Alternatives_0_in_rule__Signal__Group__0__Impl877);
+            pushFollow(FOLLOW_rule__Signal__Alternatives_0_in_rule__Signal__Group__0__Impl873);
             rule__Signal__Alternatives_0();
 
             state._fsp--;
@@ -1203,21 +1223,21 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Signal__Group__1"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:467:1: rule__Signal__Group__1 : rule__Signal__Group__1__Impl rule__Signal__Group__2 ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:463:1: rule__Signal__Group__1 : rule__Signal__Group__1__Impl rule__Signal__Group__2 ;
     public final void rule__Signal__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:471:1: ( rule__Signal__Group__1__Impl rule__Signal__Group__2 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:472:2: rule__Signal__Group__1__Impl rule__Signal__Group__2
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:467:1: ( rule__Signal__Group__1__Impl rule__Signal__Group__2 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:468:2: rule__Signal__Group__1__Impl rule__Signal__Group__2
             {
-            pushFollow(FOLLOW_rule__Signal__Group__1__Impl_in_rule__Signal__Group__1907);
+            pushFollow(FOLLOW_rule__Signal__Group__1__Impl_in_rule__Signal__Group__1903);
             rule__Signal__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Signal__Group__2_in_rule__Signal__Group__1910);
+            pushFollow(FOLLOW_rule__Signal__Group__2_in_rule__Signal__Group__1906);
             rule__Signal__Group__2();
 
             state._fsp--;
@@ -1241,20 +1261,20 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Signal__Group__1__Impl"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:479:1: rule__Signal__Group__1__Impl : ( 'signal' ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:475:1: rule__Signal__Group__1__Impl : ( 'signal' ) ;
     public final void rule__Signal__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:483:1: ( ( 'signal' ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:484:1: ( 'signal' )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:479:1: ( ( 'signal' ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:480:1: ( 'signal' )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:484:1: ( 'signal' )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:485:1: 'signal'
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:480:1: ( 'signal' )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:481:1: 'signal'
             {
              before(grammarAccess.getSignalAccess().getSignalKeyword_1()); 
-            match(input,14,FOLLOW_14_in_rule__Signal__Group__1__Impl938); 
+            match(input,12,FOLLOW_12_in_rule__Signal__Group__1__Impl934); 
              after(grammarAccess.getSignalAccess().getSignalKeyword_1()); 
 
             }
@@ -1278,16 +1298,16 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Signal__Group__2"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:498:1: rule__Signal__Group__2 : rule__Signal__Group__2__Impl ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:494:1: rule__Signal__Group__2 : rule__Signal__Group__2__Impl ;
     public final void rule__Signal__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:502:1: ( rule__Signal__Group__2__Impl )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:503:2: rule__Signal__Group__2__Impl
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:498:1: ( rule__Signal__Group__2__Impl )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:499:2: rule__Signal__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__Signal__Group__2__Impl_in_rule__Signal__Group__2969);
+            pushFollow(FOLLOW_rule__Signal__Group__2__Impl_in_rule__Signal__Group__2965);
             rule__Signal__Group__2__Impl();
 
             state._fsp--;
@@ -1311,23 +1331,23 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Signal__Group__2__Impl"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:509:1: rule__Signal__Group__2__Impl : ( ( rule__Signal__NameAssignment_2 ) ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:505:1: rule__Signal__Group__2__Impl : ( ( rule__Signal__NameAssignment_2 ) ) ;
     public final void rule__Signal__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:513:1: ( ( ( rule__Signal__NameAssignment_2 ) ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:514:1: ( ( rule__Signal__NameAssignment_2 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:509:1: ( ( ( rule__Signal__NameAssignment_2 ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:510:1: ( ( rule__Signal__NameAssignment_2 ) )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:514:1: ( ( rule__Signal__NameAssignment_2 ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:515:1: ( rule__Signal__NameAssignment_2 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:510:1: ( ( rule__Signal__NameAssignment_2 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:511:1: ( rule__Signal__NameAssignment_2 )
             {
              before(grammarAccess.getSignalAccess().getNameAssignment_2()); 
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:516:1: ( rule__Signal__NameAssignment_2 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:516:2: rule__Signal__NameAssignment_2
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:512:1: ( rule__Signal__NameAssignment_2 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:512:2: rule__Signal__NameAssignment_2
             {
-            pushFollow(FOLLOW_rule__Signal__NameAssignment_2_in_rule__Signal__Group__2__Impl996);
+            pushFollow(FOLLOW_rule__Signal__NameAssignment_2_in_rule__Signal__Group__2__Impl992);
             rule__Signal__NameAssignment_2();
 
             state._fsp--;
@@ -1357,22 +1377,312 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
     // $ANTLR end "rule__Signal__Group__2__Impl"
 
 
+    // $ANTLR start "rule__InputSignal__Group__0"
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:528:1: rule__InputSignal__Group__0 : rule__InputSignal__Group__0__Impl rule__InputSignal__Group__1 ;
+    public final void rule__InputSignal__Group__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:532:1: ( rule__InputSignal__Group__0__Impl rule__InputSignal__Group__1 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:533:2: rule__InputSignal__Group__0__Impl rule__InputSignal__Group__1
+            {
+            pushFollow(FOLLOW_rule__InputSignal__Group__0__Impl_in_rule__InputSignal__Group__01028);
+            rule__InputSignal__Group__0__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_rule__InputSignal__Group__1_in_rule__InputSignal__Group__01031);
+            rule__InputSignal__Group__1();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__InputSignal__Group__0"
+
+
+    // $ANTLR start "rule__InputSignal__Group__0__Impl"
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:540:1: rule__InputSignal__Group__0__Impl : ( () ) ;
+    public final void rule__InputSignal__Group__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:544:1: ( ( () ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:545:1: ( () )
+            {
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:545:1: ( () )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:546:1: ()
+            {
+             before(grammarAccess.getInputSignalAccess().getInputSignalAction_0()); 
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:547:1: ()
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:549:1: 
+            {
+            }
+
+             after(grammarAccess.getInputSignalAccess().getInputSignalAction_0()); 
+
+            }
+
+
+            }
+
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__InputSignal__Group__0__Impl"
+
+
+    // $ANTLR start "rule__InputSignal__Group__1"
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:559:1: rule__InputSignal__Group__1 : rule__InputSignal__Group__1__Impl ;
+    public final void rule__InputSignal__Group__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:563:1: ( rule__InputSignal__Group__1__Impl )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:564:2: rule__InputSignal__Group__1__Impl
+            {
+            pushFollow(FOLLOW_rule__InputSignal__Group__1__Impl_in_rule__InputSignal__Group__11089);
+            rule__InputSignal__Group__1__Impl();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__InputSignal__Group__1"
+
+
+    // $ANTLR start "rule__InputSignal__Group__1__Impl"
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:570:1: rule__InputSignal__Group__1__Impl : ( 'input' ) ;
+    public final void rule__InputSignal__Group__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:574:1: ( ( 'input' ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:575:1: ( 'input' )
+            {
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:575:1: ( 'input' )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:576:1: 'input'
+            {
+             before(grammarAccess.getInputSignalAccess().getInputKeyword_1()); 
+            match(input,13,FOLLOW_13_in_rule__InputSignal__Group__1__Impl1117); 
+             after(grammarAccess.getInputSignalAccess().getInputKeyword_1()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__InputSignal__Group__1__Impl"
+
+
+    // $ANTLR start "rule__OutputSignal__Group__0"
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:593:1: rule__OutputSignal__Group__0 : rule__OutputSignal__Group__0__Impl rule__OutputSignal__Group__1 ;
+    public final void rule__OutputSignal__Group__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:597:1: ( rule__OutputSignal__Group__0__Impl rule__OutputSignal__Group__1 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:598:2: rule__OutputSignal__Group__0__Impl rule__OutputSignal__Group__1
+            {
+            pushFollow(FOLLOW_rule__OutputSignal__Group__0__Impl_in_rule__OutputSignal__Group__01152);
+            rule__OutputSignal__Group__0__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_rule__OutputSignal__Group__1_in_rule__OutputSignal__Group__01155);
+            rule__OutputSignal__Group__1();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__OutputSignal__Group__0"
+
+
+    // $ANTLR start "rule__OutputSignal__Group__0__Impl"
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:605:1: rule__OutputSignal__Group__0__Impl : ( () ) ;
+    public final void rule__OutputSignal__Group__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:609:1: ( ( () ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:610:1: ( () )
+            {
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:610:1: ( () )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:611:1: ()
+            {
+             before(grammarAccess.getOutputSignalAccess().getOutputSignalAction_0()); 
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:612:1: ()
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:614:1: 
+            {
+            }
+
+             after(grammarAccess.getOutputSignalAccess().getOutputSignalAction_0()); 
+
+            }
+
+
+            }
+
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__OutputSignal__Group__0__Impl"
+
+
+    // $ANTLR start "rule__OutputSignal__Group__1"
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:624:1: rule__OutputSignal__Group__1 : rule__OutputSignal__Group__1__Impl ;
+    public final void rule__OutputSignal__Group__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:628:1: ( rule__OutputSignal__Group__1__Impl )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:629:2: rule__OutputSignal__Group__1__Impl
+            {
+            pushFollow(FOLLOW_rule__OutputSignal__Group__1__Impl_in_rule__OutputSignal__Group__11213);
+            rule__OutputSignal__Group__1__Impl();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__OutputSignal__Group__1"
+
+
+    // $ANTLR start "rule__OutputSignal__Group__1__Impl"
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:635:1: rule__OutputSignal__Group__1__Impl : ( 'output' ) ;
+    public final void rule__OutputSignal__Group__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:639:1: ( ( 'output' ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:640:1: ( 'output' )
+            {
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:640:1: ( 'output' )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:641:1: 'output'
+            {
+             before(grammarAccess.getOutputSignalAccess().getOutputKeyword_1()); 
+            match(input,14,FOLLOW_14_in_rule__OutputSignal__Group__1__Impl1241); 
+             after(grammarAccess.getOutputSignalAccess().getOutputKeyword_1()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__OutputSignal__Group__1__Impl"
+
+
     // $ANTLR start "rule__State__Group__0"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:532:1: rule__State__Group__0 : rule__State__Group__0__Impl rule__State__Group__1 ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:658:1: rule__State__Group__0 : rule__State__Group__0__Impl rule__State__Group__1 ;
     public final void rule__State__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:536:1: ( rule__State__Group__0__Impl rule__State__Group__1 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:537:2: rule__State__Group__0__Impl rule__State__Group__1
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:662:1: ( rule__State__Group__0__Impl rule__State__Group__1 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:663:2: rule__State__Group__0__Impl rule__State__Group__1
             {
-            pushFollow(FOLLOW_rule__State__Group__0__Impl_in_rule__State__Group__01032);
+            pushFollow(FOLLOW_rule__State__Group__0__Impl_in_rule__State__Group__01276);
             rule__State__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__State__Group__1_in_rule__State__Group__01035);
+            pushFollow(FOLLOW_rule__State__Group__1_in_rule__State__Group__01279);
             rule__State__Group__1();
 
             state._fsp--;
@@ -1396,20 +1706,20 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__State__Group__0__Impl"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:544:1: rule__State__Group__0__Impl : ( 'state' ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:670:1: rule__State__Group__0__Impl : ( 'state' ) ;
     public final void rule__State__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:548:1: ( ( 'state' ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:549:1: ( 'state' )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:674:1: ( ( 'state' ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:675:1: ( 'state' )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:549:1: ( 'state' )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:550:1: 'state'
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:675:1: ( 'state' )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:676:1: 'state'
             {
              before(grammarAccess.getStateAccess().getStateKeyword_0()); 
-            match(input,15,FOLLOW_15_in_rule__State__Group__0__Impl1063); 
+            match(input,15,FOLLOW_15_in_rule__State__Group__0__Impl1307); 
              after(grammarAccess.getStateAccess().getStateKeyword_0()); 
 
             }
@@ -1433,21 +1743,21 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__State__Group__1"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:563:1: rule__State__Group__1 : rule__State__Group__1__Impl rule__State__Group__2 ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:689:1: rule__State__Group__1 : rule__State__Group__1__Impl rule__State__Group__2 ;
     public final void rule__State__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:567:1: ( rule__State__Group__1__Impl rule__State__Group__2 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:568:2: rule__State__Group__1__Impl rule__State__Group__2
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:693:1: ( rule__State__Group__1__Impl rule__State__Group__2 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:694:2: rule__State__Group__1__Impl rule__State__Group__2
             {
-            pushFollow(FOLLOW_rule__State__Group__1__Impl_in_rule__State__Group__11094);
+            pushFollow(FOLLOW_rule__State__Group__1__Impl_in_rule__State__Group__11338);
             rule__State__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__State__Group__2_in_rule__State__Group__11097);
+            pushFollow(FOLLOW_rule__State__Group__2_in_rule__State__Group__11341);
             rule__State__Group__2();
 
             state._fsp--;
@@ -1471,23 +1781,23 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__State__Group__1__Impl"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:575:1: rule__State__Group__1__Impl : ( ( rule__State__NameAssignment_1 ) ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:701:1: rule__State__Group__1__Impl : ( ( rule__State__NameAssignment_1 ) ) ;
     public final void rule__State__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:579:1: ( ( ( rule__State__NameAssignment_1 ) ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:580:1: ( ( rule__State__NameAssignment_1 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:705:1: ( ( ( rule__State__NameAssignment_1 ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:706:1: ( ( rule__State__NameAssignment_1 ) )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:580:1: ( ( rule__State__NameAssignment_1 ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:581:1: ( rule__State__NameAssignment_1 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:706:1: ( ( rule__State__NameAssignment_1 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:707:1: ( rule__State__NameAssignment_1 )
             {
              before(grammarAccess.getStateAccess().getNameAssignment_1()); 
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:582:1: ( rule__State__NameAssignment_1 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:582:2: rule__State__NameAssignment_1
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:708:1: ( rule__State__NameAssignment_1 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:708:2: rule__State__NameAssignment_1
             {
-            pushFollow(FOLLOW_rule__State__NameAssignment_1_in_rule__State__Group__1__Impl1124);
+            pushFollow(FOLLOW_rule__State__NameAssignment_1_in_rule__State__Group__1__Impl1368);
             rule__State__NameAssignment_1();
 
             state._fsp--;
@@ -1518,21 +1828,21 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__State__Group__2"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:592:1: rule__State__Group__2 : rule__State__Group__2__Impl rule__State__Group__3 ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:718:1: rule__State__Group__2 : rule__State__Group__2__Impl rule__State__Group__3 ;
     public final void rule__State__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:596:1: ( rule__State__Group__2__Impl rule__State__Group__3 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:597:2: rule__State__Group__2__Impl rule__State__Group__3
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:722:1: ( rule__State__Group__2__Impl rule__State__Group__3 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:723:2: rule__State__Group__2__Impl rule__State__Group__3
             {
-            pushFollow(FOLLOW_rule__State__Group__2__Impl_in_rule__State__Group__21154);
+            pushFollow(FOLLOW_rule__State__Group__2__Impl_in_rule__State__Group__21398);
             rule__State__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__State__Group__3_in_rule__State__Group__21157);
+            pushFollow(FOLLOW_rule__State__Group__3_in_rule__State__Group__21401);
             rule__State__Group__3();
 
             state._fsp--;
@@ -1556,20 +1866,20 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__State__Group__2__Impl"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:604:1: rule__State__Group__2__Impl : ( ( rule__State__CommandsAssignment_2 )* ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:730:1: rule__State__Group__2__Impl : ( ( rule__State__CommandsAssignment_2 )* ) ;
     public final void rule__State__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:608:1: ( ( ( rule__State__CommandsAssignment_2 )* ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:609:1: ( ( rule__State__CommandsAssignment_2 )* )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:734:1: ( ( ( rule__State__CommandsAssignment_2 )* ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:735:1: ( ( rule__State__CommandsAssignment_2 )* )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:609:1: ( ( rule__State__CommandsAssignment_2 )* )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:610:1: ( rule__State__CommandsAssignment_2 )*
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:735:1: ( ( rule__State__CommandsAssignment_2 )* )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:736:1: ( rule__State__CommandsAssignment_2 )*
             {
              before(grammarAccess.getStateAccess().getCommandsAssignment_2()); 
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:611:1: ( rule__State__CommandsAssignment_2 )*
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:737:1: ( rule__State__CommandsAssignment_2 )*
             loop4:
             do {
                 int alt4=2;
@@ -1582,9 +1892,9 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:611:2: rule__State__CommandsAssignment_2
+            	    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:737:2: rule__State__CommandsAssignment_2
             	    {
-            	    pushFollow(FOLLOW_rule__State__CommandsAssignment_2_in_rule__State__Group__2__Impl1184);
+            	    pushFollow(FOLLOW_rule__State__CommandsAssignment_2_in_rule__State__Group__2__Impl1428);
             	    rule__State__CommandsAssignment_2();
 
             	    state._fsp--;
@@ -1621,21 +1931,21 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__State__Group__3"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:621:1: rule__State__Group__3 : rule__State__Group__3__Impl rule__State__Group__4 ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:747:1: rule__State__Group__3 : rule__State__Group__3__Impl rule__State__Group__4 ;
     public final void rule__State__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:625:1: ( rule__State__Group__3__Impl rule__State__Group__4 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:626:2: rule__State__Group__3__Impl rule__State__Group__4
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:751:1: ( rule__State__Group__3__Impl rule__State__Group__4 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:752:2: rule__State__Group__3__Impl rule__State__Group__4
             {
-            pushFollow(FOLLOW_rule__State__Group__3__Impl_in_rule__State__Group__31215);
+            pushFollow(FOLLOW_rule__State__Group__3__Impl_in_rule__State__Group__31459);
             rule__State__Group__3__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__State__Group__4_in_rule__State__Group__31218);
+            pushFollow(FOLLOW_rule__State__Group__4_in_rule__State__Group__31462);
             rule__State__Group__4();
 
             state._fsp--;
@@ -1659,20 +1969,20 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__State__Group__3__Impl"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:633:1: rule__State__Group__3__Impl : ( ( rule__State__TransitionsAssignment_3 )* ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:759:1: rule__State__Group__3__Impl : ( ( rule__State__TransitionsAssignment_3 )* ) ;
     public final void rule__State__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:637:1: ( ( ( rule__State__TransitionsAssignment_3 )* ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:638:1: ( ( rule__State__TransitionsAssignment_3 )* )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:763:1: ( ( ( rule__State__TransitionsAssignment_3 )* ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:764:1: ( ( rule__State__TransitionsAssignment_3 )* )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:638:1: ( ( rule__State__TransitionsAssignment_3 )* )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:639:1: ( rule__State__TransitionsAssignment_3 )*
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:764:1: ( ( rule__State__TransitionsAssignment_3 )* )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:765:1: ( rule__State__TransitionsAssignment_3 )*
             {
              before(grammarAccess.getStateAccess().getTransitionsAssignment_3()); 
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:640:1: ( rule__State__TransitionsAssignment_3 )*
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:766:1: ( rule__State__TransitionsAssignment_3 )*
             loop5:
             do {
                 int alt5=2;
@@ -1685,9 +1995,9 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
                 switch (alt5) {
             	case 1 :
-            	    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:640:2: rule__State__TransitionsAssignment_3
+            	    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:766:2: rule__State__TransitionsAssignment_3
             	    {
-            	    pushFollow(FOLLOW_rule__State__TransitionsAssignment_3_in_rule__State__Group__3__Impl1245);
+            	    pushFollow(FOLLOW_rule__State__TransitionsAssignment_3_in_rule__State__Group__3__Impl1489);
             	    rule__State__TransitionsAssignment_3();
 
             	    state._fsp--;
@@ -1724,16 +2034,16 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__State__Group__4"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:650:1: rule__State__Group__4 : rule__State__Group__4__Impl ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:776:1: rule__State__Group__4 : rule__State__Group__4__Impl ;
     public final void rule__State__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:654:1: ( rule__State__Group__4__Impl )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:655:2: rule__State__Group__4__Impl
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:780:1: ( rule__State__Group__4__Impl )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:781:2: rule__State__Group__4__Impl
             {
-            pushFollow(FOLLOW_rule__State__Group__4__Impl_in_rule__State__Group__41276);
+            pushFollow(FOLLOW_rule__State__Group__4__Impl_in_rule__State__Group__41520);
             rule__State__Group__4__Impl();
 
             state._fsp--;
@@ -1757,20 +2067,20 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__State__Group__4__Impl"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:661:1: rule__State__Group__4__Impl : ( 'end' ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:787:1: rule__State__Group__4__Impl : ( 'end' ) ;
     public final void rule__State__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:665:1: ( ( 'end' ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:666:1: ( 'end' )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:791:1: ( ( 'end' ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:792:1: ( 'end' )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:666:1: ( 'end' )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:667:1: 'end'
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:792:1: ( 'end' )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:793:1: 'end'
             {
              before(grammarAccess.getStateAccess().getEndKeyword_4()); 
-            match(input,16,FOLLOW_16_in_rule__State__Group__4__Impl1304); 
+            match(input,16,FOLLOW_16_in_rule__State__Group__4__Impl1548); 
              after(grammarAccess.getStateAccess().getEndKeyword_4()); 
 
             }
@@ -1794,21 +2104,21 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Transition__Group__0"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:690:1: rule__Transition__Group__0 : rule__Transition__Group__0__Impl rule__Transition__Group__1 ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:816:1: rule__Transition__Group__0 : rule__Transition__Group__0__Impl rule__Transition__Group__1 ;
     public final void rule__Transition__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:694:1: ( rule__Transition__Group__0__Impl rule__Transition__Group__1 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:695:2: rule__Transition__Group__0__Impl rule__Transition__Group__1
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:820:1: ( rule__Transition__Group__0__Impl rule__Transition__Group__1 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:821:2: rule__Transition__Group__0__Impl rule__Transition__Group__1
             {
-            pushFollow(FOLLOW_rule__Transition__Group__0__Impl_in_rule__Transition__Group__01345);
+            pushFollow(FOLLOW_rule__Transition__Group__0__Impl_in_rule__Transition__Group__01589);
             rule__Transition__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Transition__Group__1_in_rule__Transition__Group__01348);
+            pushFollow(FOLLOW_rule__Transition__Group__1_in_rule__Transition__Group__01592);
             rule__Transition__Group__1();
 
             state._fsp--;
@@ -1832,20 +2142,20 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Transition__Group__0__Impl"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:702:1: rule__Transition__Group__0__Impl : ( 'if' ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:828:1: rule__Transition__Group__0__Impl : ( 'if' ) ;
     public final void rule__Transition__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:706:1: ( ( 'if' ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:707:1: ( 'if' )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:832:1: ( ( 'if' ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:833:1: ( 'if' )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:707:1: ( 'if' )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:708:1: 'if'
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:833:1: ( 'if' )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:834:1: 'if'
             {
              before(grammarAccess.getTransitionAccess().getIfKeyword_0()); 
-            match(input,17,FOLLOW_17_in_rule__Transition__Group__0__Impl1376); 
+            match(input,17,FOLLOW_17_in_rule__Transition__Group__0__Impl1620); 
              after(grammarAccess.getTransitionAccess().getIfKeyword_0()); 
 
             }
@@ -1869,21 +2179,21 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Transition__Group__1"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:721:1: rule__Transition__Group__1 : rule__Transition__Group__1__Impl rule__Transition__Group__2 ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:847:1: rule__Transition__Group__1 : rule__Transition__Group__1__Impl rule__Transition__Group__2 ;
     public final void rule__Transition__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:725:1: ( rule__Transition__Group__1__Impl rule__Transition__Group__2 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:726:2: rule__Transition__Group__1__Impl rule__Transition__Group__2
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:851:1: ( rule__Transition__Group__1__Impl rule__Transition__Group__2 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:852:2: rule__Transition__Group__1__Impl rule__Transition__Group__2
             {
-            pushFollow(FOLLOW_rule__Transition__Group__1__Impl_in_rule__Transition__Group__11407);
+            pushFollow(FOLLOW_rule__Transition__Group__1__Impl_in_rule__Transition__Group__11651);
             rule__Transition__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Transition__Group__2_in_rule__Transition__Group__11410);
+            pushFollow(FOLLOW_rule__Transition__Group__2_in_rule__Transition__Group__11654);
             rule__Transition__Group__2();
 
             state._fsp--;
@@ -1907,23 +2217,23 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Transition__Group__1__Impl"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:733:1: rule__Transition__Group__1__Impl : ( ( rule__Transition__ConditionAssignment_1 ) ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:859:1: rule__Transition__Group__1__Impl : ( ( rule__Transition__ConditionAssignment_1 ) ) ;
     public final void rule__Transition__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:737:1: ( ( ( rule__Transition__ConditionAssignment_1 ) ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:738:1: ( ( rule__Transition__ConditionAssignment_1 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:863:1: ( ( ( rule__Transition__ConditionAssignment_1 ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:864:1: ( ( rule__Transition__ConditionAssignment_1 ) )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:738:1: ( ( rule__Transition__ConditionAssignment_1 ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:739:1: ( rule__Transition__ConditionAssignment_1 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:864:1: ( ( rule__Transition__ConditionAssignment_1 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:865:1: ( rule__Transition__ConditionAssignment_1 )
             {
              before(grammarAccess.getTransitionAccess().getConditionAssignment_1()); 
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:740:1: ( rule__Transition__ConditionAssignment_1 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:740:2: rule__Transition__ConditionAssignment_1
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:866:1: ( rule__Transition__ConditionAssignment_1 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:866:2: rule__Transition__ConditionAssignment_1
             {
-            pushFollow(FOLLOW_rule__Transition__ConditionAssignment_1_in_rule__Transition__Group__1__Impl1437);
+            pushFollow(FOLLOW_rule__Transition__ConditionAssignment_1_in_rule__Transition__Group__1__Impl1681);
             rule__Transition__ConditionAssignment_1();
 
             state._fsp--;
@@ -1954,21 +2264,21 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Transition__Group__2"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:750:1: rule__Transition__Group__2 : rule__Transition__Group__2__Impl rule__Transition__Group__3 ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:876:1: rule__Transition__Group__2 : rule__Transition__Group__2__Impl rule__Transition__Group__3 ;
     public final void rule__Transition__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:754:1: ( rule__Transition__Group__2__Impl rule__Transition__Group__3 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:755:2: rule__Transition__Group__2__Impl rule__Transition__Group__3
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:880:1: ( rule__Transition__Group__2__Impl rule__Transition__Group__3 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:881:2: rule__Transition__Group__2__Impl rule__Transition__Group__3
             {
-            pushFollow(FOLLOW_rule__Transition__Group__2__Impl_in_rule__Transition__Group__21467);
+            pushFollow(FOLLOW_rule__Transition__Group__2__Impl_in_rule__Transition__Group__21711);
             rule__Transition__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Transition__Group__3_in_rule__Transition__Group__21470);
+            pushFollow(FOLLOW_rule__Transition__Group__3_in_rule__Transition__Group__21714);
             rule__Transition__Group__3();
 
             state._fsp--;
@@ -1992,20 +2302,20 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Transition__Group__2__Impl"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:762:1: rule__Transition__Group__2__Impl : ( 'goto' ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:888:1: rule__Transition__Group__2__Impl : ( 'goto' ) ;
     public final void rule__Transition__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:766:1: ( ( 'goto' ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:767:1: ( 'goto' )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:892:1: ( ( 'goto' ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:893:1: ( 'goto' )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:767:1: ( 'goto' )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:768:1: 'goto'
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:893:1: ( 'goto' )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:894:1: 'goto'
             {
              before(grammarAccess.getTransitionAccess().getGotoKeyword_2()); 
-            match(input,18,FOLLOW_18_in_rule__Transition__Group__2__Impl1498); 
+            match(input,18,FOLLOW_18_in_rule__Transition__Group__2__Impl1742); 
              after(grammarAccess.getTransitionAccess().getGotoKeyword_2()); 
 
             }
@@ -2029,16 +2339,16 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Transition__Group__3"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:781:1: rule__Transition__Group__3 : rule__Transition__Group__3__Impl ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:907:1: rule__Transition__Group__3 : rule__Transition__Group__3__Impl ;
     public final void rule__Transition__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:785:1: ( rule__Transition__Group__3__Impl )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:786:2: rule__Transition__Group__3__Impl
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:911:1: ( rule__Transition__Group__3__Impl )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:912:2: rule__Transition__Group__3__Impl
             {
-            pushFollow(FOLLOW_rule__Transition__Group__3__Impl_in_rule__Transition__Group__31529);
+            pushFollow(FOLLOW_rule__Transition__Group__3__Impl_in_rule__Transition__Group__31773);
             rule__Transition__Group__3__Impl();
 
             state._fsp--;
@@ -2062,23 +2372,23 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Transition__Group__3__Impl"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:792:1: rule__Transition__Group__3__Impl : ( ( rule__Transition__StateAssignment_3 ) ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:918:1: rule__Transition__Group__3__Impl : ( ( rule__Transition__StateAssignment_3 ) ) ;
     public final void rule__Transition__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:796:1: ( ( ( rule__Transition__StateAssignment_3 ) ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:797:1: ( ( rule__Transition__StateAssignment_3 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:922:1: ( ( ( rule__Transition__StateAssignment_3 ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:923:1: ( ( rule__Transition__StateAssignment_3 ) )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:797:1: ( ( rule__Transition__StateAssignment_3 ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:798:1: ( rule__Transition__StateAssignment_3 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:923:1: ( ( rule__Transition__StateAssignment_3 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:924:1: ( rule__Transition__StateAssignment_3 )
             {
              before(grammarAccess.getTransitionAccess().getStateAssignment_3()); 
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:799:1: ( rule__Transition__StateAssignment_3 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:799:2: rule__Transition__StateAssignment_3
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:925:1: ( rule__Transition__StateAssignment_3 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:925:2: rule__Transition__StateAssignment_3
             {
-            pushFollow(FOLLOW_rule__Transition__StateAssignment_3_in_rule__Transition__Group__3__Impl1556);
+            pushFollow(FOLLOW_rule__Transition__StateAssignment_3_in_rule__Transition__Group__3__Impl1800);
             rule__Transition__StateAssignment_3();
 
             state._fsp--;
@@ -2109,21 +2419,21 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Condition__Group__0"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:817:1: rule__Condition__Group__0 : rule__Condition__Group__0__Impl rule__Condition__Group__1 ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:943:1: rule__Condition__Group__0 : rule__Condition__Group__0__Impl rule__Condition__Group__1 ;
     public final void rule__Condition__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:821:1: ( rule__Condition__Group__0__Impl rule__Condition__Group__1 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:822:2: rule__Condition__Group__0__Impl rule__Condition__Group__1
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:947:1: ( rule__Condition__Group__0__Impl rule__Condition__Group__1 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:948:2: rule__Condition__Group__0__Impl rule__Condition__Group__1
             {
-            pushFollow(FOLLOW_rule__Condition__Group__0__Impl_in_rule__Condition__Group__01594);
+            pushFollow(FOLLOW_rule__Condition__Group__0__Impl_in_rule__Condition__Group__01838);
             rule__Condition__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Condition__Group__1_in_rule__Condition__Group__01597);
+            pushFollow(FOLLOW_rule__Condition__Group__1_in_rule__Condition__Group__01841);
             rule__Condition__Group__1();
 
             state._fsp--;
@@ -2147,23 +2457,23 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Condition__Group__0__Impl"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:829:1: rule__Condition__Group__0__Impl : ( ( rule__Condition__EventsAssignment_0 ) ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:955:1: rule__Condition__Group__0__Impl : ( ( rule__Condition__EventsAssignment_0 ) ) ;
     public final void rule__Condition__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:833:1: ( ( ( rule__Condition__EventsAssignment_0 ) ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:834:1: ( ( rule__Condition__EventsAssignment_0 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:959:1: ( ( ( rule__Condition__EventsAssignment_0 ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:960:1: ( ( rule__Condition__EventsAssignment_0 ) )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:834:1: ( ( rule__Condition__EventsAssignment_0 ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:835:1: ( rule__Condition__EventsAssignment_0 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:960:1: ( ( rule__Condition__EventsAssignment_0 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:961:1: ( rule__Condition__EventsAssignment_0 )
             {
              before(grammarAccess.getConditionAccess().getEventsAssignment_0()); 
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:836:1: ( rule__Condition__EventsAssignment_0 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:836:2: rule__Condition__EventsAssignment_0
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:962:1: ( rule__Condition__EventsAssignment_0 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:962:2: rule__Condition__EventsAssignment_0
             {
-            pushFollow(FOLLOW_rule__Condition__EventsAssignment_0_in_rule__Condition__Group__0__Impl1624);
+            pushFollow(FOLLOW_rule__Condition__EventsAssignment_0_in_rule__Condition__Group__0__Impl1868);
             rule__Condition__EventsAssignment_0();
 
             state._fsp--;
@@ -2194,16 +2504,16 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Condition__Group__1"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:846:1: rule__Condition__Group__1 : rule__Condition__Group__1__Impl ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:972:1: rule__Condition__Group__1 : rule__Condition__Group__1__Impl ;
     public final void rule__Condition__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:850:1: ( rule__Condition__Group__1__Impl )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:851:2: rule__Condition__Group__1__Impl
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:976:1: ( rule__Condition__Group__1__Impl )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:977:2: rule__Condition__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__Condition__Group__1__Impl_in_rule__Condition__Group__11654);
+            pushFollow(FOLLOW_rule__Condition__Group__1__Impl_in_rule__Condition__Group__11898);
             rule__Condition__Group__1__Impl();
 
             state._fsp--;
@@ -2227,20 +2537,20 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Condition__Group__1__Impl"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:857:1: rule__Condition__Group__1__Impl : ( ( rule__Condition__Group_1__0 )* ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:983:1: rule__Condition__Group__1__Impl : ( ( rule__Condition__Group_1__0 )* ) ;
     public final void rule__Condition__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:861:1: ( ( ( rule__Condition__Group_1__0 )* ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:862:1: ( ( rule__Condition__Group_1__0 )* )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:987:1: ( ( ( rule__Condition__Group_1__0 )* ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:988:1: ( ( rule__Condition__Group_1__0 )* )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:862:1: ( ( rule__Condition__Group_1__0 )* )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:863:1: ( rule__Condition__Group_1__0 )*
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:988:1: ( ( rule__Condition__Group_1__0 )* )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:989:1: ( rule__Condition__Group_1__0 )*
             {
              before(grammarAccess.getConditionAccess().getGroup_1()); 
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:864:1: ( rule__Condition__Group_1__0 )*
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:990:1: ( rule__Condition__Group_1__0 )*
             loop6:
             do {
                 int alt6=2;
@@ -2253,9 +2563,9 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
                 switch (alt6) {
             	case 1 :
-            	    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:864:2: rule__Condition__Group_1__0
+            	    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:990:2: rule__Condition__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__Condition__Group_1__0_in_rule__Condition__Group__1__Impl1681);
+            	    pushFollow(FOLLOW_rule__Condition__Group_1__0_in_rule__Condition__Group__1__Impl1925);
             	    rule__Condition__Group_1__0();
 
             	    state._fsp--;
@@ -2292,21 +2602,21 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Condition__Group_1__0"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:878:1: rule__Condition__Group_1__0 : rule__Condition__Group_1__0__Impl rule__Condition__Group_1__1 ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1004:1: rule__Condition__Group_1__0 : rule__Condition__Group_1__0__Impl rule__Condition__Group_1__1 ;
     public final void rule__Condition__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:882:1: ( rule__Condition__Group_1__0__Impl rule__Condition__Group_1__1 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:883:2: rule__Condition__Group_1__0__Impl rule__Condition__Group_1__1
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1008:1: ( rule__Condition__Group_1__0__Impl rule__Condition__Group_1__1 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1009:2: rule__Condition__Group_1__0__Impl rule__Condition__Group_1__1
             {
-            pushFollow(FOLLOW_rule__Condition__Group_1__0__Impl_in_rule__Condition__Group_1__01716);
+            pushFollow(FOLLOW_rule__Condition__Group_1__0__Impl_in_rule__Condition__Group_1__01960);
             rule__Condition__Group_1__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Condition__Group_1__1_in_rule__Condition__Group_1__01719);
+            pushFollow(FOLLOW_rule__Condition__Group_1__1_in_rule__Condition__Group_1__01963);
             rule__Condition__Group_1__1();
 
             state._fsp--;
@@ -2330,20 +2640,20 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Condition__Group_1__0__Impl"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:890:1: rule__Condition__Group_1__0__Impl : ( 'and' ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1016:1: rule__Condition__Group_1__0__Impl : ( 'and' ) ;
     public final void rule__Condition__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:894:1: ( ( 'and' ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:895:1: ( 'and' )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1020:1: ( ( 'and' ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1021:1: ( 'and' )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:895:1: ( 'and' )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:896:1: 'and'
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1021:1: ( 'and' )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1022:1: 'and'
             {
              before(grammarAccess.getConditionAccess().getAndKeyword_1_0()); 
-            match(input,19,FOLLOW_19_in_rule__Condition__Group_1__0__Impl1747); 
+            match(input,19,FOLLOW_19_in_rule__Condition__Group_1__0__Impl1991); 
              after(grammarAccess.getConditionAccess().getAndKeyword_1_0()); 
 
             }
@@ -2367,16 +2677,16 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Condition__Group_1__1"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:909:1: rule__Condition__Group_1__1 : rule__Condition__Group_1__1__Impl ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1035:1: rule__Condition__Group_1__1 : rule__Condition__Group_1__1__Impl ;
     public final void rule__Condition__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:913:1: ( rule__Condition__Group_1__1__Impl )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:914:2: rule__Condition__Group_1__1__Impl
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1039:1: ( rule__Condition__Group_1__1__Impl )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1040:2: rule__Condition__Group_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__Condition__Group_1__1__Impl_in_rule__Condition__Group_1__11778);
+            pushFollow(FOLLOW_rule__Condition__Group_1__1__Impl_in_rule__Condition__Group_1__12022);
             rule__Condition__Group_1__1__Impl();
 
             state._fsp--;
@@ -2400,23 +2710,23 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Condition__Group_1__1__Impl"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:920:1: rule__Condition__Group_1__1__Impl : ( ( rule__Condition__EventsAssignment_1_1 ) ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1046:1: rule__Condition__Group_1__1__Impl : ( ( rule__Condition__EventsAssignment_1_1 ) ) ;
     public final void rule__Condition__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:924:1: ( ( ( rule__Condition__EventsAssignment_1_1 ) ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:925:1: ( ( rule__Condition__EventsAssignment_1_1 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1050:1: ( ( ( rule__Condition__EventsAssignment_1_1 ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1051:1: ( ( rule__Condition__EventsAssignment_1_1 ) )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:925:1: ( ( rule__Condition__EventsAssignment_1_1 ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:926:1: ( rule__Condition__EventsAssignment_1_1 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1051:1: ( ( rule__Condition__EventsAssignment_1_1 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1052:1: ( rule__Condition__EventsAssignment_1_1 )
             {
              before(grammarAccess.getConditionAccess().getEventsAssignment_1_1()); 
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:927:1: ( rule__Condition__EventsAssignment_1_1 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:927:2: rule__Condition__EventsAssignment_1_1
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1053:1: ( rule__Condition__EventsAssignment_1_1 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1053:2: rule__Condition__EventsAssignment_1_1
             {
-            pushFollow(FOLLOW_rule__Condition__EventsAssignment_1_1_in_rule__Condition__Group_1__1__Impl1805);
+            pushFollow(FOLLOW_rule__Condition__EventsAssignment_1_1_in_rule__Condition__Group_1__1__Impl2049);
             rule__Condition__EventsAssignment_1_1();
 
             state._fsp--;
@@ -2447,21 +2757,21 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Event__Group__0"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:941:1: rule__Event__Group__0 : rule__Event__Group__0__Impl rule__Event__Group__1 ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1067:1: rule__Event__Group__0 : rule__Event__Group__0__Impl rule__Event__Group__1 ;
     public final void rule__Event__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:945:1: ( rule__Event__Group__0__Impl rule__Event__Group__1 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:946:2: rule__Event__Group__0__Impl rule__Event__Group__1
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1071:1: ( rule__Event__Group__0__Impl rule__Event__Group__1 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1072:2: rule__Event__Group__0__Impl rule__Event__Group__1
             {
-            pushFollow(FOLLOW_rule__Event__Group__0__Impl_in_rule__Event__Group__01839);
+            pushFollow(FOLLOW_rule__Event__Group__0__Impl_in_rule__Event__Group__02083);
             rule__Event__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Event__Group__1_in_rule__Event__Group__01842);
+            pushFollow(FOLLOW_rule__Event__Group__1_in_rule__Event__Group__02086);
             rule__Event__Group__1();
 
             state._fsp--;
@@ -2485,23 +2795,23 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Event__Group__0__Impl"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:953:1: rule__Event__Group__0__Impl : ( ( rule__Event__SignalAssignment_0 ) ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1079:1: rule__Event__Group__0__Impl : ( ( rule__Event__SignalAssignment_0 ) ) ;
     public final void rule__Event__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:957:1: ( ( ( rule__Event__SignalAssignment_0 ) ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:958:1: ( ( rule__Event__SignalAssignment_0 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1083:1: ( ( ( rule__Event__SignalAssignment_0 ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1084:1: ( ( rule__Event__SignalAssignment_0 ) )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:958:1: ( ( rule__Event__SignalAssignment_0 ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:959:1: ( rule__Event__SignalAssignment_0 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1084:1: ( ( rule__Event__SignalAssignment_0 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1085:1: ( rule__Event__SignalAssignment_0 )
             {
              before(grammarAccess.getEventAccess().getSignalAssignment_0()); 
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:960:1: ( rule__Event__SignalAssignment_0 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:960:2: rule__Event__SignalAssignment_0
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1086:1: ( rule__Event__SignalAssignment_0 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1086:2: rule__Event__SignalAssignment_0
             {
-            pushFollow(FOLLOW_rule__Event__SignalAssignment_0_in_rule__Event__Group__0__Impl1869);
+            pushFollow(FOLLOW_rule__Event__SignalAssignment_0_in_rule__Event__Group__0__Impl2113);
             rule__Event__SignalAssignment_0();
 
             state._fsp--;
@@ -2532,21 +2842,21 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Event__Group__1"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:970:1: rule__Event__Group__1 : rule__Event__Group__1__Impl rule__Event__Group__2 ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1096:1: rule__Event__Group__1 : rule__Event__Group__1__Impl rule__Event__Group__2 ;
     public final void rule__Event__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:974:1: ( rule__Event__Group__1__Impl rule__Event__Group__2 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:975:2: rule__Event__Group__1__Impl rule__Event__Group__2
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1100:1: ( rule__Event__Group__1__Impl rule__Event__Group__2 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1101:2: rule__Event__Group__1__Impl rule__Event__Group__2
             {
-            pushFollow(FOLLOW_rule__Event__Group__1__Impl_in_rule__Event__Group__11899);
+            pushFollow(FOLLOW_rule__Event__Group__1__Impl_in_rule__Event__Group__12143);
             rule__Event__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Event__Group__2_in_rule__Event__Group__11902);
+            pushFollow(FOLLOW_rule__Event__Group__2_in_rule__Event__Group__12146);
             rule__Event__Group__2();
 
             state._fsp--;
@@ -2570,20 +2880,20 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Event__Group__1__Impl"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:982:1: rule__Event__Group__1__Impl : ( '==' ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1108:1: rule__Event__Group__1__Impl : ( '==' ) ;
     public final void rule__Event__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:986:1: ( ( '==' ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:987:1: ( '==' )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1112:1: ( ( '==' ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1113:1: ( '==' )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:987:1: ( '==' )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:988:1: '=='
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1113:1: ( '==' )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1114:1: '=='
             {
              before(grammarAccess.getEventAccess().getEqualsSignEqualsSignKeyword_1()); 
-            match(input,20,FOLLOW_20_in_rule__Event__Group__1__Impl1930); 
+            match(input,20,FOLLOW_20_in_rule__Event__Group__1__Impl2174); 
              after(grammarAccess.getEventAccess().getEqualsSignEqualsSignKeyword_1()); 
 
             }
@@ -2607,16 +2917,16 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Event__Group__2"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1001:1: rule__Event__Group__2 : rule__Event__Group__2__Impl ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1127:1: rule__Event__Group__2 : rule__Event__Group__2__Impl ;
     public final void rule__Event__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1005:1: ( rule__Event__Group__2__Impl )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1006:2: rule__Event__Group__2__Impl
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1131:1: ( rule__Event__Group__2__Impl )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1132:2: rule__Event__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__Event__Group__2__Impl_in_rule__Event__Group__21961);
+            pushFollow(FOLLOW_rule__Event__Group__2__Impl_in_rule__Event__Group__22205);
             rule__Event__Group__2__Impl();
 
             state._fsp--;
@@ -2640,31 +2950,31 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Event__Group__2__Impl"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1012:1: rule__Event__Group__2__Impl : ( ( rule__Event__StateAssignment_2 ) ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1138:1: rule__Event__Group__2__Impl : ( ( rule__Event__ValueAssignment_2 ) ) ;
     public final void rule__Event__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1016:1: ( ( ( rule__Event__StateAssignment_2 ) ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1017:1: ( ( rule__Event__StateAssignment_2 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1142:1: ( ( ( rule__Event__ValueAssignment_2 ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1143:1: ( ( rule__Event__ValueAssignment_2 ) )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1017:1: ( ( rule__Event__StateAssignment_2 ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1018:1: ( rule__Event__StateAssignment_2 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1143:1: ( ( rule__Event__ValueAssignment_2 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1144:1: ( rule__Event__ValueAssignment_2 )
             {
-             before(grammarAccess.getEventAccess().getStateAssignment_2()); 
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1019:1: ( rule__Event__StateAssignment_2 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1019:2: rule__Event__StateAssignment_2
+             before(grammarAccess.getEventAccess().getValueAssignment_2()); 
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1145:1: ( rule__Event__ValueAssignment_2 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1145:2: rule__Event__ValueAssignment_2
             {
-            pushFollow(FOLLOW_rule__Event__StateAssignment_2_in_rule__Event__Group__2__Impl1988);
-            rule__Event__StateAssignment_2();
+            pushFollow(FOLLOW_rule__Event__ValueAssignment_2_in_rule__Event__Group__2__Impl2232);
+            rule__Event__ValueAssignment_2();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getEventAccess().getStateAssignment_2()); 
+             after(grammarAccess.getEventAccess().getValueAssignment_2()); 
 
             }
 
@@ -2687,21 +2997,21 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Command__Group__0"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1035:1: rule__Command__Group__0 : rule__Command__Group__0__Impl rule__Command__Group__1 ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1161:1: rule__Command__Group__0 : rule__Command__Group__0__Impl rule__Command__Group__1 ;
     public final void rule__Command__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1039:1: ( rule__Command__Group__0__Impl rule__Command__Group__1 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1040:2: rule__Command__Group__0__Impl rule__Command__Group__1
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1165:1: ( rule__Command__Group__0__Impl rule__Command__Group__1 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1166:2: rule__Command__Group__0__Impl rule__Command__Group__1
             {
-            pushFollow(FOLLOW_rule__Command__Group__0__Impl_in_rule__Command__Group__02024);
+            pushFollow(FOLLOW_rule__Command__Group__0__Impl_in_rule__Command__Group__02268);
             rule__Command__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Command__Group__1_in_rule__Command__Group__02027);
+            pushFollow(FOLLOW_rule__Command__Group__1_in_rule__Command__Group__02271);
             rule__Command__Group__1();
 
             state._fsp--;
@@ -2725,20 +3035,20 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Command__Group__0__Impl"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1047:1: rule__Command__Group__0__Impl : ( 'set' ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1173:1: rule__Command__Group__0__Impl : ( 'set' ) ;
     public final void rule__Command__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1051:1: ( ( 'set' ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1052:1: ( 'set' )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1177:1: ( ( 'set' ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1178:1: ( 'set' )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1052:1: ( 'set' )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1053:1: 'set'
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1178:1: ( 'set' )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1179:1: 'set'
             {
              before(grammarAccess.getCommandAccess().getSetKeyword_0()); 
-            match(input,21,FOLLOW_21_in_rule__Command__Group__0__Impl2055); 
+            match(input,21,FOLLOW_21_in_rule__Command__Group__0__Impl2299); 
              after(grammarAccess.getCommandAccess().getSetKeyword_0()); 
 
             }
@@ -2762,21 +3072,21 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Command__Group__1"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1066:1: rule__Command__Group__1 : rule__Command__Group__1__Impl rule__Command__Group__2 ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1192:1: rule__Command__Group__1 : rule__Command__Group__1__Impl rule__Command__Group__2 ;
     public final void rule__Command__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1070:1: ( rule__Command__Group__1__Impl rule__Command__Group__2 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1071:2: rule__Command__Group__1__Impl rule__Command__Group__2
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1196:1: ( rule__Command__Group__1__Impl rule__Command__Group__2 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1197:2: rule__Command__Group__1__Impl rule__Command__Group__2
             {
-            pushFollow(FOLLOW_rule__Command__Group__1__Impl_in_rule__Command__Group__12086);
+            pushFollow(FOLLOW_rule__Command__Group__1__Impl_in_rule__Command__Group__12330);
             rule__Command__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Command__Group__2_in_rule__Command__Group__12089);
+            pushFollow(FOLLOW_rule__Command__Group__2_in_rule__Command__Group__12333);
             rule__Command__Group__2();
 
             state._fsp--;
@@ -2800,23 +3110,23 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Command__Group__1__Impl"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1078:1: rule__Command__Group__1__Impl : ( ( rule__Command__SignalAssignment_1 ) ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1204:1: rule__Command__Group__1__Impl : ( ( rule__Command__SignalAssignment_1 ) ) ;
     public final void rule__Command__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1082:1: ( ( ( rule__Command__SignalAssignment_1 ) ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1083:1: ( ( rule__Command__SignalAssignment_1 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1208:1: ( ( ( rule__Command__SignalAssignment_1 ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1209:1: ( ( rule__Command__SignalAssignment_1 ) )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1083:1: ( ( rule__Command__SignalAssignment_1 ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1084:1: ( rule__Command__SignalAssignment_1 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1209:1: ( ( rule__Command__SignalAssignment_1 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1210:1: ( rule__Command__SignalAssignment_1 )
             {
              before(grammarAccess.getCommandAccess().getSignalAssignment_1()); 
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1085:1: ( rule__Command__SignalAssignment_1 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1085:2: rule__Command__SignalAssignment_1
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1211:1: ( rule__Command__SignalAssignment_1 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1211:2: rule__Command__SignalAssignment_1
             {
-            pushFollow(FOLLOW_rule__Command__SignalAssignment_1_in_rule__Command__Group__1__Impl2116);
+            pushFollow(FOLLOW_rule__Command__SignalAssignment_1_in_rule__Command__Group__1__Impl2360);
             rule__Command__SignalAssignment_1();
 
             state._fsp--;
@@ -2847,21 +3157,21 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Command__Group__2"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1095:1: rule__Command__Group__2 : rule__Command__Group__2__Impl rule__Command__Group__3 ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1221:1: rule__Command__Group__2 : rule__Command__Group__2__Impl rule__Command__Group__3 ;
     public final void rule__Command__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1099:1: ( rule__Command__Group__2__Impl rule__Command__Group__3 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1100:2: rule__Command__Group__2__Impl rule__Command__Group__3
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1225:1: ( rule__Command__Group__2__Impl rule__Command__Group__3 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1226:2: rule__Command__Group__2__Impl rule__Command__Group__3
             {
-            pushFollow(FOLLOW_rule__Command__Group__2__Impl_in_rule__Command__Group__22146);
+            pushFollow(FOLLOW_rule__Command__Group__2__Impl_in_rule__Command__Group__22390);
             rule__Command__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Command__Group__3_in_rule__Command__Group__22149);
+            pushFollow(FOLLOW_rule__Command__Group__3_in_rule__Command__Group__22393);
             rule__Command__Group__3();
 
             state._fsp--;
@@ -2885,20 +3195,20 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Command__Group__2__Impl"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1107:1: rule__Command__Group__2__Impl : ( '=' ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1233:1: rule__Command__Group__2__Impl : ( '=' ) ;
     public final void rule__Command__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1111:1: ( ( '=' ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1112:1: ( '=' )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1237:1: ( ( '=' ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1238:1: ( '=' )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1112:1: ( '=' )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1113:1: '='
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1238:1: ( '=' )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1239:1: '='
             {
              before(grammarAccess.getCommandAccess().getEqualsSignKeyword_2()); 
-            match(input,22,FOLLOW_22_in_rule__Command__Group__2__Impl2177); 
+            match(input,22,FOLLOW_22_in_rule__Command__Group__2__Impl2421); 
              after(grammarAccess.getCommandAccess().getEqualsSignKeyword_2()); 
 
             }
@@ -2922,16 +3232,16 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Command__Group__3"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1126:1: rule__Command__Group__3 : rule__Command__Group__3__Impl ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1252:1: rule__Command__Group__3 : rule__Command__Group__3__Impl ;
     public final void rule__Command__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1130:1: ( rule__Command__Group__3__Impl )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1131:2: rule__Command__Group__3__Impl
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1256:1: ( rule__Command__Group__3__Impl )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1257:2: rule__Command__Group__3__Impl
             {
-            pushFollow(FOLLOW_rule__Command__Group__3__Impl_in_rule__Command__Group__32208);
+            pushFollow(FOLLOW_rule__Command__Group__3__Impl_in_rule__Command__Group__32452);
             rule__Command__Group__3__Impl();
 
             state._fsp--;
@@ -2955,31 +3265,31 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Command__Group__3__Impl"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1137:1: rule__Command__Group__3__Impl : ( ( rule__Command__NewStateAssignment_3 ) ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1263:1: rule__Command__Group__3__Impl : ( ( rule__Command__NewValueAssignment_3 ) ) ;
     public final void rule__Command__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1141:1: ( ( ( rule__Command__NewStateAssignment_3 ) ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1142:1: ( ( rule__Command__NewStateAssignment_3 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1267:1: ( ( ( rule__Command__NewValueAssignment_3 ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1268:1: ( ( rule__Command__NewValueAssignment_3 ) )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1142:1: ( ( rule__Command__NewStateAssignment_3 ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1143:1: ( rule__Command__NewStateAssignment_3 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1268:1: ( ( rule__Command__NewValueAssignment_3 ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1269:1: ( rule__Command__NewValueAssignment_3 )
             {
-             before(grammarAccess.getCommandAccess().getNewStateAssignment_3()); 
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1144:1: ( rule__Command__NewStateAssignment_3 )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1144:2: rule__Command__NewStateAssignment_3
+             before(grammarAccess.getCommandAccess().getNewValueAssignment_3()); 
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1270:1: ( rule__Command__NewValueAssignment_3 )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1270:2: rule__Command__NewValueAssignment_3
             {
-            pushFollow(FOLLOW_rule__Command__NewStateAssignment_3_in_rule__Command__Group__3__Impl2235);
-            rule__Command__NewStateAssignment_3();
+            pushFollow(FOLLOW_rule__Command__NewValueAssignment_3_in_rule__Command__Group__3__Impl2479);
+            rule__Command__NewValueAssignment_3();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getCommandAccess().getNewStateAssignment_3()); 
+             after(grammarAccess.getCommandAccess().getNewValueAssignment_3()); 
 
             }
 
@@ -3002,20 +3312,20 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Statemachine__SignalsAssignment_1"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1163:1: rule__Statemachine__SignalsAssignment_1 : ( ruleSignal ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1289:1: rule__Statemachine__SignalsAssignment_1 : ( ruleSignal ) ;
     public final void rule__Statemachine__SignalsAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1167:1: ( ( ruleSignal ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1168:1: ( ruleSignal )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1293:1: ( ( ruleSignal ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1294:1: ( ruleSignal )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1168:1: ( ruleSignal )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1169:1: ruleSignal
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1294:1: ( ruleSignal )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1295:1: ruleSignal
             {
              before(grammarAccess.getStatemachineAccess().getSignalsSignalParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleSignal_in_rule__Statemachine__SignalsAssignment_12278);
+            pushFollow(FOLLOW_ruleSignal_in_rule__Statemachine__SignalsAssignment_12522);
             ruleSignal();
 
             state._fsp--;
@@ -3043,20 +3353,20 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Statemachine__StatesAssignment_2"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1178:1: rule__Statemachine__StatesAssignment_2 : ( ruleState ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1304:1: rule__Statemachine__StatesAssignment_2 : ( ruleState ) ;
     public final void rule__Statemachine__StatesAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1182:1: ( ( ruleState ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1183:1: ( ruleState )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1308:1: ( ( ruleState ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1309:1: ( ruleState )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1183:1: ( ruleState )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1184:1: ruleState
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1309:1: ( ruleState )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1310:1: ruleState
             {
              before(grammarAccess.getStatemachineAccess().getStatesStateParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleState_in_rule__Statemachine__StatesAssignment_22309);
+            pushFollow(FOLLOW_ruleState_in_rule__Statemachine__StatesAssignment_22553);
             ruleState();
 
             state._fsp--;
@@ -3084,20 +3394,20 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Signal__NameAssignment_2"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1193:1: rule__Signal__NameAssignment_2 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1319:1: rule__Signal__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__Signal__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1197:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1198:1: ( RULE_ID )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1323:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1324:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1198:1: ( RULE_ID )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1199:1: RULE_ID
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1324:1: ( RULE_ID )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1325:1: RULE_ID
             {
              before(grammarAccess.getSignalAccess().getNameIDTerminalRuleCall_2_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Signal__NameAssignment_22340); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Signal__NameAssignment_22584); 
              after(grammarAccess.getSignalAccess().getNameIDTerminalRuleCall_2_0()); 
 
             }
@@ -3121,20 +3431,20 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__State__NameAssignment_1"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1208:1: rule__State__NameAssignment_1 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1334:1: rule__State__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__State__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1212:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1213:1: ( RULE_ID )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1338:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1339:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1213:1: ( RULE_ID )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1214:1: RULE_ID
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1339:1: ( RULE_ID )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1340:1: RULE_ID
             {
              before(grammarAccess.getStateAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__State__NameAssignment_12371); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__State__NameAssignment_12615); 
              after(grammarAccess.getStateAccess().getNameIDTerminalRuleCall_1_0()); 
 
             }
@@ -3158,20 +3468,20 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__State__CommandsAssignment_2"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1223:1: rule__State__CommandsAssignment_2 : ( ruleCommand ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1349:1: rule__State__CommandsAssignment_2 : ( ruleCommand ) ;
     public final void rule__State__CommandsAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1227:1: ( ( ruleCommand ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1228:1: ( ruleCommand )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1353:1: ( ( ruleCommand ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1354:1: ( ruleCommand )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1228:1: ( ruleCommand )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1229:1: ruleCommand
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1354:1: ( ruleCommand )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1355:1: ruleCommand
             {
              before(grammarAccess.getStateAccess().getCommandsCommandParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleCommand_in_rule__State__CommandsAssignment_22402);
+            pushFollow(FOLLOW_ruleCommand_in_rule__State__CommandsAssignment_22646);
             ruleCommand();
 
             state._fsp--;
@@ -3199,20 +3509,20 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__State__TransitionsAssignment_3"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1238:1: rule__State__TransitionsAssignment_3 : ( ruleTransition ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1364:1: rule__State__TransitionsAssignment_3 : ( ruleTransition ) ;
     public final void rule__State__TransitionsAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1242:1: ( ( ruleTransition ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1243:1: ( ruleTransition )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1368:1: ( ( ruleTransition ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1369:1: ( ruleTransition )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1243:1: ( ruleTransition )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1244:1: ruleTransition
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1369:1: ( ruleTransition )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1370:1: ruleTransition
             {
              before(grammarAccess.getStateAccess().getTransitionsTransitionParserRuleCall_3_0()); 
-            pushFollow(FOLLOW_ruleTransition_in_rule__State__TransitionsAssignment_32433);
+            pushFollow(FOLLOW_ruleTransition_in_rule__State__TransitionsAssignment_32677);
             ruleTransition();
 
             state._fsp--;
@@ -3240,20 +3550,20 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Transition__ConditionAssignment_1"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1253:1: rule__Transition__ConditionAssignment_1 : ( ruleCondition ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1379:1: rule__Transition__ConditionAssignment_1 : ( ruleCondition ) ;
     public final void rule__Transition__ConditionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1257:1: ( ( ruleCondition ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1258:1: ( ruleCondition )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1383:1: ( ( ruleCondition ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1384:1: ( ruleCondition )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1258:1: ( ruleCondition )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1259:1: ruleCondition
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1384:1: ( ruleCondition )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1385:1: ruleCondition
             {
              before(grammarAccess.getTransitionAccess().getConditionConditionParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleCondition_in_rule__Transition__ConditionAssignment_12464);
+            pushFollow(FOLLOW_ruleCondition_in_rule__Transition__ConditionAssignment_12708);
             ruleCondition();
 
             state._fsp--;
@@ -3281,24 +3591,24 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Transition__StateAssignment_3"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1268:1: rule__Transition__StateAssignment_3 : ( ( RULE_ID ) ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1394:1: rule__Transition__StateAssignment_3 : ( ( RULE_ID ) ) ;
     public final void rule__Transition__StateAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1272:1: ( ( ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1273:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1398:1: ( ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1399:1: ( ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1273:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1274:1: ( RULE_ID )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1399:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1400:1: ( RULE_ID )
             {
              before(grammarAccess.getTransitionAccess().getStateStateCrossReference_3_0()); 
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1275:1: ( RULE_ID )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1276:1: RULE_ID
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1401:1: ( RULE_ID )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1402:1: RULE_ID
             {
              before(grammarAccess.getTransitionAccess().getStateStateIDTerminalRuleCall_3_0_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Transition__StateAssignment_32499); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Transition__StateAssignment_32743); 
              after(grammarAccess.getTransitionAccess().getStateStateIDTerminalRuleCall_3_0_1()); 
 
             }
@@ -3326,20 +3636,20 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Condition__EventsAssignment_0"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1287:1: rule__Condition__EventsAssignment_0 : ( ruleEvent ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1413:1: rule__Condition__EventsAssignment_0 : ( ruleEvent ) ;
     public final void rule__Condition__EventsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1291:1: ( ( ruleEvent ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1292:1: ( ruleEvent )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1417:1: ( ( ruleEvent ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1418:1: ( ruleEvent )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1292:1: ( ruleEvent )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1293:1: ruleEvent
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1418:1: ( ruleEvent )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1419:1: ruleEvent
             {
              before(grammarAccess.getConditionAccess().getEventsEventParserRuleCall_0_0()); 
-            pushFollow(FOLLOW_ruleEvent_in_rule__Condition__EventsAssignment_02534);
+            pushFollow(FOLLOW_ruleEvent_in_rule__Condition__EventsAssignment_02778);
             ruleEvent();
 
             state._fsp--;
@@ -3367,20 +3677,20 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Condition__EventsAssignment_1_1"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1302:1: rule__Condition__EventsAssignment_1_1 : ( ruleEvent ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1428:1: rule__Condition__EventsAssignment_1_1 : ( ruleEvent ) ;
     public final void rule__Condition__EventsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1306:1: ( ( ruleEvent ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1307:1: ( ruleEvent )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1432:1: ( ( ruleEvent ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1433:1: ( ruleEvent )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1307:1: ( ruleEvent )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1308:1: ruleEvent
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1433:1: ( ruleEvent )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1434:1: ruleEvent
             {
              before(grammarAccess.getConditionAccess().getEventsEventParserRuleCall_1_1_0()); 
-            pushFollow(FOLLOW_ruleEvent_in_rule__Condition__EventsAssignment_1_12565);
+            pushFollow(FOLLOW_ruleEvent_in_rule__Condition__EventsAssignment_1_12809);
             ruleEvent();
 
             state._fsp--;
@@ -3408,24 +3718,24 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Event__SignalAssignment_0"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1317:1: rule__Event__SignalAssignment_0 : ( ( RULE_ID ) ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1443:1: rule__Event__SignalAssignment_0 : ( ( RULE_ID ) ) ;
     public final void rule__Event__SignalAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1321:1: ( ( ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1322:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1447:1: ( ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1448:1: ( ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1322:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1323:1: ( RULE_ID )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1448:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1449:1: ( RULE_ID )
             {
              before(grammarAccess.getEventAccess().getSignalSignalCrossReference_0_0()); 
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1324:1: ( RULE_ID )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1325:1: RULE_ID
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1450:1: ( RULE_ID )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1451:1: RULE_ID
             {
              before(grammarAccess.getEventAccess().getSignalSignalIDTerminalRuleCall_0_0_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Event__SignalAssignment_02600); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Event__SignalAssignment_02844); 
              after(grammarAccess.getEventAccess().getSignalSignalIDTerminalRuleCall_0_0_1()); 
 
             }
@@ -3452,22 +3762,22 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
     // $ANTLR end "rule__Event__SignalAssignment_0"
 
 
-    // $ANTLR start "rule__Event__StateAssignment_2"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1336:1: rule__Event__StateAssignment_2 : ( RULE_BOOLEAN ) ;
-    public final void rule__Event__StateAssignment_2() throws RecognitionException {
+    // $ANTLR start "rule__Event__ValueAssignment_2"
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1462:1: rule__Event__ValueAssignment_2 : ( RULE_BOOLEAN ) ;
+    public final void rule__Event__ValueAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1340:1: ( ( RULE_BOOLEAN ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1341:1: ( RULE_BOOLEAN )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1466:1: ( ( RULE_BOOLEAN ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1467:1: ( RULE_BOOLEAN )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1341:1: ( RULE_BOOLEAN )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1342:1: RULE_BOOLEAN
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1467:1: ( RULE_BOOLEAN )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1468:1: RULE_BOOLEAN
             {
-             before(grammarAccess.getEventAccess().getStateBOOLEANTerminalRuleCall_2_0()); 
-            match(input,RULE_BOOLEAN,FOLLOW_RULE_BOOLEAN_in_rule__Event__StateAssignment_22635); 
-             after(grammarAccess.getEventAccess().getStateBOOLEANTerminalRuleCall_2_0()); 
+             before(grammarAccess.getEventAccess().getValueBOOLEANTerminalRuleCall_2_0()); 
+            match(input,RULE_BOOLEAN,FOLLOW_RULE_BOOLEAN_in_rule__Event__ValueAssignment_22879); 
+             after(grammarAccess.getEventAccess().getValueBOOLEANTerminalRuleCall_2_0()); 
 
             }
 
@@ -3486,28 +3796,28 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end "rule__Event__StateAssignment_2"
+    // $ANTLR end "rule__Event__ValueAssignment_2"
 
 
     // $ANTLR start "rule__Command__SignalAssignment_1"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1351:1: rule__Command__SignalAssignment_1 : ( ( RULE_ID ) ) ;
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1477:1: rule__Command__SignalAssignment_1 : ( ( RULE_ID ) ) ;
     public final void rule__Command__SignalAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1355:1: ( ( ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1356:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1481:1: ( ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1482:1: ( ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1356:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1357:1: ( RULE_ID )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1482:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1483:1: ( RULE_ID )
             {
              before(grammarAccess.getCommandAccess().getSignalSignalCrossReference_1_0()); 
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1358:1: ( RULE_ID )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1359:1: RULE_ID
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1484:1: ( RULE_ID )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1485:1: RULE_ID
             {
              before(grammarAccess.getCommandAccess().getSignalSignalIDTerminalRuleCall_1_0_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Command__SignalAssignment_12670); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Command__SignalAssignment_12914); 
              after(grammarAccess.getCommandAccess().getSignalSignalIDTerminalRuleCall_1_0_1()); 
 
             }
@@ -3534,22 +3844,22 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
     // $ANTLR end "rule__Command__SignalAssignment_1"
 
 
-    // $ANTLR start "rule__Command__NewStateAssignment_3"
-    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1370:1: rule__Command__NewStateAssignment_3 : ( RULE_BOOLEAN ) ;
-    public final void rule__Command__NewStateAssignment_3() throws RecognitionException {
+    // $ANTLR start "rule__Command__NewValueAssignment_3"
+    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1496:1: rule__Command__NewValueAssignment_3 : ( RULE_BOOLEAN ) ;
+    public final void rule__Command__NewValueAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1374:1: ( ( RULE_BOOLEAN ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1375:1: ( RULE_BOOLEAN )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1500:1: ( ( RULE_BOOLEAN ) )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1501:1: ( RULE_BOOLEAN )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1375:1: ( RULE_BOOLEAN )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1376:1: RULE_BOOLEAN
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1501:1: ( RULE_BOOLEAN )
+            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1502:1: RULE_BOOLEAN
             {
-             before(grammarAccess.getCommandAccess().getNewStateBOOLEANTerminalRuleCall_3_0()); 
-            match(input,RULE_BOOLEAN,FOLLOW_RULE_BOOLEAN_in_rule__Command__NewStateAssignment_32705); 
-             after(grammarAccess.getCommandAccess().getNewStateBOOLEANTerminalRuleCall_3_0()); 
+             before(grammarAccess.getCommandAccess().getNewValueBOOLEANTerminalRuleCall_3_0()); 
+            match(input,RULE_BOOLEAN,FOLLOW_RULE_BOOLEAN_in_rule__Command__NewValueAssignment_32949); 
+             after(grammarAccess.getCommandAccess().getNewValueBOOLEANTerminalRuleCall_3_0()); 
 
             }
 
@@ -3568,7 +3878,7 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end "rule__Command__NewStateAssignment_3"
+    // $ANTLR end "rule__Command__NewValueAssignment_3"
 
     // Delegated rules
 
@@ -3583,109 +3893,117 @@ public class InternalStatemachineParser extends AbstractInternalContentAssistPar
     public static final BitSet FOLLOW_rule__Signal__Group__0_in_ruleSignal154 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleInputSignal_in_entryRuleInputSignal181 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleInputSignal188 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_ruleInputSignal215 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOutputSignal_in_entryRuleOutputSignal243 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleOutputSignal250 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_ruleOutputSignal277 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleState_in_entryRuleState305 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleState312 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__State__Group__0_in_ruleState338 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTransition_in_entryRuleTransition365 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTransition372 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Transition__Group__0_in_ruleTransition398 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCondition_in_entryRuleCondition425 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleCondition432 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Condition__Group__0_in_ruleCondition458 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEvent_in_entryRuleEvent485 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEvent492 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Event__Group__0_in_ruleEvent518 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCommand_in_entryRuleCommand545 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleCommand552 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Command__Group__0_in_ruleCommand578 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInputSignal_in_rule__Signal__Alternatives_0614 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOutputSignal_in_rule__Signal__Alternatives_0631 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statemachine__Group__0__Impl_in_rule__Statemachine__Group__0661 = new BitSet(new long[]{0x000000000000B000L});
-    public static final BitSet FOLLOW_rule__Statemachine__Group__1_in_rule__Statemachine__Group__0664 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statemachine__Group__1__Impl_in_rule__Statemachine__Group__1722 = new BitSet(new long[]{0x000000000000B000L});
-    public static final BitSet FOLLOW_rule__Statemachine__Group__2_in_rule__Statemachine__Group__1725 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statemachine__SignalsAssignment_1_in_rule__Statemachine__Group__1__Impl752 = new BitSet(new long[]{0x0000000000003002L});
-    public static final BitSet FOLLOW_rule__Statemachine__Group__2__Impl_in_rule__Statemachine__Group__2783 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statemachine__StatesAssignment_2_in_rule__Statemachine__Group__2__Impl810 = new BitSet(new long[]{0x0000000000008002L});
-    public static final BitSet FOLLOW_rule__Signal__Group__0__Impl_in_rule__Signal__Group__0847 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_rule__Signal__Group__1_in_rule__Signal__Group__0850 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Signal__Alternatives_0_in_rule__Signal__Group__0__Impl877 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Signal__Group__1__Impl_in_rule__Signal__Group__1907 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__Signal__Group__2_in_rule__Signal__Group__1910 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_rule__Signal__Group__1__Impl938 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Signal__Group__2__Impl_in_rule__Signal__Group__2969 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Signal__NameAssignment_2_in_rule__Signal__Group__2__Impl996 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__State__Group__0__Impl_in_rule__State__Group__01032 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__State__Group__1_in_rule__State__Group__01035 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_rule__State__Group__0__Impl1063 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__State__Group__1__Impl_in_rule__State__Group__11094 = new BitSet(new long[]{0x0000000000230000L});
-    public static final BitSet FOLLOW_rule__State__Group__2_in_rule__State__Group__11097 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__State__NameAssignment_1_in_rule__State__Group__1__Impl1124 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__State__Group__2__Impl_in_rule__State__Group__21154 = new BitSet(new long[]{0x0000000000230000L});
-    public static final BitSet FOLLOW_rule__State__Group__3_in_rule__State__Group__21157 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__State__CommandsAssignment_2_in_rule__State__Group__2__Impl1184 = new BitSet(new long[]{0x0000000000200002L});
-    public static final BitSet FOLLOW_rule__State__Group__3__Impl_in_rule__State__Group__31215 = new BitSet(new long[]{0x0000000000230000L});
-    public static final BitSet FOLLOW_rule__State__Group__4_in_rule__State__Group__31218 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__State__TransitionsAssignment_3_in_rule__State__Group__3__Impl1245 = new BitSet(new long[]{0x0000000000020002L});
-    public static final BitSet FOLLOW_rule__State__Group__4__Impl_in_rule__State__Group__41276 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_rule__State__Group__4__Impl1304 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Transition__Group__0__Impl_in_rule__Transition__Group__01345 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__Transition__Group__1_in_rule__Transition__Group__01348 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_rule__Transition__Group__0__Impl1376 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Transition__Group__1__Impl_in_rule__Transition__Group__11407 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_rule__Transition__Group__2_in_rule__Transition__Group__11410 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Transition__ConditionAssignment_1_in_rule__Transition__Group__1__Impl1437 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Transition__Group__2__Impl_in_rule__Transition__Group__21467 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__Transition__Group__3_in_rule__Transition__Group__21470 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_18_in_rule__Transition__Group__2__Impl1498 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Transition__Group__3__Impl_in_rule__Transition__Group__31529 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Transition__StateAssignment_3_in_rule__Transition__Group__3__Impl1556 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Condition__Group__0__Impl_in_rule__Condition__Group__01594 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_rule__Condition__Group__1_in_rule__Condition__Group__01597 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Condition__EventsAssignment_0_in_rule__Condition__Group__0__Impl1624 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Condition__Group__1__Impl_in_rule__Condition__Group__11654 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Condition__Group_1__0_in_rule__Condition__Group__1__Impl1681 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_rule__Condition__Group_1__0__Impl_in_rule__Condition__Group_1__01716 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__Condition__Group_1__1_in_rule__Condition__Group_1__01719 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_rule__Condition__Group_1__0__Impl1747 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Condition__Group_1__1__Impl_in_rule__Condition__Group_1__11778 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Condition__EventsAssignment_1_1_in_rule__Condition__Group_1__1__Impl1805 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Event__Group__0__Impl_in_rule__Event__Group__01839 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_rule__Event__Group__1_in_rule__Event__Group__01842 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Event__SignalAssignment_0_in_rule__Event__Group__0__Impl1869 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Event__Group__1__Impl_in_rule__Event__Group__11899 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__Event__Group__2_in_rule__Event__Group__11902 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_rule__Event__Group__1__Impl1930 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Event__Group__2__Impl_in_rule__Event__Group__21961 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Event__StateAssignment_2_in_rule__Event__Group__2__Impl1988 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Command__Group__0__Impl_in_rule__Command__Group__02024 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__Command__Group__1_in_rule__Command__Group__02027 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_rule__Command__Group__0__Impl2055 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Command__Group__1__Impl_in_rule__Command__Group__12086 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_rule__Command__Group__2_in_rule__Command__Group__12089 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Command__SignalAssignment_1_in_rule__Command__Group__1__Impl2116 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Command__Group__2__Impl_in_rule__Command__Group__22146 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__Command__Group__3_in_rule__Command__Group__22149 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_rule__Command__Group__2__Impl2177 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Command__Group__3__Impl_in_rule__Command__Group__32208 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Command__NewStateAssignment_3_in_rule__Command__Group__3__Impl2235 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSignal_in_rule__Statemachine__SignalsAssignment_12278 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleState_in_rule__Statemachine__StatesAssignment_22309 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Signal__NameAssignment_22340 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__State__NameAssignment_12371 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCommand_in_rule__State__CommandsAssignment_22402 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTransition_in_rule__State__TransitionsAssignment_32433 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCondition_in_rule__Transition__ConditionAssignment_12464 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Transition__StateAssignment_32499 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEvent_in_rule__Condition__EventsAssignment_02534 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEvent_in_rule__Condition__EventsAssignment_1_12565 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Event__SignalAssignment_02600 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_BOOLEAN_in_rule__Event__StateAssignment_22635 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Command__SignalAssignment_12670 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_BOOLEAN_in_rule__Command__NewStateAssignment_32705 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__InputSignal__Group__0_in_ruleInputSignal214 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOutputSignal_in_entryRuleOutputSignal241 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleOutputSignal248 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__OutputSignal__Group__0_in_ruleOutputSignal274 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleState_in_entryRuleState301 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleState308 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__State__Group__0_in_ruleState334 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTransition_in_entryRuleTransition361 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTransition368 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Transition__Group__0_in_ruleTransition394 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCondition_in_entryRuleCondition421 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleCondition428 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Condition__Group__0_in_ruleCondition454 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEvent_in_entryRuleEvent481 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEvent488 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Event__Group__0_in_ruleEvent514 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCommand_in_entryRuleCommand541 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleCommand548 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Command__Group__0_in_ruleCommand574 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInputSignal_in_rule__Signal__Alternatives_0610 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOutputSignal_in_rule__Signal__Alternatives_0627 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statemachine__Group__0__Impl_in_rule__Statemachine__Group__0657 = new BitSet(new long[]{0x000000000000E000L});
+    public static final BitSet FOLLOW_rule__Statemachine__Group__1_in_rule__Statemachine__Group__0660 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statemachine__Group__1__Impl_in_rule__Statemachine__Group__1718 = new BitSet(new long[]{0x000000000000E000L});
+    public static final BitSet FOLLOW_rule__Statemachine__Group__2_in_rule__Statemachine__Group__1721 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statemachine__SignalsAssignment_1_in_rule__Statemachine__Group__1__Impl748 = new BitSet(new long[]{0x0000000000006002L});
+    public static final BitSet FOLLOW_rule__Statemachine__Group__2__Impl_in_rule__Statemachine__Group__2779 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statemachine__StatesAssignment_2_in_rule__Statemachine__Group__2__Impl806 = new BitSet(new long[]{0x0000000000008002L});
+    public static final BitSet FOLLOW_rule__Signal__Group__0__Impl_in_rule__Signal__Group__0843 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_rule__Signal__Group__1_in_rule__Signal__Group__0846 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Signal__Alternatives_0_in_rule__Signal__Group__0__Impl873 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Signal__Group__1__Impl_in_rule__Signal__Group__1903 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__Signal__Group__2_in_rule__Signal__Group__1906 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_12_in_rule__Signal__Group__1__Impl934 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Signal__Group__2__Impl_in_rule__Signal__Group__2965 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Signal__NameAssignment_2_in_rule__Signal__Group__2__Impl992 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__InputSignal__Group__0__Impl_in_rule__InputSignal__Group__01028 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_rule__InputSignal__Group__1_in_rule__InputSignal__Group__01031 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__InputSignal__Group__1__Impl_in_rule__InputSignal__Group__11089 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_rule__InputSignal__Group__1__Impl1117 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__OutputSignal__Group__0__Impl_in_rule__OutputSignal__Group__01152 = new BitSet(new long[]{0x0000000000006000L});
+    public static final BitSet FOLLOW_rule__OutputSignal__Group__1_in_rule__OutputSignal__Group__01155 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__OutputSignal__Group__1__Impl_in_rule__OutputSignal__Group__11213 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_rule__OutputSignal__Group__1__Impl1241 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__State__Group__0__Impl_in_rule__State__Group__01276 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__State__Group__1_in_rule__State__Group__01279 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_rule__State__Group__0__Impl1307 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__State__Group__1__Impl_in_rule__State__Group__11338 = new BitSet(new long[]{0x0000000000230000L});
+    public static final BitSet FOLLOW_rule__State__Group__2_in_rule__State__Group__11341 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__State__NameAssignment_1_in_rule__State__Group__1__Impl1368 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__State__Group__2__Impl_in_rule__State__Group__21398 = new BitSet(new long[]{0x0000000000230000L});
+    public static final BitSet FOLLOW_rule__State__Group__3_in_rule__State__Group__21401 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__State__CommandsAssignment_2_in_rule__State__Group__2__Impl1428 = new BitSet(new long[]{0x0000000000200002L});
+    public static final BitSet FOLLOW_rule__State__Group__3__Impl_in_rule__State__Group__31459 = new BitSet(new long[]{0x0000000000230000L});
+    public static final BitSet FOLLOW_rule__State__Group__4_in_rule__State__Group__31462 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__State__TransitionsAssignment_3_in_rule__State__Group__3__Impl1489 = new BitSet(new long[]{0x0000000000020002L});
+    public static final BitSet FOLLOW_rule__State__Group__4__Impl_in_rule__State__Group__41520 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_rule__State__Group__4__Impl1548 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Transition__Group__0__Impl_in_rule__Transition__Group__01589 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__Transition__Group__1_in_rule__Transition__Group__01592 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_rule__Transition__Group__0__Impl1620 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Transition__Group__1__Impl_in_rule__Transition__Group__11651 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_rule__Transition__Group__2_in_rule__Transition__Group__11654 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Transition__ConditionAssignment_1_in_rule__Transition__Group__1__Impl1681 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Transition__Group__2__Impl_in_rule__Transition__Group__21711 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__Transition__Group__3_in_rule__Transition__Group__21714 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_18_in_rule__Transition__Group__2__Impl1742 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Transition__Group__3__Impl_in_rule__Transition__Group__31773 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Transition__StateAssignment_3_in_rule__Transition__Group__3__Impl1800 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Condition__Group__0__Impl_in_rule__Condition__Group__01838 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_rule__Condition__Group__1_in_rule__Condition__Group__01841 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Condition__EventsAssignment_0_in_rule__Condition__Group__0__Impl1868 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Condition__Group__1__Impl_in_rule__Condition__Group__11898 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Condition__Group_1__0_in_rule__Condition__Group__1__Impl1925 = new BitSet(new long[]{0x0000000000080002L});
+    public static final BitSet FOLLOW_rule__Condition__Group_1__0__Impl_in_rule__Condition__Group_1__01960 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__Condition__Group_1__1_in_rule__Condition__Group_1__01963 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_rule__Condition__Group_1__0__Impl1991 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Condition__Group_1__1__Impl_in_rule__Condition__Group_1__12022 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Condition__EventsAssignment_1_1_in_rule__Condition__Group_1__1__Impl2049 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Event__Group__0__Impl_in_rule__Event__Group__02083 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_rule__Event__Group__1_in_rule__Event__Group__02086 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Event__SignalAssignment_0_in_rule__Event__Group__0__Impl2113 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Event__Group__1__Impl_in_rule__Event__Group__12143 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_rule__Event__Group__2_in_rule__Event__Group__12146 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_rule__Event__Group__1__Impl2174 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Event__Group__2__Impl_in_rule__Event__Group__22205 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Event__ValueAssignment_2_in_rule__Event__Group__2__Impl2232 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Command__Group__0__Impl_in_rule__Command__Group__02268 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__Command__Group__1_in_rule__Command__Group__02271 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_21_in_rule__Command__Group__0__Impl2299 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Command__Group__1__Impl_in_rule__Command__Group__12330 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_rule__Command__Group__2_in_rule__Command__Group__12333 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Command__SignalAssignment_1_in_rule__Command__Group__1__Impl2360 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Command__Group__2__Impl_in_rule__Command__Group__22390 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_rule__Command__Group__3_in_rule__Command__Group__22393 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_22_in_rule__Command__Group__2__Impl2421 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Command__Group__3__Impl_in_rule__Command__Group__32452 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Command__NewValueAssignment_3_in_rule__Command__Group__3__Impl2479 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSignal_in_rule__Statemachine__SignalsAssignment_12522 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleState_in_rule__Statemachine__StatesAssignment_22553 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__Signal__NameAssignment_22584 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__State__NameAssignment_12615 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCommand_in_rule__State__CommandsAssignment_22646 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTransition_in_rule__State__TransitionsAssignment_32677 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCondition_in_rule__Transition__ConditionAssignment_12708 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__Transition__StateAssignment_32743 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEvent_in_rule__Condition__EventsAssignment_02778 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEvent_in_rule__Condition__EventsAssignment_1_12809 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__Event__SignalAssignment_02844 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_BOOLEAN_in_rule__Event__ValueAssignment_22879 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__Command__SignalAssignment_12914 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_BOOLEAN_in_rule__Command__NewValueAssignment_32949 = new BitSet(new long[]{0x0000000000000002L});
 
 }

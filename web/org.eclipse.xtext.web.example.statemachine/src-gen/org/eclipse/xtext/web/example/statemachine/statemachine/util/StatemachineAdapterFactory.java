@@ -85,6 +85,16 @@ public class StatemachineAdapterFactory extends AdapterFactoryImpl
         return createSignalAdapter();
       }
       @Override
+      public Adapter caseInputSignal(InputSignal object)
+      {
+        return createInputSignalAdapter();
+      }
+      @Override
+      public Adapter caseOutputSignal(OutputSignal object)
+      {
+        return createOutputSignalAdapter();
+      }
+      @Override
       public Adapter caseState(State object)
       {
         return createStateAdapter();
@@ -157,6 +167,36 @@ public class StatemachineAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createSignalAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.web.example.statemachine.statemachine.InputSignal <em>Input Signal</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.web.example.statemachine.statemachine.InputSignal
+   * @generated
+   */
+  public Adapter createInputSignalAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.web.example.statemachine.statemachine.OutputSignal <em>Output Signal</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.web.example.statemachine.statemachine.OutputSignal
+   * @generated
+   */
+  public Adapter createOutputSignalAdapter()
   {
     return null;
   }

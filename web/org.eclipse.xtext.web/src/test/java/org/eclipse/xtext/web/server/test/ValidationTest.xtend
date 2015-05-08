@@ -41,17 +41,32 @@ class ValidationTest extends AbstractWebServerTest {
 	
 	@Test def testCrossRefError() {
 		'state foo set x = true end'.assertValidationResult('''
-				ValidationResult [
-				  entries = ArrayList (
-				    Entry [
-				      description = "Couldn't resolve reference to Signal 'x'."
-				      severity = "error"
-				      line = 1
-				      startOffset = 14
-				      endOffset = 15
-				    ]
-				  )
-				]''')
+			ValidationResult [
+			  entries = ArrayList (
+			    Entry [
+			      description = "Couldn't resolve reference to Signal 'x'."
+			      severity = "error"
+			      line = 1
+			      startOffset = 14
+			      endOffset = 15
+			    ]
+			  )
+			]''')
+	}
+	
+	@Test def testCustomValidationError() {
+		'input signal x state foo set x = true end'.assertValidationResult('''
+			ValidationResult [
+			  entries = ArrayList (
+			    Entry [
+			      description = "Only output signals are allowed for write access."
+			      severity = "error"
+			      line = 1
+			      startOffset = 29
+			      endOffset = 30
+			    ]
+			  )
+			]''')
 	}
 	
 	@Test def testValidateFile() {

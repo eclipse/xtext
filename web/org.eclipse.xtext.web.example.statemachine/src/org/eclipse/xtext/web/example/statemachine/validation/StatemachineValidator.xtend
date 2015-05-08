@@ -7,7 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.example.statemachine.validation
 
-//import org.eclipse.xtext.validation.Check
+import org.eclipse.xtext.validation.Check
+import org.eclipse.xtext.web.example.statemachine.statemachine.Command
+import org.eclipse.xtext.web.example.statemachine.statemachine.Event
+import org.eclipse.xtext.web.example.statemachine.statemachine.InputSignal
+import org.eclipse.xtext.web.example.statemachine.statemachine.OutputSignal
+
+import static org.eclipse.xtext.web.example.statemachine.statemachine.StatemachinePackage.Literals.*
 
 /**
  * This class contains custom validation rules. 
@@ -16,14 +22,18 @@ package org.eclipse.xtext.web.example.statemachine.validation
  */
 class StatemachineValidator extends AbstractStatemachineValidator {
 
-//  public static val INVALID_NAME = 'invalidName'
-//
-//	@Check
-//	def checkGreetingStartsWithCapital(Greeting greeting) {
-//		if (!Character.isUpperCase(greeting.name.charAt(0))) {
-//			warning('Name should start with a capital', 
-//					MyDslPackage.Literals.GREETING__NAME,
-//					INVALID_NAME)
-//		}
-//	}
+	@Check
+	def checkEventUsesInputSignal(Event event) {
+		if (event.signal !== null && !event.signal.eIsProxy && !(event.signal instanceof InputSignal)) {
+			error('Only input signals are allowed for read access.', event, EVENT__SIGNAL)
+		}
+	}
+	
+	@Check
+	def checkCommandUsesOutputSignal(Command command) {
+		if (command.signal !== null && !command.signal.eIsProxy && !(command.signal instanceof OutputSignal)) {
+			error('Only output signals are allowed for write access.', command, COMMAND__SIGNAL)
+		}
+	}
+
 }

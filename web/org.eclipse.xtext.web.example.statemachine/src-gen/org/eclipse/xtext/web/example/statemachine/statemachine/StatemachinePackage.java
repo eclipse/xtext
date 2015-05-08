@@ -122,6 +122,62 @@ public interface StatemachinePackage extends EPackage
   int SIGNAL_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.web.example.statemachine.statemachine.impl.InputSignalImpl <em>Input Signal</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.web.example.statemachine.statemachine.impl.InputSignalImpl
+   * @see org.eclipse.xtext.web.example.statemachine.statemachine.impl.StatemachinePackageImpl#getInputSignal()
+   * @generated
+   */
+  int INPUT_SIGNAL = 2;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INPUT_SIGNAL__NAME = SIGNAL__NAME;
+
+  /**
+   * The number of structural features of the '<em>Input Signal</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INPUT_SIGNAL_FEATURE_COUNT = SIGNAL_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.web.example.statemachine.statemachine.impl.OutputSignalImpl <em>Output Signal</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.web.example.statemachine.statemachine.impl.OutputSignalImpl
+   * @see org.eclipse.xtext.web.example.statemachine.statemachine.impl.StatemachinePackageImpl#getOutputSignal()
+   * @generated
+   */
+  int OUTPUT_SIGNAL = 3;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OUTPUT_SIGNAL__NAME = SIGNAL__NAME;
+
+  /**
+   * The number of structural features of the '<em>Output Signal</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OUTPUT_SIGNAL_FEATURE_COUNT = SIGNAL_FEATURE_COUNT + 0;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.web.example.statemachine.statemachine.impl.StateImpl <em>State</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -129,7 +185,7 @@ public interface StatemachinePackage extends EPackage
    * @see org.eclipse.xtext.web.example.statemachine.statemachine.impl.StatemachinePackageImpl#getState()
    * @generated
    */
-  int STATE = 2;
+  int STATE = 4;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -175,7 +231,7 @@ public interface StatemachinePackage extends EPackage
    * @see org.eclipse.xtext.web.example.statemachine.statemachine.impl.StatemachinePackageImpl#getTransition()
    * @generated
    */
-  int TRANSITION = 3;
+  int TRANSITION = 5;
 
   /**
    * The feature id for the '<em><b>Condition</b></em>' containment reference.
@@ -212,7 +268,7 @@ public interface StatemachinePackage extends EPackage
    * @see org.eclipse.xtext.web.example.statemachine.statemachine.impl.StatemachinePackageImpl#getCondition()
    * @generated
    */
-  int CONDITION = 4;
+  int CONDITION = 6;
 
   /**
    * The feature id for the '<em><b>Events</b></em>' containment reference list.
@@ -240,7 +296,7 @@ public interface StatemachinePackage extends EPackage
    * @see org.eclipse.xtext.web.example.statemachine.statemachine.impl.StatemachinePackageImpl#getEvent()
    * @generated
    */
-  int EVENT = 5;
+  int EVENT = 7;
 
   /**
    * The feature id for the '<em><b>Signal</b></em>' reference.
@@ -252,13 +308,13 @@ public interface StatemachinePackage extends EPackage
   int EVENT__SIGNAL = 0;
 
   /**
-   * The feature id for the '<em><b>State</b></em>' attribute.
+   * The feature id for the '<em><b>Value</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EVENT__STATE = 1;
+  int EVENT__VALUE = 1;
 
   /**
    * The number of structural features of the '<em>Event</em>' class.
@@ -277,7 +333,7 @@ public interface StatemachinePackage extends EPackage
    * @see org.eclipse.xtext.web.example.statemachine.statemachine.impl.StatemachinePackageImpl#getCommand()
    * @generated
    */
-  int COMMAND = 6;
+  int COMMAND = 8;
 
   /**
    * The feature id for the '<em><b>Signal</b></em>' reference.
@@ -289,13 +345,13 @@ public interface StatemachinePackage extends EPackage
   int COMMAND__SIGNAL = 0;
 
   /**
-   * The feature id for the '<em><b>New State</b></em>' attribute.
+   * The feature id for the '<em><b>New Value</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int COMMAND__NEW_STATE = 1;
+  int COMMAND__NEW_VALUE = 1;
 
   /**
    * The number of structural features of the '<em>Command</em>' class.
@@ -359,6 +415,26 @@ public interface StatemachinePackage extends EPackage
    * @generated
    */
   EAttribute getSignal_Name();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.web.example.statemachine.statemachine.InputSignal <em>Input Signal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Input Signal</em>'.
+   * @see org.eclipse.xtext.web.example.statemachine.statemachine.InputSignal
+   * @generated
+   */
+  EClass getInputSignal();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.web.example.statemachine.statemachine.OutputSignal <em>Output Signal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Output Signal</em>'.
+   * @see org.eclipse.xtext.web.example.statemachine.statemachine.OutputSignal
+   * @generated
+   */
+  EClass getOutputSignal();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.web.example.statemachine.statemachine.State <em>State</em>}'.
@@ -478,15 +554,15 @@ public interface StatemachinePackage extends EPackage
   EReference getEvent_Signal();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.web.example.statemachine.statemachine.Event#isState <em>State</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.web.example.statemachine.statemachine.Event#isValue <em>Value</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>State</em>'.
-   * @see org.eclipse.xtext.web.example.statemachine.statemachine.Event#isState()
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see org.eclipse.xtext.web.example.statemachine.statemachine.Event#isValue()
    * @see #getEvent()
    * @generated
    */
-  EAttribute getEvent_State();
+  EAttribute getEvent_Value();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.web.example.statemachine.statemachine.Command <em>Command</em>}'.
@@ -510,15 +586,15 @@ public interface StatemachinePackage extends EPackage
   EReference getCommand_Signal();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.web.example.statemachine.statemachine.Command#isNewState <em>New State</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.web.example.statemachine.statemachine.Command#isNewValue <em>New Value</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>New State</em>'.
-   * @see org.eclipse.xtext.web.example.statemachine.statemachine.Command#isNewState()
+   * @return the meta object for the attribute '<em>New Value</em>'.
+   * @see org.eclipse.xtext.web.example.statemachine.statemachine.Command#isNewValue()
    * @see #getCommand()
    * @generated
    */
-  EAttribute getCommand_NewState();
+  EAttribute getCommand_NewValue();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -586,6 +662,26 @@ public interface StatemachinePackage extends EPackage
      * @generated
      */
     EAttribute SIGNAL__NAME = eINSTANCE.getSignal_Name();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.web.example.statemachine.statemachine.impl.InputSignalImpl <em>Input Signal</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.web.example.statemachine.statemachine.impl.InputSignalImpl
+     * @see org.eclipse.xtext.web.example.statemachine.statemachine.impl.StatemachinePackageImpl#getInputSignal()
+     * @generated
+     */
+    EClass INPUT_SIGNAL = eINSTANCE.getInputSignal();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.web.example.statemachine.statemachine.impl.OutputSignalImpl <em>Output Signal</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.web.example.statemachine.statemachine.impl.OutputSignalImpl
+     * @see org.eclipse.xtext.web.example.statemachine.statemachine.impl.StatemachinePackageImpl#getOutputSignal()
+     * @generated
+     */
+    EClass OUTPUT_SIGNAL = eINSTANCE.getOutputSignal();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.web.example.statemachine.statemachine.impl.StateImpl <em>State</em>}' class.
@@ -684,12 +780,12 @@ public interface StatemachinePackage extends EPackage
     EReference EVENT__SIGNAL = eINSTANCE.getEvent_Signal();
 
     /**
-     * The meta object literal for the '<em><b>State</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute EVENT__STATE = eINSTANCE.getEvent_State();
+    EAttribute EVENT__VALUE = eINSTANCE.getEvent_Value();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.web.example.statemachine.statemachine.impl.CommandImpl <em>Command</em>}' class.
@@ -710,12 +806,12 @@ public interface StatemachinePackage extends EPackage
     EReference COMMAND__SIGNAL = eINSTANCE.getCommand_Signal();
 
     /**
-     * The meta object literal for the '<em><b>New State</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>New Value</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute COMMAND__NEW_STATE = eINSTANCE.getCommand_NewState();
+    EAttribute COMMAND__NEW_VALUE = eINSTANCE.getCommand_NewValue();
 
   }
 

@@ -12,6 +12,8 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.xtext.web.example.statemachine.statemachine.Command;
 import org.eclipse.xtext.web.example.statemachine.statemachine.Condition;
 import org.eclipse.xtext.web.example.statemachine.statemachine.Event;
+import org.eclipse.xtext.web.example.statemachine.statemachine.InputSignal;
+import org.eclipse.xtext.web.example.statemachine.statemachine.OutputSignal;
 import org.eclipse.xtext.web.example.statemachine.statemachine.Signal;
 import org.eclipse.xtext.web.example.statemachine.statemachine.State;
 import org.eclipse.xtext.web.example.statemachine.statemachine.Statemachine;
@@ -40,6 +42,20 @@ public class StatemachinePackageImpl extends EPackageImpl implements Statemachin
    * @generated
    */
   private EClass signalEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass inputSignalEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass outputSignalEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -194,6 +210,26 @@ public class StatemachinePackageImpl extends EPackageImpl implements Statemachin
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getInputSignal()
+  {
+    return inputSignalEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getOutputSignal()
+  {
+    return outputSignalEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getState()
   {
     return stateEClass;
@@ -304,7 +340,7 @@ public class StatemachinePackageImpl extends EPackageImpl implements Statemachin
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getEvent_State()
+  public EAttribute getEvent_Value()
   {
     return (EAttribute)eventEClass.getEStructuralFeatures().get(1);
   }
@@ -334,7 +370,7 @@ public class StatemachinePackageImpl extends EPackageImpl implements Statemachin
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getCommand_NewState()
+  public EAttribute getCommand_NewValue()
   {
     return (EAttribute)commandEClass.getEStructuralFeatures().get(1);
   }
@@ -376,6 +412,10 @@ public class StatemachinePackageImpl extends EPackageImpl implements Statemachin
     signalEClass = createEClass(SIGNAL);
     createEAttribute(signalEClass, SIGNAL__NAME);
 
+    inputSignalEClass = createEClass(INPUT_SIGNAL);
+
+    outputSignalEClass = createEClass(OUTPUT_SIGNAL);
+
     stateEClass = createEClass(STATE);
     createEAttribute(stateEClass, STATE__NAME);
     createEReference(stateEClass, STATE__COMMANDS);
@@ -390,11 +430,11 @@ public class StatemachinePackageImpl extends EPackageImpl implements Statemachin
 
     eventEClass = createEClass(EVENT);
     createEReference(eventEClass, EVENT__SIGNAL);
-    createEAttribute(eventEClass, EVENT__STATE);
+    createEAttribute(eventEClass, EVENT__VALUE);
 
     commandEClass = createEClass(COMMAND);
     createEReference(commandEClass, COMMAND__SIGNAL);
-    createEAttribute(commandEClass, COMMAND__NEW_STATE);
+    createEAttribute(commandEClass, COMMAND__NEW_VALUE);
   }
 
   /**
@@ -426,6 +466,8 @@ public class StatemachinePackageImpl extends EPackageImpl implements Statemachin
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    inputSignalEClass.getESuperTypes().add(this.getSignal());
+    outputSignalEClass.getESuperTypes().add(this.getSignal());
 
     // Initialize classes and features; add operations and parameters
     initEClass(statemachineEClass, Statemachine.class, "Statemachine", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -434,6 +476,10 @@ public class StatemachinePackageImpl extends EPackageImpl implements Statemachin
 
     initEClass(signalEClass, Signal.class, "Signal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSignal_Name(), ecorePackage.getEString(), "name", null, 0, 1, Signal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(inputSignalEClass, InputSignal.class, "InputSignal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(outputSignalEClass, OutputSignal.class, "OutputSignal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(stateEClass, State.class, "State", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getState_Name(), ecorePackage.getEString(), "name", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -449,11 +495,11 @@ public class StatemachinePackageImpl extends EPackageImpl implements Statemachin
 
     initEClass(eventEClass, Event.class, "Event", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEvent_Signal(), this.getSignal(), null, "signal", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEvent_State(), ecorePackage.getEBoolean(), "state", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEvent_Value(), ecorePackage.getEBoolean(), "value", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(commandEClass, Command.class, "Command", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getCommand_Signal(), this.getSignal(), null, "signal", null, 0, 1, Command.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getCommand_NewState(), ecorePackage.getEBoolean(), "newState", null, 0, 1, Command.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getCommand_NewValue(), ecorePackage.getEBoolean(), "newValue", null, 0, 1, Command.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

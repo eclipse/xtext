@@ -41,6 +41,24 @@ public interface StatemachineFactory extends EFactory
   Signal createSignal();
 
   /**
+   * Returns a new object of class '<em>Input Signal</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Input Signal</em>'.
+   * @generated
+   */
+  InputSignal createInputSignal();
+
+  /**
+   * Returns a new object of class '<em>Output Signal</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Output Signal</em>'.
+   * @generated
+   */
+  OutputSignal createOutputSignal();
+
+  /**
    * Returns a new object of class '<em>State</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

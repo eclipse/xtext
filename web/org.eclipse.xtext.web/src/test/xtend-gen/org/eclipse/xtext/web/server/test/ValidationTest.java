@@ -120,6 +120,42 @@ public class ValidationTest extends AbstractWebServerTest {
   }
   
   @Test
+  public void testCustomValidationError() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("ValidationResult [");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("entries = ArrayList (");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("Entry [");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("description = \"Only output signals are allowed for write access.\"");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("severity = \"error\"");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("line = 1");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("startOffset = 29");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("endOffset = 30");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append(")");
+    _builder.newLine();
+    _builder.append("]");
+    this.assertValidationResult("input signal x state foo set x = true end", _builder.toString());
+  }
+  
+  @Test
   public void testValidateFile() {
     try {
       final File file = this.createFile("stat foo end");
