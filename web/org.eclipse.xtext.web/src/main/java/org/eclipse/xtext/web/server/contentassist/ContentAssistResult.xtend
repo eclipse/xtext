@@ -12,6 +12,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend.lib.annotations.ToString
 import org.eclipse.xtext.web.server.IServiceResult
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
 @Accessors
 @ToString(skipNulls = true)
@@ -21,14 +22,12 @@ class ContentAssistResult implements IServiceResult {
 	
 	val entries = new ArrayList<Entry>
 	
-	@Data
+	@Accessors
+	@FinalFieldsConstructor
 	@ToString(skipNulls = true)
 	static class Entry {
-		/** The type identifier is used internally to group the proposals. */
-		@Accessors
-		transient String type
-		
-		String prefix
+		val String type
+		val String prefix
 		String proposal
 		String name
 		String description

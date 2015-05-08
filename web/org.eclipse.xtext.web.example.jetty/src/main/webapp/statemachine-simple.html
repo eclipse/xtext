@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Language" content="en-us">
+	<title>Xtext-Web Entities Example</title>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<script src="requirejs/require.js"></script>
+	<script type="text/javascript">
+		require({
+		  paths: {
+			  text: 'requirejs/text',
+			  i18n: 'requirejs/i18n',
+		      domReady: 'requirejs/domReady',
+		      jquery : 'jquery/jquery'
+		  }
+		});
+		require(["xtext/xtext"], function(xtext) {
+			xtext.createEditor();
+		});
+	</script>
+</head>
+<body>
+
+<div class="container">
+	<div class="xtext-editor"
+	    data-editor-lang="statemachine"
+	    data-editor-status-element="status"
+		data-editor-dirty-element="dirty-indicator"
+	><pre>
+/*
+ * A simple State Machine example.
+ */
+input signal x
+input signal y
+output signal z
+
+state State1
+	set z = false
+	if x == true goto State2
+end
+
+state State2
+	if x == false and y == true goto State1
+end</pre></div>
+	<div class="status-wrapper">
+		<div id="dirty-indicator">modified</div>
+		<div id="status">Welcome to Xtext-Web</div>
+	</div>
+</div>
+
+</body>
+</html>

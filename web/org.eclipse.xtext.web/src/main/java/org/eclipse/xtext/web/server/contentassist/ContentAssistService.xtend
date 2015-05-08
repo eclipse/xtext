@@ -10,9 +10,10 @@ package org.eclipse.xtext.web.server.contentassist
 import com.google.inject.Inject
 import com.google.inject.Provider
 import com.google.inject.Singleton
+import java.util.Collection
 import java.util.Collections
-import java.util.Comparator
 import java.util.HashSet
+import java.util.List
 import java.util.Set
 import java.util.concurrent.ExecutorService
 import org.eclipse.emf.ecore.EClass
@@ -21,6 +22,8 @@ import org.eclipse.xtext.Assignment
 import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.GrammarUtil
 import org.eclipse.xtext.Keyword
+import org.eclipse.xtext.RuleCall
+import org.eclipse.xtext.TerminalRule
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory
 import org.eclipse.xtext.scoping.IScopeProvider
@@ -34,6 +37,7 @@ import org.eclipse.xtext.xtext.CurrentTypeFinder
 class ContentAssistService {
 	
 	protected static val KEYWORD = 'keyword'
+	protected static val TERMINAL = 'terminal'
 	protected static val CROSSREF = 'crossref'
 	
 	@Inject Provider<ContentAssistContextFactory> contextFactoryProvider
@@ -91,19 +95,29 @@ class ContentAssistService {
 					}
 				}
 			}
-			result.entries.addAll(proposals)
-			Collections.sort(result.entries, proposalComparator)
+			result.entries.addAll(proposals.filter)
+			result.entries.sort
 		}
 		return result
 	}
 	
-	protected def Comparator<? super ContentAssistResult.Entry> getProposalComparator() {
-		[a, b |
+	protected def filter(Collection<ContentAssistResult.Entry> proposals) {
+		proposals.filter[
+			switch type {
+				case KEYWORD:
+					proposals.size == 1 || Character.isLetter(proposal.charAt(0))
+				default: true
+			}
+		]
+	}
+	
+	protected def sort(List<ContentAssistResult.Entry> proposals) {
+		Collections.sort(proposals, [a, b |
 			if (a.type == b.type)
 				a.proposal.compareTo(b.proposal)
 			else
 				a.type.compareTo(b.type)
-		]
+		])
 	}
 
 	protected def dispatch void createProposal(AbstractElement element, ContentAssistContext context,
@@ -111,19 +125,47 @@ class ContentAssistService {
 		// not supported
 	}
 	
+	protected def dispatch void createProposal(Assignment assignment, ContentAssistContext context,
+			Set<ContentAssistResult.Entry> proposals) {
+		if (assignment.terminal instanceof CrossReference)
+			createProposal(assignment.terminal, context, proposals)
+	}
+	
 	protected def dispatch void createProposal(Keyword keyword, ContentAssistContext context,
 			Set<ContentAssistResult.Entry> proposals) {
 		val value = keyword.value
-		if (value.startsWith(context.prefix) && value.length > 1 && Character.isLetter(value.charAt(0))) {
-			val entry = new ContentAssistResult.Entry(context.prefix, keyword.value, null, null, null)
-			entry.type = KEYWORD
-			proposals += entry
+		if (value.startsWith(context.prefix)) {
+			proposals += new ContentAssistResult.Entry(KEYWORD, context.prefix) => [
+				proposal = keyword.value
+			]
 		}
 	}
 	
-	protected def dispatch void createProposal(Assignment assignment, ContentAssistContext context,
+	protected def dispatch void createProposal(RuleCall ruleCall, ContentAssistContext context,
 			Set<ContentAssistResult.Entry> proposals) {
-		createProposal(assignment.terminal, context, proposals)
+		if (ruleCall.rule instanceof TerminalRule && context.prefix.empty) {
+			proposals += new ContentAssistResult.Entry(TERMINAL, context.prefix) => [
+				if (ruleCall.rule.name == 'STRING') {
+					val container = ruleCall.eContainer
+					if (container instanceof Assignment) {
+						proposal = '"' + container.feature + '"'
+						description = ruleCall.rule.name
+					} else {
+						proposal = '"' + ruleCall.rule.name + '"'
+					}
+					editPositions += new ContentAssistResult.EditPosition(context.offset + 1, proposal.length - 2)
+				} else {
+					val container = ruleCall.eContainer
+					if (container instanceof Assignment) {
+						proposal = container.feature
+						description = ruleCall.rule.name
+					} else {
+						proposal = ruleCall.rule.name
+					}
+					editPositions += new ContentAssistResult.EditPosition(context.offset, proposal.length)
+				}
+			]
+		}
 	}
 	
 	protected def dispatch void createProposal(CrossReference reference, ContentAssistContext context,
@@ -135,13 +177,12 @@ class ContentAssistService {
 				val scope = scopeProvider.getScope(context.currentModel, ereference)
 				try {
 					for (description : scope.allElements) {
-						var String name = description.name.toString
-						if (!name.startsWith(context.prefix))
-							name = description.qualifiedName.toString
-						if (name.startsWith(context.prefix)) {
-							val entry = new ContentAssistResult.Entry(context.prefix, name, null, description.EClass.name, null)
-							entry.type = CROSSREF
-							proposals += entry
+						val String elementName = description.name.toString
+						if (elementName.startsWith(context.prefix)) {
+							proposals += new ContentAssistResult.Entry(CROSSREF, context.prefix) => [
+								proposal = elementName
+								description = description.EClass.name
+							]
 						}
 					}
 				} catch (UnsupportedOperationException uoe) {

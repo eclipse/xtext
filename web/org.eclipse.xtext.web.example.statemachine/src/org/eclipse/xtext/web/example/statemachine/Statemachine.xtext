@@ -19,9 +19,11 @@ Signal:
 	(InputSignal | OutputSignal) 'signal' name=ID;
 
 InputSignal:
+	{InputSignal}
 	'input';
 
 OutputSignal:
+	{OutputSignal}
 	'output';
 
 State:
@@ -37,10 +39,10 @@ Condition:
 	events+=Event ('and' events+=Event)*;
 
 Event:
-	signal=[Signal] '==' state=BOOLEAN;
+	signal=[Signal] '==' value=BOOLEAN;
 
 Command:
-	'set' signal=[Signal] '=' newState=BOOLEAN;
+	'set' signal=[Signal] '=' newValue=BOOLEAN;
 
 terminal BOOLEAN returns ecore::EBoolean:
 	'true' | 'false';

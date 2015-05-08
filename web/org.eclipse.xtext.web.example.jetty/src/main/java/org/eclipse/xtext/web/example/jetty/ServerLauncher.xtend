@@ -10,6 +10,7 @@ package org.eclipse.xtext.web.example.jetty
 import java.net.InetSocketAddress
 import org.eclipse.jetty.annotations.AnnotationConfiguration
 import org.eclipse.jetty.server.Server
+import org.eclipse.jetty.util.log.Slf4jLog
 import org.eclipse.jetty.webapp.MetaInfConfiguration
 import org.eclipse.jetty.webapp.WebAppContext
 import org.eclipse.jetty.webapp.WebInfConfiguration
@@ -31,7 +32,15 @@ class ServerLauncher {
 			]
 			setAttribute(WebInfConfiguration.CONTAINER_JAR_PATTERN, ".*org\\.eclipse\\.xtext\\.web.*")
 		]
+		val log = new Slf4jLog
 		server.start
+		log.info('Press enter to stop the server...')
+		new Thread[
+	    	val key = System.in.read
+	    	server.stop
+	    	if (key == -1)
+	    		log.warn('The standard input stream is empty.')
+	    ].start
 		server.join
 	}
 
