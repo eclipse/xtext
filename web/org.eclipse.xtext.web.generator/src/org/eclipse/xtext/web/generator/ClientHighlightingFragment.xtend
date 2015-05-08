@@ -31,6 +31,9 @@ class ClientHighlightingFragment extends Xtend2GeneratorFragment {
 	@Accessors
 	String javaScriptPath
 	
+	@Accessors
+	String keywordsFilter = '\\w*'
+	
 	override generate(LanguageConfig config, XpandExecutionContext ctx) {
 		langId = config.getFileExtensions(config.grammar).head
 		grammar = config.grammar
@@ -75,11 +78,15 @@ class ClientHighlightingFragment extends Xtend2GeneratorFragment {
 		writer.close
 	}
 	
-	protected def generateJavaScript(Collection<String> keywords) '''
+	protected def generateJavaScript(Collection<String> keywords) {
+		val filteredKeywords = keywords.filter[matches(keywordsFilter)]
+		'''
 		define("xtext/«langId»-syntax", ["orion/editor/stylers/lib/syntax"], function(mLib) {
-			var keywords = [
-				«FOR kw : keywords.filter[matches('\\w*')].sort SEPARATOR ', '»"«kw»"«ENDFOR»
-			];
+			«IF !filteredKeywords.empty»
+				var keywords = [
+					«FOR kw : filteredKeywords.sort SEPARATOR ', '»"«kw»"«ENDFOR»
+				];
+			«ENDIF»
 		
 			var grammars = [];
 			grammars.push.apply(grammars, mLib.grammars);
@@ -109,10 +116,12 @@ class ClientHighlightingFragment extends Xtend2GeneratorFragment {
 						{include: "orion.lib#parenthesis_open"},
 						{include: "orion.lib#parenthesis_close"},
 					«ENDIF»
-					{
-						match: "\\b(?:" + keywords.join("|") + ")\\b",
-						name: "keyword.operator.«langId»"
-					}
+					«IF !filteredKeywords.empty»
+						{
+							match: "\\b(?:" + keywords.join("|") + ")\\b",
+							name: "keyword.operator.«langId»"
+						}
+					«ENDIF»
 				]
 			});
 		
@@ -122,6 +131,7 @@ class ClientHighlightingFragment extends Xtend2GeneratorFragment {
 				keywords: keywords
 			};
 		});
-	'''
+		'''
+	}
 	
 }

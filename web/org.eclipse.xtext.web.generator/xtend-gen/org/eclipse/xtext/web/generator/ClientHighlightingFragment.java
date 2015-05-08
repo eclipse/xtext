@@ -46,6 +46,9 @@ public class ClientHighlightingFragment extends Xtend2GeneratorFragment {
   @Accessors
   private String javaScriptPath;
   
+  @Accessors
+  private String keywordsFilter = "\\w*";
+  
   @Override
   public void generate(final LanguageConfig config, final XpandExecutionContext ctx) {
     Grammar _grammar = config.getGrammar();
@@ -120,193 +123,212 @@ public class ClientHighlightingFragment extends Xtend2GeneratorFragment {
   }
   
   protected CharSequence generateJavaScript(final Collection<String> keywords) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("define(\"xtext/");
-    _builder.append(this.langId, "");
-    _builder.append("-syntax\", [\"orion/editor/stylers/lib/syntax\"], function(mLib) {");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("var keywords = [");
-    _builder.newLine();
-    _builder.append("\t\t");
+    CharSequence _xblockexpression = null;
     {
       final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
         @Override
         public Boolean apply(final String it) {
-          return Boolean.valueOf(it.matches("\\w*"));
+          return Boolean.valueOf(it.matches(ClientHighlightingFragment.this.keywordsFilter));
         }
       };
-      Iterable<String> _filter = IterableExtensions.<String>filter(keywords, _function);
-      List<String> _sort = IterableExtensions.<String>sort(_filter);
-      boolean _hasElements = false;
-      for(final String kw : _sort) {
-        if (!_hasElements) {
-          _hasElements = true;
-        } else {
-          _builder.appendImmediate(", ", "\t\t");
+      final Iterable<String> filteredKeywords = IterableExtensions.<String>filter(keywords, _function);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("define(\"xtext/");
+      _builder.append(this.langId, "");
+      _builder.append("-syntax\", [\"orion/editor/stylers/lib/syntax\"], function(mLib) {");
+      _builder.newLineIfNotEmpty();
+      {
+        boolean _isEmpty = IterableExtensions.isEmpty(filteredKeywords);
+        boolean _not = (!_isEmpty);
+        if (_not) {
+          _builder.append("\t");
+          _builder.append("var keywords = [");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\t");
+          {
+            List<String> _sort = IterableExtensions.<String>sort(filteredKeywords);
+            boolean _hasElements = false;
+            for(final String kw : _sort) {
+              if (!_hasElements) {
+                _hasElements = true;
+              } else {
+                _builder.appendImmediate(", ", "\t\t");
+              }
+              _builder.append("\"");
+              _builder.append(kw, "\t\t");
+              _builder.append("\"");
+            }
+          }
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("];");
+          _builder.newLine();
         }
-        _builder.append("\"");
-        _builder.append(kw, "\t\t");
-        _builder.append("\"");
       }
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var grammars = [];");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("grammars.push.apply(grammars, mLib.grammars);");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("grammars.push({");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("id: \"xtext.");
+      _builder.append(this.langId, "\t\t");
+      _builder.append("\",");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t\t");
+      _builder.append("contentTypes: [\"xtext/");
+      _builder.append(this.langId, "\t\t");
+      _builder.append("\"],");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t\t");
+      _builder.append("patterns: [");
+      _builder.newLine();
+      {
+        boolean _or = false;
+        boolean _inherits = this.inherits(this.grammar, ClientHighlightingFragment.TERMINALS);
+        if (_inherits) {
+          _or = true;
+        } else {
+          boolean _inherits_1 = this.inherits(this.grammar, ClientHighlightingFragment.XBASE);
+          _or = _inherits_1;
+        }
+        if (_or) {
+          _builder.append("\t\t\t");
+          _builder.append("{include: \"orion.lib#string_doubleQuote\"},");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("{include: \"orion.lib#string_singleQuote\"},");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("{include: \"orion.c-like#comment_singleLine\"},");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("{include: \"orion.c-like#comment_block\"},");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("{include: \"orion.lib#number_decimal\"},");
+          _builder.newLine();
+        }
+      }
+      {
+        boolean _inherits_2 = this.inherits(this.grammar, ClientHighlightingFragment.XBASE);
+        if (_inherits_2) {
+          _builder.append("\t\t\t");
+          _builder.append("{include: \"orion.lib#number_hex\"},");
+          _builder.newLine();
+        }
+      }
+      {
+        boolean _and = false;
+        boolean _contains = keywords.contains("{");
+        if (!_contains) {
+          _and = false;
+        } else {
+          boolean _contains_1 = keywords.contains("}");
+          _and = _contains_1;
+        }
+        if (_and) {
+          _builder.append("\t\t\t");
+          _builder.append("{include: \"orion.lib#brace_open\"},");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("{include: \"orion.lib#brace_close\"},");
+          _builder.newLine();
+        }
+      }
+      {
+        boolean _and_1 = false;
+        boolean _contains_2 = keywords.contains("[");
+        if (!_contains_2) {
+          _and_1 = false;
+        } else {
+          boolean _contains_3 = keywords.contains("]");
+          _and_1 = _contains_3;
+        }
+        if (_and_1) {
+          _builder.append("\t\t\t");
+          _builder.append("{include: \"orion.lib#bracket_open\"},");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("{include: \"orion.lib#bracket_close\"},");
+          _builder.newLine();
+        }
+      }
+      {
+        boolean _and_2 = false;
+        boolean _contains_4 = keywords.contains("(");
+        if (!_contains_4) {
+          _and_2 = false;
+        } else {
+          boolean _contains_5 = keywords.contains(")");
+          _and_2 = _contains_5;
+        }
+        if (_and_2) {
+          _builder.append("\t\t\t");
+          _builder.append("{include: \"orion.lib#parenthesis_open\"},");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("{include: \"orion.lib#parenthesis_close\"},");
+          _builder.newLine();
+        }
+      }
+      {
+        boolean _isEmpty_1 = IterableExtensions.isEmpty(filteredKeywords);
+        boolean _not_1 = (!_isEmpty_1);
+        if (_not_1) {
+          _builder.append("\t\t\t");
+          _builder.append("{");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t");
+          _builder.append("match: \"\\\\b(?:\" + keywords.join(\"|\") + \")\\\\b\",");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t");
+          _builder.append("name: \"keyword.operator.");
+          _builder.append(this.langId, "\t\t\t\t");
+          _builder.append("\"");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t\t");
+          _builder.append("}");
+          _builder.newLine();
+        }
+      }
+      _builder.append("\t\t");
+      _builder.append("]");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("});");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("return {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("id: \"xtext.");
+      _builder.append(this.langId, "\t\t");
+      _builder.append("\",");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t\t");
+      _builder.append("grammars: grammars,");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("keywords: keywords");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("};");
+      _builder.newLine();
+      _builder.append("});");
+      _builder.newLine();
+      _xblockexpression = _builder;
     }
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("];");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("var grammars = [];");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("grammars.push.apply(grammars, mLib.grammars);");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("grammars.push({");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("id: \"xtext.");
-    _builder.append(this.langId, "\t\t");
-    _builder.append("\",");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
-    _builder.append("contentTypes: [\"xtext/");
-    _builder.append(this.langId, "\t\t");
-    _builder.append("\"],");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
-    _builder.append("patterns: [");
-    _builder.newLine();
-    {
-      boolean _or = false;
-      boolean _inherits = this.inherits(this.grammar, ClientHighlightingFragment.TERMINALS);
-      if (_inherits) {
-        _or = true;
-      } else {
-        boolean _inherits_1 = this.inherits(this.grammar, ClientHighlightingFragment.XBASE);
-        _or = _inherits_1;
-      }
-      if (_or) {
-        _builder.append("\t\t\t");
-        _builder.append("{include: \"orion.lib#string_doubleQuote\"},");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("{include: \"orion.lib#string_singleQuote\"},");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("{include: \"orion.c-like#comment_singleLine\"},");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("{include: \"orion.c-like#comment_block\"},");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("{include: \"orion.lib#number_decimal\"},");
-        _builder.newLine();
-      }
-    }
-    {
-      boolean _inherits_2 = this.inherits(this.grammar, ClientHighlightingFragment.XBASE);
-      if (_inherits_2) {
-        _builder.append("\t\t\t");
-        _builder.append("{include: \"orion.lib#number_hex\"},");
-        _builder.newLine();
-      }
-    }
-    {
-      boolean _and = false;
-      boolean _contains = keywords.contains("{");
-      if (!_contains) {
-        _and = false;
-      } else {
-        boolean _contains_1 = keywords.contains("}");
-        _and = _contains_1;
-      }
-      if (_and) {
-        _builder.append("\t\t\t");
-        _builder.append("{include: \"orion.lib#brace_open\"},");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("{include: \"orion.lib#brace_close\"},");
-        _builder.newLine();
-      }
-    }
-    {
-      boolean _and_1 = false;
-      boolean _contains_2 = keywords.contains("[");
-      if (!_contains_2) {
-        _and_1 = false;
-      } else {
-        boolean _contains_3 = keywords.contains("]");
-        _and_1 = _contains_3;
-      }
-      if (_and_1) {
-        _builder.append("\t\t\t");
-        _builder.append("{include: \"orion.lib#bracket_open\"},");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("{include: \"orion.lib#bracket_close\"},");
-        _builder.newLine();
-      }
-    }
-    {
-      boolean _and_2 = false;
-      boolean _contains_4 = keywords.contains("(");
-      if (!_contains_4) {
-        _and_2 = false;
-      } else {
-        boolean _contains_5 = keywords.contains(")");
-        _and_2 = _contains_5;
-      }
-      if (_and_2) {
-        _builder.append("\t\t\t");
-        _builder.append("{include: \"orion.lib#parenthesis_open\"},");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("{include: \"orion.lib#parenthesis_close\"},");
-        _builder.newLine();
-      }
-    }
-    _builder.append("\t\t\t");
-    _builder.append("{");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("match: \"\\\\b(?:\" + keywords.join(\"|\") + \")\\\\b\",");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("name: \"keyword.operator.");
-    _builder.append(this.langId, "\t\t\t\t");
-    _builder.append("\"");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("]");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("});");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("return {");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("id: \"xtext.");
-    _builder.append(this.langId, "\t\t");
-    _builder.append("\",");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
-    _builder.append("grammars: grammars,");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("keywords: keywords");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("};");
-    _builder.newLine();
-    _builder.append("});");
-    _builder.newLine();
-    return _builder;
+    return _xblockexpression;
   }
   
   @Pure
@@ -316,5 +338,14 @@ public class ClientHighlightingFragment extends Xtend2GeneratorFragment {
   
   public void setJavaScriptPath(final String javaScriptPath) {
     this.javaScriptPath = javaScriptPath;
+  }
+  
+  @Pure
+  public String getKeywordsFilter() {
+    return this.keywordsFilter;
+  }
+  
+  public void setKeywordsFilter(final String keywordsFilter) {
+    this.keywordsFilter = keywordsFilter;
   }
 }
