@@ -29,11 +29,12 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 			https://gradle.org/docs/current/userguide/installation.html
 			
 			The following tasks are available:
-			 eclipse - generates Eclipse metadata like .project and .classpath
-			 jettyRun - starts a server with an example editor
+			  eclipse - generates Eclipse metadata like .project and .classpath
+			  jettyRun - starts a server with an example editor
 			
 			While the server is running, point your web browser to http://localhost:8080
-			to test the editor for your language.
+			to test the editor for your language. The server can also be started from
+			Eclipse with the ServerLauncher class (right-click > Run As > Java Application).
 		'''.writeToFile(fc, 'readme.txt')
 	}
 
@@ -82,10 +83,6 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 		'''.writeToFile(fc, 'src/main/webapp/index.html')
 
 		'''
-			html {
-				height: 100%;
-			}
-			
 			body {
 				width: 100%;
 				height: 100%;
@@ -105,10 +102,10 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 			.container {
 				display: block;
 				position: absolute;
-				   top: 0;
-				   bottom: 0;
-				   left: 0;
-				   right: 0;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
 				margin: 20px;
 			}
 			
@@ -129,16 +126,16 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 				top: 90px;
 				bottom: 0;
 				left: 0;
-				   width: 640px;
+				width: 640px;
 			}
 			
 			.xtext-editor {
 				display: block;
 				position: absolute;
-				   top: 0;
-				   bottom: 0;
-				   left: 0;
-				   right: 0;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
 				padding: 4px;
 				border: 1px solid #aaa;
 			}
@@ -157,12 +154,13 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 
 	def contributeGradleFiles(IFileCreator fc) {
 		'''
-			apply plugin: 'eclipse'
-			apply plugin: 'war'
-			
-			sourceSets {
-				main.java.srcDir 'src/main/xtend-gen'
+			plugins {
+				id 'org.xtend.xtend' version '0.4.7'
+				id 'eclipse'
+				id 'war'
 			}
+			
+			sourceSets.main.xtendOutputDir = 'src/main/xtend-gen'
 			
 			dependencies {
 				compile group: 'org.eclipse.xtend', name: 'org.eclipse.xtend.lib', version: '2.9.+'
@@ -177,12 +175,12 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 				dependsOn(sourceSets.main.runtimeClasspath)
 				classpath = sourceSets.main.runtimeClasspath.filter{it.exists()}
 				main = "«projectInfo.basePackage».«WEB».ServerLauncher"
+				standardInput = System.in
 			}
 			
 			allprojects {
 				repositories { 
 					jcenter()
-					mavenLocal()
 					maven {
 						url "https://oss.sonatype.org/content/repositories/snapshots/"
 					}
@@ -224,6 +222,7 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 			import java.net.InetSocketAddress
 			import org.eclipse.jetty.annotations.AnnotationConfiguration
 			import org.eclipse.jetty.server.Server
+			import org.eclipse.jetty.util.log.Slf4jLog
 			import org.eclipse.jetty.webapp.MetaInfConfiguration
 			import org.eclipse.jetty.webapp.WebAppContext
 			import org.eclipse.jetty.webapp.WebInfConfiguration
@@ -244,7 +243,15 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 						]
 						setAttribute(WebInfConfiguration.CONTAINER_JAR_PATTERN, ".*org\\.eclipse\\.xtext\\.web.*|.*«projectInfo.webProjectName.replaceAll('\\.','\\\\\\\\.')».*")
 					]
+					val log = new Slf4jLog
 					server.start
+					log.info('Press enter to stop the server...')
+					new Thread[
+				    	val key = System.in.read
+				    	server.stop
+				    	if (key == -1)
+				    		log.warn('The standard input stream is empty. If you are using Gradle, set the property \'standardInput = System.in\' in the JavaExec task.')
+				    ].start
 					server.join
 				}
 			}
@@ -303,15 +310,12 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 			import org.eclipse.xtext.service.AbstractGenericModule
 			import «projectInfo.basePackage».ide.contentassist.antlr.«projectInfo.languageNameAbbreviation»Parser
 			import «projectInfo.basePackage».ide.contentassist.antlr.internal.Internal«projectInfo.languageNameAbbreviation»Lexer
-			import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider
 			
 			@Accessors
 			@FinalFieldsConstructor
 			class «projectInfo.languageNameAbbreviation»WebModule extends AbstractGenericModule {
 			
 				val ExecutorService executorService
-			
-				IResourceBaseProvider resourceBaseProvider
 			
 				def configureExecutorService(Binder binder) {
 					binder.bind(ExecutorService).toInstance(executorService)
@@ -323,15 +327,6 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 			
 				def Class<? extends IContentAssistParser> bindIContentAssistParser() {
 					«projectInfo.languageNameAbbreviation»Parser
-				}
-			
-			//	def Class<? extends IServerResourceHandler> bindIServerResourceHandler() {
-			//		FileResourceHandler
-			//	}
-			
-				def configureResourceBaseProvider(Binder binder) {
-					if (resourceBaseProvider !== null)
-						binder.bind(IResourceBaseProvider).toInstance(resourceBaseProvider)
 				}
 			
 			}
