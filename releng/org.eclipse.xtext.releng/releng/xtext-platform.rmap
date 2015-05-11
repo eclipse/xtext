@@ -12,7 +12,7 @@
   <rm:property key="maven.repository.uri" value="http://repo.maven.apache.org/maven2"/>
   <rm:property key="xtext.p2.repository" value="${eclipse.download}/modeling/tmf/xtext/updates/milestones/"/>
   
-  <rm:property key="orbit.p2.repository" value="${eclipse.download}/modeling/tmf/xtext/updates/orbit"/>
+  <rm:property key="orbit.p2.repository" value="${eclipse.download}/modeling/tmf/xtext/updates/orbit/maintenance"/>
   <rm:property key="antlr_gen.p2.repository" value="http://download.itemis.de/updates/releases/2.0.0"/>
   <rm:property key="jdt_annotation.p2.repository" value="${eclipse.download}/eclipse/updates/3.8"/>
 
