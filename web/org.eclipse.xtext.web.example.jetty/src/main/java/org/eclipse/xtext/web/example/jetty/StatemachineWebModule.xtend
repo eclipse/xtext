@@ -16,8 +16,10 @@ import org.eclipse.xtext.ide.LexerIdeBindings
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer
 import org.eclipse.xtext.service.AbstractGenericModule
+import org.eclipse.xtext.web.example.jetty.contentassist.StatemachineWebContentProposalProvider
 import org.eclipse.xtext.web.example.statemachine.ide.contentassist.antlr.StatemachineParser
 import org.eclipse.xtext.web.example.statemachine.ide.contentassist.antlr.internal.InternalStatemachineLexer
+import org.eclipse.xtext.web.server.contentassist.WebContentProposalProvider
 import org.eclipse.xtext.web.server.persistence.FileResourceHandler
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler
@@ -40,6 +42,10 @@ class StatemachineWebModule extends AbstractGenericModule {
 	
 	def Class<? extends IContentAssistParser> bindIContentAssistParser() {
 		StatemachineParser
+	}
+	
+	def Class<? extends WebContentProposalProvider> bindWebContentProposalProvider() {
+		StatemachineWebContentProposalProvider
 	}
 	
 	def Class<? extends IServerResourceHandler> bindIServerResourceHandler() {

@@ -18,6 +18,12 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 @ToString(skipNulls = true)
 class ContentAssistResult implements IServiceResult {
 	
+	public static val KEYWORD = 'keyword'
+	public static val PARSER_RULE = 'parser-rule'
+	public static val FEATURE = 'feature'
+	public static val TERMINAL = 'terminal'
+	public static val CROSSREF = 'cross-ref'
+	
 	String stateId
 	
 	val entries = new ArrayList<Entry>
@@ -26,6 +32,7 @@ class ContentAssistResult implements IServiceResult {
 	@FinalFieldsConstructor
 	@ToString(skipNulls = true)
 	static class Entry {
+		/** One of the constants defined in {@link ContentAssistResult} */
 		val String type
 		val String prefix
 		String proposal
@@ -33,6 +40,7 @@ class ContentAssistResult implements IServiceResult {
 		String description
 		/** Available styles: 'default', 'emphasis', 'noemphasis', 'hr' */
 		String style
+		int escapePosition
 		val textReplacements = new ArrayList<TextReplacement>
 		val editPositions = new ArrayList<EditPosition>
 	}

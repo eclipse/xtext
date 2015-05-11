@@ -24,6 +24,9 @@ public class ContentAssistResult implements IServiceResult {
   @FinalFieldsConstructor
   @ToString(skipNulls = true)
   public static class Entry {
+    /**
+     * One of the constants defined in {@link ContentAssistResult}
+     */
     private final String type;
     
     private final String prefix;
@@ -38,6 +41,8 @@ public class ContentAssistResult implements IServiceResult {
      * Available styles: 'default', 'emphasis', 'noemphasis', 'hr'
      */
     private String style;
+    
+    private int escapePosition;
     
     private final ArrayList<ContentAssistResult.TextReplacement> textReplacements = new ArrayList<ContentAssistResult.TextReplacement>();
     
@@ -96,6 +101,15 @@ public class ContentAssistResult implements IServiceResult {
     }
     
     @Pure
+    public int getEscapePosition() {
+      return this.escapePosition;
+    }
+    
+    public void setEscapePosition(final int escapePosition) {
+      this.escapePosition = escapePosition;
+    }
+    
+    @Pure
     public ArrayList<ContentAssistResult.TextReplacement> getTextReplacements() {
       return this.textReplacements;
     }
@@ -116,6 +130,7 @@ public class ContentAssistResult implements IServiceResult {
       b.add("name", this.name);
       b.add("description", this.description);
       b.add("style", this.style);
+      b.add("escapePosition", this.escapePosition);
       b.add("textReplacements", this.textReplacements);
       b.add("editPositions", this.editPositions);
       return b.toString();
@@ -254,6 +269,16 @@ public class ContentAssistResult implements IServiceResult {
       return this.length;
     }
   }
+  
+  public final static String KEYWORD = "keyword";
+  
+  public final static String PARSER_RULE = "parser-rule";
+  
+  public final static String FEATURE = "feature";
+  
+  public final static String TERMINAL = "terminal";
+  
+  public final static String CROSSREF = "cross-ref";
   
   private String stateId;
   

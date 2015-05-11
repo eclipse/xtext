@@ -8,71 +8,47 @@
 package org.eclipse.xtext.web.server.contentassist;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.ExecutorService;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory;
-import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
+import org.eclipse.xtext.web.server.contentassist.WebContentProposalProvider;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 import org.eclipse.xtext.web.server.model.UpdateDocumentService;
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess;
 import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xtext.CurrentTypeFinder;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @Singleton
 @SuppressWarnings("all")
 public class ContentAssistService {
-  protected final static String KEYWORD = "keyword";
-  
-  protected final static String TERMINAL = "terminal";
-  
-  protected final static String CROSSREF = "crossref";
-  
   @Inject
   private Provider<ContentAssistContextFactory> contextFactoryProvider;
   
   @Inject
-  private IScopeProvider scopeProvider;
+  private WebContentProposalProvider proposalProvider;
   
   @Inject
   private ExecutorService executorService;
@@ -80,10 +56,6 @@ public class ContentAssistService {
   @Inject
   @Extension
   private UpdateDocumentService _updateDocumentService;
-  
-  @Inject
-  @Extension
-  private CurrentTypeFinder _currentTypeFinder;
   
   public ContentAssistResult createProposals(final XtextWebDocumentAccess document, final ITextRegion selection, final int offset) throws InvalidRequestException {
     ContentAssistContextFactory _get = this.contextFactoryProvider.get();
@@ -168,28 +140,32 @@ public class ContentAssistService {
     boolean _not = (!_isEmpty);
     if (_not) {
       final HashSet<ContentAssistResult.Entry> proposals = new HashSet<ContentAssistResult.Entry>();
-      final Function1<ContentAssistContext, String> _function = new Function1<ContentAssistContext, String>() {
+      final IAcceptor<ContentAssistResult.Entry> _function = new IAcceptor<ContentAssistResult.Entry>() {
+        @Override
+        public void accept(final ContentAssistResult.Entry it) {
+          proposals.add(it);
+        }
+      };
+      final IAcceptor<ContentAssistResult.Entry> acceptor = _function;
+      final Function1<ContentAssistContext, String> _function_1 = new Function1<ContentAssistContext, String>() {
         @Override
         public String apply(final ContentAssistContext it) {
           return it.getPrefix();
         }
       };
-      List<String> _map = ListExtensions.<ContentAssistContext, String>map(((List<ContentAssistContext>)Conversions.doWrapArray(contexts)), _function);
-      final Function1<String, Integer> _function_1 = new Function1<String, Integer>() {
+      List<String> _map = ListExtensions.<ContentAssistContext, String>map(((List<ContentAssistContext>)Conversions.doWrapArray(contexts)), _function_1);
+      final Function1<String, Integer> _function_2 = new Function1<String, Integer>() {
         @Override
         public Integer apply(final String it) {
           return Integer.valueOf(it.length());
         }
       };
-      final String longestPrefix = IterableExtensions.<String, Integer>maxBy(_map, _function_1);
+      final String longestPrefix = IterableExtensions.<String, Integer>maxBy(_map, _function_2);
       for (final ContentAssistContext context : contexts) {
         String _prefix = context.getPrefix();
         boolean _equals = Objects.equal(_prefix, longestPrefix);
         if (_equals) {
-          ImmutableList<AbstractElement> _firstSetGrammarElements = context.getFirstSetGrammarElements();
-          for (final AbstractElement element : _firstSetGrammarElements) {
-            this.createProposal(element, context, proposals);
-          }
+          this.proposalProvider.createProposals(context, acceptor);
         }
       }
       ArrayList<ContentAssistResult.Entry> _entries = result.getEntries();
@@ -205,30 +181,49 @@ public class ContentAssistService {
     final Function1<ContentAssistResult.Entry, Boolean> _function = new Function1<ContentAssistResult.Entry, Boolean>() {
       @Override
       public Boolean apply(final ContentAssistResult.Entry it) {
-        boolean _switchResult = false;
-        String _type = it.getType();
-        boolean _matched = false;
-        if (!_matched) {
-          if (Objects.equal(_type, ContentAssistService.KEYWORD)) {
-            _matched=true;
-            boolean _or = false;
-            int _size = proposals.size();
-            boolean _equals = (_size == 1);
-            if (_equals) {
-              _or = true;
-            } else {
-              String _proposal = it.getProposal();
-              char _charAt = _proposal.charAt(0);
-              boolean _isLetter = Character.isLetter(_charAt);
-              _or = _isLetter;
-            }
-            _switchResult = _or;
+        boolean _xblockexpression = false;
+        {
+          boolean _or = false;
+          String _proposal = it.getProposal();
+          boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_proposal);
+          if (_isNullOrEmpty) {
+            _or = true;
+          } else {
+            String _proposal_1 = it.getProposal();
+            String _prefix = it.getPrefix();
+            boolean _startsWith = _proposal_1.startsWith(_prefix);
+            boolean _not = (!_startsWith);
+            _or = _not;
           }
+          if (_or) {
+            return Boolean.valueOf(false);
+          }
+          boolean _switchResult = false;
+          String _type = it.getType();
+          boolean _matched = false;
+          if (!_matched) {
+            if (Objects.equal(_type, ContentAssistResult.KEYWORD)) {
+              _matched=true;
+              boolean _or_1 = false;
+              int _size = proposals.size();
+              boolean _equals = (_size == 1);
+              if (_equals) {
+                _or_1 = true;
+              } else {
+                String _proposal_2 = it.getProposal();
+                char _charAt = _proposal_2.charAt(0);
+                boolean _isLetter = Character.isLetter(_charAt);
+                _or_1 = _isLetter;
+              }
+              _switchResult = _or_1;
+            }
+          }
+          if (!_matched) {
+            _switchResult = true;
+          }
+          _xblockexpression = _switchResult;
         }
-        if (!_matched) {
-          _switchResult = true;
-        }
-        return Boolean.valueOf(_switchResult);
+        return Boolean.valueOf(_xblockexpression);
       }
     };
     return IterableExtensions.<ContentAssistResult.Entry>filter(proposals, _function);
@@ -255,172 +250,5 @@ public class ContentAssistService {
       }
     };
     Collections.<ContentAssistResult.Entry>sort(proposals, _function);
-  }
-  
-  protected void _createProposal(final AbstractElement element, final ContentAssistContext context, final Set<ContentAssistResult.Entry> proposals) {
-  }
-  
-  protected void _createProposal(final Assignment assignment, final ContentAssistContext context, final Set<ContentAssistResult.Entry> proposals) {
-    AbstractElement _terminal = assignment.getTerminal();
-    if ((_terminal instanceof CrossReference)) {
-      AbstractElement _terminal_1 = assignment.getTerminal();
-      this.createProposal(_terminal_1, context, proposals);
-    }
-  }
-  
-  protected void _createProposal(final Keyword keyword, final ContentAssistContext context, final Set<ContentAssistResult.Entry> proposals) {
-    final String value = keyword.getValue();
-    String _prefix = context.getPrefix();
-    boolean _startsWith = value.startsWith(_prefix);
-    if (_startsWith) {
-      String _prefix_1 = context.getPrefix();
-      ContentAssistResult.Entry _entry = new ContentAssistResult.Entry(ContentAssistService.KEYWORD, _prefix_1);
-      final Procedure1<ContentAssistResult.Entry> _function = new Procedure1<ContentAssistResult.Entry>() {
-        @Override
-        public void apply(final ContentAssistResult.Entry it) {
-          String _value = keyword.getValue();
-          it.setProposal(_value);
-        }
-      };
-      ContentAssistResult.Entry _doubleArrow = ObjectExtensions.<ContentAssistResult.Entry>operator_doubleArrow(_entry, _function);
-      proposals.add(_doubleArrow);
-    }
-  }
-  
-  protected void _createProposal(final RuleCall ruleCall, final ContentAssistContext context, final Set<ContentAssistResult.Entry> proposals) {
-    boolean _and = false;
-    AbstractRule _rule = ruleCall.getRule();
-    if (!(_rule instanceof TerminalRule)) {
-      _and = false;
-    } else {
-      String _prefix = context.getPrefix();
-      boolean _isEmpty = _prefix.isEmpty();
-      _and = _isEmpty;
-    }
-    if (_and) {
-      String _prefix_1 = context.getPrefix();
-      ContentAssistResult.Entry _entry = new ContentAssistResult.Entry(ContentAssistService.TERMINAL, _prefix_1);
-      final Procedure1<ContentAssistResult.Entry> _function = new Procedure1<ContentAssistResult.Entry>() {
-        @Override
-        public void apply(final ContentAssistResult.Entry it) {
-          AbstractRule _rule = ruleCall.getRule();
-          String _name = _rule.getName();
-          boolean _equals = Objects.equal(_name, "STRING");
-          if (_equals) {
-            final EObject container = ruleCall.eContainer();
-            if ((container instanceof Assignment)) {
-              String _feature = ((Assignment)container).getFeature();
-              String _plus = ("\"" + _feature);
-              String _plus_1 = (_plus + "\"");
-              it.setProposal(_plus_1);
-              AbstractRule _rule_1 = ruleCall.getRule();
-              String _name_1 = _rule_1.getName();
-              it.setDescription(_name_1);
-            } else {
-              AbstractRule _rule_2 = ruleCall.getRule();
-              String _name_2 = _rule_2.getName();
-              String _plus_2 = ("\"" + _name_2);
-              String _plus_3 = (_plus_2 + "\"");
-              it.setProposal(_plus_3);
-            }
-            ArrayList<ContentAssistResult.EditPosition> _editPositions = it.getEditPositions();
-            int _offset = context.getOffset();
-            int _plus_4 = (_offset + 1);
-            String _proposal = it.getProposal();
-            int _length = _proposal.length();
-            int _minus = (_length - 2);
-            ContentAssistResult.EditPosition _editPosition = new ContentAssistResult.EditPosition(_plus_4, _minus);
-            _editPositions.add(_editPosition);
-          } else {
-            final EObject container_1 = ruleCall.eContainer();
-            if ((container_1 instanceof Assignment)) {
-              String _feature_1 = ((Assignment)container_1).getFeature();
-              it.setProposal(_feature_1);
-              AbstractRule _rule_3 = ruleCall.getRule();
-              String _name_3 = _rule_3.getName();
-              it.setDescription(_name_3);
-            } else {
-              AbstractRule _rule_4 = ruleCall.getRule();
-              String _name_4 = _rule_4.getName();
-              it.setProposal(_name_4);
-            }
-            ArrayList<ContentAssistResult.EditPosition> _editPositions_1 = it.getEditPositions();
-            int _offset_1 = context.getOffset();
-            String _proposal_1 = it.getProposal();
-            int _length_1 = _proposal_1.length();
-            ContentAssistResult.EditPosition _editPosition_1 = new ContentAssistResult.EditPosition(_offset_1, _length_1);
-            _editPositions_1.add(_editPosition_1);
-          }
-        }
-      };
-      ContentAssistResult.Entry _doubleArrow = ObjectExtensions.<ContentAssistResult.Entry>operator_doubleArrow(_entry, _function);
-      proposals.add(_doubleArrow);
-    }
-  }
-  
-  protected void _createProposal(final CrossReference reference, final ContentAssistContext context, final Set<ContentAssistResult.Entry> proposals) {
-    final EClassifier type = this._currentTypeFinder.findCurrentTypeAfter(reference);
-    if ((type instanceof EClass)) {
-      final EReference ereference = GrammarUtil.getReference(reference, ((EClass)type));
-      if ((ereference != null)) {
-        EObject _currentModel = context.getCurrentModel();
-        final IScope scope = this.scopeProvider.getScope(_currentModel, ereference);
-        try {
-          Iterable<IEObjectDescription> _allElements = scope.getAllElements();
-          for (final IEObjectDescription description : _allElements) {
-            {
-              QualifiedName _name = description.getName();
-              final String elementName = _name.toString();
-              String _prefix = context.getPrefix();
-              boolean _startsWith = elementName.startsWith(_prefix);
-              if (_startsWith) {
-                String _prefix_1 = context.getPrefix();
-                ContentAssistResult.Entry _entry = new ContentAssistResult.Entry(ContentAssistService.CROSSREF, _prefix_1);
-                final Procedure1<ContentAssistResult.Entry> _function = new Procedure1<ContentAssistResult.Entry>() {
-                  @Override
-                  public void apply(final ContentAssistResult.Entry it) {
-                    it.setProposal(elementName);
-                    EClass _eClass = description.getEClass();
-                    String _name = _eClass.getName();
-                    it.setDescription(_name);
-                  }
-                };
-                ContentAssistResult.Entry _doubleArrow = ObjectExtensions.<ContentAssistResult.Entry>operator_doubleArrow(_entry, _function);
-                proposals.add(_doubleArrow);
-              }
-            }
-          }
-        } catch (final Throwable _t) {
-          if (_t instanceof UnsupportedOperationException) {
-            final UnsupportedOperationException uoe = (UnsupportedOperationException)_t;
-            uoe.printStackTrace();
-          } else {
-            throw Exceptions.sneakyThrow(_t);
-          }
-        }
-      }
-    }
-  }
-  
-  protected void createProposal(final AbstractElement assignment, final ContentAssistContext context, final Set<ContentAssistResult.Entry> proposals) {
-    if (assignment instanceof Assignment) {
-      _createProposal((Assignment)assignment, context, proposals);
-      return;
-    } else if (assignment instanceof CrossReference) {
-      _createProposal((CrossReference)assignment, context, proposals);
-      return;
-    } else if (assignment instanceof Keyword) {
-      _createProposal((Keyword)assignment, context, proposals);
-      return;
-    } else if (assignment instanceof RuleCall) {
-      _createProposal((RuleCall)assignment, context, proposals);
-      return;
-    } else if (assignment != null) {
-      _createProposal(assignment, context, proposals);
-      return;
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(assignment, context, proposals).toString());
-    }
   }
 }

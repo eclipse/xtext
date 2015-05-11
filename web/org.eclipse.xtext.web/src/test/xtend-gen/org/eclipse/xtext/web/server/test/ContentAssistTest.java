@@ -27,6 +27,15 @@ import org.junit.Test;
 
 @SuppressWarnings("all")
 public class ContentAssistTest extends AbstractWebServerTest {
+  protected void assertContentAssistResult(final String resourceContent, final String expectedResult) {
+    final int cursorOffset = resourceContent.indexOf("|");
+    if ((cursorOffset >= 0)) {
+      this.assertContentAssistResult(resourceContent, cursorOffset, expectedResult);
+    } else {
+      this.assertContentAssistResult(resourceContent, 0, expectedResult);
+    }
+  }
+  
   protected void assertContentAssistResult(final String resourceContent, final int offset, final String expectedResult) {
     try {
       final HashMapSessionStore sessionStore = new HashMapSessionStore();
@@ -73,6 +82,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("proposal = \"input\"");
     _builder.newLine();
     _builder.append("      ");
+    _builder.append("escapePosition = 0");
+    _builder.newLine();
+    _builder.append("      ");
     _builder.append("textReplacements = ArrayList ()");
     _builder.newLine();
     _builder.append("      ");
@@ -92,6 +104,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.newLine();
     _builder.append("      ");
     _builder.append("proposal = \"output\"");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("escapePosition = 0");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("textReplacements = ArrayList ()");
@@ -115,6 +130,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("proposal = \"state\"");
     _builder.newLine();
     _builder.append("      ");
+    _builder.append("escapePosition = 0");
+    _builder.newLine();
+    _builder.append("      ");
     _builder.append("textReplacements = ArrayList ()");
     _builder.newLine();
     _builder.append("      ");
@@ -127,7 +145,7 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append(")");
     _builder.newLine();
     _builder.append("]");
-    this.assertContentAssistResult("", 0, _builder.toString());
+    this.assertContentAssistResult("", _builder.toString());
   }
   
   @Test
@@ -154,6 +172,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("proposal = \"state\"");
     _builder.newLine();
     _builder.append("      ");
+    _builder.append("escapePosition = 0");
+    _builder.newLine();
+    _builder.append("      ");
     _builder.append("textReplacements = ArrayList ()");
     _builder.newLine();
     _builder.append("      ");
@@ -166,7 +187,178 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append(")");
     _builder.newLine();
     _builder.append("]");
-    this.assertContentAssistResult("sta", 3, _builder.toString());
+    this.assertContentAssistResult("sta|", _builder.toString());
+  }
+  
+  @Test
+  public void testTerminal() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("ContentAssistResult [");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("stateId = \"-80000000\"");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("entries = ArrayList (");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("Entry [");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("type = \"terminal\"");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("prefix = \"\"");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("proposal = \"name\"");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("description = \"ID\"");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("escapePosition = 0");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("textReplacements = ArrayList ()");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("editPositions = ArrayList (");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("EditPosition [");
+    _builder.newLine();
+    _builder.append("          ");
+    _builder.append("offset = 6");
+    _builder.newLine();
+    _builder.append("          ");
+    _builder.append("length = 4");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append(")");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append(")");
+    _builder.newLine();
+    _builder.append("]");
+    this.assertContentAssistResult("state | end", _builder.toString());
+  }
+  
+  @Test
+  public void testCustomTerminal() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("ContentAssistResult [");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("stateId = \"-80000000\"");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("entries = ArrayList (");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("Entry [");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("type = \"terminal\"");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("prefix = \"\"");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("proposal = \"false\"");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("escapePosition = 0");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("textReplacements = ArrayList ()");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("editPositions = ArrayList ()");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("],");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("Entry [");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("type = \"terminal\"");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("prefix = \"\"");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("proposal = \"true\"");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("escapePosition = 0");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("textReplacements = ArrayList ()");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("editPositions = ArrayList ()");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append(")");
+    _builder.newLine();
+    _builder.append("]");
+    this.assertContentAssistResult("output signal x state foo set x = | end", _builder.toString());
+  }
+  
+  @Test
+  public void testCustomCrossref() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("ContentAssistResult [");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("stateId = \"-80000000\"");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("entries = ArrayList (");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("Entry [");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("type = \"cross-ref\"");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("prefix = \"\"");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("proposal = \"x\"");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("description = \"input signal\"");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("escapePosition = 0");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("textReplacements = ArrayList ()");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("editPositions = ArrayList ()");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append(")");
+    _builder.newLine();
+    _builder.append("]");
+    this.assertContentAssistResult("input signal x state foo if | == true goto foo end", _builder.toString());
   }
   
   @Test
