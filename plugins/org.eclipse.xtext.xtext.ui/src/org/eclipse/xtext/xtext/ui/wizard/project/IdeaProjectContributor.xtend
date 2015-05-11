@@ -32,7 +32,7 @@ class IdeaProjectContributor extends DefaultProjectFactoryContributor {
 			}
 			
 			ideaDevelopment {
-				ideaVersion = '141.178.9'
+				ideaVersion = '141.814.3'
 				pluginRepositories {
 					url 'https://hudson.eclipse.org/xtext/job/xtext-intellij/lastSuccessfulBuild/artifact/git-repo/intellij/build/ideaRepository/updatePlugins.xml'
 				}

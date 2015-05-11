@@ -58,7 +58,7 @@ public class IdeaProjectContributor extends DefaultProjectFactoryContributor {
     _builder.append("ideaDevelopment {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("ideaVersion = \'141.178.9\'");
+    _builder.append("ideaVersion = \'141.814.3\'");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("pluginRepositories {");
