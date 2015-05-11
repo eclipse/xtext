@@ -247,10 +247,15 @@ public class GrammarUtil {
 	public static AbstractRule findRuleForName(Grammar grammar, String ruleName) {
 		if (ruleName == null)
 			return null;
-		List<AbstractRule> rules = allRules(grammar);
-		for (AbstractRule abstractRule : rules) {
-			if (ruleName.equals(abstractRule.getName())) {
-				return abstractRule;
+		for (AbstractRule rule : grammar.getRules()) {
+			if (ruleName.equals(rule.getName())) {
+				return rule;
+			}
+		}
+		for (Grammar usedGrammar : grammar.getUsedGrammars()) {
+			AbstractRule rule = findRuleForName(usedGrammar, ruleName);
+			if (rule != null) {
+				return rule;
 			}
 		}
 		return null;
