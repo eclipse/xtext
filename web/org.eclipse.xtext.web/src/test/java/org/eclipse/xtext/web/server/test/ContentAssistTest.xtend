@@ -13,7 +13,15 @@ import org.junit.Test
 
 import static org.hamcrest.core.IsInstanceOf.*
 
-class ContentAssistTest extends AbstractWebServerTest {	
+class ContentAssistTest extends AbstractWebServerTest {
+	
+	protected def assertContentAssistResult(String resourceContent, String expectedResult) {
+		val cursorOffset = resourceContent.indexOf('|')
+		if (cursorOffset >= 0)
+			assertContentAssistResult(resourceContent, cursorOffset, expectedResult)
+		else
+			assertContentAssistResult(resourceContent, 0, expectedResult)
+	}
 	
 	protected def assertContentAssistResult(String resourceContent, int offset, String expectedResult) {
 		val sessionStore = new HashMapSessionStore
@@ -28,7 +36,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 	}
 	
 	@Test def testKeywords() {
-		''.assertContentAssistResult(0, '''
+		''.assertContentAssistResult('''
 			ContentAssistResult [
 			  stateId = "-80000000"
 			  entries = ArrayList (
@@ -36,6 +44,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      type = "keyword"
 			      prefix = ""
 			      proposal = "input"
+			      escapePosition = 0
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
 			    ],
@@ -43,6 +52,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      type = "keyword"
 			      prefix = ""
 			      proposal = "output"
+			      escapePosition = 0
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
 			    ],
@@ -50,6 +60,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      type = "keyword"
 			      prefix = ""
 			      proposal = "state"
+			      escapePosition = 0
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
 			    ]
@@ -58,7 +69,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 	}
 	
 	@Test def testKeywordWithPrefix() {
-		'sta'.assertContentAssistResult(3, '''
+		'sta|'.assertContentAssistResult('''
 			ContentAssistResult [
 			  stateId = "-80000000"
 			  entries = ArrayList (
@@ -66,6 +77,73 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      type = "keyword"
 			      prefix = "sta"
 			      proposal = "state"
+			      escapePosition = 0
+			      textReplacements = ArrayList ()
+			      editPositions = ArrayList ()
+			    ]
+			  )
+			]''')
+	}
+	
+	@Test def testTerminal() {
+		'state | end'.assertContentAssistResult('''
+			ContentAssistResult [
+			  stateId = "-80000000"
+			  entries = ArrayList (
+			    Entry [
+			      type = "terminal"
+			      prefix = ""
+			      proposal = "name"
+			      description = "ID"
+			      escapePosition = 0
+			      textReplacements = ArrayList ()
+			      editPositions = ArrayList (
+			        EditPosition [
+			          offset = 6
+			          length = 4
+			        ]
+			      )
+			    ]
+			  )
+			]''')
+	}
+	
+	@Test def testCustomTerminal() {
+		'output signal x state foo set x = | end'.assertContentAssistResult('''
+			ContentAssistResult [
+			  stateId = "-80000000"
+			  entries = ArrayList (
+			    Entry [
+			      type = "terminal"
+			      prefix = ""
+			      proposal = "false"
+			      escapePosition = 0
+			      textReplacements = ArrayList ()
+			      editPositions = ArrayList ()
+			    ],
+			    Entry [
+			      type = "terminal"
+			      prefix = ""
+			      proposal = "true"
+			      escapePosition = 0
+			      textReplacements = ArrayList ()
+			      editPositions = ArrayList ()
+			    ]
+			  )
+			]''')
+	}
+	
+	@Test def testCustomCrossref() {
+		'input signal x state foo if | == true goto foo end'.assertContentAssistResult('''
+			ContentAssistResult [
+			  stateId = "-80000000"
+			  entries = ArrayList (
+			    Entry [
+			      type = "cross-ref"
+			      prefix = ""
+			      proposal = "x"
+			      description = "input signal"
+			      escapePosition = 0
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
 			    ]

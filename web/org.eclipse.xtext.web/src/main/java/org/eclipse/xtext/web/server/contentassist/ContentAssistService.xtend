@@ -14,41 +14,27 @@ import java.util.Collection
 import java.util.Collections
 import java.util.HashSet
 import java.util.List
-import java.util.Set
 import java.util.concurrent.ExecutorService
-import org.eclipse.emf.ecore.EClass
-import org.eclipse.xtext.AbstractElement
-import org.eclipse.xtext.Assignment
-import org.eclipse.xtext.CrossReference
-import org.eclipse.xtext.GrammarUtil
-import org.eclipse.xtext.Keyword
-import org.eclipse.xtext.RuleCall
-import org.eclipse.xtext.TerminalRule
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory
-import org.eclipse.xtext.scoping.IScopeProvider
+import org.eclipse.xtext.util.IAcceptor
 import org.eclipse.xtext.util.ITextRegion
 import org.eclipse.xtext.web.server.InvalidRequestException
 import org.eclipse.xtext.web.server.model.UpdateDocumentService
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess
-import org.eclipse.xtext.xtext.CurrentTypeFinder
+
+import static org.eclipse.xtext.web.server.contentassist.ContentAssistResult.*
 
 @Singleton
 class ContentAssistService {
 	
-	protected static val KEYWORD = 'keyword'
-	protected static val TERMINAL = 'terminal'
-	protected static val CROSSREF = 'crossref'
-	
 	@Inject Provider<ContentAssistContextFactory> contextFactoryProvider
 	
-	@Inject IScopeProvider scopeProvider
+	@Inject WebContentProposalProvider proposalProvider
 	
 	@Inject ExecutorService executorService
 	
 	@Inject extension UpdateDocumentService
-	
-	@Inject extension CurrentTypeFinder
 	
 	def createProposals(XtextWebDocumentAccess document, ITextRegion selection, int offset)
 			throws InvalidRequestException {
@@ -87,12 +73,11 @@ class ContentAssistService {
 		result.stateId = stateId
 		if (!contexts.empty) {
 			val proposals = new HashSet<ContentAssistResult.Entry>
+			val IAcceptor<ContentAssistResult.Entry> acceptor = [proposals.add(it)]
 			val longestPrefix = contexts.map[prefix].maxBy[length]
 			for (context : contexts) {
 				if (context.prefix == longestPrefix) {
-					for (element : context.firstSetGrammarElements) {
-						createProposal(element, context, proposals)
-					}
+					proposalProvider.createProposals(context, acceptor)
 				}
 			}
 			result.entries.addAll(proposals.filter)
@@ -103,6 +88,8 @@ class ContentAssistService {
 	
 	protected def filter(Collection<ContentAssistResult.Entry> proposals) {
 		proposals.filter[
+			if (proposal.nullOrEmpty || !proposal.startsWith(prefix))
+				return false
 			switch type {
 				case KEYWORD:
 					proposals.size == 1 || Character.isLetter(proposal.charAt(0))
@@ -118,78 +105,6 @@ class ContentAssistService {
 			else
 				a.type.compareTo(b.type)
 		])
-	}
-
-	protected def dispatch void createProposal(AbstractElement element, ContentAssistContext context,
-			Set<ContentAssistResult.Entry> proposals) {
-		// not supported
-	}
-	
-	protected def dispatch void createProposal(Assignment assignment, ContentAssistContext context,
-			Set<ContentAssistResult.Entry> proposals) {
-		if (assignment.terminal instanceof CrossReference)
-			createProposal(assignment.terminal, context, proposals)
-	}
-	
-	protected def dispatch void createProposal(Keyword keyword, ContentAssistContext context,
-			Set<ContentAssistResult.Entry> proposals) {
-		val value = keyword.value
-		if (value.startsWith(context.prefix)) {
-			proposals += new ContentAssistResult.Entry(KEYWORD, context.prefix) => [
-				proposal = keyword.value
-			]
-		}
-	}
-	
-	protected def dispatch void createProposal(RuleCall ruleCall, ContentAssistContext context,
-			Set<ContentAssistResult.Entry> proposals) {
-		if (ruleCall.rule instanceof TerminalRule && context.prefix.empty) {
-			proposals += new ContentAssistResult.Entry(TERMINAL, context.prefix) => [
-				if (ruleCall.rule.name == 'STRING') {
-					val container = ruleCall.eContainer
-					if (container instanceof Assignment) {
-						proposal = '"' + container.feature + '"'
-						description = ruleCall.rule.name
-					} else {
-						proposal = '"' + ruleCall.rule.name + '"'
-					}
-					editPositions += new ContentAssistResult.EditPosition(context.offset + 1, proposal.length - 2)
-				} else {
-					val container = ruleCall.eContainer
-					if (container instanceof Assignment) {
-						proposal = container.feature
-						description = ruleCall.rule.name
-					} else {
-						proposal = ruleCall.rule.name
-					}
-					editPositions += new ContentAssistResult.EditPosition(context.offset, proposal.length)
-				}
-			]
-		}
-	}
-	
-	protected def dispatch void createProposal(CrossReference reference, ContentAssistContext context,
-			Set<ContentAssistResult.Entry> proposals) {
-		val type = findCurrentTypeAfter(reference)
-		if (type instanceof EClass) {
-			val ereference = GrammarUtil.getReference(reference, type)
-			if (ereference !== null) {
-				val scope = scopeProvider.getScope(context.currentModel, ereference)
-				try {
-					for (description : scope.allElements) {
-						val String elementName = description.name.toString
-						if (elementName.startsWith(context.prefix)) {
-							proposals += new ContentAssistResult.Entry(CROSSREF, context.prefix) => [
-								proposal = elementName
-								description = description.EClass.name
-							]
-						}
-					}
-				} catch (UnsupportedOperationException uoe) {
-					uoe.printStackTrace
-				}
-			}
-		}
 	}
 	
 }

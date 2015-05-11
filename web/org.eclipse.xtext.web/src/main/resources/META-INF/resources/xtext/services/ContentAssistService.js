@@ -79,7 +79,7 @@ define(["xtext/services/AbstractXtextService", "orion/Deferred"], function(Abstr
 				var proposals = [];
 				for (var i = 0; i < result.entries.length; i++) {
 					var e = result.entries[i];
-					proposals.push({
+					var p = {
 						proposal : e.proposal,
 						prefix : e.prefix,
 						overwrite : true,
@@ -87,8 +87,12 @@ define(["xtext/services/AbstractXtextService", "orion/Deferred"], function(Abstr
 						description : e.description,
 						style : e.style,
 						additionalEdits : e.textReplacements,
-						positions : e.editPositions
-					});
+						positions : e.editPositions,
+					};
+					if (e.escapePosition) {
+						p.escapePosition = e.escapePosition;
+					}
+					proposals.push(p);
 				}
 				deferred.resolve(proposals);
 			},
