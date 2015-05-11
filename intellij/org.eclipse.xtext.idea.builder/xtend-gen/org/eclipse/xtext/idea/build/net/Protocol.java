@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.build.net;
 
-import groovy.transform.EqualsAndHashCode;
 import java.io.Serializable;
 import java.util.List;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -225,7 +224,7 @@ public class Protocol {
   }
   
   @Accessors
-  @EqualsAndHashCode
+  @EqualsHashCode
   public static class GeneratedFile implements Serializable {
     private String file;
     
@@ -248,10 +247,43 @@ public class Protocol {
     public void setSourceFiles(final List<String> sourceFiles) {
       this.sourceFiles = sourceFiles;
     }
+    
+    @Override
+    @Pure
+    public boolean equals(final Object obj) {
+      if (this == obj)
+        return true;
+      if (obj == null)
+        return false;
+      if (getClass() != obj.getClass())
+        return false;
+      Protocol.GeneratedFile other = (Protocol.GeneratedFile) obj;
+      if (this.file == null) {
+        if (other.file != null)
+          return false;
+      } else if (!this.file.equals(other.file))
+        return false;
+      if (this.sourceFiles == null) {
+        if (other.sourceFiles != null)
+          return false;
+      } else if (!this.sourceFiles.equals(other.sourceFiles))
+        return false;
+      return true;
+    }
+    
+    @Override
+    @Pure
+    public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + ((this.file== null) ? 0 : this.file.hashCode());
+      result = prime * result + ((this.sourceFiles== null) ? 0 : this.sourceFiles.hashCode());
+      return result;
+    }
   }
   
   @Accessors
-  @EqualsAndHashCode
+  @EqualsHashCode
   public static class JavaDependencyRequest implements Serializable {
     private List<String> dirtyJavaFiles = CollectionLiterals.<String>newArrayList();
     
@@ -274,10 +306,43 @@ public class Protocol {
     public void setDeletedJavaFiles(final List<String> deletedJavaFiles) {
       this.deletedJavaFiles = deletedJavaFiles;
     }
+    
+    @Override
+    @Pure
+    public boolean equals(final Object obj) {
+      if (this == obj)
+        return true;
+      if (obj == null)
+        return false;
+      if (getClass() != obj.getClass())
+        return false;
+      Protocol.JavaDependencyRequest other = (Protocol.JavaDependencyRequest) obj;
+      if (this.dirtyJavaFiles == null) {
+        if (other.dirtyJavaFiles != null)
+          return false;
+      } else if (!this.dirtyJavaFiles.equals(other.dirtyJavaFiles))
+        return false;
+      if (this.deletedJavaFiles == null) {
+        if (other.deletedJavaFiles != null)
+          return false;
+      } else if (!this.deletedJavaFiles.equals(other.deletedJavaFiles))
+        return false;
+      return true;
+    }
+    
+    @Override
+    @Pure
+    public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + ((this.dirtyJavaFiles== null) ? 0 : this.dirtyJavaFiles.hashCode());
+      result = prime * result + ((this.deletedJavaFiles== null) ? 0 : this.deletedJavaFiles.hashCode());
+      return result;
+    }
   }
   
   @Accessors
-  @EqualsAndHashCode
+  @EqualsHashCode
   public static class JavaDependencyResult implements Serializable {
     private List<String> dependentJavaFiles = CollectionLiterals.<String>newArrayList();
     
@@ -288,6 +353,33 @@ public class Protocol {
     
     public void setDependentJavaFiles(final List<String> dependentJavaFiles) {
       this.dependentJavaFiles = dependentJavaFiles;
+    }
+    
+    @Override
+    @Pure
+    public boolean equals(final Object obj) {
+      if (this == obj)
+        return true;
+      if (obj == null)
+        return false;
+      if (getClass() != obj.getClass())
+        return false;
+      Protocol.JavaDependencyResult other = (Protocol.JavaDependencyResult) obj;
+      if (this.dependentJavaFiles == null) {
+        if (other.dependentJavaFiles != null)
+          return false;
+      } else if (!this.dependentJavaFiles.equals(other.dependentJavaFiles))
+        return false;
+      return true;
+    }
+    
+    @Override
+    @Pure
+    public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + ((this.dependentJavaFiles== null) ? 0 : this.dependentJavaFiles.hashCode());
+      return result;
     }
   }
   

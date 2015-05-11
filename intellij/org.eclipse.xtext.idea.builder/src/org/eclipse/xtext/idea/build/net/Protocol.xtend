@@ -10,9 +10,8 @@ package org.eclipse.xtext.idea.build.net
 import java.io.Serializable
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.jetbrains.jps.incremental.messages.BuildMessage
 import org.eclipse.xtend.lib.annotations.EqualsHashCode
-import groovy.transform.EqualsAndHashCode
+import org.jetbrains.jps.incremental.messages.BuildMessage
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -39,21 +38,21 @@ class Protocol {
 	}
 	
 	@Accessors
-	@EqualsAndHashCode
+	@EqualsHashCode
 	static class GeneratedFile implements Serializable {
 		String file
 		List<String> sourceFiles = newArrayList
 	}
 
 	@Accessors
-	@EqualsAndHashCode
+	@EqualsHashCode
 	static class JavaDependencyRequest implements Serializable {
 		List<String> dirtyJavaFiles = newArrayList
 		List<String> deletedJavaFiles = newArrayList
 	}
 	
 	@Accessors
-	@EqualsAndHashCode
+	@EqualsHashCode
 	static class JavaDependencyResult implements Serializable {
 		List<String> dependentJavaFiles = newArrayList
 	}
