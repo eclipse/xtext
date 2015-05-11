@@ -39,6 +39,7 @@ import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
 import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
@@ -201,6 +202,9 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 						((IDirtyStateEditorSupportClientExtension) currentClient).forceReconcile();
 					else 
 						resource.reparse(document.get());
+					if (resourceSet instanceof XtextResourceSet) {
+						((XtextResourceSet) resourceSet).markOutdated();
+					}
 				}
 
 			});
