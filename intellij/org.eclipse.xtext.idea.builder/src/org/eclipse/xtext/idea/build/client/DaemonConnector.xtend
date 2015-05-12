@@ -21,6 +21,7 @@ import java.nio.channels.SocketChannel
 import java.util.regex.Pattern
 import org.apache.log4j.Logger
 import org.eclipse.xtext.idea.build.daemon.XtextBuildDaemon
+import org.eclipse.xtext.idea.build.net.ObjectChannel
 
 import static extension org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs.*
 
@@ -43,15 +44,23 @@ class DaemonConnector {
 			if (portFile.exists) {
 				val line = new BufferedReader(new FileReader(portFile)).readLine
 				val port = Integer.parseInt(line.trim)
-				var socketChannel = SocketChannel.open()
-				socketChannel.configureBlocking(true)
-				socketChannel.connect(new InetSocketAddress(InetAddress.getByName('127.0.0.1'), port))
+				var socketChannel = connectClientSocketChannel(port)
 				return socketChannel
 			}
 		} catch (Exception exc) {
 			// ignore and launch new process
 		}
 		launch(portFile)
+	}
+	
+	protected def connectClientSocketChannel(int port) {
+		var socketChannel = SocketChannel.open()
+		socketChannel.configureBlocking(true)
+		socketChannel.socket.sendBufferSize = ObjectChannel.BUFFER_SIZE
+		socketChannel.socket.receiveBufferSize = ObjectChannel.BUFFER_SIZE
+		socketChannel.socket.tcpNoDelay = true
+		socketChannel.connect(new InetSocketAddress(InetAddress.getByName('127.0.0.1'), port))
+		socketChannel
 	}
 
 	def launch(File lockFile) {
@@ -83,9 +92,7 @@ class DaemonConnector {
 			val daemonProcess = new ProcessBuilder().command(command).start
 			for (i : 0 .. 200) {
 				try {
-					var socketChannel = SocketChannel.open()
-					socketChannel.configureBlocking(true)
-					socketChannel.connect(new InetSocketAddress(InetAddress.getByName('127.0.0.1'), port))
+					var socketChannel = connectClientSocketChannel(port)
 					writeLockFile(lockFile, port)
 					return socketChannel
 				} catch (ConnectException exc) {

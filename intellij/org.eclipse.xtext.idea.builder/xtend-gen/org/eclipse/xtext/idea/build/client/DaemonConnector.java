@@ -19,6 +19,7 @@ import java.lang.management.RuntimeMXBean;
 import java.net.ConnectException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.channels.SocketChannel;
@@ -29,6 +30,7 @@ import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
 import org.eclipse.xtext.idea.build.daemon.XtextBuildDaemon;
+import org.eclipse.xtext.idea.build.net.ObjectChannel;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -63,11 +65,7 @@ public class DaemonConnector {
           final String line = _bufferedReader.readLine();
           String _trim = line.trim();
           final int port = Integer.parseInt(_trim);
-          SocketChannel socketChannel = SocketChannel.open();
-          socketChannel.configureBlocking(true);
-          InetAddress _byName = InetAddress.getByName("127.0.0.1");
-          InetSocketAddress _inetSocketAddress = new InetSocketAddress(_byName, port);
-          socketChannel.connect(_inetSocketAddress);
+          SocketChannel socketChannel = this.connectClientSocketChannel(port);
           return socketChannel;
         }
       } catch (final Throwable _t) {
@@ -80,6 +78,29 @@ public class DaemonConnector {
       _xblockexpression = this.launch(portFile);
     }
     return _xblockexpression;
+  }
+  
+  protected SocketChannel connectClientSocketChannel(final int port) {
+    try {
+      SocketChannel _xblockexpression = null;
+      {
+        SocketChannel socketChannel = SocketChannel.open();
+        socketChannel.configureBlocking(true);
+        Socket _socket = socketChannel.socket();
+        _socket.setSendBufferSize(ObjectChannel.BUFFER_SIZE);
+        Socket _socket_1 = socketChannel.socket();
+        _socket_1.setReceiveBufferSize(ObjectChannel.BUFFER_SIZE);
+        Socket _socket_2 = socketChannel.socket();
+        _socket_2.setTcpNoDelay(true);
+        InetAddress _byName = InetAddress.getByName("127.0.0.1");
+        InetSocketAddress _inetSocketAddress = new InetSocketAddress(_byName, port);
+        socketChannel.connect(_inetSocketAddress);
+        _xblockexpression = socketChannel;
+      }
+      return _xblockexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   public SocketChannel launch(final File lockFile) {
@@ -146,11 +167,7 @@ public class DaemonConnector {
           IntegerRange _upTo_1 = new IntegerRange(0, 200);
           for (final Integer i : _upTo_1) {
             try {
-              SocketChannel socketChannel = SocketChannel.open();
-              socketChannel.configureBlocking(true);
-              InetAddress _byName = InetAddress.getByName("127.0.0.1");
-              InetSocketAddress _inetSocketAddress = new InetSocketAddress(_byName, (port).intValue());
-              socketChannel.connect(_inetSocketAddress);
+              SocketChannel socketChannel = this.connectClientSocketChannel((port).intValue());
               this.writeLockFile(lockFile, (port).intValue());
               return socketChannel;
             } catch (final Throwable _t) {
