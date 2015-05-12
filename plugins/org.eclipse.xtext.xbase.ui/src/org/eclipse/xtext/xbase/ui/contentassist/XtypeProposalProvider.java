@@ -58,47 +58,47 @@ public class XtypeProposalProvider extends AbstractXtypeProposalProvider {
 		}
 	}
 
-	protected StyledString getStyledDisplayString(JvmFeature feature, boolean withParenths, int insignificantParameters, String qualifiedNameAsString, String shortName,
+	protected StyledString getStyledDisplayString(JvmFeature feature, boolean withParents, int insignificantParameters, String qualifiedNameAsString, String shortName,
 			LightweightTypeReferenceFactory converter) {
-				StyledString result = new StyledString(shortName);
-				if (feature instanceof JvmOperation) {
-					JvmOperation operation = (JvmOperation) feature;
-					if (withParenths) {
-						result.append('(');
-						appendParameters(result, (JvmExecutable)feature, insignificantParameters, converter);
-						result.append(')');
-					}
-					JvmTypeReference returnType = operation.getReturnType();
-					if (returnType != null && returnType.getSimpleName() != null) {
-						result.append(" : ");
-						result.append(converter.toLightweightReference(returnType).getHumanReadableName());
-					}
-					result.append(" - ", StyledString.QUALIFIER_STYLER);
-					result.append(converter.toPlainTypeReference(feature.getDeclaringType()).getHumanReadableName(), StyledString.QUALIFIER_STYLER);
-					if (!withParenths) {
-						result.append(".", StyledString.QUALIFIER_STYLER);
-						result.append(feature.getSimpleName(), StyledString.QUALIFIER_STYLER);
-						result.append("()", StyledString.QUALIFIER_STYLER);
-					}
-				} else if (feature instanceof JvmField) {
-					JvmField field = (JvmField) feature;
-					result.append(" : ");
-					if (field.getType() != null) {
-						String fieldType = converter.toLightweightReference(field.getType()).getHumanReadableName();
-						if (fieldType != null)
-							result.append(fieldType);
-					}
-					result.append(" - ", StyledString.QUALIFIER_STYLER);
-					result.append(converter.toPlainTypeReference(feature.getDeclaringType()).getHumanReadableName(), StyledString.QUALIFIER_STYLER);
-				} else if (feature instanceof JvmConstructor) {
-					if (withParenths) {
-						result.append('(');
-						appendParameters(result, (JvmExecutable)feature, insignificantParameters, converter);
-						result.append(')');
-					}
-				}
-				return result;
+		StyledString result = new StyledString(shortName);
+		if (feature instanceof JvmOperation) {
+			JvmOperation operation = (JvmOperation) feature;
+			if (withParents) {
+				result.append('(');
+				appendParameters(result, (JvmExecutable)feature, insignificantParameters, converter);
+				result.append(')');
 			}
+			JvmTypeReference returnType = operation.getReturnType();
+			if (returnType != null && returnType.getSimpleName() != null) {
+				result.append(" : ");
+				result.append(converter.toLightweightReference(returnType).getHumanReadableName());
+			}
+			result.append(" - ", StyledString.QUALIFIER_STYLER);
+			result.append(converter.toPlainTypeReference(feature.getDeclaringType()).getHumanReadableName(), StyledString.QUALIFIER_STYLER);
+			if (!withParents) {
+				result.append(".", StyledString.QUALIFIER_STYLER);
+				result.append(feature.getSimpleName(), StyledString.QUALIFIER_STYLER);
+				result.append("()", StyledString.QUALIFIER_STYLER);
+			}
+		} else if (feature instanceof JvmField) {
+			JvmField field = (JvmField) feature;
+			result.append(" : ");
+			if (field.getType() != null) {
+				String fieldType = converter.toLightweightReference(field.getType()).getHumanReadableName();
+				if (fieldType != null)
+					result.append(fieldType);
+			}
+			result.append(" - ", StyledString.QUALIFIER_STYLER);
+			result.append(converter.toPlainTypeReference(feature.getDeclaringType()).getHumanReadableName(), StyledString.QUALIFIER_STYLER);
+		} else if (feature instanceof JvmConstructor) {
+			if (withParents) {
+				result.append('(');
+				appendParameters(result, (JvmExecutable)feature, insignificantParameters, converter);
+				result.append(')');
+			}
+		}
+		return result;
+	}
 
 	protected void appendParameters(StyledString result, JvmExecutable executable, int insignificantParameters, LightweightTypeReferenceFactory ownedConverter) {
 		List<JvmFormalParameter> declaredParameters = executable.getParameters();
