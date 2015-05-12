@@ -28,12 +28,14 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
+import org.eclipse.xtext.web.server.contentassist.CrossrefProposalCreator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -48,6 +50,10 @@ public class WebContentProposalProvider {
   @Accessors(AccessorType.PROTECTED_GETTER)
   @Inject
   private IScopeProvider scopeProvider;
+  
+  @Accessors(AccessorType.PROTECTED_GETTER)
+  @Inject
+  private IQualifiedNameConverter qualifiedNameConverter;
   
   @Inject
   @Extension
@@ -169,6 +175,7 @@ public class WebContentProposalProvider {
         EObject _currentModel = context.getCurrentModel();
         final IScope scope = this.scopeProvider.getScope(_currentModel, ereference);
         try {
+          final CrossrefProposalCreator proposalCreator = new CrossrefProposalCreator(context, this.qualifiedNameConverter);
           Iterable<IEObjectDescription> _allElements = scope.getAllElements();
           for (final IEObjectDescription description : _allElements) {
             {
@@ -177,19 +184,8 @@ public class WebContentProposalProvider {
               String _prefix = context.getPrefix();
               boolean _startsWith = elementName.startsWith(_prefix);
               if (_startsWith) {
-                String _prefix_1 = context.getPrefix();
-                ContentAssistResult.Entry _entry = new ContentAssistResult.Entry(ContentAssistResult.CROSSREF, _prefix_1);
-                final Procedure1<ContentAssistResult.Entry> _function = new Procedure1<ContentAssistResult.Entry>() {
-                  @Override
-                  public void apply(final ContentAssistResult.Entry it) {
-                    it.setProposal(elementName);
-                    EClass _eClass = description.getEClass();
-                    String _name = _eClass.getName();
-                    it.setDescription(_name);
-                  }
-                };
-                ContentAssistResult.Entry _doubleArrow = ObjectExtensions.<ContentAssistResult.Entry>operator_doubleArrow(_entry, _function);
-                acceptor.accept(_doubleArrow);
+                ContentAssistResult.Entry _apply = proposalCreator.apply(description);
+                acceptor.accept(_apply);
               }
             }
           }
@@ -230,5 +226,10 @@ public class WebContentProposalProvider {
   @Pure
   protected IScopeProvider getScopeProvider() {
     return this.scopeProvider;
+  }
+  
+  @Pure
+  protected IQualifiedNameConverter getQualifiedNameConverter() {
+    return this.qualifiedNameConverter;
   }
 }

@@ -10,6 +10,7 @@ package org.eclipse.xtext.web.server.contentassist
 import com.google.inject.Inject
 import org.apache.log4j.Logger
 import org.eclipse.emf.ecore.EClass
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.AbstractElement
 import org.eclipse.xtext.Assignment
 import org.eclipse.xtext.CrossReference
@@ -18,12 +19,12 @@ import org.eclipse.xtext.Keyword
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.TerminalRule
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext
+import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.scoping.IScopeProvider
 import org.eclipse.xtext.util.IAcceptor
 import org.eclipse.xtext.xtext.CurrentTypeFinder
 
 import static org.eclipse.xtext.web.server.contentassist.ContentAssistResult.*
-import org.eclipse.xtend.lib.annotations.Accessors
 
 class WebContentProposalProvider {
 	
@@ -31,6 +32,9 @@ class WebContentProposalProvider {
 	
 	@Accessors(PROTECTED_GETTER)
 	@Inject IScopeProvider scopeProvider
+	
+	@Accessors(PROTECTED_GETTER)
+	@Inject IQualifiedNameConverter qualifiedNameConverter
 	
 	@Inject extension CurrentTypeFinder
 	
@@ -96,13 +100,11 @@ class WebContentProposalProvider {
 			if (ereference !== null) {
 				val scope = scopeProvider.getScope(context.currentModel, ereference)
 				try {
+					val proposalCreator = new CrossrefProposalCreator(context, qualifiedNameConverter)
 					for (description : scope.allElements) {
 						val String elementName = description.name.toString
 						if (elementName.startsWith(context.prefix)) {
-							acceptor.accept(new ContentAssistResult.Entry(CROSSREF, context.prefix) => [
-								proposal = elementName
-								description = description.EClass.name
-							])
+							acceptor.accept(proposalCreator.apply(description))
 						}
 					}
 				} catch (UnsupportedOperationException uoe) {
