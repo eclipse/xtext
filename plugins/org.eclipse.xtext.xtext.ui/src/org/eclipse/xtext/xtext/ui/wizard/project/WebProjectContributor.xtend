@@ -45,25 +45,20 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 			<head>
 				<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 				<meta http-equiv="Content-Language" content="en-us">
-				<meta http-equiv="Cache-Control" content="no-store" />
 				<title>Example Web Editor</title>
 				<link rel="stylesheet" type="text/css" href="style.css" />
+				<link rel="stylesheet" type="text/css" href="orion/built-editor.css"/>
 				<script src="http://requirejs.org/docs/release/2.1.17/minified/require.js"></script>
 				<script type="text/javascript">
 					require.config({
-						bundles: {
-							"orion-edit": ["orion/Deferred", "orion/keyBinding", "orion/editor/editorFeatures",
-								"orion/editor/textStyler", "orion/editor/textModel", "orion/editor/textTheme",
-								"orion/editor/textView", "orion/editor/contentAssist", "orion/editor/editor",
-								"orion/editor/projectionTextModel"]
-						},
 						paths: {
-						   	"jquery": "http://code.jquery.com/jquery-2.1.3.min",
-						   	"orion-edit": "orion/built-editor-amd.min"
+							"text": "https://raw.githubusercontent.com/requirejs/text/latest/text",
+							"jquery": "http://code.jquery.com/jquery-2.1.4.min"
 						}
 					});
+					require(["orion/built-editor-amd.min.js"]);
 					require(["xtext/xtext"], function(xtext) {
-						xtext.createEditor({theme: "orion/themes/default.css"});
+						xtext.createEditor();
 					});
 				</script>
 			</head>
