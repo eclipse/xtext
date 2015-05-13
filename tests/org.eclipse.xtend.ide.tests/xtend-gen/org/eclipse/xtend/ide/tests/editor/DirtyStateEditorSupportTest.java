@@ -12,6 +12,8 @@ import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+import org.apache.log4j.Level;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.ui.IEditorInput;
@@ -19,9 +21,17 @@ import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.junit4.logging.LoggingTester;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.validation.CheckMode;
+import org.eclipse.xtext.validation.IResourceValidator;
+import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
@@ -47,9 +57,13 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
   @Extension
   private SyncUtil _syncUtil;
   
+  @Inject
+  private IResourceValidator validator;
+  
   @Before
   public void start() {
     try {
+      WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME, "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.lib");
       this._workbenchTestHelper.closeWelcomePage();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -60,6 +74,78 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
   public void close() {
     try {
       this._workbenchTestHelper.tearDown();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug464483() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class A {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("new() {}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("static class B {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final String model = _builder.toString();
+      final XtextEditor c1Editor = this._workbenchTestHelper.openEditor("C1.xtend", model);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("import A.B");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("class C {}");
+      _builder_1.newLine();
+      final XtextEditor c2Editor = this._workbenchTestHelper.openEditor("C2.xtend", _builder_1.toString());
+      this._syncUtil.waitForDirtyStateUpdater(c1Editor);
+      this._syncUtil.waitForDirtyStateUpdater(c2Editor);
+      IXtextDocument _document = c1Editor.getDocument();
+      final IUnitOfWork<List<Issue>, XtextResource> _function = new IUnitOfWork<List<Issue>, XtextResource>() {
+        @Override
+        public List<Issue> exec(final XtextResource it) throws Exception {
+          return DirtyStateEditorSupportTest.this.validator.validate(it, CheckMode.ALL, null);
+        }
+      };
+      _document.<List<Issue>>readOnly(_function);
+      IXtextDocument _document_1 = c2Editor.getDocument();
+      final IUnitOfWork<List<Issue>, XtextResource> _function_1 = new IUnitOfWork<List<Issue>, XtextResource>() {
+        @Override
+        public List<Issue> exec(final XtextResource it) throws Exception {
+          return DirtyStateEditorSupportTest.this.validator.validate(it, CheckMode.ALL, null);
+        }
+      };
+      _document_1.<List<Issue>>readOnly(_function_1);
+      this.assertHasNoErrors(c1Editor);
+      this.assertHasNoErrors(c2Editor);
+      final int staticOffset = model.indexOf("static");
+      final Runnable _function_2 = new Runnable() {
+        @Override
+        public void run() {
+          try {
+            IXtextDocument _document = c1Editor.getDocument();
+            _document.replace(staticOffset, 0, "// ");
+            DirtyStateEditorSupportTest.this._syncUtil.waitForDirtyStateUpdater(c2Editor);
+            IXtextDocument _document_1 = c2Editor.getDocument();
+            final IUnitOfWork<List<Issue>, XtextResource> _function = new IUnitOfWork<List<Issue>, XtextResource>() {
+              @Override
+              public List<Issue> exec(final XtextResource it) throws Exception {
+                return DirtyStateEditorSupportTest.this.validator.validate(it, CheckMode.ALL, null);
+              }
+            };
+            _document_1.<List<Issue>>readOnly(_function);
+            DirtyStateEditorSupportTest.this.assertHasErrors(c2Editor, "A.B cannot be resolved to a type.");
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      LoggingTester.LogCapture _captureLogging = LoggingTester.captureLogging(Level.ERROR, XtextDocument.class, _function_2);
+      _captureLogging.assertNoLogEntries();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -80,7 +166,7 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
       _builder.append("println(inner) ");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("}   ");
+      _builder.append("}");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("interface NoDebuggingAcceptor {");
@@ -100,15 +186,13 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
       _builder_1.newLine();
       _builder_1.append("import foo.NoDebuggingCase");
       _builder_1.newLine();
-      _builder_1.append("class Bar {                              ");
+      _builder_1.append("class Bar {");
       _builder_1.newLine();
       _builder_1.append("\t");
-      _builder_1.append("def void testCase() {         ");
+      _builder_1.append("def void testCase() {");
       _builder_1.newLine();
       _builder_1.append("\t\t");
       _builder_1.append("var c = new NoDebuggingCase()");
-      _builder_1.newLine();
-      _builder_1.append("\t                                   ");
       _builder_1.newLine();
       _builder_1.append("\t\t");
       _builder_1.append("c.call(new NoDebuggingCase.NoDebuggingAcceptor() {");
@@ -150,6 +234,7 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
       _builder_2.append("} ");
       _builder_2.newLine();
       _builder_2.append("}");
+      _builder_2.newLine();
       final String replaceModel = _builder_2.toString();
       IXtextDocument _document_1 = editor.getDocument();
       int _length = model.length();
@@ -171,6 +256,10 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
   private final static long VALIDATION_TIMEOUT = 10000L;
   
   private void assertHasErrors(final XtextEditor editor) {
+    this.assertHasErrors(editor, null);
+  }
+  
+  private void assertHasErrors(final XtextEditor editor, final String... messages) {
     final Function0<Boolean> _function = new Function0<Boolean>() {
       @Override
       public Boolean apply() {
@@ -196,6 +285,18 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
     int _size = errors.size();
     boolean _greaterThan = (_size > 0);
     Assert.assertTrue(_join, _greaterThan);
+    if ((messages != null)) {
+      final Function1<Annotation, String> _function_2 = new Function1<Annotation, String>() {
+        @Override
+        public String apply(final Annotation it) {
+          return it.getText();
+        }
+      };
+      List<String> _map_1 = ListExtensions.<Annotation, String>map(errors, _function_2);
+      final Set<String> actualErrors = IterableExtensions.<String>toSet(_map_1);
+      final Set<String> expectedErrors = IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(messages)));
+      Assert.assertEquals(expectedErrors, actualErrors);
+    }
   }
   
   private void assertHasNoErrors(final XtextEditor editor) {
