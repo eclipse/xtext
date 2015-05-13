@@ -109,6 +109,9 @@ class XtextBuildDaemon {
 										shutdown = true
 									} else {
 										socketChannel.configureBlocking(true)
+										socketChannel.socket.sendBufferSize = ObjectChannel.BUFFER_SIZE
+										socketChannel.socket.receiveBufferSize = ObjectChannel.BUFFER_SIZE
+										socketChannel.socket.tcpNoDelay = true
 										currentTimeout = arguments.timeout
 										shutdown = worker.serve(socketChannel)
 									}

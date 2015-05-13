@@ -307,10 +307,6 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
           String _file_1 = it.getFile();
           CustomBuilderMessage _customBuilderMessage = new CustomBuilderMessage(_presentableName, "generated", _file_1);
           context.processMessage(_customBuilderMessage);
-          String _presentableName_1 = XtextIdeaBuilder.this.getPresentableName();
-          String _file_2 = it.getFile();
-          CustomBuilderMessage _customBuilderMessage_1 = new CustomBuilderMessage(_presentableName_1, "refresh", _file_2);
-          context.processMessage(_customBuilderMessage_1);
           List<String> _sourceFiles = it.getSourceFiles();
           final Function1<String, String> _function = new Function1<String, String>() {
             @Override
@@ -337,15 +333,15 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
           String _presentableName = XtextIdeaBuilder.this.getPresentableName();
           CustomBuilderMessage _customBuilderMessage = new CustomBuilderMessage(_presentableName, "generated", it);
           context.processMessage(_customBuilderMessage);
-          String _presentableName_1 = XtextIdeaBuilder.this.getPresentableName();
-          CustomBuilderMessage _customBuilderMessage_1 = new CustomBuilderMessage(_presentableName_1, "refresh", it);
-          context.processMessage(_customBuilderMessage_1);
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
       }
     };
     IterableExtensions.<String>forEach(_deletedFiles, _function_1);
+    String _presentableName = this.getPresentableName();
+    CustomBuilderMessage _customBuilderMessage = new CustomBuilderMessage(_presentableName, "refresh", null);
+    context.processMessage(_customBuilderMessage);
   }
   
   private void reportIssue(final Protocol.BuildIssueMessage it, final CompileContext context) {

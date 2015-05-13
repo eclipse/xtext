@@ -155,9 +155,12 @@ public class IncrementalStandaloneBuilder {
           boolean _xblockexpression = false;
           {
             File _tempDir_1 = this.context.getTempDir();
-            Files.sweepFolder(_tempDir_1);
+            String _plus = ("Removing temp folder " + _tempDir_1);
+            IncrementalStandaloneBuilder.LOG.info(_plus);
             File _tempDir_2 = this.context.getTempDir();
-            _xblockexpression = _tempDir_2.delete();
+            Files.sweepFolder(_tempDir_2);
+            File _tempDir_3 = this.context.getTempDir();
+            _xblockexpression = _tempDir_3.delete();
           }
           _xifexpression = _xblockexpression;
         }
@@ -232,6 +235,7 @@ public class IncrementalStandaloneBuilder {
       final Procedure1<URI> _function = new Procedure1<URI>() {
         @Override
         public void apply(final URI it) {
+          IncrementalStandaloneBuilder.LOG.info(("Deleting stale generated file " + it));
           File _asFile = FilesAndURIs.asFile(it);
           _asFile.delete();
           Procedure1<? super URI> _afterDeleteFile = request.getAfterDeleteFile();

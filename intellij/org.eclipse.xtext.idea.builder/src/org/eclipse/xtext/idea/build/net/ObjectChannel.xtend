@@ -24,7 +24,7 @@ import static java.lang.Math.*
  */
 class ObjectChannel {
 	
-	public static val BUFFER_SIZE = 32768
+	public static val BUFFER_SIZE = 65536
 	
 	ByteBuffer inputBuffer = ByteBuffer.allocate(BUFFER_SIZE)
 	ByteBuffer outputBuffer = ByteBuffer.allocate(BUFFER_SIZE)
@@ -48,6 +48,7 @@ class ObjectChannel {
 		val oos = new ObjectOutputStream(baos)
 		try {
 			oos.writeObject(o)
+			oos.flush
 			val bytes = baos.toByteArray
 			outputBuffer.putInt(bytes.length)
 			var offset = 0
@@ -55,7 +56,8 @@ class ObjectChannel {
 				var numBytes = min(outputBuffer.remaining, bytes.length-offset)
 				outputBuffer.put(bytes, offset, numBytes)
 				outputBuffer.flip
-				outputChannel.write(outputBuffer)
+				while(outputBuffer.hasRemaining)
+					outputChannel.write(outputBuffer)
 				outputBuffer.clear
 				offset += numBytes
 			} 

@@ -23,7 +23,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
  */
 @SuppressWarnings("all")
 public class ObjectChannel {
-  public final static int BUFFER_SIZE = 32768;
+  public final static int BUFFER_SIZE = 65536;
   
   private ByteBuffer inputBuffer = ByteBuffer.allocate(ObjectChannel.BUFFER_SIZE);
   
@@ -50,6 +50,7 @@ public class ObjectChannel {
       final ObjectOutputStream oos = new ObjectOutputStream(baos);
       try {
         oos.writeObject(o);
+        oos.flush();
         final byte[] bytes = baos.toByteArray();
         int _length = bytes.length;
         this.outputBuffer.putInt(_length);
@@ -62,7 +63,9 @@ public class ObjectChannel {
             int numBytes = Math.min(_remaining, _minus);
             this.outputBuffer.put(bytes, offset, numBytes);
             this.outputBuffer.flip();
-            this.outputChannel.write(this.outputBuffer);
+            while (this.outputBuffer.hasRemaining()) {
+              this.outputChannel.write(this.outputBuffer);
+            }
             this.outputBuffer.clear();
             int _offset = offset;
             offset = (_offset + numBytes);

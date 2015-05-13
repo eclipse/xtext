@@ -16,6 +16,7 @@ import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
+import java.net.Socket;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
@@ -104,6 +105,12 @@ public class XtextBuildDaemon {
                         shutdown = true;
                       } else {
                         socketChannel.configureBlocking(true);
+                        Socket _socket_1 = socketChannel.socket();
+                        _socket_1.setSendBufferSize(ObjectChannel.BUFFER_SIZE);
+                        Socket _socket_2 = socketChannel.socket();
+                        _socket_2.setReceiveBufferSize(ObjectChannel.BUFFER_SIZE);
+                        Socket _socket_3 = socketChannel.socket();
+                        _socket_3.setTcpNoDelay(true);
                         currentTimeout = arguments.timeout;
                         boolean _serve = this.worker.serve(socketChannel);
                         shutdown = _serve;
