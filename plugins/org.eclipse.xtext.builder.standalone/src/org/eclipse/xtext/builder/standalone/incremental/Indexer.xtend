@@ -69,8 +69,7 @@ class Indexer {
 
 		val isConsiderJava = !languages
 				.entrySet
-				.filter[value.linksAgainstJava]
-				.empty
+				.exists[value.linksAgainstJava]
 
 		val affectionCandidates = newHashSet
 		var Set<URI> directlyAffected = null

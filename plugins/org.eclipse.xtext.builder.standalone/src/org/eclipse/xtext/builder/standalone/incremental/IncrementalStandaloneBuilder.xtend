@@ -92,6 +92,7 @@ class IncrementalStandaloneBuilder {
 		
 		def protected cleanup() {
 			if(tempDir.exists) {
+				LOG.info('Removing temp folder ' + tempDir)
 				Files.sweepFolder(tempDir)
 				tempDir.delete		
 			}
@@ -133,6 +134,7 @@ class IncrementalStandaloneBuilder {
 			access.generator.doGenerate(resource, fileSystemAccess)
 			// delete everything that was previously generated, but not this time
 			previous.forEach[
+				LOG.info('Deleting stale generated file ' + it)
 				asFile.delete
 				request.getAfterDeleteFile.apply(it)
 			]

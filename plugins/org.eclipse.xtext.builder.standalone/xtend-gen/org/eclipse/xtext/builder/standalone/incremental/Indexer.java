@@ -182,9 +182,8 @@ public class Indexer {
         return Boolean.valueOf(_value.isLinksAgainstJava());
       }
     };
-    Iterable<Map.Entry<String, LanguageAccess>> _filter = IterableExtensions.<Map.Entry<String, LanguageAccess>>filter(_entrySet, _function);
-    boolean _isEmpty = IterableExtensions.isEmpty(_filter);
-    final boolean isConsiderJava = (!_isEmpty);
+    boolean _exists = IterableExtensions.<Map.Entry<String, LanguageAccess>>exists(_entrySet, _function);
+    final boolean isConsiderJava = (!_exists);
     final HashSet<URI> affectionCandidates = CollectionLiterals.<URI>newHashSet();
     Set<URI> directlyAffected = null;
     if (fullBuild) {
@@ -204,8 +203,8 @@ public class Indexer {
           return Boolean.valueOf((!_contains));
         }
       };
-      Iterable<URI> _filter_1 = IterableExtensions.<URI>filter(_allURIs, _function_1);
-      Iterables.<URI>addAll(affectionCandidates, _filter_1);
+      Iterable<URI> _filter = IterableExtensions.<URI>filter(_allURIs, _function_1);
+      Iterables.<URI>addAll(affectionCandidates, _filter);
       List<URI> _dirtyFiles_1 = request.getDirtyFiles();
       final Function1<URI, Iterable<URI>> _function_2 = new Function1<URI, Iterable<URI>>() {
         @Override
@@ -273,8 +272,8 @@ public class Indexer {
               return Boolean.valueOf(Objects.equal(_fileExtension, "java"));
             }
           };
-          Iterable<URI> _filter_2 = IterableExtensions.<URI>filter(_plus_6, _function_4);
-          final Set<URI> affectedJavaFiles = IterableExtensions.<URI>toSet(_filter_2);
+          Iterable<URI> _filter_1 = IterableExtensions.<URI>filter(_plus_6, _function_4);
+          final Set<URI> affectedJavaFiles = IterableExtensions.<URI>toSet(_filter_1);
           List<URI> _deletedFiles_1 = request.getDeletedFiles();
           final Function1<URI, Iterable<URI>> _function_5 = new Function1<URI, Iterable<URI>>() {
             @Override
@@ -316,8 +315,8 @@ public class Indexer {
               return Boolean.valueOf(_or);
             }
           };
-          Iterable<URI> _filter_3 = IterableExtensions.<URI>filter(_flatten_3, _function_8);
-          Iterables.<URI>addAll(toBeIndexed, _filter_3);
+          Iterable<URI> _filter_2 = IterableExtensions.<URI>filter(_flatten_3, _function_8);
+          Iterables.<URI>addAll(toBeIndexed, _filter_2);
         }
         allAffected.addAll(toBeIndexed);
         affectionCandidates.removeAll(toBeIndexed);
@@ -344,7 +343,7 @@ public class Indexer {
             return Boolean.valueOf(Objects.equal(_fileExtension, "java"));
           }
         };
-        Iterable<URI> _filter_4 = IterableExtensions.<URI>filter(toBeIndexed, _function_10);
+        Iterable<URI> _filter_3 = IterableExtensions.<URI>filter(toBeIndexed, _function_10);
         final Procedure1<URI> _function_11 = new Procedure1<URI>() {
           @Override
           public void apply(final URI it) {
@@ -357,7 +356,7 @@ public class Indexer {
             currentDeltas.add(_changedDelta);
           }
         };
-        IterableExtensions.<URI>forEach(_filter_4, _function_11);
+        IterableExtensions.<URI>forEach(_filter_3, _function_11);
         Iterables.<IResourceDescription.Delta>addAll(allDeltas, currentDeltas);
         toBeIndexed.clear();
         final Function1<URI, Boolean> _function_12 = new Function1<URI, Boolean>() {
@@ -380,11 +379,11 @@ public class Indexer {
             return Boolean.valueOf(_xblockexpression);
           }
         };
-        Iterable<URI> _filter_5 = IterableExtensions.<URI>filter(affectionCandidates, _function_12);
-        Iterables.<URI>addAll(toBeIndexed, _filter_5);
+        Iterable<URI> _filter_4 = IterableExtensions.<URI>filter(affectionCandidates, _function_12);
+        Iterables.<URI>addAll(toBeIndexed, _filter_4);
         currentDeltas.clear();
-        boolean _isEmpty_1 = toBeIndexed.isEmpty();
-        boolean _not = (!_isEmpty_1);
+        boolean _isEmpty = toBeIndexed.isEmpty();
+        boolean _not = (!_isEmpty);
         if (_not) {
           Indexer.LOG.info("Indexing affected files");
         }
