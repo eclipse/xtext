@@ -22,20 +22,18 @@ public class IdeaProjectContributor extends DefaultProjectFactoryContributor {
   @Override
   public void contributeFiles(final IProject project, final IProjectFactoryContributor.IFileCreator fc) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("buildscript {");
+    _builder.append("plugins {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("repositories { jcenter() }");
+    _builder.append("id \'org.xtend.xtend\' version \'0.4.7\'");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("dependencies { classpath \'org.xtext:xtext-idea-gradle-plugin:+\'}");
+    _builder.append("id \'org.xtext.idea-plugin\' version \'0.3.16\'");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("id \'eclipse\'");
     _builder.newLine();
     _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("apply plugin: \'org.xtext.idea-plugin\'");
-    _builder.newLine();
-    _builder.append("apply plugin: \'eclipse\'");
     _builder.newLine();
     _builder.newLine();
     _builder.append("dependencies {");
@@ -79,6 +77,9 @@ public class IdeaProjectContributor extends DefaultProjectFactoryContributor {
     _builder.append("}");
     _builder.newLine();
     _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("sourceSets.main.xtendOutputDir = \'xtend-gen\'");
     _builder.newLine();
     _builder.newLine();
     _builder.append("allprojects {");
