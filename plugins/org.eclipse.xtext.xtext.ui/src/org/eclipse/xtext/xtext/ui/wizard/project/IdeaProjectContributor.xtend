@@ -18,13 +18,11 @@ class IdeaProjectContributor extends DefaultProjectFactoryContributor {
 
 	override contributeFiles(IProject project, IFileCreator fc) {
 		'''
-			buildscript {
-				repositories { jcenter() }
-				dependencies { classpath 'org.xtext:xtext-idea-gradle-plugin:+'}
+			plugins {
+				id 'org.xtend.xtend' version '0.4.7'
+				id 'org.xtext.idea-plugin' version '0.3.16'
+				id 'eclipse'
 			}
-			
-			apply plugin: 'org.xtext.idea-plugin'
-			apply plugin: 'eclipse'
 			
 			dependencies {
 				compile project(':«projectInfo.projectName»')
@@ -40,7 +38,9 @@ class IdeaProjectContributor extends DefaultProjectFactoryContributor {
 					id 'org.eclipse.xtext.idea' version '2.9.0-SNAPSHOT'
 				}
 			}
-			
+
+			sourceSets.main.xtendOutputDir = 'xtend-gen'
+
 			allprojects {
 				repositories { 
 					jcenter()
