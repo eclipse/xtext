@@ -21,7 +21,7 @@ class FilesAndURIs {
 	 * Unfortunately, {@link File#toURI} does not append '/' to directiories, making it useless for the {@link URLClassLoader}.
 	 */
 	static def asURI(File file) {
-		val uri = URI.createFileURI(file.absolutePath)
+		val uri = URI.createFileURI(file.canonicalFile.absolutePath)
 		if(file.isDirectory)
 			uri.appendSegment('')
 		else 
@@ -29,14 +29,14 @@ class FilesAndURIs {
 	}
 	
 	static def asFile(URI uri) {
-		new File(asPath(uri))
+		if(uri.isFile) 
+			new File(uri.toFileString).canonicalFile
+		else
+			throw new IllegalArgumentException('Cannot convert non-file URI ' + uri + ' to file')
 	}
 	
 	static def asPath(URI uri) {
-		if(uri.isFile) 
-			uri.toFileString
-		else
-			throw new IllegalArgumentException('Cannot convert non-file URI ' + uri + ' to file')
+		uri.asFile.path		
 	}
 	
 	static def asURI(String uri) {
@@ -44,7 +44,7 @@ class FilesAndURIs {
 	}
 
 	static def asFileURI(String path) {
-		URI.createFileURI(path)
+		URI.createFileURI(new File(path).canonicalPath)
 	}
 	
 	static def asPath(URL url) {

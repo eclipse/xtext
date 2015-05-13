@@ -16,6 +16,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -29,36 +30,47 @@ public class FilesAndURIs {
    * Unfortunately, {@link File#toURI} does not append '/' to directiories, making it useless for the {@link URLClassLoader}.
    */
   public static URI asURI(final File file) {
-    URI _xblockexpression = null;
-    {
-      String _absolutePath = file.getAbsolutePath();
-      final URI uri = URI.createFileURI(_absolutePath);
-      URI _xifexpression = null;
-      boolean _isDirectory = file.isDirectory();
-      if (_isDirectory) {
-        _xifexpression = uri.appendSegment("");
-      } else {
-        _xifexpression = uri;
+    try {
+      URI _xblockexpression = null;
+      {
+        File _canonicalFile = file.getCanonicalFile();
+        String _absolutePath = _canonicalFile.getAbsolutePath();
+        final URI uri = URI.createFileURI(_absolutePath);
+        URI _xifexpression = null;
+        boolean _isDirectory = file.isDirectory();
+        if (_isDirectory) {
+          _xifexpression = uri.appendSegment("");
+        } else {
+          _xifexpression = uri;
+        }
+        _xblockexpression = _xifexpression;
       }
-      _xblockexpression = _xifexpression;
+      return _xblockexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
-    return _xblockexpression;
   }
   
   public static File asFile(final URI uri) {
-    String _asPath = FilesAndURIs.asPath(uri);
-    return new File(_asPath);
+    try {
+      File _xifexpression = null;
+      boolean _isFile = uri.isFile();
+      if (_isFile) {
+        String _fileString = uri.toFileString();
+        File _file = new File(_fileString);
+        _xifexpression = _file.getCanonicalFile();
+      } else {
+        throw new IllegalArgumentException((("Cannot convert non-file URI " + uri) + " to file"));
+      }
+      return _xifexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   public static String asPath(final URI uri) {
-    String _xifexpression = null;
-    boolean _isFile = uri.isFile();
-    if (_isFile) {
-      _xifexpression = uri.toFileString();
-    } else {
-      throw new IllegalArgumentException((("Cannot convert non-file URI " + uri) + " to file"));
-    }
-    return _xifexpression;
+    File _asFile = FilesAndURIs.asFile(uri);
+    return _asFile.getPath();
   }
   
   public static URI asURI(final String uri) {
@@ -66,7 +78,13 @@ public class FilesAndURIs {
   }
   
   public static URI asFileURI(final String path) {
-    return URI.createFileURI(path);
+    try {
+      File _file = new File(path);
+      String _canonicalPath = _file.getCanonicalPath();
+      return URI.createFileURI(_canonicalPath);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   public static String asPath(final URL url) {
