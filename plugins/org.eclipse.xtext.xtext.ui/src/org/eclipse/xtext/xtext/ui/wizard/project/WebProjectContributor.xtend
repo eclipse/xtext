@@ -59,11 +59,11 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 						},
 						paths: {
 						   	"jquery": "http://code.jquery.com/jquery-2.1.3.min",
-						   	"orion-edit": "http://orionhub.org/edit/edit"
+						   	"orion-edit": "orion/built-editor-amd.min"
 						}
 					});
 					require(["xtext/xtext"], function(xtext) {
-						xtext.createEditor({theme: "https://orionhub.org/edit/edit.css"});
+						xtext.createEditor({theme: "orion/themes/default.css"});
 					});
 				</script>
 			</head>
@@ -171,12 +171,37 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 				providedCompile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.+'
 			}
 			
+			/* 
+			 * The following download/unpack tasks are currently necessary 
+			 * because Eclipse Orion does not provide easily consumable artifacts
+			 */
+			
+			def orionDir = file('src/main/webapp/orion')
+			def orionZip = file("$buildDir/orionTmp/built-editor.zip")
+			
+			task downloadOrion {
+				onlyIf {!orionDir.exists()}
+				doLast {
+					orionZip.parentFile.mkdirs()
+					ant.get(src: 'http://download.eclipse.org/orion/drops/R-8.0-201502161823/built-editor.zip', dest: orionZip)
+				}
+			}
+			
+			task unpackOrion(type: Copy) {
+				onlyIf {!orionDir.exists()}
+				dependsOn(downloadOrion)
+				from(zipTree(orionZip))
+				into(orionDir)
+			}
+			
 			task jettyRun(type:JavaExec) {
-				dependsOn(sourceSets.main.runtimeClasspath)
+				dependsOn(sourceSets.main.runtimeClasspath, unpackOrion)
 				classpath = sourceSets.main.runtimeClasspath.filter{it.exists()}
-				main = "«projectInfo.basePackage».«WEB».ServerLauncher"
+				main = "org.xtext.example.mydsl.web.ServerLauncher"
 				standardInput = System.in
 			}
+			
+			tasks.eclipse.dependsOn(unpackOrion)
 			
 			allprojects {
 				repositories { 
