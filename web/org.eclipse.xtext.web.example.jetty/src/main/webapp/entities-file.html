@@ -5,18 +5,17 @@
 	<meta http-equiv="Content-Language" content="en-us">
 	<title>Xtext-Web Domainmodel Example</title>
 	<link rel="stylesheet" type="text/css" href="style.css" />
-	<script src="requirejs/require.js"></script>
+	<script src="requirejs/require.min.js"></script>
 	<script type="text/javascript">
-		require({
-		  paths: {
-			  text: 'requirejs/text',
-			  i18n: 'requirejs/i18n',
-		      domReady: 'requirejs/domReady',
-		      jquery : 'jquery/jquery'
-		  }
+		require.config({
+			paths: {
+				text: 'requirejs/text',
+				i18n: 'requirejs/i18n',
+				jquery: 'jquery/jquery.min'
+			}
 		});
 		require(["xtext/xtext"], function(xtext) {
-			var editor = xtext.createEditor();
+			var editor = xtext.createEditor({theme: "orion/editor/themes/default.css"});
 			$("#save-button").click(function() {
 				xtext.invokeService(editor, "save");
 			});
