@@ -59,6 +59,9 @@ public class XbaseDocumentProvider extends XtextDocumentProvider {
 		if (input instanceof IClassFileEditorInput) {
 			IClassFile classFile = ((IClassFileEditorInput) input).getClassFile();
 			ILocationInResource source = getClassFileSourceStorage(classFile);
+			if (source == null) {
+				return false;
+			}
 			InputStream contents = null;
 			try {
 				contents = source.getContents();
