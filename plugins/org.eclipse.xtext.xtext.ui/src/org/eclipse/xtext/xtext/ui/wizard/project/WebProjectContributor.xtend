@@ -45,25 +45,20 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 			<head>
 				<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 				<meta http-equiv="Content-Language" content="en-us">
-				<meta http-equiv="Cache-Control" content="no-store" />
 				<title>Example Web Editor</title>
 				<link rel="stylesheet" type="text/css" href="style.css" />
-				<script src="http://requirejs.org/docs/release/2.1.17/minified/require.js"></script>
+				<link rel="stylesheet" type="text/css" href="orion/built-editor.css"/>
+				<script src="webjars/requirejs/2.1.17/require.min.js"></script>
 				<script type="text/javascript">
 					require.config({
-						bundles: {
-							"orion-edit": ["orion/Deferred", "orion/keyBinding", "orion/editor/editorFeatures",
-								"orion/editor/textStyler", "orion/editor/textModel", "orion/editor/textTheme",
-								"orion/editor/textView", "orion/editor/contentAssist", "orion/editor/editor",
-								"orion/editor/projectionTextModel"]
-						},
 						paths: {
-						   	"jquery": "http://code.jquery.com/jquery-2.1.3.min",
-						   	"orion-edit": "http://orionhub.org/edit/edit"
+							"text": "webjars/requirejs-text/2.0.10-3/text",
+							"jquery": "webjars/jquery/2.1.4/jquery.min"
 						}
 					});
+					require(["orion/built-editor-amd.min.js"]);
 					require(["xtext/xtext"], function(xtext) {
-						xtext.createEditor({theme: "https://orionhub.org/edit/edit.css"});
+						xtext.createEditor();
 					});
 				</script>
 			</head>
@@ -167,16 +162,44 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 				compile group: 'org.eclipse.xtext', name: 'org.eclipse.xtext.web.servlet', version: '2.9.+'
 				compile project(':«projectInfo.projectName»')
 				compile project(':«projectInfo.ideProjectName»')
+				compile group: 'org.webjars', name: 'requirejs', version: '2.1.17'
+				compile group: 'org.webjars', name: 'requirejs-text', version: '2.0.10-3'
+				compile group: 'org.webjars', name: 'jquery', version: '2.1.4'
 				providedCompile group: 'org.eclipse.jetty', name: 'jetty-annotations', version: '9.2.+'
 				providedCompile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.+'
 			}
 			
+			/* 
+			 * The following download/unpack tasks are currently necessary 
+			 * because Eclipse Orion does not provide easily consumable artifacts
+			 */
+			
+			def orionDir = file('src/main/webapp/orion')
+			def orionZip = file("$buildDir/orionTmp/built-editor.zip")
+			
+			task downloadOrion {
+				onlyIf {!orionDir.exists()}
+				doLast {
+					orionZip.parentFile.mkdirs()
+					ant.get(src: 'http://download.eclipse.org/orion/drops/R-8.0-201502161823/built-editor.zip', dest: orionZip)
+				}
+			}
+			
+			task unpackOrion(type: Copy) {
+				onlyIf {!orionDir.exists()}
+				dependsOn(downloadOrion)
+				from(zipTree(orionZip))
+				into(orionDir)
+			}
+			
 			task jettyRun(type:JavaExec) {
-				dependsOn(sourceSets.main.runtimeClasspath)
+				dependsOn(sourceSets.main.runtimeClasspath, unpackOrion)
 				classpath = sourceSets.main.runtimeClasspath.filter{it.exists()}
-				main = "«projectInfo.basePackage».«WEB».ServerLauncher"
+				main = "org.xtext.example.mydsl.web.ServerLauncher"
 				standardInput = System.in
 			}
+			
+			tasks.eclipse.dependsOn(unpackOrion)
 			
 			allprojects {
 				repositories { 
@@ -241,7 +264,7 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 							new WebInfConfiguration,
 							new MetaInfConfiguration
 						]
-						setAttribute(WebInfConfiguration.CONTAINER_JAR_PATTERN, ".*org\\.eclipse\\.xtext\\.web.*|.*«projectInfo.webProjectName.replaceAll('\\.','\\\\\\\\.')».*")
+						setAttribute(WebInfConfiguration.CONTAINER_JAR_PATTERN, ".*org\\.eclipse\\.xtext\\.web.*|.*«projectInfo.webProjectName.replaceAll('\\.','\\\\\\\\.')».*|.*requirejs.*|.*jquery.*")
 					]
 					val log = new Slf4jLog
 					server.start
