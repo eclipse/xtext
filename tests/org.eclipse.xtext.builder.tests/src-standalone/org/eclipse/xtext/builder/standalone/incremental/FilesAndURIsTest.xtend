@@ -13,6 +13,7 @@ import org.junit.Test
 import static extension org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs.*
 import static org.junit.Assert.*
 import java.io.File
+import org.eclipse.emf.common.util.URI
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -44,6 +45,14 @@ class FilesAndURIsTest {
 		assertRelativeURI(null, 'http:/foo/bar/Foo.txt', 'file:/foo/bar/Foo.txt/')
 		assertRelativeURI('Foo.txt', 'file:/foo/bar/Foo.txt', 'file:/foo/', 'file:/foo/bar/')
 		assertRelativeURI('Foo.txt', 'file:/foo/bar/Foo.txt', 'file:/foo/bar/', 'file:/foo/')
+	}
+	
+	@Test
+	def testDotInURI() {
+		assertEquals('/Users/Foo/bar', URI.createURI('file:/Users/./Foo/bar').asPath)
+		assertEquals('/Users/Foo/bar', URI.createURI('file:/Users/./Foo/bar').asFile.path)
+		assertEquals('file:/Users/Foo/bar', '/Users/./Foo/bar'.asFileURI.toString)
+		assertEquals('file:/Users/Foo/bar', new File('/Users/./Foo/bar').asURI.toString)
 	}
 	
 	def assertRelativeURI(String expected, String absoluteURI, String... baseURIs) {

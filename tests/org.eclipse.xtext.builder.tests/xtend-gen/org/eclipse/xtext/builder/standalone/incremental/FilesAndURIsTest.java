@@ -54,6 +54,24 @@ public class FilesAndURIsTest {
     this.assertRelativeURI("Foo.txt", "file:/foo/bar/Foo.txt", "file:/foo/bar/", "file:/foo/");
   }
   
+  @Test
+  public void testDotInURI() {
+    URI _createURI = URI.createURI("file:/Users/./Foo/bar");
+    String _asPath = FilesAndURIs.asPath(_createURI);
+    Assert.assertEquals("/Users/Foo/bar", _asPath);
+    URI _createURI_1 = URI.createURI("file:/Users/./Foo/bar");
+    File _asFile = FilesAndURIs.asFile(_createURI_1);
+    String _path = _asFile.getPath();
+    Assert.assertEquals("/Users/Foo/bar", _path);
+    URI _asFileURI = FilesAndURIs.asFileURI("/Users/./Foo/bar");
+    String _string = _asFileURI.toString();
+    Assert.assertEquals("file:/Users/Foo/bar", _string);
+    File _file = new File("/Users/./Foo/bar");
+    URI _asURI = FilesAndURIs.asURI(_file);
+    String _string_1 = _asURI.toString();
+    Assert.assertEquals("file:/Users/Foo/bar", _string_1);
+  }
+  
   public void assertRelativeURI(final String expected, final String absoluteURI, final String... baseURIs) {
     URI _asURI = null;
     if (expected!=null) {
