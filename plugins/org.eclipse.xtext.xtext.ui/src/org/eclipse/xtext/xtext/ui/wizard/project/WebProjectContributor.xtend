@@ -48,12 +48,12 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 				<title>Example Web Editor</title>
 				<link rel="stylesheet" type="text/css" href="style.css" />
 				<link rel="stylesheet" type="text/css" href="orion/built-editor.css"/>
-				<script src="http://requirejs.org/docs/release/2.1.17/minified/require.js"></script>
+				<script src="webjars/requirejs/2.1.17/require.min.js"></script>
 				<script type="text/javascript">
 					require.config({
 						paths: {
-							"text": "https://raw.githubusercontent.com/requirejs/text/latest/text",
-							"jquery": "http://code.jquery.com/jquery-2.1.4.min"
+							"text": "webjars/requirejs-text/2.0.10-3/text",
+							"jquery": "webjars/jquery/2.1.4/jquery.min"
 						}
 					});
 					require(["orion/built-editor-amd.min.js"]);
@@ -162,6 +162,9 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 				compile group: 'org.eclipse.xtext', name: 'org.eclipse.xtext.web.servlet', version: '2.9.+'
 				compile project(':«projectInfo.projectName»')
 				compile project(':«projectInfo.ideProjectName»')
+				compile group: 'org.webjars', name: 'requirejs', version: '2.1.17'
+				compile group: 'org.webjars', name: 'requirejs-text', version: '2.0.10-3'
+				compile group: 'org.webjars', name: 'jquery', version: '2.1.4'
 				providedCompile group: 'org.eclipse.jetty', name: 'jetty-annotations', version: '9.2.+'
 				providedCompile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.+'
 			}
@@ -261,7 +264,7 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 							new WebInfConfiguration,
 							new MetaInfConfiguration
 						]
-						setAttribute(WebInfConfiguration.CONTAINER_JAR_PATTERN, ".*org\\.eclipse\\.xtext\\.web.*|.*«projectInfo.webProjectName.replaceAll('\\.','\\\\\\\\.')».*")
+						setAttribute(WebInfConfiguration.CONTAINER_JAR_PATTERN, ".*org\\.eclipse\\.xtext\\.web.*|.*«projectInfo.webProjectName.replaceAll('\\.','\\\\\\\\.')».*|.*requirejs.*|.*jquery.*")
 					]
 					val log = new Slf4jLog
 					server.start

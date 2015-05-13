@@ -77,7 +77,7 @@ public class WebProjectContributor extends DefaultProjectFactoryContributor {
       _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"orion/built-editor.css\"/>");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("<script src=\"http://requirejs.org/docs/release/2.1.17/minified/require.js\"></script>");
+      _builder.append("<script src=\"webjars/requirejs/2.1.17/require.min.js\"></script>");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("<script type=\"text/javascript\">");
@@ -89,10 +89,10 @@ public class WebProjectContributor extends DefaultProjectFactoryContributor {
       _builder.append("paths: {");
       _builder.newLine();
       _builder.append("\t\t\t\t");
-      _builder.append("\"text\": \"https://raw.githubusercontent.com/requirejs/text/latest/text\",");
+      _builder.append("\"text\": \"webjars/requirejs-text/2.0.10-3/text\",");
       _builder.newLine();
       _builder.append("\t\t\t\t");
-      _builder.append("\"jquery\": \"http://code.jquery.com/jquery-2.1.4.min\"");
+      _builder.append("\"jquery\": \"webjars/jquery/2.1.4/jquery.min\"");
       _builder.newLine();
       _builder.append("\t\t\t");
       _builder.append("}");
@@ -363,6 +363,15 @@ public class WebProjectContributor extends DefaultProjectFactoryContributor {
       _builder.append("\')");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
+      _builder.append("compile group: \'org.webjars\', name: \'requirejs\', version: \'2.1.17\'");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("compile group: \'org.webjars\', name: \'requirejs-text\', version: \'2.0.10-3\'");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("compile group: \'org.webjars\', name: \'jquery\', version: \'2.1.4\'");
+      _builder.newLine();
+      _builder.append("\t");
       _builder.append("providedCompile group: \'org.eclipse.jetty\', name: \'jetty-annotations\', version: \'9.2.+\'");
       _builder.newLine();
       _builder.append("\t");
@@ -609,7 +618,7 @@ public class WebProjectContributor extends DefaultProjectFactoryContributor {
       String _webProjectName = this.projectInfo.getWebProjectName();
       String _replaceAll = _webProjectName.replaceAll("\\.", "\\\\\\\\.");
       _builder.append(_replaceAll, "\t\t\t");
-      _builder.append(".*\")");
+      _builder.append(".*|.*requirejs.*|.*jquery.*\")");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("]");
