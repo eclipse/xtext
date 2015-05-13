@@ -7,9 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.build.client
 
-import java.io.BufferedReader
+import com.google.common.base.Charsets
+import com.google.common.io.Files
 import java.io.File
-import java.io.FileReader
 import java.io.FileWriter
 import java.io.IOException
 import java.lang.management.ManagementFactory
@@ -42,7 +42,7 @@ class DaemonConnector {
 		val portFile = new File(DaemonConnector.DAEMON_LOCK_FILE)
 		try {
 			if (portFile.exists) {
-				val line = new BufferedReader(new FileReader(portFile)).readLine
+				val line = Files.toString(portFile, Charsets.US_ASCII)
 				val port = Integer.parseInt(line.trim)
 				var socketChannel = connectClientSocketChannel(port)
 				return socketChannel

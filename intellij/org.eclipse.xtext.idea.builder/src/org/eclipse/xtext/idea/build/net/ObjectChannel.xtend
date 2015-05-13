@@ -48,6 +48,7 @@ class ObjectChannel {
 		val oos = new ObjectOutputStream(baos)
 		try {
 			oos.writeObject(o)
+			oos.flush
 			val bytes = baos.toByteArray
 			outputBuffer.putInt(bytes.length)
 			var offset = 0

@@ -50,6 +50,7 @@ public class ObjectChannel {
       final ObjectOutputStream oos = new ObjectOutputStream(baos);
       try {
         oos.writeObject(o);
+        oos.flush();
         final byte[] bytes = baos.toByteArray();
         int _length = bytes.length;
         this.outputBuffer.putInt(_length);

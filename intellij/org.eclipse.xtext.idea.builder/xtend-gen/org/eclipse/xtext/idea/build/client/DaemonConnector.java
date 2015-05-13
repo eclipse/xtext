@@ -7,11 +7,11 @@
  */
 package org.eclipse.xtext.idea.build.client;
 
+import com.google.common.base.Charsets;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import java.io.BufferedReader;
+import com.google.common.io.Files;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
@@ -60,9 +60,7 @@ public class DaemonConnector {
       try {
         boolean _exists = portFile.exists();
         if (_exists) {
-          FileReader _fileReader = new FileReader(portFile);
-          BufferedReader _bufferedReader = new BufferedReader(_fileReader);
-          final String line = _bufferedReader.readLine();
+          final String line = Files.toString(portFile, Charsets.US_ASCII);
           String _trim = line.trim();
           final int port = Integer.parseInt(_trim);
           SocketChannel socketChannel = this.connectClientSocketChannel(port);
