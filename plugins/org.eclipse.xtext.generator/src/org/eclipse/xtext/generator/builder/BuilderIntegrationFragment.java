@@ -55,6 +55,7 @@ public class BuilderIntegrationFragment extends DefaultGeneratorFragment {
 							+ ResourceDescriptionsProvider.class.getName() + ".NAMED_BUILDER_SCOPE)).to("
 							+ "org.eclipse.xtext.builder.clustering.CurrentDescriptions.ResourceSetAware.class)")
 			.addTypeToType("org.eclipse.xtext.ui.editor.IXtextEditorCallback", "org.eclipse.xtext.builder.nature.NatureAddingEditorCallback")
+			.addTypeToType("org.eclipse.xtext.generator.IContextualOutputConfigurationProvider", "org.eclipse.xtext.builder.EclipseOutputConfigurationProvider")
 			.addConfiguredBinding(
 					IResourceDescriptions.class.getName() + "Persisted",
 					"binder.bind("+ IResourceDescriptions.class.getName() + ".class"
