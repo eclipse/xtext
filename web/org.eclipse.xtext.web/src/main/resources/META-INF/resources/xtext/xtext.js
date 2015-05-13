@@ -176,9 +176,6 @@ define([
 	 * Create and configure an Orion-based Xtext editor.
 	 */
 	function XtextEditor(options, parent, doc) {
-		if (!options.theme) {
-			options.theme = "orion/editor/themes/default.css";
-		}
 		if (typeof options.theme === "string") {
 			var theme = mTextTheme.TextTheme.getTheme(options.theme);
 			var index = options.theme.lastIndexOf("/");
