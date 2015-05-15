@@ -146,6 +146,17 @@ class IncrementalStandaloneBuilderTest {
 		assertTrue(generated.values.containsSuffix('src-gen/B.txt'))
 		assertTrue(generated.values.containsSuffix('src-gen/A.txt'))
 		assertTrue(deleted.containsSuffix('src-gen/X.txt'))
+		
+		// delete file
+		build(newBuildRequest [
+			deletedFiles = #[
+				uri('src/A.buildertestlanguage')
+			]
+		])
+		assertTrue(issues.toString, issues.isEmpty)
+		assertEquals(0, generated.size)
+		assertEquals(1, deleted.size)
+		assertTrue(deleted.containsSuffix('src-gen/A.txt'))
 	}
 
 	protected def IndexState build(BuildRequest buildRequest) {

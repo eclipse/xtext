@@ -278,6 +278,24 @@ public class IncrementalStandaloneBuilderTest {
     Assert.assertTrue(_containsSuffix_8);
     boolean _containsSuffix_9 = this.containsSuffix(this.deleted, "src-gen/X.txt");
     Assert.assertTrue(_containsSuffix_9);
+    final Procedure1<BuildRequest> _function_4 = new Procedure1<BuildRequest>() {
+      @Override
+      public void apply(final BuildRequest it) {
+        URI _uri = IncrementalStandaloneBuilderTest.this.uri("src/A.buildertestlanguage");
+        it.setDeletedFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_uri)));
+      }
+    };
+    BuildRequest _newBuildRequest_4 = this.newBuildRequest(_function_4);
+    this.build(_newBuildRequest_4);
+    String _string_4 = this.issues.toString();
+    boolean _isEmpty_3 = this.issues.isEmpty();
+    Assert.assertTrue(_string_4, _isEmpty_3);
+    int _size_7 = this.generated.size();
+    Assert.assertEquals(0, _size_7);
+    int _size_8 = this.deleted.size();
+    Assert.assertEquals(1, _size_8);
+    boolean _containsSuffix_10 = this.containsSuffix(this.deleted, "src-gen/A.txt");
+    Assert.assertTrue(_containsSuffix_10);
   }
   
   protected IndexState build(final BuildRequest buildRequest) {

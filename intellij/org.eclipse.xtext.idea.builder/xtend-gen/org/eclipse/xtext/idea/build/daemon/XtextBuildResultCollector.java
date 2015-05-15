@@ -39,11 +39,17 @@ public class XtextBuildResultCollector {
       @Override
       public void apply(final Protocol.BuildResultMessage it) {
         List<String> _deletedFiles = it.getDeletedFiles();
-        String _string = XtextBuildResultCollector.this.deletedFiles.toString();
-        _deletedFiles.add(_string);
+        final Function1<URI, String> _function = new Function1<URI, String>() {
+          @Override
+          public String apply(final URI it) {
+            return it.toString();
+          }
+        };
+        Iterable<String> _map = IterableExtensions.<URI, String>map(XtextBuildResultCollector.this.deletedFiles, _function);
+        Iterables.<String>addAll(_deletedFiles, _map);
         List<Protocol.GeneratedFile> _generatedFiles = it.getGeneratedFiles();
         Set<URI> _keySet = XtextBuildResultCollector.this.generatedFile2sourceURI.keySet();
-        final Function1<URI, Protocol.GeneratedFile> _function = new Function1<URI, Protocol.GeneratedFile>() {
+        final Function1<URI, Protocol.GeneratedFile> _function_1 = new Function1<URI, Protocol.GeneratedFile>() {
           @Override
           public Protocol.GeneratedFile apply(final URI generated) {
             Protocol.GeneratedFile _generatedFile = new Protocol.GeneratedFile();
@@ -67,8 +73,8 @@ public class XtextBuildResultCollector {
             return ObjectExtensions.<Protocol.GeneratedFile>operator_doubleArrow(_generatedFile, _function);
           }
         };
-        Iterable<Protocol.GeneratedFile> _map = IterableExtensions.<URI, Protocol.GeneratedFile>map(_keySet, _function);
-        Iterables.<Protocol.GeneratedFile>addAll(_generatedFiles, _map);
+        Iterable<Protocol.GeneratedFile> _map_1 = IterableExtensions.<URI, Protocol.GeneratedFile>map(_keySet, _function_1);
+        Iterables.<Protocol.GeneratedFile>addAll(_generatedFiles, _map_1);
       }
     };
     return ObjectExtensions.<Protocol.BuildResultMessage>operator_doubleArrow(_buildResultMessage, _function);

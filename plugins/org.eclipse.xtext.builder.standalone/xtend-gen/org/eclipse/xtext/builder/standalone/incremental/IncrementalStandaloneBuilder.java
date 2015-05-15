@@ -89,6 +89,8 @@ public class IncrementalStandaloneBuilder {
               IncrementalStandaloneBuilder.LOG.info(("Deleting " + it));
               File _asFile = FilesAndURIs.asFile(it);
               _asFile.delete();
+              Procedure1<? super URI> _afterDeleteFile = InternalStatefulIncrementalBuilder.this.request.getAfterDeleteFile();
+              _afterDeleteFile.apply(it);
             }
           };
           IterableExtensions.<URI>forEach(_deleteSource, _function);
