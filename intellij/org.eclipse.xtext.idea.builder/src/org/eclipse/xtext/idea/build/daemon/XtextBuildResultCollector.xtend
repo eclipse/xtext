@@ -26,7 +26,7 @@ import org.eclipse.xtext.idea.build.net.Protocol.GeneratedFile
 	
 	def getBuildResult() {
 		new BuildResultMessage => [
-			it.deletedFiles += deletedFiles.toString
+			it.deletedFiles += deletedFiles.map[toString]
 			it.generatedFiles += generatedFile2sourceURI.keySet.map[ generated |
 				new GeneratedFile => [
 					file = generated.toString
