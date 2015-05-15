@@ -67,7 +67,7 @@ class Indexer {
 		val ResourceDescriptionsData newIndex = oldIndex.copy
 		val resourceDescriptions = installIndex(resourceSet, newIndex)
 
-		val isConsiderJava = !languages
+		val isConsiderJava = languages
 				.entrySet
 				.exists[value.linksAgainstJava]
 

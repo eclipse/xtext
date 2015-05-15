@@ -182,8 +182,7 @@ public class Indexer {
         return Boolean.valueOf(_value.isLinksAgainstJava());
       }
     };
-    boolean _exists = IterableExtensions.<Map.Entry<String, LanguageAccess>>exists(_entrySet, _function);
-    final boolean isConsiderJava = (!_exists);
+    final boolean isConsiderJava = IterableExtensions.<Map.Entry<String, LanguageAccess>>exists(_entrySet, _function);
     final HashSet<URI> affectionCandidates = CollectionLiterals.<URI>newHashSet();
     Set<URI> directlyAffected = null;
     if (fullBuild) {
