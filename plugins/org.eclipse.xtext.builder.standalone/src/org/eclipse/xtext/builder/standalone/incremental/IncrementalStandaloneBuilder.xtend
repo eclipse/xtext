@@ -55,6 +55,7 @@ class IncrementalStandaloneBuilder {
 				newSource2GeneratedMapping.deleteSource(it).forEach [
 					LOG.info("Deleting " + it)
 					asFile.delete
+					request.afterDeleteFile.apply(it)
 				]
 			]
 			val result = indexer.computeAndIndexAffected(request, context)
