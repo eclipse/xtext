@@ -54,19 +54,20 @@ public abstract class AbstractHiddenRegion extends AbstractTextSegment implement
 						result.add(part);
 					} else {
 						int mergedLength = last.getLength() + part.getLength();
-						result.add(new TextSegment(part.getTextRegionAccess(), last.getOffset(), mergedLength));
+						result.set(result.size() - 1, new TextSegment(access, last.getOffset(), mergedLength));
 					}
 				} else if (part instanceof IComment) {
 					if (last == null || last instanceof IComment) {
-						result.add(new TextSegment(part.getTextRegionAccess(), part.getOffset(), 0));
+						result.add(new TextSegment(access, part.getOffset(), 0));
 					}
 					if (includeComments)
 						result.add(part);
 				}
-				last = part;
+				if (!result.isEmpty())
+					last = result.get(result.size() - 1);
 			}
 			if (last instanceof IComment) {
-				result.add(new TextSegment(last.getTextRegionAccess(), last.getOffset() + last.getLength(), 0));
+				result.add(new TextSegment(access, last.getOffset() + last.getLength(), 0));
 			}
 			return ImmutableList.copyOf(result);
 		}
