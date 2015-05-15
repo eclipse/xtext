@@ -41,9 +41,9 @@ import java.util.Set
 	}
 	
 	def Set<URI> deleteSource(URI source) {
-		val generated = new HashSet(getGenerated(source).toSet)
-		source2generated.removeAll(source).forEach[
-			generated2source.remove(source, it)
+		val generated = new HashSet<URI>(source2generated.removeAll(source))
+		generated.forEach[
+			generated2source.remove(it, source)
 		]
 		return generated
 	}
