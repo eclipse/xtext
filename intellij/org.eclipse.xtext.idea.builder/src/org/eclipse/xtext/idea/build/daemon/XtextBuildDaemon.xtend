@@ -9,6 +9,7 @@ package org.eclipse.xtext.idea.build.daemon
 
 import com.google.inject.Guice
 import com.google.inject.Inject
+import com.google.inject.Provider
 import java.net.InetAddress
 import java.net.InetSocketAddress
 import java.net.ServerSocket
@@ -138,7 +139,7 @@ class XtextBuildDaemon {
 
 		@Inject IBuildSessionSingletons.Impl singletons
 
-		@Inject XtextBuildResultCollector xtextBuildResultCollector
+		@Inject Provider<XtextBuildResultCollector> xtextBuildResultCollectorProvider
 		
 		@Inject IIssueHandler issueHandler
 		
@@ -170,6 +171,7 @@ class XtextBuildDaemon {
 		}
 
 		def BuildResultMessage build(BuildRequestMessage request) {
+			val xtextBuildResultCollector = xtextBuildResultCollectorProvider.get
 			singletons => [
 				objectChannel = channel
 				moduleBaseURL = request.baseDir
@@ -193,14 +195,15 @@ class XtextBuildDaemon {
 				it.issueHandler = issueHandler
 				
 				afterGenerateFile = [ source, target |
-					xtextBuildResultCollector.generatedFile2sourceURI.put(source,target)
+					xtextBuildResultCollector.generatedFile2sourceURI.put(target,source)
 				]
 				afterDeleteFile = [ deleted |
 					xtextBuildResultCollector.deletedFiles.add(deleted)
 				]
 			]
 			indexState = incrementalBuilder.build(buildRequest, XtextLanguages.getLanguageAccesses)
-			return xtextBuildResultCollector.buildResult
+			val buildResult = xtextBuildResultCollector.buildResult
+			return buildResult
 		}
 	}
 }
