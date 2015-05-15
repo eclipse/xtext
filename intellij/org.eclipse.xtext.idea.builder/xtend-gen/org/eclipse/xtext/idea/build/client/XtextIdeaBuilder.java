@@ -303,8 +303,8 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
           long _compilationStartStamp = context.getCompilationStartStamp();
           outputFile.setLastModified(_compilationStartStamp);
           String _presentableName = XtextIdeaBuilder.this.getPresentableName();
-          String _file_1 = it.getFile();
-          CustomBuilderMessage _customBuilderMessage = new CustomBuilderMessage(_presentableName, "generated", _file_1);
+          String _path = outputFile.getPath();
+          CustomBuilderMessage _customBuilderMessage = new CustomBuilderMessage(_presentableName, "generated", _path);
           context.processMessage(_customBuilderMessage);
           List<String> _sourceFiles = it.getSourceFiles();
           final Function1<String, String> _function = new Function1<String, String>() {
@@ -327,10 +327,12 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
       @Override
       public void apply(final String it) {
         try {
-          File _file = new File(it);
-          FSOperations.markDeleted(context, _file);
+          URI _asURI = FilesAndURIs.asURI(it);
+          final File deletedFile = FilesAndURIs.asFile(_asURI);
+          FSOperations.markDeleted(context, deletedFile);
           String _presentableName = XtextIdeaBuilder.this.getPresentableName();
-          CustomBuilderMessage _customBuilderMessage = new CustomBuilderMessage(_presentableName, "generated", it);
+          String _path = deletedFile.getPath();
+          CustomBuilderMessage _customBuilderMessage = new CustomBuilderMessage(_presentableName, "generated", _path);
           context.processMessage(_customBuilderMessage);
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
