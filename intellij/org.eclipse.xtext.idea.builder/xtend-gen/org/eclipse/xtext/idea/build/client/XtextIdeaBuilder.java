@@ -131,7 +131,6 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
         XtextIdeaBuilder.LOG.error("Error in build", exc);
         String _message = exc.getMessage();
         this.reportError(_message, context);
-        result = ModuleLevelBuilder.ExitCode.ABORT;
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -340,7 +339,7 @@ public class XtextIdeaBuilder extends ModuleLevelBuilder {
     };
     IterableExtensions.<String>forEach(_deletedFiles, _function_1);
     String _presentableName = this.getPresentableName();
-    CustomBuilderMessage _customBuilderMessage = new CustomBuilderMessage(_presentableName, "refresh", null);
+    CustomBuilderMessage _customBuilderMessage = new CustomBuilderMessage(_presentableName, "refresh", "refresh");
     context.processMessage(_customBuilderMessage);
   }
   

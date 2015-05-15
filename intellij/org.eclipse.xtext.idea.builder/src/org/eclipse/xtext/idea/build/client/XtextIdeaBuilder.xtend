@@ -88,7 +88,6 @@ class XtextIdeaBuilder extends ModuleLevelBuilder {
 		} catch (Exception exc) {
 			LOG.error('Error in build', exc)
 			reportError(exc.message, context)
-			result = ABORT
 		} finally {
 			socketChannel?.close
 		}
@@ -139,7 +138,7 @@ class XtextIdeaBuilder extends ModuleLevelBuilder {
 			FSOperations.markDeleted(context, new File(it))
 			context.processMessage(new CustomBuilderMessage(presentableName, 'generated', it))
 		]
-		context.processMessage(new CustomBuilderMessage(presentableName, 'refresh', null))
+		context.processMessage(new CustomBuilderMessage(presentableName, 'refresh', "refresh"))
 	}
 
 	private def reportIssue(BuildIssueMessage it, CompileContext context) {

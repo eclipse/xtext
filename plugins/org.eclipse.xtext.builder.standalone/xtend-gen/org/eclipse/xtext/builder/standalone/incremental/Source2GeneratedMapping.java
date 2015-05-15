@@ -46,17 +46,15 @@ public class Source2GeneratedMapping {
   }
   
   public Set<URI> deleteSource(final URI source) {
-    Iterable<URI> _generated = this.getGenerated(source);
-    Set<URI> _set = IterableExtensions.<URI>toSet(_generated);
-    final HashSet<URI> generated = new HashSet<URI>(_set);
     Collection<URI> _removeAll = this.source2generated.removeAll(source);
+    final HashSet<URI> generated = new HashSet<URI>(_removeAll);
     final Procedure1<URI> _function = new Procedure1<URI>() {
       @Override
       public void apply(final URI it) {
-        Source2GeneratedMapping.this.generated2source.remove(source, it);
+        Source2GeneratedMapping.this.generated2source.remove(it, source);
       }
     };
-    IterableExtensions.<URI>forEach(_removeAll, _function);
+    IterableExtensions.<URI>forEach(generated, _function);
     return generated;
   }
   

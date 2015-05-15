@@ -12,6 +12,7 @@ import com.google.common.collect.Multimap;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.Provider;
 import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -158,7 +159,7 @@ public class XtextBuildDaemon {
     private IBuildSessionSingletons.Impl singletons;
     
     @Inject
-    private XtextBuildResultCollector xtextBuildResultCollector;
+    private Provider<XtextBuildResultCollector> xtextBuildResultCollectorProvider;
     
     @Inject
     private IIssueHandler issueHandler;
@@ -206,6 +207,7 @@ public class XtextBuildDaemon {
     }
     
     public Protocol.BuildResultMessage build(final Protocol.BuildRequestMessage request) {
+      final XtextBuildResultCollector xtextBuildResultCollector = this.xtextBuildResultCollectorProvider.get();
       final Procedure1<IBuildSessionSingletons.Impl> _function = new Procedure1<IBuildSessionSingletons.Impl>() {
         @Override
         public void apply(final IBuildSessionSingletons.Impl it) {
@@ -281,15 +283,15 @@ public class XtextBuildDaemon {
           final Procedure2<URI, URI> _function_5 = new Procedure2<URI, URI>() {
             @Override
             public void apply(final URI source, final URI target) {
-              Multimap<URI, URI> _generatedFile2sourceURI = Worker.this.xtextBuildResultCollector.getGeneratedFile2sourceURI();
-              _generatedFile2sourceURI.put(source, target);
+              Multimap<URI, URI> _generatedFile2sourceURI = xtextBuildResultCollector.getGeneratedFile2sourceURI();
+              _generatedFile2sourceURI.put(target, source);
             }
           };
           it.setAfterGenerateFile(_function_5);
           final Procedure1<URI> _function_6 = new Procedure1<URI>() {
             @Override
             public void apply(final URI deleted) {
-              Set<URI> _deletedFiles = Worker.this.xtextBuildResultCollector.getDeletedFiles();
+              Set<URI> _deletedFiles = xtextBuildResultCollector.getDeletedFiles();
               _deletedFiles.add(deleted);
             }
           };
@@ -300,7 +302,8 @@ public class XtextBuildDaemon {
       Map<String, LanguageAccess> _languageAccesses = XtextLanguages.getLanguageAccesses();
       IndexState _build = this.incrementalBuilder.build(buildRequest, _languageAccesses);
       this.indexState = _build;
-      return this.xtextBuildResultCollector.getBuildResult();
+      final Protocol.BuildResultMessage buildResult = xtextBuildResultCollector.getBuildResult();
+      return buildResult;
     }
   }
   
