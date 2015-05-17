@@ -7,18 +7,18 @@
  */
 package org.eclipse.xtext.xbase.idea.filesystem;
 
+import com.google.common.base.Objects;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.vfs.VfsUtil;
-import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.roots.SourceFolder;
 import java.util.Map;
 import java.util.Set;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.generator.OutputConfiguration;
+import org.eclipse.xtext.idea.extensions.RootModelExtensions;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
-import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.idea.filesystem.IdeaFileSystemSupport;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -41,31 +41,29 @@ public class IdeaModuleConfig extends ProjectConfig {
       final Map<Path, Path> mappings = super.getSourceFolderMappings();
       boolean _isEmpty = mappings.isEmpty();
       if (_isEmpty) {
-        ModuleRootManager _instance = ModuleRootManager.getInstance(this.module);
-        VirtualFile[] _sourceRoots = _instance.getSourceRoots();
-        final Procedure1<VirtualFile> _function = new Procedure1<VirtualFile>() {
+        Iterable<SourceFolder> _sourceFolders = RootModelExtensions.getSourceFolders(this.module);
+        final Procedure1<SourceFolder> _function = new Procedure1<SourceFolder>() {
           @Override
-          public void apply(final VirtualFile root) {
-            final Project project = IdeaModuleConfig.this.module.getProject();
-            VirtualFile _baseDir = project.getBaseDir();
-            String _name = IdeaModuleConfig.this.module.getName();
-            final VirtualFile moduleBaseDir = _baseDir.findChild(_name);
-            final String relativeSourceFolder = VfsUtil.getRelativePath(root, moduleBaseDir, Path.SEGMENT_SEPARATOR);
-            String _name_1 = IdeaModuleConfig.this.module.getName();
-            String _plus = (_name_1 + Character.valueOf(Path.SEGMENT_SEPARATOR));
-            final String sourcePath = (_plus + relativeSourceFolder);
-            String _name_2 = IdeaModuleConfig.this.module.getName();
-            String _plus_1 = (_name_2 + Character.valueOf(Path.SEGMENT_SEPARATOR));
+          public void apply(final SourceFolder sourceFolder) {
             Set<OutputConfiguration> _outputConfigurations = IdeaModuleConfig.this.outputConfigurations.getOutputConfigurations();
             OutputConfiguration _head = IterableExtensions.<OutputConfiguration>head(_outputConfigurations);
-            String _outputDirectory = _head.getOutputDirectory(sourcePath);
-            final String outputPath = (_plus_1 + _outputDirectory);
-            Path _path = new Path(sourcePath);
-            Path _path_1 = new Path(outputPath);
-            mappings.put(_path, _path_1);
+            String _relativePath = RootModelExtensions.getRelativePath(sourceFolder);
+            final String relativeOutputPath = _head.getOutputDirectory(_relativePath);
+            Iterable<SourceFolder> _sourceFolders = RootModelExtensions.getSourceFolders(IdeaModuleConfig.this.module);
+            final Function1<SourceFolder, Boolean> _function = new Function1<SourceFolder, Boolean>() {
+              @Override
+              public Boolean apply(final SourceFolder it) {
+                String _relativePath = RootModelExtensions.getRelativePath(it);
+                return Boolean.valueOf(Objects.equal(_relativePath, relativeOutputPath));
+              }
+            };
+            final SourceFolder outputFolder = IterableExtensions.<SourceFolder>findFirst(_sourceFolders, _function);
+            final Path sourcePath = IdeaFileSystemSupport.createAbsolutePath(IdeaModuleConfig.this.module, sourceFolder);
+            final Path outputPath = IdeaFileSystemSupport.createAbsolutePath(IdeaModuleConfig.this.module, outputFolder);
+            mappings.put(sourcePath, outputPath);
           }
         };
-        IterableExtensions.<VirtualFile>forEach(((Iterable<VirtualFile>)Conversions.doWrapArray(_sourceRoots)), _function);
+        IterableExtensions.<SourceFolder>forEach(_sourceFolders, _function);
       }
       _xblockexpression = mappings;
     }

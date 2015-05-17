@@ -12,13 +12,13 @@ import com.google.inject.Provider
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.module.ModuleManager
 import com.intellij.openapi.project.ProjectManager
-import com.intellij.openapi.roots.ModuleRootManager
-import com.intellij.openapi.vfs.VfsUtil
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.generator.IOutputConfigurationProvider
 import org.eclipse.xtext.xbase.file.ProjectConfig
 import org.eclipse.xtext.xbase.file.SimpleWorkspaceConfig
 import org.eclipse.xtext.xbase.file.WorkspaceConfig
+
+import static extension org.eclipse.xtext.idea.extensions.RootModelExtensions.*
 
 class IdeaWorkspaceConfigProvider implements Provider<WorkspaceConfig> {
 
@@ -50,13 +50,12 @@ class IdeaModuleConfig extends ProjectConfig {
 	override getSourceFolderMappings() {
 		val mappings = super.sourceFolderMappings
 		if (mappings.isEmpty) {
-			ModuleRootManager.getInstance(module).sourceRoots.forEach [ root |
-				val project = module.project
-				val moduleBaseDir = project.baseDir.findChild(module.name)
-				val relativeSourceFolder = VfsUtil.getRelativePath(root, moduleBaseDir, Path.SEGMENT_SEPARATOR)
-				val sourcePath = module.name + Path.SEGMENT_SEPARATOR + relativeSourceFolder
-				val outputPath = module.name + Path.SEGMENT_SEPARATOR + outputConfigurations.outputConfigurations.head.getOutputDirectory(sourcePath)
-				mappings.put(new Path(sourcePath), new Path(outputPath))
+			module.sourceFolders.forEach [ sourceFolder |
+				val relativeOutputPath = outputConfigurations.outputConfigurations.head.getOutputDirectory(sourceFolder.relativePath)
+				val outputFolder = module.sourceFolders.findFirst[relativePath == relativeOutputPath]
+				val sourcePath = IdeaFileSystemSupport.createAbsolutePath(module, sourceFolder)
+				val outputPath = IdeaFileSystemSupport.createAbsolutePath(module, outputFolder)
+				mappings.put(sourcePath, outputPath)
 			]
 		}
 		mappings
