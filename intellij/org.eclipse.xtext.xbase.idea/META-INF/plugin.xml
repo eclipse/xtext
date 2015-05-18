@@ -4,8 +4,8 @@
 	<description>
       This plugin enables smart editing of Xbase files.
 	</description>
-	<version>1.0.0</version>
-	<vendor>My Company</vendor>
+	<version>2.9.0.beta1</version>
+	<vendor>Eclipse Modeling Project</vendor>
 
 	<idea-version since-build="131"/>
 	<depends>org.eclipse.xtext.idea</depends>

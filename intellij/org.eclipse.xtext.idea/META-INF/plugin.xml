@@ -2,7 +2,7 @@
 	<id>org.eclipse.xtext.idea</id>
 	<name>Xtext IDEA Core</name>
 	<description>Xtext IDEA Core.</description>
-	<version>1.0.0</version>
+	<version>2.9.0.beta1</version>
 	<vendor>Eclipse Modeling Project</vendor>
 
 	<idea-version since-build="131"/>
