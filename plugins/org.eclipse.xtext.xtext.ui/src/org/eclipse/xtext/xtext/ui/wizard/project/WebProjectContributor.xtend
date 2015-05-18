@@ -158,8 +158,8 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 			sourceSets.main.xtendOutputDir = 'src/main/xtend-gen'
 			
 			dependencies {
-				compile group: 'org.eclipse.xtend', name: 'org.eclipse.xtend.lib', version: '2.9.+'
-				compile group: 'org.eclipse.xtext', name: 'org.eclipse.xtext.web.servlet', version: '2.9.+'
+				compile group: 'org.eclipse.xtend', name: 'org.eclipse.xtend.lib', version: '2.9.0.beta1'
+				compile group: 'org.eclipse.xtext', name: 'org.eclipse.xtext.web.servlet', version: '2.9.0.beta1'
 				compile project(':«projectInfo.projectName»')
 				compile project(':«projectInfo.ideProjectName»')
 				compile group: 'org.webjars', name: 'requirejs', version: '2.1.17'
@@ -204,9 +204,6 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 			allprojects {
 				repositories { 
 					jcenter()
-					maven {
-						url "https://oss.sonatype.org/content/repositories/snapshots/"
-					}
 				}
 			}
 			
@@ -218,14 +215,14 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 			
 			configure(project(':«projectInfo.projectName»')) {
 				dependencies {
-					compile group: 'org.eclipse.xtext', name: 'org.eclipse.xtext.common.types', version: '2.9.+'
+					compile group: 'org.eclipse.xtext', name: 'org.eclipse.xtext.common.types', version: '2.9.0.beta1'
 				}
 			}
 			
 			configure(project(':«projectInfo.ideProjectName»')) {
 				dependencies { 
 					compile project(':«projectInfo.projectName»')
-					compile group: 'org.eclipse.xtext', name: 'org.eclipse.xtext.ide', version: '2.9.+' 
+					compile group: 'org.eclipse.xtext', name: 'org.eclipse.xtext.ide', version: '2.9.0.beta1' 
 				}
 			}
 		'''.writeToFile(fc, 'build.gradle')
