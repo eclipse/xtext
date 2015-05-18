@@ -345,10 +345,10 @@ public class WebProjectContributor extends DefaultProjectFactoryContributor {
       _builder.append("dependencies {");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("compile group: \'org.eclipse.xtend\', name: \'org.eclipse.xtend.lib\', version: \'2.9.+\'");
+      _builder.append("compile group: \'org.eclipse.xtend\', name: \'org.eclipse.xtend.lib\', version: \'2.9.0.beta1\'");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("compile group: \'org.eclipse.xtext\', name: \'org.eclipse.xtext.web.servlet\', version: \'2.9.+\'");
+      _builder.append("compile group: \'org.eclipse.xtext\', name: \'org.eclipse.xtext.web.servlet\', version: \'2.9.0.beta1\'");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("compile project(\':");
@@ -462,15 +462,6 @@ public class WebProjectContributor extends DefaultProjectFactoryContributor {
       _builder.append("\t\t");
       _builder.append("jcenter()");
       _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("maven {");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("url \"https://oss.sonatype.org/content/repositories/snapshots/\"");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("}");
-      _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
@@ -500,7 +491,7 @@ public class WebProjectContributor extends DefaultProjectFactoryContributor {
       _builder.append("dependencies {");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("compile group: \'org.eclipse.xtext\', name: \'org.eclipse.xtext.common.types\', version: \'2.9.+\'");
+      _builder.append("compile group: \'org.eclipse.xtext\', name: \'org.eclipse.xtext.common.types\', version: \'2.9.0.beta1\'");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
@@ -523,7 +514,7 @@ public class WebProjectContributor extends DefaultProjectFactoryContributor {
       _builder.append("\')");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
-      _builder.append("compile group: \'org.eclipse.xtext\', name: \'org.eclipse.xtext.ide\', version: \'2.9.+\' ");
+      _builder.append("compile group: \'org.eclipse.xtext\', name: \'org.eclipse.xtext.ide\', version: \'2.9.0.beta1\' ");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("}");

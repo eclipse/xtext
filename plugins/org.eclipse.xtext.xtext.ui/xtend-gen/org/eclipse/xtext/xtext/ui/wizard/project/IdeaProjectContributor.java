@@ -28,7 +28,7 @@ public class IdeaProjectContributor extends DefaultProjectFactoryContributor {
     _builder.append("id \'org.xtend.xtend\' version \'0.4.7\'");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("id \'org.xtext.idea-plugin\' version \'0.3.16\'");
+    _builder.append("id \'org.xtext.idea-plugin\' version \'0.3.17\'");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("id \'eclipse\'");
@@ -62,7 +62,7 @@ public class IdeaProjectContributor extends DefaultProjectFactoryContributor {
     _builder.append("pluginRepositories {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("url \'https://hudson.eclipse.org/xtext/job/xtext-intellij/lastSuccessfulBuild/artifact/git-repo/intellij/build/ideaRepository/updatePlugins.xml\'");
+    _builder.append("url \'http://download.eclipse.org/modeling/tmf/xtext/idea/2.9.0.beta1/updatePlugins.xml\'");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -71,7 +71,7 @@ public class IdeaProjectContributor extends DefaultProjectFactoryContributor {
     _builder.append("pluginDependencies {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("id \'org.eclipse.xtext.idea\' version \'2.9.0-SNAPSHOT\'");
+    _builder.append("id \'org.eclipse.xtext.idea\' version \'2.9.0.beta1\'");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -89,15 +89,6 @@ public class IdeaProjectContributor extends DefaultProjectFactoryContributor {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("jcenter()");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("maven {");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("url \"https://oss.sonatype.org/content/repositories/snapshots/\"");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("}");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -123,7 +114,7 @@ public class IdeaProjectContributor extends DefaultProjectFactoryContributor {
     _builder.append("dependencies {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("compile \'org.eclipse.xtext:org.eclipse.xtext.common.types:+\'");
+    _builder.append("compile \'org.eclipse.xtext:org.eclipse.xtext.common.types:2.9.0.beta1\'");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -146,7 +137,7 @@ public class IdeaProjectContributor extends DefaultProjectFactoryContributor {
     _builder.append("\')");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
-    _builder.append("compile \'org.eclipse.xtext:org.eclipse.xtext.ide:+\' ");
+    _builder.append("compile \'org.eclipse.xtext:org.eclipse.xtext.ide:2.9.0.beta1\' ");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");

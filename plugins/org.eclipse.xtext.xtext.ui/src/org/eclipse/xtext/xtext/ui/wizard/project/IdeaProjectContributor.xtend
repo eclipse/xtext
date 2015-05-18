@@ -20,7 +20,7 @@ class IdeaProjectContributor extends DefaultProjectFactoryContributor {
 		'''
 			plugins {
 				id 'org.xtend.xtend' version '0.4.7'
-				id 'org.xtext.idea-plugin' version '0.3.16'
+				id 'org.xtext.idea-plugin' version '0.3.17'
 				id 'eclipse'
 			}
 			
@@ -32,10 +32,10 @@ class IdeaProjectContributor extends DefaultProjectFactoryContributor {
 			ideaDevelopment {
 				ideaVersion = '141.814.3'
 				pluginRepositories {
-					url 'https://hudson.eclipse.org/xtext/job/xtext-intellij/lastSuccessfulBuild/artifact/git-repo/intellij/build/ideaRepository/updatePlugins.xml'
+					url 'http://download.eclipse.org/modeling/tmf/xtext/idea/2.9.0.beta1/updatePlugins.xml'
 				}
 				pluginDependencies {
-					id 'org.eclipse.xtext.idea' version '2.9.0-SNAPSHOT'
+					id 'org.eclipse.xtext.idea' version '2.9.0.beta1'
 				}
 			}
 
@@ -44,9 +44,6 @@ class IdeaProjectContributor extends DefaultProjectFactoryContributor {
 			allprojects {
 				repositories { 
 					jcenter()
-					maven {
-						url "https://oss.sonatype.org/content/repositories/snapshots/"
-					}
 				}
 				apply plugin: 'java'
 				sourceSets.main.java.srcDirs = ['src', 'src-gen', 'xtend-gen']
@@ -55,14 +52,14 @@ class IdeaProjectContributor extends DefaultProjectFactoryContributor {
 			
 			configure(project(':«projectInfo.projectName»')) {
 				dependencies {
-					compile 'org.eclipse.xtext:org.eclipse.xtext.common.types:+'
+					compile 'org.eclipse.xtext:org.eclipse.xtext.common.types:2.9.0.beta1'
 				}
 			}
 			
 			configure(project('«projectInfo.ideProjectName»')) {
 				dependencies { 
 					compile project(':«projectInfo.projectName»')
-					compile 'org.eclipse.xtext:org.eclipse.xtext.ide:+' 
+					compile 'org.eclipse.xtext:org.eclipse.xtext.ide:2.9.0.beta1' 
 				}
 			}
 		'''.writeToFile(fc, 'build.gradle')
