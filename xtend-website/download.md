@@ -21,7 +21,7 @@ Now the features are downloaded and installed. Eclipse will ask you for a restar
 
 ### IntelliJ Idea / Android Studio Support {#intellij}
 
-You can now try the developer preview for Xtend on IntelliJ. Add the folowing URL to your update manager
+You can now try the developer preview for Xtend on IntelliJ. Add the following URL to your update manager
 
 ```
 http://download.eclipse.org/modeling/tmf/xtext/idea/2.9.0.beta1/updatePlugins.xml
