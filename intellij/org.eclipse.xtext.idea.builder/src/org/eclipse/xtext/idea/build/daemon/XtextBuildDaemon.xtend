@@ -17,10 +17,11 @@ import java.nio.channels.SelectionKey
 import java.nio.channels.ServerSocketChannel
 import java.nio.channels.SocketChannel
 import java.nio.channels.spi.SelectorProvider
+import org.apache.log4j.BasicConfigurator
 import org.apache.log4j.FileAppender
 import org.apache.log4j.Level
 import org.apache.log4j.Logger
-import org.apache.log4j.TTCCLayout
+import org.apache.log4j.PatternLayout
 import org.eclipse.xtext.builder.standalone.IIssueHandler
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder
@@ -39,17 +40,25 @@ import static extension org.eclipse.xtext.builder.standalone.incremental.FilesAn
  */
 class XtextBuildDaemon {
 
-	static val LOG = Logger.getLogger(XtextBuildDaemon)
+	static var Logger LOG //initialize only after log4j is set up
 
 	def static void main(String[] args) {
 		try {
-			LOG.parent.addAppender(new FileAppender(new TTCCLayout(), 'xtext_builder_daemon.log', false))
-			LOG.level = Level.INFO
+			setupLogging
 			val injector = Guice.createInjector(new BuildDaemonModule)
 			injector.getInstance(Server).run(args.parse)
 		} catch (Exception exc) {
 			System.err.println('Error ' + exc.message)
 		}
+	}
+	
+	private static def setupLogging() {
+		BasicConfigurator.resetConfiguration
+		val layout = new PatternLayout("%-4r [%t] %-5p %35.35c %x - %m%n")
+		val appender = new FileAppender(layout, 'xtext_builder_daemon.log', false)
+		BasicConfigurator.configure(appender)
+		Logger.rootLogger.level = Level.INFO
+		LOG = Logger.getLogger(XtextBuildDaemon)
 	}
 
 	private static def Arguments parse(String... args) {

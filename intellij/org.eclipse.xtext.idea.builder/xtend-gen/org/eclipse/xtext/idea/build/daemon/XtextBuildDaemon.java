@@ -27,11 +27,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.apache.log4j.Category;
+import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.FileAppender;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.apache.log4j.TTCCLayout;
+import org.apache.log4j.PatternLayout;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.builder.standalone.IIssueHandler;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
@@ -307,15 +307,11 @@ public class XtextBuildDaemon {
     }
   }
   
-  private final static Logger LOG = Logger.getLogger(XtextBuildDaemon.class);
+  private static Logger LOG;
   
   public static void main(final String[] args) {
     try {
-      Category _parent = XtextBuildDaemon.LOG.getParent();
-      TTCCLayout _tTCCLayout = new TTCCLayout();
-      FileAppender _fileAppender = new FileAppender(_tTCCLayout, "xtext_builder_daemon.log", false);
-      _parent.addAppender(_fileAppender);
-      XtextBuildDaemon.LOG.setLevel(Level.INFO);
+      XtextBuildDaemon.setupLogging();
       BuildDaemonModule _buildDaemonModule = new BuildDaemonModule();
       final Injector injector = Guice.createInjector(_buildDaemonModule);
       XtextBuildDaemon.Server _instance = injector.<XtextBuildDaemon.Server>getInstance(XtextBuildDaemon.Server.class);
@@ -330,6 +326,25 @@ public class XtextBuildDaemon {
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
+    }
+  }
+  
+  private static Logger setupLogging() {
+    try {
+      Logger _xblockexpression = null;
+      {
+        BasicConfigurator.resetConfiguration();
+        final PatternLayout layout = new PatternLayout("%-4r [%t] %-5p %35.35c %x - %m%n");
+        final FileAppender appender = new FileAppender(layout, "xtext_builder_daemon.log", false);
+        BasicConfigurator.configure(appender);
+        Logger _rootLogger = Logger.getRootLogger();
+        _rootLogger.setLevel(Level.INFO);
+        Logger _logger = Logger.getLogger(XtextBuildDaemon.class);
+        _xblockexpression = XtextBuildDaemon.LOG = _logger;
+      }
+      return _xblockexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
