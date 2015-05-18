@@ -97,13 +97,13 @@ class IdeaFileSystemSupport extends AbstractFileSystemSupport {
 		val moduleName = path.segments.head
 		val module = ModuleManager.getInstance(project).findModuleByName(moduleName)
 		val moduleRelativePath = path.relativize(SEGMENT_SEPARATOR + moduleName)
-		module.sourceFolders.map[findFileByModuleRelativePath(moduleRelativePath)].filterNull.head
+		module.existingSourceFolders.map[findFileByModuleRelativePath(moduleRelativePath)].filterNull.head
 	}
 
 	private def toPath(VirtualFile file) {
 		val project = currentlyActiveProject
 		val module = ProjectRootManager.getInstance(project).fileIndex.getModuleForFile(file)
-		val sourceFolder = module.sourceFolders.findFirst[it.file.isAncestor(file, true)]
+		val sourceFolder = module.existingSourceFolders.findFirst[it.file.isAncestor(file, true)]
 		val relativePath = file.getRelativePath(sourceFolder.file)
 		createAbsolutePath(module, sourceFolder, relativePath)
 	}
@@ -119,6 +119,10 @@ class IdeaFileSystemSupport extends AbstractFileSystemSupport {
 			null
 		else
 			sourceFolder.file.findFileByRelativePath(sourceRelativePath.toString)
+	}
+	
+	private def getExistingSourceFolders(Module module) {
+		module.sourceFolders.filter[file != null]
 	}
 
 	def static Path createAbsolutePath(Module module, SourceFolder sourceFolder) {

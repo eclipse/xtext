@@ -73,6 +73,7 @@ public class IdeaModuleConfig extends ProjectConfig {
   @Override
   public Path getRootPath() {
     String _name = this.module.getName();
-    return new Path(_name);
+    String _plus = (Character.valueOf(Path.SEGMENT_SEPARATOR) + _name);
+    return new Path(_plus);
   }
 }

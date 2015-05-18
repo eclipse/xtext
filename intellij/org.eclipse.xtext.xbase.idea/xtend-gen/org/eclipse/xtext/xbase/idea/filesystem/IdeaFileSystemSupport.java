@@ -173,14 +173,14 @@ public class IdeaFileSystemSupport extends AbstractFileSystemSupport {
       final Module module = _instance.findModuleByName(moduleName);
       String _plus = (Character.valueOf(Path.SEGMENT_SEPARATOR) + moduleName);
       final Path moduleRelativePath = path.relativize(_plus);
-      Iterable<SourceFolder> _sourceFolders = RootModelExtensions.getSourceFolders(module);
+      Iterable<SourceFolder> _existingSourceFolders = this.getExistingSourceFolders(module);
       final Function1<SourceFolder, VirtualFile> _function = new Function1<SourceFolder, VirtualFile>() {
         @Override
         public VirtualFile apply(final SourceFolder it) {
           return IdeaFileSystemSupport.this.findFileByModuleRelativePath(it, moduleRelativePath);
         }
       };
-      Iterable<VirtualFile> _map = IterableExtensions.<SourceFolder, VirtualFile>map(_sourceFolders, _function);
+      Iterable<VirtualFile> _map = IterableExtensions.<SourceFolder, VirtualFile>map(_existingSourceFolders, _function);
       Iterable<VirtualFile> _filterNull = IterableExtensions.<VirtualFile>filterNull(_map);
       _xblockexpression = IterableExtensions.<VirtualFile>head(_filterNull);
     }
@@ -194,7 +194,7 @@ public class IdeaFileSystemSupport extends AbstractFileSystemSupport {
       ProjectRootManager _instance = ProjectRootManager.getInstance(project);
       ProjectFileIndex _fileIndex = _instance.getFileIndex();
       final Module module = _fileIndex.getModuleForFile(file);
-      Iterable<SourceFolder> _sourceFolders = RootModelExtensions.getSourceFolders(module);
+      Iterable<SourceFolder> _existingSourceFolders = this.getExistingSourceFolders(module);
       final Function1<SourceFolder, Boolean> _function = new Function1<SourceFolder, Boolean>() {
         @Override
         public Boolean apply(final SourceFolder it) {
@@ -202,7 +202,7 @@ public class IdeaFileSystemSupport extends AbstractFileSystemSupport {
           return Boolean.valueOf(VfsUtilCore.isAncestor(_file, file, true));
         }
       };
-      final SourceFolder sourceFolder = IterableExtensions.<SourceFolder>findFirst(_sourceFolders, _function);
+      final SourceFolder sourceFolder = IterableExtensions.<SourceFolder>findFirst(_existingSourceFolders, _function);
       VirtualFile _file = sourceFolder.getFile();
       final String relativePath = VfsUtilCore.getRelativePath(file, _file);
       _xblockexpression = IdeaFileSystemSupport.createAbsolutePath(module, sourceFolder, relativePath);
@@ -233,6 +233,18 @@ public class IdeaFileSystemSupport extends AbstractFileSystemSupport {
       _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
+  }
+  
+  private Iterable<SourceFolder> getExistingSourceFolders(final Module module) {
+    Iterable<SourceFolder> _sourceFolders = RootModelExtensions.getSourceFolders(module);
+    final Function1<SourceFolder, Boolean> _function = new Function1<SourceFolder, Boolean>() {
+      @Override
+      public Boolean apply(final SourceFolder it) {
+        VirtualFile _file = it.getFile();
+        return Boolean.valueOf((!Objects.equal(_file, null)));
+      }
+    };
+    return IterableExtensions.<SourceFolder>filter(_sourceFolders, _function);
   }
   
   public static Path createAbsolutePath(final Module module, final SourceFolder sourceFolder) {

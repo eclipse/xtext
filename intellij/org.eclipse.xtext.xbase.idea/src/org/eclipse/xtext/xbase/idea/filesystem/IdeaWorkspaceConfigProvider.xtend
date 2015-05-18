@@ -62,7 +62,7 @@ class IdeaModuleConfig extends ProjectConfig {
 	}
 	
 	override getRootPath() {
-		new Path(module.name)
+		new Path(Path.SEGMENT_SEPARATOR + module.name)
 	}
 
 }
