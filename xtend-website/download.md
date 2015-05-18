@@ -19,6 +19,20 @@ If you already have an Eclipse running you should install the *Xtend SDK*-Featur
 
 Now the features are downloaded and installed. Eclipse will ask you for a restart when downloading and installation is done.
 
+### IntelliJ Idea / Android Studio Support {#intellij}
+
+You can now try the developer preview for Xtend on IntelliJ. Add the folowing URL to your update manager
+
+```
+http://download.eclipse.org/modeling/tmf/xtext/idea/2.9.0.beta1/updatePlugins.xml
+```
+
+Then install all of the following plugins:
+
+- org.eclipse.xtext.idea
+- org.eclipse.xtext.xbase.idea
+- org.eclipse.xtend.idea
+
 ### Download Runtime Libraries {#library}
 
 If you do not use Maven or some Maven compatible build system, you can download the runtime library from the maven central manually:
