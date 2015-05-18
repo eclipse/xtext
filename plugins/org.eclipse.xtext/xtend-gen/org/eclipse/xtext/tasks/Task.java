@@ -17,7 +17,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
  */
 @Accessors
 @SuppressWarnings("all")
-public final class Task {
+public class Task {
   private TaskTag tag;
   
   private String description;
