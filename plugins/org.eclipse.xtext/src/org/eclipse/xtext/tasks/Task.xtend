@@ -14,7 +14,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
  * @since 2.6
  */
  @Accessors
-final class Task {
+class Task {
 	TaskTag tag;
 	String description;
 	int lineNumber;
