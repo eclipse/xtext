@@ -382,6 +382,7 @@ define([
 				return options;
 			}
 		};
+		editor.getEditorContext = editorContextProvider.getEditorContext;
 		
 		var serverUrl = options.serverUrl;
 		if (!serverUrl) {
