@@ -4,8 +4,8 @@
 	<description>
       This plugin enables smart editing of Xtend files.
 	</description>
-	<version>2.9.0.beta1</version>
-	<vendor>Eclipse Modeling Project</vendor>
+	<version>1.0.0</version>
+	<vendor>My Company</vendor>
 
 	<idea-version since-build="131"/>
 	<depends>org.eclipse.xtext.idea</depends>
