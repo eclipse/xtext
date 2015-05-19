@@ -443,8 +443,13 @@ public class WebProjectContributor extends DefaultProjectFactoryContributor {
       _builder.append("classpath = sourceSets.main.runtimeClasspath.filter{it.exists()}");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("main = \"org.xtext.example.mydsl.web.ServerLauncher\"");
-      _builder.newLine();
+      _builder.append("main = \"");
+      String _basePackage = this.projectInfo.getBasePackage();
+      _builder.append(_basePackage, "\t");
+      _builder.append(".");
+      _builder.append(XtextProjectInfo.WEB, "\t");
+      _builder.append(".ServerLauncher\"");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("standardInput = System.in");
       _builder.newLine();

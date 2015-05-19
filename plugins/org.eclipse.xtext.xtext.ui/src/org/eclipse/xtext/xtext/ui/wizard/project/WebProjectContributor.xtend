@@ -195,7 +195,7 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 			task jettyRun(type:JavaExec) {
 				dependsOn(sourceSets.main.runtimeClasspath, unpackOrion)
 				classpath = sourceSets.main.runtimeClasspath.filter{it.exists()}
-				main = "org.xtext.example.mydsl.web.ServerLauncher"
+				main = "«projectInfo.basePackage».«WEB».ServerLauncher"
 				standardInput = System.in
 			}
 			
