@@ -151,5 +151,9 @@ class XtextProjectInfo implements IProjectInfo {
 	def String getGrammarFilePath() {
 		return '''«basePackagePath»/«languageNameAbbreviation».xtext'''
 	}
+	
+	def String getXtextVersion() {
+		'2.9.0.beta1'
+	}
 
 }

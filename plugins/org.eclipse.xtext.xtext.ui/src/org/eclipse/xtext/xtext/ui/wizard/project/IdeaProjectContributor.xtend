@@ -32,10 +32,10 @@ class IdeaProjectContributor extends DefaultProjectFactoryContributor {
 			ideaDevelopment {
 				ideaVersion = '141.814.3'
 				pluginRepositories {
-					url 'http://download.eclipse.org/modeling/tmf/xtext/idea/2.9.0.beta1/updatePlugins.xml'
+					url 'http://download.eclipse.org/modeling/tmf/xtext/idea/«projectInfo.xtextVersion»/updatePlugins.xml'
 				}
 				pluginDependencies {
-					id 'org.eclipse.xtext.idea' version '2.9.0.beta1'
+					id 'org.eclipse.xtext.idea' version '«projectInfo.xtextVersion»'
 				}
 			}
 
@@ -52,14 +52,14 @@ class IdeaProjectContributor extends DefaultProjectFactoryContributor {
 			
 			configure(project(':«projectInfo.projectName»')) {
 				dependencies {
-					compile 'org.eclipse.xtext:org.eclipse.xtext.common.types:2.9.0.beta1'
+					compile 'org.eclipse.xtext:org.eclipse.xtext.common.types:«projectInfo.xtextVersion»'
 				}
 			}
 			
 			configure(project('«projectInfo.ideProjectName»')) {
 				dependencies { 
 					compile project(':«projectInfo.projectName»')
-					compile 'org.eclipse.xtext:org.eclipse.xtext.ide:2.9.0.beta1' 
+					compile 'org.eclipse.xtext:org.eclipse.xtext.ide:«projectInfo.xtextVersion»' 
 				}
 			}
 		'''.writeToFile(fc, 'build.gradle')
