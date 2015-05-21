@@ -17,7 +17,7 @@ artifacts {
 
 signing {
   sign configurations.archives
-  required {!version.endsWith('SNAPSHOT')}
+  required {!version.endsWith('SNAPSHOT') && gradle.taskGraph.hasTask('uploadArchives')}
 }
 
 def installer = install.repositories.mavenInstaller()

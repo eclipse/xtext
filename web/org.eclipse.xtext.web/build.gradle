@@ -1,3 +1,7 @@
+plugins {
+  id "com.eriwen.gradle.js" version "1.12.1"
+}
+
 dependencies {
     compile group: 'log4j', name: 'log4j', version: '1.2.17'
     compile project(':plugins:org.eclipse.xtext.ide')
@@ -6,3 +10,20 @@ dependencies {
     testCompile project(':web:org.eclipse.xtext.web.example.statemachine')
     testCompile project(':web:org.eclipse.xtext.web.example.statemachine.ide')
 }
+
+javascript.source {
+	main.js {
+    	srcDir 'src/main/js'
+	}
+}
+
+requirejs.buildprofile = new File('src/main/js/requirejs-config.js')
+requirejs.options = [optimize: 'none']
+
+requireJs {
+    source = javascript.source.main.js
+    dest = file("build/opt-js/META-INF/resources/xtext/${project.version}/xtext.js")
+}
+
+sourceSets.main.resources.srcDir 'build/opt-js'
+processResources.dependsOn(requireJs)

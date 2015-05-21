@@ -232,6 +232,10 @@ public class XtextProjectInfo implements IProjectInfo {
     return _builder.toString();
   }
   
+  public String getXtextVersion() {
+    return "2.9.0.beta1";
+  }
+  
   @Pure
   public String getProjectName() {
     return this.projectName;
