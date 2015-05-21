@@ -17,13 +17,30 @@ javascript.source {
 	}
 }
 
+def requireJsPlugins = file("$buildDir/tmp/js/requirejs-plugins")
+task downloadRequireJsPlugins {
+	onlyIf {!requireJsPlugins.exists()}
+	doLast {
+		requireJsPlugins.mkdirs()
+		ant.get(src: 'https://raw.github.com/requirejs/i18n/latest/i18n.js', dest: requireJsPlugins.path + "/i18n.js")
+		ant.get(src: 'https://raw.github.com/requirejs/text/latest/text.js', dest: requireJsPlugins.path + "/text.js")
+	}
+}
+
 requirejs.buildprofile = new File('src/main/js/requirejs-config.js')
 requirejs.options = [optimize: 'none']
 
 requireJs {
+	dependsOn(downloadRequireJsPlugins)
     source = javascript.source.main.js
-    dest = file("build/opt-js/META-INF/resources/xtext/${project.version}/xtext.js")
+    dest = file("$buildDir/opt-resources/META-INF/resources/xtext/${project.version}/xtext.js")
 }
 
-sourceSets.main.resources.srcDir 'build/opt-js'
-processResources.dependsOn(requireJs)
+task copyCss(type: Copy) {
+    from 'src/main/js/orion/built-editor.css'
+    into "$buildDir/opt-resources/META-INF/resources/xtext/${project.version}"
+    rename { 'xtext.css' }
+}
+
+sourceSets.main.resources.srcDir "$buildDir/opt-resources"
+processResources.dependsOn(requireJs, copyCss)
