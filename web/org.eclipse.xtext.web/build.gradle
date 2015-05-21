@@ -27,7 +27,7 @@ task downloadRequireJsPlugins {
 	}
 }
 
-requirejs.buildprofile = new File('src/main/js/requirejs-config.js')
+requirejs.buildprofile = file('src/main/js/requirejs-config.js')
 requirejs.options = [optimize: 'none']
 
 requireJs {
