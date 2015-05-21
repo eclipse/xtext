@@ -46,7 +46,7 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 				<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 				<meta http-equiv="Content-Language" content="en-us">
 				<title>Example Web Editor</title>
-				<link rel="stylesheet" type="text/css" href="orion/built-editor.css"/>
+				<link rel="stylesheet" type="text/css" href="xtext/«projectInfo.xtextVersion»/xtext.css"/>
 				<link rel="stylesheet" type="text/css" href="style.css" />
 				<script src="webjars/requirejs/2.1.17/require.min.js"></script>
 				<script type="text/javascript">
@@ -57,7 +57,6 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 							"xtext/xtext": "xtext/«projectInfo.xtextVersion»/xtext"
 						}
 					});
-					require(["orion/built-editor-amd.min.js"]);
 					require(["xtext/xtext"], function(xtext) {
 						xtext.createEditor();
 					});
@@ -170,40 +169,15 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 				providedCompile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.+'
 			}
 			
-			/* 
-			 * The following download/unpack tasks are currently necessary 
-			 * because Eclipse Orion does not provide easily consumable artifacts
-			 */
-			
-			def orionDir = file('src/main/webapp/orion')
-			def orionZip = file("$buildDir/orionTmp/built-editor.zip")
-			
-			task downloadOrion {
-				onlyIf {!orionDir.exists()}
-				doLast {
-					orionZip.parentFile.mkdirs()
-					ant.get(src: 'http://download.eclipse.org/orion/drops/R-8.0-201502161823/built-editor.zip', dest: orionZip)
-				}
-			}
-			
-			task unpackOrion(type: Copy) {
-				onlyIf {!orionDir.exists()}
-				dependsOn(downloadOrion)
-				from(zipTree(orionZip))
-				into(orionDir)
-			}
-			
 			task jettyRun(type:JavaExec) {
-				dependsOn(sourceSets.main.runtimeClasspath, unpackOrion)
+				dependsOn(sourceSets.main.runtimeClasspath)
 				classpath = sourceSets.main.runtimeClasspath.filter{it.exists()}
 				main = "«projectInfo.basePackage».«WEB».ServerLauncher"
 				standardInput = System.in
 			}
 			
-			tasks.eclipse.dependsOn(unpackOrion)
-			
 			allprojects {
-				repositories { 
+				repositories {
 					jcenter()
 				}
 			}
