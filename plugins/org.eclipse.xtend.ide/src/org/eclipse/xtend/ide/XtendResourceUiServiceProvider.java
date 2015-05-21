@@ -51,10 +51,7 @@ public class XtendResourceUiServiceProvider extends DefaultResourceUIServiceProv
 			IJavaProject javaProject = JavaCore.create(project);
 			return isInSourceFolder(javaProject, file);
 		}
-		// also load and index if it has storage data attached
-		if (resourceStorageFacade != null && resourceStorageFacade.hasStorageFor(uri)) {
-			return true;
-		}
+		// everything non local shouldn't be indexed at all, as we are going to link against Java.
 		return false;
 	}
 
