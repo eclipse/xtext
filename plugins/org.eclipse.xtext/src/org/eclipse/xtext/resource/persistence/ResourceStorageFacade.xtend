@@ -94,6 +94,10 @@ class ResourceStorageFacade implements IResourceStorageFacade {
 		if (resource.resourceSet.URIConverter.exists(resource.URI.getBinaryStorageURI, emptyMap)) {
 			return true
 		}
+		// if it's an archive URI, we don't need to look up the source folder-output folder scheme
+		if (resource.URI.isArchive) {
+			return false
+		}
 		
 		// check for source project locations, i.e. use generator config
 		val fsa = getFileSystemAccess(resource);
