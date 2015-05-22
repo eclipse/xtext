@@ -62,7 +62,7 @@ public abstract class AbstractScopeBasedSelectable extends AbstractCompoundSelec
   public Iterable<IResourceDescription> getResourceDescriptions() {
     Iterable<IResourceDescription> _xblockexpression = null;
     {
-      Project _project = this.scope.getProject();
+      Project _project = this.getProject();
       @Extension
       final PsiManager psiManager = PsiManager.getInstance(_project);
       Iterable<VirtualFile> _allXtextVirtualFiles = this.getAllXtextVirtualFiles();
@@ -88,7 +88,7 @@ public abstract class AbstractScopeBasedSelectable extends AbstractCompoundSelec
   @Override
   public Iterable<IEObjectDescription> getExportedObjects(final EClass type, final QualifiedName qualifiedName, final boolean ignoreCase) {
     String _string = qualifiedName.toString();
-    Project _project = this.scope.getProject();
+    Project _project = this.getProject();
     Collection<BaseXtextFile> _get = this.exportedObjectQualifiedNameIndex.get(_string, _project, this.scope);
     final Function1<BaseXtextFile, Iterable<IEObjectDescription>> _function = new Function1<BaseXtextFile, Iterable<IEObjectDescription>>() {
       @Override
@@ -114,7 +114,7 @@ public abstract class AbstractScopeBasedSelectable extends AbstractCompoundSelec
     BaseXtextFile _xblockexpression = null;
     {
       final String fileName = uri.lastSegment();
-      Project _project = this.scope.getProject();
+      Project _project = this.getProject();
       PsiFile[] _filesByName = FilenameIndex.getFilesByName(_project, fileName, this.scope);
       Iterable<BaseXtextFile> _filter = Iterables.<BaseXtextFile>filter(((Iterable<?>)Conversions.doWrapArray(_filesByName)), BaseXtextFile.class);
       final Function1<BaseXtextFile, Boolean> _function = new Function1<BaseXtextFile, Boolean>() {
@@ -143,7 +143,7 @@ public abstract class AbstractScopeBasedSelectable extends AbstractCompoundSelec
   
   protected Iterable<FileType> getXtextLanguageFilesTypes() {
     FileBasedIndex _instance = FileBasedIndex.getInstance();
-    Project _project = this.scope.getProject();
+    Project _project = this.getProject();
     Collection<FileType> _allKeys = _instance.<FileType>getAllKeys(FileTypeIndex.NAME, _project);
     final Function1<FileType, Boolean> _function = new Function1<FileType, Boolean>() {
       @Override
@@ -161,6 +161,10 @@ public abstract class AbstractScopeBasedSelectable extends AbstractCompoundSelec
       _xifexpression = (_language instanceof IXtextLanguage);
     }
     return _xifexpression;
+  }
+  
+  protected Project getProject() {
+    return this.scope.getProject();
   }
   
   @Pure

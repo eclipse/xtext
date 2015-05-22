@@ -42,6 +42,7 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.OperationCanceledError;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.jetbrains.annotations.NotNull;
@@ -52,6 +53,7 @@ import com.google.inject.name.Named;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
+import com.intellij.openapi.progress.ProgressIndicatorProvider;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
@@ -62,7 +64,6 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.CachedValue;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
-import com.intellij.util.indexing.FileBasedIndexImpl;
 import com.intellij.util.indexing.IndexingDataKeys;
 
 public abstract class BaseXtextFile extends PsiFileBase {
@@ -194,16 +195,10 @@ public abstract class BaseXtextFile extends PsiFileBase {
 				throw new IllegalStateException("Was already indexing resource set for " + resource.getURI());
 			}
 			compilerPhases.setIndexing(resource, true);
-			/*
-			 * Avoid deadlocks when a language accesses the index during indexing, 
-			 * e.g. Xtend active annotations
-			 */
-			FileBasedIndexImpl.disableUpToDateCheckForCurrentThread();
 			ResourceDescriptionAdapter.install(resource);
 		} catch(OperationCanceledError e) {
 			throw e.getWrapped();
 		} finally {
-			FileBasedIndexImpl.enableUpToDateCheckForCurrentThread();
 			compilerPhases.setIndexing(resource, false);
 		}
 	}
@@ -244,6 +239,15 @@ public abstract class BaseXtextFile extends PsiFileBase {
 			} finally {
 				resource.eSetDeliver(deliver);
 			}
+			resource.resolveLazyCrossReferences(new CancelIndicator() {
+				
+				@Override
+				public boolean isCanceled() {
+					ProgressIndicatorProvider.checkCanceled();
+					return false;
+				}
+
+			});
 		} catch (OperationCanceledError e) {
 			throw e.getWrapped();
 		}

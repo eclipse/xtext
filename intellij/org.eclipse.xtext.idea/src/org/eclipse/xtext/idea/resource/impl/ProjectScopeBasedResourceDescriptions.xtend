@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.resource.impl
 
-import com.google.inject.Inject
 import com.intellij.openapi.project.DumbService
 import com.intellij.openapi.project.Project
 import com.intellij.psi.search.GlobalSearchScope
@@ -18,8 +17,8 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.idea.resource.AbstractScopeBasedSelectable
 import org.eclipse.xtext.idea.resource.ProjectAdapter
 import org.eclipse.xtext.naming.QualifiedName
-import org.eclipse.xtext.resource.CompilerPhases
 import org.eclipse.xtext.resource.IResourceDescriptions
+import org.eclipse.xtext.resource.XtextResourceSet
 
 import static java.util.Collections.emptyList
 
@@ -30,8 +29,6 @@ class ProjectScopeBasedResourceDescriptions extends AbstractScopeBasedSelectable
 
 	@Accessors(PUBLIC_GETTER)
 	Notifier context
-
-	@Inject CompilerPhases compilerPhases
 
 	override getExportedObjects(EClass type, QualifiedName qualifiedName, boolean ignoreCase) {
 		if (indexing) {
@@ -60,13 +57,15 @@ class ProjectScopeBasedResourceDescriptions extends AbstractScopeBasedSelectable
 		if (project == null) {
 			throw new IllegalStateException("project is null")
 		}
-		setScope(GlobalSearchScope.projectScope(project))
+		if (ctx instanceof XtextResourceSet) {
+			val classpathURIContext = ctx.classpathURIContext
+			if (classpathURIContext instanceof GlobalSearchScope) {
+				scope = classpathURIContext
+			}
+		}
 	}
 
 	def isIndexing() {
-		if (compilerPhases.isIndexing(context)) {
-			return true
-		}
 		DumbService.isDumb(project)
 	}
 

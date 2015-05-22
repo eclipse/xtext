@@ -43,12 +43,12 @@ abstract class AbstractScopeBasedSelectable extends AbstractCompoundSelectable {
 	}
 
 	def getResourceDescriptions() {
-		val extension psiManager = PsiManager.getInstance(scope.project)
+		val extension psiManager = PsiManager.getInstance(project)
 		allXtextVirtualFiles.map[findFile].filter(BaseXtextFile).map[toResourceDescription]
 	}
 
 	override getExportedObjects(EClass type, QualifiedName qualifiedName, boolean ignoreCase) {
-		exportedObjectQualifiedNameIndex.get(qualifiedName.toString, scope.project, scope).map [
+		exportedObjectQualifiedNameIndex.get(qualifiedName.toString, project, scope).map [
 			toResourceDescription.getExportedObjects(type, qualifiedName, ignoreCase)
 		].flatten
 	}
@@ -59,7 +59,7 @@ abstract class AbstractScopeBasedSelectable extends AbstractCompoundSelectable {
 
 	protected def findFile(URI uri) {
 		val fileName = uri.lastSegment
-		FilenameIndex.getFilesByName(scope.project, fileName, scope).filter(BaseXtextFile).findFirst [
+		FilenameIndex.getFilesByName(project, fileName, scope).filter(BaseXtextFile).findFirst [
 			uri.equals(URI)
 		]
 	}
@@ -69,11 +69,15 @@ abstract class AbstractScopeBasedSelectable extends AbstractCompoundSelectable {
 	}
 
 	protected def getXtextLanguageFilesTypes() {
-		FileBasedIndex.instance.getAllKeys(FileTypeIndex.NAME, scope.project).filter[xtextLanguage]
+		FileBasedIndex.instance.getAllKeys(FileTypeIndex.NAME, project).filter[xtextLanguage]
 	}
 
 	protected def isXtextLanguage(FileType fileType) {
 		if(fileType instanceof LanguageFileType) fileType.language instanceof IXtextLanguage
+	}
+	
+	protected def getProject() {
+		scope.project
 	}
 
 }

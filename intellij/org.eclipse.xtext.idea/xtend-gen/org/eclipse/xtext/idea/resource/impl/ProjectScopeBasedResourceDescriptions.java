@@ -8,7 +8,6 @@
 package org.eclipse.xtext.idea.resource.impl;
 
 import com.google.common.base.Objects;
-import com.google.inject.Inject;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
@@ -21,10 +20,10 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.idea.resource.AbstractScopeBasedSelectable;
 import org.eclipse.xtext.idea.resource.ProjectAdapter;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
@@ -34,9 +33,6 @@ public class ProjectScopeBasedResourceDescriptions extends AbstractScopeBasedSel
   
   @Accessors(AccessorType.PUBLIC_GETTER)
   private Notifier context;
-  
-  @Inject
-  private CompilerPhases compilerPhases;
   
   @Override
   public Iterable<IEObjectDescription> getExportedObjects(final EClass type, final QualifiedName qualifiedName, final boolean ignoreCase) {
@@ -86,20 +82,16 @@ public class ProjectScopeBasedResourceDescriptions extends AbstractScopeBasedSel
     if (_equals) {
       throw new IllegalStateException("project is null");
     }
-    GlobalSearchScope _projectScope = GlobalSearchScope.projectScope(this.project);
-    this.setScope(_projectScope);
+    if ((ctx instanceof XtextResourceSet)) {
+      final Object classpathURIContext = ((XtextResourceSet)ctx).getClasspathURIContext();
+      if ((classpathURIContext instanceof GlobalSearchScope)) {
+        this.setScope(((GlobalSearchScope)classpathURIContext));
+      }
+    }
   }
   
   public boolean isIndexing() {
-    boolean _xblockexpression = false;
-    {
-      boolean _isIndexing = this.compilerPhases.isIndexing(this.context);
-      if (_isIndexing) {
-        return true;
-      }
-      _xblockexpression = DumbService.isDumb(this.project);
-    }
-    return _xblockexpression;
+    return DumbService.isDumb(this.project);
   }
   
   @Pure
