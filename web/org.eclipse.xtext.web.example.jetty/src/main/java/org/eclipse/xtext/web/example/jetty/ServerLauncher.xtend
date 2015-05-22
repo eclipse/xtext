@@ -25,12 +25,11 @@ class ServerLauncher {
 		server.handler = new HandlerList => [
 			handlers = #[
 				new ResourceHandler => [
-					resourceBase = '../org.eclipse.xtext.web/src/main/js'
-					directoriesListed = false
-				],
-				new WebAppContext => [
 					resourceBase = 'src/main/webapp'
 					welcomeFiles = #['index.html']
+				],
+				new WebAppContext => [
+					resourceBase = '../org.eclipse.xtext.web/src/main/js'
 					contextPath = '/'
 					configurations = #[
 						new AnnotationConfiguration,

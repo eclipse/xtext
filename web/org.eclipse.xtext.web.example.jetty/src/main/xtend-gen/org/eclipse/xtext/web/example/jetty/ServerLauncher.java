@@ -37,8 +37,8 @@ public class ServerLauncher {
           final Procedure1<ResourceHandler> _function = new Procedure1<ResourceHandler>() {
             @Override
             public void apply(final ResourceHandler it) {
-              it.setResourceBase("../org.eclipse.xtext.web/src/main/js");
-              it.setDirectoriesListed(false);
+              it.setResourceBase("src/main/webapp");
+              it.setWelcomeFiles(new String[] { "index.html" });
             }
           };
           ResourceHandler _doubleArrow = ObjectExtensions.<ResourceHandler>operator_doubleArrow(_resourceHandler, _function);
@@ -46,8 +46,7 @@ public class ServerLauncher {
           final Procedure1<WebAppContext> _function_1 = new Procedure1<WebAppContext>() {
             @Override
             public void apply(final WebAppContext it) {
-              it.setResourceBase("src/main/webapp");
-              it.setWelcomeFiles(new String[] { "index.html" });
+              it.setResourceBase("../org.eclipse.xtext.web/src/main/js");
               it.setContextPath("/");
               AnnotationConfiguration _annotationConfiguration = new AnnotationConfiguration();
               WebXmlConfiguration _webXmlConfiguration = new WebXmlConfiguration();
