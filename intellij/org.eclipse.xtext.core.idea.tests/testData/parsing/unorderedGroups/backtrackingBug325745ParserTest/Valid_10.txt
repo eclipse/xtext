@@ -3,7 +3,7 @@ org.eclipse.xtext.parser.unorderedGroups.idea.lang.psi.impl.SimpleBacktrackingBu
     org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ModelAction_0_ELEMENT_TYPE)(0,21)
       org.eclipse.xtext.psi.impl.PsiEObjectImpl(DelegateModel_ModelParserRuleCall_ELEMENT_TYPE)(0,0)
         <empty list>
-      org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_FieldsElementParserRuleCall_1_0_ELEMENT_TYPE)(0,7)
+      org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Model_FieldsElementParserRuleCall_1_0_ELEMENT_TYPE)(0,7)
         PsiElement(Element_NameIDTerminalRuleCall_0_0_ELEMENT_TYPE)('foo')(0,3)
         org.eclipse.xtext.psi.impl.PsiEObjectImpl(Expression_ExpressionAction_0_ELEMENT_TYPE)(3,6)
           org.eclipse.xtext.psi.impl.PsiEObjectImpl(Element_ExpressionExpressionParserRuleCall_2_0_ELEMENT_TYPE)(3,3)
@@ -13,7 +13,7 @@ org.eclipse.xtext.parser.unorderedGroups.idea.lang.psi.impl.SimpleBacktrackingBu
             PsiElement(SimpleTerm_LineCountINTTerminalRuleCall_0_0_0_ELEMENT_TYPE)('1')(4,5)
             PsiElement(SimpleTerm_ExclamationMarkKeyword_0_3_ELEMENT_TYPE)('!')(5,6)
         PsiElement(Element_FullStopKeyword_3_ELEMENT_TYPE)('.')(6,7)
-      org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_FieldsElementParserRuleCall_1_0_ELEMENT_TYPE)(7,21)
+      org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Model_FieldsElementParserRuleCall_1_0_ELEMENT_TYPE)(7,21)
         PsiElement(Element_NameIDTerminalRuleCall_0_0_ELEMENT_TYPE)('bar')(7,10)
         org.eclipse.xtext.psi.impl.PsiEObjectImpl(Expression_ExpressionAction_0_ELEMENT_TYPE)(10,20)
           org.eclipse.xtext.psi.impl.PsiEObjectImpl(Element_ExpressionExpressionParserRuleCall_2_0_ELEMENT_TYPE)(10,10)

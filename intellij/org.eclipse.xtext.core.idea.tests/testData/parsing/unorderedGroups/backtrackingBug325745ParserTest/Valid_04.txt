@@ -3,7 +3,7 @@ org.eclipse.xtext.parser.unorderedGroups.idea.lang.psi.impl.SimpleBacktrackingBu
     org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ModelAction_0_ELEMENT_TYPE)(0,13)
       org.eclipse.xtext.psi.impl.PsiEObjectImpl(DelegateModel_ModelParserRuleCall_ELEMENT_TYPE)(0,0)
         <empty list>
-      org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_FieldsElementParserRuleCall_1_0_ELEMENT_TYPE)(0,13)
+      org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Model_FieldsElementParserRuleCall_1_0_ELEMENT_TYPE)(0,13)
         PsiElement(Element_NameIDTerminalRuleCall_0_0_ELEMENT_TYPE)('foo')(0,3)
         org.eclipse.xtext.psi.impl.PsiEObjectImpl(Expression_ExpressionAction_0_ELEMENT_TYPE)(3,12)
           org.eclipse.xtext.psi.impl.PsiEObjectImpl(Element_ExpressionExpressionParserRuleCall_2_0_ELEMENT_TYPE)(3,3)
