@@ -33,6 +33,7 @@ import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 import org.eclipse.xtext.preferences.ITypedPreferenceValues;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -180,7 +181,11 @@ public abstract class FormattableDocument implements IFormattableDocument {
 				formatter.format(obj, this);
 			} catch (Exception e) {
 				IAcceptor<Exception> handler = getRequest().getExceptionHandler();
-				handler.accept(e);
+				ITextRegionAccess textRegionAccess = getRequest().getTextRegionAccess();
+				XtextResource resource = textRegionAccess.getResource();
+				String documentContent = textRegionAccess.regionForDocument().getText();
+				handler.accept(new Exception(
+						"Error while formatting " + resource.getURI() + ">>>\n" + documentContent + "\n<<< document end", e));
 			}
 		}
 		return obj;
