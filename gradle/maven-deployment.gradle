@@ -42,6 +42,8 @@ configure(deployer) {
 	def parentPom = file("$rootDir/maven/org.eclipse.xtext.parent/pom.xml")
 	def parent = new XmlSlurper().parse(parentPom)
 
+	name = project.name
+	url = parent.url
 	description = parent.description
 
 	scm {
