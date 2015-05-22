@@ -63,7 +63,7 @@ public class DerivedResourceMarkerCopier {
 	 */
 	public void reflectErrorMarkerInSource(IFile javaFile, ITrace traceToSource) throws CoreException {
 		IFile srcFile = findSourceFile(traceToSource, javaFile.getWorkspace());
-		if (srcFile == null) {
+		if (srcFile == null || !srcFile.exists()) {
 			return;
 		}
 		int maxSeverity = getMaxSeverity(srcFile);
@@ -193,7 +193,7 @@ public class DerivedResourceMarkerCopier {
 	private IFile findIFile(ILocationInResource locationInResource, IWorkspace workspace) {
 		IStorage storage = locationInResource.getStorage();
 		if (storage == null) {
-			LOG.error("Failed to find Storage. Please make sure there are no outdated generated files.");
+			LOG.warn("Failed to find Storage. Please make sure there are no outdated generated files.");
 			return null;
 		}
 		return workspace.getRoot().getFile(storage.getFullPath());
