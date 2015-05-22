@@ -13,7 +13,6 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -163,6 +162,32 @@ public class SourceBasedJdtTypeProviderTest extends AbstractJdtTypeProviderTest 
 			assertTrue(value instanceof JvmTypeAnnotationValue);
 			List<JvmTypeReference> typeLiterals = ((JvmTypeAnnotationValue) value).getValues();
 			assertEquals(2, typeLiterals.size());
+		} finally {
+			javaFile.setContents(new StringInputStream(content), IResource.NONE, new NullProgressMonitor());
+		}
+	}
+	
+	@Test public void testClassAnnotationValue_09() throws Exception {
+		IJavaProject project = projectProvider.getJavaProject(null);
+		String typeName = EmptyAbstractClass.class.getName();
+		IFile javaFile = (IFile) project.getProject().findMember(new Path("src/" + typeName.replace('.', '/') + ".java"));
+		assertNotNull(javaFile);
+		String content = Files.readStreamIntoString(javaFile.getContents());
+		try {
+			String newContent = content.replace(
+					"public abstract ", 
+					"@TestAnnotation( classArray = ) public abstract ");
+			javaFile.setContents(new StringInputStream(newContent), IResource.NONE, new NullProgressMonitor());
+			
+			JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
+			List<JvmAnnotationReference> annotations = type.getAnnotations();
+			assertEquals(1, annotations.size());
+			JvmAnnotationReference annotation = annotations.get(0);
+			assertEquals(1, annotation.getExplicitValues().size());
+			JvmAnnotationValue value = annotation.getExplicitValues().get(0);
+			assertTrue(value instanceof JvmTypeAnnotationValue);
+			List<JvmTypeReference> typeLiterals = ((JvmTypeAnnotationValue) value).getValues();
+			assertEquals(0, typeLiterals.size());
 		} finally {
 			javaFile.setContents(new StringInputStream(content), IResource.NONE, new NullProgressMonitor());
 		}
