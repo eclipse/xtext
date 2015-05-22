@@ -789,11 +789,11 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 			InternalEList<JvmAnnotationReference> values = (InternalEList<JvmAnnotationReference>)annotationValue.getValues();
 			if (value instanceof Object[]) {
 				for (Object element : (Object[])value) {
-					if (element != null) {
+					if (element instanceof IAnnotationBinding) {
 						values.addUnique(createAnnotationReference((IAnnotationBinding)element));
 					}
 				}
-			} else {
+			} else if (value instanceof IAnnotationBinding) {
 				values.addUnique(createAnnotationReference((IAnnotationBinding)value));
 			}
 		}
@@ -807,7 +807,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 			InternalEList<Object> values = (InternalEList<Object>)(InternalEList<?>)annotationValue.getValues();
 			if (value instanceof Object[]) {
 				for (Object element : (Object[])value) {
-					if (element != null) {
+					if (element instanceof Character) {
 						values.addUnique(element);
 					}
 				}
@@ -833,7 +833,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 				}
 			} else if (value instanceof Double) {
 				values.addUnique(value);
-			} else {
+			} else if (value instanceof Number) {
 				values.addUnique(((Number)value).doubleValue());
 			}
 		}
@@ -855,7 +855,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 				}
 			} else if (value instanceof Float) {
 				values.addUnique(value);
-			} else {
+			} else if (value instanceof Number) {
 				values.addUnique(((Number)value).floatValue());
 			}
 		}
@@ -877,7 +877,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 				}
 			} else if (value instanceof Short) {
 				values.addUnique(value);
-			} else {
+			} else if (value instanceof Number) {
 				values.addUnique(((Number)value).shortValue());
 			}
 		}
@@ -899,7 +899,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 				}
 			} else if (value instanceof Byte) {
 				values.addUnique(value);
-			} else {
+			} else if (value instanceof Number) {
 				values.addUnique(((Number)value).byteValue());
 			}
 		}
@@ -921,7 +921,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 				}
 			} else if (value instanceof Long) {
 				values.addUnique(value);
-			} else {
+			} else if (value instanceof Number) {
 				values.addUnique(((Number)value).longValue());
 			}
 		}
@@ -935,7 +935,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 			InternalEList<Object> values = (InternalEList<Object>)(InternalEList<?>)annotationValue.getValues();
 			if (value instanceof Object[]) {
 				for (Object element : (Object[])value) {
-					if (element != null) {
+					if (element instanceof Boolean) {
 						values.addUnique(element);
 					}
 				}
@@ -961,7 +961,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 				}
 			} else if (value instanceof Integer) {
 				values.addUnique(value);
-			} else {
+			} else if (value instanceof Number) {
 				values.addUnique(((Number)value).intValue());
 			}
 		}
@@ -974,11 +974,11 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 			InternalEList<JvmTypeReference> values = (InternalEList<JvmTypeReference>)annotationValue.getValues();
 			if (value instanceof Object[]) {
 				for (Object element : (Object[])value) {
-					if (element != null) {
+					if (element instanceof ITypeBinding) {
 						values.addUnique(createTypeReference((ITypeBinding)element));
 					}
 				}
-			} else {
+			} else if (value instanceof ITypeBinding) {
 				values.addUnique(createTypeReference((ITypeBinding)value));
 			}
 		}
@@ -992,7 +992,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 			InternalEList<Object> values = (InternalEList<Object>)(InternalEList<?>)annotationValue.getValues();
 			if (value instanceof Object[]) {
 				for (Object element : (Object[])value) {
-					if (element != null) {
+					if (element instanceof String) {
 						values.addUnique(element);
 					}
 				}
