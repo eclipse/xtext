@@ -10,7 +10,7 @@ def ideaTestProjects = subprojects.findAll{it.name.endsWith('idea.tests')} + pro
 
 apply plugin: 'org.xtext.idea-repository'
 apply plugin: 'org.xtext.idea-aggregator'
-ideaRepository.rootUrl = 'http://download.eclipse.org/modeling/tmf/xtext/idea/2.9.0.beta1/'
+ideaRepository.rootUrl = "http://download.eclipse.org/modeling/tmf/xtext/idea/${project.version}/"
 
 allprojects {
 	apply plugin: 'org.xtext.idea-dev'

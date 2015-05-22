@@ -11,7 +11,7 @@ allprojects {
 	} else {
 		group = 'org.eclipse.xtext'
 	}
-	version = '2.9.0.beta1'
+	version = '2.9.0.beta2'
 
 	repositories.addAll(rootProject.buildscript.repositories)
 

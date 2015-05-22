@@ -233,7 +233,7 @@ public class XtextProjectInfo implements IProjectInfo {
   }
   
   public String getXtextVersion() {
-    return "2.9.0.beta1";
+    return "2.9.0.beta2";
   }
   
   @Pure
