@@ -10,6 +10,7 @@ package org.eclipse.xtext.builder.impl;
 import java.util.AbstractQueue;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -293,6 +294,9 @@ public class QueuedBuildData {
 	}
 
 	public synchronized Collection<IResourceDescription.Delta> getAndRemovePendingDeltas() {
+		if (deltas.isEmpty()) {
+			return Collections.emptyList();
+		}
 		Collection<IResourceDescription.Delta> result = deltas;
 		deltas = Lists.newArrayList();
 		return result;

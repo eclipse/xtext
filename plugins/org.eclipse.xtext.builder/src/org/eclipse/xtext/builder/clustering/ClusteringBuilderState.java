@@ -28,7 +28,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.builder.builderState.AbstractBuilderState;
 import org.eclipse.xtext.builder.builderState.BuilderStateUtil;
@@ -46,7 +45,6 @@ import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceDescription.Manager.AllChangeAware;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.resource.IResourceServiceProviderExtension;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.resource.persistence.SourceLevelURIsAdapter;
@@ -129,7 +127,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
         // virtue of the newMap, which is maintained in synch with this.
         ResourceSet resourceSet = buildData.getResourceSet();
         final CurrentDescriptions newState = new CurrentDescriptions(resourceSet, newData, buildData);
-
+        buildData.getSourceLevelURICache().cacheAsSourceURIs(toBeDeleted);
         installSourceLevelURIs(buildData);
         // Step 3: Create a queue; write new temporary resource descriptions for the added or updated resources so that we can link
         // subsequently; put all the added or updated resources into the queue.
@@ -323,21 +321,18 @@ public class ClusteringBuilderState extends AbstractBuilderState {
     }
 
 	protected void installSourceLevelURIs(BuildData buildData) {
-		ResourceSetImpl resourceSet = (ResourceSetImpl) buildData.getResourceSet();
+		ResourceSet resourceSet = buildData.getResourceSet();
 		Iterable<URI> sourceLevelUris = Iterables.concat(buildData.getToBeUpdated(), buildData.getURIQueue());
 		Set<URI> sourceUris = newHashSet();
 		for (URI uri : sourceLevelUris) {
-			IResourceServiceProvider provider = resourceServiceProviderRegistry.getResourceServiceProvider(uri);
-			if ((provider instanceof IResourceServiceProviderExtension) 
-					&& ((IResourceServiceProviderExtension) provider).isReadOnly(uri)) {
-				continue;
-			}
-			sourceUris.add(uri);
-			// unload resources loaded from storage previously
-			Resource resource = resourceSet.getResource(uri, false);
-			if (resource instanceof StorageAwareResource) {
-				if (((StorageAwareResource) resource).isLoadedFromStorage()) {
-					resource.unload();
+			if (buildData.getSourceLevelURICache().getOrComputeIsSource(uri, resourceServiceProviderRegistry)) {
+				sourceUris.add(uri);
+				// unload resources loaded from storage previously
+				Resource resource = resourceSet.getResource(uri, false);
+				if (resource instanceof StorageAwareResource) {
+					if (((StorageAwareResource) resource).isLoadedFromStorage()) {
+						resource.unload();
+					}
 				}
 			}
 		}
