@@ -682,14 +682,18 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 		IMemberValuePairBinding[] allMemberValuePairs = annotation.getDeclaredMemberValuePairs();
 		for (IMemberValuePairBinding memberValuePair : allMemberValuePairs) {
 			IMethodBinding methodBinding = memberValuePair.getMethodBinding();
-			try {
-				values.addUnique(createAnnotationValue(annotationType, memberValuePair.getValue(), methodBinding));
-			} catch(NullPointerException npe) {
-				// memberValuePair#getValue may throw an NPE if the methodBinding has no return type
-				if (methodBinding.getReturnType() != null) {
-					throw npe;
-				} else {
-					log.debug(npe.getMessage(), npe);
+			if (methodBinding != null) {
+				try {
+					values.addUnique(createAnnotationValue(annotationType, memberValuePair.getValue(), methodBinding));
+				} catch(NullPointerException npe) {
+					// memberValuePair#getValue may throw an NPE if the methodBinding has no return type
+					if (methodBinding.getReturnType() != null) {
+						throw npe;
+					} else {
+						if (log.isDebugEnabled()) {
+							log.debug(npe.getMessage(), npe);
+						}
+					}
 				}
 			}
 		}
