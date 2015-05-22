@@ -77,7 +77,7 @@ class XtextProjectInfo implements IProjectInfo {
 	}
 
 	def private String asProjectName(String string) {
-		'''ï¿½getProjectNameï¿½.ï¿½stringï¿½'''
+		'''«getProjectName».«string»'''
 	}
 
 	def String getBasePackagePath() {
@@ -97,11 +97,11 @@ class XtextProjectInfo implements IProjectInfo {
 	def String getNsURI() {
 		var String[] strings = languageName.split("\\.") // $NON-NLS-1$
 		if (strings.length < 2) {
-			return '''http://www.ï¿½languageNameï¿½''' // $NON-NLS-1$
+			return '''http://www.«languageName»''' // $NON-NLS-1$
 		}
-		var String s = '''http://www.ï¿½strings.get(1)ï¿½.ï¿½strings.get(0)ï¿½''' // $NON-NLS-1$ //$NON-NLS-2$
+		var String s = '''http://www.«strings.get(1)».«strings.get(0)»''' // $NON-NLS-1$ //$NON-NLS-2$
 		for (var int i = 2; i < strings.length; i++) {
-			s += '''/ï¿½strings.get(i)ï¿½''' // $NON-NLS-1$
+			s += '''/«strings.get(i)»''' // $NON-NLS-1$
 		}
 		return s
 	}
@@ -149,7 +149,7 @@ class XtextProjectInfo implements IProjectInfo {
 	}
 
 	def String getGrammarFilePath() {
-		return '''ï¿½basePackagePathï¿½/ï¿½languageNameAbbreviationï¿½.xtext'''
+		return '''«basePackagePath»/«languageNameAbbreviation».xtext'''
 	}
 	
 	def String getXtextVersion() {
