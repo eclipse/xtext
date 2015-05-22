@@ -24,7 +24,8 @@ public class BuildData {
 	private final QueuedBuildData queuedBuildData;
 	private final String projectName;
 	private final ResourceSet resourceSet;
-	private boolean indexingOnly;
+	private final boolean indexingOnly;
+	private final SourceLevelURICache sourceLevelURICache;
 	
 	public BuildData(String projectName, ResourceSet resourceSet, ToBeBuilt toBeBuilt, QueuedBuildData queuedBuildData) {
 		this(projectName, resourceSet, toBeBuilt, queuedBuildData, false);
@@ -36,6 +37,7 @@ public class BuildData {
 		this.toBeBuilt = toBeBuilt;
 		this.queuedBuildData = queuedBuildData;
 		this.indexingOnly = indexingOnly;
+		this.sourceLevelURICache = new SourceLevelURICache();
 	}
 
 	public boolean isEmpty() {
@@ -81,6 +83,10 @@ public class BuildData {
 	
 	public String getProjectName() {
 		return projectName;
+	}
+
+	public SourceLevelURICache getSourceLevelURICache() {
+		return sourceLevelURICache;
 	}
 	
 }
