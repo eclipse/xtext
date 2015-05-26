@@ -20,7 +20,7 @@ class IdeaProjectContributor extends DefaultProjectFactoryContributor {
 		'''
 			plugins {
 				id 'org.xtend.xtend' version '0.4.7'
-				id 'org.xtext.idea-plugin' version '0.3.16'
+				id 'org.xtext.idea-plugin' version '0.3.17'
 				id 'eclipse'
 			}
 			
@@ -35,7 +35,7 @@ class IdeaProjectContributor extends DefaultProjectFactoryContributor {
 					url 'https://hudson.eclipse.org/xtext/job/xtext-intellij/lastSuccessfulBuild/artifact/git-repo/intellij/build/ideaRepository/updatePlugins.xml'
 				}
 				pluginDependencies {
-					id 'org.eclipse.xtext.idea' version '2.9.0-SNAPSHOT'
+					id 'org.eclipse.xtext.idea' version '«projectInfo.xtextVersion»'
 				}
 			}
 
@@ -55,14 +55,14 @@ class IdeaProjectContributor extends DefaultProjectFactoryContributor {
 			
 			configure(project(':«projectInfo.projectName»')) {
 				dependencies {
-					compile 'org.eclipse.xtext:org.eclipse.xtext.common.types:+'
+					compile 'org.eclipse.xtext:org.eclipse.xtext.common.types:«projectInfo.xtextVersion»'
 				}
 			}
 			
 			configure(project('«projectInfo.ideProjectName»')) {
 				dependencies { 
 					compile project(':«projectInfo.projectName»')
-					compile 'org.eclipse.xtext:org.eclipse.xtext.ide:+' 
+					compile 'org.eclipse.xtext:org.eclipse.xtext.ide:«projectInfo.xtextVersion»' 
 				}
 			}
 		'''.writeToFile(fc, 'build.gradle')
