@@ -10,6 +10,8 @@ package org.eclipse.xtext.web.example.jetty
 import java.net.InetSocketAddress
 import org.eclipse.jetty.annotations.AnnotationConfiguration
 import org.eclipse.jetty.server.Server
+import org.eclipse.jetty.server.handler.HandlerList
+import org.eclipse.jetty.server.handler.ResourceHandler
 import org.eclipse.jetty.util.log.Slf4jLog
 import org.eclipse.jetty.webapp.MetaInfConfiguration
 import org.eclipse.jetty.webapp.WebAppContext
@@ -20,17 +22,24 @@ class ServerLauncher {
 
 	def static void main(String[] args) {
 		val server = new Server(new InetSocketAddress('localhost', 8080))
-		server.handler = new WebAppContext => [
-			resourceBase = 'src/main/webapp'
-			welcomeFiles = #["index.html"]
-			contextPath = "/"
-			configurations = #[
-				new AnnotationConfiguration,
-				new WebXmlConfiguration,
-				new WebInfConfiguration,
-				new MetaInfConfiguration
+		server.handler = new HandlerList => [
+			handlers = #[
+				new ResourceHandler => [
+					resourceBase = 'src/main/webapp'
+					welcomeFiles = #['index.html']
+				],
+				new WebAppContext => [
+					resourceBase = '../org.eclipse.xtext.web/src/main/js'
+					contextPath = '/'
+					configurations = #[
+						new AnnotationConfiguration,
+						new WebXmlConfiguration,
+						new WebInfConfiguration,
+						new MetaInfConfiguration
+					]
+					setAttribute(WebInfConfiguration.CONTAINER_JAR_PATTERN, ".*org\\.eclipse\\.xtext\\.web.*")
+				]
 			]
-			setAttribute(WebInfConfiguration.CONTAINER_JAR_PATTERN, ".*org\\.eclipse\\.xtext\\.web.*")
 		]
 		val log = new Slf4jLog
 		server.start

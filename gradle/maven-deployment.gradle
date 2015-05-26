@@ -17,7 +17,7 @@ artifacts {
 
 signing {
   sign configurations.archives
-  required {!version.endsWith('SNAPSHOT')}
+  required {!version.endsWith('SNAPSHOT') && gradle.taskGraph.hasTask('uploadArchives')}
 }
 
 def installer = install.repositories.mavenInstaller()
@@ -42,6 +42,8 @@ configure(deployer) {
 	def parentPom = file("$rootDir/maven/org.eclipse.xtext.parent/pom.xml")
 	def parent = new XmlSlurper().parse(parentPom)
 
+	name = project.name
+	url = parent.url
 	description = parent.description
 
 	scm {

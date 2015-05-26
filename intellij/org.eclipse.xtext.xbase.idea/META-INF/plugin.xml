@@ -4,15 +4,15 @@
 	<description>
       This plugin enables smart editing of Xbase files.
 	</description>
-	<version>1.0.0</version>
-	<vendor>My Company</vendor>
+	<version>2.9.0-SNAPSHOT</version>
+	<vendor>Eclipse Modeling Project</vendor>
 
 	<idea-version since-build="131"/>
 	<depends>org.eclipse.xtext.idea</depends>
 
 	<extensions defaultExtensionNs="com.intellij">
 		<buildProcess.parametersProvider implementation="org.eclipse.xtext.xbase.idea.server.XbaseBuildProcessParametersProvider"/>
-		
+
 		<java.elementFinder implementation="org.eclipse.xtext.xbase.idea.lang.types.psi.XbaseJvmTypesElementFinder" order="first, before java"/>
 		<java.shortNamesCache implementation="org.eclipse.xtext.xbase.idea.lang.types.XbaseJvmTypesShortNamesCache"/>
 
@@ -62,7 +62,7 @@
 								factoryClass="org.eclipse.xtext.xbase.idea.XbaseExtensionFactory"
 								implementationClass="com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider"/>
 		<hierarchy.referenceProcessor implementation="org.eclipse.xtext.xbase.idea.ide.hierarchy.call.XbaseCallReferenceProcessor"/>
-		
+
     	<lang.parserDefinition language="org.eclipse.xtext.jvm.JVM" implementationClass="org.eclipse.xtext.xbase.idea.jvm.JvmParserDefinition"/>
 	</extensions>
 
