@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.idea.resource.PsiToEcoreAdapter;
 import org.eclipse.xtext.idea.tests.parsing.NodeModelPrinter;
 import org.eclipse.xtext.nodemodel.BidiTreeIterable;
@@ -46,6 +47,10 @@ public class XtextResourceAsserts extends Assert {
   private InvariantChecker invariantChecker;
   
   public void assertResource(final XtextResource expectedResource, final XtextResource actualResource) {
+    this.assertResource(expectedResource, actualResource, true);
+  }
+  
+  public void assertResource(final XtextResource expectedResource, final XtextResource actualResource, final boolean resolve) {
     IParseResult _parseResult = expectedResource.getParseResult();
     final ICompositeNode expectedRootNode = _parseResult.getRootNode();
     IParseResult _parseResult_1 = actualResource.getParseResult();
@@ -53,6 +58,10 @@ public class XtextResourceAsserts extends Assert {
     String _print = this.nodeModelPrinter.print(expectedRootNode);
     String _print_1 = this.nodeModelPrinter.print(actualRootNode);
     Assert.assertEquals(_print, _print_1);
+    if (resolve) {
+      EcoreUtil2.resolveLazyCrossReferences(expectedResource, null);
+      EcoreUtil2.resolveLazyCrossReferences(actualResource, null);
+    }
     IParseResult _parseResult_2 = expectedResource.getParseResult();
     final EObject expectedRootASTElement = _parseResult_2.getRootASTElement();
     IParseResult _parseResult_3 = actualResource.getParseResult();
