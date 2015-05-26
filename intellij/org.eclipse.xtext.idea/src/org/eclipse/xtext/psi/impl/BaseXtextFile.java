@@ -22,11 +22,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.idea.resource.IResourceSetProvider;
 import org.eclipse.xtext.idea.resource.PsiToEcoreAdapter;
 import org.eclipse.xtext.idea.resource.PsiToEcoreTransformator;
 import org.eclipse.xtext.idea.resource.ResourceDescriptionAdapter;
+import org.eclipse.xtext.idea.util.CancelProgressIndicator;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.SyntheticCompositeNode;
@@ -42,7 +44,6 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.OperationCanceledError;
-import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.jetbrains.annotations.NotNull;
@@ -53,7 +54,6 @@ import com.google.inject.name.Named;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
-import com.intellij.openapi.progress.ProgressIndicatorProvider;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
@@ -117,7 +117,7 @@ public abstract class BaseXtextFile extends PsiFileBase {
 	
 	public XtextResource getResource() {
 		XtextResource resource = doGetResource();
-		installDerivedState(resource);
+		initialize(resource);
 		return resource;
 	}
     
@@ -203,53 +203,46 @@ public abstract class BaseXtextFile extends PsiFileBase {
 		}
 	}
 
-	protected void installDerivedState(Resource resource) {
-		if (resource instanceof DerivedStateAwareResource) {
-			final DerivedStateAwareResource derivedStateAwareResource = (DerivedStateAwareResource) resource;
-			// avoid synchronization of the resource
-			if (!derivedStateAwareResource.isFullyInitialized()) {
-				if (derivedStateAwareResource instanceof ISynchronizable<?>) {
-					ISynchronizable<?> synchronizable = (ISynchronizable<?>) derivedStateAwareResource;
-					try {
-						synchronizable.execute(new IUnitOfWork<Void, Object>() {
-	
-							@Override
-							public java.lang.Void exec(Object state) throws Exception {
-								doInstallDerivedState(derivedStateAwareResource);
-								return null;
-							}
-							
-						});
-					} catch (Exception e) {
-						Exceptions.sneakyThrow(e);
+	protected void initialize(final Resource resource) {
+		if (resource instanceof ISynchronizable<?>) {
+			ISynchronizable<?> synchronizable = (ISynchronizable<?>) resource;
+			try {
+				synchronizable.execute(new IUnitOfWork.Void<Object>() {
+
+					@Override
+					public void process(Object state) throws Exception {
+						doInitialize(resource);
 					}
-				} else {
-					doInstallDerivedState(derivedStateAwareResource);
-				}
+					
+				});
+			} catch (Exception e) {
+				Exceptions.sneakyThrow(e);
 			}
+		} else {
+			// TODO: throw an exception?
+			doInitialize(resource);
 		}
 	}
 	
-	protected void doInstallDerivedState(DerivedStateAwareResource resource) {
+	protected void doInitialize(Resource resource) {
 		try {
-			boolean deliver = resource.eDeliver();
-			try {
-				resource.eSetDeliver(false);
-				resource.installDerivedState(false);
-			} finally {
-				resource.eSetDeliver(deliver);
-			}
-			resource.resolveLazyCrossReferences(new CancelIndicator() {
-				
-				@Override
-				public boolean isCanceled() {
-					ProgressIndicatorProvider.checkCanceled();
-					return false;
-				}
-
-			});
+			installDerivedState(resource);
+			EcoreUtil2.resolveLazyCrossReferences(resource, new CancelProgressIndicator());
 		} catch (OperationCanceledError e) {
 			throw e.getWrapped();
+		}
+	}
+
+	protected void installDerivedState(Resource resource) {
+		if (resource instanceof DerivedStateAwareResource) {
+			final DerivedStateAwareResource derivedStateAwareResource = (DerivedStateAwareResource) resource;
+			boolean deliver = derivedStateAwareResource.eDeliver();
+			try {
+				derivedStateAwareResource.eSetDeliver(false);
+				derivedStateAwareResource.installDerivedState(false);
+			} finally {
+				derivedStateAwareResource.eSetDeliver(deliver);
+			}
 		}
 	}
 

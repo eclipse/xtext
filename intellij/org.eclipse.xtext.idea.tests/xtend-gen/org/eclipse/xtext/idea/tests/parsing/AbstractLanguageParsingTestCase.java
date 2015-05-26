@@ -204,7 +204,7 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
     this.actualResource = _createActualResource;
     XtextResource _createExpectedResource = this.createExpectedResource();
     this.expectedResource = _createExpectedResource;
-    this.xtextResourceAsserts.assertResource(this.expectedResource, this.actualResource);
+    this.xtextResourceAsserts.assertResource(this.expectedResource, this.actualResource, false);
   }
   
   protected XtextResource createActualResource() {

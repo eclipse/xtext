@@ -19,6 +19,7 @@ import org.junit.Assert
 import static extension org.eclipse.xtext.util.EmfFormatter.*
 import com.intellij.psi.PsiErrorElement
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.EcoreUtil2
 
 class XtextResourceAsserts extends Assert {
 
@@ -30,9 +31,18 @@ class XtextResourceAsserts extends Assert {
 	extension InvariantChecker invariantChecker
 
 	def assertResource(XtextResource expectedResource, XtextResource actualResource) {
+		assertResource(expectedResource, actualResource, true)
+	}
+
+	def assertResource(XtextResource expectedResource, XtextResource actualResource, boolean resolve) {
 		val expectedRootNode = expectedResource.parseResult.rootNode
 		val actualRootNode = actualResource.parseResult.rootNode
 		assertEquals(expectedRootNode.print, actualRootNode.print)
+
+		if (resolve) {
+			EcoreUtil2.resolveLazyCrossReferences(expectedResource, null)
+			EcoreUtil2.resolveLazyCrossReferences(actualResource, null)
+		}
 
 		val expectedRootASTElement = expectedResource.parseResult.rootASTElement
 		val actualRootASTElement = actualResource.parseResult.rootASTElement

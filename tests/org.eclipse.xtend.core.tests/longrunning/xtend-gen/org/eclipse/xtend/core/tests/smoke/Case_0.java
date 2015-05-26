@@ -7,7 +7,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Data
 @SuppressWarnings("all")
@@ -59,40 +58,29 @@ public class Case_0 {
   }
   
   public Case_0(final int id) {
-    super();
-    this.id = id;
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe type Case_0 is already defined in Case_0.java.");
   }
   
   @Override
   @Pure
   public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + this.id;
-    return result;
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe type Case_0 is already defined in Case_0.java.");
   }
   
   @Override
   @Pure
   public boolean equals(final Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    Case_0 other = (Case_0) obj;
-    if (other.id != this.id)
-      return false;
-    return true;
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe type Case_0 is already defined in Case_0.java.");
   }
   
   @Override
   @Pure
   public String toString() {
-    ToStringBuilder b = new ToStringBuilder(this);
-    b.add("id", this.id);
-    return b.toString();
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe type Case_0 is already defined in Case_0.java.");
   }
   
   @Pure

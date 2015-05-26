@@ -152,7 +152,7 @@ abstract class AbstractLanguageParsingTestCase extends ParsingTestCase implement
 	protected def void assertResource() {
 		actualResource = createActualResource
 		expectedResource = createExpectedResource
-		assertResource(expectedResource, actualResource)
+		assertResource(expectedResource, actualResource, false)
 	}
 
 	def protected createActualResource() {
