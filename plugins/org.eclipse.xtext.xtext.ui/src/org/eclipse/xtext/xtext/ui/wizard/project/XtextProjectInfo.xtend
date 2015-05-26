@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.project
 
@@ -18,7 +18,7 @@ import org.eclipse.xtext.util.Strings
 
 /**
  * Simple value object class containing all relevant attributes necessary for the creation of new Xtext projects.
- * 
+ *
  * @author Michael Clay - Initial contribution and API
  */
 @Accessors
@@ -150,6 +150,10 @@ class XtextProjectInfo implements IProjectInfo {
 
 	def String getGrammarFilePath() {
 		return '''«basePackagePath»/«languageNameAbbreviation».xtext'''
+	}
+
+	def String getXtextVersion() {
+		'2.9.0-SNAPSHOT'
 	}
 
 }

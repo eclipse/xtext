@@ -5,7 +5,7 @@ allprojects {
 			jcenter()
 		}
 	}
-	
+
 	if (name.startsWith('org.eclipse.xtend')) {
 		group = 'org.eclipse.xtend'
 	} else {

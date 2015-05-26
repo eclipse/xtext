@@ -193,7 +193,7 @@ public class Naming {
 		if (!hasIde() && hasUI()) {
 			return basePackageUi(g);
 		}
-		if (!Strings.isEmpty(ideBasePackage))
+		if (!Strings.isEmpty(ideBasePackage) && (grammarId!=null && grammarId.equals(g.getName())))
 			return this.ideBasePackage;
 		return getNamespace(g) + ".ide";
 	}

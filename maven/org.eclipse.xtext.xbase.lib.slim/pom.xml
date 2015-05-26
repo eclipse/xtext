@@ -25,6 +25,10 @@
 					<groupId>com.google.guava</groupId>
 					<artifactId>guava</artifactId>
 				</exclusion>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>com.google.guava</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>

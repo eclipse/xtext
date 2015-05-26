@@ -9,7 +9,10 @@ package org.eclipse.xtext.web.example.jetty;
 
 import java.net.InetSocketAddress;
 import org.eclipse.jetty.annotations.AnnotationConfiguration;
+import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.HandlerList;
+import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.util.log.Slf4jLog;
 import org.eclipse.jetty.webapp.Configuration;
 import org.eclipse.jetty.webapp.MetaInfConfiguration;
@@ -26,22 +29,38 @@ public class ServerLauncher {
     try {
       InetSocketAddress _inetSocketAddress = new InetSocketAddress("localhost", 8080);
       final Server server = new Server(_inetSocketAddress);
-      WebAppContext _webAppContext = new WebAppContext();
-      final Procedure1<WebAppContext> _function = new Procedure1<WebAppContext>() {
+      HandlerList _handlerList = new HandlerList();
+      final Procedure1<HandlerList> _function = new Procedure1<HandlerList>() {
         @Override
-        public void apply(final WebAppContext it) {
-          it.setResourceBase("src/main/webapp");
-          it.setWelcomeFiles(new String[] { "index.html" });
-          it.setContextPath("/");
-          AnnotationConfiguration _annotationConfiguration = new AnnotationConfiguration();
-          WebXmlConfiguration _webXmlConfiguration = new WebXmlConfiguration();
-          WebInfConfiguration _webInfConfiguration = new WebInfConfiguration();
-          MetaInfConfiguration _metaInfConfiguration = new MetaInfConfiguration();
-          it.setConfigurations(new Configuration[] { _annotationConfiguration, _webXmlConfiguration, _webInfConfiguration, _metaInfConfiguration });
-          it.setAttribute(WebInfConfiguration.CONTAINER_JAR_PATTERN, ".*org\\.eclipse\\.xtext\\.web.*");
+        public void apply(final HandlerList it) {
+          ResourceHandler _resourceHandler = new ResourceHandler();
+          final Procedure1<ResourceHandler> _function = new Procedure1<ResourceHandler>() {
+            @Override
+            public void apply(final ResourceHandler it) {
+              it.setResourceBase("src/main/webapp");
+              it.setWelcomeFiles(new String[] { "index.html" });
+            }
+          };
+          ResourceHandler _doubleArrow = ObjectExtensions.<ResourceHandler>operator_doubleArrow(_resourceHandler, _function);
+          WebAppContext _webAppContext = new WebAppContext();
+          final Procedure1<WebAppContext> _function_1 = new Procedure1<WebAppContext>() {
+            @Override
+            public void apply(final WebAppContext it) {
+              it.setResourceBase("../org.eclipse.xtext.web/src/main/js");
+              it.setContextPath("/");
+              AnnotationConfiguration _annotationConfiguration = new AnnotationConfiguration();
+              WebXmlConfiguration _webXmlConfiguration = new WebXmlConfiguration();
+              WebInfConfiguration _webInfConfiguration = new WebInfConfiguration();
+              MetaInfConfiguration _metaInfConfiguration = new MetaInfConfiguration();
+              it.setConfigurations(new Configuration[] { _annotationConfiguration, _webXmlConfiguration, _webInfConfiguration, _metaInfConfiguration });
+              it.setAttribute(WebInfConfiguration.CONTAINER_JAR_PATTERN, ".*org\\.eclipse\\.xtext\\.web.*");
+            }
+          };
+          WebAppContext _doubleArrow_1 = ObjectExtensions.<WebAppContext>operator_doubleArrow(_webAppContext, _function_1);
+          it.setHandlers(new Handler[] { _doubleArrow, _doubleArrow_1 });
         }
       };
-      WebAppContext _doubleArrow = ObjectExtensions.<WebAppContext>operator_doubleArrow(_webAppContext, _function);
+      HandlerList _doubleArrow = ObjectExtensions.<HandlerList>operator_doubleArrow(_handlerList, _function);
       server.setHandler(_doubleArrow);
       final Slf4jLog log = new Slf4jLog();
       server.start();
