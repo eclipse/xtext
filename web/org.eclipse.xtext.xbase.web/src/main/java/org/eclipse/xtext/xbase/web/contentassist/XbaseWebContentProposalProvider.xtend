@@ -291,7 +291,7 @@ class XbaseWebContentProposalProvider extends AbstractDeclarativeWebContentPropo
 		if (model instanceof XMemberFeatureCall && endOffset >= context.offset) {
 			val featureNodes = NodeModelUtils.findNodesForFeature(model, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE)
 			if (!featureNodes.empty) {
-				val featureNode = featureNodes.get(0)
+				val featureNode = featureNodes.head
 				if (featureNode.totalOffset < context.offset &&
 					featureNode.totalEndOffset >= context.offset) {
 					return true
@@ -357,7 +357,7 @@ class XbaseWebContentProposalProvider extends AbstractDeclarativeWebContentPropo
 	}
 
 	@Proposals(rule = 'XUnaryOperation', feature = 'feature')
-	def completeXUnaryOperation_Feature(EObject model, Assignment assignment,
+	def void completeXUnaryOperation_Feature(EObject model, Assignment assignment,
 			ContentAssistContext context, IAcceptor<ContentAssistResult.Entry> acceptor) {
 	}
 
@@ -536,14 +536,14 @@ class XbaseWebContentProposalProvider extends AbstractDeclarativeWebContentPropo
 		getConcreteSyntaxRuleName(assignment.terminal)
 	}
 
-	protected def dispatch String getConcreteSyntaxRuleName(RuleCall ruleCall) {
-		ruleCall.rule.name
-	}
-
 	protected def dispatch String getConcreteSyntaxRuleName(CrossReference crossReference) {
 		if (crossReference.terminal instanceof RuleCall) {
 			getConcreteSyntaxRuleName(crossReference.terminal)
 		}
+	}
+
+	protected def dispatch String getConcreteSyntaxRuleName(RuleCall ruleCall) {
+		ruleCall.rule.name
 	}
 	
 	protected def lookupCrossReference(IScope scope, EObject model, EReference reference,

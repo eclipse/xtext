@@ -12,7 +12,6 @@ import java.lang.reflect.Method
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 import java.util.Map
-import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.AbstractElement
 import org.eclipse.xtext.Assignment
@@ -70,10 +69,8 @@ abstract class AbstractDeclarativeWebContentProposalProvider extends WebContentP
 						method.accessible = true
 						ruleCallProposalComputers.put(rule.name, computer)
 					} else {
-						val classifier = rule.type?.classifier
-						if (classifier instanceof EClass) {
-							if (classifier.getEStructuralFeature(annot.feature) === null)
-								throw new RuntimeException("The feature '" + annot.feature + "' does not exist for the metamodel class '" + classifier.name + "'.")
+						if (!GrammarUtil.containedAssignments(rule).exists[feature == annot.feature]) {
+							throw new RuntimeException("The feature '" + annot.feature + "' is not assigned in the grammar rule '" + annot.rule + "'.")
 						}
 						val key = rule.name -> annot.feature
 						if (assignmentProposalComputers.containsKey(key))

@@ -88,7 +88,7 @@ class ContentAssistService {
 	
 	protected def filter(Collection<ContentAssistResult.Entry> proposals) {
 		proposals.filter[
-			if (proposal.nullOrEmpty || !proposal.startsWith(prefix))
+			if (proposal.nullOrEmpty || !matchesPrefix)
 				return false
 			switch type {
 				case KEYWORD:
@@ -96,6 +96,16 @@ class ContentAssistService {
 				default: true
 			}
 		]
+	}
+	
+	protected def matchesPrefix(ContentAssistResult.Entry entry) {
+		entry.proposal.startsWith(entry.prefix)
+			|| entry.proposal.charAt(0).isDelimiter
+			|| entry.prefix.charAt(entry.prefix.length - 1).isDelimiter
+	}
+	
+	protected def isDelimiter(char c) {
+		!Character.isJavaIdentifierPart(c)
 	}
 	
 	protected def sort(List<ContentAssistResult.Entry> proposals) {
