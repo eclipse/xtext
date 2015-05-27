@@ -453,14 +453,17 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	@Override
 	public void initializeCache() {
 		if(!isInitialized) {
-			for(IProject project: workspace.getRoot().getProjects()) {
-				if(project.isAccessible() && JavaProject.hasJavaNature(project)) {
-					IJavaProject javaProject = JavaCore.create(project);
-					updateCache(javaProject);
+			synchronized (this) {
+				if(!isInitialized) {
+					for(IProject project: workspace.getRoot().getProjects()) {
+						if(project.isAccessible() && JavaProject.hasJavaNature(project)) {
+							IJavaProject javaProject = JavaCore.create(project);
+							updateCache(javaProject);
+						}
+					}
+					isInitialized = true;
 				}
 			}
-			JavaCore.addElementChangedListener(this, ElementChangedEvent.POST_CHANGE);
-			isInitialized = true;
 		}
 	}
 	
