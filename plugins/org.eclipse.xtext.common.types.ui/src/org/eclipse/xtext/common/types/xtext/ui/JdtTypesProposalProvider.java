@@ -94,7 +94,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 	private IEObjectHover hover;
 	
 	@Inject
-	private JdtTypeProviderFactory jdtTypeProviderFatory;
+	private JdtTypeProviderFactory jdtTypeProviderFactory;
 	
 	@Inject
 	private JdtTypeRelevance jdtTypeRelevance;
@@ -172,7 +172,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 		} 
 		try {
 			final Set<String> superTypeNames = Sets.newHashSet();
-			final IJdtTypeProvider provider = jdtTypeProviderFatory.createTypeProvider(superType.eResource().getResourceSet());
+			final IJdtTypeProvider provider = jdtTypeProviderFactory.createTypeProvider(superType.eResource().getResourceSet());
 			IJavaSearchScope scope = createSearchScope(project, superType, superTypeNames);
 			searchAndCreateProposals(scope, proposalFactory, context, typeReference, TypeMatchFilters.and(filter, new ITypesProposalProvider.Filter() {
 				@Override
@@ -335,7 +335,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 			}
 		});
 		final ContentAssistContext myContext = contextBuilder.toContext();
-		final IJvmTypeProvider jvmTypeProvider = jdtTypeProviderFatory.findOrCreateTypeProvider(context.getResource().getResourceSet());
+		final IJvmTypeProvider jvmTypeProvider = jdtTypeProviderFactory.findOrCreateTypeProvider(context.getResource().getResourceSet());
 		final Set<String> filteredTypeNames = getDirtyTypeNames();
 		final Filter dirtyTypenameFilter = new ITypesProposalProvider.Filter(){
 			@Override
