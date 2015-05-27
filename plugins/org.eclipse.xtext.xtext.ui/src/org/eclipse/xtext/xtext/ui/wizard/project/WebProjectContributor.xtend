@@ -241,16 +241,21 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 						]
 						setAttribute(WebInfConfiguration.CONTAINER_JAR_PATTERN, ".*org\\.eclipse\\.xtext\\.web.*|.*«projectInfo.webProjectName.replaceAll('\\.','\\\\\\\\.')».*|.*requirejs.*|.*jquery.*")
 					]
-					val log = new Slf4jLog
-					server.start
-					log.info('Press enter to stop the server...')
-					new Thread[
-				    	val key = System.in.read
-				    	server.stop
-				    	if (key == -1)
-				    		log.warn('The standard input stream is empty. If you are using Gradle, set the property \'standardInput = System.in\' in the JavaExec task.')
-				    ].start
-					server.join
+					val log = new Slf4jLog(ServerLauncher.name)
+					try {
+						server.start
+						log.info('Press enter to stop the server...')
+						new Thread[
+					    	val key = System.in.read
+					    	server.stop
+					    	if (key == -1)
+					    		log.warn('The standard input stream is empty.')
+					    ].start
+						server.join
+					} catch (Exception exception) {
+						log.warn(exception.message)
+						System.exit(1)
+					}
 				}
 			}
 		'''.writeToFile(fc, baseWebPackagePath() + '/ServerLauncher.xtend')
