@@ -85,7 +85,7 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 			data : serverData,
 			success : function(result) {
 				if (result.conflict) {
-					// This can only happen if the server has lost its session state
+					// The server has lost its session state and the resource is loaded from the server
 					if (knownServerState.text !== undefined) {
 						delete knownServerState.text;
 						delete knownServerState.stateId;
@@ -97,6 +97,16 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 				var listeners = editorContext.updateServerState(currentText, result.stateId);
 				for (i in listeners) {
 					self.addCompletionCallback(listeners[i]);
+				}
+			},
+			error: function(xhr, textStatus, errorThrown) {
+				if (xhr.status == 404 && !params.loadFromServer && knownServerState.text !== undefined) {
+					// The server has lost its session state and the resource is not loaded from the server
+					delete editorContext.getClientServiceState().update;
+					delete knownServerState.text;
+					delete knownServerState.stateId;
+					self.update(editorContext, params);
+					return true;
 				}
 			},
 			complete : self.onComplete.bind(self)

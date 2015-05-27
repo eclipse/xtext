@@ -61,17 +61,20 @@ public class XtextServlet extends HttpServlet {
         if (_type != null) {
           switch (_type) {
             case RESOURCE_NOT_FOUND:
-              _switchResult = 404;
+              _switchResult = HttpServletResponse.SC_NOT_FOUND;
               break;
             case INVALID_DOCUMENT_STATE:
-              _switchResult = 409;
+              _switchResult = HttpServletResponse.SC_CONFLICT;
+              break;
+            case PERMISSION_DENIED:
+              _switchResult = HttpServletResponse.SC_FORBIDDEN;
               break;
             default:
-              _switchResult = 400;
+              _switchResult = HttpServletResponse.SC_BAD_REQUEST;
               break;
           }
         } else {
-          _switchResult = 400;
+          _switchResult = HttpServletResponse.SC_BAD_REQUEST;
         }
         final int statusCode = _switchResult;
         String _message_1 = ire.getMessage();
@@ -192,10 +195,15 @@ public class XtextServlet extends HttpServlet {
       } else {
         _elvis = "";
       }
-      return serviceDispatcher.getService(_elvis, parameters, sessionStore);
+      final XtextServiceDispatcher.ServiceDescriptor service = serviceDispatcher.getService(_elvis, parameters, sessionStore);
+      this.checkPermission(req, service);
+      return service;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  protected void checkPermission(final HttpServletRequest req, final XtextServiceDispatcher.ServiceDescriptor service) {
   }
   
   protected Map<String, String> getParameterMap(final HttpServletRequest req) {

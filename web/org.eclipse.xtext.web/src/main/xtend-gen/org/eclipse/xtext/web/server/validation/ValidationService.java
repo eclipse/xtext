@@ -31,13 +31,13 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class ValidationService {
   @Inject
   @Extension
-  private UpdateDocumentService updateDocumentService;
+  private UpdateDocumentService _updateDocumentService;
   
   public ValidationResult validate(final XtextWebDocumentAccess document) throws InvalidRequestException {
     final CancelableUnitOfWork<Collection<Issue>, IXtextWebDocument> _function = new CancelableUnitOfWork<Collection<Issue>, IXtextWebDocument>() {
       @Override
       public Collection<Issue> exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
-        ValidationService.this.updateDocumentService.processUpdatedDocument(it, cancelIndicator);
+        ValidationService.this._updateDocumentService.processUpdatedDocument(it, cancelIndicator);
         return it.getIssues();
       }
     };

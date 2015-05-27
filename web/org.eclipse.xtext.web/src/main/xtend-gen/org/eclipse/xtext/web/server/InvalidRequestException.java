@@ -20,7 +20,9 @@ public class InvalidRequestException extends Exception {
     
     RESOURCE_NOT_FOUND,
     
-    INVALID_DOCUMENT_STATE;
+    INVALID_DOCUMENT_STATE,
+    
+    PERMISSION_DENIED;
   }
   
   private final InvalidRequestException.Type type;

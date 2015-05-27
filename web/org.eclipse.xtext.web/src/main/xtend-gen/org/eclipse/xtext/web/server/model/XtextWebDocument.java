@@ -45,6 +45,22 @@ public class XtextWebDocument implements IXtextWebDocument {
   @Inject
   private DocumentSynchronizer synchronizer;
   
+  @Override
+  public String toString() {
+    String _xblockexpression = null;
+    {
+      if ((this.resourceId != null)) {
+        Class<? extends XtextWebDocument> _class = this.getClass();
+        String _simpleName = _class.getSimpleName();
+        String _plus = (_simpleName + "(");
+        String _plus_1 = (_plus + this.resourceId);
+        return (_plus_1 + ")");
+      }
+      _xblockexpression = super.toString();
+    }
+    return _xblockexpression;
+  }
+  
   public String setInput(final XtextResource resource, final String resourceId) {
     String _xblockexpression = null;
     {

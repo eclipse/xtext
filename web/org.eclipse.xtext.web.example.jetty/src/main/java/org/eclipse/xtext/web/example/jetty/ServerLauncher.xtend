@@ -41,16 +41,21 @@ class ServerLauncher {
 				]
 			]
 		]
-		val log = new Slf4jLog
-		server.start
-		log.info('Press enter to stop the server...')
-		new Thread[
-	    	val key = System.in.read
-	    	server.stop
-	    	if (key == -1)
-	    		log.warn('The standard input stream is empty.')
-	    ].start
-		server.join
+		val log = new Slf4jLog(ServerLauncher.name)
+		try {
+			server.start
+			log.info('Press enter to stop the server...')
+			new Thread[
+		    	val key = System.in.read
+		    	server.stop
+		    	if (key == -1)
+		    		log.warn('The standard input stream is empty.')
+		    ].start
+			server.join
+		} catch (Exception exception) {
+			log.warn(exception.message)
+			System.exit(1)
+		}
 	}
 
 }

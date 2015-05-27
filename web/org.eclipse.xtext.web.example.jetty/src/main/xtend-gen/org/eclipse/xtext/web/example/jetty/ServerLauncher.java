@@ -26,43 +26,44 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @SuppressWarnings("all")
 public class ServerLauncher {
   public static void main(final String[] args) {
+    InetSocketAddress _inetSocketAddress = new InetSocketAddress("localhost", 8080);
+    final Server server = new Server(_inetSocketAddress);
+    HandlerList _handlerList = new HandlerList();
+    final Procedure1<HandlerList> _function = new Procedure1<HandlerList>() {
+      @Override
+      public void apply(final HandlerList it) {
+        ResourceHandler _resourceHandler = new ResourceHandler();
+        final Procedure1<ResourceHandler> _function = new Procedure1<ResourceHandler>() {
+          @Override
+          public void apply(final ResourceHandler it) {
+            it.setResourceBase("src/main/webapp");
+            it.setWelcomeFiles(new String[] { "index.html" });
+          }
+        };
+        ResourceHandler _doubleArrow = ObjectExtensions.<ResourceHandler>operator_doubleArrow(_resourceHandler, _function);
+        WebAppContext _webAppContext = new WebAppContext();
+        final Procedure1<WebAppContext> _function_1 = new Procedure1<WebAppContext>() {
+          @Override
+          public void apply(final WebAppContext it) {
+            it.setResourceBase("../org.eclipse.xtext.web/src/main/js");
+            it.setContextPath("/");
+            AnnotationConfiguration _annotationConfiguration = new AnnotationConfiguration();
+            WebXmlConfiguration _webXmlConfiguration = new WebXmlConfiguration();
+            WebInfConfiguration _webInfConfiguration = new WebInfConfiguration();
+            MetaInfConfiguration _metaInfConfiguration = new MetaInfConfiguration();
+            it.setConfigurations(new Configuration[] { _annotationConfiguration, _webXmlConfiguration, _webInfConfiguration, _metaInfConfiguration });
+            it.setAttribute(WebInfConfiguration.CONTAINER_JAR_PATTERN, ".*org\\.eclipse\\.xtext\\.web.*");
+          }
+        };
+        WebAppContext _doubleArrow_1 = ObjectExtensions.<WebAppContext>operator_doubleArrow(_webAppContext, _function_1);
+        it.setHandlers(new Handler[] { _doubleArrow, _doubleArrow_1 });
+      }
+    };
+    HandlerList _doubleArrow = ObjectExtensions.<HandlerList>operator_doubleArrow(_handlerList, _function);
+    server.setHandler(_doubleArrow);
+    String _name = ServerLauncher.class.getName();
+    final Slf4jLog log = new Slf4jLog(_name);
     try {
-      InetSocketAddress _inetSocketAddress = new InetSocketAddress("localhost", 8080);
-      final Server server = new Server(_inetSocketAddress);
-      HandlerList _handlerList = new HandlerList();
-      final Procedure1<HandlerList> _function = new Procedure1<HandlerList>() {
-        @Override
-        public void apply(final HandlerList it) {
-          ResourceHandler _resourceHandler = new ResourceHandler();
-          final Procedure1<ResourceHandler> _function = new Procedure1<ResourceHandler>() {
-            @Override
-            public void apply(final ResourceHandler it) {
-              it.setResourceBase("src/main/webapp");
-              it.setWelcomeFiles(new String[] { "index.html" });
-            }
-          };
-          ResourceHandler _doubleArrow = ObjectExtensions.<ResourceHandler>operator_doubleArrow(_resourceHandler, _function);
-          WebAppContext _webAppContext = new WebAppContext();
-          final Procedure1<WebAppContext> _function_1 = new Procedure1<WebAppContext>() {
-            @Override
-            public void apply(final WebAppContext it) {
-              it.setResourceBase("../org.eclipse.xtext.web/src/main/js");
-              it.setContextPath("/");
-              AnnotationConfiguration _annotationConfiguration = new AnnotationConfiguration();
-              WebXmlConfiguration _webXmlConfiguration = new WebXmlConfiguration();
-              WebInfConfiguration _webInfConfiguration = new WebInfConfiguration();
-              MetaInfConfiguration _metaInfConfiguration = new MetaInfConfiguration();
-              it.setConfigurations(new Configuration[] { _annotationConfiguration, _webXmlConfiguration, _webInfConfiguration, _metaInfConfiguration });
-              it.setAttribute(WebInfConfiguration.CONTAINER_JAR_PATTERN, ".*org\\.eclipse\\.xtext\\.web.*");
-            }
-          };
-          WebAppContext _doubleArrow_1 = ObjectExtensions.<WebAppContext>operator_doubleArrow(_webAppContext, _function_1);
-          it.setHandlers(new Handler[] { _doubleArrow, _doubleArrow_1 });
-        }
-      };
-      HandlerList _doubleArrow = ObjectExtensions.<HandlerList>operator_doubleArrow(_handlerList, _function);
-      server.setHandler(_doubleArrow);
-      final Slf4jLog log = new Slf4jLog();
       server.start();
       log.info("Press enter to stop the server...");
       final Runnable _function_1 = new Runnable() {
@@ -82,8 +83,15 @@ public class ServerLauncher {
       Thread _thread = new Thread(_function_1);
       _thread.start();
       server.join();
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+    } catch (final Throwable _t) {
+      if (_t instanceof Exception) {
+        final Exception exception = (Exception)_t;
+        String _message = exception.getMessage();
+        log.warn(_message);
+        System.exit(1);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
   }
 }

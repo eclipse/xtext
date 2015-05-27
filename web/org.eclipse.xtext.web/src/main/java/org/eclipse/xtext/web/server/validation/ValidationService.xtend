@@ -17,9 +17,9 @@ import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess
 @Singleton
 class ValidationService {
 	
-	@Inject extension UpdateDocumentService updateDocumentService
+	@Inject extension UpdateDocumentService
 	
-	def validate(XtextWebDocumentAccess document) throws InvalidRequestException {
+	def ValidationResult validate(XtextWebDocumentAccess document) throws InvalidRequestException {
 		val issues = document.readOnly[ it, cancelIndicator |
 			processUpdatedDocument(cancelIndicator)
 			return issues
@@ -32,7 +32,7 @@ class ValidationService {
 		return result
 	}
 	
-	protected def translate(Severity severity){
+	protected def translate(Severity severity) {
 		switch severity {
 			case WARNING : "warning"
 			case ERROR : "error"

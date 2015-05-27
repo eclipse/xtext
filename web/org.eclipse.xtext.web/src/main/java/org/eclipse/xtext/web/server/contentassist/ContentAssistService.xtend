@@ -36,7 +36,7 @@ class ContentAssistService {
 	
 	@Inject extension UpdateDocumentService
 	
-	def createProposals(XtextWebDocumentAccess document, ITextRegion selection, int offset)
+	def ContentAssistResult createProposals(XtextWebDocumentAccess document, ITextRegion selection, int offset)
 			throws InvalidRequestException {
 		val contextFactory = contextFactoryProvider.get() => [it.pool = executorService]
 		val stateIdWrapper = ArrayLiterals.newArrayOfSize(1)
@@ -50,7 +50,7 @@ class ContentAssistService {
 		return createProposals(contexts, stateIdWrapper.get(0))
 	}
 	
-	def createProposalsWithUpdate(XtextWebDocumentAccess document, String deltaText, int deltaOffset,
+	def ContentAssistResult createProposalsWithUpdate(XtextWebDocumentAccess document, String deltaText, int deltaOffset,
 			int deltaReplaceLength, ITextRegion textSelection, int caretOffset) {
 		val contextFactory = contextFactoryProvider.get() => [it.pool = executorService]
 		val stateIdWrapper = ArrayLiterals.newArrayOfSize(1)

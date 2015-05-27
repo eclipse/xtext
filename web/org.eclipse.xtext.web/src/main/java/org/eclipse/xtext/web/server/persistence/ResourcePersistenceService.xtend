@@ -20,7 +20,7 @@ import static org.eclipse.xtext.web.server.InvalidRequestException.Type.*
 @Singleton
 class ResourcePersistenceService {
 	
-	def load(String resourceId, IServerResourceHandler resourceHandler, ISessionStore sessionStore)
+	def ResourceContentResult load(String resourceId, IServerResourceHandler resourceHandler, ISessionStore sessionStore)
 			throws InvalidRequestException {
 		val document = sessionStore.get(XtextWebDocument -> resourceId, [
 			try {
@@ -37,7 +37,7 @@ class ResourcePersistenceService {
 		]
 	}
 	
-	def revert(String resourceId, IServerResourceHandler resourceHandler, ISessionStore sessionStore)
+	def ResourceContentResult revert(String resourceId, IServerResourceHandler resourceHandler, ISessionStore sessionStore)
 			throws InvalidRequestException {
 		try {
 			val document = resourceHandler.get(resourceId)
@@ -50,7 +50,7 @@ class ResourcePersistenceService {
 		}
 	}
 	
-	def save(XtextWebDocumentAccess document, IServerResourceHandler resourceHandler)
+	def DocumentStateResult save(XtextWebDocumentAccess document, IServerResourceHandler resourceHandler)
 			throws InvalidRequestException {
 		document.readOnly[ it, cancelIndicator |
 			try {
