@@ -26,10 +26,9 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.resource.IEObjectDescription
 import org.eclipse.xtext.scoping.IScope
 import org.eclipse.xtext.util.IAcceptor
-import org.eclipse.xtext.web.server.contentassist.AbstractDeclarativeWebContentProposalProvider
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult
 import org.eclipse.xtext.web.server.contentassist.CrossrefProposalCreator
-import org.eclipse.xtext.web.server.contentassist.Proposals
+import org.eclipse.xtext.web.server.contentassist.WebContentProposalProvider
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XAssignment
 import org.eclipse.xtext.xbase.XBasicForLoopExpression
@@ -44,13 +43,16 @@ import org.eclipse.xtext.xbase.conversion.XbaseQualifiedNameValueConverter
 import org.eclipse.xtext.xbase.scoping.SyntaxFilteredScopes
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping
+import org.eclipse.xtext.xbase.services.XbaseGrammarAccess
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.xtype.XtypePackage
 
-class XbaseWebContentProposalProvider extends AbstractDeclarativeWebContentProposalProvider {
+import static extension org.eclipse.xtext.xbase.web.contentassist.TypeMatchFilters.*
+
+class XbaseWebContentProposalProvider extends WebContentProposalProvider {
 
 	static class ValidFeatureDescription implements Predicate<IEObjectDescription> {
 		@Inject OperatorMapping operatorMapping
@@ -68,6 +70,8 @@ class XbaseWebContentProposalProvider extends AbstractDeclarativeWebContentPropo
 			return true
 		}
 	}
+	
+	@Inject extension XbaseGrammarAccess
 
 	@Inject ITypesProposalProvider typeProposalProvider
 	
@@ -107,96 +111,134 @@ class XbaseWebContentProposalProvider extends AbstractDeclarativeWebContentPropo
 		return true
 	}
 	
-	@Proposals(rule = 'XImportDeclaration', feature = 'importedType')
-	def completeXImportDeclaration_ImportedType(ContentAssistContext context, IAcceptor<ContentAssistResult.Entry> acceptor) {
-		val ITypesProposalProvider.Filter filter = [ modifiers, packageName, simpleTypeName, enclosingTypeNames, path |
-			!TypeMatchFilters.isInternalClass(simpleTypeName, enclosingTypeNames)
-		]
-		completeJavaTypes(context, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, true,
-			qualifiedNameValueConverter, filter, acceptor)
-	}
-
-	@Proposals(rule = 'JvmParameterizedTypeReference', feature = 'type')
-	def completeJvmParameterizedTypeReference_Type(ContentAssistContext context, IAcceptor<ContentAssistResult.Entry> acceptor) {
-		completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, acceptor)
-	}
-
-	@Proposals(rule = 'XConstructorCall', feature = 'constructor')
-	def completeXConstructorCall_Constructor(ContentAssistContext context, IAcceptor<ContentAssistResult.Entry> acceptor) {
-		val ITypesProposalProvider.Filter filter = [ modifiers, packageName, simpleTypeName, enclosingTypeNames, path |
-			!TypeMatchFilters.isInternalClass(simpleTypeName, enclosingTypeNames)
-				&& !TypeMatchFilters.isAbstract(modifiers) && !TypeMatchFilters.isInterface(modifiers)
-		]
-		completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true,
-			qualifiedNameValueConverter, filter, acceptor)
-	}
-
-	@Proposals(rule = 'XRelationalExpression', feature = 'type')
-	def completeXRelationalExpression_Type(ContentAssistContext context, IAcceptor<ContentAssistResult.Entry> acceptor) {
-		completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, acceptor)
-	}
-
-	@Proposals(rule = 'XTypeLiteral', feature = 'type')
-	def completeXTypeLiteral_Type(EObject model, Assignment assignment, ContentAssistContext context,
+	override dispatch createProposals(RuleCall ruleCall, ContentAssistContext context,
 			IAcceptor<ContentAssistResult.Entry> acceptor) {
-		val ITypesProposalProvider.Filter filter = [ modifiers, packageName, simpleTypeName, enclosingTypeNames, path |
-			!TypeMatchFilters.isInternalClass(simpleTypeName, enclosingTypeNames)
-		]
-		completeJavaTypes(context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, true,
-			qualifiedNameValueConverter, filter, acceptor)
+		switch (ruleCall.rule) {
+			case XExpressionRule: {
+				if (ruleCall.eContainer instanceof Group && GrammarUtil.containingRule(ruleCall).name == 'XParenthesizedExpression') {
+					createLocalVariableAndImplicitProposals(context.currentModel, IExpressionScope.Anchor.WITHIN, context, acceptor)
+				}
+			}
+			default:
+				super._createProposals(ruleCall, context, acceptor)
+		}
 	}
 
+	override dispatch createProposals(Assignment assignment, ContentAssistContext context,
+			IAcceptor<ContentAssistResult.Entry> acceptor) {
+		val model = context.currentModel
+		println(GrammarUtil.containingRule(assignment).name + " - " + assignment.feature)
+		switch (assignment) {
+			
+			case XFeatureCallAccess.featureAssignment_2:
+				completeXFeatureCall(model, context, acceptor)
+			
+			case XMemberFeatureCallAccess.featureAssignment_1_0_0_0_2,
+			case XMemberFeatureCallAccess.featureAssignment_1_1_2:
+				completeXMemberFeatureCall(model, assignment, context, acceptor)
+			
+			case XBlockExpressionAccess.expressionsAssignment_2_0,
+			case XExpressionInClosureAccess.expressionsAssignment_1_0:
+				completeWithinBlock(model, context, acceptor)
+			
+			case XAssignmentAccess.featureAssignment_0_1,
+			case XAssignmentAccess.featureAssignment_1_1_0_0_1:
+				completeXAssignment(model, assignment, context, acceptor)
+			
+			case jvmParameterizedTypeReferenceAccess.typeAssignment_0,
+			case jvmParameterizedTypeReferenceAccess.typeAssignment_1_4_1:
+				completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, acceptor)
+			
+			case XRelationalExpressionAccess.typeAssignment_1_0_1:
+				completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, acceptor)
+				
+			case XImportDeclarationAccess.importedTypeAssignment_1_0_2,
+			case XImportDeclarationAccess.importedTypeAssignment_1_1:
+				completeJavaTypes(context, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, true, acceptor)
+			
+			case XTypeLiteralAccess.typeAssignment_3:
+				completeJavaTypes(context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, true, acceptor)
+			
+			case XConstructorCallAccess.constructorAssignment_2:
+				completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true,
+					qualifiedNameValueConverter, !(INTERNAL || ABSTRACT || INTERFACE), acceptor)
+			
+			case XForLoopExpressionAccess.eachExpressionAssignment_3,
+			case XSwitchExpressionAccess.defaultAssignment_5_2,
+			case XCasePartAccess.caseAssignment_2_1,
+			case XCatchClauseAccess.expressionAssignment_4,
+			case XBasicForLoopExpressionAccess.updateExpressionsAssignment_7_0,
+			case XBasicForLoopExpressionAccess.updateExpressionsAssignment_7_1_1,
+			case XBasicForLoopExpressionAccess.expressionAssignment_5,
+			case XBasicForLoopExpressionAccess.eachExpressionAssignment_9,
+			case XClosureAccess.expressionAssignment_2,
+			case XShortClosureAccess.expressionAssignment_1:
+				createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor)
+			
+			case XForLoopExpressionAccess.forExpressionAssignment_1,
+			case XVariableDeclarationAccess.rightAssignment_3_1:
+				createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.BEFORE, context, acceptor)
+			
+			case XCasePartAccess.thenAssignment_3_0_1:
+				createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.AFTER, context, acceptor)
+			
+			case XOrExpressionAccess.featureAssignment_1_0_0_1,
+			case XAndExpressionAccess.featureAssignment_1_0_0_1,
+			case XEqualityExpressionAccess.featureAssignment_1_0_0_1,
+			case XRelationalExpressionAccess.featureAssignment_1_1_0_0_1,
+			case XOtherOperatorExpressionAccess.featureAssignment_1_0_0_1,
+			case XAdditiveExpressionAccess.featureAssignment_1_0_0_1,
+			case XMultiplicativeExpressionAccess.featureAssignment_1_0_0_1,
+			case XPostfixOperationAccess.featureAssignment_1_0_1:
+				completeBinaryOperation(model, assignment, context, acceptor)
+			
+			case XBasicForLoopExpressionAccess.initExpressionsAssignment_3_0,
+			case XBasicForLoopExpressionAccess.initExpressionsAssignment_3_1_1:
+				completeXBasicForLoopInit(model, context, acceptor)
+			
+			// Don't propose unary operations
+			case XUnaryOperationAccess.featureAssignment_0_1: {}
+			
+			default:
+				super._createProposals(assignment, context, acceptor)
+		}
+	}
+	
 	protected def void completeJavaTypes(ContentAssistContext context, EReference reference,
 			IAcceptor<ContentAssistResult.Entry> acceptor) {
-		val ITypesProposalProvider.Filter filter = [ modifiers, packageName, simpleTypeName, enclosingTypeNames, path |
-			!TypeMatchFilters.isInternalClass(simpleTypeName, enclosingTypeNames)
-		]
-		completeJavaTypes(context, reference, qualifiedNameValueConverter, filter, acceptor)
-	}
-
-	protected def void completeJavaTypes(ContentAssistContext context, EReference reference,
-			ITypesProposalProvider.Filter filter, IAcceptor<ContentAssistResult.Entry> acceptor) {
-		completeJavaTypes(context, reference, qualifiedNameValueConverter, filter, acceptor)
-	}
-
-	protected def void completeJavaTypes(ContentAssistContext context, EReference reference,
-			IValueConverter<String> valueConverter, ITypesProposalProvider.Filter filter,
-			IAcceptor<ContentAssistResult.Entry> acceptor) {
-		completeJavaTypes(context, reference, false, valueConverter, filter, acceptor)
+		completeJavaTypes(context, reference, false, qualifiedNameValueConverter, !INTERNAL, acceptor)
 	}
 
 	protected def void completeJavaTypes(ContentAssistContext context, EReference reference, boolean forced,
-			IValueConverter<String> valueConverter, ITypesProposalProvider.Filter filter,
+			IAcceptor<ContentAssistResult.Entry> acceptor) {
+		completeJavaTypes(context, reference, forced, qualifiedNameValueConverter, !INTERNAL, acceptor)
+	}
+
+	protected def void completeJavaTypes(ContentAssistContext context, EReference reference, boolean forced,
+			IValueConverter<String> valueConverter, ITypeFilter filter,
 			IAcceptor<ContentAssistResult.Entry> acceptor) {
 		val prefix = context.prefix
 		if (prefix.length() > 0) {
 			if (Character.isJavaIdentifierStart(prefix.charAt(0))) {
-				if (!forced) {
-					if (!prefix.contains(".") && !prefix.contains(".") &&
-						!Character.isUpperCase(prefix.charAt(0))) return
+				if (!forced && !prefix.contains('.') && !prefix.contains('::') && !Character.isUpperCase(prefix.charAt(0))) {
+					return
 				}
-				typeProposalProvider.createTypeProposals(context, reference, filter, valueConverter, acceptor)
+				typeProposalProvider.createTypeProposals(context, reference, valueConverter, filter, acceptor)
 			}
-		} else {
-			if (forced) {
-				val INode lastCompleteNode = context.getLastCompleteNode()
-				if (lastCompleteNode instanceof ILeafNode && !(lastCompleteNode as ILeafNode).isHidden()) {
-					if (lastCompleteNode.getLength() > 0 &&
-						lastCompleteNode.getTotalEndOffset() === context.getOffset()) {
-						val text = lastCompleteNode.text
-						val lastChar = text.charAt(text.length() - 1)
-						if (Character.isJavaIdentifierPart(lastChar)) {
-							return;
-						}
-					}
+		} else if (forced) {
+			val INode lastCompleteNode = context.getLastCompleteNode()
+			if (lastCompleteNode instanceof ILeafNode && !(lastCompleteNode as ILeafNode).isHidden
+					&& lastCompleteNode.length > 0 && lastCompleteNode.totalEndOffset == context.offset) {
+				val text = lastCompleteNode.text
+				if (Character.isJavaIdentifierPart(text.charAt(text.length - 1))) {
+					return
 				}
-				typeProposalProvider.createTypeProposals(context, reference, filter, valueConverter, acceptor)
 			}
+			typeProposalProvider.createTypeProposals(context, reference, valueConverter, filter, acceptor)
 		}
 	}
 
-	@Proposals(rule = 'XFeatureCall', feature = 'feature')
-	def completeXFeatureCall_Feature(EObject model, ContentAssistContext context, IAcceptor<ContentAssistResult.Entry> acceptor) {
+	protected def completeXFeatureCall(EObject model, ContentAssistContext context, IAcceptor<ContentAssistResult.Entry> acceptor) {
 		if (model !== null) {
 			if (typeResolver.resolveTypes(model).hasExpressionScope(model, IExpressionScope.Anchor.WITHIN)) {
 				return
@@ -209,48 +251,6 @@ class XbaseWebContentProposalProvider extends AbstractDeclarativeWebContentPropo
 			}
 		}
 		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.AFTER, context, acceptor)
-	}
-
-	@Proposals(rule = 'XForLoopExpression', feature = 'eachExpression')
-	def completeXForLoopExpression_EachExpression(EObject model, ContentAssistContext context,
-			IAcceptor<ContentAssistResult.Entry> acceptor) {
-		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor)
-	}
-
-	@Proposals(rule = 'XForLoopExpression', feature = 'forExpression')
-	def completeXForLoopExpression_ForExpression(EObject model, ContentAssistContext context,
-			IAcceptor<ContentAssistResult.Entry> acceptor) {
-		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.BEFORE, context, acceptor)
-	}
-
-	@Proposals(rule = 'XSwitchExpression', feature = 'default')
-	def completeXSwitchExpression_Default(EObject model, ContentAssistContext context,
-			IAcceptor<ContentAssistResult.Entry> acceptor) {
-		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor)
-	}
-
-	@Proposals(rule = 'XCasePart', feature = 'then')
-	def completeXCasePart_Then(EObject model, ContentAssistContext context,
-			IAcceptor<ContentAssistResult.Entry> acceptor) {
-		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.AFTER, context, acceptor)
-	}
-
-	@Proposals(rule = 'XCasePart', feature = 'case')
-	def completeXCasePart_Case(EObject model, ContentAssistContext context,
-			IAcceptor<ContentAssistResult.Entry> acceptor) {
-		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor)
-	}
-
-	@Proposals(rule = 'XBlockExpression', feature = 'expressions')
-	def completeXBlockExpression_Expressions(EObject model, ContentAssistContext context,
-			IAcceptor<ContentAssistResult.Entry> acceptor) {
-		completeWithinBlock(model, context, acceptor)
-	}
-
-	@Proposals(rule = 'XExpressionInClosure', feature = 'expressions')
-	def completeXExpressionInClosure_Expressions(EObject model, ContentAssistContext context,
-			IAcceptor<ContentAssistResult.Entry> acceptor) {
-		completeWithinBlock(model, context, acceptor)
 	}
 
 	protected def void completeWithinBlock(EObject model, ContentAssistContext context,
@@ -301,12 +301,11 @@ class XbaseWebContentProposalProvider extends AbstractDeclarativeWebContentPropo
 		return false
 	}
 
-	@Proposals(rule = 'XAssignment', feature = 'feature')
-	def completeXAssignment_Feature(EObject model, Assignment assignment,
+	protected def completeXAssignment(EObject model, Assignment assignment,
 			ContentAssistContext context, IAcceptor<ContentAssistResult.Entry> acceptor) {
 		val ruleName = getConcreteSyntaxRuleName(assignment)
 		if (isOperatorRule(ruleName)) {
-			completeBinaryOperationFeature(model, assignment, context, acceptor)
+			completeBinaryOperation(model, assignment, context, acceptor)
 		}
 	}
 
@@ -314,60 +313,7 @@ class XbaseWebContentProposalProvider extends AbstractDeclarativeWebContentPropo
 		return ruleName !== null && ruleName.startsWith('Op')
 	}
 
-	@Proposals(rule = 'XOrExpression', feature = 'feature')
-	def completeXOrExpression_Feature(EObject model, Assignment assignment,
-			ContentAssistContext context, IAcceptor<ContentAssistResult.Entry> acceptor) {
-		completeBinaryOperationFeature(model, assignment, context, acceptor)
-	}
-
-	@Proposals(rule = 'XAndExpression', feature = 'feature')
-	def completeXAndExpression_Feature(EObject model, Assignment assignment,
-			ContentAssistContext context, IAcceptor<ContentAssistResult.Entry> acceptor) {
-		completeBinaryOperationFeature(model, assignment, context, acceptor)
-	}
-
-	@Proposals(rule = 'XEqualityExpression', feature = 'feature')
-	def completeXEqualityExpression_Feature(EObject model, Assignment assignment,
-			ContentAssistContext context, IAcceptor<ContentAssistResult.Entry> acceptor) {
-		completeBinaryOperationFeature(model, assignment, context, acceptor)
-	}
-
-	@Proposals(rule = 'XRelationalExpression', feature = 'feature')
-	def completeXRelationalExpression_Feature(EObject model, Assignment assignment,
-			ContentAssistContext context, IAcceptor<ContentAssistResult.Entry> acceptor) {
-		completeBinaryOperationFeature(model, assignment, context, acceptor)
-	}
-
-	@Proposals(rule = 'XOtherOperatorExpression', feature = 'feature')
-	def completeXOtherOperatorExpression_Feature(EObject model, Assignment assignment,
-			ContentAssistContext context, IAcceptor<ContentAssistResult.Entry> acceptor) {
-		completeBinaryOperationFeature(model, assignment, context, acceptor)
-	}
-
-	@Proposals(rule = 'XAdditiveExpression', feature = 'feature')
-	def completeXAdditiveExpression_Feature(EObject model, Assignment assignment,
-			ContentAssistContext context, IAcceptor<ContentAssistResult.Entry> acceptor) {
-		completeBinaryOperationFeature(model, assignment, context, acceptor)
-	}
-
-	@Proposals(rule = 'XMultiplicativeExpression', feature = 'feature')
-	def completeXMultiplicativeExpression_Feature(EObject model, Assignment assignment,
-			ContentAssistContext context, IAcceptor<ContentAssistResult.Entry> acceptor) {
-		completeBinaryOperationFeature(model, assignment, context, acceptor)
-	}
-
-	@Proposals(rule = 'XUnaryOperation', feature = 'feature')
-	def void completeXUnaryOperation_Feature(EObject model, Assignment assignment,
-			ContentAssistContext context, IAcceptor<ContentAssistResult.Entry> acceptor) {
-	}
-
-	@Proposals(rule = 'XPostfixOperation', feature = 'feature')
-	def completeXPostfixOperation_Feature(EObject model, Assignment assignment,
-			ContentAssistContext context, IAcceptor<ContentAssistResult.Entry> acceptor) {
-		completeBinaryOperationFeature(model, assignment, context, acceptor)
-	}
-
-	protected def void completeBinaryOperationFeature(EObject model, Assignment assignment,
+	protected def void completeBinaryOperation(EObject model, Assignment assignment,
 			ContentAssistContext context, IAcceptor<ContentAssistResult.Entry> acceptor) {
 		if (model instanceof XBinaryOperation) {
 			if (context.prefix.length() === 0) {
@@ -401,22 +347,7 @@ class XbaseWebContentProposalProvider extends AbstractDeclarativeWebContentPropo
 		}
 	}
 
-	@Proposals(rule = 'XCatchClause', feature = 'expression')
-	def completeXCatchClause_Expression(EObject model, ContentAssistContext context,
-			IAcceptor<ContentAssistResult.Entry> acceptor) {
-		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor)
-	}
-
-	@Proposals(rule = 'XExpression')
-	def complete_XExpression(EObject model, RuleCall ruleCall, ContentAssistContext context,
-			IAcceptor<ContentAssistResult.Entry> acceptor) {
-		if (ruleCall.eContainer instanceof Group && GrammarUtil.containingRule(ruleCall).name == 'XParenthesizedExpression') {
-			createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor)
-		}
-	}
-
-	@Proposals(rule = 'XBasicForLoopExpression', feature = 'initExpressions')
-	def completeXBasicForLoopExpression_InitExpressions(EObject model, ContentAssistContext context,
+	protected def completeXBasicForLoopInit(EObject model, ContentAssistContext context,
 			IAcceptor<ContentAssistResult.Entry> acceptor) {
 		val node = NodeModelUtils.getNode(model)
 		if (node.offset >= context.offset) {
@@ -437,38 +368,7 @@ class XbaseWebContentProposalProvider extends AbstractDeclarativeWebContentPropo
 		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.BEFORE, context, acceptor)
 	}
 
-	@Proposals(rule = 'XBasicForLoopExpression', feature = 'updateExpressions')
-	def completeXBasicForLoopExpression_UpdateExpressions(EObject model, ContentAssistContext context,
-			IAcceptor<ContentAssistResult.Entry> acceptor) {
-		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor)
-	}
-
-	@Proposals(rule = 'XBasicForLoopExpression', feature = 'expression')
-	def completeXBasicForLoopExpression_Expression(EObject model, ContentAssistContext context,
-			IAcceptor<ContentAssistResult.Entry> acceptor) {
-		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor)
-	}
-
-	@Proposals(rule = 'XBasicForLoopExpression', feature = 'eachExpression')
-	def completeXBasicForLoopExpression_EachExpression(EObject model, ContentAssistContext context,
-			IAcceptor<ContentAssistResult.Entry> acceptor) {
-		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor)
-	}
-
-	@Proposals(rule = 'XClosure', feature = 'expression')
-	def completeXClosure_Expression(EObject model, ContentAssistContext context,
-			IAcceptor<ContentAssistResult.Entry> acceptor) {
-		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor)
-	}
-
-	@Proposals(rule = 'XShortClosure', feature = 'expression')
-	def completeXShortClosure_Expression(EObject model, ContentAssistContext context,
-			IAcceptor<ContentAssistResult.Entry> acceptor) {
-		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor)
-	}
-
-	@Proposals(rule = 'XMemberFeatureCall', feature = 'feature')
-	def completeXMemberFeatureCall_Feature(EObject model, Assignment assignment,
+	protected def completeXMemberFeatureCall(EObject model, Assignment assignment,
 			ContentAssistContext context, IAcceptor<ContentAssistResult.Entry> acceptor) {
 		if (model instanceof XMemberFeatureCall) {
 			createReceiverProposals((model as XMemberFeatureCall).memberCallTarget,
@@ -479,13 +379,7 @@ class XbaseWebContentProposalProvider extends AbstractDeclarativeWebContentPropo
 		}
 	}
 
-	@Proposals(rule = 'XVariableDeclaration', feature = 'right')
-	def completeXVariableDeclaration_Right(EObject model, ContentAssistContext context,
-			IAcceptor<ContentAssistResult.Entry> acceptor) {
-		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.BEFORE, context, acceptor)
-	}
-
-	protected def void createLocalVariableAndImplicitProposals(EObject context, IExpressionScope.Anchor anchor,
+	protected def void createLocalVariableAndImplicitProposals(EObject model, IExpressionScope.Anchor anchor,
 			ContentAssistContext contentAssistContext, IAcceptor<ContentAssistResult.Entry> acceptor) {
 		var String prefix = contentAssistContext.prefix
 		if (prefix.length() > 0) {
@@ -493,15 +387,15 @@ class XbaseWebContentProposalProvider extends AbstractDeclarativeWebContentPropo
 				return
 			}
 		}
-		val resolvedTypes = if (context !== null)
-				typeResolver.resolveTypes(context)
+		val resolvedTypes = if (model !== null)
+				typeResolver.resolveTypes(model)
 			else
 				typeResolver.resolveTypes(contentAssistContext.resource)
-		val expressionScope = resolvedTypes.getExpressionScope(context, anchor)
+		val expressionScope = resolvedTypes.getExpressionScope(model, anchor)
 		val scope = expressionScope.featureScope
 		val proposalCreator = new XbaseCrossrefProposalCreator(contentAssistContext, qualifiedNameConverter,
 			typeComputationServices, 'IdOrSuper')
-		lookupCrossReference(scope, context, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE,
+		lookupCrossReference(scope, model, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE,
 			acceptor, featureDescriptionPredicate, proposalCreator)
 	}
 

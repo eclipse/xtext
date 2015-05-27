@@ -62,7 +62,7 @@ class XbaseCrossrefProposalCreator extends CrossrefProposalCreator {
 					qualifiedNameConverter.toString(candidate.qualifiedName),
 					qualifiedNameConverter.toString(candidate.name))
 			}
-			var offset = contentAssistContext.offset + proposalString.length
+			var offset = contentAssistContext.offset - contentAssistContext.prefix.length + proposalString.length
 			result.escapePosition = offset + bracketInfo.caretOffset
 			if (bracketInfo.selectionOffset != 0) {
 				offset += bracketInfo.selectionOffset
