@@ -12,6 +12,10 @@ import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -38,9 +42,12 @@ import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
 import org.eclipse.xtext.web.server.contentassist.CrossrefProposalCreator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.CurrentTypeFinder;
 
 @SuppressWarnings("all")
@@ -64,6 +71,96 @@ public class WebContentProposalProvider {
     for (final AbstractElement element : _firstSetGrammarElements) {
       this.createProposals(element, context, acceptor);
     }
+  }
+  
+  public Iterable<ContentAssistResult.Entry> filter(final Collection<ContentAssistResult.Entry> proposals) {
+    final Function1<ContentAssistResult.Entry, Boolean> _function = new Function1<ContentAssistResult.Entry, Boolean>() {
+      @Override
+      public Boolean apply(final ContentAssistResult.Entry it) {
+        boolean _xblockexpression = false;
+        {
+          boolean _or = false;
+          boolean _or_1 = false;
+          String _proposal = it.getProposal();
+          boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_proposal);
+          if (_isNullOrEmpty) {
+            _or_1 = true;
+          } else {
+            String _proposal_1 = it.getProposal();
+            String _prefix = it.getPrefix();
+            boolean _equals = Objects.equal(_proposal_1, _prefix);
+            _or_1 = _equals;
+          }
+          if (_or_1) {
+            _or = true;
+          } else {
+            boolean _matchesPrefix = WebContentProposalProvider.this.matchesPrefix(it);
+            boolean _not = (!_matchesPrefix);
+            _or = _not;
+          }
+          if (_or) {
+            return Boolean.valueOf(false);
+          }
+          boolean _switchResult = false;
+          String _type = it.getType();
+          boolean _matched = false;
+          if (!_matched) {
+            if (Objects.equal(_type, ContentAssistResult.KEYWORD)) {
+              _matched=true;
+              boolean _or_2 = false;
+              int _size = proposals.size();
+              boolean _equals_1 = (_size == 1);
+              if (_equals_1) {
+                _or_2 = true;
+              } else {
+                String _proposal_2 = it.getProposal();
+                char _charAt = _proposal_2.charAt(0);
+                boolean _isLetter = Character.isLetter(_charAt);
+                _or_2 = _isLetter;
+              }
+              _switchResult = _or_2;
+            }
+          }
+          if (!_matched) {
+            _switchResult = true;
+          }
+          _xblockexpression = _switchResult;
+        }
+        return Boolean.valueOf(_xblockexpression);
+      }
+    };
+    return IterableExtensions.<ContentAssistResult.Entry>filter(proposals, _function);
+  }
+  
+  protected boolean matchesPrefix(final ContentAssistResult.Entry entry) {
+    String _proposal = entry.getProposal();
+    String _prefix = entry.getPrefix();
+    String _prefix_1 = entry.getPrefix();
+    int _length = _prefix_1.length();
+    return _proposal.regionMatches(true, 0, _prefix, 0, _length);
+  }
+  
+  public void sort(final List<ContentAssistResult.Entry> proposals) {
+    final Comparator<ContentAssistResult.Entry> _function = new Comparator<ContentAssistResult.Entry>() {
+      @Override
+      public int compare(final ContentAssistResult.Entry a, final ContentAssistResult.Entry b) {
+        int _xifexpression = (int) 0;
+        String _type = a.getType();
+        String _type_1 = b.getType();
+        boolean _equals = Objects.equal(_type, _type_1);
+        if (_equals) {
+          String _proposal = a.getProposal();
+          String _proposal_1 = b.getProposal();
+          _xifexpression = _proposal.compareTo(_proposal_1);
+        } else {
+          String _type_2 = a.getType();
+          String _type_3 = b.getType();
+          _xifexpression = _type_2.compareTo(_type_3);
+        }
+        return _xifexpression;
+      }
+    };
+    Collections.<ContentAssistResult.Entry>sort(proposals, _function);
   }
   
   protected void _createProposals(final AbstractElement element, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {

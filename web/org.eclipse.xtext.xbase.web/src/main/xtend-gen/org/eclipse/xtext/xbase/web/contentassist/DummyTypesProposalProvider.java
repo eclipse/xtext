@@ -14,12 +14,13 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.web.contentassist.ITypeFilter;
 import org.eclipse.xtext.xbase.web.contentassist.ITypesProposalProvider;
 
 @SuppressWarnings("all")
 public class DummyTypesProposalProvider implements ITypesProposalProvider {
   @Override
-  public void createTypeProposals(final ContentAssistContext context, final EReference typeReference, final ITypesProposalProvider.Filter filter, final IValueConverter<String> valueConverter, final IAcceptor<ContentAssistResult.Entry> acceptor) {
+  public void createTypeProposals(final ContentAssistContext context, final EReference typeReference, final IValueConverter<String> valueConverter, final ITypeFilter filter, final IAcceptor<ContentAssistResult.Entry> acceptor) {
     String _prefix = context.getPrefix();
     ContentAssistResult.Entry _entry = new ContentAssistResult.Entry(ContentAssistResult.CROSSREF, _prefix);
     final Procedure1<ContentAssistResult.Entry> _function = new Procedure1<ContentAssistResult.Entry>() {

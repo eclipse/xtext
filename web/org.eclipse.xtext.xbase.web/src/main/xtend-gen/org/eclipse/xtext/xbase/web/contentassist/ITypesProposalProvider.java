@@ -12,12 +12,9 @@ import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
+import org.eclipse.xtext.xbase.web.contentassist.ITypeFilter;
 
 @SuppressWarnings("all")
 public interface ITypesProposalProvider {
-  public interface Filter {
-    public abstract boolean accept(final int modifiers, final char[] packageName, final char[] simpleTypeName, final char[][] enclosingTypeNames, final String path);
-  }
-  
-  public abstract void createTypeProposals(final ContentAssistContext context, final EReference typeReference, final ITypesProposalProvider.Filter filter, final IValueConverter<String> valueConverter, final IAcceptor<ContentAssistResult.Entry> acceptor);
+  public abstract void createTypeProposals(final ContentAssistContext context, final EReference typeReference, final IValueConverter<String> valueConverter, final ITypeFilter filter, final IAcceptor<ContentAssistResult.Entry> acceptor);
 }

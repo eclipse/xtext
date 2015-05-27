@@ -119,8 +119,12 @@ public class XbaseCrossrefProposalCreator extends CrossrefProposalCreator {
       }
       ContentAssistContext _contentAssistContext_3 = this.getContentAssistContext();
       int _offset = _contentAssistContext_3.getOffset();
-      int _length = proposalString.length();
-      int offset = (_offset + _length);
+      ContentAssistContext _contentAssistContext_4 = this.getContentAssistContext();
+      String _prefix_1 = _contentAssistContext_4.getPrefix();
+      int _length = _prefix_1.length();
+      int _minus = (_offset - _length);
+      int _length_1 = proposalString.length();
+      int offset = (_minus + _length_1);
       result.setEscapePosition((offset + bracketInfo.caretOffset));
       if ((bracketInfo.selectionOffset != 0)) {
         int _offset_1 = offset;

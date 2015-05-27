@@ -8,6 +8,9 @@
 package org.eclipse.xtext.web.server.contentassist
 
 import com.google.inject.Inject
+import java.util.Collection
+import java.util.Collections
+import java.util.List
 import org.apache.log4j.Logger
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -38,10 +41,35 @@ class WebContentProposalProvider {
 	
 	@Inject extension CurrentTypeFinder
 	
-	def createProposals(ContentAssistContext context, IAcceptor<ContentAssistResult.Entry> acceptor) {
+	def void createProposals(ContentAssistContext context, IAcceptor<ContentAssistResult.Entry> acceptor) {
 		for (element : context.firstSetGrammarElements) {
 			createProposals(element, context, acceptor)
 		}
+	}
+	
+	def Iterable<ContentAssistResult.Entry> filter(Collection<ContentAssistResult.Entry> proposals) {
+		proposals.filter[
+			if (proposal.nullOrEmpty || proposal == prefix || !matchesPrefix)
+				return false
+			switch type {
+				case KEYWORD:
+					proposals.size == 1 || Character.isLetter(proposal.charAt(0))
+				default: true
+			}
+		]
+	}
+	
+	protected def matchesPrefix(ContentAssistResult.Entry entry) {
+		entry.proposal.regionMatches(true, 0, entry.prefix, 0, entry.prefix.length)
+	}
+	
+	def void sort(List<ContentAssistResult.Entry> proposals) {
+		Collections.sort(proposals, [a, b |
+			if (a.type == b.type)
+				a.proposal.compareTo(b.proposal)
+			else
+				a.type.compareTo(b.type)
+		])
 	}
 
 	protected def dispatch void createProposals(AbstractElement element, ContentAssistContext context,

@@ -22,6 +22,7 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.conversion.IValueConverter;
@@ -36,10 +37,9 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.IAcceptor;
-import org.eclipse.xtext.web.server.contentassist.AbstractDeclarativeWebContentProposalProvider;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
 import org.eclipse.xtext.web.server.contentassist.CrossrefProposalCreator;
-import org.eclipse.xtext.web.server.contentassist.Proposals;
+import org.eclipse.xtext.web.server.contentassist.WebContentProposalProvider;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBasicForLoopExpression;
@@ -51,22 +51,27 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.conversion.XbaseQualifiedNameValueConverter;
+import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.scoping.SyntaxFilteredScopes;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
+import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
+import org.eclipse.xtext.xbase.services.XtypeGrammarAccess;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
+import org.eclipse.xtext.xbase.web.contentassist.ITypeFilter;
 import org.eclipse.xtext.xbase.web.contentassist.ITypesProposalProvider;
 import org.eclipse.xtext.xbase.web.contentassist.TypeMatchFilters;
 import org.eclipse.xtext.xbase.web.contentassist.XbaseCrossrefProposalCreator;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 @SuppressWarnings("all")
-public class XbaseWebContentProposalProvider extends AbstractDeclarativeWebContentProposalProvider {
+public class XbaseWebContentProposalProvider extends WebContentProposalProvider {
   public static class ValidFeatureDescription implements Predicate<IEObjectDescription> {
     @Inject
     private OperatorMapping operatorMapping;
@@ -101,6 +106,10 @@ public class XbaseWebContentProposalProvider extends AbstractDeclarativeWebConte
       return true;
     }
   }
+  
+  @Inject
+  @Extension
+  private XbaseGrammarAccess _xbaseGrammarAccess;
   
   @Inject
   private ITypesProposalProvider typeProposalProvider;
@@ -172,96 +181,363 @@ public class XbaseWebContentProposalProvider extends AbstractDeclarativeWebConte
     return true;
   }
   
-  @Proposals(rule = "XImportDeclaration", feature = "importedType")
-  public void completeXImportDeclaration_ImportedType(final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    final ITypesProposalProvider.Filter _function = new ITypesProposalProvider.Filter() {
-      @Override
-      public boolean accept(final int modifiers, final char[] packageName, final char[] simpleTypeName, final char[][] enclosingTypeNames, final String path) {
-        boolean _isInternalClass = TypeMatchFilters.isInternalClass(simpleTypeName, enclosingTypeNames);
-        return (!_isInternalClass);
-      }
-    };
-    final ITypesProposalProvider.Filter filter = _function;
-    this.completeJavaTypes(context, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, true, 
-      this.qualifiedNameValueConverter, filter, acceptor);
-  }
-  
-  @Proposals(rule = "JvmParameterizedTypeReference", feature = "type")
-  public void completeJvmParameterizedTypeReference_Type(final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    this.completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, acceptor);
-  }
-  
-  @Proposals(rule = "XConstructorCall", feature = "constructor")
-  public void completeXConstructorCall_Constructor(final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    final ITypesProposalProvider.Filter _function = new ITypesProposalProvider.Filter() {
-      @Override
-      public boolean accept(final int modifiers, final char[] packageName, final char[] simpleTypeName, final char[][] enclosingTypeNames, final String path) {
+  @Override
+  protected void _createProposals(final RuleCall ruleCall, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
+    AbstractRule _rule = ruleCall.getRule();
+    boolean _matched = false;
+    if (!_matched) {
+      ParserRule _xExpressionRule = this._xbaseGrammarAccess.getXExpressionRule();
+      if (Objects.equal(_rule, _xExpressionRule)) {
+        _matched=true;
         boolean _and = false;
-        boolean _and_1 = false;
-        boolean _isInternalClass = TypeMatchFilters.isInternalClass(simpleTypeName, enclosingTypeNames);
-        boolean _not = (!_isInternalClass);
-        if (!_not) {
-          _and_1 = false;
-        } else {
-          boolean _isAbstract = TypeMatchFilters.isAbstract(modifiers);
-          boolean _not_1 = (!_isAbstract);
-          _and_1 = _not_1;
-        }
-        if (!_and_1) {
+        EObject _eContainer = ruleCall.eContainer();
+        if (!(_eContainer instanceof Group)) {
           _and = false;
         } else {
-          boolean _isInterface = TypeMatchFilters.isInterface(modifiers);
-          boolean _not_2 = (!_isInterface);
-          _and = _not_2;
+          AbstractRule _containingRule = GrammarUtil.containingRule(ruleCall);
+          String _name = _containingRule.getName();
+          boolean _equals = Objects.equal(_name, "XParenthesizedExpression");
+          _and = _equals;
         }
-        return _and;
+        if (_and) {
+          EObject _currentModel = context.getCurrentModel();
+          this.createLocalVariableAndImplicitProposals(_currentModel, IExpressionScope.Anchor.WITHIN, context, acceptor);
+        }
       }
-    };
-    final ITypesProposalProvider.Filter filter = _function;
-    this.completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true, 
-      this.qualifiedNameValueConverter, filter, acceptor);
+    }
+    if (!_matched) {
+      super._createProposals(ruleCall, context, acceptor);
+    }
   }
   
-  @Proposals(rule = "XRelationalExpression", feature = "type")
-  public void completeXRelationalExpression_Type(final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    this.completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, acceptor);
-  }
-  
-  @Proposals(rule = "XTypeLiteral", feature = "type")
-  public void completeXTypeLiteral_Type(final EObject model, final Assignment assignment, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    final ITypesProposalProvider.Filter _function = new ITypesProposalProvider.Filter() {
-      @Override
-      public boolean accept(final int modifiers, final char[] packageName, final char[] simpleTypeName, final char[][] enclosingTypeNames, final String path) {
-        boolean _isInternalClass = TypeMatchFilters.isInternalClass(simpleTypeName, enclosingTypeNames);
-        return (!_isInternalClass);
+  @Override
+  protected void _createProposals(final Assignment assignment, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
+    final EObject model = context.getCurrentModel();
+    AbstractRule _containingRule = GrammarUtil.containingRule(assignment);
+    String _name = _containingRule.getName();
+    String _plus = (_name + " - ");
+    String _feature = assignment.getFeature();
+    String _plus_1 = (_plus + _feature);
+    InputOutput.<String>println(_plus_1);
+    boolean _matched = false;
+    if (!_matched) {
+      XbaseGrammarAccess.XFeatureCallElements _xFeatureCallAccess = this._xbaseGrammarAccess.getXFeatureCallAccess();
+      Assignment _featureAssignment_2 = _xFeatureCallAccess.getFeatureAssignment_2();
+      if (Objects.equal(assignment, _featureAssignment_2)) {
+        _matched=true;
+        this.completeXFeatureCall(model, context, acceptor);
       }
-    };
-    final ITypesProposalProvider.Filter filter = _function;
-    this.completeJavaTypes(context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, true, 
-      this.qualifiedNameValueConverter, filter, acceptor);
+    }
+    if (!_matched) {
+      XbaseGrammarAccess.XMemberFeatureCallElements _xMemberFeatureCallAccess = this._xbaseGrammarAccess.getXMemberFeatureCallAccess();
+      Assignment _featureAssignment_1_0_0_0_2 = _xMemberFeatureCallAccess.getFeatureAssignment_1_0_0_0_2();
+      if (Objects.equal(assignment, _featureAssignment_1_0_0_0_2)) {
+        _matched=true;
+      }
+      if (!_matched) {
+        XbaseGrammarAccess.XMemberFeatureCallElements _xMemberFeatureCallAccess_1 = this._xbaseGrammarAccess.getXMemberFeatureCallAccess();
+        Assignment _featureAssignment_1_1_2 = _xMemberFeatureCallAccess_1.getFeatureAssignment_1_1_2();
+        if (Objects.equal(assignment, _featureAssignment_1_1_2)) {
+          _matched=true;
+        }
+      }
+      if (_matched) {
+        this.completeXMemberFeatureCall(model, assignment, context, acceptor);
+      }
+    }
+    if (!_matched) {
+      XbaseGrammarAccess.XBlockExpressionElements _xBlockExpressionAccess = this._xbaseGrammarAccess.getXBlockExpressionAccess();
+      Assignment _expressionsAssignment_2_0 = _xBlockExpressionAccess.getExpressionsAssignment_2_0();
+      if (Objects.equal(assignment, _expressionsAssignment_2_0)) {
+        _matched=true;
+      }
+      if (!_matched) {
+        XbaseGrammarAccess.XExpressionInClosureElements _xExpressionInClosureAccess = this._xbaseGrammarAccess.getXExpressionInClosureAccess();
+        Assignment _expressionsAssignment_1_0 = _xExpressionInClosureAccess.getExpressionsAssignment_1_0();
+        if (Objects.equal(assignment, _expressionsAssignment_1_0)) {
+          _matched=true;
+        }
+      }
+      if (_matched) {
+        this.completeWithinBlock(model, context, acceptor);
+      }
+    }
+    if (!_matched) {
+      XbaseGrammarAccess.XAssignmentElements _xAssignmentAccess = this._xbaseGrammarAccess.getXAssignmentAccess();
+      Assignment _featureAssignment_0_1 = _xAssignmentAccess.getFeatureAssignment_0_1();
+      if (Objects.equal(assignment, _featureAssignment_0_1)) {
+        _matched=true;
+      }
+      if (!_matched) {
+        XbaseGrammarAccess.XAssignmentElements _xAssignmentAccess_1 = this._xbaseGrammarAccess.getXAssignmentAccess();
+        Assignment _featureAssignment_1_1_0_0_1 = _xAssignmentAccess_1.getFeatureAssignment_1_1_0_0_1();
+        if (Objects.equal(assignment, _featureAssignment_1_1_0_0_1)) {
+          _matched=true;
+        }
+      }
+      if (_matched) {
+        this.completeXAssignment(model, assignment, context, acceptor);
+      }
+    }
+    if (!_matched) {
+      XtypeGrammarAccess.JvmParameterizedTypeReferenceElements _jvmParameterizedTypeReferenceAccess = this._xbaseGrammarAccess.getJvmParameterizedTypeReferenceAccess();
+      Assignment _typeAssignment_0 = _jvmParameterizedTypeReferenceAccess.getTypeAssignment_0();
+      if (Objects.equal(assignment, _typeAssignment_0)) {
+        _matched=true;
+      }
+      if (!_matched) {
+        XtypeGrammarAccess.JvmParameterizedTypeReferenceElements _jvmParameterizedTypeReferenceAccess_1 = this._xbaseGrammarAccess.getJvmParameterizedTypeReferenceAccess();
+        Assignment _typeAssignment_1_4_1 = _jvmParameterizedTypeReferenceAccess_1.getTypeAssignment_1_4_1();
+        if (Objects.equal(assignment, _typeAssignment_1_4_1)) {
+          _matched=true;
+        }
+      }
+      if (_matched) {
+        this.completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, acceptor);
+      }
+    }
+    if (!_matched) {
+      XbaseGrammarAccess.XRelationalExpressionElements _xRelationalExpressionAccess = this._xbaseGrammarAccess.getXRelationalExpressionAccess();
+      Assignment _typeAssignment_1_0_1 = _xRelationalExpressionAccess.getTypeAssignment_1_0_1();
+      if (Objects.equal(assignment, _typeAssignment_1_0_1)) {
+        _matched=true;
+        this.completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, acceptor);
+      }
+    }
+    if (!_matched) {
+      XtypeGrammarAccess.XImportDeclarationElements _xImportDeclarationAccess = this._xbaseGrammarAccess.getXImportDeclarationAccess();
+      Assignment _importedTypeAssignment_1_0_2 = _xImportDeclarationAccess.getImportedTypeAssignment_1_0_2();
+      if (Objects.equal(assignment, _importedTypeAssignment_1_0_2)) {
+        _matched=true;
+      }
+      if (!_matched) {
+        XtypeGrammarAccess.XImportDeclarationElements _xImportDeclarationAccess_1 = this._xbaseGrammarAccess.getXImportDeclarationAccess();
+        Assignment _importedTypeAssignment_1_1 = _xImportDeclarationAccess_1.getImportedTypeAssignment_1_1();
+        if (Objects.equal(assignment, _importedTypeAssignment_1_1)) {
+          _matched=true;
+        }
+      }
+      if (_matched) {
+        this.completeJavaTypes(context, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, true, acceptor);
+      }
+    }
+    if (!_matched) {
+      XbaseGrammarAccess.XTypeLiteralElements _xTypeLiteralAccess = this._xbaseGrammarAccess.getXTypeLiteralAccess();
+      Assignment _typeAssignment_3 = _xTypeLiteralAccess.getTypeAssignment_3();
+      if (Objects.equal(assignment, _typeAssignment_3)) {
+        _matched=true;
+        this.completeJavaTypes(context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, true, acceptor);
+      }
+    }
+    if (!_matched) {
+      XbaseGrammarAccess.XConstructorCallElements _xConstructorCallAccess = this._xbaseGrammarAccess.getXConstructorCallAccess();
+      Assignment _constructorAssignment_2 = _xConstructorCallAccess.getConstructorAssignment_2();
+      if (Objects.equal(assignment, _constructorAssignment_2)) {
+        _matched=true;
+        ITypeFilter _or = TypeMatchFilters.operator_or(TypeMatchFilters.INTERNAL, TypeMatchFilters.ABSTRACT);
+        ITypeFilter _or_1 = TypeMatchFilters.operator_or(_or, TypeMatchFilters.INTERFACE);
+        ITypeFilter _not = TypeMatchFilters.operator_not(_or_1);
+        this.completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true, 
+          this.qualifiedNameValueConverter, _not, acceptor);
+      }
+    }
+    if (!_matched) {
+      XbaseGrammarAccess.XForLoopExpressionElements _xForLoopExpressionAccess = this._xbaseGrammarAccess.getXForLoopExpressionAccess();
+      Assignment _eachExpressionAssignment_3 = _xForLoopExpressionAccess.getEachExpressionAssignment_3();
+      if (Objects.equal(assignment, _eachExpressionAssignment_3)) {
+        _matched=true;
+      }
+      if (!_matched) {
+        XbaseGrammarAccess.XSwitchExpressionElements _xSwitchExpressionAccess = this._xbaseGrammarAccess.getXSwitchExpressionAccess();
+        Assignment _defaultAssignment_5_2 = _xSwitchExpressionAccess.getDefaultAssignment_5_2();
+        if (Objects.equal(assignment, _defaultAssignment_5_2)) {
+          _matched=true;
+        }
+      }
+      if (!_matched) {
+        XbaseGrammarAccess.XCasePartElements _xCasePartAccess = this._xbaseGrammarAccess.getXCasePartAccess();
+        Assignment _caseAssignment_2_1 = _xCasePartAccess.getCaseAssignment_2_1();
+        if (Objects.equal(assignment, _caseAssignment_2_1)) {
+          _matched=true;
+        }
+      }
+      if (!_matched) {
+        XbaseGrammarAccess.XCatchClauseElements _xCatchClauseAccess = this._xbaseGrammarAccess.getXCatchClauseAccess();
+        Assignment _expressionAssignment_4 = _xCatchClauseAccess.getExpressionAssignment_4();
+        if (Objects.equal(assignment, _expressionAssignment_4)) {
+          _matched=true;
+        }
+      }
+      if (!_matched) {
+        XbaseGrammarAccess.XBasicForLoopExpressionElements _xBasicForLoopExpressionAccess = this._xbaseGrammarAccess.getXBasicForLoopExpressionAccess();
+        Assignment _updateExpressionsAssignment_7_0 = _xBasicForLoopExpressionAccess.getUpdateExpressionsAssignment_7_0();
+        if (Objects.equal(assignment, _updateExpressionsAssignment_7_0)) {
+          _matched=true;
+        }
+      }
+      if (!_matched) {
+        XbaseGrammarAccess.XBasicForLoopExpressionElements _xBasicForLoopExpressionAccess_1 = this._xbaseGrammarAccess.getXBasicForLoopExpressionAccess();
+        Assignment _updateExpressionsAssignment_7_1_1 = _xBasicForLoopExpressionAccess_1.getUpdateExpressionsAssignment_7_1_1();
+        if (Objects.equal(assignment, _updateExpressionsAssignment_7_1_1)) {
+          _matched=true;
+        }
+      }
+      if (!_matched) {
+        XbaseGrammarAccess.XBasicForLoopExpressionElements _xBasicForLoopExpressionAccess_2 = this._xbaseGrammarAccess.getXBasicForLoopExpressionAccess();
+        Assignment _expressionAssignment_5 = _xBasicForLoopExpressionAccess_2.getExpressionAssignment_5();
+        if (Objects.equal(assignment, _expressionAssignment_5)) {
+          _matched=true;
+        }
+      }
+      if (!_matched) {
+        XbaseGrammarAccess.XBasicForLoopExpressionElements _xBasicForLoopExpressionAccess_3 = this._xbaseGrammarAccess.getXBasicForLoopExpressionAccess();
+        Assignment _eachExpressionAssignment_9 = _xBasicForLoopExpressionAccess_3.getEachExpressionAssignment_9();
+        if (Objects.equal(assignment, _eachExpressionAssignment_9)) {
+          _matched=true;
+        }
+      }
+      if (!_matched) {
+        XbaseGrammarAccess.XClosureElements _xClosureAccess = this._xbaseGrammarAccess.getXClosureAccess();
+        Assignment _expressionAssignment_2 = _xClosureAccess.getExpressionAssignment_2();
+        if (Objects.equal(assignment, _expressionAssignment_2)) {
+          _matched=true;
+        }
+      }
+      if (!_matched) {
+        XbaseGrammarAccess.XShortClosureElements _xShortClosureAccess = this._xbaseGrammarAccess.getXShortClosureAccess();
+        Assignment _expressionAssignment_1 = _xShortClosureAccess.getExpressionAssignment_1();
+        if (Objects.equal(assignment, _expressionAssignment_1)) {
+          _matched=true;
+        }
+      }
+      if (_matched) {
+        this.createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor);
+      }
+    }
+    if (!_matched) {
+      XbaseGrammarAccess.XForLoopExpressionElements _xForLoopExpressionAccess_1 = this._xbaseGrammarAccess.getXForLoopExpressionAccess();
+      Assignment _forExpressionAssignment_1 = _xForLoopExpressionAccess_1.getForExpressionAssignment_1();
+      if (Objects.equal(assignment, _forExpressionAssignment_1)) {
+        _matched=true;
+      }
+      if (!_matched) {
+        XbaseGrammarAccess.XVariableDeclarationElements _xVariableDeclarationAccess = this._xbaseGrammarAccess.getXVariableDeclarationAccess();
+        Assignment _rightAssignment_3_1 = _xVariableDeclarationAccess.getRightAssignment_3_1();
+        if (Objects.equal(assignment, _rightAssignment_3_1)) {
+          _matched=true;
+        }
+      }
+      if (_matched) {
+        this.createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.BEFORE, context, acceptor);
+      }
+    }
+    if (!_matched) {
+      XbaseGrammarAccess.XCasePartElements _xCasePartAccess_1 = this._xbaseGrammarAccess.getXCasePartAccess();
+      Assignment _thenAssignment_3_0_1 = _xCasePartAccess_1.getThenAssignment_3_0_1();
+      if (Objects.equal(assignment, _thenAssignment_3_0_1)) {
+        _matched=true;
+        this.createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.AFTER, context, acceptor);
+      }
+    }
+    if (!_matched) {
+      XbaseGrammarAccess.XOrExpressionElements _xOrExpressionAccess = this._xbaseGrammarAccess.getXOrExpressionAccess();
+      Assignment _featureAssignment_1_0_0_1 = _xOrExpressionAccess.getFeatureAssignment_1_0_0_1();
+      if (Objects.equal(assignment, _featureAssignment_1_0_0_1)) {
+        _matched=true;
+      }
+      if (!_matched) {
+        XbaseGrammarAccess.XAndExpressionElements _xAndExpressionAccess = this._xbaseGrammarAccess.getXAndExpressionAccess();
+        Assignment _featureAssignment_1_0_0_1_1 = _xAndExpressionAccess.getFeatureAssignment_1_0_0_1();
+        if (Objects.equal(assignment, _featureAssignment_1_0_0_1_1)) {
+          _matched=true;
+        }
+      }
+      if (!_matched) {
+        XbaseGrammarAccess.XEqualityExpressionElements _xEqualityExpressionAccess = this._xbaseGrammarAccess.getXEqualityExpressionAccess();
+        Assignment _featureAssignment_1_0_0_1_2 = _xEqualityExpressionAccess.getFeatureAssignment_1_0_0_1();
+        if (Objects.equal(assignment, _featureAssignment_1_0_0_1_2)) {
+          _matched=true;
+        }
+      }
+      if (!_matched) {
+        XbaseGrammarAccess.XRelationalExpressionElements _xRelationalExpressionAccess_1 = this._xbaseGrammarAccess.getXRelationalExpressionAccess();
+        Assignment _featureAssignment_1_1_0_0_1_1 = _xRelationalExpressionAccess_1.getFeatureAssignment_1_1_0_0_1();
+        if (Objects.equal(assignment, _featureAssignment_1_1_0_0_1_1)) {
+          _matched=true;
+        }
+      }
+      if (!_matched) {
+        XbaseGrammarAccess.XOtherOperatorExpressionElements _xOtherOperatorExpressionAccess = this._xbaseGrammarAccess.getXOtherOperatorExpressionAccess();
+        Assignment _featureAssignment_1_0_0_1_3 = _xOtherOperatorExpressionAccess.getFeatureAssignment_1_0_0_1();
+        if (Objects.equal(assignment, _featureAssignment_1_0_0_1_3)) {
+          _matched=true;
+        }
+      }
+      if (!_matched) {
+        XbaseGrammarAccess.XAdditiveExpressionElements _xAdditiveExpressionAccess = this._xbaseGrammarAccess.getXAdditiveExpressionAccess();
+        Assignment _featureAssignment_1_0_0_1_4 = _xAdditiveExpressionAccess.getFeatureAssignment_1_0_0_1();
+        if (Objects.equal(assignment, _featureAssignment_1_0_0_1_4)) {
+          _matched=true;
+        }
+      }
+      if (!_matched) {
+        XbaseGrammarAccess.XMultiplicativeExpressionElements _xMultiplicativeExpressionAccess = this._xbaseGrammarAccess.getXMultiplicativeExpressionAccess();
+        Assignment _featureAssignment_1_0_0_1_5 = _xMultiplicativeExpressionAccess.getFeatureAssignment_1_0_0_1();
+        if (Objects.equal(assignment, _featureAssignment_1_0_0_1_5)) {
+          _matched=true;
+        }
+      }
+      if (!_matched) {
+        XbaseGrammarAccess.XPostfixOperationElements _xPostfixOperationAccess = this._xbaseGrammarAccess.getXPostfixOperationAccess();
+        Assignment _featureAssignment_1_0_1 = _xPostfixOperationAccess.getFeatureAssignment_1_0_1();
+        if (Objects.equal(assignment, _featureAssignment_1_0_1)) {
+          _matched=true;
+        }
+      }
+      if (_matched) {
+        this.completeBinaryOperation(model, assignment, context, acceptor);
+      }
+    }
+    if (!_matched) {
+      XbaseGrammarAccess.XBasicForLoopExpressionElements _xBasicForLoopExpressionAccess_4 = this._xbaseGrammarAccess.getXBasicForLoopExpressionAccess();
+      Assignment _initExpressionsAssignment_3_0 = _xBasicForLoopExpressionAccess_4.getInitExpressionsAssignment_3_0();
+      if (Objects.equal(assignment, _initExpressionsAssignment_3_0)) {
+        _matched=true;
+      }
+      if (!_matched) {
+        XbaseGrammarAccess.XBasicForLoopExpressionElements _xBasicForLoopExpressionAccess_5 = this._xbaseGrammarAccess.getXBasicForLoopExpressionAccess();
+        Assignment _initExpressionsAssignment_3_1_1 = _xBasicForLoopExpressionAccess_5.getInitExpressionsAssignment_3_1_1();
+        if (Objects.equal(assignment, _initExpressionsAssignment_3_1_1)) {
+          _matched=true;
+        }
+      }
+      if (_matched) {
+        this.completeXBasicForLoopInit(model, context, acceptor);
+      }
+    }
+    if (!_matched) {
+      XbaseGrammarAccess.XUnaryOperationElements _xUnaryOperationAccess = this._xbaseGrammarAccess.getXUnaryOperationAccess();
+      Assignment _featureAssignment_0_1_1 = _xUnaryOperationAccess.getFeatureAssignment_0_1();
+      if (Objects.equal(assignment, _featureAssignment_0_1_1)) {
+        _matched=true;
+      }
+    }
+    if (!_matched) {
+      super._createProposals(assignment, context, acceptor);
+    }
   }
   
   protected void completeJavaTypes(final ContentAssistContext context, final EReference reference, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    final ITypesProposalProvider.Filter _function = new ITypesProposalProvider.Filter() {
-      @Override
-      public boolean accept(final int modifiers, final char[] packageName, final char[] simpleTypeName, final char[][] enclosingTypeNames, final String path) {
-        boolean _isInternalClass = TypeMatchFilters.isInternalClass(simpleTypeName, enclosingTypeNames);
-        return (!_isInternalClass);
-      }
-    };
-    final ITypesProposalProvider.Filter filter = _function;
-    this.completeJavaTypes(context, reference, this.qualifiedNameValueConverter, filter, acceptor);
+    ITypeFilter _not = TypeMatchFilters.operator_not(TypeMatchFilters.INTERNAL);
+    this.completeJavaTypes(context, reference, false, this.qualifiedNameValueConverter, _not, acceptor);
   }
   
-  protected void completeJavaTypes(final ContentAssistContext context, final EReference reference, final ITypesProposalProvider.Filter filter, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    this.completeJavaTypes(context, reference, this.qualifiedNameValueConverter, filter, acceptor);
+  protected void completeJavaTypes(final ContentAssistContext context, final EReference reference, final boolean forced, final IAcceptor<ContentAssistResult.Entry> acceptor) {
+    ITypeFilter _not = TypeMatchFilters.operator_not(TypeMatchFilters.INTERNAL);
+    this.completeJavaTypes(context, reference, forced, this.qualifiedNameValueConverter, _not, acceptor);
   }
   
-  protected void completeJavaTypes(final ContentAssistContext context, final EReference reference, final IValueConverter<String> valueConverter, final ITypesProposalProvider.Filter filter, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    this.completeJavaTypes(context, reference, false, valueConverter, filter, acceptor);
-  }
-  
-  protected void completeJavaTypes(final ContentAssistContext context, final EReference reference, final boolean forced, final IValueConverter<String> valueConverter, final ITypesProposalProvider.Filter filter, final IAcceptor<ContentAssistResult.Entry> acceptor) {
+  protected void completeJavaTypes(final ContentAssistContext context, final EReference reference, final boolean forced, final IValueConverter<String> valueConverter, final ITypeFilter filter, final IAcceptor<ContentAssistResult.Entry> acceptor) {
     final String prefix = context.getPrefix();
     int _length = prefix.length();
     boolean _greaterThan = (_length > 0);
@@ -269,73 +545,80 @@ public class XbaseWebContentProposalProvider extends AbstractDeclarativeWebConte
       char _charAt = prefix.charAt(0);
       boolean _isJavaIdentifierStart = Character.isJavaIdentifierStart(_charAt);
       if (_isJavaIdentifierStart) {
-        if ((!forced)) {
-          boolean _and = false;
-          boolean _and_1 = false;
+        boolean _and = false;
+        boolean _and_1 = false;
+        boolean _and_2 = false;
+        if (!(!forced)) {
+          _and_2 = false;
+        } else {
           boolean _contains = prefix.contains(".");
           boolean _not = (!_contains);
-          if (!_not) {
-            _and_1 = false;
-          } else {
-            boolean _contains_1 = prefix.contains(".");
-            boolean _not_1 = (!_contains_1);
-            _and_1 = _not_1;
-          }
-          if (!_and_1) {
-            _and = false;
-          } else {
-            char _charAt_1 = prefix.charAt(0);
-            boolean _isUpperCase = Character.isUpperCase(_charAt_1);
-            boolean _not_2 = (!_isUpperCase);
-            _and = _not_2;
-          }
-          if (_and) {
-            return;
-          }
+          _and_2 = _not;
         }
-        this.typeProposalProvider.createTypeProposals(context, reference, filter, valueConverter, acceptor);
+        if (!_and_2) {
+          _and_1 = false;
+        } else {
+          boolean _contains_1 = prefix.contains("::");
+          boolean _not_1 = (!_contains_1);
+          _and_1 = _not_1;
+        }
+        if (!_and_1) {
+          _and = false;
+        } else {
+          char _charAt_1 = prefix.charAt(0);
+          boolean _isUpperCase = Character.isUpperCase(_charAt_1);
+          boolean _not_2 = (!_isUpperCase);
+          _and = _not_2;
+        }
+        if (_and) {
+          return;
+        }
+        this.typeProposalProvider.createTypeProposals(context, reference, valueConverter, filter, acceptor);
       }
     } else {
       if (forced) {
         final INode lastCompleteNode = context.getLastCompleteNode();
-        boolean _and_2 = false;
+        boolean _and_3 = false;
+        boolean _and_4 = false;
+        boolean _and_5 = false;
         if (!(lastCompleteNode instanceof ILeafNode)) {
-          _and_2 = false;
+          _and_5 = false;
         } else {
           boolean _isHidden = ((ILeafNode) lastCompleteNode).isHidden();
           boolean _not_3 = (!_isHidden);
-          _and_2 = _not_3;
+          _and_5 = _not_3;
         }
-        if (_and_2) {
-          boolean _and_3 = false;
+        if (!_and_5) {
+          _and_4 = false;
+        } else {
           int _length_1 = lastCompleteNode.getLength();
           boolean _greaterThan_1 = (_length_1 > 0);
-          if (!_greaterThan_1) {
-            _and_3 = false;
-          } else {
-            int _totalEndOffset = lastCompleteNode.getTotalEndOffset();
-            int _offset = context.getOffset();
-            boolean _tripleEquals = (_totalEndOffset == _offset);
-            _and_3 = _tripleEquals;
-          }
-          if (_and_3) {
-            final String text = lastCompleteNode.getText();
-            int _length_2 = text.length();
-            int _minus = (_length_2 - 1);
-            final char lastChar = text.charAt(_minus);
-            boolean _isJavaIdentifierPart = Character.isJavaIdentifierPart(lastChar);
-            if (_isJavaIdentifierPart) {
-              return;
-            }
+          _and_4 = _greaterThan_1;
+        }
+        if (!_and_4) {
+          _and_3 = false;
+        } else {
+          int _totalEndOffset = lastCompleteNode.getTotalEndOffset();
+          int _offset = context.getOffset();
+          boolean _equals = (_totalEndOffset == _offset);
+          _and_3 = _equals;
+        }
+        if (_and_3) {
+          final String text = lastCompleteNode.getText();
+          int _length_2 = text.length();
+          int _minus = (_length_2 - 1);
+          char _charAt_2 = text.charAt(_minus);
+          boolean _isJavaIdentifierPart = Character.isJavaIdentifierPart(_charAt_2);
+          if (_isJavaIdentifierPart) {
+            return;
           }
         }
-        this.typeProposalProvider.createTypeProposals(context, reference, filter, valueConverter, acceptor);
+        this.typeProposalProvider.createTypeProposals(context, reference, valueConverter, filter, acceptor);
       }
     }
   }
   
-  @Proposals(rule = "XFeatureCall", feature = "feature")
-  public void completeXFeatureCall_Feature(final EObject model, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
+  protected void completeXFeatureCall(final EObject model, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
     if ((model != null)) {
       IResolvedTypes _resolveTypes = this.typeResolver.resolveTypes(model);
       boolean _hasExpressionScope = _resolveTypes.hasExpressionScope(model, IExpressionScope.Anchor.WITHIN);
@@ -352,41 +635,6 @@ public class XbaseWebContentProposalProvider extends AbstractDeclarativeWebConte
       }
     }
     this.createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.AFTER, context, acceptor);
-  }
-  
-  @Proposals(rule = "XForLoopExpression", feature = "eachExpression")
-  public void completeXForLoopExpression_EachExpression(final EObject model, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    this.createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor);
-  }
-  
-  @Proposals(rule = "XForLoopExpression", feature = "forExpression")
-  public void completeXForLoopExpression_ForExpression(final EObject model, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    this.createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.BEFORE, context, acceptor);
-  }
-  
-  @Proposals(rule = "XSwitchExpression", feature = "default")
-  public void completeXSwitchExpression_Default(final EObject model, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    this.createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor);
-  }
-  
-  @Proposals(rule = "XCasePart", feature = "then")
-  public void completeXCasePart_Then(final EObject model, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    this.createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.AFTER, context, acceptor);
-  }
-  
-  @Proposals(rule = "XCasePart", feature = "case")
-  public void completeXCasePart_Case(final EObject model, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    this.createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor);
-  }
-  
-  @Proposals(rule = "XBlockExpression", feature = "expressions")
-  public void completeXBlockExpression_Expressions(final EObject model, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    this.completeWithinBlock(model, context, acceptor);
-  }
-  
-  @Proposals(rule = "XExpressionInClosure", feature = "expressions")
-  public void completeXExpressionInClosure_Expressions(final EObject model, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    this.completeWithinBlock(model, context, acceptor);
   }
   
   protected void completeWithinBlock(final EObject model, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
@@ -493,12 +741,11 @@ public class XbaseWebContentProposalProvider extends AbstractDeclarativeWebConte
     return false;
   }
   
-  @Proposals(rule = "XAssignment", feature = "feature")
-  public void completeXAssignment_Feature(final EObject model, final Assignment assignment, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
+  protected void completeXAssignment(final EObject model, final Assignment assignment, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
     final String ruleName = this.getConcreteSyntaxRuleName(assignment);
     boolean _isOperatorRule = this.isOperatorRule(ruleName);
     if (_isOperatorRule) {
-      this.completeBinaryOperationFeature(model, assignment, context, acceptor);
+      this.completeBinaryOperation(model, assignment, context, acceptor);
     }
   }
   
@@ -513,51 +760,7 @@ public class XbaseWebContentProposalProvider extends AbstractDeclarativeWebConte
     return _and;
   }
   
-  @Proposals(rule = "XOrExpression", feature = "feature")
-  public void completeXOrExpression_Feature(final EObject model, final Assignment assignment, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    this.completeBinaryOperationFeature(model, assignment, context, acceptor);
-  }
-  
-  @Proposals(rule = "XAndExpression", feature = "feature")
-  public void completeXAndExpression_Feature(final EObject model, final Assignment assignment, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    this.completeBinaryOperationFeature(model, assignment, context, acceptor);
-  }
-  
-  @Proposals(rule = "XEqualityExpression", feature = "feature")
-  public void completeXEqualityExpression_Feature(final EObject model, final Assignment assignment, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    this.completeBinaryOperationFeature(model, assignment, context, acceptor);
-  }
-  
-  @Proposals(rule = "XRelationalExpression", feature = "feature")
-  public void completeXRelationalExpression_Feature(final EObject model, final Assignment assignment, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    this.completeBinaryOperationFeature(model, assignment, context, acceptor);
-  }
-  
-  @Proposals(rule = "XOtherOperatorExpression", feature = "feature")
-  public void completeXOtherOperatorExpression_Feature(final EObject model, final Assignment assignment, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    this.completeBinaryOperationFeature(model, assignment, context, acceptor);
-  }
-  
-  @Proposals(rule = "XAdditiveExpression", feature = "feature")
-  public void completeXAdditiveExpression_Feature(final EObject model, final Assignment assignment, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    this.completeBinaryOperationFeature(model, assignment, context, acceptor);
-  }
-  
-  @Proposals(rule = "XMultiplicativeExpression", feature = "feature")
-  public void completeXMultiplicativeExpression_Feature(final EObject model, final Assignment assignment, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    this.completeBinaryOperationFeature(model, assignment, context, acceptor);
-  }
-  
-  @Proposals(rule = "XUnaryOperation", feature = "feature")
-  public void completeXUnaryOperation_Feature(final EObject model, final Assignment assignment, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-  }
-  
-  @Proposals(rule = "XPostfixOperation", feature = "feature")
-  public void completeXPostfixOperation_Feature(final EObject model, final Assignment assignment, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    this.completeBinaryOperationFeature(model, assignment, context, acceptor);
-  }
-  
-  protected void completeBinaryOperationFeature(final EObject model, final Assignment assignment, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
+  protected void completeBinaryOperation(final EObject model, final Assignment assignment, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
     if ((model instanceof XBinaryOperation)) {
       String _prefix = context.getPrefix();
       int _length = _prefix.length();
@@ -618,30 +821,7 @@ public class XbaseWebContentProposalProvider extends AbstractDeclarativeWebConte
     }
   }
   
-  @Proposals(rule = "XCatchClause", feature = "expression")
-  public void completeXCatchClause_Expression(final EObject model, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    this.createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor);
-  }
-  
-  @Proposals(rule = "XExpression")
-  public void complete_XExpression(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    boolean _and = false;
-    EObject _eContainer = ruleCall.eContainer();
-    if (!(_eContainer instanceof Group)) {
-      _and = false;
-    } else {
-      AbstractRule _containingRule = GrammarUtil.containingRule(ruleCall);
-      String _name = _containingRule.getName();
-      boolean _equals = Objects.equal(_name, "XParenthesizedExpression");
-      _and = _equals;
-    }
-    if (_and) {
-      this.createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor);
-    }
-  }
-  
-  @Proposals(rule = "XBasicForLoopExpression", feature = "initExpressions")
-  public void completeXBasicForLoopExpression_InitExpressions(final EObject model, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
+  protected void completeXBasicForLoopInit(final EObject model, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
     final ICompositeNode node = NodeModelUtils.getNode(model);
     int _offset = node.getOffset();
     int _offset_1 = context.getOffset();
@@ -669,33 +849,7 @@ public class XbaseWebContentProposalProvider extends AbstractDeclarativeWebConte
     this.createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.BEFORE, context, acceptor);
   }
   
-  @Proposals(rule = "XBasicForLoopExpression", feature = "updateExpressions")
-  public void completeXBasicForLoopExpression_UpdateExpressions(final EObject model, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    this.createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor);
-  }
-  
-  @Proposals(rule = "XBasicForLoopExpression", feature = "expression")
-  public void completeXBasicForLoopExpression_Expression(final EObject model, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    this.createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor);
-  }
-  
-  @Proposals(rule = "XBasicForLoopExpression", feature = "eachExpression")
-  public void completeXBasicForLoopExpression_EachExpression(final EObject model, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    this.createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor);
-  }
-  
-  @Proposals(rule = "XClosure", feature = "expression")
-  public void completeXClosure_Expression(final EObject model, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    this.createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor);
-  }
-  
-  @Proposals(rule = "XShortClosure", feature = "expression")
-  public void completeXShortClosure_Expression(final EObject model, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    this.createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor);
-  }
-  
-  @Proposals(rule = "XMemberFeatureCall", feature = "feature")
-  public void completeXMemberFeatureCall_Feature(final EObject model, final Assignment assignment, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
+  protected void completeXMemberFeatureCall(final EObject model, final Assignment assignment, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
     if ((model instanceof XMemberFeatureCall)) {
       XExpression _memberCallTarget = ((XMemberFeatureCall) model).getMemberCallTarget();
       AbstractElement _terminal = assignment.getTerminal();
@@ -711,12 +865,7 @@ public class XbaseWebContentProposalProvider extends AbstractDeclarativeWebConte
     }
   }
   
-  @Proposals(rule = "XVariableDeclaration", feature = "right")
-  public void completeXVariableDeclaration_Right(final EObject model, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    this.createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.BEFORE, context, acceptor);
-  }
-  
-  protected void createLocalVariableAndImplicitProposals(final EObject context, final IExpressionScope.Anchor anchor, final ContentAssistContext contentAssistContext, final IAcceptor<ContentAssistResult.Entry> acceptor) {
+  protected void createLocalVariableAndImplicitProposals(final EObject model, final IExpressionScope.Anchor anchor, final ContentAssistContext contentAssistContext, final IAcceptor<ContentAssistResult.Entry> acceptor) {
     String prefix = contentAssistContext.getPrefix();
     int _length = prefix.length();
     boolean _greaterThan = (_length > 0);
@@ -729,19 +878,19 @@ public class XbaseWebContentProposalProvider extends AbstractDeclarativeWebConte
       }
     }
     IResolvedTypes _xifexpression = null;
-    if ((context != null)) {
-      _xifexpression = this.typeResolver.resolveTypes(context);
+    if ((model != null)) {
+      _xifexpression = this.typeResolver.resolveTypes(model);
     } else {
       XtextResource _resource = contentAssistContext.getResource();
       _xifexpression = this.typeResolver.resolveTypes(_resource);
     }
     final IResolvedTypes resolvedTypes = _xifexpression;
-    final IExpressionScope expressionScope = resolvedTypes.getExpressionScope(context, anchor);
+    final IExpressionScope expressionScope = resolvedTypes.getExpressionScope(model, anchor);
     final IScope scope = expressionScope.getFeatureScope();
     IQualifiedNameConverter _qualifiedNameConverter = this.getQualifiedNameConverter();
     final XbaseCrossrefProposalCreator proposalCreator = new XbaseCrossrefProposalCreator(contentAssistContext, _qualifiedNameConverter, 
       this.typeComputationServices, "IdOrSuper");
-    this.lookupCrossReference(scope, context, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, acceptor, this.featureDescriptionPredicate, proposalCreator);
+    this.lookupCrossReference(scope, model, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, acceptor, this.featureDescriptionPredicate, proposalCreator);
   }
   
   protected void createReceiverProposals(final XExpression receiver, final CrossReference crossReference, final ContentAssistContext contentAssistContext, final IAcceptor<ContentAssistResult.Entry> acceptor) {
@@ -821,25 +970,25 @@ public class XbaseWebContentProposalProvider extends AbstractDeclarativeWebConte
     }
   }
   
-  public void createProposals(final AbstractElement keyword, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    if (keyword instanceof Assignment) {
-      _createProposals((Assignment)keyword, context, acceptor);
+  public void createProposals(final AbstractElement assignment, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
+    if (assignment instanceof Assignment) {
+      _createProposals((Assignment)assignment, context, acceptor);
       return;
-    } else if (keyword instanceof CrossReference) {
-      _createProposals((CrossReference)keyword, context, acceptor);
+    } else if (assignment instanceof CrossReference) {
+      _createProposals((CrossReference)assignment, context, acceptor);
       return;
-    } else if (keyword instanceof Keyword) {
-      _createProposals((Keyword)keyword, context, acceptor);
+    } else if (assignment instanceof Keyword) {
+      _createProposals((Keyword)assignment, context, acceptor);
       return;
-    } else if (keyword instanceof RuleCall) {
-      _createProposals((RuleCall)keyword, context, acceptor);
+    } else if (assignment instanceof RuleCall) {
+      _createProposals((RuleCall)assignment, context, acceptor);
       return;
-    } else if (keyword != null) {
-      _createProposals(keyword, context, acceptor);
+    } else if (assignment != null) {
+      _createProposals(assignment, context, acceptor);
       return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(keyword, context, acceptor).toString());
+        Arrays.<Object>asList(assignment, context, acceptor).toString());
     }
   }
   

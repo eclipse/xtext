@@ -16,7 +16,8 @@ import org.eclipse.xtext.web.server.contentassist.ContentAssistResult.Entry
 
 class DummyTypesProposalProvider implements ITypesProposalProvider {
 	
-	override createTypeProposals(ContentAssistContext context, EReference typeReference, Filter filter, IValueConverter<String> valueConverter, IAcceptor<Entry> acceptor) {
+	override createTypeProposals(ContentAssistContext context, EReference typeReference, IValueConverter<String> valueConverter,
+			ITypeFilter filter, IAcceptor<Entry> acceptor) {
 		acceptor.accept(new ContentAssistResult.Entry(ContentAssistResult.CROSSREF, context.prefix) => [
 			proposal = 'Object'
 			description = 'java.lang'

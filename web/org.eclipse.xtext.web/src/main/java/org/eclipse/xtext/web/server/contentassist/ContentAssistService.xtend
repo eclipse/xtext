@@ -10,10 +10,7 @@ package org.eclipse.xtext.web.server.contentassist
 import com.google.inject.Inject
 import com.google.inject.Provider
 import com.google.inject.Singleton
-import java.util.Collection
-import java.util.Collections
 import java.util.HashSet
-import java.util.List
 import java.util.concurrent.ExecutorService
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory
@@ -22,8 +19,6 @@ import org.eclipse.xtext.util.ITextRegion
 import org.eclipse.xtext.web.server.InvalidRequestException
 import org.eclipse.xtext.web.server.model.UpdateDocumentService
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess
-
-import static org.eclipse.xtext.web.server.contentassist.ContentAssistResult.*
 
 @Singleton
 class ContentAssistService {
@@ -80,41 +75,10 @@ class ContentAssistService {
 					proposalProvider.createProposals(context, acceptor)
 				}
 			}
-			result.entries.addAll(proposals.filter)
-			result.entries.sort
+			result.entries.addAll(proposalProvider.filter(proposals))
+			proposalProvider.sort(result.entries)
 		}
 		return result
-	}
-	
-	protected def filter(Collection<ContentAssistResult.Entry> proposals) {
-		proposals.filter[
-			if (proposal.nullOrEmpty || !matchesPrefix)
-				return false
-			switch type {
-				case KEYWORD:
-					proposals.size == 1 || Character.isLetter(proposal.charAt(0))
-				default: true
-			}
-		]
-	}
-	
-	protected def matchesPrefix(ContentAssistResult.Entry entry) {
-		entry.proposal.startsWith(entry.prefix)
-			|| entry.proposal.charAt(0).isDelimiter
-			|| entry.prefix.charAt(entry.prefix.length - 1).isDelimiter
-	}
-	
-	protected def isDelimiter(char c) {
-		!Character.isJavaIdentifierPart(c)
-	}
-	
-	protected def sort(List<ContentAssistResult.Entry> proposals) {
-		Collections.sort(proposals, [a, b |
-			if (a.type == b.type)
-				a.proposal.compareTo(b.proposal)
-			else
-				a.type.compareTo(b.type)
-		])
 	}
 	
 }
