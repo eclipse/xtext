@@ -39,9 +39,10 @@ class XtextServlet extends HttpServlet {
 		} catch (InvalidRequestException ire) {
 			LOG.trace('Invalid request (' + req.requestURI + '): ' + ire.message)
 			val statusCode = switch ire.type {
-				case RESOURCE_NOT_FOUND: 404
-				case INVALID_DOCUMENT_STATE: 409
-				default: 400
+				case RESOURCE_NOT_FOUND: HttpServletResponse.SC_NOT_FOUND
+				case INVALID_DOCUMENT_STATE: HttpServletResponse.SC_CONFLICT
+				case PERMISSION_DENIED: HttpServletResponse.SC_FORBIDDEN
+				default: HttpServletResponse.SC_BAD_REQUEST
 			}
 			resp.sendError(statusCode, ire.message)
 		}
@@ -90,7 +91,13 @@ class XtextServlet extends HttpServlet {
 		val parameters = getParameterMap(req)
 		val injector = getInjector(parameters)
 		val serviceDispatcher = injector.getInstance(XtextServiceDispatcher)
-		return serviceDispatcher.getService(req.pathInfo ?: '', parameters, sessionStore)
+		val service = serviceDispatcher.getService(req.pathInfo ?: '', parameters, sessionStore)
+		checkPermission(req, service)
+		return service
+	}
+	
+	protected def void checkPermission(HttpServletRequest req, XtextServiceDispatcher.ServiceDescriptor service) {
+		// Subclasses may throw InvalidRequestException(PERMISSION_DENIED, '...')
 	}
 	
 	protected def getParameterMap(HttpServletRequest req) {

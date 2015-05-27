@@ -87,6 +87,9 @@
  *     it can be either a DOM element or an ID for a DOM element.
  * statusReporter {Function}
  *     A status reporter function.
+ * syntaxDefinition {String}
+ *     A path to a JS file defining an Orion syntax definition (see orion/editor/stylers/lib/syntax.js);
+ *     if no path is given, it is built from the 'lang' option in the form 'xtext/<lang>-syntax'.
  * tabMode = true {Boolean}
  *     Whether the tab key is consumed by the view or is used for focus traversal.
  * tabSize = 4 {Number}
@@ -420,7 +423,11 @@ define([
 
 		if (lang) {
 			var contentType = "xtext/" + lang;
-			require([contentType + "-syntax"], function(grammar) {
+			var syntaxDefinition = options.syntaxDefinition;
+			if (!syntaxDefinition) {
+				syntaxDefinition = contentType + "-syntax";
+			}
+			require([syntaxDefinition], function(grammar) {
 				var annotationModel = editor.getAnnotationModel();
 				var stylerAdapter = new mTextStyler.createPatternBasedAdapter(grammar.grammars, grammar.id, contentType);
 				new mTextStyler.TextStyler(textView, annotationModel, stylerAdapter);

@@ -19,7 +19,8 @@ class UpdateDocumentService {
 	
 	@Inject IResourceValidator resourceValidator
 	
-	def updateFullText(XtextWebDocumentAccess document, String fullText, boolean reparse) throws InvalidRequestException {
+	def DocumentStateResult updateFullText(XtextWebDocumentAccess document, String fullText, boolean reparse)
+			throws InvalidRequestException {
 		document.modify([ it, cancelIndicator |
 			if (reparse) {
 				dirty = true
@@ -36,7 +37,7 @@ class UpdateDocumentService {
 		])
 	}
 	
-	def updateDeltaText(XtextWebDocumentAccess document, String deltaText, int offset, int replaceLength)
+	def DocumentStateResult updateDeltaText(XtextWebDocumentAccess document, String deltaText, int offset, int replaceLength)
 			throws InvalidRequestException {
 		document.modify([ it, cancelIndicator |
 			dirty = true

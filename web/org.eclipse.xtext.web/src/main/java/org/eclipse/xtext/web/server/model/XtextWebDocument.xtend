@@ -35,6 +35,13 @@ class XtextWebDocument implements IXtextWebDocument {
 	
 	@Accessors(PACKAGE_GETTER)
     @Inject DocumentSynchronizer synchronizer
+    
+	override toString() {
+		if (resourceId !== null) {
+			return class.simpleName + '(' + resourceId + ')'
+		}
+		super.toString()
+	}
 	
 	def setInput(XtextResource resource, String resourceId) {
 		this.resource = resource

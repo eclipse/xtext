@@ -61,7 +61,8 @@ class XtextServiceDispatcher {
 	@Inject IResourceFactory resourceFactory
 	@Inject OperationCanceledManager operationCanceledManager
 	
-	def getService(String path, Map<String, String> parameters, ISessionStore sessionStore) throws InvalidRequestException {
+	def ServiceDescriptor getService(String path, Map<String, String> parameters, ISessionStore sessionStore)
+			throws InvalidRequestException {
 		val requestType = getRequestType(path, parameters)
 		if (LOG.traceEnabled) {
 			val stringParams = parameters.entrySet.sortBy[key].join(': ', ', ', '', [
