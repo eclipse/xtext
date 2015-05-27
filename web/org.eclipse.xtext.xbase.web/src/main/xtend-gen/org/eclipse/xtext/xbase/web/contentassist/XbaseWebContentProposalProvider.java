@@ -51,6 +51,7 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.conversion.XbaseQualifiedNameValueConverter;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.scoping.SyntaxFilteredScopes;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
@@ -471,7 +472,7 @@ public class XbaseWebContentProposalProvider extends AbstractDeclarativeWebConte
       boolean _isEmpty = featureNodes.isEmpty();
       boolean _not = (!_isEmpty);
       if (_not) {
-        final INode featureNode = featureNodes.get(0);
+        final INode featureNode = IterableExtensions.<INode>head(featureNodes);
         boolean _and_1 = false;
         int _totalOffset = featureNode.getTotalOffset();
         int _offset_1 = context.getOffset();
@@ -548,8 +549,7 @@ public class XbaseWebContentProposalProvider extends AbstractDeclarativeWebConte
   }
   
   @Proposals(rule = "XUnaryOperation", feature = "feature")
-  public Object completeXUnaryOperation_Feature(final EObject model, final Assignment assignment, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    return null;
+  public void completeXUnaryOperation_Feature(final EObject model, final Assignment assignment, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
   }
   
   @Proposals(rule = "XPostfixOperation", feature = "feature")
@@ -795,11 +795,6 @@ public class XbaseWebContentProposalProvider extends AbstractDeclarativeWebConte
     return this.getConcreteSyntaxRuleName(_terminal);
   }
   
-  protected String _getConcreteSyntaxRuleName(final RuleCall ruleCall) {
-    AbstractRule _rule = ruleCall.getRule();
-    return _rule.getName();
-  }
-  
   protected String _getConcreteSyntaxRuleName(final CrossReference crossReference) {
     String _xifexpression = null;
     AbstractElement _terminal = crossReference.getTerminal();
@@ -808,6 +803,11 @@ public class XbaseWebContentProposalProvider extends AbstractDeclarativeWebConte
       _xifexpression = this.getConcreteSyntaxRuleName(_terminal_1);
     }
     return _xifexpression;
+  }
+  
+  protected String _getConcreteSyntaxRuleName(final RuleCall ruleCall) {
+    AbstractRule _rule = ruleCall.getRule();
+    return _rule.getName();
   }
   
   protected void lookupCrossReference(final IScope scope, final EObject model, final EReference reference, final IAcceptor<ContentAssistResult.Entry> acceptor, final Predicate<IEObjectDescription> filter, final CrossrefProposalCreator proposalCreator) {

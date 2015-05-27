@@ -10,6 +10,7 @@ package org.eclipse.xtext.web.server.contentassist;
 import java.util.ArrayList;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.Data;
+import org.eclipse.xtend.lib.annotations.EqualsHashCode;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend.lib.annotations.ToString;
 import org.eclipse.xtext.web.server.IServiceResult;
@@ -23,6 +24,7 @@ public class ContentAssistResult implements IServiceResult {
   @Accessors
   @FinalFieldsConstructor
   @ToString(skipNulls = true)
+  @EqualsHashCode
   public static class Entry {
     /**
      * One of the constants defined in {@link ContentAssistResult}
@@ -134,6 +136,78 @@ public class ContentAssistResult implements IServiceResult {
       b.add("textReplacements", this.textReplacements);
       b.add("editPositions", this.editPositions);
       return b.toString();
+    }
+    
+    @Override
+    @Pure
+    public boolean equals(final Object obj) {
+      if (this == obj)
+        return true;
+      if (obj == null)
+        return false;
+      if (getClass() != obj.getClass())
+        return false;
+      ContentAssistResult.Entry other = (ContentAssistResult.Entry) obj;
+      if (this.type == null) {
+        if (other.type != null)
+          return false;
+      } else if (!this.type.equals(other.type))
+        return false;
+      if (this.prefix == null) {
+        if (other.prefix != null)
+          return false;
+      } else if (!this.prefix.equals(other.prefix))
+        return false;
+      if (this.proposal == null) {
+        if (other.proposal != null)
+          return false;
+      } else if (!this.proposal.equals(other.proposal))
+        return false;
+      if (this.name == null) {
+        if (other.name != null)
+          return false;
+      } else if (!this.name.equals(other.name))
+        return false;
+      if (this.description == null) {
+        if (other.description != null)
+          return false;
+      } else if (!this.description.equals(other.description))
+        return false;
+      if (this.style == null) {
+        if (other.style != null)
+          return false;
+      } else if (!this.style.equals(other.style))
+        return false;
+      if (other.escapePosition != this.escapePosition)
+        return false;
+      if (this.textReplacements == null) {
+        if (other.textReplacements != null)
+          return false;
+      } else if (!this.textReplacements.equals(other.textReplacements))
+        return false;
+      if (this.editPositions == null) {
+        if (other.editPositions != null)
+          return false;
+      } else if (!this.editPositions.equals(other.editPositions))
+        return false;
+      return true;
+    }
+    
+    @Override
+    @Pure
+    public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + ((this.type== null) ? 0 : this.type.hashCode());
+      result = prime * result + ((this.prefix== null) ? 0 : this.prefix.hashCode());
+      result = prime * result + ((this.proposal== null) ? 0 : this.proposal.hashCode());
+      result = prime * result + ((this.name== null) ? 0 : this.name.hashCode());
+      result = prime * result + ((this.description== null) ? 0 : this.description.hashCode());
+      result = prime * result + ((this.style== null) ? 0 : this.style.hashCode());
+      result = prime * result + this.escapePosition;
+      result = prime * result + ((this.textReplacements== null) ? 0 : this.textReplacements.hashCode());
+      result = prime * result + ((this.editPositions== null) ? 0 : this.editPositions.hashCode());
+      return result;
     }
   }
   

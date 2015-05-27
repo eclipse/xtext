@@ -23,6 +23,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
 import org.eclipse.xtext.web.server.contentassist.CrossrefProposalCreator;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -186,10 +187,8 @@ public class XbaseCrossrefProposalCreator extends CrossrefProposalCreator {
             info.selectionLength = _length_1;
             return info;
           }
-          int _size = parameters.size();
-          int _minus_1 = (_size - 1);
-          JvmFormalParameter _get = parameters.get(_minus_1);
-          final JvmTypeReference parameterType = _get.getParameterType();
+          JvmFormalParameter _last = IterableExtensions.<JvmFormalParameter>last(parameters);
+          final JvmTypeReference parameterType = _last.getParameterType();
           XtextResource _resource = contentAssistContext.getResource();
           LightweightTypeReferenceFactory _typeConverter = this.getTypeConverter(_resource);
           final LightweightTypeReference light = _typeConverter.toLightweightReference(parameterType);
@@ -223,9 +222,9 @@ public class XbaseCrossrefProposalCreator extends CrossrefProposalCreator {
                 info.brackets = _plus_1;
                 info.caretOffset = (-1);
                 int _length_2 = b.length();
-                int _minus_2 = (-_length_2);
-                int _minus_3 = (_minus_2 - 2);
-                info.selectionOffset = _minus_3;
+                int _minus_1 = (-_length_2);
+                int _minus_2 = (_minus_1 - 2);
+                info.selectionOffset = _minus_2;
                 int _length_3 = b.length();
                 info.selectionLength = _length_3;
                 return info;

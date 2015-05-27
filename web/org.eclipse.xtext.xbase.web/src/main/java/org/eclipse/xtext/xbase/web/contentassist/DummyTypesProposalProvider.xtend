@@ -12,14 +12,19 @@ import org.eclipse.xtext.conversion.IValueConverter
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.util.IAcceptor
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult
+import org.eclipse.xtext.web.server.contentassist.ContentAssistResult.Entry
 
-interface ITypesProposalProvider {
+class DummyTypesProposalProvider implements ITypesProposalProvider {
 	
-	def void createTypeProposals(ContentAssistContext context, EReference typeReference, Filter filter,
-		IValueConverter<String> valueConverter, IAcceptor<ContentAssistResult.Entry> acceptor)
-	 
-	interface Filter {
-		def boolean accept(int modifiers, char[] packageName, char[] simpleTypeName, char[][] enclosingTypeNames, String path)
+	override createTypeProposals(ContentAssistContext context, EReference typeReference, Filter filter, IValueConverter<String> valueConverter, IAcceptor<Entry> acceptor) {
+		acceptor.accept(new ContentAssistResult.Entry(ContentAssistResult.CROSSREF, context.prefix) => [
+			proposal = 'Object'
+			description = 'java.lang'
+		])
+		acceptor.accept(new ContentAssistResult.Entry(ContentAssistResult.CROSSREF, context.prefix) => [
+			proposal = 'String'
+			description = 'java.lang'
+		])
 	}
 	
 }

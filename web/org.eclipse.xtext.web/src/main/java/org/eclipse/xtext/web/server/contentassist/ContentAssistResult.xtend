@@ -10,9 +10,10 @@ package org.eclipse.xtext.web.server.contentassist
 import java.util.ArrayList
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.xtend.lib.annotations.EqualsHashCode
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtend.lib.annotations.ToString
 import org.eclipse.xtext.web.server.IServiceResult
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
 @Accessors
 @ToString(skipNulls = true)
@@ -31,6 +32,7 @@ class ContentAssistResult implements IServiceResult {
 	@Accessors
 	@FinalFieldsConstructor
 	@ToString(skipNulls = true)
+	@EqualsHashCode
 	static class Entry {
 		/** One of the constants defined in {@link ContentAssistResult} */
 		val String type

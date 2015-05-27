@@ -17,16 +17,14 @@ import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer
 import org.eclipse.xtext.idea.example.entities.ide.contentassist.antlr.EntitiesParser
 import org.eclipse.xtext.idea.example.entities.ide.contentassist.antlr.internal.InternalEntitiesLexer
-import org.eclipse.xtext.service.AbstractGenericModule
 import org.eclipse.xtext.web.server.persistence.FileResourceHandler
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler
-import org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker
-import org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider
+import org.eclipse.xtext.xbase.web.DefaultXbaseWebModule
 
 @Accessors
 @FinalFieldsConstructor
-class EntitiesWebModule extends AbstractGenericModule {
+class EntitiesWebModule extends DefaultXbaseWebModule {
 	
 	val ExecutorService executorService
 	
@@ -38,10 +36,6 @@ class EntitiesWebModule extends AbstractGenericModule {
 	
 	def configureContentAssistLexer(Binder binder) {
 		binder.bind(Lexer).annotatedWith(Names.named(LexerIdeBindings.CONTENT_ASSIST)).to(InternalEntitiesLexer)
-	}
-	
-	def Class<? extends IFeatureScopeTracker.Provider> bindIFeatureScopeTrackerProvider() {
-		OptimizingFeatureScopeTrackerProvider
 	}
 
 	def Class<? extends IContentAssistParser> bindIContentAssistParser() {

@@ -14,11 +14,9 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
@@ -28,7 +26,6 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
@@ -36,6 +33,8 @@ import org.eclipse.xtext.web.server.contentassist.Proposals;
 import org.eclipse.xtext.web.server.contentassist.WebContentProposalProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure3;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -133,39 +132,39 @@ public abstract class AbstractDeclarativeWebContentProposalProvider extends WebC
                 String _name_2 = rule.getName();
                 this.ruleCallProposalComputers.put(_name_2, computer);
               } else {
-                TypeRef _type = rule.getType();
-                EClassifier _classifier = null;
-                if (_type!=null) {
-                  _classifier=_type.getClassifier();
-                }
-                final EClassifier classifier = _classifier;
-                if ((classifier instanceof EClass)) {
-                  String _feature_1 = annot.feature();
-                  EStructuralFeature _eStructuralFeature = ((EClass)classifier).getEStructuralFeature(_feature_1);
-                  boolean _tripleEquals = (_eStructuralFeature == null);
-                  if (_tripleEquals) {
-                    String _feature_2 = annot.feature();
-                    String _plus_10 = ("The feature \'" + _feature_2);
-                    String _plus_11 = (_plus_10 + "\' does not exist for the metamodel class \'");
-                    String _name_3 = ((EClass)classifier).getName();
-                    String _plus_12 = (_plus_11 + _name_3);
-                    String _plus_13 = (_plus_12 + "\'.");
-                    throw new RuntimeException(_plus_13);
+                List<Assignment> _containedAssignments = GrammarUtil.containedAssignments(rule);
+                final Function1<Assignment, Boolean> _function = new Function1<Assignment, Boolean>() {
+                  @Override
+                  public Boolean apply(final Assignment it) {
+                    String _feature = it.getFeature();
+                    String _feature_1 = annot.feature();
+                    return Boolean.valueOf(Objects.equal(_feature, _feature_1));
                   }
+                };
+                boolean _exists = IterableExtensions.<Assignment>exists(_containedAssignments, _function);
+                boolean _not = (!_exists);
+                if (_not) {
+                  String _feature_1 = annot.feature();
+                  String _plus_10 = ("The feature \'" + _feature_1);
+                  String _plus_11 = (_plus_10 + "\' is not assigned in the grammar rule \'");
+                  String _rule_3 = annot.rule();
+                  String _plus_12 = (_plus_11 + _rule_3);
+                  String _plus_13 = (_plus_12 + "\'.");
+                  throw new RuntimeException(_plus_13);
                 }
-                String _name_4 = rule.getName();
-                String _feature_3 = annot.feature();
-                final Pair<String, String> key = Pair.<String, String>of(_name_4, _feature_3);
+                String _name_3 = rule.getName();
+                String _feature_2 = annot.feature();
+                final Pair<String, String> key = Pair.<String, String>of(_name_3, _feature_2);
                 boolean _containsKey_1 = this.assignmentProposalComputers.containsKey(key);
                 if (_containsKey_1) {
                   String _simpleName_2 = Proposals.class.getSimpleName();
                   String _plus_14 = ("Multiple methods with \'" + _simpleName_2);
                   String _plus_15 = (_plus_14 + "\' annotation for the same feature \'");
-                  String _rule_3 = annot.rule();
-                  String _plus_16 = (_plus_15 + _rule_3);
+                  String _rule_4 = annot.rule();
+                  String _plus_16 = (_plus_15 + _rule_4);
                   String _plus_17 = (_plus_16 + ".");
-                  String _feature_4 = annot.feature();
-                  String _plus_18 = (_plus_17 + _feature_4);
+                  String _feature_3 = annot.feature();
+                  String _plus_18 = (_plus_17 + _feature_3);
                   String _plus_19 = (_plus_18 + "\'");
                   throw new RuntimeException(_plus_19);
                 }

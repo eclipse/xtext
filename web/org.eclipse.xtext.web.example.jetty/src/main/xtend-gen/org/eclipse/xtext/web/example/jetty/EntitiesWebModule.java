@@ -21,18 +21,16 @@ import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 import org.eclipse.xtext.idea.example.entities.ide.contentassist.antlr.EntitiesParser;
 import org.eclipse.xtext.idea.example.entities.ide.contentassist.antlr.internal.InternalEntitiesLexer;
-import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.web.server.persistence.FileResourceHandler;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker;
-import org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider;
+import org.eclipse.xtext.xbase.web.DefaultXbaseWebModule;
 
 @Accessors
 @FinalFieldsConstructor
 @SuppressWarnings("all")
-public class EntitiesWebModule extends AbstractGenericModule {
+public class EntitiesWebModule extends DefaultXbaseWebModule {
   private final ExecutorService executorService;
   
   private IResourceBaseProvider resourceBaseProvider;
@@ -47,10 +45,6 @@ public class EntitiesWebModule extends AbstractGenericModule {
     Named _named = Names.named(LexerIdeBindings.CONTENT_ASSIST);
     LinkedBindingBuilder<Lexer> _annotatedWith = _bind.annotatedWith(_named);
     return _annotatedWith.to(InternalEntitiesLexer.class);
-  }
-  
-  public Class<? extends IFeatureScopeTracker.Provider> bindIFeatureScopeTrackerProvider() {
-    return OptimizingFeatureScopeTrackerProvider.class;
   }
   
   public Class<? extends IContentAssistParser> bindIContentAssistParser() {

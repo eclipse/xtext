@@ -101,7 +101,7 @@ class XbaseCrossrefProposalCreator extends CrossrefProposalCreator {
 						info.selectionLength = 'value'.length
 						return info
 					}
-					val parameterType = parameters.get(parameters.size() - 1).parameterType
+					val parameterType = parameters.last.parameterType
 					val light = getTypeConverter(contentAssistContext.resource).toLightweightReference(parameterType)
 					if (light.isFunctionType) {
 						val numParameters = light.asFunctionTypeReference.parameterTypes.size

@@ -189,10 +189,8 @@ public class ContentAssistService {
           if (_isNullOrEmpty) {
             _or = true;
           } else {
-            String _proposal_1 = it.getProposal();
-            String _prefix = it.getPrefix();
-            boolean _startsWith = _proposal_1.startsWith(_prefix);
-            boolean _not = (!_startsWith);
+            boolean _matchesPrefix = ContentAssistService.this.matchesPrefix(it);
+            boolean _not = (!_matchesPrefix);
             _or = _not;
           }
           if (_or) {
@@ -210,8 +208,8 @@ public class ContentAssistService {
               if (_equals) {
                 _or_1 = true;
               } else {
-                String _proposal_2 = it.getProposal();
-                char _charAt = _proposal_2.charAt(0);
+                String _proposal_1 = it.getProposal();
+                char _charAt = _proposal_1.charAt(0);
                 boolean _isLetter = Character.isLetter(_charAt);
                 _or_1 = _isLetter;
               }
@@ -227,6 +225,39 @@ public class ContentAssistService {
       }
     };
     return IterableExtensions.<ContentAssistResult.Entry>filter(proposals, _function);
+  }
+  
+  protected boolean matchesPrefix(final ContentAssistResult.Entry entry) {
+    boolean _or = false;
+    boolean _or_1 = false;
+    String _proposal = entry.getProposal();
+    String _prefix = entry.getPrefix();
+    boolean _startsWith = _proposal.startsWith(_prefix);
+    if (_startsWith) {
+      _or_1 = true;
+    } else {
+      String _proposal_1 = entry.getProposal();
+      char _charAt = _proposal_1.charAt(0);
+      boolean _isDelimiter = this.isDelimiter(_charAt);
+      _or_1 = _isDelimiter;
+    }
+    if (_or_1) {
+      _or = true;
+    } else {
+      String _prefix_1 = entry.getPrefix();
+      String _prefix_2 = entry.getPrefix();
+      int _length = _prefix_2.length();
+      int _minus = (_length - 1);
+      char _charAt_1 = _prefix_1.charAt(_minus);
+      boolean _isDelimiter_1 = this.isDelimiter(_charAt_1);
+      _or = _isDelimiter_1;
+    }
+    return _or;
+  }
+  
+  protected boolean isDelimiter(final char c) {
+    boolean _isJavaIdentifierPart = Character.isJavaIdentifierPart(c);
+    return (!_isJavaIdentifierPart);
   }
   
   protected void sort(final List<ContentAssistResult.Entry> proposals) {

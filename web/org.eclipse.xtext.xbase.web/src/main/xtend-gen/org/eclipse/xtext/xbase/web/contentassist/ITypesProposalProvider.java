@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.web.contentassist;
 
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.util.IAcceptor;
@@ -20,15 +19,5 @@ public interface ITypesProposalProvider {
     public abstract boolean accept(final int modifiers, final char[] packageName, final char[] simpleTypeName, final char[][] enclosingTypeNames, final String path);
   }
   
-  public abstract void createTypeProposals(final ContentAssistContext context, final EReference typeReference, final IAcceptor<ContentAssistResult.Entry> acceptor);
-  
-  public abstract void createTypeProposals(final ContentAssistContext context, final EReference typeReference, final ITypesProposalProvider.Filter filter, final IAcceptor<ContentAssistResult.Entry> acceptor);
-  
   public abstract void createTypeProposals(final ContentAssistContext context, final EReference typeReference, final ITypesProposalProvider.Filter filter, final IValueConverter<String> valueConverter, final IAcceptor<ContentAssistResult.Entry> acceptor);
-  
-  public abstract void createSubTypeProposals(final JvmType superType, final ContentAssistContext context, final EReference typeReference, final IAcceptor<ContentAssistResult.Entry> acceptor);
-  
-  public abstract void createSubTypeProposals(final JvmType superType, final ContentAssistContext context, final EReference typeReference, final ITypesProposalProvider.Filter filter, final IAcceptor<ContentAssistResult.Entry> acceptor);
-  
-  public abstract void createSubTypeProposals(final JvmType superType, final ContentAssistContext context, final EReference typeReference, final ITypesProposalProvider.Filter filter, final IValueConverter<String> valueConverter, final IAcceptor<ContentAssistResult.Entry> acceptor);
 }
