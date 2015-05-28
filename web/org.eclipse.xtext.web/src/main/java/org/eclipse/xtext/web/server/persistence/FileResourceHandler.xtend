@@ -14,15 +14,15 @@ import javax.inject.Inject
 import org.eclipse.emf.common.util.WrappedException
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.XtextResource
-import org.eclipse.xtext.resource.XtextResourceSet
-import org.eclipse.xtext.web.server.model.XtextWebDocument
+import org.eclipse.xtext.web.server.model.IWebResourceSetProvider
 import org.eclipse.xtext.web.server.model.IXtextWebDocument
+import org.eclipse.xtext.web.server.model.XtextWebDocument
 
 class FileResourceHandler implements IServerResourceHandler {
 	
 	@Inject IResourceBaseProvider resourceBaseProvider
 	
-	@Inject Provider<XtextResourceSet> resourceSetProvider
+	@Inject IWebResourceSetProvider resourceSetProvider
 	
 	@Inject Provider<XtextWebDocument> documentProvider
 	
@@ -33,7 +33,7 @@ class FileResourceHandler implements IServerResourceHandler {
 			val uri = resourceBaseProvider.getFileURI(resourceId)
 			if (uri === null)
 				throw new IOException('The requested resource does not exist.')
-			val resourceSet = resourceSetProvider.get()
+			val resourceSet = resourceSetProvider.get(resourceId)
 			val resource = resourceSet.getResource(uri, true) as XtextResource
 			return documentProvider.get() => [
 				setInput(resource, resourceId)

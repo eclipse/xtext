@@ -9,7 +9,7 @@ package org.eclipse.xtext.xbase.web.contentassist
 
 import java.lang.reflect.Modifier
 
-final package class TypeMatchFilters {
+final package class TypeFilters {
 	
 	public static val ITypeFilter INTERNAL = [ modifiers, packageName, simpleTypeName, enclosingTypeNames, path |
 		if (simpleTypeName.startsWith('$'))

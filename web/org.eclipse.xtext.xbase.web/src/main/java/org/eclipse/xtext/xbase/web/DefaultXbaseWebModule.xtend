@@ -13,8 +13,8 @@ import org.eclipse.xtext.web.server.contentassist.WebContentProposalPriorities
 import org.eclipse.xtext.web.server.contentassist.WebContentProposalProvider
 import org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker
 import org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider
-import org.eclipse.xtext.xbase.web.contentassist.DummyTypesProposalProvider
 import org.eclipse.xtext.xbase.web.contentassist.ITypesProposalProvider
+import org.eclipse.xtext.xbase.web.contentassist.IndexBasedTypesProposalProvider
 import org.eclipse.xtext.xbase.web.contentassist.XbaseCrossrefProposalCreator
 import org.eclipse.xtext.xbase.web.contentassist.XbaseWebContentProposalPriorities
 import org.eclipse.xtext.xbase.web.contentassist.XbaseWebContentProposalProvider
@@ -38,7 +38,7 @@ class DefaultXbaseWebModule extends AbstractGenericModule {
 	}
 	
 	def Class<? extends ITypesProposalProvider> bindITypesProposalProvider() {
-		DummyTypesProposalProvider
+		IndexBasedTypesProposalProvider
 	}
 	
 }

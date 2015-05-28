@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.web.contentassist
 
 interface ITypeFilter {
 	
+	// TODO what would be a suitable signature for the web context?
 	def boolean accept(int modifiers, String packageName, String simpleTypeName, String[] enclosingTypeNames, String path)
 	
 }
