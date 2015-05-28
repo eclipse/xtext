@@ -1,6 +1,16 @@
+/*******************************************************************************
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.xbase.web.contentassist
 
+import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.CrossReference
+import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.common.types.JvmConstructor
 import org.eclipse.xtext.common.types.JvmExecutable
 import org.eclipse.xtext.common.types.JvmFeature
@@ -9,7 +19,6 @@ import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext
-import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.resource.IEObjectDescription
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult
@@ -21,28 +30,19 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 
 class XbaseCrossrefProposalCreator extends CrossrefProposalCreator {
 	
-	val String ruleName
+	@Inject CommonTypeComputationServices typeComputationServices
 	
-	val CommonTypeComputationServices typeComputationServices
-	
-	new(ContentAssistContext contentAssistContext, IQualifiedNameConverter qualifiedNameConverter,
-			CommonTypeComputationServices typeComputationServices, String ruleName) {
-		super(contentAssistContext, qualifiedNameConverter)
-		this.typeComputationServices = typeComputationServices
-		this.ruleName = ruleName
-	}
-	
-	override apply(IEObjectDescription candidate) {
-		if (candidate instanceof IIdentifiableElementDescription && ruleName.isIdRule) {
-			val bracketInfo = getProposalBracketInfo(candidate, contentAssistContext)
+	override createProposal(IEObjectDescription candidate, CrossReference crossRef, ContentAssistContext context) {
+		if (crossRef.hasIdRule) {
+			val bracketInfo = getProposalBracketInfo(candidate, context)
 			val proposalString = qualifiedNameConverter.toString(candidate.name) + bracketInfo.brackets
 			var int insignificantParameters = 0
 			if (candidate instanceof IIdentifiableElementDescription) {
 				insignificantParameters = candidate.numberOfIrrelevantParameters
 			}
-			val converter = getTypeConverter(contentAssistContext.resource)
+			val converter = getTypeConverter(context.resource)
 			val objectOrProxy = candidate.EObjectOrProxy
-			val result = new ContentAssistResult.Entry(ContentAssistResult.CROSSREF, contentAssistContext.prefix) => [
+			val result = new ContentAssistResult.Entry(context.prefix) => [
 				proposal = proposalString
 			]
 			if (objectOrProxy instanceof JvmFeature) {
@@ -62,7 +62,7 @@ class XbaseCrossrefProposalCreator extends CrossrefProposalCreator {
 					qualifiedNameConverter.toString(candidate.qualifiedName),
 					qualifiedNameConverter.toString(candidate.name))
 			}
-			var offset = contentAssistContext.offset - contentAssistContext.prefix.length + proposalString.length
+			var offset = context.offset - context.prefix.length + proposalString.length
 			result.escapePosition = offset + bracketInfo.caretOffset
 			if (bracketInfo.selectionOffset != 0) {
 				offset += bracketInfo.selectionOffset
@@ -74,11 +74,14 @@ class XbaseCrossrefProposalCreator extends CrossrefProposalCreator {
 			}
 			return result
 		}
-		return super.apply(candidate)
+		return super.createProposal(candidate, crossRef, context)
 	}
 	
-	protected def isIdRule(String ruleName) {
-		ruleName == 'IdOrSuper' || ruleName == 'ValidID' || ruleName == 'FeatureCallID'
+	protected def hasIdRule(CrossReference crossRef) {
+		if (crossRef.terminal instanceof RuleCall) {
+			val ruleName = (crossRef.terminal as RuleCall).rule.name
+			return ruleName == 'IdOrSuper' || ruleName == 'ValidID' || ruleName == 'FeatureCallID'
+		}
 	}
 	
 	static class ProposalBracketInfo {

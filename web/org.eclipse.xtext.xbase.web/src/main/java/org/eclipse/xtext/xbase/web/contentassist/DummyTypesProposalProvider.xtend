@@ -10,22 +10,21 @@ package org.eclipse.xtext.xbase.web.contentassist
 import org.eclipse.emf.ecore.EReference
 import org.eclipse.xtext.conversion.IValueConverter
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext
-import org.eclipse.xtext.util.IAcceptor
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult
-import org.eclipse.xtext.web.server.contentassist.ContentAssistResult.Entry
+import org.eclipse.xtext.web.server.contentassist.IWebContentProposaAcceptor
 
 class DummyTypesProposalProvider implements ITypesProposalProvider {
 	
 	override createTypeProposals(ContentAssistContext context, EReference typeReference, IValueConverter<String> valueConverter,
-			ITypeFilter filter, IAcceptor<Entry> acceptor) {
-		acceptor.accept(new ContentAssistResult.Entry(ContentAssistResult.CROSSREF, context.prefix) => [
+			ITypeFilter filter, IWebContentProposaAcceptor acceptor) {
+		acceptor.accept(new ContentAssistResult.Entry(context.prefix) => [
 			proposal = 'Object'
 			description = 'java.lang'
-		])
-		acceptor.accept(new ContentAssistResult.Entry(ContentAssistResult.CROSSREF, context.prefix) => [
+		], 500)
+		acceptor.accept(new ContentAssistResult.Entry(context.prefix) => [
 			proposal = 'String'
 			description = 'java.lang'
-		])
+		], 500)
 	}
 	
 }

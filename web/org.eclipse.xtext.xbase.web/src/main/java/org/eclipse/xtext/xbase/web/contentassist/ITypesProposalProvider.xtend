@@ -10,12 +10,11 @@ package org.eclipse.xtext.xbase.web.contentassist
 import org.eclipse.emf.ecore.EReference
 import org.eclipse.xtext.conversion.IValueConverter
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext
-import org.eclipse.xtext.util.IAcceptor
-import org.eclipse.xtext.web.server.contentassist.ContentAssistResult
+import org.eclipse.xtext.web.server.contentassist.IWebContentProposaAcceptor
 
 interface ITypesProposalProvider {
 	
 	def void createTypeProposals(ContentAssistContext context, EReference typeReference, IValueConverter<String> valueConverter,
-		ITypeFilter filter, IAcceptor<ContentAssistResult.Entry> acceptor)
+		ITypeFilter filter, IWebContentProposaAcceptor acceptor)
 	 
 }

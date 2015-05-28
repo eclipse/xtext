@@ -1,10 +1,22 @@
+/**
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtext.xbase.web.contentassist;
 
 import com.google.common.base.Objects;
+import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
@@ -46,28 +58,14 @@ public class XbaseCrossrefProposalCreator extends CrossrefProposalCreator {
     private int caretOffset = 0;
   }
   
-  private final String ruleName;
-  
-  private final CommonTypeComputationServices typeComputationServices;
-  
-  public XbaseCrossrefProposalCreator(final ContentAssistContext contentAssistContext, final IQualifiedNameConverter qualifiedNameConverter, final CommonTypeComputationServices typeComputationServices, final String ruleName) {
-    super(contentAssistContext, qualifiedNameConverter);
-    this.typeComputationServices = typeComputationServices;
-    this.ruleName = ruleName;
-  }
+  @Inject
+  private CommonTypeComputationServices typeComputationServices;
   
   @Override
-  public ContentAssistResult.Entry apply(final IEObjectDescription candidate) {
-    boolean _and = false;
-    if (!(candidate instanceof IIdentifiableElementDescription)) {
-      _and = false;
-    } else {
-      boolean _isIdRule = this.isIdRule(this.ruleName);
-      _and = _isIdRule;
-    }
-    if (_and) {
-      ContentAssistContext _contentAssistContext = this.getContentAssistContext();
-      final XbaseCrossrefProposalCreator.ProposalBracketInfo bracketInfo = this.getProposalBracketInfo(candidate, _contentAssistContext);
+  public ContentAssistResult.Entry createProposal(final IEObjectDescription candidate, final CrossReference crossRef, final ContentAssistContext context) {
+    boolean _hasIdRule = this.hasIdRule(crossRef);
+    if (_hasIdRule) {
+      final XbaseCrossrefProposalCreator.ProposalBracketInfo bracketInfo = this.getProposalBracketInfo(candidate, context);
       IQualifiedNameConverter _qualifiedNameConverter = this.getQualifiedNameConverter();
       QualifiedName _name = candidate.getName();
       String _string = _qualifiedNameConverter.toString(_name);
@@ -77,13 +75,11 @@ public class XbaseCrossrefProposalCreator extends CrossrefProposalCreator {
         int _numberOfIrrelevantParameters = ((IIdentifiableElementDescription)candidate).getNumberOfIrrelevantParameters();
         insignificantParameters = _numberOfIrrelevantParameters;
       }
-      ContentAssistContext _contentAssistContext_1 = this.getContentAssistContext();
-      XtextResource _resource = _contentAssistContext_1.getResource();
+      XtextResource _resource = context.getResource();
       final LightweightTypeReferenceFactory converter = this.getTypeConverter(_resource);
       final EObject objectOrProxy = candidate.getEObjectOrProxy();
-      ContentAssistContext _contentAssistContext_2 = this.getContentAssistContext();
-      String _prefix = _contentAssistContext_2.getPrefix();
-      ContentAssistResult.Entry _entry = new ContentAssistResult.Entry(ContentAssistResult.CROSSREF, _prefix);
+      String _prefix = context.getPrefix();
+      ContentAssistResult.Entry _entry = new ContentAssistResult.Entry(_prefix);
       final Procedure1<ContentAssistResult.Entry> _function = new Procedure1<ContentAssistResult.Entry>() {
         @Override
         public void apply(final ContentAssistResult.Entry it) {
@@ -117,10 +113,8 @@ public class XbaseCrossrefProposalCreator extends CrossrefProposalCreator {
         String _string_4 = _qualifiedNameConverter_4.toString(_name_3);
         this.addNameAndDescription(result, objectOrProxy, _string_3, _string_4);
       }
-      ContentAssistContext _contentAssistContext_3 = this.getContentAssistContext();
-      int _offset = _contentAssistContext_3.getOffset();
-      ContentAssistContext _contentAssistContext_4 = this.getContentAssistContext();
-      String _prefix_1 = _contentAssistContext_4.getPrefix();
+      int _offset = context.getOffset();
+      String _prefix_1 = context.getPrefix();
       int _length = _prefix_1.length();
       int _minus = (_offset - _length);
       int _length_1 = proposalString.length();
@@ -139,26 +133,33 @@ public class XbaseCrossrefProposalCreator extends CrossrefProposalCreator {
       }
       return result;
     }
-    return super.apply(candidate);
+    return super.createProposal(candidate, crossRef, context);
   }
   
-  protected boolean isIdRule(final String ruleName) {
-    boolean _or = false;
-    boolean _or_1 = false;
-    boolean _equals = Objects.equal(ruleName, "IdOrSuper");
-    if (_equals) {
-      _or_1 = true;
-    } else {
-      boolean _equals_1 = Objects.equal(ruleName, "ValidID");
-      _or_1 = _equals_1;
+  protected boolean hasIdRule(final CrossReference crossRef) {
+    AbstractElement _terminal = crossRef.getTerminal();
+    if ((_terminal instanceof RuleCall)) {
+      AbstractElement _terminal_1 = crossRef.getTerminal();
+      AbstractRule _rule = ((RuleCall) _terminal_1).getRule();
+      final String ruleName = _rule.getName();
+      boolean _or = false;
+      boolean _or_1 = false;
+      boolean _equals = Objects.equal(ruleName, "IdOrSuper");
+      if (_equals) {
+        _or_1 = true;
+      } else {
+        boolean _equals_1 = Objects.equal(ruleName, "ValidID");
+        _or_1 = _equals_1;
+      }
+      if (_or_1) {
+        _or = true;
+      } else {
+        boolean _equals_2 = Objects.equal(ruleName, "FeatureCallID");
+        _or = _equals_2;
+      }
+      return _or;
     }
-    if (_or_1) {
-      _or = true;
-    } else {
-      boolean _equals_2 = Objects.equal(ruleName, "FeatureCallID");
-      _or = _equals_2;
-    }
-    return _or;
+    return false;
   }
   
   protected XbaseCrossrefProposalCreator.ProposalBracketInfo getProposalBracketInfo(final IEObjectDescription proposedDescription, final ContentAssistContext contentAssistContext) {

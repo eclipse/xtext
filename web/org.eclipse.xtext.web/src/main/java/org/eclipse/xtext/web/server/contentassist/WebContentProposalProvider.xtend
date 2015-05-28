@@ -7,11 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server.contentassist
 
+import com.google.common.base.Predicates
 import com.google.inject.Inject
-import java.util.Collection
-import java.util.Collections
 import java.util.List
-import org.apache.log4j.Logger
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.AbstractElement
@@ -24,14 +22,9 @@ import org.eclipse.xtext.TerminalRule
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.scoping.IScopeProvider
-import org.eclipse.xtext.util.IAcceptor
 import org.eclipse.xtext.xtext.CurrentTypeFinder
 
-import static org.eclipse.xtext.web.server.contentassist.ContentAssistResult.*
-
 class WebContentProposalProvider {
-	
-	static val LOG = Logger.getLogger(WebContentProposalProvider)
 	
 	@Accessors(PROTECTED_GETTER)
 	@Inject IScopeProvider scopeProvider
@@ -39,64 +32,65 @@ class WebContentProposalProvider {
 	@Accessors(PROTECTED_GETTER)
 	@Inject IQualifiedNameConverter qualifiedNameConverter
 	
+	@Accessors(PROTECTED_GETTER)
+	@Inject CrossrefProposalCreator crossrefProposalCreator
+	
+	@Accessors(PROTECTED_GETTER)
+	@Inject WebContentProposalPriorities proposalPriorities
+	
 	@Inject extension CurrentTypeFinder
 	
-	def void createProposals(ContentAssistContext context, IAcceptor<ContentAssistResult.Entry> acceptor) {
-		for (element : context.firstSetGrammarElements) {
-			createProposals(element, context, acceptor)
+	def void createProposals(List<ContentAssistContext> contexts, IWebContentProposaAcceptor acceptor) {
+		var ContentAssistContext selectedContext
+		for (context : contexts) {
+			if (selectedContext === null || context.acceptable
+					&& (context.prefix.length > selectedContext.prefix.length || !selectedContext.acceptable)) {
+				selectedContext = context
+			}
+		}
+		for (context : contexts) {
+			if (context === selectedContext || context.prefix == selectedContext.prefix && context.acceptable) {
+				for (element : context.firstSetGrammarElements) {
+					createProposals(element, context, acceptor)
+				}
+			}
 		}
 	}
 	
-	def Iterable<ContentAssistResult.Entry> filter(Collection<ContentAssistResult.Entry> proposals) {
-		proposals.filter[
-			if (proposal.nullOrEmpty || proposal == prefix || !matchesPrefix)
-				return false
-			switch type {
-				case KEYWORD:
-					proposals.size == 1 || Character.isLetter(proposal.charAt(0))
-				default: true
-			}
-		]
+	protected def isAcceptable(ContentAssistContext context) {
+		val prefix = context.prefix
+		return prefix.empty || Character.isJavaIdentifierPart(prefix.charAt(prefix.length - 1))
 	}
 	
-	protected def matchesPrefix(ContentAssistResult.Entry entry) {
-		entry.proposal.regionMatches(true, 0, entry.prefix, 0, entry.prefix.length)
-	}
-	
-	def void sort(List<ContentAssistResult.Entry> proposals) {
-		Collections.sort(proposals, [a, b |
-			if (a.type == b.type)
-				a.proposal.compareTo(b.proposal)
-			else
-				a.type.compareTo(b.type)
-		])
-	}
-
 	protected def dispatch void createProposals(AbstractElement element, ContentAssistContext context,
-			IAcceptor<ContentAssistResult.Entry> acceptor) {
+			IWebContentProposaAcceptor acceptor) {
 		// not supported
 	}
 	
 	protected def dispatch void createProposals(Assignment assignment, ContentAssistContext context,
-			IAcceptor<ContentAssistResult.Entry> acceptor) {
+			IWebContentProposaAcceptor acceptor) {
 		if (assignment.terminal instanceof CrossReference)
 			createProposals(assignment.terminal, context, acceptor)
 	}
 	
 	protected def dispatch void createProposals(Keyword keyword, ContentAssistContext context,
-			IAcceptor<ContentAssistResult.Entry> acceptor) {
-		val value = keyword.value
-		if (value.startsWith(context.prefix)) {
-			acceptor.accept(new ContentAssistResult.Entry(KEYWORD, context.prefix) => [
+			IWebContentProposaAcceptor acceptor) {
+		if (filterKeyword(keyword, context)) {
+			val entry = new ContentAssistResult.Entry(context.prefix) => [
 				proposal = keyword.value
-			])
+			]
+			acceptor.accept(entry, proposalPriorities.getKeywordPriority(keyword.value, entry))
 		}
 	}
 	
+	protected def filterKeyword(Keyword keyword, ContentAssistContext context) {
+		keyword.value.startsWith(context.prefix) && keyword.value.length > context.prefix.length
+	}
+	
 	protected def dispatch void createProposals(RuleCall ruleCall, ContentAssistContext context,
-			IAcceptor<ContentAssistResult.Entry> acceptor) {
+			IWebContentProposaAcceptor acceptor) {
 		if (ruleCall.rule instanceof TerminalRule && context.prefix.empty) {
-			acceptor.accept(new ContentAssistResult.Entry(TERMINAL, context.prefix) => [
+			val entry = new ContentAssistResult.Entry(context.prefix) => [
 				if (ruleCall.rule.name == 'STRING') {
 					val container = ruleCall.eContainer
 					if (container instanceof Assignment) {
@@ -116,28 +110,19 @@ class WebContentProposalProvider {
 					}
 					editPositions += new ContentAssistResult.EditPosition(context.offset, proposal.length)
 				}
-			])
+			]
+			acceptor.accept(entry, proposalPriorities.getDefaultPriority(entry))
 		}
 	}
 	
 	protected def dispatch void createProposals(CrossReference reference, ContentAssistContext context,
-			IAcceptor<ContentAssistResult.Entry> acceptor) {
+			IWebContentProposaAcceptor acceptor) {
 		val type = findCurrentTypeAfter(reference)
 		if (type instanceof EClass) {
 			val ereference = GrammarUtil.getReference(reference, type)
 			if (ereference !== null) {
 				val scope = scopeProvider.getScope(context.currentModel, ereference)
-				try {
-					val proposalCreator = new CrossrefProposalCreator(context, qualifiedNameConverter)
-					for (description : scope.allElements) {
-						val String elementName = description.name.toString
-						if (elementName.startsWith(context.prefix)) {
-							acceptor.accept(proposalCreator.apply(description))
-						}
-					}
-				} catch (UnsupportedOperationException uoe) {
-					LOG.error('Failed to create content assist proposals for cross-reference.', uoe)
-				}
+				crossrefProposalCreator.lookupCrossReference(scope, reference, context, acceptor, Predicates.alwaysTrue)
 			}
 		}
 	}

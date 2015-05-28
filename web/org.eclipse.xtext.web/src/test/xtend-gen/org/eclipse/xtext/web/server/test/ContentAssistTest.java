@@ -73,9 +73,6 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("Entry [");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("type = \"keyword\"");
-    _builder.newLine();
-    _builder.append("      ");
     _builder.append("prefix = \"\"");
     _builder.newLine();
     _builder.append("      ");
@@ -97,9 +94,6 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("Entry [");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("type = \"keyword\"");
-    _builder.newLine();
-    _builder.append("      ");
     _builder.append("prefix = \"\"");
     _builder.newLine();
     _builder.append("      ");
@@ -119,9 +113,6 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.newLine();
     _builder.append("    ");
     _builder.append("Entry [");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("type = \"keyword\"");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("prefix = \"\"");
@@ -163,9 +154,6 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("Entry [");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("type = \"keyword\"");
-    _builder.newLine();
-    _builder.append("      ");
     _builder.append("prefix = \"sta\"");
     _builder.newLine();
     _builder.append("      ");
@@ -203,9 +191,6 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.newLine();
     _builder.append("    ");
     _builder.append("Entry [");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("type = \"terminal\"");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("prefix = \"\"");
@@ -265,9 +250,6 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("Entry [");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("type = \"terminal\"");
-    _builder.newLine();
-    _builder.append("      ");
     _builder.append("prefix = \"\"");
     _builder.newLine();
     _builder.append("      ");
@@ -287,9 +269,6 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.newLine();
     _builder.append("    ");
     _builder.append("Entry [");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("type = \"terminal\"");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("prefix = \"\"");
@@ -329,9 +308,6 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.newLine();
     _builder.append("    ");
     _builder.append("Entry [");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("type = \"cross-ref\"");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("prefix = \"\"");

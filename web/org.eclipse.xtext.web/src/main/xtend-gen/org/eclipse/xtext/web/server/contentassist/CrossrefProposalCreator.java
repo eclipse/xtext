@@ -7,36 +7,128 @@
  */
 package org.eclipse.xtext.web.server.contentassist;
 
+import com.google.common.base.Objects;
+import com.google.common.base.Predicate;
+import com.google.inject.Inject;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
+import org.eclipse.xtext.web.server.contentassist.IWebContentProposaAcceptor;
+import org.eclipse.xtext.web.server.contentassist.WebContentProposalPriorities;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
-@FinalFieldsConstructor
 @SuppressWarnings("all")
-public class CrossrefProposalCreator implements Function1<IEObjectDescription, ContentAssistResult.Entry> {
-  @Accessors(AccessorType.PROTECTED_GETTER)
-  private final ContentAssistContext contentAssistContext;
+public class CrossrefProposalCreator {
+  private final static Logger LOG = Logger.getLogger(CrossrefProposalCreator.class);
   
   @Accessors(AccessorType.PROTECTED_GETTER)
-  private final IQualifiedNameConverter qualifiedNameConverter;
+  @Inject
+  private IQualifiedNameConverter qualifiedNameConverter;
   
-  @Override
-  public ContentAssistResult.Entry apply(final IEObjectDescription candidate) {
-    if ((candidate == null)) {
-      return null;
+  @Inject
+  private WebContentProposalPriorities proposalPriorities;
+  
+  public void lookupCrossReference(final IScope scope, final CrossReference crossReference, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor, final Predicate<IEObjectDescription> filter) {
+    try {
+      Iterable<IEObjectDescription> _queryScope = this.queryScope(scope, crossReference, context);
+      for (final IEObjectDescription candidate : _queryScope) {
+        boolean _apply = filter.apply(candidate);
+        if (_apply) {
+          final ContentAssistResult.Entry entry = this.createProposal(candidate, crossReference, context);
+          int _crossRefPriority = this.proposalPriorities.getCrossRefPriority(candidate, entry);
+          acceptor.accept(entry, _crossRefPriority);
+        }
+      }
+    } catch (final Throwable _t) {
+      if (_t instanceof UnsupportedOperationException) {
+        final UnsupportedOperationException uoe = (UnsupportedOperationException)_t;
+        CrossrefProposalCreator.LOG.error("Failed to create content assist proposals for cross-reference.", uoe);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
-    String _prefix = this.contentAssistContext.getPrefix();
-    ContentAssistResult.Entry _entry = new ContentAssistResult.Entry(ContentAssistResult.CROSSREF, _prefix);
+  }
+  
+  protected Iterable<IEObjectDescription> queryScope(final IScope scope, final CrossReference crossReference, final ContentAssistContext context) {
+    Iterable<IEObjectDescription> _xblockexpression = null;
+    {
+      String _prefix = context.getPrefix();
+      boolean _isEmpty = _prefix.isEmpty();
+      if (_isEmpty) {
+        return scope.getAllElements();
+      }
+      String _prefix_1 = context.getPrefix();
+      final QualifiedName prefix = this.qualifiedNameConverter.toQualifiedName(_prefix_1);
+      Iterable<IEObjectDescription> _allElements = scope.getAllElements();
+      final Function1<IEObjectDescription, Boolean> _function = new Function1<IEObjectDescription, Boolean>() {
+        @Override
+        public Boolean apply(final IEObjectDescription it) {
+          return Boolean.valueOf(CrossrefProposalCreator.this.matchesPrefix(it, prefix));
+        }
+      };
+      _xblockexpression = IterableExtensions.<IEObjectDescription>filter(_allElements, _function);
+    }
+    return _xblockexpression;
+  }
+  
+  protected boolean matchesPrefix(final IEObjectDescription candidate, final QualifiedName prefix) {
+    final QualifiedName name = candidate.getName();
+    final int count = prefix.getSegmentCount();
+    int _segmentCount = name.getSegmentCount();
+    boolean _greaterThan = (count > _segmentCount);
+    if (_greaterThan) {
+      return false;
+    }
+    for (int i = 0; (i < count); i++) {
+      {
+        final String nameSegment = name.getSegment(i);
+        final String prefixSegment = prefix.getSegment(i);
+        boolean _or = false;
+        boolean _and = false;
+        if (!(i < (count - 1))) {
+          _and = false;
+        } else {
+          boolean _notEquals = (!Objects.equal(nameSegment, prefixSegment));
+          _and = _notEquals;
+        }
+        if (_and) {
+          _or = true;
+        } else {
+          boolean _and_1 = false;
+          if (!(i == (count - 1))) {
+            _and_1 = false;
+          } else {
+            int _length = prefixSegment.length();
+            boolean _regionMatches = nameSegment.regionMatches(true, 0, prefixSegment, 0, _length);
+            boolean _not = (!_regionMatches);
+            _and_1 = _not;
+          }
+          _or = _and_1;
+        }
+        if (_or) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+  
+  protected ContentAssistResult.Entry createProposal(final IEObjectDescription candidate, final CrossReference crossRef, final ContentAssistContext context) {
+    String _prefix = context.getPrefix();
+    ContentAssistResult.Entry _entry = new ContentAssistResult.Entry(_prefix);
     final Procedure1<ContentAssistResult.Entry> _function = new Procedure1<ContentAssistResult.Entry>() {
       @Override
       public void apply(final ContentAssistResult.Entry it) {
@@ -49,17 +141,6 @@ public class CrossrefProposalCreator implements Function1<IEObjectDescription, C
       }
     };
     return ObjectExtensions.<ContentAssistResult.Entry>operator_doubleArrow(_entry, _function);
-  }
-  
-  public CrossrefProposalCreator(final ContentAssistContext contentAssistContext, final IQualifiedNameConverter qualifiedNameConverter) {
-    super();
-    this.contentAssistContext = contentAssistContext;
-    this.qualifiedNameConverter = qualifiedNameConverter;
-  }
-  
-  @Pure
-  protected ContentAssistContext getContentAssistContext() {
-    return this.contentAssistContext;
   }
   
   @Pure

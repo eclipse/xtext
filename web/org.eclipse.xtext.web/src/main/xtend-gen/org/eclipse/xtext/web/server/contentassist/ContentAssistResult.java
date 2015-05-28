@@ -26,11 +26,6 @@ public class ContentAssistResult implements IServiceResult {
   @ToString(skipNulls = true)
   @EqualsHashCode
   public static class Entry {
-    /**
-     * One of the constants defined in {@link ContentAssistResult}
-     */
-    private final String type;
-    
     private final String prefix;
     
     private String proposal;
@@ -50,15 +45,9 @@ public class ContentAssistResult implements IServiceResult {
     
     private final ArrayList<ContentAssistResult.EditPosition> editPositions = new ArrayList<ContentAssistResult.EditPosition>();
     
-    public Entry(final String type, final String prefix) {
+    public Entry(final String prefix) {
       super();
-      this.type = type;
       this.prefix = prefix;
-    }
-    
-    @Pure
-    public String getType() {
-      return this.type;
     }
     
     @Pure
@@ -126,7 +115,6 @@ public class ContentAssistResult implements IServiceResult {
     public String toString() {
       ToStringBuilder b = new ToStringBuilder(this);
       b.skipNulls();
-      b.add("type", this.type);
       b.add("prefix", this.prefix);
       b.add("proposal", this.proposal);
       b.add("name", this.name);
@@ -148,11 +136,6 @@ public class ContentAssistResult implements IServiceResult {
       if (getClass() != obj.getClass())
         return false;
       ContentAssistResult.Entry other = (ContentAssistResult.Entry) obj;
-      if (this.type == null) {
-        if (other.type != null)
-          return false;
-      } else if (!this.type.equals(other.type))
-        return false;
       if (this.prefix == null) {
         if (other.prefix != null)
           return false;
@@ -198,7 +181,6 @@ public class ContentAssistResult implements IServiceResult {
     public int hashCode() {
       final int prime = 31;
       int result = 1;
-      result = prime * result + ((this.type== null) ? 0 : this.type.hashCode());
       result = prime * result + ((this.prefix== null) ? 0 : this.prefix.hashCode());
       result = prime * result + ((this.proposal== null) ? 0 : this.proposal.hashCode());
       result = prime * result + ((this.name== null) ? 0 : this.name.hashCode());
@@ -343,16 +325,6 @@ public class ContentAssistResult implements IServiceResult {
       return this.length;
     }
   }
-  
-  public final static String KEYWORD = "keyword";
-  
-  public final static String PARSER_RULE = "parser-rule";
-  
-  public final static String FEATURE = "feature";
-  
-  public final static String TERMINAL = "terminal";
-  
-  public final static String CROSSREF = "cross-ref";
   
   private String stateId;
   

@@ -8,15 +8,13 @@
 package org.eclipse.xtext.web.server.contentassist;
 
 import com.google.common.base.Objects;
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -33,27 +31,21 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
 import org.eclipse.xtext.web.server.contentassist.CrossrefProposalCreator;
-import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.web.server.contentassist.IWebContentProposaAcceptor;
+import org.eclipse.xtext.web.server.contentassist.WebContentProposalPriorities;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.CurrentTypeFinder;
 
 @SuppressWarnings("all")
 public class WebContentProposalProvider {
-  private final static Logger LOG = Logger.getLogger(WebContentProposalProvider.class);
-  
   @Accessors(AccessorType.PROTECTED_GETTER)
   @Inject
   private IScopeProvider scopeProvider;
@@ -62,111 +54,97 @@ public class WebContentProposalProvider {
   @Inject
   private IQualifiedNameConverter qualifiedNameConverter;
   
+  @Accessors(AccessorType.PROTECTED_GETTER)
+  @Inject
+  private CrossrefProposalCreator crossrefProposalCreator;
+  
+  @Accessors(AccessorType.PROTECTED_GETTER)
+  @Inject
+  private WebContentProposalPriorities proposalPriorities;
+  
   @Inject
   @Extension
   private CurrentTypeFinder _currentTypeFinder;
   
-  public void createProposals(final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    ImmutableList<AbstractElement> _firstSetGrammarElements = context.getFirstSetGrammarElements();
-    for (final AbstractElement element : _firstSetGrammarElements) {
-      this.createProposals(element, context, acceptor);
+  public void createProposals(final List<ContentAssistContext> contexts, final IWebContentProposaAcceptor acceptor) {
+    ContentAssistContext selectedContext = null;
+    for (final ContentAssistContext context : contexts) {
+      boolean _or = false;
+      if ((selectedContext == null)) {
+        _or = true;
+      } else {
+        boolean _and = false;
+        boolean _isAcceptable = this.isAcceptable(context);
+        if (!_isAcceptable) {
+          _and = false;
+        } else {
+          boolean _or_1 = false;
+          String _prefix = context.getPrefix();
+          int _length = _prefix.length();
+          String _prefix_1 = selectedContext.getPrefix();
+          int _length_1 = _prefix_1.length();
+          boolean _greaterThan = (_length > _length_1);
+          if (_greaterThan) {
+            _or_1 = true;
+          } else {
+            boolean _isAcceptable_1 = this.isAcceptable(selectedContext);
+            boolean _not = (!_isAcceptable_1);
+            _or_1 = _not;
+          }
+          _and = _or_1;
+        }
+        _or = _and;
+      }
+      if (_or) {
+        selectedContext = context;
+      }
+    }
+    for (final ContentAssistContext context_1 : contexts) {
+      boolean _or_2 = false;
+      if ((context_1 == selectedContext)) {
+        _or_2 = true;
+      } else {
+        boolean _and_1 = false;
+        String _prefix_2 = context_1.getPrefix();
+        String _prefix_3 = selectedContext.getPrefix();
+        boolean _equals = Objects.equal(_prefix_2, _prefix_3);
+        if (!_equals) {
+          _and_1 = false;
+        } else {
+          boolean _isAcceptable_2 = this.isAcceptable(context_1);
+          _and_1 = _isAcceptable_2;
+        }
+        _or_2 = _and_1;
+      }
+      if (_or_2) {
+        ImmutableList<AbstractElement> _firstSetGrammarElements = context_1.getFirstSetGrammarElements();
+        for (final AbstractElement element : _firstSetGrammarElements) {
+          this.createProposals(element, context_1, acceptor);
+        }
+      }
     }
   }
   
-  public Iterable<ContentAssistResult.Entry> filter(final Collection<ContentAssistResult.Entry> proposals) {
-    final Function1<ContentAssistResult.Entry, Boolean> _function = new Function1<ContentAssistResult.Entry, Boolean>() {
-      @Override
-      public Boolean apply(final ContentAssistResult.Entry it) {
-        boolean _xblockexpression = false;
-        {
-          boolean _or = false;
-          boolean _or_1 = false;
-          String _proposal = it.getProposal();
-          boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_proposal);
-          if (_isNullOrEmpty) {
-            _or_1 = true;
-          } else {
-            String _proposal_1 = it.getProposal();
-            String _prefix = it.getPrefix();
-            boolean _equals = Objects.equal(_proposal_1, _prefix);
-            _or_1 = _equals;
-          }
-          if (_or_1) {
-            _or = true;
-          } else {
-            boolean _matchesPrefix = WebContentProposalProvider.this.matchesPrefix(it);
-            boolean _not = (!_matchesPrefix);
-            _or = _not;
-          }
-          if (_or) {
-            return Boolean.valueOf(false);
-          }
-          boolean _switchResult = false;
-          String _type = it.getType();
-          boolean _matched = false;
-          if (!_matched) {
-            if (Objects.equal(_type, ContentAssistResult.KEYWORD)) {
-              _matched=true;
-              boolean _or_2 = false;
-              int _size = proposals.size();
-              boolean _equals_1 = (_size == 1);
-              if (_equals_1) {
-                _or_2 = true;
-              } else {
-                String _proposal_2 = it.getProposal();
-                char _charAt = _proposal_2.charAt(0);
-                boolean _isLetter = Character.isLetter(_charAt);
-                _or_2 = _isLetter;
-              }
-              _switchResult = _or_2;
-            }
-          }
-          if (!_matched) {
-            _switchResult = true;
-          }
-          _xblockexpression = _switchResult;
-        }
-        return Boolean.valueOf(_xblockexpression);
-      }
-    };
-    return IterableExtensions.<ContentAssistResult.Entry>filter(proposals, _function);
+  protected boolean isAcceptable(final ContentAssistContext context) {
+    final String prefix = context.getPrefix();
+    boolean _or = false;
+    boolean _isEmpty = prefix.isEmpty();
+    if (_isEmpty) {
+      _or = true;
+    } else {
+      int _length = prefix.length();
+      int _minus = (_length - 1);
+      char _charAt = prefix.charAt(_minus);
+      boolean _isJavaIdentifierPart = Character.isJavaIdentifierPart(_charAt);
+      _or = _isJavaIdentifierPart;
+    }
+    return _or;
   }
   
-  protected boolean matchesPrefix(final ContentAssistResult.Entry entry) {
-    String _proposal = entry.getProposal();
-    String _prefix = entry.getPrefix();
-    String _prefix_1 = entry.getPrefix();
-    int _length = _prefix_1.length();
-    return _proposal.regionMatches(true, 0, _prefix, 0, _length);
+  protected void _createProposals(final AbstractElement element, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
   }
   
-  public void sort(final List<ContentAssistResult.Entry> proposals) {
-    final Comparator<ContentAssistResult.Entry> _function = new Comparator<ContentAssistResult.Entry>() {
-      @Override
-      public int compare(final ContentAssistResult.Entry a, final ContentAssistResult.Entry b) {
-        int _xifexpression = (int) 0;
-        String _type = a.getType();
-        String _type_1 = b.getType();
-        boolean _equals = Objects.equal(_type, _type_1);
-        if (_equals) {
-          String _proposal = a.getProposal();
-          String _proposal_1 = b.getProposal();
-          _xifexpression = _proposal.compareTo(_proposal_1);
-        } else {
-          String _type_2 = a.getType();
-          String _type_3 = b.getType();
-          _xifexpression = _type_2.compareTo(_type_3);
-        }
-        return _xifexpression;
-      }
-    };
-    Collections.<ContentAssistResult.Entry>sort(proposals, _function);
-  }
-  
-  protected void _createProposals(final AbstractElement element, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-  }
-  
-  protected void _createProposals(final Assignment assignment, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
+  protected void _createProposals(final Assignment assignment, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
     AbstractElement _terminal = assignment.getTerminal();
     if ((_terminal instanceof CrossReference)) {
       AbstractElement _terminal_1 = assignment.getTerminal();
@@ -174,13 +152,11 @@ public class WebContentProposalProvider {
     }
   }
   
-  protected void _createProposals(final Keyword keyword, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
-    final String value = keyword.getValue();
-    String _prefix = context.getPrefix();
-    boolean _startsWith = value.startsWith(_prefix);
-    if (_startsWith) {
-      String _prefix_1 = context.getPrefix();
-      ContentAssistResult.Entry _entry = new ContentAssistResult.Entry(ContentAssistResult.KEYWORD, _prefix_1);
+  protected void _createProposals(final Keyword keyword, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
+    boolean _filterKeyword = this.filterKeyword(keyword, context);
+    if (_filterKeyword) {
+      String _prefix = context.getPrefix();
+      ContentAssistResult.Entry _entry = new ContentAssistResult.Entry(_prefix);
       final Procedure1<ContentAssistResult.Entry> _function = new Procedure1<ContentAssistResult.Entry>() {
         @Override
         public void apply(final ContentAssistResult.Entry it) {
@@ -188,12 +164,32 @@ public class WebContentProposalProvider {
           it.setProposal(_value);
         }
       };
-      ContentAssistResult.Entry _doubleArrow = ObjectExtensions.<ContentAssistResult.Entry>operator_doubleArrow(_entry, _function);
-      acceptor.accept(_doubleArrow);
+      final ContentAssistResult.Entry entry = ObjectExtensions.<ContentAssistResult.Entry>operator_doubleArrow(_entry, _function);
+      String _value = keyword.getValue();
+      int _keywordPriority = this.proposalPriorities.getKeywordPriority(_value, entry);
+      acceptor.accept(entry, _keywordPriority);
     }
   }
   
-  protected void _createProposals(final RuleCall ruleCall, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
+  protected boolean filterKeyword(final Keyword keyword, final ContentAssistContext context) {
+    boolean _and = false;
+    String _value = keyword.getValue();
+    String _prefix = context.getPrefix();
+    boolean _startsWith = _value.startsWith(_prefix);
+    if (!_startsWith) {
+      _and = false;
+    } else {
+      String _value_1 = keyword.getValue();
+      int _length = _value_1.length();
+      String _prefix_1 = context.getPrefix();
+      int _length_1 = _prefix_1.length();
+      boolean _greaterThan = (_length > _length_1);
+      _and = _greaterThan;
+    }
+    return _and;
+  }
+  
+  protected void _createProposals(final RuleCall ruleCall, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
     boolean _and = false;
     AbstractRule _rule = ruleCall.getRule();
     if (!(_rule instanceof TerminalRule)) {
@@ -205,7 +201,7 @@ public class WebContentProposalProvider {
     }
     if (_and) {
       String _prefix_1 = context.getPrefix();
-      ContentAssistResult.Entry _entry = new ContentAssistResult.Entry(ContentAssistResult.TERMINAL, _prefix_1);
+      ContentAssistResult.Entry _entry = new ContentAssistResult.Entry(_prefix_1);
       final Procedure1<ContentAssistResult.Entry> _function = new Procedure1<ContentAssistResult.Entry>() {
         @Override
         public void apply(final ContentAssistResult.Entry it) {
@@ -259,46 +255,26 @@ public class WebContentProposalProvider {
           }
         }
       };
-      ContentAssistResult.Entry _doubleArrow = ObjectExtensions.<ContentAssistResult.Entry>operator_doubleArrow(_entry, _function);
-      acceptor.accept(_doubleArrow);
+      final ContentAssistResult.Entry entry = ObjectExtensions.<ContentAssistResult.Entry>operator_doubleArrow(_entry, _function);
+      int _defaultPriority = this.proposalPriorities.getDefaultPriority(entry);
+      acceptor.accept(entry, _defaultPriority);
     }
   }
   
-  protected void _createProposals(final CrossReference reference, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
+  protected void _createProposals(final CrossReference reference, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
     final EClassifier type = this._currentTypeFinder.findCurrentTypeAfter(reference);
     if ((type instanceof EClass)) {
       final EReference ereference = GrammarUtil.getReference(reference, ((EClass)type));
       if ((ereference != null)) {
         EObject _currentModel = context.getCurrentModel();
         final IScope scope = this.scopeProvider.getScope(_currentModel, ereference);
-        try {
-          final CrossrefProposalCreator proposalCreator = new CrossrefProposalCreator(context, this.qualifiedNameConverter);
-          Iterable<IEObjectDescription> _allElements = scope.getAllElements();
-          for (final IEObjectDescription description : _allElements) {
-            {
-              QualifiedName _name = description.getName();
-              final String elementName = _name.toString();
-              String _prefix = context.getPrefix();
-              boolean _startsWith = elementName.startsWith(_prefix);
-              if (_startsWith) {
-                ContentAssistResult.Entry _apply = proposalCreator.apply(description);
-                acceptor.accept(_apply);
-              }
-            }
-          }
-        } catch (final Throwable _t) {
-          if (_t instanceof UnsupportedOperationException) {
-            final UnsupportedOperationException uoe = (UnsupportedOperationException)_t;
-            WebContentProposalProvider.LOG.error("Failed to create content assist proposals for cross-reference.", uoe);
-          } else {
-            throw Exceptions.sneakyThrow(_t);
-          }
-        }
+        Predicate<IEObjectDescription> _alwaysTrue = Predicates.<IEObjectDescription>alwaysTrue();
+        this.crossrefProposalCreator.lookupCrossReference(scope, reference, context, acceptor, _alwaysTrue);
       }
     }
   }
   
-  protected void createProposals(final AbstractElement assignment, final ContentAssistContext context, final IAcceptor<ContentAssistResult.Entry> acceptor) {
+  protected void createProposals(final AbstractElement assignment, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
     if (assignment instanceof Assignment) {
       _createProposals((Assignment)assignment, context, acceptor);
       return;
@@ -328,5 +304,15 @@ public class WebContentProposalProvider {
   @Pure
   protected IQualifiedNameConverter getQualifiedNameConverter() {
     return this.qualifiedNameConverter;
+  }
+  
+  @Pure
+  protected CrossrefProposalCreator getCrossrefProposalCreator() {
+    return this.crossrefProposalCreator;
+  }
+  
+  @Pure
+  protected WebContentProposalPriorities getProposalPriorities() {
+    return this.proposalPriorities;
   }
 }
