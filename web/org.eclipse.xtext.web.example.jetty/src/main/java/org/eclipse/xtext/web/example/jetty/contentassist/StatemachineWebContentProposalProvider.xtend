@@ -7,46 +7,65 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.example.jetty.contentassist
 
+import com.google.inject.Inject
+import org.eclipse.xtext.Assignment
+import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.util.IAcceptor
-import org.eclipse.xtext.web.server.contentassist.AbstractDeclarativeWebContentProposalProvider
+import org.eclipse.xtext.web.example.statemachine.services.StatemachineGrammarAccess
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult
-import org.eclipse.xtext.web.server.contentassist.Proposals
+import org.eclipse.xtext.web.server.contentassist.WebContentProposalProvider
 
 import static org.eclipse.xtext.web.example.statemachine.statemachine.StatemachinePackage.Literals.*
 import static org.eclipse.xtext.web.server.contentassist.ContentAssistResult.*
 
-class StatemachineWebContentProposalProvider extends AbstractDeclarativeWebContentProposalProvider {
+class StatemachineWebContentProposalProvider extends WebContentProposalProvider {
 	
-	@Proposals(rule='BOOLEAN')
-	def completeBoolean(ContentAssistContext context, IAcceptor<ContentAssistResult.Entry> acceptor) {
-		acceptor.accept(new ContentAssistResult.Entry(TERMINAL, context.prefix) => [
-			proposal = 'true'
-		])
-		acceptor.accept(new ContentAssistResult.Entry(TERMINAL, context.prefix) => [
-			proposal = 'false'
-		])
-	}
+	@Inject extension StatemachineGrammarAccess
 	
-	@Proposals(rule='Event', feature='signal')
-	def completeEventSignal(ContentAssistContext context, IAcceptor<ContentAssistResult.Entry> acceptor) {
-		val scope = scopeProvider.getScope(context.currentModel, EVENT__SIGNAL)
-		for (description : scope.allElements.filter[EClass == INPUT_SIGNAL]) {
-			acceptor.accept(new ContentAssistResult.Entry(CROSSREF, context.prefix) => [
-				proposal = description.name.toString
-				description = 'input signal'
-			])
+	override dispatch createProposals(RuleCall ruleCall, ContentAssistContext context,
+			IAcceptor<ContentAssistResult.Entry> acceptor) {
+		switch (ruleCall.rule) {
+			
+			case BOOLEANRule: {
+				acceptor.accept(new ContentAssistResult.Entry(TERMINAL, context.prefix) => [
+					proposal = 'true'
+				])
+				acceptor.accept(new ContentAssistResult.Entry(TERMINAL, context.prefix) => [
+					proposal = 'false'
+				])
+			}
+			
+			default:
+				super._createProposals(ruleCall, context, acceptor)	
 		}
 	}
 	
-	@Proposals(rule='Command', feature='signal')
-	def completeCommandSignal(ContentAssistContext context, IAcceptor<ContentAssistResult.Entry> acceptor) {
-		val scope = scopeProvider.getScope(context.currentModel, COMMAND__SIGNAL)
-		for (description : scope.allElements.filter[EClass == OUTPUT_SIGNAL]) {
-			acceptor.accept(new ContentAssistResult.Entry(CROSSREF, context.prefix) => [
-				proposal = description.name.toString
-				description = 'output signal'
-			])
+	override dispatch createProposals(Assignment assignment, ContentAssistContext context,
+			IAcceptor<ContentAssistResult.Entry> acceptor) {
+		switch (assignment) {
+			case eventAccess.signalAssignment_0: {
+				val scope = scopeProvider.getScope(context.currentModel, EVENT__SIGNAL)
+				for (description : scope.allElements.filter[getEClass == INPUT_SIGNAL]) {
+					acceptor.accept(new ContentAssistResult.Entry(CROSSREF, context.prefix) => [
+						proposal = description.name.toString
+						description = 'input signal'
+					])
+				}
+			}
+			
+			case commandAccess.signalAssignment_1: {
+				val scope = scopeProvider.getScope(context.currentModel, COMMAND__SIGNAL)
+				for (description : scope.allElements.filter[getEClass == OUTPUT_SIGNAL]) {
+					acceptor.accept(new ContentAssistResult.Entry(CROSSREF, context.prefix) => [
+						proposal = description.name.toString
+						description = 'output signal'
+					])
+				}
+			}
+			
+			default:
+				super._createProposals(assignment, context, acceptor)
 		}
 	}
 	
