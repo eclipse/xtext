@@ -11,10 +11,10 @@ import com.google.inject.Inject
 import com.google.inject.Provider
 import com.google.inject.Singleton
 import java.util.HashSet
+import java.util.List
 import java.util.concurrent.ExecutorService
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory
-import org.eclipse.xtext.util.IAcceptor
 import org.eclipse.xtext.util.ITextRegion
 import org.eclipse.xtext.web.server.InvalidRequestException
 import org.eclipse.xtext.web.server.model.UpdateDocumentService
@@ -63,20 +63,24 @@ class ContentAssistService {
 		return createProposals(contexts, stateIdWrapper.get(0))
 	}
 	
-	protected def createProposals(ContentAssistContext[] contexts, String stateId) {
+	protected def createProposals(List<ContentAssistContext> contexts, String stateId) {
 		val result = new ContentAssistResult
 		result.stateId = stateId
 		if (!contexts.empty) {
-			val proposals = new HashSet<ContentAssistResult.Entry>
-			val IAcceptor<ContentAssistResult.Entry> acceptor = [proposals.add(it)]
-			val longestPrefix = contexts.map[prefix].maxBy[length]
-			for (context : contexts) {
-				if (context.prefix == longestPrefix) {
-					proposalProvider.createProposals(context, acceptor)
-				}
-			}
-			result.entries.addAll(proposalProvider.filter(proposals))
-			proposalProvider.sort(result.entries)
+			val proposals = new HashSet<Pair<Integer, ContentAssistResult.Entry>>
+			val IWebContentProposaAcceptor acceptor = [entry, priority |
+				proposals.add(priority -> entry)
+			]
+			
+			proposalProvider.createProposals(contexts, acceptor)
+			
+			result.entries.addAll(proposals.sortWith[p1, p2 |
+				val prioResult = p2.key.compareTo(p1.key)
+				if (prioResult != 0)
+					return prioResult
+				else
+					return p1.value.proposal.compareTo(p2.value.proposal)
+			].map[value])
 		}
 		return result
 	}

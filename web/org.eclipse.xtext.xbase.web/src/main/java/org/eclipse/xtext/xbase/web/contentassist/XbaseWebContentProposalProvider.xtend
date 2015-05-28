@@ -25,9 +25,7 @@ import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.resource.IEObjectDescription
 import org.eclipse.xtext.scoping.IScope
-import org.eclipse.xtext.util.IAcceptor
-import org.eclipse.xtext.web.server.contentassist.ContentAssistResult
-import org.eclipse.xtext.web.server.contentassist.CrossrefProposalCreator
+import org.eclipse.xtext.web.server.contentassist.IWebContentProposaAcceptor
 import org.eclipse.xtext.web.server.contentassist.WebContentProposalProvider
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XAssignment
@@ -47,7 +45,6 @@ import org.eclipse.xtext.xbase.services.XbaseGrammarAccess
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.xtype.XtypePackage
 
 import static extension org.eclipse.xtext.xbase.web.contentassist.TypeMatchFilters.*
@@ -59,13 +56,12 @@ class XbaseWebContentProposalProvider extends WebContentProposalProvider {
 
 		override boolean apply(IEObjectDescription input) {
 			if (input instanceof IIdentifiableElementDescription) {
-				val IIdentifiableElementDescription desc = input as IIdentifiableElementDescription
-				if (!desc.isVisible || !desc.isValidStaticState)
-					return false // filter operator method names from CA
+				if (!input.isVisible || !input.isValidStaticState)
+					return false
+				// Filter operator method names from content assist
 				if (input.name.firstSegment.startsWith("operator_")) {
 					return operatorMapping.getOperator(input.name) === null
 				}
-				return true
 			}
 			return true
 		}
@@ -81,25 +77,16 @@ class XbaseWebContentProposalProvider extends WebContentProposalProvider {
 	
 	@Inject IBatchTypeResolver typeResolver
 	
-	@Inject CommonTypeComputationServices typeComputationServices
-	
 	@Inject SyntaxFilteredScopes syntaxFilteredScopes
 	
-	override dispatch void createProposals(Keyword keyword, ContentAssistContext context,
-			IAcceptor<ContentAssistResult.Entry> acceptor) {
-		if (isKeywordWorthyToPropose(keyword, context)) {
-			super._createProposals(keyword, context, acceptor)
-		}
-	}
-
-	protected def boolean isKeywordWorthyToPropose(Keyword keyword, ContentAssistContext context) {
+	override filterKeyword(Keyword keyword, ContentAssistContext context) {
+		if (!super.filterKeyword(keyword, context))
+			return false
 		if (keyword.value == 'as' || keyword.value == 'instanceof') {
 			val previousModel = context.previousModel
 			if (previousModel instanceof XExpression) {
-				if (context.prefix.length === 0) {
-					if (NodeModelUtils.getNode(previousModel).endOffset > context.offset) {
-						return false
-					}
+				if (context.prefix.length == 0 && NodeModelUtils.getNode(previousModel).endOffset > context.offset) {
+					return false
 				}
 				var LightweightTypeReference type = typeResolver.resolveTypes(previousModel).getActualType(
 					previousModel as XExpression)
@@ -112,22 +99,22 @@ class XbaseWebContentProposalProvider extends WebContentProposalProvider {
 	}
 	
 	override dispatch createProposals(RuleCall ruleCall, ContentAssistContext context,
-			IAcceptor<ContentAssistResult.Entry> acceptor) {
+			IWebContentProposaAcceptor acceptor) {
 		switch (ruleCall.rule) {
 			case XExpressionRule: {
 				if (ruleCall.eContainer instanceof Group && GrammarUtil.containingRule(ruleCall).name == 'XParenthesizedExpression') {
 					createLocalVariableAndImplicitProposals(context.currentModel, IExpressionScope.Anchor.WITHIN, context, acceptor)
 				}
 			}
-			default:
+			default: {
 				super._createProposals(ruleCall, context, acceptor)
+			}
 		}
 	}
 
 	override dispatch createProposals(Assignment assignment, ContentAssistContext context,
-			IAcceptor<ContentAssistResult.Entry> acceptor) {
+			IWebContentProposaAcceptor acceptor) {
 		val model = context.currentModel
-		println(GrammarUtil.containingRule(assignment).name + " - " + assignment.feature)
 		switch (assignment) {
 			
 			case XFeatureCallAccess.featureAssignment_2:
@@ -199,24 +186,24 @@ class XbaseWebContentProposalProvider extends WebContentProposalProvider {
 			// Don't propose unary operations
 			case XUnaryOperationAccess.featureAssignment_0_1: {}
 			
-			default:
+			default: {
 				super._createProposals(assignment, context, acceptor)
+			}
 		}
 	}
 	
 	protected def void completeJavaTypes(ContentAssistContext context, EReference reference,
-			IAcceptor<ContentAssistResult.Entry> acceptor) {
+			IWebContentProposaAcceptor acceptor) {
 		completeJavaTypes(context, reference, false, qualifiedNameValueConverter, !INTERNAL, acceptor)
 	}
 
 	protected def void completeJavaTypes(ContentAssistContext context, EReference reference, boolean forced,
-			IAcceptor<ContentAssistResult.Entry> acceptor) {
+			IWebContentProposaAcceptor acceptor) {
 		completeJavaTypes(context, reference, forced, qualifiedNameValueConverter, !INTERNAL, acceptor)
 	}
 
 	protected def void completeJavaTypes(ContentAssistContext context, EReference reference, boolean forced,
-			IValueConverter<String> valueConverter, ITypeFilter filter,
-			IAcceptor<ContentAssistResult.Entry> acceptor) {
+			IValueConverter<String> valueConverter, ITypeFilter filter, IWebContentProposaAcceptor acceptor) {
 		val prefix = context.prefix
 		if (prefix.length() > 0) {
 			if (Character.isJavaIdentifierStart(prefix.charAt(0))) {
@@ -238,7 +225,7 @@ class XbaseWebContentProposalProvider extends WebContentProposalProvider {
 		}
 	}
 
-	protected def completeXFeatureCall(EObject model, ContentAssistContext context, IAcceptor<ContentAssistResult.Entry> acceptor) {
+	protected def completeXFeatureCall(EObject model, ContentAssistContext context, IWebContentProposaAcceptor acceptor) {
 		if (model !== null) {
 			if (typeResolver.resolveTypes(model).hasExpressionScope(model, IExpressionScope.Anchor.WITHIN)) {
 				return
@@ -254,7 +241,7 @@ class XbaseWebContentProposalProvider extends WebContentProposalProvider {
 	}
 
 	protected def void completeWithinBlock(EObject model, ContentAssistContext context,
-			IAcceptor<ContentAssistResult.Entry> acceptor) {
+			IWebContentProposaAcceptor acceptor) {
 		val node = NodeModelUtils.getNode(model)
 		if (node.offset >= context.offset) {
 			createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.BEFORE, context, acceptor)
@@ -302,7 +289,7 @@ class XbaseWebContentProposalProvider extends WebContentProposalProvider {
 	}
 
 	protected def completeXAssignment(EObject model, Assignment assignment,
-			ContentAssistContext context, IAcceptor<ContentAssistResult.Entry> acceptor) {
+			ContentAssistContext context, IWebContentProposaAcceptor acceptor) {
 		val ruleName = getConcreteSyntaxRuleName(assignment)
 		if (isOperatorRule(ruleName)) {
 			completeBinaryOperation(model, assignment, context, acceptor)
@@ -314,7 +301,7 @@ class XbaseWebContentProposalProvider extends WebContentProposalProvider {
 	}
 
 	protected def void completeBinaryOperation(EObject model, Assignment assignment,
-			ContentAssistContext context, IAcceptor<ContentAssistResult.Entry> acceptor) {
+			ContentAssistContext context, IWebContentProposaAcceptor acceptor) {
 		if (model instanceof XBinaryOperation) {
 			if (context.prefix.length() === 0) {
 				val currentNode = context.currentNode
@@ -348,7 +335,7 @@ class XbaseWebContentProposalProvider extends WebContentProposalProvider {
 	}
 
 	protected def completeXBasicForLoopInit(EObject model, ContentAssistContext context,
-			IAcceptor<ContentAssistResult.Entry> acceptor) {
+			IWebContentProposaAcceptor acceptor) {
 		val node = NodeModelUtils.getNode(model)
 		if (node.offset >= context.offset) {
 			createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.BEFORE, context, acceptor)
@@ -369,7 +356,7 @@ class XbaseWebContentProposalProvider extends WebContentProposalProvider {
 	}
 
 	protected def completeXMemberFeatureCall(EObject model, Assignment assignment,
-			ContentAssistContext context, IAcceptor<ContentAssistResult.Entry> acceptor) {
+			ContentAssistContext context, IWebContentProposaAcceptor acceptor) {
 		if (model instanceof XMemberFeatureCall) {
 			createReceiverProposals((model as XMemberFeatureCall).memberCallTarget,
 				assignment.terminal as CrossReference, context, acceptor)
@@ -380,27 +367,23 @@ class XbaseWebContentProposalProvider extends WebContentProposalProvider {
 	}
 
 	protected def void createLocalVariableAndImplicitProposals(EObject model, IExpressionScope.Anchor anchor,
-			ContentAssistContext contentAssistContext, IAcceptor<ContentAssistResult.Entry> acceptor) {
-		var String prefix = contentAssistContext.prefix
-		if (prefix.length() > 0) {
-			if (!Character.isJavaIdentifierStart(prefix.charAt(0))) {
-				return
-			}
+			ContentAssistContext context, IWebContentProposaAcceptor acceptor) {
+		var String prefix = context.prefix
+		if (prefix.length() > 0 && !Character.isJavaIdentifierStart(prefix.charAt(0))) {
+			return
 		}
 		val resolvedTypes = if (model !== null)
 				typeResolver.resolveTypes(model)
 			else
-				typeResolver.resolveTypes(contentAssistContext.resource)
+				typeResolver.resolveTypes(context.resource)
 		val expressionScope = resolvedTypes.getExpressionScope(model, anchor)
 		val scope = expressionScope.featureScope
-		val proposalCreator = new XbaseCrossrefProposalCreator(contentAssistContext, qualifiedNameConverter,
-			typeComputationServices, 'IdOrSuper')
-		lookupCrossReference(scope, model, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE,
-			acceptor, featureDescriptionPredicate, proposalCreator)
+		crossrefProposalCreator.lookupCrossReference(scope, XFeatureCallAccess.featureJvmIdentifiableElementCrossReference_2_0,
+			context, acceptor, featureDescriptionPredicate)
 	}
 
 	protected def void createReceiverProposals(XExpression receiver, CrossReference crossReference,
-			ContentAssistContext contentAssistContext, IAcceptor<ContentAssistResult.Entry> acceptor) {
+			ContentAssistContext context, IWebContentProposaAcceptor acceptor) {
 		val resolvedTypes = typeResolver.resolveTypes(receiver)
 		val receiverType = resolvedTypes.getActualType(receiver)
 		if (receiverType === null || receiverType.isPrimitiveVoid) {
@@ -408,7 +391,7 @@ class XbaseWebContentProposalProvider extends WebContentProposalProvider {
 		}
 		val expressionScope = resolvedTypes.getExpressionScope(receiver, IExpressionScope.Anchor.RECEIVER)
 		var IScope scope
-		val currentModel = contentAssistContext.currentModel
+		val currentModel = context.currentModel
 		if (currentModel !== receiver) {
 			if (currentModel instanceof XMemberFeatureCall &&
 				(currentModel as XMemberFeatureCall).memberCallTarget === receiver) {
@@ -419,11 +402,7 @@ class XbaseWebContentProposalProvider extends WebContentProposalProvider {
 		} else {
 			scope = syntaxFilteredScopes.create(expressionScope.featureScope, crossReference)
 		}
-		val ruleName = getConcreteSyntaxRuleName(crossReference)
-		val proposalCreator = new XbaseCrossrefProposalCreator(contentAssistContext, qualifiedNameConverter,
-			typeComputationServices, ruleName)
-		lookupCrossReference(scope, receiver, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE,
-			acceptor, featureDescriptionPredicate, proposalCreator)
+		crossrefProposalCreator.lookupCrossReference(scope, crossReference, context, acceptor, featureDescriptionPredicate)
 	}
 
 	protected def dispatch String getConcreteSyntaxRuleName(Assignment assignment) {
@@ -438,16 +417,6 @@ class XbaseWebContentProposalProvider extends WebContentProposalProvider {
 
 	protected def dispatch String getConcreteSyntaxRuleName(RuleCall ruleCall) {
 		ruleCall.rule.name
-	}
-	
-	protected def lookupCrossReference(IScope scope, EObject model, EReference reference,
-			IAcceptor<ContentAssistResult.Entry> acceptor, Predicate<IEObjectDescription> filter,
-			CrossrefProposalCreator proposalCreator) {
-		for (IEObjectDescription candidate : scope.allElements) {
-			if (filter.apply(candidate)) {
-				acceptor.accept(proposalCreator.apply(candidate))
-			}
-		}
 	}
 
 }

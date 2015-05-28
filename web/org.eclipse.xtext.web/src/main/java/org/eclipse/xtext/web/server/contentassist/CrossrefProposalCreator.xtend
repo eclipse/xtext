@@ -7,24 +7,66 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server.contentassist
 
+import com.google.common.base.Predicate
+import com.google.inject.Inject
+import org.apache.log4j.Logger
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.naming.IQualifiedNameConverter
+import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.resource.IEObjectDescription
+import org.eclipse.xtext.scoping.IScope
 
-@FinalFieldsConstructor
-class CrossrefProposalCreator implements (IEObjectDescription) => ContentAssistResult.Entry {
+class CrossrefProposalCreator {
+	
+	static val LOG = Logger.getLogger(CrossrefProposalCreator)
 	
 	@Accessors(PROTECTED_GETTER)
-	val ContentAssistContext contentAssistContext
-	@Accessors(PROTECTED_GETTER)
-	val IQualifiedNameConverter qualifiedNameConverter
-
-	override apply(IEObjectDescription candidate) {
-		if (candidate === null)
-			return null
-		return new ContentAssistResult.Entry(ContentAssistResult.CROSSREF, contentAssistContext.prefix) => [
+	@Inject IQualifiedNameConverter qualifiedNameConverter
+	
+	@Inject WebContentProposalPriorities proposalPriorities
+	
+	def void lookupCrossReference(IScope scope, CrossReference crossReference, ContentAssistContext context,
+			IWebContentProposaAcceptor acceptor, Predicate<IEObjectDescription> filter) {
+		try {
+			for (candidate : queryScope(scope, crossReference, context)) {
+				if (filter.apply(candidate)) {
+					val entry = createProposal(candidate, crossReference, context)
+					acceptor.accept(entry, proposalPriorities.getCrossRefPriority(candidate, entry))
+				}
+			}
+		} catch (UnsupportedOperationException uoe) {
+			LOG.error('Failed to create content assist proposals for cross-reference.', uoe)
+		}
+	}
+	
+	protected def queryScope(IScope scope, CrossReference crossReference, ContentAssistContext context) {
+		if (context.prefix.empty) {
+			return scope.allElements
+		}
+		val prefix = qualifiedNameConverter.toQualifiedName(context.prefix)
+		scope.allElements.filter[matchesPrefix(prefix)]
+	}
+	
+	protected def matchesPrefix(IEObjectDescription candidate, QualifiedName prefix) {
+		val name = candidate.name
+		val count = prefix.segmentCount
+		if (count > name.segmentCount)
+			return false
+		for (var i = 0; i < count; i++) {
+			val nameSegment = name.getSegment(i)
+			val prefixSegment = prefix.getSegment(i)
+			if (i < count - 1 && nameSegment != prefixSegment
+				 	||	i == count - 1 && !nameSegment.regionMatches(true, 0, prefixSegment, 0, prefixSegment.length)) {
+				return false
+			}
+		}
+		return true
+	}
+	
+	protected def ContentAssistResult.Entry createProposal(IEObjectDescription candidate, CrossReference crossRef, ContentAssistContext context) {
+		return new ContentAssistResult.Entry(context.prefix) => [
 			proposal = qualifiedNameConverter.toString(candidate.name)
 			description = candidate.getEClass.name
 		]

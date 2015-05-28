@@ -19,12 +19,6 @@ import org.eclipse.xtext.web.server.IServiceResult
 @ToString(skipNulls = true)
 class ContentAssistResult implements IServiceResult {
 	
-	public static val KEYWORD = 'keyword'
-	public static val PARSER_RULE = 'parser-rule'
-	public static val FEATURE = 'feature'
-	public static val TERMINAL = 'terminal'
-	public static val CROSSREF = 'cross-ref'
-	
 	String stateId
 	
 	val entries = new ArrayList<Entry>
@@ -34,8 +28,6 @@ class ContentAssistResult implements IServiceResult {
 	@ToString(skipNulls = true)
 	@EqualsHashCode
 	static class Entry {
-		/** One of the constants defined in {@link ContentAssistResult} */
-		val String type
 		val String prefix
 		String proposal
 		String name
