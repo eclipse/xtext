@@ -22,12 +22,12 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.ToString;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.TextRegion;
@@ -36,6 +36,7 @@ import org.eclipse.xtext.web.server.ISessionStore;
 import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.ServiceConflictResult;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistService;
+import org.eclipse.xtext.web.server.model.IWebResourceSetProvider;
 import org.eclipse.xtext.web.server.model.UpdateDocumentService;
 import org.eclipse.xtext.web.server.model.XtextWebDocument;
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess;
@@ -145,7 +146,7 @@ public class XtextServiceDispatcher {
   private IServerResourceHandler resourceHandler;
   
   @Inject
-  private Provider<XtextResourceSet> resourceSetProvider;
+  private IWebResourceSetProvider resourceSetProvider;
   
   @Inject
   private Provider<XtextWebDocument> documentProvider;
@@ -657,7 +658,7 @@ public class XtextServiceDispatcher {
   
   protected XtextWebDocument getFullTextDocument(final String fullText, final String resourceId, final ISessionStore sessionStore) {
     try {
-      final XtextResourceSet resourceSet = this.resourceSetProvider.get();
+      final ResourceSet resourceSet = this.resourceSetProvider.get(resourceId);
       String _elvis = null;
       if (resourceId != null) {
         _elvis = resourceId;

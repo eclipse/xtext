@@ -20,8 +20,6 @@ import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.common.types.TypesPackage
 import org.eclipse.xtext.conversion.IValueConverter
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext
-import org.eclipse.xtext.nodemodel.ILeafNode
-import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.resource.IEObjectDescription
 import org.eclipse.xtext.scoping.IScope
@@ -47,7 +45,7 @@ import org.eclipse.xtext.xbase.typesystem.IExpressionScope
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xtype.XtypePackage
 
-import static extension org.eclipse.xtext.xbase.web.contentassist.TypeMatchFilters.*
+import static extension org.eclipse.xtext.xbase.web.contentassist.TypeFilters.*
 
 class XbaseWebContentProposalProvider extends WebContentProposalProvider {
 
@@ -141,13 +139,13 @@ class XbaseWebContentProposalProvider extends WebContentProposalProvider {
 				
 			case XImportDeclarationAccess.importedTypeAssignment_1_0_2,
 			case XImportDeclarationAccess.importedTypeAssignment_1_1:
-				completeJavaTypes(context, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, true, acceptor)
+				completeJavaTypes(context, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, acceptor)
 			
 			case XTypeLiteralAccess.typeAssignment_3:
-				completeJavaTypes(context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, true, acceptor)
+				completeJavaTypes(context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, acceptor)
 			
 			case XConstructorCallAccess.constructorAssignment_2:
-				completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true,
+				completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE,
 					qualifiedNameValueConverter, !(INTERNAL || ABSTRACT || INTERFACE), acceptor)
 			
 			case XForLoopExpressionAccess.eachExpressionAssignment_3,
@@ -194,35 +192,12 @@ class XbaseWebContentProposalProvider extends WebContentProposalProvider {
 	
 	protected def void completeJavaTypes(ContentAssistContext context, EReference reference,
 			IWebContentProposaAcceptor acceptor) {
-		completeJavaTypes(context, reference, false, qualifiedNameValueConverter, !INTERNAL, acceptor)
+		completeJavaTypes(context, reference, qualifiedNameValueConverter, !INTERNAL, acceptor)
 	}
 
-	protected def void completeJavaTypes(ContentAssistContext context, EReference reference, boolean forced,
-			IWebContentProposaAcceptor acceptor) {
-		completeJavaTypes(context, reference, forced, qualifiedNameValueConverter, !INTERNAL, acceptor)
-	}
-
-	protected def void completeJavaTypes(ContentAssistContext context, EReference reference, boolean forced,
+	protected def void completeJavaTypes(ContentAssistContext context, EReference reference,
 			IValueConverter<String> valueConverter, ITypeFilter filter, IWebContentProposaAcceptor acceptor) {
-		val prefix = context.prefix
-		if (prefix.length() > 0) {
-			if (Character.isJavaIdentifierStart(prefix.charAt(0))) {
-				if (!forced && !prefix.contains('.') && !prefix.contains('::') && !Character.isUpperCase(prefix.charAt(0))) {
-					return
-				}
-				typeProposalProvider.createTypeProposals(context, reference, valueConverter, filter, acceptor)
-			}
-		} else if (forced) {
-			val INode lastCompleteNode = context.getLastCompleteNode()
-			if (lastCompleteNode instanceof ILeafNode && !(lastCompleteNode as ILeafNode).isHidden
-					&& lastCompleteNode.length > 0 && lastCompleteNode.totalEndOffset == context.offset) {
-				val text = lastCompleteNode.text
-				if (Character.isJavaIdentifierPart(text.charAt(text.length - 1))) {
-					return
-				}
-			}
-			typeProposalProvider.createTypeProposals(context, reference, valueConverter, filter, acceptor)
-		}
+		typeProposalProvider.createTypeProposals(context, reference, valueConverter, filter, acceptor)
 	}
 
 	protected def completeXFeatureCall(EObject model, ContentAssistContext context, IWebContentProposaAcceptor acceptor) {

@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.web.server.model.IWebResourceSetProvider;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 import org.eclipse.xtext.web.server.model.XtextWebDocument;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
@@ -34,7 +34,7 @@ public class FileResourceHandler implements IServerResourceHandler {
   private IResourceBaseProvider resourceBaseProvider;
   
   @Inject
-  private Provider<XtextResourceSet> resourceSetProvider;
+  private IWebResourceSetProvider resourceSetProvider;
   
   @Inject
   private Provider<XtextWebDocument> documentProvider;
@@ -50,7 +50,7 @@ public class FileResourceHandler implements IServerResourceHandler {
         if ((uri == null)) {
           throw new IOException("The requested resource does not exist.");
         }
-        final XtextResourceSet resourceSet = this.resourceSetProvider.get();
+        final ResourceSet resourceSet = this.resourceSetProvider.get(resourceId);
         Resource _resource = resourceSet.getResource(uri, true);
         final XtextResource resource = ((XtextResource) _resource);
         XtextWebDocument _get = this.documentProvider.get();

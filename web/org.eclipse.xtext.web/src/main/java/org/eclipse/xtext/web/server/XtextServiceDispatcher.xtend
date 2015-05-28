@@ -21,11 +21,11 @@ import org.eclipse.xtend.lib.annotations.ToString
 import org.eclipse.xtext.resource.FileExtensionProvider
 import org.eclipse.xtext.resource.IResourceFactory
 import org.eclipse.xtext.resource.XtextResource
-import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.StringInputStream
 import org.eclipse.xtext.util.TextRegion
 import org.eclipse.xtext.web.server.contentassist.ContentAssistService
+import org.eclipse.xtext.web.server.model.IWebResourceSetProvider
 import org.eclipse.xtext.web.server.model.UpdateDocumentService
 import org.eclipse.xtext.web.server.model.XtextWebDocument
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess
@@ -55,7 +55,7 @@ class XtextServiceDispatcher {
 	@Inject ContentAssistService contentAssistService
 	@Inject ValidationService validationService
 	@Inject IServerResourceHandler resourceHandler
-	@Inject Provider<XtextResourceSet> resourceSetProvider
+	@Inject IWebResourceSetProvider resourceSetProvider
 	@Inject Provider<XtextWebDocument> documentProvider
 	@Inject FileExtensionProvider fileExtensionProvider
 	@Inject IResourceFactory resourceFactory
@@ -279,7 +279,7 @@ class XtextServiceDispatcher {
 	}
 	
 	protected def getFullTextDocument(String fullText, String resourceId, ISessionStore sessionStore) {
-		val resourceSet = resourceSetProvider.get()
+		val resourceSet = resourceSetProvider.get(resourceId)
 		val uri = URI.createURI(resourceId ?: 'fullText.' + fileExtensionProvider.primaryFileExtension)
 		val resource = resourceFactory.createResource(uri) as XtextResource
 		resourceSet.resources.add(resource)

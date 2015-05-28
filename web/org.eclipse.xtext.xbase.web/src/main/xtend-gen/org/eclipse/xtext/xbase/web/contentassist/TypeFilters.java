@@ -11,7 +11,7 @@ import java.lang.reflect.Modifier;
 import org.eclipse.xtext.xbase.web.contentassist.ITypeFilter;
 
 @SuppressWarnings("all")
-final class TypeMatchFilters {
+final class TypeFilters {
   public final static ITypeFilter INTERNAL = new ITypeFilter() {
     @Override
     public boolean accept(final int modifiers, final String packageName, final String simpleTypeName, final String[] enclosingTypeNames, final String path) {

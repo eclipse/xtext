@@ -29,7 +29,6 @@ import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -62,7 +61,7 @@ import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.web.contentassist.ITypeFilter;
 import org.eclipse.xtext.xbase.web.contentassist.ITypesProposalProvider;
-import org.eclipse.xtext.xbase.web.contentassist.TypeMatchFilters;
+import org.eclipse.xtext.xbase.web.contentassist.TypeFilters;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 @SuppressWarnings("all")
@@ -304,7 +303,7 @@ public class XbaseWebContentProposalProvider extends WebContentProposalProvider 
         }
       }
       if (_matched) {
-        this.completeJavaTypes(context, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, true, acceptor);
+        this.completeJavaTypes(context, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, acceptor);
       }
     }
     if (!_matched) {
@@ -312,7 +311,7 @@ public class XbaseWebContentProposalProvider extends WebContentProposalProvider 
       Assignment _typeAssignment_3 = _xTypeLiteralAccess.getTypeAssignment_3();
       if (Objects.equal(assignment, _typeAssignment_3)) {
         _matched=true;
-        this.completeJavaTypes(context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, true, acceptor);
+        this.completeJavaTypes(context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, acceptor);
       }
     }
     if (!_matched) {
@@ -320,10 +319,10 @@ public class XbaseWebContentProposalProvider extends WebContentProposalProvider 
       Assignment _constructorAssignment_2 = _xConstructorCallAccess.getConstructorAssignment_2();
       if (Objects.equal(assignment, _constructorAssignment_2)) {
         _matched=true;
-        ITypeFilter _or = TypeMatchFilters.operator_or(TypeMatchFilters.INTERNAL, TypeMatchFilters.ABSTRACT);
-        ITypeFilter _or_1 = TypeMatchFilters.operator_or(_or, TypeMatchFilters.INTERFACE);
-        ITypeFilter _not = TypeMatchFilters.operator_not(_or_1);
-        this.completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true, 
+        ITypeFilter _or = TypeFilters.operator_or(TypeFilters.INTERNAL, TypeFilters.ABSTRACT);
+        ITypeFilter _or_1 = TypeFilters.operator_or(_or, TypeFilters.INTERFACE);
+        ITypeFilter _not = TypeFilters.operator_not(_or_1);
+        this.completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, 
           this.qualifiedNameValueConverter, _not, acceptor);
       }
     }
@@ -514,94 +513,12 @@ public class XbaseWebContentProposalProvider extends WebContentProposalProvider 
   }
   
   protected void completeJavaTypes(final ContentAssistContext context, final EReference reference, final IWebContentProposaAcceptor acceptor) {
-    ITypeFilter _not = TypeMatchFilters.operator_not(TypeMatchFilters.INTERNAL);
-    this.completeJavaTypes(context, reference, false, this.qualifiedNameValueConverter, _not, acceptor);
+    ITypeFilter _not = TypeFilters.operator_not(TypeFilters.INTERNAL);
+    this.completeJavaTypes(context, reference, this.qualifiedNameValueConverter, _not, acceptor);
   }
   
-  protected void completeJavaTypes(final ContentAssistContext context, final EReference reference, final boolean forced, final IWebContentProposaAcceptor acceptor) {
-    ITypeFilter _not = TypeMatchFilters.operator_not(TypeMatchFilters.INTERNAL);
-    this.completeJavaTypes(context, reference, forced, this.qualifiedNameValueConverter, _not, acceptor);
-  }
-  
-  protected void completeJavaTypes(final ContentAssistContext context, final EReference reference, final boolean forced, final IValueConverter<String> valueConverter, final ITypeFilter filter, final IWebContentProposaAcceptor acceptor) {
-    final String prefix = context.getPrefix();
-    int _length = prefix.length();
-    boolean _greaterThan = (_length > 0);
-    if (_greaterThan) {
-      char _charAt = prefix.charAt(0);
-      boolean _isJavaIdentifierStart = Character.isJavaIdentifierStart(_charAt);
-      if (_isJavaIdentifierStart) {
-        boolean _and = false;
-        boolean _and_1 = false;
-        boolean _and_2 = false;
-        if (!(!forced)) {
-          _and_2 = false;
-        } else {
-          boolean _contains = prefix.contains(".");
-          boolean _not = (!_contains);
-          _and_2 = _not;
-        }
-        if (!_and_2) {
-          _and_1 = false;
-        } else {
-          boolean _contains_1 = prefix.contains("::");
-          boolean _not_1 = (!_contains_1);
-          _and_1 = _not_1;
-        }
-        if (!_and_1) {
-          _and = false;
-        } else {
-          char _charAt_1 = prefix.charAt(0);
-          boolean _isUpperCase = Character.isUpperCase(_charAt_1);
-          boolean _not_2 = (!_isUpperCase);
-          _and = _not_2;
-        }
-        if (_and) {
-          return;
-        }
-        this.typeProposalProvider.createTypeProposals(context, reference, valueConverter, filter, acceptor);
-      }
-    } else {
-      if (forced) {
-        final INode lastCompleteNode = context.getLastCompleteNode();
-        boolean _and_3 = false;
-        boolean _and_4 = false;
-        boolean _and_5 = false;
-        if (!(lastCompleteNode instanceof ILeafNode)) {
-          _and_5 = false;
-        } else {
-          boolean _isHidden = ((ILeafNode) lastCompleteNode).isHidden();
-          boolean _not_3 = (!_isHidden);
-          _and_5 = _not_3;
-        }
-        if (!_and_5) {
-          _and_4 = false;
-        } else {
-          int _length_1 = lastCompleteNode.getLength();
-          boolean _greaterThan_1 = (_length_1 > 0);
-          _and_4 = _greaterThan_1;
-        }
-        if (!_and_4) {
-          _and_3 = false;
-        } else {
-          int _totalEndOffset = lastCompleteNode.getTotalEndOffset();
-          int _offset = context.getOffset();
-          boolean _equals = (_totalEndOffset == _offset);
-          _and_3 = _equals;
-        }
-        if (_and_3) {
-          final String text = lastCompleteNode.getText();
-          int _length_2 = text.length();
-          int _minus = (_length_2 - 1);
-          char _charAt_2 = text.charAt(_minus);
-          boolean _isJavaIdentifierPart = Character.isJavaIdentifierPart(_charAt_2);
-          if (_isJavaIdentifierPart) {
-            return;
-          }
-        }
-        this.typeProposalProvider.createTypeProposals(context, reference, valueConverter, filter, acceptor);
-      }
-    }
+  protected void completeJavaTypes(final ContentAssistContext context, final EReference reference, final IValueConverter<String> valueConverter, final ITypeFilter filter, final IWebContentProposaAcceptor acceptor) {
+    this.typeProposalProvider.createTypeProposals(context, reference, valueConverter, filter, acceptor);
   }
   
   protected void completeXFeatureCall(final EObject model, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
