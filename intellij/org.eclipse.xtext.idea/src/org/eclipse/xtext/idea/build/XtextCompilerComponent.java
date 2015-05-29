@@ -15,12 +15,52 @@ import java.util.concurrent.atomic.AtomicReference;
 import com.intellij.compiler.impl.CompilerUtil;
 import com.intellij.compiler.server.CustomBuilderMessageHandler;
 import com.intellij.openapi.components.AbstractProjectComponent;
+import com.intellij.openapi.editor.EditorFactory;
+import com.intellij.openapi.editor.event.DocumentAdapter;
+import com.intellij.openapi.editor.event.DocumentEvent;
+import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileAdapter;
+import com.intellij.openapi.vfs.VirtualFileEvent;
+import com.intellij.openapi.vfs.VirtualFileManager;
+import com.intellij.openapi.vfs.VirtualFileMoveEvent;
 
 public class XtextCompilerComponent extends AbstractProjectComponent {
 
+	private XtextAutoBuilder autoBuilder;
+	
 	public XtextCompilerComponent(Project project) {
 		super(project);
+		autoBuilder = new XtextAutoBuilder(project);
+		EditorFactory.getInstance().getEventMulticaster().addDocumentListener(new DocumentAdapter() {
+			@Override
+			public void documentChanged(DocumentEvent event) {
+				VirtualFile file = FileDocumentManager.getInstance().getFile(event.getDocument());
+				autoBuilder.fileModified(file);
+			}
+		});
+		VirtualFileManager.getInstance().addVirtualFileListener(new VirtualFileAdapter() {
+			@Override
+			public void contentsChanged(VirtualFileEvent event) {
+				autoBuilder.fileModified(event.getFile());
+			}
+
+			@Override
+			public void fileCreated(VirtualFileEvent event) {
+				autoBuilder.fileAdded(event.getFile());
+			}
+
+			@Override
+			public void fileDeleted(VirtualFileEvent event) {
+				autoBuilder.fileDeleted(event.getFile());
+			}
+
+			@Override
+			public void fileMoved(VirtualFileMoveEvent event) {
+				// TODO should we deal with that?
+			}
+		});
 	}
 	
 	@Override

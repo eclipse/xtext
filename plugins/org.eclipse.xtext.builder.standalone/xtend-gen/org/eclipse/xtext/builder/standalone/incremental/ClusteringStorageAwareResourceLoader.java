@@ -115,7 +115,11 @@ public class ClusteringStorageAwareResourceLoader {
     Map<String, LanguageAccess> _languages = this.context.getLanguages();
     String _fileExtension = uri.fileExtension();
     LanguageAccess _get = _languages.get(_fileExtension);
-    final IResourceServiceProvider provider = _get.getResourceServiceProvider();
+    IResourceServiceProvider _resourceServiceProvider = null;
+    if (_get!=null) {
+      _resourceServiceProvider=_get.getResourceServiceProvider();
+    }
+    final IResourceServiceProvider provider = _resourceServiceProvider;
     boolean _and = false;
     if (!(provider instanceof IResourceServiceProviderExtension)) {
       _and = false;
