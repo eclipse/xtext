@@ -53,7 +53,7 @@ class ClusteringStorageAwareResourceLoader {
 	}
 	
 	protected def isReadOnly(URI uri) {
-		val provider = languages.get(uri.fileExtension).resourceServiceProvider
+		val provider = languages.get(uri.fileExtension)?.resourceServiceProvider
 		return provider instanceof IResourceServiceProviderExtension &&
 				(provider as IResourceServiceProviderExtension).isReadOnly(uri)
 	}
