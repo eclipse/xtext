@@ -316,11 +316,18 @@ public class ClientHighlightingFragment extends Xtend2GeneratorFragment {
       _builder.append("\",");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
-      _builder.append("grammars: grammars,");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("keywords: keywords");
-      _builder.newLine();
+      _builder.append("grammars: grammars");
+      {
+        boolean _isEmpty_2 = IterableExtensions.isEmpty(filteredKeywords);
+        boolean _not_2 = (!_isEmpty_2);
+        if (_not_2) {
+          _builder.append(",");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("keywords: keywords");
+          _builder.newLine();
+        }
+      }
       _builder.append("\t");
       _builder.append("};");
       _builder.newLine();

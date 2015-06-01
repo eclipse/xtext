@@ -215,54 +215,14 @@ public class XtextServiceDispatcher {
       }
       XtextServiceDispatcher.ServiceDescriptor _xtrycatchfinallyexpression = null;
       try {
-        XtextServiceDispatcher.ServiceDescriptor _switchResult = null;
-        boolean _matched = false;
-        if (!_matched) {
-          if (Objects.equal(requestType, "load")) {
-            _matched=true;
-            _switchResult = this.getLoadResourceService(false, parameters, sessionStore);
-          }
-        }
-        if (!_matched) {
-          if (Objects.equal(requestType, "revert")) {
-            _matched=true;
-            _switchResult = this.getLoadResourceService(true, parameters, sessionStore);
-          }
-        }
-        if (!_matched) {
-          if (Objects.equal(requestType, "save")) {
-            _matched=true;
-            _switchResult = this.getSaveResourceService(parameters, sessionStore);
-          }
-        }
-        if (!_matched) {
-          if (Objects.equal(requestType, "update")) {
-            _matched=true;
-            _switchResult = this.getUpdateDocumentService(parameters, sessionStore);
-          }
-        }
-        if (!_matched) {
-          if (Objects.equal(requestType, "validation")) {
-            _matched=true;
-            _switchResult = this.getValidationService(parameters, sessionStore);
-          }
-        }
-        if (!_matched) {
-          if (Objects.equal(requestType, "content-assist")) {
-            _matched=true;
-            _switchResult = this.getContentAssistService(parameters, sessionStore);
-          }
-        }
-        if (!_matched) {
-          throw new InvalidRequestException(InvalidRequestException.Type.INVALID_PARAMETERS, (("The request type \'" + requestType) + "\' is not supported."));
-        }
+        XtextServiceDispatcher.ServiceDescriptor _createServiceDescriptor = this.createServiceDescriptor(requestType, parameters, sessionStore);
         final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function_2 = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
           @Override
           public void apply(final XtextServiceDispatcher.ServiceDescriptor it) {
             it.type = requestType;
           }
         };
-        _xtrycatchfinallyexpression = ObjectExtensions.<XtextServiceDispatcher.ServiceDescriptor>operator_doubleArrow(_switchResult, _function_2);
+        _xtrycatchfinallyexpression = ObjectExtensions.<XtextServiceDispatcher.ServiceDescriptor>operator_doubleArrow(_createServiceDescriptor, _function_2);
       } catch (final Throwable _t) {
         if (_t instanceof InvalidRequestException) {
           final InvalidRequestException ire = (InvalidRequestException)_t;
@@ -295,6 +255,55 @@ public class XtextServiceDispatcher {
       _xblockexpression = _xtrycatchfinallyexpression;
     }
     return _xblockexpression;
+  }
+  
+  public XtextServiceDispatcher.ServiceDescriptor createServiceDescriptor(final String requestType, final Map<String, String> parameters, final ISessionStore sessionStore) {
+    try {
+      XtextServiceDispatcher.ServiceDescriptor _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (Objects.equal(requestType, "load")) {
+          _matched=true;
+          _switchResult = this.getLoadResourceService(false, parameters, sessionStore);
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(requestType, "revert")) {
+          _matched=true;
+          _switchResult = this.getLoadResourceService(true, parameters, sessionStore);
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(requestType, "save")) {
+          _matched=true;
+          _switchResult = this.getSaveResourceService(parameters, sessionStore);
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(requestType, "update")) {
+          _matched=true;
+          _switchResult = this.getUpdateDocumentService(parameters, sessionStore);
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(requestType, "validation")) {
+          _matched=true;
+          _switchResult = this.getValidationService(parameters, sessionStore);
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(requestType, "content-assist")) {
+          _matched=true;
+          _switchResult = this.getContentAssistService(parameters, sessionStore);
+        }
+      }
+      if (!_matched) {
+        throw new InvalidRequestException(InvalidRequestException.Type.INVALID_PARAMETERS, (("The request type \'" + requestType) + "\' is not supported."));
+      }
+      return _switchResult;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   protected String getRequestType(final String contextPath, final Map<String, String> parameters) {

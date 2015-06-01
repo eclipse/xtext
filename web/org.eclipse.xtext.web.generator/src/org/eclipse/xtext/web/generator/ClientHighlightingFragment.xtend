@@ -127,8 +127,9 @@ class ClientHighlightingFragment extends Xtend2GeneratorFragment {
 		
 			return {
 				id: "xtext.«langId»",
-				grammars: grammars,
+				grammars: grammars«IF !filteredKeywords.empty»,
 				keywords: keywords
+				«ENDIF»
 			};
 		});
 		'''
