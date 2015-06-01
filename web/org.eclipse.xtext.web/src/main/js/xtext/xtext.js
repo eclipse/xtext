@@ -386,6 +386,7 @@ define([
 			}
 		};
 		editor.getEditorContext = editorContextProvider.getEditorContext;
+		editor.getEditorOptions = editorContextProvider.getOptions;
 		
 		var serverUrl = options.serverUrl;
 		if (!serverUrl) {
