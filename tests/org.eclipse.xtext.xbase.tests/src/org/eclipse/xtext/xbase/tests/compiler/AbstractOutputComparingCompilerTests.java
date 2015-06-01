@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.compiler;
 
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
@@ -20,7 +19,6 @@ import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
@@ -72,9 +70,8 @@ public abstract class AbstractOutputComparingCompilerTests extends AbstractXbase
 		XExpression model = expression(xbaseCode.toString(),true);
 		XbaseCompiler compiler = get(XbaseCompiler.class);
 		ITreeAppendable tracing = new FakeTreeAppendable();
-		JvmType voidType = typeReferences.findDeclaredType(Void.TYPE, model);
 		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, model);
-		ParameterizedTypeReference voidRef = owner.newParameterizedTypeReference(voidType);
+		LightweightTypeReference voidRef = owner.newReferenceTo(Void.TYPE);
 		compiler.compile(model, tracing, voidRef);
 		assertEquals(expectedJavaCode, tracing.getContent());
 	}

@@ -136,10 +136,7 @@ public class WildcardTypeReference extends LightweightTypeReference {
 	@Override
 	public LightweightTypeReference getUpperBoundSubstitute() {
 		if (isUnbounded()) {
-			JvmType object = getOwner().getServices().getTypeReferences().findDeclaredType(Object.class, getOwner().getContextResourceSet());
-			if (object != null)
-				return getOwner().newParameterizedTypeReference(object);
-			return getOwner().newUnknownTypeReference(Object.class.getName());
+			return getOwner().newReferenceToObject();
 		}
 		List<LightweightTypeReference> upperBounds = getUpperBounds();
 		if (upperBounds.size() == 1) {

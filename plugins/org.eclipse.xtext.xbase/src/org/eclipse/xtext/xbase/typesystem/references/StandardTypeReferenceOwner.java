@@ -17,8 +17,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 /**
@@ -186,6 +185,59 @@ public class StandardTypeReferenceOwner implements ITypeReferenceOwner {
 	@Override
 	public AnyTypeReference newAnyTypeReference() {
 		return new AnyTypeReference(this);
+	}
+	
+	/**
+	 * Creates a references to {@link Object} or returns an {@link UnknownTypeReference} if no
+	 * JRE is available.
+	 */
+	@Override
+	public LightweightTypeReference newReferenceToObject() {
+		return newReferenceTo(Object.class);
+	}
+	
+	/**
+	 * Creates a wildcard reference to {@link Object} or returns a wildcard to an {@link UnknownTypeReference} if no
+	 * JRE is available.
+	 */
+	@Override
+	public WildcardTypeReference newWildcardExtendsObject() {
+		WildcardTypeReference result = newWildcardTypeReference();
+		result.addUpperBound(newReferenceToObject());
+		return result;
+	}
+	
+	/**
+	 * Creates a references to the given class or returns an {@link UnknownTypeReference} if no
+	 * JRE is available.
+	 */
+	@Override
+	public LightweightTypeReference newReferenceTo(Class<?> type) {
+		JvmType rawType = getServices().getTypeReferences().findDeclaredType(type, getContextResourceSet());
+		if (rawType == null) {
+			return newUnknownTypeReference(type.getName());
+		}
+		return toPlainTypeReference(rawType);
+	}
+	
+	/**
+	 * Creates a references to the given class or returns an {@link UnknownTypeReference} if no
+	 * JRE is available. If the type is available, the given acceptor is used to initialize it further.
+	 */
+	@Override
+	public LightweightTypeReference newReferenceTo(Class<?> type, TypeReferenceInitializer<? super ParameterizedTypeReference> init) {
+		if (init == null) {
+			throw new NullPointerException("initializer");
+		}
+		JvmType rawType = getServices().getTypeReferences().findDeclaredType(type, getContextResourceSet());
+		if (rawType == null) {
+			return newUnknownTypeReference(type.getName());
+		}
+		if (rawType.eClass() == TypesPackage.Literals.JVM_ARRAY_TYPE) {
+			throw new IllegalArgumentException("given type is an array type: " + type);
+		}
+		ParameterizedTypeReference result = newParameterizedTypeReference(rawType);
+		return init.enhance(result);
 	}
 
 }

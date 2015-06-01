@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceInitializer;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -28,36 +29,31 @@ public class TypeLiteralHelper {
 		this.state = state;
 	}
 
+	/**
+	 * @deprecated use {@link ITypeReferenceOwner#newReferenceTo(Class)} instead.
+	 */
+	@Deprecated
 	/* @Nullable */
 	protected LightweightTypeReference getRawTypeForName(Class<?> clazz, ITypeReferenceOwner owner) {
-		JvmType clazzType = owner.getServices().getTypeReferences().findDeclaredType(clazz, owner.getContextResourceSet());
-		if (clazzType == null) {
-			return null;
-		}
-		LightweightTypeReference result = owner.toPlainTypeReference(clazzType);
-		return result;
+		return owner.newReferenceTo(clazz);
 	}
 	
-	protected LightweightTypeReference getAsClassLiteral(JvmIdentifiableElement feature) {
+	protected LightweightTypeReference getAsClassLiteral(final JvmIdentifiableElement feature) {
 		if (feature instanceof JvmType) {
-			ITypeReferenceOwner owner = state.getReferenceOwner();
-			LightweightTypeReference result = getRawTypeForName(Class.class, owner);
-			if (result == null) {
-				return owner.newUnknownTypeReference(Class.class.getName());
-			}
-			LightweightTypeReference argumentType = owner.newParameterizedTypeReference((JvmType) feature);
-			if (argumentType.isPrimitiveVoid()) {
-				LightweightTypeReference voidType = getRawTypeForName(Void.class, owner);
-				if (voidType == null) {
-					argumentType = owner.newUnknownTypeReference(Void.class.getName());
-				} else {
-					argumentType = voidType;
+			final ITypeReferenceOwner owner = state.getReferenceOwner();
+			return owner.newReferenceTo(Class.class, new TypeReferenceInitializer<ParameterizedTypeReference>() {
+				@Override
+				public LightweightTypeReference enhance(ParameterizedTypeReference reference) {
+					LightweightTypeReference argumentType = owner.newParameterizedTypeReference((JvmType) feature);
+					if (argumentType.isPrimitiveVoid()) {
+						argumentType = owner.newReferenceTo(Void.class);
+					} else {
+						argumentType = argumentType.getWrapperTypeIfPrimitive();
+					}
+					reference.addTypeArgument(argumentType);
+					return reference;
 				}
-			} else {
-				argumentType = argumentType.getWrapperTypeIfPrimitive();
-			}
-			((ParameterizedTypeReference) result).addTypeArgument(argumentType);
-			return result;
+			});
 		}
 		throw new IllegalArgumentException(String.valueOf(feature));
 	}
