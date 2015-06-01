@@ -77,22 +77,7 @@ class XtextServiceDispatcher {
 		}
 		
 		try {
-			switch requestType {
-				case 'load':
-					getLoadResourceService(false, parameters, sessionStore)
-				case 'revert':
-					getLoadResourceService(true, parameters, sessionStore)
-				case 'save':
-					getSaveResourceService(parameters, sessionStore)
-				case 'update':
-					getUpdateDocumentService(parameters, sessionStore)
-				case 'validation':
-					getValidationService(parameters, sessionStore)
-				case 'content-assist':
-					getContentAssistService(parameters, sessionStore)
-				default:
-					throw new InvalidRequestException(INVALID_PARAMETERS, 'The request type \'' + requestType + '\' is not supported.')
-			} => [
+			createServiceDescriptor(requestType, parameters, sessionStore) => [
 				type = requestType
 			]
 		} catch (InvalidRequestException ire) {
@@ -106,6 +91,25 @@ class XtextServiceDispatcher {
 			}
 			// The caller is responsible for translating this exception into a proper error message
 			throw ire
+		}
+	}
+	
+	def ServiceDescriptor createServiceDescriptor(String requestType, Map<String, String> parameters, ISessionStore sessionStore) {
+		switch requestType {
+			case 'load':
+				getLoadResourceService(false, parameters, sessionStore)
+			case 'revert':
+				getLoadResourceService(true, parameters, sessionStore)
+			case 'save':
+				getSaveResourceService(parameters, sessionStore)
+			case 'update':
+				getUpdateDocumentService(parameters, sessionStore)
+			case 'validation':
+				getValidationService(parameters, sessionStore)
+			case 'content-assist':
+				getContentAssistService(parameters, sessionStore)
+			default:
+				throw new InvalidRequestException(INVALID_PARAMETERS, 'The request type \'' + requestType + '\' is not supported.')
 		}
 	}
 	
