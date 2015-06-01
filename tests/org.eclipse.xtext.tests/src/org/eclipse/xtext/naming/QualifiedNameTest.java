@@ -7,6 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.naming;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.Collections;
+
+import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl;
+import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl.EObjectInputStream;
+import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl.EObjectOutputStream;
 import org.eclipse.xtext.naming.IQualifiedNameConverter.DefaultImpl;
 import org.eclipse.xtext.scoping.impl.ImportNormalizer;
 import org.junit.Assert;
@@ -24,6 +32,25 @@ public class QualifiedNameTest extends Assert {
 		QualifiedName name = impl.toQualifiedName(".");
 		ImportNormalizer normalizer = new ImportNormalizer(QualifiedName.create("Test"), true, false);
 		assertNull(normalizer.resolve(name));
+	}
+	
+	@Test public void testDeserializeAsLowerCase() throws IOException {
+		QualifiedName upperCase = QualifiedName.create("A", "B");
+		QualifiedName lowerCase = upperCase.toLowerCase();
+		
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		EObjectOutputStream out = new BinaryResourceImpl.EObjectOutputStream(bos, Collections.emptyMap());
+		upperCase.writeToStream(out);
+		lowerCase.writeToStream(out);
+		out.flush();
+		
+		EObjectInputStream in = new BinaryResourceImpl.EObjectInputStream(new ByteArrayInputStream(bos.toByteArray()), Collections.emptyMap());
+		QualifiedName readUpperCase = QualifiedName.createFromStream(in);
+		QualifiedName readLowerCase = QualifiedName.createFromStream(in);
+		assertEquals(QualifiedName.class.getName(), readUpperCase.getClass().getName());
+		assertEquals(QualifiedName.class.getName() + "$QualifiedNameLowerCase", readLowerCase.getClass().getName());
+		assertEquals(upperCase, readUpperCase);
+		assertEquals(lowerCase, readLowerCase);
 	}
 
 	@Test public void testCreateNull() {
