@@ -263,6 +263,7 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 			package «projectInfo.basePackage».«WEB»
 			
 			import com.google.inject.Guice
+			import com.google.inject.util.Modules
 			import java.util.concurrent.ExecutorService
 			import java.util.concurrent.Executors
 			import javax.servlet.annotation.WebServlet
@@ -283,7 +284,7 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 						override createInjector() {
 							val runtimeModule = new «projectInfo.languageNameAbbreviation»RuntimeModule as Module
 							val webModule = new «projectInfo.languageNameAbbreviation»WebModule(executorService)
-							return Guice.createInjector(runtimeModule, webModule)
+							return Guice.createInjector(Modules.override(runtimeModule).with(webModule))
 						}
 					}.createInjectorAndDoEMFRegistration
 				}
