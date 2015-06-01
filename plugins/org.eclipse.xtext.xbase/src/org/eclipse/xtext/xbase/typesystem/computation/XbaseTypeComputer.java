@@ -236,7 +236,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 	}
 	
 	protected void _computeTypes(XIfExpression object, ITypeComputationState state) {
-		ITypeComputationState conditionExpectation = state.withExpectation(getTypeForName(Boolean.TYPE, state));
+		ITypeComputationState conditionExpectation = state.withExpectation(getRawTypeForName(Boolean.TYPE, state));
 		XExpression condition = object.getIf();
 		conditionExpectation.computeTypes(condition);
 		
@@ -576,7 +576,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 	 * @param object used for dispatching
 	 */
 	protected void _computeTypes(XBooleanLiteral object, ITypeComputationState state) {
-		LightweightTypeReference bool = getTypeForName(Boolean.TYPE, state);
+		LightweightTypeReference bool = getRawTypeForName(Boolean.TYPE, state);
 		state.acceptActualType(bool);
 	}
 
@@ -598,7 +598,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 	 */
 	protected void _computeTypes(XStringLiteral object, ITypeComputationState state) {
 		if (object.getValue() != null && object.getValue().length() != 1) {
-			LightweightTypeReference result = getTypeForName(String.class, state);
+			LightweightTypeReference result = getRawTypeForName(String.class, state);
 			state.acceptActualType(result);
 		} else {
 			for(ITypeExpectation expectation: state.getExpectations()) {
@@ -607,11 +607,11 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 					if (expectedType.isType(Character.TYPE) || expectedType.isType(Character.class)) {
 						expectation.acceptActualType(expectedType, ConformanceFlags.CHECKED_SUCCESS | ConformanceFlags.DEMAND_CONVERSION | ConformanceFlags.SEALED);
 					} else {
-						LightweightTypeReference type = getTypeForName(String.class, state);
+						LightweightTypeReference type = getRawTypeForName(String.class, state);
 						expectation.acceptActualType(type, ConformanceFlags.UNCHECKED);
 					}
 				} else {
-					LightweightTypeReference type = getTypeForName(String.class, state);
+					LightweightTypeReference type = getRawTypeForName(String.class, state);
 					expectation.acceptActualType(type, ConformanceFlags.UNCHECKED);
 				}
 			}
@@ -675,7 +675,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 		state.withinScope(object);
 		XExpression expression = object.getExpression();
 		if (expression != null) {
-			LightweightTypeReference booleanType = getTypeForName(Boolean.TYPE, state);
+			LightweightTypeReference booleanType = getRawTypeForName(Boolean.TYPE, state);
 			ITypeComputationState conditionExpectation = state.withExpectation(booleanType);
 			conditionExpectation.computeTypes(expression);
 		}
@@ -793,7 +793,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 			compoundResult.addComponent(iterableOrArray);
 			addAsArrayComponentAndIterable = parameterType.getWrapperTypeIfPrimitive();
 		} else if (parameterType.isAny()) {
-			addAsArrayComponentAndIterable = getRawTypeForName(Object.class, parameterType.getOwner());
+			addAsArrayComponentAndIterable = parameterType.getOwner().newReferenceToObject();
 		} else {
 			addAsArrayComponentAndIterable = parameterType;
 		}
@@ -840,7 +840,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 	}
 
 	protected ITypeComputationResult computeWhileLoopBody(XAbstractWhileExpression object, ITypeComputationState state, boolean autocast) {
-		ITypeComputationState conditionExpectation = state.withExpectation(getTypeForName(Boolean.TYPE, state));
+		ITypeComputationState conditionExpectation = state.withExpectation(getRawTypeForName(Boolean.TYPE, state));
 		XExpression predicate = object.getPredicate();
 		conditionExpectation.computeTypes(predicate);
 		XExpression body = object.getBody();
@@ -875,17 +875,12 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 		}
 		if (object.getArrayDimensions().isEmpty()) {
 			if (clazz.isPrimitiveVoid()) {
-				JvmType voidType = findDeclaredType(Void.class, state.getReferenceOwner());
-				if (voidType == null) {
-					clazz = owner.newUnknownTypeReference(Void.class.getName());
-				} else {
-					clazz = owner.newParameterizedTypeReference(voidType);
-				}
+				clazz = state.getReferenceOwner().newReferenceTo(Void.class);
 			} else {
 				clazz = clazz.getWrapperTypeIfPrimitive();
 			}
 		}
-		LightweightTypeReference result = getRawTypeForName(Class.class, owner);
+		LightweightTypeReference result = owner.newReferenceTo(Class.class);
 		if (result instanceof ParameterizedTypeReference) {
 			ParameterizedTypeReference parameterizedTypeReference = (ParameterizedTypeReference) result;
 			parameterizedTypeReference.addTypeArgument(clazz);
@@ -908,7 +903,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 	}
 
 	protected void _computeTypes(XInstanceOfExpression object, ITypeComputationState state) {
-		ITypeComputationState expressionState = state.withExpectation(getRawTypeForName(Object.class, state.getReferenceOwner()));
+		ITypeComputationState expressionState = state.withExpectation(state.getReferenceOwner().newReferenceToObject());
 		expressionState.computeTypes(object.getExpression());
 		JvmTypeReference type = object.getType();
 		if (type != null && type.getType() instanceof JvmTypeParameter) {
@@ -924,12 +919,12 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 					new String[] { 
 					}));
 		}
-		LightweightTypeReference bool = getTypeForName(Boolean.TYPE, state);
+		LightweightTypeReference bool = getRawTypeForName(Boolean.TYPE, state);
 		state.acceptActualType(bool);
 	}
 
 	protected void _computeTypes(XThrowExpression object, ITypeComputationState state) {
-		LightweightTypeReference throwable = getTypeForName(Throwable.class, state);
+		LightweightTypeReference throwable = getRawTypeForName(Throwable.class, state);
 		ITypeComputationState expressionState = state.withExpectation(throwable);
 		ITypeComputationResult types = expressionState.computeTypes(object.getExpression());
 		LightweightTypeReference thrownException = types.getActualExpressionType();
@@ -997,7 +992,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 	}
 	
 	protected void _computeTypes(XSynchronizedExpression expr, ITypeComputationState state) {
-		ITypeComputationState paramState = state.withExpectation(getRawTypeForName(Object.class, state.getReferenceOwner()));
+		ITypeComputationState paramState = state.withExpectation(state.getReferenceOwner().newReferenceToObject());
 		ITypeComputationResult paramType = paramState.computeTypes(expr.getParam());
 		LightweightTypeReference actualParamType = paramType.getActualExpressionType();
 		if (actualParamType != null && (actualParamType.isPrimitive() || actualParamType.isAny())) {

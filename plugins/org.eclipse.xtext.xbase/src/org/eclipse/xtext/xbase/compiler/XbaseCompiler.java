@@ -142,13 +142,10 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				throw new IllegalStateException();
 			return result;
 		}
-		else if(type.isSubtypeOf(Collection.class) && type.hasTypeArguments()) 
+		else if(type.isSubtypeOf(Collection.class) && type.hasTypeArguments()) {
 			return type.getTypeArguments().get(0).getInvariantBoundSubstitute();
-		JvmType objectType = findKnownTopLevelType(Object.class, literal);
-		if (objectType == null) {
-			return type.getOwner().newUnknownTypeReference("Object");
 		}
-		return type.getOwner().newParameterizedTypeReference(objectType);
+		return type.getOwner().newReferenceToObject();
 	}
 
 	protected void _toJavaExpression(XListLiteral literal, ITreeAppendable b) {

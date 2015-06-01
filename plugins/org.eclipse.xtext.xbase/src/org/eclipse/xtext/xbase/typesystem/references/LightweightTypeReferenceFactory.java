@@ -87,7 +87,7 @@ public class LightweightTypeReferenceFactory extends AbstractXtypeReferenceVisit
 		if (type.eClass() == TypesPackage.Literals.JVM_ARRAY_TYPE) {
 			JvmComponentType componentType = ((JvmArrayType) type).getComponentType();
 			LightweightTypeReference componentTypeReference = toLightweightReference(componentType);
-			return getOwner().newArrayTypeReference(componentTypeReference);
+			return owner.newArrayTypeReference(componentTypeReference);
 		}
 		ParameterizedTypeReference result = owner.newParameterizedTypeReference(type);
 		if (type.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
@@ -164,7 +164,7 @@ public class LightweightTypeReferenceFactory extends AbstractXtypeReferenceVisit
 		}
 		JvmTypeReference equivalent = reference.getEquivalent();
 		if (equivalent == null)
-			return new UnknownTypeReference(owner);
+			return owner.newUnknownTypeReference();
 		return super.doVisitComputedTypeReference(reference);
 	}
 	
@@ -230,6 +230,7 @@ public class LightweightTypeReferenceFactory extends AbstractXtypeReferenceVisit
 		if (outer == null)
 			return doVisitParameterizedTypeReference(reference);
 		ParameterizedTypeReference lightweightOuter = (ParameterizedTypeReference) outer.accept(this);
+		// constructor call instead of owner.newParameterized to avoid second check for isInner(..)
 		InnerTypeReference result = new InnerTypeReference(owner, lightweightOuter, type);
 		for(JvmTypeReference argument: reference.getArguments()) {
 			result.addTypeArgument(visit(argument).getWrapperTypeIfPrimitive());
@@ -284,6 +285,8 @@ public class LightweightTypeReferenceFactory extends AbstractXtypeReferenceVisit
 			return super.doVisitFunctionTypeReference(reference);
 		}
 		FunctionTypeReference result;
+		// constructors used below to avoid subsequent checks for isInner which was supposed to be done by 
+		// the computation of the equivalent
 		if (equivalent.eClass() == TypesPackage.Literals.JVM_INNER_TYPE_REFERENCE) {
 			JvmParameterizedTypeReference outer = ((JvmInnerTypeReference) equivalent).getOuter();
 			LightweightTypeReference outerEquivalent = outer.accept(this);
@@ -308,26 +311,23 @@ public class LightweightTypeReferenceFactory extends AbstractXtypeReferenceVisit
 	@Override
 	public LightweightTypeReference doVisitUnknownTypeReference(JvmUnknownTypeReference reference) {
 		if (reference.eIsSet(TypesPackage.Literals.JVM_UNKNOWN_TYPE_REFERENCE__QUALIFIED_NAME))
-			return getOwner().newUnknownTypeReference(reference.getQualifiedName());
-		return getOwner().newUnknownTypeReference();
+			return owner.newUnknownTypeReference(reference.getQualifiedName());
+		return owner.newUnknownTypeReference();
 	}
 	
 	@Override
 	protected LightweightTypeReference handleNullReference() {
-		return new UnknownTypeReference(getOwner());
+		return owner.newUnknownTypeReference();
 	}
 
+	/* @NotNull */
 	protected LightweightTypeReference getObjectReference() {
-		JvmType objectType = getObjectType();
-		if (objectType == null) {
-			return owner.newUnknownTypeReference(Object.class.getName());
-		}
-		ParameterizedTypeReference result = owner.newParameterizedTypeReference(objectType);
-		return result;
+		return owner.newReferenceToObject();
 	}
 
+	/* @Nullable */
 	protected JvmType getObjectType() {
-		return owner.getServices().getTypeReferences().findDeclaredType(Object.class, getOwner().getContextResourceSet());
+		return owner.getServices().getTypeReferences().findDeclaredType(Object.class, owner.getContextResourceSet());
 	}
 	
 	@Override
