@@ -8,6 +8,7 @@
 package org.eclipse.xtext.web.server.test
 
 import com.google.inject.Guice
+import com.google.inject.util.Modules
 import java.io.File
 import java.io.FileWriter
 import java.util.HashMap
@@ -51,7 +52,7 @@ class AbstractWebServerTest extends AbstractXtextTests {
 			override createInjector() {
 				val webModule = new StatemachineWebModule(executorService)
 				webModule.resourceBaseProvider = resourceBaseProvider
-				return Guice.createInjector(runtimeModule, webModule)
+				return Guice.createInjector(Modules.override(runtimeModule).with(webModule))
 			}
 		})
 		dispatcher = injector.getInstance(XtextServiceDispatcher)

@@ -18,9 +18,9 @@ import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.resource.IEObjectDescription
 import org.eclipse.xtext.scoping.IScope
 
-class CrossrefProposalCreator {
+class CrossrefProposalProvider {
 	
-	static val LOG = Logger.getLogger(CrossrefProposalCreator)
+	static val LOG = Logger.getLogger(CrossrefProposalProvider)
 	
 	@Accessors(PROTECTED_GETTER)
 	@Inject IQualifiedNameConverter qualifiedNameConverter
@@ -68,7 +68,7 @@ class CrossrefProposalCreator {
 	protected def ContentAssistResult.Entry createProposal(IEObjectDescription candidate, CrossReference crossRef, ContentAssistContext context) {
 		return new ContentAssistResult.Entry(context.prefix) => [
 			proposal = qualifiedNameConverter.toString(candidate.name)
-			description = candidate.getEClass.name
+			description = candidate.getEClass?.name
 		]
 	}
 	

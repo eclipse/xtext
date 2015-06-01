@@ -22,6 +22,7 @@ import org.eclipse.xtext.TerminalRule
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.scoping.IScopeProvider
+import org.eclipse.xtext.util.TextRegion
 import org.eclipse.xtext.xtext.CurrentTypeFinder
 
 class WebContentProposalProvider {
@@ -33,7 +34,7 @@ class WebContentProposalProvider {
 	@Inject IQualifiedNameConverter qualifiedNameConverter
 	
 	@Accessors(PROTECTED_GETTER)
-	@Inject CrossrefProposalCreator crossrefProposalCreator
+	@Inject CrossrefProposalProvider crossrefProposalProvider
 	
 	@Accessors(PROTECTED_GETTER)
 	@Inject WebContentProposalPriorities proposalPriorities
@@ -84,7 +85,8 @@ class WebContentProposalProvider {
 	}
 	
 	protected def filterKeyword(Keyword keyword, ContentAssistContext context) {
-		keyword.value.startsWith(context.prefix) && keyword.value.length > context.prefix.length
+		keyword.value.regionMatches(true, 0, context.prefix, 0, context.prefix.length)
+			&& keyword.value.length > context.prefix.length
 	}
 	
 	protected def dispatch void createProposals(RuleCall ruleCall, ContentAssistContext context,
@@ -99,7 +101,7 @@ class WebContentProposalProvider {
 					} else {
 						proposal = '"' + ruleCall.rule.name + '"'
 					}
-					editPositions += new ContentAssistResult.EditPosition(context.offset + 1, proposal.length - 2)
+					editPositions += new TextRegion(context.offset + 1, proposal.length - 2)
 				} else {
 					val container = ruleCall.eContainer
 					if (container instanceof Assignment) {
@@ -108,7 +110,7 @@ class WebContentProposalProvider {
 					} else {
 						proposal = ruleCall.rule.name
 					}
-					editPositions += new ContentAssistResult.EditPosition(context.offset, proposal.length)
+					editPositions += new TextRegion(context.offset, proposal.length)
 				}
 			]
 			acceptor.accept(entry, proposalPriorities.getDefaultPriority(entry))
@@ -122,7 +124,7 @@ class WebContentProposalProvider {
 			val ereference = GrammarUtil.getReference(reference, type)
 			if (ereference !== null) {
 				val scope = scopeProvider.getScope(context.currentModel, ereference)
-				crossrefProposalCreator.lookupCrossReference(scope, reference, context, acceptor, Predicates.alwaysTrue)
+				crossrefProposalProvider.lookupCrossReference(scope, reference, context, acceptor, Predicates.alwaysTrue)
 			}
 		}
 	}

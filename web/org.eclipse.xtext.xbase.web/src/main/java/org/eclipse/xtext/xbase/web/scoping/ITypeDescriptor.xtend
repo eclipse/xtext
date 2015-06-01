@@ -5,11 +5,18 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.web.contentassist
+package org.eclipse.xtext.xbase.web.scoping
 
-interface ITypeFilter {
+import org.eclipse.xtext.naming.QualifiedName
+
+interface ITypeDescriptor {
 	
-	// TODO what would be a suitable signature for the web context?
-	def boolean accept(int modifiers, String packageName, String simpleTypeName, String[] enclosingTypeNames, String path)
+	def String getName()
+	
+	def String getSimpleName()
+	
+	def QualifiedName getQualifiedName()
+	
+	def int getAccessFlags()
 	
 }
