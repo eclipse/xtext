@@ -93,10 +93,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      escapePosition = 0
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList (
-			        EditPosition [
-			          offset = 6
-			          length = 4
-			        ]
+			        [6:4]
 			      )
 			    ]
 			  )

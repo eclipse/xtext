@@ -17,6 +17,7 @@ import org.eclipse.xtext.web.server.contentassist.WebContentProposalPriorities;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.scoping.batch.SimpleIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.scoping.batch.StaticFeatureDescriptionWithTypeLiteralReceiver;
+import org.eclipse.xtext.xbase.web.scoping.ITypeDescriptor;
 
 @SuppressWarnings("all")
 public class XbaseWebContentProposalPriorities extends WebContentProposalPriorities {
@@ -75,5 +76,10 @@ public class XbaseWebContentProposalPriorities extends WebContentProposalPriorit
       }
     }
     return super.getCrossRefPriority(objectDesc, entry);
+  }
+  
+  public int getTypeRefPriority(final ITypeDescriptor typeDesc, final ContentAssistResult.Entry entry) {
+    int _crossRefPriority = this.getCrossRefPriority();
+    return this.adjustPriority(entry, _crossRefPriority);
   }
 }

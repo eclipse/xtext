@@ -211,16 +211,7 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("editPositions = ArrayList (");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("EditPosition [");
-    _builder.newLine();
-    _builder.append("          ");
-    _builder.append("offset = 6");
-    _builder.newLine();
-    _builder.append("          ");
-    _builder.append("length = 4");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("]");
+    _builder.append("[6:4]");
     _builder.newLine();
     _builder.append("      ");
     _builder.append(")");

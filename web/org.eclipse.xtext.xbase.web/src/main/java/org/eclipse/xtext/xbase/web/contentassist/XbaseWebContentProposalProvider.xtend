@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.web.contentassist
 
 import com.google.common.base.Predicate
+import com.google.common.base.Predicates
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EReference
@@ -18,7 +19,6 @@ import org.eclipse.xtext.Group
 import org.eclipse.xtext.Keyword
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.common.types.TypesPackage
-import org.eclipse.xtext.conversion.IValueConverter
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.resource.IEObjectDescription
@@ -35,7 +35,6 @@ import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.xbase.XbasePackage
-import org.eclipse.xtext.xbase.conversion.XbaseQualifiedNameValueConverter
 import org.eclipse.xtext.xbase.scoping.SyntaxFilteredScopes
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping
@@ -43,9 +42,8 @@ import org.eclipse.xtext.xbase.services.XbaseGrammarAccess
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
+import org.eclipse.xtext.xbase.web.scoping.ITypeDescriptor
 import org.eclipse.xtext.xtype.XtypePackage
-
-import static extension org.eclipse.xtext.xbase.web.contentassist.TypeFilters.*
 
 class XbaseWebContentProposalProvider extends WebContentProposalProvider {
 
@@ -67,13 +65,11 @@ class XbaseWebContentProposalProvider extends WebContentProposalProvider {
 	
 	@Inject extension XbaseGrammarAccess
 
-	@Inject ITypesProposalProvider typeProposalProvider
-	
 	@Inject ValidFeatureDescription featureDescriptionPredicate
 	
-	@Inject XbaseQualifiedNameValueConverter qualifiedNameValueConverter
-	
 	@Inject IBatchTypeResolver typeResolver
+	
+	@Inject IWebTypesProposalProvider typesProposalProvider
 	
 	@Inject SyntaxFilteredScopes syntaxFilteredScopes
 	
@@ -132,21 +128,21 @@ class XbaseWebContentProposalProvider extends WebContentProposalProvider {
 			
 			case jvmParameterizedTypeReferenceAccess.typeAssignment_0,
 			case jvmParameterizedTypeReferenceAccess.typeAssignment_1_4_1:
-				completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, acceptor)
+				completeJavaTypes(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, context, acceptor)
 			
 			case XRelationalExpressionAccess.typeAssignment_1_0_1:
-				completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, acceptor)
+				completeJavaTypes(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, context, acceptor)
 				
 			case XImportDeclarationAccess.importedTypeAssignment_1_0_2,
 			case XImportDeclarationAccess.importedTypeAssignment_1_1:
-				completeJavaTypes(context, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, acceptor)
+				completeJavaTypes(XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, context, acceptor)
 			
 			case XTypeLiteralAccess.typeAssignment_3:
-				completeJavaTypes(context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, acceptor)
+				completeJavaTypes(XbasePackage.Literals.XTYPE_LITERAL__TYPE, context, acceptor)
 			
 			case XConstructorCallAccess.constructorAssignment_2:
-				completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE,
-					qualifiedNameValueConverter, !(INTERNAL || ABSTRACT || INTERFACE), acceptor)
+				completeJavaTypes(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, context,
+					TypeFilters.NON_ABSTRACT, acceptor)
 			
 			case XForLoopExpressionAccess.eachExpressionAssignment_3,
 			case XSwitchExpressionAccess.defaultAssignment_5_2,
@@ -190,14 +186,13 @@ class XbaseWebContentProposalProvider extends WebContentProposalProvider {
 		}
 	}
 	
-	protected def void completeJavaTypes(ContentAssistContext context, EReference reference,
-			IWebContentProposaAcceptor acceptor) {
-		completeJavaTypes(context, reference, qualifiedNameValueConverter, !INTERNAL, acceptor)
+	protected def void completeJavaTypes(EReference reference, ContentAssistContext context, IWebContentProposaAcceptor acceptor) {
+		completeJavaTypes(reference, context, Predicates.alwaysTrue, acceptor)
 	}
 
-	protected def void completeJavaTypes(ContentAssistContext context, EReference reference,
-			IValueConverter<String> valueConverter, ITypeFilter filter, IWebContentProposaAcceptor acceptor) {
-		typeProposalProvider.createTypeProposals(context, reference, valueConverter, filter, acceptor)
+	protected def void completeJavaTypes(EReference reference, ContentAssistContext context,
+			Predicate<ITypeDescriptor> filter, IWebContentProposaAcceptor acceptor) {
+		typesProposalProvider.createTypeProposals(reference, context, filter, acceptor)
 	}
 
 	protected def completeXFeatureCall(EObject model, ContentAssistContext context, IWebContentProposaAcceptor acceptor) {
@@ -353,7 +348,7 @@ class XbaseWebContentProposalProvider extends WebContentProposalProvider {
 				typeResolver.resolveTypes(context.resource)
 		val expressionScope = resolvedTypes.getExpressionScope(model, anchor)
 		val scope = expressionScope.featureScope
-		crossrefProposalCreator.lookupCrossReference(scope, XFeatureCallAccess.featureJvmIdentifiableElementCrossReference_2_0,
+		crossrefProposalProvider.lookupCrossReference(scope, XFeatureCallAccess.featureJvmIdentifiableElementCrossReference_2_0,
 			context, acceptor, featureDescriptionPredicate)
 	}
 
@@ -377,7 +372,7 @@ class XbaseWebContentProposalProvider extends WebContentProposalProvider {
 		} else {
 			scope = syntaxFilteredScopes.create(expressionScope.featureScope, crossReference)
 		}
-		crossrefProposalCreator.lookupCrossReference(scope, crossReference, context, acceptor, featureDescriptionPredicate)
+		crossrefProposalProvider.lookupCrossReference(scope, crossReference, context, acceptor, featureDescriptionPredicate)
 	}
 
 	protected def dispatch String getConcreteSyntaxRuleName(Assignment assignment) {

@@ -33,8 +33,9 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
-import org.eclipse.xtext.web.server.contentassist.CrossrefProposalCreator;
+import org.eclipse.xtext.web.server.contentassist.CrossrefProposalProvider;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -47,7 +48,7 @@ import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 @SuppressWarnings("all")
-public class XbaseCrossrefProposalCreator extends CrossrefProposalCreator {
+public class XbaseCrossrefProposalProvider extends CrossrefProposalProvider {
   public static class ProposalBracketInfo {
     private String brackets = "";
     
@@ -65,7 +66,7 @@ public class XbaseCrossrefProposalCreator extends CrossrefProposalCreator {
   public ContentAssistResult.Entry createProposal(final IEObjectDescription candidate, final CrossReference crossRef, final ContentAssistContext context) {
     boolean _hasIdRule = this.hasIdRule(crossRef);
     if (_hasIdRule) {
-      final XbaseCrossrefProposalCreator.ProposalBracketInfo bracketInfo = this.getProposalBracketInfo(candidate, context);
+      final XbaseCrossrefProposalProvider.ProposalBracketInfo bracketInfo = this.getProposalBracketInfo(candidate, context);
       IQualifiedNameConverter _qualifiedNameConverter = this.getQualifiedNameConverter();
       QualifiedName _name = candidate.getName();
       String _string = _qualifiedNameConverter.toString(_name);
@@ -123,9 +124,9 @@ public class XbaseCrossrefProposalCreator extends CrossrefProposalCreator {
       if ((bracketInfo.selectionOffset != 0)) {
         int _offset_1 = offset;
         offset = (_offset_1 + bracketInfo.selectionOffset);
-        ArrayList<ContentAssistResult.EditPosition> _editPositions = result.getEditPositions();
-        ContentAssistResult.EditPosition _editPosition = new ContentAssistResult.EditPosition(offset, bracketInfo.selectionLength);
-        _editPositions.add(_editPosition);
+        ArrayList<TextRegion> _editPositions = result.getEditPositions();
+        TextRegion _textRegion = new TextRegion(offset, bracketInfo.selectionLength);
+        _editPositions.add(_textRegion);
       }
       if ((objectOrProxy instanceof JvmExecutable)) {
         final StringBuilder parameterList = new StringBuilder();
@@ -162,8 +163,8 @@ public class XbaseCrossrefProposalCreator extends CrossrefProposalCreator {
     return false;
   }
   
-  protected XbaseCrossrefProposalCreator.ProposalBracketInfo getProposalBracketInfo(final IEObjectDescription proposedDescription, final ContentAssistContext contentAssistContext) {
-    final XbaseCrossrefProposalCreator.ProposalBracketInfo info = new XbaseCrossrefProposalCreator.ProposalBracketInfo();
+  protected XbaseCrossrefProposalProvider.ProposalBracketInfo getProposalBracketInfo(final IEObjectDescription proposedDescription, final ContentAssistContext contentAssistContext) {
+    final XbaseCrossrefProposalProvider.ProposalBracketInfo info = new XbaseCrossrefProposalProvider.ProposalBracketInfo();
     if ((proposedDescription instanceof IIdentifiableElementDescription)) {
       final JvmIdentifiableElement jvmFeature = ((IIdentifiableElementDescription)proposedDescription).getElementOrProxy();
       if ((jvmFeature instanceof JvmExecutable)) {

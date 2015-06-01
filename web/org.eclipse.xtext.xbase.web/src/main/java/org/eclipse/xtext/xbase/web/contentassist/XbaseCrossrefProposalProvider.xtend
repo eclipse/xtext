@@ -21,14 +21,15 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.resource.IEObjectDescription
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.util.TextRegion
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult
-import org.eclipse.xtext.web.server.contentassist.CrossrefProposalCreator
+import org.eclipse.xtext.web.server.contentassist.CrossrefProposalProvider
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceFactory
 import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 
-class XbaseCrossrefProposalCreator extends CrossrefProposalCreator {
+class XbaseCrossrefProposalProvider extends CrossrefProposalProvider {
 	
 	@Inject CommonTypeComputationServices typeComputationServices
 	
@@ -66,7 +67,7 @@ class XbaseCrossrefProposalCreator extends CrossrefProposalCreator {
 			result.escapePosition = offset + bracketInfo.caretOffset
 			if (bracketInfo.selectionOffset != 0) {
 				offset += bracketInfo.selectionOffset
-				result.editPositions += new ContentAssistResult.EditPosition(offset, bracketInfo.selectionLength)
+				result.editPositions += new TextRegion(offset, bracketInfo.selectionLength)
 			}
 			if (objectOrProxy instanceof JvmExecutable) {
 				val parameterList = new StringBuilder

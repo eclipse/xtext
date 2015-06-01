@@ -34,8 +34,9 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
-import org.eclipse.xtext.web.server.contentassist.CrossrefProposalCreator;
+import org.eclipse.xtext.web.server.contentassist.CrossrefProposalProvider;
 import org.eclipse.xtext.web.server.contentassist.IWebContentProposaAcceptor;
 import org.eclipse.xtext.web.server.contentassist.WebContentProposalPriorities;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -56,7 +57,7 @@ public class WebContentProposalProvider {
   
   @Accessors(AccessorType.PROTECTED_GETTER)
   @Inject
-  private CrossrefProposalCreator crossrefProposalCreator;
+  private CrossrefProposalProvider crossrefProposalProvider;
   
   @Accessors(AccessorType.PROTECTED_GETTER)
   @Inject
@@ -175,15 +176,17 @@ public class WebContentProposalProvider {
     boolean _and = false;
     String _value = keyword.getValue();
     String _prefix = context.getPrefix();
-    boolean _startsWith = _value.startsWith(_prefix);
-    if (!_startsWith) {
+    String _prefix_1 = context.getPrefix();
+    int _length = _prefix_1.length();
+    boolean _regionMatches = _value.regionMatches(true, 0, _prefix, 0, _length);
+    if (!_regionMatches) {
       _and = false;
     } else {
       String _value_1 = keyword.getValue();
-      int _length = _value_1.length();
-      String _prefix_1 = context.getPrefix();
-      int _length_1 = _prefix_1.length();
-      boolean _greaterThan = (_length > _length_1);
+      int _length_1 = _value_1.length();
+      String _prefix_2 = context.getPrefix();
+      int _length_2 = _prefix_2.length();
+      boolean _greaterThan = (_length_1 > _length_2);
       _and = _greaterThan;
     }
     return _and;
@@ -225,14 +228,14 @@ public class WebContentProposalProvider {
               String _plus_3 = (_plus_2 + "\"");
               it.setProposal(_plus_3);
             }
-            ArrayList<ContentAssistResult.EditPosition> _editPositions = it.getEditPositions();
+            ArrayList<TextRegion> _editPositions = it.getEditPositions();
             int _offset = context.getOffset();
             int _plus_4 = (_offset + 1);
             String _proposal = it.getProposal();
             int _length = _proposal.length();
             int _minus = (_length - 2);
-            ContentAssistResult.EditPosition _editPosition = new ContentAssistResult.EditPosition(_plus_4, _minus);
-            _editPositions.add(_editPosition);
+            TextRegion _textRegion = new TextRegion(_plus_4, _minus);
+            _editPositions.add(_textRegion);
           } else {
             final EObject container_1 = ruleCall.eContainer();
             if ((container_1 instanceof Assignment)) {
@@ -246,12 +249,12 @@ public class WebContentProposalProvider {
               String _name_4 = _rule_4.getName();
               it.setProposal(_name_4);
             }
-            ArrayList<ContentAssistResult.EditPosition> _editPositions_1 = it.getEditPositions();
+            ArrayList<TextRegion> _editPositions_1 = it.getEditPositions();
             int _offset_1 = context.getOffset();
             String _proposal_1 = it.getProposal();
             int _length_1 = _proposal_1.length();
-            ContentAssistResult.EditPosition _editPosition_1 = new ContentAssistResult.EditPosition(_offset_1, _length_1);
-            _editPositions_1.add(_editPosition_1);
+            TextRegion _textRegion_1 = new TextRegion(_offset_1, _length_1);
+            _editPositions_1.add(_textRegion_1);
           }
         }
       };
@@ -269,7 +272,7 @@ public class WebContentProposalProvider {
         EObject _currentModel = context.getCurrentModel();
         final IScope scope = this.scopeProvider.getScope(_currentModel, ereference);
         Predicate<IEObjectDescription> _alwaysTrue = Predicates.<IEObjectDescription>alwaysTrue();
-        this.crossrefProposalCreator.lookupCrossReference(scope, reference, context, acceptor, _alwaysTrue);
+        this.crossrefProposalProvider.lookupCrossReference(scope, reference, context, acceptor, _alwaysTrue);
       }
     }
   }
@@ -307,8 +310,8 @@ public class WebContentProposalProvider {
   }
   
   @Pure
-  protected CrossrefProposalCreator getCrossrefProposalCreator() {
-    return this.crossrefProposalCreator;
+  protected CrossrefProposalProvider getCrossrefProposalProvider() {
+    return this.crossrefProposalProvider;
   }
   
   @Pure

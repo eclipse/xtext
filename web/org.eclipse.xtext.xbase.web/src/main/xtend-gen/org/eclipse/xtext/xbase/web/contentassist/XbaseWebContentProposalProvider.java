@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.web.contentassist;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +26,6 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -34,7 +34,7 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.web.server.contentassist.CrossrefProposalCreator;
+import org.eclipse.xtext.web.server.contentassist.CrossrefProposalProvider;
 import org.eclipse.xtext.web.server.contentassist.IWebContentProposaAcceptor;
 import org.eclipse.xtext.web.server.contentassist.WebContentProposalProvider;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -47,7 +47,6 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.conversion.XbaseQualifiedNameValueConverter;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.scoping.SyntaxFilteredScopes;
@@ -59,9 +58,9 @@ import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.web.contentassist.ITypeFilter;
-import org.eclipse.xtext.xbase.web.contentassist.ITypesProposalProvider;
+import org.eclipse.xtext.xbase.web.contentassist.IWebTypesProposalProvider;
 import org.eclipse.xtext.xbase.web.contentassist.TypeFilters;
+import org.eclipse.xtext.xbase.web.scoping.ITypeDescriptor;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 @SuppressWarnings("all")
@@ -104,16 +103,13 @@ public class XbaseWebContentProposalProvider extends WebContentProposalProvider 
   private XbaseGrammarAccess _xbaseGrammarAccess;
   
   @Inject
-  private ITypesProposalProvider typeProposalProvider;
-  
-  @Inject
   private XbaseWebContentProposalProvider.ValidFeatureDescription featureDescriptionPredicate;
   
   @Inject
-  private XbaseQualifiedNameValueConverter qualifiedNameValueConverter;
+  private IBatchTypeResolver typeResolver;
   
   @Inject
-  private IBatchTypeResolver typeResolver;
+  private IWebTypesProposalProvider typesProposalProvider;
   
   @Inject
   private SyntaxFilteredScopes syntaxFilteredScopes;
@@ -278,7 +274,7 @@ public class XbaseWebContentProposalProvider extends WebContentProposalProvider 
         }
       }
       if (_matched) {
-        this.completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, acceptor);
+        this.completeJavaTypes(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, context, acceptor);
       }
     }
     if (!_matched) {
@@ -286,7 +282,7 @@ public class XbaseWebContentProposalProvider extends WebContentProposalProvider 
       Assignment _typeAssignment_1_0_1 = _xRelationalExpressionAccess.getTypeAssignment_1_0_1();
       if (Objects.equal(assignment, _typeAssignment_1_0_1)) {
         _matched=true;
-        this.completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, acceptor);
+        this.completeJavaTypes(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, context, acceptor);
       }
     }
     if (!_matched) {
@@ -303,7 +299,7 @@ public class XbaseWebContentProposalProvider extends WebContentProposalProvider 
         }
       }
       if (_matched) {
-        this.completeJavaTypes(context, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, acceptor);
+        this.completeJavaTypes(XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, context, acceptor);
       }
     }
     if (!_matched) {
@@ -311,7 +307,7 @@ public class XbaseWebContentProposalProvider extends WebContentProposalProvider 
       Assignment _typeAssignment_3 = _xTypeLiteralAccess.getTypeAssignment_3();
       if (Objects.equal(assignment, _typeAssignment_3)) {
         _matched=true;
-        this.completeJavaTypes(context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, acceptor);
+        this.completeJavaTypes(XbasePackage.Literals.XTYPE_LITERAL__TYPE, context, acceptor);
       }
     }
     if (!_matched) {
@@ -319,11 +315,8 @@ public class XbaseWebContentProposalProvider extends WebContentProposalProvider 
       Assignment _constructorAssignment_2 = _xConstructorCallAccess.getConstructorAssignment_2();
       if (Objects.equal(assignment, _constructorAssignment_2)) {
         _matched=true;
-        ITypeFilter _or = TypeFilters.operator_or(TypeFilters.INTERNAL, TypeFilters.ABSTRACT);
-        ITypeFilter _or_1 = TypeFilters.operator_or(_or, TypeFilters.INTERFACE);
-        ITypeFilter _not = TypeFilters.operator_not(_or_1);
-        this.completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, 
-          this.qualifiedNameValueConverter, _not, acceptor);
+        this.completeJavaTypes(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, context, 
+          TypeFilters.NON_ABSTRACT, acceptor);
       }
     }
     if (!_matched) {
@@ -512,13 +505,13 @@ public class XbaseWebContentProposalProvider extends WebContentProposalProvider 
     }
   }
   
-  protected void completeJavaTypes(final ContentAssistContext context, final EReference reference, final IWebContentProposaAcceptor acceptor) {
-    ITypeFilter _not = TypeFilters.operator_not(TypeFilters.INTERNAL);
-    this.completeJavaTypes(context, reference, this.qualifiedNameValueConverter, _not, acceptor);
+  protected void completeJavaTypes(final EReference reference, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
+    Predicate<ITypeDescriptor> _alwaysTrue = Predicates.<ITypeDescriptor>alwaysTrue();
+    this.completeJavaTypes(reference, context, _alwaysTrue, acceptor);
   }
   
-  protected void completeJavaTypes(final ContentAssistContext context, final EReference reference, final IValueConverter<String> valueConverter, final ITypeFilter filter, final IWebContentProposaAcceptor acceptor) {
-    this.typeProposalProvider.createTypeProposals(context, reference, valueConverter, filter, acceptor);
+  protected void completeJavaTypes(final EReference reference, final ContentAssistContext context, final Predicate<ITypeDescriptor> filter, final IWebContentProposaAcceptor acceptor) {
+    this.typesProposalProvider.createTypeProposals(reference, context, filter, acceptor);
   }
   
   protected void completeXFeatureCall(final EObject model, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
@@ -794,10 +787,10 @@ public class XbaseWebContentProposalProvider extends WebContentProposalProvider 
     final IResolvedTypes resolvedTypes = _xifexpression;
     final IExpressionScope expressionScope = resolvedTypes.getExpressionScope(model, anchor);
     final IScope scope = expressionScope.getFeatureScope();
-    CrossrefProposalCreator _crossrefProposalCreator = this.getCrossrefProposalCreator();
+    CrossrefProposalProvider _crossrefProposalProvider = this.getCrossrefProposalProvider();
     XbaseGrammarAccess.XFeatureCallElements _xFeatureCallAccess = this._xbaseGrammarAccess.getXFeatureCallAccess();
     CrossReference _featureJvmIdentifiableElementCrossReference_2_0 = _xFeatureCallAccess.getFeatureJvmIdentifiableElementCrossReference_2_0();
-    _crossrefProposalCreator.lookupCrossReference(scope, _featureJvmIdentifiableElementCrossReference_2_0, context, acceptor, this.featureDescriptionPredicate);
+    _crossrefProposalProvider.lookupCrossReference(scope, _featureJvmIdentifiableElementCrossReference_2_0, context, acceptor, this.featureDescriptionPredicate);
   }
   
   protected void createReceiverProposals(final XExpression receiver, final CrossReference crossReference, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
@@ -839,8 +832,8 @@ public class XbaseWebContentProposalProvider extends WebContentProposalProvider 
       IScope _create_2 = this.syntaxFilteredScopes.create(_featureScope_2, crossReference);
       scope = _create_2;
     }
-    CrossrefProposalCreator _crossrefProposalCreator = this.getCrossrefProposalCreator();
-    _crossrefProposalCreator.lookupCrossReference(scope, crossReference, context, acceptor, this.featureDescriptionPredicate);
+    CrossrefProposalProvider _crossrefProposalProvider = this.getCrossrefProposalProvider();
+    _crossrefProposalProvider.lookupCrossReference(scope, crossReference, context, acceptor, this.featureDescriptionPredicate);
   }
   
   protected String _getConcreteSyntaxRuleName(final Assignment assignment) {

@@ -7,14 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.web.contentassist
 
+import com.google.common.base.Predicate
 import org.eclipse.emf.ecore.EReference
-import org.eclipse.xtext.conversion.IValueConverter
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.web.server.contentassist.IWebContentProposaAcceptor
+import org.eclipse.xtext.xbase.web.scoping.ITypeDescriptor
 
-interface ITypesProposalProvider {
+interface IWebTypesProposalProvider {
 	
-	def void createTypeProposals(ContentAssistContext context, EReference typeReference, IValueConverter<String> valueConverter,
-		ITypeFilter filter, IWebContentProposaAcceptor acceptor)
+	def void createTypeProposals(EReference reference, ContentAssistContext context, Predicate<ITypeDescriptor> filter,
+		IWebContentProposaAcceptor acceptor)
 	 
 }

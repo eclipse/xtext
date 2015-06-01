@@ -8,14 +8,14 @@
 package org.eclipse.xtext.xbase.web;
 
 import org.eclipse.xtext.service.AbstractGenericModule;
-import org.eclipse.xtext.web.server.contentassist.CrossrefProposalCreator;
+import org.eclipse.xtext.web.server.contentassist.CrossrefProposalProvider;
 import org.eclipse.xtext.web.server.contentassist.WebContentProposalPriorities;
 import org.eclipse.xtext.web.server.contentassist.WebContentProposalProvider;
 import org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker;
 import org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider;
-import org.eclipse.xtext.xbase.web.contentassist.ITypesProposalProvider;
-import org.eclipse.xtext.xbase.web.contentassist.IndexBasedTypesProposalProvider;
-import org.eclipse.xtext.xbase.web.contentassist.XbaseCrossrefProposalCreator;
+import org.eclipse.xtext.xbase.web.contentassist.ClasspathBasedWebTypesProposalProvider;
+import org.eclipse.xtext.xbase.web.contentassist.IWebTypesProposalProvider;
+import org.eclipse.xtext.xbase.web.contentassist.XbaseCrossrefProposalProvider;
 import org.eclipse.xtext.xbase.web.contentassist.XbaseWebContentProposalPriorities;
 import org.eclipse.xtext.xbase.web.contentassist.XbaseWebContentProposalProvider;
 
@@ -29,15 +29,15 @@ public class DefaultXbaseWebModule extends AbstractGenericModule {
     return XbaseWebContentProposalProvider.class;
   }
   
-  public Class<? extends CrossrefProposalCreator> bindCrossrefProposalCreator() {
-    return XbaseCrossrefProposalCreator.class;
+  public Class<? extends CrossrefProposalProvider> bindCrossrefProposalProvider() {
+    return XbaseCrossrefProposalProvider.class;
+  }
+  
+  public Class<? extends IWebTypesProposalProvider> bindIWebTypesProposalProvider() {
+    return ClasspathBasedWebTypesProposalProvider.class;
   }
   
   public Class<? extends WebContentProposalPriorities> bindWebContentProposalPriorities() {
     return XbaseWebContentProposalPriorities.class;
-  }
-  
-  public Class<? extends ITypesProposalProvider> bindITypesProposalProvider() {
-    return IndexBasedTypesProposalProvider.class;
   }
 }

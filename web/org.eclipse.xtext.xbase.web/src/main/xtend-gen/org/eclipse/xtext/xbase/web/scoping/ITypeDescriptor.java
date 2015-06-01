@@ -5,9 +5,17 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.xbase.web.contentassist;
+package org.eclipse.xtext.xbase.web.scoping;
+
+import org.eclipse.xtext.naming.QualifiedName;
 
 @SuppressWarnings("all")
-public interface ITypeFilter {
-  public abstract boolean accept(final int modifiers, final String packageName, final String simpleTypeName, final String[] enclosingTypeNames, final String path);
+public interface ITypeDescriptor {
+  public abstract String getName();
+  
+  public abstract String getSimpleName();
+  
+  public abstract QualifiedName getQualifiedName();
+  
+  public abstract int getAccessFlags();
 }

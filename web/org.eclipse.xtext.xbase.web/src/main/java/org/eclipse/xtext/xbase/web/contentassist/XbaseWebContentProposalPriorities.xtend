@@ -15,6 +15,7 @@ import org.eclipse.xtext.web.server.contentassist.WebContentProposalPriorities
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription
 import org.eclipse.xtext.xbase.scoping.batch.SimpleIdentifiableElementDescription
 import org.eclipse.xtext.xbase.scoping.batch.StaticFeatureDescriptionWithTypeLiteralReceiver
+import org.eclipse.xtext.xbase.web.scoping.ITypeDescriptor
 
 class XbaseWebContentProposalPriorities extends WebContentProposalPriorities {
 	
@@ -38,6 +39,10 @@ class XbaseWebContentProposalPriorities extends WebContentProposalPriorities {
 			}
 		}
 		return super.getCrossRefPriority(objectDesc, entry)
+	}
+	
+	def getTypeRefPriority(ITypeDescriptor typeDesc, Entry entry) {
+		adjustPriority(entry, crossRefPriority)
 	}
 	
 }

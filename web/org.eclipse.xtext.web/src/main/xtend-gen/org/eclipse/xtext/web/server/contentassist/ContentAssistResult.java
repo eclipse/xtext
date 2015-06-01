@@ -9,10 +9,11 @@ package org.eclipse.xtext.web.server.contentassist;
 
 import java.util.ArrayList;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtend.lib.annotations.EqualsHashCode;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend.lib.annotations.ToString;
+import org.eclipse.xtext.util.ReplaceRegion;
+import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
@@ -41,9 +42,9 @@ public class ContentAssistResult implements IServiceResult {
     
     private int escapePosition;
     
-    private final ArrayList<ContentAssistResult.TextReplacement> textReplacements = new ArrayList<ContentAssistResult.TextReplacement>();
+    private final ArrayList<ReplaceRegion> textReplacements = new ArrayList<ReplaceRegion>();
     
-    private final ArrayList<ContentAssistResult.EditPosition> editPositions = new ArrayList<ContentAssistResult.EditPosition>();
+    private final ArrayList<TextRegion> editPositions = new ArrayList<TextRegion>();
     
     public Entry(final String prefix) {
       super();
@@ -101,12 +102,12 @@ public class ContentAssistResult implements IServiceResult {
     }
     
     @Pure
-    public ArrayList<ContentAssistResult.TextReplacement> getTextReplacements() {
+    public ArrayList<ReplaceRegion> getTextReplacements() {
       return this.textReplacements;
     }
     
     @Pure
-    public ArrayList<ContentAssistResult.EditPosition> getEditPositions() {
+    public ArrayList<TextRegion> getEditPositions() {
       return this.editPositions;
     }
     
@@ -190,139 +191,6 @@ public class ContentAssistResult implements IServiceResult {
       result = prime * result + ((this.textReplacements== null) ? 0 : this.textReplacements.hashCode());
       result = prime * result + ((this.editPositions== null) ? 0 : this.editPositions.hashCode());
       return result;
-    }
-  }
-  
-  @Data
-  public static class TextReplacement {
-    private final String text;
-    
-    private final int offset;
-    
-    private final int length;
-    
-    public TextReplacement(final String text, final int offset, final int length) {
-      super();
-      this.text = text;
-      this.offset = offset;
-      this.length = length;
-    }
-    
-    @Override
-    @Pure
-    public int hashCode() {
-      final int prime = 31;
-      int result = 1;
-      result = prime * result + ((this.text== null) ? 0 : this.text.hashCode());
-      result = prime * result + this.offset;
-      result = prime * result + this.length;
-      return result;
-    }
-    
-    @Override
-    @Pure
-    public boolean equals(final Object obj) {
-      if (this == obj)
-        return true;
-      if (obj == null)
-        return false;
-      if (getClass() != obj.getClass())
-        return false;
-      ContentAssistResult.TextReplacement other = (ContentAssistResult.TextReplacement) obj;
-      if (this.text == null) {
-        if (other.text != null)
-          return false;
-      } else if (!this.text.equals(other.text))
-        return false;
-      if (other.offset != this.offset)
-        return false;
-      if (other.length != this.length)
-        return false;
-      return true;
-    }
-    
-    @Override
-    @Pure
-    public String toString() {
-      ToStringBuilder b = new ToStringBuilder(this);
-      b.add("text", this.text);
-      b.add("offset", this.offset);
-      b.add("length", this.length);
-      return b.toString();
-    }
-    
-    @Pure
-    public String getText() {
-      return this.text;
-    }
-    
-    @Pure
-    public int getOffset() {
-      return this.offset;
-    }
-    
-    @Pure
-    public int getLength() {
-      return this.length;
-    }
-  }
-  
-  @Data
-  public static class EditPosition {
-    private final int offset;
-    
-    private final int length;
-    
-    public EditPosition(final int offset, final int length) {
-      super();
-      this.offset = offset;
-      this.length = length;
-    }
-    
-    @Override
-    @Pure
-    public int hashCode() {
-      final int prime = 31;
-      int result = 1;
-      result = prime * result + this.offset;
-      result = prime * result + this.length;
-      return result;
-    }
-    
-    @Override
-    @Pure
-    public boolean equals(final Object obj) {
-      if (this == obj)
-        return true;
-      if (obj == null)
-        return false;
-      if (getClass() != obj.getClass())
-        return false;
-      ContentAssistResult.EditPosition other = (ContentAssistResult.EditPosition) obj;
-      if (other.offset != this.offset)
-        return false;
-      if (other.length != this.length)
-        return false;
-      return true;
-    }
-    
-    @Override
-    @Pure
-    public String toString() {
-      ToStringBuilder b = new ToStringBuilder(this);
-      b.add("offset", this.offset);
-      b.add("length", this.length);
-      return b.toString();
-    }
-    
-    @Pure
-    public int getOffset() {
-      return this.offset;
-    }
-    
-    @Pure
-    public int getLength() {
-      return this.length;
     }
   }
   

@@ -652,6 +652,8 @@ public class WebProjectContributor extends DefaultProjectFactoryContributor {
       _builder_1.newLine();
       _builder_1.append("import com.google.inject.Guice");
       _builder_1.newLine();
+      _builder_1.append("import com.google.inject.util.Modules");
+      _builder_1.newLine();
       _builder_1.append("import java.util.concurrent.ExecutorService");
       _builder_1.newLine();
       _builder_1.append("import java.util.concurrent.Executors");
@@ -722,7 +724,7 @@ public class WebProjectContributor extends DefaultProjectFactoryContributor {
       _builder_1.append("WebModule(executorService)");
       _builder_1.newLineIfNotEmpty();
       _builder_1.append("\t\t\t\t");
-      _builder_1.append("return Guice.createInjector(runtimeModule, webModule)");
+      _builder_1.append("return Guice.createInjector(Modules.override(runtimeModule).with(webModule))");
       _builder_1.newLine();
       _builder_1.append("\t\t\t");
       _builder_1.append("}");

@@ -31,8 +31,8 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
-public class CrossrefProposalCreator {
-  private final static Logger LOG = Logger.getLogger(CrossrefProposalCreator.class);
+public class CrossrefProposalProvider {
+  private final static Logger LOG = Logger.getLogger(CrossrefProposalProvider.class);
   
   @Accessors(AccessorType.PROTECTED_GETTER)
   @Inject
@@ -55,7 +55,7 @@ public class CrossrefProposalCreator {
     } catch (final Throwable _t) {
       if (_t instanceof UnsupportedOperationException) {
         final UnsupportedOperationException uoe = (UnsupportedOperationException)_t;
-        CrossrefProposalCreator.LOG.error("Failed to create content assist proposals for cross-reference.", uoe);
+        CrossrefProposalProvider.LOG.error("Failed to create content assist proposals for cross-reference.", uoe);
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -76,7 +76,7 @@ public class CrossrefProposalCreator {
       final Function1<IEObjectDescription, Boolean> _function = new Function1<IEObjectDescription, Boolean>() {
         @Override
         public Boolean apply(final IEObjectDescription it) {
-          return Boolean.valueOf(CrossrefProposalCreator.this.matchesPrefix(it, prefix));
+          return Boolean.valueOf(CrossrefProposalProvider.this.matchesPrefix(it, prefix));
         }
       };
       _xblockexpression = IterableExtensions.<IEObjectDescription>filter(_allElements, _function);
@@ -133,10 +133,13 @@ public class CrossrefProposalCreator {
       @Override
       public void apply(final ContentAssistResult.Entry it) {
         QualifiedName _name = candidate.getName();
-        String _string = CrossrefProposalCreator.this.qualifiedNameConverter.toString(_name);
+        String _string = CrossrefProposalProvider.this.qualifiedNameConverter.toString(_name);
         it.setProposal(_string);
         EClass _eClass = candidate.getEClass();
-        String _name_1 = _eClass.getName();
+        String _name_1 = null;
+        if (_eClass!=null) {
+          _name_1=_eClass.getName();
+        }
         it.setDescription(_name_1);
       }
     };

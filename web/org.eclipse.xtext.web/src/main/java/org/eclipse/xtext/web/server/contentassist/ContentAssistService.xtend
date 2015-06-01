@@ -78,8 +78,16 @@ class ContentAssistService {
 				val prioResult = p2.key.compareTo(p1.key)
 				if (prioResult != 0)
 					return prioResult
+				val v1 = p1.value
+				val v2 = p2.value
+				if (v1.name !== null && v2.name !== null)
+					return v1.name.compareTo(v2.name)
+				else if (v1.name !== null)
+					return v1.name.compareTo(v2.proposal)
+				else if (v2.name !== null)
+					return v1.proposal.compareTo(v2.name)
 				else
-					return p1.value.proposal.compareTo(p2.value.proposal)
+					return v1.proposal.compareTo(v2.proposal)
 			].map[value])
 		}
 		return result

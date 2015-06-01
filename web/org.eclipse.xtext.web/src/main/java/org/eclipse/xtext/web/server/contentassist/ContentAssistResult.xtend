@@ -9,10 +9,11 @@ package org.eclipse.xtext.web.server.contentassist
 
 import java.util.ArrayList
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend.lib.annotations.EqualsHashCode
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtend.lib.annotations.ToString
+import org.eclipse.xtext.util.ReplaceRegion
+import org.eclipse.xtext.util.TextRegion
 import org.eclipse.xtext.web.server.IServiceResult
 
 @Accessors
@@ -35,21 +36,8 @@ class ContentAssistResult implements IServiceResult {
 		/** Available styles: 'default', 'emphasis', 'noemphasis', 'hr' */
 		String style
 		int escapePosition
-		val textReplacements = new ArrayList<TextReplacement>
-		val editPositions = new ArrayList<EditPosition>
-	}
-	
-	@Data
-	static class TextReplacement {
-		String text
-		int offset
-		int length
-	}
-	
-	@Data
-	static class EditPosition {
-		int offset
-		int length
+		val textReplacements = new ArrayList<ReplaceRegion>
+		val editPositions = new ArrayList<TextRegion>
 	}
 	
 }

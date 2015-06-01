@@ -154,12 +154,43 @@ public class ContentAssistService {
           final int prioResult = _key.compareTo(_key_1);
           if ((prioResult != 0)) {
             return prioResult;
+          }
+          final ContentAssistResult.Entry v1 = p1.getValue();
+          final ContentAssistResult.Entry v2 = p2.getValue();
+          boolean _and = false;
+          String _name = v1.getName();
+          boolean _tripleNotEquals = (_name != null);
+          if (!_tripleNotEquals) {
+            _and = false;
           } else {
-            ContentAssistResult.Entry _value = p1.getValue();
-            String _proposal = _value.getProposal();
-            ContentAssistResult.Entry _value_1 = p2.getValue();
-            String _proposal_1 = _value_1.getProposal();
-            return _proposal.compareTo(_proposal_1);
+            String _name_1 = v2.getName();
+            boolean _tripleNotEquals_1 = (_name_1 != null);
+            _and = _tripleNotEquals_1;
+          }
+          if (_and) {
+            String _name_2 = v1.getName();
+            String _name_3 = v2.getName();
+            return _name_2.compareTo(_name_3);
+          } else {
+            String _name_4 = v1.getName();
+            boolean _tripleNotEquals_2 = (_name_4 != null);
+            if (_tripleNotEquals_2) {
+              String _name_5 = v1.getName();
+              String _proposal = v2.getProposal();
+              return _name_5.compareTo(_proposal);
+            } else {
+              String _name_6 = v2.getName();
+              boolean _tripleNotEquals_3 = (_name_6 != null);
+              if (_tripleNotEquals_3) {
+                String _proposal_1 = v1.getProposal();
+                String _name_7 = v2.getName();
+                return _proposal_1.compareTo(_name_7);
+              } else {
+                String _proposal_2 = v1.getProposal();
+                String _proposal_3 = v2.getProposal();
+                return _proposal_2.compareTo(_proposal_3);
+              }
+            }
           }
         }
       };
