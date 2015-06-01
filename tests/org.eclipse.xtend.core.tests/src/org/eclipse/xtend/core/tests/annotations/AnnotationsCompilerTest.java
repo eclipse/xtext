@@ -12,40 +12,28 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
-import org.eclipse.xtend.core.xtend.XtendClass;
-import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.core.xtend.XtendPackage;
-import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.junit4.util.ParseHelper;
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
-import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
-import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
-import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.junit.Before;
+import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
+import org.eclipse.xtext.xbase.compiler.CompilationTestHelper.Result;
 import org.junit.Test;
 
-import testdata.Annotation1;
-import testdata.Annotation2;
-import testdata.Properties1;
-
-import com.google.common.base.Function;
 import com.google.inject.ImplementedBy;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+
+import testdata.Annotation1;
+import testdata.Annotation2;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class AnnotationsCompilerTest extends AbstractXtendTestCase {
+	
+	@Inject
+	private CompilationTestHelper javaCompiler;
 	
 	@Test public void testSimpleAnnotationOnType() throws Exception {
 		final String text = "@com.google.inject.Singleton() class Foo {}";
@@ -219,45 +207,15 @@ public class AnnotationsCompilerTest extends AbstractXtendTestCase {
 	}
 
 	protected Class<?> compileToClass(final String text) throws Exception {
-		XtendFile file = parseHelper.parse(text);
-		validationHelper.assertNoErrors(file);
-		JvmGenericType inferredType = associations.getInferredType((XtendClass) file.getXtendTypes().get(0));
-		CharSequence javaCode = generator.generateType(inferredType, generatorConfigProvider.get(file));
-		Class<?> class1 = javaCompiler.compileToClass("Foo", javaCode.toString());
-		return class1;
+		final Class<?>[] result = new Class[1];
+		javaCompiler.compile(text, new IAcceptor<CompilationTestHelper.Result>() {
+			
+			@Override
+			public void accept(Result t) {
+				result[0] = t.getCompiledClass();
+			}
+		});
+		return result[0];
 	}
 	
-	@Inject
-	private EclipseRuntimeDependentJavaCompiler javaCompiler;
-
-	@Inject
-	private ParseHelper<XtendFile> parseHelper;
-
-	@Inject
-	private ValidationTestHelper validationHelper;
-	
-	@Inject
-	private IXtendJvmAssociations associations;
-	
-	@Inject
-	private JvmModelGenerator generator;
-	
-	@Inject
-	private IGeneratorConfigProvider generatorConfigProvider;
-
-	@Before
-	public void setUp() throws Exception {
-		javaCompiler.addClassPathOfClass(getClass());
-		javaCompiler.addClassPathOfClass(Check.class);
-		javaCompiler.addClassPathOfClass(Test.class);
-		javaCompiler.addClassPathOfClass(StringExtensions.class);
-		javaCompiler.addClassPathOfClass(Notifier.class);
-		javaCompiler.addClassPathOfClass(EcorePackage.class);
-		javaCompiler.addClassPathOfClass(XbasePackage.class);
-		javaCompiler.addClassPathOfClass(XtendPackage.class);
-		javaCompiler.addClassPathOfClass(Inject.class);
-		javaCompiler.addClassPathOfClass(Properties1.class);
-		javaCompiler.addClassPathOfClass(Function.class);
-		javaCompiler.addClassPathOfClass(StringConcatenation.class);
-	}
 }
