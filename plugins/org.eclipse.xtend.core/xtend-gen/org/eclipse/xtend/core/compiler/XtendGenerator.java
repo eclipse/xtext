@@ -632,18 +632,26 @@ public class XtendGenerator extends JvmModelGenerator {
     ITreeAppendable _xblockexpression = null;
     {
       boolean _and = false;
+      boolean _and_1 = false;
       JvmVisibility _visibility = it.getVisibility();
       boolean _equals = Objects.equal(_visibility, JvmVisibility.PRIVATE);
       if (!_equals) {
-        _and = false;
+        _and_1 = false;
       } else {
         JvmDeclaredType _declaringType = it.getDeclaringType();
-        boolean _isLocal = _declaringType.isLocal();
+        boolean _notEquals = (!Objects.equal(_declaringType, null));
+        _and_1 = _notEquals;
+      }
+      if (!_and_1) {
+        _and = false;
+      } else {
+        JvmDeclaredType _declaringType_1 = it.getDeclaringType();
+        boolean _isLocal = _declaringType_1.isLocal();
         _and = _isLocal;
       }
       if (_and) {
-        JvmDeclaredType _declaringType_1 = it.getDeclaringType();
-        final JvmGenericType declarator = ((JvmGenericType) _declaringType_1);
+        JvmDeclaredType _declaringType_2 = it.getDeclaringType();
+        final JvmGenericType declarator = ((JvmGenericType) _declaringType_2);
         boolean _isAnonymous = declarator.isAnonymous();
         boolean _not = (!_isAnonymous);
         if (_not) {
