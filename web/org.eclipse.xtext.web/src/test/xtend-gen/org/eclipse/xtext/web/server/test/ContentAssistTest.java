@@ -27,22 +27,28 @@ import org.junit.Test;
 
 @SuppressWarnings("all")
 public class ContentAssistTest extends AbstractWebServerTest {
-  protected void assertContentAssistResult(final String resourceContent, final String expectedResult) {
-    final int cursorOffset = resourceContent.indexOf("|");
+  protected void assertContentAssistResult(final CharSequence resourceContent, final CharSequence expectedResult) {
+    String contentString = resourceContent.toString();
+    final int cursorOffset = contentString.indexOf("|");
     if ((cursorOffset >= 0)) {
-      this.assertContentAssistResult(resourceContent, cursorOffset, expectedResult);
+      String _substring = contentString.substring(0, cursorOffset);
+      String _substring_1 = contentString.substring((cursorOffset + 1));
+      String _plus = (_substring + _substring_1);
+      contentString = _plus;
+      this.assertContentAssistResult(contentString, cursorOffset, expectedResult);
     } else {
       this.assertContentAssistResult(resourceContent, 0, expectedResult);
     }
   }
   
-  protected void assertContentAssistResult(final String resourceContent, final int offset, final String expectedResult) {
+  protected void assertContentAssistResult(final CharSequence resourceContent, final int offset, final CharSequence expectedResult) {
     try {
       final HashMapSessionStore sessionStore = new HashMapSessionStore();
       XtextServiceDispatcher _dispatcher = this.getDispatcher();
-      Pair<String, String> _mappedTo = Pair.<String, String>of("fullText", resourceContent);
-      String _string = Integer.valueOf(offset).toString();
-      Pair<String, String> _mappedTo_1 = Pair.<String, String>of("caretOffset", _string);
+      String _string = resourceContent.toString();
+      Pair<String, String> _mappedTo = Pair.<String, String>of("fullText", _string);
+      String _string_1 = Integer.valueOf(offset).toString();
+      Pair<String, String> _mappedTo_1 = Pair.<String, String>of("caretOffset", _string_1);
       final XtextServiceDispatcher.ServiceDescriptor contentAssist = _dispatcher.getService("/content-assist", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)), sessionStore);
       boolean _isHasSideEffects = contentAssist.isHasSideEffects();
       Assert.assertFalse(_isHasSideEffects);
@@ -51,8 +57,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
       Function0<? extends IServiceResult> _service = contentAssist.getService();
       IServiceResult _apply = _service.apply();
       final ContentAssistResult result = ((ContentAssistResult) _apply);
-      String _string_1 = result.toString();
-      Assert.assertEquals(expectedResult, _string_1);
+      String _string_2 = expectedResult.toString();
+      String _string_3 = result.toString();
+      Assert.assertEquals(_string_2, _string_3);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -136,7 +143,7 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append(")");
     _builder.newLine();
     _builder.append("]");
-    this.assertContentAssistResult("", _builder.toString());
+    this.assertContentAssistResult("", _builder);
   }
   
   @Test
@@ -175,7 +182,7 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append(")");
     _builder.newLine();
     _builder.append("]");
-    this.assertContentAssistResult("sta|", _builder.toString());
+    this.assertContentAssistResult("sta|", _builder);
   }
   
   @Test
@@ -223,7 +230,7 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append(")");
     _builder.newLine();
     _builder.append("]");
-    this.assertContentAssistResult("state | end", _builder.toString());
+    this.assertContentAssistResult("state | end", _builder);
   }
   
   @Test
@@ -283,7 +290,7 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append(")");
     _builder.newLine();
     _builder.append("]");
-    this.assertContentAssistResult("output signal x state foo set x = | end", _builder.toString());
+    this.assertContentAssistResult("output signal x state foo set x = | end", _builder);
   }
   
   @Test
@@ -325,7 +332,7 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append(")");
     _builder.newLine();
     _builder.append("]");
-    this.assertContentAssistResult("input signal x state foo if | == true goto foo end", _builder.toString());
+    this.assertContentAssistResult("input signal x state foo if | == true goto foo end", _builder);
   }
   
   @Test

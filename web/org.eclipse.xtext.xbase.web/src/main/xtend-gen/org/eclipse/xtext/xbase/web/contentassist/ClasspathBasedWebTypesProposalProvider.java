@@ -176,31 +176,11 @@ public class ClasspathBasedWebTypesProposalProvider implements IWebTypesProposal
           it.setProposal(_simpleName_1);
           it.setDescription(qualifiedName);
           boolean _and = false;
-          boolean _and_1 = false;
           if (!(importSectionRegion != null)) {
-            _and_1 = false;
-          } else {
-            boolean _isImportDeclarationRequired = ClasspathBasedWebTypesProposalProvider.this.isImportDeclarationRequired(typeDesc, context);
-            _and_1 = _isImportDeclarationRequired;
-          }
-          if (!_and_1) {
             _and = false;
           } else {
-            EList<XImportDeclaration> _importDeclarations = importSection.getImportDeclarations();
-            final Function1<XImportDeclaration, Boolean> _function = new Function1<XImportDeclaration, Boolean>() {
-              @Override
-              public Boolean apply(final XImportDeclaration it) {
-                JvmDeclaredType _importedType = it.getImportedType();
-                String _qualifiedName = null;
-                if (_importedType!=null) {
-                  _qualifiedName=_importedType.getQualifiedName();
-                }
-                return Boolean.valueOf(Objects.equal(_qualifiedName, qualifiedName));
-              }
-            };
-            boolean _exists = IterableExtensions.<XImportDeclaration>exists(_importDeclarations, _function);
-            boolean _not = (!_exists);
-            _and = _not;
+            boolean _isImportDeclarationRequired = ClasspathBasedWebTypesProposalProvider.this.isImportDeclarationRequired(typeDesc, qualifiedName, context, importSection);
+            _and = _isImportDeclarationRequired;
           }
           if (_and) {
             ClasspathBasedWebTypesProposalProvider.this.addImportDeclaration(it, importSectionRegion, typeDesc, qualifiedName, context);
@@ -215,19 +195,46 @@ public class ClasspathBasedWebTypesProposalProvider implements IWebTypesProposal
     return Objects.equal(reference, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE);
   }
   
-  protected boolean isImportDeclarationRequired(final ITypeDescriptor typeDesc, final ContentAssistContext context) {
+  protected boolean isImportDeclarationRequired(final ITypeDescriptor typeDesc, final String qualifiedName, final ContentAssistContext context, final XImportSection importSection) {
     boolean _and = false;
+    boolean _and_1 = false;
     String _name = typeDesc.getName();
     boolean _startsWith = _name.startsWith("java.lang");
     if (!_startsWith) {
-      _and = false;
+      _and_1 = false;
     } else {
       String _name_1 = typeDesc.getName();
       int _lastIndexOf = _name_1.lastIndexOf(".");
       boolean _equals = (_lastIndexOf == 9);
-      _and = _equals;
+      _and_1 = _equals;
     }
-    return (!_and);
+    boolean _not = (!_and_1);
+    if (!_not) {
+      _and = false;
+    } else {
+      boolean _or = false;
+      if ((importSection == null)) {
+        _or = true;
+      } else {
+        EList<XImportDeclaration> _importDeclarations = importSection.getImportDeclarations();
+        final Function1<XImportDeclaration, Boolean> _function = new Function1<XImportDeclaration, Boolean>() {
+          @Override
+          public Boolean apply(final XImportDeclaration it) {
+            JvmDeclaredType _importedType = it.getImportedType();
+            String _qualifiedName = null;
+            if (_importedType!=null) {
+              _qualifiedName=_importedType.getQualifiedName();
+            }
+            return Boolean.valueOf(Objects.equal(_qualifiedName, qualifiedName));
+          }
+        };
+        boolean _exists = IterableExtensions.<XImportDeclaration>exists(_importDeclarations, _function);
+        boolean _not_1 = (!_exists);
+        _or = _not_1;
+      }
+      _and = _or;
+    }
+    return _and;
   }
   
   protected boolean addImportDeclaration(final ContentAssistResult.Entry entry, final ITextRegion importSectionRegion, final ITypeDescriptor typeDesc, final String qualifiedName, final ContentAssistContext context) {
