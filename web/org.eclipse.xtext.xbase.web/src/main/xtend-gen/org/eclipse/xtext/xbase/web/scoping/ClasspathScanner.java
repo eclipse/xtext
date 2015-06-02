@@ -17,6 +17,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -28,57 +29,59 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.web.scoping.ClasspathTypeDescriptor;
 
 @SuppressWarnings("all")
 public class ClasspathScanner {
-  private final static Splitter PROPERTY_CLASSPATH_SPLITTER = Splitter.on(":");
+  private final static Splitter PROPERTY_CLASSPATH_SPLITTER = Splitter.on(File.pathSeparatorChar);
   
   private final static Splitter MANIFEST_CLASSPATH_SPLITTER = Splitter.on(" ").omitEmptyStrings();
   
   @Accessors
   private final static ClasspathScanner instance = new ClasspathScanner();
   
-  private final HashMap<ClassLoader, Iterable<ClasspathTypeDescriptor>> classLoaderDescriptors = new HashMap<ClassLoader, Iterable<ClasspathTypeDescriptor>>();
+  private final HashMap<Pair<ClassLoader, Collection<String>>, Iterable<ClasspathTypeDescriptor>> classLoaderDescriptors = new HashMap<Pair<ClassLoader, Collection<String>>, Iterable<ClasspathTypeDescriptor>>();
   
-  private final HashMap<URI, Iterable<ClasspathTypeDescriptor>> uriDescriptors = new HashMap<URI, Iterable<ClasspathTypeDescriptor>>();
+  private final HashMap<Pair<URI, Collection<String>>, Iterable<ClasspathTypeDescriptor>> uriDescriptors = new HashMap<Pair<URI, Collection<String>>, Iterable<ClasspathTypeDescriptor>>();
   
-  public Iterable<ClasspathTypeDescriptor> getDescriptors(final ClassLoader classLoader) {
+  public Iterable<ClasspathTypeDescriptor> getDescriptors(final ClassLoader classLoader, final Collection<String> packagePrefixes) {
+    final Pair<ClassLoader, Collection<String>> key = new Pair<ClassLoader, Collection<String>>(classLoader, packagePrefixes);
     /* this.classLoaderDescriptors; */
     synchronized (this.classLoaderDescriptors) {
       {
-        boolean _containsKey = this.classLoaderDescriptors.containsKey(classLoader);
-        if (_containsKey) {
-          return this.classLoaderDescriptors.get(classLoader);
+        Iterable<ClasspathTypeDescriptor> result = this.classLoaderDescriptors.get(key);
+        if ((result == null)) {
+          Iterable<ClasspathTypeDescriptor> _loadDescriptors = this.loadDescriptors(classLoader, packagePrefixes);
+          result = _loadDescriptors;
+          this.classLoaderDescriptors.put(key, result);
         }
-        final Iterable<ClasspathTypeDescriptor> result = this.loadDescriptors(classLoader);
-        this.classLoaderDescriptors.put(classLoader, result);
         return result;
       }
     }
   }
   
-  public Iterable<ClasspathTypeDescriptor> getDescriptors(final URI uri) {
+  public Iterable<ClasspathTypeDescriptor> getDescriptors(final URI uri, final Collection<String> packagePrefixes) {
+    final Pair<URI, Collection<String>> key = new Pair<URI, Collection<String>>(uri, packagePrefixes);
     /* this.uriDescriptors; */
     synchronized (this.uriDescriptors) {
       {
-        boolean _containsKey = this.uriDescriptors.containsKey(uri);
-        if (_containsKey) {
-          return this.uriDescriptors.get(uri);
+        Iterable<ClasspathTypeDescriptor> result = this.uriDescriptors.get(key);
+        if ((result == null)) {
+          Iterable<ClasspathTypeDescriptor> _loadDescriptors = this.loadDescriptors(uri, packagePrefixes);
+          result = _loadDescriptors;
+          this.uriDescriptors.put(key, result);
         }
-        final Iterable<ClasspathTypeDescriptor> result = this.loadDescriptors(uri);
-        this.uriDescriptors.put(uri, result);
         return result;
       }
     }
   }
   
-  public Iterable<ClasspathTypeDescriptor> getBootClasspathDescriptors() {
+  public Iterable<ClasspathTypeDescriptor> getBootClasspathDescriptors(final Collection<String> packagePrefixes) {
     Iterable<ClasspathTypeDescriptor> _xblockexpression = null;
     {
       final String classpath = System.getProperty("sun.boot.class.path");
@@ -91,7 +94,7 @@ public class ClasspathScanner {
         public Iterable<ClasspathTypeDescriptor> apply(final String path) {
           try {
             URI _uRI = new URI("file", null, path, null);
-            return ClasspathScanner.this.getDescriptors(_uRI);
+            return ClasspathScanner.this.getDescriptors(_uRI, packagePrefixes);
           } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
           }
@@ -103,7 +106,7 @@ public class ClasspathScanner {
     return _xblockexpression;
   }
   
-  protected Iterable<ClasspathTypeDescriptor> loadDescriptors(final ClassLoader classLoader) {
+  protected Iterable<ClasspathTypeDescriptor> loadDescriptors(final ClassLoader classLoader, final Collection<String> packagePrefixes) {
     try {
       final LinkedList<ClassLoader> classLoaderHierarchy = new LinkedList<ClassLoader>();
       ClassLoader cl = classLoader;
@@ -131,7 +134,7 @@ public class ClasspathScanner {
       final Function1<URI, Iterable<ClasspathTypeDescriptor>> _function = new Function1<URI, Iterable<ClasspathTypeDescriptor>>() {
         @Override
         public Iterable<ClasspathTypeDescriptor> apply(final URI it) {
-          return ClasspathScanner.this.getDescriptors(it);
+          return ClasspathScanner.this.getDescriptors(it, packagePrefixes);
         }
       };
       Iterable<Iterable<ClasspathTypeDescriptor>> _map = IterableExtensions.<URI, Iterable<ClasspathTypeDescriptor>>map(uris, _function);
@@ -141,7 +144,7 @@ public class ClasspathScanner {
     }
   }
   
-  protected Iterable<ClasspathTypeDescriptor> loadDescriptors(final URI uri) {
+  protected Iterable<ClasspathTypeDescriptor> loadDescriptors(final URI uri, final Collection<String> packagePrefixes) {
     String _scheme = uri.getScheme();
     boolean _equals = Objects.equal(_scheme, "file");
     if (_equals) {
@@ -149,48 +152,49 @@ public class ClasspathScanner {
       boolean _isDirectory = file.isDirectory();
       if (_isDirectory) {
         final ArrayList<ClasspathTypeDescriptor> descriptors = new ArrayList<ClasspathTypeDescriptor>();
-        ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
-        this.loadDirectoryDescriptors(file, _newArrayList, descriptors);
+        this.loadDirectoryDescriptors(file, "", descriptors, packagePrefixes);
         return descriptors;
       } else {
         boolean _exists = file.exists();
         if (_exists) {
-          return this.loadJarDescriptors(file, true);
+          return this.loadJarDescriptors(file, true, packagePrefixes);
         }
       }
     }
     return Collections.<ClasspathTypeDescriptor>emptyList();
   }
   
-  protected void loadDirectoryDescriptors(final File directory, final List<String> packageName, final List<ClasspathTypeDescriptor> descriptors) {
+  protected void loadDirectoryDescriptors(final File directory, final String packageName, final List<ClasspathTypeDescriptor> descriptors, final Collection<String> packagePrefixes) {
     File[] _listFiles = directory.listFiles();
     for (final File file : _listFiles) {
-      {
-        final String fileName = file.getName();
-        boolean _isDirectory = file.isDirectory();
-        if (_isDirectory) {
-          packageName.add(fileName);
-          this.loadDirectoryDescriptors(file, packageName, descriptors);
-          int _size = packageName.size();
-          int _minus = (_size - 1);
-          packageName.remove(_minus);
+      boolean _isDirectory = file.isDirectory();
+      if (_isDirectory) {
+        String _xifexpression = null;
+        boolean _isEmpty = packageName.isEmpty();
+        if (_isEmpty) {
+          _xifexpression = file.getName();
         } else {
-          final ClasspathTypeDescriptor typeDesc = ClasspathTypeDescriptor.forFile(file, packageName);
-          if ((typeDesc != null)) {
-            descriptors.add(typeDesc);
-          }
+          String _name = file.getName();
+          _xifexpression = ((packageName + ".") + _name);
+        }
+        final String subPackageName = _xifexpression;
+        this.loadDirectoryDescriptors(file, subPackageName, descriptors, packagePrefixes);
+      } else {
+        final ClasspathTypeDescriptor typeDesc = ClasspathTypeDescriptor.forFile(file, packageName, packagePrefixes);
+        if ((typeDesc != null)) {
+          descriptors.add(typeDesc);
         }
       }
     }
   }
   
-  protected Iterable<ClasspathTypeDescriptor> loadJarDescriptors(final File file, final boolean includeManifestEntries) {
+  protected Iterable<ClasspathTypeDescriptor> loadJarDescriptors(final File file, final boolean includeManifestEntries, final Collection<String> packagePrefixes) {
     try {
       JarFile jarFile = null;
       try {
         JarFile _jarFile = new JarFile(file, false);
         jarFile = _jarFile;
-        final ArrayList<Iterable<ClasspathTypeDescriptor>> descriptorCollections = new ArrayList<Iterable<ClasspathTypeDescriptor>>();
+        List<Iterable<ClasspathTypeDescriptor>> descriptorCollections = null;
         boolean _and = false;
         if (!includeManifestEntries) {
           _and = false;
@@ -204,6 +208,8 @@ public class ClasspathScanner {
           Attributes _mainAttributes = _manifest_1.getMainAttributes();
           final String classpath = _mainAttributes.getValue("Class-Path");
           if ((classpath != null)) {
+            ArrayList<Iterable<ClasspathTypeDescriptor>> _arrayList = new ArrayList<Iterable<ClasspathTypeDescriptor>>();
+            descriptorCollections = _arrayList;
             Iterable<String> _split = ClasspathScanner.MANIFEST_CLASSPATH_SPLITTER.split(classpath);
             for (final String path : _split) {
               try {
@@ -217,7 +223,7 @@ public class ClasspathScanner {
                   URI _uRI = _file.toURI();
                   uri = _uRI;
                 }
-                Iterable<ClasspathTypeDescriptor> _descriptors = this.getDescriptors(uri);
+                Iterable<ClasspathTypeDescriptor> _descriptors = this.getDescriptors(uri, packagePrefixes);
                 descriptorCollections.add(_descriptors);
               } catch (final Throwable _t) {
                 if (_t instanceof URISyntaxException) {
@@ -246,15 +252,14 @@ public class ClasspathScanner {
               _and_1 = _not_2;
             }
             if (_and_1) {
-              final ClasspathTypeDescriptor typeDesc = ClasspathTypeDescriptor.forJarEntry(entry, jarFile);
+              final ClasspathTypeDescriptor typeDesc = ClasspathTypeDescriptor.forJarEntry(entry, jarFile, packagePrefixes);
               if ((typeDesc != null)) {
                 descriptors.add(typeDesc);
               }
             }
           }
         }
-        boolean _isEmpty = descriptorCollections.isEmpty();
-        if (_isEmpty) {
+        if ((descriptorCollections == null)) {
           return descriptors;
         } else {
           descriptorCollections.add(descriptors);

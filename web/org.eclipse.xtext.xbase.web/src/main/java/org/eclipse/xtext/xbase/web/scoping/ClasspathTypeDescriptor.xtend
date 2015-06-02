@@ -12,7 +12,7 @@ import java.io.File
 import java.io.FileInputStream
 import java.io.IOException
 import java.io.InputStream
-import java.util.List
+import java.util.Collection
 import java.util.jar.JarEntry
 import java.util.jar.JarFile
 import java.util.regex.Pattern
@@ -40,7 +40,9 @@ class ClasspathTypeDescriptor implements ITypeDescriptor {
 		QualifiedName.create(PACKAGE_AND_NESTED_CLASS_SPLITTER.split(name))
 	}
 	
-	static def forFile(File file, List<String> packageName) {
+	static def forFile(File file, String packageName, Collection<String> packagePrefixes) {
+		if (!packagePrefixes.empty && !packagePrefixes.exists[packageName.startsWith(it)])
+			return null
 		val fileName = file.name
 		var InputStream inputStream
 		try {
@@ -50,7 +52,7 @@ class ClasspathTypeDescriptor implements ITypeDescriptor {
 					if (ANONYMOUS_CLASS_PATTERN.matcher(s).matches)
 						return null
 				}
-				val name = packageName.join(null, '.', '.', [it]) + simpleNames
+				val name = if (packageName.empty) simpleNames else packageName + '.' + simpleNames
 				
 				inputStream = new FileInputStream(file)
 				val classReader = new ClassReader(inputStream)
@@ -64,23 +66,29 @@ class ClasspathTypeDescriptor implements ITypeDescriptor {
 		}
 	}
 	
-	static def forJarEntry(JarEntry jarEntry, JarFile jarFile) {
+	static def forJarEntry(JarEntry jarEntry, JarFile jarFile, Collection<String> packagePrefixes) {
 		val filePath = jarEntry.name
+		var InputStream inputStream
 		try {
 			if (filePath.endsWith('.class')) {
 				val name = filePath.substring(0, filePath.length - 6).replace('/', '.')
+				if (!packagePrefixes.empty && !packagePrefixes.exists[name.startsWith(it)])
+					return null
 				val simpleNames = name.substring(name.lastIndexOf('.') + 1)
 				for (s : NESTED_CLASS_SPLITTER.split(simpleNames)) {
 					if (ANONYMOUS_CLASS_PATTERN.matcher(s).matches)
 						return null
 				}
 				
-				val inputStream = jarFile.getInputStream(jarEntry)
+				inputStream = jarFile.getInputStream(jarEntry)
 				val classReader = new ClassReader(inputStream)
 				val accessFlags = classReader.access
 				new ClasspathTypeDescriptor(name, accessFlags)
 			}
 		} catch (IOException exception) {
+		} finally {
+			if (inputStream !== null)
+				inputStream.close()			
 		}
 	}
 	

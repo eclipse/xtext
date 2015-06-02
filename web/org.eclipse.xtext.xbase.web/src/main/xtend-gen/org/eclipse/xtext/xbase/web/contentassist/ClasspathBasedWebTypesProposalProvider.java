@@ -12,8 +12,12 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -24,7 +28,11 @@ import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
 import org.eclipse.xtext.web.server.contentassist.IWebContentProposaAcceptor;
 import org.eclipse.xtext.web.server.contentassist.WebContentProposalPriorities;
+import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
 import org.eclipse.xtext.xbase.imports.ImportSectionRegionUtil;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.web.contentassist.IWebTypesProposalProvider;
@@ -32,6 +40,8 @@ import org.eclipse.xtext.xbase.web.contentassist.XbaseWebContentProposalPrioriti
 import org.eclipse.xtext.xbase.web.scoping.ClasspathScanner;
 import org.eclipse.xtext.xbase.web.scoping.ClasspathTypeDescriptor;
 import org.eclipse.xtext.xbase.web.scoping.ITypeDescriptor;
+import org.eclipse.xtext.xtype.XImportDeclaration;
+import org.eclipse.xtext.xtype.XImportSection;
 import org.eclipse.xtext.xtype.XtypePackage;
 import org.objectweb.asm.Opcodes;
 
@@ -47,24 +57,31 @@ public class ClasspathBasedWebTypesProposalProvider implements IWebTypesProposal
   private IQualifiedNameConverter qualifiedNameConverter;
   
   @Inject
+  private IImportsConfiguration importsConfiguration;
+  
+  @Inject
   private ImportSectionRegionUtil importSectionRegionUtil;
   
   @Override
   public void createTypeProposals(final EReference reference, final ContentAssistContext context, final Predicate<ITypeDescriptor> filter, final IWebContentProposaAcceptor acceptor) {
-    ITextRegion _xifexpression = null;
+    ITextRegion importSectionRegion = null;
+    XImportSection importSection = null;
     boolean _isImportDeclaration = this.isImportDeclaration(reference, context);
     boolean _not = (!_isImportDeclaration);
     if (_not) {
       XtextResource _resource = context.getResource();
-      _xifexpression = this.importSectionRegionUtil.computeRegion(_resource);
+      XImportSection _importSection = this.importsConfiguration.getImportSection(_resource);
+      importSection = _importSection;
+      XtextResource _resource_1 = context.getResource();
+      ITextRegion _computeRegion = this.importSectionRegionUtil.computeRegion(_resource_1);
+      importSectionRegion = _computeRegion;
     }
-    final ITextRegion importSectionRegion = _xifexpression;
     int count = 0;
     Iterable<ClasspathTypeDescriptor> _typeDescriptors = this.getTypeDescriptors(context);
     for (final ClasspathTypeDescriptor typeDesc : _typeDescriptors) {
       boolean _canPropose = this.canPropose(typeDesc, context, filter, count);
       if (_canPropose) {
-        final ContentAssistResult.Entry entry = this.createProposal(reference, typeDesc, context, importSectionRegion);
+        final ContentAssistResult.Entry entry = this.createProposal(reference, typeDesc, context, importSection, importSectionRegion);
         final int priority = ((XbaseWebContentProposalPriorities) this.proposalPriorities).getTypeRefPriority(typeDesc, entry);
         acceptor.accept(entry, priority);
         count++;
@@ -73,11 +90,12 @@ public class ClasspathBasedWebTypesProposalProvider implements IWebTypesProposal
   }
   
   protected Iterable<ClasspathTypeDescriptor> getTypeDescriptors(final ContentAssistContext context) {
-    final ClassLoader classLoader = this.getClassLoader(context);
     final ClasspathScanner classpathScanner = ClasspathScanner.getInstance();
-    Iterable<ClasspathTypeDescriptor> _bootClasspathDescriptors = classpathScanner.getBootClasspathDescriptors();
-    Iterable<ClasspathTypeDescriptor> _descriptors = classpathScanner.getDescriptors(classLoader);
-    return Iterables.<ClasspathTypeDescriptor>concat(_bootClasspathDescriptors, _descriptors);
+    final Iterable<ClasspathTypeDescriptor> bootClasspath = classpathScanner.getBootClasspathDescriptors(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("java")));
+    ClassLoader _classLoader = this.getClassLoader(context);
+    List<String> _emptyList = Collections.<String>emptyList();
+    final Iterable<ClasspathTypeDescriptor> appClasspath = classpathScanner.getDescriptors(_classLoader, _emptyList);
+    return Iterables.<ClasspathTypeDescriptor>concat(bootClasspath, appClasspath);
   }
   
   protected ClassLoader getClassLoader(final ContentAssistContext context) {
@@ -138,17 +156,17 @@ public class ClasspathBasedWebTypesProposalProvider implements IWebTypesProposal
     return (_bitwiseAnd != 0);
   }
   
-  protected ContentAssistResult.Entry createProposal(final EReference reference, final ITypeDescriptor typeDesc, final ContentAssistContext context, final ITextRegion importSectionRegion) {
+  protected ContentAssistResult.Entry createProposal(final EReference reference, final ITypeDescriptor typeDesc, final ContentAssistContext context, final XImportSection importSection, final ITextRegion importSectionRegion) {
     String _prefix = context.getPrefix();
     ContentAssistResult.Entry _entry = new ContentAssistResult.Entry(_prefix);
     final Procedure1<ContentAssistResult.Entry> _function = new Procedure1<ContentAssistResult.Entry>() {
       @Override
       public void apply(final ContentAssistResult.Entry it) {
+        QualifiedName _qualifiedName = typeDesc.getQualifiedName();
+        final String qualifiedName = ClasspathBasedWebTypesProposalProvider.this.qualifiedNameConverter.toString(_qualifiedName);
         boolean _isImportDeclaration = ClasspathBasedWebTypesProposalProvider.this.isImportDeclaration(reference, context);
         if (_isImportDeclaration) {
-          QualifiedName _qualifiedName = typeDesc.getQualifiedName();
-          String _string = ClasspathBasedWebTypesProposalProvider.this.qualifiedNameConverter.toString(_qualifiedName);
-          it.setProposal(_string);
+          it.setProposal(qualifiedName);
           String _simpleName = typeDesc.getSimpleName();
           it.setName(_simpleName);
           String _proposal = it.getProposal();
@@ -156,18 +174,36 @@ public class ClasspathBasedWebTypesProposalProvider implements IWebTypesProposal
         } else {
           String _simpleName_1 = typeDesc.getSimpleName();
           it.setProposal(_simpleName_1);
-          QualifiedName _qualifiedName_1 = typeDesc.getQualifiedName();
-          String _string_1 = ClasspathBasedWebTypesProposalProvider.this.qualifiedNameConverter.toString(_qualifiedName_1);
-          it.setDescription(_string_1);
+          it.setDescription(qualifiedName);
           boolean _and = false;
+          boolean _and_1 = false;
           if (!(importSectionRegion != null)) {
-            _and = false;
+            _and_1 = false;
           } else {
             boolean _isImportDeclarationRequired = ClasspathBasedWebTypesProposalProvider.this.isImportDeclarationRequired(typeDesc, context);
-            _and = _isImportDeclarationRequired;
+            _and_1 = _isImportDeclarationRequired;
+          }
+          if (!_and_1) {
+            _and = false;
+          } else {
+            EList<XImportDeclaration> _importDeclarations = importSection.getImportDeclarations();
+            final Function1<XImportDeclaration, Boolean> _function = new Function1<XImportDeclaration, Boolean>() {
+              @Override
+              public Boolean apply(final XImportDeclaration it) {
+                JvmDeclaredType _importedType = it.getImportedType();
+                String _qualifiedName = null;
+                if (_importedType!=null) {
+                  _qualifiedName=_importedType.getQualifiedName();
+                }
+                return Boolean.valueOf(Objects.equal(_qualifiedName, qualifiedName));
+              }
+            };
+            boolean _exists = IterableExtensions.<XImportDeclaration>exists(_importDeclarations, _function);
+            boolean _not = (!_exists);
+            _and = _not;
           }
           if (_and) {
-            ClasspathBasedWebTypesProposalProvider.this.addImportDeclaration(it, importSectionRegion, typeDesc, context);
+            ClasspathBasedWebTypesProposalProvider.this.addImportDeclaration(it, importSectionRegion, typeDesc, qualifiedName, context);
           }
         }
       }
@@ -194,15 +230,13 @@ public class ClasspathBasedWebTypesProposalProvider implements IWebTypesProposal
     return (!_and);
   }
   
-  protected boolean addImportDeclaration(final ContentAssistResult.Entry entry, final ITextRegion importSectionRegion, final ITypeDescriptor typeDesc, final ContentAssistContext context) {
+  protected boolean addImportDeclaration(final ContentAssistResult.Entry entry, final ITextRegion importSectionRegion, final ITypeDescriptor typeDesc, final String qualifiedName, final ContentAssistContext context) {
     boolean _xblockexpression = false;
     {
       int _offset = importSectionRegion.getOffset();
       int _length = importSectionRegion.getLength();
       final int insertionOffset = (_offset + _length);
-      QualifiedName _qualifiedName = typeDesc.getQualifiedName();
-      String _string = this.qualifiedNameConverter.toString(_qualifiedName);
-      final String declaration = ("\nimport " + _string);
+      final String declaration = ("\nimport " + qualifiedName);
       ArrayList<ReplaceRegion> _textReplacements = entry.getTextReplacements();
       ReplaceRegion _replaceRegion = new ReplaceRegion(insertionOffset, 0, declaration);
       _xblockexpression = _textReplacements.add(_replaceRegion);

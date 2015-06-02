@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
+import java.util.Collection;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.regex.Matcher;
@@ -53,10 +53,29 @@ public class ClasspathTypeDescriptor implements ITypeDescriptor {
     return QualifiedName.create(((String[])Conversions.unwrapArray(_split, String.class)));
   }
   
-  public static ClasspathTypeDescriptor forFile(final File file, final List<String> packageName) {
+  public static ClasspathTypeDescriptor forFile(final File file, final String packageName, final Collection<String> packagePrefixes) {
     try {
       ClasspathTypeDescriptor _xblockexpression = null;
       {
+        boolean _and = false;
+        boolean _isEmpty = packagePrefixes.isEmpty();
+        boolean _not = (!_isEmpty);
+        if (!_not) {
+          _and = false;
+        } else {
+          final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
+            @Override
+            public Boolean apply(final String it) {
+              return Boolean.valueOf(packageName.startsWith(it));
+            }
+          };
+          boolean _exists = IterableExtensions.<String>exists(packagePrefixes, _function);
+          boolean _not_1 = (!_exists);
+          _and = _not_1;
+        }
+        if (_and) {
+          return null;
+        }
         final String fileName = file.getName();
         InputStream inputStream = null;
         ClasspathTypeDescriptor _xtrycatchfinallyexpression = null;
@@ -77,14 +96,14 @@ public class ClasspathTypeDescriptor implements ITypeDescriptor {
                   return null;
                 }
               }
-              final Function1<String, CharSequence> _function = new Function1<String, CharSequence>() {
-                @Override
-                public CharSequence apply(final String it) {
-                  return it;
-                }
-              };
-              String _join = IterableExtensions.<String>join(packageName, null, ".", ".", _function);
-              final String name = (_join + simpleNames);
+              String _xifexpression_1 = null;
+              boolean _isEmpty_1 = packageName.isEmpty();
+              if (_isEmpty_1) {
+                _xifexpression_1 = simpleNames;
+              } else {
+                _xifexpression_1 = ((packageName + ".") + simpleNames);
+              }
+              final String name = _xifexpression_1;
               FileInputStream _fileInputStream = new FileInputStream(file);
               inputStream = _fileInputStream;
               final ClassReader classReader = new ClassReader(inputStream);
@@ -114,51 +133,80 @@ public class ClasspathTypeDescriptor implements ITypeDescriptor {
     }
   }
   
-  public static ClasspathTypeDescriptor forJarEntry(final JarEntry jarEntry, final JarFile jarFile) {
-    ClasspathTypeDescriptor _xblockexpression = null;
-    {
-      final String filePath = jarEntry.getName();
-      ClasspathTypeDescriptor _xtrycatchfinallyexpression = null;
-      try {
-        ClasspathTypeDescriptor _xifexpression = null;
-        boolean _endsWith = filePath.endsWith(".class");
-        if (_endsWith) {
-          ClasspathTypeDescriptor _xblockexpression_1 = null;
-          {
-            int _length = filePath.length();
-            int _minus = (_length - 6);
-            String _substring = filePath.substring(0, _minus);
-            final String name = _substring.replace("/", ".");
-            int _lastIndexOf = name.lastIndexOf(".");
-            int _plus = (_lastIndexOf + 1);
-            final String simpleNames = name.substring(_plus);
-            Iterable<String> _split = ClasspathTypeDescriptor.NESTED_CLASS_SPLITTER.split(simpleNames);
-            for (final String s : _split) {
-              Matcher _matcher = ClasspathTypeDescriptor.ANONYMOUS_CLASS_PATTERN.matcher(s);
-              boolean _matches = _matcher.matches();
-              if (_matches) {
+  public static ClasspathTypeDescriptor forJarEntry(final JarEntry jarEntry, final JarFile jarFile, final Collection<String> packagePrefixes) {
+    try {
+      ClasspathTypeDescriptor _xblockexpression = null;
+      {
+        final String filePath = jarEntry.getName();
+        InputStream inputStream = null;
+        ClasspathTypeDescriptor _xtrycatchfinallyexpression = null;
+        try {
+          ClasspathTypeDescriptor _xifexpression = null;
+          boolean _endsWith = filePath.endsWith(".class");
+          if (_endsWith) {
+            ClasspathTypeDescriptor _xblockexpression_1 = null;
+            {
+              int _length = filePath.length();
+              int _minus = (_length - 6);
+              String _substring = filePath.substring(0, _minus);
+              final String name = _substring.replace("/", ".");
+              boolean _and = false;
+              boolean _isEmpty = packagePrefixes.isEmpty();
+              boolean _not = (!_isEmpty);
+              if (!_not) {
+                _and = false;
+              } else {
+                final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
+                  @Override
+                  public Boolean apply(final String it) {
+                    return Boolean.valueOf(name.startsWith(it));
+                  }
+                };
+                boolean _exists = IterableExtensions.<String>exists(packagePrefixes, _function);
+                boolean _not_1 = (!_exists);
+                _and = _not_1;
+              }
+              if (_and) {
                 return null;
               }
+              int _lastIndexOf = name.lastIndexOf(".");
+              int _plus = (_lastIndexOf + 1);
+              final String simpleNames = name.substring(_plus);
+              Iterable<String> _split = ClasspathTypeDescriptor.NESTED_CLASS_SPLITTER.split(simpleNames);
+              for (final String s : _split) {
+                Matcher _matcher = ClasspathTypeDescriptor.ANONYMOUS_CLASS_PATTERN.matcher(s);
+                boolean _matches = _matcher.matches();
+                if (_matches) {
+                  return null;
+                }
+              }
+              InputStream _inputStream = jarFile.getInputStream(jarEntry);
+              inputStream = _inputStream;
+              final ClassReader classReader = new ClassReader(inputStream);
+              final int accessFlags = classReader.getAccess();
+              _xblockexpression_1 = new ClasspathTypeDescriptor(name, accessFlags);
             }
-            final InputStream inputStream = jarFile.getInputStream(jarEntry);
-            final ClassReader classReader = new ClassReader(inputStream);
-            final int accessFlags = classReader.getAccess();
-            _xblockexpression_1 = new ClasspathTypeDescriptor(name, accessFlags);
+            _xifexpression = _xblockexpression_1;
           }
-          _xifexpression = _xblockexpression_1;
+          _xtrycatchfinallyexpression = _xifexpression;
+        } catch (final Throwable _t) {
+          if (_t instanceof IOException) {
+            final IOException exception = (IOException)_t;
+            _xtrycatchfinallyexpression = null;
+          } else {
+            throw Exceptions.sneakyThrow(_t);
+          }
+        } finally {
+          if ((inputStream != null)) {
+            inputStream.close();
+          }
         }
-        _xtrycatchfinallyexpression = _xifexpression;
-      } catch (final Throwable _t) {
-        if (_t instanceof IOException) {
-          final IOException exception = (IOException)_t;
-          _xtrycatchfinallyexpression = null;
-        } else {
-          throw Exceptions.sneakyThrow(_t);
-        }
+        _xblockexpression = _xtrycatchfinallyexpression;
       }
-      _xblockexpression = _xtrycatchfinallyexpression;
+      return _xblockexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
-    return _xblockexpression;
   }
   
   public ClasspathTypeDescriptor(final String name, final int accessFlags) {
