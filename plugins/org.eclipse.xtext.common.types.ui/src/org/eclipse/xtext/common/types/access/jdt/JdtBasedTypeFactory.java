@@ -674,7 +674,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 	/**
 	 * @since 2.4
 	 */
-	protected JvmAnnotationReference createAnnotationReference(IAnnotationBinding annotation) {
+	protected JvmAnnotationReference createAnnotationReference(/* @NonNull */ IAnnotationBinding annotation) {
 		JvmAnnotationReference annotationReference = TypesFactory.eINSTANCE.createJvmAnnotationReference();
 		ITypeBinding annotationType = annotation.getAnnotationType();
 		annotationReference.setAnnotation(createAnnotationProxy(annotationType));
@@ -682,14 +682,18 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 		IMemberValuePairBinding[] allMemberValuePairs = annotation.getDeclaredMemberValuePairs();
 		for (IMemberValuePairBinding memberValuePair : allMemberValuePairs) {
 			IMethodBinding methodBinding = memberValuePair.getMethodBinding();
-			try {
-				values.addUnique(createAnnotationValue(annotationType, memberValuePair.getValue(), methodBinding));
-			} catch(NullPointerException npe) {
-				// memberValuePair#getValue may throw an NPE if the methodBinding has no return type
-				if (methodBinding.getReturnType() != null) {
-					throw npe;
-				} else {
-					log.debug(npe.getMessage(), npe);
+			if (methodBinding != null) {
+				try {
+					values.addUnique(createAnnotationValue(annotationType, memberValuePair.getValue(), methodBinding));
+				} catch(NullPointerException npe) {
+					// memberValuePair#getValue may throw an NPE if the methodBinding has no return type
+					if (methodBinding.getReturnType() != null) {
+						throw npe;
+					} else {
+						if (log.isDebugEnabled()) {
+							log.debug(npe.getMessage(), npe);
+						}
+					}
 				}
 			}
 		}
@@ -699,7 +703,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 	/**
 	 * @since 2.4
 	 */
-	protected JvmAnnotationValue createAnnotationValue(ITypeBinding annotationType, Object value, IMethodBinding methodBinding) {
+	protected JvmAnnotationValue createAnnotationValue(ITypeBinding annotationType, /* @Nullable */ Object value, IMethodBinding methodBinding) {
 		ITypeBinding originalTypeBinding = methodBinding.getReturnType();
 		ITypeBinding typeBinding = originalTypeBinding;
 		if (originalTypeBinding.isArray()) {
@@ -715,7 +719,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 	/**
 	 * @since 2.4
 	 */
-	protected JvmAnnotationValue createAnnotationValue(ITypeBinding type, Object value) {
+	protected JvmAnnotationValue createAnnotationValue(ITypeBinding type, /* @Nullable */ Object value) {
 		if (type == stringTypeBinding) {
 			return createStringAnnotationValue(value);
 		} else if (type == classTypeBinding) {
@@ -785,9 +789,11 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 			InternalEList<JvmAnnotationReference> values = (InternalEList<JvmAnnotationReference>)annotationValue.getValues();
 			if (value instanceof Object[]) {
 				for (Object element : (Object[])value) {
-					values.addUnique(createAnnotationReference((IAnnotationBinding)element));
+					if (element instanceof IAnnotationBinding) {
+						values.addUnique(createAnnotationReference((IAnnotationBinding)element));
+					}
 				}
-			} else {
+			} else if (value instanceof IAnnotationBinding) {
 				values.addUnique(createAnnotationReference((IAnnotationBinding)value));
 			}
 		}
@@ -801,7 +807,9 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 			InternalEList<Object> values = (InternalEList<Object>)(InternalEList<?>)annotationValue.getValues();
 			if (value instanceof Object[]) {
 				for (Object element : (Object[])value) {
-					values.addUnique(element);
+					if (element instanceof Character) {
+						values.addUnique(element);
+					}
 				}
 			} else {
 				values.addUnique(value);
@@ -819,13 +827,13 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 				for (Object element : (Object[])value) {
 					if (element instanceof Double) {
 						values.addUnique(element);
-					} else {
+					} else if (element != null) {
 						values.addUnique(((Number)element).doubleValue());
 					}
 				}
 			} else if (value instanceof Double) {
 				values.addUnique(value);
-			} else {
+			} else if (value instanceof Number) {
 				values.addUnique(((Number)value).doubleValue());
 			}
 		}
@@ -841,13 +849,13 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 				for (Object element : (Object[])value) {
 					if (element instanceof Float) {
 						values.addUnique(element);
-					} else {
+					} else if (element != null) {
 						values.addUnique(((Number)element).floatValue());
 					}
 				}
 			} else if (value instanceof Float) {
 				values.addUnique(value);
-			} else {
+			} else if (value instanceof Number) {
 				values.addUnique(((Number)value).floatValue());
 			}
 		}
@@ -863,13 +871,13 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 				for (Object element : (Object[])value) {
 					if (element instanceof Short) {
 						values.addUnique(element);
-					} else {
+					} else if (element != null) {
 						values.addUnique(((Number)element).shortValue());
 					}
 				}
 			} else if (value instanceof Short) {
 				values.addUnique(value);
-			} else {
+			} else if (value instanceof Number) {
 				values.addUnique(((Number)value).shortValue());
 			}
 		}
@@ -885,13 +893,13 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 				for (Object element : (Object[])value) {
 					if (element instanceof Byte) {
 						values.addUnique(element);
-					} else {
+					} else if (element != null) {
 						values.addUnique(((Number)element).byteValue());
 					}
 				}
 			} else if (value instanceof Byte) {
 				values.addUnique(value);
-			} else {
+			} else if (value instanceof Number) {
 				values.addUnique(((Number)value).byteValue());
 			}
 		}
@@ -907,13 +915,13 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 				for (Object element : (Object[])value) {
 					if (element instanceof Long) {
 						values.addUnique(element);
-					} else {
+					} else if (element != null) {
 						values.addUnique(((Number)element).longValue());
 					}
 				}
 			} else if (value instanceof Long) {
 				values.addUnique(value);
-			} else {
+			} else if (value instanceof Number) {
 				values.addUnique(((Number)value).longValue());
 			}
 		}
@@ -927,7 +935,9 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 			InternalEList<Object> values = (InternalEList<Object>)(InternalEList<?>)annotationValue.getValues();
 			if (value instanceof Object[]) {
 				for (Object element : (Object[])value) {
-					values.addUnique(element);
+					if (element instanceof Boolean) {
+						values.addUnique(element);
+					}
 				}
 			} else {
 				values.addUnique(value);
@@ -945,13 +955,13 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 				for (Object element : (Object[])value) {
 					if (element instanceof Integer) {
 						values.addUnique(element);
-					} else {
+					} else if (element != null) {
 						values.addUnique(((Number)element).intValue());
 					}
 				}
 			} else if (value instanceof Integer) {
 				values.addUnique(value);
-			} else {
+			} else if (value instanceof Number) {
 				values.addUnique(((Number)value).intValue());
 			}
 		}
@@ -964,9 +974,11 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 			InternalEList<JvmTypeReference> values = (InternalEList<JvmTypeReference>)annotationValue.getValues();
 			if (value instanceof Object[]) {
 				for (Object element : (Object[])value) {
-					values.addUnique(createTypeReference((ITypeBinding)element));
+					if (element instanceof ITypeBinding) {
+						values.addUnique(createTypeReference((ITypeBinding)element));
+					}
 				}
-			} else {
+			} else if (value instanceof ITypeBinding) {
 				values.addUnique(createTypeReference((ITypeBinding)value));
 			}
 		}
@@ -980,7 +992,9 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 			InternalEList<Object> values = (InternalEList<Object>)(InternalEList<?>)annotationValue.getValues();
 			if (value instanceof Object[]) {
 				for (Object element : (Object[])value) {
-					values.addUnique(element);
+					if (element instanceof String) {
+						values.addUnique(element);
+					}
 				}
 			} else {
 				values.addUnique(value);
@@ -1032,7 +1046,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 		return proxy;
 	}
 
-	protected JvmEnumerationLiteral createEnumLiteralProxy(IVariableBinding binding) {
+	protected JvmEnumerationLiteral createEnumLiteralProxy(/* @NonNull */ IVariableBinding binding) {
 		JvmEnumerationLiteral proxy = enumerationLiteralProxies.get(binding);
 		if (proxy == null) {
 			proxy = TypesFactory.eINSTANCE.createJvmEnumerationLiteral();
@@ -1043,7 +1057,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 		return proxy;
 	}
 
-	protected JvmAnnotationType createAnnotationProxy(ITypeBinding annotation) {
+	protected JvmAnnotationType createAnnotationProxy(/* @NonNull */ ITypeBinding annotation) {
 		JvmAnnotationType proxy = annotationProxies.get(annotation);
 		if (proxy == null) {
 			URI uri = uriHelper.getFullURI(annotation);
@@ -1195,7 +1209,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 		return result;
 	}
 
-	protected JvmTypeReference createTypeReference(ITypeBinding typeBinding) {
+	protected JvmTypeReference createTypeReference(/* @NonNull */ ITypeBinding typeBinding) {
 		if (typeBinding.isArray()) {
 			ITypeBinding componentType = typeBinding.getComponentType();
 			JvmTypeReference componentTypeReference = createTypeReference(componentType);
