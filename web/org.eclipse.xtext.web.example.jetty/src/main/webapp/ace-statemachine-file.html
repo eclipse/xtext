@@ -6,14 +6,15 @@
 	<title>Xtext-Web Domainmodel Example</title>
 	<link rel="stylesheet" type="text/css" href="xtext/xtext-ace.css" />
 	<link rel="stylesheet" type="text/css" href="style.css" />
-	<script src="requirejs/require.min.js"></script>
+	<script src="webjars/requirejs/2.1.17/require.min.js"></script>
 	<script type="text/javascript">
 		require.config({
 			paths: {
-				jquery: 'jquery/jquery.min'
+				"jquery": "webjars/jquery/2.1.4/jquery.min"
 			}
 		});
-		require(["ace/ace", "xtext/xtext-ace"], function(ace, xtext) {
+		require(["webjars/ace/01.08.2014/src/ace"]);
+		require(["xtext/xtext-ace"], function(xtext) {
 			var editor = ace.edit("xtext-editor");
 			xtext.configureServices(editor, { lang: "statemachine", sendFullText: true });
 		});

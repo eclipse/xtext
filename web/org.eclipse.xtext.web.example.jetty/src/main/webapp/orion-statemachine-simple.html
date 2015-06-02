@@ -6,13 +6,12 @@
 	<title>Xtext-Web State Machine Example</title>
 	<link rel="stylesheet" type="text/css" href="xtext/xtext-orion.css" />
 	<link rel="stylesheet" type="text/css" href="style.css" />
-	<script src="requirejs/require.min.js"></script>
+	<script src="webjars/requirejs/2.1.17/require.min.js"></script>
 	<script type="text/javascript">
 		require.config({
 			paths: {
-				text: 'requirejs/text',
-				i18n: 'requirejs/i18n',
-				jquery: 'jquery/jquery.min'
+				"text": "webjars/requirejs-text/2.0.10-3/text",
+				"jquery": "webjars/jquery/2.1.4/jquery.min"
 			}
 		});
 		require(["xtext/xtext-orion"], function(xtext) {
