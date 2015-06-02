@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.ui" version="2">
     <resource path="META-INF/MANIFEST.MF">
+        <filter id="923795461">
+            <message_arguments>
+                <message_argument value="2.9.0"/>
+                <message_argument value="2.8.0"/>
+            </message_arguments>
+        </filter>
         <filter comment="version will be generated during buckminster build" id="927989779">
             <message_arguments>
                 <message_argument value="2.9.0"/>
@@ -23,6 +29,14 @@
                 <message_argument value="org.eclipse.xtext.ui.editor.occurrences.MarkOccurrenceActionContributor"/>
                 <message_argument value="EDITOR_MARK_OCCURRENCES"/>
                 <message_argument value="markOccurrences"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/resource/DefaultResourceUIServiceProvider.java" type="org.eclipse.xtext.ui.resource.DefaultResourceUIServiceProvider">
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.resource.DefaultResourceUIServiceProvider"/>
+                <message_argument value="isReadOnly(URI)"/>
             </message_arguments>
         </filter>
     </resource>
