@@ -20,7 +20,6 @@ import org.eclipse.xtext.builder.standalone.LanguageAccess
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess.IFileCallback
 import org.eclipse.xtext.parser.IEncodingProvider
-import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.clustering.DisabledClusteringPolicy
 import org.eclipse.xtext.resource.clustering.DynamicResourceClusteringPolicy
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
@@ -155,7 +154,6 @@ class IncrementalStandaloneBuilder {
 	}
 
 	@Inject Provider<IncrementalStandaloneBuilder.InternalStatefulIncrementalBuilder> provider
-	@Inject Provider<XtextResourceSet> resourceSetProvider
 
 	def IndexState build(BuildRequest request, Map<String, LanguageAccess> languages) {
 		build(request, languages, null)
@@ -174,7 +172,7 @@ class IncrementalStandaloneBuilder {
 				new DisabledClusteringPolicy
 				
 		val tempDir = new File(request.baseDir.asFile, 'xtext-tmp')
-		val resourceSet = resourceSetProvider.get
+		val resourceSet = request.resourceSet
 		resourceSet.addLoadOption(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE, true)
 		val context = new BuildContext(languages
 									, resourceSet
