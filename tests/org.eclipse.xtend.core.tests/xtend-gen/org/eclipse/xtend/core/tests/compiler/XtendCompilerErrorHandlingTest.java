@@ -539,6 +539,23 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
+  public void testPrivateClass() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("private class Foo {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("private class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
   public void assertCompilesTo(final CharSequence input, final CharSequence expected) {
     try {
       String _string = input.toString();
