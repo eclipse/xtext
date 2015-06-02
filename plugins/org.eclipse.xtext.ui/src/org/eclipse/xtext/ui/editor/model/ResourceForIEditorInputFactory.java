@@ -166,7 +166,7 @@ public class ResourceForIEditorInputFactory implements IResourceForEditorInputFa
 		// TODO: Filter external content - primary resource should not use dirty state
 		externalContentSupport.configureResourceSet(resourceSet, externalContentProvider);
 		if (!(resourceServiceProvider instanceof IResourceServiceProviderExtension) 
-				|| !((IResourceServiceProviderExtension)resourceServiceProvider).isReadOnly(primaryURI)) {
+				|| ((IResourceServiceProviderExtension)resourceServiceProvider).isSource(primaryURI)) {
 			SourceLevelURIsAdapter.setSourceLevelUris(resourceSet, Collections.singleton(primaryURI));
 			resourceSet.eAdapters().add(new ResourceStorageProviderAdapter() {
 				

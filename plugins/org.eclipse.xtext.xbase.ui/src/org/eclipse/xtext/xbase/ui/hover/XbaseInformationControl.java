@@ -174,7 +174,7 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 		@Override
 		public XtextResource createResource() {
 			final String SYNTHETIC_SCHEME = "synthetic";
-			xtextResourceSet = new XtextResourceSet();
+			xtextResourceSet = xbaseHoverConfiguration.createResourceSet();
 			if (fInput != null) {
 				XtextResourceSet resourceSet = (XtextResourceSet) fInput.getElement().eResource().getResourceSet();
 				xtextResourceSet.setClasspathURIContext(resourceSet.getClasspathURIContext());
