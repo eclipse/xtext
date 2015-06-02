@@ -11,6 +11,7 @@ import com.google.common.collect.HashMultimap
 import com.google.inject.Inject
 import com.google.inject.Provider
 import com.intellij.compiler.impl.CompilerUtil
+import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.progress.ProcessCanceledException
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.roots.ModuleRootManager
@@ -25,8 +26,10 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder
 import org.eclipse.xtext.builder.standalone.incremental.IndexState
+import org.eclipse.xtext.idea.resource.IResourceSetProvider
 import org.eclipse.xtext.idea.shared.IdeaSharedInjectorProvider
 import org.eclipse.xtext.idea.shared.XtextLanguages
+import org.eclipse.xtext.resource.XtextResourceSet
 
 import static org.eclipse.xtext.idea.build.BuildEvent.Type.*
 
@@ -46,6 +49,8 @@ class XtextAutoBuilder {
 	@Inject Provider<IncrementalStandaloneBuilder> builderProvider	
 	 
 	@Inject XtextLanguages xtextLanguages
+	
+	@Inject IResourceSetProvider resourceSetProvider
 	
 	IndexState indexState
 	
@@ -68,12 +73,14 @@ class XtextAutoBuilder {
 	}
 
 	protected def enqueue(VirtualFile file, BuildEvent.Type type) {
-		queue.put(new BuildEvent(file, type))
-		alarm.cancelAllRequests
-		alarm.addRequest([build], 200)
+		if (file != null) {
+			queue.put(new BuildEvent(file, type))
+			alarm.cancelAllRequests
+			alarm.addRequest([build], 200)
+		}
 	}
 
-	protected def build() {
+	protected def void build() {
 		val allEvents = newArrayList
 		queue.drainTo(allEvents)
 		try {
@@ -92,6 +99,7 @@ class XtextAutoBuilder {
 				val events = module2event.get(module)
 				val entries = OrderEnumerator.orderEntries(module)
 				val request = new BuildRequest => [
+					resourceSet = resourceSetProvider.get(module) as XtextResourceSet
 					dirtyFiles += events.filter[type==MODIFIED || type == ADDED].map[file.URI]
 					deletedFiles += events.filter[type == DELETED].map[file.URI]
 					classPath += entries.withoutSdk.classes.pathsList.virtualFiles.map[URI]
@@ -112,7 +120,9 @@ class XtextAutoBuilder {
 					afterGenerateFile = [ refreshFiles += $1 ] 
 					afterDeleteFile = [ refreshFiles += it ]
 				]
-				indexState = builderProvider.get().build(request, xtextLanguages.languageAccesses)
+				indexState = ApplicationManager.application.<IndexState>runReadAction [
+					builderProvider.get().build(request, xtextLanguages.languageAccesses)
+				]
 			}
 			CompilerUtil.refreshIOFiles(refreshFiles.map[asFile])
 		} catch(ProcessCanceledException exc) {
@@ -120,7 +130,14 @@ class XtextAutoBuilder {
 		}		
 	}
 	
-	private def getURI(VirtualFile file) {
-		URI.createURI(file.url)
+	protected def getURI(VirtualFile file) {
+		val uri = if (file.isInLocalFileSystem)
+				URI.createFileURI(file.path)
+			else
+				URI.createURI(file.url)
+		if (file.directory)
+			uri.appendSegment('')
+		else
+			uri
 	}
 }

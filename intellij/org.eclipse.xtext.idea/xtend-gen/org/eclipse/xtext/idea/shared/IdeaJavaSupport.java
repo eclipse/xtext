@@ -22,12 +22,10 @@ import org.eclipse.xtext.xbase.lib.Extension;
 public class IdeaJavaSupport extends JavaSupport {
   @Override
   public void installLocalOnlyTypeProvider(final Iterable<URI> classPathRoots, final XtextResourceSet resourceSet) {
-    super.installLocalOnlyTypeProvider(classPathRoots, resourceSet);
   }
   
   @Override
   public void installTypeProvider(final Iterable<URI> classPathRoots, final XtextResourceSet resSet) {
-    super.installTypeProvider(classPathRoots, resSet);
   }
   
   @Override

@@ -7,11 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.standalone.incremental
 
+import java.io.File
 import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
-import java.io.File
 import org.eclipse.xtext.builder.standalone.IIssueHandler
+import org.eclipse.xtext.resource.XtextResourceSet
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -47,5 +48,7 @@ class BuildRequest {
 	boolean failOnValidationError = true
 	boolean debugLog = false
 	boolean writeStorageResources = false
+	
+	XtextResourceSet resourceSet
 	
 }

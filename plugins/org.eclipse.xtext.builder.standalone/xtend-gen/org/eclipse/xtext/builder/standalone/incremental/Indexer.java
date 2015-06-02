@@ -28,7 +28,6 @@ import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
 import org.eclipse.xtext.builder.standalone.incremental.IClassFileBasedDependencyFinder;
 import org.eclipse.xtext.builder.standalone.incremental.IndexState;
-import org.eclipse.xtext.builder.standalone.incremental.JavaSupport;
 import org.eclipse.xtext.builder.standalone.incremental.ResolvedResourceDescription;
 import org.eclipse.xtext.builder.standalone.incremental.ResourceURICollector;
 import org.eclipse.xtext.builder.standalone.incremental.Source2GeneratedMapping;
@@ -144,9 +143,6 @@ public class Indexer {
   private ResourceURICollector uriCollector;
   
   @Inject
-  private JavaSupport javaSupport;
-  
-  @Inject
   private CompilerPhases compilerPhases;
   
   @Inject
@@ -219,27 +215,7 @@ public class Indexer {
     final ArrayList<IResourceDescription.Delta> currentDeltas = CollectionLiterals.<IResourceDescription.Delta>newArrayList();
     ArrayList<IResourceDescription.Delta> _removeDeletedFilesFromIndex = this.removeDeletedFilesFromIndex(request, oldIndex, newIndex);
     Iterables.<IResourceDescription.Delta>addAll(currentDeltas, _removeDeletedFilesFromIndex);
-    if (isConsiderJava) {
-      List<URI> _sourceRoots = request.getSourceRoots();
-      List<URI> _outputs = request.getOutputs();
-      Iterable<URI> _plus_1 = Iterables.<URI>concat(_sourceRoots, _outputs);
-      List<URI> _classPath = request.getClassPath();
-      Iterable<URI> _plus_2 = Iterables.<URI>concat(_plus_1, _classPath);
-      XtextResourceSet _resourceSet_1 = context.getResourceSet();
-      this.javaSupport.installLocalOnlyTypeProvider(_plus_2, _resourceSet_1);
-    }
     this.preIndexChangedResources(directlyAffected, oldIndex, newIndex, request, context);
-    if (isConsiderJava) {
-      final URI preCompiledClasses = this.javaSupport.preCompileJavaFiles(directlyAffected, newIndex, request, context);
-      List<URI> _sourceRoots_1 = request.getSourceRoots();
-      Iterable<URI> _plus_3 = Iterables.<URI>concat(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(preCompiledClasses)), _sourceRoots_1);
-      List<URI> _outputs_1 = request.getOutputs();
-      Iterable<URI> _plus_4 = Iterables.<URI>concat(_plus_3, _outputs_1);
-      List<URI> _classPath_1 = request.getClassPath();
-      Iterable<URI> _plus_5 = Iterables.<URI>concat(_plus_4, _classPath_1);
-      XtextResourceSet _resourceSet_2 = context.getResourceSet();
-      this.javaSupport.installTypeProvider(_plus_5, _resourceSet_2);
-    }
     Indexer.LOG.info("Indexing changed and added files");
     final HashSet<URI> allAffected = CollectionLiterals.<URI>newHashSet();
     Iterables.<URI>addAll(allAffected, directlyAffected);
@@ -263,7 +239,7 @@ public class Indexer {
           };
           Iterable<Iterable<URI>> _map_1 = IterableExtensions.<URI, Iterable<URI>>map(toBeIndexed, _function_3);
           Iterable<URI> _flatten_1 = Iterables.<URI>concat(_map_1);
-          Iterable<URI> _plus_6 = Iterables.<URI>concat(_flatten_1, toBeIndexed);
+          Iterable<URI> _plus_1 = Iterables.<URI>concat(_flatten_1, toBeIndexed);
           final Function1<URI, Boolean> _function_4 = new Function1<URI, Boolean>() {
             @Override
             public Boolean apply(final URI it) {
@@ -271,7 +247,7 @@ public class Indexer {
               return Boolean.valueOf(Objects.equal(_fileExtension, "java"));
             }
           };
-          Iterable<URI> _filter_1 = IterableExtensions.<URI>filter(_plus_6, _function_4);
+          Iterable<URI> _filter_1 = IterableExtensions.<URI>filter(_plus_1, _function_4);
           final Set<URI> affectedJavaFiles = IterableExtensions.<URI>toSet(_filter_1);
           List<URI> _deletedFiles_1 = request.getDeletedFiles();
           final Function1<URI, Iterable<URI>> _function_5 = new Function1<URI, Iterable<URI>>() {

@@ -15,6 +15,7 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.builder.standalone.IIssueHandler;
 import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
 import org.eclipse.xtext.builder.standalone.incremental.IndexState;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
@@ -75,6 +76,8 @@ public class BuildRequest {
   private boolean debugLog = false;
   
   private boolean writeStorageResources = false;
+  
+  private XtextResourceSet resourceSet;
   
   public void setBaseDir(final URI baseDir) {
     this.baseDir = baseDir;
@@ -204,5 +207,14 @@ public class BuildRequest {
   
   public void setWriteStorageResources(final boolean writeStorageResources) {
     this.writeStorageResources = writeStorageResources;
+  }
+  
+  @Pure
+  public XtextResourceSet getResourceSet() {
+    return this.resourceSet;
+  }
+  
+  public void setResourceSet(final XtextResourceSet resourceSet) {
+    this.resourceSet = resourceSet;
   }
 }

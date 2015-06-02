@@ -38,7 +38,7 @@ class Indexer {
 
 	@Inject ResourceURICollector uriCollector
 
-	@Inject JavaSupport javaSupport
+//	@Inject JavaSupport javaSupport
 
 	@Inject CompilerPhases compilerPhases
 
@@ -84,16 +84,18 @@ class Indexer {
 		val currentDeltas = <IResourceDescription.Delta>newArrayList
 		currentDeltas += request.removeDeletedFilesFromIndex(oldIndex, newIndex)
 
-		if (isConsiderJava) 
-			javaSupport.installLocalOnlyTypeProvider(
-				request.sourceRoots  + request.outputs + request.classPath, resourceSet)
+//		if (isConsiderJava) 
+//			javaSupport.installLocalOnlyTypeProvider(
+//				request.sourceRoots  + request.outputs + request.classPath, resourceSet)
 		preIndexChangedResources(directlyAffected, oldIndex, newIndex, request, context)
-		if(isConsiderJava) {
-			val preCompiledClasses = javaSupport.preCompileJavaFiles(directlyAffected, newIndex, request, context)
-			javaSupport.installTypeProvider(
-				#[preCompiledClasses] + request.sourceRoots  + request.outputs + request.classPath, 
-				resourceSet)
-		}
+//		if(isConsiderJava) {
+//			val preCompiledClasses = javaSupport.preCompileJavaFiles(directlyAffected, newIndex, request, context)
+//			if (preCompiledClasses != null) {
+//				javaSupport.installTypeProvider(
+//					#[preCompiledClasses] + request.sourceRoots  + request.outputs + request.classPath, 
+//					resourceSet)
+//			}
+//		}
 	
 		LOG.info("Indexing changed and added files")
 		val allAffected = newHashSet

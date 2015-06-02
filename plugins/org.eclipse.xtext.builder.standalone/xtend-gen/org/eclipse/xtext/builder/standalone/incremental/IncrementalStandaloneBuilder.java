@@ -276,9 +276,6 @@ public class IncrementalStandaloneBuilder {
   @Inject
   private Provider<IncrementalStandaloneBuilder.InternalStatefulIncrementalBuilder> provider;
   
-  @Inject
-  private Provider<XtextResourceSet> resourceSetProvider;
-  
   public IndexState build(final BuildRequest request, final Map<String, LanguageAccess> languages) {
     return this.build(request, languages, null);
   }
@@ -314,7 +311,7 @@ public class IncrementalStandaloneBuilder {
     URI _baseDir = request.getBaseDir();
     File _asFile = FilesAndURIs.asFile(_baseDir);
     final File tempDir = new File(_asFile, "xtext-tmp");
-    final XtextResourceSet resourceSet = this.resourceSetProvider.get();
+    final XtextResourceSet resourceSet = request.getResourceSet();
     resourceSet.addLoadOption(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE, Boolean.valueOf(true));
     final BuildContext context = new BuildContext(languages, resourceSet, strategy, tempDir);
     final IncrementalStandaloneBuilder.InternalStatefulIncrementalBuilder builder = this.provider.get();
