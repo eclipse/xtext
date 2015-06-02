@@ -43,12 +43,20 @@ public class QualifiedName implements Comparable<QualifiedName> {
 			return QualifiedName.create(segment);
 		}
 		@Override
+		boolean hasLowerCase() {
+			return true;
+		}
+		@Override
 		public QualifiedName toLowerCase() {
 			return this;
 		}
 		@Override
 		public QualifiedName toUpperCase() {
 			return this;
+		}
+		@Override
+		public String toString(String delimiter) {
+			return "";
 		}
 	};
 
@@ -86,11 +94,31 @@ public class QualifiedName implements Comparable<QualifiedName> {
 		if (segmentCount == 0) {
 			return QualifiedName.EMPTY;
 		}
-		String[] segments = new String[segmentCount];
-		for (int i = 0; i < segmentCount; ++i) {
-			segments[i] = eObjectInputStream.readSegmentedString();
+		// lowercase QN serialize a 'null' value at index 0 and 
+		String firstSegment = eObjectInputStream.readSegmentedString();
+		boolean lowerCase = false;
+		if (firstSegment == null) {
+			lowerCase = true;
+			// first was null, read another string which is the actual first segment
+			firstSegment = eObjectInputStream.readSegmentedString();
 		}
-		return new QualifiedName(segments);
+		
+		String[] segments = readSegmentArray(eObjectInputStream, segmentCount, firstSegment);
+		if (lowerCase) {
+			return new QualifiedNameLowerCase(segments);
+		} else {
+			return new QualifiedName(segments);	
+		}
+	}
+
+	private static String[] readSegmentArray(EObjectInputStream from, int count, String first) throws IOException {
+		String[] segments = new String[count];
+		segments[0] = first;
+		for (int i = 1; i < count; i++) {
+			String segment = from.readSegmentedString();
+			segments[i] = segment;
+		}
+		return segments;
 	}
 	
 	/**
@@ -218,6 +246,9 @@ public class QualifiedName implements Comparable<QualifiedName> {
 		if (skipCount == getSegmentCount()) {
 			return EMPTY;
 		}
+		if (skipCount == 0) {
+			return this;
+		}
 		if (skipCount > getSegmentCount() || skipCount < 0) {
 			throw new IllegalArgumentException("Cannot skip " + skipCount + " fragments from QualifiedName with "
 					+ getSegmentCount() + " segments");
@@ -230,6 +261,9 @@ public class QualifiedName implements Comparable<QualifiedName> {
 	public QualifiedName skipLast(int skipCount) {
 		if (skipCount == getSegmentCount()) {
 			return EMPTY;
+		}
+		if (skipCount == 0) {
+			return this;
 		}
 		if (skipCount > getSegmentCount() || skipCount < 0) {
 			throw new IllegalArgumentException("Cannot skip " + skipCount + " fragments from QualifiedName with "
@@ -244,9 +278,18 @@ public class QualifiedName implements Comparable<QualifiedName> {
 		if (lowerCase != null)
 			return lowerCase;
 		String[] newSegments = new String[segments.length];
-		for (int i = 0; i < getSegmentCount(); ++i)
-			newSegments[i] = segments[i].toLowerCase();
-		lowerCase = new QualifiedNameLowerCase(newSegments);
+		boolean isLowerCase = true;
+		for (int i = 0; i < getSegmentCount(); ++i) {
+			String segment = segments[i];
+			String lowerCaseSegment = segment.toLowerCase();
+			isLowerCase = isLowerCase && segment == lowerCaseSegment;
+			newSegments[i] = lowerCaseSegment;
+		}
+		if (isLowerCase) {
+			lowerCase = this;
+		} else {
+			lowerCase = new QualifiedNameLowerCase(newSegments);
+		}
 		return lowerCase;
 	}
 	
@@ -258,13 +301,35 @@ public class QualifiedName implements Comparable<QualifiedName> {
 		public QualifiedName toLowerCase() {
 			return this;
 		}
+
+		@Override
+		boolean hasLowerCase() {
+			return true;
+		}
+		
+		/**
+		 * We serialize a segmentCount + 1 and a dummy null value as the first entry.
+		 * This is used to retrieve the information about lowercase QN in {@link QualifiedName#createFromStream(EObjectInputStream)}
+		 */
+		@Override
+		public void writeToStream(EObjectOutputStream eObjectOutputStream) throws IOException {
+			int segmentCount = getSegmentCount();
+			eObjectOutputStream.writeCompressedInt(segmentCount);
+			// indicator for lowercase instance
+			eObjectOutputStream.writeSegmentedString(null);
+			for (int i = 0; i < segmentCount; ++i) {
+				eObjectOutputStream.writeSegmentedString(getSegment(i));
+			}
+		}
 	}
 
 	public QualifiedName toUpperCase() {
 		String[] newSegments = new String[getSegmentCount()];
 		for (int i = 0; i < getSegmentCount(); ++i)
 			newSegments[i] = segments[i].toUpperCase();
-		return new QualifiedName(newSegments);
+		QualifiedName result = new QualifiedName(newSegments);
+		result.lowerCase = this.lowerCase;
+		return result;
 	}
 
 	@Override
@@ -285,9 +350,40 @@ public class QualifiedName implements Comparable<QualifiedName> {
 		return false;
 	}
 
+	/**
+	 * Returns <code>true</code> if this instance can provide a ready to use
+	 * lowercase representation.
+	 * 
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	boolean hasLowerCase() {
+		return lowerCase != null;
+	}
+
 	public boolean equalsIgnoreCase(Object obj) {
-		return obj instanceof QualifiedName && ((QualifiedName) obj).getSegmentCount() == getSegmentCount()
-				&& startsWith((QualifiedName) obj, true);
+		if (obj == this)
+			return true;
+		if (obj instanceof QualifiedName) {
+			// if both instances can provide lowerCase representations
+			// use their equals method
+			QualifiedName other = (QualifiedName) obj;
+			if (hasLowerCase() && other.hasLowerCase()) {
+				return toLowerCase().equals(other.toLowerCase());
+			}
+			// check the length
+			int segmentCount = getSegmentCount();
+			if (segmentCount != other.getSegmentCount()) {
+				return false;
+			}
+			// compare by segment
+			for (int i = 0; i < segmentCount; i++) {
+				if (!getSegment(i).equalsIgnoreCase(other.getSegment(i))) {
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -300,12 +396,21 @@ public class QualifiedName implements Comparable<QualifiedName> {
 	}
 
 	protected int compareTo(QualifiedName qualifiedName, boolean ignoreCase) {
-		for (int i = 0; i < Math.min(getSegmentCount(), qualifiedName.getSegmentCount()); ++i) {
-			int result = (ignoreCase) ? getSegment(i).compareToIgnoreCase(qualifiedName.getSegment(i)) : getSegment(i)
-					.compareTo(qualifiedName.getSegment(i));
-			if (result != 0)
-				return result;
+		if (ignoreCase) {
+			for (int i = 0, upTo = Math.min(getSegmentCount(), qualifiedName.getSegmentCount()); i < upTo; ++i) {
+				int result = getSegment(i).compareToIgnoreCase(qualifiedName.getSegment(i));
+				if (result != 0)
+					return result;
+			}
+		} else {
+			for (int i = 0, upTo = Math.min(getSegmentCount(), qualifiedName.getSegmentCount()); i < upTo; ++i) {
+				int result = getSegment(i).compareTo(qualifiedName.getSegment(i));
+				if (result != 0)
+					return result;
+			}
 		}
+		// with Java7 this should probably read
+		// return Integer.compare(getSegmentCount(), qualifiedName.getSegmentCount()) 
 		return getSegmentCount() - qualifiedName.getSegmentCount();
 	}
 
@@ -320,12 +425,19 @@ public class QualifiedName implements Comparable<QualifiedName> {
 	protected boolean startsWith(QualifiedName prefix, boolean ignoreCase) {
 		if (prefix.getSegmentCount() > getSegmentCount())
 			return false;
-		for (int i = 0; i < prefix.getSegmentCount(); ++i) {
-			if ((ignoreCase && !this.getSegment(i).equalsIgnoreCase(prefix.getSegment(i)))
-					|| (!ignoreCase && !this.getSegment(i).equals(prefix.getSegment(i))))
-				return false;
+		if (ignoreCase) {
+			for (int i = 0; i < prefix.getSegmentCount(); ++i) {
+				if (!this.getSegment(i).equalsIgnoreCase(prefix.getSegment(i)))
+					return false;
+			}
+			return true;
+		} else {
+			for (int i = 0; i < prefix.getSegmentCount(); ++i) {
+				if(!getSegment(i).equals(prefix.getSegment(i)))
+					return false;
+			}
+			return true;
 		}
-		return true;
 	}
 
 	/**
@@ -350,9 +462,9 @@ public class QualifiedName implements Comparable<QualifiedName> {
 			case 1: return getFirstSegment();
 			default:
 				StringBuilder builder = new StringBuilder();
-				for (int i = 0; i < segmentCount; i++) {
-					if (i > 0)
-						builder.append(delimiter);
+				builder.append(getFirstSegment());
+				for (int i = 1; i < segmentCount; i++) {
+					builder.append(delimiter);
 					builder.append(segments[i]);
 				}
 				return builder.toString();
