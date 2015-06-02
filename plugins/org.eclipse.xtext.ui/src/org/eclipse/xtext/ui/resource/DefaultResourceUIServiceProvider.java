@@ -156,7 +156,7 @@ public class DefaultResourceUIServiceProvider implements IResourceServiceProvide
 	}
 
 	/**
-	 * @since 2.8
+	 * @since 2.9
 	 */
 	@Override
 	public boolean isSource(URI uri) {
