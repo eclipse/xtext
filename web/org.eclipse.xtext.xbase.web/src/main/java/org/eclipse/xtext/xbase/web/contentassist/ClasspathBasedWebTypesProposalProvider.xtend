@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.web.contentassist
 import com.google.common.base.Predicate
 import com.google.common.collect.Iterables
 import com.google.inject.Inject
+import java.util.Collections
 import org.eclipse.emf.ecore.EReference
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.naming.IQualifiedNameConverter
@@ -19,9 +20,11 @@ import org.eclipse.xtext.util.ReplaceRegion
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult
 import org.eclipse.xtext.web.server.contentassist.IWebContentProposaAcceptor
 import org.eclipse.xtext.web.server.contentassist.WebContentProposalPriorities
+import org.eclipse.xtext.xbase.imports.IImportsConfiguration
 import org.eclipse.xtext.xbase.imports.ImportSectionRegionUtil
 import org.eclipse.xtext.xbase.web.scoping.ClasspathScanner
 import org.eclipse.xtext.xbase.web.scoping.ITypeDescriptor
+import org.eclipse.xtext.xtype.XImportSection
 import org.eclipse.xtext.xtype.XtypePackage
 import org.objectweb.asm.Opcodes
 
@@ -33,15 +36,23 @@ class ClasspathBasedWebTypesProposalProvider implements IWebTypesProposalProvide
 	
 	@Inject IQualifiedNameConverter qualifiedNameConverter
 	
+	@Inject IImportsConfiguration importsConfiguration
+	
 	@Inject ImportSectionRegionUtil importSectionRegionUtil
 	
 	override createTypeProposals(EReference reference, ContentAssistContext context, Predicate<ITypeDescriptor> filter,
 			IWebContentProposaAcceptor acceptor) {
-		val importSectionRegion = if (!isImportDeclaration(reference, context)) importSectionRegionUtil.computeRegion(context.resource)
+		var ITextRegion importSectionRegion
+		var XImportSection importSection
+		if (!isImportDeclaration(reference, context)) {
+			importSection = importsConfiguration.getImportSection(context.resource)
+			importSectionRegion = importSectionRegionUtil.computeRegion(context.resource)
+		}
+		
 		var count = 0
 		for (typeDesc : context.typeDescriptors) {
 			if (canPropose(typeDesc, context, filter, count)) {
-				val entry = createProposal(reference, typeDesc, context, importSectionRegion)
+				val entry = createProposal(reference, typeDesc, context, importSection, importSectionRegion)
 				val priority = (proposalPriorities as XbaseWebContentProposalPriorities).getTypeRefPriority(typeDesc, entry)
 				acceptor.accept(entry, priority)
 				count++
@@ -50,9 +61,10 @@ class ClasspathBasedWebTypesProposalProvider implements IWebTypesProposalProvide
 	}
 	
 	protected def getTypeDescriptors(ContentAssistContext context) {
-		val classLoader = context.classLoader
 		val classpathScanner = ClasspathScanner.instance
-		return Iterables.concat(classpathScanner.bootClasspathDescriptors, classpathScanner.getDescriptors(classLoader))
+		val bootClasspath = classpathScanner.getBootClasspathDescriptors(#['java'])
+		val appClasspath = classpathScanner.getDescriptors(context.classLoader, Collections.emptyList)
+		return Iterables.concat(bootClasspath, appClasspath)
 	}
 	
 	protected def getClassLoader(ContentAssistContext context) {
@@ -82,17 +94,21 @@ class ClasspathBasedWebTypesProposalProvider implements IWebTypesProposalProvide
 	}
 	
 	protected def ContentAssistResult.Entry createProposal(EReference reference, ITypeDescriptor typeDesc,
-			ContentAssistContext context, ITextRegion importSectionRegion) {
+			ContentAssistContext context, XImportSection importSection, ITextRegion importSectionRegion) {
 		return new ContentAssistResult.Entry(context.prefix) => [
+			val qualifiedName = qualifiedNameConverter.toString(typeDesc.qualifiedName)
 			if (isImportDeclaration(reference, context)) {
-				proposal = qualifiedNameConverter.toString(typeDesc.qualifiedName)
+				proposal = qualifiedName
 				name = typeDesc.simpleName
 				description = proposal
 			} else {
 				proposal = typeDesc.simpleName
-				description = qualifiedNameConverter.toString(typeDesc.qualifiedName)
-				if (importSectionRegion !== null && isImportDeclarationRequired(typeDesc, context))
-					addImportDeclaration(importSectionRegion, typeDesc, context)
+				description = qualifiedName
+				if (importSectionRegion !== null
+						&& isImportDeclarationRequired(typeDesc, context)
+						&& !importSection.importDeclarations.exists[importedType?.qualifiedName == qualifiedName]) {
+					addImportDeclaration(importSectionRegion, typeDesc, qualifiedName, context)
+				}
 			}
 		]
 	}
@@ -106,9 +122,9 @@ class ClasspathBasedWebTypesProposalProvider implements IWebTypesProposalProvide
 	}
 	
 	protected def addImportDeclaration(ContentAssistResult.Entry entry, ITextRegion importSectionRegion,
-			ITypeDescriptor typeDesc, ContentAssistContext context) {
+			ITypeDescriptor typeDesc, String qualifiedName, ContentAssistContext context) {
 		val insertionOffset = importSectionRegion.offset + importSectionRegion.length
-		val declaration = '\nimport ' + qualifiedNameConverter.toString(typeDesc.qualifiedName)
+		val declaration = '\nimport ' + qualifiedName
 		entry.textReplacements += new ReplaceRegion(insertionOffset, 0, declaration)
 	}
 	
