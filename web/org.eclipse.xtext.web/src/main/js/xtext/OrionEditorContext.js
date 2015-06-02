@@ -8,15 +8,14 @@
 
 define(function() {
 	
-	function EditorContext(editor) {
+	function OrionEditorContext(editor) {
 		this._editor = editor;
-		var text = editor.getTextView().getText();
 		this._serverState = {};
 		this._serverStateListeners = [];
 		this._clientServiceState = {};
 	};
 
-	EditorContext.prototype = {
+	OrionEditorContext.prototype = {
 		
 		getEditor : function() {
 			return this._editor
@@ -58,7 +57,7 @@ define(function() {
 		},
 		
 		getText : function(start, end) {
-			return this._editor.getTextView().getText(start, end)
+			return this._editor.getTextView().getText(start, end);
 		},
 		
 		isDirty : function() {
@@ -86,10 +85,20 @@ define(function() {
 			var fullText = this.getText();
 		},
 		
-		showMarkers : function(problems) {
+		showMarkers : function(entries) {
+			var problems = [];
+			for (var i = 0; i < entries.length; i++) {
+				var e = entries[i];
+				problems.push({
+					description : e.description,
+					start : e.startOffset,
+					end : e.endOffset,
+					severity : e.severity
+				});
+			}
 			this._editor.showProblems(problems);
 		}
 	};
 	
-	return EditorContext;
+	return OrionEditorContext;
 });

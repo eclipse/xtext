@@ -74,7 +74,7 @@ public class WebProjectContributor extends DefaultProjectFactoryContributor {
       _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"xtext/");
       String _xtextVersion = this.projectInfo.getXtextVersion();
       _builder.append(_xtextVersion, "\t");
-      _builder.append("/xtext.css\"/>");
+      _builder.append("/xtext-orion.css\"/>");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />");
@@ -98,10 +98,10 @@ public class WebProjectContributor extends DefaultProjectFactoryContributor {
       _builder.append("\"jquery\": \"webjars/jquery/2.1.4/jquery.min\",");
       _builder.newLine();
       _builder.append("\t\t\t\t");
-      _builder.append("\"xtext/xtext\": \"xtext/");
+      _builder.append("\"xtext/xtext-orion\": \"xtext/");
       String _xtextVersion_1 = this.projectInfo.getXtextVersion();
       _builder.append(_xtextVersion_1, "\t\t\t\t");
-      _builder.append("/xtext\"");
+      _builder.append("/xtext-orion\"");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t\t");
       _builder.append("}");
@@ -110,7 +110,7 @@ public class WebProjectContributor extends DefaultProjectFactoryContributor {
       _builder.append("});");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("require([\"xtext/xtext\"], function(xtext) {");
+      _builder.append("require([\"xtext/xtext-orion\"], function(xtext) {");
       _builder.newLine();
       _builder.append("\t\t\t");
       _builder.append("xtext.createEditor();");
@@ -144,7 +144,7 @@ public class WebProjectContributor extends DefaultProjectFactoryContributor {
       _builder.append("<div class=\"content\">");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("<div class=\"xtext-editor\" data-editor-lang=\"");
+      _builder.append("<div id=\"xtext-editor\" data-editor-lang=\"");
       String _fileExtension = this.projectInfo.getFileExtension();
       _builder.append(_fileExtension, "\t\t");
       _builder.append("\"></div>");
@@ -275,7 +275,7 @@ public class WebProjectContributor extends DefaultProjectFactoryContributor {
       _builder_1.append("}");
       _builder_1.newLine();
       _builder_1.newLine();
-      _builder_1.append(".xtext-editor {");
+      _builder_1.append("#xtext-editor {");
       _builder_1.newLine();
       _builder_1.append("\t");
       _builder_1.append("display: block;");

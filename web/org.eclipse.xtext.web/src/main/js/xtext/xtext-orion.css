@@ -1,0 +1,8 @@
+.contentassist .proposal-default {
+	color: #777;
+}
+
+.contentassist .proposal-name {
+	color: #000;
+	padding-right: 12px;
+}

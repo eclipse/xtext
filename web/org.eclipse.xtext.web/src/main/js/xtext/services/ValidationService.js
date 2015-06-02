@@ -50,17 +50,7 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 					}
 					return false;
 				}
-				var problems = [];
-				for (var i = 0; i < result.entries.length; i++) {
-					var e = result.entries[i];
-					problems.push({
-						description : e.description,
-						start : e.startOffset,
-						end : e.endOffset,
-						severity : e.severity
-					});
-				}
-				editorContext.showMarkers(problems)
+				editorContext.showMarkers(result.entries);
 			}
 		});
 	};

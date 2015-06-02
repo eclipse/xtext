@@ -26,19 +26,19 @@ task downloadRequireJsPlugins {
 	}
 }
 
-requirejs.buildprofile = file('src/main/js/requirejs-config.js')
+requirejs.buildprofile = file('src/main/js/requirejs-orion-config.js')
 requirejs.options = [optimize: 'none']
 
 requireJs {
 	dependsOn(downloadRequireJsPlugins)
     source = javascript.source.main.js
-    dest = file("$buildDir/opt-resources/META-INF/resources/xtext/${project.version}/xtext.js")
+    dest = file("$buildDir/opt-resources/META-INF/resources/xtext/${project.version}/xtext-orion.js")
 }
 
 task copyCss(type: Copy) {
     from 'src/main/js/orion/built-editor.css'
     into "$buildDir/opt-resources/META-INF/resources/xtext/${project.version}"
-    rename { 'xtext.css' }
+    rename { 'xtext-orion.css' }
 }
 
 sourceSets.main.resources.srcDir "$buildDir/opt-resources"
