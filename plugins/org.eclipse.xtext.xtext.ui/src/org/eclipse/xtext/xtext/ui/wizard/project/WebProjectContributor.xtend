@@ -46,7 +46,7 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 				<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 				<meta http-equiv="Content-Language" content="en-us">
 				<title>Example Web Editor</title>
-				<link rel="stylesheet" type="text/css" href="xtext/«projectInfo.xtextVersion»/xtext.css"/>
+				<link rel="stylesheet" type="text/css" href="xtext/«projectInfo.xtextVersion»/xtext-orion.css"/>
 				<link rel="stylesheet" type="text/css" href="style.css" />
 				<script src="webjars/requirejs/2.1.17/require.min.js"></script>
 				<script type="text/javascript">
@@ -54,10 +54,10 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 						paths: {
 							"text": "webjars/requirejs-text/2.0.10-3/text",
 							"jquery": "webjars/jquery/2.1.4/jquery.min",
-							"xtext/xtext": "xtext/«projectInfo.xtextVersion»/xtext"
+							"xtext/xtext-orion": "xtext/«projectInfo.xtextVersion»/xtext-orion"
 						}
 					});
-					require(["xtext/xtext"], function(xtext) {
+					require(["xtext/xtext-orion"], function(xtext) {
 						xtext.createEditor();
 					});
 				</script>
@@ -69,7 +69,7 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 					<h1>Example «projectInfo.languageNameAbbreviation» Web Editor</h1>
 				</div>
 				<div class="content">
-					<div class="xtext-editor" data-editor-lang="«projectInfo.fileExtension»"></div>
+					<div id="xtext-editor" data-editor-lang="«projectInfo.fileExtension»"></div>
 				</div>
 			</div>
 			
@@ -124,7 +124,7 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 				width: 640px;
 			}
 			
-			.xtext-editor {
+			#xtext-editor {
 				display: block;
 				position: absolute;
 				top: 0;
