@@ -116,7 +116,7 @@ define([
 	"orion/editor/editorFeatures",
 	"orion/editor/contentAssist",
 	"orion/editor/textStyler",
-	"xtext/services/EditorContext",
+	"xtext/OrionEditorContext",
 	"xtext/services/LoadResourceService",
 	"xtext/services/RevertResourceService",
 	"xtext/services/SaveResourceService",

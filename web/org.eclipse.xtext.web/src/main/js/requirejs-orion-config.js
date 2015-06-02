@@ -1,6 +1,6 @@
 ({
 	baseUrl: ".",
-	name: "xtext/xtext",
+	name: "xtext/xtext-orion",
 	paths: {
 		"jquery": "empty:",
 		"text": "../../../build/tmp/js/requirejs-plugins/text",
