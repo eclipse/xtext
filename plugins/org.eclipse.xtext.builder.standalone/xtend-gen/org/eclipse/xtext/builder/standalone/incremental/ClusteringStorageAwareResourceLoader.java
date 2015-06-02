@@ -78,9 +78,8 @@ public class ClusteringStorageAwareResourceLoader {
             loadedURIs.clear();
           }
           loadedURIs.add(uri);
-          boolean _isReadOnly = this.isReadOnly(uri);
-          boolean _not_1 = (!_isReadOnly);
-          if (_not_1) {
+          boolean _isSource = this.isSource(uri);
+          if (_isSource) {
             sourceLevelURIs.add(uri);
             XtextResourceSet _resourceSet_1 = this.context.getResourceSet();
             final Resource existingResource = _resourceSet_1.getResource(uri, false);
@@ -111,7 +110,7 @@ public class ClusteringStorageAwareResourceLoader {
     return _xblockexpression;
   }
   
-  protected boolean isReadOnly(final URI uri) {
+  protected boolean isSource(final URI uri) {
     Map<String, LanguageAccess> _languages = this.context.getLanguages();
     String _fileExtension = uri.fileExtension();
     LanguageAccess _get = _languages.get(_fileExtension);
@@ -120,8 +119,8 @@ public class ClusteringStorageAwareResourceLoader {
     if (!(provider instanceof IResourceServiceProviderExtension)) {
       _and = false;
     } else {
-      boolean _isReadOnly = ((IResourceServiceProviderExtension) provider).isReadOnly(uri);
-      _and = _isReadOnly;
+      boolean _isSource = ((IResourceServiceProviderExtension) provider).isSource(uri);
+      _and = _isSource;
     }
     return _and;
   }

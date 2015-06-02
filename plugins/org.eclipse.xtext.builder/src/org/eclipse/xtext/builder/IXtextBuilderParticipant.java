@@ -81,7 +81,7 @@ public interface IXtextBuilderParticipant {
 		/**
 		 * Returns true if the given uri points to a resource from the workspace rather than from an archive.
 		 * 
-		 * @since 2.8
+		 * @since 2.9
 		 */
 		boolean isSourceLevelURI(URI uri);
 		/**
