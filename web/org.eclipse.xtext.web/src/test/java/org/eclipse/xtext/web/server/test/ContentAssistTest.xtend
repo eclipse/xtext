@@ -15,24 +15,26 @@ import static org.hamcrest.core.IsInstanceOf.*
 
 class ContentAssistTest extends AbstractWebServerTest {
 	
-	protected def assertContentAssistResult(String resourceContent, String expectedResult) {
-		val cursorOffset = resourceContent.indexOf('|')
-		if (cursorOffset >= 0)
-			assertContentAssistResult(resourceContent, cursorOffset, expectedResult)
-		else
+	protected def assertContentAssistResult(CharSequence resourceContent, CharSequence expectedResult) {
+		var contentString = resourceContent.toString
+		val cursorOffset = contentString.indexOf('|')
+		if (cursorOffset >= 0) {
+			contentString = contentString.substring(0, cursorOffset) + contentString.substring(cursorOffset + 1)
+			assertContentAssistResult(contentString, cursorOffset, expectedResult)
+		} else
 			assertContentAssistResult(resourceContent, 0, expectedResult)
 	}
 	
-	protected def assertContentAssistResult(String resourceContent, int offset, String expectedResult) {
+	protected def assertContentAssistResult(CharSequence resourceContent, int offset, CharSequence expectedResult) {
 		val sessionStore = new HashMapSessionStore
 		val contentAssist = dispatcher.getService('/content-assist', #{
-				'fullText' -> resourceContent,
+				'fullText' -> resourceContent.toString,
 				'caretOffset' -> offset.toString
 			}, sessionStore)
 		assertFalse(contentAssist.hasSideEffects)
 		assertTrue(contentAssist.hasTextInput)
 		val result = contentAssist.service.apply() as ContentAssistResult
-		assertEquals(expectedResult, result.toString)
+		assertEquals(expectedResult.toString, result.toString)
 	}
 	
 	@Test def testKeywords() {

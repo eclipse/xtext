@@ -7,7 +7,6 @@ dependencies {
     compile project(':plugins:org.eclipse.xtext.ide')
     testCompile group: 'junit', name: 'junit', version: '4.12'
     testCompile project(':plugins:org.eclipse.xtext.junit4')
-    testCompile project(':web:org.eclipse.xtext.web.example.statemachine')
     testCompile project(':web:org.eclipse.xtext.web.example.statemachine.ide')
 }
 

@@ -105,8 +105,7 @@ class ClasspathBasedWebTypesProposalProvider implements IWebTypesProposalProvide
 				proposal = typeDesc.simpleName
 				description = qualifiedName
 				if (importSectionRegion !== null
-						&& isImportDeclarationRequired(typeDesc, context)
-						&& !importSection.importDeclarations.exists[importedType?.qualifiedName == qualifiedName]) {
+						&& isImportDeclarationRequired(typeDesc, qualifiedName, context, importSection)) {
 					addImportDeclaration(importSectionRegion, typeDesc, qualifiedName, context)
 				}
 			}
@@ -117,8 +116,10 @@ class ClasspathBasedWebTypesProposalProvider implements IWebTypesProposalProvide
 		reference == XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE
 	}
 	
-	protected def isImportDeclarationRequired(ITypeDescriptor typeDesc, ContentAssistContext context) {
+	protected def isImportDeclarationRequired(ITypeDescriptor typeDesc, String qualifiedName,
+			ContentAssistContext context, XImportSection importSection) {
 		!(typeDesc.name.startsWith('java.lang') && typeDesc.name.lastIndexOf('.') == 9)
+			&& (importSection === null || !importSection.importDeclarations.exists[importedType?.qualifiedName == qualifiedName])
 	}
 	
 	protected def addImportDeclaration(ContentAssistResult.Entry entry, ITextRegion importSectionRegion,
