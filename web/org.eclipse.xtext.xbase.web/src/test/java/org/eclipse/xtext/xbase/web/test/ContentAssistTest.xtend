@@ -33,51 +33,40 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 	}
 	
 	@Test def testExtendsType() {
-		'entity Foo extends ArrayLis|'.assertContentAssistResult('''
+		'entity Foo extends AbstractQu|'.assertContentAssistResult('''
 			ContentAssistResult [
 			  stateId = "-80000000"
 			  entries = ArrayList (
 			    Entry [
-			      prefix = "ArrayLis"
-			      proposal = "ArrayList"
-			      description = "java.util.ArrayList"
+			      prefix = "AbstractQu"
+			      proposal = "AbstractQueue"
+			      description = "java.util.AbstractQueue"
 			      escapePosition = 0
 			      textReplacements = ArrayList (
 			        replace region [0 / length: 0] '
-			        import java.util.ArrayList'
+			        import java.util.AbstractQueue'
 			      )
 			      editPositions = ArrayList ()
 			    ],
 			    Entry [
-			      prefix = "ArrayLis"
-			      proposal = "ArrayListMultimap"
-			      description = "com.google.common.collect.ArrayListMultimap"
+			      prefix = "AbstractQu"
+			      proposal = "AbstractQueuedLongSynchronizer"
+			      description = "java.util.concurrent.locks.AbstractQueuedLongSynchronizer"
 			      escapePosition = 0
 			      textReplacements = ArrayList (
 			        replace region [0 / length: 0] '
-			        import com.google.common.collect.ArrayListMultimap'
+			        import java.util.concurrent.locks.AbstractQueuedLongSynchronizer'
 			      )
 			      editPositions = ArrayList ()
 			    ],
 			    Entry [
-			      prefix = "ArrayLis"
-			      proposal = "ArrayListMultimap"
-			      description = "com.google.common.collect.ArrayListMultimap"
+			      prefix = "AbstractQu"
+			      proposal = "AbstractQueuedSynchronizer"
+			      description = "java.util.concurrent.locks.AbstractQueuedSynchronizer"
 			      escapePosition = 0
 			      textReplacements = ArrayList (
 			        replace region [0 / length: 0] '
-			        import com.google.common.collect.ArrayListMultimap'
-			      )
-			      editPositions = ArrayList ()
-			    ],
-			    Entry [
-			      prefix = "ArrayLis"
-			      proposal = "ArrayListTextSegmentSet"
-			      description = "org.eclipse.xtext.formatting2.internal.ArrayListTextSegmentSet"
-			      escapePosition = 0
-			      textReplacements = ArrayList (
-			        replace region [0 / length: 0] '
-			        import org.eclipse.xtext.formatting2.internal.ArrayListTextSegmentSet'
+			        import java.util.concurrent.locks.AbstractQueuedSynchronizer'
 			      )
 			      editPositions = ArrayList ()
 			    ]
@@ -86,51 +75,40 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 	}
 	
 	@Test def testPropertyType() {
-		'entity Foo { bar: ArrayLis| }'.assertContentAssistResult('''
+		'entity Foo { bar: AbstractQu| }'.assertContentAssistResult('''
 			ContentAssistResult [
 			  stateId = "-80000000"
 			  entries = ArrayList (
 			    Entry [
-			      prefix = "ArrayLis"
-			      proposal = "ArrayList"
-			      description = "java.util.ArrayList"
+			      prefix = "AbstractQu"
+			      proposal = "AbstractQueue"
+			      description = "java.util.AbstractQueue"
 			      escapePosition = 0
 			      textReplacements = ArrayList (
 			        replace region [0 / length: 0] '
-			        import java.util.ArrayList'
+			        import java.util.AbstractQueue'
 			      )
 			      editPositions = ArrayList ()
 			    ],
 			    Entry [
-			      prefix = "ArrayLis"
-			      proposal = "ArrayListMultimap"
-			      description = "com.google.common.collect.ArrayListMultimap"
+			      prefix = "AbstractQu"
+			      proposal = "AbstractQueuedLongSynchronizer"
+			      description = "java.util.concurrent.locks.AbstractQueuedLongSynchronizer"
 			      escapePosition = 0
 			      textReplacements = ArrayList (
 			        replace region [0 / length: 0] '
-			        import com.google.common.collect.ArrayListMultimap'
+			        import java.util.concurrent.locks.AbstractQueuedLongSynchronizer'
 			      )
 			      editPositions = ArrayList ()
 			    ],
 			    Entry [
-			      prefix = "ArrayLis"
-			      proposal = "ArrayListMultimap"
-			      description = "com.google.common.collect.ArrayListMultimap"
+			      prefix = "AbstractQu"
+			      proposal = "AbstractQueuedSynchronizer"
+			      description = "java.util.concurrent.locks.AbstractQueuedSynchronizer"
 			      escapePosition = 0
 			      textReplacements = ArrayList (
 			        replace region [0 / length: 0] '
-			        import com.google.common.collect.ArrayListMultimap'
-			      )
-			      editPositions = ArrayList ()
-			    ],
-			    Entry [
-			      prefix = "ArrayLis"
-			      proposal = "ArrayListTextSegmentSet"
-			      description = "org.eclipse.xtext.formatting2.internal.ArrayListTextSegmentSet"
-			      escapePosition = 0
-			      textReplacements = ArrayList (
-			        replace region [0 / length: 0] '
-			        import org.eclipse.xtext.formatting2.internal.ArrayListTextSegmentSet'
+			        import java.util.concurrent.locks.AbstractQueuedSynchronizer'
 			      )
 			      editPositions = ArrayList ()
 			    ]
