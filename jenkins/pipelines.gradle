@@ -12,14 +12,14 @@ def allSuites = onPushSuites + slowSuites + smokeSuites + generatorSuites
 def testScripts = allSuites.collectEntries{suite -> [(suite): project.file("scripts/${suite}.txt").text]}
 
 branches.each { branch ->
-	def testJobs = [allSuites, ['oldest', 'latest']]
+	def testJobs = [allSuites, branch.platforms.keySet()]
 		.combinations{ suite, platformName -> 
 			def platform = branch.platforms[platformName]
-			new TestJob(branch: branch.name, suite: suite, platformName: platformName, target: platform.target, jdk: platform.jdk, buildSystem: 'buckminster')
+			new TestJob(branch: branch.name, branchDisplayName: branch.displayName, suite: suite, platformName: platformName, target: platform.target, jdk: platform.jdk, buildSystem: 'buckminster')
 		}
 		.findAll {
 			(!(smokeSuites + java8Suites).contains(it.suite) || it.platformName == 'latest') &&
-			(!intellijSuites.contains(it.suite) || it.branch == 'master' && it.target == 'Latest')
+			(!intellijSuites.contains(it.suite) || it.branch != 'maintenance' && it.target != 'oldest')
 		}
 		.each {
 			if(java8Suites.contains(it.suite)) {
@@ -32,19 +32,19 @@ branches.each { branch ->
 
 	jenkins {
 		
-		jobs.create("xtext-${branch.name}").definition {
+		jobs.create("xtext-${branch.displayName}").definition {
 			xml templates.push.override { config -> 
 				config.scm.branches.'hudson.plugins.git.BranchSpec'.name = branch.name
 				config.description = "This job was generated"
 				config.builders.'hudson.plugins.copyartifact.CopyArtifact'[0]
-					.project = "target-platforms-${branch.name}"
+					.project = "target-platforms-${branch.displayName}"
 				config.publishers.'hudson.plugins.parameterizedtrigger.BuildTrigger'.configs
 					.'hudson.plugins.parameterizedtrigger.BuildTriggerConfig'
 					.projects	= testJobs.findAll{onPushSuites.contains(it.suite)}.collect{it.name}.join(',')
 				}
 		}
 		
-		jobs.create("target-platforms-${branch.name}").definition {
+		jobs.create("target-platforms-${branch.displayName}").definition {
 			xml templates.targetPlatforms.override { config -> 
 				config.scm.branches.'hudson.plugins.git.BranchSpec'.name = branch.name
 				config.description = "This job was generated"
@@ -96,9 +96,9 @@ branches.each { branch ->
 					
 					if (job.buildSystem == 'buckminster') {
 						config.builders.'hudson.plugins.copyartifact.CopyArtifact'[0]
-							.project = "xtext-${branch.name}"
+							.project = "xtext-${branch.displayName}"
 						config.builders.'hudson.plugins.copyartifact.CopyArtifact'[1]
-							.project = "target-platforms-${branch.name}"
+							.project = "target-platforms-${branch.displayName}"
 						def builder = config.builders.'hudson.plugins.buckminster.EclipseBuckminsterBuilder'
 						def params = '-Declipse.p2.mirrors=false\n-Dcheckout.location=${WORKSPACE}/org.eclipse.xtext.git/\n-Dxtext.checkout.location=${checkout.location}\n-Dxtext.p2.repository=${WORKSPACE}/repositories/xtext.p2.repository'
 						if (job.jdk == jdks['1.8']) {
@@ -129,9 +129,10 @@ class TestJob {
 	String target
 	String jdk
 	String branch
+	String branchDisplayName
 	String buildSystem
 	
 	def getName() {
-		suite + "-" + branch + "-" + platformName
+		suite + "-" + branchDisplayName + "-" + platformName
 	}
 }

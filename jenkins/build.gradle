@@ -11,6 +11,7 @@ ext.jdks = [
 ext.branches = [
 	[
 		name: 'master',
+		displayName: 'master',
 		platforms: [
 			oldest: [
 				target: 'Helios',
@@ -24,11 +25,22 @@ ext.branches = [
 	],
 	[
 		name: 'maintenance',
+		displayName: 'maintenance',
 		platforms: [
 			oldest: [
 				target: 'Helios',
 				jdk: jdks['1.6']
 			],
+			latest: [
+				target: 'Latest',
+				jdk: jdks['1.7']
+			],
+		]
+	],
+	[
+		name: 'jk/idea_autobuild',
+		displayName: 'idea_autobuild',
+		platforms: [
 			latest: [
 				target: 'Latest',
 				jdk: jdks['1.7']
