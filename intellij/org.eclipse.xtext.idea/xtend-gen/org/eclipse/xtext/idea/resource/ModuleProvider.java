@@ -7,12 +7,14 @@
  */
 package org.eclipse.xtext.idea.resource;
 
-import com.google.inject.ImplementedBy;
+import com.intellij.openapi.module.Module;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.idea.resource.ProjectBasedResourceSetProvider;
+import org.eclipse.xtext.resource.XtextResourceSet;
 
-@ImplementedBy(ProjectBasedResourceSetProvider.class)
 @SuppressWarnings("all")
-public interface IResourceSetProvider {
-  public abstract ResourceSet get(final Object context);
+public class ModuleProvider {
+  public static Module findModule(final ResourceSet resourceSet) {
+    Object _classpathURIContext = ((XtextResourceSet) resourceSet).getClasspathURIContext();
+    return ((Module) _classpathURIContext);
+  }
 }

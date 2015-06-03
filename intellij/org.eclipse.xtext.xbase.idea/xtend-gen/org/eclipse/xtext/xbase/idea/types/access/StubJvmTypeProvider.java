@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.idea.types.access;
 
 import com.google.common.base.Objects;
+import com.intellij.openapi.module.Module;
 import com.intellij.openapi.progress.ProgressIndicatorProvider;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.JavaPsiFacade;
@@ -21,7 +22,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
@@ -34,7 +34,6 @@ import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
 import org.eclipse.xtext.idea.extensions.IdeaProjectExtensions;
 import org.eclipse.xtext.psi.IPsiModelAssociator;
 import org.eclipse.xtext.resource.ISynchronizable;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -49,18 +48,22 @@ import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
-  @Accessors(AccessorType.PUBLIC_GETTER)
-  private final Project project;
-  
   private final ITypeFactory<PsiClass, JvmDeclaredType> psiClassFactory;
   
-  @Accessors(AccessorType.PUBLIC_GETTER)
+  @Accessors
+  private final Module module;
+  
+  @Accessors
   @Extension
   private final StubURIHelper uriHelper;
   
-  public StubJvmTypeProvider(final Project project, final ResourceSet resourceSet, final IndexedJvmTypeAccess indexedJvmTypeAccess, final TypeResourceServices services, final IPsiModelAssociator psiModelAssociator) {
+  @Accessors
+  private final GlobalSearchScope searchScope;
+  
+  public StubJvmTypeProvider(final Module module, final ResourceSet resourceSet, final IndexedJvmTypeAccess indexedJvmTypeAccess, final TypeResourceServices services, final IPsiModelAssociator psiModelAssociator, final GlobalSearchScope searchScope) {
     super(resourceSet, indexedJvmTypeAccess, services);
-    this.project = project;
+    this.module = module;
+    this.searchScope = searchScope;
     StubURIHelper _createStubURIHelper = this.createStubURIHelper();
     this.uriHelper = _createStubURIHelper;
     PsiBasedTypeFactory _createPsiClassFactory = this.createPsiClassFactory(psiModelAssociator);
@@ -227,9 +230,9 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
   protected IMirror createMirrorForFQN(final String name) {
     PsiClassMirror _xblockexpression = null;
     {
-      JavaPsiFacade _javaPsiFacade = IdeaProjectExtensions.getJavaPsiFacade(this.project);
-      GlobalSearchScope _searchScope = this.getSearchScope();
-      final PsiClass psiClass = IdeaProjectExtensions.findClassWithAlternativeResolvedEnabled(_javaPsiFacade, name, _searchScope);
+      Project _project = this.module.getProject();
+      JavaPsiFacade _javaPsiFacade = IdeaProjectExtensions.getJavaPsiFacade(_project);
+      final PsiClass psiClass = IdeaProjectExtensions.findClassWithAlternativeResolvedEnabled(_javaPsiFacade, name, this.searchScope);
       boolean _or = false;
       boolean _equals = Objects.equal(psiClass, null);
       if (_equals) {
@@ -251,26 +254,12 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
   }
   
   protected GlobalSearchScope getSearchScope() {
-    GlobalSearchScope _switchResult = null;
-    ResourceSet _resourceSet = this.getResourceSet();
-    final ResourceSet resourceSet = _resourceSet;
-    boolean _matched = false;
-    if (!_matched) {
-      if (resourceSet instanceof XtextResourceSet) {
-        _matched=true;
-        Object _classpathURIContext = ((XtextResourceSet)resourceSet).getClasspathURIContext();
-        _switchResult = ((GlobalSearchScope) _classpathURIContext);
-      }
-    }
-    if (!_matched) {
-      _switchResult = GlobalSearchScope.allScope(this.project);
-    }
-    return _switchResult;
+    return this.searchScope;
   }
   
   @Pure
-  public Project getProject() {
-    return this.project;
+  public Module getModule() {
+    return this.module;
   }
   
   @Pure

@@ -25,9 +25,9 @@ import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.incremental.BuildContext;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
-import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
 import org.eclipse.xtext.builder.standalone.incremental.IClassFileBasedDependencyFinder;
 import org.eclipse.xtext.builder.standalone.incremental.IndexState;
+import org.eclipse.xtext.builder.standalone.incremental.JavaSupport;
 import org.eclipse.xtext.builder.standalone.incremental.ResolvedResourceDescription;
 import org.eclipse.xtext.builder.standalone.incremental.ResourceURICollector;
 import org.eclipse.xtext.builder.standalone.incremental.Source2GeneratedMapping;
@@ -143,6 +143,9 @@ public class Indexer {
   private ResourceURICollector uriCollector;
   
   @Inject
+  private JavaSupport javaSupport;
+  
+  @Inject
   private CompilerPhases compilerPhases;
   
   @Inject
@@ -169,16 +172,6 @@ public class Indexer {
     final ResourceDescriptionsData newIndex = oldIndex.copy();
     XtextResourceSet _resourceSet = context.getResourceSet();
     final IResourceDescriptions resourceDescriptions = this.installIndex(_resourceSet, newIndex);
-    Map<String, LanguageAccess> _languages = context.getLanguages();
-    Set<Map.Entry<String, LanguageAccess>> _entrySet = _languages.entrySet();
-    final Function1<Map.Entry<String, LanguageAccess>, Boolean> _function = new Function1<Map.Entry<String, LanguageAccess>, Boolean>() {
-      @Override
-      public Boolean apply(final Map.Entry<String, LanguageAccess> it) {
-        LanguageAccess _value = it.getValue();
-        return Boolean.valueOf(_value.isLinksAgainstJava());
-      }
-    };
-    final boolean isConsiderJava = IterableExtensions.<Map.Entry<String, LanguageAccess>>exists(_entrySet, _function);
     final HashSet<URI> affectionCandidates = CollectionLiterals.<URI>newHashSet();
     Set<URI> directlyAffected = null;
     if (fullBuild) {
@@ -191,23 +184,23 @@ public class Indexer {
       Iterable<URI> _plus = Iterables.<URI>concat(_dirtyFiles, _deletedFiles);
       final Set<URI> allModified = IterableExtensions.<URI>toSet(_plus);
       Set<URI> _allURIs = oldIndex.getAllURIs();
-      final Function1<URI, Boolean> _function_1 = new Function1<URI, Boolean>() {
+      final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
         @Override
         public Boolean apply(final URI it) {
           boolean _contains = allModified.contains(it);
           return Boolean.valueOf((!_contains));
         }
       };
-      Iterable<URI> _filter = IterableExtensions.<URI>filter(_allURIs, _function_1);
+      Iterable<URI> _filter = IterableExtensions.<URI>filter(_allURIs, _function);
       Iterables.<URI>addAll(affectionCandidates, _filter);
       List<URI> _dirtyFiles_1 = request.getDirtyFiles();
-      final Function1<URI, Iterable<URI>> _function_2 = new Function1<URI, Iterable<URI>>() {
+      final Function1<URI, Iterable<URI>> _function_1 = new Function1<URI, Iterable<URI>>() {
         @Override
         public Iterable<URI> apply(final URI it) {
           return Indexer.this.primarySources(it, fileMappings);
         }
       };
-      List<Iterable<URI>> _map = ListExtensions.<URI, Iterable<URI>>map(_dirtyFiles_1, _function_2);
+      List<Iterable<URI>> _map = ListExtensions.<URI, Iterable<URI>>map(_dirtyFiles_1, _function_1);
       Iterable<URI> _flatten = Iterables.<URI>concat(_map);
       Set<URI> _set_1 = IterableExtensions.<URI>toSet(_flatten);
       directlyAffected = _set_1;
@@ -216,6 +209,19 @@ public class Indexer {
     ArrayList<IResourceDescription.Delta> _removeDeletedFilesFromIndex = this.removeDeletedFilesFromIndex(request, oldIndex, newIndex);
     Iterables.<IResourceDescription.Delta>addAll(currentDeltas, _removeDeletedFilesFromIndex);
     this.preIndexChangedResources(directlyAffected, oldIndex, newIndex, request, context);
+    Map<String, LanguageAccess> _languages = context.getLanguages();
+    Set<Map.Entry<String, LanguageAccess>> _entrySet = _languages.entrySet();
+    final Function1<Map.Entry<String, LanguageAccess>, Boolean> _function_2 = new Function1<Map.Entry<String, LanguageAccess>, Boolean>() {
+      @Override
+      public Boolean apply(final Map.Entry<String, LanguageAccess> it) {
+        LanguageAccess _value = it.getValue();
+        return Boolean.valueOf(_value.isLinksAgainstJava());
+      }
+    };
+    final boolean isConsiderJava = IterableExtensions.<Map.Entry<String, LanguageAccess>>exists(_entrySet, _function_2);
+    if (isConsiderJava) {
+      this.javaSupport.preCompileJavaFiles(directlyAffected, newIndex, request, context);
+    }
     Indexer.LOG.info("Indexing changed and added files");
     final HashSet<URI> allAffected = CollectionLiterals.<URI>newHashSet();
     Iterables.<URI>addAll(allAffected, directlyAffected);
@@ -322,13 +328,23 @@ public class Indexer {
         final Procedure1<URI> _function_11 = new Procedure1<URI>() {
           @Override
           public void apply(final URI it) {
-            URI _findSourceRootRelativeURI = FilesAndURIs.findSourceRootRelativeURI(it, request);
-            URI _trimFileExtension = _findSourceRootRelativeURI.trimFileExtension();
-            final String javaPath = _trimFileExtension.toString();
-            String _replace = javaPath.replace("/", ".");
-            final QualifiedName fqn = Indexer.this.qualifiedNameConverter.toQualifiedName(_replace);
-            TypeResourceDescription.ChangedDelta _changedDelta = new TypeResourceDescription.ChangedDelta(fqn);
-            currentDeltas.add(_changedDelta);
+            final String stringUri = it.toString();
+            List<URI> _sourceRoots = request.getSourceRoots();
+            for (final URI srcRoot : _sourceRoots) {
+              {
+                final String srcRootString = srcRoot.toString();
+                boolean _startsWith = stringUri.startsWith(srcRootString);
+                if (_startsWith) {
+                  int _length = srcRootString.length();
+                  final String javaPath = stringUri.substring(_length);
+                  String _replace = javaPath.replace("/", ".");
+                  final QualifiedName fqn = Indexer.this.qualifiedNameConverter.toQualifiedName(_replace);
+                  TypeResourceDescription.ChangedDelta _changedDelta = new TypeResourceDescription.ChangedDelta(fqn);
+                  currentDeltas.add(_changedDelta);
+                  return;
+                }
+              }
+            }
           }
         };
         IterableExtensions.<URI>forEach(_filter_3, _function_11);

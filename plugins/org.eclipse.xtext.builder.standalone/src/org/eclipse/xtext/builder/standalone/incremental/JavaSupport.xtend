@@ -16,12 +16,8 @@ import org.apache.log4j.Logger
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.builder.standalone.compiler.IJavaCompiler
 import org.eclipse.xtext.builder.standalone.compiler.IJavaCompiler.CompilationResult
-import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider
-import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess
-import org.eclipse.xtext.common.types.access.impl.TypeResourceServices
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
-import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 
 import static extension com.google.common.io.Files.*
@@ -35,24 +31,8 @@ class JavaSupport {
 
 	static val LOG = Logger.getLogger(JavaSupport)
 
-	@Inject TypeResourceServices typeResourceServices
-	@Inject IndexedJvmTypeAccess typeAccess
 	@Inject IJavaCompiler compiler
 	@Inject JavaIoFileSystemAccess commonFileAccess
-
-	def installLocalOnlyTypeProvider(Iterable<URI> classPathRoots, XtextResourceSet resourceSet) {
-		LOG.info("Installing type provider for local types only")
-		val classLoader = createURLClassLoader(classPathRoots)
-		new ClasspathTypeProvider(classLoader, resourceSet, null, typeResourceServices)
-		resourceSet.setClasspathURIContext(classLoader);
-	}
-
-	def void installTypeProvider(Iterable<URI> classPathRoots, XtextResourceSet resSet) {
-		LOG.info("Installing type provider with stubs")
-		val classLoader = createURLClassLoader(classPathRoots)
-		new ClasspathTypeProvider(classLoader, resSet, typeAccess, typeResourceServices)
-		resSet.setClasspathURIContext(classLoader);
-	}
 
 	def protected URLClassLoader createURLClassLoader(Iterable<URI> classPathEntries) {
 		val classPathUrls = classPathEntries.map[new URL(toString)]

@@ -24,7 +24,7 @@ class SourceStubJvmTypeProviderTest extends PsiTestCase {
 		val testDataFolder = new File("../../tests/org.eclipse.xtext.common.types.tests/testdata")
 		val testDataSourceRoot = LocalFileSystem.instance.refreshAndFindFileByIoFile(testDataFolder)
 		PsiTestUtil.addSourceRoot(myModule, testDataSourceRoot)
-		delegate.setUp(project)
+		delegate.setUp(myModule)
 	}
 
 	override protected getTestProjectJdk() {

@@ -11,7 +11,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.builder.standalone.incremental.BuildContext;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.builder.standalone.incremental.JavaSupport;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.xbase.lib.Extension;
 
@@ -20,14 +19,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
  */
 @SuppressWarnings("all")
 public class IdeaJavaSupport extends JavaSupport {
-  @Override
-  public void installLocalOnlyTypeProvider(final Iterable<URI> classPathRoots, final XtextResourceSet resourceSet) {
-  }
-  
-  @Override
-  public void installTypeProvider(final Iterable<URI> classPathRoots, final XtextResourceSet resSet) {
-  }
-  
   @Override
   public URI preCompileJavaFiles(final Iterable<URI> changedResources, final ResourceDescriptionsData newIndex, final BuildRequest request, @Extension final BuildContext context) {
     return null;

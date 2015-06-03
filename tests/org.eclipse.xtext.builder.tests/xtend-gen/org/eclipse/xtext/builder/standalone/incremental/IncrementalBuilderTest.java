@@ -13,6 +13,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.common.io.Files;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import java.io.File;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -30,12 +31,13 @@ import org.eclipse.xtext.builder.standalone.StandaloneBuilderInjectorProvider;
 import org.eclipse.xtext.builder.standalone.StandaloneBuilderTest;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
-import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder;
+import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder;
 import org.eclipse.xtext.builder.standalone.incremental.IndexState;
 import org.eclipse.xtext.builder.standalone.incremental.Source2GeneratedMapping;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.TemporaryFolder;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -57,19 +59,22 @@ import org.junit.runner.RunWith;
 @RunWith(XtextRunner.class)
 @InjectWith(StandaloneBuilderInjectorProvider.class)
 @SuppressWarnings("all")
-public class IncrementalStandaloneBuilderTest {
+public class IncrementalBuilderTest {
   @Rule
   @Inject
   public TemporaryFolder temporaryFolder;
   
   @Inject
-  private IncrementalStandaloneBuilder incrementalBuilder;
+  private IncrementalBuilder incrementalBuilder;
   
   @Inject
   private LanguageAccessFactory languageAccessFactory;
   
   @Inject
   private IndexState indexState;
+  
+  @Inject
+  private Provider<XtextResourceSet> resourceSetProvider;
   
   private File tempDir;
   
@@ -119,7 +124,7 @@ public class IncrementalStandaloneBuilderTest {
         _builder.newLine();
         _builder.append("}");
         _builder.newLine();
-        URI _minus = IncrementalStandaloneBuilderTest.this.operator_minus(
+        URI _minus = IncrementalBuilderTest.this.operator_minus(
           "src/MyFile.buildertestlanguage", _builder.toString());
         it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus)));
       }
@@ -152,7 +157,7 @@ public class IncrementalStandaloneBuilderTest {
         _builder.newLine();
         _builder.append("}");
         _builder.newLine();
-        URI _minus = IncrementalStandaloneBuilderTest.this.operator_minus(
+        URI _minus = IncrementalBuilderTest.this.operator_minus(
           "src/A.buildertestlanguage", _builder.toString());
         StringConcatenation _builder_1 = new StringConcatenation();
         _builder_1.append("namespace foo {");
@@ -162,7 +167,7 @@ public class IncrementalStandaloneBuilderTest {
         _builder_1.newLine();
         _builder_1.append("}");
         _builder_1.newLine();
-        URI _minus_1 = IncrementalStandaloneBuilderTest.this.operator_minus(
+        URI _minus_1 = IncrementalBuilderTest.this.operator_minus(
           "src/B.buildertestlanguage", _builder_1.toString());
         it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus, _minus_1)));
       }
@@ -191,7 +196,7 @@ public class IncrementalStandaloneBuilderTest {
         _builder.newLine();
         _builder.append("}");
         _builder.newLine();
-        URI _minus = IncrementalStandaloneBuilderTest.this.operator_minus(
+        URI _minus = IncrementalBuilderTest.this.operator_minus(
           "src/A.buildertestlanguage", _builder.toString());
         it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus)));
       }
@@ -220,7 +225,7 @@ public class IncrementalStandaloneBuilderTest {
         _builder.newLine();
         _builder.append("}");
         _builder.newLine();
-        URI _minus = IncrementalStandaloneBuilderTest.this.operator_minus(
+        URI _minus = IncrementalBuilderTest.this.operator_minus(
           "src/A.buildertestlanguage", _builder.toString());
         it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus)));
       }
@@ -258,7 +263,7 @@ public class IncrementalStandaloneBuilderTest {
         _builder.newLine();
         _builder.append("}");
         _builder.newLine();
-        URI _minus = IncrementalStandaloneBuilderTest.this.operator_minus(
+        URI _minus = IncrementalBuilderTest.this.operator_minus(
           "src/A.buildertestlanguage", _builder.toString());
         it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus)));
       }
@@ -281,7 +286,7 @@ public class IncrementalStandaloneBuilderTest {
     final Procedure1<BuildRequest> _function_4 = new Procedure1<BuildRequest>() {
       @Override
       public void apply(final BuildRequest it) {
-        URI _uri = IncrementalStandaloneBuilderTest.this.uri("src/A.buildertestlanguage");
+        URI _uri = IncrementalBuilderTest.this.uri("src/A.buildertestlanguage");
         it.setDeletedFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_uri)));
       }
     };
@@ -301,7 +306,7 @@ public class IncrementalStandaloneBuilderTest {
   protected IndexState build(final BuildRequest buildRequest) {
     this.clean();
     StandaloneBuilderTest.TestLanguageConfiguration _testLanguageConfiguration = new StandaloneBuilderTest.TestLanguageConfiguration(false);
-    Class<? extends IncrementalStandaloneBuilderTest> _class = this.getClass();
+    Class<? extends IncrementalBuilderTest> _class = this.getClass();
     ClassLoader _classLoader = _class.getClassLoader();
     final Map<String, LanguageAccess> languages = this.languageAccessFactory.createLanguageAccess(Collections.<ILanguageConfiguration>unmodifiableList(CollectionLiterals.<ILanguageConfiguration>newArrayList(_testLanguageConfiguration)), _classLoader);
     IndexState _build = this.incrementalBuilder.build(buildRequest, languages);
@@ -314,14 +319,16 @@ public class IncrementalStandaloneBuilderTest {
     final Procedure1<BuildRequest> _function = new Procedure1<BuildRequest>() {
       @Override
       public void apply(final BuildRequest it) {
-        URI _asURI = FilesAndURIs.asURI(IncrementalStandaloneBuilderTest.this.tempDir);
+        URI _asURI = FilesAndURIs.asURI(IncrementalBuilderTest.this.tempDir);
         it.setBaseDir(_asURI);
         it.setDefaultEncoding("UTF-8");
+        XtextResourceSet _get = IncrementalBuilderTest.this.resourceSetProvider.get();
+        it.setResourceSet(_get);
         it.setClassPath(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList()));
-        File _file = new File(IncrementalStandaloneBuilderTest.this.tempDir, "out");
+        File _file = new File(IncrementalBuilderTest.this.tempDir, "out");
         URI _asURI_1 = FilesAndURIs.asURI(_file);
         it.setOutputs(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_asURI_1)));
-        File _file_1 = new File(IncrementalStandaloneBuilderTest.this.tempDir, "src");
+        File _file_1 = new File(IncrementalBuilderTest.this.tempDir, "src");
         URI _asURI_2 = FilesAndURIs.asURI(_file_1);
         it.setSourceRoots(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_asURI_2)));
         it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList()));
@@ -329,7 +336,7 @@ public class IncrementalStandaloneBuilderTest {
         final IIssueHandler _function = new IIssueHandler() {
           @Override
           public boolean handleIssue(final Iterable<Issue> issues) {
-            Iterables.<Issue>addAll(IncrementalStandaloneBuilderTest.this.issues, issues);
+            Iterables.<Issue>addAll(IncrementalBuilderTest.this.issues, issues);
             return IterableExtensions.isEmpty(issues);
           }
         };
@@ -337,18 +344,18 @@ public class IncrementalStandaloneBuilderTest {
         final Procedure1<URI> _function_1 = new Procedure1<URI>() {
           @Override
           public void apply(final URI it) {
-            IncrementalStandaloneBuilderTest.this.deleted.add(it);
+            IncrementalBuilderTest.this.deleted.add(it);
           }
         };
         it.setAfterDeleteFile(_function_1);
         final Procedure2<URI, URI> _function_2 = new Procedure2<URI, URI>() {
           @Override
           public void apply(final URI source, final URI target) {
-            IncrementalStandaloneBuilderTest.this.generated.put(source, target);
+            IncrementalBuilderTest.this.generated.put(source, target);
           }
         };
         it.setAfterGenerateFile(_function_2);
-        it.setPreviousState(IncrementalStandaloneBuilderTest.this.indexState);
+        it.setPreviousState(IncrementalBuilderTest.this.indexState);
         it.setFailOnValidationError(false);
       }
     };

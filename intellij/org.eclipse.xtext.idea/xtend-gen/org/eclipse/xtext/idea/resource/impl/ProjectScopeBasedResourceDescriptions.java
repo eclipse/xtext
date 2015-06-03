@@ -9,6 +9,7 @@ package org.eclipse.xtext.idea.resource.impl;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
@@ -16,15 +17,18 @@ import java.util.Collections;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.idea.resource.AbstractScopeBasedSelectable;
-import org.eclipse.xtext.idea.resource.ProjectAdapter;
+import org.eclipse.xtext.idea.resource.ModuleProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
@@ -80,7 +84,10 @@ public class ProjectScopeBasedResourceDescriptions extends AbstractScopeBasedSel
   @Override
   public void setContext(final Notifier ctx) {
     this.context = ctx;
-    Project _project = ProjectAdapter.getProject(ctx);
+    ResourceSet _resourceSet = EcoreUtil2.getResourceSet(ctx);
+    final XtextResourceSet resourceSet = ((XtextResourceSet) _resourceSet);
+    Module _findModule = ModuleProvider.findModule(resourceSet);
+    Project _project = _findModule.getProject();
     this.project = _project;
     boolean _equals = Objects.equal(this.project, null);
     if (_equals) {

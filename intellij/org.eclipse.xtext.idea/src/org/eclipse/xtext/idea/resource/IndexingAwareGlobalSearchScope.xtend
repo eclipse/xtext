@@ -14,6 +14,8 @@ import com.intellij.psi.search.GlobalSearchScope
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.resource.CompilerPhases
+import org.eclipse.xtext.resource.XtextResourceSet
+import com.google.inject.Provider
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -31,6 +33,20 @@ class IndexingAwareGlobalSearchScope extends GlobalSearchScope {
 
 	@Inject
 	CompilerPhases compilerPhases
+	
+	static class Factory {
+		
+		@Inject Provider<IndexingAwareGlobalSearchScope> provider
+		
+		def IndexingAwareGlobalSearchScope createSearchScope(XtextResourceSet resourceSet) {
+			val indexingAwareGlobalSearchScope = provider.get
+			indexingAwareGlobalSearchScope.resourceSet = resourceSet
+			val Module context = ModuleProvider.findModule(resourceSet)
+			indexingAwareGlobalSearchScope.filterScope = context.moduleScope
+			indexingAwareGlobalSearchScope.searchScope = GlobalSearchScope.moduleWithDependenciesAndLibrariesScope(context)
+			return indexingAwareGlobalSearchScope
+		}
+	}
 
 	override getProject() {
 		searchScope.project

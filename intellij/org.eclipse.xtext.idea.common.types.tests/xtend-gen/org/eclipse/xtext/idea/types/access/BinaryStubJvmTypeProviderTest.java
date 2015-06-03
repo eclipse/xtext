@@ -1,7 +1,6 @@
 package org.eclipse.xtext.idea.types.access;
 
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.JavaAwareProjectJdkTableImpl;
 import com.intellij.testFramework.PsiTestCase;
@@ -24,8 +23,7 @@ public class BinaryStubJvmTypeProviderTest extends PsiTestCase {
     LibraryUtil.addGuavaLibrary(_module);
     Module _module_1 = this.getModule();
     LibraryUtil.addLibrary(_module_1, "org.eclipse.xtext.common.types.tests.testData", AbstractMethods.class);
-    Project _project = this.getProject();
-    this.delegate.setUp(_project);
+    this.delegate.setUp(this.myModule);
   }
   
   @Override

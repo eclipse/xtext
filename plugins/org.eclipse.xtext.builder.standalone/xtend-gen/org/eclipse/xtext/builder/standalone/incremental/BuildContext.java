@@ -8,7 +8,6 @@
 package org.eclipse.xtext.builder.standalone.incremental;
 
 import com.google.common.base.Objects;
-import java.io.File;
 import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -35,7 +34,7 @@ public class BuildContext {
   
   private final IResourceClusteringPolicy clusteringPolicy;
   
-  private final File tempDir;
+  private final URI tempDir;
   
   private ClusteringStorageAwareResourceLoader loader;
   
@@ -57,7 +56,7 @@ public class BuildContext {
     return this.languages.get(_fileExtension);
   }
   
-  public BuildContext(final Map<String, LanguageAccess> languages, final XtextResourceSet resourceSet, final IResourceClusteringPolicy clusteringPolicy, final File tempDir) {
+  public BuildContext(final Map<String, LanguageAccess> languages, final XtextResourceSet resourceSet, final IResourceClusteringPolicy clusteringPolicy, final URI tempDir) {
     super();
     this.languages = languages;
     this.resourceSet = resourceSet;
@@ -81,7 +80,7 @@ public class BuildContext {
   }
   
   @Pure
-  public File getTempDir() {
+  public URI getTempDir() {
     return this.tempDir;
   }
   

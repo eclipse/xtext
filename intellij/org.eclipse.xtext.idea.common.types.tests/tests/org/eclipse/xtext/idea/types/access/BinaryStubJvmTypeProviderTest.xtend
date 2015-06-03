@@ -17,7 +17,7 @@ class BinaryStubJvmTypeProviderTest extends PsiTestCase {
 		super.setUp
 		module.addGuavaLibrary
 		module.addLibrary("org.eclipse.xtext.common.types.tests.testData", AbstractMethods)
-		delegate.setUp(project)
+		delegate.setUp(myModule)
 	}
 	
 	override protected getTestProjectJdk() {

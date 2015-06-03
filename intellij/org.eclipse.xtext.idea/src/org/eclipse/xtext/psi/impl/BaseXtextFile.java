@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
-import org.eclipse.xtext.idea.resource.IResourceSetProvider;
+import org.eclipse.xtext.idea.resource.ModuleBasedResourceSetProvider;
 import org.eclipse.xtext.idea.resource.PsiToEcoreAdapter;
 import org.eclipse.xtext.idea.resource.PsiToEcoreTransformator;
 import org.eclipse.xtext.idea.resource.ResourceDescriptionAdapter;
@@ -54,6 +54,8 @@ import com.google.inject.name.Named;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
@@ -75,7 +77,7 @@ public abstract class BaseXtextFile extends PsiFileBase {
 	private CompilerPhases compilerPhases;
 
     @Inject
-    protected IResourceSetProvider resourceSetProvider;
+    protected ModuleBasedResourceSetProvider resourceSetProvider;
     
     @Inject
     protected Provider<PsiToEcoreTransformator> psiToEcoreTransformatorProvider;
@@ -175,8 +177,9 @@ public abstract class BaseXtextFile extends PsiFileBase {
         
         PsiToEcoreTransformator psiToEcoreTransformator = psiToEcoreTransformatorProvider.get();
         psiToEcoreTransformator.setXtextFile(this);
-        
-        ResourceSet resourceSet = resourceSetProvider.get(this);
+        Module module = ModuleUtilCore.findModuleForFile(findVirtualFile(this), getProject());
+        if (module == null) throw new IllegalStateException("Couldn't find module for "+this);
+        ResourceSet resourceSet = resourceSetProvider.get(module);
         XtextResource resource = (XtextResource) resourceSet.createResource(getURI());
         resource.setParser(psiToEcoreTransformator);
         try {
@@ -189,6 +192,19 @@ public abstract class BaseXtextFile extends PsiFileBase {
         
         return resource;
     }
+	
+	 
+	protected VirtualFile findVirtualFile(final PsiFile psiFile) {
+		PsiFile originalFile = psiFile.getOriginalFile();
+		if (originalFile != psiFile && originalFile != null) {
+			return findVirtualFile(originalFile);
+		}
+		VirtualFile virtualFile = psiFile.getUserData(IndexingDataKeys.VIRTUAL_FILE);
+		if (virtualFile != null) {
+			return virtualFile;
+		}
+		return psiFile.getViewProvider().getVirtualFile();
+	}
 
 	protected void installResourceDescription(Resource resource) {
 		try {

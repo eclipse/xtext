@@ -36,15 +36,14 @@ import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.builder.standalone.IIssueHandler;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
-import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder;
+import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder;
 import org.eclipse.xtext.builder.standalone.incremental.IndexState;
 import org.eclipse.xtext.idea.build.BuildEvent;
-import org.eclipse.xtext.idea.resource.IResourceSetProvider;
+import org.eclipse.xtext.idea.resource.ModuleBasedResourceSetProvider;
 import org.eclipse.xtext.idea.shared.IdeaSharedInjectorProvider;
 import org.eclipse.xtext.idea.shared.XtextLanguages;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -70,13 +69,13 @@ public class XtextAutoBuilder {
   private Project project;
   
   @Inject
-  private Provider<IncrementalStandaloneBuilder> builderProvider;
+  private Provider<IncrementalBuilder> builderProvider;
   
   @Inject
   private XtextLanguages xtextLanguages;
   
   @Inject
-  private IResourceSetProvider resourceSetProvider;
+  private ModuleBasedResourceSetProvider resourceSetProvider;
   
   private IndexState indexState;
   
@@ -157,8 +156,8 @@ public class XtextAutoBuilder {
           final Procedure1<BuildRequest> _function_1 = new Procedure1<BuildRequest>() {
             @Override
             public void apply(final BuildRequest it) {
-              ResourceSet _get = XtextAutoBuilder.this.resourceSetProvider.get(module);
-              it.setResourceSet(((XtextResourceSet) _get));
+              XtextResourceSet _get = XtextAutoBuilder.this.resourceSetProvider.get(module);
+              it.setResourceSet(_get);
               List<URI> _dirtyFiles = it.getDirtyFiles();
               final Function1<BuildEvent, Boolean> _function = new Function1<BuildEvent, Boolean>() {
                 @Override
@@ -209,13 +208,21 @@ public class XtextAutoBuilder {
               OrderRootsEnumerator _classes = _withoutSdk.classes();
               PathsList _pathsList = _classes.getPathsList();
               List<VirtualFile> _virtualFiles = _pathsList.getVirtualFiles();
-              final Function1<VirtualFile, URI> _function_4 = new Function1<VirtualFile, URI>() {
+              final Function1<VirtualFile, Boolean> _function_4 = new Function1<VirtualFile, Boolean>() {
+                @Override
+                public Boolean apply(final VirtualFile it) {
+                  boolean _isDirectory = it.isDirectory();
+                  return Boolean.valueOf((!_isDirectory));
+                }
+              };
+              Iterable<VirtualFile> _filter_2 = IterableExtensions.<VirtualFile>filter(_virtualFiles, _function_4);
+              final Function1<VirtualFile, URI> _function_5 = new Function1<VirtualFile, URI>() {
                 @Override
                 public URI apply(final VirtualFile it) {
                   return XtextAutoBuilder.this.getURI(it);
                 }
               };
-              List<URI> _map_2 = ListExtensions.<VirtualFile, URI>map(_virtualFiles, _function_4);
+              Iterable<URI> _map_2 = IterableExtensions.<VirtualFile, URI>map(_filter_2, _function_5);
               Iterables.<URI>addAll(_classPath, _map_2);
               ModuleRootManager _instance = ModuleRootManager.getInstance(module);
               VirtualFile[] _contentRoots = _instance.getContentRoots();
@@ -230,13 +237,13 @@ public class XtextAutoBuilder {
               OrderRootsEnumerator _sources = _withoutDepModules.sources();
               PathsList _pathsList_1 = _sources.getPathsList();
               List<VirtualFile> _virtualFiles_1 = _pathsList_1.getVirtualFiles();
-              final Function1<VirtualFile, URI> _function_5 = new Function1<VirtualFile, URI>() {
+              final Function1<VirtualFile, URI> _function_6 = new Function1<VirtualFile, URI>() {
                 @Override
                 public URI apply(final VirtualFile it) {
                   return XtextAutoBuilder.this.getURI(it);
                 }
               };
-              List<URI> _map_3 = ListExtensions.<VirtualFile, URI>map(_virtualFiles_1, _function_5);
+              List<URI> _map_3 = ListExtensions.<VirtualFile, URI>map(_virtualFiles_1, _function_6);
               Iterables.<URI>addAll(_sourceRoots, _map_3);
               it.setFailOnValidationError(false);
               boolean _notEquals = (!Objects.equal(XtextAutoBuilder.this.indexState, null));
@@ -247,20 +254,20 @@ public class XtextAutoBuilder {
               }
               IIssueHandler _issueHandler = it.getIssueHandler();
               it.setIssueHandler(_issueHandler);
-              final Procedure2<URI, URI> _function_6 = new Procedure2<URI, URI>() {
+              final Procedure2<URI, URI> _function_7 = new Procedure2<URI, URI>() {
                 @Override
                 public void apply(final URI $0, final URI $1) {
                   refreshFiles.add($1);
                 }
               };
-              it.setAfterGenerateFile(_function_6);
-              final Procedure1<URI> _function_7 = new Procedure1<URI>() {
+              it.setAfterGenerateFile(_function_7);
+              final Procedure1<URI> _function_8 = new Procedure1<URI>() {
                 @Override
                 public void apply(final URI it) {
                   refreshFiles.add(it);
                 }
               };
-              it.setAfterDeleteFile(_function_7);
+              it.setAfterDeleteFile(_function_8);
             }
           };
           final BuildRequest request = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_1);
@@ -268,7 +275,7 @@ public class XtextAutoBuilder {
           final Computable<IndexState> _function_2 = new Computable<IndexState>() {
             @Override
             public IndexState compute() {
-              IncrementalStandaloneBuilder _get = XtextAutoBuilder.this.builderProvider.get();
+              IncrementalBuilder _get = XtextAutoBuilder.this.builderProvider.get();
               Map<String, LanguageAccess> _languageAccesses = XtextAutoBuilder.this.xtextLanguages.getLanguageAccesses();
               return _get.build(request, _languageAccesses);
             }

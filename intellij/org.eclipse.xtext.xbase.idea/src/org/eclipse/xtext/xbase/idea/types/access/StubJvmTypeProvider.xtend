@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.idea.types.access
 
+import com.intellij.openapi.module.Module
 import com.intellij.openapi.progress.ProgressIndicatorProvider
-import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiClass
 import com.intellij.psi.impl.compiled.SignatureParsing
 import com.intellij.psi.search.GlobalSearchScope
@@ -16,7 +16,6 @@ import java.text.StringCharacterIterator
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.xtend.lib.annotations.AccessorType
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.JvmType
@@ -26,28 +25,24 @@ import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess
 import org.eclipse.xtext.common.types.access.impl.TypeResourceServices
 import org.eclipse.xtext.psi.IPsiModelAssociator
 import org.eclipse.xtext.resource.ISynchronizable
-import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.service.OperationCanceledError
 import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass
 
-import static extension org.eclipse.xtend.lib.annotations.AccessorType.*
 import static extension org.eclipse.xtext.idea.extensions.IdeaProjectExtensions.*
 
 class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 
-	@Accessors(AccessorType.PUBLIC_GETTER)
-	val Project project
-
 	val ITypeFactory<PsiClass, JvmDeclaredType> psiClassFactory
+	@Accessors val Module module
+	@Accessors val extension StubURIHelper uriHelper
+	@Accessors val GlobalSearchScope searchScope
 
-	@Accessors(AccessorType.PUBLIC_GETTER)
-	val extension StubURIHelper uriHelper
-
-	new(Project project, ResourceSet resourceSet, IndexedJvmTypeAccess indexedJvmTypeAccess,
-		TypeResourceServices services, IPsiModelAssociator psiModelAssociator) {
+	new(Module module, ResourceSet resourceSet, IndexedJvmTypeAccess indexedJvmTypeAccess,
+		TypeResourceServices services, IPsiModelAssociator psiModelAssociator, GlobalSearchScope searchScope) {
 		super(resourceSet, indexedJvmTypeAccess, services)
-		this.project = project
+		this.module = module
+		this.searchScope = searchScope
 		this.uriHelper = createStubURIHelper
 		this.psiClassFactory = createPsiClassFactory(psiModelAssociator)
 	}
@@ -134,7 +129,7 @@ class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 	}
 
 	protected override createMirrorForFQN(String name) {
-		val psiClass = project.javaPsiFacade.findClassWithAlternativeResolvedEnabled(name, searchScope)
+		val psiClass = module.project.javaPsiFacade.findClassWithAlternativeResolvedEnabled(name, searchScope)
 		if (psiClass == null || psiClass.containingClass != null) {
 			return null
 		}
@@ -145,12 +140,7 @@ class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 	}
 
 	protected def getSearchScope() {
-		switch resourceSet : resourceSet {
-			XtextResourceSet:
-				resourceSet.classpathURIContext as GlobalSearchScope
-			default:
-				GlobalSearchScope.allScope(project)
-		}
+		searchScope
 	}
 
 }

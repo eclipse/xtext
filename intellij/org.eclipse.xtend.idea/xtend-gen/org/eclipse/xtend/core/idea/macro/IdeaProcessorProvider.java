@@ -7,40 +7,30 @@
  */
 package org.eclipse.xtend.core.idea.macro;
 
-import com.google.inject.Inject;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.roots.OrderEnumerator;
 import com.intellij.openapi.roots.OrderRootsEnumerator;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiElement;
 import com.intellij.util.PathsList;
 import java.io.File;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.psi.IPsiModelAssociations;
+import org.eclipse.xtext.idea.resource.ModuleProvider;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @SuppressWarnings("all")
 public class IdeaProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
-  @Inject
-  @Extension
-  private IPsiModelAssociations _iPsiModelAssociations;
-  
   @Override
   public Object getProcessorInstance(final JvmType type) {
     try {
@@ -48,12 +38,8 @@ public class IdeaProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
       {
         Resource _eResource = type.eResource();
         ResourceSet _resourceSet = _eResource.getResourceSet();
-        EList<Resource> _resources = _resourceSet.getResources();
-        Resource _head = IterableExtensions.<Resource>head(_resources);
-        EList<EObject> _contents = _head.getContents();
-        EObject _head_1 = IterableExtensions.<EObject>head(_contents);
-        final PsiElement psiElement = this._iPsiModelAssociations.getPsiElement(_head_1);
-        final Module module = ModuleUtil.findModuleForPsiElement(psiElement);
+        final XtextResourceSet resourceSet = ((XtextResourceSet) _resourceSet);
+        final Module module = ModuleProvider.findModule(resourceSet);
         OrderEnumerator _orderEntries = OrderEnumerator.orderEntries(module);
         OrderEnumerator _recursively = _orderEntries.recursively();
         OrderRootsEnumerator _classes = _recursively.classes();

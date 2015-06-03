@@ -24,14 +24,10 @@ import org.eclipse.xtext.builder.standalone.compiler.IJavaCompiler;
 import org.eclipse.xtext.builder.standalone.incremental.BuildContext;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
-import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
-import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
-import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
 import org.eclipse.xtext.common.types.descriptions.IStubGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -52,30 +48,10 @@ public class JavaSupport {
   private final static Logger LOG = Logger.getLogger(JavaSupport.class);
   
   @Inject
-  private TypeResourceServices typeResourceServices;
-  
-  @Inject
-  private IndexedJvmTypeAccess typeAccess;
-  
-  @Inject
   private IJavaCompiler compiler;
   
   @Inject
   private JavaIoFileSystemAccess commonFileAccess;
-  
-  public void installLocalOnlyTypeProvider(final Iterable<URI> classPathRoots, final XtextResourceSet resourceSet) {
-    JavaSupport.LOG.info("Installing type provider for local types only");
-    final URLClassLoader classLoader = this.createURLClassLoader(classPathRoots);
-    new ClasspathTypeProvider(classLoader, resourceSet, null, this.typeResourceServices);
-    resourceSet.setClasspathURIContext(classLoader);
-  }
-  
-  public void installTypeProvider(final Iterable<URI> classPathRoots, final XtextResourceSet resSet) {
-    JavaSupport.LOG.info("Installing type provider with stubs");
-    final URLClassLoader classLoader = this.createURLClassLoader(classPathRoots);
-    new ClasspathTypeProvider(classLoader, resSet, this.typeAccess, this.typeResourceServices);
-    resSet.setClasspathURIContext(classLoader);
-  }
   
   protected URLClassLoader createURLClassLoader(final Iterable<URI> classPathEntries) {
     final Function1<URI, URL> _function = new Function1<URI, URL>() {

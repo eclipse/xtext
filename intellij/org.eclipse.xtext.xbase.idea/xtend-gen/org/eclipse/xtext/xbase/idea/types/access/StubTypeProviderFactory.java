@@ -7,16 +7,17 @@
  */
 package org.eclipse.xtext.xbase.idea.types.access;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
-import com.intellij.openapi.project.Project;
+import com.intellij.openapi.module.Module;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.access.AbstractTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
-import org.eclipse.xtext.idea.resource.ProjectAdapter;
+import org.eclipse.xtext.idea.resource.IndexingAwareGlobalSearchScope;
+import org.eclipse.xtext.idea.resource.ModuleProvider;
 import org.eclipse.xtext.psi.IPsiModelAssociator;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.idea.types.access.StubJvmTypeProvider;
 
 @SuppressWarnings("all")
@@ -24,23 +25,18 @@ public class StubTypeProviderFactory extends AbstractTypeProviderFactory {
   @Inject
   private IPsiModelAssociator psiModelAssociator;
   
+  @Inject
+  private IndexingAwareGlobalSearchScope.Factory searchScopeFactory;
+  
   @Override
   public IJvmTypeProvider createTypeProvider(final ResourceSet resourceSet) {
-    StubJvmTypeProvider _xblockexpression = null;
-    {
-      boolean _equals = Objects.equal(resourceSet, null);
-      if (_equals) {
-        throw new IllegalArgumentException("resourceSet may not be null.");
-      }
-      final Project project = ProjectAdapter.getProject(resourceSet);
-      boolean _equals_1 = Objects.equal(project, null);
-      if (_equals_1) {
-        throw new IllegalArgumentException("project may not be null.");
-      }
+    if ((resourceSet instanceof XtextResourceSet)) {
+      final Module module = ModuleProvider.findModule(resourceSet);
+      final IndexingAwareGlobalSearchScope searchScope = this.searchScopeFactory.createSearchScope(((XtextResourceSet)resourceSet));
       IndexedJvmTypeAccess _indexedJvmTypeAccess = this.getIndexedJvmTypeAccess();
       TypeResourceServices _services = this.getServices();
-      _xblockexpression = new StubJvmTypeProvider(project, resourceSet, _indexedJvmTypeAccess, _services, this.psiModelAssociator);
+      return new StubJvmTypeProvider(module, resourceSet, _indexedJvmTypeAccess, _services, this.psiModelAssociator, searchScope);
     }
-    return _xblockexpression;
+    throw new IllegalArgumentException(("resourceSet was " + resourceSet));
   }
 }

@@ -19,7 +19,7 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.idea.lang.BaseXtextASTFactory
-import org.eclipse.xtext.idea.resource.IResourceSetProvider
+import org.eclipse.xtext.idea.resource.ModuleBasedResourceSetProvider
 import org.eclipse.xtext.idea.resource.PsiToEcoreTransformator
 import org.eclipse.xtext.idea.tests.LightToolingTest
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
@@ -39,7 +39,7 @@ class AbstractModelTestCase extends LightToolingTest implements ModelChecker {
 
 	@Inject
 	@Accessors(PROTECTED_GETTER)
-	IResourceSetProvider resourceSetProvider
+	ModuleBasedResourceSetProvider resourceSetProvider
 
 	@Inject
 	@Accessors(PROTECTED_GETTER)
@@ -87,7 +87,7 @@ class AbstractModelTestCase extends LightToolingTest implements ModelChecker {
 	}
 
 	def protected XtextResource createExpectedResource() {
-		var resourceSet = resourceSetProvider.get(project)
+		var resourceSet = resourceSetProvider.get(myModule)
 		var resource = resourceSet.createResource(URI.createURI(xtextFile.virtualFile.url)) as XtextResource
 		try {
 			resource.load(new ByteArrayInputStream(xtextFile.text.bytes), null)

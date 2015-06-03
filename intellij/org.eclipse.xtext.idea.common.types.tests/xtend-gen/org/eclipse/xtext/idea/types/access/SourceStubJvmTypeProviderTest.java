@@ -33,8 +33,7 @@ public class SourceStubJvmTypeProviderTest extends PsiTestCase {
     LocalFileSystem _instance_1 = LocalFileSystem.getInstance();
     final VirtualFile testDataSourceRoot = _instance_1.refreshAndFindFileByIoFile(testDataFolder);
     PsiTestUtil.addSourceRoot(this.myModule, testDataSourceRoot);
-    Project _project_1 = this.getProject();
-    this.delegate.setUp(_project_1);
+    this.delegate.setUp(this.myModule);
   }
   
   @Override

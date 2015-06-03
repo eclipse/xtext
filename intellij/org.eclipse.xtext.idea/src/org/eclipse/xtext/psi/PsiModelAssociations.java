@@ -13,13 +13,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.idea.resource.ProjectAdapter;
+import org.eclipse.xtext.idea.resource.ModuleProvider;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.service.OperationCanceledError;
 
 import com.google.inject.Singleton;
-import com.intellij.openapi.project.Project;
+import com.intellij.openapi.module.Module;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.psi.PsiElement;
@@ -147,15 +148,15 @@ public class PsiModelAssociations implements IPsiModelAssociations, IPsiModelAss
     }
 
 	protected BaseXtextFile getBaseXtextFile(ResourceSet resourceSet, URI uri) {
-    	Project project = ProjectAdapter.getProject(resourceSet);
-    	if (project == null) {
-    		return null;
-    	}
 		VirtualFile file = VirtualFileManager.getInstance().findFileByUrl(uri.trimFragment().toString());
     	if (file == null) {
     		return null;
     	}
-    	PsiFile psiFile = PsiManager.getInstance(project).findFile(file);
+    	Module module = ModuleProvider.findModule(resourceSet);
+    	if (module == null) {
+    		throw new IllegalStateException("Module was null");
+    	}
+    	PsiFile psiFile = PsiManager.getInstance(module.getProject()).findFile(file);
     	if (psiFile == null || !(psiFile instanceof BaseXtextFile)) {
     		return null;
     	}

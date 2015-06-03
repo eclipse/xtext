@@ -6,17 +6,19 @@ import org.eclipse.xtext.common.types.access.impl.AbstractTypeProviderTest;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
 import org.eclipse.xtext.idea.common.types.idea.lang.RefactoringTestLanguageLanguage;
-import org.eclipse.xtext.idea.resource.IResourceSetProvider;
+import org.eclipse.xtext.idea.resource.IndexingAwareGlobalSearchScope;
+import org.eclipse.xtext.idea.resource.ModuleBasedResourceSetProvider;
 import org.eclipse.xtext.psi.IPsiModelAssociator;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.idea.types.access.StubJvmTypeProvider;
 
 import com.google.inject.Inject;
-import com.intellij.openapi.project.Project;
+import com.intellij.openapi.module.Module;
 
 abstract class StubJvmTypeProviderTestDelegate extends AbstractTypeProviderTest {
 
 	@Inject
-	protected IResourceSetProvider resourceSetProvider;
+	protected ModuleBasedResourceSetProvider resourceSetProvider;
 
 	@Inject
 	protected IndexedJvmTypeAccess indexedJvmTypeAccess;
@@ -26,14 +28,18 @@ abstract class StubJvmTypeProviderTestDelegate extends AbstractTypeProviderTest 
 	
 	@Inject
 	protected TypeResourceServices services;
+	
+	@Inject
+	protected IndexingAwareGlobalSearchScope.Factory awareGlobalSearchScopeFactory;
 
 	private IJvmTypeProvider typeProvider;
 
-	public void setUp(Project project) throws Exception {
+	public void setUp(Module module) throws Exception {
 		super.setUp();
 		RefactoringTestLanguageLanguage.INSTANCE.injectMembers(this);
-		ResourceSet resourceSet = resourceSetProvider.get(project);
-		typeProvider = new StubJvmTypeProvider(project, resourceSet, indexedJvmTypeAccess, services, psiModelAssociator);
+		ResourceSet resourceSet = resourceSetProvider.get(module);
+		IndexingAwareGlobalSearchScope searchScope = awareGlobalSearchScopeFactory.createSearchScope((XtextResourceSet) resourceSet);
+		typeProvider = new StubJvmTypeProvider(module, resourceSet, indexedJvmTypeAccess, services, psiModelAssociator, searchScope);
 	}
 
 	public void tearDown() {

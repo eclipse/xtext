@@ -37,7 +37,7 @@ import org.eclipse.xtext.builder.standalone.IIssueHandler;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
-import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder;
+import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder;
 import org.eclipse.xtext.builder.standalone.incremental.IndexState;
 import org.eclipse.xtext.idea.build.daemon.BuildDaemonModule;
 import org.eclipse.xtext.idea.build.daemon.IBuildSessionSingletons;
@@ -153,7 +153,7 @@ public class XtextBuildDaemon {
   
   public static class Worker {
     @Inject
-    private IncrementalStandaloneBuilder incrementalBuilder;
+    private IncrementalBuilder incrementalBuilder;
     
     @Inject
     private IBuildSessionSingletons.Impl singletons;

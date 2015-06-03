@@ -7,12 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.resource
 
-import org.eclipse.emf.ecore.resource.ResourceSet
-import com.google.inject.ImplementedBy
+import com.google.inject.Inject
+import com.google.inject.Provider
+import com.google.inject.Singleton
+import com.intellij.openapi.module.Module
+import org.eclipse.xtext.resource.XtextResourceSet
 
-@ImplementedBy(ProjectBasedResourceSetProvider)
-interface IResourceSetProvider {
-	
-	def ResourceSet get(Object context)
-	
+@Singleton
+class ModuleBasedResourceSetProvider {
+
+	@Inject
+	Provider<XtextResourceSet> resourceSetProvider
+
+	def get(Module context) {
+		val resourceSet = resourceSetProvider.get
+		resourceSet.classpathURIContext = context
+		return resourceSet
+	}
+
 }

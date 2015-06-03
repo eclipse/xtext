@@ -1,0 +1,90 @@
+/*******************************************************************************
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.generator
+
+import com.google.common.io.ByteStreams
+import com.google.common.io.CharStreams
+import java.io.ByteArrayInputStream
+import java.io.InputStream
+import java.io.InputStreamReader
+import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.resource.URIConverter
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.parser.IEncodingProvider
+import org.eclipse.xtext.util.RuntimeIOException
+
+/**
+ * A file system access implementation that is based on EMF URIs and URIConverter
+ * @since 2.9
+ */
+class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
+	
+	static interface BeforeDelete {
+		/**
+		 * @return <code>true</code> if the file can be deleted, false otherwise
+		 */
+		def boolean beforeDelete(URI changed)
+	}
+	
+	static interface BeforeWrite {
+		def InputStream beforeWrite(URI changed, InputStream in)
+	}
+	
+	static interface BeforeRead {
+		def InputStream beforeRead(URI changed, InputStream in)
+	}
+	
+	@Accessors URIConverter converter
+	@Accessors IEncodingProvider encodingProvider = new IEncodingProvider.Runtime()
+	@Accessors BeforeDelete beforeDelete = [true]
+	@Accessors BeforeWrite beforeWrite = [$1]
+	@Accessors BeforeRead beforeRead = [$1]
+
+	override getURI(String path, String outputConfiguration) {
+		val outlet = pathes.get(outputConfiguration)
+		if (outlet == null)
+			throw new IllegalArgumentException("A slot with name '" + outputConfiguration + "' has not been configured.");
+		val uri = URI.createURI(outlet + "/" + path);
+		return uri;
+	}
+	
+	def String getEncoding(URI uri) {
+		return encodingProvider.getEncoding(uri)
+	}
+	
+	override generateFile(String fileName, String outputCfgName, CharSequence contents) {
+		val uri = getURI(fileName, outputCfgName)
+		val encoding = getEncoding(uri)
+		val inStream = new ByteArrayInputStream(contents.toString.getBytes(encoding))
+		generateFile(fileName, outputCfgName, inStream)
+	}	
+	
+	override generateFile(String fileName, String outputCfgName, InputStream content) throws RuntimeIOException {
+		val uri = getURI(fileName, outputCfgName)
+		val out = converter.createOutputStream(uri)
+		try {
+			val processedContent = beforeWrite.beforeWrite(uri, content)
+			ByteStreams.copy(processedContent, out);
+		} finally {
+			out.close
+		}
+	}
+	
+	override readBinaryFile(String fileName, String outputCfgName) throws RuntimeIOException {
+		val uri = getURI(fileName, outputCfgName)
+		val input = converter.createInputStream(uri)
+		return beforeRead.beforeRead(uri, input)
+	}
+	
+	override readTextFile(String fileName, String outputCfgName) throws RuntimeIOException {
+		val uri = getURI(fileName, outputCfgName)
+		val inputstream = readBinaryFile(fileName, outputCfgName)
+		return CharStreams.toString(new InputStreamReader(inputstream, getEncoding(uri)))
+	}
+	
+}

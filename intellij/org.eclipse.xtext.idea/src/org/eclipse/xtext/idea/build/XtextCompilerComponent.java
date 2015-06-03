@@ -58,7 +58,7 @@ public class XtextCompilerComponent extends AbstractProjectComponent {
 
 			@Override
 			public void fileMoved(VirtualFileMoveEvent event) {
-				// TODO should we deal with that?
+				// TODO deal with that!
 			}
 		});
 	}

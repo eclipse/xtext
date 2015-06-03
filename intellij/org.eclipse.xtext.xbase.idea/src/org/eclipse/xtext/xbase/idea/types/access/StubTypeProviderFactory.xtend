@@ -10,21 +10,25 @@ package org.eclipse.xtext.xbase.idea.types.access
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtext.common.types.access.AbstractTypeProviderFactory
-import org.eclipse.xtext.idea.resource.ProjectAdapter
+import org.eclipse.xtext.idea.resource.IndexingAwareGlobalSearchScope
+import org.eclipse.xtext.idea.resource.ModuleProvider
 import org.eclipse.xtext.psi.IPsiModelAssociator
+import org.eclipse.xtext.resource.XtextResourceSet
 
 class StubTypeProviderFactory extends AbstractTypeProviderFactory {
 	
 	@Inject
 	IPsiModelAssociator psiModelAssociator
 	
+	@Inject IndexingAwareGlobalSearchScope.Factory searchScopeFactory
+	
 	override createTypeProvider(ResourceSet resourceSet) {
-		if (resourceSet == null)
-			throw new IllegalArgumentException("resourceSet may not be null.")
-		val project = ProjectAdapter.getProject(resourceSet)
-		if (project == null)
-			throw new IllegalArgumentException("project may not be null.")
-		new StubJvmTypeProvider(project, resourceSet, indexedJvmTypeAccess, services, psiModelAssociator)
+		if (resourceSet instanceof XtextResourceSet) {
+			val module = ModuleProvider.findModule(resourceSet) 
+			val searchScope = searchScopeFactory.createSearchScope(resourceSet)
+			return new StubJvmTypeProvider(module, resourceSet, indexedJvmTypeAccess, services, psiModelAssociator, searchScope)
+		}
+		throw new IllegalArgumentException("resourceSet was "+resourceSet)
 	}
 	
 }

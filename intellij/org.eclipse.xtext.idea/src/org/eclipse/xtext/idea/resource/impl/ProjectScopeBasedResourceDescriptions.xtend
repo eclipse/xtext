@@ -8,6 +8,7 @@
 package org.eclipse.xtext.idea.resource.impl
 
 import com.google.inject.Inject
+import com.intellij.openapi.module.Module
 import com.intellij.openapi.project.DumbService
 import com.intellij.openapi.project.Project
 import com.intellij.psi.search.GlobalSearchScope
@@ -15,13 +16,15 @@ import org.eclipse.emf.common.notify.Notifier
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.idea.resource.AbstractScopeBasedSelectable
-import org.eclipse.xtext.idea.resource.ProjectAdapter
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.resource.CompilerPhases
 import org.eclipse.xtext.resource.IResourceDescriptions
+import org.eclipse.xtext.resource.XtextResourceSet
 
 import static java.util.Collections.emptyList
+import org.eclipse.xtext.idea.resource.ModuleProvider
 
 class ProjectScopeBasedResourceDescriptions extends AbstractScopeBasedSelectable implements IResourceDescriptions.IContextAware {
 
@@ -56,7 +59,8 @@ class ProjectScopeBasedResourceDescriptions extends AbstractScopeBasedSelectable
 
 	override setContext(Notifier ctx) {
 		this.context = ctx
-		this.project = ProjectAdapter.getProject(ctx)
+		val resourceSet  = EcoreUtil2.getResourceSet(ctx) as XtextResourceSet;
+		this.project = ModuleProvider.findModule(resourceSet).project
 		if (project == null) {
 			throw new IllegalStateException("project is null")
 		}

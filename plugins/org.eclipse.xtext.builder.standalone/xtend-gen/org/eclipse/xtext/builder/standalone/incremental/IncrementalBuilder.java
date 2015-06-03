@@ -10,7 +10,7 @@ package org.eclipse.xtext.builder.standalone.incremental;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import java.io.File;
+import java.io.InputStream;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +18,8 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.EcoreUtil2;
@@ -26,12 +28,11 @@ import org.eclipse.xtext.builder.standalone.IIssueHandler;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.incremental.BuildContext;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
-import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
 import org.eclipse.xtext.builder.standalone.incremental.IndexState;
 import org.eclipse.xtext.builder.standalone.incremental.Indexer;
 import org.eclipse.xtext.builder.standalone.incremental.Source2GeneratedMapping;
 import org.eclipse.xtext.generator.IGenerator;
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
+import org.eclipse.xtext.generator.URIBasedFileSystemAccess;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.clustering.DisabledClusteringPolicy;
@@ -42,7 +43,6 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
@@ -60,7 +60,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
  * @since 2.9
  */
 @SuppressWarnings("all")
-public class IncrementalStandaloneBuilder {
+public class IncrementalBuilder {
   protected static class InternalStatefulIncrementalBuilder {
     @Accessors(AccessorType.PROTECTED_SETTER)
     @Extension
@@ -86,11 +86,17 @@ public class IncrementalStandaloneBuilder {
           final Procedure1<URI> _function = new Procedure1<URI>() {
             @Override
             public void apply(final URI it) {
-              IncrementalStandaloneBuilder.LOG.info(("Deleting " + it));
-              File _asFile = FilesAndURIs.asFile(it);
-              _asFile.delete();
-              Procedure1<? super URI> _afterDeleteFile = InternalStatefulIncrementalBuilder.this.request.getAfterDeleteFile();
-              _afterDeleteFile.apply(it);
+              try {
+                IncrementalBuilder.LOG.info(("Deleting " + it));
+                XtextResourceSet _resourceSet = InternalStatefulIncrementalBuilder.this.context.getResourceSet();
+                URIConverter _uRIConverter = _resourceSet.getURIConverter();
+                Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
+                _uRIConverter.delete(it, _emptyMap);
+                Procedure1<? super URI> _afterDeleteFile = InternalStatefulIncrementalBuilder.this.request.getAfterDeleteFile();
+                _afterDeleteFile.apply(it);
+              } catch (Throwable _e) {
+                throw Exceptions.sneakyThrow(_e);
+              }
             }
           };
           IterableExtensions.<URI>forEach(_deleteSource, _function);
@@ -121,7 +127,7 @@ public class IncrementalStandaloneBuilder {
       String _defaultEncoding = this.request.getDefaultEncoding();
       boolean _notEquals = (!Objects.equal(_defaultEncoding, null));
       if (_notEquals) {
-        IncrementalStandaloneBuilder.LOG.info("Setting encoding.");
+        IncrementalBuilder.LOG.info("Setting encoding.");
         Map<String, LanguageAccess> _languages = this.context.getLanguages();
         Collection<LanguageAccess> _values = _languages.values();
         for (final LanguageAccess lang : _values) {
@@ -142,31 +148,28 @@ public class IncrementalStandaloneBuilder {
             String _plus_2 = (_plus_1 + provider);
             String _plus_3 = (_plus_2 + 
               "\'. Only subclasses of IEncodingProvider.Runtime are supported.");
-            IncrementalStandaloneBuilder.LOG.info(_plus_3);
+            IncrementalBuilder.LOG.info(_plus_3);
           }
         }
       }
     }
     
-    protected boolean cleanup() {
+    protected void cleanup() {
       try {
-        boolean _xifexpression = false;
-        File _tempDir = this.context.getTempDir();
-        boolean _exists = _tempDir.exists();
+        XtextResourceSet _resourceSet = this.context.getResourceSet();
+        @Extension
+        final URIConverter converter = _resourceSet.getURIConverter();
+        URI _tempDir = this.context.getTempDir();
+        Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
+        boolean _exists = converter.exists(_tempDir, _emptyMap);
         if (_exists) {
-          boolean _xblockexpression = false;
-          {
-            File _tempDir_1 = this.context.getTempDir();
-            String _plus = ("Removing temp folder " + _tempDir_1);
-            IncrementalStandaloneBuilder.LOG.info(_plus);
-            File _tempDir_2 = this.context.getTempDir();
-            Files.sweepFolder(_tempDir_2);
-            File _tempDir_3 = this.context.getTempDir();
-            _xblockexpression = _tempDir_3.delete();
-          }
-          _xifexpression = _xblockexpression;
+          URI _tempDir_1 = this.context.getTempDir();
+          String _plus = ("Removing temp folder " + _tempDir_1);
+          IncrementalBuilder.LOG.info(_plus);
+          URI _tempDir_2 = this.context.getTempDir();
+          Map<Object, Object> _emptyMap_1 = CollectionLiterals.<Object, Object>emptyMap();
+          converter.delete(_tempDir_2, _emptyMap_1);
         }
-        return _xifexpression;
       } catch (Throwable _e) {
         throw Exceptions.sneakyThrow(_e);
       }
@@ -177,7 +180,7 @@ public class IncrementalStandaloneBuilder {
       String _lastSegment = _uRI.lastSegment();
       String _plus = ("Starting validation for input: \'" + _lastSegment);
       String _plus_1 = (_plus + "\'");
-      IncrementalStandaloneBuilder.LOG.info(_plus_1);
+      IncrementalBuilder.LOG.info(_plus_1);
       URI _uRI_1 = resource.getURI();
       LanguageAccess _languageAccess = this.context.getLanguageAccess(_uRI_1);
       final IResourceValidator resourceValidator = _languageAccess.getResourceValidator();
@@ -191,32 +194,46 @@ public class IncrementalStandaloneBuilder {
       String _lastSegment = _uRI.lastSegment();
       String _plus = ("Starting generator for input: \'" + _lastSegment);
       String _plus_1 = (_plus + "\'");
-      IncrementalStandaloneBuilder.LOG.info(_plus_1);
+      IncrementalBuilder.LOG.info(_plus_1);
       URI _uRI_1 = resource.getURI();
       final LanguageAccess access = this.context.getLanguageAccess(_uRI_1);
       URI _uRI_2 = resource.getURI();
       final Set<URI> previous = newMappings.deleteSource(_uRI_2);
-      final JavaIoFileSystemAccess fileSystemAccess = this.getFileSystemAccess(access, request);
-      fileSystemAccess.setCallBack(new JavaIoFileSystemAccess.IFileCallback() {
+      URI _baseDir = request.getBaseDir();
+      URIBasedFileSystemAccess _createUriBasedFileSystemAccess = access.createUriBasedFileSystemAccess(_baseDir);
+      final Procedure1<URIBasedFileSystemAccess> _function = new Procedure1<URIBasedFileSystemAccess>() {
         @Override
-        public void fileAdded(final File file) {
-          final URI uri = FilesAndURIs.asURI(file);
-          URI _uRI = resource.getURI();
-          newMappings.addSource2Generated(_uRI, uri);
-          previous.remove(uri);
-          Procedure2<? super URI, ? super URI> _afterGenerateFile = request.getAfterGenerateFile();
-          URI _uRI_1 = resource.getURI();
-          _afterGenerateFile.apply(_uRI_1, uri);
+        public void apply(final URIBasedFileSystemAccess it) {
+          ResourceSet _resourceSet = resource.getResourceSet();
+          URIConverter _uRIConverter = _resourceSet.getURIConverter();
+          it.setConverter(_uRIConverter);
+          final URIBasedFileSystemAccess.BeforeWrite _function = new URIBasedFileSystemAccess.BeforeWrite() {
+            @Override
+            public InputStream beforeWrite(final URI uri, final InputStream contents) {
+              URI _uRI = resource.getURI();
+              newMappings.addSource2Generated(_uRI, uri);
+              previous.remove(uri);
+              Procedure2<? super URI, ? super URI> _afterGenerateFile = request.getAfterGenerateFile();
+              URI _uRI_1 = resource.getURI();
+              _afterGenerateFile.apply(_uRI_1, uri);
+              return contents;
+            }
+          };
+          it.setBeforeWrite(_function);
+          final URIBasedFileSystemAccess.BeforeDelete _function_1 = new URIBasedFileSystemAccess.BeforeDelete() {
+            @Override
+            public boolean beforeDelete(final URI uri) {
+              newMappings.deleteGenerated(uri);
+              Procedure1<? super URI> _afterDeleteFile = request.getAfterDeleteFile();
+              _afterDeleteFile.apply(uri);
+              return true;
+            }
+          };
+          it.setBeforeDelete(_function_1);
         }
-        
-        @Override
-        public void fileDeleted(final File file) {
-          final URI uri = FilesAndURIs.asURI(file);
-          newMappings.deleteGenerated(uri);
-          Procedure1<? super URI> _afterDeleteFile = request.getAfterDeleteFile();
-          _afterDeleteFile.apply(uri);
-        }
-      });
+      };
+      final URIBasedFileSystemAccess fileSystemAccess = ObjectExtensions.<URIBasedFileSystemAccess>operator_doubleArrow(_createUriBasedFileSystemAccess, _function);
+      fileSystemAccess.setContext(resource);
       boolean _isWriteStorageResources = request.isWriteStorageResources();
       if (_isWriteStorageResources) {
         boolean _matched = false;
@@ -234,32 +251,23 @@ public class IncrementalStandaloneBuilder {
       }
       IGenerator _generator = access.getGenerator();
       _generator.doGenerate(resource, fileSystemAccess);
-      final Procedure1<URI> _function = new Procedure1<URI>() {
+      final Procedure1<URI> _function_1 = new Procedure1<URI>() {
         @Override
         public void apply(final URI it) {
-          IncrementalStandaloneBuilder.LOG.info(("Deleting stale generated file " + it));
-          File _asFile = FilesAndURIs.asFile(it);
-          _asFile.delete();
-          Procedure1<? super URI> _afterDeleteFile = request.getAfterDeleteFile();
-          _afterDeleteFile.apply(it);
+          try {
+            IncrementalBuilder.LOG.info(("Deleting stale generated file " + it));
+            XtextResourceSet _resourceSet = InternalStatefulIncrementalBuilder.this.context.getResourceSet();
+            URIConverter _uRIConverter = _resourceSet.getURIConverter();
+            Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
+            _uRIConverter.delete(it, _emptyMap);
+            Procedure1<? super URI> _afterDeleteFile = request.getAfterDeleteFile();
+            _afterDeleteFile.apply(it);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
         }
       };
-      IterableExtensions.<URI>forEach(previous, _function);
-    }
-    
-    private Map<LanguageAccess, JavaIoFileSystemAccess> configuredFsas = CollectionLiterals.<LanguageAccess, JavaIoFileSystemAccess>newHashMap();
-    
-    protected JavaIoFileSystemAccess getFileSystemAccess(final LanguageAccess language, final BuildRequest request) {
-      JavaIoFileSystemAccess fsa = this.configuredFsas.get(language);
-      boolean _equals = Objects.equal(fsa, null);
-      if (_equals) {
-        URI _baseDir = request.getBaseDir();
-        File _asFile = FilesAndURIs.asFile(_baseDir);
-        JavaIoFileSystemAccess _createFileSystemAccess = language.createFileSystemAccess(_asFile);
-        fsa = _createFileSystemAccess;
-        this.configuredFsas.put(language, fsa);
-      }
-      return fsa;
+      IterableExtensions.<URI>forEach(previous, _function_1);
     }
     
     protected void setContext(final BuildContext context) {
@@ -271,10 +279,10 @@ public class IncrementalStandaloneBuilder {
     }
   }
   
-  private final static Logger LOG = Logger.getLogger(IncrementalStandaloneBuilder.class);
+  private final static Logger LOG = Logger.getLogger(IncrementalBuilder.class);
   
   @Inject
-  private Provider<IncrementalStandaloneBuilder.InternalStatefulIncrementalBuilder> provider;
+  private Provider<IncrementalBuilder.InternalStatefulIncrementalBuilder> provider;
   
   public IndexState build(final BuildRequest request, final Map<String, LanguageAccess> languages) {
     return this.build(request, languages, null);
@@ -286,7 +294,7 @@ public class IncrementalStandaloneBuilder {
     if (_notEquals) {
       DynamicResourceClusteringPolicy _xblockexpression = null;
       {
-        IncrementalStandaloneBuilder.LOG.info("Clustering configured.");
+        IncrementalBuilder.LOG.info("Clustering configured.");
         DynamicResourceClusteringPolicy _dynamicResourceClusteringPolicy = new DynamicResourceClusteringPolicy();
         final Procedure1<DynamicResourceClusteringPolicy> _function = new Procedure1<DynamicResourceClusteringPolicy>() {
           @Override
@@ -309,12 +317,11 @@ public class IncrementalStandaloneBuilder {
     }
     final IResourceClusteringPolicy strategy = _xifexpression;
     URI _baseDir = request.getBaseDir();
-    File _asFile = FilesAndURIs.asFile(_baseDir);
-    final File tempDir = new File(_asFile, "xtext-tmp");
+    final URI tempDir = _baseDir.appendSegment("xtext-tmp");
     final XtextResourceSet resourceSet = request.getResourceSet();
     resourceSet.addLoadOption(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE, Boolean.valueOf(true));
     final BuildContext context = new BuildContext(languages, resourceSet, strategy, tempDir);
-    final IncrementalStandaloneBuilder.InternalStatefulIncrementalBuilder builder = this.provider.get();
+    final IncrementalBuilder.InternalStatefulIncrementalBuilder builder = this.provider.get();
     builder.context = context;
     builder.request = request;
     return builder.launch();

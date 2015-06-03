@@ -8,6 +8,7 @@
 package org.eclipse.xtext.idea.resource;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -15,13 +16,31 @@ import com.intellij.psi.search.GlobalSearchScope;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.idea.resource.ModuleProvider;
 import org.eclipse.xtext.resource.CompilerPhases;
+import org.eclipse.xtext.resource.XtextResourceSet;
 
 /**
  * @author kosyakov - Initial contribution and API
  */
 @SuppressWarnings("all")
 public class IndexingAwareGlobalSearchScope extends GlobalSearchScope {
+  public static class Factory {
+    @Inject
+    private Provider<IndexingAwareGlobalSearchScope> provider;
+    
+    public IndexingAwareGlobalSearchScope createSearchScope(final XtextResourceSet resourceSet) {
+      final IndexingAwareGlobalSearchScope indexingAwareGlobalSearchScope = this.provider.get();
+      indexingAwareGlobalSearchScope.resourceSet = resourceSet;
+      final Module context = ModuleProvider.findModule(resourceSet);
+      GlobalSearchScope _moduleScope = context.getModuleScope();
+      indexingAwareGlobalSearchScope.filterScope = _moduleScope;
+      GlobalSearchScope _moduleWithDependenciesAndLibrariesScope = GlobalSearchScope.moduleWithDependenciesAndLibrariesScope(context);
+      indexingAwareGlobalSearchScope.searchScope = _moduleWithDependenciesAndLibrariesScope;
+      return indexingAwareGlobalSearchScope;
+    }
+  }
+  
   @Accessors(AccessorType.PUBLIC_SETTER)
   private ResourceSet resourceSet;
   

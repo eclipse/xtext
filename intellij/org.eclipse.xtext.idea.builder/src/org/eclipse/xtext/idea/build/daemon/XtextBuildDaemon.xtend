@@ -24,7 +24,6 @@ import org.apache.log4j.Logger
 import org.apache.log4j.PatternLayout
 import org.eclipse.xtext.builder.standalone.IIssueHandler
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest
-import org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder
 import org.eclipse.xtext.builder.standalone.incremental.IndexState
 import org.eclipse.xtext.idea.build.net.ObjectChannel
 import org.eclipse.xtext.idea.build.net.Protocol.BuildFailureMessage
@@ -34,6 +33,7 @@ import org.eclipse.xtext.idea.build.net.Protocol.BuildResultMessage
 import static org.eclipse.xtext.idea.build.daemon.XtextBuildDaemon.*
 
 import static extension org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs.*
+import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -144,7 +144,7 @@ class XtextBuildDaemon {
 
 	static class Worker {
 
-		@Inject IncrementalStandaloneBuilder incrementalBuilder
+		@Inject IncrementalBuilder incrementalBuilder
 
 		@Inject IBuildSessionSingletons.Impl singletons
 

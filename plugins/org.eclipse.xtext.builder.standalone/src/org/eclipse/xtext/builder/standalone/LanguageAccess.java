@@ -4,16 +4,21 @@
 package org.eclipse.xtext.builder.standalone;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.common.types.descriptions.IStubGenerator;
+import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.OutputConfiguration.SourceMapping;
+import org.eclipse.xtext.generator.URIBasedFileSystemAccess;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.parser.IEncodingProvider.Runtime;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -66,6 +71,21 @@ public class LanguageAccess {
 
 	public JavaIoFileSystemAccess createFileSystemAccess(final File baseDir) {
 		JavaIoFileSystemAccess fsa = resourceServiceProvider.get(JavaIoFileSystemAccess.class);
+		try {
+			configureFileSystemAccess(URI.createFileURI(baseDir.getCanonicalPath()), fsa);
+		} catch (IOException e) {
+			throw new WrappedException(e);
+		}
+		return fsa;
+	}
+	
+	public URIBasedFileSystemAccess createUriBasedFileSystemAccess(final URI baseDir) {
+		URIBasedFileSystemAccess fsa = resourceServiceProvider.get(URIBasedFileSystemAccess.class);
+		configureFileSystemAccess(baseDir, fsa);
+		return fsa;
+	}
+
+	private void configureFileSystemAccess(final URI baseDir, AbstractFileSystemAccess2 fsa) {
 		Set<OutputConfiguration> confsForFsa = Sets.newHashSet();
 		Set<OutputConfiguration> pomOutputConfigs = getConfiguredOutputConfigs();
 		if (pomOutputConfigs != null && !pomOutputConfigs.isEmpty()) {
@@ -96,7 +116,6 @@ public class LanguageAccess {
 					}
 				});
 		fsa.setOutputConfigurations(asMap);
-		return fsa;
 	}
 
 	public Set<OutputConfiguration> getConfiguredOutputConfigs() {
@@ -127,11 +146,11 @@ public class LanguageAccess {
 		return linksAgainstJava;
 	}
 
-	protected String resolveToBaseDir(final String directory, File baseDir) {
-		File outDir = new File(directory);
-		if (!outDir.isAbsolute()) {
-			outDir = new File(baseDir, directory);
+	protected String resolveToBaseDir(final String directory, URI baseDir) {
+		URI outDir = URI.createURI(directory);
+		if (outDir.isRelative()) {
+			outDir = outDir.resolve(baseDir);
 		}
-		return outDir.getAbsolutePath();
+		return outDir.toString();
 	}
 }

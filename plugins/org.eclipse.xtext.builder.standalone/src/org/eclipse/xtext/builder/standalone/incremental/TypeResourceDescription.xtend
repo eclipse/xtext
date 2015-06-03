@@ -16,8 +16,6 @@ import org.eclipse.xtext.resource.impl.AbstractResourceDescription
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta
 import org.eclipse.xtext.util.Strings
 
-import static extension org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs.*
-
 /**
  * More or less copied from NameBasedResourceDescription and TypeResourceDescription
  * to avoid dependency on common.types.ui
@@ -38,7 +36,7 @@ class TypeResourceDescription extends AbstractResourceDescription {
 	URI uri
 	
 	new(QualifiedName typeName) {
-		uri = ('java:/' + typeName.toString('.')).asURI
+		uri = URI::createURI('java:/' + typeName.toString('.'))
 		exportedObjects = #[new ClassDescription(typeName)]
 	}
 	
