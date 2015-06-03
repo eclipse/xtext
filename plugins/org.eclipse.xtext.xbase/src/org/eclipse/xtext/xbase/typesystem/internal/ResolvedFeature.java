@@ -245,7 +245,7 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 	@Override
 	protected LightweightTypeReference getDeclaredType(JvmIdentifiableElement feature) {
 		if (feature instanceof JvmConstructor) {
-			return getState().getReferenceOwner().toPlainTypeReference(getState().getTypeReferences().findDeclaredType(Void.TYPE, feature));
+			return getState().getReferenceOwner().newReferenceTo(Void.TYPE);
 		}
 		/*
 		 * The actual result type is Class<? extends |X|> where |X| is the erasure of 

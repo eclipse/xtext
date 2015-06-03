@@ -8,20 +8,19 @@
 package org.eclipse.xtend.core.tests.typesystem
 
 import com.google.inject.Inject
+import org.apache.log4j.Level
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.junit4.logging.LoggingTester
 import org.eclipse.xtext.junit4.util.ResourceHelper
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.xbase.resource.BatchLinkableResource
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.eclipse.xtext.junit4.logging.LoggingTester
-import org.apache.log4j.Level
-import org.eclipse.xtext.xbase.resource.BatchLinkableResource
-import org.junit.Assert
 
 /**
  * @author efftinge - Initial contribution and API

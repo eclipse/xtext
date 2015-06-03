@@ -42,7 +42,7 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 		assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
 		computedSuperType = getServices.typeConformanceComputer.getCommonSuperType(typeReferences.reverseView, owner)
 		assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
-		if (!(computedSuperType?.primitiveVoid || computedSuperType?.primitive)) {
+		if (!(computedSuperType != null && (computedSuperType.primitiveVoid || computedSuperType.primitive))) {
 			computedSuperType = getServices.typeConformanceComputer.getCommonSuperType((typeReferences + newImmutableList(owner.newAnyTypeReference, owner.newAnyTypeReference)).toList, owner)
 			assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
 		}

@@ -58,7 +58,7 @@ public class ElementOrComponentTypeComputer extends TypeReferenceVisitorWithResu
 		TypeParameterSubstitutor<?> substitutor = new UnboundTypeParameterPreservingSubstitutor(typeParameterMapping, owner);
 		JvmGenericType iterable = (JvmGenericType) owner.getServices().getTypeReferences().findDeclaredType(Iterable.class, owner.getContextResourceSet());
 		if (iterable == null) {
-			return owner.newUnknownTypeReference(Object.class.getName());
+			return owner.newReferenceToObject();
 		}
 		LightweightTypeReference substituteMe = owner.newParameterizedTypeReference(iterable.getTypeParameters().get(0));
 		LightweightTypeReference substitutedArgument = substitutor.substitute(substituteMe).getUpperBoundSubstitute();

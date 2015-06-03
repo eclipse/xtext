@@ -121,12 +121,7 @@ public class ActualTypeArgumentCollector extends AbstractTypeReferencePairWalker
 										substitutor, substitutor.createVisiting(pendingParameter));
 								Maps2.putIntoListMap(pendingParameter, boundByConstraint(resolvedConstraint, pendingParameter), result);
 							} else {
-								JvmType objectType = getOwner().getServices().getTypeReferences().findDeclaredType(Object.class, constraintType);
-								LightweightTypeReference lightweightReference;
-								if (objectType != null)
-									lightweightReference = getOwner().newParameterizedTypeReference(objectType);
-								else
-									lightweightReference = getOwner().newUnknownTypeReference(Object.class.getName());
+								LightweightTypeReference lightweightReference = getOwner().newReferenceToObject();
 								Maps2.putIntoListMap(pendingParameter, boundByConstraint(lightweightReference, pendingParameter), result);
 							}
 						} else {
