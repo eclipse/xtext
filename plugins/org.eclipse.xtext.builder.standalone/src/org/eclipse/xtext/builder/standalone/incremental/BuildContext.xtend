@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.standalone.incremental
 
-import java.io.File
 import java.util.Map
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
@@ -26,7 +25,7 @@ class BuildContext {
 	val Map<String, LanguageAccess> languages
 	val XtextResourceSet resourceSet
 	val IResourceClusteringPolicy clusteringPolicy
-	val File tempDir
+	val URI tempDir
 	
 	ClusteringStorageAwareResourceLoader loader
 	

@@ -9,7 +9,6 @@ package org.eclipse.xtext.builder.standalone.incremental
 
 import com.google.inject.Inject
 import com.google.inject.Provider
-import java.io.File
 import java.util.Map
 import org.apache.log4j.Logger
 import org.eclipse.emf.ecore.resource.Resource
@@ -17,27 +16,28 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.builder.standalone.ClusteringConfig
 import org.eclipse.xtext.builder.standalone.LanguageAccess
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess.IFileCallback
+//import org.eclipse.xtext.generator.JavaIoFileSystemAccess
+//import org.eclipse.xtext.generator.JavaIoFileSystemAccess.IFileCallback
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.clustering.DisabledClusteringPolicy
 import org.eclipse.xtext.resource.clustering.DynamicResourceClusteringPolicy
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.util.CancelIndicator
-import org.eclipse.xtext.util.Files
+//import org.eclipse.xtext.util.Files
 import org.eclipse.xtext.validation.CheckMode
 
-import static org.eclipse.xtext.builder.standalone.incremental.IncrementalStandaloneBuilder.*
 
-import static extension org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs.*
+//import static extension org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs.*
+import static org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder.*
+import org.eclipse.xtext.generator.URIBasedFileSystemAccess
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.9 
  */
-class IncrementalStandaloneBuilder {
-	static final Logger LOG = Logger.getLogger(IncrementalStandaloneBuilder);
+class IncrementalBuilder {
+	static final Logger LOG = Logger.getLogger(IncrementalBuilder);
 	
 	protected static class InternalStatefulIncrementalBuilder {
 	
@@ -53,7 +53,8 @@ class IncrementalStandaloneBuilder {
 			request.deletedFiles.forEach [
 				newSource2GeneratedMapping.deleteSource(it).forEach [
 					LOG.info("Deleting " + it)
-					asFile.delete
+					
+					context.resourceSet.URIConverter.delete(it, emptyMap)
 					request.afterDeleteFile.apply(it)
 				]
 			]
@@ -74,6 +75,7 @@ class IncrementalStandaloneBuilder {
 		}
 		
 		def protected initialize() {
+			//TODO needs to be done outside
 			if (request.defaultEncoding != null) {
 				LOG.info("Setting encoding.")
 				for (lang : languages.values) {
@@ -91,10 +93,10 @@ class IncrementalStandaloneBuilder {
 		}
 		
 		def protected cleanup() {
-			if(tempDir.exists) {
+			val extension converter = context.resourceSet.URIConverter
+			if(tempDir.exists(emptyMap)) {
 				LOG.info('Removing temp folder ' + tempDir)
-				Files.sweepFolder(tempDir)
-				tempDir.delete		
+				tempDir.delete(emptyMap)
 			}
 		}
 	
@@ -109,21 +111,22 @@ class IncrementalStandaloneBuilder {
 			LOG.info("Starting generator for input: '" + resource.URI.lastSegment + "'");
 			val access = resource.URI.languageAccess
 			val previous = newMappings.deleteSource(resource.URI)
-			val fileSystemAccess = access.getFileSystemAccess(request)
-			fileSystemAccess.setCallBack(new IFileCallback() {
-				override fileAdded(File file) {
-					val uri = file.asURI
+			val fileSystemAccess = access.createUriBasedFileSystemAccess(request.baseDir) => [
+				converter = resource.resourceSet.URIConverter
+				beforeWrite = [ uri, contents |
 					newMappings.addSource2Generated(resource.URI, uri)
 					previous.remove(uri)
 					request.afterGenerateFile.apply(resource.URI, uri)
-				}
+					return contents
+				]
 				
-				override fileDeleted(File file) {
-					val uri = file.asURI
+				beforeDelete = [ uri |
 					newMappings.deleteGenerated(uri)
 					request.afterDeleteFile.apply(uri)
-				}
-			})
+					return true
+				]
+			]
+			fileSystemAccess.context = resource
 			if (request.isWriteStorageResources) {
 				switch resource {
 					StorageAwareResource case resource.resourceStorageFacade != null: {
@@ -135,25 +138,14 @@ class IncrementalStandaloneBuilder {
 			// delete everything that was previously generated, but not this time
 			previous.forEach[
 				LOG.info('Deleting stale generated file ' + it)
-				asFile.delete
+				context.resourceSet.URIConverter.delete(it, emptyMap)
 				request.getAfterDeleteFile.apply(it)
 			]
 		}
 	
-		Map<LanguageAccess, JavaIoFileSystemAccess> configuredFsas = newHashMap()
-	
-		protected def getFileSystemAccess(LanguageAccess language, BuildRequest request) {
-			var fsa = configuredFsas.get(language)
-			if (fsa == null) {
-				fsa = language.createFileSystemAccess(request.baseDir.asFile)
-				configuredFsas.put(language, fsa)
-			}
-			return fsa
-		}
-	
 	}
 
-	@Inject Provider<IncrementalStandaloneBuilder.InternalStatefulIncrementalBuilder> provider
+	@Inject Provider<IncrementalBuilder.InternalStatefulIncrementalBuilder> provider
 
 	def IndexState build(BuildRequest request, Map<String, LanguageAccess> languages) {
 		build(request, languages, null)
@@ -171,7 +163,7 @@ class IncrementalStandaloneBuilder {
 			} else
 				new DisabledClusteringPolicy
 				
-		val tempDir = new File(request.baseDir.asFile, 'xtext-tmp')
+		val tempDir = request.baseDir.appendSegment('xtext-tmp')
 		val resourceSet = request.resourceSet
 		resourceSet.addLoadOption(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE, true)
 		val context = new BuildContext(languages

@@ -10,9 +10,11 @@ package org.eclipse.xtext.builder.standalone.incremental
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.Collection
+import java.util.Set
 import org.apache.log4j.Logger
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.mwe.ResourceDescriptionsProvider
 import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.resource.CompilerPhases
@@ -22,10 +24,6 @@ import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
-
-import static extension org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs.*
-import java.util.Set
-import org.eclipse.xtend.lib.annotations.Data
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -38,7 +36,7 @@ class Indexer {
 
 	@Inject ResourceURICollector uriCollector
 
-//	@Inject JavaSupport javaSupport
+	@Inject JavaSupport javaSupport
 
 	@Inject CompilerPhases compilerPhases
 
@@ -67,9 +65,6 @@ class Indexer {
 		val ResourceDescriptionsData newIndex = oldIndex.copy
 		val resourceDescriptions = installIndex(resourceSet, newIndex)
 
-		val isConsiderJava = languages
-				.entrySet
-				.exists[value.linksAgainstJava]
 
 		val affectionCandidates = newHashSet
 		var Set<URI> directlyAffected = null
@@ -84,18 +79,13 @@ class Indexer {
 		val currentDeltas = <IResourceDescription.Delta>newArrayList
 		currentDeltas += request.removeDeletedFilesFromIndex(oldIndex, newIndex)
 
-//		if (isConsiderJava) 
-//			javaSupport.installLocalOnlyTypeProvider(
-//				request.sourceRoots  + request.outputs + request.classPath, resourceSet)
 		preIndexChangedResources(directlyAffected, oldIndex, newIndex, request, context)
-//		if(isConsiderJava) {
-//			val preCompiledClasses = javaSupport.preCompileJavaFiles(directlyAffected, newIndex, request, context)
-//			if (preCompiledClasses != null) {
-//				javaSupport.installTypeProvider(
-//					#[preCompiledClasses] + request.sourceRoots  + request.outputs + request.classPath, 
-//					resourceSet)
-//			}
-//		}
+		val isConsiderJava = languages
+				.entrySet
+				.exists[value.linksAgainstJava]
+		if(isConsiderJava) {
+			javaSupport.preCompileJavaFiles(directlyAffected, newIndex, request, context)
+		}
 	
 		LOG.info("Indexing changed and added files")
 		val allAffected = newHashSet
@@ -134,9 +124,16 @@ class Indexer {
 			]
 			toBeIndexed.filter[fileExtension=='java'].forEach [
 				// FIXME: this will only work for the public top-level type
-				val javaPath = findSourceRootRelativeURI(request).trimFileExtension.toString
-				val fqn = qualifiedNameConverter.toQualifiedName(javaPath.replace('/', '.'))
-				currentDeltas += new TypeResourceDescription.ChangedDelta(fqn)
+				val stringUri = it.toString
+				for (srcRoot : request.sourceRoots) {
+					val srcRootString = srcRoot.toString
+					if (stringUri.startsWith(srcRootString)) {
+						val javaPath = stringUri.substring(srcRootString.length)
+						val fqn = qualifiedNameConverter.toQualifiedName(javaPath.replace('/', '.'))
+						currentDeltas += new TypeResourceDescription.ChangedDelta(fqn)
+						return;
+					}
+				}
 			]
 			allDeltas += currentDeltas
 			
