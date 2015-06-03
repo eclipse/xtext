@@ -28,6 +28,9 @@ class ServerLauncher {
 					resourceBase = 'src/main/webapp'
 					welcomeFiles = #['index.html']
 				],
+				new ResourceHandler => [
+					resourceBase = '../org.eclipse.xtext.web/src/main/css'
+				],
 				new WebAppContext => [
 					resourceBase = '../org.eclipse.xtext.web/src/main/js'
 					contextPath = '/'

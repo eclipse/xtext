@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="Content-Language" content="en-us">
-	<title>Xtext-Web State Machine Example</title>
+	<title>Xtext-Web Entities Example</title>
 	<link rel="stylesheet" type="text/css" href="xtext/xtext-orion.css" />
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<script src="webjars/requirejs/2.1.17/require.min.js"></script>
@@ -23,25 +23,33 @@
 
 <div class="container">
 	<div class="xtext-editor"
-	    data-editor-lang="statemachine"
+	    data-editor-xtext-lang="entities"
 	    data-editor-status-element="status"
 		data-editor-dirty-element="dirty-indicator"
 	><pre>
+import java.util.List
+
 /*
- * A simple State Machine example.
+ * A simple Entities example.
  */
-input signal x
-input signal y
-output signal z
-
-state State1
-	set z = false
-	if x == true goto State2
-end
-
-state State2
-	if x == false and y == true goto State1
-end</pre></div>
+package test {
+	
+	// This is my self-made entity
+	entity MyEntity {
+		myProperty : List&lt;String&gt;
+		op myOperation() : String {
+			myProperty.head
+		}
+	}
+	
+	entity Container {
+		entities : List&lt;MyEntity&gt;
+		op findMatching(String param) : MyEntity {
+			entities.findFirst[myOperation == param]
+		}
+	}
+	
+}</pre></div>
 	<div class="status-wrapper">
 		<div id="dirty-indicator">modified</div>
 		<div id="status">Welcome to Xtext-Web</div>

@@ -3,33 +3,28 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="Content-Language" content="en-us">
-	<title>Xtext-Web State Machine Example</title>
-	<link rel="stylesheet" type="text/css" href="xtext/xtext-orion.css" />
+	<title>Xtext-Web Domainmodel Example</title>
+	<link rel="stylesheet" type="text/css" href="xtext/xtext-ace.css" />
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<script src="webjars/requirejs/2.1.17/require.min.js"></script>
 	<script type="text/javascript">
 		require.config({
 			paths: {
-				"text": "webjars/requirejs-text/2.0.10-3/text",
 				"jquery": "webjars/jquery/2.1.4/jquery.min"
 			}
 		});
-		require(["xtext/xtext-orion"], function(xtext) {
-			var editor = xtext.createEditor({theme: "orion/editor/themes/default.css"});
-			$("#save-button").click(function() {
-				xtext.invokeService(editor, "save");
-			});
-			$("#revert-button").click(function() {
-				xtext.invokeService(editor, "revert");
-			});
+		require(["webjars/ace/01.08.2014/src/ace"]);
+		require(["xtext/xtext-ace"], function(xtext) {
+			var editor = ace.edit("xtext-editor");
+			xtext.configureServices(editor, { lang: "statemachine", sendFullText: true });
 		});
 	</script>
 </head>
 <body>
 
 <div class="container">
-	<div class="xtext-editor"
-		data-editor-resource-uri="example.statemachine"
+	<div id="xtext-editor"
+		data-editor-resource-id="example.statemachine"
 		data-editor-status-element="status"
 		data-editor-dirty-element="dirty-indicator"
 		data-editor-enable-save-action="true"

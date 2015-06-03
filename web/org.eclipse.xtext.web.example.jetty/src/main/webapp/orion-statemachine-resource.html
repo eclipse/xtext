@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="Content-Language" content="en-us">
-	<title>Xtext-Web Entities Example</title>
+	<title>Xtext-Web State Machine Example</title>
 	<link rel="stylesheet" type="text/css" href="xtext/xtext-orion.css" />
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<script src="webjars/requirejs/2.1.17/require.min.js"></script>
@@ -15,7 +15,13 @@
 			}
 		});
 		require(["xtext/xtext-orion"], function(xtext) {
-			xtext.createEditor({theme: "orion/editor/themes/default.css"});
+			var editor = xtext.createEditor({theme: "orion/editor/themes/default.css"});
+			$("#save-button").click(function() {
+				xtext.invokeService(editor, "save");
+			});
+			$("#revert-button").click(function() {
+				xtext.invokeService(editor, "revert");
+			});
 		});
 	</script>
 </head>
@@ -23,36 +29,18 @@
 
 <div class="container">
 	<div class="xtext-editor"
-	    data-editor-lang="entities"
-	    data-editor-status-element="status"
+		data-editor-resource-id="example.statemachine"
+		data-editor-status-element="status"
 		data-editor-dirty-element="dirty-indicator"
-	><pre>
-import java.util.List
-
-/*
- * A simple Entities example.
- */
-package test {
-	
-	// This is my self-made entity
-	entity MyEntity {
-		myProperty : List&lt;String&gt;
-		op myOperation() : String {
-			myProperty.head
-		}
-	}
-	
-	entity Container {
-		entities : List&lt;MyEntity&gt;
-		op findMatching(String param) : MyEntity {
-			entities.findFirst[myOperation == param]
-		}
-	}
-	
-}</pre></div>
+		data-editor-enable-save-action="true"
+		data-editor-show-error-dialogs="true"></div>
 	<div class="status-wrapper">
 		<div id="dirty-indicator">modified</div>
 		<div id="status">Welcome to Xtext-Web</div>
+	</div>
+	<div class="button-wrapper">
+		<button id="save-button">Save</button>
+		<button id="revert-button">Revert</button>
 	</div>
 </div>
 
