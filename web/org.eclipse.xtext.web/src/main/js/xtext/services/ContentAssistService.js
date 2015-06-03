@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 
-define(["xtext/services/AbstractXtextService", "orion/Deferred"], function(AbstractXtextService, Deferred) {
+define(["xtext/services/AbstractXtextService", "jquery"], function(AbstractXtextService, jQuery) {
 
 	function ContentAssistService(serverUrl, resourceUri) {
 		this.initialize(serverUrl, resourceUri, "content-assist");
@@ -16,7 +16,7 @@ define(["xtext/services/AbstractXtextService", "orion/Deferred"], function(Abstr
 		
 	ContentAssistService.prototype.computeContentAssist = function(editorContext, params, deferred) {
 		if (deferred === undefined) {
-			deferred = new Deferred();
+			deferred = jQuery.Deferred();
 		}
 		var serverData = {
 			contentType : params.contentType,
@@ -42,7 +42,7 @@ define(["xtext/services/AbstractXtextService", "orion/Deferred"], function(Abstr
 					this._updateService.addCompletionCallback(function() {
 						self.computeContentAssist(editorContext, params, deferred);
 					});
-					return deferred.promise;
+					return deferred.promise();
 				}
 				editorContext.getClientServiceState().update = "started";
 				onComplete = this._updateService.onComplete.bind(this._updateService);
@@ -117,7 +117,7 @@ define(["xtext/services/AbstractXtextService", "orion/Deferred"], function(Abstr
 			
 			complete: onComplete
 		});
-		return deferred.promise;
+		return deferred.promise();
 	};
 	
 	return ContentAssistService;

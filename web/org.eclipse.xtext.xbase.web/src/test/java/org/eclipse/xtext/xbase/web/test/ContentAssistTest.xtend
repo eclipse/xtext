@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.web.test
 
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult
-import org.eclipse.xtext.web.server.test.HashMapSessionStore
 import org.junit.Test
 
 class ContentAssistTest extends AbstractXbaseWebTest {

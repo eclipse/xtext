@@ -12,12 +12,12 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
-import org.eclipse.xtext.web.server.test.HashMapSessionStore;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.web.test.AbstractXbaseWebTest;
+import org.eclipse.xtext.xbase.web.test.HashMapSessionStore;
 import org.junit.Assert;
 import org.junit.Test;
 

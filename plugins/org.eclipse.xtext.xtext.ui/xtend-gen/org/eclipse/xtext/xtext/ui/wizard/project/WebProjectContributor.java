@@ -144,7 +144,7 @@ public class WebProjectContributor extends DefaultProjectFactoryContributor {
       _builder.append("<div class=\"content\">");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("<div id=\"xtext-editor\" data-editor-lang=\"");
+      _builder.append("<div id=\"xtext-editor\" data-editor-xtext-lang=\"");
       String _fileExtension = this.projectInfo.getFileExtension();
       _builder.append(_fileExtension, "\t\t");
       _builder.append("\"></div>");

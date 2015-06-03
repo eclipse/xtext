@@ -18,6 +18,10 @@ a:hover {
 	text-decoration: underline;
 }
 
+h1 {
+	color: #555;
+}
+
 h2 {
 	color: #555;
 	padding-left: 15px;
@@ -79,15 +83,15 @@ h2 {
 	margin: 20px;
 }
 
-.dirty {
-	background-color: #88e;
-}
-
 #dirty-indicator {
 	display: inline;
 	color: #e8e8e8;
 	padding: 1px 8px 1px 8px;
 	border: 1px solid #ccc;
+}
+
+#dirty-indicator.dirty {
+	background-color: #88e;
 }
 
 #status {
