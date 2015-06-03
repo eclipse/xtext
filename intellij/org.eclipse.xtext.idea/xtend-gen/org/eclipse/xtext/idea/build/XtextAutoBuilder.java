@@ -101,8 +101,16 @@ public class XtextAutoBuilder {
   
   protected void enqueue(final VirtualFile file, final BuildEvent.Type type) {
     try {
+      boolean _and = false;
       boolean _notEquals = (!Objects.equal(file, null));
-      if (_notEquals) {
+      if (!_notEquals) {
+        _and = false;
+      } else {
+        boolean _isDisposed = this.project.isDisposed();
+        boolean _not = (!_isDisposed);
+        _and = _not;
+      }
+      if (_and) {
         BuildEvent _buildEvent = new BuildEvent(file, type);
         this.queue.put(_buildEvent);
         this.alarm.cancelAllRequests();

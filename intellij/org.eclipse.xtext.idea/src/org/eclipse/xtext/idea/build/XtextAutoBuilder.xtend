@@ -72,7 +72,7 @@ class XtextAutoBuilder {
 	}
 
 	protected def enqueue(VirtualFile file, BuildEvent.Type type) {
-		if (file != null) {
+		if (file != null && !project.isDisposed) {
 			queue.put(new BuildEvent(file, type))
 			alarm.cancelAllRequests
 			alarm.addRequest([build], 200)

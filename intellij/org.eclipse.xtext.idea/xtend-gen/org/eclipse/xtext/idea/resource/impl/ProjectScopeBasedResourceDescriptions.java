@@ -86,15 +86,16 @@ public class ProjectScopeBasedResourceDescriptions extends AbstractScopeBasedSel
     this.context = ctx;
     ResourceSet _resourceSet = EcoreUtil2.getResourceSet(ctx);
     final XtextResourceSet resourceSet = ((XtextResourceSet) _resourceSet);
-    Module _findModule = ModuleProvider.findModule(resourceSet);
-    Project _project = _findModule.getProject();
-    this.project = _project;
-    boolean _equals = Objects.equal(this.project, null);
+    final Module module = ModuleProvider.findModule(resourceSet);
+    boolean _equals = Objects.equal(module, null);
     if (_equals) {
-      throw new IllegalStateException("project is null");
+      throw new IllegalStateException("module is null");
+    } else {
+      Project _project = module.getProject();
+      this.project = _project;
+      GlobalSearchScope _projectScope = GlobalSearchScope.projectScope(this.project);
+      this.setScope(_projectScope);
     }
-    GlobalSearchScope _projectScope = GlobalSearchScope.projectScope(this.project);
-    this.setScope(_projectScope);
   }
   
   public boolean isIndexing() {

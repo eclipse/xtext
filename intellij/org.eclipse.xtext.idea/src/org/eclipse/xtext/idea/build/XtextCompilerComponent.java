@@ -29,18 +29,21 @@ import com.intellij.openapi.vfs.VirtualFileMoveEvent;
 public class XtextCompilerComponent extends AbstractProjectComponent {
 
 	private XtextAutoBuilder autoBuilder;
+	private VirtualFileAdapter virtualFileListener;
+	private DocumentAdapter documentListener;
 	
 	public XtextCompilerComponent(Project project) {
 		super(project);
 		autoBuilder = new XtextAutoBuilder(project);
-		EditorFactory.getInstance().getEventMulticaster().addDocumentListener(new DocumentAdapter() {
+		documentListener = new DocumentAdapter() {
 			@Override
 			public void documentChanged(DocumentEvent event) {
 				VirtualFile file = FileDocumentManager.getInstance().getFile(event.getDocument());
 				autoBuilder.fileModified(file);
 			}
-		});
-		VirtualFileManager.getInstance().addVirtualFileListener(new VirtualFileAdapter() {
+		};
+		EditorFactory.getInstance().getEventMulticaster().addDocumentListener(documentListener);
+		virtualFileListener = new VirtualFileAdapter() {
 			@Override
 			public void contentsChanged(VirtualFileEvent event) {
 				autoBuilder.fileModified(event.getFile());
@@ -60,7 +63,8 @@ public class XtextCompilerComponent extends AbstractProjectComponent {
 			public void fileMoved(VirtualFileMoveEvent event) {
 				// TODO deal with that!
 			}
-		});
+		};
+		VirtualFileManager.getInstance().addVirtualFileListener(virtualFileListener);
 	}
 	
 	@Override
@@ -72,6 +76,13 @@ public class XtextCompilerComponent extends AbstractProjectComponent {
 	@Override
 	public void projectOpened() {
 		myProject.getMessageBus().connect().subscribe(CustomBuilderMessageHandler.TOPIC, new RefreshFilesCompilationStatusListener());
+	}
+	
+	@Override
+	public void disposeComponent() {
+		EditorFactory.getInstance().getEventMulticaster().removeDocumentListener(documentListener);
+		VirtualFileManager.getInstance().removeVirtualFileListener(virtualFileListener);
+		super.disposeComponent();
 	}
 
 	private class RefreshFilesCompilationStatusListener implements CustomBuilderMessageHandler {
