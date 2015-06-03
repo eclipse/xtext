@@ -69,7 +69,7 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 					<h1>Example «projectInfo.languageNameAbbreviation» Web Editor</h1>
 				</div>
 				<div class="content">
-					<div id="xtext-editor" data-editor-lang="«projectInfo.fileExtension»"></div>
+					<div id="xtext-editor" data-editor-xtext-lang="«projectInfo.fileExtension»"></div>
 				</div>
 			</div>
 			
