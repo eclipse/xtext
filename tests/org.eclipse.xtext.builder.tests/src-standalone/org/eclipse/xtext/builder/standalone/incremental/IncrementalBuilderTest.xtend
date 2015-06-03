@@ -30,19 +30,22 @@ import org.junit.runner.RunWith
 import static org.junit.Assert.*
 
 import static extension org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs.*
+import com.google.inject.Provider
+import org.eclipse.xtext.resource.XtextResourceSet
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 @RunWith(XtextRunner)
 @InjectWith(StandaloneBuilderInjectorProvider)
-class IncrementalStandaloneBuilderTest {
+class IncrementalBuilderTest {
 
 	@Rule @Inject public TemporaryFolder temporaryFolder
 
-	@Inject IncrementalStandaloneBuilder incrementalBuilder
+	@Inject IncrementalBuilder incrementalBuilder
 	@Inject LanguageAccessFactory languageAccessFactory
 	@Inject IndexState indexState
+	@Inject Provider<XtextResourceSet> resourceSetProvider
 
 	File tempDir
 	Multimap<URI, URI> generated
@@ -171,6 +174,7 @@ class IncrementalStandaloneBuilderTest {
 		val result = new BuildRequest => [
 			baseDir = tempDir.asURI
 			defaultEncoding = "UTF-8"
+			resourceSet = resourceSetProvider.get
 			classPath = #[]
 			outputs = #[new File(tempDir, "out").asURI]
 			sourceRoots = #[new File(tempDir, "src").asURI]
