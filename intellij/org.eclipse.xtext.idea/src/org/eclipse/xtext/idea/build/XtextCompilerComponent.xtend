@@ -17,8 +17,10 @@ import com.intellij.openapi.vfs.VirtualFileAdapter
 import com.intellij.openapi.vfs.VirtualFileEvent
 import com.intellij.openapi.vfs.VirtualFileManager
 import com.intellij.openapi.vfs.VirtualFileMoveEvent
+import org.eclipse.xtend.lib.annotations.Accessors
 
 class XtextCompilerComponent extends AbstractProjectComponent {
+	@Accessors(PUBLIC_GETTER)
 	XtextAutoBuilder autoBuilder
 	VirtualFileAdapter virtualFileListener
 	DocumentAdapter documentListener

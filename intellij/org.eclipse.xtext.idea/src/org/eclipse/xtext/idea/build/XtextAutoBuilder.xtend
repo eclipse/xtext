@@ -24,6 +24,7 @@ import java.util.List
 import java.util.concurrent.BlockingQueue
 import java.util.concurrent.LinkedBlockingQueue
 import org.eclipse.emf.common.util.URI
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder
 import org.eclipse.xtext.builder.standalone.incremental.IndexState
@@ -31,9 +32,9 @@ import org.eclipse.xtext.idea.resource.ModuleBasedResourceSetProvider
 import org.eclipse.xtext.idea.resource.ModuleBasedResourceSetProvider.VirtualFileBasedUriHandler
 import org.eclipse.xtext.idea.shared.IdeaSharedInjectorProvider
 import org.eclipse.xtext.idea.shared.XtextLanguages
+import org.eclipse.xtext.util.internal.Log
 
 import static org.eclipse.xtext.idea.build.BuildEvent.Type.*
-import org.eclipse.xtext.util.internal.Log
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -52,6 +53,7 @@ import org.eclipse.xtext.util.internal.Log
 	
 	@Inject ModuleBasedResourceSetProvider resourceSetProvider
 	
+	@Accessors(PUBLIC_GETTER)
 	IndexState indexState
 	
 	new(Project project) {

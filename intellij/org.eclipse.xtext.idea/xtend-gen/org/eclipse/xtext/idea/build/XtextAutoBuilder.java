@@ -39,6 +39,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.URIHandler;
+import org.eclipse.xtend.lib.annotations.AccessorType;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.builder.standalone.IIssueHandler;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
@@ -59,6 +61,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -81,6 +84,7 @@ public class XtextAutoBuilder {
   @Inject
   private ModuleBasedResourceSetProvider resourceSetProvider;
   
+  @Accessors(AccessorType.PUBLIC_GETTER)
   private IndexState indexState;
   
   public XtextAutoBuilder(final Project project) {
@@ -398,4 +402,9 @@ public class XtextAutoBuilder {
   }
   
   private final static Logger LOG = Logger.getLogger(XtextAutoBuilder.class);
+  
+  @Pure
+  public IndexState getIndexState() {
+    return this.indexState;
+  }
 }

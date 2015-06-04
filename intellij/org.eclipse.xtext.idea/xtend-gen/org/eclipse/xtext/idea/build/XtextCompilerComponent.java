@@ -20,10 +20,14 @@ import com.intellij.openapi.vfs.VirtualFileAdapter;
 import com.intellij.openapi.vfs.VirtualFileEvent;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.openapi.vfs.VirtualFileMoveEvent;
+import org.eclipse.xtend.lib.annotations.AccessorType;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.idea.build.XtextAutoBuilder;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class XtextCompilerComponent extends AbstractProjectComponent {
+  @Accessors(AccessorType.PUBLIC_GETTER)
   private XtextAutoBuilder autoBuilder;
   
   private VirtualFileAdapter virtualFileListener;
@@ -76,5 +80,10 @@ public class XtextCompilerComponent extends AbstractProjectComponent {
   @Override
   public String getComponentName() {
     return "Xtext Compiler Component";
+  }
+  
+  @Pure
+  public XtextAutoBuilder getAutoBuilder() {
+    return this.autoBuilder;
   }
 }

@@ -12,6 +12,8 @@
 
 	<extensions defaultExtensionNs="com.intellij">
 		<buildProcess.parametersProvider implementation="org.eclipse.xtext.xbase.idea.server.XbaseBuildProcessParametersProvider"/>
+		
+		<editor.navigationPolicy implementation="org.eclipse.xtext.xbase.idea.editor.IndexBasedFileEditorNavigationPolicy"/>
 
 		<java.elementFinder implementation="org.eclipse.xtext.xbase.idea.lang.types.psi.XbaseJvmTypesElementFinder" order="first, before java"/>
 		<java.shortNamesCache implementation="org.eclipse.xtext.xbase.idea.lang.types.XbaseJvmTypesShortNamesCache"/>
