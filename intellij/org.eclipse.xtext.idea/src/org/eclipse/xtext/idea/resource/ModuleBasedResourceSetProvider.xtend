@@ -10,6 +10,7 @@ package org.eclipse.xtext.idea.resource
 import com.google.inject.Inject
 import com.google.inject.Provider
 import com.google.inject.Singleton
+import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.openapi.vfs.VfsUtilCore
@@ -23,8 +24,8 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.URIHandler
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.resource.XtextResourceSet
-import com.intellij.openapi.fileEditor.FileDocumentManager
 import org.eclipse.xtext.util.internal.Log
+import com.intellij.openapi.vfs.VirtualFile
 
 @Singleton @Log
 class ModuleBasedResourceSetProvider {
@@ -35,7 +36,8 @@ class ModuleBasedResourceSetProvider {
 	def get(Module context) {
 		val resourceSet = resourceSetProvider.get
 		resourceSet.classpathURIContext = context
-		resourceSet.URIConverter.URIHandlers.add(0, new VirtualFileBasedUriHandler()) 
+		resourceSet.URIConverter.URIHandlers.clear 
+		resourceSet.URIConverter.URIHandlers.add(new VirtualFileBasedUriHandler()) 
 		return resourceSet
 	}
 	
@@ -45,7 +47,7 @@ class ModuleBasedResourceSetProvider {
 		@Accessors Set<URI> deleted = newHashSet()
 		
 		override canHandle(URI uri) {
-			return findFile(uri) != null
+			return true
 		}
 		
 		def flushToDisk() {
@@ -62,7 +64,7 @@ class ModuleBasedResourceSetProvider {
 			}
 			val timeStamp = System.currentTimeMillis
 			for (uri : localWritten.keySet) {
-				val file = findFile(uri)
+				var file = getOrCreateFile(uri, false)
 				file.setBinaryContent(localWritten.get(uri), -1, timeStamp, requestor)
 			}
 			for (uri : localDeleted) {
@@ -71,12 +73,21 @@ class ModuleBasedResourceSetProvider {
 			}
 		}
 		
+		private def VirtualFile getOrCreateFile(URI uri, boolean isDirectory) {
+			val file = findFile(uri)
+			if (file != null) {
+				return file
+			}
+			val parent = getOrCreateFile(uri.trimSegments(1), true)
+			return parent.createChildData(requestor, uri.lastSegment)
+		}
+		
 		def findFile(URI uri) {
 			val url = uri.toURL
 			if (url == null) {
 				return null;
 			}
-			VfsUtil.findFileByURL(url)
+			return VfsUtil.findFileByURL(url)
 		}
 		
 		protected def URL toURL(URI uri) {
@@ -133,7 +144,7 @@ class ModuleBasedResourceSetProvider {
 			if (writtenContents.containsKey(uri)) {
 				return true
 			}
-			return findFile(uri).exists
+			return findFile(uri)?.exists
 		}
 		
 		override getAttributes(URI uri, Map<?, ?> options) {

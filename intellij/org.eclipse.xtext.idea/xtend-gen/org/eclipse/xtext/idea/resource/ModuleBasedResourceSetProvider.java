@@ -54,8 +54,7 @@ public class ModuleBasedResourceSetProvider {
     
     @Override
     public boolean canHandle(final URI uri) {
-      VirtualFile _findFile = this.findFile(uri);
-      return (!Objects.equal(_findFile, null));
+      return true;
     }
     
     public void flushToDisk() {
@@ -91,7 +90,7 @@ public class ModuleBasedResourceSetProvider {
         Set<URI> _keySet_1 = localWritten.keySet();
         for (final URI uri : _keySet_1) {
           {
-            final VirtualFile file = this.findFile(uri);
+            VirtualFile file = this.getOrCreateFile(uri, false);
             byte[] _get = localWritten.get(uri);
             Object _requestor = this.getRequestor();
             file.setBinaryContent(_get, (-1), timeStamp, _requestor);
@@ -109,17 +108,30 @@ public class ModuleBasedResourceSetProvider {
       }
     }
     
-    public VirtualFile findFile(final URI uri) {
-      VirtualFile _xblockexpression = null;
-      {
-        final URL url = this.toURL(uri);
-        boolean _equals = Objects.equal(url, null);
-        if (_equals) {
-          return null;
+    private VirtualFile getOrCreateFile(final URI uri, final boolean isDirectory) {
+      try {
+        final VirtualFile file = this.findFile(uri);
+        boolean _notEquals = (!Objects.equal(file, null));
+        if (_notEquals) {
+          return file;
         }
-        _xblockexpression = VfsUtil.findFileByURL(url);
+        URI _trimSegments = uri.trimSegments(1);
+        final VirtualFile parent = this.getOrCreateFile(_trimSegments, true);
+        Object _requestor = this.getRequestor();
+        String _lastSegment = uri.lastSegment();
+        return parent.createChildData(_requestor, _lastSegment);
+      } catch (Throwable _e) {
+        throw Exceptions.sneakyThrow(_e);
       }
-      return _xblockexpression;
+    }
+    
+    public VirtualFile findFile(final URI uri) {
+      final URL url = this.toURL(uri);
+      boolean _equals = Objects.equal(url, null);
+      if (_equals) {
+        return null;
+      }
+      return VfsUtil.findFileByURL(url);
     }
     
     protected URL toURL(final URI uri) {
@@ -194,7 +206,11 @@ public class ModuleBasedResourceSetProvider {
         return true;
       }
       VirtualFile _findFile = this.findFile(uri);
-      return _findFile.exists();
+      boolean _exists = false;
+      if (_findFile!=null) {
+        _exists=_findFile.exists();
+      }
+      return _exists;
     }
     
     @Override
@@ -233,8 +249,11 @@ public class ModuleBasedResourceSetProvider {
     resourceSet.setClasspathURIContext(context);
     URIConverter _uRIConverter = resourceSet.getURIConverter();
     EList<URIHandler> _uRIHandlers = _uRIConverter.getURIHandlers();
+    _uRIHandlers.clear();
+    URIConverter _uRIConverter_1 = resourceSet.getURIConverter();
+    EList<URIHandler> _uRIHandlers_1 = _uRIConverter_1.getURIHandlers();
     ModuleBasedResourceSetProvider.VirtualFileBasedUriHandler _virtualFileBasedUriHandler = new ModuleBasedResourceSetProvider.VirtualFileBasedUriHandler();
-    _uRIHandlers.add(0, _virtualFileBasedUriHandler);
+    _uRIHandlers_1.add(_virtualFileBasedUriHandler);
     return resourceSet;
   }
   
