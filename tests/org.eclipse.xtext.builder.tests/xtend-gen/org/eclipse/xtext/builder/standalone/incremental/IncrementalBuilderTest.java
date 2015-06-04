@@ -321,7 +321,6 @@ public class IncrementalBuilderTest {
       public void apply(final BuildRequest it) {
         URI _asURI = FilesAndURIs.asURI(IncrementalBuilderTest.this.tempDir);
         it.setBaseDir(_asURI);
-        it.setDefaultEncoding("UTF-8");
         XtextResourceSet _get = IncrementalBuilderTest.this.resourceSetProvider.get();
         it.setResourceSet(_get);
         it.setClassPath(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList()));

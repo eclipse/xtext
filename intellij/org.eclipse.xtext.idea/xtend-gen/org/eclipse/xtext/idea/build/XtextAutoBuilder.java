@@ -25,7 +25,6 @@ import com.intellij.openapi.roots.OrderRootsEnumerator;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.encoding.EncodingProjectManager;
 import com.intellij.util.Alarm;
 import com.intellij.util.PathsList;
 import java.util.ArrayList;
@@ -45,7 +44,8 @@ import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder;
 import org.eclipse.xtext.builder.standalone.incremental.IndexState;
 import org.eclipse.xtext.idea.build.BuildEvent;
-import org.eclipse.xtext.idea.resource.ModuleBasedResourceSetProvider;
+import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider;
+import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
 import org.eclipse.xtext.idea.shared.IdeaSharedInjectorProvider;
 import org.eclipse.xtext.idea.shared.XtextLanguages;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -79,7 +79,7 @@ public class XtextAutoBuilder {
   private XtextLanguages xtextLanguages;
   
   @Inject
-  private ModuleBasedResourceSetProvider resourceSetProvider;
+  private IdeaResourceSetProvider resourceSetProvider;
   
   private IndexState indexState;
   
@@ -108,7 +108,7 @@ public class XtextAutoBuilder {
       this.checkIndexStateLoaded();
       boolean _isDebugEnabled = XtextAutoBuilder.LOG.isDebugEnabled();
       if (_isDebugEnabled) {
-        URI _uRI = this.getURI(file);
+        URI _uRI = VirtualFileURIUtil.getURI(file);
         String _plus = ("queuing " + _uRI);
         XtextAutoBuilder.LOG.debug(_plus);
       }
@@ -217,8 +217,6 @@ public class XtextAutoBuilder {
         }
       };
       IterableExtensions.<BuildEvent>forEach(allEvents, _function);
-      EncodingProjectManager _instance = EncodingProjectManager.getInstance(this.project);
-      final String projectEncoding = _instance.getDefaultCharsetName();
       final ArrayList<URI> refreshFiles = CollectionLiterals.<URI>newArrayList();
       Set<Module> _keySet = module2event.keySet();
       for (final Module module : _keySet) {
@@ -253,7 +251,7 @@ public class XtextAutoBuilder {
                 @Override
                 public URI apply(final BuildEvent it) {
                   VirtualFile _file = it.getFile();
-                  return XtextAutoBuilder.this.getURI(_file);
+                  return VirtualFileURIUtil.getURI(_file);
                 }
               };
               Iterable<URI> _map = IterableExtensions.<BuildEvent, URI>map(_filter, _function_1);
@@ -271,7 +269,7 @@ public class XtextAutoBuilder {
                 @Override
                 public URI apply(final BuildEvent it) {
                   VirtualFile _file = it.getFile();
-                  return XtextAutoBuilder.this.getURI(_file);
+                  return VirtualFileURIUtil.getURI(_file);
                 }
               };
               Iterable<URI> _map_1 = IterableExtensions.<BuildEvent, URI>map(_filter_1, _function_3);
@@ -292,7 +290,7 @@ public class XtextAutoBuilder {
               final Function1<VirtualFile, URI> _function_5 = new Function1<VirtualFile, URI>() {
                 @Override
                 public URI apply(final VirtualFile it) {
-                  return XtextAutoBuilder.this.getURI(it);
+                  return VirtualFileURIUtil.getURI(it);
                 }
               };
               Iterable<URI> _map_2 = IterableExtensions.<VirtualFile, URI>map(_filter_2, _function_5);
@@ -300,9 +298,8 @@ public class XtextAutoBuilder {
               ModuleRootManager _instance = ModuleRootManager.getInstance(module);
               VirtualFile[] _contentRoots = _instance.getContentRoots();
               VirtualFile _head = IterableExtensions.<VirtualFile>head(((Iterable<VirtualFile>)Conversions.doWrapArray(_contentRoots)));
-              URI _uRI = XtextAutoBuilder.this.getURI(_head);
+              URI _uRI = VirtualFileURIUtil.getURI(_head);
               it.setBaseDir(_uRI);
-              it.setDefaultEncoding(projectEncoding);
               List<URI> _sourceRoots = it.getSourceRoots();
               OrderEnumerator _withoutSdk_1 = entries.withoutSdk();
               OrderEnumerator _withoutLibraries = _withoutSdk_1.withoutLibraries();
@@ -313,18 +310,13 @@ public class XtextAutoBuilder {
               final Function1<VirtualFile, URI> _function_6 = new Function1<VirtualFile, URI>() {
                 @Override
                 public URI apply(final VirtualFile it) {
-                  return XtextAutoBuilder.this.getURI(it);
+                  return VirtualFileURIUtil.getURI(it);
                 }
               };
               List<URI> _map_3 = ListExtensions.<VirtualFile, URI>map(_virtualFiles_1, _function_6);
               Iterables.<URI>addAll(_sourceRoots, _map_3);
               it.setFailOnValidationError(false);
-              boolean _notEquals = (!Objects.equal(XtextAutoBuilder.this.indexState, null));
-              if (_notEquals) {
-                it.setPreviousState(XtextAutoBuilder.this.indexState);
-              } else {
-                it.setIsFullBuild(true);
-              }
+              it.setPreviousState(XtextAutoBuilder.this.indexState);
               IIssueHandler _issueHandler = it.getIssueHandler();
               it.setIssueHandler(_issueHandler);
               final Procedure2<URI, URI> _function_7 = new Procedure2<URI, URI>() {
@@ -365,7 +357,7 @@ public class XtextAutoBuilder {
                   URIConverter _uRIConverter = _resourceSet.getURIConverter();
                   EList<URIHandler> _uRIHandlers = _uRIConverter.getURIHandlers();
                   URIHandler _head = IterableExtensions.<URIHandler>head(_uRIHandlers);
-                  final ModuleBasedResourceSetProvider.VirtualFileBasedUriHandler handler = ((ModuleBasedResourceSetProvider.VirtualFileBasedUriHandler) _head);
+                  final IdeaResourceSetProvider.VirtualFileBasedUriHandler handler = ((IdeaResourceSetProvider.VirtualFileBasedUriHandler) _head);
                   handler.flushToDisk();
                 }
               };
@@ -384,17 +376,6 @@ public class XtextAutoBuilder {
         throw Exceptions.sneakyThrow(_t);
       }
     }
-  }
-  
-  protected URI getURI(final VirtualFile file) {
-    boolean _isDirectory = file.isDirectory();
-    if (_isDirectory) {
-      String _url = file.getUrl();
-      String _plus = (_url + "/");
-      return URI.createURI(_plus);
-    }
-    String _url_1 = file.getUrl();
-    return URI.createURI(_url_1);
   }
   
   private final static Logger LOG = Logger.getLogger(XtextAutoBuilder.class);

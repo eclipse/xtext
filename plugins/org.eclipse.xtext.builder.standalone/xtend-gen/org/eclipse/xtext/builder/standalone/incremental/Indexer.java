@@ -159,10 +159,10 @@ public class Indexer {
       Indexer.LOG.info("Creating new index");
     }
     IndexState _previousState = request.getPreviousState();
-    final Source2GeneratedMapping fileMappings = _previousState.getFileMappings();
+    final Source2GeneratedMapping previousFileMappings = _previousState.getFileMappings();
     IndexState _previousState_1 = request.getPreviousState();
-    final ResourceDescriptionsData oldIndex = _previousState_1.getResourceDescriptions();
-    final ResourceDescriptionsData newIndex = oldIndex.copy();
+    final ResourceDescriptionsData previousIndex = _previousState_1.getResourceDescriptions();
+    final ResourceDescriptionsData newIndex = previousIndex.copy();
     XtextResourceSet _resourceSet = context.getResourceSet();
     final IResourceDescriptions resourceDescriptions = this.installIndex(_resourceSet, newIndex);
     final HashSet<URI> affectionCandidates = CollectionLiterals.<URI>newHashSet();
@@ -171,7 +171,7 @@ public class Indexer {
     List<URI> _deletedFiles = request.getDeletedFiles();
     Iterable<URI> _plus = Iterables.<URI>concat(_dirtyFiles, _deletedFiles);
     final Set<URI> allModified = IterableExtensions.<URI>toSet(_plus);
-    Set<URI> _allURIs = oldIndex.getAllURIs();
+    Set<URI> _allURIs = previousIndex.getAllURIs();
     final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
       @Override
       public Boolean apply(final URI it) {
@@ -185,7 +185,7 @@ public class Indexer {
     final Function1<URI, Iterable<URI>> _function_1 = new Function1<URI, Iterable<URI>>() {
       @Override
       public Iterable<URI> apply(final URI it) {
-        return Indexer.this.primarySources(it, fileMappings);
+        return Indexer.this.primarySources(it, previousFileMappings);
       }
     };
     List<Iterable<URI>> _map = ListExtensions.<URI, Iterable<URI>>map(_dirtyFiles_1, _function_1);
@@ -193,9 +193,9 @@ public class Indexer {
     Set<URI> _set = IterableExtensions.<URI>toSet(_flatten);
     directlyAffected = _set;
     final ArrayList<IResourceDescription.Delta> currentDeltas = CollectionLiterals.<IResourceDescription.Delta>newArrayList();
-    ArrayList<IResourceDescription.Delta> _removeDeletedFilesFromIndex = this.removeDeletedFilesFromIndex(request, oldIndex, newIndex);
+    ArrayList<IResourceDescription.Delta> _removeDeletedFilesFromIndex = this.removeDeletedFilesFromIndex(request, previousIndex, newIndex);
     Iterables.<IResourceDescription.Delta>addAll(currentDeltas, _removeDeletedFilesFromIndex);
-    this.preIndexChangedResources(directlyAffected, oldIndex, newIndex, request, context);
+    this.preIndexChangedResources(directlyAffected, previousIndex, newIndex, request, context);
     Map<String, LanguageAccess> _languages = context.getLanguages();
     Set<Map.Entry<String, LanguageAccess>> _entrySet = _languages.entrySet();
     final Function1<Map.Entry<String, LanguageAccess>, Boolean> _function_2 = new Function1<Map.Entry<String, LanguageAccess>, Boolean>() {
@@ -221,7 +221,7 @@ public class Indexer {
           final Function1<URI, Iterable<URI>> _function_3 = new Function1<URI, Iterable<URI>>() {
             @Override
             public Iterable<URI> apply(final URI it) {
-              return fileMappings.getGenerated(it);
+              return previousFileMappings.getGenerated(it);
             }
           };
           Iterable<Iterable<URI>> _map_1 = IterableExtensions.<URI, Iterable<URI>>map(toBeIndexed, _function_3);
@@ -240,7 +240,7 @@ public class Indexer {
           final Function1<URI, Iterable<URI>> _function_5 = new Function1<URI, Iterable<URI>>() {
             @Override
             public Iterable<URI> apply(final URI it) {
-              return Indexer.this.primarySources(it, fileMappings);
+              return Indexer.this.primarySources(it, previousFileMappings);
             }
           };
           List<Iterable<URI>> _map_2 = ListExtensions.<URI, Iterable<URI>>map(_deletedFiles_1, _function_5);
@@ -257,7 +257,7 @@ public class Indexer {
           final Function1<URI, Iterable<URI>> _function_7 = new Function1<URI, Iterable<URI>>() {
             @Override
             public Iterable<URI> apply(final URI it) {
-              return Indexer.this.primarySources(it, fileMappings);
+              return Indexer.this.primarySources(it, previousFileMappings);
             }
           };
           Iterable<Iterable<URI>> _map_3 = IterableExtensions.map(dependentJavaFiles, _function_7);
@@ -290,7 +290,7 @@ public class Indexer {
               URI _uRI = resource.getURI();
               String _plus = ("Indexing " + _uRI);
               Indexer.LOG.info(_plus);
-              DefaultResourceDescriptionDelta _addToIndex = Indexer.this.addToIndex(resource, false, oldIndex, newIndex, context);
+              DefaultResourceDescriptionDelta _addToIndex = Indexer.this.addToIndex(resource, false, previousIndex, newIndex, context);
               currentDeltas.add(_addToIndex);
               _xblockexpression = null;
             }
@@ -345,7 +345,7 @@ public class Indexer {
               String _fileExtension_1 = it.fileExtension();
               LanguageAccess _get = _languages.get(_fileExtension_1);
               final IResourceDescription.Manager manager = _get.getResourceDescriptionManager();
-              final IResourceDescription resourceDescription = oldIndex.getResourceDescription(it);
+              final IResourceDescription resourceDescription = previousIndex.getResourceDescription(it);
               _xblockexpression = Indexer.this.isAffected(resourceDescription, manager, currentDeltas, allDeltas, resourceDescriptions);
             }
             return Boolean.valueOf(_xblockexpression);
@@ -465,12 +465,8 @@ public class Indexer {
   }
   
   protected IResourceDescriptions installIndex(final XtextResourceSet resourceSet, final ResourceDescriptionsData index) {
-    IResourceDescriptions _xblockexpression = null;
-    {
-      ResourceDescriptionsData.ResourceSetAdapter.installResourceDescriptionsData(resourceSet, index);
-      _xblockexpression = this.resourceDescriptionsProvider.get(resourceSet);
-    }
-    return _xblockexpression;
+    ResourceDescriptionsData.ResourceSetAdapter.installResourceDescriptionsData(resourceSet, index);
+    return this.resourceDescriptionsProvider.get(resourceSet);
   }
   
   protected boolean isAffected(final IResourceDescription affectionCandidate, final IResourceDescription.Manager manager, final Collection<IResourceDescription.Delta> newDeltas, final Collection<IResourceDescription.Delta> allDeltas, final IResourceDescriptions resourceDescriptions) {

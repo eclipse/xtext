@@ -42,9 +42,6 @@ class BuildRequest {
 	
 	IndexState previousState = new IndexState
 	
-	String defaultEncoding
-	
-	boolean isFullBuild = false
 	boolean failOnValidationError = true
 	boolean debugLog = false
 	boolean writeStorageResources = false

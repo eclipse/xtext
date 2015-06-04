@@ -67,10 +67,6 @@ public class BuildRequest {
   
   private IndexState previousState = new IndexState();
   
-  private String defaultEncoding;
-  
-  private boolean isFullBuild = false;
-  
   private boolean failOnValidationError = true;
   
   private boolean debugLog = false;
@@ -162,24 +158,6 @@ public class BuildRequest {
   
   public void setPreviousState(final IndexState previousState) {
     this.previousState = previousState;
-  }
-  
-  @Pure
-  public String getDefaultEncoding() {
-    return this.defaultEncoding;
-  }
-  
-  public void setDefaultEncoding(final String defaultEncoding) {
-    this.defaultEncoding = defaultEncoding;
-  }
-  
-  @Pure
-  public boolean isFullBuild() {
-    return this.isFullBuild;
-  }
-  
-  public void setIsFullBuild(final boolean isFullBuild) {
-    this.isFullBuild = isFullBuild;
   }
   
   @Pure

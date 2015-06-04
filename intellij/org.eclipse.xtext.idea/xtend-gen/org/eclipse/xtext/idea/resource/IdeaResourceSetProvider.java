@@ -14,15 +14,12 @@ import com.google.inject.Singleton;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VfsUtil;
-import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -34,6 +31,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.URIHandler;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -44,7 +42,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Singleton
 @Log
 @SuppressWarnings("all")
-public class ModuleBasedResourceSetProvider {
+public class IdeaResourceSetProvider {
   public static class VirtualFileBasedUriHandler implements URIHandler {
     @Accessors
     private Map<URI, byte[]> writtenContents = CollectionLiterals.<URI, byte[]>newHashMap();
@@ -59,15 +57,15 @@ public class ModuleBasedResourceSetProvider {
     
     public void flushToDisk() {
       try {
-        boolean _isDebugEnabled = ModuleBasedResourceSetProvider.LOG.isDebugEnabled();
+        boolean _isDebugEnabled = IdeaResourceSetProvider.LOG.isDebugEnabled();
         if (_isDebugEnabled) {
           Set<URI> _keySet = this.writtenContents.keySet();
           String _join = IterableExtensions.join(_keySet, ", ");
           String _plus = ("writing : " + _join);
-          ModuleBasedResourceSetProvider.LOG.debug(_plus);
+          IdeaResourceSetProvider.LOG.debug(_plus);
           String _join_1 = IterableExtensions.join(this.deleted, ", ");
           String _plus_1 = ("deleting: " + _join_1);
-          ModuleBasedResourceSetProvider.LOG.debug(_plus_1);
+          IdeaResourceSetProvider.LOG.debug(_plus_1);
         }
         final Map<URI, byte[]> localWritten = this.writtenContents;
         HashMap<URI, byte[]> _newHashMap = CollectionLiterals.<URI, byte[]>newHashMap();
@@ -90,7 +88,7 @@ public class ModuleBasedResourceSetProvider {
         Set<URI> _keySet_1 = localWritten.keySet();
         for (final URI uri : _keySet_1) {
           {
-            VirtualFile file = this.getOrCreateFile(uri, false);
+            VirtualFile file = VirtualFileURIUtil.getOrCreateVirtualFile(uri);
             byte[] _get = localWritten.get(uri);
             Object _requestor = this.getRequestor();
             file.setBinaryContent(_get, (-1), timeStamp, _requestor);
@@ -98,7 +96,7 @@ public class ModuleBasedResourceSetProvider {
         }
         for (final URI uri_1 : localDeleted) {
           {
-            final VirtualFile file = this.findFile(uri_1);
+            final VirtualFile file = VirtualFileURIUtil.getVirtualFile(uri_1);
             Object _requestor = this.getRequestor();
             file.delete(_requestor);
           }
@@ -106,41 +104,6 @@ public class ModuleBasedResourceSetProvider {
       } catch (Throwable _e) {
         throw Exceptions.sneakyThrow(_e);
       }
-    }
-    
-    private VirtualFile getOrCreateFile(final URI uri, final boolean isDirectory) {
-      try {
-        final VirtualFile file = this.findFile(uri);
-        boolean _notEquals = (!Objects.equal(file, null));
-        if (_notEquals) {
-          return file;
-        }
-        URI _trimSegments = uri.trimSegments(1);
-        final VirtualFile parent = this.getOrCreateFile(_trimSegments, true);
-        Object _requestor = this.getRequestor();
-        String _lastSegment = uri.lastSegment();
-        return parent.createChildData(_requestor, _lastSegment);
-      } catch (Throwable _e) {
-        throw Exceptions.sneakyThrow(_e);
-      }
-    }
-    
-    public VirtualFile findFile(final URI uri) {
-      final URL url = this.toURL(uri);
-      boolean _equals = Objects.equal(url, null);
-      if (_equals) {
-        return null;
-      }
-      return VfsUtil.findFileByURL(url);
-    }
-    
-    protected URL toURL(final URI uri) {
-      boolean _equals = Objects.equal(uri, null);
-      if (_equals) {
-        return null;
-      }
-      String _string = uri.toString();
-      return VfsUtilCore.convertToURL(_string);
     }
     
     @Override
@@ -159,7 +122,7 @@ public class ModuleBasedResourceSetProvider {
         byte[] _get = this.writtenContents.get(uri);
         return new ByteArrayInputStream(_get);
       }
-      final VirtualFile virtualFile = this.findFile(uri);
+      final VirtualFile virtualFile = VirtualFileURIUtil.getVirtualFile(uri);
       FileDocumentManager _instance = FileDocumentManager.getInstance();
       final Document doc = _instance.getCachedDocument(virtualFile);
       boolean _notEquals = (!Objects.equal(doc, null));
@@ -205,10 +168,10 @@ public class ModuleBasedResourceSetProvider {
       if (_containsKey) {
         return true;
       }
-      VirtualFile _findFile = this.findFile(uri);
+      VirtualFile _virtualFile = VirtualFileURIUtil.getVirtualFile(uri);
       boolean _exists = false;
-      if (_findFile!=null) {
-        _exists=_findFile.exists();
+      if (_virtualFile!=null) {
+        _exists=_virtualFile.exists();
       }
       return _exists;
     }
@@ -252,10 +215,10 @@ public class ModuleBasedResourceSetProvider {
     _uRIHandlers.clear();
     URIConverter _uRIConverter_1 = resourceSet.getURIConverter();
     EList<URIHandler> _uRIHandlers_1 = _uRIConverter_1.getURIHandlers();
-    ModuleBasedResourceSetProvider.VirtualFileBasedUriHandler _virtualFileBasedUriHandler = new ModuleBasedResourceSetProvider.VirtualFileBasedUriHandler();
+    IdeaResourceSetProvider.VirtualFileBasedUriHandler _virtualFileBasedUriHandler = new IdeaResourceSetProvider.VirtualFileBasedUriHandler();
     _uRIHandlers_1.add(_virtualFileBasedUriHandler);
     return resourceSet;
   }
   
-  private final static Logger LOG = Logger.getLogger(ModuleBasedResourceSetProvider.class);
+  private final static Logger LOG = Logger.getLogger(IdeaResourceSetProvider.class);
 }

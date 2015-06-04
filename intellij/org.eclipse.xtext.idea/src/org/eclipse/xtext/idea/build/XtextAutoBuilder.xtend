@@ -18,22 +18,22 @@ import com.intellij.openapi.roots.ModuleRootManager
 import com.intellij.openapi.roots.OrderEnumerator
 import com.intellij.openapi.roots.ProjectFileIndex
 import com.intellij.openapi.vfs.VirtualFile
-import com.intellij.openapi.vfs.encoding.EncodingProjectManager
 import com.intellij.util.Alarm
 import java.util.List
 import java.util.concurrent.BlockingQueue
 import java.util.concurrent.LinkedBlockingQueue
-import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder
 import org.eclipse.xtext.builder.standalone.incremental.IndexState
-import org.eclipse.xtext.idea.resource.ModuleBasedResourceSetProvider
-import org.eclipse.xtext.idea.resource.ModuleBasedResourceSetProvider.VirtualFileBasedUriHandler
+import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider
+import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider.VirtualFileBasedUriHandler
 import org.eclipse.xtext.idea.shared.IdeaSharedInjectorProvider
 import org.eclipse.xtext.idea.shared.XtextLanguages
+import org.eclipse.xtext.util.internal.Log
 
 import static org.eclipse.xtext.idea.build.BuildEvent.Type.*
-import org.eclipse.xtext.util.internal.Log
+
+import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -50,7 +50,7 @@ import org.eclipse.xtext.util.internal.Log
 	 
 	@Inject XtextLanguages xtextLanguages
 	
-	@Inject ModuleBasedResourceSetProvider resourceSetProvider
+	@Inject IdeaResourceSetProvider resourceSetProvider
 	
 	IndexState indexState
 	
@@ -121,7 +121,6 @@ import org.eclipse.xtext.util.internal.Log
 						module2event.put(module, it)
 				}
 			]
-			val projectEncoding = EncodingProjectManager.getInstance(project).defaultCharsetName
 			val refreshFiles = newArrayList
 			for(module: module2event.keySet) {
 				val events = module2event.get(module)
@@ -132,16 +131,10 @@ import org.eclipse.xtext.util.internal.Log
 					deletedFiles += events.filter[type == DELETED].map[file.URI]
 					classPath += entries.withoutSdk.classes.pathsList.virtualFiles.filter[/* HACK! we need to properly exclude the out put dir */!isDirectory].map[URI]
 					baseDir = ModuleRootManager.getInstance(module).contentRoots.head.URI
-					defaultEncoding = projectEncoding
 					sourceRoots += entries.withoutSdk.withoutLibraries.withoutDepModules.sources.pathsList.virtualFiles.map[URI]
 					// outputs = ??
 					failOnValidationError = false
-				
-					if (indexState != null) {
-						previousState = indexState
-					} else {
-						isFullBuild = true
-					}
+					previousState = indexState
 				
 					it.issueHandler = issueHandler
 				
@@ -164,10 +157,4 @@ import org.eclipse.xtext.util.internal.Log
 		}		
 	}
 	
-	protected def getURI(VirtualFile file) {
-		if (file.isDirectory) {
-			return URI.createURI(file.url+"/")	
-		}
-		return URI.createURI(file.url)
-	}
 }

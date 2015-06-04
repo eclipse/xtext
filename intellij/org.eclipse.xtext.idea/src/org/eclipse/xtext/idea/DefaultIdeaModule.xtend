@@ -39,6 +39,8 @@ import org.eclipse.xtext.resource.IContainer
 import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.service.AbstractGenericModule
 import org.eclipse.xtext.service.SingletonBinding
+import org.eclipse.xtext.parser.IEncodingProvider
+import org.eclipse.xtext.idea.resource.IdeaEncodingProvider
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -108,4 +110,7 @@ class DefaultIdeaModule extends AbstractGenericModule {
 		binder.bind(Key).annotatedWith(Names.named(BaseXtextFile.GLOBAL_MODIFICATION_COUNT)).toInstance(PsiModificationTracker.MODIFICATION_COUNT)
 	}
 
+	def Class<? extends IEncodingProvider> bindEncodingProvider() {
+		IdeaEncodingProvider
+	}	
 }

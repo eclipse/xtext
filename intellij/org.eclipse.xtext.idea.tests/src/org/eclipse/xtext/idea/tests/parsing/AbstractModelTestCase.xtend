@@ -19,7 +19,7 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.idea.lang.BaseXtextASTFactory
-import org.eclipse.xtext.idea.resource.ModuleBasedResourceSetProvider
+import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider
 import org.eclipse.xtext.idea.resource.PsiToEcoreTransformator
 import org.eclipse.xtext.idea.tests.LightToolingTest
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
@@ -39,7 +39,7 @@ class AbstractModelTestCase extends LightToolingTest implements ModelChecker {
 
 	@Inject
 	@Accessors(PROTECTED_GETTER)
-	ModuleBasedResourceSetProvider resourceSetProvider
+	IdeaResourceSetProvider resourceSetProvider
 
 	@Inject
 	@Accessors(PROTECTED_GETTER)

@@ -25,17 +25,13 @@ import java.util.zip.ZipException;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.xtext.builder.standalone.LanguageAccess;
-import org.eclipse.xtext.builder.standalone.incremental.BuildContext;
-import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
-import org.eclipse.xtext.mwe.NameBasedFilter;
 import org.eclipse.xtext.mwe.PathTraverser;
+import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.MapExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 
@@ -43,39 +39,30 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.9
  */
+@Log
 @SuppressWarnings("all")
 public class ResourceURICollector {
-  private final static Logger LOG = Logger.getLogger(ResourceURICollector.class);
-  
-  public Iterable<URI> collectAllResources(final BuildRequest request, final BuildContext context) {
-    Set<URI> _xblockexpression = null;
-    {
+  public Set<URI> collectAllResources(final Iterable<URI> roots, final Set<String> fileExtensions) {
+    boolean _isInfoEnabled = ResourceURICollector.LOG.isInfoEnabled();
+    if (_isInfoEnabled) {
       ResourceURICollector.LOG.info("Collecting source models.");
-      final long startedAt = System.currentTimeMillis();
-      List<URI> _sourceRoots = request.getSourceRoots();
-      List<URI> _collectResources = this.collectResources(_sourceRoots, context);
-      List<URI> _classPath = request.getClassPath();
-      List<URI> _collectResources_1 = this.collectResources(_classPath, context);
-      Iterable<URI> _plus = Iterables.<URI>concat(_collectResources, _collectResources_1);
-      final Set<URI> result = IterableExtensions.<URI>toSet(_plus);
+    }
+    final long startedAt = System.currentTimeMillis();
+    final Set<URI> result = this.collectResources(roots, fileExtensions);
+    boolean _isDebugEnabled = ResourceURICollector.LOG.isDebugEnabled();
+    if (_isDebugEnabled) {
       long _currentTimeMillis = System.currentTimeMillis();
       long _minus = (_currentTimeMillis - startedAt);
-      String _plus_1 = ("Finished collecting source models. Took: " + Long.valueOf(_minus));
-      String _plus_2 = (_plus_1 + " ms.");
-      ResourceURICollector.LOG.debug(_plus_2);
-      _xblockexpression = result;
+      String _plus = ("Finished collecting source models. Took: " + Long.valueOf(_minus));
+      String _plus_1 = (_plus + " ms.");
+      ResourceURICollector.LOG.debug(_plus_1);
     }
-    return _xblockexpression;
+    return result;
   }
   
-  protected List<URI> collectResources(final List<URI> roots, final BuildContext context) {
-    Map<String, LanguageAccess> _languages = context.getLanguages();
-    Set<String> _keySet = _languages.keySet();
-    Iterable<String> _plus = Iterables.<String>concat(_keySet, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("java")));
-    final String extensions = IterableExtensions.join(_plus, "|");
-    final NameBasedFilter nameBasedFilter = new NameBasedFilter();
-    nameBasedFilter.setRegularExpression(((".*\\.(?:(" + extensions) + "))$"));
-    final List<URI> resources = CollectionLiterals.<URI>newArrayList();
+  protected Set<URI> collectResources(final Iterable<URI> roots, final Set<String> fileExtensions) {
+    Iterable<String> _plus = Iterables.<String>concat(fileExtensions, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("java")));
+    final Set<String> extensions = IterableExtensions.<String>toSet(_plus);
     PathTraverser _pathTraverser = new PathTraverser();
     final Function1<URI, String> _function = new Function1<URI, String>() {
       @Override
@@ -83,17 +70,13 @@ public class ResourceURICollector {
         return it.toFileString();
       }
     };
-    List<String> _map = ListExtensions.<URI, String>map(roots, _function);
+    Iterable<String> _map = IterableExtensions.<URI, String>map(roots, _function);
     List<String> _list = IterableExtensions.<String>toList(_map);
     final Predicate<URI> _function_1 = new Predicate<URI>() {
       @Override
-      public boolean apply(final URI input) {
-        final boolean matches = nameBasedFilter.matches(input);
-        if (matches) {
-          ResourceURICollector.LOG.info((("Adding file \'" + input) + "\'"));
-          resources.add(input);
-        }
-        return matches;
+      public boolean apply(final URI it) {
+        String _fileExtension = it.fileExtension();
+        return extensions.contains(_fileExtension);
       }
     };
     final Multimap<String, URI> modelsFound = _pathTraverser.resolvePathes(_list, _function_1);
@@ -125,7 +108,8 @@ public class ResourceURICollector {
       }
     };
     MapExtensions.<String, Collection<URI>>forEach(_asMap, _function_2);
-    return resources;
+    Collection<URI> _values = modelsFound.values();
+    return IterableExtensions.<URI>toSet(_values);
   }
   
   protected void registerBundle(final File file) {
@@ -189,4 +173,6 @@ public class ResourceURICollector {
       }
     }
   }
+  
+  private final static Logger LOG = Logger.getLogger(ResourceURICollector.class);
 }

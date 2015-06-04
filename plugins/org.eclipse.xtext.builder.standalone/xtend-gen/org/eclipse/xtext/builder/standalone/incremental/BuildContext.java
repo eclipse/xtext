@@ -34,8 +34,6 @@ public class BuildContext {
   
   private final IResourceClusteringPolicy clusteringPolicy;
   
-  private final URI tempDir;
-  
   private ClusteringStorageAwareResourceLoader loader;
   
   public <T extends Object> Iterable<T> executeClustered(final Iterable<URI> uri, final Function1<? super Resource, ? extends T> operation) {
@@ -56,12 +54,11 @@ public class BuildContext {
     return this.languages.get(_fileExtension);
   }
   
-  public BuildContext(final Map<String, LanguageAccess> languages, final XtextResourceSet resourceSet, final IResourceClusteringPolicy clusteringPolicy, final URI tempDir) {
+  public BuildContext(final Map<String, LanguageAccess> languages, final XtextResourceSet resourceSet, final IResourceClusteringPolicy clusteringPolicy) {
     super();
     this.languages = languages;
     this.resourceSet = resourceSet;
     this.clusteringPolicy = clusteringPolicy;
-    this.tempDir = tempDir;
   }
   
   @Pure
@@ -77,11 +74,6 @@ public class BuildContext {
   @Pure
   public IResourceClusteringPolicy getClusteringPolicy() {
     return this.clusteringPolicy;
-  }
-  
-  @Pure
-  public URI getTempDir() {
-    return this.tempDir;
   }
   
   @Pure

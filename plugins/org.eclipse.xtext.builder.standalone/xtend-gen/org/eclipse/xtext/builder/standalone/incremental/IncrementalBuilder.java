@@ -11,7 +11,6 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.io.InputStream;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -33,7 +32,6 @@ import org.eclipse.xtext.builder.standalone.incremental.Indexer;
 import org.eclipse.xtext.builder.standalone.incremental.Source2GeneratedMapping;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.URIBasedFileSystemAccess;
-import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.clustering.DisabledClusteringPolicy;
 import org.eclipse.xtext.resource.clustering.DynamicResourceClusteringPolicy;
@@ -43,6 +41,7 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
@@ -59,8 +58,10 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.9
  */
+@Log
 @SuppressWarnings("all")
 public class IncrementalBuilder {
+  @Log
   protected static class InternalStatefulIncrementalBuilder {
     @Accessors(AccessorType.PROTECTED_SETTER)
     @Extension
@@ -73,8 +74,6 @@ public class IncrementalBuilder {
     private Indexer indexer;
     
     public IndexState launch() {
-      this.initialize();
-      this.cleanup();
       IndexState _previousState = this.request.getPreviousState();
       Source2GeneratedMapping _fileMappings = _previousState.getFileMappings();
       final Source2GeneratedMapping newSource2GeneratedMapping = _fileMappings.copy();
@@ -87,7 +86,10 @@ public class IncrementalBuilder {
             @Override
             public void apply(final URI it) {
               try {
-                IncrementalBuilder.LOG.info(("Deleting " + it));
+                boolean _isInfoEnabled = IncrementalBuilder.InternalStatefulIncrementalBuilder.LOG.isInfoEnabled();
+                if (_isInfoEnabled) {
+                  IncrementalBuilder.InternalStatefulIncrementalBuilder.LOG.info(("Deleting " + it));
+                }
                 XtextResourceSet _resourceSet = InternalStatefulIncrementalBuilder.this.context.getResourceSet();
                 URIConverter _uRIConverter = _resourceSet.getURIConverter();
                 Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
@@ -123,64 +125,12 @@ public class IncrementalBuilder {
       return new IndexState(_newIndex, newSource2GeneratedMapping);
     }
     
-    protected void initialize() {
-      String _defaultEncoding = this.request.getDefaultEncoding();
-      boolean _notEquals = (!Objects.equal(_defaultEncoding, null));
-      if (_notEquals) {
-        IncrementalBuilder.LOG.info("Setting encoding.");
-        Map<String, LanguageAccess> _languages = this.context.getLanguages();
-        Collection<LanguageAccess> _values = _languages.values();
-        for (final LanguageAccess lang : _values) {
-          IEncodingProvider _encodingProvider = lang.getEncodingProvider();
-          final IEncodingProvider provider = _encodingProvider;
-          boolean _matched = false;
-          if (!_matched) {
-            if (provider instanceof IEncodingProvider.Runtime) {
-              _matched=true;
-              String _defaultEncoding_1 = this.request.getDefaultEncoding();
-              ((IEncodingProvider.Runtime)provider).setDefaultEncoding(_defaultEncoding_1);
-            }
-          }
-          if (!_matched) {
-            String _defaultEncoding_1 = this.request.getDefaultEncoding();
-            String _plus = ("Couldn\'t set encoding \'" + _defaultEncoding_1);
-            String _plus_1 = (_plus + "\' for provider \'");
-            String _plus_2 = (_plus_1 + provider);
-            String _plus_3 = (_plus_2 + 
-              "\'. Only subclasses of IEncodingProvider.Runtime are supported.");
-            IncrementalBuilder.LOG.info(_plus_3);
-          }
-        }
-      }
-    }
-    
-    protected void cleanup() {
-      try {
-        XtextResourceSet _resourceSet = this.context.getResourceSet();
-        @Extension
-        final URIConverter converter = _resourceSet.getURIConverter();
-        URI _tempDir = this.context.getTempDir();
-        Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
-        boolean _exists = converter.exists(_tempDir, _emptyMap);
-        if (_exists) {
-          URI _tempDir_1 = this.context.getTempDir();
-          String _plus = ("Removing temp folder " + _tempDir_1);
-          IncrementalBuilder.LOG.info(_plus);
-          URI _tempDir_2 = this.context.getTempDir();
-          Map<Object, Object> _emptyMap_1 = CollectionLiterals.<Object, Object>emptyMap();
-          converter.delete(_tempDir_2, _emptyMap_1);
-        }
-      } catch (Throwable _e) {
-        throw Exceptions.sneakyThrow(_e);
-      }
-    }
-    
     protected boolean validate(final Resource resource) {
       URI _uRI = resource.getURI();
       String _lastSegment = _uRI.lastSegment();
       String _plus = ("Starting validation for input: \'" + _lastSegment);
       String _plus_1 = (_plus + "\'");
-      IncrementalBuilder.LOG.info(_plus_1);
+      IncrementalBuilder.InternalStatefulIncrementalBuilder.LOG.info(_plus_1);
       URI _uRI_1 = resource.getURI();
       LanguageAccess _languageAccess = this.context.getLanguageAccess(_uRI_1);
       final IResourceValidator resourceValidator = _languageAccess.getResourceValidator();
@@ -194,7 +144,7 @@ public class IncrementalBuilder {
       String _lastSegment = _uRI.lastSegment();
       String _plus = ("Starting generator for input: \'" + _lastSegment);
       String _plus_1 = (_plus + "\'");
-      IncrementalBuilder.LOG.info(_plus_1);
+      IncrementalBuilder.InternalStatefulIncrementalBuilder.LOG.info(_plus_1);
       URI _uRI_1 = resource.getURI();
       final LanguageAccess access = this.context.getLanguageAccess(_uRI_1);
       URI _uRI_2 = resource.getURI();
@@ -255,7 +205,7 @@ public class IncrementalBuilder {
         @Override
         public void apply(final URI it) {
           try {
-            IncrementalBuilder.LOG.info(("Deleting stale generated file " + it));
+            IncrementalBuilder.InternalStatefulIncrementalBuilder.LOG.info(("Deleting stale generated file " + it));
             XtextResourceSet _resourceSet = InternalStatefulIncrementalBuilder.this.context.getResourceSet();
             URIConverter _uRIConverter = _resourceSet.getURIConverter();
             Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
@@ -270,6 +220,8 @@ public class IncrementalBuilder {
       IterableExtensions.<URI>forEach(previous, _function_1);
     }
     
+    private final static Logger LOG = Logger.getLogger(InternalStatefulIncrementalBuilder.class);
+    
     protected void setContext(final BuildContext context) {
       this.context = context;
     }
@@ -278,8 +230,6 @@ public class IncrementalBuilder {
       this.request = request;
     }
   }
-  
-  private final static Logger LOG = Logger.getLogger(IncrementalBuilder.class);
   
   @Inject
   private Provider<IncrementalBuilder.InternalStatefulIncrementalBuilder> provider;
@@ -316,14 +266,14 @@ public class IncrementalBuilder {
       _xifexpression = new DisabledClusteringPolicy();
     }
     final IResourceClusteringPolicy strategy = _xifexpression;
-    URI _baseDir = request.getBaseDir();
-    final URI tempDir = _baseDir.appendSegment("xtext-tmp");
     final XtextResourceSet resourceSet = request.getResourceSet();
     resourceSet.addLoadOption(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE, Boolean.valueOf(true));
-    final BuildContext context = new BuildContext(languages, resourceSet, strategy, tempDir);
+    final BuildContext context = new BuildContext(languages, resourceSet, strategy);
     final IncrementalBuilder.InternalStatefulIncrementalBuilder builder = this.provider.get();
     builder.context = context;
     builder.request = request;
     return builder.launch();
   }
+  
+  private final static Logger LOG = Logger.getLogger(IncrementalBuilder.class);
 }

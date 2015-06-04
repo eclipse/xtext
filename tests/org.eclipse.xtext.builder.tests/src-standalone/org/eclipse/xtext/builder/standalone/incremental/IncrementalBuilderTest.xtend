@@ -173,7 +173,6 @@ class IncrementalBuilderTest {
 	protected def newBuildRequest((BuildRequest)=>void init) {
 		val result = new BuildRequest => [
 			baseDir = tempDir.asURI
-			defaultEncoding = "UTF-8"
 			resourceSet = resourceSetProvider.get
 			classPath = #[]
 			outputs = #[new File(tempDir, "out").asURI]

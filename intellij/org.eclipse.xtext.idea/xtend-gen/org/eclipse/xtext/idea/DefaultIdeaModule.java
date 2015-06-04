@@ -29,8 +29,10 @@ import org.eclipse.xtext.idea.highlighting.DefaultPairedBraceMatcher;
 import org.eclipse.xtext.idea.highlighting.DefaultSyntaxHighlighter;
 import org.eclipse.xtext.idea.parser.AntlrDelegatingIdeaLexer;
 import org.eclipse.xtext.idea.refactoring.NullNamesValidator;
+import org.eclipse.xtext.idea.resource.IdeaEncodingProvider;
 import org.eclipse.xtext.idea.resource.impl.ProjectScopeBasedResourceDescriptions;
 import org.eclipse.xtext.idea.structureview.DefaultPsiStructureViewFactory;
+import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.psi.IPsiModelAssociations;
@@ -116,5 +118,9 @@ public class DefaultIdeaModule extends AbstractGenericModule {
     Named _named = Names.named(BaseXtextFile.GLOBAL_MODIFICATION_COUNT);
     LinkedBindingBuilder<Key> _annotatedWith = _bind.annotatedWith(_named);
     _annotatedWith.toInstance(PsiModificationTracker.MODIFICATION_COUNT);
+  }
+  
+  public Class<? extends IEncodingProvider> bindEncodingProvider() {
+    return IdeaEncodingProvider.class;
   }
 }

@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
-import org.eclipse.xtext.idea.resource.ModuleBasedResourceSetProvider;
+import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider;
 import org.eclipse.xtext.idea.resource.PsiToEcoreAdapter;
 import org.eclipse.xtext.idea.resource.PsiToEcoreTransformator;
 import org.eclipse.xtext.idea.resource.ResourceDescriptionAdapter;
@@ -77,7 +77,7 @@ public abstract class BaseXtextFile extends PsiFileBase {
 	private CompilerPhases compilerPhases;
 
     @Inject
-    protected ModuleBasedResourceSetProvider resourceSetProvider;
+    protected IdeaResourceSetProvider resourceSetProvider;
     
     @Inject
     protected Provider<PsiToEcoreTransformator> psiToEcoreTransformatorProvider;

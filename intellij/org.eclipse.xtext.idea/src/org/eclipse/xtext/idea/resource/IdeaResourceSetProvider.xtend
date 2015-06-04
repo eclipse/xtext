@@ -12,12 +12,9 @@ import com.google.inject.Provider
 import com.google.inject.Singleton
 import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.module.Module
-import com.intellij.openapi.vfs.VfsUtil
-import com.intellij.openapi.vfs.VfsUtilCore
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.IOException
-import java.net.URL
 import java.util.Map
 import java.util.Set
 import org.eclipse.emf.common.util.URI
@@ -25,10 +22,12 @@ import org.eclipse.emf.ecore.resource.URIHandler
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.util.internal.Log
-import com.intellij.openapi.vfs.VirtualFile
+
+import static org.eclipse.xtext.idea.resource.IdeaResourceSetProvider.*
+import static org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 
 @Singleton @Log
-class ModuleBasedResourceSetProvider {
+class IdeaResourceSetProvider {
 	
 	@Inject
 	Provider<XtextResourceSet> resourceSetProvider
@@ -64,37 +63,13 @@ class ModuleBasedResourceSetProvider {
 			}
 			val timeStamp = System.currentTimeMillis
 			for (uri : localWritten.keySet) {
-				var file = getOrCreateFile(uri, false)
+				var file = getOrCreateVirtualFile(uri)
 				file.setBinaryContent(localWritten.get(uri), -1, timeStamp, requestor)
 			}
 			for (uri : localDeleted) {
-				val file = findFile(uri)
+				val file = getVirtualFile(uri)
 				file.delete(requestor)
 			}
-		}
-		
-		private def VirtualFile getOrCreateFile(URI uri, boolean isDirectory) {
-			val file = findFile(uri)
-			if (file != null) {
-				return file
-			}
-			val parent = getOrCreateFile(uri.trimSegments(1), true)
-			return parent.createChildData(requestor, uri.lastSegment)
-		}
-		
-		def findFile(URI uri) {
-			val url = uri.toURL
-			if (url == null) {
-				return null;
-			}
-			return VfsUtil.findFileByURL(url)
-		}
-		
-		protected def URL toURL(URI uri) {
-			if (uri == null) {
-				return null
-			}
-			return VfsUtilCore.convertToURL(uri.toString)
 		}
 		
 		override contentDescription(URI uri, Map<?, ?> options) throws IOException {
@@ -108,7 +83,7 @@ class ModuleBasedResourceSetProvider {
 			if (writtenContents.containsKey(uri)) {
 				return new ByteArrayInputStream(writtenContents.get(uri))
 			}
-			val virtualFile = findFile(uri)
+			val virtualFile = getVirtualFile(uri)
 			val doc = FileDocumentManager.getInstance().getCachedDocument(virtualFile)
 			if (doc != null) {
 				return new ByteArrayInputStream(doc.text.getBytes(virtualFile.charset))
@@ -133,7 +108,6 @@ class ModuleBasedResourceSetProvider {
 		}
 	
 		def getRequestor() {
-			//TODO
 			null
 		}
 		
@@ -144,7 +118,7 @@ class ModuleBasedResourceSetProvider {
 			if (writtenContents.containsKey(uri)) {
 				return true
 			}
-			return findFile(uri)?.exists
+			return getVirtualFile(uri)?.exists
 		}
 		
 		override getAttributes(URI uri, Map<?, ?> options) {
