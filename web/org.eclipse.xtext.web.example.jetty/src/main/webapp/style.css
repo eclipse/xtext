@@ -6,7 +6,7 @@ body {
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
-	font: 15px Helvetica,sans-serif;
+	font: 16px Helvetica,sans-serif;
 }
 
 a {
@@ -20,12 +20,17 @@ a:hover {
 
 h1 {
 	color: #555;
+	font-style: italic;
 }
 
 h2 {
 	color: #555;
 	padding-left: 15px;
 	border-bottom: 1px solid #aab;
+}
+
+h3 {
+	font-size: 16px;
 }
 
 .text-container {

@@ -76,25 +76,7 @@ define(["xtext/services/AbstractXtextService", "jquery"], function(AbstractXtext
 					}
 					editorContext.getClientServiceState().update = "finished";
 				}
-				var proposals = [];
-				for (var i = 0; i < result.entries.length; i++) {
-					var e = result.entries[i];
-					var p = {
-						proposal : e.proposal,
-						prefix : e.prefix,
-						overwrite : true,
-						name : (e.name ? e.name : e.proposal),
-						description : e.description,
-						style : e.style,
-						additionalEdits : e.textReplacements,
-						positions : e.editPositions,
-					};
-					if (e.escapePosition) {
-						p.escapePosition = e.escapePosition;
-					}
-					proposals.push(p);
-				}
-				deferred.resolve(proposals);
+				deferred.resolve(editorContext.translateCompletionProposals(result.entries));
 			},
 			
 			error : function(xhr, textStatus, errorThrown) {
