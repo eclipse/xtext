@@ -57,7 +57,7 @@
  * model {TextModel}
  *     The base text model.
  * parent {String | DOMElement}
- *     The parent element for the view; it can be either a DOM element or an ID for a DOM element.
+ *     The parent element for the view; it can be either a DOM element or an ID or class name for a DOM element.
  * readonly = false {Boolean}
  *     Whether the view is read-only.
  * resourceId {String}

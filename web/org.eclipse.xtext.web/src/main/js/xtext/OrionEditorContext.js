@@ -86,17 +86,32 @@ define(function() {
 		},
 		
 		showMarkers : function(entries) {
-			var problems = [];
-			for (var i = 0; i < entries.length; i++) {
-				var e = entries[i];
-				problems.push({
-					description : e.description,
-					start : e.startOffset,
-					end : e.endOffset,
-					severity : e.severity
-				});
-			}
-			this._editor.showProblems(problems);
+			this._editor.showProblems(entries.map(function(entry) {
+				return {
+					description : entry.description,
+					start : entry.startOffset,
+					end : entry.endOffset,
+					severity : entry.severity
+				};
+			}));
+		},
+		
+		translateCompletionProposals : function(entries) {
+			return entries.map(function(entry) {
+				var p = {
+					proposal : entry.proposal,
+					prefix : entry.prefix,
+					overwrite : true,
+					name : (entry.name ? entry.name : entry.proposal),
+					description : entry.description,
+					style : entry.style,
+					additionalEdits : entry.textReplacements,
+					positions : entry.editPositions,
+				};
+				if (entry.escapePosition)
+					p.escapePosition = entry.escapePosition;
+				return p;
+			});
 		}
 	};
 	

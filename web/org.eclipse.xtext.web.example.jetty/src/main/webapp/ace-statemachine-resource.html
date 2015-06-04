@@ -13,10 +13,9 @@
 				"jquery": "webjars/jquery/2.1.4/jquery.min"
 			}
 		});
-		require(["webjars/ace/01.08.2014/src/ace"]);
+		require(["webjars/ace/1.1.9/src/ace", "webjars/ace/1.1.9/src/ext-language_tools"]);
 		require(["xtext/xtext-ace"], function(xtext) {
-			var editor = ace.edit("xtext-editor");
-			xtext.configureServices(editor, { lang: "statemachine", sendFullText: true });
+			xtext.createEditor({ lang: "statemachine", sendFullText: true });
 		});
 	</script>
 </head>

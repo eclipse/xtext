@@ -94,6 +94,17 @@ define(["ace/range"], function(mRange) {
 				var range = new mRange.Range(start.row, start.column, end.row, end.column);
 				this._problemMarkerIds.push(session.addMarker(range, "xtext-marker_" + e.severity, "text"));
 			}
+		},
+		
+		translateCompletionProposals : function(entries) {
+			return entries.map(function(entry) {
+    			return {
+    				value: entry.proposal,
+    				caption: (entry.name ? entry.name : entry.proposal),
+    				meta: entry.description,
+    				className: entry.style
+    			};
+			});
 		}
 	};
 	
