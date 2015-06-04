@@ -10,8 +10,8 @@ package org.eclipse.xtext.idea.build
 import com.google.common.collect.HashMultimap
 import com.google.inject.Inject
 import com.google.inject.Provider
-import com.intellij.compiler.impl.CompilerUtil
 import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.application.ModalityState
 import com.intellij.openapi.progress.ProcessCanceledException
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.roots.ModuleRootManager
@@ -20,6 +20,7 @@ import com.intellij.openapi.roots.ProjectFileIndex
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.vfs.encoding.EncodingProjectManager
 import com.intellij.util.Alarm
+import java.util.List
 import java.util.concurrent.BlockingQueue
 import java.util.concurrent.LinkedBlockingQueue
 import org.eclipse.emf.common.util.URI
@@ -27,18 +28,18 @@ import org.eclipse.xtext.builder.standalone.incremental.BuildRequest
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder
 import org.eclipse.xtext.builder.standalone.incremental.IndexState
 import org.eclipse.xtext.idea.resource.ModuleBasedResourceSetProvider
+import org.eclipse.xtext.idea.resource.ModuleBasedResourceSetProvider.VirtualFileBasedUriHandler
 import org.eclipse.xtext.idea.shared.IdeaSharedInjectorProvider
 import org.eclipse.xtext.idea.shared.XtextLanguages
 
 import static org.eclipse.xtext.idea.build.BuildEvent.Type.*
-
-import static extension org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs.*
+import org.eclipse.xtext.util.internal.Log
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-class XtextAutoBuilder {
-
+@Log class XtextAutoBuilder {
+	
 	BlockingQueue<BuildEvent> queue = new LinkedBlockingQueue<BuildEvent>()
 
 	Alarm alarm 
@@ -72,16 +73,44 @@ class XtextAutoBuilder {
 	}
 
 	protected def enqueue(VirtualFile file, BuildEvent.Type type) {
+		checkIndexStateLoaded()
+		if (LOG.isDebugEnabled) {
+			LOG.debug("queuing "+file.URI)
+		}
 		if (file != null && !project.isDisposed) {
 			queue.put(new BuildEvent(file, type))
 			alarm.cancelAllRequests
 			alarm.addRequest([build], 200)
 		}
 	}
-
+	
+	protected def void checkIndexStateLoaded() {
+		if (indexState != null || !queue.isEmpty)
+			return;
+		val baseFile = project.baseDir
+		baseFile.visitFileTree[ file |
+			if (!file.isDirectory && file.exists) {
+				queue.put(new BuildEvent(file, BuildEvent.Type.ADDED))
+			}
+		]
+	}
+	
+	def void visitFileTree(VirtualFile file, (VirtualFile)=>void handler) {
+		if (file.isDirectory) {
+			for (child : file.children) {
+				visitFileTree(child, handler)
+			}
+		}
+		handler.apply(file)
+	}
+	
 	protected def void build() {
 		val allEvents = newArrayList
 		queue.drainTo(allEvents)
+		build(allEvents)
+	}
+
+	public def void build(List<BuildEvent> allEvents) {
 		try {
 			val module2event = HashMultimap.create
 			val fileIndex = ProjectFileIndex.SERVICE.getInstance(project)
@@ -119,24 +148,26 @@ class XtextAutoBuilder {
 					afterGenerateFile = [ refreshFiles += $1 ] 
 					afterDeleteFile = [ refreshFiles += it ]
 				]
-				indexState = ApplicationManager.application.<IndexState>runReadAction [
+				val app = ApplicationManager.application
+				indexState = app.<IndexState>runReadAction [
 					builderProvider.get().build(request, xtextLanguages.languageAccesses)
 				]
+				app.invokeAndWait([
+					app.runWriteAction [
+						val handler = request.resourceSet.URIConverter.URIHandlers.head as VirtualFileBasedUriHandler
+						handler.flushToDisk
+					]
+				], ModalityState.any)
 			}
-			CompilerUtil.refreshIOFiles(refreshFiles.map[asFile])
 		} catch(ProcessCanceledException exc) {
 			queue.addAll(allEvents)
 		}		
 	}
 	
 	protected def getURI(VirtualFile file) {
-		val uri = if (file.isInLocalFileSystem)
-				URI.createFileURI(file.path)
-			else
-				URI.createURI(file.url)
-		if (file.directory)
-			uri.appendSegment('')
-		else
-			uri
+		if (file.isDirectory) {
+			return URI.createURI(file.url+"/")	
+		}
+		return URI.createURI(file.url)
 	}
 }

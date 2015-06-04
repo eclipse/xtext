@@ -11,7 +11,6 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.Collection
 import java.util.Set
-import org.apache.log4j.Logger
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.lib.annotations.Data
@@ -24,17 +23,14 @@ import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
+import org.eclipse.xtext.util.internal.Log
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.9 
  */
-@Singleton
+@Singleton @Log
 class Indexer {
-
-	static val LOG = Logger.getLogger(Indexer)
-
-	@Inject ResourceURICollector uriCollector
 
 	@Inject JavaSupport javaSupport
 
@@ -53,13 +49,8 @@ class Indexer {
 	}
 	
 	def IndexResult computeAndIndexAffected(BuildRequest request, extension BuildContext context) {
-		val fullBuild = request.fullBuild
-		if(fullBuild) 
-			LOG.info('Performing full build')
-		else
-			LOG.info('Performing incremental build')
-			
-		LOG.info('Creating new index')
+		if (LOG.isInfoEnabled) 
+			LOG.info('Creating new index')
 		val fileMappings = request.previousState.fileMappings
 		val ResourceDescriptionsData oldIndex = request.previousState.resourceDescriptions
 		val ResourceDescriptionsData newIndex = oldIndex.copy
@@ -68,13 +59,9 @@ class Indexer {
 
 		val affectionCandidates = newHashSet
 		var Set<URI> directlyAffected = null
-		if (fullBuild) {
-			directlyAffected = uriCollector.collectAllResources(request, context).toSet
-		} else {
-			val allModified = (request.dirtyFiles + request.deletedFiles).toSet
-			affectionCandidates += oldIndex.allURIs.filter[!allModified.contains(it)]
-			directlyAffected = request.dirtyFiles.map[primarySources(fileMappings)].flatten.toSet
-		}
+		val allModified = (request.dirtyFiles + request.deletedFiles).toSet
+		affectionCandidates += oldIndex.allURIs.filter[!allModified.contains(it)]
+		directlyAffected = request.dirtyFiles.map[primarySources(fileMappings)].flatten.toSet
 
 		val currentDeltas = <IResourceDescription.Delta>newArrayList
 		currentDeltas += request.removeDeletedFilesFromIndex(oldIndex, newIndex)
@@ -94,7 +81,7 @@ class Indexer {
 		toBeIndexed.addAll(directlyAffected)
 		val allDeltas = newHashSet
 		while (!toBeIndexed.empty) {
-			if(isConsiderJava && !fullBuild) {
+			if(isConsiderJava) {
 				val affectedJavaFiles = 
 					(toBeIndexed
 						.map[fileMappings.getGenerated(it)]

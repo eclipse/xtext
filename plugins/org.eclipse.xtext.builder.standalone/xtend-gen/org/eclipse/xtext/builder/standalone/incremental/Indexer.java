@@ -29,7 +29,6 @@ import org.eclipse.xtext.builder.standalone.incremental.IClassFileBasedDependenc
 import org.eclipse.xtext.builder.standalone.incremental.IndexState;
 import org.eclipse.xtext.builder.standalone.incremental.JavaSupport;
 import org.eclipse.xtext.builder.standalone.incremental.ResolvedResourceDescription;
-import org.eclipse.xtext.builder.standalone.incremental.ResourceURICollector;
 import org.eclipse.xtext.builder.standalone.incremental.Source2GeneratedMapping;
 import org.eclipse.xtext.builder.standalone.incremental.TypeResourceDescription;
 import org.eclipse.xtext.mwe.ResourceDescriptionsProvider;
@@ -41,6 +40,7 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
+import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -55,6 +55,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
  * @since 2.9
  */
 @Singleton
+@Log
 @SuppressWarnings("all")
 public class Indexer {
   @Data
@@ -137,11 +138,6 @@ public class Indexer {
     }
   }
   
-  private final static Logger LOG = Logger.getLogger(Indexer.class);
-  
-  @Inject
-  private ResourceURICollector uriCollector;
-  
   @Inject
   private JavaSupport javaSupport;
   
@@ -158,13 +154,10 @@ public class Indexer {
   private IQualifiedNameConverter qualifiedNameConverter;
   
   public Indexer.IndexResult computeAndIndexAffected(final BuildRequest request, @Extension final BuildContext context) {
-    final boolean fullBuild = request.isFullBuild();
-    if (fullBuild) {
-      Indexer.LOG.info("Performing full build");
-    } else {
-      Indexer.LOG.info("Performing incremental build");
+    boolean _isInfoEnabled = Indexer.LOG.isInfoEnabled();
+    if (_isInfoEnabled) {
+      Indexer.LOG.info("Creating new index");
     }
-    Indexer.LOG.info("Creating new index");
     IndexState _previousState = request.getPreviousState();
     final Source2GeneratedMapping fileMappings = _previousState.getFileMappings();
     IndexState _previousState_1 = request.getPreviousState();
@@ -174,37 +167,31 @@ public class Indexer {
     final IResourceDescriptions resourceDescriptions = this.installIndex(_resourceSet, newIndex);
     final HashSet<URI> affectionCandidates = CollectionLiterals.<URI>newHashSet();
     Set<URI> directlyAffected = null;
-    if (fullBuild) {
-      Iterable<URI> _collectAllResources = this.uriCollector.collectAllResources(request, context);
-      Set<URI> _set = IterableExtensions.<URI>toSet(_collectAllResources);
-      directlyAffected = _set;
-    } else {
-      List<URI> _dirtyFiles = request.getDirtyFiles();
-      List<URI> _deletedFiles = request.getDeletedFiles();
-      Iterable<URI> _plus = Iterables.<URI>concat(_dirtyFiles, _deletedFiles);
-      final Set<URI> allModified = IterableExtensions.<URI>toSet(_plus);
-      Set<URI> _allURIs = oldIndex.getAllURIs();
-      final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
-        @Override
-        public Boolean apply(final URI it) {
-          boolean _contains = allModified.contains(it);
-          return Boolean.valueOf((!_contains));
-        }
-      };
-      Iterable<URI> _filter = IterableExtensions.<URI>filter(_allURIs, _function);
-      Iterables.<URI>addAll(affectionCandidates, _filter);
-      List<URI> _dirtyFiles_1 = request.getDirtyFiles();
-      final Function1<URI, Iterable<URI>> _function_1 = new Function1<URI, Iterable<URI>>() {
-        @Override
-        public Iterable<URI> apply(final URI it) {
-          return Indexer.this.primarySources(it, fileMappings);
-        }
-      };
-      List<Iterable<URI>> _map = ListExtensions.<URI, Iterable<URI>>map(_dirtyFiles_1, _function_1);
-      Iterable<URI> _flatten = Iterables.<URI>concat(_map);
-      Set<URI> _set_1 = IterableExtensions.<URI>toSet(_flatten);
-      directlyAffected = _set_1;
-    }
+    List<URI> _dirtyFiles = request.getDirtyFiles();
+    List<URI> _deletedFiles = request.getDeletedFiles();
+    Iterable<URI> _plus = Iterables.<URI>concat(_dirtyFiles, _deletedFiles);
+    final Set<URI> allModified = IterableExtensions.<URI>toSet(_plus);
+    Set<URI> _allURIs = oldIndex.getAllURIs();
+    final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
+      @Override
+      public Boolean apply(final URI it) {
+        boolean _contains = allModified.contains(it);
+        return Boolean.valueOf((!_contains));
+      }
+    };
+    Iterable<URI> _filter = IterableExtensions.<URI>filter(_allURIs, _function);
+    Iterables.<URI>addAll(affectionCandidates, _filter);
+    List<URI> _dirtyFiles_1 = request.getDirtyFiles();
+    final Function1<URI, Iterable<URI>> _function_1 = new Function1<URI, Iterable<URI>>() {
+      @Override
+      public Iterable<URI> apply(final URI it) {
+        return Indexer.this.primarySources(it, fileMappings);
+      }
+    };
+    List<Iterable<URI>> _map = ListExtensions.<URI, Iterable<URI>>map(_dirtyFiles_1, _function_1);
+    Iterable<URI> _flatten = Iterables.<URI>concat(_map);
+    Set<URI> _set = IterableExtensions.<URI>toSet(_flatten);
+    directlyAffected = _set;
     final ArrayList<IResourceDescription.Delta> currentDeltas = CollectionLiterals.<IResourceDescription.Delta>newArrayList();
     ArrayList<IResourceDescription.Delta> _removeDeletedFilesFromIndex = this.removeDeletedFilesFromIndex(request, oldIndex, newIndex);
     Iterables.<IResourceDescription.Delta>addAll(currentDeltas, _removeDeletedFilesFromIndex);
@@ -230,13 +217,7 @@ public class Indexer {
     final HashSet<IResourceDescription.Delta> allDeltas = CollectionLiterals.<IResourceDescription.Delta>newHashSet();
     while ((!toBeIndexed.isEmpty())) {
       {
-        boolean _and = false;
-        if (!isConsiderJava) {
-          _and = false;
-        } else {
-          _and = (!fullBuild);
-        }
-        if (_and) {
+        if (isConsiderJava) {
           final Function1<URI, Iterable<URI>> _function_3 = new Function1<URI, Iterable<URI>>() {
             @Override
             public Iterable<URI> apply(final URI it) {
@@ -504,4 +485,6 @@ public class Indexer {
       }
     }
   }
+  
+  private final static Logger LOG = Logger.getLogger(Indexer.class);
 }

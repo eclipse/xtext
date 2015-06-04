@@ -13,9 +13,9 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
-import com.intellij.compiler.impl.CompilerUtil;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.application.ModalityState;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.project.Project;
@@ -28,18 +28,20 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.encoding.EncodingProjectManager;
 import com.intellij.util.Alarm;
 import com.intellij.util.PathsList;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.URIHandler;
 import org.eclipse.xtext.builder.standalone.IIssueHandler;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
-import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder;
 import org.eclipse.xtext.builder.standalone.incremental.IndexState;
 import org.eclipse.xtext.idea.build.BuildEvent;
@@ -47,6 +49,7 @@ import org.eclipse.xtext.idea.resource.ModuleBasedResourceSetProvider;
 import org.eclipse.xtext.idea.shared.IdeaSharedInjectorProvider;
 import org.eclipse.xtext.idea.shared.XtextLanguages;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -60,6 +63,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@Log
 @SuppressWarnings("all")
 public class XtextAutoBuilder {
   private BlockingQueue<BuildEvent> queue = new LinkedBlockingQueue<BuildEvent>();
@@ -101,6 +105,13 @@ public class XtextAutoBuilder {
   
   protected void enqueue(final VirtualFile file, final BuildEvent.Type type) {
     try {
+      this.checkIndexStateLoaded();
+      boolean _isDebugEnabled = XtextAutoBuilder.LOG.isDebugEnabled();
+      if (_isDebugEnabled) {
+        URI _uRI = this.getURI(file);
+        String _plus = ("queuing " + _uRI);
+        XtextAutoBuilder.LOG.debug(_plus);
+      }
       boolean _and = false;
       boolean _notEquals = (!Objects.equal(file, null));
       if (!_notEquals) {
@@ -127,9 +138,63 @@ public class XtextAutoBuilder {
     }
   }
   
+  protected void checkIndexStateLoaded() {
+    boolean _or = false;
+    boolean _notEquals = (!Objects.equal(this.indexState, null));
+    if (_notEquals) {
+      _or = true;
+    } else {
+      boolean _isEmpty = this.queue.isEmpty();
+      boolean _not = (!_isEmpty);
+      _or = _not;
+    }
+    if (_or) {
+      return;
+    }
+    final VirtualFile baseFile = this.project.getBaseDir();
+    final Procedure1<VirtualFile> _function = new Procedure1<VirtualFile>() {
+      @Override
+      public void apply(final VirtualFile file) {
+        try {
+          boolean _and = false;
+          boolean _isDirectory = file.isDirectory();
+          boolean _not = (!_isDirectory);
+          if (!_not) {
+            _and = false;
+          } else {
+            boolean _exists = file.exists();
+            _and = _exists;
+          }
+          if (_and) {
+            BuildEvent _buildEvent = new BuildEvent(file, BuildEvent.Type.ADDED);
+            XtextAutoBuilder.this.queue.put(_buildEvent);
+          }
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
+        }
+      }
+    };
+    this.visitFileTree(baseFile, _function);
+  }
+  
+  public void visitFileTree(final VirtualFile file, final Procedure1<? super VirtualFile> handler) {
+    boolean _isDirectory = file.isDirectory();
+    if (_isDirectory) {
+      VirtualFile[] _children = file.getChildren();
+      for (final VirtualFile child : _children) {
+        this.visitFileTree(child, handler);
+      }
+    }
+    handler.apply(file);
+  }
+  
   protected void build() {
     final ArrayList<BuildEvent> allEvents = CollectionLiterals.<BuildEvent>newArrayList();
     this.queue.drainTo(allEvents);
+    this.build(allEvents);
+  }
+  
+  public void build(final List<BuildEvent> allEvents) {
     try {
       final HashMultimap<Module, BuildEvent> module2event = HashMultimap.<Module, BuildEvent>create();
       final ProjectFileIndex fileIndex = ProjectFileIndex.SERVICE.getInstance(this.project);
@@ -279,7 +344,7 @@ public class XtextAutoBuilder {
             }
           };
           final BuildRequest request = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_1);
-          Application _application = ApplicationManager.getApplication();
+          final Application app = ApplicationManager.getApplication();
           final Computable<IndexState> _function_2 = new Computable<IndexState>() {
             @Override
             public IndexState compute() {
@@ -288,18 +353,29 @@ public class XtextAutoBuilder {
               return _get.build(request, _languageAccesses);
             }
           };
-          IndexState _runReadAction = _application.<IndexState>runReadAction(_function_2);
+          IndexState _runReadAction = app.<IndexState>runReadAction(_function_2);
           this.indexState = _runReadAction;
+          final Runnable _function_3 = new Runnable() {
+            @Override
+            public void run() {
+              final Runnable _function = new Runnable() {
+                @Override
+                public void run() {
+                  XtextResourceSet _resourceSet = request.getResourceSet();
+                  URIConverter _uRIConverter = _resourceSet.getURIConverter();
+                  EList<URIHandler> _uRIHandlers = _uRIConverter.getURIHandlers();
+                  URIHandler _head = IterableExtensions.<URIHandler>head(_uRIHandlers);
+                  final ModuleBasedResourceSetProvider.VirtualFileBasedUriHandler handler = ((ModuleBasedResourceSetProvider.VirtualFileBasedUriHandler) _head);
+                  handler.flushToDisk();
+                }
+              };
+              app.runWriteAction(_function);
+            }
+          };
+          ModalityState _any = ModalityState.any();
+          app.invokeAndWait(_function_3, _any);
         }
       }
-      final Function1<URI, File> _function_1 = new Function1<URI, File>() {
-        @Override
-        public File apply(final URI it) {
-          return FilesAndURIs.asFile(it);
-        }
-      };
-      List<File> _map = ListExtensions.<URI, File>map(refreshFiles, _function_1);
-      CompilerUtil.refreshIOFiles(_map);
     } catch (final Throwable _t) {
       if (_t instanceof ProcessCanceledException) {
         final ProcessCanceledException exc = (ProcessCanceledException)_t;
@@ -311,27 +387,15 @@ public class XtextAutoBuilder {
   }
   
   protected URI getURI(final VirtualFile file) {
-    URI _xblockexpression = null;
-    {
-      URI _xifexpression = null;
-      boolean _isInLocalFileSystem = file.isInLocalFileSystem();
-      if (_isInLocalFileSystem) {
-        String _path = file.getPath();
-        _xifexpression = URI.createFileURI(_path);
-      } else {
-        String _url = file.getUrl();
-        _xifexpression = URI.createURI(_url);
-      }
-      final URI uri = _xifexpression;
-      URI _xifexpression_1 = null;
-      boolean _isDirectory = file.isDirectory();
-      if (_isDirectory) {
-        _xifexpression_1 = uri.appendSegment("");
-      } else {
-        _xifexpression_1 = uri;
-      }
-      _xblockexpression = _xifexpression_1;
+    boolean _isDirectory = file.isDirectory();
+    if (_isDirectory) {
+      String _url = file.getUrl();
+      String _plus = (_url + "/");
+      return URI.createURI(_plus);
     }
-    return _xblockexpression;
+    String _url_1 = file.getUrl();
+    return URI.createURI(_url_1);
   }
+  
+  private final static Logger LOG = Logger.getLogger(XtextAutoBuilder.class);
 }

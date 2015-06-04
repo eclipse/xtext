@@ -178,7 +178,11 @@ public abstract class BaseXtextFile extends PsiFileBase {
         PsiToEcoreTransformator psiToEcoreTransformator = psiToEcoreTransformatorProvider.get();
         psiToEcoreTransformator.setXtextFile(this);
         Module module = ModuleUtilCore.findModuleForFile(findVirtualFile(this), getProject());
-        if (module == null) throw new IllegalStateException("Couldn't find module for "+this);
+        if (module == null) {
+        	module = ModuleUtilCore.findModuleForPsiElement(this);
+        	if (module == null)
+        		throw new IllegalStateException("Couldn't find module for "+this);
+        }
         ResourceSet resourceSet = resourceSetProvider.get(module);
         XtextResource resource = (XtextResource) resourceSet.createResource(getURI());
         resource.setParser(psiToEcoreTransformator);

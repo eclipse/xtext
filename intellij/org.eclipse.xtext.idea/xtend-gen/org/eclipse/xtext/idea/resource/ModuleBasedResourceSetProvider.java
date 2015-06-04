@@ -7,21 +7,236 @@
  */
 package org.eclipse.xtext.idea.resource;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
+import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VfsUtilCore;
+import com.intellij.openapi.vfs.VirtualFile;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.URIHandler;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.util.internal.Log;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 @Singleton
+@Log
 @SuppressWarnings("all")
 public class ModuleBasedResourceSetProvider {
+  public static class VirtualFileBasedUriHandler implements URIHandler {
+    @Accessors
+    private Map<URI, byte[]> writtenContents = CollectionLiterals.<URI, byte[]>newHashMap();
+    
+    @Accessors
+    private Set<URI> deleted = CollectionLiterals.<URI>newHashSet();
+    
+    @Override
+    public boolean canHandle(final URI uri) {
+      VirtualFile _findFile = this.findFile(uri);
+      return (!Objects.equal(_findFile, null));
+    }
+    
+    public void flushToDisk() {
+      try {
+        boolean _isDebugEnabled = ModuleBasedResourceSetProvider.LOG.isDebugEnabled();
+        if (_isDebugEnabled) {
+          Set<URI> _keySet = this.writtenContents.keySet();
+          String _join = IterableExtensions.join(_keySet, ", ");
+          String _plus = ("writing : " + _join);
+          ModuleBasedResourceSetProvider.LOG.debug(_plus);
+          String _join_1 = IterableExtensions.join(this.deleted, ", ");
+          String _plus_1 = ("deleting: " + _join_1);
+          ModuleBasedResourceSetProvider.LOG.debug(_plus_1);
+        }
+        final Map<URI, byte[]> localWritten = this.writtenContents;
+        HashMap<URI, byte[]> _newHashMap = CollectionLiterals.<URI, byte[]>newHashMap();
+        this.writtenContents = _newHashMap;
+        final Set<URI> localDeleted = this.deleted;
+        HashSet<URI> _newHashSet = CollectionLiterals.<URI>newHashSet();
+        this.deleted = _newHashSet;
+        boolean _and = false;
+        boolean _isEmpty = localDeleted.isEmpty();
+        if (!_isEmpty) {
+          _and = false;
+        } else {
+          boolean _isEmpty_1 = localWritten.isEmpty();
+          _and = _isEmpty_1;
+        }
+        if (_and) {
+          return;
+        }
+        final long timeStamp = System.currentTimeMillis();
+        Set<URI> _keySet_1 = localWritten.keySet();
+        for (final URI uri : _keySet_1) {
+          {
+            final VirtualFile file = this.findFile(uri);
+            byte[] _get = localWritten.get(uri);
+            Object _requestor = this.getRequestor();
+            file.setBinaryContent(_get, (-1), timeStamp, _requestor);
+          }
+        }
+        for (final URI uri_1 : localDeleted) {
+          {
+            final VirtualFile file = this.findFile(uri_1);
+            Object _requestor = this.getRequestor();
+            file.delete(_requestor);
+          }
+        }
+      } catch (Throwable _e) {
+        throw Exceptions.sneakyThrow(_e);
+      }
+    }
+    
+    public VirtualFile findFile(final URI uri) {
+      VirtualFile _xblockexpression = null;
+      {
+        final URL url = this.toURL(uri);
+        boolean _equals = Objects.equal(url, null);
+        if (_equals) {
+          return null;
+        }
+        _xblockexpression = VfsUtil.findFileByURL(url);
+      }
+      return _xblockexpression;
+    }
+    
+    protected URL toURL(final URI uri) {
+      boolean _equals = Objects.equal(uri, null);
+      if (_equals) {
+        return null;
+      }
+      String _string = uri.toString();
+      return VfsUtilCore.convertToURL(_string);
+    }
+    
+    @Override
+    public Map<String, ?> contentDescription(final URI uri, final Map<?, ?> options) throws IOException {
+      return CollectionLiterals.<String, Object>emptyMap();
+    }
+    
+    @Override
+    public InputStream createInputStream(final URI uri, final Map<?, ?> options) throws IOException {
+      boolean _contains = this.deleted.contains(uri);
+      if (_contains) {
+        throw new IllegalStateException((("resource " + uri) + " is deleted."));
+      }
+      boolean _containsKey = this.writtenContents.containsKey(uri);
+      if (_containsKey) {
+        byte[] _get = this.writtenContents.get(uri);
+        return new ByteArrayInputStream(_get);
+      }
+      final VirtualFile virtualFile = this.findFile(uri);
+      FileDocumentManager _instance = FileDocumentManager.getInstance();
+      final Document doc = _instance.getCachedDocument(virtualFile);
+      boolean _notEquals = (!Objects.equal(doc, null));
+      if (_notEquals) {
+        String _text = doc.getText();
+        Charset _charset = virtualFile.getCharset();
+        byte[] _bytes = _text.getBytes(_charset);
+        return new ByteArrayInputStream(_bytes);
+      }
+      return virtualFile.getInputStream();
+    }
+    
+    @Override
+    public OutputStream createOutputStream(final URI uri, final Map<?, ?> options) throws IOException {
+      return new ByteArrayOutputStream() {
+        @Override
+        public void close() throws IOException {
+          super.close();
+          final byte[] bytes = this.toByteArray();
+          VirtualFileBasedUriHandler.this.deleted.remove(uri);
+          VirtualFileBasedUriHandler.this.writtenContents.put(uri, bytes);
+        }
+      };
+    }
+    
+    @Override
+    public void delete(final URI uri, final Map<?, ?> options) throws IOException {
+      this.writtenContents.remove(uri);
+      this.deleted.add(uri);
+    }
+    
+    public Object getRequestor() {
+      return null;
+    }
+    
+    @Override
+    public boolean exists(final URI uri, final Map<?, ?> options) {
+      boolean _contains = this.deleted.contains(uri);
+      if (_contains) {
+        return false;
+      }
+      boolean _containsKey = this.writtenContents.containsKey(uri);
+      if (_containsKey) {
+        return true;
+      }
+      VirtualFile _findFile = this.findFile(uri);
+      return _findFile.exists();
+    }
+    
+    @Override
+    public Map<String, ?> getAttributes(final URI uri, final Map<?, ?> options) {
+      return CollectionLiterals.<String, Object>emptyMap();
+    }
+    
+    @Override
+    public void setAttributes(final URI uri, final Map<String, ?> attributes, final Map<?, ?> options) throws IOException {
+    }
+    
+    @Pure
+    public Map<URI, byte[]> getWrittenContents() {
+      return this.writtenContents;
+    }
+    
+    public void setWrittenContents(final Map<URI, byte[]> writtenContents) {
+      this.writtenContents = writtenContents;
+    }
+    
+    @Pure
+    public Set<URI> getDeleted() {
+      return this.deleted;
+    }
+    
+    public void setDeleted(final Set<URI> deleted) {
+      this.deleted = deleted;
+    }
+  }
+  
   @Inject
   private Provider<XtextResourceSet> resourceSetProvider;
   
   public XtextResourceSet get(final Module context) {
     final XtextResourceSet resourceSet = this.resourceSetProvider.get();
     resourceSet.setClasspathURIContext(context);
+    URIConverter _uRIConverter = resourceSet.getURIConverter();
+    EList<URIHandler> _uRIHandlers = _uRIConverter.getURIHandlers();
+    ModuleBasedResourceSetProvider.VirtualFileBasedUriHandler _virtualFileBasedUriHandler = new ModuleBasedResourceSetProvider.VirtualFileBasedUriHandler();
+    _uRIHandlers.add(0, _virtualFileBasedUriHandler);
     return resourceSet;
   }
+  
+  private final static Logger LOG = Logger.getLogger(ModuleBasedResourceSetProvider.class);
 }
