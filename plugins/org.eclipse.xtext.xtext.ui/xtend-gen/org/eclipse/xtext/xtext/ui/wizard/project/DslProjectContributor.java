@@ -549,7 +549,7 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
         _builder.append("// JavaScript-based syntax highlighting");
         _builder.newLine();
         _builder.append("\t\t\t");
-        _builder.append("fragment = org.eclipse.xtext.web.generator.ClientHighlightingFragment auto-inject {");
+        _builder.append("fragment = org.eclipse.xtext.web.generator.OrionHighlightingFragment auto-inject {");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("\t");

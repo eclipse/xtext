@@ -198,7 +198,7 @@ class DslProjectContributor extends DefaultProjectFactoryContributor {
 
 						«IF projectInfo.createWebProject»
 							// JavaScript-based syntax highlighting
-							fragment = org.eclipse.xtext.web.generator.ClientHighlightingFragment auto-inject {
+							fragment = org.eclipse.xtext.web.generator.OrionHighlightingFragment auto-inject {
 								javaScriptPath = javaScriptPath
 							}
 						«ENDIF»
