@@ -7,11 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.resource
 
-import org.eclipse.xtext.resource.IResourceDescriptions
-import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtext.idea.build.XtextCompilerComponent
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 
 /**
  * 
@@ -23,6 +23,10 @@ class IdeaResourceDescriptionsProvider extends ResourceDescriptionsProvider {
 	}
 	
 	override getResourceDescriptions(ResourceSet resourceSet) {
+		val installedData = ResourceDescriptionsData.ResourceSetAdapter.findResourceDescriptionsData(resourceSet)
+		if (installedData != null) {
+			return installedData;
+		}
 		val module = ModuleProvider.findModule(resourceSet)
 		val compiler = module.project.getComponent(XtextCompilerComponent)
 		return compiler.getResourceDescriptions()

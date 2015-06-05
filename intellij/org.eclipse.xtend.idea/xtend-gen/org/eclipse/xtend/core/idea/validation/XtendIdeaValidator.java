@@ -11,17 +11,21 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.JavaDirectoryService;
+import com.intellij.psi.JavaPsiFacade;
+import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiDirectory;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiManager;
 import com.intellij.psi.PsiPackage;
+import com.intellij.psi.search.GlobalSearchScope;
 import java.util.Collections;
 import java.util.List;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.macro.XAnnotationExtensions;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendFile;
@@ -29,8 +33,8 @@ import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.idea.extensions.IdeaProjectExtensions;
-import org.eclipse.xtext.psi.IPsiModelAssociations;
+import org.eclipse.xtext.idea.resource.ModuleProvider;
+import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
@@ -47,10 +51,6 @@ import org.eclipse.xtext.xtype.XtypePackage;
  */
 @SuppressWarnings("all")
 public class XtendIdeaValidator extends AbstractDeclarativeValidator {
-  @Inject
-  @Extension
-  private IPsiModelAssociations _iPsiModelAssociations;
-  
   @Inject
   @Extension
   private XAnnotationExtensions _xAnnotationExtensions;
@@ -77,39 +77,19 @@ public class XtendIdeaValidator extends AbstractDeclarativeValidator {
   }
   
   protected boolean isSameModule(final XAnnotation annotation, final JvmType annotationType) {
-    boolean _xblockexpression = false;
-    {
-      final Module annotationModule = this.getModule(annotation);
-      boolean _and = false;
-      boolean _notEquals = (!Objects.equal(annotationModule, null));
-      if (!_notEquals) {
-        _and = false;
-      } else {
-        Module _module = this.getModule(annotationType);
-        boolean _equals = Objects.equal(annotationModule, _module);
-        _and = _equals;
-      }
-      _xblockexpression = _and;
-    }
-    return _xblockexpression;
+    final Module module = this.getModule(annotation);
+    Project _project = module.getProject();
+    final JavaPsiFacade psiFacade = JavaPsiFacade.getInstance(_project);
+    String _qualifiedName = annotationType.getQualifiedName();
+    GlobalSearchScope _moduleScope = module.getModuleScope();
+    PsiClass _findClass = psiFacade.findClass(_qualifiedName, _moduleScope);
+    return (!Objects.equal(_findClass, null));
   }
   
   protected Module getModule(final EObject object) {
-    Module _xblockexpression = null;
-    {
-      final PsiElement psiElement = this._iPsiModelAssociations.getPsiElement(object);
-      boolean _equals = Objects.equal(psiElement, null);
-      if (_equals) {
-        return null;
-      }
-      Project _project = psiElement.getProject();
-      @Extension
-      final ProjectFileIndex projectFileIndex = IdeaProjectExtensions.getProjectFileIndex(_project);
-      PsiFile _containingFile = psiElement.getContainingFile();
-      VirtualFile _virtualFile = _containingFile.getVirtualFile();
-      _xblockexpression = projectFileIndex.getModuleForFile(_virtualFile, false);
-    }
-    return _xblockexpression;
+    Resource _eResource = object.eResource();
+    ResourceSet _resourceSet = _eResource.getResourceSet();
+    return ModuleProvider.findModule(_resourceSet);
   }
   
   @Check
@@ -150,21 +130,16 @@ public class XtendIdeaValidator extends AbstractDeclarativeValidator {
   }
   
   protected String getExpectedPackageName(final XtendFile xtendFile) {
-    String _xblockexpression = null;
-    {
-      final PsiElement psiElement = this._iPsiModelAssociations.getPsiElement(xtendFile);
-      boolean _equals = Objects.equal(psiElement, null);
-      if (_equals) {
-        return null;
-      }
-      @Extension
-      final JavaDirectoryService javaDirectoryService = JavaDirectoryService.getInstance();
-      PsiFile _containingFile = psiElement.getContainingFile();
-      PsiFile _originalFile = _containingFile.getOriginalFile();
-      PsiDirectory _containingDirectory = _originalFile.getContainingDirectory();
-      PsiPackage _package = javaDirectoryService.getPackage(_containingDirectory);
-      _xblockexpression = _package.getQualifiedName();
-    }
-    return _xblockexpression;
+    Resource _eResource = xtendFile.eResource();
+    URI _uRI = _eResource.getURI();
+    final VirtualFile file = VirtualFileURIUtil.getVirtualFile(_uRI);
+    Module _module = this.getModule(xtendFile);
+    Project _project = _module.getProject();
+    PsiManager _instance = PsiManager.getInstance(_project);
+    VirtualFile _parent = file.getParent();
+    final PsiDirectory psiDirectory = _instance.findDirectory(_parent);
+    final JavaDirectoryService javaDirectoryService = JavaDirectoryService.getInstance();
+    PsiPackage _package = javaDirectoryService.getPackage(psiDirectory);
+    return _package.getQualifiedName();
   }
 }

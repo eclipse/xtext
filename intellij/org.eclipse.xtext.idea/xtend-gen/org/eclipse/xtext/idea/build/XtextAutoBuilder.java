@@ -102,7 +102,11 @@ public class XtextAutoBuilder {
   
   protected void enqueue(final VirtualFile file, final BuildEvent.Type type) {
     try {
-      this.checkIndexStateLoaded();
+      boolean _isLoaded = this.isLoaded();
+      boolean _not = (!_isLoaded);
+      if (_not) {
+        this.queueAllResources();
+      }
       boolean _isDebugEnabled = XtextAutoBuilder.LOG.isDebugEnabled();
       if (_isDebugEnabled) {
         URI _uRI = VirtualFileURIUtil.getURI(file);
@@ -115,8 +119,8 @@ public class XtextAutoBuilder {
         _and = false;
       } else {
         boolean _isDisposed = this.project.isDisposed();
-        boolean _not = (!_isDisposed);
-        _and = _not;
+        boolean _not_1 = (!_isDisposed);
+        _and = _not_1;
       }
       if (_and) {
         BuildEvent _buildEvent = new BuildEvent(file, type);
@@ -135,7 +139,7 @@ public class XtextAutoBuilder {
     }
   }
   
-  protected void checkIndexStateLoaded() {
+  protected boolean isLoaded() {
     boolean _or = false;
     boolean _notEquals = (!Objects.equal(this.indexState, null));
     if (_notEquals) {
@@ -146,8 +150,12 @@ public class XtextAutoBuilder {
       _or = _not;
     }
     if (_or) {
-      return;
+      return true;
     }
+    return false;
+  }
+  
+  protected void queueAllResources() {
     final VirtualFile baseFile = this.project.getBaseDir();
     final Procedure1<VirtualFile> _function = new Procedure1<VirtualFile>() {
       @Override
@@ -367,8 +375,20 @@ public class XtextAutoBuilder {
   protected IndexState getIndexState() {
     boolean _equals = Objects.equal(this.indexState, null);
     if (_equals) {
-      this.checkIndexStateLoaded();
-      this.build();
+      boolean _isLoaded = this.isLoaded();
+      boolean _not = (!_isLoaded);
+      if (_not) {
+        this.queueAllResources();
+        this.alarm.cancelAllRequests();
+        final Runnable _function = new Runnable() {
+          @Override
+          public void run() {
+            XtextAutoBuilder.this.build();
+          }
+        };
+        this.alarm.addRequest(_function, 200);
+      }
+      return new IndexState();
     }
     return this.indexState;
   }

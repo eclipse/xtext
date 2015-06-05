@@ -74,7 +74,9 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	}
 
 	protected def enqueue(VirtualFile file, BuildEvent.Type type) {
-		checkIndexStateLoaded()
+		if (!isLoaded()) {
+			queueAllResources()
+		}
 		if (LOG.isDebugEnabled) {
 			LOG.debug("queuing "+file.URI)
 		}
@@ -85,9 +87,13 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		}
 	}
 	
-	protected def void checkIndexStateLoaded() {
+	protected def boolean isLoaded() {
 		if (indexState != null || !queue.isEmpty)
-			return;
+			return true;
+		return false;
+	}
+	
+	protected def queueAllResources() {
 		val baseFile = project.baseDir
 		baseFile.visitFileTree[ file |
 			if (!file.isDirectory && file.exists) {
@@ -155,13 +161,18 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	
 	protected def  getIndexState() {
 		if (indexState == null) {
-			checkIndexStateLoaded
-			build
+			if (!isLoaded()) {
+				queueAllResources
+				alarm.cancelAllRequests
+				alarm.addRequest([build], 200)
+			}
+			return new IndexState()
 		}
 		return indexState		
 	}
 	
 	public def IResourceDescriptions getResourceDescriptions() {
+		
 		getIndexState.resourceDescriptions
 	}
 	

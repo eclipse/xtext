@@ -31,7 +31,6 @@ import org.eclipse.xtext.builder.standalone.incremental.JavaSupport;
 import org.eclipse.xtext.builder.standalone.incremental.ResolvedResourceDescription;
 import org.eclipse.xtext.builder.standalone.incremental.Source2GeneratedMapping;
 import org.eclipse.xtext.builder.standalone.incremental.TypeResourceDescription;
-import org.eclipse.xtext.mwe.ResourceDescriptionsProvider;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.CompilerPhases;
@@ -145,9 +144,6 @@ public class Indexer {
   private CompilerPhases compilerPhases;
   
   @Inject
-  private ResourceDescriptionsProvider resourceDescriptionsProvider;
-  
-  @Inject
   private IClassFileBasedDependencyFinder javaDependencyFinder;
   
   @Inject
@@ -164,7 +160,7 @@ public class Indexer {
     final ResourceDescriptionsData previousIndex = _previousState_1.getResourceDescriptions();
     final ResourceDescriptionsData newIndex = previousIndex.copy();
     XtextResourceSet _resourceSet = context.getResourceSet();
-    final IResourceDescriptions resourceDescriptions = this.installIndex(_resourceSet, newIndex);
+    this.installIndex(_resourceSet, newIndex);
     final HashSet<URI> affectionCandidates = CollectionLiterals.<URI>newHashSet();
     Set<URI> directlyAffected = null;
     List<URI> _dirtyFiles = request.getDirtyFiles();
@@ -346,7 +342,7 @@ public class Indexer {
               LanguageAccess _get = _languages.get(_fileExtension_1);
               final IResourceDescription.Manager manager = _get.getResourceDescriptionManager();
               final IResourceDescription resourceDescription = previousIndex.getResourceDescription(it);
-              _xblockexpression = Indexer.this.isAffected(resourceDescription, manager, currentDeltas, allDeltas, resourceDescriptions);
+              _xblockexpression = Indexer.this.isAffected(resourceDescription, manager, currentDeltas, allDeltas, newIndex);
             }
             return Boolean.valueOf(_xblockexpression);
           }
@@ -458,9 +454,8 @@ public class Indexer {
     return delta;
   }
   
-  protected IResourceDescriptions installIndex(final XtextResourceSet resourceSet, final ResourceDescriptionsData index) {
+  protected void installIndex(final XtextResourceSet resourceSet, final ResourceDescriptionsData index) {
     ResourceDescriptionsData.ResourceSetAdapter.installResourceDescriptionsData(resourceSet, index);
-    return this.resourceDescriptionsProvider.get(resourceSet);
   }
   
   protected boolean isAffected(final IResourceDescription affectionCandidate, final IResourceDescription.Manager manager, final Collection<IResourceDescription.Delta> newDeltas, final Collection<IResourceDescription.Delta> allDeltas, final IResourceDescriptions resourceDescriptions) {
