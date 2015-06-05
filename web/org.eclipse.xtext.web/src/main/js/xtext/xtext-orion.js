@@ -49,8 +49,6 @@
  *     The line index displayed for the first line of text.
  * fullSelection = true {Boolean}
  *     Whether or not the view is in full selection mode.
- * xtextLang {String}
- *     The language name (usually the file extension configured for the language).
  * loadFromServer = true {Boolean}
  *     Whether to load the editor content from the server. If enabled, the client will try to
  *     send only deltas instead of the full text whenever possible.
@@ -108,6 +106,8 @@
  *     Whether the view is wrappable.
  * wrapMode = false {Boolean}
  *     Whether the view wraps lines.
+ * xtextLang {String}
+ *     The language name (usually the file extension configured for the language).
  */
 define([
     "jquery",

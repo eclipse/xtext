@@ -1,7 +1,5 @@
 define("xtext/statemachine-syntax", ["orion/editor/stylers/lib/syntax"], function(mLib) {
-	var keywords = [
-		"and", "end", "goto", "if", "input", "output", "set", "signal", "state"
-	];
+	var keywords = ["and", "end", "goto", "if", "input", "output", "set", "signal", "state"];
 
 	var grammars = [];
 	grammars.push.apply(grammars, mLib.grammars);
@@ -14,10 +12,7 @@ define("xtext/statemachine-syntax", ["orion/editor/stylers/lib/syntax"], functio
 			{include: "orion.c-like#comment_singleLine"},
 			{include: "orion.c-like#comment_block"},
 			{include: "orion.lib#number_decimal"},
-			{
-				match: "\\b(?:" + keywords.join("|") + ")\\b",
-				name: "keyword.operator.statemachine"
-			}
+			{match: "\b(?:" + keywords.join("|") + ")\b", name: "keyword.operator.«langId»"}
 		]
 	});
 
