@@ -18,6 +18,8 @@
  *     Whether validation should be enabled.
  * parent {String | DOMElement}
  *     The parent element for the view; it can be either a DOM element or an ID for a DOM element.
+ * xtextLang {String}
+ *     The language name (usually the file extension configured for the language).
  */
 define([
     "jquery",
@@ -60,6 +62,11 @@ define([
 	 * Configure Xtext services for the given editor.
 	 */
 	exports.configureServices = function(editor, options) {
+		if (!options.xtextLang && options.lang)
+			options.xtextLang = options.lang
+		if (!options.xtextLang && options.resourceId)
+			options.xtextLang = options.resourceId.split('.').pop();
+	
 		var editorContext = new EditorContext(editor);
 		editor.getEditorContext = function() {
 			return editorContext;
@@ -69,16 +76,22 @@ define([
 		if (!serverUrl) {
 			serverUrl = "http://" + location.host + "/xtext-service";
 		}
-		var lang = options.lang;
 		var resourceId = options.resourceId;
 		if (resourceId) {
-			if (!lang) {
-				lang = resourceId.split('.').pop();
-			}
 		} else {
-			if (lang) {
-				resourceId = "text." + lang;
-			}
+			if (options.xtextLang)
+				resourceId = "text." + options.xtextLang;
+		}
+		
+		//---- Syntax Highlighting Service
+		
+		if (options.syntaxDefinition || options.xtextLang) {
+			var syntaxDefinition = options.syntaxDefinition;
+			if (!syntaxDefinition)
+				syntaxDefinition = "xtext/mode-" + options.xtextLang;
+			require([syntaxDefinition], function(mode) {
+				editor.getSession().setMode(new mode.Mode);
+			});
 		}
 		
 		//---- Validation Service
