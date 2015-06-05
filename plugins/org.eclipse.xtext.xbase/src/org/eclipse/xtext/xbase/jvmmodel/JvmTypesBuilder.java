@@ -49,8 +49,6 @@ import org.eclipse.xtext.common.types.util.AnnotationLookup;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Tuples;
@@ -759,26 +757,16 @@ public class JvmTypesBuilder {
 	}
 
 	/**
-	 * Detects whether the type reference refers to primitive boolean, first trying without
-	 * triggering proxy resolution (looking at the original text reference).
+	 * Detects whether the type reference refers to primitive boolean.
 	 * 
-	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=468641
-	 * 
-	 * @param typeRef
-	 * @return
+	 * @since 2.9
 	 */
-	private boolean isPrimitiveBoolean(JvmTypeReference typeRef) {
+	protected boolean isPrimitiveBoolean(JvmTypeReference typeRef) {
 		if (InferredTypeIndicator.isInferred(typeRef)) {
 			return false;
 		}
 		
-		ICompositeNode actualNodeFor = NodeModelUtils.findActualNodeFor(typeRef);
-		if (actualNodeFor != null) {
-			return "boolean".equals(NodeModelUtils.getTokenText(actualNodeFor));
-		} else {
-			return typeRef.getType()!=null 
-					&& !typeRef.getType().eIsProxy() && "boolean".equals(typeRef.getType().getIdentifier());
-		}
+		return typeRef.getType() != null && !typeRef.getType().eIsProxy() && "boolean".equals(typeRef.getType().getIdentifier());
 	}
 
 	/**
