@@ -134,7 +134,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 					sourceRoots += entries.withoutSdk.withoutLibraries.withoutDepModules.sources.pathsList.virtualFiles.map[URI]
 					// outputs = ??
 					failOnValidationError = false
-					previousState = indexState
+					previousState = indexState ?: new IndexState()
 				
 					it.issueHandler = issueHandler
 				

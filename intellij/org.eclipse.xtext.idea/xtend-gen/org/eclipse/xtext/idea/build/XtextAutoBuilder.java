@@ -316,7 +316,14 @@ public class XtextAutoBuilder {
               List<URI> _map_3 = ListExtensions.<VirtualFile, URI>map(_virtualFiles_1, _function_6);
               Iterables.<URI>addAll(_sourceRoots, _map_3);
               it.setFailOnValidationError(false);
-              it.setPreviousState(XtextAutoBuilder.this.indexState);
+              IndexState _elvis = null;
+              if (XtextAutoBuilder.this.indexState != null) {
+                _elvis = XtextAutoBuilder.this.indexState;
+              } else {
+                IndexState _indexState = new IndexState();
+                _elvis = _indexState;
+              }
+              it.setPreviousState(_elvis);
               IIssueHandler _issueHandler = it.getIssueHandler();
               it.setIssueHandler(_issueHandler);
               final Procedure2<URI, URI> _function_7 = new Procedure2<URI, URI>() {

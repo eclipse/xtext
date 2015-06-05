@@ -56,7 +56,12 @@ class VirtualFileURIUtil {
 			return file
 		}
 		val parent = getOrCreateFile(uri.trimSegments(1), true)
-		return parent.createChildData(null, uri.lastSegment)
+		if (isDirectory) {
+			return parent.createChildDirectory(null, uri.lastSegment)
+		} else {
+			return parent.createChildData(null, uri.lastSegment)
+			
+		}
 	}
 		
 	private static def URL toURL(URI uri) {

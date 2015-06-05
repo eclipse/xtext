@@ -112,12 +112,9 @@ public class IncrementalBuilder {
         public Boolean apply(final Resource resource) {
           resource.getContents();
           EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl);
-          boolean _validate = InternalStatefulIncrementalBuilder.this.validate(resource);
-          if (_validate) {
-            InternalStatefulIncrementalBuilder.this.generate(resource, InternalStatefulIncrementalBuilder.this.request, newSource2GeneratedMapping);
-            return Boolean.valueOf(true);
-          }
-          return Boolean.valueOf(false);
+          InternalStatefulIncrementalBuilder.this.validate(resource);
+          InternalStatefulIncrementalBuilder.this.generate(resource, InternalStatefulIncrementalBuilder.this.request, newSource2GeneratedMapping);
+          return Boolean.valueOf(true);
         }
       };
       this.context.<Boolean>executeClustered(_affectedResources, _function_1);
