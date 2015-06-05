@@ -80,12 +80,7 @@ public class CurrentDescriptions extends AdapterImpl implements IResourceDescrip
 	 *            The resource change.
 	 */
 	public void register(IResourceDescription.Delta delta) {
-		final IResourceDescription newDesc = delta.getNew();
-		if (newDesc == null) {
-			newData.removeDescription(delta.getUri());
-		} else {
-			newData.addDescription(delta.getUri(), newDesc);
-		}
+		newData.register(delta);
 	}
 
 	/**
