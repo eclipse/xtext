@@ -53,11 +53,12 @@ import org.eclipse.xtext.validation.CheckMode
 					Resource resource |
 					resource.contents // fully initialize
 					EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl)
-					if(resource.validate) {
+					resource.validate
+//					if (resource.validate) {
 						resource.generate(request, newSource2GeneratedMapping)
 						return true				
-					}
-					return false 
+//					}
+//					return false 
 				]
 			return new IndexState(result.newIndex, newSource2GeneratedMapping)
 		}
