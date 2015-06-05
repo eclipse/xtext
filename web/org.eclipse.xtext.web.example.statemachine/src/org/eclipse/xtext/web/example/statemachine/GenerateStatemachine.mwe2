@@ -91,7 +91,7 @@ Workflow {
 			fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}
 			
 			// JavaScript-based syntax highlighting
-			fragment = ClientHighlightingFragment auto-inject {
+			fragment = OrionHighlightingFragment auto-inject {
 				javaScriptPath = javaScriptPath
 			}
 		}
