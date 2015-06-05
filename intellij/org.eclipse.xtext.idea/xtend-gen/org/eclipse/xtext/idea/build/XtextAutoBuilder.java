@@ -35,12 +35,12 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.builder.standalone.IIssueHandler;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder;
 import org.eclipse.xtext.builder.standalone.incremental.IndexState;
 import org.eclipse.xtext.idea.build.BuildEvent;
+import org.eclipse.xtext.idea.build.BuildProgressReporter;
 import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider;
 import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
 import org.eclipse.xtext.idea.shared.IdeaSharedInjectorProvider;
@@ -71,6 +71,9 @@ public class XtextAutoBuilder {
   
   @Inject
   private Provider<IncrementalBuilder> builderProvider;
+  
+  @Inject
+  private Provider<BuildProgressReporter> buildProgressReporterProvider;
   
   @Inject
   private XtextLanguages xtextLanguages;
@@ -200,24 +203,18 @@ public class XtextAutoBuilder {
   }
   
   public void build(final List<BuildEvent> allEvents) {
+    final BuildProgressReporter buildProgressReporter = this.buildProgressReporterProvider.get();
+    buildProgressReporter.setProject(this.project);
     try {
       final HashMultimap<Module, BuildEvent> module2event = HashMultimap.<Module, BuildEvent>create();
       final ProjectFileIndex fileIndex = ProjectFileIndex.SERVICE.getInstance(this.project);
       final Procedure1<BuildEvent> _function = new Procedure1<BuildEvent>() {
         @Override
         public void apply(final BuildEvent it) {
-          Map<String, LanguageAccess> _languageAccesses = XtextAutoBuilder.this.xtextLanguages.getLanguageAccesses();
-          VirtualFile _file = it.getFile();
-          String _extension = _file.getExtension();
-          LanguageAccess _get = _languageAccesses.get(_extension);
-          boolean _notEquals = (!Objects.equal(_get, null));
+          final Module module = XtextAutoBuilder.this.findModule(it, fileIndex);
+          boolean _notEquals = (!Objects.equal(module, null));
           if (_notEquals) {
-            VirtualFile _file_1 = it.getFile();
-            final Module module = fileIndex.getModuleForFile(_file_1);
-            boolean _notEquals_1 = (!Objects.equal(module, null));
-            if (_notEquals_1) {
-              module2event.put(module, it);
-            }
+            module2event.put(module, it);
           }
         }
       };
@@ -328,8 +325,14 @@ public class XtextAutoBuilder {
                 _elvis = _indexState;
               }
               it.setPreviousState(_elvis);
-              IIssueHandler _issueHandler = it.getIssueHandler();
-              it.setIssueHandler(_issueHandler);
+              it.setIssueHandler(buildProgressReporter);
+              final Procedure1<URI> _function_7 = new Procedure1<URI>() {
+                @Override
+                public void apply(final URI it) {
+                  buildProgressReporter.markAsAffected(it);
+                }
+              };
+              it.setIssueCleaner(_function_7);
             }
           };
           final BuildRequest request = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_1);
@@ -369,6 +372,8 @@ public class XtextAutoBuilder {
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
+    } finally {
+      buildProgressReporter.clearProgress();
     }
   }
   
@@ -396,6 +401,50 @@ public class XtextAutoBuilder {
   public IResourceDescriptions getResourceDescriptions() {
     IndexState _indexState = this.getIndexState();
     return _indexState.getResourceDescriptions();
+  }
+  
+  protected Module findModule(final BuildEvent it, final ProjectFileIndex fileIndex) {
+    Module _xblockexpression = null;
+    {
+      Map<String, LanguageAccess> _languageAccesses = this.xtextLanguages.getLanguageAccesses();
+      VirtualFile _file = it.getFile();
+      String _extension = _file.getExtension();
+      LanguageAccess _get = _languageAccesses.get(_extension);
+      boolean _equals = Objects.equal(_get, null);
+      if (_equals) {
+        return null;
+      }
+      Module _xifexpression = null;
+      BuildEvent.Type _type = it.getType();
+      boolean _equals_1 = Objects.equal(_type, BuildEvent.Type.DELETED);
+      if (_equals_1) {
+        VirtualFile _file_1 = it.getFile();
+        _xifexpression = this.findModule(_file_1, fileIndex);
+      } else {
+        VirtualFile _file_2 = it.getFile();
+        _xifexpression = fileIndex.getModuleForFile(_file_2, true);
+      }
+      _xblockexpression = _xifexpression;
+    }
+    return _xblockexpression;
+  }
+  
+  protected Module findModule(final VirtualFile file, final ProjectFileIndex fileIndex) {
+    Module _xblockexpression = null;
+    {
+      boolean _equals = Objects.equal(file, null);
+      if (_equals) {
+        return null;
+      }
+      final Module module = fileIndex.getModuleForFile(file, true);
+      boolean _notEquals = (!Objects.equal(module, null));
+      if (_notEquals) {
+        return module;
+      }
+      VirtualFile _parent = file.getParent();
+      _xblockexpression = this.findModule(_parent, fileIndex);
+    }
+    return _xblockexpression;
   }
   
   private final static Logger LOG = Logger.getLogger(XtextAutoBuilder.class);

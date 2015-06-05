@@ -35,6 +35,7 @@ import org.eclipse.xtext.util.internal.Log
 import static org.eclipse.xtext.idea.build.BuildEvent.Type.*
 
 import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
+import com.intellij.openapi.module.Module
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -47,7 +48,9 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 
 	Project project
 	
-	@Inject Provider<IncrementalBuilder> builderProvider	
+	@Inject Provider<IncrementalBuilder> builderProvider
+	
+	@Inject Provider<BuildProgressReporter> buildProgressReporterProvider	
 	 
 	@Inject XtextLanguages xtextLanguages
 	
@@ -118,15 +121,15 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	}
 
 	public def void build(List<BuildEvent> allEvents) {
+		val buildProgressReporter = buildProgressReporterProvider.get 
+		buildProgressReporter.project = project
 		try {
 			val module2event = HashMultimap.create
 			val fileIndex = ProjectFileIndex.SERVICE.getInstance(project)
 			allEvents.forEach [
-				if(xtextLanguages.languageAccesses.get(file.extension) != null) {
-					val module = fileIndex.getModuleForFile(file)
-					if(module != null)
-						module2event.put(module, it)
-				}
+				val module = findModule(fileIndex)
+				if(module != null)
+					module2event.put(module, it)
 			]
 			for(module: module2event.keySet) {
 				val events = module2event.get(module)
@@ -141,7 +144,9 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 					// outputs = ??
 					failOnValidationError = false
 					previousState = indexState ?: new IndexState()
-					it.issueHandler = issueHandler
+
+					it.issueHandler = buildProgressReporter
+					issueCleaner = [ buildProgressReporter.markAsAffected(it) ]
 				]
 				val app = ApplicationManager.application
 				indexState = app.<IndexState>runReadAction [
@@ -153,13 +158,16 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 						handler.flushToDisk
 					]
 				], ModalityState.any)
+				
 			}
 		} catch(ProcessCanceledException exc) {
 			queue.addAll(allEvents)
-		}		
+		} finally {
+			buildProgressReporter.clearProgress
+		}
 	}
 	
-	protected def  getIndexState() {
+	protected def getIndexState() {
 		if (indexState == null) {
 			if (!isLoaded()) {
 				queueAllResources
@@ -172,8 +180,27 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	}
 	
 	public def IResourceDescriptions getResourceDescriptions() {
-		
 		getIndexState.resourceDescriptions
+	}
+
+	protected def findModule(BuildEvent it, ProjectFileIndex fileIndex) {
+		if (xtextLanguages.languageAccesses.get(file.extension) == null) {
+			return null
+		}
+		if (type == DELETED)
+			file.findModule(fileIndex)
+		else
+			fileIndex.getModuleForFile(file, true)
+	}
+	
+	protected def Module findModule(VirtualFile file, ProjectFileIndex fileIndex) {
+		if (file == null) {
+			return null
+		}
+		val module = fileIndex.getModuleForFile(file, true)
+		if (module != null)
+			return module
+		file.parent.findModule(fileIndex)
 	}
 	
 }

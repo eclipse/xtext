@@ -81,6 +81,8 @@ public class IncrementalBuilder {
       final Procedure1<URI> _function = new Procedure1<URI>() {
         @Override
         public void apply(final URI it) {
+          Procedure1<? super URI> _issueCleaner = InternalStatefulIncrementalBuilder.this.request.getIssueCleaner();
+          _issueCleaner.apply(it);
           Set<URI> _deleteSource = newSource2GeneratedMapping.deleteSource(it);
           final Procedure1<URI> _function = new Procedure1<URI>() {
             @Override
@@ -110,6 +112,9 @@ public class IncrementalBuilder {
       final Function1<Resource, Boolean> _function_1 = new Function1<Resource, Boolean>() {
         @Override
         public Boolean apply(final Resource resource) {
+          Procedure1<? super URI> _issueCleaner = InternalStatefulIncrementalBuilder.this.request.getIssueCleaner();
+          URI _uRI = resource.getURI();
+          _issueCleaner.apply(_uRI);
           resource.getContents();
           EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl);
           InternalStatefulIncrementalBuilder.this.validate(resource);

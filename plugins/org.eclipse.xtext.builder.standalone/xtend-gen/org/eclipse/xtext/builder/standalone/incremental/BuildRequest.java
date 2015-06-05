@@ -53,6 +53,12 @@ public class BuildRequest {
   
   private IIssueHandler issueHandler = new IIssueHandler.DefaultIssueHandler();
   
+  private Procedure1<? super URI> issueCleaner = new Procedure1<URI>() {
+    @Override
+    public void apply(final URI it) {
+    }
+  };
+  
   private Procedure2<? super URI, ? super URI> afterGenerateFile = new Procedure2<URI, URI>() {
     @Override
     public void apply(final URI $0, final URI $1) {
@@ -131,6 +137,15 @@ public class BuildRequest {
   
   public void setIssueHandler(final IIssueHandler issueHandler) {
     this.issueHandler = issueHandler;
+  }
+  
+  @Pure
+  public Procedure1<? super URI> getIssueCleaner() {
+    return this.issueCleaner;
+  }
+  
+  public void setIssueCleaner(final Procedure1<? super URI> issueCleaner) {
+    this.issueCleaner = issueCleaner;
   }
   
   @Pure
