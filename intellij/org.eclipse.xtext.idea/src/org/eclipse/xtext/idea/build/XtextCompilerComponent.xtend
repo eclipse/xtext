@@ -17,6 +17,11 @@ import com.intellij.openapi.vfs.VirtualFileAdapter
 import com.intellij.openapi.vfs.VirtualFileEvent
 import com.intellij.openapi.vfs.VirtualFileManager
 import com.intellij.openapi.vfs.VirtualFileMoveEvent
+import org.eclipse.xtext.resource.IResourceDescriptions
+import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.EClass
+import org.eclipse.xtext.naming.QualifiedName
+import org.eclipse.emf.ecore.EObject
 
 class XtextCompilerComponent extends AbstractProjectComponent {
 	XtextAutoBuilder autoBuilder
@@ -56,5 +61,10 @@ class XtextCompilerComponent extends AbstractProjectComponent {
 	override String getComponentName() {
 		return "Xtext Compiler Component"
 	}
+	
+	def IResourceDescriptions getResourceDescriptions() {
+		autoBuilder.getResourceDescriptions()
+	}
+	
 
 }

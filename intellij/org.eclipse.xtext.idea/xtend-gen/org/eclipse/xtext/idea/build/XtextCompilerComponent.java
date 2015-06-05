@@ -21,6 +21,7 @@ import com.intellij.openapi.vfs.VirtualFileEvent;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.openapi.vfs.VirtualFileMoveEvent;
 import org.eclipse.xtext.idea.build.XtextAutoBuilder;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 
 @SuppressWarnings("all")
 public class XtextCompilerComponent extends AbstractProjectComponent {
@@ -76,5 +77,9 @@ public class XtextCompilerComponent extends AbstractProjectComponent {
   @Override
   public String getComponentName() {
     return "Xtext Compiler Component";
+  }
+  
+  public IResourceDescriptions getResourceDescriptions() {
+    return this.autoBuilder.getResourceDescriptions();
   }
 }

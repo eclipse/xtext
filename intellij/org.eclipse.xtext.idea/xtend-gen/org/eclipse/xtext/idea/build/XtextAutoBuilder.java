@@ -34,10 +34,7 @@ import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.URIHandler;
 import org.eclipse.xtext.builder.standalone.IIssueHandler;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
@@ -48,6 +45,7 @@ import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider;
 import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
 import org.eclipse.xtext.idea.shared.IdeaSharedInjectorProvider;
 import org.eclipse.xtext.idea.shared.XtextLanguages;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -58,7 +56,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -217,7 +214,6 @@ public class XtextAutoBuilder {
         }
       };
       IterableExtensions.<BuildEvent>forEach(allEvents, _function);
-      final ArrayList<URI> refreshFiles = CollectionLiterals.<URI>newArrayList();
       Set<Module> _keySet = module2event.keySet();
       for (final Module module : _keySet) {
         {
@@ -326,20 +322,6 @@ public class XtextAutoBuilder {
               it.setPreviousState(_elvis);
               IIssueHandler _issueHandler = it.getIssueHandler();
               it.setIssueHandler(_issueHandler);
-              final Procedure2<URI, URI> _function_7 = new Procedure2<URI, URI>() {
-                @Override
-                public void apply(final URI $0, final URI $1) {
-                  refreshFiles.add($1);
-                }
-              };
-              it.setAfterGenerateFile(_function_7);
-              final Procedure1<URI> _function_8 = new Procedure1<URI>() {
-                @Override
-                public void apply(final URI it) {
-                  refreshFiles.add(it);
-                }
-              };
-              it.setAfterDeleteFile(_function_8);
             }
           };
           final BuildRequest request = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_1);
@@ -361,10 +343,7 @@ public class XtextAutoBuilder {
                 @Override
                 public void run() {
                   XtextResourceSet _resourceSet = request.getResourceSet();
-                  URIConverter _uRIConverter = _resourceSet.getURIConverter();
-                  EList<URIHandler> _uRIHandlers = _uRIConverter.getURIHandlers();
-                  URIHandler _head = IterableExtensions.<URIHandler>head(_uRIHandlers);
-                  final IdeaResourceSetProvider.VirtualFileBasedUriHandler handler = ((IdeaResourceSetProvider.VirtualFileBasedUriHandler) _head);
+                  final IdeaResourceSetProvider.VirtualFileBasedUriHandler handler = IdeaResourceSetProvider.VirtualFileBasedUriHandler.find(_resourceSet);
                   handler.flushToDisk();
                 }
               };
@@ -383,6 +362,20 @@ public class XtextAutoBuilder {
         throw Exceptions.sneakyThrow(_t);
       }
     }
+  }
+  
+  protected IndexState getIndexState() {
+    boolean _equals = Objects.equal(this.indexState, null);
+    if (_equals) {
+      this.checkIndexStateLoaded();
+      this.build();
+    }
+    return this.indexState;
+  }
+  
+  public IResourceDescriptions getResourceDescriptions() {
+    IndexState _indexState = this.getIndexState();
+    return _indexState.getResourceDescriptions();
   }
   
   private final static Logger LOG = Logger.getLogger(XtextAutoBuilder.class);

@@ -29,6 +29,7 @@ import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider
 import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider.VirtualFileBasedUriHandler
 import org.eclipse.xtext.idea.shared.IdeaSharedInjectorProvider
 import org.eclipse.xtext.idea.shared.XtextLanguages
+import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.util.internal.Log
 
 import static org.eclipse.xtext.idea.build.BuildEvent.Type.*
@@ -121,7 +122,6 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 						module2event.put(module, it)
 				}
 			]
-			val refreshFiles = newArrayList
 			for(module: module2event.keySet) {
 				val events = module2event.get(module)
 				val entries = OrderEnumerator.orderEntries(module)
@@ -135,11 +135,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 					// outputs = ??
 					failOnValidationError = false
 					previousState = indexState ?: new IndexState()
-				
 					it.issueHandler = issueHandler
-				
-					afterGenerateFile = [ refreshFiles += $1 ] 
-					afterDeleteFile = [ refreshFiles += it ]
 				]
 				val app = ApplicationManager.application
 				indexState = app.<IndexState>runReadAction [
@@ -147,7 +143,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 				]
 				app.invokeAndWait([
 					app.runWriteAction [
-						val handler = request.resourceSet.URIConverter.URIHandlers.head as VirtualFileBasedUriHandler
+						val handler = VirtualFileBasedUriHandler.find(request.resourceSet)
 						handler.flushToDisk
 					]
 				], ModalityState.any)
@@ -155,6 +151,18 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		} catch(ProcessCanceledException exc) {
 			queue.addAll(allEvents)
 		}		
+	}
+	
+	protected def  getIndexState() {
+		if (indexState == null) {
+			checkIndexStateLoaded
+			build
+		}
+		return indexState		
+	}
+	
+	public def IResourceDescriptions getResourceDescriptions() {
+		getIndexState.resourceDescriptions
 	}
 	
 }

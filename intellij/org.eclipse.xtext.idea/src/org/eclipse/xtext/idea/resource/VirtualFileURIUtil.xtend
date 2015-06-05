@@ -60,7 +60,6 @@ class VirtualFileURIUtil {
 			return parent.createChildDirectory(null, uri.lastSegment)
 		} else {
 			return parent.createChildData(null, uri.lastSegment)
-			
 		}
 	}
 		

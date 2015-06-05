@@ -25,6 +25,8 @@ import org.eclipse.xtext.util.internal.Log
 
 import static org.eclipse.xtext.idea.resource.IdeaResourceSetProvider.*
 import static org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
+import org.eclipse.emf.common.notify.Notifier
+import org.eclipse.xtext.EcoreUtil2
 
 @Singleton @Log
 class IdeaResourceSetProvider {
@@ -41,6 +43,10 @@ class IdeaResourceSetProvider {
 	}
 	
 	public static class VirtualFileBasedUriHandler implements URIHandler {
+		
+		public static def VirtualFileBasedUriHandler find(Notifier notifier) {
+			EcoreUtil2.getResourceSet(notifier).URIConverter.URIHandlers.filter(VirtualFileBasedUriHandler).head
+		} 
 		
 		@Accessors Map<URI, byte[]> writtenContents = newHashMap()
 		@Accessors Set<URI> deleted = newHashSet()
@@ -72,7 +78,7 @@ class IdeaResourceSetProvider {
 			}
 		}
 		
-		override contentDescription(URI uri, Map<?, ?> options) throws IOException {
+		override contentDescription(URI uri, Map<?,?> options) throws IOException {
 			emptyMap
 		}
 		

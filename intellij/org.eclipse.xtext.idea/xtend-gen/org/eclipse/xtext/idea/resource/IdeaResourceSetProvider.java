@@ -8,6 +8,7 @@
 package org.eclipse.xtext.idea.resource;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -26,11 +27,14 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.URIHandler;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.internal.Log;
@@ -44,6 +48,14 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @SuppressWarnings("all")
 public class IdeaResourceSetProvider {
   public static class VirtualFileBasedUriHandler implements URIHandler {
+    public static IdeaResourceSetProvider.VirtualFileBasedUriHandler find(final Notifier notifier) {
+      ResourceSet _resourceSet = EcoreUtil2.getResourceSet(notifier);
+      URIConverter _uRIConverter = _resourceSet.getURIConverter();
+      EList<URIHandler> _uRIHandlers = _uRIConverter.getURIHandlers();
+      Iterable<IdeaResourceSetProvider.VirtualFileBasedUriHandler> _filter = Iterables.<IdeaResourceSetProvider.VirtualFileBasedUriHandler>filter(_uRIHandlers, IdeaResourceSetProvider.VirtualFileBasedUriHandler.class);
+      return IterableExtensions.<IdeaResourceSetProvider.VirtualFileBasedUriHandler>head(_filter);
+    }
+    
     @Accessors
     private Map<URI, byte[]> writtenContents = CollectionLiterals.<URI, byte[]>newHashMap();
     

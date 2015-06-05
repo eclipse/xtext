@@ -365,19 +365,13 @@ public class Indexer {
   }
   
   private Iterable<URI> primarySources(final URI uri, final Source2GeneratedMapping mappings) {
-    Iterable<URI> _xblockexpression = null;
-    {
-      final Iterable<URI> sources = mappings.getSource(uri);
-      Iterable<URI> _xifexpression = null;
-      boolean _isEmpty = IterableExtensions.isEmpty(sources);
-      if (_isEmpty) {
-        _xifexpression = Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri));
-      } else {
-        _xifexpression = sources;
-      }
-      _xblockexpression = _xifexpression;
+    final Iterable<URI> sources = mappings.getSource(uri);
+    boolean _isEmpty = IterableExtensions.isEmpty(sources);
+    if (_isEmpty) {
+      return Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri));
+    } else {
+      return sources;
     }
-    return _xblockexpression;
   }
   
   public ArrayList<IResourceDescription.Delta> removeDeletedFilesFromIndex(final BuildRequest request, final ResourceDescriptionsData oldIndex, final ResourceDescriptionsData newIndex) {
@@ -397,10 +391,10 @@ public class Indexer {
           final IResourceDescription oldDescription = _resourceDescription;
           boolean _notEquals_1 = (!Objects.equal(oldDescription, null));
           if (_notEquals_1) {
-            DefaultResourceDescriptionDelta _defaultResourceDescriptionDelta = new DefaultResourceDescriptionDelta(oldDescription, null);
-            deltas.add(_defaultResourceDescriptionDelta);
+            final DefaultResourceDescriptionDelta delta = new DefaultResourceDescriptionDelta(oldDescription, null);
+            deltas.add(delta);
+            newIndex.register(delta);
           }
-          newIndex.removeDescription(it);
         }
       }
     };
@@ -455,12 +449,12 @@ public class Indexer {
       _xifexpression = newDescription;
     }
     final IResourceDescription toBeAdded = _xifexpression;
-    newIndex.addDescription(uri, toBeAdded);
     IResourceDescription _resourceDescription = null;
     if (oldIndex!=null) {
       _resourceDescription=oldIndex.getResourceDescription(uri);
     }
     final DefaultResourceDescriptionDelta delta = new DefaultResourceDescriptionDelta(_resourceDescription, toBeAdded);
+    newIndex.register(delta);
     return delta;
   }
   

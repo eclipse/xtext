@@ -143,9 +143,9 @@ class Indexer {
 	private def primarySources(URI uri, Source2GeneratedMapping mappings) {
 		val sources = mappings.getSource(uri)
 		if(sources.empty) 
-			#[uri] 
+			return #[uri] 
 		else 
-			sources
+			return sources
 	}
 	
 	def removeDeletedFilesFromIndex(BuildRequest request, ResourceDescriptionsData oldIndex, ResourceDescriptionsData newIndex) {
@@ -154,9 +154,11 @@ class Indexer {
 		request.deletedFiles.forEach [
 			if(fileExtension != 'java') {
 				val IResourceDescription oldDescription = oldIndex?.getResourceDescription(it)
-				if (oldDescription != null)
-					deltas += new DefaultResourceDescriptionDelta(oldDescription, null)
-				newIndex.removeDescription(it)
+				if (oldDescription != null) {
+					val delta = new DefaultResourceDescriptionDelta(oldDescription, null)
+					deltas += delta
+					newIndex.register(delta)
+				}
 			}
 		]
 		return deltas
@@ -187,8 +189,8 @@ class Indexer {
 				new ResolvedResourceDescription(newDescription)
 			else 
 				newDescription
-		newIndex.addDescription(uri, toBeAdded)
 		val delta = new DefaultResourceDescriptionDelta(oldIndex?.getResourceDescription(uri), toBeAdded)
+		newIndex.register(delta)
 		return delta
 	}
 
