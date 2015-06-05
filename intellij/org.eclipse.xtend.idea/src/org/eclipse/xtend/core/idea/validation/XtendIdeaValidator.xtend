@@ -9,6 +9,8 @@ package org.eclipse.xtend.core.idea.validation
 
 import com.google.inject.Inject
 import com.intellij.psi.JavaDirectoryService
+import com.intellij.psi.JavaPsiFacade
+import com.intellij.psi.PsiManager
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.core.macro.XAnnotationExtensions
 import org.eclipse.xtend.core.validation.IssueCodes
@@ -16,7 +18,8 @@ import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendPackage
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.TypesPackage
-import org.eclipse.xtext.psi.IPsiModelAssociations
+import org.eclipse.xtext.idea.resource.ModuleProvider
+import org.eclipse.xtext.idea.resource.VirtualFileURIUtil
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator
 import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.validation.ValidationMessageAcceptor
@@ -27,16 +30,12 @@ import org.eclipse.xtext.xtype.XtypePackage
 
 import static org.eclipse.xtend.core.validation.IssueCodes.ACTIVE_ANNOTAION_IN_SAME_CONTAINER
 
-import static extension org.eclipse.xtext.idea.extensions.IdeaProjectExtensions.*
 import static extension org.eclipse.xtext.util.Strings.*
 
 /**
  * @author kosyakov - Initial contribution and API
  */
 class XtendIdeaValidator extends AbstractDeclarativeValidator {
-
-	@Inject
-	extension IPsiModelAssociations
 
 	@Inject
 	extension XAnnotationExtensions
@@ -67,17 +66,13 @@ class XtendIdeaValidator extends AbstractDeclarativeValidator {
 	}
 	
 	protected def isSameModule(XAnnotation annotation, JvmType annotationType) {
-		val annotationModule = annotation.module
-		annotationModule != null && annotationModule == annotationType.module
+		val module = annotation.module
+		val psiFacade = JavaPsiFacade.getInstance(module.project)
+		return psiFacade.findClass(annotationType.qualifiedName, module.moduleScope) != null
 	}
 	
 	protected def getModule(EObject object) {
-		val psiElement = object.psiElement
-		if (psiElement == null) {
-			return null
-		}
-		val extension projectFileIndex = psiElement.project.projectFileIndex
-		psiElement.containingFile.virtualFile.getModuleForFile(false)
+		ModuleProvider.findModule(object.eResource.resourceSet)
 	}
 
 	@Check
@@ -102,13 +97,11 @@ class XtendIdeaValidator extends AbstractDeclarativeValidator {
 		)
 	}
 
-	protected def getExpectedPackageName(XtendFile xtendFile) {
-		val psiElement = xtendFile.psiElement
-		if (psiElement == null) {
-			return null
-		}
-		val extension javaDirectoryService = JavaDirectoryService.instance
-		psiElement.containingFile.originalFile.containingDirectory.package.qualifiedName
+	protected def String getExpectedPackageName(XtendFile xtendFile) {
+		val file = VirtualFileURIUtil.getVirtualFile(xtendFile.eResource.URI)
+		val psiDirectory = PsiManager.getInstance(xtendFile.module.project).findDirectory(file.parent)
+		val javaDirectoryService = JavaDirectoryService.instance
+		return javaDirectoryService.getPackage(psiDirectory).qualifiedName
 	}
 
 }
