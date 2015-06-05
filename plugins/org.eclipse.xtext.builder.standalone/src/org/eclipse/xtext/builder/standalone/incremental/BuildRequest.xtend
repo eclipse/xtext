@@ -37,6 +37,8 @@ class BuildRequest {
 	List<URI> deletedFiles = newArrayList
 	
 	IIssueHandler issueHandler = new IIssueHandler.DefaultIssueHandler()
+	(URI)=>void issueCleaner = []
+	
 	(URI, URI)=>void afterGenerateFile = []
 	(URI)=>void afterDeleteFile = []
 	

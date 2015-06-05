@@ -39,6 +39,7 @@ import org.eclipse.xtext.validation.CheckMode
 		def IndexState launch() {
 			val newSource2GeneratedMapping = request.previousState.fileMappings.copy
 			request.deletedFiles.forEach [
+				request.issueCleaner.apply(it)
 				newSource2GeneratedMapping.deleteSource(it).forEach [
 					if (LOG.isInfoEnabled)
 						LOG.info("Deleting " + it)
@@ -51,6 +52,7 @@ import org.eclipse.xtext.validation.CheckMode
 			result.affectedResources
 				.executeClustered [
 					Resource resource |
+					request.issueCleaner.apply(resource.URI)
 					resource.contents // fully initialize
 					EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl)
 					resource.validate
