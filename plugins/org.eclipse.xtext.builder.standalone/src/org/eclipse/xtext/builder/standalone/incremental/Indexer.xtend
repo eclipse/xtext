@@ -14,7 +14,6 @@ import java.util.Set
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.lib.annotations.Data
-import org.eclipse.xtext.mwe.ResourceDescriptionsProvider
 import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.resource.CompilerPhases
 import org.eclipse.xtext.resource.IResourceDescription
@@ -36,8 +35,6 @@ class Indexer {
 
 	@Inject CompilerPhases compilerPhases
 
-	@Inject ResourceDescriptionsProvider resourceDescriptionsProvider
-	
 	@Inject IClassFileBasedDependencyFinder javaDependencyFinder
 
 	@Inject IQualifiedNameConverter qualifiedNameConverter
@@ -54,7 +51,7 @@ class Indexer {
 		val previousFileMappings = request.previousState.fileMappings
 		val previousIndex = request.previousState.resourceDescriptions
 		val newIndex = previousIndex.copy
-		val resourceDescriptions = installIndex(resourceSet, newIndex)
+		installIndex(resourceSet, newIndex)
 
 
 		val affectionCandidates = newHashSet
@@ -131,7 +128,7 @@ class Indexer {
 						return false
 					val manager = languages.get(fileExtension).resourceDescriptionManager
 					val resourceDescription = previousIndex.getResourceDescription(it)
-					resourceDescription.isAffected(manager, currentDeltas, allDeltas, resourceDescriptions)
+					resourceDescription.isAffected(manager, currentDeltas, allDeltas, newIndex)
 				])
 			currentDeltas.clear
 			if(!toBeIndexed.empty) 
@@ -194,9 +191,8 @@ class Indexer {
 		return delta
 	}
 
-	def protected installIndex(XtextResourceSet resourceSet, ResourceDescriptionsData index) {
+	def protected void installIndex(XtextResourceSet resourceSet, ResourceDescriptionsData index) {
 		ResourceDescriptionsData.ResourceSetAdapter.installResourceDescriptionsData(resourceSet, index)
-		return resourceDescriptionsProvider.get(resourceSet)
 	}
 	
 	def protected boolean isAffected(IResourceDescription affectionCandidate, IResourceDescription.Manager manager,
