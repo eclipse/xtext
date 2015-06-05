@@ -22,8 +22,8 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
- * computes the fully qualified name of an EObject by first invoking a method <br/>
- * <code>QulifiedName qualifiedName(MyType ele)</code><br/>
+ * Computes the fully qualified name of an EObject by first invoking a method <br/>
+ * <code>QualifiedName qualifiedName(MyType ele)</code><br/>
  * reflectively.
  * 
  * And if no such method is found looks up a property 'name' and invokes the value and appends it to the
