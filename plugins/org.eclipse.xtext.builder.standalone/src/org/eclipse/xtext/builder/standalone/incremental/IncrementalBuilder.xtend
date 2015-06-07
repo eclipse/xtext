@@ -39,7 +39,6 @@ import org.eclipse.xtext.validation.CheckMode
 		def IndexState launch() {
 			val newSource2GeneratedMapping = request.previousState.fileMappings.copy
 			request.deletedFiles.forEach [
-				request.issueCleaner.apply(it)
 				newSource2GeneratedMapping.deleteSource(it).forEach [
 					if (LOG.isInfoEnabled)
 						LOG.info("Deleting " + it)
@@ -52,11 +51,11 @@ import org.eclipse.xtext.validation.CheckMode
 			result.affectedResources
 				.executeClustered [
 					Resource resource |
-					request.issueCleaner.apply(resource.URI)
 					resource.contents // fully initialize
 					EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl)
-					resource.validate
-					resource.generate(request, newSource2GeneratedMapping)
+					if (resource.validate) {
+						resource.generate(request, newSource2GeneratedMapping)
+					}
 					return true
 				]
 			return new IndexState(result.newIndex, newSource2GeneratedMapping)
@@ -66,7 +65,7 @@ import org.eclipse.xtext.validation.CheckMode
 			LOG.info("Starting validation for input: '" + resource.URI.lastSegment + "'");
 			val resourceValidator = resource.URI.languageAccess.getResourceValidator();
 			val validationResult = resourceValidator.validate(resource, CheckMode.ALL, null);
-			return request.issueHandler.handleIssue(validationResult)
+			return request.afterValidate.afterValidate(resource.URI, validationResult)
 		}
 	
 		protected def void generate(Resource resource, BuildRequest request, Source2GeneratedMapping newMappings) {
