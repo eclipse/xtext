@@ -145,8 +145,10 @@ import com.intellij.openapi.module.Module
 					failOnValidationError = false
 					previousState = indexState ?: new IndexState()
 
-					it.issueHandler = buildProgressReporter
-					issueCleaner = [ buildProgressReporter.markAsAffected(it) ]
+					afterValidate = buildProgressReporter
+					afterDeleteFile = [
+						buildProgressReporter.markAsAffected(it)
+					]
 				]
 				val app = ApplicationManager.application
 				indexState = app.<IndexState>runReadAction [

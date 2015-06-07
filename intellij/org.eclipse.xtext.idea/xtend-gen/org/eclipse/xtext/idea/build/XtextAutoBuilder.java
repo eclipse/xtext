@@ -325,14 +325,14 @@ public class XtextAutoBuilder {
                 _elvis = _indexState;
               }
               it.setPreviousState(_elvis);
-              it.setIssueHandler(buildProgressReporter);
+              it.setAfterValidate(buildProgressReporter);
               final Procedure1<URI> _function_7 = new Procedure1<URI>() {
                 @Override
                 public void apply(final URI it) {
                   buildProgressReporter.markAsAffected(it);
                 }
               };
-              it.setIssueCleaner(_function_7);
+              it.setAfterDeleteFile(_function_7);
             }
           };
           final BuildRequest request = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_1);

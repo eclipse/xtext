@@ -34,38 +34,34 @@ public class IdeaProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
   @Override
   public Object getProcessorInstance(final JvmType type) {
     try {
-      Object _xblockexpression = null;
-      {
-        Resource _eResource = type.eResource();
-        ResourceSet _resourceSet = _eResource.getResourceSet();
-        final XtextResourceSet resourceSet = ((XtextResourceSet) _resourceSet);
-        final Module module = ModuleProvider.findModule(resourceSet);
-        OrderEnumerator _orderEntries = OrderEnumerator.orderEntries(module);
-        OrderEnumerator _recursively = _orderEntries.recursively();
-        OrderRootsEnumerator _classes = _recursively.classes();
-        PathsList _pathsList = _classes.getPathsList();
-        final List<VirtualFile> roots = _pathsList.getVirtualFiles();
-        final Function1<VirtualFile, URL> _function = new Function1<VirtualFile, URL>() {
-          @Override
-          public URL apply(final VirtualFile it) {
-            try {
-              String _path = it.getPath();
-              File _file = new File(_path);
-              URI _uRI = _file.toURI();
-              return _uRI.toURL();
-            } catch (Throwable _e) {
-              throw Exceptions.sneakyThrow(_e);
-            }
+      Resource _eResource = type.eResource();
+      ResourceSet _resourceSet = _eResource.getResourceSet();
+      final XtextResourceSet resourceSet = ((XtextResourceSet) _resourceSet);
+      final Module module = ModuleProvider.findModule(resourceSet);
+      OrderEnumerator _orderEntries = OrderEnumerator.orderEntries(module);
+      OrderEnumerator _recursively = _orderEntries.recursively();
+      OrderRootsEnumerator _classes = _recursively.classes();
+      PathsList _pathsList = _classes.getPathsList();
+      final List<VirtualFile> roots = _pathsList.getVirtualFiles();
+      final Function1<VirtualFile, URL> _function = new Function1<VirtualFile, URL>() {
+        @Override
+        public URL apply(final VirtualFile it) {
+          try {
+            String _path = it.getPath();
+            File _file = new File(_path);
+            URI _uRI = _file.toURI();
+            return _uRI.toURL();
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
           }
-        };
-        final List<URL> urls = ListExtensions.<VirtualFile, URL>map(roots, _function);
-        ClassLoader _classLoader = TransformationContext.class.getClassLoader();
-        final URLClassLoader classLoader = new URLClassLoader(((URL[])Conversions.unwrapArray(urls, URL.class)), _classLoader);
-        String _identifier = type.getIdentifier();
-        Class<?> _loadClass = classLoader.loadClass(_identifier);
-        _xblockexpression = _loadClass.newInstance();
-      }
-      return _xblockexpression;
+        }
+      };
+      final List<URL> urls = ListExtensions.<VirtualFile, URL>map(roots, _function);
+      ClassLoader _classLoader = TransformationContext.class.getClassLoader();
+      final URLClassLoader classLoader = new URLClassLoader(((URL[])Conversions.unwrapArray(urls, URL.class)), _classLoader);
+      String _identifier = type.getIdentifier();
+      Class<?> _loadClass = classLoader.loadClass(_identifier);
+      return _loadClass.newInstance();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

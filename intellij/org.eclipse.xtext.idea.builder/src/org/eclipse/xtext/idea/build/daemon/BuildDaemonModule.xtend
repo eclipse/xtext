@@ -16,10 +16,6 @@ import org.eclipse.xtext.builder.standalone.incremental.IClassFileBasedDependenc
  */
 class BuildDaemonModule extends StandaloneBuilderModule {
 	
-	override bindIIssueHandler() {
-		IdeaIssueHandler
-	}
-	
 	override protected configure() {
 		super.configure()
 		bind(ResourceDescriptionsProvider).to(IdeaBuilderResourceDescriptionsProvider)

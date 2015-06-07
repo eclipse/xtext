@@ -22,7 +22,6 @@ import org.apache.log4j.FileAppender
 import org.apache.log4j.Level
 import org.apache.log4j.Logger
 import org.apache.log4j.PatternLayout
-import org.eclipse.xtext.builder.standalone.IIssueHandler
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder
 import org.eclipse.xtext.builder.standalone.incremental.IndexState
@@ -153,7 +152,7 @@ class XtextBuildDaemon {
 
 		@Inject Provider<XtextBuildResultCollector> xtextBuildResultCollectorProvider
 		
-		@Inject IIssueHandler issueHandler
+		@Inject IdeaIssueHandler issueHandler
 		
 		IndexState indexState
 
@@ -204,7 +203,7 @@ class XtextBuildDaemon {
 				failOnValidationError = false
 				previousState = indexState
 				
-				it.issueHandler = issueHandler
+				it.afterValidate = issueHandler
 				
 				afterGenerateFile = [ source, target |
 					xtextBuildResultCollector.generatedFile2sourceURI.put(target,source)

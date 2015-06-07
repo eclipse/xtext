@@ -23,7 +23,6 @@ import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.builder.standalone.ClusteringConfig;
-import org.eclipse.xtext.builder.standalone.IIssueHandler;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.incremental.BuildContext;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
@@ -81,8 +80,6 @@ public class IncrementalBuilder {
       final Procedure1<URI> _function = new Procedure1<URI>() {
         @Override
         public void apply(final URI it) {
-          Procedure1<? super URI> _issueCleaner = InternalStatefulIncrementalBuilder.this.request.getIssueCleaner();
-          _issueCleaner.apply(it);
           Set<URI> _deleteSource = newSource2GeneratedMapping.deleteSource(it);
           final Procedure1<URI> _function = new Procedure1<URI>() {
             @Override
@@ -112,13 +109,12 @@ public class IncrementalBuilder {
       final Function1<Resource, Boolean> _function_1 = new Function1<Resource, Boolean>() {
         @Override
         public Boolean apply(final Resource resource) {
-          Procedure1<? super URI> _issueCleaner = InternalStatefulIncrementalBuilder.this.request.getIssueCleaner();
-          URI _uRI = resource.getURI();
-          _issueCleaner.apply(_uRI);
           resource.getContents();
           EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl);
-          InternalStatefulIncrementalBuilder.this.validate(resource);
-          InternalStatefulIncrementalBuilder.this.generate(resource, InternalStatefulIncrementalBuilder.this.request, newSource2GeneratedMapping);
+          boolean _validate = InternalStatefulIncrementalBuilder.this.validate(resource);
+          if (_validate) {
+            InternalStatefulIncrementalBuilder.this.generate(resource, InternalStatefulIncrementalBuilder.this.request, newSource2GeneratedMapping);
+          }
           return Boolean.valueOf(true);
         }
       };
@@ -137,8 +133,9 @@ public class IncrementalBuilder {
       LanguageAccess _languageAccess = this.context.getLanguageAccess(_uRI_1);
       final IResourceValidator resourceValidator = _languageAccess.getResourceValidator();
       final List<Issue> validationResult = resourceValidator.validate(resource, CheckMode.ALL, null);
-      IIssueHandler _issueHandler = this.request.getIssueHandler();
-      return _issueHandler.handleIssue(validationResult);
+      BuildRequest.IPostValidationCallback _afterValidate = this.request.getAfterValidate();
+      URI _uRI_2 = resource.getURI();
+      return _afterValidate.afterValidate(_uRI_2, validationResult);
     }
     
     protected void generate(final Resource resource, final BuildRequest request, final Source2GeneratedMapping newMappings) {

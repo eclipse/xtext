@@ -34,7 +34,6 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.builder.standalone.IIssueHandler;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
@@ -43,6 +42,7 @@ import org.eclipse.xtext.builder.standalone.incremental.IndexState;
 import org.eclipse.xtext.builder.standalone.incremental.ResourceURICollector;
 import org.eclipse.xtext.idea.build.daemon.BuildDaemonModule;
 import org.eclipse.xtext.idea.build.daemon.IBuildSessionSingletons;
+import org.eclipse.xtext.idea.build.daemon.IdeaIssueHandler;
 import org.eclipse.xtext.idea.build.daemon.XtextBuildResultCollector;
 import org.eclipse.xtext.idea.build.daemon.XtextLanguages;
 import org.eclipse.xtext.idea.build.net.ObjectChannel;
@@ -167,7 +167,7 @@ public class XtextBuildDaemon {
     private Provider<XtextBuildResultCollector> xtextBuildResultCollectorProvider;
     
     @Inject
-    private IIssueHandler issueHandler;
+    private IdeaIssueHandler issueHandler;
     
     private IndexState indexState;
     
@@ -287,7 +287,7 @@ public class XtextBuildDaemon {
           }
           it.setFailOnValidationError(false);
           it.setPreviousState(Worker.this.indexState);
-          it.setIssueHandler(Worker.this.issueHandler);
+          it.setAfterValidate(Worker.this.issueHandler);
           final Procedure2<URI, URI> _function_5 = new Procedure2<URI, URI>() {
             @Override
             public void apply(final URI source, final URI target) {

@@ -19,8 +19,7 @@ import com.intellij.openapi.util.Key
 import java.util.UUID
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.builder.standalone.IIssueHandler
-import org.eclipse.xtext.diagnostics.Severity
+import org.eclipse.xtext.builder.standalone.incremental.BuildRequest
 import org.eclipse.xtext.validation.Issue
 
 import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
@@ -28,7 +27,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 /**
  * @author kosyakov - Initial contribution and API
  */
-class BuildProgressReporter implements IIssueHandler {
+class BuildProgressReporter implements BuildRequest.IPostValidationCallback {
 
 	val sessionId = UUID.randomUUID
 
@@ -52,15 +51,16 @@ class BuildProgressReporter implements IIssueHandler {
 		affectedScope.affectedFiles += uri
 	}
 
-	override handleIssue(Iterable<Issue> issues) {
-		var errorFree = true
+	override afterValidate(URI validated, Iterable<Issue> issues) {
+		markAsAffected(validated)
+//		var errorFree = true
 		for (issue : issues) {
-			if (issue.severity == Severity.ERROR) {
-				errorFree = false
-			}
+//			if (issue.severity == Severity.ERROR) {
+//				errorFree = false
+//			}
 			reportIssue(issue)
 		}
-		errorFree
+		return true
 	}
 
 	protected def reportIssue(Issue issue) {
@@ -93,7 +93,7 @@ class BuildProgressReporter implements IIssueHandler {
 				CompilerMessageCategory.INFORMATION
 		}
 	}
-
+	
 }
 
 class AffectedScope implements CompileScope {

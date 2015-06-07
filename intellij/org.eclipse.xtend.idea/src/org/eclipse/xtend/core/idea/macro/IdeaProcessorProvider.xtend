@@ -24,6 +24,6 @@ class IdeaProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 		val roots = OrderEnumerator.orderEntries(module).recursively.classes.pathsList.virtualFiles
 		val urls = roots.map[new File(path).toURI.toURL]
 		val classLoader = new URLClassLoader(urls, TransformationContext.classLoader)
-		classLoader.loadClass(type.identifier).newInstance
+		return classLoader.loadClass(type.identifier).newInstance
 	}
 }
