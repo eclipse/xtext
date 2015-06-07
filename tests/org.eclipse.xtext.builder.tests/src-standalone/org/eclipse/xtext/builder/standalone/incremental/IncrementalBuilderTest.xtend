@@ -180,7 +180,7 @@ class IncrementalBuilderTest {
 			dirtyFiles = #[]
 			deletedFiles = #[]
 			
-			issueHandler = [ issues |
+			afterValidate = [ uri, issues |
 				this.issues.addAll(issues)
 				return issues.empty
 			]
