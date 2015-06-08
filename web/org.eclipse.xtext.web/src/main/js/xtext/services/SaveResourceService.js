@@ -45,9 +45,14 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 							self._updateService.addCompletionCallback(function() {
 								self.saveResource(editorContext, params);
 							});
-							params.sendFullText = true;
+							var newParams = {};
+							for (var p in params) {
+								if (params.hasOwnProperty(p))
+									newParams[p] = params[p];
+							}
+							newParams.sendFullText = true;
 							delete editorContext.getServerState().stateId;
-							self._updateService.update(editorContext, params);
+							self._updateService.update(editorContext, newParams);
 						} else {
 							self.saveResource(editorContext, params);
 						}

@@ -50,8 +50,7 @@
  * fullSelection = true {Boolean}
  *     Whether or not the view is in full selection mode.
  * loadFromServer = true {Boolean}
- *     Whether to load the editor content from the server. If enabled, the client will try to
- *     send only deltas instead of the full text whenever possible.
+ *     Whether to load the editor content from the server.
  * model {TextModel}
  *     The base text model.
  * parent {String | DOMElement}
@@ -268,8 +267,8 @@ define([
 			options.xtextLang = options.lang
 		if (!options.xtextLang && options.resourceId)
 			options.xtextLang = options.resourceId.split('.').pop();
-		var doc = options.document || document;
 		if (options.dirtyElement) {
+			var doc = options.document || document;
 			var dirtyElement;
 			if (typeof(options.dirtyElement) === "string")
 				dirtyElement = jQuery("#" + options.dirtyElement, doc);
@@ -309,12 +308,12 @@ define([
 			if (options.loadFromServer === undefined || options.loadFromServer) {
 				options.loadFromServer = true;
 				loadResourceService = new LoadResourceService(serverUrl, resourceId);
-				loadResourceService.loadResource(editorContext, _copy(options));
+				loadResourceService.loadResource(editorContext, options);
 				saveResourceService = new SaveResourceService(serverUrl, resourceId);
 				if (options.enableSaveAction) {
 					textView.setKeyBinding(new mKeyBinding.KeyStroke("s", true), "saveXtextDocument");
 					textView.setAction("saveXtextDocument", function() {
-						saveResourceService.saveResource(editorContext, _copy(options));
+						saveResourceService.saveResource(editorContext, options);
 						return true;
 					}, {name: "Save"});
 				}
@@ -354,7 +353,7 @@ define([
 		function refreshDocument() {
 			editorContext.clearClientServiceState();
 			if (validationService)
-				validationService.computeProblems(editorContext, _copy(options));
+				validationService.computeProblems(editorContext, options);
 		}
 		var updateService = undefined;
 		if (!options.sendFullText) {
@@ -371,7 +370,7 @@ define([
 				if (options.sendFullText)
 					refreshDocument();
 				else
-					updateService.update(editorContext, _copy(options));
+					updateService.update(editorContext, options);
 			}, 500);
 		};
 		if (!options.resourceId || !options.loadFromServer) {

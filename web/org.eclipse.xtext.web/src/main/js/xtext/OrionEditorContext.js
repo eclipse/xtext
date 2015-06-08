@@ -18,7 +18,7 @@ define(function() {
 	OrionEditorContext.prototype = {
 		
 		getEditor : function() {
-			return this._editor
+			return this._editor;
 		},
 		
 		getServerState : function() {
@@ -70,6 +70,10 @@ define(function() {
 			} else {
 				this._editor.setDirty(true);
 			}
+		},
+		
+		clearUndoStack : function() {
+			this._editor.getUndoStack().reset();
 		},
 		
 		setCaretOffset : function(offset, show) {

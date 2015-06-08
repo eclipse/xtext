@@ -14,12 +14,14 @@ define(["ace/range"], function(mRange) {
 		this._serverStateListeners = [];
 		this._clientServiceState = {};
 		this._problemMarkerIds = [];
+		this._clean = true;
+		this._dirtyStateListeners = [];
 	};
 
 	AceEditorContext.prototype = {
 		
 		getEditor : function() {
-			return this._editor
+			return this._editor;
 		},
 		
 		getServerState : function() {
@@ -45,39 +47,73 @@ define(["ace/range"], function(mRange) {
 		},
 		
 		getCaretOffset : function() {
-			throw "getCaretOffset not supported";
+			var pos = this._editor.getCursorPosition();
+			return this._editor.getSession().getDocument().positionToIndex(pos);
 		},
 		
 		getLineStart : function(lineNumber) {
-			throw "getLineStart not supported";
+			var pos = this._editor.getCursorPosition();
+			return pos.row;
 		},
 		
 		getSelection : function() {
-			throw "getSelection not supported";
+			var range = editor.getSelectionRange();
+			var document = this._editor.getSession().getDocument();
+        	return {
+        		start: document.positionToIndex(range.start),
+        		end: document.positionToIndex(range.end)
+        	};
 		},
 		
 		getText : function(start, end) {
-			return this._editor.getSession().getValue();
+			var session = this._editor.getSession();
+			if (start && end) {
+				var document = session.getDocument();
+				var startPos = document.indexToPosition(start);
+				var endPos = document.indexToPosition(end);
+				return session.getTextRange(new mRange.Range(startPos.row, startPos.column, endPos.row, endPos.column));
+			} else {
+				return session.getValue();
+			}
 		},
 		
 		isDirty : function() {
-			throw "isDirty not supported";
+			return !this._clean;
 		},
 		
 		markClean : function(clean) {
-			throw "markClean not supported";
+			if (clean != this._clean) {
+				for (i in this._dirtyStateListeners) {
+					this._dirtyStateListeners[i](clean);
+				}
+			}
+			this._clean = clean;
 		},
 		
-		setCaretOffset : function(offset, show) {
-			throw "setCaretOffset not supported";
+		addDirtyStateListener : function(listener) {
+			this._dirtyStateListeners.push(listener);
+		},
+		
+		clearUndoStack : function() {
+			this._editor.getSession().getUndoManager().reset();
+		},
+		
+		setCaretOffset : function(offset) {
+			var pos = this._editor.getSession().getDocument().indexToPosition(offset);
+			this._editor.moveCursorTo(pos.row, pos.column);
 		},
 		
 		setSelection : function(selection) {
-			throw "setSelection not supported";
+			if (this._editor.selection) {
+				var document = this._editor.getSession().getDocument();
+				var startPos = document.indexToPosition(selection.start);
+				var endPos = document.indexToPosition(selection.end);
+				this._editor.selection.setSelectionRange(new mRange.Range(startPos.row, startPos.column, endPos.row, endPos.column));
+			}
 		},
 		
-		setText : function(text, start, end) {
-			throw "setText not supported";
+		setText : function(text) {
+			this._editor.getSession().setValue(text);
 		},
 		
 		showMarkers : function(entries) {

@@ -12,12 +12,26 @@
  * option name with camelCase converted to hyphen-separated.
  * The following options are available:
  *
+ * dirtyElement {String | DOMElement}
+ *     An element into which the dirty status class is written when the editor is marked dirty;
+ *     it can be either a DOM element or an ID for a DOM element.
+ * dirtyStatusClass = "dirty" {String}
+ *     A CSS class name written into the dirtyElement when the editor is marked dirty.
  * enableContentAssistService = true {Boolean}
  *     Whether content assist should be enabled.
+ * enableSaveAction = false {Boolean}
+ *     Whether the save action should be bound to the standard keystroke ctrl+s / cmd+s.
  * enableValidationService = true {Boolean}
  *     Whether validation should be enabled.
+ * loadFromServer = true {Boolean}
+ *     Whether to load the editor content from the server.
  * parent {String | DOMElement}
  *     The parent element for the view; it can be either a DOM element or an ID for a DOM element.
+ * sendFullText = false {Boolean}
+ *     Whether the full text shall be sent to the server with each request; use this if you want
+ *     the server to run in stateless mode. If the option is inactive, the server state is updated regularly.
+ * showErrorDialogs = false {Boolean}
+ *     Whether errors should be displayed in popup dialogs.
  * theme {String}
  *     The path name of the Ace theme for the editor.
  * xtextLang {String}
@@ -27,9 +41,14 @@ define([
     "jquery",
     "ace/ext/language_tools",
 	"xtext/AceEditorContext",
+	"xtext/services/LoadResourceService",
+	"xtext/services/RevertResourceService",
+	"xtext/services/SaveResourceService",
+	"xtext/services/UpdateService",
 	"xtext/services/ContentAssistService",
 	"xtext/services/ValidationService"
-], function(jQuery, languageTools, EditorContext, ContentAssistService, ValidationService) {
+], function(jQuery, languageTools, EditorContext, LoadResourceService, RevertResourceService,
+		SaveResourceService, UpdateService, ContentAssistService, ValidationService) {
 	
 	/**
 	 * Translate an HTML attribute name to a JS option name.
@@ -138,19 +157,56 @@ define([
 			options.xtextLang = options.resourceId.split('.').pop();
 		if (options.theme)
 			editor.setTheme(options.theme)
-	
+		
 		var editorContext = new EditorContext(editor);
 		editor.getEditorContext = function() {
 			return editorContext;
 		};
+		if (options.dirtyElement) {
+			var doc = options.document || document;
+			var dirtyElement;
+			if (typeof(options.dirtyElement) === "string")
+				dirtyElement = jQuery("#" + options.dirtyElement, doc);
+			else
+				dirtyElement = jQuery(options.dirtyElement);
+			var dirtyStatusClass = options.dirtyStatusClass;
+			if (!dirtyStatusClass)
+				dirtyStatusClass = "dirty";
+			editorContext.addDirtyStateListener(function(clean) {
+				if (clean)
+					dirtyElement.removeClass(dirtyStatusClass);
+				else
+					dirtyElement.addClass(dirtyStatusClass);
+			});
+		}
+		
+		//---- Persistence Services
 		
 		var serverUrl = options.serverUrl;
-		if (!serverUrl) {
+		if (!serverUrl)
 			serverUrl = "http://" + location.host + "/xtext-service";
-		}
 		var resourceId = options.resourceId;
+		var loadResourceService = undefined, saveResourceService = undefined, revertResourceService = undefined;
 		if (resourceId) {
+			if (options.loadFromServer === undefined || options.loadFromServer) {
+				options.loadFromServer = true;
+				loadResourceService = new LoadResourceService(serverUrl, resourceId);
+				loadResourceService.loadResource(editorContext, options);
+				saveResourceService = new SaveResourceService(serverUrl, resourceId);
+				if (options.enableSaveAction && editor.commands) {
+					editor.commands.addCommand({
+						name: "save",
+						bindKey: {win: "Ctrl-S", mac: "Command-S"},
+						exec: function(editor) {
+							saveResourceService.saveResource(editorContext, options);
+						}
+					});
+				}
+				revertResourceService = new RevertResourceService(serverUrl, resourceId);
+			}
 		} else {
+			if (options.loadFromServer === undefined)
+				options.loadFromServer = false;
 			if (options.xtextLang)
 				resourceId = "text." + options.xtextLang;
 		}
@@ -180,14 +236,29 @@ define([
 			if (validationService)
 				validationService.computeProblems(editorContext, options);
 		}
+		var updateService = undefined;
+		if (!options.sendFullText) {
+			updateService = new UpdateService(serverUrl, resourceId);
+			if (saveResourceService)
+				saveResourceService.setUpdateService(updateService);
+			editorContext.addServerStateListener(refreshDocument);
+		}
 		function modelChangeListener(event) {
+			if (!event.init)
+				editorContext.markClean(false);
 			if (editor._modelChangeTimeout){
 				clearTimeout(editor._modelChangeTimeout);
 			}
 			editor._modelChangeTimeout = setTimeout(function() {
-				refreshDocument();
+				if (options.sendFullText)
+					refreshDocument();
+				else
+					updateService.update(editorContext, options);
 			}, 500);
 		};
+		if (!options.resourceId || !options.loadFromServer) {
+			modelChangeListener({init: true});
+		}
 		editor.on("change", modelChangeListener)
 		
 		//---- Content Assist Service
@@ -196,22 +267,65 @@ define([
 			editor.setOptions({ enableBasicAutocompletion: true });
 			var contentAssistService = new ContentAssistService(serverUrl, resourceId);
 			var completer = {
-		        getCompletions: function(editor, session, pos, prefix, callback) {
-		        	var params = _copy(options);
-		        	var document = session.getDocument();
-		        	params.offset = document.positionToIndex(pos);
-		        	var range = editor.getSelectionRange();
-		        	params.selection = {
-		        		start: document.positionToIndex(range.start),
-		        		end: document.positionToIndex(range.end)
-		        	};
-		        	contentAssistService.computeContentAssist(editorContext, params).done(function(proposals) {
-		        		callback(null, proposals);
-		        	});
-		        }
-		    }
+				getCompletions: function(editor, session, pos, prefix, callback) {
+					var params = _copy(options);
+					var document = session.getDocument();
+					params.offset = document.positionToIndex(pos);
+					var range = editor.getSelectionRange();
+					params.selection = {
+						start: document.positionToIndex(range.start),
+						end: document.positionToIndex(range.end)
+					};
+					contentAssistService.computeContentAssist(editorContext, params).done(function(proposals) {
+						callback(null, proposals);
+					});
+				}
+			}
 			languageTools.addCompleter(completer);
 		}
+		
+		editor.invokeXtextService = function(service, invokeOptions) {
+			var optionsCopy = _copy(options);
+			for (var p in invokeOptions) {
+				if (invokeOptions.hasOwnProperty(p)) {
+					optionsCopy[p] = invokeOptions[p];
+				}
+			}
+			if (service === "load" && loadResourceService)
+				loadResourceService.loadResource(editorContext, optionsCopy);
+			else if (service === "save" && saveResourceService)
+				saveResourceService.saveResource(editorContext, optionsCopy);
+			else if (service === "revert" && revertResourceService)
+				revertResourceService.revertResource(editorContext, optionsCopy);
+			else if (service === "validation" && validationService)
+				validationService.computeProblems(editorContext, optionsCopy);
+			else
+				throw "Service '" + service + "' is not available.";
+		};
+		editor.xtextServiceSuccessListeners = [];
+		editor.xtextServiceErrorListeners = [function(requestType, xhr, textStatus, errorThrown) {
+			if (options.showErrorDialogs)
+				window.alert("Xtext service '" + requestType + "' failed: " + errorThrown);
+			else
+				console.log("Xtext service '" + requestType + "' failed: " + errorThrown);
+		}];
+	}
+	
+	/**
+	 * Invoke an Xtext service.
+	 * 
+	 * @param editor
+	 *     The editor for which the service shall be invoked.
+	 * @param service
+	 *     A service type identifier, e.g. "save".
+	 * @param invokeOptions
+	 *     Additional options to pass to the service (optional).
+	 */
+	exports.invokeService = function(editor, service, invokeOptions) {
+		if (editor.invokeXtextService)
+			editor.invokeXtextService(service, invokeOptions);
+		else
+			throw "The editor has not been configured with Xtext.";
 	}
 	
 	return exports;
