@@ -258,7 +258,7 @@ public class OrionHighlightingFragment extends Xtend2GeneratorFragment {
     final boolean inheritsXbase = this.inherits(this.grammar, OrionHighlightingFragment.XBASE);
     final ArrayList<String> patterns = new ArrayList<String>();
     boolean _or = false;
-    boolean _contains = this.enabledPatterns.contains("string_doubleQuote");
+    boolean _contains = this.enabledPatterns.contains("comment_singleLine");
     if (_contains) {
       _or = true;
     } else {
@@ -266,17 +266,17 @@ public class OrionHighlightingFragment extends Xtend2GeneratorFragment {
       if (!(inheritsTerminals || inheritsXbase)) {
         _and = false;
       } else {
-        boolean _contains_1 = this.suppressedPatterns.contains("string_doubleQuote");
+        boolean _contains_1 = this.suppressedPatterns.contains("comment_singleLine");
         boolean _not = (!_contains_1);
         _and = _not;
       }
       _or = _and;
     }
     if (_or) {
-      patterns.add("{include: \"orion.lib#string_doubleQuote\"}");
+      patterns.add("{include: \"orion.c-like#comment_singleLine\"}");
     }
     boolean _or_1 = false;
-    boolean _contains_2 = this.enabledPatterns.contains("string_singleQuote");
+    boolean _contains_2 = this.enabledPatterns.contains("comment_block");
     if (_contains_2) {
       _or_1 = true;
     } else {
@@ -284,17 +284,17 @@ public class OrionHighlightingFragment extends Xtend2GeneratorFragment {
       if (!(inheritsTerminals || inheritsXbase)) {
         _and_1 = false;
       } else {
-        boolean _contains_3 = this.suppressedPatterns.contains("string_singleQuote");
+        boolean _contains_3 = this.suppressedPatterns.contains("comment_block");
         boolean _not_1 = (!_contains_3);
         _and_1 = _not_1;
       }
       _or_1 = _and_1;
     }
     if (_or_1) {
-      patterns.add("{include: \"orion.lib#string_singleQuote\"}");
+      patterns.add("{include: \"orion.c-like#comment_block\"}");
     }
     boolean _or_2 = false;
-    boolean _contains_4 = this.enabledPatterns.contains("comment_singleLine");
+    boolean _contains_4 = this.enabledPatterns.contains("string_doubleQuote");
     if (_contains_4) {
       _or_2 = true;
     } else {
@@ -302,17 +302,17 @@ public class OrionHighlightingFragment extends Xtend2GeneratorFragment {
       if (!(inheritsTerminals || inheritsXbase)) {
         _and_2 = false;
       } else {
-        boolean _contains_5 = this.suppressedPatterns.contains("comment_singleLine");
+        boolean _contains_5 = this.suppressedPatterns.contains("string_doubleQuote");
         boolean _not_2 = (!_contains_5);
         _and_2 = _not_2;
       }
       _or_2 = _and_2;
     }
     if (_or_2) {
-      patterns.add("{include: \"orion.c-like#comment_singleLine\"}");
+      patterns.add("{include: \"orion.lib#string_doubleQuote\"}");
     }
     boolean _or_3 = false;
-    boolean _contains_6 = this.enabledPatterns.contains("comment_block");
+    boolean _contains_6 = this.enabledPatterns.contains("string_singleQuote");
     if (_contains_6) {
       _or_3 = true;
     } else {
@@ -320,14 +320,14 @@ public class OrionHighlightingFragment extends Xtend2GeneratorFragment {
       if (!(inheritsTerminals || inheritsXbase)) {
         _and_3 = false;
       } else {
-        boolean _contains_7 = this.suppressedPatterns.contains("comment_block");
+        boolean _contains_7 = this.suppressedPatterns.contains("string_singleQuote");
         boolean _not_3 = (!_contains_7);
         _and_3 = _not_3;
       }
       _or_3 = _and_3;
     }
     if (_or_3) {
-      patterns.add("{include: \"orion.c-like#comment_block\"}");
+      patterns.add("{include: \"orion.lib#string_singleQuote\"}");
     }
     boolean _or_4 = false;
     boolean _contains_8 = this.enabledPatterns.contains("number_decimal");
@@ -486,7 +486,11 @@ public class OrionHighlightingFragment extends Xtend2GeneratorFragment {
     boolean _isEmpty = filteredKeywords.isEmpty();
     boolean _not_12 = (!_isEmpty);
     if (_not_12) {
-      patterns.add("{match: \"\\b(?:\" + keywords.join(\"|\") + \")\\b\", name: \"keyword.operator.«langId»\"}");
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{match: \"\\\\b(?:\" + keywords.join(\"|\") + \")\\\\b\", name: \"keyword.operator.");
+      _builder.append(this.langId, "");
+      _builder.append("\"}");
+      patterns.add(_builder.toString());
     }
     return patterns;
   }

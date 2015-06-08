@@ -127,46 +127,61 @@ class OrionHighlightingFragment extends Xtend2GeneratorFragment {
 		val inheritsTerminals = grammar.inherits(TERMINALS)
 		val inheritsXbase = grammar.inherits(XBASE)
 		val patterns = new ArrayList<String>
-		if (enabledPatterns.contains('string_doubleQuote')
-				|| (inheritsTerminals || inheritsXbase) && !suppressedPatterns.contains('string_doubleQuote'))
-			patterns += '{include: "orion.lib#string_doubleQuote"}'
-		if (enabledPatterns.contains('string_singleQuote')
-				|| (inheritsTerminals || inheritsXbase) && !suppressedPatterns.contains('string_singleQuote'))
-			patterns += '{include: "orion.lib#string_singleQuote"}'
+		
 		if (enabledPatterns.contains('comment_singleLine')
 				|| (inheritsTerminals || inheritsXbase) && !suppressedPatterns.contains('comment_singleLine'))
 			patterns += '{include: "orion.c-like#comment_singleLine"}'
+		
 		if (enabledPatterns.contains('comment_block')
 				|| (inheritsTerminals || inheritsXbase) && !suppressedPatterns.contains('comment_block'))
 			patterns += '{include: "orion.c-like#comment_block"}'
+		
+		if (enabledPatterns.contains('string_doubleQuote')
+				|| (inheritsTerminals || inheritsXbase) && !suppressedPatterns.contains('string_doubleQuote'))
+			patterns += '{include: "orion.lib#string_doubleQuote"}'
+		
+		if (enabledPatterns.contains('string_singleQuote')
+				|| (inheritsTerminals || inheritsXbase) && !suppressedPatterns.contains('string_singleQuote'))
+			patterns += '{include: "orion.lib#string_singleQuote"}'
+		
 		if (enabledPatterns.contains('number_decimal')
 				|| (inheritsTerminals || inheritsXbase) && !suppressedPatterns.contains('number_decimal'))
 			patterns += '{include: "orion.lib#number_decimal"}'
+		
 		if (enabledPatterns.contains('number_hex')
 				|| inheritsXbase && !suppressedPatterns.contains('number_hex'))
 			patterns += '{include: "orion.lib#number_hex"}'
+		
 		if (enabledPatterns.contains('brace_open')
 				|| keywords.contains('{') && !suppressedPatterns.contains('brace_open'))
 			patterns += '{include: "orion.lib#brace_open"}'
+		
 		if (enabledPatterns.contains('brace_close')
 				|| keywords.contains('}') && !suppressedPatterns.contains('brace_close'))
 			patterns += '{include: "orion.lib#brace_close"}'
+		
 		if (enabledPatterns.contains('bracket_open')
 				|| keywords.contains('[') && !suppressedPatterns.contains('bracket_open'))
 			patterns += '{include: "orion.lib#bracket_open"}'
+		
 		if (enabledPatterns.contains('bracket_close')
 				|| keywords.contains(']') && !suppressedPatterns.contains('bracket_close'))
 			patterns += '{include: "orion.lib#bracket_close"}'
+		
 		if (enabledPatterns.contains('parenthesis_open')
 				|| keywords.contains('(') && !suppressedPatterns.contains('parenthesis_open'))
 			patterns += '{include: "orion.lib#parenthesis_open"}'
+		
 		if (enabledPatterns.contains('parenthesis_close')
 				|| keywords.contains(')') && !suppressedPatterns.contains('parenthesis_close'))
 			patterns += '{include: "orion.lib#parenthesis_close"}'
+		
 		if (enabledPatterns.contains('doc_block'))
 			patterns += '{include: "orion.lib#doc_block"}'
+		
 		if (!filteredKeywords.empty)
-			patterns += '{match: "\\b(?:" + keywords.join("|") + ")\\b", name: "keyword.operator.«langId»"}'
+			patterns += '''{match: "\\b(?:" + keywords.join("|") + ")\\b", name: "keyword.operator.«langId»"}'''
+		
 		return patterns
 	}
 	

@@ -7,9 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.generator
 
+import com.google.common.collect.LinkedHashMultimap
+import com.google.common.collect.Multimap
 import java.io.File
 import java.io.FileWriter
-import java.util.ArrayList
 import java.util.Collection
 import java.util.HashSet
 import java.util.Set
@@ -106,11 +107,11 @@ class AceHighlightingFragment extends Xtend2GeneratorFragment {
 					var keywords = "«FOR keyword : filteredKeywords.sort SEPARATOR '|'»«keyword»«ENDFOR»";
 				«ENDIF»
 				this.$rules = {
-					"start": [
-						«IF !filteredKeywords.empty»
-							{token: "keyword", regex: "\\b(?:" + keywords + ")\\b"}
-						«ENDIF»
-					]
+					«FOR state : patterns.keySet SEPARATOR ','»
+						"«state»": [
+							«FOR rule : patterns.get(state) SEPARATOR ',\n'»«rule»«ENDFOR»
+						]
+					«ENDFOR»
 				};
 			};
 			oop.inherits(HighlightRules, mTextHighlightRules.TextHighlightRules);
@@ -131,9 +132,54 @@ class AceHighlightingFragment extends Xtend2GeneratorFragment {
 		'''
 	}
 	
-	protected def Collection<String> createPatterns(Collection<String> keywords,
+	protected def Multimap<String, String> createPatterns(Collection<String> keywords,
 			Collection<String> filteredKeywords) {
-		val patterns = new ArrayList<String>
+		val inheritsTerminals = grammar.inherits(TERMINALS)
+		val inheritsXbase = grammar.inherits(XBASE)
+		val patterns = LinkedHashMultimap.<String, String>create
+		
+		if (enabledPatterns.contains('comment_singleLine')
+				|| (inheritsTerminals || inheritsXbase) && !suppressedPatterns.contains('comment_singleLine'))
+			patterns.put('start', '''{token: "comment", regex: "\\/\\/.*$"}''')
+		
+		if (enabledPatterns.contains('comment_block')
+				|| (inheritsTerminals || inheritsXbase) && !suppressedPatterns.contains('comment_block')) {
+			patterns.put('start', '''{token: "comment", regex: "\\/\\*", next : "comment"}''')
+			patterns.put('comment', '''{token: "comment", regex: ".*?\\*\\/", next : "start"}''')
+			patterns.put('comment', '''{token: "comment", regex: ".+"}''')
+		}
+		
+		if (enabledPatterns.contains('string_doubleQuote')
+				|| (inheritsTerminals || inheritsXbase) && !suppressedPatterns.contains('string_doubleQuote'))
+			patterns.put('start', '''{token: "string", regex: '["](?:(?:\\\\.)|(?:[^"\\\\]))*?["]'}''')
+		
+		if (enabledPatterns.contains('string_singleQuote')
+				|| (inheritsTerminals || inheritsXbase) && !suppressedPatterns.contains('string_singleQuote'))
+			patterns.put('start', '''{token: "string", regex: "['](?:(?:\\\\.)|(?:[^'\\\\]))*?[']"}''')
+		
+		if (enabledPatterns.contains('number_decimal')
+				|| (inheritsTerminals || inheritsXbase) && !suppressedPatterns.contains('number_decimal'))
+			patterns.put('start', '''{token: "constant.numeric", regex: "[+-]?\\d+(?:(?:\\.\\d*)?(?:[eE][+-]?\\d+)?)?\\b"}''')
+		
+		if (enabledPatterns.contains('number_hex')
+				|| inheritsXbase && !suppressedPatterns.contains('number_hex'))
+			patterns.put('start', '''{token: "constant.numeric", regex: "0[xX][0-9a-fA-F]+\\b"}''')
+		
+		val bracketOpen = enabledPatterns.contains('bracket_open') || keywords.contains('[') && !suppressedPatterns.contains('bracket_open')
+		val parenOpen = enabledPatterns.contains('parenthesis_open') || keywords.contains('(') && !suppressedPatterns.contains('parenthesis_open')
+		val braceOpen = enabledPatterns.contains('brace_open') || keywords.contains('{') && !suppressedPatterns.contains('brace_open')
+		if (bracketOpen || parenOpen || braceOpen)
+			patterns.put('start', '''{token: "lparen", regex: "[«IF bracketOpen»\\[«ENDIF»«IF parenOpen»(«ENDIF»«IF braceOpen»{«ENDIF»]"}''')
+		
+		val bracketClose = enabledPatterns.contains('bracket_close') || keywords.contains(']') && !suppressedPatterns.contains('bracket_close')
+		val parenClose = enabledPatterns.contains('parenthesis_close') || keywords.contains(')') && !suppressedPatterns.contains('parenthesis_close')
+		val braceClose = enabledPatterns.contains('brace_close') || keywords.contains('}') && !suppressedPatterns.contains('brace_close')
+		if (bracketClose || parenClose || braceClose)
+			patterns.put('start', '''{token: "rparen", regex: "[«IF bracketClose»\\]«ENDIF»«IF parenClose»)«ENDIF»«IF braceClose»}«ENDIF»]"}''')
+		
+		if (!filteredKeywords.empty)
+			patterns.put('start', '''{token: "keyword", regex: "\\b(?:" + keywords + ")\\b"}''')
+		
 		return patterns
 	}
 	
