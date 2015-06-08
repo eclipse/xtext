@@ -330,21 +330,18 @@ public class Indexer {
         final Function1<URI, Boolean> _function_12 = new Function1<URI, Boolean>() {
           @Override
           public Boolean apply(final URI it) {
-            boolean _xblockexpression = false;
-            {
-              String _fileExtension = it.fileExtension();
-              boolean _equals = Objects.equal(_fileExtension, "java");
-              if (_equals) {
-                return Boolean.valueOf(false);
-              }
-              Map<String, LanguageAccess> _languages = context.getLanguages();
-              String _fileExtension_1 = it.fileExtension();
-              LanguageAccess _get = _languages.get(_fileExtension_1);
-              final IResourceDescription.Manager manager = _get.getResourceDescriptionManager();
-              final IResourceDescription resourceDescription = previousIndex.getResourceDescription(it);
-              _xblockexpression = Indexer.this.isAffected(resourceDescription, manager, currentDeltas, allDeltas, newIndex);
+            String _fileExtension = it.fileExtension();
+            boolean _equals = Objects.equal(_fileExtension, "java");
+            if (_equals) {
+              return Boolean.valueOf(false);
             }
-            return Boolean.valueOf(_xblockexpression);
+            Map<String, LanguageAccess> _languages = context.getLanguages();
+            String _fileExtension_1 = it.fileExtension();
+            LanguageAccess _get = _languages.get(_fileExtension_1);
+            final IResourceDescription.Manager manager = _get.getResourceDescriptionManager();
+            final IResourceDescription resourceDescription = previousIndex.getResourceDescription(it);
+            final boolean isAffected = Indexer.this.isAffected(resourceDescription, manager, currentDeltas, allDeltas, newIndex);
+            return Boolean.valueOf(isAffected);
           }
         };
         Iterable<URI> _filter_4 = IterableExtensions.<URI>filter(affectionCandidates, _function_12);

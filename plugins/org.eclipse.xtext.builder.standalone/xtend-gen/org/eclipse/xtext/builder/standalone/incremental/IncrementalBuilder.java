@@ -31,6 +31,7 @@ import org.eclipse.xtext.builder.standalone.incremental.Indexer;
 import org.eclipse.xtext.builder.standalone.incremental.Source2GeneratedMapping;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.URIBasedFileSystemAccess;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.clustering.DisabledClusteringPolicy;
 import org.eclipse.xtext.resource.clustering.DynamicResourceClusteringPolicy;
@@ -38,6 +39,7 @@ import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
+import org.eclipse.xtext.resource.persistence.SerializableResourceDescription;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.internal.Log;
@@ -111,6 +113,14 @@ public class IncrementalBuilder {
         public Boolean apply(final Resource resource) {
           resource.getContents();
           EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl);
+          URI _uRI = resource.getURI();
+          LanguageAccess _languageAccess = InternalStatefulIncrementalBuilder.this.context.getLanguageAccess(_uRI);
+          final IResourceDescription.Manager manager = _languageAccess.getResourceDescriptionManager();
+          final IResourceDescription description = manager.getResourceDescription(resource);
+          final SerializableResourceDescription copiedDescription = SerializableResourceDescription.createCopy(description);
+          ResourceDescriptionsData _newIndex = result.getNewIndex();
+          URI _uRI_1 = resource.getURI();
+          _newIndex.addDescription(_uRI_1, copiedDescription);
           boolean _validate = InternalStatefulIncrementalBuilder.this.validate(resource);
           if (_validate) {
             InternalStatefulIncrementalBuilder.this.generate(resource, InternalStatefulIncrementalBuilder.this.request, newSource2GeneratedMapping);
