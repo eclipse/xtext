@@ -264,7 +264,6 @@ define([
 		//---- Content Assist Service
 		
 		if (options.enableContentAssistService || options.enableContentAssistService === undefined) {
-			editor.setOptions({ enableBasicAutocompletion: true });
 			var contentAssistService = new ContentAssistService(serverUrl, resourceId);
 			var completer = {
 				getCompletions: function(editor, session, pos, prefix, callback) {
@@ -281,7 +280,8 @@ define([
 					});
 				}
 			}
-			languageTools.addCompleter(completer);
+			languageTools.setCompleters([completer]);
+			editor.setOptions({ enableBasicAutocompletion: true });
 		}
 		
 		editor.invokeXtextService = function(service, invokeOptions) {

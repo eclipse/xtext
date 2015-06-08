@@ -13,7 +13,7 @@ define(["ace/range"], function(mRange) {
 		this._serverState = {};
 		this._serverStateListeners = [];
 		this._clientServiceState = {};
-		this._problemMarkerIds = [];
+		this._problemMarkers = [];
 		this._clean = true;
 		this._dirtyStateListeners = [];
 	};
@@ -118,17 +118,25 @@ define(["ace/range"], function(mRange) {
 		
 		showMarkers : function(entries) {
 			var session = this._editor.getSession();
-			for (var i = 0; i < this._problemMarkerIds.length; i++) {
-				session.removeMarker(this._problemMarkerIds[i]);
+			for (var i = 0; i < this._problemMarkers.length; i++) {
+				var marker = this._problemMarkers[i];
+				session.removeMarker(marker.id);
+				session.removeGutterDecoration(marker.row, "xtext-annotation_" + marker.severity);
 			}
-			this._problemMarkerIds = [];
+			this._problemMarkers = [];
 			var document = session.getDocument();
 			for (var i = 0; i < entries.length; i++) {
-				var e = entries[i];
-				var start = document.indexToPosition(e.startOffset);
-				var end = document.indexToPosition(e.endOffset);
+				var entry = entries[i];
+				var start = document.indexToPosition(entry.startOffset);
+				var end = document.indexToPosition(entry.endOffset);
 				var range = new mRange.Range(start.row, start.column, end.row, end.column);
-				this._problemMarkerIds.push(session.addMarker(range, "xtext-marker_" + e.severity, "text"));
+				var markerId = session.addMarker(range, "xtext-marker_" + entry.severity, "text");
+				session.addGutterDecoration(start.row, "xtext-annotation_" + entry.severity);
+				this._problemMarkers.push({
+					id: markerId,
+					row: start.row,
+					severity: entry.severity
+				});
 			}
 		},
 		
