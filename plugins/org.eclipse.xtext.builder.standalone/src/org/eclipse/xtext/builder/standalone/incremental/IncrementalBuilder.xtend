@@ -18,6 +18,7 @@ import org.eclipse.xtext.builder.standalone.LanguageAccess
 import org.eclipse.xtext.resource.clustering.DisabledClusteringPolicy
 import org.eclipse.xtext.resource.clustering.DynamicResourceClusteringPolicy
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
+import org.eclipse.xtext.resource.persistence.SerializableResourceDescription
 import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Log
@@ -53,6 +54,10 @@ import org.eclipse.xtext.validation.CheckMode
 					Resource resource |
 					resource.contents // fully initialize
 					EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl)
+					val manager = context.getLanguageAccess(resource.URI).resourceDescriptionManager
+					val description = manager.getResourceDescription(resource);
+                    val copiedDescription = SerializableResourceDescription.createCopy(description);
+                    result.newIndex.addDescription(resource.URI, copiedDescription)
 					if (resource.validate) {
 						resource.generate(request, newSource2GeneratedMapping)
 					}

@@ -128,7 +128,8 @@ class Indexer {
 						return false
 					val manager = languages.get(fileExtension).resourceDescriptionManager
 					val resourceDescription = previousIndex.getResourceDescription(it)
-					resourceDescription.isAffected(manager, currentDeltas, allDeltas, newIndex)
+					val isAffected = resourceDescription.isAffected(manager, currentDeltas, allDeltas, newIndex)
+					return isAffected
 				])
 			currentDeltas.clear
 			if(!toBeIndexed.empty) 
