@@ -7,12 +7,12 @@ define("xtext/statemachine-syntax", ["orion/editor/stylers/lib/syntax"], functio
 		id: "xtext.statemachine",
 		contentTypes: ["xtext/statemachine"],
 		patterns: [
-			{include: "orion.lib#string_doubleQuote"},
-			{include: "orion.lib#string_singleQuote"},
 			{include: "orion.c-like#comment_singleLine"},
 			{include: "orion.c-like#comment_block"},
+			{include: "orion.lib#string_doubleQuote"},
+			{include: "orion.lib#string_singleQuote"},
 			{include: "orion.lib#number_decimal"},
-			{match: "\b(?:" + keywords.join("|") + ")\b", name: "keyword.operator.«langId»"}
+			{match: "\\b(?:" + keywords.join("|") + ")\\b", name: "keyword.operator.statemachine"}
 		]
 	});
 

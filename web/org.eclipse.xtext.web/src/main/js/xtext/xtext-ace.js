@@ -18,6 +18,8 @@
  *     Whether validation should be enabled.
  * parent {String | DOMElement}
  *     The parent element for the view; it can be either a DOM element or an ID for a DOM element.
+ * theme {String}
+ *     The path name of the Ace theme for the editor.
  * xtextLang {String}
  *     The language name (usually the file extension configured for the language).
  */
@@ -28,6 +30,21 @@ define([
 	"xtext/services/ContentAssistService",
 	"xtext/services/ValidationService"
 ], function(jQuery, languageTools, EditorContext, ContentAssistService, ValidationService) {
+	
+	/**
+	 * Translate an HTML attribute name to a JS option name.
+	 */
+	function _optionName(name) {
+		var prefix = "data-editor-";
+		if (name.substring(0, prefix.length) === prefix) {
+			var key = name.substring(prefix.length);
+			key = key.replace(/-([a-z])/ig, function(all, character) {
+				return character.toUpperCase();
+			});
+			return key;
+		}
+		return undefined;
+	}
 	
 	/**
 	 * Create a copy of the given object.
@@ -41,21 +58,74 @@ define([
 		return copy;
 	}
 	
+	/**
+	 * Merge all properties of the given parent element with the given default options.
+	 */
+	function _mergeOptions(parent, defaultOptions) {
+		var options = _copy(defaultOptions);
+		for (var attr, j = 0, attrs = parent.attributes, l = attrs.length; j < l; j++) {
+			attr = attrs.item(j);
+			var key = _optionName(attr.nodeName);
+			if (key) {
+				var value = attr.nodeValue;
+				if (value === "true" || value === "false")
+					value = value === "true";
+				options[key] = value;
+			}
+		}
+		return options;
+	}
+	
+	/**
+	 * Set the default options for Xtext editors.
+	 */
+	function _setDefaultOptions(options) {
+		if (!options.xtextLang && options.lang)
+			options.xtextLang = options.lang
+		if (!options.xtextLang && options.resourceId)
+			options.xtextLang = options.resourceId.split('.').pop();
+		if (!options.theme)
+			options.theme = "ace/theme/eclipse";
+	}
+	
 	var exports = {};
 	
 	/**
 	 * Create an Xtext editor instance configured with the given options.
 	 */
 	exports.createEditor = function(options) {
+		if (!options)
+			options = {};
 		if (!options.parent)
 			options.parent = "xtext-editor";
 		
-		var editor = ace.edit(options.parent);
-		editor.$blockScrolling = Infinity;
+		var parents;
+		if (typeof(options.parent) === "string") {
+			var doc = options.document || document;
+			var element = doc.getElementById(options.parent);
+			if (element)
+				parents = [element];
+			else
+				parents = doc.getElementsByClassName(options.parent);
+		} else {
+			parents = [options.parent];
+		}
 		
-		exports.configureServices(editor, options);
+		var editors = [];
+		for (var i = 0; i < parents.length; i++) {
+			var editor = ace.edit(parents[i]);
+			editor.$blockScrolling = Infinity;
+			
+			var editorOptions = _mergeOptions(parents[i], options);
+			_setDefaultOptions(editorOptions);
+			exports.configureServices(editor, editorOptions);
+			editors[i] = editor;
+		}
 		
-		return editor;
+		if (editors.length == 1)
+			return editors[0];
+		else
+			return editors;
 	}
 	
 	/**
@@ -66,6 +136,8 @@ define([
 			options.xtextLang = options.lang
 		if (!options.xtextLang && options.resourceId)
 			options.xtextLang = options.resourceId.split('.').pop();
+		if (options.theme)
+			editor.setTheme(options.theme)
 	
 		var editorContext = new EditorContext(editor);
 		editor.getEditorContext = function() {

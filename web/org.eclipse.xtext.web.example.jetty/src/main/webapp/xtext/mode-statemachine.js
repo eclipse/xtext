@@ -3,7 +3,16 @@ define("xtext/mode-statemachine", ["ace/lib/oop", "ace/mode/text", "ace/mode/tex
 		var keywords = "and|end|goto|if|input|output|set|signal|state";
 		this.$rules = {
 			"start": [
+				{token: "comment", regex: "\\/\\/.*$"},
+				{token: "comment", regex: "\\/\\*", next : "comment"},
+				{token: "string", regex: '["](?:(?:\\\\.)|(?:[^"\\\\]))*?["]'},
+				{token: "string", regex: "['](?:(?:\\\\.)|(?:[^'\\\\]))*?[']"},
+				{token: "constant.numeric", regex: "[+-]?\\d+(?:(?:\\.\\d*)?(?:[eE][+-]?\\d+)?)?\\b"},
 				{token: "keyword", regex: "\\b(?:" + keywords + ")\\b"}
+			],
+			"comment": [
+				{token: "comment", regex: ".*?\\*\\/", next : "start"},
+				{token: "comment", regex: ".+"}
 			]
 		};
 	};
