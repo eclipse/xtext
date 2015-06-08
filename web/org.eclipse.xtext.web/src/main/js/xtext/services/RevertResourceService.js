@@ -25,7 +25,7 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 			data : serverData,
 			success : function(result) {
 				editorContext.setText(result.fullText);
-				editorContext.getEditor().getUndoStack().reset();
+				editorContext.clearUndoStack();
 				editorContext.markClean(!result.dirty);
 				var listeners = editorContext.updateServerState(result.fullText, result.stateId);
 				for (i in listeners) {
