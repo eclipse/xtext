@@ -22,9 +22,10 @@ import org.apache.log4j.FileAppender
 import org.apache.log4j.Level
 import org.apache.log4j.Logger
 import org.apache.log4j.PatternLayout
-import org.eclipse.xtext.builder.standalone.IIssueHandler
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest
+import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder
 import org.eclipse.xtext.builder.standalone.incremental.IndexState
+import org.eclipse.xtext.builder.standalone.incremental.ResourceURICollector
 import org.eclipse.xtext.idea.build.net.ObjectChannel
 import org.eclipse.xtext.idea.build.net.Protocol.BuildFailureMessage
 import org.eclipse.xtext.idea.build.net.Protocol.BuildRequestMessage
@@ -33,7 +34,6 @@ import org.eclipse.xtext.idea.build.net.Protocol.BuildResultMessage
 import static org.eclipse.xtext.idea.build.daemon.XtextBuildDaemon.*
 
 import static extension org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs.*
-import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -145,12 +145,14 @@ class XtextBuildDaemon {
 	static class Worker {
 
 		@Inject IncrementalBuilder incrementalBuilder
+		
+		@Inject ResourceURICollector resourceURICollector
 
 		@Inject IBuildSessionSingletons.Impl singletons
 
 		@Inject Provider<XtextBuildResultCollector> xtextBuildResultCollectorProvider
 		
-		@Inject IIssueHandler issueHandler
+		@Inject IdeaIssueHandler issueHandler
 		
 		IndexState indexState
 
@@ -180,28 +182,28 @@ class XtextBuildDaemon {
 		}
 
 		def BuildResultMessage build(BuildRequestMessage request) {
+			val languages = XtextLanguages.getLanguageAccesses
 			val xtextBuildResultCollector = xtextBuildResultCollectorProvider.get
 			singletons => [
 				objectChannel = channel
 				moduleBaseURL = request.baseDir
 			]
+			
 			val buildRequest = new BuildRequest => [
 				baseDir = request.baseDir.asURI
-				defaultEncoding = request.encoding
 				classPath = request.classpath.map[asURI]
 				outputs = request.outputs.map[asURI]
 				sourceRoots = request.sourceRoots.map[asURI]
-				dirtyFiles = request.dirtyFiles.map[asURI]
-				deletedFiles = request.deletedFiles.map[asURI]
-				failOnValidationError = false
-				
-				if (indexState != null) {
-					previousState = indexState
+				if (indexState == null) {
+					resourceURICollector.collectAllResources(classPath+sourceRoots, languages.keySet)	
 				} else {
-					isFullBuild = true
+					dirtyFiles = request.dirtyFiles.map[asURI]
+					deletedFiles = request.deletedFiles.map[asURI]
 				}
+				failOnValidationError = false
+				previousState = indexState
 				
-				it.issueHandler = issueHandler
+				it.afterValidate = issueHandler
 				
 				afterGenerateFile = [ source, target |
 					xtextBuildResultCollector.generatedFile2sourceURI.put(target,source)
@@ -210,7 +212,7 @@ class XtextBuildDaemon {
 					xtextBuildResultCollector.deletedFiles.add(deleted)
 				]
 			]
-			indexState = incrementalBuilder.build(buildRequest, XtextLanguages.getLanguageAccesses)
+			indexState = incrementalBuilder.build(buildRequest, languages)
 			val buildResult = xtextBuildResultCollector.buildResult
 			return buildResult
 		}

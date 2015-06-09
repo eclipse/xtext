@@ -10,50 +10,55 @@ package org.eclipse.xtext.idea.build
 import com.google.common.collect.HashMultimap
 import com.google.inject.Inject
 import com.google.inject.Provider
-import com.intellij.compiler.impl.CompilerUtil
+import com.intellij.openapi.Disposable
 import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.application.ModalityState
+import com.intellij.openapi.module.Module
 import com.intellij.openapi.progress.ProcessCanceledException
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.roots.ModuleRootManager
 import com.intellij.openapi.roots.OrderEnumerator
 import com.intellij.openapi.roots.ProjectFileIndex
+import com.intellij.openapi.util.Disposer
 import com.intellij.openapi.vfs.VirtualFile
-import com.intellij.openapi.vfs.encoding.EncodingProjectManager
 import com.intellij.util.Alarm
+import java.util.List
 import java.util.concurrent.BlockingQueue
 import java.util.concurrent.LinkedBlockingQueue
-import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder
 import org.eclipse.xtext.builder.standalone.incremental.IndexState
-import org.eclipse.xtext.idea.resource.ModuleBasedResourceSetProvider
+import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider
+import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider.VirtualFileBasedUriHandler
 import org.eclipse.xtext.idea.shared.IdeaSharedInjectorProvider
 import org.eclipse.xtext.idea.shared.XtextLanguages
+import org.eclipse.xtext.resource.IResourceDescriptions
+import org.eclipse.xtext.util.internal.Log
 
 import static org.eclipse.xtext.idea.build.BuildEvent.Type.*
 
-import static extension org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs.*
-import com.intellij.openapi.util.Disposer
-import com.intellij.openapi.Disposable
+import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-class XtextAutoBuilder implements Disposable {
-
+@Log class XtextAutoBuilder implements Disposable {
+	
+	boolean disposed
+	
 	BlockingQueue<BuildEvent> queue = new LinkedBlockingQueue<BuildEvent>()
 
 	Alarm alarm 
 
 	Project project
 	
-	boolean disposed
-	
 	@Inject Provider<IncrementalBuilder> builderProvider	
+	
+	@Inject Provider<BuildProgressReporter> buildProgressReporterProvider	
 	 
 	@Inject XtextLanguages xtextLanguages
 	
-	@Inject ModuleBasedResourceSetProvider resourceSetProvider
+	@Inject IdeaResourceSetProvider resourceSetProvider
 	
 	IndexState indexState
 	
@@ -84,31 +89,63 @@ class XtextAutoBuilder implements Disposable {
 	}
 
 	protected def enqueue(VirtualFile file, BuildEvent.Type type) {
+		if (!disposed && !isLoaded()) {
+			queueAllResources()
+		}
+		if (LOG.isDebugEnabled) {
+			LOG.debug("queuing "+file.URI)
+		}
 		if (file != null && !disposed) {
 			queue.put(new BuildEvent(file, type))
 			alarm.cancelAllRequests
 			alarm.addRequest([build], 200)
 		}
 	}
-
+	
+	protected def boolean isLoaded() {
+		if (indexState != null || !queue.isEmpty)
+			return true;
+		return false;
+	}
+	
+	protected def queueAllResources() {
+		val baseFile = project.baseDir
+		baseFile.visitFileTree[ file |
+			if (!file.isDirectory && file.exists) {
+				queue.put(new BuildEvent(file, BuildEvent.Type.ADDED))
+			}
+		]
+	}
+	
+	def void visitFileTree(VirtualFile file, (VirtualFile)=>void handler) {
+		if (file.isDirectory) {
+			for (child : file.children) {
+				visitFileTree(child, handler)
+			}
+		}
+		handler.apply(file)
+	}
+	
 	protected def void build() {
 		if (disposed) {
 			return
 		}
 		val allEvents = newArrayList
 		queue.drainTo(allEvents)
+		build(allEvents)
+	}
+
+	public def void build(List<BuildEvent> allEvents) {
+		val buildProgressReporter = buildProgressReporterProvider.get 
+		buildProgressReporter.project = project
 		try {
 			val module2event = HashMultimap.create
 			val fileIndex = ProjectFileIndex.SERVICE.getInstance(project)
 			allEvents.forEach [
-				if(xtextLanguages.languageAccesses.get(file.extension) != null) {
-					val module = fileIndex.getModuleForFile(file)
-					if(module != null)
-						module2event.put(module, it)
-				}
+				val module = findModule(fileIndex)
+				if(module != null)
+					module2event.put(module, it)
 			]
-			val projectEncoding = EncodingProjectManager.getInstance(project).defaultCharsetName
-			val refreshFiles = newArrayList
 			for(module: module2event.keySet) {
 				val events = module2event.get(module)
 				val entries = OrderEnumerator.orderEntries(module)
@@ -118,40 +155,69 @@ class XtextAutoBuilder implements Disposable {
 					deletedFiles += events.filter[type == DELETED].map[file.URI]
 					classPath += entries.withoutSdk.classes.pathsList.virtualFiles.filter[/* HACK! we need to properly exclude the out put dir */!isDirectory].map[URI]
 					baseDir = ModuleRootManager.getInstance(module).contentRoots.head.URI
-					defaultEncoding = projectEncoding
 					sourceRoots += entries.withoutSdk.withoutLibraries.withoutDepModules.sources.pathsList.virtualFiles.map[URI]
 					// outputs = ??
 					failOnValidationError = false
-				
-					if (indexState != null) {
-						previousState = indexState
-					} else {
-						isFullBuild = true
-					}
-				
-					it.issueHandler = issueHandler
-				
-					afterGenerateFile = [ refreshFiles += $1 ] 
-					afterDeleteFile = [ refreshFiles += it ]
+					previousState = indexState ?: new IndexState()
+
+					afterValidate = buildProgressReporter
+					afterDeleteFile = [
+						buildProgressReporter.markAsAffected(it)
+					]
 				]
-				indexState = ApplicationManager.application.<IndexState>runReadAction [
+				val app = ApplicationManager.application
+				indexState = app.<IndexState>runReadAction [
 					builderProvider.get().build(request, xtextLanguages.languageAccesses)
 				]
+				app.invokeAndWait([
+					app.runWriteAction [
+						val handler = VirtualFileBasedUriHandler.find(request.resourceSet)
+						handler.flushToDisk
+					]
+				], ModalityState.any)
+				
 			}
-			CompilerUtil.refreshIOFiles(refreshFiles.map[asFile])
 		} catch(ProcessCanceledException exc) {
 			queue.addAll(allEvents)
-		}		
+		} finally {
+			buildProgressReporter.clearProgress
+		}
 	}
 	
-	protected def getURI(VirtualFile file) {
-		val uri = if (file.isInLocalFileSystem)
-				URI.createFileURI(file.path)
-			else
-				URI.createURI(file.url)
-		if (file.directory)
-			uri.appendSegment('')
-		else
-			uri
+	protected def getIndexState() {
+		if (indexState == null) {
+			if (!isLoaded()) {
+				queueAllResources
+				alarm.cancelAllRequests
+				alarm.addRequest([build], 200)
+			}
+			return new IndexState()
+		}
+		return indexState		
 	}
+	
+	public def IResourceDescriptions getResourceDescriptions() {
+		getIndexState.resourceDescriptions
+	}
+
+	protected def findModule(BuildEvent it, ProjectFileIndex fileIndex) {
+		if (xtextLanguages.languageAccesses.get(file.extension) == null) {
+			return null
+		}
+		if (type == DELETED)
+			file.findModule(fileIndex)
+		else
+			fileIndex.getModuleForFile(file, true)
+	}
+	
+	protected def Module findModule(VirtualFile file, ProjectFileIndex fileIndex) {
+		if (file == null) {
+			return null
+		}
+		val module = fileIndex.getModuleForFile(file, true)
+		if (module != null)
+			return module
+		file.parent.findModule(fileIndex)
+	}
+	
 }

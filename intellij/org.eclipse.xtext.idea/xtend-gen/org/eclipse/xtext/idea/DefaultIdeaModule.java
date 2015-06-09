@@ -24,22 +24,21 @@ import org.eclipse.xtext.ide.editor.bracketmatching.DefaultBracePairProvider;
 import org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper;
-import org.eclipse.xtext.idea.containers.ResolveScopeBasedContainerManger;
 import org.eclipse.xtext.idea.highlighting.DefaultPairedBraceMatcher;
 import org.eclipse.xtext.idea.highlighting.DefaultSyntaxHighlighter;
 import org.eclipse.xtext.idea.parser.AntlrDelegatingIdeaLexer;
 import org.eclipse.xtext.idea.refactoring.NullNamesValidator;
-import org.eclipse.xtext.idea.resource.impl.ProjectScopeBasedResourceDescriptions;
+import org.eclipse.xtext.idea.resource.IdeaEncodingProvider;
+import org.eclipse.xtext.idea.resource.IdeaResourceDescriptionsProvider;
 import org.eclipse.xtext.idea.structureview.DefaultPsiStructureViewFactory;
+import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.psi.IPsiModelAssociations;
 import org.eclipse.xtext.psi.IPsiModelAssociator;
 import org.eclipse.xtext.psi.PsiModelAssociations;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
-import org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex;
-import org.eclipse.xtext.resource.IContainer;
-import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.service.SingletonBinding;
 
@@ -52,26 +51,12 @@ public class DefaultIdeaModule extends AbstractGenericModule {
     return AntlrDelegatingIdeaLexer.class;
   }
   
-  public void configureIResourceDescriptions(final Binder binder) {
-    AnnotatedBindingBuilder<IResourceDescriptions> _bind = binder.<IResourceDescriptions>bind(IResourceDescriptions.class);
-    _bind.to(ProjectScopeBasedResourceDescriptions.class);
-  }
-  
-  public Class<? extends IContainer.Manager> bindIContainer$Manager() {
-    return ResolveScopeBasedContainerManger.class;
-  }
-  
   public Class<? extends IPsiModelAssociations> bindIPsiModelAssociations() {
     return PsiModelAssociations.class;
   }
   
   public Class<? extends IPsiModelAssociator> bindIPsiModelAssociator() {
     return PsiModelAssociations.class;
-  }
-  
-  @SingletonBinding
-  public Class<? extends ExportedObjectQualifiedNameIndex> bindExportedObjectQualifiedNameIndex() {
-    return ExportedObjectQualifiedNameIndex.class;
   }
   
   @SingletonBinding
@@ -116,5 +101,13 @@ public class DefaultIdeaModule extends AbstractGenericModule {
     Named _named = Names.named(BaseXtextFile.GLOBAL_MODIFICATION_COUNT);
     LinkedBindingBuilder<Key> _annotatedWith = _bind.annotatedWith(_named);
     _annotatedWith.toInstance(PsiModificationTracker.MODIFICATION_COUNT);
+  }
+  
+  public Class<? extends IEncodingProvider> bindEncodingProvider() {
+    return IdeaEncodingProvider.class;
+  }
+  
+  public Class<? extends ResourceDescriptionsProvider> bindResourceDescriptionsProvider() {
+    return IdeaResourceDescriptionsProvider.class;
   }
 }

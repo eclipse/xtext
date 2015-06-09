@@ -9,18 +9,20 @@ package org.eclipse.xtext.idea.types.access
 
 import com.intellij.openapi.projectRoots.impl.JavaAwareProjectJdkTableImpl
 import com.intellij.testFramework.PsiTestCase
+import org.eclipse.xtext.common.types.JvmCharAnnotationValue
+import org.eclipse.xtext.common.types.JvmGenericType
+import org.eclipse.xtext.common.types.JvmInnerTypeReference
+import org.eclipse.xtext.common.types.JvmOperation
+import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.testSetups.AbstractMethods
+import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuperSuper
+import org.eclipse.xtext.common.types.testSetups.ParameterizedTypes
+import org.eclipse.xtext.common.types.testSetups.ParameterizedTypes2
 import org.eclipse.xtext.idea.tests.TestDecorator
 
+import static junit.framework.TestCase.*
+
 import static extension org.eclipse.xtext.idea.tests.LibraryUtil.*
-import org.eclipse.xtext.common.types.JvmCharAnnotationValue
-import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuperSuper
-import org.eclipse.xtext.common.types.testSetups.ParameterizedTypes2
-import org.eclipse.xtext.common.types.JvmOperation
-import org.eclipse.xtext.common.types.JvmGenericType
-import org.eclipse.xtext.common.types.JvmTypeReference
-import org.eclipse.xtext.common.types.JvmInnerTypeReference
-import org.eclipse.xtext.common.types.testSetups.ParameterizedTypes
 
 @TestDecorator
 class BinaryStubJvmTypeProviderTest extends PsiTestCase {

@@ -23,7 +23,8 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.impl.AbstractCompoundSelectable;
+import org.eclipse.xtext.resource.IResourceDescription.Delta;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 
 import com.google.common.annotations.Beta;
 import com.google.common.base.Function;
@@ -39,7 +40,7 @@ import com.google.common.collect.Sets;
  * @since 2.5
  * 
  */
-@Beta public class ResourceDescriptionsData extends AbstractCompoundSelectable {
+@Beta public class ResourceDescriptionsData extends AbstractCompoundSelectable implements IResourceDescriptions {
 	
 	public static class ResourceSetAdapter extends AdapterImpl {
 		
@@ -130,10 +131,12 @@ import com.google.common.collect.Sets;
 		return result;
 	}
 
+	@Override
 	public Iterable<IResourceDescription> getAllResourceDescriptions() {
 		return resourceDescriptionMap.values();
 	}
 
+	@Override
 	public IResourceDescription getResourceDescription(URI uri) {
 		return resourceDescriptionMap.get(uri);
 	}
@@ -223,6 +226,23 @@ import com.google.common.collect.Sets;
 				set.add(description);
 				target.put(lowerCase, set);
 			}
+		}
+	}
+
+	/**
+	 * Put a new resource description into the index, or remove one if the delta has no new description. A delta for a
+	 * particular URI may be registered more than once; overwriting any earlier registration.
+	 * 
+	 * @param delta
+	 *            The resource change.
+	 * @since 2.9
+	 */
+	public void register(Delta delta) {
+		final IResourceDescription newDesc = delta.getNew();
+		if (newDesc == null) {
+			removeDescription(delta.getUri());
+		} else {
+			addDescription(delta.getUri(), newDesc);
 		}
 	}
 }

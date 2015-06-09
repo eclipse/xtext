@@ -8,7 +8,8 @@
 package org.eclipse.xtext.idea.build.daemon
 
 import com.google.inject.Inject
-import org.eclipse.xtext.builder.standalone.IIssueHandler
+import org.eclipse.emf.common.util.URI
+import org.eclipse.xtext.builder.standalone.incremental.BuildRequest
 import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.idea.build.net.Protocol.BuildIssueMessage
 import org.eclipse.xtext.validation.Issue
@@ -17,12 +18,11 @@ import org.jetbrains.jps.incremental.messages.BuildMessage.Kind
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-class IdeaIssueHandler implements IIssueHandler {
+class IdeaIssueHandler implements BuildRequest.IPostValidationCallback {
 	
 	@Inject extension IBuildSessionSingletons 
 	
-	override handleIssue(Iterable<Issue> issues) {
-		var errorFree = true
+	override afterValidate(URI validated, Iterable<Issue> issues) {
 		for(issue: issues.filter[severity != Severity.IGNORE]) {
 			objectChannel.writeObject(new BuildIssueMessage() => [
 				kind = issue.kind
@@ -34,9 +34,8 @@ class IdeaIssueHandler implements IIssueHandler {
 				line = issue.lineNumber
 				column = 0 // FIXME we have to find out the column :-(
 			])
-			errorFree = errorFree && issue.severity != Severity.ERROR
 		}
-		return errorFree
+		return true
 	}
 	
 	private def getKind(Issue issue) {
@@ -51,4 +50,5 @@ class IdeaIssueHandler implements IIssueHandler {
 				Kind.PROGRESS
 		}
 	}
+	
 }

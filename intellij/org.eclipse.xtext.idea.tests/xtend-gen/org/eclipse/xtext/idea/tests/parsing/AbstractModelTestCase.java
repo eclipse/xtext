@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.idea.lang.BaseXtextASTFactory;
-import org.eclipse.xtext.idea.resource.ModuleBasedResourceSetProvider;
+import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider;
 import org.eclipse.xtext.idea.resource.PsiToEcoreTransformator;
 import org.eclipse.xtext.idea.tests.LibraryUtil;
 import org.eclipse.xtext.idea.tests.LightToolingTest;
@@ -50,7 +50,7 @@ public class AbstractModelTestCase extends LightToolingTest implements ModelChec
   
   @Inject
   @Accessors(AccessorType.PROTECTED_GETTER)
-  private ModuleBasedResourceSetProvider resourceSetProvider;
+  private IdeaResourceSetProvider resourceSetProvider;
   
   @Inject
   @Accessors(AccessorType.PROTECTED_GETTER)
@@ -150,7 +150,7 @@ public class AbstractModelTestCase extends LightToolingTest implements ModelChec
   }
   
   @Pure
-  protected ModuleBasedResourceSetProvider getResourceSetProvider() {
+  protected IdeaResourceSetProvider getResourceSetProvider() {
     return this.resourceSetProvider;
   }
   

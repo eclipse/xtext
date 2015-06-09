@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.builder.standalone.IIssueHandler;
 import org.eclipse.xtext.builder.standalone.ILanguageConfiguration;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.LanguageAccessFactory;
@@ -321,7 +320,6 @@ public class IncrementalBuilderTest {
       public void apply(final BuildRequest it) {
         URI _asURI = FilesAndURIs.asURI(IncrementalBuilderTest.this.tempDir);
         it.setBaseDir(_asURI);
-        it.setDefaultEncoding("UTF-8");
         XtextResourceSet _get = IncrementalBuilderTest.this.resourceSetProvider.get();
         it.setResourceSet(_get);
         it.setClassPath(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList()));
@@ -333,14 +331,14 @@ public class IncrementalBuilderTest {
         it.setSourceRoots(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_asURI_2)));
         it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList()));
         it.setDeletedFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList()));
-        final IIssueHandler _function = new IIssueHandler() {
+        final BuildRequest.IPostValidationCallback _function = new BuildRequest.IPostValidationCallback() {
           @Override
-          public boolean handleIssue(final Iterable<Issue> issues) {
+          public boolean afterValidate(final URI uri, final Iterable<Issue> issues) {
             Iterables.<Issue>addAll(IncrementalBuilderTest.this.issues, issues);
             return IterableExtensions.isEmpty(issues);
           }
         };
-        it.setIssueHandler(_function);
+        it.setAfterValidate(_function);
         final Procedure1<URI> _function_1 = new Procedure1<URI>() {
           @Override
           public void apply(final URI it) {

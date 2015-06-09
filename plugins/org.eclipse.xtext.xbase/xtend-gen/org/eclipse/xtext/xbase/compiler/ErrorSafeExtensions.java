@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.compiler.BrokenTypeRefDetector;
+import org.eclipse.xtext.xbase.compiler.ElementIssueProvider;
 import org.eclipse.xtext.xbase.compiler.IElementIssueProvider;
 import org.eclipse.xtext.xbase.compiler.LoopParams;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
@@ -43,7 +44,11 @@ public class ErrorSafeExtensions {
   private TypeReferenceSerializer _typeReferenceSerializer;
   
   @Inject
-  private IElementIssueProvider.Factory issueProviderFactory;
+  private ElementIssueProvider.Factory issueProviderFactory;
+  
+  public void installIssues(final Resource resource) {
+    this.issueProviderFactory.attachData(resource);
+  }
   
   public Iterable<Issue> getErrors(final EObject element) {
     Iterable<Issue> _xblockexpression = null;

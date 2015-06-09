@@ -11,11 +11,9 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.Collection
 import java.util.Set
-import org.apache.log4j.Logger
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.lib.annotations.Data
-import org.eclipse.xtext.mwe.ResourceDescriptionsProvider
 import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.resource.CompilerPhases
 import org.eclipse.xtext.resource.IResourceDescription
@@ -24,24 +22,19 @@ import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
+import org.eclipse.xtext.util.internal.Log
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.9 
  */
-@Singleton
+@Singleton @Log
 class Indexer {
-
-	static val LOG = Logger.getLogger(Indexer)
-
-	@Inject ResourceURICollector uriCollector
 
 	@Inject JavaSupport javaSupport
 
 	@Inject CompilerPhases compilerPhases
 
-	@Inject ResourceDescriptionsProvider resourceDescriptionsProvider
-	
 	@Inject IClassFileBasedDependencyFinder javaDependencyFinder
 
 	@Inject IQualifiedNameConverter qualifiedNameConverter
@@ -53,33 +46,24 @@ class Indexer {
 	}
 	
 	def IndexResult computeAndIndexAffected(BuildRequest request, extension BuildContext context) {
-		val fullBuild = request.fullBuild
-		if(fullBuild) 
-			LOG.info('Performing full build')
-		else
-			LOG.info('Performing incremental build')
-			
-		LOG.info('Creating new index')
-		val fileMappings = request.previousState.fileMappings
-		val ResourceDescriptionsData oldIndex = request.previousState.resourceDescriptions
-		val ResourceDescriptionsData newIndex = oldIndex.copy
-		val resourceDescriptions = installIndex(resourceSet, newIndex)
+		if (LOG.isInfoEnabled) 
+			LOG.info('Creating new index')
+		val previousFileMappings = request.previousState.fileMappings
+		val previousIndex = request.previousState.resourceDescriptions
+		val newIndex = previousIndex.copy
+		installIndex(resourceSet, newIndex)
 
 
 		val affectionCandidates = newHashSet
 		var Set<URI> directlyAffected = null
-		if (fullBuild) {
-			directlyAffected = uriCollector.collectAllResources(request, context).toSet
-		} else {
-			val allModified = (request.dirtyFiles + request.deletedFiles).toSet
-			affectionCandidates += oldIndex.allURIs.filter[!allModified.contains(it)]
-			directlyAffected = request.dirtyFiles.map[primarySources(fileMappings)].flatten.toSet
-		}
+		val allModified = (request.dirtyFiles + request.deletedFiles).toSet
+		affectionCandidates += previousIndex.allURIs.filter[!allModified.contains(it)]
+		directlyAffected = request.dirtyFiles.map[primarySources(previousFileMappings)].flatten.toSet
 
 		val currentDeltas = <IResourceDescription.Delta>newArrayList
-		currentDeltas += request.removeDeletedFilesFromIndex(oldIndex, newIndex)
+		currentDeltas += request.removeDeletedFilesFromIndex(previousIndex, newIndex)
 
-		preIndexChangedResources(directlyAffected, oldIndex, newIndex, request, context)
+		preIndexChangedResources(directlyAffected, previousIndex, newIndex, request, context)
 		val isConsiderJava = languages
 				.entrySet
 				.exists[value.linksAgainstJava]
@@ -94,24 +78,24 @@ class Indexer {
 		toBeIndexed.addAll(directlyAffected)
 		val allDeltas = newHashSet
 		while (!toBeIndexed.empty) {
-			if(isConsiderJava && !fullBuild) {
+			if(isConsiderJava) {
 				val affectedJavaFiles = 
 					(toBeIndexed
-						.map[fileMappings.getGenerated(it)]
+						.map[previousFileMappings.getGenerated(it)]
 						.flatten
 					+ toBeIndexed)
 						.filter[fileExtension=='java']
 						.toSet
 				val deletedPrimaryJavaFiles = request
 					.deletedFiles
-					.map[primarySources(fileMappings)]
+					.map[primarySources(previousFileMappings)]
 					.flatten
 					.filter[fileExtension=='java']
 				val dependentJavaFiles = javaDependencyFinder.getDependentJavaFiles(
 						affectedJavaFiles, deletedPrimaryJavaFiles)
 				toBeIndexed += 
 					dependentJavaFiles
-						.map[primarySources(fileMappings)]
+						.map[primarySources(previousFileMappings)]
 						.flatten
 						.filter[fileExtension=='java' || affectionCandidates.contains(it)]
 			}
@@ -119,7 +103,7 @@ class Indexer {
 			affectionCandidates.removeAll(toBeIndexed)
 			toBeIndexed.executeClustered [ Resource resource |
 				LOG.info('Indexing ' + resource.URI)
-				currentDeltas += resource.addToIndex(false, oldIndex, newIndex, context)
+				currentDeltas += resource.addToIndex(false, previousIndex, newIndex, context)
 				null
 			]
 			toBeIndexed.filter[fileExtension=='java'].forEach [
@@ -143,8 +127,9 @@ class Indexer {
 					if(fileExtension == 'java')
 						return false
 					val manager = languages.get(fileExtension).resourceDescriptionManager
-					val resourceDescription = oldIndex.getResourceDescription(it)
-					resourceDescription.isAffected(manager, currentDeltas, allDeltas, resourceDescriptions)
+					val resourceDescription = previousIndex.getResourceDescription(it)
+					val isAffected = resourceDescription.isAffected(manager, currentDeltas, allDeltas, newIndex)
+					return isAffected
 				])
 			currentDeltas.clear
 			if(!toBeIndexed.empty) 
@@ -156,9 +141,9 @@ class Indexer {
 	private def primarySources(URI uri, Source2GeneratedMapping mappings) {
 		val sources = mappings.getSource(uri)
 		if(sources.empty) 
-			#[uri] 
+			return #[uri] 
 		else 
-			sources
+			return sources
 	}
 	
 	def removeDeletedFilesFromIndex(BuildRequest request, ResourceDescriptionsData oldIndex, ResourceDescriptionsData newIndex) {
@@ -167,9 +152,11 @@ class Indexer {
 		request.deletedFiles.forEach [
 			if(fileExtension != 'java') {
 				val IResourceDescription oldDescription = oldIndex?.getResourceDescription(it)
-				if (oldDescription != null)
-					deltas += new DefaultResourceDescriptionDelta(oldDescription, null)
-				newIndex.removeDescription(it)
+				if (oldDescription != null) {
+					val delta = new DefaultResourceDescriptionDelta(oldDescription, null)
+					deltas += delta
+					newIndex.register(delta)
+				}
 			}
 		]
 		return deltas
@@ -200,14 +187,13 @@ class Indexer {
 				new ResolvedResourceDescription(newDescription)
 			else 
 				newDescription
-		newIndex.addDescription(uri, toBeAdded)
 		val delta = new DefaultResourceDescriptionDelta(oldIndex?.getResourceDescription(uri), toBeAdded)
+		newIndex.register(delta)
 		return delta
 	}
 
-	def protected installIndex(XtextResourceSet resourceSet, ResourceDescriptionsData index) {
+	def protected void installIndex(XtextResourceSet resourceSet, ResourceDescriptionsData index) {
 		ResourceDescriptionsData.ResourceSetAdapter.installResourceDescriptionsData(resourceSet, index)
-		resourceDescriptionsProvider.get(resourceSet)
 	}
 	
 	def protected boolean isAffected(IResourceDescription affectionCandidate, IResourceDescription.Manager manager,

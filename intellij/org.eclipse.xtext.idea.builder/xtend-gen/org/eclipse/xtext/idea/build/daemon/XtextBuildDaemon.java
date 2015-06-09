@@ -8,6 +8,7 @@
 package org.eclipse.xtext.idea.build.daemon;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -33,14 +34,15 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.builder.standalone.IIssueHandler;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder;
 import org.eclipse.xtext.builder.standalone.incremental.IndexState;
+import org.eclipse.xtext.builder.standalone.incremental.ResourceURICollector;
 import org.eclipse.xtext.idea.build.daemon.BuildDaemonModule;
 import org.eclipse.xtext.idea.build.daemon.IBuildSessionSingletons;
+import org.eclipse.xtext.idea.build.daemon.IdeaIssueHandler;
 import org.eclipse.xtext.idea.build.daemon.XtextBuildResultCollector;
 import org.eclipse.xtext.idea.build.daemon.XtextLanguages;
 import org.eclipse.xtext.idea.build.net.ObjectChannel;
@@ -156,13 +158,16 @@ public class XtextBuildDaemon {
     private IncrementalBuilder incrementalBuilder;
     
     @Inject
+    private ResourceURICollector resourceURICollector;
+    
+    @Inject
     private IBuildSessionSingletons.Impl singletons;
     
     @Inject
     private Provider<XtextBuildResultCollector> xtextBuildResultCollectorProvider;
     
     @Inject
-    private IIssueHandler issueHandler;
+    private IdeaIssueHandler issueHandler;
     
     private IndexState indexState;
     
@@ -207,6 +212,7 @@ public class XtextBuildDaemon {
     }
     
     public Protocol.BuildResultMessage build(final Protocol.BuildRequestMessage request) {
+      final Map<String, LanguageAccess> languages = XtextLanguages.getLanguageAccesses();
       final XtextBuildResultCollector xtextBuildResultCollector = this.xtextBuildResultCollectorProvider.get();
       final Procedure1<IBuildSessionSingletons.Impl> _function = new Procedure1<IBuildSessionSingletons.Impl>() {
         @Override
@@ -225,8 +231,6 @@ public class XtextBuildDaemon {
           String _baseDir = request.getBaseDir();
           URI _asURI = FilesAndURIs.asURI(_baseDir);
           it.setBaseDir(_asURI);
-          String _encoding = request.getEncoding();
-          it.setDefaultEncoding(_encoding);
           List<String> _classpath = request.getClasspath();
           final Function1<String, URI> _function = new Function1<String, URI>() {
             @Override
@@ -254,32 +258,36 @@ public class XtextBuildDaemon {
           };
           List<URI> _map_2 = ListExtensions.<String, URI>map(_sourceRoots, _function_2);
           it.setSourceRoots(_map_2);
-          List<String> _dirtyFiles = request.getDirtyFiles();
-          final Function1<String, URI> _function_3 = new Function1<String, URI>() {
-            @Override
-            public URI apply(final String it) {
-              return FilesAndURIs.asURI(it);
-            }
-          };
-          List<URI> _map_3 = ListExtensions.<String, URI>map(_dirtyFiles, _function_3);
-          it.setDirtyFiles(_map_3);
-          List<String> _deletedFiles = request.getDeletedFiles();
-          final Function1<String, URI> _function_4 = new Function1<String, URI>() {
-            @Override
-            public URI apply(final String it) {
-              return FilesAndURIs.asURI(it);
-            }
-          };
-          List<URI> _map_4 = ListExtensions.<String, URI>map(_deletedFiles, _function_4);
-          it.setDeletedFiles(_map_4);
-          it.setFailOnValidationError(false);
-          boolean _notEquals = (!Objects.equal(Worker.this.indexState, null));
-          if (_notEquals) {
-            it.setPreviousState(Worker.this.indexState);
+          boolean _equals = Objects.equal(Worker.this.indexState, null);
+          if (_equals) {
+            List<URI> _classPath = it.getClassPath();
+            List<URI> _sourceRoots_1 = it.getSourceRoots();
+            Iterable<URI> _plus = Iterables.<URI>concat(_classPath, _sourceRoots_1);
+            Set<String> _keySet = languages.keySet();
+            Worker.this.resourceURICollector.collectAllResources(_plus, _keySet);
           } else {
-            it.setIsFullBuild(true);
+            List<String> _dirtyFiles = request.getDirtyFiles();
+            final Function1<String, URI> _function_3 = new Function1<String, URI>() {
+              @Override
+              public URI apply(final String it) {
+                return FilesAndURIs.asURI(it);
+              }
+            };
+            List<URI> _map_3 = ListExtensions.<String, URI>map(_dirtyFiles, _function_3);
+            it.setDirtyFiles(_map_3);
+            List<String> _deletedFiles = request.getDeletedFiles();
+            final Function1<String, URI> _function_4 = new Function1<String, URI>() {
+              @Override
+              public URI apply(final String it) {
+                return FilesAndURIs.asURI(it);
+              }
+            };
+            List<URI> _map_4 = ListExtensions.<String, URI>map(_deletedFiles, _function_4);
+            it.setDeletedFiles(_map_4);
           }
-          it.setIssueHandler(Worker.this.issueHandler);
+          it.setFailOnValidationError(false);
+          it.setPreviousState(Worker.this.indexState);
+          it.setAfterValidate(Worker.this.issueHandler);
           final Procedure2<URI, URI> _function_5 = new Procedure2<URI, URI>() {
             @Override
             public void apply(final URI source, final URI target) {
@@ -299,8 +307,7 @@ public class XtextBuildDaemon {
         }
       };
       final BuildRequest buildRequest = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_1);
-      Map<String, LanguageAccess> _languageAccesses = XtextLanguages.getLanguageAccesses();
-      IndexState _build = this.incrementalBuilder.build(buildRequest, _languageAccesses);
+      IndexState _build = this.incrementalBuilder.build(buildRequest, languages);
       this.indexState = _build;
       final Protocol.BuildResultMessage buildResult = xtextBuildResultCollector.getBuildResult();
       return buildResult;

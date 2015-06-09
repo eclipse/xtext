@@ -187,6 +187,7 @@ public class JvmModelGenerator implements IGenerator {
   
   @Override
   public void doGenerate(final Resource input, final IFileSystemAccess fsa) {
+    this._errorSafeExtensions.installIssues(input);
     EList<EObject> _contents = input.getContents();
     for (final EObject obj : _contents) {
       this.internalDoGenerate(obj, fsa);

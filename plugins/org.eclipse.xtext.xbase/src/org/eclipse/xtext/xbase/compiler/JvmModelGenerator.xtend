@@ -110,6 +110,7 @@ class JvmModelGenerator implements IGenerator {
 	@Inject IQualifiedNameConverter qualifiedNameConverter
 	
 	override void doGenerate(Resource input, IFileSystemAccess fsa) {
+		input.installIssues
 		for (obj : input.contents) {
 			obj.internalDoGenerate(fsa)
 		}

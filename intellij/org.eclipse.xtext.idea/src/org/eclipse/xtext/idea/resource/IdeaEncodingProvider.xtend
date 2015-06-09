@@ -7,22 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.resource
 
-import com.google.inject.Inject
-import com.google.inject.Provider
-import com.google.inject.Singleton
-import com.intellij.openapi.module.Module
-import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.emf.common.util.URI
+import org.eclipse.xtext.parser.IEncodingProvider
 
-@Singleton
-class ModuleBasedResourceSetProvider {
-
-	@Inject
-	Provider<XtextResourceSet> resourceSetProvider
-
-	def get(Module context) {
-		val resourceSet = resourceSetProvider.get
-		resourceSet.classpathURIContext = context
-		return resourceSet
+/**
+ * 
+ */
+class IdeaEncodingProvider implements IEncodingProvider {
+	
+	override getEncoding(URI uri) {
+		var file = VirtualFileURIUtil.getVirtualFile(uri)
+		while (file == null && uri.segmentCount > 0) {
+			val parent = uri.trimSegments(1)
+			file = VirtualFileURIUtil.getVirtualFile(parent)
+		}
+		return file?.charset?.name ?: 'UTF-8'
 	}
-
+	
 }
