@@ -18,8 +18,14 @@ public class TestConstants {
 	public static final short shortConstant = -42;
 	public static final char charConstant = ' ';
 	public static final byte byteConstant = -128;
-	public static final double doubleConstant = Double.NaN;
-	public static final float floatConstant = Float.POSITIVE_INFINITY;
+	public static final double doubleConstant = 1d / 2d;
+	public static final double doubleConstantNaN = Double.NaN;
+	public static final double doubleConstantPosInf = Double.POSITIVE_INFINITY;
+	public static final double doubleConstantNegInf = Double.NEGATIVE_INFINITY;
+	public static final float floatConstant = 1f / 2f;
+	public static final float floatConstantNaN = Float.NaN;
+	public static final float floatConstantPosInf = Float.POSITIVE_INFINITY;
+	public static final float floatConstantNegInf = Float.NEGATIVE_INFINITY;
 	public static final boolean booleanConstant = true;
 	
 }
