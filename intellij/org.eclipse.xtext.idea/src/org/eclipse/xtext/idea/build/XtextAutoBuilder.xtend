@@ -33,17 +33,21 @@ import org.eclipse.xtext.idea.shared.XtextLanguages
 import static org.eclipse.xtext.idea.build.BuildEvent.Type.*
 
 import static extension org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs.*
+import com.intellij.openapi.util.Disposer
+import com.intellij.openapi.Disposable
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-class XtextAutoBuilder {
+class XtextAutoBuilder implements Disposable {
 
 	BlockingQueue<BuildEvent> queue = new LinkedBlockingQueue<BuildEvent>()
 
 	Alarm alarm 
 
 	Project project
+	
+	boolean disposed
 	
 	@Inject Provider<IncrementalBuilder> builderProvider	
 	 
@@ -56,7 +60,15 @@ class XtextAutoBuilder {
 	new(Project project) {
 		IdeaSharedInjectorProvider.injector.injectMembers(this)
 		this.project = project
-		alarm = new Alarm(Alarm.ThreadToUse.OWN_THREAD, project)
+		alarm = new Alarm(Alarm.ThreadToUse.OWN_THREAD, this)
+		disposed = false
+		Disposer.register(project, this)
+	}
+	
+	override dispose() {
+		alarm.cancelAllRequests
+		queue.clear
+		disposed = true
 	}
 
 	def void fileModified(VirtualFile file) {
@@ -72,7 +84,7 @@ class XtextAutoBuilder {
 	}
 
 	protected def enqueue(VirtualFile file, BuildEvent.Type type) {
-		if (file != null && !project.isDisposed) {
+		if (file != null && !disposed) {
 			queue.put(new BuildEvent(file, type))
 			alarm.cancelAllRequests
 			alarm.addRequest([build], 200)
@@ -80,6 +92,9 @@ class XtextAutoBuilder {
 	}
 
 	protected def void build() {
+		if (disposed) {
+			return
+		}
 		val allEvents = newArrayList
 		queue.drainTo(allEvents)
 		try {

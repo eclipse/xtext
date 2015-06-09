@@ -11,30 +11,35 @@ import com.google.inject.Inject
 import com.intellij.openapi.progress.ProgressIndicatorProvider
 import com.intellij.openapi.project.Project
 import com.intellij.psi.JavaPsiFacade
+import com.intellij.psi.JavaTokenType
 import com.intellij.psi.PsiAnnotation
 import com.intellij.psi.PsiAnnotationMemberValue
 import com.intellij.psi.PsiAnnotationMethod
 import com.intellij.psi.PsiAnonymousClass
 import com.intellij.psi.PsiArrayInitializerMemberValue
 import com.intellij.psi.PsiArrayType
+import com.intellij.psi.PsiBinaryExpression
 import com.intellij.psi.PsiCapturedWildcardType
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiClassObjectAccessExpression
 import com.intellij.psi.PsiClassType
 import com.intellij.psi.PsiClassType.ClassResolveResult
+import com.intellij.psi.PsiCompiledElement
+import com.intellij.psi.PsiConstantEvaluationHelper
 import com.intellij.psi.PsiEnumConstant
 import com.intellij.psi.PsiField
 import com.intellij.psi.PsiJavaFile
 import com.intellij.psi.PsiMethod
 import com.intellij.psi.PsiModifier
 import com.intellij.psi.PsiModifierListOwner
+import com.intellij.psi.PsiNameHelper
 import com.intellij.psi.PsiParameter
-import com.intellij.psi.PsiPrimitiveType
 import com.intellij.psi.PsiReferenceExpression
 import com.intellij.psi.PsiType
 import com.intellij.psi.PsiTypeParameter
 import com.intellij.psi.PsiTypeParameterListOwner
 import com.intellij.psi.PsiWildcardType
+import com.intellij.psi.impl.compiled.StubBuildingVisitor
 import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.ecore.InternalEObject
 import org.eclipse.emf.ecore.util.InternalEList
@@ -64,14 +69,16 @@ import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.TypesFactory
+import org.eclipse.xtext.common.types.access.impl.AbstractDeclaredTypeFactory
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory
 import org.eclipse.xtext.common.types.impl.JvmTypeConstraintImplCustom
 import org.eclipse.xtext.psi.IPsiModelAssociator
 import org.eclipse.xtext.util.internal.Stopwatches
 
 import static extension org.eclipse.xtext.idea.extensions.IdeaProjectExtensions.*
+import com.intellij.psi.PsiElementFactory
 
-class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
+class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 
 	val final createTypeTask = Stopwatches.forTask("PsiClassFactory.createType")
 
@@ -88,21 +95,21 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 	}
 
 	override createType(PsiClass psiClass) {
-		psiClass.project.withAlternativeResolvedEnabled [
-			try {
-				createTypeTask.start
-				val fqn = new StringBuilder(100)
+		try {
+			createTypeTask.start
+			psiClass.project.withAlternativeResolvedEnabled [
+				val buffer = new StringBuilder(100)
 				val packageName = psiClass.packageName
 				if (packageName != null) {
-					fqn.append(packageName).append('.')
+					buffer.append(packageName).append('.')
 				}
-				val type = psiClass.createType(fqn)
+				val type = psiClass.createType(buffer)
 				type.packageName = packageName
 				type
-			} finally {
-				createTypeTask.stop
-			}
-		]
+			]
+		} finally {
+			createTypeTask.stop
+		}
 	}
 
 	protected def JvmDeclaredType createType(PsiClass psiClass, StringBuilder fqn) {
@@ -111,18 +118,18 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 			throw new IllegalStateException("Cannot create type for anonymous or synthetic classes")
 		}
 		switch psiClass {
-			case psiClass.annotationType:
+			case psiClass.isAnnotationType:
 				createJvmAnnotationType
-			case psiClass.enum:
+			case psiClass.isEnum:
 				createJvmEnumerationType
-			default:
-				createJvmGenericType => [
-					interface = psiClass.interface
-					strictFloatingPoint = psiClass.modifierList.hasModifierProperty(PsiModifier.STRICTFP)
-					createTypeParameters(psiClass)
-				]
+			default: {
+				val genericType = createJvmGenericType
+				genericType.interface = psiClass.isInterface
+				genericType.strictFloatingPoint = psiClass.hasModifierProperty(PsiModifier.STRICTFP)
+				genericType.createTypeParameters(psiClass)
+				genericType
+			}
 		} => [
-			ProgressIndicatorProvider.checkCanceled
 			setTypeModifiers(psiClass)
 			setVisibility(psiClass)
 			deprecated = psiClass.deprecated
@@ -157,7 +164,7 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 		val psiClass = annotation.nameReferenceElement.resolve
 		if (psiClass instanceof PsiClass) {
 			createJvmAnnotationReference => [
-				it.annotation = psiClass.craeteAnnotationProxy
+				it.annotation = psiClass.createAnnotationProxy
 				for (attribute : annotation.parameterList.attributes) {
 					val attributeName = attribute.name ?: 'value'
 					val value = attribute.value.computeAnnotationValue(annotation.project)
@@ -188,7 +195,7 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 		]
 	}
 
-	protected def craeteAnnotationProxy(PsiClass annotationType) {
+	protected def createAnnotationProxy(PsiClass annotationType) {
 		createJvmAnnotationType => [
 			val uri = annotationType.fullURI
 			if (it instanceof InternalEObject) {
@@ -205,13 +212,58 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 		}
 	}
 
-	protected def Object createField(PsiField field, StringBuilder fqn) {
+	protected def createField(PsiField field, StringBuilder fqn) {
 		ProgressIndicatorProvider.checkCanceled
 		switch field {
 			PsiEnumConstant:
 				createJvmEnumerationLiteral
 			default:
 				createJvmField => [
+					val initializer = field.initializer
+					if (initializer instanceof PsiCompiledElement && initializer instanceof PsiBinaryExpression) {
+						val fieldType = field.getType.canonicalText
+						val PsiBinaryExpression binary = initializer as PsiBinaryExpression
+						if (binary.operationSign.tokenType == JavaTokenType.DIV) {
+							switch fieldType {
+								case Double.TYPE.simpleName:
+									switch binary.text {
+										case StubBuildingVisitor.DOUBLE_NAN: {
+											constant = true
+											constantValue = Double.NaN
+											return
+										}
+										case StubBuildingVisitor.DOUBLE_POSITIVE_INF: {
+											constant = true
+											constantValue = Double.POSITIVE_INFINITY
+											return
+										}
+										case StubBuildingVisitor.DOUBLE_NEGATIVE_INF: {
+											constant = true
+											constantValue = Double.NEGATIVE_INFINITY
+											return
+										}
+									}
+								case Float.TYPE.simpleName:
+									switch binary.text {
+										case StubBuildingVisitor.FLOAT_NAN: {
+											constant = true
+											constantValue = Float.NaN
+											return
+										}
+										case StubBuildingVisitor.FLOAT_POSITIVE_INF: {
+											constant = true
+											constantValue = Float.POSITIVE_INFINITY
+											return
+										}
+										case StubBuildingVisitor.FLOAT_NEGATIVE_INF: {
+											constant = true
+											constantValue = Float.NEGATIVE_INFINITY
+											return
+										}
+									}
+							}
+						}
+					}
 					val value = field.computeConstantValue
 					if (value != null) {
 						constant = true
@@ -239,6 +291,12 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 		for (superType : psiClass.superTypes) {
 			superTypes.addUnique(superType.createTypeReference)
 		}
+//		for (superType : psiClass.extendsListTypes) {
+//			superTypes.addUnique(superType.createTypeReference)
+//		}
+//		for (superType : psiClass.implementsListTypes) {
+//			superTypes.addUnique(superType.createTypeReference)
+//		}
 	}
 
 	protected def createMethods(JvmDeclaredType it, PsiClass psiClass, StringBuilder fqn) {
@@ -430,12 +488,18 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 	}
 
 	protected def Object computeAnnotationValue(PsiAnnotationMemberValue value, Project project) {
-		val extension constantEvaluationHelper = JavaPsiFacade.getInstance(project).constantEvaluationHelper
+		val constantEvaluationHelper = JavaPsiFacade.getInstance(project).constantEvaluationHelper
+		return value.computeAnnotationValue(constantEvaluationHelper)
+	}
+	
+	protected def Object computeAnnotationValue(PsiAnnotationMemberValue value, extension PsiConstantEvaluationHelper helper) {
 		switch value {
 			PsiAnnotation: value
 			PsiReferenceExpression: value.resolve
 			PsiClassObjectAccessExpression: value.operand.type
-			PsiArrayInitializerMemberValue: value.initializers.map[computeAnnotationValue(project)].toArray
+			PsiArrayInitializerMemberValue: value.initializers.map[
+				computeAnnotationValue(helper)
+			].toArray
 			default: value.computeConstantExpression
 		}
 	}
@@ -451,32 +515,34 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 		return null
 	}
 
-	protected def createValuesOperation(PsiClass psiClass, StringBuilder fqn) {
+	protected def createValuesOperation(PsiClass enumType, StringBuilder fqn) {
 		createJvmOperation => [
 			internalSetIdentifier(fqn.append('values()').toString)
 			simpleName = 'values'
 			visibility = JvmVisibility.PUBLIC
 			static = true
-			returnType = psiClass.project.psiElementFactory.createType(psiClass).createTypeReference
+			returnType = createJvmGenericArrayTypeReference => [
+				componentType = enumType.project.psiElementFactory.createType(enumType).createTypeReference
+			]
 			deprecated = false
-			associate[|psiClass]
+			associate[enumType]
 		]
 	}
 
-	protected def createValueOfOperation(PsiClass psiClass, StringBuilder fqn) {
-		val psiElementFactory = psiClass.project.psiElementFactory
+	protected def createValueOfOperation(PsiClass enumType, StringBuilder fqn) {
+		val psiElementFactory = enumType.project.psiElementFactory
 		createJvmOperation => [
 			internalSetIdentifier(fqn.append('valueOf(java.lang.String)').toString)
 			simpleName = 'valueOf'
 			visibility = JvmVisibility.PUBLIC
 			static = true
-			returnType = psiElementFactory.createType(psiClass).createTypeReference
+			returnType = psiElementFactory.createType(enumType).createTypeReference
 			parameters.addUnique(createJvmFormalParameter => [
 				name = 'name'
-				parameterType = psiElementFactory.createTypeByFQClassName(String.name).createTypeReference
+				parameterType = createStringReference
 			])
 			deprecated = false
-			associate[|psiClass]
+			associate[enumType]
 		]
 	}
 
@@ -486,7 +552,7 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 			simpleName = psiClass.name
 			visibility = JvmVisibility.PUBLIC
 			deprecated = false
-			associate[|psiClass]
+			associate[psiClass]
 		]
 	}
 
@@ -509,7 +575,7 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 			native = method.hasModifierProperty(PsiModifier.NATIVE)
 			returnType = method.returnType.createTypeReference
 			createAnnotationValues(method)
-			associate[|method]
+			associate[method]
 		]
 	}
 
@@ -527,13 +593,15 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 
 	protected def createFormalParameters(JvmExecutable it, PsiMethod psiMethod, StringBuilder fqn) {
 		val parameterList = psiMethod.parameterList
-		for (var i = 0; i < parameterList.parametersCount; i++) {
-			val parameter = parameterList.parameters.get(i)
+		val max = parameterList.parametersCount
+		val parameters = parameterList.parameters
+		for (var i = 0; i < max; i++) {
+			val parameter = parameters.get(i)
 			if (i != 0) {
 				fqn.append(',')
 			}
 			fqn.appendTypeName(parameter.type)
-			parameters.addUnique(parameter.createFormalParameter)
+			it.parameters.addUnique(parameter.createFormalParameter)
 		}
 	}
 
@@ -556,7 +624,7 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 		createJvmTypeParameter => [
 			name = parameter.name
 			val extendsListTypes = parameter.extendsListTypes
-			if (!extendsListTypes.empty) {
+			if (extendsListTypes.length != 0) {
 				for (upperBound : extendsListTypes) {
 					val jvmUpperBound = createJvmUpperBound as JvmTypeConstraintImplCustom
 					jvmUpperBound.internalSetTypeReference(upperBound.createTypeReference)
@@ -564,33 +632,37 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 				}
 			} else {
 				val jvmUpperBound = createJvmUpperBound as JvmTypeConstraintImplCustom
-				jvmUpperBound.internalSetTypeReference(parameter.project.createObjectClassReference)
+				jvmUpperBound.internalSetTypeReference(createObjectReference)
 				constraints.addUnique(jvmUpperBound)
 			}
 		]
 	}
 
-	protected def createObjectClassReference(Project it) {
-		psiElementFactory.createTypeByFQClassName(Object.name).createTypeReference
+	protected def createObjectReference() {
+		val result = createJvmParameterizedTypeReference
+		result.setType(OBJECT_CLASS_PROXY);
+		return result;
+	}
+	
+	protected def createStringReference() {
+		val result = createJvmParameterizedTypeReference
+		result.setType(COMMON_PROXIES.get(STRING_CLASS_NAME));
+		return result;
 	}
 
 	protected def JvmTypeReference createTypeReference(PsiType psiType) {
 		try {
 			switch psiType {
 				PsiArrayType:
-					psiType.componentType.createArrayTypeReference
+					return psiType.componentType.createArrayTypeReference
 				PsiClassType: {
 					val resolveResult = psiType.resolveGenerics
 					if (!resolveResult.validResult) {
-						createJvmUnknownTypeReference => [
+						return createJvmUnknownTypeReference => [
 							qualifiedName = psiType.className
 						]
-					} else if (psiType.parameterCount == 0) {
-						resolveResult.createClassTypeReference => [
-							type = psiType.createProxy
-						]
 					} else {
-						resolveResult.createClassTypeReference => [
+						return resolveResult.createClassTypeReference => [
 							type = psiType.rawType.createProxy
 							for (parameter : psiType.parameters) {
 								arguments.addUnique(parameter.createTypeArgument)
@@ -599,7 +671,7 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 					}
 				}
 				default:
-					createJvmParameterizedTypeReference => [
+					return createJvmParameterizedTypeReference => [
 						type = psiType.createProxy
 					]
 			}
@@ -645,7 +717,7 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 	}
 	
 	protected def dispatch JvmTypeReference createTypeArgument(PsiCapturedWildcardType type) {
-		type.wildcard.createTypeArgument
+		type.wildcard._createTypeArgument
 	}
 
 	protected def createUpperBoundReference(PsiWildcardType type) {
@@ -653,7 +725,7 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 		if (extendsBound != PsiType.NULL) {
 			extendsBound.createTypeReference
 		} else {
-			createObjectClassReference(type.manager.project)
+			createObjectReference
 		}
 	}
 
@@ -663,22 +735,22 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 		]
 	}
 
-	protected def JvmType createProxy(PsiType psiType) {
-		createJvmVoid => [
+	protected def JvmType createProxy(PsiType psiType) throws UnresolvedPsiClassType {
+		val result = createJvmVoid;
+		(result as InternalEObject) => [
 			val uri = psiType.fullURI
-			if (it instanceof InternalEObject) {
-				eSetProxyURI(uri)
-			}
+			eSetProxyURI(uri)
 		]
+		return result
 	}
 
 	protected def createNestedTypes(JvmDeclaredType it, PsiClass psiClass, StringBuilder fqn) {
-		for (innerClass : psiClass.innerClasses.filter [
-			!anonymous && !synthetic
-		]) {
-			fqn.preserve [|
-				members.addUnique(innerClass.createType(fqn))
-			]
+		for (innerClass : psiClass.innerClasses) {
+			if (!innerClass.anonymous && !innerClass.synthetic) {
+				fqn.preserve [
+					members.addUnique(innerClass.createType(fqn))
+				]
+			}
 		}
 	}
 
@@ -694,21 +766,25 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 	protected def setVisibility(JvmMember it, PsiModifierListOwner modifierListOwner) {
 		visibility = switch modifierListOwner {
 			case modifierListOwner.hasModifierProperty(PsiModifier.PRIVATE): JvmVisibility.PRIVATE
+			case modifierListOwner.hasModifierProperty(PsiModifier.PACKAGE_LOCAL): JvmVisibility.DEFAULT
 			case modifierListOwner.hasModifierProperty(PsiModifier.PROTECTED): JvmVisibility.PROTECTED
 			case modifierListOwner.hasModifierProperty(PsiModifier.PUBLIC): JvmVisibility.PUBLIC
 		}
 	}
 
 	protected def setTypeModifiers(JvmDeclaredType it, PsiClass psiClass) {
-		abstract = psiClass.hasModifierProperty(PsiModifier.ABSTRACT)
-		static = psiClass.hasModifierProperty(PsiModifier.STATIC)
+		val modifierList = psiClass.modifierList
+		abstract = modifierList.hasModifierProperty(PsiModifier.ABSTRACT)
+		static = modifierList.hasModifierProperty(PsiModifier.STATIC)
 		if (!psiClass.enum) {
-			final = psiClass.hasModifierProperty(PsiModifier.FINAL)
+			final = modifierList.hasModifierProperty(PsiModifier.FINAL)
 		}
 	}
 
-	protected def void addUnique(EList<?> list, Object object) {
-		(list as InternalEList<Object>).addUnique(object)
+	protected def <T> addUnique(EList<? super T> list, T object) {
+		if (object !== null) {
+			(list as InternalEList<T>).addUnique(object)
+		}
 	}
 
 	protected def append(StringBuilder builder, String value, ()=>void procedure) {
@@ -726,13 +802,9 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 		builder
 	}
 
-	protected def isPrimitive(PsiType type) {
-		type instanceof PsiPrimitiveType
-	}
-
 	protected def isClassType(PsiType type, Class<?> clazz) {
 		if (type instanceof PsiClassType) {
-			type.resolve.qualifiedName == clazz.name
+			return PsiNameHelper.getQualifiedClassName(type.canonicalText, true) == clazz.name
 		} else {
 			false
 		}
@@ -756,6 +828,10 @@ class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 
 	protected def isArray(PsiType type) {
 		type instanceof PsiArrayType
+	}
+	
+	private def getPsiElementFactory(Project project) {
+		PsiElementFactory.SERVICE.getInstance(project)
 	}
 
 }

@@ -43,6 +43,7 @@ import org.eclipse.xtext.common.types.JvmDoubleAnnotationValue;
 import org.eclipse.xtext.common.types.JvmEnumAnnotationValue;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFloatAnnotationValue;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -93,6 +94,7 @@ import org.eclipse.xtext.common.types.testSetups.NestedInterfaces;
 import org.eclipse.xtext.common.types.testSetups.NestedTypes;
 import org.eclipse.xtext.common.types.testSetups.ParameterizedMethods;
 import org.eclipse.xtext.common.types.testSetups.ParameterizedTypes;
+import org.eclipse.xtext.common.types.testSetups.ParameterizedTypes2;
 import org.eclipse.xtext.common.types.testSetups.RawIterable;
 import org.eclipse.xtext.common.types.testSetups.StaticNestedTypes;
 import org.eclipse.xtext.common.types.testSetups.TestAnnotation;
@@ -1427,6 +1429,24 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertEquals("ParameterizedTypes<String, String, List<String>, V, String>$Inner<String, List<String>, List<String>>", returnType.getSimpleName());
 	}
 	
+	@Test public void test_ParameterizedTypes2_inner_return_01() {
+		String typeName = ParameterizedTypes2.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		JvmOperation operation = getMethodFromType(type, ParameterizedTypes2.class, "plainInner()");
+		JvmTypeReference returnType = operation.getReturnType();
+		assertTrue(returnType.getIdentifier(), returnType instanceof JvmInnerTypeReference);
+		assertEquals("ParameterizedTypes2<P>$Inner<String>", returnType.getSimpleName());
+	}
+
+	@Test public void test_ParameterizedTypes2_inner_return_02() {
+		String typeName = ParameterizedTypes2.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		JvmOperation operation = getMethodFromType(type, ParameterizedTypes2.class, "concreteInner()");
+		JvmTypeReference returnType = operation.getReturnType();
+		assertTrue(returnType.getIdentifier(), returnType instanceof JvmInnerTypeReference);
+		assertEquals("ParameterizedTypes2<Number>$Inner<String>", returnType.getSimpleName());
+	}
+	
 	@Test public void test_ParameterizedTypes_Inner_01() {
 		String typeName = ParameterizedTypes.Inner.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
@@ -2082,6 +2102,22 @@ public abstract class AbstractTypeProviderTest extends Assert {
 			}
 		}
 		assertTrue(constructorFound);
+	}
+	
+	@Test public void testEnum_05() throws Exception {
+		String typeName = TestEnum.class.getName();
+		JvmEnumerationType type = (JvmEnumerationType) getTypeProvider().findTypeByName(typeName);
+		JvmOperation valuesOperation = (JvmOperation) Iterables.getOnlyElement(type.findAllFeaturesByName("values"));
+		String qualifiedReturnValue = valuesOperation.getReturnType().getQualifiedName();
+		assertEquals(typeName + "[]", qualifiedReturnValue);
+	}
+	
+	@Test public void testEnum_06() throws Exception {
+		String typeName = TestEnum.class.getName();
+		JvmEnumerationType type = (JvmEnumerationType) getTypeProvider().findTypeByName(typeName);
+		JvmOperation valuesOperation = (JvmOperation) Iterables.getFirst(type.findAllFeaturesByName("valueOf"), null);
+		String qualifiedReturnValue = valuesOperation.getReturnType().getQualifiedName();
+		assertEquals(typeName, qualifiedReturnValue);
 	}
 	
 	@Test public void testNestedEnum_01() throws Exception {
@@ -3275,9 +3311,39 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertEquals(TestConstants.doubleConstant, field.getConstantValueAsDouble(), 0.00000001);
 	}
 	@Test
+	public void testConstantValue_07a() {
+		JvmField field = doTestConstantValue("doubleConstantNaN", TestConstants.doubleConstantNaN);
+		assertEquals(TestConstants.doubleConstantNaN, field.getConstantValueAsDouble(), 0.00000001);
+	}
+	@Test
+	public void testConstantValue_07b() {
+		JvmField field = doTestConstantValue("doubleConstantPosInf", TestConstants.doubleConstantPosInf);
+		assertEquals(TestConstants.doubleConstantPosInf, field.getConstantValueAsDouble(), 0.00000001);
+	}
+	@Test
+	public void testConstantValue_07c() {
+		JvmField field = doTestConstantValue("doubleConstantNegInf", TestConstants.doubleConstantNegInf);
+		assertEquals(TestConstants.doubleConstantNegInf, field.getConstantValueAsDouble(), 0.00000001);
+	}
+	@Test
 	public void testConstantValue_08() {
 		JvmField field = doTestConstantValue("floatConstant", TestConstants.floatConstant);
 		assertEquals(TestConstants.floatConstant, field.getConstantValueAsFloat(), 0.00000001);
+	}
+	@Test
+	public void testConstantValue_08a() {
+		JvmField field = doTestConstantValue("floatConstantNaN", TestConstants.floatConstantNaN);
+		assertEquals(TestConstants.floatConstantNaN, field.getConstantValueAsFloat(), 0.00000001);
+	}
+	@Test
+	public void testConstantValue_08b() {
+		JvmField field = doTestConstantValue("floatConstantPosInf", TestConstants.floatConstantPosInf);
+		assertEquals(TestConstants.floatConstantPosInf, field.getConstantValueAsFloat(), 0.00000001);
+	}
+	@Test
+	public void testConstantValue_08c() {
+		JvmField field = doTestConstantValue("floatConstantNegInf", TestConstants.floatConstantNegInf);
+		assertEquals(TestConstants.floatConstantNegInf, field.getConstantValueAsFloat(), 0.00000001);
 	}
 	@Test
 	public void testConstantValue_09() {

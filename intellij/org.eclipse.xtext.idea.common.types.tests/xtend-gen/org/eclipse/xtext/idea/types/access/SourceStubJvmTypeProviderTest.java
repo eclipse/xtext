@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtext.idea.types.access;
 
 import com.intellij.openapi.module.Module;
@@ -304,8 +311,32 @@ public class SourceStubJvmTypeProviderTest extends PsiTestCase {
     delegate.testConstantValue_07();
   }
   
+  public void testConstantValue_07a() {
+    delegate.testConstantValue_07a();
+  }
+  
+  public void testConstantValue_07b() {
+    delegate.testConstantValue_07b();
+  }
+  
+  public void testConstantValue_07c() {
+    delegate.testConstantValue_07c();
+  }
+  
   public void testConstantValue_08() {
     delegate.testConstantValue_08();
+  }
+  
+  public void testConstantValue_08a() {
+    delegate.testConstantValue_08a();
+  }
+  
+  public void testConstantValue_08b() {
+    delegate.testConstantValue_08b();
+  }
+  
+  public void testConstantValue_08c() {
+    delegate.testConstantValue_08c();
   }
   
   public void testConstantValue_09() {
@@ -422,6 +453,14 @@ public class SourceStubJvmTypeProviderTest extends PsiTestCase {
   
   public void testEnum_04() throws Exception {
     delegate.testEnum_04();
+  }
+  
+  public void testEnum_05() throws Exception {
+    delegate.testEnum_05();
+  }
+  
+  public void testEnum_06() throws Exception {
+    delegate.testEnum_06();
   }
   
   public void testFields_01() {
@@ -898,6 +937,14 @@ public class SourceStubJvmTypeProviderTest extends PsiTestCase {
   
   public void testVarArgs_03() {
     delegate.testVarArgs_03();
+  }
+  
+  public void test_ParameterizedTypes2_inner_return_01() {
+    delegate.test_ParameterizedTypes2_inner_return_01();
+  }
+  
+  public void test_ParameterizedTypes2_inner_return_02() {
+    delegate.test_ParameterizedTypes2_inner_return_02();
   }
   
   public void test_ParameterizedTypes_01() {

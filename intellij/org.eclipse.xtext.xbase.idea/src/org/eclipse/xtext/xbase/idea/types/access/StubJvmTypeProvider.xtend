@@ -75,8 +75,8 @@ class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 	def doFindTypeByName(String name, boolean traverseNestedTypes) {
 		ProgressIndicatorProvider.checkCanceled
 		val normalizedName = name.normalize
-		val resourceURI = normalizedName.createResourceURI
-		val fragment = normalizedName.fragment
+		val resourceURI = createResourceURI(normalizedName)
+		val fragment = getFragment(normalizedName)
 		switch resourceSet : resourceSet {
 			ISynchronizable<ResourceSet>:
 				resourceSet.execute [
@@ -96,8 +96,8 @@ class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 	}
 
 	def findType(URI resourceURI, String fragment, boolean traverseNestedTypes) {
-		val indexedJvmTypeAccess = indexedJvmTypeAccess
-		if (indexedJvmTypeAccess != null) {
+		val indexedJvmTypeAccess = getIndexedJvmTypeAccess
+		if (indexedJvmTypeAccess !== null) {
 			val proxyURI = resourceURI.appendFragment(fragment)
 			val candidate = indexedJvmTypeAccess.getIndexedJvmType(proxyURI, resourceSet)
 			if (candidate instanceof JvmType) {

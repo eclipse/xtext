@@ -14,6 +14,7 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
 import com.intellij.compiler.impl.CompilerUtil;
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
@@ -24,6 +25,7 @@ import com.intellij.openapi.roots.OrderEnumerator;
 import com.intellij.openapi.roots.OrderRootsEnumerator;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.util.Computable;
+import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.encoding.EncodingProjectManager;
 import com.intellij.util.Alarm;
@@ -61,12 +63,14 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class XtextAutoBuilder {
+public class XtextAutoBuilder implements Disposable {
   private BlockingQueue<BuildEvent> queue = new LinkedBlockingQueue<BuildEvent>();
   
   private Alarm alarm;
   
   private Project project;
+  
+  private boolean disposed;
   
   @Inject
   private Provider<IncrementalBuilder> builderProvider;
@@ -83,8 +87,17 @@ public class XtextAutoBuilder {
     Injector _injector = IdeaSharedInjectorProvider.getInjector();
     _injector.injectMembers(this);
     this.project = project;
-    Alarm _alarm = new Alarm(Alarm.ThreadToUse.OWN_THREAD, project);
+    Alarm _alarm = new Alarm(Alarm.ThreadToUse.OWN_THREAD, this);
     this.alarm = _alarm;
+    this.disposed = false;
+    Disposer.register(project, this);
+  }
+  
+  @Override
+  public void dispose() {
+    this.alarm.cancelAllRequests();
+    this.queue.clear();
+    this.disposed = true;
   }
   
   public void fileModified(final VirtualFile file) {
@@ -106,9 +119,7 @@ public class XtextAutoBuilder {
       if (!_notEquals) {
         _and = false;
       } else {
-        boolean _isDisposed = this.project.isDisposed();
-        boolean _not = (!_isDisposed);
-        _and = _not;
+        _and = (!this.disposed);
       }
       if (_and) {
         BuildEvent _buildEvent = new BuildEvent(file, type);
@@ -128,6 +139,9 @@ public class XtextAutoBuilder {
   }
   
   protected void build() {
+    if (this.disposed) {
+      return;
+    }
     final ArrayList<BuildEvent> allEvents = CollectionLiterals.<BuildEvent>newArrayList();
     this.queue.drainTo(allEvents);
     try {

@@ -350,6 +350,24 @@ public class ReflectionTypeProviderTest extends AbstractTypeProviderTest {
 	public void testConstantValue_07() {
 		doTestConstantValue("doubleConstant", TestConstants.doubleConstant);
 	}
+	
+	@Override
+	@Test
+	public void testConstantValue_07a() {
+		doTestConstantValue("doubleConstantNaN", TestConstants.doubleConstant);
+	}
+	
+	@Override
+	@Test
+	public void testConstantValue_07b() {
+		doTestConstantValue("doubleConstantPosInf", TestConstants.doubleConstant);
+	}
+	
+	@Override
+	@Test
+	public void testConstantValue_07c() {
+		doTestConstantValue("doubleConstantNegInf", TestConstants.doubleConstant);
+	}
 
 	@Override
 	@Test
@@ -357,6 +375,24 @@ public class ReflectionTypeProviderTest extends AbstractTypeProviderTest {
 		doTestConstantValue("floatConstant", TestConstants.floatConstant);
 	}
 
+	@Override
+	@Test
+	public void testConstantValue_08a() {
+		doTestConstantValue("floatConstantNaN", TestConstants.floatConstant);
+	}
+	
+	@Override
+	@Test
+	public void testConstantValue_08b() {
+		doTestConstantValue("floatConstantPosInf", TestConstants.floatConstant);
+	}
+	
+	@Override
+	@Test
+	public void testConstantValue_08c() {
+		doTestConstantValue("floatConstantNegInf", TestConstants.floatConstant);
+	}
+	
 	@Override
 	@Test
 	public void testConstantValue_09() {
