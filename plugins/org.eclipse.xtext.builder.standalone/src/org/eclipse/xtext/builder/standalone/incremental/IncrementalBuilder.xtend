@@ -10,36 +10,27 @@ package org.eclipse.xtext.builder.standalone.incremental
 import com.google.inject.Inject
 import com.google.inject.Provider
 import java.util.Map
-import org.apache.log4j.Logger
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.builder.standalone.ClusteringConfig
 import org.eclipse.xtext.builder.standalone.LanguageAccess
-//import org.eclipse.xtext.generator.JavaIoFileSystemAccess
-//import org.eclipse.xtext.generator.JavaIoFileSystemAccess.IFileCallback
-import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.clustering.DisabledClusteringPolicy
 import org.eclipse.xtext.resource.clustering.DynamicResourceClusteringPolicy
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
+import org.eclipse.xtext.resource.persistence.SerializableResourceDescription
 import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.util.CancelIndicator
-//import org.eclipse.xtext.util.Files
+import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.CheckMode
-
-
-//import static extension org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs.*
-import static org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder.*
-import org.eclipse.xtext.generator.URIBasedFileSystemAccess
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.9 
  */
-class IncrementalBuilder {
-	static final Logger LOG = Logger.getLogger(IncrementalBuilder);
+@Log class IncrementalBuilder {
 	
-	protected static class InternalStatefulIncrementalBuilder {
+	@Log protected static class InternalStatefulIncrementalBuilder {
 	
 		@Accessors(PROTECTED_SETTER) extension BuildContext context
 		@Accessors(PROTECTED_SETTER) BuildRequest request
@@ -47,12 +38,11 @@ class IncrementalBuilder {
 		@Inject Indexer indexer
 	
 		def IndexState launch() {
-			initialize
-			cleanup
 			val newSource2GeneratedMapping = request.previousState.fileMappings.copy
 			request.deletedFiles.forEach [
 				newSource2GeneratedMapping.deleteSource(it).forEach [
-					LOG.info("Deleting " + it)
+					if (LOG.isInfoEnabled)
+						LOG.info("Deleting " + it)
 					
 					context.resourceSet.URIConverter.delete(it, emptyMap)
 					request.afterDeleteFile.apply(it)
@@ -64,47 +54,23 @@ class IncrementalBuilder {
 					Resource resource |
 					resource.contents // fully initialize
 					EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl)
-					if(resource.validate) {
+					val manager = context.getLanguageAccess(resource.URI).resourceDescriptionManager
+					val description = manager.getResourceDescription(resource);
+                    val copiedDescription = SerializableResourceDescription.createCopy(description);
+                    result.newIndex.addDescription(resource.URI, copiedDescription)
+					if (resource.validate) {
 						resource.generate(request, newSource2GeneratedMapping)
-						return true				
 					}
-					return false 
+					return true
 				]
-	//		cleanup
 			return new IndexState(result.newIndex, newSource2GeneratedMapping)
 		}
 		
-		def protected initialize() {
-			//TODO needs to be done outside
-			if (request.defaultEncoding != null) {
-				LOG.info("Setting encoding.")
-				for (lang : languages.values) {
-					switch provider : lang.encodingProvider {
-						IEncodingProvider.Runtime: {
-							provider.setDefaultEncoding(request.defaultEncoding)
-						}
-						default: {
-							LOG.info("Couldn't set encoding '" + request.defaultEncoding + "' for provider '" + provider +
-								"'. Only subclasses of IEncodingProvider.Runtime are supported.")
-						}
-					}
-				}
-			}
-		}
-		
-		def protected cleanup() {
-			val extension converter = context.resourceSet.URIConverter
-			if(tempDir.exists(emptyMap)) {
-				LOG.info('Removing temp folder ' + tempDir)
-				tempDir.delete(emptyMap)
-			}
-		}
-	
 		def protected boolean validate(Resource resource) {
 			LOG.info("Starting validation for input: '" + resource.URI.lastSegment + "'");
 			val resourceValidator = resource.URI.languageAccess.getResourceValidator();
 			val validationResult = resourceValidator.validate(resource, CheckMode.ALL, null);
-			return request.issueHandler.handleIssue(validationResult)
+			return request.afterValidate.afterValidate(resource.URI, validationResult)
 		}
 	
 		protected def void generate(Resource resource, BuildRequest request, Source2GeneratedMapping newMappings) {
@@ -163,13 +129,11 @@ class IncrementalBuilder {
 			} else
 				new DisabledClusteringPolicy
 				
-		val tempDir = request.baseDir.appendSegment('xtext-tmp')
 		val resourceSet = request.resourceSet
 		resourceSet.addLoadOption(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE, true)
 		val context = new BuildContext(languages
 									, resourceSet
-									, strategy
-									, tempDir)
+									, strategy)
 		val builder = provider.get
 		builder.context = context
 		builder.request = request

@@ -12,7 +12,6 @@ import static java.util.Collections.*;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -67,16 +66,16 @@ public class ElementIssueProvider implements IElementIssueProvider {
 	
 	public static class Factory implements IElementIssueProvider.Factory {
 		
-		private static final Logger LOG = Logger.getLogger(Factory.class);
-		
 		@Inject IJvmModelAssociations associations;
 		
 		@Inject IResourceValidator resourceValidator;
 		
 		@Inject IBatchTypeResolver typeResolver;
 		
-		
 		public void attachData(Resource resource) {
+			if (findDataAdapter(resource) != null) {
+				return;
+			}
 			List<Issue> issues = collectIssues(resource);
 			Data adapter = new Data();
 			for (Issue issue : issues) {

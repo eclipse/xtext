@@ -9,59 +9,44 @@ package org.eclipse.xtext.builder.standalone.incremental
 
 import java.io.File
 import java.io.IOException
-import java.util.List
+import java.util.Set
 import java.util.jar.JarFile
 import java.util.jar.Manifest
 import java.util.zip.ZipException
-import org.apache.log4j.Logger
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.plugin.EcorePlugin
-import org.eclipse.xtext.mwe.NameBasedFilter
 import org.eclipse.xtext.mwe.PathTraverser
+import org.eclipse.xtext.util.internal.Log
+
 import static extension org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs.*
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.9 
  */
-class ResourceURICollector {
+@Log class ResourceURICollector {
 	
-	static val LOG = Logger.getLogger(ResourceURICollector)
-	
-	def Iterable<URI> collectAllResources(BuildRequest request, BuildContext context) {
-		LOG.info("Collecting source models.")
+	def Set<URI> collectAllResources(Iterable<URI> roots, Set<String> fileExtensions) {
+		if (LOG.infoEnabled) 
+			LOG.info("Collecting source models.")
 		val startedAt = System.currentTimeMillis
-		val result = (request.sourceRoots.collectResources(context) + request.classPath.collectResources(context)).toSet
-		LOG.debug("Finished collecting source models. Took: " + (System.currentTimeMillis - startedAt) + " ms.")
-		result
+		val result = roots.collectResources(fileExtensions)
+		if (LOG.debugEnabled) 
+			LOG.debug("Finished collecting source models. Took: " + (System.currentTimeMillis - startedAt) + " ms.")
+		return result
 	} 
 	
-	def protected collectResources(List<URI> roots, BuildContext context) {
-		val extensions = (context.languages.keySet + #['java']).join("|")
-		val nameBasedFilter = new NameBasedFilter
+	def protected collectResources(Iterable<URI> roots, Set<String> fileExtensions) {
+		val extensions = (fileExtensions + #['java']).toSet
 
-		// TODO test with whitespaced file extensions
-		nameBasedFilter.setRegularExpression(".*\\.(?:(" + extensions + "))$");
-		val List<URI> resources = newArrayList();
-
-		val modelsFound = new PathTraverser().resolvePathes(
-			roots.map[toFileString].toList,
-			[ input |
-				val matches = nameBasedFilter.matches(input)
-				if (matches) {
-					LOG.info("Adding file '" + input + "'");
-					resources.add(input);
-				}
-				return matches
-			]
-		)
+		val modelsFound = new PathTraverser().resolvePathes(roots.map[toFileString].toList) [ extensions.contains(fileExtension) ]
 		modelsFound.asMap.forEach [ path, resource |
 			val file = new File(path)
 			if (resource != null && !file.directory && file.name.endsWith(".jar")) {
 				registerBundle(file)
 			}
 		]
-		return resources;
+		return modelsFound.values.toSet;
 	}
 
 	def protected registerBundle(File file) {

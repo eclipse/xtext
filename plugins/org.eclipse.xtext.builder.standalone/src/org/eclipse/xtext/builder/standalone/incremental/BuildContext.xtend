@@ -25,7 +25,6 @@ class BuildContext {
 	val Map<String, LanguageAccess> languages
 	val XtextResourceSet resourceSet
 	val IResourceClusteringPolicy clusteringPolicy
-	val URI tempDir
 	
 	ClusteringStorageAwareResourceLoader loader
 	
