@@ -837,14 +837,14 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		var XtendClass clazz = toValidXtendClass(
 			'''
 		public class Clazz { 
-			public static main(String[] args) {
-				int[] ints = new int[]{1,2,3,4,5};
-				int in = 2;
-				System.out.println("3="+(ints[in]++));
-				System.out.println("4="+(ints[in]--));
-				System.out.println("1="+(--ints[in]));
-				System.out.println("5="+(++ints[in]));
-			}
+			public static void main(String[] args) {
+					int[] ints = new int[]{1,2,40,44,5,6,7};
+					int in = 3;
+					System.out.println("44="+(ints[in]++));
+					System.out.println("45="+(ints[in]--));
+					System.out.println("43="+(--ints[in]));
+					System.out.println("44="+(++ints[in]));
+				}
 		}''')
 		assertNotNull(clazz)
 	}
@@ -854,7 +854,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		var XtendClass clazz = toValidXtendClass(
 			'''
 		public class Clazz { 
-			public static main(String[] args) {
+			public static void main(String[] args) {
 				int[] ints = new int[]{1,2,3,4,5};
 				int in = 2;
 				System.out.println("3="+(ints[in++]++));
@@ -864,6 +864,26 @@ class JavaConverterTest extends AbstractXtendTestCase {
 			}
 		}''')
 		assertNotNull(clazz)
+	}
+	
+	@Test def void testPostfixArrayAccess() throws Exception {
+		val javaCode = '''
+			private int ar[] = new int[1];
+			public void arPostReturn() {
+				System.out.println(ar[0]++);
+			}
+			public void arPostNoReturn() {
+				ar[0]++;
+			}
+		'''
+		assertEquals('''
+		int[] ar=newIntArrayOfSize(1)
+		def void arPostReturn() {
+			System.out.println({ var _postIndx_ar=0 var  _postVal_ar={val _rdIndx_ar=_postIndx_ar ar.get(_rdIndx_ar)}{ val _wrVal_ar=ar val _wrIndx_ar=_postIndx_ar _wrVal_ar.set(_wrIndx_ar,_postVal_ar + 1)}_postVal_ar }) 
+		}
+		def void arPostNoReturn() {
+			{ var _postIndx_ar=0 var  _postVal_ar={val _rdIndx_ar=_postIndx_ar ar.get(_rdIndx_ar)}{ val _wrVal_ar=ar val _wrIndx_ar=_postIndx_ar _wrVal_ar.set(_wrIndx_ar,_postVal_ar + 1)} } 
+		}'''.toString, toXtendClassBodyDeclr(javaCode))
 	}
 
 	@Test def void testRichStringCase() throws Exception {
