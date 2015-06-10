@@ -23,7 +23,7 @@ public class ClasspathTypeProviderWithoutASMTest extends ReflectionTypeProviderT
 
 	@Override
 	protected AbstractRuntimeJvmTypeProvider createTypeProvider() {
-		return new ClasspathTypeProvider(getClass().getClassLoader(), resourceSet, indexedJvmTypeAccess) {
+		return new ClasspathTypeProvider(getClass().getClassLoader(), resourceSet, indexedJvmTypeAccess, null) {
 			@Override
 			protected ITypeFactory<BinaryClass, JvmDeclaredType> createDeclaredTypeFactory(ClassFileBytesAccess readerAccess, ClassLoader classLoader) {
 				return new DeclaredTypeFactory(readerAccess, classLoader, false);

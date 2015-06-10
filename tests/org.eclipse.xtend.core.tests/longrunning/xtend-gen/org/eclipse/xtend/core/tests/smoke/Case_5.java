@@ -9,7 +9,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 @SuppressWarnings("all")
 public class Case_5 {
   @Inject
-  private ArrayList myList;
+  private ArrayList<?> myList;
   
   @Inject
   @Extension

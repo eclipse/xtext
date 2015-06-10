@@ -7,9 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
-import java.util.Iterator;
-
-import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.resource.ResourceSet;

@@ -5,8 +5,8 @@ class Case_3 {
 	    val (Integer) => Integer closure = [Integer i| return i]
 	    for (x : 1..100) closure.apply(x)
 	}
-	def testReturnExpression_07() {
-		if (typeof(Case_3) != null) {
+	def testReturnExpression_07(Class<?> c) {
+		if (typeof(Case_3) != c) {
 		    val (int)=>int closure = [Integer i| return i]
 		    for (x : 1..100) closure.apply(x)
 		}

@@ -321,8 +321,9 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 		val file = file(input.toString(), false)
 		val resource = file.eResource
 		try {
+			// we need to attach the data here explicitly since #generateType is called directly
 			issueProviderFactory.attachData(resource)
-			val inferredType = resource.contents.filter(typeof(JvmDeclaredType)).head
+			val inferredType = resource.contents.filter(JvmDeclaredType).head
 			var javaCode = generator.generateType(inferredType, generatorConfigProvider.get(inferredType));
 			javaCode = postProcessor.postProcess(null, javaCode)
 			assertEquals(expected.toString, javaCode.toString)

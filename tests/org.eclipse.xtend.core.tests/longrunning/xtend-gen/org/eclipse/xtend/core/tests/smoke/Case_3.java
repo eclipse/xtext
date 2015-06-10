@@ -23,8 +23,8 @@ public class Case_3 {
     }
   }
   
-  public void testReturnExpression_07() {
-    boolean _notEquals = (!Objects.equal(Case_3.class, null));
+  public void testReturnExpression_07(final Class<?> c) {
+    boolean _notEquals = (!Objects.equal(Case_3.class, c));
     if (_notEquals) {
       final Function1<Integer, Integer> _function = new Function1<Integer, Integer>() {
         @Override

@@ -27,6 +27,7 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jdt.core.WorkingCopyOwner;
+import org.eclipse.jdt.core.compiler.IProblem;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
@@ -584,7 +585,11 @@ public class JdtBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
 				}
 			}
 		} catch(AbortCompilation aborted) {
-			log.info("Couldn't resolve annotations of "+annotated, aborted);
+			if (aborted.problem.getID() == IProblem.IsClassPathCorrect) {
+				// ignore
+			} else {
+				log.info("Couldn't resolve annotations of "+annotated, aborted);
+			}
 		} finally {
 			resolveAnnotations.stop();
 		}
@@ -601,14 +606,16 @@ public class JdtBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
 		IMemberValuePairBinding[] allMemberValuePairs = annotation.getDeclaredMemberValuePairs();
 		for (IMemberValuePairBinding memberValuePair : allMemberValuePairs) {
 			IMethodBinding methodBinding = memberValuePair.getMethodBinding();
-			try {
-				values.addUnique(createAnnotationValue(annotationType, memberValuePair.getValue(), methodBinding));
-			} catch(NullPointerException npe) {
-				// memberValuePair#getValue may throw an NPE if the methodBinding has no return type
-				if (methodBinding.getReturnType() != null) {
-					throw npe;
-				} else {
-					log.debug(npe.getMessage(), npe);
+			if (methodBinding != null) {
+				try {
+					values.addUnique(createAnnotationValue(annotationType, memberValuePair.getValue(), methodBinding));
+				} catch(NullPointerException npe) {
+					// memberValuePair#getValue may throw an NPE if the methodBinding has no return type
+					if (methodBinding.getReturnType() != null) {
+						throw npe;
+					} else {
+						log.debug(npe.getMessage(), npe);
+					}
 				}
 			}
 		}

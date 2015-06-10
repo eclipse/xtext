@@ -135,21 +135,8 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
         _simpleName_2=computedSuperType.getSimpleName();
       }
       Assert.assertEquals(_key_2, _simpleName_2);
-      boolean _or = false;
-      boolean _isPrimitiveVoid = false;
-      if (computedSuperType!=null) {
-        _isPrimitiveVoid=computedSuperType.isPrimitiveVoid();
-      }
-      if (_isPrimitiveVoid) {
-        _or = true;
-      } else {
-        boolean _isPrimitive = false;
-        if (computedSuperType!=null) {
-          _isPrimitive=computedSuperType.isPrimitive();
-        }
-        _or = _isPrimitive;
-      }
-      boolean _not_1 = (!_or);
+      boolean _isPrimitiveOrVoid = this.isPrimitiveOrVoid(computedSuperType);
+      boolean _not_1 = (!_isPrimitiveOrVoid);
       if (_not_1) {
         CommonTypeComputationServices _services_3 = this.getServices();
         TypeConformanceComputer _typeConformanceComputer_2 = _services_3.getTypeConformanceComputer();
@@ -204,6 +191,25 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  private boolean isPrimitiveOrVoid(final LightweightTypeReference computedSuperType) {
+    boolean _xblockexpression = false;
+    {
+      if ((computedSuperType == null)) {
+        return false;
+      }
+      boolean _or = false;
+      boolean _isPrimitiveVoid = computedSuperType.isPrimitiveVoid();
+      if (_isPrimitiveVoid) {
+        _or = true;
+      } else {
+        boolean _isPrimitive = computedSuperType.isPrimitive();
+        _or = _isPrimitive;
+      }
+      _xblockexpression = _or;
+    }
+    return _xblockexpression;
   }
   
   public void isFunctionAndEquivalentTo(final Object reference, final String type) {

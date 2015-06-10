@@ -9,8 +9,8 @@ class Case_2 {
 			a 
 	}
 	
-	def returnInIf() {
-		if ('x'!='x') return 'xx' else return 'yy'
+	def returnInIf(char c) {
+		if ('x'!=c) return 'xx' else return 'yy'
 	}
 
 }

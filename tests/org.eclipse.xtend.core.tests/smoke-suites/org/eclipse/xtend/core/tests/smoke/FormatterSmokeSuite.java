@@ -18,7 +18,6 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder;
-import org.eclipse.xtext.formatting2.regionaccess.internal.NodeModelBasedRegionAccess;
 import org.eclipse.xtext.junit4.smoketest.ProcessedBy;
 import org.eclipse.xtext.junit4.smoketest.ScenarioProcessor;
 import org.eclipse.xtext.junit4.smoketest.XtextSmokeTestRunner;

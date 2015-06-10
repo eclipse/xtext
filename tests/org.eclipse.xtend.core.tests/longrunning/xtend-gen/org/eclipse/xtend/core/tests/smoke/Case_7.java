@@ -26,7 +26,7 @@ public class Case_7 {
     {
       CharSequence x = null;
       Object _xifexpression = null;
-      if ((x instanceof Map.Entry)) {
+      if ((x instanceof Map.Entry<?, ?>)) {
         _xifexpression = null;
       }
       _xblockexpression = _xifexpression;
