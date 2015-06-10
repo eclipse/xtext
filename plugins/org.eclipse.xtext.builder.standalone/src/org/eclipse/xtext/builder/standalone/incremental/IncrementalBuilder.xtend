@@ -23,12 +23,20 @@ import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.CheckMode
+import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.xtext.resource.IResourceDescription
+import java.util.Set
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.9 
  */
 @Log class IncrementalBuilder {
+	
+	@Data static class Result {
+		IndexState indexState
+		Set<IResourceDescription.Delta> affectedResources
+	}
 	
 	@Log protected static class InternalStatefulIncrementalBuilder {
 	
@@ -37,7 +45,7 @@ import org.eclipse.xtext.validation.CheckMode
 	
 		@Inject Indexer indexer
 	
-		def IndexState launch() {
+		def Result launch() {
 			val newSource2GeneratedMapping = request.previousState.fileMappings.copy
 			request.deletedFiles.forEach [
 				newSource2GeneratedMapping.deleteSource(it).forEach [
@@ -63,7 +71,7 @@ import org.eclipse.xtext.validation.CheckMode
 					}
 					return true
 				]
-			return new IndexState(result.newIndex, newSource2GeneratedMapping)
+			return new Result(new IndexState(result.newIndex, newSource2GeneratedMapping), result.resourceDeltas)
 		}
 		
 		def protected boolean validate(Resource resource) {
@@ -113,11 +121,11 @@ import org.eclipse.xtext.validation.CheckMode
 
 	@Inject Provider<IncrementalBuilder.InternalStatefulIncrementalBuilder> provider
 
-	def IndexState build(BuildRequest request, Map<String, LanguageAccess> languages) {
+	def Result build(BuildRequest request, Map<String, LanguageAccess> languages) {
 		build(request, languages, null)
 	}
 	
-	def IndexState build(BuildRequest request, Map<String, LanguageAccess> languages, ClusteringConfig clusteringConfig) {
+	def Result build(BuildRequest request, Map<String, LanguageAccess> languages, ClusteringConfig clusteringConfig) {
 		val strategy = if (clusteringConfig != null) {
 				LOG.info("Clustering configured.")
 				new DynamicResourceClusteringPolicy => [
