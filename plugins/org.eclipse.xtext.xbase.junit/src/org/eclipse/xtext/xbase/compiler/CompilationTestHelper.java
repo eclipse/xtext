@@ -23,6 +23,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.generator.GeneratorDelegate;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
@@ -326,7 +327,6 @@ public class CompilationTestHelper {
 		
 		@Inject private IResourceServiceProvider.Registry serviceRegistry;
 		@Inject private Provider<RegisteringFileSystemAccess> fileSystemAccessProvider;
-		@Inject	private ElementIssueProvider.Factory elementIssueProviderFactory;
 		
 		private OnTheFlyJavaCompiler2 javaCompiler;
 		private ResourceSet resourceSet;
@@ -526,14 +526,9 @@ public class CompilationTestHelper {
 				for (Resource resource : sources) {
 					if (resource instanceof XtextResource) {
 						XtextResource xtextResource = (XtextResource) resource;
-						IGenerator generator = xtextResource.getResourceServiceProvider().get(IGenerator.class);
+						GeneratorDelegate generator = xtextResource.getResourceServiceProvider().get(GeneratorDelegate.class);
 						if (generator != null) {
-							try {
-								elementIssueProviderFactory.attachData(xtextResource);
-								generator.doGenerate(xtextResource, access);
-							} finally {
-								elementIssueProviderFactory.detachData(xtextResource);
-							}
+							generator.generate(xtextResource, access);
 						}
 					}
 				}

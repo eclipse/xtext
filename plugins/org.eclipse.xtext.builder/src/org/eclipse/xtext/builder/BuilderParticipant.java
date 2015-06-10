@@ -35,10 +35,12 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.builder.DerivedResourceMarkers.GeneratorIdProvider;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2.IFileCallback;
 import org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess;
+import org.eclipse.xtext.generator.GeneratorDelegate;
 import org.eclipse.xtext.generator.IDerivedResourceMarkers;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IFileSystemAccessExtension3;
 import org.eclipse.xtext.generator.IGenerator;
+import org.eclipse.xtext.generator.IGenerator2;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.OutputConfiguration.SourceMapping;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -79,7 +81,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	private Provider<EclipseResourceFileSystemAccess2> fileSystemAccessProvider;
 
 	@Inject
-	private IGenerator generator;
+	private GeneratorDelegate generatorDelegate;
 
 	@Inject
 	private IResourceServiceProvider resourceServiceProvider;
@@ -140,9 +142,18 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 
 	/**
 	 * @since 2.2
+	 * @deprecated use {@link #getGenerator2()} instead. 
 	 */
+	@Deprecated
 	public IGenerator getGenerator() {
-		return generator;
+		return generatorDelegate;
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public IGenerator2 getGenerator2() {
+		return generatorDelegate;
 	}
 
 	/**
@@ -516,15 +527,16 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		handleChangedContents(delta, context, (EclipseResourceFileSystemAccess2) access);
 	}
 
-	protected void handleChangedContents(Delta delta, IBuildContext context,
-			EclipseResourceFileSystemAccess2 fileSystemAccess) throws CoreException {
+	protected void handleChangedContents(Delta delta, IBuildContext context, EclipseResourceFileSystemAccess2 fileSystemAccess) throws CoreException {
 		// TODO: we will run out of memory here if the number of deltas is large enough
+		if (!getResourceServiceProvider().canHandle(delta.getUri()))
+			return;
 		Resource resource = context.getResourceSet().getResource(delta.getUri(), true);
 		saveResourceStorage(resource, fileSystemAccess);
 		if (shouldGenerate(resource, context)) {
 			try {
 				registerCurrentSourceFolder(context, delta, fileSystemAccess);
-				generator.doGenerate(resource, fileSystemAccess);
+				generatorDelegate.generate(resource, fileSystemAccess);
 			} catch (RuntimeException e) {
 				if (e.getCause() instanceof CoreException) {
 					throw (CoreException) e.getCause();
@@ -533,7 +545,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			}
 		}
 	}
-
+	
 	/**
 	 * @since 2.6
 	 */
