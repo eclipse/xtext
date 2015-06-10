@@ -14,13 +14,12 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.util.RuntimeIOException;
 
 /**
- *
- * Abstract base class for file system access supporting {@link IFileSystemAccessExtension3} and {@link IFileSystemAccessExtension4}.
+ * Abstract base class for file system access supporting {@link IFileSystemAccess2}.
  *
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.4
  */
-public abstract class AbstractFileSystemAccess2 extends AbstractFileSystemAccess implements IFileSystemAccessExtension3, IFileSystemAccessExtension4 {
+public abstract class AbstractFileSystemAccess2 extends AbstractFileSystemAccess implements IFileSystemAccess2 {
 
 	/**
 	 * @since 2.4
@@ -50,7 +49,7 @@ public abstract class AbstractFileSystemAccess2 extends AbstractFileSystemAccess
 	/**
 	 * Sets the context to further configure this file system access instance.
 	 *
-	 * @param context - a context from which project configuration can be obtained. Supported context types
+	 * @param context a context from which project configuration can be obtained. Supported context types
 	 * 	depend on the concrete implementation, but {@link Resource} is usually a good fit.
 	 *
 	 * @since 2.8
@@ -58,9 +57,16 @@ public abstract class AbstractFileSystemAccess2 extends AbstractFileSystemAccess
 	public void setContext(Object context) {
 		// do nothing
 	}
+	
+	/**
+	 * @since 2.9
+	 */
+	@Override
+	public boolean isFile(String path) throws RuntimeIOException {
+		return isFile(path, DEFAULT_OUTPUT);
+	}
 
 	/**
-	 * {@inheritDoc}
 	 * @since 2.9
 	 */
 	@Override

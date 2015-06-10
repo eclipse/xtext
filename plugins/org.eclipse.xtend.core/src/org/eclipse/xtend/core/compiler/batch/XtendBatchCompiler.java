@@ -34,7 +34,7 @@ import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.descriptions.IStubGenerator;
 import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.generator.IGenerator;
+import org.eclipse.xtext.generator.GeneratorDelegate;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.mwe.NameBasedFilter;
 import org.eclipse.xtext.mwe.PathTraverser;
@@ -108,7 +108,7 @@ public class XtendBatchCompiler {
 	@Inject
 	protected Provider<ResourceSetBasedResourceDescriptions> resourceSetDescriptionsProvider;
 	@Inject
-	private IGenerator generator;
+	private GeneratorDelegate generator;
 	@Inject
 	private IndexedJvmTypeAccess indexedJvmTypeAccess;
 	@Inject
@@ -783,7 +783,7 @@ public class XtendBatchCompiler {
 					StorageAwareResource storageAwareResource = (StorageAwareResource)resource;
 					storageAwareResource.getResourceStorageFacade().saveResource(storageAwareResource, javaIoFileSystemAccess);
 				}
-				generator.doGenerate(resource, javaIoFileSystemAccess);
+				generator.generate(resource, javaIoFileSystemAccess);
 			}
 		}
 	}

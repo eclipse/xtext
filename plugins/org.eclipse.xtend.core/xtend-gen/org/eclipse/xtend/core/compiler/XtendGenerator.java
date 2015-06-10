@@ -53,12 +53,15 @@ import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.generator.IFileSystemAccess;
+import org.eclipse.xtext.generator.IFileSystemAccess2;
+import org.eclipse.xtext.generator.IGenerator2;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.compiler.ElementIssueProvider;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
@@ -83,7 +86,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * @author Sven Efftinge - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class XtendGenerator extends JvmModelGenerator {
+public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
   private static class StopCollecting extends Exception {
   }
   
@@ -93,10 +96,28 @@ public class XtendGenerator extends JvmModelGenerator {
   @Inject
   private OperationCanceledManager operationCanceledManager;
   
+  @Inject
+  private ElementIssueProvider.Factory issueProviderFactory;
+  
   @Override
   public void doGenerate(final Resource input, final IFileSystemAccess fsa) {
     super.doGenerate(input, fsa);
     this.callMacroProcessors(input);
+  }
+  
+  @Override
+  public void beforeGenerate(final Resource input, final IFileSystemAccess2 fsa) {
+    this.issueProviderFactory.attachData(input);
+  }
+  
+  @Override
+  public void afterGenerate(final Resource input, final IFileSystemAccess2 fsa) {
+    this.issueProviderFactory.detachData(input);
+  }
+  
+  @Override
+  public void doGenerate(final Resource input, final IFileSystemAccess2 fsa) {
+    this.doGenerate(input, ((IFileSystemAccess) fsa));
   }
   
   public void callMacroProcessors(final Resource input) {

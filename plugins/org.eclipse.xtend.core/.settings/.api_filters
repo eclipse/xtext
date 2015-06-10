@@ -9,12 +9,6 @@
         </filter>
     </resource>
     <resource path="src/org/eclipse/xtend/core/compiler/batch/XtendBatchCompiler.java" type="org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler">
-        <filter id="338755678">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler"/>
-                <message_argument value="complianceLevel"/>
-            </message_arguments>
-        </filter>
         <filter id="643842064">
             <message_arguments>
                 <message_argument value="XtendFile"/>

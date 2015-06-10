@@ -30,7 +30,7 @@ import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.builder.standalone.incremental.IndexState;
 import org.eclipse.xtext.builder.standalone.incremental.Indexer;
 import org.eclipse.xtext.builder.standalone.incremental.Source2GeneratedMapping;
-import org.eclipse.xtext.generator.IGenerator;
+import org.eclipse.xtext.generator.GeneratorDelegate;
 import org.eclipse.xtext.generator.URIBasedFileSystemAccess;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -278,8 +278,8 @@ public class IncrementalBuilder {
           }
         }
       }
-      IGenerator _generator = access.getGenerator();
-      _generator.doGenerate(resource, fileSystemAccess);
+      GeneratorDelegate _generator = access.getGenerator();
+      _generator.generate(resource, fileSystemAccess);
       final Procedure1<URI> _function_1 = new Procedure1<URI>() {
         @Override
         public void apply(final URI it) {

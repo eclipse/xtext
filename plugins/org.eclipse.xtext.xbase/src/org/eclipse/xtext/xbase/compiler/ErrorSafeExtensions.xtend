@@ -9,7 +9,6 @@
 
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.common.types.JvmAnnotationReference
 import org.eclipse.xtext.common.types.JvmCompoundTypeReference
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference
@@ -30,12 +29,8 @@ class ErrorSafeExtensions {
 	
 	@Inject extension TypeReferenceSerializer 
 
-	@Inject ElementIssueProvider.Factory issueProviderFactory
+	@Inject IElementIssueProvider.Factory issueProviderFactory
 	
-	def void installIssues(Resource resource) {
-		issueProviderFactory.attachData(resource)
-	}
-
 	def Iterable<Issue> getErrors(EObject element) {
 		val issueProvider = issueProviderFactory.get(element.eResource)
 		issueProvider.getIssues(element).filter[severity == Severity.ERROR]

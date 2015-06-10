@@ -278,6 +278,48 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
     this.assertLineNumbers(_builder);
   }
   
+  @Test
+  public void testLineMapping_09() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Test {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def Object doStuff() { // 18 ");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("switch x : \"Hello\" { \t\t// 5..7");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("String \t\t\t\t\t// 8..9");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("case ");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("x.length > 4 : {// 10..12");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("null\t\t\t// 14");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertLineNumbers(_builder);
+  }
+  
   public void assertLineNumbers(final CharSequence xtendCodeWithLineNumbers) {
     final AbstractTraceRegion region = this.getTraceRegion(xtendCodeWithLineNumbers);
     final List<LineMappingProvider.LineMapping> normalizedMappings = this.lineMappingProvider.getLineMapping(region);

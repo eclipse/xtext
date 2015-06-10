@@ -40,8 +40,8 @@ import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.descriptions.IStubGenerator;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess;
+import org.eclipse.xtext.generator.GeneratorDelegate;
 import org.eclipse.xtext.generator.IFileSystemAccess;
-import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.mwe.NameBasedFilter;
@@ -472,8 +472,8 @@ public class StandaloneBuilder {
             }
           }
         }
-        IGenerator _generator = access.getGenerator();
-        _generator.doGenerate(it, fileSystemAccess);
+        GeneratorDelegate _generator = access.getGenerator();
+        _generator.generate(it, fileSystemAccess);
       }
     }
   }

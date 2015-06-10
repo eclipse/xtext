@@ -114,8 +114,8 @@ public class GeneratorComponent implements IWorkflowComponent {
 	
 	@Override
 	public void invoke(IWorkflowContext ctx) {
-		IGenerator instance = getCompiler();
-		IFileSystemAccess fileSystemAccess = getConfiguredFileSystemAccess();
+		GeneratorDelegate instance = getCompiler();
+		IFileSystemAccess2 fileSystemAccess = getConfiguredFileSystemAccess();
 		for (String slot : slotNames) {
 			Object object = ctx.get(slot);
 			if (object == null) {
@@ -127,7 +127,7 @@ public class GeneratorComponent implements IWorkflowComponent {
 					if (!(object2 instanceof Resource)) {
 						throw new IllegalStateException("Slot contents was not a Resource but a '"+object.getClass().getSimpleName()+"'!");
 					}
-					instance.doGenerate((Resource) object2, fileSystemAccess);
+					instance.generate((Resource) object2, fileSystemAccess);
 				}
 			} else if (object instanceof Resource) {
 				instance.doGenerate((Resource) object, fileSystemAccess);
@@ -137,11 +137,17 @@ public class GeneratorComponent implements IWorkflowComponent {
 		}
 	}
 
-	protected IGenerator getCompiler() {
-		return injector.getInstance(IGenerator.class);
+	/**
+	 * @since 2.9
+	 */
+	protected GeneratorDelegate getCompiler() {
+		return injector.getInstance(GeneratorDelegate.class);
 	}
 
-	protected IFileSystemAccess getConfiguredFileSystemAccess() {
+	/**
+	 * @since 2.9
+	 */
+	protected IFileSystemAccess2 getConfiguredFileSystemAccess() {
 		final JavaIoFileSystemAccess configuredFileSystemAccess = injector.getInstance(JavaIoFileSystemAccess.class);
 		configuredFileSystemAccess.setOutputConfigurations(getOutputConfigurations());
 		for (Entry<String, String> outs : outlets.entrySet()) {

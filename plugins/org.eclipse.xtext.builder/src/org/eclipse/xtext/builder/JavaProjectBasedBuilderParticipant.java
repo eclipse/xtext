@@ -28,8 +28,9 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.xtext.generator.GeneratorDelegate;
 import org.eclipse.xtext.generator.IFileSystemAccess;
-import org.eclipse.xtext.generator.IGenerator;
+import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -51,7 +52,7 @@ public class JavaProjectBasedBuilderParticipant implements IXtextBuilderParticip
 	private final static Logger logger = Logger.getLogger(JavaProjectBasedBuilderParticipant.class);
 	
 	@Inject
-	private IGenerator generator;
+	private GeneratorDelegate generator;
 
 	@Inject
 	private Provider<EclipseResourceFileSystemAccess> fileAccessProvider;
@@ -135,7 +136,7 @@ public class JavaProjectBasedBuilderParticipant implements IXtextBuilderParticip
 			return;
 		Resource resource = context.getResourceSet().getResource(delta.getUri(), true);
 		if (shouldGenerate(resource, context)) {
-			generator.doGenerate(resource, fileSystemAccess);
+			generator.generate(resource, (IFileSystemAccess2) fileSystemAccess);
 			context.needRebuild();
 		}
 	}

@@ -2,7 +2,6 @@ package org.eclipse.xtext.generator;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
@@ -10,19 +9,19 @@ import org.eclipse.xtext.xbase.lib.Pure;
  * @since 2.7
  */
 @SuppressWarnings("all")
-public class FileSystemAccessRequest {
+public class FileSystemAccessRequest implements Runnable {
   private final URI uri;
   
-  private final Procedure0 procedure;
+  private final Runnable runMe;
   
   /**
-   * @since 2.8
+   * @since 2.9
    */
   @FinalFieldsConstructor
-  public FileSystemAccessRequest(final URI uri, final Procedure0 procedure) {
+  public FileSystemAccessRequest(final URI uri, final Runnable runMe) {
     super();
     this.uri = uri;
-    this.procedure = procedure;
+    this.runMe = runMe;
   }
   
   /**
@@ -34,10 +33,10 @@ public class FileSystemAccessRequest {
   }
   
   /**
-   * @since 2.8
+   * @since 2.9
    */
-  @Pure
-  public Procedure0 getProcedure() {
-    return this.procedure;
+  @Override
+  public void run() {
+    this.runMe.run();
   }
 }

@@ -14,7 +14,7 @@ import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.generator.FileSystemAccessQueue
 
 /**
- * @author kosyakov - Initial contribution and API
+ * @author Anton Kosyakov - Initial contribution and API
  */
 class ParallelFileSystemSupport implements MutableFileSystemSupport {
 	
@@ -31,25 +31,25 @@ class ParallelFileSystemSupport implements MutableFileSystemSupport {
 	}
 	
 	override delete(Path path) { 
-		sendAsync(uri) [|
+		sendAsync(uri) [
 			delegate.delete(path)
 		]
 	}
 	
 	override mkdir(Path path) {
-		sendAsync(uri) [|
+		sendAsync(uri) [
 			delegate.mkdir(path)
 		]
 	}
 	
 	override setContents(Path path, CharSequence contents) {
-		sendAsync(uri) [|
+		sendAsync(uri) [
 			delegate.setContents(path, contents)
 		]
 	}
 	
 	override setContentsAsStream(Path path, InputStream source) {
-		sendAsync(uri) [|
+		sendAsync(uri) [
 			delegate.setContentsAsStream(path, source)
 		]
 	}
