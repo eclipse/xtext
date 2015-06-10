@@ -10,11 +10,11 @@ package org.eclipse.xtend.core.tests.typesystem
 import com.google.inject.Inject
 import java.util.ArrayList
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
+import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
 import org.junit.Test
-import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
 
 /**
  * @author Sebastian Zarnekow
@@ -42,7 +42,7 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 		assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
 		computedSuperType = getServices.typeConformanceComputer.getCommonSuperType(typeReferences.reverseView, owner)
 		assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
-		if (!(computedSuperType?.primitiveVoid || computedSuperType?.primitive)) {
+		if (!computedSuperType.isPrimitiveOrVoid) {
 			computedSuperType = getServices.typeConformanceComputer.getCommonSuperType((typeReferences + newImmutableList(owner.newAnyTypeReference, owner.newAnyTypeReference)).toList, owner)
 			assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
 		}
@@ -59,6 +59,12 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 			}
 		}
 		return computedSuperType
+	}
+	
+	private def isPrimitiveOrVoid(LightweightTypeReference computedSuperType) {
+		if (computedSuperType === null)
+			return false
+		computedSuperType.primitiveVoid || computedSuperType.primitive
 	}
 	
 	def void isFunctionAndEquivalentTo(Object reference, String type) {

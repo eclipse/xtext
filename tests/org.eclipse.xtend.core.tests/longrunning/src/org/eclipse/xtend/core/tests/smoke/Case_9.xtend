@@ -24,6 +24,7 @@ class Case_9 extends Case_8 {
 	
 	override <T1> /*List<List<T1>>*/ foo(T1 t) {
         val List<List<T1>> x = super.foo(t)
+        x.toString
         return null
     }
 		

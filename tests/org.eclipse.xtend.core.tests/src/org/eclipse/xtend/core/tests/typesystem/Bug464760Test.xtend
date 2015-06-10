@@ -21,7 +21,6 @@ import org.junit.runner.RunWith
 import org.eclipse.xtext.junit4.logging.LoggingTester
 import org.apache.log4j.Level
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource
-import org.junit.Assert
 
 /**
  * @author efftinge - Initial contribution and API

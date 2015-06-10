@@ -273,7 +273,7 @@ public class ConvertToArrayBenchmark extends SimpleBenchmark {
 		XtextResourceSet resourceSet = new XtextResourceSet();
 		ClassLoader loader = getClass().getClassLoader();
 		resourceSet.setClasspathURIContext(loader);
-		ClasspathTypeProvider typeProvider = new ClasspathTypeProvider(loader, resourceSet, indexedAccess);
+		ClasspathTypeProvider typeProvider = new ClasspathTypeProvider(loader, resourceSet, indexedAccess, null);
 		CommonTypeComputationServices services = injector.getInstance(CommonTypeComputationServices.class);
 		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, resourceSet);
 		typeReference = type.getReference(typeProvider, owner);

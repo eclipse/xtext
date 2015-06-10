@@ -45,6 +45,7 @@ import com.google.inject.Singleton;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class AnnotationsCompilerTest extends AbstractXtendTestCase {
 	
 	@Test public void testSimpleAnnotationOnType() throws Exception {

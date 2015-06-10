@@ -10,7 +10,7 @@ import static extension java.util.Collections.*
 class Case_5 {
 
 	@Inject
-	ArrayList myList
+	ArrayList<?> myList
 //	ArrayList as list
 	
 	@Inject extension
