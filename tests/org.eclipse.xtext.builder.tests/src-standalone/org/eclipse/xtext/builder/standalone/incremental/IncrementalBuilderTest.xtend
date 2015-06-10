@@ -166,7 +166,7 @@ class IncrementalBuilderTest {
 		clean()
 		val languages = languageAccessFactory.createLanguageAccess(#[new TestLanguageConfiguration(false)],
 			class.getClassLoader)
-		this.indexState = incrementalBuilder.build(buildRequest, languages)
+		this.indexState = incrementalBuilder.build(buildRequest, languages).indexState
 		return indexState
 	}
 
