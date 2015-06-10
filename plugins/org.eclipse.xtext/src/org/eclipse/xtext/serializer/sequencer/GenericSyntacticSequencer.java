@@ -33,7 +33,7 @@ public class GenericSyntacticSequencer extends AbstractSyntacticSequencer {
 			if (rule.getAlternatives() instanceof Alternatives)
 				for (AbstractElement ele : ((Alternatives) rule.getAlternatives()).getElements())
 					if (ele instanceof Keyword)
-						((Keyword) ele).getValue();
+						return ((Keyword) ele).getValue();
 		}
 		return "";
 	}

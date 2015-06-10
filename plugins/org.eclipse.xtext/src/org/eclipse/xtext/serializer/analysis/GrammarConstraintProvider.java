@@ -1036,7 +1036,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				else
 					return isOptional ? null : INVALID;
 			} else
-				new ConstraintElement(context, getConstraintElementType(ele), ele);
+				return null; //new ConstraintElement(context, getConstraintElementType(ele), ele);
 		} else if (ele instanceof RuleCall) {
 			RuleCall rc = (RuleCall) ele;
 			if (GrammarUtil.isUnassignedEObjectRuleCall(rc)) {
