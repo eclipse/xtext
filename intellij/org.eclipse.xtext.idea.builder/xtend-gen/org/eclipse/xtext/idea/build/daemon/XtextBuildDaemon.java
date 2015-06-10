@@ -307,8 +307,9 @@ public class XtextBuildDaemon {
         }
       };
       final BuildRequest buildRequest = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_1);
-      IndexState _build = this.incrementalBuilder.build(buildRequest, languages);
-      this.indexState = _build;
+      IncrementalBuilder.Result _build = this.incrementalBuilder.build(buildRequest, languages);
+      IndexState _indexState = _build.getIndexState();
+      this.indexState = _indexState;
       final Protocol.BuildResultMessage buildResult = xtextBuildResultCollector.getBuildResult();
       return buildResult;
     }

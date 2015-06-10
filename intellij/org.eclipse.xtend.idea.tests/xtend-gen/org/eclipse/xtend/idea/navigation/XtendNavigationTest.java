@@ -17,8 +17,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiField;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiParameter;
 import com.intellij.psi.impl.DebugUtil;
+import com.intellij.psi.impl.light.LightParameter;
 import junit.framework.TestCase;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend.idea.navigation.NavigationTestData;
@@ -59,9 +59,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.<PsiParameter>testNavigateTo(
+    this.<LightParameter>testNavigateTo(
       "mypackage/Greeter.xtend", _builder.toString(), 
-      PsiParameter.class);
+      LightParameter.class);
   }
   
   public void testNavigateToClass() {

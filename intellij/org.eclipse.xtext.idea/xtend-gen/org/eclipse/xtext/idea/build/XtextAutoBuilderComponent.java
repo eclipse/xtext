@@ -9,6 +9,7 @@ package org.eclipse.xtext.idea.build;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -17,6 +18,13 @@ import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ModalityState;
+import com.intellij.openapi.components.AbstractProjectComponent;
+import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.editor.EditorFactory;
+import com.intellij.openapi.editor.event.DocumentAdapter;
+import com.intellij.openapi.editor.event.DocumentEvent;
+import com.intellij.openapi.editor.event.EditorEventMulticaster;
+import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.project.Project;
@@ -27,6 +35,10 @@ import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileAdapter;
+import com.intellij.openapi.vfs.VirtualFileEvent;
+import com.intellij.openapi.vfs.VirtualFileManager;
+import com.intellij.openapi.vfs.VirtualFileMoveEvent;
 import com.intellij.util.Alarm;
 import com.intellij.util.PathsList;
 import java.util.ArrayList;
@@ -47,6 +59,7 @@ import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider;
 import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
 import org.eclipse.xtext.idea.shared.IdeaSharedInjectorProvider;
 import org.eclipse.xtext.idea.shared.XtextLanguages;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.internal.Log;
@@ -64,7 +77,13 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  */
 @Log
 @SuppressWarnings("all")
-public class XtextAutoBuilder implements Disposable {
+public class XtextAutoBuilderComponent extends AbstractProjectComponent implements IResourceDescription.Event.Source, Disposable {
+  public interface AutoBuilderListener {
+    public abstract void aboutToBuild(final List<BuildEvent> events);
+    
+    public abstract void finishedBuild();
+  }
+  
   private boolean disposed;
   
   private BlockingQueue<BuildEvent> queue = new LinkedBlockingQueue<BuildEvent>();
@@ -87,7 +106,12 @@ public class XtextAutoBuilder implements Disposable {
   
   private IndexState indexState;
   
-  public XtextAutoBuilder(final Project project) {
+  private List<IResourceDescription.Event.Listener> resourceDeltaListeners = CollectionLiterals.<IResourceDescription.Event.Listener>newArrayList();
+  
+  private List<XtextAutoBuilderComponent.AutoBuilderListener> autoBuildListeners = CollectionLiterals.<XtextAutoBuilderComponent.AutoBuilderListener>newArrayList();
+  
+  public XtextAutoBuilderComponent(final Project project) {
+    super(project);
     Injector _injector = IdeaSharedInjectorProvider.getInjector();
     _injector.injectMembers(this);
     this.project = project;
@@ -95,6 +119,43 @@ public class XtextAutoBuilder implements Disposable {
     this.alarm = _alarm;
     this.disposed = false;
     Disposer.register(project, this);
+    EditorFactory _instance = EditorFactory.getInstance();
+    EditorEventMulticaster _eventMulticaster = _instance.getEventMulticaster();
+    _eventMulticaster.addDocumentListener(new DocumentAdapter() {
+      @Override
+      public void documentChanged(final DocumentEvent event) {
+        FileDocumentManager _instance = FileDocumentManager.getInstance();
+        Document _document = event.getDocument();
+        VirtualFile file = _instance.getFile(_document);
+        XtextAutoBuilderComponent.this.fileModified(file);
+      }
+    }, project);
+    VirtualFileManager _instance_1 = VirtualFileManager.getInstance();
+    _instance_1.addVirtualFileListener(new VirtualFileAdapter() {
+      @Override
+      public void contentsChanged(final VirtualFileEvent event) {
+        VirtualFile _file = event.getFile();
+        XtextAutoBuilderComponent.this.fileModified(_file);
+      }
+      
+      @Override
+      public void fileCreated(final VirtualFileEvent event) {
+        VirtualFile _file = event.getFile();
+        XtextAutoBuilderComponent.this.fileAdded(_file);
+      }
+      
+      @Override
+      public void fileDeleted(final VirtualFileEvent event) {
+        VirtualFile _file = event.getFile();
+        XtextAutoBuilderComponent.this.fileDeleted(_file);
+      }
+      
+      @Override
+      public void fileMoved(final VirtualFileMoveEvent event) {
+      }
+    }, project);
+    Alarm _alarm_1 = new Alarm(Alarm.ThreadToUse.OWN_THREAD, project);
+    this.alarm = _alarm_1;
   }
   
   @Override
@@ -102,6 +163,35 @@ public class XtextAutoBuilder implements Disposable {
     this.alarm.cancelAllRequests();
     this.queue.clear();
     this.disposed = true;
+  }
+  
+  protected Project getProject() {
+    return this.myProject;
+  }
+  
+  @Override
+  public void addListener(final IResourceDescription.Event.Listener listener) {
+    this.resourceDeltaListeners.add(listener);
+  }
+  
+  @Override
+  public void notifyListeners(final IResourceDescription.Event event) {
+    for (final IResourceDescription.Event.Listener listener : this.resourceDeltaListeners) {
+      listener.descriptionsChanged(event);
+    }
+  }
+  
+  @Override
+  public void removeListener(final IResourceDescription.Event.Listener listener) {
+    this.resourceDeltaListeners.remove(this.resourceDeltaListeners);
+  }
+  
+  public void addAutoBuilderListener(final XtextAutoBuilderComponent.AutoBuilderListener listener) {
+    this.autoBuildListeners.add(listener);
+  }
+  
+  public void removeAutoBuilderListener(final XtextAutoBuilderComponent.AutoBuilderListener listener) {
+    this.autoBuildListeners.remove(listener);
   }
   
   public void fileModified(final VirtualFile file) {
@@ -116,6 +206,11 @@ public class XtextAutoBuilder implements Disposable {
     this.enqueue(file, BuildEvent.Type.ADDED);
   }
   
+  /**
+   * For testing purposes! When set to <code>true</code>, the builds are not running asynchronously and delayed, but directly when the event comes in
+   */
+  public static boolean TEST_MODE = false;
+  
   protected void enqueue(final VirtualFile file, final BuildEvent.Type type) {
     try {
       boolean _and = false;
@@ -129,11 +224,11 @@ public class XtextAutoBuilder implements Disposable {
       if (_and) {
         this.queueAllResources();
       }
-      boolean _isDebugEnabled = XtextAutoBuilder.LOG.isDebugEnabled();
+      boolean _isDebugEnabled = XtextAutoBuilderComponent.LOG.isDebugEnabled();
       if (_isDebugEnabled) {
         URI _uRI = VirtualFileURIUtil.getURI(file);
         String _plus = ("queuing " + _uRI);
-        XtextAutoBuilder.LOG.debug(_plus);
+        XtextAutoBuilderComponent.LOG.debug(_plus);
       }
       boolean _and_1 = false;
       boolean _notEquals = (!Objects.equal(file, null));
@@ -145,14 +240,18 @@ public class XtextAutoBuilder implements Disposable {
       if (_and_1) {
         BuildEvent _buildEvent = new BuildEvent(file, type);
         this.queue.put(_buildEvent);
-        this.alarm.cancelAllRequests();
-        final Runnable _function = new Runnable() {
-          @Override
-          public void run() {
-            XtextAutoBuilder.this.build();
-          }
-        };
-        this.alarm.addRequest(_function, 200);
+        if (XtextAutoBuilderComponent.TEST_MODE) {
+          this.build();
+        } else {
+          this.alarm.cancelAllRequests();
+          final Runnable _function = new Runnable() {
+            @Override
+            public void run() {
+              XtextAutoBuilderComponent.this.build();
+            }
+          };
+          this.alarm.addRequest(_function, 200);
+        }
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -192,7 +291,7 @@ public class XtextAutoBuilder implements Disposable {
           }
           if (_and) {
             BuildEvent _buildEvent = new BuildEvent(file, BuildEvent.Type.ADDED);
-            XtextAutoBuilder.this.queue.put(_buildEvent);
+            XtextAutoBuilderComponent.this.queue.put(_buildEvent);
           }
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
@@ -226,29 +325,36 @@ public class XtextAutoBuilder implements Disposable {
     final BuildProgressReporter buildProgressReporter = this.buildProgressReporterProvider.get();
     buildProgressReporter.setProject(this.project);
     try {
+      final Procedure1<XtextAutoBuilderComponent.AutoBuilderListener> _function = new Procedure1<XtextAutoBuilderComponent.AutoBuilderListener>() {
+        @Override
+        public void apply(final XtextAutoBuilderComponent.AutoBuilderListener it) {
+          it.aboutToBuild(allEvents);
+        }
+      };
+      IterableExtensions.<XtextAutoBuilderComponent.AutoBuilderListener>forEach(this.autoBuildListeners, _function);
       final HashMultimap<Module, BuildEvent> module2event = HashMultimap.<Module, BuildEvent>create();
       final ProjectFileIndex fileIndex = ProjectFileIndex.SERVICE.getInstance(this.project);
-      final Procedure1<BuildEvent> _function = new Procedure1<BuildEvent>() {
+      final Procedure1<BuildEvent> _function_1 = new Procedure1<BuildEvent>() {
         @Override
         public void apply(final BuildEvent it) {
-          final Module module = XtextAutoBuilder.this.findModule(it, fileIndex);
+          final Module module = XtextAutoBuilderComponent.this.findModule(it, fileIndex);
           boolean _notEquals = (!Objects.equal(module, null));
           if (_notEquals) {
             module2event.put(module, it);
           }
         }
       };
-      IterableExtensions.<BuildEvent>forEach(allEvents, _function);
+      IterableExtensions.<BuildEvent>forEach(allEvents, _function_1);
       Set<Module> _keySet = module2event.keySet();
       for (final Module module : _keySet) {
         {
           final Set<BuildEvent> events = module2event.get(module);
           final OrderEnumerator entries = OrderEnumerator.orderEntries(module);
           BuildRequest _buildRequest = new BuildRequest();
-          final Procedure1<BuildRequest> _function_1 = new Procedure1<BuildRequest>() {
+          final Procedure1<BuildRequest> _function_2 = new Procedure1<BuildRequest>() {
             @Override
             public void apply(final BuildRequest it) {
-              XtextResourceSet _get = XtextAutoBuilder.this.resourceSetProvider.get(module);
+              XtextResourceSet _get = XtextAutoBuilderComponent.this.resourceSetProvider.get(module);
               it.setResourceSet(_get);
               List<URI> _dirtyFiles = it.getDirtyFiles();
               final Function1<BuildEvent, Boolean> _function = new Function1<BuildEvent, Boolean>() {
@@ -338,8 +444,8 @@ public class XtextAutoBuilder implements Disposable {
               Iterables.<URI>addAll(_sourceRoots, _map_3);
               it.setFailOnValidationError(false);
               IndexState _elvis = null;
-              if (XtextAutoBuilder.this.indexState != null) {
-                _elvis = XtextAutoBuilder.this.indexState;
+              if (XtextAutoBuilderComponent.this.indexState != null) {
+                _elvis = XtextAutoBuilderComponent.this.indexState;
               } else {
                 IndexState _indexState = new IndexState();
                 _elvis = _indexState;
@@ -355,19 +461,20 @@ public class XtextAutoBuilder implements Disposable {
               it.setAfterDeleteFile(_function_7);
             }
           };
-          final BuildRequest request = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_1);
+          final BuildRequest request = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_2);
           final Application app = ApplicationManager.getApplication();
-          final Computable<IndexState> _function_2 = new Computable<IndexState>() {
+          final Computable<IncrementalBuilder.Result> _function_3 = new Computable<IncrementalBuilder.Result>() {
             @Override
-            public IndexState compute() {
-              IncrementalBuilder _get = XtextAutoBuilder.this.builderProvider.get();
-              Map<String, LanguageAccess> _languageAccesses = XtextAutoBuilder.this.xtextLanguages.getLanguageAccesses();
+            public IncrementalBuilder.Result compute() {
+              IncrementalBuilder _get = XtextAutoBuilderComponent.this.builderProvider.get();
+              Map<String, LanguageAccess> _languageAccesses = XtextAutoBuilderComponent.this.xtextLanguages.getLanguageAccesses();
               return _get.build(request, _languageAccesses);
             }
           };
-          IndexState _runReadAction = app.<IndexState>runReadAction(_function_2);
-          this.indexState = _runReadAction;
-          final Runnable _function_3 = new Runnable() {
+          final IncrementalBuilder.Result result = app.<IncrementalBuilder.Result>runReadAction(_function_3);
+          IndexState _indexState = result.getIndexState();
+          this.indexState = _indexState;
+          final Runnable _function_4 = new Runnable() {
             @Override
             public void run() {
               final Runnable _function = new Runnable() {
@@ -382,7 +489,15 @@ public class XtextAutoBuilder implements Disposable {
             }
           };
           ModalityState _any = ModalityState.any();
-          app.invokeAndWait(_function_3, _any);
+          app.invokeAndWait(_function_4, _any);
+          final IResourceDescription.Event _function_5 = new IResourceDescription.Event() {
+            @Override
+            public ImmutableList<IResourceDescription.Delta> getDeltas() {
+              Set<IResourceDescription.Delta> _affectedResources = result.getAffectedResources();
+              return ImmutableList.<IResourceDescription.Delta>copyOf(_affectedResources);
+            }
+          };
+          this.notifyListeners(_function_5);
         }
       }
     } catch (final Throwable _t) {
@@ -394,6 +509,13 @@ public class XtextAutoBuilder implements Disposable {
       }
     } finally {
       buildProgressReporter.clearProgress();
+      final Procedure1<XtextAutoBuilderComponent.AutoBuilderListener> _function_2 = new Procedure1<XtextAutoBuilderComponent.AutoBuilderListener>() {
+        @Override
+        public void apply(final XtextAutoBuilderComponent.AutoBuilderListener it) {
+          it.finishedBuild();
+        }
+      };
+      IterableExtensions.<XtextAutoBuilderComponent.AutoBuilderListener>forEach(this.autoBuildListeners, _function_2);
     }
   }
   
@@ -404,14 +526,18 @@ public class XtextAutoBuilder implements Disposable {
       boolean _not = (!_isLoaded);
       if (_not) {
         this.queueAllResources();
-        this.alarm.cancelAllRequests();
-        final Runnable _function = new Runnable() {
-          @Override
-          public void run() {
-            XtextAutoBuilder.this.build();
-          }
-        };
-        this.alarm.addRequest(_function, 200);
+        if (XtextAutoBuilderComponent.TEST_MODE) {
+          this.build();
+        } else {
+          this.alarm.cancelAllRequests();
+          final Runnable _function = new Runnable() {
+            @Override
+            public void run() {
+              XtextAutoBuilderComponent.this.build();
+            }
+          };
+          this.alarm.addRequest(_function, 200);
+        }
       }
       return new IndexState();
     }
@@ -467,5 +593,10 @@ public class XtextAutoBuilder implements Disposable {
     return _xblockexpression;
   }
   
-  private final static Logger LOG = Logger.getLogger(XtextAutoBuilder.class);
+  @Override
+  public String getComponentName() {
+    return "Xtext Compiler Component";
+  }
+  
+  private final static Logger LOG = Logger.getLogger(XtextAutoBuilderComponent.class);
 }

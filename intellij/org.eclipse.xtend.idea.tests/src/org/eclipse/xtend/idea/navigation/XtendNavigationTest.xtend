@@ -8,14 +8,12 @@
 package org.eclipse.xtend.idea.navigation
 
 import com.intellij.openapi.util.TextRange
-import com.intellij.psi.PsiAnnotationMethod
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiEnumConstant
 import com.intellij.psi.PsiField
 import com.intellij.psi.PsiMethod
-import com.intellij.psi.PsiParameter
 import com.intellij.psi.impl.DebugUtil
+import com.intellij.psi.impl.light.LightParameter
 import java.util.Map
 import org.eclipse.xtend.idea.LightXtendTest
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -29,7 +27,7 @@ import static org.eclipse.xtend.idea.navigation.NavigationTestData.*
  * @author kosyakov - Initial contribution and API
  */
 class XtendNavigationTest extends LightXtendTest {
-
+	
 	def void testNavigateToParameter() {
 		testNavigateTo(
 			'mypackage/Greeter.xtend',
@@ -44,7 +42,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			PsiParameter
+			LightParameter
 		)
 	}
 

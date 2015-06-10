@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.builder.standalone.ClusteringConfig;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
@@ -54,6 +55,8 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
+import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -62,6 +65,71 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 @Log
 @SuppressWarnings("all")
 public class IncrementalBuilder {
+  @Data
+  public static class Result {
+    private final IndexState indexState;
+    
+    private final Set<IResourceDescription.Delta> affectedResources;
+    
+    public Result(final IndexState indexState, final Set<IResourceDescription.Delta> affectedResources) {
+      super();
+      this.indexState = indexState;
+      this.affectedResources = affectedResources;
+    }
+    
+    @Override
+    @Pure
+    public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + ((this.indexState== null) ? 0 : this.indexState.hashCode());
+      result = prime * result + ((this.affectedResources== null) ? 0 : this.affectedResources.hashCode());
+      return result;
+    }
+    
+    @Override
+    @Pure
+    public boolean equals(final Object obj) {
+      if (this == obj)
+        return true;
+      if (obj == null)
+        return false;
+      if (getClass() != obj.getClass())
+        return false;
+      IncrementalBuilder.Result other = (IncrementalBuilder.Result) obj;
+      if (this.indexState == null) {
+        if (other.indexState != null)
+          return false;
+      } else if (!this.indexState.equals(other.indexState))
+        return false;
+      if (this.affectedResources == null) {
+        if (other.affectedResources != null)
+          return false;
+      } else if (!this.affectedResources.equals(other.affectedResources))
+        return false;
+      return true;
+    }
+    
+    @Override
+    @Pure
+    public String toString() {
+      ToStringBuilder b = new ToStringBuilder(this);
+      b.add("indexState", this.indexState);
+      b.add("affectedResources", this.affectedResources);
+      return b.toString();
+    }
+    
+    @Pure
+    public IndexState getIndexState() {
+      return this.indexState;
+    }
+    
+    @Pure
+    public Set<IResourceDescription.Delta> getAffectedResources() {
+      return this.affectedResources;
+    }
+  }
+  
   @Log
   protected static class InternalStatefulIncrementalBuilder {
     @Accessors(AccessorType.PROTECTED_SETTER)
@@ -74,7 +142,7 @@ public class IncrementalBuilder {
     @Inject
     private Indexer indexer;
     
-    public IndexState launch() {
+    public IncrementalBuilder.Result launch() {
       IndexState _previousState = this.request.getPreviousState();
       Source2GeneratedMapping _fileMappings = _previousState.getFileMappings();
       final Source2GeneratedMapping newSource2GeneratedMapping = _fileMappings.copy();
@@ -130,7 +198,9 @@ public class IncrementalBuilder {
       };
       this.context.<Boolean>executeClustered(_affectedResources, _function_1);
       ResourceDescriptionsData _newIndex = result.getNewIndex();
-      return new IndexState(_newIndex, newSource2GeneratedMapping);
+      IndexState _indexState = new IndexState(_newIndex, newSource2GeneratedMapping);
+      Set<IResourceDescription.Delta> _resourceDeltas = result.getResourceDeltas();
+      return new IncrementalBuilder.Result(_indexState, _resourceDeltas);
     }
     
     protected boolean validate(final Resource resource) {
@@ -243,11 +313,11 @@ public class IncrementalBuilder {
   @Inject
   private Provider<IncrementalBuilder.InternalStatefulIncrementalBuilder> provider;
   
-  public IndexState build(final BuildRequest request, final Map<String, LanguageAccess> languages) {
+  public IncrementalBuilder.Result build(final BuildRequest request, final Map<String, LanguageAccess> languages) {
     return this.build(request, languages, null);
   }
   
-  public IndexState build(final BuildRequest request, final Map<String, LanguageAccess> languages, final ClusteringConfig clusteringConfig) {
+  public IncrementalBuilder.Result build(final BuildRequest request, final Map<String, LanguageAccess> languages, final ClusteringConfig clusteringConfig) {
     IResourceClusteringPolicy _xifexpression = null;
     boolean _notEquals = (!Objects.equal(clusteringConfig, null));
     if (_notEquals) {

@@ -8,10 +8,8 @@
 package org.eclipse.xtext.idea.resource;
 
 import com.google.common.base.Objects;
-import com.intellij.openapi.vfs.VfsUtil;
-import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
-import java.net.URL;
+import com.intellij.openapi.vfs.VirtualFileManager;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
@@ -41,12 +39,9 @@ public class VirtualFileURIUtil {
    * @return a VirtualFile for the given EMF URI, or <code>null</code> if no VirtualFile exists.
    */
   public static VirtualFile getVirtualFile(final URI uri) {
-    final URL url = VirtualFileURIUtil.toURL(uri);
-    boolean _equals = Objects.equal(url, null);
-    if (_equals) {
-      return null;
-    }
-    return VfsUtil.findFileByURL(url);
+    VirtualFileManager _instance = VirtualFileManager.getInstance();
+    String _string = uri.toString();
+    return _instance.findFileByUrl(_string);
   }
   
   /**
@@ -76,14 +71,5 @@ public class VirtualFileURIUtil {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
-  }
-  
-  private static URL toURL(final URI uri) {
-    boolean _equals = Objects.equal(uri, null);
-    if (_equals) {
-      return null;
-    }
-    String _string = uri.toString();
-    return VfsUtilCore.convertToURL(_string);
   }
 }

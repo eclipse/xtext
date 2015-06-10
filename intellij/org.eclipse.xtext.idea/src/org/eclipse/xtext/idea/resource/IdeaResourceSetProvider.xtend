@@ -74,7 +74,8 @@ class IdeaResourceSetProvider {
 			}
 			for (uri : localDeleted) {
 				val file = getVirtualFile(uri)
-				file.delete(requestor)
+				if (file != null && file.exists)
+					file.delete(requestor)
 			}
 		}
 		

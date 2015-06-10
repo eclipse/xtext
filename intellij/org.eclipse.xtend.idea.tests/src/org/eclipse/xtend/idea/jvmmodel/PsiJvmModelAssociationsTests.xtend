@@ -9,16 +9,13 @@ package org.eclipse.xtend.idea.jvmmodel
 
 import com.google.inject.Inject
 import org.eclipse.xtend.idea.LightXtendTest
+import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiJvmModelAssociations
-import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClasses
 
 /**
  * @author kosyakov - Initial contribution and API
  */
 class PsiJvmModelAssociationsTests extends LightXtendTest {
-
-	@Inject
-	extension JvmPsiClasses
 
 	@Inject
 	extension IPsiJvmModelAssociations
@@ -39,24 +36,9 @@ class PsiJvmModelAssociationsTests extends LightXtendTest {
 				}
 			}
 		''')
-		val psiClass = xtextFile.psiClasses.head
-		val sourceElements = psiClass.sourceElements
-		assertNotNull(sourceElements.toString, sourceElements.head)
-
-		val psiField = psiClass.fields.head
-		assertNotNull(psiField.sourceElements.head)
-
-		val getterMethod = psiClass.methods.head
-		assertNotNull(getterMethod.sourceElements.head)
-		
-		val setterMethod = psiClass.methods.last
-		assertNotNull(setterMethod.sourceElements.head)
-
-		val psiParameter = setterMethod.parameterList.parameters.head
-		assertNotNull(psiParameter.sourceElements.head)
-
-		val innerClass = psiClass.innerClasses.head
-		assertNotNull(innerClass.sourceElements.head)
+		val jvmClass = xtextFile.resource.contents.filter(JvmDeclaredType).head
+		val sourceElement = jvmClass.primarySourceElement
+		assertNotNull(sourceElement.toString, sourceElement)
 	}
 
 }

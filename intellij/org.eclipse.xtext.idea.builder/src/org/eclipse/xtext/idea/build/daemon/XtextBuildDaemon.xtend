@@ -212,7 +212,7 @@ class XtextBuildDaemon {
 					xtextBuildResultCollector.deletedFiles.add(deleted)
 				]
 			]
-			indexState = incrementalBuilder.build(buildRequest, languages)
+			indexState = incrementalBuilder.build(buildRequest, languages).indexState
 			val buildResult = xtextBuildResultCollector.buildResult
 			return buildResult
 		}

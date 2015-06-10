@@ -53,24 +53,20 @@ class BuildProgressReporter implements BuildRequest.IPostValidationCallback {
 
 	override afterValidate(URI validated, Iterable<Issue> issues) {
 		markAsAffected(validated)
-//		var errorFree = true
 		for (issue : issues) {
-//			if (issue.severity == Severity.ERROR) {
-//				errorFree = false
-//			}
-			reportIssue(issue)
+			reportIssue(validated, issue)
 		}
 		return true
 	}
 
-	protected def reportIssue(Issue issue) {
-		val compilerMessage = issue.compilerMessage
+	protected def reportIssue(URI validated, Issue issue) {
+		val compilerMessage = getCompilerMessage(validated, issue)
 		problemsView.addMessage(compilerMessage, sessionId)
 	}
 
-	protected def CompilerMessage getCompilerMessage(Issue issue) {
-		val file = issue.uriToProblem.virtualFile
-		new CompilerMessageImpl(
+	protected def CompilerMessage getCompilerMessage(URI validated, Issue issue) {
+		val file = validated.virtualFile
+		return new CompilerMessageImpl(
 			project,
 			issue.category,
 			issue.message,

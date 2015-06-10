@@ -30,6 +30,7 @@ import org.eclipse.xtext.psi.impl.BaseXtextFile
 
 import static extension com.intellij.testFramework.PlatformTestUtil.*
 import static extension com.intellij.util.ui.tree.TreeUtil.*
+import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent
 
 class LightToolingTest extends LightCodeInsightFixtureTestCase {
 
@@ -37,6 +38,7 @@ class LightToolingTest extends LightCodeInsightFixtureTestCase {
 	val LanguageFileType fileType
 	
 	new(LanguageFileType fileType) {
+		XtextAutoBuilderComponent.TEST_MODE = true
 		this.fileType = fileType
 		xtextLanguage.injectMembers(this)
 	}

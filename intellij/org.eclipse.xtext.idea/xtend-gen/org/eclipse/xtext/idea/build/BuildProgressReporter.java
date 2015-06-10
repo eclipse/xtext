@@ -56,31 +56,26 @@ public class BuildProgressReporter implements BuildRequest.IPostValidationCallba
   public boolean afterValidate(final URI validated, final Iterable<Issue> issues) {
     this.markAsAffected(validated);
     for (final Issue issue : issues) {
-      this.reportIssue(issue);
+      this.reportIssue(validated, issue);
     }
     return true;
   }
   
-  protected void reportIssue(final Issue issue) {
-    final CompilerMessage compilerMessage = this.getCompilerMessage(issue);
+  protected void reportIssue(final URI validated, final Issue issue) {
+    final CompilerMessage compilerMessage = this.getCompilerMessage(validated, issue);
     this.problemsView.addMessage(compilerMessage, this.sessionId);
   }
   
-  protected CompilerMessage getCompilerMessage(final Issue issue) {
-    CompilerMessageImpl _xblockexpression = null;
-    {
-      URI _uriToProblem = issue.getUriToProblem();
-      final VirtualFile file = VirtualFileURIUtil.getVirtualFile(_uriToProblem);
-      CompilerMessageCategory _category = this.getCategory(issue);
-      String _message = issue.getMessage();
-      Integer _lineNumber = issue.getLineNumber();
-      Integer _offset = issue.getOffset();
-      OpenFileDescriptor _openFileDescriptor = new OpenFileDescriptor(this.project, file, (_offset).intValue());
-      _xblockexpression = new CompilerMessageImpl(
-        this.project, _category, _message, file, (_lineNumber).intValue(), 
-        (-1), _openFileDescriptor);
-    }
-    return _xblockexpression;
+  protected CompilerMessage getCompilerMessage(final URI validated, final Issue issue) {
+    final VirtualFile file = VirtualFileURIUtil.getVirtualFile(validated);
+    CompilerMessageCategory _category = this.getCategory(issue);
+    String _message = issue.getMessage();
+    Integer _lineNumber = issue.getLineNumber();
+    Integer _offset = issue.getOffset();
+    OpenFileDescriptor _openFileDescriptor = new OpenFileDescriptor(this.project, file, (_offset).intValue());
+    return new CompilerMessageImpl(
+      this.project, _category, _message, file, (_lineNumber).intValue(), 
+      (-1), _openFileDescriptor);
   }
   
   protected CompilerMessageCategory getCategory(final Issue issue) {

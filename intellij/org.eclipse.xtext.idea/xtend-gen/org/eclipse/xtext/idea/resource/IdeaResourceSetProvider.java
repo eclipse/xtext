@@ -109,8 +109,18 @@ public class IdeaResourceSetProvider {
         for (final URI uri_1 : localDeleted) {
           {
             final VirtualFile file = VirtualFileURIUtil.getVirtualFile(uri_1);
-            Object _requestor = this.getRequestor();
-            file.delete(_requestor);
+            boolean _and_1 = false;
+            boolean _notEquals = (!Objects.equal(file, null));
+            if (!_notEquals) {
+              _and_1 = false;
+            } else {
+              boolean _exists = file.exists();
+              _and_1 = _exists;
+            }
+            if (_and_1) {
+              Object _requestor = this.getRequestor();
+              file.delete(_requestor);
+            }
           }
         }
       } catch (Throwable _e) {

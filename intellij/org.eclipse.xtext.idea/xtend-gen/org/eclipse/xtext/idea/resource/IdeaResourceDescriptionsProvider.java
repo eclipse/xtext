@@ -12,7 +12,7 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.idea.build.XtextCompilerComponent;
+import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent;
 import org.eclipse.xtext.idea.resource.ModuleProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
@@ -35,7 +35,7 @@ public class IdeaResourceDescriptionsProvider extends ResourceDescriptionsProvid
     }
     final Module module = ModuleProvider.findModule(resourceSet);
     Project _project = module.getProject();
-    final XtextCompilerComponent compiler = _project.<XtextCompilerComponent>getComponent(XtextCompilerComponent.class);
+    final XtextAutoBuilderComponent compiler = _project.<XtextAutoBuilderComponent>getComponent(XtextAutoBuilderComponent.class);
     return compiler.getResourceDescriptions();
   }
 }

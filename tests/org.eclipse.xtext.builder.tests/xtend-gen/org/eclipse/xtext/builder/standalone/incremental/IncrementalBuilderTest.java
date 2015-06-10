@@ -308,8 +308,9 @@ public class IncrementalBuilderTest {
     Class<? extends IncrementalBuilderTest> _class = this.getClass();
     ClassLoader _classLoader = _class.getClassLoader();
     final Map<String, LanguageAccess> languages = this.languageAccessFactory.createLanguageAccess(Collections.<ILanguageConfiguration>unmodifiableList(CollectionLiterals.<ILanguageConfiguration>newArrayList(_testLanguageConfiguration)), _classLoader);
-    IndexState _build = this.incrementalBuilder.build(buildRequest, languages);
-    this.indexState = _build;
+    IncrementalBuilder.Result _build = this.incrementalBuilder.build(buildRequest, languages);
+    IndexState _indexState = _build.getIndexState();
+    this.indexState = _indexState;
     return this.indexState;
   }
   

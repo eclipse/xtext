@@ -8,10 +8,8 @@
 package org.eclipse.xtext.idea.resource
 
 import com.intellij.openapi.vfs.VirtualFile
+import com.intellij.openapi.vfs.VirtualFileManager
 import org.eclipse.emf.common.util.URI
-import com.intellij.openapi.vfs.VfsUtil
-import com.intellij.openapi.vfs.VfsUtilCore
-import java.net.URL
 
 /**
  * Utilities to bridge URIs and VirtualFiles
@@ -35,11 +33,7 @@ class VirtualFileURIUtil {
 	 * @return a VirtualFile for the given EMF URI, or <code>null</code> if no VirtualFile exists.
 	 */
 	def static VirtualFile getVirtualFile(URI uri) {
-		val url = uri.toURL
-		if (url == null) {
-			return null;
-		}
-		return VfsUtil.findFileByURL(url)
+		return VirtualFileManager.getInstance().findFileByUrl(uri.toString)
 	}
 	
 	/**
@@ -63,10 +57,4 @@ class VirtualFileURIUtil {
 		}
 	}
 		
-	private static def URL toURL(URI uri) {
-		if (uri == null) {
-			return null
-		}
-		return VfsUtilCore.convertToURL(uri.toString)
-	}
 }

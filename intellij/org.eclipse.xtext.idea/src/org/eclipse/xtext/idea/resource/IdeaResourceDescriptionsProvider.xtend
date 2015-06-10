@@ -9,13 +9,10 @@ package org.eclipse.xtext.idea.resource
 
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.xtext.idea.build.XtextCompilerComponent
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
+import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent
 
-/**
- * 
- */
 class IdeaResourceDescriptionsProvider extends ResourceDescriptionsProvider {
 	
 	override getResourceDescriptions(Resource resource) {
@@ -28,7 +25,7 @@ class IdeaResourceDescriptionsProvider extends ResourceDescriptionsProvider {
 			return installedData;
 		}
 		val module = ModuleProvider.findModule(resourceSet)
-		val compiler = module.project.getComponent(XtextCompilerComponent)
+		val compiler = module.project.getComponent(XtextAutoBuilderComponent)
 		return compiler.getResourceDescriptions()
 	}
 	

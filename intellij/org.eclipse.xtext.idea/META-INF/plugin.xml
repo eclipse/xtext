@@ -15,7 +15,7 @@
 
 	<project-components>
 		<component>
-			<implementation-class>org.eclipse.xtext.idea.build.XtextCompilerComponent</implementation-class>
+			<implementation-class>org.eclipse.xtext.idea.build.XtextAutoBuilderComponent</implementation-class>
 		</component>
 	</project-components>
 
