@@ -8,7 +8,10 @@
 package org.eclipse.xtext.idea.resource;
 
 import com.google.common.base.Objects;
+import com.intellij.openapi.application.Application;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileManager;
 import java.nio.charset.Charset;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
@@ -18,6 +21,13 @@ import org.eclipse.xtext.parser.IEncodingProvider;
 public class IdeaEncodingProvider implements IEncodingProvider {
   @Override
   public String getEncoding(final URI uri) {
+    Application _application = ApplicationManager.getApplication();
+    final VirtualFileManager fileManager = _application.<VirtualFileManager>getComponent(VirtualFileManager.class);
+    boolean _equals = Objects.equal(fileManager, null);
+    if (_equals) {
+      IEncodingProvider.Runtime _runtime = new IEncodingProvider.Runtime();
+      return _runtime.getEncoding(uri);
+    }
     VirtualFile file = VirtualFileURIUtil.getVirtualFile(uri);
     while ((Objects.equal(file, null) && (uri.segmentCount() > 0))) {
       {

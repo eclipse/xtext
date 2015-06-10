@@ -43,6 +43,8 @@ import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.eclipse.xtext.service.AbstractGenericModule
 import org.eclipse.xtext.service.SingletonBinding
+import org.eclipse.xtext.resource.containers.IAllContainersState
+import org.eclipse.xtext.idea.resource.IdeaAllContainerStateProvider
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -118,5 +120,9 @@ class DefaultIdeaModule extends AbstractGenericModule {
 	
 	def Class<? extends ResourceDescriptionsProvider> bindResourceDescriptionsProvider() {
 		IdeaResourceDescriptionsProvider
+	}
+	
+	def Class<? extends IAllContainersState.Provider> bindIallContainerState$Provider() {
+		IdeaAllContainerStateProvider
 	}
 }

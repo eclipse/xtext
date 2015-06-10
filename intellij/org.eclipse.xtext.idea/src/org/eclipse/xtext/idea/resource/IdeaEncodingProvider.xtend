@@ -9,6 +9,8 @@ package org.eclipse.xtext.idea.resource
 
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.parser.IEncodingProvider
+import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.vfs.VirtualFileManager
 
 /**
  * 
@@ -16,6 +18,11 @@ import org.eclipse.xtext.parser.IEncodingProvider
 class IdeaEncodingProvider implements IEncodingProvider {
 	
 	override getEncoding(URI uri) {
+		val fileManager = ApplicationManager.getApplication().getComponent(VirtualFileManager);
+		// fall back when no file manager exists (parsing tests)
+		if (fileManager == null) {
+			return new IEncodingProvider.Runtime().getEncoding(uri)
+		}
 		var file = VirtualFileURIUtil.getVirtualFile(uri)
 		while (file == null && uri.segmentCount > 0) {
 			val parent = uri.trimSegments(1)
