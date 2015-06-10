@@ -19,7 +19,6 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.xtext.builder.preferences.BuilderConfigurationBlock;
-import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.xbase.compiler.JavaVersion;
 
 import com.google.inject.Inject;
