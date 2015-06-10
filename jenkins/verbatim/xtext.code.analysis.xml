@@ -51,7 +51,7 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <jdk>Java 6 Oracle</jdk>
+  <jdk>Oracle JDK 1.7 Autoinstall</jdk>
   <triggers>
     <hudson.triggers.SCMTrigger>
       <spec>@daily</spec>
@@ -85,10 +85,11 @@
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.Shell>
-      <command>if [ ! -d findbugs-2.0.0 ];
+      <command>if [ ! -d findbugs ];
 then
-   wget &apos;http://heanet.dl.sourceforge.net/project/findbugs/findbugs/2.0.0/findbugs-2.0.0.zip&apos;
-   unzip findbugs-2.0.0.zip
+   wget &apos;http://heanet.dl.sourceforge.net/project/findbugs/findbugs/3.0.1/findbugs-3.0.1.zip&apos;
+   unzip findbugs-3.0.1.zip
+   mv findbugs-3.0.1 findbugs
 fi
 </command>
     </hudson.tasks.Shell>
@@ -96,12 +97,9 @@ fi
       <targets>-lib ${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/findbugs/findbugs-ant.jar findbugs</targets>
       <antName>(Default)</antName>
       <buildFile>org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/findbugs/findbugs.ant</buildFile>
-      <properties>findbugs.home=${WORKSPACE}/findbugs-2.0.0/lib
+      <properties>findbugs.home=${WORKSPACE}/findbugs/lib
 jarsLocation=${WORKSPACE}/jars/</properties>
     </hudson.tasks.Ant>
-    <hudson.tasks.Shell>
-      <command>rm jars/*</command>
-    </hudson.tasks.Shell>
   </builders>
   <publishers>
     <hudson.plugins.findbugs.FindBugsPublisher plugin="findbugs@4.57">
@@ -150,6 +148,24 @@ jarsLocation=${WORKSPACE}/jars/</properties>
     <com.cloudbees.jenkins.GitHubCommitNotifier plugin="github@1.11">
       <resultOnFailure>FAILURE</resultOnFailure>
     </com.cloudbees.jenkins.GitHubCommitNotifier>
+   <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.25">
+      <patterns>
+        <hudson.plugins.ws__cleanup.Pattern>
+          <pattern>jars/**</pattern>
+          <type>INCLUDE</type>
+        </hudson.plugins.ws__cleanup.Pattern>
+      </patterns>
+      <deleteDirs>false</deleteDirs>
+      <skipWhenFailed>false</skipWhenFailed>
+      <cleanWhenSuccess>true</cleanWhenSuccess>
+      <cleanWhenUnstable>true</cleanWhenUnstable>
+      <cleanWhenFailure>true</cleanWhenFailure>
+      <cleanWhenNotBuilt>true</cleanWhenNotBuilt>
+      <cleanWhenAborted>true</cleanWhenAborted>
+      <notFailBuild>false</notFailBuild>
+      <cleanupMatrixParent>false</cleanupMatrixParent>
+      <externalDelete></externalDelete>
+    </hudson.plugins.ws__cleanup.WsCleanup>
   </publishers>
   <buildWrappers>
     <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.14">
