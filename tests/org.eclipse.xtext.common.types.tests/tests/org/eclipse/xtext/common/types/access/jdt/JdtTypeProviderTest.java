@@ -263,15 +263,15 @@ public class JdtTypeProviderTest extends AbstractJdtTypeProviderTest {
 	}
 	
 	@Override
-	@Test public void testEnum_05() throws Exception {
+	@Test public void testEnum_07() throws Exception {
 		if (isParameterNamesAvailable()) {
-			super.testEnum_05();
+			super.testEnum_07();
 		}
 	}
 	
-	@Test public void testEnum_06() throws Exception {
+	@Test public void testEnum_08() throws Exception {
 		if (!isParameterNamesAvailable()) {
-			doTestEnum_05("arg2");
+			doTestEnum_07("arg2");
 		}
 	}
 

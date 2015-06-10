@@ -43,7 +43,7 @@ public class JavaReflectAccessTest extends Assert {
 	@Before
 	public void setUp() throws Exception {
 		resourceSet = new ResourceSetImpl();
-		typeProvider = new ClasspathTypeProvider(getClass().getClassLoader(), resourceSet, null);
+		typeProvider = new ClasspathTypeProvider(getClass().getClassLoader(), resourceSet, null, null);
 	}
 
 	@After
