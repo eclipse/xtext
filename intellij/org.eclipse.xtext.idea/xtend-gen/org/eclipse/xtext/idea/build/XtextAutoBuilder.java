@@ -13,6 +13,7 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ModalityState;
@@ -24,6 +25,7 @@ import com.intellij.openapi.roots.OrderEnumerator;
 import com.intellij.openapi.roots.OrderRootsEnumerator;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.util.Computable;
+import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.Alarm;
 import com.intellij.util.PathsList;
@@ -62,7 +64,9 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  */
 @Log
 @SuppressWarnings("all")
-public class XtextAutoBuilder {
+public class XtextAutoBuilder implements Disposable {
+  private boolean disposed;
+  
   private BlockingQueue<BuildEvent> queue = new LinkedBlockingQueue<BuildEvent>();
   
   private Alarm alarm;
@@ -87,8 +91,17 @@ public class XtextAutoBuilder {
     Injector _injector = IdeaSharedInjectorProvider.getInjector();
     _injector.injectMembers(this);
     this.project = project;
-    Alarm _alarm = new Alarm(Alarm.ThreadToUse.OWN_THREAD, project);
+    Alarm _alarm = new Alarm(Alarm.ThreadToUse.OWN_THREAD, this);
     this.alarm = _alarm;
+    this.disposed = false;
+    Disposer.register(project, this);
+  }
+  
+  @Override
+  public void dispose() {
+    this.alarm.cancelAllRequests();
+    this.queue.clear();
+    this.disposed = true;
   }
   
   public void fileModified(final VirtualFile file) {
@@ -105,9 +118,15 @@ public class XtextAutoBuilder {
   
   protected void enqueue(final VirtualFile file, final BuildEvent.Type type) {
     try {
-      boolean _isLoaded = this.isLoaded();
-      boolean _not = (!_isLoaded);
-      if (_not) {
+      boolean _and = false;
+      if (!(!this.disposed)) {
+        _and = false;
+      } else {
+        boolean _isLoaded = this.isLoaded();
+        boolean _not = (!_isLoaded);
+        _and = _not;
+      }
+      if (_and) {
         this.queueAllResources();
       }
       boolean _isDebugEnabled = XtextAutoBuilder.LOG.isDebugEnabled();
@@ -116,16 +135,14 @@ public class XtextAutoBuilder {
         String _plus = ("queuing " + _uRI);
         XtextAutoBuilder.LOG.debug(_plus);
       }
-      boolean _and = false;
+      boolean _and_1 = false;
       boolean _notEquals = (!Objects.equal(file, null));
       if (!_notEquals) {
-        _and = false;
+        _and_1 = false;
       } else {
-        boolean _isDisposed = this.project.isDisposed();
-        boolean _not_1 = (!_isDisposed);
-        _and = _not_1;
+        _and_1 = (!this.disposed);
       }
-      if (_and) {
+      if (_and_1) {
         BuildEvent _buildEvent = new BuildEvent(file, type);
         this.queue.put(_buildEvent);
         this.alarm.cancelAllRequests();
@@ -197,6 +214,9 @@ public class XtextAutoBuilder {
   }
   
   protected void build() {
+    if (this.disposed) {
+      return;
+    }
     final ArrayList<BuildEvent> allEvents = CollectionLiterals.<BuildEvent>newArrayList();
     this.queue.drainTo(allEvents);
     this.build(allEvents);

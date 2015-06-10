@@ -167,8 +167,7 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
     JvmType _xblockexpression = null;
     {
       final IndexedJvmTypeAccess indexedJvmTypeAccess = this.getIndexedJvmTypeAccess();
-      boolean _notEquals = (!Objects.equal(indexedJvmTypeAccess, null));
-      if (_notEquals) {
+      if ((indexedJvmTypeAccess != null)) {
         final URI proxyURI = resourceURI.appendFragment(fragment);
         ResourceSet _resourceSet = this.getResourceSet();
         final EObject candidate = indexedJvmTypeAccess.getIndexedJvmType(proxyURI, _resourceSet);

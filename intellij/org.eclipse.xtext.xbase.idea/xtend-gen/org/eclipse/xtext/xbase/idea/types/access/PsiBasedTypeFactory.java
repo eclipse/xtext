@@ -12,6 +12,7 @@ import com.google.inject.Inject;
 import com.intellij.openapi.progress.ProgressIndicatorProvider;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.JavaPsiFacade;
+import com.intellij.psi.JavaTokenType;
 import com.intellij.psi.PsiAnnotation;
 import com.intellij.psi.PsiAnnotationMemberValue;
 import com.intellij.psi.PsiAnnotationMethod;
@@ -19,27 +20,30 @@ import com.intellij.psi.PsiAnnotationParameterList;
 import com.intellij.psi.PsiAnonymousClass;
 import com.intellij.psi.PsiArrayInitializerMemberValue;
 import com.intellij.psi.PsiArrayType;
+import com.intellij.psi.PsiBinaryExpression;
 import com.intellij.psi.PsiCapturedWildcardType;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiClassObjectAccessExpression;
 import com.intellij.psi.PsiClassType;
+import com.intellij.psi.PsiCompiledElement;
 import com.intellij.psi.PsiConstantEvaluationHelper;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementFactory;
 import com.intellij.psi.PsiEnumConstant;
+import com.intellij.psi.PsiExpression;
 import com.intellij.psi.PsiField;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiJavaCodeReferenceElement;
 import com.intellij.psi.PsiJavaFile;
-import com.intellij.psi.PsiManager;
+import com.intellij.psi.PsiJavaToken;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.PsiModifier;
 import com.intellij.psi.PsiModifierList;
 import com.intellij.psi.PsiModifierListOwner;
+import com.intellij.psi.PsiNameHelper;
 import com.intellij.psi.PsiNameValuePair;
 import com.intellij.psi.PsiParameter;
 import com.intellij.psi.PsiParameterList;
-import com.intellij.psi.PsiPrimitiveType;
 import com.intellij.psi.PsiReferenceExpression;
 import com.intellij.psi.PsiSubstitutor;
 import com.intellij.psi.PsiType;
@@ -47,6 +51,8 @@ import com.intellij.psi.PsiTypeElement;
 import com.intellij.psi.PsiTypeParameter;
 import com.intellij.psi.PsiTypeParameterListOwner;
 import com.intellij.psi.PsiWildcardType;
+import com.intellij.psi.impl.compiled.StubBuildingVisitor;
+import com.intellij.psi.tree.IElementType;
 import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
@@ -93,6 +99,7 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.access.impl.AbstractDeclaredTypeFactory;
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
 import org.eclipse.xtext.common.types.impl.JvmTypeConstraintImplCustom;
 import org.eclipse.xtext.idea.extensions.IdeaProjectExtensions;
@@ -113,7 +120,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
-public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
+public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
   private final Stopwatches.StoppedTask createTypeTask = Stopwatches.forTask("PsiClassFactory.createType");
   
   @Extension
@@ -133,34 +140,38 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
   
   @Override
   public JvmDeclaredType createType(final PsiClass psiClass) {
-    Project _project = psiClass.getProject();
-    final Function0<JvmDeclaredType> _function = new Function0<JvmDeclaredType>() {
-      @Override
-      public JvmDeclaredType apply() {
-        JvmDeclaredType _xtrycatchfinallyexpression = null;
-        try {
-          JvmDeclaredType _xblockexpression = null;
-          {
-            PsiBasedTypeFactory.this.createTypeTask.start();
-            final StringBuilder fqn = new StringBuilder(100);
-            final String packageName = PsiBasedTypeFactory.this.getPackageName(psiClass);
-            boolean _notEquals = (!Objects.equal(packageName, null));
-            if (_notEquals) {
-              StringBuilder _append = fqn.append(packageName);
-              _append.append(".");
+    JvmDeclaredType _xtrycatchfinallyexpression = null;
+    try {
+      JvmDeclaredType _xblockexpression = null;
+      {
+        this.createTypeTask.start();
+        Project _project = psiClass.getProject();
+        final Function0<JvmDeclaredType> _function = new Function0<JvmDeclaredType>() {
+          @Override
+          public JvmDeclaredType apply() {
+            JvmDeclaredType _xblockexpression = null;
+            {
+              final StringBuilder buffer = new StringBuilder(100);
+              final String packageName = PsiBasedTypeFactory.this.getPackageName(psiClass);
+              boolean _notEquals = (!Objects.equal(packageName, null));
+              if (_notEquals) {
+                StringBuilder _append = buffer.append(packageName);
+                _append.append(".");
+              }
+              final JvmDeclaredType type = PsiBasedTypeFactory.this.createType(psiClass, buffer);
+              type.setPackageName(packageName);
+              _xblockexpression = type;
             }
-            final JvmDeclaredType type = PsiBasedTypeFactory.this.createType(psiClass, fqn);
-            type.setPackageName(packageName);
-            _xblockexpression = type;
+            return _xblockexpression;
           }
-          _xtrycatchfinallyexpression = _xblockexpression;
-        } finally {
-          PsiBasedTypeFactory.this.createTypeTask.stop();
-        }
-        return _xtrycatchfinallyexpression;
+        };
+        _xblockexpression = IdeaProjectExtensions.<JvmDeclaredType>withAlternativeResolvedEnabled(_project, _function);
       }
-    };
-    return IdeaProjectExtensions.<JvmDeclaredType>withAlternativeResolvedEnabled(_project, _function);
+      _xtrycatchfinallyexpression = _xblockexpression;
+    } finally {
+      this.createTypeTask.stop();
+    }
+    return _xtrycatchfinallyexpression;
   }
   
   protected JvmDeclaredType createType(final PsiClass psiClass, final StringBuilder fqn) {
@@ -195,24 +206,21 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
         }
       }
       if (!_matched) {
-        JvmGenericType _createJvmGenericType = this._typesFactory.createJvmGenericType();
-        final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
-          @Override
-          public void apply(final JvmGenericType it) {
-            boolean _isInterface = psiClass.isInterface();
-            it.setInterface(_isInterface);
-            PsiModifierList _modifierList = psiClass.getModifierList();
-            boolean _hasModifierProperty = _modifierList.hasModifierProperty(PsiModifier.STRICTFP);
-            it.setStrictFloatingPoint(_hasModifierProperty);
-            PsiBasedTypeFactory.this.createTypeParameters(it, psiClass);
-          }
-        };
-        _switchResult = ObjectExtensions.<JvmGenericType>operator_doubleArrow(_createJvmGenericType, _function);
+        JvmGenericType _xblockexpression_1 = null;
+        {
+          final JvmGenericType genericType = this._typesFactory.createJvmGenericType();
+          boolean _isInterface = psiClass.isInterface();
+          genericType.setInterface(_isInterface);
+          boolean _hasModifierProperty = psiClass.hasModifierProperty(PsiModifier.STRICTFP);
+          genericType.setStrictFloatingPoint(_hasModifierProperty);
+          this.createTypeParameters(genericType, psiClass);
+          _xblockexpression_1 = genericType;
+        }
+        _switchResult = _xblockexpression_1;
       }
-      final Procedure1<JvmDeclaredType> _function_1 = new Procedure1<JvmDeclaredType>() {
+      final Procedure1<JvmDeclaredType> _function = new Procedure1<JvmDeclaredType>() {
         @Override
         public void apply(final JvmDeclaredType it) {
-          ProgressIndicatorProvider.checkCanceled();
           PsiBasedTypeFactory.this.setTypeModifiers(it, psiClass);
           PsiBasedTypeFactory.this.setVisibility(it, psiClass);
           boolean _isDeprecated = psiClass.isDeprecated();
@@ -248,7 +256,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
           PsiBasedTypeFactory.this.psiModelAssociator.associate(it, _function_1);
         }
       };
-      _xblockexpression = ObjectExtensions.<JvmDeclaredType>operator_doubleArrow(_switchResult, _function_1);
+      _xblockexpression = ObjectExtensions.<JvmDeclaredType>operator_doubleArrow(_switchResult, _function);
     }
     return _xblockexpression;
   }
@@ -262,7 +270,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
         boolean _notEquals = (!Objects.equal(annotationReference, null));
         if (_notEquals) {
           EList<JvmAnnotationReference> _annotations_1 = it.getAnnotations();
-          this.addUnique(_annotations_1, annotationReference);
+          this.<JvmAnnotationReference>addUnique(_annotations_1, annotationReference);
         }
       }
     }
@@ -279,8 +287,8 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
         final Procedure1<JvmAnnotationReference> _function = new Procedure1<JvmAnnotationReference>() {
           @Override
           public void apply(final JvmAnnotationReference it) {
-            JvmAnnotationType _craeteAnnotationProxy = PsiBasedTypeFactory.this.craeteAnnotationProxy(((PsiClass)psiClass));
-            it.setAnnotation(_craeteAnnotationProxy);
+            JvmAnnotationType _createAnnotationProxy = PsiBasedTypeFactory.this.createAnnotationProxy(((PsiClass)psiClass));
+            it.setAnnotation(_createAnnotationProxy);
             PsiAnnotationParameterList _parameterList = annotation.getParameterList();
             PsiNameValuePair[] _attributes = _parameterList.getAttributes();
             for (final PsiNameValuePair attribute : _attributes) {
@@ -309,7 +317,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
                 JvmOperation _createMethodProxy = PsiBasedTypeFactory.this.createMethodProxy(method);
                 annotationValue.setOperation(_createMethodProxy);
                 EList<JvmAnnotationValue> _explicitValues = it.getExplicitValues();
-                PsiBasedTypeFactory.this.addUnique(_explicitValues, annotationValue);
+                PsiBasedTypeFactory.this.<JvmAnnotationValue>addUnique(_explicitValues, annotationValue);
               }
             }
           }
@@ -349,7 +357,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
     return ObjectExtensions.<JvmEnumerationLiteral>operator_doubleArrow(_createJvmEnumerationLiteral, _function);
   }
   
-  protected JvmAnnotationType craeteAnnotationProxy(final PsiClass annotationType) {
+  protected JvmAnnotationType createAnnotationProxy(final PsiClass annotationType) {
     JvmAnnotationType _createJvmAnnotationType = this._typesFactory.createJvmAnnotationType();
     final Procedure1<JvmAnnotationType> _function = new Procedure1<JvmAnnotationType>() {
       @Override
@@ -370,15 +378,15 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
         @Override
         public void apply() {
           EList<JvmMember> _members = it.getMembers();
-          Object _createField = PsiBasedTypeFactory.this.createField(field, fqn);
-          PsiBasedTypeFactory.this.addUnique(_members, _createField);
+          JvmField _createField = PsiBasedTypeFactory.this.createField(field, fqn);
+          PsiBasedTypeFactory.this.<JvmField>addUnique(_members, _createField);
         }
       };
       this.preserve(fqn, _function);
     }
   }
   
-  protected Object createField(final PsiField field, final StringBuilder fqn) {
+  protected JvmField createField(final PsiField field, final StringBuilder fqn) {
     JvmField _xblockexpression = null;
     {
       ProgressIndicatorProvider.checkCanceled();
@@ -395,6 +403,88 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
         final Procedure1<JvmField> _function = new Procedure1<JvmField>() {
           @Override
           public void apply(final JvmField it) {
+            final PsiExpression initializer = field.getInitializer();
+            boolean _and = false;
+            if (!(initializer instanceof PsiCompiledElement)) {
+              _and = false;
+            } else {
+              _and = (initializer instanceof PsiBinaryExpression);
+            }
+            if (_and) {
+              PsiType _type = field.getType();
+              final String fieldType = _type.getCanonicalText();
+              final PsiBinaryExpression binary = ((PsiBinaryExpression) initializer);
+              PsiJavaToken _operationSign = binary.getOperationSign();
+              IElementType _tokenType = _operationSign.getTokenType();
+              boolean _equals = Objects.equal(_tokenType, JavaTokenType.DIV);
+              if (_equals) {
+                boolean _matched = false;
+                if (!_matched) {
+                  String _simpleName = Double.TYPE.getSimpleName();
+                  if (Objects.equal(fieldType, _simpleName)) {
+                    _matched=true;
+                    String _text = binary.getText();
+                    boolean _matched_1 = false;
+                    if (!_matched_1) {
+                      if (Objects.equal(_text, StubBuildingVisitor.DOUBLE_NAN)) {
+                        _matched_1=true;
+                        it.setConstant(true);
+                        it.setConstantValue(Double.valueOf(Double.NaN));
+                        return;
+                      }
+                    }
+                    if (!_matched_1) {
+                      if (Objects.equal(_text, StubBuildingVisitor.DOUBLE_POSITIVE_INF)) {
+                        _matched_1=true;
+                        it.setConstant(true);
+                        it.setConstantValue(Double.valueOf(Double.POSITIVE_INFINITY));
+                        return;
+                      }
+                    }
+                    if (!_matched_1) {
+                      if (Objects.equal(_text, StubBuildingVisitor.DOUBLE_NEGATIVE_INF)) {
+                        _matched_1=true;
+                        it.setConstant(true);
+                        it.setConstantValue(Double.valueOf(Double.NEGATIVE_INFINITY));
+                        return;
+                      }
+                    }
+                  }
+                }
+                if (!_matched) {
+                  String _simpleName_1 = Float.TYPE.getSimpleName();
+                  if (Objects.equal(fieldType, _simpleName_1)) {
+                    _matched=true;
+                    String _text_1 = binary.getText();
+                    boolean _matched_2 = false;
+                    if (!_matched_2) {
+                      if (Objects.equal(_text_1, StubBuildingVisitor.FLOAT_NAN)) {
+                        _matched_2=true;
+                        it.setConstant(true);
+                        it.setConstantValue(Float.valueOf(Float.NaN));
+                        return;
+                      }
+                    }
+                    if (!_matched_2) {
+                      if (Objects.equal(_text_1, StubBuildingVisitor.FLOAT_POSITIVE_INF)) {
+                        _matched_2=true;
+                        it.setConstant(true);
+                        it.setConstantValue(Float.valueOf(Float.POSITIVE_INFINITY));
+                        return;
+                      }
+                    }
+                    if (!_matched_2) {
+                      if (Objects.equal(_text_1, StubBuildingVisitor.FLOAT_NEGATIVE_INF)) {
+                        _matched_2=true;
+                        it.setConstant(true);
+                        it.setConstantValue(Float.valueOf(Float.NEGATIVE_INFINITY));
+                        return;
+                      }
+                    }
+                  }
+                }
+              }
+            }
             final Object value = field.computeConstantValue();
             boolean _notEquals = (!Objects.equal(value, null));
             if (_notEquals) {
@@ -450,7 +540,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
     for (final PsiClassType superType : _superTypes) {
       EList<JvmTypeReference> _superTypes_1 = it.getSuperTypes();
       JvmTypeReference _createTypeReference = this.createTypeReference(superType);
-      this.addUnique(_superTypes_1, _createTypeReference);
+      this.<JvmTypeReference>addUnique(_superTypes_1, _createTypeReference);
     }
   }
   
@@ -508,7 +598,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
               }
               final JvmExecutable operation = _xifexpression;
               EList<JvmMember> _members = it.getMembers();
-              PsiBasedTypeFactory.this.addUnique(_members, operation);
+              PsiBasedTypeFactory.this.<JvmExecutable>addUnique(_members, operation);
             } catch (final Throwable _t) {
               if (_t instanceof UnresolvedPsiClassType) {
                 final UnresolvedPsiClassType e = (UnresolvedPsiClassType)_t;
@@ -527,7 +617,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
           public void apply() {
             EList<JvmMember> _members = it.getMembers();
             JvmConstructor _createDefaultConstructor = PsiBasedTypeFactory.this.createDefaultConstructor(psiClass, fqn);
-            PsiBasedTypeFactory.this.addUnique(_members, _createDefaultConstructor);
+            PsiBasedTypeFactory.this.<JvmConstructor>addUnique(_members, _createDefaultConstructor);
           }
         };
         this.preserve(fqn, _function_1);
@@ -542,7 +632,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
             public void apply() {
               EList<JvmMember> _members = it.getMembers();
               JvmOperation _createValuesOperation = PsiBasedTypeFactory.this.createValuesOperation(psiClass, fqn);
-              PsiBasedTypeFactory.this.addUnique(_members, _createValuesOperation);
+              PsiBasedTypeFactory.this.<JvmOperation>addUnique(_members, _createValuesOperation);
             }
           };
           this.preserve(fqn, _function_2);
@@ -551,7 +641,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
             public void apply() {
               EList<JvmMember> _members = it.getMembers();
               JvmOperation _createValueOfOperation = PsiBasedTypeFactory.this.createValueOfOperation(psiClass, fqn);
-              PsiBasedTypeFactory.this.addUnique(_members, _createValueOfOperation);
+              PsiBasedTypeFactory.this.<JvmOperation>addUnique(_members, _createValueOfOperation);
             }
           };
           _xblockexpression_1 = this.preserve(fqn, _function_3);
@@ -662,7 +752,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
       if (it instanceof JvmBooleanAnnotationValue) {
         _matched=true;
         EList<Boolean> _values = ((JvmBooleanAnnotationValue)it).getValues();
-        this.addUnique(_values, ((Boolean) value));
+        this.<Boolean>addUnique(_values, ((Boolean) value));
       }
     }
     if (!_matched) {
@@ -670,7 +760,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
         _matched=true;
         EList<Integer> _values = ((JvmIntAnnotationValue)it).getValues();
         Integer _asInteger = this.asInteger(value);
-        this.addUnique(_values, _asInteger);
+        this.<Integer>addUnique(_values, _asInteger);
       }
     }
     if (!_matched) {
@@ -678,7 +768,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
         _matched=true;
         EList<Long> _values = ((JvmLongAnnotationValue)it).getValues();
         Long _asLong = this.asLong(value);
-        this.addUnique(_values, _asLong);
+        this.<Long>addUnique(_values, _asLong);
       }
     }
     if (!_matched) {
@@ -686,7 +776,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
         _matched=true;
         EList<Short> _values = ((JvmShortAnnotationValue)it).getValues();
         Short _asShort = this.asShort(value);
-        this.addUnique(_values, _asShort);
+        this.<Short>addUnique(_values, _asShort);
       }
     }
     if (!_matched) {
@@ -694,7 +784,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
         _matched=true;
         EList<Float> _values = ((JvmFloatAnnotationValue)it).getValues();
         Float _asFloat = this.asFloat(value);
-        this.addUnique(_values, _asFloat);
+        this.<Float>addUnique(_values, _asFloat);
       }
     }
     if (!_matched) {
@@ -702,7 +792,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
         _matched=true;
         EList<Double> _values = ((JvmDoubleAnnotationValue)it).getValues();
         Double _asDouble = this.asDouble(value);
-        this.addUnique(_values, _asDouble);
+        this.<Double>addUnique(_values, _asDouble);
       }
     }
     if (!_matched) {
@@ -710,7 +800,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
         _matched=true;
         EList<Character> _values = ((JvmCharAnnotationValue)it).getValues();
         Character _asCharacter = this.asCharacter(value);
-        this.addUnique(_values, _asCharacter);
+        this.<Character>addUnique(_values, _asCharacter);
       }
     }
     if (!_matched) {
@@ -718,14 +808,14 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
         _matched=true;
         EList<Byte> _values = ((JvmByteAnnotationValue)it).getValues();
         Byte _asByte = this.asByte(value);
-        this.addUnique(_values, _asByte);
+        this.<Byte>addUnique(_values, _asByte);
       }
     }
     if (!_matched) {
       if (it instanceof JvmStringAnnotationValue) {
         _matched=true;
         EList<String> _values = ((JvmStringAnnotationValue)it).getValues();
-        this.addUnique(_values, ((String) value));
+        this.<String>addUnique(_values, ((String) value));
       }
     }
     if (!_matched) {
@@ -733,7 +823,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
         _matched=true;
         EList<JvmTypeReference> _values = ((JvmTypeAnnotationValue)it).getValues();
         JvmTypeReference _createTypeReference = this.createTypeReference(((PsiType) value));
-        this.addUnique(_values, _createTypeReference);
+        this.<JvmTypeReference>addUnique(_values, _createTypeReference);
       }
     }
     if (!_matched) {
@@ -743,7 +833,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
         boolean _notEquals = (!Objects.equal(annotationReference, null));
         if (_notEquals) {
           EList<JvmAnnotationReference> _values = ((JvmAnnotationAnnotationValue)it).getValues();
-          this.addUnique(_values, annotationReference);
+          this.<JvmAnnotationReference>addUnique(_values, annotationReference);
         }
       }
     }
@@ -752,7 +842,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
         _matched=true;
         EList<JvmEnumerationLiteral> _values = ((JvmEnumAnnotationValue)it).getValues();
         JvmEnumerationLiteral _createEnumLiteralProxy = this.createEnumLiteralProxy(((PsiEnumConstant) value));
-        this.addUnique(_values, _createEnumLiteralProxy);
+        this.<JvmEnumerationLiteral>addUnique(_values, _createEnumLiteralProxy);
       }
     }
   }
@@ -993,52 +1083,51 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
   }
   
   protected Object computeAnnotationValue(final PsiAnnotationMemberValue value, final Project project) {
-    Object _xblockexpression = null;
-    {
-      JavaPsiFacade _instance = JavaPsiFacade.getInstance(project);
-      @Extension
-      final PsiConstantEvaluationHelper constantEvaluationHelper = _instance.getConstantEvaluationHelper();
-      Object _switchResult = null;
-      boolean _matched = false;
-      if (!_matched) {
-        if (value instanceof PsiAnnotation) {
-          _matched=true;
-          _switchResult = value;
-        }
+    JavaPsiFacade _instance = JavaPsiFacade.getInstance(project);
+    final PsiConstantEvaluationHelper constantEvaluationHelper = _instance.getConstantEvaluationHelper();
+    return this.computeAnnotationValue(value, constantEvaluationHelper);
+  }
+  
+  protected Object computeAnnotationValue(final PsiAnnotationMemberValue value, @Extension final PsiConstantEvaluationHelper helper) {
+    Object _switchResult = null;
+    boolean _matched = false;
+    if (!_matched) {
+      if (value instanceof PsiAnnotation) {
+        _matched=true;
+        _switchResult = value;
       }
-      if (!_matched) {
-        if (value instanceof PsiReferenceExpression) {
-          _matched=true;
-          _switchResult = ((PsiReferenceExpression)value).resolve();
-        }
-      }
-      if (!_matched) {
-        if (value instanceof PsiClassObjectAccessExpression) {
-          _matched=true;
-          PsiTypeElement _operand = ((PsiClassObjectAccessExpression)value).getOperand();
-          _switchResult = _operand.getType();
-        }
-      }
-      if (!_matched) {
-        if (value instanceof PsiArrayInitializerMemberValue) {
-          _matched=true;
-          PsiAnnotationMemberValue[] _initializers = ((PsiArrayInitializerMemberValue)value).getInitializers();
-          final Function1<PsiAnnotationMemberValue, Object> _function = new Function1<PsiAnnotationMemberValue, Object>() {
-            @Override
-            public Object apply(final PsiAnnotationMemberValue it) {
-              return PsiBasedTypeFactory.this.computeAnnotationValue(it, project);
-            }
-          };
-          List<Object> _map = ListExtensions.<PsiAnnotationMemberValue, Object>map(((List<PsiAnnotationMemberValue>)Conversions.doWrapArray(_initializers)), _function);
-          _switchResult = _map.toArray();
-        }
-      }
-      if (!_matched) {
-        _switchResult = constantEvaluationHelper.computeConstantExpression(value);
-      }
-      _xblockexpression = _switchResult;
     }
-    return _xblockexpression;
+    if (!_matched) {
+      if (value instanceof PsiReferenceExpression) {
+        _matched=true;
+        _switchResult = ((PsiReferenceExpression)value).resolve();
+      }
+    }
+    if (!_matched) {
+      if (value instanceof PsiClassObjectAccessExpression) {
+        _matched=true;
+        PsiTypeElement _operand = ((PsiClassObjectAccessExpression)value).getOperand();
+        _switchResult = _operand.getType();
+      }
+    }
+    if (!_matched) {
+      if (value instanceof PsiArrayInitializerMemberValue) {
+        _matched=true;
+        PsiAnnotationMemberValue[] _initializers = ((PsiArrayInitializerMemberValue)value).getInitializers();
+        final Function1<PsiAnnotationMemberValue, Object> _function = new Function1<PsiAnnotationMemberValue, Object>() {
+          @Override
+          public Object apply(final PsiAnnotationMemberValue it) {
+            return PsiBasedTypeFactory.this.computeAnnotationValue(it, helper);
+          }
+        };
+        List<Object> _map = ListExtensions.<PsiAnnotationMemberValue, Object>map(((List<PsiAnnotationMemberValue>)Conversions.doWrapArray(_initializers)), _function);
+        _switchResult = _map.toArray();
+      }
+    }
+    if (!_matched) {
+      _switchResult = helper.computeConstantExpression(value);
+    }
+    return _switchResult;
   }
   
   protected String getPackageName(final PsiClass psiClass) {
@@ -1054,7 +1143,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
     return null;
   }
   
-  protected JvmOperation createValuesOperation(final PsiClass psiClass, final StringBuilder fqn) {
+  protected JvmOperation createValuesOperation(final PsiClass enumType, final StringBuilder fqn) {
     JvmOperation _createJvmOperation = this._typesFactory.createJvmOperation();
     final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
       @Override
@@ -1065,29 +1154,37 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
         it.setSimpleName("values");
         it.setVisibility(JvmVisibility.PUBLIC);
         it.setStatic(true);
-        Project _project = psiClass.getProject();
-        PsiElementFactory _psiElementFactory = PsiBasedTypeFactory.this.uriHelper.getPsiElementFactory(_project);
-        PsiClassType _createType = _psiElementFactory.createType(psiClass);
-        JvmTypeReference _createTypeReference = PsiBasedTypeFactory.this.createTypeReference(_createType);
-        it.setReturnType(_createTypeReference);
-        it.setDeprecated(false);
-        final PsiElementProvider _function = new PsiElementProvider() {
+        JvmGenericArrayTypeReference _createJvmGenericArrayTypeReference = PsiBasedTypeFactory.this._typesFactory.createJvmGenericArrayTypeReference();
+        final Procedure1<JvmGenericArrayTypeReference> _function = new Procedure1<JvmGenericArrayTypeReference>() {
           @Override
-          public PsiElement get() {
-            return psiClass;
+          public void apply(final JvmGenericArrayTypeReference it) {
+            Project _project = enumType.getProject();
+            PsiElementFactory _psiElementFactory = PsiBasedTypeFactory.this.getPsiElementFactory(_project);
+            PsiClassType _createType = _psiElementFactory.createType(enumType);
+            JvmTypeReference _createTypeReference = PsiBasedTypeFactory.this.createTypeReference(_createType);
+            it.setComponentType(_createTypeReference);
           }
         };
-        PsiBasedTypeFactory.this.psiModelAssociator.associate(it, _function);
+        JvmGenericArrayTypeReference _doubleArrow = ObjectExtensions.<JvmGenericArrayTypeReference>operator_doubleArrow(_createJvmGenericArrayTypeReference, _function);
+        it.setReturnType(_doubleArrow);
+        it.setDeprecated(false);
+        final PsiElementProvider _function_1 = new PsiElementProvider() {
+          @Override
+          public PsiElement get() {
+            return enumType;
+          }
+        };
+        PsiBasedTypeFactory.this.psiModelAssociator.associate(it, _function_1);
       }
     };
     return ObjectExtensions.<JvmOperation>operator_doubleArrow(_createJvmOperation, _function);
   }
   
-  protected JvmOperation createValueOfOperation(final PsiClass psiClass, final StringBuilder fqn) {
+  protected JvmOperation createValueOfOperation(final PsiClass enumType, final StringBuilder fqn) {
     JvmOperation _xblockexpression = null;
     {
-      Project _project = psiClass.getProject();
-      final PsiElementFactory psiElementFactory = this.uriHelper.getPsiElementFactory(_project);
+      Project _project = enumType.getProject();
+      final PsiElementFactory psiElementFactory = this.getPsiElementFactory(_project);
       JvmOperation _createJvmOperation = this._typesFactory.createJvmOperation();
       final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
         @Override
@@ -1098,7 +1195,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
           it.setSimpleName("valueOf");
           it.setVisibility(JvmVisibility.PUBLIC);
           it.setStatic(true);
-          PsiClassType _createType = psiElementFactory.createType(psiClass);
+          PsiClassType _createType = psiElementFactory.createType(enumType);
           JvmTypeReference _createTypeReference = PsiBasedTypeFactory.this.createTypeReference(_createType);
           it.setReturnType(_createTypeReference);
           EList<JvmFormalParameter> _parameters = it.getParameters();
@@ -1107,19 +1204,17 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
             @Override
             public void apply(final JvmFormalParameter it) {
               it.setName("name");
-              String _name = String.class.getName();
-              PsiClassType _createTypeByFQClassName = psiElementFactory.createTypeByFQClassName(_name);
-              JvmTypeReference _createTypeReference = PsiBasedTypeFactory.this.createTypeReference(_createTypeByFQClassName);
-              it.setParameterType(_createTypeReference);
+              JvmParameterizedTypeReference _createStringReference = PsiBasedTypeFactory.this.createStringReference();
+              it.setParameterType(_createStringReference);
             }
           };
           JvmFormalParameter _doubleArrow = ObjectExtensions.<JvmFormalParameter>operator_doubleArrow(_createJvmFormalParameter, _function);
-          PsiBasedTypeFactory.this.addUnique(_parameters, _doubleArrow);
+          PsiBasedTypeFactory.this.<JvmFormalParameter>addUnique(_parameters, _doubleArrow);
           it.setDeprecated(false);
           final PsiElementProvider _function_1 = new PsiElementProvider() {
             @Override
             public PsiElement get() {
-              return psiClass;
+              return enumType;
             }
           };
           PsiBasedTypeFactory.this.psiModelAssociator.associate(it, _function_1);
@@ -1227,18 +1322,19 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
   
   protected void createFormalParameters(final JvmExecutable it, final PsiMethod psiMethod, final StringBuilder fqn) {
     final PsiParameterList parameterList = psiMethod.getParameterList();
-    for (int i = 0; (i < parameterList.getParametersCount()); i++) {
+    final int max = parameterList.getParametersCount();
+    final PsiParameter[] parameters = parameterList.getParameters();
+    for (int i = 0; (i < max); i++) {
       {
-        PsiParameter[] _parameters = parameterList.getParameters();
-        final PsiParameter parameter = _parameters[i];
+        final PsiParameter parameter = parameters[i];
         if ((i != 0)) {
           fqn.append(",");
         }
         PsiType _type = parameter.getType();
         this.uriHelper.appendTypeName(fqn, _type);
-        EList<JvmFormalParameter> _parameters_1 = it.getParameters();
+        EList<JvmFormalParameter> _parameters = it.getParameters();
         JvmFormalParameter _createFormalParameter = this.createFormalParameter(parameter);
-        this.addUnique(_parameters_1, _createFormalParameter);
+        this.<JvmFormalParameter>addUnique(_parameters, _createFormalParameter);
       }
     }
   }
@@ -1248,7 +1344,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
     for (final PsiTypeParameter typeParameter : _typeParameters) {
       EList<JvmTypeParameter> _typeParameters_1 = it.getTypeParameters();
       JvmTypeParameter _createTypeParameter = this.createTypeParameter(typeParameter);
-      this.addUnique(_typeParameters_1, _createTypeParameter);
+      this.<JvmTypeParameter>addUnique(_typeParameters_1, _createTypeParameter);
     }
   }
   
@@ -1276,9 +1372,9 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
         String _name = parameter.getName();
         it.setName(_name);
         final PsiClassType[] extendsListTypes = parameter.getExtendsListTypes();
-        boolean _isEmpty = ((List<PsiClassType>)Conversions.doWrapArray(extendsListTypes)).isEmpty();
-        boolean _not = (!_isEmpty);
-        if (_not) {
+        int _length = extendsListTypes.length;
+        boolean _notEquals = (_length != 0);
+        if (_notEquals) {
           for (final PsiClassType upperBound : extendsListTypes) {
             {
               JvmUpperBound _createJvmUpperBound = PsiBasedTypeFactory.this._typesFactory.createJvmUpperBound();
@@ -1286,112 +1382,99 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
               JvmTypeReference _createTypeReference = PsiBasedTypeFactory.this.createTypeReference(upperBound);
               jvmUpperBound.internalSetTypeReference(_createTypeReference);
               EList<JvmTypeConstraint> _constraints = it.getConstraints();
-              PsiBasedTypeFactory.this.addUnique(_constraints, jvmUpperBound);
+              PsiBasedTypeFactory.this.<JvmTypeConstraintImplCustom>addUnique(_constraints, jvmUpperBound);
             }
           }
         } else {
           JvmUpperBound _createJvmUpperBound = PsiBasedTypeFactory.this._typesFactory.createJvmUpperBound();
           final JvmTypeConstraintImplCustom jvmUpperBound = ((JvmTypeConstraintImplCustom) _createJvmUpperBound);
-          Project _project = parameter.getProject();
-          JvmTypeReference _createObjectClassReference = PsiBasedTypeFactory.this.createObjectClassReference(_project);
-          jvmUpperBound.internalSetTypeReference(_createObjectClassReference);
+          JvmParameterizedTypeReference _createObjectReference = PsiBasedTypeFactory.this.createObjectReference();
+          jvmUpperBound.internalSetTypeReference(_createObjectReference);
           EList<JvmTypeConstraint> _constraints = it.getConstraints();
-          PsiBasedTypeFactory.this.addUnique(_constraints, jvmUpperBound);
+          PsiBasedTypeFactory.this.<JvmTypeConstraintImplCustom>addUnique(_constraints, jvmUpperBound);
         }
       }
     };
     return ObjectExtensions.<JvmTypeParameter>operator_doubleArrow(_createJvmTypeParameter, _function);
   }
   
-  protected JvmTypeReference createObjectClassReference(final Project it) {
-    PsiElementFactory _psiElementFactory = this.uriHelper.getPsiElementFactory(it);
-    String _name = Object.class.getName();
-    PsiClassType _createTypeByFQClassName = _psiElementFactory.createTypeByFQClassName(_name);
-    return this.createTypeReference(_createTypeByFQClassName);
+  protected JvmParameterizedTypeReference createObjectReference() {
+    final JvmParameterizedTypeReference result = this._typesFactory.createJvmParameterizedTypeReference();
+    result.setType(AbstractDeclaredTypeFactory.OBJECT_CLASS_PROXY);
+    return result;
+  }
+  
+  protected JvmParameterizedTypeReference createStringReference() {
+    final JvmParameterizedTypeReference result = this._typesFactory.createJvmParameterizedTypeReference();
+    JvmType _get = AbstractDeclaredTypeFactory.COMMON_PROXIES.get(AbstractDeclaredTypeFactory.STRING_CLASS_NAME);
+    result.setType(_get);
+    return result;
   }
   
   protected JvmTypeReference createTypeReference(final PsiType psiType) {
-    JvmTypeReference _xtrycatchfinallyexpression = null;
+    JvmUnknownTypeReference _xtrycatchfinallyexpression = null;
     try {
-      JvmTypeReference _switchResult = null;
       boolean _matched = false;
       if (!_matched) {
         if (psiType instanceof PsiArrayType) {
           _matched=true;
           PsiType _componentType = ((PsiArrayType)psiType).getComponentType();
-          _switchResult = this.createArrayTypeReference(_componentType);
+          return this.createArrayTypeReference(_componentType);
         }
       }
       if (!_matched) {
         if (psiType instanceof PsiClassType) {
           _matched=true;
-          JvmTypeReference _xblockexpression = null;
-          {
-            final PsiClassType.ClassResolveResult resolveResult = ((PsiClassType)psiType).resolveGenerics();
-            JvmTypeReference _xifexpression = null;
-            boolean _isValidResult = resolveResult.isValidResult();
-            boolean _not = (!_isValidResult);
-            if (_not) {
-              JvmUnknownTypeReference _createJvmUnknownTypeReference = this._typesFactory.createJvmUnknownTypeReference();
-              final Procedure1<JvmUnknownTypeReference> _function = new Procedure1<JvmUnknownTypeReference>() {
-                @Override
-                public void apply(final JvmUnknownTypeReference it) {
-                  String _className = ((PsiClassType)psiType).getClassName();
-                  it.setQualifiedName(_className);
-                }
-              };
-              _xifexpression = ObjectExtensions.<JvmUnknownTypeReference>operator_doubleArrow(_createJvmUnknownTypeReference, _function);
-            } else {
-              JvmParameterizedTypeReference _xifexpression_1 = null;
-              int _parameterCount = ((PsiClassType)psiType).getParameterCount();
-              boolean _equals = (_parameterCount == 0);
-              if (_equals) {
-                JvmParameterizedTypeReference _createClassTypeReference = this.createClassTypeReference(resolveResult);
-                final Procedure1<JvmParameterizedTypeReference> _function_1 = new Procedure1<JvmParameterizedTypeReference>() {
-                  @Override
-                  public void apply(final JvmParameterizedTypeReference it) {
-                    JvmType _createProxy = PsiBasedTypeFactory.this.createProxy(psiType);
-                    it.setType(_createProxy);
-                  }
-                };
-                _xifexpression_1 = ObjectExtensions.<JvmParameterizedTypeReference>operator_doubleArrow(_createClassTypeReference, _function_1);
-              } else {
-                JvmParameterizedTypeReference _createClassTypeReference_1 = this.createClassTypeReference(resolveResult);
-                final Procedure1<JvmParameterizedTypeReference> _function_2 = new Procedure1<JvmParameterizedTypeReference>() {
-                  @Override
-                  public void apply(final JvmParameterizedTypeReference it) {
-                    PsiClassType _rawType = ((PsiClassType)psiType).rawType();
-                    JvmType _createProxy = PsiBasedTypeFactory.this.createProxy(_rawType);
-                    it.setType(_createProxy);
-                    PsiType[] _parameters = ((PsiClassType)psiType).getParameters();
-                    for (final PsiType parameter : _parameters) {
-                      EList<JvmTypeReference> _arguments = it.getArguments();
-                      JvmTypeReference _createTypeArgument = PsiBasedTypeFactory.this.createTypeArgument(parameter);
-                      PsiBasedTypeFactory.this.addUnique(_arguments, _createTypeArgument);
-                    }
-                  }
-                };
-                _xifexpression_1 = ObjectExtensions.<JvmParameterizedTypeReference>operator_doubleArrow(_createClassTypeReference_1, _function_2);
+          final PsiClassType.ClassResolveResult resolveResult = ((PsiClassType)psiType).resolveGenerics();
+          boolean _isValidResult = resolveResult.isValidResult();
+          boolean _not = (!_isValidResult);
+          if (_not) {
+            JvmUnknownTypeReference _createJvmUnknownTypeReference = this._typesFactory.createJvmUnknownTypeReference();
+            final Procedure1<JvmUnknownTypeReference> _function = new Procedure1<JvmUnknownTypeReference>() {
+              @Override
+              public void apply(final JvmUnknownTypeReference it) {
+                String _className = ((PsiClassType)psiType).getClassName();
+                it.setQualifiedName(_className);
               }
-              _xifexpression = _xifexpression_1;
-            }
-            _xblockexpression = _xifexpression;
+            };
+            return ObjectExtensions.<JvmUnknownTypeReference>operator_doubleArrow(_createJvmUnknownTypeReference, _function);
+          } else {
+            JvmParameterizedTypeReference _createClassTypeReference = this.createClassTypeReference(resolveResult);
+            final Procedure1<JvmParameterizedTypeReference> _function_1 = new Procedure1<JvmParameterizedTypeReference>() {
+              @Override
+              public void apply(final JvmParameterizedTypeReference it) {
+                try {
+                  PsiClassType _rawType = ((PsiClassType)psiType).rawType();
+                  JvmType _createProxy = PsiBasedTypeFactory.this.createProxy(_rawType);
+                  it.setType(_createProxy);
+                  PsiType[] _parameters = ((PsiClassType)psiType).getParameters();
+                  for (final PsiType parameter : _parameters) {
+                    EList<JvmTypeReference> _arguments = it.getArguments();
+                    JvmTypeReference _createTypeArgument = PsiBasedTypeFactory.this.createTypeArgument(parameter);
+                    PsiBasedTypeFactory.this.<JvmTypeReference>addUnique(_arguments, _createTypeArgument);
+                  }
+                } catch (Throwable _e) {
+                  throw Exceptions.sneakyThrow(_e);
+                }
+              }
+            };
+            return ObjectExtensions.<JvmParameterizedTypeReference>operator_doubleArrow(_createClassTypeReference, _function_1);
           }
-          _switchResult = _xblockexpression;
         }
       }
-      if (!_matched) {
-        JvmParameterizedTypeReference _createJvmParameterizedTypeReference = this._typesFactory.createJvmParameterizedTypeReference();
-        final Procedure1<JvmParameterizedTypeReference> _function = new Procedure1<JvmParameterizedTypeReference>() {
-          @Override
-          public void apply(final JvmParameterizedTypeReference it) {
+      JvmParameterizedTypeReference _createJvmParameterizedTypeReference = this._typesFactory.createJvmParameterizedTypeReference();
+      final Procedure1<JvmParameterizedTypeReference> _function = new Procedure1<JvmParameterizedTypeReference>() {
+        @Override
+        public void apply(final JvmParameterizedTypeReference it) {
+          try {
             JvmType _createProxy = PsiBasedTypeFactory.this.createProxy(psiType);
             it.setType(_createProxy);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
           }
-        };
-        _switchResult = ObjectExtensions.<JvmParameterizedTypeReference>operator_doubleArrow(_createJvmParameterizedTypeReference, _function);
-      }
-      _xtrycatchfinallyexpression = _switchResult;
+        }
+      };
+      return ObjectExtensions.<JvmParameterizedTypeReference>operator_doubleArrow(_createJvmParameterizedTypeReference, _function);
     } catch (final Throwable _t) {
       if (_t instanceof UnresolvedPsiClassType) {
         final UnresolvedPsiClassType e = (UnresolvedPsiClassType)_t;
@@ -1416,7 +1499,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
           public void apply(final JvmInnerTypeReference it) {
             final PsiClass containingClass = psiClass.getContainingClass();
             Project _project = psiClass.getProject();
-            final PsiElementFactory psiElementFactory = PsiBasedTypeFactory.this.uriHelper.getPsiElementFactory(_project);
+            final PsiElementFactory psiElementFactory = PsiBasedTypeFactory.this.getPsiElementFactory(_project);
             PsiSubstitutor _substitutor = resolveResult.getSubstitutor();
             final PsiClassType outerType = psiElementFactory.createType(containingClass, _substitutor);
             JvmTypeReference _createTypeReference = PsiBasedTypeFactory.this.createTypeReference(outerType);
@@ -1460,7 +1543,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
         JvmTypeReference _createUpperBoundReference = PsiBasedTypeFactory.this.createUpperBoundReference(type);
         upperBound.internalSetTypeReference(_createUpperBoundReference);
         EList<JvmTypeConstraint> _constraints = it.getConstraints();
-        PsiBasedTypeFactory.this.addUnique(_constraints, upperBound);
+        PsiBasedTypeFactory.this.<JvmTypeConstraintImplCustom>addUnique(_constraints, upperBound);
         final PsiType superBound = type.getSuperBound();
         boolean _notEquals = (!Objects.equal(superBound, PsiType.NULL));
         if (_notEquals) {
@@ -1469,7 +1552,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
           JvmTypeReference _createTypeReference = PsiBasedTypeFactory.this.createTypeReference(superBound);
           lowerBound.internalSetTypeReference(_createTypeReference);
           EList<JvmTypeConstraint> _constraints_1 = it.getConstraints();
-          PsiBasedTypeFactory.this.addUnique(_constraints_1, lowerBound);
+          PsiBasedTypeFactory.this.<JvmTypeConstraintImplCustom>addUnique(_constraints_1, lowerBound);
         }
       }
     };
@@ -1478,7 +1561,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
   
   protected JvmTypeReference _createTypeArgument(final PsiCapturedWildcardType type) {
     PsiWildcardType _wildcard = type.getWildcard();
-    return this.createTypeArgument(_wildcard);
+    return this._createTypeArgument(_wildcard);
   }
   
   protected JvmTypeReference createUpperBoundReference(final PsiWildcardType type) {
@@ -1490,9 +1573,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
       if (_notEquals) {
         _xifexpression = this.createTypeReference(extendsBound);
       } else {
-        PsiManager _manager = type.getManager();
-        Project _project = _manager.getProject();
-        _xifexpression = this.createObjectClassReference(_project);
+        _xifexpression = this.createObjectReference();
       }
       _xblockexpression = _xifexpression;
     }
@@ -1511,49 +1592,47 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
     return ObjectExtensions.<JvmGenericArrayTypeReference>operator_doubleArrow(_createJvmGenericArrayTypeReference, _function);
   }
   
-  protected JvmType createProxy(final PsiType psiType) {
-    JvmVoid _createJvmVoid = this._typesFactory.createJvmVoid();
-    final Procedure1<JvmVoid> _function = new Procedure1<JvmVoid>() {
+  protected JvmType createProxy(final PsiType psiType) throws UnresolvedPsiClassType {
+    final JvmVoid result = this._typesFactory.createJvmVoid();
+    final Procedure1<InternalEObject> _function = new Procedure1<InternalEObject>() {
       @Override
-      public void apply(final JvmVoid it) {
-        final URI uri = PsiBasedTypeFactory.this.uriHelper.getFullURI(psiType);
-        if ((it instanceof InternalEObject)) {
-          ((InternalEObject)it).eSetProxyURI(uri);
+      public void apply(final InternalEObject it) {
+        try {
+          final URI uri = PsiBasedTypeFactory.this.uriHelper.getFullURI(psiType);
+          it.eSetProxyURI(uri);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       }
     };
-    return ObjectExtensions.<JvmVoid>operator_doubleArrow(_createJvmVoid, _function);
+    ObjectExtensions.<InternalEObject>operator_doubleArrow(((InternalEObject) result), _function);
+    return result;
   }
   
   protected void createNestedTypes(final JvmDeclaredType it, final PsiClass psiClass, final StringBuilder fqn) {
     PsiClass[] _innerClasses = psiClass.getInnerClasses();
-    final Function1<PsiClass, Boolean> _function = new Function1<PsiClass, Boolean>() {
-      @Override
-      public Boolean apply(final PsiClass it) {
-        boolean _and = false;
-        boolean _isAnonymous = PsiBasedTypeFactory.this.isAnonymous(it);
-        boolean _not = (!_isAnonymous);
-        if (!_not) {
-          _and = false;
-        } else {
-          boolean _isSynthetic = PsiBasedTypeFactory.this.isSynthetic(it);
-          boolean _not_1 = (!_isSynthetic);
-          _and = _not_1;
-        }
-        return Boolean.valueOf(_and);
+    for (final PsiClass innerClass : _innerClasses) {
+      boolean _and = false;
+      boolean _isAnonymous = this.isAnonymous(innerClass);
+      boolean _not = (!_isAnonymous);
+      if (!_not) {
+        _and = false;
+      } else {
+        boolean _isSynthetic = this.isSynthetic(innerClass);
+        boolean _not_1 = (!_isSynthetic);
+        _and = _not_1;
       }
-    };
-    Iterable<PsiClass> _filter = IterableExtensions.<PsiClass>filter(((Iterable<PsiClass>)Conversions.doWrapArray(_innerClasses)), _function);
-    for (final PsiClass innerClass : _filter) {
-      final Procedure0 _function_1 = new Procedure0() {
-        @Override
-        public void apply() {
-          EList<JvmMember> _members = it.getMembers();
-          JvmDeclaredType _createType = PsiBasedTypeFactory.this.createType(innerClass, fqn);
-          PsiBasedTypeFactory.this.addUnique(_members, _createType);
-        }
-      };
-      this.preserve(fqn, _function_1);
+      if (_and) {
+        final Procedure0 _function = new Procedure0() {
+          @Override
+          public void apply() {
+            EList<JvmMember> _members = it.getMembers();
+            JvmDeclaredType _createType = PsiBasedTypeFactory.this.createType(innerClass, fqn);
+            PsiBasedTypeFactory.this.<JvmDeclaredType>addUnique(_members, _createType);
+          }
+        };
+        this.preserve(fqn, _function);
+      }
     }
   }
   
@@ -1576,15 +1655,22 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
       }
     }
     if (!_matched) {
-      boolean _hasModifierProperty_1 = modifierListOwner.hasModifierProperty(PsiModifier.PROTECTED);
+      boolean _hasModifierProperty_1 = modifierListOwner.hasModifierProperty(PsiModifier.PACKAGE_LOCAL);
       if (_hasModifierProperty_1) {
+        _matched=true;
+        _switchResult = JvmVisibility.DEFAULT;
+      }
+    }
+    if (!_matched) {
+      boolean _hasModifierProperty_2 = modifierListOwner.hasModifierProperty(PsiModifier.PROTECTED);
+      if (_hasModifierProperty_2) {
         _matched=true;
         _switchResult = JvmVisibility.PROTECTED;
       }
     }
     if (!_matched) {
-      boolean _hasModifierProperty_2 = modifierListOwner.hasModifierProperty(PsiModifier.PUBLIC);
-      if (_hasModifierProperty_2) {
+      boolean _hasModifierProperty_3 = modifierListOwner.hasModifierProperty(PsiModifier.PUBLIC);
+      if (_hasModifierProperty_3) {
         _matched=true;
         _switchResult = JvmVisibility.PUBLIC;
       }
@@ -1593,20 +1679,23 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
   }
   
   protected void setTypeModifiers(final JvmDeclaredType it, final PsiClass psiClass) {
-    boolean _hasModifierProperty = psiClass.hasModifierProperty(PsiModifier.ABSTRACT);
+    final PsiModifierList modifierList = psiClass.getModifierList();
+    boolean _hasModifierProperty = modifierList.hasModifierProperty(PsiModifier.ABSTRACT);
     it.setAbstract(_hasModifierProperty);
-    boolean _hasModifierProperty_1 = psiClass.hasModifierProperty(PsiModifier.STATIC);
+    boolean _hasModifierProperty_1 = modifierList.hasModifierProperty(PsiModifier.STATIC);
     it.setStatic(_hasModifierProperty_1);
     boolean _isEnum = psiClass.isEnum();
     boolean _not = (!_isEnum);
     if (_not) {
-      boolean _hasModifierProperty_2 = psiClass.hasModifierProperty(PsiModifier.FINAL);
+      boolean _hasModifierProperty_2 = modifierList.hasModifierProperty(PsiModifier.FINAL);
       it.setFinal(_hasModifierProperty_2);
     }
   }
   
-  protected void addUnique(final EList<?> list, final Object object) {
-    ((InternalEList<Object>) list).addUnique(object);
+  protected <T extends Object> void addUnique(final EList<? super T> list, final T object) {
+    if ((object != null)) {
+      ((InternalEList<T>) list).addUnique(object);
+    }
   }
   
   protected StringBuilder append(final StringBuilder builder, final String value, final Procedure0 procedure) {
@@ -1632,17 +1721,13 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
     return _xblockexpression;
   }
   
-  protected boolean isPrimitive(final PsiType type) {
-    return (type instanceof PsiPrimitiveType);
-  }
-  
   protected boolean isClassType(final PsiType type, final Class<?> clazz) {
     boolean _xifexpression = false;
     if ((type instanceof PsiClassType)) {
-      PsiClass _resolve = ((PsiClassType)type).resolve();
-      String _qualifiedName = _resolve.getQualifiedName();
+      String _canonicalText = ((PsiClassType)type).getCanonicalText();
+      String _qualifiedClassName = PsiNameHelper.getQualifiedClassName(_canonicalText, true);
       String _name = clazz.getName();
-      _xifexpression = Objects.equal(_qualifiedName, _name);
+      return Objects.equal(_qualifiedClassName, _name);
     } else {
       _xifexpression = false;
     }
@@ -1673,6 +1758,10 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
   
   protected boolean isArray(final PsiType type) {
     return (type instanceof PsiArrayType);
+  }
+  
+  private PsiElementFactory getPsiElementFactory(final Project project) {
+    return PsiElementFactory.SERVICE.getInstance(project);
   }
   
   protected JvmTypeReference createTypeArgument(final PsiType type) {

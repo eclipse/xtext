@@ -1,7 +1,6 @@
 package org.eclipse.xtext.idea.extensions
 
 import com.intellij.openapi.project.DumbService
-import com.intellij.openapi.project.IndexNotReadyException
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.roots.LanguageLevelProjectExtension
 import com.intellij.openapi.roots.ProjectFileIndex
@@ -9,11 +8,9 @@ import com.intellij.psi.JavaPsiFacade
 import com.intellij.psi.PsiDocumentManager
 import com.intellij.psi.PsiFileFactory
 import com.intellij.psi.search.GlobalSearchScope
-import org.apache.log4j.Logger
+import org.eclipse.xtext.util.Wrapper
 
 class IdeaProjectExtensions {
-
-	static val LOG = Logger.getLogger(IdeaProjectExtensions)
 
 	static def findClassWithAlternativeResolvedEnabled(
 		JavaPsiFacade javaPsiFacade,
@@ -35,26 +32,24 @@ class IdeaProjectExtensions {
 		]
 	}
 
+	/**
+	 * The given function is executed with a fallback to the slow indexing mode, which
+	 * is demand indexing rather than using a populated index.
+	 */
 	static def <T> T withAlternativeResolvedEnabled(Project project, ()=>T function) {
 		project.dumbService.withAlternativeResolvedEnabled(function)
 	}
 
+	/**
+	 * The given function is executed with a fallback to the slow indexing mode, which
+	 * is demand indexing rather than using a populated index.
+	 */
 	static def <T> T withAlternativeResolvedEnabled(DumbService dumbService, ()=>T function) {
-		val wasEnabled = dumbService.alternativeResolveEnabled
-		if (!wasEnabled) {
-			dumbService.alternativeResolveEnabled = true
-		}
-		try {
-			function.apply
-		} catch (IndexNotReadyException e) {
-			// Should never happen
-			LOG.warn(e.message, e)
-			null
-		} finally {
-			if (!wasEnabled) {
-				dumbService.alternativeResolveEnabled = false
-			}
-		}
+		val Wrapper<T> result = Wrapper.wrap(null)
+		dumbService.withAlternativeResolveEnabled [
+			result.set(function.apply)
+		]
+		return result.get
 	}
 
 	static def getJavaPsiFacade(Project project) {

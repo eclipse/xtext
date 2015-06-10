@@ -82,11 +82,11 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.TypeResource;
+import org.eclipse.xtext.common.types.access.impl.AbstractDeclaredTypeFactory;
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
 import org.eclipse.xtext.common.types.impl.JvmExecutableImplCustom;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 import org.osgi.framework.Version;
@@ -106,21 +106,10 @@ import com.google.common.collect.Lists;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.7
  */
-public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>, ITypeFactory.OptionsAware<IType, JvmDeclaredType> {
+public class JdtBasedTypeFactory extends AbstractDeclaredTypeFactory implements ITypeFactory<IType, JvmDeclaredType>, ITypeFactory.OptionsAware<IType, JvmDeclaredType> {
 
 	private final static Logger log = Logger.getLogger(JdtBasedTypeFactory.class);
 
-	private static final String CLASS_CLASS_NAME = "java.lang.Class";
-	private static final String OBJECT_CLASS_NAME = "java.lang.Object";
-	private static final String STRING_CLASS_NAME = "java.lang.String";
-
-	private static final String[] EMPTY_STRING_ARRAY = Strings.EMPTY_ARRAY;
-
-	/**
-	 * An array of proxies for primitives indexed the same way as {@link TypeURIHelper#PRIMITIVE_URIS}, i.e., indexed based on the first character of their signature.
-	 */
-	static final JvmType[] PRIMITIVE_PROXIES = new JvmType[TypeURIHelper.PRIMITIVE_URIS.length];
-	
 	private static JdtCompliance getComplianceLevel() {
 		if (isJdtGreaterOrEqual(new Version(3,7,0))) {
 			if (isJdtGreaterOrEqual(new Version(3,10,0))) {
@@ -228,76 +217,6 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 	}
 	
 	private static final JdtCompliance jdtCompliance = getComplianceLevel(); 
-	
-	static {
-		// Initialize the primitive proxies at the same indices as in the PRIMITIVE_URIs.
-		//
-		for (int i = 0; i < TypeURIHelper.PRIMITIVE_URIS.length; ++i) {
-			URI uri = TypeURIHelper.PRIMITIVE_URIS[i];
-			if (uri != null) {
-				JvmType proxy = TypesFactory.eINSTANCE.createJvmVoid();
-				((InternalEObject)proxy).eSetProxyURI(uri);
-				PRIMITIVE_PROXIES[i] = proxy;
-			}
-		}
-	}
-	
-	/**
-	 * Mappings from qualified type binding name to proxy instance for all the types in {@link TypeURIHelper#COMMON_CLASS_NAMES}.
-	 */
-	static final Map<String, JvmType> COMMON_PROXIES = new HashMap<String, JvmType>();
-
-
-	static {
-		// Initialize the common proxies
-		//
-		for (String commonClassName : TypeURIHelper.COMMON_CLASS_NAMES) {
-			JvmType objectProxy = TypesFactory.eINSTANCE.createJvmVoid();
-			URI uri = TypeURIHelper.COMMON_URIS.get(commonClassName);
-			((InternalEObject)objectProxy).eSetProxyURI(uri);
-			COMMON_PROXIES.put(uri.segment(1), objectProxy);
-		}
-	}
-
-	/**
-	 * The proxy for <code>java.lang.Object</code>.
-	 */
-	static final JvmType OBJECT_CLASS_PROXY = COMMON_PROXIES.get(OBJECT_CLASS_NAME);
-
-	/**
-	 * Mappings from qualified annotation type binding name to proxy instance for all the annotations in {@link TypeURIHelper#COMMON_ANNOTATIONS}.
-	 */
-	static final Map<String, JvmAnnotationType> ANNOTATION_PROXIES = new HashMap<String, JvmAnnotationType>();
-
-	/**
-	 * Mappings from qualified method name to proxy instance for all the methods in {@link TypeURIHelper#COMMON_ANNOTATIONS}.
-	 */
-	static final Map<String, JvmOperation[]> ANNOTATION_METHOD_PROXIES = new HashMap<String, JvmOperation[]>();
-
-	static {
-		// Initialize the common annotation proxies and their corresponding method proxies.
-		//
-		for (String[] annotations : TypeURIHelper.COMMON_ANNOTATIONS) {
-			JvmAnnotationType objectProxy = TypesFactory.eINSTANCE.createJvmAnnotationType();
-			URI uri = TypeURIHelper.COMMON_URIS.get(annotations[0]);
-			((InternalEObject)objectProxy).eSetProxyURI(uri);
-			String key = uri.segment(1);
-			ANNOTATION_PROXIES.put(key, objectProxy);
-			
-			// Initialize any corresponding method proxies.
-			//
-			URI[] methodURIs = TypeURIHelper.COMMON_METHOD_URIS.get(annotations[0]);
-			if (methodURIs != null) {
-				JvmOperation[] jvmOperationProxies = new JvmOperation[methodURIs.length];
-				for (int i = 0; i < methodURIs.length; ++i) {
-					JvmOperation jvmOperation = TypesFactory.eINSTANCE.createJvmOperation();
-					((InternalEObject)jvmOperation).eSetProxyURI(methodURIs[i]);
-					jvmOperationProxies[i] = jvmOperation;
-				}
-				ANNOTATION_METHOD_PROXIES.put(key, jvmOperationProxies);
-			}
-		}
-	}
 	
 
 	private final TypeURIHelper uriHelper;

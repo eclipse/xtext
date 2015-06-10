@@ -10,13 +10,16 @@ package org.eclipse.xtext.idea.build
 import com.google.common.collect.HashMultimap
 import com.google.inject.Inject
 import com.google.inject.Provider
+import com.intellij.openapi.Disposable
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.application.ModalityState
+import com.intellij.openapi.module.Module
 import com.intellij.openapi.progress.ProcessCanceledException
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.roots.ModuleRootManager
 import com.intellij.openapi.roots.OrderEnumerator
 import com.intellij.openapi.roots.ProjectFileIndex
+import com.intellij.openapi.util.Disposer
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.util.Alarm
 import java.util.List
@@ -35,12 +38,13 @@ import org.eclipse.xtext.util.internal.Log
 import static org.eclipse.xtext.idea.build.BuildEvent.Type.*
 
 import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
-import com.intellij.openapi.module.Module
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@Log class XtextAutoBuilder {
+@Log class XtextAutoBuilder implements Disposable {
+	
+	boolean disposed
 	
 	BlockingQueue<BuildEvent> queue = new LinkedBlockingQueue<BuildEvent>()
 
@@ -48,7 +52,7 @@ import com.intellij.openapi.module.Module
 
 	Project project
 	
-	@Inject Provider<IncrementalBuilder> builderProvider
+	@Inject Provider<IncrementalBuilder> builderProvider	
 	
 	@Inject Provider<BuildProgressReporter> buildProgressReporterProvider	
 	 
@@ -61,7 +65,15 @@ import com.intellij.openapi.module.Module
 	new(Project project) {
 		IdeaSharedInjectorProvider.injector.injectMembers(this)
 		this.project = project
-		alarm = new Alarm(Alarm.ThreadToUse.OWN_THREAD, project)
+		alarm = new Alarm(Alarm.ThreadToUse.OWN_THREAD, this)
+		disposed = false
+		Disposer.register(project, this)
+	}
+	
+	override dispose() {
+		alarm.cancelAllRequests
+		queue.clear
+		disposed = true
 	}
 
 	def void fileModified(VirtualFile file) {
@@ -77,13 +89,13 @@ import com.intellij.openapi.module.Module
 	}
 
 	protected def enqueue(VirtualFile file, BuildEvent.Type type) {
-		if (!isLoaded()) {
+		if (!disposed && !isLoaded()) {
 			queueAllResources()
 		}
 		if (LOG.isDebugEnabled) {
 			LOG.debug("queuing "+file.URI)
 		}
-		if (file != null && !project.isDisposed) {
+		if (file != null && !disposed) {
 			queue.put(new BuildEvent(file, type))
 			alarm.cancelAllRequests
 			alarm.addRequest([build], 200)
@@ -115,6 +127,9 @@ import com.intellij.openapi.module.Module
 	}
 	
 	protected def void build() {
+		if (disposed) {
+			return
+		}
 		val allEvents = newArrayList
 		queue.drainTo(allEvents)
 		build(allEvents)
