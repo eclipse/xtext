@@ -8,35 +8,6 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="src-gen/org/eclipse/xtext/xbase/AbstractXbaseRuntimeModule.java" type="org.eclipse.xtext.xbase.AbstractXbaseRuntimeModule">
-        <filter id="1143996420">
-            <message_arguments>
-                <message_argument value="bindIFormatter2()"/>
-            </message_arguments>
-        </filter>
-        <filter id="1143996420">
-            <message_arguments>
-                <message_argument value="configureFormatterPreferences(Binder)"/>
-            </message_arguments>
-        </filter>
-        <filter id="1143996420">
-            <message_arguments>
-                <message_argument value="configureITransientValueService(Binder)"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/xbase/AbstractXtypeRuntimeModule.java" type="org.eclipse.xtext.xbase.AbstractXtypeRuntimeModule">
-        <filter id="1143996420">
-            <message_arguments>
-                <message_argument value="bindIFormatter2()"/>
-            </message_arguments>
-        </filter>
-        <filter id="1143996420">
-            <message_arguments>
-                <message_argument value="configureFormatterPreferences(Binder)"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="src-gen/org/eclipse/xtext/xbase/XbaseStandaloneSetupGenerated.java" type="org.eclipse.xtext.xbase.XbaseStandaloneSetupGenerated">
         <filter id="1143996420">
             <message_arguments>
@@ -48,14 +19,6 @@
         <filter id="1143996420">
             <message_arguments>
                 <message_argument value="getFileExtensions()"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/xbase/jvmmodel/JvmModelAssociator.java" type="org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator">
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator"/>
-                <message_argument value="setInferrer(IJvmModelInferrer)"/>
             </message_arguments>
         </filter>
     </resource>

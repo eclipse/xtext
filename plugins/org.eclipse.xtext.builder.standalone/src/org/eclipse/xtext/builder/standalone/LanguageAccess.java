@@ -13,7 +13,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.common.types.descriptions.IStubGenerator;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
-import org.eclipse.xtext.generator.IGenerator;
+import org.eclipse.xtext.generator.GeneratorDelegate;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
@@ -54,8 +54,8 @@ public class LanguageAccess {
 		this.linksAgainstJava = linksAgainstJavaTypes;
 	}
 
-	public IGenerator getGenerator() {
-		return resourceServiceProvider.get(IGenerator.class);
+	public GeneratorDelegate getGenerator() {
+		return resourceServiceProvider.get(GeneratorDelegate.class);
 	}
 
 	public IStubGenerator getStubGenerator() {

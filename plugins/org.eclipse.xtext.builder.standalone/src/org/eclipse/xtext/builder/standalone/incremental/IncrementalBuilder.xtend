@@ -108,7 +108,7 @@ import java.util.Set
 					}
 				}
 			}
-			access.generator.doGenerate(resource, fileSystemAccess)
+			access.generator.generate(resource, fileSystemAccess)
 			// delete everything that was previously generated, but not this time
 			previous.forEach[
 				LOG.info('Deleting stale generated file ' + it)

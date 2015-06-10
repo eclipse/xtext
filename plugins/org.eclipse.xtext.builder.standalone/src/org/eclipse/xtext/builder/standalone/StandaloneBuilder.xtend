@@ -264,7 +264,7 @@ class StandaloneBuilder {
 					}
 				}
 			}
-			access.generator.doGenerate(it, fileSystemAccess);
+			access.generator.generate(it, fileSystemAccess);
 		}
 	}
 
