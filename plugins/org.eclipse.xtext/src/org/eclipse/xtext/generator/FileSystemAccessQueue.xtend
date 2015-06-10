@@ -22,8 +22,11 @@ class FileSystemAccessQueue extends AdapterImpl {
 	@FinalFieldsConstructor
 	new() {}
 	
-	def void sendAsync(URI uri, ()=>void procedure) {
-		send(new FileSystemAccessRequest(uri, procedure))
+	/**
+	 * @since 2.9
+	 */
+	def void sendAsync(URI uri, Runnable runMe) {
+		send(new FileSystemAccessRequest(uri, runMe))
 	}
 	
 	protected def send(FileSystemAccessRequest request) {
@@ -44,12 +47,12 @@ class FileSystemAccessQueue extends AdapterImpl {
  * @author Anton Kosyakov
  * @since 2.7
  */
-class FileSystemAccessRequest {
+class FileSystemAccessRequest implements Runnable {
 	val URI uri
-	val ()=>void procedure
+	val Runnable runMe
 	
 	/**
-	 * @since 2.8
+	 * @since 2.9
 	 */
 	@FinalFieldsConstructor
 	new() {}
@@ -63,10 +66,10 @@ class FileSystemAccessRequest {
 	}
 	
 	/**
-	 * @since 2.8
+	 * @since 2.9
 	 */
-	@Pure
-	def getProcedure() {
-		return procedure
+	override run() {
+		runMe.run
 	}
+	
 }
