@@ -5,9 +5,10 @@ import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 
 var projectName = "org.xpect"
-var grammarURI = "classpath:/org/xpect/Xpect.xtext"
+var grammarURI = "platform:/resource/${projectName}/src/org/xpect/Xpect.xtext"
 var genmodelURI = "platform:/resource/${projectName}/model/Xpect.genmodel"
-var ecoreURI = "platform:/resource/${projectName}/model/Xpect.ecore"
+var xpectEcoreURI = "platform:/resource/${projectName}/model/Xpect.ecore"
+var xjmEcoreURI = "platform:/resource/${projectName}/model/XpectJavaModel.ecore"
 var file.extensions = "xpect"
 var runtimeProject = "../${projectName}"
 
@@ -39,7 +40,8 @@ Workflow {
 		projectNameRt = projectName
 		projectNameUi = "${projectName}.ui"
 		language = {
-			loadedResource = ecoreURI
+			loadedResource = xjmEcoreURI
+			loadedResource = xpectEcoreURI
 			uri = grammarURI
 			fileExtensions = file.extensions
 
