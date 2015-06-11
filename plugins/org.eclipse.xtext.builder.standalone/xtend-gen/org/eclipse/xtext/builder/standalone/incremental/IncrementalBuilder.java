@@ -69,9 +69,9 @@ public class IncrementalBuilder {
   public static class Result {
     private final IndexState indexState;
     
-    private final Set<IResourceDescription.Delta> affectedResources;
+    private final List<IResourceDescription.Delta> affectedResources;
     
-    public Result(final IndexState indexState, final Set<IResourceDescription.Delta> affectedResources) {
+    public Result(final IndexState indexState, final List<IResourceDescription.Delta> affectedResources) {
       super();
       this.indexState = indexState;
       this.affectedResources = affectedResources;
@@ -125,7 +125,7 @@ public class IncrementalBuilder {
     }
     
     @Pure
-    public Set<IResourceDescription.Delta> getAffectedResources() {
+    public List<IResourceDescription.Delta> getAffectedResources() {
       return this.affectedResources;
     }
   }
@@ -175,8 +175,23 @@ public class IncrementalBuilder {
       };
       IterableExtensions.<URI>forEach(_deletedFiles, _function);
       final Indexer.IndexResult result = this.indexer.computeAndIndexAffected(this.request, this.context);
-      Set<URI> _affectedResources = result.getAffectedResources();
-      final Function1<Resource, Boolean> _function_1 = new Function1<Resource, Boolean>() {
+      List<IResourceDescription.Delta> _resourceDeltas = result.getResourceDeltas();
+      final Function1<IResourceDescription.Delta, Boolean> _function_1 = new Function1<IResourceDescription.Delta, Boolean>() {
+        @Override
+        public Boolean apply(final IResourceDescription.Delta it) {
+          IResourceDescription _new = it.getNew();
+          return Boolean.valueOf((!Objects.equal(_new, null)));
+        }
+      };
+      Iterable<IResourceDescription.Delta> _filter = IterableExtensions.<IResourceDescription.Delta>filter(_resourceDeltas, _function_1);
+      final Function1<IResourceDescription.Delta, URI> _function_2 = new Function1<IResourceDescription.Delta, URI>() {
+        @Override
+        public URI apply(final IResourceDescription.Delta it) {
+          return it.getUri();
+        }
+      };
+      Iterable<URI> _map = IterableExtensions.<IResourceDescription.Delta, URI>map(_filter, _function_2);
+      final Function1<Resource, Boolean> _function_3 = new Function1<Resource, Boolean>() {
         @Override
         public Boolean apply(final Resource resource) {
           resource.getContents();
@@ -196,11 +211,11 @@ public class IncrementalBuilder {
           return Boolean.valueOf(true);
         }
       };
-      this.context.<Boolean>executeClustered(_affectedResources, _function_1);
+      this.context.<Boolean>executeClustered(_map, _function_3);
       ResourceDescriptionsData _newIndex = result.getNewIndex();
       IndexState _indexState = new IndexState(_newIndex, newSource2GeneratedMapping);
-      Set<IResourceDescription.Delta> _resourceDeltas = result.getResourceDeltas();
-      return new IncrementalBuilder.Result(_indexState, _resourceDeltas);
+      List<IResourceDescription.Delta> _resourceDeltas_1 = result.getResourceDeltas();
+      return new IncrementalBuilder.Result(_indexState, _resourceDeltas_1);
     }
     
     protected boolean validate(final Resource resource) {

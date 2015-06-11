@@ -9,12 +9,15 @@ package org.eclipse.xtext.builder.standalone.incremental
 
 import com.google.inject.Inject
 import com.google.inject.Provider
+import java.util.List
 import java.util.Map
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.builder.standalone.ClusteringConfig
 import org.eclipse.xtext.builder.standalone.LanguageAccess
+import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.resource.clustering.DisabledClusteringPolicy
 import org.eclipse.xtext.resource.clustering.DynamicResourceClusteringPolicy
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
@@ -23,9 +26,6 @@ import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.CheckMode
-import org.eclipse.xtend.lib.annotations.Data
-import org.eclipse.xtext.resource.IResourceDescription
-import java.util.Set
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -35,7 +35,7 @@ import java.util.Set
 	
 	@Data static class Result {
 		IndexState indexState
-		Set<IResourceDescription.Delta> affectedResources
+		List<IResourceDescription.Delta> affectedResources
 	}
 	
 	@Log protected static class InternalStatefulIncrementalBuilder {
@@ -57,7 +57,7 @@ import java.util.Set
 				]
 			]
 			val result = indexer.computeAndIndexAffected(request, context)
-			result.affectedResources
+			result.resourceDeltas.filter[getNew != null].map[uri]
 				.executeClustered [
 					Resource resource |
 					resource.contents // fully initialize

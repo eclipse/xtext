@@ -493,7 +493,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
           final IResourceDescription.Event _function_5 = new IResourceDescription.Event() {
             @Override
             public ImmutableList<IResourceDescription.Delta> getDeltas() {
-              Set<IResourceDescription.Delta> _affectedResources = result.getAffectedResources();
+              List<IResourceDescription.Delta> _affectedResources = result.getAffectedResources();
               return ImmutableList.<IResourceDescription.Delta>copyOf(_affectedResources);
             }
           };
