@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.standalone.incremental
+package org.eclipse.xtext.builder.tests.incremental
 
 import com.google.common.io.Files
 import org.junit.Test
