@@ -51,7 +51,7 @@ class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest {
 		assertTrue(generated.values.containsSuffix('src-gen/B.java'))
 		assertTrue(generated.values.containsSuffix('src-gen/A.java'))
 	}
-	
+
 	@Test def void testDelete_01() {
 		build(newBuildRequest [
 			dirtyFiles = #[
