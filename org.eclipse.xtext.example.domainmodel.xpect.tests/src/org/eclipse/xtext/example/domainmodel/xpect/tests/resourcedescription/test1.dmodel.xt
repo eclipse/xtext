@@ -35,7 +35,7 @@ pkg1.string
 
 /*
 these references are stored in the Xtext Index
-XPECT referenceDescriptions ---
+XPECT !referenceDescriptions ---
 	/0/@elements.0/@elements.0/@features.0::/@type type       --> java:/Primitives#int
 	/0/@elements.0/@elements.0/@features.1::/@type type       --> java:/Objects/java.lang.String#java.lang.String
 	/1/@members.1::/@parameters.0/@parameterType   type       --> java:/Objects/org.eclipse.xtext.xbase.lib.Procedures#org.eclipse.xtext.xbase.lib.Procedures$Procedure1

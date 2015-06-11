@@ -6,8 +6,8 @@ package pkg1 {
 		op calc():String {
 			val x = 1
 			
-			// XPECT errors --> "Assignment to final variable" at "x = 2"
-			x = 2
+			// XPECT !errors --> "Assignment to final variable" at "x = 2"
+			// x = 2
 			
 			// XPECT errors --> "Type mismatch: cannot convert from int to String" at "x"
 			return x
