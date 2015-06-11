@@ -162,6 +162,9 @@ define([
 		editor.getEditorContext = function() {
 			return editorContext;
 		};
+		editor.getOptions = function() {
+			return options;
+		}
 		if (options.dirtyElement) {
 			var doc = options.document || document;
 			var dirtyElement;
@@ -182,17 +185,15 @@ define([
 		
 		//---- Persistence Services
 		
-		var serverUrl = options.serverUrl;
-		if (!serverUrl)
-			serverUrl = "http://" + location.host + "/xtext-service";
-		var resourceId = options.resourceId;
+		if (!options.serverUrl)
+			options.serverUrl = "http://" + location.host + "/xtext-service";
 		var loadResourceService = undefined, saveResourceService = undefined, revertResourceService = undefined;
-		if (resourceId) {
+		if (options.resourceId) {
 			if (options.loadFromServer === undefined || options.loadFromServer) {
 				options.loadFromServer = true;
-				loadResourceService = new LoadResourceService(serverUrl, resourceId);
+				loadResourceService = new LoadResourceService(options.serverUrl, options.resourceId);
 				loadResourceService.loadResource(editorContext, options);
-				saveResourceService = new SaveResourceService(serverUrl, resourceId);
+				saveResourceService = new SaveResourceService(options.serverUrl, options.resourceId);
 				if (options.enableSaveAction && editor.commands) {
 					editor.commands.addCommand({
 						name: "save",
@@ -202,13 +203,13 @@ define([
 						}
 					});
 				}
-				revertResourceService = new RevertResourceService(serverUrl, resourceId);
+				revertResourceService = new RevertResourceService(options.serverUrl, options.resourceId);
 			}
 		} else {
 			if (options.loadFromServer === undefined)
 				options.loadFromServer = false;
 			if (options.xtextLang)
-				resourceId = "text." + options.xtextLang;
+				options.resourceId = "text." + options.xtextLang;
 		}
 		
 		//---- Syntax Highlighting Service
@@ -226,7 +227,7 @@ define([
 		
 		var validationService;
 		if (options.enableValidationService || options.enableValidationService === undefined) {
-			validationService = new ValidationService(serverUrl, resourceId);
+			validationService = new ValidationService(options.serverUrl, options.resourceId);
 		}
 		
 		//---- Update Service
@@ -238,7 +239,7 @@ define([
 		}
 		var updateService = undefined;
 		if (!options.sendFullText) {
-			updateService = new UpdateService(serverUrl, resourceId);
+			updateService = new UpdateService(options.serverUrl, options.resourceId);
 			if (saveResourceService)
 				saveResourceService.setUpdateService(updateService);
 			editorContext.addServerStateListener(refreshDocument);
@@ -264,7 +265,7 @@ define([
 		//---- Content Assist Service
 		
 		if (options.enableContentAssistService || options.enableContentAssistService === undefined) {
-			var contentAssistService = new ContentAssistService(serverUrl, resourceId);
+			var contentAssistService = new ContentAssistService(options.serverUrl, options.resourceId);
 			var completer = {
 				getCompletions: function(editor, session, pos, prefix, callback) {
 					var params = _copy(options);

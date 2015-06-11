@@ -12,6 +12,7 @@ import com.google.inject.util.Modules
 import java.io.File
 import java.io.FileWriter
 import java.util.HashMap
+import java.util.Map
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import org.eclipse.emf.common.util.URI
@@ -19,6 +20,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.idea.example.entities.EntitiesRuntimeModule
 import org.eclipse.xtext.idea.example.entities.EntitiesStandaloneSetup
 import org.eclipse.xtext.junit4.AbstractXtextTests
+import org.eclipse.xtext.web.server.ISessionStore
 import org.eclipse.xtext.web.server.XtextServiceDispatcher
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider
 import org.eclipse.xtext.xbase.web.test.languages.EntitiesWebModule
@@ -71,6 +73,15 @@ class AbstractXbaseWebTest extends AbstractXtextTests {
 		writer.close()
 		file.deleteOnExit
 		return file
+	}
+	
+	protected def getService(String path, Map<String, String> parameters) {
+		getService(path, parameters, new HashMapSessionStore)
+	}
+	
+	protected def getService(String path, Map<String, String> parameters, ISessionStore sessionStore) {
+		val requestData = new MockRequestData(path, parameters)
+		dispatcher.getService(requestData, sessionStore)
 	}
 	
 }

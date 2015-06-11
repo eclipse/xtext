@@ -26,11 +26,10 @@ class ContentAssistTest extends AbstractWebServerTest {
 	}
 	
 	protected def assertContentAssistResult(CharSequence resourceContent, int offset, CharSequence expectedResult) {
-		val sessionStore = new HashMapSessionStore
-		val contentAssist = dispatcher.getService('/content-assist', #{
+		val contentAssist = getService('content-assist', #{
 				'fullText' -> resourceContent.toString,
 				'caretOffset' -> offset.toString
-			}, sessionStore)
+			})
 		assertFalse(contentAssist.hasSideEffects)
 		assertTrue(contentAssist.hasTextInput)
 		val result = contentAssist.service.apply() as ContentAssistResult
@@ -144,12 +143,11 @@ class ContentAssistTest extends AbstractWebServerTest {
 	
 	@Test def testIncorrectStateId() {
 		val file = createFile('state foo end')
-		val sessionStore = new HashMapSessionStore
-		val contentAssist = dispatcher.getService('/content-assist', #{
+		val contentAssist = getService('content-assist', #{
 				'resource' -> file.name,
 				'caretOffset' -> '3',
 				'requiredStateId' -> 'totalerquatsch'
-			}, sessionStore)
+			})
 		assertTrue(contentAssist.hasConflict)
 		val result = contentAssist.service.apply()
 		assertThat(result, instanceOf(ServiceConflictResult))

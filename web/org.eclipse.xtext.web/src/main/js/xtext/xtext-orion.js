@@ -296,20 +296,19 @@ define([
 			}
 		};
 		editor.getEditorContext = editorContextProvider.getEditorContext;
+		editor.getOptions = editorContextProvider.getOptions;
 		
 		//---- Persistence Services
 		
-		var serverUrl = options.serverUrl;
-		if (!serverUrl)
-			serverUrl = "http://" + location.host + "/xtext-service";
-		var resourceId = options.resourceId;
+		if (!options.serverUrl)
+			options.serverUrl = "http://" + location.host + "/xtext-service";
 		var loadResourceService = undefined, saveResourceService = undefined, revertResourceService = undefined;
-		if (resourceId) {
+		if (options.resourceId) {
 			if (options.loadFromServer === undefined || options.loadFromServer) {
 				options.loadFromServer = true;
-				loadResourceService = new LoadResourceService(serverUrl, resourceId);
+				loadResourceService = new LoadResourceService(options.serverUrl, options.resourceId);
 				loadResourceService.loadResource(editorContext, options);
-				saveResourceService = new SaveResourceService(serverUrl, resourceId);
+				saveResourceService = new SaveResourceService(options.serverUrl, options.resourceId);
 				if (options.enableSaveAction) {
 					textView.setKeyBinding(new mKeyBinding.KeyStroke("s", true), "saveXtextDocument");
 					textView.setAction("saveXtextDocument", function() {
@@ -317,13 +316,13 @@ define([
 						return true;
 					}, {name: "Save"});
 				}
-				revertResourceService = new RevertResourceService(serverUrl, resourceId);
+				revertResourceService = new RevertResourceService(options.serverUrl, options.resourceId);
 			}
 		} else {
 			if (options.loadFromServer === undefined)
 				options.loadFromServer = false;
 			if (options.xtextLang)
-				resourceId = "text." + options.xtextLang;
+				options.resourceId = "text." + options.xtextLang;
 		}
 		
 		//---- Syntax Highlighting Service
@@ -345,7 +344,7 @@ define([
 		
 		var validationService;
 		if (options.enableValidationService || options.enableValidationService === undefined) {
-			validationService = new ValidationService(serverUrl, resourceId);
+			validationService = new ValidationService(options.serverUrl, options.resourceId);
 		}
 		
 		//---- Update Service
@@ -357,7 +356,7 @@ define([
 		}
 		var updateService = undefined;
 		if (!options.sendFullText) {
-			updateService = new UpdateService(serverUrl, resourceId);
+			updateService = new UpdateService(options.serverUrl, options.resourceId);
 			if (saveResourceService)
 				saveResourceService.setUpdateService(updateService);
 			editorContext.addServerStateListener(refreshDocument);
@@ -383,7 +382,7 @@ define([
 		var contentAssist = editor.getContentAssist();
 		if (contentAssist && (options.enableContentAssistService || options.enableContentAssistService === undefined)) {
 			contentAssist.setEditorContextProvider(editorContextProvider);
-			var contentAssistService = new ContentAssistService(serverUrl, resourceId);
+			var contentAssistService = new ContentAssistService(options.serverUrl, options.resourceId);
 			if (updateService)
 				contentAssistService.setUpdateService(updateService);
 			contentAssist.setProviders([{

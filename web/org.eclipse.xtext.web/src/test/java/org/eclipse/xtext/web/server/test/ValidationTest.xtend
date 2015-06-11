@@ -16,8 +16,7 @@ import static org.hamcrest.core.IsInstanceOf.*
 class ValidationTest extends AbstractWebServerTest {
 	
 	protected def assertValidationResult(String resourceContent, String expectedResult) {
-		val sessionStore = new HashMapSessionStore
-		val validate = dispatcher.getService('/validation', #{'fullText' -> resourceContent}, sessionStore)
+		val validate = getService('validation', #{'fullText' -> resourceContent})
 		assertFalse(validate.hasSideEffects)
 		assertTrue(validate.hasTextInput)
 		val result = validate.service.apply() as ValidationResult
@@ -71,8 +70,7 @@ class ValidationTest extends AbstractWebServerTest {
 	
 	@Test def testValidateFile() {
 		val file = createFile('stat foo end')
-		val sessionStore = new HashMapSessionStore
-		val validate = dispatcher.getService('/validation', #{'resource' -> file.name}, sessionStore)
+		val validate = getService('validation', #{'resource' -> file.name})
 		assertFalse(validate.hasSideEffects)
 		assertFalse(validate.hasTextInput)
 		val result = validate.service.apply() as ValidationResult
@@ -93,11 +91,10 @@ class ValidationTest extends AbstractWebServerTest {
 	
 	@Test def testIncorrectStateId() {
 		val file = createFile('state foo end')
-		val sessionStore = new HashMapSessionStore
-		val validate = dispatcher.getService('/validation', #{
+		val validate = getService('validation', #{
 				'resource' -> file.name,
 				'requiredStateId' -> 'totalerquatsch'
-			}, sessionStore)
+			})
 		assertTrue(validate.hasConflict)
 		val result = validate.service.apply()
 		assertThat(result, instanceOf(ServiceConflictResult))
