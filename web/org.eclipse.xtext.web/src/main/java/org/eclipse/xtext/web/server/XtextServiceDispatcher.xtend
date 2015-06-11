@@ -12,8 +12,6 @@ import com.google.inject.Inject
 import com.google.inject.Provider
 import com.google.inject.Singleton
 import java.io.IOException
-import java.util.Map
-import java.util.StringTokenizer
 import org.apache.log4j.Logger
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -61,11 +59,11 @@ class XtextServiceDispatcher {
 	@Inject IResourceFactory resourceFactory
 	@Inject OperationCanceledManager operationCanceledManager
 	
-	def ServiceDescriptor getService(String path, Map<String, String> parameters, ISessionStore sessionStore)
+	def ServiceDescriptor getService(IRequestData request, ISessionStore sessionStore)
 			throws InvalidRequestException {
-		val requestType = getRequestType(path, parameters)
+		val requestType = request.getMetadata('requestType') ?: ''
 		if (LOG.traceEnabled) {
-			val stringParams = parameters.entrySet.sortBy[key].join(': ', ', ', '', [
+			val stringParams = request.parameters.entrySet.sortBy[key].join(': ', ', ', '', [
 				if (value.length > 18)
 					key + '=\'' + value.substring(0, 16) + '...\''
 				else if (value.matches('.*\\s+.*'))
@@ -77,7 +75,7 @@ class XtextServiceDispatcher {
 		}
 		
 		try {
-			createServiceDescriptor(requestType, parameters, sessionStore) => [
+			createServiceDescriptor(requestType, request, sessionStore) => [
 				type = requestType
 			]
 		} catch (InvalidRequestException ire) {
@@ -94,37 +92,28 @@ class XtextServiceDispatcher {
 		}
 	}
 	
-	def ServiceDescriptor createServiceDescriptor(String requestType, Map<String, String> parameters, ISessionStore sessionStore) {
+	def ServiceDescriptor createServiceDescriptor(String requestType, IRequestData request, ISessionStore sessionStore) {
 		switch requestType {
 			case 'load':
-				getLoadResourceService(false, parameters, sessionStore)
+				getLoadResourceService(false, request, sessionStore)
 			case 'revert':
-				getLoadResourceService(true, parameters, sessionStore)
+				getLoadResourceService(true, request, sessionStore)
 			case 'save':
-				getSaveResourceService(parameters, sessionStore)
+				getSaveResourceService(request, sessionStore)
 			case 'update':
-				getUpdateDocumentService(parameters, sessionStore)
+				getUpdateDocumentService(request, sessionStore)
 			case 'validation':
-				getValidationService(parameters, sessionStore)
+				getValidationService(request, sessionStore)
 			case 'content-assist':
-				getContentAssistService(parameters, sessionStore)
+				getContentAssistService(request, sessionStore)
 			default:
 				throw new InvalidRequestException(INVALID_PARAMETERS, 'The request type \'' + requestType + '\' is not supported.')
 		}
 	}
 	
-	protected def getRequestType(String contextPath, Map<String, String> parameters) {
-		if (contextPath !== null) {
-			val tokenizer = new StringTokenizer(contextPath, '/')
-			if (tokenizer.hasMoreTokens)
-				return tokenizer.nextToken
-		}
-		return parameters.get('requestType') ?: ''
-	}
-	
-	protected def getLoadResourceService(boolean revert, Map<String, String> parameters,
+	protected def getLoadResourceService(boolean revert, IRequestData request,
 			ISessionStore sessionStore) throws InvalidRequestException {
-		val resourceId = parameters.get('resource')
+		val resourceId = request.parameters.get('resource')
 		if (resourceId === null)
 			throw new InvalidRequestException(INVALID_PARAMETERS, 'The parameter \'resource\' is required.')
 		new ServiceDescriptor => [
@@ -142,9 +131,9 @@ class XtextServiceDispatcher {
 		]
 	}
 	
-	protected def getSaveResourceService(Map<String, String> parameters, ISessionStore sessionStore)
+	protected def getSaveResourceService(IRequestData request, ISessionStore sessionStore)
 			throws InvalidRequestException {
-		val document = getDocumentAccess(parameters, sessionStore)
+		val document = getDocumentAccess(request, sessionStore)
 		new ServiceDescriptor => [
 			service = [
 				try {
@@ -154,16 +143,16 @@ class XtextServiceDispatcher {
 				}
 			]
 			hasSideEffects = true
-			hasTextInput = parameters.containsKey('fullText')
+			hasTextInput = request.parameters.containsKey('fullText')
 		]
 	}
 	
-	protected def getUpdateDocumentService(Map<String, String> parameters, ISessionStore sessionStore)
+	protected def getUpdateDocumentService(IRequestData request, ISessionStore sessionStore)
 			throws InvalidRequestException {
-		val resourceId = parameters.get('resource')
+		val resourceId = request.parameters.get('resource')
 		if (resourceId === null)
 			throw new InvalidRequestException(INVALID_PARAMETERS, 'The parameter \'resource\' is required.')
-		val fullText = parameters.get('fullText')
+		val fullText = request.parameters.get('fullText')
 		val initializedFromFullText = ArrayLiterals.newBooleanArrayOfSize(1)
 		val document = new XtextWebDocumentAccess(getResourceDocument(resourceId, sessionStore, [
 			// If the resource does not exist, create a dummy resource for the given full text
@@ -172,19 +161,19 @@ class XtextServiceDispatcher {
 				getFullTextDocument(fullText, resourceId, sessionStore)
 			} else
 				throw new InvalidRequestException(RESOURCE_NOT_FOUND, 'The requested resource was not found.')
-		]), parameters.get('requiredStateId'))
+		]), request.parameters.get('requiredStateId'))
 		val result = new ServiceDescriptor => [
 			hasSideEffects = true
 			hasTextInput = true
 		]
 		if (fullText === null) {
-			val deltaText = parameters.get('deltaText')
+			val deltaText = request.parameters.get('deltaText')
 			if (deltaText === null)
 				throw new InvalidRequestException(INVALID_PARAMETERS, 'One of the parameters \'deltaText\' and \'fullText\' must be specified.')
-			val deltaOffset = parameters.getInt('deltaOffset', Optional.absent)
+			val deltaOffset = request.getInt('deltaOffset', Optional.absent)
 			if (deltaOffset < 0)
 				throw new InvalidRequestException(INVALID_PARAMETERS, 'The parameter \'deltaOffset\' must not be negative.')
-			val deltaReplaceLength = parameters.getInt('deltaReplaceLength', Optional.absent)
+			val deltaReplaceLength = request.getInt('deltaReplaceLength', Optional.absent)
 			if (deltaReplaceLength < 0)
 				throw new InvalidRequestException(INVALID_PARAMETERS, 'The parameter \'deltaReplaceLength\' must not be negative.')
 			result.service = [
@@ -195,7 +184,7 @@ class XtextServiceDispatcher {
 				}
 			]
 		} else {
-			if (parameters.containsKey('deltaText'))
+			if (request.parameters.containsKey('deltaText'))
 				throw new InvalidRequestException(INVALID_PARAMETERS, 'The parameters \'deltaText\' and \'fullText\' cannot be set in the same request.')
 			result.service = [
 				try {
@@ -209,14 +198,14 @@ class XtextServiceDispatcher {
 		return result
 	}
 	
-	protected def getContentAssistService(Map<String, String> parameters, ISessionStore sessionStore)
+	protected def getContentAssistService(IRequestData request, ISessionStore sessionStore)
 			throws InvalidRequestException {
-		val offset = parameters.getInt('caretOffset', Optional.of(0))
-		val document = getDocumentAccess(parameters, sessionStore)
-		val selectionStart = parameters.getInt('selectionStart', Optional.of(offset))
-		val selectionEnd = parameters.getInt('selectionEnd', Optional.of(selectionStart))
+		val offset = request.getInt('caretOffset', Optional.of(0))
+		val document = getDocumentAccess(request, sessionStore)
+		val selectionStart = request.getInt('selectionStart', Optional.of(offset))
+		val selectionEnd = request.getInt('selectionEnd', Optional.of(selectionStart))
 		val selection = new TextRegion(selectionStart, Math.max(selectionEnd - selectionStart, 0))
-		val deltaText = parameters.get('deltaText')
+		val deltaText = request.parameters.get('deltaText')
 		if (deltaText === null) {
 			new ServiceDescriptor => [
 				service = [
@@ -226,15 +215,15 @@ class XtextServiceDispatcher {
 						handleError(throwable)
 					}
 				]
-				hasTextInput = parameters.containsKey('fullText')
+				hasTextInput = request.parameters.containsKey('fullText')
 			]
 		} else {
-			if (parameters.containsKey('fullText'))
+			if (request.parameters.containsKey('fullText'))
 				throw new InvalidRequestException(INVALID_PARAMETERS, 'The parameters \'deltaText\' and \'fullText\' cannot be set in the same request.')
-			val deltaOffset = parameters.getInt('deltaOffset', Optional.absent)
+			val deltaOffset = request.getInt('deltaOffset', Optional.absent)
 			if (deltaOffset < 0)
 				throw new InvalidRequestException(INVALID_PARAMETERS, 'The parameter \'deltaOffset\' must not be negative.')
-			val deltaReplaceLength = parameters.getInt('deltaReplaceLength', Optional.absent)
+			val deltaReplaceLength = request.getInt('deltaReplaceLength', Optional.absent)
 			if (deltaReplaceLength < 0)
 				throw new InvalidRequestException(INVALID_PARAMETERS, 'The parameter \'deltaReplaceLength\' must not be negative.')
 			new ServiceDescriptor => [
@@ -252,9 +241,9 @@ class XtextServiceDispatcher {
 		}
 	}
 	
-	protected def getValidationService(Map<String, String> parameters, ISessionStore sessionStore)
+	protected def getValidationService(IRequestData request, ISessionStore sessionStore)
 			throws InvalidRequestException {
-		val document = getDocumentAccess(parameters, sessionStore)
+		val document = getDocumentAccess(request, sessionStore)
 		new ServiceDescriptor => [
 			service = [
 				try {
@@ -263,23 +252,23 @@ class XtextServiceDispatcher {
 					handleError(throwable)
 				}
 			]
-			hasTextInput = parameters.containsKey('fullText')
+			hasTextInput = request.parameters.containsKey('fullText')
 		]
 	}
 	
-	protected def getDocumentAccess(Map<String, String> parameters, ISessionStore sessionStore)
+	protected def getDocumentAccess(IRequestData request, ISessionStore sessionStore)
 			throws InvalidRequestException {
 		var XtextWebDocument document
-		if (parameters.containsKey('fullText')) {
-			document = getFullTextDocument(parameters.get('fullText'), null, sessionStore)
-		} else if (parameters.containsKey('resource')) {
-			document = getResourceDocument(parameters.get('resource'), sessionStore, [
+		if (request.parameters.containsKey('fullText')) {
+			document = getFullTextDocument(request.parameters.get('fullText'), null, sessionStore)
+		} else if (request.parameters.containsKey('resource')) {
+			document = getResourceDocument(request.parameters.get('resource'), sessionStore, [
 				throw new InvalidRequestException(RESOURCE_NOT_FOUND, 'The requested resource was not found.')
 			])
 		} else {
 			throw new InvalidRequestException(INVALID_PARAMETERS, 'At least one of the parameters \'resource\' and \'fullText\' must be specified.')
 		}
-		return new XtextWebDocumentAccess(document, parameters.get('requiredStateId'))
+		return new XtextWebDocumentAccess(document, request.parameters.get('requiredStateId'))
 	}
 	
 	protected def getFullTextDocument(String fullText, String resourceId, ISessionStore sessionStore) {
@@ -306,9 +295,9 @@ class XtextServiceDispatcher {
 		])
 	}
 	
-	protected def getInt(Map<String, String> parameters, String key, Optional<Integer> defaultValue)
+	protected def getInt(IRequestData request, String key, Optional<Integer> defaultValue)
 			throws InvalidRequestException {
-		val stringValue = parameters.get(key)
+		val stringValue = request.parameters.get(key)
 		if (stringValue === null) {
 			if (!defaultValue.present) {
 				throw new InvalidRequestException(INVALID_PARAMETERS, 'The parameter \'' + key + '\' must be specified.')
@@ -322,9 +311,9 @@ class XtextServiceDispatcher {
 		}
 	}
 	
-	protected def getBoolean(Map<String, String> parameters, String key, Optional<Boolean> defaultValue)
+	protected def getBoolean(IRequestData request, String key, Optional<Boolean> defaultValue)
 			throws InvalidRequestException {
-		val stringValue = parameters.get(key)
+		val stringValue = request.parameters.get(key)
 		if (stringValue === null) {
 			if (!defaultValue.present) {
 				throw new InvalidRequestException(INVALID_PARAMETERS, 'The parameter \'' + key + '\' must be specified.')

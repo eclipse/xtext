@@ -17,7 +17,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.StringTokenizer;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -31,6 +30,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.TextRegion;
+import org.eclipse.xtext.web.server.IRequestData;
 import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.web.server.ISessionStore;
 import org.eclipse.xtext.web.server.InvalidRequestException;
@@ -160,13 +160,21 @@ public class XtextServiceDispatcher {
   @Inject
   private OperationCanceledManager operationCanceledManager;
   
-  public XtextServiceDispatcher.ServiceDescriptor getService(final String path, final Map<String, String> parameters, final ISessionStore sessionStore) throws InvalidRequestException {
+  public XtextServiceDispatcher.ServiceDescriptor getService(final IRequestData request, final ISessionStore sessionStore) throws InvalidRequestException {
     XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
     {
-      final String requestType = this.getRequestType(path, parameters);
+      String _elvis = null;
+      String _metadata = request.getMetadata("requestType");
+      if (_metadata != null) {
+        _elvis = _metadata;
+      } else {
+        _elvis = "";
+      }
+      final String requestType = _elvis;
       boolean _isTraceEnabled = XtextServiceDispatcher.LOG.isTraceEnabled();
       if (_isTraceEnabled) {
-        Set<Map.Entry<String, String>> _entrySet = parameters.entrySet();
+        Map<String, String> _parameters = request.getParameters();
+        Set<Map.Entry<String, String>> _entrySet = _parameters.entrySet();
         final Function1<Map.Entry<String, String>, String> _function = new Function1<Map.Entry<String, String>, String>() {
           @Override
           public String apply(final Map.Entry<String, String> it) {
@@ -215,7 +223,7 @@ public class XtextServiceDispatcher {
       }
       XtextServiceDispatcher.ServiceDescriptor _xtrycatchfinallyexpression = null;
       try {
-        XtextServiceDispatcher.ServiceDescriptor _createServiceDescriptor = this.createServiceDescriptor(requestType, parameters, sessionStore);
+        XtextServiceDispatcher.ServiceDescriptor _createServiceDescriptor = this.createServiceDescriptor(requestType, request, sessionStore);
         final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function_2 = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
           @Override
           public void apply(final XtextServiceDispatcher.ServiceDescriptor it) {
@@ -257,44 +265,44 @@ public class XtextServiceDispatcher {
     return _xblockexpression;
   }
   
-  public XtextServiceDispatcher.ServiceDescriptor createServiceDescriptor(final String requestType, final Map<String, String> parameters, final ISessionStore sessionStore) {
+  public XtextServiceDispatcher.ServiceDescriptor createServiceDescriptor(final String requestType, final IRequestData request, final ISessionStore sessionStore) {
     try {
       XtextServiceDispatcher.ServiceDescriptor _switchResult = null;
       boolean _matched = false;
       if (!_matched) {
         if (Objects.equal(requestType, "load")) {
           _matched=true;
-          _switchResult = this.getLoadResourceService(false, parameters, sessionStore);
+          _switchResult = this.getLoadResourceService(false, request, sessionStore);
         }
       }
       if (!_matched) {
         if (Objects.equal(requestType, "revert")) {
           _matched=true;
-          _switchResult = this.getLoadResourceService(true, parameters, sessionStore);
+          _switchResult = this.getLoadResourceService(true, request, sessionStore);
         }
       }
       if (!_matched) {
         if (Objects.equal(requestType, "save")) {
           _matched=true;
-          _switchResult = this.getSaveResourceService(parameters, sessionStore);
+          _switchResult = this.getSaveResourceService(request, sessionStore);
         }
       }
       if (!_matched) {
         if (Objects.equal(requestType, "update")) {
           _matched=true;
-          _switchResult = this.getUpdateDocumentService(parameters, sessionStore);
+          _switchResult = this.getUpdateDocumentService(request, sessionStore);
         }
       }
       if (!_matched) {
         if (Objects.equal(requestType, "validation")) {
           _matched=true;
-          _switchResult = this.getValidationService(parameters, sessionStore);
+          _switchResult = this.getValidationService(request, sessionStore);
         }
       }
       if (!_matched) {
         if (Objects.equal(requestType, "content-assist")) {
           _matched=true;
-          _switchResult = this.getContentAssistService(parameters, sessionStore);
+          _switchResult = this.getContentAssistService(request, sessionStore);
         }
       }
       if (!_matched) {
@@ -306,28 +314,11 @@ public class XtextServiceDispatcher {
     }
   }
   
-  protected String getRequestType(final String contextPath, final Map<String, String> parameters) {
-    if ((contextPath != null)) {
-      final StringTokenizer tokenizer = new StringTokenizer(contextPath, "/");
-      boolean _hasMoreTokens = tokenizer.hasMoreTokens();
-      if (_hasMoreTokens) {
-        return tokenizer.nextToken();
-      }
-    }
-    String _elvis = null;
-    String _get = parameters.get("requestType");
-    if (_get != null) {
-      _elvis = _get;
-    } else {
-      _elvis = "";
-    }
-    return _elvis;
-  }
-  
-  protected XtextServiceDispatcher.ServiceDescriptor getLoadResourceService(final boolean revert, final Map<String, String> parameters, final ISessionStore sessionStore) throws InvalidRequestException {
+  protected XtextServiceDispatcher.ServiceDescriptor getLoadResourceService(final boolean revert, final IRequestData request, final ISessionStore sessionStore) throws InvalidRequestException {
     XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
     {
-      final String resourceId = parameters.get("resource");
+      Map<String, String> _parameters = request.getParameters();
+      final String resourceId = _parameters.get("resource");
       if ((resourceId == null)) {
         throw new InvalidRequestException(InvalidRequestException.Type.INVALID_PARAMETERS, "The parameter \'resource\' is required.");
       }
@@ -367,10 +358,10 @@ public class XtextServiceDispatcher {
     return _xblockexpression;
   }
   
-  protected XtextServiceDispatcher.ServiceDescriptor getSaveResourceService(final Map<String, String> parameters, final ISessionStore sessionStore) throws InvalidRequestException {
+  protected XtextServiceDispatcher.ServiceDescriptor getSaveResourceService(final IRequestData request, final ISessionStore sessionStore) throws InvalidRequestException {
     XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
     {
-      final XtextWebDocumentAccess document = this.getDocumentAccess(parameters, sessionStore);
+      final XtextWebDocumentAccess document = this.getDocumentAccess(request, sessionStore);
       XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
       final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
         @Override
@@ -394,7 +385,8 @@ public class XtextServiceDispatcher {
           };
           it.service = _function;
           it.hasSideEffects = true;
-          boolean _containsKey = parameters.containsKey("fullText");
+          Map<String, String> _parameters = request.getParameters();
+          boolean _containsKey = _parameters.containsKey("fullText");
           it.hasTextInput = _containsKey;
         }
       };
@@ -403,12 +395,14 @@ public class XtextServiceDispatcher {
     return _xblockexpression;
   }
   
-  protected XtextServiceDispatcher.ServiceDescriptor getUpdateDocumentService(final Map<String, String> parameters, final ISessionStore sessionStore) throws InvalidRequestException {
-    final String resourceId = parameters.get("resource");
+  protected XtextServiceDispatcher.ServiceDescriptor getUpdateDocumentService(final IRequestData request, final ISessionStore sessionStore) throws InvalidRequestException {
+    Map<String, String> _parameters = request.getParameters();
+    final String resourceId = _parameters.get("resource");
     if ((resourceId == null)) {
       throw new InvalidRequestException(InvalidRequestException.Type.INVALID_PARAMETERS, "The parameter \'resource\' is required.");
     }
-    final String fullText = parameters.get("fullText");
+    Map<String, String> _parameters_1 = request.getParameters();
+    final String fullText = _parameters_1.get("fullText");
     final boolean[] initializedFromFullText = new boolean[1];
     final Provider<XtextWebDocument> _function = new Provider<XtextWebDocument>() {
       @Override
@@ -432,7 +426,8 @@ public class XtextServiceDispatcher {
       }
     };
     XtextWebDocument _resourceDocument = this.getResourceDocument(resourceId, sessionStore, _function);
-    String _get = parameters.get("requiredStateId");
+    Map<String, String> _parameters_2 = request.getParameters();
+    String _get = _parameters_2.get("requiredStateId");
     final XtextWebDocumentAccess document = new XtextWebDocumentAccess(_resourceDocument, _get);
     XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
     final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function_1 = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
@@ -444,17 +439,18 @@ public class XtextServiceDispatcher {
     };
     final XtextServiceDispatcher.ServiceDescriptor result = ObjectExtensions.<XtextServiceDispatcher.ServiceDescriptor>operator_doubleArrow(_serviceDescriptor, _function_1);
     if ((fullText == null)) {
-      final String deltaText = parameters.get("deltaText");
+      Map<String, String> _parameters_3 = request.getParameters();
+      final String deltaText = _parameters_3.get("deltaText");
       if ((deltaText == null)) {
         throw new InvalidRequestException(InvalidRequestException.Type.INVALID_PARAMETERS, "One of the parameters \'deltaText\' and \'fullText\' must be specified.");
       }
       Optional<Integer> _absent = Optional.<Integer>absent();
-      final int deltaOffset = this.getInt(parameters, "deltaOffset", _absent);
+      final int deltaOffset = this.getInt(request, "deltaOffset", _absent);
       if ((deltaOffset < 0)) {
         throw new InvalidRequestException(InvalidRequestException.Type.INVALID_PARAMETERS, "The parameter \'deltaOffset\' must not be negative.");
       }
       Optional<Integer> _absent_1 = Optional.<Integer>absent();
-      final int deltaReplaceLength = this.getInt(parameters, "deltaReplaceLength", _absent_1);
+      final int deltaReplaceLength = this.getInt(request, "deltaReplaceLength", _absent_1);
       if ((deltaReplaceLength < 0)) {
         throw new InvalidRequestException(InvalidRequestException.Type.INVALID_PARAMETERS, "The parameter \'deltaReplaceLength\' must not be negative.");
       }
@@ -477,7 +473,8 @@ public class XtextServiceDispatcher {
       };
       result.service = _function_2;
     } else {
-      boolean _containsKey = parameters.containsKey("deltaText");
+      Map<String, String> _parameters_4 = request.getParameters();
+      boolean _containsKey = _parameters_4.containsKey("deltaText");
       if (_containsKey) {
         throw new InvalidRequestException(InvalidRequestException.Type.INVALID_PARAMETERS, "The parameters \'deltaText\' and \'fullText\' cannot be set in the same request.");
       }
@@ -505,19 +502,20 @@ public class XtextServiceDispatcher {
     return result;
   }
   
-  protected XtextServiceDispatcher.ServiceDescriptor getContentAssistService(final Map<String, String> parameters, final ISessionStore sessionStore) throws InvalidRequestException {
+  protected XtextServiceDispatcher.ServiceDescriptor getContentAssistService(final IRequestData request, final ISessionStore sessionStore) throws InvalidRequestException {
     XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
     {
       Optional<Integer> _of = Optional.<Integer>of(Integer.valueOf(0));
-      final int offset = this.getInt(parameters, "caretOffset", _of);
-      final XtextWebDocumentAccess document = this.getDocumentAccess(parameters, sessionStore);
+      final int offset = this.getInt(request, "caretOffset", _of);
+      final XtextWebDocumentAccess document = this.getDocumentAccess(request, sessionStore);
       Optional<Integer> _of_1 = Optional.<Integer>of(Integer.valueOf(offset));
-      final int selectionStart = this.getInt(parameters, "selectionStart", _of_1);
+      final int selectionStart = this.getInt(request, "selectionStart", _of_1);
       Optional<Integer> _of_2 = Optional.<Integer>of(Integer.valueOf(selectionStart));
-      final int selectionEnd = this.getInt(parameters, "selectionEnd", _of_2);
+      final int selectionEnd = this.getInt(request, "selectionEnd", _of_2);
       int _max = Math.max((selectionEnd - selectionStart), 0);
       final TextRegion selection = new TextRegion(selectionStart, _max);
-      final String deltaText = parameters.get("deltaText");
+      Map<String, String> _parameters = request.getParameters();
+      final String deltaText = _parameters.get("deltaText");
       XtextServiceDispatcher.ServiceDescriptor _xifexpression = null;
       if ((deltaText == null)) {
         XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
@@ -542,7 +540,8 @@ public class XtextServiceDispatcher {
               }
             };
             it.service = _function;
-            boolean _containsKey = parameters.containsKey("fullText");
+            Map<String, String> _parameters = request.getParameters();
+            boolean _containsKey = _parameters.containsKey("fullText");
             it.hasTextInput = _containsKey;
           }
         };
@@ -550,17 +549,18 @@ public class XtextServiceDispatcher {
       } else {
         XtextServiceDispatcher.ServiceDescriptor _xblockexpression_1 = null;
         {
-          boolean _containsKey = parameters.containsKey("fullText");
+          Map<String, String> _parameters_1 = request.getParameters();
+          boolean _containsKey = _parameters_1.containsKey("fullText");
           if (_containsKey) {
             throw new InvalidRequestException(InvalidRequestException.Type.INVALID_PARAMETERS, "The parameters \'deltaText\' and \'fullText\' cannot be set in the same request.");
           }
           Optional<Integer> _absent = Optional.<Integer>absent();
-          final int deltaOffset = this.getInt(parameters, "deltaOffset", _absent);
+          final int deltaOffset = this.getInt(request, "deltaOffset", _absent);
           if ((deltaOffset < 0)) {
             throw new InvalidRequestException(InvalidRequestException.Type.INVALID_PARAMETERS, "The parameter \'deltaOffset\' must not be negative.");
           }
           Optional<Integer> _absent_1 = Optional.<Integer>absent();
-          final int deltaReplaceLength = this.getInt(parameters, "deltaReplaceLength", _absent_1);
+          final int deltaReplaceLength = this.getInt(request, "deltaReplaceLength", _absent_1);
           if ((deltaReplaceLength < 0)) {
             throw new InvalidRequestException(InvalidRequestException.Type.INVALID_PARAMETERS, "The parameter \'deltaReplaceLength\' must not be negative.");
           }
@@ -599,10 +599,10 @@ public class XtextServiceDispatcher {
     return _xblockexpression;
   }
   
-  protected XtextServiceDispatcher.ServiceDescriptor getValidationService(final Map<String, String> parameters, final ISessionStore sessionStore) throws InvalidRequestException {
+  protected XtextServiceDispatcher.ServiceDescriptor getValidationService(final IRequestData request, final ISessionStore sessionStore) throws InvalidRequestException {
     XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
     {
-      final XtextWebDocumentAccess document = this.getDocumentAccess(parameters, sessionStore);
+      final XtextWebDocumentAccess document = this.getDocumentAccess(request, sessionStore);
       XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
       final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
         @Override
@@ -625,7 +625,8 @@ public class XtextServiceDispatcher {
             }
           };
           it.service = _function;
-          boolean _containsKey = parameters.containsKey("fullText");
+          Map<String, String> _parameters = request.getParameters();
+          boolean _containsKey = _parameters.containsKey("fullText");
           it.hasTextInput = _containsKey;
         }
       };
@@ -634,17 +635,21 @@ public class XtextServiceDispatcher {
     return _xblockexpression;
   }
   
-  protected XtextWebDocumentAccess getDocumentAccess(final Map<String, String> parameters, final ISessionStore sessionStore) throws InvalidRequestException {
+  protected XtextWebDocumentAccess getDocumentAccess(final IRequestData request, final ISessionStore sessionStore) throws InvalidRequestException {
     XtextWebDocument document = null;
-    boolean _containsKey = parameters.containsKey("fullText");
+    Map<String, String> _parameters = request.getParameters();
+    boolean _containsKey = _parameters.containsKey("fullText");
     if (_containsKey) {
-      String _get = parameters.get("fullText");
+      Map<String, String> _parameters_1 = request.getParameters();
+      String _get = _parameters_1.get("fullText");
       XtextWebDocument _fullTextDocument = this.getFullTextDocument(_get, null, sessionStore);
       document = _fullTextDocument;
     } else {
-      boolean _containsKey_1 = parameters.containsKey("resource");
+      Map<String, String> _parameters_2 = request.getParameters();
+      boolean _containsKey_1 = _parameters_2.containsKey("resource");
       if (_containsKey_1) {
-        String _get_1 = parameters.get("resource");
+        Map<String, String> _parameters_3 = request.getParameters();
+        String _get_1 = _parameters_3.get("resource");
         final Provider<XtextWebDocument> _function = new Provider<XtextWebDocument>() {
           @Override
           public XtextWebDocument get() {
@@ -661,7 +666,8 @@ public class XtextServiceDispatcher {
         throw new InvalidRequestException(InvalidRequestException.Type.INVALID_PARAMETERS, "At least one of the parameters \'resource\' and \'fullText\' must be specified.");
       }
     }
-    String _get_2 = parameters.get("requiredStateId");
+    Map<String, String> _parameters_4 = request.getParameters();
+    String _get_2 = _parameters_4.get("requiredStateId");
     return new XtextWebDocumentAccess(document, _get_2);
   }
   
@@ -715,8 +721,9 @@ public class XtextServiceDispatcher {
     return sessionStore.<XtextWebDocument>get(_mappedTo, _function);
   }
   
-  protected int getInt(final Map<String, String> parameters, final String key, final Optional<Integer> defaultValue) throws InvalidRequestException {
-    final String stringValue = parameters.get(key);
+  protected int getInt(final IRequestData request, final String key, final Optional<Integer> defaultValue) throws InvalidRequestException {
+    Map<String, String> _parameters = request.getParameters();
+    final String stringValue = _parameters.get(key);
     if ((stringValue == null)) {
       boolean _isPresent = defaultValue.isPresent();
       boolean _not = (!_isPresent);
@@ -738,8 +745,9 @@ public class XtextServiceDispatcher {
     }
   }
   
-  protected boolean getBoolean(final Map<String, String> parameters, final String key, final Optional<Boolean> defaultValue) throws InvalidRequestException {
-    final String stringValue = parameters.get(key);
+  protected boolean getBoolean(final IRequestData request, final String key, final Optional<Boolean> defaultValue) throws InvalidRequestException {
+    Map<String, String> _parameters = request.getParameters();
+    final String stringValue = _parameters.get(key);
     if ((stringValue == null)) {
       boolean _isPresent = defaultValue.isPresent();
       boolean _not = (!_isPresent);

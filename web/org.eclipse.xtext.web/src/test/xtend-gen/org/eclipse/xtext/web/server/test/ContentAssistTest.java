@@ -15,9 +15,7 @@ import org.eclipse.xtext.web.server.ServiceConflictResult;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
 import org.eclipse.xtext.web.server.test.AbstractWebServerTest;
-import org.eclipse.xtext.web.server.test.HashMapSessionStore;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.hamcrest.Matcher;
@@ -42,27 +40,21 @@ public class ContentAssistTest extends AbstractWebServerTest {
   }
   
   protected void assertContentAssistResult(final CharSequence resourceContent, final int offset, final CharSequence expectedResult) {
-    try {
-      final HashMapSessionStore sessionStore = new HashMapSessionStore();
-      XtextServiceDispatcher _dispatcher = this.getDispatcher();
-      String _string = resourceContent.toString();
-      Pair<String, String> _mappedTo = Pair.<String, String>of("fullText", _string);
-      String _string_1 = Integer.valueOf(offset).toString();
-      Pair<String, String> _mappedTo_1 = Pair.<String, String>of("caretOffset", _string_1);
-      final XtextServiceDispatcher.ServiceDescriptor contentAssist = _dispatcher.getService("/content-assist", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)), sessionStore);
-      boolean _isHasSideEffects = contentAssist.isHasSideEffects();
-      Assert.assertFalse(_isHasSideEffects);
-      boolean _isHasTextInput = contentAssist.isHasTextInput();
-      Assert.assertTrue(_isHasTextInput);
-      Function0<? extends IServiceResult> _service = contentAssist.getService();
-      IServiceResult _apply = _service.apply();
-      final ContentAssistResult result = ((ContentAssistResult) _apply);
-      String _string_2 = expectedResult.toString();
-      String _string_3 = result.toString();
-      Assert.assertEquals(_string_2, _string_3);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    String _string = resourceContent.toString();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("fullText", _string);
+    String _string_1 = Integer.valueOf(offset).toString();
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("caretOffset", _string_1);
+    final XtextServiceDispatcher.ServiceDescriptor contentAssist = this.getService("content-assist", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)));
+    boolean _isHasSideEffects = contentAssist.isHasSideEffects();
+    Assert.assertFalse(_isHasSideEffects);
+    boolean _isHasTextInput = contentAssist.isHasTextInput();
+    Assert.assertTrue(_isHasTextInput);
+    Function0<? extends IServiceResult> _service = contentAssist.getService();
+    IServiceResult _apply = _service.apply();
+    final ContentAssistResult result = ((ContentAssistResult) _apply);
+    String _string_2 = expectedResult.toString();
+    String _string_3 = result.toString();
+    Assert.assertEquals(_string_2, _string_3);
   }
   
   @Test
@@ -337,25 +329,19 @@ public class ContentAssistTest extends AbstractWebServerTest {
   
   @Test
   public void testIncorrectStateId() {
-    try {
-      final File file = this.createFile("state foo end");
-      final HashMapSessionStore sessionStore = new HashMapSessionStore();
-      XtextServiceDispatcher _dispatcher = this.getDispatcher();
-      String _name = file.getName();
-      Pair<String, String> _mappedTo = Pair.<String, String>of("resource", _name);
-      Pair<String, String> _mappedTo_1 = Pair.<String, String>of("caretOffset", "3");
-      Pair<String, String> _mappedTo_2 = Pair.<String, String>of("requiredStateId", "totalerquatsch");
-      final XtextServiceDispatcher.ServiceDescriptor contentAssist = _dispatcher.getService("/content-assist", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2)), sessionStore);
-      boolean _isHasConflict = contentAssist.isHasConflict();
-      Assert.assertTrue(_isHasConflict);
-      Function0<? extends IServiceResult> _service = contentAssist.getService();
-      final IServiceResult result = _service.apply();
-      Matcher<IServiceResult> _instanceOf = IsInstanceOf.<IServiceResult>instanceOf(ServiceConflictResult.class);
-      Assert.<IServiceResult>assertThat(result, _instanceOf);
-      String _conflict = ((ServiceConflictResult) result).getConflict();
-      Assert.assertEquals(_conflict, "invalidStateId");
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    final File file = this.createFile("state foo end");
+    String _name = file.getName();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("resource", _name);
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("caretOffset", "3");
+    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("requiredStateId", "totalerquatsch");
+    final XtextServiceDispatcher.ServiceDescriptor contentAssist = this.getService("content-assist", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2)));
+    boolean _isHasConflict = contentAssist.isHasConflict();
+    Assert.assertTrue(_isHasConflict);
+    Function0<? extends IServiceResult> _service = contentAssist.getService();
+    final IServiceResult result = _service.apply();
+    Matcher<IServiceResult> _instanceOf = IsInstanceOf.<IServiceResult>instanceOf(ServiceConflictResult.class);
+    Assert.<IServiceResult>assertThat(result, _instanceOf);
+    String _conflict = ((ServiceConflictResult) result).getConflict();
+    Assert.assertEquals(_conflict, "invalidStateId");
   }
 }

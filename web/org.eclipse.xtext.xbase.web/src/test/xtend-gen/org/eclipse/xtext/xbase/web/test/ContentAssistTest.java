@@ -13,11 +13,9 @@ import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.web.test.AbstractXbaseWebTest;
-import org.eclipse.xtext.xbase.web.test.HashMapSessionStore;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -38,23 +36,17 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
   }
   
   protected void assertContentAssistResult(final CharSequence resourceContent, final int offset, final CharSequence expectedResult) {
-    try {
-      final HashMapSessionStore sessionStore = new HashMapSessionStore();
-      XtextServiceDispatcher _dispatcher = this.getDispatcher();
-      String _string = resourceContent.toString();
-      Pair<String, String> _mappedTo = Pair.<String, String>of("fullText", _string);
-      String _string_1 = Integer.valueOf(offset).toString();
-      Pair<String, String> _mappedTo_1 = Pair.<String, String>of("caretOffset", _string_1);
-      final XtextServiceDispatcher.ServiceDescriptor contentAssist = _dispatcher.getService("/content-assist", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)), sessionStore);
-      Function0<? extends IServiceResult> _service = contentAssist.getService();
-      IServiceResult _apply = _service.apply();
-      final ContentAssistResult result = ((ContentAssistResult) _apply);
-      String _string_2 = expectedResult.toString();
-      String _string_3 = result.toString();
-      Assert.assertEquals(_string_2, _string_3);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    String _string = resourceContent.toString();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("fullText", _string);
+    String _string_1 = Integer.valueOf(offset).toString();
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("caretOffset", _string_1);
+    final XtextServiceDispatcher.ServiceDescriptor contentAssist = this.getService("content-assist", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)));
+    Function0<? extends IServiceResult> _service = contentAssist.getService();
+    IServiceResult _apply = _service.apply();
+    final ContentAssistResult result = ((ContentAssistResult) _apply);
+    String _string_2 = expectedResult.toString();
+    String _string_3 = result.toString();
+    Assert.assertEquals(_string_2, _string_3);
   }
   
   @Test

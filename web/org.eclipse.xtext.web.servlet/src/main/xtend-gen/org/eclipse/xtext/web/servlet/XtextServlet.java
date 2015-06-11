@@ -8,15 +8,11 @@
 package org.eclipse.xtext.web.servlet;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.inject.Injector;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,15 +21,14 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.web.server.IRequestData;
 import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
+import org.eclipse.xtext.web.servlet.HttpServletRequestData;
 import org.eclipse.xtext.web.servlet.HttpServletSessionStore;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class XtextServlet extends HttpServlet {
@@ -167,84 +162,51 @@ public class XtextServlet extends HttpServlet {
     }
   }
   
-  protected void doService(final XtextServiceDispatcher.ServiceDescriptor service, final HttpServletResponse resp) {
+  protected void doService(final XtextServiceDispatcher.ServiceDescriptor service, final HttpServletResponse response) {
     try {
       Function0<? extends IServiceResult> _service = service.getService();
       final IServiceResult result = _service.apply();
-      resp.setStatus(HttpServletResponse.SC_OK);
-      resp.setContentType("text/x-json;charset=UTF-8");
-      resp.setHeader("Cache-Control", "no-cache");
-      PrintWriter _writer = resp.getWriter();
+      response.setStatus(HttpServletResponse.SC_OK);
+      response.setContentType("text/x-json;charset=UTF-8");
+      response.setHeader("Cache-Control", "no-cache");
+      PrintWriter _writer = response.getWriter();
       this.gson.toJson(result, _writer);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  protected XtextServiceDispatcher.ServiceDescriptor getService(final HttpServletRequest req) {
+  protected XtextServiceDispatcher.ServiceDescriptor getService(final HttpServletRequest request) {
     try {
-      HttpSession _session = req.getSession();
+      HttpSession _session = request.getSession();
       final HttpServletSessionStore sessionStore = new HttpServletSessionStore(_session);
-      final Map<String, String> parameters = this.getParameterMap(req);
-      final Injector injector = this.getInjector(parameters);
+      final HttpServletRequestData requestData = new HttpServletRequestData(request);
+      final Injector injector = this.getInjector(requestData);
       final XtextServiceDispatcher serviceDispatcher = injector.<XtextServiceDispatcher>getInstance(XtextServiceDispatcher.class);
-      String _elvis = null;
-      String _pathInfo = req.getPathInfo();
-      if (_pathInfo != null) {
-        _elvis = _pathInfo;
-      } else {
-        _elvis = "";
-      }
-      final XtextServiceDispatcher.ServiceDescriptor service = serviceDispatcher.getService(_elvis, parameters, sessionStore);
-      this.checkPermission(req, service);
+      final XtextServiceDispatcher.ServiceDescriptor service = serviceDispatcher.getService(requestData, sessionStore);
+      this.checkPermission(request, service);
       return service;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  protected void checkPermission(final HttpServletRequest req, final XtextServiceDispatcher.ServiceDescriptor service) {
+  protected void checkPermission(final HttpServletRequest request, final XtextServiceDispatcher.ServiceDescriptor service) {
   }
   
-  protected Map<String, String> getParameterMap(final HttpServletRequest req) {
-    Map<String, String[]> _parameterMap = req.getParameterMap();
-    final Map<String, String[]> paramMultiMap = ((Map<String, String[]>) _parameterMap);
-    int _size = paramMultiMap.size();
-    final HashMap<String, String> result = Maps.<String, String>newHashMapWithExpectedSize(_size);
-    Set<Map.Entry<String, String[]>> _entrySet = paramMultiMap.entrySet();
-    final Function1<Map.Entry<String, String[]>, Boolean> _function = new Function1<Map.Entry<String, String[]>, Boolean>() {
-      @Override
-      public Boolean apply(final Map.Entry<String, String[]> it) {
-        String[] _value = it.getValue();
-        int _length = _value.length;
-        return Boolean.valueOf((_length > 0));
-      }
-    };
-    Iterable<Map.Entry<String, String[]>> _filter = IterableExtensions.<Map.Entry<String, String[]>>filter(_entrySet, _function);
-    final Procedure1<Map.Entry<String, String[]>> _function_1 = new Procedure1<Map.Entry<String, String[]>>() {
-      @Override
-      public void apply(final Map.Entry<String, String[]> it) {
-        String _key = it.getKey();
-        String[] _value = it.getValue();
-        String _get = _value[0];
-        result.put(_key, _get);
-      }
-    };
-    IterableExtensions.<Map.Entry<String, String[]>>forEach(_filter, _function_1);
-    return Collections.<String, String>unmodifiableMap(result);
-  }
-  
-  protected Injector getInjector(final Map<String, String> parameters) throws InvalidRequestException {
+  protected Injector getInjector(final IRequestData requestData) throws InvalidRequestException {
     IResourceServiceProvider resourceServiceProvider = null;
     String _elvis = null;
-    String _get = parameters.get("resource");
+    Map<String, String> _parameters = requestData.getParameters();
+    String _get = _parameters.get("resource");
     if (_get != null) {
       _elvis = _get;
     } else {
       _elvis = "";
     }
     final URI emfURI = URI.createURI(_elvis);
-    final String contentType = parameters.get("contentType");
+    Map<String, String> _parameters_1 = requestData.getParameters();
+    final String contentType = _parameters_1.get("contentType");
     if ((contentType == null)) {
       IResourceServiceProvider _resourceServiceProvider = this.serviceProviderRegistry.getResourceServiceProvider(emfURI);
       resourceServiceProvider = _resourceServiceProvider;

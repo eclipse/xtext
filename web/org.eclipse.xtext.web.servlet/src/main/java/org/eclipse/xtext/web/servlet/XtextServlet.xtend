@@ -7,12 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.servlet
 
-import com.google.common.collect.Maps
 import com.google.gson.Gson
 import com.google.inject.Injector
 import java.io.IOException
-import java.util.Collections
-import java.util.Map
 import javax.servlet.ServletException
 import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
@@ -20,6 +17,7 @@ import javax.servlet.http.HttpServletResponse
 import org.apache.log4j.Logger
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.resource.IResourceServiceProvider
+import org.eclipse.xtext.web.server.IRequestData
 import org.eclipse.xtext.web.server.InvalidRequestException
 import org.eclipse.xtext.web.server.XtextServiceDispatcher
 
@@ -78,40 +76,33 @@ class XtextServlet extends HttpServlet {
 		}
 	}
 	
-	protected def doService(XtextServiceDispatcher.ServiceDescriptor service, HttpServletResponse resp) {
+	protected def doService(XtextServiceDispatcher.ServiceDescriptor service, HttpServletResponse response) {
 		val result = service.service.apply()
-		resp.setStatus(HttpServletResponse.SC_OK)
-		resp.setContentType("text/x-json;charset=UTF-8")
-		resp.setHeader("Cache-Control", "no-cache")
-		gson.toJson(result, resp.writer)
+		response.setStatus(HttpServletResponse.SC_OK)
+		response.setContentType("text/x-json;charset=UTF-8")
+		response.setHeader("Cache-Control", "no-cache")
+		gson.toJson(result, response.writer)
 	}
 	
-	protected def getService(HttpServletRequest req) {
-		val sessionStore = new HttpServletSessionStore(req.session)
-		val parameters = getParameterMap(req)
-		val injector = getInjector(parameters)
+	protected def getService(HttpServletRequest request) {
+		val sessionStore = new HttpServletSessionStore(request.session)
+		val requestData = new HttpServletRequestData(request)
+		val injector = getInjector(requestData)
 		val serviceDispatcher = injector.getInstance(XtextServiceDispatcher)
-		val service = serviceDispatcher.getService(req.pathInfo ?: '', parameters, sessionStore)
-		checkPermission(req, service)
+		val service = serviceDispatcher.getService(requestData, sessionStore)
+		checkPermission(request, service)
 		return service
 	}
 	
-	protected def void checkPermission(HttpServletRequest req, XtextServiceDispatcher.ServiceDescriptor service) {
+	protected def void checkPermission(HttpServletRequest request, XtextServiceDispatcher.ServiceDescriptor service) {
 		// Subclasses may throw InvalidRequestException(PERMISSION_DENIED, '...')
 	}
 	
-	protected def getParameterMap(HttpServletRequest req) {
-		val paramMultiMap = req.parameterMap as Map<String, String[]>
-		val result = Maps.newHashMapWithExpectedSize(paramMultiMap.size)
-		paramMultiMap.entrySet.filter[value.length > 0].forEach[result.put(key, value.get(0))]
-		return Collections.unmodifiableMap(result)
-	}
-	
-	protected def getInjector(Map<String, String> parameters) throws InvalidRequestException {
+	protected def getInjector(IRequestData requestData) throws InvalidRequestException {
 		var IResourceServiceProvider resourceServiceProvider
 		
-		val emfURI = URI.createURI(parameters.get('resource') ?: '')
-		val contentType = parameters.get('contentType')
+		val emfURI = URI.createURI(requestData.parameters.get('resource') ?: '')
+		val contentType = requestData.parameters.get('contentType')
 		if (contentType === null)
 			resourceServiceProvider = serviceProviderRegistry.getResourceServiceProvider(emfURI)
 		else
