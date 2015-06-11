@@ -32,9 +32,9 @@ public class JavaCoreListenerRegistrar implements IEagerContribution {
 			@Override
 			public void run() {
 				storage2UriMapperJavaImpl.initializeCache();
-				JavaCore.addElementChangedListener(storage2UriMapperJavaImpl);
 			}
 		}).start();
+		JavaCore.addElementChangedListener(storage2UriMapperJavaImpl);
 	}
 
 	@Override
