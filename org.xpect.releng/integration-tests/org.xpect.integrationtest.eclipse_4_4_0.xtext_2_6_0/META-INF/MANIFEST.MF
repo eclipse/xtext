@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Eclipse_4_4_0-xtext_2_6_0
 Bundle-SymbolicName: org.xpect.integrationtest.eclipse_4_4_0.xtext_2_6_0
 Bundle-Version: 0.1.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.xtext.example.domainmodel;bundle-version="2.4.0",
  org.eclipse.xtext.example.domainmodel.ui;bundle-version="2.4.0",

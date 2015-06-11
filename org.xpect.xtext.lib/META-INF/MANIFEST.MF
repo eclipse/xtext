@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Lib
 Bundle-SymbolicName: org.xpect.xtext.lib
 Bundle-Version: 0.1.0.qualifier
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.7.0";visibility:=reexport,
  org.eclipse.core.resources;bundle-version="3.7.0";visibility:=reexport,
  org.eclipse.xtext.xbase;bundle-version="2.4.0";visibility:=reexport,
