@@ -10,11 +10,10 @@ package org.eclipse.xtext.builder.standalone.incremental
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.Collection
-import java.util.Set
+import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.lib.annotations.Data
-import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.resource.CompilerPhases
 import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.resource.IResourceDescription.Delta
@@ -31,164 +30,79 @@ import org.eclipse.xtext.util.internal.Log
 @Singleton @Log
 class Indexer {
 
-	@Inject JavaSupport javaSupport
-
 	@Inject CompilerPhases compilerPhases
 
-	@Inject IClassFileBasedDependencyFinder javaDependencyFinder
-
-	@Inject IQualifiedNameConverter qualifiedNameConverter
-	
 	@Data static class IndexResult {
-		Set<Delta> resourceDeltas
-		Set<URI> affectedResources
+		List<Delta> resourceDeltas
 		ResourceDescriptionsData newIndex
 	}
 	
 	def IndexResult computeAndIndexAffected(BuildRequest request, extension BuildContext context) {
 		if (LOG.isInfoEnabled) 
 			LOG.info('Creating new index')
-		val previousFileMappings = request.previousState.fileMappings
 		val previousIndex = request.previousState.resourceDescriptions
 		val newIndex = previousIndex.copy
 		installIndex(resourceSet, newIndex)
 
-
-		val affectionCandidates = newHashSet
-		var Set<URI> directlyAffected = null
-		val allModified = (request.dirtyFiles + request.deletedFiles).toSet
-		affectionCandidates += previousIndex.allURIs.filter[!allModified.contains(it)]
-		directlyAffected = request.dirtyFiles.map[primarySources(previousFileMappings)].flatten.toSet
-
-		val currentDeltas = <IResourceDescription.Delta>newArrayList
-		currentDeltas += request.removeDeletedFilesFromIndex(previousIndex, newIndex)
-
-		preIndexChangedResources(directlyAffected, previousIndex, newIndex, request, context)
-		val isConsiderJava = languages
-				.entrySet
-				.exists[value.linksAgainstJava]
-		if(isConsiderJava) {
-			javaSupport.preCompileJavaFiles(directlyAffected, newIndex, request, context)
-		}
-	
-		LOG.info("Indexing changed and added files")
-		val allAffected = newHashSet
-		allAffected += directlyAffected
-		val toBeIndexed = newHashSet
-		toBeIndexed.addAll(directlyAffected)
-		val allDeltas = newHashSet
-		while (!toBeIndexed.empty) {
-			if(isConsiderJava) {
-				val affectedJavaFiles = 
-					(toBeIndexed
-						.map[previousFileMappings.getGenerated(it)]
-						.flatten
-					+ toBeIndexed)
-						.filter[fileExtension=='java']
-						.toSet
-				val deletedPrimaryJavaFiles = request
-					.deletedFiles
-					.map[primarySources(previousFileMappings)]
-					.flatten
-					.filter[fileExtension=='java']
-				val dependentJavaFiles = javaDependencyFinder.getDependentJavaFiles(
-						affectedJavaFiles, deletedPrimaryJavaFiles)
-				toBeIndexed += 
-					dependentJavaFiles
-						.map[primarySources(previousFileMappings)]
-						.flatten
-						.filter[fileExtension=='java' || affectionCandidates.contains(it)]
-			}
-			allAffected.addAll(toBeIndexed)
-			affectionCandidates.removeAll(toBeIndexed)
-			toBeIndexed.executeClustered [ Resource resource |
-				LOG.info('Indexing ' + resource.URI)
-				currentDeltas += resource.addToIndex(false, previousIndex, newIndex, context)
-				null
-			]
-			toBeIndexed.filter[fileExtension=='java'].forEach [
-				// FIXME: this will only work for the public top-level type
-				val stringUri = it.toString
-				for (srcRoot : request.sourceRoots) {
-					val srcRootString = srcRoot.toString
-					if (stringUri.startsWith(srcRootString)) {
-						val javaPath = stringUri.substring(srcRootString.length)
-						val fqn = qualifiedNameConverter.toQualifiedName(javaPath.replace('/', '.'))
-						currentDeltas += new TypeResourceDescription.ChangedDelta(fqn)
-						return;
-					}
-				}
-			]
-			allDeltas += currentDeltas
-			
-			toBeIndexed.clear
-			toBeIndexed.addAll(
-				affectionCandidates.filter [
-					if(fileExtension == 'java')
-						return false
-					val manager = languages.get(fileExtension).resourceDescriptionManager
-					val resourceDescription = previousIndex.getResourceDescription(it)
-					val isAffected = resourceDescription.isAffected(manager, currentDeltas, allDeltas, newIndex)
-					return isAffected
-				])
-			currentDeltas.clear
-			if(!toBeIndexed.empty) 
-				LOG.info('Indexing affected files')
-		}
-		return new IndexResult(allDeltas, allAffected, newIndex)
+		// get the direct deltas
+		val List<Delta> deltas = newArrayList
+		if (LOG.isInfoEnabled)
+			LOG.info('Creating Deltas for changes. Deleted : '+request.deletedFiles.join(', ')+' - Changed : '+request.dirtyFiles.join(', ')+'.')
+		deltas.addAll(getDeltasForDeletedResources(request, previousIndex, context))
+		deltas.addAll(getDeltasForChangedResources(request.dirtyFiles, previousIndex, context))
+		
+		// update the index with the direct deltas
+		for (delta : deltas)
+			newIndex.register(delta)
+		
+		val remainingURIs = previousIndex.allResourceDescriptions.map[getURI].toSet
+		remainingURIs.removeAll(deltas.map[uri])
+		
+		val allAffected = remainingURIs.filter [
+			val manager = languages.get(fileExtension).resourceDescriptionManager
+			val resourceDescription = previousIndex.getResourceDescription(it)
+			val isAffected = resourceDescription.isAffected(manager, deltas, deltas, newIndex)
+			return isAffected
+		].toList
+		if (LOG.isInfoEnabled)
+			LOG.info('Creating Deltas for affected resources : '+allAffected.join(', ')+".")
+		deltas.addAll(getDeltasForChangedResources(allAffected, previousIndex, context))
+		
+		return new IndexResult(deltas, newIndex)
 	}
 	
-	private def primarySources(URI uri, Source2GeneratedMapping mappings) {
-		val sources = mappings.getSource(uri)
-		if(sources.empty) 
-			return #[uri] 
-		else 
-			return sources
-	}
-	
-	def removeDeletedFilesFromIndex(BuildRequest request, ResourceDescriptionsData oldIndex, ResourceDescriptionsData newIndex) {
-		LOG.info('Removing deleted files from index')
-		val deltas = <Delta>newArrayList
+	protected def List<Delta> getDeltasForDeletedResources(BuildRequest request, ResourceDescriptionsData oldIndex, extension BuildContext context) {
+		val deltas = <Delta>newArrayList()
 		request.deletedFiles.forEach [
 			if(fileExtension != 'java') {
 				val IResourceDescription oldDescription = oldIndex?.getResourceDescription(it)
 				if (oldDescription != null) {
 					val delta = new DefaultResourceDescriptionDelta(oldDescription, null)
 					deltas += delta
-					newIndex.register(delta)
 				}
 			}
 		]
 		return deltas
 	}
 
-	protected def preIndexChangedResources(Iterable<URI> directlyAffected, ResourceDescriptionsData oldIndex, ResourceDescriptionsData newIndex, BuildRequest request,
-		extension BuildContext context) {
-		LOG.info("Pre-indexing changed files")
+	protected def List<Delta> getDeltasForChangedResources(Iterable<URI> affectedUris, ResourceDescriptionsData oldIndex, extension BuildContext context) {
 		try {
 			compilerPhases.setIndexing(resourceSet, true)
-			directlyAffected
-				.executeClustered [
-					addToIndex(true, oldIndex, newIndex, context)
-					null
-				]
+			return affectedUris.executeClustered [
+				addToIndex(true, oldIndex, context)
+			].toList
 		} finally {
 			compilerPhases.setIndexing(resourceSet, false)
 		}
 	}
 
-	def protected addToIndex(Resource resource, boolean isPreIndexing, ResourceDescriptionsData oldIndex, ResourceDescriptionsData newIndex, BuildContext context) {
+	def protected Delta addToIndex(Resource resource, boolean isPreIndexing, ResourceDescriptionsData oldIndex, BuildContext context) {
 		val uri = resource.URI
 		val languageAccess = context.languages.get(uri.fileExtension)
 		val manager = languageAccess.resourceDescriptionManager
 		val newDescription = manager.getResourceDescription(resource)
-		val IResourceDescription toBeAdded = 
-			if(isPreIndexing) 
-				new ResolvedResourceDescription(newDescription)
-			else 
-				newDescription
+		val IResourceDescription toBeAdded = new ResolvedResourceDescription(newDescription)
 		val delta = new DefaultResourceDescriptionDelta(oldIndex?.getResourceDescription(uri), toBeAdded)
-		newIndex.register(delta)
 		return delta
 	}
 
