@@ -22,22 +22,24 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.ui.ide;bundle-version="3.6.0",
  org.eclipse.xtext.junit4,
  org.eclipse.xtext.builder.standalone,
- org.eclipse.xtext.common.types
+ org.eclipse.xtext.common.types,
+ org.eclipse.xtend.lib;bundle-version="2.9.0"
 Import-Package: org.apache.log4j;version="1.2.15",
  org.hamcrest.core;version="1.1.0",
  org.junit;version="4.5.0",
  org.junit.runner;version="4.5.0"
 Bundle-Activator: org.eclipse.xtext.builder.tests.Activator
 Bundle-ActivationPolicy: lazy
-Export-Package: org.eclipse.xtext.builder.tests.builderTestLanguage,
+Export-Package: org.eclipse.xtext.builder.tests.incremental,
+ org.eclipse.xtext.builder.tests,
+ org.eclipse.xtext.builder.tests.builderTestLanguage,
  org.eclipse.xtext.builder.tests.builderTestLanguage.impl,
  org.eclipse.xtext.builder.tests.builderTestLanguage.util,
- org.eclipse.xtext.builder.tests,
- org.eclipse.xtext.builder.tests.services,
  org.eclipse.xtext.builder.tests.parseTreeConstruction,
  org.eclipse.xtext.builder.tests.parser.antlr,
  org.eclipse.xtext.builder.tests.parser.antlr.internal,
- org.eclipse.xtext.builder.tests.validation,
+ org.eclipse.xtext.builder.tests.services,
+ org.eclipse.xtext.builder.tests.ui.contentassist,
  org.eclipse.xtext.builder.tests.ui.contentassist.antlr,
- org.eclipse.xtext.builder.tests.ui.contentassist
+ org.eclipse.xtext.builder.tests.validation
 
