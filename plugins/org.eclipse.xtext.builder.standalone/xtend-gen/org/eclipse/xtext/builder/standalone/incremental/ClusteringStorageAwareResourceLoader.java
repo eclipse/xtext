@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.builder.standalone.incremental;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -28,7 +27,6 @@ import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 /**
@@ -47,15 +45,7 @@ public class ClusteringStorageAwareResourceLoader {
       final ArrayList<URI> sourceLevelURIs = CollectionLiterals.<URI>newArrayList();
       final ArrayList<Resource> resources = CollectionLiterals.<Resource>newArrayList();
       final ArrayList<T> result = CollectionLiterals.<T>newArrayList();
-      final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
-        @Override
-        public Boolean apply(final URI it) {
-          String _fileExtension = it.fileExtension();
-          return Boolean.valueOf((!Objects.equal(_fileExtension, "java")));
-        }
-      };
-      Iterable<URI> _filter = IterableExtensions.<URI>filter(uris, _function);
-      final Iterator<URI> iter = _filter.iterator();
+      final Iterator<URI> iter = uris.iterator();
       while (iter.hasNext()) {
         {
           final URI uri = iter.next();
@@ -65,13 +55,13 @@ public class ClusteringStorageAwareResourceLoader {
           boolean _continueProcessing = _clusteringPolicy.continueProcessing(_resourceSet, uri, _size);
           boolean _not = (!_continueProcessing);
           if (_not) {
-            final Function1<Resource, T> _function_1 = new Function1<Resource, T>() {
+            final Function1<Resource, T> _function = new Function1<Resource, T>() {
               @Override
               public T apply(final Resource it) {
                 return operation.apply(it);
               }
             };
-            List<T> _map = ListExtensions.<Resource, T>map(resources, _function_1);
+            List<T> _map = ListExtensions.<Resource, T>map(resources, _function);
             Iterables.<T>addAll(result, _map);
             resources.clear();
             this.clearResourceSet();
@@ -98,13 +88,13 @@ public class ClusteringStorageAwareResourceLoader {
           resources.add(_resource);
         }
       }
-      final Function1<Resource, T> _function_1 = new Function1<Resource, T>() {
+      final Function1<Resource, T> _function = new Function1<Resource, T>() {
         @Override
         public T apply(final Resource it) {
           return operation.apply(it);
         }
       };
-      List<T> _map = ListExtensions.<Resource, T>map(resources, _function_1);
+      List<T> _map = ListExtensions.<Resource, T>map(resources, _function);
       Iterables.<T>addAll(result, _map);
       _xblockexpression = result;
     }

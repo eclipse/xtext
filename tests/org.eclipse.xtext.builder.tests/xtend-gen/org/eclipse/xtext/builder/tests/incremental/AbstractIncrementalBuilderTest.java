@@ -119,6 +119,8 @@ public abstract class AbstractIncrementalBuilderTest {
             URIConverter _uRIConverter_1 = it.getURIConverter();
             EList<URIHandler> _uRIHandlers_1 = _uRIConverter_1.getURIHandlers();
             _uRIHandlers_1.add(AbstractIncrementalBuilderTest.this.inMemoryURIHandler);
+            ClassLoader _classLoader = AbstractIncrementalBuilderTest.class.getClassLoader();
+            it.setClasspathURIContext(_classLoader);
           }
         };
         XtextResourceSet _doubleArrow = ObjectExtensions.<XtextResourceSet>operator_doubleArrow(_get, _function);
