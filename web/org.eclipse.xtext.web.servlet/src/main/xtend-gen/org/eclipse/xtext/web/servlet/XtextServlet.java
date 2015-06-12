@@ -12,7 +12,6 @@ import com.google.gson.Gson;
 import com.google.inject.Injector;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -197,16 +196,14 @@ public class XtextServlet extends HttpServlet {
   protected Injector getInjector(final IRequestData requestData) throws InvalidRequestException {
     IResourceServiceProvider resourceServiceProvider = null;
     String _elvis = null;
-    Map<String, String> _parameters = requestData.getParameters();
-    String _get = _parameters.get("resource");
-    if (_get != null) {
-      _elvis = _get;
+    String _parameter = requestData.getParameter("resource");
+    if (_parameter != null) {
+      _elvis = _parameter;
     } else {
       _elvis = "";
     }
     final URI emfURI = URI.createURI(_elvis);
-    Map<String, String> _parameters_1 = requestData.getParameters();
-    final String contentType = _parameters_1.get("contentType");
+    final String contentType = requestData.getParameter("contentType");
     if ((contentType == null)) {
       IResourceServiceProvider _resourceServiceProvider = this.serviceProviderRegistry.getResourceServiceProvider(emfURI);
       resourceServiceProvider = _resourceServiceProvider;

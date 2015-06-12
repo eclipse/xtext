@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server.contentassist
 
-interface IWebContentProposaAcceptor {
+interface IWebContentProposalAcceptor {
 	
 	def void accept(ContentAssistResult.Entry entry, int priority)
 	

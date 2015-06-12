@@ -8,17 +8,15 @@
 package org.eclipse.xtext.web.servlet;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.Maps;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.Enumeration;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.web.server.IRequestData;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
@@ -26,35 +24,24 @@ public class HttpServletRequestData implements IRequestData {
   private final HttpServletRequest request;
   
   @Accessors
-  private final Map<String, String> parameters;
+  private final Collection<String> parameterKeys;
   
   public HttpServletRequestData(final HttpServletRequest request) {
     this.request = request;
-    final Map<String, String[]> paramMultiMap = request.getParameterMap();
-    int _size = paramMultiMap.size();
-    final HashMap<String, String> result = Maps.<String, String>newHashMapWithExpectedSize(_size);
-    Set<Map.Entry<String, String[]>> _entrySet = paramMultiMap.entrySet();
-    final Function1<Map.Entry<String, String[]>, Boolean> _function = new Function1<Map.Entry<String, String[]>, Boolean>() {
-      @Override
-      public Boolean apply(final Map.Entry<String, String[]> it) {
-        String[] _value = it.getValue();
-        int _length = _value.length;
-        return Boolean.valueOf((_length > 0));
-      }
-    };
-    Iterable<Map.Entry<String, String[]>> _filter = IterableExtensions.<Map.Entry<String, String[]>>filter(_entrySet, _function);
-    final Procedure1<Map.Entry<String, String[]>> _function_1 = new Procedure1<Map.Entry<String, String[]>>() {
-      @Override
-      public void apply(final Map.Entry<String, String[]> it) {
-        String _key = it.getKey();
-        String[] _value = it.getValue();
-        String _get = _value[0];
-        result.put(_key, _get);
-      }
-    };
-    IterableExtensions.<Map.Entry<String, String[]>>forEach(_filter, _function_1);
-    Map<String, String> _unmodifiableMap = Collections.<String, String>unmodifiableMap(result);
-    this.parameters = _unmodifiableMap;
+    Enumeration<String> _parameterNames = request.getParameterNames();
+    ArrayList<String> _list = Collections.<String>list(_parameterNames);
+    List<String> _unmodifiableList = Collections.<String>unmodifiableList(_list);
+    this.parameterKeys = _unmodifiableList;
+  }
+  
+  @Override
+  public String getParameter(final String key) {
+    return this.request.getParameter(key);
+  }
+  
+  @Override
+  public Collection<String> getMetadataKeys() {
+    return Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(IRequestData.METADATA_REQUEST_TYPE, "authType", "characterEncoding", "contentType", "contextPath", "localAddr", "localName", "localPort", "method", "pathInfo", "pathTranslated", "protocol", "queryString", "remoteAddr", "remoteHost", "remotePort", "remoteUser", "requestedSessionId", "requestURI", "scheme", "serverName", "serverPort", "servletPath"));
   }
   
   @Override
@@ -62,20 +49,14 @@ public class HttpServletRequestData implements IRequestData {
     String _switchResult = null;
     boolean _matched = false;
     if (!_matched) {
-      if (Objects.equal(key, "requestType")) {
+      if (Objects.equal(key, IRequestData.METADATA_REQUEST_TYPE)) {
         _matched=true;
-        String _elvis = null;
         String _pathInfo = this.request.getPathInfo();
         String _substring = null;
         if (_pathInfo!=null) {
           _substring=_pathInfo.substring(1);
         }
-        if (_substring != null) {
-          _elvis = _substring;
-        } else {
-          _elvis = "";
-        }
-        _switchResult = _elvis;
+        _switchResult = _substring;
       }
     }
     if (!_matched) {
@@ -217,7 +198,7 @@ public class HttpServletRequestData implements IRequestData {
   }
   
   @Pure
-  public Map<String, String> getParameters() {
-    return this.parameters;
+  public Collection<String> getParameterKeys() {
+    return this.parameterKeys;
   }
 }

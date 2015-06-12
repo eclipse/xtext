@@ -10,6 +10,6 @@ package org.eclipse.xtext.web.server.contentassist;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
 
 @SuppressWarnings("all")
-public interface IWebContentProposaAcceptor {
+public interface IWebContentProposalAcceptor {
   public abstract void accept(final ContentAssistResult.Entry entry, final int priority);
 }

@@ -26,7 +26,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
-import org.eclipse.xtext.web.server.contentassist.IWebContentProposaAcceptor;
+import org.eclipse.xtext.web.server.contentassist.IWebContentProposalAcceptor;
 import org.eclipse.xtext.web.server.contentassist.WebContentProposalPriorities;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
 import org.eclipse.xtext.xbase.imports.ImportSectionRegionUtil;
@@ -63,7 +63,7 @@ public class ClasspathBasedWebTypesProposalProvider implements IWebTypesProposal
   private ImportSectionRegionUtil importSectionRegionUtil;
   
   @Override
-  public void createTypeProposals(final EReference reference, final ContentAssistContext context, final Predicate<ITypeDescriptor> filter, final IWebContentProposaAcceptor acceptor) {
+  public void createTypeProposals(final EReference reference, final ContentAssistContext context, final Predicate<ITypeDescriptor> filter, final IWebContentProposalAcceptor acceptor) {
     ITextRegion importSectionRegion = null;
     XImportSection importSection = null;
     boolean _isImportDeclaration = this.isImportDeclaration(reference, context);

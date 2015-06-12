@@ -35,11 +35,6 @@ public class ContentAssistResult implements IServiceResult {
     
     private String description;
     
-    /**
-     * Available styles: 'default', 'emphasis', 'noemphasis', 'hr'
-     */
-    private String style;
-    
     private int escapePosition;
     
     private final ArrayList<ReplaceRegion> textReplacements = new ArrayList<ReplaceRegion>();
@@ -84,15 +79,6 @@ public class ContentAssistResult implements IServiceResult {
     }
     
     @Pure
-    public String getStyle() {
-      return this.style;
-    }
-    
-    public void setStyle(final String style) {
-      this.style = style;
-    }
-    
-    @Pure
     public int getEscapePosition() {
       return this.escapePosition;
     }
@@ -120,7 +106,6 @@ public class ContentAssistResult implements IServiceResult {
       b.add("proposal", this.proposal);
       b.add("name", this.name);
       b.add("description", this.description);
-      b.add("style", this.style);
       b.add("escapePosition", this.escapePosition);
       b.add("textReplacements", this.textReplacements);
       b.add("editPositions", this.editPositions);
@@ -157,11 +142,6 @@ public class ContentAssistResult implements IServiceResult {
           return false;
       } else if (!this.description.equals(other.description))
         return false;
-      if (this.style == null) {
-        if (other.style != null)
-          return false;
-      } else if (!this.style.equals(other.style))
-        return false;
       if (other.escapePosition != this.escapePosition)
         return false;
       if (this.textReplacements == null) {
@@ -186,7 +166,6 @@ public class ContentAssistResult implements IServiceResult {
       result = prime * result + ((this.proposal== null) ? 0 : this.proposal.hashCode());
       result = prime * result + ((this.name== null) ? 0 : this.name.hashCode());
       result = prime * result + ((this.description== null) ? 0 : this.description.hashCode());
-      result = prime * result + ((this.style== null) ? 0 : this.style.hashCode());
       result = prime * result + this.escapePosition;
       result = prime * result + ((this.textReplacements== null) ? 0 : this.textReplacements.hashCode());
       result = prime * result + ((this.editPositions== null) ? 0 : this.editPositions.hashCode());

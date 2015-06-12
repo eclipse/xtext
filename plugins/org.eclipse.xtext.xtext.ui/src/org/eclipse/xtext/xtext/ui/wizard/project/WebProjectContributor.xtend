@@ -58,7 +58,7 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 						}
 					});
 					require(["xtext/xtext-orion"], function(xtext) {
-						xtext.createEditor();
+						xtext.createEditor({syntaxDefinition: "xtext/generated/«projectInfo.fileExtension»-syntax"});
 					});
 				</script>
 			</head>

@@ -101,8 +101,8 @@ class XtextServlet extends HttpServlet {
 	protected def getInjector(IRequestData requestData) throws InvalidRequestException {
 		var IResourceServiceProvider resourceServiceProvider
 		
-		val emfURI = URI.createURI(requestData.parameters.get('resource') ?: '')
-		val contentType = requestData.parameters.get('contentType')
+		val emfURI = URI.createURI(requestData.getParameter('resource') ?: '')
+		val contentType = requestData.getParameter('contentType')
 		if (contentType === null)
 			resourceServiceProvider = serviceProviderRegistry.getResourceServiceProvider(emfURI)
 		else

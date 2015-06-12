@@ -92,6 +92,11 @@ class DslProjectContributor extends DefaultProjectFactoryContributor {
 						directory = "${ideaProjectPath}/src-gen"
 					}
 				«ENDIF»
+				«IF projectInfo.createWebProject»
+					component = DirectoryCleaner {
+						directory = "${javaScriptPath}/generated"
+					}
+				«ENDIF»
 				
 				component = Generator auto-inject {
 					pathRtProject = runtimeProject
@@ -199,7 +204,7 @@ class DslProjectContributor extends DefaultProjectFactoryContributor {
 						«IF projectInfo.createWebProject»
 							// JavaScript-based syntax highlighting
 							fragment = org.eclipse.xtext.web.generator.OrionHighlightingFragment auto-inject {
-								javaScriptPath = javaScriptPath
+								javaScriptPath = "${javaScriptPath}/generated"
 							}
 						«ENDIF»
 					}

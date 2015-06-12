@@ -253,6 +253,21 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
         _builder.newLine();
       }
     }
+    {
+      boolean _isCreateWebProject_1 = this.projectInfo.isCreateWebProject();
+      if (_isCreateWebProject_1) {
+        _builder.append("\t");
+        _builder.append("component = DirectoryCleaner {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("\t");
+        _builder.append("directory = \"${javaScriptPath}/generated\"");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+      }
+    }
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
@@ -543,8 +558,8 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
     }
     _builder.newLine();
     {
-      boolean _isCreateWebProject_1 = this.projectInfo.isCreateWebProject();
-      if (_isCreateWebProject_1) {
+      boolean _isCreateWebProject_2 = this.projectInfo.isCreateWebProject();
+      if (_isCreateWebProject_2) {
         _builder.append("\t\t\t");
         _builder.append("// JavaScript-based syntax highlighting");
         _builder.newLine();
@@ -553,7 +568,7 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("\t");
-        _builder.append("javaScriptPath = javaScriptPath");
+        _builder.append("javaScriptPath = \"${javaScriptPath}/generated\"");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("}");

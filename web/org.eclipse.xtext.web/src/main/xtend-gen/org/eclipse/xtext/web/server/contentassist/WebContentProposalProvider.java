@@ -37,7 +37,7 @@ import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
 import org.eclipse.xtext.web.server.contentassist.CrossrefProposalProvider;
-import org.eclipse.xtext.web.server.contentassist.IWebContentProposaAcceptor;
+import org.eclipse.xtext.web.server.contentassist.IWebContentProposalAcceptor;
 import org.eclipse.xtext.web.server.contentassist.WebContentProposalPriorities;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -67,7 +67,7 @@ public class WebContentProposalProvider {
   @Extension
   private CurrentTypeFinder _currentTypeFinder;
   
-  public void createProposals(final List<ContentAssistContext> contexts, final IWebContentProposaAcceptor acceptor) {
+  public void createProposals(final List<ContentAssistContext> contexts, final IWebContentProposalAcceptor acceptor) {
     ContentAssistContext selectedContext = null;
     for (final ContentAssistContext context : contexts) {
       boolean _or = false;
@@ -142,10 +142,10 @@ public class WebContentProposalProvider {
     return _or;
   }
   
-  protected void _createProposals(final AbstractElement element, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
+  protected void _createProposals(final AbstractElement element, final ContentAssistContext context, final IWebContentProposalAcceptor acceptor) {
   }
   
-  protected void _createProposals(final Assignment assignment, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
+  protected void _createProposals(final Assignment assignment, final ContentAssistContext context, final IWebContentProposalAcceptor acceptor) {
     AbstractElement _terminal = assignment.getTerminal();
     if ((_terminal instanceof CrossReference)) {
       AbstractElement _terminal_1 = assignment.getTerminal();
@@ -153,7 +153,7 @@ public class WebContentProposalProvider {
     }
   }
   
-  protected void _createProposals(final Keyword keyword, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
+  protected void _createProposals(final Keyword keyword, final ContentAssistContext context, final IWebContentProposalAcceptor acceptor) {
     boolean _filterKeyword = this.filterKeyword(keyword, context);
     if (_filterKeyword) {
       String _prefix = context.getPrefix();
@@ -192,7 +192,7 @@ public class WebContentProposalProvider {
     return _and;
   }
   
-  protected void _createProposals(final RuleCall ruleCall, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
+  protected void _createProposals(final RuleCall ruleCall, final ContentAssistContext context, final IWebContentProposalAcceptor acceptor) {
     boolean _and = false;
     AbstractRule _rule = ruleCall.getRule();
     if (!(_rule instanceof TerminalRule)) {
@@ -264,7 +264,7 @@ public class WebContentProposalProvider {
     }
   }
   
-  protected void _createProposals(final CrossReference reference, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
+  protected void _createProposals(final CrossReference reference, final ContentAssistContext context, final IWebContentProposalAcceptor acceptor) {
     final EClassifier type = this._currentTypeFinder.findCurrentTypeAfter(reference);
     if ((type instanceof EClass)) {
       final EReference ereference = GrammarUtil.getReference(reference, ((EClass)type));
@@ -277,7 +277,7 @@ public class WebContentProposalProvider {
     }
   }
   
-  protected void createProposals(final AbstractElement assignment, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
+  protected void createProposals(final AbstractElement assignment, final ContentAssistContext context, final IWebContentProposalAcceptor acceptor) {
     if (assignment instanceof Assignment) {
       _createProposals((Assignment)assignment, context, acceptor);
       return;

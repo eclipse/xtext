@@ -21,7 +21,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
-import org.eclipse.xtext.web.server.contentassist.IWebContentProposaAcceptor;
+import org.eclipse.xtext.web.server.contentassist.IWebContentProposalAcceptor;
 import org.eclipse.xtext.web.server.contentassist.WebContentProposalPriorities;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -41,7 +41,7 @@ public class CrossrefProposalProvider {
   @Inject
   private WebContentProposalPriorities proposalPriorities;
   
-  public void lookupCrossReference(final IScope scope, final CrossReference crossReference, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor, final Predicate<IEObjectDescription> filter) {
+  public void lookupCrossReference(final IScope scope, final CrossReference crossReference, final ContentAssistContext context, final IWebContentProposalAcceptor acceptor, final Predicate<IEObjectDescription> filter) {
     try {
       Iterable<IEObjectDescription> _queryScope = this.queryScope(scope, crossReference, context);
       for (final IEObjectDescription candidate : _queryScope) {

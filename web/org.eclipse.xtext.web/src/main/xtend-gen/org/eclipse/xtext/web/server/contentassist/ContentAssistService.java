@@ -23,7 +23,7 @@ import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
-import org.eclipse.xtext.web.server.contentassist.IWebContentProposaAcceptor;
+import org.eclipse.xtext.web.server.contentassist.IWebContentProposalAcceptor;
 import org.eclipse.xtext.web.server.contentassist.WebContentProposalProvider;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 import org.eclipse.xtext.web.server.model.UpdateDocumentService;
@@ -136,14 +136,14 @@ public class ContentAssistService {
     boolean _not = (!_isEmpty);
     if (_not) {
       final HashSet<Pair<Integer, ContentAssistResult.Entry>> proposals = new HashSet<Pair<Integer, ContentAssistResult.Entry>>();
-      final IWebContentProposaAcceptor _function = new IWebContentProposaAcceptor() {
+      final IWebContentProposalAcceptor _function = new IWebContentProposalAcceptor() {
         @Override
         public void accept(final ContentAssistResult.Entry entry, final int priority) {
           Pair<Integer, ContentAssistResult.Entry> _mappedTo = Pair.<Integer, ContentAssistResult.Entry>of(Integer.valueOf(priority), entry);
           proposals.add(_mappedTo);
         }
       };
-      final IWebContentProposaAcceptor acceptor = _function;
+      final IWebContentProposalAcceptor acceptor = _function;
       this.proposalProvider.createProposals(contexts, acceptor);
       ArrayList<ContentAssistResult.Entry> _entries = result.getEntries();
       final Comparator<Pair<Integer, ContentAssistResult.Entry>> _function_1 = new Comparator<Pair<Integer, ContentAssistResult.Entry>>() {

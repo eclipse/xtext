@@ -7,11 +7,17 @@
  */
 package org.eclipse.xtext.web.server;
 
-import java.util.Map;
+import java.util.Collection;
 
 @SuppressWarnings("all")
 public interface IRequestData {
-  public abstract Map<String, String> getParameters();
+  public final static String METADATA_REQUEST_TYPE = "requestType";
+  
+  public abstract Collection<String> getParameterKeys();
+  
+  public abstract String getParameter(final String key);
+  
+  public abstract Collection<String> getMetadataKeys();
   
   public abstract String getMetadata(final String key);
 }

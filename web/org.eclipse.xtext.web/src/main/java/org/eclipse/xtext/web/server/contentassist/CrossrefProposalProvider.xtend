@@ -28,7 +28,7 @@ class CrossrefProposalProvider {
 	@Inject WebContentProposalPriorities proposalPriorities
 	
 	def void lookupCrossReference(IScope scope, CrossReference crossReference, ContentAssistContext context,
-			IWebContentProposaAcceptor acceptor, Predicate<IEObjectDescription> filter) {
+			IWebContentProposalAcceptor acceptor, Predicate<IEObjectDescription> filter) {
 		try {
 			for (candidate : queryScope(scope, crossReference, context)) {
 				if (filter.apply(candidate)) {

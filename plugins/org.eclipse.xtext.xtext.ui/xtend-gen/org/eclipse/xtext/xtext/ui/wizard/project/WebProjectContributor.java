@@ -113,8 +113,11 @@ public class WebProjectContributor extends DefaultProjectFactoryContributor {
       _builder.append("require([\"xtext/xtext-orion\"], function(xtext) {");
       _builder.newLine();
       _builder.append("\t\t\t");
-      _builder.append("xtext.createEditor();");
-      _builder.newLine();
+      _builder.append("xtext.createEditor({syntaxDefinition: \"xtext/generated/");
+      String _fileExtension = this.projectInfo.getFileExtension();
+      _builder.append(_fileExtension, "\t\t\t");
+      _builder.append("-syntax\"});");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("});");
       _builder.newLine();
@@ -145,8 +148,8 @@ public class WebProjectContributor extends DefaultProjectFactoryContributor {
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("<div id=\"xtext-editor\" data-editor-xtext-lang=\"");
-      String _fileExtension = this.projectInfo.getFileExtension();
-      _builder.append(_fileExtension, "\t\t");
+      String _fileExtension_1 = this.projectInfo.getFileExtension();
+      _builder.append(_fileExtension_1, "\t\t");
       _builder.append("\"></div>");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");

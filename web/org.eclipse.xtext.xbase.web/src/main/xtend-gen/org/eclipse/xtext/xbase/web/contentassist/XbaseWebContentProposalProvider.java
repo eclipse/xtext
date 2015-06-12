@@ -35,7 +35,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.web.server.contentassist.CrossrefProposalProvider;
-import org.eclipse.xtext.web.server.contentassist.IWebContentProposaAcceptor;
+import org.eclipse.xtext.web.server.contentassist.IWebContentProposalAcceptor;
 import org.eclipse.xtext.web.server.contentassist.WebContentProposalProvider;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
@@ -169,7 +169,7 @@ public class XbaseWebContentProposalProvider extends WebContentProposalProvider 
   }
   
   @Override
-  protected void _createProposals(final RuleCall ruleCall, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
+  protected void _createProposals(final RuleCall ruleCall, final ContentAssistContext context, final IWebContentProposalAcceptor acceptor) {
     AbstractRule _rule = ruleCall.getRule();
     boolean _matched = false;
     if (!_matched) {
@@ -198,7 +198,7 @@ public class XbaseWebContentProposalProvider extends WebContentProposalProvider 
   }
   
   @Override
-  protected void _createProposals(final Assignment assignment, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
+  protected void _createProposals(final Assignment assignment, final ContentAssistContext context, final IWebContentProposalAcceptor acceptor) {
     final EObject model = context.getCurrentModel();
     boolean _matched = false;
     if (!_matched) {
@@ -505,16 +505,16 @@ public class XbaseWebContentProposalProvider extends WebContentProposalProvider 
     }
   }
   
-  protected void completeJavaTypes(final EReference reference, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
+  protected void completeJavaTypes(final EReference reference, final ContentAssistContext context, final IWebContentProposalAcceptor acceptor) {
     Predicate<ITypeDescriptor> _alwaysTrue = Predicates.<ITypeDescriptor>alwaysTrue();
     this.completeJavaTypes(reference, context, _alwaysTrue, acceptor);
   }
   
-  protected void completeJavaTypes(final EReference reference, final ContentAssistContext context, final Predicate<ITypeDescriptor> filter, final IWebContentProposaAcceptor acceptor) {
+  protected void completeJavaTypes(final EReference reference, final ContentAssistContext context, final Predicate<ITypeDescriptor> filter, final IWebContentProposalAcceptor acceptor) {
     this.typesProposalProvider.createTypeProposals(reference, context, filter, acceptor);
   }
   
-  protected void completeXFeatureCall(final EObject model, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
+  protected void completeXFeatureCall(final EObject model, final ContentAssistContext context, final IWebContentProposalAcceptor acceptor) {
     if ((model != null)) {
       IResolvedTypes _resolveTypes = this.typeResolver.resolveTypes(model);
       boolean _hasExpressionScope = _resolveTypes.hasExpressionScope(model, IExpressionScope.Anchor.WITHIN);
@@ -533,7 +533,7 @@ public class XbaseWebContentProposalProvider extends WebContentProposalProvider 
     this.createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.AFTER, context, acceptor);
   }
   
-  protected void completeWithinBlock(final EObject model, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
+  protected void completeWithinBlock(final EObject model, final ContentAssistContext context, final IWebContentProposalAcceptor acceptor) {
     final ICompositeNode node = NodeModelUtils.getNode(model);
     int _offset = node.getOffset();
     int _offset_1 = context.getOffset();
@@ -637,7 +637,7 @@ public class XbaseWebContentProposalProvider extends WebContentProposalProvider 
     return false;
   }
   
-  protected void completeXAssignment(final EObject model, final Assignment assignment, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
+  protected void completeXAssignment(final EObject model, final Assignment assignment, final ContentAssistContext context, final IWebContentProposalAcceptor acceptor) {
     final String ruleName = this.getConcreteSyntaxRuleName(assignment);
     boolean _isOperatorRule = this.isOperatorRule(ruleName);
     if (_isOperatorRule) {
@@ -656,7 +656,7 @@ public class XbaseWebContentProposalProvider extends WebContentProposalProvider 
     return _and;
   }
   
-  protected void completeBinaryOperation(final EObject model, final Assignment assignment, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
+  protected void completeBinaryOperation(final EObject model, final Assignment assignment, final ContentAssistContext context, final IWebContentProposalAcceptor acceptor) {
     if ((model instanceof XBinaryOperation)) {
       String _prefix = context.getPrefix();
       int _length = _prefix.length();
@@ -717,7 +717,7 @@ public class XbaseWebContentProposalProvider extends WebContentProposalProvider 
     }
   }
   
-  protected void completeXBasicForLoopInit(final EObject model, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
+  protected void completeXBasicForLoopInit(final EObject model, final ContentAssistContext context, final IWebContentProposalAcceptor acceptor) {
     final ICompositeNode node = NodeModelUtils.getNode(model);
     int _offset = node.getOffset();
     int _offset_1 = context.getOffset();
@@ -745,7 +745,7 @@ public class XbaseWebContentProposalProvider extends WebContentProposalProvider 
     this.createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.BEFORE, context, acceptor);
   }
   
-  protected void completeXMemberFeatureCall(final EObject model, final Assignment assignment, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
+  protected void completeXMemberFeatureCall(final EObject model, final Assignment assignment, final ContentAssistContext context, final IWebContentProposalAcceptor acceptor) {
     if ((model instanceof XMemberFeatureCall)) {
       XExpression _memberCallTarget = ((XMemberFeatureCall) model).getMemberCallTarget();
       AbstractElement _terminal = assignment.getTerminal();
@@ -761,7 +761,7 @@ public class XbaseWebContentProposalProvider extends WebContentProposalProvider 
     }
   }
   
-  protected void createLocalVariableAndImplicitProposals(final EObject model, final IExpressionScope.Anchor anchor, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
+  protected void createLocalVariableAndImplicitProposals(final EObject model, final IExpressionScope.Anchor anchor, final ContentAssistContext context, final IWebContentProposalAcceptor acceptor) {
     String prefix = context.getPrefix();
     boolean _and = false;
     int _length = prefix.length();
@@ -793,7 +793,7 @@ public class XbaseWebContentProposalProvider extends WebContentProposalProvider 
     _crossrefProposalProvider.lookupCrossReference(scope, _featureJvmIdentifiableElementCrossReference_2_0, context, acceptor, this.featureDescriptionPredicate);
   }
   
-  protected void createReceiverProposals(final XExpression receiver, final CrossReference crossReference, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
+  protected void createReceiverProposals(final XExpression receiver, final CrossReference crossReference, final ContentAssistContext context, final IWebContentProposalAcceptor acceptor) {
     final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(receiver);
     final LightweightTypeReference receiverType = resolvedTypes.getActualType(receiver);
     boolean _or = false;
@@ -856,7 +856,7 @@ public class XbaseWebContentProposalProvider extends WebContentProposalProvider 
     return _rule.getName();
   }
   
-  public void createProposals(final AbstractElement assignment, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
+  public void createProposals(final AbstractElement assignment, final ContentAssistContext context, final IWebContentProposalAcceptor acceptor) {
     if (assignment instanceof Assignment) {
       _createProposals((Assignment)assignment, context, acceptor);
       return;

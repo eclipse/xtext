@@ -10,10 +10,10 @@ package org.eclipse.xtext.xbase.web.contentassist;
 import com.google.common.base.Predicate;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
-import org.eclipse.xtext.web.server.contentassist.IWebContentProposaAcceptor;
+import org.eclipse.xtext.web.server.contentassist.IWebContentProposalAcceptor;
 import org.eclipse.xtext.xbase.web.scoping.ITypeDescriptor;
 
 @SuppressWarnings("all")
 public interface IWebTypesProposalProvider {
-  public abstract void createTypeProposals(final EReference reference, final ContentAssistContext context, final Predicate<ITypeDescriptor> filter, final IWebContentProposaAcceptor acceptor);
+  public abstract void createTypeProposals(final EReference reference, final ContentAssistContext context, final Predicate<ITypeDescriptor> filter, final IWebContentProposalAcceptor acceptor);
 }

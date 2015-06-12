@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.web.test
 
+import java.util.Collections
 import java.util.Map
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.web.server.IRequestData
 
@@ -17,12 +17,23 @@ class MockRequestData implements IRequestData {
 	
 	val String requestType
 	
-	@Accessors
 	val Map<String, String> parameters
+	
+	override getParameterKeys() {
+		Collections.unmodifiableSet(parameters.keySet)
+	}
+	
+	override getParameter(String key) {
+		parameters.get(key)
+	}
+	
+	override getMetadataKeys() {
+		#[IRequestData.METADATA_REQUEST_TYPE]
+	}
 	
 	override getMetadata(String key) {
 		switch key {
-			case 'requestType': requestType
+			case IRequestData.METADATA_REQUEST_TYPE: requestType
 		}
 	}
 	

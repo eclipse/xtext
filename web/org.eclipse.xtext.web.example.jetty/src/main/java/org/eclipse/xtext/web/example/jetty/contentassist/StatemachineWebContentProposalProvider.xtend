@@ -13,7 +13,7 @@ import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.web.example.statemachine.services.StatemachineGrammarAccess
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult
-import org.eclipse.xtext.web.server.contentassist.IWebContentProposaAcceptor
+import org.eclipse.xtext.web.server.contentassist.IWebContentProposalAcceptor
 import org.eclipse.xtext.web.server.contentassist.WebContentProposalProvider
 
 import static org.eclipse.xtext.web.example.statemachine.statemachine.StatemachinePackage.Literals.*
@@ -23,7 +23,7 @@ class StatemachineWebContentProposalProvider extends WebContentProposalProvider 
 	@Inject extension StatemachineGrammarAccess
 	
 	override dispatch createProposals(RuleCall ruleCall, ContentAssistContext context,
-			IWebContentProposaAcceptor acceptor) {
+			IWebContentProposalAcceptor acceptor) {
 		switch (ruleCall.rule) {
 			
 			case BOOLEANRule: {
@@ -43,7 +43,7 @@ class StatemachineWebContentProposalProvider extends WebContentProposalProvider 
 	}
 	
 	override dispatch createProposals(Assignment assignment, ContentAssistContext context,
-			IWebContentProposaAcceptor acceptor) {
+			IWebContentProposalAcceptor acceptor) {
 		switch (assignment) {
 			case eventAccess.signalAssignment_0: {
 				val scope = scopeProvider.getScope(context.currentModel, EVENT__SIGNAL)

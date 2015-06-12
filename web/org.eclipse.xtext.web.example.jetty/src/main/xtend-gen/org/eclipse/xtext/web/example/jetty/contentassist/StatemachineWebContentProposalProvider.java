@@ -27,7 +27,7 @@ import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.web.example.statemachine.services.StatemachineGrammarAccess;
 import org.eclipse.xtext.web.example.statemachine.statemachine.StatemachinePackage;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
-import org.eclipse.xtext.web.server.contentassist.IWebContentProposaAcceptor;
+import org.eclipse.xtext.web.server.contentassist.IWebContentProposalAcceptor;
 import org.eclipse.xtext.web.server.contentassist.WebContentProposalPriorities;
 import org.eclipse.xtext.web.server.contentassist.WebContentProposalProvider;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -43,7 +43,7 @@ public class StatemachineWebContentProposalProvider extends WebContentProposalPr
   private StatemachineGrammarAccess _statemachineGrammarAccess;
   
   @Override
-  protected void _createProposals(final RuleCall ruleCall, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
+  protected void _createProposals(final RuleCall ruleCall, final ContentAssistContext context, final IWebContentProposalAcceptor acceptor) {
     AbstractRule _rule = ruleCall.getRule();
     boolean _matched = false;
     if (!_matched) {
@@ -82,7 +82,7 @@ public class StatemachineWebContentProposalProvider extends WebContentProposalPr
   }
   
   @Override
-  protected void _createProposals(final Assignment assignment, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
+  protected void _createProposals(final Assignment assignment, final ContentAssistContext context, final IWebContentProposalAcceptor acceptor) {
     boolean _matched = false;
     if (!_matched) {
       StatemachineGrammarAccess.EventElements _eventAccess = this._statemachineGrammarAccess.getEventAccess();
@@ -165,7 +165,7 @@ public class StatemachineWebContentProposalProvider extends WebContentProposalPr
     }
   }
   
-  public void createProposals(final AbstractElement assignment, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
+  public void createProposals(final AbstractElement assignment, final ContentAssistContext context, final IWebContentProposalAcceptor acceptor) {
     if (assignment instanceof Assignment) {
       _createProposals((Assignment)assignment, context, acceptor);
       return;

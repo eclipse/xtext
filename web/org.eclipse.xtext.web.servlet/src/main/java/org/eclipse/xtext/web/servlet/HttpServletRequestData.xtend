@@ -7,9 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.servlet
 
-import com.google.common.collect.Maps
+import java.util.Collection
 import java.util.Collections
-import java.util.Map
 import javax.servlet.http.HttpServletRequest
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.web.server.IRequestData
@@ -17,21 +16,29 @@ import org.eclipse.xtext.web.server.IRequestData
 class HttpServletRequestData implements IRequestData {
 	
 	val HttpServletRequest request
-
-	@Accessors	
-	val Map<String, String> parameters
 	
+	@Accessors
+	val Collection<String> parameterKeys
+
 	new(HttpServletRequest request) {
 		this.request = request
-		val paramMultiMap = request.parameterMap
-		val result = Maps.newHashMapWithExpectedSize(paramMultiMap.size)
-		paramMultiMap.entrySet.filter[value.length > 0].forEach[result.put(key, value.get(0))]
-		this.parameters = Collections.unmodifiableMap(result)
+		this.parameterKeys = Collections.unmodifiableList(Collections.list(request.parameterNames))
+	}
+	
+	override getParameter(String key) {
+		request.getParameter(key)
+	}
+	
+	override getMetadataKeys() {
+		#[IRequestData.METADATA_REQUEST_TYPE, 'authType', 'characterEncoding', 'contentType',
+		'contextPath', 'localAddr', 'localName', 'localPort', 'method', 'pathInfo', 'pathTranslated',
+		'protocol', 'queryString', 'remoteAddr', 'remoteHost', 'remotePort', 'remoteUser',
+		'requestedSessionId', 'requestURI', 'scheme', 'serverName', 'serverPort', 'servletPath']
 	}
 	
 	override getMetadata(String key) {
 		switch key {
-			case 'requestType': request.pathInfo?.substring(1) ?: ''
+			case IRequestData.METADATA_REQUEST_TYPE: request.pathInfo?.substring(1)
 			case 'authType': request.authType
 			case 'characterEncoding': request.characterEncoding
 			case 'contentType': request.contentType
