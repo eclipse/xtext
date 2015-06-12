@@ -33,8 +33,6 @@ class ContentAssistResult implements IServiceResult {
 		String proposal
 		String name
 		String description
-		/** Available styles: 'default', 'emphasis', 'noemphasis', 'hr' */
-		String style
 		int escapePosition
 		val textReplacements = new ArrayList<ReplaceRegion>
 		val editPositions = new ArrayList<TextRegion>

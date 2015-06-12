@@ -7,11 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server
 
-import java.util.Map
+import java.util.Collection
 
 interface IRequestData {
 	
-	def Map<String, String> getParameters()
+	public static val METADATA_REQUEST_TYPE = 'requestType'
+	
+	def Collection<String> getParameterKeys()
+	
+	def String getParameter(String key)
+	
+	def Collection<String> getMetadataKeys()
 	
 	def String getMetadata(String key)
 	

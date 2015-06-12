@@ -68,7 +68,7 @@ class ContentAssistService {
 		result.stateId = stateId
 		if (!contexts.empty) {
 			val proposals = new HashSet<Pair<Integer, ContentAssistResult.Entry>>
-			val IWebContentProposaAcceptor acceptor = [entry, priority |
+			val IWebContentProposalAcceptor acceptor = [entry, priority |
 				proposals.add(priority -> entry)
 			]
 			

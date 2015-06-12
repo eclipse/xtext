@@ -41,7 +41,7 @@ class WebContentProposalProvider {
 	
 	@Inject extension CurrentTypeFinder
 	
-	def void createProposals(List<ContentAssistContext> contexts, IWebContentProposaAcceptor acceptor) {
+	def void createProposals(List<ContentAssistContext> contexts, IWebContentProposalAcceptor acceptor) {
 		var ContentAssistContext selectedContext
 		for (context : contexts) {
 			if (selectedContext === null || context.acceptable
@@ -64,18 +64,18 @@ class WebContentProposalProvider {
 	}
 	
 	protected def dispatch void createProposals(AbstractElement element, ContentAssistContext context,
-			IWebContentProposaAcceptor acceptor) {
+			IWebContentProposalAcceptor acceptor) {
 		// not supported
 	}
 	
 	protected def dispatch void createProposals(Assignment assignment, ContentAssistContext context,
-			IWebContentProposaAcceptor acceptor) {
+			IWebContentProposalAcceptor acceptor) {
 		if (assignment.terminal instanceof CrossReference)
 			createProposals(assignment.terminal, context, acceptor)
 	}
 	
 	protected def dispatch void createProposals(Keyword keyword, ContentAssistContext context,
-			IWebContentProposaAcceptor acceptor) {
+			IWebContentProposalAcceptor acceptor) {
 		if (filterKeyword(keyword, context)) {
 			val entry = new ContentAssistResult.Entry(context.prefix) => [
 				proposal = keyword.value
@@ -90,7 +90,7 @@ class WebContentProposalProvider {
 	}
 	
 	protected def dispatch void createProposals(RuleCall ruleCall, ContentAssistContext context,
-			IWebContentProposaAcceptor acceptor) {
+			IWebContentProposalAcceptor acceptor) {
 		if (ruleCall.rule instanceof TerminalRule && context.prefix.empty) {
 			val entry = new ContentAssistResult.Entry(context.prefix) => [
 				if (ruleCall.rule.name == 'STRING') {
@@ -118,7 +118,7 @@ class WebContentProposalProvider {
 	}
 	
 	protected def dispatch void createProposals(CrossReference reference, ContentAssistContext context,
-			IWebContentProposaAcceptor acceptor) {
+			IWebContentProposalAcceptor acceptor) {
 		val type = findCurrentTypeAfter(reference)
 		if (type instanceof EClass) {
 			val ereference = GrammarUtil.getReference(reference, type)

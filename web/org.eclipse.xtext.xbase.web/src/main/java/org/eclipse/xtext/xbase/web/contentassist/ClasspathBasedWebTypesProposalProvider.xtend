@@ -18,7 +18,7 @@ import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.util.ITextRegion
 import org.eclipse.xtext.util.ReplaceRegion
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult
-import org.eclipse.xtext.web.server.contentassist.IWebContentProposaAcceptor
+import org.eclipse.xtext.web.server.contentassist.IWebContentProposalAcceptor
 import org.eclipse.xtext.web.server.contentassist.WebContentProposalPriorities
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration
 import org.eclipse.xtext.xbase.imports.ImportSectionRegionUtil
@@ -41,7 +41,7 @@ class ClasspathBasedWebTypesProposalProvider implements IWebTypesProposalProvide
 	@Inject ImportSectionRegionUtil importSectionRegionUtil
 	
 	override createTypeProposals(EReference reference, ContentAssistContext context, Predicate<ITypeDescriptor> filter,
-			IWebContentProposaAcceptor acceptor) {
+			IWebContentProposalAcceptor acceptor) {
 		var ITextRegion importSectionRegion
 		var XImportSection importSection
 		if (!isImportDeclaration(reference, context)) {
@@ -61,6 +61,7 @@ class ClasspathBasedWebTypesProposalProvider implements IWebTypesProposalProvide
 	}
 	
 	protected def getTypeDescriptors(ContentAssistContext context) {
+		// TODO get from injector
 		val classpathScanner = ClasspathScanner.instance
 		val bootClasspath = classpathScanner.getBootClasspathDescriptors(#['java'])
 		val appClasspath = classpathScanner.getDescriptors(context.classLoader, Collections.emptyList)
