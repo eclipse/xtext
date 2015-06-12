@@ -1,0 +1,9 @@
+{
+	"name": "xtext",
+	"dependencies": {
+		"requirejs": "2.1.18"
+	},
+	"devDependencies": {
+		"mocha": "2.2.5"
+	}
+}
