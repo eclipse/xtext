@@ -9,7 +9,6 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.jdt.internal.compiler.CompilationResult
 import org.eclipse.jdt.internal.compiler.Compiler
 import org.eclipse.jdt.internal.compiler.DefaultErrorHandlingPolicies
-import org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration
 import org.eclipse.jdt.internal.compiler.ast.TypeDeclaration
 import org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants
 import org.eclipse.jdt.internal.compiler.env.ICompilationUnit
@@ -17,6 +16,7 @@ import org.eclipse.jdt.internal.compiler.impl.CompilerOptions
 import org.eclipse.jdt.internal.compiler.parser.Parser
 import org.eclipse.jdt.internal.compiler.problem.DefaultProblemFactory
 import org.eclipse.jdt.internal.compiler.problem.ProblemReporter
+import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.common.types.access.binary.BinaryClass
@@ -26,7 +26,6 @@ import org.eclipse.xtext.common.types.descriptions.EObjectDescriptionBasedStubGe
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
-import org.eclipse.xtext.common.types.JvmDeclaredType
 
 class JavaDerivedStateComputer {
 	

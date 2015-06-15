@@ -1,33 +1,31 @@
 package org.eclipse.xtext.java.tests
 
-import org.eclipse.xtext.common.types.access.impl.AbstractTypeProviderTest
-import org.eclipse.xtext.common.types.access.IJvmTypeProvider
+import com.google.common.collect.Iterables
 import com.google.inject.Inject
-import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder
-import org.eclipse.xtext.resource.IResourceServiceProvider
-import org.eclipse.xtext.resource.FileExtensionProvider
+import com.google.inject.Provider
+import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.builder.standalone.LanguageAccess
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest
-import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider
-import org.eclipse.xtext.common.types.tests.Activator
-import org.eclipse.xtext.common.types.tests.AbstractActivator
-import org.eclipse.emf.common.util.URI
-import com.google.inject.Provider
-import org.eclipse.xtext.resource.XtextResourceSet
-import org.junit.runner.RunWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuperSuper
-import org.eclipse.xtext.common.types.testSetups.AbstractMethods
-import org.eclipse.xtext.common.types.testSetups.ClassWithVarArgs
-import org.junit.Test
-import org.eclipse.xtext.common.types.JvmOperation
-import com.google.common.collect.Iterables
+import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder
 import org.eclipse.xtext.common.types.JvmAnnotationReference
-import org.eclipse.xtext.common.types.JvmFormalParameter
-import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmAnnotationType
+import org.eclipse.xtext.common.types.JvmFormalParameter
+import org.eclipse.xtext.common.types.JvmGenericType
+import org.eclipse.xtext.common.types.JvmOperation
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider
+import org.eclipse.xtext.common.types.access.impl.AbstractTypeProviderTest
+import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider
+import org.eclipse.xtext.common.types.testSetups.AbstractMethods
+import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuperSuper
+import org.eclipse.xtext.common.types.testSetups.ClassWithVarArgs
+import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.resource.FileExtensionProvider
+import org.eclipse.xtext.resource.IResourceServiceProvider
+import org.eclipse.xtext.resource.XtextResourceSet
+import org.junit.Test
+import org.junit.runner.RunWith
 
 @RunWith(XtextRunner)
 @InjectWith(JavaInjectorProvider)
