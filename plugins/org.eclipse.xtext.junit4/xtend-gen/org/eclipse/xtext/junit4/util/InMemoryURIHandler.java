@@ -22,6 +22,12 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
+/**
+ * @since 2.9
+ * 
+ * @noimplement
+ * @noreference
+ */
 @SuppressWarnings("all")
 public class InMemoryURIHandler implements URIHandler {
   @Accessors
