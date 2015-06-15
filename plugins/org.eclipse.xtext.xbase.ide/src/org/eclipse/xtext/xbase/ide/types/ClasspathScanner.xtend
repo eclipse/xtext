@@ -21,41 +21,73 @@ import java.util.LinkedHashSet
 import java.util.LinkedList
 import java.util.List
 import java.util.jar.JarFile
+import org.eclipse.xtend.lib.annotations.Accessors
 
 class ClasspathScanner {
+	
+	/** The default time after which a cached classloader scan result is cleared, in seconds. */
+	static val long CLASSLOADER_CACHE_TIME = 300
+	/** The default time after which a cached URI scan result is cleared, in seconds. */
+	static val long URI_CACHE_TIME = 1800
 	
 	static val PROPERTY_CLASSPATH_SPLITTER = Splitter.on(File.pathSeparatorChar)
 	static val MANIFEST_CLASSPATH_SPLITTER = Splitter.on(' ').omitEmptyStrings()
 	
-	val classLoaderDescriptors = new HashMap<Pair<ClassLoader, Collection<String>>, Iterable<ClasspathTypeDescriptor>>
+	private static class ScanResult {
+		Iterable<ITypeDescriptor> descriptors
+		long timestamp
+	}
 	
-	val uriDescriptors = new HashMap<Pair<URI, Collection<String>>, Iterable<ClasspathTypeDescriptor>>
 	
-	def Iterable<ClasspathTypeDescriptor> getDescriptors(ClassLoader classLoader, Collection<String> packagePrefixes) {
+	@Accessors
+	long classloaderCacheTime = CLASSLOADER_CACHE_TIME
+	
+	@Accessors
+	long uriCacheTime = URI_CACHE_TIME
+	
+	val lock = new Object
+	
+	val classLoaderDescriptors = new HashMap<Pair<ClassLoader, Collection<String>>, ScanResult>
+	
+	val uriDescriptors = new HashMap<Pair<URI, Collection<String>>, ScanResult>
+	
+	CacheCleanerThread cacheCleanerThread
+	
+	def Iterable<ITypeDescriptor> getDescriptors(ClassLoader classLoader, Collection<String> packagePrefixes) {
 		val key = new Pair(classLoader, packagePrefixes)
-		synchronized (classLoaderDescriptors) {
+		synchronized (lock) {
 			var result = classLoaderDescriptors.get(key)
 			if (result === null) {
 				result = loadDescriptors(classLoader, packagePrefixes)
 				classLoaderDescriptors.put(key, result)
+				if (cacheCleanerThread === null) {
+					cacheCleanerThread = new CacheCleanerThread(this)
+					cacheCleanerThread.start()
+				}
 			}
-			return result
+			result.timestamp = System.currentTimeMillis
+			return result.descriptors
 		}
 	}
 	
-	def Iterable<ClasspathTypeDescriptor> getDescriptors(URI uri, Collection<String> packagePrefixes) {
+	def Iterable<ITypeDescriptor> getDescriptors(URI uri, Collection<String> packagePrefixes) {
 		val key = new Pair(uri, packagePrefixes)
-		synchronized (uriDescriptors) {
+		synchronized (lock) {
 			var result = uriDescriptors.get(key)
 			if (result === null) {
 				result = loadDescriptors(uri, packagePrefixes)
 				uriDescriptors.put(key, result)
+				if (cacheCleanerThread === null) {
+					cacheCleanerThread = new CacheCleanerThread(this)
+					cacheCleanerThread.start()
+				}
 			}
-			return result
+			result.timestamp = System.currentTimeMillis
+			return result.descriptors
 		}
 	}
 	
-	def Iterable<ClasspathTypeDescriptor> getBootClasspathDescriptors(Collection<String> packagePrefixes) {
+	def Iterable<ITypeDescriptor> getBootClasspathDescriptors(Collection<String> packagePrefixes) {
 		val classpath = System.getProperty('sun.boot.class.path')
 		if (classpath === null)
 			return Collections.emptyList
@@ -82,24 +114,29 @@ class ClasspathScanner {
 			}
 		}
 		
-		return uris.map[getDescriptors(packagePrefixes)].flatten
+		return new ScanResult => [
+			descriptors = uris.map[getDescriptors(packagePrefixes)].flatten
+		]
 	}
 	
 	protected def loadDescriptors(URI uri, Collection<String> packagePrefixes) {
+		val result = new ScanResult
 		if (uri.scheme == 'file') {
 			val file = new File(uri)
 			if (file.isDirectory) {
-				val descriptors = new ArrayList<ClasspathTypeDescriptor>
+				val descriptors = new ArrayList<ITypeDescriptor>
 				loadDirectoryDescriptors(file, '', descriptors, packagePrefixes)
-				return descriptors
+				result.descriptors = descriptors
 			} else if (file.exists) {
-				return loadJarDescriptors(file, true, packagePrefixes)
+				result.descriptors = loadJarDescriptors(file, true, packagePrefixes)
 			}
 		}
-		return Collections.emptyList
+		if (result.descriptors === null)
+			result.descriptors = Collections.emptyList
+		return result
 	}
 
-	protected def void loadDirectoryDescriptors(File directory, String packageName, List<ClasspathTypeDescriptor> descriptors,
+	protected def void loadDirectoryDescriptors(File directory, String packageName, List<ITypeDescriptor> descriptors,
 			Collection<String> packagePrefixes) {
 		for (file : directory.listFiles) {
 			if (file.isDirectory) {
@@ -118,11 +155,11 @@ class ClasspathScanner {
 		try {
 			jarFile = new JarFile(file, false)
 			
-			var List<Iterable<ClasspathTypeDescriptor>> descriptorCollections
+			var List<Iterable<ITypeDescriptor>> descriptorCollections
 			if (includeManifestEntries && jarFile.manifest !== null) {
 				val classpath = jarFile.manifest.mainAttributes.getValue('Class-Path')
 				if (classpath !== null) {
-					descriptorCollections = new ArrayList<Iterable<ClasspathTypeDescriptor>>
+					descriptorCollections = new ArrayList<Iterable<ITypeDescriptor>>
 					for (path : MANIFEST_CLASSPATH_SPLITTER.split(classpath)) {
 						try {
 							var uri = new URI(path)
@@ -136,7 +173,7 @@ class ClasspathScanner {
 				}
 			}
 			
-			val descriptors = new ArrayList<ClasspathTypeDescriptor>
+			val descriptors = new ArrayList<ITypeDescriptor>
 			val entries = jarFile.entries
 			while (entries.hasMoreElements) {
 				val entry = entries.nextElement
@@ -158,6 +195,51 @@ class ClasspathScanner {
 			if (jarFile !== null)
 				jarFile.close()
 		}
+	}
+	
+	
+	private static class CacheCleanerThread extends Thread {
+		
+		val ClasspathScanner cs
+		
+		new(ClasspathScanner cs) {
+			super('Xbase Classpath Cache Cleaner')
+			daemon = true
+			this.cs = cs
+		}
+		
+		override run() {
+			try {
+				while (true) {
+					val uriCacheTime = cs.uriCacheTime * 1000
+					val classloaderCacheTime = cs.classloaderCacheTime * 1000
+					Thread.sleep(Math.min(uriCacheTime, classloaderCacheTime))
+					synchronized (cs.lock) {
+						val currentTime = System.currentTimeMillis
+						
+						val classLoaderResultIter = cs.classLoaderDescriptors.values.iterator
+						while (classLoaderResultIter.hasNext) {
+							if (currentTime > classLoaderResultIter.next.timestamp + classloaderCacheTime)
+								classLoaderResultIter.remove()
+						}
+						
+						val uriResultIter = cs.uriDescriptors.values.iterator
+						while (uriResultIter.hasNext) {
+							if (currentTime > uriResultIter.next.timestamp + uriCacheTime)
+								uriResultIter.remove()
+						}
+						
+						if (cs.classLoaderDescriptors.empty && cs.uriDescriptors.empty) {
+							cs.cacheCleanerThread = null
+							return
+						}
+					}
+				}
+			} catch (InterruptedException exception) {
+				// Stop the thread
+			}
+		}
+		
 	}
 	
 }

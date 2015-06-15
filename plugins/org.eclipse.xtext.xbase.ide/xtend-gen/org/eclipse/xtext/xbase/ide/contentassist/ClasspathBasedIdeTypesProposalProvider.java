@@ -31,7 +31,6 @@ import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.xbase.ide.contentassist.IIdeTypesProposalProvider;
 import org.eclipse.xtext.xbase.ide.contentassist.XbaseIdeContentProposalPriorities;
 import org.eclipse.xtext.xbase.ide.types.ClasspathScanner;
-import org.eclipse.xtext.xbase.ide.types.ClasspathTypeDescriptor;
 import org.eclipse.xtext.xbase.ide.types.ITypeDescriptor;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
 import org.eclipse.xtext.xbase.imports.ImportSectionRegionUtil;
@@ -79,8 +78,8 @@ public class ClasspathBasedIdeTypesProposalProvider implements IIdeTypesProposal
       ITextRegion _computeRegion = this.importSectionRegionUtil.computeRegion(_resource_1);
       importSectionRegion = _computeRegion;
     }
-    Iterable<ClasspathTypeDescriptor> _typeDescriptors = this.getTypeDescriptors(context);
-    for (final ClasspathTypeDescriptor typeDesc : _typeDescriptors) {
+    Iterable<ITypeDescriptor> _typeDescriptors = this.getTypeDescriptors(context);
+    for (final ITypeDescriptor typeDesc : _typeDescriptors) {
       {
         boolean _canAcceptMoreProposals = acceptor.canAcceptMoreProposals();
         boolean _not_1 = (!_canAcceptMoreProposals);
@@ -97,12 +96,12 @@ public class ClasspathBasedIdeTypesProposalProvider implements IIdeTypesProposal
     }
   }
   
-  protected Iterable<ClasspathTypeDescriptor> getTypeDescriptors(final ContentAssistContext context) {
-    final Iterable<ClasspathTypeDescriptor> bootClasspath = this.classpathScanner.getBootClasspathDescriptors(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("java")));
+  protected Iterable<ITypeDescriptor> getTypeDescriptors(final ContentAssistContext context) {
+    final Iterable<ITypeDescriptor> bootClasspath = this.classpathScanner.getBootClasspathDescriptors(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("java")));
     ClassLoader _classLoader = this.getClassLoader(context);
     List<String> _emptyList = Collections.<String>emptyList();
-    final Iterable<ClasspathTypeDescriptor> appClasspath = this.classpathScanner.getDescriptors(_classLoader, _emptyList);
-    return Iterables.<ClasspathTypeDescriptor>concat(bootClasspath, appClasspath);
+    final Iterable<ITypeDescriptor> appClasspath = this.classpathScanner.getDescriptors(_classLoader, _emptyList);
+    return Iterables.<ITypeDescriptor>concat(bootClasspath, appClasspath);
   }
   
   protected ClassLoader getClassLoader(final ContentAssistContext context) {

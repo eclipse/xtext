@@ -21,6 +21,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -28,65 +29,172 @@ import java.util.jar.Attributes;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.ide.types.ClasspathTypeDescriptor;
+import org.eclipse.xtext.xbase.ide.types.ITypeDescriptor;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class ClasspathScanner {
+  private static class ScanResult {
+    private Iterable<ITypeDescriptor> descriptors;
+    
+    private long timestamp;
+  }
+  
+  private static class CacheCleanerThread extends Thread {
+    private final ClasspathScanner cs;
+    
+    public CacheCleanerThread(final ClasspathScanner cs) {
+      super("Xbase Classpath Cache Cleaner");
+      this.setDaemon(true);
+      this.cs = cs;
+    }
+    
+    @Override
+    public void run() {
+      try {
+        while (true) {
+          {
+            final long uriCacheTime = (this.cs.uriCacheTime * 1000);
+            final long classloaderCacheTime = (this.cs.classloaderCacheTime * 1000);
+            long _min = Math.min(uriCacheTime, classloaderCacheTime);
+            Thread.sleep(_min);
+            /* this.cs.lock; */
+            synchronized (this.cs.lock) {
+              {
+                final long currentTime = System.currentTimeMillis();
+                Collection<ClasspathScanner.ScanResult> _values = this.cs.classLoaderDescriptors.values();
+                final Iterator<ClasspathScanner.ScanResult> classLoaderResultIter = _values.iterator();
+                while (classLoaderResultIter.hasNext()) {
+                  if ((currentTime > (classLoaderResultIter.next().timestamp + classloaderCacheTime))) {
+                    classLoaderResultIter.remove();
+                  }
+                }
+                Collection<ClasspathScanner.ScanResult> _values_1 = this.cs.uriDescriptors.values();
+                final Iterator<ClasspathScanner.ScanResult> uriResultIter = _values_1.iterator();
+                while (uriResultIter.hasNext()) {
+                  if ((currentTime > (uriResultIter.next().timestamp + uriCacheTime))) {
+                    uriResultIter.remove();
+                  }
+                }
+                boolean _and = false;
+                boolean _isEmpty = this.cs.classLoaderDescriptors.isEmpty();
+                if (!_isEmpty) {
+                  _and = false;
+                } else {
+                  boolean _isEmpty_1 = this.cs.uriDescriptors.isEmpty();
+                  _and = _isEmpty_1;
+                }
+                if (_and) {
+                  this.cs.cacheCleanerThread = null;
+                  return;
+                }
+              }
+            }
+          }
+        }
+      } catch (final Throwable _t) {
+        if (_t instanceof InterruptedException) {
+          final InterruptedException exception = (InterruptedException)_t;
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+    }
+  }
+  
+  /**
+   * The default time after which a cached classloader scan result is cleared, in seconds.
+   */
+  private final static long CLASSLOADER_CACHE_TIME = 300;
+  
+  /**
+   * The default time after which a cached URI scan result is cleared, in seconds.
+   */
+  private final static long URI_CACHE_TIME = 1800;
+  
   private final static Splitter PROPERTY_CLASSPATH_SPLITTER = Splitter.on(File.pathSeparatorChar);
   
   private final static Splitter MANIFEST_CLASSPATH_SPLITTER = Splitter.on(" ").omitEmptyStrings();
   
-  private final HashMap<Pair<ClassLoader, Collection<String>>, Iterable<ClasspathTypeDescriptor>> classLoaderDescriptors = new HashMap<Pair<ClassLoader, Collection<String>>, Iterable<ClasspathTypeDescriptor>>();
+  @Accessors
+  private long classloaderCacheTime = ClasspathScanner.CLASSLOADER_CACHE_TIME;
   
-  private final HashMap<Pair<URI, Collection<String>>, Iterable<ClasspathTypeDescriptor>> uriDescriptors = new HashMap<Pair<URI, Collection<String>>, Iterable<ClasspathTypeDescriptor>>();
+  @Accessors
+  private long uriCacheTime = ClasspathScanner.URI_CACHE_TIME;
   
-  public Iterable<ClasspathTypeDescriptor> getDescriptors(final ClassLoader classLoader, final Collection<String> packagePrefixes) {
+  private final Object lock = new Object();
+  
+  private final HashMap<Pair<ClassLoader, Collection<String>>, ClasspathScanner.ScanResult> classLoaderDescriptors = new HashMap<Pair<ClassLoader, Collection<String>>, ClasspathScanner.ScanResult>();
+  
+  private final HashMap<Pair<URI, Collection<String>>, ClasspathScanner.ScanResult> uriDescriptors = new HashMap<Pair<URI, Collection<String>>, ClasspathScanner.ScanResult>();
+  
+  private ClasspathScanner.CacheCleanerThread cacheCleanerThread;
+  
+  public Iterable<ITypeDescriptor> getDescriptors(final ClassLoader classLoader, final Collection<String> packagePrefixes) {
     final Pair<ClassLoader, Collection<String>> key = new Pair<ClassLoader, Collection<String>>(classLoader, packagePrefixes);
-    /* this.classLoaderDescriptors; */
-    synchronized (this.classLoaderDescriptors) {
+    /* this.lock; */
+    synchronized (this.lock) {
       {
-        Iterable<ClasspathTypeDescriptor> result = this.classLoaderDescriptors.get(key);
+        ClasspathScanner.ScanResult result = this.classLoaderDescriptors.get(key);
         if ((result == null)) {
-          Iterable<ClasspathTypeDescriptor> _loadDescriptors = this.loadDescriptors(classLoader, packagePrefixes);
+          ClasspathScanner.ScanResult _loadDescriptors = this.loadDescriptors(classLoader, packagePrefixes);
           result = _loadDescriptors;
           this.classLoaderDescriptors.put(key, result);
+          if ((this.cacheCleanerThread == null)) {
+            ClasspathScanner.CacheCleanerThread _cacheCleanerThread = new ClasspathScanner.CacheCleanerThread(this);
+            this.cacheCleanerThread = _cacheCleanerThread;
+            this.cacheCleanerThread.start();
+          }
         }
-        return result;
+        long _currentTimeMillis = System.currentTimeMillis();
+        result.timestamp = _currentTimeMillis;
+        return result.descriptors;
       }
     }
   }
   
-  public Iterable<ClasspathTypeDescriptor> getDescriptors(final URI uri, final Collection<String> packagePrefixes) {
+  public Iterable<ITypeDescriptor> getDescriptors(final URI uri, final Collection<String> packagePrefixes) {
     final Pair<URI, Collection<String>> key = new Pair<URI, Collection<String>>(uri, packagePrefixes);
-    /* this.uriDescriptors; */
-    synchronized (this.uriDescriptors) {
+    /* this.lock; */
+    synchronized (this.lock) {
       {
-        Iterable<ClasspathTypeDescriptor> result = this.uriDescriptors.get(key);
+        ClasspathScanner.ScanResult result = this.uriDescriptors.get(key);
         if ((result == null)) {
-          Iterable<ClasspathTypeDescriptor> _loadDescriptors = this.loadDescriptors(uri, packagePrefixes);
+          ClasspathScanner.ScanResult _loadDescriptors = this.loadDescriptors(uri, packagePrefixes);
           result = _loadDescriptors;
           this.uriDescriptors.put(key, result);
+          if ((this.cacheCleanerThread == null)) {
+            ClasspathScanner.CacheCleanerThread _cacheCleanerThread = new ClasspathScanner.CacheCleanerThread(this);
+            this.cacheCleanerThread = _cacheCleanerThread;
+            this.cacheCleanerThread.start();
+          }
         }
-        return result;
+        long _currentTimeMillis = System.currentTimeMillis();
+        result.timestamp = _currentTimeMillis;
+        return result.descriptors;
       }
     }
   }
   
-  public Iterable<ClasspathTypeDescriptor> getBootClasspathDescriptors(final Collection<String> packagePrefixes) {
-    Iterable<ClasspathTypeDescriptor> _xblockexpression = null;
+  public Iterable<ITypeDescriptor> getBootClasspathDescriptors(final Collection<String> packagePrefixes) {
+    Iterable<ITypeDescriptor> _xblockexpression = null;
     {
       final String classpath = System.getProperty("sun.boot.class.path");
       if ((classpath == null)) {
-        return Collections.<ClasspathTypeDescriptor>emptyList();
+        return Collections.<ITypeDescriptor>emptyList();
       }
       Iterable<String> _split = ClasspathScanner.PROPERTY_CLASSPATH_SPLITTER.split(classpath);
-      final Function1<String, Iterable<ClasspathTypeDescriptor>> _function = new Function1<String, Iterable<ClasspathTypeDescriptor>>() {
+      final Function1<String, Iterable<ITypeDescriptor>> _function = new Function1<String, Iterable<ITypeDescriptor>>() {
         @Override
-        public Iterable<ClasspathTypeDescriptor> apply(final String path) {
+        public Iterable<ITypeDescriptor> apply(final String path) {
           try {
             URI _uRI = new URI("file", null, path, null);
             return ClasspathScanner.this.getDescriptors(_uRI, packagePrefixes);
@@ -95,13 +203,13 @@ public class ClasspathScanner {
           }
         }
       };
-      Iterable<Iterable<ClasspathTypeDescriptor>> _map = IterableExtensions.<String, Iterable<ClasspathTypeDescriptor>>map(_split, _function);
-      _xblockexpression = Iterables.<ClasspathTypeDescriptor>concat(_map);
+      Iterable<Iterable<ITypeDescriptor>> _map = IterableExtensions.<String, Iterable<ITypeDescriptor>>map(_split, _function);
+      _xblockexpression = Iterables.<ITypeDescriptor>concat(_map);
     }
     return _xblockexpression;
   }
   
-  protected Iterable<ClasspathTypeDescriptor> loadDescriptors(final ClassLoader classLoader, final Collection<String> packagePrefixes) {
+  protected ClasspathScanner.ScanResult loadDescriptors(final ClassLoader classLoader, final Collection<String> packagePrefixes) {
     try {
       final LinkedList<ClassLoader> classLoaderHierarchy = new LinkedList<ClassLoader>();
       ClassLoader cl = classLoader;
@@ -126,40 +234,54 @@ public class ClasspathScanner {
           }
         }
       }
-      final Function1<URI, Iterable<ClasspathTypeDescriptor>> _function = new Function1<URI, Iterable<ClasspathTypeDescriptor>>() {
+      ClasspathScanner.ScanResult _scanResult = new ClasspathScanner.ScanResult();
+      final Procedure1<ClasspathScanner.ScanResult> _function = new Procedure1<ClasspathScanner.ScanResult>() {
         @Override
-        public Iterable<ClasspathTypeDescriptor> apply(final URI it) {
-          return ClasspathScanner.this.getDescriptors(it, packagePrefixes);
+        public void apply(final ClasspathScanner.ScanResult it) {
+          final Function1<URI, Iterable<ITypeDescriptor>> _function = new Function1<URI, Iterable<ITypeDescriptor>>() {
+            @Override
+            public Iterable<ITypeDescriptor> apply(final URI it) {
+              return ClasspathScanner.this.getDescriptors(it, packagePrefixes);
+            }
+          };
+          Iterable<Iterable<ITypeDescriptor>> _map = IterableExtensions.<URI, Iterable<ITypeDescriptor>>map(uris, _function);
+          Iterable<ITypeDescriptor> _flatten = Iterables.<ITypeDescriptor>concat(_map);
+          it.descriptors = _flatten;
         }
       };
-      Iterable<Iterable<ClasspathTypeDescriptor>> _map = IterableExtensions.<URI, Iterable<ClasspathTypeDescriptor>>map(uris, _function);
-      return Iterables.<ClasspathTypeDescriptor>concat(_map);
+      return ObjectExtensions.<ClasspathScanner.ScanResult>operator_doubleArrow(_scanResult, _function);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  protected Iterable<ClasspathTypeDescriptor> loadDescriptors(final URI uri, final Collection<String> packagePrefixes) {
+  protected ClasspathScanner.ScanResult loadDescriptors(final URI uri, final Collection<String> packagePrefixes) {
+    final ClasspathScanner.ScanResult result = new ClasspathScanner.ScanResult();
     String _scheme = uri.getScheme();
     boolean _equals = Objects.equal(_scheme, "file");
     if (_equals) {
       final File file = new File(uri);
       boolean _isDirectory = file.isDirectory();
       if (_isDirectory) {
-        final ArrayList<ClasspathTypeDescriptor> descriptors = new ArrayList<ClasspathTypeDescriptor>();
+        final ArrayList<ITypeDescriptor> descriptors = new ArrayList<ITypeDescriptor>();
         this.loadDirectoryDescriptors(file, "", descriptors, packagePrefixes);
-        return descriptors;
+        result.descriptors = descriptors;
       } else {
         boolean _exists = file.exists();
         if (_exists) {
-          return this.loadJarDescriptors(file, true, packagePrefixes);
+          Iterable<ITypeDescriptor> _loadJarDescriptors = this.loadJarDescriptors(file, true, packagePrefixes);
+          result.descriptors = _loadJarDescriptors;
         }
       }
     }
-    return Collections.<ClasspathTypeDescriptor>emptyList();
+    if ((result.descriptors == null)) {
+      List<ITypeDescriptor> _emptyList = Collections.<ITypeDescriptor>emptyList();
+      result.descriptors = _emptyList;
+    }
+    return result;
   }
   
-  protected void loadDirectoryDescriptors(final File directory, final String packageName, final List<ClasspathTypeDescriptor> descriptors, final Collection<String> packagePrefixes) {
+  protected void loadDirectoryDescriptors(final File directory, final String packageName, final List<ITypeDescriptor> descriptors, final Collection<String> packagePrefixes) {
     File[] _listFiles = directory.listFiles();
     for (final File file : _listFiles) {
       boolean _isDirectory = file.isDirectory();
@@ -183,13 +305,13 @@ public class ClasspathScanner {
     }
   }
   
-  protected Iterable<ClasspathTypeDescriptor> loadJarDescriptors(final File file, final boolean includeManifestEntries, final Collection<String> packagePrefixes) {
+  protected Iterable<ITypeDescriptor> loadJarDescriptors(final File file, final boolean includeManifestEntries, final Collection<String> packagePrefixes) {
     try {
       JarFile jarFile = null;
       try {
         JarFile _jarFile = new JarFile(file, false);
         jarFile = _jarFile;
-        List<Iterable<ClasspathTypeDescriptor>> descriptorCollections = null;
+        List<Iterable<ITypeDescriptor>> descriptorCollections = null;
         boolean _and = false;
         if (!includeManifestEntries) {
           _and = false;
@@ -203,7 +325,7 @@ public class ClasspathScanner {
           Attributes _mainAttributes = _manifest_1.getMainAttributes();
           final String classpath = _mainAttributes.getValue("Class-Path");
           if ((classpath != null)) {
-            ArrayList<Iterable<ClasspathTypeDescriptor>> _arrayList = new ArrayList<Iterable<ClasspathTypeDescriptor>>();
+            ArrayList<Iterable<ITypeDescriptor>> _arrayList = new ArrayList<Iterable<ITypeDescriptor>>();
             descriptorCollections = _arrayList;
             Iterable<String> _split = ClasspathScanner.MANIFEST_CLASSPATH_SPLITTER.split(classpath);
             for (final String path : _split) {
@@ -218,7 +340,7 @@ public class ClasspathScanner {
                   URI _uRI = _file.toURI();
                   uri = _uRI;
                 }
-                Iterable<ClasspathTypeDescriptor> _descriptors = this.getDescriptors(uri, packagePrefixes);
+                Iterable<ITypeDescriptor> _descriptors = this.getDescriptors(uri, packagePrefixes);
                 descriptorCollections.add(_descriptors);
               } catch (final Throwable _t) {
                 if (_t instanceof URISyntaxException) {
@@ -230,7 +352,7 @@ public class ClasspathScanner {
             }
           }
         }
-        final ArrayList<ClasspathTypeDescriptor> descriptors = new ArrayList<ClasspathTypeDescriptor>();
+        final ArrayList<ITypeDescriptor> descriptors = new ArrayList<ITypeDescriptor>();
         final Enumeration<JarEntry> entries = jarFile.entries();
         while (entries.hasMoreElements()) {
           {
@@ -258,12 +380,12 @@ public class ClasspathScanner {
           return descriptors;
         } else {
           descriptorCollections.add(descriptors);
-          return Iterables.<ClasspathTypeDescriptor>concat(descriptorCollections);
+          return Iterables.<ITypeDescriptor>concat(descriptorCollections);
         }
       } catch (final Throwable _t_1) {
         if (_t_1 instanceof IOException) {
           final IOException exception_1 = (IOException)_t_1;
-          return Collections.<ClasspathTypeDescriptor>emptyList();
+          return Collections.<ITypeDescriptor>emptyList();
         } else {
           throw Exceptions.sneakyThrow(_t_1);
         }
@@ -275,5 +397,23 @@ public class ClasspathScanner {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  @Pure
+  public long getClassloaderCacheTime() {
+    return this.classloaderCacheTime;
+  }
+  
+  public void setClassloaderCacheTime(final long classloaderCacheTime) {
+    this.classloaderCacheTime = classloaderCacheTime;
+  }
+  
+  @Pure
+  public long getUriCacheTime() {
+    return this.uriCacheTime;
+  }
+  
+  public void setUriCacheTime(final long uriCacheTime) {
+    this.uriCacheTime = uriCacheTime;
   }
 }
