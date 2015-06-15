@@ -51,10 +51,6 @@ class FilesAndURIs {
 		url.toString.asURI.asPath
 	}
 	
-	static def findSourceRootRelativeURI(URI uri, BuildRequest request) {
-		return findRelativeURI(uri, request.sourceRoots)
-	}
-
 	static def findRelativeURI(URI uri, Iterable<URI> baseURIs) {
 		val relativeURIs = baseURIs
 			.map[getRelativeURI(uri)]
