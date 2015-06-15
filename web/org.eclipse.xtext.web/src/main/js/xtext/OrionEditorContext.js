@@ -106,7 +106,7 @@ define(function() {
 					proposal : entry.proposal,
 					prefix : entry.prefix,
 					overwrite : true,
-					name : (entry.name ? entry.name : entry.proposal),
+					name : (entry.label ? entry.label : entry.proposal),
 					description : entry.description,
 					style : entry.style,
 					additionalEdits : entry.textReplacements,

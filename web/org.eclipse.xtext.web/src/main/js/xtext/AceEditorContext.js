@@ -144,7 +144,7 @@ define(["ace/range"], function(mRange) {
 			return entries.map(function(entry) {
     			return {
     				value: entry.proposal,
-    				caption: (entry.name ? entry.name : entry.proposal),
+    				caption: (entry.label ? entry.label : entry.proposal),
     				meta: entry.description,
     				className: entry.style
     			};

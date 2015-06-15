@@ -69,7 +69,7 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("entries = ArrayList (");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("Entry [");
+    _builder.append("ContentAssistEntry [");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("prefix = \"\"");
@@ -90,7 +90,7 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("],");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("Entry [");
+    _builder.append("ContentAssistEntry [");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("prefix = \"\"");
@@ -111,7 +111,7 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("],");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("Entry [");
+    _builder.append("ContentAssistEntry [");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("prefix = \"\"");
@@ -150,7 +150,7 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("entries = ArrayList (");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("Entry [");
+    _builder.append("ContentAssistEntry [");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("prefix = \"sta\"");
@@ -189,7 +189,7 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("entries = ArrayList (");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("Entry [");
+    _builder.append("ContentAssistEntry [");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("prefix = \"\"");
@@ -237,7 +237,7 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("entries = ArrayList (");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("Entry [");
+    _builder.append("ContentAssistEntry [");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("prefix = \"\"");
@@ -258,7 +258,7 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("],");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("Entry [");
+    _builder.append("ContentAssistEntry [");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("prefix = \"\"");
@@ -297,7 +297,7 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("entries = ArrayList (");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("Entry [");
+    _builder.append("ContentAssistEntry [");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("prefix = \"\"");
