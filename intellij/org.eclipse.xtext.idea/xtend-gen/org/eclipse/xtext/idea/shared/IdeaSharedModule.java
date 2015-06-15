@@ -7,10 +7,7 @@
  */
 package org.eclipse.xtext.idea.shared;
 
-import com.google.inject.binder.AnnotatedBindingBuilder;
 import org.eclipse.xtext.builder.standalone.StandaloneBuilderModule;
-import org.eclipse.xtext.builder.standalone.incremental.JavaSupport;
-import org.eclipse.xtext.idea.shared.IdeaJavaSupport;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -20,7 +17,5 @@ public class IdeaSharedModule extends StandaloneBuilderModule {
   @Override
   protected void configure() {
     super.configure();
-    AnnotatedBindingBuilder<JavaSupport> _bind = this.<JavaSupport>bind(JavaSupport.class);
-    _bind.to(IdeaJavaSupport.class);
   }
 }

@@ -239,9 +239,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 					deletedFiles += events.filter[type == DELETED].map[file.URI]
 					classPath += entries.withoutSdk.classes.pathsList.virtualFiles.filter[/* HACK! we need to properly exclude the out put dir */!isDirectory].map[URI]
 					baseDir = ModuleRootManager.getInstance(module).contentRoots.head.URI
-					sourceRoots += entries.withoutSdk.withoutLibraries.withoutDepModules.sources.pathsList.virtualFiles.map[URI]
 					// outputs = ??
-					failOnValidationError = false
 					previousState = indexState ?: new IndexState()
 
 					afterValidate = buildProgressReporter

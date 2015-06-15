@@ -68,7 +68,6 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -427,22 +426,6 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
               VirtualFile _head = IterableExtensions.<VirtualFile>head(((Iterable<VirtualFile>)Conversions.doWrapArray(_contentRoots)));
               URI _uRI = VirtualFileURIUtil.getURI(_head);
               it.setBaseDir(_uRI);
-              List<URI> _sourceRoots = it.getSourceRoots();
-              OrderEnumerator _withoutSdk_1 = entries.withoutSdk();
-              OrderEnumerator _withoutLibraries = _withoutSdk_1.withoutLibraries();
-              OrderEnumerator _withoutDepModules = _withoutLibraries.withoutDepModules();
-              OrderRootsEnumerator _sources = _withoutDepModules.sources();
-              PathsList _pathsList_1 = _sources.getPathsList();
-              List<VirtualFile> _virtualFiles_1 = _pathsList_1.getVirtualFiles();
-              final Function1<VirtualFile, URI> _function_6 = new Function1<VirtualFile, URI>() {
-                @Override
-                public URI apply(final VirtualFile it) {
-                  return VirtualFileURIUtil.getURI(it);
-                }
-              };
-              List<URI> _map_3 = ListExtensions.<VirtualFile, URI>map(_virtualFiles_1, _function_6);
-              Iterables.<URI>addAll(_sourceRoots, _map_3);
-              it.setFailOnValidationError(false);
               IndexState _elvis = null;
               if (XtextAutoBuilderComponent.this.indexState != null) {
                 _elvis = XtextAutoBuilderComponent.this.indexState;
@@ -452,13 +435,13 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
               }
               it.setPreviousState(_elvis);
               it.setAfterValidate(buildProgressReporter);
-              final Procedure1<URI> _function_7 = new Procedure1<URI>() {
+              final Procedure1<URI> _function_6 = new Procedure1<URI>() {
                 @Override
                 public void apply(final URI it) {
                   buildProgressReporter.markAsAffected(it);
                 }
               };
-              it.setAfterDeleteFile(_function_7);
+              it.setAfterDeleteFile(_function_6);
             }
           };
           final BuildRequest request = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_2);

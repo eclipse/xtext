@@ -249,20 +249,18 @@ public class XtextBuildDaemon {
           };
           List<URI> _map_1 = ListExtensions.<String, URI>map(_outputs, _function_1);
           it.setOutputs(_map_1);
-          List<String> _sourceRoots = request.getSourceRoots();
-          final Function1<String, URI> _function_2 = new Function1<String, URI>() {
-            @Override
-            public URI apply(final String it) {
-              return FilesAndURIs.asURI(it);
-            }
-          };
-          List<URI> _map_2 = ListExtensions.<String, URI>map(_sourceRoots, _function_2);
-          it.setSourceRoots(_map_2);
           boolean _equals = Objects.equal(Worker.this.indexState, null);
           if (_equals) {
             List<URI> _classPath = it.getClassPath();
-            List<URI> _sourceRoots_1 = it.getSourceRoots();
-            Iterable<URI> _plus = Iterables.<URI>concat(_classPath, _sourceRoots_1);
+            List<String> _sourceRoots = request.getSourceRoots();
+            final Function1<String, URI> _function_2 = new Function1<String, URI>() {
+              @Override
+              public URI apply(final String it) {
+                return FilesAndURIs.asURI(it);
+              }
+            };
+            List<URI> _map_2 = ListExtensions.<String, URI>map(_sourceRoots, _function_2);
+            Iterable<URI> _plus = Iterables.<URI>concat(_classPath, _map_2);
             Set<String> _keySet = languages.keySet();
             Worker.this.resourceURICollector.collectAllResources(_plus, _keySet);
           } else {
@@ -285,7 +283,6 @@ public class XtextBuildDaemon {
             List<URI> _map_4 = ListExtensions.<String, URI>map(_deletedFiles, _function_4);
             it.setDeletedFiles(_map_4);
           }
-          it.setFailOnValidationError(false);
           it.setPreviousState(Worker.this.indexState);
           it.setAfterValidate(Worker.this.issueHandler);
           final Procedure2<URI, URI> _function_5 = new Procedure2<URI, URI>() {

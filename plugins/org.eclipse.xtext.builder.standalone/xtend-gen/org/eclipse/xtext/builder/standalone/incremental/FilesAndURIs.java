@@ -14,7 +14,6 @@ import java.net.URLClassLoader;
 import java.util.Comparator;
 import java.util.List;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ExclusiveRange;
@@ -91,11 +90,6 @@ public class FilesAndURIs {
     String _string = url.toString();
     URI _asURI = FilesAndURIs.asURI(_string);
     return FilesAndURIs.asPath(_asURI);
-  }
-  
-  public static URI findSourceRootRelativeURI(final URI uri, final BuildRequest request) {
-    List<URI> _sourceRoots = request.getSourceRoots();
-    return FilesAndURIs.findRelativeURI(uri, _sourceRoots);
   }
   
   public static URI findRelativeURI(final URI uri, final Iterable<URI> baseURIs) {

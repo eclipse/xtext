@@ -64,7 +64,6 @@ class BuildRequest {
 	}
 
 	List<URI> classPath = newArrayList
-	List<URI> sourceRoots = newArrayList
 	List<URI> outputs = newArrayList
 	List<URI> dirtyFiles = newArrayList
 	List<URI> deletedFiles = newArrayList;
@@ -78,8 +77,6 @@ class BuildRequest {
 	
 	IndexState previousState = new IndexState
 	
-	boolean failOnValidationError = true
-	boolean debugLog = false
 	boolean writeStorageResources = false
 	boolean indexOnly = false
 	

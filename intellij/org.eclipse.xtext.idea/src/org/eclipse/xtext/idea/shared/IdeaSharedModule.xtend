@@ -8,7 +8,6 @@
 package org.eclipse.xtext.idea.shared
 
 import org.eclipse.xtext.builder.standalone.StandaloneBuilderModule
-import org.eclipse.xtext.builder.standalone.incremental.JavaSupport
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -17,7 +16,6 @@ class IdeaSharedModule extends StandaloneBuilderModule {
 	
 	override protected configure() {
 		super.configure()
-		bind(JavaSupport).to(IdeaJavaSupport)
 	}
 	
 }

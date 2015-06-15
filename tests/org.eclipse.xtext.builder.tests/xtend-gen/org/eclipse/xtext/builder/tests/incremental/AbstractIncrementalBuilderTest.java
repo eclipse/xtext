@@ -128,8 +128,6 @@ public abstract class AbstractIncrementalBuilderTest {
         it.setClassPath(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList()));
         URI _uri_1 = AbstractIncrementalBuilderTest.this.uri("out");
         it.setOutputs(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_uri_1)));
-        URI _uri_2 = AbstractIncrementalBuilderTest.this.uri("src");
-        it.setSourceRoots(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_uri_2)));
         it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList()));
         it.setDeletedFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList()));
         final BuildRequest.IPostValidationCallback _function_1 = new BuildRequest.IPostValidationCallback() {
@@ -155,7 +153,6 @@ public abstract class AbstractIncrementalBuilderTest {
         };
         it.setAfterGenerateFile(_function_3);
         it.setPreviousState(AbstractIncrementalBuilderTest.this.indexState);
-        it.setFailOnValidationError(false);
       }
     };
     final BuildRequest result = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function);

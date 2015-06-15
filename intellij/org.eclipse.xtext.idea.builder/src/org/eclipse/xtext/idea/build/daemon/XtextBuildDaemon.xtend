@@ -193,14 +193,12 @@ class XtextBuildDaemon {
 				baseDir = request.baseDir.asURI
 				classPath = request.classpath.map[asURI]
 				outputs = request.outputs.map[asURI]
-				sourceRoots = request.sourceRoots.map[asURI]
 				if (indexState == null) {
-					resourceURICollector.collectAllResources(classPath+sourceRoots, languages.keySet)	
+					resourceURICollector.collectAllResources(classPath + request.sourceRoots.map[asURI], languages.keySet)	
 				} else {
 					dirtyFiles = request.dirtyFiles.map[asURI]
 					deletedFiles = request.deletedFiles.map[asURI]
 				}
-				failOnValidationError = false
 				previousState = indexState
 				
 				it.afterValidate = issueHandler

@@ -68,7 +68,6 @@ abstract class AbstractIncrementalBuilderTest {
 			]
 			classPath = #[]
 			outputs = #["out".uri]
-			sourceRoots = #["src".uri]
 			dirtyFiles = #[]
 			deletedFiles = #[]
 			
@@ -86,8 +85,6 @@ abstract class AbstractIncrementalBuilderTest {
 			]
 			
 			previousState = indexState
-			
-			failOnValidationError = false
 		]
 		init.apply(result)
 		return result

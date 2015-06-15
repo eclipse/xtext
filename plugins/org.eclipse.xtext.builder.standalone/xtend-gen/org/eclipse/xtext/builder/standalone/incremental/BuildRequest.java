@@ -90,8 +90,6 @@ public class BuildRequest {
   
   private List<URI> classPath = CollectionLiterals.<URI>newArrayList();
   
-  private List<URI> sourceRoots = CollectionLiterals.<URI>newArrayList();
-  
   private List<URI> outputs = CollectionLiterals.<URI>newArrayList();
   
   private List<URI> dirtyFiles = CollectionLiterals.<URI>newArrayList();
@@ -117,10 +115,6 @@ public class BuildRequest {
   
   private IndexState previousState = new IndexState();
   
-  private boolean failOnValidationError = true;
-  
-  private boolean debugLog = false;
-  
   private boolean writeStorageResources = false;
   
   private boolean indexOnly = false;
@@ -138,15 +132,6 @@ public class BuildRequest {
   
   public void setClassPath(final List<URI> classPath) {
     this.classPath = classPath;
-  }
-  
-  @Pure
-  public List<URI> getSourceRoots() {
-    return this.sourceRoots;
-  }
-  
-  public void setSourceRoots(final List<URI> sourceRoots) {
-    this.sourceRoots = sourceRoots;
   }
   
   @Pure
@@ -210,24 +195,6 @@ public class BuildRequest {
   
   public void setPreviousState(final IndexState previousState) {
     this.previousState = previousState;
-  }
-  
-  @Pure
-  public boolean isFailOnValidationError() {
-    return this.failOnValidationError;
-  }
-  
-  public void setFailOnValidationError(final boolean failOnValidationError) {
-    this.failOnValidationError = failOnValidationError;
-  }
-  
-  @Pure
-  public boolean isDebugLog() {
-    return this.debugLog;
-  }
-  
-  public void setDebugLog(final boolean debugLog) {
-    this.debugLog = debugLog;
   }
   
   @Pure
