@@ -63,6 +63,8 @@ abstract class AbstractIncrementalBuilderTest {
 			resourceSet = resourceSetProvider.get => [
 				URIConverter.URIHandlers.clear
 				URIConverter.URIHandlers += inMemoryURIHandler
+				
+				classpathURIContext = AbstractIncrementalBuilderTest.classLoader
 			]
 			classPath = #[]
 			outputs = #["out".uri]

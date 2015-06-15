@@ -18,6 +18,12 @@ import org.eclipse.emf.ecore.resource.URIHandler
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
+/**
+ * @since 2.9
+ * 
+ * @noimplement
+ * @noreference
+ */
 class InMemoryURIHandler implements URIHandler {
 
 	@Accessors @FinalFieldsConstructor static class InMemFile {
