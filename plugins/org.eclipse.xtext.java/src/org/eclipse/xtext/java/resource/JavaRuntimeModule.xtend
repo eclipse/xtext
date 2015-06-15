@@ -15,6 +15,7 @@ import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.impl.SimpleResourceDescriptionsBasedContainerManager
 import org.eclipse.xtext.validation.IResourceValidator
+import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader
 
 class JavaRuntimeModule extends AbstractModule {
 
@@ -30,6 +31,7 @@ class JavaRuntimeModule extends AbstractModule {
 		bind(String).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("java")
 		bind(IJvmTypeProvider.Factory).to(ClasspathTypeProviderFactory)
 		bind(ClassLoader).toInstance(JavaRuntimeModule.classLoader)
+		bind(IReferableElementsUnloader).to(IReferableElementsUnloader.GenericUnloader)
 	}
 
 }

@@ -16,6 +16,7 @@ import org.eclipse.xtext.java.resource.JavaResourceDescriptionManager;
 import org.eclipse.xtext.java.resource.JavaResourceServiceProvider;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.parser.IEncodingProvider;
+import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -51,5 +52,7 @@ public class JavaRuntimeModule extends AbstractModule {
     AnnotatedBindingBuilder<ClassLoader> _bind_10 = this.<ClassLoader>bind(ClassLoader.class);
     ClassLoader _classLoader = JavaRuntimeModule.class.getClassLoader();
     _bind_10.toInstance(_classLoader);
+    AnnotatedBindingBuilder<IReferableElementsUnloader> _bind_11 = this.<IReferableElementsUnloader>bind(IReferableElementsUnloader.class);
+    _bind_11.to(IReferableElementsUnloader.GenericUnloader.class);
   }
 }

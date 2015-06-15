@@ -26,6 +26,7 @@ import org.eclipse.jdt.internal.compiler.problem.DefaultProblemFactory;
 import org.eclipse.jdt.internal.compiler.problem.ProblemReporter;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.binary.BinaryClass;
@@ -35,9 +36,9 @@ import org.eclipse.xtext.common.types.descriptions.EObjectDescriptionBasedStubGe
 import org.eclipse.xtext.java.resource.InMemoryClassLoader;
 import org.eclipse.xtext.java.resource.IndexAwareNameEnvironment;
 import org.eclipse.xtext.java.resource.JavaResource;
+import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
-import org.eclipse.xtext.xbase.jvmmodel.JvmElementsProxifyingUnloader;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -50,7 +51,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @SuppressWarnings("all")
 public class JavaDerivedStateComputer {
   @Inject
-  private JvmElementsProxifyingUnloader unloader;
+  private IReferableElementsUnloader unloader;
   
   @Inject
   private EObjectDescriptionBasedStubGenerator stubGenerator;
@@ -86,52 +87,75 @@ public class JavaDerivedStateComputer {
     final CompilationUnitDeclaration result = parser.dietParse(compilationUnit, compilationResult);
     for (final TypeDeclaration type : result.types) {
       {
-        JvmDeclaredType _switchResult = null;
-        int _kind = TypeDeclaration.kind(type.modifiers);
-        switch (_kind) {
-          case TypeDeclaration.CLASS_DECL:
-            _switchResult = TypesFactory.eINSTANCE.createJvmGenericType();
-            break;
-          case TypeDeclaration.INTERFACE_DECL:
-            JvmGenericType _createJvmGenericType = TypesFactory.eINSTANCE.createJvmGenericType();
-            final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
-              @Override
-              public void apply(final JvmGenericType it) {
-                it.setInterface(true);
-              }
-            };
-            _switchResult = ObjectExtensions.<JvmGenericType>operator_doubleArrow(_createJvmGenericType, _function);
-            break;
-          case TypeDeclaration.ENUM_DECL:
-            _switchResult = TypesFactory.eINSTANCE.createJvmEnumerationType();
-            break;
-          case TypeDeclaration.ANNOTATION_TYPE_DECL:
-            _switchResult = TypesFactory.eINSTANCE.createJvmAnnotationType();
-            break;
-        }
-        final JvmDeclaredType jvmType = _switchResult;
-        String _string = result.currentPackage.toString();
-        jvmType.setPackageName(_string);
-        String _valueOf = String.valueOf(type.name);
-        jvmType.setSimpleName(_valueOf);
-        if ((jvmType instanceof JvmGenericType)) {
-          boolean _notEquals = (!Objects.equal(type.typeParameters, null));
-          if (_notEquals) {
-            for (final TypeParameter typeParam : type.typeParameters) {
-              {
-                final JvmTypeParameter jvmTypeParam = TypesFactory.eINSTANCE.createJvmTypeParameter();
-                String _valueOf_1 = String.valueOf(typeParam.name);
-                jvmTypeParam.setName(_valueOf_1);
-                EList<JvmTypeParameter> _typeParameters = ((JvmGenericType)jvmType).getTypeParameters();
-                _typeParameters.add(jvmTypeParam);
-              }
-            }
+        char[][] _importName = result.currentPackage.getImportName();
+        final Function1<char[], String> _function = new Function1<char[], String>() {
+          @Override
+          public String apply(final char[] it) {
+            return String.valueOf(it);
           }
-        }
+        };
+        List<String> _map = ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(_importName)), _function);
+        final String packageName = IterableExtensions.join(_map, ".");
+        final JvmDeclaredType jvmType = this.createType(type, packageName);
         EList<EObject> _contents = resource.getContents();
         _contents.add(jvmType);
       }
     }
+  }
+  
+  public JvmDeclaredType createType(final TypeDeclaration type, final String packageName) {
+    JvmDeclaredType _switchResult = null;
+    int _kind = TypeDeclaration.kind(type.modifiers);
+    switch (_kind) {
+      case TypeDeclaration.CLASS_DECL:
+        _switchResult = TypesFactory.eINSTANCE.createJvmGenericType();
+        break;
+      case TypeDeclaration.INTERFACE_DECL:
+        JvmGenericType _createJvmGenericType = TypesFactory.eINSTANCE.createJvmGenericType();
+        final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+          @Override
+          public void apply(final JvmGenericType it) {
+            it.setInterface(true);
+          }
+        };
+        _switchResult = ObjectExtensions.<JvmGenericType>operator_doubleArrow(_createJvmGenericType, _function);
+        break;
+      case TypeDeclaration.ENUM_DECL:
+        _switchResult = TypesFactory.eINSTANCE.createJvmEnumerationType();
+        break;
+      case TypeDeclaration.ANNOTATION_TYPE_DECL:
+        _switchResult = TypesFactory.eINSTANCE.createJvmAnnotationType();
+        break;
+    }
+    final JvmDeclaredType jvmType = _switchResult;
+    jvmType.setPackageName(packageName);
+    String _valueOf = String.valueOf(type.name);
+    jvmType.setSimpleName(_valueOf);
+    if ((jvmType instanceof JvmGenericType)) {
+      boolean _notEquals = (!Objects.equal(type.typeParameters, null));
+      if (_notEquals) {
+        for (final TypeParameter typeParam : type.typeParameters) {
+          {
+            final JvmTypeParameter jvmTypeParam = TypesFactory.eINSTANCE.createJvmTypeParameter();
+            String _valueOf_1 = String.valueOf(typeParam.name);
+            jvmTypeParam.setName(_valueOf_1);
+            EList<JvmTypeParameter> _typeParameters = ((JvmGenericType)jvmType).getTypeParameters();
+            _typeParameters.add(jvmTypeParam);
+          }
+        }
+      }
+    }
+    boolean _notEquals_1 = (!Objects.equal(type.memberTypes, null));
+    if (_notEquals_1) {
+      for (final TypeDeclaration nestedType : type.memberTypes) {
+        {
+          final JvmDeclaredType nested = this.createType(nestedType, null);
+          EList<JvmMember> _members = jvmType.getMembers();
+          _members.add(nested);
+        }
+      }
+    }
+    return jvmType;
   }
   
   public ICompilationUnit getCompilationUnit(final Resource resource) {
@@ -202,11 +226,6 @@ public class JavaDerivedStateComputer {
           compilerOptions.targetJDK = jdkVersion;
           compilerOptions.inlineJsrBytecode = true;
           compilerOptions.sourceLevel = jdkVersion;
-          compilerOptions.produceMethodParameters = true;
-          compilerOptions.produceDebugAttributes = (((ClassFileConstants.ATTR_SOURCE | 
-            ClassFileConstants.ATTR_LINES) | 
-            ClassFileConstants.ATTR_VARS) | 
-            ClassFileConstants.ATTR_METHOD_PARAMETERS);
           try {
             Field _field = CompilerOptions.class.getField("originalSourceLevel");
             _field.setLong(compilerOptions, jdkVersion);
