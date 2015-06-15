@@ -2,12 +2,14 @@ package org.eclipse.xtext.java.resource
 
 import com.google.inject.Inject
 import java.util.Arrays
+import java.util.List
 import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.jdt.internal.compiler.CompilationResult
 import org.eclipse.jdt.internal.compiler.Compiler
 import org.eclipse.jdt.internal.compiler.DefaultErrorHandlingPolicies
+import org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration
 import org.eclipse.jdt.internal.compiler.ast.TypeDeclaration
 import org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants
 import org.eclipse.jdt.internal.compiler.env.ICompilationUnit
@@ -21,14 +23,14 @@ import org.eclipse.xtext.common.types.access.binary.BinaryClass
 import org.eclipse.xtext.common.types.access.binary.asm.ClassFileBytesAccess
 import org.eclipse.xtext.common.types.access.binary.asm.JvmDeclaredTypeBuilder
 import org.eclipse.xtext.common.types.descriptions.EObjectDescriptionBasedStubGenerator
+import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
-import org.eclipse.xtext.xbase.jvmmodel.JvmElementsProxifyingUnloader
-import java.util.List
+import org.eclipse.xtext.common.types.JvmDeclaredType
 
 class JavaDerivedStateComputer {
 	
-	@Inject JvmElementsProxifyingUnloader unloader;
+	@Inject IReferableElementsUnloader unloader;
 	@Inject EObjectDescriptionBasedStubGenerator stubGenerator
 	
 	def discardDerivedState(Resource resource) {
@@ -57,32 +59,43 @@ class JavaDerivedStateComputer {
 		val compilationResult = new CompilationResult(compilationUnit, 0, 1, -1)
 		val result = parser.dietParse(compilationUnit, compilationResult)
 		for (type : result.types) {
-			val jvmType = switch (TypeDeclaration.kind(type.modifiers)) {
-				case TypeDeclaration.CLASS_DECL :
-					TypesFactory.eINSTANCE.createJvmGenericType
-				case TypeDeclaration.INTERFACE_DECL :
-					TypesFactory.eINSTANCE.createJvmGenericType => [
-						interface = true
-					]
-				case TypeDeclaration.ENUM_DECL :
-					TypesFactory.eINSTANCE.createJvmEnumerationType
-				case TypeDeclaration.ANNOTATION_TYPE_DECL :
-					TypesFactory.eINSTANCE.createJvmAnnotationType
-			}
-			//TODO nested types
-			jvmType.packageName = result.currentPackage.toString
-			jvmType.simpleName = String.valueOf(type.name)
-			if (jvmType instanceof JvmGenericType) {
-				if (type.typeParameters != null) {
-					for (typeParam : type.typeParameters) {
-						val jvmTypeParam = TypesFactory.eINSTANCE.createJvmTypeParameter
-						jvmTypeParam.name = String.valueOf(typeParam.name)
-						jvmType.typeParameters += jvmTypeParam
-					}
-				}
-			}
+			val packageName = result.currentPackage.importName.map[String.valueOf(it)].join('.')
+			val jvmType = createType(type, packageName)
 			resource.contents.add(jvmType)
 		}
+	}
+	
+	def JvmDeclaredType createType(TypeDeclaration type, String packageName) {
+		val jvmType = switch (TypeDeclaration.kind(type.modifiers)) {
+			case TypeDeclaration.CLASS_DECL :
+				TypesFactory.eINSTANCE.createJvmGenericType
+			case TypeDeclaration.INTERFACE_DECL :
+				TypesFactory.eINSTANCE.createJvmGenericType => [
+					interface = true
+				]
+			case TypeDeclaration.ENUM_DECL :
+				TypesFactory.eINSTANCE.createJvmEnumerationType
+			case TypeDeclaration.ANNOTATION_TYPE_DECL :
+				TypesFactory.eINSTANCE.createJvmAnnotationType
+		}
+		jvmType.packageName = packageName
+		jvmType.simpleName = String.valueOf(type.name)
+		if (jvmType instanceof JvmGenericType) {
+			if (type.typeParameters != null) {
+				for (typeParam : type.typeParameters) {
+					val jvmTypeParam = TypesFactory.eINSTANCE.createJvmTypeParameter
+					jvmTypeParam.name = String.valueOf(typeParam.name)
+					jvmType.typeParameters += jvmTypeParam
+				}
+			}
+		}
+		if (type.memberTypes != null) {
+			for (nestedType : type.memberTypes) {
+				val nested = createType(nestedType, null)
+				jvmType.members += nested
+			}
+		}
+		return jvmType
 	}
 	
 	//TODO make this return type inferred and do a full build in this project to see a bug
@@ -122,11 +135,6 @@ class JavaDerivedStateComputer {
 			compilerOptions.targetJDK = jdkVersion
 			compilerOptions.inlineJsrBytecode = true
 			compilerOptions.sourceLevel = jdkVersion
-			compilerOptions.produceMethodParameters = true
-			compilerOptions.produceDebugAttributes = ClassFileConstants.ATTR_SOURCE.bitwiseOr(
-													 ClassFileConstants.ATTR_LINES).bitwiseOr(
-													 ClassFileConstants.ATTR_VARS).bitwiseOr(
-													 ClassFileConstants.ATTR_METHOD_PARAMETERS)
 			// these fields have been introduces in JDT 3.7
 			try {
 				CompilerOptions.getField("originalSourceLevel").setLong(compilerOptions, jdkVersion)
