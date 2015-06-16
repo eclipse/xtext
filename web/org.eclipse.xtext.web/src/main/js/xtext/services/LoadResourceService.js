@@ -8,8 +8,8 @@
 
 define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 	
-	function LoadResourceService(serverUrl, resourceUri) {
-		this.initialize(serverUrl, resourceUri, "load");
+	function LoadResourceService(serverUrl, resourceId) {
+		this.initialize(serverUrl, resourceId, "load");
 	};
 
 	LoadResourceService.prototype = new AbstractXtextService();

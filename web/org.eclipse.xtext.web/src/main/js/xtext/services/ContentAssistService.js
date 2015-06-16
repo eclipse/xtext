@@ -8,8 +8,8 @@
 
 define(["xtext/services/AbstractXtextService", "jquery"], function(AbstractXtextService, jQuery) {
 
-	function ContentAssistService(serverUrl, resourceUri) {
-		this.initialize(serverUrl, resourceUri, "content-assist");
+	function ContentAssistService(serverUrl, resourceId) {
+		this.initialize(serverUrl, resourceId, "content-assist");
 	}
 
 	ContentAssistService.prototype = new AbstractXtextService();

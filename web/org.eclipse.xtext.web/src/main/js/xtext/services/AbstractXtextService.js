@@ -12,12 +12,12 @@ define(["jquery"], function(jQuery) {
 
 	AbstractXtextService.prototype = {
 		
-		initialize : function(serverUrl, resourceUri, requestType) {
+		initialize : function(serverUrl, resourceId, requestType) {
 			this._requestType = requestType;
-			if (resourceUri === undefined) {
+			if (resourceId === undefined) {
 				this._requestUrl = serverUrl + "/" + requestType;
 			} else {
-				this._requestUrl = serverUrl + "/" + requestType + "?resource=" + encodeURIComponent(resourceUri);
+				this._requestUrl = serverUrl + "/" + requestType + "?resource=" + encodeURIComponent(resourceId);
 			}
 			this._recursionCount = 0;
 		},

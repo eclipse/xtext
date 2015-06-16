@@ -35,6 +35,10 @@ define(function() {
 	};
 
 	MockEditorContext.prototype = {
+			
+		getEditor : function() {
+			return this;
+		},
 		
 		getServerState : function() {
 			return this._serverState;
@@ -55,7 +59,7 @@ define(function() {
 		},
 		
 		triggerModelChange : function(text, start, end) {
-			this._setText(text, start, end);
+			this.setText(text, start, end);
 			for (var i in this._modelChangeListeners) {
 				var listener = this._modelChangeListeners[i];
 				listener(text);

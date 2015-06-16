@@ -8,8 +8,8 @@
 
 define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 	
-	function UpdateService(serverUrl, resourceUri) {
-		this.initialize(serverUrl, resourceUri, "update");
+	function UpdateService(serverUrl, resourceId) {
+		this.initialize(serverUrl, resourceId, "update");
 		this.setUpdateService(this);
 		this._completionCallbacks = [];
 	};
