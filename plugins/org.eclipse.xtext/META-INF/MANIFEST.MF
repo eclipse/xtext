@@ -77,6 +77,7 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.util,
  org.eclipse.xtext.validation,
  org.eclipse.xtext.validation.impl,
+ org.eclipse.xtext.workspace;x-internal:=true,
  org.eclipse.xtext.xtext;x-friends:="org.eclipse.xtext.xtext.ui",
  org.eclipse.xtext.xtext.ecoreInference;x-internal:=true
 Require-Bundle: org.eclipse.emf.ecore.xmi;bundle-version="2.10.2";visibility:=reexport,

@@ -11,14 +11,23 @@ import static com.google.common.collect.Sets.*;
 
 import java.util.Set;
 
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.Constants;
+
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.1
  */
 public class OutputConfigurationProvider implements IOutputConfigurationProvider, IContextualOutputConfigurationProvider {
-
+	@Inject
+	@Named(Constants.LANGUAGE_NAME)
+	private String languageName;
 	/**
 	 * @return a set of {@link OutputConfiguration} available for the generator
 	 */
@@ -40,6 +49,13 @@ public class OutputConfigurationProvider implements IOutputConfigurationProvider
 	 */
 	@Override
 	public Set<OutputConfiguration> getOutputConfigurations(Resource context) {
-		return getOutputConfigurations();
+		EList<Adapter> adapters = context.getResourceSet().eAdapters();
+		OutputConfigurationAdapter adapter = (OutputConfigurationAdapter) EcoreUtil.getAdapter(adapters, OutputConfigurationAdapter.class);
+		if (adapter == null) {
+			return getOutputConfigurations();
+		} else {
+			Set<OutputConfiguration> outputConfigurations = adapter.getOutputConfigurationsPerLanguage().get(languageName);
+			return outputConfigurations == null ? getOutputConfigurations() : outputConfigurations;
+		}
 	}
 }
