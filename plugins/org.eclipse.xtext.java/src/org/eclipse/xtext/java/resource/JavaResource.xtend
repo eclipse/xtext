@@ -10,6 +10,7 @@ import java.util.Map
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.InternalEObject
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.jdt.internal.compiler.batch.CompilationUnit
@@ -20,8 +21,12 @@ import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.CompilerPhases
+import org.eclipse.xtext.resource.ISynchronizable
+import org.eclipse.xtext.util.concurrent.IUnitOfWork
 
-class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver {
+class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver, ISynchronizable<JavaResource> {
+	
+	public static final String OPTION_ENCODING = JavaResource.name + ".DEFAULT_ENCODING"
 	
 	static class Factory implements Resource.Factory {
 		
@@ -41,10 +46,19 @@ class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver {
 	CompilationUnit compilationUnit
 	
 	override protected doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
-		// add a dummy eobject as root
-		val encoding = encodingProvider.getEncoding(getURI)
+		val encoding = getEncoding(getURI, options)
 		val contentsAsString = CharStreams.toString(new InputStreamReader(inputStream, encoding))
 		compilationUnit = new CompilationUnit(contentsAsString.toCharArray, URI.lastSegment, encoding)
+	}
+	
+	protected def getEncoding(URI uri, Map<?, ?> options) {
+		if (options != null) {
+			val encodingOption = options.get(OPTION_ENCODING);
+			if (encodingOption instanceof String) {
+				return encodingOption;
+			}
+		}
+		return encodingProvider.getEncoding(uri)
 	}
 	
 	protected def getCompilationUnit() {
@@ -57,26 +71,28 @@ class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver {
 	private boolean isInitializing = false;
 	
 	override getContents() {
-		if (isInitializing)
-			return super.getContents();
-		try {
-			isInitializing = true
-			// already in the correct state
-			val isIndexing = compilerPhases.isIndexing(this)
-			if (!isIndexing && !isFullyInitialized) {
-				derivedStateComputer.discardDerivedState(this);
-				derivedStateComputer.installFull(this);
-				isFullyInitialized = true
-				isInitialized = true
-			} else if (isIndexing && !isInitialized) {
-				derivedStateComputer.installStubs(this)
-				isFullyInitialized = false
-				isInitialized = true
+		synchronized (getLock()) {
+			if (isInitializing)
+				return super.getContents();
+			try {
+				isInitializing = true
+				// already in the correct state
+				val isIndexing = compilerPhases.isIndexing(this)
+				if (!isIndexing && !isFullyInitialized) {
+					derivedStateComputer.discardDerivedState(this);
+					derivedStateComputer.installFull(this);
+					isFullyInitialized = true
+					isInitialized = true
+				} else if (isIndexing && !isInitialized) {
+					derivedStateComputer.installStubs(this)
+					isFullyInitialized = false
+					isInitialized = true
+				}
+			} finally {
+				isInitializing = false;
 			}
-		} finally {
-			isInitializing = false;
+			return super.getContents();
 		}
-		return super.getContents();
 	}
 	
 	override resolveJavaObjectURIProxy(InternalEObject proxy, JvmTypeReference sender) {
@@ -94,10 +110,30 @@ class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver {
 	def IndexedJvmTypeAccess getIndexJvmTypeAccess() {
 		if (_access == null) {
 			val provider = resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap().get(URIHelperConstants.PROTOCOL)
-			val field = AbstractJvmTypeProvider.getDeclaredField('indexedJvmTypeAccess') => [accessible=true]
-			_access = field.get(provider) as IndexedJvmTypeAccess 
+			if (provider instanceof AbstractJvmTypeProvider) {
+				_access = provider.indexedJvmTypeAccess
+			}
 		}
 		return _access
+	}
+	
+	
+	/** 
+	 * Returns the lock of the owning {@link ResourceSet}, if it exposes such a lock.
+	 * Otherwise this resource itself is used as the lock context.
+	 */
+	override Object getLock() {
+		var resourceSet = getResourceSet() 
+		if (resourceSet instanceof ISynchronizable<?>) {
+			return (resourceSet as ISynchronizable<?>).getLock() 
+		}
+		return this 
+	}
+	
+	override <Result>Result execute(/* @NonNull */IUnitOfWork<Result, ? super JavaResource> unit) throws Exception {
+		synchronized (getLock()) {
+			return unit.exec(this) 
+		}
 	}
 	
 }

@@ -34,7 +34,7 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 		var NameEnvironmentAnswer result = null 
 		if (candidate != null) {
 			val source = stubGenerator.getJavaStubSource(candidate)
-			result = new NameEnvironmentAnswer(new CompilationUnit(source.toCharArray, className.toString('/')+'.java', 'UTF-8'), null)
+			result = new NameEnvironmentAnswer(new CompilationUnit(source.toCharArray, className.toString('/')+'.java', null), null)
 		} else {
 			val fileName = className.toString('/') + ".class"
 			if (cache.containsKey(fileName)) {
