@@ -20,7 +20,6 @@ import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuperSu
 import org.eclipse.xtext.common.types.testSetups.ClassWithVarArgs
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.resource.FileExtensionProvider
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.junit.Test
@@ -32,7 +31,6 @@ class ReusedTypeProviderTest extends AbstractTypeProviderTest {
 	
 	@Inject IncrementalBuilder builder
 	@Inject IResourceServiceProvider.Registry resourceServiceProviderRegistry
-	@Inject FileExtensionProvider extensionProvider 
 	@Inject IJvmTypeProvider.Factory typeProviderFactory
 	@Inject Provider<XtextResourceSet> resourceSetProvider
 	
