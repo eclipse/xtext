@@ -8,8 +8,8 @@
 
 define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 	
-	function RevertResourceService(serverUrl, resourceUri) {
-		this.initialize(serverUrl, resourceUri, "revert");
+	function RevertResourceService(serverUrl, resourceId) {
+		this.initialize(serverUrl, resourceId, "revert");
 	};
 
 	RevertResourceService.prototype = new AbstractXtextService();

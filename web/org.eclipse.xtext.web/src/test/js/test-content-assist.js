@@ -18,16 +18,173 @@ requirejs.config({
 });
 
 suite('content-assist', function() {
+	
 	test('should return the proposals sent by the server', function(done) {
 		requirejs(['assert', 'jquery', 'xtext/xtext-test'], function(assert, jQuery, xtext) {
 			jQuery.mockAjax({
-				result: {entries: [{proposal: 'foo'}]}
+				listener: function(url, settings) {
+					assert.equal('GET', settings.type);
+					assert.equal(0, settings.data.caretOffset);
+				},
+				result: {entries: [{proposal: 'bar'}]}
 			});
-			var editorContext = xtext.createEditor();
-			editorContext.invokeXtextService('content-assist').done(function(proposals) {
-				assert.equal('foo', proposals[0].proposal);
+			var editor = xtext.createEditor();
+			editor.invokeXtextService('content-assist').done(function(proposals) {
+				assert.equal('bar', proposals[0].proposal);
 				done();
 			});
 		});
 	});
+	
+	test('should send the full text when requested', function(done) {
+		requirejs(['assert', 'jquery', 'xtext/xtext-test'], function(assert, jQuery, xtext) {
+			jQuery.mockAjax({
+				listener: function(url, settings) {
+					assert.equal('foo', settings.data.fullText);
+					assert.equal(3, settings.data.caretOffset);
+					assert.equal('POST', settings.type);
+					done();
+				},
+				result: {entries: []}
+			});
+			var editor = xtext.createEditor({sendFullText: true});
+			editor.setText('foo');
+			editor.setCaretOffset(3);
+			editor.invokeXtextService('content-assist');
+		});
+	});
+	
+	test('should send a delta text when necessary', function(done) {
+		requirejs(['assert', 'jquery', 'xtext/xtext-test'], function(assert, jQuery, xtext) {
+			jQuery.mockAjax({
+				listener: function(url, settings) {
+					assert.equal('foo', settings.data.deltaText);
+					assert.equal(3, settings.data.caretOffset);
+					assert.equal('POST', settings.type);
+					done();
+				},
+				result: {stateId: '1', entries: []}
+			});
+			var editor = xtext.createEditor();
+			editor.setText('foo');
+			editor.setCaretOffset(3);
+			editor.invokeXtextService('content-assist');
+		});
+	});
+	
+	test('should trigger server state listeners after an update', function(done) {
+		requirejs(['assert', 'jquery', 'xtext/xtext-test'], function(assert, jQuery, xtext) {
+			jQuery.mockAjax({
+				result: {stateId: '1', entries: []}
+			});
+			var editor = xtext.createEditor();
+			editor.addServerStateListener(function() {
+				var serverState = editor.getServerState();
+				assert.equal('1', serverState.stateId);
+				assert.equal('foo', serverState.text);
+				done();
+			})
+			editor.setText('foo');
+			editor.invokeXtextService('content-assist');
+		});
+	});
+	
+	test('should try again when conflict occurs', function(done) {
+		requirejs(['assert', 'jquery', 'xtext/xtext-test'], function(assert, jQuery, xtext) {
+			var trace = '';
+			jQuery.mockAjax([
+				{
+					listener: function(url, settings) {
+						assert.equal('foo', settings.data.deltaText);
+						trace += 'a';
+					},
+					result: {conflict: 'invalidStateId'}
+				}, {
+					listener: function(url, settings) {
+						assert.equal('foo', settings.data.fullText);
+						trace += 'b';
+					},
+					result: {entries: [{proposal: 'bar'}]}
+				}
+			]);
+			var editor = xtext.createEditor();
+			editor.setText('foo');
+			editor.invokeXtextService('content-assist').done(function(proposals) {
+				assert.equal('bar', proposals[0].proposal);
+				assert.equal('ab', trace);
+				done();
+			});
+		});
+	});
+	
+	test('should try again when resource is not found', function(done) {
+		requirejs(['assert', 'jquery', 'xtext/xtext-test'], function(assert, jQuery, xtext) {
+			var trace = '';
+			jQuery.mockAjax([
+				{
+					listener: function(url, settings) {
+						assert.equal('test://xtext-service/content-assist', url);
+						trace += 'a';
+					},
+					errorThrown: 'Resource not found',
+					xhr: {status: 404}
+				}, {
+					listener: function(url, settings) {
+						assert.equal('test://xtext-service/update', url);
+						assert.equal('foo', settings.data.fullText);
+						trace += 'b';
+					},
+					result: {stateId: '1'}
+				}, {
+					listener: function(url, settings) {
+						assert.equal('test://xtext-service/content-assist', url);
+						assert.equal('1', settings.data.requiredStateId);
+						trace += 'c';
+					},
+					result: {entries: [{proposal: 'bar'}]}
+				}
+			]);
+			var editor = xtext.createEditor();
+			editor.setText('foo');
+			editor.invokeXtextService('content-assist').done(function(proposals) {
+				assert.equal('bar', proposals[0].proposal);
+				assert.equal('abc', trace);
+				done();
+			});
+		});
+	});
+	
+	test('should wait until pending update completes', function(done) {
+		requirejs(['assert', 'jquery', 'xtext/xtext-test'], function(assert, jQuery, xtext) {
+			var trace = '';
+			jQuery.mockAjax([
+				{
+					listener: function(url, settings) {
+						assert.equal('test://xtext-service/update', url);
+						trace += 'a';
+					},
+					wait: true,
+					result: {stateId: '1'}
+				}, {
+					listener: function(url, settings) {
+						assert.equal('test://xtext-service/content-assist', url);
+						assert.equal('1', settings.data.requiredStateId);
+						trace += 'c';
+					},
+					result: {entries: [{proposal: 'bar'}]}
+				}
+			]);
+			var editor = xtext.createEditor();
+			editor.triggerModelChange('foo');
+			editor.invokeXtextService('content-assist').done(function(proposals) {
+				assert.equal('bar', proposals[0].proposal);
+				assert.equal('abc', trace);
+				done();
+			});
+			trace += 'b';
+			// Respond to the update request, then start the content assist request
+			jQuery.giveNextResponse();
+		});
+	});
+	
 });

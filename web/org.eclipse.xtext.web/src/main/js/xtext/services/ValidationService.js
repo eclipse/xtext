@@ -8,8 +8,8 @@
 
 define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 	
-	function ValidationService(serverUrl, resourceUri) {
-		this.initialize(serverUrl, resourceUri, "validation");
+	function ValidationService(serverUrl, resourceId) {
+		this.initialize(serverUrl, resourceId, "validation");
 	};
 	
 	ValidationService.prototype = new AbstractXtextService();

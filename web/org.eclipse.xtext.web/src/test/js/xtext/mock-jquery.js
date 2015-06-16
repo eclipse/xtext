@@ -30,39 +30,58 @@ define(function() {
 		return result;
 	}
 	
-	var mockOptions;
+	var ajaxOptionsArray;
 	
 	function mockAjax(options) {
-		mockOptions = options;
+		if (Array.isArray(options))
+			ajaxOptionsArray = options;
+		else
+			ajaxOptionsArray = [options];
+	}
+	
+	var nextResponses = [];
+	
+	function ajax(url, settings) {
+		if (ajaxOptionsArray.length == 0)
+			return;
+		
+		var mockOptions = ajaxOptionsArray.shift();
 		if (mockOptions.result)
 			mockOptions.success = true;
 		else if (mockOptions.errorThrown)
 			mockOptions.success = false;
-	}
-	
-	function ajax(url, settings) {
+		
 		if (isFunction(mockOptions.listener))
 			mockOptions.listener(url, settings);
 		
 		function asyncAjax() {
-			var xhr = {};
+			var xhr = mockOptions.xhr ? mockOptions.xhr : {};
 			if (mockOptions.success)
 				settings.success(mockOptions.result);
 			else
 				settings.error(xhr, 'error', mockOptions.errorThrown);
 			settings.complete(xhr, mockOptions.success ? 'success' : 'error');
 		}
-		if (settings.async)
-			setTimeout(asyncAjax, 50);
+		
+		if (mockOptions.wait)
+			nextResponses.push(asyncAjax);
+		else if (settings.async)
+			setTimeout(asyncAjax, 20);
 		else
 			asyncAjax();
+	}
+	
+	function giveNextResponse() {
+		var response = nextResponses.shift();
+		response();
 	}
 	
 	return {
 		isFunction: isFunction,
 		Deferred: Deferred,
 		mockAjax: mockAjax,
-		ajax: ajax
+		ajax: ajax,
+		giveNextResponse: giveNextResponse
 	};
 });
 
