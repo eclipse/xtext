@@ -4,13 +4,12 @@ configurations {
 
 dependencies {
 	compile project(":plugins:org.eclipse.xtext.ide")
-	compile project(":plugins:org.eclipse.xtext.common.types")
+	compile project(":plugins:org.eclipse.xtext.xbase")
 	compile project(":plugins:org.eclipse.xtend.lib.macro")
 	compile project(':plugins:org.eclipse.xtext.generator')
 	compile project(':plugins:org.eclipse.xtext.ecore')
 	compile project(':plugins:org.eclipse.xtext.builder.standalone')
 
-	builder project(':intellij:org.eclipse.xtext.idea.builder')
 	builder "org.ow2.asm:asm:5.0.3"
 }
 
