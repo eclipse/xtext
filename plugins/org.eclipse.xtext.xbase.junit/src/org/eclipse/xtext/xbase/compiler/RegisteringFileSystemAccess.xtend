@@ -10,8 +10,7 @@ package org.eclipse.xtext.xbase.compiler
 import java.util.Set
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.Data
-import org.eclipse.xtend.lib.macro.file.Path
-import org.eclipse.xtext.generator.FileSystemSupportBasedFileSystemAccess
+import org.eclipse.xtext.generator.InMemoryFileSystemAccess
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -20,22 +19,31 @@ import org.eclipse.xtext.generator.FileSystemSupportBasedFileSystemAccess
  * 
  * @since 2.7
  */
-class RegisteringFileSystemAccess extends FileSystemSupportBasedFileSystemAccess {
-	
+class RegisteringFileSystemAccess extends InMemoryFileSystemAccess { 
+
+	/**
+	 * @noreference This class is not intended to be referenced by clients.
+	 */
 	@Data static class GeneratedFile {
-		Path path
+		String path
 		String javaClassName
 		CharSequence contents
 	}
-	
-	@Accessors val Set<RegisteringFileSystemAccess.GeneratedFile> textFiles = newHashSet()
+	@Accessors val Set<GeneratedFile> generatedFiles = newHashSet()
+	@Accessors String projectName;
 	
 	override generateFile(String fileName, String outputConfigurationName, CharSequence contents) {
 		super.generateFile(fileName, outputConfigurationName, contents)
 		val path = getPath(fileName, outputConfigurationName)
 		val javaName = if (fileName.endsWith(".java")) {
-			fileName.substring(0, fileName.length-5).replace('/','.')
-		}
-		textFiles.add(new RegisteringFileSystemAccess.GeneratedFile(path, javaName, contents))
+				fileName.substring(0, fileName.length - 5).replace('/', '.')
+			}
+		generatedFiles.add(new RegisteringFileSystemAccess.GeneratedFile(path, javaName, contents))
 	}
+
+	protected def getPath(String fileName, String outputConfigurationName) {
+		val path = pathes.get(outputConfigurationName)
+		return "/" + projectName + "/" + path + "/" + fileName
+	}
+	
 }

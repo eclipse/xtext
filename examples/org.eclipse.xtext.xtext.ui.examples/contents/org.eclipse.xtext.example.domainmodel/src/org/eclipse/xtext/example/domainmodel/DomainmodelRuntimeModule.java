@@ -8,8 +8,6 @@
 package org.eclipse.xtext.example.domainmodel;
 
 import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
-import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
-import org.eclipse.xtext.xbase.file.JavaIOFileSystemSupport;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResourceStorageFacade;
 
 
@@ -20,9 +18,5 @@ public class DomainmodelRuntimeModule extends AbstractDomainmodelRuntimeModule {
 	
 	public Class<? extends IResourceStorageFacade> bindResourceStorageFacade() {
 		return BatchLinkableResourceStorageFacade.class;
-	}
-	
-	public Class<? extends AbstractFileSystemSupport> bindAbstractFileSystemSupport() {
-		return JavaIOFileSystemSupport.class;
 	}
 }

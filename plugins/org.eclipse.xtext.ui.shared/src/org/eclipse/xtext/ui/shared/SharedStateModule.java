@@ -21,14 +21,12 @@ import org.eclipse.xtext.common.types.xtext.ui.JdtAwareProjectByResourceProvider
 import org.eclipse.xtext.common.types.xtext.ui.ProjectAwareResourceDescriptionsProvider;
 import org.eclipse.xtext.generator.IDerivedResourceMarkers;
 import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
-import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.LiveShadowedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
-import org.eclipse.xtext.ui.generator.trace.ExtensibleTraceURIConverter;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions;
@@ -65,13 +63,6 @@ public class SharedStateModule extends AbstractGenericModule {
 	 */
 	public Provider<StorageAwareTrace> provideStorageAwareTrace() {
 		return Access.provider(StorageAwareTrace.class);
-	}
-	
-	/**
-	 * @since 2.4
-	 */
-	public Provider<ITraceURIConverter> provideDefaultTraceURIConverter() {
-		return Access.<ITraceURIConverter>provider(ExtensibleTraceURIConverter.class);
 	}
 
 	public Provider<IStateChangeEventBroker> provideIStateChangeEventBroker() {
