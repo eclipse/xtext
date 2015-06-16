@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.tests.macro;
 
+import com.google.common.base.Objects;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.CodeGenerationContext;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
@@ -21,12 +22,9 @@ public class __GeneratedSourceModifingAnnotationProcessor extends AbstractClassP
   public void doGenerateCode(final ClassDeclaration annotatedClass, @Extension final CodeGenerationContext context) {
     CompilationUnit _compilationUnit = annotatedClass.getCompilationUnit();
     Path _filePath = _compilationUnit.getFilePath();
-    Path _targetFolder = context.getTargetFolder(_filePath);
-    String _qualifiedName = annotatedClass.getQualifiedName();
-    String _replace = _qualifiedName.replace(".", "/");
-    String _plus = (_replace + ".java");
-    final Path targetFile = _targetFolder.append(_plus);
-    boolean _exists = context.exists(targetFile);
-    Assert.assertTrue(_exists);
+    final Path targetFolder = context.getTargetFolder(_filePath);
+    String _lastSegment = targetFolder.getLastSegment();
+    boolean _equals = Objects.equal(_lastSegment, "xtend-gen");
+    Assert.assertTrue(_equals);
   }
 }

@@ -11,16 +11,16 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.List;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtend.lib.macro.file.FileLocations;
-import org.eclipse.xtend.lib.macro.file.Path;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.persistence.ResourceStorageFacade;
 import org.eclipse.xtext.resource.persistence.ResourceStorageLoadable;
 import org.eclipse.xtext.resource.persistence.ResourceStorageWritable;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
-import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
-import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.workspace.ISourceFolder;
+import org.eclipse.xtext.workspace.IWorkspaceConfig;
+import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
+import org.eclipse.xtext.workspace.WorkspaceConfigUtil;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResourceStorageLoadable;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResourceStorageWritable;
 
@@ -30,11 +30,7 @@ import org.eclipse.xtext.xbase.resource.BatchLinkableResourceStorageWritable;
 @SuppressWarnings("all")
 public class BatchLinkableResourceStorageFacade extends ResourceStorageFacade {
   @Inject
-  private AbstractFileSystemSupport fileSystemSupport;
-  
-  @Inject
-  @Extension
-  private FileLocations fileLocations;
+  private IWorkspaceConfigProvider workspaceConfigProvider;
   
   @Override
   public ResourceStorageLoadable createResourceStorageLoadable(final InputStream in) {
@@ -50,16 +46,13 @@ public class BatchLinkableResourceStorageFacade extends ResourceStorageFacade {
   
   @Override
   protected URI getSourceContainerURI(final StorageAwareResource resource) {
-    final Path path = this.fileSystemSupport.getPath(resource);
-    final Path sourceFolder = this.fileLocations.getSourceFolder(path);
+    ResourceSet _resourceSet = resource.getResourceSet();
+    final IWorkspaceConfig workspaceConfig = this.workspaceConfigProvider.getWorkspaceConfig(_resourceSet);
+    URI _uRI = resource.getURI();
+    final ISourceFolder sourceFolder = WorkspaceConfigUtil.getSourceFolderContaining(workspaceConfig, _uRI);
     boolean _notEquals = (!Objects.equal(sourceFolder, null));
     if (_notEquals) {
-      URI _uRI = resource.getURI();
-      Path _relativize = sourceFolder.relativize(path);
-      List<String> _segments = _relativize.getSegments();
-      int _size = _segments.size();
-      URI _trimSegments = _uRI.trimSegments(_size);
-      return _trimSegments.appendSegment("");
+      return sourceFolder.getPath();
     }
     return super.getSourceContainerURI(resource);
   }

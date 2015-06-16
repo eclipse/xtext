@@ -16,6 +16,10 @@ class RootModelExtensions {
 	public static def getSourceFolders(Module module) {
 		ModuleRootManager.getInstance(module).contentEntries.map[sourceFolders.toList].flatten
 	}
+	
+	public static def getExistingSourceFolders(Module module) {
+		module.sourceFolders.filter[file != null]
+	}
 
 	public static def getRelativePath(SourceFolder sourceFolder) {
 		VfsUtil.getRelativePath(sourceFolder.file, sourceFolder.contentEntry.file)

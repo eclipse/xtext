@@ -13,25 +13,22 @@ import com.google.inject.Inject;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.net.URI;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import org.apache.log4j.Level;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler;
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
-import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.logging.LoggingTester;
 import org.eclipse.xtext.junit4.smoketest.IgnoredBySmokeTest;
 import org.eclipse.xtext.util.Files;
-import org.eclipse.xtext.xbase.file.ProjectConfig;
-import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
-import org.eclipse.xtext.xbase.file.SimpleWorkspaceConfig;
-import org.eclipse.xtext.xbase.file.WorkspaceConfig;
+import org.eclipse.xtext.workspace.FileProjectConfig;
+import org.eclipse.xtext.workspace.FileSourceFolder;
+import org.eclipse.xtext.workspace.FileWorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -59,9 +56,6 @@ import org.junit.runner.RunWith;
 public class TestBatchCompiler {
   @Inject
   private XtendBatchCompiler batchCompiler;
-  
-  @Inject
-  private RuntimeWorkspaceConfigProvider workspaceConfigProvider;
   
   private static String OUTPUT_DIRECTORY_WITH_SPACES = "./test result";
   
@@ -113,7 +107,6 @@ public class TestBatchCompiler {
   @After
   public void onTearDown() {
     try {
-      this.workspaceConfigProvider.setWorkspaceConfig(null);
       File _file = new File(TestBatchCompiler.OUTPUT_DIRECTORY);
       Files.cleanFolder(_file, null, true, true);
       File _file_1 = new File(TestBatchCompiler.OUTPUT_DIRECTORY_WITH_SPACES);
@@ -204,31 +197,29 @@ public class TestBatchCompiler {
   @Test
   public void testWorkspaceConfig() {
     try {
-      boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
-      Assert.assertTrue(_configureWorkspace);
-      final WorkspaceConfig config = this.workspaceConfigProvider.get();
+      this.batchCompiler.compile();
+      final FileWorkspaceConfig config = this.batchCompiler.getWorkspaceConfig();
       File _file = new File("..");
       String _canonicalPath = _file.getCanonicalPath();
-      String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
-      Assert.assertEquals(_canonicalPath, _absoluteFileSystemPath);
-      Collection<? extends ProjectConfig> _projects = config.getProjects();
-      final ProjectConfig project = IterableExtensions.head(_projects);
+      URI _path = config.getPath();
+      String _fileString = _path.toFileString();
+      Assert.assertEquals(_canonicalPath, _fileString);
+      Set<FileProjectConfig> _projects = config.getProjects();
+      final FileProjectConfig project = IterableExtensions.<FileProjectConfig>head(_projects);
       File _file_1 = new File(".");
       File _canonicalFile = _file_1.getCanonicalFile();
-      String _name = _canonicalFile.getName();
-      final String projectPath = ("/" + _name);
-      Path _rootPath = project.getRootPath();
-      String _string = _rootPath.toString();
-      Assert.assertEquals(projectPath, _string);
-      Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
-      Set<Path> _keySet = _sourceFolderMappings.keySet();
-      final Path src = IterableExtensions.<Path>head(_keySet);
-      String _string_1 = src.toString();
-      Assert.assertEquals((projectPath + "/batch-compiler-data/test data"), _string_1);
-      Map<Path, Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
-      final Path target = _sourceFolderMappings_1.get(src);
-      String _string_2 = target.toString();
-      Assert.assertEquals((projectPath + "/test-result"), _string_2);
+      final String projectPath = _canonicalFile.getName();
+      String _name = project.getName();
+      Assert.assertEquals(projectPath, _name);
+      final OutputConfiguration output = this.batchCompiler.getOutputConfiguration();
+      Set<FileSourceFolder> _sourceFolders = project.getSourceFolders();
+      FileSourceFolder _head = IterableExtensions.<FileSourceFolder>head(_sourceFolders);
+      final String src = _head.getName();
+      String _string = src.toString();
+      Assert.assertEquals("batch-compiler-data/test data/", _string);
+      final String target = output.getOutputDirectory(src);
+      String _string_1 = target.toString();
+      Assert.assertEquals("test-result", _string_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -245,56 +236,52 @@ public class TestBatchCompiler {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("ws/prj1/bin");
       this.batchCompiler.setOutputPath(_builder_1.toString());
-      boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
-      Assert.assertTrue(_configureWorkspace);
-      final WorkspaceConfig config = this.workspaceConfigProvider.get();
+      this.batchCompiler.compile();
+      final FileWorkspaceConfig config = this.batchCompiler.getWorkspaceConfig();
       File _file = new File("ws");
       String _canonicalPath = _file.getCanonicalPath();
-      String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
-      Assert.assertEquals(_canonicalPath, _absoluteFileSystemPath);
-      Collection<? extends ProjectConfig> _projects = config.getProjects();
-      final ProjectConfig project = IterableExtensions.head(_projects);
-      Path _rootPath = project.getRootPath();
-      String _string = _rootPath.toString();
-      Assert.assertEquals("/prj1", _string);
-      Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
-      int _size = _sourceFolderMappings.size();
+      URI _path = config.getPath();
+      String _fileString = _path.toFileString();
+      Assert.assertEquals(_canonicalPath, _fileString);
+      Set<FileProjectConfig> _projects = config.getProjects();
+      final FileProjectConfig project = IterableExtensions.<FileProjectConfig>head(_projects);
+      String _name = project.getName();
+      Assert.assertEquals("prj1", _name);
+      final OutputConfiguration output = this.batchCompiler.getOutputConfiguration();
+      Set<FileSourceFolder> _sourceFolders = project.getSourceFolders();
+      int _size = _sourceFolders.size();
       Assert.assertEquals(2, _size);
-      Map<Path, Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
-      Set<Path> _keySet = _sourceFolderMappings_1.keySet();
-      final Function1<Path, String> _function = new Function1<Path, String>() {
+      Set<FileSourceFolder> _sourceFolders_1 = project.getSourceFolders();
+      final Function1<FileSourceFolder, String> _function = new Function1<FileSourceFolder, String>() {
         @Override
-        public String apply(final Path it) {
-          return it.getLastSegment();
+        public String apply(final FileSourceFolder it) {
+          return it.getName();
         }
       };
-      final List<Path> keyPaths = IterableExtensions.<Path, String>sortBy(_keySet, _function);
-      Path _get = keyPaths.get(0);
-      final Procedure1<Path> _function_1 = new Procedure1<Path>() {
+      Iterable<String> _map = IterableExtensions.<FileSourceFolder, String>map(_sourceFolders_1, _function);
+      final List<String> keyPaths = IterableExtensions.<String>sort(_map);
+      String _get = keyPaths.get(0);
+      final Procedure1<String> _function_1 = new Procedure1<String>() {
         @Override
-        public void apply(final Path it) {
-          String _string = it.toString();
-          Assert.assertEquals("/prj1/src", _string);
-          Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
-          Path _get = _sourceFolderMappings.get(it);
-          String _string_1 = _get.toString();
-          Assert.assertEquals("/prj1/bin", _string_1);
+        public void apply(final String it) {
+          Assert.assertEquals("src", it);
+          String _outputDirectory = output.getOutputDirectory(it);
+          String _string = _outputDirectory.toString();
+          Assert.assertEquals("bin", _string);
         }
       };
-      ObjectExtensions.<Path>operator_doubleArrow(_get, _function_1);
-      Path _get_1 = keyPaths.get(1);
-      final Procedure1<Path> _function_2 = new Procedure1<Path>() {
+      ObjectExtensions.<String>operator_doubleArrow(_get, _function_1);
+      String _get_1 = keyPaths.get(1);
+      final Procedure1<String> _function_2 = new Procedure1<String>() {
         @Override
-        public void apply(final Path it) {
-          String _string = it.toString();
-          Assert.assertEquals("/prj1/src-gen", _string);
-          Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
-          Path _get = _sourceFolderMappings.get(it);
-          String _string_1 = _get.toString();
-          Assert.assertEquals("/prj1/bin", _string_1);
+        public void apply(final String it) {
+          Assert.assertEquals("src-gen", it);
+          String _outputDirectory = output.getOutputDirectory(it);
+          String _string = _outputDirectory.toString();
+          Assert.assertEquals("bin", _string);
         }
       };
-      ObjectExtensions.<Path>operator_doubleArrow(_get_1, _function_2);
+      ObjectExtensions.<String>operator_doubleArrow(_get_1, _function_2);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -311,56 +298,50 @@ public class TestBatchCompiler {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("/tmp/ws/prj1/bin");
       this.batchCompiler.setOutputPath(_builder_1.toString());
-      boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
-      Assert.assertTrue(_configureWorkspace);
-      final WorkspaceConfig config = this.workspaceConfigProvider.get();
+      this.batchCompiler.compile();
+      final FileWorkspaceConfig config = this.batchCompiler.getWorkspaceConfig();
       File _file = new File("/tmp/ws");
       String _canonicalPath = _file.getCanonicalPath();
-      String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
-      Assert.assertEquals(_canonicalPath, _absoluteFileSystemPath);
-      Collection<? extends ProjectConfig> _projects = config.getProjects();
-      final ProjectConfig project = IterableExtensions.head(_projects);
-      Path _rootPath = project.getRootPath();
-      String _string = _rootPath.toString();
-      Assert.assertEquals("/prj1", _string);
-      Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
-      int _size = _sourceFolderMappings.size();
+      URI _path = config.getPath();
+      String _fileString = _path.toFileString();
+      Assert.assertEquals(_canonicalPath, _fileString);
+      Set<FileProjectConfig> _projects = config.getProjects();
+      final FileProjectConfig project = IterableExtensions.<FileProjectConfig>head(_projects);
+      String _name = project.getName();
+      Assert.assertEquals("prj1", _name);
+      final OutputConfiguration output = this.batchCompiler.getOutputConfiguration();
+      Set<FileSourceFolder> _sourceFolders = project.getSourceFolders();
+      int _size = _sourceFolders.size();
       Assert.assertEquals(2, _size);
-      Map<Path, Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
-      Set<Path> _keySet = _sourceFolderMappings_1.keySet();
-      final Function1<Path, String> _function = new Function1<Path, String>() {
+      Set<FileSourceFolder> _sourceFolders_1 = project.getSourceFolders();
+      final Function1<FileSourceFolder, String> _function = new Function1<FileSourceFolder, String>() {
         @Override
-        public String apply(final Path it) {
-          return it.getLastSegment();
+        public String apply(final FileSourceFolder it) {
+          return it.getName();
         }
       };
-      final List<Path> keyPaths = IterableExtensions.<Path, String>sortBy(_keySet, _function);
-      Path _get = keyPaths.get(0);
-      final Procedure1<Path> _function_1 = new Procedure1<Path>() {
+      Iterable<String> _map = IterableExtensions.<FileSourceFolder, String>map(_sourceFolders_1, _function);
+      final List<String> keyPaths = IterableExtensions.<String>sort(_map);
+      String _get = keyPaths.get(0);
+      final Procedure1<String> _function_1 = new Procedure1<String>() {
         @Override
-        public void apply(final Path it) {
-          String _string = it.toString();
-          Assert.assertEquals("/prj1/src", _string);
-          Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
-          Path _get = _sourceFolderMappings.get(it);
-          String _string_1 = _get.toString();
-          Assert.assertEquals("/prj1/bin", _string_1);
+        public void apply(final String it) {
+          Assert.assertEquals("src", it);
+          String _outputDirectory = output.getOutputDirectory(it);
+          Assert.assertEquals("bin", _outputDirectory);
         }
       };
-      ObjectExtensions.<Path>operator_doubleArrow(_get, _function_1);
-      Path _get_1 = keyPaths.get(1);
-      final Procedure1<Path> _function_2 = new Procedure1<Path>() {
+      ObjectExtensions.<String>operator_doubleArrow(_get, _function_1);
+      String _get_1 = keyPaths.get(1);
+      final Procedure1<String> _function_2 = new Procedure1<String>() {
         @Override
-        public void apply(final Path it) {
-          String _string = it.toString();
-          Assert.assertEquals("/prj1/src-gen", _string);
-          Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
-          Path _get = _sourceFolderMappings.get(it);
-          String _string_1 = _get.toString();
-          Assert.assertEquals("/prj1/bin", _string_1);
+        public void apply(final String it) {
+          Assert.assertEquals("src-gen", it);
+          String _outputDirectory = output.getOutputDirectory(it);
+          Assert.assertEquals("bin", _outputDirectory);
         }
       };
-      ObjectExtensions.<Path>operator_doubleArrow(_get_1, _function_2);
+      ObjectExtensions.<String>operator_doubleArrow(_get_1, _function_2);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -377,56 +358,50 @@ public class TestBatchCompiler {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("ws/prj1/dir2/bin");
       this.batchCompiler.setOutputPath(_builder_1.toString());
-      boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
-      Assert.assertTrue(_configureWorkspace);
-      final WorkspaceConfig config = this.workspaceConfigProvider.get();
+      this.batchCompiler.compile();
+      final FileWorkspaceConfig config = this.batchCompiler.getWorkspaceConfig();
       File _file = new File("ws");
       String _canonicalPath = _file.getCanonicalPath();
-      String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
-      Assert.assertEquals(_canonicalPath, _absoluteFileSystemPath);
-      Collection<? extends ProjectConfig> _projects = config.getProjects();
-      final ProjectConfig project = IterableExtensions.head(_projects);
-      Path _rootPath = project.getRootPath();
-      String _string = _rootPath.toString();
-      Assert.assertEquals("/prj1", _string);
-      Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
-      int _size = _sourceFolderMappings.size();
+      URI _path = config.getPath();
+      String _fileString = _path.toFileString();
+      Assert.assertEquals(_canonicalPath, _fileString);
+      Set<FileProjectConfig> _projects = config.getProjects();
+      final FileProjectConfig project = IterableExtensions.<FileProjectConfig>head(_projects);
+      String _name = project.getName();
+      Assert.assertEquals("prj1", _name);
+      final OutputConfiguration output = this.batchCompiler.getOutputConfiguration();
+      Set<FileSourceFolder> _sourceFolders = project.getSourceFolders();
+      int _size = _sourceFolders.size();
       Assert.assertEquals(2, _size);
-      Map<Path, Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
-      Set<Path> _keySet = _sourceFolderMappings_1.keySet();
-      final Function1<Path, String> _function = new Function1<Path, String>() {
+      Set<FileSourceFolder> _sourceFolders_1 = project.getSourceFolders();
+      final Function1<FileSourceFolder, String> _function = new Function1<FileSourceFolder, String>() {
         @Override
-        public String apply(final Path it) {
-          return it.getLastSegment();
+        public String apply(final FileSourceFolder it) {
+          return it.getName();
         }
       };
-      final List<Path> keyPaths = IterableExtensions.<Path, String>sortBy(_keySet, _function);
-      Path _get = keyPaths.get(0);
-      final Procedure1<Path> _function_1 = new Procedure1<Path>() {
+      Iterable<String> _map = IterableExtensions.<FileSourceFolder, String>map(_sourceFolders_1, _function);
+      final List<String> keyPaths = IterableExtensions.<String>sort(_map);
+      String _get = keyPaths.get(0);
+      final Procedure1<String> _function_1 = new Procedure1<String>() {
         @Override
-        public void apply(final Path it) {
-          String _string = it.toString();
-          Assert.assertEquals("/prj1/dir1/src", _string);
-          Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
-          Path _get = _sourceFolderMappings.get(it);
-          String _string_1 = _get.toString();
-          Assert.assertEquals("/prj1/dir2/bin", _string_1);
+        public void apply(final String it) {
+          Assert.assertEquals("dir1/src", it);
+          String _outputDirectory = output.getOutputDirectory(it);
+          Assert.assertEquals("dir2/bin", _outputDirectory);
         }
       };
-      ObjectExtensions.<Path>operator_doubleArrow(_get, _function_1);
-      Path _get_1 = keyPaths.get(1);
-      final Procedure1<Path> _function_2 = new Procedure1<Path>() {
+      ObjectExtensions.<String>operator_doubleArrow(_get, _function_1);
+      String _get_1 = keyPaths.get(1);
+      final Procedure1<String> _function_2 = new Procedure1<String>() {
         @Override
-        public void apply(final Path it) {
-          String _string = it.toString();
-          Assert.assertEquals("/prj1/src-gen", _string);
-          Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
-          Path _get = _sourceFolderMappings.get(it);
-          String _string_1 = _get.toString();
-          Assert.assertEquals("/prj1/dir2/bin", _string_1);
+        public void apply(final String it) {
+          Assert.assertEquals("src-gen", it);
+          String _outputDirectory = output.getOutputDirectory(it);
+          Assert.assertEquals("dir2/bin", _outputDirectory);
         }
       };
-      ObjectExtensions.<Path>operator_doubleArrow(_get_1, _function_2);
+      ObjectExtensions.<String>operator_doubleArrow(_get_1, _function_2);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -443,56 +418,50 @@ public class TestBatchCompiler {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("ws/prj1/bin");
       this.batchCompiler.setOutputPath(_builder_1.toString());
-      boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
-      Assert.assertTrue(_configureWorkspace);
-      final WorkspaceConfig config = this.workspaceConfigProvider.get();
+      this.batchCompiler.compile();
+      final FileWorkspaceConfig config = this.batchCompiler.getWorkspaceConfig();
       File _file = new File("ws");
       String _canonicalPath = _file.getCanonicalPath();
-      String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
-      Assert.assertEquals(_canonicalPath, _absoluteFileSystemPath);
-      Collection<? extends ProjectConfig> _projects = config.getProjects();
-      final ProjectConfig project = IterableExtensions.head(_projects);
-      Path _rootPath = project.getRootPath();
-      String _string = _rootPath.toString();
-      Assert.assertEquals("/prj1", _string);
-      Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
-      int _size = _sourceFolderMappings.size();
+      URI _path = config.getPath();
+      String _fileString = _path.toFileString();
+      Assert.assertEquals(_canonicalPath, _fileString);
+      Set<FileProjectConfig> _projects = config.getProjects();
+      final FileProjectConfig project = IterableExtensions.<FileProjectConfig>head(_projects);
+      String _name = project.getName();
+      Assert.assertEquals("prj1", _name);
+      final OutputConfiguration output = this.batchCompiler.getOutputConfiguration();
+      Set<FileSourceFolder> _sourceFolders = project.getSourceFolders();
+      int _size = _sourceFolders.size();
       Assert.assertEquals(2, _size);
-      Map<Path, Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
-      Set<Path> _keySet = _sourceFolderMappings_1.keySet();
-      final Function1<Path, String> _function = new Function1<Path, String>() {
+      Set<FileSourceFolder> _sourceFolders_1 = project.getSourceFolders();
+      final Function1<FileSourceFolder, String> _function = new Function1<FileSourceFolder, String>() {
         @Override
-        public String apply(final Path it) {
-          return it.getLastSegment();
+        public String apply(final FileSourceFolder it) {
+          return it.getName();
         }
       };
-      final List<Path> keyPaths = IterableExtensions.<Path, String>sortBy(_keySet, _function);
-      Path _get = keyPaths.get(0);
-      final Procedure1<Path> _function_1 = new Procedure1<Path>() {
+      Iterable<String> _map = IterableExtensions.<FileSourceFolder, String>map(_sourceFolders_1, _function);
+      final List<String> keyPaths = IterableExtensions.<String>sort(_map);
+      String _get = keyPaths.get(0);
+      final Procedure1<String> _function_1 = new Procedure1<String>() {
         @Override
-        public void apply(final Path it) {
-          String _string = it.toString();
-          Assert.assertEquals("/prj1/src", _string);
-          Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
-          Path _get = _sourceFolderMappings.get(it);
-          String _string_1 = _get.toString();
-          Assert.assertEquals("/prj1/bin", _string_1);
+        public void apply(final String it) {
+          Assert.assertEquals("dir1/src-gen", it);
+          String _outputDirectory = output.getOutputDirectory(it);
+          Assert.assertEquals("bin", _outputDirectory);
         }
       };
-      ObjectExtensions.<Path>operator_doubleArrow(_get, _function_1);
-      Path _get_1 = keyPaths.get(1);
-      final Procedure1<Path> _function_2 = new Procedure1<Path>() {
+      ObjectExtensions.<String>operator_doubleArrow(_get, _function_1);
+      String _get_1 = keyPaths.get(1);
+      final Procedure1<String> _function_2 = new Procedure1<String>() {
         @Override
-        public void apply(final Path it) {
-          String _string = it.toString();
-          Assert.assertEquals("/prj1/dir1/src-gen", _string);
-          Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
-          Path _get = _sourceFolderMappings.get(it);
-          String _string_1 = _get.toString();
-          Assert.assertEquals("/prj1/bin", _string_1);
+        public void apply(final String it) {
+          Assert.assertEquals("src", it);
+          String _outputDirectory = output.getOutputDirectory(it);
+          Assert.assertEquals("bin", _outputDirectory);
         }
       };
-      ObjectExtensions.<Path>operator_doubleArrow(_get_1, _function_2);
+      ObjectExtensions.<String>operator_doubleArrow(_get_1, _function_2);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -509,56 +478,50 @@ public class TestBatchCompiler {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("ws/prj1/dir2/dir2a/bin");
       this.batchCompiler.setOutputPath(_builder_1.toString());
-      boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
-      Assert.assertTrue(_configureWorkspace);
-      final WorkspaceConfig config = this.workspaceConfigProvider.get();
+      this.batchCompiler.compile();
+      final FileWorkspaceConfig config = this.batchCompiler.getWorkspaceConfig();
       File _file = new File("ws");
       String _canonicalPath = _file.getCanonicalPath();
-      String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
-      Assert.assertEquals(_canonicalPath, _absoluteFileSystemPath);
-      Collection<? extends ProjectConfig> _projects = config.getProjects();
-      final ProjectConfig project = IterableExtensions.head(_projects);
-      Path _rootPath = project.getRootPath();
-      String _string = _rootPath.toString();
-      Assert.assertEquals("/prj1", _string);
-      Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
-      int _size = _sourceFolderMappings.size();
+      URI _path = config.getPath();
+      String _fileString = _path.toFileString();
+      Assert.assertEquals(_canonicalPath, _fileString);
+      Set<FileProjectConfig> _projects = config.getProjects();
+      final FileProjectConfig project = IterableExtensions.<FileProjectConfig>head(_projects);
+      String _name = project.getName();
+      Assert.assertEquals("prj1", _name);
+      final OutputConfiguration output = this.batchCompiler.getOutputConfiguration();
+      Set<FileSourceFolder> _sourceFolders = project.getSourceFolders();
+      int _size = _sourceFolders.size();
       Assert.assertEquals(2, _size);
-      Map<Path, Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
-      Set<Path> _keySet = _sourceFolderMappings_1.keySet();
-      final Function1<Path, String> _function = new Function1<Path, String>() {
+      Set<FileSourceFolder> _sourceFolders_1 = project.getSourceFolders();
+      final Function1<FileSourceFolder, String> _function = new Function1<FileSourceFolder, String>() {
         @Override
-        public String apply(final Path it) {
-          return it.getLastSegment();
+        public String apply(final FileSourceFolder it) {
+          return it.getName();
         }
       };
-      final List<Path> keyPaths = IterableExtensions.<Path, String>sortBy(_keySet, _function);
-      Path _get = keyPaths.get(0);
-      final Procedure1<Path> _function_1 = new Procedure1<Path>() {
+      Iterable<String> _map = IterableExtensions.<FileSourceFolder, String>map(_sourceFolders_1, _function);
+      final List<String> keyPaths = IterableExtensions.<String>sort(_map);
+      String _get = keyPaths.get(0);
+      final Procedure1<String> _function_1 = new Procedure1<String>() {
         @Override
-        public void apply(final Path it) {
-          String _string = it.toString();
-          Assert.assertEquals("/prj1/dir1/dir1a/src", _string);
-          Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
-          Path _get = _sourceFolderMappings.get(it);
-          String _string_1 = _get.toString();
-          Assert.assertEquals("/prj1/dir2/dir2a/bin", _string_1);
+        public void apply(final String it) {
+          Assert.assertEquals("dir1/dir1a/src", it);
+          String _outputDirectory = output.getOutputDirectory(it);
+          Assert.assertEquals("dir2/dir2a/bin", _outputDirectory);
         }
       };
-      ObjectExtensions.<Path>operator_doubleArrow(_get, _function_1);
-      Path _get_1 = keyPaths.get(1);
-      final Procedure1<Path> _function_2 = new Procedure1<Path>() {
+      ObjectExtensions.<String>operator_doubleArrow(_get, _function_1);
+      String _get_1 = keyPaths.get(1);
+      final Procedure1<String> _function_2 = new Procedure1<String>() {
         @Override
-        public void apply(final Path it) {
-          String _string = it.toString();
-          Assert.assertEquals("/prj1/dir3/dir3a/src-gen", _string);
-          Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
-          Path _get = _sourceFolderMappings.get(it);
-          String _string_1 = _get.toString();
-          Assert.assertEquals("/prj1/dir2/dir2a/bin", _string_1);
+        public void apply(final String it) {
+          Assert.assertEquals("dir3/dir3a/src-gen", it);
+          String _outputDirectory = output.getOutputDirectory(it);
+          Assert.assertEquals("dir2/dir2a/bin", _outputDirectory);
         }
       };
-      ObjectExtensions.<Path>operator_doubleArrow(_get_1, _function_2);
+      ObjectExtensions.<String>operator_doubleArrow(_get_1, _function_2);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -579,82 +542,70 @@ public class TestBatchCompiler {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("dir1/ws/prj1/dir2/dir3/dir4/dir5/bin");
       this.batchCompiler.setOutputPath(_builder_1.toString());
-      boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
-      Assert.assertTrue(_configureWorkspace);
-      final WorkspaceConfig config = this.workspaceConfigProvider.get();
+      this.batchCompiler.compile();
+      final FileWorkspaceConfig config = this.batchCompiler.getWorkspaceConfig();
       File _file = new File("dir1/ws");
       String _canonicalPath = _file.getCanonicalPath();
-      String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
-      Assert.assertEquals(_canonicalPath, _absoluteFileSystemPath);
-      Collection<? extends ProjectConfig> _projects = config.getProjects();
-      final ProjectConfig project = IterableExtensions.head(_projects);
-      Path _rootPath = project.getRootPath();
-      String _string = _rootPath.toString();
-      Assert.assertEquals("/prj1", _string);
-      Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
-      int _size = _sourceFolderMappings.size();
+      URI _path = config.getPath();
+      String _fileString = _path.toFileString();
+      Assert.assertEquals(_canonicalPath, _fileString);
+      Set<FileProjectConfig> _projects = config.getProjects();
+      final FileProjectConfig project = IterableExtensions.<FileProjectConfig>head(_projects);
+      String _name = project.getName();
+      Assert.assertEquals("prj1", _name);
+      final OutputConfiguration output = this.batchCompiler.getOutputConfiguration();
+      Set<FileSourceFolder> _sourceFolders = project.getSourceFolders();
+      int _size = _sourceFolders.size();
       Assert.assertEquals(4, _size);
-      Map<Path, Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
-      Set<Path> _keySet = _sourceFolderMappings_1.keySet();
-      final Function1<Path, String> _function = new Function1<Path, String>() {
+      Set<FileSourceFolder> _sourceFolders_1 = project.getSourceFolders();
+      final Function1<FileSourceFolder, String> _function = new Function1<FileSourceFolder, String>() {
         @Override
-        public String apply(final Path it) {
-          return it.getLastSegment();
+        public String apply(final FileSourceFolder it) {
+          return it.getName();
         }
       };
-      final List<Path> keyPaths = IterableExtensions.<Path, String>sortBy(_keySet, _function);
-      Path _get = keyPaths.get(0);
-      final Procedure1<Path> _function_1 = new Procedure1<Path>() {
+      Iterable<String> _map = IterableExtensions.<FileSourceFolder, String>map(_sourceFolders_1, _function);
+      final List<String> keyPaths = IterableExtensions.<String>sort(_map);
+      String _get = keyPaths.get(0);
+      final Procedure1<String> _function_1 = new Procedure1<String>() {
         @Override
-        public void apply(final Path it) {
-          String _string = it.toString();
-          Assert.assertEquals("/prj1/dir2/dir3/dir4/src1", _string);
-          Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
-          Path _get = _sourceFolderMappings.get(it);
-          String _string_1 = _get.toString();
-          Assert.assertEquals("/prj1/dir2/dir3/dir4/dir5/bin", _string_1);
+        public void apply(final String it) {
+          Assert.assertEquals("dir2/dir3/dir4/src1", it);
+          String _outputDirectory = output.getOutputDirectory(it);
+          Assert.assertEquals("dir2/dir3/dir4/dir5/bin", _outputDirectory);
         }
       };
-      ObjectExtensions.<Path>operator_doubleArrow(_get, _function_1);
-      Path _get_1 = keyPaths.get(1);
-      final Procedure1<Path> _function_2 = new Procedure1<Path>() {
+      ObjectExtensions.<String>operator_doubleArrow(_get, _function_1);
+      String _get_1 = keyPaths.get(1);
+      final Procedure1<String> _function_2 = new Procedure1<String>() {
         @Override
-        public void apply(final Path it) {
-          String _string = it.toString();
-          Assert.assertEquals("/prj1/dir2/dir3/src2", _string);
-          Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
-          Path _get = _sourceFolderMappings.get(it);
-          String _string_1 = _get.toString();
-          Assert.assertEquals("/prj1/dir2/dir3/dir4/dir5/bin", _string_1);
+        public void apply(final String it) {
+          Assert.assertEquals("dir2/dir3/src2", it);
+          String _outputDirectory = output.getOutputDirectory(it);
+          Assert.assertEquals("dir2/dir3/dir4/dir5/bin", _outputDirectory);
         }
       };
-      ObjectExtensions.<Path>operator_doubleArrow(_get_1, _function_2);
-      Path _get_2 = keyPaths.get(2);
-      final Procedure1<Path> _function_3 = new Procedure1<Path>() {
+      ObjectExtensions.<String>operator_doubleArrow(_get_1, _function_2);
+      String _get_2 = keyPaths.get(2);
+      final Procedure1<String> _function_3 = new Procedure1<String>() {
         @Override
-        public void apply(final Path it) {
-          String _string = it.toString();
-          Assert.assertEquals("/prj1/dir2/src3", _string);
-          Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
-          Path _get = _sourceFolderMappings.get(it);
-          String _string_1 = _get.toString();
-          Assert.assertEquals("/prj1/dir2/dir3/dir4/dir5/bin", _string_1);
+        public void apply(final String it) {
+          Assert.assertEquals("dir2/src3", it);
+          String _outputDirectory = output.getOutputDirectory(it);
+          Assert.assertEquals("dir2/dir3/dir4/dir5/bin", _outputDirectory);
         }
       };
-      ObjectExtensions.<Path>operator_doubleArrow(_get_2, _function_3);
-      Path _get_3 = keyPaths.get(3);
-      final Procedure1<Path> _function_4 = new Procedure1<Path>() {
+      ObjectExtensions.<String>operator_doubleArrow(_get_2, _function_3);
+      String _get_3 = keyPaths.get(3);
+      final Procedure1<String> _function_4 = new Procedure1<String>() {
         @Override
-        public void apply(final Path it) {
-          String _string = it.toString();
-          Assert.assertEquals("/prj1/src4", _string);
-          Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
-          Path _get = _sourceFolderMappings.get(it);
-          String _string_1 = _get.toString();
-          Assert.assertEquals("/prj1/dir2/dir3/dir4/dir5/bin", _string_1);
+        public void apply(final String it) {
+          Assert.assertEquals("src4", it);
+          String _outputDirectory = output.getOutputDirectory(it);
+          Assert.assertEquals("dir2/dir3/dir4/dir5/bin", _outputDirectory);
         }
       };
-      ObjectExtensions.<Path>operator_doubleArrow(_get_3, _function_4);
+      ObjectExtensions.<String>operator_doubleArrow(_get_3, _function_4);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -662,49 +613,12 @@ public class TestBatchCompiler {
   
   @Test
   public void testWorkspaceConfigSameDir() {
-    try {
-      this.batchCompiler.setSourcePath("ws/prj1");
-      this.batchCompiler.setOutputPath("ws/prj1");
-      boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
-      Assert.assertTrue(_configureWorkspace);
-      final WorkspaceConfig config = this.workspaceConfigProvider.get();
-      File _file = new File("ws");
-      String _canonicalPath = _file.getCanonicalPath();
-      String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
-      Assert.assertEquals(_canonicalPath, _absoluteFileSystemPath);
-      Collection<? extends ProjectConfig> _projects = config.getProjects();
-      final ProjectConfig project = IterableExtensions.head(_projects);
-      Path _rootPath = project.getRootPath();
-      String _string = _rootPath.toString();
-      Assert.assertEquals("/prj1", _string);
-      Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
-      int _size = _sourceFolderMappings.size();
-      Assert.assertEquals(1, _size);
-      Map<Path, Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
-      Set<Path> _keySet = _sourceFolderMappings_1.keySet();
-      final Function1<Path, String> _function = new Function1<Path, String>() {
-        @Override
-        public String apply(final Path it) {
-          return it.getLastSegment();
-        }
-      };
-      final List<Path> keyPaths = IterableExtensions.<Path, String>sortBy(_keySet, _function);
-      Path _get = keyPaths.get(0);
-      final Procedure1<Path> _function_1 = new Procedure1<Path>() {
-        @Override
-        public void apply(final Path it) {
-          String _string = it.toString();
-          Assert.assertEquals("/prj1", _string);
-          Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
-          Path _get = _sourceFolderMappings.get(it);
-          String _string_1 = _get.toString();
-          Assert.assertEquals("/prj1", _string_1);
-        }
-      };
-      ObjectExtensions.<Path>operator_doubleArrow(_get, _function_1);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    this.batchCompiler.setSourcePath("ws/prj1");
+    this.batchCompiler.setOutputPath("ws/prj1");
+    boolean _compile = this.batchCompiler.compile();
+    Assert.assertFalse(_compile);
+    FileWorkspaceConfig _workspaceConfig = this.batchCompiler.getWorkspaceConfig();
+    Assert.assertNull(_workspaceConfig);
   }
   
   @Test
@@ -715,8 +629,11 @@ public class TestBatchCompiler {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("/usr/local/tmp/ws/prj1/bin");
     this.batchCompiler.setOutputPath(_builder_1.toString());
-    boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
-    Assert.assertFalse(_configureWorkspace);
+    this.batchCompiler.compile();
+    FileWorkspaceConfig _workspaceConfig = this.batchCompiler.getWorkspaceConfig();
+    Assert.assertNull(_workspaceConfig);
+    OutputConfiguration _outputConfiguration = this.batchCompiler.getOutputConfiguration();
+    Assert.assertNull(_outputConfiguration);
   }
   
   @Test
@@ -727,8 +644,11 @@ public class TestBatchCompiler {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("/some_non_existing_folder/bin");
     this.batchCompiler.setOutputPath(_builder_1.toString());
-    boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
-    Assert.assertFalse(_configureWorkspace);
+    this.batchCompiler.compile();
+    FileWorkspaceConfig _workspaceConfig = this.batchCompiler.getWorkspaceConfig();
+    Assert.assertNull(_workspaceConfig);
+    OutputConfiguration _outputConfiguration = this.batchCompiler.getOutputConfiguration();
+    Assert.assertNull(_outputConfiguration);
   }
   
   @Test
@@ -739,8 +659,11 @@ public class TestBatchCompiler {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("/tmp/prj/bin");
     this.batchCompiler.setOutputPath(_builder_1.toString());
-    boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
-    Assert.assertTrue(_configureWorkspace);
+    this.batchCompiler.compile();
+    FileWorkspaceConfig _workspaceConfig = this.batchCompiler.getWorkspaceConfig();
+    Assert.assertNotNull(_workspaceConfig);
+    OutputConfiguration _outputConfiguration = this.batchCompiler.getOutputConfiguration();
+    Assert.assertNotNull(_outputConfiguration);
   }
   
   @Test
@@ -833,8 +756,6 @@ public class TestBatchCompiler {
   @Test
   public void testActiveAnnotatons2() {
     this.batchCompiler.setSourcePath("./batch-compiler-data/activeAnnotations2");
-    boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
-    Assert.assertTrue(_configureWorkspace);
     boolean _compile = this.batchCompiler.compile();
     Assert.assertTrue(_compile);
     File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/mypackage"));
@@ -855,8 +776,6 @@ public class TestBatchCompiler {
   @Test
   public void testBug443800() {
     this.batchCompiler.setSourcePath("./batch-compiler-data/bug443800");
-    boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
-    Assert.assertTrue(_configureWorkspace);
     boolean _compile = this.batchCompiler.compile();
     Assert.assertTrue(_compile);
     File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/"));
@@ -986,8 +905,8 @@ public class TestBatchCompiler {
   @Test
   public void testCompileSymlinkedResource() {
     File _file = new File("./batch-compiler-data/test-resources/");
-    URI _uRI = _file.toURI();
-    URI _normalize = _uRI.normalize();
+    java.net.URI _uRI = _file.toURI();
+    java.net.URI _normalize = _uRI.normalize();
     final String tstResources = _normalize.getPath();
     final File wsRootFile = new File(tstResources, "symlink-test-ws/");
     final String wsRootPath = wsRootFile.getPath();
@@ -1006,33 +925,6 @@ public class TestBatchCompiler {
     boolean _isSymlink_1 = this.isSymlink(_file_2);
     boolean _not_1 = (!_isSymlink_1);
     Assert.assertTrue("plain-folder/src/ is not a symlink", _not_1);
-    SimpleWorkspaceConfig _simpleWorkspaceConfig = new SimpleWorkspaceConfig(wsRootPath);
-    final Procedure1<SimpleWorkspaceConfig> _function = new Procedure1<SimpleWorkspaceConfig>() {
-      @Override
-      public void apply(final SimpleWorkspaceConfig it) {
-        ProjectConfig _projectConfig = new ProjectConfig("plain-folder");
-        final Procedure1<ProjectConfig> _function = new Procedure1<ProjectConfig>() {
-          @Override
-          public void apply(final ProjectConfig it) {
-            it.addSourceFolderMapping("src", "bin");
-            it.addSourceFolderMapping("linked-src", "bin");
-          }
-        };
-        ProjectConfig _doubleArrow = ObjectExtensions.<ProjectConfig>operator_doubleArrow(_projectConfig, _function);
-        it.addProjectConfig(_doubleArrow);
-        ProjectConfig _projectConfig_1 = new ProjectConfig("linked-folder");
-        final Procedure1<ProjectConfig> _function_1 = new Procedure1<ProjectConfig>() {
-          @Override
-          public void apply(final ProjectConfig it) {
-            it.addSourceFolderMapping("src", "bin");
-          }
-        };
-        ProjectConfig _doubleArrow_1 = ObjectExtensions.<ProjectConfig>operator_doubleArrow(_projectConfig_1, _function_1);
-        it.addProjectConfig(_doubleArrow_1);
-      }
-    };
-    SimpleWorkspaceConfig _doubleArrow = ObjectExtensions.<SimpleWorkspaceConfig>operator_doubleArrow(_simpleWorkspaceConfig, _function);
-    this.workspaceConfigProvider.setWorkspaceConfig(_doubleArrow);
     this.batchCompiler.setWriteTraceFiles(true);
     this.batchCompiler.setSourcePath(((((wsRootPath + "/plain-folder/src") + File.pathSeparator) + wsRootPath) + 
       "/plain-folder/linked-src"));
@@ -1044,23 +936,23 @@ public class TestBatchCompiler {
     boolean _exists = _file_3.exists();
     Assert.assertTrue(_exists);
     File _file_4 = new File(customOutput);
-    final FilenameFilter _function_1 = new FilenameFilter() {
+    final FilenameFilter _function = new FilenameFilter() {
       @Override
       public boolean accept(final File dir, final String name) {
         return name.endsWith(".java");
       }
     };
-    String[] _list = _file_4.list(_function_1);
+    String[] _list = _file_4.list(_function);
     int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
     Assert.assertEquals(2, _size);
     File _file_5 = new File(customOutput);
-    final FilenameFilter _function_2 = new FilenameFilter() {
+    final FilenameFilter _function_1 = new FilenameFilter() {
       @Override
       public boolean accept(final File dir, final String name) {
         return name.endsWith("._trace");
       }
     };
-    String[] _list_1 = _file_5.list(_function_2);
+    String[] _list_1 = _file_5.list(_function_1);
     int _size_1 = ((List<String>)Conversions.doWrapArray(_list_1)).size();
     Assert.assertEquals(2, _size_1);
   }
@@ -1171,8 +1063,6 @@ public class TestBatchCompiler {
   public void testNoSuppressWarningsAnnotations() {
     this.batchCompiler.setGenerateSyntheticSuppressWarnings(false);
     this.batchCompiler.setSourcePath("./batch-compiler-data/xtendClass");
-    boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
-    Assert.assertTrue(_configureWorkspace);
     boolean _compile = this.batchCompiler.compile();
     Assert.assertTrue(_compile);
     String _contents = this.getContents((TestBatchCompiler.OUTPUT_DIRECTORY + "/XtendA.java"));
@@ -1184,8 +1074,6 @@ public class TestBatchCompiler {
   public void testGeneratedAnnotation() {
     this.batchCompiler.setGenerateGeneratedAnnotation(true);
     this.batchCompiler.setSourcePath("./batch-compiler-data/xtendClass");
-    boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
-    Assert.assertTrue(_configureWorkspace);
     boolean _compile = this.batchCompiler.compile();
     Assert.assertTrue(_compile);
     String _contents = this.getContents((TestBatchCompiler.OUTPUT_DIRECTORY + "/XtendA.java"));
@@ -1198,8 +1086,6 @@ public class TestBatchCompiler {
     this.batchCompiler.setGenerateGeneratedAnnotation(true);
     this.batchCompiler.setGeneratedAnnotationComment("FooComment");
     this.batchCompiler.setSourcePath("./batch-compiler-data/xtendClass");
-    boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
-    Assert.assertTrue(_configureWorkspace);
     boolean _compile = this.batchCompiler.compile();
     Assert.assertTrue(_compile);
     final String generated = this.getContents((TestBatchCompiler.OUTPUT_DIRECTORY + "/XtendA.java"));
@@ -1214,8 +1100,6 @@ public class TestBatchCompiler {
     this.batchCompiler.setGenerateGeneratedAnnotation(true);
     this.batchCompiler.setIncludeDateInGeneratedAnnotation(true);
     this.batchCompiler.setSourcePath("./batch-compiler-data/xtendClass");
-    boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
-    Assert.assertTrue(_configureWorkspace);
     boolean _compile = this.batchCompiler.compile();
     Assert.assertTrue(_compile);
     final String generated = this.getContents((TestBatchCompiler.OUTPUT_DIRECTORY + "/XtendA.java"));
@@ -1229,8 +1113,6 @@ public class TestBatchCompiler {
   public void testJavaVersion5() {
     this.batchCompiler.setJavaSourceVersion("1.5");
     this.batchCompiler.setSourcePath("./batch-compiler-data/javaVersion");
-    boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
-    Assert.assertTrue(_configureWorkspace);
     boolean _compile = this.batchCompiler.compile();
     Assert.assertTrue(_compile);
     final String generated = this.getContents((TestBatchCompiler.OUTPUT_DIRECTORY + "/XtendA.java"));
@@ -1244,8 +1126,6 @@ public class TestBatchCompiler {
   public void testJavaVersion6() {
     this.batchCompiler.setJavaSourceVersion("1.6");
     this.batchCompiler.setSourcePath("./batch-compiler-data/javaVersion");
-    boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
-    Assert.assertTrue(_configureWorkspace);
     boolean _compile = this.batchCompiler.compile();
     Assert.assertTrue(_compile);
     final String generated = this.getContents((TestBatchCompiler.OUTPUT_DIRECTORY + "/XtendA.java"));
@@ -1259,8 +1139,6 @@ public class TestBatchCompiler {
   public void testJavaVersion7() {
     this.batchCompiler.setJavaSourceVersion("1.7");
     this.batchCompiler.setSourcePath("./batch-compiler-data/javaVersion");
-    boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
-    Assert.assertTrue(_configureWorkspace);
     boolean _compile = this.batchCompiler.compile();
     Assert.assertTrue(_compile);
     final String generated = this.getContents((TestBatchCompiler.OUTPUT_DIRECTORY + "/XtendA.java"));
@@ -1274,8 +1152,6 @@ public class TestBatchCompiler {
   public void testJavaVersion8() {
     this.batchCompiler.setJavaSourceVersion("1.8");
     this.batchCompiler.setSourcePath("./batch-compiler-data/javaVersion");
-    boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
-    Assert.assertTrue(_configureWorkspace);
     boolean _compile = this.batchCompiler.compile();
     Assert.assertTrue(_compile);
     final String generated = this.getContents((TestBatchCompiler.OUTPUT_DIRECTORY + "/XtendA.java"));

@@ -15,10 +15,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
 
@@ -32,10 +30,6 @@ import org.apache.maven.toolchain.java.DefaultJavaToolChain;
 import org.codehaus.plexus.util.DirectoryScanner;
 import org.codehaus.plexus.util.xml.Xpp3Dom;
 import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler;
-import org.eclipse.xtend.lib.macro.file.Path;
-import org.eclipse.xtext.xbase.file.ProjectConfig;
-import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
-import org.eclipse.xtext.xbase.file.SimpleWorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 import com.google.common.base.Predicate;
@@ -131,9 +125,6 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 	private String generatedAnnotationComment;
 
 	@Inject
-	private RuntimeWorkspaceConfigProvider workspaceConfigProvider;
-
-	@Inject
 	private Provider<XtendBatchCompiler> xtendBatchCompilerProvider;
 
 	protected XtendBatchCompiler getBatchCompiler() {
@@ -143,7 +134,6 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 	protected void compile(String classPath, List<String> sourcePaths, String outputPath) throws MojoExecutionException {
 		XtendBatchCompiler compiler = getBatchCompiler();
 		Log log = getLog();
-		configureWorkspace(sourcePaths, outputPath);
 		compiler.setResourceSetProvider(new MavenProjectResourceSetProvider(project));
 		Iterable<String> filtered = filter(sourcePaths, FILE_EXISTS);
 		if (Iterables.isEmpty(filtered)) {
@@ -242,36 +232,6 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 			values[i] = children[i].getValue();
 		}
 		return values;
-	}
-
-	private void configureWorkspace(List<String> sourceDirectories, String outputPath) throws MojoExecutionException {
-		SimpleWorkspaceConfig workspaceConfig = new SimpleWorkspaceConfig(project.getBasedir().getParentFile()
-				.getAbsolutePath());
-		ProjectConfig projectConfig = new ProjectConfig(project.getBasedir().getName());
-		URI absoluteRootPath = project.getBasedir().getAbsoluteFile().toURI();
-		URI relativizedTarget = absoluteRootPath.relativize(new File(outputPath).toURI());
-		if (relativizedTarget.isAbsolute()) {
-			throw new MojoExecutionException("Output path '" + outputPath + "' must be a child of the project folder '"
-					+ absoluteRootPath + "'");
-		}
-		for (String source : sourceDirectories) {
-			URI relativizedSrc = absoluteRootPath.relativize(new File(source).toURI());
-			if (relativizedSrc.isAbsolute()) {
-				throw new MojoExecutionException("Source folder " + source + " must be a child of the project folder "
-						+ absoluteRootPath);
-			}
-			projectConfig.addSourceFolderMapping(relativizedSrc.getPath(), relativizedTarget.getPath());
-		}
-		workspaceConfig.addProjectConfig(projectConfig);
-		workspaceConfigProvider.setWorkspaceConfig(workspaceConfig);
-		if (getLog().isDebugEnabled()) {
-			getLog().debug("WS config root: " + workspaceConfig.getAbsoluteFileSystemPath());
-			getLog().debug("Project name: " + projectConfig.getName());
-			getLog().debug("Project root path: " + projectConfig.getRootPath());
-			for (Entry<Path, Path> entry : projectConfig.getSourceFolderMappings().entrySet()) {
-				getLog().debug("Source path: " + entry.getKey() + " -> " + entry.getValue());
-			}
-		}
 	}
 
 	protected abstract String getTempDirectory();

@@ -9,13 +9,8 @@ package org.eclipse.xtend.core.tests.macro;
 
 import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester;
 import org.eclipse.xtend.core.tests.macro.AbstractActiveAnnotationTest;
-import org.eclipse.xtend.lib.macro.TransformationContext;
-import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
-import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.IAcceptor;
-import org.eclipse.xtext.xbase.lib.Extension;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -37,14 +32,6 @@ public class TestProperSourceFolderMapping extends AbstractActiveAnnotationTest 
     final IAcceptor<XtendCompilerTester.CompilationResult> _function = new IAcceptor<XtendCompilerTester.CompilationResult>() {
       @Override
       public void accept(final XtendCompilerTester.CompilationResult it) {
-        @Extension
-        final TransformationContext ctx = it.getTransformationContext();
-        CompilationUnit _compilationUnit = it.getCompilationUnit();
-        Path _filePath = _compilationUnit.getFilePath();
-        Path _targetFolder = ctx.getTargetFolder(_filePath);
-        final Path file = _targetFolder.append("MyClass.java");
-        boolean _exists = ctx.exists(file);
-        Assert.assertTrue(_exists);
       }
     };
     this._xtendCompilerTester.compile(_builder, _function);

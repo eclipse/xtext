@@ -7,11 +7,11 @@
  */
 package org.eclipse.xtext.xbase.compiler;
 
+import java.util.Map;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.Data;
-import org.eclipse.xtend.lib.macro.file.Path;
-import org.eclipse.xtext.generator.FileSystemSupportBasedFileSystemAccess;
+import org.eclipse.xtext.generator.InMemoryFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
@@ -24,16 +24,19 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
  * @since 2.7
  */
 @SuppressWarnings("all")
-public class RegisteringFileSystemAccess extends FileSystemSupportBasedFileSystemAccess {
+public class RegisteringFileSystemAccess extends InMemoryFileSystemAccess {
+  /**
+   * @noreference This class is not intended to be referenced by clients.
+   */
   @Data
   public static class GeneratedFile {
-    private final Path path;
+    private final String path;
     
     private final String javaClassName;
     
     private final CharSequence contents;
     
-    public GeneratedFile(final Path path, final String javaClassName, final CharSequence contents) {
+    public GeneratedFile(final String path, final String javaClassName, final CharSequence contents) {
       super();
       this.path = path;
       this.javaClassName = javaClassName;
@@ -90,7 +93,7 @@ public class RegisteringFileSystemAccess extends FileSystemSupportBasedFileSyste
     }
     
     @Pure
-    public Path getPath() {
+    public String getPath() {
       return this.path;
     }
     
@@ -106,12 +109,15 @@ public class RegisteringFileSystemAccess extends FileSystemSupportBasedFileSyste
   }
   
   @Accessors
-  private final Set<RegisteringFileSystemAccess.GeneratedFile> textFiles = CollectionLiterals.<RegisteringFileSystemAccess.GeneratedFile>newHashSet();
+  private final Set<RegisteringFileSystemAccess.GeneratedFile> generatedFiles = CollectionLiterals.<RegisteringFileSystemAccess.GeneratedFile>newHashSet();
+  
+  @Accessors
+  private String projectName;
   
   @Override
   public void generateFile(final String fileName, final String outputConfigurationName, final CharSequence contents) {
     super.generateFile(fileName, outputConfigurationName, contents);
-    final Path path = this.getPath(fileName, outputConfigurationName);
+    final String path = this.getPath(fileName, outputConfigurationName);
     String _xifexpression = null;
     boolean _endsWith = fileName.endsWith(".java");
     if (_endsWith) {
@@ -122,11 +128,26 @@ public class RegisteringFileSystemAccess extends FileSystemSupportBasedFileSyste
     }
     final String javaName = _xifexpression;
     RegisteringFileSystemAccess.GeneratedFile _generatedFile = new RegisteringFileSystemAccess.GeneratedFile(path, javaName, contents);
-    this.textFiles.add(_generatedFile);
+    this.generatedFiles.add(_generatedFile);
+  }
+  
+  protected String getPath(final String fileName, final String outputConfigurationName) {
+    Map<String, String> _pathes = this.getPathes();
+    final String path = _pathes.get(outputConfigurationName);
+    return ((((("/" + this.projectName) + "/") + path) + "/") + fileName);
   }
   
   @Pure
-  public Set<RegisteringFileSystemAccess.GeneratedFile> getTextFiles() {
-    return this.textFiles;
+  public Set<RegisteringFileSystemAccess.GeneratedFile> getGeneratedFiles() {
+    return this.generatedFiles;
+  }
+  
+  @Pure
+  public String getProjectName() {
+    return this.projectName;
+  }
+  
+  public void setProjectName(final String projectName) {
+    this.projectName = projectName;
   }
 }

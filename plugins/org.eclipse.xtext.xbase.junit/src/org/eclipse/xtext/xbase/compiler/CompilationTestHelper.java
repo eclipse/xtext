@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.generator.GeneratorDelegate;
-import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.generator.OutputConfiguration;
@@ -41,10 +40,10 @@ import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.workspace.FileProjectConfig;
+import org.eclipse.xtext.workspace.FileWorkspaceConfig;
+import org.eclipse.xtext.workspace.WorkspaceConfigAdapter;
 import org.eclipse.xtext.xbase.compiler.RegisteringFileSystemAccess.GeneratedFile;
-import org.eclipse.xtext.xbase.file.ProjectConfig;
-import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
-import org.eclipse.xtext.xbase.file.SimpleWorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -90,7 +89,6 @@ public class CompilationTestHelper {
 	
 	public final static String PROJECT_NAME = "myProject";
 	
-	@Inject private TemporaryFolder temporaryFolder;
 	
 	@Inject private OnTheFlyJavaCompiler2 javaCompiler;
 	
@@ -104,43 +102,21 @@ public class CompilationTestHelper {
 	
 	@Inject private IGeneratorConfigProvider generatorConfigProvider;
 	
-	private RuntimeWorkspaceConfigProvider configProvider;
-
-	@Inject
-	private void setWorkspaceConfig(RuntimeWorkspaceConfigProvider configProvider) {
-		this.configProvider = configProvider;
-		configureFreshWorkspace();
-	}
+	private TemporaryFolder temporaryFolder;
+	
+	private File workspaceRoot;
 	
 	/**
 	 * creates a fresh temp directory and sets it as the workspace root.
 	 */
 	public void configureFreshWorkspace() {
-		File tempDir = createFreshTempDir();
-		SimpleWorkspaceConfig config = new SimpleWorkspaceConfig(tempDir.getAbsolutePath());
-		ProjectConfig projectConfig = new ProjectConfig(PROJECT_NAME);
-		// use default output configuration for the FileSystem Access
-		OutputConfiguration outputConfig = null;
-		for (OutputConfiguration cfg : getOutputConfigurations()) {
-			if (cfg.getName().equals(IFileSystemAccess.DEFAULT_OUTPUT)) {
-				outputConfig = cfg;
-				break;
-			}
-		}
-		if (outputConfig == null) {
-			throw new IllegalStateException("No default output configuration could be found!");
-		}
-		if (!outputConfig.isUseOutputPerSourceFolder()) {
-			String out = outputConfig.getOutputDirectory("src");
-			projectConfig.addSourceFolderMapping("src", out);
-		} else {
-			for (String src : outputConfig.getSourceFolders()) {
-				String out = outputConfig.getOutputDirectory(src);
-				projectConfig.addSourceFolderMapping(src, out);
-			}
-		}
-		config.addProjectConfig(projectConfig);
-		configProvider.setWorkspaceConfig(config);
+		workspaceRoot = createFreshTempDir();
+	}
+	
+	@Inject 
+	private void setTemporaryFolder(TemporaryFolder folder) {
+		this.temporaryFolder = folder;
+		configureFreshWorkspace();
 	}
 	
 	protected String getSourceFolderPath() {
@@ -266,6 +242,10 @@ public class CompilationTestHelper {
 	 */
 	public ResourceSet resourceSet(Pair<String,? extends CharSequence> ...resources ) throws IOException {
 		XtextResourceSet result = resourceSetProvider.get();
+		FileWorkspaceConfig workspaceConfig = new FileWorkspaceConfig(workspaceRoot);
+		FileProjectConfig projectConfig = workspaceConfig.addProject(PROJECT_NAME);
+		projectConfig.addSourceFolder("src");
+		result.eAdapters().add(new WorkspaceConfigAdapter(workspaceConfig));
 		for (Pair<String, ? extends CharSequence> entry : resources) {
 			URI uri = copyToWorkspace(getSourceFolderPath()+"/"+entry.getKey(), entry.getValue());
 			Resource resource = result.createResource(uri);
@@ -282,7 +262,6 @@ public class CompilationTestHelper {
 	 * @param contents the file contents
 	 */
 	public URI copyToWorkspace(String workspacefilePath, CharSequence contents) {
-		File workspaceRoot = new File(this.configProvider.getWorkspaceConfig().getAbsoluteFileSystemPath());
 		File fullPath = new File(workspaceRoot.getAbsolutePath()+"/"+workspacefilePath);
 		if (fullPath.exists()) {
 			fullPath.delete();
@@ -422,12 +401,12 @@ public class CompilationTestHelper {
 		 */
 		public String getSingleGeneratedCode() {
 			doGenerate();
-			if (access.getTextFiles().size() == 1)
-				return access.getTextFiles().iterator().next().getContents().toString();
+			if (access.getGeneratedFiles().size() == 1)
+				return access.getGeneratedFiles().iterator().next().getContents().toString();
 			String separator = System.getProperty("line.separator");
 			if (separator == null)
 				separator = "\n";
-			List<GeneratedFile> files = newArrayList(access.getTextFiles());
+			List<GeneratedFile> files = newArrayList(access.getGeneratedFiles());
 			Collections.sort(files, new Comparator<GeneratedFile>() {
 				@Override
 				public int compare(GeneratedFile o1,
@@ -472,8 +451,8 @@ public class CompilationTestHelper {
 		public Map<String, CharSequence> getAllGeneratedResources() {
 			doGenerate();
 			Map<String,CharSequence> result = newHashMap();
-			for (GeneratedFile f: access.getTextFiles()) {
-				result.put(f.getPath().toString(), f.getContents());
+			for (GeneratedFile f: access.getGeneratedFiles()) {
+				result.put(f.getPath(), f.getContents());
 			}
 			return result;
 		}
@@ -520,20 +499,21 @@ public class CompilationTestHelper {
 			if (access == null) {
 				doValidation();
 				access = fileSystemAccessProvider.get();
+				
 				access.setOutputConfigurations(outputConfigurations);
-				access.setCurrentSource("src");
-				access.setProjectName(PROJECT_NAME);
 				for (Resource resource : sources) {
 					if (resource instanceof XtextResource) {
+						access.setProjectName(PROJECT_NAME);
 						XtextResource xtextResource = (XtextResource) resource;
-						GeneratorDelegate generator = xtextResource.getResourceServiceProvider().get(GeneratorDelegate.class);
+						IResourceServiceProvider resourceServiceProvider = xtextResource.getResourceServiceProvider();
+						GeneratorDelegate generator = resourceServiceProvider.get(GeneratorDelegate.class);
 						if (generator != null) {
 							generator.generate(xtextResource, access);
 						}
 					}
 				}
 				generatedCode = newHashMap();
-				for (final GeneratedFile e : access.getTextFiles()) {
+				for (final GeneratedFile e : access.getGeneratedFiles()) {
 					if (e.getJavaClassName() != null) {
 						generatedCode.put(e.getJavaClassName(), e.getContents().toString());
 					}

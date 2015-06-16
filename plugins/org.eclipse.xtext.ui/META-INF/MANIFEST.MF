@@ -101,7 +101,8 @@ Export-Package: org.eclipse.xtext.common.ui.contentassist,
  org.eclipse.xtext.ui.util,
  org.eclipse.xtext.ui.validation,
  org.eclipse.xtext.ui.views,
- org.eclipse.xtext.ui.wizard
+ org.eclipse.xtext.ui.wizard,
+ org.eclipse.xtext.ui.workspace;x-friends:="org.eclipse.xtext.ui.tests"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName

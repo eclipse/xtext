@@ -1,11 +1,15 @@
 package org.eclipse.xtend.core.tests.macro;
 
 import com.google.common.collect.Iterables;
+import com.google.common.io.Files;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.io.File;
+import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -19,8 +23,6 @@ import org.eclipse.xtend.core.tests.macro.DelegatingClassloader;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendPackage;
-import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
-import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.junit4.InjectWith;
@@ -35,14 +37,12 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.workspace.FileProjectConfig;
+import org.eclipse.xtext.workspace.FileWorkspaceConfig;
+import org.eclipse.xtext.workspace.WorkspaceConfigAdapter;
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
-import org.eclipse.xtext.xbase.file.ProjectConfig;
-import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
-import org.eclipse.xtext.xbase.file.SimpleWorkspaceConfig;
-import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -74,18 +74,13 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
   private Provider<XtextResourceSet> resourceSetProvider;
   
   @Inject
-  private RuntimeWorkspaceConfigProvider configProvider;
-  
-  @Inject
-  @Extension
-  private MutableFileSystemSupport fileSystemSupport;
-  
-  @Inject
   private ValidationTestHelper validator;
   
   private final String macroProject = "macroProject";
   
   private final String clientProject = "userProject";
+  
+  private File workspaceRoot;
   
   @Before
   public void setUp() {
@@ -95,40 +90,8 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
   }
   
   protected void configureFreshWorkspace() {
-    final File tempDir = this.createFreshTempDir();
-    String _absolutePath = tempDir.getAbsolutePath();
-    SimpleWorkspaceConfig _simpleWorkspaceConfig = new SimpleWorkspaceConfig(_absolutePath);
-    final Procedure1<SimpleWorkspaceConfig> _function = new Procedure1<SimpleWorkspaceConfig>() {
-      @Override
-      public void apply(final SimpleWorkspaceConfig it) {
-        ProjectConfig _projectConfig = new ProjectConfig(ActiveAnnotationsRuntimeTest.this.macroProject);
-        final Procedure1<ProjectConfig> _function = new Procedure1<ProjectConfig>() {
-          @Override
-          public void apply(final ProjectConfig it) {
-            Map<Path, Path> _sourceFolderMappings = it.getSourceFolderMappings();
-            Path _path = new Path((("/" + ActiveAnnotationsRuntimeTest.this.macroProject) + "/src"));
-            Path _path_1 = new Path((("/" + ActiveAnnotationsRuntimeTest.this.macroProject) + "/xtend-gen"));
-            _sourceFolderMappings.put(_path, _path_1);
-          }
-        };
-        ProjectConfig _doubleArrow = ObjectExtensions.<ProjectConfig>operator_doubleArrow(_projectConfig, _function);
-        it.addProjectConfig(_doubleArrow);
-        ProjectConfig _projectConfig_1 = new ProjectConfig(ActiveAnnotationsRuntimeTest.this.clientProject);
-        final Procedure1<ProjectConfig> _function_1 = new Procedure1<ProjectConfig>() {
-          @Override
-          public void apply(final ProjectConfig it) {
-            Map<Path, Path> _sourceFolderMappings = it.getSourceFolderMappings();
-            Path _path = new Path((("/" + ActiveAnnotationsRuntimeTest.this.clientProject) + "/src"));
-            Path _path_1 = new Path((("/" + ActiveAnnotationsRuntimeTest.this.clientProject) + "/xtend-gen"));
-            _sourceFolderMappings.put(_path, _path_1);
-          }
-        };
-        ProjectConfig _doubleArrow_1 = ObjectExtensions.<ProjectConfig>operator_doubleArrow(_projectConfig_1, _function_1);
-        it.addProjectConfig(_doubleArrow_1);
-      }
-    };
-    SimpleWorkspaceConfig _doubleArrow = ObjectExtensions.<SimpleWorkspaceConfig>operator_doubleArrow(_simpleWorkspaceConfig, _function);
-    this.configProvider.setWorkspaceConfig(_doubleArrow);
+    File _createFreshTempDir = this.createFreshTempDir();
+    this.workspaceRoot = _createFreshTempDir;
   }
   
   protected File createFreshTempDir() {
@@ -140,16 +103,20 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
   }
   
   protected URI copyToDisk(final String projectName, final Pair<String, String> fileRepresentation) {
-    String _key = fileRepresentation.getKey();
-    String _plus = ((("/" + projectName) + "/src/") + _key);
-    final Path path = new Path(_plus);
-    String _value = fileRepresentation.getValue();
-    this.fileSystemSupport.setContents(path, _value);
-    WorkspaceConfig _workspaceConfig = this.configProvider.getWorkspaceConfig();
-    String _absoluteFileSystemPath = _workspaceConfig.getAbsoluteFileSystemPath();
-    String _string = path.toString();
-    String _plus_1 = (_absoluteFileSystemPath + _string);
-    return URI.createFileURI(_plus_1);
+    try {
+      String _key = fileRepresentation.getKey();
+      String _plus = ((projectName + "/src/") + _key);
+      final File file = new File(this.workspaceRoot, _plus);
+      File _parentFile = file.getParentFile();
+      _parentFile.mkdirs();
+      String _value = fileRepresentation.getValue();
+      Charset _defaultCharset = Charset.defaultCharset();
+      Files.write(_value, file, _defaultCharset);
+      String _path = file.getPath();
+      return URI.createFileURI(_path);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Override
@@ -204,14 +171,37 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
     {
       final URI macroURI = this.copyToDisk(this.macroProject, macroFile);
       final URI clientURI = this.copyToDisk(this.clientProject, clientFile);
+      FileWorkspaceConfig _fileWorkspaceConfig = new FileWorkspaceConfig(this.workspaceRoot);
+      final Procedure1<FileWorkspaceConfig> _function = new Procedure1<FileWorkspaceConfig>() {
+        @Override
+        public void apply(final FileWorkspaceConfig it) {
+          it.addProject(ActiveAnnotationsRuntimeTest.this.macroProject);
+          it.addProject(ActiveAnnotationsRuntimeTest.this.clientProject);
+          Set<FileProjectConfig> _projects = it.getProjects();
+          final Procedure1<FileProjectConfig> _function = new Procedure1<FileProjectConfig>() {
+            @Override
+            public void apply(final FileProjectConfig it) {
+              it.addSourceFolder("src");
+            }
+          };
+          IterableExtensions.<FileProjectConfig>forEach(_projects, _function);
+        }
+      };
+      final FileWorkspaceConfig workspaceConfig = ObjectExtensions.<FileWorkspaceConfig>operator_doubleArrow(_fileWorkspaceConfig, _function);
       final XtextResourceSet macroResourceSet = this.resourceSetProvider.get();
+      EList<Adapter> _eAdapters = macroResourceSet.eAdapters();
+      WorkspaceConfigAdapter _workspaceConfigAdapter = new WorkspaceConfigAdapter(workspaceConfig);
+      _eAdapters.add(_workspaceConfigAdapter);
       Class<? extends ActiveAnnotationsRuntimeTest> _class = this.getClass();
       ClassLoader _classLoader = _class.getClassLoader();
       macroResourceSet.setClasspathURIContext(_classLoader);
       macroResourceSet.createResource(macroURI);
       final XtextResourceSet resourceSet = this.resourceSetProvider.get();
+      EList<Adapter> _eAdapters_1 = resourceSet.eAdapters();
+      WorkspaceConfigAdapter _workspaceConfigAdapter_1 = new WorkspaceConfigAdapter(workspaceConfig);
+      _eAdapters_1.add(_workspaceConfigAdapter_1);
       resourceSet.createResource(clientURI);
-      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+      final IAcceptor<CompilationTestHelper.Result> _function_1 = new IAcceptor<CompilationTestHelper.Result>() {
         @Override
         public void accept(final CompilationTestHelper.Result result) {
           Class<? extends ActiveAnnotationsRuntimeTest> _class = ActiveAnnotationsRuntimeTest.this.getClass();
@@ -222,7 +212,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
           ActiveAnnotationsRuntimeTest.this.compiler.setJavaCompilerClassPath(classLoader);
         }
       };
-      this.compiler.compile(macroResourceSet, _function);
+      this.compiler.compile(macroResourceSet, _function_1);
       _xblockexpression = resourceSet;
     }
     return _xblockexpression;

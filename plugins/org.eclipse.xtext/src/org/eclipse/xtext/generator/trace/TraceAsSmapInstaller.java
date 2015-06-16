@@ -38,9 +38,6 @@ public class TraceAsSmapInstaller implements ITraceToBytecodeInstaller {
 	@Inject
 	private IResourceServiceProvider.Registry serviceProviderRegistry;
 	
-	@Inject
-	private ITraceURIConverter traceURIConverter; 
-
 	protected String smap;
 
 	protected /* @Nullable */
@@ -49,10 +46,6 @@ public class TraceAsSmapInstaller implements ITraceToBytecodeInstaller {
 		if (lineInfo == null || lineInfo.isEmpty())
 			return null;
 		return toSmap(outputFileName, lineInfo);
-	}
-
-	protected String getPath(URI path) {
-		return traceURIConverter.getURIForTrace(path).toString();
 	}
 
 	protected String getStratumName(final URI path) {
@@ -87,7 +80,7 @@ public class TraceAsSmapInstaller implements ITraceToBytecodeInstaller {
 		for (LineMapping lm : lineInfo) {
 			String stratumName = getStratumName(lm.source);
 			if (!"Java".equals(stratumName)) {
-				final String path = getPath(lm.source);
+				final String path = lm.source.path();
 				if (path != null) {
 					SmapStratum stratum = strata.get(stratumName);
 					if (stratum == null) {

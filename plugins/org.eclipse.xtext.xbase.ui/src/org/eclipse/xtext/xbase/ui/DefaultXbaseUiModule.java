@@ -32,15 +32,16 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeI
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.eclipse.xtext.ui.workspace.EclipseWorkspaceConfigProvider;
+import org.eclipse.xtext.ui.workspace.JdtWorkspaceConfigProvider;
+import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
-import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.ui.builder.EclipseGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.ui.builder.XbaseBuilderConfigurationBlock;
 import org.eclipse.xtext.xbase.ui.builder.XbaseBuilderPreferenceAccess;
 import org.eclipse.xtext.xbase.ui.contentassist.XbaseContentProposalPriorities;
 import org.eclipse.xtext.xbase.ui.contentassist.XbaseReferenceProposalCreator;
 import org.eclipse.xtext.xbase.ui.editor.actions.XbaseFoldingActionContributor;
-import org.eclipse.xtext.xbase.ui.file.EclipseWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingCalculator;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDispatchingEObjectTextHover;
@@ -51,8 +52,6 @@ import org.eclipse.xtext.xbase.ui.quickfix.XbaseCrossRefResolutionConverter;
 import org.eclipse.xtext.xbase.ui.validation.ProjectAwareUniqueClassNameValidator;
 import org.eclipse.xtext.xbase.ui.validation.XbaseUIValidator;
 import org.eclipse.xtext.xbase.validation.UniqueClassNameValidator;
-
-import com.google.inject.Binder;
 
 /**
  * A base module that contains default UI bindings for all Xbase inheriting languages.
@@ -145,14 +144,6 @@ public class DefaultXbaseUiModule extends DefaultCommonTypesUiModule {
 		return XbaseFoldingActionContributor.class;
 	}
 	
-	public void configureWorkspaceConfigContribution(Binder binder) {
-		binder.bind(WorkspaceConfig.class).toProvider(EclipseWorkspaceConfigProvider.class);
-	}
-	
-	public org.eclipse.core.resources.IWorkspaceRoot bindIWorkspaceRootToInstance() {
-		return ResourcesPlugin.getWorkspace().getRoot();
-	}
-	
 	public Class<? extends BuilderConfigurationBlock> bindBuilderConfigurationBlock() {
 		return XbaseBuilderConfigurationBlock.class;
 	}
@@ -163,6 +154,21 @@ public class DefaultXbaseUiModule extends DefaultCommonTypesUiModule {
 	
 	public Class<? extends BuilderPreferenceAccess.Initializer> bindBuilderPreferenceAccess$Initializer() {
 		return XbaseBuilderPreferenceAccess.Initializer.class;
+	}
+	
+
+	/**
+	 * @since 2.9
+	 */
+	public Class<? extends IWorkspaceConfigProvider> bindWorkspaceConfigProvider() {
+		return JdtWorkspaceConfigProvider.class;
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public org.eclipse.core.resources.IWorkspaceRoot bindIWorkspaceRootToInstance() {
+		return ResourcesPlugin.getWorkspace().getRoot();
 	}
 
 }

@@ -28,11 +28,14 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
+import org.eclipse.xtend.core.macro.AbstractFileSystemSupport
 import org.eclipse.xtend.core.macro.ActiveAnnotationContexts
 import org.eclipse.xtend.core.macro.ActiveAnnotationContexts.AnnotationCallback
 import org.eclipse.xtend.core.macro.AnnotationProcessor
 import org.eclipse.xtend.core.macro.CompilationContextImpl
 import org.eclipse.xtend.core.macro.ConstantExpressionsInterpreter
+import org.eclipse.xtend.core.macro.FileLocationsImpl
+import org.eclipse.xtend.core.macro.ParallelFileSystemSupport
 import org.eclipse.xtend.core.validation.IssueCodes
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget
 import org.eclipse.xtend.core.xtend.XtendAnnotationType
@@ -64,7 +67,6 @@ import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtend.lib.macro.declaration.Visibility
 import org.eclipse.xtend.lib.macro.expression.Expression
-import org.eclipse.xtend.lib.macro.file.FileLocations
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtend.lib.macro.services.AnnotationReferenceProvider
@@ -119,8 +121,6 @@ import org.eclipse.xtext.validation.EObjectDiagnosticImpl
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XListLiteral
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
-import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport
-import org.eclipse.xtext.xbase.file.ParallelFileSystemSupport
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
@@ -195,7 +195,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	@Accessors(PUBLIC_GETTER) @Inject OverrideHelper overrideHelper
 	@Accessors(PUBLIC_GETTER) @Inject IResourceChangeRegistry resourceChangeRegistry
 	@Inject AbstractFileSystemSupport fileSystemSupport
-	@Accessors(PUBLIC_GETTER) @Inject FileLocations fileLocations
+	@Accessors(PUBLIC_GETTER) @Inject FileLocationsImpl fileLocations
 	@Accessors(PUBLIC_GETTER) @Inject ReadAndWriteTracking readAndWriteTracking
 	@Accessors(PUBLIC_GETTER) @Inject IScopeProvider scopeProvider
 	@Accessors(PUBLIC_GETTER) @Inject IQualifiedNameConverter qualifiedNameConverter
@@ -236,6 +236,8 @@ class CompilationUnitImpl implements CompilationUnit {
 		this.xtendFile = xtendFile
 		// maintain invariants - CU should be usable without any further ado, e.g. before/after callback
 		this.typeRefFactory = new LightweightTypeReferenceFactory(new StandardTypeReferenceOwner(services, xtendFile))
+		this.fileSystemSupport.context = xtendFile.eResource.resourceSet
+		this.fileLocations.context = xtendFile.eResource
 	}
 	
 	def void before(AnnotationCallback phase) {
