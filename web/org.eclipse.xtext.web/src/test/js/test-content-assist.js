@@ -17,12 +17,12 @@ requirejs.config({
 	}
 });
 
-suite('content-assist', function() {
+suite('Content-assist', function() {
 	
 	test('should return the proposals sent by the server', function(done) {
 		requirejs(['assert', 'jquery', 'xtext/xtext-test'], function(assert, jQuery, xtext) {
 			jQuery.mockAjax({
-				listener: function(url, settings) {
+				onStart: function(url, settings) {
 					assert.equal('GET', settings.type);
 					assert.equal(0, settings.data.caretOffset);
 				},
@@ -39,7 +39,7 @@ suite('content-assist', function() {
 	test('should send the full text when requested', function(done) {
 		requirejs(['assert', 'jquery', 'xtext/xtext-test'], function(assert, jQuery, xtext) {
 			jQuery.mockAjax({
-				listener: function(url, settings) {
+				onStart: function(url, settings) {
 					assert.equal('foo', settings.data.fullText);
 					assert.equal(3, settings.data.caretOffset);
 					assert.equal('POST', settings.type);
@@ -57,7 +57,7 @@ suite('content-assist', function() {
 	test('should send a delta text when necessary', function(done) {
 		requirejs(['assert', 'jquery', 'xtext/xtext-test'], function(assert, jQuery, xtext) {
 			jQuery.mockAjax({
-				listener: function(url, settings) {
+				onStart: function(url, settings) {
 					assert.equal('foo', settings.data.deltaText);
 					assert.equal(3, settings.data.caretOffset);
 					assert.equal('POST', settings.type);
@@ -89,18 +89,18 @@ suite('content-assist', function() {
 		});
 	});
 	
-	test('should try again when conflict occurs', function(done) {
+	test('should try again when a conflict occurs', function(done) {
 		requirejs(['assert', 'jquery', 'xtext/xtext-test'], function(assert, jQuery, xtext) {
 			var trace = '';
 			jQuery.mockAjax([
 				{
-					listener: function(url, settings) {
+					onStart: function(url, settings) {
 						assert.equal('foo', settings.data.deltaText);
 						trace += 'a';
 					},
 					result: {conflict: 'invalidStateId'}
 				}, {
-					listener: function(url, settings) {
+					onStart: function(url, settings) {
 						assert.equal('foo', settings.data.fullText);
 						trace += 'b';
 					},
@@ -122,21 +122,21 @@ suite('content-assist', function() {
 			var trace = '';
 			jQuery.mockAjax([
 				{
-					listener: function(url, settings) {
+					onStart: function(url, settings) {
 						assert.equal('test://xtext-service/content-assist', url);
 						trace += 'a';
 					},
 					errorThrown: 'Resource not found',
 					xhr: {status: 404}
 				}, {
-					listener: function(url, settings) {
+					onStart: function(url, settings) {
 						assert.equal('test://xtext-service/update', url);
 						assert.equal('foo', settings.data.fullText);
 						trace += 'b';
 					},
 					result: {stateId: '1'}
 				}, {
-					listener: function(url, settings) {
+					onStart: function(url, settings) {
 						assert.equal('test://xtext-service/content-assist', url);
 						assert.equal('1', settings.data.requiredStateId);
 						trace += 'c';
@@ -159,14 +159,14 @@ suite('content-assist', function() {
 			var trace = '';
 			jQuery.mockAjax([
 				{
-					listener: function(url, settings) {
+					onStart: function(url, settings) {
 						assert.equal('test://xtext-service/update', url);
 						trace += 'a';
 					},
 					wait: true,
 					result: {stateId: '1'}
 				}, {
-					listener: function(url, settings) {
+					onStart: function(url, settings) {
 						assert.equal('test://xtext-service/content-assist', url);
 						assert.equal('1', settings.data.requiredStateId);
 						trace += 'c';
