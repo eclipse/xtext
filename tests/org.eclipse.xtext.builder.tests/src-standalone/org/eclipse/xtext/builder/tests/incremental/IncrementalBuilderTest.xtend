@@ -12,6 +12,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 import org.eclipse.xtext.builder.standalone.StandaloneBuilderInjectorProvider
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.junit4.builder.AbstractIncrementalBuilderTest
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.junit.Test
 import org.junit.runner.RunWith
