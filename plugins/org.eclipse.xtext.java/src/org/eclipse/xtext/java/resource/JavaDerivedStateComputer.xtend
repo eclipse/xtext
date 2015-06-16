@@ -11,7 +11,6 @@ import org.eclipse.jdt.internal.compiler.Compiler
 import org.eclipse.jdt.internal.compiler.DefaultErrorHandlingPolicies
 import org.eclipse.jdt.internal.compiler.ast.TypeDeclaration
 import org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants
-import org.eclipse.jdt.internal.compiler.env.ICompilationUnit
 import org.eclipse.jdt.internal.compiler.impl.CompilerOptions
 import org.eclipse.jdt.internal.compiler.parser.Parser
 import org.eclipse.jdt.internal.compiler.problem.DefaultProblemFactory
@@ -39,14 +38,6 @@ class JavaDerivedStateComputer {
 			unloader.unloadRoot(eObject) 
 		}
 		resource.getContents().clear 
-	}
-	
-	def installDerivedState(Resource resource, boolean preLinkingPhase) {
-		if (preLinkingPhase) {
-			installStubs(resource)
-		} else {
-			installFull(resource)
-		}
 	}
 	
 	def installStubs(Resource resource) {
@@ -97,8 +88,7 @@ class JavaDerivedStateComputer {
 		return jvmType
 	}
 	
-	//TODO make this return type inferred and do a full build in this project to see a bug
-	def ICompilationUnit getCompilationUnit(Resource resource) {
+	def getCompilationUnit(Resource resource) {
 		(resource as JavaResource).getCompilationUnit()
 	}
 	

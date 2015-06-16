@@ -20,7 +20,7 @@ class JavaSourceLanguageSetup implements ISetup, ISetupExtension {
 	}
 	
 	def Injector createInjector() {
-		return Guice.createInjector(new JavaRuntimeModule());
+		return Guice.createInjector(new JavaSourceLanguageRuntimeModule());
 	}
 	
 	def void register(Injector injector, String fileExtension) {
