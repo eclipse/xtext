@@ -28,6 +28,7 @@ import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.CheckMode
+import org.eclipse.xtext.generator.GeneratorDelegate
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -88,7 +89,7 @@ import org.eclipse.xtext.validation.CheckMode
 	
 		protected def void generate(Resource resource, BuildRequest request, Source2GeneratedMapping newMappings) {
 			val serviceProvider = resource.URI.getResourceServiceProvider
-			val generator = serviceProvider.get(IGenerator2)
+			val generator = serviceProvider.get(GeneratorDelegate)
 			if (generator == null) {
 				return;
 			}
