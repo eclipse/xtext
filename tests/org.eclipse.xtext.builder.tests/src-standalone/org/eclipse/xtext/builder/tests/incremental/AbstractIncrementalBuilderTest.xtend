@@ -65,7 +65,6 @@ abstract class AbstractIncrementalBuilderTest {
 				classpathURIContext = AbstractIncrementalBuilderTest.classLoader
 			]
 			classPath = #[]
-			outputs = #["out".uri]
 			dirtyFiles = #[]
 			deletedFiles = #[]
 			
