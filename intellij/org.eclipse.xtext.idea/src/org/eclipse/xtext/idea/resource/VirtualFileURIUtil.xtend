@@ -49,6 +49,9 @@ class VirtualFileURIUtil {
 		if (file != null) {
 			return file
 		}
+		if (uri.segmentCount==0) {
+			throw new IllegalStateException("couldn't find virtual file for "+uri)
+		}
 		val parent = getOrCreateFile(uri.trimSegments(1), true)
 		if (isDirectory) {
 			return parent.createChildDirectory(null, uri.lastSegment)

@@ -11,12 +11,10 @@ import com.google.common.collect.Iterables;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
-import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.incremental.BuildContext;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IResourceServiceProviderExtension;
@@ -102,14 +100,7 @@ public class ClusteringStorageAwareResourceLoader {
   }
   
   protected boolean isReadOnly(final URI uri) {
-    Map<String, LanguageAccess> _languages = this.context.getLanguages();
-    String _fileExtension = uri.fileExtension();
-    LanguageAccess _get = _languages.get(_fileExtension);
-    IResourceServiceProvider _resourceServiceProvider = null;
-    if (_get!=null) {
-      _resourceServiceProvider=_get.getResourceServiceProvider();
-    }
-    final IResourceServiceProvider provider = _resourceServiceProvider;
+    final IResourceServiceProvider provider = this.context.getResourceServiceProvider(uri);
     boolean _and = false;
     if (!(provider instanceof IResourceServiceProviderExtension)) {
       _and = false;

@@ -34,6 +34,7 @@ import org.eclipse.xtext.idea.build.net.Protocol.BuildResultMessage
 import static org.eclipse.xtext.idea.build.daemon.XtextBuildDaemon.*
 
 import static extension org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs.*
+import org.eclipse.xtext.resource.IResourceServiceProvider
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -154,6 +155,8 @@ class XtextBuildDaemon {
 		
 		@Inject IdeaIssueHandler issueHandler
 		
+		@Inject IResourceServiceProvider.Registry resourceServiceProviderRegistry
+		
 		IndexState indexState
 
 		ObjectChannel channel
@@ -182,7 +185,6 @@ class XtextBuildDaemon {
 		}
 
 		def BuildResultMessage build(BuildRequestMessage request) {
-			val languages = XtextLanguages.getLanguageAccesses
 			val xtextBuildResultCollector = xtextBuildResultCollectorProvider.get
 			singletons => [
 				objectChannel = channel
@@ -194,7 +196,7 @@ class XtextBuildDaemon {
 				classPath = request.classpath.map[asURI]
 				outputs = request.outputs.map[asURI]
 				if (indexState == null) {
-					resourceURICollector.collectAllResources(classPath + request.sourceRoots.map[asURI], languages.keySet)	
+					resourceURICollector.collectAllResources(classPath + request.sourceRoots.map[asURI], resourceServiceProviderRegistry.extensionToFactoryMap.keySet)	
 				} else {
 					dirtyFiles = request.dirtyFiles.map[asURI]
 					deletedFiles = request.deletedFiles.map[asURI]
@@ -210,7 +212,7 @@ class XtextBuildDaemon {
 					xtextBuildResultCollector.deletedFiles.add(deleted)
 				]
 			]
-			indexState = incrementalBuilder.build(buildRequest, languages).indexState
+			indexState = incrementalBuilder.build(buildRequest, IResourceServiceProvider.Registry.INSTANCE).indexState
 			val buildResult = xtextBuildResultCollector.buildResult
 			return buildResult
 		}

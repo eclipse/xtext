@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.URIHandler;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.idea.common.types.StubTypeProviderFactory;
 import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.internal.Log;
@@ -229,6 +230,9 @@ public class IdeaResourceSetProvider {
   @Inject
   private Provider<XtextResourceSet> resourceSetProvider;
   
+  @Inject
+  private StubTypeProviderFactory stubTypeProviderFactory;
+  
   public XtextResourceSet get(final Module context) {
     final XtextResourceSet resourceSet = this.resourceSetProvider.get();
     resourceSet.setClasspathURIContext(context);
@@ -239,6 +243,7 @@ public class IdeaResourceSetProvider {
     EList<URIHandler> _uRIHandlers_1 = _uRIConverter_1.getURIHandlers();
     IdeaResourceSetProvider.VirtualFileBasedUriHandler _virtualFileBasedUriHandler = new IdeaResourceSetProvider.VirtualFileBasedUriHandler();
     _uRIHandlers_1.add(_virtualFileBasedUriHandler);
+    this.stubTypeProviderFactory.createTypeProvider(resourceSet);
     return resourceSet;
   }
   

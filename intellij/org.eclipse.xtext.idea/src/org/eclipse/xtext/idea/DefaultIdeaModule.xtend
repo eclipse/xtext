@@ -16,19 +16,20 @@ import com.intellij.lexer.Lexer
 import com.intellij.openapi.fileTypes.SyntaxHighlighter
 import com.intellij.openapi.util.Key
 import com.intellij.psi.util.PsiModificationTracker
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider
 import org.eclipse.xtext.ide.LexerIdeBindings
 import org.eclipse.xtext.ide.editor.bracketmatching.DefaultBracePairProvider
 import org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider
 import org.eclipse.xtext.ide.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper
 import org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper
-import org.eclipse.xtext.idea.containers.ResolveScopeBasedContainerManger
+import org.eclipse.xtext.idea.common.types.StubTypeProviderFactory
 import org.eclipse.xtext.idea.highlighting.DefaultPairedBraceMatcher
 import org.eclipse.xtext.idea.highlighting.DefaultSyntaxHighlighter
 import org.eclipse.xtext.idea.parser.AntlrDelegatingIdeaLexer
 import org.eclipse.xtext.idea.refactoring.NullNamesValidator
+import org.eclipse.xtext.idea.resource.IdeaAllContainerStateProvider
 import org.eclipse.xtext.idea.resource.IdeaEncodingProvider
 import org.eclipse.xtext.idea.resource.IdeaResourceDescriptionsProvider
-import org.eclipse.xtext.idea.resource.impl.ProjectScopeBasedResourceDescriptions
 import org.eclipse.xtext.idea.structureview.DefaultPsiStructureViewFactory
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider
@@ -37,14 +38,10 @@ import org.eclipse.xtext.psi.IPsiModelAssociations
 import org.eclipse.xtext.psi.IPsiModelAssociator
 import org.eclipse.xtext.psi.PsiModelAssociations
 import org.eclipse.xtext.psi.impl.BaseXtextFile
-import org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex
-import org.eclipse.xtext.resource.IContainer
-import org.eclipse.xtext.resource.IResourceDescriptions
+import org.eclipse.xtext.resource.containers.IAllContainersState
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.eclipse.xtext.service.AbstractGenericModule
 import org.eclipse.xtext.service.SingletonBinding
-import org.eclipse.xtext.resource.containers.IAllContainersState
-import org.eclipse.xtext.idea.resource.IdeaAllContainerStateProvider
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -53,6 +50,10 @@ class DefaultIdeaModule extends AbstractGenericModule {
 
 	def Class<? extends Lexer> bindIdeaLexer() {
 		AntlrDelegatingIdeaLexer
+	}
+	
+	def Class<? extends IJvmTypeProvider.Factory> bindIJvmTypeProvider$Factory() {
+		StubTypeProviderFactory
 	}
 
 //	def void configureIResourceDescriptions(Binder binder) {

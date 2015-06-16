@@ -1,16 +1,14 @@
 package org.eclipse.xtext.java.tests;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.net.URL;
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
@@ -26,17 +24,14 @@ import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
 import org.eclipse.xtext.common.types.testSetups.AbstractMethods;
 import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuperSuper;
 import org.eclipse.xtext.common.types.testSetups.ClassWithVarArgs;
-import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.java.tests.JavaInjectorProvider;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 import org.junit.Test;
@@ -50,7 +45,7 @@ public class ReusedTypeProviderTest extends AbstractTypeProviderTest {
   private IncrementalBuilder builder;
   
   @Inject
-  private IResourceServiceProvider resourceServiceProvider;
+  private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
   
   @Inject
   private FileExtensionProvider extensionProvider;
@@ -61,53 +56,53 @@ public class ReusedTypeProviderTest extends AbstractTypeProviderTest {
   @Inject
   private Provider<XtextResourceSet> resourceSetProvider;
   
-  private IJvmTypeProvider typeProvider;
+  private static IJvmTypeProvider typeProvider;
   
   @Override
   public void setUp() throws Exception {
     super.setUp();
-    final String pathToSources = "/org/eclipse/xtext/common/types/testSetups";
-    final List<String> files = MockJavaProjectProvider.readResource((pathToSources + "/files.list"));
-    XtextResourceSet _get = this.resourceSetProvider.get();
-    final Procedure1<XtextResourceSet> _function = new Procedure1<XtextResourceSet>() {
-      @Override
-      public void apply(final XtextResourceSet it) {
-        ClassLoader _classLoader = ReusedTypeProviderTest.class.getClassLoader();
-        it.setClasspathURIContext(_classLoader);
-      }
-    };
-    final XtextResourceSet resourceSet = ObjectExtensions.<XtextResourceSet>operator_doubleArrow(_get, _function);
-    this.typeProviderFactory.createTypeProvider(resourceSet);
-    BuildRequest _buildRequest = new BuildRequest();
-    final Procedure1<BuildRequest> _function_1 = new Procedure1<BuildRequest>() {
-      @Override
-      public void apply(final BuildRequest it) {
-        Iterable<String> _filterNull = IterableExtensions.<String>filterNull(files);
-        for (final String file : _filterNull) {
-          {
-            final String fullPath = ((pathToSources + "/") + file);
-            final URL url = MockJavaProjectProvider.class.getResource(fullPath);
-            List<URI> _dirtyFiles = it.getDirtyFiles();
-            String _externalForm = url.toExternalForm();
-            URI _createURI = URI.createURI(_externalForm);
-            _dirtyFiles.add(_createURI);
-          }
+    boolean _equals = Objects.equal(ReusedTypeProviderTest.typeProvider, null);
+    if (_equals) {
+      final String pathToSources = "/org/eclipse/xtext/common/types/testSetups";
+      final List<String> files = MockJavaProjectProvider.readResource((pathToSources + "/files.list"));
+      XtextResourceSet _get = this.resourceSetProvider.get();
+      final Procedure1<XtextResourceSet> _function = new Procedure1<XtextResourceSet>() {
+        @Override
+        public void apply(final XtextResourceSet it) {
+          ClassLoader _classLoader = ReusedTypeProviderTest.class.getClassLoader();
+          it.setClasspathURIContext(_classLoader);
         }
-        it.setResourceSet(resourceSet);
-      }
-    };
-    final BuildRequest buildRequest = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_1);
-    Set<OutputConfiguration> _emptySet = CollectionLiterals.<OutputConfiguration>emptySet();
-    final LanguageAccess languageAccess = new LanguageAccess(_emptySet, this.resourceServiceProvider, true);
-    Pair<String, LanguageAccess> _mappedTo = Pair.<String, LanguageAccess>of("txt", languageAccess);
-    this.builder.build(buildRequest, Collections.<String, LanguageAccess>unmodifiableMap(CollectionLiterals.<String, LanguageAccess>newHashMap(_mappedTo)));
-    IJvmTypeProvider _findTypeProvider = this.typeProviderFactory.findTypeProvider(resourceSet);
-    this.typeProvider = _findTypeProvider;
+      };
+      final XtextResourceSet resourceSet = ObjectExtensions.<XtextResourceSet>operator_doubleArrow(_get, _function);
+      this.typeProviderFactory.createTypeProvider(resourceSet);
+      BuildRequest _buildRequest = new BuildRequest();
+      final Procedure1<BuildRequest> _function_1 = new Procedure1<BuildRequest>() {
+        @Override
+        public void apply(final BuildRequest it) {
+          Iterable<String> _filterNull = IterableExtensions.<String>filterNull(files);
+          for (final String file : _filterNull) {
+            {
+              final String fullPath = ((pathToSources + "/") + file);
+              final URL url = MockJavaProjectProvider.class.getResource(fullPath);
+              List<URI> _dirtyFiles = it.getDirtyFiles();
+              String _externalForm = url.toExternalForm();
+              URI _createURI = URI.createURI(_externalForm);
+              _dirtyFiles.add(_createURI);
+            }
+          }
+          it.setResourceSet(resourceSet);
+        }
+      };
+      final BuildRequest buildRequest = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_1);
+      this.builder.build(buildRequest, this.resourceServiceProviderRegistry);
+      IJvmTypeProvider _findTypeProvider = this.typeProviderFactory.findTypeProvider(resourceSet);
+      ReusedTypeProviderTest.typeProvider = _findTypeProvider;
+    }
   }
   
   @Override
   protected IJvmTypeProvider getTypeProvider() {
-    return this.typeProvider;
+    return ReusedTypeProviderTest.typeProvider;
   }
   
   @Override

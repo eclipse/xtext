@@ -22,6 +22,7 @@ import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.progress.ProcessCanceledException
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.roots.GeneratedSourcesFilter
 import com.intellij.openapi.roots.ModuleRootManager
 import com.intellij.openapi.roots.OrderEnumerator
 import com.intellij.openapi.roots.ProjectFileIndex
@@ -31,21 +32,27 @@ import com.intellij.openapi.vfs.VirtualFileAdapter
 import com.intellij.openapi.vfs.VirtualFileEvent
 import com.intellij.openapi.vfs.VirtualFileManager
 import com.intellij.openapi.vfs.VirtualFileMoveEvent
+import com.intellij.psi.PsiJavaFile
+import com.intellij.psi.PsiManager
+import com.intellij.psi.impl.PsiModificationTrackerImpl
 import com.intellij.util.Alarm
 import java.util.List
+import java.util.Set
 import java.util.concurrent.BlockingQueue
 import java.util.concurrent.LinkedBlockingQueue
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder
 import org.eclipse.xtext.builder.standalone.incremental.IndexState
+import org.eclipse.xtext.builder.standalone.incremental.TypeResourceDescription.ChangedDelta
 import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider
 import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider.VirtualFileBasedUriHandler
 import org.eclipse.xtext.idea.shared.IdeaSharedInjectorProvider
-import org.eclipse.xtext.idea.shared.XtextLanguages
+import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.resource.IResourceDescription.Event
 import org.eclipse.xtext.resource.IResourceDescription.Event.Listener
 import org.eclipse.xtext.resource.IResourceDescriptions
+import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.util.internal.Log
 
 import static org.eclipse.xtext.idea.build.BuildEvent.Type.*
@@ -61,6 +68,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		def void aboutToBuild(List<BuildEvent> events)
 		def void finishedBuild()
 	}
+	
 	boolean disposed
 		
 	BlockingQueue<BuildEvent> queue = new LinkedBlockingQueue<BuildEvent>()
@@ -73,9 +81,11 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	
 	@Inject Provider<BuildProgressReporter> buildProgressReporterProvider
 	 
-	@Inject XtextLanguages xtextLanguages
-	
 	@Inject IdeaResourceSetProvider resourceSetProvider
+	
+	@Inject IResourceServiceProvider.Registry resourceServiceProviderRegistry
+	
+	@Inject IQualifiedNameConverter qualifiedNameConverter
 	
 	IndexState indexState
 	
@@ -93,9 +103,14 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		EditorFactory.getInstance().getEventMulticaster().addDocumentListener(new DocumentAdapter() {
 			override void documentChanged(DocumentEvent event) {
 				var file = FileDocumentManager.getInstance().getFile(event.getDocument())
-				fileModified(file)
+				if (file != null) {
+					fileModified(file)
+				} else {
+					LOG.info("No virtual file for document. Contents was "+event.document)
+				}
 			}
 		}, project)
+		
 		VirtualFileManager.getInstance().addVirtualFileListener(new VirtualFileAdapter() {
 			override void contentsChanged(VirtualFileEvent event) {
 				fileModified(event.getFile())
@@ -166,6 +181,9 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	public static boolean TEST_MODE = false
 
 	protected def enqueue(VirtualFile file, BuildEvent.Type type) {
+		if (isExcluded(file)) {
+			return;
+		}
 		if (!disposed && !isLoaded()) {
 			queueAllResources()
 		}
@@ -175,12 +193,18 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		if (file != null && !disposed) {
 			queue.put(new BuildEvent(file, type))
 			if (TEST_MODE) {
+				(PsiManager.getInstance(getProject()).getModificationTracker() as PsiModificationTrackerImpl).incCounter();
 				build
 			} else {
 				alarm.cancelAllRequests
 				alarm.addRequest([build], 200)
 			}
 		}
+	}
+	
+	protected def boolean isExcluded(VirtualFile file) {
+		return file == null || GeneratedSourcesFilter.isGeneratedSourceByAnyFilter(file, project) 
+				|| (indexState != null && !indexState.fileMappings.getSource(file.URI).empty)
 	}
 	
 	protected def boolean isLoaded() {
@@ -230,13 +254,38 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 				if(module != null)
 					module2event.put(module, it)
 			]
+			// deltas are added over the whole build
+			val deltas = newArrayList
 			for (module: module2event.keySet) {
 				val events = module2event.get(module)
+				val changedUris = newHashSet
+				val deletedUris = newHashSet
+				for (event : events.filter[type==MODIFIED || type == ADDED]) {
+					switch event.type {
+						case MODIFIED,
+						case ADDED: {
+							if (isJavaFile(event.file)) {
+								deltas += getJavaDeltas(event.file, module)
+							} else {
+								changedUris += event.file.URI
+							}
+						}
+						case DELETED : {
+							if (isJavaFile(event.file)) {
+								deltas += getJavaDeltas(event.file, module)
+							} else {
+								changedUris += event.file.URI
+							}
+						}
+					}
+				}
+				
 				val entries = OrderEnumerator.orderEntries(module)
 				val request = new BuildRequest => [
 					resourceSet = resourceSetProvider.get(module)
-					dirtyFiles += events.filter[type==MODIFIED || type == ADDED].map[file.URI]
-					deletedFiles += events.filter[type == DELETED].map[file.URI]
+					dirtyFiles += changedUris
+					deletedFiles += deletedUris
+					externalDeltas += deltas
 					classPath += entries.withoutSdk.classes.pathsList.virtualFiles.filter[/* HACK! we need to properly exclude the out put dir */!isDirectory].map[URI]
 					baseDir = ModuleRootManager.getInstance(module).contentRoots.head.URI
 					// outputs = ??
@@ -249,7 +298,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 				]
 				val app = ApplicationManager.application
 				val result = app.<IncrementalBuilder.Result>runReadAction [
-					builderProvider.get().build(request, xtextLanguages.languageAccesses)
+					builderProvider.get().build(request, resourceServiceProviderRegistry)
 				]
 				indexState = result.indexState
 				app.invokeAndWait([
@@ -261,6 +310,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 				notifyListeners [
 					ImmutableList.copyOf(result.affectedResources)
 				]
+				deltas.addAll(result.affectedResources)
 			}
 		} catch(ProcessCanceledException exc) {
 			queue.addAll(allEvents)
@@ -270,6 +320,21 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 				finishedBuild()
 			]
 		}
+	}
+	
+	def boolean isJavaFile(VirtualFile file) {
+		file.extension == 'java'
+	}
+	
+	def Set<IResourceDescription.Delta> getJavaDeltas(VirtualFile file, Module module) {
+		val psiFile = PsiManager.getInstance(module.project).findFile(file)
+		val result = <IResourceDescription.Delta>newLinkedHashSet
+		if (psiFile instanceof PsiJavaFile) {
+			for (clazz : psiFile.classes) {
+				result += new ChangedDelta(qualifiedNameConverter.toQualifiedName(clazz.qualifiedName)) 
+			}
+		}
+		return result
 	}
 	
 	protected def getIndexState() {
@@ -293,9 +358,6 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	}
 
 	protected def findModule(BuildEvent it, ProjectFileIndex fileIndex) {
-		if (xtextLanguages.languageAccesses.get(file.extension) == null) {
-			return null
-		}
 		if (type == DELETED)
 			file.findModule(fileIndex)
 		else

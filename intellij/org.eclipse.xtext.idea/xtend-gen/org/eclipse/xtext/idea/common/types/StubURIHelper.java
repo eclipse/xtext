@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.xbase.idea.types.access;
+package org.eclipse.xtext.idea.common.types;
 
 import com.google.common.base.Objects;
 import com.intellij.psi.PsiArrayType;
@@ -23,7 +23,7 @@ import com.intellij.psi.PsiTypeParameterListOwner;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.common.types.access.impl.Primitives;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
-import org.eclipse.xtext.xbase.idea.types.access.UnresolvedPsiClassType;
+import org.eclipse.xtext.idea.common.types.UnresolvedPsiClassType;
 
 @SuppressWarnings("all")
 public class StubURIHelper implements URIHelperConstants {

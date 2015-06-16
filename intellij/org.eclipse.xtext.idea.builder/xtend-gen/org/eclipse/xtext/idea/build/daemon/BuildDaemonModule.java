@@ -12,6 +12,7 @@ import org.eclipse.xtext.builder.standalone.StandaloneBuilderModule;
 import org.eclipse.xtext.builder.standalone.incremental.IClassFileBasedDependencyFinder;
 import org.eclipse.xtext.idea.build.daemon.BuildDaemonClassFileBasedDependencyFinder;
 import org.eclipse.xtext.idea.build.daemon.IdeaBuilderResourceDescriptionsProvider;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 
 /**
@@ -26,5 +27,7 @@ public class BuildDaemonModule extends StandaloneBuilderModule {
     _bind.to(IdeaBuilderResourceDescriptionsProvider.class);
     AnnotatedBindingBuilder<IClassFileBasedDependencyFinder> _bind_1 = this.<IClassFileBasedDependencyFinder>bind(IClassFileBasedDependencyFinder.class);
     _bind_1.to(BuildDaemonClassFileBasedDependencyFinder.class);
+    AnnotatedBindingBuilder<IResourceServiceProvider.Registry> _bind_2 = this.<IResourceServiceProvider.Registry>bind(IResourceServiceProvider.Registry.class);
+    _bind_2.toInstance(IResourceServiceProvider.Registry.INSTANCE);
   }
 }

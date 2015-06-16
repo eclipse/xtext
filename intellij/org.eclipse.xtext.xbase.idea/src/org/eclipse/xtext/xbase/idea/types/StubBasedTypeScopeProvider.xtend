@@ -16,10 +16,10 @@ import org.eclipse.xtext.common.types.access.IJvmTypeProvider
 import org.eclipse.xtext.common.types.xtext.AbstractConstructorScope
 import org.eclipse.xtext.common.types.xtext.AbstractTypeScope
 import org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider
+import org.eclipse.xtext.idea.common.types.StubJvmTypeProvider
+import org.eclipse.xtext.idea.common.types.StubTypeProviderFactory
 import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.resource.IEObjectDescription
-import org.eclipse.xtext.xbase.idea.types.access.StubTypeProviderFactory
-import org.eclipse.xtext.xbase.idea.types.access.StubJvmTypeProvider
 
 class StubBasedTypeScopeProvider extends AbstractTypeScopeProvider {
 

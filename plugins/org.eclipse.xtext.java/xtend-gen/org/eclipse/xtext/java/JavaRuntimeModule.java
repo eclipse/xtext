@@ -1,4 +1,4 @@
-package org.eclipse.xtext.java.resource;
+package org.eclipse.xtext.java;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.binder.AnnotatedBindingBuilder;

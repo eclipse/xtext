@@ -1,24 +1,30 @@
 package org.eclipse.xtext.java.resource
 
-import org.eclipse.xtext.resource.IResourceServiceProvider
-import org.eclipse.emf.common.util.URI
+import com.google.inject.ConfigurationException
 import com.google.inject.Inject
 import com.google.inject.Injector
-import org.eclipse.xtext.resource.IContainer
+import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.parser.IEncodingProvider
+import org.eclipse.xtext.resource.FileExtensionProvider
+import org.eclipse.xtext.resource.IContainer
 import org.eclipse.xtext.resource.IResourceDescription
-import org.eclipse.xtext.validation.IResourceValidator
+import org.eclipse.xtext.resource.IResourceServiceProvider
 
 class JavaResourceServiceProvider implements IResourceServiceProvider {
 	
 	@Inject Injector injector
+	@Inject FileExtensionProvider extensionProvider
 	
 	override canHandle(URI uri) {
-		return uri.fileExtension == 'java'
+		return extensionProvider.fileExtensions.contains(uri.fileExtension)
 	}
 	
 	override <T> get(Class<T> t) {
-		injector.getInstance(t)
+		try {
+			return injector.getInstance(t)
+		} catch (ConfigurationException e) {
+			return null
+		}
 	}
 	
 	override getContainerManager() {
@@ -34,7 +40,7 @@ class JavaResourceServiceProvider implements IResourceServiceProvider {
 	}
 	
 	override getResourceValidator() {
-		get(IResourceValidator)
+		null
 	}
 	
 }

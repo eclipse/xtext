@@ -9,11 +9,70 @@ package org.eclipse.xtend.idea.autobuild;
 
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
+import junit.framework.TestCase;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.junit.ComparisonFailure;
 
 @SuppressWarnings("all")
-public class CyclicResolutionInEditorTest extends LightXtendTest {
+public class IdeaIntegrationTest extends LightXtendTest {
+  public void testJavaChangeTriggersError() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package otherPackage");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import mypackage.Bar");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void callToBar(Bar bar) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("bar.doStuff()");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final PsiFile xtendFile = this.myFixture.addFileToProject("otherPackage/Foo.xtend", _builder.toString());
+    try {
+      VirtualFile _virtualFile = xtendFile.getVirtualFile();
+      this.myFixture.testHighlighting(true, true, true, _virtualFile);
+      TestCase.fail("expecting errors");
+    } catch (final Throwable _t) {
+      if (_t instanceof ComparisonFailure) {
+        final ComparisonFailure e = (ComparisonFailure)_t;
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package mypackage;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("public class Bar {");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("public void doStuff() {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.myFixture.addFileToProject("myPackage/Bar.java", _builder_1.toString());
+    VirtualFile _virtualFile_1 = xtendFile.getVirtualFile();
+    this.myFixture.testHighlighting(true, true, true, _virtualFile_1);
+  }
+  
   public void testCyclicResolution() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package mypackage;");

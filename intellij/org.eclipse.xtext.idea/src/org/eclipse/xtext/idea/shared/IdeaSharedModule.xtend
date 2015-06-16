@@ -7,15 +7,27 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.shared
 
-import org.eclipse.xtext.builder.standalone.StandaloneBuilderModule
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider
+import org.eclipse.xtext.idea.common.types.StubTypeProviderFactory
+import org.eclipse.xtext.psi.IPsiModelAssociator
+import org.eclipse.xtext.psi.PsiModelAssociations
+import org.eclipse.xtext.service.AbstractGenericModule
+import org.eclipse.xtext.resource.IResourceServiceProvider
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-class IdeaSharedModule extends StandaloneBuilderModule {
+class IdeaSharedModule extends AbstractGenericModule {
+
+	def Class<? extends IJvmTypeProvider.Factory> bindIJvmTypeProvider$Factory() {
+		StubTypeProviderFactory
+	}	
 	
-	override protected configure() {
-		super.configure()
+	def IResourceServiceProvider.Registry getIResourceServiceProvider$Registry() {
+		IResourceServiceProvider.Registry.INSTANCE
 	}
-	
+
+	def Class<? extends IPsiModelAssociator> bindIPsiModelAssociator() {
+		PsiModelAssociations
+	}
 }

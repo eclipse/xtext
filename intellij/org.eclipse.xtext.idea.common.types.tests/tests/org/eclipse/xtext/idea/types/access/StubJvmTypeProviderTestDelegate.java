@@ -12,12 +12,12 @@ import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.AbstractTypeProviderTest;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
+import org.eclipse.xtext.idea.common.types.StubJvmTypeProvider;
 import org.eclipse.xtext.idea.common.types.idea.lang.RefactoringTestLanguageLanguage;
 import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider;
 import org.eclipse.xtext.idea.resource.IndexingAwareGlobalSearchScope;
 import org.eclipse.xtext.psi.IPsiModelAssociator;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.xbase.idea.types.access.StubJvmTypeProvider;
 
 import com.google.inject.Inject;
 import com.intellij.openapi.module.Module;

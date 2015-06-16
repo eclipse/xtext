@@ -10,20 +10,16 @@ package org.eclipse.xtext.builder.tests.incremental;
 import com.google.inject.Inject;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.builder.standalone.ILanguageConfiguration;
-import org.eclipse.xtext.builder.standalone.LanguageAccess;
-import org.eclipse.xtext.builder.standalone.LanguageAccessFactory;
 import org.eclipse.xtext.builder.standalone.StandaloneBuilderInjectorProvider;
-import org.eclipse.xtext.builder.standalone.StandaloneBuilderTest;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.builder.standalone.incremental.Source2GeneratedMapping;
 import org.eclipse.xtext.builder.tests.incremental.AbstractIncrementalBuilderTest;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -40,16 +36,11 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("all")
 public class IncrementalBuilderTest extends AbstractIncrementalBuilderTest {
   @Inject
-  protected LanguageAccessFactory languageAccessFactory;
+  private IResourceServiceProvider.Registry resourceServiceProviderFactory;
   
   @Override
-  public Iterable<? extends LanguageAccess> getLanguages() {
-    StandaloneBuilderTest.TestLanguageConfiguration _testLanguageConfiguration = new StandaloneBuilderTest.TestLanguageConfiguration(false);
-    Class<? extends IncrementalBuilderTest> _class = this.getClass();
-    ClassLoader _classLoader = _class.getClassLoader();
-    Map<String, LanguageAccess> _createLanguageAccess = this.languageAccessFactory.createLanguageAccess(Collections.<ILanguageConfiguration>unmodifiableList(CollectionLiterals.<ILanguageConfiguration>newArrayList(_testLanguageConfiguration)), _classLoader);
-    Collection<LanguageAccess> _values = _createLanguageAccess.values();
-    return IterableExtensions.<LanguageAccess>toList(_values);
+  public IResourceServiceProvider.Registry getLanguages() {
+    return this.resourceServiceProviderFactory;
   }
   
   @Test

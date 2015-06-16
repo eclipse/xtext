@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.xbase.idea.types.access;
+package org.eclipse.xtext.idea.common.types;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
@@ -102,12 +102,12 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.impl.AbstractDeclaredTypeFactory;
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
 import org.eclipse.xtext.common.types.impl.JvmTypeConstraintImplCustom;
+import org.eclipse.xtext.idea.common.types.StubURIHelper;
+import org.eclipse.xtext.idea.common.types.UnresolvedPsiClassType;
 import org.eclipse.xtext.idea.extensions.IdeaProjectExtensions;
 import org.eclipse.xtext.psi.IPsiModelAssociator;
 import org.eclipse.xtext.psi.PsiElementProvider;
 import org.eclipse.xtext.util.internal.Stopwatches;
-import org.eclipse.xtext.xbase.idea.types.access.StubURIHelper;
-import org.eclipse.xtext.xbase.idea.types.access.UnresolvedPsiClassType;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;

@@ -49,6 +49,9 @@ public class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
   private URIConverter converter;
   
   @Accessors
+  private URI baseDir;
+  
+  @Accessors
   private IEncodingProvider encodingProvider = new IEncodingProvider.Runtime();
   
   @Accessors
@@ -84,7 +87,13 @@ public class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
       throw new IllegalArgumentException((("A slot with name \'" + outputConfiguration) + "\' has not been configured."));
     }
     final URI uri = URI.createURI(((outlet + "/") + path));
-    return uri;
+    boolean _notEquals = (!Objects.equal(this.baseDir, null));
+    if (_notEquals) {
+      final URI resolved = uri.resolve(this.baseDir);
+      return resolved;
+    } else {
+      return uri;
+    }
   }
   
   public String getEncoding(final URI uri) {
@@ -152,6 +161,15 @@ public class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
   
   public void setConverter(final URIConverter converter) {
     this.converter = converter;
+  }
+  
+  @Pure
+  public URI getBaseDir() {
+    return this.baseDir;
+  }
+  
+  public void setBaseDir(final URI baseDir) {
+    this.baseDir = baseDir;
   }
   
   @Pure

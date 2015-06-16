@@ -59,6 +59,11 @@ public class VirtualFileURIUtil {
       if (_notEquals) {
         return file;
       }
+      int _segmentCount = uri.segmentCount();
+      boolean _equals = (_segmentCount == 0);
+      if (_equals) {
+        throw new IllegalStateException(("couldn\'t find virtual file for " + uri));
+      }
       URI _trimSegments = uri.trimSegments(1);
       final VirtualFile parent = VirtualFileURIUtil.getOrCreateFile(_trimSegments, true);
       if (isDirectory) {

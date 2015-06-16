@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.idea.types.access
+package org.eclipse.xtext.idea.common.types
 
 import com.google.inject.Inject
 import com.intellij.openapi.progress.ProgressIndicatorProvider
@@ -26,6 +26,7 @@ import com.intellij.psi.PsiClassType
 import com.intellij.psi.PsiClassType.ClassResolveResult
 import com.intellij.psi.PsiCompiledElement
 import com.intellij.psi.PsiConstantEvaluationHelper
+import com.intellij.psi.PsiElementFactory
 import com.intellij.psi.PsiEnumConstant
 import com.intellij.psi.PsiField
 import com.intellij.psi.PsiJavaFile
@@ -76,7 +77,6 @@ import org.eclipse.xtext.psi.IPsiModelAssociator
 import org.eclipse.xtext.util.internal.Stopwatches
 
 import static extension org.eclipse.xtext.idea.extensions.IdeaProjectExtensions.*
-import com.intellij.psi.PsiElementFactory
 
 class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 

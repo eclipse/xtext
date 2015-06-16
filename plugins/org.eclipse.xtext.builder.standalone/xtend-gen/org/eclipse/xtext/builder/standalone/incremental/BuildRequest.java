@@ -16,6 +16,7 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
 import org.eclipse.xtext.builder.standalone.incremental.IndexState;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.validation.Issue;
@@ -96,6 +97,8 @@ public class BuildRequest {
   
   private List<URI> deletedFiles = CollectionLiterals.<URI>newArrayList();
   
+  private List<IResourceDescription.Delta> externalDeltas = CollectionLiterals.<IResourceDescription.Delta>newArrayList();
+  
   /**
    * call back after validation, return <code>false</code> will stop the build.
    */
@@ -159,6 +162,15 @@ public class BuildRequest {
   
   public void setDeletedFiles(final List<URI> deletedFiles) {
     this.deletedFiles = deletedFiles;
+  }
+  
+  @Pure
+  public List<IResourceDescription.Delta> getExternalDeltas() {
+    return this.externalDeltas;
+  }
+  
+  public void setExternalDeltas(final List<IResourceDescription.Delta> externalDeltas) {
+    this.externalDeltas = externalDeltas;
   }
   
   @Pure

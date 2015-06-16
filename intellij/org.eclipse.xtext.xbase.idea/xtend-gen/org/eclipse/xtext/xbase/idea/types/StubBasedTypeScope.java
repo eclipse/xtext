@@ -14,10 +14,10 @@ import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.xtext.AbstractTypeScope;
+import org.eclipse.xtext.idea.common.types.StubJvmTypeProvider;
+import org.eclipse.xtext.idea.common.types.StubURIHelper;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.xbase.idea.types.access.StubJvmTypeProvider;
-import org.eclipse.xtext.xbase.idea.types.access.StubURIHelper;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 
 @SuppressWarnings("all")

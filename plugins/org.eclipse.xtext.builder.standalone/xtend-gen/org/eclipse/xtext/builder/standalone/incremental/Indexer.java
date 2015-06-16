@@ -13,13 +13,11 @@ import com.google.inject.Singleton;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.Data;
-import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.incremental.BuildContext;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.builder.standalone.incremental.IndexState;
@@ -27,6 +25,7 @@ import org.eclipse.xtext.builder.standalone.incremental.ResolvedResourceDescript
 import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
@@ -117,25 +116,21 @@ public class Indexer {
   private CompilerPhases compilerPhases;
   
   public Indexer.IndexResult computeAndIndexAffected(final BuildRequest request, @Extension final BuildContext context) {
-    boolean _isInfoEnabled = Indexer.LOG.isInfoEnabled();
-    if (_isInfoEnabled) {
-      Indexer.LOG.info("Creating new index");
-    }
     IndexState _previousState = request.getPreviousState();
     final ResourceDescriptionsData previousIndex = _previousState.getResourceDescriptions();
     final ResourceDescriptionsData newIndex = previousIndex.copy();
     XtextResourceSet _resourceSet = context.getResourceSet();
     this.installIndex(_resourceSet, newIndex);
     final List<IResourceDescription.Delta> deltas = CollectionLiterals.<IResourceDescription.Delta>newArrayList();
-    boolean _isInfoEnabled_1 = Indexer.LOG.isInfoEnabled();
-    if (_isInfoEnabled_1) {
+    boolean _isInfoEnabled = Indexer.LOG.isInfoEnabled();
+    if (_isInfoEnabled) {
       List<URI> _deletedFiles = request.getDeletedFiles();
-      String _join = IterableExtensions.join(_deletedFiles, ", ");
-      String _plus = ("Creating Deltas for changes. Deleted : " + _join);
-      String _plus_1 = (_plus + " - Changed : ");
+      Set<URI> _set = IterableExtensions.<URI>toSet(_deletedFiles);
+      String _plus = ("Creating Deltas for changes. Deleted : " + _set);
+      String _plus_1 = (_plus + ", Changed : ");
       List<URI> _dirtyFiles = request.getDirtyFiles();
-      String _join_1 = IterableExtensions.join(_dirtyFiles, ", ");
-      String _plus_2 = (_plus_1 + _join_1);
+      Set<URI> _set_1 = IterableExtensions.<URI>toSet(_dirtyFiles);
+      String _plus_2 = (_plus_1 + _set_1);
       String _plus_3 = (_plus_2 + ".");
       Indexer.LOG.info(_plus_3);
     }
@@ -146,6 +141,13 @@ public class Indexer {
     deltas.addAll(_deltasForChangedResources);
     for (final IResourceDescription.Delta delta : deltas) {
       newIndex.register(delta);
+    }
+    List<IResourceDescription.Delta> _externalDeltas = request.getExternalDeltas();
+    boolean _isEmpty = _externalDeltas.isEmpty();
+    boolean _not = (!_isEmpty);
+    if (_not) {
+      List<IResourceDescription.Delta> _externalDeltas_1 = request.getExternalDeltas();
+      deltas.addAll(_externalDeltas_1);
     }
     Iterable<IResourceDescription> _allResourceDescriptions = previousIndex.getAllResourceDescriptions();
     final Function1<IResourceDescription, URI> _function = new Function1<IResourceDescription, URI>() {
@@ -167,10 +169,8 @@ public class Indexer {
     final Function1<URI, Boolean> _function_2 = new Function1<URI, Boolean>() {
       @Override
       public Boolean apply(final URI it) {
-        Map<String, LanguageAccess> _languages = context.getLanguages();
-        String _fileExtension = it.fileExtension();
-        LanguageAccess _get = _languages.get(_fileExtension);
-        final IResourceDescription.Manager manager = _get.getResourceDescriptionManager();
+        IResourceServiceProvider _resourceServiceProvider = context.getResourceServiceProvider(it);
+        final IResourceDescription.Manager manager = _resourceServiceProvider.getResourceDescriptionManager();
         final IResourceDescription resourceDescription = previousIndex.getResourceDescription(it);
         final boolean isAffected = Indexer.this.isAffected(resourceDescription, manager, deltas, deltas, newIndex);
         return Boolean.valueOf(isAffected);
@@ -178,10 +178,18 @@ public class Indexer {
     };
     Iterable<URI> _filter = IterableExtensions.<URI>filter(remainingURIs, _function_2);
     final List<URI> allAffected = IterableExtensions.<URI>toList(_filter);
-    boolean _isInfoEnabled_2 = Indexer.LOG.isInfoEnabled();
-    if (_isInfoEnabled_2) {
-      String _join_2 = IterableExtensions.join(allAffected, ", ");
-      String _plus_4 = ("Creating Deltas for affected resources : " + _join_2);
+    boolean _and = false;
+    boolean _isInfoEnabled_1 = Indexer.LOG.isInfoEnabled();
+    if (!_isInfoEnabled_1) {
+      _and = false;
+    } else {
+      boolean _isEmpty_1 = allAffected.isEmpty();
+      boolean _not_1 = (!_isEmpty_1);
+      _and = _not_1;
+    }
+    if (_and) {
+      Set<URI> _set_2 = IterableExtensions.<URI>toSet(allAffected);
+      String _plus_4 = ("Creating Deltas for affected resources : " + _set_2);
       String _plus_5 = (_plus_4 + ".");
       Indexer.LOG.info(_plus_5);
     }
@@ -193,26 +201,30 @@ public class Indexer {
   protected List<IResourceDescription.Delta> getDeltasForDeletedResources(final BuildRequest request, final ResourceDescriptionsData oldIndex, @Extension final BuildContext context) {
     final ArrayList<IResourceDescription.Delta> deltas = CollectionLiterals.<IResourceDescription.Delta>newArrayList();
     List<URI> _deletedFiles = request.getDeletedFiles();
-    final Procedure1<URI> _function = new Procedure1<URI>() {
+    final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
+      @Override
+      public Boolean apply(final URI it) {
+        IResourceServiceProvider _resourceServiceProvider = context.getResourceServiceProvider(it);
+        return Boolean.valueOf((!Objects.equal(_resourceServiceProvider, null)));
+      }
+    };
+    Iterable<URI> _filter = IterableExtensions.<URI>filter(_deletedFiles, _function);
+    final Procedure1<URI> _function_1 = new Procedure1<URI>() {
       @Override
       public void apply(final URI it) {
-        String _fileExtension = it.fileExtension();
-        boolean _notEquals = (!Objects.equal(_fileExtension, "java"));
+        IResourceDescription _resourceDescription = null;
+        if (oldIndex!=null) {
+          _resourceDescription=oldIndex.getResourceDescription(it);
+        }
+        final IResourceDescription oldDescription = _resourceDescription;
+        boolean _notEquals = (!Objects.equal(oldDescription, null));
         if (_notEquals) {
-          IResourceDescription _resourceDescription = null;
-          if (oldIndex!=null) {
-            _resourceDescription=oldIndex.getResourceDescription(it);
-          }
-          final IResourceDescription oldDescription = _resourceDescription;
-          boolean _notEquals_1 = (!Objects.equal(oldDescription, null));
-          if (_notEquals_1) {
-            final DefaultResourceDescriptionDelta delta = new DefaultResourceDescriptionDelta(oldDescription, null);
-            deltas.add(delta);
-          }
+          final DefaultResourceDescriptionDelta delta = new DefaultResourceDescriptionDelta(oldDescription, null);
+          deltas.add(delta);
         }
       }
     };
-    IterableExtensions.<URI>forEach(_deletedFiles, _function);
+    IterableExtensions.<URI>forEach(_filter, _function_1);
     return deltas;
   }
   
@@ -236,10 +248,8 @@ public class Indexer {
   
   protected IResourceDescription.Delta addToIndex(final Resource resource, final boolean isPreIndexing, final ResourceDescriptionsData oldIndex, final BuildContext context) {
     final URI uri = resource.getURI();
-    Map<String, LanguageAccess> _languages = context.getLanguages();
-    String _fileExtension = uri.fileExtension();
-    final LanguageAccess languageAccess = _languages.get(_fileExtension);
-    final IResourceDescription.Manager manager = languageAccess.getResourceDescriptionManager();
+    final IResourceServiceProvider serviceProvider = context.getResourceServiceProvider(uri);
+    final IResourceDescription.Manager manager = serviceProvider.getResourceDescriptionManager();
     final IResourceDescription newDescription = manager.getResourceDescription(resource);
     final IResourceDescription toBeAdded = new ResolvedResourceDescription(newDescription);
     IResourceDescription _resourceDescription = null;

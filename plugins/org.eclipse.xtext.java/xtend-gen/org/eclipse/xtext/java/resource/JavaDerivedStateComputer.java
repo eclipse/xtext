@@ -16,6 +16,7 @@ import org.eclipse.jdt.internal.compiler.DefaultErrorHandlingPolicies;
 import org.eclipse.jdt.internal.compiler.ICompilerRequestor;
 import org.eclipse.jdt.internal.compiler.IErrorHandlingPolicy;
 import org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration;
+import org.eclipse.jdt.internal.compiler.ast.ImportReference;
 import org.eclipse.jdt.internal.compiler.ast.TypeDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.TypeParameter;
 import org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants;
@@ -87,15 +88,26 @@ public class JavaDerivedStateComputer {
     final CompilationUnitDeclaration result = parser.dietParse(compilationUnit, compilationResult);
     for (final TypeDeclaration type : result.types) {
       {
-        char[][] _importName = result.currentPackage.getImportName();
-        final Function1<char[], String> _function = new Function1<char[], String>() {
-          @Override
-          public String apply(final char[] it) {
-            return String.valueOf(it);
-          }
-        };
-        List<String> _map = ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(_importName)), _function);
-        final String packageName = IterableExtensions.join(_map, ".");
+        ImportReference _currentPackage = result.currentPackage;
+        char[][] _importName = null;
+        if (_currentPackage!=null) {
+          _importName=_currentPackage.getImportName();
+        }
+        List<String> _map = null;
+        if (((List<char[]>)Conversions.doWrapArray(_importName))!=null) {
+          final Function1<char[], String> _function = new Function1<char[], String>() {
+            @Override
+            public String apply(final char[] it) {
+              return String.valueOf(it);
+            }
+          };
+          _map=ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(_importName)), _function);
+        }
+        String _join = null;
+        if (_map!=null) {
+          _join=IterableExtensions.join(_map, ".");
+        }
+        final String packageName = _join;
         final JvmDeclaredType jvmType = this.createType(type, packageName);
         EList<EObject> _contents = resource.getContents();
         _contents.add(jvmType);

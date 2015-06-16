@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.xbase.idea.types.access;
+package org.eclipse.xtext.idea.common.types;
 
 import com.google.inject.Inject;
 import com.intellij.openapi.module.Module;
@@ -14,11 +14,11 @@ import org.eclipse.xtext.common.types.access.AbstractTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
+import org.eclipse.xtext.idea.common.types.StubJvmTypeProvider;
 import org.eclipse.xtext.idea.resource.IndexingAwareGlobalSearchScope;
 import org.eclipse.xtext.idea.resource.ModuleProvider;
 import org.eclipse.xtext.psi.IPsiModelAssociator;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.xbase.idea.types.access.StubJvmTypeProvider;
 
 @SuppressWarnings("all")
 public class StubTypeProviderFactory extends AbstractTypeProviderFactory {

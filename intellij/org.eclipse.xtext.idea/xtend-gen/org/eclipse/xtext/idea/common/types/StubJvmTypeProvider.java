@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.xbase.idea.types.access;
+package org.eclipse.xtext.idea.common.types;
 
 import com.google.common.base.Objects;
 import com.intellij.openapi.module.Module;
@@ -31,16 +31,15 @@ import org.eclipse.xtext.common.types.access.impl.AbstractRuntimeJvmTypeProvider
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
+import org.eclipse.xtext.idea.common.types.PsiBasedTypeFactory;
+import org.eclipse.xtext.idea.common.types.PsiClassMirror;
+import org.eclipse.xtext.idea.common.types.StubURIHelper;
 import org.eclipse.xtext.idea.extensions.IdeaProjectExtensions;
 import org.eclipse.xtext.psi.IPsiModelAssociator;
 import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.eclipse.xtext.xbase.idea.types.access.PsiBasedTypeFactory;
-import org.eclipse.xtext.xbase.idea.types.access.PsiClassMirror;
-import org.eclipse.xtext.xbase.idea.types.access.StubURIHelper;
-import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -242,9 +241,6 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
         _or = _notEquals;
       }
       if (_or) {
-        return null;
-      }
-      if ((psiClass instanceof JvmPsiClass)) {
         return null;
       }
       _xblockexpression = new PsiClassMirror(psiClass, this.psiClassFactory);

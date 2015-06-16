@@ -17,28 +17,33 @@ import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.util.Map
 import java.util.Set
+import org.eclipse.emf.common.notify.Notifier
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.URIHandler
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.xtext.idea.common.types.StubTypeProviderFactory
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.util.internal.Log
 
 import static org.eclipse.xtext.idea.resource.IdeaResourceSetProvider.*
 import static org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
-import org.eclipse.emf.common.notify.Notifier
-import org.eclipse.xtext.EcoreUtil2
 
 @Singleton @Log
 class IdeaResourceSetProvider {
 	
 	@Inject
 	Provider<XtextResourceSet> resourceSetProvider
+	
+	@Inject StubTypeProviderFactory stubTypeProviderFactory
+	
 
 	def get(Module context) {
 		val resourceSet = resourceSetProvider.get
 		resourceSet.classpathURIContext = context
 		resourceSet.URIConverter.URIHandlers.clear 
-		resourceSet.URIConverter.URIHandlers.add(new VirtualFileBasedUriHandler()) 
+		resourceSet.URIConverter.URIHandlers.add(new VirtualFileBasedUriHandler())
+		stubTypeProviderFactory.createTypeProvider(resourceSet)
 		return resourceSet
 	}
 	

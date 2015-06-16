@@ -1,19 +1,24 @@
 package org.eclipse.xtext.java.tests;
 
-import com.google.inject.Guice;
+import com.google.common.base.Objects;
 import com.google.inject.Injector;
-import java.util.Map;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.java.resource.JavaRuntimeModule;
+import org.eclipse.xtext.java.JavaSourceLanguageSetup;
 import org.eclipse.xtext.junit4.IInjectorProvider;
 import org.eclipse.xtext.junit4.IRegistryConfigurator;
 
 @SuppressWarnings("all")
 public class JavaInjectorProvider implements IInjectorProvider, IRegistryConfigurator {
-  private final Injector injector = Guice.createInjector(new JavaRuntimeModule());
+  private final JavaSourceLanguageSetup setup = new JavaSourceLanguageSetup();
+  
+  private Injector injector;
   
   @Override
   public Injector getInjector() {
+    boolean _equals = Objects.equal(this.injector, null);
+    if (_equals) {
+      Injector _createInjector = this.setup.createInjector();
+      this.injector = _createInjector;
+    }
     return this.injector;
   }
   
@@ -23,10 +28,9 @@ public class JavaInjectorProvider implements IInjectorProvider, IRegistryConfigu
   
   @Override
   public void setupRegistry() {
-    final Resource.Factory factory = this.injector.<Resource.Factory>getInstance(Resource.Factory.class);
-    Map<String, Object> _extensionToFactoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
-    _extensionToFactoryMap.put("txt", factory);
-    Map<String, Object> _extensionToFactoryMap_1 = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
-    _extensionToFactoryMap_1.put("java", factory);
+    Injector _injector = this.getInjector();
+    this.setup.register(_injector, "txt");
+    Injector _injector_1 = this.getInjector();
+    this.setup.register(_injector_1, "java");
   }
 }

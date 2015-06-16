@@ -32,10 +32,6 @@ public class AbstractXbaseWithAnnotationsIdeaModule extends org.eclipse.xtext.id
 		return org.eclipse.xtext.xbase.annotations.idea.lang.XbaseWithAnnotationsElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.common.types.access.IJvmTypeProvider.Factory> bindIJvmTypeProvider$Factory() {
-		return org.eclipse.xtext.xbase.idea.types.access.StubTypeProviderFactory.class;
-	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
 	public Class<? extends org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider> bindAbstractTypeScopeProvider() {
 		return org.eclipse.xtext.xbase.idea.types.StubBasedTypeScopeProvider.class;
 	}

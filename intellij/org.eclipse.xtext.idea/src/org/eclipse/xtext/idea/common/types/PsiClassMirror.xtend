@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.idea.types.access
+package org.eclipse.xtext.idea.common.types
 
 import com.intellij.psi.PsiClass
 import org.eclipse.xtext.common.types.JvmDeclaredType

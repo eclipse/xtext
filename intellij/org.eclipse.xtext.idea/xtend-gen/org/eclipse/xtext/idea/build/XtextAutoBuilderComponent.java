@@ -28,6 +28,7 @@ import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.GeneratedSourcesFilter;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.OrderEnumerator;
 import com.intellij.openapi.roots.OrderRootsEnumerator;
@@ -39,28 +40,38 @@ import com.intellij.openapi.vfs.VirtualFileAdapter;
 import com.intellij.openapi.vfs.VirtualFileEvent;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.openapi.vfs.VirtualFileMoveEvent;
+import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiJavaFile;
+import com.intellij.psi.PsiManager;
+import com.intellij.psi.impl.PsiModificationTrackerImpl;
+import com.intellij.psi.util.PsiModificationTracker;
 import com.intellij.util.Alarm;
 import com.intellij.util.PathsList;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder;
 import org.eclipse.xtext.builder.standalone.incremental.IndexState;
+import org.eclipse.xtext.builder.standalone.incremental.Source2GeneratedMapping;
+import org.eclipse.xtext.builder.standalone.incremental.TypeResourceDescription;
 import org.eclipse.xtext.idea.build.BuildEvent;
 import org.eclipse.xtext.idea.build.BuildProgressReporter;
 import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider;
 import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
 import org.eclipse.xtext.idea.shared.IdeaSharedInjectorProvider;
-import org.eclipse.xtext.idea.shared.XtextLanguages;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -98,10 +109,13 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   private Provider<BuildProgressReporter> buildProgressReporterProvider;
   
   @Inject
-  private XtextLanguages xtextLanguages;
+  private IdeaResourceSetProvider resourceSetProvider;
   
   @Inject
-  private IdeaResourceSetProvider resourceSetProvider;
+  private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
+  
+  @Inject
+  private IQualifiedNameConverter qualifiedNameConverter;
   
   private IndexState indexState;
   
@@ -126,7 +140,14 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
         FileDocumentManager _instance = FileDocumentManager.getInstance();
         Document _document = event.getDocument();
         VirtualFile file = _instance.getFile(_document);
-        XtextAutoBuilderComponent.this.fileModified(file);
+        boolean _notEquals = (!Objects.equal(file, null));
+        if (_notEquals) {
+          XtextAutoBuilderComponent.this.fileModified(file);
+        } else {
+          Document _document_1 = event.getDocument();
+          String _plus = ("No virtual file for document. Contents was " + _document_1);
+          XtextAutoBuilderComponent.LOG.info(_plus);
+        }
       }
     }, project);
     VirtualFileManager _instance_1 = VirtualFileManager.getInstance();
@@ -212,6 +233,10 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   
   protected void enqueue(final VirtualFile file, final BuildEvent.Type type) {
     try {
+      boolean _isExcluded = this.isExcluded(file);
+      if (_isExcluded) {
+        return;
+      }
       boolean _and = false;
       if (!(!this.disposed)) {
         _and = false;
@@ -240,6 +265,10 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
         BuildEvent _buildEvent = new BuildEvent(file, type);
         this.queue.put(_buildEvent);
         if (XtextAutoBuilderComponent.TEST_MODE) {
+          Project _project = this.getProject();
+          PsiManager _instance = PsiManager.getInstance(_project);
+          PsiModificationTracker _modificationTracker = _instance.getModificationTracker();
+          ((PsiModificationTrackerImpl) _modificationTracker).incCounter();
           this.build();
         } else {
           this.alarm.cancelAllRequests();
@@ -255,6 +284,36 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  protected boolean isExcluded(final VirtualFile file) {
+    boolean _or = false;
+    boolean _or_1 = false;
+    boolean _equals = Objects.equal(file, null);
+    if (_equals) {
+      _or_1 = true;
+    } else {
+      boolean _isGeneratedSourceByAnyFilter = GeneratedSourcesFilter.isGeneratedSourceByAnyFilter(file, this.project);
+      _or_1 = _isGeneratedSourceByAnyFilter;
+    }
+    if (_or_1) {
+      _or = true;
+    } else {
+      boolean _and = false;
+      boolean _notEquals = (!Objects.equal(this.indexState, null));
+      if (!_notEquals) {
+        _and = false;
+      } else {
+        Source2GeneratedMapping _fileMappings = this.indexState.getFileMappings();
+        URI _uRI = VirtualFileURIUtil.getURI(file);
+        Iterable<URI> _source = _fileMappings.getSource(_uRI);
+        boolean _isEmpty = IterableExtensions.isEmpty(_source);
+        boolean _not = (!_isEmpty);
+        _and = _not;
+      }
+      _or = _and;
+    }
+    return _or;
   }
   
   protected boolean isLoaded() {
@@ -344,83 +403,100 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
         }
       };
       IterableExtensions.<BuildEvent>forEach(allEvents, _function_1);
+      final ArrayList<IResourceDescription.Delta> deltas = CollectionLiterals.<IResourceDescription.Delta>newArrayList();
       Set<Module> _keySet = module2event.keySet();
       for (final Module module : _keySet) {
         {
           final Set<BuildEvent> events = module2event.get(module);
+          final HashSet<URI> changedUris = CollectionLiterals.<URI>newHashSet();
+          final HashSet<URI> deletedUris = CollectionLiterals.<URI>newHashSet();
+          final Function1<BuildEvent, Boolean> _function_2 = new Function1<BuildEvent, Boolean>() {
+            @Override
+            public Boolean apply(final BuildEvent it) {
+              boolean _or = false;
+              BuildEvent.Type _type = it.getType();
+              boolean _equals = Objects.equal(_type, BuildEvent.Type.MODIFIED);
+              if (_equals) {
+                _or = true;
+              } else {
+                BuildEvent.Type _type_1 = it.getType();
+                boolean _equals_1 = Objects.equal(_type_1, BuildEvent.Type.ADDED);
+                _or = _equals_1;
+              }
+              return Boolean.valueOf(_or);
+            }
+          };
+          Iterable<BuildEvent> _filter = IterableExtensions.<BuildEvent>filter(events, _function_2);
+          for (final BuildEvent event : _filter) {
+            BuildEvent.Type _type = event.getType();
+            if (_type != null) {
+              switch (_type) {
+                case MODIFIED:
+                case ADDED:
+                  VirtualFile _file = event.getFile();
+                  boolean _isJavaFile = this.isJavaFile(_file);
+                  if (_isJavaFile) {
+                    VirtualFile _file_1 = event.getFile();
+                    Set<IResourceDescription.Delta> _javaDeltas = this.getJavaDeltas(_file_1, module);
+                    Iterables.<IResourceDescription.Delta>addAll(deltas, _javaDeltas);
+                  } else {
+                    VirtualFile _file_2 = event.getFile();
+                    URI _uRI = VirtualFileURIUtil.getURI(_file_2);
+                    changedUris.add(_uRI);
+                  }
+                  break;
+                case DELETED:
+                  VirtualFile _file_3 = event.getFile();
+                  boolean _isJavaFile_1 = this.isJavaFile(_file_3);
+                  if (_isJavaFile_1) {
+                    VirtualFile _file_4 = event.getFile();
+                    Set<IResourceDescription.Delta> _javaDeltas_1 = this.getJavaDeltas(_file_4, module);
+                    Iterables.<IResourceDescription.Delta>addAll(deltas, _javaDeltas_1);
+                  } else {
+                    VirtualFile _file_5 = event.getFile();
+                    URI _uRI_1 = VirtualFileURIUtil.getURI(_file_5);
+                    changedUris.add(_uRI_1);
+                  }
+                  break;
+                default:
+                  break;
+              }
+            }
+          }
           final OrderEnumerator entries = OrderEnumerator.orderEntries(module);
           BuildRequest _buildRequest = new BuildRequest();
-          final Procedure1<BuildRequest> _function_2 = new Procedure1<BuildRequest>() {
+          final Procedure1<BuildRequest> _function_3 = new Procedure1<BuildRequest>() {
             @Override
             public void apply(final BuildRequest it) {
               XtextResourceSet _get = XtextAutoBuilderComponent.this.resourceSetProvider.get(module);
               it.setResourceSet(_get);
               List<URI> _dirtyFiles = it.getDirtyFiles();
-              final Function1<BuildEvent, Boolean> _function = new Function1<BuildEvent, Boolean>() {
-                @Override
-                public Boolean apply(final BuildEvent it) {
-                  boolean _or = false;
-                  BuildEvent.Type _type = it.getType();
-                  boolean _equals = Objects.equal(_type, BuildEvent.Type.MODIFIED);
-                  if (_equals) {
-                    _or = true;
-                  } else {
-                    BuildEvent.Type _type_1 = it.getType();
-                    boolean _equals_1 = Objects.equal(_type_1, BuildEvent.Type.ADDED);
-                    _or = _equals_1;
-                  }
-                  return Boolean.valueOf(_or);
-                }
-              };
-              Iterable<BuildEvent> _filter = IterableExtensions.<BuildEvent>filter(events, _function);
-              final Function1<BuildEvent, URI> _function_1 = new Function1<BuildEvent, URI>() {
-                @Override
-                public URI apply(final BuildEvent it) {
-                  VirtualFile _file = it.getFile();
-                  return VirtualFileURIUtil.getURI(_file);
-                }
-              };
-              Iterable<URI> _map = IterableExtensions.<BuildEvent, URI>map(_filter, _function_1);
-              Iterables.<URI>addAll(_dirtyFiles, _map);
+              Iterables.<URI>addAll(_dirtyFiles, changedUris);
               List<URI> _deletedFiles = it.getDeletedFiles();
-              final Function1<BuildEvent, Boolean> _function_2 = new Function1<BuildEvent, Boolean>() {
-                @Override
-                public Boolean apply(final BuildEvent it) {
-                  BuildEvent.Type _type = it.getType();
-                  return Boolean.valueOf(Objects.equal(_type, BuildEvent.Type.DELETED));
-                }
-              };
-              Iterable<BuildEvent> _filter_1 = IterableExtensions.<BuildEvent>filter(events, _function_2);
-              final Function1<BuildEvent, URI> _function_3 = new Function1<BuildEvent, URI>() {
-                @Override
-                public URI apply(final BuildEvent it) {
-                  VirtualFile _file = it.getFile();
-                  return VirtualFileURIUtil.getURI(_file);
-                }
-              };
-              Iterable<URI> _map_1 = IterableExtensions.<BuildEvent, URI>map(_filter_1, _function_3);
-              Iterables.<URI>addAll(_deletedFiles, _map_1);
+              Iterables.<URI>addAll(_deletedFiles, deletedUris);
+              List<IResourceDescription.Delta> _externalDeltas = it.getExternalDeltas();
+              Iterables.<IResourceDescription.Delta>addAll(_externalDeltas, deltas);
               List<URI> _classPath = it.getClassPath();
               OrderEnumerator _withoutSdk = entries.withoutSdk();
               OrderRootsEnumerator _classes = _withoutSdk.classes();
               PathsList _pathsList = _classes.getPathsList();
               List<VirtualFile> _virtualFiles = _pathsList.getVirtualFiles();
-              final Function1<VirtualFile, Boolean> _function_4 = new Function1<VirtualFile, Boolean>() {
+              final Function1<VirtualFile, Boolean> _function = new Function1<VirtualFile, Boolean>() {
                 @Override
                 public Boolean apply(final VirtualFile it) {
                   boolean _isDirectory = it.isDirectory();
                   return Boolean.valueOf((!_isDirectory));
                 }
               };
-              Iterable<VirtualFile> _filter_2 = IterableExtensions.<VirtualFile>filter(_virtualFiles, _function_4);
-              final Function1<VirtualFile, URI> _function_5 = new Function1<VirtualFile, URI>() {
+              Iterable<VirtualFile> _filter = IterableExtensions.<VirtualFile>filter(_virtualFiles, _function);
+              final Function1<VirtualFile, URI> _function_1 = new Function1<VirtualFile, URI>() {
                 @Override
                 public URI apply(final VirtualFile it) {
                   return VirtualFileURIUtil.getURI(it);
                 }
               };
-              Iterable<URI> _map_2 = IterableExtensions.<VirtualFile, URI>map(_filter_2, _function_5);
-              Iterables.<URI>addAll(_classPath, _map_2);
+              Iterable<URI> _map = IterableExtensions.<VirtualFile, URI>map(_filter, _function_1);
+              Iterables.<URI>addAll(_classPath, _map);
               ModuleRootManager _instance = ModuleRootManager.getInstance(module);
               VirtualFile[] _contentRoots = _instance.getContentRoots();
               VirtualFile _head = IterableExtensions.<VirtualFile>head(((Iterable<VirtualFile>)Conversions.doWrapArray(_contentRoots)));
@@ -435,29 +511,28 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
               }
               it.setPreviousState(_elvis);
               it.setAfterValidate(buildProgressReporter);
-              final Procedure1<URI> _function_6 = new Procedure1<URI>() {
+              final Procedure1<URI> _function_2 = new Procedure1<URI>() {
                 @Override
                 public void apply(final URI it) {
                   buildProgressReporter.markAsAffected(it);
                 }
               };
-              it.setAfterDeleteFile(_function_6);
+              it.setAfterDeleteFile(_function_2);
             }
           };
-          final BuildRequest request = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_2);
+          final BuildRequest request = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_3);
           final Application app = ApplicationManager.getApplication();
-          final Computable<IncrementalBuilder.Result> _function_3 = new Computable<IncrementalBuilder.Result>() {
+          final Computable<IncrementalBuilder.Result> _function_4 = new Computable<IncrementalBuilder.Result>() {
             @Override
             public IncrementalBuilder.Result compute() {
               IncrementalBuilder _get = XtextAutoBuilderComponent.this.builderProvider.get();
-              Map<String, LanguageAccess> _languageAccesses = XtextAutoBuilderComponent.this.xtextLanguages.getLanguageAccesses();
-              return _get.build(request, _languageAccesses);
+              return _get.build(request, XtextAutoBuilderComponent.this.resourceServiceProviderRegistry);
             }
           };
-          final IncrementalBuilder.Result result = app.<IncrementalBuilder.Result>runReadAction(_function_3);
+          final IncrementalBuilder.Result result = app.<IncrementalBuilder.Result>runReadAction(_function_4);
           IndexState _indexState = result.getIndexState();
           this.indexState = _indexState;
-          final Runnable _function_4 = new Runnable() {
+          final Runnable _function_5 = new Runnable() {
             @Override
             public void run() {
               final Runnable _function = new Runnable() {
@@ -472,15 +547,17 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
             }
           };
           ModalityState _any = ModalityState.any();
-          app.invokeAndWait(_function_4, _any);
-          final IResourceDescription.Event _function_5 = new IResourceDescription.Event() {
+          app.invokeAndWait(_function_5, _any);
+          final IResourceDescription.Event _function_6 = new IResourceDescription.Event() {
             @Override
             public ImmutableList<IResourceDescription.Delta> getDeltas() {
               List<IResourceDescription.Delta> _affectedResources = result.getAffectedResources();
               return ImmutableList.<IResourceDescription.Delta>copyOf(_affectedResources);
             }
           };
-          this.notifyListeners(_function_5);
+          this.notifyListeners(_function_6);
+          List<IResourceDescription.Delta> _affectedResources = result.getAffectedResources();
+          deltas.addAll(_affectedResources);
         }
       }
     } catch (final Throwable _t) {
@@ -500,6 +577,28 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
       };
       IterableExtensions.<XtextAutoBuilderComponent.AutoBuilderListener>forEach(this.autoBuildListeners, _function_2);
     }
+  }
+  
+  public boolean isJavaFile(final VirtualFile file) {
+    String _extension = file.getExtension();
+    return Objects.equal(_extension, "java");
+  }
+  
+  public Set<IResourceDescription.Delta> getJavaDeltas(final VirtualFile file, final Module module) {
+    Project _project = module.getProject();
+    PsiManager _instance = PsiManager.getInstance(_project);
+    final PsiFile psiFile = _instance.findFile(file);
+    final LinkedHashSet<IResourceDescription.Delta> result = CollectionLiterals.<IResourceDescription.Delta>newLinkedHashSet();
+    if ((psiFile instanceof PsiJavaFile)) {
+      PsiClass[] _classes = ((PsiJavaFile)psiFile).getClasses();
+      for (final PsiClass clazz : _classes) {
+        String _qualifiedName = clazz.getQualifiedName();
+        QualifiedName _qualifiedName_1 = this.qualifiedNameConverter.toQualifiedName(_qualifiedName);
+        TypeResourceDescription.ChangedDelta _changedDelta = new TypeResourceDescription.ChangedDelta(_qualifiedName_1);
+        result.add(_changedDelta);
+      }
+    }
+    return result;
   }
   
   protected IndexState getIndexState() {
@@ -533,29 +632,17 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   }
   
   protected Module findModule(final BuildEvent it, final ProjectFileIndex fileIndex) {
-    Module _xblockexpression = null;
-    {
-      Map<String, LanguageAccess> _languageAccesses = this.xtextLanguages.getLanguageAccesses();
+    Module _xifexpression = null;
+    BuildEvent.Type _type = it.getType();
+    boolean _equals = Objects.equal(_type, BuildEvent.Type.DELETED);
+    if (_equals) {
       VirtualFile _file = it.getFile();
-      String _extension = _file.getExtension();
-      LanguageAccess _get = _languageAccesses.get(_extension);
-      boolean _equals = Objects.equal(_get, null);
-      if (_equals) {
-        return null;
-      }
-      Module _xifexpression = null;
-      BuildEvent.Type _type = it.getType();
-      boolean _equals_1 = Objects.equal(_type, BuildEvent.Type.DELETED);
-      if (_equals_1) {
-        VirtualFile _file_1 = it.getFile();
-        _xifexpression = this.findModule(_file_1, fileIndex);
-      } else {
-        VirtualFile _file_2 = it.getFile();
-        _xifexpression = fileIndex.getModuleForFile(_file_2, true);
-      }
-      _xblockexpression = _xifexpression;
+      _xifexpression = this.findModule(_file, fileIndex);
+    } else {
+      VirtualFile _file_1 = it.getFile();
+      _xifexpression = fileIndex.getModuleForFile(_file_1, true);
     }
-    return _xblockexpression;
+    return _xifexpression;
   }
   
   protected Module findModule(final VirtualFile file, final ProjectFileIndex fileIndex) {

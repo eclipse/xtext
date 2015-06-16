@@ -7,25 +7,18 @@
  */
 package org.eclipse.xtend.core.tests.builder.incremental;
 
-import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.builder.standalone.incremental.Source2GeneratedMapping;
 import org.eclipse.xtext.builder.tests.incremental.AbstractIncrementalBuilderTest;
-import org.eclipse.xtext.generator.OutputConfiguration;
-import org.eclipse.xtext.generator.OutputConfigurationProvider;
-import org.eclipse.xtext.java.resource.JavaRuntimeModule;
+import org.eclipse.xtext.java.JavaSourceLanguageSetup;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -42,32 +35,19 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("all")
 public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest {
   @Inject
-  private IResourceServiceProvider rsp;
-  
-  @Inject
-  private OutputConfigurationProvider configurationProvider;
-  
-  private IResourceServiceProvider javaResourceServiceProvider;
+  private IResourceServiceProvider.Registry registry;
   
   @Override
   public void setUp() {
-    JavaRuntimeModule _javaRuntimeModule = new JavaRuntimeModule();
-    final Injector injector = Guice.createInjector(_javaRuntimeModule);
-    IResourceServiceProvider _instance = injector.<IResourceServiceProvider>getInstance(IResourceServiceProvider.class);
-    this.javaResourceServiceProvider = _instance;
-    Map<String, Object> _extensionToFactoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
-    Resource.Factory _instance_1 = injector.<Resource.Factory>getInstance(Resource.Factory.class);
-    _extensionToFactoryMap.put("java", _instance_1);
+    final JavaSourceLanguageSetup javaSetup = new JavaSourceLanguageSetup();
+    final Injector injector = javaSetup.createInjector();
+    javaSetup.register(injector, "java");
     super.setUp();
   }
   
   @Override
-  public Iterable<? extends LanguageAccess> getLanguages() {
-    Set<OutputConfiguration> _outputConfigurations = this.configurationProvider.getOutputConfigurations();
-    LanguageAccess _languageAccess = new LanguageAccess(_outputConfigurations, this.rsp);
-    Set<OutputConfiguration> _emptySet = CollectionLiterals.<OutputConfiguration>emptySet();
-    LanguageAccess _languageAccess_1 = new LanguageAccess(_emptySet, this.javaResourceServiceProvider);
-    return Collections.<LanguageAccess>unmodifiableList(CollectionLiterals.<LanguageAccess>newArrayList(_languageAccess, _languageAccess_1));
+  public IResourceServiceProvider.Registry getLanguages() {
+    return this.registry;
   }
   
   @Test

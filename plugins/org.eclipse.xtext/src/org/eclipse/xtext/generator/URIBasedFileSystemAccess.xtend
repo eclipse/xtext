@@ -40,6 +40,7 @@ class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
 	}
 	
 	@Accessors URIConverter converter
+	@Accessors URI baseDir
 	@Accessors IEncodingProvider encodingProvider = new IEncodingProvider.Runtime()
 	@Accessors BeforeDelete beforeDelete = [true]
 	@Accessors BeforeWrite beforeWrite = [$1]
@@ -49,8 +50,13 @@ class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
 		val outlet = pathes.get(outputConfiguration)
 		if (outlet == null)
 			throw new IllegalArgumentException("A slot with name '" + outputConfiguration + "' has not been configured.");
-		val uri = URI.createURI(outlet + "/" + path);
-		return uri;
+		val uri = URI.createURI(outlet + "/" + path)
+		if (baseDir != null) {
+			val resolved = uri.resolve(baseDir);
+			return resolved
+		} else {
+			return uri;
+		}
 	}
 	
 	def String getEncoding(URI uri) {

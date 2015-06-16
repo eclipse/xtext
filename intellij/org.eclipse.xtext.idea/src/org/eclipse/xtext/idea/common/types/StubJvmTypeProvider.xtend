@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.idea.types.access
+package org.eclipse.xtext.idea.common.types
 
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.progress.ProgressIndicatorProvider
@@ -27,7 +27,6 @@ import org.eclipse.xtext.psi.IPsiModelAssociator
 import org.eclipse.xtext.resource.ISynchronizable
 import org.eclipse.xtext.service.OperationCanceledError
 import org.eclipse.xtext.util.Strings
-import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass
 
 import static extension org.eclipse.xtext.idea.extensions.IdeaProjectExtensions.*
 
@@ -131,9 +130,6 @@ class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 	protected override createMirrorForFQN(String name) {
 		val psiClass = module.project.javaPsiFacade.findClassWithAlternativeResolvedEnabled(name, searchScope)
 		if (psiClass == null || psiClass.containingClass != null) {
-			return null
-		}
-		if (psiClass instanceof JvmPsiClass) {
 			return null
 		}
 		new PsiClassMirror(psiClass, psiClassFactory)

@@ -24,15 +24,17 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.builder.standalone.ClusteringConfig;
-import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.incremental.BuildContext;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.builder.standalone.incremental.IndexState;
 import org.eclipse.xtext.builder.standalone.incremental.Indexer;
 import org.eclipse.xtext.builder.standalone.incremental.Source2GeneratedMapping;
-import org.eclipse.xtext.generator.GeneratorDelegate;
+import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
+import org.eclipse.xtext.generator.IGenerator2;
+import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.URIBasedFileSystemAccess;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.clustering.DisabledClusteringPolicy;
 import org.eclipse.xtext.resource.clustering.DynamicResourceClusteringPolicy;
@@ -197,8 +199,8 @@ public class IncrementalBuilder {
           resource.getContents();
           EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl);
           URI _uRI = resource.getURI();
-          LanguageAccess _languageAccess = InternalStatefulIncrementalBuilder.this.context.getLanguageAccess(_uRI);
-          final IResourceDescription.Manager manager = _languageAccess.getResourceDescriptionManager();
+          IResourceServiceProvider _resourceServiceProvider = InternalStatefulIncrementalBuilder.this.context.getResourceServiceProvider(_uRI);
+          final IResourceDescription.Manager manager = _resourceServiceProvider.getResourceDescriptionManager();
           final IResourceDescription description = manager.getResourceDescription(resource);
           final SerializableResourceDescription copiedDescription = SerializableResourceDescription.createCopy(description);
           ResourceDescriptionsData _newIndex = result.getNewIndex();
@@ -220,13 +222,17 @@ public class IncrementalBuilder {
     
     protected boolean validate(final Resource resource) {
       URI _uRI = resource.getURI();
-      String _lastSegment = _uRI.lastSegment();
+      IResourceServiceProvider _resourceServiceProvider = this.context.getResourceServiceProvider(_uRI);
+      final IResourceValidator resourceValidator = _resourceServiceProvider.getResourceValidator();
+      boolean _equals = Objects.equal(resourceValidator, null);
+      if (_equals) {
+        return true;
+      }
+      URI _uRI_1 = resource.getURI();
+      String _lastSegment = _uRI_1.lastSegment();
       String _plus = ("Starting validation for input: \'" + _lastSegment);
       String _plus_1 = (_plus + "\'");
       IncrementalBuilder.InternalStatefulIncrementalBuilder.LOG.info(_plus_1);
-      URI _uRI_1 = resource.getURI();
-      LanguageAccess _languageAccess = this.context.getLanguageAccess(_uRI_1);
-      final IResourceValidator resourceValidator = _languageAccess.getResourceValidator();
       final List<Issue> validationResult = resourceValidator.validate(resource, CheckMode.ALL, null);
       BuildRequest.IPostValidationCallback _afterValidate = this.request.getAfterValidate();
       URI _uRI_2 = resource.getURI();
@@ -235,23 +241,39 @@ public class IncrementalBuilder {
     
     protected void generate(final Resource resource, final BuildRequest request, final Source2GeneratedMapping newMappings) {
       URI _uRI = resource.getURI();
-      String _lastSegment = _uRI.lastSegment();
+      final IResourceServiceProvider serviceProvider = this.context.getResourceServiceProvider(_uRI);
+      final IGenerator2 generator = serviceProvider.<IGenerator2>get(IGenerator2.class);
+      boolean _equals = Objects.equal(generator, null);
+      if (_equals) {
+        return;
+      }
+      URI _uRI_1 = resource.getURI();
+      String _lastSegment = _uRI_1.lastSegment();
       String _plus = ("Starting generator for input: \'" + _lastSegment);
       String _plus_1 = (_plus + "\'");
       IncrementalBuilder.InternalStatefulIncrementalBuilder.LOG.info(_plus_1);
-      URI _uRI_1 = resource.getURI();
-      final LanguageAccess access = this.context.getLanguageAccess(_uRI_1);
       URI _uRI_2 = resource.getURI();
       final Set<URI> previous = newMappings.deleteSource(_uRI_2);
-      URI _baseDir = request.getBaseDir();
-      URIBasedFileSystemAccess _createUriBasedFileSystemAccess = access.createUriBasedFileSystemAccess(_baseDir);
+      URIBasedFileSystemAccess _uRIBasedFileSystemAccess = new URIBasedFileSystemAccess();
       final Procedure1<URIBasedFileSystemAccess> _function = new Procedure1<URIBasedFileSystemAccess>() {
         @Override
         public void apply(final URIBasedFileSystemAccess it) {
+          final IContextualOutputConfigurationProvider outputConfigProvider = serviceProvider.<IContextualOutputConfigurationProvider>get(IContextualOutputConfigurationProvider.class);
+          Set<OutputConfiguration> _outputConfigurations = outputConfigProvider.getOutputConfigurations(resource);
+          final Function1<OutputConfiguration, String> _function = new Function1<OutputConfiguration, String>() {
+            @Override
+            public String apply(final OutputConfiguration it) {
+              return it.getName();
+            }
+          };
+          Map<String, OutputConfiguration> _map = IterableExtensions.<String, OutputConfiguration>toMap(_outputConfigurations, _function);
+          it.setOutputConfigurations(_map);
+          URI _baseDir = request.getBaseDir();
+          it.setBaseDir(_baseDir);
           ResourceSet _resourceSet = resource.getResourceSet();
           URIConverter _uRIConverter = _resourceSet.getURIConverter();
           it.setConverter(_uRIConverter);
-          final URIBasedFileSystemAccess.BeforeWrite _function = new URIBasedFileSystemAccess.BeforeWrite() {
+          final URIBasedFileSystemAccess.BeforeWrite _function_1 = new URIBasedFileSystemAccess.BeforeWrite() {
             @Override
             public InputStream beforeWrite(final URI uri, final InputStream contents) {
               URI _uRI = resource.getURI();
@@ -263,8 +285,8 @@ public class IncrementalBuilder {
               return contents;
             }
           };
-          it.setBeforeWrite(_function);
-          final URIBasedFileSystemAccess.BeforeDelete _function_1 = new URIBasedFileSystemAccess.BeforeDelete() {
+          it.setBeforeWrite(_function_1);
+          final URIBasedFileSystemAccess.BeforeDelete _function_2 = new URIBasedFileSystemAccess.BeforeDelete() {
             @Override
             public boolean beforeDelete(final URI uri) {
               newMappings.deleteGenerated(uri);
@@ -273,10 +295,10 @@ public class IncrementalBuilder {
               return true;
             }
           };
-          it.setBeforeDelete(_function_1);
+          it.setBeforeDelete(_function_2);
         }
       };
-      final URIBasedFileSystemAccess fileSystemAccess = ObjectExtensions.<URIBasedFileSystemAccess>operator_doubleArrow(_createUriBasedFileSystemAccess, _function);
+      final URIBasedFileSystemAccess fileSystemAccess = ObjectExtensions.<URIBasedFileSystemAccess>operator_doubleArrow(_uRIBasedFileSystemAccess, _function);
       fileSystemAccess.setContext(resource);
       boolean _isWriteStorageResources = request.isWriteStorageResources();
       if (_isWriteStorageResources) {
@@ -293,8 +315,9 @@ public class IncrementalBuilder {
           }
         }
       }
-      GeneratorDelegate _generator = access.getGenerator();
-      _generator.generate(resource, fileSystemAccess);
+      generator.beforeGenerate(resource, fileSystemAccess);
+      generator.doGenerate(resource, fileSystemAccess);
+      generator.afterGenerate(resource, fileSystemAccess);
       final Procedure1<URI> _function_1 = new Procedure1<URI>() {
         @Override
         public void apply(final URI it) {
@@ -328,11 +351,11 @@ public class IncrementalBuilder {
   @Inject
   private Provider<IncrementalBuilder.InternalStatefulIncrementalBuilder> provider;
   
-  public IncrementalBuilder.Result build(final BuildRequest request, final Map<String, LanguageAccess> languages) {
+  public IncrementalBuilder.Result build(final BuildRequest request, final IResourceServiceProvider.Registry languages) {
     return this.build(request, languages, null);
   }
   
-  public IncrementalBuilder.Result build(final BuildRequest request, final Map<String, LanguageAccess> languages, final ClusteringConfig clusteringConfig) {
+  public IncrementalBuilder.Result build(final BuildRequest request, final IResourceServiceProvider.Registry languages, final ClusteringConfig clusteringConfig) {
     IResourceClusteringPolicy _xifexpression = null;
     boolean _notEquals = (!Objects.equal(clusteringConfig, null));
     if (_notEquals) {

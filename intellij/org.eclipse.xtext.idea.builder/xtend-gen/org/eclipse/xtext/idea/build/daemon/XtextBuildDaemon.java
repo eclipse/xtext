@@ -34,7 +34,6 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder;
@@ -44,9 +43,9 @@ import org.eclipse.xtext.idea.build.daemon.BuildDaemonModule;
 import org.eclipse.xtext.idea.build.daemon.IBuildSessionSingletons;
 import org.eclipse.xtext.idea.build.daemon.IdeaIssueHandler;
 import org.eclipse.xtext.idea.build.daemon.XtextBuildResultCollector;
-import org.eclipse.xtext.idea.build.daemon.XtextLanguages;
 import org.eclipse.xtext.idea.build.net.ObjectChannel;
 import org.eclipse.xtext.idea.build.net.Protocol;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -169,6 +168,9 @@ public class XtextBuildDaemon {
     @Inject
     private IdeaIssueHandler issueHandler;
     
+    @Inject
+    private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
+    
     private IndexState indexState;
     
     private ObjectChannel channel;
@@ -212,7 +214,6 @@ public class XtextBuildDaemon {
     }
     
     public Protocol.BuildResultMessage build(final Protocol.BuildRequestMessage request) {
-      final Map<String, LanguageAccess> languages = XtextLanguages.getLanguageAccesses();
       final XtextBuildResultCollector xtextBuildResultCollector = this.xtextBuildResultCollectorProvider.get();
       final Procedure1<IBuildSessionSingletons.Impl> _function = new Procedure1<IBuildSessionSingletons.Impl>() {
         @Override
@@ -261,7 +262,8 @@ public class XtextBuildDaemon {
             };
             List<URI> _map_2 = ListExtensions.<String, URI>map(_sourceRoots, _function_2);
             Iterable<URI> _plus = Iterables.<URI>concat(_classPath, _map_2);
-            Set<String> _keySet = languages.keySet();
+            Map<String, Object> _extensionToFactoryMap = Worker.this.resourceServiceProviderRegistry.getExtensionToFactoryMap();
+            Set<String> _keySet = _extensionToFactoryMap.keySet();
             Worker.this.resourceURICollector.collectAllResources(_plus, _keySet);
           } else {
             List<String> _dirtyFiles = request.getDirtyFiles();
@@ -304,7 +306,7 @@ public class XtextBuildDaemon {
         }
       };
       final BuildRequest buildRequest = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_1);
-      IncrementalBuilder.Result _build = this.incrementalBuilder.build(buildRequest, languages);
+      IncrementalBuilder.Result _build = this.incrementalBuilder.build(buildRequest, IResourceServiceProvider.Registry.INSTANCE);
       IndexState _indexState = _build.getIndexState();
       this.indexState = _indexState;
       final Protocol.BuildResultMessage buildResult = xtextBuildResultCollector.getBuildResult();

@@ -21,12 +21,10 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.URIHandler;
-import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder;
 import org.eclipse.xtext.builder.standalone.incremental.IndexState;
 import org.eclipse.xtext.junit4.util.InMemoryURIHandler;
-import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.validation.Issue;
@@ -84,23 +82,14 @@ public abstract class AbstractIncrementalBuilderTest {
   
   protected IndexState build(final BuildRequest buildRequest) {
     this.clean();
-    Iterable<? extends LanguageAccess> _languages = this.getLanguages();
-    final Function1<LanguageAccess, String> _function = new Function1<LanguageAccess, String>() {
-      @Override
-      public String apply(final LanguageAccess it) {
-        IResourceServiceProvider _resourceServiceProvider = it.getResourceServiceProvider();
-        FileExtensionProvider _get = _resourceServiceProvider.<FileExtensionProvider>get(FileExtensionProvider.class);
-        return _get.getPrimaryFileExtension();
-      }
-    };
-    final Map<String, LanguageAccess> languages = IterableExtensions.<String, LanguageAccess>toMap(_languages, _function);
-    IncrementalBuilder.Result _build = this.incrementalBuilder.build(buildRequest, languages);
+    IResourceServiceProvider.Registry _languages = this.getLanguages();
+    IncrementalBuilder.Result _build = this.incrementalBuilder.build(buildRequest, _languages);
     IndexState _indexState = _build.getIndexState();
     this.indexState = _indexState;
     return this.indexState;
   }
   
-  protected abstract Iterable<? extends LanguageAccess> getLanguages();
+  protected abstract IResourceServiceProvider.Registry getLanguages();
   
   protected BuildRequest newBuildRequest(final Procedure1<? super BuildRequest> init) {
     BuildRequest _buildRequest = new BuildRequest();

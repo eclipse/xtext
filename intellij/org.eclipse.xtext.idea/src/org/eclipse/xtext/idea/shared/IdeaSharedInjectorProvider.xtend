@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.shared
 
-import com.google.inject.Injector
 import com.google.inject.Guice
+import com.google.inject.Injector
 
 /**
  * @author Jan Koehnlein - Initial contribution and API

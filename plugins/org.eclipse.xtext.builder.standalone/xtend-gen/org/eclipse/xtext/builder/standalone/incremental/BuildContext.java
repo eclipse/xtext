@@ -8,16 +8,16 @@
 package org.eclipse.xtext.builder.standalone.incremental;
 
 import com.google.common.base.Objects;
-import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
-import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.incremental.ClusteringStorageAwareResourceLoader;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
@@ -25,13 +25,14 @@ import org.eclipse.xtext.xbase.lib.Pure;
  * @since 2.9
  */
 @FinalFieldsConstructor
-@Accessors
 @SuppressWarnings("all")
 public class BuildContext {
-  private final Map<String, LanguageAccess> languages;
+  private final IResourceServiceProvider.Registry resourceServiceProviderRegistry;
   
+  @Accessors
   private final XtextResourceSet resourceSet;
   
+  @Accessors
   private final IResourceClusteringPolicy clusteringPolicy;
   
   private ClusteringStorageAwareResourceLoader loader;
@@ -44,26 +45,29 @@ public class BuildContext {
         ClusteringStorageAwareResourceLoader _clusteringStorageAwareResourceLoader = new ClusteringStorageAwareResourceLoader(this);
         this.loader = _clusteringStorageAwareResourceLoader;
       }
-      _xblockexpression = this.loader.<T>executeClustered(uri, operation);
+      final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
+        @Override
+        public Boolean apply(final URI it) {
+          IResourceServiceProvider _resourceServiceProvider = BuildContext.this.getResourceServiceProvider(it);
+          return Boolean.valueOf((!Objects.equal(_resourceServiceProvider, null)));
+        }
+      };
+      Iterable<URI> _filter = IterableExtensions.<URI>filter(uri, _function);
+      _xblockexpression = this.loader.<T>executeClustered(_filter, operation);
     }
     return _xblockexpression;
   }
   
-  public LanguageAccess getLanguageAccess(final URI uri) {
-    String _fileExtension = uri.fileExtension();
-    return this.languages.get(_fileExtension);
+  public IResourceServiceProvider getResourceServiceProvider(final URI uri) {
+    final IResourceServiceProvider resourceServiceProvider = this.resourceServiceProviderRegistry.getResourceServiceProvider(uri);
+    return resourceServiceProvider;
   }
   
-  public BuildContext(final Map<String, LanguageAccess> languages, final XtextResourceSet resourceSet, final IResourceClusteringPolicy clusteringPolicy) {
+  public BuildContext(final IResourceServiceProvider.Registry resourceServiceProviderRegistry, final XtextResourceSet resourceSet, final IResourceClusteringPolicy clusteringPolicy) {
     super();
-    this.languages = languages;
+    this.resourceServiceProviderRegistry = resourceServiceProviderRegistry;
     this.resourceSet = resourceSet;
     this.clusteringPolicy = clusteringPolicy;
-  }
-  
-  @Pure
-  public Map<String, LanguageAccess> getLanguages() {
-    return this.languages;
   }
   
   @Pure
@@ -74,14 +78,5 @@ public class BuildContext {
   @Pure
   public IResourceClusteringPolicy getClusteringPolicy() {
     return this.clusteringPolicy;
-  }
-  
-  @Pure
-  public ClusteringStorageAwareResourceLoader getLoader() {
-    return this.loader;
-  }
-  
-  public void setLoader(final ClusteringStorageAwareResourceLoader loader) {
-    this.loader = loader;
   }
 }

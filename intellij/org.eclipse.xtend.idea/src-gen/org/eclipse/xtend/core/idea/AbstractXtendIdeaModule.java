@@ -32,10 +32,6 @@ public class AbstractXtendIdeaModule extends org.eclipse.xtext.idea.DefaultIdeaM
 		return org.eclipse.xtend.core.idea.lang.XtendElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.common.types.access.IJvmTypeProvider.Factory> bindIJvmTypeProvider$Factory() {
-		return org.eclipse.xtext.xbase.idea.types.access.StubTypeProviderFactory.class;
-	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
 	public Class<? extends org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider> bindAbstractTypeScopeProvider() {
 		return org.eclipse.xtext.xbase.idea.types.StubBasedTypeScopeProvider.class;
 	}
