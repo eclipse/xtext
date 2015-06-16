@@ -23,6 +23,7 @@ import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.StringInputStream
 import org.eclipse.xtext.util.TextRegion
 import org.eclipse.xtext.web.server.contentassist.ContentAssistService
+import org.eclipse.xtext.web.server.hover.HoverService
 import org.eclipse.xtext.web.server.model.IWebResourceSetProvider
 import org.eclipse.xtext.web.server.model.UpdateDocumentService
 import org.eclipse.xtext.web.server.model.XtextWebDocument
@@ -52,6 +53,7 @@ class XtextServiceDispatcher {
 	@Inject UpdateDocumentService updateDocumentService
 	@Inject ContentAssistService contentAssistService
 	@Inject ValidationService validationService
+	@Inject HoverService hoverService
 	@Inject IServerResourceHandler resourceHandler
 	@Inject IWebResourceSetProvider resourceSetProvider
 	@Inject Provider<XtextWebDocument> documentProvider
@@ -107,6 +109,8 @@ class XtextServiceDispatcher {
 				getValidationService(request, sessionStore)
 			case 'content-assist':
 				getContentAssistService(request, sessionStore)
+			case 'hover':
+				getHoverService(request, sessionStore)
 			default:
 				throw new InvalidRequestException(INVALID_PARAMETERS, 'The request type \'' + requestType + '\' is not supported.')
 		}
@@ -257,6 +261,21 @@ class XtextServiceDispatcher {
 				}
 			]
 			hasTextInput = request.parameterKeys.contains('fullText')
+		]
+	}
+	
+	protected def getHoverService(IRequestData request, ISessionStore sessionStore)
+			throws InvalidRequestException {
+		val document = getDocumentAccess(request, sessionStore)
+		val offset = request.getInt('offset', Optional.of(0))
+		new ServiceDescriptor => [
+			service = [
+				try {
+					hoverService.getHover(document, offset)
+				} catch (Throwable throwable) {
+					handleError(throwable)
+				}
+			]
 		]
 	}
 	
