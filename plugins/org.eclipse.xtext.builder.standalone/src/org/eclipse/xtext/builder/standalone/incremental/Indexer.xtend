@@ -38,8 +38,6 @@ class Indexer {
 	}
 	
 	def IndexResult computeAndIndexAffected(BuildRequest request, extension BuildContext context) {
-		if (LOG.isInfoEnabled) 
-			LOG.info('Creating new index')
 		val previousIndex = request.previousState.resourceDescriptions
 		val newIndex = previousIndex.copy
 		installIndex(resourceSet, newIndex)
@@ -47,25 +45,28 @@ class Indexer {
 		// get the direct deltas
 		val List<Delta> deltas = newArrayList
 		if (LOG.isInfoEnabled)
-			LOG.info('Creating Deltas for changes. Deleted : '+request.deletedFiles.join(', ')+' - Changed : '+request.dirtyFiles.join(', ')+'.')
+			LOG.info('Creating Deltas for changes. Deleted : '+request.deletedFiles.toSet+', Changed : '+request.dirtyFiles.toSet+'.')
 		deltas.addAll(getDeltasForDeletedResources(request, previousIndex, context))
 		deltas.addAll(getDeltasForChangedResources(request.dirtyFiles, previousIndex, context))
-		
 		// update the index with the direct deltas
 		for (delta : deltas)
 			newIndex.register(delta)
+		
+		// add external deltas
+		if (!request.externalDeltas.empty)
+			deltas.addAll(request.externalDeltas)
 		
 		val remainingURIs = previousIndex.allResourceDescriptions.map[getURI].toSet
 		remainingURIs.removeAll(deltas.map[uri])
 		
 		val allAffected = remainingURIs.filter [
-			val manager = languages.get(fileExtension).resourceDescriptionManager
+			val manager = getResourceServiceProvider.resourceDescriptionManager
 			val resourceDescription = previousIndex.getResourceDescription(it)
 			val isAffected = resourceDescription.isAffected(manager, deltas, deltas, newIndex)
 			return isAffected
 		].toList
-		if (LOG.isInfoEnabled)
-			LOG.info('Creating Deltas for affected resources : '+allAffected.join(', ')+".")
+		if (LOG.isInfoEnabled && !allAffected.empty)
+			LOG.info('Creating Deltas for affected resources : '+allAffected.toSet+".")
 		deltas.addAll(getDeltasForChangedResources(allAffected, previousIndex, context))
 		
 		return new IndexResult(deltas, newIndex)
@@ -73,13 +74,11 @@ class Indexer {
 	
 	protected def List<Delta> getDeltasForDeletedResources(BuildRequest request, ResourceDescriptionsData oldIndex, extension BuildContext context) {
 		val deltas = <Delta>newArrayList()
-		request.deletedFiles.forEach [
-			if(fileExtension != 'java') {
-				val IResourceDescription oldDescription = oldIndex?.getResourceDescription(it)
-				if (oldDescription != null) {
-					val delta = new DefaultResourceDescriptionDelta(oldDescription, null)
-					deltas += delta
-				}
+		request.deletedFiles.filter[context.getResourceServiceProvider(it) != null].forEach [
+			val IResourceDescription oldDescription = oldIndex?.getResourceDescription(it)
+			if (oldDescription != null) {
+				val delta = new DefaultResourceDescriptionDelta(oldDescription, null)
+				deltas += delta
 			}
 		]
 		return deltas
@@ -98,8 +97,8 @@ class Indexer {
 
 	def protected Delta addToIndex(Resource resource, boolean isPreIndexing, ResourceDescriptionsData oldIndex, BuildContext context) {
 		val uri = resource.URI
-		val languageAccess = context.languages.get(uri.fileExtension)
-		val manager = languageAccess.resourceDescriptionManager
+		val serviceProvider = context.getResourceServiceProvider(uri)
+		val manager = serviceProvider.resourceDescriptionManager
 		val newDescription = manager.getResourceDescription(resource)
 		val IResourceDescription toBeAdded = new ResolvedResourceDescription(newDescription)
 		val delta = new DefaultResourceDescriptionDelta(oldIndex?.getResourceDescription(uri), toBeAdded)

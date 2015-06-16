@@ -15,6 +15,7 @@ import org.eclipse.xtext.resource.IEObjectDescription
 import org.eclipse.xtext.resource.impl.AbstractResourceDescription
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta
 import org.eclipse.xtext.util.Strings
+import org.eclipse.xtext.common.types.access.impl.URIHelperConstants
 
 /**
  * More or less copied from NameBasedResourceDescription and TypeResourceDescription
@@ -36,7 +37,7 @@ class TypeResourceDescription extends AbstractResourceDescription {
 	URI uri
 	
 	new(QualifiedName typeName) {
-		uri = URI::createURI('java:/' + typeName.toString('.'))
+		uri = URIHelperConstants.OBJECTS_URI.appendSegment(typeName.toString('.'))
 		exportedObjects = #[new ClassDescription(typeName)]
 	}
 	

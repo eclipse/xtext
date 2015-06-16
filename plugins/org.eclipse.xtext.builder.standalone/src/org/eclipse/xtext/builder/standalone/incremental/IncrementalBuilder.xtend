@@ -10,14 +10,16 @@ package org.eclipse.xtext.builder.standalone.incremental
 import com.google.inject.Inject
 import com.google.inject.Provider
 import java.util.List
-import java.util.Map
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.builder.standalone.ClusteringConfig
-import org.eclipse.xtext.builder.standalone.LanguageAccess
+import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider
+import org.eclipse.xtext.generator.IGenerator2
+import org.eclipse.xtext.generator.URIBasedFileSystemAccess
 import org.eclipse.xtext.resource.IResourceDescription
+import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.clustering.DisabledClusteringPolicy
 import org.eclipse.xtext.resource.clustering.DynamicResourceClusteringPolicy
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
@@ -62,7 +64,7 @@ import org.eclipse.xtext.validation.CheckMode
 					Resource resource |
 					resource.contents // fully initialize
 					EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl)
-					val manager = context.getLanguageAccess(resource.URI).resourceDescriptionManager
+					val manager = context.getResourceServiceProvider(resource.URI).resourceDescriptionManager
 					val description = manager.getResourceDescription(resource);
                     val copiedDescription = SerializableResourceDescription.createCopy(description);
                     result.newIndex.addDescription(resource.URI, copiedDescription)
@@ -75,25 +77,36 @@ import org.eclipse.xtext.validation.CheckMode
 		}
 		
 		def protected boolean validate(Resource resource) {
+			val resourceValidator = getResourceServiceProvider(resource.URI).getResourceValidator();
+			if (resourceValidator == null) {
+				return true
+			}
 			LOG.info("Starting validation for input: '" + resource.URI.lastSegment + "'");
-			val resourceValidator = resource.URI.languageAccess.getResourceValidator();
 			val validationResult = resourceValidator.validate(resource, CheckMode.ALL, null);
 			return request.afterValidate.afterValidate(resource.URI, validationResult)
 		}
 	
 		protected def void generate(Resource resource, BuildRequest request, Source2GeneratedMapping newMappings) {
+			val serviceProvider = resource.URI.getResourceServiceProvider
+			val generator = serviceProvider.get(IGenerator2)
+			if (generator == null) {
+				return;
+			}
 			LOG.info("Starting generator for input: '" + resource.URI.lastSegment + "'");
-			val access = resource.URI.languageAccess
 			val previous = newMappings.deleteSource(resource.URI)
-			val fileSystemAccess = access.createUriBasedFileSystemAccess(request.baseDir) => [
+			val fileSystemAccess = new URIBasedFileSystemAccess() => [
+				val outputConfigProvider = serviceProvider.get(IContextualOutputConfigurationProvider)
+				outputConfigurations = outputConfigProvider.getOutputConfigurations(resource).toMap[name]
+				
+				baseDir = request.baseDir
 				converter = resource.resourceSet.URIConverter
+				
 				beforeWrite = [ uri, contents |
 					newMappings.addSource2Generated(resource.URI, uri)
 					previous.remove(uri)
 					request.afterGenerateFile.apply(resource.URI, uri)
 					return contents
 				]
-				
 				beforeDelete = [ uri |
 					newMappings.deleteGenerated(uri)
 					request.afterDeleteFile.apply(uri)
@@ -108,7 +121,9 @@ import org.eclipse.xtext.validation.CheckMode
 					}
 				}
 			}
-			access.generator.generate(resource, fileSystemAccess)
+			generator.beforeGenerate(resource, fileSystemAccess)
+			generator.doGenerate(resource, fileSystemAccess)
+			generator.afterGenerate(resource, fileSystemAccess)
 			// delete everything that was previously generated, but not this time
 			previous.forEach[
 				LOG.info('Deleting stale generated file ' + it)
@@ -121,11 +136,11 @@ import org.eclipse.xtext.validation.CheckMode
 
 	@Inject Provider<IncrementalBuilder.InternalStatefulIncrementalBuilder> provider
 
-	def Result build(BuildRequest request, Map<String, LanguageAccess> languages) {
+	def Result build(BuildRequest request, IResourceServiceProvider.Registry languages) {
 		build(request, languages, null)
 	}
 	
-	def Result build(BuildRequest request, Map<String, LanguageAccess> languages, ClusteringConfig clusteringConfig) {
+	def Result build(BuildRequest request, IResourceServiceProvider.Registry languages, ClusteringConfig clusteringConfig) {
 		val strategy = if (clusteringConfig != null) {
 				LOG.info("Clustering configured.")
 				new DynamicResourceClusteringPolicy => [

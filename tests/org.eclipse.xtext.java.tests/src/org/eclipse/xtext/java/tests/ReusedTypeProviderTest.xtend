@@ -5,7 +5,6 @@ import com.google.inject.Inject
 import com.google.inject.Provider
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.xtext.builder.standalone.LanguageAccess
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder
 import org.eclipse.xtext.common.types.JvmAnnotationReference
@@ -31,34 +30,34 @@ import org.junit.runner.RunWith
 @InjectWith(JavaInjectorProvider)
 class ReusedTypeProviderTest extends AbstractTypeProviderTest {
 	
-	
 	@Inject IncrementalBuilder builder
-	@Inject IResourceServiceProvider resourceServiceProvider
+	@Inject IResourceServiceProvider.Registry resourceServiceProviderRegistry
 	@Inject FileExtensionProvider extensionProvider 
 	@Inject IJvmTypeProvider.Factory typeProviderFactory
 	@Inject Provider<XtextResourceSet> resourceSetProvider
 	
-	IJvmTypeProvider typeProvider
+	static IJvmTypeProvider typeProvider
 	
 	override setUp() throws Exception {
 		super.setUp()
-		val pathToSources = "/org/eclipse/xtext/common/types/testSetups";
-		val files = MockJavaProjectProvider.readResource(pathToSources + "/files.list")
-		val resourceSet = resourceSetProvider.get => [
-			classpathURIContext = ReusedTypeProviderTest.getClassLoader
-		]
-		typeProviderFactory.createTypeProvider(resourceSet)
-		val buildRequest = new BuildRequest => [
-			for (file : files.filterNull) {
-				val fullPath = pathToSources+"/"+file
-				val url = MockJavaProjectProvider.getResource(fullPath)
-				dirtyFiles += URI.createURI(url.toExternalForm)
-			}
-			setResourceSet(resourceSet)
-		]
-		val languageAccess = new LanguageAccess(emptySet, resourceServiceProvider, true);
-		builder.build(buildRequest, #{'txt' -> languageAccess})
-		typeProvider = typeProviderFactory.findTypeProvider(resourceSet)
+		if (typeProvider == null) {
+			val pathToSources = "/org/eclipse/xtext/common/types/testSetups";
+			val files = MockJavaProjectProvider.readResource(pathToSources + "/files.list")
+			val resourceSet = resourceSetProvider.get => [
+				classpathURIContext = ReusedTypeProviderTest.getClassLoader
+			]
+			typeProviderFactory.createTypeProvider(resourceSet)
+			val buildRequest = new BuildRequest => [
+				for (file : files.filterNull) {
+					val fullPath = pathToSources+"/"+file
+					val url = MockJavaProjectProvider.getResource(fullPath)
+					dirtyFiles += URI.createURI(url.toExternalForm)
+				}
+				setResourceSet(resourceSet)
+			]
+			builder.build(buildRequest, resourceServiceProviderRegistry)
+			typeProvider = typeProviderFactory.findTypeProvider(resourceSet)
+		}
 	}
 	
 	override protected getTypeProvider() {

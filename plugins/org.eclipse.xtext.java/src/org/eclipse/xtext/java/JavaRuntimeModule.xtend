@@ -1,4 +1,4 @@
-package org.eclipse.xtext.java.resource
+package org.eclipse.xtext.java
 
 import com.google.inject.AbstractModule
 import com.google.inject.name.Names
@@ -8,14 +8,17 @@ import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider
 import org.eclipse.xtext.common.types.xtext.JvmIdentifiableQualifiedNameProvider
 import org.eclipse.xtext.generator.IGenerator
+import org.eclipse.xtext.java.resource.JavaResource
+import org.eclipse.xtext.java.resource.JavaResourceDescriptionManager
+import org.eclipse.xtext.java.resource.JavaResourceServiceProvider
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.parser.IEncodingProvider
+import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader
 import org.eclipse.xtext.resource.IContainer
 import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.impl.SimpleResourceDescriptionsBasedContainerManager
 import org.eclipse.xtext.validation.IResourceValidator
-import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader
 
 class JavaRuntimeModule extends AbstractModule {
 

@@ -14,6 +14,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.Issue
+import org.eclipse.xtext.resource.IResourceDescription
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -67,6 +68,7 @@ class BuildRequest {
 	List<URI> outputs = newArrayList
 	List<URI> dirtyFiles = newArrayList
 	List<URI> deletedFiles = newArrayList;
+	List<IResourceDescription.Delta> externalDeltas = newArrayList()
 	
 	/**
 	 * call back after validation, return <code>false</code> will stop the build.
