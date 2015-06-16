@@ -18,7 +18,7 @@ task testJs(type: NodeTask) {
 	dependsOn(npmInstall)
 	inputs.dir new File('src/test/js')
 	script = file('node_modules/mocha/bin/mocha')
-	args = ['src/test/js/*.js']
+	args = ['-u', 'tdd', 'src/test/js/*.js']
 }
 
 def requireJsPlugins = file("$buildDir/tmp/js/requirejs-plugins")
