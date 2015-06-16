@@ -13,7 +13,6 @@
 	<name>Xtext Java Language (for standalone compilation)</name>
 
 	<dependencies>
-		<dependencies>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext</artifactId>
@@ -60,6 +59,5 @@
 			<artifactId>org.eclipse.emf.common</artifactId>
 			<version>${emf.version}</version>
 		</dependency>
-	</dependencies>
 	</dependencies>
 </project>
