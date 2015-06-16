@@ -23,6 +23,7 @@
 
 		<module>../../plugins/org.eclipse.xtext</module>
 		<module>../../plugins/org.eclipse.xtext.ide</module>
+		<module>../../plugins/org.eclipse.xtext.java</module>
 
 		<module>../../plugins/org.eclipse.xtext.common.types</module>
 		<module>../../plugins/org.eclipse.xtext.ecore</module>
