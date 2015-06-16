@@ -35,6 +35,7 @@ import org.eclipse.xtext.web.server.ISessionStore;
 import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.ServiceConflictResult;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistService;
+import org.eclipse.xtext.web.server.hover.HoverService;
 import org.eclipse.xtext.web.server.model.IWebResourceSetProvider;
 import org.eclipse.xtext.web.server.model.UpdateDocumentService;
 import org.eclipse.xtext.web.server.model.XtextWebDocument;
@@ -140,6 +141,9 @@ public class XtextServiceDispatcher {
   
   @Inject
   private ValidationService validationService;
+  
+  @Inject
+  private HoverService hoverService;
   
   @Inject
   private IServerResourceHandler resourceHandler;
@@ -288,6 +292,12 @@ public class XtextServiceDispatcher {
         if (Objects.equal(requestType, "content-assist")) {
           _matched=true;
           _switchResult = this.getContentAssistService(request, sessionStore);
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(requestType, "hover")) {
+          _matched=true;
+          _switchResult = this.getHoverService(request, sessionStore);
         }
       }
       if (!_matched) {
@@ -612,6 +622,41 @@ public class XtextServiceDispatcher {
           Collection<String> _parameterKeys = request.getParameterKeys();
           boolean _contains = _parameterKeys.contains("fullText");
           it.hasTextInput = _contains;
+        }
+      };
+      _xblockexpression = ObjectExtensions.<XtextServiceDispatcher.ServiceDescriptor>operator_doubleArrow(_serviceDescriptor, _function);
+    }
+    return _xblockexpression;
+  }
+  
+  protected XtextServiceDispatcher.ServiceDescriptor getHoverService(final IRequestData request, final ISessionStore sessionStore) throws InvalidRequestException {
+    XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
+    {
+      final XtextWebDocumentAccess document = this.getDocumentAccess(request, sessionStore);
+      Optional<Integer> _of = Optional.<Integer>of(Integer.valueOf(0));
+      final int offset = this.getInt(request, "offset", _of);
+      XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
+      final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
+        @Override
+        public void apply(final XtextServiceDispatcher.ServiceDescriptor it) {
+          final Function0<IServiceResult> _function = new Function0<IServiceResult>() {
+            @Override
+            public IServiceResult apply() {
+              IServiceResult _xtrycatchfinallyexpression = null;
+              try {
+                _xtrycatchfinallyexpression = XtextServiceDispatcher.this.hoverService.getHover(document, offset);
+              } catch (final Throwable _t) {
+                if (_t instanceof Throwable) {
+                  final Throwable throwable = (Throwable)_t;
+                  _xtrycatchfinallyexpression = XtextServiceDispatcher.this.handleError(it, throwable);
+                } else {
+                  throw Exceptions.sneakyThrow(_t);
+                }
+              }
+              return _xtrycatchfinallyexpression;
+            }
+          };
+          it.service = _function;
         }
       };
       _xblockexpression = ObjectExtensions.<XtextServiceDispatcher.ServiceDescriptor>operator_doubleArrow(_serviceDescriptor, _function);

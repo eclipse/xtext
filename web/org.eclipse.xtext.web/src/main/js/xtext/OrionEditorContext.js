@@ -116,6 +116,14 @@ define(function() {
 					p.escapePosition = entry.escapePosition;
 				return p;
 			});
+		},
+		
+		translateHoverInfo : function (entry) {
+			return { 
+				content : entry.content,
+				title : entry.title,
+				type : 'html' 
+			};
 		}
 	};
 	

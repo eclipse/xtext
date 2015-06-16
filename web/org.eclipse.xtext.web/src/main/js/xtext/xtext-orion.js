@@ -119,9 +119,10 @@ define([
 	"xtext/services/SaveResourceService",
 	"xtext/services/UpdateService",
 	"xtext/services/ContentAssistService",
-	"xtext/services/ValidationService"
+	"xtext/services/ValidationService",
+	"xtext/services/HoverService",
 ], function(jQuery, orionEdit, mKeyBinding, mTextStyler, EditorContext, LoadResourceService, RevertResourceService,
-		SaveResourceService, UpdateService, ContentAssistService, ValidationService) {
+		SaveResourceService, UpdateService, ContentAssistService, ValidationService, HoverService) {
 	
 	/**
 	 * Translate an HTML attribute name to a JS option name.
@@ -168,6 +169,9 @@ define([
 		return options;
 	}
 	
+	
+	var _internals = {}
+	
 	/**
 	 * Set the default options for Xtext editors.
 	 */
@@ -204,6 +208,18 @@ define([
 			options.autoPairSquareBrackets = true;
 		if (options.smartIndentation === undefined)
 			options.smartIndentation = true;
+		if (options.hoverFactory === undefined) {
+			options.hoverFactory = {
+				createHover : function() {
+					return {
+						computeHoverInfo : function(context) {
+							return _internals.computeHoverInfo(context);
+						},
+						clearQuickFixes: function() {}
+					};
+				}
+			};
+		}
 	}
 	
 	var exports = {};
@@ -389,6 +405,12 @@ define([
 				id : "xtext.service",
 				provider : contentAssistService
 			}]);
+		}
+		
+		//---- Hover Service
+		var hoverService = new HoverService(options.serverUrl, options.resourceId);
+		_internals.computeHoverInfo = function(context) {
+			return hoverService.computeHoverInfo(editorContext, context);
 		}
 		
 		editor.invokeXtextService = function(service, invokeOptions) {
