@@ -2,6 +2,8 @@ package org.eclipse.xtend.core.compiler.batch;
 
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Maps.*;
+import static com.google.common.collect.Sets.*;
 import static java.util.Arrays.*;
 import static java.util.Collections.*;
 import static org.eclipse.xtext.util.Strings.*;
@@ -19,6 +21,8 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
@@ -30,12 +34,16 @@ import org.eclipse.jdt.core.compiler.batch.BatchCompiler;
 import org.eclipse.xtend.core.compiler.batch.internal.AlternateJdkLoader;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.descriptions.IStubGenerator;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.generator.GeneratorDelegate;
+import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
+import org.eclipse.xtext.generator.OutputConfiguration;
+import org.eclipse.xtext.generator.OutputConfigurationAdapter;
 import org.eclipse.xtext.mwe.NameBasedFilter;
 import org.eclipse.xtext.mwe.PathTraverser;
 import org.eclipse.xtext.parser.IEncodingProvider;
@@ -53,14 +61,16 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.workspace.FileProjectConfig;
+import org.eclipse.xtext.workspace.FileWorkspaceConfig;
+import org.eclipse.xtext.workspace.IWorkspaceConfig;
+import org.eclipse.xtext.workspace.WorkspaceConfigAdapter;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfigProvider;
 import org.eclipse.xtext.xbase.compiler.JavaVersion;
-import org.eclipse.xtext.xbase.file.ProjectConfig;
-import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
-import org.eclipse.xtext.xbase.file.SimpleWorkspaceConfig;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 
+import com.google.common.base.CharMatcher;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
@@ -69,6 +79,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.name.Named;
 
 /**
  * @author Michael Clay - Initial contribution and API
@@ -118,11 +129,14 @@ public class XtendBatchCompiler {
 	@Inject
 	private IResourceDescription.Manager resourceDescriptionManager;
 	@Inject
-	private RuntimeWorkspaceConfigProvider workspaceConfigProvider;
-	@Inject
 	private CompilerPhases compilerPhases;
 	@Inject
 	private IStubGenerator stubGenerator;
+	@Inject 
+	private IOutputConfigurationProvider outputConfigurationProvider;
+	@Inject
+	@Named(Constants.LANGUAGE_NAME)
+	private String languageName;
 
 	protected String sourcePath;
 	protected String classPath;
@@ -150,6 +164,10 @@ public class XtendBatchCompiler {
 	private ClassLoader jvmTypesClassLoader;
 
 	private ClassLoader annotationProcessingClassLoader;
+
+	private FileWorkspaceConfig workspaceConfig;
+
+	private OutputConfiguration outputConfiguration;
 
 	public void setCurrentClassLoader(ClassLoader currentClassLoader) {
 		this.currentClassLoader = currentClassLoader;
@@ -318,8 +336,22 @@ public class XtendBatchCompiler {
 	public void setFileEncoding(String encoding) {
 		this.fileEncoding = encoding;
 	}
+	
+	/**
+	 * @noreference Only for testing
+	 */
+	public OutputConfiguration getOutputConfiguration() {
+		return outputConfiguration;
+	}
+	
+	/**
+	 * @noreference Only for testing
+	 */
+	public FileWorkspaceConfig getWorkspaceConfig() {
+		return workspaceConfig;
+	}
 
-	public boolean configureWorkspace() {
+	private boolean configureWorkspace(ResourceSet resourceSet) {
 		List<File> sourceFileList = getSourcePathFileList();
 		File outputFile = getOutputPathFile();
 		if (sourceFileList == null || outputFile == null) {
@@ -338,9 +370,8 @@ public class XtendBatchCompiler {
 			log.error("(Output folder: '" + outputFile + "')");
 			return false;
 		}
-
-		SimpleWorkspaceConfig workspaceConfig = new SimpleWorkspaceConfig(commonRoot.getParent().toString());
-		ProjectConfig projectConfig = new ProjectConfig(commonRoot.getName());
+		workspaceConfig = new FileWorkspaceConfig(commonRoot.getParentFile());
+		FileProjectConfig projectConfig = workspaceConfig.addProject(commonRoot.getName());
 
 		java.net.URI commonURI = commonRoot.toURI();
 		java.net.URI relativizedTarget = commonURI.relativize(outputFile.toURI());
@@ -348,43 +379,41 @@ public class XtendBatchCompiler {
 			log.error("Target folder '" + outputFile + "' must be a child of the project folder '" + commonRoot + "'");
 			return false;
 		}
-
+		CharMatcher slash = CharMatcher.is('/');
+		String relativeTargetFolder = slash.trimTrailingFrom(relativizedTarget.getPath());
+		outputConfiguration = Iterables.getOnlyElement(outputConfigurationProvider.getOutputConfigurations());
+		outputConfiguration.setOutputDirectory(relativeTargetFolder);
 		for (File source : sourceFileList) {
 			java.net.URI relativizedSrc = commonURI.relativize(source.toURI());
 			if (relativizedSrc.isAbsolute()) {
 				log.error("Source folder '" + source + "' must be a child of the project folder '" + commonRoot + "'");
 				return false;
 			}
-			projectConfig.addSourceFolderMapping(relativizedSrc.getPath(), relativizedTarget.getPath());
+			projectConfig.addSourceFolder(relativizedSrc.getPath());
 		}
-		workspaceConfig.addProjectConfig(projectConfig);
-		workspaceConfigProvider.setWorkspaceConfig(workspaceConfig);
+		Map<String, Set<OutputConfiguration>> outputConfigurations = newHashMap();
+		outputConfigurations.put(languageName, newHashSet(outputConfiguration));
+		resourceSet.eAdapters().add(new WorkspaceConfigAdapter(workspaceConfig));
+		resourceSet.eAdapters().add(new OutputConfigurationAdapter(outputConfigurations));
 		return true;
 	}
 
 	private File getOutputPathFile() {
-		try {
-			return new File(outputPath).getCanonicalFile();
-		} catch (IOException e) {
-			log.error("Invalid target folder '" + outputPath + "' (" + e.getMessage() + ")");
-			return null;
-		}
+		return new File(outputPath).getAbsoluteFile();
 	}
 
 	private List<File> getSourcePathFileList() {
 		List<File> sourceFileList = new ArrayList<File>();
 		for (String path : getSourcePathDirectories()) {
-			try {
-				sourceFileList.add(new File(path).getCanonicalFile());
-			} catch (IOException e) {
-				log.error("Invalid source folder '" + path + "' (" + e.getMessage() + ")");
-				return null;
-			}
+			sourceFileList.add(new File(path).getAbsoluteFile());
 		}
 		return sourceFileList;
 	}
 
 	private File determineCommonRoot(File outputFile, List<File> sourceFileList) {
+		if (baseURI != null && baseURI.isFile()) {
+			return new File(baseURI.toFileString());
+		}
 		List<File> pathList = new ArrayList<File>(sourceFileList);
 		pathList.add(outputFile);
 
@@ -426,12 +455,10 @@ public class XtendBatchCompiler {
 			if (!checkConfiguration()) {
 				return false;
 			}
-			if (workspaceConfigProvider.getWorkspaceConfig() == null) {
-				if (!configureWorkspace()) {
-					return false;
-				}
-			}
 			ResourceSet resourceSet = resourceSetProvider.get();
+			if (!configureWorkspace(resourceSet)) {
+				return false;
+			}
 			GeneratorConfigProvider.install(resourceSet, generatorConfig);
 			File classDirectory = createTempDir("classes");
 			try {
@@ -493,9 +520,13 @@ public class XtendBatchCompiler {
 		File output = getOutputPathFile();
 		for (String sourcePath : getSourcePathDirectories()) {
 			File sourceDirectory = new File(sourcePath);
-			if (isContainedIn(output, sourceDirectory)) {
-				log.error("The configured output path \""+getOutputPathFile()+"\" cannot be a child of the configured source directory \""+sourcePath+"\".");
-				return false;
+			try {
+				if (isContainedIn(output.getCanonicalFile(), sourceDirectory.getCanonicalFile())) {
+					log.error("The configured output path \""+getOutputPathFile()+"\" cannot be a child of the configured source directory \""+sourcePath+"\".");
+					return false;
+				}
+			} catch (IOException e) {
+				log.error("invalid configuration", e);
 			}
 		}
 		return true;
@@ -526,27 +557,11 @@ public class XtendBatchCompiler {
 			}
 		});
 		for (String src : pathes.keySet()) {
-			URI srcURI = URI.createFileURI(src + "/");
-			URI relativeSrcURI = null;
-			if(baseURI != null) {
-				relativeSrcURI = srcURI.deresolve(baseURI);
-			} else {
-				relativeSrcURI = srcURI;
-			}
-			URI platformResourceURI = null;
-			if(relativeSrcURI.isRelative()) {
-				platformResourceURI = URI.createPlatformResourceURI(relativeSrcURI.toString(), true);
-			} else {
-				String identifier = Joiner.on("_").join(relativeSrcURI.segments());
-				platformResourceURI = URI.createPlatformResourceURI(identifier + "/", true);
-			}
-			resourceSet.getURIConverter().getURIMap().put(platformResourceURI, srcURI);
 			for (URI uri : pathes.get(src)) {
 				if (log.isDebugEnabled()) {
 					log.debug("load xtend file '" + uri + "'");
 				}
-				URI uriToUse = uri.replacePrefix(srcURI, platformResourceURI);
-				resourceSet.getResource(uriToUse, true);
+				resourceSet.getResource(uri, true);
 			}
 		}
 		return resourceSet;
