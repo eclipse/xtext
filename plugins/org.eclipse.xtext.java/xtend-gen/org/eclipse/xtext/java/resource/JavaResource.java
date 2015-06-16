@@ -7,7 +7,6 @@ import com.google.inject.Provider;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Field;
 import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -26,12 +25,13 @@ import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.java.resource.JavaDerivedStateComputer;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.CompilerPhases;
-import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.resource.ISynchronizable;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
-public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver {
+public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver, ISynchronizable<JavaResource> {
   public static class Factory implements Resource.Factory {
     @Inject
     private Provider<JavaResource> resourceProvider;
@@ -49,6 +49,8 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
     }
   }
   
+  public final static String OPTION_ENCODING = (JavaResource.class.getName() + ".DEFAULT_ENCODING");
+  
   @Inject
   private IEncodingProvider encodingProvider;
   
@@ -63,7 +65,7 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
   @Override
   protected void doLoad(final InputStream inputStream, final Map<?, ?> options) throws IOException {
     URI _uRI = this.getURI();
-    final String encoding = this.encodingProvider.getEncoding(_uRI);
+    final String encoding = this.getEncoding(_uRI, options);
     InputStreamReader _inputStreamReader = new InputStreamReader(inputStream, encoding);
     final String contentsAsString = CharStreams.toString(_inputStreamReader);
     char[] _charArray = contentsAsString.toCharArray();
@@ -71,6 +73,17 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
     String _lastSegment = _uRI_1.lastSegment();
     CompilationUnit _compilationUnit = new CompilationUnit(_charArray, _lastSegment, encoding);
     this.compilationUnit = _compilationUnit;
+  }
+  
+  protected String getEncoding(final URI uri, final Map<?, ?> options) {
+    boolean _notEquals = (!Objects.equal(options, null));
+    if (_notEquals) {
+      final Object encodingOption = options.get(JavaResource.OPTION_ENCODING);
+      if ((encodingOption instanceof String)) {
+        return ((String)encodingOption);
+      }
+    }
+    return this.encodingProvider.getEncoding(uri);
   }
   
   protected CompilationUnit getCompilationUnit() {
@@ -85,34 +98,39 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
   
   @Override
   public EList<EObject> getContents() {
-    if (this.isInitializing) {
-      return super.getContents();
-    }
-    try {
-      this.isInitializing = true;
-      final boolean isIndexing = this.compilerPhases.isIndexing(this);
-      if (((!isIndexing) && (!this.isFullyInitialized))) {
-        this.derivedStateComputer.discardDerivedState(this);
-        this.derivedStateComputer.installFull(this);
-        this.isFullyInitialized = true;
-        this.isInitialized = true;
-      } else {
-        boolean _and = false;
-        if (!isIndexing) {
-          _and = false;
-        } else {
-          _and = (!this.isInitialized);
+    this.getLock();
+    synchronized (this.getLock()) {
+      {
+        if (this.isInitializing) {
+          return super.getContents();
         }
-        if (_and) {
-          this.derivedStateComputer.installStubs(this);
-          this.isFullyInitialized = false;
-          this.isInitialized = true;
+        try {
+          this.isInitializing = true;
+          final boolean isIndexing = this.compilerPhases.isIndexing(this);
+          if (((!isIndexing) && (!this.isFullyInitialized))) {
+            this.derivedStateComputer.discardDerivedState(this);
+            this.derivedStateComputer.installFull(this);
+            this.isFullyInitialized = true;
+            this.isInitialized = true;
+          } else {
+            boolean _and = false;
+            if (!isIndexing) {
+              _and = false;
+            } else {
+              _and = (!this.isInitialized);
+            }
+            if (_and) {
+              this.derivedStateComputer.installStubs(this);
+              this.isFullyInitialized = false;
+              this.isInitialized = true;
+            }
+          }
+        } finally {
+          this.isInitializing = false;
         }
+        return super.getContents();
       }
-    } finally {
-      this.isInitializing = false;
     }
-    return super.getContents();
   }
   
   @Override
@@ -134,26 +152,37 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
   private IndexedJvmTypeAccess _access;
   
   public IndexedJvmTypeAccess getIndexJvmTypeAccess() {
-    try {
-      boolean _equals = Objects.equal(this._access, null);
-      if (_equals) {
-        Resource.Factory.Registry _resourceFactoryRegistry = this.resourceSet.getResourceFactoryRegistry();
-        Map<String, Object> _protocolToFactoryMap = _resourceFactoryRegistry.getProtocolToFactoryMap();
-        final Object provider = _protocolToFactoryMap.get(URIHelperConstants.PROTOCOL);
-        Field _declaredField = AbstractJvmTypeProvider.class.getDeclaredField("indexedJvmTypeAccess");
-        final Procedure1<Field> _function = new Procedure1<Field>() {
-          @Override
-          public void apply(final Field it) {
-            it.setAccessible(true);
-          }
-        };
-        final Field field = ObjectExtensions.<Field>operator_doubleArrow(_declaredField, _function);
-        Object _get = field.get(provider);
-        this._access = ((IndexedJvmTypeAccess) _get);
+    boolean _equals = Objects.equal(this._access, null);
+    if (_equals) {
+      Resource.Factory.Registry _resourceFactoryRegistry = this.resourceSet.getResourceFactoryRegistry();
+      Map<String, Object> _protocolToFactoryMap = _resourceFactoryRegistry.getProtocolToFactoryMap();
+      final Object provider = _protocolToFactoryMap.get(URIHelperConstants.PROTOCOL);
+      if ((provider instanceof AbstractJvmTypeProvider)) {
+        IndexedJvmTypeAccess _indexedJvmTypeAccess = ((AbstractJvmTypeProvider)provider).getIndexedJvmTypeAccess();
+        this._access = _indexedJvmTypeAccess;
       }
-      return this._access;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+    }
+    return this._access;
+  }
+  
+  /**
+   * Returns the lock of the owning {@link ResourceSet}, if it exposes such a lock.
+   * Otherwise this resource itself is used as the lock context.
+   */
+  @Override
+  public Object getLock() {
+    ResourceSet resourceSet = this.getResourceSet();
+    if ((resourceSet instanceof ISynchronizable<?>)) {
+      return ((ISynchronizable<?>) resourceSet).getLock();
+    }
+    return this;
+  }
+  
+  @Override
+  public <Result extends Object> Result execute(final IUnitOfWork<Result, ? super JavaResource> unit) throws Exception {
+    this.getLock();
+    synchronized (this.getLock()) {
+      return unit.exec(this);
     }
   }
 }

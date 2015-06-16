@@ -63,7 +63,7 @@ public class IndexAwareNameEnvironment implements INameEnvironment {
         char[] _charArray = source.toCharArray();
         String _string = className.toString("/");
         String _plus = (_string + ".java");
-        CompilationUnit _compilationUnit = new CompilationUnit(_charArray, _plus, "UTF-8");
+        CompilationUnit _compilationUnit = new CompilationUnit(_charArray, _plus, null);
         NameEnvironmentAnswer _nameEnvironmentAnswer = new NameEnvironmentAnswer(_compilationUnit, null);
         result = _nameEnvironmentAnswer;
       } else {
