@@ -65,7 +65,6 @@ class BuildRequest {
 	}
 
 	List<URI> classPath = newArrayList
-	List<URI> outputs = newArrayList
 	List<URI> dirtyFiles = newArrayList
 	List<URI> deletedFiles = newArrayList;
 	List<IResourceDescription.Delta> externalDeltas = newArrayList()
