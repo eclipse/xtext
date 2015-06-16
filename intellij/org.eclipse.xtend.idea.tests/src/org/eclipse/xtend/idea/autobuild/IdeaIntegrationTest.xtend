@@ -8,10 +8,44 @@
 package org.eclipse.xtend.idea.autobuild
 
 import org.eclipse.xtend.idea.LightXtendTest
+import org.junit.ComparisonFailure
 
 /**
  */
-class CyclicResolutionInEditorTest extends LightXtendTest {
+class IdeaIntegrationTest extends LightXtendTest {
+	
+	def void testJavaChangeTriggersError() {
+		val xtendFile = myFixture.addFileToProject('otherPackage/Foo.xtend', '''
+			package otherPackage
+			
+			import mypackage.Bar
+			
+			class Foo {
+			
+				def void callToBar(Bar bar) {
+					bar.doStuff()
+				}
+			
+			}
+		''')
+		try {
+			myFixture.testHighlighting(true, true, true, xtendFile.virtualFile)
+			fail("expecting errors")
+		} catch (ComparisonFailure e) {
+			// expected		
+		}
+		myFixture.addFileToProject('myPackage/Bar.java', '''
+			package mypackage;
+			
+			public class Bar {
+			
+				public void doStuff() {
+				}
+			
+			}
+		''')
+		myFixture.testHighlighting(true, true, true, xtendFile.virtualFile)
+	}
 	
 	def void testCyclicResolution() {
 		myFixture.addClass('''

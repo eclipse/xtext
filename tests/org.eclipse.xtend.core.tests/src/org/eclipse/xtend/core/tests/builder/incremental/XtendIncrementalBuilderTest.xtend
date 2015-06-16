@@ -7,15 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.builder.incremental
 
-import com.google.inject.Guice
 import com.google.inject.Inject
 import java.util.concurrent.atomic.AtomicBoolean
-import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
-import org.eclipse.xtext.builder.standalone.LanguageAccess
 import org.eclipse.xtext.builder.tests.incremental.AbstractIncrementalBuilderTest
-import org.eclipse.xtext.generator.OutputConfigurationProvider
-import org.eclipse.xtext.java.resource.JavaRuntimeModule
+import org.eclipse.xtext.java.JavaSourceLanguageSetup
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.resource.IResourceServiceProvider
@@ -28,20 +24,17 @@ import static org.junit.Assert.*
 @RunWith(XtextRunner)
 class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest {
 	
-	@Inject IResourceServiceProvider rsp
-	@Inject OutputConfigurationProvider configurationProvider
-	
-	IResourceServiceProvider javaResourceServiceProvider
+	@Inject IResourceServiceProvider.Registry registry
 	
 	override setUp() {
-		val injector = Guice.createInjector(new JavaRuntimeModule)
-		javaResourceServiceProvider = injector.getInstance(IResourceServiceProvider)
-		Resource.Factory.Registry.INSTANCE.extensionToFactoryMap.put('java', injector.getInstance(Resource.Factory))
+		val javaSetup = new JavaSourceLanguageSetup
+		val injector = javaSetup.createInjector
+		javaSetup.register(injector, 'java')
 		super.setUp()
 	}
 	
 	override getLanguages() {
-		#[new LanguageAccess(configurationProvider.outputConfigurations, rsp), new LanguageAccess(emptySet, javaResourceServiceProvider)]
+		registry
 	}
 	
 	@Test def void testSimpleMixedBuild() {
