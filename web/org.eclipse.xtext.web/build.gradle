@@ -93,3 +93,4 @@ task optimizeAceCss(type: NodeTask) {
 
 sourceSets.main.resources.srcDir "$buildDir/opt-resources"
 processResources.dependsOn(optimizeOrionJs, optimizeOrionJsMin, optimizeOrionCss, optimizeAceJs, optimizeAceJsMin, optimizeAceCss)
+check.dependsOn(testJs)

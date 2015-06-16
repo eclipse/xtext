@@ -51,8 +51,8 @@ define(function() {
 		else if (mockOptions.errorThrown)
 			mockOptions.success = false;
 		
-		if (isFunction(mockOptions.listener))
-			mockOptions.listener(url, settings);
+		if (isFunction(mockOptions.onStart))
+			mockOptions.onStart(url, settings);
 		
 		function asyncAjax() {
 			var xhr = mockOptions.xhr ? mockOptions.xhr : {};
@@ -61,6 +61,9 @@ define(function() {
 			else
 				settings.error(xhr, 'error', mockOptions.errorThrown);
 			settings.complete(xhr, mockOptions.success ? 'success' : 'error');
+			
+			if (isFunction(mockOptions.onComplete))
+				mockOptions.onComplete();
 		}
 		
 		if (mockOptions.wait)
