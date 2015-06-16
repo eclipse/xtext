@@ -380,6 +380,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   }
   
   public void build(final List<BuildEvent> allEvents) {
+    final Application app = ApplicationManager.getApplication();
     final BuildProgressReporter buildProgressReporter = this.buildProgressReporterProvider.get();
     buildProgressReporter.setProject(this.project);
     try {
@@ -436,25 +437,31 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
                   VirtualFile _file = event.getFile();
                   boolean _isJavaFile = this.isJavaFile(_file);
                   if (_isJavaFile) {
-                    VirtualFile _file_1 = event.getFile();
-                    Set<IResourceDescription.Delta> _javaDeltas = this.getJavaDeltas(_file_1, module);
-                    Iterables.<IResourceDescription.Delta>addAll(deltas, _javaDeltas);
+                    final Computable<Set<IResourceDescription.Delta>> _function_3 = new Computable<Set<IResourceDescription.Delta>>() {
+                      @Override
+                      public Set<IResourceDescription.Delta> compute() {
+                        VirtualFile _file = event.getFile();
+                        return XtextAutoBuilderComponent.this.getJavaDeltas(_file, module);
+                      }
+                    };
+                    Set<IResourceDescription.Delta> _runReadAction = app.<Set<IResourceDescription.Delta>>runReadAction(_function_3);
+                    Iterables.<IResourceDescription.Delta>addAll(deltas, _runReadAction);
                   } else {
-                    VirtualFile _file_2 = event.getFile();
-                    URI _uRI = VirtualFileURIUtil.getURI(_file_2);
+                    VirtualFile _file_1 = event.getFile();
+                    URI _uRI = VirtualFileURIUtil.getURI(_file_1);
                     changedUris.add(_uRI);
                   }
                   break;
                 case DELETED:
-                  VirtualFile _file_3 = event.getFile();
-                  boolean _isJavaFile_1 = this.isJavaFile(_file_3);
+                  VirtualFile _file_2 = event.getFile();
+                  boolean _isJavaFile_1 = this.isJavaFile(_file_2);
                   if (_isJavaFile_1) {
-                    VirtualFile _file_4 = event.getFile();
-                    Set<IResourceDescription.Delta> _javaDeltas_1 = this.getJavaDeltas(_file_4, module);
-                    Iterables.<IResourceDescription.Delta>addAll(deltas, _javaDeltas_1);
+                    VirtualFile _file_3 = event.getFile();
+                    Set<IResourceDescription.Delta> _javaDeltas = this.getJavaDeltas(_file_3, module);
+                    Iterables.<IResourceDescription.Delta>addAll(deltas, _javaDeltas);
                   } else {
-                    VirtualFile _file_5 = event.getFile();
-                    URI _uRI_1 = VirtualFileURIUtil.getURI(_file_5);
+                    VirtualFile _file_4 = event.getFile();
+                    URI _uRI_1 = VirtualFileURIUtil.getURI(_file_4);
                     changedUris.add(_uRI_1);
                   }
                   break;
@@ -465,7 +472,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
           }
           final OrderEnumerator entries = OrderEnumerator.orderEntries(module);
           BuildRequest _buildRequest = new BuildRequest();
-          final Procedure1<BuildRequest> _function_3 = new Procedure1<BuildRequest>() {
+          final Procedure1<BuildRequest> _function_4 = new Procedure1<BuildRequest>() {
             @Override
             public void apply(final BuildRequest it) {
               XtextResourceSet _get = XtextAutoBuilderComponent.this.resourceSetProvider.get(module);
@@ -520,19 +527,18 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
               it.setAfterDeleteFile(_function_2);
             }
           };
-          final BuildRequest request = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_3);
-          final Application app = ApplicationManager.getApplication();
-          final Computable<IncrementalBuilder.Result> _function_4 = new Computable<IncrementalBuilder.Result>() {
+          final BuildRequest request = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_4);
+          final Computable<IncrementalBuilder.Result> _function_5 = new Computable<IncrementalBuilder.Result>() {
             @Override
             public IncrementalBuilder.Result compute() {
               IncrementalBuilder _get = XtextAutoBuilderComponent.this.builderProvider.get();
               return _get.build(request, XtextAutoBuilderComponent.this.resourceServiceProviderRegistry);
             }
           };
-          final IncrementalBuilder.Result result = app.<IncrementalBuilder.Result>runReadAction(_function_4);
+          final IncrementalBuilder.Result result = app.<IncrementalBuilder.Result>runReadAction(_function_5);
           IndexState _indexState = result.getIndexState();
           this.indexState = _indexState;
-          final Runnable _function_5 = new Runnable() {
+          final Runnable _function_6 = new Runnable() {
             @Override
             public void run() {
               final Runnable _function = new Runnable() {
@@ -547,15 +553,15 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
             }
           };
           ModalityState _any = ModalityState.any();
-          app.invokeAndWait(_function_5, _any);
-          final IResourceDescription.Event _function_6 = new IResourceDescription.Event() {
+          app.invokeAndWait(_function_6, _any);
+          final IResourceDescription.Event _function_7 = new IResourceDescription.Event() {
             @Override
             public ImmutableList<IResourceDescription.Delta> getDeltas() {
               List<IResourceDescription.Delta> _affectedResources = result.getAffectedResources();
               return ImmutableList.<IResourceDescription.Delta>copyOf(_affectedResources);
             }
           };
-          this.notifyListeners(_function_6);
+          this.notifyListeners(_function_7);
           List<IResourceDescription.Delta> _affectedResources = result.getAffectedResources();
           deltas.addAll(_affectedResources);
         }

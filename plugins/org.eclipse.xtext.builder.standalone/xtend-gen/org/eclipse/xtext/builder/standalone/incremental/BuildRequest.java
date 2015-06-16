@@ -91,8 +91,6 @@ public class BuildRequest {
   
   private List<URI> classPath = CollectionLiterals.<URI>newArrayList();
   
-  private List<URI> outputs = CollectionLiterals.<URI>newArrayList();
-  
   private List<URI> dirtyFiles = CollectionLiterals.<URI>newArrayList();
   
   private List<URI> deletedFiles = CollectionLiterals.<URI>newArrayList();
@@ -135,15 +133,6 @@ public class BuildRequest {
   
   public void setClassPath(final List<URI> classPath) {
     this.classPath = classPath;
-  }
-  
-  @Pure
-  public List<URI> getOutputs() {
-    return this.outputs;
-  }
-  
-  public void setOutputs(final List<URI> outputs) {
-    this.outputs = outputs;
   }
   
   @Pure

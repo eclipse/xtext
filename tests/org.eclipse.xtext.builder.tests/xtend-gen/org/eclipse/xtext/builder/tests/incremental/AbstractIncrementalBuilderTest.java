@@ -115,8 +115,6 @@ public abstract class AbstractIncrementalBuilderTest {
         XtextResourceSet _doubleArrow = ObjectExtensions.<XtextResourceSet>operator_doubleArrow(_get, _function);
         it.setResourceSet(_doubleArrow);
         it.setClassPath(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList()));
-        URI _uri_1 = AbstractIncrementalBuilderTest.this.uri("out");
-        it.setOutputs(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_uri_1)));
         it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList()));
         it.setDeletedFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList()));
         final BuildRequest.IPostValidationCallback _function_1 = new BuildRequest.IPostValidationCallback() {

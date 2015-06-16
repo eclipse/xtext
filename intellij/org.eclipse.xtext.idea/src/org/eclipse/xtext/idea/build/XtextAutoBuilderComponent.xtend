@@ -56,6 +56,7 @@ import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.util.internal.Log
 
 import static org.eclipse.xtext.idea.build.BuildEvent.Type.*
+import static org.eclipse.xtext.idea.build.XtextAutoBuilderComponent.*
 
 import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 
@@ -241,6 +242,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	}
 
 	public def void build(List<BuildEvent> allEvents) {
+		val app = ApplicationManager.application
 		val buildProgressReporter = buildProgressReporterProvider.get 
 		buildProgressReporter.project = project
 		try {
@@ -255,7 +257,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 					module2event.put(module, it)
 			]
 			// deltas are added over the whole build
-			val deltas = newArrayList
+			val deltas = <IResourceDescription.Delta>newArrayList
 			for (module: module2event.keySet) {
 				val events = module2event.get(module)
 				val changedUris = newHashSet
@@ -265,7 +267,9 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 						case MODIFIED,
 						case ADDED: {
 							if (isJavaFile(event.file)) {
-								deltas += getJavaDeltas(event.file, module)
+								deltas += app.<Set<IResourceDescription.Delta>>runReadAction [
+									return getJavaDeltas(event.file, module)
+								]
 							} else {
 								changedUris += event.file.URI
 							}
@@ -296,7 +300,6 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 						buildProgressReporter.markAsAffected(it)
 					]
 				]
-				val app = ApplicationManager.application
 				val result = app.<IncrementalBuilder.Result>runReadAction [
 					builderProvider.get().build(request, resourceServiceProviderRegistry)
 				]

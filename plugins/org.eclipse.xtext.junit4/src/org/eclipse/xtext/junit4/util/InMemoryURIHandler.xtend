@@ -49,7 +49,7 @@ class InMemoryURIHandler implements URIHandler {
 	}
 
 	public final static String SCHEME = 'inmemory'
-
+	
 	Map<URI, InMemFile> files = newHashMap()
 
 	override canHandle(URI uri) {
