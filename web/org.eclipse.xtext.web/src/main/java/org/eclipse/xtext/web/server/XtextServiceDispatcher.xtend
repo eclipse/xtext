@@ -203,6 +203,9 @@ class XtextServiceDispatcher {
 			throws InvalidRequestException {
 		val offset = request.getInt('caretOffset', Optional.of(0))
 		val document = getDocumentAccess(request, sessionStore)
+		val proposalsLimit = request.getInt('proposalsLimit', Optional.of(ContentAssistService.DEFAULT_PROPOSALS_LIMIT))
+		if (proposalsLimit <= 0)
+			throw new InvalidRequestException(INVALID_PARAMETERS, 'The parameter \'proposalsLimit\' must contain a positive integer.')
 		val selectionStart = request.getInt('selectionStart', Optional.of(offset))
 		val selectionEnd = request.getInt('selectionEnd', Optional.of(selectionStart))
 		val selection = new TextRegion(selectionStart, Math.max(selectionEnd - selectionStart, 0))
@@ -211,7 +214,7 @@ class XtextServiceDispatcher {
 			new ServiceDescriptor => [
 				service = [
 					try {
-						contentAssistService.createProposals(document, selection, offset)
+						contentAssistService.createProposals(document, selection, offset, proposalsLimit)
 					} catch (Throwable throwable) {
 						handleError(throwable)
 					}
@@ -231,7 +234,7 @@ class XtextServiceDispatcher {
 				service = [
 					try {
 						contentAssistService.createProposalsWithUpdate(document, deltaText, deltaOffset,
-								deltaReplaceLength, selection, offset)
+								deltaReplaceLength, selection, offset, proposalsLimit)
 					} catch (Throwable throwable) {
 						handleError(throwable)
 					}

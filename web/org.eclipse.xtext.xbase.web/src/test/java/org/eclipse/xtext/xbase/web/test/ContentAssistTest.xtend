@@ -36,7 +36,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			ContentAssistResult [
 			  stateId = "-80000000"
 			  entries = ArrayList (
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = "AbstractQu"
 			      proposal = "AbstractQueue"
 			      description = "java.util.AbstractQueue"
@@ -47,7 +47,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			      )
 			      editPositions = ArrayList ()
 			    ],
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = "AbstractQu"
 			      proposal = "AbstractQueuedLongSynchronizer"
 			      description = "java.util.concurrent.locks.AbstractQueuedLongSynchronizer"
@@ -58,7 +58,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			      )
 			      editPositions = ArrayList ()
 			    ],
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = "AbstractQu"
 			      proposal = "AbstractQueuedSynchronizer"
 			      description = "java.util.concurrent.locks.AbstractQueuedSynchronizer"
@@ -78,7 +78,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			ContentAssistResult [
 			  stateId = "-80000000"
 			  entries = ArrayList (
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = "AbstractQu"
 			      proposal = "AbstractQueue"
 			      description = "java.util.AbstractQueue"
@@ -89,7 +89,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			      )
 			      editPositions = ArrayList ()
 			    ],
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = "AbstractQu"
 			      proposal = "AbstractQueuedLongSynchronizer"
 			      description = "java.util.concurrent.locks.AbstractQueuedLongSynchronizer"
@@ -100,7 +100,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			      )
 			      editPositions = ArrayList ()
 			    ],
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = "AbstractQu"
 			      proposal = "AbstractQueuedSynchronizer"
 			      description = "java.util.concurrent.locks.AbstractQueuedSynchronizer"
@@ -120,10 +120,10 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			ContentAssistResult [
 			  stateId = "-80000000"
 			  entries = ArrayList (
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = "add"
 			      proposal = "add()"
-			      name = "add(E arg0) : boolean"
+			      label = "add(E arg0) : boolean"
 			      description = "List"
 			      escapePosition = 45
 			      textReplacements = ArrayList ()
@@ -131,10 +131,10 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			        [44:0]
 			      )
 			    ],
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = "add"
 			      proposal = "add()"
-			      name = "add(int arg0, E arg1) : void"
+			      label = "add(int arg0, E arg1) : void"
 			      description = "List"
 			      escapePosition = 45
 			      textReplacements = ArrayList ()
@@ -142,10 +142,10 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			        [44:0]
 			      )
 			    ],
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = "add"
 			      proposal = "addAll()"
-			      name = "addAll(Collection<? extends E> arg0) : boolean"
+			      label = "addAll(Collection<? extends E> arg0) : boolean"
 			      description = "List"
 			      escapePosition = 48
 			      textReplacements = ArrayList ()
@@ -153,10 +153,10 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			        [47:0]
 			      )
 			    ],
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = "add"
 			      proposal = "addAll()"
-			      name = "addAll(Iterable<? extends T> arg1) : boolean"
+			      label = "addAll(Iterable<? extends T> arg1) : boolean"
 			      description = "CollectionExtensions"
 			      escapePosition = 48
 			      textReplacements = ArrayList ()
@@ -164,10 +164,10 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			        [47:0]
 			      )
 			    ],
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = "add"
 			      proposal = "addAll()"
-			      name = "addAll(T... arg1) : boolean"
+			      label = "addAll(T... arg1) : boolean"
 			      description = "CollectionExtensions"
 			      escapePosition = 48
 			      textReplacements = ArrayList ()
@@ -175,10 +175,10 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			        [47:0]
 			      )
 			    ],
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = "add"
 			      proposal = "addAll()"
-			      name = "addAll(int arg0, Collection<? extends E> arg1) : boolean"
+			      label = "addAll(int arg0, Collection<? extends E> arg1) : boolean"
 			      description = "List"
 			      escapePosition = 48
 			      textReplacements = ArrayList ()
@@ -203,19 +203,19 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			ContentAssistResult [
 			  stateId = "-80000000"
 			  entries = ArrayList (
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = "foob"
 			      proposal = "foobar1"
-			      name = "foobar1 : String"
+			      label = "foobar1 : String"
 			      description = "Foo"
 			      escapePosition = 90
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
 			    ],
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = "foob"
 			      proposal = "foobar1 = value"
-			      name = "foobar1 = value : void"
+			      label = "foobar1 = value : void"
 			      description = "Foo.setFoobar1()"
 			      escapePosition = 98
 			      textReplacements = ArrayList ()
@@ -223,10 +223,10 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			        [93:5]
 			      )
 			    ],
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = "foob"
 			      proposal = "foobar2"
-			      name = "foobar2 : String"
+			      label = "foobar2 : String"
 			      description = "Foo.foobar2()"
 			      escapePosition = 90
 			      textReplacements = ArrayList ()
