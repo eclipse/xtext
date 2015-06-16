@@ -50,8 +50,8 @@ define([
 		//---- Persistence Services
 		
 		if (!options.serverUrl)
-			options.serverUrl = "http://" + location.host + "/xtext-service";
-		var loadResourceService = undefined, saveResourceService = undefined, revertResourceService = undefined;
+			options.serverUrl = "test://xtext-service";
+		var loadResourceService, saveResourceService, revertResourceService;
 		if (options.resourceId) {
 			if (options.loadFromServer === undefined || options.loadFromServer) {
 				options.loadFromServer = true;
@@ -81,7 +81,7 @@ define([
 			if (validationService)
 				validationService.computeProblems(editorContext, options);
 		}
-		var updateService = undefined;
+		var updateService;
 		if (!options.sendFullText) {
 			updateService = new UpdateService(options.serverUrl, options.resourceId);
 			if (saveResourceService)
@@ -97,16 +97,11 @@ define([
 		
 		//---- Content Assist Service
 		
+		var contentAssistService;
 		if (options.enableContentAssistService || options.enableContentAssistService === undefined) {
-			var contentAssistService = new ContentAssistService(options.serverUrl, options.resourceId);
+			contentAssistService = new ContentAssistService(options.serverUrl, options.resourceId);
 			if (updateService)
 				contentAssistService.setUpdateService(updateService);
-			editorContext.triggerContentAssist = function() {
-				var params = _copy(options);
-				params.offset = editorContext.getCaretOffset();
-				params.selection = editorContext.getSelection();
-				return contentAssistService.computeContentAssist(editorContext, params);
-			};
 		}
 		
 		editorContext.invokeXtextService = function(service, invokeOptions) {
@@ -124,7 +119,11 @@ define([
 				revertResourceService.revertResource(editorContext, optionsCopy);
 			else if (service === "validation" && validationService)
 				validationService.computeProblems(editorContext, optionsCopy);
-			else
+			else if (service === "content-assist" && contentAssistService) {
+				optionsCopy.offset = editorContext.getCaretOffset();
+				optionsCopy.selection = editorContext.getSelection();
+				return contentAssistService.computeContentAssist(editorContext, optionsCopy);
+			} else
 				throw "Service '" + service + "' is not available.";
 		};
 		editorContext.xtextServiceSuccessListeners = [];

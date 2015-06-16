@@ -24,7 +24,10 @@ define(function() {
 			end: 0
 		};
 		this._dirty = false;
-		this._serverState = {};
+		this._serverState = {
+			stateId: '0',
+			text: ''
+		};
 		this._serverStateListeners = [];
 		this._modelChangeListeners = [];
 		this._clientServiceState = {};
