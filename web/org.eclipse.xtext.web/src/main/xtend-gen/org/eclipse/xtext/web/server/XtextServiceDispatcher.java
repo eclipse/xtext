@@ -488,10 +488,15 @@ public class XtextServiceDispatcher {
       Optional<Integer> _of = Optional.<Integer>of(Integer.valueOf(0));
       final int offset = this.getInt(request, "caretOffset", _of);
       final XtextWebDocumentAccess document = this.getDocumentAccess(request, sessionStore);
-      Optional<Integer> _of_1 = Optional.<Integer>of(Integer.valueOf(offset));
-      final int selectionStart = this.getInt(request, "selectionStart", _of_1);
-      Optional<Integer> _of_2 = Optional.<Integer>of(Integer.valueOf(selectionStart));
-      final int selectionEnd = this.getInt(request, "selectionEnd", _of_2);
+      Optional<Integer> _of_1 = Optional.<Integer>of(Integer.valueOf(ContentAssistService.DEFAULT_PROPOSALS_LIMIT));
+      final int proposalsLimit = this.getInt(request, "proposalsLimit", _of_1);
+      if ((proposalsLimit <= 0)) {
+        throw new InvalidRequestException(InvalidRequestException.Type.INVALID_PARAMETERS, "The parameter \'proposalsLimit\' must contain a positive integer.");
+      }
+      Optional<Integer> _of_2 = Optional.<Integer>of(Integer.valueOf(offset));
+      final int selectionStart = this.getInt(request, "selectionStart", _of_2);
+      Optional<Integer> _of_3 = Optional.<Integer>of(Integer.valueOf(selectionStart));
+      final int selectionEnd = this.getInt(request, "selectionEnd", _of_3);
       int _max = Math.max((selectionEnd - selectionStart), 0);
       final TextRegion selection = new TextRegion(selectionStart, _max);
       final String deltaText = request.getParameter("deltaText");
@@ -506,7 +511,7 @@ public class XtextServiceDispatcher {
               public IServiceResult apply() {
                 IServiceResult _xtrycatchfinallyexpression = null;
                 try {
-                  _xtrycatchfinallyexpression = XtextServiceDispatcher.this.contentAssistService.createProposals(document, selection, offset);
+                  _xtrycatchfinallyexpression = XtextServiceDispatcher.this.contentAssistService.createProposals(document, selection, offset, proposalsLimit);
                 } catch (final Throwable _t) {
                   if (_t instanceof Throwable) {
                     final Throwable throwable = (Throwable)_t;
@@ -552,7 +557,7 @@ public class XtextServiceDispatcher {
                 public IServiceResult apply() {
                   IServiceResult _xtrycatchfinallyexpression = null;
                   try {
-                    _xtrycatchfinallyexpression = XtextServiceDispatcher.this.contentAssistService.createProposalsWithUpdate(document, deltaText, deltaOffset, deltaReplaceLength, selection, offset);
+                    _xtrycatchfinallyexpression = XtextServiceDispatcher.this.contentAssistService.createProposalsWithUpdate(document, deltaText, deltaOffset, deltaReplaceLength, selection, offset, proposalsLimit);
                   } catch (final Throwable _t) {
                     if (_t instanceof Throwable) {
                       final Throwable throwable = (Throwable)_t;

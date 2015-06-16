@@ -41,21 +41,21 @@ class ContentAssistTest extends AbstractWebServerTest {
 			ContentAssistResult [
 			  stateId = "-80000000"
 			  entries = ArrayList (
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = ""
 			      proposal = "input"
 			      escapePosition = 0
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
 			    ],
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = ""
 			      proposal = "output"
 			      escapePosition = 0
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
 			    ],
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = ""
 			      proposal = "state"
 			      escapePosition = 0
@@ -71,7 +71,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			ContentAssistResult [
 			  stateId = "-80000000"
 			  entries = ArrayList (
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = "sta"
 			      proposal = "state"
 			      escapePosition = 0
@@ -87,7 +87,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			ContentAssistResult [
 			  stateId = "-80000000"
 			  entries = ArrayList (
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = ""
 			      proposal = "name"
 			      description = "ID"
@@ -106,14 +106,14 @@ class ContentAssistTest extends AbstractWebServerTest {
 			ContentAssistResult [
 			  stateId = "-80000000"
 			  entries = ArrayList (
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = ""
 			      proposal = "false"
 			      escapePosition = 0
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
 			    ],
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = ""
 			      proposal = "true"
 			      escapePosition = 0
@@ -129,7 +129,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			ContentAssistResult [
 			  stateId = "-80000000"
 			  entries = ArrayList (
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = ""
 			      proposal = "x"
 			      description = "input signal"

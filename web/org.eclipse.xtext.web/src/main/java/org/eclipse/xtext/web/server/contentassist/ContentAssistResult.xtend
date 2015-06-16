@@ -9,11 +9,8 @@ package org.eclipse.xtext.web.server.contentassist
 
 import java.util.ArrayList
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtend.lib.annotations.EqualsHashCode
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtend.lib.annotations.ToString
-import org.eclipse.xtext.util.ReplaceRegion
-import org.eclipse.xtext.util.TextRegion
+import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry
 import org.eclipse.xtext.web.server.IServiceResult
 
 @Accessors
@@ -22,20 +19,6 @@ class ContentAssistResult implements IServiceResult {
 	
 	String stateId
 	
-	val entries = new ArrayList<Entry>
-	
-	@Accessors
-	@FinalFieldsConstructor
-	@ToString(skipNulls = true)
-	@EqualsHashCode
-	static class Entry {
-		val String prefix
-		String proposal
-		String name
-		String description
-		int escapePosition
-		val textReplacements = new ArrayList<ReplaceRegion>
-		val editPositions = new ArrayList<TextRegion>
-	}
+	val entries = new ArrayList<ContentAssistEntry>
 	
 }

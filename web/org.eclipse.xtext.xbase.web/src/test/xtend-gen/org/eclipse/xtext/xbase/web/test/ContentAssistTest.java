@@ -61,7 +61,7 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("entries = ArrayList (");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("Entry [");
+    _builder.append("ContentAssistEntry [");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("prefix = \"AbstractQu\"");
@@ -94,7 +94,7 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("],");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("Entry [");
+    _builder.append("ContentAssistEntry [");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("prefix = \"AbstractQu\"");
@@ -127,7 +127,7 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("],");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("Entry [");
+    _builder.append("ContentAssistEntry [");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("prefix = \"AbstractQu\"");
@@ -178,7 +178,7 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("entries = ArrayList (");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("Entry [");
+    _builder.append("ContentAssistEntry [");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("prefix = \"AbstractQu\"");
@@ -211,7 +211,7 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("],");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("Entry [");
+    _builder.append("ContentAssistEntry [");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("prefix = \"AbstractQu\"");
@@ -244,7 +244,7 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("],");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("Entry [");
+    _builder.append("ContentAssistEntry [");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("prefix = \"AbstractQu\"");
@@ -295,7 +295,7 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("entries = ArrayList (");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("Entry [");
+    _builder.append("ContentAssistEntry [");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("prefix = \"add\"");
@@ -304,7 +304,7 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("proposal = \"add()\"");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("name = \"add(E arg0) : boolean\"");
+    _builder.append("label = \"add(E arg0) : boolean\"");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("description = \"List\"");
@@ -328,7 +328,7 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("],");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("Entry [");
+    _builder.append("ContentAssistEntry [");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("prefix = \"add\"");
@@ -337,7 +337,7 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("proposal = \"add()\"");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("name = \"add(int arg0, E arg1) : void\"");
+    _builder.append("label = \"add(int arg0, E arg1) : void\"");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("description = \"List\"");
@@ -361,7 +361,7 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("],");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("Entry [");
+    _builder.append("ContentAssistEntry [");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("prefix = \"add\"");
@@ -370,7 +370,7 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("proposal = \"addAll()\"");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("name = \"addAll(Collection<? extends E> arg0) : boolean\"");
+    _builder.append("label = \"addAll(Collection<? extends E> arg0) : boolean\"");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("description = \"List\"");
@@ -394,7 +394,7 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("],");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("Entry [");
+    _builder.append("ContentAssistEntry [");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("prefix = \"add\"");
@@ -403,7 +403,7 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("proposal = \"addAll()\"");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("name = \"addAll(Iterable<? extends T> arg1) : boolean\"");
+    _builder.append("label = \"addAll(Iterable<? extends T> arg1) : boolean\"");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("description = \"CollectionExtensions\"");
@@ -427,7 +427,7 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("],");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("Entry [");
+    _builder.append("ContentAssistEntry [");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("prefix = \"add\"");
@@ -436,7 +436,7 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("proposal = \"addAll()\"");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("name = \"addAll(T... arg1) : boolean\"");
+    _builder.append("label = \"addAll(T... arg1) : boolean\"");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("description = \"CollectionExtensions\"");
@@ -460,7 +460,7 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("],");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("Entry [");
+    _builder.append("ContentAssistEntry [");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("prefix = \"add\"");
@@ -469,7 +469,7 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("proposal = \"addAll()\"");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("name = \"addAll(int arg0, Collection<? extends E> arg1) : boolean\"");
+    _builder.append("label = \"addAll(int arg0, Collection<? extends E> arg1) : boolean\"");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("description = \"List\"");
@@ -531,7 +531,7 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder_1.append("entries = ArrayList (");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Entry [");
+    _builder_1.append("ContentAssistEntry [");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("prefix = \"foob\"");
@@ -540,7 +540,7 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder_1.append("proposal = \"foobar1\"");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("name = \"foobar1 : String\"");
+    _builder_1.append("label = \"foobar1 : String\"");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("description = \"Foo\"");
@@ -558,7 +558,7 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder_1.append("],");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Entry [");
+    _builder_1.append("ContentAssistEntry [");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("prefix = \"foob\"");
@@ -567,7 +567,7 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder_1.append("proposal = \"foobar1 = value\"");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("name = \"foobar1 = value : void\"");
+    _builder_1.append("label = \"foobar1 = value : void\"");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("description = \"Foo.setFoobar1()\"");
@@ -591,7 +591,7 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder_1.append("],");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Entry [");
+    _builder_1.append("ContentAssistEntry [");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("prefix = \"foob\"");
@@ -600,7 +600,7 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder_1.append("proposal = \"foobar2\"");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("name = \"foobar2 : String\"");
+    _builder_1.append("label = \"foobar2 : String\"");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("description = \"Foo.foobar2()\"");
