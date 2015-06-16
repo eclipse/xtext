@@ -24,8 +24,8 @@ import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.SimpleNameProvider;
-import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.parser.EclipseProjectPropertiesEncodingProvider;
+import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.NullTokenDefProvider;
@@ -59,6 +59,8 @@ import org.eclipse.xtext.serializer.tokens.SerializerScopeProviderBinding;
 import org.eclipse.xtext.validation.CancelableDiagnostician;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
 import org.eclipse.xtext.validation.impl.ConcreteSyntaxValidator;
+import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
+import org.eclipse.xtext.workspace.RuntimeWorkspaceConfigProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.Provider;
@@ -239,5 +241,13 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 	 */
 	public void configureUseIndexFragmentsForLazyLinking(com.google.inject.Binder binder) {
 		binder.bind(Boolean.TYPE).annotatedWith(Names.named(LazyURIEncoder.USE_INDEXED_FRAGMENTS_BINDING)).toInstance(Boolean.TRUE);
+	}
+	
+	
+	/**
+	 * @since 2.9
+	 */
+	public Class<? extends IWorkspaceConfigProvider> bindWorkspaceConfigProvider() {
+		return RuntimeWorkspaceConfigProvider.class;
 	}
 }

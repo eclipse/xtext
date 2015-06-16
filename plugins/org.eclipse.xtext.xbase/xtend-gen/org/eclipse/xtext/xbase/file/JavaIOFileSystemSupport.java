@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.file;
 import com.google.common.base.Objects;
 import com.google.common.io.ByteStreams;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -29,8 +28,9 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.util.Files;
+import org.eclipse.xtext.workspace.IWorkspaceConfig;
+import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
-import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -45,7 +45,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
   @Inject
   @Accessors
-  private Provider<WorkspaceConfig> projectInformationProvider;
+  private IWorkspaceConfigProvider projectInformationProvider;
   
   @Override
   public Iterable<? extends Path> getChildren(final Path path) {
@@ -74,10 +74,12 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
   }
   
   protected File getJavaIOFile(final Path path) {
-    WorkspaceConfig _get = this.projectInformationProvider.get();
-    String _absoluteFileSystemPath = _get.getAbsoluteFileSystemPath();
+    Resource _context = this.getContext();
+    IWorkspaceConfig _workspaceConfig = this.projectInformationProvider.getWorkspaceConfig(_context);
+    URI _path = _workspaceConfig.getPath();
+    String _fileString = _path.toFileString();
     String _string = path.toString();
-    return new File(_absoluteFileSystemPath, _string);
+    return new File(_fileString, _string);
   }
   
   @Override
@@ -251,11 +253,12 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
     final URI uri = _uRIConverter.normalize(_uRI);
     boolean _isFile = uri.isFile();
     if (_isFile) {
-      WorkspaceConfig _get = this.projectInformationProvider.get();
-      String _absoluteFileSystemPath = _get.getAbsoluteFileSystemPath();
-      final File workspacePathAsFile = new File(_absoluteFileSystemPath);
-      String _fileString = uri.toFileString();
-      final File absoluteFilePathAsFile = new File(_fileString);
+      IWorkspaceConfig _workspaceConfig = this.projectInformationProvider.getWorkspaceConfig(res);
+      URI _path = _workspaceConfig.getPath();
+      String _fileString = _path.toFileString();
+      final File workspacePathAsFile = new File(_fileString);
+      String _fileString_1 = uri.toFileString();
+      final File absoluteFilePathAsFile = new File(_fileString_1);
       java.net.URI _uRI_1 = workspacePathAsFile.toURI();
       final String workspacePath = _uRI_1.getPath();
       java.net.URI _uRI_2 = absoluteFilePathAsFile.toURI();
@@ -271,8 +274,8 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
       String _plus = ("/" + _string);
       return new Path(_plus);
     } else {
-      String _path = uri.path();
-      String _plus_1 = ("/" + _path);
+      String _path_1 = uri.path();
+      String _plus_1 = ("/" + _path_1);
       return new Path(_plus_1);
     }
   }
@@ -293,11 +296,11 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
   }
   
   @Pure
-  public Provider<WorkspaceConfig> getProjectInformationProvider() {
+  public IWorkspaceConfigProvider getProjectInformationProvider() {
     return this.projectInformationProvider;
   }
   
-  public void setProjectInformationProvider(final Provider<WorkspaceConfig> projectInformationProvider) {
+  public void setProjectInformationProvider(final IWorkspaceConfigProvider projectInformationProvider) {
     this.projectInformationProvider = projectInformationProvider;
   }
 }

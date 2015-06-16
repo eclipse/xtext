@@ -5,31 +5,31 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.xbase.ui.file;
+package org.eclipse.xtext.ui.file;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
-import org.eclipse.xtext.xbase.file.WorkspaceConfig;
+import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
+import org.eclipse.xtext.ui.file.EclipseWorkspaceConfig;
+import org.eclipse.xtext.workspace.IWorkspaceConfig;
+import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.ui.file.EclipseWorkspaceConfig;
 
 @SuppressWarnings("all")
-public class EclipseWorkspaceConfigProvider implements Provider<WorkspaceConfig> {
+public class EclipseWorkspaceConfigProvider implements IWorkspaceConfigProvider {
   @Accessors
   @Inject
   private IWorkspaceRoot workspaceRoot;
   
   @Accessors
   @Inject
-  private EclipseOutputConfigurationProvider configurationProvider;
+  private IContextualOutputConfigurationProvider configurationProvider;
   
   @Override
-  public WorkspaceConfig get() {
-    final EclipseWorkspaceConfig result = new EclipseWorkspaceConfig(this.workspaceRoot, this.configurationProvider);
-    return result;
+  public IWorkspaceConfig getWorkspaceConfig(final Resource context) {
+    return new EclipseWorkspaceConfig(this.workspaceRoot, context, this.configurationProvider);
   }
   
   @Pure
@@ -42,11 +42,11 @@ public class EclipseWorkspaceConfigProvider implements Provider<WorkspaceConfig>
   }
   
   @Pure
-  public EclipseOutputConfigurationProvider getConfigurationProvider() {
+  public IContextualOutputConfigurationProvider getConfigurationProvider() {
     return this.configurationProvider;
   }
   
-  public void setConfigurationProvider(final EclipseOutputConfigurationProvider configurationProvider) {
+  public void setConfigurationProvider(final IContextualOutputConfigurationProvider configurationProvider) {
     this.configurationProvider = configurationProvider;
   }
 }

@@ -28,6 +28,9 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   @Accessors
   private IFilePostProcessor postProcessor;
   
+  @Accessors
+  private Resource context;
+  
   @Override
   public CharSequence getContents(final Path path) {
     try {
@@ -130,5 +133,14 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   
   public void setPostProcessor(final IFilePostProcessor postProcessor) {
     this.postProcessor = postProcessor;
+  }
+  
+  @Pure
+  public Resource getContext() {
+    return this.context;
+  }
+  
+  public void setContext(final Resource context) {
+    this.context = context;
   }
 }

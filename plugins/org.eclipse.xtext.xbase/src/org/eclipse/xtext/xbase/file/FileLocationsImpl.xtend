@@ -8,21 +8,26 @@
 package org.eclipse.xtext.xbase.file
 
 import com.google.inject.Inject
-import com.google.inject.Provider
+import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.macro.file.FileLocations
 import org.eclipse.xtend.lib.macro.file.Path
+import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider
+import org.eclipse.xtext.workspace.IProjectConfig
+import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 class FileLocationsImpl implements FileLocations {
 	
-	@Inject @Accessors Provider<WorkspaceConfig> projectInformationProvider
+	@Inject @Accessors IWorkspaceConfigProvider projectInformationProvider
+	@Inject @Accessors IContextualOutputConfigurationProvider outputConfigurationProvider
+	@Accessors Resource context
 	
-	protected def ProjectConfig getProjectConfig(Path path) {
+	protected def IProjectConfig getProjectConfig(Path path) {
 		val string = path.getSegments().get(0)
-		val projectConfig = projectInformationProvider.get.getProject(string)
+		val projectConfig = projectInformationProvider.getWorkspaceConfig(context).findProjectByName(string)
 		if (projectConfig == null) {
 			throw new IllegalArgumentException("The project '"+string+"' has not been configured.")
 		}
@@ -30,28 +35,31 @@ class FileLocationsImpl implements FileLocations {
 	}
 	
 	override Path getSourceFolder(Path path) {
-		val config = getProjectConfig(path)
-		return config.getContainingSourceFolder(path)
+		getProjectSourceFolders(path).findFirst[sourceFolder| path.startsWith(sourceFolder)]
 	}
 
 	override Path getTargetFolder(Path path) {
-		val config = getProjectConfig(path)
-		for (Path src : config.sourceFolderMappings.keySet()) {
-			if (path.startsWith(src)) {
-				return config.sourceFolderMappings.get(src)
-			}
+		val projectFolder = getProjectFolder(path)
+		if (projectFolder == null) {
+		 return null
 		}
-		return null
+		val outputConfiguration = outputConfigurationProvider.getOutputConfigurations(context).head
+		val sourceFolder = getSourceFolder(path)
+		val outputFolder = if (sourceFolder == null) {
+			outputConfiguration.outputDirectory
+		} else {
+			outputConfiguration.getOutputDirectory(sourceFolder.segments.tail.join('/'))
+		}
+		projectFolder.append(outputFolder)
 	}
 
 	override Path getProjectFolder(Path path) {
 		val config = getProjectConfig(path)
-		return config.rootPath
+		return Path.ROOT.append(config.name)
 	}
 	
 	override getProjectSourceFolders(Path path) {
-		val config = getProjectConfig(path)
-		return config.sourceFolderMappings.keySet.unmodifiableView
+		getProjectConfig(path).sourceFolders.map[path.projectFolder.append(name)].toSet
 	}
 	
 }

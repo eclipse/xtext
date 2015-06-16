@@ -13,9 +13,8 @@ import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.junit4.TemporaryFolder
 import org.eclipse.xtext.parser.IEncodingProvider
+import org.eclipse.xtext.workspace.FileWorkspaceConfig
 import org.eclipse.xtext.xbase.file.JavaIOFileSystemSupport
-import org.eclipse.xtext.xbase.file.ProjectConfig
-import org.eclipse.xtext.xbase.file.SimpleWorkspaceConfig
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -35,11 +34,12 @@ class JavaIoFileSystemTest {
 	@Before def void setUp() {
 		val tempDir = temporaryFolder.newFolder()
 		fs = new JavaIOFileSystemSupport => [
-			projectInformationProvider = [new SimpleWorkspaceConfig(tempDir.absolutePath) => [
-				addProjectConfig(new ProjectConfig('/foo') => [
-					sourceFolderMappings.put(new Path('/foo/src'), new Path('/foo/xtend-gen'))
-				])
-			]]
+			projectInformationProvider = [context| new FileWorkspaceConfig(tempDir) => [
+				addProject("foo") => [
+					addSourceFolder("src")
+				]
+			]
+			]
 			encodingProvider = new IEncodingProvider.Runtime()
 		]
 		new Path("/foo").mkdir

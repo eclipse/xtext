@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.file
 
 import com.google.common.io.ByteStreams
 import com.google.inject.Inject
-import com.google.inject.Provider
 import java.io.BufferedInputStream
 import java.io.BufferedOutputStream
 import java.io.File
@@ -24,13 +23,14 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.util.Files
+import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
 	
-	@Inject @Accessors Provider<WorkspaceConfig> projectInformationProvider
+	@Inject @Accessors IWorkspaceConfigProvider projectInformationProvider
 	
 	override Iterable<? extends Path> getChildren(Path path) {
 		if (!path.exists) {
@@ -43,7 +43,7 @@ class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
 	}
 
 	protected def File getJavaIOFile(Path path) {
-		return new File(projectInformationProvider.get.absoluteFileSystemPath, path.toString())
+		return new File(projectInformationProvider.getWorkspaceConfig(context).path.toFileString, path.toString())
 	}
 
 	override boolean exists(Path path) {
@@ -137,7 +137,7 @@ class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
 	override getPath(Resource res) {
 		val uri = res.resourceSet.URIConverter.normalize(res.URI)
 		if (uri.file) {
-			val workspacePathAsFile = new File(projectInformationProvider.get.absoluteFileSystemPath)
+			val workspacePathAsFile = new File(projectInformationProvider.getWorkspaceConfig(res).path.toFileString)
 			val absoluteFilePathAsFile = new File(uri.toFileString)
 			val workspacePath = workspacePathAsFile.toURI.path
 			val absolutefilePath = absoluteFilePathAsFile.toURI.path

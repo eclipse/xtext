@@ -24,17 +24,18 @@ import org.eclipse.xtext.generator.IFileSystemAccessExtension3;
 import org.eclipse.xtext.util.RuntimeIOException;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * An adapter between {org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport} and {org.eclipse.xtext.generator.IFileSystemAccess}
  * 
  * @author Sven Efftinge - Initial contribution and API
- * @since 2.7
+ * @noreference
  */
 @SuppressWarnings("all")
 public class FileSystemSupportBasedFileSystemAccess extends AbstractFileSystemAccess2 implements IFileSystemAccess, IFileSystemAccessExtension, IFileSystemAccessExtension2, IFileSystemAccessExtension3 {
   @Inject
-  @Accessors(AccessorType.PUBLIC_SETTER)
+  @Accessors
   @Extension
   private MutableFileSystemSupport fileSystemSupport;
   
@@ -82,6 +83,11 @@ public class FileSystemSupportBasedFileSystemAccess extends AbstractFileSystemAc
   public CharSequence readTextFile(final String fileName, final String outputConfigurationName) throws RuntimeIOException {
     final Path path = this.getPath(fileName, outputConfigurationName);
     return this.fileSystemSupport.getContents(path);
+  }
+  
+  @Pure
+  public MutableFileSystemSupport getFileSystemSupport() {
+    return this.fileSystemSupport;
   }
   
   public void setFileSystemSupport(final MutableFileSystemSupport fileSystemSupport) {

@@ -125,7 +125,6 @@ import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend.lib.macro.expression.Expression;
-import org.eclipse.xtend.lib.macro.file.FileLocations;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtend.lib.macro.services.AnnotationReferenceProvider;
@@ -185,6 +184,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
+import org.eclipse.xtext.xbase.file.FileLocationsImpl;
 import org.eclipse.xtext.xbase.file.ParallelFileSystemSupport;
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
@@ -330,7 +330,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
-  private FileLocations fileLocations;
+  private FileLocationsImpl fileLocations;
   
   @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
@@ -415,6 +415,10 @@ public class CompilationUnitImpl implements CompilationUnit {
     StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, xtendFile);
     LightweightTypeReferenceFactory _lightweightTypeReferenceFactory = new LightweightTypeReferenceFactory(_standardTypeReferenceOwner);
     this.typeRefFactory = _lightweightTypeReferenceFactory;
+    Resource _eResource = xtendFile.eResource();
+    this.fileSystemSupport.setContext(_eResource);
+    Resource _eResource_1 = xtendFile.eResource();
+    this.fileLocations.setContext(_eResource_1);
   }
   
   public void before(final ActiveAnnotationContexts.AnnotationCallback phase) {
@@ -2169,7 +2173,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   @Pure
-  public FileLocations getFileLocations() {
+  public FileLocationsImpl getFileLocations() {
     return this.fileLocations;
   }
   

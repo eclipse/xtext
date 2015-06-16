@@ -20,11 +20,11 @@ import org.eclipse.emf.common.util.URI
  * An adapter between {org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport} and {org.eclipse.xtext.generator.IFileSystemAccess}
  * 
  * @author Sven Efftinge - Initial contribution and API
- * @since 2.7
+ * @noreference
  */
 class FileSystemSupportBasedFileSystemAccess extends AbstractFileSystemAccess2 implements IFileSystemAccess, IFileSystemAccessExtension, IFileSystemAccessExtension2, IFileSystemAccessExtension3 {
 	
-	@Inject @Accessors(PUBLIC_SETTER) extension MutableFileSystemSupport fileSystemSupport
+	@Inject @Accessors extension MutableFileSystemSupport fileSystemSupport
 	@Accessors(PUBLIC_SETTER) String projectName;
 	
 	protected def getPath(String fileName, String outputConfigurationName) {

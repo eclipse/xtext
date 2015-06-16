@@ -7,20 +7,20 @@
  */
 package org.eclipse.xtext.xbase.tests.file;
 
-import com.google.inject.Provider;
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.URI;
 import java.util.List;
-import java.util.Map;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.junit4.TemporaryFolder;
 import org.eclipse.xtext.parser.IEncodingProvider;
+import org.eclipse.xtext.workspace.FileProjectConfig;
+import org.eclipse.xtext.workspace.FileWorkspaceConfig;
+import org.eclipse.xtext.workspace.IWorkspaceConfig;
+import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.file.JavaIOFileSystemSupport;
-import org.eclipse.xtext.xbase.file.ProjectConfig;
-import org.eclipse.xtext.xbase.file.SimpleWorkspaceConfig;
-import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -51,29 +51,24 @@ public class JavaIoFileSystemTest {
       final Procedure1<JavaIOFileSystemSupport> _function = new Procedure1<JavaIOFileSystemSupport>() {
         @Override
         public void apply(final JavaIOFileSystemSupport it) {
-          final Provider<WorkspaceConfig> _function = new Provider<WorkspaceConfig>() {
+          final IWorkspaceConfigProvider _function = new IWorkspaceConfigProvider() {
             @Override
-            public WorkspaceConfig get() {
-              String _absolutePath = tempDir.getAbsolutePath();
-              SimpleWorkspaceConfig _simpleWorkspaceConfig = new SimpleWorkspaceConfig(_absolutePath);
-              final Procedure1<SimpleWorkspaceConfig> _function = new Procedure1<SimpleWorkspaceConfig>() {
+            public IWorkspaceConfig getWorkspaceConfig(final Resource context) {
+              FileWorkspaceConfig _fileWorkspaceConfig = new FileWorkspaceConfig(tempDir);
+              final Procedure1<FileWorkspaceConfig> _function = new Procedure1<FileWorkspaceConfig>() {
                 @Override
-                public void apply(final SimpleWorkspaceConfig it) {
-                  ProjectConfig _projectConfig = new ProjectConfig("/foo");
-                  final Procedure1<ProjectConfig> _function = new Procedure1<ProjectConfig>() {
+                public void apply(final FileWorkspaceConfig it) {
+                  FileProjectConfig _addProject = it.addProject("foo");
+                  final Procedure1<FileProjectConfig> _function = new Procedure1<FileProjectConfig>() {
                     @Override
-                    public void apply(final ProjectConfig it) {
-                      Map<Path, Path> _sourceFolderMappings = it.getSourceFolderMappings();
-                      Path _path = new Path("/foo/src");
-                      Path _path_1 = new Path("/foo/xtend-gen");
-                      _sourceFolderMappings.put(_path, _path_1);
+                    public void apply(final FileProjectConfig it) {
+                      it.addSourceFolder("src");
                     }
                   };
-                  ProjectConfig _doubleArrow = ObjectExtensions.<ProjectConfig>operator_doubleArrow(_projectConfig, _function);
-                  it.addProjectConfig(_doubleArrow);
+                  ObjectExtensions.<FileProjectConfig>operator_doubleArrow(_addProject, _function);
                 }
               };
-              return ObjectExtensions.<SimpleWorkspaceConfig>operator_doubleArrow(_simpleWorkspaceConfig, _function);
+              return ObjectExtensions.<FileWorkspaceConfig>operator_doubleArrow(_fileWorkspaceConfig, _function);
             }
           };
           it.setProjectInformationProvider(_function);

@@ -88,7 +88,7 @@ public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest 
     int _size = this.generated.size();
     Assert.assertEquals(1, _size);
     Collection<URI> _values = this.generated.values();
-    boolean _containsSuffix = this.containsSuffix(_values, "src-gen/A.java");
+    boolean _containsSuffix = this.containsSuffix(_values, "xtend-gen/A.java");
     Assert.assertTrue(_containsSuffix);
   }
   
@@ -139,7 +139,7 @@ public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest 
     int _size = this.generated.size();
     Assert.assertEquals(1, _size);
     Collection<URI> _values = this.generated.values();
-    boolean _containsSuffix = this.containsSuffix(_values, "src-gen/A.java");
+    boolean _containsSuffix = this.containsSuffix(_values, "xtend-gen/A.java");
     Assert.assertTrue(_containsSuffix);
   }
   
@@ -205,10 +205,10 @@ public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest 
     int _size = this.generated.size();
     Assert.assertEquals(2, _size);
     Collection<URI> _values = this.generated.values();
-    boolean _containsSuffix = this.containsSuffix(_values, "src-gen/A.java");
+    boolean _containsSuffix = this.containsSuffix(_values, "xtend-gen/A.java");
     Assert.assertTrue(_containsSuffix);
     Collection<URI> _values_1 = this.generated.values();
-    boolean _containsSuffix_1 = this.containsSuffix(_values_1, "src-gen/mypack/Third.java");
+    boolean _containsSuffix_1 = this.containsSuffix(_values_1, "xtend-gen/mypack/Third.java");
     Assert.assertTrue(_containsSuffix_1);
   }
   
@@ -245,10 +245,10 @@ public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest 
     int _size = this.generated.size();
     Assert.assertEquals(2, _size);
     Collection<URI> _values = this.generated.values();
-    boolean _containsSuffix = this.containsSuffix(_values, "src-gen/B.java");
+    boolean _containsSuffix = this.containsSuffix(_values, "xtend-gen/B.java");
     Assert.assertTrue(_containsSuffix);
     Collection<URI> _values_1 = this.generated.values();
-    boolean _containsSuffix_1 = this.containsSuffix(_values_1, "src-gen/A.java");
+    boolean _containsSuffix_1 = this.containsSuffix(_values_1, "xtend-gen/A.java");
     Assert.assertTrue(_containsSuffix_1);
   }
   
@@ -345,10 +345,10 @@ public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest 
     int _size = this.generated.size();
     Assert.assertEquals(2, _size);
     Collection<URI> _values = this.generated.values();
-    boolean _containsSuffix = this.containsSuffix(_values, "src-gen/B.java");
+    boolean _containsSuffix = this.containsSuffix(_values, "xtend-gen/B.java");
     Assert.assertTrue(_containsSuffix);
     Collection<URI> _values_1 = this.generated.values();
-    boolean _containsSuffix_1 = this.containsSuffix(_values_1, "src-gen/A.java");
+    boolean _containsSuffix_1 = this.containsSuffix(_values_1, "xtend-gen/A.java");
     Assert.assertTrue(_containsSuffix_1);
     final Procedure1<BuildRequest> _function_1 = new Procedure1<BuildRequest>() {
       @Override
@@ -371,10 +371,10 @@ public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest 
     int _size_1 = this.generated.size();
     Assert.assertEquals(2, _size_1);
     Collection<URI> _values_2 = this.generated.values();
-    boolean _containsSuffix_2 = this.containsSuffix(_values_2, "src-gen/B.java");
+    boolean _containsSuffix_2 = this.containsSuffix(_values_2, "xtend-gen/B.java");
     Assert.assertTrue(_containsSuffix_2);
     Collection<URI> _values_3 = this.generated.values();
-    boolean _containsSuffix_3 = this.containsSuffix(_values_3, "src-gen/A.java");
+    boolean _containsSuffix_3 = this.containsSuffix(_values_3, "xtend-gen/A.java");
     Assert.assertTrue(_containsSuffix_3);
     final Procedure1<BuildRequest> _function_2 = new Procedure1<BuildRequest>() {
       @Override
@@ -395,12 +395,12 @@ public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest 
     int _size_3 = this.generated.size();
     Assert.assertEquals(1, _size_3);
     Collection<URI> _values_4 = this.generated.values();
-    boolean _containsSuffix_4 = this.containsSuffix(_values_4, "src-gen/B.java");
+    boolean _containsSuffix_4 = this.containsSuffix(_values_4, "xtend-gen/B.java");
     Assert.assertFalse(_containsSuffix_4);
     Collection<URI> _values_5 = this.generated.values();
-    boolean _containsSuffix_5 = this.containsSuffix(_values_5, "src-gen/X.java");
+    boolean _containsSuffix_5 = this.containsSuffix(_values_5, "xtend-gen/X.java");
     Assert.assertTrue(_containsSuffix_5);
-    URI _uri = this.uri("src-gen/X.java");
+    URI _uri = this.uri("xtend-gen/X.java");
     Source2GeneratedMapping _fileMappings = this.indexState.getFileMappings();
     URI _uri_1 = this.uri("src/A.xtend");
     Iterable<URI> _generated = _fileMappings.getGenerated(_uri_1);
@@ -408,7 +408,7 @@ public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest 
     Assert.assertEquals(_uri, _head);
     int _size_4 = this.deleted.size();
     Assert.assertEquals(1, _size_4);
-    boolean _containsSuffix_6 = this.containsSuffix(this.deleted, "src-gen/A.java");
+    boolean _containsSuffix_6 = this.containsSuffix(this.deleted, "xtend-gen/A.java");
     Assert.assertTrue(_containsSuffix_6);
     final Procedure1<BuildRequest> _function_3 = new Procedure1<BuildRequest>() {
       @Override
@@ -429,12 +429,12 @@ public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest 
     int _size_5 = this.generated.size();
     Assert.assertEquals(2, _size_5);
     Collection<URI> _values_6 = this.generated.values();
-    boolean _containsSuffix_7 = this.containsSuffix(_values_6, "src-gen/B.java");
+    boolean _containsSuffix_7 = this.containsSuffix(_values_6, "xtend-gen/B.java");
     Assert.assertTrue(_containsSuffix_7);
     Collection<URI> _values_7 = this.generated.values();
-    boolean _containsSuffix_8 = this.containsSuffix(_values_7, "src-gen/A.java");
+    boolean _containsSuffix_8 = this.containsSuffix(_values_7, "xtend-gen/A.java");
     Assert.assertTrue(_containsSuffix_8);
-    boolean _containsSuffix_9 = this.containsSuffix(this.deleted, "src-gen/X.java");
+    boolean _containsSuffix_9 = this.containsSuffix(this.deleted, "xtend-gen/X.java");
     Assert.assertTrue(_containsSuffix_9);
     final Procedure1<BuildRequest> _function_4 = new Procedure1<BuildRequest>() {
       @Override
@@ -453,7 +453,7 @@ public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest 
     Assert.assertEquals(0, _size_7);
     int _size_8 = this.deleted.size();
     Assert.assertEquals(1, _size_8);
-    boolean _containsSuffix_10 = this.containsSuffix(this.deleted, "src-gen/A.java");
+    boolean _containsSuffix_10 = this.containsSuffix(this.deleted, "xtend-gen/A.java");
     Assert.assertTrue(_containsSuffix_10);
   }
 }

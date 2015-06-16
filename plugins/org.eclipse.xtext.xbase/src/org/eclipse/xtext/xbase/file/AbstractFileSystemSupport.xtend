@@ -5,19 +5,20 @@ import com.google.inject.Inject
 import java.io.IOException
 import java.io.InputStreamReader
 import java.io.UnsupportedEncodingException
+import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport
 import org.eclipse.xtend.lib.macro.file.Path
+import org.eclipse.xtext.generator.IFilePostProcessor
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.util.StringInputStream
-import org.eclipse.xtext.generator.IFilePostProcessor
-import org.eclipse.emf.common.util.URI
 
 abstract class AbstractFileSystemSupport implements MutableFileSystemSupport {
 
 	@Inject @Accessors IEncodingProvider encodingProvider
 	@Inject(optional=true) @Accessors IFilePostProcessor postProcessor
+	@Accessors Resource context
 	
 	override CharSequence getContents(Path path) {
 		try {
