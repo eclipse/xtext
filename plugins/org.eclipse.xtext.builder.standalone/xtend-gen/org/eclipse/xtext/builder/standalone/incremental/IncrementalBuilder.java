@@ -29,8 +29,8 @@ import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.builder.standalone.incremental.IndexState;
 import org.eclipse.xtext.builder.standalone.incremental.Indexer;
 import org.eclipse.xtext.builder.standalone.incremental.Source2GeneratedMapping;
+import org.eclipse.xtext.generator.GeneratorDelegate;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
-import org.eclipse.xtext.generator.IGenerator2;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.URIBasedFileSystemAccess;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -242,7 +242,7 @@ public class IncrementalBuilder {
     protected void generate(final Resource resource, final BuildRequest request, final Source2GeneratedMapping newMappings) {
       URI _uRI = resource.getURI();
       final IResourceServiceProvider serviceProvider = this.context.getResourceServiceProvider(_uRI);
-      final IGenerator2 generator = serviceProvider.<IGenerator2>get(IGenerator2.class);
+      final GeneratorDelegate generator = serviceProvider.<GeneratorDelegate>get(GeneratorDelegate.class);
       boolean _equals = Objects.equal(generator, null);
       if (_equals) {
         return;

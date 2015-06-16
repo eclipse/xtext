@@ -5,8 +5,9 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.builder.tests.incremental;
+package org.eclipse.xtext.junit4.builder;
 
+import com.google.common.annotations.Beta;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
@@ -39,8 +40,14 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.junit.Before;
 
 /**
- * Abstract base class for testing incremental builder.
+ * Abstract base class for testing languages in the incremental builder.
+ * 
+ * @since 2.9
+ * 
+ * @noreference
+ * @noimplement
  */
+@Beta
 @SuppressWarnings("all")
 public abstract class AbstractIncrementalBuilderTest {
   @Inject

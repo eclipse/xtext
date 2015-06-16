@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.tests.incremental
+package org.eclipse.xtext.junit4.builder
 
 import com.google.common.collect.ArrayListMultimap
 import com.google.common.collect.Multimap
@@ -21,10 +21,17 @@ import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.validation.Issue
 import org.junit.Before
+import com.google.common.annotations.Beta
 
 /**
- * Abstract base class for testing incremental builder.
+ * Abstract base class for testing languages in the incremental builder.
+ * 
+ * @since 2.9
+ * 
+ * @noreference
+ * @noimplement
  */
+@Beta
 abstract class AbstractIncrementalBuilderTest {
 	
 	@Inject protected IncrementalBuilder incrementalBuilder
@@ -59,8 +66,8 @@ abstract class AbstractIncrementalBuilderTest {
 		val result = new BuildRequest => [
 			baseDir = "".uri
 			resourceSet = resourceSetProvider.get => [
-				URIConverter.URIHandlers.clear
-				URIConverter.URIHandlers += inMemoryURIHandler
+				getURIConverter.getURIHandlers.clear
+				getURIConverter.getURIHandlers += inMemoryURIHandler
 				
 				classpathURIContext = AbstractIncrementalBuilderTest.classLoader
 			]
