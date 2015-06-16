@@ -9,11 +9,10 @@ package org.eclipse.xtext.builder.tests.incremental
 
 import com.google.inject.Inject
 import java.util.concurrent.atomic.AtomicBoolean
-import org.eclipse.xtext.builder.standalone.LanguageAccessFactory
 import org.eclipse.xtext.builder.standalone.StandaloneBuilderInjectorProvider
-import org.eclipse.xtext.builder.standalone.StandaloneBuilderTest.TestLanguageConfiguration
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -26,10 +25,10 @@ import static org.junit.Assert.*
 @InjectWith(StandaloneBuilderInjectorProvider)
 class IncrementalBuilderTest extends AbstractIncrementalBuilderTest {
 	
-	@Inject protected LanguageAccessFactory languageAccessFactory
+	@Inject IResourceServiceProvider.Registry resourceServiceProviderFactory
 	
 	override getLanguages() {
-		languageAccessFactory.createLanguageAccess(#[new TestLanguageConfiguration(false)], class.classLoader).values.toList
+		resourceServiceProviderFactory
 	}
 
 	@Test def void testSimpleFullBuild() {

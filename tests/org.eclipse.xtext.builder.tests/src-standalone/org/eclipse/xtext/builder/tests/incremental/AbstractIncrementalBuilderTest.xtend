@@ -13,12 +13,11 @@ import com.google.inject.Inject
 import com.google.inject.Provider
 import java.util.List
 import org.eclipse.emf.common.util.URI
-import org.eclipse.xtext.builder.standalone.LanguageAccess
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder
 import org.eclipse.xtext.builder.standalone.incremental.IndexState
 import org.eclipse.xtext.junit4.util.InMemoryURIHandler
-import org.eclipse.xtext.resource.FileExtensionProvider
+import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.validation.Issue
 import org.junit.Before
@@ -50,12 +49,11 @@ abstract class AbstractIncrementalBuilderTest {
 	
 	protected def IndexState build(BuildRequest buildRequest) {
 		clean()
-		val languages = getLanguages().toMap[resourceServiceProvider.get(FileExtensionProvider).primaryFileExtension]
-		this.indexState = incrementalBuilder.build(buildRequest, languages).indexState
+		this.indexState = incrementalBuilder.build(buildRequest, getLanguages).indexState
 		return indexState
 	}
 	
-	abstract protected def Iterable<? extends LanguageAccess> getLanguages();
+	abstract protected def IResourceServiceProvider.Registry getLanguages();
 
 	protected def newBuildRequest((BuildRequest)=>void init) {
 		val result = new BuildRequest => [
