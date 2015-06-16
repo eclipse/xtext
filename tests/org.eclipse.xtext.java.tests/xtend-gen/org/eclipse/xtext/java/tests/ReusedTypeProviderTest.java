@@ -27,7 +27,6 @@ import org.eclipse.xtext.common.types.testSetups.ClassWithVarArgs;
 import org.eclipse.xtext.java.tests.JavaInjectorProvider;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
-import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -46,9 +45,6 @@ public class ReusedTypeProviderTest extends AbstractTypeProviderTest {
   
   @Inject
   private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
-  
-  @Inject
-  private FileExtensionProvider extensionProvider;
   
   @Inject
   private IJvmTypeProvider.Factory typeProviderFactory;

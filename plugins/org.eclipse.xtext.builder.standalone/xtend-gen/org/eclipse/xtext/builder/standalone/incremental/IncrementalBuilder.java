@@ -248,12 +248,7 @@ public class IncrementalBuilder {
         return;
       }
       URI _uRI_1 = resource.getURI();
-      String _lastSegment = _uRI_1.lastSegment();
-      String _plus = ("Starting generator for input: \'" + _lastSegment);
-      String _plus_1 = (_plus + "\'");
-      IncrementalBuilder.InternalStatefulIncrementalBuilder.LOG.info(_plus_1);
-      URI _uRI_2 = resource.getURI();
-      final Set<URI> previous = newMappings.deleteSource(_uRI_2);
+      final Set<URI> previous = newMappings.deleteSource(_uRI_1);
       URIBasedFileSystemAccess _uRIBasedFileSystemAccess = new URIBasedFileSystemAccess();
       final Procedure1<URIBasedFileSystemAccess> _function = new Procedure1<URIBasedFileSystemAccess>() {
         @Override

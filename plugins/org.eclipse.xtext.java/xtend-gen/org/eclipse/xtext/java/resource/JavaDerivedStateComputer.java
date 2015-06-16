@@ -19,6 +19,7 @@ import org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.ImportReference;
 import org.eclipse.jdt.internal.compiler.ast.TypeDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.TypeParameter;
+import org.eclipse.jdt.internal.compiler.batch.CompilationUnit;
 import org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants;
 import org.eclipse.jdt.internal.compiler.env.ICompilationUnit;
 import org.eclipse.jdt.internal.compiler.impl.CompilerOptions;
@@ -69,16 +70,8 @@ public class JavaDerivedStateComputer {
     _contents.clear();
   }
   
-  public void installDerivedState(final Resource resource, final boolean preLinkingPhase) {
-    if (preLinkingPhase) {
-      this.installStubs(resource);
-    } else {
-      this.installFull(resource);
-    }
-  }
-  
   public void installStubs(final Resource resource) {
-    final ICompilationUnit compilationUnit = this.getCompilationUnit(resource);
+    final CompilationUnit compilationUnit = this.getCompilationUnit(resource);
     IErrorHandlingPolicy _proceedWithAllProblems = DefaultErrorHandlingPolicies.proceedWithAllProblems();
     CompilerOptions _compilerOptions = this.getCompilerOptions();
     DefaultProblemFactory _defaultProblemFactory = new DefaultProblemFactory();
@@ -170,12 +163,12 @@ public class JavaDerivedStateComputer {
     return jvmType;
   }
   
-  public ICompilationUnit getCompilationUnit(final Resource resource) {
+  public CompilationUnit getCompilationUnit(final Resource resource) {
     return ((JavaResource) resource).getCompilationUnit();
   }
   
   public void installFull(final Resource resource) {
-    final ICompilationUnit compilationUnit = this.getCompilationUnit(resource);
+    final CompilationUnit compilationUnit = this.getCompilationUnit(resource);
     final ClassLoader classLoader = this.getClassLoader(resource);
     ResourceSet _resourceSet = resource.getResourceSet();
     final ResourceDescriptionsData data = ResourceDescriptionsData.ResourceSetAdapter.findResourceDescriptionsData(_resourceSet);
@@ -185,8 +178,7 @@ public class JavaDerivedStateComputer {
     final ICompilerRequestor _function = new ICompilerRequestor() {
       @Override
       public void acceptResult(final CompilationResult it) {
-        char[] _fileName = compilationUnit.getFileName();
-        boolean _equals = Arrays.equals(it.fileName, _fileName);
+        boolean _equals = Arrays.equals(it.fileName, compilationUnit.fileName);
         if (_equals) {
           final HashMap<String, byte[]> map = CollectionLiterals.<String, byte[]>newHashMap();
           List<String> topLevelTypes = CollectionLiterals.<String>newArrayList();

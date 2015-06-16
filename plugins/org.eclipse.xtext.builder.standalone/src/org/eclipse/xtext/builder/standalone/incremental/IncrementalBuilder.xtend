@@ -15,8 +15,8 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.builder.standalone.ClusteringConfig
+import org.eclipse.xtext.generator.GeneratorDelegate
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider
-import org.eclipse.xtext.generator.IGenerator2
 import org.eclipse.xtext.generator.URIBasedFileSystemAccess
 import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.resource.IResourceServiceProvider
@@ -28,7 +28,6 @@ import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.CheckMode
-import org.eclipse.xtext.generator.GeneratorDelegate
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -93,7 +92,7 @@ import org.eclipse.xtext.generator.GeneratorDelegate
 			if (generator == null) {
 				return;
 			}
-			LOG.info("Starting generator for input: '" + resource.URI.lastSegment + "'");
+//			LOG.info("Starting generator for input: '" + resource.URI.lastSegment + "'");
 			val previous = newMappings.deleteSource(resource.URI)
 			val fileSystemAccess = new URIBasedFileSystemAccess() => [
 				val outputConfigProvider = serviceProvider.get(IContextualOutputConfigurationProvider)

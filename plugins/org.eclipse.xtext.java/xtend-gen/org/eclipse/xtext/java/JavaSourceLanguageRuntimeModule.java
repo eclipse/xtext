@@ -24,7 +24,7 @@ import org.eclipse.xtext.resource.impl.SimpleResourceDescriptionsBasedContainerM
 import org.eclipse.xtext.validation.IResourceValidator;
 
 @SuppressWarnings("all")
-public class JavaRuntimeModule extends AbstractModule {
+public class JavaSourceLanguageRuntimeModule extends AbstractModule {
   @Override
   protected void configure() {
     AnnotatedBindingBuilder<Resource.Factory> _bind = this.<Resource.Factory>bind(Resource.Factory.class);
@@ -50,7 +50,7 @@ public class JavaRuntimeModule extends AbstractModule {
     AnnotatedBindingBuilder<IJvmTypeProvider.Factory> _bind_9 = this.<IJvmTypeProvider.Factory>bind(IJvmTypeProvider.Factory.class);
     _bind_9.to(ClasspathTypeProviderFactory.class);
     AnnotatedBindingBuilder<ClassLoader> _bind_10 = this.<ClassLoader>bind(ClassLoader.class);
-    ClassLoader _classLoader = JavaRuntimeModule.class.getClassLoader();
+    ClassLoader _classLoader = JavaSourceLanguageRuntimeModule.class.getClassLoader();
     _bind_10.toInstance(_classLoader);
     AnnotatedBindingBuilder<IReferableElementsUnloader> _bind_11 = this.<IReferableElementsUnloader>bind(IReferableElementsUnloader.class);
     _bind_11.to(IReferableElementsUnloader.GenericUnloader.class);

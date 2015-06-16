@@ -20,7 +20,7 @@ import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.impl.SimpleResourceDescriptionsBasedContainerManager
 import org.eclipse.xtext.validation.IResourceValidator
 
-class JavaRuntimeModule extends AbstractModule {
+class JavaSourceLanguageRuntimeModule extends AbstractModule {
 
 	override protected configure() {
 		bind(Resource.Factory).to(JavaResource.Factory)
@@ -33,7 +33,7 @@ class JavaRuntimeModule extends AbstractModule {
 		bind(IQualifiedNameProvider).to(JvmIdentifiableQualifiedNameProvider)
 		bind(String).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("java")
 		bind(IJvmTypeProvider.Factory).to(ClasspathTypeProviderFactory)
-		bind(ClassLoader).toInstance(JavaRuntimeModule.classLoader)
+		bind(ClassLoader).toInstance(JavaSourceLanguageRuntimeModule.classLoader)
 		bind(IReferableElementsUnloader).to(IReferableElementsUnloader.GenericUnloader)
 	}
 
