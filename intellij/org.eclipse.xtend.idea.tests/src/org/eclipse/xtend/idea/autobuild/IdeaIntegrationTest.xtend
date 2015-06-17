@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.idea.autobuild
 
+import com.google.common.io.CharStreams
+import java.io.InputStreamReader
 import org.eclipse.xtend.idea.LightXtendTest
 import org.junit.ComparisonFailure
 
@@ -147,5 +149,146 @@ class IdeaIntegrationTest extends LightXtendTest {
 		''')
 		myFixture.testHighlighting(true, true, true, xtendFile.virtualFile)
 	}
+	
+	def void testAffectedUpdated() {
+		myFixture.addFileToProject('otherPackage/Foo.xtend', '''
+			package otherPackage
+			
+			import java.util.List
+			
+			class Foo {
+				val list = OtherClass.getIt("foo")
+			}
+		''')
+		assertFileContents("src-gen/otherPackage/Foo.java",'''
+			package otherPackage;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  private final Object list /* Skipped initializer because of errors */;
+			}
+		''')
+		// add a fixing java file
+		myFixture.addFileToProject('otherPackage/OtherClass.java', '''
+			package otherPackage;
+			
+			class OtherClass {
+				public static java.util.List<String> getIt(CharSequence value) {
+					return null
+				}
+			}
+		''')
+		assertFileContents("src-gen/otherPackage/Foo.java",'''
+			package otherPackage;
+			
+			import java.util.List;
+			import otherPackage.OtherClass;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  private final List<String> list = OtherClass.getIt("foo");
+			}
+		''')
+		// add an overload
+		
+		myFixture.saveText(myFixture.findFileInTempDir("otherPackage/OtherClass.java"), '''
+			package otherPackage;
+			
+			class OtherClass {
+				public static java.util.List<String> getIt(CharSequence value) {
+					return null
+				}
+				public static String[] getIt(String value) {
+					return null
+				}
+			}
+		''')
+		assertFileContents("src-gen/otherPackage/Foo.java",'''
+			package otherPackage;
+			
+			import otherPackage.OtherClass;
 
+			@SuppressWarnings("all")
+			public class Foo {
+			  private final String[] list = OtherClass.getIt("foo");
+			}
+		''')
+	}
+	
+	def void testActiveAnnotation() {
+		myFixture.addFileToProject('otherPackage/Foo.xtend', '''
+			package otherPackage
+			
+			import mypackage.Bar
+			import org.eclipse.xtend.lib.macro.Data
+			
+			@Data class Foo {
+			
+				String myField
+			
+			}
+		''')
+		assertFileContents("src-gen/otherPackage/Foo.java",'''
+			package otherPackage;
+			
+			import org.eclipse.xtend.lib.Data;
+			import org.eclipse.xtext.xbase.lib.Pure;
+			import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+			
+			@Data
+			@SuppressWarnings("all")
+			public class Foo {
+			  private final String _myField;
+			  
+			  public Foo(final String myField) {
+			    super();
+			    this._myField = myField;
+			  }
+			  
+			  @Override
+			  @Pure
+			  public int hashCode() {
+			    final int prime = 31;
+			    int result = 1;
+			    result = prime * result + ((this._myField== null) ? 0 : this._myField.hashCode());
+			    return result;
+			  }
+			  
+			  @Override
+			  @Pure
+			  public boolean equals(final Object obj) {
+			    if (this == obj)
+			      return true;
+			    if (obj == null)
+			      return false;
+			    if (getClass() != obj.getClass())
+			      return false;
+			    Foo other = (Foo) obj;
+			    if (this._myField == null) {
+			      if (other._myField != null)
+			        return false;
+			    } else if (!this._myField.equals(other._myField))
+			      return false;
+			    return true;
+			  }
+			  
+			  @Override
+			  @Pure
+			  public String toString() {
+			    String result = new ToStringHelper().toString(this);
+			    return result;
+			  }
+			  
+			  @Pure
+			  public String getMyField() {
+			    return this._myField;
+			  }
+			}
+		''')
+	}
+	
+	def void assertFileContents(String path, CharSequence sequence) {
+		val file = myFixture.findFileInTempDir(path)
+		assertEquals(sequence.toString, CharStreams.toString(new InputStreamReader(file.inputStream, file.charset)))
+	}	
 }
