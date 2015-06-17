@@ -75,7 +75,7 @@ define(function() {
 		},
 		
 		getLineStart : function(lineNumber) {
-			throw "Not supported: getLineStart";
+			throw new Error("Not supported: getLineStart");
 		},
 		
 		getSelection : function() {

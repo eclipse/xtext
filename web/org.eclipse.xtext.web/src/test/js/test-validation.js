@@ -25,6 +25,7 @@ suite('Validation', function() {
 				.setText('foo')
 				.invokeService('validation')
 				.checkRequest(function(url, settings) {
+					assert.equal('test://xtext-service/validation', url);
 					assert.equal('GET', settings.type);
 				})
 				.respond({entries: [{severity: 'error', startOffset: 3}]})
@@ -43,8 +44,9 @@ suite('Validation', function() {
 				.setText('foo')
 				.invokeService('validation')
 				.checkRequest(function(url, settings) {
-					assert.equal('foo', settings.data.fullText);
+					assert.equal('test://xtext-service/validation', url);
 					assert.equal('POST', settings.type);
+					assert.equal('foo', settings.data.fullText);
 				})
 				.done();
 		});

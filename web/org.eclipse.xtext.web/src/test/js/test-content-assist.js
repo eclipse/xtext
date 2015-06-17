@@ -25,6 +25,7 @@ suite('Content-assist', function() {
 				.setCaretOffset(0)
 				.invokeService('content-assist')
 				.checkRequest(function(url, settings) {
+					assert.equal('test://xtext-service/content-assist', url);
 					assert.equal('GET', settings.type);
 					assert.equal(0, settings.data.caretOffset);
 				})
@@ -43,6 +44,7 @@ suite('Content-assist', function() {
 				.setCaretOffset(3)
 				.invokeService('content-assist')
 				.checkRequest(function(url, settings) {
+					assert.equal('test://xtext-service/content-assist', url);
 					assert.equal('POST', settings.type);
 					assert.equal('foo', settings.data.fullText);
 					assert.equal(3, settings.data.caretOffset);
@@ -58,6 +60,7 @@ suite('Content-assist', function() {
 				.setCaretOffset(3)
 				.invokeService('content-assist')
 				.checkRequest(function(url, settings) {
+					assert.equal('test://xtext-service/content-assist', url);
 					assert.equal('POST', settings.type);
 					assert.equal('foo', settings.data.deltaText);
 					assert.equal(3, settings.data.caretOffset);
@@ -89,10 +92,12 @@ suite('Content-assist', function() {
 				.setText('foo')
 				.invokeService('content-assist')
 				.checkRequest(function(url, settings) {
+					assert.equal('test://xtext-service/content-assist', url);
 					assert.equal('foo', settings.data.deltaText);
 				})
 				.respond({conflict: 'invalidStateId'})
 				.checkRequest(function(url, settings) {
+					assert.equal('test://xtext-service/content-assist', url);
 					assert.equal('foo', settings.data.fullText);
 				})
 				.respond({entries: [{proposal: 'bar'}]})
