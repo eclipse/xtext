@@ -50,6 +50,11 @@ define([
 			return this;
 		},
 		
+		markClean: function(clean) {
+			this._editorContext.markClean(clean);
+			return this;
+		},
+		
 		invokeService: function(service, invokeOptions) {
 			var result = this._editorContext.invokeXtextService(service, invokeOptions);
 			if (result !== undefined)
@@ -204,7 +209,7 @@ define([
 				optionsCopy.selection = editorContext.getSelection();
 				return contentAssistService.computeContentAssist(editorContext, optionsCopy);
 			} else
-				throw "Service '" + service + "' is not available.";
+				throw new Error("Service '" + service + "' is not available.");
 		};
 		editorContext.xtextServiceSuccessListeners = [];
 		editorContext.xtextServiceErrorListeners = [];

@@ -51,29 +51,25 @@ define(function() {
 	}
 	
 	var requests;
-	var responses;
 	
 	function reset() {
 		requests = [];
-		responses = [];
 	}
 	
 	function respond(result) {
 		var response = {success: true, result: result};
-		if (requests.length > 0) {
-			var request = requests.shift();
-			invokeResponseCallbacks(request, response);
-		} else
-			responses.push(response);
+		if (requests.length == 0)
+			throw new Error("Response without matching request");
+		var request = requests.shift();
+		invokeResponseCallbacks(request, response);
 	}
 	
 	function httpError(errorThrown, xhr) {
 		var response = {success: false, errorThrown: errorThrown, xhr: xhr};
-		if (requests.length > 0) {
-			var request = requests.shift();
-			invokeResponseCallbacks(request, response);
-		} else
-			responses.push(response);
+		if (requests.length == 0)
+			throw new Error("Response without matching request");
+		var request = requests.shift();
+		invokeResponseCallbacks(request, response);
 	}
 	
 	function getNextRequest() {
@@ -82,12 +78,7 @@ define(function() {
 	
 	function ajax(url, settings) {
 		var request = {url: url, settings: settings};
-		if (responses.length > 0) {
-			var response = responses.shift();
-			invokeResponseCallbacks(request, response);
-		} else {
-			requests.push(request);
-		}
+		requests.push(request);
 	}
 	
 	return {

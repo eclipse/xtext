@@ -429,7 +429,7 @@ define([
 			else if (service === "validation" && validationService)
 				validationService.computeProblems(editorContext, optionsCopy);
 			else
-				throw "Service '" + service + "' is not available.";
+				throw new Error("Service '" + service + "' is not available.");
 		};
 		editor.xtextServiceSuccessListeners = [];
 		editor.xtextServiceErrorListeners = [function(requestType, xhr, textStatus, errorThrown) {
@@ -454,7 +454,7 @@ define([
 		if (editor.invokeXtextService)
 			editor.invokeXtextService(service, invokeOptions);
 		else
-			throw "The editor has not been configured with Xtext.";
+			throw new Error("The editor has not been configured with Xtext.");
 	}
 	
 	return exports;

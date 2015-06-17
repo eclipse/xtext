@@ -32,6 +32,7 @@ suite('Update', function() {
 				})
 				.triggerModelChange('foo')
 				.checkRequest(function(url, settings) {
+					assert.equal('test://xtext-service/update', url);
 					assert.equal('PUT', settings.type);
 					assert.equal('0', settings.data.requiredStateId);
 				})
@@ -54,6 +55,7 @@ suite('Update', function() {
 				})
 				.triggerModelChange('foo')
 				.checkRequest(function(url, settings) {
+					assert.equal('test://xtext-service/update', url);
 					assert.equal('PUT', settings.type);
 					assert.equal('foo', settings.data.fullText);
 				})
@@ -74,6 +76,7 @@ suite('Update', function() {
 				.respond({stateId: '1'})
 				.triggerModelChange('Foo and Bar')
 				.checkRequest(function(url, settings) {
+					assert.equal('test://xtext-service/update', url);
 					assert.equal('1', settings.data.requiredStateId);
 					assert.equal(' and B', settings.data.deltaText);
 					assert.equal(3, settings.data.deltaOffset);
@@ -81,6 +84,48 @@ suite('Update', function() {
 				})
 				.respond({stateId: '2'})
 				.done();
+		});
+	});
+	
+	test('should try again when a conflict occurs', function(done) {
+		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
+			xtext.testEditor({enableValidationService: false})
+				.setup(function(editorContext) {
+					editorContext.addServerStateListener(function() {
+						var knownServerState = editorContext.getServerState();
+						assert.equal('foo', knownServerState.text);
+						assert.equal('2', knownServerState.stateId);
+						done();
+					});
+				})
+				.triggerModelChange('foo')
+				.respond({conflict: 'invalidStateId'})
+				.checkRequest(function(url, settings) {
+					assert.equal('test://xtext-service/update', url);
+					assert.equal('foo', settings.data.fullText);
+				})
+				.respond({stateId: '2'});
+		});
+	});
+	
+	test('should try again when resource is not found', function(done) {
+		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
+			xtext.testEditor({enableValidationService: false})
+				.setup(function(editorContext) {
+					editorContext.addServerStateListener(function() {
+						var knownServerState = editorContext.getServerState();
+						assert.equal('foo', knownServerState.text);
+						assert.equal('1', knownServerState.stateId);
+						done();
+					});
+				})
+				.triggerModelChange('foo')
+				.httpError('Resource not found', {status: 404})
+				.checkRequest(function(url, settings) {
+					assert.equal('test://xtext-service/update', url);
+					assert.equal('foo', settings.data.fullText);
+				})
+				.respond({stateId: '1'});
 		});
 	});
 	
