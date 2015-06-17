@@ -206,8 +206,10 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	}
 	
 	protected def boolean isExcluded(VirtualFile file) {
-		return file == null || GeneratedSourcesFilter.isGeneratedSourceByAnyFilter(file, project) 
-				|| (indexState != null && !indexState.fileMappings.getSource(file.URI).empty)
+		return file == null 
+			|| file.isDirectory 
+			|| GeneratedSourcesFilter.isGeneratedSourceByAnyFilter(file, project) 
+			|| (indexState != null && !indexState.fileMappings.getSource(file.URI).empty)
 	}
 	
 	protected def boolean isLoaded() {

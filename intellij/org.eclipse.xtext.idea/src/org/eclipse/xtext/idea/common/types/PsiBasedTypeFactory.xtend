@@ -579,7 +579,7 @@ class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements ITypeFa
 		]
 	}
 
-	protected def enhanceExecutable(JvmExecutable it, PsiMethod psiMethod, StringBuilder fqn) {
+	protected def void enhanceExecutable(JvmExecutable it, PsiMethod psiMethod, StringBuilder fqn) {
 		createTypeParameters(psiMethod)
 		fqn.append(psiMethod.name).append('(')
 		createFormalParameters(psiMethod, fqn)
@@ -589,6 +589,9 @@ class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements ITypeFa
 		setVisibility(psiMethod)
 		deprecated = psiMethod.deprecated
 		varArgs = psiMethod.varArgs
+		for (exceptionType : psiMethod.throwsList.referencedTypes) {
+			exceptions += exceptionType.createTypeReference
+		}
 	}
 
 	protected def createFormalParameters(JvmExecutable it, PsiMethod psiMethod, StringBuilder fqn) {

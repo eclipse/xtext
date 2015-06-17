@@ -293,8 +293,15 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   protected boolean isExcluded(final VirtualFile file) {
     boolean _or = false;
     boolean _or_1 = false;
+    boolean _or_2 = false;
     boolean _equals = Objects.equal(file, null);
     if (_equals) {
+      _or_2 = true;
+    } else {
+      boolean _isDirectory = file.isDirectory();
+      _or_2 = _isDirectory;
+    }
+    if (_or_2) {
       _or_1 = true;
     } else {
       boolean _isGeneratedSourceByAnyFilter = GeneratedSourcesFilter.isGeneratedSourceByAnyFilter(file, this.project);
