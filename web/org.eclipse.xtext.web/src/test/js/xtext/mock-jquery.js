@@ -13,78 +13,91 @@ define(function() {
 	}
 	
 	function Deferred() {
-		var result = {
+		var deferred = {
 			promise: function() {
-				return {
+				var result = {
 					done: function(callback) {
-						result.resolve = callback;
+						if (deferred.result)
+							callback(deferred.result);
+						deferred.resolve = callback;
+						return result;
 					},
 					fail: function(callback) {
-						result.reject = callback;
+						if (deferred.error)
+							callback(deferred.error);
+						deferred.reject = callback;
+						return result;
 					}
 				};
+				return result;
 			},
-			resolve: function() {},
-			reject: function() {}
+			resolve: function(result) {
+				deferred.result = result;
+			},
+			reject: function(error) {
+				deferred.error = error;
+			}
 		};
-		return result;
+		return deferred;
 	}
 	
-	var ajaxOptionsArray;
-	
-	function mockAjax(options) {
-		if (Array.isArray(options))
-			ajaxOptionsArray = options;
+	function invokeResponseCallbacks(request, response) {
+		var xhr = response.xhr ? response.xhr : {};
+		if (response.success)
+			request.settings.success(response.result);
 		else
-			ajaxOptionsArray = [options];
+			request.settings.error(xhr, 'error', response.errorThrown);
+		request.settings.complete(xhr, response.success ? 'success' : 'error');
 	}
 	
-	var nextResponses = [];
+	var requests;
+	var responses;
+	
+	function reset() {
+		requests = [];
+		responses = [];
+	}
+	
+	function respond(result) {
+		var response = {success: true, result: result};
+		if (requests.length > 0) {
+			var request = requests.shift();
+			invokeResponseCallbacks(request, response);
+		} else
+			responses.push(response);
+	}
+	
+	function httpError(errorThrown, xhr) {
+		var response = {success: false, errorThrown: errorThrown, xhr: xhr};
+		if (requests.length > 0) {
+			var request = requests.shift();
+			invokeResponseCallbacks(request, response);
+		} else
+			responses.push(response);
+	}
+	
+	function getNextRequest() {
+		return requests[0];
+	}
 	
 	function ajax(url, settings) {
-		if (ajaxOptionsArray.length == 0)
-			return;
-		
-		var mockOptions = ajaxOptionsArray.shift();
-		if (mockOptions.result)
-			mockOptions.success = true;
-		else if (mockOptions.errorThrown)
-			mockOptions.success = false;
-		
-		if (isFunction(mockOptions.onStart))
-			mockOptions.onStart(url, settings);
-		
-		function asyncAjax() {
-			var xhr = mockOptions.xhr ? mockOptions.xhr : {};
-			if (mockOptions.success)
-				settings.success(mockOptions.result);
-			else
-				settings.error(xhr, 'error', mockOptions.errorThrown);
-			settings.complete(xhr, mockOptions.success ? 'success' : 'error');
-			
-			if (isFunction(mockOptions.onComplete))
-				mockOptions.onComplete();
+		var request = {url: url, settings: settings};
+		if (responses.length > 0) {
+			var response = responses.shift();
+			invokeResponseCallbacks(request, response);
+		} else {
+			requests.push(request);
 		}
-		
-		if (mockOptions.wait)
-			nextResponses.push(asyncAjax);
-		else if (settings.async)
-			setTimeout(asyncAjax, 20);
-		else
-			asyncAjax();
-	}
-	
-	function giveNextResponse() {
-		var response = nextResponses.shift();
-		response();
 	}
 	
 	return {
 		isFunction: isFunction,
 		Deferred: Deferred,
-		mockAjax: mockAjax,
-		ajax: ajax,
-		giveNextResponse: giveNextResponse
+		reset: reset,
+		respond: respond,
+		httpError: httpError,
+		getNextRequest: getNextRequest,
+		ajax: ajax
 	};
 });
 

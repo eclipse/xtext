@@ -7,6 +7,7 @@
  *******************************************************************************/
 
 define([
+	"jquery",
 	"xtext/MockEditorContext",
 	"xtext/services/LoadResourceService",
 	"xtext/services/RevertResourceService",
@@ -14,12 +15,9 @@ define([
 	"xtext/services/UpdateService",
 	"xtext/services/ContentAssistService",
 	"xtext/services/ValidationService"
-], function(EditorContext, LoadResourceService, RevertResourceService, SaveResourceService,
+], function(mjQuery, EditorContext, LoadResourceService, RevertResourceService, SaveResourceService,
 		UpdateService, ContentAssistService, ValidationService) {
 	
-	/**
-	 * Create a copy of the given object.
-	 */
 	function _copy(obj) {
 		var copy = {};
 		for (var p in obj) {
@@ -29,7 +27,89 @@ define([
 		return copy;
 	}
 	
+	function Tester(editorContext, doneCallback) {
+		this._editorContext = editorContext;
+		this._doneCallback = doneCallback;
+		mjQuery.reset();
+	}
+	
+	Tester.prototype = {
+			
+		setup: function(setupAction) {
+			setupAction(this._editorContext);
+			return this;
+		},
+		
+		setText: function(text, start, end) {
+			this._editorContext.setText(text, start, end);
+			return this;
+		},
+		
+		setCaretOffset: function(offset) {
+			this._editorContext.setCaretOffset(offset);
+			return this;
+		},
+		
+		invokeService: function(service, invokeOptions) {
+			var result = this._editorContext.invokeXtextService(service, invokeOptions);
+			if (result !== undefined)
+				this._lastResult = result;
+			return this;
+		},
+			
+		triggerModelChange: function(text, start, end) {
+			this._editorContext.setText(text, start, end);
+			var listeners = this._editorContext.getModelChangeListeners();
+			for (var i in listeners) {
+				var listener = listeners[i];
+				listener(text);
+			}
+			return this;
+		},
+		
+		checkResult: function(checker) {
+			if (this._lastResult) {
+				if (this._lastResult.done)
+					this._lastResult.done(checker);
+				else
+					checker(this._lastResult);
+			} else
+				checker(this._editorContext);
+			return this;
+		},
+		
+		checkRequest: function(checker) {
+			var request = mjQuery.getNextRequest();
+			if (request) {
+				checker(request.url, request.settings);
+			}
+			return this;
+		},
+		
+		respond: function(result) {
+			mjQuery.respond(result);
+			return this;
+		},
+		
+		httpError: function(errorThrown, xhr) {
+			mjQuery.httpError(errorThrown, xhr);
+			return this;
+		},
+		
+		done: function() {
+			this._doneCallback();
+		}
+	
+	}
+	
 	var exports = {};
+	
+	exports.testEditor = function(options) {
+		if (!options)
+			options = {};
+		var editorContext = exports.createEditor(options);
+		return new Tester(editorContext, options.doneCallback);
+	}
 	
 	exports.createEditor = function(options) {
 		if (!options)
@@ -128,13 +208,6 @@ define([
 		};
 		editorContext.xtextServiceSuccessListeners = [];
 		editorContext.xtextServiceErrorListeners = [];
-	}
-	
-	exports.invokeService = function(editorContext, service, invokeOptions) {
-		if (editorContext.invokeXtextService)
-			editorContext.invokeXtextService(service, invokeOptions);
-		else
-			throw "The editor has not been configured with Xtext.";
 	}
 	
 	return exports;
