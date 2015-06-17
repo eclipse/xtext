@@ -27,7 +27,7 @@ import java.util.Set
 	}
 	  
 	def copy() {
-		new Source2GeneratedMapping(source2generated, generated2source)
+		new Source2GeneratedMapping(HashMultimap.create(source2generated), HashMultimap.create(generated2source))
 	}
 	
 	def void addSource2Generated(URI source, URI generated) {

@@ -32,7 +32,9 @@ public class Source2GeneratedMapping {
   }
   
   public Source2GeneratedMapping copy() {
-    return new Source2GeneratedMapping(this.source2generated, this.generated2source);
+    HashMultimap<URI, URI> _create = HashMultimap.<URI, URI>create(this.source2generated);
+    HashMultimap<URI, URI> _create_1 = HashMultimap.<URI, URI>create(this.generated2source);
+    return new Source2GeneratedMapping(_create, _create_1);
   }
   
   public void addSource2Generated(final URI source, final URI generated) {

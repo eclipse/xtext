@@ -307,13 +307,13 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 				val result = app.<IncrementalBuilder.Result>runReadAction [
 					builderProvider.get().build(request, resourceServiceProviderRegistry)
 				]
-				indexState = result.indexState
 				app.invokeAndWait([
 					app.runWriteAction [
 						val handler = VirtualFileBasedUriHandler.find(request.resourceSet)
 						handler.flushToDisk
 					]
 				], ModalityState.any)
+				indexState = result.indexState
 				notifyListeners [
 					ImmutableList.copyOf(result.affectedResources)
 				]

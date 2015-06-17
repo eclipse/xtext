@@ -530,8 +530,6 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
             }
           };
           final IncrementalBuilder.Result result = app.<IncrementalBuilder.Result>runReadAction(_function_4);
-          IndexState _indexState = result.getIndexState();
-          this.indexState = _indexState;
           final Runnable _function_5 = new Runnable() {
             @Override
             public void run() {
@@ -548,6 +546,8 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
           };
           ModalityState _any = ModalityState.any();
           app.invokeAndWait(_function_5, _any);
+          IndexState _indexState = result.getIndexState();
+          this.indexState = _indexState;
           final IResourceDescription.Event _function_6 = new IResourceDescription.Event() {
             @Override
             public ImmutableList<IResourceDescription.Delta> getDeltas() {
