@@ -74,6 +74,9 @@ configure(ideaTestProjects) {
 
 	test {
 		minHeapSize = "1024m"
+		if(isBuildServer) {
+			systemProperty 'idea.system.path', System.getenv("WORKSPACE") + '/idea-test-system'
+		}
 		jvmArgs '-XX:MaxPermSize=256m'
 		exclude {it.name.endsWith('Delegate.class')}
 	}
