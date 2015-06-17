@@ -343,6 +343,10 @@ public class SourceStubJvmTypeProviderTest extends PsiTestCase {
     delegate.testConstantValue_09();
   }
   
+  public void testConstructorThrowsException() {
+    delegate.testConstructorThrowsException();
+  }
+  
   public void testDefaultAnnotationAnnotationValueByReference() throws Exception {
     delegate.testDefaultAnnotationAnnotationValueByReference();
   }
@@ -801,6 +805,10 @@ public class SourceStubJvmTypeProviderTest extends PsiTestCase {
   
   public void testMemberCount_18() {
     delegate.testMemberCount_18();
+  }
+  
+  public void testMethodThrowsException() {
+    delegate.testMethodThrowsException();
   }
   
   public void testMethods_defaultStaticMethod_01() {

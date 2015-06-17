@@ -125,6 +125,9 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   
   public XtextAutoBuilderComponent(final Project project) {
     super(project);
+    Application _application = ApplicationManager.getApplication();
+    boolean _isUnitTestMode = _application.isUnitTestMode();
+    XtextAutoBuilderComponent.TEST_MODE = _isUnitTestMode;
     Injector _injector = IdeaSharedInjectorProvider.getInjector();
     _injector.injectMembers(this);
     this.project = project;
@@ -182,6 +185,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   public void dispose() {
     this.alarm.cancelAllRequests();
     this.queue.clear();
+    this.indexState = null;
     this.disposed = true;
   }
   
@@ -411,24 +415,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
           final Set<BuildEvent> events = module2event.get(module);
           final HashSet<URI> changedUris = CollectionLiterals.<URI>newHashSet();
           final HashSet<URI> deletedUris = CollectionLiterals.<URI>newHashSet();
-          final Function1<BuildEvent, Boolean> _function_2 = new Function1<BuildEvent, Boolean>() {
-            @Override
-            public Boolean apply(final BuildEvent it) {
-              boolean _or = false;
-              BuildEvent.Type _type = it.getType();
-              boolean _equals = Objects.equal(_type, BuildEvent.Type.MODIFIED);
-              if (_equals) {
-                _or = true;
-              } else {
-                BuildEvent.Type _type_1 = it.getType();
-                boolean _equals_1 = Objects.equal(_type_1, BuildEvent.Type.ADDED);
-                _or = _equals_1;
-              }
-              return Boolean.valueOf(_or);
-            }
-          };
-          Iterable<BuildEvent> _filter = IterableExtensions.<BuildEvent>filter(events, _function_2);
-          for (final BuildEvent event : _filter) {
+          for (final BuildEvent event : events) {
             BuildEvent.Type _type = event.getType();
             if (_type != null) {
               switch (_type) {
@@ -437,14 +424,14 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
                   VirtualFile _file = event.getFile();
                   boolean _isJavaFile = this.isJavaFile(_file);
                   if (_isJavaFile) {
-                    final Computable<Set<IResourceDescription.Delta>> _function_3 = new Computable<Set<IResourceDescription.Delta>>() {
+                    final Computable<Set<IResourceDescription.Delta>> _function_2 = new Computable<Set<IResourceDescription.Delta>>() {
                       @Override
                       public Set<IResourceDescription.Delta> compute() {
                         VirtualFile _file = event.getFile();
                         return XtextAutoBuilderComponent.this.getJavaDeltas(_file, module);
                       }
                     };
-                    Set<IResourceDescription.Delta> _runReadAction = app.<Set<IResourceDescription.Delta>>runReadAction(_function_3);
+                    Set<IResourceDescription.Delta> _runReadAction = app.<Set<IResourceDescription.Delta>>runReadAction(_function_2);
                     Iterables.<IResourceDescription.Delta>addAll(deltas, _runReadAction);
                   } else {
                     VirtualFile _file_1 = event.getFile();
@@ -462,7 +449,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
                   } else {
                     VirtualFile _file_4 = event.getFile();
                     URI _uRI_1 = VirtualFileURIUtil.getURI(_file_4);
-                    changedUris.add(_uRI_1);
+                    deletedUris.add(_uRI_1);
                   }
                   break;
                 default:
@@ -472,7 +459,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
           }
           final OrderEnumerator entries = OrderEnumerator.orderEntries(module);
           BuildRequest _buildRequest = new BuildRequest();
-          final Procedure1<BuildRequest> _function_4 = new Procedure1<BuildRequest>() {
+          final Procedure1<BuildRequest> _function_3 = new Procedure1<BuildRequest>() {
             @Override
             public void apply(final BuildRequest it) {
               XtextResourceSet _get = XtextAutoBuilderComponent.this.resourceSetProvider.get(module);
@@ -527,18 +514,18 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
               it.setAfterDeleteFile(_function_2);
             }
           };
-          final BuildRequest request = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_4);
-          final Computable<IncrementalBuilder.Result> _function_5 = new Computable<IncrementalBuilder.Result>() {
+          final BuildRequest request = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_3);
+          final Computable<IncrementalBuilder.Result> _function_4 = new Computable<IncrementalBuilder.Result>() {
             @Override
             public IncrementalBuilder.Result compute() {
               IncrementalBuilder _get = XtextAutoBuilderComponent.this.builderProvider.get();
               return _get.build(request, XtextAutoBuilderComponent.this.resourceServiceProviderRegistry);
             }
           };
-          final IncrementalBuilder.Result result = app.<IncrementalBuilder.Result>runReadAction(_function_5);
+          final IncrementalBuilder.Result result = app.<IncrementalBuilder.Result>runReadAction(_function_4);
           IndexState _indexState = result.getIndexState();
           this.indexState = _indexState;
-          final Runnable _function_6 = new Runnable() {
+          final Runnable _function_5 = new Runnable() {
             @Override
             public void run() {
               final Runnable _function = new Runnable() {
@@ -553,15 +540,15 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
             }
           };
           ModalityState _any = ModalityState.any();
-          app.invokeAndWait(_function_6, _any);
-          final IResourceDescription.Event _function_7 = new IResourceDescription.Event() {
+          app.invokeAndWait(_function_5, _any);
+          final IResourceDescription.Event _function_6 = new IResourceDescription.Event() {
             @Override
             public ImmutableList<IResourceDescription.Delta> getDeltas() {
               List<IResourceDescription.Delta> _affectedResources = result.getAffectedResources();
               return ImmutableList.<IResourceDescription.Delta>copyOf(_affectedResources);
             }
           };
-          this.notifyListeners(_function_7);
+          this.notifyListeners(_function_6);
           List<IResourceDescription.Delta> _affectedResources = result.getAffectedResources();
           deltas.addAll(_affectedResources);
         }

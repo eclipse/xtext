@@ -95,6 +95,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	
 	new(Project project) {
 		super(project)
+		TEST_MODE = ApplicationManager.application.isUnitTestMode
 		IdeaSharedInjectorProvider.injector.injectMembers(this)
 		this.project = project
 		alarm = new Alarm(Alarm.ThreadToUse.OWN_THREAD, this)
@@ -135,6 +136,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	override dispose() {
 		alarm.cancelAllRequests
 		queue.clear
+		indexState = null
 		disposed = true
 	}
 	
@@ -262,7 +264,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 				val events = module2event.get(module)
 				val changedUris = newHashSet
 				val deletedUris = newHashSet
-				for (event : events.filter[type==MODIFIED || type == ADDED]) {
+				for (event : events) {
 					switch event.type {
 						case MODIFIED,
 						case ADDED: {
@@ -278,7 +280,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 							if (isJavaFile(event.file)) {
 								deltas += getJavaDeltas(event.file, module)
 							} else {
-								changedUris += event.file.URI
+								deletedUris += event.file.URI
 							}
 						}
 					}
