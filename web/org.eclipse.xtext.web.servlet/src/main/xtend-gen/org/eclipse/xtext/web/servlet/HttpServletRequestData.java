@@ -8,11 +8,11 @@
 package org.eclipse.xtext.web.servlet;
 
 import com.google.common.base.Objects;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.web.server.IRequestData;
@@ -26,12 +26,20 @@ public class HttpServletRequestData implements IRequestData {
   @Accessors
   private final Collection<String> parameterKeys;
   
+  @Accessors
+  private final Collection<String> metadataKeys;
+  
   public HttpServletRequestData(final HttpServletRequest request) {
     this.request = request;
-    Enumeration<String> _parameterNames = request.getParameterNames();
-    ArrayList<String> _list = Collections.<String>list(_parameterNames);
-    List<String> _unmodifiableList = Collections.<String>unmodifiableList(_list);
-    this.parameterKeys = _unmodifiableList;
+    final Enumeration<String> paramNames = request.getParameterNames();
+    final HashSet<String> set = CollectionLiterals.<String>newHashSet();
+    while (paramNames.hasMoreElements()) {
+      String _nextElement = paramNames.nextElement();
+      set.add(_nextElement);
+    }
+    Set<String> _unmodifiableSet = Collections.<String>unmodifiableSet(set);
+    this.parameterKeys = _unmodifiableSet;
+    this.metadataKeys = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet(IRequestData.REQUEST_TYPE, "authType", "characterEncoding", "contentType", "contextPath", "localAddr", "localName", "localPort", "method", "pathInfo", "pathTranslated", "protocol", "queryString", "remoteAddr", "remoteHost", "remotePort", "remoteUser", "requestedSessionId", "requestURI", "scheme", "serverName", "serverPort", "servletPath"));
   }
   
   @Override
@@ -40,16 +48,11 @@ public class HttpServletRequestData implements IRequestData {
   }
   
   @Override
-  public Collection<String> getMetadataKeys() {
-    return Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(IRequestData.METADATA_REQUEST_TYPE, "authType", "characterEncoding", "contentType", "contextPath", "localAddr", "localName", "localPort", "method", "pathInfo", "pathTranslated", "protocol", "queryString", "remoteAddr", "remoteHost", "remotePort", "remoteUser", "requestedSessionId", "requestURI", "scheme", "serverName", "serverPort", "servletPath"));
-  }
-  
-  @Override
   public String getMetadata(final String key) {
     String _switchResult = null;
     boolean _matched = false;
     if (!_matched) {
-      if (Objects.equal(key, IRequestData.METADATA_REQUEST_TYPE)) {
+      if (Objects.equal(key, IRequestData.REQUEST_TYPE)) {
         _matched=true;
         String _pathInfo = this.request.getPathInfo();
         String _substring = null;
@@ -200,5 +203,10 @@ public class HttpServletRequestData implements IRequestData {
   @Pure
   public Collection<String> getParameterKeys() {
     return this.parameterKeys;
+  }
+  
+  @Pure
+  public Collection<String> getMetadataKeys() {
+    return this.metadataKeys;
   }
 }

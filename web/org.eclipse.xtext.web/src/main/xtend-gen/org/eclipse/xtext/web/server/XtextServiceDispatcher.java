@@ -166,18 +166,22 @@ public class XtextServiceDispatcher {
   public XtextServiceDispatcher.ServiceDescriptor getService(final IRequestData request, final ISessionStore sessionStore) throws InvalidRequestException {
     XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
     {
-      String _elvis = null;
-      String _metadata = request.getMetadata(IRequestData.METADATA_REQUEST_TYPE);
-      if (_metadata != null) {
-        _elvis = _metadata;
+      String _xifexpression = null;
+      Collection<String> _parameterKeys = request.getParameterKeys();
+      boolean _contains = _parameterKeys.contains(IRequestData.REQUEST_TYPE);
+      if (_contains) {
+        _xifexpression = request.getParameter(IRequestData.REQUEST_TYPE);
       } else {
-        _elvis = "";
+        _xifexpression = request.getMetadata(IRequestData.REQUEST_TYPE);
       }
-      final String requestType = _elvis;
+      final String requestType = _xifexpression;
+      if ((requestType == null)) {
+        throw new InvalidRequestException(InvalidRequestException.Type.INVALID_PARAMETERS, "The parameter \'requestType\' is required.");
+      }
       boolean _isTraceEnabled = XtextServiceDispatcher.LOG.isTraceEnabled();
       if (_isTraceEnabled) {
-        Collection<String> _parameterKeys = request.getParameterKeys();
-        List<String> _sort = IterableExtensions.<String>sort(_parameterKeys);
+        Collection<String> _parameterKeys_1 = request.getParameterKeys();
+        List<String> _sort = IterableExtensions.<String>sort(_parameterKeys_1);
         final Function1<String, CharSequence> _function = new Function1<String, CharSequence>() {
           @Override
           public CharSequence apply(final String key) {

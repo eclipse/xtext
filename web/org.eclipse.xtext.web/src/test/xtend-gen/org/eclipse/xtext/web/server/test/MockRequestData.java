@@ -36,7 +36,7 @@ public class MockRequestData implements IRequestData {
   
   @Override
   public Collection<String> getMetadataKeys() {
-    return Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(IRequestData.METADATA_REQUEST_TYPE));
+    return Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(IRequestData.REQUEST_TYPE));
   }
   
   @Override
@@ -44,7 +44,7 @@ public class MockRequestData implements IRequestData {
     String _switchResult = null;
     boolean _matched = false;
     if (!_matched) {
-      if (Objects.equal(key, IRequestData.METADATA_REQUEST_TYPE)) {
+      if (Objects.equal(key, IRequestData.REQUEST_TYPE)) {
         _matched=true;
         _switchResult = this.requestType;
       }

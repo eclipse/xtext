@@ -19,26 +19,31 @@ class HttpServletRequestData implements IRequestData {
 	
 	@Accessors
 	val Collection<String> parameterKeys
+	
+	@Accessors
+	val Collection<String> metadataKeys
 
 	new(HttpServletRequest request) {
 		this.request = request
-		this.parameterKeys = Collections.unmodifiableList(Collections.list(request.parameterNames))
+		val paramNames = request.parameterNames
+		val set = newHashSet
+        while (paramNames.hasMoreElements) {
+            set += paramNames.nextElement
+        }
+		this.parameterKeys = Collections.unmodifiableSet(set)
+		this.metadataKeys = #{IRequestData.REQUEST_TYPE, 'authType', 'characterEncoding', 'contentType',
+			'contextPath', 'localAddr', 'localName', 'localPort', 'method', 'pathInfo', 'pathTranslated',
+			'protocol', 'queryString', 'remoteAddr', 'remoteHost', 'remotePort', 'remoteUser',
+			'requestedSessionId', 'requestURI', 'scheme', 'serverName', 'serverPort', 'servletPath'}
 	}
 	
 	override getParameter(String key) {
 		request.getParameter(key)
 	}
 	
-	override getMetadataKeys() {
-		#[IRequestData.METADATA_REQUEST_TYPE, 'authType', 'characterEncoding', 'contentType',
-		'contextPath', 'localAddr', 'localName', 'localPort', 'method', 'pathInfo', 'pathTranslated',
-		'protocol', 'queryString', 'remoteAddr', 'remoteHost', 'remotePort', 'remoteUser',
-		'requestedSessionId', 'requestURI', 'scheme', 'serverName', 'serverPort', 'servletPath']
-	}
-	
 	override getMetadata(String key) {
 		switch key {
-			case IRequestData.METADATA_REQUEST_TYPE: request.pathInfo?.substring(1)
+			case IRequestData.REQUEST_TYPE: request.pathInfo?.substring(1)
 			case 'authType': request.authType
 			case 'characterEncoding': request.characterEncoding
 			case 'contentType': request.contentType

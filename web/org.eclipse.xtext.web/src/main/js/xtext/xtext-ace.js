@@ -39,6 +39,7 @@
  */
 define([
     "jquery",
+    "ace/ace",
     "ace/ext/language_tools",
 	"xtext/AceEditorContext",
 	"xtext/services/LoadResourceService",
@@ -47,7 +48,7 @@ define([
 	"xtext/services/UpdateService",
 	"xtext/services/ContentAssistService",
 	"xtext/services/ValidationService"
-], function(jQuery, languageTools, EditorContext, LoadResourceService, RevertResourceService,
+], function(jQuery, ace, languageTools, EditorContext, LoadResourceService, RevertResourceService,
 		SaveResourceService, UpdateService, ContentAssistService, ValidationService) {
 	
 	/**

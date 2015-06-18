@@ -11,7 +11,7 @@ import java.util.Collection;
 
 @SuppressWarnings("all")
 public interface IRequestData {
-  public final static String METADATA_REQUEST_TYPE = "requestType";
+  public final static String REQUEST_TYPE = "requestType";
   
   public abstract Collection<String> getParameterKeys();
   
