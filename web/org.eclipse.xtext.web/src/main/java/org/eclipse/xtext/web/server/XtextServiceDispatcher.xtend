@@ -283,6 +283,7 @@ class XtextServiceDispatcher {
 					handleError(throwable)
 				}
 			]
+			hasTextInput = request.parameterKeys.contains('fullText')
 		]
 	}
 	

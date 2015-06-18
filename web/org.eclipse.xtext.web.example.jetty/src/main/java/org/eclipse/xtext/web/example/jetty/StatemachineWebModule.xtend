@@ -23,6 +23,8 @@ import org.eclipse.xtext.web.example.statemachine.ide.contentassist.antlr.intern
 import org.eclipse.xtext.web.server.persistence.FileResourceHandler
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler
+import org.eclipse.xtext.ide.labels.IImageDescriptionProvider
+import org.eclipse.xtext.web.example.statemachine.ide.StatemachineImageDescriptionProvider
 
 @Accessors
 @FinalFieldsConstructor
@@ -57,4 +59,7 @@ class StatemachineWebModule extends AbstractGenericModule {
 			binder.bind(IResourceBaseProvider).toInstance(resourceBaseProvider)
 	}
 
+	def Class<? extends IImageDescriptionProvider> bindIImageDescriptionProvider() {
+		StatemachineImageDescriptionProvider
+	}
 }

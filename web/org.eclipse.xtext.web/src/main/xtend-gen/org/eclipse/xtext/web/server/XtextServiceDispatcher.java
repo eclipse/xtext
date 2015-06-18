@@ -661,6 +661,9 @@ public class XtextServiceDispatcher {
             }
           };
           it.service = _function;
+          Collection<String> _parameterKeys = request.getParameterKeys();
+          boolean _contains = _parameterKeys.contains("fullText");
+          it.hasTextInput = _contains;
         }
       };
       _xblockexpression = ObjectExtensions.<XtextServiceDispatcher.ServiceDescriptor>operator_doubleArrow(_serviceDescriptor, _function);
