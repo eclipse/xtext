@@ -34,16 +34,58 @@ import org.eclipse.xtext.web.server.validation.ValidationService
 
 import static org.eclipse.xtext.web.server.InvalidRequestException.Type.*
 
+/**
+ * The entry class for Xtext service invocations. Use {@link #getService(IRequestData, ISessionStore)}
+ * to obtain a {@link ServiceDescriptor} for a client request. The service descriptor has some metadata
+ * that may influence the message format expected for the request, and may lead to a rejection of the
+ * request.
+ * 
+ * <p> A typical usage can look like this:</p>
+ * <pre>
+ * val serviceDispatcher = injector.getInstance(XtextServiceDispatcher)
+ * val service = serviceDispatcher.getService(requestData, sessionStore)
+ * // Check the service metadata and permissions to invoke the service
+ * ...
+ * val result = service.service.apply()
+ * // Serialize and send the result back to the client
+ * ...
+ * </pre>
+ */
 @Singleton
 class XtextServiceDispatcher {
 	
-	@Accessors
+	/**
+	 * Service metadata, including a function for actually invoking the service.
+	 */
+	@Accessors(PUBLIC_GETTER, PROTECTED_SETTER)
 	@ToString
 	static class ServiceDescriptor {
+		
+		/**
+		 * The service type according to the 'requestType' parameter.
+		 */
 		String type
+		
+		/**
+		 * The function for invoking the service.
+		 */
 		private ()=>IServiceResult service
+		
+		/**
+		 * Whether the service has any side effects apart from initializing data in the session store.
+		 */
 		boolean hasSideEffects
+		
+		/**
+		 * Whether any text parts of the document have been sent with the request. Requests that
+		 * contain text parts may be required to be transmitted with a different format.
+		 */
 		boolean hasTextInput
+		
+		/**
+		 * Whether one of the preconditions of the service does not match, e.g. because it is in
+		 * conflict with another request.
+		 */
 		boolean hasConflict
 	}
 	
@@ -61,6 +103,9 @@ class XtextServiceDispatcher {
 	@Inject IResourceFactory resourceFactory
 	@Inject OperationCanceledManager operationCanceledManager
 	
+	/**
+	 * Get the service descriptor for the given request.
+	 */
 	def ServiceDescriptor getService(IRequestData request, ISessionStore sessionStore)
 			throws InvalidRequestException {
 		val requestType = 
@@ -102,7 +147,11 @@ class XtextServiceDispatcher {
 		}
 	}
 	
-	def ServiceDescriptor createServiceDescriptor(String requestType, IRequestData request, ISessionStore sessionStore) {
+	/**
+	 * Do the actual dispatching by delegating to a service descriptor creation method depending on the request type.
+	 * Override this method if you want to add more services to the dispatcher.
+	 */
+	protected def ServiceDescriptor createServiceDescriptor(String requestType, IRequestData request, ISessionStore sessionStore) {
 		switch requestType {
 			case 'load':
 				getLoadResourceService(false, request, sessionStore)
@@ -287,6 +336,11 @@ class XtextServiceDispatcher {
 		]
 	}
 	
+	/**
+	 * Retrieve the document access for the given request. If the 'fullText' parameter is given,
+	 * a new document containing that text is created. Otherwise the 'resource' parameter is used
+	 * to load a resource and put it into the session store.
+	 */
 	protected def getDocumentAccess(IRequestData request, ISessionStore sessionStore)
 			throws InvalidRequestException {
 		var XtextWebDocument document
@@ -302,6 +356,9 @@ class XtextServiceDispatcher {
 		return new XtextWebDocumentAccess(document, request.getParameter('requiredStateId'))
 	}
 	
+	/**
+	 * Create a new document containing the given text.
+	 */
 	protected def getFullTextDocument(String fullText, String resourceId, ISessionStore sessionStore) {
 		val resourceSet = resourceSetProvider.get(resourceId)
 		val uri = URI.createURI(resourceId ?: 'fullText.' + fileExtensionProvider.primaryFileExtension)
@@ -315,6 +372,11 @@ class XtextServiceDispatcher {
 		return document
 	}
 	
+	/**
+	 * Obtain a document from the session store, and if it is not present there, ask the
+	 * {@link IServerResourceHandler} to provide it. In case that resource handler fails
+	 * to provide the document, the {@code alternativeDocumentProvider} is invoked instead.
+	 */
 	protected def getResourceDocument(String resourceId, ISessionStore sessionStore,
 			Provider<XtextWebDocument> alternativeDocumentProvider) {
 		return sessionStore.get(XtextWebDocument -> resourceId, [
@@ -326,6 +388,11 @@ class XtextServiceDispatcher {
 		])
 	}
 	
+	/**
+	 * Read an integer-valued parameter. If the parameter is not present, the {@code defaultValue}
+	 * is returned. If that one is not present either (i.e. it is {@code Optional.absent()}), an
+	 * {@link InvalidRequestException} is thrown.
+	 */
 	protected def getInt(IRequestData request, String key, Optional<Integer> defaultValue)
 			throws InvalidRequestException {
 		val stringValue = request.getParameter(key)
@@ -342,6 +409,11 @@ class XtextServiceDispatcher {
 		}
 	}
 	
+	/**
+	 * Read a Boolean-valued parameter. If the parameter is not present, the {@code defaultValue}
+	 * is returned. If that one is not present either (i.e. it is {@code Optional.absent()}), an
+	 * {@link InvalidRequestException} is thrown.
+	 */
 	protected def getBoolean(IRequestData request, String key, Optional<Boolean> defaultValue)
 			throws InvalidRequestException {
 		val stringValue = request.getParameter(key)

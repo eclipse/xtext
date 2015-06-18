@@ -23,6 +23,23 @@ import org.eclipse.xtext.web.server.XtextServiceDispatcher
 
 import static org.eclipse.xtext.web.server.InvalidRequestException.Type.*
 
+/**
+ * An HTTP servlet for publishing the Xtext services. Include this into your web server by creating
+ * a subclass that executes the standalone setups of your languages in its {@link #init()} method:
+ * 
+ * <pre>
+ * &#64;WebServlet(name = "Xtext Services", urlPatterns = "/xtext-service/*")
+ * class MyXtextServlet extends XtextServlet {
+ *     override init() {
+ *         super.init();
+ *         MyDslWebSetup.doSetup();
+ *     }
+ * }
+ * </pre>
+ * 
+ * Use the {@code WebServlet} annotation to register your servlet. The default URL pattern for
+ * Xtext services is {@code "/xtext-service/*"}.
+ */
 class XtextServlet extends HttpServlet {
 	
 	val LOG = Logger.getLogger(class)
@@ -76,15 +93,12 @@ class XtextServlet extends HttpServlet {
 		}
 	}
 	
-	protected def doService(XtextServiceDispatcher.ServiceDescriptor service, HttpServletResponse response) {
-		val result = service.service.apply()
-		response.setStatus(HttpServletResponse.SC_OK)
-		response.setContentType("text/x-json;charset=UTF-8")
-		response.setHeader("Cache-Control", "no-cache")
-		gson.toJson(result, response.writer)
-	}
-	
-	protected def getService(HttpServletRequest request) {
+	/**
+	 * Retrieve the service metadata for the given request. This involves resolving the Guice
+	 * injector for the respective language, querying the {@link XtextServiceDispatcher}, and
+	 * checking the permission to invoke the service.
+	 */
+	protected def getService(HttpServletRequest request) throws InvalidRequestException {
 		val sessionStore = new HttpServletSessionStore(request.session)
 		val requestData = new HttpServletRequestData(request)
 		val injector = getInjector(requestData)
@@ -94,10 +108,30 @@ class XtextServlet extends HttpServlet {
 		return service
 	}
 	
-	protected def void checkPermission(HttpServletRequest request, XtextServiceDispatcher.ServiceDescriptor service) {
-		// Subclasses may throw InvalidRequestException(PERMISSION_DENIED, '...')
+	/**
+	 * Invoke the service function of the given service descriptor and write its result to the
+	 * servlet response in Json format.
+	 */
+	protected def doService(XtextServiceDispatcher.ServiceDescriptor service, HttpServletResponse response) {
+		val result = service.service.apply()
+		response.setStatus(HttpServletResponse.SC_OK)
+		response.setContentType("text/x-json;charset=UTF-8")
+		response.setHeader("Cache-Control", "no-cache")
+		gson.toJson(result, response.writer)
 	}
 	
+	/**
+	 * Check whether it is allowed to invoke the given service.
+	 * @throws InvalidRequestException with type {@code PERMISSION_DENIED} if permission is denied
+	 */
+	protected def void checkPermission(HttpServletRequest request, XtextServiceDispatcher.ServiceDescriptor service)
+			throws InvalidRequestException {
+		// The default implementation allows all services
+	}
+	
+	/**
+	 * Resolve the Guice injector for the language associated with the given request.
+	 */
 	protected def getInjector(IRequestData requestData) throws InvalidRequestException {
 		var IResourceServiceProvider resourceServiceProvider
 		

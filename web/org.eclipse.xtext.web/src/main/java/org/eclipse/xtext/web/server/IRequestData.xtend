@@ -9,16 +9,38 @@ package org.eclipse.xtext.web.server
 
 import java.util.Collection
 
+/**
+ * Provides the parameters and meta data of a service request.
+ */
 interface IRequestData {
 	
-	public static val REQUEST_TYPE = 'requestType'
+	/**
+	 * Key for the request type property, which determines the actual service to be invoked.
+	 * This property can be given either as a parameter or as part of the metadata of a request.
+	 */
+	val REQUEST_TYPE = 'requestType'
 	
+	/**
+	 * The available keys that can be used as arguments to {@link #getParameter(String)}.
+	 */
 	def Collection<String> getParameterKeys()
 	
+	/**
+	 * Returns the request parameter for the given key.
+	 */
 	def String getParameter(String key)
 	
+	/**
+	 * The available keys that can be used as arguments to {@link #getMetadata(String)}.
+	 * The returned collection contains all keys that are supported by this implementation,
+	 * but the actual values for some of these keys may be {@code null} because it might
+	 * be too expensive to determine the non-null metadata upfront.
+	 */
 	def Collection<String> getMetadataKeys()
 	
+	/**
+	 * Returns the request metadata for the given key.
+	 */
 	def String getMetadata(String key)
 	
 }
