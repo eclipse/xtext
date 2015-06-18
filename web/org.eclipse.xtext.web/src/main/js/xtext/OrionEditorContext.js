@@ -57,7 +57,7 @@ define(function() {
 		},
 		
 		getText : function(start, end) {
-			return this._editor.getTextView().getText(start, end);
+			return this._editor.getText(start, end);
 		},
 		
 		isDirty : function() {
@@ -85,8 +85,7 @@ define(function() {
 		},
 		
 		setText : function(text, start, end) {
-			this._editor.getTextView().setText(text, start, end);
-			var fullText = this.getText();
+			this._editor.setText(text, start, end);
 		},
 		
 		showMarkers : function(entries) {
