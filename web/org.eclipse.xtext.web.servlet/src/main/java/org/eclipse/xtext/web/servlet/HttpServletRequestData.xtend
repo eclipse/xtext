@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletRequest
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.web.server.IRequestData
 
+/**
+ * Provides the parameters and metadata of an {@link HttpServletRequest}.
+ */
 class HttpServletRequestData implements IRequestData {
 	
 	val HttpServletRequest request

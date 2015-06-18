@@ -19,7 +19,6 @@ define(["jquery"], function(jQuery) {
 			} else {
 				this._requestUrl = serverUrl + "/" + requestType + "?resource=" + encodeURIComponent(resourceId);
 			}
-			this._recursionCount = 0;
 		},
 		
 		setUpdateService : function(updateService) {
@@ -29,6 +28,7 @@ define(["jquery"], function(jQuery) {
 		sendRequest : function(editorContext, settings) {
 			var self = this;
 			editorContext.getClientServiceState()[self._requestType] = "started";
+			
 			var success = settings.success;
 			settings.success = function(result) {
 				var accepted = true;
@@ -46,6 +46,7 @@ define(["jquery"], function(jQuery) {
 					}
 				}
 			};
+			
 			var error = settings.error;
 			settings.error = function(xhr, textStatus, errorThrown) {
 				var resolved = false;
@@ -57,21 +58,31 @@ define(["jquery"], function(jQuery) {
 					self.reportError(editorContext, textStatus, errorThrown);
 				}
 			};
+			
 			var complete = settings.complete;
 			settings.complete = function(xhr, textStatus) {
 				if (jQuery.isFunction(complete)) {
 					complete(xhr, textStatus);
 				}
-				self._recursionCount = 0;
+				self._recursionCount = undefined;
 			};
+
+			if (self._resourceId && settings.data)
+				settings.data.resource = self._resourceId;
 			settings.async = true;
 			settings.dataType = "json";
 			jQuery.ajax(this._requestUrl, settings);
 		},
 		
 		increaseRecursionCount : function(editorContext) {
-			if (this._recursionCount++ >= 10) {
+			if (this._recursionCount === undefined)
+				this._recursionCount = 1;
+			else
+				this._recursionCount++;
+			
+			if (this._recursionCount >= 10) {
 				this.reportError(editorContext, "warning", "Xtext service request failed after 10 attempts.");
+				this._recursionCount = undefined;
 				return false;
 			}
 			return true;

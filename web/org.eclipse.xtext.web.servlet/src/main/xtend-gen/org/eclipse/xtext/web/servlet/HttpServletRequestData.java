@@ -19,6 +19,9 @@ import org.eclipse.xtext.web.server.IRequestData;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pure;
 
+/**
+ * Provides the parameters and metadata of an {@link HttpServletRequest}.
+ */
 @SuppressWarnings("all")
 public class HttpServletRequestData implements IRequestData {
   private final HttpServletRequest request;

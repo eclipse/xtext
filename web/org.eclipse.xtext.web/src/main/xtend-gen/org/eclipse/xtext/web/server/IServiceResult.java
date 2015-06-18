@@ -7,6 +7,10 @@
  */
 package org.eclipse.xtext.web.server;
 
+/**
+ * Marker interface for objects that can be converted to the <a href="http://json.org">Json</a>
+ * format for sending service results to the client.
+ */
 @SuppressWarnings("all")
 public interface IServiceResult {
 }

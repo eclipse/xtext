@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.ToString;
 import org.eclipse.xtext.resource.FileExtensionProvider;
@@ -54,20 +55,57 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
+/**
+ * The entry class for Xtext service invocations. Use {@link #getService(IRequestData, ISessionStore)}
+ * to obtain a {@link ServiceDescriptor} for a client request. The service descriptor has some metadata
+ * that may influence the message format expected for the request, and may lead to a rejection of the
+ * request.
+ * 
+ * <p> A typical usage can look like this:</p>
+ * <pre>
+ * val serviceDispatcher = injector.getInstance(XtextServiceDispatcher)
+ * val service = serviceDispatcher.getService(requestData, sessionStore)
+ * // Check the service metadata and permissions to invoke the service
+ * ...
+ * val result = service.service.apply()
+ * // Serialize and send the result back to the client
+ * ...
+ * </pre>
+ */
 @Singleton
 @SuppressWarnings("all")
 public class XtextServiceDispatcher {
-  @Accessors
+  /**
+   * Service metadata, including a function for actually invoking the service.
+   */
+  @Accessors({ AccessorType.PUBLIC_GETTER, AccessorType.PROTECTED_SETTER })
   @ToString
   public static class ServiceDescriptor {
+    /**
+     * The service type according to the 'requestType' parameter.
+     */
     private String type;
     
+    /**
+     * The function for invoking the service.
+     */
     private Function0<? extends IServiceResult> service;
     
+    /**
+     * Whether the service has any side effects apart from initializing data in the session store.
+     */
     private boolean hasSideEffects;
     
+    /**
+     * Whether any text parts of the document have been sent with the request. Requests that
+     * contain text parts may be required to be transmitted with a different format.
+     */
     private boolean hasTextInput;
     
+    /**
+     * Whether one of the preconditions of the service does not match, e.g. because it is in
+     * conflict with another request.
+     */
     private boolean hasConflict;
     
     @Pure
@@ -75,7 +113,7 @@ public class XtextServiceDispatcher {
       return this.type;
     }
     
-    public void setType(final String type) {
+    protected void setType(final String type) {
       this.type = type;
     }
     
@@ -84,7 +122,7 @@ public class XtextServiceDispatcher {
       return this.service;
     }
     
-    public void setService(final Function0<? extends IServiceResult> service) {
+    protected void setService(final Function0<? extends IServiceResult> service) {
       this.service = service;
     }
     
@@ -93,7 +131,7 @@ public class XtextServiceDispatcher {
       return this.hasSideEffects;
     }
     
-    public void setHasSideEffects(final boolean hasSideEffects) {
+    protected void setHasSideEffects(final boolean hasSideEffects) {
       this.hasSideEffects = hasSideEffects;
     }
     
@@ -102,7 +140,7 @@ public class XtextServiceDispatcher {
       return this.hasTextInput;
     }
     
-    public void setHasTextInput(final boolean hasTextInput) {
+    protected void setHasTextInput(final boolean hasTextInput) {
       this.hasTextInput = hasTextInput;
     }
     
@@ -111,7 +149,7 @@ public class XtextServiceDispatcher {
       return this.hasConflict;
     }
     
-    public void setHasConflict(final boolean hasConflict) {
+    protected void setHasConflict(final boolean hasConflict) {
       this.hasConflict = hasConflict;
     }
     
@@ -163,6 +201,9 @@ public class XtextServiceDispatcher {
   @Inject
   private OperationCanceledManager operationCanceledManager;
   
+  /**
+   * Get the service descriptor for the given request.
+   */
   public XtextServiceDispatcher.ServiceDescriptor getService(final IRequestData request, final ISessionStore sessionStore) throws InvalidRequestException {
     XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
     {
@@ -258,7 +299,11 @@ public class XtextServiceDispatcher {
     return _xblockexpression;
   }
   
-  public XtextServiceDispatcher.ServiceDescriptor createServiceDescriptor(final String requestType, final IRequestData request, final ISessionStore sessionStore) {
+  /**
+   * Do the actual dispatching by delegating to a service descriptor creation method depending on the request type.
+   * Override this method if you want to add more services to the dispatcher.
+   */
+  protected XtextServiceDispatcher.ServiceDescriptor createServiceDescriptor(final String requestType, final IRequestData request, final ISessionStore sessionStore) {
     try {
       XtextServiceDispatcher.ServiceDescriptor _switchResult = null;
       boolean _matched = false;
@@ -671,6 +716,11 @@ public class XtextServiceDispatcher {
     return _xblockexpression;
   }
   
+  /**
+   * Retrieve the document access for the given request. If the 'fullText' parameter is given,
+   * a new document containing that text is created. Otherwise the 'resource' parameter is used
+   * to load a resource and put it into the session store.
+   */
   protected XtextWebDocumentAccess getDocumentAccess(final IRequestData request, final ISessionStore sessionStore) throws InvalidRequestException {
     XtextWebDocument document = null;
     Collection<String> _parameterKeys = request.getParameterKeys();
@@ -704,6 +754,9 @@ public class XtextServiceDispatcher {
     return new XtextWebDocumentAccess(document, _parameter_2);
   }
   
+  /**
+   * Create a new document containing the given text.
+   */
   protected XtextWebDocument getFullTextDocument(final String fullText, final String resourceId, final ISessionStore sessionStore) {
     try {
       final ResourceSet resourceSet = this.resourceSetProvider.get(resourceId);
@@ -734,6 +787,11 @@ public class XtextServiceDispatcher {
     }
   }
   
+  /**
+   * Obtain a document from the session store, and if it is not present there, ask the
+   * {@link IServerResourceHandler} to provide it. In case that resource handler fails
+   * to provide the document, the {@code alternativeDocumentProvider} is invoked instead.
+   */
   protected XtextWebDocument getResourceDocument(final String resourceId, final ISessionStore sessionStore, final Provider<XtextWebDocument> alternativeDocumentProvider) {
     Pair<Class<XtextWebDocument>, String> _mappedTo = Pair.<Class<XtextWebDocument>, String>of(XtextWebDocument.class, resourceId);
     final Function0<XtextWebDocument> _function = new Function0<XtextWebDocument>() {
@@ -754,6 +812,11 @@ public class XtextServiceDispatcher {
     return sessionStore.<XtextWebDocument>get(_mappedTo, _function);
   }
   
+  /**
+   * Read an integer-valued parameter. If the parameter is not present, the {@code defaultValue}
+   * is returned. If that one is not present either (i.e. it is {@code Optional.absent()}), an
+   * {@link InvalidRequestException} is thrown.
+   */
   protected int getInt(final IRequestData request, final String key, final Optional<Integer> defaultValue) throws InvalidRequestException {
     final String stringValue = request.getParameter(key);
     if ((stringValue == null)) {
@@ -777,6 +840,11 @@ public class XtextServiceDispatcher {
     }
   }
   
+  /**
+   * Read a Boolean-valued parameter. If the parameter is not present, the {@code defaultValue}
+   * is returned. If that one is not present either (i.e. it is {@code Optional.absent()}), an
+   * {@link InvalidRequestException} is thrown.
+   */
   protected boolean getBoolean(final IRequestData request, final String key, final Optional<Boolean> defaultValue) throws InvalidRequestException {
     final String stringValue = request.getParameter(key);
     if ((stringValue == null)) {
