@@ -11,10 +11,64 @@ import com.google.common.io.CharStreams
 import java.io.InputStreamReader
 import org.eclipse.xtend.idea.LightXtendTest
 import org.junit.ComparisonFailure
+import com.intellij.openapi.application.ApplicationManager
 
 /**
  */
 class IdeaIntegrationTest extends LightXtendTest {
+	
+	def void testManualDeletionOfGeneratedSourcesTriggersRebuild() {
+		myFixture.addFileToProject('otherPackage/Foo.xtend', '''
+			package otherPackage
+			class Foo {
+			}
+		''')
+		val file = myFixture.findFileInTempDir('src-gen/otherPackage/Foo.java')
+		assertTrue(file.exists)
+		ApplicationManager.application.runWriteAction [
+			file.delete(null)
+		]
+		// should be regenerated immediately
+		val regenerated = myFixture.findFileInTempDir('src-gen/otherPackage/Foo.java')
+		assertTrue(regenerated.exists)
+	}
+	
+	def void testJavaDeletionTriggersError() {
+		val xtendFile = myFixture.addFileToProject('otherPackage/Foo.xtend', '''
+			package otherPackage
+			
+			import mypackage.Bar
+			
+			class Foo {
+			
+				def void callToBar(Bar bar) {
+					bar.doStuff()
+				}
+			
+			}
+		''')
+		myFixture.addFileToProject('myPackage/Bar.java', '''
+			package mypackage;
+			
+			public class Bar {
+			
+				public void doStuff() {
+				}
+			
+			}
+		''')
+		myFixture.testHighlighting(true, true, true, xtendFile.virtualFile)
+		ApplicationManager.application.runWriteAction[
+			val javaFile = myFixture.findFileInTempDir('myPackage/Bar.java')
+			javaFile.delete(null)
+		]
+		try {
+			myFixture.testHighlighting(true, true, true, xtendFile.virtualFile)
+			fail("expecting errors")
+		} catch (ComparisonFailure e) {
+			// expected		
+		}
+	}
 	
 	def void testJavaChangeTriggersError() {
 		val xtendFile = myFixture.addFileToProject('otherPackage/Foo.xtend', '''
