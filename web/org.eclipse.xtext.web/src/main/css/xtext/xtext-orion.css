@@ -8,3 +8,23 @@
 	color: #000;
 	padding-right: 12px;
 }
+
+.default-icon {
+	background-image: url('/images/default-icon.gif');
+	background-repeat: no-repeat;
+}
+
+.error-icon {
+	background-image: url('/images/error_co.gif');
+	background-repeat: no-repeat;
+}
+
+.warning-icon {
+	background-image: url('/images/warning_co.gif');
+	background-repeat: no-repeat;
+}
+
+.hover .element-name {
+	padding-left: 16px;
+	font-weight: bold;
+}

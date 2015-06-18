@@ -30,8 +30,10 @@ define(["xtext/services/AbstractXtextService", "jquery"], function(AbstractXtext
 			type : httpMethod,
 			data : serverData,
 			success : function(result) {
-				if (!result.conflict) 
+				if (result && !result.conflict) 
 					deferred.resolve(editorContext.translateHoverInfo(result));
+				else
+					deferred.resolve(null);
 			}
 		});
 		var promise = deferred.promise();
