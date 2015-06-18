@@ -11,7 +11,7 @@ import java.util.Collection
 
 interface IRequestData {
 	
-	public static val METADATA_REQUEST_TYPE = 'requestType'
+	public static val REQUEST_TYPE = 'requestType'
 	
 	def Collection<String> getParameterKeys()
 	

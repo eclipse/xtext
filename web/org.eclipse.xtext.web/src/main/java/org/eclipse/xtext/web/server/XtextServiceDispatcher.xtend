@@ -63,7 +63,14 @@ class XtextServiceDispatcher {
 	
 	def ServiceDescriptor getService(IRequestData request, ISessionStore sessionStore)
 			throws InvalidRequestException {
-		val requestType = request.getMetadata(IRequestData.METADATA_REQUEST_TYPE) ?: ''
+		val requestType = 
+			if (request.parameterKeys.contains(IRequestData.REQUEST_TYPE))
+				request.getParameter(IRequestData.REQUEST_TYPE)
+			else
+				request.getMetadata(IRequestData.REQUEST_TYPE)
+		if (requestType === null)
+			throw new InvalidRequestException(INVALID_PARAMETERS, 'The parameter \'requestType\' is required.')
+		
 		if (LOG.traceEnabled) {
 			val stringParams = request.parameterKeys.sort.join(': ', ', ', '', [ key |
 				val value = request.getParameter(key)

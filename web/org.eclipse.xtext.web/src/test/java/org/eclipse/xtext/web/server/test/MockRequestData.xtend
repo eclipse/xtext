@@ -28,12 +28,12 @@ class MockRequestData implements IRequestData {
 	}
 	
 	override getMetadataKeys() {
-		#[IRequestData.METADATA_REQUEST_TYPE]
+		#[IRequestData.REQUEST_TYPE]
 	}
 	
 	override getMetadata(String key) {
 		switch key {
-			case IRequestData.METADATA_REQUEST_TYPE: requestType
+			case IRequestData.REQUEST_TYPE: requestType
 		}
 	}
 	
