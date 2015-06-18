@@ -7,11 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.idea;
 
+import org.eclipse.xtend.core.idea.macro.IdeaFileSystemSupport;
 import org.eclipse.xtend.core.idea.macro.IdeaProcessorProvider;
 import org.eclipse.xtend.core.idea.presentation.XtendItemPresentationProvider;
 import org.eclipse.xtend.core.idea.structureview.XtendStructureViewBuilder;
 import org.eclipse.xtend.core.idea.validation.XtendIdeaValidator;
 import org.eclipse.xtend.core.linking.Linker;
+import org.eclipse.xtend.core.macro.AbstractFileSystemSupport;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.ide.common.contentassist.antlr.DisabledInternalLexer;
 import org.eclipse.xtend.ide.common.contentassist.antlr.FlexerBasedContentAssistContextFactory;
@@ -29,8 +31,6 @@ import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.parser.antlr.LexerProvider;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.service.SingletonBinding;
-import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
-import org.eclipse.xtext.xbase.idea.filesystem.IdeaFileSystemSupport;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;

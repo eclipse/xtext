@@ -5,22 +5,22 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.ui.tests.file
+package org.eclipse.xtend.ide.tests.macros
 
 import java.io.File
 import java.io.FileInputStream
+import java.util.Set
 import org.eclipse.core.internal.resources.ProjectDescription
 import org.eclipse.core.resources.ResourcesPlugin
+import org.eclipse.xtend.core.tests.macro.JavaIoFileSystemTest
+import org.eclipse.xtend.ide.macro.EclipseFileSystemSupportImpl
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.parser.IEncodingProvider
-import org.eclipse.xtext.xbase.tests.file.JavaIoFileSystemTest
-import org.eclipse.xtext.xbase.ui.file.EclipseFileSystemSupportImpl
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
 import static org.junit.Assert.*
-import org.junit.After
-import java.util.Set
 
 /**
  * @author Sven Efftinge - Initial contribution and API

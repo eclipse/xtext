@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.file
+package org.eclipse.xtend.core.macro
 
 import com.google.common.io.ByteStreams
 import com.google.inject.Inject
@@ -135,7 +135,7 @@ class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
 	}
 	
 	override getPath(Resource res) {
-		val uri = res.resourceSet.URIConverter.normalize(res.URI)
+		val uri = res.resourceSet.getURIConverter.normalize(res.getURI)
 		if (uri.file) {
 			val workspacePathAsFile = new File(projectInformationProvider.getWorkspaceConfig(res).path.toFileString)
 			val absoluteFilePathAsFile = new File(uri.toFileString)

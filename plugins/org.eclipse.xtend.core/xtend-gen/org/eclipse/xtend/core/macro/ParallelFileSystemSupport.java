@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.xbase.file;
+package org.eclipse.xtend.core.macro;
 
 import java.io.InputStream;
 import org.eclipse.emf.common.util.URI;

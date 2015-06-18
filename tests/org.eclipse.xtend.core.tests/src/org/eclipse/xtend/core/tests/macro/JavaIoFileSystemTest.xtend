@@ -5,16 +5,16 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.tests.file
+package org.eclipse.xtend.core.tests.macro
 
 import java.io.File
 import java.io.FileInputStream
+import org.eclipse.xtend.core.macro.JavaIOFileSystemSupport
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.junit4.TemporaryFolder
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.workspace.FileWorkspaceConfig
-import org.eclipse.xtext.xbase.file.JavaIOFileSystemSupport
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

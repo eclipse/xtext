@@ -5,8 +5,9 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.idea.filesystem
+package org.eclipse.xtend.core.idea.macro
 
+import com.google.common.base.Joiner
 import com.google.common.io.ByteStreams
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.module.ModuleManager
@@ -18,19 +19,18 @@ import com.intellij.openapi.vfs.VirtualFileManager
 import java.io.InputStream
 import java.net.URI
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtend.core.macro.AbstractFileSystemSupport
 import org.eclipse.xtend.lib.macro.file.Path
-import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport
 
 import static org.eclipse.xtend.lib.macro.file.Path.*
 
 import static extension com.intellij.openapi.vfs.VfsUtilCore.*
 import static extension org.eclipse.xtext.idea.extensions.RootModelExtensions.*
-import com.google.common.base.Joiner
 
 class IdeaFileSystemSupport extends AbstractFileSystemSupport {
 
 	override getPath(Resource res) {
-		val file = VirtualFileManager.instance.findFileByUrl(res.URI.toString)
+		val file = VirtualFileManager.instance.findFileByUrl(res.getURI.toString)
 		file.toPath
 	}
 

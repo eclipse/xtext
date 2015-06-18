@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.xbase.ui.tests.file;
+package org.eclipse.xtend.ide.tests.macros;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,6 +18,8 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.xtend.core.tests.macro.JavaIoFileSystemTest;
+import org.eclipse.xtend.ide.macro.EclipseFileSystemSupportImpl;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -26,8 +28,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.tests.file.JavaIoFileSystemTest;
-import org.eclipse.xtext.xbase.ui.file.EclipseFileSystemSupportImpl;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

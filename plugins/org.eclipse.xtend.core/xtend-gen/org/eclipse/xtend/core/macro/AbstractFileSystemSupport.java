@@ -1,4 +1,4 @@
-package org.eclipse.xtext.xbase.file;
+package org.eclipse.xtend.core.macro;
 
 import com.google.common.base.Objects;
 import com.google.common.io.CharStreams;

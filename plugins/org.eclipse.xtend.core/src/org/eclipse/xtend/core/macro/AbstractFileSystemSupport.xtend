@@ -1,4 +1,4 @@
-package org.eclipse.xtext.xbase.file
+package org.eclipse.xtend.core.macro
 
 import com.google.common.io.CharStreams
 import com.google.inject.Inject

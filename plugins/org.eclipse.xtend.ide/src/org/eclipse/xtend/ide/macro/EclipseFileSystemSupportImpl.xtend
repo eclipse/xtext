@@ -5,14 +5,15 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.ui.file
+package org.eclipse.xtend.ide.macro
 
 import com.google.common.base.Preconditions
 import com.google.inject.Inject
+import java.io.BufferedInputStream
+import java.io.IOException
 import java.io.InputStream
 import java.net.URI
 import java.util.List
-import org.eclipse.core.filesystem.URIUtil
 import org.eclipse.core.resources.IContainer
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IFolder
@@ -20,11 +21,10 @@ import org.eclipse.core.resources.IProject
 import org.eclipse.core.resources.IWorkspaceRoot
 import org.eclipse.core.runtime.CoreException
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtend.lib.macro.file.Path
-import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport
+import org.eclipse.xtend.core.macro.AbstractFileSystemSupport
 import org.eclipse.xtend.lib.annotations.Accessors
-import java.io.BufferedInputStream
-import java.io.IOException
+import org.eclipse.xtend.lib.macro.file.Path
+import org.eclipse.core.filesystem.URIUtil
 
 /**
  * A FileSystemSupport implementation which maps to the Eclipse Resources API.
@@ -214,10 +214,10 @@ class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
 	}
 	
 	override getPath(Resource res) {
-		if (!res.URI.platform) {
-			throw new IllegalStateException("Expecting platform URI but was : " + res.URI)
+		if (!res.getURI.platform) {
+			throw new IllegalStateException("Expecting platform URI but was : " + res.getURI)
 		}
-		return new Path(res.URI.toPlatformString(true))
+		return new Path(res.getURI.toPlatformString(true))
 	}
 	
 }

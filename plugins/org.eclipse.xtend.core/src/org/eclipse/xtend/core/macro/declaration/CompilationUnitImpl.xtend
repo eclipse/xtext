@@ -28,11 +28,14 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
+import org.eclipse.xtend.core.macro.AbstractFileSystemSupport
 import org.eclipse.xtend.core.macro.ActiveAnnotationContexts
 import org.eclipse.xtend.core.macro.ActiveAnnotationContexts.AnnotationCallback
 import org.eclipse.xtend.core.macro.AnnotationProcessor
 import org.eclipse.xtend.core.macro.CompilationContextImpl
 import org.eclipse.xtend.core.macro.ConstantExpressionsInterpreter
+import org.eclipse.xtend.core.macro.FileLocationsImpl
+import org.eclipse.xtend.core.macro.ParallelFileSystemSupport
 import org.eclipse.xtend.core.validation.IssueCodes
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget
 import org.eclipse.xtend.core.xtend.XtendAnnotationType
@@ -118,9 +121,6 @@ import org.eclipse.xtext.validation.EObjectDiagnosticImpl
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XListLiteral
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
-import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport
-import org.eclipse.xtext.xbase.file.FileLocationsImpl
-import org.eclipse.xtext.xbase.file.ParallelFileSystemSupport
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
