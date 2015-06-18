@@ -102,3 +102,8 @@ h3 {
 #status {
 	display: inline;
 }
+
+.output-icon {
+	background-image: url("images/output.gif");
+	background-repeat: no-repeat;
+}
