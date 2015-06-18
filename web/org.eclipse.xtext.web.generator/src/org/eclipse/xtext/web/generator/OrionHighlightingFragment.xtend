@@ -13,6 +13,7 @@ import java.util.ArrayList
 import java.util.Collection
 import java.util.HashSet
 import java.util.Set
+import org.eclipse.emf.mwe.core.issues.Issues
 import org.eclipse.xpand2.XpandExecutionContext
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.Grammar
@@ -37,23 +38,33 @@ class OrionHighlightingFragment extends Xtend2GeneratorFragment {
 	String javaScriptPath
 	
 	@Accessors
+	String moduleName
+	
+	@Accessors
 	String keywordsFilter = '\\w*'
 	
 	def addEnablePattern(String pattern) {
-		if (suppressedPatterns.contains(pattern))
-			throw new IllegalArgumentException('Cannot enable a suppressed pattern.')
 		enabledPatterns += pattern
 	}
 	
 	def addSuppressPattern(String pattern) {
-		if (enabledPatterns.contains(pattern))
-			throw new IllegalArgumentException('Cannot suppress an enabled pattern.')
 		suppressedPatterns += pattern
+	}
+	
+	override checkConfiguration(Issues issues) {
+		super.checkConfiguration(issues)
+		if (javaScriptPath === null)
+			issues.addError('The property \'javaScriptPath\' must be set.')
+		for (pattern : enabledPatterns.filter[suppressedPatterns.contains(it)]) {
+			issues.addError('The pattern \'' + pattern + '\' cannot be enabled and suppressed.')
+		}
 	}
 	
 	override generate(LanguageConfig config, XpandExecutionContext ctx) {
 		langId = config.getFileExtensions(config.grammar).head
 		grammar = config.grammar
+		if (moduleName.nullOrEmpty)
+			moduleName = 'xtext/' + langId + '-syntax'
 		super.generate(config, ctx)
 	}
 	
@@ -100,7 +111,7 @@ class OrionHighlightingFragment extends Xtend2GeneratorFragment {
 		val patterns = createPatterns(keywords, filteredKeywords)
 		
 		'''
-		define("xtext/«langId»-syntax", ["orion/editor/stylers/lib/syntax"], function(mLib) {
+		define("«moduleName»", ["orion/editor/stylers/lib/syntax"], function(mLib) {
 			var keywords = [«FOR keyword : filteredKeywords.sort SEPARATOR ', '»"«keyword»"«ENDFOR»];
 		
 			var grammars = [];

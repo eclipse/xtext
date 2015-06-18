@@ -19,6 +19,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -33,6 +34,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class OrionHighlightingFragment extends Xtend2GeneratorFragment {
@@ -52,30 +54,35 @@ public class OrionHighlightingFragment extends Xtend2GeneratorFragment {
   private String javaScriptPath;
   
   @Accessors
+  private String moduleName;
+  
+  @Accessors
   private String keywordsFilter = "\\w*";
   
   public boolean addEnablePattern(final String pattern) {
-    boolean _xblockexpression = false;
-    {
-      boolean _contains = this.suppressedPatterns.contains(pattern);
-      if (_contains) {
-        throw new IllegalArgumentException("Cannot enable a suppressed pattern.");
-      }
-      _xblockexpression = this.enabledPatterns.add(pattern);
-    }
-    return _xblockexpression;
+    return this.enabledPatterns.add(pattern);
   }
   
   public boolean addSuppressPattern(final String pattern) {
-    boolean _xblockexpression = false;
-    {
-      boolean _contains = this.enabledPatterns.contains(pattern);
-      if (_contains) {
-        throw new IllegalArgumentException("Cannot suppress an enabled pattern.");
-      }
-      _xblockexpression = this.suppressedPatterns.add(pattern);
+    return this.suppressedPatterns.add(pattern);
+  }
+  
+  @Override
+  public void checkConfiguration(final Issues issues) {
+    super.checkConfiguration(issues);
+    if ((this.javaScriptPath == null)) {
+      issues.addError("The property \'javaScriptPath\' must be set.");
     }
-    return _xblockexpression;
+    final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
+      @Override
+      public Boolean apply(final String it) {
+        return Boolean.valueOf(OrionHighlightingFragment.this.suppressedPatterns.contains(it));
+      }
+    };
+    Iterable<String> _filter = IterableExtensions.<String>filter(this.enabledPatterns, _function);
+    for (final String pattern : _filter) {
+      issues.addError((("The pattern \'" + pattern) + "\' cannot be enabled and suppressed."));
+    }
   }
   
   @Override
@@ -86,6 +93,10 @@ public class OrionHighlightingFragment extends Xtend2GeneratorFragment {
     this.langId = _head;
     Grammar _grammar_1 = config.getGrammar();
     this.grammar = _grammar_1;
+    boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(this.moduleName);
+    if (_isNullOrEmpty) {
+      this.moduleName = (("xtext/" + this.langId) + "-syntax");
+    }
     super.generate(config, ctx);
   }
   
@@ -164,9 +175,9 @@ public class OrionHighlightingFragment extends Xtend2GeneratorFragment {
       final List<String> filteredKeywords = IterableExtensions.<String>toList(_filter);
       final Collection<String> patterns = this.createPatterns(keywords, filteredKeywords);
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("define(\"xtext/");
-      _builder.append(this.langId, "");
-      _builder.append("-syntax\", [\"orion/editor/stylers/lib/syntax\"], function(mLib) {");
+      _builder.append("define(\"");
+      _builder.append(this.moduleName, "");
+      _builder.append("\", [\"orion/editor/stylers/lib/syntax\"], function(mLib) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("var keywords = [");
@@ -502,6 +513,15 @@ public class OrionHighlightingFragment extends Xtend2GeneratorFragment {
   
   public void setJavaScriptPath(final String javaScriptPath) {
     this.javaScriptPath = javaScriptPath;
+  }
+  
+  @Pure
+  public String getModuleName() {
+    return this.moduleName;
+  }
+  
+  public void setModuleName(final String moduleName) {
+    this.moduleName = moduleName;
   }
   
   @Pure

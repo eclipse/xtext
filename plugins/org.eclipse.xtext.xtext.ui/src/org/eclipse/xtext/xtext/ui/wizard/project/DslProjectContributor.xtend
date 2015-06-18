@@ -52,7 +52,7 @@ class DslProjectContributor extends DefaultProjectFactoryContributor {
 				var ideaProjectPath = "../${ideaProjectName}"
 			«ENDIF»
 			«IF projectInfo.createWebProject»
-				var javaScriptPath = "../«projectInfo.webProjectName»/src/main/webapp/xtext"
+				var javaScriptPath = "../«projectInfo.webProjectName»/src/main/webapp"
 			«ENDIF»
 			Workflow {
 			    bean = StandaloneSetup {
@@ -94,7 +94,7 @@ class DslProjectContributor extends DefaultProjectFactoryContributor {
 				«ENDIF»
 				«IF projectInfo.createWebProject»
 					component = DirectoryCleaner {
-						directory = "${javaScriptPath}/generated"
+						directory = "${javaScriptPath}/xtext/generated"
 					}
 				«ENDIF»
 				
@@ -204,7 +204,8 @@ class DslProjectContributor extends DefaultProjectFactoryContributor {
 						«IF projectInfo.createWebProject»
 							// JavaScript-based syntax highlighting
 							fragment = org.eclipse.xtext.web.generator.OrionHighlightingFragment auto-inject {
-								javaScriptPath = "${javaScriptPath}/generated"
+								javaScriptPath = "${javaScriptPath}/xtext/generated"
+								moduleName = "xtext/generated/${fileExtensions}-syntax"
 							}
 						«ENDIF»
 					}

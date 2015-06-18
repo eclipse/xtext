@@ -134,7 +134,7 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
         _builder.append("var javaScriptPath = \"../");
         String _webProjectName = this.projectInfo.getWebProjectName();
         _builder.append(_webProjectName, "");
-        _builder.append("/src/main/webapp/xtext\"");
+        _builder.append("/src/main/webapp\"");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -261,7 +261,7 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("\t");
-        _builder.append("directory = \"${javaScriptPath}/generated\"");
+        _builder.append("directory = \"${javaScriptPath}/xtext/generated\"");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("}");
@@ -568,7 +568,11 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("\t");
-        _builder.append("javaScriptPath = \"${javaScriptPath}/generated\"");
+        _builder.append("javaScriptPath = \"${javaScriptPath}/xtext/generated\"");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("\t");
+        _builder.append("moduleName = \"xtext/generated/${fileExtensions}-syntax\"");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("}");
