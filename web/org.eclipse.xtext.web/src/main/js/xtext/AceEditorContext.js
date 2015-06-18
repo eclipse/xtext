@@ -13,9 +13,9 @@ define(["ace/range"], function(mRange) {
 		this._serverState = {};
 		this._serverStateListeners = [];
 		this._clientServiceState = {};
-		this._problemMarkers = [];
 		this._clean = true;
 		this._dirtyStateListeners = [];
+		this._annotations = [];
 	};
 
 	AceEditorContext.prototype = {
@@ -118,26 +118,26 @@ define(["ace/range"], function(mRange) {
 		
 		showMarkers : function(entries) {
 			var session = this._editor.getSession();
-			for (var i = 0; i < this._problemMarkers.length; i++) {
-				var marker = this._problemMarkers[i];
-				session.removeMarker(marker.id);
-				session.removeGutterDecoration(marker.row, "xtext-annotation_" + marker.severity);
+			for (var i = 0; i < this._annotations.length; i++) {
+				var annotation = this._annotations[i];
+				session.removeMarker(annotation.markerId);
 			}
-			this._problemMarkers = [];
+			this._annotations = [];
 			var document = session.getDocument();
 			for (var i = 0; i < entries.length; i++) {
 				var entry = entries[i];
 				var start = document.indexToPosition(entry.startOffset);
 				var end = document.indexToPosition(entry.endOffset);
 				var range = new mRange.Range(start.row, start.column, end.row, end.column);
-				var markerId = session.addMarker(range, "xtext-marker_" + entry.severity, "text");
-				session.addGutterDecoration(start.row, "xtext-annotation_" + entry.severity);
-				this._problemMarkers.push({
-					id: markerId,
+				this._annotations.push({
 					row: start.row,
-					severity: entry.severity
-				});
+					column: start.column,
+					text: entry.description,
+					type: entry.severity,
+					markerId: session.addMarker(range, "xtext-marker_" + entry.severity, "text")
+				})
 			}
+			session.setAnnotations(this._annotations)
 		},
 		
 		translateCompletionProposals : function(entries) {
