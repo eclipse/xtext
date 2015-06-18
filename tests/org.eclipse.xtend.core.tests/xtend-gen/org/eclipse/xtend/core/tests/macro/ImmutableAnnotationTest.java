@@ -15,7 +15,7 @@ import org.junit.Test;
 public class ImmutableAnnotationTest extends AbstractActiveAnnotationTest {
   @Test
   public void defSimpleTest() {
-    this._xtendCompilerTester.setJavaCompilerClassPath(new Class<?>[] { Immutable.class });
+    this._xtendCompilerTester.setJavaCompilerClassPath(new Class[] { Immutable.class });
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import org.eclipse.xtend.core.tests.macro.Immutable");
     _builder.newLine();

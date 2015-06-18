@@ -7,12 +7,21 @@
  */
 package org.eclipse.xtext.xbase.compiler;
 
+import com.google.inject.Inject;
+import java.io.File;
+import java.util.Map;
 import java.util.Set;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.Data;
-import org.eclipse.xtend.lib.macro.file.Path;
-import org.eclipse.xtext.generator.FileSystemSupportBasedFileSystemAccess;
+import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
+import org.eclipse.xtext.workspace.IProjectConfig;
+import org.eclipse.xtext.workspace.IWorkspaceConfig;
+import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
@@ -24,16 +33,19 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
  * @since 2.7
  */
 @SuppressWarnings("all")
-public class RegisteringFileSystemAccess extends FileSystemSupportBasedFileSystemAccess {
+public class RegisteringFileSystemAccess extends JavaIoFileSystemAccess {
+  /**
+   * @noreference This class is not intended to be referenced by clients.
+   */
   @Data
   public static class GeneratedFile {
-    private final Path path;
+    private final String path;
     
     private final String javaClassName;
     
     private final CharSequence contents;
     
-    public GeneratedFile(final Path path, final String javaClassName, final CharSequence contents) {
+    public GeneratedFile(final String path, final String javaClassName, final CharSequence contents) {
       super();
       this.path = path;
       this.javaClassName = javaClassName;
@@ -90,7 +102,7 @@ public class RegisteringFileSystemAccess extends FileSystemSupportBasedFileSyste
     }
     
     @Pure
-    public Path getPath() {
+    public String getPath() {
       return this.path;
     }
     
@@ -105,13 +117,19 @@ public class RegisteringFileSystemAccess extends FileSystemSupportBasedFileSyste
     }
   }
   
+  @Inject
+  private IWorkspaceConfigProvider workspaceConfigProvider;
+  
   @Accessors
   private final Set<RegisteringFileSystemAccess.GeneratedFile> textFiles = CollectionLiterals.<RegisteringFileSystemAccess.GeneratedFile>newHashSet();
+  
+  @Accessors
+  private Object context;
   
   @Override
   public void generateFile(final String fileName, final String outputConfigurationName, final CharSequence contents) {
     super.generateFile(fileName, outputConfigurationName, contents);
-    final Path path = this.getPath(fileName, outputConfigurationName);
+    final String path = this.getPath(fileName, outputConfigurationName);
     String _xifexpression = null;
     boolean _endsWith = fileName.endsWith(".java");
     if (_endsWith) {
@@ -125,8 +143,60 @@ public class RegisteringFileSystemAccess extends FileSystemSupportBasedFileSyste
     this.textFiles.add(_generatedFile);
   }
   
+  protected String getPath(final String fileName, final String outputConfigurationName) {
+    Map<String, String> _pathes = this.getPathes();
+    final String path = _pathes.get(outputConfigurationName);
+    IProjectConfig _project = this.getProject();
+    String _name = _project.getName();
+    String _plus = ("/" + _name);
+    String _plus_1 = (_plus + "/");
+    String _plus_2 = (_plus_1 + path);
+    String _plus_3 = (_plus_2 + "/");
+    return (_plus_3 + fileName);
+  }
+  
+  @Override
+  protected File getFile(final String fileName, final String outputConfigName) {
+    File _xblockexpression = null;
+    {
+      Map<String, String> _pathes = this.getPathes();
+      final String outlet = _pathes.get(outputConfigName);
+      if ((outlet == null)) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("A slot with name \'");
+        _builder.append(outputConfigName, "");
+        _builder.append("\' has not been configured.");
+        throw new IllegalArgumentException(_builder.toString());
+      }
+      IProjectConfig _project = this.getProject();
+      URI _path = _project.getPath();
+      String _fileString = _path.toFileString();
+      _xblockexpression = new File(_fileString, ((outlet + "/") + fileName));
+    }
+    return _xblockexpression;
+  }
+  
+  public IProjectConfig getProject() {
+    IProjectConfig _xifexpression = null;
+    if ((this.context instanceof Resource)) {
+      IWorkspaceConfig _workspaceConfig = this.workspaceConfigProvider.getWorkspaceConfig(((Resource)this.context));
+      Set<? extends IProjectConfig> _projects = _workspaceConfig.getProjects();
+      _xifexpression = IterableExtensions.head(_projects);
+    }
+    return _xifexpression;
+  }
+  
   @Pure
   public Set<RegisteringFileSystemAccess.GeneratedFile> getTextFiles() {
     return this.textFiles;
+  }
+  
+  @Pure
+  public Object getContext() {
+    return this.context;
+  }
+  
+  public void setContext(final Object context) {
+    this.context = context;
   }
 }

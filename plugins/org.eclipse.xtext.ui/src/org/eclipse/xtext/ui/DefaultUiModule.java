@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui;
 
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
@@ -98,6 +99,7 @@ import org.eclipse.xtext.ui.editor.templates.XtextTemplateContextTypeRegistry;
 import org.eclipse.xtext.ui.editor.templates.XtextTemplateStore;
 import org.eclipse.xtext.ui.editor.toggleComments.DefaultSingleLineCommentHelper;
 import org.eclipse.xtext.ui.editor.toggleComments.ISingleLineCommentHelper;
+import org.eclipse.xtext.ui.file.EclipseWorkspaceConfigProvider;
 import org.eclipse.xtext.ui.generator.trace.ExtensibleTraceURIConverter;
 import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
@@ -110,6 +112,7 @@ import org.eclipse.xtext.ui.tasks.TaskMarkerContributor;
 import org.eclipse.xtext.ui.validation.ConfigurableIssueCodesPreferenceStoreInitializer;
 import org.eclipse.xtext.ui.validation.LanguageAwareMarkerTypeProvider;
 import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
+import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -428,4 +431,17 @@ public class DefaultUiModule extends AbstractGenericModule {
 			.to(ConfigurableIssueCodesPreferenceStoreInitializer.class);
 	}
 	
+	/**
+	 * @since 2.9
+	 */
+	public Class<? extends IWorkspaceConfigProvider> bindWorkspaceConfigProvider() {
+		return EclipseWorkspaceConfigProvider.class;
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public org.eclipse.core.resources.IWorkspaceRoot bindIWorkspaceRootToInstance() {
+		return ResourcesPlugin.getWorkspace().getRoot();
+	}
 }

@@ -10,18 +10,16 @@ package org.eclipse.xtext.xbase.resource
 import com.google.inject.Inject
 import java.io.InputStream
 import java.io.OutputStream
-import org.eclipse.xtend.lib.macro.file.FileLocations
 import org.eclipse.xtext.resource.persistence.ResourceStorageFacade
 import org.eclipse.xtext.resource.persistence.StorageAwareResource
-import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport
+import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 class BatchLinkableResourceStorageFacade extends ResourceStorageFacade {
 	
-	@Inject AbstractFileSystemSupport fileSystemSupport
-	@Inject extension FileLocations fileLocations
+	@Inject IWorkspaceConfigProvider workspaceConfigProvider
 	
 	override createResourceStorageLoadable(InputStream in) {
 		return new BatchLinkableResourceStorageLoadable(in, isStoreNodeModel)
@@ -32,10 +30,14 @@ class BatchLinkableResourceStorageFacade extends ResourceStorageFacade {
 	}
 	
 	override protected getSourceContainerURI(StorageAwareResource resource) {
-		val path = fileSystemSupport.getPath(resource)
-		val sourceFolder = path.sourceFolder
+		val workspaceConfig = workspaceConfigProvider.getWorkspaceConfig(resource)
+		val uri = resource.URI
+		val normalizedUri = resource.resourceSet.URIConverter.normalize(uri)
+		val project = workspaceConfig.findProjectContaining(normalizedUri)
+		val sourceFolder = project?.findSourceFolderContaing(normalizedUri)
 		if (sourceFolder != null) {
-			return resource.URI.trimSegments(sourceFolder.relativize(path).segments.size).appendSegment("")
+			val sourceRelativeUri = normalizedUri.deresolve(sourceFolder.path)
+			return uri.trimSegments(sourceRelativeUri.segmentCount - 1).appendSegment("")
 		}
 		return super.getSourceContainerURI(resource)
 	}

@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase;
 
-import org.eclipse.xtend.lib.macro.file.FileLocations;
-import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtext.common.types.DefaultCommonTypesRuntimeModule;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.debug.IStratumBreakpointSupport;
@@ -36,10 +34,6 @@ import org.eclipse.xtext.xbase.compiler.output.TraceAwarePostProcessor;
 import org.eclipse.xtext.xbase.conversion.XbaseValueConverterService;
 import org.eclipse.xtext.xbase.debug.XbaseStratumBreakpointSupport;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
-import org.eclipse.xtext.xbase.file.FileLocationsImpl;
-import org.eclipse.xtext.xbase.file.JavaIOFileSystemSupport;
-import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
-import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
 import org.eclipse.xtext.xbase.interpreter.impl.DefaultEvaluationContext;
@@ -60,7 +54,6 @@ import org.eclipse.xtext.xbase.validation.XbaseSeverityConverter;
 import org.eclipse.xtext.xtype.XtypeFactory;
 
 import com.google.inject.Binder;
-import com.google.inject.Provider;
 import com.google.inject.name.Names;
 
 /**
@@ -187,18 +180,6 @@ public class DefaultXbaseRuntimeModule extends DefaultCommonTypesRuntimeModule {
 	@SuppressWarnings("deprecation")
 	public Class<? extends org.eclipse.xtext.xbase.scoping.featurecalls.StaticImplicitMethodsFeatureForTypeProvider.ExtensionClassNameProvider> bindStaticImplicitMethodsFeatureForTypeProvider$ExtensionClassNameProvider() {
 		return org.eclipse.xtext.xbase.scoping.batch.ImplicitlyImportedTypesAdapter.class;
-	}
-
-	public Class<? extends MutableFileSystemSupport> bindMutableFileSystemSupport() {
-		return JavaIOFileSystemSupport.class;
-	}
-
-	public Class<? extends FileLocations> bindFileLocations() {
-		return FileLocationsImpl.class;
-	}
-
-	public Class<? extends Provider<WorkspaceConfig>> provideWorkspaceConfig() {
-		return RuntimeWorkspaceConfigProvider.class;
 	}
 	
 	public void configureITransientValueService(Binder binder) {
