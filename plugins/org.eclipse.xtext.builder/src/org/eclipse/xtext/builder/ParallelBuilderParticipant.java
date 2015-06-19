@@ -103,6 +103,11 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 			buildContextDelegate.needRebuild();
 		}
 		
+		@Override
+		public boolean isSourceLevelURI(URI uri) {
+			return buildContextDelegate.isSourceLevelURI(uri);
+		}
+		
 	}
 	
 	@Inject private BuildExecutors executors;

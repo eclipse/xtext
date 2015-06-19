@@ -50,18 +50,19 @@ public class TextAttributeProvider implements ITextAttributeProvider, IHighlight
 	}
 
 	private void initialize() {
-		attributes.clear();
 		if (Display.getCurrent() == null) {
 			Display display = SWTUtil.getStandardDisplay();
 			if (display != null) {
 				display.asyncExec(new Runnable() {
 					@Override
 					public void run() {
+						attributes.clear();
 						highlightingConfig.configure(TextAttributeProvider.this);
 					}
 				});
 			}
 		} else {
+			attributes.clear();
 			highlightingConfig.configure(this);
 		}
 	}

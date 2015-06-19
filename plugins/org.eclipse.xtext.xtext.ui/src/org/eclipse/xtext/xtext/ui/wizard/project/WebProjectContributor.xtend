@@ -46,7 +46,7 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 				<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 				<meta http-equiv="Content-Language" content="en-us">
 				<title>Example Web Editor</title>
-				<link rel="stylesheet" type="text/css" href="xtext/«projectInfo.xtextVersion»/xtext.css"/>
+				<link rel="stylesheet" type="text/css" href="xtext/«projectInfo.xtextVersion»/xtext-orion.css"/>
 				<link rel="stylesheet" type="text/css" href="style.css" />
 				<script src="webjars/requirejs/2.1.17/require.min.js"></script>
 				<script type="text/javascript">
@@ -54,11 +54,11 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 						paths: {
 							"text": "webjars/requirejs-text/2.0.10-3/text",
 							"jquery": "webjars/jquery/2.1.4/jquery.min",
-							"xtext/xtext": "xtext/«projectInfo.xtextVersion»/xtext"
+							"xtext/xtext-orion": "xtext/«projectInfo.xtextVersion»/xtext-orion"
 						}
 					});
-					require(["xtext/xtext"], function(xtext) {
-						xtext.createEditor();
+					require(["xtext/xtext-orion"], function(xtext) {
+						xtext.createEditor({syntaxDefinition: "xtext/generated/«projectInfo.fileExtension»-syntax"});
 					});
 				</script>
 			</head>
@@ -69,7 +69,7 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 					<h1>Example «projectInfo.languageNameAbbreviation» Web Editor</h1>
 				</div>
 				<div class="content">
-					<div class="xtext-editor" data-editor-lang="«projectInfo.fileExtension»"></div>
+					<div id="xtext-editor" data-editor-xtext-lang="«projectInfo.fileExtension»"></div>
 				</div>
 			</div>
 			
@@ -124,7 +124,7 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 				width: 640px;
 			}
 			
-			.xtext-editor {
+			#xtext-editor {
 				display: block;
 				position: absolute;
 				top: 0;
@@ -263,6 +263,7 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 			package «projectInfo.basePackage».«WEB»
 			
 			import com.google.inject.Guice
+			import com.google.inject.util.Modules
 			import java.util.concurrent.ExecutorService
 			import java.util.concurrent.Executors
 			import javax.servlet.annotation.WebServlet
@@ -283,7 +284,7 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 						override createInjector() {
 							val runtimeModule = new «projectInfo.languageNameAbbreviation»RuntimeModule as Module
 							val webModule = new «projectInfo.languageNameAbbreviation»WebModule(executorService)
-							return Guice.createInjector(runtimeModule, webModule)
+							return Guice.createInjector(Modules.override(runtimeModule).with(webModule))
 						}
 					}.createInjectorAndDoEMFRegistration
 				}

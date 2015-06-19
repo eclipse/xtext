@@ -12,6 +12,7 @@ import java.util.List;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IResourceDescription;
 
@@ -77,6 +78,12 @@ public interface IXtextBuilderParticipant {
 		 * @return the list of deltas. Never <code>null</code>.
 		 */
 		List<IResourceDescription.Delta> getDeltas();
+		/**
+		 * Returns true if the given uri points to a resource from the workspace rather than from an archive.
+		 * 
+		 * @since 2.9
+		 */
+		boolean isSourceLevelURI(URI uri);
 		/**
 		 * The correctly configured resource set for this run of the incremental project builder. Clients should 
 		 * not assume that the list of resources in the resource set contains anything. However, they are free to
