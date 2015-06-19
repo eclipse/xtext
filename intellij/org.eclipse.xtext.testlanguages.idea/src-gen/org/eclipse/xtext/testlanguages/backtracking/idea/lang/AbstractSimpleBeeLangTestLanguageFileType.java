@@ -2,18 +2,19 @@ package org.eclipse.xtext.testlanguages.backtracking.idea.lang;
 
 import javax.swing.Icon;
 
-import com.intellij.openapi.fileTypes.LanguageFileType;
+import org.eclipse.xtext.idea.Icons;
 import org.jetbrains.annotations.NonNls;
 
-public final class SimpleBeeLangTestLanguageFileType extends LanguageFileType {
+import com.intellij.lang.Language;
+import com.intellij.openapi.fileTypes.LanguageFileType;
 
-	public static final SimpleBeeLangTestLanguageFileType INSTANCE = new SimpleBeeLangTestLanguageFileType();
-	
+public class AbstractSimpleBeeLangTestLanguageFileType extends LanguageFileType {
+
 	@NonNls 
 	public static final String DEFAULT_EXTENSION = "simplebeelangtestlanguage";
 
-	private SimpleBeeLangTestLanguageFileType() {
-		super(SimpleBeeLangTestLanguageLanguage.INSTANCE);
+	protected AbstractSimpleBeeLangTestLanguageFileType(final Language language) {
+		super(language);
 	}
 
 	@Override
@@ -28,7 +29,7 @@ public final class SimpleBeeLangTestLanguageFileType extends LanguageFileType {
 
 	@Override
 	public Icon getIcon() {
-		return null;
+		return Icons.DSL_FILE_TYPE;
 	}
 
 	@Override

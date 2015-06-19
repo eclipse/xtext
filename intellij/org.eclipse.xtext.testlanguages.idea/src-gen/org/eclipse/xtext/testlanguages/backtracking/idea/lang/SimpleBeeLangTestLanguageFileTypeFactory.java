@@ -8,7 +8,7 @@ public class SimpleBeeLangTestLanguageFileTypeFactory extends FileTypeFactory {
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtext.testlanguages.backtracking.idea.lang.SimpleBeeLangTestLanguageFileType.INSTANCE, org.eclipse.xtext.testlanguages.backtracking.idea.lang.SimpleBeeLangTestLanguageFileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtext.testlanguages.backtracking.idea.lang.SimpleBeeLangTestLanguageFileType.INSTANCE, org.eclipse.xtext.testlanguages.backtracking.idea.lang.AbstractSimpleBeeLangTestLanguageFileType.DEFAULT_EXTENSION);
 	}
 
 }

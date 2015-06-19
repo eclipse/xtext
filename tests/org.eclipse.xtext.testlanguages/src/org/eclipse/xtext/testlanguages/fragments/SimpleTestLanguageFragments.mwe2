@@ -13,6 +13,7 @@ var runtimeProjectName = "org.eclipse.xtext.testlanguages"
 var runtimeProjectPath = "../${runtimeProjectName}"
 var ideaProjectName = "org.eclipse.xtext.testlanguages.idea"
 var ideaProjectPath = "../../intellij/${ideaProjectName}"
+var jdkLevel = "JDK60"
 
 var parser = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
   	options = auto-inject {
