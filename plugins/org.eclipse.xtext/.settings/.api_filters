@@ -22,6 +22,29 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src-gen/org/eclipse/xtext/parser/antlr/XtextParser.java" type="org.eclipse.xtext.parser.antlr.XtextParser">
+        <filter id="643842064">
+            <message_arguments>
+                <message_argument value="InternalXtextParser"/>
+                <message_argument value="XtextParser"/>
+                <message_argument value="createParser(XtextTokenStream)"/>
+            </message_arguments>
+        </filter>
+        <filter id="643842064">
+            <message_arguments>
+                <message_argument value="XtextGrammarAccess"/>
+                <message_argument value="XtextParser"/>
+                <message_argument value="getGrammarAccess()"/>
+            </message_arguments>
+        </filter>
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="XtextGrammarAccess"/>
+                <message_argument value="XtextParser"/>
+                <message_argument value="setGrammarAccess(XtextGrammarAccess)"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/GrammarToDot.java" type="org.eclipse.xtext.GrammarToDot">
         <filter id="627060751">
             <message_arguments>
@@ -172,6 +195,22 @@
             <message_arguments>
                 <message_argument value="StorageAwareResource"/>
                 <message_argument value="DerivedStateAwareResource"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/resource/IResourceServiceProviderExtension.java" type="org.eclipse.xtext.resource.IResourceServiceProviderExtension">
+        <filter comment="Renamed isReadOnly to isSource" id="405901410">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.resource.IResourceServiceProviderExtension"/>
+                <message_argument value="isReadOnly(URI)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/resource/impl/DefaultResourceServiceProvider.java" type="org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider">
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider"/>
+                <message_argument value="isReadOnly(URI)"/>
             </message_arguments>
         </filter>
     </resource>
