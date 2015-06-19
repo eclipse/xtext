@@ -75,7 +75,6 @@ public class TraceRegionMerger {
 		}
 	}
 	
-	@SuppressWarnings("null")
 	private void doMergeLeafRegions(int listIdx, int exclusiveEndOffset, int inclusiveEndLine, List<ILocationData> locations) {
 		int i = listIdx;
 		List<AbstractTraceRegion> newRegions = null;

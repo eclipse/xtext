@@ -27,109 +27,88 @@ import org.junit.Test;
 public class ResourcePersistenceTest extends AbstractWebServerTest {
   @Test
   public void testLoadFile() {
-    try {
-      final String resourceContent = "state foo end";
-      final File file = this.createFile(resourceContent);
-      final HashMapSessionStore sessionStore = new HashMapSessionStore();
-      XtextServiceDispatcher _dispatcher = this.getDispatcher();
-      String _name = file.getName();
-      Pair<String, String> _mappedTo = Pair.<String, String>of("resource", _name);
-      final XtextServiceDispatcher.ServiceDescriptor load = _dispatcher.getService("/load", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo)), sessionStore);
-      boolean _isHasSideEffects = load.isHasSideEffects();
-      Assert.assertFalse(_isHasSideEffects);
-      boolean _isHasTextInput = load.isHasTextInput();
-      Assert.assertFalse(_isHasTextInput);
-      Function0<? extends IServiceResult> _service = load.getService();
-      IServiceResult _apply = _service.apply();
-      final ResourceContentResult result = ((ResourceContentResult) _apply);
-      String _fullText = result.getFullText();
-      Assert.assertEquals(resourceContent, _fullText);
-      boolean _isDirty = result.isDirty();
-      Assert.assertFalse(_isDirty);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    final String resourceContent = "state foo end";
+    final File file = this.createFile(resourceContent);
+    String _name = file.getName();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("resource", _name);
+    final XtextServiceDispatcher.ServiceDescriptor load = this.getService("load", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo)));
+    boolean _isHasSideEffects = load.isHasSideEffects();
+    Assert.assertFalse(_isHasSideEffects);
+    boolean _isHasTextInput = load.isHasTextInput();
+    Assert.assertFalse(_isHasTextInput);
+    Function0<? extends IServiceResult> _service = load.getService();
+    IServiceResult _apply = _service.apply();
+    final ResourceContentResult result = ((ResourceContentResult) _apply);
+    String _fullText = result.getFullText();
+    Assert.assertEquals(resourceContent, _fullText);
+    boolean _isDirty = result.isDirty();
+    Assert.assertFalse(_isDirty);
   }
   
   @Test
   public void testLoadDummy() {
-    try {
-      final HashMapSessionStore sessionStore = new HashMapSessionStore();
-      final String resourceContent = "state foo end";
-      XtextServiceDispatcher _dispatcher = this.getDispatcher();
-      Pair<String, String> _mappedTo = Pair.<String, String>of("resource", "dummy.statemachine");
-      Pair<String, String> _mappedTo_1 = Pair.<String, String>of("fullText", resourceContent);
-      XtextServiceDispatcher.ServiceDescriptor update = _dispatcher.getService("/update", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)), sessionStore);
-      Function0<? extends IServiceResult> _service = update.getService();
-      _service.apply();
-      XtextServiceDispatcher _dispatcher_1 = this.getDispatcher();
-      Pair<String, String> _mappedTo_2 = Pair.<String, String>of("resource", "dummy.statemachine");
-      XtextServiceDispatcher.ServiceDescriptor load = _dispatcher_1.getService("/load", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_2)), sessionStore);
-      Function0<? extends IServiceResult> _service_1 = load.getService();
-      IServiceResult _apply = _service_1.apply();
-      ResourceContentResult result = ((ResourceContentResult) _apply);
-      String _fullText = result.getFullText();
-      Assert.assertEquals(resourceContent, _fullText);
-      XtextServiceDispatcher _dispatcher_2 = this.getDispatcher();
-      Pair<String, String> _mappedTo_3 = Pair.<String, String>of("resource", "dummy.statemachine");
-      Pair<String, String> _mappedTo_4 = Pair.<String, String>of("deltaText", "bar");
-      Pair<String, String> _mappedTo_5 = Pair.<String, String>of("deltaOffset", "6");
-      Pair<String, String> _mappedTo_6 = Pair.<String, String>of("deltaReplaceLength", "3");
-      XtextServiceDispatcher.ServiceDescriptor _service_2 = _dispatcher_2.getService("/update", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_3, _mappedTo_4, _mappedTo_5, _mappedTo_6)), sessionStore);
-      update = _service_2;
-      Function0<? extends IServiceResult> _service_3 = update.getService();
-      _service_3.apply();
-      XtextServiceDispatcher _dispatcher_3 = this.getDispatcher();
-      Pair<String, String> _mappedTo_7 = Pair.<String, String>of("resource", "dummy.statemachine");
-      XtextServiceDispatcher.ServiceDescriptor _service_4 = _dispatcher_3.getService("/load", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_7)), sessionStore);
-      load = _service_4;
-      Function0<? extends IServiceResult> _service_5 = load.getService();
-      IServiceResult _apply_1 = _service_5.apply();
-      result = ((ResourceContentResult) _apply_1);
-      String _fullText_1 = result.getFullText();
-      Assert.assertEquals("state bar end", _fullText_1);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    final HashMapSessionStore sessionStore = new HashMapSessionStore();
+    final String resourceContent = "state foo end";
+    Pair<String, String> _mappedTo = Pair.<String, String>of("resource", "dummy.statemachine");
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("fullText", resourceContent);
+    XtextServiceDispatcher.ServiceDescriptor update = this.getService("update", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)), sessionStore);
+    Function0<? extends IServiceResult> _service = update.getService();
+    _service.apply();
+    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("resource", "dummy.statemachine");
+    XtextServiceDispatcher.ServiceDescriptor load = this.getService("load", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_2)), sessionStore);
+    Function0<? extends IServiceResult> _service_1 = load.getService();
+    IServiceResult _apply = _service_1.apply();
+    ResourceContentResult result = ((ResourceContentResult) _apply);
+    String _fullText = result.getFullText();
+    Assert.assertEquals(resourceContent, _fullText);
+    Pair<String, String> _mappedTo_3 = Pair.<String, String>of("resource", "dummy.statemachine");
+    Pair<String, String> _mappedTo_4 = Pair.<String, String>of("deltaText", "bar");
+    Pair<String, String> _mappedTo_5 = Pair.<String, String>of("deltaOffset", "6");
+    Pair<String, String> _mappedTo_6 = Pair.<String, String>of("deltaReplaceLength", "3");
+    XtextServiceDispatcher.ServiceDescriptor _service_2 = this.getService("update", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_3, _mappedTo_4, _mappedTo_5, _mappedTo_6)), sessionStore);
+    update = _service_2;
+    Function0<? extends IServiceResult> _service_3 = update.getService();
+    _service_3.apply();
+    Pair<String, String> _mappedTo_7 = Pair.<String, String>of("resource", "dummy.statemachine");
+    XtextServiceDispatcher.ServiceDescriptor _service_4 = this.getService("load", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_7)), sessionStore);
+    load = _service_4;
+    Function0<? extends IServiceResult> _service_5 = load.getService();
+    IServiceResult _apply_1 = _service_5.apply();
+    result = ((ResourceContentResult) _apply_1);
+    String _fullText_1 = result.getFullText();
+    Assert.assertEquals("state bar end", _fullText_1);
   }
   
   @Test
   public void testRevertFile() {
-    try {
-      final String resourceContent = "state foo end";
-      final File file = this.createFile(resourceContent);
-      final HashMapSessionStore sessionStore = new HashMapSessionStore();
-      XtextServiceDispatcher _dispatcher = this.getDispatcher();
-      String _name = file.getName();
-      Pair<String, String> _mappedTo = Pair.<String, String>of("resource", _name);
-      final XtextServiceDispatcher.ServiceDescriptor load = _dispatcher.getService("/load", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo)), sessionStore);
-      Function0<? extends IServiceResult> _service = load.getService();
-      _service.apply();
-      XtextServiceDispatcher _dispatcher_1 = this.getDispatcher();
-      String _name_1 = file.getName();
-      Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name_1);
-      Pair<String, String> _mappedTo_2 = Pair.<String, String>of("deltaText", "bar");
-      Pair<String, String> _mappedTo_3 = Pair.<String, String>of("deltaOffset", "6");
-      Pair<String, String> _mappedTo_4 = Pair.<String, String>of("deltaReplaceLength", "3");
-      final XtextServiceDispatcher.ServiceDescriptor update = _dispatcher_1.getService("/update", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4)), sessionStore);
-      Function0<? extends IServiceResult> _service_1 = update.getService();
-      _service_1.apply();
-      XtextServiceDispatcher _dispatcher_2 = this.getDispatcher();
-      String _name_2 = file.getName();
-      Pair<String, String> _mappedTo_5 = Pair.<String, String>of("resource", _name_2);
-      final XtextServiceDispatcher.ServiceDescriptor revert = _dispatcher_2.getService("/revert", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_5)), sessionStore);
-      boolean _isHasSideEffects = revert.isHasSideEffects();
-      Assert.assertTrue(_isHasSideEffects);
-      boolean _isHasTextInput = revert.isHasTextInput();
-      Assert.assertFalse(_isHasTextInput);
-      Function0<? extends IServiceResult> _service_2 = revert.getService();
-      IServiceResult _apply = _service_2.apply();
-      final ResourceContentResult result = ((ResourceContentResult) _apply);
-      String _fullText = result.getFullText();
-      Assert.assertEquals(resourceContent, _fullText);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    final String resourceContent = "state foo end";
+    final File file = this.createFile(resourceContent);
+    final HashMapSessionStore sessionStore = new HashMapSessionStore();
+    String _name = file.getName();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("resource", _name);
+    final XtextServiceDispatcher.ServiceDescriptor load = this.getService("load", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo)), sessionStore);
+    Function0<? extends IServiceResult> _service = load.getService();
+    _service.apply();
+    String _name_1 = file.getName();
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name_1);
+    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("deltaText", "bar");
+    Pair<String, String> _mappedTo_3 = Pair.<String, String>of("deltaOffset", "6");
+    Pair<String, String> _mappedTo_4 = Pair.<String, String>of("deltaReplaceLength", "3");
+    final XtextServiceDispatcher.ServiceDescriptor update = this.getService("update", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4)), sessionStore);
+    Function0<? extends IServiceResult> _service_1 = update.getService();
+    _service_1.apply();
+    String _name_2 = file.getName();
+    Pair<String, String> _mappedTo_5 = Pair.<String, String>of("resource", _name_2);
+    final XtextServiceDispatcher.ServiceDescriptor revert = this.getService("revert", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_5)), sessionStore);
+    boolean _isHasSideEffects = revert.isHasSideEffects();
+    Assert.assertTrue(_isHasSideEffects);
+    boolean _isHasTextInput = revert.isHasTextInput();
+    Assert.assertFalse(_isHasTextInput);
+    Function0<? extends IServiceResult> _service_2 = revert.getService();
+    IServiceResult _apply = _service_2.apply();
+    final ResourceContentResult result = ((ResourceContentResult) _apply);
+    String _fullText = result.getFullText();
+    Assert.assertEquals(resourceContent, _fullText);
   }
   
   @Test
@@ -137,25 +116,22 @@ public class ResourcePersistenceTest extends AbstractWebServerTest {
     try {
       final File file = this.createFile("state foo end");
       final HashMapSessionStore sessionStore = new HashMapSessionStore();
-      XtextServiceDispatcher _dispatcher = this.getDispatcher();
       String _name = file.getName();
       Pair<String, String> _mappedTo = Pair.<String, String>of("resource", _name);
-      final XtextServiceDispatcher.ServiceDescriptor load = _dispatcher.getService("/load", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo)), sessionStore);
+      final XtextServiceDispatcher.ServiceDescriptor load = this.getService("load", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo)), sessionStore);
       Function0<? extends IServiceResult> _service = load.getService();
       _service.apply();
-      XtextServiceDispatcher _dispatcher_1 = this.getDispatcher();
       String _name_1 = file.getName();
       Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name_1);
       Pair<String, String> _mappedTo_2 = Pair.<String, String>of("deltaText", "bar");
       Pair<String, String> _mappedTo_3 = Pair.<String, String>of("deltaOffset", "6");
       Pair<String, String> _mappedTo_4 = Pair.<String, String>of("deltaReplaceLength", "3");
-      final XtextServiceDispatcher.ServiceDescriptor update = _dispatcher_1.getService("/update", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4)), sessionStore);
+      final XtextServiceDispatcher.ServiceDescriptor update = this.getService("update", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4)), sessionStore);
       Function0<? extends IServiceResult> _service_1 = update.getService();
       _service_1.apply();
-      XtextServiceDispatcher _dispatcher_2 = this.getDispatcher();
       String _name_2 = file.getName();
       Pair<String, String> _mappedTo_5 = Pair.<String, String>of("resource", _name_2);
-      final XtextServiceDispatcher.ServiceDescriptor save = _dispatcher_2.getService("/save", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_5)), sessionStore);
+      final XtextServiceDispatcher.ServiceDescriptor save = this.getService("save", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_5)), sessionStore);
       boolean _isHasSideEffects = save.isHasSideEffects();
       Assert.assertTrue(_isHasSideEffects);
       boolean _isHasTextInput = save.isHasTextInput();

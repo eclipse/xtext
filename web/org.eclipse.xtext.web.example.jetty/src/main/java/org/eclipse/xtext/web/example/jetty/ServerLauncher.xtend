@@ -28,6 +28,9 @@ class ServerLauncher {
 					resourceBase = 'src/main/webapp'
 					welcomeFiles = #['index.html']
 				],
+				new ResourceHandler => [
+					resourceBase = '../org.eclipse.xtext.web/src/main/css'
+				],
 				new WebAppContext => [
 					resourceBase = '../org.eclipse.xtext.web/src/main/js'
 					contextPath = '/'
@@ -37,7 +40,7 @@ class ServerLauncher {
 						new WebInfConfiguration,
 						new MetaInfConfiguration
 					]
-					setAttribute(WebInfConfiguration.CONTAINER_JAR_PATTERN, ".*org\\.eclipse\\.xtext\\.web.*")
+					setAttribute(WebInfConfiguration.CONTAINER_JAR_PATTERN, ".*org\\.eclipse\\.xtext\\.web.*|.*requirejs.*|.*jquery.*|.*ace.*")
 				]
 			]
 		]

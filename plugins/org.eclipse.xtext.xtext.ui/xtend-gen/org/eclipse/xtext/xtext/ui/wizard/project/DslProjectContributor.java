@@ -134,7 +134,7 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
         _builder.append("var javaScriptPath = \"../");
         String _webProjectName = this.projectInfo.getWebProjectName();
         _builder.append(_webProjectName, "");
-        _builder.append("/src/main/webapp/xtext\"");
+        _builder.append("/src/main/webapp\"");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -247,6 +247,21 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
         _builder.append("\t");
         _builder.append("\t");
         _builder.append("directory = \"${ideaProjectPath}/src-gen\"");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+      }
+    }
+    {
+      boolean _isCreateWebProject_1 = this.projectInfo.isCreateWebProject();
+      if (_isCreateWebProject_1) {
+        _builder.append("\t");
+        _builder.append("component = DirectoryCleaner {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("\t");
+        _builder.append("directory = \"${javaScriptPath}/xtext/generated\"");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("}");
@@ -543,17 +558,21 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
     }
     _builder.newLine();
     {
-      boolean _isCreateWebProject_1 = this.projectInfo.isCreateWebProject();
-      if (_isCreateWebProject_1) {
+      boolean _isCreateWebProject_2 = this.projectInfo.isCreateWebProject();
+      if (_isCreateWebProject_2) {
         _builder.append("\t\t\t");
         _builder.append("// JavaScript-based syntax highlighting");
         _builder.newLine();
         _builder.append("\t\t\t");
-        _builder.append("fragment = org.eclipse.xtext.web.generator.ClientHighlightingFragment auto-inject {");
+        _builder.append("fragment = org.eclipse.xtext.web.generator.OrionHighlightingFragment auto-inject {");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("\t");
-        _builder.append("javaScriptPath = javaScriptPath");
+        _builder.append("javaScriptPath = \"${javaScriptPath}/xtext/generated\"");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("\t");
+        _builder.append("moduleName = \"xtext/generated/${fileExtensions}-syntax\"");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("}");

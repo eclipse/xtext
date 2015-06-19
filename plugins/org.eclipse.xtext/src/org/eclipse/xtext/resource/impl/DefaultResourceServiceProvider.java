@@ -78,11 +78,11 @@ public class DefaultResourceServiceProvider implements IResourceServiceProvider,
 	}
 
 	/**
-	 * @since 2.8
+	 * @since 2.9
 	 */
 	@Override
-	public boolean isReadOnly(URI uri) {
-		return uri.isArchive();
+	public boolean isSource(URI uri) {
+		return !uri.isArchive();
 	}
 	
 }

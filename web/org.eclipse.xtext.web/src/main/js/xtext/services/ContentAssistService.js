@@ -6,17 +6,17 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 
-define(["xtext/services/AbstractXtextService", "orion/Deferred"], function(AbstractXtextService, Deferred) {
+define(["xtext/services/AbstractXtextService", "jquery"], function(AbstractXtextService, jQuery) {
 
-	function ContentAssistService(serverUrl, resourceUri) {
-		this.initialize(serverUrl, resourceUri, "content-assist");
+	function ContentAssistService(serverUrl, resourceId) {
+		this.initialize(serverUrl, resourceId, "content-assist");
 	}
 
 	ContentAssistService.prototype = new AbstractXtextService();
 		
 	ContentAssistService.prototype.computeContentAssist = function(editorContext, params, deferred) {
 		if (deferred === undefined) {
-			deferred = new Deferred();
+			deferred = jQuery.Deferred();
 		}
 		var serverData = {
 			contentType : params.contentType,
@@ -42,7 +42,7 @@ define(["xtext/services/AbstractXtextService", "orion/Deferred"], function(Abstr
 					this._updateService.addCompletionCallback(function() {
 						self.computeContentAssist(editorContext, params, deferred);
 					});
-					return deferred.promise;
+					return deferred.promise();
 				}
 				editorContext.getClientServiceState().update = "started";
 				onComplete = this._updateService.onComplete.bind(this._updateService);
@@ -76,25 +76,7 @@ define(["xtext/services/AbstractXtextService", "orion/Deferred"], function(Abstr
 					}
 					editorContext.getClientServiceState().update = "finished";
 				}
-				var proposals = [];
-				for (var i = 0; i < result.entries.length; i++) {
-					var e = result.entries[i];
-					var p = {
-						proposal : e.proposal,
-						prefix : e.prefix,
-						overwrite : true,
-						name : (e.name ? e.name : e.proposal),
-						description : e.description,
-						style : e.style,
-						additionalEdits : e.textReplacements,
-						positions : e.editPositions,
-					};
-					if (e.escapePosition) {
-						p.escapePosition = e.escapePosition;
-					}
-					proposals.push(p);
-				}
-				deferred.resolve(proposals);
+				deferred.resolve(editorContext.translateCompletionProposals(result.entries));
 			},
 			
 			error : function(xhr, textStatus, errorThrown) {
@@ -117,7 +99,7 @@ define(["xtext/services/AbstractXtextService", "orion/Deferred"], function(Abstr
 			
 			complete: onComplete
 		});
-		return deferred.promise;
+		return deferred.promise();
 	};
 	
 	return ContentAssistService;

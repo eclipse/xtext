@@ -8,9 +8,11 @@
 package org.eclipse.xtext.web.server.test
 
 import com.google.inject.Guice
+import com.google.inject.util.Modules
 import java.io.File
 import java.io.FileWriter
 import java.util.HashMap
+import java.util.Map
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import org.eclipse.emf.common.util.URI
@@ -21,6 +23,7 @@ import org.eclipse.xtext.web.example.statemachine.StatemachineStandaloneSetup
 import org.eclipse.xtext.web.server.XtextServiceDispatcher
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider
 import org.eclipse.xtext.web.server.test.languages.StatemachineWebModule
+import org.eclipse.xtext.web.server.ISessionStore
 
 @Accessors(PROTECTED_GETTER)
 class AbstractWebServerTest extends AbstractXtextTests {
@@ -51,7 +54,7 @@ class AbstractWebServerTest extends AbstractXtextTests {
 			override createInjector() {
 				val webModule = new StatemachineWebModule(executorService)
 				webModule.resourceBaseProvider = resourceBaseProvider
-				return Guice.createInjector(runtimeModule, webModule)
+				return Guice.createInjector(Modules.override(runtimeModule).with(webModule))
 			}
 		})
 		dispatcher = injector.getInstance(XtextServiceDispatcher)
@@ -70,6 +73,15 @@ class AbstractWebServerTest extends AbstractXtextTests {
 		writer.close()
 		file.deleteOnExit
 		return file
+	}
+	
+	protected def getService(String path, Map<String, String> parameters) {
+		getService(path, parameters, new HashMapSessionStore)
+	}
+	
+	protected def getService(String path, Map<String, String> parameters, ISessionStore sessionStore) {
+		val requestData = new MockRequestData(path, parameters)
+		dispatcher.getService(requestData, sessionStore)
 	}
 	
 }

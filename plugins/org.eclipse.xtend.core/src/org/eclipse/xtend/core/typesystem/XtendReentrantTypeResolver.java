@@ -48,7 +48,6 @@ import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.IAcceptor;
@@ -79,7 +78,7 @@ import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceInitializer;
 import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
@@ -337,29 +336,21 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 		@Override
 		/* @Nullable */
 		protected JvmTypeReference doGetTypeReference(XComputedTypeReferenceImplCustom context) {
-			JvmTypeReference declaredReturnType = createOperation.getReturnType();
-			TypeReferences typeReferences = resolvedTypes.getServices().getTypeReferences();
-			ITypeReferenceOwner owner = resolvedTypes.getReferenceOwner();
-			JvmType arrayList = typeReferences.findDeclaredType(ArrayList.class, createOperation);
-			if (arrayList == null) {
-				return owner.newUnknownTypeReference(ArrayList.class.getName()).toTypeReference();
-			}
-			ParameterizedTypeReference arrayListReference = owner.newParameterizedTypeReference(arrayList);
-			WildcardTypeReference wildcard = owner.newWildcardTypeReference();
-			JvmType objectType = typeReferences.findDeclaredType(Object.class, createOperation);
-			if (objectType != null) {
-				wildcard.addUpperBound(owner.newParameterizedTypeReference(objectType));
-			} else {
-				wildcard.addUpperBound(owner.newUnknownTypeReference(Object.class.getName()));
-			}
-			arrayListReference.addTypeArgument(wildcard);
-			JvmType hashMap = typeReferences.findDeclaredType(HashMap.class, createOperation);
-			if (hashMap == null) {
-				return owner.newUnknownTypeReference(HashMap.class.getName()).toTypeReference();
-			}
-			ParameterizedTypeReference hashMapReference = owner.newParameterizedTypeReference(hashMap);
-			hashMapReference.addTypeArgument(arrayListReference);
-			hashMapReference.addTypeArgument(owner.toLightweightTypeReference(declaredReturnType));
+			final ITypeReferenceOwner owner = resolvedTypes.getReferenceOwner();
+			LightweightTypeReference hashMapReference = owner.newReferenceTo(HashMap.class, new TypeReferenceInitializer<ParameterizedTypeReference>() {
+				@Override
+				public LightweightTypeReference enhance(ParameterizedTypeReference ref) {
+					ref.addTypeArgument(owner.newReferenceTo(ArrayList.class, new TypeReferenceInitializer<ParameterizedTypeReference>(){
+						@Override
+						public LightweightTypeReference enhance(ParameterizedTypeReference keyType) {
+							keyType.addTypeArgument(owner.newWildcardExtendsObject());
+							return keyType;
+						}
+					}));
+					ref.addTypeArgument(owner.toLightweightTypeReference(createOperation.getReturnType()));
+					return ref;
+				}
+			});
 			return toJavaCompliantTypeReference(hashMapReference, session);
 		}
 	}

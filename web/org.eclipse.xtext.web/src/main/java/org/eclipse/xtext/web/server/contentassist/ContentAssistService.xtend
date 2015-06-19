@@ -14,6 +14,9 @@ import java.util.HashSet
 import java.util.List
 import java.util.concurrent.ExecutorService
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext
+import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry
+import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor
+import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory
 import org.eclipse.xtext.util.ITextRegion
 import org.eclipse.xtext.web.server.InvalidRequestException
@@ -23,15 +26,17 @@ import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess
 @Singleton
 class ContentAssistService {
 	
+	public static val DEFAULT_PROPOSALS_LIMIT = 1000
+	
 	@Inject Provider<ContentAssistContextFactory> contextFactoryProvider
 	
-	@Inject WebContentProposalProvider proposalProvider
+	@Inject IdeContentProposalProvider proposalProvider
 	
 	@Inject ExecutorService executorService
 	
 	@Inject extension UpdateDocumentService
 	
-	def ContentAssistResult createProposals(XtextWebDocumentAccess document, ITextRegion selection, int offset)
+	def ContentAssistResult createProposals(XtextWebDocumentAccess document, ITextRegion selection, int offset, int proposalsLimit)
 			throws InvalidRequestException {
 		val contextFactory = contextFactoryProvider.get() => [it.pool = executorService]
 		val stateIdWrapper = ArrayLiterals.newArrayOfSize(1)
@@ -42,11 +47,11 @@ class ContentAssistService {
 			processUpdatedDocument(cancelIndicator)
 			return null
 		])
-		return createProposals(contexts, stateIdWrapper.get(0))
+		return createProposals(contexts, stateIdWrapper.get(0), proposalsLimit)
 	}
 	
 	def ContentAssistResult createProposalsWithUpdate(XtextWebDocumentAccess document, String deltaText, int deltaOffset,
-			int deltaReplaceLength, ITextRegion textSelection, int caretOffset) {
+			int deltaReplaceLength, ITextRegion textSelection, int caretOffset, int proposalsLimit) {
 		val contextFactory = contextFactoryProvider.get() => [it.pool = executorService]
 		val stateIdWrapper = ArrayLiterals.newArrayOfSize(1)
 		val contexts = document.modify([ it, cancelIndicator |
@@ -60,17 +65,22 @@ class ContentAssistService {
 			processUpdatedDocument(cancelIndicator)
 			return null
 		])
-		return createProposals(contexts, stateIdWrapper.get(0))
+		return createProposals(contexts, stateIdWrapper.get(0), proposalsLimit)
 	}
 	
-	protected def createProposals(List<ContentAssistContext> contexts, String stateId) {
+	protected def createProposals(List<ContentAssistContext> contexts, String stateId, int proposalsLimit) {
 		val result = new ContentAssistResult
 		result.stateId = stateId
 		if (!contexts.empty) {
-			val proposals = new HashSet<Pair<Integer, ContentAssistResult.Entry>>
-			val IWebContentProposaAcceptor acceptor = [entry, priority |
-				proposals.add(priority -> entry)
-			]
+			val proposals = new HashSet<Pair<Integer, ContentAssistEntry>>
+			val acceptor = new IIdeContentProposalAcceptor {
+				override accept(ContentAssistEntry entry, int priority) {
+					proposals.add(priority -> entry)
+				}
+				override canAcceptMoreProposals() {
+					proposals.size < proposalsLimit
+				}
+			}
 			
 			proposalProvider.createProposals(contexts, acceptor)
 			
@@ -78,8 +88,16 @@ class ContentAssistService {
 				val prioResult = p2.key.compareTo(p1.key)
 				if (prioResult != 0)
 					return prioResult
+				val v1 = p1.value
+				val v2 = p2.value
+				if (v1.label !== null && v2.label !== null)
+					return v1.label.compareTo(v2.label)
+				else if (v1.label !== null)
+					return v1.label.compareTo(v2.proposal)
+				else if (v2.label !== null)
+					return v1.proposal.compareTo(v2.label)
 				else
-					return p1.value.proposal.compareTo(p2.value.proposal)
+					return v1.proposal.compareTo(v2.proposal)
 			].map[value])
 		}
 		return result

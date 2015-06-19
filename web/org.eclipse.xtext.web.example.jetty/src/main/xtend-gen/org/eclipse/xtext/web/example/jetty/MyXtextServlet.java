@@ -9,6 +9,8 @@ package org.eclipse.xtext.web.example.jetty;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Module;
+import com.google.inject.util.Modules;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import javax.servlet.annotation.WebServlet;
@@ -40,7 +42,9 @@ public class MyXtextServlet extends XtextServlet {
           final StatemachineRuntimeModule runtimeModule = new StatemachineRuntimeModule();
           final StatemachineWebModule webModule = new StatemachineWebModule(MyXtextServlet.this.executorService);
           webModule.setResourceBaseProvider(resourceBaseProvider);
-          return Guice.createInjector(runtimeModule, webModule);
+          Modules.OverriddenModuleBuilder _override = Modules.override(runtimeModule);
+          Module _with = _override.with(webModule);
+          return Guice.createInjector(_with);
         }
       }.createInjectorAndDoEMFRegistration();
       new EntitiesStandaloneSetup() {
@@ -49,7 +53,9 @@ public class MyXtextServlet extends XtextServlet {
           final EntitiesRuntimeModule runtimeModule = new EntitiesRuntimeModule();
           final EntitiesWebModule webModule = new EntitiesWebModule(MyXtextServlet.this.executorService);
           webModule.setResourceBaseProvider(resourceBaseProvider);
-          return Guice.createInjector(runtimeModule, webModule);
+          Modules.OverriddenModuleBuilder _override = Modules.override(runtimeModule);
+          Module _with = _override.with(webModule);
+          return Guice.createInjector(_with);
         }
       }.createInjectorAndDoEMFRegistration();
     } catch (Throwable _e) {

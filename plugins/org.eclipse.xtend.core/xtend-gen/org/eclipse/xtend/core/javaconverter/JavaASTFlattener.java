@@ -1884,7 +1884,7 @@ public class JavaASTFlattener extends ASTVisitor {
         assigment.accept(this);
         StringConcatenation _builder_4 = new StringConcatenation();
         String _xifexpression = null;
-        boolean _needsReturnValue = this._aSTFlattenerUtils.needsReturnValue(assigment);
+        boolean _needsReturnValue = this._aSTFlattenerUtils.needsReturnValue(node);
         if (_needsReturnValue) {
           _xifexpression = tempVarName;
         }

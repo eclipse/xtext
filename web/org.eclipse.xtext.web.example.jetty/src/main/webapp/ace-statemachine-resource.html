@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Language" content="en-us">
+	<title>Xtext-Web Domainmodel Example</title>
+	<link rel="stylesheet" type="text/css" href="xtext/xtext-ace.css" />
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<script src="webjars/requirejs/2.1.17/require.min.js"></script>
+	<script type="text/javascript">
+		require.config({
+			paths: {
+				"jquery": "webjars/jquery/2.1.4/jquery.min",
+				"ace": "webjars/ace/1.1.9/src",
+				"ace/ext/language_tools": "webjars/ace/1.1.9/src/ext-language_tools"
+			}
+		});
+		require(["xtext/xtext-ace"], function(xtext) {
+			var editor = xtext.createEditor();
+			$("#save-button").click(function() {
+				xtext.invokeService(editor, "save");
+			});
+			$("#revert-button").click(function() {
+				xtext.invokeService(editor, "revert");
+			});
+		});
+	</script>
+</head>
+<body>
+
+<div class="container">
+	<div id="xtext-editor"
+		data-editor-resource-id="example.statemachine"
+		data-editor-status-element="status"
+		data-editor-dirty-element="dirty-indicator"
+		data-editor-enable-save-action="true"
+		data-editor-show-error-dialogs="true"></div>
+	<div class="status-wrapper">
+		<div id="dirty-indicator">modified</div>
+		<div id="status">Welcome to Xtext-Web</div>
+	</div>
+	<div class="button-wrapper">
+		<button id="save-button">Save</button>
+		<button id="revert-button">Revert</button>
+	</div>
+</div>
+
+</body>
+</html>

@@ -15,24 +15,25 @@ import static org.hamcrest.core.IsInstanceOf.*
 
 class ContentAssistTest extends AbstractWebServerTest {
 	
-	protected def assertContentAssistResult(String resourceContent, String expectedResult) {
-		val cursorOffset = resourceContent.indexOf('|')
-		if (cursorOffset >= 0)
-			assertContentAssistResult(resourceContent, cursorOffset, expectedResult)
-		else
+	protected def assertContentAssistResult(CharSequence resourceContent, CharSequence expectedResult) {
+		var contentString = resourceContent.toString
+		val cursorOffset = contentString.indexOf('|')
+		if (cursorOffset >= 0) {
+			contentString = contentString.substring(0, cursorOffset) + contentString.substring(cursorOffset + 1)
+			assertContentAssistResult(contentString, cursorOffset, expectedResult)
+		} else
 			assertContentAssistResult(resourceContent, 0, expectedResult)
 	}
 	
-	protected def assertContentAssistResult(String resourceContent, int offset, String expectedResult) {
-		val sessionStore = new HashMapSessionStore
-		val contentAssist = dispatcher.getService('/content-assist', #{
-				'fullText' -> resourceContent,
+	protected def assertContentAssistResult(CharSequence resourceContent, int offset, CharSequence expectedResult) {
+		val contentAssist = getService('content-assist', #{
+				'fullText' -> resourceContent.toString,
 				'caretOffset' -> offset.toString
-			}, sessionStore)
+			})
 		assertFalse(contentAssist.hasSideEffects)
 		assertTrue(contentAssist.hasTextInput)
 		val result = contentAssist.service.apply() as ContentAssistResult
-		assertEquals(expectedResult, result.toString)
+		assertEquals(expectedResult.toString, result.toString)
 	}
 	
 	@Test def testKeywords() {
@@ -40,21 +41,21 @@ class ContentAssistTest extends AbstractWebServerTest {
 			ContentAssistResult [
 			  stateId = "-80000000"
 			  entries = ArrayList (
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = ""
 			      proposal = "input"
 			      escapePosition = 0
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
 			    ],
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = ""
 			      proposal = "output"
 			      escapePosition = 0
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
 			    ],
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = ""
 			      proposal = "state"
 			      escapePosition = 0
@@ -70,7 +71,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			ContentAssistResult [
 			  stateId = "-80000000"
 			  entries = ArrayList (
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = "sta"
 			      proposal = "state"
 			      escapePosition = 0
@@ -86,17 +87,14 @@ class ContentAssistTest extends AbstractWebServerTest {
 			ContentAssistResult [
 			  stateId = "-80000000"
 			  entries = ArrayList (
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = ""
 			      proposal = "name"
 			      description = "ID"
 			      escapePosition = 0
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList (
-			        EditPosition [
-			          offset = 6
-			          length = 4
-			        ]
+			        [6:4]
 			      )
 			    ]
 			  )
@@ -108,14 +106,14 @@ class ContentAssistTest extends AbstractWebServerTest {
 			ContentAssistResult [
 			  stateId = "-80000000"
 			  entries = ArrayList (
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = ""
 			      proposal = "false"
 			      escapePosition = 0
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
 			    ],
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = ""
 			      proposal = "true"
 			      escapePosition = 0
@@ -131,7 +129,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			ContentAssistResult [
 			  stateId = "-80000000"
 			  entries = ArrayList (
-			    Entry [
+			    ContentAssistEntry [
 			      prefix = ""
 			      proposal = "x"
 			      description = "input signal"
@@ -145,12 +143,11 @@ class ContentAssistTest extends AbstractWebServerTest {
 	
 	@Test def testIncorrectStateId() {
 		val file = createFile('state foo end')
-		val sessionStore = new HashMapSessionStore
-		val contentAssist = dispatcher.getService('/content-assist', #{
+		val contentAssist = getService('content-assist', #{
 				'resource' -> file.name,
 				'caretOffset' -> '3',
 				'requiredStateId' -> 'totalerquatsch'
-			}, sessionStore)
+			})
 		assertTrue(contentAssist.hasConflict)
 		val result = contentAssist.service.apply()
 		assertThat(result, instanceOf(ServiceConflictResult))

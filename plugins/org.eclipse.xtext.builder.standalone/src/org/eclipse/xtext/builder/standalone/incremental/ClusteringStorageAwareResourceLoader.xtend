@@ -37,7 +37,7 @@ class ClusteringStorageAwareResourceLoader {
 				loadedURIs.clear
 			}
 			loadedURIs += uri
-			if (!uri.isReadOnly) {
+			if (uri.isSource) {
 				sourceLevelURIs.add(uri) 
 				val existingResource = resourceSet.getResource(uri, false)
 				if(existingResource instanceof StorageAwareResource) {
@@ -52,10 +52,10 @@ class ClusteringStorageAwareResourceLoader {
 		result
 	}
 	
-	protected def isReadOnly(URI uri) {
+	protected def isSource(URI uri) {
 		val provider = context.getResourceServiceProvider(uri)
 		return provider instanceof IResourceServiceProviderExtension &&
-				(provider as IResourceServiceProviderExtension).isReadOnly(uri)
+				(provider as IResourceServiceProviderExtension).isSource(uri)
 	}
 
 	protected def void clearResourceSet() {

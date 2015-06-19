@@ -8,4 +8,13 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/generator/parser/antlr/ex/wsAware/SyntheticTerminalAwareFragmentHelper.java" type="org.eclipse.xtext.generator.parser.antlr.ex.wsAware.SyntheticTerminalAwareFragmentHelper">
+        <filter id="643842064">
+            <message_arguments>
+                <message_argument value="SyntheticTerminalDetector"/>
+                <message_argument value="SyntheticTerminalAwareFragmentHelper"/>
+                <message_argument value="createDetector()"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>

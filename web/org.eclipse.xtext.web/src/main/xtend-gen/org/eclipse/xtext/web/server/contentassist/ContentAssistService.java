@@ -16,6 +16,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry;
+import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor;
+import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -23,8 +26,6 @@ import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
-import org.eclipse.xtext.web.server.contentassist.IWebContentProposaAcceptor;
-import org.eclipse.xtext.web.server.contentassist.WebContentProposalProvider;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 import org.eclipse.xtext.web.server.model.UpdateDocumentService;
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess;
@@ -40,11 +41,13 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @Singleton
 @SuppressWarnings("all")
 public class ContentAssistService {
+  public final static int DEFAULT_PROPOSALS_LIMIT = 1000;
+  
   @Inject
   private Provider<ContentAssistContextFactory> contextFactoryProvider;
   
   @Inject
-  private WebContentProposalProvider proposalProvider;
+  private IdeContentProposalProvider proposalProvider;
   
   @Inject
   private ExecutorService executorService;
@@ -53,7 +56,7 @@ public class ContentAssistService {
   @Extension
   private UpdateDocumentService _updateDocumentService;
   
-  public ContentAssistResult createProposals(final XtextWebDocumentAccess document, final ITextRegion selection, final int offset) throws InvalidRequestException {
+  public ContentAssistResult createProposals(final XtextWebDocumentAccess document, final ITextRegion selection, final int offset, final int proposalsLimit) throws InvalidRequestException {
     ContentAssistContextFactory _get = this.contextFactoryProvider.get();
     final Procedure1<ContentAssistContextFactory> _function = new Procedure1<ContentAssistContextFactory>() {
       @Override
@@ -86,10 +89,10 @@ public class ContentAssistService {
     };
     final ContentAssistContext[] contexts = document.<ContentAssistContext[]>priorityReadOnly(_function_1, _function_2);
     String _get_1 = stateIdWrapper[0];
-    return this.createProposals(((List<ContentAssistContext>)Conversions.doWrapArray(contexts)), _get_1);
+    return this.createProposals(((List<ContentAssistContext>)Conversions.doWrapArray(contexts)), _get_1, proposalsLimit);
   }
   
-  public ContentAssistResult createProposalsWithUpdate(final XtextWebDocumentAccess document, final String deltaText, final int deltaOffset, final int deltaReplaceLength, final ITextRegion textSelection, final int caretOffset) {
+  public ContentAssistResult createProposalsWithUpdate(final XtextWebDocumentAccess document, final String deltaText, final int deltaOffset, final int deltaReplaceLength, final ITextRegion textSelection, final int caretOffset, final int proposalsLimit) {
     ContentAssistContextFactory _get = this.contextFactoryProvider.get();
     final Procedure1<ContentAssistContextFactory> _function = new Procedure1<ContentAssistContextFactory>() {
       @Override
@@ -126,51 +129,87 @@ public class ContentAssistService {
     };
     final ContentAssistContext[] contexts = document.<ContentAssistContext[]>modify(_function_1, _function_2);
     String _get_1 = stateIdWrapper[0];
-    return this.createProposals(((List<ContentAssistContext>)Conversions.doWrapArray(contexts)), _get_1);
+    return this.createProposals(((List<ContentAssistContext>)Conversions.doWrapArray(contexts)), _get_1, proposalsLimit);
   }
   
-  protected ContentAssistResult createProposals(final List<ContentAssistContext> contexts, final String stateId) {
+  protected ContentAssistResult createProposals(final List<ContentAssistContext> contexts, final String stateId, final int proposalsLimit) {
     final ContentAssistResult result = new ContentAssistResult();
     result.setStateId(stateId);
     boolean _isEmpty = contexts.isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
-      final HashSet<Pair<Integer, ContentAssistResult.Entry>> proposals = new HashSet<Pair<Integer, ContentAssistResult.Entry>>();
-      final IWebContentProposaAcceptor _function = new IWebContentProposaAcceptor() {
+      final HashSet<Pair<Integer, ContentAssistEntry>> proposals = new HashSet<Pair<Integer, ContentAssistEntry>>();
+      final IIdeContentProposalAcceptor acceptor = new IIdeContentProposalAcceptor() {
         @Override
-        public void accept(final ContentAssistResult.Entry entry, final int priority) {
-          Pair<Integer, ContentAssistResult.Entry> _mappedTo = Pair.<Integer, ContentAssistResult.Entry>of(Integer.valueOf(priority), entry);
+        public void accept(final ContentAssistEntry entry, final int priority) {
+          Pair<Integer, ContentAssistEntry> _mappedTo = Pair.<Integer, ContentAssistEntry>of(Integer.valueOf(priority), entry);
           proposals.add(_mappedTo);
         }
-      };
-      final IWebContentProposaAcceptor acceptor = _function;
-      this.proposalProvider.createProposals(contexts, acceptor);
-      ArrayList<ContentAssistResult.Entry> _entries = result.getEntries();
-      final Comparator<Pair<Integer, ContentAssistResult.Entry>> _function_1 = new Comparator<Pair<Integer, ContentAssistResult.Entry>>() {
+        
         @Override
-        public int compare(final Pair<Integer, ContentAssistResult.Entry> p1, final Pair<Integer, ContentAssistResult.Entry> p2) {
+        public boolean canAcceptMoreProposals() {
+          int _size = proposals.size();
+          return (_size < proposalsLimit);
+        }
+      };
+      this.proposalProvider.createProposals(contexts, acceptor);
+      ArrayList<ContentAssistEntry> _entries = result.getEntries();
+      final Comparator<Pair<Integer, ContentAssistEntry>> _function = new Comparator<Pair<Integer, ContentAssistEntry>>() {
+        @Override
+        public int compare(final Pair<Integer, ContentAssistEntry> p1, final Pair<Integer, ContentAssistEntry> p2) {
           Integer _key = p2.getKey();
           Integer _key_1 = p1.getKey();
           final int prioResult = _key.compareTo(_key_1);
           if ((prioResult != 0)) {
             return prioResult;
+          }
+          final ContentAssistEntry v1 = p1.getValue();
+          final ContentAssistEntry v2 = p2.getValue();
+          boolean _and = false;
+          String _label = v1.getLabel();
+          boolean _tripleNotEquals = (_label != null);
+          if (!_tripleNotEquals) {
+            _and = false;
           } else {
-            ContentAssistResult.Entry _value = p1.getValue();
-            String _proposal = _value.getProposal();
-            ContentAssistResult.Entry _value_1 = p2.getValue();
-            String _proposal_1 = _value_1.getProposal();
-            return _proposal.compareTo(_proposal_1);
+            String _label_1 = v2.getLabel();
+            boolean _tripleNotEquals_1 = (_label_1 != null);
+            _and = _tripleNotEquals_1;
+          }
+          if (_and) {
+            String _label_2 = v1.getLabel();
+            String _label_3 = v2.getLabel();
+            return _label_2.compareTo(_label_3);
+          } else {
+            String _label_4 = v1.getLabel();
+            boolean _tripleNotEquals_2 = (_label_4 != null);
+            if (_tripleNotEquals_2) {
+              String _label_5 = v1.getLabel();
+              String _proposal = v2.getProposal();
+              return _label_5.compareTo(_proposal);
+            } else {
+              String _label_6 = v2.getLabel();
+              boolean _tripleNotEquals_3 = (_label_6 != null);
+              if (_tripleNotEquals_3) {
+                String _proposal_1 = v1.getProposal();
+                String _label_7 = v2.getLabel();
+                return _proposal_1.compareTo(_label_7);
+              } else {
+                String _proposal_2 = v1.getProposal();
+                String _proposal_3 = v2.getProposal();
+                return _proposal_2.compareTo(_proposal_3);
+              }
+            }
           }
         }
       };
-      List<Pair<Integer, ContentAssistResult.Entry>> _sortWith = IterableExtensions.<Pair<Integer, ContentAssistResult.Entry>>sortWith(proposals, _function_1);
-      final Function1<Pair<Integer, ContentAssistResult.Entry>, ContentAssistResult.Entry> _function_2 = new Function1<Pair<Integer, ContentAssistResult.Entry>, ContentAssistResult.Entry>() {
+      List<Pair<Integer, ContentAssistEntry>> _sortWith = IterableExtensions.<Pair<Integer, ContentAssistEntry>>sortWith(proposals, _function);
+      final Function1<Pair<Integer, ContentAssistEntry>, ContentAssistEntry> _function_1 = new Function1<Pair<Integer, ContentAssistEntry>, ContentAssistEntry>() {
         @Override
-        public ContentAssistResult.Entry apply(final Pair<Integer, ContentAssistResult.Entry> it) {
+        public ContentAssistEntry apply(final Pair<Integer, ContentAssistEntry> it) {
           return it.getValue();
         }
       };
-      List<ContentAssistResult.Entry> _map = ListExtensions.<Pair<Integer, ContentAssistResult.Entry>, ContentAssistResult.Entry>map(_sortWith, _function_2);
+      List<ContentAssistEntry> _map = ListExtensions.<Pair<Integer, ContentAssistEntry>, ContentAssistEntry>map(_sortWith, _function_1);
       _entries.addAll(_map);
     }
     return result;

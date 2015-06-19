@@ -142,13 +142,10 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				throw new IllegalStateException();
 			return result;
 		}
-		else if(type.isSubtypeOf(Collection.class) && type.hasTypeArguments()) 
+		else if(type.isSubtypeOf(Collection.class) && type.hasTypeArguments()) {
 			return type.getTypeArguments().get(0).getInvariantBoundSubstitute();
-		JvmType objectType = findKnownTopLevelType(Object.class, literal);
-		if (objectType == null) {
-			return type.getOwner().newUnknownTypeReference("Object");
 		}
-		return type.getOwner().newParameterizedTypeReference(objectType);
+		return type.getOwner().newReferenceToObject();
 	}
 
 	protected void _toJavaExpression(XListLiteral literal, ITreeAppendable b) {
@@ -198,12 +195,10 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if (literalType.isType(Map.class)) {
 			LightweightTypeReference keyType = literalType.getTypeArguments().get(0);
 			LightweightTypeReference valueType = literalType.getTypeArguments().get(1);
-			JvmType literalsClass = findKnownTopLevelType(CollectionLiterals.class, literal);
-			JvmType collectionsClass = findKnownTopLevelType(Collections.class, literal);
-			b.append(collectionsClass)
+			b.append(Collections.class)
 				.append(".<").append(keyType).append(", ").append(valueType)
 				.append(">unmodifiableMap(");
-			b.append(literalsClass).append(".<").append(keyType).append(", ").append(valueType).append(">newHashMap(");
+			b.append(CollectionLiterals.class).append(".<").append(keyType).append(", ").append(valueType).append(">newHashMap(");
 			Iterator<XExpression> elements = literal.getElements().iterator();
 			while(elements.hasNext())  {
 				XExpression element = elements.next();
@@ -221,17 +216,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	protected void appendImmutableCollectionExpression(XCollectionLiteral literal,
 			ITreeAppendable b, String collectionsMethod, Class<?> guavaHelper, String guavaHelperMethod) {
 		LightweightTypeReference collectionElementType = getCollectionElementType(literal);
-		ITypeReferenceOwner owner = collectionElementType.getOwner();
-		JvmType collectionsClass = findKnownTopLevelType(Collections.class, literal);
-		JvmType guavaHelperType = findKnownTopLevelType(guavaHelper, literal);
-		LightweightTypeReference guavaClass = guavaHelperType == null ? owner.newUnknownTypeReference(guavaHelper.getName()) : owner.newParameterizedTypeReference(guavaHelperType);
-		if (collectionsClass != null) {
-			b.append(collectionsClass);
-		} else {
-			b.append(Collections.class.getSimpleName());
-		}
-		b.append(".<").append(collectionElementType).append(">").append(collectionsMethod).append("(")
-			.append(guavaClass).append(".<").append(collectionElementType).append(">").append(guavaHelperMethod).append("(");
+		b.append(Collections.class);
+		b.append(".<").append(collectionElementType).append(">").append(collectionsMethod).append("(");
+		b.append(guavaHelper).append(".<").append(collectionElementType).append(">").append(guavaHelperMethod).append("(");
 		boolean isFirst = true;
 		for(XExpression element: literal.getElements())  {
 			if(!isFirst)

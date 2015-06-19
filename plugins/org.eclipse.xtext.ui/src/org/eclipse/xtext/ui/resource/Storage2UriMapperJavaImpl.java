@@ -374,6 +374,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	
 	@Override
 	public void elementChanged(ElementChangedEvent event) {
+		initializeCache();
 		Set<IJavaProject> javaProjectsWithClasspathChange = getJavaProjectsWithClasspathChange(event.getDelta());
 		if(!javaProjectsWithClasspathChange.isEmpty()) {
 			for(IJavaProject project: javaProjectsWithClasspathChange) {
@@ -400,7 +401,14 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	@Inject
 	private IWorkspace workspace;
 	
-	private boolean isInitialized = false;
+	/**
+	 * @since 2.9
+	 */
+	public void setWorkspace(IWorkspace workspace) {
+		this.workspace = workspace;
+	}
+	
+	private volatile boolean isInitialized = false;
 
 	/**
 	 * @since 2.4
@@ -453,14 +461,17 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	@Override
 	public void initializeCache() {
 		if(!isInitialized) {
-			for(IProject project: workspace.getRoot().getProjects()) {
-				if(project.isAccessible() && JavaProject.hasJavaNature(project)) {
-					IJavaProject javaProject = JavaCore.create(project);
-					updateCache(javaProject);
+			synchronized (this) {
+				if(!isInitialized) {
+					for(IProject project: workspace.getRoot().getProjects()) {
+						if(project.isAccessible() && JavaProject.hasJavaNature(project)) {
+							IJavaProject javaProject = JavaCore.create(project);
+							updateCache(javaProject);
+						}
+					}
+					isInitialized = true;
 				}
 			}
-			JavaCore.addElementChangedListener(this, ElementChangedEvent.POST_CHANGE);
-			isInitialized = true;
 		}
 	}
 	

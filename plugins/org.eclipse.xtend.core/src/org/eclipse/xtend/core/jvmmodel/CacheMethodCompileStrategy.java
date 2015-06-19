@@ -9,16 +9,14 @@ package org.eclipse.xtend.core.jvmmodel;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
@@ -30,13 +28,12 @@ import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceInitializer;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 import com.google.inject.Inject;
 
 public class CacheMethodCompileStrategy implements Procedures.Procedure1<ITreeAppendable> {
-	@Inject
-	private TypeReferences typeReferences;
 
 	@Inject
 	private IBatchTypeResolver typeResolver;
@@ -64,33 +61,22 @@ public class CacheMethodCompileStrategy implements Procedures.Procedure1<ITreeAp
 
 	@Override
 	public void apply(ITreeAppendable appendable) {
-		JvmOperation cacheMethod = (JvmOperation) logicalContainerProvider
-				.getLogicalContainer(createExtensionInfo.getCreateExpression());
+		JvmOperation cacheMethod = (JvmOperation) logicalContainerProvider.getLogicalContainer(createExtensionInfo.getCreateExpression());
 		JvmDeclaredType containerType = cacheMethod.getDeclaringType();
 		IResolvedTypes resolvedTypes = typeResolver.resolveTypes(containerType);
-		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, containerType);
-		JvmType arrayList = typeReferences.findDeclaredType(ArrayList.class, containerType);
-		LightweightTypeReference listType;
-		if (arrayList != null) {
-			ParameterizedTypeReference parameterizedListType = owner.newParameterizedTypeReference(arrayList);
-			parameterizedListType.addTypeArgument(owner.newWildcardTypeReference());
-			listType = parameterizedListType;
-		} else {
-			listType = owner.newUnknownTypeReference("ArrayList");
-		}
-		JvmType collectionLiterals = typeReferences.findDeclaredType(CollectionLiterals.class, containerType);
-		LightweightTypeReference collectionLiteralsTypeRef = null;
-		if (collectionLiterals == null) {
-			collectionLiteralsTypeRef = owner.newUnknownTypeReference(CollectionLiterals.class.getName());
-		} else {
-			collectionLiteralsTypeRef = owner.newParameterizedTypeReference(collectionLiterals);
-		}
-
+		final ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, containerType);
+		LightweightTypeReference listType = owner.newReferenceTo(ArrayList.class, new TypeReferenceInitializer<ParameterizedTypeReference>() {
+			@Override
+			public LightweightTypeReference enhance(ParameterizedTypeReference reference) {
+				reference.addTypeArgument(owner.newWildcardTypeReference());
+				return reference;
+			}
+		});
 		String cacheVarName = cacheField.getSimpleName();
 		String cacheKeyVarName = appendable.declareSyntheticVariable("CacheKey", "_cacheKey");
 		appendable.append("final ").append(listType).append(" ").append(cacheKeyVarName)
-			.append(" = ").append(collectionLiteralsTypeRef).append(".newArrayList(");
-		EList<JvmFormalParameter> list = cacheMethod.getParameters();
+			.append(" = ").append(CollectionLiterals.class).append(".newArrayList(");
+		List<JvmFormalParameter> list = cacheMethod.getParameters();
 		for (Iterator<JvmFormalParameter> iterator = list.iterator(); iterator.hasNext();) {
 			JvmFormalParameter jvmFormalParameter = iterator.next();
 			appendable.append(getVarName(jvmFormalParameter));

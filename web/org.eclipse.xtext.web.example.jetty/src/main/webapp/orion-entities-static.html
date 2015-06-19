@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Language" content="en-us">
+	<title>Xtext-Web Entities Example</title>
+	<link rel="stylesheet" type="text/css" href="xtext/xtext-orion.css" />
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<script src="webjars/requirejs/2.1.17/require.min.js"></script>
+	<script type="text/javascript">
+		require.config({
+			paths: {
+				"text": "webjars/requirejs-text/2.0.10-3/text",
+				"jquery": "webjars/jquery/2.1.4/jquery.min",
+				"webtools/htmlContentAssist": "orion/webtools/htmlContentAssist",
+				"webtools/cssContentAssist": "orion/webtools/cssContentAssist",
+				"webtools/util": "orion/webtools/util",
+				"javascript/compilationUnit": "orion/javascript/compilationUnit",
+				"csslint": "orion/csslint"
+			}
+		});
+		require(["xtext/xtext-orion"], function(xtext) {
+			xtext.createEditor();
+		});
+	</script>
+</head>
+<body>
+
+<div class="container">
+	<div class="xtext-editor"
+	    data-editor-xtext-lang="entities"
+	    data-editor-status-element="status"
+		data-editor-dirty-element="dirty-indicator"
+	><pre>
+import java.util.List
+
+/*
+ * A simple Entities example.
+ */
+package test {
+	
+	// This is my self-made entity
+	entity MyEntity {
+		myProperty : List&lt;String&gt;
+		op myOperation() : String {
+			myProperty.head
+		}
+	}
+	
+	entity Container {
+		entities : List&lt;MyEntity&gt;
+		op findMatching(String param) : MyEntity {
+			entities.findFirst[myOperation == param]
+		}
+	}
+	
+}</pre></div>
+	<div class="status-wrapper">
+		<div id="dirty-indicator">modified</div>
+		<div id="status">Welcome to Xtext-Web</div>
+	</div>
+</div>
+
+</body>
+</html>

@@ -158,6 +158,9 @@ public class SynonymTypesProvider {
 	 * Announce a synonym type with the given conformance hint.
 	 */
 	protected final boolean announceSynonym(LightweightTypeReference synonym, ConformanceHint hint, Acceptor acceptor) {
+		if (synonym.isUnknown()) {
+			return true;
+		}
 		return acceptor.accept(synonym, hint);
 	}
 	
@@ -165,6 +168,9 @@ public class SynonymTypesProvider {
 	 * Announce a synonym type with the given conformance hints.
 	 */
 	protected final boolean announceSynonym(LightweightTypeReference synonym, EnumSet<ConformanceHint> hints, Acceptor acceptor) {
+		if (synonym.isUnknown()) {
+			return true;
+		}
 		return acceptor.accept(synonym, hints);
 	}
 	
@@ -173,6 +179,9 @@ public class SynonymTypesProvider {
 	 * @see ConformanceFlags
 	 */
 	protected final boolean announceSynonym(LightweightTypeReference synonym, int flags, Acceptor acceptor) {
+		if (synonym.isUnknown()) {
+			return true;
+		}
 		return acceptor.accept(synonym, flags | ConformanceFlags.CHECKED_SUCCESS);
 	}
 	

@@ -306,7 +306,7 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 	}
 	
 	override generateVisibilityModifier(JvmMember it, ITreeAppendable result) {
-		if (visibility == JvmVisibility.PRIVATE && declaringType.local) {
+		if (visibility == JvmVisibility.PRIVATE && declaringType!=null && declaringType.local) {
 			val declarator = declaringType as JvmGenericType
 			if (!declarator.anonymous) {
 				return result
