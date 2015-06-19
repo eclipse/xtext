@@ -19,6 +19,10 @@ Workflow {
 	component = DirectoryCleaner {
 		directory = "${runtimeProject}.ui/src-gen"
 	}
+	
+	component = DirectoryCleaner {
+		directory = "../../intellij/${projectName}.idea/src-gen"
+	}
 
 	component = Generator auto-inject {
 		pathRtProject = runtimeProject
