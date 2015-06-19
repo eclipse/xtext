@@ -13,6 +13,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * A specialized appendable that can be used to trace the source location
@@ -53,6 +54,9 @@ public interface ITreeAppendable extends IAppendable, ITraceRegionProvider {
 	ITreeAppendable append(JvmType type);
 	
 	ITreeAppendable append(Class<?> type);
+	
+	@Override
+	ITreeAppendable append(LightweightTypeReference typeRef);
 	
 	@Override
 	ITreeAppendable append(CharSequence content);

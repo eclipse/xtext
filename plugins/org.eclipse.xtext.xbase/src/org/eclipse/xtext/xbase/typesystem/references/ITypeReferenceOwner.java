@@ -166,6 +166,30 @@ public interface ITypeReferenceOwner {
 	 */
 	LightweightTypeReference toLightweightTypeReference(JvmTypeReference type);
 	
+	/**
+	 * Creates a reference to {@link Object} or returns an {@link UnknownTypeReference} if no
+	 * JRE is available.
+	 */
+	LightweightTypeReference newReferenceToObject();
+	
+	/**
+	 * Creates a wildcard reference to {@link Object} or returns a wildcard to an {@link UnknownTypeReference} if no
+	 * JRE is available.
+	 */
+	WildcardTypeReference newWildcardExtendsObject();
+	
+	/**
+	 * Creates a reference to the given class or returns an {@link UnknownTypeReference} if no
+	 * JRE is available.
+	 */
+	LightweightTypeReference newReferenceTo(Class<?> type);
+	
+	/**
+	 * Creates a reference to the given class or returns an {@link UnknownTypeReference} if no
+	 * JRE is available. If the type is available, the given acceptor is used to initialize it further.
+	 */
+	LightweightTypeReference newReferenceTo(Class<?> type, TypeReferenceInitializer<? super ParameterizedTypeReference> init);
+	
 	/* ************************************************************************
 	 * TODO move the following methods to a more suitable location if possible
 	 * ************************************************************************/

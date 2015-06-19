@@ -14,6 +14,7 @@ import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -47,6 +48,12 @@ public class FakeTreeAppendable extends StringBuilderBasedAppendable implements 
 	@Override
 	public ITreeAppendable append(CharSequence string) {
 		super.append(string);
+		return this;
+	}
+	
+	@Override
+	public ITreeAppendable append(LightweightTypeReference typeRef) {
+		super.append(typeRef);
 		return this;
 	}
 	

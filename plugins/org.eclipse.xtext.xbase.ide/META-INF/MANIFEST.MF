@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-Vendor: %providerName
+Bundle-SymbolicName: org.eclipse.xtext.xbase.ide;singleton:=true
+Bundle-Version: 2.9.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.xtext.ide,
+ org.eclipse.xtext.xbase,
+ org.eclipse.xtext.xbase.lib,
+ org.objectweb.asm;bundle-version="[5.0.1,6.0.0)"
