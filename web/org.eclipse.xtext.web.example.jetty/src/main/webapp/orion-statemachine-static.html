@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Language" content="en-us">
+	<title>Xtext-Web State Machine Example</title>
+	<link rel="stylesheet" type="text/css" href="xtext/xtext-orion.css" />
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<script src="webjars/requirejs/2.1.17/require.min.js"></script>
+	<script type="text/javascript">
+		require.config({
+			paths: {
+				"text": "webjars/requirejs-text/2.0.10-3/text",
+				"jquery": "webjars/jquery/2.1.4/jquery.min",
+				"webtools/htmlContentAssist": "orion/webtools/htmlContentAssist",
+				"webtools/cssContentAssist": "orion/webtools/cssContentAssist",
+				"webtools/util": "orion/webtools/util",
+				"javascript/compilationUnit": "orion/javascript/compilationUnit",
+				"csslint": "orion/csslint"
+			}
+		});
+		require(["xtext/xtext-orion"], function(xtext) {
+			xtext.createEditor();
+		});
+	</script>
+</head>
+<body>
+
+<div class="container">
+	<div class="xtext-editor"
+	    data-editor-xtext-lang="statemachine"
+	    data-editor-status-element="status"
+		data-editor-dirty-element="dirty-indicator"
+	><pre>
+/*
+ * A simple State Machine example.
+ */
+input signal x
+input signal y
+output signal z
+
+state State1
+	set z = false
+	if x == true goto State2
+end
+
+state State2
+	if x == false and y == true goto State1
+end</pre></div>
+	<div class="status-wrapper">
+		<div id="dirty-indicator">modified</div>
+		<div id="status">Welcome to Xtext-Web</div>
+	</div>
+</div>
+
+</body>
+</html>

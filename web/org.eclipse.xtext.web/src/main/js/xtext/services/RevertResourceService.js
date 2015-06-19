@@ -8,8 +8,8 @@
 
 define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 	
-	function RevertResourceService(serverUrl, resourceUri) {
-		this.initialize(serverUrl, resourceUri, "revert");
+	function RevertResourceService(serverUrl, resourceId) {
+		this.initialize(serverUrl, resourceId, "revert");
 	};
 
 	RevertResourceService.prototype = new AbstractXtextService();
@@ -25,7 +25,7 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 			data : serverData,
 			success : function(result) {
 				editorContext.setText(result.fullText);
-				editorContext.getEditor().getUndoStack().reset();
+				editorContext.clearUndoStack();
 				editorContext.markClean(!result.dirty);
 				var listeners = editorContext.updateServerState(result.fullText, result.stateId);
 				for (i in listeners) {

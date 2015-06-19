@@ -1,9 +1,9 @@
 dependencies {
     compile group: 'log4j', name: 'log4j', version: '1.2.17'
-    compile project(':plugins:org.eclipse.xtext.xbase')
+    compile group: 'org.ow2.asm', name: 'asm', version: '5.0.1'
+    compile project(':plugins:org.eclipse.xtext.xbase.ide')
     compile project(':web:org.eclipse.xtext.web')
     testCompile group: 'junit', name: 'junit', version: '4.12'
-//    testCompile project(':plugins:org.eclipse.xtext.junit4')
-//    testCompile project(':web:org.eclipse.xtext.web.example.statemachine')
-//    testCompile project(':web:org.eclipse.xtext.web.example.statemachine.ide')
+    testCompile project(':plugins:org.eclipse.xtext.junit4')
+    testCompile project(':intellij:org.eclipse.xtext.idea.example.entities.ide')
 }

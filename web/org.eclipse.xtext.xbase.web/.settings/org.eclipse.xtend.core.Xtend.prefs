@@ -2,6 +2,8 @@
 //outlet.DEFAULT_OUTPUT.sourceFolder.src/main/java.ignore=
 //outlet.DEFAULT_OUTPUT.sourceFolder.src/main/xtend-gen.directory=
 //outlet.DEFAULT_OUTPUT.sourceFolder.src/main/xtend-gen.ignore=true
+//outlet.DEFAULT_OUTPUT.sourceFolder.src/test/java.directory=src/test/xtend-gen
+//outlet.DEFAULT_OUTPUT.sourceFolder.src/test/xtend-gen.ignore=true
 BuilderConfiguration.is_project_specific=true
 autobuilding=true
 eclipse.preferences.version=1

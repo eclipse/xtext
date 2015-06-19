@@ -11,6 +11,9 @@ import javax.servlet.http.HttpSession
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.web.server.ISessionStore
 
+/**
+ * Provides access to the information stored in a {@link HttpSession}.
+ */
 @FinalFieldsConstructor
 class HttpServletSessionStore implements ISessionStore {
 	

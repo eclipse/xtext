@@ -10,9 +10,19 @@ package org.eclipse.xtext.web.server
 import java.lang.Exception
 import org.eclipse.xtend.lib.annotations.Accessors
 
+/**
+ * Exception that can be thrown anytime while preparing or executing an Xtext service.
+ * Clients invoking such a service directly or indirectly through {@link XtextServiceDispatcher}
+ * must catch this exception and translate it to a proper error message.
+ * An InvalidRequestException must never lead to an <em>internal server error</em>.
+ */
 @Accessors
 class InvalidRequestException extends Exception {
 	
+	/**
+	 * The exception type can be used as a hint for translating the exception into a proper
+	 * error message for the client.
+	 */
 	static enum Type {
 		INVALID_PARAMETERS,
 		UNKNOWN_LANGUAGE,

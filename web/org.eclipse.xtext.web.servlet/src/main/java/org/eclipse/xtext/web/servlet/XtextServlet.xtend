@@ -7,12 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.servlet
 
-import com.google.common.collect.Maps
 import com.google.gson.Gson
 import com.google.inject.Injector
 import java.io.IOException
-import java.util.Collections
-import java.util.Map
 import javax.servlet.ServletException
 import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
@@ -20,11 +17,29 @@ import javax.servlet.http.HttpServletResponse
 import org.apache.log4j.Logger
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.resource.IResourceServiceProvider
+import org.eclipse.xtext.web.server.IRequestData
 import org.eclipse.xtext.web.server.InvalidRequestException
 import org.eclipse.xtext.web.server.XtextServiceDispatcher
 
 import static org.eclipse.xtext.web.server.InvalidRequestException.Type.*
 
+/**
+ * An HTTP servlet for publishing the Xtext services. Include this into your web server by creating
+ * a subclass that executes the standalone setups of your languages in its {@link #init()} method:
+ * 
+ * <pre>
+ * &#64;WebServlet(name = "Xtext Services", urlPatterns = "/xtext-service/*")
+ * class MyXtextServlet extends XtextServlet {
+ *     override init() {
+ *         super.init();
+ *         MyDslWebSetup.doSetup();
+ *     }
+ * }
+ * </pre>
+ * 
+ * Use the {@code WebServlet} annotation to register your servlet. The default URL pattern for
+ * Xtext services is {@code "/xtext-service/*"}.
+ */
 class XtextServlet extends HttpServlet {
 	
 	val LOG = Logger.getLogger(class)
@@ -78,40 +93,50 @@ class XtextServlet extends HttpServlet {
 		}
 	}
 	
-	protected def doService(XtextServiceDispatcher.ServiceDescriptor service, HttpServletResponse resp) {
-		val result = service.service.apply()
-		resp.setStatus(HttpServletResponse.SC_OK)
-		resp.setContentType("text/x-json;charset=UTF-8")
-		resp.setHeader("Cache-Control", "no-cache")
-		gson.toJson(result, resp.writer)
-	}
-	
-	protected def getService(HttpServletRequest req) {
-		val sessionStore = new HttpServletSessionStore(req.session)
-		val parameters = getParameterMap(req)
-		val injector = getInjector(parameters)
+	/**
+	 * Retrieve the service metadata for the given request. This involves resolving the Guice
+	 * injector for the respective language, querying the {@link XtextServiceDispatcher}, and
+	 * checking the permission to invoke the service.
+	 */
+	protected def getService(HttpServletRequest request) throws InvalidRequestException {
+		val sessionStore = new HttpServletSessionStore(request.session)
+		val requestData = new HttpServletRequestData(request)
+		val injector = getInjector(requestData)
 		val serviceDispatcher = injector.getInstance(XtextServiceDispatcher)
-		val service = serviceDispatcher.getService(req.pathInfo ?: '', parameters, sessionStore)
-		checkPermission(req, service)
+		val service = serviceDispatcher.getService(requestData, sessionStore)
+		checkPermission(request, service)
 		return service
 	}
 	
-	protected def void checkPermission(HttpServletRequest req, XtextServiceDispatcher.ServiceDescriptor service) {
-		// Subclasses may throw InvalidRequestException(PERMISSION_DENIED, '...')
+	/**
+	 * Invoke the service function of the given service descriptor and write its result to the
+	 * servlet response in Json format.
+	 */
+	protected def doService(XtextServiceDispatcher.ServiceDescriptor service, HttpServletResponse response) {
+		val result = service.service.apply()
+		response.setStatus(HttpServletResponse.SC_OK)
+		response.setContentType("text/x-json;charset=UTF-8")
+		response.setHeader("Cache-Control", "no-cache")
+		gson.toJson(result, response.writer)
 	}
 	
-	protected def getParameterMap(HttpServletRequest req) {
-		val paramMultiMap = req.parameterMap as Map<String, String[]>
-		val result = Maps.newHashMapWithExpectedSize(paramMultiMap.size)
-		paramMultiMap.entrySet.filter[value.length > 0].forEach[result.put(key, value.get(0))]
-		return Collections.unmodifiableMap(result)
+	/**
+	 * Check whether it is allowed to invoke the given service.
+	 * @throws InvalidRequestException with type {@code PERMISSION_DENIED} if permission is denied
+	 */
+	protected def void checkPermission(HttpServletRequest request, XtextServiceDispatcher.ServiceDescriptor service)
+			throws InvalidRequestException {
+		// The default implementation allows all services
 	}
 	
-	protected def getInjector(Map<String, String> parameters) throws InvalidRequestException {
+	/**
+	 * Resolve the Guice injector for the language associated with the given request.
+	 */
+	protected def getInjector(IRequestData requestData) throws InvalidRequestException {
 		var IResourceServiceProvider resourceServiceProvider
 		
-		val emfURI = URI.createURI(parameters.get('resource') ?: '')
-		val contentType = parameters.get('contentType')
+		val emfURI = URI.createURI(requestData.getParameter('resource') ?: '')
+		val contentType = requestData.getParameter('contentType')
 		if (contentType === null)
 			resourceServiceProvider = serviceProviderRegistry.getResourceServiceProvider(emfURI)
 		else

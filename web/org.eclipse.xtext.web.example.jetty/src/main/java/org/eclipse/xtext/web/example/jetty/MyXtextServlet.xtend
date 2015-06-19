@@ -8,6 +8,7 @@
 package org.eclipse.xtext.web.example.jetty
 
 import com.google.inject.Guice
+import com.google.inject.util.Modules
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import javax.servlet.annotation.WebServlet
@@ -32,7 +33,7 @@ class MyXtextServlet extends XtextServlet {
 				val runtimeModule = new StatemachineRuntimeModule
 				val webModule = new StatemachineWebModule(executorService)
 				webModule.resourceBaseProvider = resourceBaseProvider
-				return Guice.createInjector(runtimeModule, webModule)
+				return Guice.createInjector(Modules.override(runtimeModule).with(webModule))
 			}
 		}.createInjectorAndDoEMFRegistration
 		new EntitiesStandaloneSetup {
@@ -40,7 +41,7 @@ class MyXtextServlet extends XtextServlet {
 				val runtimeModule = new EntitiesRuntimeModule
 				val webModule = new EntitiesWebModule(executorService)
 				webModule.resourceBaseProvider = resourceBaseProvider
-				return Guice.createInjector(runtimeModule, webModule)
+				return Guice.createInjector(Modules.override(runtimeModule).with(webModule))
 			}
 		}.createInjectorAndDoEMFRegistration
 	}

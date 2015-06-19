@@ -7,38 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.web
 
-import org.eclipse.xtext.service.AbstractGenericModule
-import org.eclipse.xtext.web.server.contentassist.CrossrefProposalCreator
-import org.eclipse.xtext.web.server.contentassist.WebContentProposalPriorities
-import org.eclipse.xtext.web.server.contentassist.WebContentProposalProvider
-import org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker
-import org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider
-import org.eclipse.xtext.xbase.web.contentassist.ITypesProposalProvider
-import org.eclipse.xtext.xbase.web.contentassist.IndexBasedTypesProposalProvider
-import org.eclipse.xtext.xbase.web.contentassist.XbaseCrossrefProposalCreator
-import org.eclipse.xtext.xbase.web.contentassist.XbaseWebContentProposalPriorities
-import org.eclipse.xtext.xbase.web.contentassist.XbaseWebContentProposalProvider
+import org.eclipse.xtext.xbase.ide.DefaultXbaseIdeModule
 
-class DefaultXbaseWebModule extends AbstractGenericModule {
-	
-	def Class<? extends IFeatureScopeTracker.Provider> bindIFeatureScopeTrackerProvider() {
-		OptimizingFeatureScopeTrackerProvider
-	}
-	
-	def Class<? extends WebContentProposalProvider> bindWebContentProposalProvider() {
-		XbaseWebContentProposalProvider
-	}
-	
-	def Class<? extends CrossrefProposalCreator> bindCrossrefProposalCreator() {
-		XbaseCrossrefProposalCreator
-	}
-	
-	def Class<? extends WebContentProposalPriorities> bindWebContentProposalPriorities() {
-		XbaseWebContentProposalPriorities
-	}
-	
-	def Class<? extends ITypesProposalProvider> bindITypesProposalProvider() {
-		IndexBasedTypesProposalProvider
-	}
+class DefaultXbaseWebModule extends DefaultXbaseIdeModule {
 	
 }

@@ -8,8 +8,8 @@
 
 define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 	
-	function LoadResourceService(serverUrl, resourceUri) {
-		this.initialize(serverUrl, resourceUri, "load");
+	function LoadResourceService(serverUrl, resourceId) {
+		this.initialize(serverUrl, resourceId, "load");
 	};
 
 	LoadResourceService.prototype = new AbstractXtextService();
@@ -25,7 +25,7 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 			data : serverData,
 			success : function(result) {
 				editorContext.setText(result.fullText);
-				editorContext.getEditor().getUndoStack().reset();
+				editorContext.clearUndoStack();
 				editorContext.markClean(!result.dirty);
 				var listeners = editorContext.updateServerState(result.fullText, result.stateId);
 				for (i in listeners) {
