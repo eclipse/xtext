@@ -27,7 +27,7 @@ class ClusteringStorageAwareResourceLoader {
 		val sourceLevelURIs = <URI>newArrayList
 		val resources = newArrayList
 		val result = newArrayList
-		val iter = uris.filter[fileExtension != 'java'].iterator
+		val iter = uris.iterator
 		while (iter.hasNext) {
 			val uri = iter.next
 			if (!clusteringPolicy.continueProcessing(resourceSet, uri, loadedURIs.size)) {
@@ -53,7 +53,7 @@ class ClusteringStorageAwareResourceLoader {
 	}
 	
 	protected def isSource(URI uri) {
-		val provider = languages.get(uri.fileExtension).resourceServiceProvider
+		val provider = context.getResourceServiceProvider(uri)
 		return provider instanceof IResourceServiceProviderExtension &&
 				(provider as IResourceServiceProviderExtension).isSource(uri)
 	}

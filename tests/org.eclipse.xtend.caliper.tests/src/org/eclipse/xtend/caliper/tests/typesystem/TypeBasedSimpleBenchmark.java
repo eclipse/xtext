@@ -180,7 +180,7 @@ public abstract class TypeBasedSimpleBenchmark extends SimpleBenchmark {
 		XtextResourceSet resourceSet = new XtextResourceSet();
 		ClassLoader loader = getClass().getClassLoader();
 		resourceSet.setClasspathURIContext(loader);
-		typeProvider = new ClasspathTypeProvider(loader, resourceSet, indexedAccess);
+		typeProvider = new ClasspathTypeProvider(loader, resourceSet, indexedAccess, null);
 		CommonTypeComputationServices services = injector.getInstance(CommonTypeComputationServices.class);
 		owner = new StandardTypeReferenceOwner(services, resourceSet);
 	}

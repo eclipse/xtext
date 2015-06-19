@@ -135,22 +135,8 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
         _simpleName_2=computedSuperType.getSimpleName();
       }
       Assert.assertEquals(_key_2, _simpleName_2);
-      boolean _and = false;
-      boolean _notEquals = (!Objects.equal(computedSuperType, null));
-      if (!_notEquals) {
-        _and = false;
-      } else {
-        boolean _or = false;
-        boolean _isPrimitiveVoid = computedSuperType.isPrimitiveVoid();
-        if (_isPrimitiveVoid) {
-          _or = true;
-        } else {
-          boolean _isPrimitive = computedSuperType.isPrimitive();
-          _or = _isPrimitive;
-        }
-        _and = _or;
-      }
-      boolean _not_1 = (!_and);
+      boolean _isPrimitiveOrVoid = this.isPrimitiveOrVoid(computedSuperType);
+      boolean _not_1 = (!_isPrimitiveOrVoid);
       if (_not_1) {
         CommonTypeComputationServices _services_3 = this.getServices();
         TypeConformanceComputer _typeConformanceComputer_2 = _services_3.getTypeConformanceComputer();
@@ -171,8 +157,8 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
         }
         Assert.assertEquals(_key_3, _simpleName_3);
       }
-      boolean _notEquals_1 = (!Objects.equal(computedSuperType, null));
-      if (_notEquals_1) {
+      boolean _notEquals = (!Objects.equal(computedSuperType, null));
+      if (_notEquals) {
         final Procedure1<LightweightTypeReference> _function_1 = new Procedure1<LightweightTypeReference>() {
           @Override
           public void apply(final LightweightTypeReference superType) {
@@ -194,8 +180,8 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
         };
         ObjectExtensions.<LightweightTypeReference>operator_doubleArrow(computedSuperType, _function_1);
       }
-      boolean _notEquals_2 = (!Objects.equal(computedSuperType, null));
-      if (_notEquals_2) {
+      boolean _notEquals_1 = (!Objects.equal(computedSuperType, null));
+      if (_notEquals_1) {
         for (final LightweightTypeReference subType : typeReferences) {
           boolean _isAssignableFrom = computedSuperType.isAssignableFrom(subType);
           Assert.assertTrue(_isAssignableFrom);
@@ -205,6 +191,25 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  private boolean isPrimitiveOrVoid(final LightweightTypeReference computedSuperType) {
+    boolean _xblockexpression = false;
+    {
+      if ((computedSuperType == null)) {
+        return false;
+      }
+      boolean _or = false;
+      boolean _isPrimitiveVoid = computedSuperType.isPrimitiveVoid();
+      if (_isPrimitiveVoid) {
+        _or = true;
+      } else {
+        boolean _isPrimitive = computedSuperType.isPrimitive();
+        _or = _isPrimitive;
+      }
+      _xblockexpression = _or;
+    }
+    return _xblockexpression;
   }
   
   public void isFunctionAndEquivalentTo(final Object reference, final String type) {

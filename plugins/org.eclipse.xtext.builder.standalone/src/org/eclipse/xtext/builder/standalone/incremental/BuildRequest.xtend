@@ -7,11 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.standalone.incremental
 
+import java.io.File
 import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
-import java.io.File
-import org.eclipse.xtext.builder.standalone.IIssueHandler
+import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.util.internal.Log
+import org.eclipse.xtext.validation.Issue
+import org.eclipse.xtext.resource.IResourceDescription
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -19,6 +22,38 @@ import org.eclipse.xtext.builder.standalone.IIssueHandler
  */
 @Accessors
 class BuildRequest {
+	
+	interface IPostValidationCallback {
+		
+		/**
+		 * @return whether the build can proceed, <code>false</code> if the build should be interrupted
+		 */
+		def boolean afterValidate(URI validated, Iterable<Issue> issues);
+	}
+	
+	@Log private static class DefaultValidationCallback implements IPostValidationCallback {
+		
+		override afterValidate(URI validated, Iterable<Issue> issues) {
+			var boolean errorFree = true;
+			for (Issue issue : issues) {
+				switch (issue.getSeverity()) {
+					case ERROR : {
+						LOG.error(issue.toString())
+						errorFree = false
+					}
+					case WARNING :
+						LOG.warn(issue.toString())
+					case INFO:
+						LOG.info(issue.toString())
+					case IGNORE:
+						LOG.debug(issue.toString())
+				}
+			}
+			return errorFree;	
+		}
+		
+	}
+	
 	URI baseDir
 	
 	def URI getBaseDir() {
@@ -30,22 +65,22 @@ class BuildRequest {
 	}
 
 	List<URI> classPath = newArrayList
-	List<URI> sourceRoots = newArrayList
-	List<URI> outputs = newArrayList
 	List<URI> dirtyFiles = newArrayList
-	List<URI> deletedFiles = newArrayList
+	List<URI> deletedFiles = newArrayList;
+	List<IResourceDescription.Delta> externalDeltas = newArrayList()
 	
-	IIssueHandler issueHandler = new IIssueHandler.DefaultIssueHandler()
+	/**
+	 * call back after validation, return <code>false</code> will stop the build.
+	 */
+	IPostValidationCallback afterValidate = new DefaultValidationCallback()
 	(URI, URI)=>void afterGenerateFile = []
 	(URI)=>void afterDeleteFile = []
 	
 	IndexState previousState = new IndexState
 	
-	String defaultEncoding
-	
-	boolean isFullBuild = false
-	boolean failOnValidationError = true
-	boolean debugLog = false
 	boolean writeStorageResources = false
+	boolean indexOnly = false
+	
+	XtextResourceSet resourceSet
 	
 }

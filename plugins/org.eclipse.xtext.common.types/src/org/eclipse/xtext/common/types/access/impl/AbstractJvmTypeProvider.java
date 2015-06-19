@@ -134,7 +134,7 @@ public abstract class AbstractJvmTypeProvider implements IJvmTypeProvider, Resou
 
 	protected abstract IMirror createMirrorForFQN(String name);
 
-	protected IndexedJvmTypeAccess getIndexedJvmTypeAccess() {
+	public IndexedJvmTypeAccess getIndexedJvmTypeAccess() {
 		return indexedJvmTypeAccess;
 	}
 	

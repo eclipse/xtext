@@ -30,7 +30,7 @@ class ErrorSafeExtensions {
 	@Inject extension TypeReferenceSerializer 
 
 	@Inject IElementIssueProvider.Factory issueProviderFactory
-
+	
 	def Iterable<Issue> getErrors(EObject element) {
 		val issueProvider = issueProviderFactory.get(element.eResource)
 		issueProvider.getIssues(element).filter[severity == Severity.ERROR]

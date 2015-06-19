@@ -9,7 +9,8 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.common.types.descriptions.IStubGenerator;
-import org.eclipse.xtext.generator.IGenerator;
+import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
+import org.eclipse.xtext.generator.GeneratorDelegate;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
@@ -49,8 +50,8 @@ public class LanguageAccess {
 		this.linksAgainstJava = linksAgainstJavaTypes;
 	}
 
-	public IGenerator getGenerator() {
-		return resourceServiceProvider.get(IGenerator.class);
+	public GeneratorDelegate getGenerator() {
+		return resourceServiceProvider.get(GeneratorDelegate.class);
 	}
 
 	public IStubGenerator getStubGenerator() {
@@ -66,6 +67,11 @@ public class LanguageAccess {
 
 	public JavaIoFileSystemAccess createFileSystemAccess(final File baseDir) {
 		JavaIoFileSystemAccess fsa = resourceServiceProvider.get(JavaIoFileSystemAccess.class);
+		configureFileSystemAccess(baseDir, fsa);
+		return fsa;
+	}
+	
+	private void configureFileSystemAccess(final File baseDir, AbstractFileSystemAccess2 fsa) {
 		Set<OutputConfiguration> confsForFsa = Sets.newHashSet();
 		Set<OutputConfiguration> pomOutputConfigs = getConfiguredOutputConfigs();
 		if (pomOutputConfigs != null && !pomOutputConfigs.isEmpty()) {
@@ -96,7 +102,6 @@ public class LanguageAccess {
 					}
 				});
 		fsa.setOutputConfigurations(asMap);
-		return fsa;
 	}
 
 	public Set<OutputConfiguration> getConfiguredOutputConfigs() {

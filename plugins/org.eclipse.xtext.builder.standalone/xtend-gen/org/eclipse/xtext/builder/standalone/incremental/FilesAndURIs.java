@@ -14,7 +14,6 @@ import java.net.URLClassLoader;
 import java.util.Comparator;
 import java.util.List;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ExclusiveRange;
@@ -27,7 +26,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @SuppressWarnings("all")
 public class FilesAndURIs {
   /**
-   * Unfortunately, {@link File#toURI} does not append '/' to directiories, making it useless for the {@link URLClassLoader}.
+   * Unfortunately, {@link File#toURI} does not append '/' to directories, making it useless for the {@link URLClassLoader}.
    */
   public static URI asURI(final File file) {
     try {
@@ -91,11 +90,6 @@ public class FilesAndURIs {
     String _string = url.toString();
     URI _asURI = FilesAndURIs.asURI(_string);
     return FilesAndURIs.asPath(_asURI);
-  }
-  
-  public static URI findSourceRootRelativeURI(final URI uri, final BuildRequest request) {
-    List<URI> _sourceRoots = request.getSourceRoots();
-    return FilesAndURIs.findRelativeURI(uri, _sourceRoots);
   }
   
   public static URI findRelativeURI(final URI uri, final Iterable<URI> baseURIs) {

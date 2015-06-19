@@ -10,11 +10,16 @@ package org.eclipse.xtext.builder.standalone.incremental;
 import com.google.common.base.Objects;
 import java.io.File;
 import java.util.List;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.builder.standalone.IIssueHandler;
 import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
 import org.eclipse.xtext.builder.standalone.incremental.IndexState;
+import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.util.internal.Log;
+import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
@@ -27,6 +32,50 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Accessors
 @SuppressWarnings("all")
 public class BuildRequest {
+  public interface IPostValidationCallback {
+    /**
+     * @return whether the build can proceed, <code>false</code> if the build should be interrupted
+     */
+    public abstract boolean afterValidate(final URI validated, final Iterable<Issue> issues);
+  }
+  
+  @Log
+  private static class DefaultValidationCallback implements BuildRequest.IPostValidationCallback {
+    @Override
+    public boolean afterValidate(final URI validated, final Iterable<Issue> issues) {
+      boolean errorFree = true;
+      for (final Issue issue : issues) {
+        Severity _severity = issue.getSeverity();
+        if (_severity != null) {
+          switch (_severity) {
+            case ERROR:
+              String _string = issue.toString();
+              BuildRequest.DefaultValidationCallback.LOG.error(_string);
+              errorFree = false;
+              break;
+            case WARNING:
+              String _string_1 = issue.toString();
+              BuildRequest.DefaultValidationCallback.LOG.warn(_string_1);
+              break;
+            case INFO:
+              String _string_2 = issue.toString();
+              BuildRequest.DefaultValidationCallback.LOG.info(_string_2);
+              break;
+            case IGNORE:
+              String _string_3 = issue.toString();
+              BuildRequest.DefaultValidationCallback.LOG.debug(_string_3);
+              break;
+            default:
+              break;
+          }
+        }
+      }
+      return errorFree;
+    }
+    
+    private final static Logger LOG = Logger.getLogger(DefaultValidationCallback.class);
+  }
+  
   private URI baseDir;
   
   public URI getBaseDir() {
@@ -42,15 +91,16 @@ public class BuildRequest {
   
   private List<URI> classPath = CollectionLiterals.<URI>newArrayList();
   
-  private List<URI> sourceRoots = CollectionLiterals.<URI>newArrayList();
-  
-  private List<URI> outputs = CollectionLiterals.<URI>newArrayList();
-  
   private List<URI> dirtyFiles = CollectionLiterals.<URI>newArrayList();
   
   private List<URI> deletedFiles = CollectionLiterals.<URI>newArrayList();
   
-  private IIssueHandler issueHandler = new IIssueHandler.DefaultIssueHandler();
+  private List<IResourceDescription.Delta> externalDeltas = CollectionLiterals.<IResourceDescription.Delta>newArrayList();
+  
+  /**
+   * call back after validation, return <code>false</code> will stop the build.
+   */
+  private BuildRequest.IPostValidationCallback afterValidate = new BuildRequest.DefaultValidationCallback();
   
   private Procedure2<? super URI, ? super URI> afterGenerateFile = new Procedure2<URI, URI>() {
     @Override
@@ -66,15 +116,11 @@ public class BuildRequest {
   
   private IndexState previousState = new IndexState();
   
-  private String defaultEncoding;
-  
-  private boolean isFullBuild = false;
-  
-  private boolean failOnValidationError = true;
-  
-  private boolean debugLog = false;
-  
   private boolean writeStorageResources = false;
+  
+  private boolean indexOnly = false;
+  
+  private XtextResourceSet resourceSet;
   
   public void setBaseDir(final URI baseDir) {
     this.baseDir = baseDir;
@@ -87,24 +133,6 @@ public class BuildRequest {
   
   public void setClassPath(final List<URI> classPath) {
     this.classPath = classPath;
-  }
-  
-  @Pure
-  public List<URI> getSourceRoots() {
-    return this.sourceRoots;
-  }
-  
-  public void setSourceRoots(final List<URI> sourceRoots) {
-    this.sourceRoots = sourceRoots;
-  }
-  
-  @Pure
-  public List<URI> getOutputs() {
-    return this.outputs;
-  }
-  
-  public void setOutputs(final List<URI> outputs) {
-    this.outputs = outputs;
   }
   
   @Pure
@@ -126,12 +154,21 @@ public class BuildRequest {
   }
   
   @Pure
-  public IIssueHandler getIssueHandler() {
-    return this.issueHandler;
+  public List<IResourceDescription.Delta> getExternalDeltas() {
+    return this.externalDeltas;
   }
   
-  public void setIssueHandler(final IIssueHandler issueHandler) {
-    this.issueHandler = issueHandler;
+  public void setExternalDeltas(final List<IResourceDescription.Delta> externalDeltas) {
+    this.externalDeltas = externalDeltas;
+  }
+  
+  @Pure
+  public BuildRequest.IPostValidationCallback getAfterValidate() {
+    return this.afterValidate;
+  }
+  
+  public void setAfterValidate(final BuildRequest.IPostValidationCallback afterValidate) {
+    this.afterValidate = afterValidate;
   }
   
   @Pure
@@ -162,47 +199,29 @@ public class BuildRequest {
   }
   
   @Pure
-  public String getDefaultEncoding() {
-    return this.defaultEncoding;
-  }
-  
-  public void setDefaultEncoding(final String defaultEncoding) {
-    this.defaultEncoding = defaultEncoding;
-  }
-  
-  @Pure
-  public boolean isFullBuild() {
-    return this.isFullBuild;
-  }
-  
-  public void setIsFullBuild(final boolean isFullBuild) {
-    this.isFullBuild = isFullBuild;
-  }
-  
-  @Pure
-  public boolean isFailOnValidationError() {
-    return this.failOnValidationError;
-  }
-  
-  public void setFailOnValidationError(final boolean failOnValidationError) {
-    this.failOnValidationError = failOnValidationError;
-  }
-  
-  @Pure
-  public boolean isDebugLog() {
-    return this.debugLog;
-  }
-  
-  public void setDebugLog(final boolean debugLog) {
-    this.debugLog = debugLog;
-  }
-  
-  @Pure
   public boolean isWriteStorageResources() {
     return this.writeStorageResources;
   }
   
   public void setWriteStorageResources(final boolean writeStorageResources) {
     this.writeStorageResources = writeStorageResources;
+  }
+  
+  @Pure
+  public boolean isIndexOnly() {
+    return this.indexOnly;
+  }
+  
+  public void setIndexOnly(final boolean indexOnly) {
+    this.indexOnly = indexOnly;
+  }
+  
+  @Pure
+  public XtextResourceSet getResourceSet() {
+    return this.resourceSet;
+  }
+  
+  public void setResourceSet(final XtextResourceSet resourceSet) {
+    this.resourceSet = resourceSet;
   }
 }

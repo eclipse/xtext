@@ -6,7 +6,7 @@ buildscript {
 
 def eclipsePluginProjects = subprojects.findAll{it.file('build.properties').exists()}
 def ideaPluginProjects = subprojects.findAll{it.file('META-INF/plugin.xml').exists() && ! it.name.endsWith('tests')}
-def ideaTestProjects = subprojects.findAll{it.name.endsWith('idea.tests')} + project('org.eclipse.xtext.idea.common.types.tests') + project('org.eclipse.xtext.idea.builder.tests') - project('org.eclipse.xtext.idea.tests')
+def ideaTestProjects = subprojects.findAll{it.name.endsWith('idea.tests')} + project('org.eclipse.xtext.idea.common.types.tests') - project('org.eclipse.xtext.idea.tests')
 
 apply plugin: 'org.xtext.idea-repository'
 apply plugin: 'org.xtext.idea-aggregator'
@@ -74,6 +74,7 @@ configure(ideaTestProjects) {
 
 	test {
 		minHeapSize = "1024m"
+		systemProperty 'idea.system.path', "${project.buildDir}/idea-test-system"
 		jvmArgs '-XX:MaxPermSize=256m'
 		exclude {it.name.endsWith('Delegate.class')}
 	}

@@ -8,7 +8,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.generator.FileSystemAccessRequest;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
 
 /**
  * @author Anton Kosyakov
@@ -30,8 +29,11 @@ public class FileSystemAccessQueue extends AdapterImpl {
     this.monitor = monitor;
   }
   
-  public void sendAsync(final URI uri, final Procedure0 procedure) {
-    FileSystemAccessRequest _fileSystemAccessRequest = new FileSystemAccessRequest(uri, procedure);
+  /**
+   * @since 2.9
+   */
+  public void sendAsync(final URI uri, final Runnable runMe) {
+    FileSystemAccessRequest _fileSystemAccessRequest = new FileSystemAccessRequest(uri, runMe);
     this.send(_fileSystemAccessRequest);
   }
   

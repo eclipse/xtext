@@ -7,13 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.standalone.incremental
 
-import java.io.File
-import java.util.Map
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-import org.eclipse.xtext.builder.standalone.LanguageAccess
+import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy
 
@@ -21,23 +19,23 @@ import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.9
  */
-@FinalFieldsConstructor @Accessors
+@FinalFieldsConstructor
 class BuildContext {
-	val Map<String, LanguageAccess> languages
-	val XtextResourceSet resourceSet
-	val IResourceClusteringPolicy clusteringPolicy
-	val File tempDir
+	val IResourceServiceProvider.Registry resourceServiceProviderRegistry
+	@Accessors val XtextResourceSet resourceSet
+	@Accessors val IResourceClusteringPolicy clusteringPolicy
 	
 	ClusteringStorageAwareResourceLoader loader
 	
 	def <T> executeClustered(Iterable<URI> uri, (Resource)=>T operation) {
 		if(loader == null) 
 			loader = new ClusteringStorageAwareResourceLoader(this)
-		loader.executeClustered(uri, operation)
+		loader.executeClustered(uri.filter[resourceServiceProvider!=null], operation)
 	}
 	
-	def getLanguageAccess(URI uri) {
-		languages.get(uri.fileExtension)
+	def getResourceServiceProvider(URI uri) {
+		val resourceServiceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(uri)
+		return resourceServiceProvider
 	}
 	
 }

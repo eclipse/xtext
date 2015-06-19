@@ -58,7 +58,7 @@ public class LineSeparatorConversionTest extends AbstractXtendUITestCase {
 		waitForAutoBuild();
 		IFile compiledFile = project.getFile("xtend-gen/Foo.java");
 		workbenchTestHelper.getFiles().add(compiledFile);
-		String contents = workbenchTestHelper.getContentsAsString(compiledFile);
+		String contents = WorkbenchTestHelper.getContentsAsString(compiledFile);
 		List<String> expectedLines = ImmutableList.of("@SuppressWarnings(\"all\")", "public class Foo {", "}", "");
 		String expectedContent = Joiner.on(separator).join(expectedLines);
 		assertEquals(expectedContent, contents);

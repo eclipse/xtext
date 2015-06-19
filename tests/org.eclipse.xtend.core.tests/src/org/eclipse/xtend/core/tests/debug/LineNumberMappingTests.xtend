@@ -147,6 +147,27 @@ class LineNumberMappingTests extends AbstractXtendTestCase {
 		''')
 	}
 	
+	// TODO the mapping of the decl to line 18 should be fixed
+	@Test
+	def void testLineMapping_09() {
+		assertLineNumbers('''
+		package foo
+		
+		class Test {
+			
+			def Object doStuff() { // 18 
+				switch x : "Hello" { 		// 5..7
+					String 					// 8..9
+						case 
+							x.length > 4 : {// 10..12
+						null			// 14
+					}
+				}
+			}
+		}
+		''')
+	}
+	
 	def assertLineNumbers(CharSequence xtendCodeWithLineNumbers) {
 		val region = xtendCodeWithLineNumbers.traceRegion
 		val normalizedMappings = lineMappingProvider.getLineMapping(region)
@@ -187,6 +208,7 @@ class LineNumberMappingTests extends AbstractXtendTestCase {
 	def AbstractTraceRegion getTraceRegion(CharSequence xtendCode) {
 		val clazz = super.clazz(xtendCode.toString)
 		val fsa = new AbstractTraceRegionFSA()
+		// test without issues attached on purpose
 		generator.doGenerate(clazz.eResource, fsa)
 		val result = (fsa.charSequence as ITraceRegionProvider).traceRegion
 		result.print(fsa.charSequence.toString)

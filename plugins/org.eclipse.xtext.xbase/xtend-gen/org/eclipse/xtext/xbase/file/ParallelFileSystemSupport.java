@@ -13,10 +13,9 @@ import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.generator.FileSystemAccessQueue;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
 
 /**
- * @author kosyakov - Initial contribution and API
+ * @author Anton Kosyakov - Initial contribution and API
  */
 @SuppressWarnings("all")
 public class ParallelFileSystemSupport implements MutableFileSystemSupport {
@@ -35,9 +34,9 @@ public class ParallelFileSystemSupport implements MutableFileSystemSupport {
   
   @Override
   public void delete(final Path path) {
-    final Procedure0 _function = new Procedure0() {
+    final Runnable _function = new Runnable() {
       @Override
-      public void apply() {
+      public void run() {
         ParallelFileSystemSupport.this.delegate.delete(path);
       }
     };
@@ -46,9 +45,9 @@ public class ParallelFileSystemSupport implements MutableFileSystemSupport {
   
   @Override
   public void mkdir(final Path path) {
-    final Procedure0 _function = new Procedure0() {
+    final Runnable _function = new Runnable() {
       @Override
-      public void apply() {
+      public void run() {
         ParallelFileSystemSupport.this.delegate.mkdir(path);
       }
     };
@@ -57,9 +56,9 @@ public class ParallelFileSystemSupport implements MutableFileSystemSupport {
   
   @Override
   public void setContents(final Path path, final CharSequence contents) {
-    final Procedure0 _function = new Procedure0() {
+    final Runnable _function = new Runnable() {
       @Override
-      public void apply() {
+      public void run() {
         ParallelFileSystemSupport.this.delegate.setContents(path, contents);
       }
     };
@@ -68,9 +67,9 @@ public class ParallelFileSystemSupport implements MutableFileSystemSupport {
   
   @Override
   public void setContentsAsStream(final Path path, final InputStream source) {
-    final Procedure0 _function = new Procedure0() {
+    final Runnable _function = new Runnable() {
       @Override
-      public void apply() {
+      public void run() {
         ParallelFileSystemSupport.this.delegate.setContentsAsStream(path, source);
       }
     };

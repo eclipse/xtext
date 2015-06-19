@@ -23,7 +23,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
- * @author efftinge - Initial contribution and API
+ * @author Sven Efftinge - Initial contribution and API
  */
 @RunWith(XtextRunner)
 @InjectWith(RuntimeInjectorProvider)

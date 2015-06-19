@@ -1,0 +1,53 @@
+<idea-plugin version="2">
+	<id>org.eclipse.xtext.testlanguages.idea</id>
+	<name>BeeLangTestLanguage Support</name>
+	<description>
+      This plugin enables smart editing of BeeLangTestLanguage files.
+	</description>
+	<version>1.0.0</version>
+	<vendor>My Company</vendor>
+
+	<idea-version since-build="131"/>
+	<depends>org.eclipse.xtext.idea</depends>
+
+	<extensions defaultExtensionNs="com.intellij">
+		<buildProcess.parametersProvider implementation="org.eclipse.xtext.testlanguages.backtracking.idea.server.BeeLangTestLanguageBuildProcessParametersProvider"/>
+
+		<stubIndex implementation="org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex"/>
+
+		<psi.treeChangePreprocessor implementation="org.eclipse.xtext.testlanguages.backtracking.idea.lang.psi.BeeLangTestLanguageCodeBlockModificationListener"/>
+
+		<fileTypeFactory implementation="org.eclipse.xtext.testlanguages.backtracking.idea.lang.BeeLangTestLanguageFileTypeFactory"/>
+		<stubElementTypeHolder class="org.eclipse.xtext.testlanguages.backtracking.idea.lang.BeeLangTestLanguageElementTypeProvider"/>
+		<lang.ast.factory language="org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage"
+								factoryClass="org.eclipse.xtext.testlanguages.backtracking.idea.BeeLangTestLanguageExtensionFactory"
+								implementationClass="org.eclipse.xtext.idea.lang.BaseXtextASTFactory"/>
+		<lang.parserDefinition language="org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage"
+								factoryClass="org.eclipse.xtext.testlanguages.backtracking.idea.BeeLangTestLanguageExtensionFactory"
+								implementationClass="org.eclipse.xtext.testlanguages.backtracking.idea.lang.parser.BeeLangTestLanguageParserDefinition"/>
+		<lang.findUsagesProvider language="org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage"
+								factoryClass="org.eclipse.xtext.testlanguages.backtracking.idea.BeeLangTestLanguageExtensionFactory"
+								implementationClass="org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider"/>
+		<lang.refactoringSupport language="org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage"
+								factoryClass="org.eclipse.xtext.testlanguages.backtracking.idea.BeeLangTestLanguageExtensionFactory"
+								implementationClass="org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider"/>
+		<lang.namesValidator language="org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage"
+								factoryClass="org.eclipse.xtext.testlanguages.backtracking.idea.BeeLangTestLanguageExtensionFactory"
+								implementationClass="com.intellij.lang.refactoring.NamesValidator"/>
+      	<lang.syntaxHighlighterFactory key="org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage" implementationClass="org.eclipse.xtext.testlanguages.backtracking.idea.lang.BeeLangTestLanguageSyntaxHighlighterFactory" />
+		<lang.braceMatcher language="org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage"
+								factoryClass="org.eclipse.xtext.testlanguages.backtracking.idea.BeeLangTestLanguageExtensionFactory"
+								implementationClass="com.intellij.lang.PairedBraceMatcher"/>
+      	<annotator language="org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage"
+      							factoryClass="org.eclipse.xtext.testlanguages.backtracking.idea.BeeLangTestLanguageExtensionFactory"
+      							implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"/>
+      	<completion.contributor language="org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage" implementationClass="org.eclipse.xtext.testlanguages.backtracking.idea.completion.BeeLangTestLanguageCompletionContributor"/>
+      	<elementDescriptionProvider implementation="org.eclipse.xtext.testlanguages.backtracking.idea.lang.psi.BeeLangTestLanguageElementDescriptionProvider" order="first"/>
+      	<pom.declarationSearcher implementation="org.eclipse.xtext.testlanguages.backtracking.idea.lang.pom.BeeLangTestLanguagePomDeclarationSearcher"/>
+
+      	<lang.psiStructureViewFactory language="org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage"
+      							factoryClass="org.eclipse.xtext.testlanguages.backtracking.idea.BeeLangTestLanguageExtensionFactory"
+      							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
+	</extensions>
+
+</idea-plugin>

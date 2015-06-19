@@ -30,6 +30,7 @@ import testdata.Annotation2;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class AnnotationsCompilerTest extends AbstractXtendTestCase {
 	
 	@Inject

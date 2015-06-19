@@ -2,7 +2,6 @@ package org.eclipse.xtend.core.tests.smoke;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.ENamedElement;
@@ -16,7 +15,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @SuppressWarnings("all")
 public class Case_6 {
-  protected List<?> _transform(final EPackage packageDecl) {
+  protected Object _transform(final EPackage packageDecl) {
     EList<EObject> _eContents = packageDecl.eContents();
     final Function1<EObject, Object> _function = new Function1<EObject, Object>() {
       @Override
@@ -27,7 +26,7 @@ public class Case_6 {
     return ListExtensions.<EObject, Object>map(_eContents, _function);
   }
   
-  protected List<?> _transform(final EStructuralFeature entity) {
+  protected Object _transform(final EStructuralFeature entity) {
     ArrayList<EObject> _xblockexpression = null;
     {
       final Object inferredType = null;
@@ -36,7 +35,7 @@ public class Case_6 {
     return _xblockexpression;
   }
   
-  protected List<?> _transform(final EClass model) {
+  protected Object _transform(final EClass model) {
     EList<ETypeParameter> _eTypeParameters = model.getETypeParameters();
     final Function1<ETypeParameter, Object> _function = new Function1<ETypeParameter, Object>() {
       @Override
@@ -47,7 +46,7 @@ public class Case_6 {
     return ListExtensions.<ETypeParameter, Object>map(_eTypeParameters, _function);
   }
   
-  public List<?> transform(final ENamedElement model) {
+  public Object transform(final ENamedElement model) {
     if (model instanceof EClass) {
       return _transform((EClass)model);
     } else if (model instanceof EStructuralFeature) {

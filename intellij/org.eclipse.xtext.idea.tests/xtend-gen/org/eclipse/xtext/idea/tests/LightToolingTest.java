@@ -43,6 +43,7 @@ import javax.swing.JTree;
 import junit.framework.TestCase;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.junit4.internal.LineDelimiters;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
@@ -58,6 +59,7 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
   private final LanguageFileType fileType;
   
   public LightToolingTest(final LanguageFileType fileType) {
+    XtextAutoBuilderComponent.TEST_MODE = true;
     this.fileType = fileType;
     IXtextLanguage _xtextLanguage = this.getXtextLanguage();
     _xtextLanguage.injectMembers(this);

@@ -29,7 +29,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class TypeResource extends ResourceImpl implements ISynchronizable<TypeResource>{
+public class TypeResource extends ResourceImpl implements ISynchronizable<TypeResource>, IJavaSchemeUriResolver {
 
 	/**
 	 * @since 2.7
@@ -153,6 +153,7 @@ public class TypeResource extends ResourceImpl implements ISynchronizable<TypeRe
 		}
 	}
 	
+	@Override
 	public EObject resolveJavaObjectURIProxy(InternalEObject proxy, JvmTypeReference sender) {
 		if (indexedJvmTypeAccess != null) {
 			EObject result = indexedJvmTypeAccess.getIndexedJvmType(proxy.eProxyURI(), getResourceSet());

@@ -16,9 +16,9 @@ import org.eclipse.emf.common.util.URI
  * @author Jan Koehnlein - Initial contribution and API
  */
 class FilesAndURIs {
-	
+
 	/**
-	 * Unfortunately, {@link File#toURI} does not append '/' to directiories, making it useless for the {@link URLClassLoader}.
+	 * Unfortunately, {@link File#toURI} does not append '/' to directories, making it useless for the {@link URLClassLoader}.
 	 */
 	static def asURI(File file) {
 		val uri = URI.createFileURI(file.canonicalFile.absolutePath)
@@ -51,10 +51,6 @@ class FilesAndURIs {
 		url.toString.asURI.asPath
 	}
 	
-	static def findSourceRootRelativeURI(URI uri, BuildRequest request) {
-		return findRelativeURI(uri, request.sourceRoots)
-	}
-
 	static def findRelativeURI(URI uri, Iterable<URI> baseURIs) {
 		val relativeURIs = baseURIs
 			.map[getRelativeURI(uri)]

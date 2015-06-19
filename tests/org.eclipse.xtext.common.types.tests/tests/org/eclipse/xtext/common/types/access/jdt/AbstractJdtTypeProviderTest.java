@@ -27,11 +27,11 @@ public abstract class AbstractJdtTypeProviderTest extends AbstractTypeProviderTe
 		MockJavaProjectProvider.setUp();
 	}
 	
-	@Test public void testEnum_05() throws Exception {
-		doTestEnum_05("string");
+	@Test public void testEnum_07() throws Exception {
+		doTestEnum_07("string");
 	}
 	
-	protected void doTestEnum_05(String paramName) throws Exception {
+	protected void doTestEnum_07(String paramName) throws Exception {
 		String typeName = TestEnum.class.getName();
 		JvmEnumerationType type = (JvmEnumerationType) getTypeProvider().findTypeByName(typeName);
 		boolean constructorSeen = false;

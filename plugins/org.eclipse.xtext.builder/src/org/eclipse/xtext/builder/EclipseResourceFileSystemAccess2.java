@@ -674,11 +674,23 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 		return isFile(path, outputConfigurationName, monitor);
 	}
 
+	@Override
+	public boolean isFile(String path) throws RuntimeIOException {
+		return isFile(path, DEFAULT_OUTPUT);
+	}
+	
 	/**
 	 * @since 2.9
 	 */
 	public boolean isFile(String path, String outputConfigurationName, IProgressMonitor progressMonitor) {
 		return getFile(path, outputConfigurationName, progressMonitor).exists();
 	}
-
+	
+	/**
+	 * @since 2.9
+	 */
+	public boolean isFile(String path, IProgressMonitor progressMonitor) throws RuntimeIOException {
+		return isFile(path, DEFAULT_OUTPUT, progressMonitor);
+	}
+	
 }

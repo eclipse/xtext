@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer.sequencer;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EAttribute;

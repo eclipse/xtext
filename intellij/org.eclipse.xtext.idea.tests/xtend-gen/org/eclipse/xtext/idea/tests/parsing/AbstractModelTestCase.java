@@ -10,7 +10,6 @@ package org.eclipse.xtext.idea.tests.parsing;
 import com.google.inject.Inject;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ContentEntry;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -21,11 +20,10 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.idea.lang.BaseXtextASTFactory;
-import org.eclipse.xtext.idea.resource.IResourceSetProvider;
+import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider;
 import org.eclipse.xtext.idea.resource.PsiToEcoreTransformator;
 import org.eclipse.xtext.idea.tests.LibraryUtil;
 import org.eclipse.xtext.idea.tests.LightToolingTest;
@@ -34,6 +32,7 @@ import org.eclipse.xtext.idea.tests.parsing.XtextResourceAsserts;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -51,7 +50,7 @@ public class AbstractModelTestCase extends LightToolingTest implements ModelChec
   
   @Inject
   @Accessors(AccessorType.PROTECTED_GETTER)
-  private IResourceSetProvider resourceSetProvider;
+  private IdeaResourceSetProvider resourceSetProvider;
   
   @Inject
   @Accessors(AccessorType.PROTECTED_GETTER)
@@ -116,8 +115,7 @@ public class AbstractModelTestCase extends LightToolingTest implements ModelChec
   }
   
   protected XtextResource createExpectedResource() {
-    Project _project = this.getProject();
-    ResourceSet resourceSet = this.resourceSetProvider.get(_project);
+    XtextResourceSet resourceSet = this.resourceSetProvider.get(this.myModule);
     BaseXtextFile _xtextFile = this.getXtextFile();
     VirtualFile _virtualFile = _xtextFile.getVirtualFile();
     String _url = _virtualFile.getUrl();
@@ -152,7 +150,7 @@ public class AbstractModelTestCase extends LightToolingTest implements ModelChec
   }
   
   @Pure
-  protected IResourceSetProvider getResourceSetProvider() {
+  protected IdeaResourceSetProvider getResourceSetProvider() {
     return this.resourceSetProvider;
   }
   

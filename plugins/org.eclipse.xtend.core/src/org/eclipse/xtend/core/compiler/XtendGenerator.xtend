@@ -41,20 +41,35 @@ import org.eclipse.xtext.xbase.compiler.output.SharedAppendableState
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner
 import org.eclipse.xtext.service.OperationCanceledManager
+import org.eclipse.xtext.generator.IFileSystemAccess2
+import org.eclipse.xtext.xbase.compiler.ElementIssueProvider
+import org.eclipse.xtext.generator.IGenerator2
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-class XtendGenerator extends JvmModelGenerator {
+class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 	
-	@Inject 
-	private IBatchTypeResolver typeResolver;
-	@Inject
-	private OperationCanceledManager operationCanceledManager
+	@Inject IBatchTypeResolver typeResolver;
+	@Inject OperationCanceledManager operationCanceledManager
+
+	@Inject ElementIssueProvider.Factory issueProviderFactory
 	
 	override doGenerate(Resource input, IFileSystemAccess fsa) {
 		super.doGenerate(input, fsa)
 		callMacroProcessors(input)
+	}
+	
+	override beforeGenerate(Resource input, IFileSystemAccess2 fsa) {
+		issueProviderFactory.attachData(input)
+	}
+	
+	override afterGenerate(Resource input, IFileSystemAccess2 fsa) {
+		issueProviderFactory.detachData(input)
+	}
+	
+	override doGenerate(Resource input, IFileSystemAccess2 fsa) {
+		doGenerate(input, fsa as IFileSystemAccess)
 	}
 	
 	def void callMacroProcessors(Resource input) {

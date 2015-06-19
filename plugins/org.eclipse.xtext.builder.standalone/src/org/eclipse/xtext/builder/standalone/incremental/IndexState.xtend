@@ -16,7 +16,7 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
  */
 @FinalFieldsConstructor @Accessors class IndexState {
 	
-	val ResourceDescriptionsData resourceDescriptions 
+	val ResourceDescriptionsData resourceDescriptions
 	val Source2GeneratedMapping fileMappings
 	
 	new () {

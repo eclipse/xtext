@@ -112,7 +112,7 @@ public class ResolveScopeBasedContainerManagerTest extends PlatformTestCase {
     super.tearDown();
   }
   
-  public void testGetContainer_01() {
+  public void ignore_testGetContainer_01() {
     BaseXtextFile _head = IterableExtensions.<BaseXtextFile>head(((Iterable<BaseXtextFile>)Conversions.doWrapArray(this.files)));
     URI _uRI = _head.getURI();
     final URIBasedTestResourceDescription description = new URIBasedTestResourceDescription(_uRI);
@@ -137,7 +137,7 @@ public class ResolveScopeBasedContainerManagerTest extends PlatformTestCase {
     TestCase.assertNull(_resourceDescription_2);
   }
   
-  public void testGetContainer_02() {
+  public void ignore_testGetContainer_02() {
     StringConcatenation _builder = new StringConcatenation();
     String _tempDirPath = this.myFixture.getTempDirPath();
     _builder.append(_tempDirPath, "");

@@ -13,7 +13,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.lib.annotations.Data;
-import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
+import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
@@ -124,9 +124,8 @@ public class TypeResourceDescription extends AbstractResourceDescription {
   
   public TypeResourceDescription(final QualifiedName typeName) {
     String _string = typeName.toString(".");
-    String _plus = ("java:/" + _string);
-    URI _asURI = FilesAndURIs.asURI(_plus);
-    this.uri = _asURI;
+    URI _appendSegment = URIHelperConstants.OBJECTS_URI.appendSegment(_string);
+    this.uri = _appendSegment;
     TypeResourceDescription.ClassDescription _classDescription = new TypeResourceDescription.ClassDescription(typeName);
     this.exportedObjects = Collections.<IEObjectDescription>unmodifiableList(CollectionLiterals.<IEObjectDescription>newArrayList(_classDescription));
   }

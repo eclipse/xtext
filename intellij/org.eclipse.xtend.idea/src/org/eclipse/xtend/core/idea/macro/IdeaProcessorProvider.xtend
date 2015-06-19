@@ -7,27 +7,23 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.idea.macro
 
-import com.google.inject.Inject
-import com.intellij.openapi.module.ModuleUtil
 import com.intellij.openapi.roots.OrderEnumerator
 import java.io.File
 import java.net.URLClassLoader
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtext.common.types.JvmType
-import org.eclipse.xtext.psi.IPsiModelAssociations
+import org.eclipse.xtext.idea.resource.ModuleProvider
+import org.eclipse.xtext.resource.XtextResourceSet
 
 class IdeaProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 
-	@Inject
-	extension IPsiModelAssociations
-
 	override getProcessorInstance(JvmType type) {
-		val psiElement = type.eResource.resourceSet.resources.head.contents.head.psiElement
-		val module = ModuleUtil.findModuleForPsiElement(psiElement)
+		val resourceSet = type.eResource.resourceSet as XtextResourceSet
+		val module = ModuleProvider.findModule(resourceSet)
 		val roots = OrderEnumerator.orderEntries(module).recursively.classes.pathsList.virtualFiles
 		val urls = roots.map[new File(path).toURI.toURL]
 		val classLoader = new URLClassLoader(urls, TransformationContext.classLoader)
-		classLoader.loadClass(type.identifier).newInstance
+		return classLoader.loadClass(type.identifier).newInstance
 	}
 }

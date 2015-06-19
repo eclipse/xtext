@@ -108,7 +108,7 @@ public class RefactoringIntegrationTest extends AbstractXtendUITestCase {
 		IFile newFile = testHelper.getFile(newFileName);
 		IFile referringFile = testHelper.createFile(referringFileName, referringFileContents);
 		performRenameTest(file, originalContents, oldName, newName, newFile);
-		String refferingFileContentsAfterRename = testHelper.getContentsAsString(referringFile);
+		String refferingFileContentsAfterRename = WorkbenchTestHelper.getContentsAsString(referringFile);
 		assertEquals(referringFileContents.replace(oldName, newName), refferingFileContentsAfterRename);
 	}
 
@@ -120,7 +120,7 @@ public class RefactoringIntegrationTest extends AbstractXtendUITestCase {
 				testHelper.uri(file), true);
 		EObject target = eObjectAtOffsetHelper.resolveElementAt(resource, originalContents.indexOf(oldName));
 		doRename(target, newName);
-		String contentsAfterRename = testHelper.getContentsAsString(newFile);
+		String contentsAfterRename = WorkbenchTestHelper.getContentsAsString(newFile);
 		assertEquals(originalContents.replace(oldName, newName), contentsAfterRename);
 	}
 

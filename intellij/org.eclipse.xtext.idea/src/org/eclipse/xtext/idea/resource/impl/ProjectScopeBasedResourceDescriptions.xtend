@@ -15,11 +15,13 @@ import org.eclipse.emf.common.notify.Notifier
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.idea.resource.AbstractScopeBasedSelectable
-import org.eclipse.xtext.idea.resource.ProjectAdapter
+import org.eclipse.xtext.idea.resource.ModuleProvider
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.resource.CompilerPhases
 import org.eclipse.xtext.resource.IResourceDescriptions
+import org.eclipse.xtext.resource.XtextResourceSet
 
 import static java.util.Collections.emptyList
 
@@ -56,11 +58,14 @@ class ProjectScopeBasedResourceDescriptions extends AbstractScopeBasedSelectable
 
 	override setContext(Notifier ctx) {
 		this.context = ctx
-		this.project = ProjectAdapter.getProject(ctx)
-		if (project == null) {
-			throw new IllegalStateException("project is null")
+		val resourceSet  = EcoreUtil2.getResourceSet(ctx) as XtextResourceSet;
+		val module = ModuleProvider.findModule(resourceSet)
+		if (module == null) {
+			throw new IllegalStateException("module is null")
+		} else {
+			this.project = module.project
+			setScope(GlobalSearchScope.projectScope(project))
 		}
-		setScope(GlobalSearchScope.projectScope(project))
 	}
 
 	def isIndexing() {
