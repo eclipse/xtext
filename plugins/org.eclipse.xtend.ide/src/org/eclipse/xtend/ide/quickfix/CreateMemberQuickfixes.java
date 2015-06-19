@@ -462,11 +462,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 			LightweightTypeReference resolved = resolvedTypes.getActualType(argument);
 			if(resolved == null) {
 				StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, context);
-				JvmType objectType = services.getTypeReferences().findDeclaredType(Object.class, context);
-				if (objectType != null)
-					argumentTypes.add(owner.newParameterizedTypeReference(objectType));
-				else
-					argumentTypes.add(owner.newUnknownTypeReference(Object.class.getName()));
+				argumentTypes.add(owner.newReferenceToObject());
 			} else {
 				LocalTypeSubstitutor substitutor = new LocalTypeSubstitutor(resolved.getOwner(), logicalContainer);
 				argumentTypes.add(substitutor.withoutLocalTypes(resolved));
