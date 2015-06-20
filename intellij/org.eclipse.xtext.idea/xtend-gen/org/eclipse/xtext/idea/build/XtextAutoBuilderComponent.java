@@ -464,6 +464,15 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
                 }
               };
               it.setAfterDeleteFile(_function_2);
+              final Function1<URI, Boolean> _function_3 = new Function1<URI, Boolean>() {
+                @Override
+                public Boolean apply(final URI uri) {
+                  final VirtualFile file = VirtualFileURIUtil.getVirtualFile(uri);
+                  final Module thisModule = XtextAutoBuilderComponent.this.findModule(file, fileIndex);
+                  return Boolean.valueOf(Objects.equal(module, thisModule));
+                }
+              };
+              it.setBelongsToThisBuildRun(_function_3);
             }
           };
           final BuildRequest request = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_2);

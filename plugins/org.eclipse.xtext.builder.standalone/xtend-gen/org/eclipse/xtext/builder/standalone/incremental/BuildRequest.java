@@ -21,6 +21,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -114,6 +115,17 @@ public class BuildRequest {
     }
   };
   
+  private Function1<? super URI, ? extends Boolean> belongsToThisBuildRun = new Function1<URI, Boolean>() {
+    @Override
+    public Boolean apply(final URI it) {
+      return Boolean.valueOf(true);
+    }
+  };
+  
+  public boolean belongsToThisBuildRun(final URI uri) {
+    return (this.belongsToThisBuildRun.apply(uri)).booleanValue();
+  }
+  
   private IndexState previousState = new IndexState();
   
   private boolean writeStorageResources = false;
@@ -187,6 +199,15 @@ public class BuildRequest {
   
   public void setAfterDeleteFile(final Procedure1<? super URI> afterDeleteFile) {
     this.afterDeleteFile = afterDeleteFile;
+  }
+  
+  @Pure
+  public Function1<? super URI, ? extends Boolean> getBelongsToThisBuildRun() {
+    return this.belongsToThisBuildRun;
+  }
+  
+  public void setBelongsToThisBuildRun(final Function1<? super URI, ? extends Boolean> belongsToThisBuildRun) {
+    this.belongsToThisBuildRun = belongsToThisBuildRun;
   }
   
   @Pure

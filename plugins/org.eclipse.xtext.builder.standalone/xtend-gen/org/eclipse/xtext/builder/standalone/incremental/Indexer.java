@@ -169,6 +169,11 @@ public class Indexer {
     final Function1<URI, Boolean> _function_2 = new Function1<URI, Boolean>() {
       @Override
       public Boolean apply(final URI it) {
+        boolean _belongsToThisBuildRun = request.belongsToThisBuildRun(it);
+        boolean _not = (!_belongsToThisBuildRun);
+        if (_not) {
+          return Boolean.valueOf(false);
+        }
         IResourceServiceProvider _resourceServiceProvider = context.getResourceServiceProvider(it);
         final IResourceDescription.Manager manager = _resourceServiceProvider.getResourceDescriptionManager();
         final IResourceDescription resourceDescription = previousIndex.getResourceDescription(it);
