@@ -9,6 +9,8 @@
 
 	<extensions defaultExtensionNs="com.intellij">
 		<problemFileHighlightFilter implementation="org.eclipse.xtext.idea.highlighting.ProblemXtextFileHighlightFilter"/>
+		<findUsagesHandlerFactory implementation="org.eclipse.xtext.idea.findusages.GeneratedSourceAwareUsagesHandlerFactory"
+			id="generatedSources" order="first"/>
    	</extensions>
 
 	<project-components>
