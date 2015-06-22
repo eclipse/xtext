@@ -22,21 +22,30 @@ import org.eclipse.xtext.web.server.model.DocumentStateResult;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess;
 
+/**
+ * Service class for document updates. This service only makes sense with a stateful server,
+ * where the server-side document representation is updated after each modification. This
+ * can greatly improve response times compared to the stateless alternative, where the full
+ * text content is sent with each service request.
+ */
 @Singleton
 @SuppressWarnings("all")
 public class UpdateDocumentService {
   @Inject
   private IResourceValidator resourceValidator;
   
-  public DocumentStateResult updateFullText(final XtextWebDocumentAccess document, final String fullText, final boolean reparse) throws InvalidRequestException {
+  /**
+   * Update the state identifier and return it. A background process is started where the given text
+   * is assigned to the document and {@link #processUpdatedDocument(IXtextWebDocument, CancelIndicator)}
+   * is executed.
+   */
+  public DocumentStateResult updateFullText(final XtextWebDocumentAccess document, final String fullText) throws InvalidRequestException {
     final CancelableUnitOfWork<DocumentStateResult, IXtextWebDocument> _function = new CancelableUnitOfWork<DocumentStateResult, IXtextWebDocument>() {
       @Override
       public DocumentStateResult exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
-        if (reparse) {
-          it.setDirty(true);
-          it.setProcessingCompleted(false);
-          it.createNewStateId();
-        }
+        it.setDirty(true);
+        it.setProcessingCompleted(false);
+        it.createNewStateId();
         String _stateId = it.getStateId();
         return new DocumentStateResult(_stateId);
       }
@@ -44,9 +53,7 @@ public class UpdateDocumentService {
     final CancelableUnitOfWork<Object, IXtextWebDocument> _function_1 = new CancelableUnitOfWork<Object, IXtextWebDocument>() {
       @Override
       public Object exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
-        if (reparse) {
-          it.setText(fullText);
-        }
+        it.setText(fullText);
         UpdateDocumentService.this.processUpdatedDocument(it, cancelIndicator);
         return null;
       }
@@ -54,6 +61,11 @@ public class UpdateDocumentService {
     return document.<DocumentStateResult>modify(_function, _function_1);
   }
   
+  /**
+   * Update the state identifier and return it. A background process is started where the given text change
+   * is applied to the document and {@link #processUpdatedDocument(IXtextWebDocument, CancelIndicator)}
+   * is executed.
+   */
   public DocumentStateResult updateDeltaText(final XtextWebDocumentAccess document, final String deltaText, final int offset, final int replaceLength) throws InvalidRequestException {
     final CancelableUnitOfWork<DocumentStateResult, IXtextWebDocument> _function = new CancelableUnitOfWork<DocumentStateResult, IXtextWebDocument>() {
       @Override
@@ -76,6 +88,31 @@ public class UpdateDocumentService {
     return document.<DocumentStateResult>modify(_function, _function_1);
   }
   
+  /**
+   * Schedule {@link #processUpdatedDocument(IXtextWebDocument, CancelIndicator)} as background
+   * work and return the current state identifier.
+   */
+  public DocumentStateResult getStateId(final XtextWebDocumentAccess document) throws InvalidRequestException {
+    final CancelableUnitOfWork<DocumentStateResult, IXtextWebDocument> _function = new CancelableUnitOfWork<DocumentStateResult, IXtextWebDocument>() {
+      @Override
+      public DocumentStateResult exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
+        String _stateId = it.getStateId();
+        return new DocumentStateResult(_stateId);
+      }
+    };
+    final CancelableUnitOfWork<Object, IXtextWebDocument> _function_1 = new CancelableUnitOfWork<Object, IXtextWebDocument>() {
+      @Override
+      public Object exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
+        UpdateDocumentService.this.processUpdatedDocument(it, cancelIndicator);
+        return null;
+      }
+    };
+    return document.<DocumentStateResult>modify(_function, _function_1);
+  }
+  
+  /**
+   * Perform additional document processing if it has not already been done for the current document state.
+   */
   public void processUpdatedDocument(final IXtextWebDocument it, final CancelIndicator cancelIndicator) {
     boolean _isProcessingCompleted = it.isProcessingCompleted();
     boolean _not = (!_isProcessingCompleted);

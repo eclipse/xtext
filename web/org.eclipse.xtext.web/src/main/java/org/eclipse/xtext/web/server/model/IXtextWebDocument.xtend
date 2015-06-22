@@ -11,6 +11,9 @@ import java.util.Collection
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.validation.Issue
 
+/**
+ * Interface for accessing a document. Depending on the access type, some methods may not be supported.
+ */
 interface IXtextWebDocument {
 	
 	def XtextResource getResource()

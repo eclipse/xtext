@@ -26,6 +26,9 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
+/**
+ * Service class for model validation.
+ */
 @Singleton
 @SuppressWarnings("all")
 public class ValidationService {
@@ -33,6 +36,12 @@ public class ValidationService {
   @Extension
   private UpdateDocumentService _updateDocumentService;
   
+  /**
+   * Return the validation result for the given document. The actual validation may have
+   * been computed as part of the background work scheduled after another service request,
+   * e.g. {@link UpdateDocumentService}. If that background processing has not been done
+   * yet, it is executed and then the validation issues are collected.
+   */
   public ValidationResult validate(final XtextWebDocumentAccess document) throws InvalidRequestException {
     final CancelableUnitOfWork<Collection<Issue>, IXtextWebDocument> _function = new CancelableUnitOfWork<Collection<Issue>, IXtextWebDocument>() {
       @Override

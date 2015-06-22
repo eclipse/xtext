@@ -15,6 +15,9 @@ import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
+/**
+ * Result object returned by the content assist service.
+ */
 @Accessors
 @ToString(skipNulls = true)
 @SuppressWarnings("all")

@@ -28,6 +28,7 @@ import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.CheckMode
+import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -59,7 +60,12 @@ import org.eclipse.xtext.validation.CheckMode
 				]
 			]
 			val result = indexer.computeAndIndexAffected(request, context)
-			result.resourceDeltas.filter[getNew != null].map[uri]
+			
+			val resolvedDeltas = newArrayList
+			// add deleted deltas
+			resolvedDeltas += result.resourceDeltas.filter[getNew == null]
+			// add changed and added as fully resolved
+			resolvedDeltas += result.resourceDeltas.filter[getNew != null].map[uri]
 				.executeClustered [
 					Resource resource |
 					resource.contents // fully initialize
@@ -71,9 +77,10 @@ import org.eclipse.xtext.validation.CheckMode
 					if (resource.validate) {
 						resource.generate(request, newSource2GeneratedMapping)
 					}
-					return true
+					val old = request.previousState.resourceDescriptions.getResourceDescription(resource.URI)
+					return new DefaultResourceDescriptionDelta(old, copiedDescription)
 				]
-			return new Result(new IndexState(result.newIndex, newSource2GeneratedMapping), result.resourceDeltas)
+			return new Result(new IndexState(result.newIndex, newSource2GeneratedMapping), resolvedDeltas)
 		}
 		
 		def protected boolean validate(Resource resource) {

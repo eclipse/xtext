@@ -12,6 +12,10 @@ import java.io.IOException;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 import org.eclipse.xtext.web.server.model.XtextWebDocument;
 
+/**
+ * Interface for <em>get</em> and <em>put</em> operations on documents. Implementations can
+ * use arbitrary persistence technology for performing these operations.
+ */
 @ImplementedBy(IServerResourceHandler.NullImpl.class)
 @SuppressWarnings("all")
 public interface IServerResourceHandler {

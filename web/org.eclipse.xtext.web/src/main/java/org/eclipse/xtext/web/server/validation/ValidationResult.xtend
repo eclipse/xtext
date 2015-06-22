@@ -13,6 +13,9 @@ import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend.lib.annotations.ToString
 import org.eclipse.xtext.web.server.IServiceResult
 
+/**
+ * Result object returned by the validation service.
+ */
 @Accessors
 @ToString(skipNulls = true)
 class ValidationResult implements IServiceResult {

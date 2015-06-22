@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.web.server.hover
 
 import com.google.inject.Inject
@@ -13,6 +20,9 @@ import org.eclipse.xtext.ide.labels.SimpleImageDescription
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess
 
+/**
+ * Service class for mouse hover information.
+ */
 @Singleton
 class HoverService {
 
@@ -23,6 +33,10 @@ class HoverService {
 	@Inject extension IImageDescriptionProvider 
 	@Inject extension INameLabelProvider 
 	
+	/**
+	 * Compute a hover result at the given offset in the document. If no information is
+	 * available, {@code null} is returned.
+	 */
 	def HoverResult getHover(XtextWebDocumentAccess document, int offset) {
 		document.readOnly[ it, cancelIndicator |
 			var element = resolveElementAt(resource, offset)
@@ -37,7 +51,7 @@ class HoverService {
 				null
 			}
 		]
-	}	
+	}
 	
 	protected def String addIconDivs(IImageDescription it, String nameHtml) {
 		switch it {

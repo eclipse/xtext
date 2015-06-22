@@ -21,6 +21,9 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
+/**
+ * Container for an {@link XtextResource}.
+ */
 @SuppressWarnings("all")
 public class XtextWebDocument implements IXtextWebDocument {
   @Accessors(AccessorType.PUBLIC_GETTER)

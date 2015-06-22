@@ -13,6 +13,9 @@ import org.eclipse.xtend.lib.annotations.ToString
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry
 import org.eclipse.xtext.web.server.IServiceResult
 
+/**
+ * Result object returned by the content assist service.
+ */
 @Accessors
 @ToString(skipNulls = true)
 class ContentAssistResult implements IServiceResult {

@@ -8,6 +8,9 @@
 
 define(function() {
 	
+	/**
+	 * An editor context mediates between the Xtext services and the Orion editor framework.
+	 */
 	function OrionEditorContext(editor) {
 		this._editor = editor;
 		this._serverState = {};

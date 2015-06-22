@@ -12,6 +12,9 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtend.lib.annotations.ToString
 import org.eclipse.xtext.web.server.IServiceResult
 
+/**
+ * Result object returned by load and revert services.
+ */
 @Accessors
 @FinalFieldsConstructor
 @ToString

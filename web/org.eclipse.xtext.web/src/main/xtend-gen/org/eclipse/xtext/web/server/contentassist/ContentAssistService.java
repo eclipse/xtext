@@ -38,6 +38,9 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
+/**
+ * Service class for content assist proposals.
+ */
 @Singleton
 @SuppressWarnings("all")
 public class ContentAssistService {
@@ -56,6 +59,11 @@ public class ContentAssistService {
   @Extension
   private UpdateDocumentService _updateDocumentService;
   
+  /**
+   * Create content assist proposals at the given caret offset. This document read operation
+   * is scheduled with higher priority, so currently running operations may be canceled.
+   * The document processing is rescheduled as background work afterwards.
+   */
   public ContentAssistResult createProposals(final XtextWebDocumentAccess document, final ITextRegion selection, final int offset, final int proposalsLimit) throws InvalidRequestException {
     ContentAssistContextFactory _get = this.contextFactoryProvider.get();
     final Procedure1<ContentAssistContextFactory> _function = new Procedure1<ContentAssistContextFactory>() {
@@ -92,6 +100,11 @@ public class ContentAssistService {
     return this.createProposals(((List<ContentAssistContext>)Conversions.doWrapArray(contexts)), _get_1, proposalsLimit);
   }
   
+  /**
+   * Apply a text update and then create content assist proposals. This document read operation
+   * is scheduled with higher priority, so currently running operations may be canceled.
+   * The document processing is rescheduled as background work afterwards.
+   */
   public ContentAssistResult createProposalsWithUpdate(final XtextWebDocumentAccess document, final String deltaText, final int deltaOffset, final int deltaReplaceLength, final ITextRegion textSelection, final int caretOffset, final int proposalsLimit) {
     ContentAssistContextFactory _get = this.contextFactoryProvider.get();
     final Procedure1<ContentAssistContextFactory> _function = new Procedure1<ContentAssistContextFactory>() {
@@ -132,6 +145,9 @@ public class ContentAssistService {
     return this.createProposals(((List<ContentAssistContext>)Conversions.doWrapArray(contexts)), _get_1, proposalsLimit);
   }
   
+  /**
+   * Invoke the proposal provider and put the results into a {@link ContentAssistResult} object.
+   */
   protected ContentAssistResult createProposals(final List<ContentAssistContext> contexts, final String stateId, final int proposalsLimit) {
     final ContentAssistResult result = new ContentAssistResult();
     result.setStateId(stateId);

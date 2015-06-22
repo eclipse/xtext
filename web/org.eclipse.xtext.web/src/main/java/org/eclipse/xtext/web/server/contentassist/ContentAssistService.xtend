@@ -23,6 +23,9 @@ import org.eclipse.xtext.web.server.InvalidRequestException
 import org.eclipse.xtext.web.server.model.UpdateDocumentService
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess
 
+/**
+ * Service class for content assist proposals.
+ */
 @Singleton
 class ContentAssistService {
 	
@@ -36,6 +39,11 @@ class ContentAssistService {
 	
 	@Inject extension UpdateDocumentService
 	
+	/**
+	 * Create content assist proposals at the given caret offset. This document read operation
+	 * is scheduled with higher priority, so currently running operations may be canceled.
+	 * The document processing is rescheduled as background work afterwards.
+	 */
 	def ContentAssistResult createProposals(XtextWebDocumentAccess document, ITextRegion selection, int offset, int proposalsLimit)
 			throws InvalidRequestException {
 		val contextFactory = contextFactoryProvider.get() => [it.pool = executorService]
@@ -50,6 +58,11 @@ class ContentAssistService {
 		return createProposals(contexts, stateIdWrapper.get(0), proposalsLimit)
 	}
 	
+	/**
+	 * Apply a text update and then create content assist proposals. This document read operation
+	 * is scheduled with higher priority, so currently running operations may be canceled.
+	 * The document processing is rescheduled as background work afterwards.
+	 */
 	def ContentAssistResult createProposalsWithUpdate(XtextWebDocumentAccess document, String deltaText, int deltaOffset,
 			int deltaReplaceLength, ITextRegion textSelection, int caretOffset, int proposalsLimit) {
 		val contextFactory = contextFactoryProvider.get() => [it.pool = executorService]
@@ -68,6 +81,9 @@ class ContentAssistService {
 		return createProposals(contexts, stateIdWrapper.get(0), proposalsLimit)
 	}
 	
+	/**
+	 * Invoke the proposal provider and put the results into a {@link ContentAssistResult} object.
+	 */
 	protected def createProposals(List<ContentAssistContext> contexts, String stateId, int proposalsLimit) {
 		val result = new ContentAssistResult
 		result.stateId = stateId

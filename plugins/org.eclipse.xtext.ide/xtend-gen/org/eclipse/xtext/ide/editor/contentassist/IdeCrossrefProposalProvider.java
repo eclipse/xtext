@@ -30,6 +30,9 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
+/**
+ * Special content assist proposal provider for cross-references.
+ */
 @SuppressWarnings("all")
 public class IdeCrossrefProposalProvider {
   private final static Logger LOG = Logger.getLogger(IdeCrossrefProposalProvider.class);

@@ -8,9 +8,11 @@
 package org.eclipse.xtext.builder.standalone.incremental;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -39,6 +41,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.clustering.DisabledClusteringPolicy;
 import org.eclipse.xtext.resource.clustering.DynamicResourceClusteringPolicy;
 import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy;
+import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
@@ -177,25 +180,36 @@ public class IncrementalBuilder {
       };
       IterableExtensions.<URI>forEach(_deletedFiles, _function);
       final Indexer.IndexResult result = this.indexer.computeAndIndexAffected(this.request, this.context);
+      final ArrayList<IResourceDescription.Delta> resolvedDeltas = CollectionLiterals.<IResourceDescription.Delta>newArrayList();
       List<IResourceDescription.Delta> _resourceDeltas = result.getResourceDeltas();
       final Function1<IResourceDescription.Delta, Boolean> _function_1 = new Function1<IResourceDescription.Delta, Boolean>() {
+        @Override
+        public Boolean apply(final IResourceDescription.Delta it) {
+          IResourceDescription _new = it.getNew();
+          return Boolean.valueOf(Objects.equal(_new, null));
+        }
+      };
+      Iterable<IResourceDescription.Delta> _filter = IterableExtensions.<IResourceDescription.Delta>filter(_resourceDeltas, _function_1);
+      Iterables.<IResourceDescription.Delta>addAll(resolvedDeltas, _filter);
+      List<IResourceDescription.Delta> _resourceDeltas_1 = result.getResourceDeltas();
+      final Function1<IResourceDescription.Delta, Boolean> _function_2 = new Function1<IResourceDescription.Delta, Boolean>() {
         @Override
         public Boolean apply(final IResourceDescription.Delta it) {
           IResourceDescription _new = it.getNew();
           return Boolean.valueOf((!Objects.equal(_new, null)));
         }
       };
-      Iterable<IResourceDescription.Delta> _filter = IterableExtensions.<IResourceDescription.Delta>filter(_resourceDeltas, _function_1);
-      final Function1<IResourceDescription.Delta, URI> _function_2 = new Function1<IResourceDescription.Delta, URI>() {
+      Iterable<IResourceDescription.Delta> _filter_1 = IterableExtensions.<IResourceDescription.Delta>filter(_resourceDeltas_1, _function_2);
+      final Function1<IResourceDescription.Delta, URI> _function_3 = new Function1<IResourceDescription.Delta, URI>() {
         @Override
         public URI apply(final IResourceDescription.Delta it) {
           return it.getUri();
         }
       };
-      Iterable<URI> _map = IterableExtensions.<IResourceDescription.Delta, URI>map(_filter, _function_2);
-      final Function1<Resource, Boolean> _function_3 = new Function1<Resource, Boolean>() {
+      Iterable<URI> _map = IterableExtensions.<IResourceDescription.Delta, URI>map(_filter_1, _function_3);
+      final Function1<Resource, DefaultResourceDescriptionDelta> _function_4 = new Function1<Resource, DefaultResourceDescriptionDelta>() {
         @Override
-        public Boolean apply(final Resource resource) {
+        public DefaultResourceDescriptionDelta apply(final Resource resource) {
           resource.getContents();
           EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl);
           URI _uRI = resource.getURI();
@@ -210,14 +224,18 @@ public class IncrementalBuilder {
           if (_validate) {
             InternalStatefulIncrementalBuilder.this.generate(resource, InternalStatefulIncrementalBuilder.this.request, newSource2GeneratedMapping);
           }
-          return Boolean.valueOf(true);
+          IndexState _previousState = InternalStatefulIncrementalBuilder.this.request.getPreviousState();
+          ResourceDescriptionsData _resourceDescriptions = _previousState.getResourceDescriptions();
+          URI _uRI_2 = resource.getURI();
+          final IResourceDescription old = _resourceDescriptions.getResourceDescription(_uRI_2);
+          return new DefaultResourceDescriptionDelta(old, copiedDescription);
         }
       };
-      this.context.<Boolean>executeClustered(_map, _function_3);
+      Iterable<DefaultResourceDescriptionDelta> _executeClustered = this.context.<DefaultResourceDescriptionDelta>executeClustered(_map, _function_4);
+      Iterables.<IResourceDescription.Delta>addAll(resolvedDeltas, _executeClustered);
       ResourceDescriptionsData _newIndex = result.getNewIndex();
       IndexState _indexState = new IndexState(_newIndex, newSource2GeneratedMapping);
-      List<IResourceDescription.Delta> _resourceDeltas_1 = result.getResourceDeltas();
-      return new IncrementalBuilder.Result(_indexState, _resourceDeltas_1);
+      return new IncrementalBuilder.Result(_indexState, resolvedDeltas);
     }
     
     protected boolean validate(final Resource resource) {

@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtext.web.server.hover;
 
 import com.google.common.base.Objects;
@@ -31,6 +38,9 @@ import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 
+/**
+ * Service class for mouse hover information.
+ */
 @Singleton
 @SuppressWarnings("all")
 public class HoverService {
@@ -52,6 +62,10 @@ public class HoverService {
   @Extension
   private INameLabelProvider _iNameLabelProvider;
   
+  /**
+   * Compute a hover result at the given offset in the document. If no information is
+   * available, {@code null} is returned.
+   */
   public HoverResult getHover(final XtextWebDocumentAccess document, final int offset) {
     final CancelableUnitOfWork<HoverResult, IXtextWebDocument> _function = new CancelableUnitOfWork<HoverResult, IXtextWebDocument>() {
       @Override

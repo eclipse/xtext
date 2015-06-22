@@ -19,6 +19,13 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
+/**
+ * Accessor class for documents. Use {@link #readOnly(CancelableUnitOfWork)} to read the content
+ * and properties of the document, and {@link #modify(CancelableUnitOfWork, CancelableUnitOfWork)}
+ * to modify them. If this accessor has been created with a required state identifier, it will
+ * check the actual state identifier of the document before granting access, and throw an exception
+ * if it does not match.
+ */
 public class XtextWebDocumentAccess {
 	
 	private static final Logger LOG = Logger.getLogger(XtextWebDocumentAccess.class);
@@ -48,15 +55,32 @@ public class XtextWebDocumentAccess {
 		}
 	}
 	
+	/**
+	 * Execute the given work unit with read-only access and return its result.
+	 */
 	public <T> T readOnly(CancelableUnitOfWork<T, IXtextWebDocument> work) {
 		return doAccess(work, false, false, null);
 	}
 	
+	/**
+	 * Execute the given work unit with read-only access and return its result. The work unit
+	 * is handled with higher priority, i.e. currently running work units are canceled if they
+	 * support cancelation. The second work unit {@code asynchronousWork} is executed in a
+	 * separate thread after the first one has finished. It can be used for background work
+	 * that should be applied to the document, but is not relevant for the current service request.
+	 */
 	public <T> T priorityReadOnly(CancelableUnitOfWork<T, IXtextWebDocument> work,
 			CancelableUnitOfWork<T, IXtextWebDocument> asynchronousWork) {
 		return doAccess(work, true, false, asynchronousWork);
 	}
 	
+	/**
+	 * Execute the given work unit with read and write access and return its result. The work unit
+	 * is handled with higher priority, i.e. currently running work units are canceled if they
+	 * support cancelation. The second work unit {@code asynchronousWork} is executed in a
+	 * separate thread after the first one has finished. It can be used for background work
+	 * that should be applied to the document, but is not relevant for the current service request.
+	 */
 	public <T> T modify(CancelableUnitOfWork<T, IXtextWebDocument> work,
 			CancelableUnitOfWork<?, IXtextWebDocument> asynchronousWork) {
 		return doAccess(work, true, true, asynchronousWork);

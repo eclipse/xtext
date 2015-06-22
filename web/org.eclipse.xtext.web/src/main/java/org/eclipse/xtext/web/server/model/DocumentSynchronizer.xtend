@@ -15,6 +15,12 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
 
+/**
+ * Synchronizer object used by the {@link XtextWebDocumentAccess} for managing multithreaded
+ * access to a document. It holds the cancelation status and locking information. The lock
+ * is not bound to a thread, so it is possible for one thread to call {@link #acquireLock(boolean)}
+ * and for another thread to call {@link #releaseLock()}.
+ */
 package class DocumentSynchronizer implements CancelIndicator {
 	
 	val semaphore = new Semaphore(1, true)
