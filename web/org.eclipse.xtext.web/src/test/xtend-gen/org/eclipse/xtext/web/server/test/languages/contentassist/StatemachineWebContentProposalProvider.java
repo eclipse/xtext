@@ -165,6 +165,22 @@ public class StatemachineWebContentProposalProvider extends IdeContentProposalPr
       }
     }
     if (!_matched) {
+      StatemachineGrammarAccess.EventElements _eventAccess_1 = this._statemachineGrammarAccess.getEventAccess();
+      Assignment _valueAssignment_2 = _eventAccess_1.getValueAssignment_2();
+      if (Objects.equal(assignment, _valueAssignment_2)) {
+        _matched=true;
+      }
+      if (!_matched) {
+        StatemachineGrammarAccess.CommandElements _commandAccess_1 = this._statemachineGrammarAccess.getCommandAccess();
+        Assignment _newValueAssignment_3 = _commandAccess_1.getNewValueAssignment_3();
+        if (Objects.equal(assignment, _newValueAssignment_3)) {
+          _matched=true;
+        }
+      }
+      if (_matched) {
+      }
+    }
+    if (!_matched) {
       super._createProposals(assignment, context, acceptor);
     }
   }

@@ -161,10 +161,62 @@ public class IdeContentProposalProvider {
   }
   
   protected void _createProposals(final Assignment assignment, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
-    AbstractElement _terminal = assignment.getTerminal();
-    if ((_terminal instanceof CrossReference)) {
-      AbstractElement _terminal_1 = assignment.getTerminal();
-      this.createProposals(_terminal_1, context, acceptor);
+    final AbstractElement terminal = assignment.getTerminal();
+    if ((terminal instanceof CrossReference)) {
+      AbstractElement _terminal = assignment.getTerminal();
+      this.createProposals(_terminal, context, acceptor);
+    } else {
+      if ((terminal instanceof RuleCall)) {
+        final AbstractRule rule = ((RuleCall)terminal).getRule();
+        boolean _and = false;
+        if (!(rule instanceof TerminalRule)) {
+          _and = false;
+        } else {
+          String _prefix = context.getPrefix();
+          boolean _isEmpty = _prefix.isEmpty();
+          _and = _isEmpty;
+        }
+        if (_and) {
+          ContentAssistEntry _contentAssistEntry = new ContentAssistEntry();
+          final Procedure1<ContentAssistEntry> _function = new Procedure1<ContentAssistEntry>() {
+            @Override
+            public void apply(final ContentAssistEntry it) {
+              String _prefix = context.getPrefix();
+              it.setPrefix(_prefix);
+              String _name = rule.getName();
+              boolean _equals = Objects.equal(_name, "STRING");
+              if (_equals) {
+                String _feature = assignment.getFeature();
+                String _plus = ("\"" + _feature);
+                String _plus_1 = (_plus + "\"");
+                it.setProposal(_plus_1);
+                ArrayList<TextRegion> _editPositions = it.getEditPositions();
+                int _offset = context.getOffset();
+                int _plus_2 = (_offset + 1);
+                String _proposal = it.getProposal();
+                int _length = _proposal.length();
+                int _minus = (_length - 2);
+                TextRegion _textRegion = new TextRegion(_plus_2, _minus);
+                _editPositions.add(_textRegion);
+              } else {
+                String _feature_1 = assignment.getFeature();
+                it.setProposal(_feature_1);
+                ArrayList<TextRegion> _editPositions_1 = it.getEditPositions();
+                int _offset_1 = context.getOffset();
+                String _proposal_1 = it.getProposal();
+                int _length_1 = _proposal_1.length();
+                TextRegion _textRegion_1 = new TextRegion(_offset_1, _length_1);
+                _editPositions_1.add(_textRegion_1);
+              }
+              String _name_1 = rule.getName();
+              it.setDescription(_name_1);
+            }
+          };
+          final ContentAssistEntry entry = ObjectExtensions.<ContentAssistEntry>operator_doubleArrow(_contentAssistEntry, _function);
+          int _defaultPriority = this.proposalPriorities.getDefaultPriority(entry);
+          acceptor.accept(entry, _defaultPriority);
+        }
+      }
     }
   }
   
@@ -209,76 +261,6 @@ public class IdeContentProposalProvider {
   }
   
   protected void _createProposals(final RuleCall ruleCall, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
-    boolean _and = false;
-    AbstractRule _rule = ruleCall.getRule();
-    if (!(_rule instanceof TerminalRule)) {
-      _and = false;
-    } else {
-      String _prefix = context.getPrefix();
-      boolean _isEmpty = _prefix.isEmpty();
-      _and = _isEmpty;
-    }
-    if (_and) {
-      ContentAssistEntry _contentAssistEntry = new ContentAssistEntry();
-      final Procedure1<ContentAssistEntry> _function = new Procedure1<ContentAssistEntry>() {
-        @Override
-        public void apply(final ContentAssistEntry it) {
-          String _prefix = context.getPrefix();
-          it.setPrefix(_prefix);
-          AbstractRule _rule = ruleCall.getRule();
-          String _name = _rule.getName();
-          boolean _equals = Objects.equal(_name, "STRING");
-          if (_equals) {
-            final EObject container = ruleCall.eContainer();
-            if ((container instanceof Assignment)) {
-              String _feature = ((Assignment)container).getFeature();
-              String _plus = ("\"" + _feature);
-              String _plus_1 = (_plus + "\"");
-              it.setProposal(_plus_1);
-              AbstractRule _rule_1 = ruleCall.getRule();
-              String _name_1 = _rule_1.getName();
-              it.setDescription(_name_1);
-            } else {
-              AbstractRule _rule_2 = ruleCall.getRule();
-              String _name_2 = _rule_2.getName();
-              String _plus_2 = ("\"" + _name_2);
-              String _plus_3 = (_plus_2 + "\"");
-              it.setProposal(_plus_3);
-            }
-            ArrayList<TextRegion> _editPositions = it.getEditPositions();
-            int _offset = context.getOffset();
-            int _plus_4 = (_offset + 1);
-            String _proposal = it.getProposal();
-            int _length = _proposal.length();
-            int _minus = (_length - 2);
-            TextRegion _textRegion = new TextRegion(_plus_4, _minus);
-            _editPositions.add(_textRegion);
-          } else {
-            final EObject container_1 = ruleCall.eContainer();
-            if ((container_1 instanceof Assignment)) {
-              String _feature_1 = ((Assignment)container_1).getFeature();
-              it.setProposal(_feature_1);
-              AbstractRule _rule_3 = ruleCall.getRule();
-              String _name_3 = _rule_3.getName();
-              it.setDescription(_name_3);
-            } else {
-              AbstractRule _rule_4 = ruleCall.getRule();
-              String _name_4 = _rule_4.getName();
-              it.setProposal(_name_4);
-            }
-            ArrayList<TextRegion> _editPositions_1 = it.getEditPositions();
-            int _offset_1 = context.getOffset();
-            String _proposal_1 = it.getProposal();
-            int _length_1 = _proposal_1.length();
-            TextRegion _textRegion_1 = new TextRegion(_offset_1, _length_1);
-            _editPositions_1.add(_textRegion_1);
-          }
-        }
-      };
-      final ContentAssistEntry entry = ObjectExtensions.<ContentAssistEntry>operator_doubleArrow(_contentAssistEntry, _function);
-      int _defaultPriority = this.proposalPriorities.getDefaultPriority(entry);
-      acceptor.accept(entry, _defaultPriority);
-    }
   }
   
   protected void _createProposals(final CrossReference reference, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {

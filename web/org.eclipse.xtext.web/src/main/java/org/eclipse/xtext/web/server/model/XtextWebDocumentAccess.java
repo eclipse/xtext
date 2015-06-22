@@ -65,7 +65,7 @@ public class XtextWebDocumentAccess {
 	/**
 	 * Execute the given work unit with read-only access and return its result. The work unit
 	 * is handled with higher priority, i.e. currently running work units are canceled if they
-	 * support cancelation. The second work unit {@code asynchronousWork} is executed in a
+	 * support cancelation. The second work unit {@code asynchronousWork} is executed in a
 	 * separate thread after the first one has finished. It can be used for background work
 	 * that should be applied to the document, but is not relevant for the current service request.
 	 */
@@ -77,7 +77,7 @@ public class XtextWebDocumentAccess {
 	/**
 	 * Execute the given work unit with read and write access and return its result. The work unit
 	 * is handled with higher priority, i.e. currently running work units are canceled if they
-	 * support cancelation. The second work unit {@code asynchronousWork} is executed in a
+	 * support cancelation. The second work unit {@code asynchronousWork} is executed in a
 	 * separate thread after the first one has finished. It can be used for background work
 	 * that should be applied to the document, but is not relevant for the current service request.
 	 */
