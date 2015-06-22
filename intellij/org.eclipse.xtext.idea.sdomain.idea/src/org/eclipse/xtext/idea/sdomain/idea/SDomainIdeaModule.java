@@ -7,7 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.sdomain.idea;
 
+import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
+import org.eclipse.xtext.idea.sdomain.idea.facet.SDomainFacetConfiguration;
 
 public class SDomainIdeaModule extends AbstractSDomainIdeaModule {
-
+		public Class<? extends AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
+			return SDomainFacetConfiguration.class;
+		}
 }

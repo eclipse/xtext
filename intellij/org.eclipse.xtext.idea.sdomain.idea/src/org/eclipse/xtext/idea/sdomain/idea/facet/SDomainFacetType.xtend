@@ -7,38 +7,30 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.sdomain.idea.facet
 
+import com.google.inject.Inject
+import com.google.inject.Provider
 import com.intellij.facet.Facet
-import com.intellij.facet.FacetType
 import com.intellij.facet.FacetTypeId
-import com.intellij.openapi.module.Module
-import com.intellij.openapi.module.ModuleType
-import org.eclipse.xtext.idea.Icons
+import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration
+import org.eclipse.xtext.idea.facet.AbstractFacetType
+import org.eclipse.xtext.idea.sdomain.idea.lang.SDomainLanguage
 
 /**
  * @author dhuebner - Initial contribution and API
  */
-class SDomainFacetType extends FacetType<SDomainFacet, SDomainFacetConfiguration> {
+class SDomainFacetType extends AbstractFacetType<AbstractFacetConfiguration> {
 	static val TYPE_ID_STRING = "sdomain"
-	public static val TYPEID = new FacetTypeId<SDomainFacet>(TYPE_ID_STRING);
+	public static val TYPEID = new FacetTypeId<Facet<AbstractFacetConfiguration>>(TYPE_ID_STRING);
+	@Inject Provider<AbstractFacetConfiguration> facetConfiguration
 
 	new() {
-		super(SDomainFacetType.TYPEID, TYPE_ID_STRING, "SDomain", null);
+		super(SDomainFacetType.TYPEID, TYPE_ID_STRING, "SDomain");
+		SDomainLanguage.INSTANCE.injectMembers(this)
 	}
 
 	override createDefaultConfiguration() {
-		return new SDomainFacetConfiguration();
-	}
-
-	override createFacet(Module module, String name, SDomainFacetConfiguration configuration, Facet underlyingFacet) {
-		return new SDomainFacet(this, module, name, configuration, underlyingFacet)
-	}
-
-	override isSuitableModuleType(ModuleType moduleType) {
-		true
-	}
-
-	override getIcon() {
-		return Icons.DSL_FILE_TYPE
+		// TODO load defaults
+		return facetConfiguration.get();
 	}
 
 }

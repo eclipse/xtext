@@ -5,22 +5,22 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.idea.sdomain.idea.facet;
+package org.eclipse.xtext.idea.facet;
 
 import javax.swing.JComponent;
 
-
+import com.intellij.facet.Facet;
 import com.intellij.facet.ui.FacetEditorTab;
 import com.intellij.openapi.options.ConfigurationException;
 
-public class SDomainFacetEditorTab extends FacetEditorTab {
-	private SDomainFacetForm form = new SDomainFacetForm();
+public class GeneratorFacetEditorTab<C extends AbstractFacetConfiguration> extends FacetEditorTab {
+	private GeneratorFacetForm<GeneratorConfigurationState> form = new GeneratorFacetForm<GeneratorConfigurationState>();
 
 	private String title;
 
-	private SDomainFacet facet;
+	private Facet<C> facet;
 
-	public SDomainFacetEditorTab(final SDomainFacet facet, final String title) {
+	public GeneratorFacetEditorTab(final Facet<C> facet, final String title) {
 		this.facet = facet;
 		this.title = title;
 	}

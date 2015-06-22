@@ -7,46 +7,33 @@
  */
 package org.eclipse.xtext.idea.sdomain.idea.facet;
 
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.intellij.facet.Facet;
-import com.intellij.facet.FacetType;
 import com.intellij.facet.FacetTypeId;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleType;
-import javax.swing.Icon;
-import org.eclipse.xtext.idea.Icons;
-import org.eclipse.xtext.idea.sdomain.idea.facet.SDomainFacet;
-import org.eclipse.xtext.idea.sdomain.idea.facet.SDomainFacetConfiguration;
+import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
+import org.eclipse.xtext.idea.facet.AbstractFacetType;
+import org.eclipse.xtext.idea.sdomain.idea.lang.SDomainLanguage;
 
 /**
  * @author dhuebner - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class SDomainFacetType extends FacetType<SDomainFacet, SDomainFacetConfiguration> {
+public class SDomainFacetType extends AbstractFacetType<AbstractFacetConfiguration> {
   private final static String TYPE_ID_STRING = "sdomain";
   
-  public final static FacetTypeId<SDomainFacet> TYPEID = new FacetTypeId<SDomainFacet>(SDomainFacetType.TYPE_ID_STRING);
+  public final static FacetTypeId<Facet<AbstractFacetConfiguration>> TYPEID = new FacetTypeId<Facet<AbstractFacetConfiguration>>(SDomainFacetType.TYPE_ID_STRING);
+  
+  @Inject
+  private Provider<AbstractFacetConfiguration> facetConfiguration;
   
   public SDomainFacetType() {
-    super(SDomainFacetType.TYPEID, SDomainFacetType.TYPE_ID_STRING, "SDomain", null);
+    super(SDomainFacetType.TYPEID, SDomainFacetType.TYPE_ID_STRING, "SDomain");
+    SDomainLanguage.INSTANCE.injectMembers(this);
   }
   
   @Override
-  public SDomainFacetConfiguration createDefaultConfiguration() {
-    return new SDomainFacetConfiguration();
-  }
-  
-  @Override
-  public SDomainFacet createFacet(final Module module, final String name, final SDomainFacetConfiguration configuration, final Facet underlyingFacet) {
-    return new SDomainFacet(this, module, name, configuration, underlyingFacet);
-  }
-  
-  @Override
-  public boolean isSuitableModuleType(final ModuleType moduleType) {
-    return true;
-  }
-  
-  @Override
-  public Icon getIcon() {
-    return Icons.DSL_FILE_TYPE;
+  public AbstractFacetConfiguration createDefaultConfiguration() {
+    return this.facetConfiguration.get();
   }
 }

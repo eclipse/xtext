@@ -1,11 +1,11 @@
-package org.eclipse.xtext.idea.sdomain.idea.facet;
+package org.eclipse.xtext.idea.facet;
 
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @Accessors
 @SuppressWarnings("all")
-public class SDomainGeneratorConfigurationState {
+public class GeneratorConfigurationState {
   private boolean activated;
   
   private boolean createDirectory;
@@ -14,7 +14,9 @@ public class SDomainGeneratorConfigurationState {
   
   private boolean overwriteExisting;
   
-  private String directory;
+  private String outputDirectory;
+  
+  private String testOutputDirectory;
   
   @Pure
   public boolean isActivated() {
@@ -53,11 +55,20 @@ public class SDomainGeneratorConfigurationState {
   }
   
   @Pure
-  public String getDirectory() {
-    return this.directory;
+  public String getOutputDirectory() {
+    return this.outputDirectory;
   }
   
-  public void setDirectory(final String directory) {
-    this.directory = directory;
+  public void setOutputDirectory(final String outputDirectory) {
+    this.outputDirectory = outputDirectory;
+  }
+  
+  @Pure
+  public String getTestOutputDirectory() {
+    return this.testOutputDirectory;
+  }
+  
+  public void setTestOutputDirectory(final String testOutputDirectory) {
+    this.testOutputDirectory = testOutputDirectory;
   }
 }
