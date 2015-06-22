@@ -23,13 +23,13 @@ class IdeaIntegrationTest extends LightXtendTest {
 			class Foo {
 			}
 		''')
-		val file = myFixture.findFileInTempDir('src-gen/otherPackage/Foo.java')
+		val file = myFixture.findFileInTempDir('xtend-gen/otherPackage/Foo.java')
 		assertTrue(file.exists)
 		ApplicationManager.application.runWriteAction [
 			file.delete(null)
 		]
 		// should be regenerated immediately
-		val regenerated = myFixture.findFileInTempDir('src-gen/otherPackage/Foo.java')
+		val regenerated = myFixture.findFileInTempDir('xtend-gen/otherPackage/Foo.java')
 		assertTrue(regenerated.exists)
 	}
 	
@@ -214,7 +214,7 @@ class IdeaIntegrationTest extends LightXtendTest {
 				val list = OtherClass.getIt("foo")
 			}
 		''')
-		assertFileContents("src-gen/otherPackage/Foo.java",'''
+		assertFileContents("xtend-gen/otherPackage/Foo.java",'''
 			package otherPackage;
 			
 			@SuppressWarnings("all")
@@ -232,7 +232,7 @@ class IdeaIntegrationTest extends LightXtendTest {
 				}
 			}
 		''')
-		assertFileContents("src-gen/otherPackage/Foo.java",'''
+		assertFileContents("xtend-gen/otherPackage/Foo.java",'''
 			package otherPackage;
 			
 			import java.util.List;
@@ -257,7 +257,7 @@ class IdeaIntegrationTest extends LightXtendTest {
 				}
 			}
 		''')
-		assertFileContents("src-gen/otherPackage/Foo.java",'''
+		assertFileContents("xtend-gen/otherPackage/Foo.java",'''
 			package otherPackage;
 			
 			import otherPackage.OtherClass;
@@ -282,7 +282,7 @@ class IdeaIntegrationTest extends LightXtendTest {
 			
 			}
 		''')
-		assertFileContents("src-gen/otherPackage/Foo.java",'''
+		assertFileContents("xtend-gen/otherPackage/Foo.java",'''
 			package otherPackage;
 			
 			import org.eclipse.xtend.lib.Data;
