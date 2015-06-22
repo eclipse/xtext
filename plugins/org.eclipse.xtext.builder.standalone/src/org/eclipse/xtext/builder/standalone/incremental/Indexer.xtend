@@ -106,7 +106,7 @@ class Indexer {
 		val manager = serviceProvider.resourceDescriptionManager
 		val newDescription = manager.getResourceDescription(resource)
 		val IResourceDescription toBeAdded = new ResolvedResourceDescription(newDescription)
-		val delta = new DefaultResourceDescriptionDelta(oldIndex?.getResourceDescription(uri), toBeAdded)
+		val delta = manager.createDelta(oldIndex?.getResourceDescription(uri), toBeAdded)
 		return delta
 	}
 
