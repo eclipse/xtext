@@ -48,6 +48,9 @@
       	<lang.psiStructureViewFactory language="org.eclipse.xtext.idea.sdomain.SDomain"
       							factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"
       							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
+		<!-- xtext facet -->
+        <facetType implementation="org.eclipse.xtext.idea.sdomain.idea.facet.SDomainFacetType"
+        						factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"/>
 	</extensions>
 
 </idea-plugin>
