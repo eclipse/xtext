@@ -11,6 +11,7 @@ import com.google.common.collect.LinkedHashMultimap
 import com.google.inject.Guice
 import com.google.inject.Inject
 import java.util.Set
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.xpand2.XpandExecutionContext
 import org.eclipse.xpand2.output.Outlet
 import org.eclipse.xpand2.output.Output
@@ -35,11 +36,13 @@ import org.eclipse.xtext.idea.generator.parser.antlr.XtextIDEAGeneratorExtension
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment.*
-import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.GeneratedMetamodel
 
 class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	
 	private static String META_INF_PLUGIN = "META_INF_PLUGIN"
+	
+	private static String META_INF_PLUGIN_GEN = "META_INF_PLUGIN_GEN"
 	
 	private static String PLUGIN = "PLUGIN"
 	
@@ -120,8 +123,9 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			bindFactory.addTypeToTypeSingleton('com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider', 'org.eclipse.xtext.xbase.idea.ide.hierarchy.JvmExecutableCallHierarchyProvider')
 		}
 		val bindings = bindFactory.bindings
-		
+
 		ctx.writeFile(outlet_src, grammar.standaloneSetupIdea.toJavaPath, grammar.compileStandaloneSetup)
+		ctx.writeFile(outlet_src, grammar.ideaSetup.toXtendPath, grammar.compileIdeaSetup)
 		ctx.writeFile(outlet_src, grammar.ideaModuleName.toJavaPath, grammar.compileIdeaModule)
 		ctx.writeFile(outlet_src, grammar.completionContributor.toXtendPath, grammar.compileCompletionContributor)
 		ctx.writeFile(outlet_src_gen, '''META-INF/services/«ISetup.name»''', grammar.compileServicesISetup)
@@ -137,7 +141,6 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		ctx.writeFile(outlet_src_gen, grammar.syntaxHighlighterFactoryName.toJavaPath, grammar.compileSyntaxHighlighterFactory)
 		ctx.writeFile(outlet_src_gen, grammar.abstractIdeaModuleName.toJavaPath, grammar.compileGuiceModuleIdeaGenerated(bindings))
 		ctx.writeFile(outlet_src_gen, grammar.extensionFactoryName.toJavaPath, grammar.compileExtensionFactory)
-		ctx.writeFile(outlet_src_gen, grammar.buildProcessParametersProviderName.toJavaPath, grammar.compileBuildProcessParametersProvider)
 		ctx.writeFile(outlet_src_gen, grammar.codeBlockModificationListenerName.toJavaPath, grammar.compileCodeBlockModificationListener)
 		ctx.writeFile(outlet_src_gen, grammar.elementDescriptionProviderName.toJavaPath, grammar.compileElementDescriptionProvider)
 		ctx.writeFile(outlet_src_gen, grammar.psiParserName.toJavaPath, grammar.compilePsiParser)
@@ -155,9 +158,11 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		var output = new OutputImpl();
 		output.addOutlet(PLUGIN, false, ideaProjectPath);
 		output.addOutlet(META_INF_PLUGIN, false, ideaProjectPath + "/META-INF");
+		output.addOutlet(META_INF_PLUGIN_GEN, true, ideaProjectPath + "/META-INF");
 		
 		if (deployable) {
 			output.writeFile(META_INF_PLUGIN, "plugin.xml", grammar.compilePluginXml)
+			output.writeFile(META_INF_PLUGIN_GEN, "plugin_gen.xml", grammar.compilePluginGenXml)
 		}
 	}
 
@@ -231,44 +236,6 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 				return «grammar.languageName.toSimpleName».INSTANCE.<Object> getInstance(clazz);
 			}
 
-		}
-	'''
-	
-	def compileBuildProcessParametersProvider(Grammar grammar) '''
-		package «grammar.buildProcessParametersProviderName.toPackageName»;
-
-		import java.io.File;
-		import java.util.ArrayList;
-		import java.util.List;
-		
-		import com.intellij.compiler.server.BuildProcessParametersProvider;
-		import com.intellij.ide.plugins.PluginManager;
-		import com.intellij.openapi.extensions.PluginId;
-		
-		public class «grammar.buildProcessParametersProviderName.toSimpleName» extends BuildProcessParametersProvider {
-		
-			@Override
-			public List<String> getClassPath() {
-				PluginId pluginId = PluginId.getId("«ideaProjectName»");
-				File pluginFolder = PluginManager.getPlugin(pluginId).getPath();
-
-				List<String> result = new ArrayList<String>();
-
-				File libFolder = new File(pluginFolder, "lib");
-				if (libFolder.exists()) {
-					for (File file : libFolder.listFiles()) {
-						result.add(file.getAbsolutePath());
-					}
-				}
-
-				File classesFolder = new File(pluginFolder, "classes");
-				if (classesFolder.exists()) {
-					result.add(classesFolder.getAbsolutePath());
-				}
-
-				return result;
-			}
-		
 		}
 	'''
 	
@@ -486,7 +453,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	}
 	
 	def compilePluginXml(Grammar grammar)'''
-		<idea-plugin version="2">
+		<idea-plugin version="2" xmlns:xi="http://www.w3.org/2001/XInclude">
 			<id>«ideaProjectName»</id>
 			<name>«grammar.simpleName» Support</name>
 			<description>
@@ -500,15 +467,35 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			«IF grammar.doesUseXbase() && ideaProjectName != 'org.eclipse.xtext.xbase.idea'»
 			<depends>org.eclipse.xtext.xbase.idea</depends>
 			«ENDIF»
+		
+			<xi:include href="plugin_gen.xml" xpointer="xpointer(/idea-plugin/*)"/>
+		</idea-plugin>
+	'''
+	
+	def compilePluginGenXml(Grammar grammar)'''
+		<idea-plugin version="2">
+			<extensions defaultExtensionNs="org.eclipse.xtext.idea">
+				«FOR generatedMetamodel:grammar.metamodelDeclarations.filter(GeneratedMetamodel)»
+				<package uri="«generatedMetamodel.EPackage.nsURI»"
+						 class="«grammar.namespace».«generatedMetamodel.name».«generatedMetamodel.name.toFirstUpper»Package"/>
+			    «ENDFOR»
+				<resourceFactory type="«fileExtension»"
+								 class="org.eclipse.xtext.resource.IResourceFactory"
+								 factoryClass="«grammar.extensionFactoryName»"/>
+				<resourceServiceProvider uriExtension="«fileExtension»"
+										 class="org.eclipse.xtext.idea.resource.IResourceIdeaServiceProvider"
+										 factoryClass="«grammar.extensionFactoryName»"/>
+
+				<lang.setup language="«grammar.languageID»"
+							implementationClass="«grammar.ideaSetup»"/>
+			</extensions>
 
 			<extensions defaultExtensionNs="com.intellij">
-				<buildProcess.parametersProvider implementation="«grammar.buildProcessParametersProviderName»"/>
 				«IF grammar.doesUseXbase()»
-				
 				<java.elementFinder implementation="«grammar.jvmTypesElementFinderName»" order="first, before java"/>
 				<java.shortNamesCache implementation="«grammar.jvmTypesShortNamesCacheName»"/>
+				
 				«ENDIF»
-		
 				<stubIndex implementation="org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex"/>
 				«IF grammar.doesUseXbase()»
 				<stubIndex implementation="org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex"/>
@@ -543,7 +530,6 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 				«ENDIF»
 				<facetType implementation="«grammar.facetTypeName»"/>
 			</extensions>
-		
 		</idea-plugin>
 	'''
 	
@@ -676,24 +662,14 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		
 		import org.eclipse.xtext.idea.lang.AbstractXtextLanguage;
 		
-		import com.google.inject.Injector;
-		
 		public final class «grammar.languageName.toSimpleName» extends AbstractXtextLanguage {
 		
 			public static final «grammar.languageName.toSimpleName» INSTANCE = new «grammar.languageName.toSimpleName»();
 		
-			private Injector injector;
-		
 			private «grammar.languageName.toSimpleName»() {
 				super("«grammar.languageID»");
-				this.injector = new «grammar.standaloneSetupIdea»().createInjectorAndDoEMFRegistration();
-				
 			}
-		
-			@Override
-			protected Injector getInjector() {
-				return injector;
-			}
+
 		}
 	'''
 	
@@ -716,6 +692,22 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		        Module mergedModule = Modules2.mixin(runtimeModule, ideaModule);
 		        return Guice.createInjector(mergedModule);
 		    }
+		
+		}
+	'''
+	
+	def compileIdeaSetup(Grammar grammar) '''
+		package «grammar.ideaSetup.toPackageName»
+		
+		import org.eclipse.xtext.ISetup
+		import org.eclipse.xtext.idea.extensions.EcoreGlobalRegistries
+		
+		class «grammar.ideaSetup.toSimpleName» implements ISetup {
+		
+			override createInjectorAndDoEMFRegistration() {
+				EcoreGlobalRegistries.ensureInitialized
+				new «grammar.standaloneSetupIdea.toSimpleName»().createInjector
+			}
 		
 		}
 	'''
