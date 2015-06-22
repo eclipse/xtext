@@ -8,6 +8,9 @@
 
 define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 	
+	/**
+	 * Service class for reverting resources. The resulting text is passed to the editor context.
+	 */
 	function RevertResourceService(serverUrl, resourceId) {
 		this.initialize(serverUrl, resourceId, "revert");
 	};

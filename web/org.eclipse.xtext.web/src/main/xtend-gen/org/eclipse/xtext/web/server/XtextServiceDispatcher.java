@@ -37,6 +37,7 @@ import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.ServiceConflictResult;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistService;
 import org.eclipse.xtext.web.server.hover.HoverService;
+import org.eclipse.xtext.web.server.model.DocumentStateResult;
 import org.eclipse.xtext.web.server.model.IWebResourceSetProvider;
 import org.eclipse.xtext.web.server.model.UpdateDocumentService;
 import org.eclipse.xtext.web.server.model.XtextWebDocument;
@@ -522,9 +523,14 @@ public class XtextServiceDispatcher {
         public IServiceResult apply() {
           IServiceResult _xtrycatchfinallyexpression = null;
           try {
+            DocumentStateResult _xifexpression = null;
             boolean _get = initializedFromFullText[0];
-            boolean _not = (!_get);
-            _xtrycatchfinallyexpression = XtextServiceDispatcher.this.updateDocumentService.updateFullText(document, fullText, _not);
+            if (_get) {
+              _xifexpression = XtextServiceDispatcher.this.updateDocumentService.getStateId(document);
+            } else {
+              _xifexpression = XtextServiceDispatcher.this.updateDocumentService.updateFullText(document, fullText);
+            }
+            _xtrycatchfinallyexpression = _xifexpression;
           } catch (final Throwable _t) {
             if (_t instanceof Throwable) {
               final Throwable throwable = (Throwable)_t;

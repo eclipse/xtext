@@ -9,6 +9,9 @@ package org.eclipse.xtext.web.server.persistence;
 
 import org.eclipse.emf.common.util.URI;
 
+/**
+ * Translates resource identifiers into file URIs that can be used to load and save files.
+ */
 @SuppressWarnings("all")
 public interface IResourceBaseProvider {
   public abstract URI getFileURI(final String resourceId);

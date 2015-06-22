@@ -11,6 +11,9 @@ import com.google.inject.ImplementedBy
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtext.resource.XtextResourceSet
 
+/**
+ * Provider for resource set instances.
+ */
 @ImplementedBy(DefaultImpl)
 interface IWebResourceSetProvider {
 	

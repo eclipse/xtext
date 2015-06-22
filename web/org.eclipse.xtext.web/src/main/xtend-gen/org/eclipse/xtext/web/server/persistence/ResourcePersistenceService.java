@@ -23,9 +23,17 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Pair;
 
+/**
+ * Service class for loading, saving, and reverting documents. The actual work is done by
+ * an implementation of {@link IServerResourceHandler}, so if you want to use this service
+ * you must provide such an implementation in the Guice bindings.
+ */
 @Singleton
 @SuppressWarnings("all")
 public class ResourcePersistenceService {
+  /**
+   * Load the content of a document.
+   */
   public ResourceContentResult load(final String resourceId, final IServerResourceHandler resourceHandler, final ISessionStore sessionStore) throws InvalidRequestException {
     ResourceContentResult _xblockexpression = null;
     {
@@ -70,6 +78,9 @@ public class ResourcePersistenceService {
     return _xblockexpression;
   }
   
+  /**
+   * Revert the content of a document to the last saved state.
+   */
   public ResourceContentResult revert(final String resourceId, final IServerResourceHandler resourceHandler, final ISessionStore sessionStore) throws InvalidRequestException {
     try {
       final XtextWebDocument document = resourceHandler.get(resourceId);
@@ -90,6 +101,9 @@ public class ResourcePersistenceService {
     }
   }
   
+  /**
+   * Save the content of a document.
+   */
   public DocumentStateResult save(final XtextWebDocumentAccess document, final IServerResourceHandler resourceHandler) throws InvalidRequestException {
     final CancelableUnitOfWork<DocumentStateResult, IXtextWebDocument> _function = new CancelableUnitOfWork<DocumentStateResult, IXtextWebDocument>() {
       @Override

@@ -8,6 +8,9 @@
 
 define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 	
+	/**
+	 * Service class for loading resources. The resulting text is passed to the editor context.
+	 */
 	function LoadResourceService(serverUrl, resourceId) {
 		this.initialize(serverUrl, resourceId, "load");
 	};

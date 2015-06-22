@@ -11,6 +11,9 @@ import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend.lib.annotations.ToString
 import org.eclipse.xtext.web.server.IServiceResult
 
+/**
+ * Result object containing the current document state identifier.
+ */
 @Data
 @ToString
 class DocumentStateResult implements IServiceResult {

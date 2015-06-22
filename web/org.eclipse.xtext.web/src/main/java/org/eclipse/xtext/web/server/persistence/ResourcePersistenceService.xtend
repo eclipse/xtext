@@ -17,9 +17,17 @@ import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess
 
 import static org.eclipse.xtext.web.server.InvalidRequestException.Type.*
 
+/**
+ * Service class for loading, saving, and reverting documents. The actual work is done by
+ * an implementation of {@link IServerResourceHandler}, so if you want to use this service
+ * you must provide such an implementation in the Guice bindings.
+ */
 @Singleton
 class ResourcePersistenceService {
 	
+	/**
+	 * Load the content of a document.
+	 */
 	def ResourceContentResult load(String resourceId, IServerResourceHandler resourceHandler, ISessionStore sessionStore)
 			throws InvalidRequestException {
 		val document = sessionStore.get(XtextWebDocument -> resourceId, [
@@ -37,6 +45,9 @@ class ResourcePersistenceService {
 		]
 	}
 	
+	/**
+	 * Revert the content of a document to the last saved state.
+	 */
 	def ResourceContentResult revert(String resourceId, IServerResourceHandler resourceHandler, ISessionStore sessionStore)
 			throws InvalidRequestException {
 		try {
@@ -50,6 +61,9 @@ class ResourcePersistenceService {
 		}
 	}
 	
+	/**
+	 * Save the content of a document.
+	 */
 	def DocumentStateResult save(XtextWebDocumentAccess document, IServerResourceHandler resourceHandler)
 			throws InvalidRequestException {
 		document.readOnly[ it, cancelIndicator |

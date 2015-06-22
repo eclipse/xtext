@@ -14,11 +14,20 @@ import org.eclipse.xtext.web.server.InvalidRequestException
 import org.eclipse.xtext.web.server.model.UpdateDocumentService
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess
 
+/**
+ * Service class for model validation.
+ */
 @Singleton
 class ValidationService {
 	
 	@Inject extension UpdateDocumentService
 	
+	/**
+	 * Return the validation result for the given document. The actual validation may have
+	 * been computed as part of the background work scheduled after another service request,
+	 * e.g. {@link UpdateDocumentService}. If that background processing has not been done
+	 * yet, it is executed and then the validation issues are collected.
+	 */
 	def ValidationResult validate(XtextWebDocumentAccess document) throws InvalidRequestException {
 		val issues = document.readOnly[ it, cancelIndicator |
 			processUpdatedDocument(cancelIndicator)

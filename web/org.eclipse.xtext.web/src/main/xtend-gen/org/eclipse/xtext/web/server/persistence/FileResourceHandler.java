@@ -28,6 +28,10 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
+/**
+ * Resource handler that reads and writes files. The file paths are given by an implementation
+ * of {@link IResourceBaseProvider}.
+ */
 @SuppressWarnings("all")
 public class FileResourceHandler implements IServerResourceHandler {
   @Inject

@@ -18,6 +18,10 @@ import org.eclipse.xtext.web.server.model.IWebResourceSetProvider
 import org.eclipse.xtext.web.server.model.IXtextWebDocument
 import org.eclipse.xtext.web.server.model.XtextWebDocument
 
+/**
+ * Resource handler that reads and writes files. The file paths are given by an implementation
+ * of {@link IResourceBaseProvider}.
+ */
 class FileResourceHandler implements IServerResourceHandler {
 	
 	@Inject IResourceBaseProvider resourceBaseProvider

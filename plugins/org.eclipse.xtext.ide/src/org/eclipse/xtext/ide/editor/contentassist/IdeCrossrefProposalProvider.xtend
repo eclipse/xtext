@@ -19,6 +19,9 @@ import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.resource.IEObjectDescription
 import org.eclipse.xtext.scoping.IScope
 
+/**
+ * Special content assist proposal provider for cross-references.
+ */
 class IdeCrossrefProposalProvider {
 	
 	static val LOG = Logger.getLogger(IdeCrossrefProposalProvider)

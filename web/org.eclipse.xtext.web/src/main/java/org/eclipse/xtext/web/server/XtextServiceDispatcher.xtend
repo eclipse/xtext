@@ -250,7 +250,10 @@ class XtextServiceDispatcher {
 			result.service = [
 				try {
 					// If the document has already been initialized with the given text, we don't need to reparse
-					updateDocumentService.updateFullText(document, fullText, !initializedFromFullText.get(0))
+					if (initializedFromFullText.get(0))
+						updateDocumentService.getStateId(document)
+					else
+						updateDocumentService.updateFullText(document, fullText)
 				} catch (Throwable throwable) {
 					handleError(result, throwable)
 				}

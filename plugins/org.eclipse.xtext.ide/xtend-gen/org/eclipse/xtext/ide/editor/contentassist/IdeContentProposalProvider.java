@@ -45,6 +45,11 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.CurrentTypeFinder;
 
+/**
+ * Generic content proposal provider for use in different IDE contexts. This provider is
+ * <em>not</em> used by the Eclipse integration, which has its own abstraction for
+ * content assist proposals.
+ */
 @SuppressWarnings("all")
 public class IdeContentProposalProvider {
   @Accessors(AccessorType.PROTECTED_GETTER)
@@ -67,6 +72,9 @@ public class IdeContentProposalProvider {
   @Extension
   private CurrentTypeFinder _currentTypeFinder;
   
+  /**
+   * Create content assist proposals and pass them to the given acceptor.
+   */
   public void createProposals(final List<ContentAssistContext> contexts, final IIdeContentProposalAcceptor acceptor) {
     ContentAssistContext selectedContext = null;
     for (final ContentAssistContext context : contexts) {

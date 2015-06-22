@@ -12,6 +12,11 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
 
+/**
+ * Default resource base provider that assumes all resource identifiers are relative
+ * paths inside a certain resource base path, which has to be given when creating
+ * this provider.
+ */
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class ResourceBaseProviderImpl implements IResourceBaseProvider {

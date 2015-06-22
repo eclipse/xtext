@@ -18,6 +18,12 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
+/**
+ * Synchronizer object used by the {@link XtextWebDocumentAccess} for managing multithreaded
+ * access to a document. It holds the cancelation status and locking information. The lock
+ * is not bound to a thread, so it is possible for one thread to call {@link #acquireLock(boolean)}
+ * and for another thread to call {@link #releaseLock()}.
+ */
 @SuppressWarnings("all")
 class DocumentSynchronizer implements CancelIndicator {
   private final Semaphore semaphore = new Semaphore(1, true);
