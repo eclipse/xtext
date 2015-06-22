@@ -13,6 +13,8 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
+import com.intellij.ProjectTopics;
+import com.intellij.compiler.ModuleCompilerUtil;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
@@ -28,6 +30,9 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.ModuleRootAdapter;
+import com.intellij.openapi.roots.ModuleRootEvent;
+import com.intellij.openapi.roots.ModuleRootListener;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.OrderEnumerator;
 import com.intellij.openapi.roots.OrderRootsEnumerator;
@@ -48,6 +53,8 @@ import com.intellij.psi.util.PsiModificationTracker;
 import com.intellij.util.Alarm;
 import com.intellij.util.PathsList;
 import com.intellij.util.graph.Graph;
+import com.intellij.util.messages.MessageBus;
+import com.intellij.util.messages.MessageBusConnection;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -178,6 +185,14 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
       public void fileMoved(final VirtualFileMoveEvent event) {
       }
     }, project);
+    MessageBus _messageBus = project.getMessageBus();
+    final MessageBusConnection connection = _messageBus.connect(project);
+    connection.<ModuleRootListener>subscribe(ProjectTopics.PROJECT_ROOTS, new ModuleRootAdapter() {
+      @Override
+      public void rootsChanged(final ModuleRootEvent event) {
+        XtextAutoBuilderComponent.this.doCleanBuild();
+      }
+    });
     Alarm _alarm_1 = new Alarm(Alarm.ThreadToUse.OWN_THREAD, project);
     this.alarm = _alarm_1;
   }
@@ -228,7 +243,19 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   }
   
   public void fileAdded(final VirtualFile file) {
-    this.enqueue(file, BuildEvent.Type.ADDED);
+    long _length = file.getLength();
+    boolean _greaterThan = (_length > 0);
+    if (_greaterThan) {
+      this.enqueue(file, BuildEvent.Type.ADDED);
+    } else {
+      boolean _isInfoEnabled = XtextAutoBuilderComponent.LOG.isInfoEnabled();
+      if (_isInfoEnabled) {
+        String _path = file.getPath();
+        String _plus = ("Ignoring new empty file " + _path);
+        String _plus_1 = (_plus + ". Waiting for content.");
+        XtextAutoBuilderComponent.LOG.info(_plus_1);
+      }
+    }
   }
   
   /**
@@ -270,25 +297,35 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
       if (_and_1) {
         BuildEvent _buildEvent = new BuildEvent(file, type);
         this.queue.put(_buildEvent);
-        if (XtextAutoBuilderComponent.TEST_MODE) {
-          Project _project = this.getProject();
-          PsiManager _instance = PsiManager.getInstance(_project);
-          PsiModificationTracker _modificationTracker = _instance.getModificationTracker();
-          ((PsiModificationTrackerImpl) _modificationTracker).incCounter();
-          this.build();
-        } else {
-          this.alarm.cancelAllRequests();
-          final Runnable _function = new Runnable() {
-            @Override
-            public void run() {
-              XtextAutoBuilderComponent.this.build();
-            }
-          };
-          this.alarm.addRequest(_function, 200);
-        }
+        this.doRunBuild();
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected void doCleanBuild() {
+    this.indexState = null;
+    this.queueAllResources();
+    this.doRunBuild();
+  }
+  
+  protected void doRunBuild() {
+    if (XtextAutoBuilderComponent.TEST_MODE) {
+      Project _project = this.getProject();
+      PsiManager _instance = PsiManager.getInstance(_project);
+      PsiModificationTracker _modificationTracker = _instance.getModificationTracker();
+      ((PsiModificationTrackerImpl) _modificationTracker).incCounter();
+      this.build();
+    } else {
+      this.alarm.cancelAllRequests();
+      final Runnable _function = new Runnable() {
+        @Override
+        public void run() {
+          XtextAutoBuilderComponent.this.build();
+        }
+      };
+      this.alarm.addRequest(_function, 200);
     }
   }
   
@@ -396,7 +433,9 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
       final Graph<Module> moduleGraph = moduleManager.moduleGraph();
       final ArrayList<IResourceDescription.Delta> deltas = CollectionLiterals.<IResourceDescription.Delta>newArrayList();
       Collection<Module> _nodes = moduleGraph.getNodes();
-      for (final Module module : _nodes) {
+      final ArrayList<Module> sortedModules = new ArrayList<Module>(_nodes);
+      ModuleCompilerUtil.sortModules(this.project, sortedModules);
+      for (final Module module : sortedModules) {
         {
           final HashSet<URI> changedUris = CollectionLiterals.<URI>newHashSet();
           final HashSet<URI> deletedUris = CollectionLiterals.<URI>newHashSet();

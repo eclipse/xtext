@@ -263,7 +263,7 @@ public class Indexer {
     if (oldIndex!=null) {
       _resourceDescription=oldIndex.getResourceDescription(uri);
     }
-    final DefaultResourceDescriptionDelta delta = new DefaultResourceDescriptionDelta(_resourceDescription, toBeAdded);
+    final IResourceDescription.Delta delta = manager.createDelta(_resourceDescription, toBeAdded);
     return delta;
   }
   
