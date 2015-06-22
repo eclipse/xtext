@@ -28,7 +28,7 @@ public interface IScopeProvider {
 	 * @param context the element from which an element shall be referenced. It doesn't need to be the element
 	 * 		  containing the reference, it is just used to find the most inner scope for given {@link EReference}.
 	 * @param reference the reference for which to get the scope.
-	 * @return {@link IScope} representing the inner most {@link IScope} for the
+	 * @return {@link IScope} representing the innermost {@link IScope} for the
 	 *         passed context and reference. Note for implementors: The result may not be <code>null</code>.
 	 *         Return <code>IScope.NULLSCOPE</code> instead.
 	 */
