@@ -8,6 +8,9 @@
 
 define(["ace/range"], function(mRange) {
 	
+	/**
+	 * An editor context mediates between the Xtext services and the Ace editor framework.
+	 */
 	function AceEditorContext(editor) {
 		this._editor = editor;
 		this._serverState = {};

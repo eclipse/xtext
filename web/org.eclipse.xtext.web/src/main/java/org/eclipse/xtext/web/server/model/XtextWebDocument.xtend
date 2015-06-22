@@ -13,6 +13,9 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.validation.Issue
 
+/**
+ * Container for an {@link XtextResource}.
+ */
 class XtextWebDocument implements IXtextWebDocument {
 	
 	@Accessors(PUBLIC_GETTER)

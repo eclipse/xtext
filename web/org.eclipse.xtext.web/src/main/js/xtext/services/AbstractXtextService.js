@@ -8,10 +8,16 @@
 
 define(["jquery"], function(jQuery) {
 	
+	/**
+	 * Superclass for Xtext services with some useful methods.
+	 */
 	function AbstractXtextService() {};
 
 	AbstractXtextService.prototype = {
 		
+		/**
+		 * Initialize the request metadata this service class.
+		 */
 		initialize : function(serverUrl, resourceId, requestType) {
 			this._requestType = requestType;
 			if (resourceId === undefined) {
@@ -21,10 +27,17 @@ define(["jquery"], function(jQuery) {
 			}
 		},
 		
+		/**
+		 * Put a reference to the update service into this service class. It may be invoked
+		 * in case of a conflict.
+		 */
 		setUpdateService : function(updateService) {
 			this._updateService = updateService;
 		},
 
+		/**
+		 * Send an HTTP request to invoke the service.
+		 */
 		sendRequest : function(editorContext, settings) {
 			var self = this;
 			editorContext.getClientServiceState()[self._requestType] = "started";
@@ -74,6 +87,10 @@ define(["jquery"], function(jQuery) {
 			jQuery.ajax(this._requestUrl, settings);
 		},
 		
+		/**
+		 * Use this in case of a conflict before retrying the service invocation. If the number
+		 * of retries exceeds the limit, an error is reported and the function returns false.
+		 */
 		increaseRecursionCount : function(editorContext) {
 			if (this._recursionCount === undefined)
 				this._recursionCount = 1;
@@ -88,6 +105,9 @@ define(["jquery"], function(jQuery) {
 			return true;
 		},
 		
+		/**
+		 * Report an error to the listeners.
+		 */
 		reportError : function(editorContext, severity, message) {
 			var errorListeners = editorContext.getEditor().xtextServiceErrorListeners;
 			for (var i in errorListeners) {

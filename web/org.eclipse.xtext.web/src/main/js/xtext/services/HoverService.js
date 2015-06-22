@@ -6,8 +6,12 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 
-define(["xtext/services/AbstractXtextService", "jquery"], function(AbstractXtextService) {
+define(["xtext/services/AbstractXtextService", "jquery"], function(AbstractXtextService, jQuery) {
 	
+	/**
+	 * Service class for hover information. The information is returned as promise of
+	 * a Deferred object.
+	 */
 	function HoverService(serverUrl, resourceId) {
 		this.initialize(serverUrl, resourceId, "hover");
 	};
@@ -20,9 +24,14 @@ define(["xtext/services/AbstractXtextService", "jquery"], function(AbstractXtext
 			offset: params.offset
 		};
 		var httpMethod = "GET";
-		var knownServerState = editorContext.getServerState();
-		if (knownServerState.stateId !== undefined) {
-			serverData.requiredStateId = knownServerState.stateId;
+		if (params.sendFullText) {
+			serverData.fullText = editorContext.getText();
+			httpMethod = "POST";
+		} else {
+			var knownServerState = editorContext.getServerState();
+			if (knownServerState.stateId !== undefined) {
+				serverData.requiredStateId = knownServerState.stateId;
+			}
 		}
 
 		var deferred = new jQuery.Deferred();

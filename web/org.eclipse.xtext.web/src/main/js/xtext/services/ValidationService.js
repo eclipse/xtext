@@ -8,6 +8,9 @@
 
 define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 	
+	/**
+	 * Service class for validation markers. The resulting markers are passed to the editor context.
+	 */
 	function ValidationService(serverUrl, resourceId) {
 		this.initialize(serverUrl, resourceId, "validation");
 	};

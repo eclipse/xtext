@@ -8,6 +8,10 @@
 
 define(["xtext/services/AbstractXtextService", "jquery"], function(AbstractXtextService, jQuery) {
 
+	/**
+	 * Service class for content assist proposals. The proposals are returned as promise of
+	 * a Deferred object.
+	 */
 	function ContentAssistService(serverUrl, resourceId) {
 		this.initialize(serverUrl, resourceId, "content-assist");
 	}

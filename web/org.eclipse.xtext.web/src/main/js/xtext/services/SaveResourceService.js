@@ -8,6 +8,9 @@
 
 define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 	
+	/**
+	 * Service class for saving resources.
+	 */
 	function SaveResourceService(serverUrl, resourceId) {
 		this.initialize(serverUrl, resourceId, "save");
 	};

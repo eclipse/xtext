@@ -8,6 +8,12 @@
 
 define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 	
+	/**
+	 * Service class for updating the server-side representation of a resource.
+	 * This service only makes sense with a stateful server, where an update request is sent
+	 * after each modification. This can greatly improve response times compared to the
+	 * stateless alternative, where the full text content is sent with each service request.
+	 */
 	function UpdateService(serverUrl, resourceId) {
 		this.initialize(serverUrl, resourceId, "update");
 		this.setUpdateService(this);
@@ -15,7 +21,14 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 	};
 	
 	UpdateService.prototype = new AbstractXtextService();
-	
+
+	/**
+	 * Compute a delta between two versions of a text. If a difference is found, the result
+	 * contains three properties:
+	 *   deltaText - the text to insert into s1
+	 *   deltaOffset - the text insertion offset
+	 *   deltaReplaceLength - the number of characters that shall be replaced by the inserted text
+	 */
 	UpdateService.prototype.computeDelta = function(s1, s2, result) {
 		var start = 0, s1length = s1.length, s2length = s2.length;
 		while (start < s1length && start < s2length && s1.charCodeAt(start) === s2.charCodeAt(start)) {
@@ -44,6 +57,9 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 		result.deltaReplaceLength = end1 - start + 1;
 	};
 	
+	/**
+	 * Invoke all completion callbacks and clear the list afterwards.
+	 */
 	UpdateService.prototype.onComplete = function(xhr, textStatus) {
 		var callbacks = this._completionCallbacks;
 		this._completionCallbacks = [];
@@ -52,6 +68,9 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 		}
 	}
 	
+	/**
+	 * Add a callback to be invoked when the service call has completed.
+	 */
 	UpdateService.prototype.addCompletionCallback = function(callback) {
 		this._completionCallbacks.push(callback);
 	}

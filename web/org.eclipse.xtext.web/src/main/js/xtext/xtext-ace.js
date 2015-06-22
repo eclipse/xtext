@@ -149,7 +149,8 @@ define([
 	}
 	
 	/**
-	 * Configure Xtext services for the given editor.
+	 * Configure Xtext services for the given editor. The editor does not have to be created
+	 * with createEditor(options).
 	 */
 	exports.configureServices = function(editor, options) {
 		if (!options.xtextLang && options.lang)
