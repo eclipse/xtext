@@ -1,0 +1,51 @@
+<idea-plugin version="2">
+	<extensions defaultExtensionNs="org.eclipse.xtext.idea">
+		<resourceFactory type="xtext"
+						 class="org.eclipse.xtext.resource.IResourceFactory"
+						 factoryClass="org.eclipse.xtext.idea.XtextExtensionFactory"/>
+		<resourceServiceProvider uriExtension="xtext"
+								 class="org.eclipse.xtext.idea.resource.IResourceIdeaServiceProvider"
+								 factoryClass="org.eclipse.xtext.idea.XtextExtensionFactory"/>
+
+		<lang.setup language="org.eclipse.xtext.Xtext"
+					implementationClass="org.eclipse.xtext.idea.XtextIdeaSetup"/>
+	</extensions>
+
+	<extensions defaultExtensionNs="com.intellij">
+		<stubIndex implementation="org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex"/>
+
+		<psi.treeChangePreprocessor implementation="org.eclipse.xtext.idea.lang.psi.XtextCodeBlockModificationListener"/>
+
+		<fileTypeFactory implementation="org.eclipse.xtext.idea.lang.XtextFileTypeFactory"/>
+		<stubElementTypeHolder class="org.eclipse.xtext.idea.lang.XtextElementTypeProvider"/>
+		<lang.ast.factory language="org.eclipse.xtext.Xtext"
+								factoryClass="org.eclipse.xtext.idea.XtextExtensionFactory"
+								implementationClass="org.eclipse.xtext.idea.lang.BaseXtextASTFactory"/>
+		<lang.parserDefinition language="org.eclipse.xtext.Xtext"
+								factoryClass="org.eclipse.xtext.idea.XtextExtensionFactory"
+								implementationClass="org.eclipse.xtext.idea.lang.parser.XtextParserDefinition"/>
+		<lang.findUsagesProvider language="org.eclipse.xtext.Xtext"
+								factoryClass="org.eclipse.xtext.idea.XtextExtensionFactory"
+								implementationClass="org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider"/>
+		<lang.refactoringSupport language="org.eclipse.xtext.Xtext"
+								factoryClass="org.eclipse.xtext.idea.XtextExtensionFactory"
+								implementationClass="org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider"/>
+		<lang.namesValidator language="org.eclipse.xtext.Xtext"
+								factoryClass="org.eclipse.xtext.idea.XtextExtensionFactory"
+								implementationClass="com.intellij.lang.refactoring.NamesValidator"/>
+      	<lang.syntaxHighlighterFactory key="org.eclipse.xtext.Xtext" implementationClass="org.eclipse.xtext.idea.lang.XtextSyntaxHighlighterFactory" />
+		<lang.braceMatcher language="org.eclipse.xtext.Xtext"
+								factoryClass="org.eclipse.xtext.idea.XtextExtensionFactory"
+								implementationClass="com.intellij.lang.PairedBraceMatcher"/>
+      	<annotator language="org.eclipse.xtext.Xtext"
+      							factoryClass="org.eclipse.xtext.idea.XtextExtensionFactory"
+      							implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"/>
+      	<completion.contributor language="org.eclipse.xtext.Xtext" implementationClass="org.eclipse.xtext.idea.completion.XtextCompletionContributor"/>
+      	<elementDescriptionProvider implementation="org.eclipse.xtext.idea.lang.psi.XtextElementDescriptionProvider" order="first"/>
+      	<pom.declarationSearcher implementation="org.eclipse.xtext.idea.lang.pom.XtextPomDeclarationSearcher"/>
+
+      	<lang.psiStructureViewFactory language="org.eclipse.xtext.Xtext"
+      							factoryClass="org.eclipse.xtext.idea.XtextExtensionFactory"
+      							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
+	</extensions>
+</idea-plugin>

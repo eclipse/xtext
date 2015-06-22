@@ -8,7 +8,7 @@ public class SimpleExpressionsTestLanguageFileTypeFactory extends FileTypeFactor
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtext.testlanguages.idea.lang.SimpleExpressionsTestLanguageFileType.INSTANCE, org.eclipse.xtext.testlanguages.idea.lang.SimpleExpressionsTestLanguageFileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtext.testlanguages.idea.lang.SimpleExpressionsTestLanguageFileType.INSTANCE, org.eclipse.xtext.testlanguages.idea.lang.AbstractSimpleExpressionsTestLanguageFileType.DEFAULT_EXTENSION);
 	}
 
 }

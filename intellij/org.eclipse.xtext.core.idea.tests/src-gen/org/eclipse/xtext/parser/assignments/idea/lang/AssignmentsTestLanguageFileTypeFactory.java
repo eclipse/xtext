@@ -8,7 +8,7 @@ public class AssignmentsTestLanguageFileTypeFactory extends FileTypeFactory {
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtext.parser.assignments.idea.lang.AssignmentsTestLanguageFileType.INSTANCE, org.eclipse.xtext.parser.assignments.idea.lang.AssignmentsTestLanguageFileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtext.parser.assignments.idea.lang.AssignmentsTestLanguageFileType.INSTANCE, org.eclipse.xtext.parser.assignments.idea.lang.AbstractAssignmentsTestLanguageFileType.DEFAULT_EXTENSION);
 	}
 
 }

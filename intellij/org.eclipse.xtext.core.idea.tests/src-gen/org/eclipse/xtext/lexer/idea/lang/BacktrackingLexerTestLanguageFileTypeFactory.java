@@ -8,7 +8,7 @@ public class BacktrackingLexerTestLanguageFileTypeFactory extends FileTypeFactor
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtext.lexer.idea.lang.BacktrackingLexerTestLanguageFileType.INSTANCE, org.eclipse.xtext.lexer.idea.lang.BacktrackingLexerTestLanguageFileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtext.lexer.idea.lang.BacktrackingLexerTestLanguageFileType.INSTANCE, org.eclipse.xtext.lexer.idea.lang.AbstractBacktrackingLexerTestLanguageFileType.DEFAULT_EXTENSION);
 	}
 
 }

@@ -8,8 +8,6 @@
 	<idea-version since-build="131"/>
 
 	<extensions defaultExtensionNs="com.intellij">
-		<!--buildProcess.parametersProvider implementation="org.eclipse.xtext.idea.server.XtextBuildProcessParametersProvider" /-->
-
 		<problemFileHighlightFilter implementation="org.eclipse.xtext.idea.highlighting.ProblemXtextFileHighlightFilter"/>
    	</extensions>
 
@@ -18,5 +16,37 @@
 			<implementation-class>org.eclipse.xtext.idea.build.XtextAutoBuilderComponent</implementation-class>
 		</component>
 	</project-components>
+
+	<application-components>
+		<component>
+			<implementation-class>org.eclipse.xtext.idea.extensions.EcoreGlobalRegistries</implementation-class>
+		</component>
+	</application-components>
+	
+	<extensionPoints>
+		<extensionPoint name="lang.setup" beanClass="com.intellij.lang.LanguageExtensionPoint">
+			<with attribute="implementationClass" implements="org.eclipse.xtext.ISetup"/>
+		</extensionPoint>
+
+		<extensionPoint name="package" beanClass="org.eclipse.xtext.idea.extensions.EPackageEP"/>
+		<extensionPoint name="resourceFactory" beanClass="org.eclipse.xtext.idea.extensions.ResourceFactoryEP"/>
+		<extensionPoint name="resourceServiceProvider" beanClass="org.eclipse.xtext.idea.extensions.ResourceServiceProviderEP"/>
+	</extensionPoints>
+     
+    <extensions defaultExtensionNs="org.eclipse.xtext.idea">
+    	<package uri="http://www.eclipse.org/emf/2002/Ecore" class="org.eclipse.emf.ecore.EcorePackage"/>
+    	<package uri="http://www.eclipse.org/2008/Xtext" class="org.eclipse.xtext.XtextPackage"/>
+
+    	<resourceFactory type="ecore" class="org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl"/>
+    	<resourceFactory type="xmi" class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/>
+		<resourceFactory type="xtextbin" class="org.eclipse.xtext.resource.impl.BinaryGrammarResourceFactoryImpl"/>
+
+		<resourceServiceProvider protocolName="java"
+								 class="org.eclipse.xtext.resource.IResourceServiceProvider"
+								 factoryClass="org.eclipse.xtext.idea.common.types.shared.IdeaSharedCommonTypesExtensionFactory"/>
+
+		<lang.setup language="org.eclipse.xtext.idea.common.types.shared"
+					implementationClass="org.eclipse.xtext.idea.common.types.shared.IdeaSharedCommonTypesSetup"/>
+    </extensions>
 
 </idea-plugin>

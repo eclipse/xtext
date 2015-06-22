@@ -8,7 +8,7 @@ public class LiveContainerBuilderIntegerationTestLanguageFileTypeFactory extends
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtext.resource.idea.lang.LiveContainerBuilderIntegerationTestLanguageFileType.INSTANCE, org.eclipse.xtext.resource.idea.lang.LiveContainerBuilderIntegerationTestLanguageFileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtext.resource.idea.lang.LiveContainerBuilderIntegerationTestLanguageFileType.INSTANCE, org.eclipse.xtext.resource.idea.lang.AbstractLiveContainerBuilderIntegerationTestLanguageFileType.DEFAULT_EXTENSION);
 	}
 
 }

@@ -34,6 +34,10 @@ import org.eclipse.xtext.psi.impl.BaseXtextFile
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.XtextResourceSet
 import com.intellij.openapi.editor.impl.DocumentImpl
+import com.intellij.lang.LanguageParserDefinitions
+import org.eclipse.xtext.idea.lang.LanguageSetup
+import com.intellij.lang.Language
+import org.eclipse.xtext.ISetup
 
 abstract class AbstractLanguageParsingTestCase extends ParsingTestCase implements ModelChecker {
 
@@ -62,10 +66,16 @@ abstract class AbstractLanguageParsingTestCase extends ParsingTestCase implement
 	@Inject
 	@Accessors(PROTECTED_GETTER)
 	extension XtextResourceAsserts xtextResourceAsserts
+	
+	@Inject
+	ParserDefinition parserDefinition
 
 	override protected setUp() throws Exception {
-		xtextResourceAsserts.nodeModelPrinter.ignoreSyntaxErrors = false
 		super.setUp()
+		addExplicitExtension(LanguageSetup.INSTANCE, myLanguage, setup)
+		xtextLanguage.injectMembers(this)
+		
+		addExplicitExtension(LanguageParserDefinitions.INSTANCE, myLanguage, parserDefinition);
 		addExplicitExtension(LanguageASTFactory.INSTANCE, myLanguage, astFactory)
 
 		val appContainer = application.picoContainer
@@ -83,6 +93,8 @@ abstract class AbstractLanguageParsingTestCase extends ParsingTestCase implement
 		appContainer.registerComponentInstance(FileDocumentManager, new MockFileDocumentManagerImpl([charSequence |
 			editorFactory.createDocument(charSequence)
 		], FileDocumentManagerImpl.HARD_REF_TO_DOCUMENT_KEY))
+		
+		xtextResourceAsserts.nodeModelPrinter.ignoreSyntaxErrors = false
 	}
 
 	override protected tearDown() throws Exception {
@@ -100,21 +112,19 @@ abstract class AbstractLanguageParsingTestCase extends ParsingTestCase implement
 	}
 
 	new(String fileExt, IXtextLanguage language) {
-		this("", fileExt, language.getInstance(ParserDefinition))
+		this("", fileExt, language)
 	}
 
 	new(String dataPath, String fileExt, IXtextLanguage language) {
-		super(dataPath, fileExt, language.getInstance(ParserDefinition))
-		language.injectMembers(this)
+		super(dataPath, fileExt)
+		myLanguage = language as Language
 	}
-
-	new(String dataPath, String fileExt, ParserDefinition... definitions) {
-		super(dataPath, fileExt, definitions)
+	
+	protected def getXtextLanguage() {
+		myLanguage as IXtextLanguage
 	}
-
-	new(String dataPath, String fileExt, boolean lowercaseFirstLetter, ParserDefinition... definitions) {
-		super(dataPath, fileExt, lowercaseFirstLetter, definitions)
-	}
+	
+	protected abstract def ISetup getSetup()
 	
 	override checkResource(String code, boolean validate) {
 		doCodeTest(code)

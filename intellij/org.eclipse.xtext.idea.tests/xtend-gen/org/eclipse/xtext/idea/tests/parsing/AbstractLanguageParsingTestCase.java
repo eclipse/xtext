@@ -10,7 +10,9 @@ package org.eclipse.xtext.idea.tests.parsing;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.intellij.lang.ASTFactory;
+import com.intellij.lang.Language;
 import com.intellij.lang.LanguageASTFactory;
+import com.intellij.lang.LanguageParserDefinitions;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.mock.MockApplicationEx;
 import com.intellij.mock.MockEditorFactory;
@@ -36,8 +38,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.idea.lang.BaseXtextASTFactory;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
+import org.eclipse.xtext.idea.lang.LanguageSetup;
 import org.eclipse.xtext.idea.resource.PsiToEcoreAdapter;
 import org.eclipse.xtext.idea.resource.PsiToEcoreTransformator;
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
@@ -84,11 +88,17 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
   @Extension
   private XtextResourceAsserts xtextResourceAsserts;
   
+  @Inject
+  private ParserDefinition parserDefinition;
+  
   @Override
   protected void setUp() throws Exception {
-    NodeModelPrinter _nodeModelPrinter = this.xtextResourceAsserts.getNodeModelPrinter();
-    _nodeModelPrinter.setIgnoreSyntaxErrors(false);
     super.setUp();
+    ISetup _setup = this.getSetup();
+    this.<ISetup>addExplicitExtension(LanguageSetup.INSTANCE, this.myLanguage, _setup);
+    IXtextLanguage _xtextLanguage = this.getXtextLanguage();
+    _xtextLanguage.injectMembers(this);
+    this.<ParserDefinition>addExplicitExtension(LanguageParserDefinitions.INSTANCE, this.myLanguage, this.parserDefinition);
     this.<ASTFactory>addExplicitExtension(LanguageASTFactory.INSTANCE, this.myLanguage, this.astFactory);
     MockApplicationEx _application = PlatformLiteFixture.getApplication();
     final MutablePicoContainer appContainer = _application.getPicoContainer();
@@ -109,6 +119,8 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
     };
     MockFileDocumentManagerImpl _mockFileDocumentManagerImpl = new MockFileDocumentManagerImpl(_function, FileDocumentManagerImpl.HARD_REF_TO_DOCUMENT_KEY);
     appContainer.registerComponentInstance(FileDocumentManager.class, _mockFileDocumentManagerImpl);
+    NodeModelPrinter _nodeModelPrinter = this.xtextResourceAsserts.getNodeModelPrinter();
+    _nodeModelPrinter.setIgnoreSyntaxErrors(false);
   }
   
   @Override
@@ -127,21 +139,19 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
   }
   
   public AbstractLanguageParsingTestCase(final String fileExt, final IXtextLanguage language) {
-    this("", fileExt, language.<ParserDefinition>getInstance(ParserDefinition.class));
+    this("", fileExt, language);
   }
   
   public AbstractLanguageParsingTestCase(final String dataPath, final String fileExt, final IXtextLanguage language) {
-    super(dataPath, fileExt, language.<ParserDefinition>getInstance(ParserDefinition.class));
-    language.injectMembers(this);
+    super(dataPath, fileExt);
+    this.myLanguage = ((Language) language);
   }
   
-  public AbstractLanguageParsingTestCase(final String dataPath, final String fileExt, final ParserDefinition... definitions) {
-    super(dataPath, fileExt, definitions);
+  protected IXtextLanguage getXtextLanguage() {
+    return ((IXtextLanguage) this.myLanguage);
   }
   
-  public AbstractLanguageParsingTestCase(final String dataPath, final String fileExt, final boolean lowercaseFirstLetter, final ParserDefinition... definitions) {
-    super(dataPath, fileExt, lowercaseFirstLetter, definitions);
-  }
+  protected abstract ISetup getSetup();
   
   @Override
   public XtextResource checkResource(final String code, final boolean validate) {

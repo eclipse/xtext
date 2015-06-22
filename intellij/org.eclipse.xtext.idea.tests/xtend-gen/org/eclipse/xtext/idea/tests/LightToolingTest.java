@@ -61,13 +61,13 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
   public LightToolingTest(final LanguageFileType fileType) {
     XtextAutoBuilderComponent.TEST_MODE = true;
     this.fileType = fileType;
-    IXtextLanguage _xtextLanguage = this.getXtextLanguage();
-    _xtextLanguage.injectMembers(this);
   }
   
   @Override
   protected void setUp() throws Exception {
     super.setUp();
+    IXtextLanguage _xtextLanguage = this.getXtextLanguage();
+    _xtextLanguage.injectMembers(this);
     CodeInsightSettings _instance = CodeInsightSettings.getInstance();
     _instance.AUTOCOMPLETE_ON_CODE_COMPLETION = false;
   }

@@ -8,7 +8,7 @@ public class RegionAccessTestLanguageFileTypeFactory extends FileTypeFactory {
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtext.formatting2.regionaccess.internal.idea.lang.RegionAccessTestLanguageFileType.INSTANCE, org.eclipse.xtext.formatting2.regionaccess.internal.idea.lang.RegionAccessTestLanguageFileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtext.formatting2.regionaccess.internal.idea.lang.RegionAccessTestLanguageFileType.INSTANCE, org.eclipse.xtext.formatting2.regionaccess.internal.idea.lang.AbstractRegionAccessTestLanguageFileType.DEFAULT_EXTENSION);
 	}
 
 }

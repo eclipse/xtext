@@ -6,6 +6,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
+import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.idea.XtextStandaloneSetupIdea;
 import org.eclipse.xtext.idea.lang.XtextFileType;
 import org.eclipse.xtext.idea.lang.XtextLanguage;
 import org.eclipse.xtext.idea.tests.TestDecorator;
@@ -47,6 +49,11 @@ public class IdeaXtextParserTest extends AbstractLanguageParsingTestCase {
     super(XtextFileType.INSTANCE);
     IdeaXtextParserTest.Delegate _delegate = new IdeaXtextParserTest.Delegate(this);
     this.delegate = _delegate;
+  }
+  
+  @Override
+  protected ISetup getSetup() {
+    return new XtextStandaloneSetupIdea();
   }
   
   @Override

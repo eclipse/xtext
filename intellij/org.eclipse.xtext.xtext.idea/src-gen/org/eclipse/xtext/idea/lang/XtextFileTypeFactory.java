@@ -8,7 +8,7 @@ public class XtextFileTypeFactory extends FileTypeFactory {
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtext.idea.lang.XtextFileType.INSTANCE, org.eclipse.xtext.idea.lang.XtextFileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtext.idea.lang.XtextFileType.INSTANCE, org.eclipse.xtext.idea.lang.AbstractXtextFileType.DEFAULT_EXTENSION);
 	}
 
 }

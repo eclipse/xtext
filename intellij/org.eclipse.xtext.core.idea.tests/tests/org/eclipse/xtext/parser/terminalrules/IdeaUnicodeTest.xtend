@@ -9,6 +9,7 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.idea.tests.TestDecorator
 import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker
+import org.eclipse.xtext.parser.terminalrules.idea.UnicodeTestLanguageStandaloneSetupIdea
 import org.eclipse.xtext.parser.terminalrules.idea.lang.UnicodeTestLanguageFileType
 import org.eclipse.xtext.parser.terminalrules.idea.lang.UnicodeTestLanguageLanguage
 
@@ -20,6 +21,10 @@ class IdeaUnicodeTest extends AbstractLanguageParsingTestCase {
 	new() {
 		super(UnicodeTestLanguageFileType.INSTANCE)
 		delegate = new Delegate(this)
+	}
+	
+	override protected getSetup() {
+		new UnicodeTestLanguageStandaloneSetupIdea
 	}
 	
 	override protected getTestDataPath() {

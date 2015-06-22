@@ -77,6 +77,11 @@ public class XtendParsingTestCase extends AbstractModelTestCase {
     super(XtendFileType.INSTANCE);
     XtendParsingTestCase.Delegate _delegate = new XtendParsingTestCase.Delegate(this);
     this.delegate = _delegate;
+  }
+  
+  @Override
+  protected void setUp() throws Exception {
+    super.setUp();
     IXtextLanguage _xtextLanguage = this.getXtextLanguage();
     _xtextLanguage.injectMembers(this.delegate);
   }

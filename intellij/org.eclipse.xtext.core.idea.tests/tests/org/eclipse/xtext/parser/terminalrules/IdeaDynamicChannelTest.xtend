@@ -5,6 +5,7 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.idea.tests.TestDecorator
 import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker
+import org.eclipse.xtext.parser.terminalrules.idea.XtextTerminalsTestLanguageStandaloneSetupIdea
 import org.eclipse.xtext.parser.terminalrules.idea.lang.XtextTerminalsTestLanguageFileType
 import org.eclipse.xtext.parser.terminalrules.idea.lang.XtextTerminalsTestLanguageLanguage
 
@@ -16,6 +17,10 @@ class IdeaDynamicChannelTest extends AbstractLanguageParsingTestCase {
 	new() {
 		super(XtextTerminalsTestLanguageFileType.INSTANCE)
 		delegate = new Delegate(this)
+	}
+	
+	override protected getSetup() {
+		new XtextTerminalsTestLanguageStandaloneSetupIdea
 	}
 	
 	override protected getTestDataPath() {

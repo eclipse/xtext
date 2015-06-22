@@ -1,4 +1,4 @@
-<idea-plugin version="2">
+<idea-plugin version="2" xmlns:xi="http://www.w3.org/2001/XInclude">
 	<id>org.eclipse.xtext.idea.common.types.tests</id>
 	<name>RefactoringTestLanguage Support</name>
 	<description>
@@ -9,60 +9,6 @@
 
 	<idea-version since-build="131"/>
 	<depends>org.eclipse.xtext.idea</depends>
-	<depends>org.eclipse.xtext.xbase.idea</depends>
 
-	<extensions defaultExtensionNs="com.intellij">
-		<buildProcess.parametersProvider implementation="org.eclipse.xtext.idea.common.types.idea.server.RefactoringTestLanguageBuildProcessParametersProvider"/>
-		
-		<java.elementFinder implementation="org.eclipse.xtext.idea.common.types.idea.lang.types.psi.RefactoringTestLanguageJvmTypesElementFinder" order="first, before java"/>
-		<java.shortNamesCache implementation="org.eclipse.xtext.idea.common.types.idea.lang.types.RefactoringTestLanguageJvmTypesShortNamesCache"/>
-
-		<stubIndex implementation="org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex"/>
-		<stubIndex implementation="org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex"/>
-
-		<psi.treeChangePreprocessor implementation="org.eclipse.xtext.idea.common.types.idea.lang.psi.RefactoringTestLanguageCodeBlockModificationListener"/>
-
-		<referencesSearch implementation="org.eclipse.xtext.idea.common.types.idea.lang.types.psi.search.RefactoringTestLanguageJvmElementsReferencesSearch"/>
-
-		<fileTypeFactory implementation="org.eclipse.xtext.idea.common.types.idea.lang.RefactoringTestLanguageFileTypeFactory"/>
-		<stubElementTypeHolder class="org.eclipse.xtext.idea.common.types.idea.lang.RefactoringTestLanguageElementTypeProvider"/>
-		<lang.ast.factory language="org.eclipse.xtext.idea.common.types.RefactoringTestLanguage"
-								factoryClass="org.eclipse.xtext.idea.common.types.idea.RefactoringTestLanguageExtensionFactory"
-								implementationClass="org.eclipse.xtext.idea.lang.BaseXtextASTFactory"/>
-		<lang.parserDefinition language="org.eclipse.xtext.idea.common.types.RefactoringTestLanguage"
-								factoryClass="org.eclipse.xtext.idea.common.types.idea.RefactoringTestLanguageExtensionFactory"
-								implementationClass="org.eclipse.xtext.idea.common.types.idea.lang.parser.RefactoringTestLanguageParserDefinition"/>
-		<lang.findUsagesProvider language="org.eclipse.xtext.idea.common.types.RefactoringTestLanguage"
-								factoryClass="org.eclipse.xtext.idea.common.types.idea.RefactoringTestLanguageExtensionFactory"
-								implementationClass="org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider"/>
-		<lang.refactoringSupport language="org.eclipse.xtext.idea.common.types.RefactoringTestLanguage"
-								factoryClass="org.eclipse.xtext.idea.common.types.idea.RefactoringTestLanguageExtensionFactory"
-								implementationClass="org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider"/>
-		<lang.namesValidator language="org.eclipse.xtext.idea.common.types.RefactoringTestLanguage"
-								factoryClass="org.eclipse.xtext.idea.common.types.idea.RefactoringTestLanguageExtensionFactory"
-								implementationClass="com.intellij.lang.refactoring.NamesValidator"/>
-      	<lang.syntaxHighlighterFactory key="org.eclipse.xtext.idea.common.types.RefactoringTestLanguage" implementationClass="org.eclipse.xtext.idea.common.types.idea.lang.RefactoringTestLanguageSyntaxHighlighterFactory" />
-		<lang.braceMatcher language="org.eclipse.xtext.idea.common.types.RefactoringTestLanguage"
-								factoryClass="org.eclipse.xtext.idea.common.types.idea.RefactoringTestLanguageExtensionFactory"
-								implementationClass="com.intellij.lang.PairedBraceMatcher"/>
-      	<annotator language="org.eclipse.xtext.idea.common.types.RefactoringTestLanguage"
-      							factoryClass="org.eclipse.xtext.idea.common.types.idea.RefactoringTestLanguageExtensionFactory"
-      							implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"/>
-      	<completion.contributor language="org.eclipse.xtext.idea.common.types.RefactoringTestLanguage" implementationClass="org.eclipse.xtext.idea.common.types.idea.completion.RefactoringTestLanguageCompletionContributor"/>
-      	<elementDescriptionProvider implementation="org.eclipse.xtext.idea.common.types.idea.lang.psi.RefactoringTestLanguageElementDescriptionProvider" order="first"/>
-      	<pom.declarationSearcher implementation="org.eclipse.xtext.idea.common.types.idea.lang.pom.RefactoringTestLanguagePomDeclarationSearcher"/>
-
-      	<lang.psiStructureViewFactory language="org.eclipse.xtext.idea.common.types.RefactoringTestLanguage"
-      							factoryClass="org.eclipse.xtext.idea.common.types.idea.RefactoringTestLanguageExtensionFactory"
-      							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
-
-		<typeHierarchyProvider language="org.eclipse.xtext.idea.common.types.RefactoringTestLanguage"
-								factoryClass="org.eclipse.xtext.idea.common.types.idea.RefactoringTestLanguageExtensionFactory"
-								implementationClass="com.intellij.ide.hierarchy.type.JavaTypeHierarchyProvider"/>
-		<callHierarchyProvider language="org.eclipse.xtext.idea.common.types.RefactoringTestLanguage"
-								factoryClass="org.eclipse.xtext.idea.common.types.idea.RefactoringTestLanguageExtensionFactory"
-								implementationClass="com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider"/>
-		<hierarchy.referenceProcessor implementation="org.eclipse.xtext.idea.common.types.idea.ide.hierarchy.call.RefactoringTestLanguageCallReferenceProcessor"/>
-	</extensions>
-
+	<xi:include href="plugin_gen.xml" xpointer="xpointer(/idea-plugin/*)"/>
 </idea-plugin>

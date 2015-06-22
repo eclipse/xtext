@@ -7,14 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.lang;
 
+import org.eclipse.xtext.ISetup;
+
 import com.google.inject.Injector;
 import com.intellij.lang.Language;
 
 public abstract class AbstractXtextLanguage extends Language implements IXtextLanguage {
 
-	
-	public AbstractXtextLanguage(Language baseLanguage, String ID,
-			String... mimeTypes) {
+	private Injector injector;
+
+	public AbstractXtextLanguage(Language baseLanguage, String ID, String... mimeTypes) {
 		super(baseLanguage, ID, mimeTypes);
 	}
 
@@ -30,13 +32,23 @@ public abstract class AbstractXtextLanguage extends Language implements IXtextLa
 		super(id);
 	}
 
-	abstract protected Injector getInjector(); 
-	
+	protected Injector getInjector() {
+		if (injector == null) {
+			synchronized (this) {
+				if (injector == null) {
+					ISetup setup = LanguageSetup.INSTANCE.forLanguage(this);
+					this.injector = setup.createInjectorAndDoEMFRegistration();
+				}
+			}
+		}
+		return injector;
+	}
+
 	@Override
 	public <T> T getInstance(Class<? extends T> clazz) {
 		return getInjector().getInstance(clazz);
 	}
-	
+
 	@Override
 	public void injectMembers(Object o) {
 		getInjector().injectMembers(o);

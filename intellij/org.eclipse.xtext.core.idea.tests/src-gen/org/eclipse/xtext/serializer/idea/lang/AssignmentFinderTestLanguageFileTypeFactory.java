@@ -8,7 +8,7 @@ public class AssignmentFinderTestLanguageFileTypeFactory extends FileTypeFactory
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtext.serializer.idea.lang.AssignmentFinderTestLanguageFileType.INSTANCE, org.eclipse.xtext.serializer.idea.lang.AssignmentFinderTestLanguageFileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtext.serializer.idea.lang.AssignmentFinderTestLanguageFileType.INSTANCE, org.eclipse.xtext.serializer.idea.lang.AbstractAssignmentFinderTestLanguageFileType.DEFAULT_EXTENSION);
 	}
 
 }

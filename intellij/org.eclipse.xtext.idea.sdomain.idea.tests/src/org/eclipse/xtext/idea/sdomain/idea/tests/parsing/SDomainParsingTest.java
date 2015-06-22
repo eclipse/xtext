@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.sdomain.idea.tests.parsing;
 
+import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.idea.sdomain.idea.SDomainStandaloneSetupIdea;
 import org.eclipse.xtext.idea.sdomain.idea.lang.SDomainFileType;
 import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase;
 
@@ -14,6 +16,11 @@ public class SDomainParsingTest extends AbstractLanguageParsingTestCase {
 	
 	public SDomainParsingTest() {
 		super(SDomainFileType.INSTANCE);
+	}
+	
+	@Override
+	protected ISetup getSetup() {
+		return new SDomainStandaloneSetupIdea();
 	}
 	
 	@Override

@@ -1,4 +1,4 @@
-<idea-plugin version="2">
+<idea-plugin version="2" xmlns:xi="http://www.w3.org/2001/XInclude">
 	<id>org.eclipse.xtext.xtext.idea</id>
 	<name>Xtext Support</name>
 	<description>
@@ -10,44 +10,5 @@
 	<idea-version since-build="131"/>
 	<depends>org.eclipse.xtext.idea</depends>
 
-	<extensions defaultExtensionNs="com.intellij">
-		<buildProcess.parametersProvider implementation="org.eclipse.xtext.idea.server.XtextBuildProcessParametersProvider"/>
-
-		<stubIndex implementation="org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex"/>
-
-		<psi.treeChangePreprocessor implementation="org.eclipse.xtext.idea.lang.psi.XtextCodeBlockModificationListener"/>
-
-		<fileTypeFactory implementation="org.eclipse.xtext.idea.lang.XtextFileTypeFactory"/>
-		<stubElementTypeHolder class="org.eclipse.xtext.idea.lang.XtextElementTypeProvider"/>
-		<lang.ast.factory language="org.eclipse.xtext.Xtext"
-								factoryClass="org.eclipse.xtext.idea.XtextExtensionFactory"
-								implementationClass="org.eclipse.xtext.idea.lang.BaseXtextASTFactory"/>
-		<lang.parserDefinition language="org.eclipse.xtext.Xtext"
-								factoryClass="org.eclipse.xtext.idea.XtextExtensionFactory"
-								implementationClass="org.eclipse.xtext.idea.lang.parser.XtextParserDefinition"/>
-		<lang.findUsagesProvider language="org.eclipse.xtext.Xtext"
-								factoryClass="org.eclipse.xtext.idea.XtextExtensionFactory"
-								implementationClass="org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider"/>
-		<lang.refactoringSupport language="org.eclipse.xtext.Xtext"
-								factoryClass="org.eclipse.xtext.idea.XtextExtensionFactory"
-								implementationClass="org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider"/>
-		<lang.namesValidator language="org.eclipse.xtext.Xtext"
-								factoryClass="org.eclipse.xtext.idea.XtextExtensionFactory"
-								implementationClass="com.intellij.lang.refactoring.NamesValidator"/>
-      	<lang.syntaxHighlighterFactory key="org.eclipse.xtext.Xtext" implementationClass="org.eclipse.xtext.idea.lang.XtextSyntaxHighlighterFactory" />
-		<lang.braceMatcher language="org.eclipse.xtext.Xtext"
-								factoryClass="org.eclipse.xtext.idea.XtextExtensionFactory"
-								implementationClass="com.intellij.lang.PairedBraceMatcher"/>
-      	<annotator language="org.eclipse.xtext.Xtext"
-      							factoryClass="org.eclipse.xtext.idea.XtextExtensionFactory"
-      							implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"/>
-      	<completion.contributor language="org.eclipse.xtext.Xtext" implementationClass="org.eclipse.xtext.idea.completion.XtextCompletionContributor"/>
-      	<elementDescriptionProvider implementation="org.eclipse.xtext.idea.lang.psi.XtextElementDescriptionProvider" order="first"/>
-      	<pom.declarationSearcher implementation="org.eclipse.xtext.idea.lang.pom.XtextPomDeclarationSearcher"/>
-
-      	<lang.psiStructureViewFactory language="org.eclipse.xtext.Xtext"
-      							factoryClass="org.eclipse.xtext.idea.XtextExtensionFactory"
-      							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
-	</extensions>
-
+	<xi:include href="plugin_gen.xml" xpointer="xpointer(/idea-plugin/*)"/>
 </idea-plugin>

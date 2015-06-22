@@ -8,7 +8,7 @@ public class UnassignedTextTestLanguageFileTypeFactory extends FileTypeFactory {
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtext.parsetree.unassignedtext.idea.lang.UnassignedTextTestLanguageFileType.INSTANCE, org.eclipse.xtext.parsetree.unassignedtext.idea.lang.UnassignedTextTestLanguageFileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtext.parsetree.unassignedtext.idea.lang.UnassignedTextTestLanguageFileType.INSTANCE, org.eclipse.xtext.parsetree.unassignedtext.idea.lang.AbstractUnassignedTextTestLanguageFileType.DEFAULT_EXTENSION);
 	}
 
 }

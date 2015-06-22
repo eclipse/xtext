@@ -2,11 +2,13 @@ package org.eclipse.xtext.parser.terminalrules;
 
 import com.google.inject.Injector;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
+import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.idea.tests.TestDecorator;
 import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase;
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.terminalrules.DynamicChannelTest;
+import org.eclipse.xtext.parser.terminalrules.idea.XtextTerminalsTestLanguageStandaloneSetupIdea;
 import org.eclipse.xtext.parser.terminalrules.idea.lang.XtextTerminalsTestLanguageFileType;
 import org.eclipse.xtext.parser.terminalrules.idea.lang.XtextTerminalsTestLanguageLanguage;
 import org.eclipse.xtext.resource.XtextResource;
@@ -43,6 +45,11 @@ public class IdeaDynamicChannelTest extends AbstractLanguageParsingTestCase {
     super(XtextTerminalsTestLanguageFileType.INSTANCE);
     IdeaDynamicChannelTest.Delegate _delegate = new IdeaDynamicChannelTest.Delegate(this);
     this.delegate = _delegate;
+  }
+  
+  @Override
+  protected ISetup getSetup() {
+    return new XtextTerminalsTestLanguageStandaloneSetupIdea();
   }
   
   @Override

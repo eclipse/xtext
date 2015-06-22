@@ -8,7 +8,7 @@ public class Bug419429FileTypeFactory extends FileTypeFactory {
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtext.parser.bug419429.idea.lang.Bug419429FileType.INSTANCE, org.eclipse.xtext.parser.bug419429.idea.lang.Bug419429FileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtext.parser.bug419429.idea.lang.Bug419429FileType.INSTANCE, org.eclipse.xtext.parser.bug419429.idea.lang.AbstractBug419429FileType.DEFAULT_EXTENSION);
 	}
 
 }

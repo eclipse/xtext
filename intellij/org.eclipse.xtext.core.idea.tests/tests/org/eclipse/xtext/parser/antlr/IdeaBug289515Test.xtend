@@ -12,6 +12,7 @@ import org.eclipse.xtext.idea.tests.parsing.ModelChecker
 import org.eclipse.xtext.parser.antlr.idea.lang.Bug289515TestLanguageFileType
 import org.eclipse.xtext.parser.antlr.idea.lang.Bug289515TestLanguageLanguage
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.parser.antlr.idea.Bug289515TestLanguageStandaloneSetupIdea
 
 @TestDecorator
 class IdeaBug289515Test extends AbstractLanguageParsingTestCase {
@@ -21,6 +22,10 @@ class IdeaBug289515Test extends AbstractLanguageParsingTestCase {
 	new() {
 		super(Bug289515TestLanguageFileType.INSTANCE)
 		delegate = new Delegate(this)
+	}
+	
+	override protected getSetup() {
+		new Bug289515TestLanguageStandaloneSetupIdea
 	}
 	
 	override protected getTestDataPath() {
@@ -51,4 +56,5 @@ class IdeaBug289515Test extends AbstractLanguageParsingTestCase {
 		}
 		
 	}
+	
 }

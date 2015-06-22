@@ -8,11 +8,13 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
+import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.idea.tests.TestDecorator;
 import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase;
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
 import org.eclipse.xtext.parser.unorderedGroups.BacktrackingParserTest;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.testlanguages.backtracking.idea.SimpleBeeLangTestLanguageStandaloneSetupIdea;
 import org.eclipse.xtext.testlanguages.backtracking.idea.lang.SimpleBeeLangTestLanguageFileType;
 import org.eclipse.xtext.testlanguages.backtracking.idea.lang.SimpleBeeLangTestLanguageLanguage;
 
@@ -51,6 +53,11 @@ public class IdeaBacktrackingParserTest extends AbstractLanguageParsingTestCase 
     super(SimpleBeeLangTestLanguageFileType.INSTANCE);
     IdeaBacktrackingParserTest.Delegate _delegate = new IdeaBacktrackingParserTest.Delegate(this);
     this.delegate = _delegate;
+  }
+  
+  @Override
+  protected ISetup getSetup() {
+    return new SimpleBeeLangTestLanguageStandaloneSetupIdea();
   }
   
   @Override

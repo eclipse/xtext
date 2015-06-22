@@ -8,7 +8,7 @@ public class PartialSerializationTestLanguageFileTypeFactory extends FileTypeFac
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtext.parsetree.reconstr.idea.lang.PartialSerializationTestLanguageFileType.INSTANCE, org.eclipse.xtext.parsetree.reconstr.idea.lang.PartialSerializationTestLanguageFileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtext.parsetree.reconstr.idea.lang.PartialSerializationTestLanguageFileType.INSTANCE, org.eclipse.xtext.parsetree.reconstr.idea.lang.AbstractPartialSerializationTestLanguageFileType.DEFAULT_EXTENSION);
 	}
 
 }

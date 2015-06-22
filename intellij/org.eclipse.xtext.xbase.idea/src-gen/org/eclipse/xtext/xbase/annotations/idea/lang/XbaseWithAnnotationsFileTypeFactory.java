@@ -8,7 +8,7 @@ public class XbaseWithAnnotationsFileTypeFactory extends FileTypeFactory {
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtext.xbase.annotations.idea.lang.XbaseWithAnnotationsFileType.INSTANCE, org.eclipse.xtext.xbase.annotations.idea.lang.XbaseWithAnnotationsFileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtext.xbase.annotations.idea.lang.XbaseWithAnnotationsFileType.INSTANCE, org.eclipse.xtext.xbase.annotations.idea.lang.AbstractXbaseWithAnnotationsFileType.DEFAULT_EXTENSION);
 	}
 
 }

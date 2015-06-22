@@ -6,10 +6,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
+import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.idea.tests.TestDecorator;
 import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase;
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
 import org.eclipse.xtext.parser.assignments.Bug288432Test;
+import org.eclipse.xtext.parser.assignments.idea.Bug288432TestLanguageStandaloneSetupIdea;
 import org.eclipse.xtext.parser.assignments.idea.lang.Bug288432TestLanguageFileType;
 import org.eclipse.xtext.parser.assignments.idea.lang.Bug288432TestLanguageLanguage;
 import org.eclipse.xtext.resource.XtextResource;
@@ -47,6 +49,11 @@ public class IdeaBug288432Test extends AbstractLanguageParsingTestCase {
     super(Bug288432TestLanguageFileType.INSTANCE);
     IdeaBug288432Test.Delegate _delegate = new IdeaBug288432Test.Delegate(this);
     this.delegate = _delegate;
+  }
+  
+  @Override
+  protected ISetup getSetup() {
+    return new Bug288432TestLanguageStandaloneSetupIdea();
   }
   
   @Override

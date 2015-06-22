@@ -8,7 +8,7 @@ public class AbstractIgnoreCaseLinkingTestLanguageFileTypeFactory extends FileTy
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtext.linking.idea.lang.AbstractIgnoreCaseLinkingTestLanguageFileType.INSTANCE, org.eclipse.xtext.linking.idea.lang.AbstractIgnoreCaseLinkingTestLanguageFileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtext.linking.idea.lang.AbstractIgnoreCaseLinkingTestLanguageFileType.INSTANCE, org.eclipse.xtext.linking.idea.lang.AbstractAbstractIgnoreCaseLinkingTestLanguageFileType.DEFAULT_EXTENSION);
 	}
 
 }

@@ -8,7 +8,7 @@ public class HiddenTokenSequencerTestLanguageFileTypeFactory extends FileTypeFac
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtext.serializer.idea.lang.HiddenTokenSequencerTestLanguageFileType.INSTANCE, org.eclipse.xtext.serializer.idea.lang.HiddenTokenSequencerTestLanguageFileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtext.serializer.idea.lang.HiddenTokenSequencerTestLanguageFileType.INSTANCE, org.eclipse.xtext.serializer.idea.lang.AbstractHiddenTokenSequencerTestLanguageFileType.DEFAULT_EXTENSION);
 	}
 
 }

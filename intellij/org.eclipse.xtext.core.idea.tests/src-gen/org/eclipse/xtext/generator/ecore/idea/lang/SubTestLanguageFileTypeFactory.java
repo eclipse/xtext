@@ -8,7 +8,7 @@ public class SubTestLanguageFileTypeFactory extends FileTypeFactory {
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtext.generator.ecore.idea.lang.SubTestLanguageFileType.INSTANCE, org.eclipse.xtext.generator.ecore.idea.lang.SubTestLanguageFileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtext.generator.ecore.idea.lang.SubTestLanguageFileType.INSTANCE, org.eclipse.xtext.generator.ecore.idea.lang.AbstractSubTestLanguageFileType.DEFAULT_EXTENSION);
 	}
 
 }

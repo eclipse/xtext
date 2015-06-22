@@ -8,7 +8,7 @@ public class IgnoreCaseImportsTestLanguageFileTypeFactory extends FileTypeFactor
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtext.linking.idea.lang.IgnoreCaseImportsTestLanguageFileType.INSTANCE, org.eclipse.xtext.linking.idea.lang.IgnoreCaseImportsTestLanguageFileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtext.linking.idea.lang.IgnoreCaseImportsTestLanguageFileType.INSTANCE, org.eclipse.xtext.linking.idea.lang.AbstractIgnoreCaseImportsTestLanguageFileType.DEFAULT_EXTENSION);
 	}
 
 }

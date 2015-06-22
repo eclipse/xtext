@@ -70,6 +70,15 @@ public class IdeaPluginClassNames {
     return (_plus_1 + "StandaloneSetupIdea");
   }
   
+  public String getIdeaSetup(final Grammar it) {
+    String _basePackageName = this.getBasePackageName(it);
+    String _plus = (_basePackageName + ".");
+    String _name = it.getName();
+    String _simpleName = this.toSimpleName(_name);
+    String _plus_1 = (_plus + _simpleName);
+    return (_plus_1 + "IdeaSetup");
+  }
+  
   public String getExtensionFactoryName(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".");
@@ -122,15 +131,6 @@ public class IdeaPluginClassNames {
     String _simpleName = this.toSimpleName(_name);
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "Language");
-  }
-  
-  public String buildProcessParametersProviderName(final Grammar it) {
-    String _basePackageName = this.getBasePackageName(it);
-    String _plus = (_basePackageName + ".server.");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
-    String _plus_1 = (_plus + _simpleName);
-    return (_plus_1 + "BuildProcessParametersProvider");
   }
   
   public String getJvmTypesElementFinderName(final Grammar it) {

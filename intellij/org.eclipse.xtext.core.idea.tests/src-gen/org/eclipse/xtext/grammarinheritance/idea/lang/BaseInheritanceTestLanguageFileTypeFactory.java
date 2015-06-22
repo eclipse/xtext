@@ -8,7 +8,7 @@ public class BaseInheritanceTestLanguageFileTypeFactory extends FileTypeFactory 
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtext.grammarinheritance.idea.lang.BaseInheritanceTestLanguageFileType.INSTANCE, org.eclipse.xtext.grammarinheritance.idea.lang.BaseInheritanceTestLanguageFileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtext.grammarinheritance.idea.lang.BaseInheritanceTestLanguageFileType.INSTANCE, org.eclipse.xtext.grammarinheritance.idea.lang.AbstractBaseInheritanceTestLanguageFileType.DEFAULT_EXTENSION);
 	}
 
 }

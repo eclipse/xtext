@@ -8,7 +8,7 @@ public class IndentationAwareTestLanguageFileTypeFactory extends FileTypeFactory
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtext.parser.indentation.idea.lang.IndentationAwareTestLanguageFileType.INSTANCE, org.eclipse.xtext.parser.indentation.idea.lang.IndentationAwareTestLanguageFileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtext.parser.indentation.idea.lang.IndentationAwareTestLanguageFileType.INSTANCE, org.eclipse.xtext.parser.indentation.idea.lang.AbstractIndentationAwareTestLanguageFileType.DEFAULT_EXTENSION);
 	}
 
 }

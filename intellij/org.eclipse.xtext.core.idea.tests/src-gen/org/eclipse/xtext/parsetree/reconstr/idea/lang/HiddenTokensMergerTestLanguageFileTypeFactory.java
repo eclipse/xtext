@@ -8,7 +8,7 @@ public class HiddenTokensMergerTestLanguageFileTypeFactory extends FileTypeFacto
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtext.parsetree.reconstr.idea.lang.HiddenTokensMergerTestLanguageFileType.INSTANCE, org.eclipse.xtext.parsetree.reconstr.idea.lang.HiddenTokensMergerTestLanguageFileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtext.parsetree.reconstr.idea.lang.HiddenTokensMergerTestLanguageFileType.INSTANCE, org.eclipse.xtext.parsetree.reconstr.idea.lang.AbstractHiddenTokensMergerTestLanguageFileType.DEFAULT_EXTENSION);
 	}
 
 }

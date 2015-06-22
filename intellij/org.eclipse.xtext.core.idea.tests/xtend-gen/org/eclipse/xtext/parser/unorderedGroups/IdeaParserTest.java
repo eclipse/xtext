@@ -8,10 +8,12 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
+import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.idea.tests.TestDecorator;
 import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase;
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
 import org.eclipse.xtext.parser.unorderedGroups.ParserTest;
+import org.eclipse.xtext.parser.unorderedGroups.idea.SimpleUnorderedGroupsTestLanguageStandaloneSetupIdea;
 import org.eclipse.xtext.parser.unorderedGroups.idea.lang.SimpleUnorderedGroupsTestLanguageFileType;
 import org.eclipse.xtext.parser.unorderedGroups.idea.lang.SimpleUnorderedGroupsTestLanguageLanguage;
 import org.eclipse.xtext.resource.XtextResource;
@@ -51,6 +53,11 @@ public class IdeaParserTest extends AbstractLanguageParsingTestCase {
     super(SimpleUnorderedGroupsTestLanguageFileType.INSTANCE);
     IdeaParserTest.Delegate _delegate = new IdeaParserTest.Delegate(this);
     this.delegate = _delegate;
+  }
+  
+  @Override
+  protected ISetup getSetup() {
+    return new SimpleUnorderedGroupsTestLanguageStandaloneSetupIdea();
   }
   
   @Override

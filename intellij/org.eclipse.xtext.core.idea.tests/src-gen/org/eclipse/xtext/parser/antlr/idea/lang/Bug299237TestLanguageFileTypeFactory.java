@@ -8,7 +8,7 @@ public class Bug299237TestLanguageFileTypeFactory extends FileTypeFactory {
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtext.parser.antlr.idea.lang.Bug299237TestLanguageFileType.INSTANCE, org.eclipse.xtext.parser.antlr.idea.lang.Bug299237TestLanguageFileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtext.parser.antlr.idea.lang.Bug299237TestLanguageFileType.INSTANCE, org.eclipse.xtext.parser.antlr.idea.lang.AbstractBug299237TestLanguageFileType.DEFAULT_EXTENSION);
 	}
 
 }

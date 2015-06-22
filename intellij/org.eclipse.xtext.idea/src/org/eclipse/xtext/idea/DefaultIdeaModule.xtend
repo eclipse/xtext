@@ -42,6 +42,7 @@ import org.eclipse.xtext.psi.impl.BaseXtextFile
 import org.eclipse.xtext.resource.IContainer
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.eclipse.xtext.service.AbstractGenericModule
+import org.eclipse.xtext.service.LanguageSpecific
 import org.eclipse.xtext.service.SingletonBinding
 import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider
@@ -60,8 +61,8 @@ class DefaultIdeaModule extends AbstractGenericModule {
 		StubTypeProviderFactory
 	}
 
-	def Class<? extends IPsiModelAssociations> bindIPsiModelAssociations() {
-		PsiModelAssociations
+	def void configureLanguageSpecificPsiModelAssociations(Binder binder) {
+		binder.bind(IPsiModelAssociations).annotatedWith(LanguageSpecific).to(PsiModelAssociations)
 	}
 
 	def Class<? extends IPsiModelAssociator> bindIPsiModelAssociator() {

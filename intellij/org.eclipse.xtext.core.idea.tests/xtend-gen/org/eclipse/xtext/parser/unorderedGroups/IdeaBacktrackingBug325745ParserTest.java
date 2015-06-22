@@ -8,10 +8,12 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
+import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.idea.tests.TestDecorator;
 import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase;
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
 import org.eclipse.xtext.parser.unorderedGroups.BacktrackingBug325745ParserTest;
+import org.eclipse.xtext.parser.unorderedGroups.idea.SimpleBacktrackingBug325745TestLanguageStandaloneSetupIdea;
 import org.eclipse.xtext.parser.unorderedGroups.idea.lang.SimpleBacktrackingBug325745TestLanguageFileType;
 import org.eclipse.xtext.parser.unorderedGroups.idea.lang.SimpleBacktrackingBug325745TestLanguageLanguage;
 import org.eclipse.xtext.resource.XtextResource;
@@ -51,6 +53,11 @@ public class IdeaBacktrackingBug325745ParserTest extends AbstractLanguageParsing
     super(SimpleBacktrackingBug325745TestLanguageFileType.INSTANCE);
     IdeaBacktrackingBug325745ParserTest.Delegate _delegate = new IdeaBacktrackingBug325745ParserTest.Delegate(this);
     this.delegate = _delegate;
+  }
+  
+  @Override
+  protected ISetup getSetup() {
+    return new SimpleBacktrackingBug325745TestLanguageStandaloneSetupIdea();
   }
   
   @Override

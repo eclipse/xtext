@@ -8,7 +8,7 @@ public class IgnoreCaseLexerTestLanguageFileTypeFactory extends FileTypeFactory 
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtext.lexer.idea.lang.IgnoreCaseLexerTestLanguageFileType.INSTANCE, org.eclipse.xtext.lexer.idea.lang.IgnoreCaseLexerTestLanguageFileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtext.lexer.idea.lang.IgnoreCaseLexerTestLanguageFileType.INSTANCE, org.eclipse.xtext.lexer.idea.lang.AbstractIgnoreCaseLexerTestLanguageFileType.DEFAULT_EXTENSION);
 	}
 
 }
