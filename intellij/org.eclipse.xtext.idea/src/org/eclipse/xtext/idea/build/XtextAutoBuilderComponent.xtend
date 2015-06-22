@@ -292,6 +292,11 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 					afterDeleteFile = [
 						buildProgressReporter.markAsAffected(it)
 					]
+					belongsToThisBuildRun = [ uri |
+						val file = uri.virtualFile
+						val thisModule = file.findModule(fileIndex)
+						return module == thisModule
+					]
 				]
 				val result = app.<IncrementalBuilder.Result>runReadAction [
 					builderProvider.get().build(request, resourceServiceProviderRegistry)
