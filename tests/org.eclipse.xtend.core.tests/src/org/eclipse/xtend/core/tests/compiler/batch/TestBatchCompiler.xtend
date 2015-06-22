@@ -125,7 +125,7 @@ class TestBatchCompiler {
 		assertEquals(projectPath, project.name)
 		val output = batchCompiler.outputConfiguration
 		val src = project.sourceFolders.head.name
-		assertEquals("batch-compiler-data/test data/", src.toString)
+		assertEquals("batch-compiler-data/test data", src.toString)
 		val target = output.getOutputDirectory(src)
 		assertEquals("test-result", target.toString)
 	}

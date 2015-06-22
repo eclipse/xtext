@@ -217,7 +217,7 @@ public class TestBatchCompiler {
       FileSourceFolder _head = IterableExtensions.<FileSourceFolder>head(_sourceFolders);
       final String src = _head.getName();
       String _string = src.toString();
-      Assert.assertEquals("batch-compiler-data/test data/", _string);
+      Assert.assertEquals("batch-compiler-data/test data", _string);
       final String target = output.getOutputDirectory(src);
       String _string_1 = target.toString();
       Assert.assertEquals("test-result", _string_1);
