@@ -71,6 +71,11 @@ class StatemachineWebContentProposalProvider extends IdeContentProposalProvider 
 				}
 			}
 			
+			case eventAccess.valueAssignment_2,
+			case commandAccess.newValueAssignment_3: {
+				// Proposals are created by RuleCall dispatch method
+			}
+			
 			default:
 				super._createProposals(assignment, context, acceptor)
 		}
