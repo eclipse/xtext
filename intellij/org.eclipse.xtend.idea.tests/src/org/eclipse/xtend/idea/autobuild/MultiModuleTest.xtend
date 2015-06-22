@@ -9,6 +9,9 @@ package org.eclipse.xtend.idea.autobuild
 
 import com.intellij.openapi.roots.ModuleRootModificationUtil
 import com.intellij.testFramework.PsiTestCase
+import com.intellij.openapi.vfs.VirtualFile
+import com.google.common.io.CharStreams
+import java.io.InputStreamReader
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -35,6 +38,21 @@ class MultiModuleTest extends PsiTestCase {
 		assertNotNull(generatedReferencing)
 		assertNotNull(generatedReferenced)
 		assertNull(referenced.virtualFile.parent.findChild('xtend-gen').findChild('OtherClass.java'))
+		
+		assertFileContains(generatedReferencing,'''
+			public class OtherClass extends MyClass {
+			}
+		''')
+			
+		assertFileContains(generatedReferenced,'''
+			public class MyClass {
+			}
+		''')
+	}
+	
+	def assertFileContains(VirtualFile file, String string) {
+		val result = CharStreams.toString(new InputStreamReader(file.inputStream))
+		assertEquals(string, result)
 	}
 	
 }
