@@ -26,6 +26,11 @@ import org.eclipse.xtext.scoping.IScopeProvider
 import org.eclipse.xtext.util.TextRegion
 import org.eclipse.xtext.xtext.CurrentTypeFinder
 
+/**
+ * Generic content proposal provider for use in different IDE contexts. This provider is
+ * <em>not</em> used by the Eclipse integration, which has its own abstraction for
+ * content assist proposals.
+ */
 class IdeContentProposalProvider {
 	
 	@Accessors(PROTECTED_GETTER)
@@ -42,6 +47,9 @@ class IdeContentProposalProvider {
 	
 	@Inject extension CurrentTypeFinder
 	
+	/**
+	 * Create content assist proposals and pass them to the given acceptor.
+	 */
 	def void createProposals(List<ContentAssistContext> contexts, IIdeContentProposalAcceptor acceptor) {
 		var ContentAssistContext selectedContext
 		for (context : contexts) {
@@ -69,13 +77,31 @@ class IdeContentProposalProvider {
 	
 	protected def dispatch void createProposals(AbstractElement element, ContentAssistContext context,
 			IIdeContentProposalAcceptor acceptor) {
-		// not supported
+		// Unsupported element type
 	}
 	
 	protected def dispatch void createProposals(Assignment assignment, ContentAssistContext context,
 			IIdeContentProposalAcceptor acceptor) {
-		if (assignment.terminal instanceof CrossReference)
+		val terminal = assignment.terminal
+		if (terminal instanceof CrossReference) {
 			createProposals(assignment.terminal, context, acceptor)
+		} else if (terminal instanceof RuleCall) {
+			val rule = terminal.rule
+			if (rule instanceof TerminalRule && context.prefix.empty) {
+				val entry = new ContentAssistEntry => [
+					prefix = context.prefix
+					if (rule.name == 'STRING') {
+						proposal = '"' + assignment.feature + '"'
+						editPositions += new TextRegion(context.offset + 1, proposal.length - 2)
+					} else {
+						proposal = assignment.feature
+						editPositions += new TextRegion(context.offset, proposal.length)
+					}
+					description = rule.name
+				]
+				acceptor.accept(entry, proposalPriorities.getDefaultPriority(entry))
+			}
+		}
 	}
 	
 	protected def dispatch void createProposals(Keyword keyword, ContentAssistContext context,
@@ -96,31 +122,7 @@ class IdeContentProposalProvider {
 	
 	protected def dispatch void createProposals(RuleCall ruleCall, ContentAssistContext context,
 			IIdeContentProposalAcceptor acceptor) {
-		if (ruleCall.rule instanceof TerminalRule && context.prefix.empty) {
-			val entry = new ContentAssistEntry => [
-				prefix = context.prefix
-				if (ruleCall.rule.name == 'STRING') {
-					val container = ruleCall.eContainer
-					if (container instanceof Assignment) {
-						proposal = '"' + container.feature + '"'
-						description = ruleCall.rule.name
-					} else {
-						proposal = '"' + ruleCall.rule.name + '"'
-					}
-					editPositions += new TextRegion(context.offset + 1, proposal.length - 2)
-				} else {
-					val container = ruleCall.eContainer
-					if (container instanceof Assignment) {
-						proposal = container.feature
-						description = ruleCall.rule.name
-					} else {
-						proposal = ruleCall.rule.name
-					}
-					editPositions += new TextRegion(context.offset, proposal.length)
-				}
-			]
-			acceptor.accept(entry, proposalPriorities.getDefaultPriority(entry))
-		}
+		// No default proposals for rule calls
 	}
 	
 	protected def dispatch void createProposals(CrossReference reference, ContentAssistContext context,
@@ -136,4 +138,3 @@ class IdeContentProposalProvider {
 	}
 	
 }
-		
