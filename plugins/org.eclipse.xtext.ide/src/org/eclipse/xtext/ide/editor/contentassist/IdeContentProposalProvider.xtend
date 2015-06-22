@@ -26,6 +26,11 @@ import org.eclipse.xtext.scoping.IScopeProvider
 import org.eclipse.xtext.util.TextRegion
 import org.eclipse.xtext.xtext.CurrentTypeFinder
 
+/**
+ * Generic content proposal provider for use in different IDE contexts. This provider is
+ * <em>not</em> used by the Eclipse integration, which has its own abstraction for
+ * content assist proposals.
+ */
 class IdeContentProposalProvider {
 	
 	@Accessors(PROTECTED_GETTER)
@@ -42,6 +47,9 @@ class IdeContentProposalProvider {
 	
 	@Inject extension CurrentTypeFinder
 	
+	/**
+	 * Create content assist proposals and pass them to the given acceptor.
+	 */
 	def void createProposals(List<ContentAssistContext> contexts, IIdeContentProposalAcceptor acceptor) {
 		var ContentAssistContext selectedContext
 		for (context : contexts) {
@@ -136,4 +144,3 @@ class IdeContentProposalProvider {
 	}
 	
 }
-		

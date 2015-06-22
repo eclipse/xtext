@@ -12,6 +12,10 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry
 import org.eclipse.xtext.resource.IEObjectDescription
 
+/**
+ * Determines priorities for content assist proposal entries. The priorities can be used
+ * to sort the list of proposals.
+ */
 @Singleton
 @Accessors(PROTECTED_GETTER, PROTECTED_SETTER)
 class IdeContentProposalPriorities {
