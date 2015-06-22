@@ -38,24 +38,20 @@ public class BuildContext {
   private ClusteringStorageAwareResourceLoader loader;
   
   public <T extends Object> Iterable<T> executeClustered(final Iterable<URI> uri, final Function1<? super Resource, ? extends T> operation) {
-    Iterable<T> _xblockexpression = null;
-    {
-      boolean _equals = Objects.equal(this.loader, null);
-      if (_equals) {
-        ClusteringStorageAwareResourceLoader _clusteringStorageAwareResourceLoader = new ClusteringStorageAwareResourceLoader(this);
-        this.loader = _clusteringStorageAwareResourceLoader;
-      }
-      final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
-        @Override
-        public Boolean apply(final URI it) {
-          IResourceServiceProvider _resourceServiceProvider = BuildContext.this.getResourceServiceProvider(it);
-          return Boolean.valueOf((!Objects.equal(_resourceServiceProvider, null)));
-        }
-      };
-      Iterable<URI> _filter = IterableExtensions.<URI>filter(uri, _function);
-      _xblockexpression = this.loader.<T>executeClustered(_filter, operation);
+    boolean _equals = Objects.equal(this.loader, null);
+    if (_equals) {
+      ClusteringStorageAwareResourceLoader _clusteringStorageAwareResourceLoader = new ClusteringStorageAwareResourceLoader(this);
+      this.loader = _clusteringStorageAwareResourceLoader;
     }
-    return _xblockexpression;
+    final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
+      @Override
+      public Boolean apply(final URI it) {
+        IResourceServiceProvider _resourceServiceProvider = BuildContext.this.getResourceServiceProvider(it);
+        return Boolean.valueOf((!Objects.equal(_resourceServiceProvider, null)));
+      }
+    };
+    Iterable<URI> _filter = IterableExtensions.<URI>filter(uri, _function);
+    return this.loader.<T>executeClustered(_filter, operation);
   }
   
   public IResourceServiceProvider getResourceServiceProvider(final URI uri) {

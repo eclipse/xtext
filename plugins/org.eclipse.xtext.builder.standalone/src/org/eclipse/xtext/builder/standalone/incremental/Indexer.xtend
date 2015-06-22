@@ -22,6 +22,7 @@ import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.util.internal.Log
+import java.util.HashSet
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -53,8 +54,10 @@ class Indexer {
 			newIndex.register(delta)
 		
 		// add external deltas
+		val allDeltas = new HashSet<Delta>(deltas)
 		if (!request.externalDeltas.empty)
-			deltas.addAll(request.externalDeltas)
+			allDeltas.addAll(request.externalDeltas)
+			
 		
 		val remainingURIs = previousIndex.allResourceDescriptions.map[getURI].toSet
 		remainingURIs.removeAll(deltas.map[uri])
@@ -64,7 +67,7 @@ class Indexer {
 				return false;
 			val manager = getResourceServiceProvider.resourceDescriptionManager
 			val resourceDescription = previousIndex.getResourceDescription(it)
-			val isAffected = resourceDescription.isAffected(manager, deltas, deltas, newIndex)
+			val isAffected = resourceDescription.isAffected(manager, allDeltas, allDeltas, newIndex)
 			return isAffected
 		].toList
 		if (LOG.isInfoEnabled && !allAffected.empty)

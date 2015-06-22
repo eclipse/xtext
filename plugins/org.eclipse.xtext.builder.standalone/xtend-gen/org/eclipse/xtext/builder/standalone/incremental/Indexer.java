@@ -12,6 +12,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.apache.log4j.Logger;
@@ -142,12 +143,13 @@ public class Indexer {
     for (final IResourceDescription.Delta delta : deltas) {
       newIndex.register(delta);
     }
+    final HashSet<IResourceDescription.Delta> allDeltas = new HashSet<IResourceDescription.Delta>(deltas);
     List<IResourceDescription.Delta> _externalDeltas = request.getExternalDeltas();
     boolean _isEmpty = _externalDeltas.isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
       List<IResourceDescription.Delta> _externalDeltas_1 = request.getExternalDeltas();
-      deltas.addAll(_externalDeltas_1);
+      allDeltas.addAll(_externalDeltas_1);
     }
     Iterable<IResourceDescription> _allResourceDescriptions = previousIndex.getAllResourceDescriptions();
     final Function1<IResourceDescription, URI> _function = new Function1<IResourceDescription, URI>() {
@@ -177,7 +179,7 @@ public class Indexer {
         IResourceServiceProvider _resourceServiceProvider = context.getResourceServiceProvider(it);
         final IResourceDescription.Manager manager = _resourceServiceProvider.getResourceDescriptionManager();
         final IResourceDescription resourceDescription = previousIndex.getResourceDescription(it);
-        final boolean isAffected = Indexer.this.isAffected(resourceDescription, manager, deltas, deltas, newIndex);
+        final boolean isAffected = Indexer.this.isAffected(resourceDescription, manager, allDeltas, allDeltas, newIndex);
         return Boolean.valueOf(isAffected);
       }
     };

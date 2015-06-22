@@ -7,12 +7,15 @@
  */
 package org.eclipse.xtend.idea.autobuild;
 
+import com.google.common.io.CharStreams;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootModificationUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.testFramework.PsiTestCase;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import junit.framework.TestCase;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -58,6 +61,29 @@ public class MultiModuleTest extends PsiTestCase {
       VirtualFile _findChild_2 = _parent_2.findChild("src-gen");
       VirtualFile _findChild_3 = _findChild_2.findChild("OtherClass.java");
       TestCase.assertNull(_findChild_3);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("public class OtherClass extends MyClass {");
+      _builder_2.newLine();
+      _builder_2.append("}");
+      _builder_2.newLine();
+      this.assertFileContains(generatedReferencing, _builder_2.toString());
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("public class MyClass {");
+      _builder_3.newLine();
+      _builder_3.append("}");
+      _builder_3.newLine();
+      this.assertFileContains(generatedReferenced, _builder_3.toString());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public void assertFileContains(final VirtualFile file, final String string) {
+    try {
+      InputStream _inputStream = file.getInputStream();
+      InputStreamReader _inputStreamReader = new InputStreamReader(_inputStream);
+      final String result = CharStreams.toString(_inputStreamReader);
+      TestCase.assertEquals(string, result);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
