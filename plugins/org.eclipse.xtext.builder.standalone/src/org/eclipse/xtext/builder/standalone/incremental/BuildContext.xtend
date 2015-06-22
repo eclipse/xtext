@@ -27,10 +27,10 @@ class BuildContext {
 	
 	ClusteringStorageAwareResourceLoader loader
 	
-	def <T> executeClustered(Iterable<URI> uri, (Resource)=>T operation) {
+	def <T> Iterable<T> executeClustered(Iterable<URI> uri, (Resource)=>T operation) {
 		if(loader == null) 
 			loader = new ClusteringStorageAwareResourceLoader(this)
-		loader.executeClustered(uri.filter[resourceServiceProvider!=null], operation)
+		return loader.executeClustered(uri.filter[resourceServiceProvider!=null], operation)
 	}
 	
 	def getResourceServiceProvider(URI uri) {

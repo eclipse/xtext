@@ -62,6 +62,7 @@ import static org.eclipse.xtext.idea.build.BuildEvent.Type.*
 import static org.eclipse.xtext.idea.build.XtextAutoBuilderComponent.*
 
 import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
+import com.intellij.openapi.module.ModuleManager
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -255,68 +256,69 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 
 	protected def void internalBuild(List<BuildEvent> allEvents) {
 		val app = ApplicationManager.application
+		val moduleManager = ModuleManager.getInstance(getProject)
 		val buildProgressReporter = buildProgressReporterProvider.get 
 		buildProgressReporter.project = project
 		try {
 			autoBuildListeners.forEach[
 				aboutToBuild(allEvents)
 			]
-			val module2event = HashMultimap.create
 			val fileIndex = ProjectFileIndex.SERVICE.getInstance(project)
-			allEvents.forEach [event|
-				val module = event.findModule(fileIndex)
-				if(module != null)
-					module2event.put(module, event)
-			]
+			val moduleGraph = moduleManager.moduleGraph
 			// deltas are added over the whole build
  			val deltas = <IResourceDescription.Delta>newArrayList
-			for (module: module2event.keySet) {
-				val events = module2event.get(module)
+			for (module: moduleGraph.nodes) {
 				val changedUris = newHashSet
 				val deletedUris = newHashSet
-				
-				collectChanges(events, module, changedUris, deletedUris, deltas)
-				
-				val entries = OrderEnumerator.orderEntries(module)
-				val request = new BuildRequest => [
-					resourceSet = resourceSetProvider.get(module)
-					dirtyFiles += changedUris
-					deletedFiles += deletedUris
-					externalDeltas += deltas
-					classPath += entries.withoutSdk.classes.pathsList.virtualFiles.filter[/* HACK! we need to properly exclude the out put dir */!isDirectory].map[URI]
-					baseDir = ModuleRootManager.getInstance(module).contentRoots.head.URI
-					// outputs = ??
-					previousState = indexState ?: new IndexState()
-
-					afterValidate = buildProgressReporter
-					afterDeleteFile = [
-						buildProgressReporter.markAsAffected(it)
+				val contentRoots = ModuleRootManager.getInstance(module).contentRoots
+				val events = allEvents.filter[event| event.findModule(fileIndex) == module].toSet
+				if (contentRoots.empty 
+					|| events.isEmpty && deltas.isEmpty) {
+					LOG.info("Skipping module '"+module.name+"'. Nothing to do here.")		
+				} else {
+					collectChanges(events, module, changedUris, deletedUris, deltas)
+					
+					val entries = OrderEnumerator.orderEntries(module)
+					val request = new BuildRequest => [
+						resourceSet = resourceSetProvider.get(module)
+						dirtyFiles += changedUris
+						deletedFiles += deletedUris
+						externalDeltas += deltas
+						classPath += entries.withoutSdk.classes.pathsList.virtualFiles.filter[/* HACK! we need to properly exclude the out put dir */!isDirectory].map[URI]
+						baseDir = contentRoots.head.URI
+						// outputs = ??
+						previousState = indexState ?: new IndexState()
+	
+						afterValidate = buildProgressReporter
+						afterDeleteFile = [
+							buildProgressReporter.markAsAffected(it)
+						]
+						belongsToThisBuildRun = [ uri |
+							val file = uri.virtualFile
+							val thisModule = file.findModule(fileIndex)
+							return module == thisModule
+						]
 					]
-					belongsToThisBuildRun = [ uri |
-						val file = uri.virtualFile
-						val thisModule = file.findModule(fileIndex)
-						return module == thisModule
+					val result = app.<IncrementalBuilder.Result>runReadAction [
+						builderProvider.get().build(request, resourceServiceProviderRegistry)
 					]
-				]
-				val result = app.<IncrementalBuilder.Result>runReadAction [
-					builderProvider.get().build(request, resourceServiceProviderRegistry)
-				]
-				app.invokeAndWait([
-					app.runWriteAction [
-						try {
-							ignoreIncomingEvents = true
-							val handler = VirtualFileBasedUriHandler.find(request.resourceSet)
-							handler.flushToDisk
-						} finally {
-							ignoreIncomingEvents = false
-						}
+					app.invokeAndWait([
+						app.runWriteAction [
+							try {
+								ignoreIncomingEvents = true
+								val handler = VirtualFileBasedUriHandler.find(request.resourceSet)
+								handler.flushToDisk
+							} finally {
+								ignoreIncomingEvents = false
+							}
+						]
+					], ModalityState.any)
+					indexState = result.indexState
+					notifyListeners [
+						ImmutableList.copyOf(result.affectedResources)
 					]
-				], ModalityState.any)
-				indexState = result.indexState
-				notifyListeners [
-					ImmutableList.copyOf(result.affectedResources)
-				]
-				deltas.addAll(result.affectedResources)
+					deltas.addAll(result.affectedResources)
+				}
 			}
 		} catch(ProcessCanceledException exc) {
 			queue.addAll(allEvents)
