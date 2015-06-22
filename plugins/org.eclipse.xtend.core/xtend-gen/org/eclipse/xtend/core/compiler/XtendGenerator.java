@@ -63,7 +63,6 @@ import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.ElementIssueProvider;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
-import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.LoopParams;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -653,18 +652,26 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
     ITreeAppendable _xblockexpression = null;
     {
       boolean _and = false;
+      boolean _and_1 = false;
       JvmVisibility _visibility = it.getVisibility();
       boolean _equals = Objects.equal(_visibility, JvmVisibility.PRIVATE);
       if (!_equals) {
-        _and = false;
+        _and_1 = false;
       } else {
         JvmDeclaredType _declaringType = it.getDeclaringType();
-        boolean _isLocal = _declaringType.isLocal();
+        boolean _notEquals = (!Objects.equal(_declaringType, null));
+        _and_1 = _notEquals;
+      }
+      if (!_and_1) {
+        _and = false;
+      } else {
+        JvmDeclaredType _declaringType_1 = it.getDeclaringType();
+        boolean _isLocal = _declaringType_1.isLocal();
         _and = _isLocal;
       }
       if (_and) {
-        JvmDeclaredType _declaringType_1 = it.getDeclaringType();
-        final JvmGenericType declarator = ((JvmGenericType) _declaringType_1);
+        JvmDeclaredType _declaringType_2 = it.getDeclaringType();
+        final JvmGenericType declarator = ((JvmGenericType) _declaringType_2);
         boolean _isAnonymous = declarator.isAnonymous();
         boolean _not = (!_isAnonymous);
         if (_not) {
@@ -705,9 +712,9 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
           final String thisName = appendable.declareSyntheticVariable(_mappedTo_1, "_this");
           ITreeAppendable _newLine = appendable.newLine();
           ITreeAppendable _append_1 = _newLine.append("final ");
-          IAppendable _append_2 = _append_1.append(actualType);
-          IAppendable _append_3 = _append_2.append(" ");
-          IAppendable _append_4 = _append_3.append(thisName);
+          ITreeAppendable _append_2 = _append_1.append(actualType);
+          ITreeAppendable _append_3 = _append_2.append(" ");
+          ITreeAppendable _append_4 = _append_3.append(thisName);
           _append_4.append(" = this;");
         }
         Iterable<JvmField> _declaredFields = it.getDeclaredFields();

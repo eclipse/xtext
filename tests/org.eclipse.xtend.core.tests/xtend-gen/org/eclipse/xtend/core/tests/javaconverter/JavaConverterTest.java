@@ -1505,27 +1505,27 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder.append("public class Clazz { ");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public static main(String[] args) {");
+    _builder.append("public static void main(String[] args) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("int[] ints = new int[]{1,2,40,44,5,6,7};");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("int in = 3;");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("System.out.println(\"44=\"+(ints[in]++));");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("System.out.println(\"45=\"+(ints[in]--));");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("System.out.println(\"43=\"+(--ints[in]));");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("System.out.println(\"44=\"+(++ints[in]));");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("int[] ints = new int[]{1,2,3,4,5};");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("int in = 2;");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("System.out.println(\"3=\"+(ints[in]++));");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("System.out.println(\"4=\"+(ints[in]--));");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("System.out.println(\"1=\"+(--ints[in]));");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("System.out.println(\"5=\"+(++ints[in]));");
-    _builder.newLine();
-    _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
     _builder.append("}");
@@ -1539,7 +1539,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder.append("public class Clazz { ");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public static main(String[] args) {");
+    _builder.append("public static void main(String[] args) {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("int[] ints = new int[]{1,2,3,4,5};");
@@ -1565,6 +1565,47 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder.append("}");
     XtendClass clazz = this.toValidXtendClass(_builder.toString());
     Assert.assertNotNull(clazz);
+  }
+  
+  @Test
+  public void testPostfixArrayAccess() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("private int ar[] = new int[1];");
+    _builder.newLine();
+    _builder.append("public void arPostReturn() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("System.out.println(ar[0]++);");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("public void arPostNoReturn() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("ar[0]++;");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final String javaCode = _builder.toString();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("int[] ar=newIntArrayOfSize(1)");
+    _builder_1.newLine();
+    _builder_1.append("def void arPostReturn() {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("System.out.println({ var _postIndx_ar=0 var  _postVal_ar={val _rdIndx_ar=_postIndx_ar ar.get(_rdIndx_ar)}{ val _wrVal_ar=ar val _wrIndx_ar=_postIndx_ar _wrVal_ar.set(_wrIndx_ar,_postVal_ar + 1)}_postVal_ar }) ");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("def void arPostNoReturn() {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("{ var _postIndx_ar=0 var  _postVal_ar={val _rdIndx_ar=_postIndx_ar ar.get(_rdIndx_ar)}{ val _wrVal_ar=ar val _wrIndx_ar=_postIndx_ar _wrVal_ar.set(_wrIndx_ar,_postVal_ar + 1)} } ");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    String _string = _builder_1.toString();
+    String _xtendClassBodyDeclr = this.toXtendClassBodyDeclr(javaCode);
+    Assert.assertEquals(_string, _xtendClassBodyDeclr);
   }
   
   @Test

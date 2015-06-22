@@ -60,6 +60,8 @@ class Indexer {
 		remainingURIs.removeAll(deltas.map[uri])
 		
 		val allAffected = remainingURIs.filter [
+			if (!request.belongsToThisBuildRun(it))
+				return false;
 			val manager = getResourceServiceProvider.resourceDescriptionManager
 			val resourceDescription = previousIndex.getResourceDescription(it)
 			val isAffected = resourceDescription.isAffected(manager, deltas, deltas, newIndex)

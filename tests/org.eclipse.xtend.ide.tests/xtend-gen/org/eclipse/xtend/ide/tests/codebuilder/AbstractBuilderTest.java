@@ -119,11 +119,10 @@ public class AbstractBuilderTest extends AbstractXtendUITestCase {
   }
   
   protected LightweightTypeReference createTypeRef(final Class<?> clazz, final EObject context) {
-    ParameterizedTypeReference _xblockexpression = null;
+    LightweightTypeReference _xblockexpression = null;
     {
       final StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(this.services, context);
-      JvmType _findDeclaredType = this._typeReferences.findDeclaredType(clazz, context);
-      _xblockexpression = owner.newParameterizedTypeReference(_findDeclaredType);
+      _xblockexpression = owner.newReferenceTo(clazz);
     }
     return _xblockexpression;
   }

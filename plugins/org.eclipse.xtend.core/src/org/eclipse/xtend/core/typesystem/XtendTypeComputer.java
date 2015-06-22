@@ -97,17 +97,17 @@ public class XtendTypeComputer extends XbaseWithAnnotationsTypeComputer {
 			} else if (!(object.eContainer() instanceof XCastedExpression) && 
 					object.eContainingFeature() != XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET && 
 					(expectedType != null && !expectedType.isResolved() || expectedType == null && !expectation.isVoidTypeAllowed())) {
-				LightweightTypeReference type = getTypeForName(String.class, state);
+				LightweightTypeReference type = getRawTypeForName(String.class, state);
 				expectation.acceptActualType(type, ConformanceFlags.UNCHECKED | ConformanceFlags.DEMAND_CONVERSION);
 			} else {
-				LightweightTypeReference type = getTypeForName(CharSequence.class, state);
+				LightweightTypeReference type = getRawTypeForName(CharSequence.class, state);
 				expectation.acceptActualType(type, ConformanceFlags.UNCHECKED);
 			}
 		}
 	}
 	
 	protected void _computeTypes(RichStringForLoop object, ITypeComputationState state) {
-		LightweightTypeReference charSequence = getTypeForName(CharSequence.class, state);
+		LightweightTypeReference charSequence = getRawTypeForName(CharSequence.class, state);
 		ITypeComputationState eachState = state.withExpectation(charSequence);
 		JvmFormalParameter parameter = object.getDeclaredParam();
 		if (parameter != null) {
@@ -127,8 +127,8 @@ public class XtendTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	}
 	
 	protected void _computeTypes(RichStringIf object, ITypeComputationState state) {
-		LightweightTypeReference charSequence = getTypeForName(CharSequence.class, state);
-		LightweightTypeReference booleanType = getTypeForName(Boolean.TYPE, state);
+		LightweightTypeReference charSequence = getRawTypeForName(CharSequence.class, state);
+		LightweightTypeReference booleanType = getRawTypeForName(Boolean.TYPE, state);
 		
 		ITypeComputationState conditionExpectation = state.withExpectation(booleanType);
 		XExpression condition = object.getIf();
@@ -145,7 +145,7 @@ public class XtendTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	}
 	
 	protected void _computeTypes(RichStringLiteral object, ITypeComputationState state) {
-		LightweightTypeReference type = getTypeForName(CharSequence.class, state);
+		LightweightTypeReference type = getRawTypeForName(CharSequence.class, state);
 		state.acceptActualType(type);
 	}
 	

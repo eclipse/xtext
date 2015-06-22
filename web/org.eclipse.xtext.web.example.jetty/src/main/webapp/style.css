@@ -6,7 +6,7 @@ body {
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
-	font: 15px Helvetica,sans-serif;
+	font: 16px Helvetica,sans-serif;
 }
 
 a {
@@ -16,6 +16,26 @@ a {
 
 a:hover {
 	text-decoration: underline;
+}
+
+h1 {
+	color: #555;
+	font-style: italic;
+}
+
+h2 {
+	color: #555;
+	padding-left: 15px;
+	border-bottom: 1px solid #aab;
+}
+
+h3 {
+	font-size: 16px;
+}
+
+.text-container {
+	width: 800px;
+	margin: 40px;	
 }
 
 .container {
@@ -39,6 +59,16 @@ a:hover {
 	border: 1px solid #aaa;
 }
 
+#xtext-editor {
+	display: block;
+	position: absolute;
+	top: 0;
+	bottom: 30px;
+	left: 0;
+	right: 0;
+	border: 1px solid #aaa;
+}
+
 .status-wrapper {
 	display: block;
     position: absolute;
@@ -58,10 +88,6 @@ a:hover {
 	margin: 20px;
 }
 
-.dirty {
-	background-color: #88e;
-}
-
 #dirty-indicator {
 	display: inline;
 	color: #e8e8e8;
@@ -69,15 +95,15 @@ a:hover {
 	border: 1px solid #ccc;
 }
 
+#dirty-indicator.dirty {
+	background-color: #88e;
+}
+
 #status {
 	display: inline;
 }
 
-.contentassist .proposal-default {
-	color: #888;
-}
-
-.contentassist .proposal-name {
-	color: #000;
-	padding-right: 12px;
+.output-icon {
+	background-image: url("images/output.gif");
+	background-repeat: no-repeat;
 }

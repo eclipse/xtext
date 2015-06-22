@@ -179,9 +179,7 @@ public abstract class AbstractScope implements IScope {
 			@Override
 			public boolean apply(IEObjectDescription input) {
 				if (isIgnoreCase()) {
-					QualifiedName lowerCase = name.toLowerCase();
-					QualifiedName inputLowerCase = input.getName().toLowerCase();
-					return lowerCase.equals(inputLowerCase);
+					return name.equalsIgnoreCase(input.getName());
 				} else {
 					return name.equals(input.getName());
 				}

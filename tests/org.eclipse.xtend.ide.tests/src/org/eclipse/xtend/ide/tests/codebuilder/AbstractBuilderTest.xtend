@@ -69,7 +69,7 @@ class AbstractBuilderTest extends AbstractXtendUITestCase {
 	
 	def protected LightweightTypeReference createTypeRef(Class<?> clazz, EObject context) {
 		val owner = new StandardTypeReferenceOwner(services, context)
-		owner.newParameterizedTypeReference(clazz.findDeclaredType(context))
+		owner.newReferenceTo(clazz)
 	}
 	
 	def protected assertBuilds(ICodeBuilder builder, String expectedCode) {

@@ -45,6 +45,7 @@ import com.intellij.psi.PsiNameValuePair;
 import com.intellij.psi.PsiParameter;
 import com.intellij.psi.PsiParameterList;
 import com.intellij.psi.PsiReferenceExpression;
+import com.intellij.psi.PsiReferenceList;
 import com.intellij.psi.PsiSubstitutor;
 import com.intellij.psi.PsiType;
 import com.intellij.psi.PsiTypeElement;
@@ -1318,6 +1319,13 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
     it.setDeprecated(_isDeprecated);
     boolean _isVarArgs = psiMethod.isVarArgs();
     it.setVarArgs(_isVarArgs);
+    PsiReferenceList _throwsList = psiMethod.getThrowsList();
+    PsiClassType[] _referencedTypes = _throwsList.getReferencedTypes();
+    for (final PsiClassType exceptionType : _referencedTypes) {
+      EList<JvmTypeReference> _exceptions = it.getExceptions();
+      JvmTypeReference _createTypeReference = this.createTypeReference(exceptionType);
+      _exceptions.add(_createTypeReference);
+    }
   }
   
   protected void createFormalParameters(final JvmExecutable it, final PsiMethod psiMethod, final StringBuilder fqn) {

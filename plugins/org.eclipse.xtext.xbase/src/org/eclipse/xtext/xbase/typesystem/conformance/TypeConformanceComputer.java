@@ -519,7 +519,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 							wildcard.addUpperBound(parameterReference);
 							parameterReferences.add(wildcard);
 						} else if (functionType.getParameterTypes().contains(parameterReference)) {
-							WildcardTypeReference wildcard = createObjectWildcardReference(owner);
+							WildcardTypeReference wildcard = owner.newWildcardExtendsObject();
 							wildcard.setLowerBound(parameterReference);
 							parameterReferences.add(wildcard);
 						} else {
@@ -568,7 +568,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 		if (mostSpecialTypeIfAllWildcards != null) {
 			if (mostSpecialTypeIfAllWildcards instanceof WildcardTypeReference)
 				return mostSpecialTypeIfAllWildcards;
-			WildcardTypeReference result = createObjectWildcardReference(owner);
+			WildcardTypeReference result = owner.newWildcardExtendsObject();
 			result.setLowerBound(mostSpecialTypeIfAllWildcards);
 			return result;
 		}
@@ -593,13 +593,13 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 		}
 		// recursive request - return object wildcard
 		if (isRecursiveRequest(types, allNames, initiallyRequested)) {
-			return createObjectWildcardReference(owner);
+			return owner.newWildcardExtendsObject();
 		}
 		LightweightTypeReference superType = getCommonSuperType(types, owner);
 		if (superType instanceof WildcardTypeReference)
 			return superType;
 		if (superType == null) {
-			return createObjectWildcardReference(owner);
+			return owner.newWildcardExtendsObject();
 		}
 		if (superType instanceof UnboundTypeReference)
 			return superType;
@@ -659,7 +659,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			return null;
 		}
 		if (objectIsCandidate)
-			return createObjectWildcardReference(owner);
+			return owner.newWildcardExtendsObject();
 		return getMostSpecialType(types);
 	}
 	
@@ -684,18 +684,6 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 		}
 	}
 
-	protected WildcardTypeReference createObjectWildcardReference(ITypeReferenceOwner owner) {
-		WildcardTypeReference result = owner.newWildcardTypeReference();
-		JvmType objectType = owner.getServices().getTypeReferences().findDeclaredType(Object.class, owner.getContextResourceSet());
-		if (objectType != null) {
-			LightweightTypeReference objectReference = owner.newParameterizedTypeReference(objectType);
-			result.addUpperBound(objectReference);
-		} else {
-			result.addUpperBound(owner.newUnknownTypeReference(Object.class.getName()));
-		}
-		return result;
-	}
-	
 	protected LightweightTypeReference conformsToAll(LightweightTypeReference type, List<LightweightTypeReference> types) {
 		LightweightTypeReference result = type;
 		for (int i = 0; i < types.size(); i++) {

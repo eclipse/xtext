@@ -1075,7 +1075,7 @@ class JavaASTFlattener extends ASTVisitor {
 				assigment.leftHandSide = writeArray
 				assigment.rightHandSide = ASTNode.copySubtree(dummyAST, infixOp) as Expression
 				assigment.accept(this)
-				appendToBuffer('''«if(needsReturnValue(assigment)) tempVarName» }''')
+				appendToBuffer('''«if(needsReturnValue(node)) tempVarName» }''')
 				return false
 			}
 		}

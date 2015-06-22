@@ -28,7 +28,12 @@
 		<Method name="isCandidateMatchingPrefix" />
 		<Bug pattern="ES_COMPARING_STRINGS_WITH_EQ" />
 	</Match>
-	<!-- "==" compare is desired -->
+	<Match>
+		<Class
+			name="org.eclipse.xtext.naming.QualifiedName" />
+		<Method name="toLowerCase" />
+		<Bug pattern="ES_COMPARING_STRINGS_WITH_EQ" />
+	</Match>
 	<Match>
 		<Class
 			name="org.eclipse.xtext.impl.EnumLiteralDeclarationImpl" />

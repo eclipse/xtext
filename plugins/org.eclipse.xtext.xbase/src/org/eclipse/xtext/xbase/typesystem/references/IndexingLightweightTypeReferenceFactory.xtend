@@ -99,7 +99,7 @@ class IndexingLightweightTypeReferenceFactory extends LightweightTypeReferenceFa
 
 			val typeArgument = owner.newWildcardTypeReference()
 			typeArgument.setLowerBound(parameterType)
-			typeArgument.addUpperBound(reference.javaLangObjectTypeReference)
+			typeArgument.addUpperBound(javaLangObjectTypeReference)
 			result.addTypeArgument(typeArgument);
 		}
 		if (reference.getReturnType() != null) {
@@ -125,12 +125,8 @@ class IndexingLightweightTypeReferenceFactory extends LightweightTypeReferenceFa
 		reference.wrapIfNecessary(type)
 	}
 
-	protected def getJavaLangObjectTypeReference(XFunctionTypeRef reference) {
-		val objectType = owner.services.typeReferences.findDeclaredType(Object, reference)
-		if (objectType != null)
-			return owner.newParameterizedTypeReference(objectType)
-		else
-			return owner.newUnknownTypeReference(Object.name)
+	protected def getJavaLangObjectTypeReference() {
+		return owner.newReferenceToObject
 	}
 	
 }

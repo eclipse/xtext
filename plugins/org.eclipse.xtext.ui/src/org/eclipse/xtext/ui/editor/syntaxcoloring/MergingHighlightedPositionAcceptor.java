@@ -89,7 +89,6 @@ public class MergingHighlightedPositionAcceptor implements IHighlightedPositionA
 		}
 	}
 	
-	@SuppressWarnings("null")
 	private void mergePositions(int listIdx, int exclusiveEndOffset, int timestamp, IntToStringArray[] ids) {
 		int i = listIdx;
 		List<LightweightPosition> newPositions = null;

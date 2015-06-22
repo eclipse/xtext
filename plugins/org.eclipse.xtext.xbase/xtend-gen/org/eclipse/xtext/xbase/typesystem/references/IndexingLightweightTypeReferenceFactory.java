@@ -25,13 +25,11 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.impl.JvmGenericArrayTypeReferenceImplCustom;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceFactory;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XtypePackage;
 import org.eclipse.xtext.xtype.impl.XFunctionTypeRefImplCustom;
@@ -170,7 +168,7 @@ public class IndexingLightweightTypeReferenceFactory extends LightweightTypeRefe
         ITypeReferenceOwner _owner_1 = this.getOwner();
         final WildcardTypeReference typeArgument = _owner_1.newWildcardTypeReference();
         typeArgument.setLowerBound(parameterType);
-        LightweightTypeReference _javaLangObjectTypeReference = this.getJavaLangObjectTypeReference(reference);
+        LightweightTypeReference _javaLangObjectTypeReference = this.getJavaLangObjectTypeReference();
         typeArgument.addUpperBound(_javaLangObjectTypeReference);
         result.addTypeArgument(typeArgument);
       }
@@ -209,20 +207,9 @@ public class IndexingLightweightTypeReferenceFactory extends LightweightTypeRefe
     return _xblockexpression;
   }
   
-  protected LightweightTypeReference getJavaLangObjectTypeReference(final XFunctionTypeRef reference) {
+  protected LightweightTypeReference getJavaLangObjectTypeReference() {
     ITypeReferenceOwner _owner = this.getOwner();
-    CommonTypeComputationServices _services = _owner.getServices();
-    TypeReferences _typeReferences = _services.getTypeReferences();
-    final JvmType objectType = _typeReferences.findDeclaredType(Object.class, reference);
-    boolean _notEquals = (!Objects.equal(objectType, null));
-    if (_notEquals) {
-      ITypeReferenceOwner _owner_1 = this.getOwner();
-      return _owner_1.newParameterizedTypeReference(objectType);
-    } else {
-      ITypeReferenceOwner _owner_2 = this.getOwner();
-      String _name = Object.class.getName();
-      return _owner_2.newUnknownTypeReference(_name);
-    }
+    return _owner.newReferenceToObject();
   }
   
   public JvmType getType(final JvmTypeReference it) {

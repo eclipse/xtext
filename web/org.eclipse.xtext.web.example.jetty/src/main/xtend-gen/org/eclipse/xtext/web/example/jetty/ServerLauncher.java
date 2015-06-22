@@ -41,8 +41,16 @@ public class ServerLauncher {
           }
         };
         ResourceHandler _doubleArrow = ObjectExtensions.<ResourceHandler>operator_doubleArrow(_resourceHandler, _function);
+        ResourceHandler _resourceHandler_1 = new ResourceHandler();
+        final Procedure1<ResourceHandler> _function_1 = new Procedure1<ResourceHandler>() {
+          @Override
+          public void apply(final ResourceHandler it) {
+            it.setResourceBase("../org.eclipse.xtext.web/src/main/css");
+          }
+        };
+        ResourceHandler _doubleArrow_1 = ObjectExtensions.<ResourceHandler>operator_doubleArrow(_resourceHandler_1, _function_1);
         WebAppContext _webAppContext = new WebAppContext();
-        final Procedure1<WebAppContext> _function_1 = new Procedure1<WebAppContext>() {
+        final Procedure1<WebAppContext> _function_2 = new Procedure1<WebAppContext>() {
           @Override
           public void apply(final WebAppContext it) {
             it.setResourceBase("../org.eclipse.xtext.web/src/main/js");
@@ -52,11 +60,11 @@ public class ServerLauncher {
             WebInfConfiguration _webInfConfiguration = new WebInfConfiguration();
             MetaInfConfiguration _metaInfConfiguration = new MetaInfConfiguration();
             it.setConfigurations(new Configuration[] { _annotationConfiguration, _webXmlConfiguration, _webInfConfiguration, _metaInfConfiguration });
-            it.setAttribute(WebInfConfiguration.CONTAINER_JAR_PATTERN, ".*org\\.eclipse\\.xtext\\.web.*");
+            it.setAttribute(WebInfConfiguration.CONTAINER_JAR_PATTERN, ".*org\\.eclipse\\.xtext\\.web.*|.*requirejs.*|.*jquery.*|.*ace.*");
           }
         };
-        WebAppContext _doubleArrow_1 = ObjectExtensions.<WebAppContext>operator_doubleArrow(_webAppContext, _function_1);
-        it.setHandlers(new Handler[] { _doubleArrow, _doubleArrow_1 });
+        WebAppContext _doubleArrow_2 = ObjectExtensions.<WebAppContext>operator_doubleArrow(_webAppContext, _function_2);
+        it.setHandlers(new Handler[] { _doubleArrow, _doubleArrow_1, _doubleArrow_2 });
       }
     };
     HandlerList _doubleArrow = ObjectExtensions.<HandlerList>operator_doubleArrow(_handlerList, _function);

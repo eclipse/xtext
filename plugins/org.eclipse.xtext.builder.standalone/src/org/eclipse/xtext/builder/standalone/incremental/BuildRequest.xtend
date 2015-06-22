@@ -75,6 +75,11 @@ class BuildRequest {
 	IPostValidationCallback afterValidate = new DefaultValidationCallback()
 	(URI, URI)=>void afterGenerateFile = []
 	(URI)=>void afterDeleteFile = []
+	(URI)=>boolean belongsToThisBuildRun = [true]
+	
+	def boolean belongsToThisBuildRun(URI uri) {
+		return belongsToThisBuildRun.apply(uri)
+	}
 	
 	IndexState previousState = new IndexState
 	

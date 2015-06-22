@@ -61,8 +61,8 @@ public interface Issue {
 		}
 
 		public void setLength(Integer length) {
-			if(length <0) {
-				LOG.error("Issue length < 0");
+			if(length == null || length < 0) {
+				LOG.error("Issue length was "+length);
 				this.length = 0;
 			} else {
 				this.length = length;

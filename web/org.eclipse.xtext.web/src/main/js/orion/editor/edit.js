@@ -312,6 +312,7 @@ define('orion/editor/edit', [ //$NON-NLS-0$
 			contentAssistFactory: contentAssistFactory,
 			keyBindingFactory: new mEditorFeatures.KeyBindingsFactory(), 
 			statusReporter: options.statusReporter,
+			hoverFactory: options.hoverFactory,
 			domNode: parent
 		});
 		editor.addEventListener("TextViewInstalled", function() { //$NON-NLS-0$

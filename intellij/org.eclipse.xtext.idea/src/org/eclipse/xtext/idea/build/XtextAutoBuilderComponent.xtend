@@ -22,7 +22,6 @@ import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.progress.ProcessCanceledException
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.roots.GeneratedSourcesFilter
 import com.intellij.openapi.roots.ModuleRootManager
 import com.intellij.openapi.roots.OrderEnumerator
 import com.intellij.openapi.roots.ProjectFileIndex
@@ -36,10 +35,13 @@ import com.intellij.psi.PsiJavaFile
 import com.intellij.psi.PsiManager
 import com.intellij.psi.impl.PsiModificationTrackerImpl
 import com.intellij.util.Alarm
+import java.util.ArrayList
+import java.util.HashSet
 import java.util.List
 import java.util.Set
 import java.util.concurrent.BlockingQueue
 import java.util.concurrent.LinkedBlockingQueue
+import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder
 import org.eclipse.xtext.builder.standalone.incremental.IndexState
@@ -49,6 +51,7 @@ import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider.VirtualFileBasedU
 import org.eclipse.xtext.idea.shared.IdeaSharedInjectorProvider
 import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.resource.IResourceDescription
+import org.eclipse.xtext.resource.IResourceDescription.Delta
 import org.eclipse.xtext.resource.IResourceDescription.Event
 import org.eclipse.xtext.resource.IResourceDescription.Event.Listener
 import org.eclipse.xtext.resource.IResourceDescriptions
@@ -95,6 +98,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	
 	new(Project project) {
 		super(project)
+		TEST_MODE = ApplicationManager.application.isUnitTestMode
 		IdeaSharedInjectorProvider.injector.injectMembers(this)
 		this.project = project
 		alarm = new Alarm(Alarm.ThreadToUse.OWN_THREAD, this)
@@ -124,7 +128,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 			override void fileDeleted(VirtualFileEvent event) {
 				fileDeleted(event.getFile())
 			}
-
+			
 			override void fileMoved(VirtualFileMoveEvent event) {
 				// TODO deal with that!
 			}
@@ -135,6 +139,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	override dispose() {
 		alarm.cancelAllRequests
 		queue.clear
+		indexState = null
 		disposed = true
 	}
 	
@@ -188,8 +193,8 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		if (!disposed && !isLoaded()) {
 			queueAllResources()
 		}
-		if (LOG.isDebugEnabled) {
-			LOG.debug("queuing "+file.URI)
+		if (LOG.isInfoEnabled) {
+			LOG.info("Queuing "+type+" - "+file.URI+".")
 		}
 		if (file != null && !disposed) {
 			queue.put(new BuildEvent(file, type))
@@ -204,8 +209,13 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	}
 	
 	protected def boolean isExcluded(VirtualFile file) {
-		return file == null || GeneratedSourcesFilter.isGeneratedSourceByAnyFilter(file, project) 
-				|| (indexState != null && !indexState.fileMappings.getSource(file.URI).empty)
+		if (ignoreIncomingEvents) {
+			if (LOG.isDebugEnabled) 
+				LOG.debug("Ignoring transitive file change "+file.path)
+			return true;
+		}
+		return file == null 
+			|| file.isDirectory 
 	}
 	
 	protected def boolean isLoaded() {
@@ -232,16 +242,18 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		handler.apply(file)
 	}
 	
+	private volatile boolean ignoreIncomingEvents = false
+	
 	protected def void build() {
 		if (disposed) {
 			return
 		}
 		val allEvents = newArrayList
 		queue.drainTo(allEvents)
-		build(allEvents)
+		internalBuild(allEvents)
 	}
 
-	public def void build(List<BuildEvent> allEvents) {
+	protected def void internalBuild(List<BuildEvent> allEvents) {
 		val app = ApplicationManager.application
 		val buildProgressReporter = buildProgressReporterProvider.get 
 		buildProgressReporter.project = project
@@ -251,38 +263,19 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 			]
 			val module2event = HashMultimap.create
 			val fileIndex = ProjectFileIndex.SERVICE.getInstance(project)
-			allEvents.forEach [
-				val module = findModule(fileIndex)
+			allEvents.forEach [event|
+				val module = event.findModule(fileIndex)
 				if(module != null)
-					module2event.put(module, it)
+					module2event.put(module, event)
 			]
 			// deltas are added over the whole build
-			val deltas = <IResourceDescription.Delta>newArrayList
+ 			val deltas = <IResourceDescription.Delta>newArrayList
 			for (module: module2event.keySet) {
 				val events = module2event.get(module)
 				val changedUris = newHashSet
 				val deletedUris = newHashSet
-				for (event : events.filter[type==MODIFIED || type == ADDED]) {
-					switch event.type {
-						case MODIFIED,
-						case ADDED: {
-							if (isJavaFile(event.file)) {
-								deltas += app.<Set<IResourceDescription.Delta>>runReadAction [
-									return getJavaDeltas(event.file, module)
-								]
-							} else {
-								changedUris += event.file.URI
-							}
-						}
-						case DELETED : {
-							if (isJavaFile(event.file)) {
-								deltas += getJavaDeltas(event.file, module)
-							} else {
-								changedUris += event.file.URI
-							}
-						}
-					}
-				}
+				
+				collectChanges(events, module, changedUris, deletedUris, deltas)
 				
 				val entries = OrderEnumerator.orderEntries(module)
 				val request = new BuildRequest => [
@@ -299,17 +292,27 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 					afterDeleteFile = [
 						buildProgressReporter.markAsAffected(it)
 					]
+					belongsToThisBuildRun = [ uri |
+						val file = uri.virtualFile
+						val thisModule = file.findModule(fileIndex)
+						return module == thisModule
+					]
 				]
 				val result = app.<IncrementalBuilder.Result>runReadAction [
 					builderProvider.get().build(request, resourceServiceProviderRegistry)
 				]
-				indexState = result.indexState
 				app.invokeAndWait([
 					app.runWriteAction [
-						val handler = VirtualFileBasedUriHandler.find(request.resourceSet)
-						handler.flushToDisk
+						try {
+							ignoreIncomingEvents = true
+							val handler = VirtualFileBasedUriHandler.find(request.resourceSet)
+							handler.flushToDisk
+						} finally {
+							ignoreIncomingEvents = false
+						}
 					]
 				], ModalityState.any)
+				indexState = result.indexState
 				notifyListeners [
 					ImmutableList.copyOf(result.affectedResources)
 				]
@@ -325,11 +328,53 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		}
 	}
 	
+	protected def collectChanges(Set<BuildEvent> events, Module module, HashSet<URI> changedUris, HashSet<URI> deletedUris, ArrayList<Delta> deltas) {
+		val app = ApplicationManager.application
+		for (event : events) {
+			switch event.type {
+				case MODIFIED,
+				case ADDED: {
+					val uri = event.file.URI
+					val sourceUris = indexState?.fileMappings?.getSource(uri)
+					if (sourceUris != null && !sourceUris.isEmpty) {
+						for (sourceUri : sourceUris) {
+							changedUris += sourceUri
+						}									
+					} else if (isJavaFile(event.file)) {
+						deltas += app.<Set<IResourceDescription.Delta>>runReadAction [
+							return getJavaDeltas(event.file, module)
+						]
+					} else {
+						changedUris += uri
+					}
+				}
+				case DELETED : {
+					val uri = event.file.URI
+					val sourceUris = indexState?.fileMappings?.getSource(uri)
+					if (sourceUris != null && !sourceUris.isEmpty) {
+						for (sourceUri : sourceUris) {
+							changedUris += sourceUri
+						}									
+					} else if (isJavaFile(event.file)) {
+						deltas += app.<Set<IResourceDescription.Delta>>runReadAction [
+							getJavaDeltas(event.file, module)
+						]
+					} else {
+						deletedUris += uri
+					}
+				}
+			}
+		}
+	}
+	
 	def boolean isJavaFile(VirtualFile file) {
 		file.extension == 'java'
 	}
 	
 	def Set<IResourceDescription.Delta> getJavaDeltas(VirtualFile file, Module module) {
+		if (!file.isValid) {
+			return emptySet
+		}
 		val psiFile = PsiManager.getInstance(module.project).findFile(file)
 		val result = <IResourceDescription.Delta>newLinkedHashSet
 		if (psiFile instanceof PsiJavaFile) {
@@ -374,7 +419,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		val module = fileIndex.getModuleForFile(file, true)
 		if (module != null)
 			return module
-		file.parent.findModule(fileIndex)
+		return file.parent.findModule(fileIndex)
 	}
 	
 	override String getComponentName() {

@@ -8,8 +8,6 @@
 package org.eclipse.xtext.xbase.tests.compiler;
 
 import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
@@ -24,7 +22,7 @@ import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider;
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.junit.runner.RunWith;
@@ -50,9 +48,6 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 
 	@Inject
 	private OnTheFlyJavaCompiler2 javaCompiler;
-	
-	@Inject
-	private TypeReferences typeReferences;
 	
 	@Inject
 	private CommonTypeComputationServices services;
@@ -121,9 +116,7 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 		try {
 			model = expression(xtendCode, true);
 			XbaseCompiler compiler = compilerProvider.get();
-			JvmType objectType = typeReferences.findDeclaredType(Object.class, model);
-			StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, model);
-			ParameterizedTypeReference objectRef = owner.newParameterizedTypeReference(objectType);
+			LightweightTypeReference objectRef = new StandardTypeReferenceOwner(services, model).newReferenceToObject();
 			compiler.compile(model, appendable, objectRef);
 		} catch (Exception e) {
 			throw new RuntimeException("Xtend compilation failed", e);

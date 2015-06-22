@@ -103,17 +103,17 @@ public class ArrayTypes {
 		return null;
 	}
 
-	public LightweightTypeReference convertToList(ArrayTypeReference type) {
-		LightweightTypeReference componentType = type.getComponentType();
-		LightweightTypeReference wrapper = componentType.getWrapperTypeIfPrimitive();
+	public LightweightTypeReference convertToList(final ArrayTypeReference type) {
 		ITypeReferenceOwner owner = type.getOwner();
-		JvmType listType = type.getServices().getTypeReferences().findDeclaredType(List.class, owner.getContextResourceSet());
-		if (listType == null) {
-			return owner.newUnknownTypeReference(List.class.getName());
-		}
-		ParameterizedTypeReference result = owner.newParameterizedTypeReference(listType);
-		result.addTypeArgument(wrapper);
-		return result;
+		return owner.newReferenceTo(List.class, new TypeReferenceInitializer<ParameterizedTypeReference>() {
+			@Override
+			public LightweightTypeReference enhance(ParameterizedTypeReference reference) {
+				LightweightTypeReference componentType = type.getComponentType();
+				LightweightTypeReference wrapper = componentType.getWrapperTypeIfPrimitive();
+				reference.addTypeArgument(wrapper);
+				return reference;
+			}
+		});
 	}
 
 }

@@ -384,7 +384,7 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 	}
 	
 	@Override
-	public TreeAppendable append(LightweightTypeReference typeRef) {
+	public ITreeAppendable append(LightweightTypeReference typeRef) {
 		typeRef.accept(lightweightTypeReferenceSerializer);
 		return this;
 	}

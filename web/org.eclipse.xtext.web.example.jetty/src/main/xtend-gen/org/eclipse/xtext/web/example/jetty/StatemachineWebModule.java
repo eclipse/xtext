@@ -17,13 +17,15 @@ import java.util.concurrent.ExecutorService;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.ide.LexerIdeBindings;
+import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
+import org.eclipse.xtext.ide.labels.IImageDescriptionProvider;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.web.example.jetty.contentassist.StatemachineWebContentProposalProvider;
+import org.eclipse.xtext.web.example.statemachine.ide.StatemachineImageDescriptionProvider;
 import org.eclipse.xtext.web.example.statemachine.ide.contentassist.antlr.StatemachineParser;
 import org.eclipse.xtext.web.example.statemachine.ide.contentassist.antlr.internal.InternalStatemachineLexer;
-import org.eclipse.xtext.web.server.contentassist.WebContentProposalProvider;
 import org.eclipse.xtext.web.server.persistence.FileResourceHandler;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler;
@@ -53,7 +55,7 @@ public class StatemachineWebModule extends AbstractGenericModule {
     return StatemachineParser.class;
   }
   
-  public Class<? extends WebContentProposalProvider> bindWebContentProposalProvider() {
+  public Class<? extends IdeContentProposalProvider> bindIdeContentProposalProvider() {
     return StatemachineWebContentProposalProvider.class;
   }
   
@@ -66,6 +68,10 @@ public class StatemachineWebModule extends AbstractGenericModule {
       AnnotatedBindingBuilder<IResourceBaseProvider> _bind = binder.<IResourceBaseProvider>bind(IResourceBaseProvider.class);
       _bind.toInstance(this.resourceBaseProvider);
     }
+  }
+  
+  public Class<? extends IImageDescriptionProvider> bindIImageDescriptionProvider() {
+    return StatemachineImageDescriptionProvider.class;
   }
   
   public StatemachineWebModule(final ExecutorService executorService) {

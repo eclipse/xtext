@@ -11,7 +11,7 @@ import com.google.inject.Inject
 import java.util.Map
 import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.TextFile
-import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl
+import org.eclipse.xtext.ui.resource.IStorage2UriMapper
 import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl.PackageFragmentRootData
 import org.eclipse.xtext.ui.tests.Activator
 import org.junit.After
@@ -21,44 +21,63 @@ import org.junit.Test
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
+import org.eclipse.emf.common.util.URI
+import org.eclipse.xtext.ui.resource.JarEntryLocator
+import org.eclipse.xtext.ui.resource.UriValidator
+import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl
+import org.eclipse.core.resources.IStorage
+import org.eclipse.jdt.core.JavaCore
+import org.eclipse.core.resources.ResourcesPlugin
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
  */
 class Storage2UriMapperJavaImplTest extends Assert {
 
-	val static INJECTOR = Activator.instance.getInjector(Activator.ORG_ECLIPSE_XTEXT_UI_TESTS_TESTLANGUAGE)
-
-	@Inject
 	Storage2UriMapperJavaImpl storage2UriMapperJava
 
 	@Before
 	def void setUp() {
-		INJECTOR.injectMembers(this)
-		storage2UriMapperJava.initializeCache
+		this.storage2UriMapperJava = createFreshStorage2UriMapper
+		JavaCore.addElementChangedListener(storage2UriMapperJava)
 	}
 
 	@After
 	def void tearDown() {
+		JavaCore.removeElementChangedListener(storage2UriMapperJava)
 		cleanWorkspace
 	}
+	
+	def protected Storage2UriMapperJavaImpl createFreshStorage2UriMapper() {
+		new Storage2UriMapperJavaImpl => [
+			uriValidator = new UriValidator() {
+				override boolean isPossiblyManaged(IStorage storage) {
+					return "indexed".equals(storage.getFullPath().getFileExtension()) 
+				}
+				override boolean isValid(URI uri, IStorage storage) {
+					return "indexed".equals(storage.getFullPath().getFileExtension()) 
+				}
+			}
+			locator = new JarEntryLocator()
+			workspace = ResourcesPlugin.workspace
+		]
+	}
+
 
 	@Test
 	def void testOnClasspathChange() {
-		val cachedPackageFragmentRootData = cachedPackageFragmentRootData
 		assertEquals("" + cachedPackageFragmentRootData, 0, cachedPackageFragmentRootData.size)
 
 		val project = createJavaProject("testProject")
-
-		Thread.sleep(200);
+		
 		val sizeBefore = cachedPackageFragmentRootData.size
-		assertFalse(sizeBefore == 0)
+		// it should contain all the jars from JDK now
+		assertTrue(sizeBefore > 0)
 		assertNull(cachedPackageFragmentRootData.keySet.findFirst[contains("foo.jar")])
 
 		val file = project.createJar
 		addJarToClasspath(project, file)
-
-		Thread.sleep(200);
+		
 		assertEquals("" + cachedPackageFragmentRootData, sizeBefore + 1, cachedPackageFragmentRootData.size)
 		assertNotNull(cachedPackageFragmentRootData.keySet.findFirst[contains("foo.jar")])
 
@@ -70,8 +89,7 @@ class Storage2UriMapperJavaImplTest extends Assert {
 
 		val project2 = createJavaProject('testProject2')
 		addJarToClasspath(project2, file)
-
-		Thread.sleep(200);
+		
 		assertEquals("" + cachedPackageFragmentRootData, sizeBefore + 1, cachedPackageFragmentRootData.size)
 		assertNotNull(cachedPackageFragmentRootData.keySet.findFirst[contains("foo.jar")])
 
@@ -84,8 +102,7 @@ class Storage2UriMapperJavaImplTest extends Assert {
 		]
 
 		removeJarFromClasspath(project, file);
-
-		Thread.sleep(200);
+		
 		assertEquals("" + cachedPackageFragmentRootData, sizeBefore + 1, cachedPackageFragmentRootData.size)
 		assertNotNull(cachedPackageFragmentRootData.keySet.findFirst[contains("foo.jar")])
 
@@ -105,7 +122,7 @@ class Storage2UriMapperJavaImplTest extends Assert {
 
 		removeJarFromClasspath(project2, file);
 		
-		Thread.sleep(200);
+		
 		assertEquals("" + cachedPackageFragmentRootData, sizeBefore, cachedPackageFragmentRootData.size)
 		assertNull(cachedPackageFragmentRootData.keySet.findFirst[contains("foo.jar")])
 
@@ -122,8 +139,7 @@ class Storage2UriMapperJavaImplTest extends Assert {
 	def void testOnCloseOpenRemoveProject() {
 		val project = createJavaProject("testProject")
 		val project2 = createJavaProject("testProject2")
-
-		Thread.sleep(200);
+		
 		val sizeBefore = cachedPackageFragmentRootData.size
 
 		val file = project.createJar
@@ -149,12 +165,10 @@ class Storage2UriMapperJavaImplTest extends Assert {
 	}
 
 	def assertNonProjects() {
-		Thread.sleep(200);
 		assertEquals("" + cachedPackageFragmentRootData, 0, cachedPackageFragmentRootData.size)
 	}
 
 	def assertFirstProject(int sizeBefore) {
-		Thread.sleep(200);
 		assertEquals("" + cachedPackageFragmentRootData, sizeBefore + 1, cachedPackageFragmentRootData.size)
 		assertNotNull(cachedPackageFragmentRootData.keySet.findFirst[contains("foo.jar")])
 		cachedPackageFragmentRootData.entrySet.forEach [
@@ -165,7 +179,6 @@ class Storage2UriMapperJavaImplTest extends Assert {
 	}
 
 	def assertBothProjects(int sizeBefore) {
-		Thread.sleep(200);
 		assertEquals("" + cachedPackageFragmentRootData, sizeBefore + 1, cachedPackageFragmentRootData.size)
 		assertNotNull(cachedPackageFragmentRootData.keySet.findFirst[contains("foo.jar")])
 

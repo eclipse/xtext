@@ -8,15 +8,10 @@
 package org.eclipse.xtext.web.servlet;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.inject.Injector;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,16 +20,32 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.web.server.IRequestData;
 import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
+import org.eclipse.xtext.web.servlet.HttpServletRequestData;
 import org.eclipse.xtext.web.servlet.HttpServletSessionStore;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
+/**
+ * An HTTP servlet for publishing the Xtext services. Include this into your web server by creating
+ * a subclass that executes the standalone setups of your languages in its {@link #init()} method:
+ * 
+ * <pre>
+ * &#64;WebServlet(name = "Xtext Services", urlPatterns = "/xtext-service/*")
+ * class MyXtextServlet extends XtextServlet {
+ *     override init() {
+ *         super.init();
+ *         MyDslWebSetup.doSetup();
+ *     }
+ * }
+ * </pre>
+ * 
+ * Use the {@code WebServlet} annotation to register your servlet. The default URL pattern for
+ * Xtext services is {@code "/xtext-service/*"}.
+ */
 @SuppressWarnings("all")
 public class XtextServlet extends HttpServlet {
   private final Logger LOG = Logger.getLogger(this.getClass());
@@ -87,164 +98,153 @@ public class XtextServlet extends HttpServlet {
   
   @Override
   protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
-    final XtextServiceDispatcher.ServiceDescriptor service = this.getService(req);
-    boolean _and = false;
-    boolean _isHasConflict = service.isHasConflict();
-    boolean _not = (!_isHasConflict);
-    if (!_not) {
-      _and = false;
-    } else {
-      boolean _or = false;
-      boolean _isHasSideEffects = service.isHasSideEffects();
-      if (_isHasSideEffects) {
-        _or = true;
+    try {
+      final XtextServiceDispatcher.ServiceDescriptor service = this.getService(req);
+      boolean _and = false;
+      boolean _isHasConflict = service.isHasConflict();
+      boolean _not = (!_isHasConflict);
+      if (!_not) {
+        _and = false;
       } else {
-        boolean _isHasTextInput = service.isHasTextInput();
-        _or = _isHasTextInput;
+        boolean _or = false;
+        boolean _isHasSideEffects = service.isHasSideEffects();
+        if (_isHasSideEffects) {
+          _or = true;
+        } else {
+          boolean _isHasTextInput = service.isHasTextInput();
+          _or = _isHasTextInput;
+        }
+        _and = _or;
       }
-      _and = _or;
-    }
-    if (_and) {
-      super.doGet(req, resp);
-    } else {
-      this.doService(service, resp);
+      if (_and) {
+        super.doGet(req, resp);
+      } else {
+        this.doService(service, resp);
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
   @Override
   protected void doPut(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
-    final XtextServiceDispatcher.ServiceDescriptor service = this.getService(req);
-    boolean _and = false;
-    boolean _isHasConflict = service.isHasConflict();
-    boolean _not = (!_isHasConflict);
-    if (!_not) {
-      _and = false;
-    } else {
-      String _type = service.getType();
-      boolean _notEquals = (!Objects.equal(_type, "update"));
-      _and = _notEquals;
-    }
-    if (_and) {
-      super.doPut(req, resp);
-    } else {
-      this.doService(service, resp);
+    try {
+      final XtextServiceDispatcher.ServiceDescriptor service = this.getService(req);
+      boolean _and = false;
+      boolean _isHasConflict = service.isHasConflict();
+      boolean _not = (!_isHasConflict);
+      if (!_not) {
+        _and = false;
+      } else {
+        String _type = service.getType();
+        boolean _notEquals = (!Objects.equal(_type, "update"));
+        _and = _notEquals;
+      }
+      if (_and) {
+        super.doPut(req, resp);
+      } else {
+        this.doService(service, resp);
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
   @Override
   protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
-    final XtextServiceDispatcher.ServiceDescriptor service = this.getService(req);
-    boolean _and = false;
-    boolean _isHasConflict = service.isHasConflict();
-    boolean _not = (!_isHasConflict);
-    if (!_not) {
-      _and = false;
-    } else {
-      boolean _or = false;
-      boolean _and_1 = false;
-      boolean _isHasSideEffects = service.isHasSideEffects();
-      boolean _not_1 = (!_isHasSideEffects);
-      if (!_not_1) {
-        _and_1 = false;
+    try {
+      final XtextServiceDispatcher.ServiceDescriptor service = this.getService(req);
+      boolean _and = false;
+      boolean _isHasConflict = service.isHasConflict();
+      boolean _not = (!_isHasConflict);
+      if (!_not) {
+        _and = false;
       } else {
-        boolean _isHasTextInput = service.isHasTextInput();
-        boolean _not_2 = (!_isHasTextInput);
-        _and_1 = _not_2;
+        boolean _or = false;
+        boolean _and_1 = false;
+        boolean _isHasSideEffects = service.isHasSideEffects();
+        boolean _not_1 = (!_isHasSideEffects);
+        if (!_not_1) {
+          _and_1 = false;
+        } else {
+          boolean _isHasTextInput = service.isHasTextInput();
+          boolean _not_2 = (!_isHasTextInput);
+          _and_1 = _not_2;
+        }
+        if (_and_1) {
+          _or = true;
+        } else {
+          String _type = service.getType();
+          boolean _equals = Objects.equal(_type, "update");
+          _or = _equals;
+        }
+        _and = _or;
       }
-      if (_and_1) {
-        _or = true;
+      if (_and) {
+        super.doPost(req, resp);
       } else {
-        String _type = service.getType();
-        boolean _equals = Objects.equal(_type, "update");
-        _or = _equals;
+        this.doService(service, resp);
       }
-      _and = _or;
-    }
-    if (_and) {
-      super.doPost(req, resp);
-    } else {
-      this.doService(service, resp);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  protected void doService(final XtextServiceDispatcher.ServiceDescriptor service, final HttpServletResponse resp) {
+  /**
+   * Retrieve the service metadata for the given request. This involves resolving the Guice
+   * injector for the respective language, querying the {@link XtextServiceDispatcher}, and
+   * checking the permission to invoke the service.
+   */
+  protected XtextServiceDispatcher.ServiceDescriptor getService(final HttpServletRequest request) throws InvalidRequestException {
+    HttpSession _session = request.getSession();
+    final HttpServletSessionStore sessionStore = new HttpServletSessionStore(_session);
+    final HttpServletRequestData requestData = new HttpServletRequestData(request);
+    final Injector injector = this.getInjector(requestData);
+    final XtextServiceDispatcher serviceDispatcher = injector.<XtextServiceDispatcher>getInstance(XtextServiceDispatcher.class);
+    final XtextServiceDispatcher.ServiceDescriptor service = serviceDispatcher.getService(requestData, sessionStore);
+    this.checkPermission(request, service);
+    return service;
+  }
+  
+  /**
+   * Invoke the service function of the given service descriptor and write its result to the
+   * servlet response in Json format.
+   */
+  protected void doService(final XtextServiceDispatcher.ServiceDescriptor service, final HttpServletResponse response) {
     try {
       Function0<? extends IServiceResult> _service = service.getService();
       final IServiceResult result = _service.apply();
-      resp.setStatus(HttpServletResponse.SC_OK);
-      resp.setContentType("text/x-json;charset=UTF-8");
-      resp.setHeader("Cache-Control", "no-cache");
-      PrintWriter _writer = resp.getWriter();
+      response.setStatus(HttpServletResponse.SC_OK);
+      response.setContentType("text/x-json;charset=UTF-8");
+      response.setHeader("Cache-Control", "no-cache");
+      PrintWriter _writer = response.getWriter();
       this.gson.toJson(result, _writer);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  protected XtextServiceDispatcher.ServiceDescriptor getService(final HttpServletRequest req) {
-    try {
-      HttpSession _session = req.getSession();
-      final HttpServletSessionStore sessionStore = new HttpServletSessionStore(_session);
-      final Map<String, String> parameters = this.getParameterMap(req);
-      final Injector injector = this.getInjector(parameters);
-      final XtextServiceDispatcher serviceDispatcher = injector.<XtextServiceDispatcher>getInstance(XtextServiceDispatcher.class);
-      String _elvis = null;
-      String _pathInfo = req.getPathInfo();
-      if (_pathInfo != null) {
-        _elvis = _pathInfo;
-      } else {
-        _elvis = "";
-      }
-      final XtextServiceDispatcher.ServiceDescriptor service = serviceDispatcher.getService(_elvis, parameters, sessionStore);
-      this.checkPermission(req, service);
-      return service;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  /**
+   * Check whether it is allowed to invoke the given service.
+   * @throws InvalidRequestException with type {@code PERMISSION_DENIED} if permission is denied
+   */
+  protected void checkPermission(final HttpServletRequest request, final XtextServiceDispatcher.ServiceDescriptor service) throws InvalidRequestException {
   }
   
-  protected void checkPermission(final HttpServletRequest req, final XtextServiceDispatcher.ServiceDescriptor service) {
-  }
-  
-  protected Map<String, String> getParameterMap(final HttpServletRequest req) {
-    Map<String, String[]> _parameterMap = req.getParameterMap();
-    final Map<String, String[]> paramMultiMap = ((Map<String, String[]>) _parameterMap);
-    int _size = paramMultiMap.size();
-    final HashMap<String, String> result = Maps.<String, String>newHashMapWithExpectedSize(_size);
-    Set<Map.Entry<String, String[]>> _entrySet = paramMultiMap.entrySet();
-    final Function1<Map.Entry<String, String[]>, Boolean> _function = new Function1<Map.Entry<String, String[]>, Boolean>() {
-      @Override
-      public Boolean apply(final Map.Entry<String, String[]> it) {
-        String[] _value = it.getValue();
-        int _length = _value.length;
-        return Boolean.valueOf((_length > 0));
-      }
-    };
-    Iterable<Map.Entry<String, String[]>> _filter = IterableExtensions.<Map.Entry<String, String[]>>filter(_entrySet, _function);
-    final Procedure1<Map.Entry<String, String[]>> _function_1 = new Procedure1<Map.Entry<String, String[]>>() {
-      @Override
-      public void apply(final Map.Entry<String, String[]> it) {
-        String _key = it.getKey();
-        String[] _value = it.getValue();
-        String _get = _value[0];
-        result.put(_key, _get);
-      }
-    };
-    IterableExtensions.<Map.Entry<String, String[]>>forEach(_filter, _function_1);
-    return Collections.<String, String>unmodifiableMap(result);
-  }
-  
-  protected Injector getInjector(final Map<String, String> parameters) throws InvalidRequestException {
+  /**
+   * Resolve the Guice injector for the language associated with the given request.
+   */
+  protected Injector getInjector(final IRequestData requestData) throws InvalidRequestException {
     IResourceServiceProvider resourceServiceProvider = null;
     String _elvis = null;
-    String _get = parameters.get("resource");
-    if (_get != null) {
-      _elvis = _get;
+    String _parameter = requestData.getParameter("resource");
+    if (_parameter != null) {
+      _elvis = _parameter;
     } else {
       _elvis = "";
     }
     final URI emfURI = URI.createURI(_elvis);
-    final String contentType = parameters.get("contentType");
+    final String contentType = requestData.getParameter("contentType");
     if ((contentType == null)) {
       IResourceServiceProvider _resourceServiceProvider = this.serviceProviderRegistry.getResourceServiceProvider(emfURI);
       resourceServiceProvider = _resourceServiceProvider;

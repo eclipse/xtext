@@ -20,16 +20,16 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry;
+import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor;
+import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalPriorities;
+import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.web.example.statemachine.services.StatemachineGrammarAccess;
 import org.eclipse.xtext.web.example.statemachine.statemachine.StatemachinePackage;
-import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
-import org.eclipse.xtext.web.server.contentassist.IWebContentProposaAcceptor;
-import org.eclipse.xtext.web.server.contentassist.WebContentProposalPriorities;
-import org.eclipse.xtext.web.server.contentassist.WebContentProposalProvider;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -37,41 +37,43 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
-public class StatemachineWebContentProposalProvider extends WebContentProposalProvider {
+public class StatemachineWebContentProposalProvider extends IdeContentProposalProvider {
   @Inject
   @Extension
   private StatemachineGrammarAccess _statemachineGrammarAccess;
   
   @Override
-  protected void _createProposals(final RuleCall ruleCall, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
+  protected void _createProposals(final RuleCall ruleCall, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
     AbstractRule _rule = ruleCall.getRule();
     boolean _matched = false;
     if (!_matched) {
       TerminalRule _bOOLEANRule = this._statemachineGrammarAccess.getBOOLEANRule();
       if (Objects.equal(_rule, _bOOLEANRule)) {
         _matched=true;
-        String _prefix = context.getPrefix();
-        ContentAssistResult.Entry _entry = new ContentAssistResult.Entry(_prefix);
-        final Procedure1<ContentAssistResult.Entry> _function = new Procedure1<ContentAssistResult.Entry>() {
+        ContentAssistEntry _contentAssistEntry = new ContentAssistEntry();
+        final Procedure1<ContentAssistEntry> _function = new Procedure1<ContentAssistEntry>() {
           @Override
-          public void apply(final ContentAssistResult.Entry it) {
+          public void apply(final ContentAssistEntry it) {
+            String _prefix = context.getPrefix();
+            it.setPrefix(_prefix);
             it.setProposal("true");
           }
         };
-        final ContentAssistResult.Entry trueEntry = ObjectExtensions.<ContentAssistResult.Entry>operator_doubleArrow(_entry, _function);
-        WebContentProposalPriorities _proposalPriorities = this.getProposalPriorities();
+        final ContentAssistEntry trueEntry = ObjectExtensions.<ContentAssistEntry>operator_doubleArrow(_contentAssistEntry, _function);
+        IdeContentProposalPriorities _proposalPriorities = this.getProposalPriorities();
         int _defaultPriority = _proposalPriorities.getDefaultPriority(trueEntry);
         acceptor.accept(trueEntry, _defaultPriority);
-        String _prefix_1 = context.getPrefix();
-        ContentAssistResult.Entry _entry_1 = new ContentAssistResult.Entry(_prefix_1);
-        final Procedure1<ContentAssistResult.Entry> _function_1 = new Procedure1<ContentAssistResult.Entry>() {
+        ContentAssistEntry _contentAssistEntry_1 = new ContentAssistEntry();
+        final Procedure1<ContentAssistEntry> _function_1 = new Procedure1<ContentAssistEntry>() {
           @Override
-          public void apply(final ContentAssistResult.Entry it) {
+          public void apply(final ContentAssistEntry it) {
+            String _prefix = context.getPrefix();
+            it.setPrefix(_prefix);
             it.setProposal("false");
           }
         };
-        final ContentAssistResult.Entry falseEntry = ObjectExtensions.<ContentAssistResult.Entry>operator_doubleArrow(_entry_1, _function_1);
-        WebContentProposalPriorities _proposalPriorities_1 = this.getProposalPriorities();
+        final ContentAssistEntry falseEntry = ObjectExtensions.<ContentAssistEntry>operator_doubleArrow(_contentAssistEntry_1, _function_1);
+        IdeContentProposalPriorities _proposalPriorities_1 = this.getProposalPriorities();
         int _defaultPriority_1 = _proposalPriorities_1.getDefaultPriority(falseEntry);
         acceptor.accept(falseEntry, _defaultPriority_1);
       }
@@ -82,7 +84,7 @@ public class StatemachineWebContentProposalProvider extends WebContentProposalPr
   }
   
   @Override
-  protected void _createProposals(final Assignment assignment, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
+  protected void _createProposals(final Assignment assignment, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
     boolean _matched = false;
     if (!_matched) {
       StatemachineGrammarAccess.EventElements _eventAccess = this._statemachineGrammarAccess.getEventAccess();
@@ -103,19 +105,20 @@ public class StatemachineWebContentProposalProvider extends WebContentProposalPr
         Iterable<IEObjectDescription> _filter = IterableExtensions.<IEObjectDescription>filter(_allElements, _function);
         for (final IEObjectDescription description : _filter) {
           {
-            String _prefix = context.getPrefix();
-            ContentAssistResult.Entry _entry = new ContentAssistResult.Entry(_prefix);
-            final Procedure1<ContentAssistResult.Entry> _function_1 = new Procedure1<ContentAssistResult.Entry>() {
+            ContentAssistEntry _contentAssistEntry = new ContentAssistEntry();
+            final Procedure1<ContentAssistEntry> _function_1 = new Procedure1<ContentAssistEntry>() {
               @Override
-              public void apply(final ContentAssistResult.Entry it) {
+              public void apply(final ContentAssistEntry it) {
+                String _prefix = context.getPrefix();
+                it.setPrefix(_prefix);
                 QualifiedName _name = description.getName();
                 String _string = _name.toString();
                 it.setProposal(_string);
                 it.setDescription("input signal");
               }
             };
-            final ContentAssistResult.Entry entry = ObjectExtensions.<ContentAssistResult.Entry>operator_doubleArrow(_entry, _function_1);
-            WebContentProposalPriorities _proposalPriorities = this.getProposalPriorities();
+            final ContentAssistEntry entry = ObjectExtensions.<ContentAssistEntry>operator_doubleArrow(_contentAssistEntry, _function_1);
+            IdeContentProposalPriorities _proposalPriorities = this.getProposalPriorities();
             int _crossRefPriority = _proposalPriorities.getCrossRefPriority(description, entry);
             acceptor.accept(entry, _crossRefPriority);
           }
@@ -141,19 +144,20 @@ public class StatemachineWebContentProposalProvider extends WebContentProposalPr
         Iterable<IEObjectDescription> _filter_1 = IterableExtensions.<IEObjectDescription>filter(_allElements_1, _function_1);
         for (final IEObjectDescription description_1 : _filter_1) {
           {
-            String _prefix = context.getPrefix();
-            ContentAssistResult.Entry _entry = new ContentAssistResult.Entry(_prefix);
-            final Procedure1<ContentAssistResult.Entry> _function_2 = new Procedure1<ContentAssistResult.Entry>() {
+            ContentAssistEntry _contentAssistEntry = new ContentAssistEntry();
+            final Procedure1<ContentAssistEntry> _function_2 = new Procedure1<ContentAssistEntry>() {
               @Override
-              public void apply(final ContentAssistResult.Entry it) {
+              public void apply(final ContentAssistEntry it) {
+                String _prefix = context.getPrefix();
+                it.setPrefix(_prefix);
                 QualifiedName _name = description_1.getName();
                 String _string = _name.toString();
                 it.setProposal(_string);
                 it.setDescription("output signal");
               }
             };
-            final ContentAssistResult.Entry entry = ObjectExtensions.<ContentAssistResult.Entry>operator_doubleArrow(_entry, _function_2);
-            WebContentProposalPriorities _proposalPriorities = this.getProposalPriorities();
+            final ContentAssistEntry entry = ObjectExtensions.<ContentAssistEntry>operator_doubleArrow(_contentAssistEntry, _function_2);
+            IdeContentProposalPriorities _proposalPriorities = this.getProposalPriorities();
             int _crossRefPriority = _proposalPriorities.getCrossRefPriority(description_1, entry);
             acceptor.accept(entry, _crossRefPriority);
           }
@@ -165,7 +169,7 @@ public class StatemachineWebContentProposalProvider extends WebContentProposalPr
     }
   }
   
-  public void createProposals(final AbstractElement assignment, final ContentAssistContext context, final IWebContentProposaAcceptor acceptor) {
+  public void createProposals(final AbstractElement assignment, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
     if (assignment instanceof Assignment) {
       _createProposals((Assignment)assignment, context, acceptor);
       return;

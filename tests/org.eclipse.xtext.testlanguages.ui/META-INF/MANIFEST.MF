@@ -31,5 +31,6 @@ Export-Package: org.eclipse.xtext.testlanguages.backtracking.ui,
  org.eclipse.xtext.testlanguages.backtracking.ui.quickfix,
  org.eclipse.xtext.testlanguages.noJdt.ui.quickfix,
  org.eclipse.xtext.testlanguages.noJdt.ui.contentassist,
- org.eclipse.xtext.testlanguages.noJdt.ui.contentassist.antlr
+ org.eclipse.xtext.testlanguages.noJdt.ui.contentassist.antlr,
+ org.eclipse.xtext.testlanguages.noJdt.ui.contentassist.antlr.internal
 Bundle-Activator: org.eclipse.xtext.testlanguages.backtracking.ui.internal.BeeLangTestLanguageActivator

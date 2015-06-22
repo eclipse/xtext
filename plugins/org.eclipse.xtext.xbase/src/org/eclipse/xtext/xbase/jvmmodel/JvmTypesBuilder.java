@@ -862,14 +862,8 @@ public class JvmTypesBuilder {
 			public void apply(/* @Nullable */ ITreeAppendable p) {
 				if (p == null)
 					return;
-				Class<ToStringBuilder> toStringBuilder = ToStringBuilder.class;
-				JvmType type = JvmTypesBuilder.this.references.findDeclaredType(toStringBuilder, sourceElement);
 				p.append("String result = new ");
-				if (type != null) {
-					p.append(type);
-				} else {
-					p.append(toStringBuilder.getName());
-				}
+				p.append(ToStringBuilder.class);
 				p.append("(this).addAllFields().toString();");
 				p.newLine().append("return result;");
 			}

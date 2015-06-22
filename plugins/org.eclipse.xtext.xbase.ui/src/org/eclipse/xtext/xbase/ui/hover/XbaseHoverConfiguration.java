@@ -8,9 +8,11 @@
 package org.eclipse.xtext.xbase.ui.hover;
 
 import org.eclipse.xtext.resource.FileExtensionProvider;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorFactory;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Holger Schill - Initial contribution and API
@@ -23,6 +25,9 @@ public class XbaseHoverConfiguration {
 	
 	@Inject
 	private FileExtensionProvider fileExtensionProvider;
+	
+	@Inject
+	private Provider<XtextResourceSet> resourceSetProvider;
 
 	
 	public EmbeddedEditorFactory getEditorFactory() {
@@ -32,4 +37,9 @@ public class XbaseHoverConfiguration {
 	public String getFileExtension() {
 		return fileExtensionProvider.getPrimaryFileExtension();
 	}
+	
+	public XtextResourceSet createResourceSet() {
+		return resourceSetProvider.get();
+	}
+	
 }

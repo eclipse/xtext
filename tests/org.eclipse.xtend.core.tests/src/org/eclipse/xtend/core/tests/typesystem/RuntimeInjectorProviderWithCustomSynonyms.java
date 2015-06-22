@@ -12,12 +12,10 @@ import java.math.BigInteger;
 
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtend.core.tests.RuntimeTestSetup;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -54,12 +52,7 @@ public class RuntimeInjectorProviderWithCustomSynonyms extends RuntimeInjectorPr
 
 		protected boolean announceBigDecimal(LightweightTypeReference bigInteger, Acceptor acceptor) {
 			ITypeReferenceOwner owner = bigInteger.getOwner();
-			JvmType bigDecimal = owner.getServices().getTypeReferences().findDeclaredType(BigDecimal.class, owner.getContextResourceSet());
-			if (bigDecimal != null) {
-				ParameterizedTypeReference result = owner.newParameterizedTypeReference(bigDecimal);
-				return announceSynonym(result, ConformanceFlags.DEMAND_CONVERSION, acceptor);
-			}
-			return true;
+			return announceSynonym(owner.newReferenceTo(BigDecimal.class), ConformanceFlags.DEMAND_CONVERSION, acceptor);
 		}
 	}
 	

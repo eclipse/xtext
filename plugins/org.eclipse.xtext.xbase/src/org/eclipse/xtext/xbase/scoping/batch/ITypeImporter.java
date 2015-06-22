@@ -28,12 +28,16 @@ public interface ITypeImporter {
 	void importStatic(JvmDeclaredType type, String memberName);
 	
 	/**
-	 * Imports all static members of the given type.
+	 * Imports all static members of the given type as extensions.
+	 * If the strict flag is set to false, the members will also be available
+	 * as static imports.
 	 */
 	void importStaticExtension(JvmDeclaredType type, boolean strict);
 	
 	/**
-	 * Imports the static members of the given type with the given name.
+	 * Imports the static members of the given type with the given name as extensions.
+	 * If the strict flag is set to false, the imported members will also be available
+	 * as static imports.
 	 */
 	void importStaticExtension(JvmDeclaredType type, String memberName, boolean strict);
 	
