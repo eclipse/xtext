@@ -1,17 +1,17 @@
 package org.eclipse.xtend.ide.tests.compiler
 
 import com.google.inject.Inject
+import org.eclipse.core.resources.IMarker
+import org.eclipse.core.resources.IResource
+import org.eclipse.core.resources.ResourcesPlugin
+import org.eclipse.ui.texteditor.MarkerUtilities
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
+import org.junit.After
+import org.junit.Before
 import org.junit.Test
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
-import org.eclipse.core.resources.ResourcesPlugin
-import org.eclipse.core.resources.IMarker
-import org.eclipse.core.resources.IResource
-import org.eclipse.ui.texteditor.MarkerUtilities
-import org.junit.Before
-import org.junit.After
 
 class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase {
 
@@ -96,20 +96,21 @@ class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test def void testJavaSignatureDependsOnXtend() {
-		workbenchTestHelper.createFile('test/FooProvider.java', '''
+		val file1 = workbenchTestHelper.createFile('test/FooProvider.java', '''
 			package test;
 
 			public interface FooProvider {
 				public Foo get();
 			}
 		''')
-		workbenchTestHelper.createFile('test/Foo.xtend', '''
+		val file2 = workbenchTestHelper.createFile('test/Foo.xtend', '''
 			package test
 			
 			@Data class Foo {
+				int size
 			}
 		''')
-		val file = workbenchTestHelper.createFile('test/FooUser.xtend', '''
+		val file3 = workbenchTestHelper.createFile('test/FooUser.xtend', '''
 			package test
 			
 			import test.FooProvider
@@ -119,12 +120,14 @@ class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase {
 				
 				def void doStuff(FooProvider provider) {
 					val foo = provider.get
-					println(foo.toString)
+					println(foo.size)
 				}
 			}
 		''')
 		waitForAutoBuild
-		assertEquals(0,file.findMarkers(IMarker::PROBLEM, true, IResource::DEPTH_INFINITE).length)
+		assertEquals(0, file1.findMarkers(IMarker::PROBLEM, true, IResource::DEPTH_INFINITE).length)
+		assertEquals(0, file2.findMarkers(IMarker::PROBLEM, true, IResource::DEPTH_INFINITE).length)
+		assertEquals(0, file3.findMarkers(IMarker::PROBLEM, true, IResource::DEPTH_INFINITE).length)
 	}
 	
 	def void assertNoErrorsInWorkspace() {

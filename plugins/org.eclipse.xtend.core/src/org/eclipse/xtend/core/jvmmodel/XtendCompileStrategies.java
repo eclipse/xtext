@@ -46,7 +46,6 @@ public class XtendCompileStrategies {
 
 	public Procedures.Procedure1<ITreeAppendable> forCacheVariable(XtendFunction function) {
 		CacheVariableCompileStrategy strategy = cacheVarProvider.get();
-		strategy.init(function);
 		return strategy;
 	}
 }
