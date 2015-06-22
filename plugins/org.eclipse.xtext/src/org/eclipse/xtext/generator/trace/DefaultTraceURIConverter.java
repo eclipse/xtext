@@ -34,10 +34,12 @@ public class DefaultTraceURIConverter implements ITraceURIConverter {
 		if (resource instanceof XtextResource) {
 			IResourceServiceProvider serviceProvider = ((XtextResource) resource).getResourceServiceProvider();
 			IWorkspaceConfigProvider configProvider = serviceProvider.get(IWorkspaceConfigProvider.class);
-			IWorkspaceConfig workspaceConfig = configProvider.getWorkspaceConfig(resource.getResourceSet());
-			IProjectConfig projectConfig = workspaceConfig.findProjectContaining(resource.getURI());
-			if (projectConfig != null) {
-				return getURIForTrace(projectConfig, resource.getURI());
+			if (configProvider != null) {
+				IWorkspaceConfig workspaceConfig = configProvider.getWorkspaceConfig(resource.getResourceSet());
+				IProjectConfig projectConfig = workspaceConfig.findProjectContaining(resource.getURI());
+				if (projectConfig != null) {
+					return getURIForTrace(projectConfig, resource.getURI());
+				}
 			}
 		}
 		return getUriForTrace(resource.getURI());
