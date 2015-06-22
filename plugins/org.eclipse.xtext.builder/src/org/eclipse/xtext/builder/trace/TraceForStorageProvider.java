@@ -193,7 +193,7 @@ public class TraceForStorageProvider implements ITraceForStorageProvider {
 					IProject containingProject = sourceFile.getProject();
 					IResourceServiceProvider serviceProvider = serviceRegistry.getResourceServiceProvider(sourceFileURI);
 					EclipseWorkspaceConfigProvider configProvider = serviceProvider.get(EclipseWorkspaceConfigProvider.class);
-					final EclipseProjectConfig projectConfig = configProvider.getProjectConfig(containingProject);
+					final EclipseProjectConfig projectConfig = configProvider == null ? null : configProvider.getProjectConfig(containingProject);
 					final ITraceURIConverter traceURIConverter = serviceProvider.get(ITraceURIConverter.class);
 					result.setTraceRegionProvider(new ITraceRegionProvider() {
 						@Override
@@ -208,10 +208,12 @@ public class TraceForStorageProvider implements ITraceForStorageProvider {
 									AbstractTraceRegion traceRegion = cachedTraces.getTraceRegion(traceFile);
 									IPath generatedFilePath = generatedFileForTraceFile.getFullPath();
 									URI generatedFileURI = URI.createPlatformResourceURI(generatedFilePath.toString(), true);
-									URI sourceUriForTrace = traceURIConverter.getURIForTrace(projectConfig, sourceFileURI);
-									URI generatedUriForTrace = traceURIConverter.getURIForTrace(projectConfig, generatedFileURI);
-									if(sourceUriForTrace != null && generatedUriForTrace != null)
-										result.addAll(traceRegion.invertFor(sourceUriForTrace, generatedUriForTrace));
+									if (projectConfig != null) {
+										URI sourceUriForTrace = traceURIConverter.getURIForTrace(projectConfig, sourceFileURI);
+										URI generatedUriForTrace = traceURIConverter.getURIForTrace(projectConfig, generatedFileURI);
+										if(sourceUriForTrace != null && generatedUriForTrace != null)
+											result.addAll(traceRegion.invertFor(sourceUriForTrace, generatedUriForTrace));
+									}
 								}
 							}
 							if (result.isEmpty()) 

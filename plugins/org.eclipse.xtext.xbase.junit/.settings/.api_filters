@@ -14,6 +14,14 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.FileSystemSupportBasedFileSystemAccess">
+        <filter id="305422471">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.FileSystemSupportBasedFileSystemAccess"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.8.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="xtend-gen/org/eclipse/xtext/xbase/compiler/RegisteringFileSystemAccess.java" type="org.eclipse.xtext.xbase.compiler.RegisteringFileSystemAccess">
         <filter id="338792546">
             <message_arguments>
