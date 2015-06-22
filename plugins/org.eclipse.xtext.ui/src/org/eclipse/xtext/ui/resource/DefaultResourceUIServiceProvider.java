@@ -11,6 +11,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.parser.IEncodingProvider;
@@ -38,6 +39,9 @@ public class DefaultResourceUIServiceProvider implements IResourceServiceProvide
 	
 	@Inject
 	private IStorage2UriMapper storage2UriMapper;
+	
+	@Inject(optional=true)
+	private IWorkspace workspace;
 
 	@Inject
 	public DefaultResourceUIServiceProvider(IResourceServiceProvider delegate) {
@@ -152,23 +156,33 @@ public class DefaultResourceUIServiceProvider implements IResourceServiceProvide
 	}
 
 	/**
-	 * @since 2.8
+	 * @since 2.9
 	 */
 	@Override
-	public boolean isReadOnly(URI uri) {
+	public boolean isSource(URI uri) {
 		if (delegate instanceof IResourceServiceProviderExtension) {
-			if (((IResourceServiceProviderExtension) delegate).isReadOnly(uri))
-				return true;
+			if (!((IResourceServiceProviderExtension) delegate).isSource(uri))
+				return false;
+		}
+		if (workspace != null) {
+			if (uri.isPlatformResource()) {
+				String projectName = URI.decode(uri.segment(1));
+				IProject project = workspace.getRoot().getProject(projectName);
+				return project.isAccessible();
+			}
+			if (uri.isPlatformPlugin()) {
+				return false;
+			}
 		}
 		Iterable<Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(uri);
 		for (Pair<IStorage, IProject> pair : storages) {
 			IStorage storage = pair.getFirst();
 			if (storage instanceof IFile) {
-				return storage.isReadOnly();
+				return ((IFile)storage).isAccessible();
 			} else {
-				return true;
+				return false;
 			}
 		}
-		return false;
+		return true;
 	}
 }

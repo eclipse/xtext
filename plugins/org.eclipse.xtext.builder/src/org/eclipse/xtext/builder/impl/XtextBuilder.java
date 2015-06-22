@@ -9,6 +9,7 @@ package org.eclipse.xtext.builder.impl;
 
 import java.lang.reflect.Method;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
@@ -21,11 +22,13 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.ProgressMonitorWrapper;
 import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant.BuildType;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.builder.debug.IBuildLogger;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.service.OperationCanceledManager;
@@ -57,6 +60,9 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 
 	@Inject
 	private IResourceSetProvider resourceSetProvider;
+	
+	@Inject
+	private IResourceServiceProvider.Registry resourceServiceProvideRegistry;
 
 	@Inject
 	private RegistryBuilderParticipant participant;
@@ -241,7 +247,9 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		BuildData buildData = new BuildData(getProject().getName(), resourceSet, toBeBuilt, queuedBuildData, indexingOnly);
 		ImmutableList<Delta> deltas = builderState.update(buildData, progress.newChild(1));
 		if (participant != null && !indexingOnly) {
-			participant.build(new BuildContext(this, resourceSet, deltas, type),
+			SourceLevelURICache sourceLevelURIs = buildData.getSourceLevelURICache();
+			Set<URI> sources = sourceLevelURIs.getSources();
+			participant.build(new BuildContext(this, resourceSet, deltas, sources, type),
 					progress.newChild(1));
 			try {
 				getProject().getWorkspace().checkpoint(false);
@@ -310,9 +318,12 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		SubMonitor progress = SubMonitor.convert(monitor, 2);
 		ImmutableList<Delta> deltas = builderState.clean(toBeBuilt.getToBeDeleted(), progress.newChild(1));
 		if (participant != null) {
+			Set<URI> sourceURIs = new SourceLevelURICache().getSourcesFrom(toBeBuilt.getToBeDeleted(), resourceServiceProvideRegistry);
+			
 			participant.build(new BuildContext(this, 
 					getResourceSetProvider().get(getProject()), 
 					deltas,
+					sourceURIs,
 					BuildType.CLEAN), 
 					progress.newChild(1));
 		} else {

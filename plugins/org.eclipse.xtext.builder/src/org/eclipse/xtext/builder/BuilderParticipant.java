@@ -46,7 +46,6 @@ import org.eclipse.xtext.generator.OutputConfiguration.SourceMapping;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.resource.IResourceServiceProviderExtension;
 import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy;
 import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
@@ -418,9 +417,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	protected List<IResourceDescription.Delta> getRelevantDeltas(IBuildContext context) {
 		List<IResourceDescription.Delta> result = newArrayList();
 		for (IResourceDescription.Delta delta : context.getDeltas()) {
-			if (resourceServiceProvider.canHandle(delta.getUri())
-					&& (resourceServiceProvider instanceof IResourceServiceProviderExtension) 
-					&& !((IResourceServiceProviderExtension)resourceServiceProvider).isReadOnly(delta.getUri())) {
+			if (resourceServiceProvider.canHandle(delta.getUri()) && context.isSourceLevelURI(delta.getUri())) {
 				result.add(delta);
 			}
 		}
