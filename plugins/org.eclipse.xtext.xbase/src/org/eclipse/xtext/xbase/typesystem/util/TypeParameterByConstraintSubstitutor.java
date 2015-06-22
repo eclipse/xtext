@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.util;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
@@ -86,13 +85,7 @@ public class TypeParameterByConstraintSubstitutor extends CustomTypeParameterSub
 				// but 
 				// Comparable<?>
 				if (!visiting.canVisit(typeParameter)) {
-					WildcardTypeReference result = getOwner().newWildcardTypeReference();
-					JvmType objectType = getOwner().getServices().getTypeReferences().findDeclaredType(Object.class, getOwner().getContextResourceSet());
-					if (objectType != null)
-						result.addUpperBound(getOwner().newParameterizedTypeReference(objectType));
-					else
-						result.addUpperBound(getOwner().newUnknownTypeReference(Object.class.getName()));
-					return result;
+					return getOwner().newWildcardExtendsObject();
 				}
 			}
 		}

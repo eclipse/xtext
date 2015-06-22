@@ -9,9 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.computation;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
@@ -36,22 +34,25 @@ public class AbstractTypeComputer {
 	
 	/* @NotNull */
 	protected LightweightTypeReference getTypeForName(Class<?> clazz, ITypeComputationState state) {
-		ResourceSet resourceSet = state.getReferenceOwner().getContextResourceSet();
-		JvmTypeReference typeReference = services.getTypeReferences().getTypeForName(clazz, resourceSet);
-		if (typeReference == null) {
-			return state.getReferenceOwner().newUnknownTypeReference(clazz.getName());
-		}
-		return state.getReferenceOwner().toLightweightTypeReference(typeReference);
-	}
-	
-	/* @NotNull */
-	protected LightweightTypeReference getRawTypeForName(Class<?> clazz, ITypeReferenceOwner owner) {
-		JvmType clazzType = findDeclaredType(clazz, owner);
-		if (clazzType == null) {
+		JvmType type = findDeclaredType(clazz, state);
+		ITypeReferenceOwner owner = state.getReferenceOwner();
+		if (type == null) {
 			return owner.newUnknownTypeReference(clazz.getName());
 		}
-		LightweightTypeReference result = owner.toPlainTypeReference(clazzType);
-		return result;
+		return owner.toLightweightTypeReference(type);
+	}
+	
+	protected LightweightTypeReference getRawTypeForName(Class<?> clazz, ITypeComputationState state) {
+		return state.getReferenceOwner().newReferenceTo(clazz);
+	}
+	
+	/**
+	 * @deprecated use {@link ITypeReferenceOwner#newReferenceTo(Class)} instead.
+	 */
+	/* @NotNull */
+	@Deprecated
+	protected LightweightTypeReference getRawTypeForName(Class<?> clazz, ITypeReferenceOwner owner) {
+		return owner.newReferenceTo(clazz);
 	}
 	
 	/* @Nullable */
@@ -68,7 +69,7 @@ public class AbstractTypeComputer {
 	
 	/* @NotNull */
 	protected LightweightTypeReference getPrimitiveVoid(ITypeComputationState state) {
-		return getRawTypeForName(Void.TYPE, state.getReferenceOwner());
+		return state.getReferenceOwner().newReferenceTo(Void.TYPE);
 	}
 	
 	/**

@@ -13,7 +13,6 @@ import java.util.List;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
@@ -211,12 +210,7 @@ public class ClosureWithoutExpectationHelper extends AbstractClosureTypeHelper {
 				result.setReturnType(expressionResultType);
 				deferredBindTypeArgument(expectedReturnType, expressionResultType, BoundTypeArgumentSource.INFERRED);
 			} else {
-				JvmType objectType = getServices().getTypeReferences().findDeclaredType(Object.class, incompleteClosureType.getType());
-				LightweightTypeReference objectTypeReference;
-				if (objectType != null)
-					objectTypeReference = incompleteClosureType.getOwner().newParameterizedTypeReference(objectType);
-				else
-					objectTypeReference = incompleteClosureType.getOwner().newUnknownTypeReference(Object.class.getName());
+				LightweightTypeReference objectTypeReference = incompleteClosureType.getOwner().newReferenceToObject();
 				result.setReturnType(objectTypeReference);
 				deferredBindTypeArgument(expectedReturnType, objectTypeReference, BoundTypeArgumentSource.INFERRED);
 			}
