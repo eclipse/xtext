@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.ui.workspace;
 
+import com.google.common.base.Objects;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.core.resources.IProject;
@@ -70,6 +71,24 @@ public class EclipseWorkspaceConfig implements IWorkspaceConfig {
     };
     List<EclipseProjectConfig> _map = ListExtensions.<IProject, EclipseProjectConfig>map(((List<IProject>)Conversions.doWrapArray(_projects)), _function);
     return IterableExtensions.<EclipseProjectConfig>toSet(_map);
+  }
+  
+  @Override
+  public boolean equals(final Object obj) {
+    if ((obj instanceof EclipseWorkspaceConfig)) {
+      return Objects.equal(((EclipseWorkspaceConfig)obj).workspaceRoot, this.workspaceRoot);
+    }
+    return false;
+  }
+  
+  @Override
+  public int hashCode() {
+    return this.workspaceRoot.hashCode();
+  }
+  
+  @Override
+  public String toString() {
+    return this.workspaceRoot.toString();
   }
   
   public EclipseWorkspaceConfig(final EclipseWorkspaceConfigProvider provider, final IWorkspaceRoot workspaceRoot) {

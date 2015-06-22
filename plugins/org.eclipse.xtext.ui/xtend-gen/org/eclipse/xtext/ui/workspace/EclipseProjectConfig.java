@@ -11,6 +11,7 @@ import java.util.Set;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Data;
+import org.eclipse.xtext.util.UriUtil;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.ISourceFolder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -48,10 +49,8 @@ public class EclipseProjectConfig implements IProjectConfig {
     final Function1<ISourceFolder, Boolean> _function = new Function1<ISourceFolder, Boolean>() {
       @Override
       public Boolean apply(final ISourceFolder folder) {
-        String _string = member.toString();
         URI _path = folder.getPath();
-        String _string_1 = _path.toString();
-        return Boolean.valueOf(_string.startsWith(_string_1));
+        return Boolean.valueOf(UriUtil.isPrefixOf(_path, member));
       }
     };
     return IterableExtensions.findFirst(_sourceFolders, _function);

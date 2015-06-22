@@ -119,7 +119,7 @@ class TestBatchCompiler {
 	@Test def void testWorkspaceConfig() {
 		batchCompiler.compile
 		val config = batchCompiler.workspaceConfig
-		assertEquals(new File('..').canonicalPath, config.path.toFileString)
+		assertEquals(new File('..').canonicalPath+ File.separator, config.path.toFileString)
 		val project = config.projects.head
 		val projectPath = new File(".").canonicalFile.name
 		assertEquals(projectPath, project.name)
@@ -135,7 +135,7 @@ class TestBatchCompiler {
 		batchCompiler.outputPath = '''ws/prj1/bin'''
 		batchCompiler.compile
 		val config = batchCompiler.workspaceConfig
-		assertEquals(new File('ws').canonicalPath, config.path.toFileString)
+		assertEquals(new File('ws').canonicalPath + File.separator, config.path.toFileString)
 		val project = config.projects.head
 		assertEquals("prj1", project.name)
 		val output = batchCompiler.outputConfiguration
@@ -157,7 +157,7 @@ class TestBatchCompiler {
 
 		batchCompiler.compile
 		val config = batchCompiler.workspaceConfig
-		assertEquals(new File('/tmp/ws').canonicalPath, config.path.toFileString)
+		assertEquals(new File('/tmp/ws').canonicalPath+ File.separator, config.path.toFileString)
 		val project = config.projects.head
 		assertEquals("prj1", project.name)
 		val output = batchCompiler.outputConfiguration
@@ -179,7 +179,7 @@ class TestBatchCompiler {
 
 		batchCompiler.compile
 		val config = batchCompiler.workspaceConfig
-		assertEquals(new File('ws').canonicalPath, config.path.toFileString)
+		assertEquals(new File('ws').canonicalPath + File.separator, config.path.toFileString)
 		val project = config.projects.head
 		assertEquals("prj1", project.name)
 		val output = batchCompiler.outputConfiguration
@@ -202,7 +202,7 @@ class TestBatchCompiler {
 		batchCompiler.compile
 
 		val config = batchCompiler.workspaceConfig
-		assertEquals(new File('ws').canonicalPath, config.path.toFileString)
+		assertEquals(new File('ws').canonicalPath + File.separator, config.path.toFileString)
 		val project = config.projects.head
 		assertEquals("prj1", project.name)
 		val output = batchCompiler.outputConfiguration
@@ -224,7 +224,7 @@ class TestBatchCompiler {
 
 		batchCompiler.compile
 		val config = batchCompiler.workspaceConfig
-		assertEquals(new File('ws').canonicalPath, config.path.toFileString)
+		assertEquals(new File('ws').canonicalPath + File.separator, config.path.toFileString)
 		val project = config.projects.head
 		assertEquals("prj1", project.name)
 		val output = batchCompiler.outputConfiguration
@@ -248,7 +248,7 @@ class TestBatchCompiler {
 		batchCompiler.compile
 
 		val config = batchCompiler.workspaceConfig
-		assertEquals(new File('dir1/ws').canonicalPath, config.path.toFileString)
+		assertEquals(new File('dir1/ws').canonicalPath + File.separator, config.path.toFileString)
 		val project = config.projects.head
 		assertEquals("prj1", project.name)
 		val output = batchCompiler.outputConfiguration

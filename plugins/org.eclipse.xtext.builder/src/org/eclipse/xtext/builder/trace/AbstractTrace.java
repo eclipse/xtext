@@ -312,7 +312,13 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 	
 	protected boolean isAssociatedWith(AbstractTraceRegion region, URI uri) {
 		EclipseWorkspaceConfigProvider configProvider = getService(uri, EclipseWorkspaceConfigProvider.class);
+		if (configProvider == null) {
+			return false;
+		}
 		EclipseProjectConfig projectConfig = configProvider.getProjectConfig(getLocalProject());
+		if (projectConfig == null) {
+			return false;
+		}
 		ITraceURIConverter traceURIConverter = getService(uri, ITraceURIConverter.class);
 		URI convertedUri = traceURIConverter.getURIForTrace(projectConfig, uri);
 		return convertedUri.equals(region.getAssociatedPath());

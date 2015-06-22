@@ -8,20 +8,13 @@
 package org.eclipse.xtext.workspace;
 
 import com.google.common.base.Objects;
-import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
-import org.eclipse.xtend.lib.annotations.ToString;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.workspace.FileProjectConfig;
 import org.eclipse.xtext.workspace.ISourceFolder;
-import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @FinalFieldsConstructor
-@ToString
 @SuppressWarnings("all")
 public class FileSourceFolder implements ISourceFolder {
   private final FileProjectConfig parent;
@@ -35,17 +28,10 @@ public class FileSourceFolder implements ISourceFolder {
   
   @Override
   public URI getPath() {
+    URI _createFileURI = URI.createFileURI(this.name);
     URI _path = this.parent.getPath();
-    String[] _split = this.name.split("/");
-    final Function1<String, String> _function = new Function1<String, String>() {
-      @Override
-      public String apply(final String it) {
-        return URI.encodeSegment(it, true);
-      }
-    };
-    List<String> _map = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(_split)), _function);
-    URI _appendSegments = _path.appendSegments(((String[])Conversions.unwrapArray(_map, String.class)));
-    return _appendSegments.appendSegment("");
+    URI _resolve = _createFileURI.resolve(_path);
+    return _resolve.appendSegment("");
   }
   
   @Override
@@ -64,18 +50,20 @@ public class FileSourceFolder implements ISourceFolder {
     return _path.hashCode();
   }
   
+  @Override
+  public String toString() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(this.name, "");
+    _builder.append(" (");
+    URI _path = this.getPath();
+    _builder.append(_path, "");
+    _builder.append(")");
+    return _builder.toString();
+  }
+  
   public FileSourceFolder(final FileProjectConfig parent, final String name) {
     super();
     this.parent = parent;
     this.name = name;
-  }
-  
-  @Override
-  @Pure
-  public String toString() {
-    ToStringBuilder b = new ToStringBuilder(this);
-    b.add("parent", this.parent);
-    b.add("name", this.name);
-    return b.toString();
   }
 }

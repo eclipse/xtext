@@ -32,6 +32,7 @@ class JavaSourceLanguageRuntimeModule extends AbstractModule {
 		bind(IResourceDescription.Manager).to(JavaResourceDescriptionManager)
 		bind(IQualifiedNameProvider).to(JvmIdentifiableQualifiedNameProvider)
 		bind(String).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("java")
+		bind(String).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance("org.eclipse.xtext.java.Java")
 		bind(IJvmTypeProvider.Factory).to(ClasspathTypeProviderFactory)
 		bind(ClassLoader).toInstance(JavaSourceLanguageRuntimeModule.classLoader)
 		bind(IReferableElementsUnloader).to(IReferableElementsUnloader.GenericUnloader)

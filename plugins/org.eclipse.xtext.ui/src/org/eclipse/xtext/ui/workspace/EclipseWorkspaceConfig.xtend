@@ -19,6 +19,7 @@ import org.eclipse.xtext.workspace.ISourceFolder
 import org.eclipse.xtext.workspace.IWorkspaceConfig
 import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
 import org.eclipse.xtend.lib.annotations.Accessors
+import static extension org.eclipse.xtext.util.UriUtil.*
 
 class EclipseWorkspaceConfigProvider implements IWorkspaceConfigProvider {
 
@@ -61,6 +62,21 @@ class EclipseWorkspaceConfig implements IWorkspaceConfig {
 	override getProjects() {
 		workspaceRoot.projects.map[provider.getProjectConfig(it)].toSet
 	}
+	
+	override equals(Object obj) {
+		if (obj instanceof EclipseWorkspaceConfig) {
+			return obj.workspaceRoot == workspaceRoot
+		}
+		return false
+	}
+	
+	override hashCode() {
+		workspaceRoot.hashCode
+	}
+	
+	override toString() {
+		workspaceRoot.toString
+	}
 
 }
 
@@ -82,7 +98,7 @@ class EclipseProjectConfig implements IProjectConfig {
 	}
 
 	override findSourceFolderContaing(URI member) {
-		sourceFolders.findFirst[folder|member.toString.startsWith(folder.path.toString)]
+		sourceFolders.findFirst[folder|folder.path.isPrefixOf(member)]
 	}
 }
 

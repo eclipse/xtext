@@ -15,9 +15,8 @@ import com.intellij.openapi.roots.ContentEntry;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.roots.ProjectRootManager;
-import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import java.net.URL;
+import com.intellij.openapi.vfs.VirtualFileManager;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
@@ -26,7 +25,6 @@ import org.eclipse.xtext.idea.filesystem.IdeaModuleConfig;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -50,25 +48,21 @@ public class IdeaWorkspaceConfig implements IWorkspaceConfig {
   
   @Override
   public IProjectConfig findProjectContaining(final URI member) {
-    try {
-      String _string = member.toString();
-      URL _uRL = new URL(_string);
-      final VirtualFile file = VfsUtil.findFileByURL(_uRL);
-      boolean _equals = Objects.equal(file, null);
-      if (_equals) {
-        return null;
-      }
-      ProjectRootManager _instance = ProjectRootManager.getInstance(this.project);
-      ProjectFileIndex _fileIndex = _instance.getFileIndex();
-      final Module module = _fileIndex.getModuleForFile(file);
-      boolean _equals_1 = Objects.equal(module, null);
-      if (_equals_1) {
-        return null;
-      }
-      return new IdeaModuleConfig(module);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+    VirtualFileManager _instance = VirtualFileManager.getInstance();
+    String _string = member.toString();
+    final VirtualFile file = _instance.findFileByUrl(_string);
+    boolean _equals = Objects.equal(file, null);
+    if (_equals) {
+      return null;
     }
+    ProjectRootManager _instance_1 = ProjectRootManager.getInstance(this.project);
+    ProjectFileIndex _fileIndex = _instance_1.getFileIndex();
+    final Module module = _fileIndex.getModuleForFile(file);
+    boolean _equals_1 = Objects.equal(module, null);
+    if (_equals_1) {
+      return null;
+    }
+    return new IdeaModuleConfig(module);
   }
   
   @Override

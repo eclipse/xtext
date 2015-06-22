@@ -389,7 +389,7 @@ public class XtendBatchCompiler {
 				log.error("Source folder '" + source + "' must be a child of the project folder '" + commonRoot + "'");
 				return false;
 			}
-			projectConfig.addSourceFolder(relativizedSrc.getPath());
+			projectConfig.addSourceFolder(slash.trimTrailingFrom(relativizedSrc.getPath()));
 		}
 		Map<String, Set<OutputConfiguration>> outputConfigurations = newHashMap();
 		outputConfigurations.put(languageName, newHashSet(outputConfiguration));

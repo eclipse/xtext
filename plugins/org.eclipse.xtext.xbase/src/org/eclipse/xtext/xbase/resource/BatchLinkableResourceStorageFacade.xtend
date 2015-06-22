@@ -13,7 +13,6 @@ import java.io.OutputStream
 import org.eclipse.xtext.resource.persistence.ResourceStorageFacade
 import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
-import org.eclipse.xtext.workspace.WorkspaceConfigUtil
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -32,7 +31,9 @@ class BatchLinkableResourceStorageFacade extends ResourceStorageFacade {
 
 	override protected getSourceContainerURI(StorageAwareResource resource) {
 		val workspaceConfig = workspaceConfigProvider.getWorkspaceConfig(resource.resourceSet)
-		val sourceFolder = WorkspaceConfigUtil.getSourceFolderContaining(workspaceConfig, resource.URI)
+		val uri = resource.URI
+		val project = workspaceConfig.findProjectContaining(uri)
+		val sourceFolder = project?.findSourceFolderContaing(uri)
 		if (sourceFolder != null) {
 			return sourceFolder.path
 		}

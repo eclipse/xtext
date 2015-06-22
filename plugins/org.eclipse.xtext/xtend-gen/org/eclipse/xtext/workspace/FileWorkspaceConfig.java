@@ -14,18 +14,16 @@ import java.util.Map;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
-import org.eclipse.xtend.lib.annotations.ToString;
+import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.util.UriUtil;
 import org.eclipse.xtext.workspace.FileProjectConfig;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @FinalFieldsConstructor
-@ToString
 @SuppressWarnings("all")
 public class FileWorkspaceConfig implements IWorkspaceConfig {
   private final File root;
@@ -49,18 +47,28 @@ public class FileWorkspaceConfig implements IWorkspaceConfig {
     final Function1<FileProjectConfig, Boolean> _function = new Function1<FileProjectConfig, Boolean>() {
       @Override
       public Boolean apply(final FileProjectConfig project) {
-        String _string = member.toString();
-        URI _path = FileWorkspaceConfig.this.getPath();
-        String _string_1 = _path.toString();
-        return Boolean.valueOf(_string.startsWith(_string_1));
+        URI _path = project.getPath();
+        return Boolean.valueOf(UriUtil.isPrefixOf(_path, member));
       }
     };
     return IterableExtensions.<FileProjectConfig>findFirst(_values, _function);
   }
   
   public URI getPath() {
-    String _path = this.root.getPath();
-    return URI.createFileURI(_path);
+    URI _xblockexpression = null;
+    {
+      String _path = this.root.getPath();
+      final URI path = URI.createFileURI(_path);
+      URI _xifexpression = null;
+      boolean _hasTrailingPathSeparator = path.hasTrailingPathSeparator();
+      if (_hasTrailingPathSeparator) {
+        _xifexpression = path;
+      } else {
+        _xifexpression = path.appendSegment("");
+      }
+      _xblockexpression = _xifexpression;
+    }
+    return _xblockexpression;
   }
   
   @Override
@@ -90,17 +98,18 @@ public class FileWorkspaceConfig implements IWorkspaceConfig {
     return _path.hashCode();
   }
   
+  @Override
+  public String toString() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Workspace (");
+    URI _path = this.getPath();
+    _builder.append(_path, "");
+    _builder.append(")");
+    return _builder.toString();
+  }
+  
   public FileWorkspaceConfig(final File root) {
     super();
     this.root = root;
-  }
-  
-  @Override
-  @Pure
-  public String toString() {
-    ToStringBuilder b = new ToStringBuilder(this);
-    b.add("root", this.root);
-    b.add("projects", this.projects);
-    return b.toString();
   }
 }

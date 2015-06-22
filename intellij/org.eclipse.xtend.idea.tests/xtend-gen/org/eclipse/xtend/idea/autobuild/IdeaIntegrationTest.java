@@ -32,7 +32,7 @@ public class IdeaIntegrationTest extends LightXtendTest {
     _builder.append("}");
     _builder.newLine();
     this.myFixture.addFileToProject("otherPackage/Foo.xtend", _builder.toString());
-    final VirtualFile file = this.myFixture.findFileInTempDir("src-gen/otherPackage/Foo.java");
+    final VirtualFile file = this.myFixture.findFileInTempDir("xtend-gen/otherPackage/Foo.java");
     boolean _exists = file.exists();
     TestCase.assertTrue(_exists);
     Application _application = ApplicationManager.getApplication();
@@ -47,7 +47,7 @@ public class IdeaIntegrationTest extends LightXtendTest {
       }
     };
     _application.runWriteAction(_function);
-    final VirtualFile regenerated = this.myFixture.findFileInTempDir("src-gen/otherPackage/Foo.java");
+    final VirtualFile regenerated = this.myFixture.findFileInTempDir("xtend-gen/otherPackage/Foo.java");
     boolean _exists_1 = regenerated.exists();
     TestCase.assertTrue(_exists_1);
   }
@@ -377,7 +377,7 @@ public class IdeaIntegrationTest extends LightXtendTest {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertFileContents("src-gen/otherPackage/Foo.java", _builder_1);
+    this.assertFileContents("xtend-gen/otherPackage/Foo.java", _builder_1);
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("package otherPackage;");
     _builder_2.newLine();
@@ -414,7 +414,7 @@ public class IdeaIntegrationTest extends LightXtendTest {
     _builder_3.newLine();
     _builder_3.append("}");
     _builder_3.newLine();
-    this.assertFileContents("src-gen/otherPackage/Foo.java", _builder_3);
+    this.assertFileContents("xtend-gen/otherPackage/Foo.java", _builder_3);
     VirtualFile _findFileInTempDir = this.myFixture.findFileInTempDir("otherPackage/OtherClass.java");
     StringConcatenation _builder_4 = new StringConcatenation();
     _builder_4.append("package otherPackage;");
@@ -459,7 +459,7 @@ public class IdeaIntegrationTest extends LightXtendTest {
     _builder_5.newLine();
     _builder_5.append("}");
     _builder_5.newLine();
-    this.assertFileContents("src-gen/otherPackage/Foo.java", _builder_5);
+    this.assertFileContents("xtend-gen/otherPackage/Foo.java", _builder_5);
   }
   
   public void testActiveAnnotation() {
@@ -631,7 +631,7 @@ public class IdeaIntegrationTest extends LightXtendTest {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertFileContents("src-gen/otherPackage/Foo.java", _builder_1);
+    this.assertFileContents("xtend-gen/otherPackage/Foo.java", _builder_1);
   }
   
   public void assertFileContents(final String path, final CharSequence sequence) {

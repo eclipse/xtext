@@ -47,12 +47,16 @@ public class JavaSourceLanguageRuntimeModule extends AbstractModule {
     Named _named = Names.named(Constants.FILE_EXTENSIONS);
     LinkedBindingBuilder<String> _annotatedWith = _bind_8.annotatedWith(_named);
     _annotatedWith.toInstance("java");
-    AnnotatedBindingBuilder<IJvmTypeProvider.Factory> _bind_9 = this.<IJvmTypeProvider.Factory>bind(IJvmTypeProvider.Factory.class);
-    _bind_9.to(ClasspathTypeProviderFactory.class);
-    AnnotatedBindingBuilder<ClassLoader> _bind_10 = this.<ClassLoader>bind(ClassLoader.class);
+    AnnotatedBindingBuilder<String> _bind_9 = this.<String>bind(String.class);
+    Named _named_1 = Names.named(Constants.LANGUAGE_NAME);
+    LinkedBindingBuilder<String> _annotatedWith_1 = _bind_9.annotatedWith(_named_1);
+    _annotatedWith_1.toInstance("org.eclipse.xtext.java.Java");
+    AnnotatedBindingBuilder<IJvmTypeProvider.Factory> _bind_10 = this.<IJvmTypeProvider.Factory>bind(IJvmTypeProvider.Factory.class);
+    _bind_10.to(ClasspathTypeProviderFactory.class);
+    AnnotatedBindingBuilder<ClassLoader> _bind_11 = this.<ClassLoader>bind(ClassLoader.class);
     ClassLoader _classLoader = JavaSourceLanguageRuntimeModule.class.getClassLoader();
-    _bind_10.toInstance(_classLoader);
-    AnnotatedBindingBuilder<IReferableElementsUnloader> _bind_11 = this.<IReferableElementsUnloader>bind(IReferableElementsUnloader.class);
-    _bind_11.to(IReferableElementsUnloader.GenericUnloader.class);
+    _bind_11.toInstance(_classLoader);
+    AnnotatedBindingBuilder<IReferableElementsUnloader> _bind_12 = this.<IReferableElementsUnloader>bind(IReferableElementsUnloader.class);
+    _bind_12.to(IReferableElementsUnloader.GenericUnloader.class);
   }
 }

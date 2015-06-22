@@ -13,8 +13,7 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.roots.ModuleRootManager
 import com.intellij.openapi.roots.ProjectRootManager
 import com.intellij.openapi.roots.SourceFolder
-import com.intellij.openapi.vfs.VfsUtil
-import java.net.URL
+import com.intellij.openapi.vfs.VirtualFileManager
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtend.lib.annotations.Data
@@ -54,7 +53,7 @@ class IdeaWorkspaceConfig implements IWorkspaceConfig {
 	}
 
 	override findProjectContaining(URI member) {
-		val file = VfsUtil.findFileByURL(new URL(member.toString))
+		val file = VirtualFileManager.instance.findFileByUrl(member.toString)
 		if (file == null)
 			return null
 		val module = ProjectRootManager.getInstance(project).fileIndex.getModuleForFile(file)
@@ -79,7 +78,7 @@ class IdeaModuleConfig implements IProjectConfig {
 	val Module module
 
 	override findSourceFolderContaing(URI member) {
-		val file = VfsUtil.findFileByURL(new URL(member.toString))
+		val file = VirtualFileManager.instance.findFileByUrl(member.toString)
 		if (file == null)
 			return null
 		val sourceRoot = ProjectRootManager.getInstance(module.project).fileIndex.getSourceRootForFile(file)
@@ -97,7 +96,12 @@ class IdeaModuleConfig implements IProjectConfig {
 
 	override getPath() {
 		val contentRoot = ModuleRootManager.getInstance(module).contentEntries.head
-		URI.createURI(contentRoot.file.url)
+		val path = URI.createURI(contentRoot.file.url)
+		if (path.hasTrailingPathSeparator) 
+			path
+		else 
+			path.appendSegment("")
+		
 	}
 
 	override getSourceFolders() {
@@ -115,7 +119,10 @@ class IdeaSourceFolder implements ISourceFolder {
 	}
 
 	override getPath() {
-		URI.createURI(folder.file.url)
+		val path = URI.createURI(folder.file.url)
+		if (path.hasTrailingPathSeparator) 
+			path
+		else 
+			path.appendSegment("")
 	}
-
 }

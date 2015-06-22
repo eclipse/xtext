@@ -15,9 +15,8 @@ import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.roots.SourceFolder;
-import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import java.net.URL;
+import com.intellij.openapi.vfs.VirtualFileManager;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Data;
@@ -26,7 +25,6 @@ import org.eclipse.xtext.idea.filesystem.IdeaSourceFolder;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.ISourceFolder;
 import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -39,38 +37,34 @@ public class IdeaModuleConfig implements IProjectConfig {
   
   @Override
   public ISourceFolder findSourceFolderContaing(final URI member) {
-    try {
-      String _string = member.toString();
-      URL _uRL = new URL(_string);
-      final VirtualFile file = VfsUtil.findFileByURL(_uRL);
-      boolean _equals = Objects.equal(file, null);
-      if (_equals) {
-        return null;
-      }
-      Project _project = this.module.getProject();
-      ProjectRootManager _instance = ProjectRootManager.getInstance(_project);
-      ProjectFileIndex _fileIndex = _instance.getFileIndex();
-      final VirtualFile sourceRoot = _fileIndex.getSourceRootForFile(file);
-      boolean _equals_1 = Objects.equal(sourceRoot, null);
-      if (_equals_1) {
-        return null;
-      }
-      Iterable<SourceFolder> _existingSourceFolders = RootModelExtensions.getExistingSourceFolders(this.module);
-      final Function1<SourceFolder, Boolean> _function = new Function1<SourceFolder, Boolean>() {
-        @Override
-        public Boolean apply(final SourceFolder it) {
-          return Boolean.valueOf(Objects.equal(file, sourceRoot));
-        }
-      };
-      final SourceFolder sourceFolder = IterableExtensions.<SourceFolder>findFirst(_existingSourceFolders, _function);
-      boolean _equals_2 = Objects.equal(sourceFolder, null);
-      if (_equals_2) {
-        return null;
-      }
-      return new IdeaSourceFolder(sourceFolder);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+    VirtualFileManager _instance = VirtualFileManager.getInstance();
+    String _string = member.toString();
+    final VirtualFile file = _instance.findFileByUrl(_string);
+    boolean _equals = Objects.equal(file, null);
+    if (_equals) {
+      return null;
     }
+    Project _project = this.module.getProject();
+    ProjectRootManager _instance_1 = ProjectRootManager.getInstance(_project);
+    ProjectFileIndex _fileIndex = _instance_1.getFileIndex();
+    final VirtualFile sourceRoot = _fileIndex.getSourceRootForFile(file);
+    boolean _equals_1 = Objects.equal(sourceRoot, null);
+    if (_equals_1) {
+      return null;
+    }
+    Iterable<SourceFolder> _existingSourceFolders = RootModelExtensions.getExistingSourceFolders(this.module);
+    final Function1<SourceFolder, Boolean> _function = new Function1<SourceFolder, Boolean>() {
+      @Override
+      public Boolean apply(final SourceFolder it) {
+        return Boolean.valueOf(Objects.equal(file, sourceRoot));
+      }
+    };
+    final SourceFolder sourceFolder = IterableExtensions.<SourceFolder>findFirst(_existingSourceFolders, _function);
+    boolean _equals_2 = Objects.equal(sourceFolder, null);
+    if (_equals_2) {
+      return null;
+    }
+    return new IdeaSourceFolder(sourceFolder);
   }
   
   @Override
@@ -87,7 +81,15 @@ public class IdeaModuleConfig implements IProjectConfig {
       final ContentEntry contentRoot = IterableExtensions.<ContentEntry>head(((Iterable<ContentEntry>)Conversions.doWrapArray(_contentEntries)));
       VirtualFile _file = contentRoot.getFile();
       String _url = _file.getUrl();
-      _xblockexpression = URI.createURI(_url);
+      final URI path = URI.createURI(_url);
+      URI _xifexpression = null;
+      boolean _hasTrailingPathSeparator = path.hasTrailingPathSeparator();
+      if (_hasTrailingPathSeparator) {
+        _xifexpression = path;
+      } else {
+        _xifexpression = path.appendSegment("");
+      }
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }

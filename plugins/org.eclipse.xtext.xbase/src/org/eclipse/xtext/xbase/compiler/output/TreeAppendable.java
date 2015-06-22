@@ -144,12 +144,11 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 
 			@Override
 			public URI getURIForTrace(Resource resource) {
-				URI uri = resource.getURI();
-				if (!uriForTraceCache.containsKey(uri)) {
+				if (!uriForTraceCache.containsKey(resource)) {
 					URI uriForTrace = converter.getURIForTrace(resource);
 					uriForTraceCache.put(resource, uriForTrace);
 				}
-				return uriForTraceCache.get(uri);
+				return uriForTraceCache.get(resource);
 			}
 		};
 		this.locationProvider = locationProvider;

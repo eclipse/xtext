@@ -28,9 +28,21 @@ public class IdeaSourceFolder implements ISourceFolder {
   
   @Override
   public URI getPath() {
-    VirtualFile _file = this.folder.getFile();
-    String _url = _file.getUrl();
-    return URI.createURI(_url);
+    URI _xblockexpression = null;
+    {
+      VirtualFile _file = this.folder.getFile();
+      String _url = _file.getUrl();
+      final URI path = URI.createURI(_url);
+      URI _xifexpression = null;
+      boolean _hasTrailingPathSeparator = path.hasTrailingPathSeparator();
+      if (_hasTrailingPathSeparator) {
+        _xifexpression = path;
+      } else {
+        _xifexpression = path.appendSegment("");
+      }
+      _xblockexpression = _xifexpression;
+    }
+    return _xblockexpression;
   }
   
   public IdeaSourceFolder(final SourceFolder folder) {

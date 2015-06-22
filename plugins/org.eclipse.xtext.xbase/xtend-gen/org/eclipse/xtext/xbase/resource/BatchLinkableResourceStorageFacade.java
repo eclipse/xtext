@@ -17,10 +17,10 @@ import org.eclipse.xtext.resource.persistence.ResourceStorageFacade;
 import org.eclipse.xtext.resource.persistence.ResourceStorageLoadable;
 import org.eclipse.xtext.resource.persistence.ResourceStorageWritable;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
+import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.ISourceFolder;
 import org.eclipse.xtext.workspace.IWorkspaceConfig;
 import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
-import org.eclipse.xtext.workspace.WorkspaceConfigUtil;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResourceStorageLoadable;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResourceStorageWritable;
 
@@ -48,8 +48,13 @@ public class BatchLinkableResourceStorageFacade extends ResourceStorageFacade {
   protected URI getSourceContainerURI(final StorageAwareResource resource) {
     ResourceSet _resourceSet = resource.getResourceSet();
     final IWorkspaceConfig workspaceConfig = this.workspaceConfigProvider.getWorkspaceConfig(_resourceSet);
-    URI _uRI = resource.getURI();
-    final ISourceFolder sourceFolder = WorkspaceConfigUtil.getSourceFolderContaining(workspaceConfig, _uRI);
+    final URI uri = resource.getURI();
+    final IProjectConfig project = workspaceConfig.findProjectContaining(uri);
+    ISourceFolder _findSourceFolderContaing = null;
+    if (project!=null) {
+      _findSourceFolderContaing=project.findSourceFolderContaing(uri);
+    }
+    final ISourceFolder sourceFolder = _findSourceFolderContaing;
     boolean _notEquals = (!Objects.equal(sourceFolder, null));
     if (_notEquals) {
       return sourceFolder.getPath();

@@ -11,18 +11,16 @@ import com.google.common.base.Objects;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
-import org.eclipse.xtend.lib.annotations.ToString;
+import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.util.UriUtil;
 import org.eclipse.xtext.workspace.FileSourceFolder;
 import org.eclipse.xtext.workspace.FileWorkspaceConfig;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @FinalFieldsConstructor
-@ToString
 @SuppressWarnings("all")
 public class FileProjectConfig implements IProjectConfig {
   private final FileWorkspaceConfig parent;
@@ -46,10 +44,8 @@ public class FileProjectConfig implements IProjectConfig {
     final Function1<FileSourceFolder, Boolean> _function = new Function1<FileSourceFolder, Boolean>() {
       @Override
       public Boolean apply(final FileSourceFolder source) {
-        String _string = member.toString();
         URI _path = source.getPath();
-        String _string_1 = _path.toString();
-        return Boolean.valueOf(_string.startsWith(_string_1));
+        return Boolean.valueOf(UriUtil.isPrefixOf(_path, member));
       }
     };
     return IterableExtensions.<FileSourceFolder>findFirst(this.sourceFolders, _function);
@@ -62,8 +58,10 @@ public class FileProjectConfig implements IProjectConfig {
   
   @Override
   public URI getPath() {
+    URI _createFileURI = URI.createFileURI(this.name);
     URI _path = this.parent.getPath();
-    return _path.appendSegment(this.name);
+    URI _resolve = _createFileURI.resolve(_path);
+    return _resolve.appendSegment("");
   }
   
   @Override
@@ -87,19 +85,21 @@ public class FileProjectConfig implements IProjectConfig {
     return _path.hashCode();
   }
   
+  @Override
+  public String toString() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Project ");
+    _builder.append(this.name, "");
+    _builder.append(" (");
+    URI _path = this.getPath();
+    _builder.append(_path, "");
+    _builder.append(")");
+    return _builder.toString();
+  }
+  
   public FileProjectConfig(final FileWorkspaceConfig parent, final String name) {
     super();
     this.parent = parent;
     this.name = name;
-  }
-  
-  @Override
-  @Pure
-  public String toString() {
-    ToStringBuilder b = new ToStringBuilder(this);
-    b.add("parent", this.parent);
-    b.add("name", this.name);
-    b.add("sourceFolders", this.sourceFolders);
-    return b.toString();
   }
 }

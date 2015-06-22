@@ -12,10 +12,10 @@ import java.util.Map
 import java.util.Set
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-import org.eclipse.xtend.lib.annotations.ToString
+
+import static extension org.eclipse.xtext.util.UriUtil.*
 
 @FinalFieldsConstructor
-@ToString
 class FileWorkspaceConfig implements IWorkspaceConfig {
 	val File root
 	val Map<String, FileProjectConfig> projects = newHashMap
@@ -27,11 +27,15 @@ class FileWorkspaceConfig implements IWorkspaceConfig {
 	}
 
 	override FileProjectConfig findProjectContaining(URI member) {
-		projects.values.findFirst[project|member.toString.startsWith(path.toString)]
+		projects.values.findFirst[project|project.path.isPrefixOf(member)]
 	}
 
 	def getPath() {
-		URI.createFileURI(root.path)
+		val path = URI.createFileURI(root.path)
+		if (path.hasTrailingPathSeparator) 
+			path 
+		else 
+			path.appendSegment("")
 	}
 
 	override Set<FileProjectConfig> getProjects() {
@@ -52,11 +56,14 @@ class FileWorkspaceConfig implements IWorkspaceConfig {
 	override hashCode() {
 		path.hashCode
 	}
+	
+	override toString() {
+		'''Workspace («path»)'''
+	}
 
 }
 
 @FinalFieldsConstructor
-@ToString
 class FileProjectConfig implements IProjectConfig {
 	val FileWorkspaceConfig parent
 	val String name
@@ -69,7 +76,7 @@ class FileProjectConfig implements IProjectConfig {
 	}
 
 	override FileSourceFolder findSourceFolderContaing(URI member) {
-		sourceFolders.findFirst[source|member.toString.startsWith(source.path.toString)]
+		sourceFolders.findFirst[source|source.path.isPrefixOf(member)]
 	}
 
 	override getName() {
@@ -77,7 +84,7 @@ class FileProjectConfig implements IProjectConfig {
 	}
 
 	override getPath() {
-		parent.path.appendSegment(name)
+		URI.createFileURI(name).resolve(parent.path).appendSegment("")
 	}
 
 	override Set<FileSourceFolder> getSourceFolders() {
@@ -94,11 +101,14 @@ class FileProjectConfig implements IProjectConfig {
 	override hashCode() {
 		path.hashCode
 	}
+	
+	override toString() {
+		'''Project «name» («path»)'''
+	}
 
 }
 
 @FinalFieldsConstructor
-@ToString
 class FileSourceFolder implements ISourceFolder {
 	val FileProjectConfig parent
 	val String name
@@ -108,7 +118,7 @@ class FileSourceFolder implements ISourceFolder {
 	}
 
 	override getPath() {
-		parent.path.appendSegments(name.split("/").map[URI.encodeSegment(it, true)]).appendSegment("")
+		URI.createFileURI(name).resolve(parent.path).appendSegment("")
 	}
 
 	override equals(Object obj) {
@@ -121,4 +131,9 @@ class FileSourceFolder implements ISourceFolder {
 	override hashCode() {
 		path.hashCode
 	}
+	
+	override toString() {
+		'''«name» («path»)'''
+	}
+	
 }
