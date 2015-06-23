@@ -1,4 +1,5 @@
 plugins {
+	id "osgi"
 	id "com.moowork.node" version "0.10"
 }
 
@@ -10,6 +11,11 @@ dependencies {
     testCompile project(':web:org.eclipse.xtext.web.example.statemachine.ide')
 }
 
+jar.manifest {
+	name 'Xtext Web Integration'
+	vendor 'Eclipse Modeling Project'
+}
+
 node {
 	download = true
 }
@@ -18,7 +24,7 @@ task testJs(type: NodeTask) {
 	dependsOn(npmInstall)
 	inputs.dir new File('src/test/js')
 	script = file('node_modules/mocha/bin/mocha')
-	args = ['-u', 'tdd', 'src/test/js/*.js']
+	args = ['-u', 'tdd', '--reporter', 'dot', 'src/test/js/*.js']
 }
 
 def requireJsPlugins = file("$buildDir/tmp/js/requirejs-plugins")
@@ -38,6 +44,8 @@ task copyImages(type: Copy) {
 	into new File(optResources, 'images')
 }
 
+def optimizeLogLevel = 2 //WARN
+
 task optimizeOrionJs(type: NodeTask) {
 	dependsOn(npmInstall, downloadRequireJsPlugins)
 	inputs.dir new File('src/main/js')
@@ -45,7 +53,7 @@ task optimizeOrionJs(type: NodeTask) {
 	outputs.file out
 	def buildProfile = file('src/main/js/requirejs-orion-config.js')
 	script = file('node_modules/requirejs/bin/r.js')
-	args = ['-o', buildProfile.path, 'optimize=none', 'out=' + out.path]
+	args = ['-o', buildProfile.path, 'optimize=none', 'out=' + out.path, 'logLevel=' + optimizeLogLevel]
 }
 
 task optimizeOrionJsMin(type: NodeTask) {
@@ -55,7 +63,7 @@ task optimizeOrionJsMin(type: NodeTask) {
 	outputs.file out
 	def buildProfile = file('src/main/js/requirejs-orion-config.js')
 	script = file('node_modules/requirejs/bin/r.js')
-	args = ['-o', buildProfile.path, 'optimize=uglify', 'preserveLicenseComments=false', 'out=' + out.path]
+	args = ['-o', buildProfile.path, 'optimize=uglify', 'preserveLicenseComments=false', 'out=' + out.path, 'logLevel=' + optimizeLogLevel]
 }
 
 task optimizeOrionCss(type: NodeTask) {
@@ -64,7 +72,7 @@ task optimizeOrionCss(type: NodeTask) {
 	def out = file(optResources.path + '/xtext-orion.css')
 	outputs.file out
 	script = file('node_modules/requirejs/bin/r.js')
-	args = ['-o', 'cssIn=src/main/css/xtext/xtext-orion.css', 'out=' + out.path]
+	args = ['-o', 'cssIn=src/main/css/xtext/xtext-orion.css', 'out=' + out.path, 'logLevel=' + optimizeLogLevel]
 }
 
 task optimizeAceJs(type: NodeTask) {
@@ -74,7 +82,7 @@ task optimizeAceJs(type: NodeTask) {
 	outputs.file out
 	def buildProfile = file('src/main/js/requirejs-ace-config.js')
 	script = file('node_modules/requirejs/bin/r.js')
-	args = ['-o', buildProfile.path, 'optimize=none', 'out=' + out.path]
+	args = ['-o', buildProfile.path, 'optimize=none', 'out=' + out.path, 'logLevel=' + optimizeLogLevel]
 }
 
 task optimizeAceJsMin(type: NodeTask) {
@@ -84,7 +92,7 @@ task optimizeAceJsMin(type: NodeTask) {
 	outputs.file out
 	def buildProfile = file('src/main/js/requirejs-ace-config.js')
 	script = file('node_modules/requirejs/bin/r.js')
-	args = ['-o', buildProfile.path, 'optimize=uglify', 'preserveLicenseComments=false', 'out=' + out.path]
+	args = ['-o', buildProfile.path, 'optimize=uglify', 'preserveLicenseComments=false', 'out=' + out.path, 'logLevel=' + optimizeLogLevel]
 }
 
 task optimizeAceCss(type: NodeTask) {
@@ -93,7 +101,7 @@ task optimizeAceCss(type: NodeTask) {
 	def out = file(optResources.path + '/xtext-ace.css')
 	outputs.file out
 	script = file('node_modules/requirejs/bin/r.js')
-	args = ['-o', 'cssIn=src/main/css/xtext/xtext-ace.css', 'out=' + out.path]
+	args = ['-o', 'cssIn=src/main/css/xtext/xtext-ace.css', 'out=' + out.path, 'logLevel=' + optimizeLogLevel]
 }
 
 sourceSets.main.resources.srcDir "$buildDir/opt-resources"
