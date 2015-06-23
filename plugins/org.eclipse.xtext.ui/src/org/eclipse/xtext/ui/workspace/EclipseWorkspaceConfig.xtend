@@ -59,10 +59,6 @@ class EclipseWorkspaceConfig implements IWorkspaceConfig {
 		return null
 	}
 
-	override getProjects() {
-		workspaceRoot.projects.map[provider.getProjectConfig(it)].toSet
-	}
-	
 	override equals(Object obj) {
 		if (obj instanceof EclipseWorkspaceConfig) {
 			return obj.workspaceRoot == workspaceRoot
@@ -97,7 +93,7 @@ class EclipseProjectConfig implements IProjectConfig {
 		emptySet
 	}
 
-	override findSourceFolderContaing(URI member) {
+	override findSourceFolderContaining(URI member) {
 		sourceFolders.findFirst[folder|folder.path.isPrefixOf(member)]
 	}
 }
