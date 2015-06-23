@@ -215,7 +215,8 @@ define([
 						computeHoverInfo : function(context) {
 							return _internals.computeHoverInfo(context);
 						},
-						clearQuickFixes: function() {}
+						clearQuickFixes: function() {},
+						renderQuickFixes: function() {}
 					};
 				}
 			};
