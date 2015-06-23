@@ -41,7 +41,6 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.clustering.DisabledClusteringPolicy;
 import org.eclipse.xtext.resource.clustering.DynamicResourceClusteringPolicy;
 import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy;
-import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
@@ -207,9 +206,9 @@ public class IncrementalBuilder {
         }
       };
       Iterable<URI> _map = IterableExtensions.<IResourceDescription.Delta, URI>map(_filter_1, _function_3);
-      final Function1<Resource, DefaultResourceDescriptionDelta> _function_4 = new Function1<Resource, DefaultResourceDescriptionDelta>() {
+      final Function1<Resource, IResourceDescription.Delta> _function_4 = new Function1<Resource, IResourceDescription.Delta>() {
         @Override
-        public DefaultResourceDescriptionDelta apply(final Resource resource) {
+        public IResourceDescription.Delta apply(final Resource resource) {
           resource.getContents();
           EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl);
           URI _uRI = resource.getURI();
@@ -228,10 +227,10 @@ public class IncrementalBuilder {
           ResourceDescriptionsData _resourceDescriptions = _previousState.getResourceDescriptions();
           URI _uRI_2 = resource.getURI();
           final IResourceDescription old = _resourceDescriptions.getResourceDescription(_uRI_2);
-          return new DefaultResourceDescriptionDelta(old, copiedDescription);
+          return manager.createDelta(old, copiedDescription);
         }
       };
-      Iterable<DefaultResourceDescriptionDelta> _executeClustered = this.context.<DefaultResourceDescriptionDelta>executeClustered(_map, _function_4);
+      Iterable<IResourceDescription.Delta> _executeClustered = this.context.<IResourceDescription.Delta>executeClustered(_map, _function_4);
       Iterables.<IResourceDescription.Delta>addAll(resolvedDeltas, _executeClustered);
       ResourceDescriptionsData _newIndex = result.getNewIndex();
       IndexState _indexState = new IndexState(_newIndex, newSource2GeneratedMapping);

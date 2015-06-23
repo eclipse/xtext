@@ -7,10 +7,11 @@
  */
 package org.eclipse.xtext.idea.build
 
-import com.google.common.collect.HashMultimap
 import com.google.common.collect.ImmutableList
 import com.google.inject.Inject
 import com.google.inject.Provider
+import com.intellij.ProjectTopics
+import com.intellij.compiler.ModuleCompilerUtil
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.application.ModalityState
@@ -20,8 +21,11 @@ import com.intellij.openapi.editor.event.DocumentAdapter
 import com.intellij.openapi.editor.event.DocumentEvent
 import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.module.Module
+import com.intellij.openapi.module.ModuleManager
 import com.intellij.openapi.progress.ProcessCanceledException
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.roots.ModuleRootAdapter
+import com.intellij.openapi.roots.ModuleRootEvent
 import com.intellij.openapi.roots.ModuleRootManager
 import com.intellij.openapi.roots.OrderEnumerator
 import com.intellij.openapi.roots.ProjectFileIndex
@@ -35,6 +39,7 @@ import com.intellij.psi.PsiJavaFile
 import com.intellij.psi.PsiManager
 import com.intellij.psi.impl.PsiModificationTrackerImpl
 import com.intellij.util.Alarm
+import com.intellij.util.messages.MessageBusConnection
 import java.util.ArrayList
 import java.util.HashSet
 import java.util.List
@@ -62,7 +67,6 @@ import static org.eclipse.xtext.idea.build.BuildEvent.Type.*
 import static org.eclipse.xtext.idea.build.XtextAutoBuilderComponent.*
 
 import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
-import com.intellij.openapi.module.ModuleManager
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -134,6 +138,16 @@ import com.intellij.openapi.module.ModuleManager
 				// TODO deal with that!
 			}
 		}, project)
+		
+		val MessageBusConnection connection = project.getMessageBus().connect(project);
+         connection.subscribe(ProjectTopics.PROJECT_ROOTS, new ModuleRootAdapter() {
+										
+			override rootsChanged(ModuleRootEvent event) {
+				doCleanBuild
+			}
+         	
+         });
+		
 		alarm = new Alarm(Alarm.ThreadToUse.OWN_THREAD, project)
 	}
 	
@@ -179,7 +193,12 @@ import com.intellij.openapi.module.ModuleManager
 	}
 
 	def void fileAdded(VirtualFile file) {
-		enqueue(file, ADDED)
+		if (file.length > 0) {
+			enqueue(file, ADDED)
+		} else {
+			if (LOG.infoEnabled)
+				LOG.info("Ignoring new empty file "+file.path+". Waiting for content.")
+		}
 	}
 	
 	/**
@@ -199,13 +218,23 @@ import com.intellij.openapi.module.ModuleManager
 		}
 		if (file != null && !disposed) {
 			queue.put(new BuildEvent(file, type))
-			if (TEST_MODE) {
-				(PsiManager.getInstance(getProject()).getModificationTracker() as PsiModificationTrackerImpl).incCounter();
-				build
-			} else {
-				alarm.cancelAllRequests
-				alarm.addRequest([build], 200)
-			}
+			doRunBuild()
+		}
+	}
+	
+	protected def doCleanBuild() {
+		indexState = null
+		queueAllResources
+		doRunBuild
+	}
+	
+	protected def doRunBuild() {
+		if (TEST_MODE) {
+			(PsiManager.getInstance(getProject()).getModificationTracker() as PsiModificationTrackerImpl).incCounter();
+			build
+		} else {
+			alarm.cancelAllRequests
+			alarm.addRequest([build], 200)
 		}
 	}
 	
@@ -266,8 +295,10 @@ import com.intellij.openapi.module.ModuleManager
 			val fileIndex = ProjectFileIndex.SERVICE.getInstance(project)
 			val moduleGraph = moduleManager.moduleGraph
 			// deltas are added over the whole build
- 			val deltas = <IResourceDescription.Delta>newArrayList
-			for (module: moduleGraph.nodes) {
+			val deltas = <IResourceDescription.Delta>newArrayList
+			val sortedModules = new ArrayList(moduleGraph.nodes)
+			ModuleCompilerUtil.sortModules(project, sortedModules) 
+			for (module: sortedModules) {
 				val changedUris = newHashSet
 				val deletedUris = newHashSet
 				val contentRoots = ModuleRootManager.getInstance(module).contentRoots

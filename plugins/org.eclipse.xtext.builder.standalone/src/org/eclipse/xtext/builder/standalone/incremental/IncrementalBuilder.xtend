@@ -28,7 +28,6 @@ import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.CheckMode
-import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -78,7 +77,7 @@ import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta
 						resource.generate(request, newSource2GeneratedMapping)
 					}
 					val old = request.previousState.resourceDescriptions.getResourceDescription(resource.URI)
-					return new DefaultResourceDescriptionDelta(old, copiedDescription)
+					return manager.createDelta(old, copiedDescription)
 				]
 			return new Result(new IndexState(result.newIndex, newSource2GeneratedMapping), resolvedDeltas)
 		}
