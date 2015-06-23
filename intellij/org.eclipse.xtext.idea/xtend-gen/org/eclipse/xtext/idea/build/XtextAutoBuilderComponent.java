@@ -430,7 +430,13 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
       };
       IterableExtensions.<XtextAutoBuilderComponent.AutoBuilderListener>forEach(this.autoBuildListeners, _function);
       final ProjectFileIndex fileIndex = ProjectFileIndex.SERVICE.getInstance(this.project);
-      final Graph<Module> moduleGraph = moduleManager.moduleGraph();
+      final Computable<Graph<Module>> _function_1 = new Computable<Graph<Module>>() {
+        @Override
+        public Graph<Module> compute() {
+          return moduleManager.moduleGraph();
+        }
+      };
+      final Graph<Module> moduleGraph = app.<Graph<Module>>runReadAction(_function_1);
       final ArrayList<IResourceDescription.Delta> deltas = CollectionLiterals.<IResourceDescription.Delta>newArrayList();
       Collection<Module> _nodes = moduleGraph.getNodes();
       final ArrayList<Module> sortedModules = new ArrayList<Module>(_nodes);
@@ -441,14 +447,14 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
           final HashSet<URI> deletedUris = CollectionLiterals.<URI>newHashSet();
           ModuleRootManager _instance = ModuleRootManager.getInstance(module);
           final VirtualFile[] contentRoots = _instance.getContentRoots();
-          final Function1<BuildEvent, Boolean> _function_1 = new Function1<BuildEvent, Boolean>() {
+          final Function1<BuildEvent, Boolean> _function_2 = new Function1<BuildEvent, Boolean>() {
             @Override
             public Boolean apply(final BuildEvent event) {
               Module _findModule = XtextAutoBuilderComponent.this.findModule(event, fileIndex);
               return Boolean.valueOf(Objects.equal(_findModule, module));
             }
           };
-          Iterable<BuildEvent> _filter = IterableExtensions.<BuildEvent>filter(allEvents, _function_1);
+          Iterable<BuildEvent> _filter = IterableExtensions.<BuildEvent>filter(allEvents, _function_2);
           final Set<BuildEvent> events = IterableExtensions.<BuildEvent>toSet(_filter);
           boolean _or = false;
           boolean _isEmpty = ((List<VirtualFile>)Conversions.doWrapArray(contentRoots)).isEmpty();
@@ -474,7 +480,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
             this.collectChanges(events, module, changedUris, deletedUris, deltas);
             final OrderEnumerator entries = OrderEnumerator.orderEntries(module);
             BuildRequest _buildRequest = new BuildRequest();
-            final Procedure1<BuildRequest> _function_2 = new Procedure1<BuildRequest>() {
+            final Procedure1<BuildRequest> _function_3 = new Procedure1<BuildRequest>() {
               @Override
               public void apply(final BuildRequest it) {
                 XtextResourceSet _get = XtextAutoBuilderComponent.this.resourceSetProvider.get(module);
@@ -536,16 +542,16 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
                 it.setBelongsToThisBuildRun(_function_3);
               }
             };
-            final BuildRequest request = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_2);
-            final Computable<IncrementalBuilder.Result> _function_3 = new Computable<IncrementalBuilder.Result>() {
+            final BuildRequest request = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_3);
+            final Computable<IncrementalBuilder.Result> _function_4 = new Computable<IncrementalBuilder.Result>() {
               @Override
               public IncrementalBuilder.Result compute() {
                 IncrementalBuilder _get = XtextAutoBuilderComponent.this.builderProvider.get();
                 return _get.build(request, XtextAutoBuilderComponent.this.resourceServiceProviderRegistry);
               }
             };
-            final IncrementalBuilder.Result result = app.<IncrementalBuilder.Result>runReadAction(_function_3);
-            final Runnable _function_4 = new Runnable() {
+            final IncrementalBuilder.Result result = app.<IncrementalBuilder.Result>runReadAction(_function_4);
+            final Runnable _function_5 = new Runnable() {
               @Override
               public void run() {
                 final Runnable _function = new Runnable() {
@@ -565,17 +571,17 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
               }
             };
             ModalityState _any = ModalityState.any();
-            app.invokeAndWait(_function_4, _any);
+            app.invokeAndWait(_function_5, _any);
             IndexState _indexState = result.getIndexState();
             this.indexState = _indexState;
-            final IResourceDescription.Event _function_5 = new IResourceDescription.Event() {
+            final IResourceDescription.Event _function_6 = new IResourceDescription.Event() {
               @Override
               public ImmutableList<IResourceDescription.Delta> getDeltas() {
                 List<IResourceDescription.Delta> _affectedResources = result.getAffectedResources();
                 return ImmutableList.<IResourceDescription.Delta>copyOf(_affectedResources);
               }
             };
-            this.notifyListeners(_function_5);
+            this.notifyListeners(_function_6);
             List<IResourceDescription.Delta> _affectedResources = result.getAffectedResources();
             deltas.addAll(_affectedResources);
           }
@@ -590,13 +596,13 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
       }
     } finally {
       buildProgressReporter.clearProgress();
-      final Procedure1<XtextAutoBuilderComponent.AutoBuilderListener> _function_1 = new Procedure1<XtextAutoBuilderComponent.AutoBuilderListener>() {
+      final Procedure1<XtextAutoBuilderComponent.AutoBuilderListener> _function_2 = new Procedure1<XtextAutoBuilderComponent.AutoBuilderListener>() {
         @Override
         public void apply(final XtextAutoBuilderComponent.AutoBuilderListener it) {
           it.finishedBuild();
         }
       };
-      IterableExtensions.<XtextAutoBuilderComponent.AutoBuilderListener>forEach(this.autoBuildListeners, _function_1);
+      IterableExtensions.<XtextAutoBuilderComponent.AutoBuilderListener>forEach(this.autoBuildListeners, _function_2);
     }
   }
   

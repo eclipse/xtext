@@ -39,6 +39,7 @@ import com.intellij.psi.PsiJavaFile
 import com.intellij.psi.PsiManager
 import com.intellij.psi.impl.PsiModificationTrackerImpl
 import com.intellij.util.Alarm
+import com.intellij.util.graph.Graph
 import com.intellij.util.messages.MessageBusConnection
 import java.util.ArrayList
 import java.util.HashSet
@@ -293,11 +294,11 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 				aboutToBuild(allEvents)
 			]
 			val fileIndex = ProjectFileIndex.SERVICE.getInstance(project)
-			val moduleGraph = moduleManager.moduleGraph
+			val moduleGraph = app.<Graph<Module>>runReadAction[moduleManager.moduleGraph]
 			// deltas are added over the whole build
 			val deltas = <IResourceDescription.Delta>newArrayList
 			val sortedModules = new ArrayList(moduleGraph.nodes)
-			ModuleCompilerUtil.sortModules(project, sortedModules) 
+			ModuleCompilerUtil.sortModules(project, sortedModules)
 			for (module: sortedModules) {
 				val changedUris = newHashSet
 				val deletedUris = newHashSet
