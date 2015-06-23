@@ -23,6 +23,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.ITypeImporter;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IApplicableCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
@@ -379,5 +380,12 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		for (int i = 0; i < components.length; i++) {
 			components[i].rewriteScope(context);
 		}
+	}
+
+	@Override
+	public IResolvedTypes getComputedTypes() {
+		for (AbstractTypeComputationState state : components)
+			return state.getComputedTypes();
+		throw new IllegalStateException("no computed types available.");
 	}
 }

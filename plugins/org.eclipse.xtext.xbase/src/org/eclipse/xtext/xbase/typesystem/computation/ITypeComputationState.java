@@ -28,6 +28,7 @@ import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.scoping.batch.ITypeImporter;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
@@ -154,6 +155,15 @@ public interface ITypeComputationState {
 	 * @throws IllegalArgumentException if the given expression is the currently computed expression.
 	 */
 	ITypeComputationResult computeTypes(/* @Nullable */ XExpression expression);
+	
+	
+	/**
+	 * Access to the still mutating resolved types object.
+	 * It may not complete. Never hold long living references to this.
+	 * 
+	 * @returns the resolved type information at this point of the computation
+	 */
+	IResolvedTypes getComputedTypes();
 	
 	/**
 	 * Assigns the type to the given element and makes the element available in the scope.

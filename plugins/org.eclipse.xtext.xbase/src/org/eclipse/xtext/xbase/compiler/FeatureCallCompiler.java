@@ -53,6 +53,7 @@ import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -823,12 +824,13 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				b.append(".");
 			appendFeatureCall(expr, b);
 		} else {
-			boolean isArgument = expr.eContainer() instanceof XAbstractFeatureCall;
-			if (isArgument) {
+			EObject container = expr.eContainer();
+			boolean isOperand = container instanceof XAbstractFeatureCall || container instanceof XInstanceOfExpression;
+			if (isOperand) {
 				EStructuralFeature containingFeature = expr.eContainingFeature();
 				if (containingFeature == XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS 
 						|| containingFeature == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS) {
-					isArgument = false;
+					isOperand = false;
 				} else {
 					b.append("(");
 				}
@@ -844,7 +846,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			}
 			b.append(" = ");
 			internalToJavaExpression(expr.getValue(), b);
-			if (isArgument) {
+			if (isOperand) {
 				b.append(")");
 			}
 		}
