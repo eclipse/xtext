@@ -51,6 +51,10 @@ import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.workspace.IProjectConfig;
+import org.eclipse.xtext.workspace.ISourceFolder;
+import org.eclipse.xtext.workspace.IWorkspaceConfig;
+import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -266,6 +270,24 @@ public class IncrementalBuilder {
       }
       URI _uRI_1 = resource.getURI();
       final Set<URI> previous = newMappings.deleteSource(_uRI_1);
+      final IWorkspaceConfigProvider workspaceConfigProvider = serviceProvider.<IWorkspaceConfigProvider>get(IWorkspaceConfigProvider.class);
+      IWorkspaceConfig _workspaceConfig = null;
+      if (workspaceConfigProvider!=null) {
+        ResourceSet _resourceSet = resource.getResourceSet();
+        _workspaceConfig=workspaceConfigProvider.getWorkspaceConfig(_resourceSet);
+      }
+      final IWorkspaceConfig workspaceConfig = _workspaceConfig;
+      IProjectConfig _findProjectContaining = null;
+      if (workspaceConfig!=null) {
+        URI _uRI_2 = resource.getURI();
+        _findProjectContaining=workspaceConfig.findProjectContaining(_uRI_2);
+      }
+      ISourceFolder _findSourceFolderContaining = null;
+      if (_findProjectContaining!=null) {
+        URI _uRI_3 = resource.getURI();
+        _findSourceFolderContaining=_findProjectContaining.findSourceFolderContaining(_uRI_3);
+      }
+      final ISourceFolder sourceFolder = _findSourceFolderContaining;
       URIBasedFileSystemAccess _uRIBasedFileSystemAccess = new URIBasedFileSystemAccess();
       final Procedure1<URIBasedFileSystemAccess> _function = new Procedure1<URIBasedFileSystemAccess>() {
         @Override
@@ -282,6 +304,11 @@ public class IncrementalBuilder {
           it.setOutputConfigurations(_map);
           URI _baseDir = request.getBaseDir();
           it.setBaseDir(_baseDir);
+          String _name = null;
+          if (sourceFolder!=null) {
+            _name=sourceFolder.getName();
+          }
+          it.setCurrentSource(_name);
           ResourceSet _resourceSet = resource.getResourceSet();
           URIConverter _uRIConverter = _resourceSet.getURIConverter();
           it.setConverter(_uRIConverter);
