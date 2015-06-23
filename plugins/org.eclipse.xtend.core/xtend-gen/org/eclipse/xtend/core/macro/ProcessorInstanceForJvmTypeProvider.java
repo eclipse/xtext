@@ -167,10 +167,13 @@ public class ProcessorInstanceForJvmTypeProvider {
           _xifexpression = jvmTypeLoader;
         }
         final ClassLoader processorClassLoader = _xifexpression;
-        EList<Adapter> _eAdapters_1 = ((XtextResourceSet)resourceSet).eAdapters();
-        ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter _processorClassloaderAdapter = new ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter(processorClassLoader);
-        _eAdapters_1.add(_processorClassloaderAdapter);
-        return processorClassLoader;
+        boolean _notEquals_1 = (!Objects.equal(processorClassLoader, null));
+        if (_notEquals_1) {
+          EList<Adapter> _eAdapters_1 = ((XtextResourceSet)resourceSet).eAdapters();
+          ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter _processorClassloaderAdapter = new ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter(processorClassLoader);
+          _eAdapters_1.add(_processorClassloaderAdapter);
+          return processorClassLoader;
+        }
       }
     }
     ProcessorInstanceForJvmTypeProvider.logger.info("No class loader configured. Trying with this class classloader.");

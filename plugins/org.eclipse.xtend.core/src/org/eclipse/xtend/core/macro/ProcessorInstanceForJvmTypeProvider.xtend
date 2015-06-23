@@ -92,8 +92,10 @@ class ProcessorInstanceForJvmTypeProvider {
 				} else {
 					jvmTypeLoader
 				}
-				resourceSet.eAdapters += new ProcessorClassloaderAdapter(processorClassLoader)
-				return processorClassLoader
+				if (processorClassLoader != null) {
+					resourceSet.eAdapters += new ProcessorClassloaderAdapter(processorClassLoader)
+					return processorClassLoader
+				}
 			}
 		}
 		logger.info("No class loader configured. Trying with this class classloader.")
