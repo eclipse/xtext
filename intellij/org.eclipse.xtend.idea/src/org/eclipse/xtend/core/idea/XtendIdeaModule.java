@@ -7,11 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.idea;
 
+import org.eclipse.xtend.core.idea.macro.IdeaFileSystemSupport;
 import org.eclipse.xtend.core.idea.macro.IdeaProcessorProvider;
 import org.eclipse.xtend.core.idea.presentation.XtendItemPresentationProvider;
 import org.eclipse.xtend.core.idea.structureview.XtendStructureViewBuilder;
 import org.eclipse.xtend.core.idea.validation.XtendIdeaValidator;
 import org.eclipse.xtend.core.linking.Linker;
+import org.eclipse.xtend.core.macro.AbstractFileSystemSupport;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.ide.common.contentassist.antlr.DisabledInternalLexer;
 import org.eclipse.xtend.ide.common.contentassist.antlr.FlexerBasedContentAssistContextFactory;
@@ -29,10 +31,6 @@ import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.parser.antlr.LexerProvider;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.service.SingletonBinding;
-import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
-import org.eclipse.xtext.xbase.file.WorkspaceConfig;
-import org.eclipse.xtext.xbase.idea.filesystem.IdeaFileSystemSupport;
-import org.eclipse.xtext.xbase.idea.filesystem.IdeaWorkspaceConfigProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -66,10 +64,6 @@ public class XtendIdeaModule extends AbstractXtendIdeaModule {
 	@SingletonBinding
 	public Class<? extends IBracePairProvider> bindIBracePairProvider() {
 		return XtendBracePairProvider.class;
-	}
-	
-	public void configureWorkspaceConfig(Binder binder) {
-		binder.bind(WorkspaceConfig.class).toProvider(IdeaWorkspaceConfigProvider.class);
 	}
 	
 	public Class<? extends AbstractFileSystemSupport> bindAbstractFileSystemSupport() {

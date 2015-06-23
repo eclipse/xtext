@@ -1,8 +1,10 @@
 package org.eclipse.xtend.core.tests.macro
 
+import com.google.common.io.Files
 import com.google.inject.Inject
 import com.google.inject.Provider
 import java.io.File
+import java.nio.charset.Charset
 import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.core.macro.AnnotationProcessor
@@ -12,8 +14,6 @@ import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
 import org.eclipse.xtend.core.validation.IssueCodes
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendPackage
-import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport
-import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.TemporaryFolder
@@ -24,10 +24,9 @@ import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.Issue
+import org.eclipse.xtext.workspace.FileWorkspaceConfig
+import org.eclipse.xtext.workspace.WorkspaceConfigAdapter
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
-import org.eclipse.xtext.xbase.file.ProjectConfig
-import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider
-import org.eclipse.xtext.xbase.file.SimpleWorkspaceConfig
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -46,12 +45,11 @@ class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests
 	@Inject Provider<CompilationUnitImpl> compilationUnitProvider
 	@Inject ProcessorInstanceForJvmTypeProvider processorProvider
 	@Inject Provider<XtextResourceSet> resourceSetProvider;
-	@Inject RuntimeWorkspaceConfigProvider configProvider
-	@Inject extension MutableFileSystemSupport fileSystemSupport
 	@Inject ValidationTestHelper validator
 	
 	val macroProject = "macroProject"
 	val clientProject = "userProject"
+	File workspaceRoot
 
 	@Before
 	def void setUp() {
@@ -60,15 +58,7 @@ class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests
 	}
 	
 	protected def void configureFreshWorkspace() {
-		val tempDir = createFreshTempDir()
-		configProvider.workspaceConfig = new SimpleWorkspaceConfig(tempDir.absolutePath) => [
-			addProjectConfig(new ProjectConfig(macroProject) => [
-				sourceFolderMappings.put(new Path('/'+macroProject+'/src'), new Path('/'+macroProject+'/xtend-gen'))
-			])
-			addProjectConfig(new ProjectConfig(clientProject) => [
-				sourceFolderMappings.put(new Path('/'+clientProject+'/src'), new Path('/'+clientProject+'/xtend-gen'))
-			])
-		]
+		workspaceRoot = createFreshTempDir()
 	}
 	
 	protected def File createFreshTempDir() {
@@ -76,9 +66,10 @@ class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests
 	}
 	
 	protected def URI copyToDisk(String projectName, Pair<String,String> fileRepresentation) {
-		val path = new Path("/"+projectName+"/src/"+fileRepresentation.key)
-		path.setContents(fileRepresentation.value)
-		return URI.createFileURI(configProvider.workspaceConfig.absoluteFileSystemPath+path.toString)
+		val file = new File(workspaceRoot, projectName+"/src/"+fileRepresentation.key)
+		file.parentFile.mkdirs
+		Files.write(fileRepresentation.value, file, Charset.defaultCharset)
+		return URI.createFileURI(file.path)
 	}
 
 	override assertProcessing(Pair<String, String> macroFile, Pair<String, String> clientFile, (CompilationUnitImpl)=>void expectations) {
@@ -107,12 +98,21 @@ class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests
 	def compileMacroResourceSet(Pair<String, String> macroFile, Pair<String, String> clientFile) {
 		val macroURI = copyToDisk(macroProject, macroFile)
 		val clientURI = copyToDisk(clientProject, clientFile)
+		val workspaceConfig = new FileWorkspaceConfig(workspaceRoot) => [
+			addProject(macroProject)
+			addProject(clientProject)
+			projects.forEach [
+				addSourceFolder("src")
+			]
+		] 
 		
 		val macroResourceSet = resourceSetProvider.get
+		macroResourceSet.eAdapters.add(new WorkspaceConfigAdapter(workspaceConfig))
 		macroResourceSet.classpathURIContext = getClass.classLoader
 		macroResourceSet.createResource(macroURI)
 		
 		val resourceSet = resourceSetProvider.get
+		resourceSet.eAdapters.add(new WorkspaceConfigAdapter(workspaceConfig))
 		resourceSet.createResource(clientURI)
 		
 		compiler.compile(macroResourceSet) [ result |
