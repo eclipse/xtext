@@ -143,6 +143,22 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 				color: #000;
 				padding-right: 12px;
 			}
+			
+			/************* Examples for custom icons *************/
+			
+			/* For all elements of type Greeting or its subtypes */ 
+			/*
+				.Greeting-icon {
+			  		background-image: url('images/Greeting.gif');
+			  	}
+			 */
+
+			/* Only in hovers */ 
+			/*
+				.hover .Greeting-icon {
+			  		background-image: url('images/Greeting.gif');
+			  	}
+			 */
 		'''.writeToFile(fc, 'src/main/webapp/style.css')
 
 	}
