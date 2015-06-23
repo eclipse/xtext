@@ -10,17 +10,17 @@
 }
 
 .default-icon {
-	background-image: url('/images/default-icon.gif');
+	background-image: url('images/default-icon.gif');
 	background-repeat: no-repeat;
 }
 
 .error-icon {
-	background-image: url('/images/error_co.gif');
+	background-image: url('images/error_co.gif');
 	background-repeat: no-repeat;
 }
 
 .warning-icon {
-	background-image: url('/images/warning_co.gif');
+	background-image: url('images/warning_co.gif');
 	background-repeat: no-repeat;
 }
 

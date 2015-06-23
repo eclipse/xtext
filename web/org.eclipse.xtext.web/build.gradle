@@ -33,6 +33,11 @@ task downloadRequireJsPlugins {
 
 def optResources = file("$buildDir/opt-resources/META-INF/resources/xtext/${project.version}")
 
+task copyImages(type: Copy) {
+	from 'src/main/css/xtext/images'
+	into new File(optResources, 'images')
+}
+
 task optimizeOrionJs(type: NodeTask) {
 	dependsOn(npmInstall, downloadRequireJsPlugins)
 	inputs.dir new File('src/main/js')
@@ -92,5 +97,5 @@ task optimizeAceCss(type: NodeTask) {
 }
 
 sourceSets.main.resources.srcDir "$buildDir/opt-resources"
-processResources.dependsOn(optimizeOrionJs, optimizeOrionJsMin, optimizeOrionCss, optimizeAceJs, optimizeAceJsMin, optimizeAceCss)
+processResources.dependsOn(optimizeOrionJs, optimizeOrionJsMin, optimizeOrionCss, optimizeAceJs, optimizeAceJsMin, optimizeAceCss, copyImages)
 check.dependsOn(testJs)
