@@ -243,9 +243,17 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   }
   
   public void fileAdded(final VirtualFile file) {
-    long _length = file.getLength();
-    boolean _greaterThan = (_length > 0);
-    if (_greaterThan) {
+    boolean _and = false;
+    boolean _isDirectory = file.isDirectory();
+    boolean _not = (!_isDirectory);
+    if (!_not) {
+      _and = false;
+    } else {
+      long _length = file.getLength();
+      boolean _greaterThan = (_length > 0);
+      _and = _greaterThan;
+    }
+    if (_and) {
       this.enqueue(file, BuildEvent.Type.ADDED);
     } else {
       boolean _isInfoEnabled = XtextAutoBuilderComponent.LOG.isInfoEnabled();

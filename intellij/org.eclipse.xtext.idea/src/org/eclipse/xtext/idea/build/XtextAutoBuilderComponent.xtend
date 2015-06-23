@@ -194,7 +194,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	}
 
 	def void fileAdded(VirtualFile file) {
-		if (file.length > 0) {
+		if (!file.directory && file.length > 0) {
 			enqueue(file, ADDED)
 		} else {
 			if (LOG.infoEnabled)
