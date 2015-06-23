@@ -37,40 +37,6 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 	
 	static val Logger LOG = Logger.getLogger(JdtBasedProcessorProvider) 
 
-	@Accessors public static class ProcessorClassloaderAdapter extends AdapterImpl {
-		var ClassLoader classLoader
-		
-		new(ClassLoader classLoader) {
-			this.classLoader = classLoader
-		}
-
-		override isAdapterForType(Object type) {
-			type == ProcessorClassloaderAdapter
-		}
-		
-		override unsetTarget(Notifier oldTarget) {
-			discard()
-		}
-		
-		override setTarget(Notifier newTarget) {
-			if (newTarget==null) {
-				discard()
-			}
-		}
-		
-		def discard() {
-			if (classLoader instanceof Closeable) {
-				try {
-					(classLoader as Closeable).close
-					classLoader = null
-				} catch (IOException e) {
-					LOG.error(e.message, e)
-				}
-			}
-		}
-		
-	}
-
 	override getProcessorInstance(JvmType type) {
 		try {
 			val classLoader = getClassLoader(type)

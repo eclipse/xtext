@@ -43,8 +43,6 @@ public class XtendCompilerTester {
 	public static XtendCompilerTester newXtendCompilerTester(Class<?> ...classesOnClassPath) {
 		XtendCompilerTester instance = XtendInjectorSingleton.INJECTOR.getInstance(XtendCompilerTester.class);
 		instance.setJavaCompilerClassPath(classesOnClassPath);
-		ProcessorInstanceForJvmTypeProvider processorProvider = XtendInjectorSingleton.INJECTOR.getInstance(ProcessorInstanceForJvmTypeProvider.class);
-		processorProvider.setClassLoader(XtendCompilerTester.class.getClassLoader());
 		return instance;
 	}
 	

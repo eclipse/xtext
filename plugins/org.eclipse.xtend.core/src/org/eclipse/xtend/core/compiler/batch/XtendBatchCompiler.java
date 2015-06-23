@@ -63,7 +63,6 @@ import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.workspace.FileProjectConfig;
 import org.eclipse.xtext.workspace.FileWorkspaceConfig;
-import org.eclipse.xtext.workspace.IWorkspaceConfig;
 import org.eclipse.xtext.workspace.WorkspaceConfigAdapter;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfigProvider;
@@ -122,8 +121,6 @@ public class XtendBatchCompiler {
 	private GeneratorDelegate generator;
 	@Inject
 	private IndexedJvmTypeAccess indexedJvmTypeAccess;
-	@Inject
-	private ProcessorInstanceForJvmTypeProvider annotationProcessorFactory;
 	@Inject
 	private IEncodingProvider.Runtime encodingProvider;
 	@Inject
@@ -488,7 +485,6 @@ public class XtendBatchCompiler {
 			}
 			generateJavaFiles(resourceSet);
 		} finally {
-			annotationProcessorFactory.setClassLoader(null);
 			destroyClassLoader(jvmTypesClassLoader);
 			destroyClassLoader(annotationProcessingClassLoader);
 			if (isDeleteTempDirectory()) {
@@ -733,7 +729,7 @@ public class XtendBatchCompiler {
 
 		// for annotation processing we need to have the compiler's classpath as a parent.
 		annotationProcessingClassLoader = createClassLoader(classpath, currentClassLoader);
-		annotationProcessorFactory.setClassLoader(annotationProcessingClassLoader);
+		resourceSet.eAdapters().add(new ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter(annotationProcessingClassLoader));
 	}
 	
 	private static final Function<String, File> TO_FILE = new Function<String, File>() {

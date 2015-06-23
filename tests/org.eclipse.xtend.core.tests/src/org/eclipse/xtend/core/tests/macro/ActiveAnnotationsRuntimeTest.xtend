@@ -8,7 +8,6 @@ import java.nio.charset.Charset
 import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.core.macro.AnnotationProcessor
-import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
 import org.eclipse.xtend.core.validation.IssueCodes
@@ -43,7 +42,6 @@ class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests
 
 	@Inject CompilationTestHelper compiler
 	@Inject Provider<CompilationUnitImpl> compilationUnitProvider
-	@Inject ProcessorInstanceForJvmTypeProvider processorProvider
 	@Inject Provider<XtextResourceSet> resourceSetProvider;
 	@Inject ValidationTestHelper validator
 	
@@ -118,7 +116,6 @@ class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests
 		compiler.compile(macroResourceSet) [ result |
 			val classLoader = new DelegatingClassloader(getClass().classLoader, result)
 			resourceSet.classpathURIContext = classLoader
-			processorProvider.classLoader = classLoader
 			compiler.javaCompilerClassPath = classLoader 
 		]
 		
