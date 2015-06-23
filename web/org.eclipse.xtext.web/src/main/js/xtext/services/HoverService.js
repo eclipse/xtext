@@ -14,9 +14,14 @@ define(["xtext/services/AbstractXtextService", "jquery"], function(AbstractXtext
 	 */
 	function HoverService(serverUrl, resourceId) {
 		this.initialize(serverUrl, resourceId, "hover");
+		this._delay = 500
 	};
-	
+
 	HoverService.prototype = new AbstractXtextService();
+
+	HoverService.prototype.setDelay = function(delay) {
+		this._delay = delay
+	};
 
 	HoverService.prototype.computeHoverInfo = function(editorContext, params) {
 		var serverData = {
@@ -35,12 +40,17 @@ define(["xtext/services/AbstractXtextService", "jquery"], function(AbstractXtext
 		}
 
 		var deferred = new jQuery.Deferred();
+		var showTime = new Date().getTime() + this._delay;
 		this.sendRequest(editorContext, {
 			type : httpMethod,
 			data : serverData,
 			success : function(result) {
-				if (result && !result.conflict) 
-					deferred.resolve(editorContext.translateHoverInfo(result));
+				if (result && !result.conflict) {
+					var remainingTimeout = Math.max(0, showTime - new Date().getTime())
+					setTimeout(function() {
+						deferred.resolve(editorContext.translateHoverInfo(result));
+					}, remainingTimeout);
+				}
 				else
 					deferred.resolve(null);
 			}
