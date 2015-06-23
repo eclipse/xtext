@@ -11,14 +11,17 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.ISourceFolder;
 import org.eclipse.xtext.workspace.IWorkspaceConfig;
 import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
 
+import com.google.inject.Inject;
+
 public class DefaultTraceURIConverter implements ITraceURIConverter {
+	
+	@Inject(optional = true) 
+	private IWorkspaceConfigProvider configProvider;
 
 	@Override
 	public URI getURIForTrace(IProjectConfig projectConfig, URI qualifiedUri) {
@@ -31,15 +34,11 @@ public class DefaultTraceURIConverter implements ITraceURIConverter {
 
 	@Override
 	public URI getURIForTrace(Resource resource) {
-		if (resource instanceof XtextResource) {
-			IResourceServiceProvider serviceProvider = ((XtextResource) resource).getResourceServiceProvider();
-			IWorkspaceConfigProvider configProvider = serviceProvider.get(IWorkspaceConfigProvider.class);
-			if (configProvider != null) {
-				IWorkspaceConfig workspaceConfig = configProvider.getWorkspaceConfig(resource.getResourceSet());
-				IProjectConfig projectConfig = workspaceConfig.findProjectContaining(resource.getURI());
-				if (projectConfig != null) {
-					return getURIForTrace(projectConfig, resource.getURI());
-				}
+		if (configProvider != null) {
+			IWorkspaceConfig workspaceConfig = configProvider.getWorkspaceConfig(resource.getResourceSet());
+			IProjectConfig projectConfig = workspaceConfig.findProjectContaining(resource.getURI());
+			if (projectConfig != null) {
+				return getURIForTrace(projectConfig, resource.getURI());
 			}
 		}
 		return getUriForTrace(resource.getURI());
