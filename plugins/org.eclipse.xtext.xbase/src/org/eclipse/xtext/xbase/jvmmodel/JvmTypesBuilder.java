@@ -79,6 +79,7 @@ import com.google.inject.Inject;
  * 
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein
+ * @author Lorenzo Bettini - https://bugs.eclipse.org/bugs/show_bug.cgi?id=468641
  * 
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
@@ -738,12 +739,7 @@ public class JvmTypesBuilder {
 			return null;
 		JvmOperation result = typesFactory.createJvmOperation();
 		result.setVisibility(JvmVisibility.PUBLIC);
-		String prefix = "get";
-		if (typeRef != null && !typeRef.eIsProxy() && !InferredTypeIndicator.isInferred(typeRef) 
-				&& typeRef.getType()!=null 
-				&& !typeRef.getType().eIsProxy() && "boolean".equals(typeRef.getType().getIdentifier())) {
-			prefix = "is";
-		}
+		String prefix = (isPrimitiveBoolean(typeRef) ? "is" : "get");
 		result.setSimpleName(prefix + Strings.toFirstUpper(propertyName));
 		result.setReturnType(cloneWithProxies(typeRef));
 		setBody(result, new Procedures.Procedure1<ITreeAppendable>() {
@@ -758,6 +754,19 @@ public class JvmTypesBuilder {
 			}
 		});
 		return associate(sourceElement, result);
+	}
+
+	/**
+	 * Detects whether the type reference refers to primitive boolean.
+	 * 
+	 * @since 2.9
+	 */
+	protected boolean isPrimitiveBoolean(JvmTypeReference typeRef) {
+		if (InferredTypeIndicator.isInferred(typeRef)) {
+			return false;
+		}
+		
+		return typeRef.getType() != null && !typeRef.getType().eIsProxy() && "boolean".equals(typeRef.getType().getIdentifier());
 	}
 
 	/**
@@ -788,7 +797,7 @@ public class JvmTypesBuilder {
 		result.setVisibility(JvmVisibility.PUBLIC);
 		result.setReturnType(references.getTypeForName(Void.TYPE,sourceElement));
 		result.setSimpleName("set" + Strings.toFirstUpper(propertyName));
-		result.getParameters().add(toParameter(sourceElement, propertyName, cloneWithProxies(typeRef)));
+		result.getParameters().add(toParameter(sourceElement, propertyName, typeRef));
 		setBody(result, new Procedures.Procedure1<ITreeAppendable>() {
 			@Override
 			public void apply(/* @Nullable */ ITreeAppendable p) {
