@@ -17,6 +17,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
@@ -31,7 +32,10 @@ import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
 import org.eclipse.xtext.generator.trace.TraceNotFoundException;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.ui.workspace.EclipseProjectConfig;
+import org.eclipse.xtext.ui.workspace.EclipseWorkspaceConfigProvider;
 
 import com.google.common.io.Closeables;
 import com.google.inject.Inject;
@@ -67,7 +71,7 @@ public class TraceForStorageProvider implements ITraceForStorageProvider {
 	private TraceFileNameProvider traceFileNameProvider;
 	
 	@Inject
-	private ITraceURIConverter traceURIConverter;
+	private IResourceServiceProvider.Registry serviceRegistry;
 	
 	@Inject
 	private CachedTraces cachedTraces;
@@ -186,6 +190,11 @@ public class TraceForStorageProvider implements ITraceForStorageProvider {
 					StorageAwareTrace result = traceToSourceProvider.get();
 					result.setLocalStorage(sourceResource);
 					final URI sourceFileURI = storage2UriMapper.getUri(sourceResource);
+					IProject containingProject = sourceFile.getProject();
+					IResourceServiceProvider serviceProvider = serviceRegistry.getResourceServiceProvider(sourceFileURI);
+					EclipseWorkspaceConfigProvider configProvider = serviceProvider.get(EclipseWorkspaceConfigProvider.class);
+					final EclipseProjectConfig projectConfig = configProvider == null ? null : configProvider.getProjectConfig(containingProject);
+					final ITraceURIConverter traceURIConverter = serviceProvider.get(ITraceURIConverter.class);
 					result.setTraceRegionProvider(new ITraceRegionProvider() {
 						@Override
 						public AbstractTraceRegion getTraceRegion() {
@@ -199,10 +208,12 @@ public class TraceForStorageProvider implements ITraceForStorageProvider {
 									AbstractTraceRegion traceRegion = cachedTraces.getTraceRegion(traceFile);
 									IPath generatedFilePath = generatedFileForTraceFile.getFullPath();
 									URI generatedFileURI = URI.createPlatformResourceURI(generatedFilePath.toString(), true);
-									URI sourceUriForTrace = traceURIConverter.getURIForTrace(sourceFileURI);
-									URI generatedUriForTrace = traceURIConverter.getURIForTrace(generatedFileURI);
-									if(sourceUriForTrace != null && generatedUriForTrace != null)
-										result.addAll(traceRegion.invertFor(sourceUriForTrace, generatedUriForTrace));
+									if (projectConfig != null) {
+										URI sourceUriForTrace = traceURIConverter.getURIForTrace(projectConfig, sourceFileURI);
+										URI generatedUriForTrace = traceURIConverter.getURIForTrace(projectConfig, generatedFileURI);
+										if(sourceUriForTrace != null && generatedUriForTrace != null)
+											result.addAll(traceRegion.invertFor(sourceUriForTrace, generatedUriForTrace));
+									}
 								}
 							}
 							if (result.isEmpty()) 

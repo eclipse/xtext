@@ -14,12 +14,13 @@ import org.eclipse.xtend.lib.macro.CodeGenerationContext
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
-import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport
-import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.junit4.TemporaryFolder
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
 import org.junit.Rule
 import org.junit.Test
+import java.io.File
+import com.google.common.io.Files
+import java.nio.charset.Charset
 
 /**
  * @author svenefftinge - Initial contribution and API
@@ -27,19 +28,21 @@ import org.junit.Test
 class AnnotationTestingTest extends AbstractXtendCompilerTest {
 	
 	@Rule @Inject public TemporaryFolder temporaryFolder
-	@Inject protected extension MutableFileSystemSupport fileSystemSupport
 	
 	@Test def void testPath() {
-		new Path("/"+CompilationTestHelper.PROJECT_NAME+"/res/template.txt").contents = '''
+		val sourceFileUri = compilationTestHelper.copyToWorkspace(CompilationTestHelper.PROJECT_NAME+"/res/template.txt", '''
 			foo,bar,baz
-		'''
+		''')
 		'''@org.eclipse.xtend.core.tests.compiler.MyAnnotation class Foo {}'''.compile [
 			val compiledClass = it.compiledClass
 			assertEquals(3,compiledClass.declaredFields.size)
 			assertTrue(compiledClass.declaredFields.exists[name=='foo'])
 			assertTrue(compiledClass.declaredFields.exists[name=='bar'])
 			assertTrue(compiledClass.declaredFields.exists[name=='baz'])
-			assertEquals("foo|bar|baz",new Path("/"+CompilationTestHelper.PROJECT_NAME+"/xtend-gen/out.txt").contents.toString.trim)
+			val targetFileUri = sourceFileUri.trimSegments(2).appendSegment("xtend-gen").appendSegment("out.txt")
+			val targetFile = new File (targetFileUri.toFileString)
+			val result = Files.toString(targetFile, Charset.defaultCharset)
+			assertEquals("foo|bar|baz",result.trim)
 		]
 	}
 }

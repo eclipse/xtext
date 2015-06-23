@@ -27,11 +27,11 @@ import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.generator.trace.LocationData;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.ILocationInFileProviderExtension;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.TextRegionWithLineInformation;
+import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
@@ -135,20 +135,20 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		this.state = state;
 		this.traceURIConverter = new ITraceURIConverter() {
 			
-			private Map<XtextResource, URI> uriForTraceCache = newHashMap();
+			private Map<Resource, URI> uriForTraceCache = newHashMap();
 			
 			@Override
-			public URI getURIForTrace(URI uri) {
-				return converter.getURIForTrace(uri);
+			public URI getURIForTrace(IProjectConfig config, URI uri) {
+				return converter.getURIForTrace(config, uri);
 			}
-			
+
 			@Override
-			public URI getURIForTrace(XtextResource context) {
-				if (!uriForTraceCache.containsKey(context)) {
-					URI uriForTrace = converter.getURIForTrace(context);
-					uriForTraceCache.put(context, uriForTrace);
+			public URI getURIForTrace(Resource resource) {
+				if (!uriForTraceCache.containsKey(resource)) {
+					URI uriForTrace = converter.getURIForTrace(resource);
+					uriForTraceCache.put(resource, uriForTrace);
 				}
-				return uriForTraceCache.get(context);
+				return uriForTraceCache.get(resource);
 			}
 		};
 		this.locationProvider = locationProvider;
@@ -311,12 +311,12 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 	}
 	
 	protected static ILocationData createLocationData(ITraceURIConverter converter, EObject object, ITextRegionWithLineInformation textRegion) {
-		URI uri = null;
 		Resource resource = object.eResource();
-		if (resource instanceof XtextResource) {
-			uri = converter.getURIForTrace((XtextResource) resource);
+		URI uriForTrace = null;
+		if (converter != null) {
+			uriForTrace = converter.getURIForTrace(resource);
 		}
-		ILocationData newData = new LocationData(textRegion, uri);
+		ILocationData newData = new LocationData(textRegion, uriForTrace);
 		return newData;
 	}
 

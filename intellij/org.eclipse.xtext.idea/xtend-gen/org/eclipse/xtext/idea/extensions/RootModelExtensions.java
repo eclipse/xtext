@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.idea.extensions;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ContentEntry;
@@ -34,6 +35,18 @@ public class RootModelExtensions {
     };
     List<List<SourceFolder>> _map = ListExtensions.<ContentEntry, List<SourceFolder>>map(((List<ContentEntry>)Conversions.doWrapArray(_contentEntries)), _function);
     return Iterables.<SourceFolder>concat(_map);
+  }
+  
+  public static Iterable<SourceFolder> getExistingSourceFolders(final Module module) {
+    Iterable<SourceFolder> _sourceFolders = RootModelExtensions.getSourceFolders(module);
+    final Function1<SourceFolder, Boolean> _function = new Function1<SourceFolder, Boolean>() {
+      @Override
+      public Boolean apply(final SourceFolder it) {
+        VirtualFile _file = it.getFile();
+        return Boolean.valueOf((!Objects.equal(_file, null)));
+      }
+    };
+    return IterableExtensions.<SourceFolder>filter(_sourceFolders, _function);
   }
   
   public static String getRelativePath(final SourceFolder sourceFolder) {

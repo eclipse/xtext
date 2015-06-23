@@ -23,6 +23,7 @@ import org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider
 import org.eclipse.xtext.ide.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper
 import org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper
 import org.eclipse.xtext.idea.common.types.StubTypeProviderFactory
+import org.eclipse.xtext.idea.filesystem.IdeaWorkspaceConfigProvider
 import org.eclipse.xtext.idea.highlighting.DefaultPairedBraceMatcher
 import org.eclipse.xtext.idea.highlighting.DefaultSyntaxHighlighter
 import org.eclipse.xtext.idea.parser.AntlrDelegatingIdeaLexer
@@ -42,6 +43,7 @@ import org.eclipse.xtext.resource.containers.IAllContainersState
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.eclipse.xtext.service.AbstractGenericModule
 import org.eclipse.xtext.service.SingletonBinding
+import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -125,5 +127,9 @@ class DefaultIdeaModule extends AbstractGenericModule {
 	
 	def Class<? extends IAllContainersState.Provider> bindIallContainerState$Provider() {
 		IdeaAllContainerStateProvider
+	}
+	
+	def Class<? extends IWorkspaceConfigProvider> bindWorkspaceConfigProvider() {
+		IdeaWorkspaceConfigProvider
 	}
 }

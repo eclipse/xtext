@@ -27,11 +27,7 @@ class TestProperSourceFolderMapping extends AbstractActiveAnnotationTest {
 		'''
 			@org.eclipse.xtend.core.tests.macro.__GeneratedSourceModifingAnnotation
 			class MyClass {}
-		'''.compile[
-			val extension ctx = transformationContext
-			val file = compilationUnit.filePath.targetFolder.append("MyClass.java")
-			Assert.assertTrue(file.exists)
-		]
+		'''.compile[]
 	}
 }
 
@@ -40,7 +36,7 @@ annotation __GeneratedSourceModifingAnnotation {}
 
 class __GeneratedSourceModifingAnnotationProcessor extends AbstractClassProcessor {
 	override doGenerateCode(ClassDeclaration annotatedClass, extension CodeGenerationContext context) {
-		val targetFile = annotatedClass.compilationUnit.filePath.targetFolder.append(annotatedClass.qualifiedName.replace('.','/')+".java")
-		Assert.assertTrue(targetFile.exists)
+		val targetFolder = annotatedClass.compilationUnit.filePath.targetFolder
+		Assert.assertTrue(targetFolder.lastSegment == "xtend-gen")
 	}
 }

@@ -64,11 +64,11 @@ class MultiModuleTest extends PsiTestCase {
 			class MyClass {
 			}
 		''')
-		val generatedReferencing = referencing.virtualFile.parent.findChild('src-gen').findChild('OtherClass.java')
-		val generatedReferenced = referenced.virtualFile.parent.findChild('src-gen').findChild('MyClass.java')
+		val generatedReferencing = referencing.virtualFile.parent.findChild('xtend-gen').findChild('OtherClass.java')
+		val generatedReferenced = referenced.virtualFile.parent.findChild('xtend-gen').findChild('MyClass.java')
 		assertNotNull(generatedReferencing)
 		assertNotNull(generatedReferenced)
-		assertNull(referenced.virtualFile.parent.findChild('src-gen').findChild('OtherClass.java'))
+		assertNull(referenced.virtualFile.parent.findChild('xtend-gen').findChild('OtherClass.java'))
 		
 		assertFileContains(generatedReferencing,'''
 			public class OtherClass /* implements MyClass  */{

@@ -14,8 +14,6 @@ import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.outline.actions.IOutlineContribution;
-import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
-import org.eclipse.xtext.xbase.ui.file.EclipseFileSystemSupportImpl;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -49,9 +47,5 @@ public class DomainmodelUiModule extends AbstractDomainmodelUiModule {
 	
 	public Class<? extends IContextualOutputConfigurationProvider> bindIContextualOutputConfigurationProvider() {
 		return EclipseOutputConfigurationProvider.class;
-	}
-	
-	public Class<? extends AbstractFileSystemSupport> bindAbstractFileSystemSupport() {
-		return EclipseFileSystemSupportImpl.class;
 	}
 }

@@ -25,6 +25,7 @@ import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.TextRegionWithLineInformation;
+import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
@@ -283,15 +284,15 @@ public class TreeAppendableTest extends Assert implements ILocationInFileProvide
 	public EObject getPrimarySourceElement(EObject jvmElement) {
 		return null;
 	}
-
+	
 	@Override
-	public URI getURIForTrace(XtextResource context) {
-		return context.getURI();
+	public URI getURIForTrace(IProjectConfig projectConfig, URI qualifiedUri) {
+		return qualifiedUri;
 	}
-
+	
 	@Override
-	public URI getURIForTrace(URI uri) {
-		return uri;
+	public URI getURIForTrace(Resource resource) {
+		return resource.getURI();
 	}
 
 	@Override

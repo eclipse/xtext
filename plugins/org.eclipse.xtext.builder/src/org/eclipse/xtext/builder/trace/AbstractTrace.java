@@ -31,6 +31,8 @@ import org.eclipse.xtext.generator.trace.TraceRegion;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.ui.workspace.EclipseProjectConfig;
+import org.eclipse.xtext.ui.workspace.EclipseWorkspaceConfigProvider;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 
@@ -87,9 +89,6 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 	
 	@Inject
 	private IWorkspace workspace;
-	
-	@Inject
-	private ITraceURIConverter traceURIConverter;
 
 	private AbstractTraceRegion rootTraceRegion;
 	
@@ -312,10 +311,17 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 	}
 	
 	protected boolean isAssociatedWith(AbstractTraceRegion region, URI uri) {
-		URI convertedUri = traceURIConverter.getURIForTrace(uri);
-		if (convertedUri.equals(region.getAssociatedPath()))
-			return true;
-		return false;
+		EclipseWorkspaceConfigProvider configProvider = getService(uri, EclipseWorkspaceConfigProvider.class);
+		if (configProvider == null) {
+			return false;
+		}
+		EclipseProjectConfig projectConfig = configProvider.getProjectConfig(getLocalProject());
+		if (projectConfig == null) {
+			return false;
+		}
+		ITraceURIConverter traceURIConverter = getService(uri, ITraceURIConverter.class);
+		URI convertedUri = traceURIConverter.getURIForTrace(projectConfig, uri);
+		return convertedUri.equals(region.getAssociatedPath());
 	}
 	
 	/* @Nullable */
