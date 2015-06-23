@@ -939,7 +939,7 @@ public class TestBatchCompiler {
     this.batchCompiler.setOutputPath(customOutput);
     boolean _compile = this.batchCompiler.compile();
     Assert.assertTrue(_compile);
-    File _file_3 = new File((wsRootPath + "/plain-folder/bin/Test.txt"));
+    File _file_3 = new File((wsRootPath + "/plain-folder/target/Test.txt"));
     boolean _exists = _file_3.exists();
     Assert.assertTrue(_exists);
     File _file_4 = new File(customOutput);

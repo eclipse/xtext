@@ -444,7 +444,7 @@ class TestBatchCompiler {
         val customOutput = wsRootPath + "/plain-folder/target"
         batchCompiler.outputPath = customOutput
         assertTrue(batchCompiler.compile)
-        assertTrue(new File(wsRootPath + "/plain-folder/bin/Test.txt").exists)
+        assertTrue(new File(wsRootPath + "/plain-folder/target/Test.txt").exists)
         assertEquals(2, new File(customOutput).list[dir, name|name.endsWith(".java")].size)
         assertEquals(2, new File(customOutput).list[dir, name|name.endsWith("._trace")].size)
 
