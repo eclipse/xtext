@@ -25,7 +25,7 @@ public class DefaultTraceURIConverter implements ITraceURIConverter {
 
 	@Override
 	public URI getURIForTrace(IProjectConfig projectConfig, URI qualifiedUri) {
-		ISourceFolder sourceFolder = projectConfig.findSourceFolderContaing(qualifiedUri);
+		ISourceFolder sourceFolder = projectConfig.findSourceFolderContaining(qualifiedUri);
 		if (sourceFolder != null) {
 			return qualifiedUri.deresolve(sourceFolder.getPath());
 		}

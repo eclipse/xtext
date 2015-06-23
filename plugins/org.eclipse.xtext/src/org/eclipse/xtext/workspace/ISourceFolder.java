@@ -16,7 +16,7 @@ public interface ISourceFolder {
 	String getName();
 
 	/**
-	 * The (platform dependant) physical location of the source folder. The path will always end in a trailing
+	 * The (platform dependent) physical location of the source folder. The path will always end in a trailing
 	 * separator. It will never be null.
 	 */
 	URI getPath();

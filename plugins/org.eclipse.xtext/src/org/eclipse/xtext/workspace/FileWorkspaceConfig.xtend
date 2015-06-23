@@ -37,8 +37,8 @@ class FileWorkspaceConfig implements IWorkspaceConfig {
 		else 
 			path.appendSegment("")
 	}
-
-	override Set<FileProjectConfig> getProjects() {
+	
+	def getProjects() {
 		projects.values.toSet
 	}
 
@@ -75,7 +75,7 @@ class FileProjectConfig implements IProjectConfig {
 		sourceFolder
 	}
 
-	override FileSourceFolder findSourceFolderContaing(URI member) {
+	override FileSourceFolder findSourceFolderContaining(URI member) {
 		sourceFolders.findFirst[source|source.path.isPrefixOf(member)]
 	}
 

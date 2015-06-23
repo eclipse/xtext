@@ -19,9 +19,4 @@ class NullWorkspaceConfig implements IWorkspaceConfig {
 	override findProjectContaining(URI member) {
 		null
 	}
-	
-	override getProjects() {
-		emptySet
-	}
-	
 }

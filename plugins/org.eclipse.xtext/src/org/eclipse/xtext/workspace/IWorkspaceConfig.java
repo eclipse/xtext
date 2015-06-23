@@ -7,13 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.workspace;
 
-import java.util.Set;
-
 import org.eclipse.emf.common.util.URI;
 
 public interface IWorkspaceConfig {
-	Set<? extends IProjectConfig> getProjects();
-
 	/**
 	 * @return the project whose source folders physically contain this member or null if none was found
 	 */
