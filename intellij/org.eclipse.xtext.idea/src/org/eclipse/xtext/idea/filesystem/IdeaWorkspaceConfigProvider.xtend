@@ -84,7 +84,7 @@ class IdeaModuleConfig implements IProjectConfig {
 		val sourceRoot = ProjectRootManager.getInstance(module.project).fileIndex.getSourceRootForFile(file)
 		if (sourceRoot == null)
 			return null
-		val sourceFolder = module.existingSourceFolders.findFirst[file == sourceRoot]
+		val sourceFolder = module.existingSourceFolders.findFirst[folder|folder.file == sourceRoot]
 		if (sourceFolder == null)
 			return null
 		return new IdeaSourceFolder(sourceFolder)

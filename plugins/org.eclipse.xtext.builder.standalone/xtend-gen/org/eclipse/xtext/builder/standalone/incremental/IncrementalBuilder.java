@@ -51,6 +51,10 @@ import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.workspace.IProjectConfig;
+import org.eclipse.xtext.workspace.ISourceFolder;
+import org.eclipse.xtext.workspace.IWorkspaceConfig;
+import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -266,6 +270,7 @@ public class IncrementalBuilder {
       }
       URI _uRI_1 = resource.getURI();
       final Set<URI> previous = newMappings.deleteSource(_uRI_1);
+      final IWorkspaceConfigProvider wsConfProvider = serviceProvider.<IWorkspaceConfigProvider>get(IWorkspaceConfigProvider.class);
       URIBasedFileSystemAccess _uRIBasedFileSystemAccess = new URIBasedFileSystemAccess();
       final Procedure1<URIBasedFileSystemAccess> _function = new Procedure1<URIBasedFileSystemAccess>() {
         @Override
@@ -285,6 +290,17 @@ public class IncrementalBuilder {
           ResourceSet _resourceSet = resource.getResourceSet();
           URIConverter _uRIConverter = _resourceSet.getURIConverter();
           it.setConverter(_uRIConverter);
+          ResourceSet _resourceSet_1 = resource.getResourceSet();
+          IWorkspaceConfig _workspaceConfig = wsConfProvider.getWorkspaceConfig(_resourceSet_1);
+          URI _uRI = resource.getURI();
+          IProjectConfig _findProjectContaining = _workspaceConfig.findProjectContaining(_uRI);
+          URI _uRI_1 = resource.getURI();
+          final ISourceFolder srcFolder = _findProjectContaining.findSourceFolderContaining(_uRI_1);
+          boolean _notEquals = (!Objects.equal(srcFolder, null));
+          if (_notEquals) {
+            String _name = srcFolder.getName();
+            it.setCurrentSource(_name);
+          }
           final URIBasedFileSystemAccess.BeforeWrite _function_1 = new URIBasedFileSystemAccess.BeforeWrite() {
             @Override
             public InputStream beforeWrite(final URI uri, final InputStream contents) {

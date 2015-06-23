@@ -14,12 +14,17 @@ import com.intellij.facet.Facet;
 import com.intellij.facet.FacetManager;
 import com.intellij.facet.FacetTypeId;
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.roots.ContentEntry;
+import com.intellij.openapi.roots.SourceFolder;
+import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 import java.util.Set;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
+import org.eclipse.xtext.idea.extensions.RootModelExtensions;
 import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 import org.eclipse.xtext.idea.facet.GeneratorConfigurationState;
@@ -33,11 +38,6 @@ public class IdeaOutputConfigurationProvider implements IContextualOutputConfigu
   @Inject(optional = true)
   private AbstractFacetType<AbstractFacetConfiguration> languageFacet;
   
-  public final static String TEST_OUTPUT = "TEST_OUTPUT";
-  
-  /**
-   * TODO need a delegate to default output configs
-   */
   @Override
   public Set<OutputConfiguration> getOutputConfigurations(final Resource context) {
     boolean _equals = Objects.equal(this.languageFacet, null);
@@ -50,15 +50,42 @@ public class IdeaOutputConfigurationProvider implements IContextualOutputConfigu
       FacetManager _instance = FacetManager.getInstance(((Module)module));
       FacetTypeId<Facet<AbstractFacetConfiguration>> _id = this.languageFacet.getId();
       final Facet<AbstractFacetConfiguration> facet = _instance.<Facet<AbstractFacetConfiguration>>getFacetByType(_id);
-      AbstractFacetConfiguration _configuration = facet.getConfiguration();
-      final GeneratorConfigurationState generatorConf = _configuration.getState();
-      final OutputConfiguration defOut = new OutputConfiguration(IFileSystemAccess.DEFAULT_OUTPUT);
-      String _outputDirectory = generatorConf.getOutputDirectory();
-      defOut.setOutputDirectory(_outputDirectory);
-      final OutputConfiguration testOut = new OutputConfiguration(IdeaOutputConfigurationProvider.TEST_OUTPUT);
-      String _testOutputDirectory = generatorConf.getTestOutputDirectory();
-      testOut.setOutputDirectory(_testOutputDirectory);
-      return Sets.<OutputConfiguration>newHashSet(defOut, testOut);
+      boolean _notEquals = (!Objects.equal(facet, null));
+      if (_notEquals) {
+        AbstractFacetConfiguration _configuration = facet.getConfiguration();
+        final GeneratorConfigurationState generatorConf = _configuration.getState();
+        final OutputConfiguration defOut = new OutputConfiguration(IFileSystemAccess.DEFAULT_OUTPUT);
+        String _outputDirectory = generatorConf.getOutputDirectory();
+        defOut.setOutputDirectory(_outputDirectory);
+        boolean _isCreateDirectory = generatorConf.isCreateDirectory();
+        defOut.setCreateOutputDirectory(_isCreateDirectory);
+        boolean _isDeleteGenerated = generatorConf.isDeleteGenerated();
+        defOut.setCanClearOutputDirectory(_isDeleteGenerated);
+        boolean _isOverwriteExisting = generatorConf.isOverwriteExisting();
+        defOut.setOverrideExistingResources(_isOverwriteExisting);
+        defOut.setUseOutputPerSourceFolder(true);
+        final Iterable<SourceFolder> allSrcFolders = RootModelExtensions.getSourceFolders(((Module)module));
+        for (final SourceFolder srcFolder : allSrcFolders) {
+          {
+            ContentEntry _contentEntry = srcFolder.getContentEntry();
+            VirtualFile _file = _contentEntry.getFile();
+            VirtualFile _file_1 = srcFolder.getFile();
+            String _path = VfsUtil.getPath(_file, _file_1, '/');
+            final OutputConfiguration.SourceMapping mapping = new OutputConfiguration.SourceMapping(_path);
+            boolean _isTestSource = srcFolder.isTestSource();
+            if (_isTestSource) {
+              String _testOutputDirectory = generatorConf.getTestOutputDirectory();
+              mapping.setOutputDirectory(_testOutputDirectory);
+            } else {
+              String _outputDirectory_1 = generatorConf.getOutputDirectory();
+              mapping.setOutputDirectory(_outputDirectory_1);
+            }
+            Set<OutputConfiguration.SourceMapping> _sourceMappings = defOut.getSourceMappings();
+            _sourceMappings.add(mapping);
+          }
+        }
+        return Sets.<OutputConfiguration>newHashSet(defOut);
+      }
     }
     return Sets.<OutputConfiguration>newHashSet();
   }

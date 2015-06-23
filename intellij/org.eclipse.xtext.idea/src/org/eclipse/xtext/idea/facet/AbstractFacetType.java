@@ -11,6 +11,8 @@ import javax.swing.Icon;
 
 import org.eclipse.xtext.idea.Icons;
 
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.intellij.facet.Facet;
 import com.intellij.facet.FacetConfiguration;
 import com.intellij.facet.FacetType;
@@ -22,6 +24,7 @@ import com.intellij.openapi.module.ModuleType;
  * @author dhuebner - Initial contribution and API
  */
 public abstract class AbstractFacetType<C extends FacetConfiguration> extends FacetType<Facet<C>, C> {
+	private @Inject Provider<C> facetConfiguration;
 
 	public AbstractFacetType(FacetTypeId<Facet<C>> id, String stringId, String presentableName) {
 		super(id, stringId, presentableName);
@@ -37,6 +40,11 @@ public abstract class AbstractFacetType<C extends FacetConfiguration> extends Fa
 	@Override
 	public boolean isSuitableModuleType(ModuleType moduleType) {
 		return true;
+	}
+
+	@Override
+	public C createDefaultConfiguration() {
+		return facetConfiguration.get();
 	}
 
 	@Override

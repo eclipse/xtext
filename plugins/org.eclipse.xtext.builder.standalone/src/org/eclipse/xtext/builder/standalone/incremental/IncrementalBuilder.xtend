@@ -28,6 +28,7 @@ import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.CheckMode
+import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -46,7 +47,7 @@ import org.eclipse.xtext.validation.CheckMode
 		@Accessors(PROTECTED_SETTER) BuildRequest request
 	
 		@Inject Indexer indexer
-	
+		
 		def Result launch() {
 			val newSource2GeneratedMapping = request.previousState.fileMappings.copy
 			request.deletedFiles.forEach [
@@ -100,13 +101,17 @@ import org.eclipse.xtext.validation.CheckMode
 			}
 //			LOG.info("Starting generator for input: '" + resource.URI.lastSegment + "'");
 			val previous = newMappings.deleteSource(resource.URI)
+			val  wsConfProvider = serviceProvider.get(IWorkspaceConfigProvider)
+			
 			val fileSystemAccess = new URIBasedFileSystemAccess() => [
 				val outputConfigProvider = serviceProvider.get(IContextualOutputConfigurationProvider)
 				outputConfigurations = outputConfigProvider.getOutputConfigurations(resource).toMap[name]
-				
 				baseDir = request.baseDir
 				converter = resource.resourceSet.URIConverter
-				
+				val srcFolder = wsConfProvider.getWorkspaceConfig(resource.resourceSet).findProjectContaining(resource.URI).findSourceFolderContaining(resource.URI)
+				if(srcFolder != null) {
+					currentSource = srcFolder.name
+				}
 				beforeWrite = [ uri, contents |
 					newMappings.addSource2Generated(resource.URI, uri)
 					previous.remove(uri)

@@ -7,8 +7,6 @@
  */
 package org.eclipse.xtext.idea.sdomain.idea.facet;
 
-import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.intellij.facet.Facet;
 import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
@@ -24,16 +22,8 @@ public class SDomainFacetType extends AbstractFacetType<AbstractFacetConfigurati
   
   public final static FacetTypeId<Facet<AbstractFacetConfiguration>> TYPEID = new FacetTypeId<Facet<AbstractFacetConfiguration>>(SDomainFacetType.TYPE_ID_STRING);
   
-  @Inject
-  private Provider<AbstractFacetConfiguration> facetConfiguration;
-  
   public SDomainFacetType() {
     super(SDomainFacetType.TYPEID, SDomainFacetType.TYPE_ID_STRING, "SDomain");
     SDomainLanguage.INSTANCE.injectMembers(this);
-  }
-  
-  @Override
-  public AbstractFacetConfiguration createDefaultConfiguration() {
-    return this.facetConfiguration.get();
   }
 }
