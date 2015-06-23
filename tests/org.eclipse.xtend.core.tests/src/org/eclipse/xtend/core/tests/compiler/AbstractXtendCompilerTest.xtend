@@ -8,7 +8,6 @@
 package org.eclipse.xtend.core.tests.compiler
 
 import com.google.inject.Inject
-import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.generator.IFilePostProcessor
@@ -28,14 +27,12 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 	@Inject protected IGeneratorConfigProvider generatorConfigProvider
 	@Inject protected IFilePostProcessor postProcessor
 	@Inject protected extension CompilationTestHelper compilationTestHelper
-	@Inject ProcessorInstanceForJvmTypeProvider processorProvider
 	
 	protected boolean useJavaCompiler = false
 	
 	@Before
 	public def setupCompiler() {
 		compilationTestHelper.javaCompilerClassPath = class.classLoader
-		processorProvider.classLoader = class.classLoader
 	}
 	
 	def void assertCompilesTo(CharSequence input, CharSequence expected) {
