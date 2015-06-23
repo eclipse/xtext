@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.ui.tests.workspace;
 
-import java.util.Set;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
@@ -18,7 +17,6 @@ import org.eclipse.xtext.ui.workspace.EclipseWorkspaceConfigProvider;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.After;
@@ -61,12 +59,8 @@ public class EclipseWorkspaceConfigurationTest {
       };
       final EclipseWorkspaceConfigProvider provider = ObjectExtensions.<EclipseWorkspaceConfigProvider>operator_doubleArrow(_eclipseWorkspaceConfigProvider, _function);
       IWorkspaceConfig _workspaceConfig = provider.getWorkspaceConfig(null);
-      final Set<? extends IProjectConfig> projects = _workspaceConfig.getProjects();
-      int _size = projects.size();
-      Assert.assertEquals(1, _size);
-      IProjectConfig _head = IterableExtensions.head(projects);
-      String _name = _head.getName();
-      Assert.assertEquals("projectA", _name);
+      final IProjectConfig project = _workspaceConfig.findProjectByName("projectA");
+      Assert.assertNotNull(project);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

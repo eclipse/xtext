@@ -50,11 +50,11 @@ public class BatchLinkableResourceStorageFacade extends ResourceStorageFacade {
     final IWorkspaceConfig workspaceConfig = this.workspaceConfigProvider.getWorkspaceConfig(_resourceSet);
     final URI uri = resource.getURI();
     final IProjectConfig project = workspaceConfig.findProjectContaining(uri);
-    ISourceFolder _findSourceFolderContaing = null;
+    ISourceFolder _findSourceFolderContaining = null;
     if (project!=null) {
-      _findSourceFolderContaing=project.findSourceFolderContaing(uri);
+      _findSourceFolderContaining=project.findSourceFolderContaining(uri);
     }
-    final ISourceFolder sourceFolder = _findSourceFolderContaing;
+    final ISourceFolder sourceFolder = _findSourceFolderContaining;
     boolean _notEquals = (!Objects.equal(sourceFolder, null));
     if (_notEquals) {
       return sourceFolder.getPath();

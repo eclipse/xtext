@@ -44,7 +44,7 @@ public class EclipseProjectConfig implements IProjectConfig {
   }
   
   @Override
-  public ISourceFolder findSourceFolderContaing(final URI member) {
+  public ISourceFolder findSourceFolderContaining(final URI member) {
     Set<? extends ISourceFolder> _sourceFolders = this.getSourceFolders();
     final Function1<ISourceFolder, Boolean> _function = new Function1<ISourceFolder, Boolean>() {
       @Override

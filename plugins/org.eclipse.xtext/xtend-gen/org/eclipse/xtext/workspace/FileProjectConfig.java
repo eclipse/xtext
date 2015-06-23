@@ -40,7 +40,7 @@ public class FileProjectConfig implements IProjectConfig {
   }
   
   @Override
-  public FileSourceFolder findSourceFolderContaing(final URI member) {
+  public FileSourceFolder findSourceFolderContaining(final URI member) {
     final Function1<FileSourceFolder, Boolean> _function = new Function1<FileSourceFolder, Boolean>() {
       @Override
       public Boolean apply(final FileSourceFolder source) {

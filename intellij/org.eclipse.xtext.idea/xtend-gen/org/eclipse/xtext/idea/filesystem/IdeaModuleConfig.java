@@ -36,7 +36,7 @@ public class IdeaModuleConfig implements IProjectConfig {
   private final Module module;
   
   @Override
-  public ISourceFolder findSourceFolderContaing(final URI member) {
+  public ISourceFolder findSourceFolderContaining(final URI member) {
     VirtualFileManager _instance = VirtualFileManager.getInstance();
     String _string = member.toString();
     final VirtualFile file = _instance.findFileByUrl(_string);

@@ -71,7 +71,6 @@ public class FileWorkspaceConfig implements IWorkspaceConfig {
     return _xblockexpression;
   }
   
-  @Override
   public Set<FileProjectConfig> getProjects() {
     Collection<FileProjectConfig> _values = this.projects.values();
     return IterableExtensions.<FileProjectConfig>toSet(_values);

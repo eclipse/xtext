@@ -8,21 +8,14 @@
 package org.eclipse.xtext.ui.workspace;
 
 import com.google.common.base.Objects;
-import java.util.List;
-import java.util.Set;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
-import org.eclipse.xtext.ui.workspace.EclipseProjectConfig;
 import org.eclipse.xtext.ui.workspace.EclipseWorkspaceConfigProvider;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.IWorkspaceConfig;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @FinalFieldsConstructor
 @SuppressWarnings("all")
@@ -58,19 +51,6 @@ public class EclipseWorkspaceConfig implements IWorkspaceConfig {
       return this.findProjectByName(_segment);
     }
     return null;
-  }
-  
-  @Override
-  public Set<? extends IProjectConfig> getProjects() {
-    IProject[] _projects = this.workspaceRoot.getProjects();
-    final Function1<IProject, EclipseProjectConfig> _function = new Function1<IProject, EclipseProjectConfig>() {
-      @Override
-      public EclipseProjectConfig apply(final IProject it) {
-        return EclipseWorkspaceConfig.this.provider.getProjectConfig(it);
-      }
-    };
-    List<EclipseProjectConfig> _map = ListExtensions.<IProject, EclipseProjectConfig>map(((List<IProject>)Conversions.doWrapArray(_projects)), _function);
-    return IterableExtensions.<EclipseProjectConfig>toSet(_map);
   }
   
   @Override

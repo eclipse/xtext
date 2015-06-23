@@ -38,9 +38,8 @@ class EclipseWorkspaceConfigurationTest {
 		val provider = new EclipseWorkspaceConfigProvider => [
 			workspaceRoot = wsroot
 		]
-		val projects = provider.getWorkspaceConfig(null).projects
-		assertEquals(1, projects.size)
-		assertEquals("projectA", projects.head.name)
+		val project = provider.getWorkspaceConfig(null).findProjectByName("projectA")
+		assertNotNull(project)
 		
 	}
 }

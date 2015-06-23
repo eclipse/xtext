@@ -18,15 +18,12 @@ import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import java.util.List;
-import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.idea.filesystem.IdeaModuleConfig;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
@@ -41,6 +38,11 @@ public class IdeaWorkspaceConfig implements IWorkspaceConfig {
     final Module module = _instance.findModuleByName(name);
     boolean _equals = Objects.equal(module, null);
     if (_equals) {
+      return null;
+    }
+    boolean _isUsable = this.isUsable(module);
+    boolean _not = (!_isUsable);
+    if (_not) {
       return null;
     }
     return new IdeaModuleConfig(module);
@@ -62,35 +64,19 @@ public class IdeaWorkspaceConfig implements IWorkspaceConfig {
     if (_equals_1) {
       return null;
     }
+    boolean _isUsable = this.isUsable(module);
+    boolean _not = (!_isUsable);
+    if (_not) {
+      return null;
+    }
     return new IdeaModuleConfig(module);
   }
   
-  @Override
-  public Set<? extends IProjectConfig> getProjects() {
-    Set<IdeaModuleConfig> _xblockexpression = null;
-    {
-      ModuleManager _instance = ModuleManager.getInstance(this.project);
-      final Module[] modules = _instance.getModules();
-      final Function1<Module, Boolean> _function = new Function1<Module, Boolean>() {
-        @Override
-        public Boolean apply(final Module it) {
-          ModuleRootManager _instance = ModuleRootManager.getInstance(it);
-          ContentEntry[] _contentEntries = _instance.getContentEntries();
-          boolean _isEmpty = ((List<ContentEntry>)Conversions.doWrapArray(_contentEntries)).isEmpty();
-          return Boolean.valueOf((!_isEmpty));
-        }
-      };
-      final Iterable<Module> usableModules = IterableExtensions.<Module>filter(((Iterable<Module>)Conversions.doWrapArray(modules)), _function);
-      final Function1<Module, IdeaModuleConfig> _function_1 = new Function1<Module, IdeaModuleConfig>() {
-        @Override
-        public IdeaModuleConfig apply(final Module it) {
-          return new IdeaModuleConfig(it);
-        }
-      };
-      Iterable<IdeaModuleConfig> _map = IterableExtensions.<Module, IdeaModuleConfig>map(usableModules, _function_1);
-      _xblockexpression = IterableExtensions.<IdeaModuleConfig>toSet(_map);
-    }
-    return _xblockexpression;
+  private boolean isUsable(final Module module) {
+    ModuleRootManager _instance = ModuleRootManager.getInstance(module);
+    ContentEntry[] _contentEntries = _instance.getContentEntries();
+    boolean _isEmpty = ((List<ContentEntry>)Conversions.doWrapArray(_contentEntries)).isEmpty();
+    return (!_isEmpty);
   }
   
   public IdeaWorkspaceConfig(final Project project) {

@@ -49,6 +49,8 @@ class IdeaWorkspaceConfig implements IWorkspaceConfig {
 		val module = ModuleManager.getInstance(project).findModuleByName(name)
 		if (module == null)
 			return null
+		if (!module.isUsable) 
+			return null
 		return new IdeaModuleConfig(module)
 	}
 
@@ -59,17 +61,15 @@ class IdeaWorkspaceConfig implements IWorkspaceConfig {
 		val module = ProjectRootManager.getInstance(project).fileIndex.getModuleForFile(file)
 		if (module == null)
 			return null
+		if (!module.isUsable) 
+			return null
 		return new IdeaModuleConfig(module)
 	}
 
-	override getProjects() {
-		val modules = ModuleManager.getInstance(project).modules
-		val usableModules = modules.filter [
-			!ModuleRootManager.getInstance(it).contentEntries.isEmpty
-		]
-		usableModules.map[new IdeaModuleConfig(it)].toSet
-	}
 
+	private def isUsable(Module module) {
+		!ModuleRootManager.getInstance(module).contentEntries.isEmpty
+	}
 }
 
 @Data
@@ -77,7 +77,7 @@ class IdeaModuleConfig implements IProjectConfig {
 
 	val Module module
 
-	override findSourceFolderContaing(URI member) {
+	override findSourceFolderContaining(URI member) {
 		val file = VirtualFileManager.instance.findFileByUrl(member.toString)
 		if (file == null)
 			return null
