@@ -8,8 +8,8 @@
 package org.eclipse.xtext.builder.standalone.incremental
 
 import com.google.inject.Inject
-import com.google.inject.Singleton
 import java.util.Collection
+import java.util.HashSet
 import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
@@ -18,18 +18,15 @@ import org.eclipse.xtext.resource.CompilerPhases
 import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.resource.IResourceDescription.Delta
 import org.eclipse.xtext.resource.IResourceDescriptions
-import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.util.internal.Log
-import java.util.HashSet
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.9 
  */
-@Singleton @Log
-class Indexer {
+@Log class Indexer {
 
 	@Inject CompilerPhases compilerPhases
 
@@ -40,8 +37,7 @@ class Indexer {
 	
 	def IndexResult computeAndIndexAffected(BuildRequest request, extension BuildContext context) {
 		val previousIndex = request.previousState.resourceDescriptions
-		val newIndex = previousIndex.copy
-		installIndex(resourceSet, newIndex)
+		val newIndex = request.newState.resourceDescriptions
 
 		// get the direct deltas
 		val List<Delta> deltas = newArrayList
@@ -63,8 +59,6 @@ class Indexer {
 		remainingURIs.removeAll(deltas.map[uri])
 		
 		val allAffected = remainingURIs.filter [
-			if (!request.belongsToThisBuildRun(it))
-				return false;
 			val manager = getResourceServiceProvider.resourceDescriptionManager
 			val resourceDescription = previousIndex.getResourceDescription(it)
 			val isAffected = resourceDescription.isAffected(manager, allDeltas, allDeltas, newIndex)
@@ -110,10 +104,6 @@ class Indexer {
 		return delta
 	}
 
-	def protected void installIndex(XtextResourceSet resourceSet, ResourceDescriptionsData index) {
-		ResourceDescriptionsData.ResourceSetAdapter.installResourceDescriptionsData(resourceSet, index)
-	}
-	
 	def protected boolean isAffected(IResourceDescription affectionCandidate, IResourceDescription.Manager manager,
 		Collection<IResourceDescription.Delta> newDeltas, Collection<IResourceDescription.Delta> allDeltas,
 		IResourceDescriptions resourceDescriptions) {
