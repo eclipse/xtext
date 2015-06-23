@@ -8,7 +8,6 @@
 package org.eclipse.xtend.idea.autobuild
 
 import com.google.common.io.CharStreams
-import com.intellij.openapi.roots.ModuleRootManager
 import com.intellij.openapi.roots.ModuleRootModificationUtil
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.testFramework.PsiTestCase
@@ -33,11 +32,11 @@ class MultiModuleTest extends PsiTestCase {
 			class MyClass {
 			}
 		''')
-		val generatedReferencing = referencing.virtualFile.parent.findChild('src-gen').findChild('OtherClass.java')
-		val generatedReferenced = referenced.virtualFile.parent.findChild('src-gen').findChild('MyClass.java')
+		val generatedReferencing = referencing.virtualFile?.parent?.findChild('xtend-gen')?.findChild('OtherClass.java')
+		val generatedReferenced = referenced.virtualFile?.parent?.findChild('xtend-gen')?.findChild('MyClass.java')
 		assertNotNull(generatedReferencing)
 		assertNotNull(generatedReferenced)
-		assertNull(referenced.virtualFile.parent.findChild('src-gen').findChild('OtherClass.java'))
+		assertNull(referenced.virtualFile.parent.findChild('xtend-gen').findChild('OtherClass.java'))
 		
 		assertFileContains(generatedReferencing,'''
 			public class OtherClass extends MyClass {

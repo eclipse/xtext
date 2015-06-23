@@ -15,7 +15,6 @@ import com.intellij.testFramework.fixtures.IdeaTestFixtureFactory
 import com.intellij.testFramework.fixtures.JavaCodeInsightTestFixture
 import com.intellij.testFramework.fixtures.JavaTestFixtureFactory
 import java.io.File
-import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.psi.impl.BaseXtextFile
 import org.eclipse.xtext.resource.IContainer
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
@@ -74,8 +73,7 @@ class ResolveScopeBasedContainerManagerTest extends PlatformTestCase {
 		super.tearDown
 	}
 	
-	//TODO implement proper all container state (see IdeaAllContainerstateProvider)
-	def void ignore_testGetContainer_01() {
+	def void testGetContainer_01() {
 		val description = new URIBasedTestResourceDescription(files.head.URI)
 		val resourceDescriptions = resourceDescriptionsProvider.getResourceDescriptions(files.head.resource)
 		val container = containerManager.getContainer(description, resourceDescriptions)
@@ -85,39 +83,34 @@ class ResolveScopeBasedContainerManagerTest extends PlatformTestCase {
 		assertNull(container.getResourceDescription(files.last.URI))
 	}
 	
-	def void ignore_testGetContainer_02() {
-		val uri = URI.createFileURI(new File('''«myFixture.tempDirPath»/module/doesNotExist''').absolutePath)
-		val description = new URIBasedTestResourceDescription(uri)
-		val resourceDescriptions = resourceDescriptionsProvider.getResourceDescriptions(files.head.resource)
+	def void testGetContainer_02() {
+		val description = new URIBasedTestResourceDescription(files.last.URI)
+		val resourceDescriptions = resourceDescriptionsProvider.getResourceDescriptions(files.last.resource)
 		val container = containerManager.getContainer(description, resourceDescriptions)
-		assertEquals(3, container.resourceDescriptions.size)
-		assertNotNull(container.getResourceDescription(uri))
-		assertNotNull(container.getResourceDescription(files.head.URI))
-		assertNotNull(container.getResourceDescription(files.get(1).URI))
-		assertNull(container.getResourceDescription(files.last.URI))
+		assertEquals(1, container.resourceDescriptions.size)
+		assertNull(container.getResourceDescription(files.head.URI))
+		assertNull(container.getResourceDescription(files.get(1).URI))
+		assertNotNull(container.getResourceDescription(files.last.URI))
 	}
 	
 	def void testGetVisibleContainers_01() {
 		val description = new URIBasedTestResourceDescription(files.head.URI)
 		val resourceDescriptions = resourceDescriptionsProvider.getResourceDescriptions(files.head.resource)
 		val visibleContainers = containerManager.getVisibleContainers(description, resourceDescriptions)
-		assertEquals(1, visibleContainers.size)
-		assertEquals(3, visibleContainers.head.resourceDescriptions.size)
+		assertEquals(2, visibleContainers.size)
+		assertEquals(2, visibleContainers.head.resourceDescriptions.size)
+		assertEquals(1, visibleContainers.get(1).resourceDescriptions.size)
 		assertNotNull(visibleContainers.head.getResourceDescription(files.head.URI))
 		assertNotNull(visibleContainers.head.getResourceDescription(files.get(1).URI))
-		assertNotNull(visibleContainers.head.getResourceDescription(files.last.URI))
+		assertNotNull(visibleContainers.get(1).getResourceDescription(files.last.URI))
 	}
 	
 	def void testGetVisibleContainers_02() {
-		val uri = URI.createFileURI(new File('''«myFixture.tempDirPath»/module/doesNotExist''').absolutePath)
-		val description = new URIBasedTestResourceDescription(uri)
-		val resourceDescriptions = resourceDescriptionsProvider.getResourceDescriptions(files.head.resource)
+		val description = new URIBasedTestResourceDescription(files.last.URI)
+		val resourceDescriptions = resourceDescriptionsProvider.getResourceDescriptions(files.last.resource)
 		val visibleContainers = containerManager.getVisibleContainers(description, resourceDescriptions)
 		assertEquals(1, visibleContainers.size)
-		assertEquals(4, visibleContainers.head.resourceDescriptions.size)
-		assertNotNull(visibleContainers.head.getResourceDescription(uri))
-		assertNotNull(visibleContainers.head.getResourceDescription(files.head.URI))
-		assertNotNull(visibleContainers.head.getResourceDescription(files.get(1).URI))
+		assertEquals(1, visibleContainers.head.resourceDescriptions.size)
 		assertNotNull(visibleContainers.head.getResourceDescription(files.last.URI))
 	}
 

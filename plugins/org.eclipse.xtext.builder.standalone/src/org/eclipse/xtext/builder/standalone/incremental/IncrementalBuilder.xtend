@@ -48,7 +48,7 @@ import org.eclipse.xtext.validation.CheckMode
 		@Inject Indexer indexer
 	
 		def Result launch() {
-			val newSource2GeneratedMapping = request.previousState.fileMappings.copy
+			val newSource2GeneratedMapping = request.newState.fileMappings
 			request.deletedFiles.forEach [
 				newSource2GeneratedMapping.deleteSource(it).forEach [
 					if (LOG.isInfoEnabled)
@@ -79,7 +79,7 @@ import org.eclipse.xtext.validation.CheckMode
 					val old = request.previousState.resourceDescriptions.getResourceDescription(resource.URI)
 					return manager.createDelta(old, copiedDescription)
 				]
-			return new Result(new IndexState(result.newIndex, newSource2GeneratedMapping), resolvedDeltas)
+			return new Result(request.newState, resolvedDeltas)
 		}
 		
 		def protected boolean validate(Resource resource) {
