@@ -25,11 +25,14 @@ import org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
+import org.eclipse.xtext.idea.common.types.DerivedMemberAwarePsiModelAssociations;
 import org.eclipse.xtext.idea.presentation.ItemPresentationProvider;
 import org.eclipse.xtext.idea.structureview.XtextFileAwareStructureViewBuilder;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.parser.antlr.LexerProvider;
+import org.eclipse.xtext.psi.IPsiModelAssociations;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
+import org.eclipse.xtext.service.LanguageSpecific;
 import org.eclipse.xtext.service.SingletonBinding;
 
 import com.google.inject.Binder;
@@ -38,6 +41,11 @@ import com.intellij.openapi.util.Key;
 import com.intellij.psi.util.PsiModificationTracker;
 
 public class XtendIdeaModule extends AbstractXtendIdeaModule {
+	
+	@Override
+	public void configureLanguageSpecificPsiModelAssociations(Binder binder) {
+		binder.bind(IPsiModelAssociations.class).annotatedWith(LanguageSpecific.class).to(DerivedMemberAwarePsiModelAssociations.class);
+	}
 
 	public Class<? extends IContentAssistParser> bindIContentAssistParser() {
 		return FlexerBasedContentAssistParser.class;

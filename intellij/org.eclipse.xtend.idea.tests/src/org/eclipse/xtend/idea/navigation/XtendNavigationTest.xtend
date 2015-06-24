@@ -8,20 +8,25 @@
 package org.eclipse.xtend.idea.navigation
 
 import com.intellij.openapi.util.TextRange
-import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiField
-import com.intellij.psi.PsiMethod
 import com.intellij.psi.impl.DebugUtil
-import com.intellij.psi.impl.light.LightParameter
 import java.util.Map
+import org.eclipse.xtend.core.xtend.AnonymousClass
+import org.eclipse.xtend.core.xtend.XtendClass
+import org.eclipse.xtend.core.xtend.XtendConstructor
+import org.eclipse.xtend.core.xtend.XtendEnum
+import org.eclipse.xtend.core.xtend.XtendEnumLiteral
+import org.eclipse.xtend.core.xtend.XtendField
+import org.eclipse.xtend.core.xtend.XtendFunction
+import org.eclipse.xtend.core.xtend.XtendInterface
+import org.eclipse.xtend.core.xtend.XtendParameter
 import org.eclipse.xtend.idea.LightXtendTest
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.psi.PsiEObject
 import org.eclipse.xtext.psi.PsiNamedEObject
-import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass
 
 import static org.eclipse.xtend.idea.navigation.NavigationTestData.*
+import org.eclipse.xtend.core.xtend.XtendVariableDeclaration
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -42,7 +47,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			LightParameter
+			XtendParameter
 		)
 	}
 
@@ -64,7 +69,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			PsiMethod // constructor
+			XtendClass // constructor
 		)
 	}
 
@@ -80,7 +85,7 @@ class XtendNavigationTest extends LightXtendTest {
 				class Bar extends «REFERENCE_OFFSET»Foo {
 				}
 			''',
-			JvmPsiClass
+			XtendClass
 		)
 	}
 
@@ -96,7 +101,7 @@ class XtendNavigationTest extends LightXtendTest {
 				class Bar implements «REFERENCE_OFFSET»Foo {
 				}
 			''',
-			JvmPsiClass
+			XtendInterface
 		)
 	}
 
@@ -115,7 +120,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			JvmPsiClass
+			XtendClass
 		)
 	}
 
@@ -131,7 +136,7 @@ class XtendNavigationTest extends LightXtendTest {
 				class Bar<T extends Fo«REFERENCE_OFFSET»o> {
 				}
 			''',
-			JvmPsiClass
+			XtendClass
 		)
 	}
 
@@ -146,7 +151,7 @@ class XtendNavigationTest extends LightXtendTest {
 					static class Baz extends «REFERENCE_OFFSET»Bar {}
 				}
 			''',
-			PsiClass
+			XtendClass
 		)
 	}
 
@@ -177,7 +182,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			PsiClass
+			AnonymousClass
 		)
 	}
 
@@ -208,7 +213,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			PsiClass
+			AnonymousClass
 		)
 	}
 
@@ -239,7 +244,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			JvmPsiClass
+			XtendInterface
 		)
 	}
 
@@ -270,7 +275,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			PsiClass
+			AnonymousClass
 		)
 	}
 
@@ -298,7 +303,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			PsiClass
+			AnonymousClass
 		)
 	}
 
@@ -322,7 +327,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			JvmPsiClass
+			XtendEnum
 		)
 	}
 
@@ -346,12 +351,12 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			PsiField
+			XtendEnumLiteral
 		)
 	}
 
 	def void testNavigateToConstructor() {
-		val psiConstructor = testNavigateTo(
+		testNavigateTo(
 			'mypackage/Greeter.xtend',
 			'''
 				package mypackage
@@ -368,13 +373,12 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			PsiMethod
+			XtendConstructor
 		)
-		assertTrue(psiConstructor.constructor)
 	}
 
 	def void testNavigateToMethod() {
-		val psiMethod = testNavigateTo(
+		testNavigateTo(
 			'mypackage/Greeter.xtend',
 			'''
 				package mypackage
@@ -391,9 +395,8 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			PsiMethod
+			XtendFunction
 		)
-		assertFalse(psiMethod.constructor)
 	}
 
 	def void testNavigateToAnnotationMethod() {
@@ -414,7 +417,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			PsiMethod
+			XtendField
 		)
 	}
 
@@ -434,7 +437,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			PsiField
+			XtendField
 		)
 	}
 
@@ -454,7 +457,7 @@ class XtendNavigationTest extends LightXtendTest {
 				
 				}
 			''',
-			PsiEObject
+			XtendVariableDeclaration
 		)
 	}
 
@@ -478,15 +481,17 @@ class XtendNavigationTest extends LightXtendTest {
 		myFixture.editor.caretModel.moveToOffset(referenceOffset)
 		val targetElement = myFixture.elementAtCaret
 		assertNotNull(targetElement)
-		assertTrue(
-			targetElement.class + ' is not assignable from ' + expectedType,
-			expectedType.isAssignableFrom(targetElement.class)
-		)
 		val actualNavigationElement = targetElement.navigationElement
 		if (expectedNavigationElement != actualNavigationElement) {
 			assertEquals(DebugUtil.psiToString(file, true, true), expectedNavigationElement, actualNavigationElement)
 		}
-		targetElement as T
+		
+		val result = (targetElement as PsiEObject).EObject
+		assertTrue(
+			result.class + ' is not assignable from ' + expectedType,
+			expectedType.isAssignableFrom(result.class)
+		)
+		result as T
 	}
 
 	protected def findNavigationElement(TextRange range) {
