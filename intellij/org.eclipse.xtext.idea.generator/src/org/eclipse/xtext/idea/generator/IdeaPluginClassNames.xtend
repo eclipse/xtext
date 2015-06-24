@@ -48,6 +48,10 @@ class IdeaPluginClassNames {
 		basePackageName+'.'+it.name.toSimpleName+'StandaloneSetupIdea'
 	}
 	
+	def String getIdeaSetup(Grammar it) {
+		basePackageName+'.'+it.name.toSimpleName+'IdeaSetup'
+	}
+	
 	def String getExtensionFactoryName(Grammar it) {
 		basePackageName+'.'+it.name.toSimpleName+'ExtensionFactory'
 	}
@@ -70,10 +74,6 @@ class IdeaPluginClassNames {
 	
 	def String getLanguageName(Grammar it) {
 		basePackageName+'.lang.'+it.name.toSimpleName+'Language'
-	}
-	
-	def String buildProcessParametersProviderName(Grammar it) {
-		basePackageName+'.server.'+it.name.toSimpleName+'BuildProcessParametersProvider'
 	}
 	
 	def String getJvmTypesElementFinderName(Grammar it) {
