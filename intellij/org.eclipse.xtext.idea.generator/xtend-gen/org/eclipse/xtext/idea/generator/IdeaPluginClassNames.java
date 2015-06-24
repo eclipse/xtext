@@ -364,4 +364,22 @@ public class IdeaPluginClassNames {
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "CallReferenceProcessor");
   }
+  
+  public String getFacetConfiguration(final Grammar it) {
+    String _basePackageName = this.getBasePackageName(it);
+    String _plus = (_basePackageName + ".facet.");
+    String _name = it.getName();
+    String _simpleName = this.toSimpleName(_name);
+    String _plus_1 = (_plus + _simpleName);
+    return (_plus_1 + "FacetConfiguration");
+  }
+  
+  public String getFacetTypeName(final Grammar it) {
+    String _basePackageName = this.getBasePackageName(it);
+    String _plus = (_basePackageName + ".facet.");
+    String _name = it.getName();
+    String _simpleName = this.toSimpleName(_name);
+    String _plus_1 = (_plus + _simpleName);
+    return (_plus_1 + "FacetType");
+  }
 }

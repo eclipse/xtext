@@ -1,6 +1,9 @@
 apply plugin: 'maven'
 apply plugin: 'signing'
 
+ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
+
+
 task sourcesJar(type: Jar, dependsOn: classes) {
 	classifier = 'sources'
 	from sourceSets.main.allSource
@@ -16,8 +19,8 @@ artifacts {
 }
 
 signing {
+  required { isReleaseVersion && gradle.taskGraph.hasTask("uploadArchives") }
   sign configurations.archives
-  required {!version.endsWith('SNAPSHOT') && gradle.taskGraph.hasTask('uploadArchives')}
 }
 
 def installer = install.repositories.mavenInstaller()

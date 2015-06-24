@@ -22,11 +22,13 @@ import com.intellij.psi.util.PsiModificationTracker;
 import org.eclipse.xtext.builder.standalone.incremental.ChunkedResourceDescriptionsProvider;
 import org.eclipse.xtext.builder.standalone.incremental.ProjectDescriptionBasedContainerManager;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
 import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.bracketmatching.DefaultBracePairProvider;
 import org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper;
+import org.eclipse.xtext.idea.build.IdeaOutputConfigurationProvider;
 import org.eclipse.xtext.idea.common.types.StubTypeProviderFactory;
 import org.eclipse.xtext.idea.filesystem.IdeaWorkspaceConfigProvider;
 import org.eclipse.xtext.idea.highlighting.DefaultPairedBraceMatcher;
@@ -127,5 +129,9 @@ public class DefaultIdeaModule extends AbstractGenericModule {
   
   public Class<? extends IWorkspaceConfigProvider> bindWorkspaceConfigProvider() {
     return IdeaWorkspaceConfigProvider.class;
+  }
+  
+  public Class<? extends IContextualOutputConfigurationProvider> bindIContextualOutputConfigurationProvider() {
+    return IdeaOutputConfigurationProvider.class;
   }
 }

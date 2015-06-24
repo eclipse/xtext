@@ -47,7 +47,7 @@ import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
 		@Accessors(PROTECTED_SETTER) BuildRequest request
 	
 		@Inject Indexer indexer
-	
+		
 		def Result launch() {
 			val newSource2GeneratedMapping = request.newState.fileMappings
 			request.deletedFiles.forEach [

@@ -55,8 +55,9 @@ public class IdeaModuleConfig implements IProjectConfig {
     Iterable<SourceFolder> _existingSourceFolders = RootModelExtensions.getExistingSourceFolders(this.module);
     final Function1<SourceFolder, Boolean> _function = new Function1<SourceFolder, Boolean>() {
       @Override
-      public Boolean apply(final SourceFolder it) {
-        return Boolean.valueOf(Objects.equal(file, sourceRoot));
+      public Boolean apply(final SourceFolder folder) {
+        VirtualFile _file = folder.getFile();
+        return Boolean.valueOf(Objects.equal(_file, sourceRoot));
       }
     };
     final SourceFolder sourceFolder = IterableExtensions.<SourceFolder>findFirst(_existingSourceFolders, _function);
