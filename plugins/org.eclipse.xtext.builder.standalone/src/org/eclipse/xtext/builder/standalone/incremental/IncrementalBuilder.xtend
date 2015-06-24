@@ -28,6 +28,7 @@ import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.CheckMode
+import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -100,11 +101,15 @@ import org.eclipse.xtext.validation.CheckMode
 			}
 //			LOG.info("Starting generator for input: '" + resource.URI.lastSegment + "'");
 			val previous = newMappings.deleteSource(resource.URI)
+			val workspaceConfigProvider = serviceProvider.get(IWorkspaceConfigProvider)
+			val workspaceConfig = workspaceConfigProvider?.getWorkspaceConfig(resource.resourceSet)
+			val sourceFolder = workspaceConfig?.findProjectContaining(resource.URI)?.findSourceFolderContaining(resource.URI)
 			val fileSystemAccess = new URIBasedFileSystemAccess() => [
 				val outputConfigProvider = serviceProvider.get(IContextualOutputConfigurationProvider)
 				outputConfigurations = outputConfigProvider.getOutputConfigurations(resource).toMap[name]
 				
 				baseDir = request.baseDir
+				currentSource = sourceFolder?.name
 				converter = resource.resourceSet.URIConverter
 				
 				beforeWrite = [ uri, contents |
