@@ -94,7 +94,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @Log
 @SuppressWarnings("all")
 public class XtextAutoBuilderComponent extends AbstractProjectComponent implements Disposable {
-  private boolean disposed;
+  private volatile boolean disposed;
   
   private BlockingQueue<BuildEvent> queue = new LinkedBlockingQueue<BuildEvent>();
   
@@ -190,10 +190,10 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   
   @Override
   public void dispose() {
+    this.disposed = true;
     this.alarm.cancelAllRequests();
     this.queue.clear();
     this.chunkedResourceDescriptions = null;
-    this.disposed = true;
   }
   
   protected Project getProject() {
@@ -326,18 +326,16 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   
   protected boolean isLoaded() {
     boolean _or = false;
-    boolean _notEquals = (!Objects.equal(this.chunkedResourceDescriptions, null));
-    if (_notEquals) {
+    boolean _isEmpty = this.chunkedResourceDescriptions.isEmpty();
+    boolean _not = (!_isEmpty);
+    if (_not) {
       _or = true;
     } else {
-      boolean _isEmpty = this.queue.isEmpty();
-      boolean _not = (!_isEmpty);
-      _or = _not;
+      boolean _isEmpty_1 = this.queue.isEmpty();
+      boolean _not_1 = (!_isEmpty_1);
+      _or = _not_1;
     }
-    if (_or) {
-      return true;
-    }
-    return false;
+    return _or;
   }
   
   protected void queueAllResources() {

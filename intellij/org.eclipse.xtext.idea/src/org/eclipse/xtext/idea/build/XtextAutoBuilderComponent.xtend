@@ -73,7 +73,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
  */
 @Log class XtextAutoBuilderComponent extends AbstractProjectComponent implements Disposable {
 	
-	boolean disposed
+	volatile boolean disposed
 	
 	BlockingQueue<BuildEvent> queue = new LinkedBlockingQueue<BuildEvent>()
 
@@ -146,10 +146,10 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	}
 	
 	override dispose() {
+		disposed = true
 		alarm.cancelAllRequests
 		queue.clear
 		chunkedResourceDescriptions = null
-		disposed = true
 	}
 	
 	protected def getProject() {
@@ -182,8 +182,8 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		if (isExcluded(file)) {
 			return;
 		}
-		if (!disposed && !isLoaded()) {
-			queueAllResources()
+		if (!disposed && !isLoaded) {
+			queueAllResources
 		}
 		if (LOG.isInfoEnabled) {
 			LOG.info("Queuing "+type+" - "+file.URI+".")
@@ -221,9 +221,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	}
 	
 	protected def boolean isLoaded() {
-		if (chunkedResourceDescriptions != null || !queue.isEmpty)
-			return true;
-		return false;
+		return !chunkedResourceDescriptions.isEmpty || !queue.isEmpty
 	}
 	
 	protected def queueAllResources() {
