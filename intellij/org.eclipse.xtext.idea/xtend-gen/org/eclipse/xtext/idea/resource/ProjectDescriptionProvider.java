@@ -13,7 +13,7 @@ import com.intellij.openapi.roots.ModuleOrderEntry;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.OrderEntry;
 import java.util.ArrayList;
-import org.eclipse.xtext.builder.standalone.incremental.ProjectDescription;
+import org.eclipse.xtext.resource.impl.ProjectDescription;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;

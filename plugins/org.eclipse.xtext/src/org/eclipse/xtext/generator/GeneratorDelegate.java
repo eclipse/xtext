@@ -17,7 +17,7 @@ import com.google.inject.Inject;
  */
 public class GeneratorDelegate implements IGenerator, IGenerator2 {
 
-	@Inject
+	@Inject(optional = true)
 	private IGenerator legacyGenerator;
 	
 	@Inject(optional = true)

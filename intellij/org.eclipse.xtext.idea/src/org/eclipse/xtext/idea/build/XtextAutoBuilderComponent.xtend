@@ -47,13 +47,11 @@ import java.util.Set
 import java.util.concurrent.BlockingQueue
 import java.util.concurrent.LinkedBlockingQueue
 import org.eclipse.emf.common.util.URI
-import org.eclipse.xtext.builder.standalone.incremental.BuildRequest
-import org.eclipse.xtext.builder.standalone.incremental.ChunkedResourceDescriptions
-import org.eclipse.xtext.builder.standalone.incremental.ContextualChunkedResourceDescriptions
-import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder
-import org.eclipse.xtext.builder.standalone.incremental.IndexState
-import org.eclipse.xtext.builder.standalone.incremental.Source2GeneratedMapping
-import org.eclipse.xtext.builder.standalone.incremental.TypeResourceDescription.ChangedDelta
+import org.eclipse.xtext.build.BuildRequest
+import org.eclipse.xtext.build.IncrementalBuilder
+import org.eclipse.xtext.build.IndexState
+import org.eclipse.xtext.build.Source2GeneratedMapping
+import org.eclipse.xtext.common.types.descriptions.TypeResourceDescription.ChangedDelta
 import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider
 import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider.VirtualFileBasedUriHandler
 import org.eclipse.xtext.idea.shared.IdeaSharedInjectorProvider
@@ -61,6 +59,7 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.resource.IResourceDescription.Delta
 import org.eclipse.xtext.resource.IResourceServiceProvider
+import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.util.internal.Log
 
@@ -326,7 +325,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	
 	def createResourceSet(Module module, ResourceDescriptionsData newData) {
 		val result = resourceSetProvider.get(module)
-		val fullIndex = ContextualChunkedResourceDescriptions.findInEmfObject(result)
+		val fullIndex = ChunkedResourceDescriptions.findInEmfObject(result)
 		fullIndex.setContainer(module.name, newData)
 		return result
 	}
@@ -393,8 +392,8 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		return result
 	}
 	
-	public def ContextualChunkedResourceDescriptions getCopyOfResourceDescriptions() {
-		return new ContextualChunkedResourceDescriptions(chunkedResourceDescriptions)
+	public def ChunkedResourceDescriptions getCopyOfResourceDescriptions() {
+		return chunkedResourceDescriptions.createFreshFlatCopy
 	}
 
 	protected def findModule(BuildEvent it, ProjectFileIndex fileIndex) {

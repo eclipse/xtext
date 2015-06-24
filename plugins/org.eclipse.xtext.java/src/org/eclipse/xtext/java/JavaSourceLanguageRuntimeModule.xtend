@@ -16,7 +16,9 @@ import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader
 import org.eclipse.xtext.resource.IContainer
 import org.eclipse.xtext.resource.IResourceDescription
+import org.eclipse.xtext.resource.IResourceDescriptionsProvider
 import org.eclipse.xtext.resource.IResourceServiceProvider
+import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
 import org.eclipse.xtext.resource.impl.SimpleResourceDescriptionsBasedContainerManager
 import org.eclipse.xtext.validation.IResourceValidator
 
@@ -36,6 +38,9 @@ class JavaSourceLanguageRuntimeModule extends AbstractModule {
 		bind(IJvmTypeProvider.Factory).to(ClasspathTypeProviderFactory)
 		bind(ClassLoader).toInstance(JavaSourceLanguageRuntimeModule.classLoader)
 		bind(IReferableElementsUnloader).to(IReferableElementsUnloader.GenericUnloader)
+		bind(IResourceDescriptionsProvider).toInstance([
+			ChunkedResourceDescriptions.findInEmfObject(it)
+		])
 	}
 
 }

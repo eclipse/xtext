@@ -6,11 +6,14 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.net.URL;
 import java.util.List;
+import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
-import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder;
+import org.eclipse.xtext.build.BuildRequest;
+import org.eclipse.xtext.build.IncrementalBuilder;
+import org.eclipse.xtext.build.IndexState;
+import org.eclipse.xtext.build.Source2GeneratedMapping;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmFeature;
@@ -27,8 +30,13 @@ import org.eclipse.xtext.common.types.testSetups.ClassWithVarArgs;
 import org.eclipse.xtext.java.tests.JavaInjectorProvider;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
+import org.eclipse.xtext.resource.impl.ProjectDescription;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -61,18 +69,33 @@ public class ReusedTypeProviderTest extends AbstractTypeProviderTest {
     if (_equals) {
       final String pathToSources = "/org/eclipse/xtext/common/types/testSetups";
       final List<String> files = MockJavaProjectProvider.readResource((pathToSources + "/files.list"));
+      final ChunkedResourceDescriptions index = new ChunkedResourceDescriptions();
+      Set<IResourceDescription> _emptySet = CollectionLiterals.<IResourceDescription>emptySet();
+      final ResourceDescriptionsData part = new ResourceDescriptionsData(_emptySet);
+      ProjectDescription _projectDescription = new ProjectDescription();
+      final Procedure1<ProjectDescription> _function = new Procedure1<ProjectDescription>() {
+        @Override
+        public void apply(final ProjectDescription it) {
+          it.setName("my-test-project");
+        }
+      };
+      final ProjectDescription projectDesc = ObjectExtensions.<ProjectDescription>operator_doubleArrow(_projectDescription, _function);
+      String _name = projectDesc.getName();
+      index.setContainer(_name, part);
       XtextResourceSet _get = this.resourceSetProvider.get();
-      final Procedure1<XtextResourceSet> _function = new Procedure1<XtextResourceSet>() {
+      final Procedure1<XtextResourceSet> _function_1 = new Procedure1<XtextResourceSet>() {
         @Override
         public void apply(final XtextResourceSet it) {
           ClassLoader _classLoader = ReusedTypeProviderTest.class.getClassLoader();
           it.setClasspathURIContext(_classLoader);
+          index.attachToEmfObject(it);
+          index.setContext(it);
         }
       };
-      final XtextResourceSet resourceSet = ObjectExtensions.<XtextResourceSet>operator_doubleArrow(_get, _function);
+      final XtextResourceSet resourceSet = ObjectExtensions.<XtextResourceSet>operator_doubleArrow(_get, _function_1);
       this.typeProviderFactory.createTypeProvider(resourceSet);
       BuildRequest _buildRequest = new BuildRequest();
-      final Procedure1<BuildRequest> _function_1 = new Procedure1<BuildRequest>() {
+      final Procedure1<BuildRequest> _function_2 = new Procedure1<BuildRequest>() {
         @Override
         public void apply(final BuildRequest it) {
           Iterable<String> _filterNull = IterableExtensions.<String>filterNull(files);
@@ -87,9 +110,12 @@ public class ReusedTypeProviderTest extends AbstractTypeProviderTest {
             }
           }
           it.setResourceSet(resourceSet);
+          Source2GeneratedMapping _source2GeneratedMapping = new Source2GeneratedMapping();
+          IndexState _indexState = new IndexState(part, _source2GeneratedMapping);
+          it.setNewState(_indexState);
         }
       };
-      final BuildRequest buildRequest = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_1);
+      final BuildRequest buildRequest = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_2);
       this.builder.build(buildRequest, this.resourceServiceProviderRegistry);
       IJvmTypeProvider _findTypeProvider = this.typeProviderFactory.findTypeProvider(resourceSet);
       ReusedTypeProviderTest.typeProvider = _findTypeProvider;

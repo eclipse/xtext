@@ -9,6 +9,7 @@ package org.eclipse.xtext.builder.standalone.incremental
 
 import java.io.File
 import java.io.IOException
+import java.net.URLClassLoader
 import java.util.Set
 import java.util.jar.JarFile
 import java.util.jar.Manifest
@@ -17,8 +18,6 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.plugin.EcorePlugin
 import org.eclipse.xtext.mwe.PathTraverser
 import org.eclipse.xtext.util.internal.Log
-
-import static extension org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs.*
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -64,7 +63,7 @@ import static extension org.eclipse.xtext.builder.standalone.incremental.FilesAn
 				if (EcorePlugin.getPlatformResourceMap().containsKey(name))
 					return;
 				val String path = "archive:" + file.asURI + "!/";
-				EcorePlugin.getPlatformResourceMap().put(name, path.asURI);
+				EcorePlugin.getPlatformResourceMap().put(name, URI.createURI(path));
 			}
 		} catch (ZipException e) {
 			LOG.info("Could not open Jar file " + file.getAbsolutePath() + ".");
@@ -80,4 +79,14 @@ import static extension org.eclipse.xtext.builder.standalone.incremental.FilesAn
 		}
 	}
 
+	/**
+	 * Unfortunately, {@link File#toURI} does not append '/' to directories, making it useless for the {@link URLClassLoader}.
+	 */
+	static def asURI(File file) {
+		val uri = URI.createFileURI(file.canonicalFile.absolutePath)
+		if(file.isDirectory)
+			uri.appendSegment('')
+		else 
+			uri
+	}
 }

@@ -12,6 +12,7 @@ import java.util.Map;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.IResourceDescriptionsProvider;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -25,7 +26,7 @@ import com.google.inject.name.Named;
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
-public class ResourceDescriptionsProvider {
+public class ResourceDescriptionsProvider implements IResourceDescriptionsProvider {
 
 	/**
 	 * This flag configures Xtext's scoping for a {@link ResourceSet} for the (incremental) build. This should not be
@@ -96,9 +97,10 @@ public class ResourceDescriptionsProvider {
 	 * @since 2.1
 	 */
 	/* @NonNull */
+	@Override
 	public IResourceDescriptions getResourceDescriptions(/* @NonNull */ ResourceSet resourceSet) {
 		String flag = getFlagFromLoadOptions(resourceSet);
-		final IResourceDescriptions result;
+		IResourceDescriptions result;
 		if (NAMED_BUILDER_SCOPE.equals(flag)) {
 			result = createBuilderScopeResourceDescriptions();
 		} else if (LIVE_SCOPE.equals(flag)) {
@@ -106,7 +108,13 @@ public class ResourceDescriptionsProvider {
 		} else if (PERSISTED_DESCRIPTIONS.equals(flag)) {
 			result = createPersistedResourceDescriptions();
 		} else {
-			result = createResourceDescriptions();
+			result = ChunkedResourceDescriptions.findInEmfObject(resourceSet);
+			if (result == null) {
+				result = ResourceDescriptionsData.ResourceSetAdapter.findResourceDescriptionsData(resourceSet);
+				if (result == null) {
+					result = createResourceDescriptions();
+				}
+			}
 		}
 		if (result instanceof IResourceDescriptions.IContextAware) {
 			((IResourceDescriptions.IContextAware) result).setContext(resourceSet);
