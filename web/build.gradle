@@ -13,4 +13,10 @@ configure(subprojects - eclipsePluginProjects) {
 		main.java.srcDir 'src/main/xtend-gen'
 		test.java.srcDir 'src/test/xtend-gen'
 	}
+	
+	if (JavaVersion.current().isJava8Compatible()) {
+		tasks.withType(Javadoc) {
+			options.addStringOption('Xdoclint:syntax,reference', '-quiet')
+		}
+	}
 }

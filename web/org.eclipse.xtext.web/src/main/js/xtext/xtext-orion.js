@@ -315,8 +315,10 @@ define([
 				return options;
 			}
 		};
-		editor.getEditorContext = editorContextProvider.getEditorContext;
-		editor.getOptions = editorContextProvider.getOptions;
+		if (!editor.getEditorContext)
+			editor.getEditorContext = editorContextProvider.getEditorContext;
+		if (!editor.getOptions)
+			editor.getOptions = editorContextProvider.getOptions;
 		
 		//---- Persistence Services
 		
