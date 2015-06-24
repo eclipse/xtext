@@ -14,8 +14,6 @@ interface IPsiModelAssociator {
 	
 	def boolean associate(EObject eObject, PsiElementProvider psiElementProvider)
 	
-	def boolean associatePrimary(EObject eObject, PsiElementProvider psiElementProvider)
-	
 }
 
 interface PsiElementProvider {
