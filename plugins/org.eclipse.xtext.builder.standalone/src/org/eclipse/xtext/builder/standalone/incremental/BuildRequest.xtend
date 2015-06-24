@@ -11,10 +11,10 @@ import java.io.File
 import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.Issue
-import org.eclipse.xtext.resource.IResourceDescription
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -22,6 +22,34 @@ import org.eclipse.xtext.resource.IResourceDescription
  */
 @Accessors
 class BuildRequest {
+	
+	URI baseDir
+	def URI getBaseDir() {
+		if (baseDir == null) {
+			val userDir = System.getProperty('user.dir')
+			baseDir = FilesAndURIs.asURI(new File(userDir)) 
+		}
+		return baseDir
+	}
+
+	List<URI> dirtyFiles = newArrayList
+	List<URI> deletedFiles = newArrayList;
+	List<IResourceDescription.Delta> externalDeltas = newArrayList()
+	
+	/**
+	 * call back after validation, return <code>false</code> will stop the build.
+	 */
+	IPostValidationCallback afterValidate = new DefaultValidationCallback()
+	(URI, URI)=>void afterGenerateFile = []
+	(URI)=>void afterDeleteFile = []
+	
+	IndexState previousState = new IndexState
+	IndexState newState = new IndexState
+	
+	boolean writeStorageResources = false
+	boolean indexOnly = false
+	
+	XtextResourceSet resourceSet
 	
 	interface IPostValidationCallback {
 		
@@ -53,39 +81,4 @@ class BuildRequest {
 		}
 		
 	}
-	
-	URI baseDir
-	
-	def URI getBaseDir() {
-		if (baseDir == null) {
-			val userDir = System.getProperty('user.dir')
-			baseDir = FilesAndURIs.asURI(new File(userDir)) 
-		}
-		return baseDir
-	}
-
-	List<URI> classPath = newArrayList
-	List<URI> dirtyFiles = newArrayList
-	List<URI> deletedFiles = newArrayList;
-	List<IResourceDescription.Delta> externalDeltas = newArrayList()
-	
-	/**
-	 * call back after validation, return <code>false</code> will stop the build.
-	 */
-	IPostValidationCallback afterValidate = new DefaultValidationCallback()
-	(URI, URI)=>void afterGenerateFile = []
-	(URI)=>void afterDeleteFile = []
-	(URI)=>boolean belongsToThisBuildRun = [true]
-	
-	def boolean belongsToThisBuildRun(URI uri) {
-		return belongsToThisBuildRun.apply(uri)
-	}
-	
-	IndexState previousState = new IndexState
-	
-	boolean writeStorageResources = false
-	boolean indexOnly = false
-	
-	XtextResourceSet resourceSet
-	
 }
