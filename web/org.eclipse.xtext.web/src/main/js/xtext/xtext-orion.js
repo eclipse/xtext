@@ -121,8 +121,9 @@ define([
 	"xtext/services/ContentAssistService",
 	"xtext/services/ValidationService",
 	"xtext/services/HoverService",
+	"xtext/services/OccurrencesService",
 ], function(jQuery, orionEdit, mKeyBinding, mTextStyler, EditorContext, LoadResourceService, RevertResourceService,
-		SaveResourceService, UpdateService, ContentAssistService, ValidationService, HoverService) {
+		SaveResourceService, UpdateService, ContentAssistService, ValidationService, HoverService, OccurrencesService) {
 	
 	/**
 	 * Translate an HTML attribute name to a JS option name.
@@ -304,6 +305,7 @@ define([
 		}
 		
 		var textView = editor.getTextView();
+		textView._setLinksVisible(true);
 		var editorContext = new EditorContext(editor);
 		var editorContextProvider = {
 			getEditorContext : function() {
@@ -410,10 +412,21 @@ define([
 		}
 		
 		//---- Hover Service
+		
 		var hoverService = new HoverService(options.serverUrl, options.resourceId);
 		_internals.computeHoverInfo = function(context) {
 			return hoverService.computeHoverInfo(editorContext, context);
 		}
+		
+		//---- Occurrence Service
+		
+		var occurrencesService = new OccurrencesService(options.serverUrl, options.resourceId);
+		textView.addEventListener("Selection", function() {
+			occurrencesService.markOccurrences(editorContext, {
+				offset: textView.getCaretOffset(),
+				contentType: options.contentType
+			});
+		})
 		
 		editor.invokeXtextService = function(service, invokeOptions) {
 			var optionsCopy = _copy(options);
@@ -430,6 +443,8 @@ define([
 				revertResourceService.revertResource(editorContext, optionsCopy);
 			else if (service === "validation" && validationService)
 				validationService.computeProblems(editorContext, optionsCopy);
+			else if (service === "occurrences" && occurrencesService)
+				occurrencesService.markOccurrences(editorContext, optionsCopy);
 			else
 				throw new Error("Service '" + service + "' is not available.");
 		};

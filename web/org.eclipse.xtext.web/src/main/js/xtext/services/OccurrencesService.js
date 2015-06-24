@@ -12,18 +12,14 @@ define(["xtext/services/AbstractXtextService", "jquery"], function(AbstractXtext
 	 * Service class for hover information. The information is returned as promise of
 	 * a Deferred object.
 	 */
-	function HoverService(serverUrl, resourceId) {
-		this.initialize(serverUrl, resourceId, "hover");
+	function OccurrencesService(serverUrl, resourceId) {
+		this.initialize(serverUrl, resourceId, "occurrences");
 		this._delay = 500
 	};
 
-	HoverService.prototype = new AbstractXtextService();
+	OccurrencesService.prototype = new AbstractXtextService();
 
-	HoverService.prototype.setDelay = function(delay) {
-		this._delay = delay
-	};
-
-	HoverService.prototype.computeHoverInfo = function(editorContext, params) {
+	OccurrencesService.prototype.markOccurrences = function(editorContext, params) {
 		var serverData = {
 			contentType : params.contentType,
 			offset: params.offset
@@ -39,29 +35,18 @@ define(["xtext/services/AbstractXtextService", "jquery"], function(AbstractXtext
 			}
 		}
 
-		var deferred = new jQuery.Deferred();
-		var showTime = new Date().getTime() + this._delay;
 		this.sendRequest(editorContext, {
 			type : httpMethod,
 			data : serverData,
 			success : function(result) {
-				if (result && !result.conflict) {
-					var remainingTimeout = Math.max(0, showTime - new Date().getTime())
-					setTimeout(function() {
-						if (result.stateId !== undefined && result.stateId != editorContext.getServerState().stateId) 
-							deferred.resolve(null);
-						else 
-							deferred.resolve(editorContext.translateHoverInfo(result));
-					}, remainingTimeout);
-				}
-				else
-					deferred.resolve(null);
+				if (result && !result.conflict 
+						&& (result.stateId === undefined || result.stateId == editorContext.getServerState().stateId)) 
+					editorContext.showOccurrences(result);
+				else 
+					editorContext.showOccurrences(null);
 			}
 		});
-		var promise = deferred.promise();
-		promise.cancel = function() {};
-		return [ promise ];
 	};
 	
-	return HoverService;
+	return OccurrencesService;
 });

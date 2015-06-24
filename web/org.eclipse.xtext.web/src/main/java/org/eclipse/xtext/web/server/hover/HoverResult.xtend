@@ -18,6 +18,7 @@ import org.eclipse.xtext.web.server.IServiceResult
 @ToString(skipNulls = true)
 class HoverResult implements IServiceResult {
 	
+	String stateId
 	String title
 	String content
 }

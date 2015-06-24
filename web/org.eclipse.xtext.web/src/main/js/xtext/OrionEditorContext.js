@@ -1,15 +1,15 @@
 /*******************************************************************************
- * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *******************************************************************************/
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others. All rights
+ * reserved. This program and the accompanying materials are made available
+ * under the terms of the Eclipse Public License v1.0 which accompanies this
+ * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+ ******************************************************************************/
 
 define(function() {
 	
 	/**
-	 * An editor context mediates between the Xtext services and the Orion editor framework.
+	 * An editor context mediates between the Xtext services and the Orion
+	 * editor framework.
 	 */
 	function OrionEditorContext(editor) {
 		this._editor = editor;
@@ -126,6 +126,28 @@ define(function() {
 				title : entry.title,
 				type : 'html' 
 			};
+		},
+		
+		showOccurrences : function(occurrencesResult) {
+			if(occurrencesResult == null) {
+				this._editor.showOccurrences({})
+			} else {
+				var readAnnotations = occurrencesResult.readRegions.map(function(region) {
+					return {
+						start : region.offset,
+						end : region.offset + region.length,
+						readAccess : true
+					};
+				});
+				var writeAnnotations = occurrencesResult.writeRegions.map(function(region) {
+					return {
+						start : region.offset,
+						end : region.offset + region.length,
+						readAccess : false
+					};
+				})
+				this._editor.showOccurrences(readAnnotations.concat(writeAnnotations))
+			}
 		}
 	};
 	

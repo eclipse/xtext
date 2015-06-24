@@ -82,20 +82,7 @@ class HoverTest extends AbstractWebServerTest {
 			 */
 			#state foo
 		''' .hover
-			.assertContent('''
-				<div class="hover">
-					This is foo!
-				</div>
-			''')
-			.assertTitle('''
-				<div class="hover">
-					<div class="State-icon default-icon">
-						<div class="element-name">
-							foo
-						</div>
-					</div>
-				</div>
-			''')
+			.assertNull
 	}
 	
 	@Test

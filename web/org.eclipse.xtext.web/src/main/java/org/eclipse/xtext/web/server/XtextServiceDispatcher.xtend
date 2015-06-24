@@ -12,7 +12,6 @@ import com.google.inject.Inject
 import com.google.inject.Provider
 import com.google.inject.Singleton
 import java.io.IOException
-import org.apache.log4j.Logger
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.ToString
@@ -28,11 +27,13 @@ import org.eclipse.xtext.web.server.model.IWebResourceSetProvider
 import org.eclipse.xtext.web.server.model.UpdateDocumentService
 import org.eclipse.xtext.web.server.model.XtextWebDocument
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess
+import org.eclipse.xtext.web.server.occurrences.OccurrencesService
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler
 import org.eclipse.xtext.web.server.persistence.ResourcePersistenceService
 import org.eclipse.xtext.web.server.validation.ValidationService
 
 import static org.eclipse.xtext.web.server.InvalidRequestException.Type.*
+import org.eclipse.xtext.util.internal.Log
 
 /**
  * The entry class for Xtext service invocations. Use {@link #getService(IRequestData, ISessionStore)}
@@ -51,7 +52,7 @@ import static org.eclipse.xtext.web.server.InvalidRequestException.Type.*
  * ...
  * </pre>
  */
-@Singleton
+@Singleton@Log
 class XtextServiceDispatcher {
 	
 	/**
@@ -89,13 +90,12 @@ class XtextServiceDispatcher {
 		boolean hasConflict
 	}
 	
-	static val LOG = Logger.getLogger(XtextServiceDispatcher)
-	
 	@Inject ResourcePersistenceService resourcePersistenceService
 	@Inject UpdateDocumentService updateDocumentService
 	@Inject ContentAssistService contentAssistService
 	@Inject ValidationService validationService
 	@Inject HoverService hoverService
+	@Inject OccurrencesService occurrencesService
 	@Inject IServerResourceHandler resourceHandler
 	@Inject IWebResourceSetProvider resourceSetProvider
 	@Inject Provider<XtextWebDocument> documentProvider
@@ -167,6 +167,8 @@ class XtextServiceDispatcher {
 				getContentAssistService(request, sessionStore)
 			case 'hover':
 				getHoverService(request, sessionStore)
+			case 'occurrences':
+				getOccurrencesService(request, sessionStore)
 			default:
 				throw new InvalidRequestException(INVALID_PARAMETERS, 'The request type \'' + requestType + '\' is not supported.')
 		}
@@ -331,6 +333,22 @@ class XtextServiceDispatcher {
 			service = [
 				try {
 					hoverService.getHover(document, offset)
+				} catch (Throwable throwable) {
+					handleError(throwable)
+				}
+			]
+			hasTextInput = request.parameterKeys.contains('fullText')
+		]
+	}
+	
+	protected def getOccurrencesService(IRequestData request, ISessionStore sessionStore)
+			throws InvalidRequestException {
+		val document = getDocumentAccess(request, sessionStore)
+		val offset = request.getInt('offset', Optional.of(0))
+		new ServiceDescriptor => [
+			service = [
+				try {
+					occurrencesService.findOccurrences(document, offset)
 				} catch (Throwable throwable) {
 					handleError(throwable)
 				}
