@@ -223,7 +223,7 @@ public class XtextServlet extends HttpServlet {
   
   /**
    * Check whether it is allowed to invoke the given service.
-   * @throws PermissionDeniedException if permission is denied
+   * @throws InvalidRequestException.PermissionDeniedException if permission is denied
    */
   protected void checkPermission(final HttpServletRequest request, final XtextServiceDispatcher.ServiceDescriptor service) throws InvalidRequestException.PermissionDeniedException {
   }

@@ -826,11 +826,13 @@ public class XtextServiceDispatcher {
   }
   
   /**
-   * Read an integer-valued parameter. If the parameter is not present, the {@code defaultValue}
-   * is returned. If that one is not present either (i.e. it is {@code Optional.absent()}), an
-   * {@link InvalidParametersException} is thrown.
+   * Read an integer-valued parameter. If the parameter is not available, the
+   * {@code defaultValue} is returned.
+   * 
+   * @throws InvalidRequestException.InvalidParametersException if the parameter
+   * 		is not available and {@code defaultValue} is absent
    */
-  protected int getInt(final IRequestData request, final String key, final Optional<Integer> defaultValue) throws InvalidRequestException {
+  protected int getInt(final IRequestData request, final String key, final Optional<Integer> defaultValue) throws InvalidRequestException.InvalidParametersException {
     final String stringValue = request.getParameter(key);
     if ((stringValue == null)) {
       boolean _isPresent = defaultValue.isPresent();
@@ -854,11 +856,13 @@ public class XtextServiceDispatcher {
   }
   
   /**
-   * Read a Boolean-valued parameter. If the parameter is not present, the {@code defaultValue}
-   * is returned. If that one is not present either (i.e. it is {@code Optional.absent()}), an
-   * {@link InvalidParametersException} is thrown.
+   * Read a Boolean-valued parameter. If the parameter is not available, the
+   * {@code defaultValue} is returned.
+   * 
+   * @throws InvalidRequestException.InvalidParametersException if the parameter
+   * 		is not available and {@code defaultValue} is absent
    */
-  protected boolean getBoolean(final IRequestData request, final String key, final Optional<Boolean> defaultValue) throws InvalidRequestException {
+  protected boolean getBoolean(final IRequestData request, final String key, final Optional<Boolean> defaultValue) throws InvalidRequestException.InvalidParametersException {
     final String stringValue = request.getParameter(key);
     if ((stringValue == null)) {
       boolean _isPresent = defaultValue.isPresent();

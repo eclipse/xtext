@@ -403,12 +403,14 @@ class XtextServiceDispatcher {
 	}
 	
 	/**
-	 * Read an integer-valued parameter. If the parameter is not present, the {@code defaultValue}
-	 * is returned. If that one is not present either (i.e. it is {@code Optional.absent()}), an
-	 * {@link InvalidParametersException} is thrown.
+	 * Read an integer-valued parameter. If the parameter is not available, the
+	 * {@code defaultValue} is returned.
+	 * 
+	 * @throws InvalidRequestException.InvalidParametersException if the parameter
+	 * 		is not available and {@code defaultValue} is absent
 	 */
 	protected def getInt(IRequestData request, String key, Optional<Integer> defaultValue)
-			throws InvalidRequestException {
+			throws InvalidParametersException {
 		val stringValue = request.getParameter(key)
 		if (stringValue === null) {
 			if (!defaultValue.present) {
@@ -424,12 +426,14 @@ class XtextServiceDispatcher {
 	}
 	
 	/**
-	 * Read a Boolean-valued parameter. If the parameter is not present, the {@code defaultValue}
-	 * is returned. If that one is not present either (i.e. it is {@code Optional.absent()}), an
-	 * {@link InvalidParametersException} is thrown.
+	 * Read a Boolean-valued parameter. If the parameter is not available, the
+	 * {@code defaultValue} is returned.
+	 * 
+	 * @throws InvalidRequestException.InvalidParametersException if the parameter
+	 * 		is not available and {@code defaultValue} is absent
 	 */
 	protected def getBoolean(IRequestData request, String key, Optional<Boolean> defaultValue)
-			throws InvalidRequestException {
+			throws InvalidParametersException {
 		val stringValue = request.getParameter(key)
 		if (stringValue === null) {
 			if (!defaultValue.present) {
