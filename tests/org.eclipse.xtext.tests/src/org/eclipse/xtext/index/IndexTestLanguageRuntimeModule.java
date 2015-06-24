@@ -3,6 +3,7 @@
  */
 package org.eclipse.xtext.index;
 
+import org.eclipse.xtext.generator.IGenerator2;
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
@@ -32,6 +33,10 @@ public class IndexTestLanguageRuntimeModule extends org.eclipse.xtext.index.Abst
 	@org.eclipse.xtext.service.SingletonBinding(eager = true)
 	public Class<? extends IndexTestLanguageJavaValidator> bindIndexTestLanguageJavaValidator() {
 		return IndexTestLanguageJavaValidator.class;
+	}
+	
+	public Class<? extends IGenerator2> bindIGenerator2() {
+		return IndexTestLanguageGenerator.class;
 	}
 
 //	public IResourceScopeCache bindIResourceScoprCache() {

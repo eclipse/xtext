@@ -5,36 +5,19 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.tests.incremental
+package org.eclipse.xtext.build
 
-import com.google.common.io.Files
+import org.eclipse.emf.common.util.URI
 import org.junit.Test
 
-import static extension org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs.*
 import static org.junit.Assert.*
-import java.io.File
-import org.eclipse.emf.common.util.URI
+
+import static extension org.eclipse.xtext.build.FilesAndURIs.*
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 class FilesAndURIsTest {
-	
-	@Test
-	def testDirsVsFiles() {
-		val tmpDir = Files.createTempDir()
-		val tmpFile = new File(tmpDir, 'tmp.tmp');
-		try {
-			val dirURI = tmpDir.asURI
-			assertTrue(dirURI.hasTrailingPathSeparator)
-			assertEquals('', dirURI.lastSegment)
-			val fileURI = tmpFile.asURI
-			assertFalse(fileURI.hasTrailingPathSeparator)
-			assertNotSame('', fileURI.lastSegment)
-		} finally {
-			tmpDir.delete
-		}
-	}
 	
 	@Test 
 	def testRelativeURI() {
@@ -49,10 +32,8 @@ class FilesAndURIsTest {
 	
 	@Test
 	def testDotInURI() {
-		assertEquals('/Users/Foo/bar', URI.createURI('file:/Users/./Foo/bar').asPath)
 		assertEquals('/Users/Foo/bar', URI.createURI('file:/Users/./Foo/bar').asFile.path)
 		assertEquals('file:/Users/Foo/bar', '/Users/./Foo/bar'.asFileURI.toString)
-		assertEquals('file:/Users/Foo/bar', new File('/Users/./Foo/bar').asURI.toString)
 	}
 	
 	def assertRelativeURI(String expected, String absoluteURI, String... baseURIs) {
