@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.psi;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.intellij.psi.PsiElement;
@@ -32,33 +33,30 @@ public class GlobalPsiModelAssociations implements IPsiModelAssociations {
   
   @Override
   public EObject getEObject(final PsiElement element) {
-    EObject _xblockexpression = null;
-    {
-      final PsiFile containingFile = element.getContainingFile();
-      EObject _xifexpression = null;
-      if ((containingFile instanceof BaseXtextFile)) {
-        EObject _xblockexpression_1 = null;
-        {
-          final URI resourceURI = ((BaseXtextFile)containingFile).getURI();
-          final IResourceServiceProvider resourceServiceProvider = this.resourceServiceProviderRegistry.getResourceServiceProvider(resourceURI);
-          EObject _xifexpression_1 = null;
-          if ((resourceServiceProvider instanceof IResourceIdeaServiceProvider)) {
-            IPsiModelAssociations _psiModelAssociations = ((IResourceIdeaServiceProvider)resourceServiceProvider).getPsiModelAssociations();
-            _xifexpression_1 = _psiModelAssociations.getEObject(element);
-          }
-          _xblockexpression_1 = _xifexpression_1;
-        }
-        _xifexpression = _xblockexpression_1;
-      }
-      _xblockexpression = _xifexpression;
+    boolean _equals = Objects.equal(element, null);
+    if (_equals) {
+      return null;
     }
-    return _xblockexpression;
+    final PsiFile containingFile = element.getContainingFile();
+    if ((containingFile instanceof BaseXtextFile)) {
+      final URI resourceURI = ((BaseXtextFile)containingFile).getURI();
+      final IResourceServiceProvider resourceServiceProvider = this.resourceServiceProviderRegistry.getResourceServiceProvider(resourceURI);
+      if ((resourceServiceProvider instanceof IResourceIdeaServiceProvider)) {
+        IPsiModelAssociations _psiModelAssociations = ((IResourceIdeaServiceProvider)resourceServiceProvider).getPsiModelAssociations();
+        return _psiModelAssociations.getEObject(element);
+      }
+    }
+    return null;
   }
   
   @Override
   public PsiElement getPsiElement(final EObject object) {
     PsiElement _xblockexpression = null;
     {
+      boolean _equals = Objects.equal(object, null);
+      if (_equals) {
+        return null;
+      }
       URI _uRI = EcoreUtil.getURI(object);
       final URI resourceURI = _uRI.trimFragment();
       final IResourceServiceProvider resourceServiceProvider = this.resourceServiceProviderRegistry.getResourceServiceProvider(resourceURI);
@@ -76,6 +74,17 @@ public class GlobalPsiModelAssociations implements IPsiModelAssociations {
   public PsiElement getPsiElement(final IEObjectDescription objectDescription, final Resource context) {
     PsiElement _xblockexpression = null;
     {
+      boolean _or = false;
+      boolean _equals = Objects.equal(objectDescription, null);
+      if (_equals) {
+        _or = true;
+      } else {
+        boolean _equals_1 = Objects.equal(context, null);
+        _or = _equals_1;
+      }
+      if (_or) {
+        return null;
+      }
       final URI resourceURI = context.getURI();
       final IResourceServiceProvider resourceServiceProvider = this.resourceServiceProviderRegistry.getResourceServiceProvider(resourceURI);
       PsiElement _xifexpression = null;

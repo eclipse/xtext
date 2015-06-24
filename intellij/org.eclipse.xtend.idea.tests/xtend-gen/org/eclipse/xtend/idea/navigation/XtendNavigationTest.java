@@ -12,21 +12,27 @@ import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiField;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiMethod;
 import com.intellij.psi.impl.DebugUtil;
-import com.intellij.psi.impl.light.LightParameter;
 import junit.framework.TestCase;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtend.core.xtend.AnonymousClass;
+import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendConstructor;
+import org.eclipse.xtend.core.xtend.XtendEnum;
+import org.eclipse.xtend.core.xtend.XtendEnumLiteral;
+import org.eclipse.xtend.core.xtend.XtendField;
+import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendInterface;
+import org.eclipse.xtend.core.xtend.XtendParameter;
+import org.eclipse.xtend.core.xtend.XtendVariableDeclaration;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend.idea.navigation.NavigationTestData;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.psi.PsiEObject;
 import org.eclipse.xtext.psi.PsiEObjectIdentifier;
 import org.eclipse.xtext.psi.PsiNamedEObject;
-import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClass;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -59,9 +65,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.<LightParameter>testNavigateTo(
+    this.<XtendParameter>testNavigateTo(
       "mypackage/Greeter.xtend", _builder.toString(), 
-      LightParameter.class);
+      XtendParameter.class);
   }
   
   public void testNavigateToClass() {
@@ -100,9 +106,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.<PsiMethod>testNavigateTo(
+    this.<XtendClass>testNavigateTo(
       "mypackage/Greeter.xtend", _builder.toString(), 
-      PsiMethod.class);
+      XtendClass.class);
   }
   
   public void testNavigateToClass_Extends() {
@@ -125,9 +131,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();
-    this.<JvmPsiClass>testNavigateTo(
+    this.<XtendClass>testNavigateTo(
       "mypackage/Foo.xtend", _builder.toString(), 
-      JvmPsiClass.class);
+      XtendClass.class);
   }
   
   public void testNavigateToClass_Implements() {
@@ -150,9 +156,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();
-    this.<JvmPsiClass>testNavigateTo(
+    this.<XtendInterface>testNavigateTo(
       "mypackage/Foo.xtend", _builder.toString(), 
-      JvmPsiClass.class);
+      XtendInterface.class);
   }
   
   public void testNavigateToClass_Throws() {
@@ -180,9 +186,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.<JvmPsiClass>testNavigateTo(
+    this.<XtendClass>testNavigateTo(
       "mypackage/Exception.xtend", _builder.toString(), 
-      JvmPsiClass.class);
+      XtendClass.class);
   }
   
   public void testNavigateToClass_ExtendsBound() {
@@ -205,9 +211,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();
-    this.<JvmPsiClass>testNavigateTo(
+    this.<XtendClass>testNavigateTo(
       "mypackage/Foo.xtend", _builder.toString(), 
-      JvmPsiClass.class);
+      XtendClass.class);
   }
   
   public void testNavigateToInnerClass() {
@@ -231,9 +237,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();
-    this.<PsiClass>testNavigateTo(
+    this.<XtendClass>testNavigateTo(
       "mypackage/Foo.xtend", _builder.toString(), 
-      PsiClass.class);
+      XtendClass.class);
   }
   
   public void testNavigateToAnnonymousClass() {
@@ -294,9 +300,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.<PsiClass>testNavigateTo(
+    this.<AnonymousClass>testNavigateTo(
       "mypackage/Foo.xtend", _builder.toString(), 
-      PsiClass.class);
+      AnonymousClass.class);
   }
   
   public void testNavigateToAnnonymousClass2() {
@@ -357,9 +363,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.<PsiClass>testNavigateTo(
+    this.<AnonymousClass>testNavigateTo(
       "mypackage/Foo.xtend", _builder.toString(), 
-      PsiClass.class);
+      AnonymousClass.class);
   }
   
   public void testNavigateToAnnonymousClass3() {
@@ -420,9 +426,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.<JvmPsiClass>testNavigateTo(
+    this.<XtendInterface>testNavigateTo(
       "mypackage/Foo.xtend", _builder.toString(), 
-      JvmPsiClass.class);
+      XtendInterface.class);
   }
   
   public void testNavigateToAnnonymousClass4() {
@@ -481,9 +487,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.<PsiClass>testNavigateTo(
+    this.<AnonymousClass>testNavigateTo(
       "mypackage/Foo.xtend", _builder.toString(), 
-      PsiClass.class);
+      AnonymousClass.class);
   }
   
   public void testNavigateToAnnonymousClass5() {
@@ -534,9 +540,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.<PsiClass>testNavigateTo(
+    this.<AnonymousClass>testNavigateTo(
       "mypackage/Foo.xtend", _builder.toString(), 
-      PsiClass.class);
+      AnonymousClass.class);
   }
   
   public void testNavigateToEnumeration() {
@@ -576,9 +582,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.<JvmPsiClass>testNavigateTo(
+    this.<XtendEnum>testNavigateTo(
       "mypackage/Foo.xtend", _builder.toString(), 
-      JvmPsiClass.class);
+      XtendEnum.class);
   }
   
   public void testNavigateToEnumConstant() {
@@ -618,9 +624,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.<PsiField>testNavigateTo(
+    this.<XtendEnumLiteral>testNavigateTo(
       "mypackage/Foo.xtend", _builder.toString(), 
-      PsiField.class);
+      XtendEnumLiteral.class);
   }
   
   public void testNavigateToConstructor() {
@@ -657,11 +663,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final PsiMethod psiConstructor = this.<PsiMethod>testNavigateTo(
+    this.<XtendConstructor>testNavigateTo(
       "mypackage/Greeter.xtend", _builder.toString(), 
-      PsiMethod.class);
-    boolean _isConstructor = psiConstructor.isConstructor();
-    TestCase.assertTrue(_isConstructor);
+      XtendConstructor.class);
   }
   
   public void testNavigateToMethod() {
@@ -700,11 +704,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final PsiMethod psiMethod = this.<PsiMethod>testNavigateTo(
+    this.<XtendFunction>testNavigateTo(
       "mypackage/Greeter.xtend", _builder.toString(), 
-      PsiMethod.class);
-    boolean _isConstructor = psiMethod.isConstructor();
-    TestCase.assertFalse(_isConstructor);
+      XtendFunction.class);
   }
   
   public void testNavigateToAnnotationMethod() {
@@ -741,9 +743,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.<PsiMethod>testNavigateTo(
+    this.<XtendField>testNavigateTo(
       "mypackage/MyAnnotation.xtend", _builder.toString(), 
-      PsiMethod.class);
+      XtendField.class);
   }
   
   public void testNavigateToField() {
@@ -775,9 +777,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.<PsiField>testNavigateTo(
+    this.<XtendField>testNavigateTo(
       "mypackage/MyAnnotation.xtend", _builder.toString(), 
-      PsiField.class);
+      XtendField.class);
   }
   
   public void testNavigateToVariable() {
@@ -811,9 +813,9 @@ public class XtendNavigationTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.<PsiEObject>testNavigateTo(
+    this.<XtendVariableDeclaration>testNavigateTo(
       "mypackage/MyFunction.xtend", _builder.toString(), 
-      PsiEObject.class);
+      XtendVariableDeclaration.class);
   }
   
   protected <T extends Object> T testNavigateTo(final String relativePath, final String fileText, final Class<T> expectedType) {
@@ -840,12 +842,6 @@ public class XtendNavigationTest extends LightXtendTest {
       _caretModel.moveToOffset(referenceOffset);
       final PsiElement targetElement = this.myFixture.getElementAtCaret();
       TestCase.assertNotNull(targetElement);
-      Class<? extends PsiElement> _class = targetElement.getClass();
-      String _plus = (_class + " is not assignable from ");
-      String _plus_1 = (_plus + expectedType);
-      Class<? extends PsiElement> _class_1 = targetElement.getClass();
-      boolean _isAssignableFrom = expectedType.isAssignableFrom(_class_1);
-      TestCase.assertTrue(_plus_1, _isAssignableFrom);
       final PsiElement actualNavigationElement = targetElement.getNavigationElement();
       boolean _notEquals = (!Objects.equal(expectedNavigationElement, actualNavigationElement));
       if (_notEquals) {
@@ -853,7 +849,14 @@ public class XtendNavigationTest extends LightXtendTest {
         String _psiToString = DebugUtil.psiToString(_file, true, true);
         TestCase.assertEquals(_psiToString, expectedNavigationElement, actualNavigationElement);
       }
-      _xblockexpression = ((T) targetElement);
+      final EObject result = ((PsiEObject) targetElement).getEObject();
+      Class<? extends EObject> _class = result.getClass();
+      String _plus = (_class + " is not assignable from ");
+      String _plus_1 = (_plus + expectedType);
+      Class<? extends EObject> _class_1 = result.getClass();
+      boolean _isAssignableFrom = expectedType.isAssignableFrom(_class_1);
+      TestCase.assertTrue(_plus_1, _isAssignableFrom);
+      _xblockexpression = ((T) result);
     }
     return _xblockexpression;
   }
