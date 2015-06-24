@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.web
 
-import org.eclipse.xtext.xbase.ide.DefaultXbaseIdeModule
+import org.eclipse.xtext.web.server.DefaultWebModule
 
-class DefaultXbaseWebModule extends DefaultXbaseIdeModule {
+class DefaultXbaseWebModule extends DefaultWebModule {
 	
 }

@@ -59,37 +59,46 @@ public class XtextServlet extends HttpServlet {
     try {
       super.service(req, resp);
     } catch (final Throwable _t) {
-      if (_t instanceof InvalidRequestException) {
-        final InvalidRequestException ire = (InvalidRequestException)_t;
+      if (_t instanceof InvalidRequestException.ResourceNotFoundException) {
+        final InvalidRequestException.ResourceNotFoundException exception = (InvalidRequestException.ResourceNotFoundException)_t;
         String _requestURI = req.getRequestURI();
         String _plus = ("Invalid request (" + _requestURI);
         String _plus_1 = (_plus + "): ");
-        String _message = ire.getMessage();
+        String _message = exception.getMessage();
         String _plus_2 = (_plus_1 + _message);
         this.LOG.trace(_plus_2);
-        int _switchResult = (int) 0;
-        InvalidRequestException.Type _type = ire.getType();
-        if (_type != null) {
-          switch (_type) {
-            case RESOURCE_NOT_FOUND:
-              _switchResult = HttpServletResponse.SC_NOT_FOUND;
-              break;
-            case INVALID_DOCUMENT_STATE:
-              _switchResult = HttpServletResponse.SC_CONFLICT;
-              break;
-            case PERMISSION_DENIED:
-              _switchResult = HttpServletResponse.SC_FORBIDDEN;
-              break;
-            default:
-              _switchResult = HttpServletResponse.SC_BAD_REQUEST;
-              break;
-          }
-        } else {
-          _switchResult = HttpServletResponse.SC_BAD_REQUEST;
-        }
-        final int statusCode = _switchResult;
-        String _message_1 = ire.getMessage();
-        resp.sendError(statusCode, _message_1);
+        String _message_1 = exception.getMessage();
+        resp.sendError(HttpServletResponse.SC_NOT_FOUND, _message_1);
+      } else if (_t instanceof InvalidRequestException.InvalidDocumentStateException) {
+        final InvalidRequestException.InvalidDocumentStateException exception_1 = (InvalidRequestException.InvalidDocumentStateException)_t;
+        String _requestURI_1 = req.getRequestURI();
+        String _plus_3 = ("Invalid request (" + _requestURI_1);
+        String _plus_4 = (_plus_3 + "): ");
+        String _message_2 = exception_1.getMessage();
+        String _plus_5 = (_plus_4 + _message_2);
+        this.LOG.trace(_plus_5);
+        String _message_3 = exception_1.getMessage();
+        resp.sendError(HttpServletResponse.SC_CONFLICT, _message_3);
+      } else if (_t instanceof InvalidRequestException.PermissionDeniedException) {
+        final InvalidRequestException.PermissionDeniedException exception_2 = (InvalidRequestException.PermissionDeniedException)_t;
+        String _requestURI_2 = req.getRequestURI();
+        String _plus_6 = ("Invalid request (" + _requestURI_2);
+        String _plus_7 = (_plus_6 + "): ");
+        String _message_4 = exception_2.getMessage();
+        String _plus_8 = (_plus_7 + _message_4);
+        this.LOG.trace(_plus_8);
+        String _message_5 = exception_2.getMessage();
+        resp.sendError(HttpServletResponse.SC_FORBIDDEN, _message_5);
+      } else if (_t instanceof InvalidRequestException) {
+        final InvalidRequestException exception_3 = (InvalidRequestException)_t;
+        String _requestURI_3 = req.getRequestURI();
+        String _plus_9 = ("Invalid request (" + _requestURI_3);
+        String _plus_10 = (_plus_9 + "): ");
+        String _message_6 = exception_3.getMessage();
+        String _plus_11 = (_plus_10 + _message_6);
+        this.LOG.trace(_plus_11);
+        String _message_7 = exception_3.getMessage();
+        resp.sendError(HttpServletResponse.SC_BAD_REQUEST, _message_7);
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -98,95 +107,83 @@ public class XtextServlet extends HttpServlet {
   
   @Override
   protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
-    try {
-      final XtextServiceDispatcher.ServiceDescriptor service = this.getService(req);
-      boolean _and = false;
-      boolean _isHasConflict = service.isHasConflict();
-      boolean _not = (!_isHasConflict);
-      if (!_not) {
-        _and = false;
+    final XtextServiceDispatcher.ServiceDescriptor service = this.getService(req);
+    boolean _and = false;
+    boolean _isHasConflict = service.isHasConflict();
+    boolean _not = (!_isHasConflict);
+    if (!_not) {
+      _and = false;
+    } else {
+      boolean _or = false;
+      boolean _isHasSideEffects = service.isHasSideEffects();
+      if (_isHasSideEffects) {
+        _or = true;
       } else {
-        boolean _or = false;
-        boolean _isHasSideEffects = service.isHasSideEffects();
-        if (_isHasSideEffects) {
-          _or = true;
-        } else {
-          boolean _isHasTextInput = service.isHasTextInput();
-          _or = _isHasTextInput;
-        }
-        _and = _or;
+        boolean _isHasTextInput = service.isHasTextInput();
+        _or = _isHasTextInput;
       }
-      if (_and) {
-        super.doGet(req, resp);
-      } else {
-        this.doService(service, resp);
-      }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+      _and = _or;
+    }
+    if (_and) {
+      super.doGet(req, resp);
+    } else {
+      this.doService(service, resp);
     }
   }
   
   @Override
   protected void doPut(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
-    try {
-      final XtextServiceDispatcher.ServiceDescriptor service = this.getService(req);
-      boolean _and = false;
-      boolean _isHasConflict = service.isHasConflict();
-      boolean _not = (!_isHasConflict);
-      if (!_not) {
-        _and = false;
-      } else {
-        String _type = service.getType();
-        boolean _notEquals = (!Objects.equal(_type, "update"));
-        _and = _notEquals;
-      }
-      if (_and) {
-        super.doPut(req, resp);
-      } else {
-        this.doService(service, resp);
-      }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+    final XtextServiceDispatcher.ServiceDescriptor service = this.getService(req);
+    boolean _and = false;
+    boolean _isHasConflict = service.isHasConflict();
+    boolean _not = (!_isHasConflict);
+    if (!_not) {
+      _and = false;
+    } else {
+      String _type = service.getType();
+      boolean _notEquals = (!Objects.equal(_type, "update"));
+      _and = _notEquals;
+    }
+    if (_and) {
+      super.doPut(req, resp);
+    } else {
+      this.doService(service, resp);
     }
   }
   
   @Override
   protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
-    try {
-      final XtextServiceDispatcher.ServiceDescriptor service = this.getService(req);
-      boolean _and = false;
-      boolean _isHasConflict = service.isHasConflict();
-      boolean _not = (!_isHasConflict);
-      if (!_not) {
-        _and = false;
+    final XtextServiceDispatcher.ServiceDescriptor service = this.getService(req);
+    boolean _and = false;
+    boolean _isHasConflict = service.isHasConflict();
+    boolean _not = (!_isHasConflict);
+    if (!_not) {
+      _and = false;
+    } else {
+      boolean _or = false;
+      boolean _and_1 = false;
+      boolean _isHasSideEffects = service.isHasSideEffects();
+      boolean _not_1 = (!_isHasSideEffects);
+      if (!_not_1) {
+        _and_1 = false;
       } else {
-        boolean _or = false;
-        boolean _and_1 = false;
-        boolean _isHasSideEffects = service.isHasSideEffects();
-        boolean _not_1 = (!_isHasSideEffects);
-        if (!_not_1) {
-          _and_1 = false;
-        } else {
-          boolean _isHasTextInput = service.isHasTextInput();
-          boolean _not_2 = (!_isHasTextInput);
-          _and_1 = _not_2;
-        }
-        if (_and_1) {
-          _or = true;
-        } else {
-          String _type = service.getType();
-          boolean _equals = Objects.equal(_type, "update");
-          _or = _equals;
-        }
-        _and = _or;
+        boolean _isHasTextInput = service.isHasTextInput();
+        boolean _not_2 = (!_isHasTextInput);
+        _and_1 = _not_2;
       }
-      if (_and) {
-        super.doPost(req, resp);
+      if (_and_1) {
+        _or = true;
       } else {
-        this.doService(service, resp);
+        String _type = service.getType();
+        boolean _equals = Objects.equal(_type, "update");
+        _or = _equals;
       }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+      _and = _or;
+    }
+    if (_and) {
+      super.doPost(req, resp);
+    } else {
+      this.doService(service, resp);
     }
   }
   
@@ -226,15 +223,15 @@ public class XtextServlet extends HttpServlet {
   
   /**
    * Check whether it is allowed to invoke the given service.
-   * @throws InvalidRequestException with type {@code PERMISSION_DENIED} if permission is denied
+   * @throws PermissionDeniedException if permission is denied
    */
-  protected void checkPermission(final HttpServletRequest request, final XtextServiceDispatcher.ServiceDescriptor service) throws InvalidRequestException {
+  protected void checkPermission(final HttpServletRequest request, final XtextServiceDispatcher.ServiceDescriptor service) throws InvalidRequestException.PermissionDeniedException {
   }
   
   /**
    * Resolve the Guice injector for the language associated with the given request.
    */
-  protected Injector getInjector(final IRequestData requestData) throws InvalidRequestException {
+  protected Injector getInjector(final IRequestData requestData) throws InvalidRequestException.UnknownLanguageException {
     IResourceServiceProvider resourceServiceProvider = null;
     String _elvis = null;
     String _parameter = requestData.getParameter("resource");
@@ -254,7 +251,7 @@ public class XtextServlet extends HttpServlet {
     }
     boolean _equals = Objects.equal(resourceServiceProvider, null);
     if (_equals) {
-      throw new InvalidRequestException(InvalidRequestException.Type.UNKNOWN_LANGUAGE, "Unable to identify the Xtext language.");
+      throw new InvalidRequestException.UnknownLanguageException("Unable to identify the Xtext language.");
     }
     return resourceServiceProvider.<Injector>get(Injector.class);
   }

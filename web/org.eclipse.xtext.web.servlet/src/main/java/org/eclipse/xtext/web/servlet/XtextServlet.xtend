@@ -19,9 +19,11 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.web.server.IRequestData
 import org.eclipse.xtext.web.server.InvalidRequestException
+import org.eclipse.xtext.web.server.InvalidRequestException.InvalidDocumentStateException
+import org.eclipse.xtext.web.server.InvalidRequestException.PermissionDeniedException
+import org.eclipse.xtext.web.server.InvalidRequestException.ResourceNotFoundException
+import org.eclipse.xtext.web.server.InvalidRequestException.UnknownLanguageException
 import org.eclipse.xtext.web.server.XtextServiceDispatcher
-
-import static org.eclipse.xtext.web.server.InvalidRequestException.Type.*
 
 /**
  * An HTTP servlet for publishing the Xtext services. Include this into your web server by creating
@@ -51,15 +53,18 @@ class XtextServlet extends HttpServlet {
 	override protected service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			super.service(req, resp)
-		} catch (InvalidRequestException ire) {
-			LOG.trace('Invalid request (' + req.requestURI + '): ' + ire.message)
-			val statusCode = switch ire.type {
-				case RESOURCE_NOT_FOUND: HttpServletResponse.SC_NOT_FOUND
-				case INVALID_DOCUMENT_STATE: HttpServletResponse.SC_CONFLICT
-				case PERMISSION_DENIED: HttpServletResponse.SC_FORBIDDEN
-				default: HttpServletResponse.SC_BAD_REQUEST
-			}
-			resp.sendError(statusCode, ire.message)
+		} catch (ResourceNotFoundException exception) {
+			LOG.trace('Invalid request (' + req.requestURI + '): ' + exception.message)
+			resp.sendError(HttpServletResponse.SC_NOT_FOUND, exception.message)
+		} catch (InvalidDocumentStateException exception) {
+			LOG.trace('Invalid request (' + req.requestURI + '): ' + exception.message)
+			resp.sendError(HttpServletResponse.SC_CONFLICT, exception.message)
+		} catch (PermissionDeniedException exception) {
+			LOG.trace('Invalid request (' + req.requestURI + '): ' + exception.message)
+			resp.sendError(HttpServletResponse.SC_FORBIDDEN, exception.message)
+		} catch (InvalidRequestException exception) {
+			LOG.trace('Invalid request (' + req.requestURI + '): ' + exception.message)
+			resp.sendError(HttpServletResponse.SC_BAD_REQUEST, exception.message)
 		}
 	}
 	
@@ -122,17 +127,17 @@ class XtextServlet extends HttpServlet {
 	
 	/**
 	 * Check whether it is allowed to invoke the given service.
-	 * @throws InvalidRequestException with type {@code PERMISSION_DENIED} if permission is denied
+	 * @throws PermissionDeniedException if permission is denied
 	 */
 	protected def void checkPermission(HttpServletRequest request, XtextServiceDispatcher.ServiceDescriptor service)
-			throws InvalidRequestException {
+			throws PermissionDeniedException {
 		// The default implementation allows all services
 	}
 	
 	/**
 	 * Resolve the Guice injector for the language associated with the given request.
 	 */
-	protected def getInjector(IRequestData requestData) throws InvalidRequestException {
+	protected def getInjector(IRequestData requestData) throws UnknownLanguageException {
 		var IResourceServiceProvider resourceServiceProvider
 		
 		val emfURI = URI.createURI(requestData.getParameter('resource') ?: '')
@@ -143,7 +148,7 @@ class XtextServlet extends HttpServlet {
 			resourceServiceProvider = serviceProviderRegistry.getResourceServiceProvider(emfURI, contentType)
 		
 		if (resourceServiceProvider == null)
-			throw new InvalidRequestException(UNKNOWN_LANGUAGE, 'Unable to identify the Xtext language.')
+			throw new UnknownLanguageException('Unable to identify the Xtext language.')
 		
 		return resourceServiceProvider.get(Injector)
 	}

@@ -105,7 +105,7 @@ public class ContentAssistService {
    * is scheduled with higher priority, so currently running operations may be canceled.
    * The document processing is rescheduled as background work afterwards.
    */
-  public ContentAssistResult createProposalsWithUpdate(final XtextWebDocumentAccess document, final String deltaText, final int deltaOffset, final int deltaReplaceLength, final ITextRegion textSelection, final int caretOffset, final int proposalsLimit) {
+  public ContentAssistResult createProposalsWithUpdate(final XtextWebDocumentAccess document, final String deltaText, final int deltaOffset, final int deltaReplaceLength, final ITextRegion textSelection, final int caretOffset, final int proposalsLimit) throws InvalidRequestException {
     ContentAssistContextFactory _get = this.contextFactoryProvider.get();
     final Procedure1<ContentAssistContextFactory> _function = new Procedure1<ContentAssistContextFactory>() {
       @Override

@@ -7,24 +7,19 @@
  */
 package org.eclipse.xtext.web.server.test;
 
-import com.google.common.base.Objects;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.web.server.IRequestData;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class MockRequestData implements IRequestData {
-  private final String requestType;
-  
   private final Map<String, String> parameters;
   
   @Override
-  public Collection<String> getParameterKeys() {
+  public Set<String> getParameterKeys() {
     Set<String> _keySet = this.parameters.keySet();
     return Collections.<String>unmodifiableSet(_keySet);
   }
@@ -35,26 +30,17 @@ public class MockRequestData implements IRequestData {
   }
   
   @Override
-  public Collection<String> getMetadataKeys() {
-    return Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(IRequestData.REQUEST_TYPE));
+  public Set<String> getMetadataKeys() {
+    return Collections.<String>emptySet();
   }
   
   @Override
   public String getMetadata(final String key) {
-    String _switchResult = null;
-    boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(key, IRequestData.REQUEST_TYPE)) {
-        _matched=true;
-        _switchResult = this.requestType;
-      }
-    }
-    return _switchResult;
+    return null;
   }
   
-  public MockRequestData(final String requestType, final Map<String, String> parameters) {
+  public MockRequestData(final Map<String, String> parameters) {
     super();
-    this.requestType = requestType;
     this.parameters = parameters;
   }
 }

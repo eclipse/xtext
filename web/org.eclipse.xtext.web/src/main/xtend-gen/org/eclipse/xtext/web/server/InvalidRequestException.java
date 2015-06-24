@@ -8,7 +8,6 @@
 package org.eclipse.xtext.web.server;
 
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * Exception that can be thrown anytime while preparing or executing an Xtext service.
@@ -18,37 +17,78 @@ import org.eclipse.xtext.xbase.lib.Pure;
  */
 @Accessors
 @SuppressWarnings("all")
-public class InvalidRequestException extends Exception {
+public class InvalidRequestException extends RuntimeException {
   /**
-   * The exception type can be used as a hint for translating the exception into a proper
-   * error message for the client.
+   * The request parameters are not valid.
    */
-  public enum Type {
-    INVALID_PARAMETERS,
+  public static class InvalidParametersException extends InvalidRequestException {
+    public InvalidParametersException(final String message) {
+      super(message);
+    }
     
-    UNKNOWN_LANGUAGE,
-    
-    RESOURCE_NOT_FOUND,
-    
-    INVALID_DOCUMENT_STATE,
-    
-    PERMISSION_DENIED;
+    public InvalidParametersException(final String message, final Throwable cause) {
+      super(message, cause);
+    }
   }
   
-  private final InvalidRequestException.Type type;
+  /**
+   * The Xtext language could not be inferred from the parameters or metadata.
+   */
+  public static class UnknownLanguageException extends InvalidRequestException {
+    public UnknownLanguageException(final String message) {
+      super(message);
+    }
+    
+    public UnknownLanguageException(final String message, final Throwable cause) {
+      super(message, cause);
+    }
+  }
   
-  public InvalidRequestException(final InvalidRequestException.Type type, final String message) {
+  /**
+   * The requested resource was not found on the server.
+   */
+  public static class ResourceNotFoundException extends InvalidRequestException {
+    public ResourceNotFoundException(final String message) {
+      super(message);
+    }
+    
+    public ResourceNotFoundException(final String message, final Throwable cause) {
+      super(message, cause);
+    }
+  }
+  
+  /**
+   * The required document state does not match the current document state.
+   * @see org.eclipse.xtext.web.server.model.XtextWebDocument#getStateId()
+   */
+  public static class InvalidDocumentStateException extends InvalidRequestException {
+    public InvalidDocumentStateException(final String message) {
+      super(message);
+    }
+    
+    public InvalidDocumentStateException(final String message, final Throwable cause) {
+      super(message, cause);
+    }
+  }
+  
+  /**
+   * Permission to invoke the requested service was denied.
+   */
+  public static class PermissionDeniedException extends InvalidRequestException {
+    public PermissionDeniedException(final String message) {
+      super(message);
+    }
+    
+    public PermissionDeniedException(final String message, final Throwable cause) {
+      super(message, cause);
+    }
+  }
+  
+  public InvalidRequestException(final String message) {
     super(message);
-    this.type = type;
   }
   
-  public InvalidRequestException(final InvalidRequestException.Type type, final String message, final Throwable cause) {
+  public InvalidRequestException(final String message, final Throwable cause) {
     super(message, cause);
-    this.type = type;
-  }
-  
-  @Pure
-  public InvalidRequestException.Type getType() {
-    return this.type;
   }
 }

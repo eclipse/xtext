@@ -108,22 +108,18 @@ public class AbstractWebServerTest extends AbstractXtextTests {
     }
   }
   
-  protected XtextServiceDispatcher.ServiceDescriptor getService(final String path, final Map<String, String> parameters) {
+  protected XtextServiceDispatcher.ServiceDescriptor getService(final Map<String, String> parameters) {
     HashMapSessionStore _hashMapSessionStore = new HashMapSessionStore();
-    return this.getService(path, parameters, _hashMapSessionStore);
+    return this.getService(parameters, _hashMapSessionStore);
   }
   
-  protected XtextServiceDispatcher.ServiceDescriptor getService(final String path, final Map<String, String> parameters, final ISessionStore sessionStore) {
-    try {
-      XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
-      {
-        final MockRequestData requestData = new MockRequestData(path, parameters);
-        _xblockexpression = this.dispatcher.getService(requestData, sessionStore);
-      }
-      return _xblockexpression;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+  protected XtextServiceDispatcher.ServiceDescriptor getService(final Map<String, String> parameters, final ISessionStore sessionStore) {
+    XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
+    {
+      final MockRequestData requestData = new MockRequestData(parameters);
+      _xblockexpression = this.dispatcher.getService(requestData, sessionStore);
     }
+    return _xblockexpression;
   }
   
   @Pure

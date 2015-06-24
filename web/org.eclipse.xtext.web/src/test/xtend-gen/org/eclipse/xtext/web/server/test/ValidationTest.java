@@ -26,8 +26,9 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ValidationTest extends AbstractWebServerTest {
   protected void assertValidationResult(final String resourceContent, final String expectedResult) {
-    Pair<String, String> _mappedTo = Pair.<String, String>of("fullText", resourceContent);
-    final XtextServiceDispatcher.ServiceDescriptor validate = this.getService("validation", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo)));
+    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "validation");
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("fullText", resourceContent);
+    final XtextServiceDispatcher.ServiceDescriptor validate = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)));
     boolean _isHasSideEffects = validate.isHasSideEffects();
     Assert.assertFalse(_isHasSideEffects);
     boolean _isHasTextInput = validate.isHasTextInput();
@@ -150,9 +151,10 @@ public class ValidationTest extends AbstractWebServerTest {
   @Test
   public void testValidateFile() {
     final File file = this.createFile("stat foo end");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "validation");
     String _name = file.getName();
-    Pair<String, String> _mappedTo = Pair.<String, String>of("resource", _name);
-    final XtextServiceDispatcher.ServiceDescriptor validate = this.getService("validation", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo)));
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
+    final XtextServiceDispatcher.ServiceDescriptor validate = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)));
     boolean _isHasSideEffects = validate.isHasSideEffects();
     Assert.assertFalse(_isHasSideEffects);
     boolean _isHasTextInput = validate.isHasTextInput();
@@ -199,10 +201,12 @@ public class ValidationTest extends AbstractWebServerTest {
   @Test
   public void testIncorrectStateId() {
     final File file = this.createFile("state foo end");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "validation");
     String _name = file.getName();
-    Pair<String, String> _mappedTo = Pair.<String, String>of("resource", _name);
-    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("requiredStateId", "totalerquatsch");
-    final XtextServiceDispatcher.ServiceDescriptor validate = this.getService("validation", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)));
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
+    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("requiredStateId", "totalerquatsch");
+    final XtextServiceDispatcher.ServiceDescriptor validate = this.getService(
+      Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2)));
     boolean _isHasConflict = validate.isHasConflict();
     Assert.assertTrue(_isHasConflict);
     Function0<? extends IServiceResult> _service = validate.getService();

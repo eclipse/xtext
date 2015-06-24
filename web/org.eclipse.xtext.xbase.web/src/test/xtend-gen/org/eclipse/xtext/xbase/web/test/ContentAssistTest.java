@@ -36,11 +36,13 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
   }
   
   protected void assertContentAssistResult(final CharSequence resourceContent, final int offset, final CharSequence expectedResult) {
+    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "content-assist");
     String _string = resourceContent.toString();
-    Pair<String, String> _mappedTo = Pair.<String, String>of("fullText", _string);
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("fullText", _string);
     String _string_1 = Integer.valueOf(offset).toString();
-    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("caretOffset", _string_1);
-    final XtextServiceDispatcher.ServiceDescriptor contentAssist = this.getService("content-assist", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)));
+    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("caretOffset", _string_1);
+    final XtextServiceDispatcher.ServiceDescriptor contentAssist = this.getService(
+      Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2)));
     Function0<? extends IServiceResult> _service = contentAssist.getService();
     IServiceResult _apply = _service.apply();
     final ContentAssistResult result = ((ContentAssistResult) _apply);

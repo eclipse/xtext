@@ -11,11 +11,10 @@ import com.google.inject.Singleton
 import java.io.IOException
 import org.eclipse.xtext.web.server.ISessionStore
 import org.eclipse.xtext.web.server.InvalidRequestException
+import org.eclipse.xtext.web.server.InvalidRequestException.ResourceNotFoundException
 import org.eclipse.xtext.web.server.model.DocumentStateResult
 import org.eclipse.xtext.web.server.model.XtextWebDocument
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess
-
-import static org.eclipse.xtext.web.server.InvalidRequestException.Type.*
 
 /**
  * Service class for loading, saving, and reverting documents. The actual work is done by
@@ -34,7 +33,7 @@ class ResourcePersistenceService {
 			try {
 				resourceHandler.get(resourceId)
 			} catch (IOException ioe) {
-				throw new InvalidRequestException(RESOURCE_NOT_FOUND, 'The requested resource was not found.', ioe)
+				throw new ResourceNotFoundException('The requested resource was not found.', ioe)
 			}
 		])
 		new XtextWebDocumentAccess(document).readOnly[ it, cancelIndicator |
@@ -57,7 +56,7 @@ class ResourcePersistenceService {
 			sessionStore.put(XtextWebDocument -> resourceId, document)
 			return result
 		} catch (IOException ioe) {
-			throw new InvalidRequestException(RESOURCE_NOT_FOUND, 'The requested resource was not found.', ioe)
+			throw new ResourceNotFoundException('The requested resource was not found.', ioe)
 		}
 	}
 	
@@ -71,7 +70,7 @@ class ResourcePersistenceService {
 				resourceHandler.put(it)
 				dirty = false
 			} catch (IOException ioe) {
-				throw new InvalidRequestException(RESOURCE_NOT_FOUND, ioe.message, ioe)
+				throw new ResourceNotFoundException(ioe.message, ioe)
 			}
 			return new DocumentStateResult(stateId)
 		]

@@ -184,12 +184,14 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
     this.resourceValidator.reset(0);
     final File file = this.createFile("input signal x state foo end");
     final HashMapSessionStore sessionStore = new HashMapSessionStore();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "update");
     String _name = file.getName();
-    Pair<String, String> _mappedTo = Pair.<String, String>of("resource", _name);
-    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("deltaText", "bar");
-    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("deltaOffset", "21");
-    Pair<String, String> _mappedTo_3 = Pair.<String, String>of("deltaReplaceLength", "3");
-    XtextServiceDispatcher.ServiceDescriptor update = this.getService("update", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3)), sessionStore);
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
+    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("deltaText", "bar");
+    Pair<String, String> _mappedTo_3 = Pair.<String, String>of("deltaOffset", "21");
+    Pair<String, String> _mappedTo_4 = Pair.<String, String>of("deltaReplaceLength", "3");
+    XtextServiceDispatcher.ServiceDescriptor update = this.getService(
+      Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4)), sessionStore);
     boolean _isHasSideEffects = update.isHasSideEffects();
     Assert.assertTrue(_isHasSideEffects);
     boolean _isHasTextInput = update.isHasTextInput();
@@ -197,20 +199,23 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
     Function0<? extends IServiceResult> _service = update.getService();
     IServiceResult _apply = _service.apply();
     final DocumentStateResult updateResult = ((DocumentStateResult) _apply);
+    Pair<String, String> _mappedTo_5 = Pair.<String, String>of("requestType", "update");
     String _name_1 = file.getName();
-    Pair<String, String> _mappedTo_4 = Pair.<String, String>of("resource", _name_1);
-    Pair<String, String> _mappedTo_5 = Pair.<String, String>of("deltaText", " set x = true");
-    Pair<String, String> _mappedTo_6 = Pair.<String, String>of("deltaOffset", "24");
-    Pair<String, String> _mappedTo_7 = Pair.<String, String>of("deltaReplaceLength", "0");
+    Pair<String, String> _mappedTo_6 = Pair.<String, String>of("resource", _name_1);
+    Pair<String, String> _mappedTo_7 = Pair.<String, String>of("deltaText", " set x = true");
+    Pair<String, String> _mappedTo_8 = Pair.<String, String>of("deltaOffset", "24");
+    Pair<String, String> _mappedTo_9 = Pair.<String, String>of("deltaReplaceLength", "0");
     String _stateId = updateResult.getStateId();
-    Pair<String, String> _mappedTo_8 = Pair.<String, String>of("requiredStateId", _stateId);
-    XtextServiceDispatcher.ServiceDescriptor _service_1 = this.getService("update", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_4, _mappedTo_5, _mappedTo_6, _mappedTo_7, _mappedTo_8)), sessionStore);
+    Pair<String, String> _mappedTo_10 = Pair.<String, String>of("requiredStateId", _stateId);
+    XtextServiceDispatcher.ServiceDescriptor _service_1 = this.getService(
+      Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_5, _mappedTo_6, _mappedTo_7, _mappedTo_8, _mappedTo_9, _mappedTo_10)), sessionStore);
     update = _service_1;
     Function0<? extends IServiceResult> _service_2 = update.getService();
     _service_2.apply();
+    Pair<String, String> _mappedTo_11 = Pair.<String, String>of("requestType", "load");
     String _name_2 = file.getName();
-    Pair<String, String> _mappedTo_9 = Pair.<String, String>of("resource", _name_2);
-    final XtextServiceDispatcher.ServiceDescriptor load = this.getService("load", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_9)), sessionStore);
+    Pair<String, String> _mappedTo_12 = Pair.<String, String>of("resource", _name_2);
+    final XtextServiceDispatcher.ServiceDescriptor load = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_11, _mappedTo_12)), sessionStore);
     Function0<? extends IServiceResult> _service_3 = load.getService();
     IServiceResult _apply_1 = _service_3.apply();
     final ResourceContentResult loadResult = ((ResourceContentResult) _apply_1);
@@ -222,13 +227,15 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
   public void testIncorrectStateId1() {
     this.resourceValidator.reset(0);
     final File file = this.createFile("state foo end");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "update");
     String _name = file.getName();
-    Pair<String, String> _mappedTo = Pair.<String, String>of("resource", _name);
-    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("deltaText", " set x = true");
-    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("deltaOffset", "10");
-    Pair<String, String> _mappedTo_3 = Pair.<String, String>of("deltaReplaceLength", "0");
-    Pair<String, String> _mappedTo_4 = Pair.<String, String>of("requiredStateId", "totalerquatsch");
-    final XtextServiceDispatcher.ServiceDescriptor update = this.getService("update", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4)));
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
+    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("deltaText", " set x = true");
+    Pair<String, String> _mappedTo_3 = Pair.<String, String>of("deltaOffset", "10");
+    Pair<String, String> _mappedTo_4 = Pair.<String, String>of("deltaReplaceLength", "0");
+    Pair<String, String> _mappedTo_5 = Pair.<String, String>of("requiredStateId", "totalerquatsch");
+    final XtextServiceDispatcher.ServiceDescriptor update = this.getService(
+      Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4, _mappedTo_5)));
     boolean _isHasConflict = update.isHasConflict();
     Assert.assertTrue(_isHasConflict);
     Function0<? extends IServiceResult> _service = update.getService();
@@ -244,31 +251,37 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
     this.resourceValidator.reset(0);
     final File file = this.createFile("input signal x state foo end");
     final HashMapSessionStore sessionStore = new HashMapSessionStore();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "update");
     String _name = file.getName();
-    Pair<String, String> _mappedTo = Pair.<String, String>of("resource", _name);
-    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("deltaText", "bar");
-    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("deltaOffset", "21");
-    Pair<String, String> _mappedTo_3 = Pair.<String, String>of("deltaReplaceLength", "3");
-    final XtextServiceDispatcher.ServiceDescriptor update1 = this.getService("update", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3)), sessionStore);
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
+    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("deltaText", "bar");
+    Pair<String, String> _mappedTo_3 = Pair.<String, String>of("deltaOffset", "21");
+    Pair<String, String> _mappedTo_4 = Pair.<String, String>of("deltaReplaceLength", "3");
+    final XtextServiceDispatcher.ServiceDescriptor update1 = this.getService(
+      Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4)), sessionStore);
     Function0<? extends IServiceResult> _service = update1.getService();
     IServiceResult _apply = _service.apply();
     final DocumentStateResult updateResult = ((DocumentStateResult) _apply);
+    Pair<String, String> _mappedTo_5 = Pair.<String, String>of("requestType", "update");
     String _name_1 = file.getName();
-    Pair<String, String> _mappedTo_4 = Pair.<String, String>of("resource", _name_1);
-    Pair<String, String> _mappedTo_5 = Pair.<String, String>of("deltaText", " set x = true");
-    Pair<String, String> _mappedTo_6 = Pair.<String, String>of("deltaOffset", "24");
-    Pair<String, String> _mappedTo_7 = Pair.<String, String>of("deltaReplaceLength", "0");
+    Pair<String, String> _mappedTo_6 = Pair.<String, String>of("resource", _name_1);
+    Pair<String, String> _mappedTo_7 = Pair.<String, String>of("deltaText", " set x = true");
+    Pair<String, String> _mappedTo_8 = Pair.<String, String>of("deltaOffset", "24");
+    Pair<String, String> _mappedTo_9 = Pair.<String, String>of("deltaReplaceLength", "0");
     String _stateId = updateResult.getStateId();
-    Pair<String, String> _mappedTo_8 = Pair.<String, String>of("requiredStateId", _stateId);
-    final XtextServiceDispatcher.ServiceDescriptor update2 = this.getService("update", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_4, _mappedTo_5, _mappedTo_6, _mappedTo_7, _mappedTo_8)), sessionStore);
+    Pair<String, String> _mappedTo_10 = Pair.<String, String>of("requiredStateId", _stateId);
+    final XtextServiceDispatcher.ServiceDescriptor update2 = this.getService(
+      Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_5, _mappedTo_6, _mappedTo_7, _mappedTo_8, _mappedTo_9, _mappedTo_10)), sessionStore);
+    Pair<String, String> _mappedTo_11 = Pair.<String, String>of("requestType", "update");
     String _name_2 = file.getName();
-    Pair<String, String> _mappedTo_9 = Pair.<String, String>of("resource", _name_2);
-    Pair<String, String> _mappedTo_10 = Pair.<String, String>of("deltaText", "y");
-    Pair<String, String> _mappedTo_11 = Pair.<String, String>of("deltaOffset", "12");
-    Pair<String, String> _mappedTo_12 = Pair.<String, String>of("deltaReplaceLength", "1");
+    Pair<String, String> _mappedTo_12 = Pair.<String, String>of("resource", _name_2);
+    Pair<String, String> _mappedTo_13 = Pair.<String, String>of("deltaText", "y");
+    Pair<String, String> _mappedTo_14 = Pair.<String, String>of("deltaOffset", "12");
+    Pair<String, String> _mappedTo_15 = Pair.<String, String>of("deltaReplaceLength", "1");
     String _stateId_1 = updateResult.getStateId();
-    Pair<String, String> _mappedTo_13 = Pair.<String, String>of("requiredStateId", _stateId_1);
-    final XtextServiceDispatcher.ServiceDescriptor update3 = this.getService("update", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_9, _mappedTo_10, _mappedTo_11, _mappedTo_12, _mappedTo_13)), sessionStore);
+    Pair<String, String> _mappedTo_16 = Pair.<String, String>of("requiredStateId", _stateId_1);
+    final XtextServiceDispatcher.ServiceDescriptor update3 = this.getService(
+      Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_11, _mappedTo_12, _mappedTo_13, _mappedTo_14, _mappedTo_15, _mappedTo_16)), sessionStore);
     Function0<? extends IServiceResult> _service_1 = update2.getService();
     _service_1.apply();
     Function0<? extends IServiceResult> _service_2 = update3.getService();
@@ -284,23 +297,27 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
     this.resourceValidator.reset(3000);
     final File file = this.createFile("input signal x state foo end");
     final HashMapSessionStore sessionStore = new HashMapSessionStore();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "update");
     String _name = file.getName();
-    Pair<String, String> _mappedTo = Pair.<String, String>of("resource", _name);
-    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("deltaText", "bar");
-    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("deltaOffset", "21");
-    Pair<String, String> _mappedTo_3 = Pair.<String, String>of("deltaReplaceLength", "3");
-    final XtextServiceDispatcher.ServiceDescriptor update1 = this.getService("update", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3)), sessionStore);
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
+    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("deltaText", "bar");
+    Pair<String, String> _mappedTo_3 = Pair.<String, String>of("deltaOffset", "21");
+    Pair<String, String> _mappedTo_4 = Pair.<String, String>of("deltaReplaceLength", "3");
+    final XtextServiceDispatcher.ServiceDescriptor update1 = this.getService(
+      Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4)), sessionStore);
     Function0<? extends IServiceResult> _service = update1.getService();
     IServiceResult _apply = _service.apply();
     final DocumentStateResult updateResult = ((DocumentStateResult) _apply);
+    Pair<String, String> _mappedTo_5 = Pair.<String, String>of("requestType", "update");
     String _name_1 = file.getName();
-    Pair<String, String> _mappedTo_4 = Pair.<String, String>of("resource", _name_1);
-    Pair<String, String> _mappedTo_5 = Pair.<String, String>of("deltaText", " set x = true");
-    Pair<String, String> _mappedTo_6 = Pair.<String, String>of("deltaOffset", "24");
-    Pair<String, String> _mappedTo_7 = Pair.<String, String>of("deltaReplaceLength", "0");
+    Pair<String, String> _mappedTo_6 = Pair.<String, String>of("resource", _name_1);
+    Pair<String, String> _mappedTo_7 = Pair.<String, String>of("deltaText", " set x = true");
+    Pair<String, String> _mappedTo_8 = Pair.<String, String>of("deltaOffset", "24");
+    Pair<String, String> _mappedTo_9 = Pair.<String, String>of("deltaReplaceLength", "0");
     String _stateId = updateResult.getStateId();
-    Pair<String, String> _mappedTo_8 = Pair.<String, String>of("requiredStateId", _stateId);
-    final XtextServiceDispatcher.ServiceDescriptor update2 = this.getService("update", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_4, _mappedTo_5, _mappedTo_6, _mappedTo_7, _mappedTo_8)), sessionStore);
+    Pair<String, String> _mappedTo_10 = Pair.<String, String>of("requiredStateId", _stateId);
+    final XtextServiceDispatcher.ServiceDescriptor update2 = this.getService(
+      Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_5, _mappedTo_6, _mappedTo_7, _mappedTo_8, _mappedTo_9, _mappedTo_10)), sessionStore);
     final Function1<UpdateDocumentTest.TestResourceValidator, Boolean> _function = new Function1<UpdateDocumentTest.TestResourceValidator, Boolean>() {
       @Override
       public Boolean apply(final UpdateDocumentTest.TestResourceValidator it) {
@@ -339,21 +356,25 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
     this.resourceValidator.reset(3000);
     final File file = this.createFile("input signal x state foo end");
     final HashMapSessionStore sessionStore = new HashMapSessionStore();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "update");
     String _name = file.getName();
-    Pair<String, String> _mappedTo = Pair.<String, String>of("resource", _name);
-    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("deltaText", "bar");
-    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("deltaOffset", "21");
-    Pair<String, String> _mappedTo_3 = Pair.<String, String>of("deltaReplaceLength", "3");
-    final XtextServiceDispatcher.ServiceDescriptor update = this.getService("update", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3)), sessionStore);
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
+    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("deltaText", "bar");
+    Pair<String, String> _mappedTo_3 = Pair.<String, String>of("deltaOffset", "21");
+    Pair<String, String> _mappedTo_4 = Pair.<String, String>of("deltaReplaceLength", "3");
+    final XtextServiceDispatcher.ServiceDescriptor update = this.getService(
+      Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4)), sessionStore);
     Function0<? extends IServiceResult> _service = update.getService();
     IServiceResult _apply = _service.apply();
     final DocumentStateResult updateResult = ((DocumentStateResult) _apply);
+    Pair<String, String> _mappedTo_5 = Pair.<String, String>of("requestType", "content-assist");
     String _name_1 = file.getName();
-    Pair<String, String> _mappedTo_4 = Pair.<String, String>of("resource", _name_1);
-    Pair<String, String> _mappedTo_5 = Pair.<String, String>of("caretOffset", "15");
+    Pair<String, String> _mappedTo_6 = Pair.<String, String>of("resource", _name_1);
+    Pair<String, String> _mappedTo_7 = Pair.<String, String>of("caretOffset", "15");
     String _stateId = updateResult.getStateId();
-    Pair<String, String> _mappedTo_6 = Pair.<String, String>of("requiredStateId", _stateId);
-    final XtextServiceDispatcher.ServiceDescriptor contentAssist = this.getService("content-assist", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_4, _mappedTo_5, _mappedTo_6)), sessionStore);
+    Pair<String, String> _mappedTo_8 = Pair.<String, String>of("requiredStateId", _stateId);
+    final XtextServiceDispatcher.ServiceDescriptor contentAssist = this.getService(
+      Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_5, _mappedTo_6, _mappedTo_7, _mappedTo_8)), sessionStore);
     final Function1<UpdateDocumentTest.TestResourceValidator, Boolean> _function = new Function1<UpdateDocumentTest.TestResourceValidator, Boolean>() {
       @Override
       public Boolean apply(final UpdateDocumentTest.TestResourceValidator it) {
@@ -392,15 +413,18 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
     this.resourceValidator.reset(3000);
     final File file = this.createFile("state foo end");
     final HashMapSessionStore sessionStore = new HashMapSessionStore();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "validation");
     String _name = file.getName();
-    Pair<String, String> _mappedTo = Pair.<String, String>of("resource", _name);
-    final XtextServiceDispatcher.ServiceDescriptor validate = this.getService("validation", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo)), sessionStore);
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
+    final XtextServiceDispatcher.ServiceDescriptor validate = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)), sessionStore);
+    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("requestType", "update");
     String _name_1 = file.getName();
-    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name_1);
-    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("deltaText", "bar");
-    Pair<String, String> _mappedTo_3 = Pair.<String, String>of("deltaOffset", "6");
-    Pair<String, String> _mappedTo_4 = Pair.<String, String>of("deltaReplaceLength", "3");
-    final XtextServiceDispatcher.ServiceDescriptor update = this.getService("update", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4)), sessionStore);
+    Pair<String, String> _mappedTo_3 = Pair.<String, String>of("resource", _name_1);
+    Pair<String, String> _mappedTo_4 = Pair.<String, String>of("deltaText", "bar");
+    Pair<String, String> _mappedTo_5 = Pair.<String, String>of("deltaOffset", "6");
+    Pair<String, String> _mappedTo_6 = Pair.<String, String>of("deltaReplaceLength", "3");
+    final XtextServiceDispatcher.ServiceDescriptor update = this.getService(
+      Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_2, _mappedTo_3, _mappedTo_4, _mappedTo_5, _mappedTo_6)), sessionStore);
     ExecutorService _executorService = this.getExecutorService();
     final Callable<IServiceResult> _function = new Callable<IServiceResult>() {
       @Override
@@ -441,13 +465,16 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
     this.resourceValidator.reset(3000);
     final File file = this.createFile("state foo end");
     final HashMapSessionStore sessionStore = new HashMapSessionStore();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "validation");
     String _name = file.getName();
-    Pair<String, String> _mappedTo = Pair.<String, String>of("resource", _name);
-    final XtextServiceDispatcher.ServiceDescriptor validate = this.getService("validation", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo)), sessionStore);
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
+    final XtextServiceDispatcher.ServiceDescriptor validate = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)), sessionStore);
+    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("requestType", "content-assist");
     String _name_1 = file.getName();
-    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name_1);
-    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("caretOffset", "0");
-    final XtextServiceDispatcher.ServiceDescriptor contentAssist = this.getService("content-assist", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_1, _mappedTo_2)), sessionStore);
+    Pair<String, String> _mappedTo_3 = Pair.<String, String>of("resource", _name_1);
+    Pair<String, String> _mappedTo_4 = Pair.<String, String>of("caretOffset", "0");
+    final XtextServiceDispatcher.ServiceDescriptor contentAssist = this.getService(
+      Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_2, _mappedTo_3, _mappedTo_4)), sessionStore);
     ExecutorService _executorService = this.getExecutorService();
     final Callable<IServiceResult> _function = new Callable<IServiceResult>() {
       @Override
@@ -488,29 +515,34 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
     this.resourceValidator.reset(0);
     final File file = this.createFile("input signal x state foo end");
     final HashMapSessionStore sessionStore = new HashMapSessionStore();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "update");
     String _name = file.getName();
-    Pair<String, String> _mappedTo = Pair.<String, String>of("resource", _name);
-    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("deltaText", "bar");
-    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("deltaOffset", "21");
-    Pair<String, String> _mappedTo_3 = Pair.<String, String>of("deltaReplaceLength", "3");
-    XtextServiceDispatcher.ServiceDescriptor update = this.getService("update", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3)), sessionStore);
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
+    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("deltaText", "bar");
+    Pair<String, String> _mappedTo_3 = Pair.<String, String>of("deltaOffset", "21");
+    Pair<String, String> _mappedTo_4 = Pair.<String, String>of("deltaReplaceLength", "3");
+    XtextServiceDispatcher.ServiceDescriptor update = this.getService(
+      Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4)), sessionStore);
     Function0<? extends IServiceResult> _service = update.getService();
     IServiceResult _apply = _service.apply();
     final DocumentStateResult updateResult = ((DocumentStateResult) _apply);
+    Pair<String, String> _mappedTo_5 = Pair.<String, String>of("requestType", "content-assist");
     String _name_1 = file.getName();
-    Pair<String, String> _mappedTo_4 = Pair.<String, String>of("resource", _name_1);
-    Pair<String, String> _mappedTo_5 = Pair.<String, String>of("caretOffset", "34");
-    Pair<String, String> _mappedTo_6 = Pair.<String, String>of("deltaText", " set x = ");
-    Pair<String, String> _mappedTo_7 = Pair.<String, String>of("deltaOffset", "24");
-    Pair<String, String> _mappedTo_8 = Pair.<String, String>of("deltaReplaceLength", "0");
+    Pair<String, String> _mappedTo_6 = Pair.<String, String>of("resource", _name_1);
+    Pair<String, String> _mappedTo_7 = Pair.<String, String>of("caretOffset", "34");
+    Pair<String, String> _mappedTo_8 = Pair.<String, String>of("deltaText", " set x = ");
+    Pair<String, String> _mappedTo_9 = Pair.<String, String>of("deltaOffset", "24");
+    Pair<String, String> _mappedTo_10 = Pair.<String, String>of("deltaReplaceLength", "0");
     String _stateId = updateResult.getStateId();
-    Pair<String, String> _mappedTo_9 = Pair.<String, String>of("requiredStateId", _stateId);
-    final XtextServiceDispatcher.ServiceDescriptor contentAssist = this.getService("content-assist", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_4, _mappedTo_5, _mappedTo_6, _mappedTo_7, _mappedTo_8, _mappedTo_9)), sessionStore);
+    Pair<String, String> _mappedTo_11 = Pair.<String, String>of("requiredStateId", _stateId);
+    final XtextServiceDispatcher.ServiceDescriptor contentAssist = this.getService(
+      Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_5, _mappedTo_6, _mappedTo_7, _mappedTo_8, _mappedTo_9, _mappedTo_10, _mappedTo_11)), sessionStore);
     Function0<? extends IServiceResult> _service_1 = contentAssist.getService();
     _service_1.apply();
+    Pair<String, String> _mappedTo_12 = Pair.<String, String>of("requestType", "load");
     String _name_2 = file.getName();
-    Pair<String, String> _mappedTo_10 = Pair.<String, String>of("resource", _name_2);
-    final XtextServiceDispatcher.ServiceDescriptor load = this.getService("load", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_10)), sessionStore);
+    Pair<String, String> _mappedTo_13 = Pair.<String, String>of("resource", _name_2);
+    final XtextServiceDispatcher.ServiceDescriptor load = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_12, _mappedTo_13)), sessionStore);
     Function0<? extends IServiceResult> _service_2 = load.getService();
     IServiceResult _apply_1 = _service_2.apply();
     final ResourceContentResult loadResult = ((ResourceContentResult) _apply_1);

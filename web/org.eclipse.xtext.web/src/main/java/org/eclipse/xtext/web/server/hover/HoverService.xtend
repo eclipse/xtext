@@ -23,7 +23,8 @@ import org.eclipse.xtext.web.server.util.ElementAtOffsetUtil
 /**
  * Service class for mouse hover information.
  */
-@Singleton @Log
+@Singleton
+@Log
 class HoverService {
 
 	@Inject extension ElementAtOffsetUtil

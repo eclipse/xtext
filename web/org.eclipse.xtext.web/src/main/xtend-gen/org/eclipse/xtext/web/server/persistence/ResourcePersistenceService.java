@@ -41,22 +41,18 @@ public class ResourcePersistenceService {
       final Function0<XtextWebDocument> _function = new Function0<XtextWebDocument>() {
         @Override
         public XtextWebDocument apply() {
+          XtextWebDocument _xtrycatchfinallyexpression = null;
           try {
-            XtextWebDocument _xtrycatchfinallyexpression = null;
-            try {
-              _xtrycatchfinallyexpression = resourceHandler.get(resourceId);
-            } catch (final Throwable _t) {
-              if (_t instanceof IOException) {
-                final IOException ioe = (IOException)_t;
-                throw new InvalidRequestException(InvalidRequestException.Type.RESOURCE_NOT_FOUND, "The requested resource was not found.", ioe);
-              } else {
-                throw Exceptions.sneakyThrow(_t);
-              }
+            _xtrycatchfinallyexpression = resourceHandler.get(resourceId);
+          } catch (final Throwable _t) {
+            if (_t instanceof IOException) {
+              final IOException ioe = (IOException)_t;
+              throw new InvalidRequestException.ResourceNotFoundException("The requested resource was not found.", ioe);
+            } else {
+              throw Exceptions.sneakyThrow(_t);
             }
-            return _xtrycatchfinallyexpression;
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
           }
+          return _xtrycatchfinallyexpression;
         }
       };
       final XtextWebDocument document = sessionStore.<XtextWebDocument>get(_mappedTo, _function);
@@ -94,7 +90,7 @@ public class ResourcePersistenceService {
     } catch (final Throwable _t) {
       if (_t instanceof IOException) {
         final IOException ioe = (IOException)_t;
-        throw new InvalidRequestException(InvalidRequestException.Type.RESOURCE_NOT_FOUND, "The requested resource was not found.", ioe);
+        throw new InvalidRequestException.ResourceNotFoundException("The requested resource was not found.", ioe);
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -115,7 +111,7 @@ public class ResourcePersistenceService {
           if (_t instanceof IOException) {
             final IOException ioe = (IOException)_t;
             String _message = ioe.getMessage();
-            throw new InvalidRequestException(InvalidRequestException.Type.RESOURCE_NOT_FOUND, _message, ioe);
+            throw new InvalidRequestException.ResourceNotFoundException(_message, ioe);
           } else {
             throw Exceptions.sneakyThrow(_t);
           }

@@ -75,12 +75,12 @@ class AbstractWebServerTest extends AbstractXtextTests {
 		return file
 	}
 	
-	protected def getService(String path, Map<String, String> parameters) {
-		getService(path, parameters, new HashMapSessionStore)
+	protected def getService(Map<String, String> parameters) {
+		getService(parameters, new HashMapSessionStore)
 	}
 	
-	protected def getService(String path, Map<String, String> parameters, ISessionStore sessionStore) {
-		val requestData = new MockRequestData(path, parameters)
+	protected def getService(Map<String, String> parameters, ISessionStore sessionStore) {
+		val requestData = new MockRequestData(parameters)
 		dispatcher.getService(requestData, sessionStore)
 	}
 	

@@ -7,8 +7,8 @@
  */
 package org.eclipse.xtext.xbase.web;
 
-import org.eclipse.xtext.xbase.ide.DefaultXbaseIdeModule;
+import org.eclipse.xtext.web.server.DefaultWebModule;
 
 @SuppressWarnings("all")
-public class DefaultXbaseWebModule extends DefaultXbaseIdeModule {
+public class DefaultXbaseWebModule extends DefaultWebModule {
 }

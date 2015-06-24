@@ -7,7 +7,7 @@
  */
 package org.eclipse.xtext.web.server;
 
-import java.util.Collection;
+import java.util.Set;
 
 /**
  * Provides the parameters and meta data of a service request.
@@ -15,15 +15,14 @@ import java.util.Collection;
 @SuppressWarnings("all")
 public interface IRequestData {
   /**
-   * Key for the request type property, which determines the actual service to be invoked.
-   * This property can be given either as a parameter or as part of the metadata of a request.
+   * Key for the request type parameter, which determines the actual service to be invoked.
    */
   public final static String REQUEST_TYPE = "requestType";
   
   /**
    * The available keys that can be used as arguments to {@link #getParameter(String)}.
    */
-  public abstract Collection<String> getParameterKeys();
+  public abstract Set<String> getParameterKeys();
   
   /**
    * Returns the request parameter for the given key.
@@ -36,7 +35,7 @@ public interface IRequestData {
    * but the actual values for some of these keys may be {@code null} because it might
    * be too expensive to determine the non-null metadata upfront.
    */
-  public abstract Collection<String> getMetadataKeys();
+  public abstract Set<String> getMetadataKeys();
   
   /**
    * Returns the request metadata for the given key.

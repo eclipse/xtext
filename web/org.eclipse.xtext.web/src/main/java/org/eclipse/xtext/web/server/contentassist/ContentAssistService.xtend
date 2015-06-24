@@ -64,7 +64,8 @@ class ContentAssistService {
 	 * The document processing is rescheduled as background work afterwards.
 	 */
 	def ContentAssistResult createProposalsWithUpdate(XtextWebDocumentAccess document, String deltaText, int deltaOffset,
-			int deltaReplaceLength, ITextRegion textSelection, int caretOffset, int proposalsLimit) {
+			int deltaReplaceLength, ITextRegion textSelection, int caretOffset, int proposalsLimit)
+			throws InvalidRequestException {
 		val contextFactory = contextFactoryProvider.get() => [it.pool = executorService]
 		val stateIdWrapper = ArrayLiterals.newArrayOfSize(1)
 		val contexts = document.modify([ it, cancelIndicator |

@@ -10,18 +10,19 @@ package org.eclipse.xtext.web.example.jetty;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.util.Modules;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import javax.servlet.annotation.WebServlet;
 import org.eclipse.xtext.idea.example.entities.EntitiesRuntimeModule;
 import org.eclipse.xtext.idea.example.entities.EntitiesStandaloneSetup;
+import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.web.example.jetty.EntitiesWebModule;
 import org.eclipse.xtext.web.example.jetty.StatemachineWebModule;
 import org.eclipse.xtext.web.example.statemachine.StatemachineRuntimeModule;
 import org.eclipse.xtext.web.example.statemachine.StatemachineStandaloneSetup;
 import org.eclipse.xtext.web.server.persistence.ResourceBaseProviderImpl;
 import org.eclipse.xtext.web.servlet.XtextServlet;
+import org.eclipse.xtext.xbase.ide.DefaultXbaseIdeModule;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
 @WebServlet(name = "Xtext Services", urlPatterns = "/xtext-service/*")
@@ -42,20 +43,19 @@ public class MyXtextServlet extends XtextServlet {
           final StatemachineRuntimeModule runtimeModule = new StatemachineRuntimeModule();
           final StatemachineWebModule webModule = new StatemachineWebModule(MyXtextServlet.this.executorService);
           webModule.setResourceBaseProvider(resourceBaseProvider);
-          Modules.OverriddenModuleBuilder _override = Modules.override(runtimeModule);
-          Module _with = _override.with(webModule);
-          return Guice.createInjector(_with);
+          Module _mixin = Modules2.mixin(runtimeModule, webModule);
+          return Guice.createInjector(_mixin);
         }
       }.createInjectorAndDoEMFRegistration();
       new EntitiesStandaloneSetup() {
         @Override
         public Injector createInjector() {
           final EntitiesRuntimeModule runtimeModule = new EntitiesRuntimeModule();
+          final DefaultXbaseIdeModule ideModule = new DefaultXbaseIdeModule();
           final EntitiesWebModule webModule = new EntitiesWebModule(MyXtextServlet.this.executorService);
           webModule.setResourceBaseProvider(resourceBaseProvider);
-          Modules.OverriddenModuleBuilder _override = Modules.override(runtimeModule);
-          Module _with = _override.with(webModule);
-          return Guice.createInjector(_with);
+          Module _mixin = Modules2.mixin(runtimeModule, ideModule, webModule);
+          return Guice.createInjector(_mixin);
         }
       }.createInjectorAndDoEMFRegistration();
     } catch (Throwable _e) {

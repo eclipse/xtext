@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.web.test;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.util.Modules;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.HashMap;
@@ -23,9 +22,11 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.idea.example.entities.EntitiesRuntimeModule;
 import org.eclipse.xtext.idea.example.entities.EntitiesStandaloneSetup;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.web.server.ISessionStore;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
+import org.eclipse.xtext.xbase.ide.DefaultXbaseIdeModule;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.web.test.HashMapSessionStore;
@@ -65,12 +66,12 @@ public class AbstractXbaseWebTest extends AbstractXtextTests {
       this.with(new EntitiesStandaloneSetup() {
         @Override
         public Injector createInjector() {
+          final DefaultXbaseIdeModule ideModule = new DefaultXbaseIdeModule();
           final EntitiesWebModule webModule = new EntitiesWebModule(AbstractXbaseWebTest.this.executorService);
           webModule.setResourceBaseProvider(AbstractXbaseWebTest.this.resourceBaseProvider);
           EntitiesRuntimeModule _runtimeModule = AbstractXbaseWebTest.this.getRuntimeModule();
-          Modules.OverriddenModuleBuilder _override = Modules.override(_runtimeModule);
-          Module _with = _override.with(webModule);
-          return Guice.createInjector(_with);
+          Module _mixin = Modules2.mixin(_runtimeModule, ideModule, webModule);
+          return Guice.createInjector(_mixin);
         }
       });
       Injector _injector = this.getInjector();
@@ -108,22 +109,18 @@ public class AbstractXbaseWebTest extends AbstractXtextTests {
     }
   }
   
-  protected XtextServiceDispatcher.ServiceDescriptor getService(final String path, final Map<String, String> parameters) {
+  protected XtextServiceDispatcher.ServiceDescriptor getService(final Map<String, String> parameters) {
     HashMapSessionStore _hashMapSessionStore = new HashMapSessionStore();
-    return this.getService(path, parameters, _hashMapSessionStore);
+    return this.getService(parameters, _hashMapSessionStore);
   }
   
-  protected XtextServiceDispatcher.ServiceDescriptor getService(final String path, final Map<String, String> parameters, final ISessionStore sessionStore) {
-    try {
-      XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
-      {
-        final MockRequestData requestData = new MockRequestData(path, parameters);
-        _xblockexpression = this.dispatcher.getService(requestData, sessionStore);
-      }
-      return _xblockexpression;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+  protected XtextServiceDispatcher.ServiceDescriptor getService(final Map<String, String> parameters, final ISessionStore sessionStore) {
+    XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
+    {
+      final MockRequestData requestData = new MockRequestData(parameters);
+      _xblockexpression = this.dispatcher.getService(requestData, sessionStore);
     }
+    return _xblockexpression;
   }
   
   @Pure

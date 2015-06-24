@@ -8,7 +8,6 @@
 package org.eclipse.xtext.web.servlet;
 
 import com.google.common.base.Objects;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashSet;
@@ -27,10 +26,10 @@ public class HttpServletRequestData implements IRequestData {
   private final HttpServletRequest request;
   
   @Accessors
-  private final Collection<String> parameterKeys;
+  private final Set<String> parameterKeys;
   
   @Accessors
-  private final Collection<String> metadataKeys;
+  private final Set<String> metadataKeys;
   
   public HttpServletRequestData(final HttpServletRequest request) {
     this.request = request;
@@ -40,31 +39,38 @@ public class HttpServletRequestData implements IRequestData {
       String _nextElement = paramNames.nextElement();
       set.add(_nextElement);
     }
+    set.add(IRequestData.REQUEST_TYPE);
     Set<String> _unmodifiableSet = Collections.<String>unmodifiableSet(set);
     this.parameterKeys = _unmodifiableSet;
-    this.metadataKeys = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet(IRequestData.REQUEST_TYPE, "authType", "characterEncoding", "contentType", "contextPath", "localAddr", "localName", "localPort", "method", "pathInfo", "pathTranslated", "protocol", "queryString", "remoteAddr", "remoteHost", "remotePort", "remoteUser", "requestedSessionId", "requestURI", "scheme", "serverName", "serverPort", "servletPath"));
+    this.metadataKeys = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("authType", "characterEncoding", "contentType", "contextPath", "localAddr", "localName", "localPort", "method", "pathInfo", "pathTranslated", "protocol", "queryString", "remoteAddr", "remoteHost", "remotePort", "remoteUser", "requestedSessionId", "requestURI", "scheme", "serverName", "serverPort", "servletPath"));
   }
   
   @Override
   public String getParameter(final String key) {
-    return this.request.getParameter(key);
+    final String value = this.request.getParameter(key);
+    boolean _and = false;
+    if (!(value == null)) {
+      _and = false;
+    } else {
+      boolean _equals = Objects.equal(key, IRequestData.REQUEST_TYPE);
+      _and = _equals;
+    }
+    if (_and) {
+      String _pathInfo = this.request.getPathInfo();
+      String _substring = null;
+      if (_pathInfo!=null) {
+        _substring=_pathInfo.substring(1);
+      }
+      return _substring;
+    } else {
+      return value;
+    }
   }
   
   @Override
   public String getMetadata(final String key) {
     String _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(key, IRequestData.REQUEST_TYPE)) {
-        _matched=true;
-        String _pathInfo = this.request.getPathInfo();
-        String _substring = null;
-        if (_pathInfo!=null) {
-          _substring=_pathInfo.substring(1);
-        }
-        _switchResult = _substring;
-      }
-    }
     if (!_matched) {
       if (Objects.equal(key, "authType")) {
         _matched=true;
@@ -204,12 +210,12 @@ public class HttpServletRequestData implements IRequestData {
   }
   
   @Pure
-  public Collection<String> getParameterKeys() {
+  public Set<String> getParameterKeys() {
     return this.parameterKeys;
   }
   
   @Pure
-  public Collection<String> getMetadataKeys() {
+  public Set<String> getMetadataKeys() {
     return this.metadataKeys;
   }
 }
