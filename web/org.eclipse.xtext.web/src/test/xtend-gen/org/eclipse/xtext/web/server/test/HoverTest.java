@@ -154,36 +154,7 @@ public class HoverTest extends AbstractWebServerTest {
     _builder.append("#state foo");
     _builder.newLine();
     HoverResult _hover = this.getHover(_builder);
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("<div class=\"hover\">");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append("This is foo!");
-    _builder_1.newLine();
-    _builder_1.append("</div>");
-    _builder_1.newLine();
-    HoverResult _assertContent = this.assertContent(_hover, _builder_1.toString());
-    StringConcatenation _builder_2 = new StringConcatenation();
-    _builder_2.append("<div class=\"hover\">");
-    _builder_2.newLine();
-    _builder_2.append("\t");
-    _builder_2.append("<div class=\"State-icon default-icon\">");
-    _builder_2.newLine();
-    _builder_2.append("\t\t");
-    _builder_2.append("<div class=\"element-name\">");
-    _builder_2.newLine();
-    _builder_2.append("\t\t\t");
-    _builder_2.append("foo");
-    _builder_2.newLine();
-    _builder_2.append("\t\t");
-    _builder_2.append("</div>");
-    _builder_2.newLine();
-    _builder_2.append("\t");
-    _builder_2.append("</div>");
-    _builder_2.newLine();
-    _builder_2.append("</div>");
-    _builder_2.newLine();
-    this.assertTitle(_assertContent, _builder_2.toString());
+    Assert.assertNull(_hover);
   }
   
   @Test

@@ -20,12 +20,15 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 @ToString(skipNulls = true)
 @SuppressWarnings("all")
 public class HoverResult implements IServiceResult {
+  private final String stateId;
+  
   private final String title;
   
   private final String content;
   
-  public HoverResult(final String title, final String content) {
+  public HoverResult(final String stateId, final String title, final String content) {
     super();
+    this.stateId = stateId;
     this.title = title;
     this.content = content;
   }
@@ -35,6 +38,7 @@ public class HoverResult implements IServiceResult {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
+    result = prime * result + ((this.stateId== null) ? 0 : this.stateId.hashCode());
     result = prime * result + ((this.title== null) ? 0 : this.title.hashCode());
     result = prime * result + ((this.content== null) ? 0 : this.content.hashCode());
     return result;
@@ -50,6 +54,11 @@ public class HoverResult implements IServiceResult {
     if (getClass() != obj.getClass())
       return false;
     HoverResult other = (HoverResult) obj;
+    if (this.stateId == null) {
+      if (other.stateId != null)
+        return false;
+    } else if (!this.stateId.equals(other.stateId))
+      return false;
     if (this.title == null) {
       if (other.title != null)
         return false;
@@ -68,9 +77,15 @@ public class HoverResult implements IServiceResult {
   public String toString() {
     ToStringBuilder b = new ToStringBuilder(this);
     b.skipNulls();
+    b.add("stateId", this.stateId);
     b.add("title", this.title);
     b.add("content", this.content);
     return b.toString();
+  }
+  
+  @Pure
+  public String getStateId() {
+    return this.stateId;
   }
   
   @Pure

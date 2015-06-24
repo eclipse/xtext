@@ -23,13 +23,14 @@ import org.eclipse.xtext.ide.labels.IImageDescription;
 import org.eclipse.xtext.ide.labels.IImageDescriptionProvider;
 import org.eclipse.xtext.ide.labels.INameLabelProvider;
 import org.eclipse.xtext.ide.labels.SimpleImageDescription;
-import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
+import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.web.server.hover.HoverResult;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess;
+import org.eclipse.xtext.web.server.util.ElementAtOffsetUtil;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -42,13 +43,12 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
  * Service class for mouse hover information.
  */
 @Singleton
+@Log
 @SuppressWarnings("all")
 public class HoverService {
-  private final static Logger LOG = Logger.getLogger(HoverService.class);
-  
   @Inject
   @Extension
-  private EObjectAtOffsetHelper _eObjectAtOffsetHelper;
+  private ElementAtOffsetUtil _elementAtOffsetUtil;
   
   @Inject
   @Extension
@@ -73,7 +73,7 @@ public class HoverService {
         HoverResult _xblockexpression = null;
         {
           XtextResource _resource = it.getResource();
-          EObject element = HoverService.this._eObjectAtOffsetHelper.resolveElementAt(_resource, offset);
+          final EObject element = HoverService.this._elementAtOffsetUtil.getElementAt(_resource, offset);
           String _nameLabel = null;
           if (element!=null) {
             _nameLabel=HoverService.this._iNameLabelProvider.getNameLabel(element);
@@ -99,7 +99,8 @@ public class HoverService {
                 _elvis = "";
               }
               final String bodyHtml = HoverService.this.surroundWithDiv(_elvis, "hover");
-              final HoverResult result = new HoverResult(titleHtml, bodyHtml);
+              String _stateId = it.getStateId();
+              final HoverResult result = new HoverResult(_stateId, titleHtml, bodyHtml);
               HoverService.LOG.trace(result);
               _xblockexpression_1 = result;
             }
@@ -179,4 +180,6 @@ public class HoverService {
     _builder.newLine();
     return _builder.toString();
   }
+  
+  private final static Logger LOG = Logger.getLogger(HoverService.class);
 }
