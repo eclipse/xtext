@@ -1,5 +1,6 @@
 {
 	"name": "xtext",
+	"private": true,
 	"devDependencies": {
 		"requirejs": "2.1.18",
 		"mocha": "2.2.5"
