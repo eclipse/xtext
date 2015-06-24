@@ -7,7 +7,6 @@
  */
 package observables;
 
-import observables.Observable;
 import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -16,7 +15,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ObservableTests {
   @Extension
-  private XtendCompilerTester compilerTester = XtendCompilerTester.newXtendCompilerTester(Observable.class);
+  private XtendCompilerTester compilerTester = XtendCompilerTester.newXtendCompilerTester(this.getClass().getClassLoader());
   
   @Test
   public void testObservable() {

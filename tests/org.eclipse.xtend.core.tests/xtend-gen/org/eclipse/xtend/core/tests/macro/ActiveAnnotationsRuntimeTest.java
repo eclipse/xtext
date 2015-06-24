@@ -15,7 +15,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.macro.AnnotationProcessor;
-import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtend.core.tests.macro.AbstractReusableActiveAnnotationTests;
@@ -66,9 +65,6 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
   
   @Inject
   private Provider<CompilationUnitImpl> compilationUnitProvider;
-  
-  @Inject
-  private ProcessorInstanceForJvmTypeProvider processorProvider;
   
   @Inject
   private Provider<XtextResourceSet> resourceSetProvider;
@@ -208,7 +204,6 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
           ClassLoader _classLoader = _class.getClassLoader();
           final DelegatingClassloader classLoader = new DelegatingClassloader(_classLoader, result);
           resourceSet.setClasspathURIContext(classLoader);
-          ActiveAnnotationsRuntimeTest.this.processorProvider.setClassLoader(classLoader);
           ActiveAnnotationsRuntimeTest.this.compiler.setJavaCompilerClassPath(classLoader);
         }
       };

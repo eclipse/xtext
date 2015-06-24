@@ -7,7 +7,6 @@
  */
 package extract;
 
-import extract.Extract;
 import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
@@ -27,7 +26,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ExtractTest {
   @Extension
-  private XtendCompilerTester compilerTester = XtendCompilerTester.newXtendCompilerTester(Extract.class);
+  private XtendCompilerTester compilerTester = XtendCompilerTester.newXtendCompilerTester(this.getClass().getClassLoader());
   
   @Test
   public void testExtractAnnotation() {

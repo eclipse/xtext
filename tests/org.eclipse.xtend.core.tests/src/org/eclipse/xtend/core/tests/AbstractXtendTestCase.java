@@ -87,6 +87,7 @@ public abstract class AbstractXtendTestCase extends Assert {
 
 	protected XtextResourceSet getResourceSet() {
 		XtextResourceSet set = resourceSetProvider.get();
+		set.setClasspathURIContext(getClass().getClassLoader());
 		return set;
 	}
 	

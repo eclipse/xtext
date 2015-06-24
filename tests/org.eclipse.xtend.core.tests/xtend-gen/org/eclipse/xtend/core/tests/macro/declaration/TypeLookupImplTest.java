@@ -2,7 +2,6 @@ package org.eclipse.xtend.core.tests.macro.declaration;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
@@ -180,20 +179,10 @@ public class TypeLookupImplTest extends AbstractXtendTestCase {
   @Inject
   private Provider<CompilationUnitImpl> compilationUnitProvider;
   
-  @Inject
-  private ProcessorInstanceForJvmTypeProvider instanceForJvmTypeProvider;
-  
   public XtendFile validFile(final CharSequence code) {
     try {
-      XtendFile _xblockexpression = null;
-      {
-        Class<? extends TypeLookupImplTest> _class = this.getClass();
-        ClassLoader _classLoader = _class.getClassLoader();
-        this.instanceForJvmTypeProvider.setClassLoader(_classLoader);
-        String _string = code.toString();
-        _xblockexpression = this.file(_string, true);
-      }
-      return _xblockexpression;
+      String _string = code.toString();
+      return this.file(_string, true);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

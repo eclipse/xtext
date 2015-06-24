@@ -9,9 +9,7 @@ package org.eclipse.xtend.ide.macro;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import java.io.Closeable;
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.HashSet;
@@ -24,8 +22,6 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -35,7 +31,6 @@ import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
-import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.resource.ResourceSetContext;
@@ -44,71 +39,9 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
-  @Accessors
-  public static class ProcessorClassloaderAdapter extends AdapterImpl {
-    private ClassLoader classLoader;
-    
-    public ProcessorClassloaderAdapter(final ClassLoader classLoader) {
-      this.classLoader = classLoader;
-    }
-    
-    @Override
-    public boolean isAdapterForType(final Object type) {
-      return Objects.equal(type, JdtBasedProcessorProvider.ProcessorClassloaderAdapter.class);
-    }
-    
-    @Override
-    public void unsetTarget(final Notifier oldTarget) {
-      this.discard();
-    }
-    
-    @Override
-    public void setTarget(final Notifier newTarget) {
-      boolean _equals = Objects.equal(newTarget, null);
-      if (_equals) {
-        this.discard();
-      }
-    }
-    
-    public ClassLoader discard() {
-      ClassLoader _xifexpression = null;
-      if ((this.classLoader instanceof Closeable)) {
-        ClassLoader _xtrycatchfinallyexpression = null;
-        try {
-          ClassLoader _xblockexpression = null;
-          {
-            ((Closeable) this.classLoader).close();
-            _xblockexpression = this.classLoader = null;
-          }
-          _xtrycatchfinallyexpression = _xblockexpression;
-        } catch (final Throwable _t) {
-          if (_t instanceof IOException) {
-            final IOException e = (IOException)_t;
-            String _message = e.getMessage();
-            JdtBasedProcessorProvider.LOG.error(_message, e);
-          } else {
-            throw Exceptions.sneakyThrow(_t);
-          }
-        }
-        _xifexpression = _xtrycatchfinallyexpression;
-      }
-      return _xifexpression;
-    }
-    
-    @Pure
-    public ClassLoader getClassLoader() {
-      return this.classLoader;
-    }
-    
-    public void setClassLoader(final ClassLoader classLoader) {
-      this.classLoader = classLoader;
-    }
-  }
-  
   private final static Logger LOG = Logger.getLogger(JdtBasedProcessorProvider.class);
   
   @Override
@@ -144,27 +77,28 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
     final boolean isEditor = _get_1.isEditor();
     if (isBuilder) {
       EList<Adapter> _eAdapters = rs.eAdapters();
-      Iterable<JdtBasedProcessorProvider.ProcessorClassloaderAdapter> _filter = Iterables.<JdtBasedProcessorProvider.ProcessorClassloaderAdapter>filter(_eAdapters, JdtBasedProcessorProvider.ProcessorClassloaderAdapter.class);
-      final JdtBasedProcessorProvider.ProcessorClassloaderAdapter adapter = IterableExtensions.<JdtBasedProcessorProvider.ProcessorClassloaderAdapter>head(_filter);
+      Iterable<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter> _filter = Iterables.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>filter(_eAdapters, ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter.class);
+      final ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter adapter = IterableExtensions.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>head(_filter);
       boolean _notEquals = (!Objects.equal(adapter, null));
       if (_notEquals) {
-        return adapter.classLoader;
+        return adapter.getClassLoader();
       }
     }
     if (isEditor) {
       Resource _editorResource = this.getEditorResource(ctx);
       EList<Adapter> _eAdapters_1 = _editorResource.eAdapters();
-      Iterable<JdtBasedProcessorProvider.ProcessorClassloaderAdapter> _filter_1 = Iterables.<JdtBasedProcessorProvider.ProcessorClassloaderAdapter>filter(_eAdapters_1, JdtBasedProcessorProvider.ProcessorClassloaderAdapter.class);
-      final JdtBasedProcessorProvider.ProcessorClassloaderAdapter adapter_1 = IterableExtensions.<JdtBasedProcessorProvider.ProcessorClassloaderAdapter>head(_filter_1);
+      Iterable<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter> _filter_1 = Iterables.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>filter(_eAdapters_1, ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter.class);
+      final ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter adapter_1 = IterableExtensions.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>head(_filter_1);
       boolean _notEquals_1 = (!Objects.equal(adapter_1, null));
       if (_notEquals_1) {
-        boolean _equals = Objects.equal(adapter_1.classLoader, null);
+        ClassLoader _classLoader = adapter_1.getClassLoader();
+        boolean _equals = Objects.equal(_classLoader, null);
         if (_equals) {
           Resource _editorResource_1 = this.getEditorResource(ctx);
           EList<Adapter> _eAdapters_2 = _editorResource_1.eAdapters();
           _eAdapters_2.remove(adapter_1);
         } else {
-          return adapter_1.classLoader;
+          return adapter_1.getClassLoader();
         }
       }
     }
@@ -173,13 +107,13 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
     final URLClassLoader classloader = this.createClassLoaderForJavaProject(project);
     if (isBuilder) {
       EList<Adapter> _eAdapters_3 = rs.eAdapters();
-      JdtBasedProcessorProvider.ProcessorClassloaderAdapter _processorClassloaderAdapter = new JdtBasedProcessorProvider.ProcessorClassloaderAdapter(classloader);
+      ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter _processorClassloaderAdapter = new ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter(classloader);
       _eAdapters_3.add(_processorClassloaderAdapter);
     }
     if (isEditor) {
       Resource _editorResource_2 = this.getEditorResource(ctx);
       EList<Adapter> _eAdapters_4 = _editorResource_2.eAdapters();
-      JdtBasedProcessorProvider.ProcessorClassloaderAdapter _processorClassloaderAdapter_1 = new JdtBasedProcessorProvider.ProcessorClassloaderAdapter(classloader);
+      ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter _processorClassloaderAdapter_1 = new ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter(classloader);
       _eAdapters_4.add(_processorClassloaderAdapter_1);
     }
     return classloader;

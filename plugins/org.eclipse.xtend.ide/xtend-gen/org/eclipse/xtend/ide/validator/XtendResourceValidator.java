@@ -12,8 +12,8 @@ import java.util.List;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.core.validation.CachingResourceValidatorImpl;
-import org.eclipse.xtend.ide.macro.JdtBasedProcessorProvider;
 import org.eclipse.xtext.resource.ResourceSetContext;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -36,8 +36,8 @@ public class XtendResourceValidator extends CachingResourceValidatorImpl {
       boolean _isEditor = _get.isEditor();
       if (_isEditor) {
         EList<Adapter> _eAdapters = resource.eAdapters();
-        Iterable<JdtBasedProcessorProvider.ProcessorClassloaderAdapter> _filter = Iterables.<JdtBasedProcessorProvider.ProcessorClassloaderAdapter>filter(_eAdapters, JdtBasedProcessorProvider.ProcessorClassloaderAdapter.class);
-        final JdtBasedProcessorProvider.ProcessorClassloaderAdapter adapter = IterableExtensions.<JdtBasedProcessorProvider.ProcessorClassloaderAdapter>head(_filter);
+        Iterable<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter> _filter = Iterables.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>filter(_eAdapters, ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter.class);
+        final ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter adapter = IterableExtensions.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>head(_filter);
         EList<Adapter> _eAdapters_1 = resource.eAdapters();
         _eAdapters_1.remove(adapter);
       }

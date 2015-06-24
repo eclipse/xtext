@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -49,9 +48,6 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
   @Extension
   protected CompilationTestHelper compilationTestHelper;
   
-  @Inject
-  private ProcessorInstanceForJvmTypeProvider processorProvider;
-  
   protected boolean useJavaCompiler = false;
   
   @Before
@@ -59,9 +55,6 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     Class<? extends AbstractXtendCompilerTest> _class = this.getClass();
     ClassLoader _classLoader = _class.getClassLoader();
     this.compilationTestHelper.setJavaCompilerClassPath(_classLoader);
-    Class<? extends AbstractXtendCompilerTest> _class_1 = this.getClass();
-    ClassLoader _classLoader_1 = _class_1.getClassLoader();
-    this.processorProvider.setClassLoader(_classLoader_1);
   }
   
   public void assertCompilesTo(final CharSequence input, final CharSequence expected) {
