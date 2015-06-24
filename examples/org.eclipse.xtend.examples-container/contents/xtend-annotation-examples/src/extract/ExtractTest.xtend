@@ -13,7 +13,7 @@ import static org.junit.Assert.*
 
 class ExtractTest {
 	
-	extension XtendCompilerTester compilerTester = XtendCompilerTester.newXtendCompilerTester(Extract)
+	extension XtendCompilerTester compilerTester = XtendCompilerTester.newXtendCompilerTester(class.classLoader)
 	
 	@Test def void testExtractAnnotation() {
 		'''

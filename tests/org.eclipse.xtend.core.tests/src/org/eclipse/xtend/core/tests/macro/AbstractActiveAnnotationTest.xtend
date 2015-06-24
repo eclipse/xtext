@@ -6,6 +6,10 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 
 abstract class AbstractActiveAnnotationTest extends AbstractXtendTestCase {
 	
-	@Inject protected extension XtendCompilerTester
+	protected extension XtendCompilerTester
 	
+	@Inject def doInject(XtendCompilerTester compilerTester) {
+		_xtendCompilerTester = compilerTester
+		_xtendCompilerTester.javaCompilerClassPath = class.classLoader
+	}
 }

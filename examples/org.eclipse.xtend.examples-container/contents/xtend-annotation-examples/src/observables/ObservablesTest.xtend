@@ -12,7 +12,7 @@ import org.junit.Test
 
 class ObservableTests {
 
-	extension XtendCompilerTester compilerTester = XtendCompilerTester::newXtendCompilerTester(Observable)
+	extension XtendCompilerTester compilerTester = XtendCompilerTester::newXtendCompilerTester(class.classLoader)
 
 	@Test def void testObservable() {
 		'''

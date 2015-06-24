@@ -7,7 +7,14 @@ import org.eclipse.xtext.xbase.lib.Extension;
 
 @SuppressWarnings("all")
 public abstract class AbstractActiveAnnotationTest extends AbstractXtendTestCase {
-  @Inject
   @Extension
   protected XtendCompilerTester _xtendCompilerTester;
+  
+  @Inject
+  public void doInject(final XtendCompilerTester compilerTester) {
+    this._xtendCompilerTester = compilerTester;
+    Class<? extends AbstractActiveAnnotationTest> _class = this.getClass();
+    ClassLoader _classLoader = _class.getClassLoader();
+    this._xtendCompilerTester.setJavaCompilerClassPath(_classLoader);
+  }
 }

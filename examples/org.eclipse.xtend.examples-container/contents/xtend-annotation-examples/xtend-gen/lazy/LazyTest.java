@@ -7,7 +7,6 @@
  */
 package lazy;
 
-import lazy.Lazy;
 import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -16,7 +15,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class LazyTest {
   @Extension
-  private XtendCompilerTester compilerTester = XtendCompilerTester.newXtendCompilerTester(Lazy.class);
+  private XtendCompilerTester compilerTester = XtendCompilerTester.newXtendCompilerTester(this.getClass().getClassLoader());
   
   @Test
   public void testLazy() {
