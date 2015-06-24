@@ -21,3 +21,15 @@
 	background-repeat: repeat-x;
 	background-position: left bottom;
 }
+
+.xtext-marker_read {
+	position: absolute;
+	z-index: 5;
+	background-color: #ddd;
+}
+
+.xtext-marker_write {
+	z-index: 5;
+	position: absolute;
+	background-color: yellow;
+}

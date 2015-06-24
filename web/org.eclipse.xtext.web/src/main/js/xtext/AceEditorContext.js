@@ -19,6 +19,7 @@ define(["ace/range"], function(mRange) {
 		this._clean = true;
 		this._dirtyStateListeners = [];
 		this._annotations = [];
+		this._occurrenceMarkers = [];
 	};
 
 	AceEditorContext.prototype = {
@@ -126,22 +127,28 @@ define(["ace/range"], function(mRange) {
 				session.removeMarker(annotation.markerId);
 			}
 			this._annotations = [];
-			var document = session.getDocument();
 			for (var i = 0; i < entries.length; i++) {
 				var entry = entries[i];
-				var start = document.indexToPosition(entry.startOffset);
-				var end = document.indexToPosition(entry.endOffset);
-				var range = new mRange.Range(start.row, start.column, end.row, end.column);
+				var marker = this._addMarker(session, entry.startOffset, entry.endOffset, entry.severity)
+				var start = session.getDocument().indexToPosition(entry.startOffset);
 				this._annotations.push({
 					row: start.row,
 					column: start.column,
 					text: entry.description,
 					type: entry.severity,
-					markerId: session.addMarker(range, "xtext-marker_" + entry.severity, "text")
+					markerId: marker
 				})
 			}
 			session.setAnnotations(this._annotations)
 		},
+		
+		_addMarker : function(session, startOffset, endOffset, clazz, type) {
+			var document = session.getDocument();
+			var start = document.indexToPosition(startOffset);
+			var end = document.indexToPosition(endOffset);
+			var range = new mRange.Range(start.row, start.column, end.row, end.column);
+			return session.addMarker(range, "xtext-marker_" + clazz, "text");
+		}, 
 		
 		translateCompletionProposals : function(entries) {
 			return entries.map(function(entry) {
@@ -152,6 +159,25 @@ define(["ace/range"], function(mRange) {
     				className: entry.style
     			};
 			});
+		},
+		
+		showOccurrences : function(occurrencesResult) {
+			var session = this._editor.getSession();
+			for(var i = 0; i < this._occurrenceMarkers.length; i++)  {
+				var marker = this._occurrenceMarkers[i];
+				session.removeMarker(marker);
+			}
+			this._occurrenceMarkers = [];
+			if(occurrencesResult != null) {
+				for (var i = 0; i < occurrencesResult.readRegions.length; i++) {
+					var region = occurrencesResult.readRegions[i];
+					this._occurrenceMarkers.push(this._addMarker(session, region.offset, region.offset + region.length, "read"));
+				}
+				for (var i = 0; i < occurrencesResult.writeRegions.length; i++) {
+					var region = occurrencesResult.writeRegions[i];
+					this._occurrenceMarkers.push(this._addMarker(session, region.offset, region.offset + region.length, "write"));
+				}
+			}
 		}
 	};
 	

@@ -47,9 +47,10 @@ define([
 	"xtext/services/SaveResourceService",
 	"xtext/services/UpdateService",
 	"xtext/services/ContentAssistService",
-	"xtext/services/ValidationService"
+	"xtext/services/ValidationService",
+	"xtext/services/OccurrencesService"
 ], function(jQuery, ace, languageTools, EditorContext, LoadResourceService, RevertResourceService,
-		SaveResourceService, UpdateService, ContentAssistService, ValidationService) {
+		SaveResourceService, UpdateService, ContentAssistService, ValidationService, OccurrencesService) {
 	
 	/**
 	 * Translate an HTML attribute name to a JS option name.
@@ -287,6 +288,18 @@ define([
 			editor.setOptions({ enableBasicAutocompletion: true });
 		}
 		
+		//---- Occurrences Service
+		
+		var occurrencesService = new OccurrencesService(options.serverUrl, options.resourceId);
+		editor.getSelection().on("changeCursor", function() {
+			var index = editor.getSession().getDocument().positionToIndex(editor.getSelection().getCursor());
+			occurrencesService.markOccurrences(editorContext, {
+				offset: index,
+				contentType : options.contentType
+			});
+		})
+		
+		
 		editor.invokeXtextService = function(service, invokeOptions) {
 			var optionsCopy = _copy(options);
 			for (var p in invokeOptions) {
@@ -302,6 +315,8 @@ define([
 				revertResourceService.revertResource(editorContext, optionsCopy);
 			else if (service === "validation" && validationService)
 				validationService.computeProblems(editorContext, optionsCopy);
+			else if (service === "occurrences" && occurrencesService)
+				occurrencesService.markOccurrences(editorContext, optionsCopy);
 			else
 				throw new Error("Service '" + service + "' is not available.");
 		};
