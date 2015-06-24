@@ -44,20 +44,40 @@ public class MultiModuleTest extends PsiTestCase {
       _builder_1.newLine();
       final PsiFile referenced = this.createFile(moduleA, "MyClass.xtend", _builder_1.toString());
       VirtualFile _virtualFile = referencing.getVirtualFile();
-      VirtualFile _parent = _virtualFile.getParent();
-      VirtualFile _findChild = _parent.findChild("src-gen");
-      final VirtualFile generatedReferencing = _findChild.findChild("OtherClass.java");
+      VirtualFile _parent = null;
+      if (_virtualFile!=null) {
+        _parent=_virtualFile.getParent();
+      }
+      VirtualFile _findChild = null;
+      if (_parent!=null) {
+        _findChild=_parent.findChild("xtend-gen");
+      }
+      VirtualFile _findChild_1 = null;
+      if (_findChild!=null) {
+        _findChild_1=_findChild.findChild("OtherClass.java");
+      }
+      final VirtualFile generatedReferencing = _findChild_1;
       VirtualFile _virtualFile_1 = referenced.getVirtualFile();
-      VirtualFile _parent_1 = _virtualFile_1.getParent();
-      VirtualFile _findChild_1 = _parent_1.findChild("src-gen");
-      final VirtualFile generatedReferenced = _findChild_1.findChild("MyClass.java");
+      VirtualFile _parent_1 = null;
+      if (_virtualFile_1!=null) {
+        _parent_1=_virtualFile_1.getParent();
+      }
+      VirtualFile _findChild_2 = null;
+      if (_parent_1!=null) {
+        _findChild_2=_parent_1.findChild("xtend-gen");
+      }
+      VirtualFile _findChild_3 = null;
+      if (_findChild_2!=null) {
+        _findChild_3=_findChild_2.findChild("MyClass.java");
+      }
+      final VirtualFile generatedReferenced = _findChild_3;
       TestCase.assertNotNull(generatedReferencing);
       TestCase.assertNotNull(generatedReferenced);
       VirtualFile _virtualFile_2 = referenced.getVirtualFile();
       VirtualFile _parent_2 = _virtualFile_2.getParent();
-      VirtualFile _findChild_2 = _parent_2.findChild("src-gen");
-      VirtualFile _findChild_3 = _findChild_2.findChild("OtherClass.java");
-      TestCase.assertNull(_findChild_3);
+      VirtualFile _findChild_4 = _parent_2.findChild("xtend-gen");
+      VirtualFile _findChild_5 = _findChild_4.findChild("OtherClass.java");
+      TestCase.assertNull(_findChild_5);
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("public class OtherClass extends MyClass {");
       _builder_2.newLine();

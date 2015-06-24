@@ -151,9 +151,8 @@ public class IncrementalBuilder {
     private Indexer indexer;
     
     public IncrementalBuilder.Result launch() {
-      IndexState _previousState = this.request.getPreviousState();
-      Source2GeneratedMapping _fileMappings = _previousState.getFileMappings();
-      final Source2GeneratedMapping newSource2GeneratedMapping = _fileMappings.copy();
+      IndexState _newState = this.request.getNewState();
+      final Source2GeneratedMapping newSource2GeneratedMapping = _newState.getFileMappings();
       List<URI> _deletedFiles = this.request.getDeletedFiles();
       final Procedure1<URI> _function = new Procedure1<URI>() {
         @Override
@@ -236,9 +235,8 @@ public class IncrementalBuilder {
       };
       Iterable<IResourceDescription.Delta> _executeClustered = this.context.<IResourceDescription.Delta>executeClustered(_map, _function_4);
       Iterables.<IResourceDescription.Delta>addAll(resolvedDeltas, _executeClustered);
-      ResourceDescriptionsData _newIndex = result.getNewIndex();
-      IndexState _indexState = new IndexState(_newIndex, newSource2GeneratedMapping);
-      return new IncrementalBuilder.Result(_indexState, resolvedDeltas);
+      IndexState _newState_1 = this.request.getNewState();
+      return new IncrementalBuilder.Result(_newState_1, resolvedDeltas);
     }
     
     protected boolean validate(final Resource resource) {
@@ -270,7 +268,24 @@ public class IncrementalBuilder {
       }
       URI _uRI_1 = resource.getURI();
       final Set<URI> previous = newMappings.deleteSource(_uRI_1);
-      final IWorkspaceConfigProvider wsConfProvider = serviceProvider.<IWorkspaceConfigProvider>get(IWorkspaceConfigProvider.class);
+      final IWorkspaceConfigProvider workspaceConfigProvider = serviceProvider.<IWorkspaceConfigProvider>get(IWorkspaceConfigProvider.class);
+      IWorkspaceConfig _workspaceConfig = null;
+      if (workspaceConfigProvider!=null) {
+        ResourceSet _resourceSet = resource.getResourceSet();
+        _workspaceConfig=workspaceConfigProvider.getWorkspaceConfig(_resourceSet);
+      }
+      final IWorkspaceConfig workspaceConfig = _workspaceConfig;
+      IProjectConfig _findProjectContaining = null;
+      if (workspaceConfig!=null) {
+        URI _uRI_2 = resource.getURI();
+        _findProjectContaining=workspaceConfig.findProjectContaining(_uRI_2);
+      }
+      ISourceFolder _findSourceFolderContaining = null;
+      if (_findProjectContaining!=null) {
+        URI _uRI_3 = resource.getURI();
+        _findSourceFolderContaining=_findProjectContaining.findSourceFolderContaining(_uRI_3);
+      }
+      final ISourceFolder sourceFolder = _findSourceFolderContaining;
       URIBasedFileSystemAccess _uRIBasedFileSystemAccess = new URIBasedFileSystemAccess();
       final Procedure1<URIBasedFileSystemAccess> _function = new Procedure1<URIBasedFileSystemAccess>() {
         @Override
@@ -287,20 +302,14 @@ public class IncrementalBuilder {
           it.setOutputConfigurations(_map);
           URI _baseDir = request.getBaseDir();
           it.setBaseDir(_baseDir);
+          String _name = null;
+          if (sourceFolder!=null) {
+            _name=sourceFolder.getName();
+          }
+          it.setCurrentSource(_name);
           ResourceSet _resourceSet = resource.getResourceSet();
           URIConverter _uRIConverter = _resourceSet.getURIConverter();
           it.setConverter(_uRIConverter);
-          ResourceSet _resourceSet_1 = resource.getResourceSet();
-          IWorkspaceConfig _workspaceConfig = wsConfProvider.getWorkspaceConfig(_resourceSet_1);
-          URI _uRI = resource.getURI();
-          IProjectConfig _findProjectContaining = _workspaceConfig.findProjectContaining(_uRI);
-          URI _uRI_1 = resource.getURI();
-          final ISourceFolder srcFolder = _findProjectContaining.findSourceFolderContaining(_uRI_1);
-          boolean _notEquals = (!Objects.equal(srcFolder, null));
-          if (_notEquals) {
-            String _name = srcFolder.getName();
-            it.setCurrentSource(_name);
-          }
           final URIBasedFileSystemAccess.BeforeWrite _function_1 = new URIBasedFileSystemAccess.BeforeWrite() {
             @Override
             public InputStream beforeWrite(final URI uri, final InputStream contents) {

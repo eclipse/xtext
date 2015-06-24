@@ -49,7 +49,7 @@ import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
 		@Inject Indexer indexer
 		
 		def Result launch() {
-			val newSource2GeneratedMapping = request.previousState.fileMappings.copy
+			val newSource2GeneratedMapping = request.newState.fileMappings
 			request.deletedFiles.forEach [
 				newSource2GeneratedMapping.deleteSource(it).forEach [
 					if (LOG.isInfoEnabled)
@@ -80,7 +80,7 @@ import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
 					val old = request.previousState.resourceDescriptions.getResourceDescription(resource.URI)
 					return manager.createDelta(old, copiedDescription)
 				]
-			return new Result(new IndexState(result.newIndex, newSource2GeneratedMapping), resolvedDeltas)
+			return new Result(request.newState, resolvedDeltas)
 		}
 		
 		def protected boolean validate(Resource resource) {
@@ -101,17 +101,17 @@ import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
 			}
 //			LOG.info("Starting generator for input: '" + resource.URI.lastSegment + "'");
 			val previous = newMappings.deleteSource(resource.URI)
-			val  wsConfProvider = serviceProvider.get(IWorkspaceConfigProvider)
-			
+			val workspaceConfigProvider = serviceProvider.get(IWorkspaceConfigProvider)
+			val workspaceConfig = workspaceConfigProvider?.getWorkspaceConfig(resource.resourceSet)
+			val sourceFolder = workspaceConfig?.findProjectContaining(resource.URI)?.findSourceFolderContaining(resource.URI)
 			val fileSystemAccess = new URIBasedFileSystemAccess() => [
 				val outputConfigProvider = serviceProvider.get(IContextualOutputConfigurationProvider)
 				outputConfigurations = outputConfigProvider.getOutputConfigurations(resource).toMap[name]
+				
 				baseDir = request.baseDir
+				currentSource = sourceFolder?.name
 				converter = resource.resourceSet.URIConverter
-				val srcFolder = wsConfProvider.getWorkspaceConfig(resource.resourceSet).findProjectContaining(resource.URI).findSourceFolderContaining(resource.URI)
-				if(srcFolder != null) {
-					currentSource = srcFolder.name
-				}
+				
 				beforeWrite = [ uri, contents |
 					newMappings.addSource2Generated(resource.URI, uri)
 					previous.remove(uri)

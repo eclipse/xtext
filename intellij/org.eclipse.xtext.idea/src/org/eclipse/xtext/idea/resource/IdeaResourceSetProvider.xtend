@@ -22,6 +22,7 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.URIHandler
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent
 import org.eclipse.xtext.idea.common.types.StubTypeProviderFactory
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.util.internal.Log
@@ -37,12 +38,22 @@ class IdeaResourceSetProvider {
 	
 	@Inject StubTypeProviderFactory stubTypeProviderFactory
 	
-
-	def get(Module context) {
+	@Inject ProjectDescriptionProvider projectDescriptionProvider
+	
+	def get(Module module) {
 		val resourceSet = resourceSetProvider.get
-		resourceSet.classpathURIContext = context
+		resourceSet.classpathURIContext = module
 		resourceSet.URIConverter.URIHandlers.clear 
 		resourceSet.URIConverter.URIHandlers.add(new VirtualFileBasedUriHandler())
+		
+		val desc = projectDescriptionProvider.getProjectDescription(module)
+		desc.attachToEmfObject(resourceSet)
+		
+		val builder = module.project.getComponent(XtextAutoBuilderComponent)
+		val descriptions = builder.copyOfResourceDescriptions
+		descriptions.attachToEmfObject(resourceSet)
+		descriptions.context = resourceSet
+		
 		stubTypeProviderFactory.createTypeProvider(resourceSet)
 		return resourceSet
 	}

@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.junit4.builder
 
+import com.google.common.annotations.Beta
 import com.google.common.collect.ArrayListMultimap
 import com.google.common.collect.Multimap
 import com.google.inject.Inject
@@ -19,9 +20,9 @@ import org.eclipse.xtext.builder.standalone.incremental.IndexState
 import org.eclipse.xtext.junit4.util.InMemoryURIHandler
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.validation.Issue
 import org.junit.Before
-import com.google.common.annotations.Beta
 
 /**
  * Abstract base class for testing languages in the incremental builder.
@@ -64,14 +65,15 @@ abstract class AbstractIncrementalBuilderTest {
 
 	protected def newBuildRequest((BuildRequest)=>void init) {
 		val result = new BuildRequest => [
+			val newIndex = indexState.resourceDescriptions.copy()
 			baseDir = "".uri
 			resourceSet = resourceSetProvider.get => [
 				getURIConverter.getURIHandlers.clear
 				getURIConverter.getURIHandlers += inMemoryURIHandler
-				
 				classpathURIContext = AbstractIncrementalBuilderTest.classLoader
+				
+				ResourceDescriptionsData.ResourceSetAdapter.installResourceDescriptionsData(it, newIndex)
 			]
-			classPath = #[]
 			dirtyFiles = #[]
 			deletedFiles = #[]
 			
@@ -89,6 +91,7 @@ abstract class AbstractIncrementalBuilderTest {
 			]
 			
 			previousState = indexState
+			newState = new IndexState(newIndex, indexState.fileMappings.copy)
 		]
 		init.apply(result)
 		return result
