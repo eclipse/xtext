@@ -5,17 +5,17 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.standalone.incremental
+package org.eclipse.xtext.common.types.descriptions
 
 import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.xtext.common.types.access.impl.URIHelperConstants
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.resource.IEObjectDescription
 import org.eclipse.xtext.resource.impl.AbstractResourceDescription
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta
 import org.eclipse.xtext.util.Strings
-import org.eclipse.xtext.common.types.access.impl.URIHelperConstants
 
 /**
  * More or less copied from NameBasedResourceDescription and TypeResourceDescription

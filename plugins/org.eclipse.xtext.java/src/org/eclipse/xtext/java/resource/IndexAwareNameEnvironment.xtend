@@ -10,12 +10,12 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.common.types.TypesPackage
 import org.eclipse.xtext.common.types.descriptions.EObjectDescriptionBasedStubGenerator
 import org.eclipse.xtext.naming.QualifiedName
-import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
+import org.eclipse.xtext.resource.ISelectable
 
 @FinalFieldsConstructor class IndexAwareNameEnvironment implements INameEnvironment {
 
 	val ClassLoader classLoader
-	val ResourceDescriptionsData descriptionsData
+	val ISelectable indexAccesss
 	val EObjectDescriptionBasedStubGenerator stubGenerator
 
 	Map<QualifiedName, NameEnvironmentAnswer> cache = newHashMap()
@@ -30,7 +30,7 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 	}
 	
 	def findType(QualifiedName className) {
-		val candidate = descriptionsData.getExportedObjects(TypesPackage.Literals.JVM_DECLARED_TYPE, className, false).head
+		val candidate = indexAccesss.getExportedObjects(TypesPackage.Literals.JVM_DECLARED_TYPE, className, false).head
 		var NameEnvironmentAnswer result = null 
 		if (candidate != null) {
 			val source = stubGenerator.getJavaStubSource(candidate)
