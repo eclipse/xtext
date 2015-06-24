@@ -1,6 +1,5 @@
 package i18n
 
-import extract.Extract
 import org.eclipse.xtend.core.compiler.batch.XtendCompilerTester
 import org.junit.Test
 
@@ -8,7 +7,7 @@ import static org.junit.Assert.assertEquals
 
 class ExternalizedTest {
 	
-	extension XtendCompilerTester compilerTester = XtendCompilerTester.newXtendCompilerTester(Extract)
+	extension XtendCompilerTester compilerTester = XtendCompilerTester.newXtendCompilerTester(class.classLoader)
 	
 	@Test def void testExtractAnnotation() {
 		'''
