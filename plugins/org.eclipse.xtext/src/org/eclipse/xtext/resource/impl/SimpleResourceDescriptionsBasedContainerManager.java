@@ -13,14 +13,23 @@ import java.util.List;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.containers.ProjectDescriptionBasedContainerManager;
+
+import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class SimpleResourceDescriptionsBasedContainerManager implements IContainer.Manager {
 
+	@Inject
+	private ProjectDescriptionBasedContainerManager delegate;
+	
 	@Override
 	public IContainer getContainer(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {
+		if (delegate.shouldUseProjectDescriptionBasedContainers(resourceDescriptions)) {
+			return delegate.getContainer(desc, resourceDescriptions);
+		}
 		ResourceDescriptionsBasedContainer result = new ResourceDescriptionsBasedContainer(resourceDescriptions);
 		result.setUriToDescriptionCacheEnabled(false);
 		return result;
@@ -28,6 +37,9 @@ public class SimpleResourceDescriptionsBasedContainerManager implements IContain
 
 	@Override
 	public List<IContainer> getVisibleContainers(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {
+		if (delegate.shouldUseProjectDescriptionBasedContainers(resourceDescriptions)) {
+			return delegate.getVisibleContainers(desc, resourceDescriptions);
+		}
 		return Collections.singletonList(getContainer(desc, resourceDescriptions));
 	}
 
