@@ -108,6 +108,8 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		bindFactory.addTypeToType('org.eclipse.xtext.idea.parser.TokenTypeProvider', grammar.tokenTypeProviderName)
 		bindFactory.addTypeToType('com.intellij.lang.ParserDefinition', grammar.parserDefinitionName)
 		bindFactory.addTypeToTypeSingleton('org.eclipse.xtext.idea.lang.IElementTypeProvider', grammar.elementTypeProviderName)
+		bindFactory.addTypeToType('org.eclipse.xtext.idea.facet.AbstractFacetConfiguration', grammar.facetConfiguration)
+		bindFactory.addTypeToType('org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.idea.facet.AbstractFacetConfiguration>', grammar.facetTypeName)
 		
 		if (grammar.doesUseXbase) {
 			bindFactory.addTypeToType('org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider', 'org.eclipse.xtext.xbase.idea.types.StubBasedTypeScopeProvider')
@@ -141,6 +143,8 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		ctx.writeFile(outlet_src_gen, grammar.psiParserName.toJavaPath, grammar.compilePsiParser)
 		ctx.writeFile(outlet_src_gen, grammar.antlrTokenFileProvider.toJavaPath, grammar.compileAntlrTokenFileProvider)
 		ctx.writeFile(outlet_src_gen, grammar.pomDeclarationSearcherName.toJavaPath, grammar.compilePomDeclarationSearcher)
+		ctx.writeFile(outlet_src_gen, grammar.facetTypeName.toJavaPath, grammar.compileFacetType)
+		ctx.writeFile(outlet_src_gen, grammar.facetConfiguration.toJavaPath, grammar.compileFacetConfiguration)
 		if (grammar.doesUseXbase) {
 			ctx.writeFile(outlet_src_gen, grammar.jvmTypesElementFinderName.toJavaPath, grammar.compileJvmTypesElementFinder)
 			ctx.writeFile(outlet_src_gen, grammar.jvmTypesShortNamesCacheName.toJavaPath, grammar.compileJvmTypesShortNamesCache)
@@ -156,6 +160,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			output.writeFile(META_INF_PLUGIN, "plugin.xml", grammar.compilePluginXml)
 		}
 	}
+
 	
 	def CharSequence compileGuiceModuleIdeaGenerated(Grammar grammar, Set<Binding> bindings) '''
 		package «grammar.abstractIdeaModuleName.toPackageName»;
@@ -536,6 +541,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 				«grammar.compileExtension('callHierarchyProvider', 'com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider')»
 				<hierarchy.referenceProcessor implementation="«grammar.callReferenceProcessorName»"/>
 				«ENDIF»
+				<facetType implementation="«grammar.facetTypeName»"/>
 			</extensions>
 		
 		</idea-plugin>
@@ -1024,5 +1030,45 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	def compileServicesISetup(Grammar grammar) '''
 		«grammar.standaloneSetup»
 	'''
-
+	
+	def CharSequence compileFacetConfiguration(Grammar grammar) '''
+	package «grammar.facetConfiguration.toPackageName»;
+	
+	import com.intellij.openapi.components.State;
+	import com.intellij.openapi.components.Storage;
+	import com.intellij.openapi.components.StorageScheme;
+	import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
+	
+	@State(name = "«grammar.name»Generator", storages = {
+			@Storage(id = "ipr", file = "$PROJECT_FILE$"),
+			@Storage(id = "prjDir", file = "${PROJECT_CONFIG_DIR$/«grammar.name»GeneratorConfig.xml", scheme = StorageScheme.DIRECTORY_BASED)})
+	public class «grammar.facetConfiguration.toSimpleName» extends AbstractFacetConfiguration {
+		@Override
+		protected String getTabTitle() {
+			return "«grammar.name» facet";
+		}
+	}
+	'''
+	
+	def CharSequence compileFacetType(Grammar grammar) '''
+	package «grammar.facetTypeName.toPackageName»;
+	
+	import com.intellij.facet.Facet;
+	import com.intellij.facet.FacetTypeId;
+	import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
+	import org.eclipse.xtext.idea.facet.AbstractFacetType;
+	
+	public class «grammar.facetTypeName.toSimpleName»  extends AbstractFacetType<AbstractFacetConfiguration> {
+		private static String TYPE_ID_STRING = "«grammar.name»";
+	
+		public static  FacetTypeId<Facet<AbstractFacetConfiguration>> TYPEID = new FacetTypeId<Facet<AbstractFacetConfiguration>>(TYPE_ID_STRING);
+	
+		public «grammar.facetTypeName.toSimpleName»() {
+			super(TYPEID, TYPE_ID_STRING, "«grammar.name.toSimpleName»");
+			«grammar.languageName».INSTANCE.injectMembers(this);
+		}
+	
+	}
+	'''
+	
 }
