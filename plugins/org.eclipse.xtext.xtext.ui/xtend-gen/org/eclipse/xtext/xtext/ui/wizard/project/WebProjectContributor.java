@@ -829,7 +829,7 @@ public class WebProjectContributor extends DefaultProjectFactoryContributor {
       _builder_3.newLine();
       _builder_3.append("import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer");
       _builder_3.newLine();
-      _builder_3.append("import org.eclipse.xtext.service.AbstractGenericModule");
+      _builder_3.append("import org.eclipse.xtext.web.server.DefaultWebModule");
       _builder_3.newLine();
       _builder_3.append("import ");
       String _basePackage_5 = this.projectInfo.getBasePackage();
@@ -855,7 +855,7 @@ public class WebProjectContributor extends DefaultProjectFactoryContributor {
       _builder_3.append("class ");
       String _languageNameAbbreviation_9 = this.projectInfo.getLanguageNameAbbreviation();
       _builder_3.append(_languageNameAbbreviation_9, "");
-      _builder_3.append("WebModule extends AbstractGenericModule {");
+      _builder_3.append("WebModule extends DefaultWebModule {");
       _builder_3.newLineIfNotEmpty();
       _builder_3.newLine();
       _builder_3.append("\t");

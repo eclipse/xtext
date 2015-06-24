@@ -327,13 +327,13 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 			import org.eclipse.xtext.ide.LexerIdeBindings
 			import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser
 			import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer
-			import org.eclipse.xtext.service.AbstractGenericModule
+			import org.eclipse.xtext.web.server.DefaultWebModule
 			import «projectInfo.basePackage».ide.contentassist.antlr.«projectInfo.languageNameAbbreviation»Parser
 			import «projectInfo.basePackage».ide.contentassist.antlr.internal.Internal«projectInfo.languageNameAbbreviation»Lexer
 			
 			@Accessors
 			@FinalFieldsConstructor
-			class «projectInfo.languageNameAbbreviation»WebModule extends AbstractGenericModule {
+			class «projectInfo.languageNameAbbreviation»WebModule extends DefaultWebModule {
 			
 				val ExecutorService executorService
 			
