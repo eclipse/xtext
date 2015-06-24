@@ -15,6 +15,7 @@ import com.google.inject.Singleton;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -35,7 +36,11 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.URIHandler;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.builder.standalone.incremental.ContextualChunkedResourceDescriptions;
+import org.eclipse.xtext.builder.standalone.incremental.ProjectDescription;
+import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent;
 import org.eclipse.xtext.idea.common.types.StubTypeProviderFactory;
+import org.eclipse.xtext.idea.resource.ProjectDescriptionProvider;
 import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.internal.Log;
@@ -233,9 +238,12 @@ public class IdeaResourceSetProvider {
   @Inject
   private StubTypeProviderFactory stubTypeProviderFactory;
   
-  public XtextResourceSet get(final Module context) {
+  @Inject
+  private ProjectDescriptionProvider projectDescriptionProvider;
+  
+  public XtextResourceSet get(final Module module) {
     final XtextResourceSet resourceSet = this.resourceSetProvider.get();
-    resourceSet.setClasspathURIContext(context);
+    resourceSet.setClasspathURIContext(module);
     URIConverter _uRIConverter = resourceSet.getURIConverter();
     EList<URIHandler> _uRIHandlers = _uRIConverter.getURIHandlers();
     _uRIHandlers.clear();
@@ -243,6 +251,13 @@ public class IdeaResourceSetProvider {
     EList<URIHandler> _uRIHandlers_1 = _uRIConverter_1.getURIHandlers();
     IdeaResourceSetProvider.VirtualFileBasedUriHandler _virtualFileBasedUriHandler = new IdeaResourceSetProvider.VirtualFileBasedUriHandler();
     _uRIHandlers_1.add(_virtualFileBasedUriHandler);
+    final ProjectDescription desc = this.projectDescriptionProvider.getProjectDescription(module);
+    desc.attachToEmfObject(resourceSet);
+    Project _project = module.getProject();
+    final XtextAutoBuilderComponent builder = _project.<XtextAutoBuilderComponent>getComponent(XtextAutoBuilderComponent.class);
+    final ContextualChunkedResourceDescriptions descriptions = builder.getCopyOfResourceDescriptions();
+    descriptions.attachToEmfObject(resourceSet);
+    descriptions.setContext(resourceSet);
     this.stubTypeProviderFactory.createTypeProvider(resourceSet);
     return resourceSet;
   }

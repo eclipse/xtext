@@ -19,6 +19,8 @@ import com.intellij.lexer.Lexer;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.util.Key;
 import com.intellij.psi.util.PsiModificationTracker;
+import org.eclipse.xtext.builder.standalone.incremental.ChunkedResourceDescriptionsProvider;
+import org.eclipse.xtext.builder.standalone.incremental.ProjectDescriptionBasedContainerManager;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.bracketmatching.DefaultBracePairProvider;
@@ -31,9 +33,7 @@ import org.eclipse.xtext.idea.highlighting.DefaultPairedBraceMatcher;
 import org.eclipse.xtext.idea.highlighting.DefaultSyntaxHighlighter;
 import org.eclipse.xtext.idea.parser.AntlrDelegatingIdeaLexer;
 import org.eclipse.xtext.idea.refactoring.NullNamesValidator;
-import org.eclipse.xtext.idea.resource.IdeaAllContainerStateProvider;
 import org.eclipse.xtext.idea.resource.IdeaEncodingProvider;
-import org.eclipse.xtext.idea.resource.IdeaResourceDescriptionsProvider;
 import org.eclipse.xtext.idea.structureview.DefaultPsiStructureViewFactory;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
@@ -42,7 +42,7 @@ import org.eclipse.xtext.psi.IPsiModelAssociations;
 import org.eclipse.xtext.psi.IPsiModelAssociator;
 import org.eclipse.xtext.psi.PsiModelAssociations;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
-import org.eclipse.xtext.resource.containers.IAllContainersState;
+import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.service.SingletonBinding;
@@ -118,11 +118,11 @@ public class DefaultIdeaModule extends AbstractGenericModule {
   }
   
   public Class<? extends ResourceDescriptionsProvider> bindResourceDescriptionsProvider() {
-    return IdeaResourceDescriptionsProvider.class;
+    return ChunkedResourceDescriptionsProvider.class;
   }
   
-  public Class<? extends IAllContainersState.Provider> bindIallContainerState$Provider() {
-    return IdeaAllContainerStateProvider.class;
+  public Class<? extends IContainer.Manager> bindIContainer$Manager() {
+    return ProjectDescriptionBasedContainerManager.class;
   }
   
   public Class<? extends IWorkspaceConfigProvider> bindWorkspaceConfigProvider() {

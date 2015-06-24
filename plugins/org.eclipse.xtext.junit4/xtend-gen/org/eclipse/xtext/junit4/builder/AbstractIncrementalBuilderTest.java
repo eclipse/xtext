@@ -25,9 +25,11 @@ import org.eclipse.emf.ecore.resource.URIHandler;
 import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
 import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder;
 import org.eclipse.xtext.builder.standalone.incremental.IndexState;
+import org.eclipse.xtext.builder.standalone.incremental.Source2GeneratedMapping;
 import org.eclipse.xtext.junit4.util.InMemoryURIHandler;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -103,6 +105,8 @@ public abstract class AbstractIncrementalBuilderTest {
     final Procedure1<BuildRequest> _function = new Procedure1<BuildRequest>() {
       @Override
       public void apply(final BuildRequest it) {
+        ResourceDescriptionsData _resourceDescriptions = AbstractIncrementalBuilderTest.this.indexState.getResourceDescriptions();
+        final ResourceDescriptionsData newIndex = _resourceDescriptions.copy();
         URI _uri = AbstractIncrementalBuilderTest.this.uri("");
         it.setBaseDir(_uri);
         XtextResourceSet _get = AbstractIncrementalBuilderTest.this.resourceSetProvider.get();
@@ -117,11 +121,11 @@ public abstract class AbstractIncrementalBuilderTest {
             _uRIHandlers_1.add(AbstractIncrementalBuilderTest.this.inMemoryURIHandler);
             ClassLoader _classLoader = AbstractIncrementalBuilderTest.class.getClassLoader();
             it.setClasspathURIContext(_classLoader);
+            ResourceDescriptionsData.ResourceSetAdapter.installResourceDescriptionsData(it, newIndex);
           }
         };
         XtextResourceSet _doubleArrow = ObjectExtensions.<XtextResourceSet>operator_doubleArrow(_get, _function);
         it.setResourceSet(_doubleArrow);
-        it.setClassPath(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList()));
         it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList()));
         it.setDeletedFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList()));
         final BuildRequest.IPostValidationCallback _function_1 = new BuildRequest.IPostValidationCallback() {
@@ -147,6 +151,10 @@ public abstract class AbstractIncrementalBuilderTest {
         };
         it.setAfterGenerateFile(_function_3);
         it.setPreviousState(AbstractIncrementalBuilderTest.this.indexState);
+        Source2GeneratedMapping _fileMappings = AbstractIncrementalBuilderTest.this.indexState.getFileMappings();
+        Source2GeneratedMapping _copy = _fileMappings.copy();
+        IndexState _indexState = new IndexState(newIndex, _copy);
+        it.setNewState(_indexState);
       }
     };
     final BuildRequest result = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function);

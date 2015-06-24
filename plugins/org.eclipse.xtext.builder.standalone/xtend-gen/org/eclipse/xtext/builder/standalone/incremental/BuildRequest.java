@@ -21,7 +21,6 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -90,8 +89,6 @@ public class BuildRequest {
     return this.baseDir;
   }
   
-  private List<URI> classPath = CollectionLiterals.<URI>newArrayList();
-  
   private List<URI> dirtyFiles = CollectionLiterals.<URI>newArrayList();
   
   private List<URI> deletedFiles = CollectionLiterals.<URI>newArrayList();
@@ -115,18 +112,9 @@ public class BuildRequest {
     }
   };
   
-  private Function1<? super URI, ? extends Boolean> belongsToThisBuildRun = new Function1<URI, Boolean>() {
-    @Override
-    public Boolean apply(final URI it) {
-      return Boolean.valueOf(true);
-    }
-  };
-  
-  public boolean belongsToThisBuildRun(final URI uri) {
-    return (this.belongsToThisBuildRun.apply(uri)).booleanValue();
-  }
-  
   private IndexState previousState = new IndexState();
+  
+  private IndexState newState = new IndexState();
   
   private boolean writeStorageResources = false;
   
@@ -136,15 +124,6 @@ public class BuildRequest {
   
   public void setBaseDir(final URI baseDir) {
     this.baseDir = baseDir;
-  }
-  
-  @Pure
-  public List<URI> getClassPath() {
-    return this.classPath;
-  }
-  
-  public void setClassPath(final List<URI> classPath) {
-    this.classPath = classPath;
   }
   
   @Pure
@@ -202,21 +181,21 @@ public class BuildRequest {
   }
   
   @Pure
-  public Function1<? super URI, ? extends Boolean> getBelongsToThisBuildRun() {
-    return this.belongsToThisBuildRun;
-  }
-  
-  public void setBelongsToThisBuildRun(final Function1<? super URI, ? extends Boolean> belongsToThisBuildRun) {
-    this.belongsToThisBuildRun = belongsToThisBuildRun;
-  }
-  
-  @Pure
   public IndexState getPreviousState() {
     return this.previousState;
   }
   
   public void setPreviousState(final IndexState previousState) {
     this.previousState = previousState;
+  }
+  
+  @Pure
+  public IndexState getNewState() {
+    return this.newState;
+  }
+  
+  public void setNewState(final IndexState newState) {
+    this.newState = newState;
   }
   
   @Pure

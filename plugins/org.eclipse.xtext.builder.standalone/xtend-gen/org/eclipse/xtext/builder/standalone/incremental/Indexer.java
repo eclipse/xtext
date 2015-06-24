@@ -9,7 +9,6 @@ package org.eclipse.xtext.builder.standalone.incremental;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -44,7 +43,6 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.9
  */
-@Singleton
 @Log
 @SuppressWarnings("all")
 public class Indexer {
@@ -119,9 +117,8 @@ public class Indexer {
   public Indexer.IndexResult computeAndIndexAffected(final BuildRequest request, @Extension final BuildContext context) {
     IndexState _previousState = request.getPreviousState();
     final ResourceDescriptionsData previousIndex = _previousState.getResourceDescriptions();
-    final ResourceDescriptionsData newIndex = previousIndex.copy();
-    XtextResourceSet _resourceSet = context.getResourceSet();
-    this.installIndex(_resourceSet, newIndex);
+    IndexState _newState = request.getNewState();
+    final ResourceDescriptionsData newIndex = _newState.getResourceDescriptions();
     final List<IResourceDescription.Delta> deltas = CollectionLiterals.<IResourceDescription.Delta>newArrayList();
     boolean _isInfoEnabled = Indexer.LOG.isInfoEnabled();
     if (_isInfoEnabled) {
@@ -171,11 +168,6 @@ public class Indexer {
     final Function1<URI, Boolean> _function_2 = new Function1<URI, Boolean>() {
       @Override
       public Boolean apply(final URI it) {
-        boolean _belongsToThisBuildRun = request.belongsToThisBuildRun(it);
-        boolean _not = (!_belongsToThisBuildRun);
-        if (_not) {
-          return Boolean.valueOf(false);
-        }
         IResourceServiceProvider _resourceServiceProvider = context.getResourceServiceProvider(it);
         final IResourceDescription.Manager manager = _resourceServiceProvider.getResourceDescriptionManager();
         final IResourceDescription resourceDescription = previousIndex.getResourceDescription(it);
@@ -265,10 +257,6 @@ public class Indexer {
     }
     final IResourceDescription.Delta delta = manager.createDelta(_resourceDescription, toBeAdded);
     return delta;
-  }
-  
-  protected void installIndex(final XtextResourceSet resourceSet, final ResourceDescriptionsData index) {
-    ResourceDescriptionsData.ResourceSetAdapter.installResourceDescriptionsData(resourceSet, index);
   }
   
   protected boolean isAffected(final IResourceDescription affectionCandidate, final IResourceDescription.Manager manager, final Collection<IResourceDescription.Delta> newDeltas, final Collection<IResourceDescription.Delta> allDeltas, final IResourceDescriptions resourceDescriptions) {

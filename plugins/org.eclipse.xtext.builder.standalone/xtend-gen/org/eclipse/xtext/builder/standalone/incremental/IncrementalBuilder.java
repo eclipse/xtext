@@ -147,9 +147,8 @@ public class IncrementalBuilder {
     private Indexer indexer;
     
     public IncrementalBuilder.Result launch() {
-      IndexState _previousState = this.request.getPreviousState();
-      Source2GeneratedMapping _fileMappings = _previousState.getFileMappings();
-      final Source2GeneratedMapping newSource2GeneratedMapping = _fileMappings.copy();
+      IndexState _newState = this.request.getNewState();
+      final Source2GeneratedMapping newSource2GeneratedMapping = _newState.getFileMappings();
       List<URI> _deletedFiles = this.request.getDeletedFiles();
       final Procedure1<URI> _function = new Procedure1<URI>() {
         @Override
@@ -232,9 +231,8 @@ public class IncrementalBuilder {
       };
       Iterable<IResourceDescription.Delta> _executeClustered = this.context.<IResourceDescription.Delta>executeClustered(_map, _function_4);
       Iterables.<IResourceDescription.Delta>addAll(resolvedDeltas, _executeClustered);
-      ResourceDescriptionsData _newIndex = result.getNewIndex();
-      IndexState _indexState = new IndexState(_newIndex, newSource2GeneratedMapping);
-      return new IncrementalBuilder.Result(_indexState, resolvedDeltas);
+      IndexState _newState_1 = this.request.getNewState();
+      return new IncrementalBuilder.Result(_newState_1, resolvedDeltas);
     }
     
     protected boolean validate(final Resource resource) {

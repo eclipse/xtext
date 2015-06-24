@@ -7,22 +7,25 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.standalone.incremental
 
-import org.eclipse.emf.common.util.URI
-import com.google.inject.ImplementedBy
+import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.util.internal.EmfAdaptable
 
 /**
- * @author Jan Koehnlein - Initial contribution and API
+ * @author Sven Efftinge - Initial contribution and API
+ * 
+ * @since 2.9
  */
-@ImplementedBy(IClassFileBasedDependencyFinder.NullImpl)
-interface IClassFileBasedDependencyFinder {
+@EmfAdaptable class ProjectDescription {
 	
-	def Iterable<? extends URI> getDependentJavaFiles(Iterable<URI> dirtyJavaFiles, Iterable<URI> deletedJavaFiles)
+	/**
+	 * A unique name for this project
+	 */
+	@Accessors String name
 	
-	static class NullImpl implements IClassFileBasedDependencyFinder {
-		
-		override getDependentJavaFiles(Iterable<URI> dirtyJavaFiles, Iterable<URI> deletedJavaFiles) {
-			emptyList
-		}
-		
-	} 
+	/**
+	 * list of logical names of upstream dependencies
+	 */
+	@Accessors List<String> dependencies
+	
 }
