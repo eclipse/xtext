@@ -5,7 +5,7 @@ buildscript {
 }
 
 def eclipsePluginProjects = subprojects.findAll{it.file('build.properties').exists()}
-def ideaPluginProjects = subprojects.findAll{it.file('META-INF/plugin.xml').exists() && ! it.name.endsWith('tests')}
+def ideaPluginProjects = subprojects.findAll{it.file('META-INF/plugin.xml').exists() && ! it.name.endsWith('tests')} + project('org.eclipse.xtext.idea.common.types.tests')
 def ideaTestProjects = subprojects.findAll{it.name.endsWith('idea.tests')} + project('org.eclipse.xtext.idea.common.types.tests') - project('org.eclipse.xtext.idea.tests')
 
 apply plugin: 'org.xtext.idea-repository'

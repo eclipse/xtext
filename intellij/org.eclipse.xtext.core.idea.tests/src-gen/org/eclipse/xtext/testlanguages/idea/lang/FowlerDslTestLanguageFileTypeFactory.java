@@ -8,7 +8,7 @@ public class FowlerDslTestLanguageFileTypeFactory extends FileTypeFactory {
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtext.testlanguages.idea.lang.FowlerDslTestLanguageFileType.INSTANCE, org.eclipse.xtext.testlanguages.idea.lang.FowlerDslTestLanguageFileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtext.testlanguages.idea.lang.FowlerDslTestLanguageFileType.INSTANCE, org.eclipse.xtext.testlanguages.idea.lang.AbstractFowlerDslTestLanguageFileType.DEFAULT_EXTENSION);
 	}
 
 }

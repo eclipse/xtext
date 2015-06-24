@@ -1,0 +1,20 @@
+package org.eclipse.xtext.testlanguages.idea;
+
+import com.google.inject.Injector;
+import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.idea.extensions.EcoreGlobalRegistries;
+import org.eclipse.xtext.testlanguages.idea.FowlerDslTestLanguageStandaloneSetupIdea;
+
+@SuppressWarnings("all")
+public class FowlerDslTestLanguageIdeaSetup implements ISetup {
+  @Override
+  public Injector createInjectorAndDoEMFRegistration() {
+    Injector _xblockexpression = null;
+    {
+      EcoreGlobalRegistries.ensureInitialized();
+      FowlerDslTestLanguageStandaloneSetupIdea _fowlerDslTestLanguageStandaloneSetupIdea = new FowlerDslTestLanguageStandaloneSetupIdea();
+      _xblockexpression = _fowlerDslTestLanguageStandaloneSetupIdea.createInjector();
+    }
+    return _xblockexpression;
+  }
+}

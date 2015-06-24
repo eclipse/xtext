@@ -9,6 +9,7 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.idea.tests.TestDecorator
 import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker
+import org.eclipse.xtext.parser.unorderedGroups.idea.ExUnorderedGroupsTestLanguageStandaloneSetupIdea
 import org.eclipse.xtext.parser.unorderedGroups.idea.lang.ExUnorderedGroupsTestLanguageFileType
 import org.eclipse.xtext.parser.unorderedGroups.idea.lang.ExUnorderedGroupsTestLanguageLanguage
 import org.eclipse.xtext.resource.XtextResource
@@ -21,6 +22,10 @@ class IdeaParserExTest extends AbstractLanguageParsingTestCase {
 	new() {
 		super(ExUnorderedGroupsTestLanguageFileType.INSTANCE)
 		delegate = new Delegate(this)
+	}
+	
+	override protected getSetup() {
+		new ExUnorderedGroupsTestLanguageStandaloneSetupIdea
 	}
 	
 	override protected getTestDataPath() {

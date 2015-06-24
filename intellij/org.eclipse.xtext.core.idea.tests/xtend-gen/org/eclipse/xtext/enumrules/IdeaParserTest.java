@@ -4,7 +4,9 @@ import com.google.inject.Injector;
 import java.io.IOException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
+import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.enumrules.ParserTest;
+import org.eclipse.xtext.enumrules.idea.EnumRulesTestLanguageStandaloneSetupIdea;
 import org.eclipse.xtext.enumrules.idea.lang.EnumRulesTestLanguageFileType;
 import org.eclipse.xtext.enumrules.idea.lang.EnumRulesTestLanguageLanguage;
 import org.eclipse.xtext.idea.tests.TestDecorator;
@@ -42,6 +44,11 @@ public class IdeaParserTest extends AbstractLanguageParsingTestCase {
     super(EnumRulesTestLanguageFileType.INSTANCE);
     IdeaParserTest.Delegate _delegate = new IdeaParserTest.Delegate(this);
     this.delegate = _delegate;
+  }
+  
+  @Override
+  protected ISetup getSetup() {
+    return new EnumRulesTestLanguageStandaloneSetupIdea();
   }
   
   @Override

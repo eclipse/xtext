@@ -8,7 +8,7 @@ public class CommentAssociationTestLanguageFileTypeFactory extends FileTypeFacto
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtext.parsetree.impl.idea.lang.CommentAssociationTestLanguageFileType.INSTANCE, org.eclipse.xtext.parsetree.impl.idea.lang.CommentAssociationTestLanguageFileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtext.parsetree.impl.idea.lang.CommentAssociationTestLanguageFileType.INSTANCE, org.eclipse.xtext.parsetree.impl.idea.lang.AbstractCommentAssociationTestLanguageFileType.DEFAULT_EXTENSION);
 	}
 
 }

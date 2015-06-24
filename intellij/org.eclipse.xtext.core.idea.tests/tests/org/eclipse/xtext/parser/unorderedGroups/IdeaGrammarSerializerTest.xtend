@@ -6,6 +6,7 @@ import java.io.InputStream
 import java.io.InputStreamReader
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.idea.XtextStandaloneSetupIdea
 import org.eclipse.xtext.idea.lang.XtextFileType
 import org.eclipse.xtext.idea.lang.XtextLanguage
 import org.eclipse.xtext.idea.tests.TestDecorator
@@ -21,6 +22,10 @@ class IdeaGrammarSerializerTest extends AbstractLanguageParsingTestCase {
 	new() {
 		super(XtextFileType.INSTANCE)
 		delegate = new Delegate(this)
+	}
+	
+	override protected getSetup() {
+		new XtextStandaloneSetupIdea
 	}
 	
 	override protected getTestDataPath() {

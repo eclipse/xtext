@@ -8,7 +8,7 @@ public class SyntacticSequencerTestLanguageFileTypeFactory extends FileTypeFacto
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtext.serializer.idea.lang.SyntacticSequencerTestLanguageFileType.INSTANCE, org.eclipse.xtext.serializer.idea.lang.SyntacticSequencerTestLanguageFileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtext.serializer.idea.lang.SyntacticSequencerTestLanguageFileType.INSTANCE, org.eclipse.xtext.serializer.idea.lang.AbstractSyntacticSequencerTestLanguageFileType.DEFAULT_EXTENSION);
 	}
 
 }

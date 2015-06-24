@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.idea.resource.ModuleProvider;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.service.OperationCanceledError;
 
 import com.google.inject.Singleton;

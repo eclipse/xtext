@@ -40,11 +40,11 @@ class LightToolingTest extends LightCodeInsightFixtureTestCase {
 	new(LanguageFileType fileType) {
 		XtextAutoBuilderComponent.TEST_MODE = true
 		this.fileType = fileType
-		xtextLanguage.injectMembers(this)
 	}
 
 	override protected setUp() throws Exception {
 		super.setUp
+		xtextLanguage.injectMembers(this)
 		CodeInsightSettings.instance.AUTOCOMPLETE_ON_CODE_COMPLETION = false
 	}
 	

@@ -9,6 +9,7 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.idea.tests.TestDecorator
 import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker
+import org.eclipse.xtext.parser.assignments.idea.AssignmentsTestLanguageStandaloneSetupIdea
 import org.eclipse.xtext.parser.assignments.idea.lang.AssignmentsTestLanguageFileType
 import org.eclipse.xtext.parser.assignments.idea.lang.AssignmentsTestLanguageLanguage
 
@@ -20,6 +21,10 @@ class IdeaParserBug281962Test extends AbstractLanguageParsingTestCase {
 	new() {
 		super(AssignmentsTestLanguageFileType.INSTANCE)
 		delegate = new Delegate(this)
+	}
+	
+	override protected getSetup() {
+		new AssignmentsTestLanguageStandaloneSetupIdea
 	}
 	
 	override protected getTestDataPath() {

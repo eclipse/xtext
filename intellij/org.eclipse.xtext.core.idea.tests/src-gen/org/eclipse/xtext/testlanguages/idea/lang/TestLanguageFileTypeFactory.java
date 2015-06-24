@@ -8,7 +8,7 @@ public class TestLanguageFileTypeFactory extends FileTypeFactory {
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtext.testlanguages.idea.lang.TestLanguageFileType.INSTANCE, org.eclipse.xtext.testlanguages.idea.lang.TestLanguageFileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtext.testlanguages.idea.lang.TestLanguageFileType.INSTANCE, org.eclipse.xtext.testlanguages.idea.lang.AbstractTestLanguageFileType.DEFAULT_EXTENSION);
 	}
 
 }

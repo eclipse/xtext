@@ -8,7 +8,7 @@ public class IgnoreCaseNamespacesTestLanguageFileTypeFactory extends FileTypeFac
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtext.linking.idea.lang.IgnoreCaseNamespacesTestLanguageFileType.INSTANCE, org.eclipse.xtext.linking.idea.lang.IgnoreCaseNamespacesTestLanguageFileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtext.linking.idea.lang.IgnoreCaseNamespacesTestLanguageFileType.INSTANCE, org.eclipse.xtext.linking.idea.lang.AbstractIgnoreCaseNamespacesTestLanguageFileType.DEFAULT_EXTENSION);
 	}
 
 }

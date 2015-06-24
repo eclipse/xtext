@@ -8,7 +8,7 @@ public class QualifiedNameTestLanguageFileTypeFactory extends FileTypeFactory {
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtext.valueconverter.idea.lang.QualifiedNameTestLanguageFileType.INSTANCE, org.eclipse.xtext.valueconverter.idea.lang.QualifiedNameTestLanguageFileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtext.valueconverter.idea.lang.QualifiedNameTestLanguageFileType.INSTANCE, org.eclipse.xtext.valueconverter.idea.lang.AbstractQualifiedNameTestLanguageFileType.DEFAULT_EXTENSION);
 	}
 
 }

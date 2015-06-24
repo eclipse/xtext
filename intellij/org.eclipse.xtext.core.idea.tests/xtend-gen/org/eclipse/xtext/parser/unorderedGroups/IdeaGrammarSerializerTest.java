@@ -8,6 +8,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
+import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.idea.XtextStandaloneSetupIdea;
 import org.eclipse.xtext.idea.lang.XtextFileType;
 import org.eclipse.xtext.idea.lang.XtextLanguage;
 import org.eclipse.xtext.idea.tests.TestDecorator;
@@ -51,6 +53,11 @@ public class IdeaGrammarSerializerTest extends AbstractLanguageParsingTestCase {
     super(XtextFileType.INSTANCE);
     IdeaGrammarSerializerTest.Delegate _delegate = new IdeaGrammarSerializerTest.Delegate(this);
     this.delegate = _delegate;
+  }
+  
+  @Override
+  protected ISetup getSetup() {
+    return new XtextStandaloneSetupIdea();
   }
   
   @Override

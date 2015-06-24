@@ -8,7 +8,7 @@ public class ConcreteTestLanguageFileTypeFactory extends FileTypeFactory {
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtext.grammarinheritance.idea.lang.ConcreteTestLanguageFileType.INSTANCE, org.eclipse.xtext.grammarinheritance.idea.lang.ConcreteTestLanguageFileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtext.grammarinheritance.idea.lang.ConcreteTestLanguageFileType.INSTANCE, org.eclipse.xtext.grammarinheritance.idea.lang.AbstractConcreteTestLanguageFileType.DEFAULT_EXTENSION);
 	}
 
 }

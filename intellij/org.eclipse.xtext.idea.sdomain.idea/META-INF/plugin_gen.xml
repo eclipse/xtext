@@ -1,0 +1,54 @@
+<idea-plugin version="2">
+	<extensions defaultExtensionNs="org.eclipse.xtext.idea">
+		<package uri="http://www.xtext.org/idea/sdomain/SDomain"
+				 class="org.eclipse.xtext.idea.sdomain.sDomain.SDomainPackage"/>
+		<resourceFactory type="sdomain"
+						 class="org.eclipse.xtext.resource.IResourceFactory"
+						 factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"/>
+		<resourceServiceProvider uriExtension="sdomain"
+								 class="org.eclipse.xtext.idea.resource.IResourceIdeaServiceProvider"
+								 factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"/>
+
+		<lang.setup language="org.eclipse.xtext.idea.sdomain.SDomain"
+					implementationClass="org.eclipse.xtext.idea.sdomain.idea.SDomainIdeaSetup"/>
+	</extensions>
+
+	<extensions defaultExtensionNs="com.intellij">
+		<stubIndex implementation="org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex"/>
+
+		<psi.treeChangePreprocessor implementation="org.eclipse.xtext.idea.sdomain.idea.lang.psi.SDomainCodeBlockModificationListener"/>
+
+		<fileTypeFactory implementation="org.eclipse.xtext.idea.sdomain.idea.lang.SDomainFileTypeFactory"/>
+		<stubElementTypeHolder class="org.eclipse.xtext.idea.sdomain.idea.lang.SDomainElementTypeProvider"/>
+		<lang.ast.factory language="org.eclipse.xtext.idea.sdomain.SDomain"
+								factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"
+								implementationClass="org.eclipse.xtext.idea.lang.BaseXtextASTFactory"/>
+		<lang.parserDefinition language="org.eclipse.xtext.idea.sdomain.SDomain"
+								factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"
+								implementationClass="org.eclipse.xtext.idea.sdomain.idea.lang.parser.SDomainParserDefinition"/>
+		<lang.findUsagesProvider language="org.eclipse.xtext.idea.sdomain.SDomain"
+								factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"
+								implementationClass="org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider"/>
+		<lang.refactoringSupport language="org.eclipse.xtext.idea.sdomain.SDomain"
+								factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"
+								implementationClass="org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider"/>
+		<lang.namesValidator language="org.eclipse.xtext.idea.sdomain.SDomain"
+								factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"
+								implementationClass="com.intellij.lang.refactoring.NamesValidator"/>
+      	<lang.syntaxHighlighterFactory key="org.eclipse.xtext.idea.sdomain.SDomain" implementationClass="org.eclipse.xtext.idea.sdomain.idea.lang.SDomainSyntaxHighlighterFactory" />
+		<lang.braceMatcher language="org.eclipse.xtext.idea.sdomain.SDomain"
+								factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"
+								implementationClass="com.intellij.lang.PairedBraceMatcher"/>
+      	<annotator language="org.eclipse.xtext.idea.sdomain.SDomain"
+      							factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"
+      							implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"/>
+      	<completion.contributor language="org.eclipse.xtext.idea.sdomain.SDomain" implementationClass="org.eclipse.xtext.idea.sdomain.idea.completion.SDomainCompletionContributor"/>
+      	<elementDescriptionProvider implementation="org.eclipse.xtext.idea.sdomain.idea.lang.psi.SDomainElementDescriptionProvider" order="first"/>
+      	<pom.declarationSearcher implementation="org.eclipse.xtext.idea.sdomain.idea.lang.pom.SDomainPomDeclarationSearcher"/>
+
+      	<lang.psiStructureViewFactory language="org.eclipse.xtext.idea.sdomain.SDomain"
+      							factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"
+      							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
+        <facetType implementation="org.eclipse.xtext.idea.sdomain.idea.facet.SDomainFacetType"/>
+	</extensions>
+</idea-plugin>

@@ -8,7 +8,7 @@ public class BacktrackingBug325745TestLanguageFileTypeFactory extends FileTypeFa
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtext.parser.unorderedGroups.idea.lang.BacktrackingBug325745TestLanguageFileType.INSTANCE, org.eclipse.xtext.parser.unorderedGroups.idea.lang.BacktrackingBug325745TestLanguageFileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtext.parser.unorderedGroups.idea.lang.BacktrackingBug325745TestLanguageFileType.INSTANCE, org.eclipse.xtext.parser.unorderedGroups.idea.lang.AbstractBacktrackingBug325745TestLanguageFileType.DEFAULT_EXTENSION);
 	}
 
 }

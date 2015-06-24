@@ -8,7 +8,7 @@ public class UnassignedRuleCallTestLanguageFileTypeFactory extends FileTypeFacto
 
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(org.eclipse.xtext.xtext.ecoreInference.idea.lang.UnassignedRuleCallTestLanguageFileType.INSTANCE, org.eclipse.xtext.xtext.ecoreInference.idea.lang.UnassignedRuleCallTestLanguageFileType.DEFAULT_EXTENSION);
+		consumer.consume(org.eclipse.xtext.xtext.ecoreInference.idea.lang.UnassignedRuleCallTestLanguageFileType.INSTANCE, org.eclipse.xtext.xtext.ecoreInference.idea.lang.AbstractUnassignedRuleCallTestLanguageFileType.DEFAULT_EXTENSION);
 	}
 
 }

@@ -6,10 +6,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
+import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.idea.tests.TestDecorator;
 import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase;
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
 import org.eclipse.xtext.parser.terminalrules.UnicodeTest;
+import org.eclipse.xtext.parser.terminalrules.idea.UnicodeTestLanguageStandaloneSetupIdea;
 import org.eclipse.xtext.parser.terminalrules.idea.lang.UnicodeTestLanguageFileType;
 import org.eclipse.xtext.parser.terminalrules.idea.lang.UnicodeTestLanguageLanguage;
 import org.eclipse.xtext.resource.XtextResource;
@@ -47,6 +49,11 @@ public class IdeaUnicodeTest extends AbstractLanguageParsingTestCase {
     super(UnicodeTestLanguageFileType.INSTANCE);
     IdeaUnicodeTest.Delegate _delegate = new IdeaUnicodeTest.Delegate(this);
     this.delegate = _delegate;
+  }
+  
+  @Override
+  protected ISetup getSetup() {
+    return new UnicodeTestLanguageStandaloneSetupIdea();
   }
   
   @Override

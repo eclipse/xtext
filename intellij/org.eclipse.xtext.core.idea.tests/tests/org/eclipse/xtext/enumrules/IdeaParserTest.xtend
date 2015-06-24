@@ -3,6 +3,7 @@ package org.eclipse.xtext.enumrules
 import com.google.inject.Injector
 import java.io.IOException
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.enumrules.idea.EnumRulesTestLanguageStandaloneSetupIdea
 import org.eclipse.xtext.enumrules.idea.lang.EnumRulesTestLanguageFileType
 import org.eclipse.xtext.enumrules.idea.lang.EnumRulesTestLanguageLanguage
 import org.eclipse.xtext.idea.tests.TestDecorator
@@ -17,6 +18,10 @@ class IdeaParserTest extends AbstractLanguageParsingTestCase {
 	new() {
 		super(EnumRulesTestLanguageFileType.INSTANCE)
 		delegate = new Delegate(this)
+	}
+	
+	override protected getSetup() {
+		new EnumRulesTestLanguageStandaloneSetupIdea
 	}
 	
 	override protected getTestDataPath() {

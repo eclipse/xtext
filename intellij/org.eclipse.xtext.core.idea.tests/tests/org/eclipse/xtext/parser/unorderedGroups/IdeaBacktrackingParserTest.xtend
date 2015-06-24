@@ -10,6 +10,7 @@ import org.eclipse.xtext.idea.tests.TestDecorator
 import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.testlanguages.backtracking.idea.SimpleBeeLangTestLanguageStandaloneSetupIdea
 import org.eclipse.xtext.testlanguages.backtracking.idea.lang.SimpleBeeLangTestLanguageFileType
 import org.eclipse.xtext.testlanguages.backtracking.idea.lang.SimpleBeeLangTestLanguageLanguage
 
@@ -21,6 +22,10 @@ class IdeaBacktrackingParserTest extends AbstractLanguageParsingTestCase {
 	new() {
 		super(SimpleBeeLangTestLanguageFileType.INSTANCE)
 		delegate = new Delegate(this)
+	}
+	
+	override protected getSetup() {
+		new SimpleBeeLangTestLanguageStandaloneSetupIdea
 	}
 	
 	override protected getTestDataPath() {

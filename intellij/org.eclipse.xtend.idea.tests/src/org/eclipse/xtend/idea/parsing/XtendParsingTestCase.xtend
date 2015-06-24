@@ -26,6 +26,10 @@ class XtendParsingTestCase extends AbstractModelTestCase {
 	new() {
 		super(XtendFileType.INSTANCE)
 		delegate = new Delegate(this)
+	}
+	
+	override protected setUp() throws Exception {
+		super.setUp()
 		xtextLanguage.injectMembers(delegate)
 	}
 

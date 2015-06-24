@@ -70,7 +70,7 @@ public class JavaDerivedStateComputer {
     _contents.clear();
   }
   
-  public void installStubs(final Resource resource) {
+  public Object installStubs(final Resource resource) {
     final CompilationUnit compilationUnit = this.getCompilationUnit(resource);
     IErrorHandlingPolicy _proceedWithAllProblems = DefaultErrorHandlingPolicies.proceedWithAllProblems();
     CompilerOptions _compilerOptions = this.getCompilerOptions();
@@ -106,6 +106,7 @@ public class JavaDerivedStateComputer {
         _contents.add(jvmType);
       }
     }
+    return null;
   }
   
   public JvmDeclaredType createType(final TypeDeclaration type, final String packageName) {
