@@ -40,16 +40,32 @@ import com.google.inject.Provider;
  */
 public class XtendCompilerTester {
 	
+	@Deprecated
 	public static XtendCompilerTester newXtendCompilerTester(Class<?> ...classesOnClassPath) {
 		XtendCompilerTester instance = XtendInjectorSingleton.INJECTOR.getInstance(XtendCompilerTester.class);
 		instance.setJavaCompilerClassPath(classesOnClassPath);
-		ProcessorInstanceForJvmTypeProvider processorProvider = XtendInjectorSingleton.INJECTOR.getInstance(ProcessorInstanceForJvmTypeProvider.class);
-		processorProvider.setClassLoader(XtendCompilerTester.class.getClassLoader());
 		return instance;
 	}
 	
+	/**
+	 * @since 2.9
+	 */
+	public static XtendCompilerTester newXtendCompilerTester(ClassLoader classesOnClassPath) {
+		XtendCompilerTester instance = XtendInjectorSingleton.INJECTOR.getInstance(XtendCompilerTester.class);
+		instance.setJavaCompilerClassPath(classesOnClassPath);
+		return instance;
+	}
+	
+	@Deprecated
 	public void setJavaCompilerClassPath(Class<?>[] classesOnClassPath) {
 		compilationTestHelper.setJavaCompilerClassPath(classesOnClassPath);
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public void setJavaCompilerClassPath(ClassLoader classPath) {
+		compilationTestHelper.setJavaCompilerClassPath(classPath);
 	}
 
 	@Inject CompilationTestHelper compilationTestHelper;

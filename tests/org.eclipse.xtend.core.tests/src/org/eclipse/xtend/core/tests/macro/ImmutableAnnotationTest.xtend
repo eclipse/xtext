@@ -11,7 +11,6 @@ import org.junit.Test
 class ImmutableAnnotationTest extends AbstractActiveAnnotationTest {
 	
 	@Test def void defSimpleTest() {
-		setJavaCompilerClassPath(#[Immutable])
 		'''
 			import org.eclipse.xtend.core.tests.macro.Immutable
 			

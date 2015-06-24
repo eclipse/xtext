@@ -2,16 +2,15 @@ package org.eclipse.xtend.core.tests.macro.declaration
 
 import com.google.inject.Inject
 import com.google.inject.Provider
+import java.util.List
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtend.core.xtend.XtendFile
-import org.junit.Test
+import org.eclipse.xtend.lib.macro.Active
+import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
 import org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration
-import java.util.List
-import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
-import org.eclipse.xtend.lib.macro.Active
-import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider
+import org.junit.Test
 
 class TypeLookupImplTest extends AbstractXtendTestCase {
 	
@@ -86,10 +85,8 @@ class TypeLookupImplTest extends AbstractXtendTestCase {
 	}
 
 	@Inject Provider<CompilationUnitImpl> compilationUnitProvider
-	@Inject ProcessorInstanceForJvmTypeProvider instanceForJvmTypeProvider
 	
 	def validFile(CharSequence code) {
-		instanceForJvmTypeProvider.setClassLoader(class.classLoader)
 		file(code.toString, true)
 	}
 	
