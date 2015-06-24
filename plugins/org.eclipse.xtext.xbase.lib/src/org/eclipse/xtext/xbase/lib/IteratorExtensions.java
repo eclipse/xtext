@@ -269,7 +269,7 @@ import com.google.common.collect.Sets;
 	 *            the iterator. May not be <code>null</code>.
 	 * @param predicate
 	 *            the predicate. May not be <code>null</code>.
-	 * @return <code>true</code> if one or more elements in {@code iterator} satisfy the predicate.
+	 * @return <code>true</code> if every element in {@code iterator} satisfies the predicate and also if there is no element.
 	 */
 	public static <T> boolean forall(Iterator<T> iterator, Function1<? super T, Boolean> predicate) {
 		if (predicate == null)
