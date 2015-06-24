@@ -179,4 +179,12 @@ class IdeaPluginClassNames {
 	def String getCallReferenceProcessorName(Grammar it) {
 		basePackageName+'.ide.hierarchy.call.'+it.name.toSimpleName+'CallReferenceProcessor'
 	}
+		
+	def String getFacetConfiguration(Grammar it) {
+		basePackageName+'.facet.'+it.name.toSimpleName+'FacetConfiguration'
+	}
+	
+	def String getFacetTypeName(Grammar it) {
+		basePackageName+'.facet.'+it.name.toSimpleName+'FacetType'
+	}
 }

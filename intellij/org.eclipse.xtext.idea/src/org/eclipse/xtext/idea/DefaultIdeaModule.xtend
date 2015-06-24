@@ -44,6 +44,8 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.eclipse.xtext.service.AbstractGenericModule
 import org.eclipse.xtext.service.SingletonBinding
 import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
+import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider
+import org.eclipse.xtext.idea.build.IdeaOutputConfigurationProvider
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -132,4 +134,9 @@ class DefaultIdeaModule extends AbstractGenericModule {
 	def Class<? extends IWorkspaceConfigProvider> bindWorkspaceConfigProvider() {
 		IdeaWorkspaceConfigProvider
 	}
+	
+	def Class<? extends IContextualOutputConfigurationProvider> bindIContextualOutputConfigurationProvider() {
+		IdeaOutputConfigurationProvider
+	}
+
 }
