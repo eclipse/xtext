@@ -105,6 +105,8 @@ public class CompilationTestHelper {
 	private TemporaryFolder temporaryFolder;
 	
 	private File workspaceRoot;
+
+	private ClassLoader classpathUriContext;
 	
 	/**
 	 * creates a fresh temp directory and sets it as the workspace root.
@@ -143,6 +145,7 @@ public class CompilationTestHelper {
 	 */
 	public void setJavaCompilerClassPath(ClassLoader classLoader) {
 		this.javaCompiler = new OnTheFlyJavaCompiler2(classLoader, generatorConfigProvider.get(null).getJavaSourceVersion());
+		this.classpathUriContext = classLoader;
 	}
 	
 	/**
@@ -242,6 +245,7 @@ public class CompilationTestHelper {
 	 */
 	public ResourceSet resourceSet(Pair<String,? extends CharSequence> ...resources ) throws IOException {
 		XtextResourceSet result = resourceSetProvider.get();
+		result.setClasspathURIContext(classpathUriContext);
 		FileWorkspaceConfig workspaceConfig = new FileWorkspaceConfig(workspaceRoot);
 		FileProjectConfig projectConfig = workspaceConfig.addProject(PROJECT_NAME);
 		projectConfig.addSourceFolder("src");
