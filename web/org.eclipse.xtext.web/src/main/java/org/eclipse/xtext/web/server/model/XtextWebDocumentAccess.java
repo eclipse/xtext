@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server.model;
 
-import static org.eclipse.xtext.web.server.InvalidRequestException.Type.INVALID_DOCUMENT_STATE;
-
 import java.util.Collection;
 import java.util.concurrent.RejectedExecutionException;
 
@@ -16,7 +14,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
-import org.eclipse.xtext.web.server.InvalidRequestException;
+import org.eclipse.xtext.web.server.InvalidRequestException.InvalidDocumentStateException;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
 /**
@@ -38,7 +36,7 @@ public class XtextWebDocumentAccess {
 
 	private final String requiredStateId;
 	
-	public XtextWebDocumentAccess(XtextWebDocument document, String requiredStateId) throws InvalidRequestException {
+	public XtextWebDocumentAccess(XtextWebDocument document, String requiredStateId) {
 		this.document = document;
 		this.requiredStateId = requiredStateId;
 		checkStateId();
@@ -49,9 +47,9 @@ public class XtextWebDocumentAccess {
 		this.requiredStateId = null;
 	}
 
-	protected void checkStateId() throws InvalidRequestException {
+	protected void checkStateId() throws InvalidDocumentStateException {
 		if (requiredStateId != null && !requiredStateId.equals(document.getStateId())) {
-			throw new InvalidRequestException(INVALID_DOCUMENT_STATE, "The given state id does not match the current state.");
+			throw new InvalidDocumentStateException("The given state id does not match the current state.");
 		}
 	}
 	

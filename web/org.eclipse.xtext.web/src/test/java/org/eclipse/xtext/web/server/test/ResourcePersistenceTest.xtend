@@ -18,7 +18,7 @@ class ResourcePersistenceTest extends AbstractWebServerTest {
 		val resourceContent = 'state foo end'
 		val file = createFile(resourceContent)
 		
-		val load = getService('load', #{'resource' -> file.name})
+		val load = getService(#{'requestType' -> 'load', 'resource' -> file.name})
 		assertFalse(load.hasSideEffects)
 		assertFalse(load.hasTextInput)
 		
@@ -30,20 +30,25 @@ class ResourcePersistenceTest extends AbstractWebServerTest {
 	@Test def testLoadDummy() {
 		val sessionStore = new HashMapSessionStore
 		val resourceContent = 'state foo end'
-		var update = getService('update', #{'resource' -> 'dummy.statemachine', 'fullText' -> resourceContent}, sessionStore)
+		var update = getService(#{
+				'requestType' -> 'update',
+				'resource' -> 'dummy.statemachine',
+				'fullText' -> resourceContent
+			}, sessionStore)
 		update.service.apply()
-		var load = getService('load', #{'resource' -> 'dummy.statemachine'}, sessionStore)
+		var load = getService(#{'requestType' -> 'load', 'resource' -> 'dummy.statemachine'}, sessionStore)
 		var result = load.service.apply() as ResourceContentResult
 		assertEquals(resourceContent, result.fullText)
 		
-		update = getService('update', #{
+		update = getService(#{
+				'requestType' -> 'update',
 				'resource' -> 'dummy.statemachine',
 				'deltaText' -> 'bar',
 				'deltaOffset' -> '6',
 				'deltaReplaceLength' -> '3'
 			}, sessionStore)
 		update.service.apply()
-		load = getService('load', #{'resource' -> 'dummy.statemachine'}, sessionStore)
+		load = getService(#{'requestType' -> 'load', 'resource' -> 'dummy.statemachine'}, sessionStore)
 		result = load.service.apply() as ResourceContentResult
 		assertEquals('state bar end', result.fullText)
 	}
@@ -53,9 +58,10 @@ class ResourcePersistenceTest extends AbstractWebServerTest {
 		val file = createFile(resourceContent)
 		
 		val sessionStore = new HashMapSessionStore
-		val load = getService('load', #{'resource' -> file.name}, sessionStore)
+		val load = getService(#{'requestType' -> 'load', 'resource' -> file.name}, sessionStore)
 		load.service.apply()
-		val update = getService('update', #{
+		val update = getService(#{
+				'requestType' -> 'update',
 				'resource' -> file.name,
 				'deltaText' -> 'bar',
 				'deltaOffset' -> '6',
@@ -63,7 +69,7 @@ class ResourcePersistenceTest extends AbstractWebServerTest {
 			}, sessionStore)
 		update.service.apply()
 		
-		val revert = getService('revert', #{'resource' -> file.name}, sessionStore)
+		val revert = getService(#{'requestType' -> 'revert', 'resource' -> file.name}, sessionStore)
 		assertTrue(revert.hasSideEffects)
 		assertFalse(revert.hasTextInput)
 		val result = revert.service.apply() as ResourceContentResult
@@ -74,9 +80,10 @@ class ResourcePersistenceTest extends AbstractWebServerTest {
 		val file = createFile('state foo end')
 		
 		val sessionStore = new HashMapSessionStore
-		val load = getService('load', #{'resource' -> file.name}, sessionStore)
+		val load = getService(#{'requestType' -> 'load', 'resource' -> file.name}, sessionStore)
 		load.service.apply()
-		val update = getService('update', #{
+		val update = getService(#{
+				'requestType' -> 'update',
 				'resource' -> file.name,
 				'deltaText' -> 'bar',
 				'deltaOffset' -> '6',
@@ -84,7 +91,7 @@ class ResourcePersistenceTest extends AbstractWebServerTest {
 			}, sessionStore)
 		update.service.apply()
 		
-		val save = getService('save', #{'resource' -> file.name}, sessionStore)
+		val save = getService(#{'requestType' -> 'save', 'resource' -> file.name}, sessionStore)
 		assertTrue(save.hasSideEffects)
 		assertFalse(save.hasTextInput)
 		save.service.apply()

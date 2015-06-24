@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.servlet
 
-import java.util.Collection
 import java.util.Collections
+import java.util.Set
 import javax.servlet.http.HttpServletRequest
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.web.server.IRequestData
@@ -21,10 +21,10 @@ class HttpServletRequestData implements IRequestData {
 	val HttpServletRequest request
 	
 	@Accessors
-	val Collection<String> parameterKeys
+	val Set<String> parameterKeys
 	
 	@Accessors
-	val Collection<String> metadataKeys
+	val Set<String> metadataKeys
 
 	new(HttpServletRequest request) {
 		this.request = request
@@ -33,20 +33,24 @@ class HttpServletRequestData implements IRequestData {
         while (paramNames.hasMoreElements) {
             set += paramNames.nextElement
         }
+        set += IRequestData.REQUEST_TYPE
 		this.parameterKeys = Collections.unmodifiableSet(set)
-		this.metadataKeys = #{IRequestData.REQUEST_TYPE, 'authType', 'characterEncoding', 'contentType',
-			'contextPath', 'localAddr', 'localName', 'localPort', 'method', 'pathInfo', 'pathTranslated',
+		this.metadataKeys = #{'authType', 'characterEncoding', 'contentType', 'contextPath',
+			'localAddr', 'localName', 'localPort', 'method', 'pathInfo', 'pathTranslated',
 			'protocol', 'queryString', 'remoteAddr', 'remoteHost', 'remotePort', 'remoteUser',
 			'requestedSessionId', 'requestURI', 'scheme', 'serverName', 'serverPort', 'servletPath'}
 	}
 	
 	override getParameter(String key) {
-		request.getParameter(key)
+		val value = request.getParameter(key)
+		if (value === null && key == IRequestData.REQUEST_TYPE)
+			return request.pathInfo?.substring(1)
+		else
+			return value
 	}
 	
 	override getMetadata(String key) {
 		switch key {
-			case IRequestData.REQUEST_TYPE: request.pathInfo?.substring(1)
 			case 'authType': request.authType
 			case 'characterEncoding': request.characterEncoding
 			case 'contentType': request.contentType

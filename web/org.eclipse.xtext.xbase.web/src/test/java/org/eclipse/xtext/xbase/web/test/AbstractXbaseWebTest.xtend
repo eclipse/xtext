@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.web.test
 
 import com.google.inject.Guice
-import com.google.inject.util.Modules
 import java.io.File
 import java.io.FileWriter
 import java.util.HashMap
@@ -20,9 +19,11 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.idea.example.entities.EntitiesRuntimeModule
 import org.eclipse.xtext.idea.example.entities.EntitiesStandaloneSetup
 import org.eclipse.xtext.junit4.AbstractXtextTests
+import org.eclipse.xtext.util.Modules2
 import org.eclipse.xtext.web.server.ISessionStore
 import org.eclipse.xtext.web.server.XtextServiceDispatcher
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider
+import org.eclipse.xtext.xbase.ide.DefaultXbaseIdeModule
 import org.eclipse.xtext.xbase.web.test.languages.EntitiesWebModule
 
 @Accessors(PROTECTED_GETTER)
@@ -52,9 +53,10 @@ class AbstractXbaseWebTest extends AbstractXtextTests {
 		resourceBaseProvider = new TestResourceBaseProvider
 		with(new EntitiesStandaloneSetup {
 			override createInjector() {
+				val ideModule = new DefaultXbaseIdeModule
 				val webModule = new EntitiesWebModule(executorService)
 				webModule.resourceBaseProvider = resourceBaseProvider
-				return Guice.createInjector(Modules.override(runtimeModule).with(webModule))
+				return Guice.createInjector(Modules2.mixin(runtimeModule, ideModule, webModule))
 			}
 		})
 		dispatcher = injector.getInstance(XtextServiceDispatcher)
@@ -75,12 +77,12 @@ class AbstractXbaseWebTest extends AbstractXtextTests {
 		return file
 	}
 	
-	protected def getService(String path, Map<String, String> parameters) {
-		getService(path, parameters, new HashMapSessionStore)
+	protected def getService(Map<String, String> parameters) {
+		getService(parameters, new HashMapSessionStore)
 	}
 	
-	protected def getService(String path, Map<String, String> parameters, ISessionStore sessionStore) {
-		val requestData = new MockRequestData(path, parameters)
+	protected def getService(Map<String, String> parameters, ISessionStore sessionStore) {
+		val requestData = new MockRequestData(parameters)
 		dispatcher.getService(requestData, sessionStore)
 	}
 	

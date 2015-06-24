@@ -15,8 +15,6 @@ import org.eclipse.xtext.web.server.IRequestData
 @FinalFieldsConstructor
 class MockRequestData implements IRequestData {
 	
-	val String requestType
-	
 	val Map<String, String> parameters
 	
 	override getParameterKeys() {
@@ -28,13 +26,10 @@ class MockRequestData implements IRequestData {
 	}
 	
 	override getMetadataKeys() {
-		#[IRequestData.REQUEST_TYPE]
+		Collections.emptySet
 	}
 	
 	override getMetadata(String key) {
-		switch key {
-			case IRequestData.REQUEST_TYPE: requestType
-		}
 	}
 	
 }

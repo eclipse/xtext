@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server
 
-import java.lang.Exception
 import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
@@ -17,30 +16,50 @@ import org.eclipse.xtend.lib.annotations.Accessors
  * An InvalidRequestException must never lead to an <em>internal server error</em>.
  */
 @Accessors
-class InvalidRequestException extends Exception {
+class InvalidRequestException extends RuntimeException {
+	
+	new(String message) { super(message) }
+	new(String message, Throwable cause) { super(message, cause) }
 	
 	/**
-	 * The exception type can be used as a hint for translating the exception into a proper
-	 * error message for the client.
+	 * The request parameters are not valid.
 	 */
-	static enum Type {
-		INVALID_PARAMETERS,
-		UNKNOWN_LANGUAGE,
-		RESOURCE_NOT_FOUND,
-		INVALID_DOCUMENT_STATE,
-		PERMISSION_DENIED
+	static class InvalidParametersException extends InvalidRequestException {
+		new(String message) { super(message) }
+		new(String message, Throwable cause) { super(message, cause) }
 	}
 	
-	val Type type
-	
-	new(Type type, String message) {
-		super(message)
-		this.type = type
+	/**
+	 * The Xtext language could not be inferred from the parameters or metadata.
+	 */
+	static class UnknownLanguageException extends InvalidRequestException {
+		new(String message) { super(message) }
+		new(String message, Throwable cause) { super(message, cause) }
 	}
 	
-	new(Type type, String message, Throwable cause) {
-		super(message, cause)
-		this.type = type
+	/**
+	 * The requested resource was not found on the server.
+	 */
+	static class ResourceNotFoundException extends InvalidRequestException {
+		new(String message) { super(message) }
+		new(String message, Throwable cause) { super(message, cause) }
+	}
+	
+	/**
+	 * The required document state does not match the current document state.
+	 * @see org.eclipse.xtext.web.server.model.XtextWebDocument#getStateId()
+	 */
+	static class InvalidDocumentStateException extends InvalidRequestException {
+		new(String message) { super(message) }
+		new(String message, Throwable cause) { super(message, cause) }
+	}
+	
+	/**
+	 * Permission to invoke the requested service was denied.
+	 */
+	static class PermissionDeniedException extends InvalidRequestException {
+		new(String message) { super(message) }
+		new(String message, Throwable cause) { super(message, cause) }
 	}
 	
 }

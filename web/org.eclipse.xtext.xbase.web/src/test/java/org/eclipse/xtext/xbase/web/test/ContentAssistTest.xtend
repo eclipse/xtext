@@ -23,7 +23,8 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 	}
 	
 	protected def assertContentAssistResult(CharSequence resourceContent, int offset, CharSequence expectedResult) {
-		val contentAssist = getService('content-assist', #{
+		val contentAssist = getService(#{
+				'requestType' -> 'content-assist', 
 				'fullText' -> resourceContent.toString,
 				'caretOffset' -> offset.toString
 			})

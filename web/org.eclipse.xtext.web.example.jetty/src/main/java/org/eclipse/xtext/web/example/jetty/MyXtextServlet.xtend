@@ -8,16 +8,17 @@
 package org.eclipse.xtext.web.example.jetty
 
 import com.google.inject.Guice
-import com.google.inject.util.Modules
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import javax.servlet.annotation.WebServlet
 import org.eclipse.xtext.idea.example.entities.EntitiesRuntimeModule
 import org.eclipse.xtext.idea.example.entities.EntitiesStandaloneSetup
+import org.eclipse.xtext.util.Modules2
 import org.eclipse.xtext.web.example.statemachine.StatemachineRuntimeModule
 import org.eclipse.xtext.web.example.statemachine.StatemachineStandaloneSetup
 import org.eclipse.xtext.web.server.persistence.ResourceBaseProviderImpl
 import org.eclipse.xtext.web.servlet.XtextServlet
+import org.eclipse.xtext.xbase.ide.DefaultXbaseIdeModule
 
 @WebServlet(name = "Xtext Services", urlPatterns = "/xtext-service/*")
 class MyXtextServlet extends XtextServlet {
@@ -33,15 +34,16 @@ class MyXtextServlet extends XtextServlet {
 				val runtimeModule = new StatemachineRuntimeModule
 				val webModule = new StatemachineWebModule(executorService)
 				webModule.resourceBaseProvider = resourceBaseProvider
-				return Guice.createInjector(Modules.override(runtimeModule).with(webModule))
+				return Guice.createInjector(Modules2.mixin(runtimeModule, webModule))
 			}
 		}.createInjectorAndDoEMFRegistration
 		new EntitiesStandaloneSetup {
 			override createInjector() {
 				val runtimeModule = new EntitiesRuntimeModule
+				val ideModule = new DefaultXbaseIdeModule
 				val webModule = new EntitiesWebModule(executorService)
 				webModule.resourceBaseProvider = resourceBaseProvider
-				return Guice.createInjector(Modules.override(runtimeModule).with(webModule))
+				return Guice.createInjector(Modules2.mixin(runtimeModule, ideModule, webModule))
 			}
 		}.createInjectorAndDoEMFRegistration
 	}

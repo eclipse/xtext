@@ -26,7 +26,8 @@ class ContentAssistTest extends AbstractWebServerTest {
 	}
 	
 	protected def assertContentAssistResult(CharSequence resourceContent, int offset, CharSequence expectedResult) {
-		val contentAssist = getService('content-assist', #{
+		val contentAssist = getService(#{
+				'requestType' -> 'content-assist',
 				'fullText' -> resourceContent.toString,
 				'caretOffset' -> offset.toString
 			})
@@ -143,7 +144,8 @@ class ContentAssistTest extends AbstractWebServerTest {
 	
 	@Test def testIncorrectStateId() {
 		val file = createFile('state foo end')
-		val contentAssist = getService('content-assist', #{
+		val contentAssist = getService(#{
+				'requestType' -> 'content-assist',
 				'resource' -> file.name,
 				'caretOffset' -> '3',
 				'requiredStateId' -> 'totalerquatsch'
