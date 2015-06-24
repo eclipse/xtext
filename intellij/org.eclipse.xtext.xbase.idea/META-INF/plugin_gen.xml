@@ -12,15 +12,9 @@
 	</extensions>
 
 	<extensions defaultExtensionNs="com.intellij">
-		<java.elementFinder implementation="org.eclipse.xtext.xbase.idea.lang.types.psi.XbaseJvmTypesElementFinder" order="first, before java"/>
-		<java.shortNamesCache implementation="org.eclipse.xtext.xbase.idea.lang.types.XbaseJvmTypesShortNamesCache"/>
-		
 		<stubIndex implementation="org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex"/>
-		<stubIndex implementation="org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex"/>
 
 		<psi.treeChangePreprocessor implementation="org.eclipse.xtext.xbase.idea.lang.psi.XbaseCodeBlockModificationListener"/>
-
-		<referencesSearch implementation="org.eclipse.xtext.xbase.idea.lang.types.psi.search.XbaseJvmElementsReferencesSearch"/>
 
 		<fileTypeFactory implementation="org.eclipse.xtext.xbase.idea.lang.XbaseFileTypeFactory"/>
 		<stubElementTypeHolder class="org.eclipse.xtext.xbase.idea.lang.XbaseElementTypeProvider"/>
@@ -53,13 +47,6 @@
       	<lang.psiStructureViewFactory language="org.eclipse.xtext.xbase.Xbase"
       							factoryClass="org.eclipse.xtext.xbase.idea.XbaseExtensionFactory"
       							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
-
-		<typeHierarchyProvider language="org.eclipse.xtext.xbase.Xbase"
-								factoryClass="org.eclipse.xtext.xbase.idea.XbaseExtensionFactory"
-								implementationClass="com.intellij.ide.hierarchy.type.JavaTypeHierarchyProvider"/>
-		<callHierarchyProvider language="org.eclipse.xtext.xbase.Xbase"
-								factoryClass="org.eclipse.xtext.xbase.idea.XbaseExtensionFactory"
-								implementationClass="com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider"/>
-		<hierarchy.referenceProcessor implementation="org.eclipse.xtext.xbase.idea.ide.hierarchy.call.XbaseCallReferenceProcessor"/>
+		<facetType implementation="org.eclipse.xtext.xbase.idea.facet.XbaseFacetType"/>
 	</extensions>
 </idea-plugin>
