@@ -96,8 +96,7 @@ abstract class AbstractIncrementalBuilderTest {
 				generated.put(source, target)
 			]
 			
-			previousState = indexState
-			newState = new IndexState(newIndex, indexState.fileMappings.copy)
+			state = new IndexState(newIndex, indexState.fileMappings.copy)
 		]
 		init.apply(result)
 		return result
