@@ -34,6 +34,7 @@
 	</extensionPoints>
      
     <extensions defaultExtensionNs="org.eclipse.xtext.idea">
+    	<!-- EMF -->
     	<package uri="http://www.eclipse.org/emf/2002/Ecore" class="org.eclipse.emf.ecore.EcorePackage"/>
     	<package uri="http://www.eclipse.org/2008/Xtext" class="org.eclipse.xtext.XtextPackage"/>
 
@@ -41,12 +42,18 @@
     	<resourceFactory type="xmi" class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/>
 		<resourceFactory type="xtextbin" class="org.eclipse.xtext.resource.impl.BinaryGrammarResourceFactoryImpl"/>
 
+		<!-- Common Types -->
 		<resourceServiceProvider protocolName="java"
 								 class="org.eclipse.xtext.idea.resource.IResourceIdeaServiceProvider"
 								 factoryClass="org.eclipse.xtext.idea.common.types.shared.IdeaSharedCommonTypesExtensionFactory"/>
 
 		<lang.setup language="org.eclipse.xtext.idea.common.types.shared"
 					implementationClass="org.eclipse.xtext.idea.common.types.shared.IdeaSharedCommonTypesSetup"/>
+					
+		<!-- Xtype, Xbase, XAnnotations -->
+    	<package uri="http://www.eclipse.org/xtext/xbase/Xtype" class="org.eclipse.xtext.xtype.XtypePackage"/>
+    	<package uri="http://www.eclipse.org/xtext/xbase/Xbase" class="org.eclipse.xtext.xbase.XbasePackage"/>
+    	<package uri="http://www.eclipse.org/Xtext/Xbase/XAnnotations" class="org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage"/>
     </extensions>
 
 </idea-plugin>

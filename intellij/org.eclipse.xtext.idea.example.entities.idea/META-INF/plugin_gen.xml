@@ -14,15 +14,9 @@
 	</extensions>
 
 	<extensions defaultExtensionNs="com.intellij">
-		<java.elementFinder implementation="org.eclipse.xtext.idea.example.entities.idea.lang.types.psi.EntitiesJvmTypesElementFinder" order="first, before java"/>
-		<java.shortNamesCache implementation="org.eclipse.xtext.idea.example.entities.idea.lang.types.EntitiesJvmTypesShortNamesCache"/>
-		
 		<stubIndex implementation="org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex"/>
-		<stubIndex implementation="org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex"/>
 
 		<psi.treeChangePreprocessor implementation="org.eclipse.xtext.idea.example.entities.idea.lang.psi.EntitiesCodeBlockModificationListener"/>
-
-		<referencesSearch implementation="org.eclipse.xtext.idea.example.entities.idea.lang.types.psi.search.EntitiesJvmElementsReferencesSearch"/>
 
 		<fileTypeFactory implementation="org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesFileTypeFactory"/>
 		<stubElementTypeHolder class="org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesElementTypeProvider"/>
@@ -55,13 +49,6 @@
       	<lang.psiStructureViewFactory language="org.eclipse.xtext.idea.example.entities.Entities"
       							factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
       							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
-
-		<typeHierarchyProvider language="org.eclipse.xtext.idea.example.entities.Entities"
-								factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
-								implementationClass="com.intellij.ide.hierarchy.type.JavaTypeHierarchyProvider"/>
-		<callHierarchyProvider language="org.eclipse.xtext.idea.example.entities.Entities"
-								factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
-								implementationClass="com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider"/>
-		<hierarchy.referenceProcessor implementation="org.eclipse.xtext.idea.example.entities.idea.ide.hierarchy.call.EntitiesCallReferenceProcessor"/>
+		<facetType implementation="org.eclipse.xtext.idea.example.entities.idea.facet.EntitiesFacetType"/>
 	</extensions>
 </idea-plugin>

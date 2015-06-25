@@ -56,7 +56,7 @@ class BuildProgressReporter implements BuildRequest.IPostValidationCallback {
 		for (issue : issues) {
 			reportIssue(validated, issue)
 		}
-		return true
+		return false
 	}
 
 	protected def reportIssue(URI validated, Issue issue) {
