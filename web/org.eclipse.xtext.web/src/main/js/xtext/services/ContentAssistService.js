@@ -23,14 +23,18 @@ define(['xtext/services/AbstractXtextService', 'jquery'], function(AbstractXtext
 			deferred = jQuery.Deferred();
 		}
 		var serverData = {
-			contentType: params.contentType,
-			caretOffset: params.offset
+			contentType: params.contentType
 		};
-		if (params.selection.start != params.offset || params.selection.end != params.offset) {
-			serverData.selectionStart = params.selection.start;
-			serverData.selectionEnd = params.selection.end;
+		if (params.offset)
+			serverData.caretOffset = params.offset;
+		else
+			serverData.caretOffset = editorContext.getCaretOffset();
+		var selection = params.selection ? params.selection : editorContext.getSelection();
+		if (selection.start != serverData.caretOffset || selection.end != serverData.caretOffset) {
+			serverData.selectionStart = selection.start;
+			serverData.selectionEnd = selection.end;
 		}
-		var currentText = editorContext.getText();
+		var currentText;
 		var httpMethod = 'GET';
 		var onComplete = undefined;
 		var knownServerState = editorContext.getServerState();
@@ -50,6 +54,7 @@ define(['xtext/services/AbstractXtextService', 'jquery'], function(AbstractXtext
 				}
 				editorContext.getClientServiceState().update = 'started';
 				onComplete = this._updateService.onComplete.bind(this._updateService);
+				currentText = editorContext.getText();
 				this._updateService.computeDelta(knownServerState.text, currentText, serverData);
 				if (serverData.deltaText !== undefined) {
 					httpMethod = 'POST';
@@ -80,7 +85,7 @@ define(['xtext/services/AbstractXtextService', 'jquery'], function(AbstractXtext
 					}
 					editorContext.getClientServiceState().update = 'finished';
 				}
-				deferred.resolve(editorContext.translateCompletionProposals(result.entries));
+				deferred.resolve(result.entries);
 			},
 			
 			error: function(xhr, textStatus, errorThrown) {

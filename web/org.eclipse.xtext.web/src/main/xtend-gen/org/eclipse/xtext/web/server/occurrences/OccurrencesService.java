@@ -6,7 +6,6 @@ import com.google.inject.Provider;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -19,7 +18,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
-import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess;
 import org.eclipse.xtext.web.server.occurrences.OccurrencesResult;
@@ -28,7 +26,6 @@ import org.eclipse.xtext.web.server.util.ElementAtOffsetUtil;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 
-@Log
 @SuppressWarnings("all")
 public class OccurrencesService {
   @Inject
@@ -82,8 +79,6 @@ public class OccurrencesService {
           }
           final List<ITextRegion> writeRegions = _xifexpression;
           final OccurrencesResult occurrencesResult = new OccurrencesResult(readRegions, writeRegions);
-          String _string = occurrencesResult.toString();
-          OccurrencesService.LOG.trace(_string);
           return occurrencesResult;
         }
         return null;
@@ -91,6 +86,4 @@ public class OccurrencesService {
     };
     return document.<OccurrencesResult>readOnly(_function);
   }
-  
-  private final static Logger LOG = Logger.getLogger(OccurrencesService.class);
 }

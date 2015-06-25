@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 
-define(['xtext/services/AbstractXtextService'], function(AbstractXtextService) {
+define(['xtext/services/AbstractXtextService', 'jquery'], function(AbstractXtextService, jQuery) {
 	
 	/**
 	 * Service class for saving resources.
@@ -17,7 +17,10 @@ define(['xtext/services/AbstractXtextService'], function(AbstractXtextService) {
 
 	SaveResourceService.prototype = new AbstractXtextService();
 
-	SaveResourceService.prototype.saveResource = function(editorContext, params) {
+	SaveResourceService.prototype.saveResource = function(editorContext, params, deferred) {
+		if (deferred === undefined) {
+			deferred = jQuery.Deferred();
+		}
 		var serverData = {
 			contentType: params.contentType
 		};
@@ -27,9 +30,9 @@ define(['xtext/services/AbstractXtextService'], function(AbstractXtextService) {
 			if (editorContext.getClientServiceState().update == 'started') {
 				var self = this;
 				this._updateService.addCompletionCallback(function() {
-					self.saveResource(editorContext, params);
+					self.saveResource(editorContext, params, deferred);
 				});
-				return;
+				return deferred.promise();
 			}
 			var knownServerState = editorContext.getServerState();
 			if (knownServerState.stateId !== undefined) {
@@ -41,12 +44,13 @@ define(['xtext/services/AbstractXtextService'], function(AbstractXtextService) {
 		self.sendRequest(editorContext, {
 			type: 'POST',
 			data: serverData,
+			
 			success: function(result) {
 				if (result.conflict) {
 					if (self.increaseRecursionCount(editorContext)) {
 						if (!params.sendFullText && result.conflict == 'invalidStateId') {
 							self._updateService.addCompletionCallback(function() {
-								self.saveResource(editorContext, params);
+								self.saveResource(editorContext, params, deferred);
 							});
 							var newParams = {};
 							for (var p in params) {
@@ -57,14 +61,21 @@ define(['xtext/services/AbstractXtextService'], function(AbstractXtextService) {
 							delete editorContext.getServerState().stateId;
 							self._updateService.update(editorContext, newParams);
 						} else {
-							self.saveResource(editorContext, params);
+							self.saveResource(editorContext, params, deferred);
 						}
 					}
+					deferred.reject();
 					return false;
 				}
 				editorContext.markClean(true);
+				deferred.resolve();
+			},
+			
+			error: function(xhr, textStatus, errorThrown) {
+				deferred.reject(errorThrown);
 			}
 		});
+		return deferred.promise();
 	};
 	
 	return SaveResourceService;

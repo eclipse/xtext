@@ -19,6 +19,8 @@
  *     A CSS class name written into the dirtyElement when the editor is marked dirty.
  * enableContentAssistService = true {Boolean}
  *     Whether content assist should be enabled.
+ * enableOccurrencesService = true {Boolean}
+ *     Whether marking occurrences should be enabled.
  * enableSaveAction = false {Boolean}
  *     Whether the save action should be bound to the standard keystroke ctrl+s / cmd+s.
  * enableValidationService = true {Boolean}
@@ -30,8 +32,12 @@
  * sendFullText = false {Boolean}
  *     Whether the full text shall be sent to the server with each request; use this if you want
  *     the server to run in stateless mode. If the option is inactive, the server state is updated regularly.
+ * selectionUpdateDelay = 550 {Number}
+ *     The number of milliseconds to wait after a selection change before Xtext services are invoked.
  * showErrorDialogs = false {Boolean}
  *     Whether errors should be displayed in popup dialogs.
+ * textUpdateDelay = 500 {Number}
+ *     The number of milliseconds to wait after a text change before Xtext services are invoked.
  * theme {String}
  *     The path name of the Ace theme for the editor.
  * xtextLang {String}
@@ -51,6 +57,18 @@ define([
 	'xtext/services/OccurrencesService'
 ], function(jQuery, ace, languageTools, EditorContext, LoadResourceService, RevertResourceService,
 		SaveResourceService, UpdateService, ContentAssistService, ValidationService, OccurrencesService) {
+	
+	/**
+	 * Add a problem marker to an editor session.
+	 */
+	function _addMarker(session, startOffset, endOffset, clazz, type) {
+		var document = session.getDocument();
+		var start = document.indexToPosition(startOffset);
+		var end = document.indexToPosition(endOffset);
+		var mRange = require('ace/range');
+		var range = new mRange.Range(start.row, start.column, end.row, end.column);
+		return session.addMarker(range, 'xtext-marker_' + clazz, 'text');
+	}
 	
 	/**
 	 * Translate an HTML attribute name to a JS option name.
@@ -217,12 +235,13 @@ define([
 		
 		//---- Syntax Highlighting Service
 		
+		var session = editor.getSession();
 		if (options.syntaxDefinition || options.xtextLang) {
 			var syntaxDefinition = options.syntaxDefinition;
 			if (!syntaxDefinition)
 				syntaxDefinition = 'xtext/mode-' + options.xtextLang;
 			require([syntaxDefinition], function(mode) {
-				editor.getSession().setMode(new mode.Mode);
+				session.setMode(new mode.Mode);
 			});
 		}
 		
@@ -237,8 +256,32 @@ define([
 		
 		function refreshDocument() {
 			editorContext.clearClientServiceState();
-			if (validationService)
-				validationService.computeProblems(editorContext, options);
+			if (validationService) {
+				validationService.computeProblems(editorContext, options).always(function() {
+					var annotations = editorContext._annotations;
+					if (annotations) {
+						for (var i = 0; i < annotations.length; i++) {
+							var annotation = annotations[i];
+							session.removeMarker(annotation.markerId);
+						}
+					}
+					editorContext._annotations = [];
+				}).done(function(entries) {
+					for (var i = 0; i < entries.length; i++) {
+						var entry = entries[i];
+						var marker = _addMarker(session, entry.startOffset, entry.endOffset, entry.severity);
+						var start = session.getDocument().indexToPosition(entry.startOffset);
+						editorContext._annotations.push({
+							row: start.row,
+							column: start.column,
+							text: entry.description,
+							type: entry.severity,
+							markerId: marker
+						});
+					}
+					session.setAnnotations(editorContext._annotations);
+				});
+			}
 		}
 		var updateService = undefined;
 		if (!options.sendFullText) {
@@ -247,6 +290,9 @@ define([
 				saveResourceService.setUpdateService(updateService);
 			editorContext.addServerStateListener(refreshDocument);
 		}
+		var textUpdateDelay = options.textUpdateDelay;
+		if (!textUpdateDelay)
+			textUpdateDelay = 500;
 		function modelChangeListener(event) {
 			if (!event.init)
 				editorContext.markClean(false);
@@ -258,7 +304,7 @@ define([
 					refreshDocument();
 				else
 					updateService.update(editorContext, options);
-			}, 500);
+			}, textUpdateDelay);
 		};
 		if (!options.resourceId || !options.loadFromServer) {
 			modelChangeListener({init: true});
@@ -269,6 +315,8 @@ define([
 		
 		if (options.enableContentAssistService || options.enableContentAssistService === undefined) {
 			var contentAssistService = new ContentAssistService(options.serverUrl, options.resourceId);
+			if (updateService)
+				contentAssistService.setUpdateService(updateService);
 			var completer = {
 				getCompletions: function(editor, session, pos, prefix, callback) {
 					var params = _copy(options);
@@ -279,8 +327,14 @@ define([
 						start: document.positionToIndex(range.start),
 						end: document.positionToIndex(range.end)
 					};
-					contentAssistService.computeContentAssist(editorContext, params).done(function(proposals) {
-						callback(null, proposals);
+					contentAssistService.computeContentAssist(editorContext, params).done(function(entries) {
+						callback(null, entries.map(function(entry) {
+			    			return {
+			    				value: entry.proposal,
+			    				caption: (entry.label ? entry.label: entry.proposal),
+			    				meta: entry.description
+			    			};
+						}));
 					});
 				}
 			}
@@ -290,15 +344,45 @@ define([
 		
 		//---- Occurrences Service
 		
-		var occurrencesService = new OccurrencesService(options.serverUrl, options.resourceId);
-		editor.getSelection().on('changeCursor', function() {
-			var index = editor.getSession().getDocument().positionToIndex(editor.getSelection().getCursor());
-			occurrencesService.markOccurrences(editorContext, {
-				offset: index,
-				contentType: options.contentType
+		var occurrencesService;
+		if (options.enableOccurrencesService || options.enableOccurrencesService === undefined) {
+			occurrencesService = new OccurrencesService(options.serverUrl, options.resourceId);
+			if (updateService)
+				occurrencesService.setUpdateService(updateService);
+			var selectionUpdateDelay = options.selectionUpdateDelay;
+			if (!selectionUpdateDelay)
+				selectionUpdateDelay = 550;
+			editor.getSelection().on('changeCursor', function() {
+				if (editorContext._selectionChangeTimeout) {
+					clearTimeout(editorContext._selectionChangeTimeout);
+				}
+				editorContext._selectionChangeTimeout = setTimeout(function() {
+					var params = _copy(options);
+					params.offset = session.getDocument().positionToIndex(editor.getSelection().getCursor());
+					occurrencesService.markOccurrences(editorContext, params).always(function() {
+						var occurrenceMarkers = editorContext._occurrenceMarkers;
+						if (occurrenceMarkers) {
+							for (var i = 0; i < occurrenceMarkers.length; i++)  {
+								var marker = occurrenceMarkers[i];
+								session.removeMarker(marker);
+							}
+						}
+						editorContext._occurrenceMarkers = [];
+					}).done(function(occurrencesResult) {
+						for (var i = 0; i < occurrencesResult.readRegions.length; i++) {
+							var region = occurrencesResult.readRegions[i];
+							var marker = _addMarker(session, region.offset, region.offset + region.length, 'read');
+							editorContext._occurrenceMarkers.push(marker);
+						}
+						for (var i = 0; i < occurrencesResult.writeRegions.length; i++) {
+							var region = occurrencesResult.writeRegions[i];
+							var marker = _addMarker(session, region.offset, region.offset + region.length, 'write');
+							editorContext._occurrenceMarkers.push(marker);
+						}
+					});
+				}, selectionUpdateDelay);
 			});
-		})
-		
+		}
 		
 		editor.invokeXtextService = function(service, invokeOptions) {
 			var optionsCopy = _copy(options);
@@ -308,15 +392,15 @@ define([
 				}
 			}
 			if (service === 'load' && loadResourceService)
-				loadResourceService.loadResource(editorContext, optionsCopy);
+				return loadResourceService.loadResource(editorContext, optionsCopy);
 			else if (service === 'save' && saveResourceService)
-				saveResourceService.saveResource(editorContext, optionsCopy);
+				return saveResourceService.saveResource(editorContext, optionsCopy);
 			else if (service === 'revert' && revertResourceService)
-				revertResourceService.revertResource(editorContext, optionsCopy);
+				return revertResourceService.revertResource(editorContext, optionsCopy);
 			else if (service === 'validation' && validationService)
-				validationService.computeProblems(editorContext, optionsCopy);
+				return validationService.computeProblems(editorContext, optionsCopy);
 			else if (service === 'occurrences' && occurrencesService)
-				occurrencesService.markOccurrences(editorContext, optionsCopy);
+				return occurrencesService.markOccurrences(editorContext, optionsCopy);
 			else
 				throw new Error('Service \'' + service + '\' is not available.');
 		};

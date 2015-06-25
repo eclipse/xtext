@@ -661,7 +661,7 @@ public class XtextServiceDispatcher {
     {
       final XtextWebDocumentAccess document = this.getDocumentAccess(request, sessionStore);
       Optional<Integer> _of = Optional.<Integer>of(Integer.valueOf(0));
-      final int offset = this.getInt(request, "offset", _of);
+      final int offset = this.getInt(request, "caretOffset", _of);
       XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
       final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
         @Override
@@ -699,7 +699,7 @@ public class XtextServiceDispatcher {
     {
       final XtextWebDocumentAccess document = this.getDocumentAccess(request, sessionStore);
       Optional<Integer> _of = Optional.<Integer>of(Integer.valueOf(0));
-      final int offset = this.getInt(request, "offset", _of);
+      final int offset = this.getInt(request, "caretOffset", _of);
       XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
       final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
         @Override

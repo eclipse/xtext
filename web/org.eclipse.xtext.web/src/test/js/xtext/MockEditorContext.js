@@ -31,7 +31,6 @@ define(function() {
 		this._serverStateListeners = [];
 		this._modelChangeListeners = [];
 		this._clientServiceState = {};
-		this._markers = [];
 	};
 
 	MockEditorContext.prototype = {
@@ -113,19 +112,8 @@ define(function() {
 				this._text = this._text.substring(0, start) + text + this._text.substring(end);
 			else
 				this._text = text;
-		},
-		
-		showMarkers: function(entries) {
-			this._markers = entries;
-		},
-		
-		getMarkers: function() {
-			return this._markers;
-		},
-		
-		translateCompletionProposals: function(entries) {
-			return entries;
 		}
+
 	};
 	
 	return MockEditorContext;

@@ -9,26 +9,42 @@
 define(['xtext/services/AbstractXtextService', 'jquery'], function(AbstractXtextService, jQuery) {
 	
 	/**
-	 * Service class for hover information. The information is returned as promise of
-	 * a Deferred object.
+	 * Service class for marking occurrences. The occurrences are returned as promise of a
+	 * Deferred object.
 	 */
 	function OccurrencesService(serverUrl, resourceId) {
 		this.initialize(serverUrl, resourceId, 'occurrences');
-		this._delay = 500
 	};
 
 	OccurrencesService.prototype = new AbstractXtextService();
 
-	OccurrencesService.prototype.markOccurrences = function(editorContext, params) {
+	OccurrencesService.prototype.markOccurrences = function(editorContext, params, deferred) {
+		if (deferred === undefined) {
+			deferred = jQuery.Deferred();
+		}
 		var serverData = {
-			contentType: params.contentType,
-			offset: params.offset
+			contentType: params.contentType
 		};
+		if (params.offset)
+			serverData.caretOffset = params.offset;
+		else
+			serverData.caretOffset = editorContext.getCaretOffset();
 		var httpMethod = 'GET';
 		if (params.sendFullText) {
 			serverData.fullText = editorContext.getText();
 			httpMethod = 'POST';
 		} else {
+			if (editorContext.getClientServiceState().update == 'started') {
+				if (this._updateService) {
+					var self = this;
+					this._updateService.addCompletionCallback(function() {
+						self.markOccurrences(editorContext, params, deferred);
+					});
+				} else {
+					deferred.reject();
+				}
+				return deferred.promise();
+			}
 			var knownServerState = editorContext.getServerState();
 			if (knownServerState.stateId !== undefined) {
 				serverData.requiredStateId = knownServerState.stateId;
@@ -38,14 +54,20 @@ define(['xtext/services/AbstractXtextService', 'jquery'], function(AbstractXtext
 		this.sendRequest(editorContext, {
 			type: httpMethod,
 			data: serverData,
+			
 			success: function(result) {
 				if (result && !result.conflict 
 						&& (result.stateId === undefined || result.stateId == editorContext.getServerState().stateId)) 
-					editorContext.showOccurrences(result);
+					deferred.resolve(result);
 				else 
-					editorContext.showOccurrences(null);
+					deferred.reject();
+			},
+			
+			error: function(xhr, textStatus, errorThrown) {
+				deferred.reject(errorThrown);
 			}
 		});
+		return deferred.promise();
 	};
 	
 	return OccurrencesService;
