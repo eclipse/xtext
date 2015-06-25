@@ -118,9 +118,7 @@ public class BuildRequest {
     }
   };
   
-  private IndexState previousState = new IndexState();
-  
-  private IndexState newState = new IndexState();
+  private IndexState state = new IndexState();
   
   private boolean writeStorageResources = false;
   
@@ -187,21 +185,12 @@ public class BuildRequest {
   }
   
   @Pure
-  public IndexState getPreviousState() {
-    return this.previousState;
+  public IndexState getState() {
+    return this.state;
   }
   
-  public void setPreviousState(final IndexState previousState) {
-    this.previousState = previousState;
-  }
-  
-  @Pure
-  public IndexState getNewState() {
-    return this.newState;
-  }
-  
-  public void setNewState(final IndexState newState) {
-    this.newState = newState;
+  public void setState(final IndexState state) {
+    this.state = state;
   }
   
   @Pure

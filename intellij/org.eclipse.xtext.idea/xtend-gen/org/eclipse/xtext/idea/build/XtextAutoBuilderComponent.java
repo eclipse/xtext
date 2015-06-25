@@ -480,11 +480,9 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
                 VirtualFile _head = IterableExtensions.<VirtualFile>head(((Iterable<VirtualFile>)Conversions.doWrapArray(contentRoots)));
                 URI _uRI = VirtualFileURIUtil.getURI(_head);
                 it.setBaseDir(_uRI);
-                IndexState _indexState = new IndexState(moduleDescriptions, fileMappings);
-                it.setPreviousState(_indexState);
                 Source2GeneratedMapping _copy = fileMappings.copy();
-                IndexState _indexState_1 = new IndexState(newIndex, _copy);
-                it.setNewState(_indexState_1);
+                IndexState _indexState = new IndexState(newIndex, _copy);
+                it.setState(_indexState);
                 it.setAfterValidate(buildProgressReporter);
                 final Procedure1<URI> _function = new Procedure1<URI>() {
                   @Override

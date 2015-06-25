@@ -288,8 +288,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet
 						externalDeltas += deltas
 						baseDir = contentRoots.head.URI
 						// outputs = ??
-						previousState = new IndexState(moduleDescriptions, fileMappings)
-						newState = new IndexState(newIndex, fileMappings.copy)
+						state = new IndexState(newIndex, fileMappings.copy)
 	
 						afterValidate = buildProgressReporter
 						afterDeleteFile = [
