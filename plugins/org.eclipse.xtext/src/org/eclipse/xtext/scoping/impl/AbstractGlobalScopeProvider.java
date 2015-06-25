@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.IResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.scoping.ICaseInsensitivityHelper;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
@@ -27,13 +28,13 @@ import com.google.inject.Inject;
 public abstract class AbstractGlobalScopeProvider implements IGlobalScopeProvider {
 
 	@Inject
-	private ResourceDescriptionsProvider provider;
+	private IResourceDescriptionsProvider provider;
 	
 	@Inject
 	private ICaseInsensitivityHelper caseInsensitivityHelper;
 
 	public IResourceDescriptions getResourceDescriptions(Resource resource) {
-		return provider.getResourceDescriptions(resource);
+		return provider.getResourceDescriptions(resource.getResourceSet());
 	}
 
 	public void setResourceDescriptionsProvider(ResourceDescriptionsProvider provider) {
