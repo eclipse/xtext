@@ -1,0 +1,54 @@
+<idea-plugin version="2">
+	<extensions defaultExtensionNs="org.eclipse.xtext.idea">
+		<package uri="http://www.eclipse.org/xtext/purexbase/PureXbase"
+				 class="org.eclipse.xtext.purexbase.pureXbase.PureXbasePackage"/>
+		<resourceFactory type="xbase"
+						 class="org.eclipse.xtext.resource.IResourceFactory"
+						 factoryClass="org.eclipse.xtext.purexbase.idea.PureXbaseExtensionFactory"/>
+		<resourceServiceProvider uriExtension="xbase"
+								 class="org.eclipse.xtext.idea.resource.IResourceIdeaServiceProvider"
+								 factoryClass="org.eclipse.xtext.purexbase.idea.PureXbaseExtensionFactory"/>
+
+		<lang.setup language="org.eclipse.xtext.purexbase.PureXbase"
+					implementationClass="org.eclipse.xtext.purexbase.idea.PureXbaseIdeaSetup"/>
+	</extensions>
+
+	<extensions defaultExtensionNs="com.intellij">
+		<stubIndex implementation="org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex"/>
+
+		<psi.treeChangePreprocessor implementation="org.eclipse.xtext.purexbase.idea.lang.psi.PureXbaseCodeBlockModificationListener"/>
+
+		<fileTypeFactory implementation="org.eclipse.xtext.purexbase.idea.lang.PureXbaseFileTypeFactory"/>
+		<stubElementTypeHolder class="org.eclipse.xtext.purexbase.idea.lang.PureXbaseElementTypeProvider"/>
+		<lang.ast.factory language="org.eclipse.xtext.purexbase.PureXbase"
+								factoryClass="org.eclipse.xtext.purexbase.idea.PureXbaseExtensionFactory"
+								implementationClass="org.eclipse.xtext.idea.lang.BaseXtextASTFactory"/>
+		<lang.parserDefinition language="org.eclipse.xtext.purexbase.PureXbase"
+								factoryClass="org.eclipse.xtext.purexbase.idea.PureXbaseExtensionFactory"
+								implementationClass="org.eclipse.xtext.purexbase.idea.lang.parser.PureXbaseParserDefinition"/>
+		<lang.findUsagesProvider language="org.eclipse.xtext.purexbase.PureXbase"
+								factoryClass="org.eclipse.xtext.purexbase.idea.PureXbaseExtensionFactory"
+								implementationClass="org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider"/>
+		<lang.refactoringSupport language="org.eclipse.xtext.purexbase.PureXbase"
+								factoryClass="org.eclipse.xtext.purexbase.idea.PureXbaseExtensionFactory"
+								implementationClass="org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider"/>
+		<lang.namesValidator language="org.eclipse.xtext.purexbase.PureXbase"
+								factoryClass="org.eclipse.xtext.purexbase.idea.PureXbaseExtensionFactory"
+								implementationClass="com.intellij.lang.refactoring.NamesValidator"/>
+      	<lang.syntaxHighlighterFactory key="org.eclipse.xtext.purexbase.PureXbase" implementationClass="org.eclipse.xtext.purexbase.idea.lang.PureXbaseSyntaxHighlighterFactory" />
+		<lang.braceMatcher language="org.eclipse.xtext.purexbase.PureXbase"
+								factoryClass="org.eclipse.xtext.purexbase.idea.PureXbaseExtensionFactory"
+								implementationClass="com.intellij.lang.PairedBraceMatcher"/>
+      	<annotator language="org.eclipse.xtext.purexbase.PureXbase"
+      							factoryClass="org.eclipse.xtext.purexbase.idea.PureXbaseExtensionFactory"
+      							implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"/>
+      	<completion.contributor language="org.eclipse.xtext.purexbase.PureXbase" implementationClass="org.eclipse.xtext.purexbase.idea.completion.PureXbaseCompletionContributor"/>
+      	<elementDescriptionProvider implementation="org.eclipse.xtext.purexbase.idea.lang.psi.PureXbaseElementDescriptionProvider" order="first"/>
+      	<pom.declarationSearcher implementation="org.eclipse.xtext.purexbase.idea.lang.pom.PureXbasePomDeclarationSearcher"/>
+
+      	<lang.psiStructureViewFactory language="org.eclipse.xtext.purexbase.PureXbase"
+      							factoryClass="org.eclipse.xtext.purexbase.idea.PureXbaseExtensionFactory"
+      							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
+		<facetType implementation="org.eclipse.xtext.purexbase.idea.facet.PureXbaseFacetType"/>
+	</extensions>
+</idea-plugin>

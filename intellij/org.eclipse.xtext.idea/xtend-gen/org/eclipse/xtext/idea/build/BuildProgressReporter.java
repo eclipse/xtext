@@ -58,7 +58,7 @@ public class BuildProgressReporter implements BuildRequest.IPostValidationCallba
     for (final Issue issue : issues) {
       this.reportIssue(validated, issue);
     }
-    return true;
+    return false;
   }
   
   protected void reportIssue(final URI validated, final Issue issue) {
