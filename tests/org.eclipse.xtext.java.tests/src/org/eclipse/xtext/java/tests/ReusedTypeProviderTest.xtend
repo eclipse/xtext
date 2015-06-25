@@ -46,17 +46,15 @@ class ReusedTypeProviderTest extends AbstractTypeProviderTest {
 		if (typeProvider == null) {
 			val pathToSources = "/org/eclipse/xtext/common/types/testSetups";
 			val files = MockJavaProjectProvider.readResource(pathToSources + "/files.list")
-			val index = new ChunkedResourceDescriptions()
 			val part = new ResourceDescriptionsData(emptySet)
-			val projectDesc = new ProjectDescription => [
-				name = "my-test-project"
-			]
-			index.setContainer(projectDesc.name, part)
-			
 			val resourceSet = resourceSetProvider.get => [
+				val projectDesc = new ProjectDescription => [
+					name = "my-test-project"
+				]
+				projectDesc.attachToEmfObject(it)
+				val index = new ChunkedResourceDescriptions(emptyMap, it)
+				index.setContainer(projectDesc.name, part)
 				classpathURIContext = ReusedTypeProviderTest.getClassLoader
-				index.attachToEmfObject(it)
-				index.context = it
 			]
 			typeProviderFactory.createTypeProvider(resourceSet)
 			val buildRequest = new BuildRequest => [

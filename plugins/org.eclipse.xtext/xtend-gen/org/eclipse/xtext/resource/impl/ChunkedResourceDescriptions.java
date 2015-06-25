@@ -18,7 +18,6 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.ISelectable;
@@ -43,7 +42,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @Beta
 @EmfAdaptable
 @SuppressWarnings("all")
-public class ChunkedResourceDescriptions extends AbstractCompoundSelectable implements IResourceDescriptions, IResourceDescriptions.IContextAware {
+public class ChunkedResourceDescriptions extends AbstractCompoundSelectable implements IResourceDescriptions {
   public static class ChunkedResourceDescriptionsAdapter extends AdapterImpl {
     private ChunkedResourceDescriptions element;
     
@@ -64,47 +63,6 @@ public class ChunkedResourceDescriptions extends AbstractCompoundSelectable impl
   
   protected ResourceSet resourceSet;
   
-  @Override
-  public void setContext(final Notifier context) {
-    final ResourceSet newResourceSet = EcoreUtil2.getResourceSet(context);
-    boolean _and = false;
-    boolean _notEquals = (!Objects.equal(this.resourceSet, null));
-    if (!_notEquals) {
-      _and = false;
-    } else {
-      boolean _notEquals_1 = (!Objects.equal(this.resourceSet, newResourceSet));
-      _and = _notEquals_1;
-    }
-    if (_and) {
-      Class<? extends ChunkedResourceDescriptions> _class = this.getClass();
-      String _name = _class.getName();
-      String _plus = ("This " + _name);
-      String _plus_1 = (_plus + " is already associated with a different resource set.");
-      throw new IllegalStateException(_plus_1);
-    }
-    final ChunkedResourceDescriptions index = ChunkedResourceDescriptions.findInEmfObject(newResourceSet);
-    boolean _and_1 = false;
-    boolean _notEquals_2 = (!Objects.equal(index, null));
-    if (!_notEquals_2) {
-      _and_1 = false;
-    } else {
-      boolean _notEquals_3 = (!Objects.equal(index, this));
-      _and_1 = _notEquals_3;
-    }
-    if (_and_1) {
-      Class<? extends ChunkedResourceDescriptions> _class_1 = this.getClass();
-      String _name_1 = _class_1.getName();
-      String _plus_2 = ("There is already a different " + _name_1);
-      String _plus_3 = (_plus_2 + " installed in the given resource set.");
-      throw new IllegalStateException(_plus_3);
-    }
-    this.resourceSet = newResourceSet;
-  }
-  
-  public ResourceSet getResourceSet() {
-    return this.resourceSet;
-  }
-  
   public ChunkedResourceDescriptions() {
   }
   
@@ -113,12 +71,42 @@ public class ChunkedResourceDescriptions extends AbstractCompoundSelectable impl
     this.chunk2resourceDescriptions = _concurrentHashMap;
   }
   
+  public ChunkedResourceDescriptions(final Map<String, ResourceDescriptionsData> initialData, final ResourceSet resourceSet) {
+    this(initialData);
+    this.setResourceSet(resourceSet);
+  }
+  
   /**
-   * Creates a flat copy of the resource descriptions. i.e. the inner ResourceDescriptionsData objects are not copied.
-   * Also doesn't copy over the referenced ResourceSet
+   * Creates a shallow copy of the resource descriptions map and installs it with the given ResourceSet.
    */
-  public ChunkedResourceDescriptions createFreshFlatCopy() {
-    return new ChunkedResourceDescriptions(this.chunk2resourceDescriptions);
+  public ChunkedResourceDescriptions createShallowCopyWith(final ResourceSet resourcSet) {
+    return new ChunkedResourceDescriptions(this.chunk2resourceDescriptions, this.resourceSet);
+  }
+  
+  public ResourceSet getResourceSet() {
+    return this.resourceSet;
+  }
+  
+  protected void setResourceSet(final ResourceSet resourceSet) {
+    boolean _notEquals = (!Objects.equal(this.resourceSet, null));
+    if (_notEquals) {
+      Class<? extends ChunkedResourceDescriptions> _class = this.getClass();
+      String _name = _class.getName();
+      String _plus = ("This " + _name);
+      String _plus_1 = (_plus + " is already associated with a different resource set.");
+      throw new IllegalStateException(_plus_1);
+    }
+    final ChunkedResourceDescriptions index = ChunkedResourceDescriptions.findInEmfObject(resourceSet);
+    boolean _notEquals_1 = (!Objects.equal(index, null));
+    if (_notEquals_1) {
+      Class<? extends ChunkedResourceDescriptions> _class_1 = this.getClass();
+      String _name_1 = _class_1.getName();
+      String _plus_2 = ("There is already a different " + _name_1);
+      String _plus_3 = (_plus_2 + " installed in the given resource set.");
+      throw new IllegalStateException(_plus_3);
+    }
+    this.resourceSet = resourceSet;
+    this.attachToEmfObject(resourceSet);
   }
   
   public ResourceDescriptionsData setContainer(final String name, final ResourceDescriptionsData descriptions) {

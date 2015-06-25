@@ -41,7 +41,6 @@ import org.eclipse.xtext.idea.common.types.StubTypeProviderFactory;
 import org.eclipse.xtext.idea.resource.ProjectDescriptionProvider;
 import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ProjectDescription;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -255,9 +254,7 @@ public class IdeaResourceSetProvider {
     desc.attachToEmfObject(resourceSet);
     Project _project = module.getProject();
     final XtextAutoBuilderComponent builder = _project.<XtextAutoBuilderComponent>getComponent(XtextAutoBuilderComponent.class);
-    final ChunkedResourceDescriptions descriptions = builder.getCopyOfResourceDescriptions();
-    descriptions.attachToEmfObject(resourceSet);
-    descriptions.setContext(resourceSet);
+    builder.installCopyOfResourceDescriptions(resourceSet);
     this.stubTypeProviderFactory.createTypeProvider(resourceSet);
     return resourceSet;
   }

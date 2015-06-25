@@ -7,18 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.impl
 
+import com.google.common.annotations.Beta
 import java.util.Map
 import java.util.concurrent.ConcurrentHashMap
 import org.eclipse.emf.common.util.URI
-import org.eclipse.xtext.resource.IResourceDescriptions
-import org.eclipse.xtext.resource.impl.AbstractCompoundSelectable
-import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
-import com.google.common.annotations.Beta
-import org.eclipse.xtext.util.internal.EmfAdaptable
 import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.emf.common.notify.Notifier
-import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.resource.containers.ProjectDescriptionBasedContainerManager
+import org.eclipse.xtext.util.internal.EmfAdaptable
 
 /**
  * A IResourceDescriptions implementation that holds its resource description in chunks, each identified by a string.
@@ -32,27 +28,11 @@ import org.eclipse.xtext.resource.containers.ProjectDescriptionBasedContainerMan
  * @since 2.9
  */
 @Beta
-@EmfAdaptable class ChunkedResourceDescriptions extends AbstractCompoundSelectable implements IResourceDescriptions, IResourceDescriptions.IContextAware {
+@EmfAdaptable class ChunkedResourceDescriptions extends AbstractCompoundSelectable implements IResourceDescriptions {
 	
 	protected ConcurrentHashMap<String, ResourceDescriptionsData> chunk2resourceDescriptions = new ConcurrentHashMap;
 	
 	protected ResourceSet resourceSet
-	
-	override void setContext(Notifier context) {
-		val newResourceSet = EcoreUtil2.getResourceSet(context)
-		if (this.resourceSet != null && this.resourceSet != newResourceSet) {
-			throw new IllegalStateException("This "+class.name+" is already associated with a different resource set.")
-		}
-		val index = findInEmfObject(newResourceSet)
-		if (index != null && index != this) {
-			throw new IllegalStateException("There is already a different "+class.name+" installed in the given resource set.")
-		}
-		this.resourceSet = newResourceSet
-	}
-	
-	def ResourceSet getResourceSet() {
-		resourceSet
-	}
 	
 	new() {}
 	
@@ -60,12 +40,32 @@ import org.eclipse.xtext.resource.containers.ProjectDescriptionBasedContainerMan
 		this.chunk2resourceDescriptions = new ConcurrentHashMap(initialData) 
 	}
 	
+	new(Map<String,ResourceDescriptionsData> initialData, ResourceSet resourceSet) {
+		this(initialData)
+		setResourceSet(resourceSet)
+	}
+	
 	/**
-	 * Creates a flat copy of the resource descriptions. i.e. the inner ResourceDescriptionsData objects are not copied.
-	 * Also doesn't copy over the referenced ResourceSet
+	 * Creates a shallow copy of the resource descriptions map and installs it with the given ResourceSet.
 	 */
-	def ChunkedResourceDescriptions createFreshFlatCopy() {
-		new ChunkedResourceDescriptions(chunk2resourceDescriptions) 
+	def ChunkedResourceDescriptions createShallowCopyWith(ResourceSet resourcSet) {
+		return new ChunkedResourceDescriptions(chunk2resourceDescriptions, resourceSet)
+	}
+	
+	def ResourceSet getResourceSet() {
+		resourceSet
+	}
+	
+	protected def void setResourceSet(ResourceSet resourceSet) {
+		if (this.resourceSet != null) {
+			throw new IllegalStateException("This "+class.name+" is already associated with a different resource set.")
+		}
+		val index = findInEmfObject(resourceSet)
+		if (index != null) {
+			throw new IllegalStateException("There is already a different "+class.name+" installed in the given resource set.")
+		}
+		this.resourceSet = resourceSet
+		attachToEmfObject(resourceSet)
 	}
 	
 	def ResourceDescriptionsData setContainer(String name, ResourceDescriptionsData descriptions) {

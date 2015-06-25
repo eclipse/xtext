@@ -98,6 +98,8 @@ class JavaDerivedStateComputer {
 		val classLoader = getClassLoader(resource)
 		
 		val data = resourceDescriptionsProvider.getResourceDescriptions(resource.resourceSet)
+		if (data == null)
+			throw new IllegalStateException("no index installed")
 		// TODO use container manager
 		val nameEnv = new IndexAwareNameEnvironment(classLoader, data, stubGenerator)
 		val compiler = new Compiler(nameEnv, DefaultErrorHandlingPolicies.proceedWithAllProblems(), getCompilerOptions(), [

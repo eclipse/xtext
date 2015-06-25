@@ -47,6 +47,7 @@ import org.eclipse.xtext.service.SingletonBinding
 import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
 import org.eclipse.xtext.resource.IResourceDescriptionsProvider
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
+import org.eclipse.xtext.idea.resource.IdeaResourceDescriptionsProvider
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -127,4 +128,7 @@ class DefaultIdeaModule extends AbstractGenericModule {
 		IdeaOutputConfigurationProvider
 	}
 
+	def Class<? extends IResourceDescriptionsProvider> bindIResourceDescriptionsProvider() {
+		IdeaResourceDescriptionsProvider
+	}
 }
