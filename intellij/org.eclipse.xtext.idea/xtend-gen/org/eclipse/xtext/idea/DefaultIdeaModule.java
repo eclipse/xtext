@@ -35,6 +35,7 @@ import org.eclipse.xtext.idea.highlighting.DefaultSyntaxHighlighter;
 import org.eclipse.xtext.idea.parser.AntlrDelegatingIdeaLexer;
 import org.eclipse.xtext.idea.refactoring.NullNamesValidator;
 import org.eclipse.xtext.idea.resource.IdeaEncodingProvider;
+import org.eclipse.xtext.idea.resource.IdeaResourceDescriptionsProvider;
 import org.eclipse.xtext.idea.structureview.DefaultPsiStructureViewFactory;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
@@ -144,5 +145,9 @@ public class DefaultIdeaModule extends AbstractGenericModule {
   
   public Class<? extends IContextualOutputConfigurationProvider> bindIContextualOutputConfigurationProvider() {
     return IdeaOutputConfigurationProvider.class;
+  }
+  
+  public Class<? extends IResourceDescriptionsProvider> bindIResourceDescriptionsProvider() {
+    return IdeaResourceDescriptionsProvider.class;
   }
 }

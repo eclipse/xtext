@@ -67,6 +67,7 @@ import static org.eclipse.xtext.idea.build.BuildEvent.Type.*
 import static org.eclipse.xtext.idea.build.XtextAutoBuilderComponent.*
 
 import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
+import org.eclipse.emf.ecore.resource.ResourceSet
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -390,8 +391,8 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		return result
 	}
 	
-	public def ChunkedResourceDescriptions getCopyOfResourceDescriptions() {
-		return chunkedResourceDescriptions.createFreshFlatCopy
+	public def ChunkedResourceDescriptions installCopyOfResourceDescriptions(ResourceSet resourceSet) {
+		return chunkedResourceDescriptions.createShallowCopyWith(resourceSet)
 	}
 
 	protected def findModule(BuildEvent it, ProjectFileIndex fileIndex) {

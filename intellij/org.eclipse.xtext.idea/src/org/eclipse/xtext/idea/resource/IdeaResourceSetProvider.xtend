@@ -50,9 +50,7 @@ class IdeaResourceSetProvider {
 		desc.attachToEmfObject(resourceSet)
 		
 		val builder = module.project.getComponent(XtextAutoBuilderComponent)
-		val descriptions = builder.copyOfResourceDescriptions
-		descriptions.attachToEmfObject(resourceSet)
-		descriptions.context = resourceSet
+		builder.installCopyOfResourceDescriptions(resourceSet)
 		
 		stubTypeProviderFactory.createTypeProvider(resourceSet)
 		return resourceSet
