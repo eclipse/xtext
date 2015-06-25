@@ -36,9 +36,8 @@ import org.eclipse.xtext.resource.clustering.DynamicResourceClusteringPolicy
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtext.util.UriUtil
 import org.eclipse.xtext.validation.CheckMode
-
-import static extension org.eclipse.emf.common.util.URI.createFileURI
 
 class StandaloneBuilder {
 	static final Logger LOG = Logger.getLogger(StandaloneBuilder);
@@ -270,9 +269,9 @@ class StandaloneBuilder {
 
 	def protected registerCurrentSource(URI uri) {
 		val fsa = uri.languageAccess.fileSystemAccess
-		val absoluteSource = sourceDirs.map[new File(it).absolutePath.createFileURI.toString].filter [
-			uri.toString.startsWith(it)
-		].reduce[longest, current|if(current.length > longest.length) current else longest]?.createFileURI
+		val absoluteSource = sourceDirs
+			.map[UriUtil.createFolderURI(new File(it))]
+			.findFirst [UriUtil.isPrefixOf(it, uri)]
 		if (absoluteSource == null) {
 			throw new IllegalStateException(
 				'''Resource «uri» is not contained in any of the known source folders «sourceDirs».''')
