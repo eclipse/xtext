@@ -28,6 +28,6 @@ import com.google.common.annotations.Beta
 	/**
 	 * list of logical names of upstream dependencies
 	 */
-	@Accessors List<String> dependencies = #[]
+	@Accessors List<String> dependencies = newArrayList
 	
 }

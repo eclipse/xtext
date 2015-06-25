@@ -77,10 +77,8 @@ abstract class AbstractIncrementalBuilderTest {
 					name = 'test-project'
 				]
 				projectDescription.attachToEmfObject(it)
-				val index = new ChunkedResourceDescriptions()
+				val index = new ChunkedResourceDescriptions(emptyMap, it)
 				index.setContainer(projectDescription.name, newIndex)
-				index.context = it
-				index.attachToEmfObject(it)
 			]
 			dirtyFiles = #[]
 			deletedFiles = #[]
