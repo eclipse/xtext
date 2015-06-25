@@ -111,7 +111,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		bindFactory.addTypeToType('org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.idea.facet.AbstractFacetConfiguration>', grammar.facetTypeName)
 		
 		if (grammar.doesUseXbase) {
-			bindFactory.addTypeToType('org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider', 'org.eclipse.xtext.xbase.idea.types.StubBasedTypeScopeProvider')
+			bindFactory.addTypeToType('org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider', 'org.eclipse.xtext.idea.common.types.StubBasedTypeScopeProvider')
 			bindFactory.addTypeToType('org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker.Provider', 'org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider')
 		}
 		val bindings = bindFactory.bindings
@@ -388,9 +388,6 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		
 			<idea-version since-build="131"/>
 			<depends>org.eclipse.xtext.idea</depends>
-			«IF grammar.doesUseXbase() && ideaProjectName != 'org.eclipse.xtext.xbase.idea'»
-			<depends>org.eclipse.xtext.xbase.idea</depends>
-			«ENDIF»
 		
 			<xi:include href="plugin_gen.xml" xpointer="xpointer(/idea-plugin/*)"/>
 		</idea-plugin>
