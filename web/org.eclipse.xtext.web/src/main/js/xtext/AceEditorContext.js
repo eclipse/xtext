@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 
-define(['ace/range'], function(mRange) {
+define([], function() {
 	
 	/**
 	 * An editor context mediates between the Xtext services and the Ace editor framework.
@@ -75,6 +75,7 @@ define(['ace/range'], function(mRange) {
 				var document = session.getDocument();
 				var startPos = document.indexToPosition(start);
 				var endPos = document.indexToPosition(end);
+				var mRange = require('ace/range');
 				return session.getTextRange(new mRange.Range(startPos.row, startPos.column, endPos.row, endPos.column));
 			} else {
 				return session.getValue();
@@ -118,67 +119,8 @@ define(['ace/range'], function(mRange) {
 		
 		setText: function(text) {
 			this._editor.getSession().setValue(text);
-		},
-		
-		showMarkers: function(entries) {
-			var session = this._editor.getSession();
-			for (var i = 0; i < this._annotations.length; i++) {
-				var annotation = this._annotations[i];
-				session.removeMarker(annotation.markerId);
-			}
-			this._annotations = [];
-			for (var i = 0; i < entries.length; i++) {
-				var entry = entries[i];
-				var marker = this._addMarker(session, entry.startOffset, entry.endOffset, entry.severity)
-				var start = session.getDocument().indexToPosition(entry.startOffset);
-				this._annotations.push({
-					row: start.row,
-					column: start.column,
-					text: entry.description,
-					type: entry.severity,
-					markerId: marker
-				})
-			}
-			session.setAnnotations(this._annotations)
-		},
-		
-		_addMarker: function(session, startOffset, endOffset, clazz, type) {
-			var document = session.getDocument();
-			var start = document.indexToPosition(startOffset);
-			var end = document.indexToPosition(endOffset);
-			var range = new mRange.Range(start.row, start.column, end.row, end.column);
-			return session.addMarker(range, 'xtext-marker_' + clazz, 'text');
-		}, 
-		
-		translateCompletionProposals: function(entries) {
-			return entries.map(function(entry) {
-    			return {
-    				value: entry.proposal,
-    				caption: (entry.label ? entry.label: entry.proposal),
-    				meta: entry.description,
-    				className: entry.style
-    			};
-			});
-		},
-		
-		showOccurrences: function(occurrencesResult) {
-			var session = this._editor.getSession();
-			for(var i = 0; i < this._occurrenceMarkers.length; i++)  {
-				var marker = this._occurrenceMarkers[i];
-				session.removeMarker(marker);
-			}
-			this._occurrenceMarkers = [];
-			if(occurrencesResult != null) {
-				for (var i = 0; i < occurrencesResult.readRegions.length; i++) {
-					var region = occurrencesResult.readRegions[i];
-					this._occurrenceMarkers.push(this._addMarker(session, region.offset, region.offset + region.length, 'read'));
-				}
-				for (var i = 0; i < occurrencesResult.writeRegions.length; i++) {
-					var region = occurrencesResult.writeRegions[i];
-					this._occurrenceMarkers.push(this._addMarker(session, region.offset, region.offset + region.length, 'write'));
-				}
-			}
 		}
+		
 	};
 	
 	return AceEditorContext;

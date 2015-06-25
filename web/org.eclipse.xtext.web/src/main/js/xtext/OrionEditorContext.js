@@ -89,66 +89,8 @@ define(function() {
 		
 		setText: function(text, start, end) {
 			this._editor.setText(text, start, end);
-		},
-		
-		showMarkers: function(entries) {
-			this._editor.showProblems(entries.map(function(entry) {
-				return {
-					description: entry.description,
-					start: entry.startOffset,
-					end: entry.endOffset,
-					severity: entry.severity
-				};
-			}));
-		},
-		
-		translateCompletionProposals: function(entries) {
-			return entries.map(function(entry) {
-				var p = {
-					proposal: entry.proposal,
-					prefix: entry.prefix,
-					overwrite: true,
-					name: (entry.label ? entry.label: entry.proposal),
-					description: entry.description,
-					style: entry.style,
-					additionalEdits: entry.textReplacements,
-					positions: entry.editPositions,
-				};
-				if (entry.escapePosition)
-					p.escapePosition = entry.escapePosition;
-				return p;
-			});
-		},
-		
-		translateHoverInfo: function (entry) {
-			return { 
-				content: entry.content,
-				title: entry.title,
-				type: 'html' 
-			};
-		},
-		
-		showOccurrences: function(occurrencesResult) {
-			if(occurrencesResult == null) {
-				this._editor.showOccurrences({})
-			} else {
-				var readAnnotations = occurrencesResult.readRegions.map(function(region) {
-					return {
-						start: region.offset,
-						end: region.offset + region.length,
-						readAccess: true
-					};
-				});
-				var writeAnnotations = occurrencesResult.writeRegions.map(function(region) {
-					return {
-						start: region.offset,
-						end: region.offset + region.length,
-						readAccess: false
-					};
-				})
-				this._editor.showOccurrences(readAnnotations.concat(writeAnnotations))
-			}
 		}
+		
 	};
 	
 	return OrionEditorContext;

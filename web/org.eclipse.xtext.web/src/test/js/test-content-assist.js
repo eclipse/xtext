@@ -30,7 +30,7 @@ suite('Content-assist', function() {
 					assert.equal(0, settings.data.caretOffset);
 				})
 				.respond({entries: [{proposal: 'bar'}]})
-				.checkResult(function(proposals) {
+				.checkResult(function(editorContext, proposals) {
 					assert.equal('bar', proposals[0].proposal);
 				})
 				.done();
@@ -101,7 +101,7 @@ suite('Content-assist', function() {
 					assert.equal('foo', settings.data.fullText);
 				})
 				.respond({entries: [{proposal: 'bar'}]})
-				.checkResult(function(proposals) {
+				.checkResult(function(editorContext, proposals) {
 					assert.equal('bar', proposals[0].proposal);
 				})
 				.done();
@@ -127,7 +127,7 @@ suite('Content-assist', function() {
 					assert.equal('1', settings.data.requiredStateId);
 				})
 				.respond({entries: [{proposal: 'bar'}]})
-				.checkResult(function(proposals) {
+				.checkResult(function(editorContext, proposals) {
 					assert.equal('bar', proposals[0].proposal);
 				})
 				.done();
@@ -148,7 +148,7 @@ suite('Content-assist', function() {
 					assert.equal('1', settings.data.requiredStateId);
 				})
 				.respond({entries: [{proposal: 'bar'}]})
-				.checkResult(function(proposals) {
+				.checkResult(function(editorContext, proposals) {
 					assert.equal('bar', proposals[0].proposal);
 				})
 				.done();

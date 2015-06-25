@@ -75,9 +75,11 @@ define([
 		checkResult: function(checker) {
 			if (this._lastResult) {
 				if (this._lastResult.done)
-					this._lastResult.done(checker);
+					this._lastResult.done(function(result) {
+						checker(this._editorContext, result);
+					});
 				else
-					checker(this._lastResult);
+					checker(this._editorContext, this._lastResult);
 			} else
 				checker(this._editorContext);
 			return this;
@@ -197,13 +199,13 @@ define([
 				}
 			}
 			if (service === 'load' && loadResourceService)
-				loadResourceService.loadResource(editorContext, optionsCopy);
+				return loadResourceService.loadResource(editorContext, optionsCopy);
 			else if (service === 'save' && saveResourceService)
-				saveResourceService.saveResource(editorContext, optionsCopy);
+				return saveResourceService.saveResource(editorContext, optionsCopy);
 			else if (service === 'revert' && revertResourceService)
-				revertResourceService.revertResource(editorContext, optionsCopy);
+				return revertResourceService.revertResource(editorContext, optionsCopy);
 			else if (service === 'validation' && validationService)
-				validationService.computeProblems(editorContext, optionsCopy);
+				return validationService.computeProblems(editorContext, optionsCopy);
 			else if (service === 'content-assist' && contentAssistService) {
 				optionsCopy.offset = editorContext.getCaretOffset();
 				optionsCopy.selection = editorContext.getSelection();

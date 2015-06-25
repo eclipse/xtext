@@ -50,11 +50,13 @@ define(['jquery'], function(jQuery) {
 				}
 				if (accepted || accepted === undefined) {
 					editorContext.getClientServiceState()[self._requestType] = 'finished';
-					var successListeners = editorContext.getEditor().xtextServiceSuccessListeners;
-					for (var i = 0; i < successListeners.length; i++) {
-						var listener = successListeners[i];
-						if (jQuery.isFunction(listener)) {
-							listener(self._requestType, result);
+					if (editorContext.getEditor) {
+						var successListeners = editorContext.getEditor().xtextServiceSuccessListeners;
+						for (var i = 0; i < successListeners.length; i++) {
+							var listener = successListeners[i];
+							if (jQuery.isFunction(listener)) {
+								listener(self._requestType, result);
+							}
 						}
 					}
 				}
@@ -109,11 +111,13 @@ define(['jquery'], function(jQuery) {
 		 * Report an error to the listeners.
 		 */
 		reportError: function(editorContext, severity, message) {
-			var errorListeners = editorContext.getEditor().xtextServiceErrorListeners;
-			for (var i = 0; i < errorListeners.length; i++) {
-				var listener = errorListeners[i];
-				if (jQuery.isFunction(listener)) {
-					listener(this._requestType, {}, severity, message);
+			if (editorContext.getEditor) {
+				var errorListeners = editorContext.getEditor().xtextServiceErrorListeners;
+				for (var i = 0; i < errorListeners.length; i++) {
+					var listener = errorListeners[i];
+					if (jQuery.isFunction(listener)) {
+						listener(this._requestType, {}, severity, message);
+					}
 				}
 			}
 		}

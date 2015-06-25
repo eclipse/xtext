@@ -6,10 +6,11 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 
-define(['xtext/services/AbstractXtextService'], function(AbstractXtextService) {
+define(['xtext/services/AbstractXtextService', 'jquery'], function(AbstractXtextService, jQuery) {
 	
 	/**
-	 * Service class for validation markers. The resulting markers are passed to the editor context.
+	 * Service class for validation. The validation issues are returned as promise of a
+	 * Deferred object.
 	 */
 	function ValidationService(serverUrl, resourceId) {
 		this.initialize(serverUrl, resourceId, 'validation');
@@ -17,10 +18,14 @@ define(['xtext/services/AbstractXtextService'], function(AbstractXtextService) {
 	
 	ValidationService.prototype = new AbstractXtextService();
 
-	ValidationService.prototype.computeProblems = function(editorContext, params) {
+	ValidationService.prototype.computeProblems = function(editorContext, params, deferred) {
+		if (deferred === undefined) {
+			deferred = jQuery.Deferred();
+		}
 		if (editorContext.getClientServiceState().validation) {
 			// Validation has already been triggered by another event
-			return;
+			deferred.reject();
+			return deferred.promise();
 		}
 		
 		var serverData = {
@@ -33,7 +38,8 @@ define(['xtext/services/AbstractXtextService'], function(AbstractXtextService) {
 		} else {
 			if (editorContext.getClientServiceState().update == 'started') {
 				// An update is currently running - it will retrigger validation on completion
-				return;
+				deferred.reject();
+				return deferred.promise();
 			}
 			var knownServerState = editorContext.getServerState();
 			if (knownServerState.stateId !== undefined) {
@@ -45,17 +51,24 @@ define(['xtext/services/AbstractXtextService'], function(AbstractXtextService) {
 		this.sendRequest(editorContext, {
 			type: httpMethod,
 			data: serverData,
+			
 			success: function(result) {
 				if (result.conflict) {
 					if (self.increaseRecursionCount(editorContext)) {
 						delete editorContext.getClientServiceState().validation;
-						self.computeProblems(editorContext, params);
+						self.computeProblems(editorContext, params, deferred);
 					}
+					deferred.reject(result.conflict);
 					return false;
 				}
-				editorContext.showMarkers(result.entries);
+				deferred.resolve(result.entries)
+			},
+			
+			error: function(xhr, textStatus, errorThrown) {
+				deferred.reject(errorThrown);
 			}
 		});
+		return deferred.promise();
 	};
 	
 	return ValidationService;
