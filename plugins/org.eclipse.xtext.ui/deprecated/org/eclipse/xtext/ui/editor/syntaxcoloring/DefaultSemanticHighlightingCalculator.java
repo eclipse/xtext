@@ -28,7 +28,9 @@ import com.google.inject.Inject;
 /**
  * @author Stefan Oehme - Initial contribution and API
  * @since 2.6
+ * @deprecated use {@link org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator} instead.
  */
+@Deprecated
 public class DefaultSemanticHighlightingCalculator implements ISemanticHighlightingCalculator {
 
 	@Inject

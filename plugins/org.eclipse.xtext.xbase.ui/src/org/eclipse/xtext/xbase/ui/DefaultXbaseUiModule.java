@@ -18,6 +18,7 @@ import org.eclipse.xtext.builder.preferences.BuilderConfigurationBlock;
 import org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess;
 import org.eclipse.xtext.common.types.ui.DefaultCommonTypesUiModule;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider;
 import org.eclipse.xtext.ui.editor.contentassist.IContentProposalPriorities;
@@ -31,8 +32,6 @@ import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
-import org.eclipse.xtext.ui.workspace.EclipseWorkspaceConfigProvider;
 import org.eclipse.xtext.ui.workspace.JdtWorkspaceConfigProvider;
 import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
@@ -42,7 +41,7 @@ import org.eclipse.xtext.xbase.ui.builder.XbaseBuilderPreferenceAccess;
 import org.eclipse.xtext.xbase.ui.contentassist.XbaseContentProposalPriorities;
 import org.eclipse.xtext.xbase.ui.contentassist.XbaseReferenceProposalCreator;
 import org.eclipse.xtext.xbase.ui.editor.actions.XbaseFoldingActionContributor;
-import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingCalculator;
+import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingCalculator2;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDispatchingEObjectTextHover;
 import org.eclipse.xtext.xbase.ui.hover.XbaseHoverDocumentationProvider;
@@ -80,7 +79,7 @@ public class DefaultXbaseUiModule extends DefaultCommonTypesUiModule {
 	}
 
 	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
-		return XbaseHighlightingCalculator.class;
+		return XbaseHighlightingCalculator2.class;
 	}
 
 	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {

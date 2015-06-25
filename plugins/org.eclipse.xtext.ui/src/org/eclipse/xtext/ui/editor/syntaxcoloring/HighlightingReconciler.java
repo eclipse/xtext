@@ -23,6 +23,8 @@ import org.eclipse.jface.text.TextPresentation;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPartSite;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.MergingHighlightedPositionAcceptor;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IBatchLinkableResource;
 import org.eclipse.xtext.resource.XtextResource;
@@ -47,8 +49,7 @@ import com.google.inject.Inject;
  */
 public class HighlightingReconciler implements ITextInputListener, IXtextModelListener, IXtextModelListenerExtension, IHighlightedPositionAcceptor {
 
-	@Inject(optional=true)
-	private ISemanticHighlightingCalculator calculator;
+	private SemanticHighlightingCalculatorDelegate calculator;
 	
 	@Inject
 	private ITextAttributeProvider attributeProvider;
@@ -422,11 +423,13 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 		return true;
 	}
 
-	public void setCalculator(ISemanticHighlightingCalculator calculator) {
-		this.calculator = calculator;
+	@Deprecated
+	public void setCalculator(org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator calculator) {
 	}
 
-	public ISemanticHighlightingCalculator getCalculator() {
-		return calculator;
+	@Deprecated
+	public org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator getCalculator() {
+		return null;
 	}
+
 }

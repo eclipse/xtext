@@ -17,7 +17,7 @@ import org.eclipse.xtext.ui.codetemplates.ui.highlighting.SemanticHighlighter;
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.TemplatesHighlightingConfiguration;
 import org.eclipse.xtext.ui.codetemplates.ui.preferences.TemplateResourceProvider;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.TextRegion;
 import org.junit.After;
