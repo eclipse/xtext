@@ -15,6 +15,7 @@ import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.Issue
+import org.eclipse.xtext.util.UriUtil
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -27,7 +28,7 @@ class BuildRequest {
 	def URI getBaseDir() {
 		if (baseDir == null) {
 			val userDir = System.getProperty('user.dir')
-			baseDir = URI.createFileURI(new File(userDir).canonicalFile.absolutePath) 
+			baseDir = UriUtil.createFolderURI(new File(userDir)) 
 		}
 		return baseDir
 	}
