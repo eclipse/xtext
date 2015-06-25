@@ -43,8 +43,8 @@ import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.IResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.ISelectable;
-import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.ImportNormalizer;
 import org.eclipse.xtext.scoping.impl.MultimapBasedSelectable;
@@ -93,7 +93,7 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 	private AnonymousClassUtil anonymousClassUtil;
 	
 	@Inject
-	private ResourceDescriptionsProvider resourceDescriptionsProvider;
+	private IResourceDescriptionsProvider resourceDescriptionsProvider;
 	
 	@Override
 	public IScope getScope(final EObject context, final EReference reference) {
@@ -103,7 +103,7 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 				Resource resource = context.eResource();
 				IJvmTypeProvider typeProvider = typeScopeProvider.getTypeProvider(resource.getResourceSet());
 				AbstractTypeScope typeScope = typeScopeProvider.createTypeScope(typeProvider, null);
-				IResourceDescriptions descriptions = resourceDescriptionsProvider.getResourceDescriptions(context.eResource());
+				IResourceDescriptions descriptions = resourceDescriptionsProvider.getResourceDescriptions(context.eResource().getResourceSet());
 				IResourceDescription resourceDescription = descriptions.getResourceDescription(resource.getURI());
 				if (resourceDescription != null) {
 					typeScope = new LocalResourceFilteringTypeScope(typeScope, resourceDescription);
@@ -121,7 +121,7 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 				public AbstractScope get() {
 					IJvmTypeProvider typeProvider = typeScopeProvider.getTypeProvider(resource.getResourceSet());
 					AbstractTypeScope typeScope = typeScopeProvider.createTypeScope(typeProvider, null);
-					IResourceDescriptions descriptions = resourceDescriptionsProvider.getResourceDescriptions(context.eResource());
+					IResourceDescriptions descriptions = resourceDescriptionsProvider.getResourceDescriptions(context.eResource().getResourceSet());
 					IResourceDescription resourceDescription = descriptions.getResourceDescription(resource.getURI());
 					if (resourceDescription != null) {
 						typeScope = new LocalResourceFilteringTypeScope(typeScope, resourceDescription);
