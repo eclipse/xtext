@@ -14,6 +14,7 @@ import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
 import org.eclipse.xtext.resource.impl.ProjectDescription
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsBasedContainer
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -47,11 +48,12 @@ class ProjectDescriptionBasedContainerManager implements IContainer.Manager {
 			val resourceSet = resourceDescriptions.resourceSet
 			val projectDescription = ProjectDescription.findInEmfObject(resourceSet)
 			val allContainers = <IContainer>newArrayList
-			allContainers.add(new ResourceDescriptionsBasedContainer(resourceDescriptions.getContainer(projectDescription.name)))
-			allContainers.addAll(projectDescription.dependencies.map[ uri |
-				val container = resourceDescriptions.getContainer(uri.toString)
-				return new ResourceDescriptionsBasedContainer(container)
-			])
+			val container = resourceDescriptions.getContainer(projectDescription.name) ?: new ResourceDescriptionsData(emptySet)
+			allContainers.add(new ResourceDescriptionsBasedContainer(container))
+			for (name : projectDescription.dependencies) {
+				val containerDep = resourceDescriptions.getContainer(name) ?: new ResourceDescriptionsData(emptySet)
+				allContainers.add(new ResourceDescriptionsBasedContainer(containerDep))
+			}
 			return allContainers
 		}
 		throw new IllegalArgumentException("expected "+ChunkedResourceDescriptions.name)
