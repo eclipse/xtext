@@ -5,10 +5,16 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.idea.lang.parser
+package org.eclipse.xtext.xbase.idea.completion
 
-import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition
+import org.eclipse.xtext.idea.completion.AbstractCompletionContributor
+import org.eclipse.xtext.idea.lang.AbstractXtextLanguage
 
-abstract class TerminalsParserDefinition extends AbstractXtextParserDefinition {
-	
+class XtypeCompletionContributor extends AbstractCompletionContributor {
+
+	new(AbstractXtextLanguage lang) {
+		super(lang)
+	}
 }
+
+

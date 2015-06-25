@@ -41,7 +41,7 @@ public class AbstractXtendIdeaModule extends org.eclipse.xtext.idea.DefaultIdeaM
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
 	public Class<? extends org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider> bindAbstractTypeScopeProvider() {
-		return org.eclipse.xtext.xbase.idea.types.StubBasedTypeScopeProvider.class;
+		return org.eclipse.xtext.idea.common.types.StubBasedTypeScopeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
 	public Class<? extends org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker.Provider> bindIFeatureScopeTracker$Provider() {

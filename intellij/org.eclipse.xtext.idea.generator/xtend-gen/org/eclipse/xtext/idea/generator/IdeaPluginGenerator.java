@@ -164,7 +164,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     bindFactory.addTypeToType("org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.idea.facet.AbstractFacetConfiguration>", _facetTypeName);
     boolean _doesUseXbase = XbaseGeneratorFragment.doesUseXbase(grammar);
     if (_doesUseXbase) {
-      bindFactory.addTypeToType("org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider", "org.eclipse.xtext.xbase.idea.types.StubBasedTypeScopeProvider");
+      bindFactory.addTypeToType("org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider", "org.eclipse.xtext.idea.common.types.StubBasedTypeScopeProvider");
       bindFactory.addTypeToType("org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker.Provider", "org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider");
     }
     final Set<Binding> bindings = bindFactory.getBindings();
@@ -1066,21 +1066,6 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("\t");
     _builder.append("<depends>org.eclipse.xtext.idea</depends>");
     _builder.newLine();
-    {
-      boolean _and = false;
-      boolean _doesUseXbase = XbaseGeneratorFragment.doesUseXbase(grammar);
-      if (!_doesUseXbase) {
-        _and = false;
-      } else {
-        boolean _notEquals = (!Objects.equal(this.ideaProjectName, "org.eclipse.xtext.xbase.idea"));
-        _and = _notEquals;
-      }
-      if (_and) {
-        _builder.append("\t");
-        _builder.append("<depends>org.eclipse.xtext.xbase.idea</depends>");
-        _builder.newLine();
-      }
-    }
     _builder.newLine();
     _builder.append("\t");
     _builder.append("<xi:include href=\"plugin_gen.xml\" xpointer=\"xpointer(/idea-plugin/*)\"/>");

@@ -9,7 +9,6 @@
 
 	<idea-version since-build="131"/>
 	<depends>org.eclipse.xtext.idea</depends>
-	<depends>org.eclipse.xtext.xbase.idea</depends>
 
 	<xi:include href="plugin_gen.xml" xpointer="xpointer(/idea-plugin/*)"/>
 </idea-plugin>
