@@ -412,8 +412,6 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			</extensions>
 
 			<extensions defaultExtensionNs="com.intellij">
-				<stubIndex implementation="org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex"/>
-		
 				<psi.treeChangePreprocessor implementation="«grammar.codeBlockModificationListenerName»"/>
 		
 				<fileTypeFactory implementation="«grammar.fileTypeFactoryName»"/>
