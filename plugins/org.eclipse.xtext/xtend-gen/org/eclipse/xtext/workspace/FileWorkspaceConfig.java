@@ -55,20 +55,7 @@ public class FileWorkspaceConfig implements IWorkspaceConfig {
   }
   
   public URI getPath() {
-    URI _xblockexpression = null;
-    {
-      String _path = this.root.getPath();
-      final URI path = URI.createFileURI(_path);
-      URI _xifexpression = null;
-      boolean _hasTrailingPathSeparator = path.hasTrailingPathSeparator();
-      if (_hasTrailingPathSeparator) {
-        _xifexpression = path;
-      } else {
-        _xifexpression = path.appendSegment("");
-      }
-      _xblockexpression = _xifexpression;
-    }
-    return _xblockexpression;
+    return UriUtil.createFolderURI(this.root);
   }
   
   public Set<FileProjectConfig> getProjects() {

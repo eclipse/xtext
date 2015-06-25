@@ -17,10 +17,10 @@ import org.eclipse.xtext.build.IndexState;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.util.UriUtil;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -79,20 +79,14 @@ public class BuildRequest {
   private URI baseDir;
   
   public URI getBaseDir() {
-    try {
-      boolean _equals = Objects.equal(this.baseDir, null);
-      if (_equals) {
-        final String userDir = System.getProperty("user.dir");
-        File _file = new File(userDir);
-        File _canonicalFile = _file.getCanonicalFile();
-        String _absolutePath = _canonicalFile.getAbsolutePath();
-        URI _createFileURI = URI.createFileURI(_absolutePath);
-        this.baseDir = _createFileURI;
-      }
-      return this.baseDir;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+    boolean _equals = Objects.equal(this.baseDir, null);
+    if (_equals) {
+      final String userDir = System.getProperty("user.dir");
+      File _file = new File(userDir);
+      URI _createFolderURI = UriUtil.createFolderURI(_file);
+      this.baseDir = _createFolderURI;
     }
+    return this.baseDir;
   }
   
   private List<URI> dirtyFiles = CollectionLiterals.<URI>newArrayList();

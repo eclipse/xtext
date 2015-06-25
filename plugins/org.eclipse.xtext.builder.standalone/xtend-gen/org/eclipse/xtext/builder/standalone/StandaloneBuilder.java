@@ -56,6 +56,7 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.UriUtil;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
@@ -63,7 +64,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.MapExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -481,45 +481,21 @@ public class StandaloneBuilder {
   protected void registerCurrentSource(final URI uri) {
     LanguageAccess _languageAccess = this.languageAccess(uri);
     final JavaIoFileSystemAccess fsa = this.getFileSystemAccess(_languageAccess);
-    final Function1<String, String> _function = new Function1<String, String>() {
+    final Function1<String, URI> _function = new Function1<String, URI>() {
       @Override
-      public String apply(final String it) {
+      public URI apply(final String it) {
         File _file = new File(it);
-        String _absolutePath = _file.getAbsolutePath();
-        URI _createFileURI = URI.createFileURI(_absolutePath);
-        return _createFileURI.toString();
+        return UriUtil.createFolderURI(_file);
       }
     };
-    Iterable<String> _map = IterableExtensions.<String, String>map(this.sourceDirs, _function);
-    final Function1<String, Boolean> _function_1 = new Function1<String, Boolean>() {
+    Iterable<URI> _map = IterableExtensions.<String, URI>map(this.sourceDirs, _function);
+    final Function1<URI, Boolean> _function_1 = new Function1<URI, Boolean>() {
       @Override
-      public Boolean apply(final String it) {
-        String _string = uri.toString();
-        return Boolean.valueOf(_string.startsWith(it));
+      public Boolean apply(final URI it) {
+        return Boolean.valueOf(UriUtil.isPrefixOf(it, uri));
       }
     };
-    Iterable<String> _filter = IterableExtensions.<String>filter(_map, _function_1);
-    final Function2<String, String, String> _function_2 = new Function2<String, String, String>() {
-      @Override
-      public String apply(final String longest, final String current) {
-        String _xifexpression = null;
-        int _length = current.length();
-        int _length_1 = longest.length();
-        boolean _greaterThan = (_length > _length_1);
-        if (_greaterThan) {
-          _xifexpression = current;
-        } else {
-          _xifexpression = longest;
-        }
-        return _xifexpression;
-      }
-    };
-    String _reduce = IterableExtensions.<String>reduce(_filter, _function_2);
-    URI _createFileURI = null;
-    if (_reduce!=null) {
-      _createFileURI=URI.createFileURI(_reduce);
-    }
-    final URI absoluteSource = _createFileURI;
+    final URI absoluteSource = IterableExtensions.<URI>findFirst(_map, _function_1);
     boolean _equals = Objects.equal(absoluteSource, null);
     if (_equals) {
       StringConcatenation _builder = new StringConcatenation();

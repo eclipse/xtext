@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
 import static extension org.eclipse.xtext.util.UriUtil.*
+import org.eclipse.xtext.util.UriUtil
 
 @FinalFieldsConstructor
 class FileWorkspaceConfig implements IWorkspaceConfig {
@@ -31,11 +32,7 @@ class FileWorkspaceConfig implements IWorkspaceConfig {
 	}
 
 	def getPath() {
-		val path = URI.createFileURI(root.path)
-		if (path.hasTrailingPathSeparator) 
-			path 
-		else 
-			path.appendSegment("")
+		UriUtil.createFolderURI(root)
 	}
 	
 	def getProjects() {
