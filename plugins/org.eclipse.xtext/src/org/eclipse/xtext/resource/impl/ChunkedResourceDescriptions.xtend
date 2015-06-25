@@ -48,7 +48,7 @@ import org.eclipse.xtext.util.internal.EmfAdaptable
 	/**
 	 * Creates a shallow copy of the resource descriptions map and installs it with the given ResourceSet.
 	 */
-	def ChunkedResourceDescriptions createShallowCopyWith(ResourceSet resourcSet) {
+	def ChunkedResourceDescriptions createShallowCopyWith(ResourceSet resourceSet) {
 		return new ChunkedResourceDescriptions(chunk2resourceDescriptions, resourceSet)
 	}
 	

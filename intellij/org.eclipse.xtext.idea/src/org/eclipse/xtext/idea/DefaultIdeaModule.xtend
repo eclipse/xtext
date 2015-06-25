@@ -31,6 +31,7 @@ import org.eclipse.xtext.idea.highlighting.DefaultSyntaxHighlighter
 import org.eclipse.xtext.idea.parser.AntlrDelegatingIdeaLexer
 import org.eclipse.xtext.idea.refactoring.NullNamesValidator
 import org.eclipse.xtext.idea.resource.IdeaEncodingProvider
+import org.eclipse.xtext.idea.resource.IdeaResourceDescriptionsProvider
 import org.eclipse.xtext.idea.structureview.DefaultPsiStructureViewFactory
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider
@@ -40,14 +41,12 @@ import org.eclipse.xtext.psi.IPsiModelAssociator
 import org.eclipse.xtext.psi.PsiModelAssociations
 import org.eclipse.xtext.psi.impl.BaseXtextFile
 import org.eclipse.xtext.resource.IContainer
+import org.eclipse.xtext.resource.IResourceDescriptionsProvider
 import org.eclipse.xtext.resource.containers.ProjectDescriptionBasedContainerManager
 import org.eclipse.xtext.service.AbstractGenericModule
 import org.eclipse.xtext.service.LanguageSpecific
 import org.eclipse.xtext.service.SingletonBinding
 import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
-import org.eclipse.xtext.resource.IResourceDescriptionsProvider
-import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
-import org.eclipse.xtext.idea.resource.IdeaResourceDescriptionsProvider
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -110,10 +109,6 @@ class DefaultIdeaModule extends AbstractGenericModule {
 
 	def Class<? extends IEncodingProvider> bindEncodingProvider() {
 		IdeaEncodingProvider
-	}
-	
-	def IResourceDescriptionsProvider bindResourceDescriptionsProvider() {
-		[ChunkedResourceDescriptions.findInEmfObject(it)]
 	}
 	
 	def Class<? extends IContainer.Manager> bindIContainer$Manager() {

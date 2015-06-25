@@ -79,8 +79,8 @@ public class ChunkedResourceDescriptions extends AbstractCompoundSelectable impl
   /**
    * Creates a shallow copy of the resource descriptions map and installs it with the given ResourceSet.
    */
-  public ChunkedResourceDescriptions createShallowCopyWith(final ResourceSet resourcSet) {
-    return new ChunkedResourceDescriptions(this.chunk2resourceDescriptions, this.resourceSet);
+  public ChunkedResourceDescriptions createShallowCopyWith(final ResourceSet resourceSet) {
+    return new ChunkedResourceDescriptions(this.chunk2resourceDescriptions, resourceSet);
   }
   
   public ResourceSet getResourceSet() {

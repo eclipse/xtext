@@ -19,7 +19,6 @@ import com.intellij.lexer.Lexer;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.util.Key;
 import com.intellij.psi.util.PsiModificationTracker;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
 import org.eclipse.xtext.ide.LexerIdeBindings;
@@ -45,10 +44,8 @@ import org.eclipse.xtext.psi.IPsiModelAssociator;
 import org.eclipse.xtext.psi.PsiModelAssociations;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.IContainer;
-import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.containers.ProjectDescriptionBasedContainerManager;
-import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.service.LanguageSpecific;
 import org.eclipse.xtext.service.SingletonBinding;
@@ -123,16 +120,6 @@ public class DefaultIdeaModule extends AbstractGenericModule {
   
   public Class<? extends IEncodingProvider> bindEncodingProvider() {
     return IdeaEncodingProvider.class;
-  }
-  
-  public IResourceDescriptionsProvider bindResourceDescriptionsProvider() {
-    final IResourceDescriptionsProvider _function = new IResourceDescriptionsProvider() {
-      @Override
-      public IResourceDescriptions getResourceDescriptions(final ResourceSet it) {
-        return ChunkedResourceDescriptions.findInEmfObject(it);
-      }
-    };
-    return _function;
   }
   
   public Class<? extends IContainer.Manager> bindIContainer$Manager() {
