@@ -6,13 +6,13 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 
-define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
+define(['xtext/services/AbstractXtextService'], function(AbstractXtextService) {
 	
 	/**
 	 * Service class for validation markers. The resulting markers are passed to the editor context.
 	 */
 	function ValidationService(serverUrl, resourceId) {
-		this.initialize(serverUrl, resourceId, "validation");
+		this.initialize(serverUrl, resourceId, 'validation');
 	};
 	
 	ValidationService.prototype = new AbstractXtextService();
@@ -24,14 +24,14 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 		}
 		
 		var serverData = {
-			contentType : params.contentType
+			contentType: params.contentType
 		};
-		var httpMethod = "GET";
+		var httpMethod = 'GET';
 		if (params.sendFullText) {
 			serverData.fullText = editorContext.getText();
-			httpMethod = "POST";
+			httpMethod = 'POST';
 		} else {
-			if (editorContext.getClientServiceState().update == "started") {
+			if (editorContext.getClientServiceState().update == 'started') {
 				// An update is currently running - it will retrigger validation on completion
 				return;
 			}
@@ -43,9 +43,9 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 
 		var self = this;
 		this.sendRequest(editorContext, {
-			type : httpMethod,
-			data : serverData,
-			success : function(result) {
+			type: httpMethod,
+			data: serverData,
+			success: function(result) {
 				if (result.conflict) {
 					if (self.increaseRecursionCount(editorContext)) {
 						delete editorContext.getClientServiceState().validation;

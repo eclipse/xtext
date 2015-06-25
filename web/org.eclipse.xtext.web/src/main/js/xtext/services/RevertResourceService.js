@@ -6,32 +6,32 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 
-define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
+define(['xtext/services/AbstractXtextService'], function(AbstractXtextService) {
 	
 	/**
 	 * Service class for reverting resources. The resulting text is passed to the editor context.
 	 */
 	function RevertResourceService(serverUrl, resourceId) {
-		this.initialize(serverUrl, resourceId, "revert");
+		this.initialize(serverUrl, resourceId, 'revert');
 	};
 
 	RevertResourceService.prototype = new AbstractXtextService();
 
 	RevertResourceService.prototype.revertResource = function(editorContext, params) {
 		var serverData = {
-			contentType : params.contentType
+			contentType: params.contentType
 		};
 		
 		var self = this;
 		this.sendRequest(editorContext, {
-			type : "POST",
-			data : serverData,
-			success : function(result) {
+			type: 'POST',
+			data: serverData,
+			success: function(result) {
 				editorContext.setText(result.fullText);
 				editorContext.clearUndoStack();
 				editorContext.markClean(!result.dirty);
 				var listeners = editorContext.updateServerState(result.fullText, result.stateId);
-				for (i in listeners) {
+				for (var i = 0; i < listeners.length; i++) {
 					listeners[i]();
 				}
 			}

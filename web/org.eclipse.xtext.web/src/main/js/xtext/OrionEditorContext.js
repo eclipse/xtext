@@ -20,54 +20,54 @@ define(function() {
 
 	OrionEditorContext.prototype = {
 		
-		getEditor : function() {
+		getEditor: function() {
 			return this._editor;
 		},
 		
-		getServerState : function() {
+		getServerState: function() {
 			return this._serverState;
 		},
 		
-		updateServerState : function(currentText, currentStateId) {
+		updateServerState: function(currentText, currentStateId) {
 			this._serverState.text = currentText;
 			this._serverState.stateId = currentStateId;
 			return this._serverStateListeners;
 		},
 		
-		addServerStateListener : function(listener) {
+		addServerStateListener: function(listener) {
 			this._serverStateListeners.push(listener);
 		},
 		
-		getClientServiceState : function() {
+		getClientServiceState: function() {
 			return this._clientServiceState;
 		},
 		
-		clearClientServiceState : function() {
+		clearClientServiceState: function() {
 			this._clientServiceState = {};
 		},
 		
-		getCaretOffset : function() {
+		getCaretOffset: function() {
 			return this._editor.getTextView().getCaretOffset();
 		},
 		
-		getLineStart : function(lineNumber) {
+		getLineStart: function(lineNumber) {
 			var view = this._editor.getTextView();
 			return view.getLineStart(view.getLineAtOffset(view.getCaretOffset()));
 		},
 		
-		getSelection : function() {
+		getSelection: function() {
 			return this._editor.getTextView().getSelection();
 		},
 		
-		getText : function(start, end) {
+		getText: function(start, end) {
 			return this._editor.getText(start, end);
 		},
 		
-		isDirty : function() {
+		isDirty: function() {
 			return this._editor.isDirty();
 		},
 		
-		markClean : function(clean) {
+		markClean: function(clean) {
 			if (clean === undefined || clean) {
 				this._editor.markClean();
 			} else {
@@ -75,44 +75,44 @@ define(function() {
 			}
 		},
 		
-		clearUndoStack : function() {
+		clearUndoStack: function() {
 			this._editor.getUndoStack().reset();
 		},
 		
-		setCaretOffset : function(offset, show) {
+		setCaretOffset: function(offset, show) {
 			this._editor.getTextView().setCaretOffset(offset, show);
 		},
 		
-		setSelection : function(selection) {
+		setSelection: function(selection) {
 			this._editor.getTextView().setSelection(selection.start, selection.end);
 		},
 		
-		setText : function(text, start, end) {
+		setText: function(text, start, end) {
 			this._editor.setText(text, start, end);
 		},
 		
-		showMarkers : function(entries) {
+		showMarkers: function(entries) {
 			this._editor.showProblems(entries.map(function(entry) {
 				return {
-					description : entry.description,
-					start : entry.startOffset,
-					end : entry.endOffset,
-					severity : entry.severity
+					description: entry.description,
+					start: entry.startOffset,
+					end: entry.endOffset,
+					severity: entry.severity
 				};
 			}));
 		},
 		
-		translateCompletionProposals : function(entries) {
+		translateCompletionProposals: function(entries) {
 			return entries.map(function(entry) {
 				var p = {
-					proposal : entry.proposal,
-					prefix : entry.prefix,
-					overwrite : true,
-					name : (entry.label ? entry.label : entry.proposal),
-					description : entry.description,
-					style : entry.style,
-					additionalEdits : entry.textReplacements,
-					positions : entry.editPositions,
+					proposal: entry.proposal,
+					prefix: entry.prefix,
+					overwrite: true,
+					name: (entry.label ? entry.label: entry.proposal),
+					description: entry.description,
+					style: entry.style,
+					additionalEdits: entry.textReplacements,
+					positions: entry.editPositions,
 				};
 				if (entry.escapePosition)
 					p.escapePosition = entry.escapePosition;
@@ -120,30 +120,30 @@ define(function() {
 			});
 		},
 		
-		translateHoverInfo : function (entry) {
+		translateHoverInfo: function (entry) {
 			return { 
-				content : entry.content,
-				title : entry.title,
-				type : 'html' 
+				content: entry.content,
+				title: entry.title,
+				type: 'html' 
 			};
 		},
 		
-		showOccurrences : function(occurrencesResult) {
+		showOccurrences: function(occurrencesResult) {
 			if(occurrencesResult == null) {
 				this._editor.showOccurrences({})
 			} else {
 				var readAnnotations = occurrencesResult.readRegions.map(function(region) {
 					return {
-						start : region.offset,
-						end : region.offset + region.length,
-						readAccess : true
+						start: region.offset,
+						end: region.offset + region.length,
+						readAccess: true
 					};
 				});
 				var writeAnnotations = occurrencesResult.writeRegions.map(function(region) {
 					return {
-						start : region.offset,
-						end : region.offset + region.length,
-						readAccess : false
+						start: region.offset,
+						end: region.offset + region.length,
+						readAccess: false
 					};
 				})
 				this._editor.showOccurrences(readAnnotations.concat(writeAnnotations))

@@ -21,19 +21,19 @@
  * autoPairParentheses = true {Boolean}
  *     Whether (parentheses) shall be auto-completed.
  * autoPairQuotations = true {Boolean}
- *     Whether "quotations" shall be auto-completed.
+ *     Whether 'quotations' shall be auto-completed.
  * autoPairSquareBrackets = true {Boolean}
  *     Whether [square brackets] shall be auto-completed.
  * computeSize = true {Boolean}
  *     Whether to enable automatic computation of the widget height.
- * contents = "" {String}
+ * contents = '' {String}
  *     The editor contents.
  * contentType {String}
  *     The content type included in requests to the Xtext server.
  * dirtyElement {String | DOMElement}
  *     An element into which the dirty status class is written when the editor is marked dirty;
  *     it can be either a DOM element or an ID for a DOM element.
- * dirtyStatusClass = "dirty" {String}
+ * dirtyStatusClass = 'dirty' {String}
  *     A CSS class name written into the dirtyElement when the editor is marked dirty.
  * document {Document}
  *     The document.
@@ -99,7 +99,7 @@
  *     The CSS file for the view theming or the actual theme.
  * themeClass {String}
  *     The CSS class for the view theming.
- * title = "" {String}
+ * title = '' {String}
  *     The editor title.
  * wrappable = false {Boolean}
  *     Whether the view is wrappable.
@@ -109,19 +109,19 @@
  *     The language name (usually the file extension configured for the language).
  */
 define([
-    "jquery",
-    "orion/editor/edit",
-    "orion/keyBinding",
-    "orion/editor/textStyler",
-	"xtext/OrionEditorContext",
-	"xtext/services/LoadResourceService",
-	"xtext/services/RevertResourceService",
-	"xtext/services/SaveResourceService",
-	"xtext/services/UpdateService",
-	"xtext/services/ContentAssistService",
-	"xtext/services/ValidationService",
-	"xtext/services/HoverService",
-	"xtext/services/OccurrencesService",
+    'jquery',
+    'orion/editor/edit',
+    'orion/keyBinding',
+    'orion/editor/textStyler',
+	'xtext/OrionEditorContext',
+	'xtext/services/LoadResourceService',
+	'xtext/services/RevertResourceService',
+	'xtext/services/SaveResourceService',
+	'xtext/services/UpdateService',
+	'xtext/services/ContentAssistService',
+	'xtext/services/ValidationService',
+	'xtext/services/HoverService',
+	'xtext/services/OccurrencesService',
 ], function(jQuery, orionEdit, mKeyBinding, mTextStyler, EditorContext, LoadResourceService, RevertResourceService,
 		SaveResourceService, UpdateService, ContentAssistService, ValidationService, HoverService, OccurrencesService) {
 	
@@ -129,7 +129,7 @@ define([
 	 * Translate an HTML attribute name to a JS option name.
 	 */
 	function _optionName(name) {
-		var prefix = "data-editor-";
+		var prefix = 'data-editor-';
 		if (name.substring(0, prefix.length) === prefix) {
 			var key = name.substring(prefix.length);
 			key = key.replace(/-([a-z])/ig, function(all, character) {
@@ -162,8 +162,8 @@ define([
 			var key = _optionName(attr.nodeName);
 			if (key) {
 				var value = attr.nodeValue;
-				if (value === "true" || value === "false")
-					value = value === "true";
+				if (value === 'true' || value === 'false')
+					value = value === 'true';
 				options[key] = value;
 			}
 		}
@@ -183,7 +183,7 @@ define([
 			options.xtextLang = options.resourceId.split('.').pop();
 		if (!options.statusReporter && options.statusElement) {
 			var statusElement = options.statusElement;
-			if (typeof(statusElement) === "string") {
+			if (typeof(statusElement) === 'string') {
 				var doc = options.document || document;
 				statusElement = doc.getElementById(statusElement);
 			}
@@ -211,9 +211,9 @@ define([
 			options.smartIndentation = true;
 		if (options.hoverFactory === undefined) {
 			options.hoverFactory = {
-				createHover : function() {
+				createHover: function() {
 					return {
-						computeHoverInfo : function(context) {
+						computeHoverInfo: function(context) {
 							return _internals.computeHoverInfo(context);
 						},
 						clearQuickFixes: function() {},
@@ -236,12 +236,12 @@ define([
 		if (!options)
 			options = {};
 		if (!options.parent)
-			options.parent = "xtext-editor";
+			options.parent = 'xtext-editor';
 		if (!options.className)
-			options.className = "xtext-editor";
+			options.className = 'xtext-editor';
 		
 		var parents;
-		if (typeof(options.parent) === "string") {
+		if (typeof(options.parent) === 'string') {
 			var doc = options.document || document;
 			var element = doc.getElementById(options.parent);
 			if (element)
@@ -289,14 +289,14 @@ define([
 		if (options.dirtyElement) {
 			var doc = options.document || document;
 			var dirtyElement;
-			if (typeof(options.dirtyElement) === "string")
-				dirtyElement = jQuery("#" + options.dirtyElement, doc);
+			if (typeof(options.dirtyElement) === 'string')
+				dirtyElement = jQuery('#' + options.dirtyElement, doc);
 			else
 				dirtyElement = jQuery(options.dirtyElement);
 			var dirtyStatusClass = options.dirtyStatusClass;
 			if (!dirtyStatusClass)
-				dirtyStatusClass = "dirty";
-			editor.addEventListener("DirtyChanged", function(event) {
+				dirtyStatusClass = 'dirty';
+			editor.addEventListener('DirtyChanged', function(event) {
 				if (editor.isDirty())
 					dirtyElement.addClass(dirtyStatusClass);
 				else
@@ -308,10 +308,10 @@ define([
 		textView._setLinksVisible(true);
 		var editorContext = new EditorContext(editor);
 		var editorContextProvider = {
-			getEditorContext : function() {
+			getEditorContext: function() {
 				return editorContext;
 			},
-			getOptions : function() {
+			getOptions: function() {
 				return options;
 			}
 		};
@@ -323,7 +323,7 @@ define([
 		//---- Persistence Services
 		
 		if (!options.serverUrl)
-			options.serverUrl = "http://" + location.host + "/xtext-service";
+			options.serverUrl = 'http://' + location.host + '/xtext-service';
 		var loadResourceService = undefined, saveResourceService = undefined, revertResourceService = undefined;
 		if (options.resourceId) {
 			if (options.loadFromServer === undefined || options.loadFromServer) {
@@ -332,11 +332,11 @@ define([
 				loadResourceService.loadResource(editorContext, options);
 				saveResourceService = new SaveResourceService(options.serverUrl, options.resourceId);
 				if (options.enableSaveAction) {
-					textView.setKeyBinding(new mKeyBinding.KeyStroke("s", true), "saveXtextDocument");
-					textView.setAction("saveXtextDocument", function() {
+					textView.setKeyBinding(new mKeyBinding.KeyStroke('s', true), 'saveXtextDocument');
+					textView.setAction('saveXtextDocument', function() {
 						saveResourceService.saveResource(editorContext, options);
 						return true;
-					}, {name: "Save"});
+					}, {name: 'Save'});
 				}
 				revertResourceService = new RevertResourceService(options.serverUrl, options.resourceId);
 			}
@@ -344,16 +344,16 @@ define([
 			if (options.loadFromServer === undefined)
 				options.loadFromServer = false;
 			if (options.xtextLang)
-				options.resourceId = "text." + options.xtextLang;
+				options.resourceId = 'text.' + options.xtextLang;
 		}
 		
 		//---- Syntax Highlighting Service
 		
 		if (options.xtextLang) {
-			var contentType = "xtext/" + options.xtextLang;
+			var contentType = 'xtext/' + options.xtextLang;
 			var syntaxDefinition = options.syntaxDefinition;
 			if (!syntaxDefinition) {
-				syntaxDefinition = contentType + "-syntax";
+				syntaxDefinition = contentType + '-syntax';
 			}
 			require([syntaxDefinition], function(grammar) {
 				var annotationModel = editor.getAnnotationModel();
@@ -397,7 +397,7 @@ define([
 		if (!options.resourceId || !options.loadFromServer) {
 			modelChangeListener(null);
 		}
-		textView.addEventListener("ModelChanged", modelChangeListener);
+		textView.addEventListener('ModelChanged', modelChangeListener);
 		
 		//---- Content Assist Service
 		
@@ -408,8 +408,8 @@ define([
 			if (updateService)
 				contentAssistService.setUpdateService(updateService);
 			contentAssist.setProviders([{
-				id : "xtext.service",
-				provider : contentAssistService
+				id: 'xtext.service',
+				provider: contentAssistService
 			}]);
 		}
 		
@@ -423,7 +423,7 @@ define([
 		//---- Occurrence Service
 		
 		var occurrencesService = new OccurrencesService(options.serverUrl, options.resourceId);
-		textView.addEventListener("Selection", function() {
+		textView.addEventListener('Selection', function() {
 			occurrencesService.markOccurrences(editorContext, {
 				offset: textView.getCaretOffset(),
 				contentType: options.contentType
@@ -437,25 +437,25 @@ define([
 					optionsCopy[p] = invokeOptions[p];
 				}
 			}
-			if (service === "load" && loadResourceService)
+			if (service === 'load' && loadResourceService)
 				loadResourceService.loadResource(editorContext, optionsCopy);
-			else if (service === "save" && saveResourceService)
+			else if (service === 'save' && saveResourceService)
 				saveResourceService.saveResource(editorContext, optionsCopy);
-			else if (service === "revert" && revertResourceService)
+			else if (service === 'revert' && revertResourceService)
 				revertResourceService.revertResource(editorContext, optionsCopy);
-			else if (service === "validation" && validationService)
+			else if (service === 'validation' && validationService)
 				validationService.computeProblems(editorContext, optionsCopy);
-			else if (service === "occurrences" && occurrencesService)
+			else if (service === 'occurrences' && occurrencesService)
 				occurrencesService.markOccurrences(editorContext, optionsCopy);
 			else
-				throw new Error("Service '" + service + "' is not available.");
+				throw new Error('Service \'' + service + '\' is not available.');
 		};
 		editor.xtextServiceSuccessListeners = [];
 		editor.xtextServiceErrorListeners = [function(requestType, xhr, textStatus, errorThrown) {
 			if (options.showErrorDialogs)
-				window.alert("Xtext service '" + requestType + "' failed: " + errorThrown);
+				window.alert('Xtext service \'' + requestType + '\' failed: ' + errorThrown);
 			else
-				console.log("Xtext service '" + requestType + "' failed: " + errorThrown);
+				console.log('Xtext service \'' + requestType + '\' failed: ' + errorThrown);
 		}];
 	}
 	
@@ -465,7 +465,7 @@ define([
 	 * @param editor
 	 *     The editor for which the service shall be invoked.
 	 * @param service
-	 *     A service type identifier, e.g. "save".
+	 *     A service type identifier, e.g. 'save'.
 	 * @param invokeOptions
 	 *     Additional options to pass to the service (optional).
 	 */
@@ -473,7 +473,7 @@ define([
 		if (editor.invokeXtextService)
 			editor.invokeXtextService(service, invokeOptions);
 		else
-			throw new Error("The editor has not been configured with Xtext.");
+			throw new Error('The editor has not been configured with Xtext.');
 	}
 	
 	return exports;

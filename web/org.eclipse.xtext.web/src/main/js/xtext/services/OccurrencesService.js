@@ -6,14 +6,14 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 
-define(["xtext/services/AbstractXtextService", "jquery"], function(AbstractXtextService, jQuery) {
+define(['xtext/services/AbstractXtextService', 'jquery'], function(AbstractXtextService, jQuery) {
 	
 	/**
 	 * Service class for hover information. The information is returned as promise of
 	 * a Deferred object.
 	 */
 	function OccurrencesService(serverUrl, resourceId) {
-		this.initialize(serverUrl, resourceId, "occurrences");
+		this.initialize(serverUrl, resourceId, 'occurrences');
 		this._delay = 500
 	};
 
@@ -21,13 +21,13 @@ define(["xtext/services/AbstractXtextService", "jquery"], function(AbstractXtext
 
 	OccurrencesService.prototype.markOccurrences = function(editorContext, params) {
 		var serverData = {
-			contentType : params.contentType,
+			contentType: params.contentType,
 			offset: params.offset
 		};
-		var httpMethod = "GET";
+		var httpMethod = 'GET';
 		if (params.sendFullText) {
 			serverData.fullText = editorContext.getText();
-			httpMethod = "POST";
+			httpMethod = 'POST';
 		} else {
 			var knownServerState = editorContext.getServerState();
 			if (knownServerState.stateId !== undefined) {
@@ -36,9 +36,9 @@ define(["xtext/services/AbstractXtextService", "jquery"], function(AbstractXtext
 		}
 
 		this.sendRequest(editorContext, {
-			type : httpMethod,
-			data : serverData,
-			success : function(result) {
+			type: httpMethod,
+			data: serverData,
+			success: function(result) {
 				if (result && !result.conflict 
 						&& (result.stateId === undefined || result.stateId == editorContext.getServerState().stateId)) 
 					editorContext.showOccurrences(result);

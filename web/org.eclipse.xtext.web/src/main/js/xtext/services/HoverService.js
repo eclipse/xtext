@@ -6,14 +6,14 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 
-define(["xtext/services/AbstractXtextService", "jquery"], function(AbstractXtextService, jQuery) {
+define(['xtext/services/AbstractXtextService', 'jquery'], function(AbstractXtextService, jQuery) {
 	
 	/**
 	 * Service class for hover information. The information is returned as promise of
 	 * a Deferred object.
 	 */
 	function HoverService(serverUrl, resourceId) {
-		this.initialize(serverUrl, resourceId, "hover");
+		this.initialize(serverUrl, resourceId, 'hover');
 		this._delay = 500
 	};
 
@@ -25,13 +25,13 @@ define(["xtext/services/AbstractXtextService", "jquery"], function(AbstractXtext
 
 	HoverService.prototype.computeHoverInfo = function(editorContext, params) {
 		var serverData = {
-			contentType : params.contentType,
+			contentType: params.contentType,
 			offset: params.offset
 		};
-		var httpMethod = "GET";
+		var httpMethod = 'GET';
 		if (params.sendFullText) {
 			serverData.fullText = editorContext.getText();
-			httpMethod = "POST";
+			httpMethod = 'POST';
 		} else {
 			var knownServerState = editorContext.getServerState();
 			if (knownServerState.stateId !== undefined) {
@@ -42,9 +42,9 @@ define(["xtext/services/AbstractXtextService", "jquery"], function(AbstractXtext
 		var deferred = new jQuery.Deferred();
 		var showTime = new Date().getTime() + this._delay;
 		this.sendRequest(editorContext, {
-			type : httpMethod,
-			data : serverData,
-			success : function(result) {
+			type: httpMethod,
+			data: serverData,
+			success: function(result) {
 				if (result && !result.conflict) {
 					var remainingTimeout = Math.max(0, showTime - new Date().getTime())
 					setTimeout(function() {

@@ -59,7 +59,7 @@ define(function() {
 	function respond(result) {
 		var response = {success: true, result: result};
 		if (requests.length == 0)
-			throw new Error("Response without matching request");
+			throw new Error('Response without matching request');
 		var request = requests.shift();
 		invokeResponseCallbacks(request, response);
 	}
@@ -67,7 +67,7 @@ define(function() {
 	function httpError(errorThrown, xhr) {
 		var response = {success: false, errorThrown: errorThrown, xhr: xhr};
 		if (requests.length == 0)
-			throw new Error("Response without matching request");
+			throw new Error('Response without matching request');
 		var request = requests.shift();
 		invokeResponseCallbacks(request, response);
 	}

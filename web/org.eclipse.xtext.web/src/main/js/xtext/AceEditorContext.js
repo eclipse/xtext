@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 
-define(["ace/range"], function(mRange) {
+define(['ace/range'], function(mRange) {
 	
 	/**
 	 * An editor context mediates between the Xtext services and the Ace editor framework.
@@ -24,43 +24,43 @@ define(["ace/range"], function(mRange) {
 
 	AceEditorContext.prototype = {
 		
-		getEditor : function() {
+		getEditor: function() {
 			return this._editor;
 		},
 		
-		getServerState : function() {
+		getServerState: function() {
 			return this._serverState;
 		},
 		
-		updateServerState : function(currentText, currentStateId) {
+		updateServerState: function(currentText, currentStateId) {
 			this._serverState.text = currentText;
 			this._serverState.stateId = currentStateId;
 			return this._serverStateListeners;
 		},
 		
-		addServerStateListener : function(listener) {
+		addServerStateListener: function(listener) {
 			this._serverStateListeners.push(listener);
 		},
 		
-		getClientServiceState : function() {
+		getClientServiceState: function() {
 			return this._clientServiceState;
 		},
 		
-		clearClientServiceState : function() {
+		clearClientServiceState: function() {
 			this._clientServiceState = {};
 		},
 		
-		getCaretOffset : function() {
+		getCaretOffset: function() {
 			var pos = this._editor.getCursorPosition();
 			return this._editor.getSession().getDocument().positionToIndex(pos);
 		},
 		
-		getLineStart : function(lineNumber) {
+		getLineStart: function(lineNumber) {
 			var pos = this._editor.getCursorPosition();
 			return pos.row;
 		},
 		
-		getSelection : function() {
+		getSelection: function() {
 			var range = editor.getSelectionRange();
 			var document = this._editor.getSession().getDocument();
         	return {
@@ -69,7 +69,7 @@ define(["ace/range"], function(mRange) {
         	};
 		},
 		
-		getText : function(start, end) {
+		getText: function(start, end) {
 			var session = this._editor.getSession();
 			if (start && end) {
 				var document = session.getDocument();
@@ -81,33 +81,33 @@ define(["ace/range"], function(mRange) {
 			}
 		},
 		
-		isDirty : function() {
+		isDirty: function() {
 			return !this._clean;
 		},
 		
-		markClean : function(clean) {
+		markClean: function(clean) {
 			if (clean != this._clean) {
-				for (i in this._dirtyStateListeners) {
+				for (var i = 0; i < this._dirtyStateListeners.length; i++) {
 					this._dirtyStateListeners[i](clean);
 				}
 			}
 			this._clean = clean;
 		},
 		
-		addDirtyStateListener : function(listener) {
+		addDirtyStateListener: function(listener) {
 			this._dirtyStateListeners.push(listener);
 		},
 		
-		clearUndoStack : function() {
+		clearUndoStack: function() {
 			this._editor.getSession().getUndoManager().reset();
 		},
 		
-		setCaretOffset : function(offset) {
+		setCaretOffset: function(offset) {
 			var pos = this._editor.getSession().getDocument().indexToPosition(offset);
 			this._editor.moveCursorTo(pos.row, pos.column);
 		},
 		
-		setSelection : function(selection) {
+		setSelection: function(selection) {
 			if (this._editor.selection) {
 				var document = this._editor.getSession().getDocument();
 				var startPos = document.indexToPosition(selection.start);
@@ -116,11 +116,11 @@ define(["ace/range"], function(mRange) {
 			}
 		},
 		
-		setText : function(text) {
+		setText: function(text) {
 			this._editor.getSession().setValue(text);
 		},
 		
-		showMarkers : function(entries) {
+		showMarkers: function(entries) {
 			var session = this._editor.getSession();
 			for (var i = 0; i < this._annotations.length; i++) {
 				var annotation = this._annotations[i];
@@ -142,26 +142,26 @@ define(["ace/range"], function(mRange) {
 			session.setAnnotations(this._annotations)
 		},
 		
-		_addMarker : function(session, startOffset, endOffset, clazz, type) {
+		_addMarker: function(session, startOffset, endOffset, clazz, type) {
 			var document = session.getDocument();
 			var start = document.indexToPosition(startOffset);
 			var end = document.indexToPosition(endOffset);
 			var range = new mRange.Range(start.row, start.column, end.row, end.column);
-			return session.addMarker(range, "xtext-marker_" + clazz, "text");
+			return session.addMarker(range, 'xtext-marker_' + clazz, 'text');
 		}, 
 		
-		translateCompletionProposals : function(entries) {
+		translateCompletionProposals: function(entries) {
 			return entries.map(function(entry) {
     			return {
     				value: entry.proposal,
-    				caption: (entry.label ? entry.label : entry.proposal),
+    				caption: (entry.label ? entry.label: entry.proposal),
     				meta: entry.description,
     				className: entry.style
     			};
 			});
 		},
 		
-		showOccurrences : function(occurrencesResult) {
+		showOccurrences: function(occurrencesResult) {
 			var session = this._editor.getSession();
 			for(var i = 0; i < this._occurrenceMarkers.length; i++)  {
 				var marker = this._occurrenceMarkers[i];
@@ -171,11 +171,11 @@ define(["ace/range"], function(mRange) {
 			if(occurrencesResult != null) {
 				for (var i = 0; i < occurrencesResult.readRegions.length; i++) {
 					var region = occurrencesResult.readRegions[i];
-					this._occurrenceMarkers.push(this._addMarker(session, region.offset, region.offset + region.length, "read"));
+					this._occurrenceMarkers.push(this._addMarker(session, region.offset, region.offset + region.length, 'read'));
 				}
 				for (var i = 0; i < occurrencesResult.writeRegions.length; i++) {
 					var region = occurrencesResult.writeRegions[i];
-					this._occurrenceMarkers.push(this._addMarker(session, region.offset, region.offset + region.length, "write"));
+					this._occurrenceMarkers.push(this._addMarker(session, region.offset, region.offset + region.length, 'write'));
 				}
 			}
 		}
