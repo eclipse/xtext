@@ -64,7 +64,7 @@ class ReusedTypeProviderTest extends AbstractTypeProviderTest {
 					dirtyFiles += URI.createURI(url.toExternalForm)
 				}
 				setResourceSet(resourceSet)
-				it.newState = new IndexState(part, new Source2GeneratedMapping)
+				it.state = new IndexState(part, new Source2GeneratedMapping)
 			]
 			builder.build(buildRequest, resourceServiceProviderRegistry)
 			typeProvider = typeProviderFactory.findTypeProvider(resourceSet)
