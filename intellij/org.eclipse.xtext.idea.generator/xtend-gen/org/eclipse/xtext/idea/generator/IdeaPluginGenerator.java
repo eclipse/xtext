@@ -165,7 +165,6 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     boolean _doesUseXbase = XbaseGeneratorFragment.doesUseXbase(grammar);
     if (_doesUseXbase) {
       bindFactory.addTypeToType("org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider", "org.eclipse.xtext.xbase.idea.types.StubBasedTypeScopeProvider");
-      bindFactory.addTypeToType("org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator", "org.eclipse.xtext.xbase.idea.jvmmodel.PsiJvmModelAssociator");
       bindFactory.addTypeToTypeSingleton("org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex", "org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex");
       bindFactory.addTypeToType("org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker.Provider", "org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider");
       bindFactory.addTypeToTypeSingleton("com.intellij.ide.hierarchy.type.JavaTypeHierarchyProvider", "org.eclipse.xtext.xbase.idea.ide.hierarchy.JvmDeclaredTypeHierarchyProvider");

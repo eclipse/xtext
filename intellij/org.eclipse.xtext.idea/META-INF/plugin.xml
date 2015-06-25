@@ -42,7 +42,7 @@
 		<resourceFactory type="xtextbin" class="org.eclipse.xtext.resource.impl.BinaryGrammarResourceFactoryImpl"/>
 
 		<resourceServiceProvider protocolName="java"
-								 class="org.eclipse.xtext.resource.IResourceServiceProvider"
+								 class="org.eclipse.xtext.idea.resource.IResourceIdeaServiceProvider"
 								 factoryClass="org.eclipse.xtext.idea.common.types.shared.IdeaSharedCommonTypesExtensionFactory"/>
 
 		<lang.setup language="org.eclipse.xtext.idea.common.types.shared"

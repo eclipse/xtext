@@ -5,20 +5,25 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.idea.common.types.shared
+package org.eclipse.xtext.idea.common.types
 
-import com.google.inject.Guice
-import org.eclipse.xtext.ISetup
-import org.eclipse.xtext.idea.extensions.EcoreGlobalRegistries
+import com.google.inject.Inject
+import com.google.inject.Singleton
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.psi.PsiModelAssociations
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 
 /**
  * @author kosyakov - Initial contribution and API
  */
-class IdeaSharedCommonTypesSetup implements ISetup {
-	
-	override createInjectorAndDoEMFRegistration() {
-		EcoreGlobalRegistries.ensureInitialized
-		Guice.createInjector(new IdeaSharedCommonTypesModule)
+@Singleton
+class DerivedMemberAwarePsiModelAssociations extends PsiModelAssociations {
+
+	@Inject
+	extension IJvmModelAssociations jvmModelAssociations
+
+	override getPsiElement(EObject object) {
+		super.getPsiElement(object.primarySourceElement ?: object)
 	}
-	
+
 }

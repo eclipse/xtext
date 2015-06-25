@@ -183,16 +183,4 @@ public class PsiModelAssociations implements IPsiModelAssociations, IPsiModelAss
 		return eObject.eAdapters().add(new PsiAdapter(psiElementProvider));
 	}
 
-	@Override
-	public boolean associatePrimary(EObject eObject, PsiElementProvider psiElementProvider) {
-		if (eObject == null || psiElementProvider == null) {
-			return false;
-		}
-		PsiAdapter psiAdapter = PsiAdapter.get(eObject);
-		if (psiAdapter != null) {
-			eObject.eAdapters().remove(psiAdapter);
-		}
-		return eObject.eAdapters().add(new PsiAdapter(psiElementProvider));
-	}
-
 }

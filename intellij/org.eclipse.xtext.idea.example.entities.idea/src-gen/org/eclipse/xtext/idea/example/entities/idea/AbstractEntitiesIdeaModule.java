@@ -36,10 +36,6 @@ public class AbstractEntitiesIdeaModule extends org.eclipse.xtext.idea.DefaultId
 		return org.eclipse.xtext.xbase.idea.types.StubBasedTypeScopeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator> bindJvmModelAssociator() {
-		return org.eclipse.xtext.xbase.idea.jvmmodel.PsiJvmModelAssociator.class;
-	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
 	@org.eclipse.xtext.service.SingletonBinding
 	public Class<? extends org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex> bindJvmDeclaredTypeShortNameIndex() {
 		return org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex.class;
