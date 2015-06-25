@@ -5,8 +5,10 @@ import com.google.inject.Inject
 import com.google.inject.Provider
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.xtext.builder.standalone.incremental.BuildRequest
-import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder
+import org.eclipse.xtext.build.BuildRequest
+import org.eclipse.xtext.build.IncrementalBuilder
+import org.eclipse.xtext.build.IndexState
+import org.eclipse.xtext.build.Source2GeneratedMapping
 import org.eclipse.xtext.common.types.JvmAnnotationReference
 import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.common.types.JvmFormalParameter
@@ -22,6 +24,9 @@ import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
+import org.eclipse.xtext.resource.impl.ProjectDescription
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -41,8 +46,17 @@ class ReusedTypeProviderTest extends AbstractTypeProviderTest {
 		if (typeProvider == null) {
 			val pathToSources = "/org/eclipse/xtext/common/types/testSetups";
 			val files = MockJavaProjectProvider.readResource(pathToSources + "/files.list")
+			val index = new ChunkedResourceDescriptions()
+			val part = new ResourceDescriptionsData(emptySet)
+			val projectDesc = new ProjectDescription => [
+				name = "my-test-project"
+			]
+			index.setContainer(projectDesc.name, part)
+			
 			val resourceSet = resourceSetProvider.get => [
 				classpathURIContext = ReusedTypeProviderTest.getClassLoader
+				index.attachToEmfObject(it)
+				index.context = it
 			]
 			typeProviderFactory.createTypeProvider(resourceSet)
 			val buildRequest = new BuildRequest => [
@@ -52,6 +66,7 @@ class ReusedTypeProviderTest extends AbstractTypeProviderTest {
 					dirtyFiles += URI.createURI(url.toExternalForm)
 				}
 				setResourceSet(resourceSet)
+				it.newState = new IndexState(part, new Source2GeneratedMapping)
 			]
 			builder.build(buildRequest, resourceServiceProviderRegistry)
 			typeProvider = typeProviderFactory.findTypeProvider(resourceSet)

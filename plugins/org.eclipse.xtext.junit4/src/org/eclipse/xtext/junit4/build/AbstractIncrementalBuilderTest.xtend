@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.junit4.builder
+package org.eclipse.xtext.junit4.build
 
 import com.google.common.annotations.Beta
 import com.google.common.collect.ArrayListMultimap
@@ -14,13 +14,14 @@ import com.google.inject.Inject
 import com.google.inject.Provider
 import java.util.List
 import org.eclipse.emf.common.util.URI
-import org.eclipse.xtext.builder.standalone.incremental.BuildRequest
-import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder
-import org.eclipse.xtext.builder.standalone.incremental.IndexState
+import org.eclipse.xtext.build.BuildRequest
+import org.eclipse.xtext.build.IncrementalBuilder
+import org.eclipse.xtext.build.IndexState
 import org.eclipse.xtext.junit4.util.InMemoryURIHandler
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.XtextResourceSet
-import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
+import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
+import org.eclipse.xtext.resource.impl.ProjectDescription
 import org.eclipse.xtext.validation.Issue
 import org.junit.Before
 
@@ -72,7 +73,14 @@ abstract class AbstractIncrementalBuilderTest {
 				getURIConverter.getURIHandlers += inMemoryURIHandler
 				classpathURIContext = AbstractIncrementalBuilderTest.classLoader
 				
-				ResourceDescriptionsData.ResourceSetAdapter.installResourceDescriptionsData(it, newIndex)
+				val projectDescription = new ProjectDescription => [
+					name = 'test-project'
+				]
+				projectDescription.attachToEmfObject(it)
+				val index = new ChunkedResourceDescriptions()
+				index.setContainer(projectDescription.name, newIndex)
+				index.context = it
+				index.attachToEmfObject(it)
 			]
 			dirtyFiles = #[]
 			deletedFiles = #[]
