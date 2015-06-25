@@ -12,8 +12,6 @@
 	</extensions>
 
 	<extensions defaultExtensionNs="com.intellij">
-		<stubIndex implementation="org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex"/>
-
 		<psi.treeChangePreprocessor implementation="org.eclipse.xtend.core.idea.lang.psi.XtendCodeBlockModificationListener"/>
 
 		<fileTypeFactory implementation="org.eclipse.xtend.core.idea.lang.XtendFileTypeFactory"/>

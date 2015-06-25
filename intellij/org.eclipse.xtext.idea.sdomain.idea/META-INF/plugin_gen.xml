@@ -14,8 +14,6 @@
 	</extensions>
 
 	<extensions defaultExtensionNs="com.intellij">
-		<stubIndex implementation="org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex"/>
-
 		<psi.treeChangePreprocessor implementation="org.eclipse.xtext.idea.sdomain.idea.lang.psi.SDomainCodeBlockModificationListener"/>
 
 		<fileTypeFactory implementation="org.eclipse.xtext.idea.sdomain.idea.lang.SDomainFileTypeFactory"/>
@@ -49,6 +47,6 @@
       	<lang.psiStructureViewFactory language="org.eclipse.xtext.idea.sdomain.SDomain"
       							factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"
       							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
-        <facetType implementation="org.eclipse.xtext.idea.sdomain.idea.facet.SDomainFacetType"/>
+		<facetType implementation="org.eclipse.xtext.idea.sdomain.idea.facet.SDomainFacetType"/>
 	</extensions>
 </idea-plugin>

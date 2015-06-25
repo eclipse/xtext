@@ -12,8 +12,6 @@
 	</extensions>
 
 	<extensions defaultExtensionNs="com.intellij">
-		<stubIndex implementation="org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex"/>
-
 		<psi.treeChangePreprocessor implementation="org.eclipse.xtext.testlanguages.backtracking.idea.lang.psi.ExBeeLangTestLanguageCodeBlockModificationListener"/>
 
 		<fileTypeFactory implementation="org.eclipse.xtext.testlanguages.backtracking.idea.lang.ExBeeLangTestLanguageFileTypeFactory"/>
@@ -47,5 +45,6 @@
       	<lang.psiStructureViewFactory language="org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguage"
       							factoryClass="org.eclipse.xtext.testlanguages.backtracking.idea.ExBeeLangTestLanguageExtensionFactory"
       							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
+		<facetType implementation="org.eclipse.xtext.testlanguages.backtracking.idea.facet.ExBeeLangTestLanguageFacetType"/>
 	</extensions>
 </idea-plugin>

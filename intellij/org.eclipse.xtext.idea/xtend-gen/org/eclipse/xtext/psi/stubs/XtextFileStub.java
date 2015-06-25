@@ -9,11 +9,9 @@ package org.eclipse.xtext.psi.stubs;
 
 import com.intellij.psi.stubs.PsiFileStub;
 import com.intellij.psi.stubs.PsiFileStubImpl;
-import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
-import org.eclipse.xtext.psi.stubs.ExportedObject;
 import org.eclipse.xtext.psi.stubs.XtextFileElementType;
 import org.eclipse.xtext.xbase.lib.Pure;
 
@@ -21,9 +19,6 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class XtextFileStub<T extends BaseXtextFile> extends PsiFileStubImpl<T> implements PsiFileStub<T> {
   @Accessors
   private URI uri;
-  
-  @Accessors
-  private List<ExportedObject> exportedObjects;
   
   private final XtextFileElementType<?> type;
   
@@ -44,14 +39,5 @@ public class XtextFileStub<T extends BaseXtextFile> extends PsiFileStubImpl<T> i
   
   public void setUri(final URI uri) {
     this.uri = uri;
-  }
-  
-  @Pure
-  public List<ExportedObject> getExportedObjects() {
-    return this.exportedObjects;
-  }
-  
-  public void setExportedObjects(final List<ExportedObject> exportedObjects) {
-    this.exportedObjects = exportedObjects;
   }
 }

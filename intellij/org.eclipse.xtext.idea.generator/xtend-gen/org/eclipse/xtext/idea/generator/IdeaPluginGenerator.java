@@ -1158,10 +1158,6 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("<extensions defaultExtensionNs=\"com.intellij\">");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("<stubIndex implementation=\"org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex\"/>");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t\t");
     _builder.append("<psi.treeChangePreprocessor implementation=\"");
     String _codeBlockModificationListenerName = this._ideaPluginClassNames.getCodeBlockModificationListenerName(grammar);
     _builder.append(_codeBlockModificationListenerName, "\t\t");
