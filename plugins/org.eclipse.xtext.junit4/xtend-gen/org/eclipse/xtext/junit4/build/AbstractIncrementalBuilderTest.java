@@ -132,11 +132,10 @@ public abstract class AbstractIncrementalBuilderTest {
             };
             final ProjectDescription projectDescription = ObjectExtensions.<ProjectDescription>operator_doubleArrow(_projectDescription, _function);
             projectDescription.attachToEmfObject(it);
-            final ChunkedResourceDescriptions index = new ChunkedResourceDescriptions();
+            Map<String, ResourceDescriptionsData> _emptyMap = CollectionLiterals.<String, ResourceDescriptionsData>emptyMap();
+            final ChunkedResourceDescriptions index = new ChunkedResourceDescriptions(_emptyMap, it);
             String _name = projectDescription.getName();
             index.setContainer(_name, newIndex);
-            index.setContext(it);
-            index.attachToEmfObject(it);
           }
         };
         XtextResourceSet _doubleArrow = ObjectExtensions.<XtextResourceSet>operator_doubleArrow(_get, _function);

@@ -8,7 +8,6 @@
 package org.eclipse.xtext.resource.impl;
 
 import com.google.common.annotations.Beta;
-import java.util.Collections;
 import java.util.List;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
@@ -53,7 +52,7 @@ public class ProjectDescription {
    * list of logical names of upstream dependencies
    */
   @Accessors
-  private List<String> dependencies = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList());
+  private List<String> dependencies = CollectionLiterals.<String>newArrayList();
   
   public static ProjectDescription findInEmfObject(final Notifier emfObject) {
     for (Adapter adapter : emfObject.eAdapters()) {

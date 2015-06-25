@@ -5,29 +5,22 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.resource.impl
+package org.eclipse.xtext.idea.resource
 
-import java.util.List
-import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.util.internal.EmfAdaptable
-import com.google.common.annotations.Beta
+import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.xtext.resource.IResourceDescriptionsProvider
+import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
- * @since 2.9
  */
-@Beta
-@EmfAdaptable class ProjectDescription {
+class IdeaResourceDescriptionsProvider implements IResourceDescriptionsProvider {
 	
-	/**
-	 * A unique name for this project
-	 */
-	@Accessors String name
-	
-	/**
-	 * list of logical names of upstream dependencies
-	 */
-	@Accessors List<String> dependencies = newArrayList
+	override getResourceDescriptions(ResourceSet resourceSet) {
+		val index = ChunkedResourceDescriptions.findInEmfObject(resourceSet)
+		if (index != null)
+			return index
+		throw new IllegalStateException("No index installed.")
+	}
 	
 }

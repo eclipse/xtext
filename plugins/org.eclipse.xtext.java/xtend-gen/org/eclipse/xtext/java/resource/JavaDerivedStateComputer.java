@@ -177,6 +177,10 @@ public class JavaDerivedStateComputer {
     final ClassLoader classLoader = this.getClassLoader(resource);
     ResourceSet _resourceSet = resource.getResourceSet();
     final IResourceDescriptions data = this.resourceDescriptionsProvider.getResourceDescriptions(_resourceSet);
+    boolean _equals = Objects.equal(data, null);
+    if (_equals) {
+      throw new IllegalStateException("no index installed");
+    }
     final IndexAwareNameEnvironment nameEnv = new IndexAwareNameEnvironment(classLoader, data, this.stubGenerator);
     IErrorHandlingPolicy _proceedWithAllProblems = DefaultErrorHandlingPolicies.proceedWithAllProblems();
     CompilerOptions _compilerOptions = this.getCompilerOptions();

@@ -62,6 +62,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.build.BuildRequest;
 import org.eclipse.xtext.build.IncrementalBuilder;
 import org.eclipse.xtext.build.IndexState;
@@ -680,8 +681,12 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     return result;
   }
   
-  public ChunkedResourceDescriptions getCopyOfResourceDescriptions() {
-    return this.chunkedResourceDescriptions.createFreshFlatCopy();
+  public ChunkedResourceDescriptions installCopyOfResourceDescriptions(final ResourceSet resourceSet) {
+    boolean _equals = Objects.equal(resourceSet, null);
+    if (_equals) {
+      throw new NullPointerException("resourceSet");
+    }
+    return this.chunkedResourceDescriptions.createShallowCopyWith(resourceSet);
   }
   
   protected Module findModule(final BuildEvent it, final ProjectFileIndex fileIndex) {
