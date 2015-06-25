@@ -167,6 +167,13 @@ public class DefaultXbaseUiModule extends DefaultCommonTypesUiModule {
 	/**
 	 * @since 2.9
 	 */
+	public Class<? extends EclipseWorkspaceConfigProvider> bindEclipseWorkspaceConfigProvider() {
+		return JdtWorkspaceConfigProvider.class;
+	}
+	
+	/**
+	 * @since 2.9
+	 */
 	public org.eclipse.core.resources.IWorkspaceRoot bindIWorkspaceRootToInstance() {
 		return ResourcesPlugin.getWorkspace().getRoot();
 	}
