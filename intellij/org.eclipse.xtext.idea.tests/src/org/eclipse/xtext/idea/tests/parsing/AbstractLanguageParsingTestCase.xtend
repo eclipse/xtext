@@ -38,6 +38,8 @@ import com.intellij.lang.LanguageParserDefinitions
 import org.eclipse.xtext.idea.lang.LanguageSetup
 import com.intellij.lang.Language
 import org.eclipse.xtext.ISetup
+import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
+import org.eclipse.xtext.resource.impl.ProjectDescription
 
 abstract class AbstractLanguageParsingTestCase extends ParsingTestCase implements ModelChecker {
 
@@ -170,15 +172,25 @@ abstract class AbstractLanguageParsingTestCase extends ParsingTestCase implement
 			xtextFile = myFile as BaseXtextFile
 		]
 		val uri = URI.createURI(myFile.virtualFile.url)
-		xtextResourceSetProvider.get.createResource(uri) as XtextResource => [
+		createFreshResourceSet().createResource(uri) as XtextResource => [
 			parser = psiToEcoreTransformator
 			load(new ByteArrayInputStream(newByteArrayOfSize(0)), null)
 			psiToEcoreTransformator.adapter.install(it)
 		]
 	}
+	
+	def XtextResourceSet createFreshResourceSet() {
+		var resourceSet = xtextResourceSetProvider.get
+		new ChunkedResourceDescriptions(emptyMap, resourceSet)
+		val project = new ProjectDescription() => [
+			name = 'parsing-test-project'
+		]
+		project.attachToEmfObject(resourceSet)
+		return resourceSet
+	}
 
 	def protected createExpectedResource() {
-		var resourceSet = xtextResourceSetProvider.get
+		var resourceSet = createFreshResourceSet
 		val uri = URI.createURI(myFile.virtualFile.url)
 		resourceSet.createResource(uri) as XtextResource => [
 			load(new ByteArrayInputStream(myFile.text.bytes), null)

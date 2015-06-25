@@ -32,6 +32,7 @@ import com.intellij.util.Function;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -51,6 +52,10 @@ import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
+import org.eclipse.xtext.resource.impl.ProjectDescription;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -231,8 +236,8 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
       VirtualFile _virtualFile = this.myFile.getVirtualFile();
       String _url = _virtualFile.getUrl();
       final URI uri = URI.createURI(_url);
-      XtextResourceSet _get_1 = this.xtextResourceSetProvider.get();
-      Resource _createResource = _get_1.createResource(uri);
+      XtextResourceSet _createFreshResourceSet = this.createFreshResourceSet();
+      Resource _createResource = _createFreshResourceSet.createResource(uri);
       final Procedure1<XtextResource> _function_1 = new Procedure1<XtextResource>() {
         @Override
         public void apply(final XtextResource it) {
@@ -254,10 +259,26 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
     return _xblockexpression;
   }
   
+  public XtextResourceSet createFreshResourceSet() {
+    XtextResourceSet resourceSet = this.xtextResourceSetProvider.get();
+    Map<String, ResourceDescriptionsData> _emptyMap = CollectionLiterals.<String, ResourceDescriptionsData>emptyMap();
+    new ChunkedResourceDescriptions(_emptyMap, resourceSet);
+    ProjectDescription _projectDescription = new ProjectDescription();
+    final Procedure1<ProjectDescription> _function = new Procedure1<ProjectDescription>() {
+      @Override
+      public void apply(final ProjectDescription it) {
+        it.setName("parsing-test-project");
+      }
+    };
+    final ProjectDescription project = ObjectExtensions.<ProjectDescription>operator_doubleArrow(_projectDescription, _function);
+    project.attachToEmfObject(resourceSet);
+    return resourceSet;
+  }
+  
   protected XtextResource createExpectedResource() {
     XtextResource _xblockexpression = null;
     {
-      XtextResourceSet resourceSet = this.xtextResourceSetProvider.get();
+      XtextResourceSet resourceSet = this.createFreshResourceSet();
       VirtualFile _virtualFile = this.myFile.getVirtualFile();
       String _url = _virtualFile.getUrl();
       final URI uri = URI.createURI(_url);

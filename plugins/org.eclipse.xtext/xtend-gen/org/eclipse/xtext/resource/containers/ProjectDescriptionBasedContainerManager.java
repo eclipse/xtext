@@ -11,6 +11,7 @@ import com.google.common.annotations.Beta;
 import com.google.common.base.Objects;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -20,8 +21,6 @@ import org.eclipse.xtext.resource.impl.ProjectDescription;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsBasedContainer;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -63,21 +62,36 @@ public class ProjectDescriptionBasedContainerManager implements IContainer.Manag
       final ResourceSet resourceSet = ((ChunkedResourceDescriptions)resourceDescriptions).getResourceSet();
       final ProjectDescription projectDescription = ProjectDescription.findInEmfObject(resourceSet);
       final ArrayList<IContainer> allContainers = CollectionLiterals.<IContainer>newArrayList();
+      ResourceDescriptionsData _elvis = null;
       String _name = projectDescription.getName();
       ResourceDescriptionsData _container = ((ChunkedResourceDescriptions)resourceDescriptions).getContainer(_name);
-      ResourceDescriptionsBasedContainer _resourceDescriptionsBasedContainer = new ResourceDescriptionsBasedContainer(_container);
+      if (_container != null) {
+        _elvis = _container;
+      } else {
+        Set<IResourceDescription> _emptySet = CollectionLiterals.<IResourceDescription>emptySet();
+        ResourceDescriptionsData _resourceDescriptionsData = new ResourceDescriptionsData(_emptySet);
+        _elvis = _resourceDescriptionsData;
+      }
+      final ResourceDescriptionsData container = _elvis;
+      ResourceDescriptionsBasedContainer _resourceDescriptionsBasedContainer = new ResourceDescriptionsBasedContainer(container);
       allContainers.add(_resourceDescriptionsBasedContainer);
       List<String> _dependencies = projectDescription.getDependencies();
-      final Function1<String, ResourceDescriptionsBasedContainer> _function = new Function1<String, ResourceDescriptionsBasedContainer>() {
-        @Override
-        public ResourceDescriptionsBasedContainer apply(final String uri) {
-          String _string = uri.toString();
-          final ResourceDescriptionsData container = ((ChunkedResourceDescriptions)resourceDescriptions).getContainer(_string);
-          return new ResourceDescriptionsBasedContainer(container);
+      for (final String name : _dependencies) {
+        {
+          ResourceDescriptionsData _elvis_1 = null;
+          ResourceDescriptionsData _container_1 = ((ChunkedResourceDescriptions)resourceDescriptions).getContainer(name);
+          if (_container_1 != null) {
+            _elvis_1 = _container_1;
+          } else {
+            Set<IResourceDescription> _emptySet_1 = CollectionLiterals.<IResourceDescription>emptySet();
+            ResourceDescriptionsData _resourceDescriptionsData_1 = new ResourceDescriptionsData(_emptySet_1);
+            _elvis_1 = _resourceDescriptionsData_1;
+          }
+          final ResourceDescriptionsData containerDep = _elvis_1;
+          ResourceDescriptionsBasedContainer _resourceDescriptionsBasedContainer_1 = new ResourceDescriptionsBasedContainer(containerDep);
+          allContainers.add(_resourceDescriptionsBasedContainer_1);
         }
-      };
-      List<ResourceDescriptionsBasedContainer> _map = ListExtensions.<String, ResourceDescriptionsBasedContainer>map(_dependencies, _function);
-      allContainers.addAll(_map);
+      }
       return allContainers;
     }
     String _name_1 = ChunkedResourceDescriptions.class.getName();
