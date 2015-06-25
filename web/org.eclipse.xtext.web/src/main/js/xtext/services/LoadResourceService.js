@@ -6,32 +6,32 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 
-define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
+define(['xtext/services/AbstractXtextService'], function(AbstractXtextService) {
 	
 	/**
 	 * Service class for loading resources. The resulting text is passed to the editor context.
 	 */
 	function LoadResourceService(serverUrl, resourceId) {
-		this.initialize(serverUrl, resourceId, "load");
+		this.initialize(serverUrl, resourceId, 'load');
 	};
 
 	LoadResourceService.prototype = new AbstractXtextService();
 
 	LoadResourceService.prototype.loadResource = function(editorContext, params) {
 		var serverData = {
-			contentType : params.contentType
+			contentType: params.contentType
 		};
 		
 		var self = this;
 		this.sendRequest(editorContext, {
-			type : "GET",
-			data : serverData,
-			success : function(result) {
+			type: 'GET',
+			data: serverData,
+			success: function(result) {
 				editorContext.setText(result.fullText);
 				editorContext.clearUndoStack();
 				editorContext.markClean(!result.dirty);
 				var listeners = editorContext.updateServerState(result.fullText, result.stateId);
-				for (i in listeners) {
+				for (var i = 0; i < listeners.length; i++) {
 					listeners[i]();
 				}
 			}

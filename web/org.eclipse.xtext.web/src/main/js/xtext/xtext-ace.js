@@ -15,7 +15,7 @@
  * dirtyElement {String | DOMElement}
  *     An element into which the dirty status class is written when the editor is marked dirty;
  *     it can be either a DOM element or an ID for a DOM element.
- * dirtyStatusClass = "dirty" {String}
+ * dirtyStatusClass = 'dirty' {String}
  *     A CSS class name written into the dirtyElement when the editor is marked dirty.
  * enableContentAssistService = true {Boolean}
  *     Whether content assist should be enabled.
@@ -38,17 +38,17 @@
  *     The language name (usually the file extension configured for the language).
  */
 define([
-    "jquery",
-    "ace/ace",
-    "ace/ext/language_tools",
-	"xtext/AceEditorContext",
-	"xtext/services/LoadResourceService",
-	"xtext/services/RevertResourceService",
-	"xtext/services/SaveResourceService",
-	"xtext/services/UpdateService",
-	"xtext/services/ContentAssistService",
-	"xtext/services/ValidationService",
-	"xtext/services/OccurrencesService"
+    'jquery',
+    'ace/ace',
+    'ace/ext/language_tools',
+	'xtext/AceEditorContext',
+	'xtext/services/LoadResourceService',
+	'xtext/services/RevertResourceService',
+	'xtext/services/SaveResourceService',
+	'xtext/services/UpdateService',
+	'xtext/services/ContentAssistService',
+	'xtext/services/ValidationService',
+	'xtext/services/OccurrencesService'
 ], function(jQuery, ace, languageTools, EditorContext, LoadResourceService, RevertResourceService,
 		SaveResourceService, UpdateService, ContentAssistService, ValidationService, OccurrencesService) {
 	
@@ -56,7 +56,7 @@ define([
 	 * Translate an HTML attribute name to a JS option name.
 	 */
 	function _optionName(name) {
-		var prefix = "data-editor-";
+		var prefix = 'data-editor-';
 		if (name.substring(0, prefix.length) === prefix) {
 			var key = name.substring(prefix.length);
 			key = key.replace(/-([a-z])/ig, function(all, character) {
@@ -89,8 +89,8 @@ define([
 			var key = _optionName(attr.nodeName);
 			if (key) {
 				var value = attr.nodeValue;
-				if (value === "true" || value === "false")
-					value = value === "true";
+				if (value === 'true' || value === 'false')
+					value = value === 'true';
 				options[key] = value;
 			}
 		}
@@ -106,7 +106,7 @@ define([
 		if (!options.xtextLang && options.resourceId)
 			options.xtextLang = options.resourceId.split('.').pop();
 		if (!options.theme)
-			options.theme = "ace/theme/eclipse";
+			options.theme = 'ace/theme/eclipse';
 	}
 	
 	var exports = {};
@@ -118,10 +118,10 @@ define([
 		if (!options)
 			options = {};
 		if (!options.parent)
-			options.parent = "xtext-editor";
+			options.parent = 'xtext-editor';
 		
 		var parents;
-		if (typeof(options.parent) === "string") {
+		if (typeof(options.parent) === 'string') {
 			var doc = options.document || document;
 			var element = doc.getElementById(options.parent);
 			if (element)
@@ -171,13 +171,13 @@ define([
 		if (options.dirtyElement) {
 			var doc = options.document || document;
 			var dirtyElement;
-			if (typeof(options.dirtyElement) === "string")
-				dirtyElement = jQuery("#" + options.dirtyElement, doc);
+			if (typeof(options.dirtyElement) === 'string')
+				dirtyElement = jQuery('#' + options.dirtyElement, doc);
 			else
 				dirtyElement = jQuery(options.dirtyElement);
 			var dirtyStatusClass = options.dirtyStatusClass;
 			if (!dirtyStatusClass)
-				dirtyStatusClass = "dirty";
+				dirtyStatusClass = 'dirty';
 			editorContext.addDirtyStateListener(function(clean) {
 				if (clean)
 					dirtyElement.removeClass(dirtyStatusClass);
@@ -189,7 +189,7 @@ define([
 		//---- Persistence Services
 		
 		if (!options.serverUrl)
-			options.serverUrl = "http://" + location.host + "/xtext-service";
+			options.serverUrl = 'http://' + location.host + '/xtext-service';
 		var loadResourceService = undefined, saveResourceService = undefined, revertResourceService = undefined;
 		if (options.resourceId) {
 			if (options.loadFromServer === undefined || options.loadFromServer) {
@@ -199,8 +199,8 @@ define([
 				saveResourceService = new SaveResourceService(options.serverUrl, options.resourceId);
 				if (options.enableSaveAction && editor.commands) {
 					editor.commands.addCommand({
-						name: "save",
-						bindKey: {win: "Ctrl-S", mac: "Command-S"},
+						name: 'save',
+						bindKey: {win: 'Ctrl-S', mac: 'Command-S'},
 						exec: function(editor) {
 							saveResourceService.saveResource(editorContext, options);
 						}
@@ -212,7 +212,7 @@ define([
 			if (options.loadFromServer === undefined)
 				options.loadFromServer = false;
 			if (options.xtextLang)
-				options.resourceId = "text." + options.xtextLang;
+				options.resourceId = 'text.' + options.xtextLang;
 		}
 		
 		//---- Syntax Highlighting Service
@@ -220,7 +220,7 @@ define([
 		if (options.syntaxDefinition || options.xtextLang) {
 			var syntaxDefinition = options.syntaxDefinition;
 			if (!syntaxDefinition)
-				syntaxDefinition = "xtext/mode-" + options.xtextLang;
+				syntaxDefinition = 'xtext/mode-' + options.xtextLang;
 			require([syntaxDefinition], function(mode) {
 				editor.getSession().setMode(new mode.Mode);
 			});
@@ -263,7 +263,7 @@ define([
 		if (!options.resourceId || !options.loadFromServer) {
 			modelChangeListener({init: true});
 		}
-		editor.on("change", modelChangeListener)
+		editor.on('change', modelChangeListener)
 		
 		//---- Content Assist Service
 		
@@ -291,11 +291,11 @@ define([
 		//---- Occurrences Service
 		
 		var occurrencesService = new OccurrencesService(options.serverUrl, options.resourceId);
-		editor.getSelection().on("changeCursor", function() {
+		editor.getSelection().on('changeCursor', function() {
 			var index = editor.getSession().getDocument().positionToIndex(editor.getSelection().getCursor());
 			occurrencesService.markOccurrences(editorContext, {
 				offset: index,
-				contentType : options.contentType
+				contentType: options.contentType
 			});
 		})
 		
@@ -307,25 +307,25 @@ define([
 					optionsCopy[p] = invokeOptions[p];
 				}
 			}
-			if (service === "load" && loadResourceService)
+			if (service === 'load' && loadResourceService)
 				loadResourceService.loadResource(editorContext, optionsCopy);
-			else if (service === "save" && saveResourceService)
+			else if (service === 'save' && saveResourceService)
 				saveResourceService.saveResource(editorContext, optionsCopy);
-			else if (service === "revert" && revertResourceService)
+			else if (service === 'revert' && revertResourceService)
 				revertResourceService.revertResource(editorContext, optionsCopy);
-			else if (service === "validation" && validationService)
+			else if (service === 'validation' && validationService)
 				validationService.computeProblems(editorContext, optionsCopy);
-			else if (service === "occurrences" && occurrencesService)
+			else if (service === 'occurrences' && occurrencesService)
 				occurrencesService.markOccurrences(editorContext, optionsCopy);
 			else
-				throw new Error("Service '" + service + "' is not available.");
+				throw new Error('Service \'' + service + '\' is not available.');
 		};
 		editor.xtextServiceSuccessListeners = [];
 		editor.xtextServiceErrorListeners = [function(requestType, xhr, textStatus, errorThrown) {
 			if (options.showErrorDialogs)
-				window.alert("Xtext service '" + requestType + "' failed: " + errorThrown);
+				window.alert('Xtext service \'' + requestType + '\' failed: ' + errorThrown);
 			else
-				console.log("Xtext service '" + requestType + "' failed: " + errorThrown);
+				console.log('Xtext service \'' + requestType + '\' failed: ' + errorThrown);
 		}];
 	}
 	
@@ -335,7 +335,7 @@ define([
 	 * @param editor
 	 *     The editor for which the service shall be invoked.
 	 * @param service
-	 *     A service type identifier, e.g. "save".
+	 *     A service type identifier, e.g. 'save'.
 	 * @param invokeOptions
 	 *     Additional options to pass to the service (optional).
 	 */
@@ -343,7 +343,7 @@ define([
 		if (editor.invokeXtextService)
 			editor.invokeXtextService(service, invokeOptions);
 		else
-			throw new Error("The editor has not been configured with Xtext.");
+			throw new Error('The editor has not been configured with Xtext.');
 	}
 	
 	return exports;

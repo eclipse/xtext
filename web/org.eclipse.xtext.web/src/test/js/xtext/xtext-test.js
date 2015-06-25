@@ -7,14 +7,14 @@
  *******************************************************************************/
 
 define([
-	"jquery",
-	"xtext/MockEditorContext",
-	"xtext/services/LoadResourceService",
-	"xtext/services/RevertResourceService",
-	"xtext/services/SaveResourceService",
-	"xtext/services/UpdateService",
-	"xtext/services/ContentAssistService",
-	"xtext/services/ValidationService"
+	'jquery',
+	'xtext/MockEditorContext',
+	'xtext/services/LoadResourceService',
+	'xtext/services/RevertResourceService',
+	'xtext/services/SaveResourceService',
+	'xtext/services/UpdateService',
+	'xtext/services/ContentAssistService',
+	'xtext/services/ValidationService'
 ], function(mjQuery, EditorContext, LoadResourceService, RevertResourceService, SaveResourceService,
 		UpdateService, ContentAssistService, ValidationService) {
 	
@@ -65,7 +65,7 @@ define([
 		triggerModelChange: function(text, start, end) {
 			this._editorContext.setText(text, start, end);
 			var listeners = this._editorContext.getModelChangeListeners();
-			for (var i in listeners) {
+			for (var i = 0; i < listeners.length; i++) {
 				var listener = listeners[i];
 				listener(text);
 			}
@@ -135,7 +135,7 @@ define([
 		//---- Persistence Services
 		
 		if (!options.serverUrl)
-			options.serverUrl = "test://xtext-service";
+			options.serverUrl = 'test://xtext-service';
 		var loadResourceService, saveResourceService, revertResourceService;
 		if (options.resourceId) {
 			if (options.loadFromServer === undefined || options.loadFromServer) {
@@ -149,7 +149,7 @@ define([
 			if (options.loadFromServer === undefined)
 				options.loadFromServer = false;
 			if (options.xtextLang)
-				options.resourceId = "text." + options.xtextLang;
+				options.resourceId = 'text.' + options.xtextLang;
 		}
 		
 		//---- Validation Service
@@ -196,20 +196,20 @@ define([
 					optionsCopy[p] = invokeOptions[p];
 				}
 			}
-			if (service === "load" && loadResourceService)
+			if (service === 'load' && loadResourceService)
 				loadResourceService.loadResource(editorContext, optionsCopy);
-			else if (service === "save" && saveResourceService)
+			else if (service === 'save' && saveResourceService)
 				saveResourceService.saveResource(editorContext, optionsCopy);
-			else if (service === "revert" && revertResourceService)
+			else if (service === 'revert' && revertResourceService)
 				revertResourceService.revertResource(editorContext, optionsCopy);
-			else if (service === "validation" && validationService)
+			else if (service === 'validation' && validationService)
 				validationService.computeProblems(editorContext, optionsCopy);
-			else if (service === "content-assist" && contentAssistService) {
+			else if (service === 'content-assist' && contentAssistService) {
 				optionsCopy.offset = editorContext.getCaretOffset();
 				optionsCopy.selection = editorContext.getSelection();
 				return contentAssistService.computeContentAssist(editorContext, optionsCopy);
 			} else
-				throw new Error("Service '" + service + "' is not available.");
+				throw new Error('Service \'' + service + '\' is not available.');
 		};
 		editorContext.xtextServiceSuccessListeners = [];
 		editorContext.xtextServiceErrorListeners = [];

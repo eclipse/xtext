@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 
-define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
+define(['xtext/services/AbstractXtextService'], function(AbstractXtextService) {
 	
 	/**
 	 * Service class for updating the server-side representation of a resource.
@@ -15,7 +15,7 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 	 * stateless alternative, where the full text content is sent with each service request.
 	 */
 	function UpdateService(serverUrl, resourceId) {
-		this.initialize(serverUrl, resourceId, "update");
+		this.initialize(serverUrl, resourceId, 'update');
 		this.setUpdateService(this);
 		this._completionCallbacks = [];
 	};
@@ -43,7 +43,7 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 			result.deltaReplaceLength = 0;
 			return;
 		} else if (start === s2length) {
-			result.deltaText = "";
+			result.deltaText = '';
 			result.deltaReplaceLength = s1length - start;
 			return;
 		}
@@ -63,7 +63,7 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 	UpdateService.prototype.onComplete = function(xhr, textStatus) {
 		var callbacks = this._completionCallbacks;
 		this._completionCallbacks = [];
-		for (i in callbacks) {
+		for (var i = 0; i < callbacks.length; i++) {
 			callbacks[i]();
 		}
 	}
@@ -76,14 +76,14 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 	}
 
 	UpdateService.prototype.update = function(editorContext, params) {
-		if (editorContext.getClientServiceState().update == "started") {
+		if (editorContext.getClientServiceState().update == 'started') {
 			var self = this;
 			this.addCompletionCallback(function() { self.update(editorContext, params) });
 			return;
 		}
 		
 		var serverData = {
-			contentType : params.contentType
+			contentType: params.contentType
 		};
 		var currentText = editorContext.getText();
 		var knownServerState = editorContext.getServerState();
@@ -100,9 +100,9 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 
 		var self = this;
 		self.sendRequest(editorContext, {
-			type : "PUT",
-			data : serverData,
-			success : function(result) {
+			type: 'PUT',
+			data: serverData,
+			success: function(result) {
 				if (result.conflict) {
 					// The server has lost its session state and the resource is loaded from the server
 					if (knownServerState.text !== undefined) {
@@ -114,7 +114,7 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 					return false;
 				}
 				var listeners = editorContext.updateServerState(currentText, result.stateId);
-				for (i in listeners) {
+				for (var i = 0; i < listeners.length; i++) {
 					self.addCompletionCallback(listeners[i]);
 				}
 			},
@@ -128,7 +128,7 @@ define(["xtext/services/AbstractXtextService"], function(AbstractXtextService) {
 					return true;
 				}
 			},
-			complete : self.onComplete.bind(self)
+			complete: self.onComplete.bind(self)
 		});
 	};
 	

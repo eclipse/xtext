@@ -12,7 +12,7 @@ define(function() {
 		if (text)
 			this._text = text;
 		else
-			this._text = "";
+			this._text = '';
 		
 		if (caretOffset)
 			this._caretOffset = caretOffset;
@@ -36,94 +36,94 @@ define(function() {
 
 	MockEditorContext.prototype = {
 			
-		getEditor : function() {
+		getEditor: function() {
 			return this;
 		},
 		
-		getServerState : function() {
+		getServerState: function() {
 			return this._serverState;
 		},
 		
-		updateServerState : function(currentText, currentStateId) {
+		updateServerState: function(currentText, currentStateId) {
 			this._serverState.text = currentText;
 			this._serverState.stateId = currentStateId;
 			return this._serverStateListeners;
 		},
 		
-		addServerStateListener : function(listener) {
+		addServerStateListener: function(listener) {
 			this._serverStateListeners.push(listener);
 		},
 		
-		addModelChangeListener : function(listener) {
+		addModelChangeListener: function(listener) {
 			this._modelChangeListeners.push(listener);
 		},
 		
-		getModelChangeListeners : function() {
+		getModelChangeListeners: function() {
 			return this._modelChangeListeners;
 		},
 		
-		getClientServiceState : function() {
+		getClientServiceState: function() {
 			return this._clientServiceState;
 		},
 		
-		clearClientServiceState : function() {
+		clearClientServiceState: function() {
 			this._clientServiceState = {};
 		},
 		
-		getCaretOffset : function() {
+		getCaretOffset: function() {
 			return this._caretOffset;
 		},
 		
-		getLineStart : function(lineNumber) {
-			throw new Error("Not supported: getLineStart");
+		getLineStart: function(lineNumber) {
+			throw new Error('Not supported: getLineStart');
 		},
 		
-		getSelection : function() {
+		getSelection: function() {
 			return this._selection;
 		},
 		
-		getText : function(start, end) {
+		getText: function(start, end) {
 			if (start && end)
 				return this._text.substring(start, end);
 			else
 				return this._text;
 		},
 		
-		isDirty : function() {
+		isDirty: function() {
 			return this._dirty;
 		},
 		
-		markClean : function(clean) {
+		markClean: function(clean) {
 			this._dirty = !clean;
 		},
 		
-		clearUndoStack : function() {
+		clearUndoStack: function() {
 		},
 		
-		setCaretOffset : function(offset) {
+		setCaretOffset: function(offset) {
 			this._caretOffset = offset;
 		},
 		
-		setSelection : function(selection) {
+		setSelection: function(selection) {
 			this._selection = selection;
 		},
 		
-		setText : function(text, start, end) {
+		setText: function(text, start, end) {
 			if (start && end)
 				this._text = this._text.substring(0, start) + text + this._text.substring(end);
 			else
 				this._text = text;
 		},
 		
-		showMarkers : function(entries) {
+		showMarkers: function(entries) {
 			this._markers = entries;
 		},
 		
-		getMarkers : function() {
+		getMarkers: function() {
 			return this._markers;
 		},
 		
-		translateCompletionProposals : function(entries) {
+		translateCompletionProposals: function(entries) {
 			return entries;
 		}
 	};
