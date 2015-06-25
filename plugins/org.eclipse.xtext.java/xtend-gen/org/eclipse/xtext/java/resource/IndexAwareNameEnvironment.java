@@ -15,7 +15,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.descriptions.EObjectDescriptionBasedStubGenerator;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
+import org.eclipse.xtext.resource.ISelectable;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -28,7 +28,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 public class IndexAwareNameEnvironment implements INameEnvironment {
   private final ClassLoader classLoader;
   
-  private final ResourceDescriptionsData descriptionsData;
+  private final ISelectable indexAccesss;
   
   private final EObjectDescriptionBasedStubGenerator stubGenerator;
   
@@ -54,7 +54,7 @@ public class IndexAwareNameEnvironment implements INameEnvironment {
   
   public NameEnvironmentAnswer findType(final QualifiedName className) {
     try {
-      Iterable<IEObjectDescription> _exportedObjects = this.descriptionsData.getExportedObjects(TypesPackage.Literals.JVM_DECLARED_TYPE, className, false);
+      Iterable<IEObjectDescription> _exportedObjects = this.indexAccesss.getExportedObjects(TypesPackage.Literals.JVM_DECLARED_TYPE, className, false);
       final IEObjectDescription candidate = IterableExtensions.<IEObjectDescription>head(_exportedObjects);
       NameEnvironmentAnswer result = null;
       boolean _notEquals = (!Objects.equal(candidate, null));
@@ -113,10 +113,10 @@ public class IndexAwareNameEnvironment implements INameEnvironment {
     return Character.isLowerCase((_head).charValue());
   }
   
-  public IndexAwareNameEnvironment(final ClassLoader classLoader, final ResourceDescriptionsData descriptionsData, final EObjectDescriptionBasedStubGenerator stubGenerator) {
+  public IndexAwareNameEnvironment(final ClassLoader classLoader, final ISelectable indexAccesss, final EObjectDescriptionBasedStubGenerator stubGenerator) {
     super();
     this.classLoader = classLoader;
-    this.descriptionsData = descriptionsData;
+    this.indexAccesss = indexAccesss;
     this.stubGenerator = stubGenerator;
   }
 }

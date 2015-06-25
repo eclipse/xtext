@@ -8,6 +8,7 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext,
+ org.eclipse.xtext.build;x-friends:="org.eclipse.xtext.ide,org.eclipse.xtext.junit4,org.eclipse.xtend.core.tests",
  org.eclipse.xtext.common,
  org.eclipse.xtext.common.parseTreeConstruction,
  org.eclipse.xtext.common.parser.packrat;x-internal:=true,

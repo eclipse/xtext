@@ -23,13 +23,14 @@ import org.eclipse.xtext.common.types.access.binary.asm.ClassFileBytesAccess
 import org.eclipse.xtext.common.types.access.binary.asm.JvmDeclaredTypeBuilder
 import org.eclipse.xtext.common.types.descriptions.EObjectDescriptionBasedStubGenerator
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader
+import org.eclipse.xtext.resource.IResourceDescriptionsProvider
 import org.eclipse.xtext.resource.XtextResourceSet
-import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 
 class JavaDerivedStateComputer {
 	
 	@Inject IReferableElementsUnloader unloader;
 	@Inject EObjectDescriptionBasedStubGenerator stubGenerator
+	@Inject IResourceDescriptionsProvider resourceDescriptionsProvider
 	
 	def discardDerivedState(Resource resource) {
 		var EList<EObject> resourcesContentsList=resource.getContents() 
@@ -95,7 +96,9 @@ class JavaDerivedStateComputer {
 	def void installFull(Resource resource) {
 		val compilationUnit = getCompilationUnit(resource)
 		val classLoader = getClassLoader(resource)
-		val data = ResourceDescriptionsData.ResourceSetAdapter.findResourceDescriptionsData(resource.resourceSet)
+		
+		val data = resourceDescriptionsProvider.getResourceDescriptions(resource.resourceSet)
+		// TODO use container manager
 		val nameEnv = new IndexAwareNameEnvironment(classLoader, data, stubGenerator)
 		val compiler = new Compiler(nameEnv, DefaultErrorHandlingPolicies.proceedWithAllProblems(), getCompilerOptions(), [
 			if (Arrays.equals(it.fileName, compilationUnit.fileName)) {

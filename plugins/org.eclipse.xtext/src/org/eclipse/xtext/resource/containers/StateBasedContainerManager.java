@@ -29,8 +29,14 @@ public class StateBasedContainerManager implements IContainer.Manager {
 	@Inject
 	private IAllContainersState.Provider stateProvider;
 	
+	@Inject
+	private ProjectDescriptionBasedContainerManager delegate;
+	
 	@Override
 	public IContainer getContainer(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {
+		if (delegate.shouldUseProjectDescriptionBasedContainers(resourceDescriptions)) {
+			return delegate.getContainer(desc, resourceDescriptions);
+		}
 		String root = internalGetContainerHandle(desc, resourceDescriptions);
 		if (root == null) {
 			if (log.isDebugEnabled())
@@ -47,6 +53,9 @@ public class StateBasedContainerManager implements IContainer.Manager {
 
 	@Override
 	public List<IContainer> getVisibleContainers(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {
+		if (delegate.shouldUseProjectDescriptionBasedContainers(resourceDescriptions)) {
+			return delegate.getVisibleContainers(desc, resourceDescriptions);
+		}
 		String root = internalGetContainerHandle(desc, resourceDescriptions);
 		if (root == null) {
 			if (log.isDebugEnabled())

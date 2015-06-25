@@ -11,7 +11,7 @@ import com.intellij.openapi.module.Module
 import com.intellij.openapi.roots.LibraryOrderEntry
 import com.intellij.openapi.roots.ModuleOrderEntry
 import com.intellij.openapi.roots.ModuleRootManager
-import org.eclipse.xtext.builder.standalone.incremental.ProjectDescription
+import org.eclipse.xtext.resource.impl.ProjectDescription
 
 /**
  * @author Sven Efftinge - Initial contribution and API

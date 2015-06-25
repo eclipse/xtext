@@ -17,7 +17,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import java.util.HashSet;
 import java.util.UUID;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
+import org.eclipse.xtext.build.BuildRequest;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.idea.build.AffectedScope;
 import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;

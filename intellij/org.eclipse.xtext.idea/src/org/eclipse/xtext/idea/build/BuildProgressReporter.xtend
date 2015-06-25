@@ -19,7 +19,7 @@ import com.intellij.openapi.util.Key
 import java.util.UUID
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.builder.standalone.incremental.BuildRequest
+import org.eclipse.xtext.build.BuildRequest
 import org.eclipse.xtext.validation.Issue
 
 import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*

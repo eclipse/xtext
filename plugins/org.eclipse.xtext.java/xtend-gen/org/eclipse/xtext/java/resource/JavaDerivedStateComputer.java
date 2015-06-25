@@ -39,8 +39,9 @@ import org.eclipse.xtext.java.resource.InMemoryClassLoader;
 import org.eclipse.xtext.java.resource.IndexAwareNameEnvironment;
 import org.eclipse.xtext.java.resource.JavaResource;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
+import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.IResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -57,6 +58,9 @@ public class JavaDerivedStateComputer {
   
   @Inject
   private EObjectDescriptionBasedStubGenerator stubGenerator;
+  
+  @Inject
+  private IResourceDescriptionsProvider resourceDescriptionsProvider;
   
   public void discardDerivedState(final Resource resource) {
     EList<EObject> resourcesContentsList = resource.getContents();
@@ -172,7 +176,7 @@ public class JavaDerivedStateComputer {
     final CompilationUnit compilationUnit = this.getCompilationUnit(resource);
     final ClassLoader classLoader = this.getClassLoader(resource);
     ResourceSet _resourceSet = resource.getResourceSet();
-    final ResourceDescriptionsData data = ResourceDescriptionsData.ResourceSetAdapter.findResourceDescriptionsData(_resourceSet);
+    final IResourceDescriptions data = this.resourceDescriptionsProvider.getResourceDescriptions(_resourceSet);
     final IndexAwareNameEnvironment nameEnv = new IndexAwareNameEnvironment(classLoader, data, this.stubGenerator);
     IErrorHandlingPolicy _proceedWithAllProblems = DefaultErrorHandlingPolicies.proceedWithAllProblems();
     CompilerOptions _compilerOptions = this.getCompilerOptions();

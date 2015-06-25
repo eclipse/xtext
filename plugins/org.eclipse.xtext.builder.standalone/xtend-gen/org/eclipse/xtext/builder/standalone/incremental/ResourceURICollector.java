@@ -13,6 +13,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import java.io.File;
 import java.io.IOException;
+import java.net.URLClassLoader;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -25,7 +26,6 @@ import java.util.zip.ZipException;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.xtext.builder.standalone.incremental.FilesAndURIs;
 import org.eclipse.xtext.mwe.PathTraverser;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -136,12 +136,12 @@ public class ResourceURICollector {
         if (_containsKey) {
           return;
         }
-        URI _asURI = FilesAndURIs.asURI(file);
+        URI _asURI = ResourceURICollector.asURI(file);
         String _plus = ("archive:" + _asURI);
         final String path = (_plus + "!/");
         Map<String, URI> _platformResourceMap_1 = EcorePlugin.getPlatformResourceMap();
-        URI _asURI_1 = FilesAndURIs.asURI(path);
-        _platformResourceMap_1.put(name, _asURI_1);
+        URI _createURI = URI.createURI(path);
+        _platformResourceMap_1.put(name, _createURI);
       }
     } catch (final Throwable _t) {
       if (_t instanceof ZipException) {
@@ -171,6 +171,31 @@ public class ResourceURICollector {
           throw Exceptions.sneakyThrow(_t_1);
         }
       }
+    }
+  }
+  
+  /**
+   * Unfortunately, {@link File#toURI} does not append '/' to directories, making it useless for the {@link URLClassLoader}.
+   */
+  public static URI asURI(final File file) {
+    try {
+      URI _xblockexpression = null;
+      {
+        File _canonicalFile = file.getCanonicalFile();
+        String _absolutePath = _canonicalFile.getAbsolutePath();
+        final URI uri = URI.createFileURI(_absolutePath);
+        URI _xifexpression = null;
+        boolean _isDirectory = file.isDirectory();
+        if (_isDirectory) {
+          _xifexpression = uri.appendSegment("");
+        } else {
+          _xifexpression = uri;
+        }
+        _xblockexpression = _xifexpression;
+      }
+      return _xblockexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   

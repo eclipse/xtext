@@ -62,13 +62,11 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.builder.standalone.incremental.BuildRequest;
-import org.eclipse.xtext.builder.standalone.incremental.ChunkedResourceDescriptions;
-import org.eclipse.xtext.builder.standalone.incremental.ContextualChunkedResourceDescriptions;
-import org.eclipse.xtext.builder.standalone.incremental.IncrementalBuilder;
-import org.eclipse.xtext.builder.standalone.incremental.IndexState;
-import org.eclipse.xtext.builder.standalone.incremental.Source2GeneratedMapping;
-import org.eclipse.xtext.builder.standalone.incremental.TypeResourceDescription;
+import org.eclipse.xtext.build.BuildRequest;
+import org.eclipse.xtext.build.IncrementalBuilder;
+import org.eclipse.xtext.build.IndexState;
+import org.eclipse.xtext.build.Source2GeneratedMapping;
+import org.eclipse.xtext.common.types.descriptions.TypeResourceDescription;
 import org.eclipse.xtext.idea.build.BuildEvent;
 import org.eclipse.xtext.idea.build.BuildProgressReporter;
 import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider;
@@ -79,6 +77,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -553,7 +552,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   
   public XtextResourceSet createResourceSet(final Module module, final ResourceDescriptionsData newData) {
     final XtextResourceSet result = this.resourceSetProvider.get(module);
-    final ContextualChunkedResourceDescriptions fullIndex = ContextualChunkedResourceDescriptions.findInEmfObject(result);
+    final ChunkedResourceDescriptions fullIndex = ChunkedResourceDescriptions.findInEmfObject(result);
     String _name = module.getName();
     fullIndex.setContainer(_name, newData);
     return result;
@@ -683,8 +682,8 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     return result;
   }
   
-  public ContextualChunkedResourceDescriptions getCopyOfResourceDescriptions() {
-    return new ContextualChunkedResourceDescriptions(this.chunkedResourceDescriptions);
+  public ChunkedResourceDescriptions getCopyOfResourceDescriptions() {
+    return this.chunkedResourceDescriptions.createFreshFlatCopy();
   }
   
   protected Module findModule(final BuildEvent it, final ProjectFileIndex fileIndex) {
