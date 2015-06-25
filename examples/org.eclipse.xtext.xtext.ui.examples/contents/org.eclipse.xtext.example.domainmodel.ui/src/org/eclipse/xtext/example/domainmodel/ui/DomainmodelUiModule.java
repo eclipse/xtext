@@ -9,11 +9,15 @@ import org.eclipse.xtext.example.domainmodel.ui.autoedit.FantasticEditStrategyPr
 import org.eclipse.xtext.example.domainmodel.ui.linking.DomainmodelLinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.example.domainmodel.ui.navigation.DomainmodelHyperlinkHelper;
 import org.eclipse.xtext.example.domainmodel.ui.outline.FilterOperationsContribution;
+import org.eclipse.xtext.example.domainmodel.ui.syntaxcoloring.SemanticHighlightingCalculator;
+import org.eclipse.xtext.example.domainmodel.ui.syntaxcoloring.SemanticHighlightingConfiguration;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.outline.actions.IOutlineContribution;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -47,5 +51,15 @@ public class DomainmodelUiModule extends AbstractDomainmodelUiModule {
 	
 	public Class<? extends IContextualOutputConfigurationProvider> bindIContextualOutputConfigurationProvider() {
 		return EclipseOutputConfigurationProvider.class;
+	}
+	
+	@Override
+	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
+		return SemanticHighlightingCalculator.class;
+	}
+
+	@Override
+	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return SemanticHighlightingConfiguration.class;
 	}
 }

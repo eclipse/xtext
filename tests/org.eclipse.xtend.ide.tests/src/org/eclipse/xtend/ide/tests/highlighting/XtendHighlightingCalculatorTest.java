@@ -22,7 +22,7 @@ import org.eclipse.xtend.ide.highlighting.XtendHighlightingConfiguration;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration;
 import org.junit.After;

@@ -13,6 +13,7 @@ import java.util.List;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.core.IAnnotatable;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IMember;
 import org.eclipse.jdt.core.IType;
@@ -210,7 +211,7 @@ public class CodeBuilderQuickfix {
           _switchResult = null;
         }
         final Object element = ((Object)_switchResult);
-        boolean _notEquals = (!Objects.equal(element, null));
+        boolean _notEquals = (!Objects.equal(((IAnnotatable)element), null));
         if (_notEquals) {
           JdtHyperlink _jdtHyperlink = new JdtHyperlink();
           final Procedure1<JdtHyperlink> _function_1 = new Procedure1<JdtHyperlink>() {

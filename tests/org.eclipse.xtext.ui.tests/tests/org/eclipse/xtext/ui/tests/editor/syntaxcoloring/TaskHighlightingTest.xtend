@@ -11,8 +11,8 @@ import com.google.inject.Inject
 import org.eclipse.jface.text.TypedRegion
 import org.eclipse.xtext.junit4.AbstractXtextTests
 import org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguageStandaloneSetup
-import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator
-import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor
+import org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator
+import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor
 import org.junit.Before
 import org.junit.Test
 import static org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration.*
