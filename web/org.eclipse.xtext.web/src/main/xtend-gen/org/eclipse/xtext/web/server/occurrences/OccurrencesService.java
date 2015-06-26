@@ -73,7 +73,8 @@ public class OccurrencesService {
           if (((definitionRegion != null) && (definitionRegion != ITextRegionWithLineInformation.EMPTY_REGION))) {
             writeRegions.add(definitionRegion);
           }
-          final OccurrencesResult occurrencesResult = new OccurrencesResult(readRegions, writeRegions);
+          String _stateId = it.getStateId();
+          final OccurrencesResult occurrencesResult = new OccurrencesResult(_stateId, readRegions, writeRegions);
           return occurrencesResult;
         }
         return null;
