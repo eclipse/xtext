@@ -28,8 +28,8 @@ import org.eclipse.xtext.ui.codetemplates.templates.TemplatesPackage;
 import org.eclipse.xtext.ui.codetemplates.templates.Variable;
 import org.eclipse.xtext.ui.codetemplates.ui.evaluator.EvaluatedTemplate;
 import org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistry;
-import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
-import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.editor.templates.ContextTypeIdHelper;
 import org.eclipse.xtext.util.ITextRegion;
 

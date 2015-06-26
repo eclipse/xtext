@@ -10,8 +10,8 @@ package org.eclipse.xtext.ui.tests.editor.syntaxcoloring;
 import java.util.Arrays;
 import java.util.List;
 
-import org.eclipse.xtext.ide.editor.syntaxcoloring.LightweightPosition;
-import org.eclipse.xtext.ide.editor.syntaxcoloring.MergingHighlightedPositionAcceptor;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.LightweightPosition;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.MergingHighlightedPositionAcceptor;
 import org.eclipse.xtext.util.Strings;
 import org.junit.After;
 import org.junit.Assert;

@@ -21,9 +21,7 @@ import com.google.common.collect.Lists;
  * of positions from them that do not overlap.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * @deprecated Use {@link org.eclipse.xtext.ide.editor.syntaxcoloring.MergingHighlightedPositionAcceptor} instead.
  */
-@Deprecated
 public class MergingHighlightedPositionAcceptor implements IHighlightedPositionAcceptor, ISemanticHighlightingCalculator {
 
 	private final ISemanticHighlightingCalculator delegate;
@@ -159,5 +157,5 @@ public class MergingHighlightedPositionAcceptor implements IHighlightedPositionA
 	public List<LightweightPosition> getPositions() {
 		return positions;
 	}
-
+	
 }
