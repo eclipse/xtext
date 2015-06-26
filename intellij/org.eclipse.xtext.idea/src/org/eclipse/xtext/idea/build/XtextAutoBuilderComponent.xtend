@@ -129,8 +129,12 @@ import org.eclipse.emf.ecore.resource.ResourceSet
 				fileDeleted(event.getFile())
 			}
 			
+			override beforeFileMovement(VirtualFileMoveEvent event) {
+				fileDeleted(event.file)
+			}
+			
 			override void fileMoved(VirtualFileMoveEvent event) {
-				// TODO deal with that!
+				fileAdded(event.file)
 			}
 		}, project)
 		

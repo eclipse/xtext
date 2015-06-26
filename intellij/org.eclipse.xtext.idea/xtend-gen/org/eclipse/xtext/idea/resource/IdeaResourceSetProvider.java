@@ -19,6 +19,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -150,6 +151,10 @@ public class IdeaResourceSetProvider {
         return new ByteArrayInputStream(_get);
       }
       final VirtualFile virtualFile = VirtualFileURIUtil.getVirtualFile(uri);
+      boolean _equals = Objects.equal(virtualFile, null);
+      if (_equals) {
+        throw new FileNotFoundException(("Couldn\'t find virtual file for " + uri));
+      }
       FileDocumentManager _instance = FileDocumentManager.getInstance();
       final Document doc = _instance.getCachedDocument(virtualFile);
       boolean _notEquals = (!Objects.equal(doc, null));
