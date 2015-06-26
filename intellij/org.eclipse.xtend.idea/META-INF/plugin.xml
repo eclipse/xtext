@@ -1,4 +1,4 @@
-<idea-plugin version="2">
+<idea-plugin version="2" xmlns:xi="http://www.w3.org/2001/XInclude">
 	<id>org.eclipse.xtend.idea</id>
 	<name>Xtend Support</name>
 	<description>
@@ -23,70 +23,11 @@
     	<package uri="http://www.eclipse.org/xtend/RichString"
     			 class="org.eclipse.xtend.core.richstring.ProcessedRichStringPackage"/>
 
-		<resourceFactory type="xtend"
-						 class="org.eclipse.xtext.resource.IResourceFactory"
-						 factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"/>
-		<resourceServiceProvider uriExtension="xtend"
-								 class="org.eclipse.xtext.idea.resource.IResourceIdeaServiceProvider"
-								 factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"/>
-
-		<lang.setup language="org.eclipse.xtend.core.Xtend"
-					implementationClass="org.eclipse.xtend.core.idea.XtendIdeaSetup"/>
     </extensions>
 
 	<extensions defaultExtensionNs="com.intellij">
 		<createFromTemplateHandler implementation="org.eclipse.xtend.core.idea.actions.XtendCreateFromTemplateHandler"/>
 		<buildProcess.parametersProvider implementation="org.eclipse.xtend.core.idea.server.XtendBuildProcessParametersProvider"/>
-
-		<!--java.elementFinder implementation="org.eclipse.xtend.core.idea.lang.types.psi.XtendJvmTypesElementFinder" order="first, before java"/-->
-		<!--java.shortNamesCache implementation="org.eclipse.xtend.core.idea.lang.types.XtendJvmTypesShortNamesCache"/-->
-
-		<stubIndex implementation="org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex"/>
-		<!--stubIndex implementation="org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex"/-->
-
-		<psi.treeChangePreprocessor implementation="org.eclipse.xtend.core.idea.lang.psi.XtendCodeBlockModificationListener"/>
-
-		<!--referencesSearch implementation="org.eclipse.xtend.core.idea.lang.types.psi.search.XtendJvmElementsReferencesSearch"/-->
-
-		<fileTypeFactory implementation="org.eclipse.xtend.core.idea.lang.XtendFileTypeFactory"/>
-		<stubElementTypeHolder class="org.eclipse.xtend.core.idea.lang.XtendElementTypeProvider"/>
-		<lang.ast.factory language="org.eclipse.xtend.core.Xtend"
-								factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
-								implementationClass="org.eclipse.xtext.idea.lang.BaseXtextASTFactory"/>
-		<lang.parserDefinition language="org.eclipse.xtend.core.Xtend"
-								factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
-								implementationClass="org.eclipse.xtend.core.idea.lang.parser.XtendParserDefinition"/>
-		<lang.findUsagesProvider language="org.eclipse.xtend.core.Xtend"
-								factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
-								implementationClass="org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider"/>
-		<lang.refactoringSupport language="org.eclipse.xtend.core.Xtend"
-								factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
-								implementationClass="org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider"/>
-		<lang.namesValidator language="org.eclipse.xtend.core.Xtend"
-								factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
-								implementationClass="com.intellij.lang.refactoring.NamesValidator"/>
-      	<lang.syntaxHighlighterFactory key="org.eclipse.xtend.core.Xtend" implementationClass="org.eclipse.xtend.core.idea.lang.XtendSyntaxHighlighterFactory" />
-		<lang.braceMatcher language="org.eclipse.xtend.core.Xtend"
-								factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
-								implementationClass="com.intellij.lang.PairedBraceMatcher"/>
-      	<annotator language="org.eclipse.xtend.core.Xtend"
-      							factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
-      							implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"/>
-      	<completion.contributor language="org.eclipse.xtend.core.Xtend" implementationClass="org.eclipse.xtend.core.idea.completion.XtendCompletionContributor"/>
-      	<elementDescriptionProvider implementation="org.eclipse.xtend.core.idea.lang.psi.XtendElementDescriptionProvider" order="first"/>
-      	<pom.declarationSearcher implementation="org.eclipse.xtend.core.idea.lang.pom.XtendPomDeclarationSearcher"/>
-
-      	<lang.psiStructureViewFactory language="org.eclipse.xtend.core.Xtend"
-      							factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
-      							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
-
-		<!--typeHierarchyProvider language="org.eclipse.xtend.core.Xtend"
-								factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
-								implementationClass="com.intellij.ide.hierarchy.type.JavaTypeHierarchyProvider"/-->
-		<!--callHierarchyProvider language="org.eclipse.xtend.core.Xtend"
-								factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
-								implementationClass="com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider"/-->
-		<!--hierarchy.referenceProcessor implementation="org.eclipse.xtend.core.idea.ide.hierarchy.call.XtendCallReferenceProcessor"/-->
 
     	<runConfigurationProducer implementation="org.eclipse.xtend.core.idea.execution.XtendApplicationConfigurationProducer"/>
 
@@ -97,4 +38,5 @@
     	<treeStructureProvider implementation="org.eclipse.xtend.core.idea.projectview.XtendSelectableTreeStructureProvider" order="last"/>
 	</extensions>
 
+	<xi:include href="plugin_gen.xml" xpointer="xpointer(/idea-plugin/*)"/>
 </idea-plugin>
