@@ -14,9 +14,7 @@ import java.util.Set;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * @deprecated ude {@link org.eclipse.xtext.ide.editor.syntaxcoloring.LightweightPosition} instead
- */ 
-@Deprecated
+ */
 public class LightweightPosition implements Comparable<LightweightPosition>{
 
 	public static class IntToStringArray implements Comparable<IntToStringArray>{

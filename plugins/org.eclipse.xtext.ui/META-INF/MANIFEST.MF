@@ -29,7 +29,7 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0";visibility:=reex
  org.eclipse.ui.forms;bundle-version="3.4.1",
  org.eclipse.xtend.lib,
  org.eclipse.jdt.ui;bundle-version="3.6.0";resolution:=optional,
- org.eclipse.xtext.ide;visibility:=reexport
+ org.eclipse.xtext.ide
 Bundle-Activator: org.eclipse.xtext.ui.internal.Activator
 Export-Package: org.eclipse.xtext.common.ui.contentassist,
  org.eclipse.xtext.ui,

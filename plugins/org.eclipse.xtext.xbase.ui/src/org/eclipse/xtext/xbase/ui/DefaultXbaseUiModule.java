@@ -18,7 +18,6 @@ import org.eclipse.xtext.builder.preferences.BuilderConfigurationBlock;
 import org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess;
 import org.eclipse.xtext.common.types.ui.DefaultCommonTypesUiModule;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
-import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider;
 import org.eclipse.xtext.ui.editor.contentassist.IContentProposalPriorities;
@@ -32,6 +31,7 @@ import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.workspace.EclipseWorkspaceConfigProvider;
 import org.eclipse.xtext.ui.workspace.JdtWorkspaceConfigProvider;
 import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
@@ -42,7 +42,7 @@ import org.eclipse.xtext.xbase.ui.builder.XbaseBuilderPreferenceAccess;
 import org.eclipse.xtext.xbase.ui.contentassist.XbaseContentProposalPriorities;
 import org.eclipse.xtext.xbase.ui.contentassist.XbaseReferenceProposalCreator;
 import org.eclipse.xtext.xbase.ui.editor.actions.XbaseFoldingActionContributor;
-import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingCalculator2;
+import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingCalculator;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDispatchingEObjectTextHover;
 import org.eclipse.xtext.xbase.ui.hover.XbaseHoverDocumentationProvider;
@@ -55,7 +55,7 @@ import org.eclipse.xtext.xbase.validation.UniqueClassNameValidator;
 
 /**
  * A base module that contains default UI bindings for all Xbase inheriting languages.
- * 
+ *
  * @since 2.8
  * @author Sven Efftinge - Initial contribution and API
  */
@@ -80,7 +80,7 @@ public class DefaultXbaseUiModule extends DefaultCommonTypesUiModule {
 	}
 
 	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
-		return XbaseHighlightingCalculator2.class;
+		return XbaseHighlightingCalculator.class;
 	}
 
 	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
@@ -126,15 +126,15 @@ public class DefaultXbaseUiModule extends DefaultCommonTypesUiModule {
 	public Class<? extends AbstractFileSystemAccess2> bindAbstractFileSystemAccess2() {
 		return EclipseResourceFileSystemAccess2.class;
 	}
-	
+
 	public Class<? extends EclipseResourceFileSystemAccess2> bindEclipseResourceFileSystemAccess2() {
 		return JDTAwareEclipseResourceFileSystemAccess2.class;
 	}
-	
+
 	public Class<? extends EclipseSourceFolderProvider> bindEclipseSourceFolderProvider() {
 		return JDTAwareSourceFolderProvider.class;
 	}
-	
+
 	@SingletonBinding(eager = true)
 	public Class<? extends UniqueClassNameValidator> bindUniqueClassNameValidator() {
 		return ProjectAwareUniqueClassNameValidator.class;
@@ -143,19 +143,19 @@ public class DefaultXbaseUiModule extends DefaultCommonTypesUiModule {
 	public Class<? extends FoldingActionContributor> bindFoldingActionContributor() {
 		return XbaseFoldingActionContributor.class;
 	}
-	
+
 	public Class<? extends BuilderConfigurationBlock> bindBuilderConfigurationBlock() {
 		return XbaseBuilderConfigurationBlock.class;
 	}
-	
+
 	public Class<? extends IGeneratorConfigProvider> bindIGeneratorConfigProvider() {
 		return EclipseGeneratorConfigProvider.class;
 	}
-	
+
 	public Class<? extends BuilderPreferenceAccess.Initializer> bindBuilderPreferenceAccess$Initializer() {
 		return XbaseBuilderPreferenceAccess.Initializer.class;
 	}
-	
+
 
 	/**
 	 * @since 2.9
@@ -163,14 +163,14 @@ public class DefaultXbaseUiModule extends DefaultCommonTypesUiModule {
 	public Class<? extends IWorkspaceConfigProvider> bindWorkspaceConfigProvider() {
 		return JdtWorkspaceConfigProvider.class;
 	}
-	
+
 	/**
 	 * @since 2.9
 	 */
 	public Class<? extends EclipseWorkspaceConfigProvider> bindEclipseWorkspaceConfigProvider() {
 		return JdtWorkspaceConfigProvider.class;
 	}
-	
+
 	/**
 	 * @since 2.9
 	 */
