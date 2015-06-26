@@ -10,7 +10,7 @@ class HoverTest extends AbstractWebServerTest {
 		val hover = getService(#{
 				'requestType' -> 'hover',
 				'fullText' -> content.replace('#', ''),
-				'offset' -> offset.toString
+				'caretOffset' -> offset.toString
 			})
 		assertTrue(hover.hasTextInput)
 		hover.service.apply() as HoverResult

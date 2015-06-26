@@ -23,7 +23,7 @@ public class HoverTest extends AbstractWebServerTest {
       String _replace = content.replace("#", "");
       Pair<String, String> _mappedTo_1 = Pair.<String, String>of("fullText", _replace);
       String _string = Integer.valueOf(offset).toString();
-      Pair<String, String> _mappedTo_2 = Pair.<String, String>of("offset", _string);
+      Pair<String, String> _mappedTo_2 = Pair.<String, String>of("caretOffset", _string);
       final XtextServiceDispatcher.ServiceDescriptor hover = this.getService(
         Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2)));
       boolean _isHasTextInput = hover.isHasTextInput();
