@@ -47,6 +47,7 @@ define([
     'jquery',
     'ace/ace',
     'ace/ext/language_tools',
+    'xtext/compatibility',
 	'xtext/AceEditorContext',
 	'xtext/services/LoadResourceService',
 	'xtext/services/RevertResourceService',
@@ -55,8 +56,9 @@ define([
 	'xtext/services/ContentAssistService',
 	'xtext/services/ValidationService',
 	'xtext/services/OccurrencesService'
-], function(jQuery, ace, languageTools, EditorContext, LoadResourceService, RevertResourceService,
-		SaveResourceService, UpdateService, ContentAssistService, ValidationService, OccurrencesService) {
+], function(jQuery, ace, languageTools, compatibility, EditorContext, LoadResourceService,
+		RevertResourceService, SaveResourceService, UpdateService, ContentAssistService,
+		ValidationService, OccurrencesService) {
 	
 	/**
 	 * Add a problem marker to an editor session.

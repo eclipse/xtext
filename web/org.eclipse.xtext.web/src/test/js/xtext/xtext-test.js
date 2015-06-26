@@ -8,6 +8,7 @@
 
 define([
 	'jquery',
+    'xtext/compatibility',
 	'xtext/MockEditorContext',
 	'xtext/services/LoadResourceService',
 	'xtext/services/RevertResourceService',
@@ -15,8 +16,8 @@ define([
 	'xtext/services/UpdateService',
 	'xtext/services/ContentAssistService',
 	'xtext/services/ValidationService'
-], function(mjQuery, EditorContext, LoadResourceService, RevertResourceService, SaveResourceService,
-		UpdateService, ContentAssistService, ValidationService) {
+], function(mjQuery, compatibility, EditorContext, LoadResourceService, RevertResourceService,
+		SaveResourceService, UpdateService, ContentAssistService, ValidationService) {
 	
 	function _copy(obj) {
 		var copy = {};
