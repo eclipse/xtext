@@ -44,8 +44,7 @@ class BuildRequest {
 	(URI, URI)=>void afterGenerateFile = []
 	(URI)=>void afterDeleteFile = []
 	
-	IndexState previousState = new IndexState
-	IndexState newState = new IndexState
+	IndexState state = new IndexState
 	
 	boolean writeStorageResources = false
 	boolean indexOnly = false

@@ -23,6 +23,7 @@ import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy
 class BuildContext {
 	val IResourceServiceProvider.Registry resourceServiceProviderRegistry
 	@Accessors val XtextResourceSet resourceSet
+	@Accessors val IndexState oldState
 	@Accessors val IResourceClusteringPolicy clusteringPolicy
 	
 	ClusteringStorageAwareResourceLoader loader

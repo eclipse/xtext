@@ -164,11 +164,10 @@ public abstract class AbstractIncrementalBuilderTest {
           }
         };
         it.setAfterGenerateFile(_function_3);
-        it.setPreviousState(AbstractIncrementalBuilderTest.this.indexState);
         Source2GeneratedMapping _fileMappings = AbstractIncrementalBuilderTest.this.indexState.getFileMappings();
         Source2GeneratedMapping _copy = _fileMappings.copy();
         IndexState _indexState = new IndexState(newIndex, _copy);
-        it.setNewState(_indexState);
+        it.setState(_indexState);
       }
     };
     final BuildRequest result = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function);

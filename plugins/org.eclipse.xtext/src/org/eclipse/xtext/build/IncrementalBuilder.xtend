@@ -21,7 +21,6 @@ import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.clustering.DisabledClusteringPolicy
 import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy
-import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.eclipse.xtext.resource.persistence.SerializableResourceDescription
 import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.util.CancelIndicator
@@ -48,7 +47,7 @@ import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
 		@Inject Indexer indexer
 		
 		def Result launch() {
-			val newSource2GeneratedMapping = request.newState.fileMappings
+			val newSource2GeneratedMapping = request.state.fileMappings
 			request.deletedFiles.forEach [
 				newSource2GeneratedMapping.deleteSource(it).forEach [
 					if (LOG.isInfoEnabled)
@@ -76,10 +75,10 @@ import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
 					if (resource.validate) {
 						resource.generate(request, newSource2GeneratedMapping)
 					}
-					val old = request.previousState.resourceDescriptions.getResourceDescription(resource.getURI)
+					val old = oldState.resourceDescriptions.getResourceDescription(resource.getURI)
 					return manager.createDelta(old, copiedDescription)
 				]
-			return new Result(request.newState, resolvedDeltas)
+			return new Result(request.state, resolvedDeltas)
 		}
 		
 		def protected boolean validate(Resource resource) {
@@ -152,8 +151,10 @@ import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
 	
 	def Result build(BuildRequest request, IResourceServiceProvider.Registry languages, IResourceClusteringPolicy clusteringPolicy) {
 		val resourceSet = request.resourceSet
+		val oldState = new IndexState(request.state.resourceDescriptions.copy, request.state.fileMappings.copy)
 		val context = new BuildContext(languages
 									, resourceSet
+									, oldState
 									, clusteringPolicy)
 		val builder = provider.get
 		builder.context = context

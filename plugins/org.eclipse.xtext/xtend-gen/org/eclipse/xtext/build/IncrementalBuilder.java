@@ -148,8 +148,8 @@ public class IncrementalBuilder {
     private Indexer indexer;
     
     public IncrementalBuilder.Result launch() {
-      IndexState _newState = this.request.getNewState();
-      final Source2GeneratedMapping newSource2GeneratedMapping = _newState.getFileMappings();
+      IndexState _state = this.request.getState();
+      final Source2GeneratedMapping newSource2GeneratedMapping = _state.getFileMappings();
       List<URI> _deletedFiles = this.request.getDeletedFiles();
       final Procedure1<URI> _function = new Procedure1<URI>() {
         @Override
@@ -223,8 +223,8 @@ public class IncrementalBuilder {
           if (_validate) {
             InternalStatefulIncrementalBuilder.this.generate(resource, InternalStatefulIncrementalBuilder.this.request, newSource2GeneratedMapping);
           }
-          IndexState _previousState = InternalStatefulIncrementalBuilder.this.request.getPreviousState();
-          ResourceDescriptionsData _resourceDescriptions = _previousState.getResourceDescriptions();
+          IndexState _oldState = InternalStatefulIncrementalBuilder.this.context.getOldState();
+          ResourceDescriptionsData _resourceDescriptions = _oldState.getResourceDescriptions();
           URI _uRI_2 = resource.getURI();
           final IResourceDescription old = _resourceDescriptions.getResourceDescription(_uRI_2);
           return manager.createDelta(old, copiedDescription);
@@ -232,8 +232,8 @@ public class IncrementalBuilder {
       };
       Iterable<IResourceDescription.Delta> _executeClustered = this.context.<IResourceDescription.Delta>executeClustered(_map, _function_4);
       Iterables.<IResourceDescription.Delta>addAll(resolvedDeltas, _executeClustered);
-      IndexState _newState_1 = this.request.getNewState();
-      return new IncrementalBuilder.Result(_newState_1, resolvedDeltas);
+      IndexState _state_1 = this.request.getState();
+      return new IncrementalBuilder.Result(_state_1, resolvedDeltas);
     }
     
     protected boolean validate(final Resource resource) {
@@ -392,7 +392,14 @@ public class IncrementalBuilder {
   
   public IncrementalBuilder.Result build(final BuildRequest request, final IResourceServiceProvider.Registry languages, final IResourceClusteringPolicy clusteringPolicy) {
     final XtextResourceSet resourceSet = request.getResourceSet();
-    final BuildContext context = new BuildContext(languages, resourceSet, clusteringPolicy);
+    IndexState _state = request.getState();
+    ResourceDescriptionsData _resourceDescriptions = _state.getResourceDescriptions();
+    ResourceDescriptionsData _copy = _resourceDescriptions.copy();
+    IndexState _state_1 = request.getState();
+    Source2GeneratedMapping _fileMappings = _state_1.getFileMappings();
+    Source2GeneratedMapping _copy_1 = _fileMappings.copy();
+    final IndexState oldState = new IndexState(_copy, _copy_1);
+    final BuildContext context = new BuildContext(languages, resourceSet, oldState, clusteringPolicy);
     final IncrementalBuilder.InternalStatefulIncrementalBuilder builder = this.provider.get();
     builder.context = context;
     builder.request = request;
