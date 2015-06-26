@@ -124,6 +124,7 @@ define([
     'orion/Deferred',
     'orion/keyBinding',
     'orion/editor/textStyler',
+    'xtext/compatibility',
 	'xtext/OrionEditorContext',
 	'xtext/services/LoadResourceService',
 	'xtext/services/RevertResourceService',
@@ -132,9 +133,10 @@ define([
 	'xtext/services/ContentAssistService',
 	'xtext/services/ValidationService',
 	'xtext/services/HoverService',
-	'xtext/services/OccurrencesService',
-], function(jQuery, orionEdit, Deferred, mKeyBinding, mTextStyler, EditorContext, LoadResourceService, RevertResourceService,
-		SaveResourceService, UpdateService, ContentAssistService, ValidationService, HoverService, OccurrencesService) {
+	'xtext/services/OccurrencesService'
+], function(jQuery, orionEdit, Deferred, mKeyBinding, mTextStyler, compatibility, EditorContext,
+		LoadResourceService, RevertResourceService, SaveResourceService, UpdateService,
+		ContentAssistService, ValidationService, HoverService, OccurrencesService) {
 	
 	/**
 	 * Translate an HTML attribute name to a JS option name.
