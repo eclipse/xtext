@@ -58,6 +58,7 @@ import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.util.UriUtil;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
@@ -232,7 +233,7 @@ public class XtendBatchCompiler {
 	 * @since 2.8
 	 */
 	public void setBasePath(String basePath) {
-		this.baseURI = URI.createFileURI(new File(basePath).getAbsolutePath());
+		this.baseURI = UriUtil.createFolderURI(new File(basePath));
 	}
 
 	public void setOutputPath(String outputPath) {
