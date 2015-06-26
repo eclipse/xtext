@@ -6,8 +6,10 @@ Bundle-Version: 2.9.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.web.example.statemachine.ide; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.web.example.statemachine,
- org.eclipse.xtext.ide;visibility:=reexport
+ org.eclipse.xtext.ide;visibility:=reexport,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.9.0"
 Import-Package: org.apache.log4j
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Export-Package: org.eclipse.xtext.web.example.statemachine.ide.contentassist.antlr,
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.eclipse.xtext.web.example.statemachine.ide,
+ org.eclipse.xtext.web.example.statemachine.ide.contentassist.antlr,
  org.eclipse.xtext.web.example.statemachine.ide.contentassist.antlr.internal

@@ -25,6 +25,8 @@ import org.eclipse.xtext.web.server.persistence.FileResourceHandler
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler
 import org.eclipse.xtext.web.server.test.languages.contentassist.StatemachineWebContentProposalProvider
+import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator
+import org.eclipse.xtext.web.example.statemachine.ide.StatemachineSemanticHighlightingCalculator
 
 @Accessors
 @FinalFieldsConstructor
@@ -63,5 +65,7 @@ class StatemachineWebModule extends AbstractGenericModule {
 		StatemachineImageDescriptionProvider
 	}
 	
-
+	def Class<? extends ISemanticHighlightingCalculator> bindSemanticHighlightingCalculator() {
+		StatemachineSemanticHighlightingCalculator
+	}
 }

@@ -36,6 +36,7 @@ import org.eclipse.xtext.web.server.persistence.IServerResourceHandler
 import org.eclipse.xtext.web.server.persistence.ResourcePersistenceService
 import org.eclipse.xtext.web.server.validation.ValidationService
 import org.eclipse.xtext.web.server.formatting.FormattingService
+import org.eclipse.xtext.web.server.syntaxcoloring.HighlightingService
 
 /**
  * The entry class for Xtext service invocations. Use {@link #getService(IRequestData, ISessionStore)}
@@ -97,6 +98,7 @@ class XtextServiceDispatcher {
 	@Inject UpdateDocumentService updateDocumentService
 	@Inject ContentAssistService contentAssistService
 	@Inject ValidationService validationService
+	@Inject HighlightingService highlightingService
 	@Inject HoverService hoverService
 	@Inject OccurrencesService occurrencesService
 	@Inject FormattingService formattingService
@@ -163,6 +165,8 @@ class XtextServiceDispatcher {
 				getContentAssistService(request, sessionStore)
 			case 'hover':
 				getHoverService(request, sessionStore)
+			case 'highlighting':
+				getHighlightingService(request, sessionStore)
 			case 'occurrences':
 				getOccurrencesService(request, sessionStore)
 			case 'format':
@@ -331,6 +335,21 @@ class XtextServiceDispatcher {
 			service = [
 				try {
 					hoverService.getHover(document, offset)
+				} catch (Throwable throwable) {
+					handleError(throwable)
+				}
+			]
+			hasTextInput = request.parameterKeys.contains('fullText')
+		]
+	}
+	
+	protected def getHighlightingService(IRequestData request, ISessionStore sessionStore)
+			throws InvalidRequestException {
+		val document = getDocumentAccess(request, sessionStore)
+		new ServiceDescriptor => [
+			service = [
+				try {
+					highlightingService.calculateHighlighting(document)
 				} catch (Throwable throwable) {
 					handleError(throwable)
 				}

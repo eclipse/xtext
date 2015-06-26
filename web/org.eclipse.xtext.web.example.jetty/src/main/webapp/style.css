@@ -35,7 +35,7 @@ h3 {
 
 .text-container {
 	width: 800px;
-	margin: 40px;	
+	margin: 40px;
 }
 
 .container {
@@ -106,4 +106,14 @@ h3 {
 .output-icon {
 	background-image: url("images/output.gif");
 	background-repeat: no-repeat;
+}
+
+.InputSignal {
+	font-style: italic;
+	color: #2222ff
+}
+
+.OutputSignal {
+	font-style: italic;
+	color: #11aa11
 }
