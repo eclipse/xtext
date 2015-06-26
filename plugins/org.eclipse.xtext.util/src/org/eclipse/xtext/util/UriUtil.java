@@ -7,12 +7,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
+import java.io.File;
+
 import org.eclipse.emf.common.util.URI;
 
 /**
  * @noreference This class is not intended to be referenced by clients.
  */
 public class UriUtil {
+	/**
+	 * A URI is a prefix of another URI if:
+	 * <br/>
+	 * <ul>
+	 * 	<li>Both have the same scheme</li>
+	 * 	<li>The prefix ends with a trailing separator</li>
+	 * 	<li>The segments of both URIs match up to the prefix's length</li>
+	 * </ul>
+	 */
 	public static boolean isPrefixOf(URI prefix, URI uri) {
 		if (prefix.scheme() == null || !prefix.scheme().equals(uri.scheme()))
 			return false;
@@ -20,7 +31,7 @@ public class UriUtil {
 		String[] uriSeg = uri.segments();
 		if (prefixSeg.length == 0 || uriSeg.length == 0)
 			return false;
-		if (!"".equals(prefixSeg[prefixSeg.length - 1])) // this is true when the URI has a trailing slash ("/").
+		if (!prefix.hasTrailingPathSeparator())
 			return false;
 		if (uriSeg.length < prefixSeg.length - 1)
 			return false;
@@ -28,5 +39,19 @@ public class UriUtil {
 			if (!uriSeg[i].equals(prefixSeg[i]))
 				return false;
 		return true;
+	}
+
+	/**
+	 * In contrast to {@link URI#createFileURI(String)}, this appends a trailing path separator. This ensures
+	 * the resulting URI can be used with methods like {@link #isPrefixOf(URI, URI)}, {@link URI#resolve(URI)} and
+	 * {@link URI#deresolve(URI)}
+	 */
+	public static URI createFolderURI(File file) {
+		URI uri = URI.createFileURI(file.getAbsolutePath());
+		if (uri.hasTrailingPathSeparator()) {
+			return uri;
+		} else {
+			return uri.appendSegment("");
+		}
 	}
 }
