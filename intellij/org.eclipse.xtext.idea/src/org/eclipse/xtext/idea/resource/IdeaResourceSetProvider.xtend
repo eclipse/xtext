@@ -29,6 +29,7 @@ import org.eclipse.xtext.util.internal.Log
 
 import static org.eclipse.xtext.idea.resource.IdeaResourceSetProvider.*
 import static org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
+import java.io.FileNotFoundException
 
 @Singleton @Log
 class IdeaResourceSetProvider {
@@ -105,6 +106,9 @@ class IdeaResourceSetProvider {
 				return new ByteArrayInputStream(writtenContents.get(uri))
 			}
 			val virtualFile = getVirtualFile(uri)
+			if (virtualFile == null) {
+				throw new FileNotFoundException("Couldn't find virtual file for "+uri)
+			}
 			val doc = FileDocumentManager.getInstance().getCachedDocument(virtualFile)
 			if (doc != null) {
 				return new ByteArrayInputStream(doc.text.getBytes(virtualFile.charset))

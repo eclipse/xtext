@@ -174,7 +174,15 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
       }
       
       @Override
+      public void beforeFileMovement(final VirtualFileMoveEvent event) {
+        VirtualFile _file = event.getFile();
+        XtextAutoBuilderComponent.this.fileDeleted(_file);
+      }
+      
+      @Override
       public void fileMoved(final VirtualFileMoveEvent event) {
+        VirtualFile _file = event.getFile();
+        XtextAutoBuilderComponent.this.fileAdded(_file);
       }
     }, project);
     MessageBus _messageBus = project.getMessageBus();

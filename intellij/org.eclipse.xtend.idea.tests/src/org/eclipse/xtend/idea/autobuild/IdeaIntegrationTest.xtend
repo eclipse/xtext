@@ -8,10 +8,15 @@
 package org.eclipse.xtend.idea.autobuild
 
 import com.google.common.io.CharStreams
-import java.io.InputStreamReader
-import org.eclipse.xtend.idea.LightXtendTest
-import org.junit.ComparisonFailure
+import com.intellij.openapi.application.Application
 import com.intellij.openapi.application.ApplicationManager
+import java.io.InputStreamReader
+import org.eclipse.emf.common.util.URI
+import org.eclipse.xtend.idea.LightXtendTest
+import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent
+import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
+import org.junit.ComparisonFailure
 
 /**
  */
@@ -339,6 +344,41 @@ class IdeaIntegrationTest extends LightXtendTest {
 			  }
 			}
 		''')
+	}
+	
+	def void testMoveFile() {
+		val xtendFile = myFixture.addFileToProject('otherPackage/Foo.xtend', '''
+			package otherPackage
+			
+			import mypackage.Bar
+			
+			class Foo {
+			
+				def void callToBar(Bar bar) {
+					bar.doStuff()
+				}
+			
+			}
+		''')
+		
+		val vf = xtendFile.virtualFile
+		val before = URI.createURI("temp:///src/otherPackage/Foo.xtend")
+		val after = URI.createURI("temp:///src/Foo.xtend")
+		assertNull(index.getResourceDescription(after))
+		assertNotNull(index.getResourceDescription(before))
+		ApplicationManager.application.runWriteAction [
+			vf.move(null, vf.parent.parent)
+		]
+		assertNotNull(index.getResourceDescription(after))
+		assertNull(index.getResourceDescription(before))
+	}
+	
+	def getIndex() {
+		val builder = project.getComponent(XtextAutoBuilderComponent)
+		val rs = new XtextResourceSet()
+		builder.installCopyOfResourceDescriptions(rs)
+		val index = ChunkedResourceDescriptions.findInEmfObject(rs)
+		return index
 	}
 	
 	def void assertFileContents(String path, CharSequence sequence) {

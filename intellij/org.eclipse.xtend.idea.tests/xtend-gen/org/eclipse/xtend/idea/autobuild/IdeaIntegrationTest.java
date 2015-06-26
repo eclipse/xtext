@@ -10,14 +10,20 @@ package org.eclipse.xtend.idea.autobuild;
 import com.google.common.io.CharStreams;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import junit.framework.TestCase;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent;
+import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.ComparisonFailure;
 
@@ -632,6 +638,70 @@ public class IdeaIntegrationTest extends LightXtendTest {
     _builder_1.append("}");
     _builder_1.newLine();
     this.assertFileContents("xtend-gen/otherPackage/Foo.java", _builder_1);
+  }
+  
+  public void testMoveFile() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package otherPackage");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import mypackage.Bar");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void callToBar(Bar bar) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("bar.doStuff()");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final PsiFile xtendFile = this.myFixture.addFileToProject("otherPackage/Foo.xtend", _builder.toString());
+    final VirtualFile vf = xtendFile.getVirtualFile();
+    final URI before = URI.createURI("temp:///src/otherPackage/Foo.xtend");
+    final URI after = URI.createURI("temp:///src/Foo.xtend");
+    ChunkedResourceDescriptions _index = this.getIndex();
+    IResourceDescription _resourceDescription = _index.getResourceDescription(after);
+    TestCase.assertNull(_resourceDescription);
+    ChunkedResourceDescriptions _index_1 = this.getIndex();
+    IResourceDescription _resourceDescription_1 = _index_1.getResourceDescription(before);
+    TestCase.assertNotNull(_resourceDescription_1);
+    Application _application = ApplicationManager.getApplication();
+    final Runnable _function = new Runnable() {
+      @Override
+      public void run() {
+        try {
+          VirtualFile _parent = vf.getParent();
+          VirtualFile _parent_1 = _parent.getParent();
+          vf.move(null, _parent_1);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
+        }
+      }
+    };
+    _application.runWriteAction(_function);
+    ChunkedResourceDescriptions _index_2 = this.getIndex();
+    IResourceDescription _resourceDescription_2 = _index_2.getResourceDescription(after);
+    TestCase.assertNotNull(_resourceDescription_2);
+    ChunkedResourceDescriptions _index_3 = this.getIndex();
+    IResourceDescription _resourceDescription_3 = _index_3.getResourceDescription(before);
+    TestCase.assertNull(_resourceDescription_3);
+  }
+  
+  public ChunkedResourceDescriptions getIndex() {
+    Project _project = this.getProject();
+    final XtextAutoBuilderComponent builder = _project.<XtextAutoBuilderComponent>getComponent(XtextAutoBuilderComponent.class);
+    final XtextResourceSet rs = new XtextResourceSet();
+    builder.installCopyOfResourceDescriptions(rs);
+    final ChunkedResourceDescriptions index = ChunkedResourceDescriptions.findInEmfObject(rs);
+    return index;
   }
   
   public void assertFileContents(final String path, final CharSequence sequence) {
