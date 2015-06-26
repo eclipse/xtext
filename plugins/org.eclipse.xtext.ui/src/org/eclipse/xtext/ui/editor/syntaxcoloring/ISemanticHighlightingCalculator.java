@@ -16,7 +16,9 @@ import com.google.inject.ImplementedBy;
  * the mapping from ranges in the input to the appropriate highlighting style.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @deprecated use org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator instead.
  */
+@Deprecated
 @ImplementedBy(DefaultSemanticHighlightingCalculator.class)
 public interface ISemanticHighlightingCalculator {
 
@@ -26,4 +28,45 @@ public interface ISemanticHighlightingCalculator {
 	 */
 	void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor);
 	
+	/**
+	 * @since 2.9
+	 */
+	class NewToOldDelegate implements ISemanticHighlightingCalculator {
+
+		private org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator delegate;
+
+		public NewToOldDelegate(org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator delegate) {
+			this.delegate = delegate;
+		}
+		
+		@Override
+		public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
+			delegate.provideHighlightingFor(resource, acceptor);
+		}
+		
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	static class OldToNewDelegate implements org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator {
+
+		private ISemanticHighlightingCalculator delegate;
+		
+		public OldToNewDelegate(ISemanticHighlightingCalculator delegate) {
+			this.delegate = delegate;
+		}
+		
+		@Override
+		public void provideHighlightingFor(XtextResource resource,
+				org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor) {
+			delegate.provideHighlightingFor(resource, cast(acceptor));
+		}
+		
+		private IHighlightedPositionAcceptor cast(org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor) {
+			return (IHighlightedPositionAcceptor) acceptor;
+		}
+		
+	}
+
 }

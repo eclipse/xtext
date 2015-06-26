@@ -7,125 +7,150 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.syntaxcoloring;
 
-import java.util.List;
-
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
-import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.tasks.ITaskFinder;
-import org.eclipse.xtext.tasks.Task;
-import org.eclipse.xtext.util.ITextRegion;
-
-import com.google.inject.Inject;
 
 /**
  * @author Stefan Oehme - Initial contribution and API
  * @since 2.6
+ * @deprecated Use org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator instead.
  */
-public class DefaultSemanticHighlightingCalculator implements ISemanticHighlightingCalculator {
-
-	@Inject
-	private ITaskFinder taskFinder;
-
+@Deprecated
+public class DefaultSemanticHighlightingCalculator extends org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator implements ISemanticHighlightingCalculator {
+	
+	/**
+	 * @since 2.9
+	 */
+	@Override
+	public void provideHighlightingFor(XtextResource resource, org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor) {
+		provideHighlightingFor(resource, cast(acceptor));
+	}
+	
+	/**
+	 * @since 2.9
+	 */
 	@Override
 	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		if (resource == null)
-			return;
-		IParseResult parseResult = resource.getParseResult();
-		if (parseResult == null || parseResult.getRootASTElement() == null)
-			return;
-		doProvideHighlightingFor(resource, acceptor);
+		super.provideHighlightingFor(resource, acceptor);
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	@Override
+	protected void doProvideHighlightingFor(XtextResource resource, org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor) {
+		doProvideHighlightingFor(resource, cast(acceptor));
 	}
 
 	/**
-	 * <p>
-	 * Actual implementation of the semantic highlighting calculation. It is ensured, that the given resource is not
-	 * <code>null</code> and refers to an initialized parse result.
-	 * </p>
-	 * <p>
-	 * By default this will visit the elements in the resource recursively and call
-	 * {@link #highlightElement(EObject, IHighlightedPositionAcceptor)} for each of them. As the last step, tasks will
-	 * be highlighted.
-	 * </p>
-	 * <p>
-	 * Clients can override this method if the default recursive approach does not fit their use case
-	 * </p>
-	 * 
-	 * @param resource
-	 *            a valid to-be-processed resource. Is never <code>null</code>.
-	 * @param acceptor
-	 *            the acceptor. Is never <code>null</code>.
+	 * @since 2.9
 	 */
+	@Override
+	protected void searchAndHighlightElements(XtextResource resource, org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor) {
+		searchAndHighlightElements(resource, cast(acceptor));
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	@Override
+	protected void highlightElementRecursively(EObject element, org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor) {
+		highlightElementRecursively(element, cast(acceptor));
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	@Override
+	protected boolean highlightElement(EObject object, org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor) {
+		return highlightElement(object, cast(acceptor));
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	@Override
+	protected void highlightTasks(XtextResource resource, org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor) {
+		highlightTasks(resource, cast(acceptor));
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	@Override
+	protected void highlightFeature(org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor, EObject object, EStructuralFeature feature,
+			String... styleIds) {
+		highlightFeature(cast(acceptor), object, feature, styleIds);
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	@Override
+	protected void highlightNode(org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor, INode node, String... styleIds) {
+		highlightNode(cast(acceptor), node, styleIds);
+	}
+
+	private IHighlightedPositionAcceptor cast(org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor) {
+		return (IHighlightedPositionAcceptor) acceptor;
+	}
+
+	/**
+	 * @deprecated Use org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator instead.
+	 */
+	@Deprecated
 	protected void doProvideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		searchAndHighlightElements(resource, acceptor);
-		highlightTasks(resource, acceptor);
+		super.doProvideHighlightingFor(resource, acceptor);
 	}
 
+	/**
+	 * @deprecated Use org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator instead.
+	 */
+	@Deprecated
 	protected void searchAndHighlightElements(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		IParseResult parseResult = resource.getParseResult();
-		if (parseResult == null)
-			throw new IllegalStateException("resource#parseResult may not be null");
-		EObject element = parseResult.getRootASTElement();
-		highlightElementRecursively(element, acceptor);
+		super.searchAndHighlightElements(resource, acceptor);
 	}
 
+	/**
+	 * @deprecated Use org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator instead.
+	 */
+	@Deprecated
 	protected void highlightElementRecursively(EObject element, IHighlightedPositionAcceptor acceptor) {
-		TreeIterator<EObject> iterator = EcoreUtil2.eAll(element);
-		while (iterator.hasNext()) {
-			EObject object = iterator.next();
-			if (highlightElement(object, acceptor)) {
-				iterator.prune();
-			}
-		}
+		super.highlightElementRecursively(element, acceptor);
 	}
 
 	/**
-	 * @return true to skip the children of this element false otherwise
+	 * @deprecated Use org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator instead.
 	 */
+	@Deprecated
 	protected boolean highlightElement(EObject object, IHighlightedPositionAcceptor acceptor) {
-		return false;
-	}
-
-	protected void highlightTasks(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		List<Task> tasks = taskFinder.findTasks(resource);
-		for (Task task : tasks) {
-			acceptor.addPosition(task.getOffset(), task.getTagLength(), HighlightingStyles.TASK_ID);
-		}
+		return super.highlightElement(object, acceptor);
 	}
 
 	/**
-	 * Highlights an object at the position of the given {@link EStructuralFeature}
+	 * @deprecated Use org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator instead.
 	 */
+	@Deprecated
+	protected void highlightTasks(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
+		super.highlightTasks(resource, acceptor);
+	}
+
+	/**
+	 * @deprecated Use org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator instead.
+	 */
+	@Deprecated
 	protected void highlightFeature(IHighlightedPositionAcceptor acceptor, EObject object, EStructuralFeature feature,
 			String... styleIds) {
-		List<INode> children = NodeModelUtils.findNodesForFeature(object, feature);
-		if (children.size() > 0)
-			highlightNode(acceptor, children.get(0), styleIds);
+		super.highlightFeature(acceptor, object, feature, styleIds);
 	}
 
 	/**
-	 * Highlights the non-hidden parts of {@code node} with the styles given by the {@code styleIds}
+	 * @deprecated Use org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator instead.
 	 */
+	@Deprecated
 	protected void highlightNode(IHighlightedPositionAcceptor acceptor, INode node, String... styleIds) {
-		if (node == null)
-			return;
-		if (node instanceof ILeafNode) {
-			ITextRegion textRegion = node.getTextRegion();
-			acceptor.addPosition(textRegion.getOffset(), textRegion.getLength(), styleIds);
-		} else {
-			for (ILeafNode leaf : node.getLeafNodes()) {
-				if (!leaf.isHidden()) {
-					ITextRegion leafRegion = leaf.getTextRegion();
-					acceptor.addPosition(leafRegion.getOffset(), leafRegion.getLength(), styleIds);
-				}
-			}
-		}
+		super.highlightNode(acceptor, node, styleIds);
 	}
 }
