@@ -12,8 +12,8 @@ import java.io.StringReader
 import org.antlr.runtime.Token
 import org.eclipse.xtend.core.parser.antlr.internal.FlexerFactory
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.TemplateBodyHighlighter
-import org.eclipse.xtext.ide.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper
-import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor
+import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper
+import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor
 
 import static extension org.eclipse.xtext.parser.antlr.TokenTool.*
 
