@@ -11,6 +11,7 @@ import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Maps.*;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -124,7 +125,9 @@ public class CombinedJvmJdtRenameProcessor extends RenameElementProcessor {
 		RefactoringStatus status = super.checkFinalConditions(monitor.newChild(1), context);
 		ResourceSet resourceSet = getResourceSet(getRenameElementContext());
 		getRenameArguments().getRenameStrategy().applyDeclarationChange(getNewName(), resourceSet);
-		for (Map.Entry<URI, JavaRenameProcessor> jvmElement2jdtRefactoring : jvmElements2jdtProcessors.entrySet()) {
+		for (Iterator<Map.Entry<URI, JavaRenameProcessor>> entryIterator = jvmElements2jdtProcessors.entrySet().iterator();
+				entryIterator.hasNext();) {
+			Map.Entry<URI, JavaRenameProcessor> jvmElement2jdtRefactoring = entryIterator.next();
 			if (monitor.isCanceled()) {
 				throw new OperationCanceledException();
 			}
@@ -134,8 +137,13 @@ public class CombinedJvmJdtRenameProcessor extends RenameElementProcessor {
 				status.addError("Cannot find inferred JVM element after refactoring.");
 			} else {
 				JavaRenameProcessor jdtRefactoring = jvmElement2jdtRefactoring.getValue();
-				jdtRefactoring.setNewElementName(((JvmIdentifiableElement) renamedJvmElement).getSimpleName());
-				status.merge(jdtRefactoring.checkFinalConditions(monitor.newChild(1), context));
+				String newName = ((JvmIdentifiableElement) renamedJvmElement).getSimpleName();
+				if(jdtRefactoring.getCurrentElementName().equals(newName)) {
+					entryIterator.remove();
+				} else {
+					jdtRefactoring.setNewElementName(newName);
+					status.merge(jdtRefactoring.checkFinalConditions(monitor.newChild(1), context));
+				}
 			}
 		}
 		getRenameArguments().getRenameStrategy().revertDeclarationChange(resourceSet);
