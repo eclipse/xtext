@@ -19,6 +19,24 @@ requirejs.config({
 
 suite('Update', function() {
 	
+	test('should return the new state identifier', function(done) {
+		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
+			xtext.testEditor({doneCallback: done})
+				.setText('foo')
+				.invokeService('update')
+				.checkRequest(function(url, settings) {
+					assert.equal('test://xtext-service/update', url);
+					assert.equal('PUT', settings.type);
+					assert.equal('0', settings.data.requiredStateId);
+				})
+				.respond({stateId: '1'})
+				.checkResult(function(editorContext, result) {
+					assert.equal('1', result.stateId);
+				})
+				.done();
+		});
+	});
+	
 	test('should update the known server state', function(done) {
 		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
 			xtext.testEditor({enableValidationService: false})

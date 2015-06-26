@@ -19,6 +19,22 @@ requirejs.config({
 
 suite('Persistence', function() {
 	
+	test('[load] should return the client text', function(done) {
+		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
+			xtext.testEditor({resourceId: 'test.mydsl', doneCallback: done})
+				.invokeService('load')
+				.checkRequest(function(url, settings) {
+					assert.equal('test://xtext-service/load?resource=test.mydsl', url);
+					assert.equal('GET', settings.type);
+				})
+				.respond({fullText: 'foo', dirty: false, stateId: '1'})
+				.checkResult(function(editorContext, result) {
+					assert.equal('foo', result.fullText);
+				})
+				.done();
+		});
+	});
+	
 	test('[load] should update the client text', function(done) {
 		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
 			xtext.testEditor({resourceId: 'test.mydsl'})
@@ -37,6 +53,22 @@ suite('Persistence', function() {
 					assert.equal('GET', settings.type);
 				})
 				.respond({fullText: 'foo', dirty: false, stateId: '1'});
+		});
+	});
+	
+	test('[revert] should return the client text', function(done) {
+		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
+			xtext.testEditor({resourceId: 'test.mydsl', doneCallback: done})
+				.invokeService('revert')
+				.checkRequest(function(url, settings) {
+					assert.equal('test://xtext-service/revert?resource=test.mydsl', url);
+					assert.equal('POST', settings.type);
+				})
+				.respond({fullText: 'foo', dirty: false, stateId: '1'})
+				.checkResult(function(editorContext, result) {
+					assert.equal('foo', result.fullText);
+				})
+				.done();
 		});
 	});
 	
