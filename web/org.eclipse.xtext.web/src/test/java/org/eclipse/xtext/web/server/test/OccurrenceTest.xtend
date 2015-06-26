@@ -10,7 +10,7 @@ class OccurrenceTest extends AbstractWebServerTest {
 		val occurrences = getService(#{
 				'requestType' -> 'occurrences',
 				'fullText' -> content.replace('#', ''),
-				'offset' -> offset.toString
+				'caretOffset' -> offset.toString
 			})
 		assertTrue(occurrences.hasTextInput)
 		occurrences.service.apply() as OccurrencesResult
