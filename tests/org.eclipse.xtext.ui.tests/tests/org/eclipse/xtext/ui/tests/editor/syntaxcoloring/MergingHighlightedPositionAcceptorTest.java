@@ -10,8 +10,8 @@ package org.eclipse.xtext.ui.tests.editor.syntaxcoloring;
 import java.util.Arrays;
 import java.util.List;
 
-import org.eclipse.xtext.ui.editor.syntaxcoloring.LightweightPosition;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.MergingHighlightedPositionAcceptor;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.LightweightPosition;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.MergingHighlightedPositionAcceptor;
 import org.eclipse.xtext.util.Strings;
 import org.junit.After;
 import org.junit.Assert;
@@ -23,11 +23,19 @@ import org.junit.Test;
  */
 public class MergingHighlightedPositionAcceptorTest extends Assert {
 
-	private MergingHighlightedPositionAcceptor acceptor;
+	protected MergingHighlightedPositionAcceptor acceptor;
 
 	@Before
 	public void setUp() throws Exception {
-		acceptor = new MergingHighlightedPositionAcceptor(null);
+		acceptor = createAcceptor();
+	}
+	
+	public MergingHighlightedPositionAcceptor getAcceptor() {
+		return acceptor;
+	}
+
+	protected MergingHighlightedPositionAcceptor createAcceptor() {
+		return new MergingHighlightedPositionAcceptor(null);
 	}
 	
 	@After
@@ -37,7 +45,7 @@ public class MergingHighlightedPositionAcceptorTest extends Assert {
 	
 	@Test public void testAddPosition_01() {
 		acceptor.addPosition(0, 1, "1");
-		List<LightweightPosition> positions = acceptor.getPositions();
+		List<? extends LightweightPosition> positions = acceptor.getPositions();
 		assertEquals(1, positions.size());
 		checkPosition(positions.get(0), 0, 1, 0, "1");
 		checkPosition(positions.get(0), -1, -1, -1, "1");
@@ -412,7 +420,7 @@ public class MergingHighlightedPositionAcceptorTest extends Assert {
 		checkPosition(positions.get(7), 129, 12, 3, "1");
 	}
 	
-	private void checkPosition(LightweightPosition position, int offset, int length, int timestamp, String... ids) {
+	protected void checkPosition(LightweightPosition position, int offset, int length, int timestamp, String... ids) {
 		assertNotNull(position);
 		if (timestamp >= 0)
 			assertEquals("timestamp", timestamp, position.getTimestamp());

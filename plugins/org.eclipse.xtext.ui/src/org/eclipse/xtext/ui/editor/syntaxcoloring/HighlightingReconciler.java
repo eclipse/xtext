@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+. * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -33,7 +33,6 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.IXtextModelListener;
 import org.eclipse.xtext.ui.editor.model.IXtextModelListenerExtension;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
-import org.eclipse.xtext.ui.editor.reconciler.XtextReconcilerDebugger;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 
@@ -45,10 +44,14 @@ import com.google.inject.Inject;
  * Initially copied from org.eclipse.jdt.internal.ui.javaeditor.SemanticHighlightingReconciler
  * @author Sebastian Zarnekow
  */
+@SuppressWarnings("deprecation")
 public class HighlightingReconciler implements ITextInputListener, IXtextModelListener, IXtextModelListenerExtension, IHighlightedPositionAcceptor {
 
 	@Inject(optional=true)
-	private ISemanticHighlightingCalculator calculator;
+	private ISemanticHighlightingCalculator oldCalculator;
+	
+	@Inject(optional=true)
+	private org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator newCalculator;
 	
 	@Inject
 	private ITextAttributeProvider attributeProvider;
@@ -130,7 +133,7 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 	}
 
 	/**
-	 * Reconcile positions using {@link MergingHighlightedPositionAcceptor}
+	 * Reconcile positions using {@link org.eclipse.xtext.ide.editor.syntaxcoloring.MergingHighlightedPositionAcceptor}
 	 * 
 	 * @param resource
 	 *            XtextResource
@@ -138,7 +141,7 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 	private void reconcilePositions(XtextResource resource) {
 		//		for (int i= 0, n= subtrees.length; i < n; i++)
 		//			subtrees[i].accept(fCollector);
-		MergingHighlightedPositionAcceptor acceptor = new MergingHighlightedPositionAcceptor(calculator);
+		MergingHighlightedPositionAcceptor acceptor = new MergingHighlightedPositionAcceptor(getEffectiveCalculator());
 		acceptor.provideHighlightingFor(resource, this);
 //		calculator.provideHighlightingFor(resource, this);
 		List<AttributedPosition> oldPositions = removedPositions;
@@ -149,6 +152,16 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 				newPositions.add(current);
 		}
 		removedPositions = newPositions;
+	}
+	
+	private ISemanticHighlightingCalculator getEffectiveCalculator() {
+		if (oldCalculator != null) {
+			return oldCalculator;
+		}
+		if (newCalculator != null) {
+			return new ISemanticHighlightingCalculator.NewToOldDelegate(newCalculator);
+		}
+		throw new IllegalStateException("No calculator bound");
 	}
 	
 	/**
@@ -259,7 +272,7 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 		this.presenter = presenter;
 		this.editor = editor;
 		this.sourceViewer = sourceViewer;
-		if (calculator != null) {
+		if (oldCalculator != null || newCalculator != null) {
 			if(editor == null){
 				((IXtextDocument) sourceViewer.getDocument()).addModelListener(this);
 			} else if (editor.getDocument() != null)
@@ -278,7 +291,7 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 			presenter.setCanceled(true);
 
 		if (sourceViewer.getDocument() != null) {
-			if (calculator != null) {
+			if (oldCalculator != null || newCalculator != null) {
 				XtextDocument document = (XtextDocument) sourceViewer.getDocument();
 				document.removeModelListener(this);
 				sourceViewer.removeTextInputListener(this);
@@ -313,7 +326,7 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 	 * Refreshes the highlighting.
 	 */
 	public void refresh() {
-		if (calculator != null) {
+		if (oldCalculator != null || newCalculator != null) {
 			new Job("calculating highlighting") {
 				@Override
 				protected IStatus run(IProgressMonitor monitor) {
@@ -412,21 +425,13 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 			throw new OperationCanceledException();
 	}
 
-	/**
-	 * @deprecated Moved to {@link XtextReconcilerDebugger} 
-	 * @noreference 
-	 * @since 2.4
-	 */
 	@Deprecated
-	protected boolean isModelInSyncWithDocument(XtextResource resource) {
-		return true;
-	}
-
 	public void setCalculator(ISemanticHighlightingCalculator calculator) {
-		this.calculator = calculator;
+		this.oldCalculator = calculator;
 	}
 
+	@Deprecated
 	public ISemanticHighlightingCalculator getCalculator() {
-		return calculator;
+		return oldCalculator;
 	}
 }
