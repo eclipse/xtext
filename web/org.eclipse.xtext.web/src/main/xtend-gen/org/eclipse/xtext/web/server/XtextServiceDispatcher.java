@@ -48,6 +48,7 @@ import org.eclipse.xtext.web.server.occurrences.OccurrencesService;
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler;
 import org.eclipse.xtext.web.server.persistence.ResourceContentResult;
 import org.eclipse.xtext.web.server.persistence.ResourcePersistenceService;
+import org.eclipse.xtext.web.server.syntaxcoloring.HighlightingService;
 import org.eclipse.xtext.web.server.validation.ValidationService;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
@@ -182,6 +183,9 @@ public class XtextServiceDispatcher {
   
   @Inject
   private ValidationService validationService;
+  
+  @Inject
+  private HighlightingService highlightingService;
   
   @Inject
   private HoverService hoverService;
@@ -336,6 +340,12 @@ public class XtextServiceDispatcher {
       if (Objects.equal(requestType, "hover")) {
         _matched=true;
         _switchResult = this.getHoverService(request, sessionStore);
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(requestType, "highlighting")) {
+        _matched=true;
+        _switchResult = this.getHighlightingService(request, sessionStore);
       }
     }
     if (!_matched) {
@@ -682,6 +692,42 @@ public class XtextServiceDispatcher {
               IServiceResult _xtrycatchfinallyexpression = null;
               try {
                 _xtrycatchfinallyexpression = XtextServiceDispatcher.this.hoverService.getHover(document, offset);
+              } catch (final Throwable _t) {
+                if (_t instanceof Throwable) {
+                  final Throwable throwable = (Throwable)_t;
+                  _xtrycatchfinallyexpression = XtextServiceDispatcher.this.handleError(it, throwable);
+                } else {
+                  throw Exceptions.sneakyThrow(_t);
+                }
+              }
+              return _xtrycatchfinallyexpression;
+            }
+          };
+          it.service = _function;
+          Set<String> _parameterKeys = request.getParameterKeys();
+          boolean _contains = _parameterKeys.contains("fullText");
+          it.hasTextInput = _contains;
+        }
+      };
+      _xblockexpression = ObjectExtensions.<XtextServiceDispatcher.ServiceDescriptor>operator_doubleArrow(_serviceDescriptor, _function);
+    }
+    return _xblockexpression;
+  }
+  
+  protected XtextServiceDispatcher.ServiceDescriptor getHighlightingService(final IRequestData request, final ISessionStore sessionStore) throws InvalidRequestException {
+    XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
+    {
+      final XtextWebDocumentAccess document = this.getDocumentAccess(request, sessionStore);
+      XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
+      final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
+        @Override
+        public void apply(final XtextServiceDispatcher.ServiceDescriptor it) {
+          final Function0<IServiceResult> _function = new Function0<IServiceResult>() {
+            @Override
+            public IServiceResult apply() {
+              IServiceResult _xtrycatchfinallyexpression = null;
+              try {
+                _xtrycatchfinallyexpression = XtextServiceDispatcher.this.highlightingService.calculateHighlighting(document);
               } catch (final Throwable _t) {
                 if (_t instanceof Throwable) {
                   final Throwable throwable = (Throwable)_t;
