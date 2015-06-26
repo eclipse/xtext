@@ -19,7 +19,7 @@ requirejs.config({
 
 suite('Validation', function() {
 	
-	test('should display the problem markers sent by the server', function(done) {
+	test('should return the issues sent by the server', function(done) {
 		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
 			xtext.testEditor({doneCallback: done})
 				.setText('foo')

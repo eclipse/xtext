@@ -204,6 +204,8 @@ define([
 				return saveResourceService.saveResource(editorContext, optionsCopy);
 			else if (service === 'revert' && revertResourceService)
 				return revertResourceService.revertResource(editorContext, optionsCopy);
+			else if (service === 'update' && updateService)
+				return updateService.update(editorContext, optionsCopy);
 			else if (service === 'validation' && validationService)
 				return validationService.computeProblems(editorContext, optionsCopy);
 			else if (service === 'content-assist' && contentAssistService) {
