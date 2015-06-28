@@ -1686,4 +1686,14 @@ class XbaseFormatterTest {
 		]
 	}
 
+	@Test def formatPostfix() {
+		assertFormattedExpression [
+			expectation = '''
+				val i = j++
+			'''
+			toBeFormatted = '''
+				val i = j ++
+			'''
+		]
+	}
 }
