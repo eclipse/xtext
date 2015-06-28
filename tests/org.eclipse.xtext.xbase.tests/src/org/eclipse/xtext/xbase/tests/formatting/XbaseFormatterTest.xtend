@@ -1675,4 +1675,15 @@ class XbaseFormatterTest {
 		]
 	}
 
+	@Test def formatCast() {
+		assertFormattedExpression [
+			expectation = '''
+				"x" as String
+			'''
+			toBeFormatted = '''
+				"x"  as  String
+			'''
+		]
+	}
+
 }
