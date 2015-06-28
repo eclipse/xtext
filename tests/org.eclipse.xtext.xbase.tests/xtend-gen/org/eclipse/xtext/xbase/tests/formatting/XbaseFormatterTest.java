@@ -3153,4 +3153,40 @@ public class XbaseFormatterTest {
     };
     this._xbaseFormatterTester.assertFormattedExpression(_function);
   }
+  
+  @Test
+  public void formatCast() {
+    final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
+      public void apply(final FormatterTestRequest it) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("\"x\" as String");
+        _builder.newLine();
+        it.setExpectation(_builder);
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("\"x\"  as  String");
+        _builder_1.newLine();
+        it.setToBeFormatted(_builder_1);
+      }
+    };
+    this._xbaseFormatterTester.assertFormattedExpression(_function);
+  }
+  
+  @Test
+  public void formatPostfix() {
+    final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
+      public void apply(final FormatterTestRequest it) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("val i = j++");
+        _builder.newLine();
+        it.setExpectation(_builder);
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("val i = j ++");
+        _builder_1.newLine();
+        it.setToBeFormatted(_builder_1);
+      }
+    };
+    this._xbaseFormatterTester.assertFormattedExpression(_function);
+  }
 }
