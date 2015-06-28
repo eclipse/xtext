@@ -53,9 +53,12 @@ import org.eclipse.xtext.xbase.services.XbaseGrammarAccess
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
 import static org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys.*
 import org.eclipse.xtext.xbase.XInstanceOfExpression
+import org.eclipse.xtext.xbase.XCastedExpression
+import org.eclipse.xtext.xbase.XPostfixOperation
 
 /**
  * @author Moritz Eysholdt - Initial implementation and API
+ * @author Lorenzo Bettini - https://bugs.eclipse.org/bugs/show_bug.cgi?id=471239
  */
 class XbaseFormatter extends XtypeFormatter {
 
@@ -659,6 +662,17 @@ class XbaseFormatter extends XtypeFormatter {
 		expr.regionForKeyword("instanceof").surround[oneSpace]
 		expr.expression.format(doc)
 		expr.type.format(doc)
+	}
+
+	def dispatch void format(XCastedExpression expr, extension IFormattableDocument doc) {
+		expr.regionForKeyword("as").surround[oneSpace]
+		expr.target.format(doc)
+		expr.type.format(doc)
+	}
+
+	def dispatch void format(XPostfixOperation expr, extension IFormattableDocument doc) {
+		expr.regionForFeature(XABSTRACT_FEATURE_CALL__FEATURE).prepend[noSpace]
+		expr.operand.format(doc)
 	}
 
 	def protected void formatExpressionsMultiline(Collection<? extends XExpression> expressions, ISemanticRegion open,
