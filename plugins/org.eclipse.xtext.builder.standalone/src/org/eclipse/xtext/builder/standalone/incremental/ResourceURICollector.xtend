@@ -9,7 +9,6 @@ package org.eclipse.xtext.builder.standalone.incremental
 
 import java.io.File
 import java.io.IOException
-import java.net.URLClassLoader
 import java.util.Set
 import java.util.jar.JarFile
 import java.util.jar.Manifest
@@ -62,7 +61,7 @@ import org.eclipse.xtext.util.internal.Log
 					name = name.substring(0, indexOf);
 				if (EcorePlugin.getPlatformResourceMap().containsKey(name))
 					return;
-				val String path = "archive:" + file.asURI + "!/";
+				val String path = "archive:" + URI.createFileURI(file.absolutePath) + "!/";
 				EcorePlugin.getPlatformResourceMap().put(name, URI.createURI(path));
 			}
 		} catch (ZipException e) {
@@ -77,16 +76,5 @@ import org.eclipse.xtext.util.internal.Log
 				LOG.error(jarFile, e);
 			}
 		}
-	}
-
-	/**
-	 * Unfortunately, {@link File#toURI} does not append '/' to directories, making it useless for the {@link URLClassLoader}.
-	 */
-	static def asURI(File file) {
-		val uri = URI.createFileURI(file.canonicalFile.absolutePath)
-		if(file.isDirectory)
-			uri.appendSegment('')
-		else 
-			uri
 	}
 }
