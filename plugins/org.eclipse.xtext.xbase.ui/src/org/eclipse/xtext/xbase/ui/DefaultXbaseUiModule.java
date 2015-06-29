@@ -55,7 +55,7 @@ import org.eclipse.xtext.xbase.validation.UniqueClassNameValidator;
 
 /**
  * A base module that contains default UI bindings for all Xbase inheriting languages.
- * 
+ *
  * @since 2.8
  * @author Sven Efftinge - Initial contribution and API
  */
@@ -126,15 +126,15 @@ public class DefaultXbaseUiModule extends DefaultCommonTypesUiModule {
 	public Class<? extends AbstractFileSystemAccess2> bindAbstractFileSystemAccess2() {
 		return EclipseResourceFileSystemAccess2.class;
 	}
-	
+
 	public Class<? extends EclipseResourceFileSystemAccess2> bindEclipseResourceFileSystemAccess2() {
 		return JDTAwareEclipseResourceFileSystemAccess2.class;
 	}
-	
+
 	public Class<? extends EclipseSourceFolderProvider> bindEclipseSourceFolderProvider() {
 		return JDTAwareSourceFolderProvider.class;
 	}
-	
+
 	@SingletonBinding(eager = true)
 	public Class<? extends UniqueClassNameValidator> bindUniqueClassNameValidator() {
 		return ProjectAwareUniqueClassNameValidator.class;
@@ -143,19 +143,19 @@ public class DefaultXbaseUiModule extends DefaultCommonTypesUiModule {
 	public Class<? extends FoldingActionContributor> bindFoldingActionContributor() {
 		return XbaseFoldingActionContributor.class;
 	}
-	
+
 	public Class<? extends BuilderConfigurationBlock> bindBuilderConfigurationBlock() {
 		return XbaseBuilderConfigurationBlock.class;
 	}
-	
+
 	public Class<? extends IGeneratorConfigProvider> bindIGeneratorConfigProvider() {
 		return EclipseGeneratorConfigProvider.class;
 	}
-	
+
 	public Class<? extends BuilderPreferenceAccess.Initializer> bindBuilderPreferenceAccess$Initializer() {
 		return XbaseBuilderPreferenceAccess.Initializer.class;
 	}
-	
+
 
 	/**
 	 * @since 2.9
@@ -163,14 +163,14 @@ public class DefaultXbaseUiModule extends DefaultCommonTypesUiModule {
 	public Class<? extends IWorkspaceConfigProvider> bindWorkspaceConfigProvider() {
 		return JdtWorkspaceConfigProvider.class;
 	}
-	
+
 	/**
 	 * @since 2.9
 	 */
 	public Class<? extends EclipseWorkspaceConfigProvider> bindEclipseWorkspaceConfigProvider() {
 		return JdtWorkspaceConfigProvider.class;
 	}
-	
+
 	/**
 	 * @since 2.9
 	 */
