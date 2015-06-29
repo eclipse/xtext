@@ -32,6 +32,7 @@ import org.eclipse.xtext.build.Indexer;
 import org.eclipse.xtext.build.Source2GeneratedMapping;
 import org.eclipse.xtext.generator.GeneratorDelegate;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
+import org.eclipse.xtext.generator.IShouldGenerate;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.URIBasedFileSystemAccess;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -212,15 +213,23 @@ public class IncrementalBuilder {
           resource.getContents();
           EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl);
           URI _uRI = resource.getURI();
-          IResourceServiceProvider _resourceServiceProvider = InternalStatefulIncrementalBuilder.this.context.getResourceServiceProvider(_uRI);
-          final IResourceDescription.Manager manager = _resourceServiceProvider.getResourceDescriptionManager();
+          final IResourceServiceProvider serviceProvider = InternalStatefulIncrementalBuilder.this.context.getResourceServiceProvider(_uRI);
+          final IResourceDescription.Manager manager = serviceProvider.getResourceDescriptionManager();
           final IResourceDescription description = manager.getResourceDescription(resource);
           final SerializableResourceDescription copiedDescription = SerializableResourceDescription.createCopy(description);
           ResourceDescriptionsData _newIndex = result.getNewIndex();
           URI _uRI_1 = resource.getURI();
           _newIndex.addDescription(_uRI_1, copiedDescription);
+          boolean _and = false;
           boolean _validate = InternalStatefulIncrementalBuilder.this.validate(resource);
-          if (_validate) {
+          if (!_validate) {
+            _and = false;
+          } else {
+            IShouldGenerate _get = serviceProvider.<IShouldGenerate>get(IShouldGenerate.class);
+            boolean _shouldGenerate = _get.shouldGenerate(resource, CancelIndicator.NullImpl);
+            _and = _shouldGenerate;
+          }
+          if (_and) {
             InternalStatefulIncrementalBuilder.this.generate(resource, InternalStatefulIncrementalBuilder.this.request, newSource2GeneratedMapping);
           }
           IndexState _oldState = InternalStatefulIncrementalBuilder.this.context.getOldState();
