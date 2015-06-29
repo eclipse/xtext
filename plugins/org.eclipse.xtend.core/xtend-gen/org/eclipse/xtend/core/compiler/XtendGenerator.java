@@ -97,8 +97,7 @@ public class XtendGenerator extends JvmModelGenerator {
   
   public void callMacroProcessors(final Resource input) {
     final ActiveAnnotationContexts ctxs = ActiveAnnotationContexts.find(input);
-    boolean _equals = Objects.equal(ctxs, null);
-    if (_equals) {
+    if ((ctxs == null)) {
       return;
     }
     try {
@@ -250,8 +249,7 @@ public class XtendGenerator extends JvmModelGenerator {
         }
       }
       String _xifexpression = null;
-      boolean _notEquals = (!Objects.equal(declaredType, null));
-      if (_notEquals) {
+      if ((declaredType != null)) {
         _xifexpression = b.declareVariable(declaredType, "this");
       }
       _xblockexpression = _xifexpression;
@@ -330,8 +328,8 @@ public class XtendGenerator extends JvmModelGenerator {
               tracedAppendable.append("abstract ");
               XtendGenerator.this.generateTypeParameterDeclaration(((JvmTypeParameterDeclarator)it), tracedAppendable, null);
               JvmTypeReference _returnType = ((JvmOperation)it).getReturnType();
-              boolean _equals = Objects.equal(_returnType, null);
-              if (_equals) {
+              boolean _tripleEquals = (_returnType == null);
+              if (_tripleEquals) {
                 tracedAppendable.append("void");
               } else {
                 JvmTypeReference _returnType_1 = ((JvmOperation)it).getReturnType();
@@ -414,12 +412,11 @@ public class XtendGenerator extends JvmModelGenerator {
             }
             final XtendTypeDeclaration enclosingType = EcoreUtil2.<XtendTypeDeclaration>getContainerOfType(referrer, XtendTypeDeclaration.class);
             boolean _and_2 = false;
-            boolean _notEquals = (!Objects.equal(enclosingType, null));
-            if (!_notEquals) {
+            if (!(enclosingType != null)) {
               _and_2 = false;
             } else {
-              boolean _notEquals_1 = (!Objects.equal(enclosingType, anonymousClass));
-              _and_2 = _notEquals_1;
+              boolean _notEquals = (!Objects.equal(enclosingType, anonymousClass));
+              _and_2 = _notEquals;
             }
             if (_and_2) {
               boolean _isEmpty = references.isEmpty();
@@ -430,8 +427,7 @@ public class XtendGenerator extends JvmModelGenerator {
             }
             final XClosure enclosingLambda = EcoreUtil2.<XClosure>getContainerOfType(referrer, XClosure.class);
             boolean _and_3 = false;
-            boolean _notEquals_2 = (!Objects.equal(enclosingLambda, null));
-            if (!_notEquals_2) {
+            if (!(enclosingLambda != null)) {
               _and_3 = false;
             } else {
               boolean _isAncestor = EcoreUtil.isAncestor(anonymousClass, enclosingLambda);
@@ -488,8 +484,7 @@ public class XtendGenerator extends JvmModelGenerator {
       return true;
     }
     boolean _and = false;
-    boolean _notEquals = (!Objects.equal(type, null));
-    if (!_notEquals) {
+    if (!(type != null)) {
       _and = false;
     } else {
       boolean _or_1 = false;
@@ -533,20 +528,25 @@ public class XtendGenerator extends JvmModelGenerator {
   public ITreeAppendable generateVisibilityModifier(final JvmMember it, final ITreeAppendable result) {
     ITreeAppendable _xblockexpression = null;
     {
-      boolean _and = false;
       JvmVisibility _visibility = it.getVisibility();
       boolean _equals = Objects.equal(_visibility, JvmVisibility.PRIVATE);
-      if (!_equals) {
-        _and = false;
-      } else {
+      if (_equals) {
         JvmDeclaredType _declaringType = it.getDeclaringType();
-        boolean _isLocal = _declaringType.isLocal();
-        _and = _isLocal;
-      }
-      if (_and) {
-        if ((it instanceof JvmOperation)) {
-          JvmDeclaredType _declaringType_1 = ((JvmOperation)it).getDeclaringType();
-          final JvmGenericType declarator = ((JvmGenericType) _declaringType_1);
+        boolean _tripleEquals = (_declaringType == null);
+        if (_tripleEquals) {
+          return result;
+        }
+        boolean _and = false;
+        JvmDeclaredType _declaringType_1 = it.getDeclaringType();
+        boolean _isLocal = _declaringType_1.isLocal();
+        if (!_isLocal) {
+          _and = false;
+        } else {
+          _and = (it instanceof JvmOperation);
+        }
+        if (_and) {
+          JvmDeclaredType _declaringType_2 = it.getDeclaringType();
+          final JvmGenericType declarator = ((JvmGenericType) _declaringType_2);
           boolean _isAnonymous = declarator.isAnonymous();
           boolean _not = (!_isAnonymous);
           if (_not) {
@@ -600,19 +600,18 @@ public class XtendGenerator extends JvmModelGenerator {
             boolean _xblockexpression = false;
             {
               Procedure1<? super ITreeAppendable> _compilationStrategy = XtendGenerator.this._jvmTypeExtensions.getCompilationStrategy(it);
-              boolean _notEquals = (!Objects.equal(_compilationStrategy, null));
-              if (_notEquals) {
+              boolean _tripleNotEquals = (_compilationStrategy != null);
+              if (_tripleNotEquals) {
                 return Boolean.valueOf(true);
               } else {
                 StringConcatenationClient _compilationTemplate = XtendGenerator.this._jvmTypeExtensions.getCompilationTemplate(it);
-                boolean _notEquals_1 = (!Objects.equal(_compilationTemplate, null));
-                if (_notEquals_1) {
+                boolean _tripleNotEquals_1 = (_compilationTemplate != null);
+                if (_tripleNotEquals_1) {
                   return Boolean.valueOf(true);
                 } else {
                   final XExpression expression = XtendGenerator.this._iLogicalContainerProvider.getAssociatedExpression(it);
                   boolean _and = false;
-                  boolean _notEquals_2 = (!Objects.equal(expression, null));
-                  if (!_notEquals_2) {
+                  if (!(expression != null)) {
                     _and = false;
                   } else {
                     boolean _isGenerateExpressions = config.isGenerateExpressions();
