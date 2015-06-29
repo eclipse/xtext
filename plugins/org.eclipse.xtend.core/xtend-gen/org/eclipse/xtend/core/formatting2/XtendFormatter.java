@@ -54,6 +54,7 @@ import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBasicForLoopExpression;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XCollectionLiteral;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -64,6 +65,7 @@ import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XPostfixOperation;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XSynchronizedExpression;
@@ -876,6 +878,9 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     } else if (anonymousClass instanceof XMemberFeatureCall) {
       _format((XMemberFeatureCall)anonymousClass, format);
       return;
+    } else if (anonymousClass instanceof XPostfixOperation) {
+      _format((XPostfixOperation)anonymousClass, format);
+      return;
     } else if (anonymousClass instanceof XWhileExpression) {
       _format((XWhileExpression)anonymousClass, format);
       return;
@@ -899,6 +904,9 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
       return;
     } else if (anonymousClass instanceof XBlockExpression) {
       _format((XBlockExpression)anonymousClass, format);
+      return;
+    } else if (anonymousClass instanceof XCastedExpression) {
+      _format((XCastedExpression)anonymousClass, format);
       return;
     } else if (anonymousClass instanceof XClosure) {
       _format((XClosure)anonymousClass, format);
