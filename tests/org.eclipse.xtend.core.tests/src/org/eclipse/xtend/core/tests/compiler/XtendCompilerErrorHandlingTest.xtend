@@ -30,6 +30,18 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 			}
 		''')
 	}
+	
+	@Test
+	def testPrivateToplevelClass() {
+		'''
+			private class C {
+			}
+		'''.assertCompilesTo( '''
+			@SuppressWarnings("all")
+			class C {
+			}
+		''')
+	}
 		
 	@Test
 	def testUnresolvedInterface() {

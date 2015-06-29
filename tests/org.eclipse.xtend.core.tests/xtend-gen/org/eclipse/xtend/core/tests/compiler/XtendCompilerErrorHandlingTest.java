@@ -51,6 +51,23 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testPrivateToplevelClass() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("private class C {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("class C {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testUnresolvedInterface() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo implements Unresolved {");
