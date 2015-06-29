@@ -14,7 +14,7 @@ import com.intellij.facet.ui.FacetEditorTab;
 import com.intellij.openapi.options.ConfigurationException;
 
 public class GeneratorFacetEditorTab<C extends AbstractFacetConfiguration> extends FacetEditorTab {
-	private GeneratorFacetForm<GeneratorConfigurationState> form = new GeneratorFacetForm<GeneratorConfigurationState>();
+	private GeneratorFacetForm<GeneratorConfigurationState> form;
 
 	private String title;
 
@@ -23,6 +23,7 @@ public class GeneratorFacetEditorTab<C extends AbstractFacetConfiguration> exten
 	public GeneratorFacetEditorTab(final Facet<C> facet, final String title) {
 		this.facet = facet;
 		this.title = title;
+		this.form = new GeneratorFacetForm<GeneratorConfigurationState>(facet.getModule());
 	}
 
 	@Override
