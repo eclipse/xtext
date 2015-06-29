@@ -3,7 +3,7 @@
     <resource path="META-INF/MANIFEST.MF">
         <filter comment="version will be generated during buckminster build" id="927989779">
             <message_arguments>
-                <message_argument value="2.8.3"/>
+                <message_argument value="2.8.4"/>
                 <message_argument value="org.eclipse.xtext"/>
             </message_arguments>
         </filter>
@@ -33,7 +33,7 @@
         <filter id="338886760">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.ui.editor.model.XtextDocument.OutdatedStateAdapter"/>
-                <message_argument value="org.eclipse.xtext.ui_2.8.3"/>
+                <message_argument value="org.eclipse.xtext.ui_2.8.4"/>
             </message_arguments>
         </filter>
     </resource>
