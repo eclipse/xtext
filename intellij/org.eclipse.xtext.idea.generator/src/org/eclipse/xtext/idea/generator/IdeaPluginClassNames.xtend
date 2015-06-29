@@ -76,18 +76,6 @@ class IdeaPluginClassNames {
 		basePackageName+'.lang.'+it.name.toSimpleName+'Language'
 	}
 	
-	def String getJvmTypesElementFinderName(Grammar it) {
-		basePackageName+'.lang.types.psi.'+it.name.toSimpleName+'JvmTypesElementFinder'
-	}
-	
-	def String getJvmTypesShortNamesCacheName(Grammar it) {
-		basePackageName+'.lang.types.'+it.name.toSimpleName+'JvmTypesShortNamesCache'
-	}
-	
-	def String getJvmElementsReferencesSearch(Grammar it) {
-		basePackageName+'.lang.types.psi.search.'+it.name.toSimpleName+ 'JvmElementsReferencesSearch'
-	}
-	
 	def String getCodeBlockModificationListenerName(Grammar it) {
 		basePackageName+'.lang.psi.'+it.name.toSimpleName+'CodeBlockModificationListener'
 	}
@@ -176,10 +164,6 @@ class IdeaPluginClassNames {
 		basePackageName +'.completion.Abstract'+ name.toSimpleName+'CompletionContributor'
 	}
 	
-	def String getCallReferenceProcessorName(Grammar it) {
-		basePackageName+'.ide.hierarchy.call.'+it.name.toSimpleName+'CallReferenceProcessor'
-	}
-		
 	def String getFacetConfiguration(Grammar it) {
 		basePackageName+'.facet.'+it.name.toSimpleName+'FacetConfiguration'
 	}

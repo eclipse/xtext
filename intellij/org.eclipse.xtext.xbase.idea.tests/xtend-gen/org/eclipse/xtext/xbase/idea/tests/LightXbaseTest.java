@@ -12,12 +12,12 @@ import com.intellij.openapi.roots.ContentEntry;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import org.eclipse.xtext.idea.tests.LibraryUtil;
 import org.eclipse.xtext.idea.tests.LightToolingTest;
-import org.eclipse.xtext.xbase.idea.lang.XbaseFileType;
+import org.eclipse.xtext.purexbase.idea.lang.PureXbaseFileType;
 
 @SuppressWarnings("all")
 public abstract class LightXbaseTest extends LightToolingTest {
   public LightXbaseTest() {
-    super(XbaseFileType.INSTANCE);
+    super(PureXbaseFileType.INSTANCE);
   }
   
   @Override

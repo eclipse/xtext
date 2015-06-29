@@ -11,6 +11,9 @@ var runtimeProject = "../${projectName}"
 var generateXtendStub = true
 var lineDelimiter = '\n'
 
+var ideaProjectName = "org.eclipse.xtext.purexbase.idea"
+var ideaProjectPath = "../../intellij/${ideaProjectName}"
+
 Workflow {
     bean = StandaloneSetup {
     	ignoreBrokenProjectFiles = true
@@ -30,6 +33,10 @@ Workflow {
 	
 	component = DirectoryCleaner {
 		directory = "${runtimeProject}/model/generated"
+	}
+
+	component = DirectoryCleaner {
+		directory = "${ideaProjectPath}/src-gen"
 	}
 
 	component = Generator auto-inject {
@@ -128,6 +135,13 @@ Workflow {
     
     		// provides a compare view
     		fragment = compare.CompareFragment auto-inject {}
+    		
+    		fragment = org.eclipse.xtext.idea.generator.IdeaPluginGenerator auto-inject {
+    			runtimeProjectName = projectName
+    			runtimeProjectPath = runtimeProject
+	        }
+	        
+	        fragment = org.eclipse.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {}
     	}
     }
 }

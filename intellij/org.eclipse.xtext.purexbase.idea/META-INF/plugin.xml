@@ -1,0 +1,14 @@
+<idea-plugin version="2" xmlns:xi="http://www.w3.org/2001/XInclude">
+	<id>org.eclipse.xtext.purexbase.idea</id>
+	<name>PureXbase Support</name>
+	<description>
+      This plugin enables smart editing of PureXbase files.
+	</description>
+	<version>1.0.0</version>
+	<vendor>My Company</vendor>
+
+	<idea-version since-build="131"/>
+	<depends>org.eclipse.xtext.idea</depends>
+
+	<xi:include href="plugin_gen.xml" xpointer="xpointer(/idea-plugin/*)"/>
+</idea-plugin>

@@ -32,28 +32,25 @@ public class AbstractXtendIdeaModule extends org.eclipse.xtext.idea.DefaultIdeaM
 		return org.eclipse.xtend.core.idea.lang.XtendElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider> bindAbstractTypeScopeProvider() {
-		return org.eclipse.xtext.xbase.idea.types.StubBasedTypeScopeProvider.class;
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
+		return org.eclipse.xtend.core.idea.facet.XtendFacetConfiguration.class;
 	}
-//	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-//	@org.eclipse.xtext.service.SingletonBinding
-//	public Class<? extends org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex> bindJvmDeclaredTypeShortNameIndex() {
-//		return org.eclipse.xtext.xbase.idea.types.stubs.JvmDeclaredTypeShortNameIndex.class;
-//	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.idea.facet.AbstractFacetConfiguration>> bindAbstractFacetType$AbstractFacetConfiguration() {
+		return org.eclipse.xtend.core.idea.facet.XtendFacetType.class;
+	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider> bindAbstractTypeScopeProvider() {
+		return org.eclipse.xtext.idea.common.types.StubBasedTypeScopeProvider.class;
+	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
 	public Class<? extends org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker.Provider> bindIFeatureScopeTracker$Provider() {
 		return org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider.class;
 	}
-//	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-//	@org.eclipse.xtext.service.SingletonBinding
-//	public Class<? extends com.intellij.ide.hierarchy.type.JavaTypeHierarchyProvider> bindJavaTypeHierarchyProvider() {
-//		return org.eclipse.xtext.xbase.idea.ide.hierarchy.JvmDeclaredTypeHierarchyProvider.class;
-//	}
-//	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-//	@org.eclipse.xtext.service.SingletonBinding
-//	public Class<? extends com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider> bindJavaCallHierarchyProvider() {
-//		return org.eclipse.xtext.xbase.idea.ide.hierarchy.JvmExecutableCallHierarchyProvider.class;
-//	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public void configureLanguageSpecificPsiModelAssociations(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.psi.IPsiModelAssociations.class).annotatedWith(org.eclipse.xtext.service.LanguageSpecific.class).to(org.eclipse.xtext.idea.common.types.DerivedMemberAwarePsiModelAssociations.class);
+	}
 	
 	
 }
