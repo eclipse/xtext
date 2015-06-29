@@ -218,7 +218,7 @@ define([
 				return revertResourceService.revertResource(editorContext, optionsCopy);
 			else if (service === 'update' && updateService)
 				return updateService.update(editorContext, optionsCopy);
-			else if (service === 'validation' && validationService)
+			else if (service === 'validate' && validationService)
 				return validationService.computeProblems(editorContext, optionsCopy);
 			else if (service === 'content-assist' && contentAssistService) {
 				optionsCopy.offset = editorContext.getCaretOffset();

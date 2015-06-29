@@ -321,7 +321,7 @@ public class XtextServiceDispatcher {
       }
     }
     if (!_matched) {
-      if (Objects.equal(requestType, "validation")) {
+      if (Objects.equal(requestType, "validate")) {
         _matched=true;
         _switchResult = this.getValidationService(request, sessionStore);
       }
