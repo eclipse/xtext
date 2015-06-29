@@ -1,0 +1,27 @@
+/*******************************************************************************
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.xtext.generator
+
+/** 
+ * Class annotations can be added to the {@link XtextGenerator} workflow component in order
+ * to configure specific Java annotations to be added to each generated class.
+ */
+interface IClassAnnotation {
+	
+	/** 
+	 * Convert the class annotation to a string suitable for use in Java code generation.
+	 */
+	override String toString()
+
+	/** 
+	 * Return the qualified name of the annotation interface for use in import declarations,
+	 * or {@code null} if no import is required.
+	 */
+	def String getAnnotationImport()
+
+}
