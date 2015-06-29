@@ -231,7 +231,7 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 		resourceValidator.reset(3000)
 		val file = createFile('state foo end')
 		val sessionStore = new HashMapSessionStore
-		val validate = getService(#{'requestType' -> 'validation', 'resource' -> file.name}, sessionStore)
+		val validate = getService(#{'requestType' -> 'validate', 'resource' -> file.name}, sessionStore)
 		val update = getService(#{
 				'requestType' -> 'update',
 				'resource' -> file.name,
@@ -252,7 +252,7 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 		resourceValidator.reset(3000)
 		val file = createFile('state foo end')
 		val sessionStore = new HashMapSessionStore
-		val validate = getService(#{'requestType' -> 'validation', 'resource' -> file.name}, sessionStore)
+		val validate = getService(#{'requestType' -> 'validate', 'resource' -> file.name}, sessionStore)
 		val contentAssist = getService(#{
 				'requestType' -> 'content-assist',
 				'resource' -> file.name,

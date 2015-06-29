@@ -157,7 +157,7 @@ class XtextServiceDispatcher {
 				getSaveResourceService(request, sessionStore)
 			case 'update':
 				getUpdateDocumentService(request, sessionStore)
-			case 'validation':
+			case 'validate':
 				getValidationService(request, sessionStore)
 			case 'content-assist':
 				getContentAssistService(request, sessionStore)
