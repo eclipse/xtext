@@ -19,7 +19,7 @@ requirejs.config({
 
 suite('Validation', function() {
 	
-	test('should display the problem markers sent by the server', function(done) {
+	test('should return the issues sent by the server', function(done) {
 		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
 			xtext.testEditor({doneCallback: done})
 				.setText('foo')
@@ -29,10 +29,9 @@ suite('Validation', function() {
 					assert.equal('GET', settings.type);
 				})
 				.respond({entries: [{severity: 'error', startOffset: 3}]})
-				.checkResult(function(editorContext) {
-					var markers = editorContext.getMarkers();
-					assert.equal('error', markers[0].severity);
-					assert.equal(3, markers[0].startOffset);
+				.checkResult(function(editorContext, issues) {
+					assert.equal('error', issues[0].severity);
+					assert.equal(3, issues[0].startOffset);
 				})
 				.done();
 		});
@@ -59,10 +58,9 @@ suite('Validation', function() {
 				.invokeService('validation')
 				.respond({conflict: 'invalidStateId'})
 				.respond({entries: [{severity: 'error', startOffset: 3}]})
-				.checkResult(function(editorContext) {
-					var markers = editorContext.getMarkers();
-					assert.equal('error', markers[0].severity);
-					assert.equal(3, markers[0].startOffset);
+				.checkResult(function(editorContext, issues) {
+					assert.equal('error', issues[0].severity);
+					assert.equal(3, issues[0].startOffset);
 				})
 				.done();
 		});

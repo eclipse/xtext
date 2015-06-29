@@ -322,7 +322,7 @@ class XtextServiceDispatcher {
 	protected def getHoverService(IRequestData request, ISessionStore sessionStore)
 			throws InvalidRequestException {
 		val document = getDocumentAccess(request, sessionStore)
-		val offset = request.getInt('offset', Optional.of(0))
+		val offset = request.getInt('caretOffset', Optional.of(0))
 		new ServiceDescriptor => [
 			service = [
 				try {
@@ -338,7 +338,7 @@ class XtextServiceDispatcher {
 	protected def getOccurrencesService(IRequestData request, ISessionStore sessionStore)
 			throws InvalidRequestException {
 		val document = getDocumentAccess(request, sessionStore)
-		val offset = request.getInt('offset', Optional.of(0))
+		val offset = request.getInt('caretOffset', Optional.of(0))
 		new ServiceDescriptor => [
 			service = [
 				try {

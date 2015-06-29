@@ -16,7 +16,6 @@ import org.eclipse.xtext.ide.labels.IImageDescription
 import org.eclipse.xtext.ide.labels.IImageDescriptionProvider
 import org.eclipse.xtext.ide.labels.INameLabelProvider
 import org.eclipse.xtext.ide.labels.SimpleImageDescription
-import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess
 import org.eclipse.xtext.web.server.util.ElementAtOffsetUtil
 
@@ -24,7 +23,6 @@ import org.eclipse.xtext.web.server.util.ElementAtOffsetUtil
  * Service class for mouse hover information.
  */
 @Singleton
-@Log
 class HoverService {
 
 	@Inject extension ElementAtOffsetUtil
@@ -44,7 +42,6 @@ class HoverService {
 				val titleHtml = element.imageDescription.addIconDivs(nameLabel).surroundWithDiv('hover')
 				val bodyHtml = (element.documentation ?: '').surroundWithDiv('hover')
 				val result = new HoverResult(stateId, titleHtml, bodyHtml)
-				LOG.trace(result)
 				result
 			} else {
 				null

@@ -129,8 +129,12 @@ import org.eclipse.emf.ecore.resource.ResourceSet
 				fileDeleted(event.getFile())
 			}
 			
+			override beforeFileMovement(VirtualFileMoveEvent event) {
+				fileDeleted(event.file)
+			}
+			
 			override void fileMoved(VirtualFileMoveEvent event) {
-				// TODO deal with that!
+				fileAdded(event.file)
 			}
 		}, project)
 		
@@ -288,8 +292,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet
 						externalDeltas += deltas
 						baseDir = contentRoots.head.URI
 						// outputs = ??
-						previousState = new IndexState(moduleDescriptions, fileMappings)
-						newState = new IndexState(newIndex, fileMappings.copy)
+						state = new IndexState(newIndex, fileMappings.copy)
 	
 						afterValidate = buildProgressReporter
 						afterDeleteFile = [

@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.build.ClusteringStorageAwareResourceLoader;
+import org.eclipse.xtext.build.IndexState;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy;
@@ -31,6 +32,9 @@ public class BuildContext {
   
   @Accessors
   private final XtextResourceSet resourceSet;
+  
+  @Accessors
+  private final IndexState oldState;
   
   @Accessors
   private final IResourceClusteringPolicy clusteringPolicy;
@@ -59,16 +63,22 @@ public class BuildContext {
     return resourceServiceProvider;
   }
   
-  public BuildContext(final IResourceServiceProvider.Registry resourceServiceProviderRegistry, final XtextResourceSet resourceSet, final IResourceClusteringPolicy clusteringPolicy) {
+  public BuildContext(final IResourceServiceProvider.Registry resourceServiceProviderRegistry, final XtextResourceSet resourceSet, final IndexState oldState, final IResourceClusteringPolicy clusteringPolicy) {
     super();
     this.resourceServiceProviderRegistry = resourceServiceProviderRegistry;
     this.resourceSet = resourceSet;
+    this.oldState = oldState;
     this.clusteringPolicy = clusteringPolicy;
   }
   
   @Pure
   public XtextResourceSet getResourceSet() {
     return this.resourceSet;
+  }
+  
+  @Pure
+  public IndexState getOldState() {
+    return this.oldState;
   }
   
   @Pure

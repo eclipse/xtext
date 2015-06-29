@@ -174,7 +174,15 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
       }
       
       @Override
+      public void beforeFileMovement(final VirtualFileMoveEvent event) {
+        VirtualFile _file = event.getFile();
+        XtextAutoBuilderComponent.this.fileDeleted(_file);
+      }
+      
+      @Override
       public void fileMoved(final VirtualFileMoveEvent event) {
+        VirtualFile _file = event.getFile();
+        XtextAutoBuilderComponent.this.fileAdded(_file);
       }
     }, project);
     MessageBus _messageBus = project.getMessageBus();
@@ -480,11 +488,9 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
                 VirtualFile _head = IterableExtensions.<VirtualFile>head(((Iterable<VirtualFile>)Conversions.doWrapArray(contentRoots)));
                 URI _uRI = VirtualFileURIUtil.getURI(_head);
                 it.setBaseDir(_uRI);
-                IndexState _indexState = new IndexState(moduleDescriptions, fileMappings);
-                it.setPreviousState(_indexState);
                 Source2GeneratedMapping _copy = fileMappings.copy();
-                IndexState _indexState_1 = new IndexState(newIndex, _copy);
-                it.setNewState(_indexState_1);
+                IndexState _indexState = new IndexState(newIndex, _copy);
+                it.setState(_indexState);
                 it.setAfterValidate(buildProgressReporter);
                 final Procedure1<URI> _function = new Procedure1<URI>() {
                   @Override

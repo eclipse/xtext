@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 
-define(['xtext/services/AbstractXtextService'], function(AbstractXtextService) {
+define(['xtext/services/AbstractXtextService', 'jquery'], function(AbstractXtextService, jQuery) {
 	
 	/**
 	 * Service class for reverting resources. The resulting text is passed to the editor context.
@@ -17,7 +17,10 @@ define(['xtext/services/AbstractXtextService'], function(AbstractXtextService) {
 
 	RevertResourceService.prototype = new AbstractXtextService();
 
-	RevertResourceService.prototype.revertResource = function(editorContext, params) {
+	RevertResourceService.prototype.revertResource = function(editorContext, params, deferred) {
+		if (deferred === undefined) {
+			deferred = jQuery.Deferred();
+		}
 		var serverData = {
 			contentType: params.contentType
 		};
@@ -26,6 +29,7 @@ define(['xtext/services/AbstractXtextService'], function(AbstractXtextService) {
 		this.sendRequest(editorContext, {
 			type: 'POST',
 			data: serverData,
+			
 			success: function(result) {
 				editorContext.setText(result.fullText);
 				editorContext.clearUndoStack();
@@ -34,8 +38,14 @@ define(['xtext/services/AbstractXtextService'], function(AbstractXtextService) {
 				for (var i = 0; i < listeners.length; i++) {
 					listeners[i]();
 				}
+				deferred.resolve(result);
+			},
+			
+			error: function(xhr, textStatus, errorThrown) {
+				deferred.reject(errorThrown);
 			}
 		});
+		return deferred.promise();
 	};
 	
 	return RevertResourceService;

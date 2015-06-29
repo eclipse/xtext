@@ -113,5 +113,12 @@ public class StateBasedContainerManager implements IContainer.Manager {
 	public void setStateProvider(IAllContainersState.Provider stateProvider) {
 		this.stateProvider = stateProvider;
 	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public void setDelegate(ProjectDescriptionBasedContainerManager delegate) {
+		this.delegate = delegate;
+	}
 
 }

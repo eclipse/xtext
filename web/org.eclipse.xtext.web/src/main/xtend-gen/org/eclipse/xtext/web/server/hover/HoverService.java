@@ -13,7 +13,6 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.Collections;
 import java.util.List;
-import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
@@ -26,7 +25,6 @@ import org.eclipse.xtext.ide.labels.SimpleImageDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
-import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.web.server.hover.HoverResult;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess;
@@ -43,7 +41,6 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
  * Service class for mouse hover information.
  */
 @Singleton
-@Log
 @SuppressWarnings("all")
 public class HoverService {
   @Inject
@@ -101,7 +98,6 @@ public class HoverService {
               final String bodyHtml = HoverService.this.surroundWithDiv(_elvis, "hover");
               String _stateId = it.getStateId();
               final HoverResult result = new HoverResult(_stateId, titleHtml, bodyHtml);
-              HoverService.LOG.trace(result);
               _xblockexpression_1 = result;
             }
             _xifexpression = _xblockexpression_1;
@@ -180,6 +176,4 @@ public class HoverService {
     _builder.newLine();
     return _builder.toString();
   }
-  
-  private final static Logger LOG = Logger.getLogger(HoverService.class);
 }

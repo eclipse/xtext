@@ -13,7 +13,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import java.io.File;
 import java.io.IOException;
-import java.net.URLClassLoader;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -136,8 +135,9 @@ public class ResourceURICollector {
         if (_containsKey) {
           return;
         }
-        URI _asURI = ResourceURICollector.asURI(file);
-        String _plus = ("archive:" + _asURI);
+        String _absolutePath = file.getAbsolutePath();
+        URI _createFileURI = URI.createFileURI(_absolutePath);
+        String _plus = ("archive:" + _createFileURI);
         final String path = (_plus + "!/");
         Map<String, URI> _platformResourceMap_1 = EcorePlugin.getPlatformResourceMap();
         URI _createURI = URI.createURI(path);
@@ -146,14 +146,14 @@ public class ResourceURICollector {
     } catch (final Throwable _t) {
       if (_t instanceof ZipException) {
         final ZipException e = (ZipException)_t;
-        String _absolutePath = file.getAbsolutePath();
-        String _plus_1 = ("Could not open Jar file " + _absolutePath);
+        String _absolutePath_1 = file.getAbsolutePath();
+        String _plus_1 = ("Could not open Jar file " + _absolutePath_1);
         String _plus_2 = (_plus_1 + ".");
         ResourceURICollector.LOG.info(_plus_2);
       } else if (_t instanceof Exception) {
         final Exception e_1 = (Exception)_t;
-        String _absolutePath_1 = file.getAbsolutePath();
-        ResourceURICollector.LOG.error(_absolutePath_1, e_1);
+        String _absolutePath_2 = file.getAbsolutePath();
+        ResourceURICollector.LOG.error(_absolutePath_2, e_1);
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -171,31 +171,6 @@ public class ResourceURICollector {
           throw Exceptions.sneakyThrow(_t_1);
         }
       }
-    }
-  }
-  
-  /**
-   * Unfortunately, {@link File#toURI} does not append '/' to directories, making it useless for the {@link URLClassLoader}.
-   */
-  public static URI asURI(final File file) {
-    try {
-      URI _xblockexpression = null;
-      {
-        File _canonicalFile = file.getCanonicalFile();
-        String _absolutePath = _canonicalFile.getAbsolutePath();
-        final URI uri = URI.createFileURI(_absolutePath);
-        URI _xifexpression = null;
-        boolean _isDirectory = file.isDirectory();
-        if (_isDirectory) {
-          _xifexpression = uri.appendSegment("");
-        } else {
-          _xifexpression = uri;
-        }
-        _xblockexpression = _xifexpression;
-      }
-      return _xblockexpression;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
     }
   }
   

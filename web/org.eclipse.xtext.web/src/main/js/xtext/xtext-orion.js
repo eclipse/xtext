@@ -21,7 +21,7 @@
  * autoPairParentheses = true {Boolean}
  *     Whether (parentheses) shall be auto-completed.
  * autoPairQuotations = true {Boolean}
- *     Whether 'quotations' shall be auto-completed.
+ *     Whether "quotations" shall be auto-completed.
  * autoPairSquareBrackets = true {Boolean}
  *     Whether [square brackets] shall be auto-completed.
  * computeSize = true {Boolean}
@@ -39,6 +39,10 @@
  *     The document.
  * enableContentAssistService = true {Boolean}
  *     Whether content assist should be enabled.
+ * enableHoverService = true {Boolean}
+ *     Whether mouse hover information should be enabled.
+ * enableOccurrencesService = true {Boolean}
+ *     Whether marking occurrences should be enabled.
  * enableSaveAction = false {Boolean}
  *     Whether the save action should be bound to the standard keystroke ctrl+s / cmd+s.
  * enableValidationService = true {Boolean}
@@ -53,6 +57,8 @@
  *     Whether to load the editor content from the server.
  * model {TextModel}
  *     The base text model.
+ * mouseHoverDelay = 500 {Number}
+ *     The number of milliseconds to wait after a mouse hover before the information tooltip is displayed.
  * parent {String | DOMElement}
  *     The parent element for the view; it can be either a DOM element or an ID or class name for a DOM element.
  * readonly = false {Boolean}
@@ -60,6 +66,8 @@
  * resourceId {String}
  *     The identifier of the resource displayed in the text editor; this option is sent to the server to
  *     communicate required information on the respective resource.
+ * selectionUpdateDelay = 550 {Number}
+ *     The number of milliseconds to wait after a selection change before Xtext services are invoked.
  * sendFullText = false {Boolean}
  *     Whether the full text shall be sent to the server with each request; use this if you want
  *     the server to run in stateless mode. If the option is inactive, the server state is updated regularly.
@@ -95,6 +103,8 @@
  *     Whether the tab key is consumed by the view or is used for focus traversal.
  * tabSize = 4 {Number}
  *     The number of spaces in a tab.
+ * textUpdateDelay = 500 {Number}
+ *     The number of milliseconds to wait after a text change before Xtext services are invoked.
  * theme {String | TextTheme}
  *     The CSS file for the view theming or the actual theme.
  * themeClass {String}
@@ -111,8 +121,10 @@
 define([
     'jquery',
     'orion/editor/edit',
+    'orion/Deferred',
     'orion/keyBinding',
     'orion/editor/textStyler',
+    'xtext/compatibility',
 	'xtext/OrionEditorContext',
 	'xtext/services/LoadResourceService',
 	'xtext/services/RevertResourceService',
@@ -121,9 +133,10 @@ define([
 	'xtext/services/ContentAssistService',
 	'xtext/services/ValidationService',
 	'xtext/services/HoverService',
-	'xtext/services/OccurrencesService',
-], function(jQuery, orionEdit, mKeyBinding, mTextStyler, EditorContext, LoadResourceService, RevertResourceService,
-		SaveResourceService, UpdateService, ContentAssistService, ValidationService, HoverService, OccurrencesService) {
+	'xtext/services/OccurrencesService'
+], function(jQuery, orionEdit, Deferred, mKeyBinding, mTextStyler, compatibility, EditorContext,
+		LoadResourceService, RevertResourceService, SaveResourceService, UpdateService,
+		ContentAssistService, ValidationService, HoverService, OccurrencesService) {
 	
 	/**
 	 * Translate an HTML attribute name to a JS option name.
@@ -210,15 +223,14 @@ define([
 		if (options.smartIndentation === undefined)
 			options.smartIndentation = true;
 		if (options.hoverFactory === undefined) {
+			var hover = {
+				clearQuickFixes: function() {},
+				renderQuickFixes: function() {}
+			};
+			_internals.hoverDelegate = hover;
 			options.hoverFactory = {
 				createHover: function() {
-					return {
-						computeHoverInfo: function(context) {
-							return _internals.computeHoverInfo(context);
-						},
-						clearQuickFixes: function() {},
-						renderQuickFixes: function() {}
-					};
+					return hover;
 				}
 			};
 		}
@@ -373,8 +385,18 @@ define([
 		
 		function refreshDocument() {
 			editorContext.clearClientServiceState();
-			if (validationService)
-				validationService.computeProblems(editorContext, options);
+			if (validationService) {
+				validationService.computeProblems(editorContext, options).done(function(entries) {
+					editor.showProblems(entries.map(function(entry) {
+						return {
+							description: entry.description,
+							start: entry.startOffset,
+							end: entry.endOffset,
+							severity: entry.severity
+						};
+					}));
+				});
+			}
 		}
 		var updateService = undefined;
 		if (!options.sendFullText) {
@@ -383,16 +405,19 @@ define([
 				saveResourceService.setUpdateService(updateService);
 			editorContext.addServerStateListener(refreshDocument);
 		}
+		var textUpdateDelay = options.textUpdateDelay;
+		if (!textUpdateDelay)
+			textUpdateDelay = 500;
 		function modelChangeListener(event) {
-			if (editor._modelChangeTimeout) {
-				clearTimeout(editor._modelChangeTimeout);
+			if (editorContext._modelChangeTimeout) {
+				clearTimeout(editorContext._modelChangeTimeout);
 			}
-			editor._modelChangeTimeout = setTimeout(function() {
+			editorContext._modelChangeTimeout = setTimeout(function() {
 				if (options.sendFullText)
 					refreshDocument();
 				else
 					updateService.update(editorContext, options);
-			}, 500);
+			}, textUpdateDelay);
 		};
 		if (!options.resourceId || !options.loadFromServer) {
 			modelChangeListener(null);
@@ -409,26 +434,95 @@ define([
 				contentAssistService.setUpdateService(updateService);
 			contentAssist.setProviders([{
 				id: 'xtext.service',
-				provider: contentAssistService
+				provider: {
+					computeContentAssist: function(editorContext, params) {
+						var deferred = new Deferred();
+						contentAssistService.computeContentAssist(editorContext, params).done(function(entries) {
+							deferred.resolve(entries.map(function(entry) {
+								var p = {
+									proposal: entry.proposal,
+									prefix: entry.prefix,
+									overwrite: true,
+									name: (entry.label ? entry.label: entry.proposal),
+									description: entry.description,
+									style: entry.style,
+									additionalEdits: entry.textReplacements,
+									positions: entry.editPositions,
+								};
+								if (entry.escapePosition)
+									p.escapePosition = entry.escapePosition;
+								return p;
+							}));
+						}).fail(function() {
+							deferred.reject();
+						});
+						return deferred.promise;
+					}
+				}
 			}]);
 		}
 		
 		//---- Hover Service
 		
-		var hoverService = new HoverService(options.serverUrl, options.resourceId);
-		_internals.computeHoverInfo = function(context) {
-			return hoverService.computeHoverInfo(editorContext, context);
+		if (_internals.hoverDelegate && (options.enableHoverService || options.enableHoverService === undefined)) {
+			var hoverService = new HoverService(options.serverUrl, options.resourceId);
+			if (updateService)
+				hoverService.setUpdateService(updateService);
+			_internals.hoverDelegate.computeHoverInfo = function(context) {
+				var deferred = new Deferred();
+				hoverService.computeHoverInfo(editorContext, context).done(function(entry) {
+					deferred.resolve({ 
+						content: entry.content,
+						title: entry.title,
+						type: 'html' 
+					});
+				}).fail(function() {
+					deferred.resolve(null);
+				});
+				return [ deferred.promise ];
+			}
+			delete _internals.hoverDelegate;
 		}
 		
-		//---- Occurrence Service
+		//---- Occurrences Service
 		
-		var occurrencesService = new OccurrencesService(options.serverUrl, options.resourceId);
-		textView.addEventListener('Selection', function() {
-			occurrencesService.markOccurrences(editorContext, {
-				offset: textView.getCaretOffset(),
-				contentType: options.contentType
+		var occurrencesService;
+		if (options.enableOccurrencesService || options.enableOccurrencesService === undefined) {
+			occurrencesService = new OccurrencesService(options.serverUrl, options.resourceId);
+			if (updateService)
+				occurrencesService.setUpdateService(updateService);
+			var selectionUpdateDelay = options.selectionUpdateDelay;
+			if (!selectionUpdateDelay)
+				selectionUpdateDelay = 550;
+			textView.addEventListener('Selection', function() {
+				if (editorContext._selectionChangeTimeout) {
+					clearTimeout(editorContext._selectionChangeTimeout);
+				}
+				editorContext._selectionChangeTimeout = setTimeout(function() {
+					var params = _copy(options);
+					params.offset = textView.getCaretOffset();
+					occurrencesService.markOccurrences(editorContext, params).done(function(occurrencesResult) {
+						var readAnnotations = occurrencesResult.readRegions.map(function(region) {
+							return {
+								start: region.offset,
+								end: region.offset + region.length,
+								readAccess: true
+							};
+						});
+						var writeAnnotations = occurrencesResult.writeRegions.map(function(region) {
+							return {
+								start: region.offset,
+								end: region.offset + region.length,
+								readAccess: false
+							};
+						});
+						editor.showOccurrences(readAnnotations.concat(writeAnnotations));
+					}).fail(function() {
+						editor.showOccurrences({});
+					});
+				}, selectionUpdateDelay);
 			});
-		})
+		}
 		
 		editor.invokeXtextService = function(service, invokeOptions) {
 			var optionsCopy = _copy(options);
@@ -438,18 +532,18 @@ define([
 				}
 			}
 			if (service === 'load' && loadResourceService)
-				loadResourceService.loadResource(editorContext, optionsCopy);
+				return loadResourceService.loadResource(editorContext, optionsCopy);
 			else if (service === 'save' && saveResourceService)
-				saveResourceService.saveResource(editorContext, optionsCopy);
+				return saveResourceService.saveResource(editorContext, optionsCopy);
 			else if (service === 'revert' && revertResourceService)
-				revertResourceService.revertResource(editorContext, optionsCopy);
+				return revertResourceService.revertResource(editorContext, optionsCopy);
 			else if (service === 'validation' && validationService)
-				validationService.computeProblems(editorContext, optionsCopy);
+				return validationService.computeProblems(editorContext, optionsCopy);
 			else if (service === 'occurrences' && occurrencesService)
-				occurrencesService.markOccurrences(editorContext, optionsCopy);
+				return occurrencesService.markOccurrences(editorContext, optionsCopy);
 			else
 				throw new Error('Service \'' + service + '\' is not available.');
-		};
+		}
 		editor.xtextServiceSuccessListeners = [];
 		editor.xtextServiceErrorListeners = [function(requestType, xhr, textStatus, errorThrown) {
 			if (options.showErrorDialogs)

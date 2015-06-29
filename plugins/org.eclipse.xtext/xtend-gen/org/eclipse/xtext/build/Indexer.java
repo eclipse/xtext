@@ -209,10 +209,10 @@ public class Indexer {
   private CompilerPhases compilerPhases;
   
   public Indexer.IndexResult computeAndIndexAffected(final BuildRequest request, @Extension final BuildContext context) {
-    IndexState _previousState = request.getPreviousState();
-    final ResourceDescriptionsData previousIndex = _previousState.getResourceDescriptions();
-    IndexState _newState = request.getNewState();
-    final ResourceDescriptionsData newIndex = _newState.getResourceDescriptions();
+    IndexState _oldState = context.getOldState();
+    final ResourceDescriptionsData previousIndex = _oldState.getResourceDescriptions();
+    IndexState _state = request.getState();
+    final ResourceDescriptionsData newIndex = _state.getResourceDescriptions();
     final List<IResourceDescription.Delta> deltas = CollectionLiterals.<IResourceDescription.Delta>newArrayList();
     boolean _isInfoEnabled = Indexer.LOG.isInfoEnabled();
     if (_isInfoEnabled) {

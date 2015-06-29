@@ -47,8 +47,8 @@ import org.eclipse.xtext.util.internal.Log
 	}
 
 	def IndexResult computeAndIndexAffected(BuildRequest request, extension BuildContext context) {
-		val previousIndex = request.previousState.resourceDescriptions
-		val newIndex = request.newState.resourceDescriptions
+		val previousIndex = context.oldState.resourceDescriptions
+		val newIndex = request.state.resourceDescriptions
 
 		// get the direct deltas
 		val List<Delta> deltas = newArrayList

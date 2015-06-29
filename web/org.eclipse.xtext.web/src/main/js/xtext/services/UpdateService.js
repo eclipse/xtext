@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 
-define(['xtext/services/AbstractXtextService'], function(AbstractXtextService) {
+define(['xtext/services/AbstractXtextService', 'jquery'], function(AbstractXtextService, jQuery) {
 	
 	/**
 	 * Service class for updating the server-side representation of a resource.
@@ -75,11 +75,14 @@ define(['xtext/services/AbstractXtextService'], function(AbstractXtextService) {
 		this._completionCallbacks.push(callback);
 	}
 
-	UpdateService.prototype.update = function(editorContext, params) {
+	UpdateService.prototype.update = function(editorContext, params, deferred) {
+		if (deferred === undefined) {
+			deferred = jQuery.Deferred();
+		}
 		if (editorContext.getClientServiceState().update == 'started') {
 			var self = this;
-			this.addCompletionCallback(function() { self.update(editorContext, params) });
-			return;
+			this.addCompletionCallback(function() { self.update(editorContext, params, deferred) });
+			return deferred.promise();
 		}
 		
 		var serverData = {
@@ -93,7 +96,8 @@ define(['xtext/services/AbstractXtextService'], function(AbstractXtextService) {
 			this.computeDelta(knownServerState.text, currentText, serverData);
 			if (serverData.deltaText === undefined) {
 				this.onComplete();
-				return;
+				deferred.resolve(knownServerState);
+				return deferred.promise();
 			}
 			serverData.requiredStateId = knownServerState.stateId;
 		}
@@ -108,15 +112,17 @@ define(['xtext/services/AbstractXtextService'], function(AbstractXtextService) {
 					if (knownServerState.text !== undefined) {
 						delete knownServerState.text;
 						delete knownServerState.stateId;
-						self.update(editorContext, params);
+						self.update(editorContext, params, deferred);
 						return true;
 					}
+					deferred.reject(result.conflict);
 					return false;
 				}
 				var listeners = editorContext.updateServerState(currentText, result.stateId);
 				for (var i = 0; i < listeners.length; i++) {
 					self.addCompletionCallback(listeners[i]);
 				}
+				deferred.resolve(result);
 			},
 			error: function(xhr, textStatus, errorThrown) {
 				if (xhr.status == 404 && !params.loadFromServer && knownServerState.text !== undefined) {
@@ -124,12 +130,14 @@ define(['xtext/services/AbstractXtextService'], function(AbstractXtextService) {
 					delete editorContext.getClientServiceState().update;
 					delete knownServerState.text;
 					delete knownServerState.stateId;
-					self.update(editorContext, params);
+					self.update(editorContext, params, deferred);
 					return true;
 				}
+				deferred.reject(errorThrown);
 			},
 			complete: self.onComplete.bind(self)
 		});
+		return deferred.promise();
 	};
 	
 	return UpdateService;

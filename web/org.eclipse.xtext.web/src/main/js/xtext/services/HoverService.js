@@ -14,53 +14,70 @@ define(['xtext/services/AbstractXtextService', 'jquery'], function(AbstractXtext
 	 */
 	function HoverService(serverUrl, resourceId) {
 		this.initialize(serverUrl, resourceId, 'hover');
-		this._delay = 500
 	};
 
 	HoverService.prototype = new AbstractXtextService();
 
-	HoverService.prototype.setDelay = function(delay) {
-		this._delay = delay
-	};
-
-	HoverService.prototype.computeHoverInfo = function(editorContext, params) {
+	HoverService.prototype.computeHoverInfo = function(editorContext, params, deferred) {
+		if (deferred === undefined) {
+			deferred = jQuery.Deferred();
+		}
 		var serverData = {
-			contentType: params.contentType,
-			offset: params.offset
+			contentType: params.contentType
 		};
+		if (params.offset)
+			serverData.caretOffset = params.offset;
+		else
+			serverData.caretOffset = editorContext.getCaretOffset();
 		var httpMethod = 'GET';
 		if (params.sendFullText) {
 			serverData.fullText = editorContext.getText();
 			httpMethod = 'POST';
 		} else {
+			if (editorContext.getClientServiceState().update == 'started') {
+				if (this._updateService) {
+					var self = this;
+					this._updateService.addCompletionCallback(function() {
+						self.computeHoverInfo(editorContext, params, deferred);
+					});
+				} else {
+					deferred.reject();
+				}
+				return deferred.promise();
+			}
 			var knownServerState = editorContext.getServerState();
 			if (knownServerState.stateId !== undefined) {
 				serverData.requiredStateId = knownServerState.stateId;
 			}
 		}
 
-		var deferred = new jQuery.Deferred();
-		var showTime = new Date().getTime() + this._delay;
+		var delay = params.mouseHoverDelay;
+		if (!delay)
+			delay = 500;
+		var showTime = new Date().getTime() + delay;
 		this.sendRequest(editorContext, {
 			type: httpMethod,
 			data: serverData,
+			
 			success: function(result) {
 				if (result && !result.conflict) {
-					var remainingTimeout = Math.max(0, showTime - new Date().getTime())
+					var remainingTimeout = Math.max(0, showTime - new Date().getTime());
 					setTimeout(function() {
 						if (result.stateId !== undefined && result.stateId != editorContext.getServerState().stateId) 
-							deferred.resolve(null);
-						else 
-							deferred.resolve(editorContext.translateHoverInfo(result));
+							deferred.reject();
+						else
+							deferred.resolve(result);
 					}, remainingTimeout);
+				} else {
+					deferred.reject();
 				}
-				else
-					deferred.resolve(null);
+			},
+			
+			error: function(xhr, textStatus, errorThrown) {
+				deferred.reject(errorThrown);
 			}
 		});
-		var promise = deferred.promise();
-		promise.cancel = function() {};
-		return [ promise ];
+		return deferred.promise();
 	};
 	
 	return HoverService;

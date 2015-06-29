@@ -113,7 +113,7 @@ public class ReusedTypeProviderTest extends AbstractTypeProviderTest {
           it.setResourceSet(resourceSet);
           Source2GeneratedMapping _source2GeneratedMapping = new Source2GeneratedMapping();
           IndexState _indexState = new IndexState(part, _source2GeneratedMapping);
-          it.setNewState(_indexState);
+          it.setState(_indexState);
         }
       };
       final BuildRequest buildRequest = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_1);

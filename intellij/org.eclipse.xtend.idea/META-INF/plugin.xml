@@ -37,4 +37,5 @@
     	<treeStructureProvider implementation="org.eclipse.xtend.core.idea.projectview.XtendSelectableTreeStructureProvider" order="last"/>
 	</extensions>
 
+	<xi:include href="plugin_gen.xml" xpointer="xpointer(/idea-plugin/*)"/>
 </idea-plugin>
