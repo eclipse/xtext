@@ -276,10 +276,15 @@ class StandaloneBuilder {
 			throw new IllegalStateException(
 				'''Resource «uri» is not contained in any of the known source folders «sourceDirs».''')
 		}
+		val projectBaseURI = UriUtil.createFolderURI(new File(baseDir))
 		for (output : fsa.outputConfigurations.values) {
-			for (relativeSource : output.sourceFolders) {
-				if (absoluteSource.toString.endsWith(relativeSource)) {
-					fsa.currentSource = relativeSource
+			for (sourceFolder : output.sourceFolders) {
+				var sourceFolderURI = URI.createURI(sourceFolder+'/')
+				if (sourceFolderURI.isRelative) {
+					sourceFolderURI = sourceFolderURI.resolve(projectBaseURI)
+				}
+				if (absoluteSource == sourceFolderURI) {
+					fsa.currentSource = sourceFolder
 				}
 			}
 		}
