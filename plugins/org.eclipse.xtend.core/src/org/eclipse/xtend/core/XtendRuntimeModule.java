@@ -61,6 +61,7 @@ import org.eclipse.xtext.findReferences.TargetURICollector;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
 import org.eclipse.xtext.generator.IGenerator2;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
+import org.eclipse.xtext.generator.IShouldGenerate;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
@@ -380,5 +381,9 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 	
 	public Class<? extends IContextualOutputConfigurationProvider> bindIContextualOutputConfigurationProvider() {
 		return XtendOutputConfigurationProvider.class;
+	}
+	
+	public Class<? extends IShouldGenerate> bindIShouldGenerate(){
+		return IShouldGenerate.Always.class;
 	}
 }
