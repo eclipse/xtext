@@ -30,6 +30,9 @@ import org.eclipse.xtext.resource.ISelectable
 	}
 	
 	def findType(QualifiedName className) {
+		if (cache.containsKey(className)) {
+			return cache.get(className)
+		}
 		val candidate = indexAccesss.getExportedObjects(TypesPackage.Literals.JVM_DECLARED_TYPE, className, false).head
 		var NameEnvironmentAnswer result = null 
 		if (candidate != null) {
@@ -37,9 +40,6 @@ import org.eclipse.xtext.resource.ISelectable
 			result = new NameEnvironmentAnswer(new CompilationUnit(source.toCharArray, className.toString('/')+'.java', null), null)
 		} else {
 			val fileName = className.toString('/') + ".class"
-			if (cache.containsKey(fileName)) {
-				return cache.get(fileName)
-			}
 			val url = classLoader.getResource(fileName)
 			if (url == null) {
 				cache.put(className, null)
