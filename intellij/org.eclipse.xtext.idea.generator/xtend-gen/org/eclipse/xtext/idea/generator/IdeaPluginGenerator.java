@@ -166,6 +166,10 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     if (_doesUseXbase) {
       bindFactory.addTypeToType("org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider", "org.eclipse.xtext.idea.common.types.StubBasedTypeScopeProvider");
       bindFactory.addTypeToType("org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker.Provider", "org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider");
+      bindFactory.addConfiguredBinding("LanguageSpecificPsiModelAssociations", 
+        (("binder.bind(org.eclipse.xtext.psi.IPsiModelAssociations.class)." + 
+          "annotatedWith(org.eclipse.xtext.service.LanguageSpecific.class).") + 
+          "to(org.eclipse.xtext.idea.common.types.DerivedMemberAwarePsiModelAssociations.class)"));
     }
     final Set<Binding> bindings = bindFactory.getBindings();
     String _standaloneSetupIdea = this._ideaPluginClassNames.getStandaloneSetupIdea(grammar);
