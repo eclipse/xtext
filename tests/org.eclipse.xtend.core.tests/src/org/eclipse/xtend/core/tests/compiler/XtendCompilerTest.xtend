@@ -5547,6 +5547,38 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	
+	@Test def void testSynchronized() {
+		'''
+			class Foo {
+				def Object getLock() {
+					return this
+				}
+				def void doStuff() {
+					synchronized(getLock()) {
+						println("hello")
+						println("hello")
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.InputOutput;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public Object getLock() {
+			    return this;
+			  }
+			  
+			  public void doStuff() {
+			    synchronized (this.getLock()) {
+			      InputOutput.<String>println("hello");
+			      InputOutput.<String>println("hello");
+			    }
+			  }
+			}
+		''')
+	}
+	
 }
 
 //class XtendCompilerTest extends AbstractXtendCompilerTest {
