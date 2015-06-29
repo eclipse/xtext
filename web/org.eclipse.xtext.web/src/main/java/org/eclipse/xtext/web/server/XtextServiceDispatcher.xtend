@@ -35,6 +35,7 @@ import org.eclipse.xtext.web.server.occurrences.OccurrencesService
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler
 import org.eclipse.xtext.web.server.persistence.ResourcePersistenceService
 import org.eclipse.xtext.web.server.validation.ValidationService
+import org.eclipse.xtext.web.server.formatting.FormattingService
 
 /**
  * The entry class for Xtext service invocations. Use {@link #getService(IRequestData, ISessionStore)}
@@ -98,6 +99,7 @@ class XtextServiceDispatcher {
 	@Inject ValidationService validationService
 	@Inject HoverService hoverService
 	@Inject OccurrencesService occurrencesService
+	@Inject FormattingService formattingService
 	@Inject IServerResourceHandler resourceHandler
 	@Inject IWebResourceSetProvider resourceSetProvider
 	@Inject Provider<XtextWebDocument> documentProvider
@@ -163,6 +165,8 @@ class XtextServiceDispatcher {
 				getHoverService(request, sessionStore)
 			case 'occurrences':
 				getOccurrencesService(request, sessionStore)
+			case 'format':
+				getFormattingService(request, sessionStore)
 			default:
 				throw new InvalidParametersException('The request type \'' + requestType + '\' is not supported.')
 		}
@@ -343,6 +347,27 @@ class XtextServiceDispatcher {
 			service = [
 				try {
 					occurrencesService.findOccurrences(document, offset)
+				} catch (Throwable throwable) {
+					handleError(throwable)
+				}
+			]
+			hasTextInput = request.parameterKeys.contains('fullText')
+		]
+	}
+	
+	protected def getFormattingService(IRequestData request, ISessionStore sessionStore)
+			throws InvalidRequestException {
+		val document = getDocumentAccess(request, sessionStore)
+		val selectionStart = request.getInt('selectionStart', Optional.of(0))
+		val selectionEnd = request.getInt('selectionEnd', Optional.of(selectionStart))
+		val selection =
+			if (selectionEnd > selectionStart)
+				new TextRegion(selectionStart, selectionEnd - selectionStart)
+			else null
+		new ServiceDescriptor => [
+			service = [
+				try {
+					formattingService.format(document, selection)
 				} catch (Throwable throwable) {
 					handleError(throwable)
 				}

@@ -9,8 +9,8 @@ package org.eclipse.xtext.web.example.statemachine.formatting
 
 import org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter
 import org.eclipse.xtext.formatting.impl.FormattingConfig
-// import com.google.inject.Inject;
-// import org.eclipse.xtext.web.example.statemachine.services.StatemachineGrammarAccess
+import com.google.inject.Inject;
+import org.eclipse.xtext.web.example.statemachine.services.StatemachineGrammarAccess
 
 /**
  * This class contains custom formatting declarations.
@@ -22,13 +22,20 @@ import org.eclipse.xtext.formatting.impl.FormattingConfig
  */
 class StatemachineFormatter extends AbstractDeclarativeFormatter {
 
-//	@Inject extension StatemachineGrammarAccess
+	@Inject extension StatemachineGrammarAccess
 	
 	override protected void configureFormatting(FormattingConfig c) {
-// It's usually a good idea to activate the following three statements.
-// They will add and preserve newlines around comments
-//		c.setLinewrap(0, 1, 2).before(SL_COMMENTRule)
-//		c.setLinewrap(0, 1, 2).before(ML_COMMENTRule)
-//		c.setLinewrap(0, 1, 1).after(ML_COMMENTRule)
+		c.setLinewrap(0, 1, 2).before(SL_COMMENTRule)
+		c.setLinewrap(0, 1, 2).before(ML_COMMENTRule)
+		c.setLinewrap(0, 1, 1).after(ML_COMMENTRule)
+		
+		c.setLinewrap.before(inputSignalAccess.inputKeyword_1)
+		c.setLinewrap.before(outputSignalAccess.outputKeyword_1)
+		c.setLinewrap(1, 1, 2).before(stateAccess.stateKeyword_0)
+		c.setIndentationIncrement.after(stateAccess.nameAssignment_1)
+		c.setLinewrap.before(commandAccess.setKeyword_0)
+		c.setLinewrap.before(transitionAccess.ifKeyword_0)
+		c.setLinewrap.before(stateAccess.endKeyword_4)
+		c.setIndentationDecrement.before(stateAccess.endKeyword_4)
 	}
 }

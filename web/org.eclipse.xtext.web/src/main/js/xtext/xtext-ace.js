@@ -19,6 +19,10 @@
  *     A CSS class name written into the dirtyElement when the editor is marked dirty.
  * enableContentAssistService = true {Boolean}
  *     Whether content assist should be enabled.
+ * enableFormattingAction = false {Boolean}
+ *     Whether the formatting action should be bound to the standard keystroke ctrl+shift+f / cmd+shift+f.
+ * enableFormattingService = true {Boolean}
+ *     Whether text formatting should be enabled.
  * enableOccurrencesService = true {Boolean}
  *     Whether marking occurrences should be enabled.
  * enableSaveAction = false {Boolean}
@@ -55,10 +59,11 @@ define([
 	'xtext/services/UpdateService',
 	'xtext/services/ContentAssistService',
 	'xtext/services/ValidationService',
-	'xtext/services/OccurrencesService'
+	'xtext/services/OccurrencesService',
+	'xtext/services/FormattingService'
 ], function(jQuery, ace, languageTools, compatibility, EditorContext, LoadResourceService,
 		RevertResourceService, SaveResourceService, UpdateService, ContentAssistService,
-		ValidationService, OccurrencesService) {
+		ValidationService, OccurrencesService, FormattingService) {
 	
 	/**
 	 * Add a problem marker to an editor session.
@@ -386,6 +391,24 @@ define([
 			});
 		}
 		
+		//---- Formatting Service
+		
+		var formattingService;
+		if (options.enableFormattingService || options.enableFormattingService === undefined) {
+			formattingService = new FormattingService(options.serverUrl, options.resourceId);
+			if (updateService)
+				formattingService.setUpdateService(updateService);
+			if (options.enableFormattingAction && editor.commands) {
+				editor.commands.addCommand({
+					name: 'format',
+					bindKey: {win: 'Ctrl-Shift-F', mac: 'Command-Shift-F'},
+					exec: function(editor) {
+						formattingService.format(editorContext, options);
+					}
+				});
+			}
+		}
+		
 		editor.invokeXtextService = function(service, invokeOptions) {
 			var optionsCopy = _copy(options);
 			for (var p in invokeOptions) {
@@ -403,6 +426,8 @@ define([
 				return validationService.computeProblems(editorContext, optionsCopy);
 			else if (service === 'occurrences' && occurrencesService)
 				return occurrencesService.markOccurrences(editorContext, optionsCopy);
+			else if (service === 'format' && formattingService)
+				return formattingService.format(editorContext, options);
 			else
 				throw new Error('Service \'' + service + '\' is not available.');
 		};
