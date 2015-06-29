@@ -328,18 +328,6 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 		''')
 	}
 	
-	@Test
-	def testPrivateClass() {
-		assertCompilesTo('''
-			private class Foo {
-			}
-		''','''
-			@SuppressWarnings("all")
-			private class Foo {
-			}
-		''')
-	}
-	
 	def assertCompilesTo(CharSequence input, CharSequence expected) {
 		val file = file(input.toString(), false)
 		val resource = file.eResource
