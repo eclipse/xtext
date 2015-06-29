@@ -179,7 +179,7 @@ This will spawn a new Eclipse workbench with your newly developed plug-ins insta
 
 ## Second Iteration: Adding Packages and Imports {#add-imports}
 
-After you have created the your first DSL and had a look at the editor, the language should be refined and incrementally enhanced. The Domain Model language should support the notion of *Package*s in order to avoid name clashes and to better fit with the target environment (Java). A *Package* may contain *Types* and other packages. In order to allow fort names in references, we will also add a way to declare imports.
+After you have created the your first DSL and had a look at the editor, the language should be refined and incrementally enhanced. The Domain Model language should support the notion of *Package*s in order to avoid name clashes and to better fit with the target environment (Java). A *Package* may contain *Types* and other packages. In order to allow for names in references, we will also add a way to declare imports.
 
 In the end we want to be able to split the previously used model into to distinct files :
 
