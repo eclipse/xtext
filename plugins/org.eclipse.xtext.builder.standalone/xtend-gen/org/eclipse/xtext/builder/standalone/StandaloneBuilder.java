@@ -506,15 +506,24 @@ public class StandaloneBuilder {
       _builder.append(".");
       throw new IllegalStateException(_builder.toString());
     }
+    File _file = new File(this.baseDir);
+    final URI projectBaseURI = UriUtil.createFolderURI(_file);
     Map<String, OutputConfiguration> _outputConfigurations = fsa.getOutputConfigurations();
     Collection<OutputConfiguration> _values = _outputConfigurations.values();
     for (final OutputConfiguration output : _values) {
       Set<String> _sourceFolders = output.getSourceFolders();
-      for (final String relativeSource : _sourceFolders) {
-        String _string = absoluteSource.toString();
-        boolean _endsWith = _string.endsWith(relativeSource);
-        if (_endsWith) {
-          fsa.setCurrentSource(relativeSource);
+      for (final String sourceFolder : _sourceFolders) {
+        {
+          URI sourceFolderURI = URI.createURI((sourceFolder + "/"));
+          boolean _isRelative = sourceFolderURI.isRelative();
+          if (_isRelative) {
+            URI _resolve = sourceFolderURI.resolve(projectBaseURI);
+            sourceFolderURI = _resolve;
+          }
+          boolean _equals_1 = Objects.equal(absoluteSource, sourceFolderURI);
+          if (_equals_1) {
+            fsa.setCurrentSource(sourceFolder);
+          }
         }
       }
     }
