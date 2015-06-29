@@ -39,6 +39,10 @@
  *     The document.
  * enableContentAssistService = true {Boolean}
  *     Whether content assist should be enabled.
+ * enableFormattingAction = false {Boolean}
+ *     Whether the formatting action should be bound to the standard keystroke ctrl+shift+f / cmd+shift+f.
+ * enableFormattingService = true {Boolean}
+ *     Whether text formatting should be enabled.
  * enableHoverService = true {Boolean}
  *     Whether mouse hover information should be enabled.
  * enableOccurrencesService = true {Boolean}
@@ -133,10 +137,11 @@ define([
 	'xtext/services/ContentAssistService',
 	'xtext/services/ValidationService',
 	'xtext/services/HoverService',
-	'xtext/services/OccurrencesService'
+	'xtext/services/OccurrencesService',
+	'xtext/services/FormattingService'
 ], function(jQuery, orionEdit, Deferred, mKeyBinding, mTextStyler, compatibility, EditorContext,
 		LoadResourceService, RevertResourceService, SaveResourceService, UpdateService,
-		ContentAssistService, ValidationService, HoverService, OccurrencesService) {
+		ContentAssistService, ValidationService, HoverService, OccurrencesService, FormattingService) {
 	
 	/**
 	 * Translate an HTML attribute name to a JS option name.
@@ -524,6 +529,22 @@ define([
 			});
 		}
 		
+		//---- Formatting Service
+		
+		var formattingService;
+		if (options.enableFormattingService || options.enableFormattingService === undefined) {
+			formattingService = new FormattingService(options.serverUrl, options.resourceId);
+			if (updateService)
+				formattingService.setUpdateService(updateService);
+			if (options.enableFormattingAction) {
+				textView.setKeyBinding(new mKeyBinding.KeyStroke('f', true, true), 'formatXtextDocument');
+				textView.setAction('formatXtextDocument', function() {
+					formattingService.format(editorContext, options);
+					return true;
+				}, {name: 'Format'});
+			}
+		}
+		
 		editor.invokeXtextService = function(service, invokeOptions) {
 			var optionsCopy = _copy(options);
 			for (var p in invokeOptions) {
@@ -537,10 +558,12 @@ define([
 				return saveResourceService.saveResource(editorContext, optionsCopy);
 			else if (service === 'revert' && revertResourceService)
 				return revertResourceService.revertResource(editorContext, optionsCopy);
-			else if (service === 'validation' && validationService)
+			else if (service === 'validate' && validationService)
 				return validationService.computeProblems(editorContext, optionsCopy);
 			else if (service === 'occurrences' && occurrencesService)
 				return occurrencesService.markOccurrences(editorContext, optionsCopy);
+			else if (service === 'format' && formattingService)
+				return formattingService.format(editorContext, options);
 			else
 				throw new Error('Service \'' + service + '\' is not available.');
 		}

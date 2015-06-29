@@ -12,14 +12,10 @@ import static java.util.Collections.*;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
@@ -27,20 +23,13 @@ import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider;
 import org.eclipse.xtext.idea.resource.PsiToEcoreAdapter;
 import org.eclipse.xtext.idea.resource.PsiToEcoreTransformator;
-import org.eclipse.xtext.idea.resource.ResourceDescriptionAdapter;
 import org.eclipse.xtext.idea.util.CancelProgressIndicator;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.SyntheticCompositeNode;
 import org.eclipse.xtext.psi.PsiEObject;
-import org.eclipse.xtext.psi.stubs.ExportedObject;
 import org.eclipse.xtext.psi.stubs.XtextFileStub;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
-import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
-import org.eclipse.xtext.resource.EObjectDescription;
-import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.OperationCanceledError;
@@ -66,16 +55,12 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.CachedValue;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
-import com.intellij.util.indexing.FileBasedIndexImpl;
 import com.intellij.util.indexing.IndexingDataKeys;
 
 public abstract class BaseXtextFile extends PsiFileBase {
 	
 	public static final String GLOBAL_MODIFICATION_COUNT = "org.eclipse.xtext.psi.impl.BaseXtextFile.globalModificationCounter";
 	
-	@Inject
-	private CompilerPhases compilerPhases;
-
     @Inject
     protected IdeaResourceSetProvider resourceSetProvider;
     
@@ -104,7 +89,6 @@ public abstract class BaseXtextFile extends PsiFileBase {
 			@Override
 			public Result<XtextResource> compute() {
 				XtextResource resource = createResource();
-				installResourceDescription(resource);
 				return Result.create(resource, new Object[] {
 						globalModificationCount, 
 						BaseXtextFile.this
@@ -210,26 +194,6 @@ public abstract class BaseXtextFile extends PsiFileBase {
 		return psiFile.getViewProvider().getVirtualFile();
 	}
 
-	protected void installResourceDescription(Resource resource) {
-		try {
-			if (compilerPhases.isIndexing(resource)) {
-				throw new IllegalStateException("Was already indexing resource set for " + resource.getURI());
-			}
-			compilerPhases.setIndexing(resource, true);
-			/*
-			 * Avoid deadlocks when a language accesses the index during indexing, 
-			 * e.g. Xtend active annotations
-			 */
-			FileBasedIndexImpl.disableUpToDateCheckForCurrentThread();
-			ResourceDescriptionAdapter.install(resource);
-		} catch(OperationCanceledError e) {
-			throw e.getWrapped();
-		} finally {
-			FileBasedIndexImpl.enableUpToDateCheckForCurrentThread();
-			compilerPhases.setIndexing(resource, false);
-		}
-	}
-
 	protected void initialize(final Resource resource) {
 		if (resource instanceof ISynchronizable<?>) {
 			ISynchronizable<?> synchronizable = (ISynchronizable<?>) resource;
@@ -281,11 +245,6 @@ public abstract class BaseXtextFile extends PsiFileBase {
     	return resource.getEObject(uri.fragment());
 	}
     
-    public IResourceDescription getResourceDescription() {
-    	Resource resource = doGetResource();
-    	return resource != null ? ResourceDescriptionAdapter.get(resource) : null;
-    }
-    
     public PsiEObject getRoot() {
     	PsiElement firstChild = getFirstChild();
     	if (firstChild instanceof PsiEObject) {
@@ -316,34 +275,6 @@ public abstract class BaseXtextFile extends PsiFileBase {
 		String url = virtualFile.getUrl();
         return URI.createURI(url);
     }
-
-	public List<IEObjectDescription> getExportedObjects() {
-		StubElement<?> stub = getStub();
-		if (stub instanceof XtextFileStub<?>) {
-			XtextFileStub<?> xtextFileStub = (XtextFileStub<?>) stub;
-			List<IEObjectDescription> exportedObjects = new ArrayList<IEObjectDescription>();
-			for (ExportedObject exportedObject : xtextFileStub.getExportedObjects()) {
-				exportedObjects.add(createEObjectDescription(exportedObject.getEClass(), exportedObject.getEObjectURI(), exportedObject.getQualifiedName()));
-			}
-			return exportedObjects;
-		}
-		IResourceDescription resourceDescription = getResourceDescription();
-		if (resourceDescription != null) {
-			List<IEObjectDescription> exportedObjects = new ArrayList<IEObjectDescription>();
-			for (IEObjectDescription objectDescription : resourceDescription.getExportedObjects()) {
-				exportedObjects.add(new XtextFileAwareEObjectDescription(this, objectDescription));
-			}
-			return exportedObjects;
-		}
-		return Collections.emptyList();
-	}
-
-	protected IEObjectDescription createEObjectDescription(EClass eClass, URI eObjectURI, QualifiedName qualifiedName) {
-		EFactory factory = eClass.getEPackage().getEFactoryInstance();
-		InternalEObject element = (InternalEObject) factory.create(eClass);
-		element.eSetProxyURI(eObjectURI);
-		return new XtextFileAwareEObjectDescription(this, EObjectDescription.create(qualifiedName, element));
-	}
 
 	@Override
 	public String toString() {

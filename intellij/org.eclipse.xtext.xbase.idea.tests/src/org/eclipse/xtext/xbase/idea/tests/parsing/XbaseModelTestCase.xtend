@@ -11,7 +11,8 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.idea.tests.TestDecorator
 import org.eclipse.xtext.idea.tests.parsing.AbstractModelTestCase
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker
-import org.eclipse.xtext.xbase.idea.lang.XbaseFileType
+import org.eclipse.xtext.purexbase.idea.lang.PureXbaseFileType
+import org.eclipse.xtext.purexbase.pureXbase.Model
 import org.eclipse.xtext.xbase.tests.parser.XbaseParserTest
 
 @TestDecorator
@@ -20,7 +21,7 @@ class XbaseModelTestCase extends AbstractModelTestCase {
 	Delegate delegate
 
 	new() {
-		super(XbaseFileType.INSTANCE)
+		super(PureXbaseFileType.INSTANCE)
 		delegate = new Delegate(this)
 	}
 
@@ -30,11 +31,11 @@ class XbaseModelTestCase extends AbstractModelTestCase {
 		val ModelChecker expresssionChecker
 
 		override protected expression(CharSequence string) throws Exception {
-			expresssionChecker.checkModel(string.toString, false)
+			expresssionChecker.<Model>checkModel(string.toString, false).block.expressions.head
 		}
 
 		override protected expression(CharSequence string, boolean resolve) throws Exception {
-			expresssionChecker.checkModel(string.toString, resolve)
+			expresssionChecker.<Model>checkModel(string.toString, resolve).block.expressions.head
 		}
 
 	}

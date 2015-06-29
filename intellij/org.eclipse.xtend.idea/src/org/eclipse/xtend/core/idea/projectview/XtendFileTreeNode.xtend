@@ -15,7 +15,7 @@ import com.intellij.ide.util.treeView.AbstractTreeNode
 import com.intellij.openapi.project.Project
 import org.eclipse.xtend.core.idea.lang.XtendLanguage
 import org.eclipse.xtend.core.idea.lang.psi.impl.XtendFileImpl
-import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClasses
+import org.eclipse.xtext.idea.common.types.JvmPsiClasses
 
 /**
  * @author kosyakov - Initial contribution and API

@@ -1,0 +1,9 @@
+dependencies {
+	compile project(":plugins:org.eclipse.xtext.purexbase")
+}
+
+ideaDevelopment {
+	pluginDependencies {
+		project ':intellij:org.eclipse.xtext.idea'
+	}
+}

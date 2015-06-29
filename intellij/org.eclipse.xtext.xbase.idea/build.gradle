@@ -1,5 +1,0 @@
-ideaDevelopment {
-	pluginDependencies {
-		project ':intellij:org.eclipse.xtext.idea'
-	}
-}

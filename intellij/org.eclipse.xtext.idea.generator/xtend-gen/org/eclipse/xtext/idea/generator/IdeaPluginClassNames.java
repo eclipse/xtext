@@ -133,33 +133,6 @@ public class IdeaPluginClassNames {
     return (_plus_1 + "Language");
   }
   
-  public String getJvmTypesElementFinderName(final Grammar it) {
-    String _basePackageName = this.getBasePackageName(it);
-    String _plus = (_basePackageName + ".lang.types.psi.");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
-    String _plus_1 = (_plus + _simpleName);
-    return (_plus_1 + "JvmTypesElementFinder");
-  }
-  
-  public String getJvmTypesShortNamesCacheName(final Grammar it) {
-    String _basePackageName = this.getBasePackageName(it);
-    String _plus = (_basePackageName + ".lang.types.");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
-    String _plus_1 = (_plus + _simpleName);
-    return (_plus_1 + "JvmTypesShortNamesCache");
-  }
-  
-  public String getJvmElementsReferencesSearch(final Grammar it) {
-    String _basePackageName = this.getBasePackageName(it);
-    String _plus = (_basePackageName + ".lang.types.psi.search.");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
-    String _plus_1 = (_plus + _simpleName);
-    return (_plus_1 + "JvmElementsReferencesSearch");
-  }
-  
   public String getCodeBlockModificationListenerName(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".lang.psi.");
@@ -354,15 +327,6 @@ public class IdeaPluginClassNames {
     String _simpleName = this.toSimpleName(_name);
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "CompletionContributor");
-  }
-  
-  public String getCallReferenceProcessorName(final Grammar it) {
-    String _basePackageName = this.getBasePackageName(it);
-    String _plus = (_basePackageName + ".ide.hierarchy.call.");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
-    String _plus_1 = (_plus + _simpleName);
-    return (_plus_1 + "CallReferenceProcessor");
   }
   
   public String getFacetConfiguration(final Grammar it) {

@@ -31,6 +31,14 @@ public class AbstractSerializationBug269362TestLanguageIdeaModule extends org.ec
 	public Class<? extends org.eclipse.xtext.idea.lang.IElementTypeProvider> bindIElementTypeProvider() {
 		return org.eclipse.xtext.parsetree.reconstr.idea.lang.SerializationBug269362TestLanguageElementTypeProvider.class;
 	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
+		return org.eclipse.xtext.parsetree.reconstr.idea.facet.SerializationBug269362TestLanguageFacetConfiguration.class;
+	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.idea.facet.AbstractFacetConfiguration>> bindAbstractFacetType$AbstractFacetConfiguration() {
+		return org.eclipse.xtext.parsetree.reconstr.idea.facet.SerializationBug269362TestLanguageFacetType.class;
+	}
 	
 	
 }

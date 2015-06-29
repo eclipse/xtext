@@ -31,6 +31,14 @@ public class AbstractDatatypeRulesTestLanguageIdeaModule extends org.eclipse.xte
 	public Class<? extends org.eclipse.xtext.idea.lang.IElementTypeProvider> bindIElementTypeProvider() {
 		return org.eclipse.xtext.parser.datatyperules.idea.lang.DatatypeRulesTestLanguageElementTypeProvider.class;
 	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
+		return org.eclipse.xtext.parser.datatyperules.idea.facet.DatatypeRulesTestLanguageFacetConfiguration.class;
+	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.idea.facet.AbstractFacetConfiguration>> bindAbstractFacetType$AbstractFacetConfiguration() {
+		return org.eclipse.xtext.parser.datatyperules.idea.facet.DatatypeRulesTestLanguageFacetType.class;
+	}
 	
 	
 }

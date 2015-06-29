@@ -31,6 +31,14 @@ public class AbstractBug305397IdeaModule extends org.eclipse.xtext.idea.DefaultI
 	public Class<? extends org.eclipse.xtext.idea.lang.IElementTypeProvider> bindIElementTypeProvider() {
 		return org.eclipse.xtext.parsetree.impl.idea.lang.Bug305397ElementTypeProvider.class;
 	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
+		return org.eclipse.xtext.parsetree.impl.idea.facet.Bug305397FacetConfiguration.class;
+	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.idea.facet.AbstractFacetConfiguration>> bindAbstractFacetType$AbstractFacetConfiguration() {
+		return org.eclipse.xtext.parsetree.impl.idea.facet.Bug305397FacetType.class;
+	}
 	
 	
 }

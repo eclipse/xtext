@@ -31,6 +31,14 @@ public class AbstractEObjectAtOffsetTestLanguageIdeaModule extends org.eclipse.x
 	public Class<? extends org.eclipse.xtext.idea.lang.IElementTypeProvider> bindIElementTypeProvider() {
 		return org.eclipse.xtext.resource.idea.lang.EObjectAtOffsetTestLanguageElementTypeProvider.class;
 	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
+		return org.eclipse.xtext.resource.idea.facet.EObjectAtOffsetTestLanguageFacetConfiguration.class;
+	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.idea.facet.AbstractFacetConfiguration>> bindAbstractFacetType$AbstractFacetConfiguration() {
+		return org.eclipse.xtext.resource.idea.facet.EObjectAtOffsetTestLanguageFacetType.class;
+	}
 	
 	
 }

@@ -5,6 +5,6 @@ dependencies {
 ideaDevelopment {
 	pluginDependencies {
 		project ':intellij:org.eclipse.xtext.idea'
-		project ':intellij:org.eclipse.xtext.xbase.idea'
+		project ':intellij:org.eclipse.xtext.purexbase.idea'
 	}
 }

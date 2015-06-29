@@ -31,6 +31,14 @@ public class AbstractBaseInheritanceTestLanguageIdeaModule extends org.eclipse.x
 	public Class<? extends org.eclipse.xtext.idea.lang.IElementTypeProvider> bindIElementTypeProvider() {
 		return org.eclipse.xtext.grammarinheritance.idea.lang.BaseInheritanceTestLanguageElementTypeProvider.class;
 	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
+		return org.eclipse.xtext.grammarinheritance.idea.facet.BaseInheritanceTestLanguageFacetConfiguration.class;
+	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.idea.facet.AbstractFacetConfiguration>> bindAbstractFacetType$AbstractFacetConfiguration() {
+		return org.eclipse.xtext.grammarinheritance.idea.facet.BaseInheritanceTestLanguageFacetType.class;
+	}
 	
 	
 }

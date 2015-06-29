@@ -20,7 +20,7 @@ import java.util.Collection;
 import java.util.List;
 import org.eclipse.xtend.core.idea.lang.XtendLanguage;
 import org.eclipse.xtend.core.idea.lang.psi.impl.XtendFileImpl;
-import org.eclipse.xtext.xbase.idea.types.psi.JvmPsiClasses;
+import org.eclipse.xtext.idea.common.types.JvmPsiClasses;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;

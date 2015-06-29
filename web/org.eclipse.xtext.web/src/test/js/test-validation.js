@@ -23,9 +23,9 @@ suite('Validation', function() {
 		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
 			xtext.testEditor({doneCallback: done})
 				.setText('foo')
-				.invokeService('validation')
+				.invokeService('validate')
 				.checkRequest(function(url, settings) {
-					assert.equal('test://xtext-service/validation', url);
+					assert.equal('test://xtext-service/validate', url);
 					assert.equal('GET', settings.type);
 				})
 				.respond({entries: [{severity: 'error', startOffset: 3}]})
@@ -41,9 +41,9 @@ suite('Validation', function() {
 		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
 			xtext.testEditor({sendFullText: true, doneCallback: done})
 				.setText('foo')
-				.invokeService('validation')
+				.invokeService('validate')
 				.checkRequest(function(url, settings) {
-					assert.equal('test://xtext-service/validation', url);
+					assert.equal('test://xtext-service/validate', url);
 					assert.equal('POST', settings.type);
 					assert.equal('foo', settings.data.fullText);
 				})
@@ -55,7 +55,7 @@ suite('Validation', function() {
 		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
 			xtext.testEditor({doneCallback: done})
 				.setText('foo')
-				.invokeService('validation')
+				.invokeService('validate')
 				.respond({conflict: 'invalidStateId'})
 				.respond({entries: [{severity: 'error', startOffset: 3}]})
 				.checkResult(function(editorContext, issues) {

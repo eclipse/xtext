@@ -12,8 +12,6 @@
 	</extensions>
 
 	<extensions defaultExtensionNs="com.intellij">
-		<stubIndex implementation="org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex"/>
-
 		<psi.treeChangePreprocessor implementation="org.eclipse.xtext.idea.lang.psi.XtextCodeBlockModificationListener"/>
 
 		<fileTypeFactory implementation="org.eclipse.xtext.idea.lang.XtextFileTypeFactory"/>
@@ -47,5 +45,6 @@
       	<lang.psiStructureViewFactory language="org.eclipse.xtext.Xtext"
       							factoryClass="org.eclipse.xtext.idea.XtextExtensionFactory"
       							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
+		<facetType implementation="org.eclipse.xtext.idea.facet.XtextFacetType"/>
 	</extensions>
 </idea-plugin>
