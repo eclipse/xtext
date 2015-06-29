@@ -54,6 +54,10 @@ public class IndexAwareNameEnvironment implements INameEnvironment {
   
   public NameEnvironmentAnswer findType(final QualifiedName className) {
     try {
+      boolean _containsKey = this.cache.containsKey(className);
+      if (_containsKey) {
+        return this.cache.get(className);
+      }
       Iterable<IEObjectDescription> _exportedObjects = this.indexAccesss.getExportedObjects(TypesPackage.Literals.JVM_DECLARED_TYPE, className, false);
       final IEObjectDescription candidate = IterableExtensions.<IEObjectDescription>head(_exportedObjects);
       NameEnvironmentAnswer result = null;
@@ -69,10 +73,6 @@ public class IndexAwareNameEnvironment implements INameEnvironment {
       } else {
         String _string_1 = className.toString("/");
         final String fileName = (_string_1 + ".class");
-        boolean _containsKey = this.cache.containsKey(fileName);
-        if (_containsKey) {
-          return this.cache.get(fileName);
-        }
         final URL url = this.classLoader.getResource(fileName);
         boolean _equals = Objects.equal(url, null);
         if (_equals) {
