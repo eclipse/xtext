@@ -303,10 +303,14 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 			return;
 		}
 		ITextEditor editor = getTextEditor();
-		if (textOperationTarget == null && editor != null && operationCode != -1)
+		if (textOperationTarget == null && editor != null)
 			textOperationTarget = (ITextOperationTarget) editor.getAdapter(ITextOperationTarget.class);
-		boolean isEnabled = (textOperationTarget != null && textOperationTarget.canDoOperation(operationCode));
+		boolean isEnabled = (textOperationTarget != null && textOperationTarget.canDoOperation(getOperationCode()));
 		setEnabled(isEnabled);
+	}
+
+	private int getOperationCode() {
+		return operationCode;
 	}
 
 	@Override
