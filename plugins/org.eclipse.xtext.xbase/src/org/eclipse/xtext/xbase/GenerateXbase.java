@@ -19,8 +19,6 @@ import org.eclipse.xtext.generator.serializer.SerializerFragment;
 import org.eclipse.xtext.generator.types.TypesGeneratorFragment;
 import org.eclipse.xtext.generator.validation.JavaValidatorFragment;
 import org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment;
-import org.eclipse.xtext.idea.generator.IdeaPluginGenerator;
-import org.eclipse.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFragment;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment;
 import org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment;
@@ -102,9 +100,6 @@ final class GenerateXbase {
 				XtextAntlrGeneratorFragment antlr = new XtextAntlrGeneratorFragment();
 				antlr.setOptions(antlrOptions);
 				addFragment(antlr);
-				
-				addFragment(createIdeaPluginProject(projectName, runtimeProject, ideaProjectName, ideaProjectPath, false, false));
-				addFragment(createXtextAntlrIDEAGeneratorFragment(ideaProjectPath));
 			}});
 			addLanguage(new LanguageConfig() {{
 				String fileExtensions = "___xbase";
@@ -148,9 +143,6 @@ final class GenerateXbase {
 				antlrUI.addAntlrParam("-Xconversiontimeout");
 				antlrUI.addAntlrParam("10000");
 				addFragment(antlrUI);
-				
-				addFragment(createIdeaPluginProject(projectName, runtimeProject, ideaProjectName, ideaProjectPath, true, true));
-				addFragment(createXtextAntlrIDEAGeneratorFragment(ideaProjectPath));
 			}});
 			addLanguage(new LanguageConfig() {{
 				String fileExtensions = "___xbasewithannotations";
@@ -192,9 +184,6 @@ final class GenerateXbase {
 				antlrUI.addAntlrParam("-Xconversiontimeout");
 				antlrUI.addAntlrParam("10000");
 				addFragment(antlrUI);
-				
-				addFragment(createIdeaPluginProject(projectName, runtimeProject, ideaProjectName, ideaProjectPath, false, true));
-				addFragment(createXtextAntlrIDEAGeneratorFragment(ideaProjectPath));
 			}});
 		}};
 		
@@ -228,25 +217,4 @@ final class GenerateXbase {
 		Logger.getLogger(GenerateXbase.class).info("Done."); 
 	}
 
-	protected static IdeaPluginGenerator createIdeaPluginProject(
-			String runtimeProjectName, 
-			String runtimeProjectPath,
-			String ideaProjectName, 
-			String ideaProjectPath,
-			boolean deploayble,
-			boolean typesIntegrationRequired) {
-		IdeaPluginGenerator ideaPluginGenerator = new IdeaPluginGenerator();
-		ideaPluginGenerator.setDeployable(deploayble);
-		ideaPluginGenerator.setRuntimeProjectName(runtimeProjectName);
-		ideaPluginGenerator.setRuntimeProjectPath(runtimeProjectPath);
-		ideaPluginGenerator.setIdeaProjectName(ideaProjectName);
-		ideaPluginGenerator.setIdeaProjectPath(ideaProjectPath);
-		return ideaPluginGenerator;
-	}
-
-	protected static XtextAntlrIDEAGeneratorFragment createXtextAntlrIDEAGeneratorFragment(String ideaProjectPath) {
-		XtextAntlrIDEAGeneratorFragment antlrIdeaGeneratorFragment = new XtextAntlrIDEAGeneratorFragment();
-		antlrIdeaGeneratorFragment.setIdeaProjectPath(ideaProjectPath);
-		return antlrIdeaGeneratorFragment;
-	}
 }
