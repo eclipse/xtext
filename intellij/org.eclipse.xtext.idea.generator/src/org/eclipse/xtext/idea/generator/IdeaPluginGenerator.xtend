@@ -21,6 +21,7 @@ import org.eclipse.xtext.AbstractElement
 import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.Action
 import org.eclipse.xtext.CrossReference
+import org.eclipse.xtext.GeneratedMetamodel
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.ISetup
 import org.eclipse.xtext.RuleCall
@@ -36,7 +37,6 @@ import org.eclipse.xtext.idea.generator.parser.antlr.XtextIDEAGeneratorExtension
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment.*
-import org.eclipse.xtext.GeneratedMetamodel
 
 class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	
@@ -113,6 +113,10 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		if (grammar.doesUseXbase) {
 			bindFactory.addTypeToType('org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider', 'org.eclipse.xtext.idea.common.types.StubBasedTypeScopeProvider')
 			bindFactory.addTypeToType('org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker.Provider', 'org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider')
+			bindFactory.addConfiguredBinding('LanguageSpecificPsiModelAssociations', 
+					'binder.bind(org.eclipse.xtext.psi.IPsiModelAssociations.class).' + 
+					'annotatedWith(org.eclipse.xtext.service.LanguageSpecific.class).' + 
+					'to(org.eclipse.xtext.idea.common.types.DerivedMemberAwarePsiModelAssociations.class)')
 		}
 		val bindings = bindFactory.bindings
 
