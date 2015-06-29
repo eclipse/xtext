@@ -118,7 +118,11 @@ class ClasspathScanner {
 
 	protected def void loadDirectoryDescriptors(File directory, String packageName, List<ITypeDescriptor> descriptors,
 			Collection<String> packagePrefixes) {
-		for (file : directory.listFiles) {
+		val children = directory.listFiles
+		if(children == null) {
+			return
+		}
+		for (file : children) {
 			if (file.isDirectory) {
 				val subPackageName = if (packageName.empty) file.name else packageName + '.' + file.name
 				loadDirectoryDescriptors(file, subPackageName, descriptors, packagePrefixes)
