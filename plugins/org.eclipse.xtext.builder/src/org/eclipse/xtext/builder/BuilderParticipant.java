@@ -29,7 +29,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.builder.DerivedResourceMarkers.GeneratorIdProvider;
@@ -41,6 +40,7 @@ import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IFileSystemAccessExtension3;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.IGenerator2;
+import org.eclipse.xtext.generator.IShouldGenerate;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.OutputConfiguration.SourceMapping;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -52,6 +52,7 @@ import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.util.ResourceUtil;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
@@ -93,6 +94,9 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 
 	@Inject
 	private GeneratorIdProvider generatorIdProvider;
+	
+	@Inject
+	private IShouldGenerate shouldGenerate;
 
 	private EclipseOutputConfigurationProvider outputConfigurationProvider;
 	private BuilderPreferenceAccess builderPreferenceAccess;
@@ -574,18 +578,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	}
 
 	protected boolean shouldGenerate(Resource resource, IBuildContext context) {
-		try {
-			Iterable<Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(resource.getURI());
-			for (Pair<IStorage, IProject> pair : storages) {
-				if (pair.getFirst() instanceof IFile && pair.getSecond().equals(context.getBuiltProject())) {
-					IFile file = (IFile) pair.getFirst();
-					return file.findMaxProblemSeverity(null, true, IResource.DEPTH_INFINITE) != IMarker.SEVERITY_ERROR;
-				}
-			}
-			return false;
-		} catch (CoreException exc) {
-			throw new WrappedException(exc);
-		}
+		return shouldGenerate.shouldGenerate(resource, CancelIndicator.NullImpl);
 	}
 
 	protected Map<String, OutputConfiguration> getOutputConfigurations(IBuildContext context) {
