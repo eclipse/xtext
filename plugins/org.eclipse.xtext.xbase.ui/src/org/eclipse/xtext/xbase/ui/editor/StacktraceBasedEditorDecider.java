@@ -52,8 +52,15 @@ public class StacktraceBasedEditorDecider {
 				return Decision.FORCE_JAVA;
 			if (isOpenSelectedMarkers(element))
 				return Decision.FORCE_JAVA;
+			if (isLightweightDecorationManager(element))
+				return Decision.FORCE_JAVA;
 		}
 		return Decision.FAVOR_XBASE;
+	}
+	
+	protected boolean isLightweightDecorationManager(StackTraceElement element) {
+		return "org.eclipse.ui.internal.decorators.LightweightDecoratorDefinition".equals(element
+				.getClassName()) && "decorate".equals(element.getMethodName());
 	}
 
 	protected boolean isOpenSelectedMarkers(StackTraceElement element) {
