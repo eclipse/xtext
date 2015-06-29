@@ -398,7 +398,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		EObject container = expression.eContainer();
 		if (container instanceof XTryCatchFinallyExpression 
 				|| container instanceof XIfExpression
-				|| container instanceof XClosure) {
+				|| container instanceof XClosure
+				|| container instanceof XSynchronizedExpression) {
 			return true;
 		}
 		if (container instanceof XBlockExpression) {
@@ -1508,7 +1509,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		ITreeAppendable synchronizedAppendable = b.trace(synchronizedExpression, true);
 		XExpression param = synchronizedExpression.getParam();
-		internalToJavaStatement(param, synchronizedAppendable, isReferenced);
+		if (!canCompileToJavaExpression(param, b))
+			internalToJavaStatement(param, synchronizedAppendable, isReferenced);
 		
 		synchronizedAppendable.newLine().append("synchronized (");
 		internalToJavaExpression(param, synchronizedAppendable);
