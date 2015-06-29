@@ -15,9 +15,11 @@ define([
 	'xtext/services/SaveResourceService',
 	'xtext/services/UpdateService',
 	'xtext/services/ContentAssistService',
-	'xtext/services/ValidationService'
+	'xtext/services/ValidationService',
+	'xtext/services/FormattingService'
 ], function(mjQuery, compatibility, EditorContext, LoadResourceService, RevertResourceService,
-		SaveResourceService, UpdateService, ContentAssistService, ValidationService) {
+		SaveResourceService, UpdateService, ContentAssistService, ValidationService,
+		FormattingService) {
 	
 	function _copy(obj) {
 		var copy = {};
@@ -192,6 +194,15 @@ define([
 				contentAssistService.setUpdateService(updateService);
 		}
 		
+		//---- Formatting Service
+		
+		var formattingService;
+		if (options.enableFormattingService || options.enableFormattingService === undefined) {
+			formattingService = new FormattingService(options.serverUrl, options.resourceId);
+			if (updateService)
+				formattingService.setUpdateService(updateService);
+		}
+		
 		editorContext.invokeXtextService = function(service, invokeOptions) {
 			var optionsCopy = _copy(options);
 			for (var p in invokeOptions) {
@@ -213,7 +224,9 @@ define([
 				optionsCopy.offset = editorContext.getCaretOffset();
 				optionsCopy.selection = editorContext.getSelection();
 				return contentAssistService.computeContentAssist(editorContext, optionsCopy);
-			} else
+			} else if (service === 'format' && formattingService)
+				return formattingService.format(editorContext, options);
+			else
 				throw new Error('Service \'' + service + '\' is not available.');
 		};
 		editorContext.xtextServiceSuccessListeners = [];
