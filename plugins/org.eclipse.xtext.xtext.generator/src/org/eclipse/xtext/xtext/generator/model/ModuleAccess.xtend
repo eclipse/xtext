@@ -5,11 +5,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xtext.generator
+package org.eclipse.xtext.xtext.generator.model
 
-/**
- * A fragment that contributes to the {@link XtextGenerator}.
- */
-interface IGeneratorFragment {
+class ModuleAccess {
+	
+	new(FileSystemAccess outlet) {
+		
+	}
 	
 }
