@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.idea.config;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.framework.addSupport.FrameworkSupportInModuleConfigurable;
 import com.intellij.openapi.module.Module;
@@ -14,6 +15,9 @@ import com.intellij.openapi.roots.ContentEntry;
 import com.intellij.openapi.roots.ModifiableModelsProvider;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.SourceFolder;
+import com.intellij.openapi.roots.libraries.Library;
+import com.intellij.openapi.roots.libraries.LibraryTable;
+import com.intellij.openapi.roots.libraries.LibraryTablesRegistrar;
 import com.intellij.openapi.roots.ui.configuration.libraries.CustomLibraryDescription;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
@@ -67,6 +71,23 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
     if (_and) {
       LocalFileSystem _instance = LocalFileSystem.getInstance();
       _instance.refreshAndFindFileByIoFile(output);
+    }
+    LibraryTablesRegistrar _instance_1 = LibraryTablesRegistrar.getInstance();
+    final LibraryTable libraryTable = _instance_1.getLibraryTable();
+    Library library = libraryTable.getLibraryByName(XtendLibraryDescription.XTEND_LIBRARY_NAME);
+    boolean _and_1 = false;
+    boolean _notEquals = (!Objects.equal(library, null));
+    if (!_notEquals) {
+      _and_1 = false;
+    } else {
+      LibraryTable _moduleLibraryTable = rootModel.getModuleLibraryTable();
+      Library[] _libraries = _moduleLibraryTable.getLibraries();
+      boolean _contains = ((List<Library>)Conversions.doWrapArray(_libraries)).contains(library);
+      boolean _not_1 = (!_contains);
+      _and_1 = _not_1;
+    }
+    if (_and_1) {
+      rootModel.addLibraryEntry(library);
     }
   }
   
