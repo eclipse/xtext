@@ -30,6 +30,7 @@ import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
 import org.eclipse.xtext.generator.trace.TraceFileNameProvider
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer
+import org.eclipse.xtext.generator.IFilePostProcessor
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -142,6 +143,7 @@ import org.eclipse.xtext.generator.trace.TraceRegionSerializer
 				val outputConfigProvider = serviceProvider.get(IContextualOutputConfigurationProvider)
 				outputConfigurations = outputConfigProvider.getOutputConfigurations(resource).toMap[name]
 				
+				postProcessor = serviceProvider.get(IFilePostProcessor)
 				traceFileNameProvider = serviceProvider.get(TraceFileNameProvider)
 				traceRegionSerializer = serviceProvider.get(TraceRegionSerializer)
 				generateTraces = true

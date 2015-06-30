@@ -53,6 +53,10 @@ class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
 	@Accessors BeforeDelete beforeDelete = [true]
 	@Accessors BeforeWrite beforeWrite = [$1]
 	@Accessors BeforeRead beforeRead = [$1]
+	
+	public override void setPostProcessor(IFilePostProcessor filePostProcessor) {
+		super.postProcessor = filePostProcessor
+	}
 
 	override getURI(String path, String outputConfiguration) {
 		val outlet = pathes.get(outputConfiguration)
@@ -73,9 +77,10 @@ class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
 	
 	override generateFile(String fileName, String outputCfgName, CharSequence contents) {
 		val uri = getURI(fileName, outputCfgName)
-		generateTrace(fileName, outputCfgName, contents)
 		val encoding = getEncoding(uri)
-		val inStream = new ByteArrayInputStream(contents.toString.getBytes(encoding))
+		val postProcessed = postProcess(fileName, outputCfgName, contents, encoding)
+		generateTrace(fileName, outputCfgName, postProcessed)
+		val inStream = new ByteArrayInputStream(postProcessed.toString.getBytes(encoding))
 		generateFile(fileName, outputCfgName, inStream)
 	}
 	
