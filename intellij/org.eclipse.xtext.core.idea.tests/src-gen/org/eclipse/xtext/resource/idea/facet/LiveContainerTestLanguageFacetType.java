@@ -2,13 +2,12 @@ package org.eclipse.xtext.resource.idea.facet;
 
 import com.intellij.facet.Facet;
 import com.intellij.facet.FacetTypeId;
-import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
-public class LiveContainerTestLanguageFacetType  extends AbstractFacetType<AbstractFacetConfiguration> {
+public class LiveContainerTestLanguageFacetType  extends AbstractFacetType<LiveContainerTestLanguageFacetConfiguration> {
 	private static String TYPE_ID_STRING = "org.eclipse.xtext.resource.LiveContainerTestLanguage";
 
-	public static  FacetTypeId<Facet<AbstractFacetConfiguration>> TYPEID = new FacetTypeId<Facet<AbstractFacetConfiguration>>(TYPE_ID_STRING);
+	public static  FacetTypeId<Facet<LiveContainerTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<LiveContainerTestLanguageFacetConfiguration>>(TYPE_ID_STRING);
 
 	public LiveContainerTestLanguageFacetType() {
 		super(TYPEID, TYPE_ID_STRING, "LiveContainerTestLanguage");

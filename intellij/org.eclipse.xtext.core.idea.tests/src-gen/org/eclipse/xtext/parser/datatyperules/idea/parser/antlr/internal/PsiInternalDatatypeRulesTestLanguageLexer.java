@@ -14,8 +14,8 @@ import java.util.ArrayList;
 public class PsiInternalDatatypeRulesTestLanguageLexer extends Lexer {
     public static final int RULE_ID=4;
     public static final int T__22=22;
-    public static final int RULE_ANY_OTHER=10;
     public static final int T__21=21;
+    public static final int RULE_ANY_OTHER=10;
     public static final int T__20=20;
     public static final int EOF=-1;
     public static final int RULE_SL_COMMENT=8;

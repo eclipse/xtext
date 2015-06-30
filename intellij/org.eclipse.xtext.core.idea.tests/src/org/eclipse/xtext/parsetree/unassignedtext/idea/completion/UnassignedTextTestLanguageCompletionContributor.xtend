@@ -13,5 +13,3 @@ class UnassignedTextTestLanguageCompletionContributor extends AbstractUnassigned
 		//custom rules here
 	}
 }
-
-

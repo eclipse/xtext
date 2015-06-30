@@ -32,11 +32,11 @@ public class AbstractPureXbaseIdeaModule extends org.eclipse.xtext.idea.DefaultI
 		return org.eclipse.xtext.purexbase.idea.lang.PureXbaseElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
 		return org.eclipse.xtext.purexbase.idea.facet.PureXbaseFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.idea.facet.AbstractFacetConfiguration>> bindAbstractFacetType$AbstractFacetConfiguration() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.purexbase.idea.facet.PureXbaseFacetConfiguration>> bindAbstractFacetType$PureXbaseFacetConfiguration() {
 		return org.eclipse.xtext.purexbase.idea.facet.PureXbaseFacetType.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator

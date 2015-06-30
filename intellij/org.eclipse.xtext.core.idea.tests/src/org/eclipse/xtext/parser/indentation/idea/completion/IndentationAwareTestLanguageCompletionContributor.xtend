@@ -13,5 +13,3 @@ class IndentationAwareTestLanguageCompletionContributor extends AbstractIndentat
 		//custom rules here
 	}
 }
-
-

@@ -32,11 +32,11 @@ public class AbstractBacktrackingLexerTestLanguageIdeaModule extends org.eclipse
 		return org.eclipse.xtext.lexer.idea.lang.BacktrackingLexerTestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
 		return org.eclipse.xtext.lexer.idea.facet.BacktrackingLexerTestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.idea.facet.AbstractFacetConfiguration>> bindAbstractFacetType$AbstractFacetConfiguration() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.lexer.idea.facet.BacktrackingLexerTestLanguageFacetConfiguration>> bindAbstractFacetType$BacktrackingLexerTestLanguageFacetConfiguration() {
 		return org.eclipse.xtext.lexer.idea.facet.BacktrackingLexerTestLanguageFacetType.class;
 	}
 	

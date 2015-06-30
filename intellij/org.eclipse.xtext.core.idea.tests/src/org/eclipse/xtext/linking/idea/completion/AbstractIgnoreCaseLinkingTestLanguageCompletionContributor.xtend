@@ -13,5 +13,3 @@ class AbstractIgnoreCaseLinkingTestLanguageCompletionContributor extends Abstrac
 		//custom rules here
 	}
 }
-
-

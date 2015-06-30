@@ -32,11 +32,11 @@ public class AbstractTransientValuesTestIdeaModule extends org.eclipse.xtext.ide
 		return org.eclipse.xtext.parsetree.transientvalues.idea.lang.TransientValuesTestElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
 		return org.eclipse.xtext.parsetree.transientvalues.idea.facet.TransientValuesTestFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.idea.facet.AbstractFacetConfiguration>> bindAbstractFacetType$AbstractFacetConfiguration() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.parsetree.transientvalues.idea.facet.TransientValuesTestFacetConfiguration>> bindAbstractFacetType$TransientValuesTestFacetConfiguration() {
 		return org.eclipse.xtext.parsetree.transientvalues.idea.facet.TransientValuesTestFacetType.class;
 	}
 	

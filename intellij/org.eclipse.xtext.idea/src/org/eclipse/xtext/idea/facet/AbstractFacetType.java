@@ -14,7 +14,6 @@ import org.eclipse.xtext.idea.Icons;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.intellij.facet.Facet;
-import com.intellij.facet.FacetConfiguration;
 import com.intellij.facet.FacetType;
 import com.intellij.facet.FacetTypeId;
 import com.intellij.openapi.module.Module;
@@ -23,7 +22,7 @@ import com.intellij.openapi.module.ModuleType;
 /**
  * @author dhuebner - Initial contribution and API
  */
-public abstract class AbstractFacetType<C extends FacetConfiguration> extends FacetType<Facet<C>, C> {
+public abstract class AbstractFacetType<C extends AbstractFacetConfiguration<? extends GeneratorConfigurationState>> extends FacetType<Facet<C>, C> {
 	private @Inject Provider<C> facetConfiguration;
 
 	public AbstractFacetType(FacetTypeId<Facet<C>> id, String stringId, String presentableName) {

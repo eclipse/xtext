@@ -2,13 +2,12 @@ package org.eclipse.xtext.valueconverter.idea.facet;
 
 import com.intellij.facet.Facet;
 import com.intellij.facet.FacetTypeId;
-import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
-public class Bug250313FacetType  extends AbstractFacetType<AbstractFacetConfiguration> {
+public class Bug250313FacetType  extends AbstractFacetType<Bug250313FacetConfiguration> {
 	private static String TYPE_ID_STRING = "org.eclipse.xtext.valueconverter.Bug250313";
 
-	public static  FacetTypeId<Facet<AbstractFacetConfiguration>> TYPEID = new FacetTypeId<Facet<AbstractFacetConfiguration>>(TYPE_ID_STRING);
+	public static  FacetTypeId<Facet<Bug250313FacetConfiguration>> TYPEID = new FacetTypeId<Facet<Bug250313FacetConfiguration>>(TYPE_ID_STRING);
 
 	public Bug250313FacetType() {
 		super(TYPEID, TYPE_ID_STRING, "Bug250313");

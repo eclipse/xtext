@@ -37,7 +37,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 @SuppressWarnings("all")
 public class IdeaOutputConfigurationProvider implements IContextualOutputConfigurationProvider {
   @Inject(optional = true)
-  private AbstractFacetType<AbstractFacetConfiguration> languageFacet;
+  private AbstractFacetType<AbstractFacetConfiguration<GeneratorConfigurationState>> languageFacet;
   
   @Inject
   private IOutputConfigurationProvider defaultOutput;
@@ -50,11 +50,11 @@ public class IdeaOutputConfigurationProvider implements IContextualOutputConfigu
       final Object module = ((XtextResourceSet) _resourceSet).getClasspathURIContext();
       if ((module instanceof Module)) {
         FacetManager _instance = FacetManager.getInstance(((Module)module));
-        FacetTypeId<Facet<AbstractFacetConfiguration>> _id = this.languageFacet.getId();
-        final Facet<AbstractFacetConfiguration> facet = _instance.<Facet<AbstractFacetConfiguration>>getFacetByType(_id);
+        FacetTypeId<Facet<AbstractFacetConfiguration<GeneratorConfigurationState>>> _id = this.languageFacet.getId();
+        final Facet<AbstractFacetConfiguration<GeneratorConfigurationState>> facet = _instance.<Facet<AbstractFacetConfiguration<GeneratorConfigurationState>>>getFacetByType(_id);
         boolean _notEquals_1 = (!Objects.equal(facet, null));
         if (_notEquals_1) {
-          AbstractFacetConfiguration _configuration = facet.getConfiguration();
+          AbstractFacetConfiguration<GeneratorConfigurationState> _configuration = facet.getConfiguration();
           final GeneratorConfigurationState generatorConf = _configuration.getState();
           final OutputConfiguration defOut = new OutputConfiguration(IFileSystemAccess.DEFAULT_OUTPUT);
           String _outputDirectory = generatorConf.getOutputDirectory();

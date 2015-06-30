@@ -13,5 +13,3 @@ class SimpleUnorderedGroupsTestLanguageCompletionContributor extends AbstractSim
 		//custom rules here
 	}
 }
-
-

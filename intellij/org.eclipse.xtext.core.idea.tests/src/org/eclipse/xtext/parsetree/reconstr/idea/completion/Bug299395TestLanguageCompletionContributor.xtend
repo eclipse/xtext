@@ -13,5 +13,3 @@ class Bug299395TestLanguageCompletionContributor extends AbstractBug299395TestLa
 		//custom rules here
 	}
 }
-
-

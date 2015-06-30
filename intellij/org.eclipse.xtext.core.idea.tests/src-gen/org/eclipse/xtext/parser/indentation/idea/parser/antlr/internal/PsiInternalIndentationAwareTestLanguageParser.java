@@ -27,8 +27,8 @@ public class PsiInternalIndentationAwareTestLanguageParser extends AbstractPsiAn
     public static final int RULE_INDENT=5;
     public static final int RULE_DEDENT=6;
     public static final int RULE_WS=11;
-    public static final int RULE_SL_COMMENT=7;
     public static final int EOF=-1;
+    public static final int RULE_SL_COMMENT=7;
     public static final int RULE_ML_COMMENT=10;
 
     // delegates

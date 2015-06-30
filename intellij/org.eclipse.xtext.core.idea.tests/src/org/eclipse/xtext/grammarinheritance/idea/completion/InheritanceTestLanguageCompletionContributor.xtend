@@ -13,5 +13,3 @@ class InheritanceTestLanguageCompletionContributor extends AbstractInheritanceTe
 		//custom rules here
 	}
 }
-
-

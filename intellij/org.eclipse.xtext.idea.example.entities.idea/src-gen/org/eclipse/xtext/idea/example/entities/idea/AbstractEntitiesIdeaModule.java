@@ -32,11 +32,11 @@ public class AbstractEntitiesIdeaModule extends org.eclipse.xtext.idea.DefaultId
 		return org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
 		return org.eclipse.xtext.idea.example.entities.idea.facet.EntitiesFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.idea.facet.AbstractFacetConfiguration>> bindAbstractFacetType$AbstractFacetConfiguration() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.idea.example.entities.idea.facet.EntitiesFacetConfiguration>> bindAbstractFacetType$EntitiesFacetConfiguration() {
 		return org.eclipse.xtext.idea.example.entities.idea.facet.EntitiesFacetType.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator

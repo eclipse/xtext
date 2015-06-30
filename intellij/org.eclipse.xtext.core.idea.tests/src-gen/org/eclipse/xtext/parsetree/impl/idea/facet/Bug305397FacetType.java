@@ -2,13 +2,12 @@ package org.eclipse.xtext.parsetree.impl.idea.facet;
 
 import com.intellij.facet.Facet;
 import com.intellij.facet.FacetTypeId;
-import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
-public class Bug305397FacetType  extends AbstractFacetType<AbstractFacetConfiguration> {
+public class Bug305397FacetType  extends AbstractFacetType<Bug305397FacetConfiguration> {
 	private static String TYPE_ID_STRING = "org.eclipse.xtext.parsetree.impl.Bug305397";
 
-	public static  FacetTypeId<Facet<AbstractFacetConfiguration>> TYPEID = new FacetTypeId<Facet<AbstractFacetConfiguration>>(TYPE_ID_STRING);
+	public static  FacetTypeId<Facet<Bug305397FacetConfiguration>> TYPEID = new FacetTypeId<Facet<Bug305397FacetConfiguration>>(TYPE_ID_STRING);
 
 	public Bug305397FacetType() {
 		super(TYPEID, TYPE_ID_STRING, "Bug305397");

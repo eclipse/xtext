@@ -32,11 +32,11 @@ public class AbstractInheritanceTestLanguageIdeaModule extends org.eclipse.xtext
 		return org.eclipse.xtext.grammarinheritance.idea.lang.InheritanceTestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
 		return org.eclipse.xtext.grammarinheritance.idea.facet.InheritanceTestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.idea.facet.AbstractFacetConfiguration>> bindAbstractFacetType$AbstractFacetConfiguration() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.grammarinheritance.idea.facet.InheritanceTestLanguageFacetConfiguration>> bindAbstractFacetType$InheritanceTestLanguageFacetConfiguration() {
 		return org.eclipse.xtext.grammarinheritance.idea.facet.InheritanceTestLanguageFacetType.class;
 	}
 	

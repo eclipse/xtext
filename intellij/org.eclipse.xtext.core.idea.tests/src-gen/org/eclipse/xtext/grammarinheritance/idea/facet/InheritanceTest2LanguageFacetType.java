@@ -2,13 +2,12 @@ package org.eclipse.xtext.grammarinheritance.idea.facet;
 
 import com.intellij.facet.Facet;
 import com.intellij.facet.FacetTypeId;
-import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
-public class InheritanceTest2LanguageFacetType  extends AbstractFacetType<AbstractFacetConfiguration> {
+public class InheritanceTest2LanguageFacetType  extends AbstractFacetType<InheritanceTest2LanguageFacetConfiguration> {
 	private static String TYPE_ID_STRING = "org.eclipse.xtext.grammarinheritance.InheritanceTest2Language";
 
-	public static  FacetTypeId<Facet<AbstractFacetConfiguration>> TYPEID = new FacetTypeId<Facet<AbstractFacetConfiguration>>(TYPE_ID_STRING);
+	public static  FacetTypeId<Facet<InheritanceTest2LanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<InheritanceTest2LanguageFacetConfiguration>>(TYPE_ID_STRING);
 
 	public InheritanceTest2LanguageFacetType() {
 		super(TYPEID, TYPE_ID_STRING, "InheritanceTest2Language");

@@ -32,11 +32,11 @@ public class AbstractQualifiedNameTestLanguageIdeaModule extends org.eclipse.xte
 		return org.eclipse.xtext.valueconverter.idea.lang.QualifiedNameTestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
 		return org.eclipse.xtext.valueconverter.idea.facet.QualifiedNameTestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.idea.facet.AbstractFacetConfiguration>> bindAbstractFacetType$AbstractFacetConfiguration() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.valueconverter.idea.facet.QualifiedNameTestLanguageFacetConfiguration>> bindAbstractFacetType$QualifiedNameTestLanguageFacetConfiguration() {
 		return org.eclipse.xtext.valueconverter.idea.facet.QualifiedNameTestLanguageFacetType.class;
 	}
 	

@@ -13,5 +13,3 @@ class BacktrackingBug325745TestLanguageCompletionContributor extends AbstractBac
 		//custom rules here
 	}
 }
-
-

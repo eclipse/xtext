@@ -2,10 +2,11 @@ package org.eclipse.xtext.idea.facet
 
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.ui.TextFieldWithBrowseButton
+import java.awt.GridBagConstraints
 import javax.swing.JCheckBox
 import javax.swing.JComponent
 import org.eclipse.xtext.idea.util.IdeaWidgetFactory
-import java.awt.GridBagConstraints
+import org.eclipse.xtext.idea.util.IdeaWidgetFactory.TwoColumnPanel
 
 /** 
  * Created by dhuebner on 19.06.15.
@@ -13,41 +14,48 @@ import java.awt.GridBagConstraints
 class GeneratorFacetForm<T extends GeneratorConfigurationState> {
 	extension IdeaWidgetFactory = new IdeaWidgetFactory
 
-	JCheckBox activated
-	TextFieldWithBrowseButton directory
-	TextFieldWithBrowseButton testDirectory
-	JCheckBox createDirectory
-	JCheckBox overwriteFiles
-	JCheckBox deleteGenerated
+	protected JCheckBox activated
+	protected TextFieldWithBrowseButton directory
+	protected TextFieldWithBrowseButton testDirectory
+	protected JCheckBox createDirectory
+	protected JCheckBox overwriteFiles
+	protected JCheckBox deleteGenerated
 
 	Module module
 	JComponent rootPanel
 
 	new(Module module) {
 		this.module = module
-		this.rootPanel = createComponent()
 	}
 
 	def protected JComponent createComponent() {
 		twoColumnPanel [ extension it |
 
 			row [separator("General")]
-			row [activated = checkBox("Compiler is activated")]
+			createGeneralSection
 			row [label(" ")]
 
 			row [separator("Output Folder")]
-			row([label("Directory:")], [weightx = 1.0 directory = browseField(module.getProject())])
-			row([label("Test Directory:")], [testDirectory = browseField(module.getProject())])
-
-			row [createDirectory = checkBox("Create directory if it doesn't exist")]
-			row [overwriteFiles = checkBox("Overwrite existing files")]
-			row [deleteGenerated = checkBox("Delete generated files")]
+			createOutputSection
 			expand(GridBagConstraints.VERTICAL)
 		]
 
 	}
 
-	def void setData(GeneratorConfigurationState data) {
+	def createOutputSection(extension TwoColumnPanel it) {
+		row([label("Directory:")], [weightx = 1.0 directory = browseField(module.getProject())])
+		row([label("Test Directory:")], [testDirectory = browseField(module.getProject())])
+
+		row [createDirectory = checkBox("Create directory if it doesn't exist")]
+		row [overwriteFiles = checkBox("Overwrite existing files")]
+		row [deleteGenerated = checkBox("Delete generated files")]
+	}
+
+	def createGeneralSection(extension TwoColumnPanel it) {
+		row [activated = checkBox("Compiler is activated")]
+	}
+
+	def void setData(T data) {
 		createDirectory.setSelected(data.isCreateDirectory())
 		overwriteFiles.setSelected(data.isOverwriteExisting())
 		deleteGenerated.setSelected(data.isDeleteGenerated())
@@ -82,7 +90,13 @@ class GeneratorFacetForm<T extends GeneratorConfigurationState> {
 	}
 
 	def JComponent getRootComponent() {
+		if (rootPanel === null) {
+			this.rootPanel = createComponent()
+		}
 		return rootPanel
 	}
 
+	def Module getModule() {
+		this.module
+	}
 }

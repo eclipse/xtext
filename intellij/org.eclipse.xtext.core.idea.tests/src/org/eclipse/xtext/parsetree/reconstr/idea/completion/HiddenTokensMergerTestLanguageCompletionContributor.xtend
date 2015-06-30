@@ -13,5 +13,3 @@ class HiddenTokensMergerTestLanguageCompletionContributor extends AbstractHidden
 		//custom rules here
 	}
 }
-
-

@@ -32,11 +32,11 @@ public class AbstractTreeTestLanguageIdeaModule extends org.eclipse.xtext.idea.D
 		return org.eclipse.xtext.testlanguages.idea.lang.TreeTestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
 		return org.eclipse.xtext.testlanguages.idea.facet.TreeTestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.idea.facet.AbstractFacetConfiguration>> bindAbstractFacetType$AbstractFacetConfiguration() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.testlanguages.idea.facet.TreeTestLanguageFacetConfiguration>> bindAbstractFacetType$TreeTestLanguageFacetConfiguration() {
 		return org.eclipse.xtext.testlanguages.idea.facet.TreeTestLanguageFacetType.class;
 	}
 	

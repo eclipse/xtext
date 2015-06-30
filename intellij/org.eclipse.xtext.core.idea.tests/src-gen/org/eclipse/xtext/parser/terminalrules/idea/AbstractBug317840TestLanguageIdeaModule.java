@@ -32,11 +32,11 @@ public class AbstractBug317840TestLanguageIdeaModule extends org.eclipse.xtext.i
 		return org.eclipse.xtext.parser.terminalrules.idea.lang.Bug317840TestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
 		return org.eclipse.xtext.parser.terminalrules.idea.facet.Bug317840TestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.idea.facet.AbstractFacetConfiguration>> bindAbstractFacetType$AbstractFacetConfiguration() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.parser.terminalrules.idea.facet.Bug317840TestLanguageFacetConfiguration>> bindAbstractFacetType$Bug317840TestLanguageFacetConfiguration() {
 		return org.eclipse.xtext.parser.terminalrules.idea.facet.Bug317840TestLanguageFacetType.class;
 	}
 	
