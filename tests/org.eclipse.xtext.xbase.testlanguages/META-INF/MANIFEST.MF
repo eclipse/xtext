@@ -31,5 +31,8 @@ Export-Package: org.eclipse.xtext.xbase.testlanguages,
  org.eclipse.xtext.xbase.testlanguages.parser.antlr.internal,
  org.eclipse.xtext.xbase.testlanguages.validation,
  org.eclipse.xtext.xbase.testlanguages.formatting,
- org.eclipse.xtext.xbase.testlanguages.jvmmodel
+ org.eclipse.xtext.xbase.testlanguages.jvmmodel,
+ org.eclipse.xtext.xbase.testlanguages.contentAssistFragmentTestLang,
+ org.eclipse.xtext.xbase.testlanguages.contentAssistFragmentTestLang.impl,
+ org.eclipse.xtext.xbase.testlanguages.contentAssistFragmentTestLang.util
 
