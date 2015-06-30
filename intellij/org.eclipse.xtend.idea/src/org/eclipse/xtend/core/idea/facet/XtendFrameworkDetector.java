@@ -9,11 +9,11 @@ package org.eclipse.xtend.core.idea.facet;
 
 import org.eclipse.xtend.core.idea.config.XtendFrameworkSupportProvider;
 import org.eclipse.xtend.core.idea.lang.XtendFileType;
-import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 import com.google.inject.Inject;
 import com.intellij.facet.Facet;
+import com.intellij.facet.FacetType;
 import com.intellij.framework.addSupport.FrameworkSupportInModuleConfigurable;
 import com.intellij.framework.detection.FacetBasedFrameworkDetector;
 import com.intellij.framework.detection.FileContentPattern;
@@ -34,11 +34,11 @@ import com.intellij.util.indexing.FileContent;
 /**
  * @author dhuebner - Initial contribution and API
  */
-public class XtendFrameworkDetector extends FacetBasedFrameworkDetector<Facet<AbstractFacetConfiguration>, AbstractFacetConfiguration> {
+public class XtendFrameworkDetector extends FacetBasedFrameworkDetector<Facet<XtendFacetConfiguration>, XtendFacetConfiguration> {
 	@Inject
-	AbstractFacetType<AbstractFacetConfiguration> xtendFacetType;
+	private AbstractFacetType<XtendFacetConfiguration> xtendFacetType;
 	@Inject
-	XtendFrameworkSupportProvider frameworkSupport;
+	private XtendFrameworkSupportProvider frameworkSupport;
 
 	public XtendFrameworkDetector() {
 		super("xtend");
@@ -46,7 +46,7 @@ public class XtendFrameworkDetector extends FacetBasedFrameworkDetector<Facet<Ab
 	}
 
 	@Override
-	public void setupFacet(Facet<AbstractFacetConfiguration> facet, ModifiableRootModel model) {
+	public void setupFacet(Facet<XtendFacetConfiguration> facet, ModifiableRootModel model) {
 		super.setupFacet(facet, model);
 		Module module = facet.getModule();
 		VirtualFile[] roots = ModuleRootManager.getInstance(module).getContentRoots();
@@ -62,7 +62,7 @@ public class XtendFrameworkDetector extends FacetBasedFrameworkDetector<Facet<Ab
 	}
 
 	@Override
-	public AbstractFacetType<AbstractFacetConfiguration> getFacetType() {
+	public FacetType<Facet<XtendFacetConfiguration>, XtendFacetConfiguration> getFacetType() {
 		return xtendFacetType;
 	}
 
