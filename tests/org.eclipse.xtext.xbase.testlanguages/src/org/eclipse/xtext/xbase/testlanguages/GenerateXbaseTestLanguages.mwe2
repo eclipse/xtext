@@ -1,4 +1,4 @@
-module org.eclipse.xtext.xbase.testlanguages.GenerateXImportSectionTestLang
+module org.eclipse.xtext.xbase.testlanguages.GenerateXbaseTestLanguages
 
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*
