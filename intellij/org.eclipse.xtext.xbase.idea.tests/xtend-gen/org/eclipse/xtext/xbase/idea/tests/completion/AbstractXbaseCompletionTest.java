@@ -13,7 +13,7 @@ import com.intellij.openapi.roots.ModifiableRootModel;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.tests.LibraryUtil;
 import org.eclipse.xtext.idea.tests.LightToolingTest;
-import org.eclipse.xtext.xbase.idea.lang.XbaseFileType;
+import org.eclipse.xtext.purexbase.idea.lang.PureXbaseFileType;
 
 @SuppressWarnings("all")
 public abstract class AbstractXbaseCompletionTest extends LightToolingTest {
@@ -34,7 +34,7 @@ public abstract class AbstractXbaseCompletionTest extends LightToolingTest {
   }
   
   public AbstractXbaseCompletionTest() {
-    super(XbaseFileType.INSTANCE);
+    super(PureXbaseFileType.INSTANCE);
   }
   
   @Override

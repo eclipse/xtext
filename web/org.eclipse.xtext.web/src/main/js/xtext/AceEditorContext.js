@@ -61,7 +61,7 @@ define([], function() {
 		},
 		
 		getSelection: function() {
-			var range = editor.getSelectionRange();
+			var range = this._editor.getSelectionRange();
 			var document = this._editor.getSession().getDocument();
         	return {
         		start: document.positionToIndex(range.start),
@@ -117,8 +117,17 @@ define([], function() {
 			}
 		},
 		
-		setText: function(text) {
-			this._editor.getSession().setValue(text);
+		setText: function(text, start, end) {
+			var session = this._editor.getSession();
+			var document = session.getDocument();
+			if (!start)
+				start = 0;
+			if (!end)
+				end = document.getValue().length;
+			var startPos = document.indexToPosition(start);
+			var endPos = document.indexToPosition(end);
+			var mRange = require('ace/range');
+			return session.replace(new mRange.Range(startPos.row, startPos.column, endPos.row, endPos.column), text);
 		}
 		
 	};

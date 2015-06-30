@@ -37,6 +37,7 @@ import org.eclipse.xtext.web.server.ISessionStore;
 import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.ServiceConflictResult;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistService;
+import org.eclipse.xtext.web.server.formatting.FormattingService;
 import org.eclipse.xtext.web.server.hover.HoverService;
 import org.eclipse.xtext.web.server.model.DocumentStateResult;
 import org.eclipse.xtext.web.server.model.IWebResourceSetProvider;
@@ -189,6 +190,9 @@ public class XtextServiceDispatcher {
   private OccurrencesService occurrencesService;
   
   @Inject
+  private FormattingService formattingService;
+  
+  @Inject
   private IServerResourceHandler resourceHandler;
   
   @Inject
@@ -317,7 +321,7 @@ public class XtextServiceDispatcher {
       }
     }
     if (!_matched) {
-      if (Objects.equal(requestType, "validation")) {
+      if (Objects.equal(requestType, "validate")) {
         _matched=true;
         _switchResult = this.getValidationService(request, sessionStore);
       }
@@ -338,6 +342,12 @@ public class XtextServiceDispatcher {
       if (Objects.equal(requestType, "occurrences")) {
         _matched=true;
         _switchResult = this.getOccurrencesService(request, sessionStore);
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(requestType, "format")) {
+        _matched=true;
+        _switchResult = this.getFormattingService(request, sessionStore);
       }
     }
     if (!_matched) {
@@ -710,6 +720,53 @@ public class XtextServiceDispatcher {
               IServiceResult _xtrycatchfinallyexpression = null;
               try {
                 _xtrycatchfinallyexpression = XtextServiceDispatcher.this.occurrencesService.findOccurrences(document, offset);
+              } catch (final Throwable _t) {
+                if (_t instanceof Throwable) {
+                  final Throwable throwable = (Throwable)_t;
+                  _xtrycatchfinallyexpression = XtextServiceDispatcher.this.handleError(it, throwable);
+                } else {
+                  throw Exceptions.sneakyThrow(_t);
+                }
+              }
+              return _xtrycatchfinallyexpression;
+            }
+          };
+          it.service = _function;
+          Set<String> _parameterKeys = request.getParameterKeys();
+          boolean _contains = _parameterKeys.contains("fullText");
+          it.hasTextInput = _contains;
+        }
+      };
+      _xblockexpression = ObjectExtensions.<XtextServiceDispatcher.ServiceDescriptor>operator_doubleArrow(_serviceDescriptor, _function);
+    }
+    return _xblockexpression;
+  }
+  
+  protected XtextServiceDispatcher.ServiceDescriptor getFormattingService(final IRequestData request, final ISessionStore sessionStore) throws InvalidRequestException {
+    XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
+    {
+      final XtextWebDocumentAccess document = this.getDocumentAccess(request, sessionStore);
+      Optional<Integer> _of = Optional.<Integer>of(Integer.valueOf(0));
+      final int selectionStart = this.getInt(request, "selectionStart", _of);
+      Optional<Integer> _of_1 = Optional.<Integer>of(Integer.valueOf(selectionStart));
+      final int selectionEnd = this.getInt(request, "selectionEnd", _of_1);
+      TextRegion _xifexpression = null;
+      if ((selectionEnd > selectionStart)) {
+        _xifexpression = new TextRegion(selectionStart, (selectionEnd - selectionStart));
+      } else {
+        _xifexpression = null;
+      }
+      final TextRegion selection = _xifexpression;
+      XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
+      final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
+        @Override
+        public void apply(final XtextServiceDispatcher.ServiceDescriptor it) {
+          final Function0<IServiceResult> _function = new Function0<IServiceResult>() {
+            @Override
+            public IServiceResult apply() {
+              IServiceResult _xtrycatchfinallyexpression = null;
+              try {
+                _xtrycatchfinallyexpression = XtextServiceDispatcher.this.formattingService.format(document, selection);
               } catch (final Throwable _t) {
                 if (_t instanceof Throwable) {
                   final Throwable throwable = (Throwable)_t;

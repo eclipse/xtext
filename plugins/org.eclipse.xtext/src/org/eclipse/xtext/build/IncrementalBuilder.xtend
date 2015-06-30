@@ -16,6 +16,7 @@ import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.generator.GeneratorDelegate
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider
+import org.eclipse.xtext.generator.IShouldGenerate
 import org.eclipse.xtext.generator.URIBasedFileSystemAccess
 import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.resource.IResourceServiceProvider
@@ -68,11 +69,12 @@ import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
 					Resource resource |
 					resource.contents // fully initialize
 					EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl)
-					val manager = context.getResourceServiceProvider(resource.getURI).resourceDescriptionManager
+					val serviceProvider = context.getResourceServiceProvider(resource.getURI)
+					val manager = serviceProvider.resourceDescriptionManager
 					val description = manager.getResourceDescription(resource);
                     val copiedDescription = SerializableResourceDescription.createCopy(description);
                     result.newIndex.addDescription(resource.getURI, copiedDescription)
-					if (resource.validate) {
+					if (resource.validate && serviceProvider.get(IShouldGenerate).shouldGenerate(resource, CancelIndicator.NullImpl)) {
 						resource.generate(request, newSource2GeneratedMapping)
 					}
 					val old = oldState.resourceDescriptions.getResourceDescription(resource.getURI)

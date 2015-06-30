@@ -14,8 +14,6 @@
 	</extensions>
 
 	<extensions defaultExtensionNs="com.intellij">
-		<stubIndex implementation="org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex"/>
-
 		<psi.treeChangePreprocessor implementation="org.eclipse.xtext.idea.common.types.idea.lang.psi.RefactoringTestLanguageCodeBlockModificationListener"/>
 
 		<fileTypeFactory implementation="org.eclipse.xtext.idea.common.types.idea.lang.RefactoringTestLanguageFileTypeFactory"/>
@@ -49,5 +47,6 @@
       	<lang.psiStructureViewFactory language="org.eclipse.xtext.idea.common.types.RefactoringTestLanguage"
       							factoryClass="org.eclipse.xtext.idea.common.types.idea.RefactoringTestLanguageExtensionFactory"
       							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
+		<facetType implementation="org.eclipse.xtext.idea.common.types.idea.facet.RefactoringTestLanguageFacetType"/>
 	</extensions>
 </idea-plugin>

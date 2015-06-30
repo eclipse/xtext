@@ -11,7 +11,7 @@ import com.intellij.openapi.module.Module
 import com.intellij.openapi.roots.ContentEntry
 import com.intellij.openapi.roots.ModifiableRootModel
 import org.eclipse.xtext.idea.tests.LightToolingTest
-import org.eclipse.xtext.xbase.idea.lang.XbaseFileType
+import org.eclipse.xtext.purexbase.idea.lang.PureXbaseFileType
 
 import static extension org.eclipse.xtext.idea.tests.LibraryUtil.*
 
@@ -32,7 +32,7 @@ abstract class AbstractXbaseCompletionTest extends LightToolingTest {
 	//TODO add tests here
 
 	new() {
-		super(XbaseFileType.INSTANCE)
+		super(PureXbaseFileType.INSTANCE)
 	}
 
 	override protected configureModule(Module module, ModifiableRootModel model, ContentEntry contentEntry) {

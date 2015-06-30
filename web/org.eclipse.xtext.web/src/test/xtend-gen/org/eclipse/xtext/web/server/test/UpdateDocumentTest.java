@@ -413,7 +413,7 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
     this.resourceValidator.reset(3000);
     final File file = this.createFile("state foo end");
     final HashMapSessionStore sessionStore = new HashMapSessionStore();
-    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "validation");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "validate");
     String _name = file.getName();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
     final XtextServiceDispatcher.ServiceDescriptor validate = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)), sessionStore);
@@ -465,7 +465,7 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
     this.resourceValidator.reset(3000);
     final File file = this.createFile("state foo end");
     final HashMapSessionStore sessionStore = new HashMapSessionStore();
-    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "validation");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "validate");
     String _name = file.getName();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
     final XtextServiceDispatcher.ServiceDescriptor validate = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)), sessionStore);

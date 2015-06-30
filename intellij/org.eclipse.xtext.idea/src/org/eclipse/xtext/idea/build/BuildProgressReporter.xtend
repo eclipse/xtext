@@ -34,15 +34,18 @@ class BuildProgressReporter implements BuildRequest.IPostValidationCallback {
 	val affectedScope = new AffectedScope
 
 	Project project
-
-	ProblemsView problemsView
-
+	
 	def void setProject(Project project) {
 		this.project = project
-		problemsView = ProblemsView.SERVICE.getInstance(project)
+	}
+	
+	protected def getProblemsView() {
+		ProblemsView.SERVICE.getInstance(project)		
 	}
 
 	def void clearProgress() {
+		if (project.isDisposed)
+			return;
 		problemsView.clearProgress
 		problemsView.clearOldMessages(affectedScope, sessionId)
 	}
@@ -60,6 +63,8 @@ class BuildProgressReporter implements BuildRequest.IPostValidationCallback {
 	}
 
 	protected def reportIssue(URI validated, Issue issue) {
+		if (project.isDisposed)
+			return;
 		val compilerMessage = getCompilerMessage(validated, issue)
 		problemsView.addMessage(compilerMessage, sessionId)
 	}

@@ -10,11 +10,9 @@ package org.eclipse.xtend.idea;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ContentEntry;
 import com.intellij.openapi.roots.ModifiableRootModel;
-import com.intellij.psi.PsiClass;
 import org.eclipse.xtend.core.idea.lang.XtendFileType;
 import org.eclipse.xtext.idea.tests.LibraryUtil;
 import org.eclipse.xtext.idea.tests.LightToolingTest;
-import org.eclipse.xtext.xbase.idea.types.psi.impl.StubBasedJvmPsiClass;
 
 @SuppressWarnings("all")
 public abstract class LightXtendTest extends LightToolingTest {
@@ -25,10 +23,5 @@ public abstract class LightXtendTest extends LightToolingTest {
   @Override
   protected void configureModule(final Module module, final ModifiableRootModel model, final ContentEntry contentEntry) {
     LibraryUtil.addXtendLibrary(model);
-  }
-  
-  protected StubBasedJvmPsiClass findJvmPsiClass(final String qualifiedName) {
-    PsiClass _findClass = this.myFixture.findClass(qualifiedName);
-    return ((StubBasedJvmPsiClass) _findClass);
   }
 }

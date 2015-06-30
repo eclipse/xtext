@@ -34,17 +34,23 @@ public class BuildProgressReporter implements BuildRequest.IPostValidationCallba
   
   private Project project;
   
-  private ProblemsView problemsView;
-  
   public void setProject(final Project project) {
     this.project = project;
-    ProblemsView _instance = ProblemsView.SERVICE.getInstance(project);
-    this.problemsView = _instance;
+  }
+  
+  protected ProblemsView getProblemsView() {
+    return ProblemsView.SERVICE.getInstance(this.project);
   }
   
   public void clearProgress() {
-    this.problemsView.clearProgress();
-    this.problemsView.clearOldMessages(this.affectedScope, this.sessionId);
+    boolean _isDisposed = this.project.isDisposed();
+    if (_isDisposed) {
+      return;
+    }
+    ProblemsView _problemsView = this.getProblemsView();
+    _problemsView.clearProgress();
+    ProblemsView _problemsView_1 = this.getProblemsView();
+    _problemsView_1.clearOldMessages(this.affectedScope, this.sessionId);
   }
   
   public void markAsAffected(final URI uri) {
@@ -62,8 +68,13 @@ public class BuildProgressReporter implements BuildRequest.IPostValidationCallba
   }
   
   protected void reportIssue(final URI validated, final Issue issue) {
+    boolean _isDisposed = this.project.isDisposed();
+    if (_isDisposed) {
+      return;
+    }
     final CompilerMessage compilerMessage = this.getCompilerMessage(validated, issue);
-    this.problemsView.addMessage(compilerMessage, this.sessionId);
+    ProblemsView _problemsView = this.getProblemsView();
+    _problemsView.addMessage(compilerMessage, this.sessionId);
   }
   
   protected CompilerMessage getCompilerMessage(final URI validated, final Issue issue) {

@@ -74,7 +74,7 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 	
 	def void callMacroProcessors(Resource input) {
 		val ctxs = ActiveAnnotationContexts.find(input);
-		if (ctxs == null)
+		if (ctxs === null)
 			return;
 		try {
 			ctxs.before(ActiveAnnotationContexts.AnnotationCallback.GENERATION);
@@ -157,7 +157,7 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 				}
 			}
 		}
-		if (declaredType != null)
+		if (declaredType !== null)
 			b.declareVariable(declaredType, 'this');
 	}
 	
@@ -190,7 +190,7 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 						generateVisibilityModifier(tracedAppendable)
 						tracedAppendable.append('abstract ')
 						generateTypeParameterDeclaration(tracedAppendable, null)
-						if (it.returnType == null) {
+						if (it.returnType === null) {
 							tracedAppendable.append("void")
 						} else {
 							it.returnType.serializeSafely("Object", tracedAppendable)
@@ -267,13 +267,13 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 					}
 				}
 				val enclosingType = EcoreUtil2.getContainerOfType(referrer, XtendTypeDeclaration)
-				if (enclosingType != null && enclosingType != anonymousClass) {
+				if (enclosingType !== null && enclosingType != anonymousClass) {
 					if (references.empty)
 						references.add(referrer)
 					return
 				}
 				val enclosingLambda = EcoreUtil2.getContainerOfType(referrer, XClosure)
-				if (enclosingLambda != null && EcoreUtil.isAncestor(anonymousClass, enclosingLambda)) {
+				if (enclosingLambda !== null && EcoreUtil.isAncestor(anonymousClass, enclosingLambda)) {
 					if (references.empty)
 						references.add(referrer)
 				}
@@ -295,7 +295,7 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 		val type = if (member instanceof JvmDeclaredType) member else member.declaringType
 		if (type == context || EcoreUtil.isAncestor(context, type))
 			return true
-		if (type != null && (visibility == JvmVisibility.DEFAULT || visibility == JvmVisibility.PROTECTED)) {
+		if (type !== null && (visibility == JvmVisibility.DEFAULT || visibility == JvmVisibility.PROTECTED)) {
 			if (Strings.isEmpty(context.packageName) && Strings.isEmpty(type.packageName)
 					|| context.packageName == type.packageName)
 				return true
@@ -306,10 +306,15 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 	}
 	
 	override generateVisibilityModifier(JvmMember it, ITreeAppendable result) {
-		if (visibility == JvmVisibility.PRIVATE && declaringType!=null && declaringType.local) {
-			val declarator = declaringType as JvmGenericType
-			if (!declarator.anonymous) {
+		if (visibility == JvmVisibility.PRIVATE) {
+			if (declaringType === null) {
 				return result
+			}
+			if (declaringType.local && it instanceof JvmOperation) {
+				val declarator = declaringType as JvmGenericType
+				if (!declarator.anonymous) {
+					return result
+				}
 			}
 		}
 		super.generateVisibilityModifier(it, result)
@@ -326,13 +331,13 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 				appendable.newLine.append("final ").append(actualType).append(' ').append(thisName).append(' = this;')
 			}
 			val fieldsWithInitializer = declaredFields.filter [
-				if (compilationStrategy != null) {
+				if (compilationStrategy !== null) {
 					return true
-				} else if (compilationTemplate != null) {
+				} else if (compilationTemplate !== null) {
 					return true
 				} else if (!(isFinal && isStatic)) {
 					val expression = associatedExpression
-					if (expression != null && config.generateExpressions) {
+					if (expression !== null && config.generateExpressions) {
 						return true
 					}
 				}

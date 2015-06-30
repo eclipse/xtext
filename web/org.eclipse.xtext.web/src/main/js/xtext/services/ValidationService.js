@@ -13,7 +13,7 @@ define(['xtext/services/AbstractXtextService', 'jquery'], function(AbstractXtext
 	 * Deferred object.
 	 */
 	function ValidationService(serverUrl, resourceId) {
-		this.initialize(serverUrl, resourceId, 'validation');
+		this.initialize(serverUrl, resourceId, 'validate');
 	};
 	
 	ValidationService.prototype = new AbstractXtextService();

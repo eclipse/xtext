@@ -4,8 +4,6 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -17,6 +15,7 @@ import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess;
@@ -70,14 +69,10 @@ public class OccurrencesService {
           CancelIndicatorProgressMonitor _cancelIndicatorProgressMonitor = new CancelIndicatorProgressMonitor(cancelIndicator);
           OccurrencesService.this._iReferenceFinder.findReferences(targetURIs, _resource_1, acceptor, _cancelIndicatorProgressMonitor);
           final ITextRegion definitionRegion = OccurrencesService.this._iLocationInFileProvider.getSignificantTextRegion(element);
-          List<ITextRegion> _xifexpression = null;
-          boolean _equals = Objects.equal(definitionRegion, null);
-          if (_equals) {
-            _xifexpression = CollectionLiterals.<ITextRegion>emptyList();
-          } else {
-            _xifexpression = Collections.<ITextRegion>unmodifiableList(CollectionLiterals.<ITextRegion>newArrayList(definitionRegion));
+          final ArrayList<ITextRegion> writeRegions = new ArrayList<ITextRegion>(1);
+          if (((definitionRegion != null) && (definitionRegion != ITextRegionWithLineInformation.EMPTY_REGION))) {
+            writeRegions.add(definitionRegion);
           }
-          final List<ITextRegion> writeRegions = _xifexpression;
           final OccurrencesResult occurrencesResult = new OccurrencesResult(readRegions, writeRegions);
           return occurrencesResult;
         }
