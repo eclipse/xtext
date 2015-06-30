@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
+import org.eclipse.xtext.generator.IFilePostProcessor;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
@@ -93,6 +94,11 @@ public class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
   };
   
   @Override
+  public void setPostProcessor(final IFilePostProcessor filePostProcessor) {
+    super.setPostProcessor(filePostProcessor);
+  }
+  
+  @Override
   public URI getURI(final String path, final String outputConfiguration) {
     Map<String, String> _pathes = this.getPathes();
     final String outlet = _pathes.get(outputConfiguration);
@@ -118,9 +124,10 @@ public class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
   public void generateFile(final String fileName, final String outputCfgName, final CharSequence contents) {
     try {
       final URI uri = this.getURI(fileName, outputCfgName);
-      this.generateTrace(fileName, outputCfgName, contents);
       final String encoding = this.getEncoding(uri);
-      String _string = contents.toString();
+      final CharSequence postProcessed = this.postProcess(fileName, outputCfgName, contents, encoding);
+      this.generateTrace(fileName, outputCfgName, postProcessed);
+      String _string = postProcessed.toString();
       byte[] _bytes = _string.getBytes(encoding);
       final ByteArrayInputStream inStream = new ByteArrayInputStream(_bytes);
       this.generateFile(fileName, outputCfgName, inStream);
