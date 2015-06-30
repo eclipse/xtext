@@ -4,17 +4,26 @@
 package org.eclipse.xtext.xbase.testlanguages;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.ISetup;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.ISetupExtension;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+
+import java.util.List;
+import java.util.Arrays;
 
 /**
  * Generated from StandaloneSetup.xpt!
  */
 @SuppressWarnings("all")
-public class XImportSectionTestLangStandaloneSetupGenerated implements ISetup {
+public class XImportSectionTestLangStandaloneSetupGenerated implements ISetup, ISetupExtension {
+
+	@Override
+	public List<String> getFileExtensions() {
+		return Arrays.asList("ximportsectiontestlang");
+	}
 
 	@Override
 	public Injector createInjectorAndDoEMFRegistration() {
@@ -36,8 +45,8 @@ public class XImportSectionTestLangStandaloneSetupGenerated implements ISetup {
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("__ximportimporttestlang", resourceFactory);
-		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("__ximportimporttestlang", serviceProvider);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ximportsectiontestlang", resourceFactory);
+		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("ximportsectiontestlang", serviceProvider);
 		
 
 
