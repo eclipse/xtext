@@ -9,7 +9,7 @@
             class="org.eclipse.xtext.xbase.testlanguages.ui.XImportSectionTestLangExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
-            extensions="__ximportimporttestlang"
+            extensions="ximportsectiontestlang"
             id="org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang"
             matchingStrategy="org.eclipse.xtext.xbase.testlanguages.ui.XImportSectionTestLangExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.editor.JavaEditorInputMatcher"
             name="XImportSectionTestLang Editor">
@@ -214,13 +214,13 @@
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
 			class="org.eclipse.xtext.xbase.testlanguages.ui.XImportSectionTestLangExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
-			type="__ximportimporttestlang">
+			type="ximportsectiontestlang">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
             class="org.eclipse.xtext.xbase.testlanguages.ui.XImportSectionTestLangExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-            uriExtension="__ximportimporttestlang">
+            uriExtension="ximportsectiontestlang">
         </resourceServiceProvider>
     </extension>
 
@@ -252,7 +252,7 @@
          point="org.eclipse.xtext.builder.participant">
       <participant
             class="org.eclipse.xtext.xbase.testlanguages.ui.XImportSectionTestLangExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
-            fileExtensions="__ximportimporttestlang"
+            fileExtensions="ximportsectiontestlang"
             >
       </participant>
    </extension>
@@ -586,24 +586,24 @@
   <extension point="org.eclipse.compare.contentViewers">
     <viewer id="org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang.compare.contentViewers"
             class="org.eclipse.xtext.xbase.testlanguages.ui.XImportSectionTestLangExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-            extensions="__ximportimporttestlang">
+            extensions="ximportsectiontestlang">
     </viewer>
   </extension>
   <extension point="org.eclipse.compare.contentMergeViewers">
     <viewer id="org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang.compare.contentMergeViewers"
             class="org.eclipse.xtext.xbase.testlanguages.ui.XImportSectionTestLangExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-            extensions="__ximportimporttestlang" label="XImportSectionTestLang Compare">
+            extensions="ximportsectiontestlang" label="XImportSectionTestLang Compare">
      </viewer>
   </extension>
   <extension point="org.eclipse.ui.editors.documentProviders">
     <provider id="org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang.editors.documentProviders"
             class="org.eclipse.xtext.xbase.testlanguages.ui.XImportSectionTestLangExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
-            extensions="__ximportimporttestlang">
+            extensions="ximportsectiontestlang">
     </provider>
   </extension>
   <extension point="org.eclipse.team.core.fileTypes">
     <fileTypes
-            extension="__ximportimporttestlang"
+            extension="ximportsectiontestlang"
             type="text">
     </fileTypes>
   </extension>
