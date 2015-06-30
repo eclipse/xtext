@@ -79,8 +79,16 @@ public class DefaultXbaseUiModule extends DefaultCommonTypesUiModule {
 		return RepeatedContentAssistProcessor.class;
 	}
 
+	/**
+	 * @deprecated clients should use the new org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator
+	 */
+	@Deprecated
 	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
-		return XbaseHighlightingCalculator.class;
+		return null;
+	}
+	
+	public Class<? extends org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator> bindIdeSemanticHighlightingCalculator() {
+		return org.eclipse.xtext.xbase.ide.highlighting.XbaseHighlightingCalculator.class;
 	}
 
 	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {

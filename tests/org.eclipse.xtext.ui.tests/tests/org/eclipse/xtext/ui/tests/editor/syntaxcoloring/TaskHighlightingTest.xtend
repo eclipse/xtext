@@ -9,19 +9,20 @@ package org.eclipse.xtext.ui.tests.editor.syntaxcoloring
 
 import com.google.inject.Inject
 import org.eclipse.jface.text.TypedRegion
+import org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator
+import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor
 import org.eclipse.xtext.junit4.AbstractXtextTests
+import org.eclipse.xtext.junit4.internal.LineDelimiters
 import org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguageStandaloneSetup
-import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator
-import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor
 import org.junit.Before
 import org.junit.Test
+
 import static org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration.*
-import org.eclipse.xtext.junit4.internal.LineDelimiters
 
 /**
  * @author Stefan Oehme - Initial contribution and API
  */
-class TaskHighlightingTest extends AbstractXtextTests implements IHighlightedPositionAcceptor{
+class TaskHighlightingTest extends AbstractXtextTests implements IHighlightedPositionAcceptor {
 
 	@Inject
 	DefaultSemanticHighlightingCalculator highlighter
@@ -49,7 +50,11 @@ class TaskHighlightingTest extends AbstractXtextTests implements IHighlightedPos
 		'''))
 		expect(2, 4, TASK_ID)
 		expect(17, 5, TASK_ID)
-		highlighter.provideHighlightingFor(resource, this)
+		getHighlighter().provideHighlightingFor(resource, this)
+	}
+	
+	protected def getHighlighter() {
+		return highlighter
 	}
 	
 	protected def expect(int offset, int length, String type) {
