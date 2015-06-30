@@ -7,17 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.macro
 
-import java.io.Closeable
-import java.io.IOException
 import java.net.URL
 import java.net.URLClassLoader
 import java.util.LinkedHashSet
 import java.util.Set
-import org.apache.log4j.Logger
 import org.eclipse.core.resources.IResource
 import org.eclipse.core.runtime.IPath
-import org.eclipse.emf.common.notify.Notifier
-import org.eclipse.emf.common.notify.impl.AdapterImpl
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
@@ -25,18 +20,13 @@ import org.eclipse.jdt.core.IClasspathEntry
 import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.resource.ResourceSetContext
 import org.eclipse.xtext.resource.XtextResourceSet
 
-import static org.eclipse.xtend.ide.macro.JdtBasedProcessorProvider.*
-
 class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 	
-	static val Logger LOG = Logger.getLogger(JdtBasedProcessorProvider) 
-
 	override getProcessorInstance(JvmType type) {
 		try {
 			val classLoader = getClassLoader(type)

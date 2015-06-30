@@ -18,11 +18,11 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.highlighting.XtendHighlightingCalculator;
-import org.eclipse.xtend.ide.highlighting.XtendHighlightingConfiguration;
+import org.eclipse.xtend.ide.highlighting.XtendHighlightingStyles;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration;
 import org.junit.After;
@@ -38,7 +38,7 @@ import com.google.inject.Inject;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Holger Schill
  */
-public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase implements IHighlightedPositionAcceptor {
+public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase implements IHighlightedPositionAcceptor, XtendHighlightingStyles {
 
 	public static final String DEFAULT_CLASS_DEF = "class Foo";
 	
@@ -135,7 +135,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		expectInsignificant(3, 2);
 		expectInsignificant(6, 1);
 		expectInsignificant(15,3);
-		expectAbsolute(14,1,XtendHighlightingConfiguration.TEMPLATE_LINE_BREAK);
+		expectAbsolute(14,1,TEMPLATE_LINE_BREAK);
 		highlight(
 				"'''  \n" +
 				" foobar \n" +
@@ -146,12 +146,12 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		expectInsignificant(0, 3);
 		expectInsignificant(3, 2);
 		expectInsignificant(6, 2);
-		expectAbsolute(18, 1, XtendHighlightingConfiguration.TEMPLATE_LINE_BREAK);
+		expectAbsolute(18, 1, TEMPLATE_LINE_BREAK);
 		expectInsignificant(19, 1);
 		expectInsignificant(37, 1);
-		expectAbsolute(50, 1, XtendHighlightingConfiguration.TEMPLATE_LINE_BREAK);
+		expectAbsolute(50, 1, TEMPLATE_LINE_BREAK);
 		expectInsignificant(51, 2);
-		expectAbsolute(86, 1, XtendHighlightingConfiguration.TEMPLATE_LINE_BREAK);
+		expectAbsolute(86, 1, TEMPLATE_LINE_BREAK);
 		expectInsignificant(87, 3);
 		highlight(
 				"'''  \n" +
@@ -200,7 +200,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		expectInsignificant(model.indexOf('\t'), 2);
 		expectInsignificant(model.indexOf("  "), 2);
 		expectInsignificant(model.lastIndexOf("'''"), 3);
-		expectAbsolute(17,1,XtendHighlightingConfiguration.POTENTIAL_LINE_BREAK);
+		expectAbsolute(17,1,POTENTIAL_LINE_BREAK);
 		highlight(model);
 	}
 	
@@ -556,8 +556,8 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		classDefString = "@Target(ElementType.TYPE) @Active(ObservableCompilationParticipant) annotation Observable {} class ObservableCompilationParticipant extends AbstractClassProcessor { override doTransform(MutableClassDeclaration clazz, extension TransformationContext context) {}}";
 		classDefString = classDefString + " @Observable class Bar ";
 		String model = "{}";
-		expect(565, 1, XtendHighlightingConfiguration.ACTIVE_ANNOTATION);
-		expect(566, 10, XtendHighlightingConfiguration.ACTIVE_ANNOTATION);
+		expect(565, 1, ACTIVE_ANNOTATION);
+		expect(566, 10, ACTIVE_ANNOTATION);
 		highlightActiveAnnotation(model);
 	}
 
@@ -571,8 +571,8 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		classDefString = "@Target(ElementType.FIELD) @Active(ObservableCompilationParticipant) annotation Observable {} class ObservableCompilationParticipant extends AbstractFieldProcessor { override doTransform(MutableFieldDeclaration field, extension TransformationContext context) {}}";
 		classDefString = classDefString + "class Bar ";
 		String model = "{} @Observable String myAnnotatedString ";
-		expect(591, 1, XtendHighlightingConfiguration.ACTIVE_ANNOTATION);
-		expect(592, 10, XtendHighlightingConfiguration.ACTIVE_ANNOTATION);
+		expect(591, 1, ACTIVE_ANNOTATION);
+		expect(592, 10, ACTIVE_ANNOTATION);
 		highlightActiveAnnotation(model);
 	}
 	
@@ -688,7 +688,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 	}
 
 	protected void expectInsignificant(int offset, int length) {
-		expectAbsolute(offset, length, XtendHighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
+		expectAbsolute(offset, length, INSIGNIFICANT_TEMPLATE_TEXT);
 	}
 
 	protected void expect(int offset, int length, String highlightID) {

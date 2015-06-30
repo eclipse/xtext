@@ -18,7 +18,7 @@ import com.google.inject.Singleton;
  * @author Holger Schill
  */
 @Singleton
-public class TokenToAttributeIdMapper extends DefaultAntlrTokenToAttributeIdMapper {
+public class TokenToAttributeIdMapper extends DefaultAntlrTokenToAttributeIdMapper implements XtendHighlightingStyles {
 
 	@Override
 	protected String getMappedValue(int tokenType) {
@@ -37,7 +37,7 @@ public class TokenToAttributeIdMapper extends DefaultAntlrTokenToAttributeIdMapp
 			"RULE_RICH_TEXT_INBETWEEN".equals(tokenName) ||
 			"RULE_COMMENT_RICH_TEXT_END".equals(tokenName) ||
 			"RULE_COMMENT_RICH_TEXT_INBETWEEN".equals(tokenName)) {
-			return XtendHighlightingConfiguration.RICH_TEXT_ID;
+			return RICH_TEXT_ID;
 		}
 		return super.calculateId(tokenName, tokenType);
 	}
