@@ -23,7 +23,7 @@ import com.google.inject.name.Named;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class RichStringAwareTokenScanner extends TokenScanner {
+public class RichStringAwareTokenScanner extends TokenScanner implements XtendHighlightingStyles {
 
 	protected RichTextToken createRichTextToken(String id, ILexerTokenRegion token) {
 		int tokenOffset = token.getOffset();
@@ -86,7 +86,7 @@ public class RichStringAwareTokenScanner extends TokenScanner {
 		}
 		
 		protected IToken createToken() {
-			String attributeId = delimiter ? XtendHighlightingConfiguration.RICH_TEXT_DELIMITER_ID : XtendHighlightingConfiguration.RICH_TEXT_ID;
+			String attributeId = delimiter ? RICH_TEXT_DELIMITER_ID : RICH_TEXT_ID;
 			Token token = new Token(getAttribute(attributeId));
 			return token;
 		}

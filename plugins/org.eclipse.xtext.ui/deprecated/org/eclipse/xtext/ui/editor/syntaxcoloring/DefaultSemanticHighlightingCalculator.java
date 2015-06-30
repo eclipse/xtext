@@ -33,7 +33,7 @@ public class DefaultSemanticHighlightingCalculator extends org.eclipse.xtext.ide
 	 */
 	@Override
 	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		super.provideHighlightingFor(resource, acceptor);
+		super.provideHighlightingFor(resource, upcast(acceptor));
 	}
 	
 	/**
@@ -94,7 +94,11 @@ public class DefaultSemanticHighlightingCalculator extends org.eclipse.xtext.ide
 	}
 
 	private IHighlightedPositionAcceptor cast(org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor) {
-		return (IHighlightedPositionAcceptor) acceptor;
+		return IHighlightedPositionAcceptor.DeprecationHelper.cast(acceptor);
+	}
+	
+	private org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor upcast(IHighlightedPositionAcceptor acceptor) {
+		return IHighlightedPositionAcceptor.DeprecationHelper.upcast(acceptor);
 	}
 
 	/**
@@ -102,7 +106,7 @@ public class DefaultSemanticHighlightingCalculator extends org.eclipse.xtext.ide
 	 */
 	@Deprecated
 	protected void doProvideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		super.doProvideHighlightingFor(resource, acceptor);
+		super.doProvideHighlightingFor(resource, upcast(acceptor));
 	}
 
 	/**
@@ -110,7 +114,7 @@ public class DefaultSemanticHighlightingCalculator extends org.eclipse.xtext.ide
 	 */
 	@Deprecated
 	protected void searchAndHighlightElements(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		super.searchAndHighlightElements(resource, acceptor);
+		super.searchAndHighlightElements(resource, upcast(acceptor));
 	}
 
 	/**
@@ -118,7 +122,7 @@ public class DefaultSemanticHighlightingCalculator extends org.eclipse.xtext.ide
 	 */
 	@Deprecated
 	protected void highlightElementRecursively(EObject element, IHighlightedPositionAcceptor acceptor) {
-		super.highlightElementRecursively(element, acceptor);
+		super.highlightElementRecursively(element, upcast(acceptor));
 	}
 
 	/**
@@ -126,7 +130,7 @@ public class DefaultSemanticHighlightingCalculator extends org.eclipse.xtext.ide
 	 */
 	@Deprecated
 	protected boolean highlightElement(EObject object, IHighlightedPositionAcceptor acceptor) {
-		return super.highlightElement(object, acceptor);
+		return super.highlightElement(object, upcast(acceptor));
 	}
 
 	/**
@@ -134,7 +138,7 @@ public class DefaultSemanticHighlightingCalculator extends org.eclipse.xtext.ide
 	 */
 	@Deprecated
 	protected void highlightTasks(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		super.highlightTasks(resource, acceptor);
+		super.highlightTasks(resource, upcast(acceptor));
 	}
 
 	/**
@@ -143,7 +147,7 @@ public class DefaultSemanticHighlightingCalculator extends org.eclipse.xtext.ide
 	@Deprecated
 	protected void highlightFeature(IHighlightedPositionAcceptor acceptor, EObject object, EStructuralFeature feature,
 			String... styleIds) {
-		super.highlightFeature(acceptor, object, feature, styleIds);
+		super.highlightFeature(upcast(acceptor), object, feature, styleIds);
 	}
 
 	/**

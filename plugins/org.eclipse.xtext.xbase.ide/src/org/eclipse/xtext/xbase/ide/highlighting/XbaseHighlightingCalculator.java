@@ -1,11 +1,11 @@
 /*******************************************************************************
- * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.ui.highlighting;
+package org.eclipse.xtext.xbase.ide.highlighting;
 
 import java.util.BitSet;
 import java.util.List;
@@ -14,7 +14,6 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.RuleCall;
@@ -30,15 +29,13 @@ import org.eclipse.xtext.common.types.util.AnnotationLookup;
 import org.eclipse.xtext.common.types.util.DeprecationUtil;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
-import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBinaryOperation;
@@ -67,7 +64,7 @@ import com.google.inject.Inject;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Holger Schill
  */
-public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalculator {
+public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalculator implements XbaseHighlightingStyles {
 
 	@Inject
 	private XbaseGrammarAccess grammarAccess;
@@ -147,7 +144,7 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 
 	protected void highlightReferenceJvmType(IHighlightedPositionAcceptor acceptor, EObject referencer,
 			EReference reference, EObject resolvedReferencedObject) {
-		highlightReferenceJvmType(acceptor, referencer, reference, resolvedReferencedObject, XbaseHighlightingConfiguration.ANNOTATION);
+		highlightReferenceJvmType(acceptor, referencer, reference, resolvedReferencedObject, ANNOTATION);
 	}
 	
 	protected void highlightReferenceJvmType(IHighlightedPositionAcceptor acceptor, EObject referencer,
@@ -163,7 +160,7 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 		if (resolvedReferencedObject instanceof JvmAnnotationTarget) {
 			JvmAnnotationTarget annoTarget = (JvmAnnotationTarget) resolvedReferencedObject;
 			if(DeprecationUtil.isDeprecated(annoTarget))
-				highlightFeature(acceptor, referencer, reference, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
+				highlightFeature(acceptor, referencer, reference, DEPRECATED_MEMBERS);
 		}
 	}
 
@@ -172,31 +169,31 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 		if (feature != null && !feature.eIsProxy()) {
 			if (feature instanceof JvmField) {
 				if (((JvmField) feature).isStatic()) {
-					highlightFeatureCall(featureCall, acceptor, XbaseHighlightingConfiguration.STATIC_FIELD);
+					highlightFeatureCall(featureCall, acceptor, STATIC_FIELD);
 				} else {
-					highlightFeatureCall(featureCall, acceptor, XbaseHighlightingConfiguration.FIELD);
+					highlightFeatureCall(featureCall, acceptor, FIELD);
 				}
 			} else if (feature instanceof JvmOperation && !featureCall.isOperation()) {
 				JvmOperation jvmOperation = (JvmOperation) feature;
 				if (jvmOperation.isStatic())
-					highlightFeatureCall(featureCall, acceptor, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
+					highlightFeatureCall(featureCall, acceptor, STATIC_METHOD_INVOCATION);
 			}
 			if(!(featureCall instanceof XBinaryOperation || featureCall instanceof XUnaryOperation)) {
 				if(featureCall.isExtension()){
 					highlightFeatureCall(featureCall, acceptor, 
-							XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+							EXTENSION_METHOD_INVOCATION);
 				} else {
 					// Extensions without implicit first argument
 					XExpression implicitReceiver = featureCall.getImplicitReceiver();
 					if(implicitReceiver != null && implicitReceiver instanceof XAbstractFeatureCall){
 							if(isExtension(((XAbstractFeatureCall) implicitReceiver).getFeature()))
 								highlightFeatureCall(featureCall, acceptor, 
-										XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+										EXTENSION_METHOD_INVOCATION);
 					}
 				}	
 			}
 			if(feature instanceof JvmAnnotationTarget && DeprecationUtil.isDeprecated((JvmAnnotationTarget)feature)){
-				highlightFeatureCall(featureCall, acceptor, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
+				highlightFeatureCall(featureCall, acceptor, DEPRECATED_MEMBERS);
 			}
 		}
 	}
@@ -212,14 +209,14 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 //		highlightDeprecation(acceptor, featureCall, null, featureCall.getFeature());
 		if (featureCall.isTypeLiteral()) {
 			ICompositeNode node = NodeModelUtils.findActualNodeFor(featureCall);
-			highlightNode(node, id, acceptor);
+			highlightNode(acceptor, node, id);
 		} else {
 			highlightFeature(acceptor, featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, id);
 		}
 	}
 	
 	protected void highlightAnnotation(XAnnotation annotation, IHighlightedPositionAcceptor acceptor) {
-		highlightAnnotation(annotation, acceptor, XbaseHighlightingConfiguration.ANNOTATION);
+		highlightAnnotation(annotation, acceptor, ANNOTATION);
 	}
 	
 	protected void highlightAnnotation(XAnnotation annotation, IHighlightedPositionAcceptor acceptor, String highlightingConfiguration) {
@@ -229,7 +226,7 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 			if (xannotationNode != null) {
 				ILeafNode firstLeafNode = NodeModelUtils.findLeafNodeAtOffset(xannotationNode, xannotationNode.getOffset() );
 				if(firstLeafNode != null)
-					highlightNode(firstLeafNode, highlightingConfiguration, acceptor);
+					highlightNode(acceptor, firstLeafNode, highlightingConfiguration);
 			}
 			highlightReferenceJvmType(acceptor, annotation, XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, annotationType, highlightingConfiguration);
 		}
@@ -238,7 +235,7 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 	protected void highlightNumberLiterals(XNumberLiteral literal, IHighlightedPositionAcceptor acceptor) {
 		ICompositeNode node = NodeModelUtils.findActualNodeFor(literal);
 		ITextRegion textRegion = node.getTextRegion();
-		acceptor.addPosition(textRegion.getOffset(), textRegion.getLength(), DefaultHighlightingConfiguration.NUMBER_ID);
+		acceptor.addPosition(textRegion.getOffset(), textRegion.getLength(), NUMBER_ID);
 	}
 	
 
@@ -279,29 +276,11 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 	protected Map<String, String> initializeHighlightedIdentifiers() {
 		Map<String, String> result = Maps.newHashMap();
 		for (Primitive p : Primitives.Primitive.values()) {
-			result.put(p.name().toLowerCase(), DefaultHighlightingConfiguration.KEYWORD_ID);
+			result.put(p.name().toLowerCase(), KEYWORD_ID);
 		}
-		result.put("this", DefaultHighlightingConfiguration.KEYWORD_ID);
-		result.put("it", DefaultHighlightingConfiguration.KEYWORD_ID);
-		result.put("self", DefaultHighlightingConfiguration.KEYWORD_ID);
+		result.put("this", KEYWORD_ID);
+		result.put("it", KEYWORD_ID);
+		result.put("self", KEYWORD_ID);
 		return result;
-	}
-	
-	/**
-	 * Highlights an object at the position of the given {@link EStructuralFeature}
-	 * @deprecated use {@link #highlightFeature(IHighlightedPositionAcceptor, EObject, EStructuralFeature, String...)}
-	 */
-	@Deprecated
-	protected void highlightObjectAtFeature(IHighlightedPositionAcceptor acceptor, EObject object, EStructuralFeature feature, String id) {
-		highlightFeature(acceptor, object, feature, id);
-	}
-	
-	/**
-	 * Highlights the non-hidden parts of {@code node} with the style that is associated with {@code id}.
-	 * @deprecated use {@link #highlightNode(IHighlightedPositionAcceptor, INode, String...)}
-	 */
-	@Deprecated
-	protected void highlightNode(INode node, String id, IHighlightedPositionAcceptor acceptor) {
-		highlightNode(acceptor, node, id);
 	}
 }

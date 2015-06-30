@@ -16,15 +16,8 @@ import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Holger Schill
  */
-public class XtendHighlightingConfiguration extends XbaseHighlightingConfiguration {
+public class XtendHighlightingConfiguration extends XbaseHighlightingConfiguration implements XtendHighlightingStyles {
 
-	public static final String RICH_TEXT_ID = "xtend.richText";
-	public static final String RICH_TEXT_DELIMITER_ID = "xtend.richText.delimiter";
-	public static final String INSIGNIFICANT_TEMPLATE_TEXT = "xtend.insignificant.template.text";
-	public static final String POTENTIAL_LINE_BREAK = "xtend.potential.line.break";
-	public static final String TEMPLATE_LINE_BREAK = "xtend.template.line.break";
-	public static final String ACTIVE_ANNOTATION = "xtend.active.annotation";
-	
 	@Override
 	public void configure(IHighlightingConfigurationAcceptor acceptor) {
 		super.configure(acceptor);

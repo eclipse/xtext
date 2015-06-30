@@ -13,10 +13,10 @@ import java.io.StringReader;
 import org.antlr.runtime.Token;
 import org.eclipse.xtend.core.parser.antlr.internal.FlexTokenSource;
 import org.eclipse.xtend.core.parser.antlr.internal.FlexerFactory;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.parser.antlr.TokenTool;
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.TemplateBodyHighlighter;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.xbase.lib.Extension;
 
 /**
@@ -33,7 +33,7 @@ public class FlexerBasedTemplateBodyHighlighter extends TemplateBodyHighlighter 
   private AbstractAntlrTokenToAttributeIdMapper _abstractAntlrTokenToAttributeIdMapper;
   
   @Override
-  public void provideHighlightingFor(final String body, final IHighlightedPositionAcceptor acceptor) {
+  public void doProvideHighlightingFor(final String body, final IHighlightedPositionAcceptor acceptor) {
     StringReader _stringReader = new StringReader(body);
     final FlexTokenSource tokenSource = this._flexerFactory.createTokenSource(_stringReader);
     Token token = tokenSource.nextToken();

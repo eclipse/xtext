@@ -15,7 +15,6 @@ import java.net.URLClassLoader;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
@@ -42,8 +41,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
-  private final static Logger LOG = Logger.getLogger(JdtBasedProcessorProvider.class);
-  
   @Override
   public Object getProcessorInstance(final JvmType type) {
     try {

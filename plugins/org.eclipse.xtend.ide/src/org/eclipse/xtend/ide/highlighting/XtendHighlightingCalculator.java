@@ -48,17 +48,17 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.util.DeprecationUtil;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
-import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingCalculator;
+import org.eclipse.xtext.xbase.ide.highlighting.XbaseHighlightingCalculator;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration;
 
 import com.google.common.collect.ImmutableSet;
@@ -70,7 +70,7 @@ import com.google.inject.Provider;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Holger Schill
  */
-public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
+public class XtendHighlightingCalculator extends XbaseHighlightingCalculator implements XtendHighlightingStyles {
 
 	@Inject
 	private RichStringProcessor processor;
@@ -146,7 +146,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 			for(XAnnotation annotation: xtendType.getAnnotations()) {
 				JvmType annotationType = annotation.getAnnotationType();
 				if (annotationType != null && !annotationType.eIsProxy() && Active.class.getName().equals(annotationType.getIdentifier())) {
-					highlightFeature(acceptor, xtendType, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME, XtendHighlightingConfiguration.ACTIVE_ANNOTATION);
+					highlightFeature(acceptor, xtendType, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME, ACTIVE_ANNOTATION);
 					break;
 				}
 			}
@@ -178,7 +178,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 			for(JvmAnnotationReference annotationReference: ((JvmAnnotationTarget) annotationType).getAnnotations()) {
 				JvmAnnotationType otherAnnotation = annotationReference.getAnnotation();
 				if (otherAnnotation != null && !otherAnnotation.eIsProxy() && Active.class.getName().equals(otherAnnotation.getIdentifier())) {
-					highlightAnnotation(annotation, acceptor, XtendHighlightingConfiguration.ACTIVE_ANNOTATION);
+					highlightAnnotation(annotation, acceptor, ACTIVE_ANNOTATION);
 					return;
 				}
 			}
@@ -298,7 +298,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 					INode node = featureNodes.get(0);
 					currentOffset = node.getOffset();
 					if (node.getText().charAt(0) == '\'') {
-						acceptor.addPosition(currentOffset, 3, XtendHighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
+						acceptor.addPosition(currentOffset, 3, INSIGNIFICANT_TEMPLATE_TEXT);
 						highlightClosingQuotes(node);
 						currentOffset += 3;
 					} else if (node.getText().startsWith("\u00AB\u00AB")) {
@@ -346,7 +346,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 			}
 			if (length != 0) {
 				acceptor.addPosition(currentOffset + node.getLength() - length, length,
-						XtendHighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
+						INSIGNIFICANT_TEMPLATE_TEXT);
 			}
 		}
 
@@ -359,10 +359,10 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 					IRegion pending = pendingRegions.poll();
 					length -= pending.getLength();
 					acceptor.addPosition(pending.getOffset(), pending.getLength(),
-							XtendHighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
+							INSIGNIFICANT_TEMPLATE_TEXT);
 				}
 				if (length != 0) {
-					acceptor.addPosition(currentOffset, length, XtendHighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
+					acceptor.addPosition(currentOffset, length, INSIGNIFICANT_TEMPLATE_TEXT);
 					currentOffset += length;
 				}
 			}
@@ -372,9 +372,9 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 		public void acceptSemanticLineBreak(int charCount, RichStringLiteral origin, boolean controlStructureSeen) {
 			resetCurrentOffset(origin);
 			if (controlStructureSeen)
-				acceptor.addPosition(currentOffset, charCount, XtendHighlightingConfiguration.POTENTIAL_LINE_BREAK);
+				acceptor.addPosition(currentOffset, charCount, POTENTIAL_LINE_BREAK);
 			else
-				acceptor.addPosition(currentOffset, charCount, XtendHighlightingConfiguration.TEMPLATE_LINE_BREAK);
+				acceptor.addPosition(currentOffset, charCount, TEMPLATE_LINE_BREAK);
 			currentOffset += charCount;
 		}
 
