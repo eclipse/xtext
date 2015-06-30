@@ -68,6 +68,8 @@ class JavaDerivedStateComputer {
 				TypesFactory.eINSTANCE.createJvmEnumerationType
 			case TypeDeclaration.ANNOTATION_TYPE_DECL :
 				TypesFactory.eINSTANCE.createJvmAnnotationType
+			default :
+				throw new IllegalArgumentException("Cannot handle type "+type.toString)
 		}
 		jvmType.packageName = packageName
 		jvmType.simpleName = String.valueOf(type.name)
