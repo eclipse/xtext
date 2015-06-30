@@ -11,13 +11,13 @@ import com.google.inject.Inject;
 import java.util.HashSet;
 import org.eclipse.jface.text.TypedRegion;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.junit4.internal.LineDelimiters;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Assert;
@@ -71,10 +71,15 @@ public class TaskHighlightingTest extends AbstractXtextTests implements IHighlig
       final XtextResource resource = this.getResourceFromString(_unix);
       this.expect(2, 4, DefaultHighlightingConfiguration.TASK_ID);
       this.expect(17, 5, DefaultHighlightingConfiguration.TASK_ID);
-      this.highlighter.provideHighlightingFor(resource, this);
+      DefaultSemanticHighlightingCalculator _highlighter = this.getHighlighter();
+      _highlighter.provideHighlightingFor(resource, this);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  protected DefaultSemanticHighlightingCalculator getHighlighter() {
+    return this.highlighter;
   }
   
   protected boolean expect(final int offset, final int length, final String type) {

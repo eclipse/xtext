@@ -138,7 +138,7 @@ import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.editor.templates.XtextTemplateContextType;
 import org.eclipse.xtext.ui.editor.toggleComments.ISingleLineCommentHelper;
 import org.eclipse.xtext.ui.editor.toggleComments.ToggleSLCommentAction;
@@ -187,15 +187,14 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 		binder.bind(IActionContributor.class).annotatedWith(Names.named("OverrideIndicatorRulerAction")).to( //$NON-NLS-1$
 				OverrideIndicatorRulerAction.class);
 	}
-	
-	
+
 	@Override
 	public void configureHyperlinkLabelProvider(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class)
 				.annotatedWith(org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkLabelProvider.class)
 				.to(HyperLinkingLabelProvider.class);
 	}
-	
+
 	@Override
 	public Class<? extends IAnnotationHover> bindIAnnotationHover() {
 		return XtendAnnotationHover.class;
@@ -217,7 +216,7 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	}
 
 	@Override
-	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
+	public Class<? extends ISemanticHighlightingCalculator> bindIdeSemanticHighlightingCalculator() {
 		return XtendHighlightingCalculator.class;
 	}
 
@@ -271,7 +270,7 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	public Class<? extends EclipseResourceFileSystemAccess2> bindEclipseResourceFileSystemAccess2() {
 		return SourceRelativeFileSystemAccess.class;
 	}
-	
+
 	@Override
 	public Class<? extends EclipseSourceFolderProvider> bindEclipseSourceFolderProvider() {
 		return JDTAwareSourceFolderProvider.class;
@@ -308,7 +307,7 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	public Class<? extends IResourceUIServiceProvider> bindIResourceUIServiceProvider() {
 		return XtendResourceUiServiceProvider.class;
 	}
-	
+
 	/**
 	 * @since 2.8
 	 */
@@ -320,9 +319,8 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 
 	@Override
 	public void configureIPreferenceStoreInitializer(Binder binder) {
-		binder.bind(IPreferenceStoreInitializer.class)
-			.annotatedWith(Names.named("RefactoringPreferences"))
-			.to(XtendRefactoringPreferences.Initializer.class);
+		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("RefactoringPreferences"))
+				.to(XtendRefactoringPreferences.Initializer.class);
 	}
 
 	@Override
@@ -343,18 +341,17 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	public java.lang.Class<? extends IDependentElementsCalculator> bindIDependentElementsCalculator() {
 		return XtendDependentElementsCalculator.class;
 	}
-	
+
 	@Override
 	public void configureJvmMemberRenameStrategy$Provider$Delegate(Binder binder) {
-		binder.bind(IRenameStrategy.Provider.class)
-			.annotatedWith(JvmMemberRenameStrategy.Provider.Delegate.class)
-			.to(XtendRenameStrategyProvider.class);
+		binder.bind(IRenameStrategy.Provider.class).annotatedWith(JvmMemberRenameStrategy.Provider.Delegate.class)
+				.to(XtendRenameStrategyProvider.class);
 	}
-		
+
 	public Class<? extends JdtRenameRefactoringParticipantProcessor> bindJdtRenameRefactoringParticipantProcessor() {
 		return XtendJdtRenameParticipantProcessor.class;
 	}
-	
+
 	public Class<? extends XbaseDeclarativeHoverSignatureProvider> bindXbaseDeclarativeHoverSignatureProvider() {
 		return XtendHoverSignatureProvider.class;
 	}
@@ -392,7 +389,7 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	public Class<? extends org.eclipse.xtext.xbase.ui.validation.XbaseUIValidator> bindXbaseUIValidator() {
 		return org.eclipse.xtend.ide.validator.XtendUIValidator.class;
 	}
-	
+
 	@SingletonBinding(eager = true)
 	public Class<? extends JavaProjectPreferencesInitializer> bindJavaProjectPreferencesInitializer() {
 		return JavaProjectPreferencesInitializer.class;
@@ -403,23 +400,23 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("smartCaretPreferenceInitializer")) //$NON-NLS-1$
 				.to(XtendPreferenceStoreInitializer.class);
 	}
-	
+
 	public Class<? extends IssueSeveritiesProvider> bindIssueSeverityServiceProvider() {
 		return XbaseIssueSeveritiesProvider.class;
 	}
-	
-	public Class<? extends XtextSourceViewerConfiguration> bindSourceViewerConfiguration(){
+
+	public Class<? extends XtextSourceViewerConfiguration> bindSourceViewerConfiguration() {
 		return XtendSourceViewerConfiguration.class;
 	}
 
-	public Class<? extends DocumentTokenSource> bindDocumentTokenSource(){
+	public Class<? extends DocumentTokenSource> bindDocumentTokenSource() {
 		return XtendDocumentTokenSource.class;
 	}
-	
+
 	public Class<? extends AbstractValidatorConfigurationBlock> bindAbstractValidatorConfigurationBlock() {
 		return XtendValidatorConfigurationBlock.class;
 	}
-	
+
 	public Class<? extends ProcessorInstanceForJvmTypeProvider> bindProcessorInstanceForJvmTypeProvider() {
 		return JdtBasedProcessorProvider.class;
 	}
@@ -428,51 +425,51 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	public Class<? extends IContentAssistantFactory> bindIContentAssistantFactory() {
 		return XtendContentAssistFactory.class;
 	}
-	
+
 	@Override
 	public Class<? extends IResourceForEditorInputFactory> bindIResourceForEditorInputFactory() {
 		return XbaseResourceForEditorInputFactory.class;
 	}
-	
+
 	public Class<? extends IContextInformationProvider> bindIContextInformationProvider() {
 		return ParameterContextInformationProvider.class;
 	}
-	
+
 	public Class<? extends PrefixMatcher.CamelCase> bindCamelCasePrefixMatcher() {
 		return EscapeSequenceAwarePrefixMatcher.class;
 	}
-	
+
 	@Override
 	public Class<? extends ILabelProvider> bindILabelProvider() {
 		return XtendLabelProvider.class;
 	}
-	
+
 	public Class<? extends IReferenceFinder> bindIReferenceFinder() {
 		return DelegatingReferenceFinder.class;
 	}
-	
+
 	public Class<? extends JavaTypeQuickfixes> bindJavaTypeQuickfixes() {
 		return TypeLiteralAwareJavaTypeQuickfixes.class;
 	}
-	
+
 	public Class<? extends ICompletionProposalComparator> bindICompletionProposalComparator() {
 		return OperatorAwareComparator.class;
 	}
-	
+
 	public Class<? extends AbstractFileSystemSupport> bindAbstractFileSystemSupport() {
 		return EclipseFileSystemSupportImpl.class;
 	}
-	
+
 	@Override
 	public Class<? extends CopyQualifiedNameService> bindCopyQualifiedNameService() {
 		return XtendCopyQualifiedNameService.class;
 	}
-	
+
 	@Override
 	public Class<? extends IContentAssistParser> bindIContentAssistParser() {
 		return FlexerBasedContentAssistParser.class;
 	}
-	
+
 	@Override
 	public void configureContentAssistLexerProvider(Binder binder) {
 		binder.bind(InternalXtendLexer.class).toProvider(LexerProvider.create(DisabledInternalLexer.class));
@@ -481,9 +478,10 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 
 	@Override
 	public void configureContentAssistLexer(Binder binder) {
-		binder.bind(Lexer.class).annotatedWith(Names.named(LexerIdeBindings.CONTENT_ASSIST)).to(DisabledInternalLexer.class);
+		binder.bind(Lexer.class).annotatedWith(Names.named(LexerIdeBindings.CONTENT_ASSIST))
+				.to(DisabledInternalLexer.class);
 	}
-	
+
 	@Override
 	public Class<? extends ContentAssistContextFactory> bindContentAssistContextFactory() {
 		return FlexerBasedContentAssistContextFactory.class;
@@ -493,7 +491,7 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	public Class<? extends IProposalConflictHelper> bindIProposalConflictHelper() {
 		return FlexProposalConflictHelper.class;
 	}
-	
+
 	public Class<? extends TemplateBodyHighlighter> bindTemplateBodyHighlighter() {
 		return FlexerBasedTemplateBodyHighlighter.class;
 	}
@@ -501,39 +499,39 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	public Class<? extends IPreferenceStoreAccess> bindPreferenceStoreAccess() {
 		return XtendPreferenceStoreAccess.class;
 	}
-	
+
 	public Class<? extends ExpressionUtil> bindExpressionUtil() {
 		return XtendExpressionUtil.class;
 	}
-	
+
 	public Class<? extends OutlineNodeFactory> bindOutlineNodeFactory() {
 		return XtendOutlineNodeFactory.class;
 	}
-	
+
 	@Override
 	public Class<? extends ITypesProposalProvider> bindITypesProposalProvider() {
 		return XtendImportingTypesProposalProvider.class;
 	}
-	
+
 	public Class<? extends IOutlineTreeProvider.ModeAware> bindIOutlineTreeProvider_ModeAware() {
 		return org.eclipse.xtend.ide.outline.XtendOutlineModes.class;
 	}
-	
+
 	public void configureSwitchOutlineModeContribution(Binder binder) {
 		binder.bind(IOutlineContribution.class).annotatedWith(Names.named("SwitchOutlineModeContribution"))
-		.to(SwitchOutlineModeContribution.class);
+				.to(SwitchOutlineModeContribution.class);
 	}
-	
+
 	public void configureSwitchQuickOutlineModeContribution(Binder binder) {
 		binder.bind(IQuickOutlineContribution.class).annotatedWith(Names.named("SwitchQuickOutlineModeContribution"))
 				.to(SwitchOutlineModeContribution.class);
 	}
-	
+
 	@org.eclipse.xtext.service.SingletonBinding(eager = true)
 	public Class<? extends IResourceChangeRegistry> bindResourceChangeRegistry() {
 		return UIResourceChangeRegistry.class;
 	}
-	
+
 	@Override
 	public Class<? extends IPartialEditingContentAssistParser> bindIPartialEditingContentAssistParser() {
 		return FlexerBasedPartialXtendContentAssistParser.class;
@@ -542,11 +540,11 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	public Class<? extends ILinker> bindILinker() {
 		return Linker.class;
 	}
-	
+
 	public Class<? extends OutlineWithEditorLinker> bindOutlineWithEditorLinker() {
 		return XtendOutlineWithEditorLinker.class;
 	}
-	
+
 	public Class<? extends XtendResourceDescriptionManager> bindXtendUIResourceDescriptionManager() {
 		return XtendUIResourceDescriptionManager.class;
 	}
@@ -554,20 +552,21 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	public Class<? extends IClipboardActionFactory> bindIClipboardActionFactory() {
 		return ImportsAwareClipboardAction.Factory.class;
 	}
-	
+
+	@Override
 	public Class<? extends IContextualOutputConfigurationProvider> bindIContextualOutputConfigurationProvider() {
 		return EclipseOutputConfigurationProvider.class;
 	}
-	
+
 	@Override
 	public Class<? extends AbstractFileSystemAccess2> bindAbstractFileSystemAccess2() {
 		return EclipseResourceFileSystemAccess2.class;
 	}
-	
+
 	public Class<? extends IResourceValidator> bindIResourceValidator() {
 		return XtendResourceValidator.class;
 	}
-	
+
 	@Override
 	public Class<? extends XtextTemplateContextType> bindXtextTemplateContextType() {
 		return XtendTemplateContextType.class;

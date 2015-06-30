@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.editor.syntaxcoloring;
+package org.eclipse.xtext.ide.editor.syntaxcoloring;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -173,8 +173,12 @@ public class LightweightPosition implements Comparable<LightweightPosition>{
 
 	public void merge(IntToStringArray[] other) {
 		IntToStringArray[] oldIds = ids;
-		ids = new IntToStringArray[oldIds.length + other.length];
+		ids = createArray(oldIds.length + other.length);
 		System.arraycopy(oldIds, 0, ids, 0, oldIds.length);
 		System.arraycopy(other, 0, ids, oldIds.length, other.length);
+	}
+	
+	protected IntToStringArray[] createArray(int len) {
+		return new IntToStringArray[len];
 	}
 }

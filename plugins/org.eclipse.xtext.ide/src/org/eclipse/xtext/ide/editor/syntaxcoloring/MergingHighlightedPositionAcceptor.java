@@ -5,14 +5,14 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.editor.syntaxcoloring;
+package org.eclipse.xtext.ide.editor.syntaxcoloring;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.LightweightPosition.IntToStringArray;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.LightweightPosition.IntToStringArray;
 
 import com.google.common.collect.Lists;
 
@@ -20,6 +20,7 @@ import com.google.common.collect.Lists;
  * Accepts a bunch of positions and creates a list
  * of positions from them that do not overlap.
  * 
+ * @since 2.9
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class MergingHighlightedPositionAcceptor implements IHighlightedPositionAcceptor, ISemanticHighlightingCalculator {
@@ -39,12 +40,20 @@ public class MergingHighlightedPositionAcceptor implements IHighlightedPositionA
 	@Override
 	public void addPosition(int offset, int length, String... ids) {
 		if (length > 0) {
-			this.getPositions().add(new LightweightPosition(offset, length, timestamp, ids));
+			this.getPositions().add(newPosition(offset, length, timestamp, ids));
 			if (offset < expectedOffset)
 				requireMerge = true;
 			expectedOffset = offset + length;
 		}
 		timestamp++;
+	}
+
+	protected LightweightPosition newPosition(int offset, int length, int timestamp, String... ids) {
+		return new LightweightPosition(offset, length, timestamp, ids);
+	}
+	
+	protected LightweightPosition newPosition(int offset, int length, int timestamp, IntToStringArray[] ids) {
+		return new LightweightPosition(offset, length, timestamp, ids);
 	}
 
 	@Override
@@ -57,8 +66,8 @@ public class MergingHighlightedPositionAcceptor implements IHighlightedPositionA
 	}
 
 	private void initialize() {
-		if (!positions.isEmpty())
-			positions.clear();
+		if (!getPositions().isEmpty())
+			getPositions().clear();
 		timestamp = 0;
 		expectedOffset = 0;
 		requireMerge = false;
@@ -105,7 +114,7 @@ public class MergingHighlightedPositionAcceptor implements IHighlightedPositionA
 				if (prevEnd < next.getOffset()) {
 					if (newPositions == null)
 						newPositions = Lists.newArrayListWithExpectedSize(4);
-					newPositions.add(new LightweightPosition(prevEnd, next.getOffset() - prevEnd, timestamp, ids));
+					newPositions.add(newPosition(prevEnd, next.getOffset() - prevEnd, timestamp, ids));
 				}
 			}
 			if (next.getOffset() + next.getLength() <= exclusiveEndOffset) {
@@ -115,7 +124,7 @@ public class MergingHighlightedPositionAcceptor implements IHighlightedPositionA
 				next.setLength(exclusiveEndOffset - next.getOffset());
 				if (newPositions == null)
 					newPositions = Lists.newArrayListWithExpectedSize(4);
-				newPositions.add(new LightweightPosition(next.getOffset() + next.getLength(), oldLength - next.getLength(), next.getTimestamp(), next.getIds()));
+				newPositions.add(newPosition(next.getOffset() + next.getLength(), oldLength - next.getLength(), next.getTimestamp(), next.getIds()));
 				next.merge(ids);
 			}
 			i++;
@@ -144,7 +153,7 @@ public class MergingHighlightedPositionAcceptor implements IHighlightedPositionA
 		if (pending != null) {
 			int prevEnd = pending.getOffset() + pending.getLength();
 			if (prevEnd < expectedEndOffset) {
-				LightweightPosition position = new LightweightPosition(prevEnd, expectedEndOffset - prevEnd, timestamp, ids);
+				LightweightPosition position = newPosition(prevEnd, expectedEndOffset - prevEnd, timestamp, ids);
 				if (result == null)
 					result = Collections.singletonList(position);
 				else

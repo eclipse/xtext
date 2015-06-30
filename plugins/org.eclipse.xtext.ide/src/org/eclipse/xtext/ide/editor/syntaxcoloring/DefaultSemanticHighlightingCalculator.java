@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.editor.syntaxcoloring;
+package org.eclipse.xtext.ide.editor.syntaxcoloring;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ import com.google.inject.Inject;
 
 /**
  * @author Stefan Oehme - Initial contribution and API
- * @since 2.6
+ * @since 2.9
  */
 public class DefaultSemanticHighlightingCalculator implements ISemanticHighlightingCalculator {
 

@@ -12,12 +12,14 @@ import com.google.inject.binder.AnnotatedBindingBuilder;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalPriorities;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider;
 import org.eclipse.xtext.ide.editor.contentassist.IdeCrossrefProposalProvider;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.xbase.ide.contentassist.ClasspathBasedIdeTypesProposalProvider;
 import org.eclipse.xtext.xbase.ide.contentassist.IIdeTypesProposalProvider;
 import org.eclipse.xtext.xbase.ide.contentassist.XbaseIdeContentProposalPriorities;
 import org.eclipse.xtext.xbase.ide.contentassist.XbaseIdeContentProposalProvider;
 import org.eclipse.xtext.xbase.ide.contentassist.XbaseIdeCrossrefProposalProvider;
+import org.eclipse.xtext.xbase.ide.highlighting.XbaseHighlightingCalculator;
 import org.eclipse.xtext.xbase.ide.types.ClasspathScanner;
 import org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker;
 import org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider;
@@ -53,5 +55,9 @@ public class DefaultXbaseIdeModule extends AbstractGenericModule {
   
   public Class<? extends IdeContentProposalPriorities> bindIdeContentProposalPriorities() {
     return XbaseIdeContentProposalPriorities.class;
+  }
+  
+  public Class<? extends ISemanticHighlightingCalculator> bindSemanticHighlightingCalculator() {
+    return XbaseHighlightingCalculator.class;
   }
 }

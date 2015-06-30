@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.editor.syntaxcoloring;
+package org.eclipse.xtext.ide.editor.syntaxcoloring;
 
 import org.eclipse.xtext.resource.XtextResource;
 
@@ -16,6 +16,7 @@ import com.google.inject.ImplementedBy;
  * the mapping from ranges in the input to the appropriate highlighting style.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @since 2.9
  */
 @ImplementedBy(DefaultSemanticHighlightingCalculator.class)
 public interface ISemanticHighlightingCalculator {

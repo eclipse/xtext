@@ -20,6 +20,9 @@ import org.eclipse.xtext.xbase.ide.contentassist.XbaseIdeCrossrefProposalProvide
 import org.eclipse.xtext.xbase.ide.types.ClasspathScanner
 import org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker
 import org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider
+import org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator
+import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator
+import org.eclipse.xtext.xbase.ide.highlighting.XbaseHighlightingCalculator
 
 /**
  * Guice module for generic IDE services for Xbase.
@@ -51,6 +54,10 @@ class DefaultXbaseIdeModule extends AbstractGenericModule {
 	
 	def Class<? extends IdeContentProposalPriorities> bindIdeContentProposalPriorities() {
 		XbaseIdeContentProposalPriorities
+	}
+	
+	def Class<? extends ISemanticHighlightingCalculator> bindSemanticHighlightingCalculator() {
+		XbaseHighlightingCalculator
 	}
 	
 }

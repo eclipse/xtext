@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.editor.syntaxcoloring;
+package org.eclipse.xtext.ide.editor.syntaxcoloring;
 
 /**
  * Xtext uses an {@link IHighlightedPositionAcceptor} to collect any ranges that should
@@ -15,6 +15,7 @@ package org.eclipse.xtext.ui.editor.syntaxcoloring;
  * This interface is not intended to be implemented by clients.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @since 2.9 
  */
 public interface IHighlightedPositionAcceptor {
 
