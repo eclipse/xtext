@@ -321,4 +321,13 @@ public class ContentAssistFragmentTestLangSemanticSequencer extends XbaseSemanti
 		feeder.accept(grammarAccess.getContentAssistFragmentTestLanguageRootAccess().getExpressionXExpressionParserRuleCall_0(), semanticObject.getExpression());
 		feeder.finish();
 	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (writeable?='var'? ((type=JvmTypeReference name=ValidID) | name=ValidID) right=XExpression?)
+	 */
+	protected void sequence_XVariableDeclaration(EObject context, XVariableDeclaration semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
 }
