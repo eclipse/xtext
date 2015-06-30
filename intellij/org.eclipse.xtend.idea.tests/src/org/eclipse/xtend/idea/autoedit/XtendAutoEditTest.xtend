@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.idea.autoedit
 
+import com.intellij.openapi.util.TextRange
 import org.eclipse.xtend.idea.LightXtendTest
 import org.eclipse.xtext.junit4.internal.LineDelimiters
 
@@ -18,7 +19,7 @@ class XtendAutoEditTest extends LightXtendTest {
 		newLine
 		assertEditor('''
 		class Foo {
-		«CARET»
+			«CARET»
 		}''')
 	}
 	
@@ -46,7 +47,7 @@ class XtendAutoEditTest extends LightXtendTest {
 		assertEditor('''
 			class Foo {
 				def bar() {
-				«CARET»
+					«CARET»
 				}
 			}
 		''')
@@ -108,13 +109,16 @@ class XtendAutoEditTest extends LightXtendTest {
 	}
 
 	private def assertEditor(String editorState) {
-		val normalized = LineDelimiters.toUnix(editorState)
-		val caretPosition = normalized.indexOf(CARET)
-		var text = normalized
-		if (caretPosition != -1) {
-			text = normalized.replace(CARET, "")
-			assertEquals(caretPosition, myFixture.editor.caretModel.primaryCaret.offset)
+		val expectedState = LineDelimiters.toUnix(editorState.replace(CARET, "|"))
+
+		val actualState = {
+			val caretOffset = myFixture.editor.caretModel.primaryCaret.offset
+			val document = myFixture.editor.document
+			val beforeCaret = myFixture.editor.document.getText(new TextRange(0, caretOffset))
+			val afterCaret = myFixture.editor.document.getText(new TextRange(caretOffset, document.textLength))
+			beforeCaret + '|' + afterCaret
 		}
-		assertEquals(text, myFixture.editor.document.text)
+
+		assertEquals(expectedState, actualState)
 	}
 }
