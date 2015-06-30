@@ -35,5 +35,7 @@
 
     	<iconProvider implementation="org.eclipse.xtend.core.idea.icons.XtendIconProvider"/>
     	<treeStructureProvider implementation="org.eclipse.xtend.core.idea.projectview.XtendSelectableTreeStructureProvider" order="last"/>
+    	<framework.detector implementation="org.eclipse.xtend.core.idea.facet.XtendFrameworkDetector"/>
+    
 	</extensions>
 </idea-plugin>

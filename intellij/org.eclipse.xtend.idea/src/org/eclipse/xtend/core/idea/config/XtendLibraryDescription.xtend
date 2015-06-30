@@ -32,13 +32,14 @@ import static extension com.intellij.util.PathUtil.*
 class XtendLibraryDescription extends CustomLibraryDescription {
 
 	public static val LIBRARY_KINDS = providers.map[kind].toSet
+	public static val XTEND_LIBRARY_NAME = 'Xtend Library'
 
 	override createNewLibrary(JComponent parentComponent, VirtualFile contextDirectory) {
 		val provider = providers.head
 		if (provider == null) {
 			return null
 		}
-		new NewLibraryConfiguration('Xtend Library') {
+		new NewLibraryConfiguration(XTEND_LIBRARY_NAME) {
 
 			override addRoots(LibraryEditor editor) {
 				editor.addRoot(Lists.urlForLibraryRoot, OrderRootType.CLASSES)
