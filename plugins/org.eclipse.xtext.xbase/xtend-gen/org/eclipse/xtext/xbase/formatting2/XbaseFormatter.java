@@ -46,6 +46,7 @@ import org.eclipse.xtext.xbase.XBasicForLoopExpression;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
+import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XCollectionLiteral;
@@ -57,6 +58,7 @@ import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XPostfixOperation;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XSynchronizedExpression;
@@ -86,6 +88,7 @@ import org.eclipse.xtext.xtype.XImportSection;
 
 /**
  * @author Moritz Eysholdt - Initial implementation and API
+ * @author Lorenzo Bettini - https://bugs.eclipse.org/bugs/show_bug.cgi?id=471239
  */
 @SuppressWarnings("all")
 public class XbaseFormatter extends XtypeFormatter {
@@ -2128,6 +2131,36 @@ public class XbaseFormatter extends XtypeFormatter {
     doc.<JvmTypeReference>format(_type);
   }
   
+  protected void _format(final XCastedExpression expr, @Extension final IFormattableDocument doc) {
+    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(expr);
+    ISemanticRegion _keyword = _regionFor.keyword("as");
+    final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
+      public void apply(final IHiddenRegionFormatter it) {
+        it.oneSpace();
+      }
+    };
+    doc.surround(_keyword, _function);
+    XExpression _target = expr.getTarget();
+    doc.<XExpression>format(_target);
+    JvmTypeReference _type = expr.getType();
+    doc.<JvmTypeReference>format(_type);
+  }
+  
+  protected void _format(final XPostfixOperation expr, @Extension final IFormattableDocument doc) {
+    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(expr);
+    ISemanticRegion _feature = _regionFor.feature(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
+    final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
+      public void apply(final IHiddenRegionFormatter it) {
+        it.noSpace();
+      }
+    };
+    doc.prepend(_feature, _function);
+    XExpression _operand = expr.getOperand();
+    doc.<XExpression>format(_operand);
+  }
+  
   protected void formatExpressionsMultiline(final Collection<? extends XExpression> expressions, final ISemanticRegion open, final ISemanticRegion close, @Extension final IFormattableDocument format) {
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
       @Override
@@ -2268,6 +2301,9 @@ public class XbaseFormatter extends XtypeFormatter {
     } else if (expr instanceof XMemberFeatureCall) {
       _format((XMemberFeatureCall)expr, format);
       return;
+    } else if (expr instanceof XPostfixOperation) {
+      _format((XPostfixOperation)expr, format);
+      return;
     } else if (expr instanceof XWhileExpression) {
       _format((XWhileExpression)expr, format);
       return;
@@ -2288,6 +2324,9 @@ public class XbaseFormatter extends XtypeFormatter {
       return;
     } else if (expr instanceof XBlockExpression) {
       _format((XBlockExpression)expr, format);
+      return;
+    } else if (expr instanceof XCastedExpression) {
+      _format((XCastedExpression)expr, format);
       return;
     } else if (expr instanceof XClosure) {
       _format((XClosure)expr, format);
