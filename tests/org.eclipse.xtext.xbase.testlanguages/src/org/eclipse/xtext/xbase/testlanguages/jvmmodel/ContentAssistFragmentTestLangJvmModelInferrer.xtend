@@ -45,18 +45,11 @@ class ContentAssistFragmentTestLangJvmModelInferrer extends AbstractModelInferre
 	 *            <code>true</code>.
 	 */
    	def dispatch void infer(ContentAssistFragmentTestLanguageRoot element, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
-   		// Here you explain how your model is mapped to Java elements, by writing the actual translation code.
-   		
-   		// An implementation for the initial hello world example could look like this:
-//   		acceptor.accept(element.toClass("my.company.greeting.MyGreetings")) [
-//   			for (greeting : element.greetings) {
-//   				members += greeting.toMethod("hello" + greeting.name, typeRef(String)) [
-//   					body = '''
-//							return "Hello «greeting.name»";
-//   					'''
-//   				]
-//   			}
-//   		]
+   		acceptor.accept(element.toClass("my.test.MyClass")) [
+			members += element.toMethod("hello", typeRef(Void)) [
+				body = element.expression
+			]
+   		]
    	}
 }
 
