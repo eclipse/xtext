@@ -9,7 +9,7 @@
             class="org.eclipse.xtext.xbase.testlanguages.ui.XImportSectionTestLangExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
-            extensions="__ximportimporttestlang"
+            extensions="ximportsectiontestlang"
             id="org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang"
             matchingStrategy="org.eclipse.xtext.xbase.testlanguages.ui.XImportSectionTestLangExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.editor.JavaEditorInputMatcher"
             name="XImportSectionTestLang Editor">
@@ -214,13 +214,13 @@
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
 			class="org.eclipse.xtext.xbase.testlanguages.ui.XImportSectionTestLangExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
-			type="__ximportimporttestlang">
+			type="ximportsectiontestlang">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
             class="org.eclipse.xtext.xbase.testlanguages.ui.XImportSectionTestLangExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-            uriExtension="__ximportimporttestlang">
+            uriExtension="ximportsectiontestlang">
         </resourceServiceProvider>
     </extension>
 
@@ -251,7 +251,9 @@
    <extension
          point="org.eclipse.xtext.builder.participant">
       <participant
-            class="org.eclipse.xtext.xbase.testlanguages.ui.XImportSectionTestLangExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
+            class="org.eclipse.xtext.xbase.testlanguages.ui.XImportSectionTestLangExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
+            fileExtensions="ximportsectiontestlang"
+            >
       </participant>
    </extension>
    <extension
@@ -278,6 +280,27 @@
 	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=xtext.ui.openDeclaration">
+			<command
+				commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand"
+				id="org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang.OpenGeneratedCode"
+				style="push">
+					<visibleWhen checkEnabled="false">
+						<reference definitionId="org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang.Editor.opened" />
+					</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtext.xbase.testlanguages.ui.XImportSectionTestLangExecutableExtensionFactory:org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler"
+			commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand">
+				<activeWhen>
+					<reference definitionId="org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang.Editor.opened" />
+				</activeWhen>
+		</handler>
+	</extension>
 
 	<!-- Quick Outline -->
 	<extension
@@ -476,7 +499,7 @@
    </extension>
    <extension point="org.eclipse.ui.editorActions">
       <editorContribution targetID="org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang" 
-                          id="org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang.ide.rulerActions">
+                          id="org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang.rulerActions">
 	     <action
 	             label="Not Used"
 	             class="org.eclipse.xtext.xbase.testlanguages.ui.XImportSectionTestLangExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
@@ -487,17 +510,29 @@
    </extension>
    <extension point="org.eclipse.ui.popupMenus">
       <viewerContribution
-         targetID="example.rulerContextMenuId"
-         id="org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang.ide.RulerPopupActions">
+         targetID="org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang.RulerContext"
+         id="org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang.RulerPopupActions">
          <action
             label="Toggle Breakpoint"
             class="org.eclipse.xtext.xbase.testlanguages.ui.XImportSectionTestLangExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
-            menubarPath="additions"
-            id="org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang.ide.rulerContextMenu.toggleBreakpointAction">
+            menubarPath="debug"
+            id="org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang.rulerContextMenu.toggleBreakpointAction">
+         </action>
+         <action
+            label="Not used"
+            class="org.eclipse.xtext.xbase.testlanguages.ui.XImportSectionTestLangExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerEnableDisableBreakpointActionDelegate"
+            menubarPath="debug"
+            id="org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang.rulerContextMenu.enableDisableBreakpointAction">
+         </action>
+         <action
+           label="Breakpoint Properties"
+           helpContextId="breakpoint_properties_action_context"
+           class="org.eclipse.xtext.xbase.testlanguages.ui.XImportSectionTestLangExecutableExtensionFactory:org.eclipse.jdt.debug.ui.actions.JavaBreakpointPropertiesRulerActionDelegate"
+           menubarPath="group.properties"
+           id="org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang.rulerContextMenu.openBreapointPropertiesAction">
          </action>
       </viewerContribution>
    </extension>
-   
     <!-- Introduce Local Variable Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
 		<handler 
@@ -523,24 +558,54 @@
          </command>
       </menuContribution>
    </extension>  
+   <!-- Open implementation -->
+   <extension point="org.eclipse.ui.handlers">
+      <handler
+            class="org.eclipse.xtext.xbase.testlanguages.ui.XImportSectionTestLangExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.navigation.OpenImplementationHandler"
+            commandId="org.eclipse.xtext.xbase.ui.OpenImplementationCommand">
+            <activeWhen>
+				<reference
+					definitionId="org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang.Editor.opened">
+				</reference>
+			</activeWhen>
+      </handler>
+   </extension>
+ <extension point="org.eclipse.ui.menus">
+       <menuContribution
+            locationURI="menu:navigate?after=open.ext4">
+         <command commandId="org.eclipse.xtext.xbase.ui.OpenImplementationCommand">
+		<visibleWhen checkEnabled="false">
+              <reference
+                 definitionId="org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang.Editor.opened">
+              </reference>
+		</visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
 
   <extension point="org.eclipse.compare.contentViewers">
     <viewer id="org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang.compare.contentViewers"
             class="org.eclipse.xtext.xbase.testlanguages.ui.XImportSectionTestLangExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-            extensions="__ximportimporttestlang">
+            extensions="ximportsectiontestlang">
     </viewer>
   </extension>
   <extension point="org.eclipse.compare.contentMergeViewers">
     <viewer id="org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang.compare.contentMergeViewers"
             class="org.eclipse.xtext.xbase.testlanguages.ui.XImportSectionTestLangExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-            extensions="__ximportimporttestlang" label="XImportSectionTestLang Compare">
+            extensions="ximportsectiontestlang" label="XImportSectionTestLang Compare">
      </viewer>
   </extension>
   <extension point="org.eclipse.ui.editors.documentProviders">
     <provider id="org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang.editors.documentProviders"
             class="org.eclipse.xtext.xbase.testlanguages.ui.XImportSectionTestLangExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
-            extensions="__ximportimporttestlang">
+            extensions="ximportsectiontestlang">
     </provider>
+  </extension>
+  <extension point="org.eclipse.team.core.fileTypes">
+    <fileTypes
+            extension="ximportsectiontestlang"
+            type="text">
+    </fileTypes>
   </extension>
 
 </plugin>
