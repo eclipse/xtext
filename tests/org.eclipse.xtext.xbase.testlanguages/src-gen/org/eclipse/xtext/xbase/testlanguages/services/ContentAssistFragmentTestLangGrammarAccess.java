@@ -34,9 +34,99 @@ public class ContentAssistFragmentTestLangGrammarAccess extends AbstractGrammarE
 		//XExpression
 		public RuleCall getExpressionXExpressionParserRuleCall_0() { return cExpressionXExpressionParserRuleCall_0; }
 	}
+
+	public class XVariableDeclarationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "XVariableDeclaration");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cXVariableDeclarationAction_0 = (Action)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Assignment cWriteableAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
+		private final Keyword cWriteableVarKeyword_1_0_0 = (Keyword)cWriteableAssignment_1_0.eContents().get(0);
+		private final Keyword cValKeyword_1_1 = (Keyword)cAlternatives_1.eContents().get(1);
+		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
+		private final Group cGroup_2_0 = (Group)cAlternatives_2.eContents().get(0);
+		private final Group cGroup_2_0_0 = (Group)cGroup_2_0.eContents().get(0);
+		private final Assignment cTypeAssignment_2_0_0_0 = (Assignment)cGroup_2_0_0.eContents().get(0);
+		private final RuleCall cTypeJvmTypeReferenceParserRuleCall_2_0_0_0_0 = (RuleCall)cTypeAssignment_2_0_0_0.eContents().get(0);
+		private final Assignment cNameAssignment_2_0_0_1 = (Assignment)cGroup_2_0_0.eContents().get(1);
+		private final RuleCall cNameValidIDParserRuleCall_2_0_0_1_0 = (RuleCall)cNameAssignment_2_0_0_1.eContents().get(0);
+		private final Assignment cNameAssignment_2_1 = (Assignment)cAlternatives_2.eContents().get(1);
+		private final RuleCall cNameValidIDParserRuleCall_2_1_0 = (RuleCall)cNameAssignment_2_1.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cEqualsSignKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cRightAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cRightXExpressionParserRuleCall_3_1_0 = (RuleCall)cRightAssignment_3_1.eContents().get(0);
+		
+		//// To test bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=471434
+		//// we need to override one of the Xbase's rules
+		//// even if we don't change its syntax
+		//XVariableDeclaration:
+		//	{XVariableDeclaration} (writeable?="var" | "val") (=> (type=JvmTypeReference name=ValidID) | name=ValidID) ("="
+		//	right=XExpression)?;
+		@Override public ParserRule getRule() { return rule; }
+
+		//{XVariableDeclaration} (writeable?="var" | "val") (=> (type=JvmTypeReference name=ValidID) | name=ValidID) ("="
+		//right=XExpression)?
+		public Group getGroup() { return cGroup; }
+
+		//{XVariableDeclaration}
+		public Action getXVariableDeclarationAction_0() { return cXVariableDeclarationAction_0; }
+
+		//writeable?="var" | "val"
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+
+		//writeable?="var"
+		public Assignment getWriteableAssignment_1_0() { return cWriteableAssignment_1_0; }
+
+		//"var"
+		public Keyword getWriteableVarKeyword_1_0_0() { return cWriteableVarKeyword_1_0_0; }
+
+		//"val"
+		public Keyword getValKeyword_1_1() { return cValKeyword_1_1; }
+
+		//=> (type=JvmTypeReference name=ValidID) | name=ValidID
+		public Alternatives getAlternatives_2() { return cAlternatives_2; }
+
+		//=> (type=JvmTypeReference name=ValidID)
+		public Group getGroup_2_0() { return cGroup_2_0; }
+
+		//type=JvmTypeReference name=ValidID
+		public Group getGroup_2_0_0() { return cGroup_2_0_0; }
+
+		//type=JvmTypeReference
+		public Assignment getTypeAssignment_2_0_0_0() { return cTypeAssignment_2_0_0_0; }
+
+		//JvmTypeReference
+		public RuleCall getTypeJvmTypeReferenceParserRuleCall_2_0_0_0_0() { return cTypeJvmTypeReferenceParserRuleCall_2_0_0_0_0; }
+
+		//name=ValidID
+		public Assignment getNameAssignment_2_0_0_1() { return cNameAssignment_2_0_0_1; }
+
+		//ValidID
+		public RuleCall getNameValidIDParserRuleCall_2_0_0_1_0() { return cNameValidIDParserRuleCall_2_0_0_1_0; }
+
+		//name=ValidID
+		public Assignment getNameAssignment_2_1() { return cNameAssignment_2_1; }
+
+		//ValidID
+		public RuleCall getNameValidIDParserRuleCall_2_1_0() { return cNameValidIDParserRuleCall_2_1_0; }
+
+		//("=" right=XExpression)?
+		public Group getGroup_3() { return cGroup_3; }
+
+		//"="
+		public Keyword getEqualsSignKeyword_3_0() { return cEqualsSignKeyword_3_0; }
+
+		//right=XExpression
+		public Assignment getRightAssignment_3_1() { return cRightAssignment_3_1; }
+
+		//XExpression
+		public RuleCall getRightXExpressionParserRuleCall_3_1_0() { return cRightXExpressionParserRuleCall_3_1_0; }
+	}
 	
 	
 	private final ContentAssistFragmentTestLanguageRootElements pContentAssistFragmentTestLanguageRoot;
+	private final XVariableDeclarationElements pXVariableDeclaration;
 	
 	private final Grammar grammar;
 
@@ -48,6 +138,7 @@ public class ContentAssistFragmentTestLangGrammarAccess extends AbstractGrammarE
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaXbase = gaXbase;
 		this.pContentAssistFragmentTestLanguageRoot = new ContentAssistFragmentTestLanguageRootElements();
+		this.pXVariableDeclaration = new XVariableDeclarationElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -85,6 +176,20 @@ public class ContentAssistFragmentTestLangGrammarAccess extends AbstractGrammarE
 	
 	public ParserRule getContentAssistFragmentTestLanguageRootRule() {
 		return getContentAssistFragmentTestLanguageRootAccess().getRule();
+	}
+
+	//// To test bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=471434
+	//// we need to override one of the Xbase's rules
+	//// even if we don't change its syntax
+	//XVariableDeclaration:
+	//	{XVariableDeclaration} (writeable?="var" | "val") (=> (type=JvmTypeReference name=ValidID) | name=ValidID) ("="
+	//	right=XExpression)?;
+	public XVariableDeclarationElements getXVariableDeclarationAccess() {
+		return pXVariableDeclaration;
+	}
+	
+	public ParserRule getXVariableDeclarationRule() {
+		return getXVariableDeclarationAccess().getRule();
 	}
 
 	//XExpression:
@@ -529,17 +634,6 @@ public class ContentAssistFragmentTestLangGrammarAccess extends AbstractGrammarE
 	
 	public ParserRule getXExpressionOrVarDeclarationRule() {
 		return getXExpressionOrVarDeclarationAccess().getRule();
-	}
-
-	//XVariableDeclaration returns XExpression:
-	//	{XVariableDeclaration} (writeable?="var" | "val") (=> (type=JvmTypeReference name=ValidID) | name=ValidID) ("="
-	//	right=XExpression)?;
-	public XbaseGrammarAccess.XVariableDeclarationElements getXVariableDeclarationAccess() {
-		return gaXbase.getXVariableDeclarationAccess();
-	}
-	
-	public ParserRule getXVariableDeclarationRule() {
-		return getXVariableDeclarationAccess().getRule();
 	}
 
 	//JvmFormalParameter returns types::JvmFormalParameter:
