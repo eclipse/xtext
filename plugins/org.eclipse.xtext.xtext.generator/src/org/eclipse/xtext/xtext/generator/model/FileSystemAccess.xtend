@@ -13,17 +13,22 @@ import java.io.FileInputStream
 import java.io.InputStream
 import java.nio.charset.Charset
 import org.eclipse.emf.common.util.URI
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.util.RuntimeIOException
 
 class FileSystemAccess implements IFileSystemAccess2 {
 	
+	@Accessors
+	val String path
+	
 	val URI baseUri
 	val IEncodingProvider encodingProvider
 	
-	new(String basePath, IEncodingProvider encodingProvider) {
-		this.baseUri = URI.createPlatformResourceURI(basePath, true)
+	new(String path, IEncodingProvider encodingProvider) {
+		this.path = path
+		this.baseUri = URI.createPlatformResourceURI(path, true)
 		this.encodingProvider = encodingProvider
 	}
 	

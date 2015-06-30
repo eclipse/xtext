@@ -7,9 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.model
 
+import org.eclipse.xtext.generator.IFileSystemAccess2
+
 class ModuleAccess {
 	
-	new(FileSystemAccess outlet) {
+	new(IFileSystemAccess2 outlet) {
+		
+	}
+	
+	def void generate() {
 		
 	}
 	

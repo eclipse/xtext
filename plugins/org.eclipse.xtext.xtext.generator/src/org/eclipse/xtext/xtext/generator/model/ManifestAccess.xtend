@@ -7,9 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.model
 
+import org.eclipse.xtend.lib.annotations.Accessors
+
 class ManifestAccess {
 	
-	new(String path) {
+	@Accessors
+	String path
+	
+	@Accessors
+	boolean merge
+	
+	def void generate() {
 		
 	}
 	
