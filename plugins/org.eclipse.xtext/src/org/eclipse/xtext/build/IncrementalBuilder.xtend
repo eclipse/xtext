@@ -28,6 +28,8 @@ import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
+import org.eclipse.xtext.generator.trace.TraceFileNameProvider
+import org.eclipse.xtext.generator.trace.TraceRegionSerializer
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -99,19 +101,8 @@ import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
 			if (generator == null) {
 				return;
 			}
-//			LOG.info("Starting generator for input: '" + resource.URI.lastSegment + "'");
 			val previous = newMappings.deleteSource(resource.getURI)
-			val workspaceConfigProvider = serviceProvider.get(IWorkspaceConfigProvider)
-			val workspaceConfig = workspaceConfigProvider?.getWorkspaceConfig(resource.resourceSet)
-			val sourceFolder = workspaceConfig?.findProjectContaining(resource.getURI)?.findSourceFolderContaining(resource.getURI)
-			val fileSystemAccess = new URIBasedFileSystemAccess() => [
-				val outputConfigProvider = serviceProvider.get(IContextualOutputConfigurationProvider)
-				outputConfigurations = outputConfigProvider.getOutputConfigurations(resource).toMap[name]
-				
-				baseDir = request.baseDir
-				currentSource = sourceFolder?.name
-				converter = resource.resourceSet.getURIConverter
-				
+			val fileSystemAccess = createFileSystemAccess(serviceProvider, resource) => [
 				beforeWrite = [ uri, contents |
 					newMappings.addSource2Generated(resource.getURI, uri)
 					previous.remove(uri)
@@ -140,6 +131,24 @@ import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
 				LOG.info('Deleting stale generated file ' + it)
 				context.resourceSet.getURIConverter.delete(it, emptyMap)
 				request.getAfterDeleteFile.apply(it)
+			]
+		}
+	
+		protected def createFileSystemAccess(IResourceServiceProvider serviceProvider, Resource resource) {
+			val workspaceConfigProvider = serviceProvider.get(IWorkspaceConfigProvider)
+			val workspaceConfig = workspaceConfigProvider?.getWorkspaceConfig(resource.resourceSet)
+			val sourceFolder = workspaceConfig?.findProjectContaining(resource.getURI)?.findSourceFolderContaining(resource.getURI)
+			new URIBasedFileSystemAccess() => [
+				val outputConfigProvider = serviceProvider.get(IContextualOutputConfigurationProvider)
+				outputConfigurations = outputConfigProvider.getOutputConfigurations(resource).toMap[name]
+				
+				traceFileNameProvider = serviceProvider.get(TraceFileNameProvider)
+				traceRegionSerializer = serviceProvider.get(TraceRegionSerializer)
+				generateTraces = true
+				
+				baseDir = request.baseDir
+				currentSource = sourceFolder?.name
+				converter = resource.resourceSet.getURIConverter
 			]
 		}
 	

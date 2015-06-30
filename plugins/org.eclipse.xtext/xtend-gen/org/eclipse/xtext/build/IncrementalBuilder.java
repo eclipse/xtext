@@ -35,6 +35,8 @@ import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
 import org.eclipse.xtext.generator.IShouldGenerate;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.URIBasedFileSystemAccess;
+import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
+import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -274,49 +276,11 @@ public class IncrementalBuilder {
       }
       URI _uRI_1 = resource.getURI();
       final Set<URI> previous = newMappings.deleteSource(_uRI_1);
-      final IWorkspaceConfigProvider workspaceConfigProvider = serviceProvider.<IWorkspaceConfigProvider>get(IWorkspaceConfigProvider.class);
-      IWorkspaceConfig _workspaceConfig = null;
-      if (workspaceConfigProvider!=null) {
-        ResourceSet _resourceSet = resource.getResourceSet();
-        _workspaceConfig=workspaceConfigProvider.getWorkspaceConfig(_resourceSet);
-      }
-      final IWorkspaceConfig workspaceConfig = _workspaceConfig;
-      IProjectConfig _findProjectContaining = null;
-      if (workspaceConfig!=null) {
-        URI _uRI_2 = resource.getURI();
-        _findProjectContaining=workspaceConfig.findProjectContaining(_uRI_2);
-      }
-      ISourceFolder _findSourceFolderContaining = null;
-      if (_findProjectContaining!=null) {
-        URI _uRI_3 = resource.getURI();
-        _findSourceFolderContaining=_findProjectContaining.findSourceFolderContaining(_uRI_3);
-      }
-      final ISourceFolder sourceFolder = _findSourceFolderContaining;
-      URIBasedFileSystemAccess _uRIBasedFileSystemAccess = new URIBasedFileSystemAccess();
+      URIBasedFileSystemAccess _createFileSystemAccess = this.createFileSystemAccess(serviceProvider, resource);
       final Procedure1<URIBasedFileSystemAccess> _function = new Procedure1<URIBasedFileSystemAccess>() {
         @Override
         public void apply(final URIBasedFileSystemAccess it) {
-          final IContextualOutputConfigurationProvider outputConfigProvider = serviceProvider.<IContextualOutputConfigurationProvider>get(IContextualOutputConfigurationProvider.class);
-          Set<OutputConfiguration> _outputConfigurations = outputConfigProvider.getOutputConfigurations(resource);
-          final Function1<OutputConfiguration, String> _function = new Function1<OutputConfiguration, String>() {
-            @Override
-            public String apply(final OutputConfiguration it) {
-              return it.getName();
-            }
-          };
-          Map<String, OutputConfiguration> _map = IterableExtensions.<String, OutputConfiguration>toMap(_outputConfigurations, _function);
-          it.setOutputConfigurations(_map);
-          URI _baseDir = request.getBaseDir();
-          it.setBaseDir(_baseDir);
-          String _name = null;
-          if (sourceFolder!=null) {
-            _name=sourceFolder.getName();
-          }
-          it.setCurrentSource(_name);
-          ResourceSet _resourceSet = resource.getResourceSet();
-          URIConverter _uRIConverter = _resourceSet.getURIConverter();
-          it.setConverter(_uRIConverter);
-          final URIBasedFileSystemAccess.BeforeWrite _function_1 = new URIBasedFileSystemAccess.BeforeWrite() {
+          final URIBasedFileSystemAccess.BeforeWrite _function = new URIBasedFileSystemAccess.BeforeWrite() {
             @Override
             public InputStream beforeWrite(final URI uri, final InputStream contents) {
               URI _uRI = resource.getURI();
@@ -328,8 +292,8 @@ public class IncrementalBuilder {
               return contents;
             }
           };
-          it.setBeforeWrite(_function_1);
-          final URIBasedFileSystemAccess.BeforeDelete _function_2 = new URIBasedFileSystemAccess.BeforeDelete() {
+          it.setBeforeWrite(_function);
+          final URIBasedFileSystemAccess.BeforeDelete _function_1 = new URIBasedFileSystemAccess.BeforeDelete() {
             @Override
             public boolean beforeDelete(final URI uri) {
               newMappings.deleteGenerated(uri);
@@ -338,10 +302,10 @@ public class IncrementalBuilder {
               return true;
             }
           };
-          it.setBeforeDelete(_function_2);
+          it.setBeforeDelete(_function_1);
         }
       };
-      final URIBasedFileSystemAccess fileSystemAccess = ObjectExtensions.<URIBasedFileSystemAccess>operator_doubleArrow(_uRIBasedFileSystemAccess, _function);
+      final URIBasedFileSystemAccess fileSystemAccess = ObjectExtensions.<URIBasedFileSystemAccess>operator_doubleArrow(_createFileSystemAccess, _function);
       fileSystemAccess.setContext(resource);
       boolean _isWriteStorageResources = request.isWriteStorageResources();
       if (_isWriteStorageResources) {
@@ -378,6 +342,63 @@ public class IncrementalBuilder {
         }
       };
       IterableExtensions.<URI>forEach(previous, _function_1);
+    }
+    
+    protected URIBasedFileSystemAccess createFileSystemAccess(final IResourceServiceProvider serviceProvider, final Resource resource) {
+      URIBasedFileSystemAccess _xblockexpression = null;
+      {
+        final IWorkspaceConfigProvider workspaceConfigProvider = serviceProvider.<IWorkspaceConfigProvider>get(IWorkspaceConfigProvider.class);
+        IWorkspaceConfig _workspaceConfig = null;
+        if (workspaceConfigProvider!=null) {
+          ResourceSet _resourceSet = resource.getResourceSet();
+          _workspaceConfig=workspaceConfigProvider.getWorkspaceConfig(_resourceSet);
+        }
+        final IWorkspaceConfig workspaceConfig = _workspaceConfig;
+        IProjectConfig _findProjectContaining = null;
+        if (workspaceConfig!=null) {
+          URI _uRI = resource.getURI();
+          _findProjectContaining=workspaceConfig.findProjectContaining(_uRI);
+        }
+        ISourceFolder _findSourceFolderContaining = null;
+        if (_findProjectContaining!=null) {
+          URI _uRI_1 = resource.getURI();
+          _findSourceFolderContaining=_findProjectContaining.findSourceFolderContaining(_uRI_1);
+        }
+        final ISourceFolder sourceFolder = _findSourceFolderContaining;
+        URIBasedFileSystemAccess _uRIBasedFileSystemAccess = new URIBasedFileSystemAccess();
+        final Procedure1<URIBasedFileSystemAccess> _function = new Procedure1<URIBasedFileSystemAccess>() {
+          @Override
+          public void apply(final URIBasedFileSystemAccess it) {
+            final IContextualOutputConfigurationProvider outputConfigProvider = serviceProvider.<IContextualOutputConfigurationProvider>get(IContextualOutputConfigurationProvider.class);
+            Set<OutputConfiguration> _outputConfigurations = outputConfigProvider.getOutputConfigurations(resource);
+            final Function1<OutputConfiguration, String> _function = new Function1<OutputConfiguration, String>() {
+              @Override
+              public String apply(final OutputConfiguration it) {
+                return it.getName();
+              }
+            };
+            Map<String, OutputConfiguration> _map = IterableExtensions.<String, OutputConfiguration>toMap(_outputConfigurations, _function);
+            it.setOutputConfigurations(_map);
+            TraceFileNameProvider _get = serviceProvider.<TraceFileNameProvider>get(TraceFileNameProvider.class);
+            it.setTraceFileNameProvider(_get);
+            TraceRegionSerializer _get_1 = serviceProvider.<TraceRegionSerializer>get(TraceRegionSerializer.class);
+            it.setTraceRegionSerializer(_get_1);
+            it.setGenerateTraces(true);
+            URI _baseDir = InternalStatefulIncrementalBuilder.this.request.getBaseDir();
+            it.setBaseDir(_baseDir);
+            String _name = null;
+            if (sourceFolder!=null) {
+              _name=sourceFolder.getName();
+            }
+            it.setCurrentSource(_name);
+            ResourceSet _resourceSet = resource.getResourceSet();
+            URIConverter _uRIConverter = _resourceSet.getURIConverter();
+            it.setConverter(_uRIConverter);
+          }
+        };
+        _xblockexpression = ObjectExtensions.<URIBasedFileSystemAccess>operator_doubleArrow(_uRIBasedFileSystemAccess, _function);
+      }
+      return _xblockexpression;
     }
     
     private final static Logger LOG = Logger.getLogger(InternalStatefulIncrementalBuilder.class);

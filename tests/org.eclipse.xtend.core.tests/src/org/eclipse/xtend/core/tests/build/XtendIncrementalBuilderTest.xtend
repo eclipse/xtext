@@ -55,7 +55,7 @@ class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest {
 		]
 		build(buildRequest)
 		assertTrue(issues.toString, issues.isEmpty)
-		assertEquals(1, generated.size)
+		assertEquals(2, generated.size)
 		assertTrue(generated.values.containsSuffix('xtend-gen/A.java'))
 	}
 	
@@ -80,7 +80,7 @@ class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest {
 		]
 		build(buildRequest)
 		assertTrue(issues.toString, issues.isEmpty)
-		assertEquals(1, generated.size)
+		assertEquals(2, generated.size)
 		assertTrue(generated.values.containsSuffix('xtend-gen/A.java'))
 	}
 	
@@ -112,9 +112,11 @@ class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest {
 		]
 		build(buildRequest)
 		assertTrue(issues.toString, issues.isEmpty)
-		assertEquals(2, generated.size)
+		assertEquals(4, generated.size)
 		assertTrue(generated.values.containsSuffix('xtend-gen/A.java'))
+		assertTrue(generated.values.containsSuffix('xtend-gen/.A.java._trace'))
 		assertTrue(generated.values.containsSuffix('xtend-gen/mypack/Third.java'))
+		assertTrue(generated.values.containsSuffix('xtend-gen/mypack/.Third.java._trace'))
 	}
 
 	@Test def void testSimpleFullBuild() {
@@ -132,9 +134,11 @@ class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest {
 		]
 		build(buildRequest)
 		assertTrue(issues.toString, issues.isEmpty)
-		assertEquals(2, generated.size)
+		assertEquals(4, generated.size)
 		assertTrue(generated.values.containsSuffix('xtend-gen/B.java'))
 		assertTrue(generated.values.containsSuffix('xtend-gen/A.java'))
+		assertTrue(generated.values.containsSuffix('xtend-gen/.B.java._trace'))
+		assertTrue(generated.values.containsSuffix('xtend-gen/.A.java._trace'))
 	}
 
 	@Test def void testDelete_01() {
@@ -182,9 +186,11 @@ class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest {
 			]
 		])
 		assertTrue(issues.toString, issues.isEmpty)
-		assertEquals(2, generated.size)
+		assertEquals(4, generated.size)
 		assertTrue(generated.values.containsSuffix('xtend-gen/B.java'))
 		assertTrue(generated.values.containsSuffix('xtend-gen/A.java'))
+		assertTrue(generated.values.containsSuffix('xtend-gen/.B.java._trace'))
+		assertTrue(generated.values.containsSuffix('xtend-gen/.A.java._trace'))
 
 		// non semantic change
 		build(newBuildRequest [
@@ -196,7 +202,7 @@ class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest {
 			]
 		])
 		assertTrue(issues.toString, issues.isEmpty)
-		assertEquals(2, generated.size)
+		assertEquals(4, generated.size)
 		assertTrue(generated.values.containsSuffix('xtend-gen/B.java'))
 		assertTrue(generated.values.containsSuffix('xtend-gen/A.java'))
 
@@ -209,12 +215,13 @@ class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest {
 			]
 		])
 		assertEquals(issues.toString, 1, issues.size)
-		assertEquals(1, generated.size)
+		assertEquals(2, generated.size)
 		assertFalse(generated.values.containsSuffix('xtend-gen/B.java'))
 		assertTrue(generated.values.containsSuffix('xtend-gen/X.java'))
 		assertEquals(uri("xtend-gen/X.java"), indexState.fileMappings.getGenerated(uri('src/A.xtend')).head)
-		assertEquals(1, deleted.size)
+		assertEquals(2, deleted.size)
 		assertTrue(deleted.containsSuffix('xtend-gen/A.java'))
+		assertTrue(deleted.containsSuffix('xtend-gen/.A.java._trace'))
 
 		// fix foreign reference
 		build(newBuildRequest [
@@ -225,7 +232,7 @@ class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest {
 			]
 		])
 		assertTrue(issues.toString, issues.isEmpty)
-		assertEquals(2, generated.size)
+		assertEquals(4, generated.size)
 		assertTrue(generated.values.containsSuffix('xtend-gen/B.java'))
 		assertTrue(generated.values.containsSuffix('xtend-gen/A.java'))
 		assertTrue(deleted.containsSuffix('xtend-gen/X.java'))
@@ -238,7 +245,7 @@ class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest {
 		])
 		assertEquals(issues.toString, 1, issues.size)
 		assertEquals(0, generated.size)
-		assertEquals(1, deleted.size)
+		assertEquals(2, deleted.size)
 		assertTrue(deleted.containsSuffix('xtend-gen/A.java'))
 	}
 }

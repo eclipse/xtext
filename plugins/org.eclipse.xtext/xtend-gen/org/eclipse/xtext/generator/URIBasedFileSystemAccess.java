@@ -11,6 +11,7 @@ import com.google.common.base.Objects;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.CharStreams;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -19,6 +20,10 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
+import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
+import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
+import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
+import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.util.RuntimeIOException;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -52,7 +57,16 @@ public class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
   private URI baseDir;
   
   @Accessors
+  private boolean generateTraces = false;
+  
+  @Accessors
   private IEncodingProvider encodingProvider = new IEncodingProvider.Runtime();
+  
+  @Accessors
+  private TraceRegionSerializer traceRegionSerializer;
+  
+  @Accessors
+  private TraceFileNameProvider traceFileNameProvider;
   
   @Accessors
   private URIBasedFileSystemAccess.BeforeDelete beforeDelete = new URIBasedFileSystemAccess.BeforeDelete() {
@@ -104,11 +118,35 @@ public class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
   public void generateFile(final String fileName, final String outputCfgName, final CharSequence contents) {
     try {
       final URI uri = this.getURI(fileName, outputCfgName);
+      this.generateTrace(fileName, outputCfgName, contents);
       final String encoding = this.getEncoding(uri);
       String _string = contents.toString();
       byte[] _bytes = _string.getBytes(encoding);
       final ByteArrayInputStream inStream = new ByteArrayInputStream(_bytes);
       this.generateFile(fileName, outputCfgName, inStream);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected void generateTrace(final String generatedFile, final String outputConfigName, final CharSequence contents) {
+    try {
+      boolean _and = false;
+      boolean _isGenerateTraces = this.isGenerateTraces();
+      if (!_isGenerateTraces) {
+        _and = false;
+      } else {
+        _and = (contents instanceof ITraceRegionProvider);
+      }
+      if (_and) {
+        String traceFileName = this.traceFileNameProvider.getTraceFromJava(generatedFile);
+        final ByteArrayOutputStream out = new ByteArrayOutputStream();
+        AbstractTraceRegion traceRegion = ((ITraceRegionProvider) contents).getTraceRegion();
+        this.traceRegionSerializer.writeTraceRegionTo(traceRegion, out);
+        byte[] _byteArray = out.toByteArray();
+        ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_byteArray);
+        this.generateFile(traceFileName, outputConfigName, _byteArrayInputStream);
+      }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -173,12 +211,39 @@ public class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
   }
   
   @Pure
+  public boolean isGenerateTraces() {
+    return this.generateTraces;
+  }
+  
+  public void setGenerateTraces(final boolean generateTraces) {
+    this.generateTraces = generateTraces;
+  }
+  
+  @Pure
   public IEncodingProvider getEncodingProvider() {
     return this.encodingProvider;
   }
   
   public void setEncodingProvider(final IEncodingProvider encodingProvider) {
     this.encodingProvider = encodingProvider;
+  }
+  
+  @Pure
+  public TraceRegionSerializer getTraceRegionSerializer() {
+    return this.traceRegionSerializer;
+  }
+  
+  public void setTraceRegionSerializer(final TraceRegionSerializer traceRegionSerializer) {
+    this.traceRegionSerializer = traceRegionSerializer;
+  }
+  
+  @Pure
+  public TraceFileNameProvider getTraceFileNameProvider() {
+    return this.traceFileNameProvider;
+  }
+  
+  public void setTraceFileNameProvider(final TraceFileNameProvider traceFileNameProvider) {
+    this.traceFileNameProvider = traceFileNameProvider;
   }
   
   @Pure
