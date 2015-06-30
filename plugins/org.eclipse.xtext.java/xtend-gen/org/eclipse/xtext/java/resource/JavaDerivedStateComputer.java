@@ -74,7 +74,7 @@ public class JavaDerivedStateComputer {
     _contents.clear();
   }
   
-  public Object installStubs(final Resource resource) {
+  public void installStubs(final Resource resource) {
     final CompilationUnit compilationUnit = this.getCompilationUnit(resource);
     IErrorHandlingPolicy _proceedWithAllProblems = DefaultErrorHandlingPolicies.proceedWithAllProblems();
     CompilerOptions _compilerOptions = this.getCompilerOptions();
@@ -110,7 +110,6 @@ public class JavaDerivedStateComputer {
         _contents.add(jvmType);
       }
     }
-    return null;
   }
   
   public JvmDeclaredType createType(final TypeDeclaration type, final String packageName) {
@@ -136,6 +135,10 @@ public class JavaDerivedStateComputer {
       case TypeDeclaration.ANNOTATION_TYPE_DECL:
         _switchResult = TypesFactory.eINSTANCE.createJvmAnnotationType();
         break;
+      default:
+        String _string = type.toString();
+        String _plus = ("Cannot handle type " + _string);
+        throw new IllegalArgumentException(_plus);
     }
     final JvmDeclaredType jvmType = _switchResult;
     jvmType.setPackageName(packageName);
