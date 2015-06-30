@@ -31,10 +31,11 @@ Import-Package: org.apache.log4j,
  org.junit.runners.model;version="4.5.0",
  org.hamcrest.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.eclipse.xtext.xbase.testlanguages.ui.quickfix,
+Export-Package: org.eclipse.xtext.xbase.testlanguages,
+ org.eclipse.xtext.xbase.testlanguages.ui,
  org.eclipse.xtext.xbase.testlanguages.ui.contentassist,
  org.eclipse.xtext.xbase.testlanguages.ui.contentassist.antlr,
+ org.eclipse.xtext.xbase.testlanguages.ui.contentassist.antlr.internal,
  org.eclipse.xtext.xbase.testlanguages.ui.internal,
- org.eclipse.xtext.xbase.testlanguages,
- org.eclipse.xtext.xbase.testlanguages.ui.contentassist.antlr.internal
+ org.eclipse.xtext.xbase.testlanguages.ui.quickfix
 Bundle-Activator: org.eclipse.xtext.xbase.testlanguages.ui.internal.XImportSectionTestLangActivator
