@@ -101,6 +101,29 @@
 		<run_buckminster commandsfile="${commands.file}" propertiesfile="${build.properties}" />
 	</target>
 
+	<target name="run-buckminster-all-tests" depends="common.cleanup">
+		<fail unless="buckminster.home" message="buckminster.home must be specified." />
+		<echo message="IMPORTANT: Populating an empty target platform may took over 10 minutes." />
+		<echo message="eclipse.download: ${eclipse.download}" />
+		<property name="commands.file" location="${temp.commands.location}/xtext-tests-cmd.txt" />
+		<echo file="${commands.file}" append="false">
+			importtargetdefinition -A "${releng.project}/releng/tests/tests-eclipseserver.target
+			resolve "${releng.project}/releng/tests/xtext-test.mspec"
+			resolve "${releng.project}/releng/tests-xtend/xtend-test.mspec"
+			build
+			junit --launch "org.eclipse.xtend.core.tests/xtend.core.tests.fast.launch" --flatXML --output "${WORKSPACE}/build-result/test-results/xtend.core.tests.fast.xml"
+			junit --launch "org.eclipse.xtend.core.tests/xtend.core.tests.fast (xtend).launch" --flatXML --output "${WORKSPACE}/build-result/test-results/xtend.core.tests.fast.xtend.xml"
+			junit --launch "org.eclipse.xtext.xbase.tests/xtext.xbase.tests.fast.launch" --flatXML --output "${WORKSPACE}/build-result/test-results/xtext.xbase.tests.fast.xml"
+			junit --launch "org.eclipse.xtext.xbase.tests/xtext.xbase.tests.fast (xtend).launch" --flatXML --output "${WORKSPACE}/build-result/test-results/xtext.xbase.tests.fast.xtend.xml"
+			junit --launch "org.eclipse.xtend.ide.tests/xtend.ide.tests.fast.launch" --flatXML --output "${WORKSPACE}/build-result/test-results/xtend.ide.tests.fast.xml"
+			junit --launch "org.eclipse.xtend.ide.tests/xtend.ide.tests.fast (xtend).launch" --flatXML --output "${WORKSPACE}/build-result/test-results/xtend.ide.tests.fast.xtend.xml"
+			junit --launch "org.eclipse.xtext.xtext.ui.graph.tests/xtext.xtext.ui.graph.tests.launch"  --flatXML --output "${WORKSPACE}/build-result/test-results/tests.fast.launch.xml"
+
+		</echo>
+		<echo message="build.properties: ${build.properties}" />
+		<run_buckminster commandsfile="${commands.file}" propertiesfile="${build.properties}" />
+	</target>
+
 	<target name="run-buckminster-swtbot" depends="common.cleanup">
 		<fail unless="buckminster.home" message="buckminster.home must be specified." />
 		<ant antfile="${checkout.location}/features/org.eclipse.xtext.build.feature/packaging.ant" target="resolve.variables">
