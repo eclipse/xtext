@@ -52,6 +52,10 @@ public class MergingHighlightedPositionAcceptor extends org.eclipse.xtext.ide.ed
 		super(delegate);
 	}
 	
+	/**
+	 * @deprecated use MergingHighlightedPositionAcceptor(org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator) instead
+	 */
+	@Deprecated
 	public MergingHighlightedPositionAcceptor(ISemanticHighlightingCalculator delegate) {
 		super(new Adapter(delegate));
 	}
@@ -69,11 +73,11 @@ public class MergingHighlightedPositionAcceptor extends org.eclipse.xtext.ide.ed
 	 */
 	@Override
 	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		super.provideHighlightingFor(resource, acceptor);
+		super.provideHighlightingFor(resource, IHighlightedPositionAcceptor.DeprecationHelper.upcast(acceptor));
 	}
 	
 	private IHighlightedPositionAcceptor cast(org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor) {
-		return (IHighlightedPositionAcceptor) acceptor;
+		return IHighlightedPositionAcceptor.DeprecationHelper.cast(acceptor);
 	}
 	
 	/*

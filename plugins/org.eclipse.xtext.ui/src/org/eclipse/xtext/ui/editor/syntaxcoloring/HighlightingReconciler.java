@@ -139,11 +139,8 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 	 *            XtextResource
 	 */
 	private void reconcilePositions(XtextResource resource) {
-		//		for (int i= 0, n= subtrees.length; i < n; i++)
-		//			subtrees[i].accept(fCollector);
 		MergingHighlightedPositionAcceptor acceptor = new MergingHighlightedPositionAcceptor(getEffectiveCalculator());
 		acceptor.provideHighlightingFor(resource, this);
-//		calculator.provideHighlightingFor(resource, this);
 		List<AttributedPosition> oldPositions = removedPositions;
 		List<AttributedPosition> newPositions = new ArrayList<AttributedPosition>(removedPositionCount);
 		for (int i = 0, n = oldPositions.size(); i < n; i++) {

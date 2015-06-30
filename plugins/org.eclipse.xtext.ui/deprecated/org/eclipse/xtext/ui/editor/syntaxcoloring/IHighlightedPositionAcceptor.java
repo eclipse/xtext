@@ -27,4 +27,41 @@ public interface IHighlightedPositionAcceptor extends org.eclipse.xtext.ide.edit
 	@Override
 	void addPosition(int offset, int length, String... id);
 	
+	/**
+	 * Small helper to convert a new IHighlightedPositionAcceptor to an instance that fulfils the deprecated old API. 
+	 * 
+	 * @since 2.9
+	 * @deprecated
+	 */
+	@Deprecated
+	class DeprecationHelper implements IHighlightedPositionAcceptor {
+		private org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor newAPI;
+
+		private DeprecationHelper(org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor newAPI) {
+			this.newAPI = newAPI;
+		}
+		
+		public static IHighlightedPositionAcceptor cast(final org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor newAPI) {
+			if (newAPI instanceof IHighlightedPositionAcceptor) {
+				return (IHighlightedPositionAcceptor) newAPI;
+			}
+			return new DeprecationHelper(newAPI);
+		}
+		
+		public static org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor upcast(final IHighlightedPositionAcceptor newAPI) {
+			if (newAPI instanceof DeprecationHelper) {
+				return ((DeprecationHelper) newAPI).newAPI;
+			}
+			return newAPI;
+		}
+		
+		@Override
+		public void addPosition(int offset, int length, String... id) {
+			newAPI.addPosition(offset, length, id);
+		}
+		
+	}
+
+	
+	
 }

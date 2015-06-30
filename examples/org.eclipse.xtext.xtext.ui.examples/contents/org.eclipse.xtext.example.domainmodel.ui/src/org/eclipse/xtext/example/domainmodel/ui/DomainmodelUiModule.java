@@ -48,4 +48,5 @@ public class DomainmodelUiModule extends AbstractDomainmodelUiModule {
 	public Class<? extends IContextualOutputConfigurationProvider> bindIContextualOutputConfigurationProvider() {
 		return EclipseOutputConfigurationProvider.class;
 	}
+	
 }
