@@ -3,13 +3,13 @@
     <resource path="META-INF/MANIFEST.MF">
         <filter id="923795461">
             <message_arguments>
-                <message_argument value="2.8.3"/>
+                <message_argument value="2.8.4"/>
                 <message_argument value="2.7.0"/>
             </message_arguments>
         </filter>
         <filter comment="version will be generated during buckminster build" id="927989779">
             <message_arguments>
-                <message_argument value="2.8.3"/>
+                <message_argument value="2.8.4"/>
                 <message_argument value="org.eclipse.xtext.util"/>
             </message_arguments>
         </filter>
