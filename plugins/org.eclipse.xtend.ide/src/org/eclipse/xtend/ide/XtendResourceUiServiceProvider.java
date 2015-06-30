@@ -19,7 +19,6 @@ import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.core.ClasspathEntry;
 import org.eclipse.jdt.internal.core.util.Util;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
 import org.eclipse.xtext.ui.resource.DefaultResourceUIServiceProvider;
 
 import com.google.inject.Inject;
@@ -30,9 +29,6 @@ import com.google.inject.Inject;
 @SuppressWarnings("restriction")
 public class XtendResourceUiServiceProvider extends DefaultResourceUIServiceProvider {
 	
-	@Inject(optional=true) 
-	private IResourceStorageFacade resourceStorageFacade;
-
 	@Inject
 	public XtendResourceUiServiceProvider(IResourceServiceProvider delegate) {
 		super(delegate);
