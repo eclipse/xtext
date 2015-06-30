@@ -2,11 +2,18 @@ package org.eclipse.xtext.xbase.testlanguages.jvmmodel;
 
 import com.google.inject.Inject;
 import java.util.Arrays;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.testlanguages.contentAssistFragmentTestLang.ContentAssistFragmentTestLanguageRoot;
 
 /**
@@ -50,6 +57,24 @@ public class ContentAssistFragmentTestLangJvmModelInferrer extends AbstractModel
    *            <code>true</code>.
    */
   protected void _infer(final ContentAssistFragmentTestLanguageRoot element, final IJvmDeclaredTypeAcceptor acceptor, final boolean isPreIndexingPhase) {
+    JvmGenericType _class = this._jvmTypesBuilder.toClass(element, "my.test.MyClass");
+    final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+      @Override
+      public void apply(final JvmGenericType it) {
+        EList<JvmMember> _members = it.getMembers();
+        JvmTypeReference _typeRef = ContentAssistFragmentTestLangJvmModelInferrer.this._typeReferenceBuilder.typeRef(Void.class);
+        final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+          @Override
+          public void apply(final JvmOperation it) {
+            XExpression _expression = element.getExpression();
+            ContentAssistFragmentTestLangJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _expression);
+          }
+        };
+        JvmOperation _method = ContentAssistFragmentTestLangJvmModelInferrer.this._jvmTypesBuilder.toMethod(element, "hello", _typeRef, _function);
+        ContentAssistFragmentTestLangJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _method);
+      }
+    };
+    acceptor.<JvmGenericType>accept(_class, _function);
   }
   
   public void infer(final EObject element, final IJvmDeclaredTypeAcceptor acceptor, final boolean isPreIndexingPhase) {
