@@ -15,20 +15,26 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.util.RuntimeIOException;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class FileSystemAccess implements IFileSystemAccess2 {
+  @Accessors
+  private final String path;
+  
   private final URI baseUri;
   
   private final IEncodingProvider encodingProvider;
   
-  public FileSystemAccess(final String basePath, final IEncodingProvider encodingProvider) {
-    URI _createPlatformResourceURI = URI.createPlatformResourceURI(basePath, true);
+  public FileSystemAccess(final String path, final IEncodingProvider encodingProvider) {
+    this.path = path;
+    URI _createPlatformResourceURI = URI.createPlatformResourceURI(path, true);
     this.baseUri = _createPlatformResourceURI;
     this.encodingProvider = encodingProvider;
   }
@@ -199,5 +205,10 @@ public class FileSystemAccess implements IFileSystemAccess2 {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  @Pure
+  public String getPath() {
+    return this.path;
   }
 }

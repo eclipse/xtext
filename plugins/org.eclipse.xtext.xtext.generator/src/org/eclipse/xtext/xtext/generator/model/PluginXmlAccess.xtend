@@ -7,9 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.model
 
+import org.eclipse.xtend.lib.annotations.Accessors
+
 class PluginXmlAccess {
 	
-	new(String path) {
+	@Accessors
+	String path
+	
+	def void generate() {
 		
 	}
 	

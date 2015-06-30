@@ -7,8 +7,23 @@
  */
 package org.eclipse.xtext.xtext.generator.model;
 
+import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.xbase.lib.Pure;
+
 @SuppressWarnings("all")
 public class PluginXmlAccess {
-  public PluginXmlAccess(final String path) {
+  @Accessors
+  private String path;
+  
+  public void generate() {
+  }
+  
+  @Pure
+  public String getPath() {
+    return this.path;
+  }
+  
+  public void setPath(final String path) {
+    this.path = path;
   }
 }

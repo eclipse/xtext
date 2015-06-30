@@ -15,80 +15,93 @@ import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.ModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 
+/**
+ * Use this class to configure output paths in the XtextGenerator.
+ *
+ * <p>This file has been generated with {@link org.eclipse.xtext.xtext.generator.internal.ProjectConfigGenerator}.</p>
+ */
 public class XtextProjectConfig implements IXtextProjectConfig {
 	
 	@Inject private IEncodingProvider encodingProvider;
 	
-	private FileSystemAccess runtimeSrcAccess;
-	private FileSystemAccess runtimeSrcGenAccess;
+	private String runtimeSrcPath;
+	private String runtimeSrcGenPath;
 	private ManifestAccess runtimeManifestAccess;
 	private PluginXmlAccess runtimePluginXmlAccess;
 	private ModuleAccess runtimeModuleAccess;
-	private FileSystemAccess runtimeTestSrcAccess;
-	private FileSystemAccess runtimeTestSrcGenAccess;
+	private String runtimeTestSrcPath;
+	private String runtimeTestSrcGenPath;
 	private ManifestAccess runtimeTestManifestAccess;
 	private PluginXmlAccess runtimeTestPluginXmlAccess;
 	private ModuleAccess runtimeTestModuleAccess;
-	private FileSystemAccess genericIdeSrcAccess;
-	private FileSystemAccess genericIdeSrcGenAccess;
+	private String genericIdeSrcPath;
+	private String genericIdeSrcGenPath;
 	private ManifestAccess genericIdeManifestAccess;
 	private PluginXmlAccess genericIdePluginXmlAccess;
 	private ModuleAccess genericIdeModuleAccess;
-	private FileSystemAccess genericIdeTestSrcAccess;
-	private FileSystemAccess genericIdeTestSrcGenAccess;
+	private String genericIdeTestSrcPath;
+	private String genericIdeTestSrcGenPath;
 	private ManifestAccess genericIdeTestManifestAccess;
 	private PluginXmlAccess genericIdeTestPluginXmlAccess;
 	private ModuleAccess genericIdeTestModuleAccess;
-	private FileSystemAccess eclipsePluginSrcAccess;
-	private FileSystemAccess eclipsePluginSrcGenAccess;
+	private String eclipsePluginSrcPath;
+	private String eclipsePluginSrcGenPath;
 	private ManifestAccess eclipsePluginManifestAccess;
 	private PluginXmlAccess eclipsePluginPluginXmlAccess;
 	private ModuleAccess eclipsePluginModuleAccess;
-	private FileSystemAccess eclipsePluginTestSrcAccess;
-	private FileSystemAccess eclipsePluginTestSrcGenAccess;
+	private String eclipsePluginTestSrcPath;
+	private String eclipsePluginTestSrcGenPath;
 	private ManifestAccess eclipsePluginTestManifestAccess;
 	private PluginXmlAccess eclipsePluginTestPluginXmlAccess;
 	private ModuleAccess eclipsePluginTestModuleAccess;
-	private FileSystemAccess ideaPluginSrcAccess;
-	private FileSystemAccess ideaPluginSrcGenAccess;
+	private String ideaPluginSrcPath;
+	private String ideaPluginSrcGenPath;
 	private ManifestAccess ideaPluginManifestAccess;
 	private PluginXmlAccess ideaPluginPluginXmlAccess;
 	private ModuleAccess ideaPluginModuleAccess;
-	private FileSystemAccess ideaPluginTestSrcAccess;
-	private FileSystemAccess ideaPluginTestSrcGenAccess;
+	private String ideaPluginTestSrcPath;
+	private String ideaPluginTestSrcGenPath;
 	private ManifestAccess ideaPluginTestManifestAccess;
 	private PluginXmlAccess ideaPluginTestPluginXmlAccess;
 	private ModuleAccess ideaPluginTestModuleAccess;
-	private FileSystemAccess webSrcAccess;
-	private FileSystemAccess webSrcGenAccess;
+	private String webSrcPath;
+	private String webSrcGenPath;
 	private ManifestAccess webManifestAccess;
 	private PluginXmlAccess webPluginXmlAccess;
 	private ModuleAccess webModuleAccess;
-	private FileSystemAccess webTestSrcAccess;
-	private FileSystemAccess webTestSrcGenAccess;
+	private String webTestSrcPath;
+	private String webTestSrcGenPath;
 	private ManifestAccess webTestManifestAccess;
 	private PluginXmlAccess webTestPluginXmlAccess;
 	private ModuleAccess webTestModuleAccess;
-	private FileSystemAccess orionJsGenAccess;
-	private FileSystemAccess aceJsGenAccess;
+	private String orionJsGenPath;
+	private String aceJsGenPath;
+	
+	public void initialize() {
+	}
 	
 	@Override
 	public IFileSystemAccess2 getRuntimeSrc() {
-		return runtimeSrcAccess;
+		if (runtimeSrcPath != null)
+			return new FileSystemAccess(runtimeSrcPath, encodingProvider);
+		else
+			return null;
 	}
 	
 	public void setRuntimeSrc(String path) {
-		runtimeSrcAccess = new FileSystemAccess(path, encodingProvider);
+		this.runtimeSrcPath = path;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getRuntimeSrcGen() {
-		return runtimeSrcGenAccess;
+		if (runtimeSrcGenPath != null)
+			return new FileSystemAccess(runtimeSrcGenPath, encodingProvider);
+		else
+			return null;
 	}
 	
 	public void setRuntimeSrcGen(String path) {
-		runtimeSrcGenAccess = new FileSystemAccess(path, encodingProvider);
-		runtimeModuleAccess = new ModuleAccess(runtimeSrcGenAccess);
+		this.runtimeSrcGenPath = path;
 	}
 	
 	@Override
@@ -96,8 +109,8 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		return runtimeManifestAccess;
 	}
 	
-	public void setRuntimeManifest(String path) {
-		runtimeManifestAccess = new ManifestAccess(path);
+	public void setRuntimeManifest(ManifestAccess manifest) {
+		this.runtimeManifestAccess = manifest;
 	}
 	
 	@Override
@@ -105,32 +118,40 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		return runtimePluginXmlAccess;
 	}
 	
-	public void setRuntimePluginXml(String path) {
-		runtimePluginXmlAccess = new PluginXmlAccess(path);
+	public void setRuntimePluginXml(PluginXmlAccess pluginXml) {
+		this.runtimePluginXmlAccess = pluginXml;
 	}
 	
 	@Override
 	public ModuleAccess getRuntimeModule() {
+		if (runtimeModuleAccess == null) {
+			runtimeModuleAccess = new ModuleAccess(getRuntimeSrcGen());
+		}
 		return runtimeModuleAccess;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getRuntimeTestSrc() {
-		return runtimeTestSrcAccess;
+		if (runtimeTestSrcPath != null)
+			return new FileSystemAccess(runtimeTestSrcPath, encodingProvider);
+		else
+			return null;
 	}
 	
 	public void setRuntimeTestSrc(String path) {
-		runtimeTestSrcAccess = new FileSystemAccess(path, encodingProvider);
+		this.runtimeTestSrcPath = path;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getRuntimeTestSrcGen() {
-		return runtimeTestSrcGenAccess;
+		if (runtimeTestSrcGenPath != null)
+			return new FileSystemAccess(runtimeTestSrcGenPath, encodingProvider);
+		else
+			return null;
 	}
 	
 	public void setRuntimeTestSrcGen(String path) {
-		runtimeTestSrcGenAccess = new FileSystemAccess(path, encodingProvider);
-		runtimeTestModuleAccess = new ModuleAccess(runtimeTestSrcGenAccess);
+		this.runtimeTestSrcGenPath = path;
 	}
 	
 	@Override
@@ -138,8 +159,8 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		return runtimeTestManifestAccess;
 	}
 	
-	public void setRuntimeTestManifest(String path) {
-		runtimeTestManifestAccess = new ManifestAccess(path);
+	public void setRuntimeTestManifest(ManifestAccess manifest) {
+		this.runtimeTestManifestAccess = manifest;
 	}
 	
 	@Override
@@ -147,32 +168,40 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		return runtimeTestPluginXmlAccess;
 	}
 	
-	public void setRuntimeTestPluginXml(String path) {
-		runtimeTestPluginXmlAccess = new PluginXmlAccess(path);
+	public void setRuntimeTestPluginXml(PluginXmlAccess pluginXml) {
+		this.runtimeTestPluginXmlAccess = pluginXml;
 	}
 	
 	@Override
 	public ModuleAccess getRuntimeTestModule() {
+		if (runtimeTestModuleAccess == null) {
+			runtimeTestModuleAccess = new ModuleAccess(getRuntimeTestSrcGen());
+		}
 		return runtimeTestModuleAccess;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getGenericIdeSrc() {
-		return genericIdeSrcAccess;
+		if (genericIdeSrcPath != null)
+			return new FileSystemAccess(genericIdeSrcPath, encodingProvider);
+		else
+			return null;
 	}
 	
 	public void setGenericIdeSrc(String path) {
-		genericIdeSrcAccess = new FileSystemAccess(path, encodingProvider);
+		this.genericIdeSrcPath = path;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getGenericIdeSrcGen() {
-		return genericIdeSrcGenAccess;
+		if (genericIdeSrcGenPath != null)
+			return new FileSystemAccess(genericIdeSrcGenPath, encodingProvider);
+		else
+			return null;
 	}
 	
 	public void setGenericIdeSrcGen(String path) {
-		genericIdeSrcGenAccess = new FileSystemAccess(path, encodingProvider);
-		genericIdeModuleAccess = new ModuleAccess(genericIdeSrcGenAccess);
+		this.genericIdeSrcGenPath = path;
 	}
 	
 	@Override
@@ -180,8 +209,8 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		return genericIdeManifestAccess;
 	}
 	
-	public void setGenericIdeManifest(String path) {
-		genericIdeManifestAccess = new ManifestAccess(path);
+	public void setGenericIdeManifest(ManifestAccess manifest) {
+		this.genericIdeManifestAccess = manifest;
 	}
 	
 	@Override
@@ -189,32 +218,40 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		return genericIdePluginXmlAccess;
 	}
 	
-	public void setGenericIdePluginXml(String path) {
-		genericIdePluginXmlAccess = new PluginXmlAccess(path);
+	public void setGenericIdePluginXml(PluginXmlAccess pluginXml) {
+		this.genericIdePluginXmlAccess = pluginXml;
 	}
 	
 	@Override
 	public ModuleAccess getGenericIdeModule() {
+		if (genericIdeModuleAccess == null) {
+			genericIdeModuleAccess = new ModuleAccess(getGenericIdeSrcGen());
+		}
 		return genericIdeModuleAccess;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getGenericIdeTestSrc() {
-		return genericIdeTestSrcAccess;
+		if (genericIdeTestSrcPath != null)
+			return new FileSystemAccess(genericIdeTestSrcPath, encodingProvider);
+		else
+			return null;
 	}
 	
 	public void setGenericIdeTestSrc(String path) {
-		genericIdeTestSrcAccess = new FileSystemAccess(path, encodingProvider);
+		this.genericIdeTestSrcPath = path;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getGenericIdeTestSrcGen() {
-		return genericIdeTestSrcGenAccess;
+		if (genericIdeTestSrcGenPath != null)
+			return new FileSystemAccess(genericIdeTestSrcGenPath, encodingProvider);
+		else
+			return null;
 	}
 	
 	public void setGenericIdeTestSrcGen(String path) {
-		genericIdeTestSrcGenAccess = new FileSystemAccess(path, encodingProvider);
-		genericIdeTestModuleAccess = new ModuleAccess(genericIdeTestSrcGenAccess);
+		this.genericIdeTestSrcGenPath = path;
 	}
 	
 	@Override
@@ -222,8 +259,8 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		return genericIdeTestManifestAccess;
 	}
 	
-	public void setGenericIdeTestManifest(String path) {
-		genericIdeTestManifestAccess = new ManifestAccess(path);
+	public void setGenericIdeTestManifest(ManifestAccess manifest) {
+		this.genericIdeTestManifestAccess = manifest;
 	}
 	
 	@Override
@@ -231,32 +268,40 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		return genericIdeTestPluginXmlAccess;
 	}
 	
-	public void setGenericIdeTestPluginXml(String path) {
-		genericIdeTestPluginXmlAccess = new PluginXmlAccess(path);
+	public void setGenericIdeTestPluginXml(PluginXmlAccess pluginXml) {
+		this.genericIdeTestPluginXmlAccess = pluginXml;
 	}
 	
 	@Override
 	public ModuleAccess getGenericIdeTestModule() {
+		if (genericIdeTestModuleAccess == null) {
+			genericIdeTestModuleAccess = new ModuleAccess(getGenericIdeTestSrcGen());
+		}
 		return genericIdeTestModuleAccess;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getEclipsePluginSrc() {
-		return eclipsePluginSrcAccess;
+		if (eclipsePluginSrcPath != null)
+			return new FileSystemAccess(eclipsePluginSrcPath, encodingProvider);
+		else
+			return null;
 	}
 	
 	public void setEclipsePluginSrc(String path) {
-		eclipsePluginSrcAccess = new FileSystemAccess(path, encodingProvider);
+		this.eclipsePluginSrcPath = path;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getEclipsePluginSrcGen() {
-		return eclipsePluginSrcGenAccess;
+		if (eclipsePluginSrcGenPath != null)
+			return new FileSystemAccess(eclipsePluginSrcGenPath, encodingProvider);
+		else
+			return null;
 	}
 	
 	public void setEclipsePluginSrcGen(String path) {
-		eclipsePluginSrcGenAccess = new FileSystemAccess(path, encodingProvider);
-		eclipsePluginModuleAccess = new ModuleAccess(eclipsePluginSrcGenAccess);
+		this.eclipsePluginSrcGenPath = path;
 	}
 	
 	@Override
@@ -264,8 +309,8 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		return eclipsePluginManifestAccess;
 	}
 	
-	public void setEclipsePluginManifest(String path) {
-		eclipsePluginManifestAccess = new ManifestAccess(path);
+	public void setEclipsePluginManifest(ManifestAccess manifest) {
+		this.eclipsePluginManifestAccess = manifest;
 	}
 	
 	@Override
@@ -273,32 +318,40 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		return eclipsePluginPluginXmlAccess;
 	}
 	
-	public void setEclipsePluginPluginXml(String path) {
-		eclipsePluginPluginXmlAccess = new PluginXmlAccess(path);
+	public void setEclipsePluginPluginXml(PluginXmlAccess pluginXml) {
+		this.eclipsePluginPluginXmlAccess = pluginXml;
 	}
 	
 	@Override
 	public ModuleAccess getEclipsePluginModule() {
+		if (eclipsePluginModuleAccess == null) {
+			eclipsePluginModuleAccess = new ModuleAccess(getEclipsePluginSrcGen());
+		}
 		return eclipsePluginModuleAccess;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getEclipsePluginTestSrc() {
-		return eclipsePluginTestSrcAccess;
+		if (eclipsePluginTestSrcPath != null)
+			return new FileSystemAccess(eclipsePluginTestSrcPath, encodingProvider);
+		else
+			return null;
 	}
 	
 	public void setEclipsePluginTestSrc(String path) {
-		eclipsePluginTestSrcAccess = new FileSystemAccess(path, encodingProvider);
+		this.eclipsePluginTestSrcPath = path;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getEclipsePluginTestSrcGen() {
-		return eclipsePluginTestSrcGenAccess;
+		if (eclipsePluginTestSrcGenPath != null)
+			return new FileSystemAccess(eclipsePluginTestSrcGenPath, encodingProvider);
+		else
+			return null;
 	}
 	
 	public void setEclipsePluginTestSrcGen(String path) {
-		eclipsePluginTestSrcGenAccess = new FileSystemAccess(path, encodingProvider);
-		eclipsePluginTestModuleAccess = new ModuleAccess(eclipsePluginTestSrcGenAccess);
+		this.eclipsePluginTestSrcGenPath = path;
 	}
 	
 	@Override
@@ -306,8 +359,8 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		return eclipsePluginTestManifestAccess;
 	}
 	
-	public void setEclipsePluginTestManifest(String path) {
-		eclipsePluginTestManifestAccess = new ManifestAccess(path);
+	public void setEclipsePluginTestManifest(ManifestAccess manifest) {
+		this.eclipsePluginTestManifestAccess = manifest;
 	}
 	
 	@Override
@@ -315,32 +368,40 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		return eclipsePluginTestPluginXmlAccess;
 	}
 	
-	public void setEclipsePluginTestPluginXml(String path) {
-		eclipsePluginTestPluginXmlAccess = new PluginXmlAccess(path);
+	public void setEclipsePluginTestPluginXml(PluginXmlAccess pluginXml) {
+		this.eclipsePluginTestPluginXmlAccess = pluginXml;
 	}
 	
 	@Override
 	public ModuleAccess getEclipsePluginTestModule() {
+		if (eclipsePluginTestModuleAccess == null) {
+			eclipsePluginTestModuleAccess = new ModuleAccess(getEclipsePluginTestSrcGen());
+		}
 		return eclipsePluginTestModuleAccess;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getIdeaPluginSrc() {
-		return ideaPluginSrcAccess;
+		if (ideaPluginSrcPath != null)
+			return new FileSystemAccess(ideaPluginSrcPath, encodingProvider);
+		else
+			return null;
 	}
 	
 	public void setIdeaPluginSrc(String path) {
-		ideaPluginSrcAccess = new FileSystemAccess(path, encodingProvider);
+		this.ideaPluginSrcPath = path;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getIdeaPluginSrcGen() {
-		return ideaPluginSrcGenAccess;
+		if (ideaPluginSrcGenPath != null)
+			return new FileSystemAccess(ideaPluginSrcGenPath, encodingProvider);
+		else
+			return null;
 	}
 	
 	public void setIdeaPluginSrcGen(String path) {
-		ideaPluginSrcGenAccess = new FileSystemAccess(path, encodingProvider);
-		ideaPluginModuleAccess = new ModuleAccess(ideaPluginSrcGenAccess);
+		this.ideaPluginSrcGenPath = path;
 	}
 	
 	@Override
@@ -348,8 +409,8 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		return ideaPluginManifestAccess;
 	}
 	
-	public void setIdeaPluginManifest(String path) {
-		ideaPluginManifestAccess = new ManifestAccess(path);
+	public void setIdeaPluginManifest(ManifestAccess manifest) {
+		this.ideaPluginManifestAccess = manifest;
 	}
 	
 	@Override
@@ -357,32 +418,40 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		return ideaPluginPluginXmlAccess;
 	}
 	
-	public void setIdeaPluginPluginXml(String path) {
-		ideaPluginPluginXmlAccess = new PluginXmlAccess(path);
+	public void setIdeaPluginPluginXml(PluginXmlAccess pluginXml) {
+		this.ideaPluginPluginXmlAccess = pluginXml;
 	}
 	
 	@Override
 	public ModuleAccess getIdeaPluginModule() {
+		if (ideaPluginModuleAccess == null) {
+			ideaPluginModuleAccess = new ModuleAccess(getIdeaPluginSrcGen());
+		}
 		return ideaPluginModuleAccess;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getIdeaPluginTestSrc() {
-		return ideaPluginTestSrcAccess;
+		if (ideaPluginTestSrcPath != null)
+			return new FileSystemAccess(ideaPluginTestSrcPath, encodingProvider);
+		else
+			return null;
 	}
 	
 	public void setIdeaPluginTestSrc(String path) {
-		ideaPluginTestSrcAccess = new FileSystemAccess(path, encodingProvider);
+		this.ideaPluginTestSrcPath = path;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getIdeaPluginTestSrcGen() {
-		return ideaPluginTestSrcGenAccess;
+		if (ideaPluginTestSrcGenPath != null)
+			return new FileSystemAccess(ideaPluginTestSrcGenPath, encodingProvider);
+		else
+			return null;
 	}
 	
 	public void setIdeaPluginTestSrcGen(String path) {
-		ideaPluginTestSrcGenAccess = new FileSystemAccess(path, encodingProvider);
-		ideaPluginTestModuleAccess = new ModuleAccess(ideaPluginTestSrcGenAccess);
+		this.ideaPluginTestSrcGenPath = path;
 	}
 	
 	@Override
@@ -390,8 +459,8 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		return ideaPluginTestManifestAccess;
 	}
 	
-	public void setIdeaPluginTestManifest(String path) {
-		ideaPluginTestManifestAccess = new ManifestAccess(path);
+	public void setIdeaPluginTestManifest(ManifestAccess manifest) {
+		this.ideaPluginTestManifestAccess = manifest;
 	}
 	
 	@Override
@@ -399,32 +468,40 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		return ideaPluginTestPluginXmlAccess;
 	}
 	
-	public void setIdeaPluginTestPluginXml(String path) {
-		ideaPluginTestPluginXmlAccess = new PluginXmlAccess(path);
+	public void setIdeaPluginTestPluginXml(PluginXmlAccess pluginXml) {
+		this.ideaPluginTestPluginXmlAccess = pluginXml;
 	}
 	
 	@Override
 	public ModuleAccess getIdeaPluginTestModule() {
+		if (ideaPluginTestModuleAccess == null) {
+			ideaPluginTestModuleAccess = new ModuleAccess(getIdeaPluginTestSrcGen());
+		}
 		return ideaPluginTestModuleAccess;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getWebSrc() {
-		return webSrcAccess;
+		if (webSrcPath != null)
+			return new FileSystemAccess(webSrcPath, encodingProvider);
+		else
+			return null;
 	}
 	
 	public void setWebSrc(String path) {
-		webSrcAccess = new FileSystemAccess(path, encodingProvider);
+		this.webSrcPath = path;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getWebSrcGen() {
-		return webSrcGenAccess;
+		if (webSrcGenPath != null)
+			return new FileSystemAccess(webSrcGenPath, encodingProvider);
+		else
+			return null;
 	}
 	
 	public void setWebSrcGen(String path) {
-		webSrcGenAccess = new FileSystemAccess(path, encodingProvider);
-		webModuleAccess = new ModuleAccess(webSrcGenAccess);
+		this.webSrcGenPath = path;
 	}
 	
 	@Override
@@ -432,8 +509,8 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		return webManifestAccess;
 	}
 	
-	public void setWebManifest(String path) {
-		webManifestAccess = new ManifestAccess(path);
+	public void setWebManifest(ManifestAccess manifest) {
+		this.webManifestAccess = manifest;
 	}
 	
 	@Override
@@ -441,32 +518,40 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		return webPluginXmlAccess;
 	}
 	
-	public void setWebPluginXml(String path) {
-		webPluginXmlAccess = new PluginXmlAccess(path);
+	public void setWebPluginXml(PluginXmlAccess pluginXml) {
+		this.webPluginXmlAccess = pluginXml;
 	}
 	
 	@Override
 	public ModuleAccess getWebModule() {
+		if (webModuleAccess == null) {
+			webModuleAccess = new ModuleAccess(getWebSrcGen());
+		}
 		return webModuleAccess;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getWebTestSrc() {
-		return webTestSrcAccess;
+		if (webTestSrcPath != null)
+			return new FileSystemAccess(webTestSrcPath, encodingProvider);
+		else
+			return null;
 	}
 	
 	public void setWebTestSrc(String path) {
-		webTestSrcAccess = new FileSystemAccess(path, encodingProvider);
+		this.webTestSrcPath = path;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getWebTestSrcGen() {
-		return webTestSrcGenAccess;
+		if (webTestSrcGenPath != null)
+			return new FileSystemAccess(webTestSrcGenPath, encodingProvider);
+		else
+			return null;
 	}
 	
 	public void setWebTestSrcGen(String path) {
-		webTestSrcGenAccess = new FileSystemAccess(path, encodingProvider);
-		webTestModuleAccess = new ModuleAccess(webTestSrcGenAccess);
+		this.webTestSrcGenPath = path;
 	}
 	
 	@Override
@@ -474,8 +559,8 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		return webTestManifestAccess;
 	}
 	
-	public void setWebTestManifest(String path) {
-		webTestManifestAccess = new ManifestAccess(path);
+	public void setWebTestManifest(ManifestAccess manifest) {
+		this.webTestManifestAccess = manifest;
 	}
 	
 	@Override
@@ -483,31 +568,40 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		return webTestPluginXmlAccess;
 	}
 	
-	public void setWebTestPluginXml(String path) {
-		webTestPluginXmlAccess = new PluginXmlAccess(path);
+	public void setWebTestPluginXml(PluginXmlAccess pluginXml) {
+		this.webTestPluginXmlAccess = pluginXml;
 	}
 	
 	@Override
 	public ModuleAccess getWebTestModule() {
+		if (webTestModuleAccess == null) {
+			webTestModuleAccess = new ModuleAccess(getWebTestSrcGen());
+		}
 		return webTestModuleAccess;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getOrionJsGen() {
-		return orionJsGenAccess;
+		if (orionJsGenPath != null)
+			return new FileSystemAccess(orionJsGenPath, encodingProvider);
+		else
+			return null;
 	}
 	
 	public void setOrionJsGen(String path) {
-		orionJsGenAccess = new FileSystemAccess(path, encodingProvider);
+		this.orionJsGenPath = path;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getAceJsGen() {
-		return aceJsGenAccess;
+		if (aceJsGenPath != null)
+			return new FileSystemAccess(aceJsGenPath, encodingProvider);
+		else
+			return null;
 	}
 	
 	public void setAceJsGen(String path) {
-		aceJsGenAccess = new FileSystemAccess(path, encodingProvider);
+		this.aceJsGenPath = path;
 	}
 	
 }

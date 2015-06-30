@@ -7,10 +7,13 @@
  */
 package org.eclipse.xtext.xtext.generator.model;
 
-import org.eclipse.xtext.xtext.generator.model.FileSystemAccess;
+import org.eclipse.xtext.generator.IFileSystemAccess2;
 
 @SuppressWarnings("all")
 public class ModuleAccess {
-  public ModuleAccess(final FileSystemAccess outlet) {
+  public ModuleAccess(final IFileSystemAccess2 outlet) {
+  }
+  
+  public void generate() {
   }
 }

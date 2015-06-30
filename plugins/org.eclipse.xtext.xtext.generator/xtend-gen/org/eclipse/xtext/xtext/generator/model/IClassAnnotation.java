@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.xtext.generator;
+package org.eclipse.xtext.xtext.generator.model;
 
 /**
  * Class annotations can be added to the {@link XtextGenerator} workflow component in order

@@ -12,6 +12,11 @@ import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.ModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 
+/**
+ * Inject an instance of this interface in order to generate code in a generator fragment.
+ *
+ * <p>This file has been generated with {@link org.eclipse.xtext.xtext.generator.internal.ProjectConfigGenerator}.</p>
+ */
 public interface IXtextProjectConfig {
 	
 	IFileSystemAccess2 getRuntimeSrc();

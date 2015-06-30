@@ -12,4 +12,5 @@ package org.eclipse.xtext.xtext.generator;
  */
 @SuppressWarnings("all")
 public interface IGeneratorFragment2 {
+  public abstract void generate();
 }

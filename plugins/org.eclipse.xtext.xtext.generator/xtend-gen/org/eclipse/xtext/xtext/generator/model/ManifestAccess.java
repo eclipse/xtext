@@ -7,8 +7,35 @@
  */
 package org.eclipse.xtext.xtext.generator.model;
 
+import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.xbase.lib.Pure;
+
 @SuppressWarnings("all")
 public class ManifestAccess {
-  public ManifestAccess(final String path) {
+  @Accessors
+  private String path;
+  
+  @Accessors
+  private boolean merge;
+  
+  public void generate() {
+  }
+  
+  @Pure
+  public String getPath() {
+    return this.path;
+  }
+  
+  public void setPath(final String path) {
+    this.path = path;
+  }
+  
+  @Pure
+  public boolean isMerge() {
+    return this.merge;
+  }
+  
+  public void setMerge(final boolean merge) {
+    this.merge = merge;
   }
 }

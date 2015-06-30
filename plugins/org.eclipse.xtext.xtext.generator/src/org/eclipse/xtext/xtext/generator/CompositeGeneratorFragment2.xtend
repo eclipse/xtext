@@ -7,11 +7,28 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator
 
+import com.google.inject.Inject
+import com.google.inject.Injector
+import java.util.List
+
 /**
- * A fragment that contributes to the {@link XtextGenerator}.
+ * A composite generator fragment delegates to its contained fragments.
  */
-interface IGeneratorFragment2 {
+class CompositeGeneratorFragment2 implements IGeneratorFragment2 {
 	
-	def void generate()
+	@Inject Injector injector
+	
+	val List<IGeneratorFragment2> fragments = newArrayList
+	
+	def void addFragment(IGeneratorFragment2 fragment) {
+		this.fragments.add(fragment)
+	}
+	
+	override generate() {
+		for (fragment : fragments) {
+			injector.injectMembers(fragment)
+			fragment.generate()
+		}
+	}
 	
 }
