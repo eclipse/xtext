@@ -468,6 +468,42 @@ public class IdeaIntegrationTest extends LightXtendTest {
     this.assertFileContents("xtend-gen/otherPackage/Foo.java", _builder_5);
   }
   
+  public void testTraceFilesGeneratedAndDeleted() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package otherPackage");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.myFixture.addFileToProject("otherPackage/Foo.xtend", _builder.toString());
+    VirtualFile _findFileInTempDir = this.myFixture.findFileInTempDir("xtend-gen/otherPackage/Foo.java");
+    boolean _exists = _findFileInTempDir.exists();
+    TestCase.assertTrue(_exists);
+    VirtualFile _findFileInTempDir_1 = this.myFixture.findFileInTempDir("xtend-gen/otherPackage/.Foo.java._trace");
+    boolean _exists_1 = _findFileInTempDir_1.exists();
+    TestCase.assertTrue(_exists_1);
+    VirtualFile _findFileInTempDir_2 = this.myFixture.findFileInTempDir("otherPackage/Foo.xtend");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package otherPackage;");
+    _builder_1.newLine();
+    _builder_1.append("class OtherClass {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.myFixture.saveText(_findFileInTempDir_2, _builder_1.toString());
+    VirtualFile _findFileInTempDir_3 = this.myFixture.findFileInTempDir("xtend-gen/otherPackage/Foo.java");
+    TestCase.assertNull(_findFileInTempDir_3);
+    VirtualFile _findFileInTempDir_4 = this.myFixture.findFileInTempDir("xtend-gen/otherPackage/.Foo.java._trace");
+    TestCase.assertNull(_findFileInTempDir_4);
+    VirtualFile _findFileInTempDir_5 = this.myFixture.findFileInTempDir("xtend-gen/otherPackage/OtherClass.java");
+    boolean _exists_2 = _findFileInTempDir_5.exists();
+    TestCase.assertTrue(_exists_2);
+    VirtualFile _findFileInTempDir_6 = this.myFixture.findFileInTempDir("xtend-gen/otherPackage/.OtherClass.java._trace");
+    boolean _exists_3 = _findFileInTempDir_6.exists();
+    TestCase.assertTrue(_exists_3);
+  }
+  
   public void testActiveAnnotation() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package otherPackage");

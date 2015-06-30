@@ -15,8 +15,13 @@ import java.io.InputStreamReader
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.URIConverter
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.generator.trace.AbstractTraceRegion
+import org.eclipse.xtext.generator.trace.ITraceRegionProvider
+import org.eclipse.xtext.generator.trace.TraceFileNameProvider
+import org.eclipse.xtext.generator.trace.TraceRegionSerializer
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.util.RuntimeIOException
+import java.io.ByteArrayOutputStream
 
 /**
  * A file system access implementation that is based on EMF URIs and URIConverter
@@ -41,7 +46,10 @@ class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
 	
 	@Accessors URIConverter converter
 	@Accessors URI baseDir
+	@Accessors boolean generateTraces = false
 	@Accessors IEncodingProvider encodingProvider = new IEncodingProvider.Runtime()
+	@Accessors TraceRegionSerializer traceRegionSerializer
+	@Accessors TraceFileNameProvider traceFileNameProvider
 	@Accessors BeforeDelete beforeDelete = [true]
 	@Accessors BeforeWrite beforeWrite = [$1]
 	@Accessors BeforeRead beforeRead = [$1]
@@ -65,10 +73,21 @@ class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
 	
 	override generateFile(String fileName, String outputCfgName, CharSequence contents) {
 		val uri = getURI(fileName, outputCfgName)
+		generateTrace(fileName, outputCfgName, contents)
 		val encoding = getEncoding(uri)
 		val inStream = new ByteArrayInputStream(contents.toString.getBytes(encoding))
 		generateFile(fileName, outputCfgName, inStream)
-	}	
+	}
+	
+	protected def void generateTrace(String generatedFile, String outputConfigName, CharSequence contents) {
+		if (isGenerateTraces && contents instanceof ITraceRegionProvider) {
+			var String traceFileName = traceFileNameProvider.getTraceFromJava(generatedFile)
+			val out = new ByteArrayOutputStream()
+			var AbstractTraceRegion traceRegion = (contents as ITraceRegionProvider).getTraceRegion()
+			traceRegionSerializer.writeTraceRegionTo(traceRegion, out)
+			generateFile(traceFileName, outputConfigName, new ByteArrayInputStream(out.toByteArray))
+		}
+	}
 	
 	override generateFile(String fileName, String outputCfgName, InputStream content) throws RuntimeIOException {
 		val uri = getURI(fileName, outputCfgName)

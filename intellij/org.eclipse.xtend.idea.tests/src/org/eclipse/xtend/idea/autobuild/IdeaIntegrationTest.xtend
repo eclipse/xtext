@@ -274,6 +274,25 @@ class IdeaIntegrationTest extends LightXtendTest {
 		''')
 	}
 	
+	def void testTraceFilesGeneratedAndDeleted() {
+		myFixture.addFileToProject('otherPackage/Foo.xtend', '''
+			package otherPackage
+			class Foo {
+			}
+		''')
+		assertTrue(myFixture.findFileInTempDir("xtend-gen/otherPackage/Foo.java").exists)
+		assertTrue(myFixture.findFileInTempDir("xtend-gen/otherPackage/.Foo.java._trace").exists)
+		myFixture.saveText(myFixture.findFileInTempDir("otherPackage/Foo.xtend"), '''
+			package otherPackage;
+			class OtherClass {
+			}
+		''')
+		assertNull(myFixture.findFileInTempDir("xtend-gen/otherPackage/Foo.java"))
+		assertNull(myFixture.findFileInTempDir("xtend-gen/otherPackage/.Foo.java._trace"))
+		assertTrue(myFixture.findFileInTempDir("xtend-gen/otherPackage/OtherClass.java").exists)
+		assertTrue(myFixture.findFileInTempDir("xtend-gen/otherPackage/.OtherClass.java._trace").exists)
+	}
+	
 	def void testActiveAnnotation() {
 		myFixture.addFileToProject('otherPackage/Foo.xtend', '''
 			package otherPackage
