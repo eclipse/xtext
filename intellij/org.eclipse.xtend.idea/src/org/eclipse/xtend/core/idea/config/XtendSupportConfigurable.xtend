@@ -12,6 +12,7 @@ import com.intellij.framework.addSupport.FrameworkSupportInModuleConfigurable
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.roots.ModifiableModelsProvider
 import com.intellij.openapi.roots.ModifiableRootModel
+import com.intellij.openapi.roots.libraries.LibraryTablesRegistrar
 import com.intellij.openapi.vfs.LocalFileSystem
 import java.io.File
 import javax.inject.Provider
@@ -37,6 +38,11 @@ class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurable {
 		rootModel.contentEntries.findFirst[!sourceFolders.empty].addSourceFolder(url, false)
 		if (!output.exists && output.mkdirs) {
 			LocalFileSystem.instance.refreshAndFindFileByIoFile(output)
+		}
+		val libraryTable = LibraryTablesRegistrar.getInstance().getLibraryTable()
+		var library = libraryTable.getLibraryByName(XtendLibraryDescription.XTEND_LIBRARY_NAME)
+		if (library != null && !rootModel.moduleLibraryTable.libraries.contains(library)) {
+			rootModel.addLibraryEntry(library)
 		}
 	}
 
