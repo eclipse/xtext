@@ -42,7 +42,6 @@ import org.eclipse.xtext.xbase.ui.builder.XbaseBuilderPreferenceAccess;
 import org.eclipse.xtext.xbase.ui.contentassist.XbaseContentProposalPriorities;
 import org.eclipse.xtext.xbase.ui.contentassist.XbaseReferenceProposalCreator;
 import org.eclipse.xtext.xbase.ui.editor.actions.XbaseFoldingActionContributor;
-import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingCalculator;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDispatchingEObjectTextHover;
 import org.eclipse.xtext.xbase.ui.hover.XbaseHoverDocumentationProvider;
@@ -59,6 +58,7 @@ import org.eclipse.xtext.xbase.validation.UniqueClassNameValidator;
  * @since 2.8
  * @author Sven Efftinge - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class DefaultXbaseUiModule extends DefaultCommonTypesUiModule {
 
 	public DefaultXbaseUiModule(AbstractUIPlugin plugin) {
