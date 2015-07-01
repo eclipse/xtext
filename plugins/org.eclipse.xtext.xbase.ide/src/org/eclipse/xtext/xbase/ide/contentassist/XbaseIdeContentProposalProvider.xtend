@@ -82,8 +82,7 @@ class XbaseIdeContentProposalProvider extends IdeContentProposalProvider {
 				if (context.prefix.length == 0 && NodeModelUtils.getNode(previousModel).endOffset > context.offset) {
 					return false
 				}
-				var LightweightTypeReference type = typeResolver.resolveTypes(previousModel).getActualType(
-					previousModel as XExpression)
+				var LightweightTypeReference type = typeResolver.resolveTypes(previousModel).getActualType(previousModel)
 				if (type === null || type.isPrimitiveVoid) {
 					return false
 				}
@@ -218,7 +217,7 @@ class XbaseIdeContentProposalProvider extends IdeContentProposalProvider {
 			return
 		}
 		if (model instanceof XBlockExpression) {
-			val children = (model as XBlockExpression).expressions
+			val children = model.expressions
 			for (var i = children.size - 1; i >= 0; i--) {
 				val child = children.get(i)
 				val childNode = NodeModelUtils.getNode(child)
@@ -287,7 +286,7 @@ class XbaseIdeContentProposalProvider extends IdeContentProposalProvider {
 				createReceiverProposals(model as XExpression, assignment.terminal as CrossReference,
 					context, acceptor)
 			} else {
-				createReceiverProposals((model as XBinaryOperation).leftOperand,
+				createReceiverProposals(model.leftOperand,
 					assignment.terminal as CrossReference, context, acceptor)
 			}
 		} else {
@@ -298,7 +297,7 @@ class XbaseIdeContentProposalProvider extends IdeContentProposalProvider {
 						return
 					}
 				}
-				createReceiverProposals(previousModel as XExpression,
+				createReceiverProposals(previousModel,
 					assignment.terminal as CrossReference, context, acceptor)
 			}
 		}
@@ -312,7 +311,7 @@ class XbaseIdeContentProposalProvider extends IdeContentProposalProvider {
 			return
 		}
 		if (model instanceof XBasicForLoopExpression) {
-			val children = (model as XBasicForLoopExpression).initExpressions
+			val children = model.initExpressions
 			for (var i = children.size - 1; i >= 0; i--) {
 				val child = children.get(i)
 				val childNode = NodeModelUtils.getNode(child)
@@ -328,10 +327,10 @@ class XbaseIdeContentProposalProvider extends IdeContentProposalProvider {
 	protected def completeXMemberFeatureCall(EObject model, Assignment assignment,
 			ContentAssistContext context, IIdeContentProposalAcceptor acceptor) {
 		if (model instanceof XMemberFeatureCall) {
-			createReceiverProposals((model as XMemberFeatureCall).memberCallTarget,
+			createReceiverProposals(model.memberCallTarget,
 				assignment.terminal as CrossReference, context, acceptor)
 		} else if (model instanceof XAssignment) {
-			createReceiverProposals((model as XAssignment).assignable,
+			createReceiverProposals(model.assignable,
 				assignment.terminal as CrossReference, context, acceptor)
 		}
 	}

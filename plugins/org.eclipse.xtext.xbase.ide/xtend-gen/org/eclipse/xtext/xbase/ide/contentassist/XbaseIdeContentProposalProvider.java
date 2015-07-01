@@ -151,8 +151,7 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
           return false;
         }
         IResolvedTypes _resolveTypes = this.typeResolver.resolveTypes(previousModel);
-        LightweightTypeReference type = _resolveTypes.getActualType(
-          ((XExpression) previousModel));
+        LightweightTypeReference type = _resolveTypes.getActualType(((XExpression)previousModel));
         boolean _or_1 = false;
         if ((type == null)) {
           _or_1 = true;
@@ -543,7 +542,7 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
       return;
     }
     if ((model instanceof XBlockExpression)) {
-      final EList<XExpression> children = ((XBlockExpression) model).getExpressions();
+      final EList<XExpression> children = ((XBlockExpression)model).getExpressions();
       for (int i = (children.size() - 1); (i >= 0); i--) {
         {
           final XExpression child = children.get(i);
@@ -690,7 +689,7 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
         AbstractElement _terminal = assignment.getTerminal();
         this.createReceiverProposals(((XExpression) model), ((CrossReference) _terminal), context, acceptor);
       } else {
-        XExpression _leftOperand = ((XBinaryOperation) model).getLeftOperand();
+        XExpression _leftOperand = ((XBinaryOperation)model).getLeftOperand();
         AbstractElement _terminal_1 = assignment.getTerminal();
         this.createReceiverProposals(_leftOperand, 
           ((CrossReference) _terminal_1), context, acceptor);
@@ -711,7 +710,7 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
           }
         }
         AbstractElement _terminal_2 = assignment.getTerminal();
-        this.createReceiverProposals(((XExpression) previousModel), 
+        this.createReceiverProposals(((XExpression)previousModel), 
           ((CrossReference) _terminal_2), context, acceptor);
       }
     }
@@ -727,7 +726,7 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
       return;
     }
     if ((model instanceof XBasicForLoopExpression)) {
-      final EList<XExpression> children = ((XBasicForLoopExpression) model).getInitExpressions();
+      final EList<XExpression> children = ((XBasicForLoopExpression)model).getInitExpressions();
       for (int i = (children.size() - 1); (i >= 0); i--) {
         {
           final XExpression child = children.get(i);
@@ -747,13 +746,13 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
   
   protected void completeXMemberFeatureCall(final EObject model, final Assignment assignment, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
     if ((model instanceof XMemberFeatureCall)) {
-      XExpression _memberCallTarget = ((XMemberFeatureCall) model).getMemberCallTarget();
+      XExpression _memberCallTarget = ((XMemberFeatureCall)model).getMemberCallTarget();
       AbstractElement _terminal = assignment.getTerminal();
       this.createReceiverProposals(_memberCallTarget, 
         ((CrossReference) _terminal), context, acceptor);
     } else {
       if ((model instanceof XAssignment)) {
-        XExpression _assignable = ((XAssignment) model).getAssignable();
+        XExpression _assignable = ((XAssignment)model).getAssignable();
         AbstractElement _terminal_1 = assignment.getTerminal();
         this.createReceiverProposals(_assignable, 
           ((CrossReference) _terminal_1), context, acceptor);
