@@ -29,9 +29,11 @@ public class IdeaEncodingProvider implements IEncodingProvider {
       return _runtime.getEncoding(uri);
     }
     VirtualFile file = VirtualFileURIUtil.getVirtualFile(uri);
-    while ((Objects.equal(file, null) && (uri.segmentCount() > 0))) {
+    URI parent = uri;
+    while ((Objects.equal(file, null) && (parent.segmentCount() > 0))) {
       {
-        final URI parent = uri.trimSegments(1);
+        URI _trimSegments = parent.trimSegments(1);
+        parent = _trimSegments;
         VirtualFile _virtualFile = VirtualFileURIUtil.getVirtualFile(parent);
         file = _virtualFile;
       }
