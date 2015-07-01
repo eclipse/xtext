@@ -32,6 +32,7 @@ import org.eclipse.xtext.generator.trace.TraceFileNameProvider
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer
 import org.eclipse.xtext.generator.IFilePostProcessor
 import org.eclipse.emf.common.util.URI
+import org.eclipse.xtext.parser.IEncodingProvider
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -145,6 +146,9 @@ import org.eclipse.emf.common.util.URI
 				outputConfigurations = outputConfigProvider.getOutputConfigurations(resource).toMap[name]
 				
 				postProcessor = serviceProvider.get(IFilePostProcessor)
+				val newEncodingProvider = serviceProvider.get(IEncodingProvider)
+				if (newEncodingProvider != null)
+					encodingProvider = newEncodingProvider
 				traceFileNameProvider = serviceProvider.get(TraceFileNameProvider)
 				traceRegionSerializer = serviceProvider.get(TraceRegionSerializer)
 				generateTraces = true
