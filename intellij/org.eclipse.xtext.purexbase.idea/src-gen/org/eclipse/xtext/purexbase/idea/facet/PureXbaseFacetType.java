@@ -5,12 +5,11 @@ import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class PureXbaseFacetType  extends AbstractFacetType<PureXbaseFacetConfiguration> {
-	private static String TYPE_ID_STRING = "org.eclipse.xtext.purexbase.PureXbase";
 
-	public static  FacetTypeId<Facet<PureXbaseFacetConfiguration>> TYPEID = new FacetTypeId<Facet<PureXbaseFacetConfiguration>>(TYPE_ID_STRING);
+	public static final FacetTypeId<Facet<PureXbaseFacetConfiguration>> TYPEID = new FacetTypeId<Facet<PureXbaseFacetConfiguration>>("org.eclipse.xtext.purexbase.PureXbase");
 
 	public PureXbaseFacetType() {
-		super(TYPEID, TYPE_ID_STRING, "PureXbase");
+		super(TYPEID, "org.eclipse.xtext.purexbase.PureXbase", "PureXbase");
 		org.eclipse.xtext.purexbase.idea.lang.PureXbaseLanguage.INSTANCE.injectMembers(this);
 	}
 

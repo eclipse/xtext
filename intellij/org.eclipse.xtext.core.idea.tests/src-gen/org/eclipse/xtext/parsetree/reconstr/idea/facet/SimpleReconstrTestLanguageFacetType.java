@@ -5,12 +5,11 @@ import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class SimpleReconstrTestLanguageFacetType  extends AbstractFacetType<SimpleReconstrTestLanguageFacetConfiguration> {
-	private static String TYPE_ID_STRING = "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage";
 
-	public static  FacetTypeId<Facet<SimpleReconstrTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<SimpleReconstrTestLanguageFacetConfiguration>>(TYPE_ID_STRING);
+	public static final FacetTypeId<Facet<SimpleReconstrTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<SimpleReconstrTestLanguageFacetConfiguration>>("org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage");
 
 	public SimpleReconstrTestLanguageFacetType() {
-		super(TYPEID, TYPE_ID_STRING, "SimpleReconstrTestLanguage");
+		super(TYPEID, "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage", "SimpleReconstrTestLanguage");
 		org.eclipse.xtext.parsetree.reconstr.idea.lang.SimpleReconstrTestLanguageLanguage.INSTANCE.injectMembers(this);
 	}
 

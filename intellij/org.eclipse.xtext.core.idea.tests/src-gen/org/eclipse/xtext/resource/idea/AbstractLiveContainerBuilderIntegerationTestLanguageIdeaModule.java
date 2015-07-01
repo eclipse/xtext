@@ -32,12 +32,12 @@ public class AbstractLiveContainerBuilderIntegerationTestLanguageIdeaModule exte
 		return org.eclipse.xtext.resource.idea.lang.LiveContainerBuilderIntegerationTestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
 		return org.eclipse.xtext.resource.idea.facet.LiveContainerBuilderIntegerationTestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.resource.idea.facet.LiveContainerBuilderIntegerationTestLanguageFacetConfiguration>> bindAbstractFacetType$LiveContainerBuilderIntegerationTestLanguageFacetConfiguration() {
-		return org.eclipse.xtext.resource.idea.facet.LiveContainerBuilderIntegerationTestLanguageFacetType.class;
+	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
+		return org.eclipse.xtext.resource.idea.facet.LiveContainerBuilderIntegerationTestLanguageFacetType.TYPEID;
 	}
 	
 	

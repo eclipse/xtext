@@ -32,12 +32,12 @@ public class AbstractMetamodelRefTestLanguageIdeaModule extends org.eclipse.xtex
 		return org.eclipse.xtext.metamodelreferencing.tests.idea.lang.MetamodelRefTestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
 		return org.eclipse.xtext.metamodelreferencing.tests.idea.facet.MetamodelRefTestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.metamodelreferencing.tests.idea.facet.MetamodelRefTestLanguageFacetConfiguration>> bindAbstractFacetType$MetamodelRefTestLanguageFacetConfiguration() {
-		return org.eclipse.xtext.metamodelreferencing.tests.idea.facet.MetamodelRefTestLanguageFacetType.class;
+	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
+		return org.eclipse.xtext.metamodelreferencing.tests.idea.facet.MetamodelRefTestLanguageFacetType.TYPEID;
 	}
 	
 	

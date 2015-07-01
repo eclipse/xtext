@@ -5,12 +5,11 @@ import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class LiveContainerBuilderIntegerationTestLanguageFacetType  extends AbstractFacetType<LiveContainerBuilderIntegerationTestLanguageFacetConfiguration> {
-	private static String TYPE_ID_STRING = "org.eclipse.xtext.resource.LiveContainerBuilderIntegerationTestLanguage";
 
-	public static  FacetTypeId<Facet<LiveContainerBuilderIntegerationTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<LiveContainerBuilderIntegerationTestLanguageFacetConfiguration>>(TYPE_ID_STRING);
+	public static final FacetTypeId<Facet<LiveContainerBuilderIntegerationTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<LiveContainerBuilderIntegerationTestLanguageFacetConfiguration>>("org.eclipse.xtext.resource.LiveContainerBuilderIntegerationTestLanguage");
 
 	public LiveContainerBuilderIntegerationTestLanguageFacetType() {
-		super(TYPEID, TYPE_ID_STRING, "LiveContainerBuilderIntegerationTestLanguage");
+		super(TYPEID, "org.eclipse.xtext.resource.LiveContainerBuilderIntegerationTestLanguage", "LiveContainerBuilderIntegerationTestLanguage");
 		org.eclipse.xtext.resource.idea.lang.LiveContainerBuilderIntegerationTestLanguageLanguage.INSTANCE.injectMembers(this);
 	}
 

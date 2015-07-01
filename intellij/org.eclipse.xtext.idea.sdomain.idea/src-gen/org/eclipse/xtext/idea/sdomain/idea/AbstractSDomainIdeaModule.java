@@ -32,12 +32,12 @@ public class AbstractSDomainIdeaModule extends org.eclipse.xtext.idea.DefaultIde
 		return org.eclipse.xtext.idea.sdomain.idea.lang.SDomainElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
 		return org.eclipse.xtext.idea.sdomain.idea.facet.SDomainFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.idea.sdomain.idea.facet.SDomainFacetConfiguration>> bindAbstractFacetType$SDomainFacetConfiguration() {
-		return org.eclipse.xtext.idea.sdomain.idea.facet.SDomainFacetType.class;
+	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
+		return org.eclipse.xtext.idea.sdomain.idea.facet.SDomainFacetType.TYPEID;
 	}
 	
 	

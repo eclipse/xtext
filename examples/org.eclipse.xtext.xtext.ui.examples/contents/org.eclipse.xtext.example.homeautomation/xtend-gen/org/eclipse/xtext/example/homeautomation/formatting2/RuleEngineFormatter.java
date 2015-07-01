@@ -35,6 +35,7 @@ import org.eclipse.xtext.xbase.XBasicForLoopExpression;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
+import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XCollectionLiteral;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -45,6 +46,7 @@ import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XPostfixOperation;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XSynchronizedExpression;
@@ -533,6 +535,9 @@ public class RuleEngineFormatter extends XbaseFormatter {
     } else if (device instanceof XMemberFeatureCall) {
       _format((XMemberFeatureCall)device, document);
       return;
+    } else if (device instanceof XPostfixOperation) {
+      _format((XPostfixOperation)device, document);
+      return;
     } else if (device instanceof XWhileExpression) {
       _format((XWhileExpression)device, document);
       return;
@@ -559,6 +564,9 @@ public class RuleEngineFormatter extends XbaseFormatter {
       return;
     } else if (device instanceof XBlockExpression) {
       _format((XBlockExpression)device, document);
+      return;
+    } else if (device instanceof XCastedExpression) {
+      _format((XCastedExpression)device, document);
       return;
     } else if (device instanceof XClosure) {
       _format((XClosure)device, document);

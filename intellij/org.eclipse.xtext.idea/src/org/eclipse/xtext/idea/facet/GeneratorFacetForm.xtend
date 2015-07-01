@@ -11,7 +11,7 @@ import org.eclipse.xtext.idea.util.IdeaWidgetFactory.TwoColumnPanel
 /** 
  * Created by dhuebner on 19.06.15.
  */
-class GeneratorFacetForm<T extends GeneratorConfigurationState> {
+class GeneratorFacetForm {
 	extension IdeaWidgetFactory = new IdeaWidgetFactory
 
 	protected JCheckBox activated
@@ -55,7 +55,7 @@ class GeneratorFacetForm<T extends GeneratorConfigurationState> {
 		row [activated = checkBox("Compiler is activated")]
 	}
 
-	def void setData(T data) {
+	def void setData(GeneratorConfigurationState data) {
 		createDirectory.setSelected(data.isCreateDirectory())
 		overwriteFiles.setSelected(data.isOverwriteExisting())
 		deleteGenerated.setSelected(data.isDeleteGenerated())
@@ -64,7 +64,7 @@ class GeneratorFacetForm<T extends GeneratorConfigurationState> {
 		testDirectory.setText(data.getTestOutputDirectory())
 	}
 
-	def void getData(T data) {
+	def void getData(GeneratorConfigurationState data) {
 		data.setCreateDirectory(createDirectory.isSelected())
 		data.setOverwriteExisting(overwriteFiles.isSelected())
 		data.setDeleteGenerated(deleteGenerated.isSelected())
@@ -73,7 +73,7 @@ class GeneratorFacetForm<T extends GeneratorConfigurationState> {
 		data.setTestOutputDirectory(testDirectory.getText())
 	}
 
-	def boolean isModified(T data) {
+	def boolean isModified(GeneratorConfigurationState data) {
 		if(createDirectory.isSelected() !== data.isCreateDirectory()) return true
 		if(overwriteFiles.isSelected() !== data.isOverwriteExisting()) return true
 		if(deleteGenerated.isSelected() !== data.isDeleteGenerated()) return true

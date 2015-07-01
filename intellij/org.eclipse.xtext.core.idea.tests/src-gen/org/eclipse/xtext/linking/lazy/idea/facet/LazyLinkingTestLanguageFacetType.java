@@ -5,12 +5,11 @@ import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class LazyLinkingTestLanguageFacetType  extends AbstractFacetType<LazyLinkingTestLanguageFacetConfiguration> {
-	private static String TYPE_ID_STRING = "org.eclipse.xtext.linking.lazy.LazyLinkingTestLanguage";
 
-	public static  FacetTypeId<Facet<LazyLinkingTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<LazyLinkingTestLanguageFacetConfiguration>>(TYPE_ID_STRING);
+	public static final FacetTypeId<Facet<LazyLinkingTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<LazyLinkingTestLanguageFacetConfiguration>>("org.eclipse.xtext.linking.lazy.LazyLinkingTestLanguage");
 
 	public LazyLinkingTestLanguageFacetType() {
-		super(TYPEID, TYPE_ID_STRING, "LazyLinkingTestLanguage");
+		super(TYPEID, "org.eclipse.xtext.linking.lazy.LazyLinkingTestLanguage", "LazyLinkingTestLanguage");
 		org.eclipse.xtext.linking.lazy.idea.lang.LazyLinkingTestLanguageLanguage.INSTANCE.injectMembers(this);
 	}
 

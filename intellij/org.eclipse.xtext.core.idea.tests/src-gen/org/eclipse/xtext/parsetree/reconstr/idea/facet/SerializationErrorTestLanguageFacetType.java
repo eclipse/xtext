@@ -5,12 +5,11 @@ import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class SerializationErrorTestLanguageFacetType  extends AbstractFacetType<SerializationErrorTestLanguageFacetConfiguration> {
-	private static String TYPE_ID_STRING = "org.eclipse.xtext.parsetree.reconstr.SerializationErrorTestLanguage";
 
-	public static  FacetTypeId<Facet<SerializationErrorTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<SerializationErrorTestLanguageFacetConfiguration>>(TYPE_ID_STRING);
+	public static final FacetTypeId<Facet<SerializationErrorTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<SerializationErrorTestLanguageFacetConfiguration>>("org.eclipse.xtext.parsetree.reconstr.SerializationErrorTestLanguage");
 
 	public SerializationErrorTestLanguageFacetType() {
-		super(TYPEID, TYPE_ID_STRING, "SerializationErrorTestLanguage");
+		super(TYPEID, "org.eclipse.xtext.parsetree.reconstr.SerializationErrorTestLanguage", "SerializationErrorTestLanguage");
 		org.eclipse.xtext.parsetree.reconstr.idea.lang.SerializationErrorTestLanguageLanguage.INSTANCE.injectMembers(this);
 	}
 

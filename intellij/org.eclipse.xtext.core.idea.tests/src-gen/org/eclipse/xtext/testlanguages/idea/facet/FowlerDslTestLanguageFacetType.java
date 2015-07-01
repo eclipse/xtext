@@ -5,12 +5,11 @@ import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class FowlerDslTestLanguageFacetType  extends AbstractFacetType<FowlerDslTestLanguageFacetConfiguration> {
-	private static String TYPE_ID_STRING = "org.eclipse.xtext.testlanguages.FowlerDslTestLanguage";
 
-	public static  FacetTypeId<Facet<FowlerDslTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<FowlerDslTestLanguageFacetConfiguration>>(TYPE_ID_STRING);
+	public static final FacetTypeId<Facet<FowlerDslTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<FowlerDslTestLanguageFacetConfiguration>>("org.eclipse.xtext.testlanguages.FowlerDslTestLanguage");
 
 	public FowlerDslTestLanguageFacetType() {
-		super(TYPEID, TYPE_ID_STRING, "FowlerDslTestLanguage");
+		super(TYPEID, "org.eclipse.xtext.testlanguages.FowlerDslTestLanguage", "FowlerDslTestLanguage");
 		org.eclipse.xtext.testlanguages.idea.lang.FowlerDslTestLanguageLanguage.INSTANCE.injectMembers(this);
 	}
 

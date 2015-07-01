@@ -32,12 +32,12 @@ public class AbstractSequencerTestLanguageIdeaModule extends org.eclipse.xtext.i
 		return org.eclipse.xtext.serializer.idea.lang.SequencerTestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
 		return org.eclipse.xtext.serializer.idea.facet.SequencerTestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.serializer.idea.facet.SequencerTestLanguageFacetConfiguration>> bindAbstractFacetType$SequencerTestLanguageFacetConfiguration() {
-		return org.eclipse.xtext.serializer.idea.facet.SequencerTestLanguageFacetType.class;
+	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
+		return org.eclipse.xtext.serializer.idea.facet.SequencerTestLanguageFacetType.TYPEID;
 	}
 	
 	

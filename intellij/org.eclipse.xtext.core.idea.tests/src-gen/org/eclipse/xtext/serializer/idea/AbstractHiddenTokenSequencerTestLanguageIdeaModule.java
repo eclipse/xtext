@@ -32,12 +32,12 @@ public class AbstractHiddenTokenSequencerTestLanguageIdeaModule extends org.ecli
 		return org.eclipse.xtext.serializer.idea.lang.HiddenTokenSequencerTestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
 		return org.eclipse.xtext.serializer.idea.facet.HiddenTokenSequencerTestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.serializer.idea.facet.HiddenTokenSequencerTestLanguageFacetConfiguration>> bindAbstractFacetType$HiddenTokenSequencerTestLanguageFacetConfiguration() {
-		return org.eclipse.xtext.serializer.idea.facet.HiddenTokenSequencerTestLanguageFacetType.class;
+	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
+		return org.eclipse.xtext.serializer.idea.facet.HiddenTokenSequencerTestLanguageFacetType.TYPEID;
 	}
 	
 	

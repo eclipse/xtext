@@ -5,12 +5,11 @@ import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class SDomainFacetType  extends AbstractFacetType<SDomainFacetConfiguration> {
-	private static String TYPE_ID_STRING = "org.eclipse.xtext.idea.sdomain.SDomain";
 
-	public static  FacetTypeId<Facet<SDomainFacetConfiguration>> TYPEID = new FacetTypeId<Facet<SDomainFacetConfiguration>>(TYPE_ID_STRING);
+	public static final FacetTypeId<Facet<SDomainFacetConfiguration>> TYPEID = new FacetTypeId<Facet<SDomainFacetConfiguration>>("org.eclipse.xtext.idea.sdomain.SDomain");
 
 	public SDomainFacetType() {
-		super(TYPEID, TYPE_ID_STRING, "SDomain");
+		super(TYPEID, "org.eclipse.xtext.idea.sdomain.SDomain", "SDomain");
 		org.eclipse.xtext.idea.sdomain.idea.lang.SDomainLanguage.INSTANCE.injectMembers(this);
 	}
 

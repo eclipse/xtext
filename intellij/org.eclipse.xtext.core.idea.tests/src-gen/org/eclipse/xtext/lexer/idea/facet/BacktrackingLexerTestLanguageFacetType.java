@@ -5,12 +5,11 @@ import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class BacktrackingLexerTestLanguageFacetType  extends AbstractFacetType<BacktrackingLexerTestLanguageFacetConfiguration> {
-	private static String TYPE_ID_STRING = "org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage";
 
-	public static  FacetTypeId<Facet<BacktrackingLexerTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<BacktrackingLexerTestLanguageFacetConfiguration>>(TYPE_ID_STRING);
+	public static final FacetTypeId<Facet<BacktrackingLexerTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<BacktrackingLexerTestLanguageFacetConfiguration>>("org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage");
 
 	public BacktrackingLexerTestLanguageFacetType() {
-		super(TYPEID, TYPE_ID_STRING, "BacktrackingLexerTestLanguage");
+		super(TYPEID, "org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage", "BacktrackingLexerTestLanguage");
 		org.eclipse.xtext.lexer.idea.lang.BacktrackingLexerTestLanguageLanguage.INSTANCE.injectMembers(this);
 	}
 

@@ -32,12 +32,12 @@ public class AbstractUnassignedTextTestLanguageIdeaModule extends org.eclipse.xt
 		return org.eclipse.xtext.parsetree.unassignedtext.idea.lang.UnassignedTextTestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
 		return org.eclipse.xtext.parsetree.unassignedtext.idea.facet.UnassignedTextTestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.parsetree.unassignedtext.idea.facet.UnassignedTextTestLanguageFacetConfiguration>> bindAbstractFacetType$UnassignedTextTestLanguageFacetConfiguration() {
-		return org.eclipse.xtext.parsetree.unassignedtext.idea.facet.UnassignedTextTestLanguageFacetType.class;
+	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
+		return org.eclipse.xtext.parsetree.unassignedtext.idea.facet.UnassignedTextTestLanguageFacetType.TYPEID;
 	}
 	
 	

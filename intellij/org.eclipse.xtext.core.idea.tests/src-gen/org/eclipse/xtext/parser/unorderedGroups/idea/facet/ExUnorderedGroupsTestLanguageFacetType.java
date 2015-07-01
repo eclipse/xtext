@@ -5,12 +5,11 @@ import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class ExUnorderedGroupsTestLanguageFacetType  extends AbstractFacetType<ExUnorderedGroupsTestLanguageFacetConfiguration> {
-	private static String TYPE_ID_STRING = "org.eclipse.xtext.parser.unorderedGroups.ExUnorderedGroupsTestLanguage";
 
-	public static  FacetTypeId<Facet<ExUnorderedGroupsTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<ExUnorderedGroupsTestLanguageFacetConfiguration>>(TYPE_ID_STRING);
+	public static final FacetTypeId<Facet<ExUnorderedGroupsTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<ExUnorderedGroupsTestLanguageFacetConfiguration>>("org.eclipse.xtext.parser.unorderedGroups.ExUnorderedGroupsTestLanguage");
 
 	public ExUnorderedGroupsTestLanguageFacetType() {
-		super(TYPEID, TYPE_ID_STRING, "ExUnorderedGroupsTestLanguage");
+		super(TYPEID, "org.eclipse.xtext.parser.unorderedGroups.ExUnorderedGroupsTestLanguage", "ExUnorderedGroupsTestLanguage");
 		org.eclipse.xtext.parser.unorderedGroups.idea.lang.ExUnorderedGroupsTestLanguageLanguage.INSTANCE.injectMembers(this);
 	}
 

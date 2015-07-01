@@ -32,12 +32,12 @@ public class AbstractSimpleUnorderedGroupsTestLanguageIdeaModule extends org.ecl
 		return org.eclipse.xtext.parser.unorderedGroups.idea.lang.SimpleUnorderedGroupsTestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
 		return org.eclipse.xtext.parser.unorderedGroups.idea.facet.SimpleUnorderedGroupsTestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.parser.unorderedGroups.idea.facet.SimpleUnorderedGroupsTestLanguageFacetConfiguration>> bindAbstractFacetType$SimpleUnorderedGroupsTestLanguageFacetConfiguration() {
-		return org.eclipse.xtext.parser.unorderedGroups.idea.facet.SimpleUnorderedGroupsTestLanguageFacetType.class;
+	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
+		return org.eclipse.xtext.parser.unorderedGroups.idea.facet.SimpleUnorderedGroupsTestLanguageFacetType.TYPEID;
 	}
 	
 	

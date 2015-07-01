@@ -9,7 +9,6 @@ package org.eclipse.xtext.idea.build
 
 import com.google.common.collect.Sets
 import com.google.inject.Inject
-import com.intellij.facet.FacetManager
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.vfs.VfsUtil
 import java.util.Set
@@ -20,46 +19,40 @@ import org.eclipse.xtext.generator.IOutputConfigurationProvider
 import org.eclipse.xtext.generator.OutputConfiguration
 import org.eclipse.xtext.generator.OutputConfiguration.SourceMapping
 import org.eclipse.xtext.idea.extensions.RootModelExtensions
-import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration
-import org.eclipse.xtext.idea.facet.AbstractFacetType
+import org.eclipse.xtext.idea.facet.FacetProvider
 import org.eclipse.xtext.resource.XtextResourceSet
-import org.eclipse.xtext.idea.facet.GeneratorConfigurationState
 
 /**
  * @author dhuebner - Initial contribution and API
  */
 class IdeaOutputConfigurationProvider implements IContextualOutputConfigurationProvider {
 
-	@Inject(optional=true)
-	AbstractFacetType<AbstractFacetConfiguration<GeneratorConfigurationState>> languageFacet
+	@Inject FacetProvider facetProvider;
 	@Inject IOutputConfigurationProvider defaultOutput
 
 	override Set<OutputConfiguration> getOutputConfigurations(Resource context) {
-		if (languageFacet != null) {
-			val module = (context.resourceSet as XtextResourceSet).classpathURIContext
-			if (module instanceof Module) {
-				val facet = FacetManager.getInstance(module).getFacetByType(languageFacet.id)
-				if (facet != null) {
-					val generatorConf = facet.configuration.state
-					val defOut = new OutputConfiguration(IFileSystemAccess.DEFAULT_OUTPUT)
-					defOut.outputDirectory = generatorConf.outputDirectory
-					defOut.createOutputDirectory = generatorConf.createDirectory
-					defOut.canClearOutputDirectory = generatorConf.deleteGenerated
-					defOut.overrideExistingResources = generatorConf.overwriteExisting
-					defOut.useOutputPerSourceFolder = true
-					val allSrcFolders = RootModelExtensions.getExistingSourceFolders(module)
-					for (srcFolder : allSrcFolders) {
-						val mapping = new SourceMapping(
-							VfsUtil.getPath(srcFolder.contentEntry.file, srcFolder.file, '/'))
-						if (srcFolder.testSource) {
-							mapping.outputDirectory = generatorConf.testOutputDirectory
-						} else {
-							mapping.outputDirectory = generatorConf.outputDirectory
-						}
-						defOut.sourceMappings.add(mapping)
+		val module = (context.resourceSet as XtextResourceSet).classpathURIContext
+		if (module instanceof Module) {
+			val facet = facetProvider.getFacet(module)
+			if (facet != null) {
+				val generatorConf = facet.configuration.state
+				val defOut = new OutputConfiguration(IFileSystemAccess.DEFAULT_OUTPUT)
+				defOut.outputDirectory = generatorConf.outputDirectory
+				defOut.createOutputDirectory = generatorConf.createDirectory
+				defOut.canClearOutputDirectory = generatorConf.deleteGenerated
+				defOut.overrideExistingResources = generatorConf.overwriteExisting
+				defOut.useOutputPerSourceFolder = true
+				val allSrcFolders = RootModelExtensions.getExistingSourceFolders(module)
+				for (srcFolder : allSrcFolders) {
+					val mapping = new SourceMapping(VfsUtil.getPath(srcFolder.contentEntry.file, srcFolder.file, '/'))
+					if (srcFolder.testSource) {
+						mapping.outputDirectory = generatorConf.testOutputDirectory
+					} else {
+						mapping.outputDirectory = generatorConf.outputDirectory
 					}
-					return Sets.newHashSet(defOut)
+					defOut.sourceMappings.add(mapping)
 				}
+				return Sets.newHashSet(defOut)
 			}
 		}
 		return defaultOutput.outputConfigurations

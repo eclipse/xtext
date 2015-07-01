@@ -1,7 +1,7 @@
 package org.eclipse.xtext.purexbase.idea;
 
-import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.purexbase.PureXbaseStandaloneSetupGenerated;
+import org.eclipse.xtext.util.Modules2;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;

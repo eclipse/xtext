@@ -15,7 +15,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
  * Created by dhuebner on 19.06.15.
  */
 @SuppressWarnings("all")
-public class GeneratorFacetForm<T extends GeneratorConfigurationState> {
+public class GeneratorFacetForm {
   @Extension
   private IdeaWidgetFactory _ideaWidgetFactory = new IdeaWidgetFactory();
   
@@ -153,7 +153,7 @@ public class GeneratorFacetForm<T extends GeneratorConfigurationState> {
     return it.row(it, _function);
   }
   
-  public void setData(final T data) {
+  public void setData(final GeneratorConfigurationState data) {
     boolean _isCreateDirectory = data.isCreateDirectory();
     this.createDirectory.setSelected(_isCreateDirectory);
     boolean _isOverwriteExisting = data.isOverwriteExisting();
@@ -168,7 +168,7 @@ public class GeneratorFacetForm<T extends GeneratorConfigurationState> {
     this.testDirectory.setText(_testOutputDirectory);
   }
   
-  public void getData(final T data) {
+  public void getData(final GeneratorConfigurationState data) {
     boolean _isSelected = this.createDirectory.isSelected();
     data.setCreateDirectory(_isSelected);
     boolean _isSelected_1 = this.overwriteFiles.isSelected();
@@ -183,7 +183,7 @@ public class GeneratorFacetForm<T extends GeneratorConfigurationState> {
     data.setTestOutputDirectory(_text_1);
   }
   
-  public boolean isModified(final T data) {
+  public boolean isModified(final GeneratorConfigurationState data) {
     boolean _isSelected = this.createDirectory.isSelected();
     boolean _isCreateDirectory = data.isCreateDirectory();
     boolean _tripleNotEquals = (Boolean.valueOf(_isSelected) != Boolean.valueOf(_isCreateDirectory));

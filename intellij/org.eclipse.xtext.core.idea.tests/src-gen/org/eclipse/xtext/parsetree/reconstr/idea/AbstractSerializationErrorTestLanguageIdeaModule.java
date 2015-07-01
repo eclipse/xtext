@@ -32,12 +32,12 @@ public class AbstractSerializationErrorTestLanguageIdeaModule extends org.eclips
 		return org.eclipse.xtext.parsetree.reconstr.idea.lang.SerializationErrorTestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
 		return org.eclipse.xtext.parsetree.reconstr.idea.facet.SerializationErrorTestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.parsetree.reconstr.idea.facet.SerializationErrorTestLanguageFacetConfiguration>> bindAbstractFacetType$SerializationErrorTestLanguageFacetConfiguration() {
-		return org.eclipse.xtext.parsetree.reconstr.idea.facet.SerializationErrorTestLanguageFacetType.class;
+	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
+		return org.eclipse.xtext.parsetree.reconstr.idea.facet.SerializationErrorTestLanguageFacetType.TYPEID;
 	}
 	
 	

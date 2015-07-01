@@ -5,12 +5,11 @@ import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class HiddenTokensMergerTestLanguageFacetType  extends AbstractFacetType<HiddenTokensMergerTestLanguageFacetConfiguration> {
-	private static String TYPE_ID_STRING = "org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage";
 
-	public static  FacetTypeId<Facet<HiddenTokensMergerTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<HiddenTokensMergerTestLanguageFacetConfiguration>>(TYPE_ID_STRING);
+	public static final FacetTypeId<Facet<HiddenTokensMergerTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<HiddenTokensMergerTestLanguageFacetConfiguration>>("org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage");
 
 	public HiddenTokensMergerTestLanguageFacetType() {
-		super(TYPEID, TYPE_ID_STRING, "HiddenTokensMergerTestLanguage");
+		super(TYPEID, "org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage", "HiddenTokensMergerTestLanguage");
 		org.eclipse.xtext.parsetree.reconstr.idea.lang.HiddenTokensMergerTestLanguageLanguage.INSTANCE.injectMembers(this);
 	}
 

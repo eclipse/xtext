@@ -5,12 +5,11 @@ import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class HiddenTokenSequencerTestLanguageFacetType  extends AbstractFacetType<HiddenTokenSequencerTestLanguageFacetConfiguration> {
-	private static String TYPE_ID_STRING = "org.eclipse.xtext.serializer.HiddenTokenSequencerTestLanguage";
 
-	public static  FacetTypeId<Facet<HiddenTokenSequencerTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<HiddenTokenSequencerTestLanguageFacetConfiguration>>(TYPE_ID_STRING);
+	public static final FacetTypeId<Facet<HiddenTokenSequencerTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<HiddenTokenSequencerTestLanguageFacetConfiguration>>("org.eclipse.xtext.serializer.HiddenTokenSequencerTestLanguage");
 
 	public HiddenTokenSequencerTestLanguageFacetType() {
-		super(TYPEID, TYPE_ID_STRING, "HiddenTokenSequencerTestLanguage");
+		super(TYPEID, "org.eclipse.xtext.serializer.HiddenTokenSequencerTestLanguage", "HiddenTokenSequencerTestLanguage");
 		org.eclipse.xtext.serializer.idea.lang.HiddenTokenSequencerTestLanguageLanguage.INSTANCE.injectMembers(this);
 	}
 

@@ -5,12 +5,11 @@ import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class XtextTerminalsTestLanguageFacetType  extends AbstractFacetType<XtextTerminalsTestLanguageFacetConfiguration> {
-	private static String TYPE_ID_STRING = "org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage";
 
-	public static  FacetTypeId<Facet<XtextTerminalsTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<XtextTerminalsTestLanguageFacetConfiguration>>(TYPE_ID_STRING);
+	public static final FacetTypeId<Facet<XtextTerminalsTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<XtextTerminalsTestLanguageFacetConfiguration>>("org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage");
 
 	public XtextTerminalsTestLanguageFacetType() {
-		super(TYPEID, TYPE_ID_STRING, "XtextTerminalsTestLanguage");
+		super(TYPEID, "org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage", "XtextTerminalsTestLanguage");
 		org.eclipse.xtext.parser.terminalrules.idea.lang.XtextTerminalsTestLanguageLanguage.INSTANCE.injectMembers(this);
 	}
 

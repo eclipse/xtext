@@ -5,12 +5,11 @@ import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class EnumAndReferenceTestLanguageFacetType  extends AbstractFacetType<EnumAndReferenceTestLanguageFacetConfiguration> {
-	private static String TYPE_ID_STRING = "org.eclipse.xtext.enumrules.EnumAndReferenceTestLanguage";
 
-	public static  FacetTypeId<Facet<EnumAndReferenceTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<EnumAndReferenceTestLanguageFacetConfiguration>>(TYPE_ID_STRING);
+	public static final FacetTypeId<Facet<EnumAndReferenceTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<EnumAndReferenceTestLanguageFacetConfiguration>>("org.eclipse.xtext.enumrules.EnumAndReferenceTestLanguage");
 
 	public EnumAndReferenceTestLanguageFacetType() {
-		super(TYPEID, TYPE_ID_STRING, "EnumAndReferenceTestLanguage");
+		super(TYPEID, "org.eclipse.xtext.enumrules.EnumAndReferenceTestLanguage", "EnumAndReferenceTestLanguage");
 		org.eclipse.xtext.enumrules.idea.lang.EnumAndReferenceTestLanguageLanguage.INSTANCE.injectMembers(this);
 	}
 

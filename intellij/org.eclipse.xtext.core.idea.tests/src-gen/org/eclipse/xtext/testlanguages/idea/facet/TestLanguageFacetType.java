@@ -5,12 +5,11 @@ import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class TestLanguageFacetType  extends AbstractFacetType<TestLanguageFacetConfiguration> {
-	private static String TYPE_ID_STRING = "org.eclipse.xtext.testlanguages.TestLanguage";
 
-	public static  FacetTypeId<Facet<TestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<TestLanguageFacetConfiguration>>(TYPE_ID_STRING);
+	public static final FacetTypeId<Facet<TestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<TestLanguageFacetConfiguration>>("org.eclipse.xtext.testlanguages.TestLanguage");
 
 	public TestLanguageFacetType() {
-		super(TYPEID, TYPE_ID_STRING, "TestLanguage");
+		super(TYPEID, "org.eclipse.xtext.testlanguages.TestLanguage", "TestLanguage");
 		org.eclipse.xtext.testlanguages.idea.lang.TestLanguageLanguage.INSTANCE.injectMembers(this);
 	}
 

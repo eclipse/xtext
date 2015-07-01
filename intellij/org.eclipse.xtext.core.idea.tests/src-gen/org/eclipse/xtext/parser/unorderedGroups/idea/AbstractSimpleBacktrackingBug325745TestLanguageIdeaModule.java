@@ -32,12 +32,12 @@ public class AbstractSimpleBacktrackingBug325745TestLanguageIdeaModule extends o
 		return org.eclipse.xtext.parser.unorderedGroups.idea.lang.SimpleBacktrackingBug325745TestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
 		return org.eclipse.xtext.parser.unorderedGroups.idea.facet.SimpleBacktrackingBug325745TestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.parser.unorderedGroups.idea.facet.SimpleBacktrackingBug325745TestLanguageFacetConfiguration>> bindAbstractFacetType$SimpleBacktrackingBug325745TestLanguageFacetConfiguration() {
-		return org.eclipse.xtext.parser.unorderedGroups.idea.facet.SimpleBacktrackingBug325745TestLanguageFacetType.class;
+	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
+		return org.eclipse.xtext.parser.unorderedGroups.idea.facet.SimpleBacktrackingBug325745TestLanguageFacetType.TYPEID;
 	}
 	
 	

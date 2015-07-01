@@ -32,7 +32,7 @@ public class AbstractXtextIdeaModule extends org.eclipse.xtext.idea.DefaultIdeaM
 		return org.eclipse.xtext.idea.lang.XtextElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
 		return org.eclipse.xtext.idea.facet.XtextFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator

@@ -5,12 +5,11 @@ import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class AssignmentFinderTestLanguageFacetType  extends AbstractFacetType<AssignmentFinderTestLanguageFacetConfiguration> {
-	private static String TYPE_ID_STRING = "org.eclipse.xtext.serializer.AssignmentFinderTestLanguage";
 
-	public static  FacetTypeId<Facet<AssignmentFinderTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<AssignmentFinderTestLanguageFacetConfiguration>>(TYPE_ID_STRING);
+	public static final FacetTypeId<Facet<AssignmentFinderTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<AssignmentFinderTestLanguageFacetConfiguration>>("org.eclipse.xtext.serializer.AssignmentFinderTestLanguage");
 
 	public AssignmentFinderTestLanguageFacetType() {
-		super(TYPEID, TYPE_ID_STRING, "AssignmentFinderTestLanguage");
+		super(TYPEID, "org.eclipse.xtext.serializer.AssignmentFinderTestLanguage", "AssignmentFinderTestLanguage");
 		org.eclipse.xtext.serializer.idea.lang.AssignmentFinderTestLanguageLanguage.INSTANCE.injectMembers(this);
 	}
 

@@ -5,12 +5,11 @@ import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class SequencerTestLanguageFacetType  extends AbstractFacetType<SequencerTestLanguageFacetConfiguration> {
-	private static String TYPE_ID_STRING = "org.eclipse.xtext.serializer.SequencerTestLanguage";
 
-	public static  FacetTypeId<Facet<SequencerTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<SequencerTestLanguageFacetConfiguration>>(TYPE_ID_STRING);
+	public static final FacetTypeId<Facet<SequencerTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<SequencerTestLanguageFacetConfiguration>>("org.eclipse.xtext.serializer.SequencerTestLanguage");
 
 	public SequencerTestLanguageFacetType() {
-		super(TYPEID, TYPE_ID_STRING, "SequencerTestLanguage");
+		super(TYPEID, "org.eclipse.xtext.serializer.SequencerTestLanguage", "SequencerTestLanguage");
 		org.eclipse.xtext.serializer.idea.lang.SequencerTestLanguageLanguage.INSTANCE.injectMembers(this);
 	}
 

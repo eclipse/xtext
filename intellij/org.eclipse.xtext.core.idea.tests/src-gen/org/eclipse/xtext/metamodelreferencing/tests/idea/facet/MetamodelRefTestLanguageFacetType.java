@@ -5,12 +5,11 @@ import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class MetamodelRefTestLanguageFacetType  extends AbstractFacetType<MetamodelRefTestLanguageFacetConfiguration> {
-	private static String TYPE_ID_STRING = "org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestLanguage";
 
-	public static  FacetTypeId<Facet<MetamodelRefTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<MetamodelRefTestLanguageFacetConfiguration>>(TYPE_ID_STRING);
+	public static final FacetTypeId<Facet<MetamodelRefTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<MetamodelRefTestLanguageFacetConfiguration>>("org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestLanguage");
 
 	public MetamodelRefTestLanguageFacetType() {
-		super(TYPEID, TYPE_ID_STRING, "MetamodelRefTestLanguage");
+		super(TYPEID, "org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestLanguage", "MetamodelRefTestLanguage");
 		org.eclipse.xtext.metamodelreferencing.tests.idea.lang.MetamodelRefTestLanguageLanguage.INSTANCE.injectMembers(this);
 	}
 

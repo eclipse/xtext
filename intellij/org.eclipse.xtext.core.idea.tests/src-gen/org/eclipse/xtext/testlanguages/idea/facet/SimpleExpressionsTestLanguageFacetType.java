@@ -5,12 +5,11 @@ import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class SimpleExpressionsTestLanguageFacetType  extends AbstractFacetType<SimpleExpressionsTestLanguageFacetConfiguration> {
-	private static String TYPE_ID_STRING = "org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguage";
 
-	public static  FacetTypeId<Facet<SimpleExpressionsTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<SimpleExpressionsTestLanguageFacetConfiguration>>(TYPE_ID_STRING);
+	public static final FacetTypeId<Facet<SimpleExpressionsTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<SimpleExpressionsTestLanguageFacetConfiguration>>("org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguage");
 
 	public SimpleExpressionsTestLanguageFacetType() {
-		super(TYPEID, TYPE_ID_STRING, "SimpleExpressionsTestLanguage");
+		super(TYPEID, "org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguage", "SimpleExpressionsTestLanguage");
 		org.eclipse.xtext.testlanguages.idea.lang.SimpleExpressionsTestLanguageLanguage.INSTANCE.injectMembers(this);
 	}
 
