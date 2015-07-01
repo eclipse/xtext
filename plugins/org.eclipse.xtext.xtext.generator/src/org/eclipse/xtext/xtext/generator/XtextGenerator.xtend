@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext.generator
 import com.google.inject.Guice
 import com.google.inject.Injector
 import com.google.inject.Module
+import java.io.File
 import java.util.List
 import org.eclipse.emf.mwe.core.WorkflowContext
 import org.eclipse.emf.mwe.core.issues.Issues
@@ -20,7 +21,9 @@ import org.eclipse.xtext.XtextStandaloneSetup
 import org.eclipse.xtext.util.Modules2
 import org.eclipse.xtext.xtext.generator.model.CodeConfig
 import org.eclipse.xtext.xtext.generator.model.IXtextProjectConfig
+import org.eclipse.xtext.xtext.generator.model.TextFileAccess
 import org.eclipse.xtext.xtext.generator.model.XtextProjectConfig
+import org.eclipse.xtext.parser.IEncodingProvider
 
 /**
  * The Xtext language infrastructure generator. Can be configured with {@link IGeneratorFragment}
@@ -60,16 +63,19 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 	
 	protected override invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, Issues issues) {
 		var IXtextProjectConfig project = projectConfig
+		var IEncodingProvider encodingProvider
 		for (language : languageConfigs) {
 			val injector = language.createInjector()
 			language.generate()
 			if (project === null)
 				project = injector.getInstance(IXtextProjectConfig)
+			if (encodingProvider === null)
+				encodingProvider = injector.getInstance(IEncodingProvider)
 		}
 		if (project !== null) {
 			project.generateManifests()
-			project.generatePluginXmls()
 			project.generateModules()
+			project.generatePluginXmls(encodingProvider)
 		}
 	}
 	
@@ -86,19 +92,6 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		project.webTestManifest?.generate()
 	}
 	
-	protected def generatePluginXmls(IXtextProjectConfig project) {
-		project.runtimePluginXml?.generate()
-		project.runtimeTestPluginXml?.generate()
-		project.genericIdePluginXml?.generate()
-		project.genericIdeTestPluginXml?.generate()
-		project.eclipsePluginPluginXml?.generate()
-		project.eclipsePluginTestPluginXml?.generate()
-		project.ideaPluginPluginXml?.generate()
-		project.ideaPluginTestPluginXml?.generate()
-		project.webPluginXml?.generate()
-		project.webTestPluginXml?.generate()
-	}
-	
 	protected def generateModules(IXtextProjectConfig project) {
 		project.runtimeModule?.generate()
 		project.runtimeTestModule?.generate()
@@ -110,6 +103,33 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		project.ideaPluginTestModule?.generate()
 		project.webModule?.generate()
 		project.webTestModule?.generate()
+	}
+	
+	protected def generatePluginXmls(IXtextProjectConfig project, IEncodingProvider encodingProvider) {
+		generatePluginXml(project.runtimePluginXml, encodingProvider)
+		generatePluginXml(project.runtimeTestPluginXml, encodingProvider)
+		generatePluginXml(project.genericIdePluginXml, encodingProvider)
+		generatePluginXml(project.genericIdeTestPluginXml, encodingProvider)
+		generatePluginXml(project.eclipsePluginPluginXml, encodingProvider)
+		generatePluginXml(project.eclipsePluginTestPluginXml, encodingProvider)
+		generatePluginXml(project.ideaPluginPluginXml, encodingProvider)
+		generatePluginXml(project.ideaPluginTestPluginXml, encodingProvider)
+		generatePluginXml(project.webPluginXml, encodingProvider)
+		generatePluginXml(project.webTestPluginXml, encodingProvider)
+	}
+	
+	protected def generatePluginXml(TextFileAccess pluginXml, IEncodingProvider encodingProvider) {
+		if (pluginXml !== null) {
+			pluginXml.encodingProvider = encodingProvider
+			if (new File(pluginXml.path).exists) {
+				if (pluginXml.path.endsWith('.xml')) {
+					pluginXml.path = pluginXml.path + '_gen'
+					pluginXml.writeToFile()
+				}
+			} else {
+				pluginXml.writeToFile()
+			}
+		}
 	}
 	
 	protected def Injector createInjector(LanguageConfig2 languageConfig) {

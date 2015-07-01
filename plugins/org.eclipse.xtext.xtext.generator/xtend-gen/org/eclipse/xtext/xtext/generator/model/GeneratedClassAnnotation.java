@@ -14,6 +14,7 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.XtextGenerator;
 import org.eclipse.xtext.xtext.generator.model.IClassAnnotation;
+import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 
 /**
  * A class annotation configuration for the <code>@Generated</code> annotation.
@@ -27,7 +28,7 @@ public class GeneratedClassAnnotation implements IClassAnnotation {
   private String comment;
   
   @Override
-  public String toString() {
+  public CharSequence generate() {
     final StringBuilder stringBuilder = new StringBuilder("@Generated(");
     boolean _or = false;
     if (this.includeDate) {
@@ -61,11 +62,16 @@ public class GeneratedClassAnnotation implements IClassAnnotation {
       this.operator_add(stringBuilder, "\"");
     }
     this.operator_add(stringBuilder, ")");
-    return stringBuilder.toString();
+    return stringBuilder;
   }
   
   protected String getGeneratorName() {
     return XtextGenerator.class.getName();
+  }
+  
+  @Override
+  public boolean appliesTo(final JavaFileAccess javaFile) {
+    return javaFile.isMarkedAsGenerated();
   }
   
   @Override

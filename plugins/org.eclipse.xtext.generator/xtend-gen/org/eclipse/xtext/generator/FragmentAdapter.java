@@ -66,6 +66,9 @@ public class FragmentAdapter implements IGeneratorFragment2 {
   @Accessors
   private IGeneratorFragment fragment;
   
+  @Accessors
+  private Naming naming;
+  
   private final List<PostProcessor> postProcessors = CollectionLiterals.<PostProcessor>newArrayList();
   
   public void addPostProcessor(final PostProcessor postProcessor) {
@@ -74,10 +77,13 @@ public class FragmentAdapter implements IGeneratorFragment2 {
   
   @Override
   public void generate() {
-    final Naming naming = this.createNaming();
-    final XpandExecutionContext ctx = this.createExecutionContext(naming);
+    if ((this.naming == null)) {
+      Naming _createNaming = this.createNaming();
+      this.naming = _createNaming;
+    }
+    final XpandExecutionContext ctx = this.createExecutionContext();
     if ((this.fragment instanceof IGeneratorFragmentExtension2)) {
-      final LanguageConfig config = this.createLanguageConfig(naming);
+      final LanguageConfig config = this.createLanguageConfig();
       ((IGeneratorFragmentExtension2)this.fragment).generate(config, ctx);
     } else {
       Grammar _grammar = this.languageConfig2.getGrammar();
@@ -127,7 +133,7 @@ public class FragmentAdapter implements IGeneratorFragment2 {
         }
         String _projectNameUi_2 = it.getProjectNameUi();
         it.setUiBasePackage(_projectNameUi_2);
-        String _activator = FragmentAdapter.this.getActivator(it);
+        String _activator = FragmentAdapter.this.getActivator();
         it.setActivatorName(_activator);
         ManifestAccess _runtimeTestManifest = FragmentAdapter.this.projectConfig.getRuntimeTestManifest();
         String _pluginPath_3 = FragmentAdapter.this.getPluginPath(_runtimeTestManifest);
@@ -149,7 +155,7 @@ public class FragmentAdapter implements IGeneratorFragment2 {
     return ObjectExtensions.<Naming>operator_doubleArrow(_naming, _function);
   }
   
-  protected LanguageConfig createLanguageConfig(final Naming naming) {
+  protected LanguageConfig createLanguageConfig() {
     final LanguageConfig config = new LanguageConfig();
     List<String> _loadedResources = this.languageConfig2.getLoadedResources();
     for (final String resource : _loadedResources) {
@@ -162,87 +168,115 @@ public class FragmentAdapter implements IGeneratorFragment2 {
     config.setFileExtensions(_join);
     String _uri = this.languageConfig2.getUri();
     config.setUri(_uri);
-    config.registerNaming(naming);
+    config.registerNaming(this.naming);
     return config;
   }
   
-  protected XpandExecutionContext createExecutionContext(final Naming naming) {
+  protected XpandExecutionContext createExecutionContext() {
     final String encoding = this.encodingProvider.getEncoding(null);
     final OutputImpl output = new OutputImpl();
-    ManifestAccess _runtimeManifest = this.projectConfig.getRuntimeManifest();
-    final String projectNameRt = this.getPluginPath(_runtimeManifest);
-    Outlet _createOutlet = this.createOutlet(false, encoding, Generator.PLUGIN_RT, false, projectNameRt);
+    String _projectNameRt = this.naming.getProjectNameRt();
+    Outlet _createOutlet = this.createOutlet(false, encoding, Generator.PLUGIN_RT, false, _projectNameRt);
     output.addOutlet(_createOutlet);
     IFileSystemAccess2 _runtimeSrc = this.projectConfig.getRuntimeSrc();
-    String _path = this.getPath(_runtimeSrc);
-    Outlet _createOutlet_1 = this.createOutlet(false, encoding, Generator.SRC, false, _path);
-    output.addOutlet(_createOutlet_1);
+    boolean _tripleNotEquals = (_runtimeSrc != null);
+    if (_tripleNotEquals) {
+      IFileSystemAccess2 _runtimeSrc_1 = this.projectConfig.getRuntimeSrc();
+      String _path = this.getPath(_runtimeSrc_1);
+      Outlet _createOutlet_1 = this.createOutlet(false, encoding, Generator.SRC, false, _path);
+      output.addOutlet(_createOutlet_1);
+    }
     IFileSystemAccess2 _runtimeSrcGen = this.projectConfig.getRuntimeSrcGen();
-    String _path_1 = this.getPath(_runtimeSrcGen);
-    Outlet _createOutlet_2 = this.createOutlet(false, encoding, Generator.SRC_GEN, true, _path_1);
-    output.addOutlet(_createOutlet_2);
-    ManifestAccess _runtimeManifest_1 = this.projectConfig.getRuntimeManifest();
-    String _pluginPath = this.getPluginPath(_runtimeManifest_1);
-    String _plus = (_pluginPath + "/model");
+    boolean _tripleNotEquals_1 = (_runtimeSrcGen != null);
+    if (_tripleNotEquals_1) {
+      IFileSystemAccess2 _runtimeSrcGen_1 = this.projectConfig.getRuntimeSrcGen();
+      String _path_1 = this.getPath(_runtimeSrcGen_1);
+      Outlet _createOutlet_2 = this.createOutlet(false, encoding, Generator.SRC_GEN, true, _path_1);
+      output.addOutlet(_createOutlet_2);
+    }
+    String _projectNameRt_1 = this.naming.getProjectNameRt();
+    String _plus = (_projectNameRt_1 + "/model");
     Outlet _createOutlet_3 = this.createOutlet(false, encoding, Generator.MODEL, false, _plus);
     output.addOutlet(_createOutlet_3);
-    ManifestAccess _eclipsePluginManifest = this.projectConfig.getEclipsePluginManifest();
-    boolean _tripleNotEquals = (_eclipsePluginManifest != null);
-    if (_tripleNotEquals) {
-      ManifestAccess _eclipsePluginManifest_1 = this.projectConfig.getEclipsePluginManifest();
-      String _pluginPath_1 = this.getPluginPath(_eclipsePluginManifest_1);
-      Outlet _createOutlet_4 = this.createOutlet(false, encoding, Generator.PLUGIN_UI, false, _pluginPath_1);
+    String _projectNameUi = this.naming.getProjectNameUi();
+    boolean _tripleNotEquals_2 = (_projectNameUi != null);
+    if (_tripleNotEquals_2) {
+      String _projectNameUi_1 = this.naming.getProjectNameUi();
+      Outlet _createOutlet_4 = this.createOutlet(false, encoding, Generator.PLUGIN_UI, false, _projectNameUi_1);
       output.addOutlet(_createOutlet_4);
-      IFileSystemAccess2 _eclipsePluginSrc = this.projectConfig.getEclipsePluginSrc();
-      String _path_2 = this.getPath(_eclipsePluginSrc);
+    }
+    IFileSystemAccess2 _eclipsePluginSrc = this.projectConfig.getEclipsePluginSrc();
+    boolean _tripleNotEquals_3 = (_eclipsePluginSrc != null);
+    if (_tripleNotEquals_3) {
+      IFileSystemAccess2 _eclipsePluginSrc_1 = this.projectConfig.getEclipsePluginSrc();
+      String _path_2 = this.getPath(_eclipsePluginSrc_1);
       Outlet _createOutlet_5 = this.createOutlet(false, encoding, Generator.SRC_UI, false, _path_2);
       output.addOutlet(_createOutlet_5);
-      IFileSystemAccess2 _eclipsePluginSrcGen = this.projectConfig.getEclipsePluginSrcGen();
-      String _path_3 = this.getPath(_eclipsePluginSrcGen);
+    }
+    IFileSystemAccess2 _eclipsePluginSrcGen = this.projectConfig.getEclipsePluginSrcGen();
+    boolean _tripleNotEquals_4 = (_eclipsePluginSrcGen != null);
+    if (_tripleNotEquals_4) {
+      IFileSystemAccess2 _eclipsePluginSrcGen_1 = this.projectConfig.getEclipsePluginSrcGen();
+      String _path_3 = this.getPath(_eclipsePluginSrcGen_1);
       Outlet _createOutlet_6 = this.createOutlet(false, encoding, Generator.SRC_GEN_UI, true, _path_3);
       output.addOutlet(_createOutlet_6);
     }
-    ManifestAccess _genericIdeManifest = this.projectConfig.getGenericIdeManifest();
-    boolean _tripleNotEquals_1 = (_genericIdeManifest != null);
-    if (_tripleNotEquals_1) {
-      ManifestAccess _genericIdeManifest_1 = this.projectConfig.getGenericIdeManifest();
-      String _pluginPath_2 = this.getPluginPath(_genericIdeManifest_1);
-      Outlet _createOutlet_7 = this.createOutlet(false, encoding, Generator.PLUGIN_IDE, false, _pluginPath_2);
+    String _projectNameIde = this.naming.getProjectNameIde();
+    boolean _tripleNotEquals_5 = (_projectNameIde != null);
+    if (_tripleNotEquals_5) {
+      String _projectNameIde_1 = this.naming.getProjectNameIde();
+      Outlet _createOutlet_7 = this.createOutlet(false, encoding, Generator.PLUGIN_IDE, false, _projectNameIde_1);
       output.addOutlet(_createOutlet_7);
-      IFileSystemAccess2 _genericIdeSrc = this.projectConfig.getGenericIdeSrc();
-      String _path_4 = this.getPath(_genericIdeSrc);
+    }
+    IFileSystemAccess2 _genericIdeSrc = this.projectConfig.getGenericIdeSrc();
+    boolean _tripleNotEquals_6 = (_genericIdeSrc != null);
+    if (_tripleNotEquals_6) {
+      IFileSystemAccess2 _genericIdeSrc_1 = this.projectConfig.getGenericIdeSrc();
+      String _path_4 = this.getPath(_genericIdeSrc_1);
       Outlet _createOutlet_8 = this.createOutlet(false, encoding, Generator.SRC_IDE, false, _path_4);
       output.addOutlet(_createOutlet_8);
-      IFileSystemAccess2 _genericIdeSrcGen = this.projectConfig.getGenericIdeSrcGen();
-      String _path_5 = this.getPath(_genericIdeSrcGen);
+    }
+    IFileSystemAccess2 _genericIdeSrcGen = this.projectConfig.getGenericIdeSrcGen();
+    boolean _tripleNotEquals_7 = (_genericIdeSrcGen != null);
+    if (_tripleNotEquals_7) {
+      IFileSystemAccess2 _genericIdeSrcGen_1 = this.projectConfig.getGenericIdeSrcGen();
+      String _path_5 = this.getPath(_genericIdeSrcGen_1);
       Outlet _createOutlet_9 = this.createOutlet(false, encoding, Generator.SRC_GEN_IDE, true, _path_5);
       output.addOutlet(_createOutlet_9);
     }
-    ManifestAccess _runtimeTestManifest = this.projectConfig.getRuntimeTestManifest();
-    boolean _tripleNotEquals_2 = (_runtimeTestManifest != null);
-    if (_tripleNotEquals_2) {
-      ManifestAccess _runtimeTestManifest_1 = this.projectConfig.getRuntimeTestManifest();
-      String _pluginPath_3 = this.getPluginPath(_runtimeTestManifest_1);
-      Outlet _createOutlet_10 = this.createOutlet(false, encoding, Generator.PLUGIN_TEST, false, _pluginPath_3);
+    String _pathTestProject = this.naming.getPathTestProject();
+    boolean _tripleNotEquals_8 = (_pathTestProject != null);
+    if (_tripleNotEquals_8) {
+      String _pathTestProject_1 = this.naming.getPathTestProject();
+      Outlet _createOutlet_10 = this.createOutlet(false, encoding, Generator.PLUGIN_TEST, false, _pathTestProject_1);
       output.addOutlet(_createOutlet_10);
-      IFileSystemAccess2 _runtimeTestSrc = this.projectConfig.getRuntimeTestSrc();
-      String _path_6 = this.getPath(_runtimeTestSrc);
+    }
+    IFileSystemAccess2 _runtimeTestSrc = this.projectConfig.getRuntimeTestSrc();
+    boolean _tripleNotEquals_9 = (_runtimeTestSrc != null);
+    if (_tripleNotEquals_9) {
+      IFileSystemAccess2 _runtimeTestSrc_1 = this.projectConfig.getRuntimeTestSrc();
+      String _path_6 = this.getPath(_runtimeTestSrc_1);
       Outlet _createOutlet_11 = this.createOutlet(false, encoding, Generator.SRC_TEST, false, _path_6);
       output.addOutlet(_createOutlet_11);
-      IFileSystemAccess2 _runtimeTestSrcGen = this.projectConfig.getRuntimeTestSrcGen();
-      String _path_7 = this.getPath(_runtimeTestSrcGen);
+    }
+    IFileSystemAccess2 _runtimeTestSrcGen = this.projectConfig.getRuntimeTestSrcGen();
+    boolean _tripleNotEquals_10 = (_runtimeTestSrcGen != null);
+    if (_tripleNotEquals_10) {
+      IFileSystemAccess2 _runtimeTestSrcGen_1 = this.projectConfig.getRuntimeTestSrcGen();
+      String _path_7 = this.getPath(_runtimeTestSrcGen_1);
       Outlet _createOutlet_12 = this.createOutlet(false, encoding, Generator.SRC_GEN_TEST, true, _path_7);
       output.addOutlet(_createOutlet_12);
     }
     final Map<String, Variable> globalVars = Maps.<String, Variable>newHashMap();
-    Variable _variable = new Variable(Naming.GLOBAL_VAR_NAME, naming);
+    Variable _variable = new Variable(Naming.GLOBAL_VAR_NAME, this.naming);
     globalVars.put(Naming.GLOBAL_VAR_NAME, _variable);
     XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(output, null, globalVars, null, null);
     ResourceManager _resourceManager = execCtx.getResourceManager();
     _resourceManager.setFileEncoding("ISO-8859-1");
     JavaBeansMetaModel _javaBeansMetaModel = new JavaBeansMetaModel();
     execCtx.registerMetaModel(_javaBeansMetaModel);
-    Variable _variable_1 = new Variable("modelPluginID", projectNameRt);
+    String _projectNameRt_2 = this.naming.getProjectNameRt();
+    Variable _variable_1 = new Variable("modelPluginID", _projectNameRt_2);
     ExecutionContext _cloneWithVariable = execCtx.cloneWithVariable(_variable_1);
     execCtx = ((XpandExecutionContextImpl) _cloneWithVariable);
     return execCtx;
@@ -259,9 +293,9 @@ public class FragmentAdapter implements IGeneratorFragment2 {
     return outlet;
   }
   
-  protected String getActivator(final Naming naming) {
+  protected String getActivator() {
     final Grammar grammar = this.languageConfig2.getGrammar();
-    String _basePackageUi = naming.basePackageUi(grammar);
+    String _basePackageUi = this.naming.basePackageUi(grammar);
     String _plus = (_basePackageUi + ".internal.");
     String _name = GrammarUtil.getName(grammar);
     String _plus_1 = (_plus + _name);
@@ -291,5 +325,14 @@ public class FragmentAdapter implements IGeneratorFragment2 {
   
   public void setFragment(final IGeneratorFragment fragment) {
     this.fragment = fragment;
+  }
+  
+  @Pure
+  public Naming getNaming() {
+    return this.naming;
+  }
+  
+  public void setNaming(final Naming naming) {
+    this.naming = naming;
   }
 }

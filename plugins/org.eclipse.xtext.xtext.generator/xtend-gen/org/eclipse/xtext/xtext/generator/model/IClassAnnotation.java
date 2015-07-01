@@ -7,6 +7,8 @@
  */
 package org.eclipse.xtext.xtext.generator.model;
 
+import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
+
 /**
  * Class annotations can be added to the {@link XtextGenerator} workflow component in order
  * to configure specific Java annotations to be added to each generated class.
@@ -16,8 +18,12 @@ public interface IClassAnnotation {
   /**
    * Convert the class annotation to a string suitable for use in Java code generation.
    */
-  @Override
-  public abstract String toString();
+  public abstract CharSequence generate();
+  
+  /**
+   * Determine whether this annotation should be applied to the given Java file.
+   */
+  public abstract boolean appliesTo(final JavaFileAccess javaFile);
   
   /**
    * Return the qualified name of the annotation interface for use in import declarations,

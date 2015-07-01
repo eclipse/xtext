@@ -52,28 +52,27 @@ class ProjectConfigGenerator {
 		 * which accompanies this distribution, and is available at
 		 * http://www.eclipse.org/legal/epl-v10.html
 		 *******************************************************************************/
-		package Â«INTERFACE_NAME.substring(0, INTERFACE_NAME.lastIndexOf('.'))Â»;
+		package «INTERFACE_NAME.substring(0, INTERFACE_NAME.lastIndexOf('.'))»;
 		
 		import org.eclipse.xtext.generator.IFileSystemAccess2;
 		import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 		import org.eclipse.xtext.xtext.generator.model.ModuleAccess;
-		import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 		
 		/**
 		 * Inject an instance of this interface in order to generate code in a generator fragment.
 		 *
-		 * <p>This file has been generated with {@link Â«ProjectConfigGenerator.nameÂ»}.</p>
+		 * <p>This file has been generated with {@link «ProjectConfigGenerator.name»}.</p>
 		 */
-		public interface Â«INTERFACE_NAME.substring(INTERFACE_NAME.lastIndexOf('.') + 1)Â» {
+		public interface «INTERFACE_NAME.substring(INTERFACE_NAME.lastIndexOf('.') + 1)» {
 			
-			Â«FOR p : PROJECTSÂ»
-				IFileSystemAccess2 getÂ«p.toFirstUpperÂ»Src();
-				IFileSystemAccess2 getÂ«p.toFirstUpperÂ»SrcGen();
-				ManifestAccess getÂ«p.toFirstUpperÂ»Manifest();
-				PluginXmlAccess getÂ«p.toFirstUpperÂ»PluginXml();
-				ModuleAccess getÂ«p.toFirstUpperÂ»Module();
+			«FOR p : PROJECTS»
+				IFileSystemAccess2 get«p.toFirstUpper»Src();
+				IFileSystemAccess2 get«p.toFirstUpper»SrcGen();
+				ManifestAccess get«p.toFirstUpper»Manifest();
+				ModuleAccess get«p.toFirstUpper»Module();
+				TextFileAccess get«p.toFirstUpper»PluginXml();
 				
-			Â«ENDFORÂ»
+			«ENDFOR»
 			IFileSystemAccess2 getOrionJsGen();
 			IFileSystemAccess2 getAceJsGen();
 			
@@ -88,7 +87,7 @@ class ProjectConfigGenerator {
 		 * which accompanies this distribution, and is available at
 		 * http://www.eclipse.org/legal/epl-v10.html
 		 *******************************************************************************/
-		package Â«IMPL_NAME.substring(0, IMPL_NAME.lastIndexOf('.'))Â»;
+		package «IMPL_NAME.substring(0, IMPL_NAME.lastIndexOf('.'))»;
 		
 		import com.google.inject.Inject;
 		import org.eclipse.xtext.generator.IFileSystemAccess2;
@@ -96,82 +95,86 @@ class ProjectConfigGenerator {
 		import org.eclipse.xtext.xtext.generator.model.FileSystemAccess;
 		import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 		import org.eclipse.xtext.xtext.generator.model.ModuleAccess;
-		import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 		
 		/**
 		 * Use this class to configure output paths in the XtextGenerator.
 		 *
-		 * <p>This file has been generated with {@link Â«ProjectConfigGenerator.nameÂ»}.</p>
+		 * <p>This file has been generated with {@link «ProjectConfigGenerator.name»}.</p>
 		 */
-		public class Â«IMPL_NAME.substring(IMPL_NAME.lastIndexOf('.') + 1)Â» implements Â«INTERFACE_NAME.substring(INTERFACE_NAME.lastIndexOf('.') + 1)Â» {
+		public class «IMPL_NAME.substring(IMPL_NAME.lastIndexOf('.') + 1)» implements «INTERFACE_NAME.substring(INTERFACE_NAME.lastIndexOf('.') + 1)» {
 			
 			@Inject private IEncodingProvider encodingProvider;
 			
-			Â«FOR p : PROJECTSÂ»
-				private String Â«pÂ»SrcPath;
-				private String Â«pÂ»SrcGenPath;
-				private ManifestAccess Â«pÂ»ManifestAccess;
-				private PluginXmlAccess Â«pÂ»PluginXmlAccess;
-				private ModuleAccess Â«pÂ»ModuleAccess;
-			Â«ENDFORÂ»
+			«FOR p : PROJECTS»
+				private String «p»SrcPath;
+				private String «p»SrcGenPath;
+				private ManifestAccess «p»ManifestAccess;
+				private ModuleAccess «p»ModuleAccess;
+				private TextFileAccess «p»PluginXmlAccess;
+			«ENDFOR»
 			private String orionJsGenPath;
 			private String aceJsGenPath;
 			
 			public void initialize() {
 			}
 			
-			Â«FOR p : PROJECTSÂ»
+			«FOR p : PROJECTS»
 				@Override
-				public IFileSystemAccess2 getÂ«p.toFirstUpperÂ»Src() {
-					if (Â«pÂ»SrcPath != null)
-						return new FileSystemAccess(Â«pÂ»SrcPath, encodingProvider);
+				public IFileSystemAccess2 get«p.toFirstUpper»Src() {
+					if («p»SrcPath != null)
+						return new FileSystemAccess(«p»SrcPath, encodingProvider);
 					else
 						return null;
 				}
 				
-				public void setÂ«p.toFirstUpperÂ»Src(String path) {
-					this.Â«pÂ»SrcPath = path;
+				public void set«p.toFirstUpper»Src(String path) {
+					this.«p»SrcPath = path;
 				}
 				
 				@Override
-				public IFileSystemAccess2 getÂ«p.toFirstUpperÂ»SrcGen() {
-					if (Â«pÂ»SrcGenPath != null)
-						return new FileSystemAccess(Â«pÂ»SrcGenPath, encodingProvider);
+				public IFileSystemAccess2 get«p.toFirstUpper»SrcGen() {
+					if («p»SrcGenPath != null)
+						return new FileSystemAccess(«p»SrcGenPath, encodingProvider);
 					else
 						return null;
 				}
 				
-				public void setÂ«p.toFirstUpperÂ»SrcGen(String path) {
-					this.Â«pÂ»SrcGenPath = path;
+				public void set«p.toFirstUpper»SrcGen(String path) {
+					this.«p»SrcGenPath = path;
 				}
 				
 				@Override
-				public ManifestAccess getÂ«p.toFirstUpperÂ»Manifest() {
-					return Â«pÂ»ManifestAccess;
+				public ManifestAccess get«p.toFirstUpper»Manifest() {
+					return «p»ManifestAccess;
 				}
 				
-				public void setÂ«p.toFirstUpperÂ»Manifest(ManifestAccess manifest) {
-					this.Â«pÂ»ManifestAccess = manifest;
-				}
-				
-				@Override
-				public PluginXmlAccess getÂ«p.toFirstUpperÂ»PluginXml() {
-					return Â«pÂ»PluginXmlAccess;
-				}
-				
-				public void setÂ«p.toFirstUpperÂ»PluginXml(PluginXmlAccess pluginXml) {
-					this.Â«pÂ»PluginXmlAccess = pluginXml;
+				public void set«p.toFirstUpper»Manifest(ManifestAccess manifest) {
+					this.«p»ManifestAccess = manifest;
 				}
 				
 				@Override
-				public ModuleAccess getÂ«p.toFirstUpperÂ»Module() {
-					if (Â«pÂ»ModuleAccess == null) {
-						Â«pÂ»ModuleAccess = new ModuleAccess(getÂ«p.toFirstUpperÂ»SrcGen());
+				public ModuleAccess get«p.toFirstUpper»Module() {
+					if («p»ModuleAccess == null) {
+						«p»ModuleAccess = new ModuleAccess(get«p.toFirstUpper»SrcGen());
 					}
-					return Â«pÂ»ModuleAccess;
+					return «p»ModuleAccess;
 				}
 				
-			Â«ENDFORÂ»
+				public void set«p.toFirstUpper»PluginXml(String path) {
+					if (path != null) {
+						this.«p»PluginXmlAccess = new TextFileAccess();
+						this.«p»PluginXmlAccess.setPath(path);
+					} else {
+						this.«p»PluginXmlAccess = null;
+					}
+				}
+				
+				@Override
+				public TextFileAccess get«p.toFirstUpper»PluginXml() {
+					return this.«p»PluginXmlAccess;
+				}
+				
+			«ENDFOR»
 			@Override
 			public IFileSystemAccess2 getOrionJsGen() {
 				if (orionJsGenPath != null)

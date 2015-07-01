@@ -12,6 +12,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.binder.AnnotatedBindingBuilder;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.mwe.core.WorkflowContext;
@@ -20,6 +21,7 @@ import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent2;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -30,7 +32,7 @@ import org.eclipse.xtext.xtext.generator.model.CodeConfig;
 import org.eclipse.xtext.xtext.generator.model.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.ModuleAccess;
-import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
+import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 import org.eclipse.xtext.xtext.generator.model.XtextProjectConfig;
 
 /**
@@ -73,6 +75,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
   @Override
   protected void invokeInternal(final WorkflowContext ctx, final ProgressMonitor monitor, final Issues issues) {
     IXtextProjectConfig project = this.projectConfig;
+    IEncodingProvider encodingProvider = null;
     for (final LanguageConfig2 language : this.languageConfigs) {
       {
         final Injector injector = this.createInjector(language);
@@ -81,12 +84,16 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
           IXtextProjectConfig _instance = injector.<IXtextProjectConfig>getInstance(IXtextProjectConfig.class);
           project = _instance;
         }
+        if ((encodingProvider == null)) {
+          IEncodingProvider _instance_1 = injector.<IEncodingProvider>getInstance(IEncodingProvider.class);
+          encodingProvider = _instance_1;
+        }
       }
     }
     if ((project != null)) {
       this.generateManifests(project);
-      this.generatePluginXmls(project);
       this.generateModules(project);
+      this.generatePluginXmls(project, encodingProvider);
     }
   }
   
@@ -133,49 +140,6 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
     }
   }
   
-  protected void generatePluginXmls(final IXtextProjectConfig project) {
-    PluginXmlAccess _runtimePluginXml = project.getRuntimePluginXml();
-    if (_runtimePluginXml!=null) {
-      _runtimePluginXml.generate();
-    }
-    PluginXmlAccess _runtimeTestPluginXml = project.getRuntimeTestPluginXml();
-    if (_runtimeTestPluginXml!=null) {
-      _runtimeTestPluginXml.generate();
-    }
-    PluginXmlAccess _genericIdePluginXml = project.getGenericIdePluginXml();
-    if (_genericIdePluginXml!=null) {
-      _genericIdePluginXml.generate();
-    }
-    PluginXmlAccess _genericIdeTestPluginXml = project.getGenericIdeTestPluginXml();
-    if (_genericIdeTestPluginXml!=null) {
-      _genericIdeTestPluginXml.generate();
-    }
-    PluginXmlAccess _eclipsePluginPluginXml = project.getEclipsePluginPluginXml();
-    if (_eclipsePluginPluginXml!=null) {
-      _eclipsePluginPluginXml.generate();
-    }
-    PluginXmlAccess _eclipsePluginTestPluginXml = project.getEclipsePluginTestPluginXml();
-    if (_eclipsePluginTestPluginXml!=null) {
-      _eclipsePluginTestPluginXml.generate();
-    }
-    PluginXmlAccess _ideaPluginPluginXml = project.getIdeaPluginPluginXml();
-    if (_ideaPluginPluginXml!=null) {
-      _ideaPluginPluginXml.generate();
-    }
-    PluginXmlAccess _ideaPluginTestPluginXml = project.getIdeaPluginTestPluginXml();
-    if (_ideaPluginTestPluginXml!=null) {
-      _ideaPluginTestPluginXml.generate();
-    }
-    PluginXmlAccess _webPluginXml = project.getWebPluginXml();
-    if (_webPluginXml!=null) {
-      _webPluginXml.generate();
-    }
-    PluginXmlAccess _webTestPluginXml = project.getWebTestPluginXml();
-    if (_webTestPluginXml!=null) {
-      _webTestPluginXml.generate();
-    }
-  }
-  
   protected void generateModules(final IXtextProjectConfig project) {
     ModuleAccess _runtimeModule = project.getRuntimeModule();
     if (_runtimeModule!=null) {
@@ -216,6 +180,50 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
     ModuleAccess _webTestModule = project.getWebTestModule();
     if (_webTestModule!=null) {
       _webTestModule.generate();
+    }
+  }
+  
+  protected void generatePluginXmls(final IXtextProjectConfig project, final IEncodingProvider encodingProvider) {
+    TextFileAccess _runtimePluginXml = project.getRuntimePluginXml();
+    this.generatePluginXml(_runtimePluginXml, encodingProvider);
+    TextFileAccess _runtimeTestPluginXml = project.getRuntimeTestPluginXml();
+    this.generatePluginXml(_runtimeTestPluginXml, encodingProvider);
+    TextFileAccess _genericIdePluginXml = project.getGenericIdePluginXml();
+    this.generatePluginXml(_genericIdePluginXml, encodingProvider);
+    TextFileAccess _genericIdeTestPluginXml = project.getGenericIdeTestPluginXml();
+    this.generatePluginXml(_genericIdeTestPluginXml, encodingProvider);
+    TextFileAccess _eclipsePluginPluginXml = project.getEclipsePluginPluginXml();
+    this.generatePluginXml(_eclipsePluginPluginXml, encodingProvider);
+    TextFileAccess _eclipsePluginTestPluginXml = project.getEclipsePluginTestPluginXml();
+    this.generatePluginXml(_eclipsePluginTestPluginXml, encodingProvider);
+    TextFileAccess _ideaPluginPluginXml = project.getIdeaPluginPluginXml();
+    this.generatePluginXml(_ideaPluginPluginXml, encodingProvider);
+    TextFileAccess _ideaPluginTestPluginXml = project.getIdeaPluginTestPluginXml();
+    this.generatePluginXml(_ideaPluginTestPluginXml, encodingProvider);
+    TextFileAccess _webPluginXml = project.getWebPluginXml();
+    this.generatePluginXml(_webPluginXml, encodingProvider);
+    TextFileAccess _webTestPluginXml = project.getWebTestPluginXml();
+    this.generatePluginXml(_webTestPluginXml, encodingProvider);
+  }
+  
+  protected void generatePluginXml(final TextFileAccess pluginXml, final IEncodingProvider encodingProvider) {
+    if ((pluginXml != null)) {
+      pluginXml.setEncodingProvider(encodingProvider);
+      String _path = pluginXml.getPath();
+      File _file = new File(_path);
+      boolean _exists = _file.exists();
+      if (_exists) {
+        String _path_1 = pluginXml.getPath();
+        boolean _endsWith = _path_1.endsWith(".xml");
+        if (_endsWith) {
+          String _path_2 = pluginXml.getPath();
+          String _plus = (_path_2 + "_gen");
+          pluginXml.setPath(_plus);
+          pluginXml.writeToFile();
+        }
+      } else {
+        pluginXml.writeToFile();
+      }
     }
   }
   

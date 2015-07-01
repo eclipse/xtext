@@ -34,8 +34,8 @@ public class FileSystemAccess implements IFileSystemAccess2 {
   
   public FileSystemAccess(final String path, final IEncodingProvider encodingProvider) {
     this.path = path;
-    URI _createPlatformResourceURI = URI.createPlatformResourceURI(path, true);
-    this.baseUri = _createPlatformResourceURI;
+    URI _createFileURI = URI.createFileURI(path);
+    this.baseUri = _createFileURI;
     this.encodingProvider = encodingProvider;
   }
   

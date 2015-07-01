@@ -28,7 +28,7 @@ class FileSystemAccess implements IFileSystemAccess2 {
 	
 	new(String path, IEncodingProvider encodingProvider) {
 		this.path = path
-		this.baseUri = URI.createPlatformResourceURI(path, true)
+		this.baseUri = URI.createFileURI(path)
 		this.encodingProvider = encodingProvider
 	}
 	
