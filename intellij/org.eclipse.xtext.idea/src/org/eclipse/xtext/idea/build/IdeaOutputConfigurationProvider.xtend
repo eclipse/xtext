@@ -16,13 +16,14 @@ import java.util.Set
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider
 import org.eclipse.xtext.generator.IFileSystemAccess
+import org.eclipse.xtext.generator.IOutputConfigurationProvider
 import org.eclipse.xtext.generator.OutputConfiguration
 import org.eclipse.xtext.generator.OutputConfiguration.SourceMapping
 import org.eclipse.xtext.idea.extensions.RootModelExtensions
 import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration
 import org.eclipse.xtext.idea.facet.AbstractFacetType
 import org.eclipse.xtext.resource.XtextResourceSet
-import org.eclipse.xtext.generator.IOutputConfigurationProvider
+import org.eclipse.xtext.idea.facet.GeneratorConfigurationState
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -30,7 +31,7 @@ import org.eclipse.xtext.generator.IOutputConfigurationProvider
 class IdeaOutputConfigurationProvider implements IContextualOutputConfigurationProvider {
 
 	@Inject(optional=true)
-	AbstractFacetType<AbstractFacetConfiguration> languageFacet
+	AbstractFacetType<AbstractFacetConfiguration<GeneratorConfigurationState>> languageFacet
 	@Inject IOutputConfigurationProvider defaultOutput
 
 	override Set<OutputConfiguration> getOutputConfigurations(Resource context) {

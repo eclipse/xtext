@@ -52,8 +52,8 @@ public class PsiInternalPureXbaseParser extends AbstractPsiAntlrParser {
     public static final int T__58=58;
     public static final int T__16=16;
     public static final int T__51=51;
-    public static final int T__15=15;
     public static final int T__52=52;
+    public static final int T__15=15;
     public static final int T__53=53;
     public static final int T__18=18;
     public static final int T__54=54;
@@ -17251,11 +17251,11 @@ public class PsiInternalPureXbaseParser extends AbstractPsiAntlrParser {
         state.failed=false;
         return success;
     }
-    public final boolean synpred9_PsiInternalPureXbase() {
+    public final boolean synpred26_PsiInternalPureXbase() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred9_PsiInternalPureXbase_fragment(); // can never throw exception
+            synpred26_PsiInternalPureXbase_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -17265,11 +17265,11 @@ public class PsiInternalPureXbaseParser extends AbstractPsiAntlrParser {
         state.failed=false;
         return success;
     }
-    public final boolean synpred26_PsiInternalPureXbase() {
+    public final boolean synpred9_PsiInternalPureXbase() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred26_PsiInternalPureXbase_fragment(); // can never throw exception
+            synpred9_PsiInternalPureXbase_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }

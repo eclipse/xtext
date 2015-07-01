@@ -13,17 +13,18 @@ import com.intellij.facet.Facet;
 import com.intellij.facet.ui.FacetEditorTab;
 import com.intellij.openapi.options.ConfigurationException;
 
-public class GeneratorFacetEditorTab<C extends AbstractFacetConfiguration> extends FacetEditorTab {
-	private GeneratorFacetForm<GeneratorConfigurationState> form;
+public class GeneratorFacetEditorTab<C extends AbstractFacetConfiguration<T>, T extends GeneratorConfigurationState> extends FacetEditorTab {
+
+	private GeneratorFacetForm<T> form;
 
 	private String title;
 
 	private Facet<C> facet;
 
-	public GeneratorFacetEditorTab(final Facet<C> facet, final String title) {
+	public GeneratorFacetEditorTab(Facet<C> facet, GeneratorFacetForm<T> form) {
+		this.form = form;
 		this.facet = facet;
-		this.title = title;
-		this.form = new GeneratorFacetForm<GeneratorConfigurationState>(facet.getModule());
+		this.title = facet.getName() + " facet";
 	}
 
 	@Override

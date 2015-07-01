@@ -13,5 +13,3 @@ class SuperTestLanguageCompletionContributor extends AbstractSuperTestLanguageCo
 		//custom rules here
 	}
 }
-
-

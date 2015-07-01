@@ -2,13 +2,12 @@ package org.eclipse.xtext.metamodelreferencing.tests.idea.facet;
 
 import com.intellij.facet.Facet;
 import com.intellij.facet.FacetTypeId;
-import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
-public class EcoreReferenceTestLanguageFacetType  extends AbstractFacetType<AbstractFacetConfiguration> {
+public class EcoreReferenceTestLanguageFacetType  extends AbstractFacetType<EcoreReferenceTestLanguageFacetConfiguration> {
 	private static String TYPE_ID_STRING = "org.eclipse.xtext.metamodelreferencing.tests.EcoreReferenceTestLanguage";
 
-	public static  FacetTypeId<Facet<AbstractFacetConfiguration>> TYPEID = new FacetTypeId<Facet<AbstractFacetConfiguration>>(TYPE_ID_STRING);
+	public static  FacetTypeId<Facet<EcoreReferenceTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<EcoreReferenceTestLanguageFacetConfiguration>>(TYPE_ID_STRING);
 
 	public EcoreReferenceTestLanguageFacetType() {
 		super(TYPEID, TYPE_ID_STRING, "EcoreReferenceTestLanguage");

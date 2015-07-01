@@ -32,11 +32,11 @@ public class AbstractEcoreReferenceTestLanguageIdeaModule extends org.eclipse.xt
 		return org.eclipse.xtext.metamodelreferencing.tests.idea.lang.EcoreReferenceTestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
 		return org.eclipse.xtext.metamodelreferencing.tests.idea.facet.EcoreReferenceTestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.idea.facet.AbstractFacetConfiguration>> bindAbstractFacetType$AbstractFacetConfiguration() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.metamodelreferencing.tests.idea.facet.EcoreReferenceTestLanguageFacetConfiguration>> bindAbstractFacetType$EcoreReferenceTestLanguageFacetConfiguration() {
 		return org.eclipse.xtext.metamodelreferencing.tests.idea.facet.EcoreReferenceTestLanguageFacetType.class;
 	}
 	

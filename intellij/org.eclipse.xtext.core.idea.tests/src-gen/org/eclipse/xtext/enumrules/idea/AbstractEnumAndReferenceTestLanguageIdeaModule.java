@@ -32,11 +32,11 @@ public class AbstractEnumAndReferenceTestLanguageIdeaModule extends org.eclipse.
 		return org.eclipse.xtext.enumrules.idea.lang.EnumAndReferenceTestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
 		return org.eclipse.xtext.enumrules.idea.facet.EnumAndReferenceTestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.idea.facet.AbstractFacetConfiguration>> bindAbstractFacetType$AbstractFacetConfiguration() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.enumrules.idea.facet.EnumAndReferenceTestLanguageFacetConfiguration>> bindAbstractFacetType$EnumAndReferenceTestLanguageFacetConfiguration() {
 		return org.eclipse.xtext.enumrules.idea.facet.EnumAndReferenceTestLanguageFacetType.class;
 	}
 	

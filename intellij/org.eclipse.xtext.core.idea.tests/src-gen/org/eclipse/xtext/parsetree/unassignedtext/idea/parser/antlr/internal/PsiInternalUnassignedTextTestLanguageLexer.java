@@ -14,8 +14,8 @@ import java.util.ArrayList;
 public class PsiInternalUnassignedTextTestLanguageLexer extends Lexer {
     public static final int RULE_ID=9;
     public static final int RULE_ANY_OTHER=14;
-    public static final int EOF=-1;
     public static final int RULE_SL_COMMENT=12;
+    public static final int EOF=-1;
     public static final int RULE_PLURAL=6;
     public static final int RULE_ML_COMMENT=11;
     public static final int T__19=19;

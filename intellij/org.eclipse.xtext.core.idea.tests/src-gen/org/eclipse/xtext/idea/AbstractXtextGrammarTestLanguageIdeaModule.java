@@ -32,11 +32,11 @@ public class AbstractXtextGrammarTestLanguageIdeaModule extends org.eclipse.xtex
 		return org.eclipse.xtext.idea.lang.XtextGrammarTestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
 		return org.eclipse.xtext.idea.facet.XtextGrammarTestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.idea.facet.AbstractFacetConfiguration>> bindAbstractFacetType$AbstractFacetConfiguration() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.idea.facet.XtextGrammarTestLanguageFacetConfiguration>> bindAbstractFacetType$XtextGrammarTestLanguageFacetConfiguration() {
 		return org.eclipse.xtext.idea.facet.XtextGrammarTestLanguageFacetType.class;
 	}
 	

@@ -19,17 +19,17 @@ public class GeneratorFacetForm<T extends GeneratorConfigurationState> {
   @Extension
   private IdeaWidgetFactory _ideaWidgetFactory = new IdeaWidgetFactory();
   
-  private JCheckBox activated;
+  protected JCheckBox activated;
   
-  private TextFieldWithBrowseButton directory;
+  protected TextFieldWithBrowseButton directory;
   
-  private TextFieldWithBrowseButton testDirectory;
+  protected TextFieldWithBrowseButton testDirectory;
   
-  private JCheckBox createDirectory;
+  protected JCheckBox createDirectory;
   
-  private JCheckBox overwriteFiles;
+  protected JCheckBox overwriteFiles;
   
-  private JCheckBox deleteGenerated;
+  protected JCheckBox deleteGenerated;
   
   private Module module;
   
@@ -37,8 +37,6 @@ public class GeneratorFacetForm<T extends GeneratorConfigurationState> {
   
   public GeneratorFacetForm(final Module module) {
     this.module = module;
-    JComponent _createComponent = this.createComponent();
-    this.rootPanel = _createComponent;
   }
   
   protected JComponent createComponent() {
@@ -54,87 +52,22 @@ public class GeneratorFacetForm<T extends GeneratorConfigurationState> {
             }
           };
           it.row(it, _function);
+          GeneratorFacetForm.this.createGeneralSection(it);
           final Function1<GridBagConstraints, JComponent> _function_1 = new Function1<GridBagConstraints, JComponent>() {
             @Override
             public JComponent apply(final GridBagConstraints it) {
-              JCheckBox _checkBox = GeneratorFacetForm.this._ideaWidgetFactory.checkBox("Compiler is activated");
-              return GeneratorFacetForm.this.activated = _checkBox;
+              return GeneratorFacetForm.this._ideaWidgetFactory.label(" ");
             }
           };
           it.row(it, _function_1);
           final Function1<GridBagConstraints, JComponent> _function_2 = new Function1<GridBagConstraints, JComponent>() {
             @Override
             public JComponent apply(final GridBagConstraints it) {
-              return GeneratorFacetForm.this._ideaWidgetFactory.label(" ");
-            }
-          };
-          it.row(it, _function_2);
-          final Function1<GridBagConstraints, JComponent> _function_3 = new Function1<GridBagConstraints, JComponent>() {
-            @Override
-            public JComponent apply(final GridBagConstraints it) {
               return GeneratorFacetForm.this._ideaWidgetFactory.separator("Output Folder");
             }
           };
-          it.row(it, _function_3);
-          final Function1<GridBagConstraints, JComponent> _function_4 = new Function1<GridBagConstraints, JComponent>() {
-            @Override
-            public JComponent apply(final GridBagConstraints it) {
-              return GeneratorFacetForm.this._ideaWidgetFactory.label("Directory:");
-            }
-          };
-          final Function1<GridBagConstraints, JComponent> _function_5 = new Function1<GridBagConstraints, JComponent>() {
-            @Override
-            public JComponent apply(final GridBagConstraints it) {
-              TextFieldWithBrowseButton _xblockexpression = null;
-              {
-                it.weightx = 1.0;
-                Project _project = GeneratorFacetForm.this.module.getProject();
-                TextFieldWithBrowseButton _browseField = GeneratorFacetForm.this._ideaWidgetFactory.browseField(_project);
-                _xblockexpression = GeneratorFacetForm.this.directory = _browseField;
-              }
-              return _xblockexpression;
-            }
-          };
-          it.row(it, _function_4, _function_5);
-          final Function1<GridBagConstraints, JComponent> _function_6 = new Function1<GridBagConstraints, JComponent>() {
-            @Override
-            public JComponent apply(final GridBagConstraints it) {
-              return GeneratorFacetForm.this._ideaWidgetFactory.label("Test Directory:");
-            }
-          };
-          final Function1<GridBagConstraints, JComponent> _function_7 = new Function1<GridBagConstraints, JComponent>() {
-            @Override
-            public JComponent apply(final GridBagConstraints it) {
-              Project _project = GeneratorFacetForm.this.module.getProject();
-              TextFieldWithBrowseButton _browseField = GeneratorFacetForm.this._ideaWidgetFactory.browseField(_project);
-              return GeneratorFacetForm.this.testDirectory = _browseField;
-            }
-          };
-          it.row(it, _function_6, _function_7);
-          final Function1<GridBagConstraints, JComponent> _function_8 = new Function1<GridBagConstraints, JComponent>() {
-            @Override
-            public JComponent apply(final GridBagConstraints it) {
-              JCheckBox _checkBox = GeneratorFacetForm.this._ideaWidgetFactory.checkBox("Create directory if it doesn\'t exist");
-              return GeneratorFacetForm.this.createDirectory = _checkBox;
-            }
-          };
-          it.row(it, _function_8);
-          final Function1<GridBagConstraints, JComponent> _function_9 = new Function1<GridBagConstraints, JComponent>() {
-            @Override
-            public JComponent apply(final GridBagConstraints it) {
-              JCheckBox _checkBox = GeneratorFacetForm.this._ideaWidgetFactory.checkBox("Overwrite existing files");
-              return GeneratorFacetForm.this.overwriteFiles = _checkBox;
-            }
-          };
-          it.row(it, _function_9);
-          final Function1<GridBagConstraints, JComponent> _function_10 = new Function1<GridBagConstraints, JComponent>() {
-            @Override
-            public JComponent apply(final GridBagConstraints it) {
-              JCheckBox _checkBox = GeneratorFacetForm.this._ideaWidgetFactory.checkBox("Delete generated files");
-              return GeneratorFacetForm.this.deleteGenerated = _checkBox;
-            }
-          };
-          it.row(it, _function_10);
+          it.row(it, _function_2);
+          GeneratorFacetForm.this.createOutputSection(it);
           _xblockexpression = it.expand(it, GridBagConstraints.VERTICAL);
         }
         return _xblockexpression;
@@ -143,7 +76,84 @@ public class GeneratorFacetForm<T extends GeneratorConfigurationState> {
     return this._ideaWidgetFactory.twoColumnPanel(_function);
   }
   
-  public void setData(final GeneratorConfigurationState data) {
+  public IdeaWidgetFactory.TwoColumnPanel createOutputSection(@Extension final IdeaWidgetFactory.TwoColumnPanel it) {
+    IdeaWidgetFactory.TwoColumnPanel _xblockexpression = null;
+    {
+      final Function1<GridBagConstraints, JComponent> _function = new Function1<GridBagConstraints, JComponent>() {
+        @Override
+        public JComponent apply(final GridBagConstraints it) {
+          return GeneratorFacetForm.this._ideaWidgetFactory.label("Directory:");
+        }
+      };
+      final Function1<GridBagConstraints, JComponent> _function_1 = new Function1<GridBagConstraints, JComponent>() {
+        @Override
+        public JComponent apply(final GridBagConstraints it) {
+          TextFieldWithBrowseButton _xblockexpression = null;
+          {
+            it.weightx = 1.0;
+            Project _project = GeneratorFacetForm.this.module.getProject();
+            TextFieldWithBrowseButton _browseField = GeneratorFacetForm.this._ideaWidgetFactory.browseField(_project);
+            _xblockexpression = GeneratorFacetForm.this.directory = _browseField;
+          }
+          return _xblockexpression;
+        }
+      };
+      it.row(it, _function, _function_1);
+      final Function1<GridBagConstraints, JComponent> _function_2 = new Function1<GridBagConstraints, JComponent>() {
+        @Override
+        public JComponent apply(final GridBagConstraints it) {
+          return GeneratorFacetForm.this._ideaWidgetFactory.label("Test Directory:");
+        }
+      };
+      final Function1<GridBagConstraints, JComponent> _function_3 = new Function1<GridBagConstraints, JComponent>() {
+        @Override
+        public JComponent apply(final GridBagConstraints it) {
+          Project _project = GeneratorFacetForm.this.module.getProject();
+          TextFieldWithBrowseButton _browseField = GeneratorFacetForm.this._ideaWidgetFactory.browseField(_project);
+          return GeneratorFacetForm.this.testDirectory = _browseField;
+        }
+      };
+      it.row(it, _function_2, _function_3);
+      final Function1<GridBagConstraints, JComponent> _function_4 = new Function1<GridBagConstraints, JComponent>() {
+        @Override
+        public JComponent apply(final GridBagConstraints it) {
+          JCheckBox _checkBox = GeneratorFacetForm.this._ideaWidgetFactory.checkBox("Create directory if it doesn\'t exist");
+          return GeneratorFacetForm.this.createDirectory = _checkBox;
+        }
+      };
+      it.row(it, _function_4);
+      final Function1<GridBagConstraints, JComponent> _function_5 = new Function1<GridBagConstraints, JComponent>() {
+        @Override
+        public JComponent apply(final GridBagConstraints it) {
+          JCheckBox _checkBox = GeneratorFacetForm.this._ideaWidgetFactory.checkBox("Overwrite existing files");
+          return GeneratorFacetForm.this.overwriteFiles = _checkBox;
+        }
+      };
+      it.row(it, _function_5);
+      final Function1<GridBagConstraints, JComponent> _function_6 = new Function1<GridBagConstraints, JComponent>() {
+        @Override
+        public JComponent apply(final GridBagConstraints it) {
+          JCheckBox _checkBox = GeneratorFacetForm.this._ideaWidgetFactory.checkBox("Delete generated files");
+          return GeneratorFacetForm.this.deleteGenerated = _checkBox;
+        }
+      };
+      _xblockexpression = it.row(it, _function_6);
+    }
+    return _xblockexpression;
+  }
+  
+  public IdeaWidgetFactory.TwoColumnPanel createGeneralSection(@Extension final IdeaWidgetFactory.TwoColumnPanel it) {
+    final Function1<GridBagConstraints, JComponent> _function = new Function1<GridBagConstraints, JComponent>() {
+      @Override
+      public JComponent apply(final GridBagConstraints it) {
+        JCheckBox _checkBox = GeneratorFacetForm.this._ideaWidgetFactory.checkBox("Compiler is activated");
+        return GeneratorFacetForm.this.activated = _checkBox;
+      }
+    };
+    return it.row(it, _function);
+  }
+  
+  public void setData(final T data) {
     boolean _isCreateDirectory = data.isCreateDirectory();
     this.createDirectory.setSelected(_isCreateDirectory);
     boolean _isOverwriteExisting = data.isOverwriteExisting();
@@ -232,6 +242,14 @@ public class GeneratorFacetForm<T extends GeneratorConfigurationState> {
   }
   
   public JComponent getRootComponent() {
+    if ((this.rootPanel == null)) {
+      JComponent _createComponent = this.createComponent();
+      this.rootPanel = _createComponent;
+    }
     return this.rootPanel;
+  }
+  
+  public Module getModule() {
+    return this.module;
   }
 }

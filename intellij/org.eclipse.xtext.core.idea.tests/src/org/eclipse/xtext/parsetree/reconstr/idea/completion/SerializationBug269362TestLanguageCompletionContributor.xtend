@@ -13,5 +13,3 @@ class SerializationBug269362TestLanguageCompletionContributor extends AbstractSe
 		//custom rules here
 	}
 }
-
-

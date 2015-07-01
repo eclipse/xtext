@@ -13,5 +13,3 @@ class PartialSerializationTestLanguageCompletionContributor extends AbstractPart
 		//custom rules here
 	}
 }
-
-

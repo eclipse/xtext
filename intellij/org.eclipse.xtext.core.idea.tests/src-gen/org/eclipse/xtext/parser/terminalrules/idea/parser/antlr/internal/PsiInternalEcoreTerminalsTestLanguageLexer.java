@@ -12,14 +12,14 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class PsiInternalEcoreTerminalsTestLanguageLexer extends Lexer {
-    public static final int RULE_EINT=4;
     public static final int RULE_EDATE=6;
+    public static final int RULE_EDOUBLE=5;
+    public static final int T__10=10;
+    public static final int RULE_EINT=4;
     public static final int RULE_WS=7;
     public static final int EOF=-1;
     public static final int T__9=9;
     public static final int T__8=8;
-    public static final int T__10=10;
-    public static final int RULE_EDOUBLE=5;
 
     // delegates
     // delegators

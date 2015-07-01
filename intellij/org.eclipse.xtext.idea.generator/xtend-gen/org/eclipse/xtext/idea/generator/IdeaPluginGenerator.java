@@ -114,6 +114,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   @Extension
   private XtextIDEAGeneratorExtensions _xtextIDEAGeneratorExtensions;
   
+  @Accessors
+  private boolean srcGenOnly = false;
+  
   @Override
   public void generate(final LanguageConfig config, final XpandExecutionContext ctx) {
     Grammar _grammar = config.getGrammar();
@@ -134,10 +137,16 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     Naming _naming = this.getNaming();
     String _lineDelimiter = _naming.getLineDelimiter();
     this._xtextIDEAGeneratorExtensions.installOutlets(ctx, this.ideaProjectPath, this.encoding, _lineDelimiter);
-    Outlet _srcOutlet = this._xtextIDEAGeneratorExtensions.getSrcOutlet(ctx);
-    String outlet_src = _srcOutlet.getName();
     Outlet _srcGenOutlet = this._xtextIDEAGeneratorExtensions.getSrcGenOutlet(ctx);
     String outlet_src_gen = _srcGenOutlet.getName();
+    String _xifexpression = null;
+    if (this.srcGenOnly) {
+      _xifexpression = outlet_src_gen;
+    } else {
+      Outlet _srcOutlet = this._xtextIDEAGeneratorExtensions.getSrcOutlet(ctx);
+      _xifexpression = _srcOutlet.getName();
+    }
+    String outlet_src = _xifexpression;
     final BindFactory bindFactory = new BindFactory();
     String _antlrTokenFileProvider = this._ideaPluginClassNames.getAntlrTokenFileProvider(grammar);
     bindFactory.addTypeToType("org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider", _antlrTokenFileProvider);
@@ -159,9 +168,14 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     String _elementTypeProviderName = this._ideaPluginClassNames.getElementTypeProviderName(grammar);
     bindFactory.addTypeToTypeSingleton("org.eclipse.xtext.idea.lang.IElementTypeProvider", _elementTypeProviderName);
     String _facetConfiguration = this._ideaPluginClassNames.getFacetConfiguration(grammar);
-    bindFactory.addTypeToType("org.eclipse.xtext.idea.facet.AbstractFacetConfiguration", _facetConfiguration);
+    bindFactory.addTypeToType("org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>", _facetConfiguration);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("org.eclipse.xtext.idea.facet.AbstractFacetType<");
+    String _facetConfiguration_1 = this._ideaPluginClassNames.getFacetConfiguration(grammar);
+    _builder.append(_facetConfiguration_1, "");
+    _builder.append(">");
     String _facetTypeName = this._ideaPluginClassNames.getFacetTypeName(grammar);
-    bindFactory.addTypeToType("org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.idea.facet.AbstractFacetConfiguration>", _facetTypeName);
+    bindFactory.addTypeToType(_builder.toString(), _facetTypeName);
     boolean _doesUseXbase = XbaseGeneratorFragment.doesUseXbase(grammar);
     if (_doesUseXbase) {
       bindFactory.addTypeToType("org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider", "org.eclipse.xtext.idea.common.types.StubBasedTypeScopeProvider");
@@ -188,12 +202,12 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     String _xtendPath_1 = this._ideaPluginClassNames.toXtendPath(_completionContributor);
     CharSequence _compileCompletionContributor = this.compileCompletionContributor(grammar);
     ctx.writeFile(outlet_src, _xtendPath_1, _compileCompletionContributor);
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("META-INF/services/");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("META-INF/services/");
     String _name = ISetup.class.getName();
-    _builder.append(_name, "");
+    _builder_1.append(_name, "");
     CharSequence _compileServicesISetup = this.compileServicesISetup(grammar);
-    ctx.writeFile(outlet_src_gen, _builder.toString(), _compileServicesISetup);
+    ctx.writeFile(outlet_src_gen, _builder_1.toString(), _compileServicesISetup);
     String _abstractCompletionContributor = this._ideaPluginClassNames.getAbstractCompletionContributor(grammar);
     String _javaPath_2 = this._ideaPluginClassNames.toJavaPath(_abstractCompletionContributor);
     CharSequence _compileAbstractCompletionContributor = this.compileAbstractCompletionContributor(grammar);
@@ -266,10 +280,10 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     String _javaPath_18 = this._ideaPluginClassNames.toJavaPath(_facetTypeName_1);
     CharSequence _compileFacetType = this.compileFacetType(grammar);
     ctx.writeFile(outlet_src_gen, _javaPath_18, _compileFacetType);
-    String _facetConfiguration_1 = this._ideaPluginClassNames.getFacetConfiguration(grammar);
-    String _javaPath_19 = this._ideaPluginClassNames.toJavaPath(_facetConfiguration_1);
+    String _facetConfiguration_2 = this._ideaPluginClassNames.getFacetConfiguration(grammar);
+    String _javaPath_19 = this._ideaPluginClassNames.toJavaPath(_facetConfiguration_2);
     CharSequence _compileFacetConfiguration = this.compileFacetConfiguration(grammar);
-    ctx.writeFile(outlet_src_gen, _javaPath_19, _compileFacetConfiguration);
+    ctx.writeFile(outlet_src, _javaPath_19, _compileFacetConfiguration);
     OutputImpl output = new OutputImpl();
     this.addOutlet(output, IdeaPluginGenerator.PLUGIN, false, this.ideaProjectPath);
     this.addOutlet(output, IdeaPluginGenerator.META_INF_PLUGIN, false, (this.ideaProjectPath + "/META-INF"));
@@ -2829,9 +2843,13 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("import com.intellij.openapi.components.Storage;");
     _builder.newLine();
+    _builder.append("import com.intellij.openapi.components.StoragePathMacros;");
+    _builder.newLine();
     _builder.append("import com.intellij.openapi.components.StorageScheme;");
     _builder.newLine();
     _builder.append("import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtext.idea.facet.GeneratorConfigurationState;");
     _builder.newLine();
     _builder.newLine();
     _builder.append("@State(name = \"");
@@ -2840,32 +2858,33 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("Generator\", storages = {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
-    _builder.append("@Storage(id = \"ipr\", file = \"$PROJECT_FILE$\"),");
+    _builder.append("@Storage(id = \"default\", file = StoragePathMacros.PROJECT_FILE),");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("@Storage(id = \"prjDir\", file = \"${PROJECT_CONFIG_DIR$/");
+    _builder.append("@Storage(id = \"dir\", file = StoragePathMacros.PROJECT_CONFIG_DIR");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("+ \"/");
     String _name_1 = grammar.getName();
-    _builder.append(_name_1, "\t\t");
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(_name_1);
+    _builder.append(_simpleName, "\t\t\t\t");
     _builder.append("GeneratorConfig.xml\", scheme = StorageScheme.DIRECTORY_BASED)})");
     _builder.newLineIfNotEmpty();
     _builder.append("public class ");
     String _facetConfiguration_1 = this._ideaPluginClassNames.getFacetConfiguration(grammar);
-    String _simpleName = this._ideaPluginClassNames.toSimpleName(_facetConfiguration_1);
-    _builder.append(_simpleName, "");
-    _builder.append(" extends AbstractFacetConfiguration {");
+    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_facetConfiguration_1);
+    _builder.append(_simpleName_1, "");
+    _builder.append(" extends AbstractFacetConfiguration<GeneratorConfigurationState> {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("@Override");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("protected String getTabTitle() {");
+    _builder.append("protected GeneratorConfigurationState createNewState() {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("return \"");
-    String _name_2 = grammar.getName();
-    _builder.append(_name_2, "\t\t");
-    _builder.append(" facet\";");
-    _builder.newLineIfNotEmpty();
+    _builder.append("return new GeneratorConfigurationState();");
+    _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
@@ -2887,8 +2906,6 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("import com.intellij.facet.FacetTypeId;");
     _builder.newLine();
-    _builder.append("import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;");
-    _builder.newLine();
     _builder.append("import org.eclipse.xtext.idea.facet.AbstractFacetType;");
     _builder.newLine();
     _builder.newLine();
@@ -2896,7 +2913,11 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     String _facetTypeName_1 = this._ideaPluginClassNames.getFacetTypeName(grammar);
     String _simpleName = this._ideaPluginClassNames.toSimpleName(_facetTypeName_1);
     _builder.append(_simpleName, "");
-    _builder.append("  extends AbstractFacetType<AbstractFacetConfiguration> {");
+    _builder.append("  extends AbstractFacetType<");
+    String _facetConfiguration = this._ideaPluginClassNames.getFacetConfiguration(grammar);
+    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_facetConfiguration);
+    _builder.append(_simpleName_1, "");
+    _builder.append("> {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("private static String TYPE_ID_STRING = \"");
@@ -2906,21 +2927,29 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public static  FacetTypeId<Facet<AbstractFacetConfiguration>> TYPEID = new FacetTypeId<Facet<AbstractFacetConfiguration>>(TYPE_ID_STRING);");
-    _builder.newLine();
+    _builder.append("public static  FacetTypeId<Facet<");
+    String _facetConfiguration_1 = this._ideaPluginClassNames.getFacetConfiguration(grammar);
+    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(_facetConfiguration_1);
+    _builder.append(_simpleName_2, "\t");
+    _builder.append(">> TYPEID = new FacetTypeId<Facet<");
+    String _facetConfiguration_2 = this._ideaPluginClassNames.getFacetConfiguration(grammar);
+    String _simpleName_3 = this._ideaPluginClassNames.toSimpleName(_facetConfiguration_2);
+    _builder.append(_simpleName_3, "\t");
+    _builder.append(">>(TYPE_ID_STRING);");
+    _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public ");
     String _facetTypeName_2 = this._ideaPluginClassNames.getFacetTypeName(grammar);
-    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_facetTypeName_2);
-    _builder.append(_simpleName_1, "\t");
+    String _simpleName_4 = this._ideaPluginClassNames.toSimpleName(_facetTypeName_2);
+    _builder.append(_simpleName_4, "\t");
     _builder.append("() {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("super(TYPEID, TYPE_ID_STRING, \"");
     String _name_1 = grammar.getName();
-    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(_name_1);
-    _builder.append(_simpleName_2, "\t\t");
+    String _simpleName_5 = this._ideaPluginClassNames.toSimpleName(_name_1);
+    _builder.append(_simpleName_5, "\t\t");
     _builder.append("\");");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
@@ -2980,5 +3009,14 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   
   public void setDeployable(final boolean deployable) {
     this.deployable = deployable;
+  }
+  
+  @Pure
+  public boolean isSrcGenOnly() {
+    return this.srcGenOnly;
+  }
+  
+  public void setSrcGenOnly(final boolean srcGenOnly) {
+    this.srcGenOnly = srcGenOnly;
   }
 }

@@ -13,5 +13,3 @@ class UnorderedGroupsTestLanguageCompletionContributor extends AbstractUnordered
 		//custom rules here
 	}
 }
-
-

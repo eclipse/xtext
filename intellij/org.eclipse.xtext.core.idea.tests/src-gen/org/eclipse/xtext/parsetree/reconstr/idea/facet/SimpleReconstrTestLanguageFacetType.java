@@ -2,13 +2,12 @@ package org.eclipse.xtext.parsetree.reconstr.idea.facet;
 
 import com.intellij.facet.Facet;
 import com.intellij.facet.FacetTypeId;
-import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
-public class SimpleReconstrTestLanguageFacetType  extends AbstractFacetType<AbstractFacetConfiguration> {
+public class SimpleReconstrTestLanguageFacetType  extends AbstractFacetType<SimpleReconstrTestLanguageFacetConfiguration> {
 	private static String TYPE_ID_STRING = "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage";
 
-	public static  FacetTypeId<Facet<AbstractFacetConfiguration>> TYPEID = new FacetTypeId<Facet<AbstractFacetConfiguration>>(TYPE_ID_STRING);
+	public static  FacetTypeId<Facet<SimpleReconstrTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<SimpleReconstrTestLanguageFacetConfiguration>>(TYPE_ID_STRING);
 
 	public SimpleReconstrTestLanguageFacetType() {
 		super(TYPEID, TYPE_ID_STRING, "SimpleReconstrTestLanguage");

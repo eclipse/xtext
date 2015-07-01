@@ -32,11 +32,11 @@ public class AbstractIndexTestLanguageIdeaModule extends org.eclipse.xtext.idea.
 		return org.eclipse.xtext.index.idea.lang.IndexTestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
 		return org.eclipse.xtext.index.idea.facet.IndexTestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.idea.facet.AbstractFacetConfiguration>> bindAbstractFacetType$AbstractFacetConfiguration() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.index.idea.facet.IndexTestLanguageFacetConfiguration>> bindAbstractFacetType$IndexTestLanguageFacetConfiguration() {
 		return org.eclipse.xtext.index.idea.facet.IndexTestLanguageFacetType.class;
 	}
 	

@@ -13,5 +13,3 @@ class ComplexReconstrTestLanguageCompletionContributor extends AbstractComplexRe
 		//custom rules here
 	}
 }
-
-

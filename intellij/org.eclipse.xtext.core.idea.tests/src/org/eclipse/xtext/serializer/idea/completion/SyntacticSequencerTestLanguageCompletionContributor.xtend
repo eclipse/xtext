@@ -13,5 +13,3 @@ class SyntacticSequencerTestLanguageCompletionContributor extends AbstractSyntac
 		//custom rules here
 	}
 }
-
-

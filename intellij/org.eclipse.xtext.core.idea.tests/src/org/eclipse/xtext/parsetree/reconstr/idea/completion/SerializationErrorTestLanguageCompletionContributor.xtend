@@ -13,5 +13,3 @@ class SerializationErrorTestLanguageCompletionContributor extends AbstractSerial
 		//custom rules here
 	}
 }
-
-

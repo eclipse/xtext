@@ -13,5 +13,3 @@ class SimpleReconstrTestLanguageCompletionContributor extends AbstractSimpleReco
 		//custom rules here
 	}
 }
-
-

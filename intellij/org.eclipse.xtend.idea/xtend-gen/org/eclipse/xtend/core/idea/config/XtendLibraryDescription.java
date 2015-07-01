@@ -45,6 +45,8 @@ public class XtendLibraryDescription extends CustomLibraryDescription {
     }
   }));
   
+  public final static String XTEND_LIBRARY_NAME = "Xtend Library";
+  
   @Override
   public NewLibraryConfiguration createNewLibrary(final JComponent parentComponent, final VirtualFile contextDirectory) {
     NewLibraryConfiguration _xblockexpression = null;
@@ -55,7 +57,7 @@ public class XtendLibraryDescription extends CustomLibraryDescription {
       if (_equals) {
         return null;
       }
-      _xblockexpression = new NewLibraryConfiguration("Xtend Library") {
+      _xblockexpression = new NewLibraryConfiguration(XtendLibraryDescription.XTEND_LIBRARY_NAME) {
         @Override
         public void addRoots(final LibraryEditor editor) {
           String _urlForLibraryRoot = XtendLibraryDescription.this.getUrlForLibraryRoot(Lists.class);

@@ -1,7 +1,7 @@
 package org.eclipse.xtext.parser.indentation.idea;
 
-import org.eclipse.xtext.parser.indentation.IndentationAwareTestLanguageStandaloneSetupGenerated;
 import org.eclipse.xtext.util.Modules2;
+import org.eclipse.xtext.parser.indentation.IndentationAwareTestLanguageStandaloneSetupGenerated;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
