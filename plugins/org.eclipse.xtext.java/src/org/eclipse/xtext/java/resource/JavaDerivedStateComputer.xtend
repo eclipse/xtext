@@ -41,7 +41,7 @@ class JavaDerivedStateComputer {
 		resource.getContents().clear 
 	}
 	
-	def installStubs(Resource resource) {
+	def void installStubs(Resource resource) {
 		val compilationUnit = getCompilationUnit(resource)
 		val parser = new Parser(new ProblemReporter(
 				DefaultErrorHandlingPolicies.proceedWithAllProblems(),

@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext" version="2">
     <resource path="META-INF/MANIFEST.MF">
-        <filter id="923795461">
-            <message_arguments>
-                <message_argument value="2.9.0"/>
-                <message_argument value="2.8.0"/>
-            </message_arguments>
-        </filter>
         <filter comment="version will be generated during buckminster build" id="927989779">
             <message_arguments>
                 <message_argument value="2.9.0"/>
@@ -246,6 +240,15 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="xtend-gen/org/eclipse/xtext/build/BuildRequest.java" type="org.eclipse.xtext.build.BuildRequest">
+        <filter id="640712815">
+            <message_arguments>
+                <message_argument value="UriUtil"/>
+                <message_argument value="BuildRequest"/>
+                <message_argument value="createFolderURI(File)"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="xtend-gen/org/eclipse/xtext/generator/FileSystemAccessQueue.java" type="org.eclipse.xtext.generator.FileSystemAccessQueue">
         <filter id="338792546">
             <message_arguments>
@@ -268,6 +271,36 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="xtend-gen/org/eclipse/xtext/generator/URIBasedFileSystemAccess.java" type="org.eclipse.xtext.generator.URIBasedFileSystemAccess">
+        <filter id="643842064">
+            <message_arguments>
+                <message_argument value="TraceFileNameProvider"/>
+                <message_argument value="URIBasedFileSystemAccess"/>
+                <message_argument value="getTraceFileNameProvider()"/>
+            </message_arguments>
+        </filter>
+        <filter id="643842064">
+            <message_arguments>
+                <message_argument value="TraceRegionSerializer"/>
+                <message_argument value="URIBasedFileSystemAccess"/>
+                <message_argument value="getTraceRegionSerializer()"/>
+            </message_arguments>
+        </filter>
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="TraceFileNameProvider"/>
+                <message_argument value="URIBasedFileSystemAccess"/>
+                <message_argument value="setTraceFileNameProvider(TraceFileNameProvider)"/>
+            </message_arguments>
+        </filter>
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="TraceRegionSerializer"/>
+                <message_argument value="URIBasedFileSystemAccess"/>
+                <message_argument value="setTraceRegionSerializer(TraceRegionSerializer)"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="xtend-gen/org/eclipse/xtext/resource/OutdatedStateManager.java" type="org.eclipse.xtext.resource.OutdatedStateManager">
         <filter id="338792546">
             <message_arguments>
@@ -278,6 +311,31 @@
         <filter id="1143996420">
             <message_arguments>
                 <message_argument value="newCancelIndicator(ResourceSet)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtext/workspace/FileProjectConfig.java" type="org.eclipse.xtext.workspace.FileProjectConfig">
+        <filter id="640712815">
+            <message_arguments>
+                <message_argument value="UriUtil"/>
+                <message_argument value="FileProjectConfig"/>
+                <message_argument value="isPrefixOf(URI, URI)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtext/workspace/FileWorkspaceConfig.java" type="org.eclipse.xtext.workspace.FileWorkspaceConfig">
+        <filter id="640712815">
+            <message_arguments>
+                <message_argument value="UriUtil"/>
+                <message_argument value="FileWorkspaceConfig"/>
+                <message_argument value="createFolderURI(File)"/>
+            </message_arguments>
+        </filter>
+        <filter id="640712815">
+            <message_arguments>
+                <message_argument value="UriUtil"/>
+                <message_argument value="FileWorkspaceConfig"/>
+                <message_argument value="isPrefixOf(URI, URI)"/>
             </message_arguments>
         </filter>
     </resource>

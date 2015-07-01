@@ -42,4 +42,20 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/xbase/GenerateXbase.java" type="org.eclipse.xtext.xbase.GenerateXbase">
+        <filter id="571519004">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.xbase.GenerateXbase.main(String[])"/>
+                <message_argument value="LanguageConfig"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/xbase/jvmmodel/JvmModelTargetURICollector.java" type="org.eclipse.xtext.xbase.jvmmodel.JvmModelTargetURICollector">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="TargetURICollector"/>
+                <message_argument value="JvmModelTargetURICollector"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>

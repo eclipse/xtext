@@ -27,7 +27,6 @@ import org.junit.BeforeClass
 
 import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
 
-@SuppressWarnings("restriction")
 class AbstractContentAssistTest implements ResourceLoadHelper, IJavaProjectProvider {
 	
 	@Inject Provider<XtextResourceSet> resourceSetProvider

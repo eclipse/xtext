@@ -96,7 +96,7 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
           QualifiedName _name_1 = candidate.getName();
           String _string_1 = _qualifiedNameConverter_1.toString(_name_1);
           String _plus = (_string_1 + bracketInfo.brackets);
-          this.addNameAndDescription(result, ((JvmFeature) objectOrProxy), 
+          this.addNameAndDescription(result, ((JvmFeature)objectOrProxy), 
             false, insignificantParameters, _plus, converter);
         } else {
           boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(bracketInfo.brackets);
@@ -104,7 +104,7 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
           IQualifiedNameConverter _qualifiedNameConverter_2 = this.getQualifiedNameConverter();
           QualifiedName _name_2 = candidate.getName();
           String _string_2 = _qualifiedNameConverter_2.toString(_name_2);
-          this.addNameAndDescription(result, ((JvmFeature) objectOrProxy), _not, insignificantParameters, _string_2, converter);
+          this.addNameAndDescription(result, ((JvmFeature)objectOrProxy), _not, insignificantParameters, _string_2, converter);
         }
       } else {
         IQualifiedNameConverter _qualifiedNameConverter_3 = this.getQualifiedNameConverter();

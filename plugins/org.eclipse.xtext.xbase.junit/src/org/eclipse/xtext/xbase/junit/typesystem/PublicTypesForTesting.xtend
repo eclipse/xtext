@@ -20,7 +20,6 @@ import org.eclipse.xtext.util.CancelIndicator
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 class PublicResolvedTypes extends RootResolvedTypes {
 	new(DefaultReentrantTypeResolver resolver) {
 		super(resolver, CancelIndicator.NullImpl)
@@ -47,7 +46,6 @@ class PublicResolvedTypes extends RootResolvedTypes {
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 class PublicStackedResolvedTypes extends StackedResolvedTypes {
 	new(ResolvedTypes parent) {
 		super(parent)
@@ -57,7 +55,6 @@ class PublicStackedResolvedTypes extends StackedResolvedTypes {
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 class PublicReentrantTypeResolver extends DefaultReentrantTypeResolver {
 	
 	override public setTypeComputer(ITypeComputer typeComputer) {

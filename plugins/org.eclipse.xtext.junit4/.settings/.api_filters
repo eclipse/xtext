@@ -17,7 +17,7 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="xtend-gen/org/eclipse/xtext/junit4/builder/AbstractIncrementalBuilderTest.java" type="org.eclipse.xtext.junit4.builder.AbstractIncrementalBuilderTest">
+    <resource path="xtend-gen/org/eclipse/xtext/junit4/build/AbstractIncrementalBuilderTest.java" type="org.eclipse.xtext.junit4.build.AbstractIncrementalBuilderTest">
         <filter id="627060751">
             <message_arguments>
                 <message_argument value="IncrementalBuilder"/>
