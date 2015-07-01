@@ -14,7 +14,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class PublicReentrantTypeResolver extends DefaultReentrantTypeResolver {
   @Override
   public void setTypeComputer(final ITypeComputer typeComputer) {

@@ -21,7 +21,7 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class PublicResolvedTypes extends RootResolvedTypes {
   public PublicResolvedTypes(final DefaultReentrantTypeResolver resolver) {
     super(resolver, CancelIndicator.NullImpl);

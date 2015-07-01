@@ -13,7 +13,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.StackedResolvedTypes;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class PublicStackedResolvedTypes extends StackedResolvedTypes {
   public PublicStackedResolvedTypes(final ResolvedTypes parent) {
     super(parent);

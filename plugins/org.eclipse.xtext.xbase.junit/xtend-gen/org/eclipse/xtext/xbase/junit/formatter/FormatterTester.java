@@ -34,8 +34,11 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.junit.Assert;
 
-@SuppressWarnings("restriction")
+/**
+ * @deprecated use org.eclipse.xtext.junit4.formatter.FormatterTester
+ */
 @Deprecated
+@SuppressWarnings("all")
 public class FormatterTester {
   @Inject
   @Extension

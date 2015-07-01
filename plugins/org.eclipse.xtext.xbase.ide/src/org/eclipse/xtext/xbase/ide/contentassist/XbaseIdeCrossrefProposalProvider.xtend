@@ -49,12 +49,12 @@ class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvider {
 			]
 			if (objectOrProxy instanceof JvmFeature) {
 				if (bracketInfo.brackets.startsWith(" =")) {
-					addNameAndDescription(result, objectOrProxy as JvmFeature,
+					addNameAndDescription(result, objectOrProxy,
 						false, insignificantParameters,
 						qualifiedNameConverter.toString(candidate.name) + bracketInfo.brackets,
 						converter)
 				} else {
-					addNameAndDescription(result, objectOrProxy as JvmFeature,
+					addNameAndDescription(result, objectOrProxy,
 						!bracketInfo.brackets.nullOrEmpty, insignificantParameters,
 						qualifiedNameConverter.toString(candidate.name),
 						converter);
