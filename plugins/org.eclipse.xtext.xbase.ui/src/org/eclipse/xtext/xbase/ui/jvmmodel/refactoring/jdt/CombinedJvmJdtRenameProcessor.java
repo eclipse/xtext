@@ -47,7 +47,7 @@ import com.google.inject.Inject;
  *  
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("restriction")
+@SuppressWarnings({ "restriction", "javadoc" })
 public class CombinedJvmJdtRenameProcessor extends RenameElementProcessor {
 
 	@Inject

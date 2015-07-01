@@ -13,8 +13,10 @@ import org.junit.Assert
 import org.eclipse.xtext.xbase.formatting.FormattingPreferenceValues
 import org.eclipse.xtend.lib.annotations.Accessors
 
-@SuppressWarnings("restriction")
-@Deprecated // use org.eclipse.xtext.junit4.formatter.FormatterTester
+/**
+ * @deprecated use org.eclipse.xtext.junit4.formatter.FormatterTester
+ */
+@Deprecated
 class FormatterTester {
 	@Inject extension ParseHelper<EObject>
 	@Inject IBasicFormatter formatter
@@ -110,7 +112,6 @@ class FormatterTester {
 	}
 }
 
-@SuppressWarnings("restriction")
 @Accessors
 class AssertingFormatterData {
 	MapBasedPreferenceValues config
