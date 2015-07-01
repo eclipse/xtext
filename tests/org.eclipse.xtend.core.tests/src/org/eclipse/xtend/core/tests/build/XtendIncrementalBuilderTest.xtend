@@ -218,7 +218,7 @@ class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest {
 		assertEquals(2, generated.size)
 		assertFalse(generated.values.containsSuffix('xtend-gen/B.java'))
 		assertTrue(generated.values.containsSuffix('xtend-gen/X.java'))
-		assertEquals(uri("xtend-gen/X.java"), indexState.fileMappings.getGenerated(uri('src/A.xtend')).head)
+		assertTrue(indexState.fileMappings.getGenerated(uri('src/A.xtend')).toSet.contains(uri("xtend-gen/X.java")))
 		assertEquals(2, deleted.size)
 		assertTrue(deleted.containsSuffix('xtend-gen/A.java'))
 		assertTrue(deleted.containsSuffix('xtend-gen/.A.java._trace'))
