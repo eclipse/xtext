@@ -19,16 +19,15 @@ public class XtendFacetConfiguration extends AbstractFacetConfiguration {
 	public FacetEditorTab[] createEditorTabs(FacetEditorContext editorContext, FacetValidatorsManager validatorsManager) {
 		GeneratorFacetForm view = new XtendFacetForm(editorContext.getFacet().getModule());
 		@SuppressWarnings("unchecked")
-		GeneratorFacetEditorTab<XtendFacetConfiguration> controller = new GeneratorFacetEditorTab<XtendFacetConfiguration>(
-				editorContext.getFacet(), view);
+		GeneratorFacetEditorTab<XtendFacetConfiguration> controller = new GeneratorFacetEditorTab<XtendFacetConfiguration>(editorContext.getFacet(), view);
 		return new FacetEditorTab[] { controller };
 	}
 
 	@Override
 	protected XtendGeneratorConfigurationState createNewDefaultState() {
-		XtendGeneratorConfigurationState xtendGeneratorConfigurationState = new XtendGeneratorConfigurationState();
-		initDefaults(xtendGeneratorConfigurationState);
-		return xtendGeneratorConfigurationState;
+		XtendGeneratorConfigurationState configurationState = new XtendGeneratorConfigurationState();
+		initDefaults(configurationState);
+		return configurationState;
 	}
 
 }
