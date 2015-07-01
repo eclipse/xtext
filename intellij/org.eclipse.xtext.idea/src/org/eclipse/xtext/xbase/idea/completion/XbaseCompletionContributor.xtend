@@ -7,22 +7,32 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.idea.completion
 
+import com.google.inject.Inject
+import com.intellij.codeInsight.completion.AllClassesGetter
 import com.intellij.codeInsight.completion.CompletionParameters
 import com.intellij.codeInsight.completion.CompletionResultSet
 import com.intellij.codeInsight.completion.CompletionType
+import com.intellij.codeInsight.completion.InsertHandler
+import com.intellij.codeInsight.completion.InsertionContext
 import com.intellij.codeInsight.completion.JavaClassNameCompletionContributor
 import com.intellij.codeInsight.completion.JavaCompletionSorting
 import com.intellij.codeInsight.completion.JavaPsiClassReferenceElement
 import com.intellij.psi.PsiModifier
 import org.eclipse.emf.ecore.EReference
+import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.TypesPackage
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider
 import org.eclipse.xtext.idea.lang.AbstractXtextLanguage
+import org.eclipse.xtext.psi.impl.BaseXtextFile
 import org.eclipse.xtext.xbase.XbasePackage
+import org.eclipse.xtext.xbase.imports.RewritableImportSection
 import org.eclipse.xtext.xtype.XtypePackage
 
 import static com.intellij.patterns.PlatformPatterns.*
 
 class XbaseCompletionContributor extends XtypeCompletionContributor {
+	
+	@Inject ImportAddingInsertHandler importAddingInsertHandler 
 
 	new(AbstractXtextLanguage lang) {
 		super(lang)
@@ -37,11 +47,11 @@ class XbaseCompletionContributor extends XtypeCompletionContributor {
 	}
 
 	protected def completeXImportDeclaration_ImportedType() {
-		completeJavaTypes(XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE)
+		completeJavaTypes(XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, false)[true]
 	}
 
 	protected def completeXConstructorCall_Constructor() {
-		completeJavaTypes(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR) [
+		completeJavaTypes(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, true) [
 			val type = object
 			!type.hasModifierProperty(PsiModifier.ABSTRACT) && !type.interface
 		]
@@ -51,19 +61,24 @@ class XbaseCompletionContributor extends XtypeCompletionContributor {
 		completeJavaTypes(XbasePackage.Literals.XTYPE_LITERAL__TYPE)
 	}
 
-	protected def completeJavaTypes(EReference reference) {
-		completeJavaTypes(reference)[true]
+	protected def void completeJavaTypes(EReference reference) {
+		completeJavaTypes(reference, true)
+	}
+	
+	protected def void completeJavaTypes(EReference reference, boolean addImport ) {
+		completeJavaTypes(reference, addImport)[true]
 	}
 
-	protected def completeJavaTypes(EReference reference, (JavaPsiClassReferenceElement)=>boolean filter) {
+	protected def void completeJavaTypes(EReference reference, boolean addImport, (JavaPsiClassReferenceElement)=>boolean filter) {
 		extend(CompletionType.BASIC, psiElement.withEReference(reference)) [
-			completeJavaTypes($0, $2, filter)
+			completeJavaTypes($0, $2, addImport, filter)
 		]
 	}
 
 	protected def completeJavaTypes(
 		CompletionParameters completionParameters,
 		CompletionResultSet completionResultSet,
+		boolean addImport,
 		(JavaPsiClassReferenceElement)=>boolean filter
 	) {
 		JavaClassNameCompletionContributor.addAllClasses(
@@ -73,10 +88,43 @@ class XbaseCompletionContributor extends XtypeCompletionContributor {
 		) [
 			if (it instanceof JavaPsiClassReferenceElement) {
 				if (filter.apply(it)) {
+					if (addImport) {
+						insertHandler = importAddingInsertHandler
+					}
 					completionResultSet.addElement(it)
 				}
 			}
 		]
+	}
+	
+	static class ImportAddingInsertHandler implements InsertHandler<JavaPsiClassReferenceElement> {
+		
+		@Inject RewritableImportSection.Factory factory
+		
+		override handleInsert(InsertionContext context, JavaPsiClassReferenceElement item) {
+			val file = context.file
+			if (file instanceof BaseXtextFile) {
+				val resource = file.resource
+				val typeProvider = resource.resourceServiceProvider.get(IJvmTypeProvider.Factory).findTypeProvider(resource.resourceSet)
+				val jvmType = typeProvider.findTypeByName(item.qualifiedName)
+				if (jvmType instanceof JvmDeclaredType) {
+					val String simpleName = jvmType.simpleName 
+					context.document.replaceString(context.startOffset, context.tailOffset, simpleName) 
+					val importSection = factory.parse(resource)
+					if (importSection.addImport(jvmType)) {
+						val regions = importSection.rewrite
+						for (reg : regions) {
+							context.document.replaceString(reg.offset, reg.endOffset, reg.text)
+						}
+					}
+				} else {
+					AllClassesGetter.INSERT_FQN.handleInsert(context, item)
+				}
+			} else {
+				throw new IllegalStateException("Not an Xtext psi file "+file) 
+			}
+		}
+		
 	}
 
 }

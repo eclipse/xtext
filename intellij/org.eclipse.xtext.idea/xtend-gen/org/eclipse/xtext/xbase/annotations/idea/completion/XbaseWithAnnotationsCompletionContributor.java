@@ -57,7 +57,7 @@ public class XbaseWithAnnotationsCompletionContributor extends XbaseCompletionCo
         return Boolean.valueOf(_object.isAnnotationType());
       }
     };
-    this.completeJavaTypes(XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, _function);
+    this.completeJavaTypes(XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, true, _function);
   }
   
   protected void completeXAnnotation_Value() {
@@ -116,7 +116,7 @@ public class XbaseWithAnnotationsCompletionContributor extends XbaseCompletionCo
                         return Boolean.valueOf(true);
                       }
                     };
-                    XbaseWithAnnotationsCompletionContributor.this.completeJavaTypes($0, $2, _function_1);
+                    XbaseWithAnnotationsCompletionContributor.this.completeJavaTypes($0, $2, true, _function_1);
                   }
                 }
               }

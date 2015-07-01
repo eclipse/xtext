@@ -7,32 +7,93 @@
  */
 package org.eclipse.xtext.xbase.idea.completion;
 
+import com.google.inject.Inject;
+import com.intellij.codeInsight.completion.AllClassesGetter;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.completion.CompletionType;
+import com.intellij.codeInsight.completion.InsertHandler;
+import com.intellij.codeInsight.completion.InsertionContext;
 import com.intellij.codeInsight.completion.JavaClassNameCompletionContributor;
 import com.intellij.codeInsight.completion.JavaCompletionSorting;
 import com.intellij.codeInsight.completion.JavaPsiClassReferenceElement;
 import com.intellij.codeInsight.completion.PrefixMatcher;
 import com.intellij.codeInsight.lookup.LookupElement;
+import com.intellij.openapi.editor.Document;
 import com.intellij.patterns.PlatformPatterns;
 import com.intellij.patterns.PsiElementPattern;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiModifier;
 import com.intellij.util.Consumer;
 import com.intellij.util.ProcessingContext;
+import java.util.List;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.idea.lang.AbstractXtextLanguage;
+import org.eclipse.xtext.psi.impl.BaseXtextFile;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.idea.completion.XtypeCompletionContributor;
+import org.eclipse.xtext.xbase.imports.RewritableImportSection;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 @SuppressWarnings("all")
 public class XbaseCompletionContributor extends XtypeCompletionContributor {
+  public static class ImportAddingInsertHandler implements InsertHandler<JavaPsiClassReferenceElement> {
+    @Inject
+    private RewritableImportSection.Factory factory;
+    
+    @Override
+    public void handleInsert(final InsertionContext context, final JavaPsiClassReferenceElement item) {
+      final PsiFile file = context.getFile();
+      if ((file instanceof BaseXtextFile)) {
+        final XtextResource resource = ((BaseXtextFile)file).getResource();
+        IResourceServiceProvider _resourceServiceProvider = resource.getResourceServiceProvider();
+        IJvmTypeProvider.Factory _get = _resourceServiceProvider.<IJvmTypeProvider.Factory>get(IJvmTypeProvider.Factory.class);
+        ResourceSet _resourceSet = resource.getResourceSet();
+        final IJvmTypeProvider typeProvider = _get.findTypeProvider(_resourceSet);
+        String _qualifiedName = item.getQualifiedName();
+        final JvmType jvmType = typeProvider.findTypeByName(_qualifiedName);
+        if ((jvmType instanceof JvmDeclaredType)) {
+          final String simpleName = ((JvmDeclaredType)jvmType).getSimpleName();
+          Document _document = context.getDocument();
+          int _startOffset = context.getStartOffset();
+          int _tailOffset = context.getTailOffset();
+          _document.replaceString(_startOffset, _tailOffset, simpleName);
+          final RewritableImportSection importSection = this.factory.parse(resource);
+          boolean _addImport = importSection.addImport(((JvmDeclaredType)jvmType));
+          if (_addImport) {
+            final List<ReplaceRegion> regions = importSection.rewrite();
+            for (final ReplaceRegion reg : regions) {
+              Document _document_1 = context.getDocument();
+              int _offset = reg.getOffset();
+              int _endOffset = reg.getEndOffset();
+              String _text = reg.getText();
+              _document_1.replaceString(_offset, _endOffset, _text);
+            }
+          }
+        } else {
+          AllClassesGetter.INSERT_FQN.handleInsert(context, item);
+        }
+      } else {
+        throw new IllegalStateException(("Not an Xtext psi file " + file));
+      }
+    }
+  }
+  
+  @Inject
+  private XbaseCompletionContributor.ImportAddingInsertHandler importAddingInsertHandler;
+  
   public XbaseCompletionContributor(final AbstractXtextLanguage lang) {
     super(lang);
     this.completeJvmParameterizedTypeReference_Type();
@@ -46,7 +107,13 @@ public class XbaseCompletionContributor extends XtypeCompletionContributor {
   }
   
   protected void completeXImportDeclaration_ImportedType() {
-    this.completeJavaTypes(XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE);
+    final Function1<JavaPsiClassReferenceElement, Boolean> _function = new Function1<JavaPsiClassReferenceElement, Boolean>() {
+      @Override
+      public Boolean apply(final JavaPsiClassReferenceElement it) {
+        return Boolean.valueOf(true);
+      }
+    };
+    this.completeJavaTypes(XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, false, _function);
   }
   
   protected void completeXConstructorCall_Constructor() {
@@ -71,7 +138,7 @@ public class XbaseCompletionContributor extends XtypeCompletionContributor {
         return Boolean.valueOf(_xblockexpression);
       }
     };
-    this.completeJavaTypes(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, _function);
+    this.completeJavaTypes(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, true, _function);
   }
   
   protected void completeXTypeLiteral_Type() {
@@ -79,28 +146,32 @@ public class XbaseCompletionContributor extends XtypeCompletionContributor {
   }
   
   protected void completeJavaTypes(final EReference reference) {
+    this.completeJavaTypes(reference, true);
+  }
+  
+  protected void completeJavaTypes(final EReference reference, final boolean addImport) {
     final Function1<JavaPsiClassReferenceElement, Boolean> _function = new Function1<JavaPsiClassReferenceElement, Boolean>() {
       @Override
       public Boolean apply(final JavaPsiClassReferenceElement it) {
         return Boolean.valueOf(true);
       }
     };
-    this.completeJavaTypes(reference, _function);
+    this.completeJavaTypes(reference, addImport, _function);
   }
   
-  protected void completeJavaTypes(final EReference reference, final Function1<? super JavaPsiClassReferenceElement, ? extends Boolean> filter) {
+  protected void completeJavaTypes(final EReference reference, final boolean addImport, final Function1<? super JavaPsiClassReferenceElement, ? extends Boolean> filter) {
     PsiElementPattern.Capture<PsiElement> _psiElement = PlatformPatterns.psiElement();
     PsiElementPattern.Capture<PsiElement> _withEReference = this._patternExtensions.withEReference(_psiElement, reference);
     final CompletionProvider<CompletionParameters> _function = new CompletionProvider<CompletionParameters>() {
       @Override
       protected void addCompletions(final CompletionParameters $0, final ProcessingContext $1, final CompletionResultSet $2) {
-        XbaseCompletionContributor.this.completeJavaTypes($0, $2, filter);
+        XbaseCompletionContributor.this.completeJavaTypes($0, $2, addImport, filter);
       }
     };
     this.extend(CompletionType.BASIC, _withEReference, _function);
   }
   
-  protected void completeJavaTypes(final CompletionParameters completionParameters, final CompletionResultSet completionResultSet, final Function1<? super JavaPsiClassReferenceElement, ? extends Boolean> filter) {
+  protected void completeJavaTypes(final CompletionParameters completionParameters, final CompletionResultSet completionResultSet, final boolean addImport, final Function1<? super JavaPsiClassReferenceElement, ? extends Boolean> filter) {
     int _invocationCount = completionParameters.getInvocationCount();
     boolean _lessEqualsThan = (_invocationCount <= 2);
     CompletionResultSet _addJavaSorting = JavaCompletionSorting.addJavaSorting(completionParameters, completionResultSet);
@@ -111,6 +182,9 @@ public class XbaseCompletionContributor extends XtypeCompletionContributor {
         if ((it instanceof JavaPsiClassReferenceElement)) {
           Boolean _apply = filter.apply(((JavaPsiClassReferenceElement)it));
           if ((_apply).booleanValue()) {
+            if (addImport) {
+              ((JavaPsiClassReferenceElement)it).setInsertHandler(XbaseCompletionContributor.this.importAddingInsertHandler);
+            }
             completionResultSet.addElement(it);
           }
         }
