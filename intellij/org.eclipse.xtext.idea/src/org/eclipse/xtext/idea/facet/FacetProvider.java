@@ -17,8 +17,10 @@ import com.intellij.openapi.module.Module;
  * @author dhuebner - Initial contribution and API
  */
 public class FacetProvider {
+	@SuppressWarnings("rawtypes")
 	@Inject FacetTypeId typeId;
 	
+	@SuppressWarnings("unchecked")
 	public Facet<? extends AbstractFacetConfiguration> getFacet(Module module) {
 		return FacetManager.getInstance(module).getFacetByType(typeId);
 	}

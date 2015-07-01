@@ -31,6 +31,11 @@ import org.eclipse.xtext.psi.impl.BaseXtextFile
 import static extension com.intellij.testFramework.PlatformTestUtil.*
 import static extension com.intellij.util.ui.tree.TreeUtil.*
 import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent
+import com.intellij.facet.FacetManager
+import com.intellij.facet.FacetTypeRegistry
+import com.intellij.facet.FacetType
+import com.intellij.openapi.application.Application
+import com.intellij.openapi.application.ApplicationManager
 
 class LightToolingTest extends LightCodeInsightFixtureTestCase {
 
@@ -64,8 +69,10 @@ class LightToolingTest extends LightCodeInsightFixtureTestCase {
 				if (languageLevelModuleExtension != null) {
 					languageLevelModuleExtension.languageLevel = LightToolingTest.this.languageLevel
 				}
+				addFacetToModule(module, fileType.language.ID)
 				LightToolingTest.this.configureModule(module, model, contentEntry)
 			}
+	
 
 			override ModuleType<?> getModuleType() {
 				StdModuleTypes.JAVA
@@ -76,6 +83,17 @@ class LightToolingTest extends LightCodeInsightFixtureTestCase {
 			}
 
 		}
+	}
+	
+	public static def void addFacetToModule(Module module, String languageId) {
+		val mnr = FacetManager.getInstance(module)
+		val facetType = FacetTypeRegistry.getInstance().facetTypes.findFirst [FacetType it|
+			it.stringId == languageId
+		]
+		ApplicationManager.application.runWriteAction [|
+			mnr.addFacet(facetType, facetType.defaultFacetName, null)
+			return;
+		]
 	}
 	
 	protected def getSdk() {

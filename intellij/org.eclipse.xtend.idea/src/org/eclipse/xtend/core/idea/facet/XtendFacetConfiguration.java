@@ -26,7 +26,9 @@ public class XtendFacetConfiguration extends AbstractFacetConfiguration {
 
 	@Override
 	protected XtendGeneratorConfigurationState createNewDefaultState() {
-		return new XtendGeneratorConfigurationState();
+		XtendGeneratorConfigurationState xtendGeneratorConfigurationState = new XtendGeneratorConfigurationState();
+		initDefaults(xtendGeneratorConfigurationState);
+		return xtendGeneratorConfigurationState;
 	}
 
 }

@@ -9,6 +9,7 @@ package org.eclipse.xtext.idea.sdomain.idea.tests.containers;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import com.intellij.lang.Language;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ModuleRootModificationUtil;
 import com.intellij.psi.PsiFile;
@@ -26,7 +27,9 @@ import junit.framework.TestCase;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
+import org.eclipse.xtext.idea.sdomain.idea.lang.SDomainFileType;
 import org.eclipse.xtext.idea.sdomain.idea.tests.containers.URIBasedTestResourceDescription;
+import org.eclipse.xtext.idea.tests.LightToolingTest;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -92,6 +95,12 @@ public class ResolveScopeBasedContainerManagerTest extends PlatformTestCase {
     final Module module = _fixture_1.getModule();
     ModuleFixture _fixture_2 = module2FixtureBuilder.getFixture();
     final Module module2 = _fixture_2.getModule();
+    Language _language = SDomainFileType.INSTANCE.getLanguage();
+    String _iD = _language.getID();
+    LightToolingTest.addFacetToModule(module, _iD);
+    Language _language_1 = SDomainFileType.INSTANCE.getLanguage();
+    String _iD_1 = _language_1.getID();
+    LightToolingTest.addFacetToModule(module2, _iD_1);
     ModuleRootModificationUtil.addDependency(module, module2);
     PsiFile[] _configureByFiles = this.myFixture.configureByFiles(
       "/module/file1.sdomain", 

@@ -18,6 +18,12 @@ import java.io.File
 import org.eclipse.xtext.psi.impl.BaseXtextFile
 import org.eclipse.xtext.resource.IContainer
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
+import com.intellij.openapi.module.Module
+import com.intellij.facet.FacetManager
+import com.intellij.facet.FacetTypeRegistry
+import com.intellij.facet.FacetType
+import org.eclipse.xtext.idea.tests.LightToolingTest
+import org.eclipse.xtext.idea.sdomain.idea.lang.SDomainFileType
 
 class ResolveScopeBasedContainerManagerTest extends PlatformTestCase {
 	
@@ -55,6 +61,8 @@ class ResolveScopeBasedContainerManagerTest extends PlatformTestCase {
 		
 		val module = moduleFixtureBuilder.fixture.module
 		val module2 = module2FixtureBuilder.fixture.module
+		LightToolingTest.addFacetToModule(module, SDomainFileType.INSTANCE.language.ID)
+		LightToolingTest.addFacetToModule(module2, SDomainFileType.INSTANCE.language.ID)
 		ModuleRootModificationUtil.addDependency(module, module2)
 		
 		files = myFixture.configureByFiles(

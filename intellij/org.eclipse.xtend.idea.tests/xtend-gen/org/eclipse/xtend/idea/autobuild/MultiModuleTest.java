@@ -17,7 +17,9 @@ import com.intellij.testFramework.PsiTestCase;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import junit.framework.TestCase;
+import org.eclipse.xtend.core.idea.lang.XtendLanguage;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.idea.tests.LightToolingTest;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 
@@ -168,5 +170,13 @@ public class MultiModuleTest extends PsiTestCase {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  @Override
+  protected Module createModule(final String moduleName) {
+    final Module module = super.createModule(moduleName);
+    String _iD = XtendLanguage.INSTANCE.getID();
+    LightToolingTest.addFacetToModule(module, _iD);
+    return module;
   }
 }

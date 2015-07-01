@@ -11,7 +11,6 @@ import com.google.common.collect.Iterators;
 import com.intellij.lang.Language;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import java.util.Iterator;
 import java.util.Set;
 import junit.framework.TestCase;
@@ -21,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
+import org.eclipse.xtext.idea.sdomain.idea.tests.containers.LightSdomainTestCase;
 import org.eclipse.xtext.idea.sdomain.sDomain.Entity;
 import org.eclipse.xtext.idea.sdomain.sDomain.SDomainPackage;
 import org.eclipse.xtext.linking.lazy.CrossReferenceDescription;
@@ -34,7 +34,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 
 @SuppressWarnings("all")
-public class ScopeProviderTest extends LightCodeInsightFixtureTestCase {
+public class ScopeProviderTest extends LightSdomainTestCase {
   public void testImports() {
     final PsiFile file = this.myFixture.configureByText("import.sdomain", "import foo.bar.*");
     StringConcatenation _builder = new StringConcatenation();
