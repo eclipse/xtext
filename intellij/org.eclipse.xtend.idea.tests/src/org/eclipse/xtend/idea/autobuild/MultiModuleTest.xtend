@@ -8,10 +8,18 @@
 package org.eclipse.xtend.idea.autobuild
 
 import com.google.common.io.CharStreams
+import com.intellij.openapi.module.Module
 import com.intellij.openapi.roots.ModuleRootModificationUtil
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.testFramework.PsiTestCase
 import java.io.InputStreamReader
+import org.jetbrains.annotations.NonNls
+import com.intellij.facet.FacetManager
+import org.eclipse.xtend.core.idea.facet.XtendFacetType
+import com.intellij.facet.FacetTypeRegistry
+import com.intellij.facet.Facet
+import org.eclipse.xtext.idea.tests.LightToolingTest
+import org.eclipse.xtend.core.idea.lang.XtendLanguage
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -95,6 +103,12 @@ class MultiModuleTest extends PsiTestCase {
 	def assertFileContains(VirtualFile file, String string) {
 		val result = CharStreams.toString(new InputStreamReader(file.inputStream))
 		assertEquals(string, result)
+	}
+	
+	override protected Module createModule(String moduleName) {
+		val module = super.createModule(moduleName)
+		LightToolingTest.addFacetToModule(module, XtendLanguage.INSTANCE.ID)
+		return module;
 	}
 	
 }
