@@ -58,7 +58,7 @@ abstract class AbstractIncrementalBuilderTest {
 	
 	protected def IndexState build(BuildRequest buildRequest) {
 		clean()
-		this.indexState = incrementalBuilder.build(buildRequest, getLanguages).indexState
+		this.indexState = incrementalBuilder.build(buildRequest, [getLanguages.getResourceServiceProvider(it)]).indexState
 		return indexState
 	}
 	
