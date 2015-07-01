@@ -13,10 +13,15 @@ package org.eclipse.xtext.xtext.generator.model
  */
 interface IClassAnnotation {
 	
-	/** 
+	/**
 	 * Convert the class annotation to a string suitable for use in Java code generation.
 	 */
-	override String toString()
+	def CharSequence generate()
+	
+	/**
+	 * Determine whether this annotation should be applied to the given Java file.
+	 */
+	def boolean appliesTo(JavaFileAccess javaFile)
 
 	/** 
 	 * Return the qualified name of the annotation interface for use in import declarations,

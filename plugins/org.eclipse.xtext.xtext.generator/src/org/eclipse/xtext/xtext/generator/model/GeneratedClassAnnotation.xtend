@@ -24,7 +24,7 @@ class GeneratedClassAnnotation implements IClassAnnotation {
 	@Accessors
 	String comment
 
-	override String toString() {
+	override generate() {
 		val stringBuilder = new StringBuilder('@Generated(')
 		if (includeDate || !Strings.isEmpty(comment)) {
 			stringBuilder += 'value = '
@@ -46,11 +46,15 @@ class GeneratedClassAnnotation implements IClassAnnotation {
 			stringBuilder += '"'
 		}
 		stringBuilder += ')'
-		return stringBuilder.toString()
+		return stringBuilder
 	}
 
 	protected def String getGeneratorName() {
 		return XtextGenerator.name
+	}
+	
+	override appliesTo(JavaFileAccess javaFile) {
+		return javaFile.markedAsGenerated
 	}
 
 	override getAnnotationImport() {

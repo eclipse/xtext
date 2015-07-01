@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtext.generator.model;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.ModuleAccess;
-import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 
 /**
  * Inject an instance of this interface in order to generate code in a generator fragment.
@@ -22,62 +21,62 @@ public interface IXtextProjectConfig {
 	IFileSystemAccess2 getRuntimeSrc();
 	IFileSystemAccess2 getRuntimeSrcGen();
 	ManifestAccess getRuntimeManifest();
-	PluginXmlAccess getRuntimePluginXml();
 	ModuleAccess getRuntimeModule();
+	TextFileAccess getRuntimePluginXml();
 	
 	IFileSystemAccess2 getRuntimeTestSrc();
 	IFileSystemAccess2 getRuntimeTestSrcGen();
 	ManifestAccess getRuntimeTestManifest();
-	PluginXmlAccess getRuntimeTestPluginXml();
 	ModuleAccess getRuntimeTestModule();
+	TextFileAccess getRuntimeTestPluginXml();
 	
 	IFileSystemAccess2 getGenericIdeSrc();
 	IFileSystemAccess2 getGenericIdeSrcGen();
 	ManifestAccess getGenericIdeManifest();
-	PluginXmlAccess getGenericIdePluginXml();
 	ModuleAccess getGenericIdeModule();
+	TextFileAccess getGenericIdePluginXml();
 	
 	IFileSystemAccess2 getGenericIdeTestSrc();
 	IFileSystemAccess2 getGenericIdeTestSrcGen();
 	ManifestAccess getGenericIdeTestManifest();
-	PluginXmlAccess getGenericIdeTestPluginXml();
 	ModuleAccess getGenericIdeTestModule();
+	TextFileAccess getGenericIdeTestPluginXml();
 	
 	IFileSystemAccess2 getEclipsePluginSrc();
 	IFileSystemAccess2 getEclipsePluginSrcGen();
 	ManifestAccess getEclipsePluginManifest();
-	PluginXmlAccess getEclipsePluginPluginXml();
 	ModuleAccess getEclipsePluginModule();
+	TextFileAccess getEclipsePluginPluginXml();
 	
 	IFileSystemAccess2 getEclipsePluginTestSrc();
 	IFileSystemAccess2 getEclipsePluginTestSrcGen();
 	ManifestAccess getEclipsePluginTestManifest();
-	PluginXmlAccess getEclipsePluginTestPluginXml();
 	ModuleAccess getEclipsePluginTestModule();
+	TextFileAccess getEclipsePluginTestPluginXml();
 	
 	IFileSystemAccess2 getIdeaPluginSrc();
 	IFileSystemAccess2 getIdeaPluginSrcGen();
 	ManifestAccess getIdeaPluginManifest();
-	PluginXmlAccess getIdeaPluginPluginXml();
 	ModuleAccess getIdeaPluginModule();
+	TextFileAccess getIdeaPluginPluginXml();
 	
 	IFileSystemAccess2 getIdeaPluginTestSrc();
 	IFileSystemAccess2 getIdeaPluginTestSrcGen();
 	ManifestAccess getIdeaPluginTestManifest();
-	PluginXmlAccess getIdeaPluginTestPluginXml();
 	ModuleAccess getIdeaPluginTestModule();
+	TextFileAccess getIdeaPluginTestPluginXml();
 	
 	IFileSystemAccess2 getWebSrc();
 	IFileSystemAccess2 getWebSrcGen();
 	ManifestAccess getWebManifest();
-	PluginXmlAccess getWebPluginXml();
 	ModuleAccess getWebModule();
+	TextFileAccess getWebPluginXml();
 	
 	IFileSystemAccess2 getWebTestSrc();
 	IFileSystemAccess2 getWebTestSrcGen();
 	ManifestAccess getWebTestManifest();
-	PluginXmlAccess getWebTestPluginXml();
 	ModuleAccess getWebTestModule();
+	TextFileAccess getWebTestPluginXml();
 	
 	IFileSystemAccess2 getOrionJsGen();
 	IFileSystemAccess2 getAceJsGen();
