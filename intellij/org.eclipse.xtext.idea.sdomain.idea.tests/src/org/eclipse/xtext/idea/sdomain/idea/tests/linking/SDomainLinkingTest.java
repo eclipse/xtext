@@ -7,13 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.sdomain.idea.tests.linking;
 
+import org.eclipse.xtext.idea.sdomain.idea.tests.containers.LightSdomainTestCase;
 import org.eclipse.xtext.psi.PsiNamedEObject;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
-import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 
-public class SDomainLinkingTest extends LightCodeInsightFixtureTestCase {
+public class SDomainLinkingTest extends LightSdomainTestCase {
 	
 	@Override
 	protected String getTestDataPath() {

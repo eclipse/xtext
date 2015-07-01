@@ -7,15 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.sdomain.idea.tests.scoping
 
-import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase
 import org.eclipse.xtext.idea.lang.IXtextLanguage
+import org.eclipse.xtext.idea.sdomain.idea.tests.containers.LightSdomainTestCase
+import org.eclipse.xtext.idea.sdomain.sDomain.Entity
+import org.eclipse.xtext.idea.sdomain.sDomain.SDomainPackage
 import org.eclipse.xtext.linking.lazy.CrossReferenceDescription.CrossReferenceDescriptionProvider
 import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.psi.PsiEObject
-import org.eclipse.xtext.idea.sdomain.sDomain.Entity
-import org.eclipse.xtext.idea.sdomain.sDomain.SDomainPackage
 
-class ScopeProviderTest extends LightCodeInsightFixtureTestCase {
+class ScopeProviderTest extends LightSdomainTestCase {
 
 	def void testImports() {
 		val file = myFixture.configureByText("import.sdomain", "import foo.bar.*")

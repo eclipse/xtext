@@ -47,11 +47,13 @@ import java.util.Set
 import java.util.concurrent.BlockingQueue
 import java.util.concurrent.LinkedBlockingQueue
 import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtext.build.BuildRequest
 import org.eclipse.xtext.build.IncrementalBuilder
 import org.eclipse.xtext.build.IndexState
 import org.eclipse.xtext.build.Source2GeneratedMapping
 import org.eclipse.xtext.common.types.descriptions.TypeResourceDescription.ChangedDelta
+import org.eclipse.xtext.idea.facet.FacetProvider
 import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider
 import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider.VirtualFileBasedUriHandler
 import org.eclipse.xtext.idea.shared.IdeaSharedInjectorProvider
@@ -67,9 +69,6 @@ import static org.eclipse.xtext.idea.build.BuildEvent.Type.*
 import static org.eclipse.xtext.idea.build.XtextAutoBuilderComponent.*
 
 import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
-import org.eclipse.emf.ecore.resource.ResourceSet
-import com.intellij.facet.FacetManager
-import org.eclipse.xtext.idea.facet.AbstractFacetType
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -95,6 +94,8 @@ import org.eclipse.xtext.idea.facet.AbstractFacetType
 	@Inject IQualifiedNameConverter qualifiedNameConverter
 	
 	@Inject ChunkedResourceDescriptions chunkedResourceDescriptions
+	
+	@Inject FacetProvider facetProvider
 	
 	Map<Module, Source2GeneratedMapping> module2GeneratedMapping = newHashMap() 
 	
@@ -328,8 +329,19 @@ import org.eclipse.xtext.idea.facet.AbstractFacetType
 	}
 	
 	def getServiceProviderProvider(Module module) {
-		//TODO check for facet
-		return [resourceServiceProviderRegistry.getResourceServiceProvider(it)]
+		return [
+			val serviceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(it)
+			if (serviceProvider != null) {
+				val facetProvider = serviceProvider.get(FacetProvider)
+				if (facetProvider != null) {
+					val facet = facetProvider.getFacet(module)
+					if (facet != null) {
+						return serviceProvider
+					}
+				}
+			}
+			return null
+		]
 	}
 	
 	def createResourceSet(Module module, ResourceDescriptionsData newData) {

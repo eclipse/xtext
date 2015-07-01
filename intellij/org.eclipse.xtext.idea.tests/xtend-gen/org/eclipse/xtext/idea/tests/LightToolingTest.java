@@ -10,10 +10,17 @@ package org.eclipse.xtext.idea.tests;
 import com.google.common.base.Objects;
 import com.intellij.codeInsight.CodeInsightSettings;
 import com.intellij.codeInsight.lookup.LookupElement;
+import com.intellij.facet.Facet;
+import com.intellij.facet.FacetConfiguration;
+import com.intellij.facet.FacetManager;
+import com.intellij.facet.FacetType;
+import com.intellij.facet.FacetTypeRegistry;
 import com.intellij.ide.highlighter.HighlighterFactory;
 import com.intellij.ide.structureView.newStructureView.StructureViewComponent;
 import com.intellij.ide.util.treeView.AbstractTreeStructure;
 import com.intellij.lang.Language;
+import com.intellij.openapi.application.Application;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
@@ -48,6 +55,7 @@ import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.junit4.internal.LineDelimiters;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -95,6 +103,9 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
           LanguageLevel _languageLevel = LightToolingTest.this.getLanguageLevel();
           languageLevelModuleExtension.setLanguageLevel(_languageLevel);
         }
+        Language _language = LightToolingTest.this.fileType.getLanguage();
+        String _iD = _language.getID();
+        LightToolingTest.addFacetToModule(module, _iD);
         LightToolingTest.this.configureModule(module, model, contentEntry);
       }
       
@@ -108,6 +119,30 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
         return LightToolingTest.this.getSdk();
       }
     };
+  }
+  
+  public static void addFacetToModule(final Module module, final String languageId) {
+    final FacetManager mnr = FacetManager.getInstance(module);
+    FacetTypeRegistry _instance = FacetTypeRegistry.getInstance();
+    FacetType[] _facetTypes = _instance.getFacetTypes();
+    final Function1<FacetType, Boolean> _function = new Function1<FacetType, Boolean>() {
+      @Override
+      public Boolean apply(final FacetType it) {
+        String _stringId = it.getStringId();
+        return Boolean.valueOf(Objects.equal(_stringId, languageId));
+      }
+    };
+    final FacetType facetType = IterableExtensions.<FacetType>findFirst(((Iterable<FacetType>)Conversions.doWrapArray(_facetTypes)), _function);
+    Application _application = ApplicationManager.getApplication();
+    final Runnable _function_1 = new Runnable() {
+      @Override
+      public void run() {
+        String _defaultFacetName = facetType.getDefaultFacetName();
+        mnr.<Facet, FacetConfiguration>addFacet(facetType, _defaultFacetName, null);
+        return;
+      }
+    };
+    _application.runWriteAction(_function_1);
   }
   
   protected Sdk getSdk() {

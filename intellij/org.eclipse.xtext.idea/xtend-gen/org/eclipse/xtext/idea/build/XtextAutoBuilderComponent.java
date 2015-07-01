@@ -14,6 +14,7 @@ import com.google.inject.Injector;
 import com.google.inject.Provider;
 import com.intellij.ProjectTopics;
 import com.intellij.compiler.ModuleCompilerUtil;
+import com.intellij.facet.Facet;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
@@ -70,6 +71,8 @@ import org.eclipse.xtext.build.Source2GeneratedMapping;
 import org.eclipse.xtext.common.types.descriptions.TypeResourceDescription;
 import org.eclipse.xtext.idea.build.BuildEvent;
 import org.eclipse.xtext.idea.build.BuildProgressReporter;
+import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
+import org.eclipse.xtext.idea.facet.FacetProvider;
 import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider;
 import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
 import org.eclipse.xtext.idea.shared.IdeaSharedInjectorProvider;
@@ -120,6 +123,9 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   
   @Inject
   private ChunkedResourceDescriptions chunkedResourceDescriptions;
+  
+  @Inject
+  private FacetProvider facetProvider;
   
   private Map<Module, Source2GeneratedMapping> module2GeneratedMapping = CollectionLiterals.<Module, Source2GeneratedMapping>newHashMap();
   
@@ -560,7 +566,20 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     final Function1<URI, IResourceServiceProvider> _function = new Function1<URI, IResourceServiceProvider>() {
       @Override
       public IResourceServiceProvider apply(final URI it) {
-        return XtextAutoBuilderComponent.this.resourceServiceProviderRegistry.getResourceServiceProvider(it);
+        final IResourceServiceProvider serviceProvider = XtextAutoBuilderComponent.this.resourceServiceProviderRegistry.getResourceServiceProvider(it);
+        boolean _notEquals = (!Objects.equal(serviceProvider, null));
+        if (_notEquals) {
+          final FacetProvider facetProvider = serviceProvider.<FacetProvider>get(FacetProvider.class);
+          boolean _notEquals_1 = (!Objects.equal(facetProvider, null));
+          if (_notEquals_1) {
+            final Facet<? extends AbstractFacetConfiguration> facet = facetProvider.getFacet(module);
+            boolean _notEquals_2 = (!Objects.equal(facet, null));
+            if (_notEquals_2) {
+              return serviceProvider;
+            }
+          }
+        }
+        return null;
       }
     };
     return _function;
