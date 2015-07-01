@@ -217,7 +217,10 @@ public class XtendFacetForm extends GeneratorFacetForm {
       boolean _isSelected = this.useJavaCompilerCompliance.isSelected();
       ((XtendGeneratorConfigurationState)data).setUseJavaCompilerCompliance(_isSelected);
       Object _selectedItem = this.targetJavaVersion.getSelectedItem();
-      String _string = _selectedItem.toString();
+      String _string = null;
+      if (_selectedItem!=null) {
+        _string=_selectedItem.toString();
+      }
       ((XtendGeneratorConfigurationState)data).setTargetJavaVersion(_string);
       boolean _isSelected_1 = this.generateSuppressWarnings.isSelected();
       ((XtendGeneratorConfigurationState)data).setGenerateSuppressWarnings(_isSelected_1);

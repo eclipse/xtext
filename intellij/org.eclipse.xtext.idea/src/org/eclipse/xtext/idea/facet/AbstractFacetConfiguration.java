@@ -26,8 +26,8 @@ import com.intellij.openapi.util.WriteExternalException;
 /**
  * @author dhuebner - Initial contribution and API
  */
-public abstract class AbstractFacetConfiguration implements FacetConfiguration, PersistentStateComponent<GeneratorConfigurationState> {
-	private GeneratorConfigurationState state;
+public abstract class AbstractFacetConfiguration<T extends GeneratorConfigurationState> implements FacetConfiguration, PersistentStateComponent<T> {
+	private T state;
 	@Inject
 	private IOutputConfigurationProvider outputConfigDefaults;
 
@@ -35,13 +35,13 @@ public abstract class AbstractFacetConfiguration implements FacetConfiguration, 
 	@SuppressWarnings("unchecked")
 	public FacetEditorTab[] createEditorTabs(FacetEditorContext editorContext, FacetValidatorsManager validatorsManager) {
 		GeneratorFacetForm uiForm = new GeneratorFacetForm(editorContext.getFacet().getModule());
-		GeneratorFacetEditorTab<AbstractFacetConfiguration> facetEditorTab = new GeneratorFacetEditorTab<AbstractFacetConfiguration>(editorContext.getFacet(),
+		GeneratorFacetEditorTab<AbstractFacetConfiguration<GeneratorConfigurationState>> facetEditorTab = new GeneratorFacetEditorTab<AbstractFacetConfiguration<GeneratorConfigurationState>>(editorContext.getFacet(),
 				uiForm);
 		return new FacetEditorTab[] { facetEditorTab };
 	}
 
 	@Override
-	public GeneratorConfigurationState getState() {
+	public T getState() {
 		if (this.state == null) {
 			this.state = createNewDefaultState();
 		}
@@ -49,14 +49,20 @@ public abstract class AbstractFacetConfiguration implements FacetConfiguration, 
 	}
 
 	@Override
-	public void loadState(GeneratorConfigurationState state) {
+	public void loadState(T state) {
 		this.state = state;
 	}
 
-	protected GeneratorConfigurationState createNewDefaultState() {
+	/**
+	 * Use {@link #initDefaults(GeneratorConfigurationState)} to preset default values.
+	 * 
+	 * @return Configuration state to persist.
+	 */
+	protected T createNewDefaultState() {
 		GeneratorConfigurationState state = new GeneratorConfigurationState();
 		initDefaults(state);
-		return state;
+		//TODO make abstract generate this body as default
+		return (T) state;
 	}
 
 	/**
