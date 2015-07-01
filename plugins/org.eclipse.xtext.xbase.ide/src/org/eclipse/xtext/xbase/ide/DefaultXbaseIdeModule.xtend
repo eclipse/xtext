@@ -11,18 +11,17 @@ import com.google.inject.Binder
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalPriorities
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider
 import org.eclipse.xtext.ide.editor.contentassist.IdeCrossrefProposalProvider
+import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator
 import org.eclipse.xtext.service.AbstractGenericModule
 import org.eclipse.xtext.xbase.ide.contentassist.ClasspathBasedIdeTypesProposalProvider
 import org.eclipse.xtext.xbase.ide.contentassist.IIdeTypesProposalProvider
 import org.eclipse.xtext.xbase.ide.contentassist.XbaseIdeContentProposalPriorities
 import org.eclipse.xtext.xbase.ide.contentassist.XbaseIdeContentProposalProvider
 import org.eclipse.xtext.xbase.ide.contentassist.XbaseIdeCrossrefProposalProvider
+import org.eclipse.xtext.xbase.ide.highlighting.XbaseHighlightingCalculator
 import org.eclipse.xtext.xbase.ide.types.ClasspathScanner
 import org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker
 import org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider
-import org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator
-import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator
-import org.eclipse.xtext.xbase.ide.highlighting.XbaseHighlightingCalculator
 
 /**
  * Guice module for generic IDE services for Xbase.
