@@ -81,6 +81,123 @@ class XtendCompletionTest extends LightXtendTest {
 		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("ArrayList"))
 	}
 	
+	def void testAppliedXImportDeclaration() {
+		"import java.util.Array<caret>".complete
+		myFixture.type('\n')
+		assertEquals('import java.util.ArrayList',myFixture.editor.document.text.toString)
+	}
+	
+	def void testAppliedXImportDeclaration_01() {
+		"import ArrayLis<caret>".complete
+		myFixture.type('\n')
+		assertEquals('import java.util.ArrayList',myFixture.editor.document.text.toString)
+	}
+	
+	def void testAppliedTypeReferenceImportsType_01() {
+		'''
+			class MyClass extends Observa<caret> {
+				
+			}
+		'''.toString.complete
+		myFixture.type('\n')
+		assertEquals('''
+			import java.util.Observable
+			
+			class MyClass extends Observable {
+				
+			}
+		'''.toString,myFixture.editor.document.text.toString)
+	}
+	
+	def void testAppliedTypeReferenceImportsType_02() {
+		'''
+			import java.util.Observable
+			
+			class MyClass extends Observab<caret> {
+				
+			}
+		'''.toString.complete
+		myFixture.type('\n')
+		assertEquals('''
+			import java.util.Observable
+			
+			class MyClass extends Observable {
+				
+			}
+		'''.toString,myFixture.editor.document.text.toString)
+	}
+	
+	def void testAppliedTypeReferenceImportsType_03() {
+		'''
+			class MyClass extends LocalCl<caret> {
+				
+			}
+			class LocalClass {}
+		'''.toString.complete
+		myFixture.type('\n')
+		assertEquals('''
+			class MyClass extends LocalClass {
+				
+			}
+			class LocalClass {}
+		'''.toString,myFixture.editor.document.text.toString)
+	}
+	
+	def void testAppliedTypeReferenceImportsType_04() {
+		'''
+			class MyClass {
+				Observ<caret> myField
+			}
+		'''.toString.complete
+		myFixture.type('\n')
+		assertEquals('''
+			import java.util.Observable
+			
+			class MyClass {
+				Observable myField
+			}
+		'''.toString,myFixture.editor.document.text.toString)
+	}
+	
+	def void testAppliedTypeReferenceImportsType_05() {
+		'''
+			class MyClass {
+				def Observ<caret> myMethod() {
+				}
+			}
+		'''.toString.complete
+		myFixture.type('\n')
+		assertEquals('''
+			import java.util.Observable
+			
+			class MyClass {
+				def Observable myMethod() {
+				}
+			}
+		'''.toString,myFixture.editor.document.text.toString)
+	}
+	
+		
+	def void testAppliedTypeReferenceImportsType_06() {
+		'''
+			class MyClass {
+				def void myMethod() {
+					new Observ<caret>
+				}
+			}
+		'''.toString.complete
+		myFixture.type('\n')
+		assertEquals('''
+			import java.util.Observable
+			
+			class MyClass {
+				def void myMethod() {
+					new Observable
+				}
+			}
+		'''.toString,myFixture.editor.document.text.toString)
+	}
+	
 	def void testXConstructorCall_Constructor() {
 		'''
 		   class Foo {
