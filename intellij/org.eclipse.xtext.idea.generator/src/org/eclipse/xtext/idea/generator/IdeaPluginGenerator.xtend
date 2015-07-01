@@ -82,6 +82,9 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	@Inject
 	extension XtextIDEAGeneratorExtensions
 	
+	@Accessors
+	boolean srcGenOnly = false
+	
 	override generate(LanguageConfig config, XpandExecutionContext ctx) {
 		fileExtension = config.getFileExtensions(config.grammar).head
 		
@@ -92,8 +95,9 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	override generate(Grammar grammar, Xtend2ExecutionContext ctx) {
 		ctx.installOutlets(ideaProjectPath, encoding, naming.lineDelimiter)
 		
-		var outlet_src = ctx.srcOutlet.name
 		var outlet_src_gen = ctx.srcGenOutlet.name
+		
+		var outlet_src = if(srcGenOnly) outlet_src_gen else ctx.srcOutlet.name
 		
 		val bindFactory = new BindFactory();
 		bindFactory.addTypeToType('org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider', grammar.antlrTokenFileProvider)
@@ -107,8 +111,8 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		bindFactory.addTypeToType('org.eclipse.xtext.idea.parser.TokenTypeProvider', grammar.tokenTypeProviderName)
 		bindFactory.addTypeToType('com.intellij.lang.ParserDefinition', grammar.parserDefinitionName)
 		bindFactory.addTypeToTypeSingleton('org.eclipse.xtext.idea.lang.IElementTypeProvider', grammar.elementTypeProviderName)
-		bindFactory.addTypeToType('org.eclipse.xtext.idea.facet.AbstractFacetConfiguration', grammar.facetConfiguration)
-		bindFactory.addTypeToType('org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.idea.facet.AbstractFacetConfiguration>', grammar.facetTypeName)
+		bindFactory.addTypeToType('org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>', grammar.facetConfiguration)
+		bindFactory.addTypeToType('''org.eclipse.xtext.idea.facet.AbstractFacetType<«grammar.facetConfiguration»>''', grammar.facetTypeName)
 		
 		if (grammar.doesUseXbase) {
 			bindFactory.addTypeToType('org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider', 'org.eclipse.xtext.idea.common.types.StubBasedTypeScopeProvider')
@@ -143,7 +147,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		ctx.writeFile(outlet_src_gen, grammar.antlrTokenFileProvider.toJavaPath, grammar.compileAntlrTokenFileProvider)
 		ctx.writeFile(outlet_src_gen, grammar.pomDeclarationSearcherName.toJavaPath, grammar.compilePomDeclarationSearcher)
 		ctx.writeFile(outlet_src_gen, grammar.facetTypeName.toJavaPath, grammar.compileFacetType)
-		ctx.writeFile(outlet_src_gen, grammar.facetConfiguration.toJavaPath, grammar.compileFacetConfiguration)
+		ctx.writeFile(outlet_src, grammar.facetConfiguration.toJavaPath, grammar.compileFacetConfiguration)
 		
 		var output = new OutputImpl();
 		output.addOutlet(PLUGIN, false, ideaProjectPath);
@@ -928,16 +932,19 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	
 	import com.intellij.openapi.components.State;
 	import com.intellij.openapi.components.Storage;
+	import com.intellij.openapi.components.StoragePathMacros;
 	import com.intellij.openapi.components.StorageScheme;
 	import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
+	import org.eclipse.xtext.idea.facet.GeneratorConfigurationState;
 	
 	@State(name = "«grammar.name»Generator", storages = {
-			@Storage(id = "ipr", file = "$PROJECT_FILE$"),
-			@Storage(id = "prjDir", file = "${PROJECT_CONFIG_DIR$/«grammar.name»GeneratorConfig.xml", scheme = StorageScheme.DIRECTORY_BASED)})
-	public class «grammar.facetConfiguration.toSimpleName» extends AbstractFacetConfiguration {
+			@Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
+			@Storage(id = "dir", file = StoragePathMacros.PROJECT_CONFIG_DIR
+					+ "/«grammar.name.toSimpleName»GeneratorConfig.xml", scheme = StorageScheme.DIRECTORY_BASED)})
+	public class «grammar.facetConfiguration.toSimpleName» extends AbstractFacetConfiguration<GeneratorConfigurationState> {
 		@Override
-		protected String getTabTitle() {
-			return "«grammar.name» facet";
+		protected GeneratorConfigurationState createNewState() {
+			return new GeneratorConfigurationState();
 		}
 	}
 	'''
@@ -947,13 +954,12 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	
 	import com.intellij.facet.Facet;
 	import com.intellij.facet.FacetTypeId;
-	import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
 	import org.eclipse.xtext.idea.facet.AbstractFacetType;
 	
-	public class «grammar.facetTypeName.toSimpleName»  extends AbstractFacetType<AbstractFacetConfiguration> {
+	public class «grammar.facetTypeName.toSimpleName»  extends AbstractFacetType<«grammar.facetConfiguration.toSimpleName»> {
 		private static String TYPE_ID_STRING = "«grammar.name»";
 	
-		public static  FacetTypeId<Facet<AbstractFacetConfiguration>> TYPEID = new FacetTypeId<Facet<AbstractFacetConfiguration>>(TYPE_ID_STRING);
+		public static  FacetTypeId<Facet<«grammar.facetConfiguration.toSimpleName»>> TYPEID = new FacetTypeId<Facet<«grammar.facetConfiguration.toSimpleName»>>(TYPE_ID_STRING);
 	
 		public «grammar.facetTypeName.toSimpleName»() {
 			super(TYPEID, TYPE_ID_STRING, "«grammar.name.toSimpleName»");
