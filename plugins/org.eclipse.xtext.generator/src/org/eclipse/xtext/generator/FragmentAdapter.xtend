@@ -45,6 +45,9 @@ class FragmentAdapter implements IGeneratorFragment2 {
 	@Accessors
 	IGeneratorFragment fragment
 	
+	@Accessors
+	Naming naming
+	
 	val List<PostProcessor> postProcessors = newArrayList
 	
 	def void addPostProcessor(PostProcessor postProcessor) {
@@ -52,10 +55,11 @@ class FragmentAdapter implements IGeneratorFragment2 {
 	}
 	
 	override generate() {
-		val naming = createNaming()
-		val ctx = createExecutionContext(naming)
+		if (naming === null)
+			naming = createNaming()
+		val ctx = createExecutionContext()
 		if (fragment instanceof IGeneratorFragmentExtension2) {
-			val config = createLanguageConfig(naming)
+			val config = createLanguageConfig()
 			fragment.generate(config, ctx)
 		} else {
 			fragment.generate(languageConfig2.grammar, ctx)
@@ -82,7 +86,7 @@ class FragmentAdapter implements IGeneratorFragment2 {
 		]
 	}
 	
-	protected def LanguageConfig createLanguageConfig(Naming naming) {
+	protected def LanguageConfig createLanguageConfig() {
 		val config = new LanguageConfig
 		for (resource : languageConfig2.loadedResources) {
 			config.addLoadedResource(resource)
@@ -94,37 +98,41 @@ class FragmentAdapter implements IGeneratorFragment2 {
 		return config
 	}
 
-	protected def XpandExecutionContext createExecutionContext(Naming naming) {
+	protected def XpandExecutionContext createExecutionContext() {
 		val encoding = encodingProvider.getEncoding(null)
 		val output = new OutputImpl
 
-		val projectNameRt = projectConfig.runtimeManifest.pluginPath
-		output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_RT, false, projectNameRt))
-		output.addOutlet(createOutlet(false, encoding, Generator.SRC, false, projectConfig.runtimeSrc.path))
-		output.addOutlet(createOutlet(false, encoding, Generator.SRC_GEN, true, projectConfig.runtimeSrcGen.path))
-		output.addOutlet(createOutlet(false, encoding, Generator.MODEL, false, projectConfig.runtimeManifest.pluginPath + "/model"))
-		if (projectConfig.eclipsePluginManifest !== null) {
-			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_UI, false, projectConfig.eclipsePluginManifest.pluginPath))
+		output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_RT, false, naming.projectNameRt))
+		if (projectConfig.runtimeSrc !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.SRC, false, projectConfig.runtimeSrc.path))
+		if (projectConfig.runtimeSrcGen !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.SRC_GEN, true, projectConfig.runtimeSrcGen.path))
+		output.addOutlet(createOutlet(false, encoding, Generator.MODEL, false, naming.projectNameRt + "/model"))
+		if (naming.projectNameUi !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_UI, false, naming.projectNameUi))
+		if (projectConfig.eclipsePluginSrc !== null)
 			output.addOutlet(createOutlet(false, encoding, Generator.SRC_UI, false, projectConfig.eclipsePluginSrc.path))
+		if (projectConfig.eclipsePluginSrcGen !== null)
 			output.addOutlet(createOutlet(false, encoding, Generator.SRC_GEN_UI, true, projectConfig.eclipsePluginSrcGen.path))
-		}
-		if (projectConfig.genericIdeManifest !== null) {
-			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_IDE, false, projectConfig.genericIdeManifest.pluginPath))
+		if (naming.projectNameIde !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_IDE, false, naming.projectNameIde))
+		if (projectConfig.genericIdeSrc !== null)
 			output.addOutlet(createOutlet(false, encoding, Generator.SRC_IDE, false, projectConfig.genericIdeSrc.path))
+		if (projectConfig.genericIdeSrcGen !== null)
 			output.addOutlet(createOutlet(false, encoding, Generator.SRC_GEN_IDE, true, projectConfig.genericIdeSrcGen.path))
-		}
-		if (projectConfig.runtimeTestManifest !== null) {
-			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_TEST, false, projectConfig.runtimeTestManifest.pluginPath));
-			output.addOutlet(createOutlet(false, encoding, Generator.SRC_TEST, false, projectConfig.runtimeTestSrc.path));
-			output.addOutlet(createOutlet(false, encoding, Generator.SRC_GEN_TEST, true, projectConfig.runtimeTestSrcGen.path));
-		}
-		val Map<String, Variable> globalVars = Maps.newHashMap();
+		if (naming.pathTestProject !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_TEST, false, naming.pathTestProject))
+		if (projectConfig.runtimeTestSrc !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.SRC_TEST, false, projectConfig.runtimeTestSrc.path))
+		if (projectConfig.runtimeTestSrcGen !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.SRC_GEN_TEST, true, projectConfig.runtimeTestSrcGen.path))
+		val Map<String, Variable> globalVars = Maps.newHashMap
 		globalVars.put(Naming.GLOBAL_VAR_NAME, new Variable(Naming.GLOBAL_VAR_NAME, naming))
 
 		var execCtx = new XpandExecutionContextImpl(output, null, globalVars, null, null)
 		execCtx.getResourceManager().setFileEncoding('ISO-8859-1')
 		execCtx.registerMetaModel(new JavaBeansMetaModel())
-		execCtx = execCtx.cloneWithVariable(new Variable('modelPluginID', projectNameRt)) as XpandExecutionContextImpl
+		execCtx = execCtx.cloneWithVariable(new Variable('modelPluginID', naming.projectNameRt)) as XpandExecutionContextImpl
 		return execCtx
 	}
 
@@ -137,7 +145,7 @@ class FragmentAdapter implements IGeneratorFragment2 {
 		return outlet;
 	}
 
-	protected def String getActivator(Naming naming) {
+	protected def String getActivator() {
 		val grammar = languageConfig2.grammar
 		return naming.basePackageUi(grammar) + '.internal.' + GrammarUtil.getName(grammar) + 'Activator'
 	}
