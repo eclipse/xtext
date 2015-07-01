@@ -24,8 +24,9 @@ class IdeaEncodingProvider implements IEncodingProvider {
 			return new IEncodingProvider.Runtime().getEncoding(uri)
 		}
 		var file = VirtualFileURIUtil.getVirtualFile(uri)
-		while (file == null && uri.segmentCount > 0) {
-			val parent = uri.trimSegments(1)
+		var parent = uri
+		while (file == null && parent.segmentCount > 0) {
+			parent = parent.trimSegments(1)
 			file = VirtualFileURIUtil.getVirtualFile(parent)
 		}
 		return file?.charset?.name ?: 'UTF-8'
