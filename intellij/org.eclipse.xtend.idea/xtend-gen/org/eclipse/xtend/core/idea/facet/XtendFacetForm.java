@@ -11,6 +11,8 @@ import com.intellij.openapi.module.Module;
 import java.awt.GridBagConstraints;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
+import org.eclipse.xtend.core.idea.facet.XtendGeneratorConfigurationState;
+import org.eclipse.xtext.idea.facet.GeneratorConfigurationState;
 import org.eclipse.xtext.idea.facet.GeneratorFacetForm;
 import org.eclipse.xtext.idea.util.IdeaWidgetFactory;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -84,5 +86,70 @@ public class XtendFacetForm extends GeneratorFacetForm {
       _xblockexpression = it.row(it, _function);
     }
     return _xblockexpression;
+  }
+  
+  @Override
+  public void setData(final GeneratorConfigurationState data) {
+    super.setData(data);
+    if ((data instanceof XtendGeneratorConfigurationState)) {
+      boolean _isUseJavasSourcelevel = ((XtendGeneratorConfigurationState)data).isUseJavasSourcelevel();
+      this.useJavasSourcelevel.setSelected(_isUseJavasSourcelevel);
+      boolean _isGenerateGeneratedAnno = ((XtendGeneratorConfigurationState)data).isGenerateGeneratedAnno();
+      this.generateGeneratedAnno.setSelected(_isGenerateGeneratedAnno);
+      boolean _isGenerateSuppressWarnAnno = ((XtendGeneratorConfigurationState)data).isGenerateSuppressWarnAnno();
+      this.generateSuppressWarnAnno.setSelected(_isGenerateSuppressWarnAnno);
+      boolean _isIgnoreGeneratedJava = ((XtendGeneratorConfigurationState)data).isIgnoreGeneratedJava();
+      this.ignoreGeneratedJava.setSelected(_isIgnoreGeneratedJava);
+    }
+  }
+  
+  @Override
+  public void getData(final GeneratorConfigurationState data) {
+    super.getData(data);
+    if ((data instanceof XtendGeneratorConfigurationState)) {
+      boolean _isSelected = this.useJavasSourcelevel.isSelected();
+      ((XtendGeneratorConfigurationState)data).setUseJavasSourcelevel(_isSelected);
+      boolean _isSelected_1 = this.generateGeneratedAnno.isSelected();
+      ((XtendGeneratorConfigurationState)data).setGenerateGeneratedAnno(_isSelected_1);
+      boolean _isSelected_2 = this.generateSuppressWarnAnno.isSelected();
+      ((XtendGeneratorConfigurationState)data).setGenerateSuppressWarnAnno(_isSelected_2);
+      boolean _isSelected_3 = this.ignoreGeneratedJava.isSelected();
+      ((XtendGeneratorConfigurationState)data).setIgnoreGeneratedJava(_isSelected_3);
+    }
+  }
+  
+  @Override
+  public boolean isModified(final GeneratorConfigurationState data) {
+    boolean _isModified = super.isModified(data);
+    boolean _not = (!_isModified);
+    if (_not) {
+      if ((data instanceof XtendGeneratorConfigurationState)) {
+        boolean _isSelected = this.useJavasSourcelevel.isSelected();
+        boolean _isUseJavasSourcelevel = ((XtendGeneratorConfigurationState)data).isUseJavasSourcelevel();
+        boolean _tripleNotEquals = (Boolean.valueOf(_isSelected) != Boolean.valueOf(_isUseJavasSourcelevel));
+        if (_tripleNotEquals) {
+          return true;
+        }
+        boolean _isSelected_1 = this.generateGeneratedAnno.isSelected();
+        boolean _isGenerateGeneratedAnno = ((XtendGeneratorConfigurationState)data).isGenerateGeneratedAnno();
+        boolean _tripleNotEquals_1 = (Boolean.valueOf(_isSelected_1) != Boolean.valueOf(_isGenerateGeneratedAnno));
+        if (_tripleNotEquals_1) {
+          return true;
+        }
+        boolean _isSelected_2 = this.generateSuppressWarnAnno.isSelected();
+        boolean _isGenerateSuppressWarnAnno = ((XtendGeneratorConfigurationState)data).isGenerateSuppressWarnAnno();
+        boolean _tripleNotEquals_2 = (Boolean.valueOf(_isSelected_2) != Boolean.valueOf(_isGenerateSuppressWarnAnno));
+        if (_tripleNotEquals_2) {
+          return true;
+        }
+        boolean _isSelected_3 = this.ignoreGeneratedJava.isSelected();
+        boolean _isIgnoreGeneratedJava = ((XtendGeneratorConfigurationState)data).isIgnoreGeneratedJava();
+        boolean _tripleNotEquals_3 = (Boolean.valueOf(_isSelected_3) != Boolean.valueOf(_isIgnoreGeneratedJava));
+        if (_tripleNotEquals_3) {
+          return true;
+        }
+      }
+    }
+    return true;
   }
 }

@@ -19,6 +19,12 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class XtendGeneratorConfigurationState extends GeneratorConfigurationState {
   private boolean useJavasSourcelevel;
   
+  private boolean generateGeneratedAnno;
+  
+  private boolean generateSuppressWarnAnno;
+  
+  private boolean ignoreGeneratedJava;
+  
   @Pure
   public boolean isUseJavasSourcelevel() {
     return this.useJavasSourcelevel;
@@ -26,5 +32,32 @@ public class XtendGeneratorConfigurationState extends GeneratorConfigurationStat
   
   public void setUseJavasSourcelevel(final boolean useJavasSourcelevel) {
     this.useJavasSourcelevel = useJavasSourcelevel;
+  }
+  
+  @Pure
+  public boolean isGenerateGeneratedAnno() {
+    return this.generateGeneratedAnno;
+  }
+  
+  public void setGenerateGeneratedAnno(final boolean generateGeneratedAnno) {
+    this.generateGeneratedAnno = generateGeneratedAnno;
+  }
+  
+  @Pure
+  public boolean isGenerateSuppressWarnAnno() {
+    return this.generateSuppressWarnAnno;
+  }
+  
+  public void setGenerateSuppressWarnAnno(final boolean generateSuppressWarnAnno) {
+    this.generateSuppressWarnAnno = generateSuppressWarnAnno;
+  }
+  
+  @Pure
+  public boolean isIgnoreGeneratedJava() {
+    return this.ignoreGeneratedJava;
+  }
+  
+  public void setIgnoreGeneratedJava(final boolean ignoreGeneratedJava) {
+    this.ignoreGeneratedJava = ignoreGeneratedJava;
   }
 }
