@@ -87,7 +87,7 @@ class XtendFacetForm extends GeneratorFacetForm {
 		super.getData(data)
 		if (data instanceof XtendGeneratorConfigurationState) {
 			data.useJavaCompilerCompliance = useJavaCompilerCompliance.selected
-			data.targetJavaVersion = targetJavaVersion.selectedItem.toString
+			data.targetJavaVersion = targetJavaVersion.selectedItem?.toString
 
 			data.generateSuppressWarnings = generateSuppressWarnings.selected
 
