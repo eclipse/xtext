@@ -11,7 +11,6 @@ import com.intellij.openapi.module.Module;
 import java.awt.GridBagConstraints;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
-import org.eclipse.xtend.core.idea.facet.XtendGeneratorConfigurationState;
 import org.eclipse.xtext.idea.facet.GeneratorFacetForm;
 import org.eclipse.xtext.idea.util.IdeaWidgetFactory;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -21,7 +20,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
  * @author dhuebner - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class XtendFacetForm extends GeneratorFacetForm<XtendGeneratorConfigurationState> {
+public class XtendFacetForm extends GeneratorFacetForm {
   @Extension
   private IdeaWidgetFactory _ideaWidgetFactory = new IdeaWidgetFactory();
   

@@ -32,12 +32,12 @@ public class AbstractMultiGenMMTestLanguageIdeaModule extends org.eclipse.xtext.
 		return org.eclipse.xtext.metamodelreferencing.tests.idea.lang.MultiGenMMTestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
 		return org.eclipse.xtext.metamodelreferencing.tests.idea.facet.MultiGenMMTestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.metamodelreferencing.tests.idea.facet.MultiGenMMTestLanguageFacetConfiguration>> bindAbstractFacetType$MultiGenMMTestLanguageFacetConfiguration() {
-		return org.eclipse.xtext.metamodelreferencing.tests.idea.facet.MultiGenMMTestLanguageFacetType.class;
+	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
+		return org.eclipse.xtext.metamodelreferencing.tests.idea.facet.MultiGenMMTestLanguageFacetType.TYPEID;
 	}
 	
 	

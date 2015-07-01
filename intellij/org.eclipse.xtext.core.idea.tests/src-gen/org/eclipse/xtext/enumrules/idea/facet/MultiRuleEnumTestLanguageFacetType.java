@@ -5,12 +5,11 @@ import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class MultiRuleEnumTestLanguageFacetType  extends AbstractFacetType<MultiRuleEnumTestLanguageFacetConfiguration> {
-	private static String TYPE_ID_STRING = "org.eclipse.xtext.enumrules.MultiRuleEnumTestLanguage";
 
-	public static  FacetTypeId<Facet<MultiRuleEnumTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<MultiRuleEnumTestLanguageFacetConfiguration>>(TYPE_ID_STRING);
+	public static final FacetTypeId<Facet<MultiRuleEnumTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<MultiRuleEnumTestLanguageFacetConfiguration>>("org.eclipse.xtext.enumrules.MultiRuleEnumTestLanguage");
 
 	public MultiRuleEnumTestLanguageFacetType() {
-		super(TYPEID, TYPE_ID_STRING, "MultiRuleEnumTestLanguage");
+		super(TYPEID, "org.eclipse.xtext.enumrules.MultiRuleEnumTestLanguage", "MultiRuleEnumTestLanguage");
 		org.eclipse.xtext.enumrules.idea.lang.MultiRuleEnumTestLanguageLanguage.INSTANCE.injectMembers(this);
 	}
 

@@ -5,12 +5,11 @@ import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class ExBeeLangTestLanguageFacetType  extends AbstractFacetType<ExBeeLangTestLanguageFacetConfiguration> {
-	private static String TYPE_ID_STRING = "org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguage";
 
-	public static  FacetTypeId<Facet<ExBeeLangTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<ExBeeLangTestLanguageFacetConfiguration>>(TYPE_ID_STRING);
+	public static final FacetTypeId<Facet<ExBeeLangTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<ExBeeLangTestLanguageFacetConfiguration>>("org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguage");
 
 	public ExBeeLangTestLanguageFacetType() {
-		super(TYPEID, TYPE_ID_STRING, "ExBeeLangTestLanguage");
+		super(TYPEID, "org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguage", "ExBeeLangTestLanguage");
 		org.eclipse.xtext.testlanguages.backtracking.idea.lang.ExBeeLangTestLanguageLanguage.INSTANCE.injectMembers(this);
 	}
 

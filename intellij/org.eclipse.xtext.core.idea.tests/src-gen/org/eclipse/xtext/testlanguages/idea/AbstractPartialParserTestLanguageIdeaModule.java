@@ -32,12 +32,12 @@ public class AbstractPartialParserTestLanguageIdeaModule extends org.eclipse.xte
 		return org.eclipse.xtext.testlanguages.idea.lang.PartialParserTestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
 		return org.eclipse.xtext.testlanguages.idea.facet.PartialParserTestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.testlanguages.idea.facet.PartialParserTestLanguageFacetConfiguration>> bindAbstractFacetType$PartialParserTestLanguageFacetConfiguration() {
-		return org.eclipse.xtext.testlanguages.idea.facet.PartialParserTestLanguageFacetType.class;
+	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
+		return org.eclipse.xtext.testlanguages.idea.facet.PartialParserTestLanguageFacetType.TYPEID;
 	}
 	
 	

@@ -5,12 +5,11 @@ import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class SuperTestLanguageFacetType  extends AbstractFacetType<SuperTestLanguageFacetConfiguration> {
-	private static String TYPE_ID_STRING = "org.eclipse.xtext.generator.ecore.SuperTestLanguage";
 
-	public static  FacetTypeId<Facet<SuperTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<SuperTestLanguageFacetConfiguration>>(TYPE_ID_STRING);
+	public static final FacetTypeId<Facet<SuperTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<SuperTestLanguageFacetConfiguration>>("org.eclipse.xtext.generator.ecore.SuperTestLanguage");
 
 	public SuperTestLanguageFacetType() {
-		super(TYPEID, TYPE_ID_STRING, "SuperTestLanguage");
+		super(TYPEID, "org.eclipse.xtext.generator.ecore.SuperTestLanguage", "SuperTestLanguage");
 		org.eclipse.xtext.generator.ecore.idea.lang.SuperTestLanguageLanguage.INSTANCE.injectMembers(this);
 	}
 

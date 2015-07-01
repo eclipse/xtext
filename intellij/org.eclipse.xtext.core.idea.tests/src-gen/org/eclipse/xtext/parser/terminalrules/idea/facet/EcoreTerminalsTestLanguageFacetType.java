@@ -5,12 +5,11 @@ import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class EcoreTerminalsTestLanguageFacetType  extends AbstractFacetType<EcoreTerminalsTestLanguageFacetConfiguration> {
-	private static String TYPE_ID_STRING = "org.eclipse.xtext.parser.terminalrules.EcoreTerminalsTestLanguage";
 
-	public static  FacetTypeId<Facet<EcoreTerminalsTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<EcoreTerminalsTestLanguageFacetConfiguration>>(TYPE_ID_STRING);
+	public static final FacetTypeId<Facet<EcoreTerminalsTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<EcoreTerminalsTestLanguageFacetConfiguration>>("org.eclipse.xtext.parser.terminalrules.EcoreTerminalsTestLanguage");
 
 	public EcoreTerminalsTestLanguageFacetType() {
-		super(TYPEID, TYPE_ID_STRING, "EcoreTerminalsTestLanguage");
+		super(TYPEID, "org.eclipse.xtext.parser.terminalrules.EcoreTerminalsTestLanguage", "EcoreTerminalsTestLanguage");
 		org.eclipse.xtext.parser.terminalrules.idea.lang.EcoreTerminalsTestLanguageLanguage.INSTANCE.injectMembers(this);
 	}
 

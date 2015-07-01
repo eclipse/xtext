@@ -32,12 +32,12 @@ public class AbstractXtendIdeaModule extends org.eclipse.xtext.idea.DefaultIdeaM
 		return org.eclipse.xtend.core.idea.lang.XtendElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
 		return org.eclipse.xtend.core.idea.facet.XtendFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtend.core.idea.facet.XtendFacetConfiguration>> bindAbstractFacetType$XtendFacetConfiguration() {
-		return org.eclipse.xtend.core.idea.facet.XtendFacetType.class;
+	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
+		return org.eclipse.xtend.core.idea.facet.XtendFacetType.TYPEID;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
 	public Class<? extends org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider> bindAbstractTypeScopeProvider() {

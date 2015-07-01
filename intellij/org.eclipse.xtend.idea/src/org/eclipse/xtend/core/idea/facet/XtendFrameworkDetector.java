@@ -9,11 +9,11 @@ package org.eclipse.xtend.core.idea.facet;
 
 import org.eclipse.xtend.core.idea.config.XtendFrameworkSupportProvider;
 import org.eclipse.xtend.core.idea.lang.XtendFileType;
-import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 import com.google.inject.Inject;
 import com.intellij.facet.Facet;
 import com.intellij.facet.FacetType;
+import com.intellij.facet.FacetTypeRegistry;
 import com.intellij.framework.addSupport.FrameworkSupportInModuleConfigurable;
 import com.intellij.framework.detection.FacetBasedFrameworkDetector;
 import com.intellij.framework.detection.FileContentPattern;
@@ -35,8 +35,6 @@ import com.intellij.util.indexing.FileContent;
  * @author dhuebner - Initial contribution and API
  */
 public class XtendFrameworkDetector extends FacetBasedFrameworkDetector<Facet<XtendFacetConfiguration>, XtendFacetConfiguration> {
-	@Inject
-	private AbstractFacetType<XtendFacetConfiguration> xtendFacetType;
 	@Inject
 	private XtendFrameworkSupportProvider frameworkSupport;
 
@@ -63,7 +61,7 @@ public class XtendFrameworkDetector extends FacetBasedFrameworkDetector<Facet<Xt
 
 	@Override
 	public FacetType<Facet<XtendFacetConfiguration>, XtendFacetConfiguration> getFacetType() {
-		return xtendFacetType;
+		return FacetTypeRegistry.getInstance().findFacetType(XtendFacetType.TYPEID);
 	}
 
 	@Override

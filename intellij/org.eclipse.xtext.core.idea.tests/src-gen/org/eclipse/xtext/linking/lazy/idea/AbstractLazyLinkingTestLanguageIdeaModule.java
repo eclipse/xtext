@@ -32,12 +32,12 @@ public class AbstractLazyLinkingTestLanguageIdeaModule extends org.eclipse.xtext
 		return org.eclipse.xtext.linking.lazy.idea.lang.LazyLinkingTestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
 		return org.eclipse.xtext.linking.lazy.idea.facet.LazyLinkingTestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.linking.lazy.idea.facet.LazyLinkingTestLanguageFacetConfiguration>> bindAbstractFacetType$LazyLinkingTestLanguageFacetConfiguration() {
-		return org.eclipse.xtext.linking.lazy.idea.facet.LazyLinkingTestLanguageFacetType.class;
+	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
+		return org.eclipse.xtext.linking.lazy.idea.facet.LazyLinkingTestLanguageFacetType.TYPEID;
 	}
 	
 	

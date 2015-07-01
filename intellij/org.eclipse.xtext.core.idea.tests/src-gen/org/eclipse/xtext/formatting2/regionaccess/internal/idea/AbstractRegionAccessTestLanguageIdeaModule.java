@@ -32,12 +32,12 @@ public class AbstractRegionAccessTestLanguageIdeaModule extends org.eclipse.xtex
 		return org.eclipse.xtext.formatting2.regionaccess.internal.idea.lang.RegionAccessTestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
 		return org.eclipse.xtext.formatting2.regionaccess.internal.idea.facet.RegionAccessTestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.formatting2.regionaccess.internal.idea.facet.RegionAccessTestLanguageFacetConfiguration>> bindAbstractFacetType$RegionAccessTestLanguageFacetConfiguration() {
-		return org.eclipse.xtext.formatting2.regionaccess.internal.idea.facet.RegionAccessTestLanguageFacetType.class;
+	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
+		return org.eclipse.xtext.formatting2.regionaccess.internal.idea.facet.RegionAccessTestLanguageFacetType.TYPEID;
 	}
 	
 	

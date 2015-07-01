@@ -16,7 +16,7 @@ import org.eclipse.xtext.idea.util.IdeaWidgetFactory.TwoColumnPanel
 /**
  * @author dhuebner - Initial contribution and API
  */
-class XtendFacetForm extends GeneratorFacetForm<XtendGeneratorConfigurationState> {
+class XtendFacetForm extends GeneratorFacetForm {
 	extension IdeaWidgetFactory = new IdeaWidgetFactory
 
 	JCheckBox useJavasSourcelevel

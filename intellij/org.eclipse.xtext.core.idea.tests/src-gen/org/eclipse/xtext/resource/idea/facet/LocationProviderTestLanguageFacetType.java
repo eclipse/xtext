@@ -5,12 +5,11 @@ import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class LocationProviderTestLanguageFacetType  extends AbstractFacetType<LocationProviderTestLanguageFacetConfiguration> {
-	private static String TYPE_ID_STRING = "org.eclipse.xtext.resource.LocationProviderTestLanguage";
 
-	public static  FacetTypeId<Facet<LocationProviderTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<LocationProviderTestLanguageFacetConfiguration>>(TYPE_ID_STRING);
+	public static final FacetTypeId<Facet<LocationProviderTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<LocationProviderTestLanguageFacetConfiguration>>("org.eclipse.xtext.resource.LocationProviderTestLanguage");
 
 	public LocationProviderTestLanguageFacetType() {
-		super(TYPEID, TYPE_ID_STRING, "LocationProviderTestLanguage");
+		super(TYPEID, "org.eclipse.xtext.resource.LocationProviderTestLanguage", "LocationProviderTestLanguage");
 		org.eclipse.xtext.resource.idea.lang.LocationProviderTestLanguageLanguage.INSTANCE.injectMembers(this);
 	}
 

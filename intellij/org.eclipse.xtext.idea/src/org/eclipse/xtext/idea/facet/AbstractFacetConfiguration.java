@@ -26,29 +26,47 @@ import com.intellij.openapi.util.WriteExternalException;
 /**
  * @author dhuebner - Initial contribution and API
  */
-public abstract class AbstractFacetConfiguration<T extends GeneratorConfigurationState> implements FacetConfiguration, PersistentStateComponent<T> {
-	private T state;
+public abstract class AbstractFacetConfiguration implements FacetConfiguration, PersistentStateComponent<GeneratorConfigurationState> {
+	private GeneratorConfigurationState state;
 	@Inject
 	private IOutputConfigurationProvider outputConfigDefaults;
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public FacetEditorTab[] createEditorTabs(FacetEditorContext editorContext, FacetValidatorsManager validatorsManager) {
-		GeneratorFacetForm<GeneratorConfigurationState> uiForm = new GeneratorFacetForm<GeneratorConfigurationState>(editorContext.getFacet().getModule());
-		GeneratorFacetEditorTab<?, ?> facetEditorTab = new GeneratorFacetEditorTab<AbstractFacetConfiguration<GeneratorConfigurationState>, GeneratorConfigurationState>(
-				editorContext.getFacet(), uiForm);
+		GeneratorFacetForm uiForm = new GeneratorFacetForm(editorContext.getFacet().getModule());
+		GeneratorFacetEditorTab<AbstractFacetConfiguration> facetEditorTab = new GeneratorFacetEditorTab<AbstractFacetConfiguration>(editorContext.getFacet(),
+				uiForm);
 		return new FacetEditorTab[] { facetEditorTab };
 	}
 
 	@Override
-	public T getState() {
+	public GeneratorConfigurationState getState() {
 		if (this.state == null) {
-			this.state = createNewState();
-			initDefaults(this.state);
+			this.state = createNewDefaultState();
 		}
 		return this.state;
 	}
 
-	private void initDefaults(T state) {
+	@Override
+	public void loadState(GeneratorConfigurationState state) {
+		this.state = state;
+	}
+
+	protected GeneratorConfigurationState createNewDefaultState() {
+		GeneratorConfigurationState state = new GeneratorConfigurationState();
+		initDefaults(state);
+		return state;
+	}
+
+	/**
+	 * presets defaults using values of {@link IFileSystemAccess#DEFAULT_OUTPUT} from the
+	 * {@link IOutputConfigurationProvider}
+	 * 
+	 * @param state
+	 *            state to modify
+	 */
+	protected void initDefaults(GeneratorConfigurationState state) {
 		OutputConfiguration defOutput = Iterables.find(outputConfigDefaults.getOutputConfigurations(), new Predicate<OutputConfiguration>() {
 			@Override
 			public boolean apply(OutputConfiguration conf) {
@@ -63,13 +81,6 @@ public abstract class AbstractFacetConfiguration<T extends GeneratorConfiguratio
 			state.setDeleteGenerated(defOutput.isCanClearOutputDirectory());
 			state.setOverwriteExisting(defOutput.isOverrideExistingResources());
 		}
-	}
-
-	protected abstract T createNewState();
-
-	@Override
-	public void loadState(T state) {
-		this.state = state;
 	}
 
 	@SuppressWarnings("deprecation")

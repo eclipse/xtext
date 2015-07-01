@@ -32,12 +32,12 @@ public class AbstractIgnoreCaseLexerTestLanguageIdeaModule extends org.eclipse.x
 		return org.eclipse.xtext.lexer.idea.lang.IgnoreCaseLexerTestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
 		return org.eclipse.xtext.lexer.idea.facet.IgnoreCaseLexerTestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.lexer.idea.facet.IgnoreCaseLexerTestLanguageFacetConfiguration>> bindAbstractFacetType$IgnoreCaseLexerTestLanguageFacetConfiguration() {
-		return org.eclipse.xtext.lexer.idea.facet.IgnoreCaseLexerTestLanguageFacetType.class;
+	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
+		return org.eclipse.xtext.lexer.idea.facet.IgnoreCaseLexerTestLanguageFacetType.TYPEID;
 	}
 	
 	

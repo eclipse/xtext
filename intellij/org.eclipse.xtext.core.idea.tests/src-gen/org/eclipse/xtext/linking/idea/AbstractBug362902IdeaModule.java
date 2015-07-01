@@ -32,12 +32,12 @@ public class AbstractBug362902IdeaModule extends org.eclipse.xtext.idea.DefaultI
 		return org.eclipse.xtext.linking.idea.lang.Bug362902ElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
 		return org.eclipse.xtext.linking.idea.facet.Bug362902FacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.linking.idea.facet.Bug362902FacetConfiguration>> bindAbstractFacetType$Bug362902FacetConfiguration() {
-		return org.eclipse.xtext.linking.idea.facet.Bug362902FacetType.class;
+	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
+		return org.eclipse.xtext.linking.idea.facet.Bug362902FacetType.TYPEID;
 	}
 	
 	

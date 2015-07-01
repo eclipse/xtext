@@ -32,12 +32,12 @@ public class AbstractEcoreTerminalsTestLanguageIdeaModule extends org.eclipse.xt
 		return org.eclipse.xtext.parser.terminalrules.idea.lang.EcoreTerminalsTestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
 		return org.eclipse.xtext.parser.terminalrules.idea.facet.EcoreTerminalsTestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.parser.terminalrules.idea.facet.EcoreTerminalsTestLanguageFacetConfiguration>> bindAbstractFacetType$EcoreTerminalsTestLanguageFacetConfiguration() {
-		return org.eclipse.xtext.parser.terminalrules.idea.facet.EcoreTerminalsTestLanguageFacetType.class;
+	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
+		return org.eclipse.xtext.parser.terminalrules.idea.facet.EcoreTerminalsTestLanguageFacetType.TYPEID;
 	}
 	
 	

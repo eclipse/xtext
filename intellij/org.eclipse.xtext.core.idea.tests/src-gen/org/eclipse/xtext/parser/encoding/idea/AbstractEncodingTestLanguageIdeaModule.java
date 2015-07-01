@@ -32,12 +32,12 @@ public class AbstractEncodingTestLanguageIdeaModule extends org.eclipse.xtext.id
 		return org.eclipse.xtext.parser.encoding.idea.lang.EncodingTestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
 		return org.eclipse.xtext.parser.encoding.idea.facet.EncodingTestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.parser.encoding.idea.facet.EncodingTestLanguageFacetConfiguration>> bindAbstractFacetType$EncodingTestLanguageFacetConfiguration() {
-		return org.eclipse.xtext.parser.encoding.idea.facet.EncodingTestLanguageFacetType.class;
+	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
+		return org.eclipse.xtext.parser.encoding.idea.facet.EncodingTestLanguageFacetType.TYPEID;
 	}
 	
 	

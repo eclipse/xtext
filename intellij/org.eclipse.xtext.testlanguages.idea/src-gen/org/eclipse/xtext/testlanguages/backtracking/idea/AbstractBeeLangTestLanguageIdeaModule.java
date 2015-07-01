@@ -32,12 +32,12 @@ public class AbstractBeeLangTestLanguageIdeaModule extends org.eclipse.xtext.ide
 		return org.eclipse.xtext.testlanguages.backtracking.idea.lang.BeeLangTestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
 		return org.eclipse.xtext.testlanguages.backtracking.idea.facet.BeeLangTestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.testlanguages.backtracking.idea.facet.BeeLangTestLanguageFacetConfiguration>> bindAbstractFacetType$BeeLangTestLanguageFacetConfiguration() {
-		return org.eclipse.xtext.testlanguages.backtracking.idea.facet.BeeLangTestLanguageFacetType.class;
+	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
+		return org.eclipse.xtext.testlanguages.backtracking.idea.facet.BeeLangTestLanguageFacetType.TYPEID;
 	}
 	
 	

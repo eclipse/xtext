@@ -32,12 +32,12 @@ public class AbstractEObjectAtOffsetTestLanguageIdeaModule extends org.eclipse.x
 		return org.eclipse.xtext.resource.idea.lang.EObjectAtOffsetTestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
 		return org.eclipse.xtext.resource.idea.facet.EObjectAtOffsetTestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.resource.idea.facet.EObjectAtOffsetTestLanguageFacetConfiguration>> bindAbstractFacetType$EObjectAtOffsetTestLanguageFacetConfiguration() {
-		return org.eclipse.xtext.resource.idea.facet.EObjectAtOffsetTestLanguageFacetType.class;
+	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
+		return org.eclipse.xtext.resource.idea.facet.EObjectAtOffsetTestLanguageFacetType.TYPEID;
 	}
 	
 	

@@ -5,12 +5,11 @@ import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class UnassignedTextTestLanguageFacetType  extends AbstractFacetType<UnassignedTextTestLanguageFacetConfiguration> {
-	private static String TYPE_ID_STRING = "org.eclipse.xtext.parsetree.unassignedtext.UnassignedTextTestLanguage";
 
-	public static  FacetTypeId<Facet<UnassignedTextTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<UnassignedTextTestLanguageFacetConfiguration>>(TYPE_ID_STRING);
+	public static final FacetTypeId<Facet<UnassignedTextTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<UnassignedTextTestLanguageFacetConfiguration>>("org.eclipse.xtext.parsetree.unassignedtext.UnassignedTextTestLanguage");
 
 	public UnassignedTextTestLanguageFacetType() {
-		super(TYPEID, TYPE_ID_STRING, "UnassignedTextTestLanguage");
+		super(TYPEID, "org.eclipse.xtext.parsetree.unassignedtext.UnassignedTextTestLanguage", "UnassignedTextTestLanguage");
 		org.eclipse.xtext.parsetree.unassignedtext.idea.lang.UnassignedTextTestLanguageLanguage.INSTANCE.injectMembers(this);
 	}
 

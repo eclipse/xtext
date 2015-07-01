@@ -32,12 +32,12 @@ public class AbstractLangATestLanguageIdeaModule extends org.eclipse.xtext.idea.
 		return org.eclipse.xtext.linking.idea.lang.LangATestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
 		return org.eclipse.xtext.linking.idea.facet.LangATestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.linking.idea.facet.LangATestLanguageFacetConfiguration>> bindAbstractFacetType$LangATestLanguageFacetConfiguration() {
-		return org.eclipse.xtext.linking.idea.facet.LangATestLanguageFacetType.class;
+	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
+		return org.eclipse.xtext.linking.idea.facet.LangATestLanguageFacetType.TYPEID;
 	}
 	
 	

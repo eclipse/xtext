@@ -32,12 +32,12 @@ public class AbstractSuperTestLanguageIdeaModule extends org.eclipse.xtext.idea.
 		return org.eclipse.xtext.generator.ecore.idea.lang.SuperTestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
 		return org.eclipse.xtext.generator.ecore.idea.facet.SuperTestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.generator.ecore.idea.facet.SuperTestLanguageFacetConfiguration>> bindAbstractFacetType$SuperTestLanguageFacetConfiguration() {
-		return org.eclipse.xtext.generator.ecore.idea.facet.SuperTestLanguageFacetType.class;
+	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
+		return org.eclipse.xtext.generator.ecore.idea.facet.SuperTestLanguageFacetType.TYPEID;
 	}
 	
 	

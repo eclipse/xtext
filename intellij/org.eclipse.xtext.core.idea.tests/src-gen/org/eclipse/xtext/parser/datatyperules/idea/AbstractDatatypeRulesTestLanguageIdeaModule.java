@@ -32,12 +32,12 @@ public class AbstractDatatypeRulesTestLanguageIdeaModule extends org.eclipse.xte
 		return org.eclipse.xtext.parser.datatyperules.idea.lang.DatatypeRulesTestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
 		return org.eclipse.xtext.parser.datatyperules.idea.facet.DatatypeRulesTestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.parser.datatyperules.idea.facet.DatatypeRulesTestLanguageFacetConfiguration>> bindAbstractFacetType$DatatypeRulesTestLanguageFacetConfiguration() {
-		return org.eclipse.xtext.parser.datatyperules.idea.facet.DatatypeRulesTestLanguageFacetType.class;
+	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
+		return org.eclipse.xtext.parser.datatyperules.idea.facet.DatatypeRulesTestLanguageFacetType.TYPEID;
 	}
 	
 	

@@ -5,12 +5,11 @@ import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class FormatterTestLanguageFacetType  extends AbstractFacetType<FormatterTestLanguageFacetConfiguration> {
-	private static String TYPE_ID_STRING = "org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage";
 
-	public static  FacetTypeId<Facet<FormatterTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<FormatterTestLanguageFacetConfiguration>>(TYPE_ID_STRING);
+	public static final FacetTypeId<Facet<FormatterTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<FormatterTestLanguageFacetConfiguration>>("org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage");
 
 	public FormatterTestLanguageFacetType() {
-		super(TYPEID, TYPE_ID_STRING, "FormatterTestLanguage");
+		super(TYPEID, "org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage", "FormatterTestLanguage");
 		org.eclipse.xtext.parsetree.formatter.idea.lang.FormatterTestLanguageLanguage.INSTANCE.injectMembers(this);
 	}
 

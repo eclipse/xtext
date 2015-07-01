@@ -5,12 +5,11 @@ import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class BaseInheritanceTestLanguageFacetType  extends AbstractFacetType<BaseInheritanceTestLanguageFacetConfiguration> {
-	private static String TYPE_ID_STRING = "org.eclipse.xtext.grammarinheritance.BaseInheritanceTestLanguage";
 
-	public static  FacetTypeId<Facet<BaseInheritanceTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<BaseInheritanceTestLanguageFacetConfiguration>>(TYPE_ID_STRING);
+	public static final FacetTypeId<Facet<BaseInheritanceTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<BaseInheritanceTestLanguageFacetConfiguration>>("org.eclipse.xtext.grammarinheritance.BaseInheritanceTestLanguage");
 
 	public BaseInheritanceTestLanguageFacetType() {
-		super(TYPEID, TYPE_ID_STRING, "BaseInheritanceTestLanguage");
+		super(TYPEID, "org.eclipse.xtext.grammarinheritance.BaseInheritanceTestLanguage", "BaseInheritanceTestLanguage");
 		org.eclipse.xtext.grammarinheritance.idea.lang.BaseInheritanceTestLanguageLanguage.INSTANCE.injectMembers(this);
 	}
 

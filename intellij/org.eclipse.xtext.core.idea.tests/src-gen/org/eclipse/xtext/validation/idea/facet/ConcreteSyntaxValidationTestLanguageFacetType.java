@@ -5,12 +5,11 @@ import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class ConcreteSyntaxValidationTestLanguageFacetType  extends AbstractFacetType<ConcreteSyntaxValidationTestLanguageFacetConfiguration> {
-	private static String TYPE_ID_STRING = "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage";
 
-	public static  FacetTypeId<Facet<ConcreteSyntaxValidationTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<ConcreteSyntaxValidationTestLanguageFacetConfiguration>>(TYPE_ID_STRING);
+	public static final FacetTypeId<Facet<ConcreteSyntaxValidationTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<ConcreteSyntaxValidationTestLanguageFacetConfiguration>>("org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage");
 
 	public ConcreteSyntaxValidationTestLanguageFacetType() {
-		super(TYPEID, TYPE_ID_STRING, "ConcreteSyntaxValidationTestLanguage");
+		super(TYPEID, "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage", "ConcreteSyntaxValidationTestLanguage");
 		org.eclipse.xtext.validation.idea.lang.ConcreteSyntaxValidationTestLanguageLanguage.INSTANCE.injectMembers(this);
 	}
 

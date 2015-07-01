@@ -5,12 +5,11 @@ import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class IndentationAwareTestLanguageFacetType  extends AbstractFacetType<IndentationAwareTestLanguageFacetConfiguration> {
-	private static String TYPE_ID_STRING = "org.eclipse.xtext.parser.indentation.IndentationAwareTestLanguage";
 
-	public static  FacetTypeId<Facet<IndentationAwareTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<IndentationAwareTestLanguageFacetConfiguration>>(TYPE_ID_STRING);
+	public static final FacetTypeId<Facet<IndentationAwareTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<IndentationAwareTestLanguageFacetConfiguration>>("org.eclipse.xtext.parser.indentation.IndentationAwareTestLanguage");
 
 	public IndentationAwareTestLanguageFacetType() {
-		super(TYPEID, TYPE_ID_STRING, "IndentationAwareTestLanguage");
+		super(TYPEID, "org.eclipse.xtext.parser.indentation.IndentationAwareTestLanguage", "IndentationAwareTestLanguage");
 		org.eclipse.xtext.parser.indentation.idea.lang.IndentationAwareTestLanguageLanguage.INSTANCE.injectMembers(this);
 	}
 

@@ -32,12 +32,12 @@ public class AbstractDummyTestLanguageIdeaModule extends org.eclipse.xtext.idea.
 		return org.eclipse.xtext.dummy.idea.lang.DummyTestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
 		return org.eclipse.xtext.dummy.idea.facet.DummyTestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.dummy.idea.facet.DummyTestLanguageFacetConfiguration>> bindAbstractFacetType$DummyTestLanguageFacetConfiguration() {
-		return org.eclipse.xtext.dummy.idea.facet.DummyTestLanguageFacetType.class;
+	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
+		return org.eclipse.xtext.dummy.idea.facet.DummyTestLanguageFacetType.TYPEID;
 	}
 	
 	

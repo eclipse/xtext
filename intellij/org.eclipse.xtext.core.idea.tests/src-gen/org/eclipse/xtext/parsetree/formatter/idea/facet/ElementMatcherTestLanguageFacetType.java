@@ -5,12 +5,11 @@ import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class ElementMatcherTestLanguageFacetType  extends AbstractFacetType<ElementMatcherTestLanguageFacetConfiguration> {
-	private static String TYPE_ID_STRING = "org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage";
 
-	public static  FacetTypeId<Facet<ElementMatcherTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<ElementMatcherTestLanguageFacetConfiguration>>(TYPE_ID_STRING);
+	public static final FacetTypeId<Facet<ElementMatcherTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<ElementMatcherTestLanguageFacetConfiguration>>("org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage");
 
 	public ElementMatcherTestLanguageFacetType() {
-		super(TYPEID, TYPE_ID_STRING, "ElementMatcherTestLanguage");
+		super(TYPEID, "org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage", "ElementMatcherTestLanguage");
 		org.eclipse.xtext.parsetree.formatter.idea.lang.ElementMatcherTestLanguageLanguage.INSTANCE.injectMembers(this);
 	}
 

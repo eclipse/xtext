@@ -5,12 +5,11 @@ import com.intellij.facet.FacetTypeId;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 
 public class PartialSerializationTestLanguageFacetType  extends AbstractFacetType<PartialSerializationTestLanguageFacetConfiguration> {
-	private static String TYPE_ID_STRING = "org.eclipse.xtext.parsetree.reconstr.PartialSerializationTestLanguage";
 
-	public static  FacetTypeId<Facet<PartialSerializationTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<PartialSerializationTestLanguageFacetConfiguration>>(TYPE_ID_STRING);
+	public static final FacetTypeId<Facet<PartialSerializationTestLanguageFacetConfiguration>> TYPEID = new FacetTypeId<Facet<PartialSerializationTestLanguageFacetConfiguration>>("org.eclipse.xtext.parsetree.reconstr.PartialSerializationTestLanguage");
 
 	public PartialSerializationTestLanguageFacetType() {
-		super(TYPEID, TYPE_ID_STRING, "PartialSerializationTestLanguage");
+		super(TYPEID, "org.eclipse.xtext.parsetree.reconstr.PartialSerializationTestLanguage", "PartialSerializationTestLanguage");
 		org.eclipse.xtext.parsetree.reconstr.idea.lang.PartialSerializationTestLanguageLanguage.INSTANCE.injectMembers(this);
 	}
 

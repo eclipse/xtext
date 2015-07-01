@@ -32,12 +32,12 @@ public class AbstractSimpleReconstrTestLanguageIdeaModule extends org.eclipse.xt
 		return org.eclipse.xtext.parsetree.reconstr.idea.lang.SimpleReconstrTestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
 		return org.eclipse.xtext.parsetree.reconstr.idea.facet.SimpleReconstrTestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.parsetree.reconstr.idea.facet.SimpleReconstrTestLanguageFacetConfiguration>> bindAbstractFacetType$SimpleReconstrTestLanguageFacetConfiguration() {
-		return org.eclipse.xtext.parsetree.reconstr.idea.facet.SimpleReconstrTestLanguageFacetType.class;
+	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
+		return org.eclipse.xtext.parsetree.reconstr.idea.facet.SimpleReconstrTestLanguageFacetType.TYPEID;
 	}
 	
 	

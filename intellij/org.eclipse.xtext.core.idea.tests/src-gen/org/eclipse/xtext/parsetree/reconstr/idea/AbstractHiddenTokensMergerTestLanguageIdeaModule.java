@@ -32,12 +32,12 @@ public class AbstractHiddenTokensMergerTestLanguageIdeaModule extends org.eclips
 		return org.eclipse.xtext.parsetree.reconstr.idea.lang.HiddenTokensMergerTestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
 		return org.eclipse.xtext.parsetree.reconstr.idea.facet.HiddenTokensMergerTestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.parsetree.reconstr.idea.facet.HiddenTokensMergerTestLanguageFacetConfiguration>> bindAbstractFacetType$HiddenTokensMergerTestLanguageFacetConfiguration() {
-		return org.eclipse.xtext.parsetree.reconstr.idea.facet.HiddenTokensMergerTestLanguageFacetType.class;
+	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
+		return org.eclipse.xtext.parsetree.reconstr.idea.facet.HiddenTokensMergerTestLanguageFacetType.TYPEID;
 	}
 	
 	

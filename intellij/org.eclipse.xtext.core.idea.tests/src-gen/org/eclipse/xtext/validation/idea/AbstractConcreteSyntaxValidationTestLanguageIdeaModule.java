@@ -32,12 +32,12 @@ public class AbstractConcreteSyntaxValidationTestLanguageIdeaModule extends org.
 		return org.eclipse.xtext.validation.idea.lang.ConcreteSyntaxValidationTestLanguageElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration<? extends org.eclipse.xtext.idea.facet.GeneratorConfigurationState>> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
 		return org.eclipse.xtext.validation.idea.facet.ConcreteSyntaxValidationTestLanguageFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.validation.idea.facet.ConcreteSyntaxValidationTestLanguageFacetConfiguration>> bindAbstractFacetType$ConcreteSyntaxValidationTestLanguageFacetConfiguration() {
-		return org.eclipse.xtext.validation.idea.facet.ConcreteSyntaxValidationTestLanguageFacetType.class;
+	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
+		return org.eclipse.xtext.validation.idea.facet.ConcreteSyntaxValidationTestLanguageFacetType.TYPEID;
 	}
 	
 	
