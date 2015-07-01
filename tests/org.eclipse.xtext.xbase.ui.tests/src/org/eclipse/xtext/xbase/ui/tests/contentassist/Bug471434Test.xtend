@@ -14,8 +14,6 @@ import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.xbase.testlanguages.ContentAssistFragmentTestLangUiInjectorProvider
 
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(ContentAssistFragmentTestLangUiInjectorProvider))
 /**
  * Test the content assist to make sure we inherit the default XbaseProposalProvider
  * implementation.
@@ -24,6 +22,8 @@ import org.eclipse.xtext.xbase.testlanguages.ContentAssistFragmentTestLangUiInje
  * 
  * @author Lorenzo Bettini - Initial contribution and API
  */
+@RunWith(typeof(XtextRunner))
+@InjectWith(typeof(ContentAssistFragmentTestLangUiInjectorProvider))
 class Bug471434Test extends AbstractContentAssistTest {
 
 	@Test def void testVariableRightWithPrefix() throws Exception {

@@ -16,6 +16,14 @@ import org.eclipse.xtext.xbase.testlanguages.ContentAssistFragmentTestLangUiInje
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+/**
+ * Test the content assist to make sure we inherit the default XbaseProposalProvider
+ * implementation.
+ * 
+ * https://bugs.eclipse.org/bugs/show_bug.cgi?id=471434
+ * 
+ * @author Lorenzo Bettini - Initial contribution and API
+ */
 @RunWith(XtextRunner.class)
 @InjectWith(ContentAssistFragmentTestLangUiInjectorProvider.class)
 @SuppressWarnings("all")
