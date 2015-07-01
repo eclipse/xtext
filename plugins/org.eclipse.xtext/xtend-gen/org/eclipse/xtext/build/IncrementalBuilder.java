@@ -38,6 +38,7 @@ import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.URIBasedFileSystemAccess;
 import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
+import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -382,6 +383,11 @@ public class IncrementalBuilder {
             it.setOutputConfigurations(_map);
             IFilePostProcessor _get = serviceProvider.<IFilePostProcessor>get(IFilePostProcessor.class);
             it.setPostProcessor(_get);
+            final IEncodingProvider newEncodingProvider = serviceProvider.<IEncodingProvider>get(IEncodingProvider.class);
+            boolean _notEquals = (!Objects.equal(newEncodingProvider, null));
+            if (_notEquals) {
+              it.setEncodingProvider(newEncodingProvider);
+            }
             TraceFileNameProvider _get_1 = serviceProvider.<TraceFileNameProvider>get(TraceFileNameProvider.class);
             it.setTraceFileNameProvider(_get_1);
             TraceRegionSerializer _get_2 = serviceProvider.<TraceRegionSerializer>get(TraceRegionSerializer.class);
