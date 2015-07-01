@@ -33,7 +33,7 @@ class XbaseWithAnnotationsCompletionContributor extends XbaseCompletionContribut
 	}
 
 	protected def completeXAnnotation_AnnotationType() {
-		completeJavaTypes(XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE) [
+		completeJavaTypes(XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, true) [
 			object.annotationType
 		]
 	}
@@ -52,7 +52,7 @@ class XbaseWithAnnotationsCompletionContributor extends XbaseCompletionContribut
 						val singleOperation = operations.head
 						if ('value' == singleOperation.simpleName) {
 							if (Class.name == singleOperation.returnType?.type?.qualifiedName) {
-								completeJavaTypes($0, $2)[true]
+								completeJavaTypes($0, $2, true)[true]
 							}
 						}
 					}

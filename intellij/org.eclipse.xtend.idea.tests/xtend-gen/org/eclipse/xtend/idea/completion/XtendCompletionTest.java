@@ -7,6 +7,8 @@
  */
 package org.eclipse.xtend.idea.completion;
 
+import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.editor.Editor;
 import java.util.List;
 import junit.framework.TestCase;
 import org.eclipse.xtend.idea.LightXtendTest;
@@ -104,6 +106,228 @@ public class XtendCompletionTest extends LightXtendTest {
     String _string = lookupElementStrings.toString();
     boolean _contains = lookupElementStrings.contains("ArrayList");
     TestCase.assertTrue(_string, _contains);
+  }
+  
+  public void testAppliedXImportDeclaration() {
+    this.complete("import java.util.Array<caret>");
+    this.myFixture.type("\n");
+    Editor _editor = this.myFixture.getEditor();
+    Document _document = _editor.getDocument();
+    String _text = _document.getText();
+    String _string = _text.toString();
+    TestCase.assertEquals("import java.util.ArrayList", _string);
+  }
+  
+  public void testAppliedXImportDeclaration_01() {
+    this.complete("import ArrayLis<caret>");
+    this.myFixture.type("\n");
+    Editor _editor = this.myFixture.getEditor();
+    Document _document = _editor.getDocument();
+    String _text = _document.getText();
+    String _string = _text.toString();
+    TestCase.assertEquals("import java.util.ArrayList", _string);
+  }
+  
+  public void testAppliedTypeReferenceImportsType_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class MyClass extends Observa<caret> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    String _string = _builder.toString();
+    this.complete(_string);
+    this.myFixture.type("\n");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.Observable");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class MyClass extends Observable {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    String _string_1 = _builder_1.toString();
+    Editor _editor = this.myFixture.getEditor();
+    Document _document = _editor.getDocument();
+    String _text = _document.getText();
+    String _string_2 = _text.toString();
+    TestCase.assertEquals(_string_1, _string_2);
+  }
+  
+  public void testAppliedTypeReferenceImportsType_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.Observable");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class MyClass extends Observab<caret> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    String _string = _builder.toString();
+    this.complete(_string);
+    this.myFixture.type("\n");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.Observable");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class MyClass extends Observable {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    String _string_1 = _builder_1.toString();
+    Editor _editor = this.myFixture.getEditor();
+    Document _document = _editor.getDocument();
+    String _text = _document.getText();
+    String _string_2 = _text.toString();
+    TestCase.assertEquals(_string_1, _string_2);
+  }
+  
+  public void testAppliedTypeReferenceImportsType_03() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class MyClass extends LocalCl<caret> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class LocalClass {}");
+    _builder.newLine();
+    String _string = _builder.toString();
+    this.complete(_string);
+    this.myFixture.type("\n");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class MyClass extends LocalClass {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("class LocalClass {}");
+    _builder_1.newLine();
+    String _string_1 = _builder_1.toString();
+    Editor _editor = this.myFixture.getEditor();
+    Document _document = _editor.getDocument();
+    String _text = _document.getText();
+    String _string_2 = _text.toString();
+    TestCase.assertEquals(_string_1, _string_2);
+  }
+  
+  public void testAppliedTypeReferenceImportsType_04() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class MyClass {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Observ<caret> myField");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    String _string = _builder.toString();
+    this.complete(_string);
+    this.myFixture.type("\n");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.Observable");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class MyClass {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("Observable myField");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    String _string_1 = _builder_1.toString();
+    Editor _editor = this.myFixture.getEditor();
+    Document _document = _editor.getDocument();
+    String _text = _document.getText();
+    String _string_2 = _text.toString();
+    TestCase.assertEquals(_string_1, _string_2);
+  }
+  
+  public void testAppliedTypeReferenceImportsType_05() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class MyClass {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def Observ<caret> myMethod() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    String _string = _builder.toString();
+    this.complete(_string);
+    this.myFixture.type("\n");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.Observable");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class MyClass {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def Observable myMethod() {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    String _string_1 = _builder_1.toString();
+    Editor _editor = this.myFixture.getEditor();
+    Document _document = _editor.getDocument();
+    String _text = _document.getText();
+    String _string_2 = _text.toString();
+    TestCase.assertEquals(_string_1, _string_2);
+  }
+  
+  public void testAppliedTypeReferenceImportsType_06() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class MyClass {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void myMethod() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("new Observ<caret>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    String _string = _builder.toString();
+    this.complete(_string);
+    this.myFixture.type("\n");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.Observable");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class MyClass {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def void myMethod() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("new Observable");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    String _string_1 = _builder_1.toString();
+    Editor _editor = this.myFixture.getEditor();
+    Document _document = _editor.getDocument();
+    String _text = _document.getText();
+    String _string_2 = _text.toString();
+    TestCase.assertEquals(_string_1, _string_2);
   }
   
   public void testXConstructorCall_Constructor() {
