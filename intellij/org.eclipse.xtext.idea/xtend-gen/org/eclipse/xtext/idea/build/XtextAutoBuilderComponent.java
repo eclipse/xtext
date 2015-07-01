@@ -506,7 +506,8 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
               @Override
               public IncrementalBuilder.Result compute() {
                 IncrementalBuilder _get = XtextAutoBuilderComponent.this.builderProvider.get();
-                return _get.build(request, XtextAutoBuilderComponent.this.resourceServiceProviderRegistry);
+                Function1<URI, IResourceServiceProvider> _serviceProviderProvider = XtextAutoBuilderComponent.this.getServiceProviderProvider(module);
+                return _get.build(request, _serviceProviderProvider);
               }
             };
             final IncrementalBuilder.Result result = app.<IncrementalBuilder.Result>runReadAction(_function_3);
@@ -553,6 +554,16 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     } finally {
       buildProgressReporter.clearProgress();
     }
+  }
+  
+  public Function1<URI, IResourceServiceProvider> getServiceProviderProvider(final Module module) {
+    final Function1<URI, IResourceServiceProvider> _function = new Function1<URI, IResourceServiceProvider>() {
+      @Override
+      public IResourceServiceProvider apply(final URI it) {
+        return XtextAutoBuilderComponent.this.resourceServiceProviderRegistry.getResourceServiceProvider(it);
+      }
+    };
+    return _function;
   }
   
   public XtextResourceSet createResourceSet(final Module module, final ResourceDescriptionsData newData) {

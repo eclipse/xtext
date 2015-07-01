@@ -418,12 +418,12 @@ public class IncrementalBuilder {
   @Inject
   private Provider<IncrementalBuilder.InternalStatefulIncrementalBuilder> provider;
   
-  public IncrementalBuilder.Result build(final BuildRequest request, final IResourceServiceProvider.Registry languages) {
+  public IncrementalBuilder.Result build(final BuildRequest request, final Function1<? super URI, ? extends IResourceServiceProvider> languages) {
     DisabledClusteringPolicy _disabledClusteringPolicy = new DisabledClusteringPolicy();
     return this.build(request, languages, _disabledClusteringPolicy);
   }
   
-  public IncrementalBuilder.Result build(final BuildRequest request, final IResourceServiceProvider.Registry languages, final IResourceClusteringPolicy clusteringPolicy) {
+  public IncrementalBuilder.Result build(final BuildRequest request, final Function1<? super URI, ? extends IResourceServiceProvider> languages, final IResourceClusteringPolicy clusteringPolicy) {
     final XtextResourceSet resourceSet = request.getResourceSet();
     IndexState _state = request.getState();
     ResourceDescriptionsData _resourceDescriptions = _state.getResourceDescriptions();

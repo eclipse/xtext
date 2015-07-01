@@ -66,7 +66,7 @@ class ReusedTypeProviderTest extends AbstractTypeProviderTest {
 				setResourceSet(resourceSet)
 				it.state = new IndexState(part, new Source2GeneratedMapping)
 			]
-			builder.build(buildRequest, resourceServiceProviderRegistry)
+			builder.build(buildRequest, [resourceServiceProviderRegistry.getResourceServiceProvider(it)])
 			typeProvider = typeProviderFactory.findTypeProvider(resourceSet)
 		}
 	}

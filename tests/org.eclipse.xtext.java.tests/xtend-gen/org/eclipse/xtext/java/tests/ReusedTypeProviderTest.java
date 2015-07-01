@@ -38,6 +38,7 @@ import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ProjectDescription;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -117,7 +118,13 @@ public class ReusedTypeProviderTest extends AbstractTypeProviderTest {
         }
       };
       final BuildRequest buildRequest = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_1);
-      this.builder.build(buildRequest, this.resourceServiceProviderRegistry);
+      final Function1<URI, IResourceServiceProvider> _function_2 = new Function1<URI, IResourceServiceProvider>() {
+        @Override
+        public IResourceServiceProvider apply(final URI it) {
+          return ReusedTypeProviderTest.this.resourceServiceProviderRegistry.getResourceServiceProvider(it);
+        }
+      };
+      this.builder.build(buildRequest, _function_2);
       IJvmTypeProvider _findTypeProvider = this.typeProviderFactory.findTypeProvider(resourceSet);
       ReusedTypeProviderTest.typeProvider = _findTypeProvider;
     }

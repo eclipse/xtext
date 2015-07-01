@@ -31,6 +31,7 @@ import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
 import org.eclipse.xtext.generator.trace.TraceFileNameProvider
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer
 import org.eclipse.xtext.generator.IFilePostProcessor
+import org.eclipse.emf.common.util.URI
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -158,11 +159,11 @@ import org.eclipse.xtext.generator.IFilePostProcessor
 
 	@Inject Provider<IncrementalBuilder.InternalStatefulIncrementalBuilder> provider
 
-	def Result build(BuildRequest request, IResourceServiceProvider.Registry languages) {
+	def Result build(BuildRequest request, (URI)=>IResourceServiceProvider languages) {
 		build(request, languages, new DisabledClusteringPolicy())
 	}
 	
-	def Result build(BuildRequest request, IResourceServiceProvider.Registry languages, IResourceClusteringPolicy clusteringPolicy) {
+	def Result build(BuildRequest request, (URI)=>IResourceServiceProvider languages, IResourceClusteringPolicy clusteringPolicy) {
 		val resourceSet = request.resourceSet
 		val oldState = new IndexState(request.state.resourceDescriptions.copy, request.state.fileMappings.copy)
 		val context = new BuildContext(languages

@@ -28,7 +28,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class BuildContext {
-  private final IResourceServiceProvider.Registry resourceServiceProviderRegistry;
+  private final Function1<? super URI, ? extends IResourceServiceProvider> resourceServiceProviderProvider;
   
   @Accessors
   private final XtextResourceSet resourceSet;
@@ -59,13 +59,13 @@ public class BuildContext {
   }
   
   public IResourceServiceProvider getResourceServiceProvider(final URI uri) {
-    final IResourceServiceProvider resourceServiceProvider = this.resourceServiceProviderRegistry.getResourceServiceProvider(uri);
+    final IResourceServiceProvider resourceServiceProvider = this.resourceServiceProviderProvider.apply(uri);
     return resourceServiceProvider;
   }
   
-  public BuildContext(final IResourceServiceProvider.Registry resourceServiceProviderRegistry, final XtextResourceSet resourceSet, final IndexState oldState, final IResourceClusteringPolicy clusteringPolicy) {
+  public BuildContext(final Function1<? super URI, ? extends IResourceServiceProvider> resourceServiceProviderProvider, final XtextResourceSet resourceSet, final IndexState oldState, final IResourceClusteringPolicy clusteringPolicy) {
     super();
-    this.resourceServiceProviderRegistry = resourceServiceProviderRegistry;
+    this.resourceServiceProviderProvider = resourceServiceProviderProvider;
     this.resourceSet = resourceSet;
     this.oldState = oldState;
     this.clusteringPolicy = clusteringPolicy;

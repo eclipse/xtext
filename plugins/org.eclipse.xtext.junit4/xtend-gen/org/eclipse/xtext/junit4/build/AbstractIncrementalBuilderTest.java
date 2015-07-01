@@ -93,8 +93,14 @@ public abstract class AbstractIncrementalBuilderTest {
   
   protected IndexState build(final BuildRequest buildRequest) {
     this.clean();
-    IResourceServiceProvider.Registry _languages = this.getLanguages();
-    IncrementalBuilder.Result _build = this.incrementalBuilder.build(buildRequest, _languages);
+    final Function1<URI, IResourceServiceProvider> _function = new Function1<URI, IResourceServiceProvider>() {
+      @Override
+      public IResourceServiceProvider apply(final URI it) {
+        IResourceServiceProvider.Registry _languages = AbstractIncrementalBuilderTest.this.getLanguages();
+        return _languages.getResourceServiceProvider(it);
+      }
+    };
+    IncrementalBuilder.Result _build = this.incrementalBuilder.build(buildRequest, _function);
     IndexState _indexState = _build.getIndexState();
     this.indexState = _indexState;
     return this.indexState;

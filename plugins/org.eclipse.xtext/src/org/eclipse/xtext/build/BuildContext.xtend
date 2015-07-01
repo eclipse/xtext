@@ -21,7 +21,7 @@ import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy
  */
 @FinalFieldsConstructor
 class BuildContext {
-	val IResourceServiceProvider.Registry resourceServiceProviderRegistry
+	val (URI)=>IResourceServiceProvider resourceServiceProviderProvider
 	@Accessors val XtextResourceSet resourceSet
 	@Accessors val IndexState oldState
 	@Accessors val IResourceClusteringPolicy clusteringPolicy
@@ -35,7 +35,7 @@ class BuildContext {
 	}
 	
 	def getResourceServiceProvider(URI uri) {
-		val resourceServiceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(uri)
+		val resourceServiceProvider = resourceServiceProviderProvider.apply(uri)
 		return resourceServiceProvider
 	}
 	

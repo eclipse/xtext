@@ -68,6 +68,8 @@ import static org.eclipse.xtext.idea.build.XtextAutoBuilderComponent.*
 
 import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 import org.eclipse.emf.ecore.resource.ResourceSet
+import com.intellij.facet.FacetManager
+import org.eclipse.xtext.idea.facet.AbstractFacetType
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -300,7 +302,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet
 						]
 					]
 					val result = app.<IncrementalBuilder.Result>runReadAction [
-						builderProvider.get().build(request, resourceServiceProviderRegistry)
+						builderProvider.get().build(request, getServiceProviderProvider(module))
 					]
 					app.invokeAndWait([
 						app.runWriteAction [
@@ -323,6 +325,11 @@ import org.eclipse.emf.ecore.resource.ResourceSet
 		} finally {
 			buildProgressReporter.clearProgress
 		}
+	}
+	
+	def getServiceProviderProvider(Module module) {
+		//TODO check for facet
+		return [resourceServiceProviderRegistry.getResourceServiceProvider(it)]
 	}
 	
 	def createResourceSet(Module module, ResourceDescriptionsData newData) {
