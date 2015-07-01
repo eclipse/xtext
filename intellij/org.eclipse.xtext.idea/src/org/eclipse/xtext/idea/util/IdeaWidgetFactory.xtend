@@ -16,8 +16,10 @@ import java.awt.Color
 import java.awt.Component
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
+import java.awt.Insets
 import javax.swing.BorderFactory
 import javax.swing.JCheckBox
+import javax.swing.JComboBox
 import javax.swing.JComponent
 import javax.swing.JLabel
 import javax.swing.JPanel
@@ -29,6 +31,16 @@ import static org.eclipse.xtext.idea.util.IdeaWidgetFactory.*
  * @author dhuebner - Initial contribution and API
  */
 class IdeaWidgetFactory {
+
+	def container((GridBagConstraints)=>JComponent... children) {
+		val layout = new GridBagLayout()
+		val flowPanel = new JPanel(layout)
+		for (childAddition : children) {
+			val ld = new GridBagConstraints
+			flowPanel.add(childAddition.apply(ld), ld)
+		}
+		return flowPanel
+	}
 
 	def checkBox(String string) {
 		new JCheckBox(string) => [
@@ -61,6 +73,26 @@ class IdeaWidgetFactory {
 			FileChooserDescriptorFactory.createSingleFolderDescriptor(), project)
 		field.addBrowseFolderListener(listener)
 		return field
+	}
+
+	def void expand(GridBagConstraints it, int dim) {
+		if (dim === GridBagConstraints.VERTICAL) {
+			weighty = 1.0
+			fill = GridBagConstraints.VERTICAL
+		} else if (dim == GridBagConstraints.HORIZONTAL) {
+			weightx = 1.0
+			fill = GridBagConstraints.HORIZONTAL
+		} else {
+			throw new IllegalArgumentException()
+		}
+	}
+
+	def JComboBox comboBox() {
+		return new JComboBox()
+	}
+
+	def void indent(GridBagConstraints it) {
+		insets = new Insets(insets.top, insets.left + 40, insets.bottom, insets.right)
 	}
 
 	def SeparatorWithText separator(String title) {
@@ -102,20 +134,6 @@ class IdeaWidgetFactory {
 			gbc.fill = GridBagConstraints.HORIZONTAL
 			host.add(col2.apply(gbc), gbc)
 			rowsAdded++
-			return host
-		}
-
-		def expand(TwoColumnPanel host, int dim) {
-			row [
-				if (dim === GridBagConstraints.VERTICAL) {
-					weighty = 1.0
-				} else if (dim == GridBagConstraints.HORIZONTAL) {
-					weightx = 1.0
-				} else {
-					throw new IllegalArgumentException()
-				}
-				return new JLabel("")
-			]
 			return host
 		}
 

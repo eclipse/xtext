@@ -17,47 +17,91 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Accessors
 @SuppressWarnings("all")
 public class XtendGeneratorConfigurationState extends GeneratorConfigurationState {
-  private boolean useJavasSourcelevel;
+  private boolean useJavaCompilerCompliance;
   
-  private boolean generateGeneratedAnno;
+  private String targetJavaVersion;
   
-  private boolean generateSuppressWarnAnno;
+  private boolean generateSuppressWarnings;
   
-  private boolean ignoreGeneratedJava;
+  private boolean generateGeneratedAnnotation;
   
-  @Pure
-  public boolean isUseJavasSourcelevel() {
-    return this.useJavasSourcelevel;
-  }
+  private boolean includeDateInGenerated;
   
-  public void setUseJavasSourcelevel(final boolean useJavasSourcelevel) {
-    this.useJavasSourcelevel = useJavasSourcelevel;
-  }
+  private String generatedAnnotationComment;
   
-  @Pure
-  public boolean isGenerateGeneratedAnno() {
-    return this.generateGeneratedAnno;
-  }
+  private boolean installDslAsPrimarySource;
   
-  public void setGenerateGeneratedAnno(final boolean generateGeneratedAnno) {
-    this.generateGeneratedAnno = generateGeneratedAnno;
-  }
+  private boolean hideLocalSyntheticVariables;
   
   @Pure
-  public boolean isGenerateSuppressWarnAnno() {
-    return this.generateSuppressWarnAnno;
+  public boolean isUseJavaCompilerCompliance() {
+    return this.useJavaCompilerCompliance;
   }
   
-  public void setGenerateSuppressWarnAnno(final boolean generateSuppressWarnAnno) {
-    this.generateSuppressWarnAnno = generateSuppressWarnAnno;
+  public void setUseJavaCompilerCompliance(final boolean useJavaCompilerCompliance) {
+    this.useJavaCompilerCompliance = useJavaCompilerCompliance;
   }
   
   @Pure
-  public boolean isIgnoreGeneratedJava() {
-    return this.ignoreGeneratedJava;
+  public String getTargetJavaVersion() {
+    return this.targetJavaVersion;
   }
   
-  public void setIgnoreGeneratedJava(final boolean ignoreGeneratedJava) {
-    this.ignoreGeneratedJava = ignoreGeneratedJava;
+  public void setTargetJavaVersion(final String targetJavaVersion) {
+    this.targetJavaVersion = targetJavaVersion;
+  }
+  
+  @Pure
+  public boolean isGenerateSuppressWarnings() {
+    return this.generateSuppressWarnings;
+  }
+  
+  public void setGenerateSuppressWarnings(final boolean generateSuppressWarnings) {
+    this.generateSuppressWarnings = generateSuppressWarnings;
+  }
+  
+  @Pure
+  public boolean isGenerateGeneratedAnnotation() {
+    return this.generateGeneratedAnnotation;
+  }
+  
+  public void setGenerateGeneratedAnnotation(final boolean generateGeneratedAnnotation) {
+    this.generateGeneratedAnnotation = generateGeneratedAnnotation;
+  }
+  
+  @Pure
+  public boolean isIncludeDateInGenerated() {
+    return this.includeDateInGenerated;
+  }
+  
+  public void setIncludeDateInGenerated(final boolean includeDateInGenerated) {
+    this.includeDateInGenerated = includeDateInGenerated;
+  }
+  
+  @Pure
+  public String getGeneratedAnnotationComment() {
+    return this.generatedAnnotationComment;
+  }
+  
+  public void setGeneratedAnnotationComment(final String generatedAnnotationComment) {
+    this.generatedAnnotationComment = generatedAnnotationComment;
+  }
+  
+  @Pure
+  public boolean isInstallDslAsPrimarySource() {
+    return this.installDslAsPrimarySource;
+  }
+  
+  public void setInstallDslAsPrimarySource(final boolean installDslAsPrimarySource) {
+    this.installDslAsPrimarySource = installDslAsPrimarySource;
+  }
+  
+  @Pure
+  public boolean isHideLocalSyntheticVariables() {
+    return this.hideLocalSyntheticVariables;
+  }
+  
+  public void setHideLocalSyntheticVariables(final boolean hideLocalSyntheticVariables) {
+    this.hideLocalSyntheticVariables = hideLocalSyntheticVariables;
   }
 }
