@@ -16,4 +16,7 @@ import org.eclipse.xtext.idea.facet.GeneratorConfigurationState
  @Accessors
 class XtendGeneratorConfigurationState extends GeneratorConfigurationState {
 	boolean useJavasSourcelevel
+	boolean generateGeneratedAnno
+	boolean generateSuppressWarnAnno
+	boolean ignoreGeneratedJava
 }
