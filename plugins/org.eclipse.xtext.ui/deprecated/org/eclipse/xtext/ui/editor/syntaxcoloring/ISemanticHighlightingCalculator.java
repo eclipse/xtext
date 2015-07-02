@@ -45,28 +45,4 @@ public interface ISemanticHighlightingCalculator {
 		}
 		
 	}
-	
-	/**
-	 * @since 2.9
-	 */
-	static class OldToNewDelegate implements org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator {
-
-		private ISemanticHighlightingCalculator delegate;
-		
-		public OldToNewDelegate(ISemanticHighlightingCalculator delegate) {
-			this.delegate = delegate;
-		}
-		
-		@Override
-		public void provideHighlightingFor(XtextResource resource,
-				org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor) {
-			delegate.provideHighlightingFor(resource, cast(acceptor));
-		}
-		
-		private IHighlightedPositionAcceptor cast(org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor) {
-			return (IHighlightedPositionAcceptor) acceptor;
-		}
-		
-	}
-
 }
