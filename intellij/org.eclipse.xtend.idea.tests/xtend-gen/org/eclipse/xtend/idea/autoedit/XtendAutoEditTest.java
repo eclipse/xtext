@@ -11,6 +11,7 @@ import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.util.TextRange;
 import junit.framework.TestCase;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -29,7 +30,8 @@ public class XtendAutoEditTest extends LightXtendTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
-    _builder_1.append(XtendAutoEditTest.CARET, "");
+    _builder_1.append("\t");
+    _builder_1.append(XtendAutoEditTest.CARET, "\t");
     _builder_1.newLineIfNotEmpty();
     _builder_1.append("}");
     this.assertEditor(_builder_1.toString());
@@ -78,8 +80,8 @@ public class XtendAutoEditTest extends LightXtendTest {
     _builder_1.append("\t");
     _builder_1.append("def bar() {");
     _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append(XtendAutoEditTest.CARET, "\t");
+    _builder_1.append("\t\t");
+    _builder_1.append(XtendAutoEditTest.CARET, "\t\t");
     _builder_1.newLineIfNotEmpty();
     _builder_1.append("\t");
     _builder_1.append("}");
@@ -160,21 +162,28 @@ public class XtendAutoEditTest extends LightXtendTest {
   }
   
   private void assertEditor(final String editorState) {
-    final String normalized = LineDelimiters.toUnix(editorState);
-    final int caretPosition = normalized.indexOf(XtendAutoEditTest.CARET);
-    String text = normalized;
-    if ((caretPosition != (-1))) {
-      String _replace = normalized.replace(XtendAutoEditTest.CARET, "");
-      text = _replace;
+    String _replace = editorState.replace(XtendAutoEditTest.CARET, "|");
+    final String expectedState = LineDelimiters.toUnix(_replace);
+    String _xblockexpression = null;
+    {
       Editor _editor = this.myFixture.getEditor();
       CaretModel _caretModel = _editor.getCaretModel();
       Caret _primaryCaret = _caretModel.getPrimaryCaret();
-      int _offset = _primaryCaret.getOffset();
-      TestCase.assertEquals(caretPosition, _offset);
+      final int caretOffset = _primaryCaret.getOffset();
+      Editor _editor_1 = this.myFixture.getEditor();
+      final Document document = _editor_1.getDocument();
+      Editor _editor_2 = this.myFixture.getEditor();
+      Document _document = _editor_2.getDocument();
+      TextRange _textRange = new TextRange(0, caretOffset);
+      final String beforeCaret = _document.getText(_textRange);
+      Editor _editor_3 = this.myFixture.getEditor();
+      Document _document_1 = _editor_3.getDocument();
+      int _textLength = document.getTextLength();
+      TextRange _textRange_1 = new TextRange(caretOffset, _textLength);
+      final String afterCaret = _document_1.getText(_textRange_1);
+      _xblockexpression = ((beforeCaret + "|") + afterCaret);
     }
-    Editor _editor_1 = this.myFixture.getEditor();
-    Document _document = _editor_1.getDocument();
-    String _text = _document.getText();
-    TestCase.assertEquals(text, _text);
+    final String actualState = _xblockexpression;
+    TestCase.assertEquals(expectedState, actualState);
   }
 }

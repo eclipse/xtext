@@ -9,6 +9,10 @@
 
 	<extensions defaultExtensionNs="com.intellij">
 		<problemFileHighlightFilter implementation="org.eclipse.xtext.idea.highlighting.ProblemXtextFileHighlightFilter"/>
+
+		<typedHandler implementation="org.eclipse.xtext.idea.editorActions.XtextAutoEditTypedHandler" order="first"/>
+		<backspaceHandlerDelegate implementation="org.eclipse.xtext.idea.editorActions.XtextAutoEditBackspaceHandler" order="first"/>
+		<enterHandlerDelegate implementation="org.eclipse.xtext.idea.editorActions.XtextAutoEditEnterHandler" order="first"/>
    	</extensions>
 
 	<project-components>
@@ -22,7 +26,7 @@
 			<implementation-class>org.eclipse.xtext.idea.extensions.EcoreGlobalRegistries</implementation-class>
 		</component>
 	</application-components>
-	
+
 	<extensionPoints>
 		<extensionPoint name="lang.setup" beanClass="com.intellij.lang.LanguageExtensionPoint">
 			<with attribute="implementationClass" implements="org.eclipse.xtext.ISetup"/>
@@ -31,6 +35,10 @@
 		<extensionPoint name="package" beanClass="org.eclipse.xtext.idea.extensions.EPackageEP"/>
 		<extensionPoint name="resourceFactory" beanClass="org.eclipse.xtext.idea.extensions.ResourceFactoryEP"/>
 		<extensionPoint name="resourceServiceProvider" beanClass="org.eclipse.xtext.idea.extensions.ResourceServiceProviderEP"/>
+
+		<extensionPoint name="lang.editor.autoEditHandler" beanClass="com.intellij.lang.LanguageExtensionPoint">
+			<with attribute="implementationClass" implements="org.eclipse.xtext.idea.editorActions.IdeaAutoEditHandler"/>
+		</extensionPoint>
 	</extensionPoints>
      
     <extensions defaultExtensionNs="org.eclipse.xtext.idea">
