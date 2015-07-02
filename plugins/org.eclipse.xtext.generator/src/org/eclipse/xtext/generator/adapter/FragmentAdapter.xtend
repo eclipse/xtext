@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.generator
+package org.eclipse.xtext.generator.adapter
 
 import com.google.common.collect.Maps
 import com.google.inject.Inject
@@ -16,17 +16,25 @@ import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xpand2.XpandExecutionContext
 import org.eclipse.xpand2.XpandExecutionContextImpl
 import org.eclipse.xpand2.output.Outlet
-import org.eclipse.xpand2.output.OutputImpl
 import org.eclipse.xpand2.output.PostProcessor
 import org.eclipse.xtend.expression.Variable
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.type.impl.java.JavaBeansMetaModel
 import org.eclipse.xtext.GrammarUtil
+import org.eclipse.xtext.generator.Binding
+import org.eclipse.xtext.generator.Generator
+import org.eclipse.xtext.generator.IFileSystemAccess2
+import org.eclipse.xtext.generator.IGeneratorFragment
+import org.eclipse.xtext.generator.IGeneratorFragmentExtension2
+import org.eclipse.xtext.generator.LanguageConfig
+import org.eclipse.xtext.generator.Naming
+import org.eclipse.xtext.generator.NewlineNormalizer
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.xtext.generator.IGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.LanguageConfig2
 import org.eclipse.xtext.xtext.generator.model.CodeConfig
 import org.eclipse.xtext.xtext.generator.model.FileSystemAccess
+import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.IXtextProjectConfig
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess
 
@@ -58,11 +66,59 @@ class FragmentAdapter implements IGeneratorFragment2 {
 		if (naming === null)
 			naming = createNaming()
 		val ctx = createExecutionContext()
+		val config = createLanguageConfig()
 		if (fragment instanceof IGeneratorFragmentExtension2) {
-			val config = createLanguageConfig()
 			fragment.generate(config, ctx)
 		} else {
-			fragment.generate(languageConfig2.grammar, ctx)
+			fragment.generate(config.grammar, ctx)
+		}
+		generateStandaloneSetup(config, ctx)
+		generateGuiceModuleRt(config, ctx)
+		generateGuiceModuleUi(config, ctx)
+		generatePluginXmlRt(config, ctx)
+	}
+	
+	private def void generateStandaloneSetup(LanguageConfig config, XpandExecutionContext ctx) {
+		ctx.output.openFile(null, StringConcatOutputImpl.STRING_OUTLET)
+		try {
+			if (fragment instanceof IGeneratorFragmentExtension2) {
+				fragment.addToStandaloneSetup(config, ctx)
+			} else {
+				fragment.addToStandaloneSetup(config.grammar, ctx)
+			}
+			val result = (ctx.output as StringConcatOutputImpl).stringOutlet
+			languageConfig2.runtimeSetup.codeFragments += result
+		} finally {
+			ctx.output.closeFile()
+		}
+	}
+	
+	private def generateGuiceModuleRt(LanguageConfig config, XpandExecutionContext ctx) {
+		languageConfig2.runtimeModule.bindings.addAll(fragment.getGuiceBindingsRt(config.grammar).map[translateBinding])
+	}
+	
+	private def generateGuiceModuleUi(LanguageConfig config, XpandExecutionContext ctx) {
+		languageConfig2.eclipsePluginModule.bindings.addAll(fragment.getGuiceBindingsUi(config.grammar).map[translateBinding])
+	}
+	
+	private def translateBinding(Binding it) {
+		val newKey = new GuiceModuleAccess.BindKey(key.type, key.singleton, key.eagerSingleton)
+		val newValue = new GuiceModuleAccess.BindValue(value.expression, value.typeName, value.provider, value.statements)
+		new GuiceModuleAccess.Binding(newKey, newValue, contributedBy, final)
+	}
+	
+	private def void generatePluginXmlRt(LanguageConfig config, XpandExecutionContext ctx) {
+		ctx.output.openFile(null, StringConcatOutputImpl.STRING_OUTLET)
+		try {
+			if (fragment instanceof IGeneratorFragmentExtension2) {
+				fragment.addToPluginXmlRt(config, ctx)
+			} else {
+				fragment.addToPluginXmlRt(config.grammar, ctx)
+			}
+			val result = (ctx.output as StringConcatOutputImpl).stringOutlet
+			projectConfig.runtimePluginXml.codeFragments += result
+		} finally {
+			ctx.output.closeFile()
 		}
 	}
 	
@@ -100,7 +156,7 @@ class FragmentAdapter implements IGeneratorFragment2 {
 
 	protected def XpandExecutionContext createExecutionContext() {
 		val encoding = encodingProvider.getEncoding(null)
-		val output = new OutputImpl
+		val output = new StringConcatOutputImpl
 
 		output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_RT, false, naming.projectNameRt))
 		if (projectConfig.runtimeSrc !== null)
@@ -163,3 +219,4 @@ class FragmentAdapter implements IGeneratorFragment2 {
 	}
 	
 }
+															

@@ -5,27 +5,33 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.generator;
+package org.eclipse.xtext.generator.adapter;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.XpandExecutionContextImpl;
 import org.eclipse.xpand2.output.Outlet;
-import org.eclipse.xpand2.output.OutputImpl;
+import org.eclipse.xpand2.output.Output;
 import org.eclipse.xpand2.output.PostProcessor;
 import org.eclipse.xtend.expression.ExecutionContext;
 import org.eclipse.xtend.expression.ResourceManager;
 import org.eclipse.xtend.expression.Variable;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.type.impl.java.JavaBeansMetaModel;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.generator.BindKey;
+import org.eclipse.xtext.generator.BindValue;
+import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Generator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorFragment;
@@ -33,8 +39,11 @@ import org.eclipse.xtext.generator.IGeneratorFragmentExtension2;
 import org.eclipse.xtext.generator.LanguageConfig;
 import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.generator.NewlineNormalizer;
+import org.eclipse.xtext.generator.adapter.StringConcatOutputImpl;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -43,8 +52,11 @@ import org.eclipse.xtext.xtext.generator.IGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.LanguageConfig2;
 import org.eclipse.xtext.xtext.generator.model.CodeConfig;
 import org.eclipse.xtext.xtext.generator.model.FileSystemAccess;
+import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
+import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 
 @SuppressWarnings("all")
 public class FragmentAdapter implements IGeneratorFragment2 {
@@ -82,12 +94,114 @@ public class FragmentAdapter implements IGeneratorFragment2 {
       this.naming = _createNaming;
     }
     final XpandExecutionContext ctx = this.createExecutionContext();
+    final LanguageConfig config = this.createLanguageConfig();
     if ((this.fragment instanceof IGeneratorFragmentExtension2)) {
-      final LanguageConfig config = this.createLanguageConfig();
       ((IGeneratorFragmentExtension2)this.fragment).generate(config, ctx);
     } else {
-      Grammar _grammar = this.languageConfig2.getGrammar();
+      Grammar _grammar = config.getGrammar();
       this.fragment.generate(_grammar, ctx);
+    }
+    this.generateStandaloneSetup(config, ctx);
+    this.generateGuiceModuleRt(config, ctx);
+    this.generateGuiceModuleUi(config, ctx);
+    this.generatePluginXmlRt(config, ctx);
+  }
+  
+  private void generateStandaloneSetup(final LanguageConfig config, final XpandExecutionContext ctx) {
+    Output _output = ctx.getOutput();
+    _output.openFile(null, StringConcatOutputImpl.STRING_OUTLET);
+    try {
+      if ((this.fragment instanceof IGeneratorFragmentExtension2)) {
+        ((IGeneratorFragmentExtension2)this.fragment).addToStandaloneSetup(config, ctx);
+      } else {
+        Grammar _grammar = config.getGrammar();
+        this.fragment.addToStandaloneSetup(_grammar, ctx);
+      }
+      Output _output_1 = ctx.getOutput();
+      final StringConcatenation result = ((StringConcatOutputImpl) _output_1).getStringOutlet();
+      JavaFileAccess _runtimeSetup = this.languageConfig2.getRuntimeSetup();
+      List<CharSequence> _codeFragments = _runtimeSetup.getCodeFragments();
+      _codeFragments.add(result);
+    } finally {
+      Output _output_2 = ctx.getOutput();
+      _output_2.closeFile();
+    }
+  }
+  
+  private boolean generateGuiceModuleRt(final LanguageConfig config, final XpandExecutionContext ctx) {
+    GuiceModuleAccess _runtimeModule = this.languageConfig2.getRuntimeModule();
+    List<GuiceModuleAccess.Binding> _bindings = _runtimeModule.getBindings();
+    Grammar _grammar = config.getGrammar();
+    Set<Binding> _guiceBindingsRt = this.fragment.getGuiceBindingsRt(_grammar);
+    final Function1<Binding, GuiceModuleAccess.Binding> _function = new Function1<Binding, GuiceModuleAccess.Binding>() {
+      @Override
+      public GuiceModuleAccess.Binding apply(final Binding it) {
+        return FragmentAdapter.this.translateBinding(it);
+      }
+    };
+    Iterable<GuiceModuleAccess.Binding> _map = IterableExtensions.<Binding, GuiceModuleAccess.Binding>map(_guiceBindingsRt, _function);
+    return Iterables.<GuiceModuleAccess.Binding>addAll(_bindings, _map);
+  }
+  
+  private boolean generateGuiceModuleUi(final LanguageConfig config, final XpandExecutionContext ctx) {
+    GuiceModuleAccess _eclipsePluginModule = this.languageConfig2.getEclipsePluginModule();
+    List<GuiceModuleAccess.Binding> _bindings = _eclipsePluginModule.getBindings();
+    Grammar _grammar = config.getGrammar();
+    Set<Binding> _guiceBindingsUi = this.fragment.getGuiceBindingsUi(_grammar);
+    final Function1<Binding, GuiceModuleAccess.Binding> _function = new Function1<Binding, GuiceModuleAccess.Binding>() {
+      @Override
+      public GuiceModuleAccess.Binding apply(final Binding it) {
+        return FragmentAdapter.this.translateBinding(it);
+      }
+    };
+    Iterable<GuiceModuleAccess.Binding> _map = IterableExtensions.<Binding, GuiceModuleAccess.Binding>map(_guiceBindingsUi, _function);
+    return Iterables.<GuiceModuleAccess.Binding>addAll(_bindings, _map);
+  }
+  
+  private GuiceModuleAccess.Binding translateBinding(final Binding it) {
+    GuiceModuleAccess.Binding _xblockexpression = null;
+    {
+      BindKey _key = it.getKey();
+      String _type = _key.getType();
+      BindKey _key_1 = it.getKey();
+      boolean _isSingleton = _key_1.isSingleton();
+      BindKey _key_2 = it.getKey();
+      boolean _isEagerSingleton = _key_2.isEagerSingleton();
+      final GuiceModuleAccess.BindKey newKey = new GuiceModuleAccess.BindKey(_type, _isSingleton, _isEagerSingleton);
+      BindValue _value = it.getValue();
+      String _expression = _value.getExpression();
+      BindValue _value_1 = it.getValue();
+      String _typeName = _value_1.getTypeName();
+      BindValue _value_2 = it.getValue();
+      boolean _isProvider = _value_2.isProvider();
+      BindValue _value_3 = it.getValue();
+      String[] _statements = _value_3.getStatements();
+      final GuiceModuleAccess.BindValue newValue = new GuiceModuleAccess.BindValue(_expression, _typeName, _isProvider, (List<CharSequence>)Conversions.doWrapArray(_statements));
+      String _contributedBy = it.getContributedBy();
+      boolean _isFinal = it.isFinal();
+      _xblockexpression = new GuiceModuleAccess.Binding(newKey, newValue, _contributedBy, _isFinal);
+    }
+    return _xblockexpression;
+  }
+  
+  private void generatePluginXmlRt(final LanguageConfig config, final XpandExecutionContext ctx) {
+    Output _output = ctx.getOutput();
+    _output.openFile(null, StringConcatOutputImpl.STRING_OUTLET);
+    try {
+      if ((this.fragment instanceof IGeneratorFragmentExtension2)) {
+        ((IGeneratorFragmentExtension2)this.fragment).addToPluginXmlRt(config, ctx);
+      } else {
+        Grammar _grammar = config.getGrammar();
+        this.fragment.addToPluginXmlRt(_grammar, ctx);
+      }
+      Output _output_1 = ctx.getOutput();
+      final StringConcatenation result = ((StringConcatOutputImpl) _output_1).getStringOutlet();
+      TextFileAccess _runtimePluginXml = this.projectConfig.getRuntimePluginXml();
+      List<CharSequence> _codeFragments = _runtimePluginXml.getCodeFragments();
+      _codeFragments.add(result);
+    } finally {
+      Output _output_2 = ctx.getOutput();
+      _output_2.closeFile();
     }
   }
   
@@ -174,7 +288,7 @@ public class FragmentAdapter implements IGeneratorFragment2 {
   
   protected XpandExecutionContext createExecutionContext() {
     final String encoding = this.encodingProvider.getEncoding(null);
-    final OutputImpl output = new OutputImpl();
+    final StringConcatOutputImpl output = new StringConcatOutputImpl();
     String _projectNameRt = this.naming.getProjectNameRt();
     Outlet _createOutlet = this.createOutlet(false, encoding, Generator.PLUGIN_RT, false, _projectNameRt);
     output.addOutlet(_createOutlet);

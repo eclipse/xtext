@@ -52,6 +52,9 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.CompositeGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.XtextGeneratorTemplates;
+import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
+import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 
 @Log
 @SuppressWarnings("all")
@@ -59,17 +62,25 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
   @Inject
   private Provider<ResourceSet> resourceSetProvider;
   
+  @Inject
+  private XtextGeneratorTemplates generatorTemplates;
+  
   @Accessors
   private String uri;
   
   @Accessors(AccessorType.PUBLIC_GETTER)
   private Grammar grammar;
   
-  @Accessors(AccessorType.PUBLIC_GETTER)
   private List<String> fileExtensions;
   
   @Accessors
   private final List<String> loadedResources = CollectionLiterals.<String>newArrayList();
+  
+  private JavaFileAccess runtimeSetupImpl;
+  
+  private GuiceModuleAccess runtimeModule;
+  
+  private GuiceModuleAccess eclipsePluginModule;
   
   public void setFileExtensions(final String fileExtensions) {
     String _trim = fileExtensions.trim();
@@ -78,8 +89,54 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
     this.fileExtensions = _list;
   }
   
+  public List<String> getFileExtensions() {
+    boolean _or = false;
+    if ((this.fileExtensions == null)) {
+      _or = true;
+    } else {
+      boolean _isEmpty = this.fileExtensions.isEmpty();
+      _or = _isEmpty;
+    }
+    if (_or) {
+      String _name = GrammarUtil.getName(this.grammar);
+      final String lowerCase = _name.toLowerCase();
+      boolean _isInfoEnabled = LanguageConfig2.LOG.isInfoEnabled();
+      if (_isInfoEnabled) {
+        LanguageConfig2.LOG.info((("No explicit fileExtensions configured. Using \'*." + lowerCase) + "\'."));
+      }
+      return Collections.<String>singletonList(lowerCase);
+    }
+    return this.fileExtensions;
+  }
+  
   public void addLoadedResource(final String uri) {
     this.loadedResources.add(uri);
+  }
+  
+  public JavaFileAccess getRuntimeSetup() {
+    if ((this.runtimeSetupImpl == null)) {
+      JavaFileAccess _startRuntimeGenSetup = this.generatorTemplates.startRuntimeGenSetup();
+      this.runtimeSetupImpl = _startRuntimeGenSetup;
+    }
+    return this.runtimeSetupImpl;
+  }
+  
+  public GuiceModuleAccess getRuntimeModule() {
+    boolean _equals = Objects.equal(this.runtimeModule, null);
+    if (_equals) {
+      GuiceModuleAccess _startRuntimeGenModule = this.generatorTemplates.startRuntimeGenModule();
+      this.runtimeModule = _startRuntimeGenModule;
+    }
+    return this.runtimeModule;
+  }
+  
+  public GuiceModuleAccess getEclipsePluginModule() {
+    boolean _equals = Objects.equal(this.eclipsePluginModule, null);
+    if (_equals) {
+      GuiceModuleAccess _startEclipsePluginGenModule = this.generatorTemplates.startEclipsePluginGenModule();
+      this.eclipsePluginModule = _startEclipsePluginGenModule;
+    }
+    return this.eclipsePluginModule;
   }
   
   public void initialize() {
@@ -359,11 +416,6 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
   @Pure
   public Grammar getGrammar() {
     return this.grammar;
-  }
-  
-  @Pure
-  public List<String> getFileExtensions() {
-    return this.fileExtensions;
   }
   
   @Pure

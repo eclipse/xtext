@@ -18,6 +18,9 @@ import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.model.CodeConfig;
 import org.eclipse.xtext.xtext.generator.model.IClassAnnotation;
@@ -37,18 +40,16 @@ public class JavaFileAccess extends TextFileAccess {
   @Accessors
   private boolean markedAsGenerated;
   
-  public JavaFileAccess(final String packageName, final CodeConfig codeConfig) {
-    this.packageName = packageName;
-    this.codeConfig = codeConfig;
-  }
-  
-  public JavaFileAccess(final String packageName, final String simpleName, final CodeConfig codeConfig) {
-    String _replace = packageName.replace(".", "/");
+  public JavaFileAccess(final String qualifiedName, final CodeConfig codeConfig) {
+    final int simpleNameIndex = qualifiedName.lastIndexOf(".");
+    String _substring = qualifiedName.substring(0, simpleNameIndex);
+    this.packageName = _substring;
+    final String simpleName = qualifiedName.substring((simpleNameIndex + 1));
+    String _replace = this.packageName.replace(".", "/");
     String _plus = (_replace + "/");
     String _plus_1 = (_plus + simpleName);
     String _plus_2 = (_plus_1 + ".java");
     this.setPath(_plus_2);
-    this.packageName = packageName;
     this.codeConfig = codeConfig;
   }
   
@@ -90,13 +91,21 @@ public class JavaFileAccess extends TextFileAccess {
   @Override
   public CharSequence generate() {
     List<IClassAnnotation> _classAnnotations = this.codeConfig.getClassAnnotations();
-    for (final IClassAnnotation annot : _classAnnotations) {
-      boolean _appliesTo = annot.appliesTo(this);
-      if (_appliesTo) {
-        String _annotationImport = annot.getAnnotationImport();
-        this.imported(_annotationImport);
+    final Function1<IClassAnnotation, Boolean> _function = new Function1<IClassAnnotation, Boolean>() {
+      @Override
+      public Boolean apply(final IClassAnnotation it) {
+        return Boolean.valueOf(it.appliesTo(JavaFileAccess.this));
       }
-    }
+    };
+    final Iterable<IClassAnnotation> classAnnotations = IterableExtensions.<IClassAnnotation>filter(_classAnnotations, _function);
+    final Procedure1<IClassAnnotation> _function_1 = new Procedure1<IClassAnnotation>() {
+      @Override
+      public void apply(final IClassAnnotation it) {
+        String _annotationImport = it.getAnnotationImport();
+        JavaFileAccess.this.imported(_annotationImport);
+      }
+    };
+    IterableExtensions.<IClassAnnotation>forEach(classAnnotations, _function_1);
     Collection<String> _values = this.imports.values();
     final ArrayList<String> sortedImports = Lists.<String>newArrayList(_values);
     Collections.<String>sort(sortedImports);
@@ -121,16 +130,10 @@ public class JavaFileAccess extends TextFileAccess {
     _builder.append(this.typeComment, "");
     _builder.newLineIfNotEmpty();
     {
-      List<IClassAnnotation> _classAnnotations_1 = this.codeConfig.getClassAnnotations();
-      for(final IClassAnnotation annot_1 : _classAnnotations_1) {
-        {
-          boolean _appliesTo_1 = annot_1.appliesTo(this);
-          if (_appliesTo_1) {
-            CharSequence _generate = annot_1.generate();
-            _builder.append(_generate, "");
-            _builder.newLineIfNotEmpty();
-          }
-        }
+      for(final IClassAnnotation annot : classAnnotations) {
+        CharSequence _generate = annot.generate();
+        _builder.append(_generate, "");
+        _builder.newLineIfNotEmpty();
       }
     }
     {

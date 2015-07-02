@@ -21,6 +21,7 @@ import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent2;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -28,10 +29,12 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.DefaultGeneratorModule;
 import org.eclipse.xtext.xtext.generator.LanguageConfig2;
+import org.eclipse.xtext.xtext.generator.XtextGeneratorTemplates;
 import org.eclipse.xtext.xtext.generator.model.CodeConfig;
+import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
-import org.eclipse.xtext.xtext.generator.model.ModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 import org.eclipse.xtext.xtext.generator.model.XtextProjectConfig;
 
@@ -80,6 +83,9 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
       {
         final Injector injector = this.createInjector(language);
         language.generate();
+        final XtextGeneratorTemplates templates = injector.<XtextGeneratorTemplates>getInstance(XtextGeneratorTemplates.class);
+        this.generateRuntimeSetup(language, project, templates);
+        this.generateModules(language, project, templates);
         if ((project == null)) {
           IXtextProjectConfig _instance = injector.<IXtextProjectConfig>getInstance(IXtextProjectConfig.class);
           project = _instance;
@@ -92,8 +98,42 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
     }
     if ((project != null)) {
       this.generateManifests(project);
-      this.generateModules(project);
       this.generatePluginXmls(project, encodingProvider);
+    }
+  }
+  
+  protected void generateRuntimeSetup(final LanguageConfig2 language, final IXtextProjectConfig project, final XtextGeneratorTemplates templates) {
+    JavaFileAccess _runtimeSetup = templates.getRuntimeSetup();
+    IFileSystemAccess2 _runtimeSrc = project.getRuntimeSrc();
+    _runtimeSetup.writeTo(_runtimeSrc);
+    JavaFileAccess _runtimeSetup_1 = language.getRuntimeSetup();
+    JavaFileAccess _finishRuntimeGenSetup = templates.finishRuntimeGenSetup(_runtimeSetup_1);
+    IFileSystemAccess2 _runtimeSrcGen = project.getRuntimeSrcGen();
+    _finishRuntimeGenSetup.writeTo(_runtimeSrcGen);
+  }
+  
+  protected void generateModules(final LanguageConfig2 language, final IXtextProjectConfig project, final XtextGeneratorTemplates templates) {
+    JavaFileAccess _runtimeModule = templates.getRuntimeModule();
+    IFileSystemAccess2 _runtimeSrc = project.getRuntimeSrc();
+    _runtimeModule.writeTo(_runtimeSrc);
+    GuiceModuleAccess _runtimeModule_1 = language.getRuntimeModule();
+    GuiceModuleAccess _finishGenModule = templates.finishGenModule(_runtimeModule_1);
+    IFileSystemAccess2 _runtimeSrcGen = project.getRuntimeSrcGen();
+    _finishGenModule.writeTo(_runtimeSrcGen);
+    IFileSystemAccess2 _eclipsePluginSrc = project.getEclipsePluginSrc();
+    boolean _tripleNotEquals = (_eclipsePluginSrc != null);
+    if (_tripleNotEquals) {
+      JavaFileAccess _eclipsePluginModule = templates.getEclipsePluginModule();
+      IFileSystemAccess2 _eclipsePluginSrc_1 = project.getEclipsePluginSrc();
+      _eclipsePluginModule.writeTo(_eclipsePluginSrc_1);
+    }
+    IFileSystemAccess2 _eclipsePluginSrcGen = project.getEclipsePluginSrcGen();
+    boolean _tripleNotEquals_1 = (_eclipsePluginSrcGen != null);
+    if (_tripleNotEquals_1) {
+      GuiceModuleAccess _eclipsePluginModule_1 = language.getEclipsePluginModule();
+      GuiceModuleAccess _finishGenModule_1 = templates.finishGenModule(_eclipsePluginModule_1);
+      IFileSystemAccess2 _eclipsePluginSrcGen_1 = project.getEclipsePluginSrcGen();
+      _finishGenModule_1.writeTo(_eclipsePluginSrcGen_1);
     }
   }
   
@@ -137,49 +177,6 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
     ManifestAccess _webTestManifest = project.getWebTestManifest();
     if (_webTestManifest!=null) {
       _webTestManifest.generate();
-    }
-  }
-  
-  protected void generateModules(final IXtextProjectConfig project) {
-    ModuleAccess _runtimeModule = project.getRuntimeModule();
-    if (_runtimeModule!=null) {
-      _runtimeModule.generate();
-    }
-    ModuleAccess _runtimeTestModule = project.getRuntimeTestModule();
-    if (_runtimeTestModule!=null) {
-      _runtimeTestModule.generate();
-    }
-    ModuleAccess _genericIdeModule = project.getGenericIdeModule();
-    if (_genericIdeModule!=null) {
-      _genericIdeModule.generate();
-    }
-    ModuleAccess _genericIdeTestModule = project.getGenericIdeTestModule();
-    if (_genericIdeTestModule!=null) {
-      _genericIdeTestModule.generate();
-    }
-    ModuleAccess _eclipsePluginModule = project.getEclipsePluginModule();
-    if (_eclipsePluginModule!=null) {
-      _eclipsePluginModule.generate();
-    }
-    ModuleAccess _eclipsePluginTestModule = project.getEclipsePluginTestModule();
-    if (_eclipsePluginTestModule!=null) {
-      _eclipsePluginTestModule.generate();
-    }
-    ModuleAccess _ideaPluginModule = project.getIdeaPluginModule();
-    if (_ideaPluginModule!=null) {
-      _ideaPluginModule.generate();
-    }
-    ModuleAccess _ideaPluginTestModule = project.getIdeaPluginTestModule();
-    if (_ideaPluginTestModule!=null) {
-      _ideaPluginTestModule.generate();
-    }
-    ModuleAccess _webModule = project.getWebModule();
-    if (_webModule!=null) {
-      _webModule.generate();
-    }
-    ModuleAccess _webTestModule = project.getWebTestModule();
-    if (_webTestModule!=null) {
-      _webTestModule.generate();
     }
   }
   

@@ -27,14 +27,11 @@ class JavaFileAccess extends TextFileAccess {
 	@Accessors
 	boolean markedAsGenerated
 	
-	new(String packageName, CodeConfig codeConfig) {
-		this.packageName = packageName
-		this.codeConfig = codeConfig
-	}
-	
-	new(String packageName, String simpleName, CodeConfig codeConfig) {
+	new(String qualifiedName, CodeConfig codeConfig) {
+		val simpleNameIndex = qualifiedName.lastIndexOf('.')
+		this.packageName = qualifiedName.substring(0, simpleNameIndex)
+		val simpleName = qualifiedName.substring(simpleNameIndex + 1)
 		this.path = packageName.replace('.', '/') + '/' + simpleName + '.java'
-		this.packageName = packageName
 		this.codeConfig = codeConfig
 	}
 	
@@ -60,10 +57,8 @@ class JavaFileAccess extends TextFileAccess {
 	}
 	
 	override generate() {
-		for (annot : codeConfig.classAnnotations) {
-			if (annot.appliesTo(this))
-				imported(annot.annotationImport)
-		}
+		val classAnnotations = codeConfig.classAnnotations.filter[appliesTo(this)]
+		classAnnotations.forEach[imported(annotationImport)]
 		val sortedImports = Lists.newArrayList(imports.values())
 		Collections.sort(sortedImports)
 		return '''
@@ -75,10 +70,8 @@ class JavaFileAccess extends TextFileAccess {
 			«ENDFOR»
 			
 			«typeComment»
-			«FOR annot : codeConfig.classAnnotations»
-				«IF annot.appliesTo(this)»
-					«annot.generate()»
-				«ENDIF»
+			«FOR annot : classAnnotations»
+				«annot.generate()»
 			«ENDFOR»
 			«FOR fragment : codeFragments»
 				«fragment»

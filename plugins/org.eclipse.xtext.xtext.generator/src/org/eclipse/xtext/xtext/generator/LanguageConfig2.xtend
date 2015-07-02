@@ -33,11 +33,15 @@ import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.util.internal.Log
+import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
+import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
 
 @Log
 class LanguageConfig2 extends CompositeGeneratorFragment2 {
 	
 	@Inject Provider<ResourceSet> resourceSetProvider
+	
+	@Inject XtextGeneratorTemplates generatorTemplates
 	
 	@Accessors
 	String uri
@@ -45,18 +49,51 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 {
 	@Accessors(PUBLIC_GETTER)
 	Grammar grammar
 	
-	@Accessors(PUBLIC_GETTER)
 	List<String> fileExtensions
 	
 	@Accessors
 	val List<String> loadedResources = newArrayList
 	
+	JavaFileAccess runtimeSetupImpl
+	
+	GuiceModuleAccess runtimeModule
+	
+	GuiceModuleAccess eclipsePluginModule
+	
 	def void setFileExtensions(String fileExtensions) {
 		this.fileExtensions = fileExtensions.trim.split("\\s*,\\s*").toList
 	}
 	
+	def List<String> getFileExtensions() {
+		if (fileExtensions === null || fileExtensions.empty) {
+			val lowerCase = GrammarUtil.getName(grammar).toLowerCase
+			if (LOG.infoEnabled)
+				LOG.info("No explicit fileExtensions configured. Using '*." + lowerCase + "'.")
+			return Collections.singletonList(lowerCase)
+		}
+		return fileExtensions
+	}
+	
 	def void addLoadedResource(String uri) {
 		this.loadedResources.add(uri)
+	}
+	
+	def JavaFileAccess getRuntimeSetup() {
+		if (runtimeSetupImpl === null)
+			runtimeSetupImpl = generatorTemplates.startRuntimeGenSetup()
+		return runtimeSetupImpl
+	}
+	
+	def GuiceModuleAccess getRuntimeModule() {
+		if (runtimeModule == null)
+			runtimeModule = generatorTemplates.startRuntimeGenModule()
+		return runtimeModule
+	}
+	
+	def GuiceModuleAccess getEclipsePluginModule() {
+		if (eclipsePluginModule == null)
+			eclipsePluginModule = generatorTemplates.startEclipsePluginGenModule()
+		return eclipsePluginModule
 	}
 	
 	def void initialize() {

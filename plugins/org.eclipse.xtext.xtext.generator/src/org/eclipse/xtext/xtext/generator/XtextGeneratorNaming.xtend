@@ -13,32 +13,52 @@ import static org.eclipse.xtext.GrammarUtil.*
 
 class XtextGeneratorNaming {
 	
+	def getPackage(String qualifiedName) {
+		qualifiedName.substring(0, qualifiedName.lastIndexOf('.'))
+	}
+	
+	def getSimple(String qualifiedName) {
+		qualifiedName.substring(qualifiedName.lastIndexOf('.'))
+	}
+	
 	def getRuntimeBasePackage(Grammar grammar) {
 		getNamespace(grammar)
 	}
 	
-	def getRuntimeGuiceModuleSimple(Grammar grammar) {
-		getName(grammar) + 'RuntimeModule'
+	def getRuntimeModule(Grammar grammar) {
+		grammar.runtimeBasePackage + getName(grammar) + 'RuntimeModule'
 	}
 	
-	def getRuntimeGuiceModuleFull(Grammar grammar) {
-		grammar.runtimeBasePackage + grammar.runtimeGuiceModuleSimple
+	def getRuntimeGenModule(Grammar grammar) {
+		grammar.runtimeBasePackage + 'Abstract' + getName(grammar) + 'RuntimeModule'
 	}
 	
-	def getRuntimeSetupSimple(Grammar grammar) {
-		getName(grammar) + 'StandaloneSetup'
+	def getRuntimeDefaultModule(Grammar grammar) {
+		'org.eclipse.xtext.service.DefaultRuntimeModule'
 	}
 	
-	def getRuntimeSetupFull(Grammar grammar) {
-		grammar.runtimeBasePackage + grammar.runtimeSetupSimple
+	def getRuntimeSetup(Grammar grammar) {
+		grammar.runtimeBasePackage + getName(grammar) + 'StandaloneSetup'
 	}
 	
-	def getRuntimeSetupImplSimple(Grammar grammar) {
-		getName(grammar) + 'StandaloneSetupGenerated'
+	def getRuntimeGenSetup(Grammar grammar) {
+		grammar.runtimeBasePackage + getName(grammar) + 'StandaloneSetupGenerated'
 	}
 	
-	def getRuntimeSetupImplFull(Grammar grammar) {
-		grammar.runtimeBasePackage + grammar.runtimeSetupImplSimple
+	def getEclipsePluginBasePackage(Grammar grammar) {
+		getNamespace(grammar) + '.ui'
+	}
+	
+	def getEclipsePluginModule(Grammar grammar) {
+		grammar.eclipsePluginBasePackage + getName(grammar) + 'UiModule'
+	}
+	
+	def getEclipsePluginGenModule(Grammar grammar) {
+		grammar.eclipsePluginBasePackage + 'Abstract' + getName(grammar) + 'UiModule'
+	}
+	
+	def getEclipsePluginDefaultModule(Grammar grammar) {
+		'org.eclipse.xtext.ui.DefaultUiModule'
 	}
 	
 }
