@@ -99,8 +99,8 @@ protected class Model_TypesAssignment extends AssignmentToken  {
 /************ begin Rule Type ****************
  *
  * / * 
- *  * Suppress[BidirectionalReference]
- *  * Suppress[potentialOverride]
+ *  * SuppressWarnings[BidirectionalReference]
+ *  * SuppressWarnings[potentialOverride]
  *  * / Type:
  * 	"type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])?
  * 	"{" properties+=Property* unresolvedProxyProperty+=UnresolvedProxyProperty* "}";

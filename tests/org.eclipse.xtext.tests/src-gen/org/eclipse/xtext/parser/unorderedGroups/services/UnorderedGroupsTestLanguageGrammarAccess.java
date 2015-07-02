@@ -1034,7 +1034,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Assignment cSecondAssignment_1_2_1_1 = (Assignment)cUnorderedGroup_1_2_1.eContents().get(1);
 		private final Keyword cSecondBKeyword_1_2_1_1_0 = (Keyword)cSecondAssignment_1_2_1_1.eContents().get(0);
 		
-		/// * Suppress[potentialOverride] * / UnorderedSerialization:
+		/// * SuppressWarnings[potentialOverride] * / UnorderedSerialization:
 		//	{UnorderedSerialization} ("1" first?="a"? & second?="b"? & third?="c"? & forth?="d"? | "2" (firstAsList+="a" &
 		//	secondAsList+="b")* | "3" (firstAsList+="a"+ & second?="b")*);
 		@Override public ParserRule getRule() { return rule; }
@@ -1213,7 +1213,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		return getUnorderedDatatypeAccess().getRule();
 	}
 
-	/// * Suppress[potentialOverride] * / UnorderedSerialization:
+	/// * SuppressWarnings[potentialOverride] * / UnorderedSerialization:
 	//	{UnorderedSerialization} ("1" first?="a"? & second?="b"? & third?="c"? & forth?="d"? | "2" (firstAsList+="a" &
 	//	secondAsList+="b")* | "3" (firstAsList+="a"+ & second?="b")*);
 	public UnorderedSerializationElements getUnorderedSerializationAccess() {

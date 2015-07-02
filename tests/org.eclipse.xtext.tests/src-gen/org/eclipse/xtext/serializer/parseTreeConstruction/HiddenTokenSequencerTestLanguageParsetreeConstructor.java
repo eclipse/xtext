@@ -98,7 +98,7 @@ protected class Model_DomainModelAssignment extends AssignmentToken  {
 
 /************ begin Rule DomainModel ****************
  *
- * / * Suppress[noInstantiation] * / DomainModel:
+ * / * SuppressWarnings[noInstantiation] * / DomainModel:
  * 	"entities" entities+=Entity* "end";
  *
  **/

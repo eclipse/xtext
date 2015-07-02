@@ -181,7 +181,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		private final Assignment cItemAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cItemCommentableItemParserRuleCall_1_0 = (RuleCall)cItemAssignment_1.eContents().get(0);
 		
-		/// * Suppress[noInstantiation] * / Commentable:
+		/// * SuppressWarnings[noInstantiation] * / Commentable:
 		//	"#3" item+=CommentableItem*;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -229,7 +229,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		private final Assignment cIdsAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cIdsFQNParserRuleCall_1_0 = (RuleCall)cIdsAssignment_1.eContents().get(0);
 		
-		/// * Suppress[noInstantiation] * / ValueList:
+		/// * SuppressWarnings[noInstantiation] * / ValueList:
 		//	"#4" ids+=FQN*;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -257,7 +257,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		private final CrossReference cRefsRefObjCrossReference_3_0 = (CrossReference)cRefsAssignment_3.eContents().get(0);
 		private final RuleCall cRefsRefObjFQNParserRuleCall_3_0_1 = (RuleCall)cRefsRefObjCrossReference_3_0.eContents().get(1);
 		
-		/// * Suppress[noInstantiation] * / RefList:
+		/// * SuppressWarnings[noInstantiation] * / RefList:
 		//	"#5" objs+=RefObj* "refs" refs+=[RefObj|FQN]*;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -350,7 +350,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cItemsAppendToFileEndItemParserRuleCall_1_0 = (RuleCall)cItemsAssignment_1.eContents().get(0);
 		
 		//// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=297938
-		/// * Suppress[noInstantiation] * / AppendToFileEnd:
+		/// * SuppressWarnings[noInstantiation] * / AppendToFileEnd:
 		//	"#7" items+=AppendToFileEndItem*;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -645,7 +645,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		return getEnumBugEnumAccess().getRule();
 	}
 
-	/// * Suppress[noInstantiation] * / Commentable:
+	/// * SuppressWarnings[noInstantiation] * / Commentable:
 	//	"#3" item+=CommentableItem*;
 	public CommentableElements getCommentableAccess() {
 		return pCommentable;
@@ -665,7 +665,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		return getCommentableItemAccess().getRule();
 	}
 
-	/// * Suppress[noInstantiation] * / ValueList:
+	/// * SuppressWarnings[noInstantiation] * / ValueList:
 	//	"#4" ids+=FQN*;
 	public ValueListElements getValueListAccess() {
 		return pValueList;
@@ -675,7 +675,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		return getValueListAccess().getRule();
 	}
 
-	/// * Suppress[noInstantiation] * / RefList:
+	/// * SuppressWarnings[noInstantiation] * / RefList:
 	//	"#5" objs+=RefObj* "refs" refs+=[RefObj|FQN]*;
 	public RefListElements getRefListAccess() {
 		return pRefList;
@@ -706,7 +706,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=297938
-	/// * Suppress[noInstantiation] * / AppendToFileEnd:
+	/// * SuppressWarnings[noInstantiation] * / AppendToFileEnd:
 	//	"#7" items+=AppendToFileEndItem*;
 	public AppendToFileEndElements getAppendToFileEndAccess() {
 		return pAppendToFileEnd;

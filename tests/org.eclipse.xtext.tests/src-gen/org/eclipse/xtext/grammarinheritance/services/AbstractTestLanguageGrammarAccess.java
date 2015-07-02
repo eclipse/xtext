@@ -49,7 +49,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		private final Assignment cElementsAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cElementsOverridableParserRuleParserRuleCall_1_0 = (RuleCall)cElementsAssignment_1.eContents().get(0);
 		
-		/// * Suppress[noInstantiation] * / AbstractCallOverridenParserRule returns mm::AModel:
+		/// * SuppressWarnings[noInstantiation] * / AbstractCallOverridenParserRule returns mm::AModel:
 		//	"overridemodel" elements+=OverridableParserRule*;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -121,7 +121,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		private final Assignment cElementsAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cElementsExtendableParserRuleParserRuleCall_1_0 = (RuleCall)cElementsAssignment_1.eContents().get(0);
 		
-		/// * Suppress[noInstantiation] * / AbstractCallExtendedParserRule returns mm::AModel:
+		/// * SuppressWarnings[noInstantiation] * / AbstractCallExtendedParserRule returns mm::AModel:
 		//	"extendedmodel" elements+=ExtendableParserRule*;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -228,7 +228,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		return getInheritedParserRuleAccess().getRule();
 	}
 
-	/// * Suppress[noInstantiation] * / AbstractCallOverridenParserRule returns mm::AModel:
+	/// * SuppressWarnings[noInstantiation] * / AbstractCallOverridenParserRule returns mm::AModel:
 	//	"overridemodel" elements+=OverridableParserRule*;
 	public AbstractCallOverridenParserRuleElements getAbstractCallOverridenParserRuleAccess() {
 		return pAbstractCallOverridenParserRule;
@@ -258,7 +258,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		return getOverridableParserRule2Access().getRule();
 	}
 
-	/// * Suppress[noInstantiation] * / AbstractCallExtendedParserRule returns mm::AModel:
+	/// * SuppressWarnings[noInstantiation] * / AbstractCallExtendedParserRule returns mm::AModel:
 	//	"extendedmodel" elements+=ExtendableParserRule*;
 	public AbstractCallExtendedParserRuleElements getAbstractCallExtendedParserRuleAccess() {
 		return pAbstractCallExtendedParserRule;

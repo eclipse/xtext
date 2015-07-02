@@ -66,8 +66,8 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		/// * 
-		// * Suppress[BidirectionalReference]
-		// * Suppress[potentialOverride]
+		// * SuppressWarnings[BidirectionalReference]
+		// * SuppressWarnings[potentialOverride]
 		// * / Type:
 		//	"type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])?
 		//	"{" properties+=Property* unresolvedProxyProperty+=UnresolvedProxyProperty* "}";
@@ -294,8 +294,8 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	/// * 
-	// * Suppress[BidirectionalReference]
-	// * Suppress[potentialOverride]
+	// * SuppressWarnings[BidirectionalReference]
+	// * SuppressWarnings[potentialOverride]
 	// * / Type:
 	//	"type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])?
 	//	"{" properties+=Property* unresolvedProxyProperty+=UnresolvedProxyProperty* "}";

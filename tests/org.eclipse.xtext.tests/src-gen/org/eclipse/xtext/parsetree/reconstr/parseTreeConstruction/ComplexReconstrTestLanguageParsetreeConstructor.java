@@ -692,7 +692,7 @@ protected class Atom_NameAssignment extends AssignmentToken  {
 
 /************ begin Rule Parens ****************
  *
- * / * Suppress[potentialOverride] * / Parens returns Expression:
+ * / * SuppressWarnings[potentialOverride] * / Parens returns Expression:
  * 	"(" Op ")" em="!"?;
  *
  **/
@@ -853,7 +853,7 @@ protected class Parens_EmAssignment_3 extends AssignmentToken  {
  * * / // disabled, because of https://bugs.eclipse.org/bugs/show_bug.cgi?id=346685
  * //TrickyA returns TypeA1: 'TA' TrickyA1 (name += ID)* ({TypeB.x=current} 'x' | {TypeC.x=current} 'y')? name+=STRING;
  * //TrickyA1 returns TypeD: name+=ID;
- * / * Suppress[noInstantiation] * / TrickyB:
+ * / * SuppressWarnings[noInstantiation] * / TrickyB:
  * 	"TB" (name=ID type+=INT)? type+=INT*;
  *
  **/
@@ -1392,7 +1392,7 @@ protected class TrickyC_ZKeyword_4_1 extends KeywordToken  {
 
 /************ begin Rule TrickyD ****************
  *
- * / * Suppress[noInstantiation] * / TrickyD:
+ * / * SuppressWarnings[noInstantiation] * / TrickyD:
  * 	"TD" (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? type+=ID*;
  *
  **/
@@ -1711,7 +1711,7 @@ protected class TrickyD_TypeAssignment_3 extends AssignmentToken  {
 /************ begin Rule TrickyE ****************
  *
  * // 34 "abc" XX 123 "de" YY x 34 DD 45 CC
- * / * Suppress[noInstantiation] * / TrickyE:
+ * / * SuppressWarnings[noInstantiation] * / TrickyE:
  * 	"TE" (name+=INT foo+=STRING type+=ID)* "x" (name+=INT type+=ID)*;
  *
  **/
@@ -2369,7 +2369,7 @@ protected class TrickyG_TreeAssignment_1 extends AssignmentToken  {
 
 /************ begin Rule TrickyG1 ****************
  *
- * / * Suppress[noInstantiation] * / TrickyG1:
+ * / * SuppressWarnings[noInstantiation] * / TrickyG1:
  * 	"[" (vals+=TrickyG2 ("," vals+=TrickyG2)*)? "]";
  *
  **/

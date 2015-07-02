@@ -105,7 +105,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 				"generate metamodel 'myURI'\n" +
 				 
 				"Model: child=Child;\n" + 
-				"/* Suppress[noInstantiation] */\n" +
+				"/* SuppressWarnings[noInstantiation] */\n" +
 				"Child: name=ID?;");
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
@@ -120,7 +120,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 				"grammar org.acme.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'myURI'\n" +
 						
-				"/* Suppress[potentialOverride] */\n" + 
+				"/* SuppressWarnings[potentialOverride] */\n" + 
 				"Parens: \n" + 
 				"  ('(' Parens ')'|name=ID) em='!'?;");
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());

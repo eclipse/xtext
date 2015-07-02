@@ -139,7 +139,7 @@ protected class InheritedParserRule_NameAssignment_1 extends AssignmentToken  {
 
 /************ begin Rule AbstractCallOverridenParserRule ****************
  *
- * / * Suppress[noInstantiation] * / AbstractCallOverridenParserRule returns mm::AModel:
+ * / * SuppressWarnings[noInstantiation] * / AbstractCallOverridenParserRule returns mm::AModel:
  * 	"overridemodel" elements+=OverridableParserRule*;
  *
  **/
@@ -438,7 +438,7 @@ protected class OverridableParserRule2_NameAssignment_1 extends AssignmentToken 
 
 /************ begin Rule AbstractCallExtendedParserRule ****************
  *
- * / * Suppress[noInstantiation] * / AbstractCallExtendedParserRule returns mm::AModel:
+ * / * SuppressWarnings[noInstantiation] * / AbstractCallExtendedParserRule returns mm::AModel:
  * 	"extendedmodel" elements+=ExtendableParserRule*;
  *
  **/

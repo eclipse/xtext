@@ -17,11 +17,11 @@ import "http://www.eclipse.org/2008/Xtext" as xtext
 Root:
 	"test" (TestLinewrap | TestIndentation);
 
-/* Suppress[noInstantiation] */
+/* SuppressWarnings[noInstantiation] */
 TestLinewrap:
 	"linewrap" items+=STRING*;
 	
-/* Suppress[noInstantiation] */
+/* SuppressWarnings[noInstantiation] */
 TestIndentation:
 	"indentation" "{" 
 		(sub+=TestIndentation | 

@@ -355,7 +355,7 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 												""+binding.getContributedBy()+" and "+entry.getContributedBy());
 									} else {
 										LOG.warn("Cannot override final binding '" + binding + "'. " +
-												"Ignoring binding from fragment '"+module.getClass().getSimpleName() +"'");
+												"Ignoring binding from fragment '"+getModuleClassName(module) +"'");
 									}
 								} else {
 									if (LOG.isDebugEnabled()) {
@@ -373,6 +373,14 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 			}
 		}
 		return bindings;
+	}
+
+	private String getModuleClassName(IGeneratorFragment module) {
+		String result = module.getClass().getSimpleName();
+		if (result.isEmpty()) {
+			return module.getClass().getName();
+		}
+		return result;
 	}
 	
 	@Override

@@ -43,7 +43,7 @@ protected class ThisRootNode extends RootToken {
 
 /************ begin Rule Statemachine ****************
  *
- * / * Suppress[noInstantiation] * / Statemachine:
+ * / * SuppressWarnings[noInstantiation] * / Statemachine:
  * 	"events" events+=Event* "end" "commands" commands+=Command* "end" states+=State*;
  *
  **/

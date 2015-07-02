@@ -746,7 +746,7 @@ protected class EnumBug_NameAssignment_3 extends AssignmentToken  {
 
 /************ begin Rule Commentable ****************
  *
- * / * Suppress[noInstantiation] * / Commentable:
+ * / * SuppressWarnings[noInstantiation] * / Commentable:
  * 	"#3" item+=CommentableItem*;
  *
  **/
@@ -950,7 +950,7 @@ protected class CommentableItem_IdAssignment_1 extends AssignmentToken  {
 
 /************ begin Rule ValueList ****************
  *
- * / * Suppress[noInstantiation] * / ValueList:
+ * / * SuppressWarnings[noInstantiation] * / ValueList:
  * 	"#4" ids+=FQN*;
  *
  **/
@@ -1047,7 +1047,7 @@ protected class ValueList_IdsAssignment_1 extends AssignmentToken  {
 
 /************ begin Rule RefList ****************
  *
- * / * Suppress[noInstantiation] * / RefList:
+ * / * SuppressWarnings[noInstantiation] * / RefList:
  * 	"#5" objs+=RefObj* "refs" refs+=[RefObj|FQN]*;
  *
  **/
@@ -1429,7 +1429,7 @@ protected class SingleRef_RefAssignment_3 extends AssignmentToken  {
 /************ begin Rule AppendToFileEnd ****************
  *
  * // see https://bugs.eclipse.org/bugs/show_bug.cgi?id=297938
- * / * Suppress[noInstantiation] * / AppendToFileEnd:
+ * / * SuppressWarnings[noInstantiation] * / AppendToFileEnd:
  * 	"#7" items+=AppendToFileEndItem*;
  *
  **/
