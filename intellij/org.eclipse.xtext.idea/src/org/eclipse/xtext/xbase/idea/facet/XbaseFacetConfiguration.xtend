@@ -7,23 +7,34 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.idea.facet
 
-import org.eclipse.xtext.generator.OutputConfiguration
+import com.intellij.facet.ui.FacetEditorContext
+import com.intellij.facet.ui.FacetEditorTab
+import com.intellij.facet.ui.FacetValidatorsManager
 import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration
+import org.eclipse.xtext.idea.facet.GeneratorFacetEditorTab
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-class AbstractXbaseFacetConfiguration extends AbstractFacetConfiguration {
-	
+class XbaseFacetConfiguration extends AbstractFacetConfiguration {
+
+	override FacetEditorTab[] createEditorTabs(FacetEditorContext editorContext,
+		FacetValidatorsManager validatorsManager) {
+		val uiForm = new XbaseFacetForm(editorContext.getFacet().getModule());
+		val facetEditorTab = new GeneratorFacetEditorTab<XbaseFacetConfiguration>(editorContext.getFacet(),
+			uiForm);
+		return #[facetEditorTab];
+	}
+
 	override XbaseGeneratorConfigurationState getState() {
 		return super.state as XbaseGeneratorConfigurationState
 	}
-	
+
 	override protected XbaseGeneratorConfigurationState createNewDefaultState() {
-		var OutputConfiguration defOutput=findDefaultOutputConfiguration() 
-		return new XbaseGeneratorConfigurationState(defOutput) 
+		var defOutput = findDefaultOutputConfiguration()
+		return new XbaseGeneratorConfigurationState(defOutput)
 	}
-	
+
 	def void loadState(XbaseGeneratorConfigurationState state) {
 		super.loadState(state);
 	}

@@ -9,16 +9,31 @@ package org.eclipse.xtext.xbase.idea.facet
 
 import org.eclipse.xtext.idea.facet.GeneratorConfigurationState
 import org.eclipse.xtext.generator.OutputConfiguration
+import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+ @Accessors
 class XbaseGeneratorConfigurationState extends GeneratorConfigurationState {
-	
-	new() {}
-	
+	String targetJavaVersion
+
+	boolean generateSuppressWarnings
+
+	boolean generateGeneratedAnnotation
+	boolean includeDateInGenerated
+	String generatedAnnotationComment
+
+	boolean installDslAsPrimarySource
+	boolean hideLocalSyntheticVariables
+
+	new() {
+	}
+
 	new(OutputConfiguration defOutput) {
 		super(defOutput)
+		generateSuppressWarnings = true
+		hideLocalSyntheticVariables = true
 	}
-	
+
 }

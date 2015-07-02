@@ -2886,7 +2886,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     {
       boolean _doesUseXbase_1 = XbaseGeneratorFragment.doesUseXbase(grammar);
       if (_doesUseXbase_1) {
-        _builder.append("AbstractXbaseFacetConfiguration implements PersistentStateComponent<XbaseGeneratorConfigurationState>");
+        _builder.append("XbaseFacetConfiguration implements PersistentStateComponent<XbaseGeneratorConfigurationState>");
       } else {
         _builder.append("AbstractFacetConfiguration implements PersistentStateComponent<GeneratorConfigurationState>");
       }

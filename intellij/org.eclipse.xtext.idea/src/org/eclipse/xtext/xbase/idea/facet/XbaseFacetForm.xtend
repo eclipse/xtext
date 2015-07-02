@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.core.idea.facet
+package org.eclipse.xtext.xbase.idea.facet
 
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.roots.LanguageLevelModuleExtension
@@ -15,7 +15,6 @@ import com.intellij.openapi.roots.ui.configuration.LanguageLevelCombo
 import com.intellij.pom.java.LanguageLevel
 import com.intellij.ui.components.JBTextField
 import javax.swing.JCheckBox
-import javax.swing.JLabel
 import org.eclipse.xtext.idea.facet.GeneratorConfigurationState
 import org.eclipse.xtext.idea.facet.GeneratorFacetForm
 import org.eclipse.xtext.idea.util.IdeaWidgetFactory
@@ -26,11 +25,9 @@ import static java.awt.GridBagConstraints.*
 /**
  * @author dhuebner - Initial contribution and API
  */
-class XtendFacetForm extends GeneratorFacetForm {
+class XbaseFacetForm extends GeneratorFacetForm {
 	extension IdeaWidgetFactory = new IdeaWidgetFactory
 
-	JCheckBox useJavaCompilerCompliance
-	JLabel targetJavaVersionLbl
 	LanguageLevelCombo targetJavaVersion
 	JCheckBox generateSuppressWarnings
 	JCheckBox generateGeneratedAnnotation
@@ -50,11 +47,6 @@ class XtendFacetForm extends GeneratorFacetForm {
 		generatedAnnotationComment.enabled = false
 		hideLocalSyntheticVariables.enabled = false
 
-		useJavaCompilerCompliance.addItemListener [
-			targetJavaVersion.enabled = !useJavaCompilerCompliance.selected
-			targetJavaVersionLbl.enabled = !useJavaCompilerCompliance.selected
-
-		]
 		generateGeneratedAnnotation.addItemListener [
 			includeDateInGenerated.enabled = generateGeneratedAnnotation.selected
 			generatedAnnotationComment.enabled = generateGeneratedAnnotation.selected
@@ -67,12 +59,10 @@ class XtendFacetForm extends GeneratorFacetForm {
 
 	override createGeneralSection(extension TwoColumnPanel it) {
 		super.createGeneralSection(it)
-		row [useJavaCompilerCompliance = checkBox("Use source compatibility level from Java settings")]
-		row [
-			indent
+		row[
 			container(
-				[targetJavaVersionLbl = label("Source compatibility level of generated code:")],
-				[expand(HORIZONTAL) targetJavaVersion = createLanguageLavelCombo()]
+				[label("Language level:")],
+				[expand(HORIZONTAL) targetJavaVersion = createLanguageLevelCombo()]
 			)
 		]
 		row [generateSuppressWarnings = checkBox("Generate @SuppressWarnings annotations")]
@@ -97,8 +87,7 @@ class XtendFacetForm extends GeneratorFacetForm {
 
 	override setData(GeneratorConfigurationState data) {
 		super.setData(data)
-		if (data instanceof XtendGeneratorConfigurationState) {
-			useJavaCompilerCompliance.setSelected(data.useJavaCompilerCompliance)
+		if (data instanceof XbaseGeneratorConfigurationState) {
 			if (LanguageLevel.values.findFirst[it.name() === data.targetJavaVersion] != null) {
 				targetJavaVersion.selectedItem = LanguageLevel.valueOf(data.targetJavaVersion)
 			} else {
@@ -112,13 +101,13 @@ class XtendFacetForm extends GeneratorFacetForm {
 			generatedAnnotationComment.text = data.generatedAnnotationComment
 
 			installDslAsPrimarySource.setSelected(data.installDslAsPrimarySource)
+			hideLocalSyntheticVariables.selected = data.hideLocalSyntheticVariables
 		}
 	}
 
 	override getData(GeneratorConfigurationState data) {
 		super.getData(data)
-		if (data instanceof XtendGeneratorConfigurationState) {
-			data.useJavaCompilerCompliance = useJavaCompilerCompliance.selected
+		if (data instanceof XbaseGeneratorConfigurationState) {
 			data.targetJavaVersion = targetJavaVersion.selectedItem?.toString
 
 			data.generateSuppressWarnings = generateSuppressWarnings.selected
@@ -128,13 +117,13 @@ class XtendFacetForm extends GeneratorFacetForm {
 			data.generatedAnnotationComment = generatedAnnotationComment.text
 
 			data.installDslAsPrimarySource = installDslAsPrimarySource.selected
+			data.hideLocalSyntheticVariables = hideLocalSyntheticVariables.selected
 		}
 	}
 
 	override isModified(GeneratorConfigurationState data) {
 		if (!super.isModified(data)) {
-			if (data instanceof XtendGeneratorConfigurationState) {
-				if(useJavaCompilerCompliance.isSelected() !== data.useJavaCompilerCompliance) return true
+			if (data instanceof XbaseGeneratorConfigurationState) {
 				if(if (targetJavaVersion.selectedItem !== null)
 					!targetJavaVersion.selectedItem.toString.equals(data.targetJavaVersion)
 				else
@@ -150,14 +139,16 @@ class XtendFacetForm extends GeneratorFacetForm {
 					data.generatedAnnotationComment !== null) return true
 
 				if(installDslAsPrimarySource.isSelected() !== data.installDslAsPrimarySource) return true
+				if(hideLocalSyntheticVariables.isSelected() !== data.hideLocalSyntheticVariables) return true
 			}
 			return false
 		}
 		return true
 	}
 
-	def LanguageLevelCombo createLanguageLavelCombo() {
+	def LanguageLevelCombo createLanguageLevelCombo() {
 		val defItem = "Module default"
+		//TODO reset available LanguageLvels when Module or Project level is changed
 		val langLavelCombo = new LanguageLevelCombo(defItem) {
 			val llExt = ModuleRootManager.getInstance(module).getModuleExtension(LanguageLevelModuleExtension)
 
