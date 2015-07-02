@@ -947,7 +947,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			@Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
 			@Storage(id = "dir", file = StoragePathMacros.PROJECT_CONFIG_DIR
 					+ "/«grammar.name.toSimpleName»GeneratorConfig.xml", scheme = StorageScheme.DIRECTORY_BASED)})
-	public class «grammar.facetConfiguration.toSimpleName» extends «IF grammar.doesUseXbase»AbstractXbaseFacetConfiguration implements PersistentStateComponent<XbaseGeneratorConfigurationState>«ELSE»AbstractFacetConfiguration implements PersistentStateComponent<GeneratorConfigurationState>«ENDIF»{
+	public class «grammar.facetConfiguration.toSimpleName» extends «IF grammar.doesUseXbase»XbaseFacetConfiguration implements PersistentStateComponent<XbaseGeneratorConfigurationState>«ELSE»AbstractFacetConfiguration implements PersistentStateComponent<GeneratorConfigurationState>«ENDIF»{
 	
 	}
 	'''
