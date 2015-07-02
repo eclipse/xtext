@@ -9,6 +9,6 @@ import com.intellij.openapi.components.StorageScheme;
 		@Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
 		@Storage(id = "dir", file = StoragePathMacros.PROJECT_CONFIG_DIR
 				+ "/XtextGeneratorConfig.xml", scheme = StorageScheme.DIRECTORY_BASED)})
-public class XtextFacetConfiguration extends AbstractFacetConfiguration {
+public class XtextFacetConfiguration extends AbstractFacetConfiguration<GeneratorConfigurationState> {
 	
 }

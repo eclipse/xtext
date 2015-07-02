@@ -37,7 +37,7 @@ class GeneratorFacetForm {
 
 			row [separator("Output Folder")]
 			createOutputSection
-			expand(GridBagConstraints.VERTICAL)
+			row [expand(GridBagConstraints.VERTICAL) label("")]
 		]
 
 	}

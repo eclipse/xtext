@@ -17,8 +17,10 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -68,26 +70,6 @@ public class IdeaWidgetFactory {
       return host;
     }
     
-    public IdeaWidgetFactory.TwoColumnPanel expand(final IdeaWidgetFactory.TwoColumnPanel host, final int dim) {
-      final Function1<GridBagConstraints, JComponent> _function = new Function1<GridBagConstraints, JComponent>() {
-        @Override
-        public JComponent apply(final GridBagConstraints it) {
-          if ((dim == GridBagConstraints.VERTICAL)) {
-            it.weighty = 1.0;
-          } else {
-            if ((dim == GridBagConstraints.HORIZONTAL)) {
-              it.weightx = 1.0;
-            } else {
-              throw new IllegalArgumentException();
-            }
-          }
-          return new JLabel("");
-        }
-      };
-      this.row(this, _function);
-      return host;
-    }
-    
     @Override
     public void add(final Component comp, final Object constraints) {
       super.add(comp, constraints);
@@ -101,6 +83,19 @@ public class IdeaWidgetFactory {
         }
       }
     }
+  }
+  
+  public JPanel container(final Function1<? super GridBagConstraints, ? extends JComponent>... children) {
+    final GridBagLayout layout = new GridBagLayout();
+    final JPanel flowPanel = new JPanel(layout);
+    for (final Function1<? super GridBagConstraints, ? extends JComponent> childAddition : children) {
+      {
+        final GridBagConstraints ld = new GridBagConstraints();
+        JComponent _apply = childAddition.apply(ld);
+        flowPanel.add(_apply, ld);
+      }
+    }
+    return flowPanel;
   }
   
   public JCheckBox checkBox(final String string) {
@@ -146,6 +141,29 @@ public class IdeaWidgetFactory {
     final MacroAwareTextBrowseFolderListener listener = new MacroAwareTextBrowseFolderListener(_createSingleFolderDescriptor, project);
     field.addBrowseFolderListener(listener);
     return field;
+  }
+  
+  public void expand(final GridBagConstraints it, final int dim) {
+    if ((dim == GridBagConstraints.VERTICAL)) {
+      it.weighty = 1.0;
+      it.fill = GridBagConstraints.VERTICAL;
+    } else {
+      if ((dim == GridBagConstraints.HORIZONTAL)) {
+        it.weightx = 1.0;
+        it.fill = GridBagConstraints.HORIZONTAL;
+      } else {
+        throw new IllegalArgumentException();
+      }
+    }
+  }
+  
+  public JComboBox comboBox() {
+    return new JComboBox();
+  }
+  
+  public void indent(final GridBagConstraints it) {
+    Insets _insets = new Insets(it.insets.top, (it.insets.left + 40), it.insets.bottom, it.insets.right);
+    it.insets = _insets;
   }
   
   public SeparatorWithText separator(final String title) {

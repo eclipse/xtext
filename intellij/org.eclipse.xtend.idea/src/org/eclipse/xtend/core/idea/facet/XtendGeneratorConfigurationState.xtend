@@ -15,5 +15,15 @@ import org.eclipse.xtext.idea.facet.GeneratorConfigurationState
  */
  @Accessors
 class XtendGeneratorConfigurationState extends GeneratorConfigurationState {
-	boolean useJavasSourcelevel
+	boolean useJavaCompilerCompliance
+	String targetJavaVersion
+	
+	boolean generateSuppressWarnings
+	
+	boolean generateGeneratedAnnotation
+	boolean includeDateInGenerated
+	String generatedAnnotationComment
+	
+	boolean installDslAsPrimarySource
+	boolean hideLocalSyntheticVariables
 }

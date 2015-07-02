@@ -6,6 +6,7 @@ import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import java.awt.GridBagConstraints;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import org.eclipse.xtext.idea.facet.GeneratorConfigurationState;
 import org.eclipse.xtext.idea.util.IdeaWidgetFactory;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -68,7 +69,18 @@ public class GeneratorFacetForm {
           };
           it.row(it, _function_2);
           GeneratorFacetForm.this.createOutputSection(it);
-          _xblockexpression = it.expand(it, GridBagConstraints.VERTICAL);
+          final Function1<GridBagConstraints, JComponent> _function_3 = new Function1<GridBagConstraints, JComponent>() {
+            @Override
+            public JComponent apply(final GridBagConstraints it) {
+              JLabel _xblockexpression = null;
+              {
+                GeneratorFacetForm.this._ideaWidgetFactory.expand(it, GridBagConstraints.VERTICAL);
+                _xblockexpression = GeneratorFacetForm.this._ideaWidgetFactory.label("");
+              }
+              return _xblockexpression;
+            }
+          };
+          _xblockexpression = it.row(it, _function_3);
         }
         return _xblockexpression;
       }

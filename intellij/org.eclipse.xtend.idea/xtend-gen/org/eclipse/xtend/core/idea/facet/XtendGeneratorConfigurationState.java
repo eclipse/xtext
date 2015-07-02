@@ -17,14 +17,91 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Accessors
 @SuppressWarnings("all")
 public class XtendGeneratorConfigurationState extends GeneratorConfigurationState {
-  private boolean useJavasSourcelevel;
+  private boolean useJavaCompilerCompliance;
+  
+  private String targetJavaVersion;
+  
+  private boolean generateSuppressWarnings;
+  
+  private boolean generateGeneratedAnnotation;
+  
+  private boolean includeDateInGenerated;
+  
+  private String generatedAnnotationComment;
+  
+  private boolean installDslAsPrimarySource;
+  
+  private boolean hideLocalSyntheticVariables;
   
   @Pure
-  public boolean isUseJavasSourcelevel() {
-    return this.useJavasSourcelevel;
+  public boolean isUseJavaCompilerCompliance() {
+    return this.useJavaCompilerCompliance;
   }
   
-  public void setUseJavasSourcelevel(final boolean useJavasSourcelevel) {
-    this.useJavasSourcelevel = useJavasSourcelevel;
+  public void setUseJavaCompilerCompliance(final boolean useJavaCompilerCompliance) {
+    this.useJavaCompilerCompliance = useJavaCompilerCompliance;
+  }
+  
+  @Pure
+  public String getTargetJavaVersion() {
+    return this.targetJavaVersion;
+  }
+  
+  public void setTargetJavaVersion(final String targetJavaVersion) {
+    this.targetJavaVersion = targetJavaVersion;
+  }
+  
+  @Pure
+  public boolean isGenerateSuppressWarnings() {
+    return this.generateSuppressWarnings;
+  }
+  
+  public void setGenerateSuppressWarnings(final boolean generateSuppressWarnings) {
+    this.generateSuppressWarnings = generateSuppressWarnings;
+  }
+  
+  @Pure
+  public boolean isGenerateGeneratedAnnotation() {
+    return this.generateGeneratedAnnotation;
+  }
+  
+  public void setGenerateGeneratedAnnotation(final boolean generateGeneratedAnnotation) {
+    this.generateGeneratedAnnotation = generateGeneratedAnnotation;
+  }
+  
+  @Pure
+  public boolean isIncludeDateInGenerated() {
+    return this.includeDateInGenerated;
+  }
+  
+  public void setIncludeDateInGenerated(final boolean includeDateInGenerated) {
+    this.includeDateInGenerated = includeDateInGenerated;
+  }
+  
+  @Pure
+  public String getGeneratedAnnotationComment() {
+    return this.generatedAnnotationComment;
+  }
+  
+  public void setGeneratedAnnotationComment(final String generatedAnnotationComment) {
+    this.generatedAnnotationComment = generatedAnnotationComment;
+  }
+  
+  @Pure
+  public boolean isInstallDslAsPrimarySource() {
+    return this.installDslAsPrimarySource;
+  }
+  
+  public void setInstallDslAsPrimarySource(final boolean installDslAsPrimarySource) {
+    this.installDslAsPrimarySource = installDslAsPrimarySource;
+  }
+  
+  @Pure
+  public boolean isHideLocalSyntheticVariables() {
+    return this.hideLocalSyntheticVariables;
+  }
+  
+  public void setHideLocalSyntheticVariables(final boolean hideLocalSyntheticVariables) {
+    this.hideLocalSyntheticVariables = hideLocalSyntheticVariables;
   }
 }

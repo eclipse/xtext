@@ -1,6 +1,7 @@
 package org.eclipse.xtend.core.idea.facet;
 
 import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
+import org.eclipse.xtext.idea.facet.GeneratorConfigurationState;
 import org.eclipse.xtext.idea.facet.GeneratorFacetEditorTab;
 import org.eclipse.xtext.idea.facet.GeneratorFacetForm;
 
@@ -13,22 +14,22 @@ import com.intellij.openapi.components.StorageScheme;
 
 @State(name = "org.eclipse.xtend.core.XtendGenerator", storages = { @Storage(id = "ipr", file = "$PROJECT_FILE$"),
 		@Storage(id = "prjDir", file = "${PROJECT_CONFIG_DIR$/XtendGeneratorConfig.xml", scheme = StorageScheme.DIRECTORY_BASED) })
-public class XtendFacetConfiguration extends AbstractFacetConfiguration {
+public class XtendFacetConfiguration extends AbstractFacetConfiguration<XtendGeneratorConfigurationState> {
 
 	@Override
 	public FacetEditorTab[] createEditorTabs(FacetEditorContext editorContext, FacetValidatorsManager validatorsManager) {
 		GeneratorFacetForm view = new XtendFacetForm(editorContext.getFacet().getModule());
 		@SuppressWarnings("unchecked")
-		GeneratorFacetEditorTab<XtendFacetConfiguration> controller = new GeneratorFacetEditorTab<XtendFacetConfiguration>(
-				editorContext.getFacet(), view);
+		GeneratorFacetEditorTab<XtendFacetConfiguration> controller = new GeneratorFacetEditorTab<XtendFacetConfiguration>(editorContext.getFacet(), view);
 		return new FacetEditorTab[] { controller };
 	}
 
+
 	@Override
 	protected XtendGeneratorConfigurationState createNewDefaultState() {
-		XtendGeneratorConfigurationState xtendGeneratorConfigurationState = new XtendGeneratorConfigurationState();
-		initDefaults(xtendGeneratorConfigurationState);
-		return xtendGeneratorConfigurationState;
+		XtendGeneratorConfigurationState configurationState = new XtendGeneratorConfigurationState();
+		initDefaults(configurationState);
+		return configurationState;
 	}
 
 }
