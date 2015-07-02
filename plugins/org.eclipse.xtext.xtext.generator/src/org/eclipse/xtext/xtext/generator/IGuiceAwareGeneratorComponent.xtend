@@ -7,11 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator
 
-/**
- * A fragment that contributes to the {@link XtextGenerator}.
- */
-interface IGeneratorFragment2 extends IGuiceAwareGeneratorComponent {
+import com.google.inject.Injector
+
+interface IGuiceAwareGeneratorComponent {
 	
-	def void generate(LanguageConfig2 language)
+	def void initialize(Injector injector)
 	
 }

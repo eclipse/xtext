@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext.generator
 import com.google.common.base.Joiner
 import com.google.common.collect.Lists
 import com.google.inject.Inject
+import com.google.inject.Injector
 import com.google.inject.Provider
 import java.util.Collections
 import java.util.HashMap
@@ -80,23 +81,24 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 {
 	
 	def JavaFileAccess getRuntimeSetup() {
 		if (runtimeSetupImpl === null)
-			runtimeSetupImpl = generatorTemplates.startRuntimeGenSetup()
+			runtimeSetupImpl = generatorTemplates.startRuntimeGenSetup(this)
 		return runtimeSetupImpl
 	}
 	
 	def GuiceModuleAccess getRuntimeModule() {
 		if (runtimeModule == null)
-			runtimeModule = generatorTemplates.startRuntimeGenModule()
+			runtimeModule = generatorTemplates.startRuntimeGenModule(this)
 		return runtimeModule
 	}
 	
 	def GuiceModuleAccess getEclipsePluginModule() {
 		if (eclipsePluginModule == null)
-			eclipsePluginModule = generatorTemplates.startEclipsePluginGenModule()
+			eclipsePluginModule = generatorTemplates.startEclipsePluginGenModule(this)
 		return eclipsePluginModule
 	}
 	
-	def void initialize() {
+	override initialize(Injector injector) {
+		super.initialize(injector)
 		val rs = resourceSetProvider.get()
 		for (String loadedResource : loadedResources) {
 			val loadedResourceUri = URI.createURI(loadedResource)

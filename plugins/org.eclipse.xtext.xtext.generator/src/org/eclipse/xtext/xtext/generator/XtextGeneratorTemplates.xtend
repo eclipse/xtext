@@ -19,8 +19,6 @@ class XtextGeneratorTemplates {
 	
 	@Inject extension XtextGeneratorNaming
 	
-	@Inject LanguageConfig2 langConfig
-	
 	@Inject CodeConfig codeConfig
 	
 	def TextFileAccess startPluginXml(TextFileAccess file) {
@@ -41,10 +39,10 @@ class XtextGeneratorTemplates {
 		return file
 	}
 	
-	def JavaFileAccess getRuntimeSetup() {
-		val grammar = langConfig.grammar
-		val javaFile = new JavaFileAccess(grammar.runtimeSetup, codeConfig)
-		val runtimeSetupImpl = javaFile.imported(grammar.runtimeGenSetup)
+	def JavaFileAccess getRuntimeSetup(LanguageConfig2 langConfig) {
+		val g = langConfig.grammar
+		val javaFile = new JavaFileAccess(g.runtimeSetup, codeConfig)
+		val runtimeSetupImpl = javaFile.imported(g.runtimeGenSetup)
 		
 		javaFile.typeComment = '''
 			/**
@@ -52,10 +50,10 @@ class XtextGeneratorTemplates {
 			 */
 		 '''
 		 javaFile.codeFragments += '''
-			 public class «grammar.runtimeSetup.simple» extends «runtimeSetupImpl»{
+			 public class «g.runtimeSetup.simple» extends «runtimeSetupImpl»{
 			 
 			 	public static void doSetup() {
-			 		new «grammar.runtimeSetup.simple»().createInjectorAndDoEMFRegistration();
+			 		new «g.runtimeSetup.simple»().createInjectorAndDoEMFRegistration();
 			 	}
 			 
 			 }
@@ -63,9 +61,9 @@ class XtextGeneratorTemplates {
 		 return javaFile
 	}
 	
-	def JavaFileAccess startRuntimeGenSetup() {
-		val grammar = langConfig.grammar
-		val javaFile = new JavaFileAccess(grammar.runtimeGenSetup, codeConfig)
+	def JavaFileAccess startRuntimeGenSetup(LanguageConfig2 langConfig) {
+		val g = langConfig.grammar
+		val javaFile = new JavaFileAccess(g.runtimeGenSetup, codeConfig)
 		javaFile.imported('org.eclipse.emf.ecore.EPackage')
 		javaFile.imported('org.eclipse.emf.ecore.resource.Resource')
 		javaFile.imported('org.eclipse.xtext.ISetup')
@@ -74,11 +72,11 @@ class XtextGeneratorTemplates {
 		javaFile.imported('com.google.inject.Injector')
 		javaFile.imported('java.util.List')
 		javaFile.imported('java.util.Arrays')
-		val runtimeGuiceModule = javaFile.imported(grammar.runtimeModule)
-		val usedRuntimeSetups = grammar.usedGrammars.map[javaFile.imported(it.runtimeSetup)]
+		val runtimeGuiceModule = javaFile.imported(g.runtimeModule)
+		val usedRuntimeSetups = g.usedGrammars.map[javaFile.imported(it.runtimeSetup)]
 		
 		javaFile.codeFragments += '''
-			public class «grammar.runtimeGenSetup.simple» implements ISetup, ISetupExtension {
+			public class «g.runtimeGenSetup.simple» implements ISetup, ISetupExtension {
 			
 				@Override
 				public List<String> getFileExtensions() {
@@ -90,7 +88,7 @@ class XtextGeneratorTemplates {
 					«FOR usedSetup : usedRuntimeSetups»
 						«usedSetup».doSetup();
 					«ENDFOR»
-					«IF grammar.usedGrammars.isEmpty»
+					«IF g.usedGrammars.isEmpty»
 						// register default ePackages
 						if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("ecore"))
 							Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
@@ -146,50 +144,50 @@ class XtextGeneratorTemplates {
 		sequence.length > 0 && sequence.charAt(sequence.length - 1) == c
 	}
 	
-	def JavaFileAccess getRuntimeModule() {
-		val grammar = langConfig.grammar
-		val javaFile = new JavaFileAccess(grammar.runtimeModule, codeConfig)
-		val runtimeGeneratedModule = javaFile.imported(grammar.runtimeGenModule)
+	def JavaFileAccess getRuntimeModule(LanguageConfig2 langConfig) {
+		val g = langConfig.grammar
+		val javaFile = new JavaFileAccess(g.runtimeModule, codeConfig)
+		val runtimeGeneratedModule = javaFile.imported(g.runtimeGenModule)
 		javaFile.typeComment = '''
 			/**
 			 * Use this class to register components to be used at runtime / without the Equinox extension registry.
 			 */
 		'''
 		javaFile.codeFragments += '''
-			public class «grammar.runtimeModule.simple» extends «runtimeGeneratedModule» {
+			public class «g.runtimeModule.simple» extends «runtimeGeneratedModule» {
 			
 			}
 		'''
 		return javaFile
 	}
 	
-	def GuiceModuleAccess startRuntimeGenModule() {
-		val grammar = langConfig.grammar
-		val module = new GuiceModuleAccess(grammar.runtimeGenModule, codeConfig)
+	def GuiceModuleAccess startRuntimeGenModule(LanguageConfig2 langConfig) {
+		val g = langConfig.grammar
+		val module = new GuiceModuleAccess(g.runtimeGenModule, codeConfig)
 		module.imported('java.util.Properties')
 		module.imported('org.eclipse.xtext.Constants')
 		module.imported('com.google.inject.Binder')
 		module.imported('com.google.inject.name.Names')
-		val runtimeDefaultModule = module.imported(grammar.runtimeDefaultModule)
+		val runtimeDefaultModule = module.imported(g.runtimeDefaultModule)
 		
 		module.typeComment = '''
 			/**
-			 * Manual modifications go to {@link «grammar.runtimeModule.simple»}.
+			 * Manual modifications go to {@link «g.runtimeModule.simple»}.
 			 */
 		'''
 		module.codeFragments += '''
-			public abstract class «grammar.runtimeGenModule.simple» extends «runtimeDefaultModule» {
+			public abstract class «g.runtimeGenModule.simple» extends «runtimeDefaultModule» {
 			
 				protected Properties properties = null;
 			
 				@Override
 				public void configure(Binder binder) {
-					properties = tryBindProperties(binder, "«grammar.name.replaceAll("\\.","/")».properties");
+					properties = tryBindProperties(binder, "«g.name.replaceAll("\\.","/")».properties");
 					super.configure(binder);
 				}
 				
 				public void configureLanguageName(Binder binder) {
-					binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance("«grammar.name»");
+					binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance("«g.name»");
 				}
 				
 				public void configureFileExtensions(Binder binder) {
@@ -201,7 +199,7 @@ class XtextGeneratorTemplates {
 		return module
 	}
 	
-	def JavaFileAccess getEclipsePluginModule() {
+	def JavaFileAccess getEclipsePluginModule(LanguageConfig2 langConfig) {
 		val g = langConfig.grammar
 		val javaFile = new JavaFileAccess(g.eclipsePluginModule, codeConfig)
 		val eclipsePluginGenGuiceModule = javaFile.imported(g.eclipsePluginGenModule)
@@ -221,7 +219,7 @@ class XtextGeneratorTemplates {
 		return javaFile
 	}
 	
-	def GuiceModuleAccess startEclipsePluginGenModule() {
+	def GuiceModuleAccess startEclipsePluginGenModule(LanguageConfig2 langConfig) {
 		val g = langConfig.grammar
 		val module = new GuiceModuleAccess(g.eclipsePluginGenModule, codeConfig)
 		module.imported('org.eclipse.ui.plugin.AbstractUIPlugin')
@@ -275,6 +273,39 @@ class XtextGeneratorTemplates {
 			}
 		'''
 		return module
+	}
+	
+	def JavaFileAccess getEclipsePluginExecutableExtensionFactory(LanguageConfig2 langConfig) {
+		val g = langConfig.grammar
+		val javaFile = new JavaFileAccess(g.eclipsePluginExecutableExtensionFactory, codeConfig)
+		javaFile.imported('org.osgi.framework.Bundle')
+		javaFile.imported('com.google.inject.Injector')
+		val superClass = javaFile.imported('org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory')
+		val activator = javaFile.imported(g.eclipsePluginActivator)
+		
+		javaFile.typeComment = '''
+			/**
+			 * This class was generated. Customizations should only happen in a newly
+			 * introduced subclass. 
+			 */
+		'''
+		javaFile.codeFragments += '''
+			public class «g.eclipsePluginExecutableExtensionFactory.simple» extends «superClass» {
+			
+				@Override
+				protected Bundle getBundle() {
+					return «activator».getInstance().getBundle();
+				}
+				
+				@Override
+				protected Injector getInjector() {
+					return «activator».getInstance().getInjector(«activator».«g.name.toUpperCase.replaceAll('\\.', '_')»);
+				}
+				
+			}
+		'''
+		javaFile.markedAsGenerated = true
+		return javaFile
 	}
 	
 }

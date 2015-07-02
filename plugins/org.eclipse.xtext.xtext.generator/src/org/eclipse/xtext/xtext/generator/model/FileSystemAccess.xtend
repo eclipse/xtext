@@ -8,28 +8,30 @@
 package org.eclipse.xtext.xtext.generator.model
 
 import com.google.common.io.Files
+import com.google.inject.Inject
+import com.google.inject.Injector
 import java.io.File
 import java.io.FileInputStream
 import java.io.InputStream
 import java.nio.charset.Charset
 import org.eclipse.emf.common.util.URI
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.util.RuntimeIOException
+import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent
 
-class FileSystemAccess implements IFileSystemAccess2 {
+class FileSystemAccess implements IFileSystemAccess2, IGuiceAwareGeneratorComponent {
 	
-	@Accessors
-	val String path
+	@Inject IEncodingProvider encodingProvider
 	
 	val URI baseUri
-	val IEncodingProvider encodingProvider
 	
-	new(String path, IEncodingProvider encodingProvider) {
-		this.path = path
+	new(String path) {
 		this.baseUri = URI.createFileURI(path)
-		this.encodingProvider = encodingProvider
+	}
+	
+	override initialize(Injector injector) {
+		injector.injectMembers(this)
 	}
 	
 	protected def getCharset(URI uri) {

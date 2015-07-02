@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator
 
-import com.google.inject.Inject
 import com.google.inject.Injector
 import java.util.List
 
@@ -16,18 +15,24 @@ import java.util.List
  */
 class CompositeGeneratorFragment2 implements IGeneratorFragment2 {
 	
-	@Inject Injector injector
-	
 	val List<IGeneratorFragment2> fragments = newArrayList
 	
 	def void addFragment(IGeneratorFragment2 fragment) {
+		if (fragment === this)
+			throw new IllegalArgumentException
 		this.fragments.add(fragment)
 	}
 	
-	override generate() {
+	override initialize(Injector injector) {
+		injector.injectMembers(this)
 		for (fragment : fragments) {
-			injector.injectMembers(fragment)
-			fragment.generate()
+			fragment.initialize(injector)
+		}
+	}
+	
+	override generate(LanguageConfig2 language) {
+		for (fragment : fragments) {
+			fragment.generate(language)
 		}
 	}
 	
