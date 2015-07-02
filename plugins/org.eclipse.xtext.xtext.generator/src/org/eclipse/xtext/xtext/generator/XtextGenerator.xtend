@@ -66,7 +66,12 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		var IEncodingProvider encodingProvider
 		for (language : languageConfigs) {
 			val injector = language.createInjector()
+			
 			language.generate()
+			val templates = injector.getInstance(XtextGeneratorTemplates)
+			language.generateRuntimeSetup(project, templates)
+			language.generateModules(project, templates)
+			
 			if (project === null)
 				project = injector.getInstance(IXtextProjectConfig)
 			if (encodingProvider === null)
@@ -74,9 +79,24 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		}
 		if (project !== null) {
 			project.generateManifests()
-			project.generateModules()
 			project.generatePluginXmls(encodingProvider)
 		}
+	}
+	
+	protected def generateRuntimeSetup(LanguageConfig2 language, IXtextProjectConfig project,
+			XtextGeneratorTemplates templates) {
+		templates.runtimeSetup.writeTo(project.runtimeSrc)
+		templates.finishRuntimeGenSetup(language.runtimeSetup).writeTo(project.runtimeSrcGen)
+	}
+	
+	protected def generateModules(LanguageConfig2 language, IXtextProjectConfig project,
+			XtextGeneratorTemplates templates) {
+		templates.runtimeModule.writeTo(project.runtimeSrc)
+		templates.finishGenModule(language.runtimeModule).writeTo(project.runtimeSrcGen)
+		if (project.eclipsePluginSrc !== null)
+			templates.eclipsePluginModule.writeTo(project.eclipsePluginSrc)
+		if (project.eclipsePluginSrcGen !== null)
+			templates.finishGenModule(language.eclipsePluginModule).writeTo(project.eclipsePluginSrcGen)
 	}
 	
 	protected def generateManifests(IXtextProjectConfig project) {
@@ -90,19 +110,6 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		project.ideaPluginTestManifest?.generate()
 		project.webManifest?.generate()
 		project.webTestManifest?.generate()
-	}
-	
-	protected def generateModules(IXtextProjectConfig project) {
-		project.runtimeModule?.generate()
-		project.runtimeTestModule?.generate()
-		project.genericIdeModule?.generate()
-		project.genericIdeTestModule?.generate()
-		project.eclipsePluginModule?.generate()
-		project.eclipsePluginTestModule?.generate()
-		project.ideaPluginModule?.generate()
-		project.ideaPluginTestModule?.generate()
-		project.webModule?.generate()
-		project.webTestModule?.generate()
 	}
 	
 	protected def generatePluginXmls(IXtextProjectConfig project, IEncodingProvider encodingProvider) {

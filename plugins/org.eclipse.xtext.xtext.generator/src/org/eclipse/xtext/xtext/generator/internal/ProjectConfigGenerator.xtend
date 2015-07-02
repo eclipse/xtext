@@ -55,8 +55,6 @@ class ProjectConfigGenerator {
 		package «INTERFACE_NAME.substring(0, INTERFACE_NAME.lastIndexOf('.'))»;
 		
 		import org.eclipse.xtext.generator.IFileSystemAccess2;
-		import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
-		import org.eclipse.xtext.xtext.generator.model.ModuleAccess;
 		
 		/**
 		 * Inject an instance of this interface in order to generate code in a generator fragment.
@@ -69,7 +67,6 @@ class ProjectConfigGenerator {
 				IFileSystemAccess2 get«p.toFirstUpper»Src();
 				IFileSystemAccess2 get«p.toFirstUpper»SrcGen();
 				ManifestAccess get«p.toFirstUpper»Manifest();
-				ModuleAccess get«p.toFirstUpper»Module();
 				TextFileAccess get«p.toFirstUpper»PluginXml();
 				
 			«ENDFOR»
@@ -92,9 +89,6 @@ class ProjectConfigGenerator {
 		import com.google.inject.Inject;
 		import org.eclipse.xtext.generator.IFileSystemAccess2;
 		import org.eclipse.xtext.parser.IEncodingProvider;
-		import org.eclipse.xtext.xtext.generator.model.FileSystemAccess;
-		import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
-		import org.eclipse.xtext.xtext.generator.model.ModuleAccess;
 		
 		/**
 		 * Use this class to configure output paths in the XtextGenerator.
@@ -109,7 +103,6 @@ class ProjectConfigGenerator {
 				private String «p»SrcPath;
 				private String «p»SrcGenPath;
 				private ManifestAccess «p»ManifestAccess;
-				private ModuleAccess «p»ModuleAccess;
 				private TextFileAccess «p»PluginXmlAccess;
 			«ENDFOR»
 			private String orionJsGenPath;
@@ -150,14 +143,6 @@ class ProjectConfigGenerator {
 				
 				public void set«p.toFirstUpper»Manifest(ManifestAccess manifest) {
 					this.«p»ManifestAccess = manifest;
-				}
-				
-				@Override
-				public ModuleAccess get«p.toFirstUpper»Module() {
-					if («p»ModuleAccess == null) {
-						«p»ModuleAccess = new ModuleAccess(get«p.toFirstUpper»SrcGen());
-					}
-					return «p»ModuleAccess;
 				}
 				
 				public void set«p.toFirstUpper»PluginXml(String path) {

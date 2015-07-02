@@ -8,10 +8,13 @@
 package org.eclipse.xtext.xtext.generator
 
 import com.google.inject.Inject
+import com.google.inject.Singleton
 import org.eclipse.xtext.xtext.generator.model.CodeConfig
+import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess
 
+@Singleton
 class XtextGeneratorTemplates {
 	
 	@Inject extension XtextGeneratorNaming
@@ -20,25 +23,28 @@ class XtextGeneratorTemplates {
 	
 	@Inject CodeConfig codeConfig
 	
-	def startPluginXml(TextFileAccess file) {
+	def TextFileAccess startPluginXml(TextFileAccess file) {
+		file.path = 'plugin.xml'
 		file.codeFragments += '''
 			<?xml version="1.0" encoding="UTF-8"?>
 			<?eclipse version="3.0"?>
 			
 			<plugin>
 		'''
+		return file
 	}
 	
-	def void finishPluginXml(TextFileAccess file) {
+	def TextFileAccess finishPluginXml(TextFileAccess file) {
 		file.codeFragments += '''
 			</plugin>
 		'''
+		return file
 	}
 	
-	def getRuntimeSetup() {
+	def JavaFileAccess getRuntimeSetup() {
 		val grammar = langConfig.grammar
-		val javaFile = new JavaFileAccess(grammar.runtimeBasePackage, codeConfig)
-		val runtimeSetupImpl = javaFile.imported(grammar.runtimeSetupImplFull)
+		val javaFile = new JavaFileAccess(grammar.runtimeSetup, codeConfig)
+		val runtimeSetupImpl = javaFile.imported(grammar.runtimeGenSetup)
 		
 		javaFile.typeComment = '''
 			/**
@@ -46,19 +52,20 @@ class XtextGeneratorTemplates {
 			 */
 		 '''
 		 javaFile.codeFragments += '''
-			 public class «grammar.runtimeSetupSimple» extends «runtimeSetupImpl»{
+			 public class «grammar.runtimeSetup.simple» extends «runtimeSetupImpl»{
 			 
 			 	public static void doSetup() {
-			 		new «grammar.runtimeSetupSimple»().createInjectorAndDoEMFRegistration();
+			 		new «grammar.runtimeSetup.simple»().createInjectorAndDoEMFRegistration();
 			 	}
 			 
 			 }
 		 '''
+		 return javaFile
 	}
 	
-	def startRuntimeSetupImpl() {
+	def JavaFileAccess startRuntimeGenSetup() {
 		val grammar = langConfig.grammar
-		val javaFile = new JavaFileAccess(grammar.runtimeBasePackage, codeConfig)
+		val javaFile = new JavaFileAccess(grammar.runtimeGenSetup, codeConfig)
 		javaFile.imported('org.eclipse.emf.ecore.EPackage')
 		javaFile.imported('org.eclipse.emf.ecore.resource.Resource')
 		javaFile.imported('org.eclipse.xtext.ISetup')
@@ -67,11 +74,11 @@ class XtextGeneratorTemplates {
 		javaFile.imported('com.google.inject.Injector')
 		javaFile.imported('java.util.List')
 		javaFile.imported('java.util.Arrays')
-		val runtimeGuiceModule = javaFile.imported(grammar.runtimeGuiceModuleFull)
-		val usedRuntimeSetups = grammar.usedGrammars.map[javaFile.imported(runtimeSetupFull)]
+		val runtimeGuiceModule = javaFile.imported(grammar.runtimeModule)
+		val usedRuntimeSetups = grammar.usedGrammars.map[javaFile.imported(it.runtimeSetup)]
 		
 		javaFile.codeFragments += '''
-			public class «grammar.runtimeSetupImplFull» implements ISetup, ISetupExtension {
+			public class «grammar.runtimeGenSetup.simple» implements ISetup, ISetupExtension {
 			
 				@Override
 				public List<String> getFileExtensions() {
@@ -109,13 +116,165 @@ class XtextGeneratorTemplates {
 			
 				public void register(Injector injector) {
 		 '''
+		 javaFile.markedAsGenerated = true
+		 return javaFile
 	}
 	
-	def void finishRuntimeSetupImpl(JavaFileAccess javaFile) {
+	def JavaFileAccess finishRuntimeGenSetup(JavaFileAccess javaFile) {
 		javaFile.codeFragments += '''
 				}
 			}
 		'''
+		return javaFile
+	}
+	
+	private def getBindMethodName(GuiceModuleAccess.Binding it) {
+		(if (!value.provider && value.statements.isEmpty)
+			'bind'
+		else if (value.statements.isEmpty)
+			'provide'
+		else 'configure')
+			+ getSimpleMethodName(key.type)
+			+ if (value.expression !== null && !value.provider) 'ToInstance' else ''
+	}
+	
+	private def getSimpleMethodName(String qn) {
+		qn.replaceAll('<', '\\.').replaceAll('>', '\\.').split('\\.').filter[matches('[A-Z].*')].join('$')
+	}
+	
+	private def endsWith(CharSequence sequence, char c) {
+		sequence.length > 0 && sequence.charAt(sequence.length - 1) == c
+	}
+	
+	def JavaFileAccess getRuntimeModule() {
+		val grammar = langConfig.grammar
+		val javaFile = new JavaFileAccess(grammar.runtimeModule, codeConfig)
+		val runtimeGeneratedModule = javaFile.imported(grammar.runtimeGenModule)
+		javaFile.typeComment = '''
+			/**
+			 * Use this class to register components to be used at runtime / without the Equinox extension registry.
+			 */
+		'''
+		javaFile.codeFragments += '''
+			public class «grammar.runtimeModule.simple» extends «runtimeGeneratedModule» {
+			
+			}
+		'''
+		return javaFile
+	}
+	
+	def GuiceModuleAccess startRuntimeGenModule() {
+		val grammar = langConfig.grammar
+		val module = new GuiceModuleAccess(grammar.runtimeGenModule, codeConfig)
+		module.imported('java.util.Properties')
+		module.imported('org.eclipse.xtext.Constants')
+		module.imported('com.google.inject.Binder')
+		module.imported('com.google.inject.name.Names')
+		val runtimeDefaultModule = module.imported(grammar.runtimeDefaultModule)
+		
+		module.typeComment = '''
+			/**
+			 * Manual modifications go to {@link «grammar.runtimeModule.simple»}.
+			 */
+		'''
+		module.codeFragments += '''
+			public abstract class «grammar.runtimeGenModule.simple» extends «runtimeDefaultModule» {
+			
+				protected Properties properties = null;
+			
+				@Override
+				public void configure(Binder binder) {
+					properties = tryBindProperties(binder, "«grammar.name.replaceAll("\\.","/")».properties");
+					super.configure(binder);
+				}
+				
+				public void configureLanguageName(Binder binder) {
+					binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance("«grammar.name»");
+				}
+				
+				public void configureFileExtensions(Binder binder) {
+					if (properties == null || properties.getProperty(Constants.FILE_EXTENSIONS) == null)
+						binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("«langConfig.fileExtensions.join(',')»");
+				}
+		'''
+		module.markedAsGenerated = true
+		return module
+	}
+	
+	def JavaFileAccess getEclipsePluginModule() {
+		val g = langConfig.grammar
+		val javaFile = new JavaFileAccess(g.eclipsePluginModule, codeConfig)
+		val eclipsePluginGenGuiceModule = javaFile.imported(g.eclipsePluginGenModule)
+		javaFile.imported('org.eclipse.ui.plugin.AbstractUIPlugin')
+		javaFile.typeComment = '''
+			/**
+			 * Use this class to register components to be used within the Eclipse IDE.
+			 */
+		'''
+		javaFile.codeFragments += '''
+			public class «g.eclipsePluginModule.simple» extends «eclipsePluginGenGuiceModule» {
+				public «g.eclipsePluginModule.simple»(AbstractUIPlugin plugin) {
+					super(plugin);
+				}
+			}
+		'''
+		return javaFile
+	}
+	
+	def GuiceModuleAccess startEclipsePluginGenModule() {
+		val g = langConfig.grammar
+		val module = new GuiceModuleAccess(g.eclipsePluginGenModule, codeConfig)
+		module.imported('org.eclipse.ui.plugin.AbstractUIPlugin')
+		val eclipsePluginDefaultModule = module.imported(g.eclipsePluginDefaultModule)
+		
+		module.typeComment = '''
+			/**
+			 * Manual modifications go to {@link «g.eclipsePluginModule.simple»}.
+			 */
+		'''
+		module.codeFragments += '''
+			public abstract class «g.eclipsePluginGenModule.simple» extends «eclipsePluginDefaultModule» {
+			
+				public «g.eclipsePluginGenModule.simple»(AbstractUIPlugin plugin) {
+					super(plugin);
+				}
+		'''
+		module.markedAsGenerated = true
+		return module
+	}
+	
+	def GuiceModuleAccess finishGenModule(GuiceModuleAccess module) {
+		val binder = module.imported('com.google.inject.Binder')
+		val provider = module.imported('com.google.inject.Provider')
+		val singletonBinding = module.imported('org.eclipse.xtext.service.SingletonBinding')
+		for (it : module.bindings) {
+			module.codeFragments += '''
+				«IF !value.provider && value.statements.isEmpty»
+					// contributed by «contributedBy»
+					«IF key.singleton»@«singletonBinding»«IF key.eagerSingleton»(eager=true)«ENDIF»«ENDIF»
+					public «IF value.expression === null»Class<? extends «module.imported(key.type)»>«ELSE»«module.imported(key.type)»«ENDIF» «bindMethodName»() {
+						return «IF value.expression !== null»«value.expression»«ELSE»«value.typeName».class«ENDIF»;
+					}
+				«ELSEIF value.statements.isEmpty»
+					// contributed by «contributedBy»
+					«IF key.singleton»@«singletonBinding»«IF key.eagerSingleton»(eager=true)«ENDIF»«ENDIF»
+					public «IF value.expression==null»Class<? extends «provider»<«key.type»>>«ELSE»«provider»<«key.type»>«ENDIF» «bindMethodName»() {
+						return «IF value.expression!=null»«value.expression»«ELSE»«value.typeName».class«ENDIF»;
+					}
+				«ELSE»
+					// contributed by «contributedBy»
+					public void «bindMethodName»(«binder» binder) {
+					«FOR statement : value.statements»
+						«statement»«IF !statement.endsWith(';')»;«ENDIF»
+					«ENDFOR»
+					}
+				«ENDIF»
+			'''
+		}
+		module.codeFragments += '''
+			}
+		'''
+		return module
 	}
 	
 }
