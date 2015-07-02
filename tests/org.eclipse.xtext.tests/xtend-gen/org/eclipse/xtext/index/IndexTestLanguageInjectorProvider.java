@@ -14,7 +14,7 @@ import org.eclipse.xtext.junit4.IInjectorProvider;
 import org.eclipse.xtext.junit4.IRegistryConfigurator;
 
 /**
- * @author Sven efftinge - Initial contribution and API
+ * @author Sven Efftinge - Initial contribution and API
  */
 @SuppressWarnings("all")
 public class IndexTestLanguageInjectorProvider implements IInjectorProvider, IRegistryConfigurator {

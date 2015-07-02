@@ -4913,7 +4913,7 @@ protected class Combination2_Val4Assignment_2_1_1 extends AssignmentToken  {
 
 /************ begin Rule Combination3 ****************
  *
- * Combination3:
+ * / * Suppress[potentialOverride] * / Combination3:
  * 	"#15" (val1=ID | val2=INT | val3=STRING)*;
  *
  **/
@@ -5490,7 +5490,7 @@ protected class List1_Val1Assignment_2_1 extends AssignmentToken  {
 
 /************ begin Rule List2 ****************
  *
- * List2:
+ * / * Suppress[noInstantiation] * / List2:
  * 	"#18" (val1+=ID ("," val1+=ID)*)?;
  *
  **/
@@ -7310,7 +7310,7 @@ protected class AltList2_Val3Assignment_1_1_3 extends AssignmentToken  {
 
 /************ begin Rule TransientObject ****************
  *
- * TransientObject:
+ * / * Suppress[noInstantiation] * / TransientObject:
  * 	"#24" (val1=ID nested=TransientObjectSub)?;
  *
  **/
@@ -7582,7 +7582,7 @@ protected class TransientObjectSub_Val3Assignment_1 extends AssignmentToken  {
 
 /************ begin Rule TransientSerializeables1 ****************
  *
- * TransientSerializeables1:
+ * / * Suppress[noInstantiation] * / TransientSerializeables1:
  * 	"#25" (val1=ID enum1=TransientSerializeables1Enum)? (val2=ID int1=INT)?;
  *
  **/
@@ -7828,7 +7828,7 @@ protected class TransientSerializeables1_Int1Assignment_2_1 extends AssignmentTo
 
 /************ begin Rule StaticSimplification ****************
  *
- * StaticSimplification:
+ * / * Suppress[potentialOverride] * / StaticSimplification:
  * 	"#26" ("kw1" | {EmptyAlternativeSub} | val1=ID) ("kw2" | val2=ID) ("kw3" ("kw4" val3=ID+)?);
  *
  **/
@@ -9120,7 +9120,7 @@ protected class TwoVersionNo2_Extra4Assignment_6_1_1 extends AssignmentToken  {
 
 /************ begin Rule Heuristic1 ****************
  *
- * Heuristic1:
+ * / * Suppress[noInstantiation] * / Heuristic1:
  * 	"#28" ("kw1" a+=ID b+=ID)* ("kw2" a+=ID c+=ID)* ("kw3" b+=ID c+=ID)*;
  *
  **/

@@ -43,7 +43,7 @@ protected class ThisRootNode extends RootToken {
 
 /************ begin Rule Model ****************
  *
- * Model:
+ * / * Suppress[noInstantiation] * / Model:
  * 	"Model" expressions+=Expression* | "DataType" values+=DataTypeExpression*;
  *
  **/

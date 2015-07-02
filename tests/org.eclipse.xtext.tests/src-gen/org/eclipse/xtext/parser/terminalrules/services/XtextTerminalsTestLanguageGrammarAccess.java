@@ -587,7 +587,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Keyword cCardinalityAsteriskKeyword_1_0_1 = (Keyword)cCardinalityAlternatives_1_0.eContents().get(1);
 		private final Keyword cCardinalityPlusSignKeyword_1_0_2 = (Keyword)cCardinalityAlternatives_1_0.eContents().get(2);
 		
-		//AbstractTokenWithCardinality returns AbstractElement:
+		/// * Suppress[potentialOverride] * / AbstractTokenWithCardinality returns AbstractElement:
 		//	(Assignment | AbstractTerminal) cardinality=("?" | "*" | "+")?;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -1109,7 +1109,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Keyword cCardinalityAsteriskKeyword_1_0_1 = (Keyword)cCardinalityAlternatives_1_0.eContents().get(1);
 		private final Keyword cCardinalityPlusSignKeyword_1_0_2 = (Keyword)cCardinalityAlternatives_1_0.eContents().get(2);
 		
-		//TerminalToken returns AbstractElement:
+		/// * Suppress[potentialOverride] * / TerminalToken returns AbstractElement:
 		//	TerminalTokenElement cardinality=("?" | "*" | "+")?;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -1688,7 +1688,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends AbstractGrammarElem
 		return getAbstractTokenAccess().getRule();
 	}
 
-	//AbstractTokenWithCardinality returns AbstractElement:
+	/// * Suppress[potentialOverride] * / AbstractTokenWithCardinality returns AbstractElement:
 	//	(Assignment | AbstractTerminal) cardinality=("?" | "*" | "+")?;
 	public AbstractTokenWithCardinalityElements getAbstractTokenWithCardinalityAccess() {
 		return pAbstractTokenWithCardinality;
@@ -1838,7 +1838,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends AbstractGrammarElem
 		return getTerminalGroupAccess().getRule();
 	}
 
-	//TerminalToken returns AbstractElement:
+	/// * Suppress[potentialOverride] * / TerminalToken returns AbstractElement:
 	//	TerminalTokenElement cardinality=("?" | "*" | "+")?;
 	public TerminalTokenElements getTerminalTokenAccess() {
 		return pTerminalToken;

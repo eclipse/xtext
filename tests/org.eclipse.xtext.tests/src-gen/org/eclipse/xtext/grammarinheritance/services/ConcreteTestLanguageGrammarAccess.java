@@ -472,7 +472,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		return getInheritedParserRuleAccess().getRule();
 	}
 
-	//AbstractCallOverridenParserRule returns mm::AModel:
+	/// * Suppress[noInstantiation] * / AbstractCallOverridenParserRule returns mm::AModel:
 	//	"overridemodel" elements+=OverridableParserRule*;
 	public AbstractTestLanguageGrammarAccess.AbstractCallOverridenParserRuleElements getAbstractCallOverridenParserRuleAccess() {
 		return gaAbstractTestLanguage.getAbstractCallOverridenParserRuleAccess();
@@ -482,7 +482,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		return getAbstractCallOverridenParserRuleAccess().getRule();
 	}
 
-	//AbstractCallExtendedParserRule returns mm::AModel:
+	/// * Suppress[noInstantiation] * / AbstractCallExtendedParserRule returns mm::AModel:
 	//	"extendedmodel" elements+=ExtendableParserRule*;
 	public AbstractTestLanguageGrammarAccess.AbstractCallExtendedParserRuleElements getAbstractCallExtendedParserRuleAccess() {
 		return gaAbstractTestLanguage.getAbstractCallExtendedParserRuleAccess();

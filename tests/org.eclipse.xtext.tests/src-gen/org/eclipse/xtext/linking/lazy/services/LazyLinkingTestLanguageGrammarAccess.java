@@ -65,7 +65,10 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cUnresolvedProxyPropertyUnresolvedProxyPropertyParserRuleCall_6_0 = (RuleCall)cUnresolvedProxyPropertyAssignment_6.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
-		//Type:
+		/// * 
+		// * Suppress[BidirectionalReference]
+		// * Suppress[potentialOverride]
+		// * / Type:
 		//	"type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])?
 		//	"{" properties+=Property* unresolvedProxyProperty+=UnresolvedProxyProperty* "}";
 		@Override public ParserRule getRule() { return rule; }
@@ -290,7 +293,10 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 		return getModelAccess().getRule();
 	}
 
-	//Type:
+	/// * 
+	// * Suppress[BidirectionalReference]
+	// * Suppress[potentialOverride]
+	// * / Type:
 	//	"type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])?
 	//	"{" properties+=Property* unresolvedProxyProperty+=UnresolvedProxyProperty* "}";
 	public TypeElements getTypeAccess() {

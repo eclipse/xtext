@@ -195,7 +195,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Assignment cEmAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final Keyword cEmExclamationMarkKeyword_3_0 = (Keyword)cEmAssignment_3.eContents().get(0);
 		
-		//Parens returns Expression:
+		/// * Suppress[potentialOverride] * / Parens returns Expression:
 		//	"(" Op ")" em="!"?;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -918,7 +918,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Assignment cTransientAssignment_1_2 = (Assignment)cAlternatives_1.eContents().get(2);
 		private final Keyword cTransientTransientKeyword_1_2_0 = (Keyword)cTransientAssignment_1_2.eContents().get(0);
 		
-		//DuplicateBug284491:
+		/// * Suppress[potentialOverride] * / DuplicateBug284491:
 		//	"#13" (static?="static" | final?="final" | transient?="transient")*;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -979,7 +979,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Assignment cListAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cListEmptyObjectItemParserRuleCall_0 = (RuleCall)cListAssignment.eContents().get(0);
 		
-		//EmptyObjectItems:
+		/// * Suppress[noInstantiation] * / EmptyObjectItems:
 		//	list+=EmptyObjectItem*;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -1504,7 +1504,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Assignment cLitsAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
 		private final RuleCall cLitsEnumBug310435Lit2EnumRuleCall_1_1_1_0 = (RuleCall)cLitsAssignment_1_1_1.eContents().get(0);
 		
-		//Bug310435Enum:
+		/// * Suppress[noInstantiation] * / Bug310435Enum:
 		//	"#20" ("kw1" lits+=EnumBug310435Lit1 | "kw2" lits+=EnumBug310435Lit2)*;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -1556,7 +1556,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Assignment cLitsAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
 		private final RuleCall cLitsSTRINGTerminalRuleCall_1_1_1_0 = (RuleCall)cLitsAssignment_1_1_1.eContents().get(0);
 		
-		//Bug310435Val:
+		/// * Suppress[noInstantiation] * / Bug310435Val:
 		//	"#21" ("kw1" lits+=ID | "kw2" lits+=STRING)*;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -1613,7 +1613,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final CrossReference cRefCrossRefNamedCrossReference_3_1_1_0 = (CrossReference)cRefAssignment_3_1_1.eContents().get(0);
 		private final RuleCall cRefCrossRefNamedID2TerminalRuleCall_3_1_1_0_1 = (RuleCall)cRefCrossRefNamedCrossReference_3_1_1_0.eContents().get(1);
 		
-		//CrossRefNameTest:
+		/// * Suppress[noInstantiation] * / CrossRefNameTest:
 		//	"#22" named+=CrossRefNamed* "kw1" ("kw2" ref+=[CrossRefNamed|ID1] | "kw3" ref+=[CrossRefNamed|ID2])*;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -1884,7 +1884,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		return getAtomAccess().getRule();
 	}
 
-	//Parens returns Expression:
+	/// * Suppress[potentialOverride] * / Parens returns Expression:
 	//	"(" Op ")" em="!"?;
 	public ParensElements getParensAccess() {
 		return pParens;
@@ -2034,7 +2034,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		return getLoopBug285452Access().getRule();
 	}
 
-	//DuplicateBug284491:
+	/// * Suppress[potentialOverride] * / DuplicateBug284491:
 	//	"#13" (static?="static" | final?="final" | transient?="transient")*;
 	public DuplicateBug284491Elements getDuplicateBug284491Access() {
 		return pDuplicateBug284491;
@@ -2054,7 +2054,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		return getEmptyObjectBug284850Access().getRule();
 	}
 
-	//EmptyObjectItems:
+	/// * Suppress[noInstantiation] * / EmptyObjectItems:
 	//	list+=EmptyObjectItem*;
 	public EmptyObjectItemsElements getEmptyObjectItemsAccess() {
 		return pEmptyObjectItems;
@@ -2224,7 +2224,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		return getBug305171Access().getRule();
 	}
 
-	//Bug310435Enum:
+	/// * Suppress[noInstantiation] * / Bug310435Enum:
 	//	"#20" ("kw1" lits+=EnumBug310435Lit1 | "kw2" lits+=EnumBug310435Lit2)*;
 	public Bug310435EnumElements getBug310435EnumAccess() {
 		return pBug310435Enum;
@@ -2234,7 +2234,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		return getBug310435EnumAccess().getRule();
 	}
 
-	//Bug310435Val:
+	/// * Suppress[noInstantiation] * / Bug310435Val:
 	//	"#21" ("kw1" lits+=ID | "kw2" lits+=STRING)*;
 	public Bug310435ValElements getBug310435ValAccess() {
 		return pBug310435Val;
@@ -2264,7 +2264,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		return getEnumBug310435Lit2Access().getRule();
 	}
 
-	//CrossRefNameTest:
+	/// * Suppress[noInstantiation] * / CrossRefNameTest:
 	//	"#22" named+=CrossRefNamed* "kw1" ("kw2" ref+=[CrossRefNamed|ID1] | "kw3" ref+=[CrossRefNamed|ID2])*;
 	public CrossRefNameTestElements getCrossRefNameTestAccess() {
 		return pCrossRefNameTest;

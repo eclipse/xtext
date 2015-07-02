@@ -51,7 +51,7 @@ protected class ThisRootNode extends RootToken {
 
 /************ begin Rule Model ****************
  *
- * Model:
+ * / * Suppress[noInstantiation] * / Model:
  * 	"actions" attributes+=BaseAttribute* | "simple" attributes+=SimpleAttribute* | "rulecall"
  * 	attributes+=RuleCallAttribute* | "rulecall2" attributes+=RuleCallAttribute2* | "rulecall3"
  * 	attributes+=RuleCallAttribute3* | "inlinedActions" attributes+=ActionAttribute*;

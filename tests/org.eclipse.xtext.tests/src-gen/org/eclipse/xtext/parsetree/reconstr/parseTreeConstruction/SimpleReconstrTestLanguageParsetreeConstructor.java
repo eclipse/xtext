@@ -1364,7 +1364,7 @@ protected class Atom_NameAssignment extends AssignmentToken  {
 
 /************ begin Rule Parens ****************
  *
- * Parens returns Expression:
+ * / * Suppress[potentialOverride] * / Parens returns Expression:
  * 	"(" Op ")" em="!"?;
  *
  **/
@@ -4308,7 +4308,7 @@ protected class LoopBug285452_NameAssignment_2 extends AssignmentToken  {
 
 /************ begin Rule DuplicateBug284491 ****************
  *
- * DuplicateBug284491:
+ * / * Suppress[potentialOverride] * / DuplicateBug284491:
  * 	"#13" (static?="static" | final?="final" | transient?="transient")*;
  *
  **/
@@ -4607,7 +4607,7 @@ protected class EmptyObjectBug284850_ItemsAssignment_1 extends AssignmentToken  
 
 /************ begin Rule EmptyObjectItems ****************
  *
- * EmptyObjectItems:
+ * / * Suppress[noInstantiation] * / EmptyObjectItems:
  * 	list+=EmptyObjectItem*;
  *
  **/
@@ -6936,7 +6936,7 @@ protected class Bug305171_NameAssignment_2 extends AssignmentToken  {
 
 /************ begin Rule Bug310435Enum ****************
  *
- * Bug310435Enum:
+ * / * Suppress[noInstantiation] * / Bug310435Enum:
  * 	"#20" ("kw1" lits+=EnumBug310435Lit1 | "kw2" lits+=EnumBug310435Lit2)*;
  *
  **/
@@ -7182,7 +7182,7 @@ protected class Bug310435Enum_LitsAssignment_1_1_1 extends AssignmentToken  {
 
 /************ begin Rule Bug310435Val ****************
  *
- * Bug310435Val:
+ * / * Suppress[noInstantiation] * / Bug310435Val:
  * 	"#21" ("kw1" lits+=ID | "kw2" lits+=STRING)*;
  *
  **/
@@ -7428,7 +7428,7 @@ protected class Bug310435Val_LitsAssignment_1_1_1 extends AssignmentToken  {
 
 /************ begin Rule CrossRefNameTest ****************
  *
- * CrossRefNameTest:
+ * / * Suppress[noInstantiation] * / CrossRefNameTest:
  * 	"#22" named+=CrossRefNamed* "kw1" ("kw2" ref+=[CrossRefNamed|ID1] | "kw3" ref+=[CrossRefNamed|ID2])*;
  *
  **/

@@ -14,8 +14,8 @@ import java.util.ArrayList;
 public class InternalBug289524ExTestLanguageLexer extends Lexer {
     public static final int RULE_ID=8;
     public static final int RULE_STRING=10;
-    public static final int DollarSign=7;
     public static final int Model=6;
+    public static final int DollarSign=7;
     public static final int RULE_ANY_OTHER=14;
     public static final int RULE_INT=9;
     public static final int RULE_WS=13;
