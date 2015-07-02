@@ -23,15 +23,18 @@ EnumBug:
 	
 enum EnumBugEnum: array="array" | object="object" | resultSet="resultSet" | iterator="iterator";	
 
+/* Suppress[noInstantiation] */
 Commentable:
 	'#3' item+=CommentableItem*;
 	
 CommentableItem:
 	'item' id=ID;
 
+/* Suppress[noInstantiation] */
 ValueList:
 	'#4' ids+=FQN*;
 	
+/* Suppress[noInstantiation] */
 RefList:
 	'#5' objs+=RefObj* 'refs' refs+=[RefObj|FQN]*;
 	
@@ -42,6 +45,7 @@ SingleRef:
 	'#6' obj=RefObj 'ref' ref=[RefObj|FQN];
 	
 // see https://bugs.eclipse.org/bugs/show_bug.cgi?id=297938
+/* Suppress[noInstantiation] */
 AppendToFileEnd:
 	'#7' items+=AppendToFileEndItem*;
 
