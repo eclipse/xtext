@@ -42,6 +42,14 @@ public class XtextGrammarSerializationTest extends AbstractXtextTests {
 				+ "mm \"http://bar\" as fooMM\n\nStartRule returns fooMM::T:\n	name=ID;";
 		doTestSerialization(model, expectedModel);
 	}
+	
+	@Test public void testSerializationWithCardinalityOverride() throws Exception {
+		final String model = "grammar foo with org.eclipse.xtext.common.Terminals\n"
+				+ "generate mm \"http://bar\" as fooMM\n" + "StartRule returns fooMM::T: (name+=ID?)+;";
+		final String expectedModel = "grammar foo with org.eclipse.xtext.common.Terminals\n\ngenerate "
+				+ "mm \"http://bar\" as fooMM\n\nStartRule returns fooMM::T:\n	name+=ID*;";
+		doTestSerialization(model, expectedModel);
+	}
 
 	private void doTestSerialization(String model, String expectedModel) throws Exception {
 		final XtextResource resource = getResourceFromString(model);

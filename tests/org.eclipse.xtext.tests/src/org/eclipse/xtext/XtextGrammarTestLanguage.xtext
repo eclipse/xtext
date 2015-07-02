@@ -58,6 +58,7 @@ AbstractToken returns AbstractElement:
 	Action
 ;
 
+/* Suppress[potentialOverride] */
 AbstractTokenWithCardinality returns AbstractElement:
 	(Assignment | 
 	 AbstractTerminal) (cardinality=('?'|'*'|'+'))?
@@ -129,6 +130,7 @@ TerminalGroup returns AbstractElement:
 	TerminalToken ({Group.tokens+=current} (tokens+=TerminalToken)+)?
 ;
 
+/* Suppress[potentialOverride] */
 TerminalToken returns AbstractElement:
 	TerminalTokenElement (cardinality=('?'|'*'|'+'))?
 ;

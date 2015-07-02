@@ -14,6 +14,7 @@ Model:
 	domainModel = DomainModel
 ;
 
+/* Suppress[noInstantiation] */
 DomainModel:
 	'entities'
 		(entities+=Entity)*
