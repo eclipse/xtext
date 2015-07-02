@@ -34,6 +34,8 @@ import com.google.common.collect.Sets;
  */
 public class OverriddenValueInspector extends XtextRuleInspector<Boolean, ParserRule> {
 
+	public static final String ISSUE_CODE = "OverriddenValueInspector.potentialOverride";
+	
 	private Multimap<String, AbstractElement> assignedFeatures;
 	
 	/**
@@ -46,6 +48,11 @@ public class OverriddenValueInspector extends XtextRuleInspector<Boolean, Parser
 		super(acceptor);
 		assignedFeatures = newMultimap();
 		permanentlyVisited = Sets.newHashSet();
+	}
+	
+	@Override
+	protected String getIssueCode() {
+		return ISSUE_CODE;
 	}
 	
 	@Override

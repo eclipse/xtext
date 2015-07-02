@@ -27,8 +27,15 @@ import org.eclipse.xtext.validation.ValidationMessageAcceptor;
  */
 public class RuleWithoutInstantiationInspector extends XtextRuleInspector<Boolean, ParserRule> {
 
+	public static final String ISSUE_CODE = "RuleWithoutInstantiationInspector.noInstantiation";
+	
 	public RuleWithoutInstantiationInspector(ValidationMessageAcceptor acceptor) {
 		super(acceptor);
+	}
+	
+	@Override
+	protected String getIssueCode() {
+		return ISSUE_CODE;
 	}
 	
 	@Override

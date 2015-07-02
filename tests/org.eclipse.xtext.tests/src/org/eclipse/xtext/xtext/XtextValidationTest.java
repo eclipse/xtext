@@ -12,6 +12,7 @@ import static com.google.common.collect.Maps.*;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.Diagnostic;
@@ -44,10 +45,14 @@ import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator.State;
 import org.eclipse.xtext.validation.AbstractValidationMessageAcceptingTestCase;
 import org.eclipse.xtext.validation.AbstractValidationMessageAcceptor;
+import org.eclipse.xtext.validation.CheckMode;
+import org.eclipse.xtext.validation.IResourceValidator;
+import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -75,6 +80,55 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		State state = validator.setMessageAcceptor(messageAcceptor).getState();
 		state.currentObject = currentObject;
 		state.context = newHashMap();
+	}
+	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=287082
+	 */
+	@Test public void testOverriddenCardinality() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'myURI'\n" +
+				"Model: ((name+=ID+)+)?;\n");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertEquals(2, resource.getWarnings().size());
+
+		String message = resource.getWarnings().get(0).getMessage();
+		assertEquals("More than one cardinality was set. Merging '+' with previously assigned cardinality to '+'.", message);
+		message = resource.getWarnings().get(1).getMessage();
+		assertEquals("More than one cardinality was set. Merging '?' with previously assigned cardinality to '*'.", message);
+	}
+	
+	@Test public void testSupressedWarning_01() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.acme.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'myURI'\n" +
+				 
+				"Model: child=Child;\n" + 
+				"/* Suppress[noInstantiation] */\n" +
+				"Child: name=ID?;");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		IResourceValidator validator = get(IResourceValidator.class);
+		List<Issue> issues = validator.validate(resource, CheckMode.FAST_ONLY, CancelIndicator.NullImpl);
+		assertTrue(issues.toString(), issues.isEmpty());
+	}
+	
+	@Test public void testSupressedWarning_02() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.acme.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'myURI'\n" +
+						
+				"/* Suppress[potentialOverride] */\n" + 
+				"Parens: \n" + 
+				"  ('(' Parens ')'|name=ID) em='!'?;");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+		
+		IResourceValidator validator = get(IResourceValidator.class);
+		List<Issue> issues = validator.validate(resource, CheckMode.FAST_ONLY, CancelIndicator.NullImpl);
+		assertTrue(issues.toString(), issues.isEmpty());
 	}
 	
 	/**
