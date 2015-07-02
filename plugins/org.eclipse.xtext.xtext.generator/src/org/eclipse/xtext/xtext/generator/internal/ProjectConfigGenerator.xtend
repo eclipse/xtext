@@ -55,13 +55,14 @@ class ProjectConfigGenerator {
 		package «INTERFACE_NAME.substring(0, INTERFACE_NAME.lastIndexOf('.'))»;
 		
 		import org.eclipse.xtext.generator.IFileSystemAccess2;
+		import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
 		
 		/**
 		 * Inject an instance of this interface in order to generate code in a generator fragment.
 		 *
 		 * <p>This file has been generated with {@link «ProjectConfigGenerator.name»}.</p>
 		 */
-		public interface «INTERFACE_NAME.substring(INTERFACE_NAME.lastIndexOf('.') + 1)» {
+		public interface «INTERFACE_NAME.substring(INTERFACE_NAME.lastIndexOf('.') + 1)» extends IGuiceAwareGeneratorComponent {
 			
 			«FOR p : PROJECTS»
 				IFileSystemAccess2 get«p.toFirstUpper»Src();
@@ -86,9 +87,8 @@ class ProjectConfigGenerator {
 		 *******************************************************************************/
 		package «IMPL_NAME.substring(0, IMPL_NAME.lastIndexOf('.'))»;
 		
-		import com.google.inject.Inject;
+		import com.google.inject.Injector;
 		import org.eclipse.xtext.generator.IFileSystemAccess2;
-		import org.eclipse.xtext.parser.IEncodingProvider;
 		
 		/**
 		 * Use this class to configure output paths in the XtextGenerator.
@@ -97,91 +97,93 @@ class ProjectConfigGenerator {
 		 */
 		public class «IMPL_NAME.substring(IMPL_NAME.lastIndexOf('.') + 1)» implements «INTERFACE_NAME.substring(INTERFACE_NAME.lastIndexOf('.') + 1)» {
 			
-			@Inject private IEncodingProvider encodingProvider;
-			
 			«FOR p : PROJECTS»
-				private String «p»SrcPath;
-				private String «p»SrcGenPath;
-				private ManifestAccess «p»ManifestAccess;
-				private TextFileAccess «p»PluginXmlAccess;
+				private FileSystemAccess «p»Src;
+				private FileSystemAccess «p»SrcGen;
+				private ManifestAccess «p»Manifest;
+				private TextFileAccess «p»PluginXml;
 			«ENDFOR»
-			private String orionJsGenPath;
-			private String aceJsGenPath;
+			private FileSystemAccess orionJsGen;
+			private FileSystemAccess aceJsGen;
 			
-			public void initialize() {
+			@Override
+			public void initialize(Injector injector) {
+				injector.injectMembers(this);
+				«FOR p : PROJECTS»
+					if («p»Src != null) {
+						«p»Src.initialize(injector);
+					}
+					if («p»SrcGen != null) {
+						«p»SrcGen.initialize(injector);
+					}
+				«ENDFOR»
+				if (orionJsGen != null) {
+					orionJsGen.initialize(injector);
+				}
+				if (aceJsGen != null) {
+					aceJsGen.initialize(injector);
+				}
 			}
 			
 			«FOR p : PROJECTS»
 				@Override
 				public IFileSystemAccess2 get«p.toFirstUpper»Src() {
-					if («p»SrcPath != null)
-						return new FileSystemAccess(«p»SrcPath, encodingProvider);
-					else
-						return null;
+					return «p»Src;
 				}
 				
 				public void set«p.toFirstUpper»Src(String path) {
-					this.«p»SrcPath = path;
+					this.«p»Src = new FileSystemAccess(path);
 				}
 				
 				@Override
 				public IFileSystemAccess2 get«p.toFirstUpper»SrcGen() {
-					if («p»SrcGenPath != null)
-						return new FileSystemAccess(«p»SrcGenPath, encodingProvider);
-					else
-						return null;
+					return «p»SrcGen;
 				}
 				
 				public void set«p.toFirstUpper»SrcGen(String path) {
-					this.«p»SrcGenPath = path;
+					this.«p»SrcGen = new FileSystemAccess(path);
 				}
 				
 				@Override
 				public ManifestAccess get«p.toFirstUpper»Manifest() {
-					return «p»ManifestAccess;
+					return «p»Manifest;
 				}
 				
 				public void set«p.toFirstUpper»Manifest(ManifestAccess manifest) {
-					this.«p»ManifestAccess = manifest;
+					this.«p»Manifest = manifest;
 				}
 				
 				public void set«p.toFirstUpper»PluginXml(String path) {
 					if (path != null) {
-						this.«p»PluginXmlAccess = new TextFileAccess();
-						this.«p»PluginXmlAccess.setPath(path);
+						this.«p»PluginXml = new TextFileAccess();
+						this.«p»PluginXml.setPath(path);
 					} else {
-						this.«p»PluginXmlAccess = null;
+						this.«p»PluginXml = null;
 					}
 				}
 				
 				@Override
 				public TextFileAccess get«p.toFirstUpper»PluginXml() {
-					return this.«p»PluginXmlAccess;
+					return this.«p»PluginXml;
 				}
 				
 			«ENDFOR»
 			@Override
 			public IFileSystemAccess2 getOrionJsGen() {
-				if (orionJsGenPath != null)
-					return new FileSystemAccess(orionJsGenPath, encodingProvider);
-				else
-					return null;
+				return orionJsGen;
 			}
 			
 			public void setOrionJsGen(String path) {
-				this.orionJsGenPath = path;
+				this.orionJsGen = new FileSystemAccess(path);
 			}
 			
 			@Override
 			public IFileSystemAccess2 getAceJsGen() {
-				if (aceJsGenPath != null)
-					return new FileSystemAccess(aceJsGenPath, encodingProvider);
-				else
-					return null;
+				return aceJsGen;
 			}
 			
 			public void setAceJsGen(String path) {
-				this.aceJsGenPath = path;
+				this.aceJsGen = new FileSystemAccess(path);
 			}
 			
 		}

@@ -9,34 +9,36 @@ package org.eclipse.xtext.xtext.generator.model;
 
 import com.google.common.base.Objects;
 import com.google.common.io.Files;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.util.RuntimeIOException;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
 
 @SuppressWarnings("all")
-public class FileSystemAccess implements IFileSystemAccess2 {
-  @Accessors
-  private final String path;
+public class FileSystemAccess implements IFileSystemAccess2, IGuiceAwareGeneratorComponent {
+  @Inject
+  private IEncodingProvider encodingProvider;
   
   private final URI baseUri;
   
-  private final IEncodingProvider encodingProvider;
-  
-  public FileSystemAccess(final String path, final IEncodingProvider encodingProvider) {
-    this.path = path;
+  public FileSystemAccess(final String path) {
     URI _createFileURI = URI.createFileURI(path);
     this.baseUri = _createFileURI;
-    this.encodingProvider = encodingProvider;
+  }
+  
+  @Override
+  public void initialize(final Injector injector) {
+    injector.injectMembers(this);
   }
   
   protected Charset getCharset(final URI uri) {
@@ -205,10 +207,5 @@ public class FileSystemAccess implements IFileSystemAccess2 {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
-  }
-  
-  @Pure
-  public String getPath() {
-    return this.path;
   }
 }

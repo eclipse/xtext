@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.model
 
+import com.google.inject.Injector
 import java.io.IOException
 import java.io.InputStream
 import java.net.URL
@@ -17,11 +18,12 @@ import java.util.jar.Manifest
 import org.eclipse.emf.common.EMFPlugin
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.util.Strings
+import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent
 
 /**
  * Configuration object for generated code.
  */
-class CodeConfig {
+class CodeConfig implements IGuiceAwareGeneratorComponent {
 
 	static val FILE_HEADER_VAR_TIME = '${time}'
 	static val FILE_HEADER_VAR_DATE = '${date}'
@@ -61,7 +63,8 @@ class CodeConfig {
 		this.classAnnotations.add(annotation)
 	}
 	
-	def initialize() {
+	override initialize(Injector injector) {
+		injector.injectMembers(this)
 		var fileHeader = fileHeaderTemplate
 		if (fileHeader != null) {
 			if (fileHeader.contains(FILE_HEADER_VAR_TIME)) {

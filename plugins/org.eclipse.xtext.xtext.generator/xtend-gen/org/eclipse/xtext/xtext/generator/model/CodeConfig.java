@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtext.generator.model;
 
 import com.google.common.base.Objects;
+import com.google.inject.Injector;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -24,13 +25,14 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
 import org.eclipse.xtext.xtext.generator.model.IClassAnnotation;
 
 /**
  * Configuration object for generated code.
  */
 @SuppressWarnings("all")
-public class CodeConfig {
+public class CodeConfig implements IGuiceAwareGeneratorComponent {
   /**
    * Only needed to determine the Manifest file and its version of this plugin in standalone mode.
    */
@@ -89,58 +91,56 @@ public class CodeConfig {
     this.classAnnotations.add(annotation);
   }
   
-  public String initialize() {
-    String _xblockexpression = null;
-    {
-      String fileHeader = this.fileHeaderTemplate;
-      boolean _notEquals = (!Objects.equal(fileHeader, null));
-      if (_notEquals) {
-        boolean _contains = fileHeader.contains(CodeConfig.FILE_HEADER_VAR_TIME);
-        if (_contains) {
-          final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-          Date _date = new Date();
-          final String time = dateFormat.format(_date);
-          String _replace = fileHeader.replace(CodeConfig.FILE_HEADER_VAR_TIME, time);
-          fileHeader = _replace;
-        }
-        boolean _contains_1 = fileHeader.contains(CodeConfig.FILE_HEADER_VAR_DATE);
-        if (_contains_1) {
-          final SimpleDateFormat dateFormat_1 = new SimpleDateFormat("MMM d, yyyy");
-          Date _date_1 = new Date();
-          final String date = dateFormat_1.format(_date_1);
-          String _replace_1 = fileHeader.replace(CodeConfig.FILE_HEADER_VAR_DATE, date);
-          fileHeader = _replace_1;
-        }
-        boolean _contains_2 = fileHeader.contains(CodeConfig.FILE_HEADER_VAR_YEAR);
-        if (_contains_2) {
-          final SimpleDateFormat dateFormat_2 = new SimpleDateFormat("yyyy");
-          Date _date_2 = new Date();
-          final String year = dateFormat_2.format(_date_2);
-          String _replace_2 = fileHeader.replace(CodeConfig.FILE_HEADER_VAR_YEAR, year);
-          fileHeader = _replace_2;
-        }
-        boolean _contains_3 = fileHeader.contains(CodeConfig.FILE_HEADER_VAR_USER);
-        if (_contains_3) {
-          final String user = System.getProperty("user.name");
-          boolean _notEquals_1 = (!Objects.equal(user, null));
-          if (_notEquals_1) {
-            String _replace_3 = fileHeader.replace(CodeConfig.FILE_HEADER_VAR_USER, user);
-            fileHeader = _replace_3;
-          }
-        }
-        boolean _contains_4 = fileHeader.contains(CodeConfig.FILE_HEADER_VAR_VERSION);
-        if (_contains_4) {
-          final String version = this.getVersion();
-          boolean _notEquals_2 = (!Objects.equal(version, null));
-          if (_notEquals_2) {
-            String _replace_4 = fileHeader.replace(CodeConfig.FILE_HEADER_VAR_VERSION, version);
-            fileHeader = _replace_4;
-          }
+  @Override
+  public void initialize(final Injector injector) {
+    injector.injectMembers(this);
+    String fileHeader = this.fileHeaderTemplate;
+    boolean _notEquals = (!Objects.equal(fileHeader, null));
+    if (_notEquals) {
+      boolean _contains = fileHeader.contains(CodeConfig.FILE_HEADER_VAR_TIME);
+      if (_contains) {
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+        Date _date = new Date();
+        final String time = dateFormat.format(_date);
+        String _replace = fileHeader.replace(CodeConfig.FILE_HEADER_VAR_TIME, time);
+        fileHeader = _replace;
+      }
+      boolean _contains_1 = fileHeader.contains(CodeConfig.FILE_HEADER_VAR_DATE);
+      if (_contains_1) {
+        final SimpleDateFormat dateFormat_1 = new SimpleDateFormat("MMM d, yyyy");
+        Date _date_1 = new Date();
+        final String date = dateFormat_1.format(_date_1);
+        String _replace_1 = fileHeader.replace(CodeConfig.FILE_HEADER_VAR_DATE, date);
+        fileHeader = _replace_1;
+      }
+      boolean _contains_2 = fileHeader.contains(CodeConfig.FILE_HEADER_VAR_YEAR);
+      if (_contains_2) {
+        final SimpleDateFormat dateFormat_2 = new SimpleDateFormat("yyyy");
+        Date _date_2 = new Date();
+        final String year = dateFormat_2.format(_date_2);
+        String _replace_2 = fileHeader.replace(CodeConfig.FILE_HEADER_VAR_YEAR, year);
+        fileHeader = _replace_2;
+      }
+      boolean _contains_3 = fileHeader.contains(CodeConfig.FILE_HEADER_VAR_USER);
+      if (_contains_3) {
+        final String user = System.getProperty("user.name");
+        boolean _notEquals_1 = (!Objects.equal(user, null));
+        if (_notEquals_1) {
+          String _replace_3 = fileHeader.replace(CodeConfig.FILE_HEADER_VAR_USER, user);
+          fileHeader = _replace_3;
         }
       }
-      _xblockexpression = this.fileHeader = fileHeader;
+      boolean _contains_4 = fileHeader.contains(CodeConfig.FILE_HEADER_VAR_VERSION);
+      if (_contains_4) {
+        final String version = this.getVersion();
+        boolean _notEquals_2 = (!Objects.equal(version, null));
+        if (_notEquals_2) {
+          String _replace_4 = fileHeader.replace(CodeConfig.FILE_HEADER_VAR_VERSION, version);
+          fileHeader = _replace_4;
+        }
+      }
     }
-    return _xblockexpression;
+    this.fileHeader = fileHeader;
   }
   
   /**

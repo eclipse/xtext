@@ -7,13 +7,9 @@
  */
 package org.eclipse.xtext.xtext.generator;
 
-import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
-import org.eclipse.xtext.xtext.generator.LanguageConfig2;
+import com.google.inject.Injector;
 
-/**
- * A fragment that contributes to the {@link XtextGenerator}.
- */
 @SuppressWarnings("all")
-public interface IGeneratorFragment2 extends IGuiceAwareGeneratorComponent {
-  public abstract void generate(final LanguageConfig2 language);
+public interface IGuiceAwareGeneratorComponent {
+  public abstract void initialize(final Injector injector);
 }

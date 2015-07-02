@@ -7,33 +7,38 @@
  */
 package org.eclipse.xtext.xtext.generator;
 
-import com.google.inject.Inject;
 import com.google.inject.Injector;
 import java.util.List;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xtext.generator.IGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.LanguageConfig2;
 
 /**
  * A composite generator fragment delegates to its contained fragments.
  */
 @SuppressWarnings("all")
 public class CompositeGeneratorFragment2 implements IGeneratorFragment2 {
-  @Inject
-  private Injector injector;
-  
   private final List<IGeneratorFragment2> fragments = CollectionLiterals.<IGeneratorFragment2>newArrayList();
   
   public void addFragment(final IGeneratorFragment2 fragment) {
+    if ((fragment == this)) {
+      throw new IllegalArgumentException();
+    }
     this.fragments.add(fragment);
   }
   
   @Override
-  public void generate() {
+  public void initialize(final Injector injector) {
+    injector.injectMembers(this);
     for (final IGeneratorFragment2 fragment : this.fragments) {
-      {
-        this.injector.injectMembers(fragment);
-        fragment.generate();
-      }
+      fragment.initialize(injector);
+    }
+  }
+  
+  @Override
+  public void generate(final LanguageConfig2 language) {
+    for (final IGeneratorFragment2 fragment : this.fragments) {
+      fragment.generate(language);
     }
   }
 }

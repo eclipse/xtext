@@ -10,6 +10,7 @@ package org.eclipse.xtext.generator.adapter;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 import com.google.inject.Provider;
 import java.util.List;
 import java.util.Map;
@@ -64,9 +65,6 @@ public class FragmentAdapter implements IGeneratorFragment2 {
   private IXtextProjectConfig projectConfig;
   
   @Inject
-  private LanguageConfig2 languageConfig2;
-  
-  @Inject
   private CodeConfig codeConfig;
   
   @Inject
@@ -88,38 +86,43 @@ public class FragmentAdapter implements IGeneratorFragment2 {
   }
   
   @Override
-  public void generate() {
+  public void initialize(final Injector injector) {
+    injector.injectMembers(this);
+  }
+  
+  @Override
+  public void generate(final LanguageConfig2 config2) {
     if ((this.naming == null)) {
-      Naming _createNaming = this.createNaming();
+      Naming _createNaming = this.createNaming(config2);
       this.naming = _createNaming;
     }
     final XpandExecutionContext ctx = this.createExecutionContext();
-    final LanguageConfig config = this.createLanguageConfig();
+    final LanguageConfig config1 = this.createLanguageConfig(config2);
     if ((this.fragment instanceof IGeneratorFragmentExtension2)) {
-      ((IGeneratorFragmentExtension2)this.fragment).generate(config, ctx);
+      ((IGeneratorFragmentExtension2)this.fragment).generate(config1, ctx);
     } else {
-      Grammar _grammar = config.getGrammar();
+      Grammar _grammar = config1.getGrammar();
       this.fragment.generate(_grammar, ctx);
     }
-    this.generateStandaloneSetup(config, ctx);
-    this.generateGuiceModuleRt(config, ctx);
-    this.generateGuiceModuleUi(config, ctx);
-    this.generatePluginXmlRt(config, ctx);
+    this.generateStandaloneSetup(config1, config2, ctx);
+    this.generateGuiceModuleRt(config1, config2, ctx);
+    this.generateGuiceModuleUi(config1, config2, ctx);
+    this.generatePluginXmlRt(config1, ctx);
   }
   
-  private void generateStandaloneSetup(final LanguageConfig config, final XpandExecutionContext ctx) {
+  private void generateStandaloneSetup(final LanguageConfig config1, final LanguageConfig2 config2, final XpandExecutionContext ctx) {
     Output _output = ctx.getOutput();
     _output.openFile(null, StringConcatOutputImpl.STRING_OUTLET);
     try {
       if ((this.fragment instanceof IGeneratorFragmentExtension2)) {
-        ((IGeneratorFragmentExtension2)this.fragment).addToStandaloneSetup(config, ctx);
+        ((IGeneratorFragmentExtension2)this.fragment).addToStandaloneSetup(config1, ctx);
       } else {
-        Grammar _grammar = config.getGrammar();
+        Grammar _grammar = config1.getGrammar();
         this.fragment.addToStandaloneSetup(_grammar, ctx);
       }
       Output _output_1 = ctx.getOutput();
       final StringConcatenation result = ((StringConcatOutputImpl) _output_1).getStringOutlet();
-      JavaFileAccess _runtimeSetup = this.languageConfig2.getRuntimeSetup();
+      JavaFileAccess _runtimeSetup = config2.getRuntimeSetup();
       List<CharSequence> _codeFragments = _runtimeSetup.getCodeFragments();
       _codeFragments.add(result);
     } finally {
@@ -128,10 +131,10 @@ public class FragmentAdapter implements IGeneratorFragment2 {
     }
   }
   
-  private boolean generateGuiceModuleRt(final LanguageConfig config, final XpandExecutionContext ctx) {
-    GuiceModuleAccess _runtimeModule = this.languageConfig2.getRuntimeModule();
+  private boolean generateGuiceModuleRt(final LanguageConfig config1, final LanguageConfig2 config2, final XpandExecutionContext ctx) {
+    GuiceModuleAccess _runtimeModule = config2.getRuntimeModule();
     List<GuiceModuleAccess.Binding> _bindings = _runtimeModule.getBindings();
-    Grammar _grammar = config.getGrammar();
+    Grammar _grammar = config1.getGrammar();
     Set<Binding> _guiceBindingsRt = this.fragment.getGuiceBindingsRt(_grammar);
     final Function1<Binding, GuiceModuleAccess.Binding> _function = new Function1<Binding, GuiceModuleAccess.Binding>() {
       @Override
@@ -143,10 +146,10 @@ public class FragmentAdapter implements IGeneratorFragment2 {
     return Iterables.<GuiceModuleAccess.Binding>addAll(_bindings, _map);
   }
   
-  private boolean generateGuiceModuleUi(final LanguageConfig config, final XpandExecutionContext ctx) {
-    GuiceModuleAccess _eclipsePluginModule = this.languageConfig2.getEclipsePluginModule();
+  private boolean generateGuiceModuleUi(final LanguageConfig config1, final LanguageConfig2 config2, final XpandExecutionContext ctx) {
+    GuiceModuleAccess _eclipsePluginModule = config2.getEclipsePluginModule();
     List<GuiceModuleAccess.Binding> _bindings = _eclipsePluginModule.getBindings();
-    Grammar _grammar = config.getGrammar();
+    Grammar _grammar = config1.getGrammar();
     Set<Binding> _guiceBindingsUi = this.fragment.getGuiceBindingsUi(_grammar);
     final Function1<Binding, GuiceModuleAccess.Binding> _function = new Function1<Binding, GuiceModuleAccess.Binding>() {
       @Override
@@ -184,14 +187,14 @@ public class FragmentAdapter implements IGeneratorFragment2 {
     return _xblockexpression;
   }
   
-  private void generatePluginXmlRt(final LanguageConfig config, final XpandExecutionContext ctx) {
+  private void generatePluginXmlRt(final LanguageConfig config1, final XpandExecutionContext ctx) {
     Output _output = ctx.getOutput();
     _output.openFile(null, StringConcatOutputImpl.STRING_OUTLET);
     try {
       if ((this.fragment instanceof IGeneratorFragmentExtension2)) {
-        ((IGeneratorFragmentExtension2)this.fragment).addToPluginXmlRt(config, ctx);
+        ((IGeneratorFragmentExtension2)this.fragment).addToPluginXmlRt(config1, ctx);
       } else {
-        Grammar _grammar = config.getGrammar();
+        Grammar _grammar = config1.getGrammar();
         this.fragment.addToPluginXmlRt(_grammar, ctx);
       }
       Output _output_1 = ctx.getOutput();
@@ -205,7 +208,7 @@ public class FragmentAdapter implements IGeneratorFragment2 {
     }
   }
   
-  protected Naming createNaming() {
+  protected Naming createNaming(final LanguageConfig2 config2) {
     Naming _naming = new Naming();
     final Procedure1<Naming> _function = new Procedure1<Naming>() {
       @Override
@@ -247,7 +250,8 @@ public class FragmentAdapter implements IGeneratorFragment2 {
         }
         String _projectNameUi_2 = it.getProjectNameUi();
         it.setUiBasePackage(_projectNameUi_2);
-        String _activator = FragmentAdapter.this.getActivator();
+        Grammar _grammar = config2.getGrammar();
+        String _activator = FragmentAdapter.this.getActivator(_grammar);
         it.setActivatorName(_activator);
         ManifestAccess _runtimeTestManifest = FragmentAdapter.this.projectConfig.getRuntimeTestManifest();
         String _pluginPath_3 = FragmentAdapter.this.getPluginPath(_runtimeTestManifest);
@@ -269,18 +273,18 @@ public class FragmentAdapter implements IGeneratorFragment2 {
     return ObjectExtensions.<Naming>operator_doubleArrow(_naming, _function);
   }
   
-  protected LanguageConfig createLanguageConfig() {
+  protected LanguageConfig createLanguageConfig(final LanguageConfig2 config2) {
     final LanguageConfig config = new LanguageConfig();
-    List<String> _loadedResources = this.languageConfig2.getLoadedResources();
+    List<String> _loadedResources = config2.getLoadedResources();
     for (final String resource : _loadedResources) {
       config.addLoadedResource(resource);
     }
     ResourceSet _get = this.resourceSetProvider.get();
     config.setForcedResourceSet(_get);
-    List<String> _fileExtensions = this.languageConfig2.getFileExtensions();
+    List<String> _fileExtensions = config2.getFileExtensions();
     String _join = IterableExtensions.join(_fileExtensions, ",");
     config.setFileExtensions(_join);
-    String _uri = this.languageConfig2.getUri();
+    String _uri = config2.getUri();
     config.setUri(_uri);
     config.registerNaming(this.naming);
     return config;
@@ -407,8 +411,7 @@ public class FragmentAdapter implements IGeneratorFragment2 {
     return outlet;
   }
   
-  protected String getActivator() {
-    final Grammar grammar = this.languageConfig2.getGrammar();
+  protected String getActivator(final Grammar grammar) {
     String _basePackageUi = this.naming.basePackageUi(grammar);
     String _plus = (_basePackageUi + ".internal.");
     String _name = GrammarUtil.getName(grammar);
@@ -418,7 +421,7 @@ public class FragmentAdapter implements IGeneratorFragment2 {
   
   protected String getPath(final IFileSystemAccess2 fsa) {
     if ((fsa instanceof FileSystemAccess)) {
-      return ((FileSystemAccess)fsa).getPath();
+      return this.getPath(fsa);
     } else {
       URI _uRI = fsa.getURI("");
       return _uRI.toPlatformString(true);

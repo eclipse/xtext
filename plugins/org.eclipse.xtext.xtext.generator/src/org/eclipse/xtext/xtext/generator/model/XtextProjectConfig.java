@@ -7,9 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.model;
 
-import com.google.inject.Inject;
+import com.google.inject.Injector;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
-import org.eclipse.xtext.parser.IEncodingProvider;
 
 /**
  * Use this class to configure output paths in the XtextGenerator.
@@ -18,546 +17,546 @@ import org.eclipse.xtext.parser.IEncodingProvider;
  */
 public class XtextProjectConfig implements IXtextProjectConfig {
 	
-	@Inject private IEncodingProvider encodingProvider;
+	private FileSystemAccess runtimeSrc;
+	private FileSystemAccess runtimeSrcGen;
+	private ManifestAccess runtimeManifest;
+	private TextFileAccess runtimePluginXml;
+	private FileSystemAccess runtimeTestSrc;
+	private FileSystemAccess runtimeTestSrcGen;
+	private ManifestAccess runtimeTestManifest;
+	private TextFileAccess runtimeTestPluginXml;
+	private FileSystemAccess genericIdeSrc;
+	private FileSystemAccess genericIdeSrcGen;
+	private ManifestAccess genericIdeManifest;
+	private TextFileAccess genericIdePluginXml;
+	private FileSystemAccess genericIdeTestSrc;
+	private FileSystemAccess genericIdeTestSrcGen;
+	private ManifestAccess genericIdeTestManifest;
+	private TextFileAccess genericIdeTestPluginXml;
+	private FileSystemAccess eclipsePluginSrc;
+	private FileSystemAccess eclipsePluginSrcGen;
+	private ManifestAccess eclipsePluginManifest;
+	private TextFileAccess eclipsePluginPluginXml;
+	private FileSystemAccess eclipsePluginTestSrc;
+	private FileSystemAccess eclipsePluginTestSrcGen;
+	private ManifestAccess eclipsePluginTestManifest;
+	private TextFileAccess eclipsePluginTestPluginXml;
+	private FileSystemAccess ideaPluginSrc;
+	private FileSystemAccess ideaPluginSrcGen;
+	private ManifestAccess ideaPluginManifest;
+	private TextFileAccess ideaPluginPluginXml;
+	private FileSystemAccess ideaPluginTestSrc;
+	private FileSystemAccess ideaPluginTestSrcGen;
+	private ManifestAccess ideaPluginTestManifest;
+	private TextFileAccess ideaPluginTestPluginXml;
+	private FileSystemAccess webSrc;
+	private FileSystemAccess webSrcGen;
+	private ManifestAccess webManifest;
+	private TextFileAccess webPluginXml;
+	private FileSystemAccess webTestSrc;
+	private FileSystemAccess webTestSrcGen;
+	private ManifestAccess webTestManifest;
+	private TextFileAccess webTestPluginXml;
+	private FileSystemAccess orionJsGen;
+	private FileSystemAccess aceJsGen;
 	
-	private String runtimeSrcPath;
-	private String runtimeSrcGenPath;
-	private ManifestAccess runtimeManifestAccess;
-	private TextFileAccess runtimePluginXmlAccess;
-	private String runtimeTestSrcPath;
-	private String runtimeTestSrcGenPath;
-	private ManifestAccess runtimeTestManifestAccess;
-	private TextFileAccess runtimeTestPluginXmlAccess;
-	private String genericIdeSrcPath;
-	private String genericIdeSrcGenPath;
-	private ManifestAccess genericIdeManifestAccess;
-	private TextFileAccess genericIdePluginXmlAccess;
-	private String genericIdeTestSrcPath;
-	private String genericIdeTestSrcGenPath;
-	private ManifestAccess genericIdeTestManifestAccess;
-	private TextFileAccess genericIdeTestPluginXmlAccess;
-	private String eclipsePluginSrcPath;
-	private String eclipsePluginSrcGenPath;
-	private ManifestAccess eclipsePluginManifestAccess;
-	private TextFileAccess eclipsePluginPluginXmlAccess;
-	private String eclipsePluginTestSrcPath;
-	private String eclipsePluginTestSrcGenPath;
-	private ManifestAccess eclipsePluginTestManifestAccess;
-	private TextFileAccess eclipsePluginTestPluginXmlAccess;
-	private String ideaPluginSrcPath;
-	private String ideaPluginSrcGenPath;
-	private ManifestAccess ideaPluginManifestAccess;
-	private TextFileAccess ideaPluginPluginXmlAccess;
-	private String ideaPluginTestSrcPath;
-	private String ideaPluginTestSrcGenPath;
-	private ManifestAccess ideaPluginTestManifestAccess;
-	private TextFileAccess ideaPluginTestPluginXmlAccess;
-	private String webSrcPath;
-	private String webSrcGenPath;
-	private ManifestAccess webManifestAccess;
-	private TextFileAccess webPluginXmlAccess;
-	private String webTestSrcPath;
-	private String webTestSrcGenPath;
-	private ManifestAccess webTestManifestAccess;
-	private TextFileAccess webTestPluginXmlAccess;
-	private String orionJsGenPath;
-	private String aceJsGenPath;
-	
-	public void initialize() {
+	@Override
+	public void initialize(Injector injector) {
+		injector.injectMembers(this);
+		if (runtimeSrc != null) {
+			runtimeSrc.initialize(injector);
+		}
+		if (runtimeSrcGen != null) {
+			runtimeSrcGen.initialize(injector);
+		}
+		if (runtimeTestSrc != null) {
+			runtimeTestSrc.initialize(injector);
+		}
+		if (runtimeTestSrcGen != null) {
+			runtimeTestSrcGen.initialize(injector);
+		}
+		if (genericIdeSrc != null) {
+			genericIdeSrc.initialize(injector);
+		}
+		if (genericIdeSrcGen != null) {
+			genericIdeSrcGen.initialize(injector);
+		}
+		if (genericIdeTestSrc != null) {
+			genericIdeTestSrc.initialize(injector);
+		}
+		if (genericIdeTestSrcGen != null) {
+			genericIdeTestSrcGen.initialize(injector);
+		}
+		if (eclipsePluginSrc != null) {
+			eclipsePluginSrc.initialize(injector);
+		}
+		if (eclipsePluginSrcGen != null) {
+			eclipsePluginSrcGen.initialize(injector);
+		}
+		if (eclipsePluginTestSrc != null) {
+			eclipsePluginTestSrc.initialize(injector);
+		}
+		if (eclipsePluginTestSrcGen != null) {
+			eclipsePluginTestSrcGen.initialize(injector);
+		}
+		if (ideaPluginSrc != null) {
+			ideaPluginSrc.initialize(injector);
+		}
+		if (ideaPluginSrcGen != null) {
+			ideaPluginSrcGen.initialize(injector);
+		}
+		if (ideaPluginTestSrc != null) {
+			ideaPluginTestSrc.initialize(injector);
+		}
+		if (ideaPluginTestSrcGen != null) {
+			ideaPluginTestSrcGen.initialize(injector);
+		}
+		if (webSrc != null) {
+			webSrc.initialize(injector);
+		}
+		if (webSrcGen != null) {
+			webSrcGen.initialize(injector);
+		}
+		if (webTestSrc != null) {
+			webTestSrc.initialize(injector);
+		}
+		if (webTestSrcGen != null) {
+			webTestSrcGen.initialize(injector);
+		}
+		if (orionJsGen != null) {
+			orionJsGen.initialize(injector);
+		}
+		if (aceJsGen != null) {
+			aceJsGen.initialize(injector);
+		}
 	}
 	
 	@Override
 	public IFileSystemAccess2 getRuntimeSrc() {
-		if (runtimeSrcPath != null)
-			return new FileSystemAccess(runtimeSrcPath, encodingProvider);
-		else
-			return null;
+		return runtimeSrc;
 	}
 	
 	public void setRuntimeSrc(String path) {
-		this.runtimeSrcPath = path;
+		this.runtimeSrc = new FileSystemAccess(path);
 	}
 	
 	@Override
 	public IFileSystemAccess2 getRuntimeSrcGen() {
-		if (runtimeSrcGenPath != null)
-			return new FileSystemAccess(runtimeSrcGenPath, encodingProvider);
-		else
-			return null;
+		return runtimeSrcGen;
 	}
 	
 	public void setRuntimeSrcGen(String path) {
-		this.runtimeSrcGenPath = path;
+		this.runtimeSrcGen = new FileSystemAccess(path);
 	}
 	
 	@Override
 	public ManifestAccess getRuntimeManifest() {
-		return runtimeManifestAccess;
+		return runtimeManifest;
 	}
 	
 	public void setRuntimeManifest(ManifestAccess manifest) {
-		this.runtimeManifestAccess = manifest;
+		this.runtimeManifest = manifest;
 	}
 	
 	public void setRuntimePluginXml(String path) {
 		if (path != null) {
-			this.runtimePluginXmlAccess = new TextFileAccess();
-			this.runtimePluginXmlAccess.setPath(path);
+			this.runtimePluginXml = new TextFileAccess();
+			this.runtimePluginXml.setPath(path);
 		} else {
-			this.runtimePluginXmlAccess = null;
+			this.runtimePluginXml = null;
 		}
 	}
 	
 	@Override
 	public TextFileAccess getRuntimePluginXml() {
-		return this.runtimePluginXmlAccess;
+		return this.runtimePluginXml;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getRuntimeTestSrc() {
-		if (runtimeTestSrcPath != null)
-			return new FileSystemAccess(runtimeTestSrcPath, encodingProvider);
-		else
-			return null;
+		return runtimeTestSrc;
 	}
 	
 	public void setRuntimeTestSrc(String path) {
-		this.runtimeTestSrcPath = path;
+		this.runtimeTestSrc = new FileSystemAccess(path);
 	}
 	
 	@Override
 	public IFileSystemAccess2 getRuntimeTestSrcGen() {
-		if (runtimeTestSrcGenPath != null)
-			return new FileSystemAccess(runtimeTestSrcGenPath, encodingProvider);
-		else
-			return null;
+		return runtimeTestSrcGen;
 	}
 	
 	public void setRuntimeTestSrcGen(String path) {
-		this.runtimeTestSrcGenPath = path;
+		this.runtimeTestSrcGen = new FileSystemAccess(path);
 	}
 	
 	@Override
 	public ManifestAccess getRuntimeTestManifest() {
-		return runtimeTestManifestAccess;
+		return runtimeTestManifest;
 	}
 	
 	public void setRuntimeTestManifest(ManifestAccess manifest) {
-		this.runtimeTestManifestAccess = manifest;
+		this.runtimeTestManifest = manifest;
 	}
 	
 	public void setRuntimeTestPluginXml(String path) {
 		if (path != null) {
-			this.runtimeTestPluginXmlAccess = new TextFileAccess();
-			this.runtimeTestPluginXmlAccess.setPath(path);
+			this.runtimeTestPluginXml = new TextFileAccess();
+			this.runtimeTestPluginXml.setPath(path);
 		} else {
-			this.runtimeTestPluginXmlAccess = null;
+			this.runtimeTestPluginXml = null;
 		}
 	}
 	
 	@Override
 	public TextFileAccess getRuntimeTestPluginXml() {
-		return this.runtimeTestPluginXmlAccess;
+		return this.runtimeTestPluginXml;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getGenericIdeSrc() {
-		if (genericIdeSrcPath != null)
-			return new FileSystemAccess(genericIdeSrcPath, encodingProvider);
-		else
-			return null;
+		return genericIdeSrc;
 	}
 	
 	public void setGenericIdeSrc(String path) {
-		this.genericIdeSrcPath = path;
+		this.genericIdeSrc = new FileSystemAccess(path);
 	}
 	
 	@Override
 	public IFileSystemAccess2 getGenericIdeSrcGen() {
-		if (genericIdeSrcGenPath != null)
-			return new FileSystemAccess(genericIdeSrcGenPath, encodingProvider);
-		else
-			return null;
+		return genericIdeSrcGen;
 	}
 	
 	public void setGenericIdeSrcGen(String path) {
-		this.genericIdeSrcGenPath = path;
+		this.genericIdeSrcGen = new FileSystemAccess(path);
 	}
 	
 	@Override
 	public ManifestAccess getGenericIdeManifest() {
-		return genericIdeManifestAccess;
+		return genericIdeManifest;
 	}
 	
 	public void setGenericIdeManifest(ManifestAccess manifest) {
-		this.genericIdeManifestAccess = manifest;
+		this.genericIdeManifest = manifest;
 	}
 	
 	public void setGenericIdePluginXml(String path) {
 		if (path != null) {
-			this.genericIdePluginXmlAccess = new TextFileAccess();
-			this.genericIdePluginXmlAccess.setPath(path);
+			this.genericIdePluginXml = new TextFileAccess();
+			this.genericIdePluginXml.setPath(path);
 		} else {
-			this.genericIdePluginXmlAccess = null;
+			this.genericIdePluginXml = null;
 		}
 	}
 	
 	@Override
 	public TextFileAccess getGenericIdePluginXml() {
-		return this.genericIdePluginXmlAccess;
+		return this.genericIdePluginXml;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getGenericIdeTestSrc() {
-		if (genericIdeTestSrcPath != null)
-			return new FileSystemAccess(genericIdeTestSrcPath, encodingProvider);
-		else
-			return null;
+		return genericIdeTestSrc;
 	}
 	
 	public void setGenericIdeTestSrc(String path) {
-		this.genericIdeTestSrcPath = path;
+		this.genericIdeTestSrc = new FileSystemAccess(path);
 	}
 	
 	@Override
 	public IFileSystemAccess2 getGenericIdeTestSrcGen() {
-		if (genericIdeTestSrcGenPath != null)
-			return new FileSystemAccess(genericIdeTestSrcGenPath, encodingProvider);
-		else
-			return null;
+		return genericIdeTestSrcGen;
 	}
 	
 	public void setGenericIdeTestSrcGen(String path) {
-		this.genericIdeTestSrcGenPath = path;
+		this.genericIdeTestSrcGen = new FileSystemAccess(path);
 	}
 	
 	@Override
 	public ManifestAccess getGenericIdeTestManifest() {
-		return genericIdeTestManifestAccess;
+		return genericIdeTestManifest;
 	}
 	
 	public void setGenericIdeTestManifest(ManifestAccess manifest) {
-		this.genericIdeTestManifestAccess = manifest;
+		this.genericIdeTestManifest = manifest;
 	}
 	
 	public void setGenericIdeTestPluginXml(String path) {
 		if (path != null) {
-			this.genericIdeTestPluginXmlAccess = new TextFileAccess();
-			this.genericIdeTestPluginXmlAccess.setPath(path);
+			this.genericIdeTestPluginXml = new TextFileAccess();
+			this.genericIdeTestPluginXml.setPath(path);
 		} else {
-			this.genericIdeTestPluginXmlAccess = null;
+			this.genericIdeTestPluginXml = null;
 		}
 	}
 	
 	@Override
 	public TextFileAccess getGenericIdeTestPluginXml() {
-		return this.genericIdeTestPluginXmlAccess;
+		return this.genericIdeTestPluginXml;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getEclipsePluginSrc() {
-		if (eclipsePluginSrcPath != null)
-			return new FileSystemAccess(eclipsePluginSrcPath, encodingProvider);
-		else
-			return null;
+		return eclipsePluginSrc;
 	}
 	
 	public void setEclipsePluginSrc(String path) {
-		this.eclipsePluginSrcPath = path;
+		this.eclipsePluginSrc = new FileSystemAccess(path);
 	}
 	
 	@Override
 	public IFileSystemAccess2 getEclipsePluginSrcGen() {
-		if (eclipsePluginSrcGenPath != null)
-			return new FileSystemAccess(eclipsePluginSrcGenPath, encodingProvider);
-		else
-			return null;
+		return eclipsePluginSrcGen;
 	}
 	
 	public void setEclipsePluginSrcGen(String path) {
-		this.eclipsePluginSrcGenPath = path;
+		this.eclipsePluginSrcGen = new FileSystemAccess(path);
 	}
 	
 	@Override
 	public ManifestAccess getEclipsePluginManifest() {
-		return eclipsePluginManifestAccess;
+		return eclipsePluginManifest;
 	}
 	
 	public void setEclipsePluginManifest(ManifestAccess manifest) {
-		this.eclipsePluginManifestAccess = manifest;
+		this.eclipsePluginManifest = manifest;
 	}
 	
 	public void setEclipsePluginPluginXml(String path) {
 		if (path != null) {
-			this.eclipsePluginPluginXmlAccess = new TextFileAccess();
-			this.eclipsePluginPluginXmlAccess.setPath(path);
+			this.eclipsePluginPluginXml = new TextFileAccess();
+			this.eclipsePluginPluginXml.setPath(path);
 		} else {
-			this.eclipsePluginPluginXmlAccess = null;
+			this.eclipsePluginPluginXml = null;
 		}
 	}
 	
 	@Override
 	public TextFileAccess getEclipsePluginPluginXml() {
-		return this.eclipsePluginPluginXmlAccess;
+		return this.eclipsePluginPluginXml;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getEclipsePluginTestSrc() {
-		if (eclipsePluginTestSrcPath != null)
-			return new FileSystemAccess(eclipsePluginTestSrcPath, encodingProvider);
-		else
-			return null;
+		return eclipsePluginTestSrc;
 	}
 	
 	public void setEclipsePluginTestSrc(String path) {
-		this.eclipsePluginTestSrcPath = path;
+		this.eclipsePluginTestSrc = new FileSystemAccess(path);
 	}
 	
 	@Override
 	public IFileSystemAccess2 getEclipsePluginTestSrcGen() {
-		if (eclipsePluginTestSrcGenPath != null)
-			return new FileSystemAccess(eclipsePluginTestSrcGenPath, encodingProvider);
-		else
-			return null;
+		return eclipsePluginTestSrcGen;
 	}
 	
 	public void setEclipsePluginTestSrcGen(String path) {
-		this.eclipsePluginTestSrcGenPath = path;
+		this.eclipsePluginTestSrcGen = new FileSystemAccess(path);
 	}
 	
 	@Override
 	public ManifestAccess getEclipsePluginTestManifest() {
-		return eclipsePluginTestManifestAccess;
+		return eclipsePluginTestManifest;
 	}
 	
 	public void setEclipsePluginTestManifest(ManifestAccess manifest) {
-		this.eclipsePluginTestManifestAccess = manifest;
+		this.eclipsePluginTestManifest = manifest;
 	}
 	
 	public void setEclipsePluginTestPluginXml(String path) {
 		if (path != null) {
-			this.eclipsePluginTestPluginXmlAccess = new TextFileAccess();
-			this.eclipsePluginTestPluginXmlAccess.setPath(path);
+			this.eclipsePluginTestPluginXml = new TextFileAccess();
+			this.eclipsePluginTestPluginXml.setPath(path);
 		} else {
-			this.eclipsePluginTestPluginXmlAccess = null;
+			this.eclipsePluginTestPluginXml = null;
 		}
 	}
 	
 	@Override
 	public TextFileAccess getEclipsePluginTestPluginXml() {
-		return this.eclipsePluginTestPluginXmlAccess;
+		return this.eclipsePluginTestPluginXml;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getIdeaPluginSrc() {
-		if (ideaPluginSrcPath != null)
-			return new FileSystemAccess(ideaPluginSrcPath, encodingProvider);
-		else
-			return null;
+		return ideaPluginSrc;
 	}
 	
 	public void setIdeaPluginSrc(String path) {
-		this.ideaPluginSrcPath = path;
+		this.ideaPluginSrc = new FileSystemAccess(path);
 	}
 	
 	@Override
 	public IFileSystemAccess2 getIdeaPluginSrcGen() {
-		if (ideaPluginSrcGenPath != null)
-			return new FileSystemAccess(ideaPluginSrcGenPath, encodingProvider);
-		else
-			return null;
+		return ideaPluginSrcGen;
 	}
 	
 	public void setIdeaPluginSrcGen(String path) {
-		this.ideaPluginSrcGenPath = path;
+		this.ideaPluginSrcGen = new FileSystemAccess(path);
 	}
 	
 	@Override
 	public ManifestAccess getIdeaPluginManifest() {
-		return ideaPluginManifestAccess;
+		return ideaPluginManifest;
 	}
 	
 	public void setIdeaPluginManifest(ManifestAccess manifest) {
-		this.ideaPluginManifestAccess = manifest;
+		this.ideaPluginManifest = manifest;
 	}
 	
 	public void setIdeaPluginPluginXml(String path) {
 		if (path != null) {
-			this.ideaPluginPluginXmlAccess = new TextFileAccess();
-			this.ideaPluginPluginXmlAccess.setPath(path);
+			this.ideaPluginPluginXml = new TextFileAccess();
+			this.ideaPluginPluginXml.setPath(path);
 		} else {
-			this.ideaPluginPluginXmlAccess = null;
+			this.ideaPluginPluginXml = null;
 		}
 	}
 	
 	@Override
 	public TextFileAccess getIdeaPluginPluginXml() {
-		return this.ideaPluginPluginXmlAccess;
+		return this.ideaPluginPluginXml;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getIdeaPluginTestSrc() {
-		if (ideaPluginTestSrcPath != null)
-			return new FileSystemAccess(ideaPluginTestSrcPath, encodingProvider);
-		else
-			return null;
+		return ideaPluginTestSrc;
 	}
 	
 	public void setIdeaPluginTestSrc(String path) {
-		this.ideaPluginTestSrcPath = path;
+		this.ideaPluginTestSrc = new FileSystemAccess(path);
 	}
 	
 	@Override
 	public IFileSystemAccess2 getIdeaPluginTestSrcGen() {
-		if (ideaPluginTestSrcGenPath != null)
-			return new FileSystemAccess(ideaPluginTestSrcGenPath, encodingProvider);
-		else
-			return null;
+		return ideaPluginTestSrcGen;
 	}
 	
 	public void setIdeaPluginTestSrcGen(String path) {
-		this.ideaPluginTestSrcGenPath = path;
+		this.ideaPluginTestSrcGen = new FileSystemAccess(path);
 	}
 	
 	@Override
 	public ManifestAccess getIdeaPluginTestManifest() {
-		return ideaPluginTestManifestAccess;
+		return ideaPluginTestManifest;
 	}
 	
 	public void setIdeaPluginTestManifest(ManifestAccess manifest) {
-		this.ideaPluginTestManifestAccess = manifest;
+		this.ideaPluginTestManifest = manifest;
 	}
 	
 	public void setIdeaPluginTestPluginXml(String path) {
 		if (path != null) {
-			this.ideaPluginTestPluginXmlAccess = new TextFileAccess();
-			this.ideaPluginTestPluginXmlAccess.setPath(path);
+			this.ideaPluginTestPluginXml = new TextFileAccess();
+			this.ideaPluginTestPluginXml.setPath(path);
 		} else {
-			this.ideaPluginTestPluginXmlAccess = null;
+			this.ideaPluginTestPluginXml = null;
 		}
 	}
 	
 	@Override
 	public TextFileAccess getIdeaPluginTestPluginXml() {
-		return this.ideaPluginTestPluginXmlAccess;
+		return this.ideaPluginTestPluginXml;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getWebSrc() {
-		if (webSrcPath != null)
-			return new FileSystemAccess(webSrcPath, encodingProvider);
-		else
-			return null;
+		return webSrc;
 	}
 	
 	public void setWebSrc(String path) {
-		this.webSrcPath = path;
+		this.webSrc = new FileSystemAccess(path);
 	}
 	
 	@Override
 	public IFileSystemAccess2 getWebSrcGen() {
-		if (webSrcGenPath != null)
-			return new FileSystemAccess(webSrcGenPath, encodingProvider);
-		else
-			return null;
+		return webSrcGen;
 	}
 	
 	public void setWebSrcGen(String path) {
-		this.webSrcGenPath = path;
+		this.webSrcGen = new FileSystemAccess(path);
 	}
 	
 	@Override
 	public ManifestAccess getWebManifest() {
-		return webManifestAccess;
+		return webManifest;
 	}
 	
 	public void setWebManifest(ManifestAccess manifest) {
-		this.webManifestAccess = manifest;
+		this.webManifest = manifest;
 	}
 	
 	public void setWebPluginXml(String path) {
 		if (path != null) {
-			this.webPluginXmlAccess = new TextFileAccess();
-			this.webPluginXmlAccess.setPath(path);
+			this.webPluginXml = new TextFileAccess();
+			this.webPluginXml.setPath(path);
 		} else {
-			this.webPluginXmlAccess = null;
+			this.webPluginXml = null;
 		}
 	}
 	
 	@Override
 	public TextFileAccess getWebPluginXml() {
-		return this.webPluginXmlAccess;
+		return this.webPluginXml;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getWebTestSrc() {
-		if (webTestSrcPath != null)
-			return new FileSystemAccess(webTestSrcPath, encodingProvider);
-		else
-			return null;
+		return webTestSrc;
 	}
 	
 	public void setWebTestSrc(String path) {
-		this.webTestSrcPath = path;
+		this.webTestSrc = new FileSystemAccess(path);
 	}
 	
 	@Override
 	public IFileSystemAccess2 getWebTestSrcGen() {
-		if (webTestSrcGenPath != null)
-			return new FileSystemAccess(webTestSrcGenPath, encodingProvider);
-		else
-			return null;
+		return webTestSrcGen;
 	}
 	
 	public void setWebTestSrcGen(String path) {
-		this.webTestSrcGenPath = path;
+		this.webTestSrcGen = new FileSystemAccess(path);
 	}
 	
 	@Override
 	public ManifestAccess getWebTestManifest() {
-		return webTestManifestAccess;
+		return webTestManifest;
 	}
 	
 	public void setWebTestManifest(ManifestAccess manifest) {
-		this.webTestManifestAccess = manifest;
+		this.webTestManifest = manifest;
 	}
 	
 	public void setWebTestPluginXml(String path) {
 		if (path != null) {
-			this.webTestPluginXmlAccess = new TextFileAccess();
-			this.webTestPluginXmlAccess.setPath(path);
+			this.webTestPluginXml = new TextFileAccess();
+			this.webTestPluginXml.setPath(path);
 		} else {
-			this.webTestPluginXmlAccess = null;
+			this.webTestPluginXml = null;
 		}
 	}
 	
 	@Override
 	public TextFileAccess getWebTestPluginXml() {
-		return this.webTestPluginXmlAccess;
+		return this.webTestPluginXml;
 	}
 	
 	@Override
 	public IFileSystemAccess2 getOrionJsGen() {
-		if (orionJsGenPath != null)
-			return new FileSystemAccess(orionJsGenPath, encodingProvider);
-		else
-			return null;
+		return orionJsGen;
 	}
 	
 	public void setOrionJsGen(String path) {
-		this.orionJsGenPath = path;
+		this.orionJsGen = new FileSystemAccess(path);
 	}
 	
 	@Override
 	public IFileSystemAccess2 getAceJsGen() {
-		if (aceJsGenPath != null)
-			return new FileSystemAccess(aceJsGenPath, encodingProvider);
-		else
-			return null;
+		return aceJsGen;
 	}
 	
 	public void setAceJsGen(String path) {
-		this.aceJsGenPath = path;
+		this.aceJsGen = new FileSystemAccess(path);
 	}
 	
 }

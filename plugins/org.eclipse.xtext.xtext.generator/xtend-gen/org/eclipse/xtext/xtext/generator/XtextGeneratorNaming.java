@@ -7,11 +7,18 @@
  */
 package org.eclipse.xtext.xtext.generator;
 
+import com.google.inject.Singleton;
+import org.eclipse.xtend.lib.annotations.AccessorType;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 
+@Singleton
 @SuppressWarnings("all")
 public class XtextGeneratorNaming {
+  @Accessors(AccessorType.PUBLIC_SETTER)
+  private String eclipsePluginActivator;
+  
   public String getPackage(final String qualifiedName) {
     int _lastIndexOf = qualifiedName.lastIndexOf(".");
     return qualifiedName.substring(0, _lastIndexOf);
@@ -28,14 +35,15 @@ public class XtextGeneratorNaming {
   
   public String getRuntimeModule(final Grammar grammar) {
     String _runtimeBasePackage = this.getRuntimeBasePackage(grammar);
+    String _plus = (_runtimeBasePackage + ".");
     String _name = GrammarUtil.getName(grammar);
-    String _plus = (_runtimeBasePackage + _name);
-    return (_plus + "RuntimeModule");
+    String _plus_1 = (_plus + _name);
+    return (_plus_1 + "RuntimeModule");
   }
   
   public String getRuntimeGenModule(final Grammar grammar) {
     String _runtimeBasePackage = this.getRuntimeBasePackage(grammar);
-    String _plus = (_runtimeBasePackage + "Abstract");
+    String _plus = (_runtimeBasePackage + ".Abstract");
     String _name = GrammarUtil.getName(grammar);
     String _plus_1 = (_plus + _name);
     return (_plus_1 + "RuntimeModule");
@@ -47,16 +55,18 @@ public class XtextGeneratorNaming {
   
   public String getRuntimeSetup(final Grammar grammar) {
     String _runtimeBasePackage = this.getRuntimeBasePackage(grammar);
+    String _plus = (_runtimeBasePackage + ".");
     String _name = GrammarUtil.getName(grammar);
-    String _plus = (_runtimeBasePackage + _name);
-    return (_plus + "StandaloneSetup");
+    String _plus_1 = (_plus + _name);
+    return (_plus_1 + "StandaloneSetup");
   }
   
   public String getRuntimeGenSetup(final Grammar grammar) {
     String _runtimeBasePackage = this.getRuntimeBasePackage(grammar);
+    String _plus = (_runtimeBasePackage + ".");
     String _name = GrammarUtil.getName(grammar);
-    String _plus = (_runtimeBasePackage + _name);
-    return (_plus + "StandaloneSetupGenerated");
+    String _plus_1 = (_plus + _name);
+    return (_plus_1 + "StandaloneSetupGenerated");
   }
   
   public String getEclipsePluginBasePackage(final Grammar grammar) {
@@ -66,20 +76,46 @@ public class XtextGeneratorNaming {
   
   public String getEclipsePluginModule(final Grammar grammar) {
     String _eclipsePluginBasePackage = this.getEclipsePluginBasePackage(grammar);
-    String _name = GrammarUtil.getName(grammar);
-    String _plus = (_eclipsePluginBasePackage + _name);
-    return (_plus + "UiModule");
-  }
-  
-  public String getEclipsePluginGenModule(final Grammar grammar) {
-    String _eclipsePluginBasePackage = this.getEclipsePluginBasePackage(grammar);
-    String _plus = (_eclipsePluginBasePackage + "Abstract");
+    String _plus = (_eclipsePluginBasePackage + ".");
     String _name = GrammarUtil.getName(grammar);
     String _plus_1 = (_plus + _name);
     return (_plus_1 + "UiModule");
   }
   
+  public String getEclipsePluginGenModule(final Grammar grammar) {
+    String _eclipsePluginBasePackage = this.getEclipsePluginBasePackage(grammar);
+    String _plus = (_eclipsePluginBasePackage + ".");
+    String _plus_1 = (_plus + "Abstract");
+    String _name = GrammarUtil.getName(grammar);
+    String _plus_2 = (_plus_1 + _name);
+    return (_plus_2 + "UiModule");
+  }
+  
   public String getEclipsePluginDefaultModule(final Grammar grammar) {
     return "org.eclipse.xtext.ui.DefaultUiModule";
+  }
+  
+  public String getEclipsePluginExecutableExtensionFactory(final Grammar grammar) {
+    String _eclipsePluginBasePackage = this.getEclipsePluginBasePackage(grammar);
+    String _plus = (_eclipsePluginBasePackage + ".");
+    String _name = GrammarUtil.getName(grammar);
+    String _plus_1 = (_plus + _name);
+    return (_plus_1 + "ExecutableExtensionFactory");
+  }
+  
+  public String getEclipsePluginActivator(final Grammar grammar) {
+    if ((this.eclipsePluginActivator == null)) {
+      String _eclipsePluginBasePackage = this.getEclipsePluginBasePackage(grammar);
+      String _plus = (_eclipsePluginBasePackage + ".internal.");
+      String _name = GrammarUtil.getName(grammar);
+      String _plus_1 = (_plus + _name);
+      String _plus_2 = (_plus_1 + "Activator");
+      this.eclipsePluginActivator = _plus_2;
+    }
+    return this.eclipsePluginActivator;
+  }
+  
+  public void setEclipsePluginActivator(final String eclipsePluginActivator) {
+    this.eclipsePluginActivator = eclipsePluginActivator;
   }
 }

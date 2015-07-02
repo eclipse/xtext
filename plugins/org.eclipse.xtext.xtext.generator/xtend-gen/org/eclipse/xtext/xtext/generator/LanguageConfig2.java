@@ -11,6 +11,7 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 import com.google.inject.Provider;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -115,7 +116,7 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
   
   public JavaFileAccess getRuntimeSetup() {
     if ((this.runtimeSetupImpl == null)) {
-      JavaFileAccess _startRuntimeGenSetup = this.generatorTemplates.startRuntimeGenSetup();
+      JavaFileAccess _startRuntimeGenSetup = this.generatorTemplates.startRuntimeGenSetup(this);
       this.runtimeSetupImpl = _startRuntimeGenSetup;
     }
     return this.runtimeSetupImpl;
@@ -124,7 +125,7 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
   public GuiceModuleAccess getRuntimeModule() {
     boolean _equals = Objects.equal(this.runtimeModule, null);
     if (_equals) {
-      GuiceModuleAccess _startRuntimeGenModule = this.generatorTemplates.startRuntimeGenModule();
+      GuiceModuleAccess _startRuntimeGenModule = this.generatorTemplates.startRuntimeGenModule(this);
       this.runtimeModule = _startRuntimeGenModule;
     }
     return this.runtimeModule;
@@ -133,13 +134,15 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
   public GuiceModuleAccess getEclipsePluginModule() {
     boolean _equals = Objects.equal(this.eclipsePluginModule, null);
     if (_equals) {
-      GuiceModuleAccess _startEclipsePluginGenModule = this.generatorTemplates.startEclipsePluginGenModule();
+      GuiceModuleAccess _startEclipsePluginGenModule = this.generatorTemplates.startEclipsePluginGenModule(this);
       this.eclipsePluginModule = _startEclipsePluginGenModule;
     }
     return this.eclipsePluginModule;
   }
   
-  public void initialize() {
+  @Override
+  public void initialize(final Injector injector) {
+    super.initialize(injector);
     final ResourceSet rs = this.resourceSetProvider.get();
     for (final String loadedResource : this.loadedResources) {
       {

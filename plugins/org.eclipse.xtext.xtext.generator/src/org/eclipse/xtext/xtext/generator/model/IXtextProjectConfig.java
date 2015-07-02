@@ -8,13 +8,14 @@
 package org.eclipse.xtext.xtext.generator.model;
 
 import org.eclipse.xtext.generator.IFileSystemAccess2;
+import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
 
 /**
  * Inject an instance of this interface in order to generate code in a generator fragment.
  *
  * <p>This file has been generated with {@link org.eclipse.xtext.xtext.generator.internal.ProjectConfigGenerator}.</p>
  */
-public interface IXtextProjectConfig {
+public interface IXtextProjectConfig extends IGuiceAwareGeneratorComponent {
 	
 	IFileSystemAccess2 getRuntimeSrc();
 	IFileSystemAccess2 getRuntimeSrcGen();
