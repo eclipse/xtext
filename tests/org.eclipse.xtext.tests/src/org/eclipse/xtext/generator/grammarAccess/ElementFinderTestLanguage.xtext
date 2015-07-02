@@ -14,9 +14,11 @@ AType:
 AnotherType:
 	'bar' {AnotherType};
 	
+/* Suppress[noInstantiation] */
 FinderKeywords: 
 	'myKeyword' name=ID? 'myKeyword' 'lala'; 
 	
+/* Suppress[potentialOverride] */
 FinderKeywordPairs:
 	'begin' 'whatever' name=ID ('begin' nested=ID 'end')* 'end' 'begin' second=ID 'end';
 	

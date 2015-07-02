@@ -7,9 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -27,6 +35,9 @@ public class XtextDiagnosticConverter extends DiagnosticConverterImpl{
 	@Inject
 	private ILocationInFileProvider locationInFileProvider;
 	
+	@Inject
+	private IEObjectDocumentationProvider documentationProvider;
+	
 	@Override
 	protected IssueLocation getLocationData(EObject obj, EStructuralFeature structuralFeature, int index) {
 		if (NodeModelUtils.getNode(obj) == null) {
@@ -42,6 +53,44 @@ public class XtextDiagnosticConverter extends DiagnosticConverterImpl{
 			}
 		}
 		return super.getLocationData(obj, structuralFeature, index);
+	}
+	
+	@Override
+	protected Severity getSeverity(Diagnostic diagnostic) {
+		Severity result = super.getSeverity(diagnostic);
+		String issueCode = getIssueCode(diagnostic);
+		if (result == Severity.WARNING && issueCode != null) {
+			// only warnings can be suppressed
+			EObject causer = getCauser(diagnostic);
+			if (causer != null) {
+				if (isMarkedAsIgnored(causer, issueCode)) {
+					return null;
+				}
+				if (!(causer instanceof AbstractRule)) {
+					AbstractRule rule = GrammarUtil.containingRule(causer);
+					if (rule != null && isMarkedAsIgnored(rule, issueCode)) {
+						return null;
+					}
+				}
+			}
+		}
+		return result;
+	}
+	
+	private final Pattern afterLastDot = Pattern.compile(".*\\W(\\w+)$");
+	
+	protected boolean isMarkedAsIgnored(EObject object, String code) {
+		String documentation = documentationProvider.getDocumentation(object);
+		if (documentation != null) {
+			Matcher matcher = afterLastDot.matcher(code);
+			if (matcher.matches()) {
+				String suffix = matcher.group(1);
+				if (documentation.contains("Suppress[" + suffix + "]")) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 }

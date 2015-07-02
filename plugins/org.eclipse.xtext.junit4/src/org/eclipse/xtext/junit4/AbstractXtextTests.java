@@ -269,17 +269,12 @@ public abstract class AbstractXtextTests extends Assert implements ResourceLoadH
 			if (d instanceof ExceptionDiagnostic)
 				fail(d.getMessage());
 		}
-
-		for(Diagnostic d: resource.getWarnings())
-			System.out.println("Resource Warning: "+d);
-				
 		if (expectedErrors == 0 && resource.getContents().size() > 0 && shouldTestSerializer(resource)) {
 			SerializerTester tester = get(SerializerTester.class);
 			EObject obj = resource.getContents().get(0);
 			tester.assertSerializeWithNodeModel(obj);
 			tester.assertSerializeWithoutNodeModel(obj);
 		}
-
 		return resource;
 	}
 
