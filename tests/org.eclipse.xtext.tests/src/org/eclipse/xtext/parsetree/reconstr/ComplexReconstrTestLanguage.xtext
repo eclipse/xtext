@@ -21,7 +21,7 @@ Term returns Expression:
 Atom: 
 	name=ID;
 
-/* Suppress[potentialOverride] */
+/* SuppressWarnings[potentialOverride] */
 Parens returns Expression: 
 	'(' Op ')' em='!'?;
 
@@ -34,23 +34,23 @@ StrangeStuff :
 //TrickyA returns TypeA1: 'TA' TrickyA1 (name += ID)* ({TypeB.x=current} 'x' | {TypeC.x=current} 'y')? name+=STRING;
 //TrickyA1 returns TypeD: name+=ID;
 
-/* Suppress[noInstantiation] */
+/* SuppressWarnings[noInstantiation] */
 TrickyB : 'TB' (name = ID type += INT)? (type += INT)*;
 
 TrickyC : 'TC' name = ID ({C1.x=current} 'x')? ({C2.y=current} 'y')? ({C3.z=current} 'z')?;
 
-/* Suppress[noInstantiation] */
+/* SuppressWarnings[noInstantiation] */
 TrickyD: 'TD' (name += INT foo = STRING type += ID)? (name += INT type += ID)? (type += ID)*;  
 
 // 34 "abc" XX 123 "de" YY x 34 DD 45 CC
-/* Suppress[noInstantiation] */
+/* SuppressWarnings[noInstantiation] */
 TrickyE: 'TE' (name+=INT foo+=STRING type+=ID)* 'x' (name+=INT type+=ID)*;
 
 // 
 TrickyF: 'TF' (name+=ID type+=INT)* (name+=ID | type+=INT);
 
 TrickyG: 'TG' tree=TrickyG1;
-/* Suppress[noInstantiation] */ 
+/* SuppressWarnings[noInstantiation] */ 
 TrickyG1: '[' (vals+=TrickyG2 (',' vals+=TrickyG2)*)? ']';
 TrickyG2: TrickyG1 | val=INT;
 

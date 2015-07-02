@@ -13,8 +13,8 @@ Model :
 	types+=Type*;
 	
 /* 
- * Suppress[BidirectionalReference]
- * Suppress[potentialOverride]
+ * SuppressWarnings[BidirectionalReference]
+ * SuppressWarnings[potentialOverride]
  */
 Type :
 	'type' name=ID ('extends' ^extends=[Type] '.' parentId=[Property])? ('for' parentId=[Property] 'in' ^extends=[Type])? '{'
