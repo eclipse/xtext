@@ -152,7 +152,10 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 	}
 	
 	private ISemanticHighlightingCalculator getEffectiveCalculator() {
-		if (oldCalculator != null) {
+		// A default binding was registered from ISemanticHighlightingCalculator to DefaultHighlightingCalculator
+		// thus clienst may have bound DefaultHighlightingCalculator to their custom impl
+		// use the custom impl if available, otherwise go for the new impl
+		if (oldCalculator != null && !DefaultSemanticHighlightingCalculator.class.equals(oldCalculator.getClass())) {
 			return oldCalculator;
 		}
 		if (newCalculator != null) {
