@@ -9,6 +9,7 @@ package org.eclipse.xtext.generator.adapter
 
 import com.google.common.collect.Maps
 import com.google.inject.Inject
+import com.google.inject.Injector
 import com.google.inject.Provider
 import java.util.List
 import java.util.Map
@@ -20,6 +21,7 @@ import org.eclipse.xpand2.output.PostProcessor
 import org.eclipse.xtend.expression.Variable
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.type.impl.java.JavaBeansMetaModel
+import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.GrammarUtil
 import org.eclipse.xtext.generator.Binding
 import org.eclipse.xtext.generator.Generator
@@ -42,8 +44,6 @@ class FragmentAdapter implements IGeneratorFragment2 {
 	
 	@Inject IXtextProjectConfig projectConfig
 	
-	@Inject LanguageConfig2 languageConfig2
-	
 	@Inject CodeConfig codeConfig
 	
 	@Inject IEncodingProvider encodingProvider
@@ -62,43 +62,47 @@ class FragmentAdapter implements IGeneratorFragment2 {
 		this.postProcessors.add(postProcessor)
 	}
 	
-	override generate() {
-		if (naming === null)
-			naming = createNaming()
-		val ctx = createExecutionContext()
-		val config = createLanguageConfig()
-		if (fragment instanceof IGeneratorFragmentExtension2) {
-			fragment.generate(config, ctx)
-		} else {
-			fragment.generate(config.grammar, ctx)
-		}
-		generateStandaloneSetup(config, ctx)
-		generateGuiceModuleRt(config, ctx)
-		generateGuiceModuleUi(config, ctx)
-		generatePluginXmlRt(config, ctx)
+	override initialize(Injector injector) {
+		injector.injectMembers(this)
 	}
 	
-	private def void generateStandaloneSetup(LanguageConfig config, XpandExecutionContext ctx) {
+	override generate(LanguageConfig2 config2) {
+		if (naming === null)
+			naming = createNaming(config2)
+		val ctx = createExecutionContext()
+		val config1 = createLanguageConfig(config2)
+		if (fragment instanceof IGeneratorFragmentExtension2) {
+			fragment.generate(config1, ctx)
+		} else {
+			fragment.generate(config1.grammar, ctx)
+		}
+		generateStandaloneSetup(config1, config2, ctx)
+		generateGuiceModuleRt(config1, config2, ctx)
+		generateGuiceModuleUi(config1, config2, ctx)
+		generatePluginXmlRt(config1, ctx)
+	}
+	
+	private def void generateStandaloneSetup(LanguageConfig config1, LanguageConfig2 config2, XpandExecutionContext ctx) {
 		ctx.output.openFile(null, StringConcatOutputImpl.STRING_OUTLET)
 		try {
 			if (fragment instanceof IGeneratorFragmentExtension2) {
-				fragment.addToStandaloneSetup(config, ctx)
+				fragment.addToStandaloneSetup(config1, ctx)
 			} else {
-				fragment.addToStandaloneSetup(config.grammar, ctx)
+				fragment.addToStandaloneSetup(config1.grammar, ctx)
 			}
 			val result = (ctx.output as StringConcatOutputImpl).stringOutlet
-			languageConfig2.runtimeSetup.codeFragments += result
+			config2.runtimeSetup.codeFragments += result
 		} finally {
 			ctx.output.closeFile()
 		}
 	}
 	
-	private def generateGuiceModuleRt(LanguageConfig config, XpandExecutionContext ctx) {
-		languageConfig2.runtimeModule.bindings.addAll(fragment.getGuiceBindingsRt(config.grammar).map[translateBinding])
+	private def generateGuiceModuleRt(LanguageConfig config1, LanguageConfig2 config2, XpandExecutionContext ctx) {
+		config2.runtimeModule.bindings.addAll(fragment.getGuiceBindingsRt(config1.grammar).map[translateBinding])
 	}
 	
-	private def generateGuiceModuleUi(LanguageConfig config, XpandExecutionContext ctx) {
-		languageConfig2.eclipsePluginModule.bindings.addAll(fragment.getGuiceBindingsUi(config.grammar).map[translateBinding])
+	private def generateGuiceModuleUi(LanguageConfig config1, LanguageConfig2 config2, XpandExecutionContext ctx) {
+		config2.eclipsePluginModule.bindings.addAll(fragment.getGuiceBindingsUi(config1.grammar).map[translateBinding])
 	}
 	
 	private def translateBinding(Binding it) {
@@ -107,13 +111,13 @@ class FragmentAdapter implements IGeneratorFragment2 {
 		new GuiceModuleAccess.Binding(newKey, newValue, contributedBy, final)
 	}
 	
-	private def void generatePluginXmlRt(LanguageConfig config, XpandExecutionContext ctx) {
+	private def void generatePluginXmlRt(LanguageConfig config1, XpandExecutionContext ctx) {
 		ctx.output.openFile(null, StringConcatOutputImpl.STRING_OUTLET)
 		try {
 			if (fragment instanceof IGeneratorFragmentExtension2) {
-				fragment.addToPluginXmlRt(config, ctx)
+				fragment.addToPluginXmlRt(config1, ctx)
 			} else {
-				fragment.addToPluginXmlRt(config.grammar, ctx)
+				fragment.addToPluginXmlRt(config1.grammar, ctx)
 			}
 			val result = (ctx.output as StringConcatOutputImpl).stringOutlet
 			projectConfig.runtimePluginXml.codeFragments += result
@@ -122,7 +126,7 @@ class FragmentAdapter implements IGeneratorFragment2 {
 		}
 	}
 	
-	protected def Naming createNaming() {
+	protected def Naming createNaming(LanguageConfig2 config2) {
 		return new Naming => [
 			projectNameRt = projectConfig.runtimeManifest?.pluginPath
 			projectNameIde = projectConfig.genericIdeManifest?.pluginPath
@@ -132,7 +136,7 @@ class FragmentAdapter implements IGeneratorFragment2 {
 			else
 				ideBasePackage = projectNameIde
 			uiBasePackage = projectNameUi
-			activatorName = getActivator
+			activatorName = getActivator(config2.grammar)
 			pathTestProject = projectConfig.runtimeTestManifest.pluginPath
 			fileHeader = codeConfig.fileHeader
 			classAnnotations = codeConfig.classAnnotationsAsString
@@ -142,14 +146,14 @@ class FragmentAdapter implements IGeneratorFragment2 {
 		]
 	}
 	
-	protected def LanguageConfig createLanguageConfig() {
+	protected def LanguageConfig createLanguageConfig(LanguageConfig2 config2) {
 		val config = new LanguageConfig
-		for (resource : languageConfig2.loadedResources) {
+		for (resource : config2.loadedResources) {
 			config.addLoadedResource(resource)
 		}
 		config.forcedResourceSet = resourceSetProvider.get
-		config.fileExtensions = languageConfig2.fileExtensions.join(',')
-		config.uri = languageConfig2.uri
+		config.fileExtensions = config2.fileExtensions.join(',')
+		config.uri = config2.uri
 		config.registerNaming(naming)
 		return config
 	}
@@ -201,8 +205,7 @@ class FragmentAdapter implements IGeneratorFragment2 {
 		return outlet;
 	}
 
-	protected def String getActivator() {
-		val grammar = languageConfig2.grammar
+	protected def String getActivator(Grammar grammar) {
 		return naming.basePackageUi(grammar) + '.internal.' + GrammarUtil.getName(grammar) + 'Activator'
 	}
 	
