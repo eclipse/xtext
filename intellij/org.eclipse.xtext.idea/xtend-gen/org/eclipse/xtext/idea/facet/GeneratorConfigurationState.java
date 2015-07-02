@@ -1,11 +1,33 @@
 package org.eclipse.xtext.idea.facet;
 
+import com.google.common.base.Objects;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @Accessors
 @SuppressWarnings("all")
 public class GeneratorConfigurationState {
+  public GeneratorConfigurationState() {
+  }
+  
+  public GeneratorConfigurationState(final OutputConfiguration defOutput) {
+    this.setActivated(true);
+    boolean _notEquals = (!Objects.equal(defOutput, null));
+    if (_notEquals) {
+      String _outputDirectory = defOutput.getOutputDirectory();
+      this.setOutputDirectory(_outputDirectory);
+      String _outputDirectory_1 = defOutput.getOutputDirectory();
+      this.setTestOutputDirectory(_outputDirectory_1);
+      boolean _isCreateOutputDirectory = defOutput.isCreateOutputDirectory();
+      this.setCreateDirectory(_isCreateOutputDirectory);
+      boolean _isCanClearOutputDirectory = defOutput.isCanClearOutputDirectory();
+      this.setDeleteGenerated(_isCanClearOutputDirectory);
+      boolean _isOverrideExistingResources = defOutput.isOverrideExistingResources();
+      this.setOverwriteExisting(_isOverrideExistingResources);
+    }
+  }
+  
   private boolean activated;
   
   private boolean createDirectory;

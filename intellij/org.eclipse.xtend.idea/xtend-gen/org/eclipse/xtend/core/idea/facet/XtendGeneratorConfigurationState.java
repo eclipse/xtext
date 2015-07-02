@@ -8,7 +8,8 @@
 package org.eclipse.xtend.core.idea.facet;
 
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.idea.facet.GeneratorConfigurationState;
+import org.eclipse.xtext.generator.OutputConfiguration;
+import org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigurationState;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
@@ -16,7 +17,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
  */
 @Accessors
 @SuppressWarnings("all")
-public class XtendGeneratorConfigurationState extends GeneratorConfigurationState {
+public class XtendGeneratorConfigurationState extends XbaseGeneratorConfigurationState {
   private boolean useJavaCompilerCompliance;
   
   private String targetJavaVersion;
@@ -32,6 +33,13 @@ public class XtendGeneratorConfigurationState extends GeneratorConfigurationStat
   private boolean installDslAsPrimarySource;
   
   private boolean hideLocalSyntheticVariables;
+  
+  public XtendGeneratorConfigurationState() {
+  }
+  
+  public XtendGeneratorConfigurationState(final OutputConfiguration configuration) {
+    super(configuration);
+  }
   
   @Pure
   public boolean isUseJavaCompilerCompliance() {
