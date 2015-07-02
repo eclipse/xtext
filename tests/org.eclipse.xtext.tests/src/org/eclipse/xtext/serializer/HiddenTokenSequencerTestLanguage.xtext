@@ -14,7 +14,7 @@ Model:
 	domainModel = DomainModel
 ;
 
-/* Suppress[noInstantiation] */
+/* SuppressWarnings[noInstantiation] */
 DomainModel:
 	'entities'
 		(entities+=Entity)*
