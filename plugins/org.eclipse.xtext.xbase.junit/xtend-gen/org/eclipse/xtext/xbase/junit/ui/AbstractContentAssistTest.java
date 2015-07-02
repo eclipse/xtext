@@ -32,6 +32,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
+@SuppressWarnings("all")
 public class AbstractContentAssistTest implements ResourceLoadHelper, IJavaProjectProvider {
   @Inject
   private Provider<XtextResourceSet> resourceSetProvider;
