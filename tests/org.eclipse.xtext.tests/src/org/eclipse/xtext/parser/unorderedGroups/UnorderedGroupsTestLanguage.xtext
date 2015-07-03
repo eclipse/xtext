@@ -54,6 +54,7 @@ UnorderedDatatype:
   | '14' (('a' & 'b') & ('c' & 'd'))+
 ;
 
+/* SuppressWarnings[potentialOverride] */
 UnorderedSerialization: {UnorderedSerialization} (
     '1' first?='a'?  & second?='b'? & third?='c'? & forth?='d'?
   | '2' (firstAsList+='a' & secondAsList+='b')*

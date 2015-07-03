@@ -32,7 +32,7 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Assignment cStatesAssignment_6 = (Assignment)cGroup.eContents().get(6);
 		private final RuleCall cStatesStateParserRuleCall_6_0 = (RuleCall)cStatesAssignment_6.eContents().get(0);
 		
-		//Statemachine:
+		/// * SuppressWarnings[noInstantiation] * / Statemachine:
 		//	"events" events+=Event* "end" "commands" commands+=Command* "end" states+=State*;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -288,7 +288,7 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	
-	//Statemachine:
+	/// * SuppressWarnings[noInstantiation] * / Statemachine:
 	//	"events" events+=Event* "end" "commands" commands+=Command* "end" states+=State*;
 	public StatemachineElements getStatemachineAccess() {
 		return pStatemachine;

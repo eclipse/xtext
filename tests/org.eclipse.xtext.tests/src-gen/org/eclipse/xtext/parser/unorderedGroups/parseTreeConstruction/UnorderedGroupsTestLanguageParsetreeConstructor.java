@@ -3007,7 +3007,7 @@ protected class NestedModel_NestedKeyword_2 extends KeywordToken  {
 
 /************ begin Rule UnorderedSerialization ****************
  *
- * UnorderedSerialization:
+ * / * SuppressWarnings[potentialOverride] * / UnorderedSerialization:
  * 	{UnorderedSerialization} ("1" first?="a"? & second?="b"? & third?="c"? & forth?="d"? | "2" (firstAsList+="a" &
  * 	secondAsList+="b")* | "3" (firstAsList+="a"+ & second?="b")*);
  *

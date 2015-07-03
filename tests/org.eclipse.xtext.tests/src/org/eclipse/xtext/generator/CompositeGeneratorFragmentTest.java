@@ -11,9 +11,11 @@ import java.io.FileNotFoundException;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.apache.log4j.Level;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.junit4.logging.LoggingTester;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -26,7 +28,7 @@ public class CompositeGeneratorFragmentTest extends Assert {
 
 	@Test
 	public void testFinalBindingsPersist() throws Exception {
-		CompositeGeneratorFragment fragment = new CompositeGeneratorFragment();
+		final CompositeGeneratorFragment fragment = new CompositeGeneratorFragment();
 		fragment.addFragment(new DefaultGeneratorFragment() {
 			@Override
 			public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
@@ -43,9 +45,16 @@ public class CompositeGeneratorFragmentTest extends Assert {
 				return bindFactory.getBindings();
 			}
 		});
-		Set<Binding> bindings = fragment.getGuiceBindingsRt(null);
-		assertEquals(1, bindings.size());
-		assertEquals("BAR", bindings.iterator().next().getValue().getTypeName());
+		LoggingTester.captureLogging(Level.WARN, CompositeGeneratorFragment.class, new Runnable() {
+
+			@Override
+			public void run() {
+				Set<Binding> bindings = fragment.getGuiceBindingsRt(null);
+				assertEquals(1, bindings.size());
+				assertEquals("BAR", bindings.iterator().next().getValue().getTypeName());
+			}
+			
+		}).assertLogEntry("Cannot override final binding 'final FOO -> BAR (contributed by org.eclipse.xtext.generator.CompositeGeneratorFragmentTest$1)'. Ignoring binding from fragment 'org.eclipse.xtext.generator.CompositeGeneratorFragmentTest$2'");
 	}
 
 	@Test
@@ -95,7 +104,6 @@ public class CompositeGeneratorFragmentTest extends Assert {
 			fragment.getGuiceBindingsRt(null);
 			fail("exception expected");
 		} catch (IllegalStateException e) {
-			System.out.println(e);
 			// expected
 		}
 	}

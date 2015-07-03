@@ -9,6 +9,7 @@ grammar org.eclipse.xtext.parser.antlr.Bug296889ExTestLanguage with org.eclipse.
 
 generate bug296889ExTest "http://eclipse.org/xtext/Bug296889ExTestLanguage"
 
+/* SuppressWarnings[noInstantiation] */
 Model: "Model" expressions += Expression* | "DataType" values += DataTypeExpression* ;
 
 Expression: Postop | Preop ; 

@@ -8,6 +8,7 @@
  *******************************************************************************/
 grammar org.eclipse.xtext.enumrules.EnumRulesTestLanguage with org.eclipse.xtext.common.Terminals
 
+/* SuppressWarnings[external] */
 import "classpath:/org/eclipse/xtext/enumrules/enums.ecore"
 generate enumRulesTestLanguage "http://www.eclipse.org/2009/tmf/xtext/EnumRulesTest"
  

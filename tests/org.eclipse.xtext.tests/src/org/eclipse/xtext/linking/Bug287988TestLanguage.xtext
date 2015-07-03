@@ -9,6 +9,7 @@ grammar org.eclipse.xtext.linking.Bug287988TestLanguage with org.eclipse.xtext.c
 
 generate bug287988Test "http://eclipse.org/xtext/Bug287988TestLanguage"
 
+/* SuppressWarnings[noInstantiation] */
 Model:
     ('actions' attributes+=BaseAttribute*)
   | ('simple' attributes+=SimpleAttribute*)

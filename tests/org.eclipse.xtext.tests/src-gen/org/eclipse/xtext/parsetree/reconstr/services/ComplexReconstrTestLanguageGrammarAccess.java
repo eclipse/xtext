@@ -143,7 +143,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Assignment cEmAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final Keyword cEmExclamationMarkKeyword_3_0 = (Keyword)cEmAssignment_3.eContents().get(0);
 		
-		//Parens returns Expression:
+		/// * SuppressWarnings[potentialOverride] * / Parens returns Expression:
 		//	"(" Op ")" em="!"?;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -184,7 +184,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		// * / // disabled, because of https://bugs.eclipse.org/bugs/show_bug.cgi?id=346685
 		////TrickyA returns TypeA1: 'TA' TrickyA1 (name += ID)* ({TypeB.x=current} 'x' | {TypeC.x=current} 'y')? name+=STRING;
 		////TrickyA1 returns TypeD: name+=ID;
-		//TrickyB:
+		/// * SuppressWarnings[noInstantiation] * / TrickyB:
 		//	"TB" (name=ID type+=INT)? type+=INT*;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -295,7 +295,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Assignment cTypeAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cTypeIDTerminalRuleCall_3_0 = (RuleCall)cTypeAssignment_3.eContents().get(0);
 		
-		//TrickyD:
+		/// * SuppressWarnings[noInstantiation] * / TrickyD:
 		//	"TD" (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? type+=ID*;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -367,7 +367,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final RuleCall cTypeIDTerminalRuleCall_3_1_0 = (RuleCall)cTypeAssignment_3_1.eContents().get(0);
 		
 		//// 34 "abc" XX 123 "de" YY x 34 DD 45 CC
-		//TrickyE:
+		/// * SuppressWarnings[noInstantiation] * / TrickyE:
 		//	"TE" (name+=INT foo+=STRING type+=ID)* "x" (name+=INT type+=ID)*;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -511,7 +511,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final RuleCall cValsTrickyG2ParserRuleCall_1_1_1_0 = (RuleCall)cValsAssignment_1_1_1.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//TrickyG1:
+		/// * SuppressWarnings[noInstantiation] * / TrickyG1:
 		//	"[" (vals+=TrickyG2 ("," vals+=TrickyG2)*)? "]";
 		@Override public ParserRule getRule() { return rule; }
 
@@ -696,7 +696,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		return getAtomAccess().getRule();
 	}
 
-	//Parens returns Expression:
+	/// * SuppressWarnings[potentialOverride] * / Parens returns Expression:
 	//	"(" Op ")" em="!"?;
 	public ParensElements getParensAccess() {
 		return pParens;
@@ -712,7 +712,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	// * / // disabled, because of https://bugs.eclipse.org/bugs/show_bug.cgi?id=346685
 	////TrickyA returns TypeA1: 'TA' TrickyA1 (name += ID)* ({TypeB.x=current} 'x' | {TypeC.x=current} 'y')? name+=STRING;
 	////TrickyA1 returns TypeD: name+=ID;
-	//TrickyB:
+	/// * SuppressWarnings[noInstantiation] * / TrickyB:
 	//	"TB" (name=ID type+=INT)? type+=INT*;
 	public TrickyBElements getTrickyBAccess() {
 		return pTrickyB;
@@ -732,7 +732,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		return getTrickyCAccess().getRule();
 	}
 
-	//TrickyD:
+	/// * SuppressWarnings[noInstantiation] * / TrickyD:
 	//	"TD" (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? type+=ID*;
 	public TrickyDElements getTrickyDAccess() {
 		return pTrickyD;
@@ -743,7 +743,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//// 34 "abc" XX 123 "de" YY x 34 DD 45 CC
-	//TrickyE:
+	/// * SuppressWarnings[noInstantiation] * / TrickyE:
 	//	"TE" (name+=INT foo+=STRING type+=ID)* "x" (name+=INT type+=ID)*;
 	public TrickyEElements getTrickyEAccess() {
 		return pTrickyE;
@@ -774,7 +774,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		return getTrickyGAccess().getRule();
 	}
 
-	//TrickyG1:
+	/// * SuppressWarnings[noInstantiation] * / TrickyG1:
 	//	"[" (vals+=TrickyG2 ("," vals+=TrickyG2)*)? "]";
 	public TrickyG1Elements getTrickyG1Access() {
 		return pTrickyG1;

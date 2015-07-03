@@ -97,7 +97,7 @@ import org.junit.Assert
 			logger.level = level
 			action.run
 			val events = appender.events.toList.sortWith(TEMPORAL_ORDER)
-			new LogCapture(events)
+			return new LogCapture(events)
 		} finally {
 			logger.removeAppender(appender)
 			allAppenders.forEach[removeFilter(filter)]
@@ -114,10 +114,16 @@ import org.junit.Assert
 	}
 
 	private static def removeFilter(Appender appender, Filter filter) {
-		for (var current = appender.filter; current != null; current = current.getNext) {
-			if (current.getNext == filter) {
-				current.setNext(null)
-			}
+		if (appender.filter == filter) {
+			appender.clearFilters
+			appender.addFilter(filter.getNext)
+		} else {
+			for (var current = appender.filter; current != null; current = current.getNext) {
+				if (current.getNext == filter) {
+					current.setNext(filter.getNext)
+					return
+				}
+			}	
 		}
 	}
 
