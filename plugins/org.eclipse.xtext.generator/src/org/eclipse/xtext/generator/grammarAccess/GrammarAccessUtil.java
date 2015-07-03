@@ -42,6 +42,28 @@ import com.google.inject.Module;
  */
 public class GrammarAccessUtil {
 
+	/**
+	 * @since 2.9
+	 */
+	protected static class LineSeparatorModule extends XtextRuntimeModule {
+		private final ILineSeparatorInformation lineSeparatorInformation;
+
+		protected LineSeparatorModule(ILineSeparatorInformation lineSeparatorInformation) {
+			this.lineSeparatorInformation = lineSeparatorInformation;
+		}
+
+		@Override
+		public void configure(Binder binder) {
+			// avoid duplicate registration of the validator
+			Module compound = getBindings();
+			compound.configure(binder);
+		}
+
+		public ILineSeparatorInformation bindILineSeparatorInformation() {
+			return lineSeparatorInformation;
+		}
+	}
+
 	public static String getClassName(EObject obj) {
 		return obj.eClass().getName();
 	}
@@ -118,18 +140,7 @@ public class GrammarAccessUtil {
 				return delimiter;
 			}
 		};
-		Injector injector = Guice.createInjector(new XtextRuntimeModule() {
-			@Override
-			public void configure(Binder binder) {
-				// avoid duplicate registration of the validator
-				Module compound = getBindings();
-				compound.configure(binder);
-			}
-			@SuppressWarnings("unused")
-			public ILineSeparatorInformation bindILineSeparatorInformation() {
-				return lineSeparatorInformation;
-			}
-		});
+		Injector injector = Guice.createInjector(new LineSeparatorModule(lineSeparatorInformation));
 		result = injector.getInstance(ISerializer.class);
 		xtextSerializerByLineDelimiter.put(delimiter, result);
 		return result;
