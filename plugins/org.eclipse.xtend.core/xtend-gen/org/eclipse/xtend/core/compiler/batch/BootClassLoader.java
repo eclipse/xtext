@@ -30,8 +30,7 @@ public class BootClassLoader extends URLClassLoader {
   @Override
   protected Class<?> loadClass(final String name, final boolean resolve) throws ClassNotFoundException {
     Class<?> _xsynchronizedexpression = null;
-    Object _classLoadingLockJdk5 = this.getClassLoadingLockJdk5(name);
-    synchronized (_classLoadingLockJdk5) {
+    synchronized (this.getClassLoadingLockJdk5(name)) {
       Class<?> _xblockexpression = null;
       {
         Class<?> _elvis = null;
