@@ -8,10 +8,15 @@
 package org.eclipse.xtext.web.server;
 
 import org.eclipse.xtext.service.AbstractGenericModule;
+import org.eclipse.xtext.web.server.generator.DefaultContentTypeProvider;
+import org.eclipse.xtext.web.server.generator.IContentTypeProvider;
 
 /**
  * Default Guice bindings for the web integration of Xtext.
  */
 @SuppressWarnings("all")
 public class DefaultWebModule extends AbstractGenericModule {
+  public Class<? extends IContentTypeProvider> bindIContentTypeProvider() {
+    return DefaultContentTypeProvider.class;
+  }
 }

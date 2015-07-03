@@ -26,6 +26,8 @@ import org.eclipse.xtext.web.server.InvalidRequestException.InvalidDocumentState
 import org.eclipse.xtext.web.server.InvalidRequestException.InvalidParametersException
 import org.eclipse.xtext.web.server.InvalidRequestException.ResourceNotFoundException
 import org.eclipse.xtext.web.server.contentassist.ContentAssistService
+import org.eclipse.xtext.web.server.formatting.FormattingService
+import org.eclipse.xtext.web.server.generator.GeneratorService
 import org.eclipse.xtext.web.server.hover.HoverService
 import org.eclipse.xtext.web.server.model.IWebResourceSetProvider
 import org.eclipse.xtext.web.server.model.UpdateDocumentService
@@ -34,9 +36,8 @@ import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess
 import org.eclipse.xtext.web.server.occurrences.OccurrencesService
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler
 import org.eclipse.xtext.web.server.persistence.ResourcePersistenceService
-import org.eclipse.xtext.web.server.validation.ValidationService
-import org.eclipse.xtext.web.server.formatting.FormattingService
 import org.eclipse.xtext.web.server.syntaxcoloring.HighlightingService
+import org.eclipse.xtext.web.server.validation.ValidationService
 
 /**
  * The entry class for Xtext service invocations. Use {@link #getService(IRequestData, ISessionStore)}
@@ -102,6 +103,7 @@ class XtextServiceDispatcher {
 	@Inject HoverService hoverService
 	@Inject OccurrencesService occurrencesService
 	@Inject FormattingService formattingService
+	@Inject GeneratorService generatorService
 	@Inject IServerResourceHandler resourceHandler
 	@Inject IWebResourceSetProvider resourceSetProvider
 	@Inject Provider<XtextWebDocument> documentProvider
@@ -171,6 +173,8 @@ class XtextServiceDispatcher {
 				getOccurrencesService(request, sessionStore)
 			case 'format':
 				getFormattingService(request, sessionStore)
+			case 'generate':
+				getGeneratorService(request, sessionStore)
 			default:
 				throw new InvalidParametersException('The request type \'' + requestType + '\' is not supported.')
 		}
@@ -387,6 +391,21 @@ class XtextServiceDispatcher {
 			service = [
 				try {
 					formattingService.format(document, selection)
+				} catch (Throwable throwable) {
+					handleError(throwable)
+				}
+			]
+			hasTextInput = request.parameterKeys.contains('fullText')
+		]
+	}
+	
+	protected def getGeneratorService(IRequestData request, ISessionStore sessionStore)
+			throws InvalidRequestException {
+		val document = getDocumentAccess(request, sessionStore)
+		new ServiceDescriptor => [
+			service = [
+				try {
+					generatorService.generate(document)
 				} catch (Throwable throwable) {
 					handleError(throwable)
 				}

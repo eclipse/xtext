@@ -8,6 +8,7 @@
 package org.eclipse.xtext.web.server.test;
 
 import com.google.inject.Injector;
+import com.google.inject.Module;
 import com.google.inject.Singleton;
 import java.io.File;
 import java.util.Collections;
@@ -153,7 +154,7 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
   private UpdateDocumentTest.TestResourceValidator resourceValidator;
   
   @Override
-  protected StatemachineRuntimeModule getRuntimeModule() {
+  protected Module getRuntimeModule() {
     abstract class __UpdateDocumentTest_1 extends StatemachineRuntimeModule {
       public abstract Class<? extends IResourceValidator> bindIResourceValidator();
     }

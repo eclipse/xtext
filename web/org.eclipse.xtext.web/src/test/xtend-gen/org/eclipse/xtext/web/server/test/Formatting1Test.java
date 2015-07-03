@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.web.server.test;
 
+import com.google.inject.Module;
 import java.io.File;
 import java.util.Collections;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -27,7 +28,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class Formatting1Test extends AbstractWebServerTest {
   @Override
-  protected StatemachineRuntimeModule getRuntimeModule() {
+  protected Module getRuntimeModule() {
     return new StatemachineRuntimeModule() {
       @Override
       public Class<? extends IFormatter2> bindIFormatter2() {

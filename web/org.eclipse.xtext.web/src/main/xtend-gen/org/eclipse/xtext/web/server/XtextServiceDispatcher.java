@@ -37,6 +37,7 @@ import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.ServiceConflictResult;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistService;
 import org.eclipse.xtext.web.server.formatting.FormattingService;
+import org.eclipse.xtext.web.server.generator.GeneratorService;
 import org.eclipse.xtext.web.server.hover.HoverService;
 import org.eclipse.xtext.web.server.model.DocumentStateResult;
 import org.eclipse.xtext.web.server.model.IWebResourceSetProvider;
@@ -194,6 +195,9 @@ public class XtextServiceDispatcher {
   
   @Inject
   private FormattingService formattingService;
+  
+  @Inject
+  private GeneratorService generatorService;
   
   @Inject
   private IServerResourceHandler resourceHandler;
@@ -357,6 +361,12 @@ public class XtextServiceDispatcher {
       if (Objects.equal(requestType, "format")) {
         _matched=true;
         _switchResult = this.getFormattingService(request, sessionStore);
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(requestType, "generate")) {
+        _matched=true;
+        _switchResult = this.getGeneratorService(request, sessionStore);
       }
     }
     if (!_matched) {
@@ -812,6 +822,42 @@ public class XtextServiceDispatcher {
               IServiceResult _xtrycatchfinallyexpression = null;
               try {
                 _xtrycatchfinallyexpression = XtextServiceDispatcher.this.formattingService.format(document, selection);
+              } catch (final Throwable _t) {
+                if (_t instanceof Throwable) {
+                  final Throwable throwable = (Throwable)_t;
+                  _xtrycatchfinallyexpression = XtextServiceDispatcher.this.handleError(it, throwable);
+                } else {
+                  throw Exceptions.sneakyThrow(_t);
+                }
+              }
+              return _xtrycatchfinallyexpression;
+            }
+          };
+          it.service = _function;
+          Set<String> _parameterKeys = request.getParameterKeys();
+          boolean _contains = _parameterKeys.contains("fullText");
+          it.hasTextInput = _contains;
+        }
+      };
+      _xblockexpression = ObjectExtensions.<XtextServiceDispatcher.ServiceDescriptor>operator_doubleArrow(_serviceDescriptor, _function);
+    }
+    return _xblockexpression;
+  }
+  
+  protected XtextServiceDispatcher.ServiceDescriptor getGeneratorService(final IRequestData request, final ISessionStore sessionStore) throws InvalidRequestException {
+    XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
+    {
+      final XtextWebDocumentAccess document = this.getDocumentAccess(request, sessionStore);
+      XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
+      final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
+        @Override
+        public void apply(final XtextServiceDispatcher.ServiceDescriptor it) {
+          final Function0<IServiceResult> _function = new Function0<IServiceResult>() {
+            @Override
+            public IServiceResult apply() {
+              IServiceResult _xtrycatchfinallyexpression = null;
+              try {
+                _xtrycatchfinallyexpression = XtextServiceDispatcher.this.generatorService.generate(document);
               } catch (final Throwable _t) {
                 if (_t instanceof Throwable) {
                   final Throwable throwable = (Throwable)_t;
