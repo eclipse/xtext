@@ -9,14 +9,14 @@ package org.eclipse.xtext.tasks
 
 import java.util.List
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl
 import org.eclipse.xtext.junit4.AbstractXtextTests
+import org.eclipse.xtext.junit4.internal.LineDelimiters
 import org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguageStandaloneSetup
 import org.junit.Before
 import org.junit.Test
 
 import static org.eclipse.xtext.tasks.TaskAssert.*
-import org.eclipse.xtext.junit4.internal.LineDelimiters
-import org.eclipse.emf.ecore.resource.impl.ResourceImpl
 
 /**
  * @author Stefan Oehme - Initial contribution and API

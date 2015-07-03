@@ -10,9 +10,9 @@
 package org.eclipse.xtext;
 
 import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.junit.Test;
 import org.eclipse.xtext.xtextTest.Assignment;
 import org.eclipse.xtext.xtextTest.Grammar;
+import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API

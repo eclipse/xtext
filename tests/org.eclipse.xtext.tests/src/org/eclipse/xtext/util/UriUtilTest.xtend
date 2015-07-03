@@ -7,13 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.util
 
+import java.io.File
 import org.eclipse.emf.common.util.URI
 import org.junit.Test
 
 import static org.junit.Assert.*
 
 import static extension org.eclipse.xtext.util.UriUtil.*
-import java.io.File
 
 class UriUtilTest {
 	@Test

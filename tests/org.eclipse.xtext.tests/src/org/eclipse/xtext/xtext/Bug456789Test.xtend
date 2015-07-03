@@ -7,11 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext
 
-import org.eclipse.xtext.junit4.AbstractXtextTests
-import org.eclipse.xtext.XtextStandaloneSetup
-import org.junit.Test
-import org.eclipse.emf.ecore.util.Diagnostician
 import org.eclipse.emf.common.util.Diagnostic
+import org.eclipse.emf.ecore.util.Diagnostician
+import org.eclipse.xtext.XtextStandaloneSetup
+import org.eclipse.xtext.junit4.AbstractXtextTests
+import org.junit.Test
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

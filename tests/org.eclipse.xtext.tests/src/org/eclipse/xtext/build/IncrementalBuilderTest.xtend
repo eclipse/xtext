@@ -9,6 +9,7 @@ package org.eclipse.xtext.build
 
 import com.google.inject.Inject
 import java.util.concurrent.atomic.AtomicBoolean
+import org.eclipse.xtext.index.IndexTestLanguageInjectorProvider
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.build.AbstractIncrementalBuilderTest
@@ -17,7 +18,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
-import org.eclipse.xtext.index.IndexTestLanguageInjectorProvider
 
 /**
  * @author Sven Efftinge - Initial contribution and API
