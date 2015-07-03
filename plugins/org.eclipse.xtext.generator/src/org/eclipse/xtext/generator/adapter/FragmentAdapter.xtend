@@ -91,7 +91,7 @@ class FragmentAdapter implements IGeneratorFragment2 {
 				fragment.addToStandaloneSetup(config1.grammar, ctx)
 			}
 			val result = (ctx.output as StringConcatOutputImpl).stringOutlet
-			config2.runtimeSetup.codeFragments += result
+			config2.runtimeSetup.content = result
 		} finally {
 			ctx.output.closeFile()
 		}
@@ -120,7 +120,7 @@ class FragmentAdapter implements IGeneratorFragment2 {
 				fragment.addToPluginXmlRt(config1.grammar, ctx)
 			}
 			val result = (ctx.output as StringConcatOutputImpl).stringOutlet
-			projectConfig.runtimePluginXml.codeFragments += result
+			projectConfig.runtimePluginXml.content = result
 		} finally {
 			ctx.output.closeFile()
 		}
