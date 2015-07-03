@@ -5,19 +5,14 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.web.server
-
-import org.eclipse.xtext.service.AbstractGenericModule
-import org.eclipse.xtext.web.server.generator.DefaultContentTypeProvider
-import org.eclipse.xtext.web.server.generator.IContentTypeProvider
+package org.eclipse.xtext.web.server.generator
 
 /**
- * Default Guice bindings for the web integration of Xtext.
+ * A content type provider is responsible for assigning content types to documents resulting
+ * from an {@link IGenerator} implementation.
  */
-class DefaultWebModule extends AbstractGenericModule {
+interface IContentTypeProvider {
 	
-	def Class<? extends IContentTypeProvider> bindIContentTypeProvider() {
-		DefaultContentTypeProvider
-	}
+	def String getContentType(String fileName)
 	
 }

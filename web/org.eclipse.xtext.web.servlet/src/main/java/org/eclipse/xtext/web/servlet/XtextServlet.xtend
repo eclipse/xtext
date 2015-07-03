@@ -24,6 +24,7 @@ import org.eclipse.xtext.web.server.InvalidRequestException.PermissionDeniedExce
 import org.eclipse.xtext.web.server.InvalidRequestException.ResourceNotFoundException
 import org.eclipse.xtext.web.server.InvalidRequestException.UnknownLanguageException
 import org.eclipse.xtext.web.server.XtextServiceDispatcher
+import org.eclipse.xtext.web.server.generator.GeneratorResult
 
 /**
  * An HTTP servlet for publishing the Xtext services. Include this into your web server by creating
@@ -115,10 +116,24 @@ class XtextServlet extends HttpServlet {
 	
 	/**
 	 * Invoke the service function of the given service descriptor and write its result to the
-	 * servlet response in Json format.
+	 * servlet response in Json format. An exception is made for code generation where exactly
+	 * one document is generated and a content type is assigned to it. In this case the document
+	 * itself is written into the response instead of wrapping it into a Json object.
 	 */
 	protected def doService(XtextServiceDispatcher.ServiceDescriptor service, HttpServletResponse response) {
 		val result = service.service.apply()
+		
+		if (result instanceof GeneratorResult) {
+			val document = result.entries.head
+			if (document !== null && !document.contentType.nullOrEmpty) {
+				response.setStatus(HttpServletResponse.SC_OK)
+				response.setContentType(document.contentType)
+				response.setHeader("Cache-Control", "no-cache")
+				response.writer.write(document.content)
+				return
+			}
+		}
+		
 		response.setStatus(HttpServletResponse.SC_OK)
 		response.setContentType("text/x-json;charset=UTF-8")
 		response.setHeader("Cache-Control", "no-cache")

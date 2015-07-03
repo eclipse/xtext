@@ -23,6 +23,9 @@
 			$("#revert-button").click(function() {
 				xtext.invokeService(editor, "revert");
 			});
+			$("#generate-button").click(function() {
+				window.open('http://' + location.host + '/xtext-service/generate?resource=example.statemachine');
+			});
 		});
 	</script>
 </head>
@@ -43,6 +46,7 @@
 	<div class="button-wrapper">
 		<button id="save-button">Save</button>
 		<button id="revert-button">Revert</button>
+		<button id="generate-button">Generate</button>
 	</div>
 </div>
 

@@ -43,6 +43,8 @@
  *     Whether the formatting action should be bound to the standard keystroke ctrl+shift+f / cmd+shift+f.
  * enableFormattingService = true {Boolean}
  *     Whether text formatting should be enabled.
+ * enableGeneratorService = true {Boolean}
+ *     Whether code generation should be enabled (must be triggered through JavaScript code).
  * enableHoverService = true {Boolean}
  *     Whether mouse hover information should be enabled.
  * enableHighlightingService = true {Boolean}
@@ -142,10 +144,12 @@ define([
 	'xtext/services/HighlightingService',
 	'xtext/services/HoverService',
 	'xtext/services/OccurrencesService',
-	'xtext/services/FormattingService'
+	'xtext/services/FormattingService',
+	'xtext/services/GeneratorService'
 ], function(jQuery, orionEdit, Deferred, mKeyBinding, mTextStyler, mAnnotations, compatibility, EditorContext,
 		LoadResourceService, RevertResourceService, SaveResourceService, UpdateService,
-		ContentAssistService, ValidationService, HighlightingService, HoverService, OccurrencesService, FormattingService) {
+		ContentAssistService, ValidationService, HighlightingService, HoverService, OccurrencesService,
+		FormattingService, GeneratorService) {
 	
 	/**
 	 * Translate an HTML attribute name to a JS option name.
@@ -597,6 +601,15 @@ define([
 			}
 		}
 		
+		//---- Generator Service
+		
+		var generatorService;
+		if (options.enableGeneratorService || options.enableGeneratorService === undefined) {
+			generatorService = new GeneratorService(options.serverUrl, options.resourceId);
+			if (updateService)
+				generatorService.setUpdateService(updateService);
+		}
+		
 		editor.invokeXtextService = function(service, invokeOptions) {
 			var optionsCopy = _copy(options);
 			for (var p in invokeOptions) {
@@ -616,6 +629,8 @@ define([
 				return occurrencesService.markOccurrences(editorContext, optionsCopy);
 			else if (service === 'format' && formattingService)
 				return formattingService.format(editorContext, options);
+			else if (service === 'generate' && generatorService)
+				return generatorService.generate(editorContext, options);
 			else
 				throw new Error('Service \'' + service + '\' is not available.');
 		}
@@ -640,7 +655,7 @@ define([
 	 */
 	exports.invokeService = function(editor, service, invokeOptions) {
 		if (editor.invokeXtextService)
-			editor.invokeXtextService(service, invokeOptions);
+			return editor.invokeXtextService(service, invokeOptions);
 		else
 			throw new Error('The editor has not been configured with Xtext.');
 	}
