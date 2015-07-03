@@ -35,6 +35,20 @@ public abstract class StringConcatenationClient {
 	protected void appendTo(TargetStringConcatenation target) {
 		throw new UnsupportedOperationException("Clients have to override this.");
 	}
+	
+	/**
+	 * Delegates to {@link #appendTo(TargetStringConcatenation)} to make it publicly accessible.
+	 * 
+	 * @param client
+	 *            the {@link StringConcatenationClient} on which {@link #appendTo(TargetStringConcatenation)} is
+	 *            invoked.
+	 * @param target
+	 *            the {@link TargetStringConcatenation} to-append-to. Never <code>null</code>.
+	 * @since 2.8
+	 */
+	public static void appendToClient(StringConcatenationClient client, TargetStringConcatenation target) {
+		client.appendTo(target);
+	}
 
 	/**
 	 * A {@link TargetStringConcatenation} models the public interface of a
