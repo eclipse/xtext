@@ -27,6 +27,6 @@ interface IClassAnnotation {
 	 * Return the qualified name of the annotation interface for use in import declarations,
 	 * or {@code null} if no import is required.
 	 */
-	def String getAnnotationImport()
+	def TypeReference getAnnotationImport()
 
 }

@@ -10,12 +10,15 @@ package org.eclipse.xtext.xtext.generator.model
 import com.google.common.collect.Lists
 import java.util.Collections
 import java.util.Map
+import java.util.regex.Pattern
 import org.eclipse.emf.codegen.util.CodeGenUtil
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend2.lib.StringConcatenation
+import org.eclipse.xtend2.lib.StringConcatenationClient
 
 class JavaFileAccess extends TextFileAccess {
 	
-	val Map<String, String> imports = newHashMap
+	val Map<String, TypeReference> imports = newHashMap
 	
 	val String packageName
 	
@@ -28,38 +31,42 @@ class JavaFileAccess extends TextFileAccess {
 	boolean markedAsGenerated
 	
 	new(String qualifiedName, CodeConfig codeConfig) {
-		val simpleNameIndex = qualifiedName.lastIndexOf('.')
-		this.packageName = qualifiedName.substring(0, simpleNameIndex)
-		val simpleName = qualifiedName.substring(simpleNameIndex + 1)
-		this.path = packageName.replace('.', '/') + '/' + simpleName + '.java'
-		this.codeConfig = codeConfig
+		this(new TypeReference(qualifiedName), codeConfig)
 	}
 	
-	def String imported(Class<?> clazz) {
-		return imported(clazz.name.replace('$', '.'))
+	new(TypeReference typeRef, CodeConfig codeConfig) {
+		this.packageName = typeRef.package
+		if (typeRef.name != packageName + '.' + typeRef.simpleName)
+			throw new IllegalArgumentException('Nested types cannot be serialized.')
+		this.path = packageName.replace('.', '/') + '/' + typeRef.simpleName + '.java'
+		this.codeConfig = codeConfig
 	}
 
-	def String imported(String clazz) {
-		val simpleNameIndex = clazz.lastIndexOf('.')
-		val simpleName = clazz.substring(simpleNameIndex + 1)
-		val packageName = clazz.substring(0, simpleNameIndex)
-		if (CodeGenUtil.isJavaDefaultType(simpleName) || this.packageName == packageName)
+	def String importType(TypeReference typeRef) {
+		val simpleName = typeRef.simpleName
+		if (CodeGenUtil.isJavaDefaultType(simpleName) || this.packageName == typeRef.package)
 			return simpleName
 		val imported = imports.get(simpleName)
 		if (imported != null) {
-			if (imported.equals(clazz))
+			if (imported == typeRef)
 				return simpleName
 			else
-				return clazz
+				return typeRef.name
 		}
-		imports.put(simpleName, clazz)
+		imports.put(simpleName, typeRef)
 		return simpleName
+	}
+	
+	def void setJavaContent(StringConcatenationClient javaContent) {
+		val javaStringConcat = new JavaStringConcatenation(this)
+		javaStringConcat.append(javaContent)
+		content = javaStringConcat
 	}
 	
 	override generate() {
 		val classAnnotations = codeConfig.classAnnotations.filter[appliesTo(this)]
-		classAnnotations.forEach[imported(annotationImport)]
-		val sortedImports = Lists.newArrayList(imports.values())
+		classAnnotations.forEach[importType(annotationImport)]
+		val sortedImports = Lists.newArrayList(imports.values.map[name])
 		Collections.sort(sortedImports)
 		return '''
 			«codeConfig.fileHeader»
@@ -73,10 +80,32 @@ class JavaFileAccess extends TextFileAccess {
 			«FOR annot : classAnnotations»
 				«annot.generate()»
 			«ENDFOR»
-			«FOR fragment : codeFragments»
-				«fragment»
-			«ENDFOR»
+			«content»
 		'''
+	}
+	
+	private static class JavaStringConcatenation extends StringConcatenation {
+		
+		val JavaFileAccess access
+		
+		val typeNamePattern = Pattern.compile('[a-z]+(\\.[a-z]+)*(\\.[A-Z][a-zA-Z]*)+')
+		
+		new(JavaFileAccess access) {
+			super(access.codeConfig.lineDelimiter)
+			this.access = access
+		}
+		
+		override getStringRepresentation(Object object) {
+			if (object instanceof TypeReference)
+				access.importType(object)
+			else if (object instanceof Class<?>)
+				access.importType(new TypeReference(object as Class<?>))
+			else if (object instanceof String && typeNamePattern.matcher(object as String).matches)
+				access.importType(new TypeReference(object as String))
+			else
+				object.toString
+		}
+		
 	}
 	
 }

@@ -10,10 +10,8 @@ package org.eclipse.xtext.xtext.generator.model
 import com.google.common.io.Files
 import java.io.File
 import java.nio.charset.Charset
-import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtend2.lib.StringConcatenation
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.parser.IEncodingProvider
 
@@ -23,17 +21,13 @@ class TextFileAccess {
 	String path
 	
 	@Accessors
-	val List<CharSequence> codeFragments = newArrayList
+	CharSequence content
 	
 	@Accessors
 	IEncodingProvider encodingProvider
 	
 	def CharSequence generate() {
-		val result = new StringConcatenation
-		for (fragment : codeFragments) {
-			result.append(fragment)
-		}
-		return result
+		return content
 	}
 	
 	def writeTo(IFileSystemAccess2 fileSystemAccess) {

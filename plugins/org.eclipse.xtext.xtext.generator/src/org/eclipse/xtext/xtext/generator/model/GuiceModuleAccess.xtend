@@ -39,8 +39,8 @@ class GuiceModuleAccess extends JavaFileAccess {
 	@Accessors
 	val List<Binding> bindings = newArrayList
 	
-	new(String qualifiedName, CodeConfig codeConfig) {
-		super(qualifiedName, codeConfig)
+	new(TypeReference typeRef, CodeConfig codeConfig) {
+		super(typeRef, codeConfig)
 	}
 		
 }

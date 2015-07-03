@@ -58,7 +58,7 @@ class GeneratedClassAnnotation implements IClassAnnotation {
 	}
 
 	override getAnnotationImport() {
-		return 'javax.annotation.Generated'
+		return new TypeReference('javax.annotation.Generated')
 	}
 	
 	private def void +=(StringBuilder stringBuilder, String s) {
