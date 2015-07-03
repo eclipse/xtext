@@ -7,11 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.syntaxcoloring
 
-import org.eclipse.xtext.ui.editor.syntaxcoloring.HighlightingPresenter
-import org.junit.Test
-import org.junit.Before
-import org.eclipse.xtext.ui.editor.syntaxcoloring.AttributedPosition
 import java.util.List
+import org.eclipse.xtext.ui.editor.syntaxcoloring.AttributedPosition
+import org.eclipse.xtext.ui.editor.syntaxcoloring.HighlightingPresenter
+import org.junit.Before
+import org.junit.Test
+
 import static org.junit.Assert.*
 
 /**

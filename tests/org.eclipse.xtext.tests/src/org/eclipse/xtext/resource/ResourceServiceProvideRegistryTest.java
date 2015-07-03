@@ -7,11 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
+import static org.junit.Assert.*;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.impl.ResourceServiceProviderRegistryImpl;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * @author efftinge - Initial contribution and API

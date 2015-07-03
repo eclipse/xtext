@@ -6,8 +6,10 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 package org.eclipse.xtext.util
-import static org.junit.Assert.*
+
 import org.junit.Test
+
+import static org.junit.Assert.*
 
 /**
  * @author koehnlein - Initial contribution and API
