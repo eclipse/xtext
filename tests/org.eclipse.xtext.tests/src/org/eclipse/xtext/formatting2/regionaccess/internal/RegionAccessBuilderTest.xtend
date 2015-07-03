@@ -8,8 +8,10 @@
 package org.eclipse.xtext.formatting2.regionaccess.internal
 
 import com.google.inject.Inject
+import javax.inject.Provider
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString
+import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Root
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
@@ -20,8 +22,6 @@ import org.eclipse.xtext.serializer.impl.Serializer
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-import javax.inject.Provider
-import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

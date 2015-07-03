@@ -14,9 +14,6 @@ import java.io.ObjectOutputStream
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EcorePackage
 import org.eclipse.xtext.naming.QualifiedName
-import org.eclipse.xtext.resource.persistence.SerializableEObjectDescription
-import org.eclipse.xtext.resource.persistence.SerializableReferenceDescription
-import org.eclipse.xtext.resource.persistence.SerializableResourceDescription
 import org.junit.Test
 
 import static org.junit.Assert.*

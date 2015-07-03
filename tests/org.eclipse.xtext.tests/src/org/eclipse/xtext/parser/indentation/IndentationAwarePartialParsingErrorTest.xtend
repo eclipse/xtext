@@ -13,9 +13,9 @@ import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.Tree
 import org.eclipse.xtext.resource.XtextResource
+import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.junit.Assert
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

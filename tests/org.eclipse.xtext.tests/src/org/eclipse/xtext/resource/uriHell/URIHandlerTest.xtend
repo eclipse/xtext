@@ -12,6 +12,7 @@ import com.google.inject.Provider
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.util.Collection
+import java.util.List
 import java.util.Map
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
@@ -27,7 +28,6 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.util.List
 
 /**
  * Base test case for different places in the workspace where

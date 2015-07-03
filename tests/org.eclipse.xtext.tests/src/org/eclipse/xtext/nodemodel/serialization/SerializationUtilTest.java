@@ -14,7 +14,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
-import org.eclipse.xtext.nodemodel.serialization.SerializationUtil;
 import org.junit.Assert;
 import org.junit.Test;
 

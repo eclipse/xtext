@@ -8,12 +8,12 @@
 package org.eclipse.xtext.tasks
 
 import java.util.List
+import org.eclipse.xtext.junit4.internal.LineDelimiters
 import org.junit.Before
 import org.junit.Test
 
 import static org.eclipse.xtext.tasks.TaskAssert.*
 import static org.junit.Assert.*
-import org.eclipse.xtext.junit4.internal.LineDelimiters
 
 /**
  * @author Stefan Oehme - Initial contribution and API
