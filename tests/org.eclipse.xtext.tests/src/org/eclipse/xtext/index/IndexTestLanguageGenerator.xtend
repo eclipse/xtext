@@ -1,8 +1,8 @@
 package org.eclipse.xtext.index
 
-import org.eclipse.xtext.generator.IGenerator2
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IFileSystemAccess2
+import org.eclipse.xtext.generator.IGenerator2
 import org.eclipse.xtext.index.indexTestLanguage.Entity
 
 class IndexTestLanguageGenerator implements IGenerator2 {

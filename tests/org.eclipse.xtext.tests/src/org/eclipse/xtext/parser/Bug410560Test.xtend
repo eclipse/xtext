@@ -8,11 +8,11 @@
 package org.eclipse.xtext.parser
 
 import org.eclipse.xtext.junit4.AbstractXtextTests
+import org.eclipse.xtext.junit4.smoketest.processors.PartialParsingProcessor
 import org.eclipse.xtext.parsetree.reconstr.SerializationErrorTestLanguageStandaloneSetup
 import org.eclipse.xtext.parsetree.reconstr.serializationerror.Model
 import org.eclipse.xtext.resource.XtextResource
 import org.junit.Test
-import org.eclipse.xtext.junit4.smoketest.processors.PartialParsingProcessor
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

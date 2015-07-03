@@ -7,14 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.regionaccess.internal
 
+import com.google.common.collect.ImmutableList
 import com.google.inject.Inject
 import com.google.inject.Provider
 import java.util.Collection
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment
 import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.AssignedAction
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Expression
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Mixed
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Root
 import org.eclipse.xtext.formatting2.regionaccess.internal.services.RegionAccessTestLanguageGrammarAccess
@@ -28,9 +31,6 @@ import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RegionaccesstestlanguagePackage.Literals.*
 import static org.junit.Assert.*
-import com.google.common.collect.ImmutableList
-import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Expression
-import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

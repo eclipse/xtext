@@ -13,16 +13,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.generator.trace.AbstractStatefulTraceRegion;
-import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
-import org.eclipse.xtext.generator.trace.LocationData;
-import org.eclipse.xtext.generator.trace.TraceRegion;
 import org.eclipse.xtext.util.TextRegionWithLineInformation;
 import org.junit.Assert;
 import org.junit.Test;
-
-import com.google.common.base.Objects;
-import com.google.common.collect.Iterators;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

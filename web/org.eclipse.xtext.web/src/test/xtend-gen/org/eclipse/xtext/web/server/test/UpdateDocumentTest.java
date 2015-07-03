@@ -66,12 +66,9 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
         {
           Thread _currentThread = Thread.currentThread();
           this.workerThread = _currentThread;
-          /* this; */
           synchronized (this) {
-            {
-              this.entryCounter++;
-              this.notifyAll();
-            }
+            this.entryCounter++;
+            this.notifyAll();
           }
           final long startTime = System.currentTimeMillis();
           while (((((System.currentTimeMillis() - startTime) < this.sleepTime) && (!mon.isCanceled())) && (!this.workerThread.isInterrupted()))) {
@@ -83,12 +80,9 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
               }
             }
           }
-          /* this; */
           synchronized (this) {
-            {
-              this.exitCounter++;
-              this.notifyAll();
-            }
+            this.exitCounter++;
+            this.notifyAll();
           }
           _xblockexpression = super.validate(resource, mode, mon);
         }
