@@ -12,19 +12,22 @@ public class GeneratorConfigurationState {
   }
   
   public GeneratorConfigurationState(final OutputConfiguration defOutput) {
-    this.setActivated(true);
+    this.activated = true;
     boolean _notEquals = (!Objects.equal(defOutput, null));
     if (_notEquals) {
-      String _outputDirectory = defOutput.getOutputDirectory();
-      this.setOutputDirectory(_outputDirectory);
-      String _outputDirectory_1 = defOutput.getOutputDirectory();
-      this.setTestOutputDirectory(_outputDirectory_1);
+      String outputDir = defOutput.getOutputDirectory();
+      boolean _equals = Objects.equal("./src-gen", outputDir);
+      if (_equals) {
+        outputDir = "src-gen";
+      }
+      this.outputDirectory = outputDir;
+      this.testOutputDirectory = outputDir;
       boolean _isCreateOutputDirectory = defOutput.isCreateOutputDirectory();
-      this.setCreateDirectory(_isCreateOutputDirectory);
+      this.createDirectory = _isCreateOutputDirectory;
       boolean _isCanClearOutputDirectory = defOutput.isCanClearOutputDirectory();
-      this.setDeleteGenerated(_isCanClearOutputDirectory);
+      this.deleteGenerated = _isCanClearOutputDirectory;
       boolean _isOverrideExistingResources = defOutput.isOverrideExistingResources();
-      this.setOverwriteExisting(_isOverrideExistingResources);
+      this.overwriteExisting = _isOverrideExistingResources;
     }
   }
   
