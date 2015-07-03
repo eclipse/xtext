@@ -7,8 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtend.idea.autoedit
 
+import com.intellij.ide.ClipboardSynchronizer
+import com.intellij.openapi.actionSystem.IdeActions
 import com.intellij.openapi.fileTypes.LanguageFileType
 import com.intellij.openapi.util.TextRange
+import java.awt.datatransfer.StringSelection
 import org.eclipse.xtext.idea.tests.LightToolingTest
 import org.eclipse.xtext.junit4.internal.LineDelimiters
 
@@ -17,7 +20,7 @@ import org.eclipse.xtext.junit4.internal.LineDelimiters
  */
 abstract class AbstractCStyleLanguageAutoEditTest extends LightToolingTest {
 
-	static val BS = '\b'
+	protected static val BS = '\b'
 
 	new(LanguageFileType fileType) {
 		super(fileType)
@@ -619,69 +622,38 @@ abstract class AbstractCStyleLanguageAutoEditTest extends LightToolingTest {
 	}
 
 	def void testBug453205_01() {
-		configureByText("/*|\n" + 
-				"* comment\n" + 
-				"*/")
+		configureByText("/*|\n" + "* comment\n" + "*/")
 
 		myFixture.type('\n')
-		assertState("/*\n" + 
-				" * |\n" + 
-				"* comment\n" + 
-				"*/")
+		assertState("/*\n" + " * |\n" + "* comment\n" + "*/")
 	}
 
 	def void testBug453205_02() {
-		configureByText("/**********|\n" + 
-				" * \"Fancy\"\n" + 
-				"**********/")
+		configureByText("/**********|\n" + " * \"Fancy\"\n" + "**********/")
 
 		myFixture.type('\n')
-		assertState("/**********\n" + 
-				" * |\n" + 
-				" * \"Fancy\"\n" + 
-				"**********/")
+		assertState("/**********\n" + " * |\n" + " * \"Fancy\"\n" + "**********/")
 	}
 
 	def void testBug341093_01() {
-		configureByText(
-				"/**/\n" + 
-				"//test|")
+		configureByText("/**/\n" + "//test|")
 
 		myFixture.type('\n')
-		assertState(
-				"/**/\n" + 
-				"//test\n" +
-				"|")
+		assertState("/**/\n" + "//test\n" + "|")
 	}
 
 	def void testBug341093_02() {
-		configureByText(
-				"/*\n" + 
-				" **/\n" + 
-				"//test|")
+		configureByText("/*\n" + " **/\n" + "//test|")
 
 		myFixture.type('\n')
-		assertState(
-				"/*\n" + 
-				" **/\n" + 
-				"//test\n" +
-				"|")
+		assertState("/*\n" + " **/\n" + "//test\n" + "|")
 	}
 
 	def void testBug341093_03() {
-		configureByText(
-				"/***********\n" + 
-				" * text|\n" + 
-				"\n" + 
-				"***********/")
+		configureByText("/***********\n" + " * text|\n" + "\n" + "***********/")
 
 		myFixture.type('\n')
-		assertState(
-				"/***********\n" + 
-				" * text\n" +
-				" * |\n" + 
-				"\n" + 
-				"***********/")
+		assertState("/***********\n" + " * text\n" + " * |\n" + "\n" + "***********/")
 	}
 
 	def void testBug335634_01() {
@@ -787,6 +759,12 @@ abstract class AbstractCStyleLanguageAutoEditTest extends LightToolingTest {
 		val startOffset = offset + relativeToCurrentOffset
 		val endOffset = startOffset + length
 		myFixture.editor.selectionModel.setSelection(startOffset, endOffset)
+	}
+
+	protected def void pasteText(String text) {
+		val content = new StringSelection(text)
+		ClipboardSynchronizer.instance.setContent(content, content)
+		myFixture.performEditorAction(IdeActions.ACTION_EDITOR_PASTE)
 	}
 
 	override protected configureByText(String code) {

@@ -158,7 +158,7 @@ public class IdeaWidgetFactory {
   }
   
   public JComboBox comboBox() {
-    return new JComboBox();
+    return new JComboBox<Object>();
   }
   
   public void indent(final GridBagConstraints it) {

@@ -8,8 +8,12 @@
 package org.eclipse.xtext.idea.tests
 
 import com.intellij.codeInsight.CodeInsightSettings
+import com.intellij.facet.FacetManager
+import com.intellij.facet.FacetType
+import com.intellij.facet.FacetTypeRegistry
 import com.intellij.ide.highlighter.HighlighterFactory
 import com.intellij.ide.structureView.newStructureView.StructureViewComponent
+import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.editor.highlighter.HighlighterIterator
 import com.intellij.openapi.fileTypes.LanguageFileType
 import com.intellij.openapi.module.Module
@@ -24,18 +28,16 @@ import com.intellij.testFramework.LightProjectDescriptor
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase
 import com.intellij.util.Consumer
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent
 import org.eclipse.xtext.idea.lang.IXtextLanguage
 import org.eclipse.xtext.junit4.internal.LineDelimiters
 import org.eclipse.xtext.psi.impl.BaseXtextFile
 
+import static org.eclipse.xtext.idea.build.XtextAutoBuilderComponent.*
+import static org.eclipse.xtext.idea.tests.LightToolingTest.*
+
 import static extension com.intellij.testFramework.PlatformTestUtil.*
 import static extension com.intellij.util.ui.tree.TreeUtil.*
-import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent
-import com.intellij.facet.FacetManager
-import com.intellij.facet.FacetTypeRegistry
-import com.intellij.facet.FacetType
-import com.intellij.openapi.application.Application
-import com.intellij.openapi.application.ApplicationManager
 
 class LightToolingTest extends LightCodeInsightFixtureTestCase {
 

@@ -83,7 +83,7 @@ public class XtendFacetForm extends GeneratorFacetForm {
                 JComboBox _xblockexpression = null;
                 {
                   XtendFacetForm.this._ideaWidgetFactory.expand(it, GridBagConstraints.HORIZONTAL);
-                  JComboBox _jComboBox = new JComboBox(((String[]) ((String[])Conversions.unwrapArray(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Java 6", "Java 7")), String.class))));
+                  JComboBox<String> _jComboBox = new JComboBox<String>(((String[]) ((String[])Conversions.unwrapArray(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Java 6", "Java 7")), String.class))));
                   _xblockexpression = XtendFacetForm.this.targetJavaVersion = _jComboBox;
                 }
                 return _xblockexpression;
