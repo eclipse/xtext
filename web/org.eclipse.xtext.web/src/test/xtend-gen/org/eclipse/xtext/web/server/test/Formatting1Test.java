@@ -10,10 +10,14 @@ package org.eclipse.xtext.web.server.test;
 import java.io.File;
 import java.util.Collections;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.formatting.IFormatter;
+import org.eclipse.xtext.formatting2.IFormatter2;
+import org.eclipse.xtext.web.example.statemachine.StatemachineRuntimeModule;
 import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.web.server.formatting.FormattingResult;
 import org.eclipse.xtext.web.server.test.AbstractWebServerTest;
+import org.eclipse.xtext.web.server.test.languages.formatting.StatemachineFormatter;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -21,7 +25,22 @@ import org.junit.Assert;
 import org.junit.Test;
 
 @SuppressWarnings("all")
-public class FormattingTest extends AbstractWebServerTest {
+public class Formatting1Test extends AbstractWebServerTest {
+  @Override
+  protected StatemachineRuntimeModule getRuntimeModule() {
+    return new StatemachineRuntimeModule() {
+      @Override
+      public Class<? extends IFormatter2> bindIFormatter2() {
+        return null;
+      }
+      
+      @Override
+      public Class<? extends IFormatter> bindIFormatter() {
+        return StatemachineFormatter.class;
+      }
+    };
+  }
+  
   @Test
   public void testFormatFile() {
     final File file = this.createFile("output signal x state foo set x = true end");

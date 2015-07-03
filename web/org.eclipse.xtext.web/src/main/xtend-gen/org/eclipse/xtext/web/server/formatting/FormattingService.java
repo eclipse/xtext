@@ -19,6 +19,7 @@ import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionRewriter;
 import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
 import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder;
+import org.eclipse.xtext.formatting2.regionaccess.internal.TextSegment;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
@@ -137,7 +138,15 @@ public class FormattingService {
     request.setTextRegionAccess(regionAccess);
     final IFormatter2 formatter2 = this.formatter2Provider.get();
     final List<ITextReplacement> replacements = formatter2.format(request);
-    ITextRegionRewriter _rewriter = regionAccess.getRewriter();
-    return _rewriter.renderToString(replacements);
+    if ((selection != null)) {
+      ITextRegionRewriter _rewriter = regionAccess.getRewriter();
+      int _offset = selection.getOffset();
+      int _length = selection.getLength();
+      TextSegment _textSegment = new TextSegment(regionAccess, _offset, _length);
+      return _rewriter.renderToString(_textSegment, replacements);
+    } else {
+      ITextRegionRewriter _rewriter_1 = regionAccess.getRewriter();
+      return _rewriter_1.renderToString(replacements);
+    }
   }
 }

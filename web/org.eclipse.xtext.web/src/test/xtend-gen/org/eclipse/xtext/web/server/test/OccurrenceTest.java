@@ -68,6 +68,9 @@ public class OccurrenceTest extends AbstractWebServerTest {
     _builder_1.append("OccurrencesResult [");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.append("stateId = \"-80000000\"");
+    _builder_1.newLine();
+    _builder_1.append("  ");
     _builder_1.append("writeRegions = ArrayList (");
     _builder_1.newLine();
     _builder_1.append("    ");
@@ -101,6 +104,9 @@ public class OccurrenceTest extends AbstractWebServerTest {
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("OccurrencesResult [");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("stateId = \"-80000000\"");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("writeRegions = ArrayList (");
@@ -145,6 +151,9 @@ public class OccurrenceTest extends AbstractWebServerTest {
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("OccurrencesResult [");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("stateId = \"-80000000\"");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("writeRegions = ArrayList (");

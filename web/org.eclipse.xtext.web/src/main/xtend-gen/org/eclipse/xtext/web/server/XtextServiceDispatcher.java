@@ -21,7 +21,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.ToString;
 import org.eclipse.xtext.resource.FileExtensionProvider;
@@ -84,7 +83,7 @@ public class XtextServiceDispatcher {
   /**
    * Service metadata, including a function for actually invoking the service.
    */
-  @Accessors({ AccessorType.PUBLIC_GETTER, AccessorType.PROTECTED_SETTER })
+  @Accessors
   @ToString
   public static class ServiceDescriptor {
     /**
@@ -119,7 +118,7 @@ public class XtextServiceDispatcher {
       return this.type;
     }
     
-    protected void setType(final String type) {
+    public void setType(final String type) {
       this.type = type;
     }
     
@@ -128,7 +127,7 @@ public class XtextServiceDispatcher {
       return this.service;
     }
     
-    protected void setService(final Function0<? extends IServiceResult> service) {
+    public void setService(final Function0<? extends IServiceResult> service) {
       this.service = service;
     }
     
@@ -137,7 +136,7 @@ public class XtextServiceDispatcher {
       return this.hasSideEffects;
     }
     
-    protected void setHasSideEffects(final boolean hasSideEffects) {
+    public void setHasSideEffects(final boolean hasSideEffects) {
       this.hasSideEffects = hasSideEffects;
     }
     
@@ -146,7 +145,7 @@ public class XtextServiceDispatcher {
       return this.hasTextInput;
     }
     
-    protected void setHasTextInput(final boolean hasTextInput) {
+    public void setHasTextInput(final boolean hasTextInput) {
       this.hasTextInput = hasTextInput;
     }
     
@@ -155,7 +154,7 @@ public class XtextServiceDispatcher {
       return this.hasConflict;
     }
     
-    protected void setHasConflict(final boolean hasConflict) {
+    public void setHasConflict(final boolean hasConflict) {
       this.hasConflict = hasConflict;
     }
     

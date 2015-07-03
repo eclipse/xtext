@@ -62,7 +62,7 @@ class XtextServiceDispatcher {
 	/**
 	 * Service metadata, including a function for actually invoking the service.
 	 */
-	@Accessors(PUBLIC_GETTER, PROTECTED_SETTER)
+	@Accessors
 	@ToString
 	static class ServiceDescriptor {
 		

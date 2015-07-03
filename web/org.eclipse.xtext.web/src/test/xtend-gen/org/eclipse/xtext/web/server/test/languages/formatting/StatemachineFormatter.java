@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.web.example.statemachine.formatting;
+package org.eclipse.xtext.web.server.test.languages.formatting;
 
 import com.google.inject.Inject;
 import org.eclipse.xtext.Assignment;

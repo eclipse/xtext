@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.web.example.statemachine.formatting
+package org.eclipse.xtext.web.server.test.languages.formatting
 
 import org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter
 import org.eclipse.xtext.formatting.impl.FormattingConfig
@@ -25,9 +25,9 @@ class StatemachineFormatter extends AbstractDeclarativeFormatter {
 	@Inject extension StatemachineGrammarAccess
 	
 	override protected void configureFormatting(FormattingConfig c) {
-		c.setLinewrap(0, 1, 2).before(SL_COMMENTRule)
-		c.setLinewrap(0, 1, 2).before(ML_COMMENTRule)
-		c.setLinewrap(0, 1, 1).after(ML_COMMENTRule)
+		c.setLinewrap(0, 1, 2).before(getSL_COMMENTRule)
+		c.setLinewrap(0, 1, 2).before(getML_COMMENTRule)
+		c.setLinewrap(0, 1, 1).after(getML_COMMENTRule)
 		
 		c.setLinewrap.before(inputSignalAccess.inputKeyword_1)
 		c.setLinewrap.before(outputSignalAccess.outputKeyword_1)

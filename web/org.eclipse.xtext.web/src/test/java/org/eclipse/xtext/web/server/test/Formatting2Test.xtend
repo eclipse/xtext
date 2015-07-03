@@ -10,7 +10,7 @@ package org.eclipse.xtext.web.server.test
 import org.eclipse.xtext.web.server.formatting.FormattingResult
 import org.junit.Test
 
-class FormattingTest extends AbstractWebServerTest {
+class Formatting2Test extends AbstractWebServerTest {
 	
 	@Test def testFormatFile() {
 		val file = createFile('output signal x state foo set x = true end')
@@ -21,7 +21,7 @@ class FormattingTest extends AbstractWebServerTest {
 		val String expectedResult = '''
 			FormattingResult [
 			  stateId = "-7fffffff"
-			  formattedText = "output signal x\nstate foo\n	set x = true\nend"
+			  formattedText = "\noutput signal x\nstate foo\n	set x = true\nend"
 			  replaceRegion = null
 			]'''
 		assertEquals(expectedResult, result.toString)
