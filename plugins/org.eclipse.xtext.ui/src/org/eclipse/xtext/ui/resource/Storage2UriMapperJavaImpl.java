@@ -440,6 +440,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 			if (data.associatedRoots.size() == 0) {
 				toBeRemoved.add(data);
 			} else {
+				// get rid of cached storages that still point to roots / projects that are no longer available
 				IPackageFragmentRoot someRoot = IterableExtensions.head(data.associatedRoots.values());
 				PackageFragmentRootData newlyCollected = initializeData(someRoot);
 				data.uri2Storage = newlyCollected.uri2Storage;
