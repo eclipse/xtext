@@ -25,5 +25,4 @@ Export-Package: org.eclipse.xtext.web.example.statemachine,
  org.eclipse.xtext.web.example.statemachine.validation,
  org.eclipse.xtext.web.example.statemachine.scoping,
  org.eclipse.xtext.web.example.statemachine.generator,
- org.eclipse.xtext.web.example.statemachine.formatting
-
+ org.eclipse.xtext.web.example.statemachine.formatting2

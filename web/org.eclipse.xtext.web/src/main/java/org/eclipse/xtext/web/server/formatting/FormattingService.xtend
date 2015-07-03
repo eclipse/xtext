@@ -14,6 +14,7 @@ import org.eclipse.xtext.formatting.INodeModelFormatter
 import org.eclipse.xtext.formatting2.FormatterRequest
 import org.eclipse.xtext.formatting2.IFormatter2
 import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder
+import org.eclipse.xtext.formatting2.regionaccess.internal.TextSegment
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.ITextRegion
 import org.eclipse.xtext.util.TextRegion
@@ -86,7 +87,11 @@ class FormattingService {
 		request.textRegionAccess = regionAccess
 		val formatter2 = formatter2Provider.get();
 		val replacements = formatter2.format(request)
-		return regionAccess.rewriter.renderToString(replacements)
+		if (selection !== null)
+			return regionAccess.rewriter.renderToString(
+					new TextSegment(regionAccess, selection.offset, selection.length), replacements)
+		else
+			return regionAccess.rewriter.renderToString(replacements)
 	}
 	
 }
