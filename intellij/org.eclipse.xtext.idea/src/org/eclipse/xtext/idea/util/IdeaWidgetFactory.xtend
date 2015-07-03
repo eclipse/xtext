@@ -19,7 +19,6 @@ import java.awt.GridBagLayout
 import java.awt.Insets
 import javax.swing.BorderFactory
 import javax.swing.JCheckBox
-import javax.swing.JComboBox
 import javax.swing.JComponent
 import javax.swing.JLabel
 import javax.swing.JPanel
@@ -85,10 +84,6 @@ class IdeaWidgetFactory {
 		} else {
 			throw new IllegalArgumentException()
 		}
-	}
-
-	def JComboBox comboBox() {
-		return new JComboBox()
 	}
 
 	def void indent(GridBagConstraints it) {

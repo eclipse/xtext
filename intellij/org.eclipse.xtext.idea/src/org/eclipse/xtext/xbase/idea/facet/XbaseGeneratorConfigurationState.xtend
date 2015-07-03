@@ -5,25 +5,35 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.core.idea.facet
+package org.eclipse.xtext.xbase.idea.facet
 
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.idea.facet.GeneratorConfigurationState
+import org.eclipse.xtext.generator.OutputConfiguration
+import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
- * @author dhuebner - Initial contribution and API
+ * @author Sven Efftinge - Initial contribution and API
  */
  @Accessors
-class XtendGeneratorConfigurationState extends GeneratorConfigurationState {
-	boolean useJavaCompilerCompliance
+class XbaseGeneratorConfigurationState extends GeneratorConfigurationState {
 	String targetJavaVersion
-	
+
 	boolean generateSuppressWarnings
-	
+
 	boolean generateGeneratedAnnotation
 	boolean includeDateInGenerated
 	String generatedAnnotationComment
-	
+
 	boolean installDslAsPrimarySource
 	boolean hideLocalSyntheticVariables
+
+	new() {
+	}
+
+	new(OutputConfiguration defOutput) {
+		super(defOutput)
+		generateSuppressWarnings = true
+		hideLocalSyntheticVariables = true
+	}
+
 }

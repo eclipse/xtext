@@ -2835,6 +2835,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
+    _builder.append("import com.intellij.openapi.components.PersistentStateComponent;");
+    _builder.newLine();
     _builder.append("import com.intellij.openapi.components.State;");
     _builder.newLine();
     _builder.append("import com.intellij.openapi.components.Storage;");
@@ -2843,8 +2845,20 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("import com.intellij.openapi.components.StorageScheme;");
     _builder.newLine();
-    _builder.append("import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;");
-    _builder.newLine();
+    {
+      boolean _doesUseXbase = XbaseGeneratorFragment.doesUseXbase(grammar);
+      if (_doesUseXbase) {
+        _builder.append("import org.eclipse.xtext.xbase.idea.facet.XbaseFacetConfiguration;");
+        _builder.newLine();
+        _builder.append("import org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigurationState;");
+        _builder.newLine();
+      } else {
+        _builder.append("import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;");
+        _builder.newLine();
+        _builder.append("import org.eclipse.xtext.idea.facet.GeneratorConfigurationState;");
+        _builder.newLine();
+      }
+    }
     _builder.newLine();
     _builder.append("@State(name = \"");
     String _name = grammar.getName();
@@ -2868,7 +2882,16 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     String _facetConfiguration_1 = this._ideaPluginClassNames.getFacetConfiguration(grammar);
     String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_facetConfiguration_1);
     _builder.append(_simpleName_1, "");
-    _builder.append(" extends AbstractFacetConfiguration{");
+    _builder.append(" extends ");
+    {
+      boolean _doesUseXbase_1 = XbaseGeneratorFragment.doesUseXbase(grammar);
+      if (_doesUseXbase_1) {
+        _builder.append("XbaseFacetConfiguration implements PersistentStateComponent<XbaseGeneratorConfigurationState>");
+      } else {
+        _builder.append("AbstractFacetConfiguration implements PersistentStateComponent<GeneratorConfigurationState>");
+      }
+    }
+    _builder.append("{");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("}");

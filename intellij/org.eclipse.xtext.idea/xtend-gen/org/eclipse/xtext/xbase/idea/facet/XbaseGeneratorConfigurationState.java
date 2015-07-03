@@ -5,20 +5,19 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtend.core.idea.facet;
+package org.eclipse.xtext.xbase.idea.facet;
 
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.idea.facet.GeneratorConfigurationState;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
- * @author dhuebner - Initial contribution and API
+ * @author Sven Efftinge - Initial contribution and API
  */
 @Accessors
 @SuppressWarnings("all")
-public class XtendGeneratorConfigurationState extends GeneratorConfigurationState {
-  private boolean useJavaCompilerCompliance;
-  
+public class XbaseGeneratorConfigurationState extends GeneratorConfigurationState {
   private String targetJavaVersion;
   
   private boolean generateSuppressWarnings;
@@ -33,13 +32,13 @@ public class XtendGeneratorConfigurationState extends GeneratorConfigurationStat
   
   private boolean hideLocalSyntheticVariables;
   
-  @Pure
-  public boolean isUseJavaCompilerCompliance() {
-    return this.useJavaCompilerCompliance;
+  public XbaseGeneratorConfigurationState() {
   }
   
-  public void setUseJavaCompilerCompliance(final boolean useJavaCompilerCompliance) {
-    this.useJavaCompilerCompliance = useJavaCompilerCompliance;
+  public XbaseGeneratorConfigurationState(final OutputConfiguration defOutput) {
+    super(defOutput);
+    this.generateSuppressWarnings = true;
+    this.hideLocalSyntheticVariables = true;
   }
   
   @Pure

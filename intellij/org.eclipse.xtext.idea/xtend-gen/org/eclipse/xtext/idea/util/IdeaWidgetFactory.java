@@ -20,7 +20,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -155,10 +154,6 @@ public class IdeaWidgetFactory {
         throw new IllegalArgumentException();
       }
     }
-  }
-  
-  public JComboBox comboBox() {
-    return new JComboBox();
   }
   
   public void indent(final GridBagConstraints it) {
