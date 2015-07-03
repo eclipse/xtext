@@ -107,21 +107,6 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="deprecated/org/eclipse/xtext/ui/editor/syntaxcoloring/ISemanticHighlightingCalculator.java" type="org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator$OldToNewDelegate">
-        <filter id="576725006">
-            <message_arguments>
-                <message_argument value="ISemanticHighlightingCalculator"/>
-                <message_argument value="OldToNewDelegate"/>
-            </message_arguments>
-        </filter>
-        <filter id="643846161">
-            <message_arguments>
-                <message_argument value="IHighlightedPositionAcceptor"/>
-                <message_argument value="OldToNewDelegate"/>
-                <message_argument value="provideHighlightingFor(XtextResource, IHighlightedPositionAcceptor)"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="deprecated/org/eclipse/xtext/ui/editor/syntaxcoloring/LightweightPosition.java" type="org.eclipse.xtext.ui.editor.syntaxcoloring.LightweightPosition">
         <filter id="338792546">
             <message_arguments>

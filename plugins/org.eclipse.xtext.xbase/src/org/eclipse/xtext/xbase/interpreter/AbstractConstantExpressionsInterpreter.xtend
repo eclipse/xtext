@@ -101,7 +101,7 @@ class AbstractConstantExpressionsInterpreter {
 	}
 
 	def dispatch Object internalEvaluate(XBinaryOperation it, Context ctx) {
-		val context = if (ctx == null) null else ctx.cloneWithExpectation(null) 
+		val context = ctx.cloneWithExpectation(null)
 		 
 		val left = leftOperand.evaluate(context) 
 		val right = rightOperand.evaluate(context)

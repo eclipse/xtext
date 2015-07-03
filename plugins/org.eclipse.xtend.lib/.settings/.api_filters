@@ -4,28 +4,7 @@
         <filter id="927989779">
             <message_arguments>
                 <message_argument value="2.9.0"/>
-                <message_argument value="2.7.0"/>
                 <message_argument value="org.eclipse.xtext.xbase.lib"/>
-            </message_arguments>
-        </filter>
-        <filter id="927989779">
-            <message_arguments>
-                <message_argument value="2.9.0"/>
-                <message_argument value="org.eclipse.xtext.xbase.lib"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="xtend-gen/org/eclipse/xtend/lib/annotations/EqualsHashCodeProcessor.java" type="org.eclipse.xtend.lib.annotations.EqualsHashCodeProcessor$Util">
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtend.lib.annotations.EqualsHashCodeProcessor.Util"/>
-                <message_argument value="contributeToEquals(FieldDeclaration)"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtend.lib.annotations.EqualsHashCodeProcessor.Util"/>
-                <message_argument value="contributeToHashCode(FieldDeclaration)"/>
             </message_arguments>
         </filter>
     </resource>
