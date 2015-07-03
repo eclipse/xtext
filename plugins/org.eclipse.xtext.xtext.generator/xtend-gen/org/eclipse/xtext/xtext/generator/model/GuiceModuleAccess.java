@@ -15,6 +15,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 import org.eclipse.xtext.xtext.generator.model.CodeConfig;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
+import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
 @SuppressWarnings("all")
 public class GuiceModuleAccess extends JavaFileAccess {
@@ -279,8 +280,8 @@ public class GuiceModuleAccess extends JavaFileAccess {
   @Accessors
   private final List<GuiceModuleAccess.Binding> bindings = CollectionLiterals.<GuiceModuleAccess.Binding>newArrayList();
   
-  public GuiceModuleAccess(final String qualifiedName, final CodeConfig codeConfig) {
-    super(qualifiedName, codeConfig);
+  public GuiceModuleAccess(final TypeReference typeRef, final CodeConfig codeConfig) {
+    super(typeRef, codeConfig);
   }
   
   @Pure

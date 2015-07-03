@@ -123,8 +123,7 @@ public class FragmentAdapter implements IGeneratorFragment2 {
       Output _output_1 = ctx.getOutput();
       final StringConcatenation result = ((StringConcatOutputImpl) _output_1).getStringOutlet();
       JavaFileAccess _runtimeSetup = config2.getRuntimeSetup();
-      List<CharSequence> _codeFragments = _runtimeSetup.getCodeFragments();
-      _codeFragments.add(result);
+      _runtimeSetup.setContent(result);
     } finally {
       Output _output_2 = ctx.getOutput();
       _output_2.closeFile();
@@ -200,8 +199,7 @@ public class FragmentAdapter implements IGeneratorFragment2 {
       Output _output_1 = ctx.getOutput();
       final StringConcatenation result = ((StringConcatOutputImpl) _output_1).getStringOutlet();
       TextFileAccess _runtimePluginXml = this.projectConfig.getRuntimePluginXml();
-      List<CharSequence> _codeFragments = _runtimePluginXml.getCodeFragments();
-      _codeFragments.add(result);
+      _runtimePluginXml.setContent(result);
     } finally {
       Output _output_2 = ctx.getOutput();
       _output_2.closeFile();

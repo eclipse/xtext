@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtext.generator.model;
 
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
+import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
 /**
  * Class annotations can be added to the {@link XtextGenerator} workflow component in order
@@ -29,5 +30,5 @@ public interface IClassAnnotation {
    * Return the qualified name of the annotation interface for use in import declarations,
    * or {@code null} if no import is required.
    */
-  public abstract String getAnnotationImport();
+  public abstract TypeReference getAnnotationImport();
 }

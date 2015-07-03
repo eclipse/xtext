@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
 import org.eclipse.xtext.xtext.generator.model.IClassAnnotation;
+import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
 /**
  * Configuration object for generated code.
@@ -94,6 +95,9 @@ public class CodeConfig implements IGuiceAwareGeneratorComponent {
   @Override
   public void initialize(final Injector injector) {
     injector.injectMembers(this);
+    if ((this.lineDelimiter == null)) {
+      this.lineDelimiter = "\n";
+    }
     String fileHeader = this.fileHeaderTemplate;
     boolean _notEquals = (!Objects.equal(fileHeader, null));
     if (_notEquals) {
@@ -203,10 +207,8 @@ public class CodeConfig implements IGuiceAwareGeneratorComponent {
     final StringBuilder stringBuilder = new StringBuilder();
     for (final IClassAnnotation annotation : this.classAnnotations) {
       {
-        final String importString = annotation.getAnnotationImport();
-        boolean _isEmpty_1 = Strings.isEmpty(importString);
-        boolean _not = (!_isEmpty_1);
-        if (_not) {
+        final TypeReference importString = annotation.getAnnotationImport();
+        if ((importString != null)) {
           StringBuilder _append = stringBuilder.append("import ");
           StringBuilder _append_1 = _append.append(importString);
           StringBuilder _append_2 = _append_1.append(";");

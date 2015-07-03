@@ -65,6 +65,10 @@ class CodeConfig implements IGuiceAwareGeneratorComponent {
 	
 	override initialize(Injector injector) {
 		injector.injectMembers(this)
+		
+		if (lineDelimiter === null)
+			lineDelimiter = '\n'
+		
 		var fileHeader = fileHeaderTemplate
 		if (fileHeader != null) {
 			if (fileHeader.contains(FILE_HEADER_VAR_TIME)) {
@@ -148,7 +152,7 @@ class CodeConfig implements IGuiceAwareGeneratorComponent {
 		val stringBuilder = new StringBuilder
 		for (annotation : classAnnotations) {
 			val importString = annotation.annotationImport
-			if (!Strings.isEmpty(importString)) {
+			if (importString !== null) {
 				stringBuilder.append('import ').append(importString).append(';').append(Strings.newLine)
 			}
 		}

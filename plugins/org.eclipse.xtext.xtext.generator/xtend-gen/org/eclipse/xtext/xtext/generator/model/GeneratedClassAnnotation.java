@@ -15,6 +15,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.XtextGenerator;
 import org.eclipse.xtext.xtext.generator.model.IClassAnnotation;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
+import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
 /**
  * A class annotation configuration for the <code>@Generated</code> annotation.
@@ -75,8 +76,8 @@ public class GeneratedClassAnnotation implements IClassAnnotation {
   }
   
   @Override
-  public String getAnnotationImport() {
-    return "javax.annotation.Generated";
+  public TypeReference getAnnotationImport() {
+    return new TypeReference("javax.annotation.Generated");
   }
   
   private void operator_add(final StringBuilder stringBuilder, final String s) {

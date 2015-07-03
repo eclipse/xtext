@@ -14,9 +14,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -25,10 +28,55 @@ import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.model.CodeConfig;
 import org.eclipse.xtext.xtext.generator.model.IClassAnnotation;
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
+import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
 @SuppressWarnings("all")
 public class JavaFileAccess extends TextFileAccess {
-  private final Map<String, String> imports = CollectionLiterals.<String, String>newHashMap();
+  private static class JavaStringConcatenation extends StringConcatenation {
+    private final JavaFileAccess access;
+    
+    private final Pattern typeNamePattern = Pattern.compile("[a-z]+(\\.[a-z]+)*(\\.[A-Z][a-zA-Z]*)+");
+    
+    public JavaStringConcatenation(final JavaFileAccess access) {
+      super(access.codeConfig.getLineDelimiter());
+      this.access = access;
+    }
+    
+    @Override
+    public String getStringRepresentation(final Object object) {
+      String _xifexpression = null;
+      if ((object instanceof TypeReference)) {
+        _xifexpression = this.access.importType(((TypeReference)object));
+      } else {
+        String _xifexpression_1 = null;
+        if ((object instanceof Class<?>)) {
+          TypeReference _typeReference = new TypeReference(((Class<?>) object));
+          _xifexpression_1 = this.access.importType(_typeReference);
+        } else {
+          String _xifexpression_2 = null;
+          boolean _and = false;
+          if (!(object instanceof String)) {
+            _and = false;
+          } else {
+            Matcher _matcher = this.typeNamePattern.matcher(((String) object));
+            boolean _matches = _matcher.matches();
+            _and = _matches;
+          }
+          if (_and) {
+            TypeReference _typeReference_1 = new TypeReference(((String) object));
+            _xifexpression_2 = this.access.importType(_typeReference_1);
+          } else {
+            _xifexpression_2 = object.toString();
+          }
+          _xifexpression_1 = _xifexpression_2;
+        }
+        _xifexpression = _xifexpression_1;
+      }
+      return _xifexpression;
+    }
+  }
+  
+  private final Map<String, TypeReference> imports = CollectionLiterals.<String, TypeReference>newHashMap();
   
   private final String packageName;
   
@@ -41,51 +89,60 @@ public class JavaFileAccess extends TextFileAccess {
   private boolean markedAsGenerated;
   
   public JavaFileAccess(final String qualifiedName, final CodeConfig codeConfig) {
-    final int simpleNameIndex = qualifiedName.lastIndexOf(".");
-    String _substring = qualifiedName.substring(0, simpleNameIndex);
-    this.packageName = _substring;
-    final String simpleName = qualifiedName.substring((simpleNameIndex + 1));
+    this(new TypeReference(qualifiedName), codeConfig);
+  }
+  
+  public JavaFileAccess(final TypeReference typeRef, final CodeConfig codeConfig) {
+    String _package = typeRef.getPackage();
+    this.packageName = _package;
+    String _name = typeRef.getName();
+    String _simpleName = typeRef.getSimpleName();
+    String _plus = ((this.packageName + ".") + _simpleName);
+    boolean _notEquals = (!Objects.equal(_name, _plus));
+    if (_notEquals) {
+      throw new IllegalArgumentException("Nested types cannot be serialized.");
+    }
     String _replace = this.packageName.replace(".", "/");
-    String _plus = (_replace + "/");
-    String _plus_1 = (_plus + simpleName);
-    String _plus_2 = (_plus_1 + ".java");
-    this.setPath(_plus_2);
+    String _plus_1 = (_replace + "/");
+    String _simpleName_1 = typeRef.getSimpleName();
+    String _plus_2 = (_plus_1 + _simpleName_1);
+    String _plus_3 = (_plus_2 + ".java");
+    this.setPath(_plus_3);
     this.codeConfig = codeConfig;
   }
   
-  public String imported(final Class<?> clazz) {
-    String _name = clazz.getName();
-    String _replace = _name.replace("$", ".");
-    return this.imported(_replace);
-  }
-  
-  public String imported(final String clazz) {
-    final int simpleNameIndex = clazz.lastIndexOf(".");
-    final String simpleName = clazz.substring((simpleNameIndex + 1));
-    final String packageName = clazz.substring(0, simpleNameIndex);
+  public String importType(final TypeReference typeRef) {
+    final String simpleName = typeRef.getSimpleName();
     boolean _or = false;
     boolean _isJavaDefaultType = CodeGenUtil.isJavaDefaultType(simpleName);
     if (_isJavaDefaultType) {
       _or = true;
     } else {
-      boolean _equals = Objects.equal(this.packageName, packageName);
+      String _package = typeRef.getPackage();
+      boolean _equals = Objects.equal(this.packageName, _package);
       _or = _equals;
     }
     if (_or) {
       return simpleName;
     }
-    final String imported = this.imports.get(simpleName);
+    final TypeReference imported = this.imports.get(simpleName);
     boolean _notEquals = (!Objects.equal(imported, null));
     if (_notEquals) {
-      boolean _equals_1 = imported.equals(clazz);
+      boolean _equals_1 = Objects.equal(imported, typeRef);
       if (_equals_1) {
         return simpleName;
       } else {
-        return clazz;
+        return typeRef.getName();
       }
     }
-    this.imports.put(simpleName, clazz);
+    this.imports.put(simpleName, typeRef);
     return simpleName;
+  }
+  
+  public void setJavaContent(final StringConcatenationClient javaContent) {
+    final JavaFileAccess.JavaStringConcatenation javaStringConcat = new JavaFileAccess.JavaStringConcatenation(this);
+    javaStringConcat.append(javaContent);
+    this.setContent(javaStringConcat);
   }
   
   @Override
@@ -101,13 +158,20 @@ public class JavaFileAccess extends TextFileAccess {
     final Procedure1<IClassAnnotation> _function_1 = new Procedure1<IClassAnnotation>() {
       @Override
       public void apply(final IClassAnnotation it) {
-        String _annotationImport = it.getAnnotationImport();
-        JavaFileAccess.this.imported(_annotationImport);
+        TypeReference _annotationImport = it.getAnnotationImport();
+        JavaFileAccess.this.importType(_annotationImport);
       }
     };
     IterableExtensions.<IClassAnnotation>forEach(classAnnotations, _function_1);
-    Collection<String> _values = this.imports.values();
-    final ArrayList<String> sortedImports = Lists.<String>newArrayList(_values);
+    Collection<TypeReference> _values = this.imports.values();
+    final Function1<TypeReference, String> _function_2 = new Function1<TypeReference, String>() {
+      @Override
+      public String apply(final TypeReference it) {
+        return it.getName();
+      }
+    };
+    Iterable<String> _map = IterableExtensions.<TypeReference, String>map(_values, _function_2);
+    final ArrayList<String> sortedImports = Lists.<String>newArrayList(_map);
     Collections.<String>sort(sortedImports);
     StringConcatenation _builder = new StringConcatenation();
     String _fileHeader = this.codeConfig.getFileHeader();
@@ -136,13 +200,9 @@ public class JavaFileAccess extends TextFileAccess {
         _builder.newLineIfNotEmpty();
       }
     }
-    {
-      List<CharSequence> _codeFragments = this.getCodeFragments();
-      for(final CharSequence fragment : _codeFragments) {
-        _builder.append(fragment, "");
-        _builder.newLineIfNotEmpty();
-      }
-    }
+    CharSequence _content = this.getContent();
+    _builder.append(_content, "");
+    _builder.newLineIfNotEmpty();
     return _builder;
   }
   

@@ -10,13 +10,10 @@ package org.eclipse.xtext.xtext.generator.model;
 import com.google.common.io.Files;
 import java.io.File;
 import java.nio.charset.Charset;
-import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.parser.IEncodingProvider;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
@@ -26,17 +23,13 @@ public class TextFileAccess {
   private String path;
   
   @Accessors
-  private final List<CharSequence> codeFragments = CollectionLiterals.<CharSequence>newArrayList();
+  private CharSequence content;
   
   @Accessors
   private IEncodingProvider encodingProvider;
   
   public CharSequence generate() {
-    final StringConcatenation result = new StringConcatenation();
-    for (final CharSequence fragment : this.codeFragments) {
-      result.append(fragment);
-    }
-    return result;
+    return this.content;
   }
   
   public void writeTo(final IFileSystemAccess2 fileSystemAccess) {
@@ -67,8 +60,12 @@ public class TextFileAccess {
   }
   
   @Pure
-  public List<CharSequence> getCodeFragments() {
-    return this.codeFragments;
+  public CharSequence getContent() {
+    return this.content;
+  }
+  
+  public void setContent(final CharSequence content) {
+    this.content = content;
   }
   
   @Pure

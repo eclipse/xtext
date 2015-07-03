@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext.generator
 import com.google.inject.Singleton
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.Grammar
+import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 import static org.eclipse.xtext.GrammarUtil.*
 
@@ -19,36 +20,28 @@ class XtextGeneratorNaming {
 	@Accessors(PUBLIC_SETTER)
 	String eclipsePluginActivator
 	
-	def getPackage(String qualifiedName) {
-		qualifiedName.substring(0, qualifiedName.lastIndexOf('.'))
-	}
-	
-	def getSimple(String qualifiedName) {
-		qualifiedName.substring(qualifiedName.lastIndexOf('.'))
-	}
-	
 	def getRuntimeBasePackage(Grammar grammar) {
 		getNamespace(grammar)
 	}
 	
 	def getRuntimeModule(Grammar grammar) {
-		grammar.runtimeBasePackage + '.' + getName(grammar) + 'RuntimeModule'
+		new TypeReference(grammar.runtimeBasePackage, getName(grammar) + 'RuntimeModule')
 	}
 	
 	def getRuntimeGenModule(Grammar grammar) {
-		grammar.runtimeBasePackage + '.Abstract' + getName(grammar) + 'RuntimeModule'
+		new TypeReference(grammar.runtimeBasePackage, 'Abstract' + getName(grammar) + 'RuntimeModule')
 	}
 	
 	def getRuntimeDefaultModule(Grammar grammar) {
-		'org.eclipse.xtext.service.DefaultRuntimeModule'
+		new TypeReference('org.eclipse.xtext.service.DefaultRuntimeModule')
 	}
 	
 	def getRuntimeSetup(Grammar grammar) {
-		grammar.runtimeBasePackage + '.' + getName(grammar) + 'StandaloneSetup'
+		new TypeReference(grammar.runtimeBasePackage, getName(grammar) + 'StandaloneSetup')
 	}
 	
 	def getRuntimeGenSetup(Grammar grammar) {
-		grammar.runtimeBasePackage + '.' + getName(grammar) + 'StandaloneSetupGenerated'
+		new TypeReference(grammar.runtimeBasePackage, getName(grammar) + 'StandaloneSetupGenerated')
 	}
 	
 	def getEclipsePluginBasePackage(Grammar grammar) {
@@ -56,26 +49,26 @@ class XtextGeneratorNaming {
 	}
 	
 	def getEclipsePluginModule(Grammar grammar) {
-		grammar.eclipsePluginBasePackage + '.' + getName(grammar) + 'UiModule'
+		new TypeReference(grammar.eclipsePluginBasePackage, getName(grammar) + 'UiModule')
 	}
 	
 	def getEclipsePluginGenModule(Grammar grammar) {
-		grammar.eclipsePluginBasePackage + '.' + 'Abstract' + getName(grammar) + 'UiModule'
+		new TypeReference(grammar.eclipsePluginBasePackage, 'Abstract' + getName(grammar) + 'UiModule')
 	}
 	
 	def getEclipsePluginDefaultModule(Grammar grammar) {
-		'org.eclipse.xtext.ui.DefaultUiModule'
+		new TypeReference('org.eclipse.xtext.ui.DefaultUiModule')
 	}
 	
 	def getEclipsePluginExecutableExtensionFactory(Grammar grammar) {
-		grammar.eclipsePluginBasePackage + '.' + getName(grammar) + 'ExecutableExtensionFactory'
+		new TypeReference(grammar.eclipsePluginBasePackage, getName(grammar) + 'ExecutableExtensionFactory')
 	}
 	
 	def getEclipsePluginActivator(Grammar grammar) {
 		if (eclipsePluginActivator === null) {
 			eclipsePluginActivator = grammar.eclipsePluginBasePackage + '.internal.' + getName(grammar) + 'Activator'
 		}
-		return eclipsePluginActivator
+		return new TypeReference(eclipsePluginActivator)
 	}
 	
 }
