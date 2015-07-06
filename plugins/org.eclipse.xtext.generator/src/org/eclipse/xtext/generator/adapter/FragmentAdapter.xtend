@@ -27,7 +27,9 @@ import org.eclipse.xtext.generator.Binding
 import org.eclipse.xtext.generator.Generator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorFragment
+import org.eclipse.xtext.generator.IGeneratorFragmentExtension
 import org.eclipse.xtext.generator.IGeneratorFragmentExtension2
+import org.eclipse.xtext.generator.IGeneratorFragmentExtension3
 import org.eclipse.xtext.generator.LanguageConfig
 import org.eclipse.xtext.generator.Naming
 import org.eclipse.xtext.generator.NewlineNormalizer
@@ -83,6 +85,11 @@ class FragmentAdapter implements IGeneratorFragment2 {
 		generateGuiceModuleRt(config1, config2, ctx)
 		generateGuiceModuleUi(config1, config2, ctx)
 		generatePluginXmlRt(config1, ctx)
+		generateManifestRt(config1, ctx)
+		generatePluginXmlUi(config1, ctx)
+		generateManifestUi(config1, ctx)
+		generateManifestIde(config1, ctx)
+		generateManifestTests(config1, ctx)
 	}
 	
 	private def void generateStandaloneSetup(LanguageConfig config1, LanguageConfig2 config2, XpandExecutionContext ctx) {
@@ -126,6 +133,49 @@ class FragmentAdapter implements IGeneratorFragment2 {
 			projectConfig.runtimePluginXml.entries += result
 		} finally {
 			ctx.output.closeFile()
+		}
+	}
+	
+	private def void generatePluginXmlUi(LanguageConfig config1, XpandExecutionContext ctx) {
+		ctx.output.openFile(null, StringConcatOutputImpl.STRING_OUTLET)
+		try {
+			if (fragment instanceof IGeneratorFragmentExtension2) {
+				fragment.addToPluginXmlUi(config1, ctx)
+			} else {
+				fragment.addToPluginXmlUi(config1.grammar, ctx)
+			}
+			val result = (ctx.output as StringConcatOutputImpl).stringOutlet
+			projectConfig.eclipsePluginPluginXml.entries += result
+		} finally {
+			ctx.output.closeFile()
+		}
+	}
+	
+	private def void generateManifestRt(LanguageConfig config1, XpandExecutionContext ctx) {
+		projectConfig.runtimeManifest.exportedPackages.addAll(fragment.getExportedPackagesRt(config1.grammar))
+		projectConfig.runtimeManifest.requiredBundles.addAll(fragment.getRequiredBundlesRt(config1.grammar))
+		projectConfig.runtimeManifest.importedPackages.addAll(fragment.getImportedPackagesRt(config1.grammar))
+	}
+	
+	private def void generateManifestUi(LanguageConfig config1, XpandExecutionContext ctx) {
+		projectConfig.eclipsePluginManifest.exportedPackages.addAll(fragment.getExportedPackagesUi(config1.grammar))
+		projectConfig.eclipsePluginManifest.requiredBundles.addAll(fragment.getRequiredBundlesUi(config1.grammar))
+		projectConfig.eclipsePluginManifest.importedPackages.addAll(fragment.getImportedPackagesUi(config1.grammar))
+	}
+	
+	private def void generateManifestIde(LanguageConfig config1, XpandExecutionContext ctx) {
+		if (fragment instanceof IGeneratorFragmentExtension3) {
+			projectConfig.genericIdeManifest.exportedPackages.addAll(fragment.getExportedPackagesIde(config1.grammar))
+			projectConfig.genericIdeManifest.requiredBundles.addAll(fragment.getRequiredBundlesIde(config1.grammar))
+			projectConfig.genericIdeManifest.importedPackages.addAll(fragment.getImportedPackagesIde(config1.grammar))
+		}
+	}
+	
+	private def void generateManifestTests(LanguageConfig config1, XpandExecutionContext ctx) {
+		if (fragment instanceof IGeneratorFragmentExtension) {
+			projectConfig.runtimeTestManifest.exportedPackages.addAll(fragment.getExportedPackagesTests(config1.grammar))
+			projectConfig.runtimeTestManifest.requiredBundles.addAll(fragment.getRequiredBundlesTests(config1.grammar))
+			projectConfig.runtimeTestManifest.importedPackages.addAll(fragment.getImportedPackagesTests(config1.grammar))
 		}
 	}
 	
