@@ -69,6 +69,10 @@
 	font-family: monospace
 }
 
+markup.raw.html.markdown {
+	background-color: #E4F7EF
+}
+
 .markup.underline.link {
 	text-decoration: underline;
 }

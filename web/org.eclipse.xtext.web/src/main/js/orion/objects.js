@@ -47,7 +47,7 @@ define([], function() {
 		},
 		/**
 		 * Mixes all <code>source</code>'s own enumerable properties into <code>target</code>. Multiple source objects
-		 * can be passed as varags.
+		 * can be passed as varargs.
 		 * @name orion.objects.mixin
 		 * @function
 		 * @static

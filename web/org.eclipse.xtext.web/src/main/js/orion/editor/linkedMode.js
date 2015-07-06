@@ -15,12 +15,66 @@ define("orion/editor/linkedMode", [ //$NON-NLS-0$
 	'orion/keyBinding', //$NON-NLS-0$
 	'orion/editor/keyModes', //$NON-NLS-0$
 	'orion/editor/annotations', //$NON-NLS-0$
-	'orion/editor/templates', //$NON-NLS-0$
 	'orion/objects', //$NON-NLS-0$
 	'orion/util' //$NON-NLS-0$
-], function(messages, mKeyBinding, mKeyModes, mAnnotations, mTemplates, objects) {
+], function(messages, mKeyBinding, mKeyModes, mAnnotations, objects) {
 
 	var exports = {};
+
+	/**
+	 * @name LinkedContentAssist
+	 * @description Creates a new LinkedContentAssist object which is used for linked data in templates
+	 * @constructor 
+	 * @param {Object} linkedData The linked data
+	 * @returns A new LinkedContentAssist object
+	 * @since 9.0
+	 */
+	function LinkedContentAssist(linkedData) {
+		this._data = linkedData;
+	}
+	
+	LinkedContentAssist.prototype = {
+		chop: function(prefix, string) {
+			return string.substring(prefix.length);
+		},
+		
+		/**
+		 * @callback
+		 */
+		computeProposals: function(buffer, offset, context) {
+			var prefix = context.prefix;
+			var proposals = [];
+			var linkedstyle = this._data.style ? this._data.style : null;
+			linkedstyle = linkedstyle ? linkedstyle : 'emphasis';
+			var values = this._data.values;
+			for (var i = 0; i < values.length; i++) {
+				var val = values[i];
+				if(typeof(val) === 'string' && val.indexOf(prefix) === 0) {
+					proposals.push({proposal: this.chop(prefix, val), 
+						description: val,
+						hover: val,
+						style: linkedstyle
+					});
+				} else if(typeof(val) === 'object' && val.proposal) {
+					proposals.push({proposal: this.chop(prefix, val.proposal), 
+						description: val.description ? val.description : val.proposal,
+						hover: val.hover ? val.hover : val.proposal,
+						style: linkedstyle
+					});
+				}
+			}
+			var linkedtitle = this._data.title ? this._data.title : null;
+			if (0 < proposals.length) {
+				proposals.splice(0, 0,{
+					proposal: '',
+					description: linkedtitle ? linkedtitle : 'Options', //$NON-NLS-0$
+					style: 'noemphasis_title', //$NON-NLS-0$
+					unselectable: true
+				});	
+			}
+			return proposals;
+		}
+	};
 
 	function LinkedMode(editor, undoStack, contentAssist) {
 		var textView = editor.getTextView();
@@ -170,7 +224,7 @@ define("orion/editor/linkedMode", [ //$NON-NLS-0$
 				for (i = sortedPositions.length - 1; i >= 0; i--) {
 					pos = sortedPositions[i];
 					if (pos.model === model && pos.group === changed.group) {
-						editor.setText(event.text, pos.oldOffset + deltaStart , pos.oldOffset + deltaEnd);
+						editor.setText(event.text, pos.oldOffset + deltaStart , pos.oldOffset + deltaEnd, false);
 					}
 				}
 				this.ignoreVerify = false;
@@ -314,7 +368,7 @@ define("orion/editor/linkedMode", [ //$NON-NLS-0$
 				if (contentAssist) {
 					contentAssist.offset = undefined;
 					if (group.data && group.data.type === "link" && group.data.values) { //$NON-NLS-0$
-						var provider = this._groupContentAssistProvider = new mTemplates.TemplateContentAssist(group.data.values);
+						var provider = this._groupContentAssistProvider = new LinkedContentAssist(group.data);
 						provider.getPrefix = function() {
 							var selection = editor.getSelection();
 							if (selection.start === selection.end) {
@@ -392,6 +446,8 @@ define("orion/editor/linkedMode", [ //$NON-NLS-0$
 			var changed;
 			var sortedPositions = this._getSortedPositions(model);
 			for (var i = sortedPositions.length - 1; i >= 0; i--) {
+				if (sortedPositions[i].escape)
+					continue;
 				var position = sortedPositions[i].position;
 				if (position.offset <= start && end <= position.offset + position.length) {
 					changed = sortedPositions[i];

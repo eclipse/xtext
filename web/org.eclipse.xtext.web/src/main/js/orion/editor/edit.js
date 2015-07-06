@@ -1,6 +1,6 @@
 /*******************************************************************************
  * @license
- * Copyright (c) 2013 IBM Corporation and others.
+ * Copyright (c) 2013, 2015 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials are made 
  * available under the terms of the Eclipse Public License v1.0 
  * (http://www.eclipse.org/legal/epl-v10.html), and the Eclipse Distribution 
@@ -14,40 +14,17 @@
 define('orion/editor/edit', [ //$NON-NLS-0$
 	"require", //$NON-NLS-0$
 
-	"orion/editor/config", //$NON-NLS-0$
-	"orion/editor/shim", //$NON-NLS-0$
-	
 	"orion/editor/textView", //$NON-NLS-0$
 	"orion/editor/textModel", //$NON-NLS-0$
 	"orion/editor/textTheme", //$NON-NLS-0$
 	"orion/editor/projectionTextModel", //$NON-NLS-0$
-	"orion/editor/eventTarget", //$NON-NLS-0$
-	"orion/keyBinding", //$NON-NLS-0$
-	"orion/editor/rulers", //$NON-NLS-0$
-	"orion/editor/annotations", //$NON-NLS-0$
-	"orion/editor/tooltip", //$NON-NLS-0$
-	"orion/editor/undoStack", //$NON-NLS-0$
-	"orion/editor/textDND", //$NON-NLS-0$
-	
 	"orion/editor/editor", //$NON-NLS-0$
 	"orion/editor/editorFeatures", //$NON-NLS-0$
 	
 	"orion/editor/contentAssist", //$NON-NLS-0$
-	"webtools/cssContentAssist", //$NON-NLS-0$
-	"webtools/htmlContentAssist", //$NON-NLS-0$
-	
-	"orion/editor/AsyncStyler", //$NON-NLS-0$
-	"orion/editor/mirror", //$NON-NLS-0$
-	"orion/editor/textMateStyler", //$NON-NLS-0$
-	"orion/editor/htmlGrammar", //$NON-NLS-0$
-	"orion/editor/textStyler", //$NON-NLS-0$
-	"orion/editor/stylers/application_javascript/syntax", //$NON-NLS-0$
-	"orion/editor/stylers/text_css/syntax", //$NON-NLS-0$
-	"orion/editor/stylers/text_html/syntax" //$NON-NLS-0$
+	"orion/editor/textStyler" //$NON-NLS-0$
 
-], function(require, config, shim, mTextView, mTextModel, mTextTheme, mProjModel, mEventTarget, mKeyBinding, mRulers, mAnnotations,
-			mTooltip, mUndoStack, mTextDND, mEditor, mEditorFeatures, mContentAssist, mCSSContentAssist, mHtmlContentAssist,
-			mAsyncStyler, mMirror, mTextMateStyler, mHtmlGrammar, mTextStyler, mJS, mCSS, mHTML) {
+], function(require, mTextView, mTextModel, mTextTheme, mProjModel, mEditor, mEditorFeatures, mContentAssist, mTextStyler) {
 
 	/**	@private */
 	function getDisplay(window, document, element) {
@@ -104,7 +81,7 @@ define('orion/editor/edit', [ //$NON-NLS-0$
 		var prefix = "data-editor-"; //$NON-NLS-0$
 		if (name.substring(0, prefix.length) === prefix) {
 			var key = name.substring(prefix.length);
-			key = key.replace(/-([a-z])/ig, function(all, character) {
+			key = key.replace(/-([a-z])/ig, /* @callback */ function(all, character) {
 				return character.toUpperCase();
 			});
 			return key;
@@ -211,7 +188,7 @@ define('orion/editor/edit', [ //$NON-NLS-0$
 				}
 			}
 		}
-		if (!parent) { throw "no parent"; } //$NON-NLS-0$
+		if (!parent) { throw new Error("no parent"); } //$NON-NLS-0$
 		options = mergeOptions(parent, options);
 	
 		if (typeof options.theme === "string") { //$NON-NLS-0$
@@ -287,7 +264,7 @@ define('orion/editor/edit', [ //$NON-NLS-0$
 							var stylerAdapter = new mTextStyler.createPatternBasedAdapter(grammar.grammars, grammar.id, contentType);
 							this.styler = new mTextStyler.TextStyler(textView, annotationModel, stylerAdapter);
 						},
-						function(error) {
+						/* @callback */ function(error) {
 							/*
 							 * A grammar file was not found for the specified contentType, so syntax styling will
 							 * not be shown (the editor will still work fine otherwise).  requireJS has already
@@ -347,17 +324,6 @@ define('orion/editor/edit', [ //$NON-NLS-0$
 		editor.setInput(options.title, null, contents, false, options.noFocus);
 		
 		syntaxHighlighter.highlight(options.contentType || options.lang, editor);
-		if (contentAssist) {
-			var cssContentAssistProvider = new mCSSContentAssist.CssContentAssistProvider();
-			var htmlContentAssistProvider = new mHtmlContentAssist.HTMLContentAssistProvider();
-			contentAssist.addEventListener("Activating", function() { //$NON-NLS-0$
-				if (/css$/.test(options.lang)) {
-					contentAssist.setProviders([cssContentAssistProvider]);
-				} else if (/html$/.test(options.lang)) {
-					contentAssist.setProviders([htmlContentAssistProvider]);
-				}
-			});
-		}
 		/*
 		 * The minimum height of the editor is 50px. Do not compute size if the editor is not
 		 * attached to the DOM or it is display=none.

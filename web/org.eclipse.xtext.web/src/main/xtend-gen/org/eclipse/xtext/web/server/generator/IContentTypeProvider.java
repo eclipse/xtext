@@ -9,7 +9,7 @@ package org.eclipse.xtext.web.server.generator;
 
 /**
  * A content type provider is responsible for assigning content types to documents resulting
- * from an {@link IGenerator} implementation.
+ * from an {@link org.eclipse.xtext.generator.IGenerator} implementation.
  */
 @SuppressWarnings("all")
 public interface IContentTypeProvider {
