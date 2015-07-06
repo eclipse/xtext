@@ -39,10 +39,11 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 @SuppressWarnings("all")
 «classAnnotations()»public class «getGenProposalProvider().toSimpleName()» extends «superClassName» {
 		
+	«LET getFqFeatureNamesToExclude() AS excludedFqnFeatureNames-»
 	«LET {} AS processedFqnFeatureNames-»
 		«FOREACH containedAssignments() AS assignment-»
 			«LET getFqFeatureName(assignment) AS fqnFeatureName-»
-				«IF !processedFqnFeatureNames.contains(fqnFeatureName)-»
+				«IF !processedFqnFeatureNames.contains(fqnFeatureName) && !excludedFqnFeatureNames.contains(fqnFeatureName)-»
 					«processedFqnFeatureNames.add(fqnFeatureName)->""-»	 
 	public void complete«fqnFeatureName»(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 	«LET containingParserRule(assignment).containedAssignments().select(a|a.feature==assignment.feature).terminal AS terminals-»
@@ -68,7 +69,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
     
   	  «FOREACH rules AS rule-»
 			«LET getFqFeatureName(rule) AS fqnFeatureName-»
-				«IF !processedFqnFeatureNames.contains(fqnFeatureName)-»
+				«IF !processedFqnFeatureNames.contains(fqnFeatureName) && !excludedFqnFeatureNames.contains(fqnFeatureName)-»
 					«processedFqnFeatureNames.add(fqnFeatureName)->""-»	 	 
 	public void complete«fqnFeatureName»(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		// subclasses may override
@@ -76,6 +77,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 				«ENDIF-»
 			«ENDLET-»
     	«ENDFOREACH-»
+	«ENDLET-»
 	«ENDLET-»
 }
 «ENDFILE»
