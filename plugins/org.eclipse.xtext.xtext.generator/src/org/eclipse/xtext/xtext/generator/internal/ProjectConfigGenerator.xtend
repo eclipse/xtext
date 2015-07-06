@@ -87,8 +87,13 @@ class ProjectConfigGenerator {
 		 *******************************************************************************/
 		package «IMPL_NAME.substring(0, IMPL_NAME.lastIndexOf('.'))»;
 		
+		import com.google.common.collect.Maps;
 		import com.google.inject.Injector;
+		import java.util.Map;
+		import org.eclipse.emf.mwe.core.issues.Issues;
 		import org.eclipse.xtext.generator.IFileSystemAccess2;
+		import org.eclipse.xtext.util.Strings;
+		import org.eclipse.xtext.xtext.generator.XtextGenerator;
 		
 		/**
 		 * Use this class to configure output paths in the XtextGenerator.
@@ -106,15 +111,46 @@ class ProjectConfigGenerator {
 			private FileSystemAccess orionJsGen;
 			private FileSystemAccess aceJsGen;
 			
+			public void checkConfiguration(XtextGenerator generator, Issues issues) {
+				«FOR p : PROJECTS»
+					if («p»Manifest != null && Strings.isEmpty(«p»Manifest.getPath())) {
+						issues.addError(generator, "The property 'path' must be set.", «p»Manifest);
+					}
+					if («p»PluginXml != null && Strings.isEmpty(«p»PluginXml.getPath())) {
+						issues.addError(generator, "The property 'path' must be set.", «p»PluginXml);
+					}
+				«ENDFOR»
+			}
+			
 			@Override
 			public void initialize(Injector injector) {
 				injector.injectMembers(this);
+				Map<String, ManifestAccess> manifestPaths = Maps.newHashMapWithExpectedSize(«PROJECTS.size»);
+				Map<String, PluginXmlAccess> pluginXmlPaths = Maps.newHashMapWithExpectedSize(«PROJECTS.size»);
 				«FOR p : PROJECTS»
+					
+					// Initialize «p» configuration
 					if («p»Src != null) {
 						«p»Src.initialize(injector);
 					}
 					if («p»SrcGen != null) {
 						«p»SrcGen.initialize(injector);
+					}
+					if («p»Manifest != null) {
+						ManifestAccess access = manifestPaths.get(«p»Manifest.getPath());
+						if (access == null) {
+							manifestPaths.put(«p»Manifest.getPath(), «p»Manifest);
+						} else if (access != «p»Manifest) {
+							set«p.toFirstUpper»Manifest(access);
+						}
+					}
+					if («p»PluginXml != null) {
+						PluginXmlAccess access = pluginXmlPaths.get(«p»PluginXml.getPath());
+						if (access == null) {
+							pluginXmlPaths.put(«p»PluginXml.getPath(), «p»PluginXml);
+						} else if (access != «p»PluginXml) {
+							set«p.toFirstUpper»PluginXml(access);
+						}
 					}
 				«ENDFOR»
 				if (orionJsGen != null) {
