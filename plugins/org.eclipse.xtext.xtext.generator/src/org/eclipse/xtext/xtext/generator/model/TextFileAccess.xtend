@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtext.generator.model
 
 import com.google.common.io.Files
 import java.io.File
+import java.io.IOException
 import java.nio.charset.Charset
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -34,7 +35,7 @@ class TextFileAccess {
 		fileSystemAccess.generateFile(path, generate())
 	}
 	
-	def writeToFile() {
+	def writeToFile() throws IOException {
 		var Charset charset
 		if (encodingProvider !== null) {
 			val uri = URI.createFileURI(path)

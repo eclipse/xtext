@@ -7,17 +7,26 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.model
 
+import java.util.Set
 import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors
 class ManifestAccess {
 	
-	String path
+	String path = 'META-INF/MANIFEST.MF'
 	
-	boolean merge
+	String bundleName
 	
-	def void generate() {
-		
-	}
+	String symbolicName
+	
+	String version = '0.0.1'
+	
+	boolean merge = true
+	
+	val Set<String> exportedPackages = newHashSet
+	
+	val Set<String> requiredBundles = newHashSet
+	
+	val Set<String> importedPackages = newHashSet
 	
 }

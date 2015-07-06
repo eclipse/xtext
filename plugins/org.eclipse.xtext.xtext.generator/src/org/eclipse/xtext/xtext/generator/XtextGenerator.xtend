@@ -11,6 +11,11 @@ import com.google.inject.Guice
 import com.google.inject.Inject
 import com.google.inject.Injector
 import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.InputStream
+import java.io.OutputStream
 import java.util.List
 import org.eclipse.emf.mwe.core.WorkflowContext
 import org.eclipse.emf.mwe.core.issues.Issues
@@ -18,9 +23,12 @@ import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent2
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.XtextStandaloneSetup
+import org.eclipse.xtext.util.MergeableManifest
 import org.eclipse.xtext.xtext.generator.model.CodeConfig
 import org.eclipse.xtext.xtext.generator.model.IXtextProjectConfig
+import org.eclipse.xtext.xtext.generator.model.ManifestAccess
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess
+import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 /**
  * The Xtext language infrastructure generator. Can be configured with {@link IGeneratorFragment}
@@ -39,6 +47,8 @@ class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGe
 	val List<LanguageConfig2> languageConfigs = newArrayList
 	
 	Injector injector
+	
+	@Inject extension XtextGeneratorNaming
 	
 	@Inject IXtextProjectConfig projectConfig
 	
@@ -87,6 +97,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGe
 		}
 		generatePluginXmls()
 		generateManifests()
+		generateActivator()
 	}
 	
 	protected def generateRuntimeSetup(LanguageConfig2 language) {
@@ -109,16 +120,67 @@ class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGe
 	}
 	
 	protected def generateManifests() {
-		projectConfig.runtimeManifest?.generate()
-		projectConfig.runtimeTestManifest?.generate()
-		projectConfig.genericIdeManifest?.generate()
-		projectConfig.genericIdeTestManifest?.generate()
-		projectConfig.eclipsePluginManifest?.generate()
-		projectConfig.eclipsePluginTestManifest?.generate()
-		projectConfig.ideaPluginManifest?.generate()
-		projectConfig.ideaPluginTestManifest?.generate()
-		projectConfig.webManifest?.generate()
-		projectConfig.webTestManifest?.generate()
+		val firstGrammar = languageConfigs.head?.grammar
+		generateManifest(projectConfig.runtimeManifest, null)
+		generateManifest(projectConfig.runtimeTestManifest, null)
+		generateManifest(projectConfig.genericIdeManifest, null)
+		generateManifest(projectConfig.genericIdeTestManifest, null)
+		generateManifest(projectConfig.eclipsePluginManifest, firstGrammar.eclipsePluginActivator)
+		generateManifest(projectConfig.eclipsePluginTestManifest, null)
+		generateManifest(projectConfig.ideaPluginManifest, null)
+		generateManifest(projectConfig.ideaPluginTestManifest, null)
+		generateManifest(projectConfig.webManifest, null)
+		generateManifest(projectConfig.webTestManifest, null)
+	}
+	
+	protected def generateManifest(ManifestAccess manifest, TypeReference activator) {
+		if (manifest !== null) {
+			if (manifest.bundleName === null) {
+				val segments = manifest.path.split('/')
+				if (segments.length >= 3 && segments.get(segments.length - 2) == 'META-INF')
+					manifest.bundleName = segments.get(segments.length - 3)
+			}
+			val file = new File(manifest.path)
+			if (file.exists) {
+				if (manifest.merge) {
+					mergeManifest(manifest, file, activator)
+				} else if (manifest.path.endsWith('.MF')) {
+					manifest.path = manifest.path + '_gen'
+					templates.createManifest(manifest, activator).writeToFile()
+				}
+			} else {
+				templates.createManifest(manifest, activator).writeToFile()
+			}
+		}
+	}
+	
+	protected def generateActivator() {
+		if (projectConfig.eclipsePluginSrcGen !== null)
+			templates.createEclipsePluginActivator(languageConfigs).writeTo(projectConfig.eclipsePluginSrcGen)
+	}
+
+	protected def mergeManifest(ManifestAccess manifest, File file, TypeReference activator) throws IOException {
+		var InputStream in
+		var OutputStream out
+		try {
+			in = new FileInputStream(file)
+			val merge = new MergeableManifest(in, manifest.bundleName)
+			merge.addExportedPackages(manifest.exportedPackages)
+			merge.addRequiredBundles(manifest.requiredBundles)
+			merge.addImportedPackages(manifest.importedPackages)
+			if (activator !== null && !merge.mainAttributes.containsKey(MergeableManifest.BUNDLE_ACTIVATOR)) {
+				merge.mainAttributes.put(MergeableManifest.BUNDLE_ACTIVATOR, activator.name)
+			}
+			if (merge.isModified) {
+				out = new FileOutputStream(file)
+				merge.write(out)
+			}
+		} finally {
+			if (in !== null)
+				in.close()
+			if (out != null)
+				out.close()
+		}
 	}
 	
 	protected def generatePluginXmls() {
