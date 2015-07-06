@@ -7,18 +7,29 @@
  */
 package org.eclipse.xtext.xtext.generator.model;
 
+import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @Accessors
 @SuppressWarnings("all")
 public class ManifestAccess {
-  private String path;
+  private String path = "META-INF/MANIFEST.MF";
   
-  private boolean merge;
+  private String bundleName;
   
-  public void generate() {
-  }
+  private String symbolicName;
+  
+  private String version = "0.0.1";
+  
+  private boolean merge = true;
+  
+  private final Set<String> exportedPackages = CollectionLiterals.<String>newHashSet();
+  
+  private final Set<String> requiredBundles = CollectionLiterals.<String>newHashSet();
+  
+  private final Set<String> importedPackages = CollectionLiterals.<String>newHashSet();
   
   @Pure
   public String getPath() {
@@ -30,11 +41,53 @@ public class ManifestAccess {
   }
   
   @Pure
+  public String getBundleName() {
+    return this.bundleName;
+  }
+  
+  public void setBundleName(final String bundleName) {
+    this.bundleName = bundleName;
+  }
+  
+  @Pure
+  public String getSymbolicName() {
+    return this.symbolicName;
+  }
+  
+  public void setSymbolicName(final String symbolicName) {
+    this.symbolicName = symbolicName;
+  }
+  
+  @Pure
+  public String getVersion() {
+    return this.version;
+  }
+  
+  public void setVersion(final String version) {
+    this.version = version;
+  }
+  
+  @Pure
   public boolean isMerge() {
     return this.merge;
   }
   
   public void setMerge(final boolean merge) {
     this.merge = merge;
+  }
+  
+  @Pure
+  public Set<String> getExportedPackages() {
+    return this.exportedPackages;
+  }
+  
+  @Pure
+  public Set<String> getRequiredBundles() {
+    return this.requiredBundles;
+  }
+  
+  @Pure
+  public Set<String> getImportedPackages() {
+    return this.importedPackages;
   }
 }

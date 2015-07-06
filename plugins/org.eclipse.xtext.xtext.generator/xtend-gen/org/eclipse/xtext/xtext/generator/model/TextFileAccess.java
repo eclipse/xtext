@@ -9,12 +9,12 @@ package org.eclipse.xtext.xtext.generator.model;
 
 import com.google.common.io.Files;
 import java.io.File;
+import java.io.IOException;
 import java.nio.charset.Charset;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.parser.IEncodingProvider;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
@@ -37,24 +37,20 @@ public class TextFileAccess {
     fileSystemAccess.generateFile(this.path, _generate);
   }
   
-  public void writeToFile() {
-    try {
-      Charset charset = null;
-      if ((this.encodingProvider != null)) {
-        final URI uri = URI.createFileURI(this.path);
-        String _encoding = this.encodingProvider.getEncoding(uri);
-        Charset _forName = Charset.forName(_encoding);
-        charset = _forName;
-      } else {
-        Charset _defaultCharset = Charset.defaultCharset();
-        charset = _defaultCharset;
-      }
-      CharSequence _generate = this.generate();
-      File _file = new File(this.path);
-      Files.write(_generate, _file, charset);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+  public void writeToFile() throws IOException {
+    Charset charset = null;
+    if ((this.encodingProvider != null)) {
+      final URI uri = URI.createFileURI(this.path);
+      String _encoding = this.encodingProvider.getEncoding(uri);
+      Charset _forName = Charset.forName(_encoding);
+      charset = _forName;
+    } else {
+      Charset _defaultCharset = Charset.defaultCharset();
+      charset = _defaultCharset;
     }
+    CharSequence _generate = this.generate();
+    File _file = new File(this.path);
+    Files.write(_generate, _file, charset);
   }
   
   @Pure

@@ -7,13 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator
 
+import com.google.common.collect.Maps
 import com.google.inject.Binder
 import com.google.inject.Guice
 import com.google.inject.Inject
 import com.google.inject.Injector
+import com.google.inject.Module
 import com.google.inject.Provider
 import com.google.inject.Singleton
 import com.google.inject.name.Names
+import java.util.List
 import org.eclipse.xtext.Constants
 import org.eclipse.xtext.ISetup
 import org.eclipse.xtext.ISetupExtension
@@ -21,11 +24,14 @@ import org.eclipse.xtext.XtextPackage
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.impl.BinaryGrammarResourceFactoryImpl
 import org.eclipse.xtext.service.SingletonBinding
+import org.eclipse.xtext.util.Modules2
 import org.eclipse.xtext.xtext.generator.model.CodeConfig
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
+import org.eclipse.xtext.xtext.generator.model.ManifestAccess
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess
+import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 @Singleton
 class XtextGeneratorTemplates {
@@ -93,6 +99,7 @@ class XtextGeneratorTemplates {
 					«FOR usedGrammar : g.usedGrammars»
 						«usedGrammar.runtimeSetup».doSetup();
 					«ENDFOR»
+					
 					«IF g.usedGrammars.isEmpty»
 						// register default ePackages
 						if (!«'org.eclipse.emf.ecore.resource.Resource'».Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("ecore"))
@@ -270,6 +277,36 @@ class XtextGeneratorTemplates {
 		return javaFile
 	}
 	
+	def TextFileAccess createManifest(ManifestAccess manifest, TypeReference activator) {
+		val file = new TextFileAccess
+		file.encodingProvider = encodingProvider
+		file.path = manifest.path
+		file.content = '''
+			Manifest-Version: 1.0
+			Bundle-ManifestVersion: 2
+			Bundle-Name: «manifest.bundleName»
+			Bundle-SymbolicName: «manifest.symbolicName ?: manifest.bundleName»; singleton:=true
+			«IF !manifest.version.nullOrEmpty»
+				Bundle-Version: «manifest.version»
+			«ENDIF»
+			Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+			Bundle-ActivationPolicy: lazy
+			«IF !manifest.exportedPackages.empty»
+				Export-Package: «FOR pack : manifest.exportedPackages.sort SEPARATOR ',\n '»«pack»«ENDFOR»
+			«ENDIF»
+			«IF !manifest.requiredBundles.empty»
+				Require-Bundle: «FOR bundle : manifest.requiredBundles.sort SEPARATOR ',\n '»«bundle»«ENDFOR»
+			«ENDIF»
+			«IF !manifest.importedPackages.empty»
+				Import-Package: «FOR pack : manifest.importedPackages.sort SEPARATOR ',\n '»«pack»«ENDFOR»
+			«ENDIF»
+			«IF activator !== null»
+				Bundle-Activator: «activator»
+			«ENDIF»
+		'''
+		return file
+	}
+	
 	def JavaFileAccess createEclipsePluginExecutableExtensionFactory(LanguageConfig2 langConfig) {
 		val g = langConfig.grammar
 		val javaFile = new JavaFileAccess(g.eclipsePluginExecutableExtensionFactory, codeConfig)
@@ -294,6 +331,100 @@ class XtextGeneratorTemplates {
 					return «g.eclipsePluginActivator».getInstance().getInjector(«g.eclipsePluginActivator».«g.name.toUpperCase.replaceAll('\\.', '_')»);
 				}
 				
+			}
+		'''
+		javaFile.markedAsGenerated = true
+		return javaFile
+	}
+	
+	def JavaFileAccess createEclipsePluginActivator(List<LanguageConfig2> langConfigs) {
+		val gs = langConfigs.map[grammar].toList
+		val activator = gs.head.eclipsePluginActivator
+		val javaFile = new JavaFileAccess(activator, codeConfig)
+		javaFile.encodingProvider = encodingProvider
+		
+		javaFile.typeComment = '''
+			/**
+			 * This class was generated. Customizations should only happen in a newly
+			 * introduced subclass. 
+			 */
+		'''
+		javaFile.javaContent = '''
+			public class «activator.simpleName» extends «'org.eclipse.ui.plugin.AbstractUIPlugin'» {
+			
+				«FOR grammar : gs»
+					public static final String «grammar.name.toUpperCase.replaceAll('\\.', '_')» = "«grammar.name»";
+				«ENDFOR»
+				
+				private static final Logger logger = Logger.getLogger(«activator.simpleName».class);
+			
+				private static «activator.simpleName» INSTANCE;
+			
+				private «'java.util.Map'»<String, «Injector»> injectors = «'java.util.Collections'».synchronizedMap(«Maps».<String, «Injector»> newHashMapWithExpectedSize(1));
+			
+				@Override
+				public void start(«'org.osgi.framework.BundleContext'» context) throws Exception {
+					super.start(context);
+					INSTANCE = this;
+				}
+			
+				@Override
+				public void stop(«'org.osgi.framework.BundleContext'» context) throws Exception {
+					injectors.clear();
+					INSTANCE = null;
+					super.stop(context);
+				}
+			
+				public static «activator.simpleName» getInstance() {
+					return INSTANCE;
+				}
+			
+				public «Injector» getInjector(String language) {
+					synchronized (injectors) {
+						«Injector» injector = injectors.get(language);
+						if (injector == null) {
+							injectors.put(language, injector = createInjector(language));
+						}
+						return injector;
+					}
+				}
+			
+				protected «Injector» createInjector(String language) {
+					try {
+						«Module» runtimeModule = getRuntimeModule(language);
+						«Module» sharedStateModule = getSharedStateModule();
+						«Module» uiModule = getUiModule(language);
+						«Module» mergedModule = «Modules2».mixin(runtimeModule, sharedStateModule, uiModule);
+						return «Guice».createInjector(mergedModule);
+					} catch (Exception e) {
+						logger.error("Failed to create injector for " + language);
+						logger.error(e.getMessage(), e);
+						throw new RuntimeException("Failed to create injector for " + language, e);
+					}
+				}
+			
+				protected Module getRuntimeModule(String grammar) {
+					«FOR grammar : gs»
+						if («grammar.name.toUpperCase.replaceAll('\\.', '_')».equals(grammar)) {
+							return new «grammar.runtimeModule»();
+						}
+					«ENDFOR»
+					throw new IllegalArgumentException(grammar);
+				}
+			
+				protected «Module» getUiModule(String grammar) {
+					«FOR grammar : gs»
+						if («grammar.name.toUpperCase.replaceAll('\\.', '_')».equals(grammar)) {
+							return new «grammar.eclipsePluginModule»(this);
+						}
+					«ENDFOR»
+					throw new IllegalArgumentException(grammar);
+				}
+			
+				protected «Module» getSharedStateModule() {
+					return new «'org.eclipse.xtext.ui.shared.SharedStateModule'»();
+				}
+			
 			}
 		'''
 		javaFile.markedAsGenerated = true

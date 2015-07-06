@@ -13,7 +13,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 @Accessors
 class PluginXmlAccess {
 	
-	String path
+	String path = 'plugin.xml'
 	
 	val List<CharSequence> entries = newArrayList
 	

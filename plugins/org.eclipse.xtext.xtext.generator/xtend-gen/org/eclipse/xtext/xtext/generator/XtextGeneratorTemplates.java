@@ -8,14 +8,17 @@
 package org.eclipse.xtext.xtext.generator;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Maps;
 import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.Module;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.google.inject.name.Names;
 import java.util.List;
+import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
@@ -27,15 +30,19 @@ import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.impl.BinaryGrammarResourceFactoryImpl;
 import org.eclipse.xtext.service.SingletonBinding;
+import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.LanguageConfig2;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.CodeConfig;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
+import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess;
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
@@ -200,6 +207,8 @@ public class XtextGeneratorTemplates {
             _builder.newLineIfNotEmpty();
           }
         }
+        _builder.append("\t\t");
+        _builder.newLine();
         {
           EList<Grammar> _usedGrammars_1 = g.getUsedGrammars();
           boolean _isEmpty = _usedGrammars_1.isEmpty();
@@ -879,6 +888,124 @@ public class XtextGeneratorTemplates {
     return javaFile;
   }
   
+  public TextFileAccess createManifest(final ManifestAccess manifest, final TypeReference activator) {
+    final TextFileAccess file = new TextFileAccess();
+    file.setEncodingProvider(this.encodingProvider);
+    String _path = manifest.getPath();
+    file.setPath(_path);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Manifest-Version: 1.0");
+    _builder.newLine();
+    _builder.append("Bundle-ManifestVersion: 2");
+    _builder.newLine();
+    _builder.append("Bundle-Name: ");
+    String _bundleName = manifest.getBundleName();
+    _builder.append(_bundleName, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append("Bundle-SymbolicName: ");
+    String _elvis = null;
+    String _symbolicName = manifest.getSymbolicName();
+    if (_symbolicName != null) {
+      _elvis = _symbolicName;
+    } else {
+      String _bundleName_1 = manifest.getBundleName();
+      _elvis = _bundleName_1;
+    }
+    _builder.append(_elvis, "");
+    _builder.append("; singleton:=true");
+    _builder.newLineIfNotEmpty();
+    {
+      String _version = manifest.getVersion();
+      boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_version);
+      boolean _not = (!_isNullOrEmpty);
+      if (_not) {
+        _builder.append("Bundle-Version: ");
+        String _version_1 = manifest.getVersion();
+        _builder.append(_version_1, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("Bundle-RequiredExecutionEnvironment: JavaSE-1.6");
+    _builder.newLine();
+    _builder.append("Bundle-ActivationPolicy: lazy");
+    _builder.newLine();
+    {
+      Set<String> _exportedPackages = manifest.getExportedPackages();
+      boolean _isEmpty = _exportedPackages.isEmpty();
+      boolean _not_1 = (!_isEmpty);
+      if (_not_1) {
+        _builder.append("Export-Package: ");
+        {
+          Set<String> _exportedPackages_1 = manifest.getExportedPackages();
+          List<String> _sort = IterableExtensions.<String>sort(_exportedPackages_1);
+          boolean _hasElements = false;
+          for(final String pack : _sort) {
+            if (!_hasElements) {
+              _hasElements = true;
+            } else {
+              _builder.appendImmediate(",\n ", "");
+            }
+            _builder.append(pack, "");
+          }
+        }
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      Set<String> _requiredBundles = manifest.getRequiredBundles();
+      boolean _isEmpty_1 = _requiredBundles.isEmpty();
+      boolean _not_2 = (!_isEmpty_1);
+      if (_not_2) {
+        _builder.append("Require-Bundle: ");
+        {
+          Set<String> _requiredBundles_1 = manifest.getRequiredBundles();
+          List<String> _sort_1 = IterableExtensions.<String>sort(_requiredBundles_1);
+          boolean _hasElements_1 = false;
+          for(final String bundle : _sort_1) {
+            if (!_hasElements_1) {
+              _hasElements_1 = true;
+            } else {
+              _builder.appendImmediate(",\n ", "");
+            }
+            _builder.append(bundle, "");
+          }
+        }
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      Set<String> _importedPackages = manifest.getImportedPackages();
+      boolean _isEmpty_2 = _importedPackages.isEmpty();
+      boolean _not_3 = (!_isEmpty_2);
+      if (_not_3) {
+        _builder.append("Import-Package: ");
+        {
+          Set<String> _importedPackages_1 = manifest.getImportedPackages();
+          List<String> _sort_2 = IterableExtensions.<String>sort(_importedPackages_1);
+          boolean _hasElements_2 = false;
+          for(final String pack_1 : _sort_2) {
+            if (!_hasElements_2) {
+              _hasElements_2 = true;
+            } else {
+              _builder.appendImmediate(",\n ", "");
+            }
+            _builder.append(pack_1, "");
+          }
+        }
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      if ((activator != null)) {
+        _builder.append("Bundle-Activator: ");
+        _builder.append(activator, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    file.setContent(_builder);
+    return file;
+  }
+  
   public JavaFileAccess createEclipsePluginExecutableExtensionFactory(final LanguageConfig2 langConfig) {
     final Grammar g = langConfig.getGrammar();
     TypeReference _eclipsePluginExecutableExtensionFactory = this._xtextGeneratorNaming.getEclipsePluginExecutableExtensionFactory(g);
@@ -954,6 +1081,310 @@ public class XtextGeneratorTemplates {
         _builder.append("}");
         _builder.newLine();
         _builder.append("\t");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+      }
+    };
+    javaFile.setJavaContent(_client);
+    javaFile.setMarkedAsGenerated(true);
+    return javaFile;
+  }
+  
+  public JavaFileAccess createEclipsePluginActivator(final List<LanguageConfig2> langConfigs) {
+    final Function1<LanguageConfig2, Grammar> _function = new Function1<LanguageConfig2, Grammar>() {
+      @Override
+      public Grammar apply(final LanguageConfig2 it) {
+        return it.getGrammar();
+      }
+    };
+    List<Grammar> _map = ListExtensions.<LanguageConfig2, Grammar>map(langConfigs, _function);
+    final List<Grammar> gs = IterableExtensions.<Grammar>toList(_map);
+    Grammar _head = IterableExtensions.<Grammar>head(gs);
+    final TypeReference activator = this._xtextGeneratorNaming.getEclipsePluginActivator(_head);
+    final JavaFileAccess javaFile = new JavaFileAccess(activator, this.codeConfig);
+    javaFile.setEncodingProvider(this.encodingProvider);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("/**");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* This class was generated. Customizations should only happen in a newly");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* introduced subclass. ");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("*/");
+    _builder.newLine();
+    javaFile.setTypeComment(_builder);
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("public class ");
+        String _simpleName = activator.getSimpleName();
+        _builder.append(_simpleName, "");
+        _builder.append(" extends ");
+        _builder.append("org.eclipse.ui.plugin.AbstractUIPlugin", "");
+        _builder.append(" {");
+        _builder.newLineIfNotEmpty();
+        _builder.newLine();
+        {
+          for(final Grammar grammar : gs) {
+            _builder.append("\t");
+            _builder.append("public static final String ");
+            String _name = grammar.getName();
+            String _upperCase = _name.toUpperCase();
+            String _replaceAll = _upperCase.replaceAll("\\.", "_");
+            _builder.append(_replaceAll, "\t");
+            _builder.append(" = \"");
+            String _name_1 = grammar.getName();
+            _builder.append(_name_1, "\t");
+            _builder.append("\";");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        _builder.append("\t");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("private static final Logger logger = Logger.getLogger(");
+        String _simpleName_1 = activator.getSimpleName();
+        _builder.append(_simpleName_1, "\t");
+        _builder.append(".class);");
+        _builder.newLineIfNotEmpty();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("private static ");
+        String _simpleName_2 = activator.getSimpleName();
+        _builder.append(_simpleName_2, "\t");
+        _builder.append(" INSTANCE;");
+        _builder.newLineIfNotEmpty();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("private ");
+        _builder.append("java.util.Map", "\t");
+        _builder.append("<String, ");
+        _builder.append(Injector.class, "\t");
+        _builder.append("> injectors = ");
+        _builder.append("java.util.Collections", "\t");
+        _builder.append(".synchronizedMap(");
+        _builder.append(Maps.class, "\t");
+        _builder.append(".<String, ");
+        _builder.append(Injector.class, "\t");
+        _builder.append("> newHashMapWithExpectedSize(1));");
+        _builder.newLineIfNotEmpty();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("@Override");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("public void start(");
+        _builder.append("org.osgi.framework.BundleContext", "\t");
+        _builder.append(" context) throws Exception {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("super.start(context);");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("INSTANCE = this;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("@Override");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("public void stop(");
+        _builder.append("org.osgi.framework.BundleContext", "\t");
+        _builder.append(" context) throws Exception {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("injectors.clear();");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("INSTANCE = null;");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("super.stop(context);");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("public static ");
+        String _simpleName_3 = activator.getSimpleName();
+        _builder.append(_simpleName_3, "\t");
+        _builder.append(" getInstance() {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("return INSTANCE;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("public ");
+        _builder.append(Injector.class, "\t");
+        _builder.append(" getInjector(String language) {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("synchronized (injectors) {");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append(Injector.class, "\t\t\t");
+        _builder.append(" injector = injectors.get(language);");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t\t");
+        _builder.append("if (injector == null) {");
+        _builder.newLine();
+        _builder.append("\t\t\t\t");
+        _builder.append("injectors.put(language, injector = createInjector(language));");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("return injector;");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("protected ");
+        _builder.append(Injector.class, "\t");
+        _builder.append(" createInjector(String language) {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("try {");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append(Module.class, "\t\t\t");
+        _builder.append(" runtimeModule = getRuntimeModule(language);");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t\t");
+        _builder.append(Module.class, "\t\t\t");
+        _builder.append(" sharedStateModule = getSharedStateModule();");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t\t");
+        _builder.append(Module.class, "\t\t\t");
+        _builder.append(" uiModule = getUiModule(language);");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t\t");
+        _builder.append(Module.class, "\t\t\t");
+        _builder.append(" mergedModule = ");
+        _builder.append(Modules2.class, "\t\t\t");
+        _builder.append(".mixin(runtimeModule, sharedStateModule, uiModule);");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t\t");
+        _builder.append("return ");
+        _builder.append(Guice.class, "\t\t\t");
+        _builder.append(".createInjector(mergedModule);");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("} catch (Exception e) {");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("logger.error(\"Failed to create injector for \" + language);");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("logger.error(e.getMessage(), e);");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("throw new RuntimeException(\"Failed to create injector for \" + language, e);");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("protected Module getRuntimeModule(String grammar) {");
+        _builder.newLine();
+        {
+          for(final Grammar grammar_1 : gs) {
+            _builder.append("\t\t");
+            _builder.append("if (");
+            String _name_2 = grammar_1.getName();
+            String _upperCase_1 = _name_2.toUpperCase();
+            String _replaceAll_1 = _upperCase_1.replaceAll("\\.", "_");
+            _builder.append(_replaceAll_1, "\t\t");
+            _builder.append(".equals(grammar)) {");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("return new ");
+            TypeReference _runtimeModule = XtextGeneratorTemplates.this._xtextGeneratorNaming.getRuntimeModule(grammar_1);
+            _builder.append(_runtimeModule, "\t\t\t");
+            _builder.append("();");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
+        _builder.append("\t\t");
+        _builder.append("throw new IllegalArgumentException(grammar);");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("protected ");
+        _builder.append(Module.class, "\t");
+        _builder.append(" getUiModule(String grammar) {");
+        _builder.newLineIfNotEmpty();
+        {
+          for(final Grammar grammar_2 : gs) {
+            _builder.append("\t\t");
+            _builder.append("if (");
+            String _name_3 = grammar_2.getName();
+            String _upperCase_2 = _name_3.toUpperCase();
+            String _replaceAll_2 = _upperCase_2.replaceAll("\\.", "_");
+            _builder.append(_replaceAll_2, "\t\t");
+            _builder.append(".equals(grammar)) {");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("return new ");
+            TypeReference _eclipsePluginModule = XtextGeneratorTemplates.this._xtextGeneratorNaming.getEclipsePluginModule(grammar_2);
+            _builder.append(_eclipsePluginModule, "\t\t\t");
+            _builder.append("(this);");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
+        _builder.append("\t\t");
+        _builder.append("throw new IllegalArgumentException(grammar);");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("protected ");
+        _builder.append(Module.class, "\t");
+        _builder.append(" getSharedStateModule() {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("return new ");
+        _builder.append("org.eclipse.xtext.ui.shared.SharedStateModule", "\t\t");
+        _builder.append("();");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
         _builder.newLine();
         _builder.append("}");
         _builder.newLine();

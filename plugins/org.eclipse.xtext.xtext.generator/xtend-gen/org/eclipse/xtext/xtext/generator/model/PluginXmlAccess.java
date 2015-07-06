@@ -15,7 +15,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Accessors
 @SuppressWarnings("all")
 public class PluginXmlAccess {
-  private String path;
+  private String path = "plugin.xml";
   
   private final List<CharSequence> entries = CollectionLiterals.<CharSequence>newArrayList();
   

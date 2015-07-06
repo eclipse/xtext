@@ -7,19 +7,32 @@
  */
 package org.eclipse.xtext.xtext.generator;
 
+import com.google.common.base.Objects;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
+import java.util.Set;
+import java.util.jar.Attributes;
 import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent2;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
+import org.eclipse.xtext.util.MergeableManifest;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -34,6 +47,7 @@ import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
+import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
 /**
  * The Xtext language infrastructure generator. Can be configured with {@link IGeneratorFragment}
@@ -52,6 +66,10 @@ public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuice
   private final List<LanguageConfig2> languageConfigs = CollectionLiterals.<LanguageConfig2>newArrayList();
   
   private Injector injector;
+  
+  @Inject
+  @Extension
+  private XtextGeneratorNaming _xtextGeneratorNaming;
   
   @Inject
   private IXtextProjectConfig projectConfig;
@@ -120,6 +138,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuice
     }
     this.generatePluginXmls();
     this.generateManifests();
+    this.generateActivator();
   }
   
   protected void generateRuntimeSetup(final LanguageConfig2 language) {
@@ -165,45 +184,142 @@ public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuice
   }
   
   protected void generateManifests() {
+    LanguageConfig2 _head = IterableExtensions.<LanguageConfig2>head(this.languageConfigs);
+    Grammar _grammar = null;
+    if (_head!=null) {
+      _grammar=_head.getGrammar();
+    }
+    final Grammar firstGrammar = _grammar;
     ManifestAccess _runtimeManifest = this.projectConfig.getRuntimeManifest();
-    if (_runtimeManifest!=null) {
-      _runtimeManifest.generate();
-    }
+    this.generateManifest(_runtimeManifest, null);
     ManifestAccess _runtimeTestManifest = this.projectConfig.getRuntimeTestManifest();
-    if (_runtimeTestManifest!=null) {
-      _runtimeTestManifest.generate();
-    }
+    this.generateManifest(_runtimeTestManifest, null);
     ManifestAccess _genericIdeManifest = this.projectConfig.getGenericIdeManifest();
-    if (_genericIdeManifest!=null) {
-      _genericIdeManifest.generate();
-    }
+    this.generateManifest(_genericIdeManifest, null);
     ManifestAccess _genericIdeTestManifest = this.projectConfig.getGenericIdeTestManifest();
-    if (_genericIdeTestManifest!=null) {
-      _genericIdeTestManifest.generate();
-    }
+    this.generateManifest(_genericIdeTestManifest, null);
     ManifestAccess _eclipsePluginManifest = this.projectConfig.getEclipsePluginManifest();
-    if (_eclipsePluginManifest!=null) {
-      _eclipsePluginManifest.generate();
-    }
+    TypeReference _eclipsePluginActivator = this._xtextGeneratorNaming.getEclipsePluginActivator(firstGrammar);
+    this.generateManifest(_eclipsePluginManifest, _eclipsePluginActivator);
     ManifestAccess _eclipsePluginTestManifest = this.projectConfig.getEclipsePluginTestManifest();
-    if (_eclipsePluginTestManifest!=null) {
-      _eclipsePluginTestManifest.generate();
-    }
+    this.generateManifest(_eclipsePluginTestManifest, null);
     ManifestAccess _ideaPluginManifest = this.projectConfig.getIdeaPluginManifest();
-    if (_ideaPluginManifest!=null) {
-      _ideaPluginManifest.generate();
-    }
+    this.generateManifest(_ideaPluginManifest, null);
     ManifestAccess _ideaPluginTestManifest = this.projectConfig.getIdeaPluginTestManifest();
-    if (_ideaPluginTestManifest!=null) {
-      _ideaPluginTestManifest.generate();
-    }
+    this.generateManifest(_ideaPluginTestManifest, null);
     ManifestAccess _webManifest = this.projectConfig.getWebManifest();
-    if (_webManifest!=null) {
-      _webManifest.generate();
-    }
+    this.generateManifest(_webManifest, null);
     ManifestAccess _webTestManifest = this.projectConfig.getWebTestManifest();
-    if (_webTestManifest!=null) {
-      _webTestManifest.generate();
+    this.generateManifest(_webTestManifest, null);
+  }
+  
+  protected void generateManifest(final ManifestAccess manifest, final TypeReference activator) {
+    try {
+      if ((manifest != null)) {
+        String _bundleName = manifest.getBundleName();
+        boolean _tripleEquals = (_bundleName == null);
+        if (_tripleEquals) {
+          String _path = manifest.getPath();
+          final String[] segments = _path.split("/");
+          boolean _and = false;
+          int _length = segments.length;
+          boolean _greaterEqualsThan = (_length >= 3);
+          if (!_greaterEqualsThan) {
+            _and = false;
+          } else {
+            int _length_1 = segments.length;
+            int _minus = (_length_1 - 2);
+            String _get = segments[_minus];
+            boolean _equals = Objects.equal(_get, "META-INF");
+            _and = _equals;
+          }
+          if (_and) {
+            int _length_2 = segments.length;
+            int _minus_1 = (_length_2 - 3);
+            String _get_1 = segments[_minus_1];
+            manifest.setBundleName(_get_1);
+          }
+        }
+        String _path_1 = manifest.getPath();
+        final File file = new File(_path_1);
+        boolean _exists = file.exists();
+        if (_exists) {
+          boolean _isMerge = manifest.isMerge();
+          if (_isMerge) {
+            this.mergeManifest(manifest, file, activator);
+          } else {
+            String _path_2 = manifest.getPath();
+            boolean _endsWith = _path_2.endsWith(".MF");
+            if (_endsWith) {
+              String _path_3 = manifest.getPath();
+              String _plus = (_path_3 + "_gen");
+              manifest.setPath(_plus);
+              TextFileAccess _createManifest = this.templates.createManifest(manifest, activator);
+              _createManifest.writeToFile();
+            }
+          }
+        } else {
+          TextFileAccess _createManifest_1 = this.templates.createManifest(manifest, activator);
+          _createManifest_1.writeToFile();
+        }
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected void generateActivator() {
+    IFileSystemAccess2 _eclipsePluginSrcGen = this.projectConfig.getEclipsePluginSrcGen();
+    boolean _tripleNotEquals = (_eclipsePluginSrcGen != null);
+    if (_tripleNotEquals) {
+      JavaFileAccess _createEclipsePluginActivator = this.templates.createEclipsePluginActivator(this.languageConfigs);
+      IFileSystemAccess2 _eclipsePluginSrcGen_1 = this.projectConfig.getEclipsePluginSrcGen();
+      _createEclipsePluginActivator.writeTo(_eclipsePluginSrcGen_1);
+    }
+  }
+  
+  protected void mergeManifest(final ManifestAccess manifest, final File file, final TypeReference activator) throws IOException {
+    InputStream in = null;
+    OutputStream out = null;
+    try {
+      FileInputStream _fileInputStream = new FileInputStream(file);
+      in = _fileInputStream;
+      String _bundleName = manifest.getBundleName();
+      final MergeableManifest merge = new MergeableManifest(in, _bundleName);
+      Set<String> _exportedPackages = manifest.getExportedPackages();
+      merge.addExportedPackages(_exportedPackages);
+      Set<String> _requiredBundles = manifest.getRequiredBundles();
+      merge.addRequiredBundles(_requiredBundles);
+      Set<String> _importedPackages = manifest.getImportedPackages();
+      merge.addImportedPackages(_importedPackages);
+      boolean _and = false;
+      if (!(activator != null)) {
+        _and = false;
+      } else {
+        Attributes _mainAttributes = merge.getMainAttributes();
+        boolean _containsKey = _mainAttributes.containsKey(MergeableManifest.BUNDLE_ACTIVATOR);
+        boolean _not = (!_containsKey);
+        _and = _not;
+      }
+      if (_and) {
+        Attributes _mainAttributes_1 = merge.getMainAttributes();
+        String _name = activator.getName();
+        _mainAttributes_1.put(MergeableManifest.BUNDLE_ACTIVATOR, _name);
+      }
+      boolean _isModified = merge.isModified();
+      if (_isModified) {
+        FileOutputStream _fileOutputStream = new FileOutputStream(file);
+        out = _fileOutputStream;
+        merge.write(out);
+      }
+    } finally {
+      if ((in != null)) {
+        in.close();
+      }
+      boolean _notEquals = (!Objects.equal(out, null));
+      if (_notEquals) {
+        out.close();
+      }
     }
   }
   
@@ -231,24 +347,28 @@ public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuice
   }
   
   protected void generatePluginXml(final PluginXmlAccess pluginXml) {
-    if ((pluginXml != null)) {
-      String _path = pluginXml.getPath();
-      File _file = new File(_path);
-      boolean _exists = _file.exists();
-      if (_exists) {
-        String _path_1 = pluginXml.getPath();
-        boolean _endsWith = _path_1.endsWith(".xml");
-        if (_endsWith) {
-          String _path_2 = pluginXml.getPath();
-          String _plus = (_path_2 + "_gen");
-          pluginXml.setPath(_plus);
-          TextFileAccess _createPluginXml = this.templates.createPluginXml(pluginXml);
-          _createPluginXml.writeToFile();
+    try {
+      if ((pluginXml != null)) {
+        String _path = pluginXml.getPath();
+        File _file = new File(_path);
+        boolean _exists = _file.exists();
+        if (_exists) {
+          String _path_1 = pluginXml.getPath();
+          boolean _endsWith = _path_1.endsWith(".xml");
+          if (_endsWith) {
+            String _path_2 = pluginXml.getPath();
+            String _plus = (_path_2 + "_gen");
+            pluginXml.setPath(_plus);
+            TextFileAccess _createPluginXml = this.templates.createPluginXml(pluginXml);
+            _createPluginXml.writeToFile();
+          }
+        } else {
+          TextFileAccess _createPluginXml_1 = this.templates.createPluginXml(pluginXml);
+          _createPluginXml_1.writeToFile();
         }
-      } else {
-        TextFileAccess _createPluginXml_1 = this.templates.createPluginXml(pluginXml);
-        _createPluginXml_1.writeToFile();
       }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
