@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server.persistence
 
+import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.io.IOException
 import org.eclipse.xtext.web.server.ISessionStore
@@ -24,6 +25,8 @@ import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess
 @Singleton
 class ResourcePersistenceService {
 	
+	@Inject XtextWebDocumentAccess.Factory documentAccessFactory
+	
 	/**
 	 * Load the content of a document.
 	 */
@@ -36,7 +39,7 @@ class ResourcePersistenceService {
 				throw new ResourceNotFoundException('The requested resource was not found.', ioe)
 			}
 		])
-		new XtextWebDocumentAccess(document).readOnly[ it, cancelIndicator |
+		documentAccessFactory.create(document, false).readOnly[ it, cancelIndicator |
 			val result = new ResourceContentResult(text)
 			result.dirty = dirty
 			result.stateId = stateId

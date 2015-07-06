@@ -27,10 +27,8 @@ import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
-import org.eclipse.xtext.web.server.model.UpdateDocumentService;
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess;
 import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -54,10 +52,6 @@ public class ContentAssistService {
   
   @Inject
   private ExecutorService executorService;
-  
-  @Inject
-  @Extension
-  private UpdateDocumentService _updateDocumentService;
   
   /**
    * Create content assist proposals at the given caret offset. This document read operation
@@ -88,14 +82,7 @@ public class ContentAssistService {
         return _xblockexpression;
       }
     };
-    final CancelableUnitOfWork<ContentAssistContext[], IXtextWebDocument> _function_2 = new CancelableUnitOfWork<ContentAssistContext[], IXtextWebDocument>() {
-      @Override
-      public ContentAssistContext[] exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
-        ContentAssistService.this._updateDocumentService.processUpdatedDocument(it, cancelIndicator);
-        return null;
-      }
-    };
-    final ContentAssistContext[] contexts = document.<ContentAssistContext[]>priorityReadOnly(_function_1, _function_2);
+    final ContentAssistContext[] contexts = document.<ContentAssistContext[]>priorityReadOnly(_function_1, null);
     String _get_1 = stateIdWrapper[0];
     return this.createProposals(((List<ContentAssistContext>)Conversions.doWrapArray(contexts)), _get_1, proposalsLimit);
   }
@@ -121,7 +108,6 @@ public class ContentAssistService {
         ContentAssistContext[] _xblockexpression = null;
         {
           it.setDirty(true);
-          it.setProcessingCompleted(false);
           it.createNewStateId();
           String _stateId = it.getStateId();
           stateIdWrapper[0] = _stateId;
@@ -133,14 +119,7 @@ public class ContentAssistService {
         return _xblockexpression;
       }
     };
-    final CancelableUnitOfWork<Object, IXtextWebDocument> _function_2 = new CancelableUnitOfWork<Object, IXtextWebDocument>() {
-      @Override
-      public Object exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
-        ContentAssistService.this._updateDocumentService.processUpdatedDocument(it, cancelIndicator);
-        return null;
-      }
-    };
-    final ContentAssistContext[] contexts = document.<ContentAssistContext[]>modify(_function_1, _function_2);
+    final ContentAssistContext[] contexts = document.<ContentAssistContext[]>modify(_function_1);
     String _get_1 = stateIdWrapper[0];
     return this.createProposals(((List<ContentAssistContext>)Conversions.doWrapArray(contexts)), _get_1, proposalsLimit);
   }

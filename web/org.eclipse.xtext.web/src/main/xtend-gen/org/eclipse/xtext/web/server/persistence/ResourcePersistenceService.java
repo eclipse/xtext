@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.web.server.persistence;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.io.IOException;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -31,6 +32,9 @@ import org.eclipse.xtext.xbase.lib.Pair;
 @Singleton
 @SuppressWarnings("all")
 public class ResourcePersistenceService {
+  @Inject
+  private XtextWebDocumentAccess.Factory documentAccessFactory;
+  
   /**
    * Load the content of a document.
    */
@@ -56,7 +60,7 @@ public class ResourcePersistenceService {
         }
       };
       final XtextWebDocument document = sessionStore.<XtextWebDocument>get(_mappedTo, _function);
-      XtextWebDocumentAccess _xtextWebDocumentAccess = new XtextWebDocumentAccess(document);
+      XtextWebDocumentAccess _create = this.documentAccessFactory.create(document, false);
       final CancelableUnitOfWork<ResourceContentResult, IXtextWebDocument> _function_1 = new CancelableUnitOfWork<ResourceContentResult, IXtextWebDocument>() {
         @Override
         public ResourceContentResult exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
@@ -69,7 +73,7 @@ public class ResourcePersistenceService {
           return result;
         }
       };
-      _xblockexpression = _xtextWebDocumentAccess.<ResourceContentResult>readOnly(_function_1);
+      _xblockexpression = _create.<ResourceContentResult>readOnly(_function_1);
     }
     return _xblockexpression;
   }

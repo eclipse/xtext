@@ -39,7 +39,7 @@ class DocumentSynchronizer implements CancelIndicator {
   private ExecutorService executorService;
   
   @Accessors
-  private boolean canceled;
+  private volatile boolean canceled;
   
   public Boolean acquireLock(final boolean priority) {
     try {

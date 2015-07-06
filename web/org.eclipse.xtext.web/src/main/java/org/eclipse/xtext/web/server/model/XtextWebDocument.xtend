@@ -8,19 +8,18 @@
 package org.eclipse.xtext.web.server.model
 
 import com.google.inject.Inject
-import java.util.List
+import java.util.Map
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.resource.XtextResource
-import org.eclipse.xtext.validation.Issue
+import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtext.util.internal.Log
+import org.eclipse.xtext.web.server.IServiceResult
 
 /**
  * Container for an {@link XtextResource}.
  */
-class XtextWebDocument implements IXtextWebDocument {
+@Log class XtextWebDocument implements IXtextWebDocument {
 	
-	@Accessors(PUBLIC_GETTER)
-	val List<Issue> issues = newArrayList
-
 	@Accessors(PUBLIC_GETTER)
 	String resourceId
 	
@@ -33,11 +32,24 @@ class XtextWebDocument implements IXtextWebDocument {
 	@Accessors
 	boolean dirty
 	
-	@Accessors
-	boolean processingCompleted
-	
 	@Accessors(PACKAGE_GETTER)
     @Inject DocumentSynchronizer synchronizer
+    
+    Map<Class<?>, IServiceResult> cachedServiceResults = newHashMap
+
+	protected def clearCachedServiceResults() {
+		cachedServiceResults.clear
+	}
+	
+	protected def <T extends IServiceResult> T getCachedServiceResult(AbstractPreComputedService<T> service, CancelIndicator cancelIndicator, boolean logCacheMiss) {
+		cachedServiceResults.get(service.class) as T ?: {
+			if(logCacheMiss)
+				LOG.trace("Cache miss for " + service.class.simpleName)
+			val result = service.compute(this, cancelIndicator)
+			cachedServiceResults.put(service.class, result)
+			result
+		}
+	}
     
 	override toString() {
 		if (resourceId !== null) {
@@ -47,13 +59,13 @@ class XtextWebDocument implements IXtextWebDocument {
 	}
 	
 	def setInput(XtextResource resource, String resourceId) {
+		clearCachedServiceResults
 		this.resource = resource
 		this.resourceId = resourceId
-		refresh()
+		refreshText
 	}
 	
-	protected def refresh() {
-		issues.clear()
+	protected def refreshText() {
 		text = resource.parseResult?.rootNode?.text ?: ''
 	}
 	
@@ -62,13 +74,15 @@ class XtextWebDocument implements IXtextWebDocument {
 	}
 		
 	override setText(String text) {
+		clearCachedServiceResults
 		resource.reparse(text)
-		refresh()
+		refreshText
 	}
 	
 	override updateText(String text, int offset, int replaceLength) {
+		clearCachedServiceResults
 		resource.update(offset, replaceLength, text)
-		refresh()
+		refreshText
 	}
 	
 	override createNewStateId() {

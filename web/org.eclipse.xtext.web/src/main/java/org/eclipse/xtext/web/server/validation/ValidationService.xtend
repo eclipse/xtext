@@ -10,29 +10,29 @@ package org.eclipse.xtext.web.server.validation
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.xtext.diagnostics.Severity
-import org.eclipse.xtext.web.server.InvalidRequestException
+import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtext.validation.CheckMode
+import org.eclipse.xtext.validation.IResourceValidator
+import org.eclipse.xtext.web.server.model.AbstractPreComputedService
+import org.eclipse.xtext.web.server.model.IXtextWebDocument
 import org.eclipse.xtext.web.server.model.UpdateDocumentService
-import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess
 
 /**
  * Service class for model validation.
  */
 @Singleton
-class ValidationService {
+class ValidationService extends AbstractPreComputedService<ValidationResult> {
 	
-	@Inject extension UpdateDocumentService
-	
+	@Inject IResourceValidator resourceValidator
+
 	/**
 	 * Return the validation result for the given document. The actual validation may have
 	 * been computed as part of the background work scheduled after another service request,
 	 * e.g. {@link UpdateDocumentService}. If that background processing has not been done
 	 * yet, it is executed and then the validation issues are collected.
 	 */
-	def ValidationResult validate(XtextWebDocumentAccess document) throws InvalidRequestException {
-		val issues = document.readOnly[ it, cancelIndicator |
-			processUpdatedDocument(cancelIndicator)
-			return issues
-		]
+	override compute(IXtextWebDocument it, CancelIndicator cancelIndicator) {
+		val issues = resourceValidator.validate(resource, CheckMode.ALL, cancelIndicator)
 		val result = new ValidationResult
 		issues.filter[severity != Severity.IGNORE].forEach[ issue |
 			result.entries += new ValidationResult.Entry(issue.message, issue.severity.translate,
@@ -49,5 +49,4 @@ class ValidationService {
 			default: "ignore"
 		}
 	}
-	
 }

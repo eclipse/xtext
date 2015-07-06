@@ -54,7 +54,7 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
     
     private long sleepTime;
     
-    private boolean canceled;
+    private volatile boolean canceled;
     
     private int entryCounter;
     
@@ -73,13 +73,11 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
           }
           final long startTime = System.currentTimeMillis();
           while (((((System.currentTimeMillis() - startTime) < this.sleepTime) && (!mon.isCanceled())) && (!this.workerThread.isInterrupted()))) {
-            {
-              Thread.sleep(30);
-              boolean _isCanceled = mon.isCanceled();
-              if (_isCanceled) {
-                this.canceled = true;
-              }
-            }
+            Thread.sleep(30);
+          }
+          boolean _isCanceled = mon.isCanceled();
+          if (_isCanceled) {
+            this.canceled = true;
           }
           synchronized (this) {
             this.exitCounter++;
@@ -115,7 +113,7 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
           {
             long _currentTimeMillis = System.currentTimeMillis();
             long _minus = (_currentTimeMillis - startTime);
-            boolean _lessThan = (_minus < 3000);
+            boolean _lessThan = (_minus < 8000);
             Assert.assertTrue(_lessThan);
             this.wait(3000);
           }
@@ -289,7 +287,7 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
   
   @Test
   public void testCancelBackgroundWork1() {
-    this.resourceValidator.reset(3000);
+    this.resourceValidator.reset(300);
     final File file = this.createFile("input signal x state foo end");
     final HashMapSessionStore sessionStore = new HashMapSessionStore();
     Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "update");
@@ -348,7 +346,7 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
   
   @Test
   public void testCancelBackgroundWork2() {
-    this.resourceValidator.reset(3000);
+    this.resourceValidator.reset(300);
     final File file = this.createFile("input signal x state foo end");
     final HashMapSessionStore sessionStore = new HashMapSessionStore();
     Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "update");

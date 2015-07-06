@@ -217,6 +217,9 @@ public class XtextServiceDispatcher {
   @Inject
   private OperationCanceledManager operationCanceledManager;
   
+  @Inject
+  private XtextWebDocumentAccess.Factory documentAccessFactory;
+  
   /**
    * Get the service descriptor for the given request.
    */
@@ -471,7 +474,7 @@ public class XtextServiceDispatcher {
       document = _fullTextDocument;
     }
     String _parameter = request.getParameter("requiredStateId");
-    final XtextWebDocumentAccess documentAccess = new XtextWebDocumentAccess(document, _parameter);
+    final XtextWebDocumentAccess documentAccess = this.documentAccessFactory.create(document, _parameter, initializedFromFullText);
     XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
     final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
       @Override
@@ -662,7 +665,7 @@ public class XtextServiceDispatcher {
             public IServiceResult apply() {
               IServiceResult _xtrycatchfinallyexpression = null;
               try {
-                _xtrycatchfinallyexpression = XtextServiceDispatcher.this.validationService.validate(document);
+                _xtrycatchfinallyexpression = XtextServiceDispatcher.this.validationService.getResult(document);
               } catch (final Throwable _t) {
                 if (_t instanceof Throwable) {
                   final Throwable throwable = (Throwable)_t;
@@ -736,7 +739,7 @@ public class XtextServiceDispatcher {
             public IServiceResult apply() {
               IServiceResult _xtrycatchfinallyexpression = null;
               try {
-                _xtrycatchfinallyexpression = XtextServiceDispatcher.this.highlightingService.calculateHighlighting(document);
+                _xtrycatchfinallyexpression = XtextServiceDispatcher.this.highlightingService.getResult(document);
               } catch (final Throwable _t) {
                 if (_t instanceof Throwable) {
                   final Throwable throwable = (Throwable)_t;
@@ -887,12 +890,14 @@ public class XtextServiceDispatcher {
    */
   protected XtextWebDocumentAccess getDocumentAccess(final IRequestData request, final ISessionStore sessionStore) throws InvalidRequestException {
     XtextWebDocument document = null;
+    boolean initializedFromFullText = false;
     Set<String> _parameterKeys = request.getParameterKeys();
     boolean _contains = _parameterKeys.contains("fullText");
     if (_contains) {
       String _parameter = request.getParameter("fullText");
       XtextWebDocument _fullTextDocument = this.getFullTextDocument(_parameter, null, sessionStore);
       document = _fullTextDocument;
+      initializedFromFullText = true;
     } else {
       Set<String> _parameterKeys_1 = request.getParameterKeys();
       boolean _contains_1 = _parameterKeys_1.contains("resource");
@@ -908,7 +913,7 @@ public class XtextServiceDispatcher {
       }
     }
     String _parameter_2 = request.getParameter("requiredStateId");
-    return new XtextWebDocumentAccess(document, _parameter_2);
+    return this.documentAccessFactory.create(document, _parameter_2, initializedFromFullText);
   }
   
   /**
