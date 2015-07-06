@@ -1,0 +1,15 @@
+grammar org.eclipse.xtext.xbase.testlanguages.ContentAssistFragmentTestLang with org.eclipse.xtext.xbase.Xbase
+
+generate contentAssistFragmentTestLang "http://www.eclipse.org/xtext/xbase/testlanguages/ContentAssistFragmentTestLang"
+
+import "http://www.eclipse.org/xtext/xbase/Xbase"
+
+ContentAssistFragmentTestLanguageRoot:
+	expression=XExpression;
+
+// To test bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=471434
+// we need to override one of the Xbase's rules
+// even if we don't change its syntax
+XVariableDeclaration returns XVariableDeclaration:
+	{XVariableDeclaration}
+	(writeable?='var'|'val') (=>(type=JvmTypeReference name=ValidID) | name=ValidID) ('=' right=XExpression)?;
