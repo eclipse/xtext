@@ -7,9 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server.model
 
-import java.util.Collection
 import org.eclipse.xtext.resource.XtextResource
-import org.eclipse.xtext.validation.Issue
 
 /**
  * Interface for accessing a document. Depending on the access type, some methods may not be supported.
@@ -24,11 +22,7 @@ interface IXtextWebDocument {
 	
 	def String getStateId()
 	
-	def Collection<Issue> getIssues()
-	
 	def boolean isDirty()
-	
-	def boolean isProcessingCompleted()
 	
 	def void setText(String text)
 	
@@ -37,7 +31,4 @@ interface IXtextWebDocument {
 	def void updateText(String text, int offset, int replaceLength)
 	
 	def void setDirty(boolean dirty)
-	
-	def void setProcessingCompleted(boolean completed)
-	
 }

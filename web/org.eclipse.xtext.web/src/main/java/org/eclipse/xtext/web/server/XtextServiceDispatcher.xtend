@@ -110,6 +110,7 @@ class XtextServiceDispatcher {
 	@Inject FileExtensionProvider fileExtensionProvider
 	@Inject IResourceFactory resourceFactory
 	@Inject OperationCanceledManager operationCanceledManager
+	@Inject XtextWebDocumentAccess.Factory documentAccessFactory
 	
 	/**
 	 * Get the service descriptor for the given request.
@@ -230,7 +231,7 @@ class XtextServiceDispatcher {
 			// If the resource does not exist, create a dummy resource for the given full text
 			document = getFullTextDocument(fullText, resourceId, sessionStore)
 		}
-		val documentAccess = new XtextWebDocumentAccess(document, request.getParameter('requiredStateId'))
+		val documentAccess = documentAccessFactory.create(document, request.getParameter('requiredStateId'), initializedFromFullText)
 		val result = new ServiceDescriptor => [
 			hasSideEffects = true
 			hasTextInput = true
@@ -322,7 +323,7 @@ class XtextServiceDispatcher {
 		new ServiceDescriptor => [
 			service = [
 				try {
-					validationService.validate(document)
+					validationService.getResult(document)
 				} catch (Throwable throwable) {
 					handleError(throwable)
 				}
@@ -353,7 +354,7 @@ class XtextServiceDispatcher {
 		new ServiceDescriptor => [
 			service = [
 				try {
-					highlightingService.calculateHighlighting(document)
+					highlightingService.getResult(document)
 				} catch (Throwable throwable) {
 					handleError(throwable)
 				}
@@ -422,8 +423,10 @@ class XtextServiceDispatcher {
 	protected def getDocumentAccess(IRequestData request, ISessionStore sessionStore)
 			throws InvalidRequestException {
 		var XtextWebDocument document
+		var initializedFromFullText = false
 		if (request.parameterKeys.contains('fullText')) {
 			document = getFullTextDocument(request.getParameter('fullText'), null, sessionStore)
+			initializedFromFullText = true
 		} else if (request.parameterKeys.contains('resource')) {
 			document = getResourceDocument(request.getParameter('resource'), sessionStore)
 			if (document === null)
@@ -431,7 +434,7 @@ class XtextServiceDispatcher {
 		} else {
 			throw new InvalidParametersException('At least one of the parameters \'resource\' and \'fullText\' must be specified.')
 		}
-		return new XtextWebDocumentAccess(document, request.getParameter('requiredStateId'))
+		return documentAccessFactory.create(document, request.getParameter('requiredStateId'), initializedFromFullText)
 	}
 	
 	/**
