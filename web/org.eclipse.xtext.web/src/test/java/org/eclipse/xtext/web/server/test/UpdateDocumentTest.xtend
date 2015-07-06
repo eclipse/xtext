@@ -295,4 +295,29 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 		assertEquals('input signal x state bar set x =  end', loadResult.fullText)
 	}
 	
+	@Test def testNoPreComputationOnFullText() {
+		resourceValidator.reset(0)
+		val file = createFile('')
+		val sessionStore = new HashMapSessionStore
+		getService(#{
+			'requestType' -> 'update',
+			'resource' -> file.name,
+			'fullText' -> 'input signal x state foo end'
+		}, sessionStore).service.apply
+		getService(#{
+			'requestType' -> 'update',
+			'resource' -> file.name,
+			'fullText' -> 'input signal x state foo end'
+		}, sessionStore).service.apply
+		assertEquals(0, resourceValidator.entryCounter)
+		getService(#{
+			'requestType' -> 'update',
+			'resource' -> file.name,
+			'deltaText' -> 'bar',
+			'deltaOffset' -> '6',
+			'deltaReplaceLength' -> '3'
+		}, sessionStore).service.apply
+		resourceValidator.waitUntil[entryCounter == 1]
+	}
+	
 }
