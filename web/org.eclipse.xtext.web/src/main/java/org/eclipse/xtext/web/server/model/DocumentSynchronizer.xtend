@@ -34,7 +34,7 @@ package class DocumentSynchronizer implements CancelIndicator {
     @Inject ExecutorService executorService
     
 	@Accessors
-    boolean canceled
+    volatile boolean canceled
     
     def acquireLock(boolean priority) {
     	if (priority) {

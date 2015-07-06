@@ -20,7 +20,6 @@ import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory
 import org.eclipse.xtext.util.ITextRegion
 import org.eclipse.xtext.web.server.InvalidRequestException
-import org.eclipse.xtext.web.server.model.UpdateDocumentService
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess
 
 /**
@@ -37,8 +36,6 @@ class ContentAssistService {
 	
 	@Inject ExecutorService executorService
 	
-	@Inject extension UpdateDocumentService
-	
 	/**
 	 * Create content assist proposals at the given caret offset. This document read operation
 	 * is scheduled with higher priority, so currently running operations may be canceled.
@@ -51,10 +48,7 @@ class ContentAssistService {
 		val contexts = document.priorityReadOnly([ it, cancelIndicator |
 			stateIdWrapper.set(0, stateId)
 			contextFactory.create(text, selection, offset, resource)
-		], [ it, cancelIndicator |
-			processUpdatedDocument(cancelIndicator)
-			return null
-		])
+		], null)
 		return createProposals(contexts, stateIdWrapper.get(0), proposalsLimit)
 	}
 	
@@ -68,17 +62,13 @@ class ContentAssistService {
 			throws InvalidRequestException {
 		val contextFactory = contextFactoryProvider.get() => [it.pool = executorService]
 		val stateIdWrapper = ArrayLiterals.newArrayOfSize(1)
-		val contexts = document.modify([ it, cancelIndicator |
+		val contexts = document.modify [ it, cancelIndicator |
 			dirty = true
-			processingCompleted = false
 			createNewStateId()
 			stateIdWrapper.set(0, stateId)
 			updateText(deltaText, deltaOffset, deltaReplaceLength)
 			contextFactory.create(text, textSelection, caretOffset, resource)
-		], [ it, cancelIndicator |
-			processUpdatedDocument(cancelIndicator)
-			return null
-		])
+		]
 		return createProposals(contexts, stateIdWrapper.get(0), proposalsLimit)
 	}
 	

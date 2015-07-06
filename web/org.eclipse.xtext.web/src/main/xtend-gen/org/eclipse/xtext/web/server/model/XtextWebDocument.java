@@ -8,13 +8,17 @@
 package org.eclipse.xtext.web.server.model;
 
 import com.google.inject.Inject;
-import java.util.List;
+import java.util.Map;
+import org.apache.log4j.Logger;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.internal.Log;
+import org.eclipse.xtext.web.server.IServiceResult;
+import org.eclipse.xtext.web.server.model.AbstractPreComputedService;
 import org.eclipse.xtext.web.server.model.DocumentSynchronizer;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -24,11 +28,9 @@ import org.eclipse.xtext.xbase.lib.Pure;
 /**
  * Container for an {@link XtextResource}.
  */
+@Log
 @SuppressWarnings("all")
 public class XtextWebDocument implements IXtextWebDocument {
-  @Accessors(AccessorType.PUBLIC_GETTER)
-  private final List<Issue> issues = CollectionLiterals.<Issue>newArrayList();
-  
   @Accessors(AccessorType.PUBLIC_GETTER)
   private String resourceId;
   
@@ -41,12 +43,40 @@ public class XtextWebDocument implements IXtextWebDocument {
   @Accessors
   private boolean dirty;
   
-  @Accessors
-  private boolean processingCompleted;
-  
   @Accessors(AccessorType.PACKAGE_GETTER)
   @Inject
   private DocumentSynchronizer synchronizer;
+  
+  private Map<Class<?>, IServiceResult> cachedServiceResults = CollectionLiterals.<Class<?>, IServiceResult>newHashMap();
+  
+  protected void clearCachedServiceResults() {
+    this.cachedServiceResults.clear();
+  }
+  
+  protected <T extends IServiceResult> T getCachedServiceResult(final AbstractPreComputedService<T> service, final CancelIndicator cancelIndicator, final boolean logCacheMiss) {
+    T _elvis = null;
+    Class<? extends AbstractPreComputedService> _class = service.getClass();
+    IServiceResult _get = this.cachedServiceResults.get(_class);
+    if (((T) _get) != null) {
+      _elvis = ((T) _get);
+    } else {
+      T _xblockexpression = null;
+      {
+        if (logCacheMiss) {
+          Class<? extends AbstractPreComputedService> _class_1 = service.getClass();
+          String _simpleName = _class_1.getSimpleName();
+          String _plus = ("Cache miss for " + _simpleName);
+          XtextWebDocument.LOG.trace(_plus);
+        }
+        final T result = service.compute(this, cancelIndicator);
+        Class<? extends AbstractPreComputedService> _class_2 = service.getClass();
+        this.cachedServiceResults.put(_class_2, result);
+        _xblockexpression = result;
+      }
+      _elvis = _xblockexpression;
+    }
+    return _elvis;
+  }
   
   @Override
   public String toString() {
@@ -67,35 +97,31 @@ public class XtextWebDocument implements IXtextWebDocument {
   public String setInput(final XtextResource resource, final String resourceId) {
     String _xblockexpression = null;
     {
+      this.clearCachedServiceResults();
       this.resource = resource;
       this.resourceId = resourceId;
-      _xblockexpression = this.refresh();
+      _xblockexpression = this.refreshText();
     }
     return _xblockexpression;
   }
   
-  protected String refresh() {
-    String _xblockexpression = null;
-    {
-      this.issues.clear();
-      String _elvis = null;
-      IParseResult _parseResult = this.resource.getParseResult();
-      ICompositeNode _rootNode = null;
-      if (_parseResult!=null) {
-        _rootNode=_parseResult.getRootNode();
-      }
-      String _text = null;
-      if (_rootNode!=null) {
-        _text=_rootNode.getText();
-      }
-      if (_text != null) {
-        _elvis = _text;
-      } else {
-        _elvis = "";
-      }
-      _xblockexpression = this.text = _elvis;
+  protected String refreshText() {
+    String _elvis = null;
+    IParseResult _parseResult = this.resource.getParseResult();
+    ICompositeNode _rootNode = null;
+    if (_parseResult!=null) {
+      _rootNode=_parseResult.getRootNode();
     }
-    return _xblockexpression;
+    String _text = null;
+    if (_rootNode!=null) {
+      _text=_rootNode.getText();
+    }
+    if (_text != null) {
+      _elvis = _text;
+    } else {
+      _elvis = "";
+    }
+    return this.text = _elvis;
   }
   
   @Override
@@ -107,8 +133,9 @@ public class XtextWebDocument implements IXtextWebDocument {
   @Override
   public void setText(final String text) {
     try {
+      this.clearCachedServiceResults();
       this.resource.reparse(text);
-      this.refresh();
+      this.refreshText();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -116,8 +143,9 @@ public class XtextWebDocument implements IXtextWebDocument {
   
   @Override
   public void updateText(final String text, final int offset, final int replaceLength) {
+    this.clearCachedServiceResults();
     this.resource.update(offset, replaceLength, text);
-    this.refresh();
+    this.refreshText();
   }
   
   @Override
@@ -127,10 +155,7 @@ public class XtextWebDocument implements IXtextWebDocument {
     this.resource.setModificationStamp(newStateId);
   }
   
-  @Pure
-  public List<Issue> getIssues() {
-    return this.issues;
-  }
+  private final static Logger LOG = Logger.getLogger(XtextWebDocument.class);
   
   @Pure
   public String getResourceId() {
@@ -154,15 +179,6 @@ public class XtextWebDocument implements IXtextWebDocument {
   
   public void setDirty(final boolean dirty) {
     this.dirty = dirty;
-  }
-  
-  @Pure
-  public boolean isProcessingCompleted() {
-    return this.processingCompleted;
-  }
-  
-  public void setProcessingCompleted(final boolean processingCompleted) {
-    this.processingCompleted = processingCompleted;
   }
   
   @Pure

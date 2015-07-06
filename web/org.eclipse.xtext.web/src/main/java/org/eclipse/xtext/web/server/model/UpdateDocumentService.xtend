@@ -7,11 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server.model
 
-import com.google.inject.Inject
 import com.google.inject.Singleton
-import org.eclipse.xtext.util.CancelIndicator
-import org.eclipse.xtext.validation.CheckMode
-import org.eclipse.xtext.validation.IResourceValidator
 import org.eclipse.xtext.web.server.InvalidRequestException
 
 /**
@@ -23,8 +19,6 @@ import org.eclipse.xtext.web.server.InvalidRequestException
 @Singleton
 class UpdateDocumentService {
 	
-	@Inject IResourceValidator resourceValidator
-	
 	/**
 	 * Update the state identifier and return it. A background process is started where the given text
 	 * is assigned to the document and {@link #processUpdatedDocument(IXtextWebDocument, CancelIndicator)}
@@ -34,12 +28,10 @@ class UpdateDocumentService {
 			throws InvalidRequestException {
 		document.modify([ it, cancelIndicator |
 			dirty = true
-			processingCompleted = false
 			createNewStateId()
 			return new DocumentStateResult(stateId)
 		], [ it, cancelIndicator |
 			text = fullText
-			processUpdatedDocument(cancelIndicator)
 			return null
 		])
 	}
@@ -53,12 +45,10 @@ class UpdateDocumentService {
 			throws InvalidRequestException {
 		document.modify([ it, cancelIndicator |
 			dirty = true
-			processingCompleted = false
 			createNewStateId()
 			return new DocumentStateResult(stateId)
 		], [ it, cancelIndicator |
 			updateText(deltaText, offset, replaceLength)
-			processUpdatedDocument(cancelIndicator)
 			return null
 		])
 	}
@@ -69,22 +59,8 @@ class UpdateDocumentService {
 	 */
 	def DocumentStateResult getStateId(XtextWebDocumentAccess document)
 			throws InvalidRequestException {
-		document.modify([ it, cancelIndicator |
+		document.modify [ it, cancelIndicator |
 			return new DocumentStateResult(stateId)
-		], [ it, cancelIndicator |
-			processUpdatedDocument(cancelIndicator)
-			return null
-		])
-	}
-	
-	/**
-	 * Perform additional document processing if it has not already been done for the current document state.
-	 */
-	def void processUpdatedDocument(IXtextWebDocument it, CancelIndicator cancelIndicator) {
-		if (!processingCompleted) {
-			issues.addAll(resourceValidator.validate(resource, CheckMode.ALL, cancelIndicator))
-			processingCompleted = true
-		}
-	}
-	
+		]
+	}	
 }

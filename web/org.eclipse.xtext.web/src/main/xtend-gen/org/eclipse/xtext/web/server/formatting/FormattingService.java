@@ -30,10 +30,8 @@ import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.formatting.FormattingResult;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
-import org.eclipse.xtext.web.server.model.UpdateDocumentService;
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Extension;
 
 /**
  * Service class for text formatting.
@@ -41,10 +39,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 @Singleton
 @SuppressWarnings("all")
 public class FormattingService {
-  @Inject
-  @Extension
-  private UpdateDocumentService _updateDocumentService;
-  
   @Inject(optional = true)
   private INodeModelFormatter formatter1;
   
@@ -79,7 +73,6 @@ public class FormattingService {
             }
           }
           it.setDirty(true);
-          it.setProcessingCompleted(false);
           it.createNewStateId();
           textWrapper[0] = formattedText;
           String _stateId = it.getStateId();
@@ -98,7 +91,6 @@ public class FormattingService {
             int _length = selection.getLength();
             it.updateText(_get_1, _offset, _length);
           }
-          FormattingService.this._updateDocumentService.processUpdatedDocument(it, cancelIndicator);
           return null;
         }
       };

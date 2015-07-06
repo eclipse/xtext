@@ -7,15 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server.model;
 
-import java.util.Collection;
 import java.util.concurrent.RejectedExecutionException;
 
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
-import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.web.server.InvalidRequestException.InvalidDocumentStateException;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * Accessor class for documents. Use {@link #readOnly(CancelableUnitOfWork)} to read the content
@@ -32,21 +35,40 @@ public class XtextWebDocumentAccess {
 	
 	private final ModifyAccess modifyAccess = new ModifyAccess();
 	
-	private final XtextWebDocument document;
+	@Inject 
+	private PreComputedServiceRegistry preComputedServiceRegistry;
 
-	private final String requiredStateId;
+	private XtextWebDocument document;
+
+	private String requiredStateId;
+
+	private boolean skipAsyncWork;
 	
-	public XtextWebDocumentAccess(XtextWebDocument document, String requiredStateId) {
+	public static class Factory {
+		
+		@Inject
+		private Provider<XtextWebDocumentAccess> provider;
+		
+		public XtextWebDocumentAccess create(XtextWebDocument document, String requiredStateId, boolean skipAsyncWork) {
+			XtextWebDocumentAccess access = provider.get();
+			access.init(document, requiredStateId, skipAsyncWork);
+			access.checkStateId();
+			return access;
+		}
+
+		public XtextWebDocumentAccess create(XtextWebDocument document, boolean skipAsyncWork) {
+			XtextWebDocumentAccess access = provider.get();
+			access.init(document, null, skipAsyncWork);
+			return access;
+		}
+	}
+	
+	protected void init(XtextWebDocument document, String requiredStateId, boolean skipAsyncWork) {
 		this.document = document;
 		this.requiredStateId = requiredStateId;
-		checkStateId();
+		this.skipAsyncWork = skipAsyncWork;
 	}
 	
-	public XtextWebDocumentAccess(XtextWebDocument document) {
-		this.document = document;
-		this.requiredStateId = null;
-	}
-
 	protected void checkStateId() throws InvalidDocumentStateException {
 		if (requiredStateId != null && !requiredStateId.equals(document.getStateId())) {
 			throw new InvalidDocumentStateException("The given state id does not match the current state.");
@@ -75,13 +97,24 @@ public class XtextWebDocumentAccess {
 	/**
 	 * Execute the given work unit with read and write access and return its result. The work unit
 	 * is handled with higher priority, i.e. currently running work units are canceled if they
-	 * support cancelation. The second work unit {@code asynchronousWork} is executed in a
+	 * support cancelation. 
+	 * 
+	 * The second work unit {@code asynchronousWork} is executed in a
 	 * separate thread after the first one has finished. It can be used for background work
 	 * that should be applied to the document, but is not relevant for the current service request.
 	 */
 	public <T> T modify(CancelableUnitOfWork<T, IXtextWebDocument> work,
 			CancelableUnitOfWork<?, IXtextWebDocument> asynchronousWork) {
 		return doAccess(work, true, true, asynchronousWork);
+	}
+	
+	/**
+	 * Execute the given work unit with read and write access and return its result. The work unit
+	 * is handled with higher priority, i.e. currently running work units are canceled if they
+	 * support cancelation.
+	 */
+	public <T> T modify(CancelableUnitOfWork<T, IXtextWebDocument> work) {
+		return doAccess(work, true, true, null);
 	}
 	
 	protected <T> T doAccess(CancelableUnitOfWork<T, IXtextWebDocument> synchronousWork, boolean priority,
@@ -101,19 +134,21 @@ public class XtextWebDocumentAccess {
 			Exceptions.sneakyThrow(exception);
 			return null;
 		} finally {
-			if (asynchronousWork == null || documentAccess == null || synchronizer.isCanceled()
-					|| Thread.currentThread().isInterrupted()) {
+			if (skipAsyncWork || !priority || documentAccess == null || synchronizer.isCanceled() || Thread.currentThread().isInterrupted()) {
 				synchronizer.releaseLock();
 			} else {
-				
-				asynchronousWork.setCancelIndicator(synchronizer);
+				if(asynchronousWork != null)
+					asynchronousWork.setCancelIndicator(synchronizer);
 				final IXtextWebDocument asyncAccess = documentAccess;
 				try {
 					synchronizer.getExecutorService().submit(new Runnable() {
 						@Override
 						public void run() {
 							try {
-								asynchronousWork.exec(asyncAccess);
+								if(asynchronousWork != null)
+									asynchronousWork.exec(asyncAccess);
+								if(!synchronizer.isCanceled() && !Thread.currentThread().isInterrupted())
+									startPreComputation(synchronizer);
 							} catch (VirtualMachineError error) {
 								throw error;
 							} catch (Throwable throwable) {
@@ -133,6 +168,20 @@ public class XtextWebDocumentAccess {
 				}
 			}
 		}
+	}
+	
+	protected void startPreComputation(CancelIndicator cancelIndicator) {
+		for(AbstractPreComputedService<?> service: preComputedServiceRegistry.getPreComputedServices()) {
+			document.getCachedServiceResult(service, cancelIndicator, false);
+		}
+	}
+	
+	protected <T extends IServiceResult> T getCachedResult(final AbstractPreComputedService<T> service) {
+		return readOnly(new CancelableUnitOfWork<T, IXtextWebDocument>() {
+			public T exec(IXtextWebDocument d, CancelIndicator cancelIndicator) throws Exception {
+				return document.getCachedServiceResult(service, cancelIndicator, true);
+			};
+		});
 	}
 	
 	protected class ReadAccess implements IXtextWebDocument {
@@ -162,23 +211,8 @@ public class XtextWebDocumentAccess {
 		}
 
 		@Override
-		public boolean isProcessingCompleted() {
-			return document.isProcessingCompleted();
-		}
-
-		@Override
-		public Collection<Issue> getIssues() {
-			return document.getIssues();
-		}
-
-		@Override
 		public void setDirty(boolean dirty) {
 			document.setDirty(dirty);
-		}
-
-		@Override
-		public void setProcessingCompleted(boolean completed) {
-			document.setProcessingCompleted(completed);
 		}
 
 		@Override
@@ -195,6 +229,7 @@ public class XtextWebDocumentAccess {
 		public void createNewStateId() {
 			throw new UnsupportedOperationException("Cannot modify the document with read-only access.");
 		}
+		
 	}
 	
 	protected class ModifyAccess extends ReadAccess {

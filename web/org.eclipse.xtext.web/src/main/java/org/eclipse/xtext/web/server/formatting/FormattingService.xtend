@@ -19,7 +19,6 @@ import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.ITextRegion
 import org.eclipse.xtext.util.TextRegion
 import org.eclipse.xtext.web.server.InvalidRequestException
-import org.eclipse.xtext.web.server.model.UpdateDocumentService
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess
 
 /**
@@ -27,8 +26,6 @@ import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess
  */
 @Singleton
 class FormattingService {
-	
-	@Inject extension UpdateDocumentService
 	
 	@Inject(optional = true) INodeModelFormatter formatter1
 	
@@ -50,7 +47,6 @@ class FormattingService {
 				throw new IllegalStateException('No formatter is available in the language configuration.')
 			
 			dirty = true
-			processingCompleted = false
 			createNewStateId()
 			textWrapper.set(0, formattedText)
 			return new FormattingResult(stateId, formattedText, selection)
@@ -59,7 +55,6 @@ class FormattingService {
 				setText(textWrapper.get(0))
 			else
 				updateText(textWrapper.get(0), selection.offset, selection.length)
-			processUpdatedDocument(cancelIndicator)
 			return null
 		])
 	}
