@@ -68,7 +68,7 @@ class ProjectConfigGenerator {
 				IFileSystemAccess2 get«p.toFirstUpper»Src();
 				IFileSystemAccess2 get«p.toFirstUpper»SrcGen();
 				ManifestAccess get«p.toFirstUpper»Manifest();
-				TextFileAccess get«p.toFirstUpper»PluginXml();
+				PluginXmlAccess get«p.toFirstUpper»PluginXml();
 				
 			«ENDFOR»
 			IFileSystemAccess2 getOrionJsGen();
@@ -101,7 +101,7 @@ class ProjectConfigGenerator {
 				private FileSystemAccess «p»Src;
 				private FileSystemAccess «p»SrcGen;
 				private ManifestAccess «p»Manifest;
-				private TextFileAccess «p»PluginXml;
+				private PluginXmlAccess «p»PluginXml;
 			«ENDFOR»
 			private FileSystemAccess orionJsGen;
 			private FileSystemAccess aceJsGen;
@@ -153,18 +153,13 @@ class ProjectConfigGenerator {
 					this.«p»Manifest = manifest;
 				}
 				
-				public void set«p.toFirstUpper»PluginXml(String path) {
-					if (path != null) {
-						this.«p»PluginXml = new TextFileAccess();
-						this.«p»PluginXml.setPath(path);
-					} else {
-						this.«p»PluginXml = null;
-					}
+				@Override
+				public PluginXmlAccess get«p.toFirstUpper»PluginXml() {
+					return «p»PluginXml;
 				}
 				
-				@Override
-				public TextFileAccess get«p.toFirstUpper»PluginXml() {
-					return this.«p»PluginXml;
+				public void set«p.toFirstUpper»PluginXml(PluginXmlAccess pluginXml) {
+					this.«p»PluginXml = pluginXml;
 				}
 				
 			«ENDFOR»

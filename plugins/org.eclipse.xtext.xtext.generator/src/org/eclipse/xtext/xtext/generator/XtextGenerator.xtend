@@ -18,10 +18,9 @@ import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent2
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.XtextStandaloneSetup
-import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.xtext.generator.model.CodeConfig
 import org.eclipse.xtext.xtext.generator.model.IXtextProjectConfig
-import org.eclipse.xtext.xtext.generator.model.TextFileAccess
+import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess
 
 /**
  * The Xtext language infrastructure generator. Can be configured with {@link IGeneratorFragment}
@@ -44,8 +43,6 @@ class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGe
 	@Inject IXtextProjectConfig projectConfig
 	
 	@Inject XtextGeneratorTemplates templates
-	
-	@Inject IEncodingProvider encodingProvider
 	
 	new() {
 		new XtextStandaloneSetup().createInjectorAndDoEMFRegistration()
@@ -93,22 +90,22 @@ class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGe
 	}
 	
 	protected def generateRuntimeSetup(LanguageConfig2 language) {
-		templates.getRuntimeSetup(language).writeTo(projectConfig.runtimeSrc)
-		templates.finishRuntimeGenSetup(language.runtimeSetup).writeTo(projectConfig.runtimeSrcGen)
+		templates.createRuntimeSetup(language).writeTo(projectConfig.runtimeSrc)
+		templates.createRuntimeGenSetup(language).writeTo(projectConfig.runtimeSrcGen)
 	}
 	
 	protected def generateModules(LanguageConfig2 language) {
-		templates.getRuntimeModule(language).writeTo(projectConfig.runtimeSrc)
-		templates.finishGenModule(language.runtimeModule).writeTo(projectConfig.runtimeSrcGen)
+		templates.createRuntimeModule(language).writeTo(projectConfig.runtimeSrc)
+		templates.createRuntimeGenModule(language).writeTo(projectConfig.runtimeSrcGen)
 		if (projectConfig.eclipsePluginSrc !== null)
-			templates.getEclipsePluginModule(language).writeTo(projectConfig.eclipsePluginSrc)
+			templates.createEclipsePluginModule(language).writeTo(projectConfig.eclipsePluginSrc)
 		if (projectConfig.eclipsePluginSrcGen !== null)
-			templates.finishGenModule(language.eclipsePluginModule).writeTo(projectConfig.eclipsePluginSrcGen)
+			templates.createEclipsePluginGenModule(language).writeTo(projectConfig.eclipsePluginSrcGen)
 	}
 	
 	protected def generateExecutableExtensionFactory(LanguageConfig2 language) {
 		if (projectConfig.eclipsePluginSrcGen !== null)
-			templates.getEclipsePluginExecutableExtensionFactory(language).writeTo(projectConfig.eclipsePluginSrcGen)
+			templates.createEclipsePluginExecutableExtensionFactory(language).writeTo(projectConfig.eclipsePluginSrcGen)
 	}
 	
 	protected def generateManifests() {
@@ -125,28 +122,27 @@ class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGe
 	}
 	
 	protected def generatePluginXmls() {
-		generatePluginXml(projectConfig.runtimePluginXml, encodingProvider)
-		generatePluginXml(projectConfig.runtimeTestPluginXml, encodingProvider)
-		generatePluginXml(projectConfig.genericIdePluginXml, encodingProvider)
-		generatePluginXml(projectConfig.genericIdeTestPluginXml, encodingProvider)
-		generatePluginXml(projectConfig.eclipsePluginPluginXml, encodingProvider)
-		generatePluginXml(projectConfig.eclipsePluginTestPluginXml, encodingProvider)
-		generatePluginXml(projectConfig.ideaPluginPluginXml, encodingProvider)
-		generatePluginXml(projectConfig.ideaPluginTestPluginXml, encodingProvider)
-		generatePluginXml(projectConfig.webPluginXml, encodingProvider)
-		generatePluginXml(projectConfig.webTestPluginXml, encodingProvider)
+		generatePluginXml(projectConfig.runtimePluginXml)
+		generatePluginXml(projectConfig.runtimeTestPluginXml)
+		generatePluginXml(projectConfig.genericIdePluginXml)
+		generatePluginXml(projectConfig.genericIdeTestPluginXml)
+		generatePluginXml(projectConfig.eclipsePluginPluginXml)
+		generatePluginXml(projectConfig.eclipsePluginTestPluginXml)
+		generatePluginXml(projectConfig.ideaPluginPluginXml)
+		generatePluginXml(projectConfig.ideaPluginTestPluginXml)
+		generatePluginXml(projectConfig.webPluginXml)
+		generatePluginXml(projectConfig.webTestPluginXml)
 	}
 	
-	protected def generatePluginXml(TextFileAccess pluginXml, IEncodingProvider encodingProvider) {
+	protected def generatePluginXml(PluginXmlAccess pluginXml) {
 		if (pluginXml !== null) {
-			pluginXml.encodingProvider = encodingProvider
 			if (new File(pluginXml.path).exists) {
 				if (pluginXml.path.endsWith('.xml')) {
 					pluginXml.path = pluginXml.path + '_gen'
-					pluginXml.writeToFile()
+					templates.createPluginXml(pluginXml).writeToFile()
 				}
 			} else {
-				pluginXml.writeToFile()
+				templates.createPluginXml(pluginXml).writeToFile()
 			}
 		}
 	}

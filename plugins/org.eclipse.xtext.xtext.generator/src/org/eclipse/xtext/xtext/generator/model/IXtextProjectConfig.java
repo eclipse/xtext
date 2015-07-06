@@ -20,52 +20,52 @@ public interface IXtextProjectConfig extends IGuiceAwareGeneratorComponent {
 	IFileSystemAccess2 getRuntimeSrc();
 	IFileSystemAccess2 getRuntimeSrcGen();
 	ManifestAccess getRuntimeManifest();
-	TextFileAccess getRuntimePluginXml();
+	PluginXmlAccess getRuntimePluginXml();
 	
 	IFileSystemAccess2 getRuntimeTestSrc();
 	IFileSystemAccess2 getRuntimeTestSrcGen();
 	ManifestAccess getRuntimeTestManifest();
-	TextFileAccess getRuntimeTestPluginXml();
+	PluginXmlAccess getRuntimeTestPluginXml();
 	
 	IFileSystemAccess2 getGenericIdeSrc();
 	IFileSystemAccess2 getGenericIdeSrcGen();
 	ManifestAccess getGenericIdeManifest();
-	TextFileAccess getGenericIdePluginXml();
+	PluginXmlAccess getGenericIdePluginXml();
 	
 	IFileSystemAccess2 getGenericIdeTestSrc();
 	IFileSystemAccess2 getGenericIdeTestSrcGen();
 	ManifestAccess getGenericIdeTestManifest();
-	TextFileAccess getGenericIdeTestPluginXml();
+	PluginXmlAccess getGenericIdeTestPluginXml();
 	
 	IFileSystemAccess2 getEclipsePluginSrc();
 	IFileSystemAccess2 getEclipsePluginSrcGen();
 	ManifestAccess getEclipsePluginManifest();
-	TextFileAccess getEclipsePluginPluginXml();
+	PluginXmlAccess getEclipsePluginPluginXml();
 	
 	IFileSystemAccess2 getEclipsePluginTestSrc();
 	IFileSystemAccess2 getEclipsePluginTestSrcGen();
 	ManifestAccess getEclipsePluginTestManifest();
-	TextFileAccess getEclipsePluginTestPluginXml();
+	PluginXmlAccess getEclipsePluginTestPluginXml();
 	
 	IFileSystemAccess2 getIdeaPluginSrc();
 	IFileSystemAccess2 getIdeaPluginSrcGen();
 	ManifestAccess getIdeaPluginManifest();
-	TextFileAccess getIdeaPluginPluginXml();
+	PluginXmlAccess getIdeaPluginPluginXml();
 	
 	IFileSystemAccess2 getIdeaPluginTestSrc();
 	IFileSystemAccess2 getIdeaPluginTestSrcGen();
 	ManifestAccess getIdeaPluginTestManifest();
-	TextFileAccess getIdeaPluginTestPluginXml();
+	PluginXmlAccess getIdeaPluginTestPluginXml();
 	
 	IFileSystemAccess2 getWebSrc();
 	IFileSystemAccess2 getWebSrcGen();
 	ManifestAccess getWebManifest();
-	TextFileAccess getWebPluginXml();
+	PluginXmlAccess getWebPluginXml();
 	
 	IFileSystemAccess2 getWebTestSrc();
 	IFileSystemAccess2 getWebTestSrcGen();
 	ManifestAccess getWebTestManifest();
-	TextFileAccess getWebTestPluginXml();
+	PluginXmlAccess getWebTestPluginXml();
 	
 	IFileSystemAccess2 getOrionJsGen();
 	IFileSystemAccess2 getAceJsGen();

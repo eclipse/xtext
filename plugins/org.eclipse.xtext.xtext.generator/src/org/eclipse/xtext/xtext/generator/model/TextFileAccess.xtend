@@ -35,8 +35,13 @@ class TextFileAccess {
 	}
 	
 	def writeToFile() {
-		val uri = URI.createFileURI(path)
-		val charset = Charset.forName(encodingProvider.getEncoding(uri))
+		var Charset charset
+		if (encodingProvider !== null) {
+			val uri = URI.createFileURI(path)
+			charset = Charset.forName(encodingProvider.getEncoding(uri))
+		} else {
+			charset = Charset.defaultCharset
+		}
 		Files.write(generate(), new File(path), charset)
 	}
 	

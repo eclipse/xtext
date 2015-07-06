@@ -9,12 +9,11 @@ package org.eclipse.xtext.xtext.generator.model
 
 import org.eclipse.xtend.lib.annotations.Accessors
 
+@Accessors
 class ManifestAccess {
 	
-	@Accessors
 	String path
 	
-	@Accessors
 	boolean merge
 	
 	def void generate() {
