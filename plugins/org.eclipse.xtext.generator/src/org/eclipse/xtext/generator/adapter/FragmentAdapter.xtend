@@ -40,6 +40,9 @@ import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.IXtextProjectConfig
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess
 
+/**
+ * @since 2.9
+ */
 class FragmentAdapter implements IGeneratorFragment2 {
 	
 	@Inject IXtextProjectConfig projectConfig
@@ -91,18 +94,18 @@ class FragmentAdapter implements IGeneratorFragment2 {
 				fragment.addToStandaloneSetup(config1.grammar, ctx)
 			}
 			val result = (ctx.output as StringConcatOutputImpl).stringOutlet
-			config2.runtimeSetup.content = result
+			config2.runtimeGenSetup.registrations += result
 		} finally {
 			ctx.output.closeFile()
 		}
 	}
 	
 	private def generateGuiceModuleRt(LanguageConfig config1, LanguageConfig2 config2, XpandExecutionContext ctx) {
-		config2.runtimeModule.bindings.addAll(fragment.getGuiceBindingsRt(config1.grammar).map[translateBinding])
+		config2.runtimeGenModule.bindings.addAll(fragment.getGuiceBindingsRt(config1.grammar).map[translateBinding])
 	}
 	
 	private def generateGuiceModuleUi(LanguageConfig config1, LanguageConfig2 config2, XpandExecutionContext ctx) {
-		config2.eclipsePluginModule.bindings.addAll(fragment.getGuiceBindingsUi(config1.grammar).map[translateBinding])
+		config2.eclipsePluginGenModule.bindings.addAll(fragment.getGuiceBindingsUi(config1.grammar).map[translateBinding])
 	}
 	
 	private def translateBinding(Binding it) {
@@ -120,7 +123,7 @@ class FragmentAdapter implements IGeneratorFragment2 {
 				fragment.addToPluginXmlRt(config1.grammar, ctx)
 			}
 			val result = (ctx.output as StringConcatOutputImpl).stringOutlet
-			projectConfig.runtimePluginXml.content = result
+			projectConfig.runtimePluginXml.entries += result
 		} finally {
 			ctx.output.closeFile()
 		}
