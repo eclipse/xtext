@@ -16,10 +16,9 @@ define("orion/editor/rulers", [
 	'orion/editor/annotations',
 	'orion/editor/tooltip', 
 	'orion/objects',
-	'orion/webui/littlelib', //$NON-NLS-0$
 	'orion/editor/util',
 	'orion/util'
-], function(messages, mTextView, mAnnotations, mTooltip, objects, lib, textUtil, util) {
+], function(messages, mTextView, mAnnotations, mTooltip, objects, textUtil, util) {
 
 	function BaseRuler (rulerLocation, rulerOverview, rulerStyle) {
 		this._location = rulerLocation || "left"; //$NON-NLS-0$
@@ -320,13 +319,10 @@ define("orion/editor/rulers", [
 			var tooltip = mTooltip.Tooltip.getTooltip(this._view);
 			if (tooltip) {
 				if (annotation && this.getLocation() === "left"){ //$NON-NLS-0$
-					tooltip.show({
-						clientX: e.clientX,
-						clientY: e.clientY,
-						getTooltipInfo: function() {
-							return self._getOnClickTooltipInfo(annotation);
+					tooltip.show({getTooltipInfo: function() {
+							return self._getTooltipInfo([annotation]);
 						}
-					}, false);
+					}, false, false);
 				} else {
 					tooltip.hide();
 				}
@@ -369,19 +365,24 @@ define("orion/editor/rulers", [
 				this._hoverTimeout = null;
 			}
 			
-			this._curElementBounds = lib.bounds(e.target ? e.target : e.srcElement);
+			var target = e.target ? e.target : e.srcElement;
+			this._curElementBounds = target.getBoundingClientRect();
+			// If we have the entire ruler selected, just use a 1 pixel high area in the ruler (Bug 463486)
+			if (target._ruler){
+				this._curElementBounds.top = e.clientY;
+				this._curElementBounds.height = 1;
+			}
 			
 			var self = this;
 			self._hoverTimeout = window.setTimeout(function() {
 				self._hoverTimeout = null;
-				if (!tooltip.OKToHover(e.clientX, e.clientY)) { return; }
-				tooltip.show({
-					clientX: e.clientX,
-					clientY: e.clientY,
+				tooltip.onHover({
 					getTooltipInfo: function() {
-						return self._getTooltipInfo(self._tooltipLineIndex, this.clientY);
+						var annotations = self._getAnnotationsAtLineIndex(self._tooltipLineIndex);
+						var content = self._getTooltipContents(self._tooltipLineIndex, annotations);
+						return self._getTooltipInfo(content, e.clientY, {source: "ruler", rulerLocation: self.getLocation()}); //$NON-NLS-0$
 					}
-				});
+				}, e.clientX, e.clientY);
 			}, 175);
 		},
 		/**
@@ -480,8 +481,8 @@ define("orion/editor/rulers", [
 			
 			return annotation;
 		},
-		/** @ignore */
-		_getTooltipInfo: function(lineIndex, y) {
+		
+		_getAnnotationsAtLineIndex: function _getAnnotationsAtLineIndex(lineIndex){
 			if (lineIndex === undefined) { return; }
 			var view = this._view;
 			var model = view.getModel();
@@ -496,56 +497,86 @@ define("orion/editor/rulers", [
 				}
 				annotations = this.getAnnotationsByType(annotationModel, start, end);
 			}
-			var contents = this._getTooltipContents(lineIndex, annotations);
-			
-			// TODO: shouldn't this check the length, it'll never be null
-			if (!contents) { return null; }
-			var hoverArea = this._curElementBounds;
-			if (typeof contents === 'string') { //$NON-NLS-0$
+			return annotations;
+		},
+		/** @ignore */
+		_getTooltipInfo: function(contents, y, context) {
+			if (!contents) { return null; } // TODO: shouldn't this check the length, it'll never be null
+		
+			var hoverArea = Object.create(null);
+			hoverArea.top = this._curElementBounds.top;
+			hoverArea.left = this._curElementBounds.left;
+			hoverArea.height = this._curElementBounds.height;
+			hoverArea.width = this._curElementBounds.width;
+			if (typeof contents === 'string' && y) { //$NON-NLS-0$
 				// Hack for line numbers
 				hoverArea.top = y;
 				hoverArea.height = 1;
 			}
 			
 			var rulerLocation = this.getLocation();
+			var rulerStyle = this.getRulerStyle();
 			// The tooltip is positioned opposite to where the ruler is
 			var position = rulerLocation === "left" ? "right" : "left"; //$NON-NLS-0$ //$NON-NLS-1$ //$NON-NLS-2$
+			
+			
+			var viewRect = this._view._clientDiv.getBoundingClientRect();
+			var offsetX = 0;
+			var offsetY = 0;
+			offsetX = viewRect.left - (hoverArea.left + hoverArea.width);
+			offsetY = hoverArea.height;
+			if (position === "left") { //$NON-NLS-0$
+				offsetX = -25;
+				// Hack for when the hoverArea is a sliver of the ruler, ruler is 2px wider than annotations
+				if (hoverArea.height === 1){
+					offsetX += 2;
+				}
+			}
+			// Adjust the tooltip for folding comments to exactly cover the unfolded text location
+			if (rulerStyle.styleClass.indexOf("folding") >= 0){ //$NON-NLS-0$
+				offsetY -= 14;
+			}
+			
 			var info = {
 				contents: contents,
 				position: position,
-				hoverArea: hoverArea,
-				context: {source: "ruler" + rulerLocation} //$NON-NLS-0$
+				tooltipOffsetX: offsetX,
+				tooltipOffsetY: offsetY,
+				anchorArea: hoverArea,
+				context: context
 			};
-			
-			var viewRect = lib.bounds(view._clientDiv);
-
-			info.offsetX = viewRect.left - (hoverArea.left + hoverArea.width);
-			info.offsetY = hoverArea.height;
-			if (info.position === "left") { //$NON-NLS-0$
-				info.offsetX = 20;
-			}
 			return info;
 		},
 		/**
-		 * @name _getOnClickTooltipInfo
-		 * @description Collects information needed to display a tooltip for a specific annotation when the user clicks on a multi-annotation in the ruler
+		 * @name _getTooltipContents
+		 * @description Overridden by different rulers to provide customer tooltip content
 		 * @function
 		 * @private
-		 * @param annotation The annotation that is selected
-		 * @returns a hover info object to pass to the tooltip
+		 * @param lineIndex
+		 * @param annotations
+		 * @returns returns
+		 * @callback
 		 */
+		_getTooltipContents: function _getTooltipContents(lineIndex, annotations){
+			return annotations;
+		},
+		
 		_getOnClickTooltipInfo: function(annotation) {
 			var view = this._view;
-			var hoverArea = this._curElementBounds;
+			var hoverArea = Object.create(null);
+			hoverArea.top = this._curElementBounds.top;
+			hoverArea.left = this._curElementBounds.left;
+			hoverArea.height = this._curElementBounds.height;
+			hoverArea.width = this._curElementBounds.width;
 			var rulerLocation = this.getLocation();
 			var position = rulerLocation === "left" ? "right" : "left"; //$NON-NLS-0$ //$NON-NLS-1$ //$NON-NLS-2$
 			var info = {
 				contents: [annotation],
 				position: position,
-				hoverArea: hoverArea
+				anchorArea: hoverArea
 			};
 			
-			var viewRect = lib.bounds(view._clientDiv);
+			var viewRect = view._clientDiv.getBoundingClientRect();
 
 			info.offsetX = viewRect.left - (hoverArea.left + hoverArea.width);
 			info.offsetY = hoverArea.height;
@@ -553,10 +584,6 @@ define("orion/editor/rulers", [
 				info.offsetX = 20;
 			}
 			return info;
-		},
-		/** @ignore */
-		_getTooltipContents: function(lineIndex, annotations) {
-			return annotations;
 		},
 		/** @ignore */
 		_onAnnotationModelChanged: function(e) {
@@ -574,7 +601,7 @@ define("orion/editor/rulers", [
 			function redraw(changes) {
 				for (var i = 0; i < changes.length; i++) {
 					if (!self.isAnnotationTypeVisible(changes[i].type)) { continue; }
-					var start = changes[i].start;
+					start = changes[i].start;
 					var end = changes[i].end;
 					if (model.getBaseModel) {
 						start = model.mapOffset(start, true);
@@ -828,7 +855,7 @@ define("orion/editor/rulers", [
 	};
 	/** @ignore */
 	OverviewRuler.prototype._getTooltipContents = function(lineIndex, annotations) {
-		if (annotations.length === 0) {
+		if (annotations && annotations.length === 0) {
 			var model = this._view.getModel();
 			var mapLine = lineIndex;
 			if (model.getBaseModel) {
@@ -908,7 +935,7 @@ define("orion/editor/rulers", [
 	};
 	/** @ignore */
 	FoldingRuler.prototype._getTooltipContents = function(lineIndex, annotations) {
-		if (annotations.length > 0) {
+		if (annotations && annotations.length > 0) {
 			var view = this._view;
 			var model = view.getModel();
 			var start = model.getLineStart(lineIndex);

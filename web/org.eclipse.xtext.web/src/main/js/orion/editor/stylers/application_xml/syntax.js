@@ -64,7 +64,6 @@ define("orion/editor/stylers/application_xml/syntax", ["orion/editor/stylers/lib
 				captures: {
 					0: {name: "meta.tag.xml"}, //$NON-NLS-0$
 				},
-				name: "meta.tag.xml", //$NON-NLS-0$
 				patterns: [
 					{include: "#comment"}, //$NON-NLS-0$
 					{include: "orion.lib#string_doubleQuote"}, //$NON-NLS-0$

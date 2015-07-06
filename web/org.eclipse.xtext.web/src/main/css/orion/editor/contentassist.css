@@ -58,14 +58,6 @@
 	padding-top: 5px;
 }
 
-.contentassist .proposal-noemphasis-title::before {
-	content: "- ";
-}
-
-.contentassist .proposal-noemphasis-title::after {
-	content: " -";
-}
-
 .contentassist .proposal-default {
 	/* nothing */
 }

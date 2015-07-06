@@ -467,7 +467,37 @@ define("orion/editor/undoStack", [], function() { //$NON-NLS-0$
 				this.view = null;
 			}
 		},
+		_trackUnsavedChanges: function(e) {
+			if (!this._unsavedChanges) return;
+			var length = this._unsavedChanges.length;
+			var addedCharCount = e.addedCharCount;
+			var removedCharCount = e.removedCharCount;
+			var start = e.start;
+			var end = e.start + removedCharCount;
+			var type = 0;
+			if (addedCharCount === 0) {
+				type = -1;
+			} else if (removedCharCount === 0) {
+				type = 1;
+			}
+			if (length > 0) {
+				if (type === this._previousChangeType) {
+					var previousChange = this._unsavedChanges[length-1];
+					if (removedCharCount === 0 && start === previousChange.end + previousChange.text.length) {
+						previousChange.text += e.text;
+						return;
+					}
+					if (e.addedCharCount === 0 && end === previousChange.start) {
+						previousChange.start = start;
+						return;
+					}
+				}
+			}
+			this._previousChangeType = type;
+			this._unsavedChanges.push({start:start, end:end, text:e.text});
+		},
 		_onChanging: function(e) {
+			this._trackUnsavedChanges(e);
 			if (this._ignoreUndo) {
 				return;
 			}

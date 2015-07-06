@@ -60,11 +60,12 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 
 			var results = [];
 			var matches = [];
+			var result;
 			startIndex = startIndex || 0;
 			endIndex = endIndex || Infinity;
 			maxBlockCount = maxBlockCount || Infinity;
 			block.blockPatterns.forEach(function(current) {
-				var result = this._findMatch(current.regexBegin || current.regex, text, startIndex);
+				result = this._findMatch(current.regexBegin || current.regex, text, startIndex);
 				if (result) {
 					matches.push({result: result, pattern: current});
 				}
@@ -139,7 +140,7 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 
 					var lastIndex = contentStart;
 					while (!resultEnd) {
-						var result = this._findMatch(endRegex, text, lastIndex);
+						result = this._findMatch(endRegex, text, lastIndex);
 						if (!result) {
 							this._eolRegex.lastIndex = 0;
 							result = this._eolRegex.exec(text);
@@ -318,7 +319,7 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 		getContentType: function() {
 			return this._contentType;
 		},
-		parse: function(text, offset, block, _styles, ignoreCaptures) {
+		parse: function(text, offset, startIndex, block, _styles, ignoreCaptures) {
 			if (!text) {
 				return;
 			}
@@ -328,10 +329,11 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 			}
 
 			var matches = [];
+			var result;
 			patterns.forEach(function(current) {
 				var regex = current.regex || current.regexBegin;
 				regex.oldLastIndex = regex.lastIndex;
-				var result = this._findMatch(regex, text, 0);
+				result = this._findMatch(regex, text, startIndex);
 				if (result) {
 					matches.push({result: result, pattern: current});
 				}
@@ -346,7 +348,7 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 				return a.pattern.pattern.index < b.pattern.pattern.index ? -1 : 1;
 			});
 
-			var index = 0;
+			var index = startIndex;
 			while (matches.length > 0) {
 				var current = matches[0];
 				matches.splice(0,1);
@@ -359,7 +361,7 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 
 				/* apply the style */
 				var start = current.result.index;
-				var end, result;
+				var end;
 				var substyles = [];
 				if (current.pattern.regex) {	/* line pattern defined by a "match" */
 					result = current.result;
@@ -417,9 +419,10 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 		verifyBlock: function(baseModel, text, ancestorBlock, changeCount) {
 			var result = null;
 			var matches = [];
+			var match;
 			var parentBlock = ancestorBlock.parent;
 			parentBlock.blockPatterns.forEach(function(current) {
-				var match = this._findMatch(current.regexBegin || current.regex, text, 0);
+				match = this._findMatch(current.regexBegin || current.regex, text, 0);
 				if (match) {
 					matches.push({result: match, pattern: current});
 				}
@@ -441,7 +444,7 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 				result = false;
 			} else {
 				/* the block start appears to be unchanged, now verify that the block end is unchanged */
-				var match = matches[0];
+				match = matches[0];
 				var endRegex = match.pattern.regexEnd;
 				if (!endRegex) {
 					/* single-match block, just verify its length */
@@ -938,7 +941,7 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 			var lineIndex = model.getLineAtOffset(offset);
 			var lineText = model.getLine(lineIndex);
 			var styles = [];
-			this._stylerAdapter.parse(lineText, model.getLineStart(lineIndex), block, styles);
+			this._stylerAdapter.parse(lineText, model.getLineStart(lineIndex), 0, block, styles);
 			var style = styles[binarySearch(styles, offset, true)];
 			if (style && style.start <= offset && offset < style.end) {
 				result.push(style);
@@ -1010,7 +1013,9 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 				var annotationType = mAnnotations.AnnotationType.ANNOTATION_TASK;
 				if (block.name && block.name.indexOf("comment") === 0) {
 					var substyles = [];
-					this._stylerAdapter.parse(baseModel.getText(block.contentStart, block.end), block.contentStart, block, substyles, true);
+					var lineIndex = baseModel.getLineAtOffset(block.contentStart);
+					var lineStart = baseModel.getLineStart(lineIndex);
+					this._stylerAdapter.parse(baseModel.getText(lineStart, block.end), lineStart, block.contentStart - lineStart, block, substyles, true);
 					for (var i = 0; i < substyles.length; i++) {
 						if (substyles[i].style === "meta.annotation.task.todo" && start <= substyles[i].start && substyles[i].end <= end) {
 							annotations.push(mAnnotations.AnnotationType.createAnnotation(annotationType, substyles[i].start, substyles[i].end, baseModel.getText(substyles[i].start, substyles[i].end)));
@@ -1046,16 +1051,18 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 			}
 			return parentBlock;
 		},
-		_findBrackets: function(bracketMatch, block, text, start, end) {
+		_findBrackets: function(model, bracketMatch, block, text, offset, end) {
 			var result = [], styles = [];
-			var offset = start, blocks = block.getBlocks();
-			var startIndex = binarySearch(blocks, start, true);
+			var start = offset, blocks = block.getBlocks();
+			var startIndex = binarySearch(blocks, offset, true);
 			for (var i = startIndex; i < blocks.length; i++) {
 				if (blocks[i].start >= end) { break; }
 				var blockStart = blocks[i].start;
 				var blockEnd = blocks[i].end;
-				if (offset < blockStart) {
-					this._stylerAdapter.parse(text.substring(offset - start, blockStart - start), offset, block, styles);
+				if (start < blockStart) {
+					var lineIndex = model.getLineAtOffset(start);
+					var lineStart = model.getLineStart(lineIndex);
+					this._stylerAdapter.parse(text.substring(lineStart - offset, blockStart - offset), lineStart, start - lineStart, block, styles);
 					styles.forEach(function(current) {
 						if (current.style) {
 							if (current.style.indexOf(bracketMatch.beginName) === 0) {
@@ -1067,10 +1074,12 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 					});
 					styles = [];
 				}
-				offset = blockEnd;
+				start = blockEnd;
 			}
-			if (offset < end) {
-				this._stylerAdapter.parse(text.substring(offset - start, end - start), offset, block, styles);
+			if (start < end) {
+				lineIndex = model.getLineAtOffset(start);
+				lineStart = model.getLineStart(lineIndex);
+				this._stylerAdapter.parse(text.substring(lineStart - offset, end - offset), lineStart, start - lineStart, block, styles);
 				styles.forEach(function(current) {
 					if (current.style) {
 						if (current.style.indexOf(bracketMatch.beginName) === 0) {
@@ -1093,7 +1102,7 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 
 			var lineText = model.getLine(lineIndex);
 			var lineStart = model.getLineStart(lineIndex);
-			var brackets = this._findBrackets(bracketMatch, block, lineText, lineStart, lineEnd);
+			var brackets = this._findBrackets(model, bracketMatch, block, lineText, lineStart, lineEnd);
 			for (var i = 0; i < brackets.length; i++) {
 				var sign = brackets[i] >= 0 ? 1 : -1;
 				if (brackets[i] * sign - 1 === offset) {
@@ -1112,7 +1121,7 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 							lineText = model.getLine(lineIndex);
 							lineStart = model.getLineStart(lineIndex);
 							lineEnd = model.getLineEnd(lineIndex);
-							brackets = this._findBrackets(bracketMatch, block, lineText, lineStart, lineEnd);
+							brackets = this._findBrackets(model, bracketMatch, block, lineText, lineStart, lineEnd);
 							for (var j = brackets.length - 1; j >= 0; j--) {
 								sign = brackets[j] >= 0 ? 1 : -1;
 								level += sign;
@@ -1137,7 +1146,7 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 							lineText = model.getLine(lineIndex);
 							lineStart = model.getLineStart(lineIndex);
 							lineEnd = model.getLineEnd(lineIndex);
-							brackets = this._findBrackets(bracketMatch, block, lineText, lineStart, lineEnd);
+							brackets = this._findBrackets(model, bracketMatch, block, lineText, lineStart, lineEnd);
 							for (var k=0; k<brackets.length; k++) {
 								sign = brackets[k] >= 0 ? 1 : -1;
 								level += sign;
@@ -1169,27 +1178,26 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 			}
 			return null;
 		},
-		_getStyles: function(block, model, text, start) {
-			if (model.getBaseModel) {
-				start = model.mapOffset(start);
-			}
-			var end = start + text.length;
+		_getStyles: function(block, model, text, offset, startIndex) {
+			var end = offset + text.length;
 
 			var styles = [];
-			var offset = start, blocks = block.getBlocks();
-			var startIndex = binarySearch(blocks, start, true);
-			for (var i = startIndex; i < blocks.length; i++) {
+			var start = offset + startIndex, blocks = block.getBlocks();
+			var startBlockIndex = binarySearch(blocks, start, true);
+			for (var i = startBlockIndex; i < blocks.length; i++) {
 				if (blocks[i].start >= end) { break; }
 				var blockStart = blocks[i].start;
 				var blockEnd = blocks[i].end;
-				if (offset < blockStart) {
+				if (start < blockStart) {
 					/* content on that line that preceeds the start of the block */
-					this._stylerAdapter.parse(text.substring(offset - start, blockStart - start), offset, block, styles);
+					var lineIndex = model.getLineAtOffset(start);
+					var lineStart = model.getLineStart(lineIndex);
+					this._stylerAdapter.parse(text.substring(lineStart - offset, blockStart - offset), lineStart, start - lineStart, block, styles);
 				}
-				var s = Math.max(offset, blockStart);
+				var s = Math.max(start, blockStart);
 				if (s === blockStart) {
 					/* currently in the block's "start" segment */
-					var startString = this._stylerAdapter.getBlockStartStyle(blocks[i], text.substring(s - start), s, styles);
+					var startString = this._stylerAdapter.getBlockStartStyle(blocks[i], text.substring(s - offset), s, styles);
 					if (startString) {
 						s += startString.length;
 					}
@@ -1203,14 +1211,16 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 				var endStyles = [];
 				if (e === blockEnd) {
 					/* currently in the block's "end" segment */
-					var testString = text.substring(e - offset - (blocks[i].end - blocks[i].contentEnd));
+					var testString = text.substring(e - start - (blocks[i].end - blocks[i].contentEnd));
 					var endString = this._stylerAdapter.getBlockEndStyle(blocks[i], testString, e, endStyles);
 					if (endString) {
 						e -= endString.length;
 					}
 				}
 
-				var blockSubstyles = this._getStyles(blocks[i], model, text.substring(s - start, e - start), s);
+				lineIndex = model.getLineAtOffset(s);
+				lineStart = model.getLineStart(lineIndex);
+				var blockSubstyles = this._getStyles(blocks[i], model, text.substring(lineStart - offset, e - offset), lineStart, s - lineStart);
 				var blockStyleName = this._stylerAdapter.getBlockContentStyleName(blocks[i]);
 				if (blockStyleName) {
 					/*
@@ -1235,19 +1245,15 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 					styles = styles.concat(blockSubstyles);
 				}
 				styles = styles.concat(endStyles);
-				offset = blockEnd;
+				start = blockEnd;
 			}
-			if (offset < end) {
+			if (start < end) {
 				/* content on that line that follows the end of the block */
-				this._stylerAdapter.parse(text.substring(offset - start, end - start), offset, block, styles);
+				lineIndex = model.getLineAtOffset(start);
+				lineStart = model.getLineStart(lineIndex);
+				this._stylerAdapter.parse(text.substring(lineStart - offset, end - offset), lineStart, start - lineStart, block, styles);
 			}
-			if (model.getBaseModel) {
-				for (var j = 0; j < styles.length; j++) {
-					var length = styles[j].end - styles[j].start;
-					styles[j].start = model.mapOffset(styles[j].start, true);
-					styles[j].end = styles[j].start + length;
-				}
-			}
+
 			return styles;
 		},
 		_isRenderingWhitespace: function() {
@@ -1260,12 +1266,28 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 			if (e.textView === this._view) {
 				e.style = this._getLineStyle(e.lineIndex);
 			}
-			e.ranges = this._getStyles(this._rootBlock, e.textView.getModel(), e.lineText, e.lineStart);
-			e.ranges.forEach(function(current) {
+
+			var offset = e.lineStart;
+			var model = e.textView.getModel();
+			if (model.getBaseModel) {
+				offset = model.mapOffset(offset);
+				var baseModel = model.getBaseModel();
+			}
+
+			e.ranges = this._getStyles(this._rootBlock, baseModel || model, e.lineText, offset, 0);
+			for (var i = e.ranges.length - 1; i >= 0; i--) {
+				var current = e.ranges[i];
 				if (current.style) {
 					current.style = {styleClass: current.style.replace(/\./g, " ")};
+					if (baseModel) {
+						var length = current.end - current.start;
+						current.start = model.mapOffset(current.start, true);
+						current.end = current.start + length;
+					}
+				} else {
+					e.ranges.splice(i, 1);
 				}
-			});
+			};
 			if (this._isRenderingWhitespace()) {
 				this._spliceStyles(this._spacePattern, e.ranges, e.lineText, e.lineStart);
 				this._spliceStyles(this._tabPattern, e.ranges, e.lineText, e.lineStart);
@@ -1620,7 +1642,7 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 				var newStyle = {
 					start: charIndex,
 					end: charIndex + 1,
-					style: whitespacePattern.style
+					style: copy(whitespacePattern.style)
 				};
 				if (rangeIndex < ranges.length && ranges[rangeIndex].start <= charIndex) {
 					var endStyle = {start: charIndex + 1, end: ranges[rangeIndex].end, style: ranges[rangeIndex].style};
@@ -1628,6 +1650,7 @@ define("orion/editor/textStyler", ['orion/editor/annotations', 'orion/editor/eve
 					ranges.splice(rangeIndex + 1, 0, endStyle);
 					ranges.splice(rangeIndex + 1, 0, newStyle);
 					rangeIndex += 2;
+					newStyle.style.styleClass += " " + ranges[rangeIndex].style.styleClass; //$NON-NLS-0$
 				} else {
 					ranges.splice(rangeIndex, 0, newStyle);
 					rangeIndex++;
