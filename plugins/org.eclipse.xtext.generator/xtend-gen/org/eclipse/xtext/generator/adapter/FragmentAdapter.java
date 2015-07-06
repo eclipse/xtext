@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.XpandExecutionContextImpl;
 import org.eclipse.xpand2.output.Outlet;
@@ -54,6 +55,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.IGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.LanguageConfig2;
+import org.eclipse.xtext.xtext.generator.XtextGenerator;
 import org.eclipse.xtext.xtext.generator.model.CodeConfig;
 import org.eclipse.xtext.xtext.generator.model.FileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
@@ -89,6 +91,15 @@ public class FragmentAdapter implements IGeneratorFragment2 {
   
   public void addPostProcessor(final PostProcessor postProcessor) {
     this.postProcessors.add(postProcessor);
+  }
+  
+  @Override
+  public void checkConfiguration(final XtextGenerator generator, final Issues issues) {
+    if ((this.fragment == null)) {
+      issues.addError(generator, "The property \'fragment\' must be set.", this);
+    } else {
+      this.fragment.checkConfiguration(issues);
+    }
   }
   
   @Override

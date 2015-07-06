@@ -41,6 +41,8 @@ import org.eclipse.xtext.xtext.generator.model.FileSystemAccess
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.IXtextProjectConfig
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess
+import org.eclipse.xtext.xtext.generator.XtextGenerator
+import org.eclipse.emf.mwe.core.issues.Issues
 
 /**
  * @since 2.9
@@ -65,6 +67,13 @@ class FragmentAdapter implements IGeneratorFragment2 {
 	
 	def void addPostProcessor(PostProcessor postProcessor) {
 		this.postProcessors.add(postProcessor)
+	}
+	
+	override checkConfiguration(XtextGenerator generator, Issues issues) {
+		if (fragment === null)
+			issues.addError(generator, 'The property \'fragment\' must be set.', this)
+		else
+			fragment.checkConfiguration(issues)
 	}
 	
 	override initialize(Injector injector) {

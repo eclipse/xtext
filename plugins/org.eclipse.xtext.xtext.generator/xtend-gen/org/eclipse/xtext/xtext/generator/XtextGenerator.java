@@ -17,6 +17,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.jar.Attributes;
@@ -32,6 +33,7 @@ import org.eclipse.xtext.util.MergeableManifest;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -87,6 +89,16 @@ public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuice
    */
   public void addLanguage(final LanguageConfig2 language) {
     this.languageConfigs.add(language);
+  }
+  
+  @Override
+  protected void checkConfigurationInternal(final Issues issues) {
+    if ((this.configuration != null)) {
+      this.configuration.checkConfiguration(this, issues);
+    }
+    for (final LanguageConfig2 language : this.languageConfigs) {
+      language.checkConfiguration(this, issues);
+    }
   }
   
   protected Injector createInjector() {
@@ -184,98 +196,93 @@ public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuice
   }
   
   protected void generateManifests() {
-    LanguageConfig2 _head = IterableExtensions.<LanguageConfig2>head(this.languageConfigs);
-    Grammar _grammar = null;
-    if (_head!=null) {
-      _grammar=_head.getGrammar();
-    }
-    final Grammar firstGrammar = _grammar;
     ManifestAccess _runtimeManifest = this.projectConfig.getRuntimeManifest();
-    this.generateManifest(_runtimeManifest, null);
     ManifestAccess _runtimeTestManifest = this.projectConfig.getRuntimeTestManifest();
-    this.generateManifest(_runtimeTestManifest, null);
     ManifestAccess _genericIdeManifest = this.projectConfig.getGenericIdeManifest();
-    this.generateManifest(_genericIdeManifest, null);
     ManifestAccess _genericIdeTestManifest = this.projectConfig.getGenericIdeTestManifest();
-    this.generateManifest(_genericIdeTestManifest, null);
     ManifestAccess _eclipsePluginManifest = this.projectConfig.getEclipsePluginManifest();
-    TypeReference _eclipsePluginActivator = this._xtextGeneratorNaming.getEclipsePluginActivator(firstGrammar);
-    this.generateManifest(_eclipsePluginManifest, _eclipsePluginActivator);
     ManifestAccess _eclipsePluginTestManifest = this.projectConfig.getEclipsePluginTestManifest();
-    this.generateManifest(_eclipsePluginTestManifest, null);
     ManifestAccess _ideaPluginManifest = this.projectConfig.getIdeaPluginManifest();
-    this.generateManifest(_ideaPluginManifest, null);
     ManifestAccess _ideaPluginTestManifest = this.projectConfig.getIdeaPluginTestManifest();
-    this.generateManifest(_ideaPluginTestManifest, null);
     ManifestAccess _webManifest = this.projectConfig.getWebManifest();
-    this.generateManifest(_webManifest, null);
     ManifestAccess _webTestManifest = this.projectConfig.getWebTestManifest();
-    this.generateManifest(_webTestManifest, null);
-  }
-  
-  protected void generateManifest(final ManifestAccess manifest, final TypeReference activator) {
-    try {
-      if ((manifest != null)) {
-        String _bundleName = manifest.getBundleName();
-        boolean _tripleEquals = (_bundleName == null);
-        if (_tripleEquals) {
-          String _path = manifest.getPath();
-          final String[] segments = _path.split("/");
-          boolean _and = false;
-          int _length = segments.length;
-          boolean _greaterEqualsThan = (_length >= 3);
-          if (!_greaterEqualsThan) {
-            _and = false;
-          } else {
-            int _length_1 = segments.length;
-            int _minus = (_length_1 - 2);
-            String _get = segments[_minus];
-            boolean _equals = Objects.equal(_get, "META-INF");
-            _and = _equals;
-          }
-          if (_and) {
-            int _length_2 = segments.length;
-            int _minus_1 = (_length_2 - 3);
-            String _get_1 = segments[_minus_1];
-            manifest.setBundleName(_get_1);
-          }
-        }
-        String _path_1 = manifest.getPath();
-        final File file = new File(_path_1);
-        boolean _exists = file.exists();
-        if (_exists) {
-          boolean _isMerge = manifest.isMerge();
-          if (_isMerge) {
-            this.mergeManifest(manifest, file, activator);
-          } else {
-            String _path_2 = manifest.getPath();
-            boolean _endsWith = _path_2.endsWith(".MF");
-            if (_endsWith) {
-              String _path_3 = manifest.getPath();
-              String _plus = (_path_3 + "_gen");
-              manifest.setPath(_plus);
-              TextFileAccess _createManifest = this.templates.createManifest(manifest, activator);
-              _createManifest.writeToFile();
+    final Set<ManifestAccess> manifests = Collections.<ManifestAccess>unmodifiableSet(CollectionLiterals.<ManifestAccess>newHashSet(_runtimeManifest, _runtimeTestManifest, _genericIdeManifest, _genericIdeTestManifest, _eclipsePluginManifest, _eclipsePluginTestManifest, _ideaPluginManifest, _ideaPluginTestManifest, _webManifest, _webTestManifest));
+    Iterable<ManifestAccess> _filterNull = IterableExtensions.<ManifestAccess>filterNull(manifests);
+    final Function1<ManifestAccess, String> _function = new Function1<ManifestAccess, String>() {
+      @Override
+      public String apply(final ManifestAccess it) {
+        return it.getPath();
+      }
+    };
+    List<ManifestAccess> _sortBy = IterableExtensions.<ManifestAccess, String>sortBy(_filterNull, _function);
+    final Procedure1<ManifestAccess> _function_1 = new Procedure1<ManifestAccess>() {
+      @Override
+      public void apply(final ManifestAccess manifest) {
+        try {
+          String _bundleName = manifest.getBundleName();
+          boolean _tripleEquals = (_bundleName == null);
+          if (_tripleEquals) {
+            String _path = manifest.getPath();
+            final String[] segments = _path.split("/");
+            boolean _and = false;
+            int _length = segments.length;
+            boolean _greaterEqualsThan = (_length >= 3);
+            if (!_greaterEqualsThan) {
+              _and = false;
+            } else {
+              int _length_1 = segments.length;
+              int _minus = (_length_1 - 2);
+              String _get = segments[_minus];
+              boolean _equals = Objects.equal(_get, "META-INF");
+              _and = _equals;
+            }
+            if (_and) {
+              int _length_2 = segments.length;
+              int _minus_1 = (_length_2 - 3);
+              String _get_1 = segments[_minus_1];
+              manifest.setBundleName(_get_1);
             }
           }
-        } else {
-          TextFileAccess _createManifest_1 = this.templates.createManifest(manifest, activator);
-          _createManifest_1.writeToFile();
+          TypeReference activator = null;
+          ManifestAccess _eclipsePluginManifest = XtextGenerator.this.projectConfig.getEclipsePluginManifest();
+          boolean _tripleEquals_1 = (manifest == _eclipsePluginManifest);
+          if (_tripleEquals_1) {
+            LanguageConfig2 _head = IterableExtensions.<LanguageConfig2>head(XtextGenerator.this.languageConfigs);
+            Grammar _grammar = null;
+            if (_head!=null) {
+              _grammar=_head.getGrammar();
+            }
+            TypeReference _eclipsePluginActivator = XtextGenerator.this._xtextGeneratorNaming.getEclipsePluginActivator(_grammar);
+            activator = _eclipsePluginActivator;
+          }
+          String _path_1 = manifest.getPath();
+          final File file = new File(_path_1);
+          boolean _exists = file.exists();
+          if (_exists) {
+            boolean _isMerge = manifest.isMerge();
+            if (_isMerge) {
+              XtextGenerator.this.mergeManifest(manifest, file, activator);
+            } else {
+              String _path_2 = manifest.getPath();
+              boolean _endsWith = _path_2.endsWith(".MF");
+              if (_endsWith) {
+                String _path_3 = manifest.getPath();
+                String _plus = (_path_3 + "_gen");
+                manifest.setPath(_plus);
+                TextFileAccess _createManifest = XtextGenerator.this.templates.createManifest(manifest, activator);
+                _createManifest.writeToFile();
+              }
+            }
+          } else {
+            TextFileAccess _createManifest_1 = XtextGenerator.this.templates.createManifest(manifest, activator);
+            _createManifest_1.writeToFile();
+          }
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
-  protected void generateActivator() {
-    IFileSystemAccess2 _eclipsePluginSrcGen = this.projectConfig.getEclipsePluginSrcGen();
-    boolean _tripleNotEquals = (_eclipsePluginSrcGen != null);
-    if (_tripleNotEquals) {
-      JavaFileAccess _createEclipsePluginActivator = this.templates.createEclipsePluginActivator(this.languageConfigs);
-      IFileSystemAccess2 _eclipsePluginSrcGen_1 = this.projectConfig.getEclipsePluginSrcGen();
-      _createEclipsePluginActivator.writeTo(_eclipsePluginSrcGen_1);
-    }
+    };
+    IterableExtensions.<ManifestAccess>forEach(_sortBy, _function_1);
   }
   
   protected void mergeManifest(final ManifestAccess manifest, final File file, final TypeReference activator) throws IOException {
@@ -323,53 +330,63 @@ public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuice
     }
   }
   
-  protected void generatePluginXmls() {
-    PluginXmlAccess _runtimePluginXml = this.projectConfig.getRuntimePluginXml();
-    this.generatePluginXml(_runtimePluginXml);
-    PluginXmlAccess _runtimeTestPluginXml = this.projectConfig.getRuntimeTestPluginXml();
-    this.generatePluginXml(_runtimeTestPluginXml);
-    PluginXmlAccess _genericIdePluginXml = this.projectConfig.getGenericIdePluginXml();
-    this.generatePluginXml(_genericIdePluginXml);
-    PluginXmlAccess _genericIdeTestPluginXml = this.projectConfig.getGenericIdeTestPluginXml();
-    this.generatePluginXml(_genericIdeTestPluginXml);
-    PluginXmlAccess _eclipsePluginPluginXml = this.projectConfig.getEclipsePluginPluginXml();
-    this.generatePluginXml(_eclipsePluginPluginXml);
-    PluginXmlAccess _eclipsePluginTestPluginXml = this.projectConfig.getEclipsePluginTestPluginXml();
-    this.generatePluginXml(_eclipsePluginTestPluginXml);
-    PluginXmlAccess _ideaPluginPluginXml = this.projectConfig.getIdeaPluginPluginXml();
-    this.generatePluginXml(_ideaPluginPluginXml);
-    PluginXmlAccess _ideaPluginTestPluginXml = this.projectConfig.getIdeaPluginTestPluginXml();
-    this.generatePluginXml(_ideaPluginTestPluginXml);
-    PluginXmlAccess _webPluginXml = this.projectConfig.getWebPluginXml();
-    this.generatePluginXml(_webPluginXml);
-    PluginXmlAccess _webTestPluginXml = this.projectConfig.getWebTestPluginXml();
-    this.generatePluginXml(_webTestPluginXml);
+  protected void generateActivator() {
+    IFileSystemAccess2 _eclipsePluginSrcGen = this.projectConfig.getEclipsePluginSrcGen();
+    boolean _tripleNotEquals = (_eclipsePluginSrcGen != null);
+    if (_tripleNotEquals) {
+      JavaFileAccess _createEclipsePluginActivator = this.templates.createEclipsePluginActivator(this.languageConfigs);
+      IFileSystemAccess2 _eclipsePluginSrcGen_1 = this.projectConfig.getEclipsePluginSrcGen();
+      _createEclipsePluginActivator.writeTo(_eclipsePluginSrcGen_1);
+    }
   }
   
-  protected void generatePluginXml(final PluginXmlAccess pluginXml) {
-    try {
-      if ((pluginXml != null)) {
-        String _path = pluginXml.getPath();
-        File _file = new File(_path);
-        boolean _exists = _file.exists();
-        if (_exists) {
-          String _path_1 = pluginXml.getPath();
-          boolean _endsWith = _path_1.endsWith(".xml");
-          if (_endsWith) {
-            String _path_2 = pluginXml.getPath();
-            String _plus = (_path_2 + "_gen");
-            pluginXml.setPath(_plus);
-            TextFileAccess _createPluginXml = this.templates.createPluginXml(pluginXml);
-            _createPluginXml.writeToFile();
+  protected void generatePluginXmls() {
+    PluginXmlAccess _runtimePluginXml = this.projectConfig.getRuntimePluginXml();
+    PluginXmlAccess _runtimeTestPluginXml = this.projectConfig.getRuntimeTestPluginXml();
+    PluginXmlAccess _genericIdePluginXml = this.projectConfig.getGenericIdePluginXml();
+    PluginXmlAccess _genericIdeTestPluginXml = this.projectConfig.getGenericIdeTestPluginXml();
+    PluginXmlAccess _eclipsePluginPluginXml = this.projectConfig.getEclipsePluginPluginXml();
+    PluginXmlAccess _eclipsePluginTestPluginXml = this.projectConfig.getEclipsePluginTestPluginXml();
+    PluginXmlAccess _ideaPluginPluginXml = this.projectConfig.getIdeaPluginPluginXml();
+    PluginXmlAccess _ideaPluginTestPluginXml = this.projectConfig.getIdeaPluginTestPluginXml();
+    PluginXmlAccess _webPluginXml = this.projectConfig.getWebPluginXml();
+    PluginXmlAccess _webTestPluginXml = this.projectConfig.getWebTestPluginXml();
+    final Set<PluginXmlAccess> pluginXmls = Collections.<PluginXmlAccess>unmodifiableSet(CollectionLiterals.<PluginXmlAccess>newHashSet(_runtimePluginXml, _runtimeTestPluginXml, _genericIdePluginXml, _genericIdeTestPluginXml, _eclipsePluginPluginXml, _eclipsePluginTestPluginXml, _ideaPluginPluginXml, _ideaPluginTestPluginXml, _webPluginXml, _webTestPluginXml));
+    Iterable<PluginXmlAccess> _filterNull = IterableExtensions.<PluginXmlAccess>filterNull(pluginXmls);
+    final Function1<PluginXmlAccess, String> _function = new Function1<PluginXmlAccess, String>() {
+      @Override
+      public String apply(final PluginXmlAccess it) {
+        return it.getPath();
+      }
+    };
+    List<PluginXmlAccess> _sortBy = IterableExtensions.<PluginXmlAccess, String>sortBy(_filterNull, _function);
+    final Procedure1<PluginXmlAccess> _function_1 = new Procedure1<PluginXmlAccess>() {
+      @Override
+      public void apply(final PluginXmlAccess pluginXml) {
+        try {
+          String _path = pluginXml.getPath();
+          File _file = new File(_path);
+          boolean _exists = _file.exists();
+          if (_exists) {
+            String _path_1 = pluginXml.getPath();
+            boolean _endsWith = _path_1.endsWith(".xml");
+            if (_endsWith) {
+              String _path_2 = pluginXml.getPath();
+              String _plus = (_path_2 + "_gen");
+              pluginXml.setPath(_plus);
+              TextFileAccess _createPluginXml = XtextGenerator.this.templates.createPluginXml(pluginXml);
+              _createPluginXml.writeToFile();
+            }
+          } else {
+            TextFileAccess _createPluginXml_1 = XtextGenerator.this.templates.createPluginXml(pluginXml);
+            _createPluginXml_1.writeToFile();
           }
-        } else {
-          TextFileAccess _createPluginXml_1 = this.templates.createPluginXml(pluginXml);
-          _createPluginXml_1.writeToFile();
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    };
+    IterableExtensions.<PluginXmlAccess>forEach(_sortBy, _function_1);
   }
   
   @Pure

@@ -27,7 +27,6 @@ import org.eclipse.xtext.util.MergeableManifest
 import org.eclipse.xtext.xtext.generator.model.CodeConfig
 import org.eclipse.xtext.xtext.generator.model.IXtextProjectConfig
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess
-import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 /**
@@ -63,6 +62,15 @@ class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGe
 	 */
 	def void addLanguage(LanguageConfig2 language) {
 		this.languageConfigs.add(language)
+	}
+	
+	override protected checkConfigurationInternal(Issues issues) {
+		if (configuration !== null) {
+			configuration.checkConfiguration(this, issues)
+		}
+		for (language : languageConfigs) {
+			language.checkConfiguration(this, issues)
+		}
 	}
 	
 	protected def Injector createInjector() {
@@ -120,25 +128,27 @@ class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGe
 	}
 	
 	protected def generateManifests() {
-		val firstGrammar = languageConfigs.head?.grammar
-		generateManifest(projectConfig.runtimeManifest, null)
-		generateManifest(projectConfig.runtimeTestManifest, null)
-		generateManifest(projectConfig.genericIdeManifest, null)
-		generateManifest(projectConfig.genericIdeTestManifest, null)
-		generateManifest(projectConfig.eclipsePluginManifest, firstGrammar.eclipsePluginActivator)
-		generateManifest(projectConfig.eclipsePluginTestManifest, null)
-		generateManifest(projectConfig.ideaPluginManifest, null)
-		generateManifest(projectConfig.ideaPluginTestManifest, null)
-		generateManifest(projectConfig.webManifest, null)
-		generateManifest(projectConfig.webTestManifest, null)
-	}
-	
-	protected def generateManifest(ManifestAccess manifest, TypeReference activator) {
-		if (manifest !== null) {
+		val manifests = #{
+			projectConfig.runtimeManifest,
+			projectConfig.runtimeTestManifest,
+			projectConfig.genericIdeManifest,
+			projectConfig.genericIdeTestManifest,
+			projectConfig.eclipsePluginManifest,
+			projectConfig.eclipsePluginTestManifest,
+			projectConfig.ideaPluginManifest,
+			projectConfig.ideaPluginTestManifest,
+			projectConfig.webManifest,
+			projectConfig.webTestManifest
+		}
+		manifests.filterNull.sortBy[path].forEach[ manifest |
 			if (manifest.bundleName === null) {
 				val segments = manifest.path.split('/')
 				if (segments.length >= 3 && segments.get(segments.length - 2) == 'META-INF')
 					manifest.bundleName = segments.get(segments.length - 3)
+			}
+			var TypeReference activator
+			if (manifest === projectConfig.eclipsePluginManifest) {
+				activator = languageConfigs.head?.grammar.eclipsePluginActivator
 			}
 			val file = new File(manifest.path)
 			if (file.exists) {
@@ -151,12 +161,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGe
 			} else {
 				templates.createManifest(manifest, activator).writeToFile()
 			}
-		}
-	}
-	
-	protected def generateActivator() {
-		if (projectConfig.eclipsePluginSrcGen !== null)
-			templates.createEclipsePluginActivator(languageConfigs).writeTo(projectConfig.eclipsePluginSrcGen)
+		]
 	}
 
 	protected def mergeManifest(ManifestAccess manifest, File file, TypeReference activator) throws IOException {
@@ -183,21 +188,25 @@ class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGe
 		}
 	}
 	
-	protected def generatePluginXmls() {
-		generatePluginXml(projectConfig.runtimePluginXml)
-		generatePluginXml(projectConfig.runtimeTestPluginXml)
-		generatePluginXml(projectConfig.genericIdePluginXml)
-		generatePluginXml(projectConfig.genericIdeTestPluginXml)
-		generatePluginXml(projectConfig.eclipsePluginPluginXml)
-		generatePluginXml(projectConfig.eclipsePluginTestPluginXml)
-		generatePluginXml(projectConfig.ideaPluginPluginXml)
-		generatePluginXml(projectConfig.ideaPluginTestPluginXml)
-		generatePluginXml(projectConfig.webPluginXml)
-		generatePluginXml(projectConfig.webTestPluginXml)
+	protected def generateActivator() {
+		if (projectConfig.eclipsePluginSrcGen !== null)
+			templates.createEclipsePluginActivator(languageConfigs).writeTo(projectConfig.eclipsePluginSrcGen)
 	}
 	
-	protected def generatePluginXml(PluginXmlAccess pluginXml) {
-		if (pluginXml !== null) {
+	protected def generatePluginXmls() {
+		val pluginXmls = #{
+			projectConfig.runtimePluginXml,
+			projectConfig.runtimeTestPluginXml,
+			projectConfig.genericIdePluginXml,
+			projectConfig.genericIdeTestPluginXml,
+			projectConfig.eclipsePluginPluginXml,
+			projectConfig.eclipsePluginTestPluginXml,
+			projectConfig.ideaPluginPluginXml,
+			projectConfig.ideaPluginTestPluginXml,
+			projectConfig.webPluginXml,
+			projectConfig.webTestPluginXml
+		}
+		pluginXmls.filterNull.sortBy[path].forEach[ pluginXml |
 			if (new File(pluginXml.path).exists) {
 				if (pluginXml.path.endsWith('.xml')) {
 					pluginXml.path = pluginXml.path + '_gen'
@@ -206,7 +215,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGe
 			} else {
 				templates.createPluginXml(pluginXml).writeToFile()
 			}
-		}
+		]
 	}
 	
 }

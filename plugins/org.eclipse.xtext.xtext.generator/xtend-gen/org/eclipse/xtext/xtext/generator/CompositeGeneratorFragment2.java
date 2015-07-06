@@ -9,9 +9,11 @@ package org.eclipse.xtext.xtext.generator;
 
 import com.google.inject.Injector;
 import java.util.List;
+import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xtext.generator.IGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.LanguageConfig2;
+import org.eclipse.xtext.xtext.generator.XtextGenerator;
 
 /**
  * A composite generator fragment delegates to its contained fragments.
@@ -25,6 +27,13 @@ public class CompositeGeneratorFragment2 implements IGeneratorFragment2 {
       throw new IllegalArgumentException();
     }
     this.fragments.add(fragment);
+  }
+  
+  @Override
+  public void checkConfiguration(final XtextGenerator generator, final Issues issues) {
+    for (final IGeneratorFragment2 fragment : this.fragments) {
+      fragment.checkConfiguration(generator, issues);
+    }
   }
   
   @Override

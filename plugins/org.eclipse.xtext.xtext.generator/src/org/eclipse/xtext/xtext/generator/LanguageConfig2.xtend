@@ -69,8 +69,7 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 {
 	def List<String> getFileExtensions() {
 		if (fileExtensions === null || fileExtensions.empty) {
 			val lowerCase = GrammarUtil.getName(grammar).toLowerCase
-			if (LOG.infoEnabled)
-				LOG.info("No explicit fileExtensions configured. Using '*." + lowerCase + "'.")
+			LOG.info("No explicit fileExtensions configured. Using '*." + lowerCase + "'.")
 			return Collections.singletonList(lowerCase)
 		}
 		return fileExtensions

@@ -10,14 +10,17 @@ package org.eclipse.xtext.xtext.generator;
 import com.google.inject.Binder;
 import com.google.inject.binder.AnnotatedBindingBuilder;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.parser.EclipseProjectPropertiesEncodingProvider;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xtext.generator.XtextGenerator;
 import org.eclipse.xtext.xtext.generator.model.CodeConfig;
 import org.eclipse.xtext.xtext.generator.model.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.WizardConfig;
 import org.eclipse.xtext.xtext.generator.model.XtextProjectConfig;
 
 @SuppressWarnings("all")
@@ -28,10 +31,16 @@ public class DefaultGeneratorModule extends AbstractGenericModule {
   @Accessors
   private CodeConfig code;
   
+  protected void checkConfiguration(final XtextGenerator generator, final Issues issues) {
+    if ((this.project != null)) {
+      this.project.checkConfiguration(generator, issues);
+    }
+  }
+  
   public void configureXtextProjectConfig(final Binder binder) {
     if ((this.project == null)) {
-      XtextProjectConfig _xtextProjectConfig = new XtextProjectConfig();
-      this.project = _xtextProjectConfig;
+      WizardConfig _wizardConfig = new WizardConfig();
+      this.project = _wizardConfig;
     }
     AnnotatedBindingBuilder<IXtextProjectConfig> _bind = binder.<IXtextProjectConfig>bind(IXtextProjectConfig.class);
     _bind.toInstance(this.project);

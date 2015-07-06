@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtext.generator
 
 import com.google.inject.Binder
 import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.emf.mwe.core.issues.Issues
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.parser.EclipseProjectPropertiesEncodingProvider
 import org.eclipse.xtext.parser.IEncodingProvider
@@ -16,6 +17,7 @@ import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.service.AbstractGenericModule
 import org.eclipse.xtext.xtext.generator.model.CodeConfig
 import org.eclipse.xtext.xtext.generator.model.IXtextProjectConfig
+import org.eclipse.xtext.xtext.generator.model.WizardConfig
 import org.eclipse.xtext.xtext.generator.model.XtextProjectConfig
 
 class DefaultGeneratorModule extends AbstractGenericModule {
@@ -26,9 +28,15 @@ class DefaultGeneratorModule extends AbstractGenericModule {
 	@Accessors
 	CodeConfig code
 	
+	protected def checkConfiguration(XtextGenerator generator, Issues issues) {
+		if (project !== null) {
+			project.checkConfiguration(generator, issues)
+		}
+	}
+	
 	def configureXtextProjectConfig(Binder binder) {
 		if (project === null)
-			project = new XtextProjectConfig
+			project = new WizardConfig
 		binder.bind(IXtextProjectConfig).toInstance(project)
 	}
 	

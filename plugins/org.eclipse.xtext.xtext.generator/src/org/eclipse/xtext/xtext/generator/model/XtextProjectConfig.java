@@ -7,8 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.model;
 
+import com.google.common.collect.Maps;
 import com.google.inject.Injector;
+import java.util.Map;
+import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
+import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xtext.generator.XtextGenerator;
 
 /**
  * Use this class to configure output paths in the XtextGenerator.
@@ -60,68 +65,313 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 	private FileSystemAccess orionJsGen;
 	private FileSystemAccess aceJsGen;
 	
+	public void checkConfiguration(XtextGenerator generator, Issues issues) {
+		if (runtimeManifest != null && Strings.isEmpty(runtimeManifest.getPath())) {
+			issues.addError(generator, "The property 'path' must be set.", runtimeManifest);
+		}
+		if (runtimePluginXml != null && Strings.isEmpty(runtimePluginXml.getPath())) {
+			issues.addError(generator, "The property 'path' must be set.", runtimePluginXml);
+		}
+		if (runtimeTestManifest != null && Strings.isEmpty(runtimeTestManifest.getPath())) {
+			issues.addError(generator, "The property 'path' must be set.", runtimeTestManifest);
+		}
+		if (runtimeTestPluginXml != null && Strings.isEmpty(runtimeTestPluginXml.getPath())) {
+			issues.addError(generator, "The property 'path' must be set.", runtimeTestPluginXml);
+		}
+		if (genericIdeManifest != null && Strings.isEmpty(genericIdeManifest.getPath())) {
+			issues.addError(generator, "The property 'path' must be set.", genericIdeManifest);
+		}
+		if (genericIdePluginXml != null && Strings.isEmpty(genericIdePluginXml.getPath())) {
+			issues.addError(generator, "The property 'path' must be set.", genericIdePluginXml);
+		}
+		if (genericIdeTestManifest != null && Strings.isEmpty(genericIdeTestManifest.getPath())) {
+			issues.addError(generator, "The property 'path' must be set.", genericIdeTestManifest);
+		}
+		if (genericIdeTestPluginXml != null && Strings.isEmpty(genericIdeTestPluginXml.getPath())) {
+			issues.addError(generator, "The property 'path' must be set.", genericIdeTestPluginXml);
+		}
+		if (eclipsePluginManifest != null && Strings.isEmpty(eclipsePluginManifest.getPath())) {
+			issues.addError(generator, "The property 'path' must be set.", eclipsePluginManifest);
+		}
+		if (eclipsePluginPluginXml != null && Strings.isEmpty(eclipsePluginPluginXml.getPath())) {
+			issues.addError(generator, "The property 'path' must be set.", eclipsePluginPluginXml);
+		}
+		if (eclipsePluginTestManifest != null && Strings.isEmpty(eclipsePluginTestManifest.getPath())) {
+			issues.addError(generator, "The property 'path' must be set.", eclipsePluginTestManifest);
+		}
+		if (eclipsePluginTestPluginXml != null && Strings.isEmpty(eclipsePluginTestPluginXml.getPath())) {
+			issues.addError(generator, "The property 'path' must be set.", eclipsePluginTestPluginXml);
+		}
+		if (ideaPluginManifest != null && Strings.isEmpty(ideaPluginManifest.getPath())) {
+			issues.addError(generator, "The property 'path' must be set.", ideaPluginManifest);
+		}
+		if (ideaPluginPluginXml != null && Strings.isEmpty(ideaPluginPluginXml.getPath())) {
+			issues.addError(generator, "The property 'path' must be set.", ideaPluginPluginXml);
+		}
+		if (ideaPluginTestManifest != null && Strings.isEmpty(ideaPluginTestManifest.getPath())) {
+			issues.addError(generator, "The property 'path' must be set.", ideaPluginTestManifest);
+		}
+		if (ideaPluginTestPluginXml != null && Strings.isEmpty(ideaPluginTestPluginXml.getPath())) {
+			issues.addError(generator, "The property 'path' must be set.", ideaPluginTestPluginXml);
+		}
+		if (webManifest != null && Strings.isEmpty(webManifest.getPath())) {
+			issues.addError(generator, "The property 'path' must be set.", webManifest);
+		}
+		if (webPluginXml != null && Strings.isEmpty(webPluginXml.getPath())) {
+			issues.addError(generator, "The property 'path' must be set.", webPluginXml);
+		}
+		if (webTestManifest != null && Strings.isEmpty(webTestManifest.getPath())) {
+			issues.addError(generator, "The property 'path' must be set.", webTestManifest);
+		}
+		if (webTestPluginXml != null && Strings.isEmpty(webTestPluginXml.getPath())) {
+			issues.addError(generator, "The property 'path' must be set.", webTestPluginXml);
+		}
+	}
+	
 	@Override
 	public void initialize(Injector injector) {
 		injector.injectMembers(this);
+		Map<String, ManifestAccess> manifestPaths = Maps.newHashMapWithExpectedSize(10);
+		Map<String, PluginXmlAccess> pluginXmlPaths = Maps.newHashMapWithExpectedSize(10);
+		
+		// Initialize runtime configuration
 		if (runtimeSrc != null) {
 			runtimeSrc.initialize(injector);
 		}
 		if (runtimeSrcGen != null) {
 			runtimeSrcGen.initialize(injector);
 		}
+		if (runtimeManifest != null) {
+			ManifestAccess access = manifestPaths.get(runtimeManifest.getPath());
+			if (access == null) {
+				manifestPaths.put(runtimeManifest.getPath(), runtimeManifest);
+			} else if (access != runtimeManifest) {
+				setRuntimeManifest(access);
+			}
+		}
+		if (runtimePluginXml != null) {
+			PluginXmlAccess access = pluginXmlPaths.get(runtimePluginXml.getPath());
+			if (access == null) {
+				pluginXmlPaths.put(runtimePluginXml.getPath(), runtimePluginXml);
+			} else if (access != runtimePluginXml) {
+				setRuntimePluginXml(access);
+			}
+		}
+		
+		// Initialize runtimeTest configuration
 		if (runtimeTestSrc != null) {
 			runtimeTestSrc.initialize(injector);
 		}
 		if (runtimeTestSrcGen != null) {
 			runtimeTestSrcGen.initialize(injector);
 		}
+		if (runtimeTestManifest != null) {
+			ManifestAccess access = manifestPaths.get(runtimeTestManifest.getPath());
+			if (access == null) {
+				manifestPaths.put(runtimeTestManifest.getPath(), runtimeTestManifest);
+			} else if (access != runtimeTestManifest) {
+				setRuntimeTestManifest(access);
+			}
+		}
+		if (runtimeTestPluginXml != null) {
+			PluginXmlAccess access = pluginXmlPaths.get(runtimeTestPluginXml.getPath());
+			if (access == null) {
+				pluginXmlPaths.put(runtimeTestPluginXml.getPath(), runtimeTestPluginXml);
+			} else if (access != runtimeTestPluginXml) {
+				setRuntimeTestPluginXml(access);
+			}
+		}
+		
+		// Initialize genericIde configuration
 		if (genericIdeSrc != null) {
 			genericIdeSrc.initialize(injector);
 		}
 		if (genericIdeSrcGen != null) {
 			genericIdeSrcGen.initialize(injector);
 		}
+		if (genericIdeManifest != null) {
+			ManifestAccess access = manifestPaths.get(genericIdeManifest.getPath());
+			if (access == null) {
+				manifestPaths.put(genericIdeManifest.getPath(), genericIdeManifest);
+			} else if (access != genericIdeManifest) {
+				setGenericIdeManifest(access);
+			}
+		}
+		if (genericIdePluginXml != null) {
+			PluginXmlAccess access = pluginXmlPaths.get(genericIdePluginXml.getPath());
+			if (access == null) {
+				pluginXmlPaths.put(genericIdePluginXml.getPath(), genericIdePluginXml);
+			} else if (access != genericIdePluginXml) {
+				setGenericIdePluginXml(access);
+			}
+		}
+		
+		// Initialize genericIdeTest configuration
 		if (genericIdeTestSrc != null) {
 			genericIdeTestSrc.initialize(injector);
 		}
 		if (genericIdeTestSrcGen != null) {
 			genericIdeTestSrcGen.initialize(injector);
 		}
+		if (genericIdeTestManifest != null) {
+			ManifestAccess access = manifestPaths.get(genericIdeTestManifest.getPath());
+			if (access == null) {
+				manifestPaths.put(genericIdeTestManifest.getPath(), genericIdeTestManifest);
+			} else if (access != genericIdeTestManifest) {
+				setGenericIdeTestManifest(access);
+			}
+		}
+		if (genericIdeTestPluginXml != null) {
+			PluginXmlAccess access = pluginXmlPaths.get(genericIdeTestPluginXml.getPath());
+			if (access == null) {
+				pluginXmlPaths.put(genericIdeTestPluginXml.getPath(), genericIdeTestPluginXml);
+			} else if (access != genericIdeTestPluginXml) {
+				setGenericIdeTestPluginXml(access);
+			}
+		}
+		
+		// Initialize eclipsePlugin configuration
 		if (eclipsePluginSrc != null) {
 			eclipsePluginSrc.initialize(injector);
 		}
 		if (eclipsePluginSrcGen != null) {
 			eclipsePluginSrcGen.initialize(injector);
 		}
+		if (eclipsePluginManifest != null) {
+			ManifestAccess access = manifestPaths.get(eclipsePluginManifest.getPath());
+			if (access == null) {
+				manifestPaths.put(eclipsePluginManifest.getPath(), eclipsePluginManifest);
+			} else if (access != eclipsePluginManifest) {
+				setEclipsePluginManifest(access);
+			}
+		}
+		if (eclipsePluginPluginXml != null) {
+			PluginXmlAccess access = pluginXmlPaths.get(eclipsePluginPluginXml.getPath());
+			if (access == null) {
+				pluginXmlPaths.put(eclipsePluginPluginXml.getPath(), eclipsePluginPluginXml);
+			} else if (access != eclipsePluginPluginXml) {
+				setEclipsePluginPluginXml(access);
+			}
+		}
+		
+		// Initialize eclipsePluginTest configuration
 		if (eclipsePluginTestSrc != null) {
 			eclipsePluginTestSrc.initialize(injector);
 		}
 		if (eclipsePluginTestSrcGen != null) {
 			eclipsePluginTestSrcGen.initialize(injector);
 		}
+		if (eclipsePluginTestManifest != null) {
+			ManifestAccess access = manifestPaths.get(eclipsePluginTestManifest.getPath());
+			if (access == null) {
+				manifestPaths.put(eclipsePluginTestManifest.getPath(), eclipsePluginTestManifest);
+			} else if (access != eclipsePluginTestManifest) {
+				setEclipsePluginTestManifest(access);
+			}
+		}
+		if (eclipsePluginTestPluginXml != null) {
+			PluginXmlAccess access = pluginXmlPaths.get(eclipsePluginTestPluginXml.getPath());
+			if (access == null) {
+				pluginXmlPaths.put(eclipsePluginTestPluginXml.getPath(), eclipsePluginTestPluginXml);
+			} else if (access != eclipsePluginTestPluginXml) {
+				setEclipsePluginTestPluginXml(access);
+			}
+		}
+		
+		// Initialize ideaPlugin configuration
 		if (ideaPluginSrc != null) {
 			ideaPluginSrc.initialize(injector);
 		}
 		if (ideaPluginSrcGen != null) {
 			ideaPluginSrcGen.initialize(injector);
 		}
+		if (ideaPluginManifest != null) {
+			ManifestAccess access = manifestPaths.get(ideaPluginManifest.getPath());
+			if (access == null) {
+				manifestPaths.put(ideaPluginManifest.getPath(), ideaPluginManifest);
+			} else if (access != ideaPluginManifest) {
+				setIdeaPluginManifest(access);
+			}
+		}
+		if (ideaPluginPluginXml != null) {
+			PluginXmlAccess access = pluginXmlPaths.get(ideaPluginPluginXml.getPath());
+			if (access == null) {
+				pluginXmlPaths.put(ideaPluginPluginXml.getPath(), ideaPluginPluginXml);
+			} else if (access != ideaPluginPluginXml) {
+				setIdeaPluginPluginXml(access);
+			}
+		}
+		
+		// Initialize ideaPluginTest configuration
 		if (ideaPluginTestSrc != null) {
 			ideaPluginTestSrc.initialize(injector);
 		}
 		if (ideaPluginTestSrcGen != null) {
 			ideaPluginTestSrcGen.initialize(injector);
 		}
+		if (ideaPluginTestManifest != null) {
+			ManifestAccess access = manifestPaths.get(ideaPluginTestManifest.getPath());
+			if (access == null) {
+				manifestPaths.put(ideaPluginTestManifest.getPath(), ideaPluginTestManifest);
+			} else if (access != ideaPluginTestManifest) {
+				setIdeaPluginTestManifest(access);
+			}
+		}
+		if (ideaPluginTestPluginXml != null) {
+			PluginXmlAccess access = pluginXmlPaths.get(ideaPluginTestPluginXml.getPath());
+			if (access == null) {
+				pluginXmlPaths.put(ideaPluginTestPluginXml.getPath(), ideaPluginTestPluginXml);
+			} else if (access != ideaPluginTestPluginXml) {
+				setIdeaPluginTestPluginXml(access);
+			}
+		}
+		
+		// Initialize web configuration
 		if (webSrc != null) {
 			webSrc.initialize(injector);
 		}
 		if (webSrcGen != null) {
 			webSrcGen.initialize(injector);
 		}
+		if (webManifest != null) {
+			ManifestAccess access = manifestPaths.get(webManifest.getPath());
+			if (access == null) {
+				manifestPaths.put(webManifest.getPath(), webManifest);
+			} else if (access != webManifest) {
+				setWebManifest(access);
+			}
+		}
+		if (webPluginXml != null) {
+			PluginXmlAccess access = pluginXmlPaths.get(webPluginXml.getPath());
+			if (access == null) {
+				pluginXmlPaths.put(webPluginXml.getPath(), webPluginXml);
+			} else if (access != webPluginXml) {
+				setWebPluginXml(access);
+			}
+		}
+		
+		// Initialize webTest configuration
 		if (webTestSrc != null) {
 			webTestSrc.initialize(injector);
 		}
 		if (webTestSrcGen != null) {
 			webTestSrcGen.initialize(injector);
+		}
+		if (webTestManifest != null) {
+			ManifestAccess access = manifestPaths.get(webTestManifest.getPath());
+			if (access == null) {
+				manifestPaths.put(webTestManifest.getPath(), webTestManifest);
+			} else if (access != webTestManifest) {
+				setWebTestManifest(access);
+			}
+		}
+		if (webTestPluginXml != null) {
+			PluginXmlAccess access = pluginXmlPaths.get(webTestPluginXml.getPath());
+			if (access == null) {
+				pluginXmlPaths.put(webTestPluginXml.getPath(), webTestPluginXml);
+			} else if (access != webTestPluginXml) {
+				setWebTestPluginXml(access);
+			}
 		}
 		if (orionJsGen != null) {
 			orionJsGen.initialize(injector);

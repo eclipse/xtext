@@ -100,10 +100,7 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
     if (_or) {
       String _name = GrammarUtil.getName(this.grammar);
       final String lowerCase = _name.toLowerCase();
-      boolean _isInfoEnabled = LanguageConfig2.LOG.isInfoEnabled();
-      if (_isInfoEnabled) {
-        LanguageConfig2.LOG.info((("No explicit fileExtensions configured. Using \'*." + lowerCase) + "\'."));
-      }
+      LanguageConfig2.LOG.info((("No explicit fileExtensions configured. Using \'*." + lowerCase) + "\'."));
       return Collections.<String>singletonList(lowerCase);
     }
     return this.fileExtensions;
