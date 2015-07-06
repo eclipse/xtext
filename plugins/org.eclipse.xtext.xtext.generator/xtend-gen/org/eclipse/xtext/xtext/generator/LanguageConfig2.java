@@ -53,18 +53,14 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.CompositeGeneratorFragment2;
-import org.eclipse.xtext.xtext.generator.XtextGeneratorTemplates;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
-import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
+import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess;
 
 @Log
 @SuppressWarnings("all")
 public class LanguageConfig2 extends CompositeGeneratorFragment2 {
   @Inject
   private Provider<ResourceSet> resourceSetProvider;
-  
-  @Inject
-  private XtextGeneratorTemplates generatorTemplates;
   
   @Accessors
   private String uri;
@@ -77,11 +73,14 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
   @Accessors
   private final List<String> loadedResources = CollectionLiterals.<String>newArrayList();
   
-  private JavaFileAccess runtimeSetupImpl;
+  @Accessors
+  private final StandaloneSetupAccess runtimeGenSetup = new StandaloneSetupAccess();
   
-  private GuiceModuleAccess runtimeModule;
+  @Accessors
+  private final GuiceModuleAccess runtimeGenModule = new GuiceModuleAccess();
   
-  private GuiceModuleAccess eclipsePluginModule;
+  @Accessors
+  private final GuiceModuleAccess eclipsePluginGenModule = new GuiceModuleAccess();
   
   public void setFileExtensions(final String fileExtensions) {
     String _trim = fileExtensions.trim();
@@ -112,32 +111,6 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
   
   public void addLoadedResource(final String uri) {
     this.loadedResources.add(uri);
-  }
-  
-  public JavaFileAccess getRuntimeSetup() {
-    if ((this.runtimeSetupImpl == null)) {
-      JavaFileAccess _startRuntimeGenSetup = this.generatorTemplates.startRuntimeGenSetup(this);
-      this.runtimeSetupImpl = _startRuntimeGenSetup;
-    }
-    return this.runtimeSetupImpl;
-  }
-  
-  public GuiceModuleAccess getRuntimeModule() {
-    boolean _equals = Objects.equal(this.runtimeModule, null);
-    if (_equals) {
-      GuiceModuleAccess _startRuntimeGenModule = this.generatorTemplates.startRuntimeGenModule(this);
-      this.runtimeModule = _startRuntimeGenModule;
-    }
-    return this.runtimeModule;
-  }
-  
-  public GuiceModuleAccess getEclipsePluginModule() {
-    boolean _equals = Objects.equal(this.eclipsePluginModule, null);
-    if (_equals) {
-      GuiceModuleAccess _startEclipsePluginGenModule = this.generatorTemplates.startEclipsePluginGenModule(this);
-      this.eclipsePluginModule = _startEclipsePluginGenModule;
-    }
-    return this.eclipsePluginModule;
   }
   
   @Override
@@ -424,5 +397,20 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
   @Pure
   public List<String> getLoadedResources() {
     return this.loadedResources;
+  }
+  
+  @Pure
+  public StandaloneSetupAccess getRuntimeGenSetup() {
+    return this.runtimeGenSetup;
+  }
+  
+  @Pure
+  public GuiceModuleAccess getRuntimeGenModule() {
+    return this.runtimeGenModule;
+  }
+  
+  @Pure
+  public GuiceModuleAccess getEclipsePluginGenModule() {
+    return this.eclipsePluginGenModule;
   }
 }

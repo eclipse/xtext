@@ -13,12 +13,10 @@ import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
-import org.eclipse.xtext.xtext.generator.model.CodeConfig;
-import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
-import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
+@Accessors
 @SuppressWarnings("all")
-public class GuiceModuleAccess extends JavaFileAccess {
+public class GuiceModuleAccess {
   @Data
   public static class BindKey {
     private final String type;
@@ -277,12 +275,7 @@ public class GuiceModuleAccess extends JavaFileAccess {
     }
   }
   
-  @Accessors
   private final List<GuiceModuleAccess.Binding> bindings = CollectionLiterals.<GuiceModuleAccess.Binding>newArrayList();
-  
-  public GuiceModuleAccess(final TypeReference typeRef, final CodeConfig codeConfig) {
-    super(typeRef, codeConfig);
-  }
   
   @Pure
   public List<GuiceModuleAccess.Binding> getBindings() {

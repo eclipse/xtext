@@ -35,14 +35,12 @@ import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
-import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
+import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess
 
 @Log
 class LanguageConfig2 extends CompositeGeneratorFragment2 {
 	
 	@Inject Provider<ResourceSet> resourceSetProvider
-	
-	@Inject XtextGeneratorTemplates generatorTemplates
 	
 	@Accessors
 	String uri
@@ -55,11 +53,14 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 {
 	@Accessors
 	val List<String> loadedResources = newArrayList
 	
-	JavaFileAccess runtimeSetupImpl
+	@Accessors
+	val StandaloneSetupAccess runtimeGenSetup = new StandaloneSetupAccess
 	
-	GuiceModuleAccess runtimeModule
+	@Accessors
+	val GuiceModuleAccess runtimeGenModule = new GuiceModuleAccess
 	
-	GuiceModuleAccess eclipsePluginModule
+	@Accessors
+	val GuiceModuleAccess eclipsePluginGenModule = new GuiceModuleAccess
 	
 	def void setFileExtensions(String fileExtensions) {
 		this.fileExtensions = fileExtensions.trim.split("\\s*,\\s*").toList
@@ -77,24 +78,6 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 {
 	
 	def void addLoadedResource(String uri) {
 		this.loadedResources.add(uri)
-	}
-	
-	def JavaFileAccess getRuntimeSetup() {
-		if (runtimeSetupImpl === null)
-			runtimeSetupImpl = generatorTemplates.startRuntimeGenSetup(this)
-		return runtimeSetupImpl
-	}
-	
-	def GuiceModuleAccess getRuntimeModule() {
-		if (runtimeModule == null)
-			runtimeModule = generatorTemplates.startRuntimeGenModule(this)
-		return runtimeModule
-	}
-	
-	def GuiceModuleAccess getEclipsePluginModule() {
-		if (eclipsePluginModule == null)
-			eclipsePluginModule = generatorTemplates.startEclipsePluginGenModule(this)
-		return eclipsePluginModule
 	}
 	
 	override initialize(Injector injector) {

@@ -20,43 +20,43 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 	private FileSystemAccess runtimeSrc;
 	private FileSystemAccess runtimeSrcGen;
 	private ManifestAccess runtimeManifest;
-	private TextFileAccess runtimePluginXml;
+	private PluginXmlAccess runtimePluginXml;
 	private FileSystemAccess runtimeTestSrc;
 	private FileSystemAccess runtimeTestSrcGen;
 	private ManifestAccess runtimeTestManifest;
-	private TextFileAccess runtimeTestPluginXml;
+	private PluginXmlAccess runtimeTestPluginXml;
 	private FileSystemAccess genericIdeSrc;
 	private FileSystemAccess genericIdeSrcGen;
 	private ManifestAccess genericIdeManifest;
-	private TextFileAccess genericIdePluginXml;
+	private PluginXmlAccess genericIdePluginXml;
 	private FileSystemAccess genericIdeTestSrc;
 	private FileSystemAccess genericIdeTestSrcGen;
 	private ManifestAccess genericIdeTestManifest;
-	private TextFileAccess genericIdeTestPluginXml;
+	private PluginXmlAccess genericIdeTestPluginXml;
 	private FileSystemAccess eclipsePluginSrc;
 	private FileSystemAccess eclipsePluginSrcGen;
 	private ManifestAccess eclipsePluginManifest;
-	private TextFileAccess eclipsePluginPluginXml;
+	private PluginXmlAccess eclipsePluginPluginXml;
 	private FileSystemAccess eclipsePluginTestSrc;
 	private FileSystemAccess eclipsePluginTestSrcGen;
 	private ManifestAccess eclipsePluginTestManifest;
-	private TextFileAccess eclipsePluginTestPluginXml;
+	private PluginXmlAccess eclipsePluginTestPluginXml;
 	private FileSystemAccess ideaPluginSrc;
 	private FileSystemAccess ideaPluginSrcGen;
 	private ManifestAccess ideaPluginManifest;
-	private TextFileAccess ideaPluginPluginXml;
+	private PluginXmlAccess ideaPluginPluginXml;
 	private FileSystemAccess ideaPluginTestSrc;
 	private FileSystemAccess ideaPluginTestSrcGen;
 	private ManifestAccess ideaPluginTestManifest;
-	private TextFileAccess ideaPluginTestPluginXml;
+	private PluginXmlAccess ideaPluginTestPluginXml;
 	private FileSystemAccess webSrc;
 	private FileSystemAccess webSrcGen;
 	private ManifestAccess webManifest;
-	private TextFileAccess webPluginXml;
+	private PluginXmlAccess webPluginXml;
 	private FileSystemAccess webTestSrc;
 	private FileSystemAccess webTestSrcGen;
 	private ManifestAccess webTestManifest;
-	private TextFileAccess webTestPluginXml;
+	private PluginXmlAccess webTestPluginXml;
 	private FileSystemAccess orionJsGen;
 	private FileSystemAccess aceJsGen;
 	
@@ -158,18 +158,13 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		this.runtimeManifest = manifest;
 	}
 	
-	public void setRuntimePluginXml(String path) {
-		if (path != null) {
-			this.runtimePluginXml = new TextFileAccess();
-			this.runtimePluginXml.setPath(path);
-		} else {
-			this.runtimePluginXml = null;
-		}
+	@Override
+	public PluginXmlAccess getRuntimePluginXml() {
+		return runtimePluginXml;
 	}
 	
-	@Override
-	public TextFileAccess getRuntimePluginXml() {
-		return this.runtimePluginXml;
+	public void setRuntimePluginXml(PluginXmlAccess pluginXml) {
+		this.runtimePluginXml = pluginXml;
 	}
 	
 	@Override
@@ -199,18 +194,13 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		this.runtimeTestManifest = manifest;
 	}
 	
-	public void setRuntimeTestPluginXml(String path) {
-		if (path != null) {
-			this.runtimeTestPluginXml = new TextFileAccess();
-			this.runtimeTestPluginXml.setPath(path);
-		} else {
-			this.runtimeTestPluginXml = null;
-		}
+	@Override
+	public PluginXmlAccess getRuntimeTestPluginXml() {
+		return runtimeTestPluginXml;
 	}
 	
-	@Override
-	public TextFileAccess getRuntimeTestPluginXml() {
-		return this.runtimeTestPluginXml;
+	public void setRuntimeTestPluginXml(PluginXmlAccess pluginXml) {
+		this.runtimeTestPluginXml = pluginXml;
 	}
 	
 	@Override
@@ -240,18 +230,13 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		this.genericIdeManifest = manifest;
 	}
 	
-	public void setGenericIdePluginXml(String path) {
-		if (path != null) {
-			this.genericIdePluginXml = new TextFileAccess();
-			this.genericIdePluginXml.setPath(path);
-		} else {
-			this.genericIdePluginXml = null;
-		}
+	@Override
+	public PluginXmlAccess getGenericIdePluginXml() {
+		return genericIdePluginXml;
 	}
 	
-	@Override
-	public TextFileAccess getGenericIdePluginXml() {
-		return this.genericIdePluginXml;
+	public void setGenericIdePluginXml(PluginXmlAccess pluginXml) {
+		this.genericIdePluginXml = pluginXml;
 	}
 	
 	@Override
@@ -281,18 +266,13 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		this.genericIdeTestManifest = manifest;
 	}
 	
-	public void setGenericIdeTestPluginXml(String path) {
-		if (path != null) {
-			this.genericIdeTestPluginXml = new TextFileAccess();
-			this.genericIdeTestPluginXml.setPath(path);
-		} else {
-			this.genericIdeTestPluginXml = null;
-		}
+	@Override
+	public PluginXmlAccess getGenericIdeTestPluginXml() {
+		return genericIdeTestPluginXml;
 	}
 	
-	@Override
-	public TextFileAccess getGenericIdeTestPluginXml() {
-		return this.genericIdeTestPluginXml;
+	public void setGenericIdeTestPluginXml(PluginXmlAccess pluginXml) {
+		this.genericIdeTestPluginXml = pluginXml;
 	}
 	
 	@Override
@@ -322,18 +302,13 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		this.eclipsePluginManifest = manifest;
 	}
 	
-	public void setEclipsePluginPluginXml(String path) {
-		if (path != null) {
-			this.eclipsePluginPluginXml = new TextFileAccess();
-			this.eclipsePluginPluginXml.setPath(path);
-		} else {
-			this.eclipsePluginPluginXml = null;
-		}
+	@Override
+	public PluginXmlAccess getEclipsePluginPluginXml() {
+		return eclipsePluginPluginXml;
 	}
 	
-	@Override
-	public TextFileAccess getEclipsePluginPluginXml() {
-		return this.eclipsePluginPluginXml;
+	public void setEclipsePluginPluginXml(PluginXmlAccess pluginXml) {
+		this.eclipsePluginPluginXml = pluginXml;
 	}
 	
 	@Override
@@ -363,18 +338,13 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		this.eclipsePluginTestManifest = manifest;
 	}
 	
-	public void setEclipsePluginTestPluginXml(String path) {
-		if (path != null) {
-			this.eclipsePluginTestPluginXml = new TextFileAccess();
-			this.eclipsePluginTestPluginXml.setPath(path);
-		} else {
-			this.eclipsePluginTestPluginXml = null;
-		}
+	@Override
+	public PluginXmlAccess getEclipsePluginTestPluginXml() {
+		return eclipsePluginTestPluginXml;
 	}
 	
-	@Override
-	public TextFileAccess getEclipsePluginTestPluginXml() {
-		return this.eclipsePluginTestPluginXml;
+	public void setEclipsePluginTestPluginXml(PluginXmlAccess pluginXml) {
+		this.eclipsePluginTestPluginXml = pluginXml;
 	}
 	
 	@Override
@@ -404,18 +374,13 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		this.ideaPluginManifest = manifest;
 	}
 	
-	public void setIdeaPluginPluginXml(String path) {
-		if (path != null) {
-			this.ideaPluginPluginXml = new TextFileAccess();
-			this.ideaPluginPluginXml.setPath(path);
-		} else {
-			this.ideaPluginPluginXml = null;
-		}
+	@Override
+	public PluginXmlAccess getIdeaPluginPluginXml() {
+		return ideaPluginPluginXml;
 	}
 	
-	@Override
-	public TextFileAccess getIdeaPluginPluginXml() {
-		return this.ideaPluginPluginXml;
+	public void setIdeaPluginPluginXml(PluginXmlAccess pluginXml) {
+		this.ideaPluginPluginXml = pluginXml;
 	}
 	
 	@Override
@@ -445,18 +410,13 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		this.ideaPluginTestManifest = manifest;
 	}
 	
-	public void setIdeaPluginTestPluginXml(String path) {
-		if (path != null) {
-			this.ideaPluginTestPluginXml = new TextFileAccess();
-			this.ideaPluginTestPluginXml.setPath(path);
-		} else {
-			this.ideaPluginTestPluginXml = null;
-		}
+	@Override
+	public PluginXmlAccess getIdeaPluginTestPluginXml() {
+		return ideaPluginTestPluginXml;
 	}
 	
-	@Override
-	public TextFileAccess getIdeaPluginTestPluginXml() {
-		return this.ideaPluginTestPluginXml;
+	public void setIdeaPluginTestPluginXml(PluginXmlAccess pluginXml) {
+		this.ideaPluginTestPluginXml = pluginXml;
 	}
 	
 	@Override
@@ -486,18 +446,13 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		this.webManifest = manifest;
 	}
 	
-	public void setWebPluginXml(String path) {
-		if (path != null) {
-			this.webPluginXml = new TextFileAccess();
-			this.webPluginXml.setPath(path);
-		} else {
-			this.webPluginXml = null;
-		}
+	@Override
+	public PluginXmlAccess getWebPluginXml() {
+		return webPluginXml;
 	}
 	
-	@Override
-	public TextFileAccess getWebPluginXml() {
-		return this.webPluginXml;
+	public void setWebPluginXml(PluginXmlAccess pluginXml) {
+		this.webPluginXml = pluginXml;
 	}
 	
 	@Override
@@ -527,18 +482,13 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		this.webTestManifest = manifest;
 	}
 	
-	public void setWebTestPluginXml(String path) {
-		if (path != null) {
-			this.webTestPluginXml = new TextFileAccess();
-			this.webTestPluginXml.setPath(path);
-		} else {
-			this.webTestPluginXml = null;
-		}
+	@Override
+	public PluginXmlAccess getWebTestPluginXml() {
+		return webTestPluginXml;
 	}
 	
-	@Override
-	public TextFileAccess getWebTestPluginXml() {
-		return this.webTestPluginXml;
+	public void setWebTestPluginXml(PluginXmlAccess pluginXml) {
+		this.webTestPluginXml = pluginXml;
 	}
 	
 	@Override

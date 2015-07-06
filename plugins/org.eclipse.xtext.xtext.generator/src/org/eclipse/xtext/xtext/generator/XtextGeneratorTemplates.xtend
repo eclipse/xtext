@@ -18,11 +18,13 @@ import org.eclipse.xtext.Constants
 import org.eclipse.xtext.ISetup
 import org.eclipse.xtext.ISetupExtension
 import org.eclipse.xtext.XtextPackage
+import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.impl.BinaryGrammarResourceFactoryImpl
 import org.eclipse.xtext.service.SingletonBinding
 import org.eclipse.xtext.xtext.generator.model.CodeConfig
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
+import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess
 
 @Singleton
@@ -32,27 +34,29 @@ class XtextGeneratorTemplates {
 	
 	@Inject CodeConfig codeConfig
 	
-	def TextFileAccess startPluginXml(TextFileAccess file) {
-		file.path = 'plugin.xml'
+	@Inject IEncodingProvider encodingProvider
+	
+	def TextFileAccess createPluginXml(PluginXmlAccess pluginXml) {
+		val file = new TextFileAccess
+		file.encodingProvider = encodingProvider
+		file.path = pluginXml.path
 		file.content = '''
 			<?xml version="1.0" encoding="UTF-8"?>
 			<?eclipse version="3.0"?>
 			
 			<plugin>
-		'''
-		return file
-	}
-	
-	def TextFileAccess finishPluginXml(TextFileAccess file) {
-		file.content = '''
+				«FOR entry : pluginXml.entries»
+					«entry»
+				«ENDFOR»
 			</plugin>
 		'''
 		return file
 	}
 	
-	def JavaFileAccess getRuntimeSetup(LanguageConfig2 langConfig) {
+	def JavaFileAccess createRuntimeSetup(LanguageConfig2 langConfig) {
 		val g = langConfig.grammar
 		val javaFile = new JavaFileAccess(g.runtimeSetup, codeConfig)
+		javaFile.encodingProvider = encodingProvider
 		
 		javaFile.typeComment = '''
 			/**
@@ -71,9 +75,10 @@ class XtextGeneratorTemplates {
 		 return javaFile
 	}
 	
-	def JavaFileAccess startRuntimeGenSetup(LanguageConfig2 langConfig) {
+	def JavaFileAccess createRuntimeGenSetup(LanguageConfig2 langConfig) {
 		val g = langConfig.grammar
 		val javaFile = new JavaFileAccess(g.runtimeGenSetup, codeConfig)
+		javaFile.encodingProvider = encodingProvider
 		
 		javaFile.javaContent = '''
 			public class «g.runtimeGenSetup.simpleName» implements «ISetup», «ISetupExtension» {
@@ -113,17 +118,14 @@ class XtextGeneratorTemplates {
 				}
 			
 				public void register(«Injector» injector) {
+					«FOR reg : langConfig.runtimeGenSetup.registrations»
+						«reg»
+					«ENDFOR»
+				}
+			}
 		 '''
 		 javaFile.markedAsGenerated = true
 		 return javaFile
-	}
-	
-	def JavaFileAccess finishRuntimeGenSetup(JavaFileAccess javaFile) {
-		javaFile.javaContent = '''
-				}
-			}
-		'''
-		return javaFile
 	}
 	
 	private def getBindMethodName(GuiceModuleAccess.Binding it) {
@@ -144,9 +146,33 @@ class XtextGeneratorTemplates {
 		sequence.length > 0 && sequence.charAt(sequence.length - 1) == c
 	}
 	
-	def JavaFileAccess getRuntimeModule(LanguageConfig2 langConfig) {
+	private def createBindingMethod(GuiceModuleAccess.Binding it) '''
+		«IF !value.provider && value.statements.isEmpty»
+			// contributed by «contributedBy»
+			«IF key.singleton»@«SingletonBinding»«IF key.eagerSingleton»(eager=true)«ENDIF»«ENDIF»
+			public «IF value.expression === null»Class<? extends «key.type»>«ELSE»«key.type»«ENDIF» «bindMethodName»() {
+				return «IF value.expression !== null»«value.expression»«ELSE»«value.typeName».class«ENDIF»;
+			}
+		«ELSEIF value.statements.isEmpty»
+			// contributed by «contributedBy»
+			«IF key.singleton»@«SingletonBinding»«IF key.eagerSingleton»(eager=true)«ENDIF»«ENDIF»
+			public «IF value.expression==null»Class<? extends «Provider»<«key.type»>>«ELSE»«Provider»<«key.type»>«ENDIF» «bindMethodName»() {
+				return «IF value.expression!=null»«value.expression»«ELSE»«value.typeName».class«ENDIF»;
+			}
+		«ELSE»
+			// contributed by «contributedBy»
+			public void «bindMethodName»(«Binder» binder) {
+			«FOR statement : value.statements»
+				«statement»«IF !statement.endsWith(';')»;«ENDIF»
+			«ENDFOR»
+			}
+		«ENDIF»
+	'''
+	
+	def JavaFileAccess createRuntimeModule(LanguageConfig2 langConfig) {
 		val g = langConfig.grammar
 		val javaFile = new JavaFileAccess(g.runtimeModule, codeConfig)
+		javaFile.encodingProvider = encodingProvider
 		javaFile.typeComment = '''
 			/**
 			 * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -160,16 +186,17 @@ class XtextGeneratorTemplates {
 		return javaFile
 	}
 	
-	def GuiceModuleAccess startRuntimeGenModule(LanguageConfig2 langConfig) {
+	def JavaFileAccess createRuntimeGenModule(LanguageConfig2 langConfig) {
 		val g = langConfig.grammar
-		val module = new GuiceModuleAccess(g.runtimeGenModule, codeConfig)
+		val javaFile = new JavaFileAccess(g.runtimeGenModule, codeConfig)
+		javaFile.encodingProvider = encodingProvider
 		
-		module.typeComment = '''
+		javaFile.typeComment = '''
 			/**
 			 * Manual modifications go to {@link «g.runtimeModule.simpleName»}.
 			 */
 		'''
-		module.javaContent = '''
+		javaFile.javaContent = '''
 			public abstract class «g.runtimeGenModule.simpleName» extends «g.runtimeDefaultModule» {
 			
 				protected «'java.util.Properties'» properties = null;
@@ -188,14 +215,20 @@ class XtextGeneratorTemplates {
 					if (properties == null || properties.getProperty(Constants.FILE_EXTENSIONS) == null)
 						binder.bind(String.class).annotatedWith(«Names».named(«Constants».FILE_EXTENSIONS)).toInstance("«langConfig.fileExtensions.join(',')»");
 				}
+				
+				«FOR binding : langConfig.runtimeGenModule.bindings»
+					«binding.createBindingMethod»
+				«ENDFOR»
+			}
 		'''
-		module.markedAsGenerated = true
-		return module
+		javaFile.markedAsGenerated = true
+		return javaFile
 	}
 	
-	def JavaFileAccess getEclipsePluginModule(LanguageConfig2 langConfig) {
+	def JavaFileAccess createEclipsePluginModule(LanguageConfig2 langConfig) {
 		val g = langConfig.grammar
 		val javaFile = new JavaFileAccess(g.eclipsePluginModule, codeConfig)
+		javaFile.encodingProvider = encodingProvider
 		javaFile.typeComment = '''
 			/**
 			 * Use this class to register components to be used within the Eclipse IDE.
@@ -211,60 +244,36 @@ class XtextGeneratorTemplates {
 		return javaFile
 	}
 	
-	def GuiceModuleAccess startEclipsePluginGenModule(LanguageConfig2 langConfig) {
+	def JavaFileAccess createEclipsePluginGenModule(LanguageConfig2 langConfig) {
 		val g = langConfig.grammar
-		val module = new GuiceModuleAccess(g.eclipsePluginGenModule, codeConfig)
+		val javaFile = new JavaFileAccess(g.eclipsePluginGenModule, codeConfig)
+		javaFile.encodingProvider = encodingProvider
 		
-		module.typeComment = '''
+		javaFile.typeComment = '''
 			/**
 			 * Manual modifications go to {@link «g.eclipsePluginModule.simpleName»}.
 			 */
 		'''
-		module.javaContent = '''
+		javaFile.javaContent = '''
 			public abstract class «g.eclipsePluginGenModule.simpleName» extends «g.eclipsePluginDefaultModule» {
 			
 				public «g.eclipsePluginGenModule.simpleName»(«'org.eclipse.ui.plugin.AbstractUIPlugin'» plugin) {
 					super(plugin);
 				}
-		'''
-		module.markedAsGenerated = true
-		return module
-	}
-	
-	def GuiceModuleAccess finishGenModule(GuiceModuleAccess module) {
-		for (it : module.bindings) {
-			module.javaContent = '''
-				«IF !value.provider && value.statements.isEmpty»
-					// contributed by «contributedBy»
-					«IF key.singleton»@«SingletonBinding»«IF key.eagerSingleton»(eager=true)«ENDIF»«ENDIF»
-					public «IF value.expression === null»Class<? extends «key.type»>«ELSE»«key.type»«ENDIF» «bindMethodName»() {
-						return «IF value.expression !== null»«value.expression»«ELSE»«value.typeName».class«ENDIF»;
-					}
-				«ELSEIF value.statements.isEmpty»
-					// contributed by «contributedBy»
-					«IF key.singleton»@«SingletonBinding»«IF key.eagerSingleton»(eager=true)«ENDIF»«ENDIF»
-					public «IF value.expression==null»Class<? extends «Provider»<«key.type»>>«ELSE»«Provider»<«key.type»>«ENDIF» «bindMethodName»() {
-						return «IF value.expression!=null»«value.expression»«ELSE»«value.typeName».class«ENDIF»;
-					}
-				«ELSE»
-					// contributed by «contributedBy»
-					public void «bindMethodName»(«Binder» binder) {
-					«FOR statement : value.statements»
-						«statement»«IF !statement.endsWith(';')»;«ENDIF»
-					«ENDFOR»
-					}
-				«ENDIF»
-			'''
-		}
-		module.javaContent = '''
+				
+				«FOR binding : langConfig.eclipsePluginGenModule.bindings»
+					«binding.createBindingMethod»
+				«ENDFOR»
 			}
 		'''
-		return module
+		javaFile.markedAsGenerated = true
+		return javaFile
 	}
 	
-	def JavaFileAccess getEclipsePluginExecutableExtensionFactory(LanguageConfig2 langConfig) {
+	def JavaFileAccess createEclipsePluginExecutableExtensionFactory(LanguageConfig2 langConfig) {
 		val g = langConfig.grammar
 		val javaFile = new JavaFileAccess(g.eclipsePluginExecutableExtensionFactory, codeConfig)
+		javaFile.encodingProvider = encodingProvider
 		
 		javaFile.typeComment = '''
 			/**

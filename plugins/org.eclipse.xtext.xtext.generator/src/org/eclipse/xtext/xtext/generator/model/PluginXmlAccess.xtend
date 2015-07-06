@@ -9,34 +9,12 @@ package org.eclipse.xtext.xtext.generator.model
 
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtend.lib.annotations.Data
 
 @Accessors
-class GuiceModuleAccess {
+class PluginXmlAccess {
 	
-	@Data
-	static class BindKey {
-		String type
-		boolean singleton
-		boolean eagerSingleton
-	}
+	String path
 	
-	@Data
-	static class BindValue {
-		private String expression
-		private String typeName
-		private boolean provider
-		private List<CharSequence> statements
-	}
-	
-	@Data
-	static class Binding {
-		BindKey key
-		BindValue value
-		String contributedBy
-		boolean isFinal
-	}
-	
-	val List<Binding> bindings = newArrayList
+	val List<CharSequence> entries = newArrayList
 	
 }

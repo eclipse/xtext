@@ -19,7 +19,6 @@ import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
-import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -30,10 +29,10 @@ import org.eclipse.xtext.xtext.generator.LanguageConfig2;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorTemplates;
 import org.eclipse.xtext.xtext.generator.model.CodeConfig;
-import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
+import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 
 /**
@@ -59,9 +58,6 @@ public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuice
   
   @Inject
   private XtextGeneratorTemplates templates;
-  
-  @Inject
-  private IEncodingProvider encodingProvider;
   
   public XtextGenerator() {
     XtextStandaloneSetup _xtextStandaloneSetup = new XtextStandaloneSetup();
@@ -127,37 +123,34 @@ public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuice
   }
   
   protected void generateRuntimeSetup(final LanguageConfig2 language) {
-    JavaFileAccess _runtimeSetup = this.templates.getRuntimeSetup(language);
+    JavaFileAccess _createRuntimeSetup = this.templates.createRuntimeSetup(language);
     IFileSystemAccess2 _runtimeSrc = this.projectConfig.getRuntimeSrc();
-    _runtimeSetup.writeTo(_runtimeSrc);
-    JavaFileAccess _runtimeSetup_1 = language.getRuntimeSetup();
-    JavaFileAccess _finishRuntimeGenSetup = this.templates.finishRuntimeGenSetup(_runtimeSetup_1);
+    _createRuntimeSetup.writeTo(_runtimeSrc);
+    JavaFileAccess _createRuntimeGenSetup = this.templates.createRuntimeGenSetup(language);
     IFileSystemAccess2 _runtimeSrcGen = this.projectConfig.getRuntimeSrcGen();
-    _finishRuntimeGenSetup.writeTo(_runtimeSrcGen);
+    _createRuntimeGenSetup.writeTo(_runtimeSrcGen);
   }
   
   protected void generateModules(final LanguageConfig2 language) {
-    JavaFileAccess _runtimeModule = this.templates.getRuntimeModule(language);
+    JavaFileAccess _createRuntimeModule = this.templates.createRuntimeModule(language);
     IFileSystemAccess2 _runtimeSrc = this.projectConfig.getRuntimeSrc();
-    _runtimeModule.writeTo(_runtimeSrc);
-    GuiceModuleAccess _runtimeModule_1 = language.getRuntimeModule();
-    GuiceModuleAccess _finishGenModule = this.templates.finishGenModule(_runtimeModule_1);
+    _createRuntimeModule.writeTo(_runtimeSrc);
+    JavaFileAccess _createRuntimeGenModule = this.templates.createRuntimeGenModule(language);
     IFileSystemAccess2 _runtimeSrcGen = this.projectConfig.getRuntimeSrcGen();
-    _finishGenModule.writeTo(_runtimeSrcGen);
+    _createRuntimeGenModule.writeTo(_runtimeSrcGen);
     IFileSystemAccess2 _eclipsePluginSrc = this.projectConfig.getEclipsePluginSrc();
     boolean _tripleNotEquals = (_eclipsePluginSrc != null);
     if (_tripleNotEquals) {
-      JavaFileAccess _eclipsePluginModule = this.templates.getEclipsePluginModule(language);
+      JavaFileAccess _createEclipsePluginModule = this.templates.createEclipsePluginModule(language);
       IFileSystemAccess2 _eclipsePluginSrc_1 = this.projectConfig.getEclipsePluginSrc();
-      _eclipsePluginModule.writeTo(_eclipsePluginSrc_1);
+      _createEclipsePluginModule.writeTo(_eclipsePluginSrc_1);
     }
     IFileSystemAccess2 _eclipsePluginSrcGen = this.projectConfig.getEclipsePluginSrcGen();
     boolean _tripleNotEquals_1 = (_eclipsePluginSrcGen != null);
     if (_tripleNotEquals_1) {
-      GuiceModuleAccess _eclipsePluginModule_1 = language.getEclipsePluginModule();
-      GuiceModuleAccess _finishGenModule_1 = this.templates.finishGenModule(_eclipsePluginModule_1);
+      JavaFileAccess _createEclipsePluginGenModule = this.templates.createEclipsePluginGenModule(language);
       IFileSystemAccess2 _eclipsePluginSrcGen_1 = this.projectConfig.getEclipsePluginSrcGen();
-      _finishGenModule_1.writeTo(_eclipsePluginSrcGen_1);
+      _createEclipsePluginGenModule.writeTo(_eclipsePluginSrcGen_1);
     }
   }
   
@@ -165,9 +158,9 @@ public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuice
     IFileSystemAccess2 _eclipsePluginSrcGen = this.projectConfig.getEclipsePluginSrcGen();
     boolean _tripleNotEquals = (_eclipsePluginSrcGen != null);
     if (_tripleNotEquals) {
-      JavaFileAccess _eclipsePluginExecutableExtensionFactory = this.templates.getEclipsePluginExecutableExtensionFactory(language);
+      JavaFileAccess _createEclipsePluginExecutableExtensionFactory = this.templates.createEclipsePluginExecutableExtensionFactory(language);
       IFileSystemAccess2 _eclipsePluginSrcGen_1 = this.projectConfig.getEclipsePluginSrcGen();
-      _eclipsePluginExecutableExtensionFactory.writeTo(_eclipsePluginSrcGen_1);
+      _createEclipsePluginExecutableExtensionFactory.writeTo(_eclipsePluginSrcGen_1);
     }
   }
   
@@ -215,31 +208,30 @@ public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuice
   }
   
   protected void generatePluginXmls() {
-    TextFileAccess _runtimePluginXml = this.projectConfig.getRuntimePluginXml();
-    this.generatePluginXml(_runtimePluginXml, this.encodingProvider);
-    TextFileAccess _runtimeTestPluginXml = this.projectConfig.getRuntimeTestPluginXml();
-    this.generatePluginXml(_runtimeTestPluginXml, this.encodingProvider);
-    TextFileAccess _genericIdePluginXml = this.projectConfig.getGenericIdePluginXml();
-    this.generatePluginXml(_genericIdePluginXml, this.encodingProvider);
-    TextFileAccess _genericIdeTestPluginXml = this.projectConfig.getGenericIdeTestPluginXml();
-    this.generatePluginXml(_genericIdeTestPluginXml, this.encodingProvider);
-    TextFileAccess _eclipsePluginPluginXml = this.projectConfig.getEclipsePluginPluginXml();
-    this.generatePluginXml(_eclipsePluginPluginXml, this.encodingProvider);
-    TextFileAccess _eclipsePluginTestPluginXml = this.projectConfig.getEclipsePluginTestPluginXml();
-    this.generatePluginXml(_eclipsePluginTestPluginXml, this.encodingProvider);
-    TextFileAccess _ideaPluginPluginXml = this.projectConfig.getIdeaPluginPluginXml();
-    this.generatePluginXml(_ideaPluginPluginXml, this.encodingProvider);
-    TextFileAccess _ideaPluginTestPluginXml = this.projectConfig.getIdeaPluginTestPluginXml();
-    this.generatePluginXml(_ideaPluginTestPluginXml, this.encodingProvider);
-    TextFileAccess _webPluginXml = this.projectConfig.getWebPluginXml();
-    this.generatePluginXml(_webPluginXml, this.encodingProvider);
-    TextFileAccess _webTestPluginXml = this.projectConfig.getWebTestPluginXml();
-    this.generatePluginXml(_webTestPluginXml, this.encodingProvider);
+    PluginXmlAccess _runtimePluginXml = this.projectConfig.getRuntimePluginXml();
+    this.generatePluginXml(_runtimePluginXml);
+    PluginXmlAccess _runtimeTestPluginXml = this.projectConfig.getRuntimeTestPluginXml();
+    this.generatePluginXml(_runtimeTestPluginXml);
+    PluginXmlAccess _genericIdePluginXml = this.projectConfig.getGenericIdePluginXml();
+    this.generatePluginXml(_genericIdePluginXml);
+    PluginXmlAccess _genericIdeTestPluginXml = this.projectConfig.getGenericIdeTestPluginXml();
+    this.generatePluginXml(_genericIdeTestPluginXml);
+    PluginXmlAccess _eclipsePluginPluginXml = this.projectConfig.getEclipsePluginPluginXml();
+    this.generatePluginXml(_eclipsePluginPluginXml);
+    PluginXmlAccess _eclipsePluginTestPluginXml = this.projectConfig.getEclipsePluginTestPluginXml();
+    this.generatePluginXml(_eclipsePluginTestPluginXml);
+    PluginXmlAccess _ideaPluginPluginXml = this.projectConfig.getIdeaPluginPluginXml();
+    this.generatePluginXml(_ideaPluginPluginXml);
+    PluginXmlAccess _ideaPluginTestPluginXml = this.projectConfig.getIdeaPluginTestPluginXml();
+    this.generatePluginXml(_ideaPluginTestPluginXml);
+    PluginXmlAccess _webPluginXml = this.projectConfig.getWebPluginXml();
+    this.generatePluginXml(_webPluginXml);
+    PluginXmlAccess _webTestPluginXml = this.projectConfig.getWebTestPluginXml();
+    this.generatePluginXml(_webTestPluginXml);
   }
   
-  protected void generatePluginXml(final TextFileAccess pluginXml, final IEncodingProvider encodingProvider) {
+  protected void generatePluginXml(final PluginXmlAccess pluginXml) {
     if ((pluginXml != null)) {
-      pluginXml.setEncodingProvider(encodingProvider);
       String _path = pluginXml.getPath();
       File _file = new File(_path);
       boolean _exists = _file.exists();
@@ -250,10 +242,12 @@ public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuice
           String _path_2 = pluginXml.getPath();
           String _plus = (_path_2 + "_gen");
           pluginXml.setPath(_plus);
-          pluginXml.writeToFile();
+          TextFileAccess _createPluginXml = this.templates.createPluginXml(pluginXml);
+          _createPluginXml.writeToFile();
         }
       } else {
-        pluginXml.writeToFile();
+        TextFileAccess _createPluginXml_1 = this.templates.createPluginXml(pluginXml);
+        _createPluginXml_1.writeToFile();
       }
     }
   }

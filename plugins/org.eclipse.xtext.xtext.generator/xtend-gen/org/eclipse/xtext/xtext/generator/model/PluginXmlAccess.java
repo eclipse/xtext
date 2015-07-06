@@ -7,18 +7,17 @@
  */
 package org.eclipse.xtext.xtext.generator.model;
 
+import java.util.List;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @Accessors
 @SuppressWarnings("all")
-public class ManifestAccess {
+public class PluginXmlAccess {
   private String path;
   
-  private boolean merge;
-  
-  public void generate() {
-  }
+  private final List<CharSequence> entries = CollectionLiterals.<CharSequence>newArrayList();
   
   @Pure
   public String getPath() {
@@ -30,11 +29,7 @@ public class ManifestAccess {
   }
   
   @Pure
-  public boolean isMerge() {
-    return this.merge;
-  }
-  
-  public void setMerge(final boolean merge) {
-    this.merge = merge;
+  public List<CharSequence> getEntries() {
+    return this.entries;
   }
 }

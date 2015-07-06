@@ -11,6 +11,9 @@ import org.eclipse.xpand2.output.OutputImpl
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenation
 
+/**
+ * @since 2.9
+ */
 class StringConcatOutputImpl extends OutputImpl {
 	
 	public static val STRING_OUTLET = 'StringConcatOutputImpl.StringOutlet'

@@ -7,34 +7,18 @@
  */
 package org.eclipse.xtext.xtext.generator.model;
 
+import java.util.List;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @Accessors
 @SuppressWarnings("all")
-public class ManifestAccess {
-  private String path;
-  
-  private boolean merge;
-  
-  public void generate() {
-  }
+public class StandaloneSetupAccess {
+  private final List<CharSequence> registrations = CollectionLiterals.<CharSequence>newArrayList();
   
   @Pure
-  public String getPath() {
-    return this.path;
-  }
-  
-  public void setPath(final String path) {
-    this.path = path;
-  }
-  
-  @Pure
-  public boolean isMerge() {
-    return this.merge;
-  }
-  
-  public void setMerge(final boolean merge) {
-    this.merge = merge;
+  public List<CharSequence> getRegistrations() {
+    return this.registrations;
   }
 }

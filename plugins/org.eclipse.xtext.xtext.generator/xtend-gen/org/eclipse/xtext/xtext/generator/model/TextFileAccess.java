@@ -39,9 +39,16 @@ public class TextFileAccess {
   
   public void writeToFile() {
     try {
-      final URI uri = URI.createFileURI(this.path);
-      String _encoding = this.encodingProvider.getEncoding(uri);
-      final Charset charset = Charset.forName(_encoding);
+      Charset charset = null;
+      if ((this.encodingProvider != null)) {
+        final URI uri = URI.createFileURI(this.path);
+        String _encoding = this.encodingProvider.getEncoding(uri);
+        Charset _forName = Charset.forName(_encoding);
+        charset = _forName;
+      } else {
+        Charset _defaultCharset = Charset.defaultCharset();
+        charset = _defaultCharset;
+      }
       CharSequence _generate = this.generate();
       File _file = new File(this.path);
       Files.write(_generate, _file, charset);

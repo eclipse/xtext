@@ -14,6 +14,9 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Pure;
 
+/**
+ * @since 2.9
+ */
 @SuppressWarnings("all")
 public class StringConcatOutputImpl extends OutputImpl {
   public final static String STRING_OUTLET = "StringConcatOutputImpl.StringOutlet";

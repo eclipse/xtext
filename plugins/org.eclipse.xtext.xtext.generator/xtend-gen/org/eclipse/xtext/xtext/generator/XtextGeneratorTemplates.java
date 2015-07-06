@@ -24,6 +24,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.ISetupExtension;
 import org.eclipse.xtext.XtextPackage;
+import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.impl.BinaryGrammarResourceFactoryImpl;
 import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -35,6 +36,8 @@ import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.CodeConfig;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
+import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
+import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess;
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
@@ -48,8 +51,14 @@ public class XtextGeneratorTemplates {
   @Inject
   private CodeConfig codeConfig;
   
-  public TextFileAccess startPluginXml(final TextFileAccess file) {
-    file.setPath("plugin.xml");
+  @Inject
+  private IEncodingProvider encodingProvider;
+  
+  public TextFileAccess createPluginXml(final PluginXmlAccess pluginXml) {
+    final TextFileAccess file = new TextFileAccess();
+    file.setEncodingProvider(this.encodingProvider);
+    String _path = pluginXml.getPath();
+    file.setPath(_path);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
     _builder.newLine();
@@ -58,22 +67,25 @@ public class XtextGeneratorTemplates {
     _builder.newLine();
     _builder.append("<plugin>");
     _builder.newLine();
-    file.setContent(_builder);
-    return file;
-  }
-  
-  public TextFileAccess finishPluginXml(final TextFileAccess file) {
-    StringConcatenation _builder = new StringConcatenation();
+    {
+      List<CharSequence> _entries = pluginXml.getEntries();
+      for(final CharSequence entry : _entries) {
+        _builder.append("\t");
+        _builder.append(entry, "\t");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     _builder.append("</plugin>");
     _builder.newLine();
     file.setContent(_builder);
     return file;
   }
   
-  public JavaFileAccess getRuntimeSetup(final LanguageConfig2 langConfig) {
+  public JavaFileAccess createRuntimeSetup(final LanguageConfig2 langConfig) {
     final Grammar g = langConfig.getGrammar();
     TypeReference _runtimeSetup = this._xtextGeneratorNaming.getRuntimeSetup(g);
     final JavaFileAccess javaFile = new JavaFileAccess(_runtimeSetup, this.codeConfig);
+    javaFile.setEncodingProvider(this.encodingProvider);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -119,10 +131,11 @@ public class XtextGeneratorTemplates {
     return javaFile;
   }
   
-  public JavaFileAccess startRuntimeGenSetup(final LanguageConfig2 langConfig) {
+  public JavaFileAccess createRuntimeGenSetup(final LanguageConfig2 langConfig) {
     final Grammar g = langConfig.getGrammar();
     TypeReference _runtimeGenSetup = this._xtextGeneratorNaming.getRuntimeGenSetup(g);
     final JavaFileAccess javaFile = new JavaFileAccess(_runtimeGenSetup, this.codeConfig);
+    javaFile.setEncodingProvider(this.encodingProvider);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -297,17 +310,15 @@ public class XtextGeneratorTemplates {
         _builder.append(Injector.class, "\t");
         _builder.append(" injector) {");
         _builder.newLineIfNotEmpty();
-      }
-    };
-    javaFile.setJavaContent(_client);
-    javaFile.setMarkedAsGenerated(true);
-    return javaFile;
-  }
-  
-  public JavaFileAccess finishRuntimeGenSetup(final JavaFileAccess javaFile) {
-    StringConcatenationClient _client = new StringConcatenationClient() {
-      @Override
-      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        {
+          StandaloneSetupAccess _runtimeGenSetup_1 = langConfig.getRuntimeGenSetup();
+          List<CharSequence> _registrations = _runtimeGenSetup_1.getRegistrations();
+          for(final CharSequence reg : _registrations) {
+            _builder.append("\t\t");
+            _builder.append(reg, "\t\t");
+            _builder.newLineIfNotEmpty();
+          }
+        }
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
@@ -316,6 +327,7 @@ public class XtextGeneratorTemplates {
       }
     };
     javaFile.setJavaContent(_client);
+    javaFile.setMarkedAsGenerated(true);
     return javaFile;
   }
   
@@ -402,10 +414,198 @@ public class XtextGeneratorTemplates {
     return _and;
   }
   
-  public JavaFileAccess getRuntimeModule(final LanguageConfig2 langConfig) {
+  private CharSequence createBindingMethod(final GuiceModuleAccess.Binding it) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      boolean _and = false;
+      GuiceModuleAccess.BindValue _value = it.getValue();
+      boolean _isProvider = _value.isProvider();
+      boolean _not = (!_isProvider);
+      if (!_not) {
+        _and = false;
+      } else {
+        GuiceModuleAccess.BindValue _value_1 = it.getValue();
+        List<CharSequence> _statements = _value_1.getStatements();
+        boolean _isEmpty = _statements.isEmpty();
+        _and = _isEmpty;
+      }
+      if (_and) {
+        _builder.append("// contributed by ");
+        String _contributedBy = it.getContributedBy();
+        _builder.append(_contributedBy, "");
+        _builder.newLineIfNotEmpty();
+        {
+          GuiceModuleAccess.BindKey _key = it.getKey();
+          boolean _isSingleton = _key.isSingleton();
+          if (_isSingleton) {
+            _builder.append("@");
+            _builder.append(SingletonBinding.class, "");
+            {
+              GuiceModuleAccess.BindKey _key_1 = it.getKey();
+              boolean _isEagerSingleton = _key_1.isEagerSingleton();
+              if (_isEagerSingleton) {
+                _builder.append("(eager=true)");
+              }
+            }
+          }
+        }
+        _builder.newLineIfNotEmpty();
+        _builder.append("public ");
+        {
+          GuiceModuleAccess.BindValue _value_2 = it.getValue();
+          String _expression = _value_2.getExpression();
+          boolean _tripleEquals = (_expression == null);
+          if (_tripleEquals) {
+            _builder.append("Class<? extends ");
+            GuiceModuleAccess.BindKey _key_2 = it.getKey();
+            String _type = _key_2.getType();
+            _builder.append(_type, "");
+            _builder.append(">");
+          } else {
+            GuiceModuleAccess.BindKey _key_3 = it.getKey();
+            String _type_1 = _key_3.getType();
+            _builder.append(_type_1, "");
+          }
+        }
+        _builder.append(" ");
+        String _bindMethodName = this.getBindMethodName(it);
+        _builder.append(_bindMethodName, "");
+        _builder.append("() {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("return ");
+        {
+          GuiceModuleAccess.BindValue _value_3 = it.getValue();
+          String _expression_1 = _value_3.getExpression();
+          boolean _tripleNotEquals = (_expression_1 != null);
+          if (_tripleNotEquals) {
+            GuiceModuleAccess.BindValue _value_4 = it.getValue();
+            String _expression_2 = _value_4.getExpression();
+            _builder.append(_expression_2, "\t");
+          } else {
+            GuiceModuleAccess.BindValue _value_5 = it.getValue();
+            String _typeName = _value_5.getTypeName();
+            _builder.append(_typeName, "\t");
+            _builder.append(".class");
+          }
+        }
+        _builder.append(";");
+        _builder.newLineIfNotEmpty();
+        _builder.append("}");
+        _builder.newLine();
+      } else {
+        GuiceModuleAccess.BindValue _value_6 = it.getValue();
+        List<CharSequence> _statements_1 = _value_6.getStatements();
+        boolean _isEmpty_1 = _statements_1.isEmpty();
+        if (_isEmpty_1) {
+          _builder.append("// contributed by ");
+          String _contributedBy_1 = it.getContributedBy();
+          _builder.append(_contributedBy_1, "");
+          _builder.newLineIfNotEmpty();
+          {
+            GuiceModuleAccess.BindKey _key_4 = it.getKey();
+            boolean _isSingleton_1 = _key_4.isSingleton();
+            if (_isSingleton_1) {
+              _builder.append("@");
+              _builder.append(SingletonBinding.class, "");
+              {
+                GuiceModuleAccess.BindKey _key_5 = it.getKey();
+                boolean _isEagerSingleton_1 = _key_5.isEagerSingleton();
+                if (_isEagerSingleton_1) {
+                  _builder.append("(eager=true)");
+                }
+              }
+            }
+          }
+          _builder.newLineIfNotEmpty();
+          _builder.append("public ");
+          {
+            GuiceModuleAccess.BindValue _value_7 = it.getValue();
+            String _expression_3 = _value_7.getExpression();
+            boolean _equals = Objects.equal(_expression_3, null);
+            if (_equals) {
+              _builder.append("Class<? extends ");
+              _builder.append(Provider.class, "");
+              _builder.append("<");
+              GuiceModuleAccess.BindKey _key_6 = it.getKey();
+              String _type_2 = _key_6.getType();
+              _builder.append(_type_2, "");
+              _builder.append(">>");
+            } else {
+              _builder.append(Provider.class, "");
+              _builder.append("<");
+              GuiceModuleAccess.BindKey _key_7 = it.getKey();
+              String _type_3 = _key_7.getType();
+              _builder.append(_type_3, "");
+              _builder.append(">");
+            }
+          }
+          _builder.append(" ");
+          String _bindMethodName_1 = this.getBindMethodName(it);
+          _builder.append(_bindMethodName_1, "");
+          _builder.append("() {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("return ");
+          {
+            GuiceModuleAccess.BindValue _value_8 = it.getValue();
+            String _expression_4 = _value_8.getExpression();
+            boolean _notEquals = (!Objects.equal(_expression_4, null));
+            if (_notEquals) {
+              GuiceModuleAccess.BindValue _value_9 = it.getValue();
+              String _expression_5 = _value_9.getExpression();
+              _builder.append(_expression_5, "\t");
+            } else {
+              GuiceModuleAccess.BindValue _value_10 = it.getValue();
+              String _typeName_1 = _value_10.getTypeName();
+              _builder.append(_typeName_1, "\t");
+              _builder.append(".class");
+            }
+          }
+          _builder.append(";");
+          _builder.newLineIfNotEmpty();
+          _builder.append("}");
+          _builder.newLine();
+        } else {
+          _builder.append("// contributed by ");
+          String _contributedBy_2 = it.getContributedBy();
+          _builder.append(_contributedBy_2, "");
+          _builder.newLineIfNotEmpty();
+          _builder.append("public void ");
+          String _bindMethodName_2 = this.getBindMethodName(it);
+          _builder.append(_bindMethodName_2, "");
+          _builder.append("(");
+          _builder.append(Binder.class, "");
+          _builder.append(" binder) {");
+          _builder.newLineIfNotEmpty();
+          {
+            GuiceModuleAccess.BindValue _value_11 = it.getValue();
+            List<CharSequence> _statements_2 = _value_11.getStatements();
+            for(final CharSequence statement : _statements_2) {
+              _builder.append(statement, "");
+              {
+                boolean _endsWith = this.endsWith(statement, ';');
+                boolean _not_1 = (!_endsWith);
+                if (_not_1) {
+                  _builder.append(";");
+                }
+              }
+              _builder.newLineIfNotEmpty();
+            }
+          }
+          _builder.append("}");
+          _builder.newLine();
+        }
+      }
+    }
+    return _builder;
+  }
+  
+  public JavaFileAccess createRuntimeModule(final LanguageConfig2 langConfig) {
     final Grammar g = langConfig.getGrammar();
     TypeReference _runtimeModule = this._xtextGeneratorNaming.getRuntimeModule(g);
     final JavaFileAccess javaFile = new JavaFileAccess(_runtimeModule, this.codeConfig);
+    javaFile.setEncodingProvider(this.encodingProvider);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -437,10 +637,11 @@ public class XtextGeneratorTemplates {
     return javaFile;
   }
   
-  public GuiceModuleAccess startRuntimeGenModule(final LanguageConfig2 langConfig) {
+  public JavaFileAccess createRuntimeGenModule(final LanguageConfig2 langConfig) {
     final Grammar g = langConfig.getGrammar();
     TypeReference _runtimeGenModule = this._xtextGeneratorNaming.getRuntimeGenModule(g);
-    final GuiceModuleAccess module = new GuiceModuleAccess(_runtimeGenModule, this.codeConfig);
+    final JavaFileAccess javaFile = new JavaFileAccess(_runtimeGenModule, this.codeConfig);
+    javaFile.setEncodingProvider(this.encodingProvider);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -454,7 +655,7 @@ public class XtextGeneratorTemplates {
     _builder.append(" ");
     _builder.append("*/");
     _builder.newLine();
-    module.setTypeComment(_builder);
+    javaFile.setTypeComment(_builder);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -539,17 +740,32 @@ public class XtextGeneratorTemplates {
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
+        _builder.append("\t");
+        _builder.newLine();
+        {
+          GuiceModuleAccess _runtimeGenModule_1 = langConfig.getRuntimeGenModule();
+          List<GuiceModuleAccess.Binding> _bindings = _runtimeGenModule_1.getBindings();
+          for(final GuiceModuleAccess.Binding binding : _bindings) {
+            _builder.append("\t");
+            CharSequence _createBindingMethod = XtextGeneratorTemplates.this.createBindingMethod(binding);
+            _builder.append(_createBindingMethod, "\t");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        _builder.append("}");
+        _builder.newLine();
       }
     };
-    module.setJavaContent(_client);
-    module.setMarkedAsGenerated(true);
-    return module;
+    javaFile.setJavaContent(_client);
+    javaFile.setMarkedAsGenerated(true);
+    return javaFile;
   }
   
-  public JavaFileAccess getEclipsePluginModule(final LanguageConfig2 langConfig) {
+  public JavaFileAccess createEclipsePluginModule(final LanguageConfig2 langConfig) {
     final Grammar g = langConfig.getGrammar();
     TypeReference _eclipsePluginModule = this._xtextGeneratorNaming.getEclipsePluginModule(g);
     final JavaFileAccess javaFile = new JavaFileAccess(_eclipsePluginModule, this.codeConfig);
+    javaFile.setEncodingProvider(this.encodingProvider);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -595,10 +811,11 @@ public class XtextGeneratorTemplates {
     return javaFile;
   }
   
-  public GuiceModuleAccess startEclipsePluginGenModule(final LanguageConfig2 langConfig) {
+  public JavaFileAccess createEclipsePluginGenModule(final LanguageConfig2 langConfig) {
     final Grammar g = langConfig.getGrammar();
     TypeReference _eclipsePluginGenModule = this._xtextGeneratorNaming.getEclipsePluginGenModule(g);
-    final GuiceModuleAccess module = new GuiceModuleAccess(_eclipsePluginGenModule, this.codeConfig);
+    final JavaFileAccess javaFile = new JavaFileAccess(_eclipsePluginGenModule, this.codeConfig);
+    javaFile.setEncodingProvider(this.encodingProvider);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -612,7 +829,7 @@ public class XtextGeneratorTemplates {
     _builder.append(" ");
     _builder.append("*/");
     _builder.newLine();
-    module.setTypeComment(_builder);
+    javaFile.setTypeComment(_builder);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -641,220 +858,32 @@ public class XtextGeneratorTemplates {
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
-      }
-    };
-    module.setJavaContent(_client);
-    module.setMarkedAsGenerated(true);
-    return module;
-  }
-  
-  public GuiceModuleAccess finishGenModule(final GuiceModuleAccess module) {
-    List<GuiceModuleAccess.Binding> _bindings = module.getBindings();
-    for (final GuiceModuleAccess.Binding it : _bindings) {
-      StringConcatenationClient _client = new StringConcatenationClient() {
-        @Override
-        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-          {
-            boolean _and = false;
-            GuiceModuleAccess.BindValue _value = it.getValue();
-            boolean _isProvider = _value.isProvider();
-            boolean _not = (!_isProvider);
-            if (!_not) {
-              _and = false;
-            } else {
-              GuiceModuleAccess.BindValue _value_1 = it.getValue();
-              List<CharSequence> _statements = _value_1.getStatements();
-              boolean _isEmpty = _statements.isEmpty();
-              _and = _isEmpty;
-            }
-            if (_and) {
-              _builder.append("// contributed by ");
-              String _contributedBy = it.getContributedBy();
-              _builder.append(_contributedBy, "");
-              _builder.newLineIfNotEmpty();
-              {
-                GuiceModuleAccess.BindKey _key = it.getKey();
-                boolean _isSingleton = _key.isSingleton();
-                if (_isSingleton) {
-                  _builder.append("@");
-                  _builder.append(SingletonBinding.class, "");
-                  {
-                    GuiceModuleAccess.BindKey _key_1 = it.getKey();
-                    boolean _isEagerSingleton = _key_1.isEagerSingleton();
-                    if (_isEagerSingleton) {
-                      _builder.append("(eager=true)");
-                    }
-                  }
-                }
-              }
-              _builder.newLineIfNotEmpty();
-              _builder.append("public ");
-              {
-                GuiceModuleAccess.BindValue _value_2 = it.getValue();
-                String _expression = _value_2.getExpression();
-                boolean _tripleEquals = (_expression == null);
-                if (_tripleEquals) {
-                  _builder.append("Class<? extends ");
-                  GuiceModuleAccess.BindKey _key_2 = it.getKey();
-                  String _type = _key_2.getType();
-                  _builder.append(_type, "");
-                  _builder.append(">");
-                } else {
-                  GuiceModuleAccess.BindKey _key_3 = it.getKey();
-                  String _type_1 = _key_3.getType();
-                  _builder.append(_type_1, "");
-                }
-              }
-              _builder.append(" ");
-              String _bindMethodName = XtextGeneratorTemplates.this.getBindMethodName(it);
-              _builder.append(_bindMethodName, "");
-              _builder.append("() {");
-              _builder.newLineIfNotEmpty();
-              _builder.append("\t");
-              _builder.append("return ");
-              {
-                GuiceModuleAccess.BindValue _value_3 = it.getValue();
-                String _expression_1 = _value_3.getExpression();
-                boolean _tripleNotEquals = (_expression_1 != null);
-                if (_tripleNotEquals) {
-                  GuiceModuleAccess.BindValue _value_4 = it.getValue();
-                  String _expression_2 = _value_4.getExpression();
-                  _builder.append(_expression_2, "\t");
-                } else {
-                  GuiceModuleAccess.BindValue _value_5 = it.getValue();
-                  String _typeName = _value_5.getTypeName();
-                  _builder.append(_typeName, "\t");
-                  _builder.append(".class");
-                }
-              }
-              _builder.append(";");
-              _builder.newLineIfNotEmpty();
-              _builder.append("}");
-              _builder.newLine();
-            } else {
-              GuiceModuleAccess.BindValue _value_6 = it.getValue();
-              List<CharSequence> _statements_1 = _value_6.getStatements();
-              boolean _isEmpty_1 = _statements_1.isEmpty();
-              if (_isEmpty_1) {
-                _builder.append("// contributed by ");
-                String _contributedBy_1 = it.getContributedBy();
-                _builder.append(_contributedBy_1, "");
-                _builder.newLineIfNotEmpty();
-                {
-                  GuiceModuleAccess.BindKey _key_4 = it.getKey();
-                  boolean _isSingleton_1 = _key_4.isSingleton();
-                  if (_isSingleton_1) {
-                    _builder.append("@");
-                    _builder.append(SingletonBinding.class, "");
-                    {
-                      GuiceModuleAccess.BindKey _key_5 = it.getKey();
-                      boolean _isEagerSingleton_1 = _key_5.isEagerSingleton();
-                      if (_isEagerSingleton_1) {
-                        _builder.append("(eager=true)");
-                      }
-                    }
-                  }
-                }
-                _builder.newLineIfNotEmpty();
-                _builder.append("public ");
-                {
-                  GuiceModuleAccess.BindValue _value_7 = it.getValue();
-                  String _expression_3 = _value_7.getExpression();
-                  boolean _equals = Objects.equal(_expression_3, null);
-                  if (_equals) {
-                    _builder.append("Class<? extends ");
-                    _builder.append(Provider.class, "");
-                    _builder.append("<");
-                    GuiceModuleAccess.BindKey _key_6 = it.getKey();
-                    String _type_2 = _key_6.getType();
-                    _builder.append(_type_2, "");
-                    _builder.append(">>");
-                  } else {
-                    _builder.append(Provider.class, "");
-                    _builder.append("<");
-                    GuiceModuleAccess.BindKey _key_7 = it.getKey();
-                    String _type_3 = _key_7.getType();
-                    _builder.append(_type_3, "");
-                    _builder.append(">");
-                  }
-                }
-                _builder.append(" ");
-                String _bindMethodName_1 = XtextGeneratorTemplates.this.getBindMethodName(it);
-                _builder.append(_bindMethodName_1, "");
-                _builder.append("() {");
-                _builder.newLineIfNotEmpty();
-                _builder.append("\t");
-                _builder.append("return ");
-                {
-                  GuiceModuleAccess.BindValue _value_8 = it.getValue();
-                  String _expression_4 = _value_8.getExpression();
-                  boolean _notEquals = (!Objects.equal(_expression_4, null));
-                  if (_notEquals) {
-                    GuiceModuleAccess.BindValue _value_9 = it.getValue();
-                    String _expression_5 = _value_9.getExpression();
-                    _builder.append(_expression_5, "\t");
-                  } else {
-                    GuiceModuleAccess.BindValue _value_10 = it.getValue();
-                    String _typeName_1 = _value_10.getTypeName();
-                    _builder.append(_typeName_1, "\t");
-                    _builder.append(".class");
-                  }
-                }
-                _builder.append(";");
-                _builder.newLineIfNotEmpty();
-                _builder.append("}");
-                _builder.newLine();
-              } else {
-                _builder.append("// contributed by ");
-                String _contributedBy_2 = it.getContributedBy();
-                _builder.append(_contributedBy_2, "");
-                _builder.newLineIfNotEmpty();
-                _builder.append("public void ");
-                String _bindMethodName_2 = XtextGeneratorTemplates.this.getBindMethodName(it);
-                _builder.append(_bindMethodName_2, "");
-                _builder.append("(");
-                _builder.append(Binder.class, "");
-                _builder.append(" binder) {");
-                _builder.newLineIfNotEmpty();
-                {
-                  GuiceModuleAccess.BindValue _value_11 = it.getValue();
-                  List<CharSequence> _statements_2 = _value_11.getStatements();
-                  for(final CharSequence statement : _statements_2) {
-                    _builder.append(statement, "");
-                    {
-                      boolean _endsWith = XtextGeneratorTemplates.this.endsWith(statement, ';');
-                      boolean _not_1 = (!_endsWith);
-                      if (_not_1) {
-                        _builder.append(";");
-                      }
-                    }
-                    _builder.newLineIfNotEmpty();
-                  }
-                }
-                _builder.append("}");
-                _builder.newLine();
-              }
-            }
+        _builder.append("\t");
+        _builder.newLine();
+        {
+          GuiceModuleAccess _eclipsePluginGenModule_2 = langConfig.getEclipsePluginGenModule();
+          List<GuiceModuleAccess.Binding> _bindings = _eclipsePluginGenModule_2.getBindings();
+          for(final GuiceModuleAccess.Binding binding : _bindings) {
+            _builder.append("\t");
+            CharSequence _createBindingMethod = XtextGeneratorTemplates.this.createBindingMethod(binding);
+            _builder.append(_createBindingMethod, "\t");
+            _builder.newLineIfNotEmpty();
           }
         }
-      };
-      module.setJavaContent(_client);
-    }
-    StringConcatenationClient _client_1 = new StringConcatenationClient() {
-      @Override
-      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("}");
         _builder.newLine();
       }
     };
-    module.setJavaContent(_client_1);
-    return module;
+    javaFile.setJavaContent(_client);
+    javaFile.setMarkedAsGenerated(true);
+    return javaFile;
   }
   
-  public JavaFileAccess getEclipsePluginExecutableExtensionFactory(final LanguageConfig2 langConfig) {
+  public JavaFileAccess createEclipsePluginExecutableExtensionFactory(final LanguageConfig2 langConfig) {
     final Grammar g = langConfig.getGrammar();
     TypeReference _eclipsePluginExecutableExtensionFactory = this._xtextGeneratorNaming.getEclipsePluginExecutableExtensionFactory(g);
     final JavaFileAccess javaFile = new JavaFileAccess(_eclipsePluginExecutableExtensionFactory, this.codeConfig);
+    javaFile.setEncodingProvider(this.encodingProvider);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
