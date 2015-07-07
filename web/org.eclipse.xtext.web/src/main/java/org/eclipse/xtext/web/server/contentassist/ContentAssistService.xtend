@@ -48,7 +48,7 @@ class ContentAssistService {
 		val contexts = document.priorityReadOnly([ it, cancelIndicator |
 			stateIdWrapper.set(0, stateId)
 			contextFactory.create(text, selection, offset, resource)
-		], null)
+		])
 		return createProposals(contexts, stateIdWrapper.get(0), proposalsLimit)
 	}
 	
