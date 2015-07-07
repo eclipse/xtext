@@ -26,7 +26,9 @@ Model:
 KeywordVal: kw="kw1" | kw="kw2";
 	
 TerminalVal: term=Terminal1 | term=Terminal2 | term="%foo";
+/* SuppressWarnings[InvalidTerminalruleName] */
 terminal Terminal1: '%' ('A'..'Z')*;
+/* SuppressWarnings[InvalidTerminalruleName] */
 terminal Terminal2: '%' ('a'..'z')*;
 
 EnumVal: en=Enum1 | en=Enum2;

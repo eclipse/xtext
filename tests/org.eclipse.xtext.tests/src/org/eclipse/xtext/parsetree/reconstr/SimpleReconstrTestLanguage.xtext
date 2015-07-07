@@ -70,7 +70,7 @@ Loop4:
 LoopBug285452:
 	'#12' (interface?="interface"|"class") name=ID;
 
-/* SuppressWarnings[potentialOverride] */
+/* SuppressWarnings[noInstantiation, potentialOverride] */
 DuplicateBug284491:
 	'#13' (static?='static' | final?='final' | transient?='transient')*;
 	
