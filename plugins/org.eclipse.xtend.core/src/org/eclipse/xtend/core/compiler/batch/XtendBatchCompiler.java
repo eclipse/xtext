@@ -133,6 +133,8 @@ public class XtendBatchCompiler {
 	@Inject 
 	private IOutputConfigurationProvider outputConfigurationProvider;
 	@Inject
+	private GeneratorConfigProvider generatorConfigProvider;
+	@Inject
 	@Named(Constants.LANGUAGE_NAME)
 	private String languageName;
 
@@ -457,7 +459,7 @@ public class XtendBatchCompiler {
 			if (!configureWorkspace(resourceSet)) {
 				return false;
 			}
-			GeneratorConfigProvider.install(resourceSet, generatorConfig);
+			generatorConfigProvider.install(resourceSet, generatorConfig);
 			File classDirectory = createTempDir("classes");
 			try {
 				compilerPhases.setIndexing(resourceSet, true);

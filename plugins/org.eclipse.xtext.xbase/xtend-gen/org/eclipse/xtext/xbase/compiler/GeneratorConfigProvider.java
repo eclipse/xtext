@@ -7,21 +7,24 @@
  */
 package org.eclipse.xtext.xbase.compiler;
 
-import com.google.common.collect.Iterables;
-import java.util.Iterator;
-import java.util.List;
+import com.google.common.base.Objects;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
+import java.util.Map;
 import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
+import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.util.internal.EmfAdaptable;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
@@ -30,79 +33,107 @@ import org.eclipse.xtext.xbase.lib.Pure;
  */
 @SuppressWarnings("all")
 public class GeneratorConfigProvider implements IGeneratorConfigProvider {
-  @FinalFieldsConstructor
-  @Accessors
-  protected static class ConfigAdapter extends AdapterImpl {
-    private final GeneratorConfig config;
-    
-    @Override
-    public boolean isAdapterForType(final Object type) {
-      return (type == GeneratorConfigProvider.ConfigAdapter.class);
+  @EmfAdaptable
+  protected static class GeneratorConfigAdapter {
+    public static class GeneratorConfigAdapterAdapter extends AdapterImpl {
+      private GeneratorConfigProvider.GeneratorConfigAdapter element;
+      
+      public GeneratorConfigAdapterAdapter(final GeneratorConfigProvider.GeneratorConfigAdapter element) {
+        this.element = element;
+      }
+      
+      public GeneratorConfigProvider.GeneratorConfigAdapter get() {
+        return this.element;
+      }
+      
+      public boolean isAdapterForType(final Object object) {
+        return object == GeneratorConfigProvider.GeneratorConfigAdapter.class;
+      }
     }
     
-    public ConfigAdapter(final GeneratorConfig config) {
-      super();
-      this.config = config;
+    @Accessors
+    private final Map<String, GeneratorConfig> language2GeneratorConfig = CollectionLiterals.<String, GeneratorConfig>newHashMap();
+    
+    public static GeneratorConfigProvider.GeneratorConfigAdapter findInEmfObject(final Notifier emfObject) {
+      for (Adapter adapter : emfObject.eAdapters()) {
+      	if (adapter instanceof org.eclipse.xtext.xbase.compiler.GeneratorConfigProvider.GeneratorConfigAdapter.GeneratorConfigAdapterAdapter) {
+      		return ((org.eclipse.xtext.xbase.compiler.GeneratorConfigProvider.GeneratorConfigAdapter.GeneratorConfigAdapterAdapter) adapter).get();
+      	}
+      }
+      return null;
+    }
+    
+    public void attachToEmfObject(final Notifier emfObject) {
+      GeneratorConfigAdapter result = findInEmfObject(emfObject);
+      if (result != null)
+      	throw new IllegalStateException("The given EMF object already contains an adapter for GeneratorConfigAdapter");
+      org.eclipse.xtext.xbase.compiler.GeneratorConfigProvider.GeneratorConfigAdapter.GeneratorConfigAdapterAdapter adapter = new org.eclipse.xtext.xbase.compiler.GeneratorConfigProvider.GeneratorConfigAdapter.GeneratorConfigAdapterAdapter(this);
+      emfObject.eAdapters().add(adapter);
     }
     
     @Pure
-    public GeneratorConfig getConfig() {
-      return this.config;
+    public Map<String, GeneratorConfig> getLanguage2GeneratorConfig() {
+      return this.language2GeneratorConfig;
     }
   }
   
-  public static void install(final ResourceSet resourceSet, final GeneratorConfig config) {
-    EList<Adapter> adapters = resourceSet.eAdapters();
-    Iterator<Adapter> iterator = adapters.iterator();
-    while (iterator.hasNext()) {
-      Adapter _next = iterator.next();
-      if ((_next instanceof GeneratorConfigProvider.ConfigAdapter)) {
-        iterator.remove();
-      }
+  @Inject
+  @Named(Constants.LANGUAGE_NAME)
+  private String languageId;
+  
+  public GeneratorConfig install(final ResourceSet resourceSet, final GeneratorConfig config) {
+    GeneratorConfigProvider.GeneratorConfigAdapter _elvis = null;
+    GeneratorConfigProvider.GeneratorConfigAdapter _findInEmfObject = GeneratorConfigProvider.GeneratorConfigAdapter.findInEmfObject(resourceSet);
+    if (_findInEmfObject != null) {
+      _elvis = _findInEmfObject;
+    } else {
+      GeneratorConfigProvider.GeneratorConfigAdapter _generatorConfigAdapter = new GeneratorConfigProvider.GeneratorConfigAdapter();
+      _elvis = _generatorConfigAdapter;
     }
-    GeneratorConfigProvider.ConfigAdapter _configAdapter = new GeneratorConfigProvider.ConfigAdapter(config);
-    adapters.add(_configAdapter);
+    final Procedure1<GeneratorConfigProvider.GeneratorConfigAdapter> _function = new Procedure1<GeneratorConfigProvider.GeneratorConfigAdapter>() {
+      @Override
+      public void apply(final GeneratorConfigProvider.GeneratorConfigAdapter it) {
+        it.attachToEmfObject(resourceSet);
+      }
+    };
+    final GeneratorConfigProvider.GeneratorConfigAdapter adapter = ObjectExtensions.<GeneratorConfigProvider.GeneratorConfigAdapter>operator_doubleArrow(_elvis, _function);
+    return adapter.language2GeneratorConfig.put(this.languageId, config);
   }
   
   @Override
   public GeneratorConfig get(final EObject context) {
-    GeneratorConfig _xblockexpression = null;
-    {
-      List<Adapter> _elvis = null;
-      Resource _eResource = null;
-      if (context!=null) {
-        _eResource=context.eResource();
-      }
-      ResourceSet _resourceSet = null;
-      if (_eResource!=null) {
-        _resourceSet=_eResource.getResourceSet();
-      }
-      EList<Adapter> _eAdapters = null;
-      if (_resourceSet!=null) {
-        _eAdapters=_resourceSet.eAdapters();
-      }
-      if (_eAdapters != null) {
-        _elvis = _eAdapters;
-      } else {
-        List<Adapter> _emptyList = CollectionLiterals.<Adapter>emptyList();
-        _elvis = _emptyList;
-      }
-      final List<Adapter> adapters = _elvis;
-      GeneratorConfig _elvis_1 = null;
-      Iterable<GeneratorConfigProvider.ConfigAdapter> _filter = Iterables.<GeneratorConfigProvider.ConfigAdapter>filter(adapters, GeneratorConfigProvider.ConfigAdapter.class);
-      GeneratorConfigProvider.ConfigAdapter _head = IterableExtensions.<GeneratorConfigProvider.ConfigAdapter>head(_filter);
-      GeneratorConfig _config = null;
-      if (_head!=null) {
-        _config=_head.config;
-      }
-      if (_config != null) {
-        _elvis_1 = _config;
-      } else {
-        GeneratorConfig _generatorConfig = new GeneratorConfig();
-        _elvis_1 = _generatorConfig;
-      }
-      _xblockexpression = _elvis_1;
+    Resource _eResource = null;
+    if (context!=null) {
+      _eResource=context.eResource();
     }
-    return _xblockexpression;
+    ResourceSet _resourceSet = null;
+    if (_eResource!=null) {
+      _resourceSet=_eResource.getResourceSet();
+    }
+    final ResourceSet resourceSet = _resourceSet;
+    boolean _notEquals = (!Objects.equal(resourceSet, null));
+    if (_notEquals) {
+      Resource _eResource_1 = null;
+      if (context!=null) {
+        _eResource_1=context.eResource();
+      }
+      ResourceSet _resourceSet_1 = null;
+      if (_eResource_1!=null) {
+        _resourceSet_1=_eResource_1.getResourceSet();
+      }
+      final GeneratorConfigProvider.GeneratorConfigAdapter adapter = GeneratorConfigProvider.GeneratorConfigAdapter.findInEmfObject(_resourceSet_1);
+      boolean _and = false;
+      boolean _notEquals_1 = (!Objects.equal(adapter, null));
+      if (!_notEquals_1) {
+        _and = false;
+      } else {
+        boolean _containsKey = adapter.language2GeneratorConfig.containsKey(this.languageId);
+        _and = _containsKey;
+      }
+      if (_and) {
+        return adapter.language2GeneratorConfig.get(this.languageId);
+      }
+    }
+    return new GeneratorConfig();
   }
 }
