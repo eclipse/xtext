@@ -7,11 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
+import static org.junit.Assert.*;
+
+import org.apache.log4j.Level;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.junit4.logging.LoggingTester;
 import org.eclipse.xtext.resource.impl.ResourceServiceProviderRegistryImpl;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * @author efftinge - Initial contribution and API
@@ -27,11 +29,17 @@ public class ResourceServiceProvideRegistryTest {
 			}
 		};
 		
-		IResourceServiceProvider.Registry reg = new ResourceServiceProviderRegistryImpl();
+		final IResourceServiceProvider.Registry reg = new ResourceServiceProviderRegistryImpl();
 		reg.getExtensionToFactoryMap().put("foo", provider);
 		
 		assertEquals(1, reg.getExtensionToFactoryMap().size());
-		assertNull(reg.getResourceServiceProvider(URI.createURI("hubba.foo")));
+		LoggingTester.captureLogging(Level.ERROR, ResourceServiceProviderRegistryImpl.class, new Runnable() {
+			@Override
+			public void run() {
+				assertNull(reg.getResourceServiceProvider(URI.createURI("hubba.foo")));
+			}
+		}).assertLogEntry("Errorneous resource service provider registered for 'hubba.foo'. Removing it from the registry.");
+		
 		assertEquals(0, reg.getExtensionToFactoryMap().size());
 	}
 }

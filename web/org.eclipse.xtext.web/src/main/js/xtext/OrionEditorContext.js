@@ -16,6 +16,7 @@ define(function() {
 		this._serverState = {};
 		this._serverStateListeners = [];
 		this._clientServiceState = {};
+		this._highlightAnnotationTypes = [];
 	};
 
 	OrionEditorContext.prototype = {

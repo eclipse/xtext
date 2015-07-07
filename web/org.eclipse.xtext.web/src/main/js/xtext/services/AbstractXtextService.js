@@ -85,7 +85,6 @@ define(['jquery'], function(jQuery) {
 			if (self._resourceId && settings.data)
 				settings.data.resource = self._resourceId;
 			settings.async = true;
-			settings.dataType = 'json';
 			jQuery.ajax(this._requestUrl, settings);
 		},
 		

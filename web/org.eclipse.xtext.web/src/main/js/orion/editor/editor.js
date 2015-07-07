@@ -124,6 +124,7 @@ define("orion/editor/editor", [ //$NON-NLS-0$
 		 * @returns {Boolean} whether the editor is dirty
 		 */
 		isDirty: function() {
+			if (this._undoStack) return !this._undoStack.isClean();
 			return this._dirty;
 		},
 		/**
@@ -204,12 +205,14 @@ define("orion/editor/editor", [ //$NON-NLS-0$
 				if (message) {
 					this.reportStatus(message, "error"); //$NON-NLS-0$
 				} else {
-					if (contents !== null && contents !== undefined && typeof contents === "string") { //$NON-NLS-0$
-						this._setModelText(contents);
+					if (contents !== null && contents !== undefined) {
+						if (typeof contents === "string") { //$NON-NLS-0$
+							this._setModelText(contents);
+						}
+						if (this._undoStack) {
+							this._undoStack.reset();
+						}
 					}
-				}
-				if (this._undoStack) {
-					this._undoStack.reset();
 				}
 			}
 			this.checkDirty();
@@ -615,10 +618,7 @@ define("orion/editor/editor", [ //$NON-NLS-0$
 			textView.setCaretOffset(caretOffset, show, callback);
 		},
 
-		/**
-		 * @private
-		 */
-		setText: function(text, start, end) {
+		setText: function(text, start, end, show, callback) {
 			var textView = this._textView;
 			var model = textView.getModel();
 			if (model.getBaseModel) {
@@ -631,7 +631,7 @@ define("orion/editor/editor", [ //$NON-NLS-0$
 					end = model.mapOffset(end, true);
 				}
 			}
-			textView.setText(text, start, end);
+			textView.setText(text, start, end, show, callback);
 		},
 
 		setSelection: function(start, end, show, callback) {
@@ -692,7 +692,7 @@ define("orion/editor/editor", [ //$NON-NLS-0$
 			if (!annotationModel) { return null; }
 			var annotationStyler = this._annotationStyler;
 			if (!annotationStyler) { return null; }
-			if (!textView.isValidLineIndex(y)) { return null; }
+			if (!textView.isValidTextPosition(x, y)) { return null; }
 			var offset = textView.getOffsetAtLocation(x, y);
 			if (offset === -1) { return null; }
 			offset = this.mapOffset(offset);
@@ -705,9 +705,8 @@ define("orion/editor/editor", [ //$NON-NLS-0$
 			}
 			var info = {
 				contents: rangeAnnotations,
-				offset: offset,
 				position: "below", //$NON-NLS-0$
-				context: {source: "editor"} //$NON-NLS-0$
+				context: {source: "editor", offset: offset} //$NON-NLS-0$
 			};
 			return info;
 		},
@@ -829,24 +828,25 @@ define("orion/editor/editor", [ //$NON-NLS-0$
 						self._hoverTimeout = null;
 						
 						// Re-check incase editor closed...
-						if (!self._listener)
+						if (!self._listener){
 							return;
-							
-						if (!tooltip.OKToHover(self._listener.lastMouseX, self._listener.lastMouseY)) { return; }
-						tooltip.show({
-							clientX: self._listener.lastMouseX,
-							clientY: self._listener.lastMouseY,
+						}
+						
+						tooltip.onHover({
+							y: e.y,
 							x: e.x,							
-							y: e.y,							
 							getTooltipInfo: function() {
 								return self._getTooltipInfo(this.x, this.y);
 							}
-						});
+						}, e.x, e.y);
 					}, 175);
 				},
 				onMouseOut: function(e) {
-//					self._listener.lastMouseX = undefined;
-//					self._listener.lastMouseY = undefined;
+					// When mouse leaves the editor, ignore any pending onMouseMove events
+					if (self._hoverTimeout) {
+						window.clearTimeout(self._hoverTimeout);
+						self._hoverTimeout = null;
+					}
 				},
 				onScroll: function(e) {
 					if (!tooltip) { return; }
@@ -971,7 +971,7 @@ define("orion/editor/editor", [ //$NON-NLS-0$
 
 			if (this._zoomRulerFactory) {
 				this._zoomRuler = this._zoomRulerFactory.createZoomRuler(this._annotationModel);
-				this.setZoomRulerVisible(this._zoomRulerVisible || this._zoomRulerVisible === undefined, true);
+				this.setZoomRulerVisible(this._zoomRulerVisible, true);
 			}
 
 			if (this._lineNumberRulerFactory) {
@@ -1103,6 +1103,9 @@ define("orion/editor/editor", [ //$NON-NLS-0$
 						annotation = AT.createAnnotation(type, start, end, annotation.description);
 					}
 					annotation.id = annotations[i].id; //allow consumers to tag the annotation with their own identifier
+					if(annotations[i].data) {
+						annotation.data = annotations[i].data;
+					}
 					annotation.creatorID = this;
 					add.push(annotation);
 
@@ -1233,6 +1236,7 @@ define("orion/editor/editor", [ //$NON-NLS-0$
 					end = start;
 				}
 				this.moveSelection(start, end);
+				return true;
 			} else if (typeof(line) === "number") { //$NON-NLS-0$
 				var model = this.getModel();
 				var pos = model.getLineStart(line-1);
@@ -1243,7 +1247,9 @@ define("orion/editor/editor", [ //$NON-NLS-0$
 					length = 0;
 				}
 				this.moveSelection(pos, pos+length);
+				return true;
 			}
+			return false;
 		},
 
 		/**

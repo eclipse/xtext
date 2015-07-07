@@ -39,6 +39,7 @@ class OccurrenceTest extends AbstractWebServerTest {
 			state #foo
 		''' .assertOccurrences('''
 			OccurrencesResult [
+			  stateId = "-80000000"
 			  writeRegions = ArrayList (
 			    TextRegionWithLineInformation [6:3][lineNumber=0, endLineNumber=0]
 			  )
@@ -57,6 +58,7 @@ class OccurrenceTest extends AbstractWebServerTest {
 			end
 		''' .assertOccurrences('''
 			OccurrencesResult [
+			  stateId = "-80000000"
 			  writeRegions = ArrayList (
 			    TextRegionWithLineInformation [13:3][lineNumber=0, endLineNumber=0]
 			  )
@@ -78,6 +80,7 @@ class OccurrenceTest extends AbstractWebServerTest {
 			end
 		''' .assertOccurrences('''
 			OccurrencesResult [
+			  stateId = "-80000000"
 			  writeRegions = ArrayList (
 			    TextRegionWithLineInformation [13:3][lineNumber=0, endLineNumber=0]
 			  )

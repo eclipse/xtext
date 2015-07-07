@@ -7,19 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.indentation
 
-import static extension org.junit.Assert.*
-import org.eclipse.xtext.junit4.util.ParseHelper
-import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.Tree
-import org.junit.Test
 import com.google.inject.Inject
-import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.TreeNode
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtend2.lib.StringConcatenation
-import org.eclipse.xtext.nodemodel.impl.InvariantChecker
-import org.eclipse.xtext.resource.XtextResource
-import org.junit.runner.RunWith
-import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.junit4.util.ParseHelper
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper
+import org.eclipse.xtext.nodemodel.impl.InvariantChecker
+import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.Tree
+import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.TreeNode
+import org.eclipse.xtext.resource.XtextResource
+import org.junit.Test
+import org.junit.runner.RunWith
+
+import static extension org.junit.Assert.*
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

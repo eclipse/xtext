@@ -65,6 +65,7 @@ Combination1:
 Combination2:
 	"#14" val1=ID (("kw1" val2=ID) | (val3+=ID val4+=ID)*);
 	
+/* SuppressWarnings[potentialOverride] */
 Combination3:
 	"#15" (val1=ID | val2=INT | val3=STRING)*;
 	
@@ -74,6 +75,7 @@ Combination4:
 List1:
 	"#17" val1+=ID ("," val1+=ID)*;
 	
+/* SuppressWarnings[noInstantiation] */
 List2:
 	"#18" (val1+=ID ("," val1+=ID)*)?;
 	
@@ -91,19 +93,22 @@ AltList1:
 	
 AltList2:
 	"#23" (val1+=ID val2=ID | "kw" val1+=ID ("," val1+=ID)* val3=ID);  
-	   
+	
+/* SuppressWarnings[noInstantiation] */
 TransientObject:
 	"#24" (val1=ID nested=TransientObjectSub)?;
 	
 TransientObjectSub:
 	val2=ID val3=ID;
 	
+/* SuppressWarnings[noInstantiation] */
 TransientSerializeables1:
 	"#25" (val1=ID enum1=TransientSerializeables1Enum)? (val2=ID int1=INT)?;
 	
 enum TransientSerializeables1Enum:
 	lit1 | lit2;
 	
+/* SuppressWarnings[potentialOverride] */
 StaticSimplification:
 	"#26" ("kw1"|{EmptyAlternativeSub}|val1=ID) ("kw2"|val2=ID) ("kw3" ("kw4" (val3=ID)+)?);
 	
@@ -117,6 +122,7 @@ TwoVersionNo2 returns TwoVersion:
 	shared1=ID? shared2=ID "long" (shared3+=ID shared3+=ID*)?
 	"extra" extra1=ID? ((extra2=ID extra3=ID) | "two" extra4=ID)?; 
 	
+/* SuppressWarnings[noInstantiation] */
 Heuristic1:
 	"#28" ("kw1" a+=ID b+=ID)* ("kw2" a+=ID c+=ID)* ("kw3" b+=ID c+=ID)*;
 

@@ -12,6 +12,10 @@ generate lazyLinking "http://eclipse.org/xtext/lazyLinkingTestLanguage"
 Model : 
 	types+=Type*;
 	
+/* 
+ * SuppressWarnings[BidirectionalReference]
+ * SuppressWarnings[potentialOverride]
+ */
 Type :
 	'type' name=ID ('extends' ^extends=[Type] '.' parentId=[Property])? ('for' parentId=[Property] 'in' ^extends=[Type])? '{'
 		(properties+=Property)* 

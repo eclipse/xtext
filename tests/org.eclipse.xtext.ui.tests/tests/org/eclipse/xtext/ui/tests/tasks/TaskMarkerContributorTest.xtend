@@ -11,8 +11,10 @@ import com.google.inject.Inject
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IMarker
 import org.eclipse.core.resources.IResource
+import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.junit4.AbstractXtextTests
+import org.eclipse.xtext.junit4.internal.LineDelimiters
 import org.eclipse.xtext.ui.tasks.TaskMarkerContributor
 import org.eclipse.xtext.ui.tasks.TaskMarkerTypeProvider
 import org.eclipse.xtext.ui.tests.Activator
@@ -21,8 +23,6 @@ import org.junit.Before
 import org.junit.Test
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
-import org.eclipse.xtext.junit4.internal.LineDelimiters
-import org.eclipse.core.runtime.NullProgressMonitor
 
 /**
  * @author Stefan Oehme - Initial contribution and API

@@ -24,6 +24,7 @@ Term returns Expression:
 Atom: 
 	name=ID;
 
+/* SuppressWarnings[potentialOverride] */
 Parens returns Expression: 
 	'(' Op ')' em='!'?;
 	
@@ -68,13 +69,15 @@ Loop4:
 	
 LoopBug285452:
 	'#12' (interface?="interface"|"class") name=ID;
-	
+
+/* SuppressWarnings[potentialOverride] */
 DuplicateBug284491:
 	'#13' (static?='static' | final?='final' | transient?='transient')*;
 	
 EmptyObjectBug284850:
 	'#14' items=EmptyObjectItems;
 	
+/* SuppressWarnings[noInstantiation] */
 EmptyObjectItems:
 	list+=EmptyObjectItem*;
 	
@@ -112,9 +115,11 @@ TypeBug2B: {TypeBug2B} "kb" name=ID;
 Bug305171:
 	"#19" (('kx' x+=ID (',' x+=ID)*)? (('ky' y+=ID (',' y+=ID)*)? ('kz' z+=ID (',' z+=ID)*)?)) name=ID;
 
+/* SuppressWarnings[noInstantiation] */
 Bug310435Enum:
 	"#20" ('kw1' lits+=EnumBug310435Lit1 | 'kw2' lits+=EnumBug310435Lit2)*;
 	
+/* SuppressWarnings[noInstantiation] */
 Bug310435Val:
 	"#21" ('kw1' lits+=ID | 'kw2' lits+=STRING)*;
 	
@@ -124,6 +129,7 @@ enum EnumBug310435Lit1 returns EnumBug310435Enum:
 enum EnumBug310435Lit2 returns EnumBug310435Enum:
 	lit2='lit2';
 	
+/* SuppressWarnings[noInstantiation] */
 CrossRefNameTest:
 	"#22" named+=CrossRefNamed* "kw1" ("kw2" ref+=[CrossRefNamed|ID1] | "kw3" ref+=[CrossRefNamed|ID2])*;
 	

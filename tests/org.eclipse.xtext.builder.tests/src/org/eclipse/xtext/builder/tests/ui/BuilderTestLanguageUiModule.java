@@ -38,6 +38,7 @@ public class BuilderTestLanguageUiModule extends org.eclipse.xtext.builder.tests
 		return JDTAwareSourceFolderProvider.class;
 	}
 	
+	@Override
 	public Class<? extends IContextualOutputConfigurationProvider> bindIContextualOutputConfigurationProvider() {
         return EclipseOutputConfigurationProvider.class;	
     }	

@@ -930,17 +930,24 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	def CharSequence compileFacetConfiguration(Grammar grammar) '''
 	package «grammar.facetConfiguration.toPackageName»;
 	
+	import com.intellij.openapi.components.PersistentStateComponent;
 	import com.intellij.openapi.components.State;
 	import com.intellij.openapi.components.Storage;
 	import com.intellij.openapi.components.StoragePathMacros;
 	import com.intellij.openapi.components.StorageScheme;
-	import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
+	«IF grammar.doesUseXbase»
+		import org.eclipse.xtext.xbase.idea.facet.XbaseFacetConfiguration;
+		import org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigurationState;
+	«ELSE»
+		import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
+		import org.eclipse.xtext.idea.facet.GeneratorConfigurationState;
+	«ENDIF»
 	
 	@State(name = "«grammar.name»Generator", storages = {
 			@Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
 			@Storage(id = "dir", file = StoragePathMacros.PROJECT_CONFIG_DIR
 					+ "/«grammar.name.toSimpleName»GeneratorConfig.xml", scheme = StorageScheme.DIRECTORY_BASED)})
-	public class «grammar.facetConfiguration.toSimpleName» extends AbstractFacetConfiguration{
+	public class «grammar.facetConfiguration.toSimpleName» extends «IF grammar.doesUseXbase»XbaseFacetConfiguration implements PersistentStateComponent<XbaseGeneratorConfigurationState>«ELSE»AbstractFacetConfiguration implements PersistentStateComponent<GeneratorConfigurationState>«ENDIF»{
 	
 	}
 	'''

@@ -13,11 +13,14 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 @ToString(skipNulls = true)
 @SuppressWarnings("all")
 public class OccurrencesResult implements IServiceResult {
+  private final String stateId;
+  
   private final ArrayList<ITextRegion> writeRegions = new ArrayList<ITextRegion>();
   
   private final ArrayList<ITextRegion> readRegions = new ArrayList<ITextRegion>();
   
-  public OccurrencesResult(final Iterable<ITextRegion> readRegions, final Iterable<ITextRegion> writeRegions) {
+  public OccurrencesResult(final String stateId, final Iterable<ITextRegion> readRegions, final Iterable<ITextRegion> writeRegions) {
+    this.stateId = stateId;
     Iterables.<ITextRegion>addAll(this.readRegions, readRegions);
     Iterables.<ITextRegion>addAll(this.writeRegions, writeRegions);
   }
@@ -27,6 +30,7 @@ public class OccurrencesResult implements IServiceResult {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
+    result = prime * result + ((this.stateId== null) ? 0 : this.stateId.hashCode());
     result = prime * result + ((this.writeRegions== null) ? 0 : this.writeRegions.hashCode());
     result = prime * result + ((this.readRegions== null) ? 0 : this.readRegions.hashCode());
     return result;
@@ -42,6 +46,11 @@ public class OccurrencesResult implements IServiceResult {
     if (getClass() != obj.getClass())
       return false;
     OccurrencesResult other = (OccurrencesResult) obj;
+    if (this.stateId == null) {
+      if (other.stateId != null)
+        return false;
+    } else if (!this.stateId.equals(other.stateId))
+      return false;
     if (this.writeRegions == null) {
       if (other.writeRegions != null)
         return false;
@@ -60,9 +69,15 @@ public class OccurrencesResult implements IServiceResult {
   public String toString() {
     ToStringBuilder b = new ToStringBuilder(this);
     b.skipNulls();
+    b.add("stateId", this.stateId);
     b.add("writeRegions", this.writeRegions);
     b.add("readRegions", this.readRegions);
     return b.toString();
+  }
+  
+  @Pure
+  public String getStateId() {
+    return this.stateId;
   }
   
   @Pure

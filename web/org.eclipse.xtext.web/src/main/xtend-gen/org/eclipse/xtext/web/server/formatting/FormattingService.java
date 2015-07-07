@@ -19,6 +19,7 @@ import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionRewriter;
 import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
 import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder;
+import org.eclipse.xtext.formatting2.regionaccess.internal.TextSegment;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
@@ -29,10 +30,8 @@ import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.formatting.FormattingResult;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
-import org.eclipse.xtext.web.server.model.UpdateDocumentService;
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Extension;
 
 /**
  * Service class for text formatting.
@@ -40,10 +39,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 @Singleton
 @SuppressWarnings("all")
 public class FormattingService {
-  @Inject
-  @Extension
-  private UpdateDocumentService _updateDocumentService;
-  
   @Inject(optional = true)
   private INodeModelFormatter formatter1;
   
@@ -78,7 +73,6 @@ public class FormattingService {
             }
           }
           it.setDirty(true);
-          it.setProcessingCompleted(false);
           it.createNewStateId();
           textWrapper[0] = formattedText;
           String _stateId = it.getStateId();
@@ -97,7 +91,6 @@ public class FormattingService {
             int _length = selection.getLength();
             it.updateText(_get_1, _offset, _length);
           }
-          FormattingService.this._updateDocumentService.processUpdatedDocument(it, cancelIndicator);
           return null;
         }
       };
@@ -137,7 +130,15 @@ public class FormattingService {
     request.setTextRegionAccess(regionAccess);
     final IFormatter2 formatter2 = this.formatter2Provider.get();
     final List<ITextReplacement> replacements = formatter2.format(request);
-    ITextRegionRewriter _rewriter = regionAccess.getRewriter();
-    return _rewriter.renderToString(replacements);
+    if ((selection != null)) {
+      ITextRegionRewriter _rewriter = regionAccess.getRewriter();
+      int _offset = selection.getOffset();
+      int _length = selection.getLength();
+      TextSegment _textSegment = new TextSegment(regionAccess, _offset, _length);
+      return _rewriter.renderToString(_textSegment, replacements);
+    } else {
+      ITextRegionRewriter _rewriter_1 = regionAccess.getRewriter();
+      return _rewriter_1.renderToString(replacements);
+    }
   }
 }

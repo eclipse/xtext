@@ -745,6 +745,16 @@
           id="Maven Install"
           excludedTriggers="MANUAL"
           launcher="/org.eclipse.xtext.parent/org.eclipse.xtext.parent.launch"/>
+      <setupTask
+          xsi:type="setup.targlets:TargletTask">
+        <targlet
+            name="JUnit 3">
+          <requirement
+              name="org.junit"
+              versionRange="[3.8.0,4.0.0)"
+              filter=""/>
+        </targlet>
+      </setupTask>
     </stream>
     <description>Provide the core grammar infrastructure</description>
   </project>

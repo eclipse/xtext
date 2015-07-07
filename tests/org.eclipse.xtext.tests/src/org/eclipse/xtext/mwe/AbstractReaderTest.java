@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.log4j.Level;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.WorkflowContextDefaultImpl;
@@ -25,6 +26,7 @@ import org.eclipse.xtext.index.IndexTestLanguageStandaloneSetup;
 import org.eclipse.xtext.index.indexTestLanguage.Entity;
 import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.junit4.logging.LoggingTester;
 import org.junit.Test;
 
 /**
@@ -33,7 +35,7 @@ import org.junit.Test;
 public abstract class AbstractReaderTest extends AbstractXtextTests {
 
 	@Test public void testLoadMatchNone() throws Exception {
-		Reader reader = getReader();
+		final Reader reader = getReader();
 		reader.addPath(pathTo("emptyFolder"));
 		reader.addPath(pathTo("nonemptyFolder"));
 		reader.addRegister(new IndexTestLanguageStandaloneSetup());
@@ -48,8 +50,15 @@ public abstract class AbstractReaderTest extends AbstractXtextTests {
 				return false;
 			}
 		});
-		WorkflowContext ctx = ctx();
-		reader.invoke(ctx, monitor(), issues());
+		final WorkflowContext ctx = ctx();
+		LoggingTester.captureLogging(Level.WARN, SlotEntry.class, new Runnable() {
+
+			@Override
+			public void run() {
+				reader.invoke(ctx, monitor(), issues());
+			}
+			
+		}).assertLogEntry("Could not find any exported element of type 'Type' -> Slot 'model' is empty.");
 		Collection<?> slotContent = (Collection<?>) ctx.get("model");
 		assertNotNull(slotContent);
 		assertTrue(slotContent.isEmpty());

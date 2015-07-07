@@ -8,6 +8,7 @@
 package org.eclipse.xtext.web.server.test;
 
 import com.google.inject.Injector;
+import com.google.inject.Module;
 import com.google.inject.Singleton;
 import java.io.File;
 import java.util.Collections;
@@ -53,7 +54,7 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
     
     private long sleepTime;
     
-    private boolean canceled;
+    private volatile boolean canceled;
     
     private int entryCounter;
     
@@ -66,29 +67,21 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
         {
           Thread _currentThread = Thread.currentThread();
           this.workerThread = _currentThread;
-          /* this; */
           synchronized (this) {
-            {
-              this.entryCounter++;
-              this.notifyAll();
-            }
+            this.entryCounter++;
+            this.notifyAll();
           }
           final long startTime = System.currentTimeMillis();
           while (((((System.currentTimeMillis() - startTime) < this.sleepTime) && (!mon.isCanceled())) && (!this.workerThread.isInterrupted()))) {
-            {
-              Thread.sleep(30);
-              boolean _isCanceled = mon.isCanceled();
-              if (_isCanceled) {
-                this.canceled = true;
-              }
-            }
+            Thread.sleep(30);
           }
-          /* this; */
+          boolean _isCanceled = mon.isCanceled();
+          if (_isCanceled) {
+            this.canceled = true;
+          }
           synchronized (this) {
-            {
-              this.exitCounter++;
-              this.notifyAll();
-            }
+            this.exitCounter++;
+            this.notifyAll();
           }
           _xblockexpression = super.validate(resource, mode, mon);
         }
@@ -120,7 +113,7 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
           {
             long _currentTimeMillis = System.currentTimeMillis();
             long _minus = (_currentTimeMillis - startTime);
-            boolean _lessThan = (_minus < 3000);
+            boolean _lessThan = (_minus < 8000);
             Assert.assertTrue(_lessThan);
             this.wait(3000);
           }
@@ -159,7 +152,7 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
   private UpdateDocumentTest.TestResourceValidator resourceValidator;
   
   @Override
-  protected StatemachineRuntimeModule getRuntimeModule() {
+  protected Module getRuntimeModule() {
     abstract class __UpdateDocumentTest_1 extends StatemachineRuntimeModule {
       public abstract Class<? extends IResourceValidator> bindIResourceValidator();
     }
@@ -294,7 +287,7 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
   
   @Test
   public void testCancelBackgroundWork1() {
-    this.resourceValidator.reset(3000);
+    this.resourceValidator.reset(300);
     final File file = this.createFile("input signal x state foo end");
     final HashMapSessionStore sessionStore = new HashMapSessionStore();
     Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "update");
@@ -353,7 +346,7 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
   
   @Test
   public void testCancelBackgroundWork2() {
-    this.resourceValidator.reset(3000);
+    this.resourceValidator.reset(300);
     final File file = this.createFile("input signal x state foo end");
     final HashMapSessionStore sessionStore = new HashMapSessionStore();
     Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "update");
@@ -548,5 +541,46 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
     final ResourceContentResult loadResult = ((ResourceContentResult) _apply_1);
     String _fullText = loadResult.getFullText();
     Assert.assertEquals("input signal x state bar set x =  end", _fullText);
+  }
+  
+  @Test
+  public void testNoPreComputationOnFullText() {
+    this.resourceValidator.reset(0);
+    final File file = this.createFile("");
+    final HashMapSessionStore sessionStore = new HashMapSessionStore();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "update");
+    String _name = file.getName();
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
+    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("fullText", "input signal x state foo end");
+    XtextServiceDispatcher.ServiceDescriptor _service = this.getService(
+      Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2)), sessionStore);
+    Function0<? extends IServiceResult> _service_1 = _service.getService();
+    _service_1.apply();
+    Pair<String, String> _mappedTo_3 = Pair.<String, String>of("requestType", "update");
+    String _name_1 = file.getName();
+    Pair<String, String> _mappedTo_4 = Pair.<String, String>of("resource", _name_1);
+    Pair<String, String> _mappedTo_5 = Pair.<String, String>of("fullText", "input signal x state foo end");
+    XtextServiceDispatcher.ServiceDescriptor _service_2 = this.getService(
+      Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_3, _mappedTo_4, _mappedTo_5)), sessionStore);
+    Function0<? extends IServiceResult> _service_3 = _service_2.getService();
+    _service_3.apply();
+    Assert.assertEquals(0, this.resourceValidator.entryCounter);
+    Pair<String, String> _mappedTo_6 = Pair.<String, String>of("requestType", "update");
+    String _name_2 = file.getName();
+    Pair<String, String> _mappedTo_7 = Pair.<String, String>of("resource", _name_2);
+    Pair<String, String> _mappedTo_8 = Pair.<String, String>of("deltaText", "bar");
+    Pair<String, String> _mappedTo_9 = Pair.<String, String>of("deltaOffset", "6");
+    Pair<String, String> _mappedTo_10 = Pair.<String, String>of("deltaReplaceLength", "3");
+    XtextServiceDispatcher.ServiceDescriptor _service_4 = this.getService(
+      Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_6, _mappedTo_7, _mappedTo_8, _mappedTo_9, _mappedTo_10)), sessionStore);
+    Function0<? extends IServiceResult> _service_5 = _service_4.getService();
+    _service_5.apply();
+    final Function1<UpdateDocumentTest.TestResourceValidator, Boolean> _function = new Function1<UpdateDocumentTest.TestResourceValidator, Boolean>() {
+      @Override
+      public Boolean apply(final UpdateDocumentTest.TestResourceValidator it) {
+        return Boolean.valueOf((it.entryCounter == 1));
+      }
+    };
+    this.resourceValidator.waitUntil(_function);
   }
 }

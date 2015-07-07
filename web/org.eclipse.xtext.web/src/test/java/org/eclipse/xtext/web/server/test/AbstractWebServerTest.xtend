@@ -8,6 +8,7 @@
 package org.eclipse.xtext.web.server.test
 
 import com.google.inject.Guice
+import com.google.inject.Module
 import com.google.inject.util.Modules
 import java.io.File
 import java.io.FileWriter
@@ -20,10 +21,10 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.junit4.AbstractXtextTests
 import org.eclipse.xtext.web.example.statemachine.StatemachineRuntimeModule
 import org.eclipse.xtext.web.example.statemachine.StatemachineStandaloneSetup
+import org.eclipse.xtext.web.server.ISessionStore
 import org.eclipse.xtext.web.server.XtextServiceDispatcher
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider
 import org.eclipse.xtext.web.server.test.languages.StatemachineWebModule
-import org.eclipse.xtext.web.server.ISessionStore
 
 @Accessors(PROTECTED_GETTER)
 class AbstractWebServerTest extends AbstractXtextTests {
@@ -42,7 +43,7 @@ class AbstractWebServerTest extends AbstractXtextTests {
 	
 	XtextServiceDispatcher dispatcher
 	
-	protected def getRuntimeModule() {
+	protected def Module getRuntimeModule() {
 		new StatemachineRuntimeModule
 	}
 	

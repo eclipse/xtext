@@ -17,7 +17,7 @@ abstract class AbstractResourceSetTest {
 	@Test
 	def void testDemandLoadedResourcesAreInMap() {
 		val rs = createEmptyResourceSet
-		val Resource$Factory nullFactory = [ uri | 
+		val Resource.Factory nullFactory = [ uri | 
 			val result = new NullResource
 			result.URI = uri
 			result

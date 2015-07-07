@@ -25,5 +25,6 @@ TwoRequired:
 TwoOptions:
 	"twooptions" ("one" one=ID | "two" two=ID);
 
+/* SuppressWarnings[noInstantiation] */
 Indent:
 	"{" req=TwoRequired? opt=TwoOptions? indent+=Indent* "}";

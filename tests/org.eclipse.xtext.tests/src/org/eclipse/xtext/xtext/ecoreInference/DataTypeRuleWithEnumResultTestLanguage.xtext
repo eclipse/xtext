@@ -9,6 +9,7 @@ grammar org.eclipse.xtext.xtext.ecoreInference.DataTypeRuleWithEnumResultTestLan
 	with org.eclipse.xtext.enumrules.EnumRulesTestLanguage
 
 import 'http://www.eclipse.org/2009/tmf/xtext/EnumRulesTest'
+/* SuppressWarnings[external] */
 import 'classpath:/org/eclipse/xtext/enumrules/enums.ecore'
  
 Model:

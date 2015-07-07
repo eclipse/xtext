@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.inject.Injector;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,10 +25,13 @@ import org.eclipse.xtext.web.server.IRequestData;
 import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
+import org.eclipse.xtext.web.server.generator.GeneratorResult;
 import org.eclipse.xtext.web.servlet.HttpServletRequestData;
 import org.eclipse.xtext.web.servlet.HttpServletSessionStore;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
  * An HTTP servlet for publishing the Xtext services. Include this into your web server by creating
@@ -205,17 +209,42 @@ public class XtextServlet extends HttpServlet {
   
   /**
    * Invoke the service function of the given service descriptor and write its result to the
-   * servlet response in Json format.
+   * servlet response in Json format. An exception is made for code generation where exactly
+   * one document is generated and a content type is assigned to it. In this case the document
+   * itself is written into the response instead of wrapping it into a Json object.
    */
   protected void doService(final XtextServiceDispatcher.ServiceDescriptor service, final HttpServletResponse response) {
     try {
       Function0<? extends IServiceResult> _service = service.getService();
       final IServiceResult result = _service.apply();
+      if ((result instanceof GeneratorResult)) {
+        List<GeneratorResult.GeneratedDocument> _entries = ((GeneratorResult)result).getEntries();
+        final GeneratorResult.GeneratedDocument document = IterableExtensions.<GeneratorResult.GeneratedDocument>head(_entries);
+        boolean _and = false;
+        if (!(document != null)) {
+          _and = false;
+        } else {
+          String _contentType = document.getContentType();
+          boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_contentType);
+          boolean _not = (!_isNullOrEmpty);
+          _and = _not;
+        }
+        if (_and) {
+          response.setStatus(HttpServletResponse.SC_OK);
+          String _contentType_1 = document.getContentType();
+          response.setContentType(_contentType_1);
+          response.setHeader("Cache-Control", "no-cache");
+          PrintWriter _writer = response.getWriter();
+          String _content = document.getContent();
+          _writer.write(_content);
+          return;
+        }
+      }
       response.setStatus(HttpServletResponse.SC_OK);
       response.setContentType("text/x-json;charset=UTF-8");
       response.setHeader("Cache-Control", "no-cache");
-      PrintWriter _writer = response.getWriter();
-      this.gson.toJson(result, _writer);
+      PrintWriter _writer_1 = response.getWriter();
+      this.gson.toJson(result, _writer_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

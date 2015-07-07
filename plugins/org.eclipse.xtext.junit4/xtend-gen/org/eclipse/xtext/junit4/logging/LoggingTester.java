@@ -373,46 +373,36 @@ public class LoggingTester {
   }
   
   public static LoggingTester.LogCapture captureLogging(final Level level, final Class<?> source, final Runnable action) {
-    LoggingTester.LogCapture _xblockexpression = null;
-    {
-      final Logger logger = Logger.getLogger(source);
-      final LoggingTester.QueueAppender appender = new LoggingTester.QueueAppender();
-      final Level oldLevel = logger.getLevel();
-      final ArrayList<Appender> allAppenders = LoggingTester.appenderHierarchy(logger);
-      final LoggingTester.SourceFilter filter = new LoggingTester.SourceFilter(logger);
-      LoggingTester.LogCapture _xtrycatchfinallyexpression = null;
-      try {
-        LoggingTester.LogCapture _xblockexpression_1 = null;
-        {
-          final Procedure1<Appender> _function = new Procedure1<Appender>() {
-            @Override
-            public void apply(final Appender it) {
-              it.addFilter(filter);
-            }
-          };
-          IterableExtensions.<Appender>forEach(allAppenders, _function);
-          logger.addAppender(appender);
-          logger.setLevel(level);
-          action.run();
-          List<LoggingTester.LogEntry> _list = IterableExtensions.<LoggingTester.LogEntry>toList(appender.events);
-          final List<LoggingTester.LogEntry> events = IterableExtensions.<LoggingTester.LogEntry>sortWith(_list, LoggingTester.TEMPORAL_ORDER);
-          _xblockexpression_1 = new LoggingTester.LogCapture(events);
+    final Logger logger = Logger.getLogger(source);
+    final LoggingTester.QueueAppender appender = new LoggingTester.QueueAppender();
+    final Level oldLevel = logger.getLevel();
+    final ArrayList<Appender> allAppenders = LoggingTester.appenderHierarchy(logger);
+    final LoggingTester.SourceFilter filter = new LoggingTester.SourceFilter(logger);
+    try {
+      final Procedure1<Appender> _function = new Procedure1<Appender>() {
+        @Override
+        public void apply(final Appender it) {
+          it.addFilter(filter);
         }
-        _xtrycatchfinallyexpression = _xblockexpression_1;
-      } finally {
-        logger.removeAppender(appender);
-        final Procedure1<Appender> _function = new Procedure1<Appender>() {
-          @Override
-          public void apply(final Appender it) {
-            LoggingTester.removeFilter(it, filter);
-          }
-        };
-        IterableExtensions.<Appender>forEach(allAppenders, _function);
-        logger.setLevel(oldLevel);
-      }
-      _xblockexpression = _xtrycatchfinallyexpression;
+      };
+      IterableExtensions.<Appender>forEach(allAppenders, _function);
+      logger.addAppender(appender);
+      logger.setLevel(level);
+      action.run();
+      List<LoggingTester.LogEntry> _list = IterableExtensions.<LoggingTester.LogEntry>toList(appender.events);
+      final List<LoggingTester.LogEntry> events = IterableExtensions.<LoggingTester.LogEntry>sortWith(_list, LoggingTester.TEMPORAL_ORDER);
+      return new LoggingTester.LogCapture(events);
+    } finally {
+      logger.removeAppender(appender);
+      final Procedure1<Appender> _function_1 = new Procedure1<Appender>() {
+        @Override
+        public void apply(final Appender it) {
+          LoggingTester.removeFilter(it, filter);
+        }
+      };
+      IterableExtensions.<Appender>forEach(allAppenders, _function_1);
+      logger.setLevel(oldLevel);
     }
-    return _xblockexpression;
   }
   
   private static ArrayList<Appender> appenderHierarchy(final Logger logger) {
@@ -430,11 +420,21 @@ public class LoggingTester {
   }
   
   private static void removeFilter(final Appender appender, final Filter filter) {
-    for (Filter current = appender.getFilter(); (!Objects.equal(current, null)); current = current.getNext()) {
-      Filter _next = current.getNext();
-      boolean _equals = Objects.equal(_next, filter);
-      if (_equals) {
-        current.setNext(null);
+    Filter _filter = appender.getFilter();
+    boolean _equals = Objects.equal(_filter, filter);
+    if (_equals) {
+      appender.clearFilters();
+      Filter _next = filter.getNext();
+      appender.addFilter(_next);
+    } else {
+      for (Filter current = appender.getFilter(); (!Objects.equal(current, null)); current = current.getNext()) {
+        Filter _next_1 = current.getNext();
+        boolean _equals_1 = Objects.equal(_next_1, filter);
+        if (_equals_1) {
+          Filter _next_2 = filter.getNext();
+          current.setNext(_next_2);
+          return;
+        }
       }
     }
   }

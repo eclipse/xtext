@@ -14,6 +14,7 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 InheritedParserRule returns mm::AType:
 	'element' name=ID;
 	
+/* SuppressWarnings[noInstantiation] */
 AbstractCallOverridenParserRule returns mm::AModel:
 	'overridemodel' (elements+=OverridableParserRule)*;
 	
@@ -23,6 +24,7 @@ OverridableParserRule returns mm::AType :
 OverridableParserRule2 returns mm::AType :
     'other element' name=STRING;
 
+/* SuppressWarnings[noInstantiation] */
 AbstractCallExtendedParserRule returns mm::AModel:
 	'extendedmodel' (elements+=ExtendableParserRule)*;
 

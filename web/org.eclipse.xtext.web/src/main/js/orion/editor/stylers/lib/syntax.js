@@ -40,6 +40,10 @@ define("orion/editor/stylers/lib/syntax", [], function() { //$NON-NLS-0$
 					match: "\\)", //$NON-NLS-0$
 					name: "punctuation.section.parens.end" //$NON-NLS-0$
 				},
+				operator: {
+					match: "(\\+|-|!|=|>|<|&|(\\|\\|))+", //$NON-NLS-0$
+					name: "punctuation.operator" //$NON-NLS-0$
+				},
 				doc_block: {
 					begin: {match: "/\\*\\*", literal: "/**"}, //$NON-NLS-1$ //$NON-NLS-0$
 					end: {match: "\\*/", literal: "*/"}, //$NON-NLS-1$ //$NON-NLS-0$

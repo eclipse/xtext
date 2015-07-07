@@ -14,7 +14,9 @@ import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.parser.DefaultEcoreElementFactory;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
+import org.eclipse.xtext.parser.antlr.SyntaxErrorMessageProvider;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.ICrossReferenceSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.resource.DerivedStateAwareResourceDescriptionManager;
@@ -48,6 +50,8 @@ import org.eclipse.xtext.xtext.XtextValidator;
 import org.eclipse.xtext.xtext.XtextValueConverters;
 import org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor;
 import org.eclipse.xtext.xtext.ecoreInference.XtendXtext2EcorePostProcessor;
+import org.eclipse.xtext.xtext.parser.CardinalityAwareEcoreFactory;
+import org.eclipse.xtext.xtext.parser.CardinalityAwareSyntaxErrorMessageProvider;
 
 import com.google.inject.Binder;
 
@@ -163,5 +167,19 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 	 */
 	public Class<? extends ConfigurableIssueCodesProvider> bindConfigurableIssueCodesProvider() {
 		return XtextConfigurableIssueCodes.class;
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public Class<? extends DefaultEcoreElementFactory> bindCardinalityAwareFactory() {
+		return CardinalityAwareEcoreFactory.class;
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public Class<? extends SyntaxErrorMessageProvider> bindSyntaxErrorMessageProvider() {
+		return CardinalityAwareSyntaxErrorMessageProvider.class;
 	}
 }

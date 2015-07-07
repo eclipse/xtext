@@ -50,7 +50,7 @@ public class AbstractWebServerTest extends AbstractXtextTests {
   
   private XtextServiceDispatcher dispatcher;
   
-  protected StatemachineRuntimeModule getRuntimeModule() {
+  protected Module getRuntimeModule() {
     return new StatemachineRuntimeModule();
   }
   
@@ -67,7 +67,7 @@ public class AbstractWebServerTest extends AbstractXtextTests {
         public Injector createInjector() {
           final StatemachineWebModule webModule = new StatemachineWebModule(AbstractWebServerTest.this.executorService);
           webModule.setResourceBaseProvider(AbstractWebServerTest.this.resourceBaseProvider);
-          StatemachineRuntimeModule _runtimeModule = AbstractWebServerTest.this.getRuntimeModule();
+          Module _runtimeModule = AbstractWebServerTest.this.getRuntimeModule();
           Modules.OverriddenModuleBuilder _override = Modules.override(_runtimeModule);
           Module _with = _override.with(webModule);
           return Guice.createInjector(_with);

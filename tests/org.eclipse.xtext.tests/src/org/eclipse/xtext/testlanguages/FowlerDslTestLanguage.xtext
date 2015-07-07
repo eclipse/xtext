@@ -10,6 +10,7 @@ grammar org.eclipse.xtext.testlanguages.FowlerDslTestLanguage with org.eclipse.x
 
 generate fowlerdsl "http://example.xtext.org/FowlerDslTestLanguage"
 
+/* SuppressWarnings[noInstantiation] */
 Statemachine :
   'events'
      (events+=Event)*

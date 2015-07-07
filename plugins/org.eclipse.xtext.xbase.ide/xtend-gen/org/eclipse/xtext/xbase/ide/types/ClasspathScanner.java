@@ -68,7 +68,6 @@ public class ClasspathScanner {
   
   public Iterable<ITypeDescriptor> getDescriptors(final ClassLoader classLoader, final Collection<String> packagePrefixes) {
     try {
-      /* this; */
       synchronized (this) {
         if ((this.classLoaderDescriptors == null)) {
           Cache<Pair<ClassLoader, Collection<String>>, Iterable<ITypeDescriptor>> _createClassLoaderCache = this.createClassLoaderCache();
@@ -90,7 +89,6 @@ public class ClasspathScanner {
   
   public Iterable<ITypeDescriptor> getDescriptors(final URI uri, final Collection<String> packagePrefixes) {
     try {
-      /* this; */
       synchronized (this) {
         if ((this.uriDescriptors == null)) {
           Cache<Pair<URI, Collection<String>>, Iterable<ITypeDescriptor>> _createUriCache = this.createUriCache();

@@ -16,19 +16,21 @@ import org.eclipse.xtext.ide.LexerIdeBindings
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer
-import org.eclipse.xtext.service.AbstractGenericModule
+import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator
+import org.eclipse.xtext.ide.labels.IImageDescriptionProvider
 import org.eclipse.xtext.web.example.jetty.contentassist.StatemachineWebContentProposalProvider
+import org.eclipse.xtext.web.example.statemachine.ide.StatemachineImageDescriptionProvider
+import org.eclipse.xtext.web.example.statemachine.ide.StatemachineSemanticHighlightingCalculator
 import org.eclipse.xtext.web.example.statemachine.ide.contentassist.antlr.StatemachineParser
 import org.eclipse.xtext.web.example.statemachine.ide.contentassist.antlr.internal.InternalStatemachineLexer
+import org.eclipse.xtext.web.server.DefaultWebModule
 import org.eclipse.xtext.web.server.persistence.FileResourceHandler
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler
-import org.eclipse.xtext.ide.labels.IImageDescriptionProvider
-import org.eclipse.xtext.web.example.statemachine.ide.StatemachineImageDescriptionProvider
 
 @Accessors
 @FinalFieldsConstructor
-class StatemachineWebModule extends AbstractGenericModule {
+class StatemachineWebModule extends DefaultWebModule {
 	
 	val ExecutorService executorService
 	
@@ -61,5 +63,9 @@ class StatemachineWebModule extends AbstractGenericModule {
 
 	def Class<? extends IImageDescriptionProvider> bindIImageDescriptionProvider() {
 		StatemachineImageDescriptionProvider
+	}
+	
+	def Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
+		StatemachineSemanticHighlightingCalculator
 	}
 }

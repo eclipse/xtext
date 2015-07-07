@@ -819,7 +819,7 @@ protected class TwoOptions_TwoAssignment_1_1_1 extends AssignmentToken  {
 
 /************ begin Rule Indent ****************
  *
- * Indent:
+ * / * SuppressWarnings[noInstantiation] * / Indent:
  * 	"{" req=TwoRequired? opt=TwoOptions? indent+=Indent* "}";
  *
  **/

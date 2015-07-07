@@ -38,6 +38,7 @@ Workflow {
 		language = auto-inject {
 			fragment = ecore.EMFGeneratorFragment {
 				emfRuntimeVersion = "2.9"
+				jdkLevel = "JDK60"
 			}
 			fragment = grammarAccess.GrammarAccessFragment auto-inject {}
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}

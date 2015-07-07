@@ -23,17 +23,14 @@ public class HashMapSessionStore implements ISessionStore {
   
   @Override
   public <T extends Object> T get(final Object key, final Function0<? extends T> factory) {
-    /* this.map; */
     synchronized (this.map) {
-      {
-        final T sessionValue = this.<T>get(key);
-        if ((sessionValue != null)) {
-          return sessionValue;
-        } else {
-          final T factoryValue = factory.apply();
-          this.put(key, factoryValue);
-          return factoryValue;
-        }
+      final T sessionValue = this.<T>get(key);
+      if ((sessionValue != null)) {
+        return sessionValue;
+      } else {
+        final T factoryValue = factory.apply();
+        this.put(key, factoryValue);
+        return factoryValue;
       }
     }
   }

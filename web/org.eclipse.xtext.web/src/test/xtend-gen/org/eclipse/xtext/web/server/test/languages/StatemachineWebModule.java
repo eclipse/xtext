@@ -20,11 +20,13 @@ import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ide.labels.IImageDescriptionProvider;
-import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.web.example.statemachine.ide.StatemachineImageDescriptionProvider;
+import org.eclipse.xtext.web.example.statemachine.ide.StatemachineSemanticHighlightingCalculator;
 import org.eclipse.xtext.web.example.statemachine.ide.contentassist.antlr.StatemachineParser;
 import org.eclipse.xtext.web.example.statemachine.ide.contentassist.antlr.internal.InternalStatemachineLexer;
+import org.eclipse.xtext.web.server.DefaultWebModule;
 import org.eclipse.xtext.web.server.persistence.FileResourceHandler;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler;
@@ -34,7 +36,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Accessors
 @FinalFieldsConstructor
 @SuppressWarnings("all")
-public class StatemachineWebModule extends AbstractGenericModule {
+public class StatemachineWebModule extends DefaultWebModule {
   private final ExecutorService executorService;
   
   private IResourceBaseProvider resourceBaseProvider;
@@ -72,6 +74,10 @@ public class StatemachineWebModule extends AbstractGenericModule {
   
   public Class<? extends IImageDescriptionProvider> bindIImageDescriptionProvider() {
     return StatemachineImageDescriptionProvider.class;
+  }
+  
+  public Class<? extends ISemanticHighlightingCalculator> bindSemanticHighlightingCalculator() {
+    return StatemachineSemanticHighlightingCalculator.class;
   }
   
   public StatemachineWebModule(final ExecutorService executorService) {

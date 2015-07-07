@@ -34,6 +34,13 @@ public class XtextRuleInspector<Result, RuleType extends AbstractRule> extends X
 		visitedRules = Sets.newHashSet();
 	}
 	
+	/**
+	 * @since 2.9
+	 */
+	protected String getIssueCode() {
+		return null;
+	}
+	
 	public void inspect(RuleType rule) {
 		if (!canInspect(rule))
 			return;
@@ -57,11 +64,11 @@ public class XtextRuleInspector<Result, RuleType extends AbstractRule> extends X
 	}
 
 	public void acceptError(String message, EObject object, EStructuralFeature feature) {
-		acceptor.acceptError(message, object, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);
+		acceptor.acceptError(message, object, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, getIssueCode());
 	}
 
 	public void acceptWarning(String message, EObject object, EStructuralFeature feature) {
-		acceptor.acceptWarning(message, object, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);
+		acceptor.acceptWarning(message, object, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, getIssueCode());
 	}
 	
 	public boolean addVisited(AbstractRule rule) {

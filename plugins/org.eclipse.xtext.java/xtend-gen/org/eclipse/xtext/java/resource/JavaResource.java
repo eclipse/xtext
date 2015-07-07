@@ -98,38 +98,35 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
   
   @Override
   public EList<EObject> getContents() {
-    this.getLock();
     synchronized (this.getLock()) {
-      {
-        if (this.isInitializing) {
-          return super.getContents();
-        }
-        try {
-          this.isInitializing = true;
-          final boolean isIndexing = this.compilerPhases.isIndexing(this);
-          if (((!isIndexing) && (!this.isFullyInitialized))) {
-            this.derivedStateComputer.discardDerivedState(this);
-            this.derivedStateComputer.installFull(this);
-            this.isFullyInitialized = true;
-            this.isInitialized = true;
-          } else {
-            boolean _and = false;
-            if (!isIndexing) {
-              _and = false;
-            } else {
-              _and = (!this.isInitialized);
-            }
-            if (_and) {
-              this.derivedStateComputer.installStubs(this);
-              this.isFullyInitialized = false;
-              this.isInitialized = true;
-            }
-          }
-        } finally {
-          this.isInitializing = false;
-        }
+      if (this.isInitializing) {
         return super.getContents();
       }
+      try {
+        this.isInitializing = true;
+        final boolean isIndexing = this.compilerPhases.isIndexing(this);
+        if (((!isIndexing) && (!this.isFullyInitialized))) {
+          this.derivedStateComputer.discardDerivedState(this);
+          this.derivedStateComputer.installFull(this);
+          this.isFullyInitialized = true;
+          this.isInitialized = true;
+        } else {
+          boolean _and = false;
+          if (!isIndexing) {
+            _and = false;
+          } else {
+            _and = (!this.isInitialized);
+          }
+          if (_and) {
+            this.derivedStateComputer.installStubs(this);
+            this.isFullyInitialized = false;
+            this.isInitialized = true;
+          }
+        }
+      } finally {
+        this.isInitializing = false;
+      }
+      return super.getContents();
     }
   }
   
@@ -180,7 +177,6 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
   
   @Override
   public <Result extends Object> Result execute(final IUnitOfWork<Result, ? super JavaResource> unit) throws Exception {
-    this.getLock();
     synchronized (this.getLock()) {
       return unit.exec(this);
     }

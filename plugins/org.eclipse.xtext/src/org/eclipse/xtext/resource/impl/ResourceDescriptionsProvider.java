@@ -110,10 +110,7 @@ public class ResourceDescriptionsProvider implements IResourceDescriptionsProvid
 		} else {
 			result = ChunkedResourceDescriptions.findInEmfObject(resourceSet);
 			if (result == null) {
-				result = ResourceDescriptionsData.ResourceSetAdapter.findResourceDescriptionsData(resourceSet);
-				if (result == null) {
-					result = createResourceDescriptions();
-				}
+				result = createResourceDescriptions();
 			}
 		}
 		if (result instanceof IResourceDescriptions.IContextAware) {

@@ -26,6 +26,8 @@ import org.eclipse.xtext.web.server.InvalidRequestException.InvalidDocumentState
 import org.eclipse.xtext.web.server.InvalidRequestException.InvalidParametersException
 import org.eclipse.xtext.web.server.InvalidRequestException.ResourceNotFoundException
 import org.eclipse.xtext.web.server.contentassist.ContentAssistService
+import org.eclipse.xtext.web.server.formatting.FormattingService
+import org.eclipse.xtext.web.server.generator.GeneratorService
 import org.eclipse.xtext.web.server.hover.HoverService
 import org.eclipse.xtext.web.server.model.IWebResourceSetProvider
 import org.eclipse.xtext.web.server.model.UpdateDocumentService
@@ -34,8 +36,8 @@ import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess
 import org.eclipse.xtext.web.server.occurrences.OccurrencesService
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler
 import org.eclipse.xtext.web.server.persistence.ResourcePersistenceService
+import org.eclipse.xtext.web.server.syntaxcoloring.HighlightingService
 import org.eclipse.xtext.web.server.validation.ValidationService
-import org.eclipse.xtext.web.server.formatting.FormattingService
 
 /**
  * The entry class for Xtext service invocations. Use {@link #getService(IRequestData, ISessionStore)}
@@ -61,7 +63,7 @@ class XtextServiceDispatcher {
 	/**
 	 * Service metadata, including a function for actually invoking the service.
 	 */
-	@Accessors(PUBLIC_GETTER, PROTECTED_SETTER)
+	@Accessors
 	@ToString
 	static class ServiceDescriptor {
 		
@@ -97,15 +99,18 @@ class XtextServiceDispatcher {
 	@Inject UpdateDocumentService updateDocumentService
 	@Inject ContentAssistService contentAssistService
 	@Inject ValidationService validationService
+	@Inject HighlightingService highlightingService
 	@Inject HoverService hoverService
 	@Inject OccurrencesService occurrencesService
 	@Inject FormattingService formattingService
+	@Inject GeneratorService generatorService
 	@Inject IServerResourceHandler resourceHandler
 	@Inject IWebResourceSetProvider resourceSetProvider
 	@Inject Provider<XtextWebDocument> documentProvider
 	@Inject FileExtensionProvider fileExtensionProvider
 	@Inject IResourceFactory resourceFactory
 	@Inject OperationCanceledManager operationCanceledManager
+	@Inject XtextWebDocumentAccess.Factory documentAccessFactory
 	
 	/**
 	 * Get the service descriptor for the given request.
@@ -163,10 +168,14 @@ class XtextServiceDispatcher {
 				getContentAssistService(request, sessionStore)
 			case 'hover':
 				getHoverService(request, sessionStore)
+			case 'highlighting':
+				getHighlightingService(request, sessionStore)
 			case 'occurrences':
 				getOccurrencesService(request, sessionStore)
 			case 'format':
 				getFormattingService(request, sessionStore)
+			case 'generate':
+				getGeneratorService(request, sessionStore)
 			default:
 				throw new InvalidParametersException('The request type \'' + requestType + '\' is not supported.')
 		}
@@ -222,7 +231,7 @@ class XtextServiceDispatcher {
 			// If the resource does not exist, create a dummy resource for the given full text
 			document = getFullTextDocument(fullText, resourceId, sessionStore)
 		}
-		val documentAccess = new XtextWebDocumentAccess(document, request.getParameter('requiredStateId'))
+		val documentAccess = documentAccessFactory.create(document, request.getParameter('requiredStateId'), initializedFromFullText)
 		val result = new ServiceDescriptor => [
 			hasSideEffects = true
 			hasTextInput = true
@@ -314,7 +323,7 @@ class XtextServiceDispatcher {
 		new ServiceDescriptor => [
 			service = [
 				try {
-					validationService.validate(document)
+					validationService.getResult(document)
 				} catch (Throwable throwable) {
 					handleError(throwable)
 				}
@@ -331,6 +340,21 @@ class XtextServiceDispatcher {
 			service = [
 				try {
 					hoverService.getHover(document, offset)
+				} catch (Throwable throwable) {
+					handleError(throwable)
+				}
+			]
+			hasTextInput = request.parameterKeys.contains('fullText')
+		]
+	}
+	
+	protected def getHighlightingService(IRequestData request, ISessionStore sessionStore)
+			throws InvalidRequestException {
+		val document = getDocumentAccess(request, sessionStore)
+		new ServiceDescriptor => [
+			service = [
+				try {
+					highlightingService.getResult(document)
 				} catch (Throwable throwable) {
 					handleError(throwable)
 				}
@@ -376,6 +400,21 @@ class XtextServiceDispatcher {
 		]
 	}
 	
+	protected def getGeneratorService(IRequestData request, ISessionStore sessionStore)
+			throws InvalidRequestException {
+		val document = getDocumentAccess(request, sessionStore)
+		new ServiceDescriptor => [
+			service = [
+				try {
+					generatorService.generate(document)
+				} catch (Throwable throwable) {
+					handleError(throwable)
+				}
+			]
+			hasTextInput = request.parameterKeys.contains('fullText')
+		]
+	}
+	
 	/**
 	 * Retrieve the document access for the given request. If the 'fullText' parameter is given,
 	 * a new document containing that text is created. Otherwise the 'resource' parameter is used
@@ -384,8 +423,10 @@ class XtextServiceDispatcher {
 	protected def getDocumentAccess(IRequestData request, ISessionStore sessionStore)
 			throws InvalidRequestException {
 		var XtextWebDocument document
+		var initializedFromFullText = false
 		if (request.parameterKeys.contains('fullText')) {
 			document = getFullTextDocument(request.getParameter('fullText'), null, sessionStore)
+			initializedFromFullText = true
 		} else if (request.parameterKeys.contains('resource')) {
 			document = getResourceDocument(request.getParameter('resource'), sessionStore)
 			if (document === null)
@@ -393,7 +434,7 @@ class XtextServiceDispatcher {
 		} else {
 			throw new InvalidParametersException('At least one of the parameters \'resource\' and \'fullText\' must be specified.')
 		}
-		return new XtextWebDocumentAccess(document, request.getParameter('requiredStateId'))
+		return documentAccessFactory.create(document, request.getParameter('requiredStateId'), initializedFromFullText)
 	}
 	
 	/**

@@ -16,7 +16,6 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.ui.tests.Activator;
-import org.eclipse.xtext.ui.workspace.EclipseProjectConfig;
 import org.eclipse.xtext.ui.workspace.JdtProjectConfig;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.junit.AfterClass;

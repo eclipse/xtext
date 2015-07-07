@@ -7,13 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.core.resource
 
-import com.google.inject.Inject
 import java.util.Map
+import org.eclipse.core.resources.IStorage
+import org.eclipse.core.resources.ResourcesPlugin
+import org.eclipse.emf.common.util.URI
 import org.eclipse.jdt.core.IJavaProject
+import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.TextFile
-import org.eclipse.xtext.ui.resource.IStorage2UriMapper
+import org.eclipse.xtext.ui.resource.JarEntryLocator
+import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl
 import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl.PackageFragmentRootData
-import org.eclipse.xtext.ui.tests.Activator
+import org.eclipse.xtext.ui.resource.UriValidator
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
@@ -21,13 +25,6 @@ import org.junit.Test
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
-import org.eclipse.emf.common.util.URI
-import org.eclipse.xtext.ui.resource.JarEntryLocator
-import org.eclipse.xtext.ui.resource.UriValidator
-import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl
-import org.eclipse.core.resources.IStorage
-import org.eclipse.jdt.core.JavaCore
-import org.eclipse.core.resources.ResourcesPlugin
 
 /**
  * @author Anton Kosyakov - Initial contribution and API

@@ -46,7 +46,7 @@ class OccurrencesService {
 				val writeRegions = new ArrayList<ITextRegion>(1)
 				if (definitionRegion !== null && definitionRegion !== ITextRegionWithLineInformation.EMPTY_REGION)
 					writeRegions += definitionRegion
-				val occurrencesResult = new OccurrencesResult(readRegions, writeRegions)
+				val occurrencesResult = new OccurrencesResult(stateId, readRegions, writeRegions)
 				return occurrencesResult
 			}
 			return null

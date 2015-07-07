@@ -11,17 +11,17 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
+import org.eclipse.xtext.validation.CheckMode;
+import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
-import org.eclipse.xtext.web.server.InvalidRequestException;
+import org.eclipse.xtext.web.server.model.AbstractPreComputedService;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 import org.eclipse.xtext.web.server.model.UpdateDocumentService;
-import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess;
 import org.eclipse.xtext.web.server.validation.ValidationResult;
-import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -31,10 +31,9 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  */
 @Singleton
 @SuppressWarnings("all")
-public class ValidationService {
+public class ValidationService extends AbstractPreComputedService<ValidationResult> {
   @Inject
-  @Extension
-  private UpdateDocumentService _updateDocumentService;
+  private IResourceValidator resourceValidator;
   
   /**
    * Return the validation result for the given document. The actual validation may have
@@ -42,25 +41,20 @@ public class ValidationService {
    * e.g. {@link UpdateDocumentService}. If that background processing has not been done
    * yet, it is executed and then the validation issues are collected.
    */
-  public ValidationResult validate(final XtextWebDocumentAccess document) throws InvalidRequestException {
-    final CancelableUnitOfWork<Collection<Issue>, IXtextWebDocument> _function = new CancelableUnitOfWork<Collection<Issue>, IXtextWebDocument>() {
-      @Override
-      public Collection<Issue> exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
-        ValidationService.this._updateDocumentService.processUpdatedDocument(it, cancelIndicator);
-        return it.getIssues();
-      }
-    };
-    final Collection<Issue> issues = document.<Collection<Issue>>readOnly(_function);
+  @Override
+  public ValidationResult compute(final IXtextWebDocument it, final CancelIndicator cancelIndicator) {
+    XtextResource _resource = it.getResource();
+    final List<Issue> issues = this.resourceValidator.validate(_resource, CheckMode.ALL, cancelIndicator);
     final ValidationResult result = new ValidationResult();
-    final Function1<Issue, Boolean> _function_1 = new Function1<Issue, Boolean>() {
+    final Function1<Issue, Boolean> _function = new Function1<Issue, Boolean>() {
       @Override
       public Boolean apply(final Issue it) {
         Severity _severity = it.getSeverity();
         return Boolean.valueOf((!Objects.equal(_severity, Severity.IGNORE)));
       }
     };
-    Iterable<Issue> _filter = IterableExtensions.<Issue>filter(issues, _function_1);
-    final Procedure1<Issue> _function_2 = new Procedure1<Issue>() {
+    Iterable<Issue> _filter = IterableExtensions.<Issue>filter(issues, _function);
+    final Procedure1<Issue> _function_1 = new Procedure1<Issue>() {
       @Override
       public void apply(final Issue issue) {
         ArrayList<ValidationResult.Entry> _entries = result.getEntries();
@@ -76,7 +70,7 @@ public class ValidationService {
         _entries.add(_entry);
       }
     };
-    IterableExtensions.<Issue>forEach(_filter, _function_2);
+    IterableExtensions.<Issue>forEach(_filter, _function_1);
     return result;
   }
   

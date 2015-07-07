@@ -43,8 +43,12 @@
  *     Whether the formatting action should be bound to the standard keystroke ctrl+shift+f / cmd+shift+f.
  * enableFormattingService = true {Boolean}
  *     Whether text formatting should be enabled.
+ * enableGeneratorService = true {Boolean}
+ *     Whether code generation should be enabled (must be triggered through JavaScript code).
  * enableHoverService = true {Boolean}
  *     Whether mouse hover information should be enabled.
+ * enableHighlightingService = true {Boolean}
+ *     Whether semantic highlighting (computed on the server) should be enabled.
  * enableOccurrencesService = true {Boolean}
  *     Whether marking occurrences should be enabled.
  * enableSaveAction = false {Boolean}
@@ -128,6 +132,7 @@ define([
     'orion/Deferred',
     'orion/keyBinding',
     'orion/editor/textStyler',
+    'orion/editor/annotations',
     'xtext/compatibility',
 	'xtext/OrionEditorContext',
 	'xtext/services/LoadResourceService',
@@ -136,12 +141,15 @@ define([
 	'xtext/services/UpdateService',
 	'xtext/services/ContentAssistService',
 	'xtext/services/ValidationService',
+	'xtext/services/HighlightingService',
 	'xtext/services/HoverService',
 	'xtext/services/OccurrencesService',
-	'xtext/services/FormattingService'
-], function(jQuery, orionEdit, Deferred, mKeyBinding, mTextStyler, compatibility, EditorContext,
+	'xtext/services/FormattingService',
+	'xtext/services/GeneratorService'
+], function(jQuery, orionEdit, Deferred, mKeyBinding, mTextStyler, mAnnotations, compatibility, EditorContext,
 		LoadResourceService, RevertResourceService, SaveResourceService, UpdateService,
-		ContentAssistService, ValidationService, HoverService, OccurrencesService, FormattingService) {
+		ContentAssistService, ValidationService, HighlightingService, HoverService, OccurrencesService,
+		FormattingService, GeneratorService) {
 	
 	/**
 	 * Translate an HTML attribute name to a JS option name.
@@ -239,6 +247,27 @@ define([
 				}
 			};
 		}
+	}
+	
+	/**
+	 * On demand registers and returns the annotation type with the given name
+	 */
+	function _getHighlightAnnotationType(typeName, editorContext) {
+		var annotationType = mAnnotations.AnnotationType;
+		var type = annotationType.getType(typeName)
+		if(type)
+			return typeName;
+		var properties = {
+			title: typeName,
+			style: {styleClass: "annotation " + typeName},
+			html: "<div class='annotationHTML " + typeName + "'></div>", 
+			overviewStyle: {styleClass: "annotationOverview " + typeName}
+		};
+		properties.rangeStyle = {styleClass: "annotationRange " + typeName};
+		var newType = annotationType.registerType(typeName, properties);
+		editorContext._highlightAnnotationTypes.push(newType)
+		editorContext.getEditor().getAnnotationStyler().addAnnotationType(newType)
+		return newType;
 	}
 	
 	var exports = {};
@@ -386,10 +415,37 @@ define([
 			validationService = new ValidationService(options.serverUrl, options.resourceId);
 		}
 		
+		
+		//---- Highlighting Service
+		var highlightingService;
+		if(options.enableHighlightingService || options.enableHighlightingService === undefined) {
+			highlightingService = new HighlightingService(options.serverUrl, options.resourceId)
+		}
+		
 		//---- Update Service
 		
 		function refreshDocument() {
 			editorContext.clearClientServiceState();
+			if (highlightingService) {
+				highlightingService.computeHighlighting(editorContext, options).done(function(regions) {
+					var annotations = [];
+					for(var i = 0; i < regions.length; ++i) {
+						var region = regions[i];
+						region.styleClasses.forEach(function(styleClass) {
+							annotations.push({
+								description: '',
+								start: region.offset,
+								end: region.offset + region.length,
+								styleClass: styleClass
+							})
+						});
+						editor.showAnnotations(annotations, editorContext._highlightAnnotationTypes, null, 
+							function(annotation) {
+								return _getHighlightAnnotationType(annotation.styleClass, editorContext);
+							});
+					}
+				});
+			}
 			if (validationService) {
 				validationService.computeProblems(editorContext, options).done(function(entries) {
 					editor.showProblems(entries.map(function(entry) {
@@ -545,6 +601,15 @@ define([
 			}
 		}
 		
+		//---- Generator Service
+		
+		var generatorService;
+		if (options.enableGeneratorService || options.enableGeneratorService === undefined) {
+			generatorService = new GeneratorService(options.serverUrl, options.resourceId);
+			if (updateService)
+				generatorService.setUpdateService(updateService);
+		}
+		
 		editor.invokeXtextService = function(service, invokeOptions) {
 			var optionsCopy = _copy(options);
 			for (var p in invokeOptions) {
@@ -564,6 +629,8 @@ define([
 				return occurrencesService.markOccurrences(editorContext, optionsCopy);
 			else if (service === 'format' && formattingService)
 				return formattingService.format(editorContext, options);
+			else if (service === 'generate' && generatorService)
+				return generatorService.generate(editorContext, options);
 			else
 				throw new Error('Service \'' + service + '\' is not available.');
 		}
@@ -588,7 +655,7 @@ define([
 	 */
 	exports.invokeService = function(editor, service, invokeOptions) {
 		if (editor.invokeXtextService)
-			editor.invokeXtextService(service, invokeOptions);
+			return editor.invokeXtextService(service, invokeOptions);
 		else
 			throw new Error('The editor has not been configured with Xtext.');
 	}

@@ -21,7 +21,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.ToString;
 import org.eclipse.xtext.resource.FileExtensionProvider;
@@ -38,6 +37,7 @@ import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.ServiceConflictResult;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistService;
 import org.eclipse.xtext.web.server.formatting.FormattingService;
+import org.eclipse.xtext.web.server.generator.GeneratorService;
 import org.eclipse.xtext.web.server.hover.HoverService;
 import org.eclipse.xtext.web.server.model.DocumentStateResult;
 import org.eclipse.xtext.web.server.model.IWebResourceSetProvider;
@@ -48,6 +48,7 @@ import org.eclipse.xtext.web.server.occurrences.OccurrencesService;
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler;
 import org.eclipse.xtext.web.server.persistence.ResourceContentResult;
 import org.eclipse.xtext.web.server.persistence.ResourcePersistenceService;
+import org.eclipse.xtext.web.server.syntaxcoloring.HighlightingService;
 import org.eclipse.xtext.web.server.validation.ValidationService;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
@@ -83,7 +84,7 @@ public class XtextServiceDispatcher {
   /**
    * Service metadata, including a function for actually invoking the service.
    */
-  @Accessors({ AccessorType.PUBLIC_GETTER, AccessorType.PROTECTED_SETTER })
+  @Accessors
   @ToString
   public static class ServiceDescriptor {
     /**
@@ -118,7 +119,7 @@ public class XtextServiceDispatcher {
       return this.type;
     }
     
-    protected void setType(final String type) {
+    public void setType(final String type) {
       this.type = type;
     }
     
@@ -127,7 +128,7 @@ public class XtextServiceDispatcher {
       return this.service;
     }
     
-    protected void setService(final Function0<? extends IServiceResult> service) {
+    public void setService(final Function0<? extends IServiceResult> service) {
       this.service = service;
     }
     
@@ -136,7 +137,7 @@ public class XtextServiceDispatcher {
       return this.hasSideEffects;
     }
     
-    protected void setHasSideEffects(final boolean hasSideEffects) {
+    public void setHasSideEffects(final boolean hasSideEffects) {
       this.hasSideEffects = hasSideEffects;
     }
     
@@ -145,7 +146,7 @@ public class XtextServiceDispatcher {
       return this.hasTextInput;
     }
     
-    protected void setHasTextInput(final boolean hasTextInput) {
+    public void setHasTextInput(final boolean hasTextInput) {
       this.hasTextInput = hasTextInput;
     }
     
@@ -154,7 +155,7 @@ public class XtextServiceDispatcher {
       return this.hasConflict;
     }
     
-    protected void setHasConflict(final boolean hasConflict) {
+    public void setHasConflict(final boolean hasConflict) {
       this.hasConflict = hasConflict;
     }
     
@@ -184,6 +185,9 @@ public class XtextServiceDispatcher {
   private ValidationService validationService;
   
   @Inject
+  private HighlightingService highlightingService;
+  
+  @Inject
   private HoverService hoverService;
   
   @Inject
@@ -191,6 +195,9 @@ public class XtextServiceDispatcher {
   
   @Inject
   private FormattingService formattingService;
+  
+  @Inject
+  private GeneratorService generatorService;
   
   @Inject
   private IServerResourceHandler resourceHandler;
@@ -209,6 +216,9 @@ public class XtextServiceDispatcher {
   
   @Inject
   private OperationCanceledManager operationCanceledManager;
+  
+  @Inject
+  private XtextWebDocumentAccess.Factory documentAccessFactory;
   
   /**
    * Get the service descriptor for the given request.
@@ -339,6 +349,12 @@ public class XtextServiceDispatcher {
       }
     }
     if (!_matched) {
+      if (Objects.equal(requestType, "highlighting")) {
+        _matched=true;
+        _switchResult = this.getHighlightingService(request, sessionStore);
+      }
+    }
+    if (!_matched) {
       if (Objects.equal(requestType, "occurrences")) {
         _matched=true;
         _switchResult = this.getOccurrencesService(request, sessionStore);
@@ -348,6 +364,12 @@ public class XtextServiceDispatcher {
       if (Objects.equal(requestType, "format")) {
         _matched=true;
         _switchResult = this.getFormattingService(request, sessionStore);
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(requestType, "generate")) {
+        _matched=true;
+        _switchResult = this.getGeneratorService(request, sessionStore);
       }
     }
     if (!_matched) {
@@ -452,7 +474,7 @@ public class XtextServiceDispatcher {
       document = _fullTextDocument;
     }
     String _parameter = request.getParameter("requiredStateId");
-    final XtextWebDocumentAccess documentAccess = new XtextWebDocumentAccess(document, _parameter);
+    final XtextWebDocumentAccess documentAccess = this.documentAccessFactory.create(document, _parameter, initializedFromFullText);
     XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
     final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
       @Override
@@ -643,7 +665,7 @@ public class XtextServiceDispatcher {
             public IServiceResult apply() {
               IServiceResult _xtrycatchfinallyexpression = null;
               try {
-                _xtrycatchfinallyexpression = XtextServiceDispatcher.this.validationService.validate(document);
+                _xtrycatchfinallyexpression = XtextServiceDispatcher.this.validationService.getResult(document);
               } catch (final Throwable _t) {
                 if (_t instanceof Throwable) {
                   final Throwable throwable = (Throwable)_t;
@@ -682,6 +704,42 @@ public class XtextServiceDispatcher {
               IServiceResult _xtrycatchfinallyexpression = null;
               try {
                 _xtrycatchfinallyexpression = XtextServiceDispatcher.this.hoverService.getHover(document, offset);
+              } catch (final Throwable _t) {
+                if (_t instanceof Throwable) {
+                  final Throwable throwable = (Throwable)_t;
+                  _xtrycatchfinallyexpression = XtextServiceDispatcher.this.handleError(it, throwable);
+                } else {
+                  throw Exceptions.sneakyThrow(_t);
+                }
+              }
+              return _xtrycatchfinallyexpression;
+            }
+          };
+          it.service = _function;
+          Set<String> _parameterKeys = request.getParameterKeys();
+          boolean _contains = _parameterKeys.contains("fullText");
+          it.hasTextInput = _contains;
+        }
+      };
+      _xblockexpression = ObjectExtensions.<XtextServiceDispatcher.ServiceDescriptor>operator_doubleArrow(_serviceDescriptor, _function);
+    }
+    return _xblockexpression;
+  }
+  
+  protected XtextServiceDispatcher.ServiceDescriptor getHighlightingService(final IRequestData request, final ISessionStore sessionStore) throws InvalidRequestException {
+    XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
+    {
+      final XtextWebDocumentAccess document = this.getDocumentAccess(request, sessionStore);
+      XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
+      final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
+        @Override
+        public void apply(final XtextServiceDispatcher.ServiceDescriptor it) {
+          final Function0<IServiceResult> _function = new Function0<IServiceResult>() {
+            @Override
+            public IServiceResult apply() {
+              IServiceResult _xtrycatchfinallyexpression = null;
+              try {
+                _xtrycatchfinallyexpression = XtextServiceDispatcher.this.highlightingService.getResult(document);
               } catch (final Throwable _t) {
                 if (_t instanceof Throwable) {
                   final Throwable throwable = (Throwable)_t;
@@ -789,6 +847,42 @@ public class XtextServiceDispatcher {
     return _xblockexpression;
   }
   
+  protected XtextServiceDispatcher.ServiceDescriptor getGeneratorService(final IRequestData request, final ISessionStore sessionStore) throws InvalidRequestException {
+    XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
+    {
+      final XtextWebDocumentAccess document = this.getDocumentAccess(request, sessionStore);
+      XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
+      final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
+        @Override
+        public void apply(final XtextServiceDispatcher.ServiceDescriptor it) {
+          final Function0<IServiceResult> _function = new Function0<IServiceResult>() {
+            @Override
+            public IServiceResult apply() {
+              IServiceResult _xtrycatchfinallyexpression = null;
+              try {
+                _xtrycatchfinallyexpression = XtextServiceDispatcher.this.generatorService.generate(document);
+              } catch (final Throwable _t) {
+                if (_t instanceof Throwable) {
+                  final Throwable throwable = (Throwable)_t;
+                  _xtrycatchfinallyexpression = XtextServiceDispatcher.this.handleError(it, throwable);
+                } else {
+                  throw Exceptions.sneakyThrow(_t);
+                }
+              }
+              return _xtrycatchfinallyexpression;
+            }
+          };
+          it.service = _function;
+          Set<String> _parameterKeys = request.getParameterKeys();
+          boolean _contains = _parameterKeys.contains("fullText");
+          it.hasTextInput = _contains;
+        }
+      };
+      _xblockexpression = ObjectExtensions.<XtextServiceDispatcher.ServiceDescriptor>operator_doubleArrow(_serviceDescriptor, _function);
+    }
+    return _xblockexpression;
+  }
+  
   /**
    * Retrieve the document access for the given request. If the 'fullText' parameter is given,
    * a new document containing that text is created. Otherwise the 'resource' parameter is used
@@ -796,12 +890,14 @@ public class XtextServiceDispatcher {
    */
   protected XtextWebDocumentAccess getDocumentAccess(final IRequestData request, final ISessionStore sessionStore) throws InvalidRequestException {
     XtextWebDocument document = null;
+    boolean initializedFromFullText = false;
     Set<String> _parameterKeys = request.getParameterKeys();
     boolean _contains = _parameterKeys.contains("fullText");
     if (_contains) {
       String _parameter = request.getParameter("fullText");
       XtextWebDocument _fullTextDocument = this.getFullTextDocument(_parameter, null, sessionStore);
       document = _fullTextDocument;
+      initializedFromFullText = true;
     } else {
       Set<String> _parameterKeys_1 = request.getParameterKeys();
       boolean _contains_1 = _parameterKeys_1.contains("resource");
@@ -817,7 +913,7 @@ public class XtextServiceDispatcher {
       }
     }
     String _parameter_2 = request.getParameter("requiredStateId");
-    return new XtextWebDocumentAccess(document, _parameter_2);
+    return this.documentAccessFactory.create(document, _parameter_2, initializedFromFullText);
   }
   
   /**

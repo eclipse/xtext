@@ -13,7 +13,7 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtext.xbase.lib,
  org.antlr.runtime
 Import-Package: org.apache.log4j
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext.web.example.statemachine,
  org.eclipse.xtext.web.example.statemachine.services,
  org.eclipse.xtext.web.example.statemachine.statemachine,
@@ -25,5 +25,4 @@ Export-Package: org.eclipse.xtext.web.example.statemachine,
  org.eclipse.xtext.web.example.statemachine.validation,
  org.eclipse.xtext.web.example.statemachine.scoping,
  org.eclipse.xtext.web.example.statemachine.generator,
- org.eclipse.xtext.web.example.statemachine.formatting
-
+ org.eclipse.xtext.web.example.statemachine.formatting2

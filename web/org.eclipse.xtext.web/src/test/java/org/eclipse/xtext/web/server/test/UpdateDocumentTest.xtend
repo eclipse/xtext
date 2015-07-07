@@ -35,7 +35,7 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 		
 		Thread workerThread
 		long sleepTime
-		boolean canceled
+		volatile boolean canceled
 		int entryCounter
 		int exitCounter
 		
@@ -48,9 +48,9 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 			val startTime = System.currentTimeMillis
 			while (System.currentTimeMillis - startTime < sleepTime && !mon.canceled && !workerThread.interrupted) {
 				Thread.sleep(30)
-				if (mon.canceled)
-					canceled = true
 			}
+			if (mon.canceled)
+				canceled = true
 			synchronized (this) {
 				exitCounter++
 				this.notifyAll()
@@ -71,7 +71,7 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 		synchronized def waitUntil((TestResourceValidator)=>boolean condition) {
 			val startTime = System.currentTimeMillis
 			while (!condition.apply(this)) {
-				Assert.assertTrue(System.currentTimeMillis - startTime < 3000)
+				Assert.assertTrue(System.currentTimeMillis - startTime < 8000)
 				this.wait(3000)
 			}
 		}
@@ -174,7 +174,7 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 	}
 	
 	@Test def testCancelBackgroundWork1() {
-		resourceValidator.reset(3000)
+		resourceValidator.reset(300)
 		val file = createFile('input signal x state foo end')
 		val sessionStore = new HashMapSessionStore
 		val update1 = getService(#{
@@ -202,7 +202,7 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 	}
 	
 	@Test def testCancelBackgroundWork2() {
-		resourceValidator.reset(3000)
+		resourceValidator.reset(300)
 		val file = createFile('input signal x state foo end')
 		val sessionStore = new HashMapSessionStore
 		val update = getService(#{
@@ -293,6 +293,31 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 		val load = getService(#{'requestType' -> 'load', 'resource' -> file.name}, sessionStore)
 		val loadResult = load.service.apply() as ResourceContentResult
 		assertEquals('input signal x state bar set x =  end', loadResult.fullText)
+	}
+	
+	@Test def testNoPreComputationOnFullText() {
+		resourceValidator.reset(0)
+		val file = createFile('')
+		val sessionStore = new HashMapSessionStore
+		getService(#{
+			'requestType' -> 'update',
+			'resource' -> file.name,
+			'fullText' -> 'input signal x state foo end'
+		}, sessionStore).service.apply
+		getService(#{
+			'requestType' -> 'update',
+			'resource' -> file.name,
+			'fullText' -> 'input signal x state foo end'
+		}, sessionStore).service.apply
+		assertEquals(0, resourceValidator.entryCounter)
+		getService(#{
+			'requestType' -> 'update',
+			'resource' -> file.name,
+			'deltaText' -> 'bar',
+			'deltaOffset' -> '6',
+			'deltaReplaceLength' -> '3'
+		}, sessionStore).service.apply
+		resourceValidator.waitUntil[entryCounter == 1]
 	}
 	
 }

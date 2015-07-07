@@ -87,7 +87,6 @@ public class SrcSegmentsInUrisAreNotRemovedTests {
 		writer.flush();
 		String fileContent = writer.toString();
 
-		System.out.println(fileContent);
 		assertTrue(
 				"We should have a src/ in the serialization as we are refering to a.ecore which is in a src folder.",
 				fileContent.indexOf("src") > -1);

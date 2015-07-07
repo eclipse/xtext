@@ -7,8 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.enumrules
 
-import org.junit.Test
 import org.eclipse.xtext.enumrules.multiRuleenums.MyEnum
+import org.junit.Test
+
 import static org.junit.Assert.*
 
 /**

@@ -7,10 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
+import java.util.List;
+
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IDerivedStateComputer;
+import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
+import org.eclipse.xtext.xtext.parser.CardinalityAwareSyntaxErrorMessageProvider;
 
 /**
  * Resource implementation that instantiates the infered packages as part of the
@@ -60,6 +66,19 @@ public class GrammarResource extends DerivedStateAwareResource {
 		// trigger derived state computation
 		getContents();
 		return super.getWarnings();
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	@Override
+	protected void addSyntaxDiagnostic(List<Diagnostic> diagnostics, INode node) {
+		SyntaxErrorMessage syntaxErrorMessage = node.getSyntaxErrorMessage();
+		if (CardinalityAwareSyntaxErrorMessageProvider.CARDINALITY_ISSUE.equals(syntaxErrorMessage.getIssueCode())) {
+			super.getWarnings().add(new XtextSyntaxDiagnostic(node));
+		} else {
+			super.addSyntaxDiagnostic(diagnostics, node);
+		}
 	}
 	
 	/**
