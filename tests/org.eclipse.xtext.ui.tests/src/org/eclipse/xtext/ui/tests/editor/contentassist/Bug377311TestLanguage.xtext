@@ -13,6 +13,8 @@ Child hidden (WS, ID):
 terminal WS:
 	(' ' | '\t')+
 ;
+
+/* SuppressWarnings[InvalidTerminalRuleName] */
 terminal NewLine:
 	('\r'? '\n')
 ;

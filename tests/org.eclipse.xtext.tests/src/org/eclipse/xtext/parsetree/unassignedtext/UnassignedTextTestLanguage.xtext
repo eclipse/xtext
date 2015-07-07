@@ -18,6 +18,7 @@ Model:
 CaseInsensitiveKeywordRule:
 	CaseInsensitiveKeyword val=INT;
 
+/* SuppressWarnings[InvalidTerminalruleName] */
 terminal CaseInsensitiveKeyword: 
 	('k'|'K')('e'|'E')('y'|'Y')('w'|'W')('o'|'O')('r'|'R')('d'|'D');
 	
@@ -25,6 +26,7 @@ terminal CaseInsensitiveKeyword:
 PluralRule:
 	'contents:' count=INT Plural;
 	
+/* SuppressWarnings[InvalidTerminalruleName] */
 terminal Plural:
 	'item' | 'items';
 
@@ -32,9 +34,11 @@ terminal Plural:
 MultiRule:
 	'multi' val=INT Multi Multi Multi;
 
+/* SuppressWarnings[InvalidTerminalruleName] */
 terminal Multi:
 	'a' 'b'? 'c'+ 'd'* ('e' | 'f') (('g'|'h') | 'i'+) Multi2 '0'..'9' '0'..'9'+;
 	
+/* SuppressWarnings[InvalidTerminalruleName] */
 terminal Multi2:
 	'j';
 
