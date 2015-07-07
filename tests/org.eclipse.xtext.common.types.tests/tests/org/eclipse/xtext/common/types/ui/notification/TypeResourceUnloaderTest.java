@@ -517,12 +517,14 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 			// usually a counter of 100 is way more than enough, but on the CI server we see a longer
 			// delay, maybe the threading model on linux is slightly different. Anyway, the overall runtime
 			// on dev boxes is not affected but the test is green on the server
-			int counter = expectEvent ? 250 : 150;
+			long before = System.currentTimeMillis();
+			int counter = expectEvent ? 350 : 150;
 			while(!listener.eventSeen && counter > 0) {
 				counter--;
 				Thread.sleep(15);
 			}
-			assertEquals(expectEvent, listener.eventSeen);
+			long timeWaited = System.currentTimeMillis() - before;
+			assertEquals("Waited "+timeWaited+"ms.", expectEvent, listener.eventSeen);
 		}
 	}
 	
