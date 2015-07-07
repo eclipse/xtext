@@ -22,7 +22,7 @@ public abstract class AbstractPreComputedService<T extends IServiceResult> {
   }
   
   public T getResult(final XtextWebDocumentAccess it) {
-    return it.<T>getCachedResult(this);
+    return it.<T>getCachedResult(this, true);
   }
   
   public abstract T compute(final IXtextWebDocument it, final CancelIndicator cancelIndicator);
