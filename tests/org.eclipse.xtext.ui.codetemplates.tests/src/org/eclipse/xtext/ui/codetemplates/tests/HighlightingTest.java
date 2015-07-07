@@ -33,6 +33,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 @InjectWith(CodetemplatesUiInjectorProvider.class)
 @RunWith(XtextRunner.class)
 public class HighlightingTest implements IHighlightedPositionAcceptor {

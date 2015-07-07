@@ -17,5 +17,6 @@ Element: name=Variable (value=Value)?;
 
 Variable: ID (('.'|'-') ID)*;
 
+/* SuppressWarnings[InvalidTerminalruleName] */
 terminal Value: ('='|'+='|'-=') -> '\n';
 terminal SL_COMMENT: '#' !('\n'|'\r')* ('\r'? '\n')?;
