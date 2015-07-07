@@ -35,7 +35,7 @@ public class WizardConfig extends XtextProjectConfig {
   
   private boolean testingSupport = false;
   
-  private boolean mavenLayout = true;
+  private boolean mavenLayout = false;
   
   @Override
   public void checkConfiguration(final XtextGenerator generator, final Issues issues) {
@@ -199,12 +199,12 @@ public class WizardConfig extends XtextProjectConfig {
       IFileSystemAccess2 _runtimeTestSrc = this.getRuntimeTestSrc();
       boolean _tripleEquals_16 = (_runtimeTestSrc == null);
       if (_tripleEquals_16) {
-        this.setRuntimeTestSrc(((this.runtimeBase + ".test/") + src));
+        this.setRuntimeTestSrc(((this.runtimeBase + ".tests/") + src));
       }
       IFileSystemAccess2 _runtimeTestSrcGen = this.getRuntimeTestSrcGen();
       boolean _tripleEquals_17 = (_runtimeTestSrcGen == null);
       if (_tripleEquals_17) {
-        this.setRuntimeTestSrcGen(((this.runtimeBase + ".test/") + srcGen));
+        this.setRuntimeTestSrcGen(((this.runtimeBase + ".tests/") + srcGen));
       }
       ManifestAccess _runtimeTestManifest = this.getRuntimeTestManifest();
       boolean _tripleEquals_18 = (_runtimeTestManifest == null);
@@ -213,11 +213,34 @@ public class WizardConfig extends XtextProjectConfig {
         final Procedure1<ManifestAccess> _function_5 = new Procedure1<ManifestAccess>() {
           @Override
           public void apply(final ManifestAccess it) {
-            it.setPath((WizardConfig.this.runtimeBase + ".test/META-INF/MANIFEST.MF"));
+            it.setPath((WizardConfig.this.runtimeBase + ".tests/META-INF/MANIFEST.MF"));
           }
         };
         ManifestAccess _doubleArrow_5 = ObjectExtensions.<ManifestAccess>operator_doubleArrow(_manifestAccess_3, _function_5);
         this.setRuntimeTestManifest(_doubleArrow_5);
+      }
+      IFileSystemAccess2 _eclipsePluginTestSrc = this.getEclipsePluginTestSrc();
+      boolean _tripleEquals_19 = (_eclipsePluginTestSrc == null);
+      if (_tripleEquals_19) {
+        this.setEclipsePluginTestSrc(((this.runtimeBase + ".tests/") + src));
+      }
+      IFileSystemAccess2 _eclipsePluginTestSrcGen = this.getEclipsePluginTestSrcGen();
+      boolean _tripleEquals_20 = (_eclipsePluginTestSrcGen == null);
+      if (_tripleEquals_20) {
+        this.setEclipsePluginTestSrcGen(((this.runtimeBase + ".tests/") + srcGen));
+      }
+      ManifestAccess _eclipsePluginTestManifest = this.getEclipsePluginTestManifest();
+      boolean _tripleEquals_21 = (_eclipsePluginTestManifest == null);
+      if (_tripleEquals_21) {
+        ManifestAccess _manifestAccess_4 = new ManifestAccess();
+        final Procedure1<ManifestAccess> _function_6 = new Procedure1<ManifestAccess>() {
+          @Override
+          public void apply(final ManifestAccess it) {
+            it.setPath((WizardConfig.this.runtimeBase + ".tests/META-INF/MANIFEST.MF"));
+          }
+        };
+        ManifestAccess _doubleArrow_6 = ObjectExtensions.<ManifestAccess>operator_doubleArrow(_manifestAccess_4, _function_6);
+        this.setEclipsePluginTestManifest(_doubleArrow_6);
       }
     }
     super.initialize(injector);

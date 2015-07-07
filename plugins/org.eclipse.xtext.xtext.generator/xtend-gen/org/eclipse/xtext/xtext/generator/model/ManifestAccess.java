@@ -21,7 +21,7 @@ public class ManifestAccess {
   
   private String symbolicName;
   
-  private String version = "0.0.1";
+  private String version = "0.0.1.qualifier";
   
   private boolean merge = true;
   

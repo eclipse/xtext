@@ -286,6 +286,36 @@ public class ProjectConfigGenerator {
     _builder.append("\t");
     _builder.append("public void checkConfiguration(XtextGenerator generator, Issues issues) {");
     _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("if (");
+    String _head = IterableExtensions.<String>head(ProjectConfigGenerator.PROJECTS);
+    _builder.append(_head, "\t\t");
+    _builder.append("Src == null) {");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t");
+    _builder.append("issues.addError(generator, \"The property \'");
+    String _head_1 = IterableExtensions.<String>head(ProjectConfigGenerator.PROJECTS);
+    _builder.append(_head_1, "\t\t\t");
+    _builder.append("Src\' must be set.\", this);");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("if (");
+    String _head_2 = IterableExtensions.<String>head(ProjectConfigGenerator.PROJECTS);
+    _builder.append(_head_2, "\t\t");
+    _builder.append("SrcGen == null) {");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t");
+    _builder.append("issues.addError(generator, \"The property \'");
+    String _head_3 = IterableExtensions.<String>head(ProjectConfigGenerator.PROJECTS);
+    _builder.append(_head_3, "\t\t\t");
+    _builder.append("SrcGen\' must be set.\", this);");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
     {
       for(final String p_1 : ProjectConfigGenerator.PROJECTS) {
         _builder.append("\t\t");

@@ -48,9 +48,13 @@ public class TextFileAccess {
       Charset _defaultCharset = Charset.defaultCharset();
       charset = _defaultCharset;
     }
+    final File file = new File(this.path);
+    final File parent = file.getParentFile();
+    if ((parent != null)) {
+      parent.mkdirs();
+    }
     CharSequence _generate = this.generate();
-    File _file = new File(this.path);
-    Files.write(_generate, _file, charset);
+    Files.write(_generate, file, charset);
   }
   
   @Pure

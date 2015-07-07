@@ -8,14 +8,13 @@
 package org.eclipse.xtext.xtext.generator.model;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -35,8 +34,6 @@ public class JavaFileAccess extends TextFileAccess {
   private static class JavaStringConcatenation extends StringConcatenation {
     private final JavaFileAccess access;
     
-    private final Pattern typeNamePattern = Pattern.compile("[a-z]+(\\.[a-z]+)*(\\.[A-Z][a-zA-Z]*)+");
-    
     public JavaStringConcatenation(final JavaFileAccess access) {
       super(access.codeConfig.getLineDelimiter());
       this.access = access;
@@ -50,25 +47,10 @@ public class JavaFileAccess extends TextFileAccess {
       } else {
         String _xifexpression_1 = null;
         if ((object instanceof Class<?>)) {
-          TypeReference _typeReference = new TypeReference(((Class<?>) object));
+          TypeReference _typeReference = new TypeReference(((Class<?>)object));
           _xifexpression_1 = this.access.importType(_typeReference);
         } else {
-          String _xifexpression_2 = null;
-          boolean _and = false;
-          if (!(object instanceof String)) {
-            _and = false;
-          } else {
-            Matcher _matcher = this.typeNamePattern.matcher(((String) object));
-            boolean _matches = _matcher.matches();
-            _and = _matches;
-          }
-          if (_and) {
-            TypeReference _typeReference_1 = new TypeReference(((String) object));
-            _xifexpression_2 = this.access.importType(_typeReference_1);
-          } else {
-            _xifexpression_2 = object.toString();
-          }
-          _xifexpression_1 = _xifexpression_2;
+          _xifexpression_1 = object.toString();
         }
         _xifexpression = _xifexpression_1;
       }
@@ -87,6 +69,9 @@ public class JavaFileAccess extends TextFileAccess {
   
   @Accessors
   private boolean markedAsGenerated;
+  
+  @Accessors
+  private final List<IClassAnnotation> annotations = CollectionLiterals.<IClassAnnotation>newArrayList();
   
   public JavaFileAccess(final String qualifiedName, final CodeConfig codeConfig) {
     this(new TypeReference(qualifiedName), codeConfig);
@@ -112,31 +97,40 @@ public class JavaFileAccess extends TextFileAccess {
   }
   
   public String importType(final TypeReference typeRef) {
-    final String simpleName = typeRef.getSimpleName();
-    boolean _or = false;
-    boolean _isJavaDefaultType = CodeGenUtil.isJavaDefaultType(simpleName);
-    if (_isJavaDefaultType) {
-      _or = true;
+    String name = typeRef.getSimpleName();
+    boolean _and = false;
+    boolean _isJavaDefaultType = CodeGenUtil.isJavaDefaultType(name);
+    boolean _not = (!_isJavaDefaultType);
+    if (!_not) {
+      _and = false;
     } else {
       String _package = typeRef.getPackage();
-      boolean _equals = Objects.equal(this.packageName, _package);
-      _or = _equals;
+      boolean _notEquals = (!Objects.equal(this.packageName, _package));
+      _and = _notEquals;
     }
-    if (_or) {
-      return simpleName;
-    }
-    final TypeReference imported = this.imports.get(simpleName);
-    boolean _notEquals = (!Objects.equal(imported, null));
-    if (_notEquals) {
-      boolean _equals_1 = Objects.equal(imported, typeRef);
-      if (_equals_1) {
-        return simpleName;
+    if (_and) {
+      final TypeReference imported = this.imports.get(name);
+      if ((imported == null)) {
+        this.imports.put(name, typeRef);
       } else {
-        return typeRef.getName();
+        String _name = imported.getName();
+        String _name_1 = typeRef.getName();
+        boolean _notEquals_1 = (!Objects.equal(_name, _name_1));
+        if (_notEquals_1) {
+          String _name_2 = typeRef.getName();
+          name = _name_2;
+        }
       }
     }
-    this.imports.put(simpleName, typeRef);
-    return simpleName;
+    List<TypeReference> _arguments = typeRef.getArguments();
+    final Function1<TypeReference, CharSequence> _function = new Function1<TypeReference, CharSequence>() {
+      @Override
+      public CharSequence apply(final TypeReference it) {
+        return JavaFileAccess.this.importType(it);
+      }
+    };
+    String _join = IterableExtensions.<TypeReference>join(_arguments, "<", ", ", ">", _function);
+    return (name + _join);
   }
   
   public void setJavaContent(final StringConcatenationClient javaContent) {
@@ -154,7 +148,8 @@ public class JavaFileAccess extends TextFileAccess {
         return Boolean.valueOf(it.appliesTo(JavaFileAccess.this));
       }
     };
-    final Iterable<IClassAnnotation> classAnnotations = IterableExtensions.<IClassAnnotation>filter(_classAnnotations, _function);
+    Iterable<IClassAnnotation> _filter = IterableExtensions.<IClassAnnotation>filter(_classAnnotations, _function);
+    final Iterable<IClassAnnotation> classAnnotations = Iterables.<IClassAnnotation>concat(this.annotations, _filter);
     final Procedure1<IClassAnnotation> _function_1 = new Procedure1<IClassAnnotation>() {
       @Override
       public void apply(final IClassAnnotation it) {
@@ -222,5 +217,10 @@ public class JavaFileAccess extends TextFileAccess {
   
   public void setMarkedAsGenerated(final boolean markedAsGenerated) {
     this.markedAsGenerated = markedAsGenerated;
+  }
+  
+  @Pure
+  public List<IClassAnnotation> getAnnotations() {
+    return this.annotations;
   }
 }

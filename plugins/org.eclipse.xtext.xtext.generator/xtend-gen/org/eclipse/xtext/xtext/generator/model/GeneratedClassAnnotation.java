@@ -20,12 +20,11 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference;
 /**
  * A class annotation configuration for the <code>@Generated</code> annotation.
  */
+@Accessors
 @SuppressWarnings("all")
 public class GeneratedClassAnnotation implements IClassAnnotation {
-  @Accessors
   private boolean includeDate = false;
   
-  @Accessors
   private String comment;
   
   @Override

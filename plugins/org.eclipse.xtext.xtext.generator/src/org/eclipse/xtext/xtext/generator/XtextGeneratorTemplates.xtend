@@ -16,7 +16,13 @@ import com.google.inject.Module
 import com.google.inject.Provider
 import com.google.inject.Singleton
 import com.google.inject.name.Names
+import java.util.Arrays
+import java.util.Collections
 import java.util.List
+import java.util.Map
+import java.util.Properties
+import org.apache.log4j.Logger
+import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.Constants
 import org.eclipse.xtext.ISetup
 import org.eclipse.xtext.ISetupExtension
@@ -30,8 +36,11 @@ import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess
+import org.eclipse.xtext.xtext.generator.model.SuppressWarningsAnnotation
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
+
+import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 
 @Singleton
 class XtextGeneratorTemplates {
@@ -85,13 +94,17 @@ class XtextGeneratorTemplates {
 		val g = langConfig.grammar
 		val javaFile = new JavaFileAccess(g.runtimeGenSetup, codeConfig)
 		javaFile.encodingProvider = encodingProvider
+		for (type : langConfig.runtimeGenSetup.imports) {
+			javaFile.importType(type)
+		}
 		
+		javaFile.annotations += new SuppressWarningsAnnotation
 		javaFile.javaContent = '''
 			public class «g.runtimeGenSetup.simpleName» implements «ISetup», «ISetupExtension» {
 			
 				@Override
-				public «'java.util.List'»<String> getFileExtensions() {
-					return «'java.util.Arrays'».asList(«FOR fileExtension : langConfig.fileExtensions SEPARATOR ','»"«fileExtension»"«ENDFOR»);
+				public «List»<String> getFileExtensions() {
+					return «Arrays».asList(«FOR fileExtension : langConfig.fileExtensions SEPARATOR ','»"«fileExtension»"«ENDFOR»);
 				}
 			
 				@Override
@@ -99,20 +112,20 @@ class XtextGeneratorTemplates {
 					«FOR usedGrammar : g.usedGrammars»
 						«usedGrammar.runtimeSetup».doSetup();
 					«ENDFOR»
-					
 					«IF g.usedGrammars.isEmpty»
+					
 						// register default ePackages
-						if (!«'org.eclipse.emf.ecore.resource.Resource'».Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("ecore"))
-							«'org.eclipse.emf.ecore.resource.Resource'».Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-								"ecore", new «'org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl'»());
-						if (!«'org.eclipse.emf.ecore.resource.Resource'».Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("xmi"))
-							«'org.eclipse.emf.ecore.resource.Resource'».Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-								"xmi", new «'org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl'»());
-						if (!«'org.eclipse.emf.ecore.resource.Resource'».Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("xtextbin"))
-							«'org.eclipse.emf.ecore.resource.Resource'».Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+						if (!«'org.eclipse.emf.ecore.resource.Resource'.typeRef».Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("ecore"))
+							«'org.eclipse.emf.ecore.resource.Resource'.typeRef».Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+								"ecore", new «'org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl'.typeRef»());
+						if (!«'org.eclipse.emf.ecore.resource.Resource'.typeRef».Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("xmi"))
+							«'org.eclipse.emf.ecore.resource.Resource'.typeRef».Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+								"xmi", new «'org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl'.typeRef»());
+						if (!«'org.eclipse.emf.ecore.resource.Resource'.typeRef».Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("xtextbin"))
+							«'org.eclipse.emf.ecore.resource.Resource'.typeRef».Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 								"xtextbin", new «BinaryGrammarResourceFactoryImpl»());
-						if (!«'org.eclipse.emf.ecore.EPackage'».Registry.INSTANCE.containsKey(«XtextPackage».eNS_URI))
-							«'org.eclipse.emf.ecore.EPackage'».Registry.INSTANCE.put(«XtextPackage».eNS_URI, «XtextPackage».eINSTANCE);
+						if (!«'org.eclipse.emf.ecore.EPackage'.typeRef».Registry.INSTANCE.containsKey(«XtextPackage».eNS_URI))
+							«'org.eclipse.emf.ecore.EPackage'.typeRef».Registry.INSTANCE.put(«XtextPackage».eNS_URI, «XtextPackage».eINSTANCE);
 					«ENDIF»
 			
 					«Injector» injector = createInjector();
@@ -120,7 +133,7 @@ class XtextGeneratorTemplates {
 					return injector;
 				}
 			
-					public «Injector» createInjector() {
+				public «Injector» createInjector() {
 					return «Guice».createInjector(new «g.runtimeModule»());
 				}
 			
@@ -141,37 +154,37 @@ class XtextGeneratorTemplates {
 		else if (value.statements.isEmpty)
 			'provide'
 		else 'configure')
-			+ getSimpleMethodName(key.type)
+			+ key.type.simpleMethodName
 			+ if (value.expression !== null && !value.provider) 'ToInstance' else ''
 	}
 	
-	private def getSimpleMethodName(String qn) {
-		qn.replaceAll('<', '\\.').replaceAll('>', '\\.').split('\\.').filter[matches('[A-Z].*')].join('$')
+	private def getSimpleMethodName(TypeReference type) {
+		type.name.replaceAll('<', '\\.').replaceAll('>', '\\.').split('\\.').filter[matches('[A-Z].*')].join('$')
 	}
 	
 	private def endsWith(CharSequence sequence, char c) {
 		sequence.length > 0 && sequence.charAt(sequence.length - 1) == c
 	}
 	
-	private def createBindingMethod(GuiceModuleAccess.Binding it) '''
+	private def StringConcatenationClient createBindingMethod(GuiceModuleAccess.Binding it) '''
 		«IF !value.provider && value.statements.isEmpty»
 			// contributed by «contributedBy»
 			«IF key.singleton»@«SingletonBinding»«IF key.eagerSingleton»(eager=true)«ENDIF»«ENDIF»
 			public «IF value.expression === null»Class<? extends «key.type»>«ELSE»«key.type»«ENDIF» «bindMethodName»() {
-				return «IF value.expression !== null»«value.expression»«ELSE»«value.typeName».class«ENDIF»;
+				return «IF value.expression !== null»«value.expression»«ELSE»«value.type».class«ENDIF»;
 			}
 		«ELSEIF value.statements.isEmpty»
 			// contributed by «contributedBy»
 			«IF key.singleton»@«SingletonBinding»«IF key.eagerSingleton»(eager=true)«ENDIF»«ENDIF»
 			public «IF value.expression==null»Class<? extends «Provider»<«key.type»>>«ELSE»«Provider»<«key.type»>«ENDIF» «bindMethodName»() {
-				return «IF value.expression!=null»«value.expression»«ELSE»«value.typeName».class«ENDIF»;
+				return «IF value.expression!=null»«value.expression»«ELSE»«value.type».class«ENDIF»;
 			}
 		«ELSE»
 			// contributed by «contributedBy»
 			public void «bindMethodName»(«Binder» binder) {
-			«FOR statement : value.statements»
-				«statement»«IF !statement.endsWith(';')»;«ENDIF»
-			«ENDFOR»
+				«FOR statement : value.statements»
+					«statement»«IF !statement.endsWith(';')»;«ENDIF»
+				«ENDFOR»
 			}
 		«ENDIF»
 	'''
@@ -195,6 +208,10 @@ class XtextGeneratorTemplates {
 	
 	def JavaFileAccess createRuntimeGenModule(LanguageConfig2 langConfig) {
 		val g = langConfig.grammar
+		val superClass =
+			if (langConfig.runtimeGenModule.superClassName !== null)
+				new TypeReference(langConfig.runtimeGenModule.superClassName)
+			else g.runtimeDefaultModule
 		val javaFile = new JavaFileAccess(g.runtimeGenModule, codeConfig)
 		javaFile.encodingProvider = encodingProvider
 		
@@ -203,10 +220,11 @@ class XtextGeneratorTemplates {
 			 * Manual modifications go to {@link «g.runtimeModule.simpleName»}.
 			 */
 		'''
+		javaFile.annotations += new SuppressWarningsAnnotation
 		javaFile.javaContent = '''
-			public abstract class «g.runtimeGenModule.simpleName» extends «g.runtimeDefaultModule» {
+			public abstract class «g.runtimeGenModule.simpleName» extends «superClass» {
 			
-				protected «'java.util.Properties'» properties = null;
+				protected «Properties» properties = null;
 			
 				@Override
 				public void configure(«Binder» binder) {
@@ -225,6 +243,7 @@ class XtextGeneratorTemplates {
 				
 				«FOR binding : langConfig.runtimeGenModule.bindings»
 					«binding.createBindingMethod»
+					
 				«ENDFOR»
 			}
 		'''
@@ -243,7 +262,7 @@ class XtextGeneratorTemplates {
 		'''
 		javaFile.javaContent = '''
 			public class «g.eclipsePluginModule.simpleName» extends «g.eclipsePluginGenModule» {
-				public «g.eclipsePluginModule.simpleName»(«'org.eclipse.ui.plugin.AbstractUIPlugin'» plugin) {
+				public «g.eclipsePluginModule.simpleName»(«'org.eclipse.ui.plugin.AbstractUIPlugin'.typeRef» plugin) {
 					super(plugin);
 				}
 			}
@@ -253,6 +272,10 @@ class XtextGeneratorTemplates {
 	
 	def JavaFileAccess createEclipsePluginGenModule(LanguageConfig2 langConfig) {
 		val g = langConfig.grammar
+		val superClass =
+			if (langConfig.eclipsePluginGenModule.superClassName !== null)
+				new TypeReference(langConfig.eclipsePluginGenModule.superClassName)
+			else g.eclipsePluginDefaultModule
 		val javaFile = new JavaFileAccess(g.eclipsePluginGenModule, codeConfig)
 		javaFile.encodingProvider = encodingProvider
 		
@@ -261,15 +284,17 @@ class XtextGeneratorTemplates {
 			 * Manual modifications go to {@link «g.eclipsePluginModule.simpleName»}.
 			 */
 		'''
+		javaFile.annotations += new SuppressWarningsAnnotation
 		javaFile.javaContent = '''
-			public abstract class «g.eclipsePluginGenModule.simpleName» extends «g.eclipsePluginDefaultModule» {
+			public abstract class «g.eclipsePluginGenModule.simpleName» extends «superClass» {
 			
-				public «g.eclipsePluginGenModule.simpleName»(«'org.eclipse.ui.plugin.AbstractUIPlugin'» plugin) {
+				public «g.eclipsePluginGenModule.simpleName»(«'org.eclipse.ui.plugin.AbstractUIPlugin'.typeRef» plugin) {
 					super(plugin);
 				}
 				
 				«FOR binding : langConfig.eclipsePluginGenModule.bindings»
 					«binding.createBindingMethod»
+					
 				«ENDFOR»
 			}
 		'''
@@ -319,10 +344,10 @@ class XtextGeneratorTemplates {
 			 */
 		'''
 		javaFile.javaContent = '''
-			public class «g.eclipsePluginExecutableExtensionFactory.simpleName» extends «'org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory'» {
+			public class «g.eclipsePluginExecutableExtensionFactory.simpleName» extends «'org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory'.typeRef» {
 			
 				@Override
-				protected «'org.osgi.framework.Bundle'» getBundle() {
+				protected «'org.osgi.framework.Bundle'.typeRef» getBundle() {
 					return «g.eclipsePluginActivator».getInstance().getBundle();
 				}
 				
@@ -356,20 +381,20 @@ class XtextGeneratorTemplates {
 					public static final String «grammar.name.toUpperCase.replaceAll('\\.', '_')» = "«grammar.name»";
 				«ENDFOR»
 				
-				private static final Logger logger = Logger.getLogger(«activator.simpleName».class);
+				private static final «Logger» logger = «Logger».getLogger(«activator.simpleName».class);
 			
 				private static «activator.simpleName» INSTANCE;
 			
-				private «'java.util.Map'»<String, «Injector»> injectors = «'java.util.Collections'».synchronizedMap(«Maps».<String, «Injector»> newHashMapWithExpectedSize(1));
+				private «Map»<String, «Injector»> injectors = «Collections».synchronizedMap(«Maps».<String, «Injector»> newHashMapWithExpectedSize(1));
 			
 				@Override
-				public void start(«'org.osgi.framework.BundleContext'» context) throws Exception {
+				public void start(«'org.osgi.framework.BundleContext'.typeRef» context) throws Exception {
 					super.start(context);
 					INSTANCE = this;
 				}
 			
 				@Override
-				public void stop(«'org.osgi.framework.BundleContext'» context) throws Exception {
+				public void stop(«'org.osgi.framework.BundleContext'.typeRef» context) throws Exception {
 					injectors.clear();
 					INSTANCE = null;
 					super.stop(context);
@@ -422,7 +447,7 @@ class XtextGeneratorTemplates {
 				}
 			
 				protected «Module» getSharedStateModule() {
-					return new «'org.eclipse.xtext.ui.shared.SharedStateModule'»();
+					return new «'org.eclipse.xtext.ui.shared.SharedStateModule'.typeRef»();
 				}
 			
 			}

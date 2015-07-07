@@ -66,6 +66,12 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 	private FileSystemAccess aceJsGen;
 	
 	public void checkConfiguration(XtextGenerator generator, Issues issues) {
+		if (runtimeSrc == null) {
+			issues.addError(generator, "The property 'runtimeSrc' must be set.", this);
+		}
+		if (runtimeSrcGen == null) {
+			issues.addError(generator, "The property 'runtimeSrcGen' must be set.", this);
+		}
 		if (runtimeManifest != null && Strings.isEmpty(runtimeManifest.getPath())) {
 			issues.addError(generator, "The property 'path' must be set.", runtimeManifest);
 		}

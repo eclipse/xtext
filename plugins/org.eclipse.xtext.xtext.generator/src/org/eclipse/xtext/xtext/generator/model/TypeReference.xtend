@@ -7,39 +7,62 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.model
 
+import java.util.Collections
+import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.EqualsHashCode
 
+@Accessors
 @EqualsHashCode
 class TypeReference {
 	
+	static def TypeReference typeRef(String name, String... arguments) {
+		new TypeReference(name, arguments.map[new TypeReference(it)])
+	}
+	
+	static def TypeReference typeRef(Class<?> clazz, Class<?>... arguments) {
+		new TypeReference(clazz, arguments.map[new TypeReference(it)])
+	}
+	
 	val String name
-
+	
+	val List<TypeReference> arguments
+	
 	new(String name) {
 		this.name = name
+		this.arguments = Collections.emptyList
+	}
+
+	new(String name, List<TypeReference> arguments) {
+		this.name = name
+		this.arguments = Collections.unmodifiableList(arguments)
 	}
 	
 	new(String packageName, String className) {
 		this.name = packageName + '.' + className
+		this.arguments = Collections.emptyList
 	}
 	
 	new(Class<?> clazz) {
 		this.name = clazz.name.replace('$', '.')
+		this.arguments = Collections.emptyList
+	}
+	
+	new(Class<?> clazz, List<TypeReference> arguments) {
+		this.name = clazz.name.replace('$', '.')
+		this.arguments = Collections.unmodifiableList(arguments)
 	}
 	
 	override toString() {
-		name
+		name + arguments.join('<', ', ', '>', [toString])
 	}
 	
-	def getName() {
-		name
-	}
-	
-	def getSimpleName() {
+	def String getSimpleName() {
 		val simpleNameIndex = name.lastIndexOf('.')
 		return name.substring(simpleNameIndex + 1)
 	}
 	
-	def getPackage() {
+	def String getPackage() {
 		var packageEnd = name.length
 		for (var i = name.length - 1; i >= 0; i--) {
 			if (name.charAt(i).matches('.')) {

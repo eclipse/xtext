@@ -16,12 +16,11 @@ import org.eclipse.xtext.xtext.generator.XtextGenerator
 /** 
  * A class annotation configuration for the <code>@Generated</code> annotation.
  */
+@Accessors
 class GeneratedClassAnnotation implements IClassAnnotation {
 	
-	@Accessors
 	boolean includeDate = false
 	
-	@Accessors
 	String comment
 
 	override generate() {

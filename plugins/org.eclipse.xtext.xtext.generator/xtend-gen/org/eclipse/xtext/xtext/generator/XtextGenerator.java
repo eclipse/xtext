@@ -18,14 +18,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.jar.Attributes;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent2;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.AbstractMetamodelDeclaration;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
@@ -65,6 +71,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuice
   @Accessors
   private String activator;
   
+  @Accessors
   private final List<LanguageConfig2> languageConfigs = CollectionLiterals.<LanguageConfig2>newArrayList();
   
   private Injector injector;
@@ -93,11 +100,38 @@ public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuice
   
   @Override
   protected void checkConfigurationInternal(final Issues issues) {
+    this.createInjector();
     if ((this.configuration != null)) {
       this.configuration.checkConfiguration(this, issues);
     }
+    final HashMap<String, Grammar> uris = new HashMap<String, Grammar>();
     for (final LanguageConfig2 language : this.languageConfigs) {
-      language.checkConfiguration(this, issues);
+      {
+        language.checkConfiguration(this, issues);
+        Grammar _grammar = language.getGrammar();
+        EList<AbstractMetamodelDeclaration> _metamodelDeclarations = _grammar.getMetamodelDeclarations();
+        List<GeneratedMetamodel> _typeSelect = EcoreUtil2.<GeneratedMetamodel>typeSelect(_metamodelDeclarations, GeneratedMetamodel.class);
+        for (final GeneratedMetamodel generatedMetamodel : _typeSelect) {
+          {
+            EPackage _ePackage = generatedMetamodel.getEPackage();
+            final String nsURI = _ePackage.getNsURI();
+            boolean _containsKey = uris.containsKey(nsURI);
+            if (_containsKey) {
+              Grammar _get = uris.get(nsURI);
+              String _name = _get.getName();
+              String _plus = ((("Duplicate generated grammar with nsURI \'" + nsURI) + "\' in ") + _name);
+              String _plus_1 = (_plus + " and ");
+              Grammar _grammar_1 = language.getGrammar();
+              String _name_1 = _grammar_1.getName();
+              String _plus_2 = (_plus_1 + _name_1);
+              issues.addError(this, _plus_2);
+            } else {
+              Grammar _grammar_2 = language.getGrammar();
+              uris.put(nsURI, _grammar_2);
+            }
+          }
+        }
+      }
     }
   }
   
@@ -118,6 +152,9 @@ public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuice
   public void initialize(final Injector injector) {
     injector.injectMembers(this);
     this.projectConfig.initialize(injector);
+    for (final LanguageConfig2 language : this.languageConfigs) {
+      language.initialize(injector);
+    }
     CodeConfig _instance = injector.<CodeConfig>getInstance(CodeConfig.class);
     final Procedure1<CodeConfig> _function = new Procedure1<CodeConfig>() {
       @Override
@@ -138,10 +175,9 @@ public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuice
   
   @Override
   protected void invokeInternal(final WorkflowContext ctx, final ProgressMonitor monitor, final Issues issues) {
-    final Injector injector = this.createInjector();
+    this.createInjector();
     for (final LanguageConfig2 language : this.languageConfigs) {
       {
-        language.initialize(injector);
         language.generate(language);
         this.generateRuntimeSetup(language);
         this.generateModules(language);
@@ -405,5 +441,10 @@ public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuice
   
   public void setActivator(final String activator) {
     this.activator = activator;
+  }
+  
+  @Pure
+  public List<LanguageConfig2> getLanguageConfigs() {
+    return this.languageConfigs;
   }
 }

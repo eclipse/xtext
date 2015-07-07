@@ -32,6 +32,9 @@ class CodeConfig implements IGuiceAwareGeneratorComponent {
 	static val FILE_HEADER_VAR_VERSION = '${version}'
 	
 	@Accessors
+	String encoding
+	
+	@Accessors
 	String lineDelimiter
 	
 	@Accessors(PUBLIC_GETTER)

@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
@@ -34,6 +35,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -45,6 +47,7 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -54,14 +57,14 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.CompositeGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
+import org.eclipse.xtext.xtext.generator.model.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess;
+import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
 @Log
 @SuppressWarnings("all")
 public class LanguageConfig2 extends CompositeGeneratorFragment2 {
-  @Inject
-  private Provider<ResourceSet> resourceSetProvider;
-  
   @Accessors
   private String uri;
   
@@ -81,6 +84,12 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
   
   @Accessors
   private final GuiceModuleAccess eclipsePluginGenModule = new GuiceModuleAccess();
+  
+  @Inject
+  private Provider<ResourceSet> resourceSetProvider;
+  
+  @Inject
+  private IXtextProjectConfig projectConfig;
   
   public void setFileExtensions(final String fileExtensions) {
     String _trim = fileExtensions.trim();
@@ -373,6 +382,47 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
     final String grammarName = _grammar.getName();
     final String msg = ((((("The EPackage " + refName) + " in grammar ") + grammarName) + " could not be found. ") + "You might want to register that EPackage in your workflow file.");
     throw new IllegalStateException(msg);
+  }
+  
+  @Override
+  public void generate(final LanguageConfig2 language) {
+    this.addImplicitContributions();
+    super.generate(language);
+  }
+  
+  protected void addImplicitContributions() {
+    ManifestAccess _runtimeManifest = this.projectConfig.getRuntimeManifest();
+    boolean _tripleNotEquals = (_runtimeManifest != null);
+    if (_tripleNotEquals) {
+      ManifestAccess _runtimeManifest_1 = this.projectConfig.getRuntimeManifest();
+      Set<String> _requiredBundles = _runtimeManifest_1.getRequiredBundles();
+      _requiredBundles.addAll(
+        Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext", "org.eclipse.xtext.util")));
+      ManifestAccess _runtimeManifest_2 = this.projectConfig.getRuntimeManifest();
+      Set<String> _importedPackages = _runtimeManifest_2.getImportedPackages();
+      _importedPackages.add("org.apache.log4j");
+    }
+    ManifestAccess _eclipsePluginManifest = this.projectConfig.getEclipsePluginManifest();
+    boolean _tripleNotEquals_1 = (_eclipsePluginManifest != null);
+    if (_tripleNotEquals_1) {
+      ManifestAccess _eclipsePluginManifest_1 = this.projectConfig.getEclipsePluginManifest();
+      Set<String> _requiredBundles_1 = _eclipsePluginManifest_1.getRequiredBundles();
+      _requiredBundles_1.addAll(
+        Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext.ui", "org.eclipse.xtext.ui.shared", "org.eclipse.ui.editors", "org.eclipse.ui")));
+    }
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ui.shared.Access");
+        _builder.append(_typeRef, "");
+        _builder.append(".getJavaProjectsState()");
+      }
+    };
+    final StringConcatenationClient expression = _client;
+    GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
+    TypeReference _typeReference = new TypeReference(IAllContainersState.class);
+    GuiceModuleAccess.BindingFactory _addTypeToProviderInstance = _bindingFactory.addTypeToProviderInstance(_typeReference, expression);
+    _addTypeToProviderInstance.contributeTo(this.eclipsePluginGenModule);
   }
   
   private final static Logger LOG = Logger.getLogger(LanguageConfig2.class);

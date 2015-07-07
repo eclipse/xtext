@@ -61,6 +61,9 @@ public class CodeConfig implements IGuiceAwareGeneratorComponent {
   private final static String FILE_HEADER_VAR_VERSION = "${version}";
   
   @Accessors
+  private String encoding;
+  
+  @Accessors
   private String lineDelimiter;
   
   @Accessors(AccessorType.PUBLIC_GETTER)
@@ -218,6 +221,15 @@ public class CodeConfig implements IGuiceAwareGeneratorComponent {
       }
     }
     return stringBuilder.toString();
+  }
+  
+  @Pure
+  public String getEncoding() {
+    return this.encoding;
+  }
+  
+  public void setEncoding(final String encoding) {
+    this.encoding = encoding;
   }
   
   @Pure

@@ -119,9 +119,13 @@ public class FileSystemAccess implements IFileSystemAccess2, IGuiceAwareGenerato
       if (_equals) {
         final URI uri = this.getURI(fileName);
         String _fileString = uri.toFileString();
-        File _file = new File(_fileString);
+        final File file = new File(_fileString);
+        final File parent = file.getParentFile();
+        if ((parent != null)) {
+          parent.mkdirs();
+        }
         Charset _charset = this.getCharset(uri);
-        Files.write(contents, _file, _charset);
+        Files.write(contents, file, _charset);
       } else {
         throw new IllegalArgumentException(("Unsupported configuration: " + outputConfiguration));
       }
@@ -142,9 +146,13 @@ public class FileSystemAccess implements IFileSystemAccess2, IGuiceAwareGenerato
       if (_equals) {
         final URI uri = this.getURI(fileName);
         String _fileString = uri.toFileString();
-        File _file = new File(_fileString);
+        final File file = new File(_fileString);
+        final File parent = file.getParentFile();
+        if ((parent != null)) {
+          parent.mkdirs();
+        }
         Charset _charset = this.getCharset(uri);
-        final BufferedWriter fileWriter = Files.newWriter(_file, _charset);
+        final BufferedWriter fileWriter = Files.newWriter(file, _charset);
         try {
           int c = content.read();
           while ((c >= 0)) {

@@ -11,7 +11,6 @@ import com.google.inject.Binder
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.mwe.core.issues.Issues
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.parser.EclipseProjectPropertiesEncodingProvider
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.service.AbstractGenericModule
@@ -22,36 +21,44 @@ import org.eclipse.xtext.xtext.generator.model.XtextProjectConfig
 
 class DefaultGeneratorModule extends AbstractGenericModule {
 	
-	@Accessors
+	@Accessors(PUBLIC_SETTER)
 	XtextProjectConfig project
 	
-	@Accessors
+	@Accessors(PUBLIC_SETTER)
 	CodeConfig code
 	
-	protected def checkConfiguration(XtextGenerator generator, Issues issues) {
-		if (project !== null) {
-			project.checkConfiguration(generator, issues)
-		}
-	}
-	
-	def configureXtextProjectConfig(Binder binder) {
+	def XtextProjectConfig getProject() {
 		if (project === null)
 			project = new WizardConfig
-		binder.bind(IXtextProjectConfig).toInstance(project)
+		return project
 	}
 	
-	def configureCodeConfig(Binder binder) {
+	def CodeConfig getCode() {
 		if (code === null)
 			code = new CodeConfig
-		binder.bind(CodeConfig).toInstance(code)
+		return code
 	}
 	
-	def configureResourceSet(Binder binder) {
-		binder.bind(ResourceSet).toInstance(new XtextResourceSet)
+	protected def void checkConfiguration(XtextGenerator generator, Issues issues) {
+		getProject.checkConfiguration(generator, issues)
 	}
 	
-	def Class<? extends IEncodingProvider> bindIEncodingProvider() {
-		EclipseProjectPropertiesEncodingProvider
+	def void configureXtextProjectConfig(Binder binder) {
+		binder.bind(IXtextProjectConfig).toInstance(getProject)
+	}
+	
+	def void configureCodeConfig(Binder binder) {
+		binder.bind(CodeConfig).toInstance(getCode)
+	}
+	
+	def void configureResourceSet(Binder binder) {
+		binder.bind(ResourceSet).to(XtextResourceSet)
+	}
+	
+	def void configureIEncodingProvider(Binder binder) {
+		binder.bind(IEncodingProvider).toInstance(new IEncodingProvider.Runtime => [
+			defaultEncoding = getCode.encoding
+		])
 	}
 	
 }

@@ -11,12 +11,13 @@ import com.google.inject.Binder;
 import com.google.inject.binder.AnnotatedBindingBuilder;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.mwe.core.issues.Issues;
+import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.parser.EclipseProjectPropertiesEncodingProvider;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.service.AbstractGenericModule;
-import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.generator.XtextGenerator;
 import org.eclipse.xtext.xtext.generator.model.CodeConfig;
 import org.eclipse.xtext.xtext.generator.model.IXtextProjectConfig;
@@ -25,58 +26,67 @@ import org.eclipse.xtext.xtext.generator.model.XtextProjectConfig;
 
 @SuppressWarnings("all")
 public class DefaultGeneratorModule extends AbstractGenericModule {
-  @Accessors
+  @Accessors(AccessorType.PUBLIC_SETTER)
   private XtextProjectConfig project;
   
-  @Accessors
+  @Accessors(AccessorType.PUBLIC_SETTER)
   private CodeConfig code;
   
-  protected void checkConfiguration(final XtextGenerator generator, final Issues issues) {
-    if ((this.project != null)) {
-      this.project.checkConfiguration(generator, issues);
-    }
-  }
-  
-  public void configureXtextProjectConfig(final Binder binder) {
+  public XtextProjectConfig getProject() {
     if ((this.project == null)) {
       WizardConfig _wizardConfig = new WizardConfig();
       this.project = _wizardConfig;
     }
-    AnnotatedBindingBuilder<IXtextProjectConfig> _bind = binder.<IXtextProjectConfig>bind(IXtextProjectConfig.class);
-    _bind.toInstance(this.project);
+    return this.project;
   }
   
-  public void configureCodeConfig(final Binder binder) {
+  public CodeConfig getCode() {
     if ((this.code == null)) {
       CodeConfig _codeConfig = new CodeConfig();
       this.code = _codeConfig;
     }
+    return this.code;
+  }
+  
+  protected void checkConfiguration(final XtextGenerator generator, final Issues issues) {
+    XtextProjectConfig _project = this.getProject();
+    _project.checkConfiguration(generator, issues);
+  }
+  
+  public void configureXtextProjectConfig(final Binder binder) {
+    AnnotatedBindingBuilder<IXtextProjectConfig> _bind = binder.<IXtextProjectConfig>bind(IXtextProjectConfig.class);
+    XtextProjectConfig _project = this.getProject();
+    _bind.toInstance(_project);
+  }
+  
+  public void configureCodeConfig(final Binder binder) {
     AnnotatedBindingBuilder<CodeConfig> _bind = binder.<CodeConfig>bind(CodeConfig.class);
-    _bind.toInstance(this.code);
+    CodeConfig _code = this.getCode();
+    _bind.toInstance(_code);
   }
   
   public void configureResourceSet(final Binder binder) {
     AnnotatedBindingBuilder<ResourceSet> _bind = binder.<ResourceSet>bind(ResourceSet.class);
-    XtextResourceSet _xtextResourceSet = new XtextResourceSet();
-    _bind.toInstance(_xtextResourceSet);
+    _bind.to(XtextResourceSet.class);
   }
   
-  public Class<? extends IEncodingProvider> bindIEncodingProvider() {
-    return EclipseProjectPropertiesEncodingProvider.class;
-  }
-  
-  @Pure
-  public XtextProjectConfig getProject() {
-    return this.project;
+  public void configureIEncodingProvider(final Binder binder) {
+    AnnotatedBindingBuilder<IEncodingProvider> _bind = binder.<IEncodingProvider>bind(IEncodingProvider.class);
+    IEncodingProvider.Runtime _runtime = new IEncodingProvider.Runtime();
+    final Procedure1<IEncodingProvider.Runtime> _function = new Procedure1<IEncodingProvider.Runtime>() {
+      @Override
+      public void apply(final IEncodingProvider.Runtime it) {
+        CodeConfig _code = DefaultGeneratorModule.this.getCode();
+        String _encoding = _code.getEncoding();
+        it.setDefaultEncoding(_encoding);
+      }
+    };
+    IEncodingProvider.Runtime _doubleArrow = ObjectExtensions.<IEncodingProvider.Runtime>operator_doubleArrow(_runtime, _function);
+    _bind.toInstance(_doubleArrow);
   }
   
   public void setProject(final XtextProjectConfig project) {
     this.project = project;
-  }
-  
-  @Pure
-  public CodeConfig getCode() {
-    return this.code;
   }
   
   public void setCode(final CodeConfig code) {
