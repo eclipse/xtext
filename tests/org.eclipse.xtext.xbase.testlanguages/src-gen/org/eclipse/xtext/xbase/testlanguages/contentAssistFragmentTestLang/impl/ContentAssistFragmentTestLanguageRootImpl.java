@@ -22,10 +22,10 @@ import org.eclipse.xtext.xbase.testlanguages.contentAssistFragmentTestLang.Conte
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
- * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.contentAssistFragmentTestLang.impl.ContentAssistFragmentTestLanguageRootImpl#getExpression <em>Expression</em>}</li>
  * </ul>
+ * </p>
  *
  * @generated
  */

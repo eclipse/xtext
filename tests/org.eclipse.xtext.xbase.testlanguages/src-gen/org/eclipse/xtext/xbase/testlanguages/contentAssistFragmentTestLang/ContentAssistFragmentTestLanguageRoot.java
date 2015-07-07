@@ -13,10 +13,10 @@ import org.eclipse.xtext.xbase.XExpression;
  *
  * <p>
  * The following features are supported:
- * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.contentAssistFragmentTestLang.ContentAssistFragmentTestLanguageRoot#getExpression <em>Expression</em>}</li>
  * </ul>
+ * </p>
  *
  * @see org.eclipse.xtext.xbase.testlanguages.contentAssistFragmentTestLang.ContentAssistFragmentTestLangPackage#getContentAssistFragmentTestLanguageRoot()
  * @model
