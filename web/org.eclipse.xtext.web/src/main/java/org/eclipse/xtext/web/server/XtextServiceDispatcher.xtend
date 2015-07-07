@@ -38,6 +38,7 @@ import org.eclipse.xtext.web.server.persistence.IServerResourceHandler
 import org.eclipse.xtext.web.server.persistence.ResourcePersistenceService
 import org.eclipse.xtext.web.server.syntaxcoloring.HighlightingService
 import org.eclipse.xtext.web.server.validation.ValidationService
+import org.eclipse.xtext.web.server.model.PreComputedServiceRegistry
 
 /**
  * The entry class for Xtext service invocations. Use {@link #getService(IRequestData, ISessionStore)}
@@ -111,6 +112,12 @@ class XtextServiceDispatcher {
 	@Inject IResourceFactory resourceFactory
 	@Inject OperationCanceledManager operationCanceledManager
 	@Inject XtextWebDocumentAccess.Factory documentAccessFactory
+	
+	@Inject
+	def registerPreComputedServices(PreComputedServiceRegistry registry) {
+		registry.addPreComputedService(highlightingService)
+		registry.addPreComputedService(validationService)
+	}
 	
 	/**
 	 * Get the service descriptor for the given request.
