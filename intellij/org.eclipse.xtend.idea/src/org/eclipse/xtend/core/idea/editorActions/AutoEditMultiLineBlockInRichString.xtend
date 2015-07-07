@@ -13,7 +13,7 @@ import org.eclipse.xtext.idea.editorActions.AutoEditMultiLineBlock
 /**
  * @author kosyakov - Initial contribution and API
  */
-class AutoEditRichStringBlock extends AutoEditMultiLineBlock {
+class AutoEditMultiLineBlockInRichString extends AutoEditMultiLineBlock {
 
 	new(String openingTerminal, String closingTerminal) {
 		super(openingTerminal, closingTerminal)

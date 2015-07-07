@@ -5,26 +5,26 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.core.idea.editorActions
+package org.eclipse.xtend.idea.autoedit
 
-import com.intellij.psi.tree.TokenSet
-import org.eclipse.xtext.idea.editorActions.AutoEditContext
-import org.eclipse.xtext.idea.editorActions.AutoEditString
+import org.eclipse.xtend.idea.autoedit.AutoEditTest
 
 /**
  * @author kosyakov - Initial contribution and API
  */
-class AutoEditRichString extends AutoEditString {
+class AutoEditInMethodBodyTest extends AutoEditTest {
 
-	val TokenSet richStringLiteralTokens
+	static val PREFIX = "class Foo {\n\tfoo() {\n"
 
-	new(TokenSet richStringLiteralTokens) {
-		super("'''")
-		this.richStringLiteralTokens = richStringLiteralTokens
+	static val SUFFIX = "\n}\n}"
+	
+	override protected configureByText(String code) {
+		super.configureByText(PREFIX + code + SUFFIX)
+	}
+	
+	override protected assertState(String editorState) {
+		super.assertState(PREFIX + editorState + SUFFIX)
 	}
 
-	override protected isStringLiteral(TokenSet tokenSet, extension AutoEditContext context) {
-		tokenSet == richStringLiteralTokens
-	}
-
+	
 }
