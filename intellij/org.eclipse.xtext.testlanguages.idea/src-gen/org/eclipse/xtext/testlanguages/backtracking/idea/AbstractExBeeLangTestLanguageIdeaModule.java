@@ -39,6 +39,10 @@ public class AbstractExBeeLangTestLanguageIdeaModule extends org.eclipse.xtext.i
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.testlanguages.backtracking.idea.facet.ExBeeLangTestLanguageFacetType.TYPEID;
 	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends com.intellij.openapi.fileTypes.SyntaxHighlighter> bindSyntaxHighlighter() {
+		return org.eclipse.xtext.testlanguages.backtracking.idea.highlighting.ExBeeLangTestLanguageSyntaxHighlighter.class;
+	}
 	
 	
 }

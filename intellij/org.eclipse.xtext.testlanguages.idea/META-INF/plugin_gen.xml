@@ -46,5 +46,6 @@
       							factoryClass="org.eclipse.xtext.testlanguages.backtracking.idea.ExBeeLangTestLanguageExtensionFactory"
       							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
 		<facetType implementation="org.eclipse.xtext.testlanguages.backtracking.idea.facet.ExBeeLangTestLanguageFacetType"/>
+		<colorSettingsPage implementation="org.eclipse.xtext.testlanguages.backtracking.idea.highlighting.ExBeeLangTestLanguageColorSettingsPage"/>
 	</extensions>
 </idea-plugin>

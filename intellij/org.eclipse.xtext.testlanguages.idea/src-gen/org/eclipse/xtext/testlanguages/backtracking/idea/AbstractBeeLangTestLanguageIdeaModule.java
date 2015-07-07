@@ -39,6 +39,10 @@ public class AbstractBeeLangTestLanguageIdeaModule extends org.eclipse.xtext.ide
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.testlanguages.backtracking.idea.facet.BeeLangTestLanguageFacetType.TYPEID;
 	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends com.intellij.openapi.fileTypes.SyntaxHighlighter> bindSyntaxHighlighter() {
+		return org.eclipse.xtext.testlanguages.backtracking.idea.highlighting.BeeLangTestLanguageSyntaxHighlighter.class;
+	}
 	
 	
 }
