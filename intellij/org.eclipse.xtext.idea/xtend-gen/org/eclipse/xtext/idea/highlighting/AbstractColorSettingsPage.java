@@ -27,11 +27,11 @@ import org.eclipse.xtext.idea.Icons;
 @SuppressWarnings("all")
 public abstract class AbstractColorSettingsPage implements ColorSettingsPage, InspectionColorSettingsPage, DisplayPrioritySortable {
   @Inject
-  private SyntaxHighlighter hightlighter;
+  private SyntaxHighlighter highlighter;
   
   @Override
   public SyntaxHighlighter getHighlighter() {
-    return this.hightlighter;
+    return this.highlighter;
   }
   
   @Override

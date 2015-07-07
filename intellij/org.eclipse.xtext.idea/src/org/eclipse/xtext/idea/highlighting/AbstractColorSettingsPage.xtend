@@ -25,10 +25,10 @@ import org.eclipse.xtext.idea.Icons
  */
 abstract class AbstractColorSettingsPage implements ColorSettingsPage, InspectionColorSettingsPage, DisplayPrioritySortable {
 
-	@Inject SyntaxHighlighter hightlighter
+	@Inject SyntaxHighlighter highlighter
 
 	override getHighlighter() {
-		hightlighter
+		highlighter
 	}
 
 	override getDemoText() {
