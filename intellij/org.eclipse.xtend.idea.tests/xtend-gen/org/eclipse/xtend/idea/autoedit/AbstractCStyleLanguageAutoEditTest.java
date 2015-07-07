@@ -193,9 +193,7 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends LightToolingTes
   
   public void testSingleQuotedStringLiteral_9() {
     this.configureByText("foo|{}");
-    Editor _editor = this.myFixture.getEditor();
-    SelectionModel _selectionModel = _editor.getSelectionModel();
-    _selectionModel.setSelection(0, 3);
+    this.selectText((-3), 3);
     this.myFixture.type("\'");
     this.assertState("\'|\'{}");
     this.myFixture.type(AbstractCStyleLanguageAutoEditTest.BS);
@@ -204,9 +202,7 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends LightToolingTes
   
   public void testSingleQuotedStringLiteral_10() {
     this.configureByText("foo|{}");
-    Editor _editor = this.myFixture.getEditor();
-    SelectionModel _selectionModel = _editor.getSelectionModel();
-    _selectionModel.setSelection(1, 3);
+    this.selectText((-2), 2);
     this.myFixture.type("\'");
     this.assertState("f\'|\'{}");
     this.myFixture.type(AbstractCStyleLanguageAutoEditTest.BS);
@@ -215,18 +211,14 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends LightToolingTes
   
   public void testSingleQuotedStringLiteral_11() {
     this.configureByText("|foo{}");
-    Editor _editor = this.myFixture.getEditor();
-    SelectionModel _selectionModel = _editor.getSelectionModel();
-    _selectionModel.setSelection(0, 2);
+    this.selectText(0, 2);
     this.myFixture.type("\'");
     this.assertState("\'|o{}");
   }
   
   public void testSingleQuotedStringLiteral_12() {
     this.configureByText("|foo{}");
-    Editor _editor = this.myFixture.getEditor();
-    SelectionModel _selectionModel = _editor.getSelectionModel();
-    _selectionModel.setSelection(0, 1);
+    this.selectText(0, 1);
     this.myFixture.type("\'");
     this.assertState("\'|oo{}");
   }

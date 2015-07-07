@@ -260,7 +260,7 @@ class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 		myFixture.type("'")
 		assertState("'''|'''")
 	}
-	
+
 //	def void testBug434717_01() {
 //		configureByText(
 //				"genPlainText(Object this){\n" + 

@@ -107,12 +107,11 @@ class AutoEditMultiLineBlock extends AbstractIndentableAutoEditBlock {
 		val iterator = nextOffset.createTokenIterator
 		var offset = nextOffset
 		while (!iterator.atEnd) {
+			if (iterator.start > offset)
+				offset = iterator.start
 			if (tokenSet == iterator.tokenSet)
 				return offset
-			if (iterator.end != document.textLength) {
-				iterator.advance
-				offset = iterator.start
-			}
+			iterator.advance
 		}
 		return offset
 	}
@@ -199,14 +198,7 @@ class AutoEditMultiLineBlock extends AbstractIndentableAutoEditBlock {
 
 	override open(char c, extension AutoEditContext context) {
 		val newCaretOffset = type(c)
-		if (!shouldInsertClosingTerminal(newCaretOffset, context))
-			return;
-
-		val documentContent = editor.document.text
-		val opening = documentContent.count(openingTerminal)
-		val closing = documentContent.count(closingTerminal)
-		val occurences = opening + closing - 1
-		if (occurences % 2 == 0)
+		if (shouldInsertClosingTerminal(newCaretOffset, context))
 			document.insertString(newCaretOffset, closingTerminal)
 	}
 

@@ -13,8 +13,8 @@ import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import java.util.Collections;
+import org.eclipse.xtend.core.idea.editorActions.AutoEditMultiLineBlockInRichString;
 import org.eclipse.xtend.core.idea.editorActions.AutoEditRichString;
-import org.eclipse.xtend.core.idea.editorActions.AutoEditRichStringBlock;
 import org.eclipse.xtend.core.idea.parser.antlr.internal.PsiInternalXtendParser;
 import org.eclipse.xtext.idea.editorActions.AbstractAutoEditBlock;
 import org.eclipse.xtext.idea.editorActions.AbstractIndentableAutoEditBlock;
@@ -64,7 +64,7 @@ public class XtendAutoEditHandler extends DefaultAutoEditHandler {
     {
       boolean _equals = Objects.equal(tokenSet, this.richStringLiteralTokens);
       if (_equals) {
-        AutoEditRichStringBlock _autoEditRichStringBlock = new AutoEditRichStringBlock("{", "}");
+        AutoEditMultiLineBlockInRichString _autoEditMultiLineBlockInRichString = new AutoEditMultiLineBlockInRichString("{", "}");
         AutoEditMultiLineBlock _autoEditMultiLineBlock = new AutoEditMultiLineBlock("«", "»");
         final Procedure1<AutoEditMultiLineBlock> _function = new Procedure1<AutoEditMultiLineBlock>() {
           @Override
@@ -75,7 +75,7 @@ public class XtendAutoEditHandler extends DefaultAutoEditHandler {
           }
         };
         AutoEditMultiLineBlock _doubleArrow = ObjectExtensions.<AutoEditMultiLineBlock>operator_doubleArrow(_autoEditMultiLineBlock, _function);
-        return Collections.<AbstractIndentableAutoEditBlock>unmodifiableList(CollectionLiterals.<AbstractIndentableAutoEditBlock>newArrayList(_autoEditRichStringBlock, _doubleArrow));
+        return Collections.<AbstractIndentableAutoEditBlock>unmodifiableList(CollectionLiterals.<AbstractIndentableAutoEditBlock>newArrayList(_autoEditMultiLineBlockInRichString, _doubleArrow));
       }
       _xblockexpression = super.getBlocks(tokenSet);
     }

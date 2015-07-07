@@ -186,7 +186,7 @@ abstract class AbstractCStyleLanguageAutoEditTest extends LightToolingTest {
 
 	def void testSingleQuotedStringLiteral_9() {
 		configureByText("foo|{}")
-		myFixture.editor.selectionModel.setSelection(0, 3)
+		selectText(-3, 3)
 		myFixture.type("'")
 		assertState("'|'{}")
 		myFixture.type(BS)
@@ -195,7 +195,7 @@ abstract class AbstractCStyleLanguageAutoEditTest extends LightToolingTest {
 
 	def void testSingleQuotedStringLiteral_10() {
 		configureByText("foo|{}")
-		myFixture.editor.selectionModel.setSelection(1, 3)
+		selectText(-2, 2)
 		myFixture.type("'")
 		assertState("f'|'{}")
 		myFixture.type(BS)
@@ -204,14 +204,14 @@ abstract class AbstractCStyleLanguageAutoEditTest extends LightToolingTest {
 
 	def void testSingleQuotedStringLiteral_11() {
 		configureByText("|foo{}")
-		myFixture.editor.selectionModel.setSelection(0, 2)
+		selectText(0, 2)
 		myFixture.type("'")
 		assertState("'|o{}")
 	}
 
 	def void testSingleQuotedStringLiteral_12() {
 		configureByText("|foo{}")
-		myFixture.editor.selectionModel.setSelection(0, 1)
+		selectText(0, 1)
 		myFixture.type("'")
 		assertState("'|oo{}")
 	}

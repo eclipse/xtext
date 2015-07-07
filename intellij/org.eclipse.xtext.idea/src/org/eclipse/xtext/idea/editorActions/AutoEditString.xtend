@@ -7,7 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.editorActions
 
+import com.intellij.openapi.editor.highlighter.HighlighterIterator
 import com.intellij.psi.tree.TokenSet
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.util.TextRegion
 
 import static extension com.intellij.openapi.editor.EditorModificationUtil.*
 
@@ -26,68 +30,132 @@ class AutoEditString extends AbstractAutoEditBlock {
 	}
 
 	override open(char c, extension AutoEditContext context) {
-		type(c)
+		val newCaretOffset = type(c)
+		if (shouldInsertClosingQuote(newCaretOffset, context))
+			document.insertString(newCaretOffset, closingTerminal)
 	}
 
 	override close(char c, extension AutoEditContext context) {
-		if (isStringLiteral(caretOffset, context)) {
-			if (isAtTerminal(closingTerminal, context)) {
-				editor.moveCaretRelatively(1)
-				return true
-			}
-			return false
-		}
-		if (shouldInsertClosingQuote(context)) {
-			val offset = type(c)
-			document.insertString(offset, closingTerminal)
-			return true
-		}
-		return false
-	}
-
-	protected def boolean shouldInsertClosingQuote(extension AutoEditContext context) {
-		if (caretOffset.identifierPart)
+		val stringRegion = caretOffset.findRegion(context)
+		if (stringRegion == null)
 			return false
 
-		if (openingTerminal == closingTerminal && document.text.count(openingTerminal) % 2 != 0)
-			return false
+		if (stringRegion.closingTerminal == null)
+			type(c)
+		else if (stringRegion.closingTerminal.contains(caretOffset))
+			editor.moveCaretRelatively(1)
+		else
+			type(c)
 
 		return true
 	}
 
-	protected def isStringLiteral(int offset, extension AutoEditContext context) {
-		if (offset == 0 || document.textLength == offset)
+	protected def AutoEditStringRegion findRegion(int offset, extension AutoEditContext context) {
+		val openingTerminal = offset.findOpeningTerminal(context)
+		if (openingTerminal == null)
+			return null
+
+		val closingTerminal = offset.findClosingTerminal(openingTerminal.offset, context)
+		if (closingTerminal != null) {
+			if (openingTerminal.offset >= offset)
+				return null
+			if (closingTerminal.offset + closingTerminal.length <= offset)
+				return null
+		}
+
+		return new AutoEditStringRegion(openingTerminal, closingTerminal)
+	}
+
+	protected def TextRegion findOpeningTerminal(
+		int offset,
+		extension AutoEditContext context
+	) {
+		val iterator = offset.createTokenIterator
+		if (!iterator.isStringLiteral(context))
+			return null
+
+		while (!iterator.atEnd) {
+			val openingTerminal = iterator.getOpeningTerminal(context)
+			if (openingTerminal != null)
+				return openingTerminal
+
+			iterator.retreat
+		}
+		null
+	}
+
+	protected def TextRegion findClosingTerminal(
+		int offset,
+		int openingTokenOffset,
+		extension AutoEditContext context
+	) {
+		val iterator = offset.createTokenIterator
+		if (!iterator.isStringLiteral(context))
+			return null
+
+		while (!iterator.atEnd) {
+			val closingTerminal = iterator.getClosingTerminal(openingTokenOffset, context)
+			if (closingTerminal != null)
+				return closingTerminal
+
+			iterator.advance
+		}
+		null
+	}
+
+	protected def TextRegion getOpeningTerminal(
+		HighlighterIterator iterator,
+		extension AutoEditContext context
+	) {
+		if (iterator == null)
+			return null
+
+		if (iterator.end - iterator.start < openingTerminal.length)
+			return null
+
+		if (getText(iterator.start, iterator.start + openingTerminal.length) != openingTerminal)
+			return null
+
+		return new TextRegion(iterator.start, openingTerminal.length)
+	}
+
+	protected def TextRegion getClosingTerminal(
+		HighlighterIterator iterator,
+		int openingTokenOffset,
+		extension AutoEditContext context
+	) {
+		if (iterator == null)
+			return null
+
+		if (iterator.end - openingTokenOffset < openingTerminal.length + closingTerminal.length)
+			return null
+
+		if (getText(iterator.end - closingTerminal.length, iterator.end) != closingTerminal)
+			return null
+
+		return new TextRegion(iterator.end - closingTerminal.length, closingTerminal.length)
+	}
+
+	protected def boolean shouldInsertClosingQuote(int offset, extension AutoEditContext context) {
+		return !offset.identifierPart
+	}
+
+	protected def isStringLiteral(HighlighterIterator iterator, extension AutoEditContext context) {
+		if (iterator.atEnd)
 			return false
-		offset.tokenSet.isStringLiteral(context)
+
+		iterator.tokenSet.isStringLiteral(context)
 	}
 
 	protected def isStringLiteral(TokenSet tokenSet, extension AutoEditContext context) {
 		tokenSet == stringLiteralTokens
 	}
 
-	protected def isAtTerminal(String terminal, extension AutoEditContext context) {
-		val terminalLength = terminal.length
+}
 
-		val caretOffset = caretOffset
-		val iterator = caretOffset.createTokenIterator
-		if (iterator.atEnd)
-			return false
-
-		val start = iterator.start
-		val end = iterator.end
-		if (end - start < terminalLength)
-			return false
-
-		if (end == caretOffset)
-			return false
-
-		val caretShift = terminalLength - (end - caretOffset)
-		val beginOffset = if (caretShift > 0) {
-				caretOffset - caretShift
-			} else
-				caretOffset
-
-		return getText(beginOffset, beginOffset + terminalLength) == terminal
-	}
-
+@Accessors
+@FinalFieldsConstructor
+class AutoEditStringRegion {
+	val TextRegion openingTerminal
+	val TextRegion closingTerminal
 }

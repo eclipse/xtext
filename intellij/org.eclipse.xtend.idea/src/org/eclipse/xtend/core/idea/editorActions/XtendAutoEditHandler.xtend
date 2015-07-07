@@ -55,7 +55,7 @@ class XtendAutoEditHandler extends DefaultAutoEditHandler {
 	override protected getBlocks(TokenSet tokenSet) {
 		if (tokenSet == richStringLiteralTokens) {
 			return #[
-				new AutoEditRichStringBlock('{', '}'),
+				new AutoEditMultiLineBlockInRichString('{', '}'),
 				new AutoEditMultiLineBlock('«', '»') => [
 					shouldDeleteClosing = true
 					shouldInsertClosingTerminalBeforeDigit = true

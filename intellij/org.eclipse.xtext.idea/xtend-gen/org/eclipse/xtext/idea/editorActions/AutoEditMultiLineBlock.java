@@ -179,20 +179,18 @@ public class AutoEditMultiLineBlock extends AbstractIndentableAutoEditBlock {
     int offset = nextOffset;
     while ((!iterator.atEnd())) {
       {
+        int _start = iterator.getStart();
+        boolean _greaterThan = (_start > offset);
+        if (_greaterThan) {
+          int _start_1 = iterator.getStart();
+          offset = _start_1;
+        }
         TokenSet _tokenSet = context.getTokenSet(iterator);
         boolean _equals = Objects.equal(tokenSet, _tokenSet);
         if (_equals) {
           return offset;
         }
-        int _end = iterator.getEnd();
-        DocumentEx _document = context.getDocument();
-        int _textLength = _document.getTextLength();
-        boolean _notEquals = (_end != _textLength);
-        if (_notEquals) {
-          iterator.advance();
-          int _start = iterator.getStart();
-          offset = _start;
-        }
+        iterator.advance();
       }
     }
     return offset;
@@ -354,22 +352,10 @@ public class AutoEditMultiLineBlock extends AbstractIndentableAutoEditBlock {
   public void open(final char c, @Extension final AutoEditContext context) {
     final int newCaretOffset = context.type(c);
     boolean _shouldInsertClosingTerminal = this.shouldInsertClosingTerminal(newCaretOffset, context);
-    boolean _not = (!_shouldInsertClosingTerminal);
-    if (_not) {
-      return;
-    }
-    EditorEx _editor = context.getEditor();
-    DocumentEx _document = _editor.getDocument();
-    final String documentContent = _document.getText();
-    String _openingTerminal = this.getOpeningTerminal();
-    final int opening = context.count(documentContent, _openingTerminal);
-    String _closingTerminal = this.getClosingTerminal();
-    final int closing = context.count(documentContent, _closingTerminal);
-    final int occurences = ((opening + closing) - 1);
-    if (((occurences % 2) == 0)) {
-      DocumentEx _document_1 = context.getDocument();
-      String _closingTerminal_1 = this.getClosingTerminal();
-      _document_1.insertString(newCaretOffset, _closingTerminal_1);
+    if (_shouldInsertClosingTerminal) {
+      DocumentEx _document = context.getDocument();
+      String _closingTerminal = this.getClosingTerminal();
+      _document.insertString(newCaretOffset, _closingTerminal);
     }
   }
   

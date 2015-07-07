@@ -17,20 +17,20 @@ import org.eclipse.xtext.xbase.lib.Extension;
  * @author kosyakov - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class AutoEditRichStringBlock extends AutoEditMultiLineBlock {
-  public AutoEditRichStringBlock(final String openingTerminal, final String closingTerminal) {
+public class AutoEditMultiLineBlockInRichString extends AutoEditMultiLineBlock {
+  public AutoEditMultiLineBlockInRichString(final String openingTerminal, final String closingTerminal) {
     super(openingTerminal, closingTerminal);
   }
   
-  public AutoEditRichStringBlock(final String openingTerminal, final String closingTerminal, final boolean nested) {
+  public AutoEditMultiLineBlockInRichString(final String openingTerminal, final String closingTerminal, final boolean nested) {
     super(openingTerminal, null, closingTerminal, nested);
   }
   
-  public AutoEditRichStringBlock(final String openingTerminal, final String indentationTerminal, final String closingTerminal) {
+  public AutoEditMultiLineBlockInRichString(final String openingTerminal, final String indentationTerminal, final String closingTerminal) {
     super(openingTerminal, indentationTerminal, closingTerminal, false);
   }
   
-  public AutoEditRichStringBlock(final String openingTerminal, final String indentationTerminal, final String closingTerminal, final boolean nested) {
+  public AutoEditMultiLineBlockInRichString(final String openingTerminal, final String indentationTerminal, final String closingTerminal, final boolean nested) {
     super(openingTerminal, indentationTerminal, closingTerminal, nested);
   }
   

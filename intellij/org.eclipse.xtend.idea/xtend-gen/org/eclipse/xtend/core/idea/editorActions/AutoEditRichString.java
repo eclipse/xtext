@@ -27,14 +27,6 @@ public class AutoEditRichString extends AutoEditString {
   
   @Override
   protected boolean isStringLiteral(final TokenSet tokenSet, @Extension final AutoEditContext context) {
-    boolean _or = false;
-    boolean _equals = Objects.equal(tokenSet, this.richStringLiteralTokens);
-    if (_equals) {
-      _or = true;
-    } else {
-      boolean _isStringLiteral = super.isStringLiteral(tokenSet, context);
-      _or = _isStringLiteral;
-    }
-    return _or;
+    return Objects.equal(tokenSet, this.richStringLiteralTokens);
   }
 }
