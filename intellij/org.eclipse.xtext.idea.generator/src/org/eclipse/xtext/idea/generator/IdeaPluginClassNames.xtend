@@ -171,4 +171,8 @@ class IdeaPluginClassNames {
 	def String getFacetTypeName(Grammar it) {
 		basePackageName+'.facet.'+it.name.toSimpleName+'FacetType'
 	}
+	
+	def String syntaxHighlighter(Grammar it) {
+		basePackageName+'.highlighting.'+it.name.toSimpleName+'SyntaxHighlighter'
+	}
 }
