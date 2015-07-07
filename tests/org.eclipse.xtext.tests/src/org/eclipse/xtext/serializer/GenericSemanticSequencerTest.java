@@ -14,6 +14,7 @@ import org.junit.Test;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class GenericSemanticSequencerTest extends AbstractSemanticSequencerTest {
 
 	@Override
