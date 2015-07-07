@@ -34,7 +34,7 @@ import com.google.inject.Injector;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({ "unused", "deprecation" })
 public abstract class UISmokeTest extends AbstractSmokeTest {
 
 //	@Inject
