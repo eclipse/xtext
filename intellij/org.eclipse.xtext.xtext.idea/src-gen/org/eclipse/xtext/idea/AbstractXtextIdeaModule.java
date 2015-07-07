@@ -32,12 +32,16 @@ public class AbstractXtextIdeaModule extends org.eclipse.xtext.idea.DefaultIdeaM
 		return org.eclipse.xtext.idea.lang.XtextElementTypeProvider.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration$GeneratorConfigurationState() {
+	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
 		return org.eclipse.xtext.idea.facet.XtextFacetConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetType<org.eclipse.xtext.idea.facet.XtextFacetConfiguration>> bindAbstractFacetType$XtextFacetConfiguration() {
-		return org.eclipse.xtext.idea.facet.XtextFacetType.class;
+	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
+		return org.eclipse.xtext.idea.facet.XtextFacetType.TYPEID;
+	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends com.intellij.openapi.fileTypes.SyntaxHighlighter> bindSyntaxHighlighter() {
+		return org.eclipse.xtext.idea.highlighting.XtextSyntaxHighlighter.class;
 	}
 	
 	
