@@ -112,6 +112,12 @@ class ProjectConfigGenerator {
 			private FileSystemAccess aceJsGen;
 			
 			public void checkConfiguration(XtextGenerator generator, Issues issues) {
+				if («PROJECTS.head»Src == null) {
+					issues.addError(generator, "The property '«PROJECTS.head»Src' must be set.", this);
+				}
+				if («PROJECTS.head»SrcGen == null) {
+					issues.addError(generator, "The property '«PROJECTS.head»SrcGen' must be set.", this);
+				}
 				«FOR p : PROJECTS»
 					if («p»Manifest != null && Strings.isEmpty(«p»Manifest.getPath())) {
 						issues.addError(generator, "The property 'path' must be set.", «p»Manifest);

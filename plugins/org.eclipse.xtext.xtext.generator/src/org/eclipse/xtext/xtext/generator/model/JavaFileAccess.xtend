@@ -9,8 +9,8 @@ package org.eclipse.xtext.xtext.generator.model
 
 import com.google.common.collect.Lists
 import java.util.Collections
+import java.util.List
 import java.util.Map
-import java.util.regex.Pattern
 import org.eclipse.emf.codegen.util.CodeGenUtil
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenation
@@ -30,6 +30,9 @@ class JavaFileAccess extends TextFileAccess {
 	@Accessors
 	boolean markedAsGenerated
 	
+	@Accessors
+	val List<IClassAnnotation> annotations = newArrayList
+	
 	new(String qualifiedName, CodeConfig codeConfig) {
 		this(new TypeReference(qualifiedName), codeConfig)
 	}
@@ -43,28 +46,25 @@ class JavaFileAccess extends TextFileAccess {
 	}
 
 	def String importType(TypeReference typeRef) {
-		val simpleName = typeRef.simpleName
-		if (CodeGenUtil.isJavaDefaultType(simpleName) || this.packageName == typeRef.package)
-			return simpleName
-		val imported = imports.get(simpleName)
-		if (imported != null) {
-			if (imported == typeRef)
-				return simpleName
-			else
-				return typeRef.name
+		var name = typeRef.simpleName
+		if (!CodeGenUtil.isJavaDefaultType(name) && this.packageName != typeRef.package) {
+			val imported = imports.get(name)
+			if (imported === null)
+				imports.put(name, typeRef)
+			else if (imported.name != typeRef.name)
+				name = typeRef.name
 		}
-		imports.put(simpleName, typeRef)
-		return simpleName
+		return name + typeRef.arguments.join('<', ', ', '>', [importType])
 	}
 	
 	def void setJavaContent(StringConcatenationClient javaContent) {
 		val javaStringConcat = new JavaStringConcatenation(this)
 		javaStringConcat.append(javaContent)
-		content = javaStringConcat
+		setContent(javaStringConcat)
 	}
 	
 	override generate() {
-		val classAnnotations = codeConfig.classAnnotations.filter[appliesTo(this)]
+		val classAnnotations = annotations + codeConfig.classAnnotations.filter[appliesTo(this)]
 		classAnnotations.forEach[importType(annotationImport)]
 		val sortedImports = Lists.newArrayList(imports.values.map[name])
 		Collections.sort(sortedImports)
@@ -88,8 +88,6 @@ class JavaFileAccess extends TextFileAccess {
 		
 		val JavaFileAccess access
 		
-		val typeNamePattern = Pattern.compile('[a-z]+(\\.[a-z]+)*(\\.[A-Z][a-zA-Z]*)+')
-		
 		new(JavaFileAccess access) {
 			super(access.codeConfig.lineDelimiter)
 			this.access = access
@@ -99,9 +97,7 @@ class JavaFileAccess extends TextFileAccess {
 			if (object instanceof TypeReference)
 				access.importType(object)
 			else if (object instanceof Class<?>)
-				access.importType(new TypeReference(object as Class<?>))
-			else if (object instanceof String && typeNamePattern.matcher(object as String).matches)
-				access.importType(new TypeReference(object as String))
+				access.importType(new TypeReference(object))
 			else
 				object.toString
 		}

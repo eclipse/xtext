@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.GrammarUtil
 import org.eclipse.xtext.ReferencedMetamodel
@@ -32,15 +33,18 @@ import org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.resource.containers.IAllContainersState
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
+import org.eclipse.xtext.xtext.generator.model.IXtextProjectConfig
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess
+import org.eclipse.xtext.xtext.generator.model.TypeReference
+
+import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 
 @Log
 class LanguageConfig2 extends CompositeGeneratorFragment2 {
-	
-	@Inject Provider<ResourceSet> resourceSetProvider
 	
 	@Accessors
 	String uri
@@ -61,6 +65,10 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 {
 	
 	@Accessors
 	val GuiceModuleAccess eclipsePluginGenModule = new GuiceModuleAccess
+	
+	@Inject Provider<ResourceSet> resourceSetProvider
+	
+	@Inject IXtextProjectConfig projectConfig
 	
 	def void setFileExtensions(String fileExtensions) {
 		this.fileExtensions = fileExtensions.trim.split("\\s*,\\s*").toList
@@ -224,6 +232,29 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 {
 		val msg = "The EPackage " + refName + " in grammar " + grammarName + " could not be found. "
 			+ "You might want to register that EPackage in your workflow file."
 		throw new IllegalStateException(msg)
+	}
+	
+	override generate(LanguageConfig2 language) {
+		addImplicitContributions()
+		super.generate(language)
+	}
+	
+	protected def void addImplicitContributions() {
+		if (projectConfig.runtimeManifest !== null) {
+			projectConfig.runtimeManifest.requiredBundles.addAll(#[
+				'org.eclipse.xtext', 'org.eclipse.xtext.util'
+			])
+			projectConfig.runtimeManifest.importedPackages.add('org.apache.log4j')
+		}
+		if (projectConfig.eclipsePluginManifest !== null) {
+			projectConfig.eclipsePluginManifest.requiredBundles.addAll(#[
+				'org.eclipse.xtext.ui', 'org.eclipse.xtext.ui.shared', 'org.eclipse.ui.editors', 'org.eclipse.ui'
+			])
+		}
+		val StringConcatenationClient expression = '''«'org.eclipse.xtext.ui.shared.Access'.typeRef».getJavaProjectsState()'''
+		new GuiceModuleAccess.BindingFactory()
+			.addTypeToProviderInstance(new TypeReference(IAllContainersState), expression)
+			.contributeTo(eclipsePluginGenModule)
 	}
 	
 }

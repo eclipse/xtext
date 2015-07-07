@@ -8,11 +8,14 @@
 package org.eclipse.xtext.xtext.generator.model
 
 import java.util.List
+import java.util.Set
 import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors
 class StandaloneSetupAccess {
 	
 	val List<CharSequence> registrations = newArrayList
+	
+	val Set<TypeReference> imports = newHashSet
 	
 }

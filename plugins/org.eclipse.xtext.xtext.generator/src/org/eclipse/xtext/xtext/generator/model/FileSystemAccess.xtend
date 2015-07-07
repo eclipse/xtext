@@ -83,7 +83,11 @@ class FileSystemAccess implements IFileSystemAccess2, IGuiceAwareGeneratorCompon
 	override generateFile(String fileName, String outputConfiguration, CharSequence contents) {
 		if (outputConfiguration == DEFAULT_OUTPUT) {
 			val uri = fileName.URI
-			Files.write(contents, new File(uri.toFileString), uri.charset)
+			val file = new File(uri.toFileString)
+			val parent = file.parentFile
+			if (parent !== null)
+				parent.mkdirs
+			Files.write(contents, file, uri.charset)
 		} else {
 			throw new IllegalArgumentException('Unsupported configuration: ' + outputConfiguration)
 		}
@@ -96,7 +100,11 @@ class FileSystemAccess implements IFileSystemAccess2, IGuiceAwareGeneratorCompon
 	override generateFile(String fileName, String outputConfiguration, InputStream content) throws RuntimeIOException {
 		if (outputConfiguration == DEFAULT_OUTPUT) {
 			val uri = fileName.URI
-			val fileWriter = Files.newWriter(new File(uri.toFileString), uri.charset)
+			val file = new File(uri.toFileString)
+			val parent = file.parentFile
+			if (parent !== null)
+				parent.mkdirs
+			val fileWriter = Files.newWriter(file, uri.charset)
 			try {
 				var c = content.read()
 				while (c >= 0) {

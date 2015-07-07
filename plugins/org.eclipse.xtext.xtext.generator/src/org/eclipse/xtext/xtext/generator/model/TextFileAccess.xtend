@@ -43,7 +43,11 @@ class TextFileAccess {
 		} else {
 			charset = Charset.defaultCharset
 		}
-		Files.write(generate(), new File(path), charset)
+		val file = new File(path)
+		val parent = file.parentFile
+		if (parent !== null)
+			parent.mkdirs
+		Files.write(generate(), file, charset)
 	}
 	
 }

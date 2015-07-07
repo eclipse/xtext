@@ -27,7 +27,7 @@ class WizardConfig extends XtextProjectConfig {
 	
 	boolean testingSupport = false
 	
-	boolean mavenLayout = true
+	boolean mavenLayout = false
 	
 	override checkConfiguration(XtextGenerator generator, Issues issues) {
 		super.checkConfiguration(generator, issues)
@@ -96,11 +96,17 @@ class WizardConfig extends XtextProjectConfig {
 		
 		if (testingSupport) {
 			if (runtimeTestSrc === null)
-				runtimeTestSrc = runtimeBase + '.test/' + src
+				runtimeTestSrc = runtimeBase + '.tests/' + src
 			if (runtimeTestSrcGen === null)
-				runtimeTestSrcGen = runtimeBase + '.test/' + srcGen
+				runtimeTestSrcGen = runtimeBase + '.tests/' + srcGen
 			if (runtimeTestManifest === null)
-				runtimeTestManifest = new ManifestAccess => [path = runtimeBase + '.test/META-INF/MANIFEST.MF']
+				runtimeTestManifest = new ManifestAccess => [path = runtimeBase + '.tests/META-INF/MANIFEST.MF']
+			if (eclipsePluginTestSrc === null)
+				eclipsePluginTestSrc = runtimeBase + '.tests/' + src
+			if (eclipsePluginTestSrcGen === null)
+				eclipsePluginTestSrcGen = runtimeBase + '.tests/' + srcGen
+			if (eclipsePluginTestManifest === null)
+				eclipsePluginTestManifest = new ManifestAccess => [path = runtimeBase + '.tests/META-INF/MANIFEST.MF']
 		}
 		
 		super.initialize(injector)

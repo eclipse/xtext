@@ -19,7 +19,7 @@ class ManifestAccess {
 	
 	String symbolicName
 	
-	String version = '0.0.1'
+	String version = '0.0.1.qualifier'
 	
 	boolean merge = true
 	

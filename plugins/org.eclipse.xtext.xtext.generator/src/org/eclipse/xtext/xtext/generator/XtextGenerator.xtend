@@ -16,12 +16,16 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
+import java.util.HashMap
 import java.util.List
 import org.eclipse.emf.mwe.core.WorkflowContext
 import org.eclipse.emf.mwe.core.issues.Issues
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent2
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.xtext.GeneratedMetamodel
+import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.XtextStandaloneSetup
 import org.eclipse.xtext.util.MergeableManifest
 import org.eclipse.xtext.xtext.generator.model.CodeConfig
@@ -43,6 +47,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGe
 	@Accessors
 	String activator
 	
+	@Accessors
 	val List<LanguageConfig2> languageConfigs = newArrayList
 	
 	Injector injector
@@ -65,11 +70,22 @@ class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGe
 	}
 	
 	override protected checkConfigurationInternal(Issues issues) {
+		createInjector()
 		if (configuration !== null) {
 			configuration.checkConfiguration(this, issues)
 		}
+		val uris = new HashMap<String, Grammar>
 		for (language : languageConfigs) {
 			language.checkConfiguration(this, issues)
+			for (generatedMetamodel : EcoreUtil2.typeSelect(language.grammar.metamodelDeclarations, GeneratedMetamodel)) {
+				val nsURI = generatedMetamodel.EPackage.nsURI
+				if (uris.containsKey(nsURI)) {
+					issues.addError(this, "Duplicate generated grammar with nsURI '" + nsURI + "' in "
+							+ uris.get(nsURI).name + " and " + language.grammar.name)
+				} else {
+					uris.put(nsURI, language.grammar)
+				}
+			}
 		}
 	}
 	
@@ -86,6 +102,9 @@ class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGe
 	override initialize(Injector injector) {
 		injector.injectMembers(this)
 		projectConfig.initialize(injector)
+		for (language : languageConfigs) {
+			language.initialize(injector)
+		}
 		injector.getInstance(CodeConfig) => [ codeConfig |
 			codeConfig.initialize(injector)
 		]
@@ -95,9 +114,8 @@ class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGe
 	}
 	
 	protected override invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, Issues issues) {
-		val injector = createInjector()
+		createInjector()
 		for (language : languageConfigs) {
-			language.initialize(injector)
 			language.generate(language)
 			language.generateRuntimeSetup()
 			language.generateModules()
