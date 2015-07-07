@@ -175,4 +175,12 @@ class IdeaPluginClassNames {
 	def String syntaxHighlighter(Grammar it) {
 		basePackageName+'.highlighting.'+it.name.toSimpleName+'SyntaxHighlighter'
 	}
+	
+	def String defaultColorSettingsPage(Grammar it) {
+		syntaxHighlighter.toPackageName+'.'+it.name.toSimpleName+'DefaultColorSettingsPage'
+	}
+	
+	def String colorSettingsPage(Grammar it) {
+		defaultColorSettingsPage.toPackageName+'.'+it.name.toSimpleName+'ColorSettingsPage'
+	}
 }

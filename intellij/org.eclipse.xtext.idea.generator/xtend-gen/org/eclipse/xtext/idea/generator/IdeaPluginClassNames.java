@@ -355,4 +355,24 @@ public class IdeaPluginClassNames {
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "SyntaxHighlighter");
   }
+  
+  public String defaultColorSettingsPage(final Grammar it) {
+    String _syntaxHighlighter = this.syntaxHighlighter(it);
+    String _packageName = this.toPackageName(_syntaxHighlighter);
+    String _plus = (_packageName + ".");
+    String _name = it.getName();
+    String _simpleName = this.toSimpleName(_name);
+    String _plus_1 = (_plus + _simpleName);
+    return (_plus_1 + "DefaultColorSettingsPage");
+  }
+  
+  public String colorSettingsPage(final Grammar it) {
+    String _defaultColorSettingsPage = this.defaultColorSettingsPage(it);
+    String _packageName = this.toPackageName(_defaultColorSettingsPage);
+    String _plus = (_packageName + ".");
+    String _name = it.getName();
+    String _simpleName = this.toSimpleName(_name);
+    String _plus_1 = (_plus + _simpleName);
+    return (_plus_1 + "ColorSettingsPage");
+  }
 }

@@ -150,6 +150,8 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		ctx.writeFile(outlet_src_gen, grammar.facetTypeName.toJavaPath, grammar.compileFacetType)
 		ctx.writeFile(outlet_src, grammar.facetConfiguration.toJavaPath, grammar.compileFacetConfiguration)
 		ctx.writeFile(outlet_src_gen, grammar.syntaxHighlighter.toJavaPath, grammar.compileSyntaxHighlighter)
+		ctx.writeFile(outlet_src_gen, grammar.defaultColorSettingsPage.toJavaPath, grammar.compileDefaultColorSettingsPage)
+		ctx.writeFile(outlet_src, grammar.colorSettingsPage.toJavaPath, grammar.compileColorSettingsPage)
 		
 		var output = new OutputImpl();
 		output.addOutlet(PLUGIN, false, ideaProjectPath);
@@ -442,6 +444,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 
 		      	«grammar.compileExtension('lang.psiStructureViewFactory', 'com.intellij.lang.PsiStructureViewFactory')»
 				<facetType implementation="«grammar.facetTypeName»"/>
+				<colorSettingsPage implementation="«grammar.colorSettingsPage»"/>
 			</extensions>
 		</idea-plugin>
 	'''
@@ -1038,6 +1041,46 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			}
 			return _switchResult;
 		}
+	}'''
+	
+	def CharSequence compileDefaultColorSettingsPage(Grammar grammar) '''
+	package «grammar.defaultColorSettingsPage.toPackageName»;
+	
+	import «grammar.languageName»;
+	import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
+	
+	import com.intellij.openapi.options.colors.AttributesDescriptor;
+	
+	public class «grammar.defaultColorSettingsPage.toSimpleName» extends AbstractColorSettingsPage {
+		private AttributesDescriptor[] descriptors;
+	
+		public «grammar.defaultColorSettingsPage.toSimpleName»() {
+			«grammar.languageName.toSimpleName».INSTANCE.injectMembers(this);
+		}
+	
+		@Override
+		public AttributesDescriptor[] getAttributeDescriptors() {
+			if (descriptors == null) {
+				this.descriptors = new AttributesDescriptor[] {
+						createDescriptor("Keywords", «grammar.syntaxHighlighter.toSimpleName».KEYWORD),
+						createDescriptor("Numbers", «grammar.syntaxHighlighter.toSimpleName».NUMBER),
+						createDescriptor("Comments", «grammar.syntaxHighlighter.toSimpleName».COMMENT),
+						createDescriptor("Strings", «grammar.syntaxHighlighter.toSimpleName».STRING) };
+			}
+			return this.descriptors;
+		}
+	
+		@Override
+		public String getDisplayName() {
+			return «grammar.languageName.toSimpleName».INSTANCE.getDisplayName();
+		}
+	}'''
+	
+	def CharSequence compileColorSettingsPage(Grammar grammar)
+	'''
+	package «grammar.colorSettingsPage.toPackageName»;
+	
+	public class «grammar.colorSettingsPage.toSimpleName» extends «grammar.defaultColorSettingsPage.toSimpleName» {
 	}'''
 	
 }
