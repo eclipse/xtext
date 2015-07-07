@@ -38,7 +38,7 @@ abstract class AbstractPreComputedService<T extends IServiceResult> {
 	}
 	
 	def T getResult(XtextWebDocumentAccess it) {
-		getCachedResult(this)
+		getCachedResult(this, true)
 	}
 
 	def T compute(IXtextWebDocument it, CancelIndicator cancelIndicator)

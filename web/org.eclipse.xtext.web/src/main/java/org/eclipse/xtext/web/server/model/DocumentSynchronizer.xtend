@@ -14,6 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
+import com.google.inject.name.Named
 
 /**
  * Synchronizer object used by the {@link XtextWebDocumentAccess} for managing multithreaded
@@ -30,8 +31,17 @@ package class DocumentSynchronizer implements CancelIndicator {
 	@Accessors(PUBLIC_GETTER)
     @Inject OperationCanceledManager operationCanceledManager
     
+    /**
+     * Executor service for runnables that are run when the lock is already acquired 
+     */
     @Accessors(PUBLIC_GETTER)
-    @Inject ExecutorService executorService
+    @Inject@Named('withDocumentLock') ExecutorService executorService
+    
+    /**
+     * A second executor service for runnables that aquire the document lock themselves 
+     */
+    @Accessors(PUBLIC_GETTER)
+    @Inject ExecutorService executorService2
     
 	@Accessors
     volatile boolean canceled

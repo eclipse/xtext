@@ -55,6 +55,8 @@ class XAnnotationExtensions {
 				val containerContainer = container.eContainer
 				if (containerContainer instanceof XtendAnnotationTarget)
 					containerContainer
+				else // in case of parse errors we might have an XtendTypeDeclaration as a direct child of XtendFile
+					container
 			}
 			XAnnotation : 
 				getAnnotatedTarget(container)

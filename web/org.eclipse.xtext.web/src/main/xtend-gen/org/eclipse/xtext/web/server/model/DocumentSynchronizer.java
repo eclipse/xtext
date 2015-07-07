@@ -8,6 +8,7 @@
 package org.eclipse.xtext.web.server.model;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -34,9 +35,20 @@ class DocumentSynchronizer implements CancelIndicator {
   @Inject
   private OperationCanceledManager operationCanceledManager;
   
+  /**
+   * Executor service for runnables that are run when the lock is already acquired
+   */
   @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
+  @Named("withDocumentLock")
   private ExecutorService executorService;
+  
+  /**
+   * A second executor service for runnables that aquire the document lock themselves
+   */
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  @Inject
+  private ExecutorService executorService2;
   
   @Accessors
   private volatile boolean canceled;
@@ -87,6 +99,11 @@ class DocumentSynchronizer implements CancelIndicator {
   @Pure
   public ExecutorService getExecutorService() {
     return this.executorService;
+  }
+  
+  @Pure
+  public ExecutorService getExecutorService2() {
+    return this.executorService2;
   }
   
   @Pure
