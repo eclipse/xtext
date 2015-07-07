@@ -346,4 +346,13 @@ public class IdeaPluginClassNames {
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "FacetType");
   }
+  
+  public String syntaxHighlighter(final Grammar it) {
+    String _basePackageName = this.getBasePackageName(it);
+    String _plus = (_basePackageName + ".highlighting.");
+    String _name = it.getName();
+    String _simpleName = this.toSimpleName(_name);
+    String _plus_1 = (_plus + _simpleName);
+    return (_plus_1 + "SyntaxHighlighter");
+  }
 }

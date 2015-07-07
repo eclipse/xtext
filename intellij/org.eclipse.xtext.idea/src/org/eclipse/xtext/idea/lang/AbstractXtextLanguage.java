@@ -8,6 +8,7 @@
 package org.eclipse.xtext.idea.lang;
 
 import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.Injector;
 import com.intellij.lang.Language;
@@ -52,5 +53,11 @@ public abstract class AbstractXtextLanguage extends Language implements IXtextLa
 	@Override
 	public void injectMembers(Object o) {
 		getInjector().injectMembers(o);
+	}
+
+	@Override
+	public String getDisplayName() {
+		String simpleName = Strings.lastToken(getID(), ".");
+		return Strings.isEmpty(simpleName) ? getID() : simpleName;
 	}
 }

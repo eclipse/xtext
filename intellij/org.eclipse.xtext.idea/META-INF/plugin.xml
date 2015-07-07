@@ -9,7 +9,6 @@
 
 	<extensions defaultExtensionNs="com.intellij">
 		<problemFileHighlightFilter implementation="org.eclipse.xtext.idea.highlighting.ProblemXtextFileHighlightFilter"/>
-
 		<typedHandler implementation="org.eclipse.xtext.idea.editorActions.XtextAutoEditTypedHandler" order="first"/>
 		<backspaceHandlerDelegate implementation="org.eclipse.xtext.idea.editorActions.XtextAutoEditBackspaceHandler" order="first"/>
 		<enterHandlerDelegate implementation="org.eclipse.xtext.idea.editorActions.XtextAutoEditEnterHandler" order="first"/>

@@ -13,7 +13,6 @@ import com.intellij.lang.PairedBraceMatcher
 import com.intellij.lang.PsiStructureViewFactory
 import com.intellij.lang.refactoring.NamesValidator
 import com.intellij.lexer.Lexer
-import com.intellij.openapi.fileTypes.SyntaxHighlighter
 import com.intellij.openapi.util.Key
 import com.intellij.psi.util.PsiModificationTracker
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider
@@ -27,7 +26,6 @@ import org.eclipse.xtext.idea.build.IdeaOutputConfigurationProvider
 import org.eclipse.xtext.idea.common.types.StubTypeProviderFactory
 import org.eclipse.xtext.idea.filesystem.IdeaWorkspaceConfigProvider
 import org.eclipse.xtext.idea.highlighting.DefaultPairedBraceMatcher
-import org.eclipse.xtext.idea.highlighting.DefaultSyntaxHighlighter
 import org.eclipse.xtext.idea.parser.AntlrDelegatingIdeaLexer
 import org.eclipse.xtext.idea.refactoring.NullNamesValidator
 import org.eclipse.xtext.idea.resource.IdeaEncodingProvider
@@ -74,11 +72,6 @@ class DefaultIdeaModule extends AbstractGenericModule {
 		DefaultAntlrTokenToAttributeIdMapper
 	}
 	
-	@SingletonBinding
-	def Class<? extends SyntaxHighlighter> bindSyntaxHighlighter() {
-		DefaultSyntaxHighlighter
-	}
-
 	def void configureHighlightingTokenDefProvider(Binder binder) {
 		binder.bind(ITokenDefProvider).annotatedWith(Names.named(LexerIdeBindings.HIGHLIGHTING)).to(AntlrTokenDefProvider)
 	}

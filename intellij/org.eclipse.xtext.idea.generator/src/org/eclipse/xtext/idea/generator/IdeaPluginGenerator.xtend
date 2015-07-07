@@ -113,6 +113,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		bindFactory.addTypeToTypeSingleton('org.eclipse.xtext.idea.lang.IElementTypeProvider', grammar.elementTypeProviderName)
 		bindFactory.addTypeToType('org.eclipse.xtext.idea.facet.AbstractFacetConfiguration', grammar.facetConfiguration)
 		bindFactory.addTypeToInstance('com.intellij.facet.FacetTypeId', grammar.facetTypeName+'.TYPEID')
+		bindFactory.addTypeToType('com.intellij.openapi.fileTypes.SyntaxHighlighter', grammar.syntaxHighlighter)
 		
 		if (grammar.doesUseXbase) {
 			bindFactory.addTypeToType('org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider', 'org.eclipse.xtext.idea.common.types.StubBasedTypeScopeProvider')
@@ -148,6 +149,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		ctx.writeFile(outlet_src_gen, grammar.pomDeclarationSearcherName.toJavaPath, grammar.compilePomDeclarationSearcher)
 		ctx.writeFile(outlet_src_gen, grammar.facetTypeName.toJavaPath, grammar.compileFacetType)
 		ctx.writeFile(outlet_src, grammar.facetConfiguration.toJavaPath, grammar.compileFacetConfiguration)
+		ctx.writeFile(outlet_src_gen, grammar.syntaxHighlighter.toJavaPath, grammar.compileSyntaxHighlighter)
 		
 		var output = new OutputImpl();
 		output.addOutlet(PLUGIN, false, ideaProjectPath);
@@ -159,6 +161,8 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			output.writeFile(META_INF_PLUGIN_GEN, "plugin_gen.xml", grammar.compilePluginGenXml)
 		}
 	}
+	
+
 
 	
 	def CharSequence compileGuiceModuleIdeaGenerated(Grammar grammar, Set<Binding> bindings) '''
@@ -749,7 +753,8 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		
 			@Override
 		    public int getAntlrType(IElementType iElementType) {
-		        return ((IndexedElementType)iElementType).getLocalIndex();
+		        return (iElementType instanceof IndexedElementType) ? ((IndexedElementType) iElementType).getLocalIndex()
+		        				: org.antlr.runtime.Token.INVALID_TOKEN_TYPE;
 		    }
 		    
 		    @Override
@@ -970,5 +975,69 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	
 	}
 	'''
+	
+	def CharSequence compileSyntaxHighlighter(Grammar grammar) '''
+	«val colorsClass = if(grammar.doesUseXbase) 
+						'com.intellij.ide.highlighter.JavaHighlightingColors'
+				else  'com.intellij.openapi.editor.DefaultLanguageHighlighterColors'»
+	package «grammar.syntaxHighlighter.toPackageName»;
+	
+	import com.google.common.base.Objects;
+	import «colorsClass»;
+	import com.intellij.openapi.editor.HighlighterColors;
+	import com.intellij.openapi.editor.colors.TextAttributesKey;
+	import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
+	import org.eclipse.xtext.idea.highlighting.AbstractSyntaxHighlighter;
+	import «grammar.languageName»;
+	
+	public class «grammar.syntaxHighlighter.toSimpleName» extends AbstractSyntaxHighlighter {
+		public final static TextAttributesKey NUMBER = TextAttributesKey.createTextAttributesKey(
+				(«grammar.languageName.toSimpleName».INSTANCE.getID() + HighlightingStyles.NUMBER_ID), «colorsClass.toSimpleName».NUMBER);
+	
+		public final static TextAttributesKey KEYWORD = TextAttributesKey.createTextAttributesKey(
+				(«grammar.languageName.toSimpleName».INSTANCE.getID() + HighlightingStyles.KEYWORD_ID),
+				«colorsClass.toSimpleName».KEYWORD);
+	
+		public final static TextAttributesKey COMMENT = TextAttributesKey.createTextAttributesKey(
+				(«grammar.languageName.toSimpleName».INSTANCE.getID() + HighlightingStyles.COMMENT_ID),
+				«colorsClass.toSimpleName».LINE_COMMENT);
+	
+		public final static TextAttributesKey STRING = TextAttributesKey.createTextAttributesKey(
+				(«grammar.languageName.toSimpleName».INSTANCE.getID() + HighlightingStyles.STRING_ID), «colorsClass.toSimpleName».STRING);
+	
+		@Override
+		public TextAttributesKey createOrGetTextAttributesKey(final String attribute) {
+			TextAttributesKey _switchResult = null;
+			boolean _matched = false;
+			if (!_matched) {
+				if (Objects.equal(attribute, HighlightingStyles.NUMBER_ID)) {
+					_matched = true;
+					_switchResult = NUMBER;
+				}
+			}
+			if (!_matched) {
+				if (Objects.equal(attribute, HighlightingStyles.KEYWORD_ID)) {
+					_matched = true;
+					_switchResult = KEYWORD;
+				}
+			}
+			if (!_matched) {
+				if (Objects.equal(attribute, HighlightingStyles.STRING_ID)) {
+					_matched = true;
+					_switchResult = STRING;
+				}
+			}
+			if (!_matched) {
+				if (Objects.equal(attribute, HighlightingStyles.COMMENT_ID)) {
+					_matched = true;
+					_switchResult = COMMENT;
+				}
+			}
+			if (!_matched) {
+				_switchResult = HighlighterColors.TEXT;
+			}
+			return _switchResult;
+		}
+	}'''
 	
 }

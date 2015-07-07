@@ -39,6 +39,10 @@ public class AbstractSDomainIdeaModule extends org.eclipse.xtext.idea.DefaultIde
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.idea.sdomain.idea.facet.SDomainFacetType.TYPEID;
 	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends com.intellij.openapi.fileTypes.SyntaxHighlighter> bindSyntaxHighlighter() {
+		return org.eclipse.xtext.idea.sdomain.idea.highlighting.SDomainSyntaxHighlighter.class;
+	}
 	
 	
 }
