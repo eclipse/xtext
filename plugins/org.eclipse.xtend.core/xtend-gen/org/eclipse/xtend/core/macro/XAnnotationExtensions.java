@@ -120,6 +120,8 @@ public class XAnnotationExtensions {
           XtendAnnotationTarget _xifexpression = null;
           if ((containerContainer instanceof XtendAnnotationTarget)) {
             _xifexpression = ((XtendAnnotationTarget)containerContainer);
+          } else {
+            _xifexpression = ((XtendAnnotationTarget)container);
           }
           _xblockexpression = _xifexpression;
         }
