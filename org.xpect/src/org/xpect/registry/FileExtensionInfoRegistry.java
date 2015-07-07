@@ -259,7 +259,7 @@ public class FileExtensionInfoRegistry implements IEmfFileExtensionInfo.Registry
 		List<IEmfFileExtensionInfo> allInfos = Lists.newArrayList();
 		Multimap<String, FileExtensionData> name2xtextInfo = HashMultimap.create();
 		for (String ext : ext2info.keySet()) {
-			FileExtensionData merged = mergeByFileExt(ext, ext2info.get(ext));
+			FileExtensionData merged = mergeByFileExt(ext, ext2info.get(ext), issues);
 			if (merged.languageID == null)
 				allInfos.add(toEmfFileExtensionInfo(merged, issues));
 			else
@@ -312,7 +312,7 @@ public class FileExtensionInfoRegistry implements IEmfFileExtensionInfo.Registry
 		return o1;
 	}
 
-	private FileExtensionData mergeByFileExt(String fileExtension, Collection<ExtensionPointData> infos) {
+	private FileExtensionData mergeByFileExt(String fileExtension, Collection<ExtensionPointData> infos, Collection<String> issues) {
 		FileExtensionData result = new FileExtensionData();
 		result.fileExtension = fileExtension;
 		result.traces = Sets.newHashSet();
