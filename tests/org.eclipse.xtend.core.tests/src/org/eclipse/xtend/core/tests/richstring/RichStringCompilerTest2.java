@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.richstring;
 
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -22,4 +23,14 @@ public class RichStringCompilerTest2 extends RichStringCompilerTest {
 			"def org.eclipse.xtend2.lib.StringConcatenationClient getClient() {\n" + richString;
 		super.assertOutput(expectedOutput, completeCode);
 	}
+	
+	@Test public void testIndentedSCClient() throws Exception {
+		assertOutput("{\n\tfoo\n\tbar\n}",
+				"val org.eclipse.xtend2.lib.StringConcatenationClient scc = '''\n" +
+				"foo\n" +
+				"bar\n" +
+				"''';\n" +
+				"'''{\n\t«scc»\n}'''");
+	}
+	
 }
