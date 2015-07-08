@@ -43,7 +43,5 @@
     	<lang.importOptimizer language="org.eclipse.xtend.core.Xtend"
 							factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
 							implementationClass="org.eclipse.xtext.xbase.idea.imports.XImportSectionOptimizer"/>
-		<highlightVisitor 
-			implementation="org.eclipse.xtend.core.idea.highlighting.XtendHighlightVisitor"/>
 	</extensions>
 </idea-plugin>
