@@ -7,6 +7,8 @@
  */
 package org.eclipse.xtend.idea.autoedit;
 
+import com.intellij.ide.ClipboardSynchronizer;
+import com.intellij.openapi.actionSystem.IdeActions;
 import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Document;
@@ -15,6 +17,7 @@ import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiFile;
+import java.awt.datatransfer.StringSelection;
 import junit.framework.TestCase;
 import org.eclipse.xtext.idea.tests.LightToolingTest;
 import org.eclipse.xtext.junit4.internal.LineDelimiters;
@@ -24,7 +27,7 @@ import org.eclipse.xtext.junit4.internal.LineDelimiters;
  */
 @SuppressWarnings("all")
 public abstract class AbstractCStyleLanguageAutoEditTest extends LightToolingTest {
-  private final static String BS = "\b";
+  protected final static String BS = "\b";
   
   public AbstractCStyleLanguageAutoEditTest(final LanguageFileType fileType) {
     super(fileType);
@@ -190,9 +193,7 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends LightToolingTes
   
   public void testSingleQuotedStringLiteral_9() {
     this.configureByText("foo|{}");
-    Editor _editor = this.myFixture.getEditor();
-    SelectionModel _selectionModel = _editor.getSelectionModel();
-    _selectionModel.setSelection(0, 3);
+    this.selectText((-3), 3);
     this.myFixture.type("\'");
     this.assertState("\'|\'{}");
     this.myFixture.type(AbstractCStyleLanguageAutoEditTest.BS);
@@ -201,9 +202,7 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends LightToolingTes
   
   public void testSingleQuotedStringLiteral_10() {
     this.configureByText("foo|{}");
-    Editor _editor = this.myFixture.getEditor();
-    SelectionModel _selectionModel = _editor.getSelectionModel();
-    _selectionModel.setSelection(1, 3);
+    this.selectText((-2), 2);
     this.myFixture.type("\'");
     this.assertState("f\'|\'{}");
     this.myFixture.type(AbstractCStyleLanguageAutoEditTest.BS);
@@ -212,18 +211,14 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends LightToolingTes
   
   public void testSingleQuotedStringLiteral_11() {
     this.configureByText("|foo{}");
-    Editor _editor = this.myFixture.getEditor();
-    SelectionModel _selectionModel = _editor.getSelectionModel();
-    _selectionModel.setSelection(0, 2);
+    this.selectText(0, 2);
     this.myFixture.type("\'");
     this.assertState("\'|o{}");
   }
   
   public void testSingleQuotedStringLiteral_12() {
     this.configureByText("|foo{}");
-    Editor _editor = this.myFixture.getEditor();
-    SelectionModel _selectionModel = _editor.getSelectionModel();
-    _selectionModel.setSelection(0, 1);
+    this.selectText(0, 1);
     this.myFixture.type("\'");
     this.assertState("\'|oo{}");
   }
@@ -614,64 +609,33 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends LightToolingTes
   }
   
   public void testBug453205_01() {
-    this.configureByText((("/*|\n" + 
-      "* comment\n") + 
-      "*/"));
+    this.configureByText((("/*|\n" + "* comment\n") + "*/"));
     this.myFixture.type("\n");
-    this.assertState(((("/*\n" + 
-      " * |\n") + 
-      "* comment\n") + 
-      "*/"));
+    this.assertState(((("/*\n" + " * |\n") + "* comment\n") + "*/"));
   }
   
   public void testBug453205_02() {
-    this.configureByText((("/**********|\n" + 
-      " * \"Fancy\"\n") + 
-      "**********/"));
+    this.configureByText((("/**********|\n" + " * \"Fancy\"\n") + "**********/"));
     this.myFixture.type("\n");
-    this.assertState(((("/**********\n" + 
-      " * |\n") + 
-      " * \"Fancy\"\n") + 
-      "**********/"));
+    this.assertState(((("/**********\n" + " * |\n") + " * \"Fancy\"\n") + "**********/"));
   }
   
   public void testBug341093_01() {
-    this.configureByText(
-      ("/**/\n" + 
-        "//test|"));
+    this.configureByText(("/**/\n" + "//test|"));
     this.myFixture.type("\n");
-    this.assertState(
-      (("/**/\n" + 
-        "//test\n") + 
-        "|"));
+    this.assertState((("/**/\n" + "//test\n") + "|"));
   }
   
   public void testBug341093_02() {
-    this.configureByText(
-      (("/*\n" + 
-        " **/\n") + 
-        "//test|"));
+    this.configureByText((("/*\n" + " **/\n") + "//test|"));
     this.myFixture.type("\n");
-    this.assertState(
-      ((("/*\n" + 
-        " **/\n") + 
-        "//test\n") + 
-        "|"));
+    this.assertState(((("/*\n" + " **/\n") + "//test\n") + "|"));
   }
   
   public void testBug341093_03() {
-    this.configureByText(
-      ((("/***********\n" + 
-        " * text|\n") + 
-        "\n") + 
-        "***********/"));
+    this.configureByText(((("/***********\n" + " * text|\n") + "\n") + "***********/"));
     this.myFixture.type("\n");
-    this.assertState(
-      (((("/***********\n" + 
-        " * text\n") + 
-        " * |\n") + 
-        "\n") + 
-        "***********/"));
+    this.assertState((((("/***********\n" + " * text\n") + " * |\n") + "\n") + "***********/"));
   }
   
   public void testBug335634_01() {
@@ -767,6 +731,13 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends LightToolingTes
     Editor _editor_1 = this.myFixture.getEditor();
     SelectionModel _selectionModel = _editor_1.getSelectionModel();
     _selectionModel.setSelection(startOffset, endOffset);
+  }
+  
+  protected void pasteText(final String text) {
+    final StringSelection content = new StringSelection(text);
+    ClipboardSynchronizer _instance = ClipboardSynchronizer.getInstance();
+    _instance.setContent(content, content);
+    this.myFixture.performEditorAction(IdeActions.ACTION_EDITOR_PASTE);
   }
   
   @Override

@@ -17,6 +17,7 @@ import com.intellij.openapi.fileTypes.FileType
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.Ref
 import com.intellij.psi.PsiFile
+import com.google.inject.ImplementedBy
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -25,6 +26,7 @@ import com.intellij.psi.PsiFile
  * @see BackspaceHandlerDelegate
  * @see EnterHandlerDelegate
  */
+@ImplementedBy(DefaultAutoEditHandler)
 abstract class IdeaAutoEditHandler {
 
 	enum Result {

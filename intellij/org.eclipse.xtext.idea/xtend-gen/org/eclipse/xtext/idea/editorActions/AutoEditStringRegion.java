@@ -9,30 +9,21 @@ package org.eclipse.xtext.idea.editorActions;
 
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
-import org.eclipse.xtext.idea.editorActions.AbstractIndentableAutoEditBlock;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @Accessors
 @FinalFieldsConstructor
 @SuppressWarnings("all")
-public class AutoEditBlockRegion {
-  private final AbstractIndentableAutoEditBlock block;
-  
+public class AutoEditStringRegion {
   private final TextRegion openingTerminal;
   
   private final TextRegion closingTerminal;
   
-  public AutoEditBlockRegion(final AbstractIndentableAutoEditBlock block, final TextRegion openingTerminal, final TextRegion closingTerminal) {
+  public AutoEditStringRegion(final TextRegion openingTerminal, final TextRegion closingTerminal) {
     super();
-    this.block = block;
     this.openingTerminal = openingTerminal;
     this.closingTerminal = closingTerminal;
-  }
-  
-  @Pure
-  public AbstractIndentableAutoEditBlock getBlock() {
-    return this.block;
   }
   
   @Pure

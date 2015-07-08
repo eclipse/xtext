@@ -9,6 +9,7 @@ package org.eclipse.xtext.idea.build
 
 import com.intellij.compiler.CompilerMessageImpl
 import com.intellij.compiler.ProblemsView
+import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.compiler.CompileScope
 import com.intellij.openapi.compiler.CompilerMessage
 import com.intellij.openapi.compiler.CompilerMessageCategory
@@ -44,7 +45,7 @@ class BuildProgressReporter implements BuildRequest.IPostValidationCallback {
 	}
 
 	def void clearProgress() {
-		if (project.isDisposed)
+		if (unitTestMode || project.isDisposed)
 			return;
 		problemsView.clearProgress
 		problemsView.clearOldMessages(affectedScope, sessionId)
@@ -63,10 +64,15 @@ class BuildProgressReporter implements BuildRequest.IPostValidationCallback {
 	}
 
 	protected def reportIssue(URI validated, Issue issue) {
-		if (project.isDisposed)
+		if (unitTestMode || project.isDisposed)
 			return;
 		val compilerMessage = getCompilerMessage(validated, issue)
 		problemsView.addMessage(compilerMessage, sessionId)
+	}
+
+	protected def isUnitTestMode() {
+		val application = ApplicationManager.application
+		application == null || application.unitTestMode
 	}
 
 	protected def CompilerMessage getCompilerMessage(URI validated, Issue issue) {

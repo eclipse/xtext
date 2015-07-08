@@ -9,28 +9,44 @@ package org.eclipse.xtext.idea.editorActions
 
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-import org.eclipse.xtext.util.TextRegion
 
 /**
  * @author kosyakov - Initial contribution and API
  */
 @Accessors
 @FinalFieldsConstructor
-class AutoEditBlock {
+abstract class AbstractAutoEditBlock {
+
 	val String openingTerminal
-	val String indentationTerminal
 	val String closingTerminal
-	val boolean nested
 
-	new(String openingTerminal, String indentationTerminal, String closingTerminal) {
-		this(openingTerminal, indentationTerminal, closingTerminal, false)
+	def void open(char c, extension AutoEditContext context)
+
+	def boolean close(char c, extension AutoEditContext context)
+
+	boolean shouldDeleteClosing = false
+
+	def boolean delete(char c, extension AutoEditContext context) {
+		if (!shouldDeleteClosing)
+			return false
+
+		if (c != openingTerminal.charAt(0))
+			return false
+
+		val beginOffset = caretOffset
+		if (beginOffset < 0)
+			return false
+
+		val endOffset = beginOffset + closingTerminal.length
+		if (endOffset > document.textLength)
+			return false
+
+		val s = getText(beginOffset, endOffset)
+		if (s != closingTerminal)
+			return false
+
+		editor.document.deleteString(beginOffset, endOffset)
+		return true
 	}
-}
 
-@Accessors
-@FinalFieldsConstructor
-class AutoEditBlockRegion {
-	val AutoEditBlock block
-	val TextRegion openingTerminal
-	val TextRegion closingTerminal
 }
