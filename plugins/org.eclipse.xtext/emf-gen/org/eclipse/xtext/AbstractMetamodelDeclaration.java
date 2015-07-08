@@ -16,11 +16,11 @@ import org.eclipse.emf.ecore.EPackage;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.AbstractMetamodelDeclaration#getEPackage <em>EPackage</em>}</li>
  *   <li>{@link org.eclipse.xtext.AbstractMetamodelDeclaration#getAlias <em>Alias</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.XtextPackage#getAbstractMetamodelDeclaration()
  * @model

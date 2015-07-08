@@ -24,10 +24,10 @@ import org.eclipse.xtext.XtextPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.impl.AbstractNegatedTokenImpl#getTerminal <em>Terminal</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

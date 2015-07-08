@@ -19,10 +19,10 @@ import org.eclipse.xtext.XtextPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.impl.TerminalRuleImpl#isFragment <em>Fragment</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

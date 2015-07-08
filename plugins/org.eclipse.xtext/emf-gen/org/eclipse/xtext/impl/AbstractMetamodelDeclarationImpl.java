@@ -24,11 +24,11 @@ import org.eclipse.xtext.XtextPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.impl.AbstractMetamodelDeclarationImpl#getEPackage <em>EPackage</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.AbstractMetamodelDeclarationImpl#getAlias <em>Alias</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

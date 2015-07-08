@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.Grammar#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.Grammar#getUsedGrammars <em>Used Grammars</em>}</li>
@@ -25,7 +26,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.Grammar#getMetamodelDeclarations <em>Metamodel Declarations</em>}</li>
  *   <li>{@link org.eclipse.xtext.Grammar#getRules <em>Rules</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.XtextPackage#getGrammar()
  * @model

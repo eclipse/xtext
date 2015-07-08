@@ -1,11 +1,11 @@
 package org.eclipse.xtext.idea.highlighting;
 
-import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
-import org.eclipse.xtext.idea.lang.XtextLanguage;
-
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.HighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
+import org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration;
+import org.eclipse.xtext.idea.lang.XtextLanguage;
 
 public class XtextHighlightingConfiguration implements IHighlightingConfiguration {
 	public final static TextAttributesKey NUMBER = TextAttributesKey.createTextAttributesKey(

@@ -2782,7 +2782,8 @@ protected class AbstractToken_ActionParserRuleCall_1 extends RuleCallToken {
 
 /************ begin Rule AbstractTokenWithCardinality ****************
  *
- * AbstractTokenWithCardinality returns AbstractElement:
+ * / * SuppressWarnings[potentialOverride]: Handled in CardinalityAwareEcoreFactory * / AbstractTokenWithCardinality returns
+ * AbstractElement:
  * 	(Assignment | AbstractTerminal) cardinality=("?" | "*" | "+")?;
  *
  **/
@@ -6257,7 +6258,8 @@ protected class TerminalGroup_ElementsAssignment_1_1 extends AssignmentToken  {
 
 /************ begin Rule TerminalToken ****************
  *
- * TerminalToken returns AbstractElement:
+ * / * SuppressWarnings[potentialOverride]: Handled in CardinalityAwareEcoreFactory * / TerminalToken returns
+ * AbstractElement:
  * 	TerminalTokenElement cardinality=("?" | "*" | "+")?;
  *
  **/

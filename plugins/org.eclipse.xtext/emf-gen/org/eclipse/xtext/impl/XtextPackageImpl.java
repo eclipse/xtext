@@ -531,9 +531,9 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @since 2.6
 	 * <!-- end-user-doc -->
 	 * @generated
-	 * @since 2.6
 	 */
 	public EAttribute getAbstractElement_FirstSetPredicated() {
 		return (EAttribute)abstractElementEClass.getEStructuralFeatures().get(2);

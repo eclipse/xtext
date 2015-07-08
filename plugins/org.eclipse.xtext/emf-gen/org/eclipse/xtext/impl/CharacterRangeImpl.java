@@ -24,11 +24,11 @@ import org.eclipse.xtext.XtextPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.impl.CharacterRangeImpl#getLeft <em>Left</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.CharacterRangeImpl#getRight <em>Right</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

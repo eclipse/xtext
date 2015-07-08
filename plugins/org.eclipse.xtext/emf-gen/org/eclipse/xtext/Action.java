@@ -14,12 +14,12 @@ package org.eclipse.xtext;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.Action#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.Action#getFeature <em>Feature</em>}</li>
  *   <li>{@link org.eclipse.xtext.Action#getOperator <em>Operator</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.XtextPackage#getAction()
  * @model

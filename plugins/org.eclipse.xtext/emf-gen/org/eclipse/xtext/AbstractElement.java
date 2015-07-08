@@ -15,12 +15,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.AbstractElement#getCardinality <em>Cardinality</em>}</li>
  *   <li>{@link org.eclipse.xtext.AbstractElement#isPredicated <em>Predicated</em>}</li>
  *   <li>{@link org.eclipse.xtext.AbstractElement#isFirstSetPredicated <em>First Set Predicated</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.XtextPackage#getAbstractElement()
  * @model
@@ -86,24 +86,24 @@ public interface AbstractElement extends EObject {
 	 * If the meaning of the '<em>First Set Predicated</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
+	 * @since 2.6
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>First Set Predicated</em>' attribute.
 	 * @see #setFirstSetPredicated(boolean)
 	 * @see org.eclipse.xtext.XtextPackage#getAbstractElement_FirstSetPredicated()
 	 * @model
 	 * @generated
-	 * @since 2.6
 	 */
 	boolean isFirstSetPredicated();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.xtext.AbstractElement#isFirstSetPredicated <em>First Set Predicated</em>}' attribute.
 	 * <!-- begin-user-doc -->
+	 * @since 2.6
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>First Set Predicated</em>' attribute.
 	 * @see #isFirstSetPredicated()
 	 * @generated
-	 * @since 2.6
 	 */
 	void setFirstSetPredicated(boolean value);
 
