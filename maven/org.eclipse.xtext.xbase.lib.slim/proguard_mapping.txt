@@ -1274,9 +1274,11 @@ org.eclipse.xtend2.lib.StringConcatenation -> org.eclipse.xtend2.lib.StringConca
     62:62:java.util.ArrayList access$0(org.eclipse.xtend2.lib.StringConcatenation) -> access$0
 org.eclipse.xtend2.lib.StringConcatenation$IndentedTarget -> org.eclipse.xtend2.lib.StringConcatenation$IndentedTarget:
     java.lang.String indentation -> indentation
-    554:555:void appendImmediate(java.lang.Object,java.lang.String) -> appendImmediate
-    559:560:void append(java.lang.Object,java.lang.String) -> append
-    564:565:void append(java.lang.Object) -> append
+    554:556:void newLineIfNotEmpty() -> newLineIfNotEmpty
+    560:562:void newLine() -> newLine
+    566:567:void appendImmediate(java.lang.Object,java.lang.String) -> appendImmediate
+    571:572:void append(java.lang.Object,java.lang.String) -> append
+    576:577:void append(java.lang.Object) -> append
 org.eclipse.xtend2.lib.StringConcatenation$SimpleTarget -> org.eclipse.xtend2.lib.StringConcatenation$SimpleTarget:
     org.eclipse.xtend2.lib.StringConcatenation target -> target
     int offsetFixup -> offsetFixup
