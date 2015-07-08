@@ -79,16 +79,16 @@ public class DefaultIdeaModule extends AbstractGenericModule {
     return DefaultAntlrTokenToAttributeIdMapper.class;
   }
   
-  @SingletonBinding
-  public Class<? extends SyntaxHighlighter> bindSyntaxHighlighter() {
-    return DefaultSyntaxHighlighter.class;
-  }
-  
   public void configureHighlightingTokenDefProvider(final Binder binder) {
     AnnotatedBindingBuilder<ITokenDefProvider> _bind = binder.<ITokenDefProvider>bind(ITokenDefProvider.class);
     Named _named = Names.named(LexerIdeBindings.HIGHLIGHTING);
     LinkedBindingBuilder<ITokenDefProvider> _annotatedWith = _bind.annotatedWith(_named);
     _annotatedWith.to(AntlrTokenDefProvider.class);
+  }
+  
+  @SingletonBinding
+  public Class<? extends SyntaxHighlighter> bindSyntaxHighlighter() {
+    return DefaultSyntaxHighlighter.class;
   }
   
   @SingletonBinding

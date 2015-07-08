@@ -48,5 +48,6 @@
       							factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
       							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
 		<facetType implementation="org.eclipse.xtext.idea.example.entities.idea.facet.EntitiesFacetType"/>
+		<colorSettingsPage implementation="org.eclipse.xtext.idea.example.entities.idea.highlighting.EntitiesColorSettingsPage"/>
 	</extensions>
 </idea-plugin>

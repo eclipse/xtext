@@ -40,6 +40,10 @@ public class AbstractPureXbaseIdeaModule extends org.eclipse.xtext.idea.DefaultI
 		return org.eclipse.xtext.purexbase.idea.facet.PureXbaseFacetType.TYPEID;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return org.eclipse.xtext.purexbase.idea.highlighting.PureXbaseHighlightingConfiguration.class;
+	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
 	public Class<? extends org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider> bindAbstractTypeScopeProvider() {
 		return org.eclipse.xtext.idea.common.types.StubBasedTypeScopeProvider.class;
 	}

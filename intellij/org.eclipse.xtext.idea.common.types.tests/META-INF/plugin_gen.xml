@@ -48,5 +48,6 @@
       							factoryClass="org.eclipse.xtext.idea.common.types.idea.RefactoringTestLanguageExtensionFactory"
       							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
 		<facetType implementation="org.eclipse.xtext.idea.common.types.idea.facet.RefactoringTestLanguageFacetType"/>
+		<colorSettingsPage implementation="org.eclipse.xtext.idea.common.types.idea.highlighting.RefactoringTestLanguageColorSettingsPage"/>
 	</extensions>
 </idea-plugin>

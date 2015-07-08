@@ -48,5 +48,6 @@
       							factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"
       							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
 		<facetType implementation="org.eclipse.xtext.idea.sdomain.idea.facet.SDomainFacetType"/>
+		<colorSettingsPage implementation="org.eclipse.xtext.idea.sdomain.idea.highlighting.SDomainColorSettingsPage"/>
 	</extensions>
 </idea-plugin>

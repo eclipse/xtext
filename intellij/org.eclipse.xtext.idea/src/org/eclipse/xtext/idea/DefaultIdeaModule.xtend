@@ -74,13 +74,13 @@ class DefaultIdeaModule extends AbstractGenericModule {
 		DefaultAntlrTokenToAttributeIdMapper
 	}
 	
+	def void configureHighlightingTokenDefProvider(Binder binder) {
+		binder.bind(ITokenDefProvider).annotatedWith(Names.named(LexerIdeBindings.HIGHLIGHTING)).to(AntlrTokenDefProvider)
+	}
+	
 	@SingletonBinding
 	def Class<? extends SyntaxHighlighter> bindSyntaxHighlighter() {
 		DefaultSyntaxHighlighter
-	}
-
-	def void configureHighlightingTokenDefProvider(Binder binder) {
-		binder.bind(ITokenDefProvider).annotatedWith(Names.named(LexerIdeBindings.HIGHLIGHTING)).to(AntlrTokenDefProvider)
 	}
 	
 	@SingletonBinding
