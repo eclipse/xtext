@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server.model
 
-import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.Set
 import org.eclipse.xtext.util.CancelIndicator
@@ -32,10 +31,6 @@ class PreComputedServiceRegistry {
 }
 
 abstract class AbstractPreComputedService<T extends IServiceResult> {
-	
-	@Inject def register(PreComputedServiceRegistry preComputedServiceRegistry) {
-		preComputedServiceRegistry.addPreComputedService(this)
-	}
 	
 	def T getResult(XtextWebDocumentAccess it) {
 		getCachedResult(this, true)

@@ -10,6 +10,7 @@ package org.eclipse.xtext.web.server.model;
 import java.util.concurrent.RejectedExecutionException;
 
 import org.apache.log4j.Logger;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
@@ -86,15 +87,10 @@ public class XtextWebDocumentAccess {
 	/**
 	 * Execute the given work unit with read-only access and return its result.
 	 * The work unit is handled with higher priority, i.e. currently running
-	 * work units are canceled if they support cancelation. The second work unit
-	 * {@code asynchronousWork} is executed in a separate thread after the first
-	 * one has finished. It can be used for background work that should be
-	 * applied to the document, but is not relevant for the current service
-	 * request.
+	 * work units are canceled if they support cancelation. 
 	 */
-	public <T> T priorityReadOnly(CancelableUnitOfWork<T, IXtextWebDocument> work,
-			CancelableUnitOfWork<T, IXtextWebDocument> asynchronousWork) {
-		return doAccess(work, true, false, asynchronousWork);
+	public <T> T priorityReadOnly(CancelableUnitOfWork<T, IXtextWebDocument> work) {
+		return doAccess(work, true, false, null);
 	}
 
 	/**
@@ -143,35 +139,34 @@ public class XtextWebDocumentAccess {
 				synchronizer.releaseLock();
 			} else {
 				requiredStateId = document.getStateId();
-				if (asynchronousWork != null) {
+				if (asynchronousWork != null) 
 					asynchronousWork.setCancelIndicator(synchronizer);
-					final IXtextWebDocument asyncAccess = documentAccess;
-					try {
-						synchronizer.getExecutorService().submit(new Runnable() {
-							@Override
-							public void run() {
-								try {
+				final IXtextWebDocument asyncAccess = documentAccess;
+				try {
+					synchronizer.getExecutorService().submit(new Runnable() {
+						@Override
+						public void run() {
+							try {
+								if (asynchronousWork != null) 
 									asynchronousWork.exec(asyncAccess);
-								} catch (VirtualMachineError error) {
-									throw error;
-								} catch (Throwable throwable) {
-									if (!synchronizer.getOperationCanceledManager()
-											.isOperationCanceledException(throwable)) {
-										LOG.error("Error during asynchronous service processing.", throwable);
-									} else {
-										LOG.trace("Canceling background process.");
-									}
-								} finally {
-									synchronizer.releaseLock();
+								EcoreUtil2.resolveLazyCrossReferences(asyncAccess.getResource(), synchronizer);
+							} catch (VirtualMachineError error) {
+								throw error;
+							} catch (Throwable throwable) {
+								if (!synchronizer.getOperationCanceledManager()
+										.isOperationCanceledException(throwable)) {
+									LOG.error("Error during asynchronous service processing.", throwable);
+								} else {
+									LOG.trace("Canceling background process.");
 								}
+							} finally {
+								synchronizer.releaseLock();
 							}
-						});
-					} catch (RejectedExecutionException ree) {
-						synchronizer.releaseLock();
-						LOG.error("Failed to start background work.", ree);
-					}
-				} else {
+						}
+					});
+				} catch (RejectedExecutionException ree) {
 					synchronizer.releaseLock();
+					LOG.error("Failed to start background work.", ree);
 				}
 				if (!synchronizer.isCanceled() && !Thread.currentThread().isInterrupted()) {
 					synchronizer.getExecutorService2().submit(new Runnable() {

@@ -65,7 +65,7 @@ Combination1:
 Combination2:
 	"#14" val1=ID (("kw1" val2=ID) | (val3+=ID val4+=ID)*);
 	
-/* SuppressWarnings[potentialOverride] */
+/* SuppressWarnings[noInstantiation, potentialOverride] */
 Combination3:
 	"#15" (val1=ID | val2=INT | val3=STRING)*;
 	
@@ -108,7 +108,7 @@ TransientSerializeables1:
 enum TransientSerializeables1Enum:
 	lit1 | lit2;
 	
-/* SuppressWarnings[potentialOverride] */
+/* SuppressWarnings[noInstantiation, potentialOverride] */
 StaticSimplification:
 	"#26" ("kw1"|{EmptyAlternativeSub}|val1=ID) ("kw2"|val2=ID) ("kw3" ("kw4" (val3=ID)+)?);
 	

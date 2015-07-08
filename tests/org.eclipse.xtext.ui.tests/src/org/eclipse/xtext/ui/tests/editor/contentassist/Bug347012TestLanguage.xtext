@@ -63,14 +63,18 @@ terminal STRING:
 terminal NUMBER returns ecore::EDouble:
 	digit+ ('.' digit+)? | '.' digit+;
 
+/* SuppressWarnings[InvalidTerminalRuleName] */
 terminal fragment digit:
 	'0'..'9';
 
+/* SuppressWarnings[InvalidTerminalRuleName] */
 terminal fragment hex:
 	digit | 'A'..'F' | 'a'..'f';
 
+/* SuppressWarnings[InvalidTerminalRuleName] */
 terminal fragment escape:
 	('b' | 't' | 'n' | 'f' | 'v' | 'r' | '"' | "'" | '\\' | 'u' hex hex hex hex);
 
+/* SuppressWarnings[InvalidTerminalRuleName] */
 terminal fragment idPlainChar:
 	'$' | 'A'..'Z' | '_' | 'a'..'z';

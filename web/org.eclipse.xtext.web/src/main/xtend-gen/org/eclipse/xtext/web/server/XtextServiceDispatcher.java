@@ -41,6 +41,7 @@ import org.eclipse.xtext.web.server.generator.GeneratorService;
 import org.eclipse.xtext.web.server.hover.HoverService;
 import org.eclipse.xtext.web.server.model.DocumentStateResult;
 import org.eclipse.xtext.web.server.model.IWebResourceSetProvider;
+import org.eclipse.xtext.web.server.model.PreComputedServiceRegistry;
 import org.eclipse.xtext.web.server.model.UpdateDocumentService;
 import org.eclipse.xtext.web.server.model.XtextWebDocument;
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess;
@@ -219,6 +220,16 @@ public class XtextServiceDispatcher {
   
   @Inject
   private XtextWebDocumentAccess.Factory documentAccessFactory;
+  
+  @Inject
+  public boolean registerPreComputedServices(final PreComputedServiceRegistry registry) {
+    boolean _xblockexpression = false;
+    {
+      registry.addPreComputedService(this.highlightingService);
+      _xblockexpression = registry.addPreComputedService(this.validationService);
+    }
+    return _xblockexpression;
+  }
   
   /**
    * Get the service descriptor for the given request.

@@ -82,7 +82,7 @@ public class ContentAssistService {
         return _xblockexpression;
       }
     };
-    final ContentAssistContext[] contexts = document.<ContentAssistContext[]>priorityReadOnly(_function_1, null);
+    final ContentAssistContext[] contexts = document.<ContentAssistContext[]>priorityReadOnly(_function_1);
     String _get_1 = stateIdWrapper[0];
     return this.createProposals(((List<ContentAssistContext>)Conversions.doWrapArray(contexts)), _get_1, proposalsLimit);
   }

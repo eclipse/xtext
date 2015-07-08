@@ -550,8 +550,20 @@ public class StringConcatenation implements CharSequence {
 		}
 		
 		@Override
+		public void newLineIfNotEmpty() {
+			super.newLineIfNotEmpty();
+			super.append(indentation);
+		}
+		
+		@Override
+		public void newLine() {
+			super.newLine();
+			super.append(indentation);
+		}
+		
+		@Override
 		public void appendImmediate(Object object, String indentation) {
-			super.appendImmediate(object, indentation + indentation);
+			super.appendImmediate(object, this.indentation + indentation);
 		}
 		
 		@Override
