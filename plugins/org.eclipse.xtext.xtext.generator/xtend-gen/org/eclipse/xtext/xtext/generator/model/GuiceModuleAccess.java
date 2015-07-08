@@ -429,7 +429,7 @@ public class GuiceModuleAccess {
   private final Set<GuiceModuleAccess.Binding> bindings = CollectionLiterals.<GuiceModuleAccess.Binding>newLinkedHashSet();
   
   @Accessors
-  private String superClassName;
+  private TypeReference superClass;
   
   public void add(final GuiceModuleAccess.Binding newBinding) {
     boolean _contains = this.bindings.contains(newBinding);
@@ -473,11 +473,11 @@ public class GuiceModuleAccess {
   private final static Logger LOG = Logger.getLogger(GuiceModuleAccess.class);
   
   @Pure
-  public String getSuperClassName() {
-    return this.superClassName;
+  public TypeReference getSuperClass() {
+    return this.superClass;
   }
   
-  public void setSuperClassName(final String superClassName) {
-    this.superClassName = superClassName;
+  public void setSuperClass(final TypeReference superClass) {
+    this.superClass = superClass;
   }
 }

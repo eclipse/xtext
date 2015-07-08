@@ -116,6 +116,22 @@ public class TypeReference {
     return "";
   }
   
+  public String getPath() {
+    final String packageName = this.getPackage();
+    int _length = packageName.length();
+    int _plus = (_length + 1);
+    String className = this.name.substring(_plus);
+    final int outerClassEnd = className.indexOf(".");
+    if ((outerClassEnd >= 0)) {
+      String _substring = className.substring(0, outerClassEnd);
+      className = _substring;
+    }
+    String _replace = packageName.replace(".", "/");
+    String _plus_1 = (_replace + "/");
+    String _plus_2 = (_plus_1 + className);
+    return (_plus_2 + ".java");
+  }
+  
   private boolean matches(final char c1, final char c2) {
     return (c1 == c2);
   }

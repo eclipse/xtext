@@ -681,20 +681,18 @@ public class XtextGeneratorTemplates {
   
   public JavaFileAccess createRuntimeGenModule(final LanguageConfig2 langConfig) {
     final XtextGeneratorNaming it = langConfig.getNaming();
-    TypeReference _xifexpression = null;
+    TypeReference _elvis = null;
     GuiceModuleAccess _runtimeGenModule = langConfig.getRuntimeGenModule();
-    String _superClassName = _runtimeGenModule.getSuperClassName();
-    boolean _tripleNotEquals = (_superClassName != null);
-    if (_tripleNotEquals) {
-      GuiceModuleAccess _runtimeGenModule_1 = langConfig.getRuntimeGenModule();
-      String _superClassName_1 = _runtimeGenModule_1.getSuperClassName();
-      _xifexpression = new TypeReference(_superClassName_1);
+    TypeReference _superClass = _runtimeGenModule.getSuperClass();
+    if (_superClass != null) {
+      _elvis = _superClass;
     } else {
-      _xifexpression = it.getRuntimeDefaultModule();
+      TypeReference _runtimeDefaultModule = it.getRuntimeDefaultModule();
+      _elvis = _runtimeDefaultModule;
     }
-    final TypeReference superClass = _xifexpression;
-    TypeReference _runtimeGenModule_2 = it.getRuntimeGenModule();
-    final JavaFileAccess javaFile = new JavaFileAccess(_runtimeGenModule_2, this.codeConfig);
+    final TypeReference superClass = _elvis;
+    TypeReference _runtimeGenModule_1 = it.getRuntimeGenModule();
+    final JavaFileAccess javaFile = new JavaFileAccess(_runtimeGenModule_1, this.codeConfig);
     javaFile.setEncodingProvider(this.encodingProvider);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
@@ -874,20 +872,18 @@ public class XtextGeneratorTemplates {
   
   public JavaFileAccess createEclipsePluginGenModule(final LanguageConfig2 langConfig) {
     final XtextGeneratorNaming it = langConfig.getNaming();
-    TypeReference _xifexpression = null;
+    TypeReference _elvis = null;
     GuiceModuleAccess _eclipsePluginGenModule = langConfig.getEclipsePluginGenModule();
-    String _superClassName = _eclipsePluginGenModule.getSuperClassName();
-    boolean _tripleNotEquals = (_superClassName != null);
-    if (_tripleNotEquals) {
-      GuiceModuleAccess _eclipsePluginGenModule_1 = langConfig.getEclipsePluginGenModule();
-      String _superClassName_1 = _eclipsePluginGenModule_1.getSuperClassName();
-      _xifexpression = new TypeReference(_superClassName_1);
+    TypeReference _superClass = _eclipsePluginGenModule.getSuperClass();
+    if (_superClass != null) {
+      _elvis = _superClass;
     } else {
-      _xifexpression = it.getEclipsePluginDefaultModule();
+      TypeReference _eclipsePluginDefaultModule = it.getEclipsePluginDefaultModule();
+      _elvis = _eclipsePluginDefaultModule;
     }
-    final TypeReference superClass = _xifexpression;
-    TypeReference _eclipsePluginGenModule_2 = it.getEclipsePluginGenModule();
-    final JavaFileAccess javaFile = new JavaFileAccess(_eclipsePluginGenModule_2, this.codeConfig);
+    final TypeReference superClass = _elvis;
+    TypeReference _eclipsePluginGenModule_1 = it.getEclipsePluginGenModule();
+    final JavaFileAccess javaFile = new JavaFileAccess(_eclipsePluginGenModule_1, this.codeConfig);
     javaFile.setEncodingProvider(this.encodingProvider);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
@@ -1222,6 +1218,7 @@ public class XtextGeneratorTemplates {
         _builder.append(_simpleName_1, "\t");
         _builder.append(".class);");
         _builder.newLineIfNotEmpty();
+        _builder.append("\t");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("private static ");
@@ -1229,6 +1226,7 @@ public class XtextGeneratorTemplates {
         _builder.append(_simpleName_2, "\t");
         _builder.append(" INSTANCE;");
         _builder.newLineIfNotEmpty();
+        _builder.append("\t");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("private ");
@@ -1243,6 +1241,7 @@ public class XtextGeneratorTemplates {
         _builder.append(Injector.class, "\t");
         _builder.append("> newHashMapWithExpectedSize(1));");
         _builder.newLineIfNotEmpty();
+        _builder.append("\t");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("@Override");
@@ -1262,6 +1261,7 @@ public class XtextGeneratorTemplates {
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
+        _builder.append("\t");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("@Override");
@@ -1284,6 +1284,7 @@ public class XtextGeneratorTemplates {
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
+        _builder.append("\t");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("public static ");
@@ -1297,6 +1298,7 @@ public class XtextGeneratorTemplates {
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
+        _builder.append("\t");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("public ");
@@ -1328,6 +1330,7 @@ public class XtextGeneratorTemplates {
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
+        _builder.append("\t");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("protected ");
@@ -1378,6 +1381,7 @@ public class XtextGeneratorTemplates {
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
+        _builder.append("\t");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("protected Module getRuntimeModule(String grammar) {");
@@ -1412,6 +1416,7 @@ public class XtextGeneratorTemplates {
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
+        _builder.append("\t");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("protected ");
@@ -1448,6 +1453,7 @@ public class XtextGeneratorTemplates {
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
+        _builder.append("\t");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("protected ");
@@ -1463,6 +1469,7 @@ public class XtextGeneratorTemplates {
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
+        _builder.append("\t");
         _builder.newLine();
         _builder.append("}");
         _builder.newLine();

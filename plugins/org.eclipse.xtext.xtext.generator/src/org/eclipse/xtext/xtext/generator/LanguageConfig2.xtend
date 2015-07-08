@@ -55,8 +55,8 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 {
 	@Accessors(PUBLIC_GETTER)
 	List<String> fileExtensions
 	
-	@Accessors(PUBLIC_SETTER)
-	ResourceSet forcedResourceSet
+	@Accessors
+	ResourceSet resourceSet
 	
 	@Accessors
 	XtextGeneratorNaming naming
@@ -102,7 +102,8 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 {
 	override initialize(Injector injector) {
 		super.initialize(injector)
 		
-		val rs = forcedResourceSet ?: resourceSetProvider.get()
+		if (resourceSet === null)
+			resourceSet = resourceSetProvider.get()
 		for (String loadedResource : loadedResources) {
 			val loadedResourceUri = URI.createURI(loadedResource)
 			switch (loadedResourceUri.fileExtension) {
@@ -142,28 +143,28 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 {
 					}
 					val xcoreLangURI = URI.createPlatformResourceURI('/org.eclipse.emf.ecore.xcore.lib/model/XcoreLang.xcore', true)
 					try {
-						rs.getResource(xcoreLangURI, true)
+						resourceSet.getResource(xcoreLangURI, true)
 					} catch (WrappedException e) {
 						LOG.error("Could not load XcoreLang.xcore.", e)
-						val brokenResource = rs.getResource(xcoreLangURI, false)
-						rs.resources.remove(brokenResource)
+						val brokenResource = resourceSet.getResource(xcoreLangURI, false)
+						resourceSet.resources.remove(brokenResource)
 					}
 				}
 			}
-			rs.getResource(loadedResourceUri, true)
+			resourceSet.getResource(loadedResourceUri, true)
 		}
-		if (!rs.resources.isEmpty) {
-			installIndex(rs)
-			for (var i = 0, var size = rs.resources.size; i < size; i++) {
-				val res = rs.resources.get(i)
+		if (!resourceSet.resources.isEmpty) {
+			installIndex()
+			for (var i = 0, var size = resourceSet.resources.size; i < size; i++) {
+				val res = resourceSet.resources.get(i)
 				if (res.getContents().isEmpty())
 					LOG.error("Error loading '" + res.getURI() + "'")
 				else if (!res.getErrors().isEmpty())
 					LOG.error("Error loading '" + res.getURI() + "':\n" + Joiner.on('\n').join(res.getErrors()))	
 			}
-			EcoreUtil.resolveAll(rs)
+			EcoreUtil.resolveAll(resourceSet)
 		}
-		val resource = rs.getResource(URI.createURI(uri), true) as XtextResource
+		val resource = resourceSet.getResource(URI.createURI(uri), true) as XtextResource
 		if (resource.contents.isEmpty) {
 			throw new IllegalArgumentException("Couldn't load grammar for '" + uri + "'.")
 		}
@@ -182,7 +183,7 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 {
 		naming.grammar = grammar
 	}
 	
-	private def void installIndex(ResourceSet resourceSet) {
+	private def void installIndex() {
 		val index = new ResourceDescriptionsData(Collections.emptyList)
 		val resources = Lists.newArrayList(resourceSet.resources)
 		for (resource : resources) {

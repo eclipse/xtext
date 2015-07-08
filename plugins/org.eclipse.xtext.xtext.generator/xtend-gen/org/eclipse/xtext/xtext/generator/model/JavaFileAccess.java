@@ -85,40 +85,47 @@ public class JavaFileAccess extends TextFileAccess {
     String _plus = ((this.packageName + ".") + _simpleName);
     boolean _notEquals = (!Objects.equal(_name, _plus));
     if (_notEquals) {
-      throw new IllegalArgumentException("Nested types cannot be serialized.");
+      throw new IllegalArgumentException(("Nested type cannot be serialized: " + typeRef));
     }
-    String _replace = this.packageName.replace(".", "/");
-    String _plus_1 = (_replace + "/");
-    String _simpleName_1 = typeRef.getSimpleName();
-    String _plus_2 = (_plus_1 + _simpleName_1);
-    String _plus_3 = (_plus_2 + ".java");
-    this.setPath(_plus_3);
+    String _path = typeRef.getPath();
+    this.setPath(_path);
     this.codeConfig = codeConfig;
   }
   
   public String importType(final TypeReference typeRef) {
     String name = typeRef.getSimpleName();
+    String packageName = typeRef.getPackage();
+    final boolean isJavaDefaultType = CodeGenUtil.isJavaDefaultType(name);
     boolean _and = false;
-    boolean _isJavaDefaultType = CodeGenUtil.isJavaDefaultType(name);
-    boolean _not = (!_isJavaDefaultType);
-    if (!_not) {
+    if (!isJavaDefaultType) {
       _and = false;
     } else {
-      String _package = typeRef.getPackage();
-      boolean _notEquals = (!Objects.equal(this.packageName, _package));
+      boolean _notEquals = (!Objects.equal(packageName, "java.lang"));
       _and = _notEquals;
     }
     if (_and) {
-      final TypeReference imported = this.imports.get(name);
-      if ((imported == null)) {
-        this.imports.put(name, typeRef);
+      String _name = typeRef.getName();
+      name = _name;
+    } else {
+      boolean _and_1 = false;
+      if (!(!isJavaDefaultType)) {
+        _and_1 = false;
       } else {
-        String _name = imported.getName();
-        String _name_1 = typeRef.getName();
-        boolean _notEquals_1 = (!Objects.equal(_name, _name_1));
-        if (_notEquals_1) {
+        boolean _notEquals_1 = (!Objects.equal(this.packageName, packageName));
+        _and_1 = _notEquals_1;
+      }
+      if (_and_1) {
+        final TypeReference imported = this.imports.get(name);
+        if ((imported == null)) {
+          this.imports.put(name, typeRef);
+        } else {
+          String _name_1 = imported.getName();
           String _name_2 = typeRef.getName();
-          name = _name_2;
+          boolean _notEquals_2 = (!Objects.equal(_name_1, _name_2));
+          if (_notEquals_2) {
+            String _name_3 = typeRef.getName();
+            name = _name_3;
+          }
         }
       }
     }

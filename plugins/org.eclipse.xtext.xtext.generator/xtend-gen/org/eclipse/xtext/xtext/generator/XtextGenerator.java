@@ -183,34 +183,62 @@ public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuice
   }
   
   protected void generateRuntimeSetup(final LanguageConfig2 language) {
-    JavaFileAccess _createRuntimeSetup = this.templates.createRuntimeSetup(language);
-    IFileSystemAccess2 _runtimeSrc = this.projectConfig.getRuntimeSrc();
-    _createRuntimeSetup.writeTo(_runtimeSrc);
     JavaFileAccess _createRuntimeGenSetup = this.templates.createRuntimeGenSetup(language);
     IFileSystemAccess2 _runtimeSrcGen = this.projectConfig.getRuntimeSrcGen();
     _createRuntimeGenSetup.writeTo(_runtimeSrcGen);
+    IFileSystemAccess2 _runtimeSrc = this.projectConfig.getRuntimeSrc();
+    XtextGeneratorNaming _naming = language.getNaming();
+    TypeReference _runtimeSetup = _naming.getRuntimeSetup();
+    String _path = _runtimeSetup.getPath();
+    boolean _isFile = _runtimeSrc.isFile(_path);
+    boolean _not = (!_isFile);
+    if (_not) {
+      JavaFileAccess _createRuntimeSetup = this.templates.createRuntimeSetup(language);
+      IFileSystemAccess2 _runtimeSrc_1 = this.projectConfig.getRuntimeSrc();
+      _createRuntimeSetup.writeTo(_runtimeSrc_1);
+    }
   }
   
   protected void generateModules(final LanguageConfig2 language) {
-    JavaFileAccess _createRuntimeModule = this.templates.createRuntimeModule(language);
-    IFileSystemAccess2 _runtimeSrc = this.projectConfig.getRuntimeSrc();
-    _createRuntimeModule.writeTo(_runtimeSrc);
     JavaFileAccess _createRuntimeGenModule = this.templates.createRuntimeGenModule(language);
     IFileSystemAccess2 _runtimeSrcGen = this.projectConfig.getRuntimeSrcGen();
     _createRuntimeGenModule.writeTo(_runtimeSrcGen);
-    IFileSystemAccess2 _eclipsePluginSrc = this.projectConfig.getEclipsePluginSrc();
-    boolean _tripleNotEquals = (_eclipsePluginSrc != null);
-    if (_tripleNotEquals) {
-      JavaFileAccess _createEclipsePluginModule = this.templates.createEclipsePluginModule(language);
-      IFileSystemAccess2 _eclipsePluginSrc_1 = this.projectConfig.getEclipsePluginSrc();
-      _createEclipsePluginModule.writeTo(_eclipsePluginSrc_1);
+    IFileSystemAccess2 _runtimeSrc = this.projectConfig.getRuntimeSrc();
+    XtextGeneratorNaming _naming = language.getNaming();
+    TypeReference _runtimeModule = _naming.getRuntimeModule();
+    String _path = _runtimeModule.getPath();
+    boolean _isFile = _runtimeSrc.isFile(_path);
+    boolean _not = (!_isFile);
+    if (_not) {
+      JavaFileAccess _createRuntimeModule = this.templates.createRuntimeModule(language);
+      IFileSystemAccess2 _runtimeSrc_1 = this.projectConfig.getRuntimeSrc();
+      _createRuntimeModule.writeTo(_runtimeSrc_1);
     }
     IFileSystemAccess2 _eclipsePluginSrcGen = this.projectConfig.getEclipsePluginSrcGen();
-    boolean _tripleNotEquals_1 = (_eclipsePluginSrcGen != null);
-    if (_tripleNotEquals_1) {
+    boolean _tripleNotEquals = (_eclipsePluginSrcGen != null);
+    if (_tripleNotEquals) {
       JavaFileAccess _createEclipsePluginGenModule = this.templates.createEclipsePluginGenModule(language);
       IFileSystemAccess2 _eclipsePluginSrcGen_1 = this.projectConfig.getEclipsePluginSrcGen();
       _createEclipsePluginGenModule.writeTo(_eclipsePluginSrcGen_1);
+    }
+    boolean _and = false;
+    IFileSystemAccess2 _eclipsePluginSrc = this.projectConfig.getEclipsePluginSrc();
+    boolean _tripleNotEquals_1 = (_eclipsePluginSrc != null);
+    if (!_tripleNotEquals_1) {
+      _and = false;
+    } else {
+      IFileSystemAccess2 _eclipsePluginSrc_1 = this.projectConfig.getEclipsePluginSrc();
+      XtextGeneratorNaming _naming_1 = language.getNaming();
+      TypeReference _eclipsePluginModule = _naming_1.getEclipsePluginModule();
+      String _path_1 = _eclipsePluginModule.getPath();
+      boolean _isFile_1 = _eclipsePluginSrc_1.isFile(_path_1);
+      boolean _not_1 = (!_isFile_1);
+      _and = _not_1;
+    }
+    if (_and) {
+      JavaFileAccess _createEclipsePluginModule = this.templates.createEclipsePluginModule(language);
+      IFileSystemAccess2 _eclipsePluginSrc_2 = this.projectConfig.getEclipsePluginSrc();
+      _createEclipsePluginModule.writeTo(_eclipsePluginSrc_2);
     }
   }
   

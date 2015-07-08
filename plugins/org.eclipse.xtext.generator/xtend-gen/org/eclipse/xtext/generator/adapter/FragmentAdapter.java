@@ -10,7 +10,6 @@ package org.eclipse.xtext.generator.adapter;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.Provider;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
@@ -79,9 +78,6 @@ public class FragmentAdapter implements IGeneratorFragment2 {
   
   @Inject
   private IEncodingProvider encodingProvider;
-  
-  @Inject
-  private Provider<ResourceSet> resourceSetProvider;
   
   @Accessors
   private IGeneratorFragment fragment;
@@ -188,18 +184,10 @@ public class FragmentAdapter implements IGeneratorFragment2 {
     if ((this.fragment instanceof IGeneratorFragmentExtension4)) {
       Grammar _grammar_1 = config1.getGrammar();
       final String superClass = ((IGeneratorFragmentExtension4)this.fragment).getDefaultRuntimeModuleClassName(_grammar_1);
-      boolean _and = false;
-      if (!(superClass != null)) {
-        _and = false;
-      } else {
+      if ((superClass != null)) {
         GuiceModuleAccess _runtimeGenModule_1 = config2.getRuntimeGenModule();
-        String _superClassName = _runtimeGenModule_1.getSuperClassName();
-        boolean _tripleEquals = (_superClassName == null);
-        _and = _tripleEquals;
-      }
-      if (_and) {
-        GuiceModuleAccess _runtimeGenModule_2 = config2.getRuntimeGenModule();
-        _runtimeGenModule_2.setSuperClassName(superClass);
+        TypeReference _typeReference = new TypeReference(superClass);
+        _runtimeGenModule_1.setSuperClass(_typeReference);
       }
     }
   }
@@ -221,18 +209,10 @@ public class FragmentAdapter implements IGeneratorFragment2 {
     if ((this.fragment instanceof IGeneratorFragmentExtension4)) {
       Grammar _grammar_1 = config1.getGrammar();
       final String superClass = ((IGeneratorFragmentExtension4)this.fragment).getDefaultUiModuleClassName(_grammar_1);
-      boolean _and = false;
-      if (!(superClass != null)) {
-        _and = false;
-      } else {
+      if ((superClass != null)) {
         GuiceModuleAccess _eclipsePluginGenModule_1 = config2.getEclipsePluginGenModule();
-        String _superClassName = _eclipsePluginGenModule_1.getSuperClassName();
-        boolean _tripleEquals = (_superClassName == null);
-        _and = _tripleEquals;
-      }
-      if (_and) {
-        GuiceModuleAccess _eclipsePluginGenModule_2 = config2.getEclipsePluginGenModule();
-        _eclipsePluginGenModule_2.setSuperClassName(superClass);
+        TypeReference _typeReference = new TypeReference(superClass);
+        _eclipsePluginGenModule_1.setSuperClass(_typeReference);
       }
     }
   }
@@ -266,146 +246,180 @@ public class FragmentAdapter implements IGeneratorFragment2 {
   }
   
   private void generatePluginXmlRt(final LanguageConfig config1, final XpandExecutionContext ctx) {
-    Output _output = ctx.getOutput();
-    _output.openFile(null, StringConcatOutputImpl.STRING_OUTLET);
-    try {
-      if ((this.fragment instanceof IGeneratorFragmentExtension2)) {
-        ((IGeneratorFragmentExtension2)this.fragment).addToPluginXmlRt(config1, ctx);
-      } else {
-        Grammar _grammar = config1.getGrammar();
-        this.fragment.addToPluginXmlRt(_grammar, ctx);
+    PluginXmlAccess _runtimePluginXml = this.projectConfig.getRuntimePluginXml();
+    boolean _tripleNotEquals = (_runtimePluginXml != null);
+    if (_tripleNotEquals) {
+      Output _output = ctx.getOutput();
+      _output.openFile(null, StringConcatOutputImpl.STRING_OUTLET);
+      try {
+        if ((this.fragment instanceof IGeneratorFragmentExtension2)) {
+          ((IGeneratorFragmentExtension2)this.fragment).addToPluginXmlRt(config1, ctx);
+        } else {
+          Grammar _grammar = config1.getGrammar();
+          this.fragment.addToPluginXmlRt(_grammar, ctx);
+        }
+        Output _output_1 = ctx.getOutput();
+        final StringConcatenation result = ((StringConcatOutputImpl) _output_1).getStringOutlet();
+        PluginXmlAccess _runtimePluginXml_1 = this.projectConfig.getRuntimePluginXml();
+        List<CharSequence> _entries = _runtimePluginXml_1.getEntries();
+        String _string = result.toString();
+        StringBuilder _decreaseIndentation = this.decreaseIndentation(_string, 1);
+        _entries.add(_decreaseIndentation);
+      } finally {
+        Output _output_2 = ctx.getOutput();
+        _output_2.closeFile();
       }
-      Output _output_1 = ctx.getOutput();
-      final StringConcatenation result = ((StringConcatOutputImpl) _output_1).getStringOutlet();
-      PluginXmlAccess _runtimePluginXml = this.projectConfig.getRuntimePluginXml();
-      List<CharSequence> _entries = _runtimePluginXml.getEntries();
-      String _string = result.toString();
-      StringBuilder _decreaseIndentation = this.decreaseIndentation(_string, 1);
-      _entries.add(_decreaseIndentation);
-    } finally {
-      Output _output_2 = ctx.getOutput();
-      _output_2.closeFile();
     }
   }
   
   private void generatePluginXmlUi(final LanguageConfig config1, final XpandExecutionContext ctx) {
-    Output _output = ctx.getOutput();
-    _output.openFile(null, StringConcatOutputImpl.STRING_OUTLET);
-    try {
-      if ((this.fragment instanceof IGeneratorFragmentExtension2)) {
-        ((IGeneratorFragmentExtension2)this.fragment).addToPluginXmlUi(config1, ctx);
-      } else {
-        Grammar _grammar = config1.getGrammar();
-        this.fragment.addToPluginXmlUi(_grammar, ctx);
+    PluginXmlAccess _eclipsePluginPluginXml = this.projectConfig.getEclipsePluginPluginXml();
+    boolean _tripleNotEquals = (_eclipsePluginPluginXml != null);
+    if (_tripleNotEquals) {
+      Output _output = ctx.getOutput();
+      _output.openFile(null, StringConcatOutputImpl.STRING_OUTLET);
+      try {
+        if ((this.fragment instanceof IGeneratorFragmentExtension2)) {
+          ((IGeneratorFragmentExtension2)this.fragment).addToPluginXmlUi(config1, ctx);
+        } else {
+          Grammar _grammar = config1.getGrammar();
+          this.fragment.addToPluginXmlUi(_grammar, ctx);
+        }
+        Output _output_1 = ctx.getOutput();
+        final StringConcatenation result = ((StringConcatOutputImpl) _output_1).getStringOutlet();
+        PluginXmlAccess _eclipsePluginPluginXml_1 = this.projectConfig.getEclipsePluginPluginXml();
+        List<CharSequence> _entries = _eclipsePluginPluginXml_1.getEntries();
+        String _string = result.toString();
+        StringBuilder _decreaseIndentation = this.decreaseIndentation(_string, 1);
+        _entries.add(_decreaseIndentation);
+      } finally {
+        Output _output_2 = ctx.getOutput();
+        _output_2.closeFile();
       }
-      Output _output_1 = ctx.getOutput();
-      final StringConcatenation result = ((StringConcatOutputImpl) _output_1).getStringOutlet();
-      PluginXmlAccess _eclipsePluginPluginXml = this.projectConfig.getEclipsePluginPluginXml();
-      List<CharSequence> _entries = _eclipsePluginPluginXml.getEntries();
-      String _string = result.toString();
-      StringBuilder _decreaseIndentation = this.decreaseIndentation(_string, 1);
-      _entries.add(_decreaseIndentation);
-    } finally {
-      Output _output_2 = ctx.getOutput();
-      _output_2.closeFile();
     }
   }
   
   private void generateManifestRt(final LanguageConfig config1, final XpandExecutionContext ctx) {
-    Grammar _grammar = config1.getGrammar();
-    final String[] exported = this.fragment.getExportedPackagesRt(_grammar);
-    if ((exported != null)) {
-      ManifestAccess _runtimeManifest = this.projectConfig.getRuntimeManifest();
-      Set<String> _exportedPackages = _runtimeManifest.getExportedPackages();
-      CollectionExtensions.<String>addAll(_exportedPackages, exported);
-    }
-    Grammar _grammar_1 = config1.getGrammar();
-    final String[] required = this.fragment.getRequiredBundlesRt(_grammar_1);
-    if ((required != null)) {
-      ManifestAccess _runtimeManifest_1 = this.projectConfig.getRuntimeManifest();
-      Set<String> _requiredBundles = _runtimeManifest_1.getRequiredBundles();
-      CollectionExtensions.<String>addAll(_requiredBundles, required);
-    }
-    Grammar _grammar_2 = config1.getGrammar();
-    final String[] imported = this.fragment.getImportedPackagesRt(_grammar_2);
-    if ((imported != null)) {
-      ManifestAccess _runtimeManifest_2 = this.projectConfig.getRuntimeManifest();
-      Set<String> _importedPackages = _runtimeManifest_2.getImportedPackages();
-      CollectionExtensions.<String>addAll(_importedPackages, imported);
+    ManifestAccess _runtimeManifest = this.projectConfig.getRuntimeManifest();
+    boolean _tripleNotEquals = (_runtimeManifest != null);
+    if (_tripleNotEquals) {
+      Grammar _grammar = config1.getGrammar();
+      final String[] exported = this.fragment.getExportedPackagesRt(_grammar);
+      if ((exported != null)) {
+        ManifestAccess _runtimeManifest_1 = this.projectConfig.getRuntimeManifest();
+        Set<String> _exportedPackages = _runtimeManifest_1.getExportedPackages();
+        CollectionExtensions.<String>addAll(_exportedPackages, exported);
+      }
+      Grammar _grammar_1 = config1.getGrammar();
+      final String[] required = this.fragment.getRequiredBundlesRt(_grammar_1);
+      if ((required != null)) {
+        ManifestAccess _runtimeManifest_2 = this.projectConfig.getRuntimeManifest();
+        Set<String> _requiredBundles = _runtimeManifest_2.getRequiredBundles();
+        CollectionExtensions.<String>addAll(_requiredBundles, required);
+      }
+      Grammar _grammar_2 = config1.getGrammar();
+      final String[] imported = this.fragment.getImportedPackagesRt(_grammar_2);
+      if ((imported != null)) {
+        ManifestAccess _runtimeManifest_3 = this.projectConfig.getRuntimeManifest();
+        Set<String> _importedPackages = _runtimeManifest_3.getImportedPackages();
+        CollectionExtensions.<String>addAll(_importedPackages, imported);
+      }
     }
   }
   
   private void generateManifestUi(final LanguageConfig config1, final XpandExecutionContext ctx) {
-    Grammar _grammar = config1.getGrammar();
-    final String[] exported = this.fragment.getExportedPackagesUi(_grammar);
-    if ((exported != null)) {
-      ManifestAccess _eclipsePluginManifest = this.projectConfig.getEclipsePluginManifest();
-      Set<String> _exportedPackages = _eclipsePluginManifest.getExportedPackages();
-      CollectionExtensions.<String>addAll(_exportedPackages, exported);
-    }
-    Grammar _grammar_1 = config1.getGrammar();
-    final String[] required = this.fragment.getRequiredBundlesUi(_grammar_1);
-    if ((required != null)) {
-      ManifestAccess _eclipsePluginManifest_1 = this.projectConfig.getEclipsePluginManifest();
-      Set<String> _requiredBundles = _eclipsePluginManifest_1.getRequiredBundles();
-      CollectionExtensions.<String>addAll(_requiredBundles, required);
-    }
-    Grammar _grammar_2 = config1.getGrammar();
-    final String[] imported = this.fragment.getImportedPackagesUi(_grammar_2);
-    if ((imported != null)) {
-      ManifestAccess _eclipsePluginManifest_2 = this.projectConfig.getEclipsePluginManifest();
-      Set<String> _importedPackages = _eclipsePluginManifest_2.getImportedPackages();
-      CollectionExtensions.<String>addAll(_importedPackages, imported);
+    ManifestAccess _eclipsePluginManifest = this.projectConfig.getEclipsePluginManifest();
+    boolean _tripleNotEquals = (_eclipsePluginManifest != null);
+    if (_tripleNotEquals) {
+      Grammar _grammar = config1.getGrammar();
+      final String[] exported = this.fragment.getExportedPackagesUi(_grammar);
+      if ((exported != null)) {
+        ManifestAccess _eclipsePluginManifest_1 = this.projectConfig.getEclipsePluginManifest();
+        Set<String> _exportedPackages = _eclipsePluginManifest_1.getExportedPackages();
+        CollectionExtensions.<String>addAll(_exportedPackages, exported);
+      }
+      Grammar _grammar_1 = config1.getGrammar();
+      final String[] required = this.fragment.getRequiredBundlesUi(_grammar_1);
+      if ((required != null)) {
+        ManifestAccess _eclipsePluginManifest_2 = this.projectConfig.getEclipsePluginManifest();
+        Set<String> _requiredBundles = _eclipsePluginManifest_2.getRequiredBundles();
+        CollectionExtensions.<String>addAll(_requiredBundles, required);
+      }
+      Grammar _grammar_2 = config1.getGrammar();
+      final String[] imported = this.fragment.getImportedPackagesUi(_grammar_2);
+      if ((imported != null)) {
+        ManifestAccess _eclipsePluginManifest_3 = this.projectConfig.getEclipsePluginManifest();
+        Set<String> _importedPackages = _eclipsePluginManifest_3.getImportedPackages();
+        CollectionExtensions.<String>addAll(_importedPackages, imported);
+      }
     }
   }
   
   private void generateManifestIde(final LanguageConfig config1, final XpandExecutionContext ctx) {
-    if ((this.fragment instanceof IGeneratorFragmentExtension3)) {
+    boolean _and = false;
+    if (!(this.fragment instanceof IGeneratorFragmentExtension3)) {
+      _and = false;
+    } else {
+      ManifestAccess _genericIdeManifest = this.projectConfig.getGenericIdeManifest();
+      boolean _tripleNotEquals = (_genericIdeManifest != null);
+      _and = _tripleNotEquals;
+    }
+    if (_and) {
+      final IGeneratorFragmentExtension3 fr = ((IGeneratorFragmentExtension3) this.fragment);
       Grammar _grammar = config1.getGrammar();
-      final String[] exported = ((IGeneratorFragmentExtension3)this.fragment).getExportedPackagesIde(_grammar);
+      final String[] exported = fr.getExportedPackagesIde(_grammar);
       if ((exported != null)) {
-        ManifestAccess _genericIdeManifest = this.projectConfig.getGenericIdeManifest();
-        Set<String> _exportedPackages = _genericIdeManifest.getExportedPackages();
+        ManifestAccess _genericIdeManifest_1 = this.projectConfig.getGenericIdeManifest();
+        Set<String> _exportedPackages = _genericIdeManifest_1.getExportedPackages();
         CollectionExtensions.<String>addAll(_exportedPackages, exported);
       }
       Grammar _grammar_1 = config1.getGrammar();
-      final String[] required = ((IGeneratorFragmentExtension3)this.fragment).getRequiredBundlesIde(_grammar_1);
+      final String[] required = fr.getRequiredBundlesIde(_grammar_1);
       if ((required != null)) {
-        ManifestAccess _genericIdeManifest_1 = this.projectConfig.getGenericIdeManifest();
-        Set<String> _requiredBundles = _genericIdeManifest_1.getRequiredBundles();
+        ManifestAccess _genericIdeManifest_2 = this.projectConfig.getGenericIdeManifest();
+        Set<String> _requiredBundles = _genericIdeManifest_2.getRequiredBundles();
         CollectionExtensions.<String>addAll(_requiredBundles, required);
       }
       Grammar _grammar_2 = config1.getGrammar();
-      final String[] imported = ((IGeneratorFragmentExtension3)this.fragment).getImportedPackagesIde(_grammar_2);
+      final String[] imported = fr.getImportedPackagesIde(_grammar_2);
       if ((imported != null)) {
-        ManifestAccess _genericIdeManifest_2 = this.projectConfig.getGenericIdeManifest();
-        Set<String> _importedPackages = _genericIdeManifest_2.getImportedPackages();
+        ManifestAccess _genericIdeManifest_3 = this.projectConfig.getGenericIdeManifest();
+        Set<String> _importedPackages = _genericIdeManifest_3.getImportedPackages();
         CollectionExtensions.<String>addAll(_importedPackages, imported);
       }
     }
   }
   
   private void generateManifestTests(final LanguageConfig config1, final XpandExecutionContext ctx) {
-    if ((this.fragment instanceof IGeneratorFragmentExtension)) {
+    boolean _and = false;
+    if (!(this.fragment instanceof IGeneratorFragmentExtension)) {
+      _and = false;
+    } else {
+      ManifestAccess _runtimeTestManifest = this.projectConfig.getRuntimeTestManifest();
+      boolean _tripleNotEquals = (_runtimeTestManifest != null);
+      _and = _tripleNotEquals;
+    }
+    if (_and) {
+      final IGeneratorFragmentExtension fr = ((IGeneratorFragmentExtension) this.fragment);
       Grammar _grammar = config1.getGrammar();
-      final String[] exported = ((IGeneratorFragmentExtension)this.fragment).getExportedPackagesTests(_grammar);
+      final String[] exported = fr.getExportedPackagesTests(_grammar);
       if ((exported != null)) {
-        ManifestAccess _runtimeTestManifest = this.projectConfig.getRuntimeTestManifest();
-        Set<String> _exportedPackages = _runtimeTestManifest.getExportedPackages();
+        ManifestAccess _runtimeTestManifest_1 = this.projectConfig.getRuntimeTestManifest();
+        Set<String> _exportedPackages = _runtimeTestManifest_1.getExportedPackages();
         CollectionExtensions.<String>addAll(_exportedPackages, exported);
       }
       Grammar _grammar_1 = config1.getGrammar();
-      final String[] required = ((IGeneratorFragmentExtension)this.fragment).getRequiredBundlesTests(_grammar_1);
+      final String[] required = fr.getRequiredBundlesTests(_grammar_1);
       if ((required != null)) {
-        ManifestAccess _runtimeTestManifest_1 = this.projectConfig.getRuntimeTestManifest();
-        Set<String> _requiredBundles = _runtimeTestManifest_1.getRequiredBundles();
+        ManifestAccess _runtimeTestManifest_2 = this.projectConfig.getRuntimeTestManifest();
+        Set<String> _requiredBundles = _runtimeTestManifest_2.getRequiredBundles();
         CollectionExtensions.<String>addAll(_requiredBundles, required);
       }
       Grammar _grammar_2 = config1.getGrammar();
-      final String[] imported = ((IGeneratorFragmentExtension)this.fragment).getImportedPackagesTests(_grammar_2);
+      final String[] imported = fr.getImportedPackagesTests(_grammar_2);
       if ((imported != null)) {
-        ManifestAccess _runtimeTestManifest_2 = this.projectConfig.getRuntimeTestManifest();
-        Set<String> _importedPackages = _runtimeTestManifest_2.getImportedPackages();
+        ManifestAccess _runtimeTestManifest_3 = this.projectConfig.getRuntimeTestManifest();
+        Set<String> _importedPackages = _runtimeTestManifest_3.getImportedPackages();
         CollectionExtensions.<String>addAll(_importedPackages, imported);
       }
     }
@@ -467,6 +481,9 @@ public class FragmentAdapter implements IGeneratorFragment2 {
         String _projectNameIde = it.getProjectNameIde();
         boolean _tripleNotEquals_1 = (_projectNameIde != null);
         it.setHasIde(_tripleNotEquals_1);
+        Grammar _grammar = config2.getGrammar();
+        String _name_1 = _grammar.getName();
+        it.setGrammarId(_name_1);
       }
     };
     final Naming result = ObjectExtensions.<Naming>operator_doubleArrow(_naming, _function);
@@ -482,8 +499,8 @@ public class FragmentAdapter implements IGeneratorFragment2 {
     for (final String resource : _loadedResources) {
       config.addLoadedResource(resource);
     }
-    ResourceSet _get = this.resourceSetProvider.get();
-    config.setForcedResourceSet(_get);
+    ResourceSet _resourceSet = config2.getResourceSet();
+    config.setForcedResourceSet(_resourceSet);
     List<String> _fileExtensions = config2.getFileExtensions();
     String _join = IterableExtensions.join(_fileExtensions, ",");
     config.setFileExtensions(_join);

@@ -206,10 +206,7 @@ class XtextGeneratorTemplates {
 	
 	def JavaFileAccess createRuntimeGenModule(LanguageConfig2 langConfig) {
 		val it = langConfig.naming
-		val superClass =
-			if (langConfig.runtimeGenModule.superClassName !== null)
-				new TypeReference(langConfig.runtimeGenModule.superClassName)
-			else runtimeDefaultModule
+		val superClass = langConfig.runtimeGenModule.superClass ?: runtimeDefaultModule
 		val javaFile = new JavaFileAccess(runtimeGenModule, codeConfig)
 		javaFile.encodingProvider = encodingProvider
 		
@@ -270,10 +267,7 @@ class XtextGeneratorTemplates {
 	
 	def JavaFileAccess createEclipsePluginGenModule(LanguageConfig2 langConfig) {
 		val it = langConfig.naming
-		val superClass =
-			if (langConfig.eclipsePluginGenModule.superClassName !== null)
-				new TypeReference(langConfig.eclipsePluginGenModule.superClassName)
-			else eclipsePluginDefaultModule
+		val superClass = langConfig.eclipsePluginGenModule.superClass ?: eclipsePluginDefaultModule
 		val javaFile = new JavaFileAccess(eclipsePluginGenModule, codeConfig)
 		javaFile.encodingProvider = encodingProvider
 		
@@ -379,28 +373,28 @@ class XtextGeneratorTemplates {
 				«ENDFOR»
 				
 				private static final «Logger» logger = «Logger».getLogger(«activator.simpleName».class);
-			
+				
 				private static «activator.simpleName» INSTANCE;
-			
+				
 				private «Map»<String, «Injector»> injectors = «Collections».synchronizedMap(«Maps».<String, «Injector»> newHashMapWithExpectedSize(1));
-			
+				
 				@Override
 				public void start(«'org.osgi.framework.BundleContext'.typeRef» context) throws Exception {
 					super.start(context);
 					INSTANCE = this;
 				}
-			
+				
 				@Override
 				public void stop(«'org.osgi.framework.BundleContext'.typeRef» context) throws Exception {
 					injectors.clear();
 					INSTANCE = null;
 					super.stop(context);
 				}
-			
+				
 				public static «activator.simpleName» getInstance() {
 					return INSTANCE;
 				}
-			
+				
 				public «Injector» getInjector(String language) {
 					synchronized (injectors) {
 						«Injector» injector = injectors.get(language);
@@ -410,7 +404,7 @@ class XtextGeneratorTemplates {
 						return injector;
 					}
 				}
-			
+				
 				protected «Injector» createInjector(String language) {
 					try {
 						«Module» runtimeModule = getRuntimeModule(language);
@@ -424,7 +418,7 @@ class XtextGeneratorTemplates {
 						throw new RuntimeException("Failed to create injector for " + language, e);
 					}
 				}
-			
+				
 				protected Module getRuntimeModule(String grammar) {
 					«FOR lang : langConfigs»
 						if («lang.grammar.name.toUpperCase.replaceAll('\\.', '_')».equals(grammar)) {
@@ -433,7 +427,7 @@ class XtextGeneratorTemplates {
 					«ENDFOR»
 					throw new IllegalArgumentException(grammar);
 				}
-			
+				
 				protected «Module» getUiModule(String grammar) {
 					«FOR lang : langConfigs»
 						if («lang.grammar.name.toUpperCase.replaceAll('\\.', '_')».equals(grammar)) {
@@ -442,11 +436,11 @@ class XtextGeneratorTemplates {
 					«ENDFOR»
 					throw new IllegalArgumentException(grammar);
 				}
-			
+				
 				protected «Module» getSharedStateModule() {
 					return new «'org.eclipse.xtext.ui.shared.SharedStateModule'.typeRef»();
 				}
-			
+				
 			}
 		'''
 		javaFile.markedAsGenerated = true

@@ -76,8 +76,8 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
   @Accessors(AccessorType.PUBLIC_GETTER)
   private List<String> fileExtensions;
   
-  @Accessors(AccessorType.PUBLIC_SETTER)
-  private ResourceSet forcedResourceSet;
+  @Accessors
+  private ResourceSet resourceSet;
   
   @Accessors
   private XtextGeneratorNaming naming;
@@ -136,14 +136,10 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
   @Override
   public void initialize(final Injector injector) {
     super.initialize(injector);
-    ResourceSet _elvis = null;
-    if (this.forcedResourceSet != null) {
-      _elvis = this.forcedResourceSet;
-    } else {
+    if ((this.resourceSet == null)) {
       ResourceSet _get = this.resourceSetProvider.get();
-      _elvis = _get;
+      this.resourceSet = _get;
     }
-    final ResourceSet rs = _elvis;
     for (final String loadedResource : this.loadedResources) {
       {
         final URI loadedResourceUri = URI.createURI(loadedResource);
@@ -209,13 +205,13 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
             }
             final URI xcoreLangURI = URI.createPlatformResourceURI("/org.eclipse.emf.ecore.xcore.lib/model/XcoreLang.xcore", true);
             try {
-              rs.getResource(xcoreLangURI, true);
+              this.resourceSet.getResource(xcoreLangURI, true);
             } catch (final Throwable _t_2) {
               if (_t_2 instanceof WrappedException) {
                 final WrappedException e_4 = (WrappedException)_t_2;
                 LanguageConfig2.LOG.error("Could not load XcoreLang.xcore.", e_4);
-                final Resource brokenResource = rs.getResource(xcoreLangURI, false);
-                EList<Resource> _resources = rs.getResources();
+                final Resource brokenResource = this.resourceSet.getResource(xcoreLangURI, false);
+                EList<Resource> _resources = this.resourceSet.getResources();
                 _resources.remove(brokenResource);
               } else {
                 throw Exceptions.sneakyThrow(_t_2);
@@ -223,22 +219,22 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
             }
           }
         }
-        rs.getResource(loadedResourceUri, true);
+        this.resourceSet.getResource(loadedResourceUri, true);
       }
     }
-    EList<Resource> _resources = rs.getResources();
+    EList<Resource> _resources = this.resourceSet.getResources();
     boolean _isEmpty = _resources.isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
-      this.installIndex(rs);
+      this.installIndex();
       {
         int i = 0;
-        EList<Resource> _resources_1 = rs.getResources();
+        EList<Resource> _resources_1 = this.resourceSet.getResources();
         int size = _resources_1.size();
         boolean _while = (i < size);
         while (_while) {
           {
-            EList<Resource> _resources_2 = rs.getResources();
+            EList<Resource> _resources_2 = this.resourceSet.getResources();
             final Resource res = _resources_2.get(i);
             EList<EObject> _contents = res.getContents();
             boolean _isEmpty_1 = _contents.isEmpty();
@@ -267,10 +263,10 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
           _while = (i < size);
         }
       }
-      EcoreUtil.resolveAll(rs);
+      EcoreUtil.resolveAll(this.resourceSet);
     }
     URI _createURI = URI.createURI(this.uri);
-    Resource _resource = rs.getResource(_createURI, true);
+    Resource _resource = this.resourceSet.getResource(_createURI, true);
     final XtextResource resource = ((XtextResource) _resource);
     EList<EObject> _contents = resource.getContents();
     boolean _isEmpty_1 = _contents.isEmpty();
@@ -301,16 +297,16 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
     this.naming.setGrammar(grammar);
   }
   
-  private void installIndex(final ResourceSet resourceSet) {
+  private void installIndex() {
     List<IResourceDescription> _emptyList = Collections.<IResourceDescription>emptyList();
     final ResourceDescriptionsData index = new ResourceDescriptionsData(_emptyList);
-    EList<Resource> _resources = resourceSet.getResources();
+    EList<Resource> _resources = this.resourceSet.getResources();
     final ArrayList<Resource> resources = Lists.<Resource>newArrayList(_resources);
     for (final Resource resource : resources) {
       URI _uRI = resource.getURI();
       this.index(resource, _uRI, index);
     }
-    ResourceDescriptionsData.ResourceSetAdapter.installResourceDescriptionsData(resourceSet, index);
+    ResourceDescriptionsData.ResourceSetAdapter.installResourceDescriptionsData(this.resourceSet, index);
   }
   
   private void index(final Resource resource, final URI uri, final ResourceDescriptionsData index) {
@@ -463,8 +459,13 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
     return this.grammar;
   }
   
-  public void setForcedResourceSet(final ResourceSet forcedResourceSet) {
-    this.forcedResourceSet = forcedResourceSet;
+  @Pure
+  public ResourceSet getResourceSet() {
+    return this.resourceSet;
+  }
+  
+  public void setResourceSet(final ResourceSet resourceSet) {
+    this.resourceSet = resourceSet;
   }
   
   @Pure
