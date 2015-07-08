@@ -1,0 +1,4 @@
+package org.eclipse.xtext.enumrules.idea.highlighting;
+
+public class EnumAndReferenceTestLanguageColorSettingsPage extends EnumAndReferenceTestLanguageBaseColorSettingsPage {
+}

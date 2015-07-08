@@ -15,6 +15,7 @@ package org.eclipse.xtext.xbase;
  */
 public class XbaseRuntimeModule extends AbstractXbaseRuntimeModule {
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public Class<? extends org.eclipse.xtext.formatting.IFormatter> bindIFormatter() {
 		// this binding can be removed once 

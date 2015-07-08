@@ -178,7 +178,7 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getVariableAccess().getRule();
 	}
 
-	//terminal Value:
+	/// * SuppressWarnings[InvalidTerminalruleName] * / terminal Value:
 	//	("=" | "+=" | "-=")->"\n";
 	public TerminalRule getValueRule() {
 		return tValue;

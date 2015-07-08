@@ -22,12 +22,12 @@ import org.eclipse.xtext.XtextPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.impl.AbstractElementImpl#getCardinality <em>Cardinality</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.AbstractElementImpl#isPredicated <em>Predicated</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.AbstractElementImpl#isFirstSetPredicated <em>First Set Predicated</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -75,22 +75,22 @@ public class AbstractElementImpl extends MinimalEObjectImpl.Container implements
 	/**
 	 * The default value of the '{@link #isFirstSetPredicated() <em>First Set Predicated</em>}' attribute.
 	 * <!-- begin-user-doc -->
+	 * @since 2.6
 	 * <!-- end-user-doc -->
 	 * @see #isFirstSetPredicated()
 	 * @generated
 	 * @ordered
-	 * @since 2.6
 	 */
 	protected static final boolean FIRST_SET_PREDICATED_EDEFAULT = false;
 
 	/**
 	 * The cached value of the '{@link #isFirstSetPredicated() <em>First Set Predicated</em>}' attribute.
 	 * <!-- begin-user-doc -->
+	 * @since 2.6
 	 * <!-- end-user-doc -->
 	 * @see #isFirstSetPredicated()
 	 * @generated
 	 * @ordered
-	 * @since 2.6
 	 */
 	protected boolean firstSetPredicated = FIRST_SET_PREDICATED_EDEFAULT;
 
@@ -157,9 +157,9 @@ public class AbstractElementImpl extends MinimalEObjectImpl.Container implements
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @since 2.6
 	 * <!-- end-user-doc -->
 	 * @generated
-	 * @since 2.6
 	 */
 	public boolean isFirstSetPredicated() {
 		return firstSetPredicated;
@@ -167,9 +167,9 @@ public class AbstractElementImpl extends MinimalEObjectImpl.Container implements
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @since 2.6
 	 * <!-- end-user-doc -->
 	 * @generated
-	 * @since 2.6
 	 */
 	public void setFirstSetPredicated(boolean newFirstSetPredicated) {
 		boolean oldFirstSetPredicated = firstSetPredicated;

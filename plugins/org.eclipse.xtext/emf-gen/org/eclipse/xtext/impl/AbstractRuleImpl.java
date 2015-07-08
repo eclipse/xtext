@@ -26,12 +26,12 @@ import org.eclipse.xtext.XtextPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.impl.AbstractRuleImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.AbstractRuleImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.AbstractRuleImpl#getAlternatives <em>Alternatives</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

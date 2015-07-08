@@ -39,6 +39,10 @@ public class AbstractEcoreTerminalsTestLanguageIdeaModule extends org.eclipse.xt
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.parser.terminalrules.idea.facet.EcoreTerminalsTestLanguageFacetType.TYPEID;
 	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return org.eclipse.xtext.parser.terminalrules.idea.highlighting.EcoreTerminalsTestLanguageHighlightingConfiguration.class;
+	}
 	
 	
 }

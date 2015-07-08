@@ -4913,7 +4913,7 @@ protected class Combination2_Val4Assignment_2_1_1 extends AssignmentToken  {
 
 /************ begin Rule Combination3 ****************
  *
- * / * SuppressWarnings[potentialOverride] * / Combination3:
+ * / * SuppressWarnings[noInstantiation, potentialOverride] * / Combination3:
  * 	"#15" (val1=ID | val2=INT | val3=STRING)*;
  *
  **/
@@ -7828,7 +7828,7 @@ protected class TransientSerializeables1_Int1Assignment_2_1 extends AssignmentTo
 
 /************ begin Rule StaticSimplification ****************
  *
- * / * SuppressWarnings[potentialOverride] * / StaticSimplification:
+ * / * SuppressWarnings[noInstantiation, potentialOverride] * / StaticSimplification:
  * 	"#26" ("kw1" | {EmptyAlternativeSub} | val1=ID) ("kw2" | val2=ID) ("kw3" ("kw4" val3=ID+)?);
  *
  **/

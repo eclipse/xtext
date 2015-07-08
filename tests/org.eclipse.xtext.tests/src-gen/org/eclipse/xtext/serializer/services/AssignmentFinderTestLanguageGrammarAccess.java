@@ -758,13 +758,13 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 		return getTerminalValAccess().getRule();
 	}
 
-	//terminal Terminal1:
+	/// * SuppressWarnings[InvalidTerminalruleName] * / terminal Terminal1:
 	//	"%" "A".."Z"*;
 	public TerminalRule getTerminal1Rule() {
 		return tTerminal1;
 	} 
 
-	//terminal Terminal2:
+	/// * SuppressWarnings[InvalidTerminalruleName] * / terminal Terminal2:
 	//	"%" "a".."z"*;
 	public TerminalRule getTerminal2Rule() {
 		return tTerminal2;

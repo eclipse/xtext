@@ -39,6 +39,10 @@ public class AbstractLocationProviderTestLanguageIdeaModule extends org.eclipse.
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.resource.idea.facet.LocationProviderTestLanguageFacetType.TYPEID;
 	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return org.eclipse.xtext.resource.idea.highlighting.LocationProviderTestLanguageHighlightingConfiguration.class;
+	}
 	
 	
 }

@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.compiler;
 
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
@@ -34,9 +33,6 @@ public abstract class AbstractOutputComparingCompilerTests extends AbstractXbase
 	
 	@Inject
 	private CommonTypeComputationServices services;
-	
-	@Inject
-	private TypeReferences typeReferences;
 	
 	@Inject
 	private IGeneratorConfigProvider generatorConfigProvider;

@@ -918,7 +918,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Assignment cTransientAssignment_1_2 = (Assignment)cAlternatives_1.eContents().get(2);
 		private final Keyword cTransientTransientKeyword_1_2_0 = (Keyword)cTransientAssignment_1_2.eContents().get(0);
 		
-		/// * SuppressWarnings[potentialOverride] * / DuplicateBug284491:
+		/// * SuppressWarnings[noInstantiation, potentialOverride] * / DuplicateBug284491:
 		//	"#13" (static?="static" | final?="final" | transient?="transient")*;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -2034,7 +2034,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		return getLoopBug285452Access().getRule();
 	}
 
-	/// * SuppressWarnings[potentialOverride] * / DuplicateBug284491:
+	/// * SuppressWarnings[noInstantiation, potentialOverride] * / DuplicateBug284491:
 	//	"#13" (static?="static" | final?="final" | transient?="transient")*;
 	public DuplicateBug284491Elements getDuplicateBug284491Access() {
 		return pDuplicateBug284491;

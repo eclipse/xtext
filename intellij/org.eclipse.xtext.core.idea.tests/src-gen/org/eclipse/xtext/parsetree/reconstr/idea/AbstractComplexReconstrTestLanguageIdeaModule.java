@@ -39,6 +39,10 @@ public class AbstractComplexReconstrTestLanguageIdeaModule extends org.eclipse.x
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.parsetree.reconstr.idea.facet.ComplexReconstrTestLanguageFacetType.TYPEID;
 	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return org.eclipse.xtext.parsetree.reconstr.idea.highlighting.ComplexReconstrTestLanguageHighlightingConfiguration.class;
+	}
 	
 	
 }

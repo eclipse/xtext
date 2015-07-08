@@ -24,12 +24,12 @@ import org.eclipse.xtext.XtextPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.impl.ActionImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.ActionImpl#getFeature <em>Feature</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.ActionImpl#getOperator <em>Operator</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

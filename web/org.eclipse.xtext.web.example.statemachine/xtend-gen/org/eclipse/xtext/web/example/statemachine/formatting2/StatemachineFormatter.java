@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.web.example.statemachine.formatting2;
 
-import com.google.inject.Inject;
 import java.util.Arrays;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.formatting2.AbstractFormatter2;
@@ -16,7 +15,6 @@ import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionsFinder;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.web.example.statemachine.services.StatemachineGrammarAccess;
 import org.eclipse.xtext.web.example.statemachine.statemachine.Command;
 import org.eclipse.xtext.web.example.statemachine.statemachine.Condition;
 import org.eclipse.xtext.web.example.statemachine.statemachine.Event;
@@ -30,10 +28,6 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class StatemachineFormatter extends AbstractFormatter2 {
-  @Inject
-  @Extension
-  private StatemachineGrammarAccess _statemachineGrammarAccess;
-  
   protected void _format(final Statemachine statemachine, @Extension final IFormattableDocument document) {
     EList<Signal> _signals = statemachine.getSignals();
     for (final Signal signal : _signals) {

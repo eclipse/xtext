@@ -39,6 +39,10 @@ public class AbstractUnassignedTextTestLanguageIdeaModule extends org.eclipse.xt
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.parsetree.unassignedtext.idea.facet.UnassignedTextTestLanguageFacetType.TYPEID;
 	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return org.eclipse.xtext.parsetree.unassignedtext.idea.highlighting.UnassignedTextTestLanguageHighlightingConfiguration.class;
+	}
 	
 	
 }

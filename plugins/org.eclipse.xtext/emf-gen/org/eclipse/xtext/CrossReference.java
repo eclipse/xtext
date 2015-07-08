@@ -14,11 +14,11 @@ package org.eclipse.xtext;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.CrossReference#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.CrossReference#getTerminal <em>Terminal</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.XtextPackage#getCrossReference()
  * @model

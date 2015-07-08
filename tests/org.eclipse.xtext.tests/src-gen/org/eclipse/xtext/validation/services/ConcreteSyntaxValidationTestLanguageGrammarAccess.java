@@ -1047,7 +1047,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		private final Assignment cVal3Assignment_1_2 = (Assignment)cAlternatives_1.eContents().get(2);
 		private final RuleCall cVal3STRINGTerminalRuleCall_1_2_0 = (RuleCall)cVal3Assignment_1_2.eContents().get(0);
 		
-		/// * SuppressWarnings[potentialOverride] * / Combination3:
+		/// * SuppressWarnings[noInstantiation, potentialOverride] * / Combination3:
 		//	"#15" (val1=ID | val2=INT | val3=STRING)*;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -1703,7 +1703,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		private final Assignment cVal3Assignment_3_1_1 = (Assignment)cGroup_3_1.eContents().get(1);
 		private final RuleCall cVal3IDTerminalRuleCall_3_1_1_0 = (RuleCall)cVal3Assignment_3_1_1.eContents().get(0);
 		
-		/// * SuppressWarnings[potentialOverride] * / StaticSimplification:
+		/// * SuppressWarnings[noInstantiation, potentialOverride] * / StaticSimplification:
 		//	"#26" ("kw1" | {EmptyAlternativeSub} | val1=ID) ("kw2" | val2=ID) ("kw3" ("kw4" val3=ID+)?);
 		@Override public ParserRule getRule() { return rule; }
 
@@ -2356,7 +2356,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		return getCombination2Access().getRule();
 	}
 
-	/// * SuppressWarnings[potentialOverride] * / Combination3:
+	/// * SuppressWarnings[noInstantiation, potentialOverride] * / Combination3:
 	//	"#15" (val1=ID | val2=INT | val3=STRING)*;
 	public Combination3Elements getCombination3Access() {
 		return pCombination3;
@@ -2486,7 +2486,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		return getTransientSerializeables1EnumAccess().getRule();
 	}
 
-	/// * SuppressWarnings[potentialOverride] * / StaticSimplification:
+	/// * SuppressWarnings[noInstantiation, potentialOverride] * / StaticSimplification:
 	//	"#26" ("kw1" | {EmptyAlternativeSub} | val1=ID) ("kw2" | val2=ID) ("kw3" ("kw4" val3=ID+)?);
 	public StaticSimplificationElements getStaticSimplificationAccess() {
 		return pStaticSimplification;

@@ -39,6 +39,10 @@ public class AbstractSerializationBug269362TestLanguageIdeaModule extends org.ec
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.parsetree.reconstr.idea.facet.SerializationBug269362TestLanguageFacetType.TYPEID;
 	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return org.eclipse.xtext.parsetree.reconstr.idea.highlighting.SerializationBug269362TestLanguageHighlightingConfiguration.class;
+	}
 	
 	
 }

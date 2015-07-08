@@ -48,5 +48,6 @@
       							factoryClass="org.eclipse.xtext.testlanguages.indent.idea.IndentationAwareTestLanguageExtensionFactory"
       							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
 		<facetType implementation="org.eclipse.xtext.testlanguages.indent.idea.facet.IndentationAwareTestLanguageFacetType"/>
+		<colorSettingsPage implementation="org.eclipse.xtext.testlanguages.indent.idea.highlighting.IndentationAwareTestLanguageColorSettingsPage"/>
 	</extensions>
 </idea-plugin>

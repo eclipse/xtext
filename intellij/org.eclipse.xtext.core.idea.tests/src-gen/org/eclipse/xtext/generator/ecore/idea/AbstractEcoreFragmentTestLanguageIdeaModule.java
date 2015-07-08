@@ -39,6 +39,10 @@ public class AbstractEcoreFragmentTestLanguageIdeaModule extends org.eclipse.xte
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.generator.ecore.idea.facet.EcoreFragmentTestLanguageFacetType.TYPEID;
 	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return org.eclipse.xtext.generator.ecore.idea.highlighting.EcoreFragmentTestLanguageHighlightingConfiguration.class;
+	}
 	
 	
 }

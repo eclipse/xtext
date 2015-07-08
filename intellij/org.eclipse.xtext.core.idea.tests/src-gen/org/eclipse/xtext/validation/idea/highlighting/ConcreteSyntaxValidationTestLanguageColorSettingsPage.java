@@ -1,0 +1,4 @@
+package org.eclipse.xtext.validation.idea.highlighting;
+
+public class ConcreteSyntaxValidationTestLanguageColorSettingsPage extends ConcreteSyntaxValidationTestLanguageBaseColorSettingsPage {
+}

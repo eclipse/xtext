@@ -49,11 +49,11 @@ public class XtextSwitch<T> extends Switch<T> {
 	/**
 	 * Checks whether this is a switch for the given package.
 	 * <!-- begin-user-doc -->
+	 * @since 2.4
 	 * <!-- end-user-doc -->
-	 * @parameter ePackage the package in question.
+	 * @param ePackage the package in question.
 	 * @return whether this is a switch for the given package.
 	 * @generated
-	 * @since 2.4
 	 */
 	@Override
 	protected boolean isSwitchFor(EPackage ePackage) {

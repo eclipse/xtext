@@ -7,6 +7,7 @@ import com.intellij.openapi.components.StoragePathMacros;
 import com.intellij.openapi.components.StorageScheme;
 import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
 import org.eclipse.xtext.idea.facet.GeneratorConfigurationState;
+
 @State(name = "org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageGenerator", storages = {
 		@Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
 		@Storage(id = "dir", file = StoragePathMacros.PROJECT_CONFIG_DIR

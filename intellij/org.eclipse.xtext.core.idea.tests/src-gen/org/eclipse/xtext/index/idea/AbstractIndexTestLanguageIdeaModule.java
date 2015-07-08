@@ -39,6 +39,10 @@ public class AbstractIndexTestLanguageIdeaModule extends org.eclipse.xtext.idea.
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.index.idea.facet.IndexTestLanguageFacetType.TYPEID;
 	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return org.eclipse.xtext.index.idea.highlighting.IndexTestLanguageHighlightingConfiguration.class;
+	}
 	
 	
 }

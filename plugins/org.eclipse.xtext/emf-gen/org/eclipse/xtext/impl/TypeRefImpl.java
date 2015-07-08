@@ -25,11 +25,11 @@ import org.eclipse.xtext.XtextPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.impl.TypeRefImpl#getMetamodel <em>Metamodel</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.TypeRefImpl#getClassifier <em>Classifier</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

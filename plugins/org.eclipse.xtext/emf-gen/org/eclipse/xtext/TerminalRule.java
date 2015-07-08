@@ -14,10 +14,10 @@ package org.eclipse.xtext;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.TerminalRule#isFragment <em>Fragment</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.XtextPackage#getTerminalRule()
  * @model

@@ -1,0 +1,4 @@
+package org.eclipse.xtext.metamodelreferencing.tests.idea.highlighting;
+
+public class MetamodelRefTestLanguageColorSettingsPage extends MetamodelRefTestLanguageBaseColorSettingsPage {
+}

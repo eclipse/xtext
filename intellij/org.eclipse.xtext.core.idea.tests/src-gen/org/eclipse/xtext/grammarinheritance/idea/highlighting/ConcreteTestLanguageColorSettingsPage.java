@@ -1,0 +1,4 @@
+package org.eclipse.xtext.grammarinheritance.idea.highlighting;
+
+public class ConcreteTestLanguageColorSettingsPage extends ConcreteTestLanguageBaseColorSettingsPage {
+}

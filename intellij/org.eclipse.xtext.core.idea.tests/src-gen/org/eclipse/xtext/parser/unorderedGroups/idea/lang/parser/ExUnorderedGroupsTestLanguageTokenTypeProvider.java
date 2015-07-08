@@ -28,7 +28,8 @@ import com.intellij.psi.tree.TokenSet;
 
 	@Override
     public int getAntlrType(IElementType iElementType) {
-        return ((IndexedElementType)iElementType).getLocalIndex();
+        return (iElementType instanceof IndexedElementType) ? ((IndexedElementType) iElementType).getLocalIndex()
+        				: org.antlr.runtime.Token.INVALID_TOKEN_TYPE;
     }
     
     @Override

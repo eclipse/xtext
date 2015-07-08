@@ -25,11 +25,11 @@ import org.eclipse.xtext.XtextPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.impl.EnumLiteralDeclarationImpl#getEnumLiteral <em>Enum Literal</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.EnumLiteralDeclarationImpl#getLiteral <em>Literal</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
