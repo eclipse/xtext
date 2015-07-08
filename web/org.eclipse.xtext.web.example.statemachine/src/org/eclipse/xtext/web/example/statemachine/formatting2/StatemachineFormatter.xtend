@@ -7,22 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.example.statemachine.formatting2;
 
-import com.google.inject.Inject;
-import org.eclipse.xtext.formatting2.AbstractFormatter2;
-import org.eclipse.xtext.formatting2.IFormattableDocument;
-import org.eclipse.xtext.web.example.statemachine.services.StatemachineGrammarAccess;
-import org.eclipse.xtext.web.example.statemachine.statemachine.Command;
-import org.eclipse.xtext.web.example.statemachine.statemachine.Condition;
-import org.eclipse.xtext.web.example.statemachine.statemachine.Event;
-import org.eclipse.xtext.web.example.statemachine.statemachine.Signal;
-import org.eclipse.xtext.web.example.statemachine.statemachine.State;
-import org.eclipse.xtext.web.example.statemachine.statemachine.Statemachine;
-import org.eclipse.xtext.web.example.statemachine.statemachine.Transition;
+import org.eclipse.xtext.formatting2.AbstractFormatter2
+import org.eclipse.xtext.formatting2.IFormattableDocument
+import org.eclipse.xtext.web.example.statemachine.statemachine.Command
+import org.eclipse.xtext.web.example.statemachine.statemachine.Condition
+import org.eclipse.xtext.web.example.statemachine.statemachine.Signal
+import org.eclipse.xtext.web.example.statemachine.statemachine.State
+import org.eclipse.xtext.web.example.statemachine.statemachine.Statemachine
+import org.eclipse.xtext.web.example.statemachine.statemachine.Transition
 
 class StatemachineFormatter extends AbstractFormatter2 {
 	
-	@Inject extension StatemachineGrammarAccess
-
 	def dispatch void format(Statemachine statemachine, extension IFormattableDocument document) {
 		for (signal : statemachine.getSignals()) {
 			format(signal, document);
