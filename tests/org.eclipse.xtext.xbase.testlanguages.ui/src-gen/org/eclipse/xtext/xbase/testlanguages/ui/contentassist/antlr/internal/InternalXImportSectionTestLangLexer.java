@@ -1,4 +1,5 @@
 package org.eclipse.xtext.xbase.testlanguages.ui.contentassist.antlr.internal;
+
 // Hack: Use our own Lexer superclass by means of import. 
 // Currently there is no other way to specify the superclass for the lexer.
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer;
@@ -13,8 +14,8 @@ import java.util.ArrayList;
 public class InternalXImportSectionTestLangLexer extends Lexer {
     public static final int T__68=68;
     public static final int T__69=69;
-    public static final int RULE_ID=4;
     public static final int T__66=66;
+    public static final int RULE_ID=4;
     public static final int T__67=67;
     public static final int T__29=29;
     public static final int T__64=64;
@@ -42,8 +43,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
     public static final int T__58=58;
     public static final int T__16=16;
     public static final int T__51=51;
-    public static final int T__15=15;
     public static final int T__52=52;
+    public static final int T__15=15;
     public static final int T__53=53;
     public static final int T__18=18;
     public static final int T__54=54;
@@ -116,8 +117,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:10:7: ( '=' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:10:9: '='
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:11:7: ( '=' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:11:9: '='
             {
             match('='); 
 
@@ -136,8 +137,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:11:7: ( '||' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:11:9: '||'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:12:7: ( '||' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:12:9: '||'
             {
             match("||"); 
 
@@ -157,8 +158,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:12:7: ( '&&' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:12:9: '&&'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:13:7: ( '&&' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:13:9: '&&'
             {
             match("&&"); 
 
@@ -178,8 +179,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:13:7: ( '+=' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:13:9: '+='
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:14:7: ( '+=' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:14:9: '+='
             {
             match("+="); 
 
@@ -199,8 +200,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:14:7: ( '-=' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:14:9: '-='
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15:7: ( '-=' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15:9: '-='
             {
             match("-="); 
 
@@ -220,8 +221,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15:7: ( '*=' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:15:9: '*='
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16:7: ( '*=' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16:9: '*='
             {
             match("*="); 
 
@@ -241,8 +242,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16:7: ( '/=' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:16:9: '/='
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17:7: ( '/=' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17:9: '/='
             {
             match("/="); 
 
@@ -262,8 +263,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17:7: ( '%=' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:17:9: '%='
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18:7: ( '%=' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18:9: '%='
             {
             match("%="); 
 
@@ -283,8 +284,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18:7: ( '==' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:18:9: '=='
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19:7: ( '==' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19:9: '=='
             {
             match("=="); 
 
@@ -304,8 +305,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19:7: ( '!=' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19:9: '!='
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:20:7: ( '!=' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:20:9: '!='
             {
             match("!="); 
 
@@ -325,8 +326,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__23;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:20:7: ( '===' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:20:9: '==='
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:21:7: ( '===' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:21:9: '==='
             {
             match("==="); 
 
@@ -346,8 +347,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:21:7: ( '!==' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:21:9: '!=='
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:22:7: ( '!==' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:22:9: '!=='
             {
             match("!=="); 
 
@@ -367,8 +368,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:22:7: ( '>=' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:22:9: '>='
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:23:7: ( '>=' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:23:9: '>='
             {
             match(">="); 
 
@@ -388,8 +389,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__26;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:23:7: ( '>' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:23:9: '>'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:24:7: ( '>' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:24:9: '>'
             {
             match('>'); 
 
@@ -408,8 +409,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:24:7: ( '<' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:24:9: '<'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:25:7: ( '<' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:25:9: '<'
             {
             match('<'); 
 
@@ -428,8 +429,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:25:7: ( '->' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:25:9: '->'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:26:7: ( '->' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:26:9: '->'
             {
             match("->"); 
 
@@ -449,8 +450,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:26:7: ( '..<' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:26:9: '..<'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:27:7: ( '..<' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:27:9: '..<'
             {
             match("..<"); 
 
@@ -470,8 +471,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:27:7: ( '..' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:27:9: '..'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:28:7: ( '..' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:28:9: '..'
             {
             match(".."); 
 
@@ -491,8 +492,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__31;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:28:7: ( '=>' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:28:9: '=>'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:29:7: ( '=>' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:29:9: '=>'
             {
             match("=>"); 
 
@@ -512,8 +513,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__32;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:29:7: ( '<>' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:29:9: '<>'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:30:7: ( '<>' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:30:9: '<>'
             {
             match("<>"); 
 
@@ -533,8 +534,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__33;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:30:7: ( '?:' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:30:9: '?:'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:31:7: ( '?:' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:31:9: '?:'
             {
             match("?:"); 
 
@@ -554,8 +555,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:31:7: ( '+' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:31:9: '+'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:32:7: ( '+' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:32:9: '+'
             {
             match('+'); 
 
@@ -574,8 +575,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__35;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:32:7: ( '-' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:32:9: '-'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:33:7: ( '-' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:33:9: '-'
             {
             match('-'); 
 
@@ -594,8 +595,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__36;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:33:7: ( '*' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:33:9: '*'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:34:7: ( '*' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:34:9: '*'
             {
             match('*'); 
 
@@ -614,8 +615,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__37;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:34:7: ( '**' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:34:9: '**'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:35:7: ( '**' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:35:9: '**'
             {
             match("**"); 
 
@@ -635,8 +636,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__38;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:35:7: ( '/' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:35:9: '/'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:36:7: ( '/' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:36:9: '/'
             {
             match('/'); 
 
@@ -655,8 +656,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__39;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:36:7: ( '%' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:36:9: '%'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:37:7: ( '%' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:37:9: '%'
             {
             match('%'); 
 
@@ -675,8 +676,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__40;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:37:7: ( '!' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:37:9: '!'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:38:7: ( '!' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:38:9: '!'
             {
             match('!'); 
 
@@ -695,8 +696,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__41;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:38:7: ( '++' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:38:9: '++'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:39:7: ( '++' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:39:9: '++'
             {
             match("++"); 
 
@@ -716,8 +717,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__42;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:39:7: ( '--' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:39:9: '--'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:40:7: ( '--' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:40:9: '--'
             {
             match("--"); 
 
@@ -737,8 +738,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__43;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:40:7: ( '.' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:40:9: '.'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:41:7: ( '.' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:41:9: '.'
             {
             match('.'); 
 
@@ -757,8 +758,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__44;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:41:7: ( 'val' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:41:9: 'val'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:42:7: ( 'val' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:42:9: 'val'
             {
             match("val"); 
 
@@ -778,8 +779,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__45;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:42:7: ( 'extends' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:42:9: 'extends'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:43:7: ( 'extends' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:43:9: 'extends'
             {
             match("extends"); 
 
@@ -799,8 +800,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__46;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:43:7: ( 'static' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:43:9: 'static'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:44:7: ( 'static' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:44:9: 'static'
             {
             match("static"); 
 
@@ -820,8 +821,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__47;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:44:7: ( 'import' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:44:9: 'import'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:45:7: ( 'import' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:45:9: 'import'
             {
             match("import"); 
 
@@ -841,8 +842,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__48;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:45:7: ( 'extension' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:45:9: 'extension'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:46:7: ( 'extension' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:46:9: 'extension'
             {
             match("extension"); 
 
@@ -862,8 +863,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__49;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:46:7: ( 'super' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:46:9: 'super'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:47:7: ( 'super' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:47:9: 'super'
             {
             match("super"); 
 
@@ -883,8 +884,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__50;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:47:7: ( 'false' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:47:9: 'false'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:48:7: ( 'false' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:48:9: 'false'
             {
             match("false"); 
 
@@ -904,8 +905,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__51;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:48:7: ( 'some' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:48:9: 'some'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:49:7: ( 'some' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:49:9: 'some'
             {
             match("some"); 
 
@@ -925,8 +926,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__52;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:49:7: ( 'token' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:49:9: 'token'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:50:7: ( 'token' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:50:9: 'token'
             {
             match("token"); 
 
@@ -946,8 +947,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__53;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:50:7: ( 'instanceof' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:50:9: 'instanceof'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:51:7: ( 'instanceof' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:51:9: 'instanceof'
             {
             match("instanceof"); 
 
@@ -967,8 +968,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__54;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:51:7: ( 'as' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:51:9: 'as'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:52:7: ( 'as' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:52:9: 'as'
             {
             match("as"); 
 
@@ -988,8 +989,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__55;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:52:7: ( ',' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:52:9: ','
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:53:7: ( ',' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:53:9: ','
             {
             match(','); 
 
@@ -1008,8 +1009,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__56;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:53:7: ( ')' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:53:9: ')'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:54:7: ( ')' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:54:9: ')'
             {
             match(')'); 
 
@@ -1028,8 +1029,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__57;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:54:7: ( '#' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:54:9: '#'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:55:7: ( '#' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:55:9: '#'
             {
             match('#'); 
 
@@ -1048,8 +1049,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__58;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:55:7: ( '{' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:55:9: '{'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:56:7: ( '{' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:56:9: '{'
             {
             match('{'); 
 
@@ -1068,8 +1069,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__59;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:56:7: ( '}' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:56:9: '}'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:57:7: ( '}' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:57:9: '}'
             {
             match('}'); 
 
@@ -1088,8 +1089,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__60;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:57:7: ( '[' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:57:9: '['
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:58:7: ( '[' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:58:9: '['
             {
             match('['); 
 
@@ -1108,8 +1109,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__61;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:58:7: ( ']' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:58:9: ']'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:59:7: ( ']' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:59:9: ']'
             {
             match(']'); 
 
@@ -1128,8 +1129,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__62;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:59:7: ( ';' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:59:9: ';'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:60:7: ( ';' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:60:9: ';'
             {
             match(';'); 
 
@@ -1148,8 +1149,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__63;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:60:7: ( '(' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:60:9: '('
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:61:7: ( '(' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:61:9: '('
             {
             match('('); 
 
@@ -1168,8 +1169,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__64;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:61:7: ( 'if' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:61:9: 'if'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:62:7: ( 'if' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:62:9: 'if'
             {
             match("if"); 
 
@@ -1189,8 +1190,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__65;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:62:7: ( 'else' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:62:9: 'else'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:63:7: ( 'else' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:63:9: 'else'
             {
             match("else"); 
 
@@ -1210,8 +1211,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__66;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:63:7: ( 'switch' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:63:9: 'switch'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:64:7: ( 'switch' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:64:9: 'switch'
             {
             match("switch"); 
 
@@ -1231,8 +1232,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__67;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:64:7: ( ':' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:64:9: ':'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:65:7: ( ':' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:65:9: ':'
             {
             match(':'); 
 
@@ -1251,8 +1252,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__68;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:65:7: ( 'default' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:65:9: 'default'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:66:7: ( 'default' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:66:9: 'default'
             {
             match("default"); 
 
@@ -1272,8 +1273,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__69;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:66:7: ( 'case' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:66:9: 'case'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:67:7: ( 'case' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:67:9: 'case'
             {
             match("case"); 
 
@@ -1293,8 +1294,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__70;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:67:7: ( 'for' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:67:9: 'for'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:68:7: ( 'for' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:68:9: 'for'
             {
             match("for"); 
 
@@ -1314,8 +1315,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__71;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:68:7: ( 'while' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:68:9: 'while'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:69:7: ( 'while' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:69:9: 'while'
             {
             match("while"); 
 
@@ -1335,8 +1336,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__72;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:69:7: ( 'do' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:69:9: 'do'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:70:7: ( 'do' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:70:9: 'do'
             {
             match("do"); 
 
@@ -1356,8 +1357,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__73;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:70:7: ( 'new' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:70:9: 'new'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:71:7: ( 'new' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:71:9: 'new'
             {
             match("new"); 
 
@@ -1377,8 +1378,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__74;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:71:7: ( 'null' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:71:9: 'null'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:72:7: ( 'null' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:72:9: 'null'
             {
             match("null"); 
 
@@ -1398,8 +1399,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__75;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:72:7: ( 'typeof' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:72:9: 'typeof'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:73:7: ( 'typeof' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:73:9: 'typeof'
             {
             match("typeof"); 
 
@@ -1419,8 +1420,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__76;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:73:7: ( 'throw' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:73:9: 'throw'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:74:7: ( 'throw' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:74:9: 'throw'
             {
             match("throw"); 
 
@@ -1440,8 +1441,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__77;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:74:7: ( 'return' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:74:9: 'return'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:75:7: ( 'return' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:75:9: 'return'
             {
             match("return"); 
 
@@ -1461,8 +1462,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__78;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:75:7: ( 'try' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:75:9: 'try'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:76:7: ( 'try' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:76:9: 'try'
             {
             match("try"); 
 
@@ -1482,8 +1483,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__79;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:76:7: ( 'finally' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:76:9: 'finally'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:77:7: ( 'finally' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:77:9: 'finally'
             {
             match("finally"); 
 
@@ -1503,8 +1504,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__80;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:77:7: ( 'synchronized' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:77:9: 'synchronized'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:78:7: ( 'synchronized' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:78:9: 'synchronized'
             {
             match("synchronized"); 
 
@@ -1524,8 +1525,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__81;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:78:7: ( 'catch' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:78:9: 'catch'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:79:7: ( 'catch' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:79:9: 'catch'
             {
             match("catch"); 
 
@@ -1545,8 +1546,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__82;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:79:7: ( '?' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:79:9: '?'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:80:7: ( '?' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:80:9: '?'
             {
             match('?'); 
 
@@ -1565,8 +1566,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__83;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:80:7: ( '&' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:80:9: '&'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:81:7: ( '&' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:81:9: '&'
             {
             match('&'); 
 
@@ -1585,8 +1586,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__84;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:81:7: ( '::' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:81:9: '::'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:82:7: ( '::' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:82:9: '::'
             {
             match("::"); 
 
@@ -1606,8 +1607,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__85;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:82:7: ( '?.' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:82:9: '?.'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:83:7: ( '?.' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:83:9: '?.'
             {
             match("?."); 
 
@@ -1627,8 +1628,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__86;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:83:7: ( '|' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:83:9: '|'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:84:7: ( '|' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:84:9: '|'
             {
             match('|'); 
 
@@ -1647,8 +1648,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__87;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:84:7: ( 'var' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:84:9: 'var'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:85:7: ( 'var' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:85:9: 'var'
             {
             match("var"); 
 
@@ -1668,8 +1669,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = T__88;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:85:7: ( 'true' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:85:9: 'true'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:86:7: ( 'true' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:86:9: 'true'
             {
             match("true"); 
 
@@ -1689,10 +1690,10 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = RULE_HEX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19408:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19408:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19405:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19405:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19408:12: ( '0x' | '0X' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19405:12: ( '0x' | '0X' )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -1720,7 +1721,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19408:13: '0x'
+                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19405:13: '0x'
                     {
                     match("0x"); 
 
@@ -1728,7 +1729,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19408:18: '0X'
+                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19405:18: '0X'
                     {
                     match("0X"); 
 
@@ -1738,7 +1739,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
 
             }
 
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19408:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19405:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
             int cnt2=0;
             loop2:
             do {
@@ -1776,7 +1777,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                 cnt2++;
             } while (true);
 
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19408:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19405:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -1785,10 +1786,10 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19408:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19405:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     {
                     match('#'); 
-                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19408:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19405:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
@@ -1806,7 +1807,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                     }
                     switch (alt3) {
                         case 1 :
-                            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19408:64: ( 'b' | 'B' ) ( 'i' | 'I' )
+                            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19405:64: ( 'b' | 'B' ) ( 'i' | 'I' )
                             {
                             if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                                 input.consume();
@@ -1830,7 +1831,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19408:84: ( 'l' | 'L' )
+                            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19405:84: ( 'l' | 'L' )
                             {
                             if ( input.LA(1)=='L'||input.LA(1)=='l' ) {
                                 input.consume();
@@ -1869,11 +1870,11 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19410:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19410:12: '0' .. '9' ( '0' .. '9' | '_' )*
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19407:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19407:12: '0' .. '9' ( '0' .. '9' | '_' )*
             {
             matchRange('0','9'); 
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19410:21: ( '0' .. '9' | '_' )*
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19407:21: ( '0' .. '9' | '_' )*
             loop5:
             do {
                 int alt5=2;
@@ -1922,11 +1923,11 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = RULE_DECIMAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19412:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19412:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19409:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19409:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             {
             mRULE_INT(); 
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19412:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19409:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1935,7 +1936,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19412:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
+                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19409:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
                     {
                     if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
                         input.consume();
@@ -1946,7 +1947,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                         recover(mse);
                         throw mse;}
 
-                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19412:36: ( '+' | '-' )?
+                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19409:36: ( '+' | '-' )?
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -1979,7 +1980,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
 
             }
 
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19412:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19409:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             int alt8=3;
             int LA8_0 = input.LA(1);
 
@@ -1991,7 +1992,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19412:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
+                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19409:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
                     {
                     if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                         input.consume();
@@ -2015,7 +2016,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19412:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
+                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19409:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
                     {
                     if ( input.LA(1)=='D'||input.LA(1)=='F'||input.LA(1)=='L'||input.LA(1)=='d'||input.LA(1)=='f'||input.LA(1)=='l' ) {
                         input.consume();
@@ -2048,10 +2049,10 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19414:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19414:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19411:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19411:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19414:11: ( '^' )?
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19411:11: ( '^' )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -2060,7 +2061,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19414:11: '^'
+                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19411:11: '^'
                     {
                     match('^'); 
 
@@ -2078,7 +2079,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19414:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19411:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             loop10:
             do {
                 int alt10=2;
@@ -2127,10 +2128,10 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19416:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? ) )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19416:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19413:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? ) )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19413:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19416:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19413:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -2148,10 +2149,10 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
             }
             switch (alt15) {
                 case 1 :
-                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19416:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )?
+                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19413:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )?
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19416:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19413:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop11:
                     do {
                         int alt11=3;
@@ -2167,7 +2168,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
 
                         switch (alt11) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19416:21: '\\\\' .
+                    	    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19413:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -2175,7 +2176,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19416:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19413:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2195,7 +2196,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                         }
                     } while (true);
 
-                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19416:44: ( '\"' )?
+                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19413:44: ( '\"' )?
                     int alt12=2;
                     int LA12_0 = input.LA(1);
 
@@ -2204,7 +2205,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                     }
                     switch (alt12) {
                         case 1 :
-                            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19416:44: '\"'
+                            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19413:44: '\"'
                             {
                             match('\"'); 
 
@@ -2217,10 +2218,10 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19416:49: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )?
+                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19413:49: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )?
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19416:54: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19413:54: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop13:
                     do {
                         int alt13=3;
@@ -2236,7 +2237,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
 
                         switch (alt13) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19416:55: '\\\\' .
+                    	    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19413:55: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -2244,7 +2245,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19416:62: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19413:62: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2264,7 +2265,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                         }
                     } while (true);
 
-                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19416:79: ( '\\'' )?
+                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19413:79: ( '\\'' )?
                     int alt14=2;
                     int LA14_0 = input.LA(1);
 
@@ -2273,7 +2274,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                     }
                     switch (alt14) {
                         case 1 :
-                            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19416:79: '\\''
+                            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19413:79: '\\''
                             {
                             match('\''); 
 
@@ -2304,12 +2305,12 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19418:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19418:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19415:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19415:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19418:24: ( options {greedy=false; } : . )*
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19415:24: ( options {greedy=false; } : . )*
             loop16:
             do {
                 int alt16=2;
@@ -2334,7 +2335,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
 
                 switch (alt16) {
             	case 1 :
-            	    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19418:52: .
+            	    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19415:52: .
             	    {
             	    matchAny(); 
 
@@ -2364,12 +2365,12 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19420:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19420:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19417:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19417:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19420:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19417:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop17:
             do {
                 int alt17=2;
@@ -2382,7 +2383,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
 
                 switch (alt17) {
             	case 1 :
-            	    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19420:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19417:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2402,7 +2403,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19420:40: ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19417:40: ( ( '\\r' )? '\\n' )?
             int alt19=2;
             int LA19_0 = input.LA(1);
 
@@ -2411,9 +2412,9 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
             }
             switch (alt19) {
                 case 1 :
-                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19420:41: ( '\\r' )? '\\n'
+                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19417:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19420:41: ( '\\r' )?
+                    // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19417:41: ( '\\r' )?
                     int alt18=2;
                     int LA18_0 = input.LA(1);
 
@@ -2422,7 +2423,7 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
                     }
                     switch (alt18) {
                         case 1 :
-                            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19420:41: '\\r'
+                            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19417:41: '\\r'
                             {
                             match('\r'); 
 
@@ -2454,10 +2455,10 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19422:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19422:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19419:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19419:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19422:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19419:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt20=0;
             loop20:
             do {
@@ -2511,8 +2512,8 @@ public class InternalXImportSectionTestLangLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19424:16: ( . )
-            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19424:18: .
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19421:16: ( . )
+            // ../org.eclipse.xtext.xbase.testlanguages.ui/src-gen/org/eclipse/xtext/xbase/testlanguages/ui/contentassist/antlr/internal/InternalXImportSectionTestLang.g:19421:18: .
             {
             matchAny(); 
 

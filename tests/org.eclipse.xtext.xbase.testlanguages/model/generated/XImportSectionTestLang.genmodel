@@ -8,7 +8,7 @@
     editorPluginID="org.eclipse.xtext.xbase.testlanguages.editor" runtimeVersion="2.10"
     usedGenPackages="platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xtype">
   <genPackages prefix="XImportSectionTestLang" basePackage="org.eclipse.xtext.xbase.testlanguages"
-      disposableProviderFactory="true" fileExtensions="__ximportimporttestlang" ecorePackage="XImportSectionTestLang.ecore#/">
+      disposableProviderFactory="true" fileExtensions="" ecorePackage="XImportSectionTestLang.ecore#/">
     <genClasses ecoreClass="XImportSectionTestLang.ecore#//ImportSectionTestLanguageRoot">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XImportSectionTestLang.ecore#//ImportSectionTestLanguageRoot/importSection"/>
     </genClasses>

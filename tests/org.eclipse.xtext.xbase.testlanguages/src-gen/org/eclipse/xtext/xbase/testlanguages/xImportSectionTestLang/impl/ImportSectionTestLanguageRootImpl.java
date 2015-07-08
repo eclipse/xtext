@@ -22,10 +22,10 @@ import org.eclipse.xtext.xtype.XImportSection;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
- * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.xImportSectionTestLang.impl.ImportSectionTestLanguageRootImpl#getImportSection <em>Import Section</em>}</li>
  * </ul>
+ * </p>
  *
  * @generated
  */
