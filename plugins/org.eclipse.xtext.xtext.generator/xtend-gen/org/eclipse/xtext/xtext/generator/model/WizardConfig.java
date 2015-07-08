@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtext.generator.model;
 
 import com.google.inject.Injector;
 import org.eclipse.emf.mwe.core.issues.Issues;
+import org.eclipse.emf.mwe2.runtime.Mandatory;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -36,6 +37,11 @@ public class WizardConfig extends XtextProjectConfig {
   private boolean testingSupport = false;
   
   private boolean mavenLayout = false;
+  
+  @Mandatory
+  public void setRuntimeBase(final String runtimeBase) {
+    this.runtimeBase = runtimeBase;
+  }
   
   @Override
   public void checkConfiguration(final XtextGenerator generator, final Issues issues) {
@@ -249,10 +255,6 @@ public class WizardConfig extends XtextProjectConfig {
   @Pure
   public String getRuntimeBase() {
     return this.runtimeBase;
-  }
-  
-  public void setRuntimeBase(final String runtimeBase) {
-    this.runtimeBase = runtimeBase;
   }
   
   @Pure

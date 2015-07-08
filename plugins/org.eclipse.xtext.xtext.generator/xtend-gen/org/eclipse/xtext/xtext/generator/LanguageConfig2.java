@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.mwe2.runtime.Mandatory;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
@@ -65,12 +66,13 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference;
 @Log
 @SuppressWarnings("all")
 public class LanguageConfig2 extends CompositeGeneratorFragment2 {
-  @Accessors
+  @Accessors(AccessorType.PUBLIC_GETTER)
   private String uri;
   
   @Accessors(AccessorType.PUBLIC_GETTER)
   private Grammar grammar;
   
+  @Accessors(AccessorType.PUBLIC_GETTER)
   private List<String> fileExtensions;
   
   @Accessors
@@ -90,6 +92,11 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
   
   @Inject
   private IXtextProjectConfig projectConfig;
+  
+  @Mandatory
+  public void setUri(final String uri) {
+    this.uri = uri;
+  }
   
   public void setFileExtensions(final String fileExtensions) {
     String _trim = fileExtensions.trim();
@@ -430,10 +437,6 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
   @Pure
   public String getUri() {
     return this.uri;
-  }
-  
-  public void setUri(final String uri) {
-    this.uri = uri;
   }
   
   @Pure
