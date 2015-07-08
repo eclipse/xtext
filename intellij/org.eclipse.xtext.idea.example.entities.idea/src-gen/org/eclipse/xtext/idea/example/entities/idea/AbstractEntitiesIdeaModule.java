@@ -40,8 +40,8 @@ public class AbstractEntitiesIdeaModule extends org.eclipse.xtext.idea.DefaultId
 		return org.eclipse.xtext.idea.example.entities.idea.facet.EntitiesFacetType.TYPEID;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends com.intellij.openapi.fileTypes.SyntaxHighlighter> bindSyntaxHighlighter() {
-		return org.eclipse.xtext.idea.example.entities.idea.highlighting.EntitiesSyntaxHighlighter.class;
+	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return org.eclipse.xtext.idea.example.entities.idea.highlighting.EntitiesHighlightingConfiguration.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
 	public Class<? extends org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider> bindAbstractTypeScopeProvider() {

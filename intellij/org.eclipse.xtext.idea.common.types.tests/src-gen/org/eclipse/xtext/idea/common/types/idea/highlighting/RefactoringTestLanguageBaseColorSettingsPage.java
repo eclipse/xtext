@@ -5,10 +5,10 @@ import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
 
 import com.intellij.openapi.options.colors.AttributesDescriptor;
 
-public class RefactoringTestLanguageDefaultColorSettingsPage extends AbstractColorSettingsPage {
+public class RefactoringTestLanguageBaseColorSettingsPage extends AbstractColorSettingsPage {
 	private AttributesDescriptor[] descriptors;
 
-	public RefactoringTestLanguageDefaultColorSettingsPage() {
+	public RefactoringTestLanguageBaseColorSettingsPage() {
 		RefactoringTestLanguageLanguage.INSTANCE.injectMembers(this);
 	}
 
@@ -16,10 +16,10 @@ public class RefactoringTestLanguageDefaultColorSettingsPage extends AbstractCol
 	public AttributesDescriptor[] getAttributeDescriptors() {
 		if (descriptors == null) {
 			this.descriptors = new AttributesDescriptor[] {
-					createDescriptor("Keywords", RefactoringTestLanguageSyntaxHighlighter.KEYWORD),
-					createDescriptor("Numbers", RefactoringTestLanguageSyntaxHighlighter.NUMBER),
-					createDescriptor("Comments", RefactoringTestLanguageSyntaxHighlighter.COMMENT),
-					createDescriptor("Strings", RefactoringTestLanguageSyntaxHighlighter.STRING) };
+					createDescriptor("Keywords", RefactoringTestLanguageHighlightingConfiguration.KEYWORD),
+					createDescriptor("Numbers", RefactoringTestLanguageHighlightingConfiguration.NUMBER),
+					createDescriptor("Comments", RefactoringTestLanguageHighlightingConfiguration.COMMENT),
+					createDescriptor("Strings", RefactoringTestLanguageHighlightingConfiguration.STRING) };
 		}
 		return this.descriptors;
 	}

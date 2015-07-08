@@ -1,6 +1,6 @@
 package org.eclipse.xtend.core.idea.highlighting
 
-class XtendColorSettingsPage extends XtendDefaultColorSettingsPage {
+class XtendColorSettingsPage extends XtendBaseColorSettingsPage {
 	override String getDemoText() '''
 	/**
 	 *

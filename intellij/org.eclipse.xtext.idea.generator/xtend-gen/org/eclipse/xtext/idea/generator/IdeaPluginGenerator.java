@@ -172,8 +172,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     String _facetTypeName = this._ideaPluginClassNames.getFacetTypeName(grammar);
     String _plus_2 = (_facetTypeName + ".TYPEID");
     bindFactory.addTypeToInstance("com.intellij.facet.FacetTypeId", _plus_2);
-    String _syntaxHighlighter = this._ideaPluginClassNames.syntaxHighlighter(grammar);
-    bindFactory.addTypeToType("com.intellij.openapi.fileTypes.SyntaxHighlighter", _syntaxHighlighter);
+    String _highlightingConfiguration = this._ideaPluginClassNames.highlightingConfiguration(grammar);
+    bindFactory.addTypeToType("org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration", _highlightingConfiguration);
     boolean _doesUseXbase = XbaseGeneratorFragment.doesUseXbase(grammar);
     if (_doesUseXbase) {
       bindFactory.addTypeToType("org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider", "org.eclipse.xtext.idea.common.types.StubBasedTypeScopeProvider");
@@ -282,14 +282,14 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     String _javaPath_19 = this._ideaPluginClassNames.toJavaPath(_facetConfiguration_1);
     CharSequence _compileFacetConfiguration = this.compileFacetConfiguration(grammar);
     ctx.writeFile(outlet_src, _javaPath_19, _compileFacetConfiguration);
-    String _syntaxHighlighter_1 = this._ideaPluginClassNames.syntaxHighlighter(grammar);
-    String _javaPath_20 = this._ideaPluginClassNames.toJavaPath(_syntaxHighlighter_1);
-    CharSequence _compileSyntaxHighlighter = this.compileSyntaxHighlighter(grammar);
-    ctx.writeFile(outlet_src_gen, _javaPath_20, _compileSyntaxHighlighter);
-    String _defaultColorSettingsPage = this._ideaPluginClassNames.defaultColorSettingsPage(grammar);
-    String _javaPath_21 = this._ideaPluginClassNames.toJavaPath(_defaultColorSettingsPage);
-    CharSequence _compileDefaultColorSettingsPage = this.compileDefaultColorSettingsPage(grammar);
-    ctx.writeFile(outlet_src_gen, _javaPath_21, _compileDefaultColorSettingsPage);
+    String _highlightingConfiguration_1 = this._ideaPluginClassNames.highlightingConfiguration(grammar);
+    String _javaPath_20 = this._ideaPluginClassNames.toJavaPath(_highlightingConfiguration_1);
+    CharSequence _compileHighlightingConfiguration = this.compileHighlightingConfiguration(grammar);
+    ctx.writeFile(outlet_src_gen, _javaPath_20, _compileHighlightingConfiguration);
+    String _baseColorSettingsPage = this._ideaPluginClassNames.baseColorSettingsPage(grammar);
+    String _javaPath_21 = this._ideaPluginClassNames.toJavaPath(_baseColorSettingsPage);
+    CharSequence _compileBaseColorSettingsPage = this.compileBaseColorSettingsPage(grammar);
+    ctx.writeFile(outlet_src_gen, _javaPath_21, _compileBaseColorSettingsPage);
     String _colorSettingsPage = this._ideaPluginClassNames.colorSettingsPage(grammar);
     String _javaPath_22 = this._ideaPluginClassNames.toJavaPath(_colorSettingsPage);
     CharSequence _compileColorSettingsPage = this.compileColorSettingsPage(grammar);
@@ -2995,7 +2995,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     return _builder;
   }
   
-  public CharSequence compileSyntaxHighlighter(final Grammar grammar) {
+  public CharSequence compileHighlightingConfiguration(final Grammar grammar) {
     StringConcatenation _builder = new StringConcatenation();
     String _xifexpression = null;
     boolean _doesUseXbase = XbaseGeneratorFragment.doesUseXbase(grammar);
@@ -3007,8 +3007,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     final String colorsClass = _xifexpression;
     _builder.newLineIfNotEmpty();
     _builder.append("package ");
-    String _syntaxHighlighter = this._ideaPluginClassNames.syntaxHighlighter(grammar);
-    String _packageName = this._ideaPluginClassNames.toPackageName(_syntaxHighlighter);
+    String _highlightingConfiguration = this._ideaPluginClassNames.highlightingConfiguration(grammar);
+    String _packageName = this._ideaPluginClassNames.toPackageName(_highlightingConfiguration);
     _builder.append(_packageName, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -3023,7 +3023,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;");
     _builder.newLine();
-    _builder.append("import org.eclipse.xtext.idea.highlighting.AbstractSyntaxHighlighter;");
+    _builder.append("import org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration;");
     _builder.newLine();
     _builder.append("import ");
     String _languageName = this._ideaPluginClassNames.getLanguageName(grammar);
@@ -3032,10 +3032,10 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("public class ");
-    String _syntaxHighlighter_1 = this._ideaPluginClassNames.syntaxHighlighter(grammar);
-    String _simpleName = this._ideaPluginClassNames.toSimpleName(_syntaxHighlighter_1);
+    String _highlightingConfiguration_1 = this._ideaPluginClassNames.highlightingConfiguration(grammar);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(_highlightingConfiguration_1);
     _builder.append(_simpleName, "");
-    _builder.append(" extends AbstractSyntaxHighlighter {");
+    _builder.append(" implements IHighlightingConfiguration {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("public final static TextAttributesKey NUMBER = TextAttributesKey.createTextAttributesKey(");
@@ -3101,7 +3101,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("@Override");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public TextAttributesKey createOrGetTextAttributesKey(final String attribute) {");
+    _builder.append("public TextAttributesKey getTextAttributesKey(final String attribute) {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("if (HighlightingStyles.KEYWORD_ID.equals(attribute)) {");
@@ -3140,11 +3140,11 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     return _builder;
   }
   
-  public CharSequence compileDefaultColorSettingsPage(final Grammar grammar) {
+  public CharSequence compileBaseColorSettingsPage(final Grammar grammar) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _defaultColorSettingsPage = this._ideaPluginClassNames.defaultColorSettingsPage(grammar);
-    String _packageName = this._ideaPluginClassNames.toPackageName(_defaultColorSettingsPage);
+    String _baseColorSettingsPage = this._ideaPluginClassNames.baseColorSettingsPage(grammar);
+    String _packageName = this._ideaPluginClassNames.toPackageName(_baseColorSettingsPage);
     _builder.append(_packageName, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -3161,8 +3161,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.newLine();
     _builder.append("public class ");
-    String _defaultColorSettingsPage_1 = this._ideaPluginClassNames.defaultColorSettingsPage(grammar);
-    String _simpleName = this._ideaPluginClassNames.toSimpleName(_defaultColorSettingsPage_1);
+    String _baseColorSettingsPage_1 = this._ideaPluginClassNames.baseColorSettingsPage(grammar);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(_baseColorSettingsPage_1);
     _builder.append(_simpleName, "");
     _builder.append(" extends AbstractColorSettingsPage {");
     _builder.newLineIfNotEmpty();
@@ -3172,8 +3172,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public ");
-    String _defaultColorSettingsPage_2 = this._ideaPluginClassNames.defaultColorSettingsPage(grammar);
-    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_defaultColorSettingsPage_2);
+    String _baseColorSettingsPage_2 = this._ideaPluginClassNames.baseColorSettingsPage(grammar);
+    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_baseColorSettingsPage_2);
     _builder.append(_simpleName_1, "\t");
     _builder.append("() {");
     _builder.newLineIfNotEmpty();
@@ -3201,29 +3201,29 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
     _builder.append("createDescriptor(\"Keywords\", ");
-    String _syntaxHighlighter = this._ideaPluginClassNames.syntaxHighlighter(grammar);
-    String _simpleName_3 = this._ideaPluginClassNames.toSimpleName(_syntaxHighlighter);
+    String _highlightingConfiguration = this._ideaPluginClassNames.highlightingConfiguration(grammar);
+    String _simpleName_3 = this._ideaPluginClassNames.toSimpleName(_highlightingConfiguration);
     _builder.append(_simpleName_3, "\t\t\t\t\t");
     _builder.append(".KEYWORD),");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t");
     _builder.append("createDescriptor(\"Numbers\", ");
-    String _syntaxHighlighter_1 = this._ideaPluginClassNames.syntaxHighlighter(grammar);
-    String _simpleName_4 = this._ideaPluginClassNames.toSimpleName(_syntaxHighlighter_1);
+    String _highlightingConfiguration_1 = this._ideaPluginClassNames.highlightingConfiguration(grammar);
+    String _simpleName_4 = this._ideaPluginClassNames.toSimpleName(_highlightingConfiguration_1);
     _builder.append(_simpleName_4, "\t\t\t\t\t");
     _builder.append(".NUMBER),");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t");
     _builder.append("createDescriptor(\"Comments\", ");
-    String _syntaxHighlighter_2 = this._ideaPluginClassNames.syntaxHighlighter(grammar);
-    String _simpleName_5 = this._ideaPluginClassNames.toSimpleName(_syntaxHighlighter_2);
+    String _highlightingConfiguration_2 = this._ideaPluginClassNames.highlightingConfiguration(grammar);
+    String _simpleName_5 = this._ideaPluginClassNames.toSimpleName(_highlightingConfiguration_2);
     _builder.append(_simpleName_5, "\t\t\t\t\t");
     _builder.append(".COMMENT),");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t");
     _builder.append("createDescriptor(\"Strings\", ");
-    String _syntaxHighlighter_3 = this._ideaPluginClassNames.syntaxHighlighter(grammar);
-    String _simpleName_6 = this._ideaPluginClassNames.toSimpleName(_syntaxHighlighter_3);
+    String _highlightingConfiguration_3 = this._ideaPluginClassNames.highlightingConfiguration(grammar);
+    String _simpleName_6 = this._ideaPluginClassNames.toSimpleName(_highlightingConfiguration_3);
     _builder.append(_simpleName_6, "\t\t\t\t\t");
     _builder.append(".STRING) };");
     _builder.newLineIfNotEmpty();
@@ -3271,8 +3271,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     String _simpleName = this._ideaPluginClassNames.toSimpleName(_colorSettingsPage_1);
     _builder.append(_simpleName, "");
     _builder.append(" extends ");
-    String _defaultColorSettingsPage = this._ideaPluginClassNames.defaultColorSettingsPage(grammar);
-    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_defaultColorSettingsPage);
+    String _baseColorSettingsPage = this._ideaPluginClassNames.baseColorSettingsPage(grammar);
+    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_baseColorSettingsPage);
     _builder.append(_simpleName_1, "");
     _builder.append(" {");
     _builder.newLineIfNotEmpty();

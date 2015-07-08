@@ -5,10 +5,10 @@ import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
 
 import com.intellij.openapi.options.colors.AttributesDescriptor;
 
-public class ExBeeLangTestLanguageDefaultColorSettingsPage extends AbstractColorSettingsPage {
+public class ExBeeLangTestLanguageBaseColorSettingsPage extends AbstractColorSettingsPage {
 	private AttributesDescriptor[] descriptors;
 
-	public ExBeeLangTestLanguageDefaultColorSettingsPage() {
+	public ExBeeLangTestLanguageBaseColorSettingsPage() {
 		ExBeeLangTestLanguageLanguage.INSTANCE.injectMembers(this);
 	}
 
@@ -16,10 +16,10 @@ public class ExBeeLangTestLanguageDefaultColorSettingsPage extends AbstractColor
 	public AttributesDescriptor[] getAttributeDescriptors() {
 		if (descriptors == null) {
 			this.descriptors = new AttributesDescriptor[] {
-					createDescriptor("Keywords", ExBeeLangTestLanguageSyntaxHighlighter.KEYWORD),
-					createDescriptor("Numbers", ExBeeLangTestLanguageSyntaxHighlighter.NUMBER),
-					createDescriptor("Comments", ExBeeLangTestLanguageSyntaxHighlighter.COMMENT),
-					createDescriptor("Strings", ExBeeLangTestLanguageSyntaxHighlighter.STRING) };
+					createDescriptor("Keywords", ExBeeLangTestLanguageHighlightingConfiguration.KEYWORD),
+					createDescriptor("Numbers", ExBeeLangTestLanguageHighlightingConfiguration.NUMBER),
+					createDescriptor("Comments", ExBeeLangTestLanguageHighlightingConfiguration.COMMENT),
+					createDescriptor("Strings", ExBeeLangTestLanguageHighlightingConfiguration.STRING) };
 		}
 		return this.descriptors;
 	}

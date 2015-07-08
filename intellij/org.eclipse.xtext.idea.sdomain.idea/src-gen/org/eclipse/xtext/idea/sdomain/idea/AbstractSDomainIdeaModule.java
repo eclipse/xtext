@@ -40,8 +40,8 @@ public class AbstractSDomainIdeaModule extends org.eclipse.xtext.idea.DefaultIde
 		return org.eclipse.xtext.idea.sdomain.idea.facet.SDomainFacetType.TYPEID;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends com.intellij.openapi.fileTypes.SyntaxHighlighter> bindSyntaxHighlighter() {
-		return org.eclipse.xtext.idea.sdomain.idea.highlighting.SDomainSyntaxHighlighter.class;
+	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return org.eclipse.xtext.idea.sdomain.idea.highlighting.SDomainHighlightingConfiguration.class;
 	}
 	
 	

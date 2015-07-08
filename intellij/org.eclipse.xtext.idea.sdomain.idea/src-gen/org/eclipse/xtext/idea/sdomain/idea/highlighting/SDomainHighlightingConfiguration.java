@@ -4,10 +4,10 @@ import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.HighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
-import org.eclipse.xtext.idea.highlighting.AbstractSyntaxHighlighter;
+import org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration;
 import org.eclipse.xtext.idea.sdomain.idea.lang.SDomainLanguage;
 
-public class SDomainSyntaxHighlighter extends AbstractSyntaxHighlighter {
+public class SDomainHighlightingConfiguration implements IHighlightingConfiguration {
 	public final static TextAttributesKey NUMBER = TextAttributesKey.createTextAttributesKey(
 			(SDomainLanguage.INSTANCE.getID() + HighlightingStyles.NUMBER_ID), DefaultLanguageHighlighterColors.NUMBER);
 
@@ -23,7 +23,7 @@ public class SDomainSyntaxHighlighter extends AbstractSyntaxHighlighter {
 			(SDomainLanguage.INSTANCE.getID() + HighlightingStyles.STRING_ID), DefaultLanguageHighlighterColors.STRING);
 
 	@Override
-	public TextAttributesKey createOrGetTextAttributesKey(final String attribute) {
+	public TextAttributesKey getTextAttributesKey(final String attribute) {
 		if (HighlightingStyles.KEYWORD_ID.equals(attribute)) {
 			return KEYWORD;
 		} else if (HighlightingStyles.STRING_ID.equals(attribute)) {

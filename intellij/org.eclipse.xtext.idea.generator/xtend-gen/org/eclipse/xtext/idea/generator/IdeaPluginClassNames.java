@@ -347,28 +347,28 @@ public class IdeaPluginClassNames {
     return (_plus_1 + "FacetType");
   }
   
-  public String syntaxHighlighter(final Grammar it) {
+  public String highlightingConfiguration(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".highlighting.");
     String _name = it.getName();
     String _simpleName = this.toSimpleName(_name);
     String _plus_1 = (_plus + _simpleName);
-    return (_plus_1 + "SyntaxHighlighter");
+    return (_plus_1 + "HighlightingConfiguration");
   }
   
-  public String defaultColorSettingsPage(final Grammar it) {
-    String _syntaxHighlighter = this.syntaxHighlighter(it);
-    String _packageName = this.toPackageName(_syntaxHighlighter);
+  public String baseColorSettingsPage(final Grammar it) {
+    String _highlightingConfiguration = this.highlightingConfiguration(it);
+    String _packageName = this.toPackageName(_highlightingConfiguration);
     String _plus = (_packageName + ".");
     String _name = it.getName();
     String _simpleName = this.toSimpleName(_name);
     String _plus_1 = (_plus + _simpleName);
-    return (_plus_1 + "DefaultColorSettingsPage");
+    return (_plus_1 + "BaseColorSettingsPage");
   }
   
   public String colorSettingsPage(final Grammar it) {
-    String _defaultColorSettingsPage = this.defaultColorSettingsPage(it);
-    String _packageName = this.toPackageName(_defaultColorSettingsPage);
+    String _baseColorSettingsPage = this.baseColorSettingsPage(it);
+    String _packageName = this.toPackageName(_baseColorSettingsPage);
     String _plus = (_packageName + ".");
     String _name = it.getName();
     String _simpleName = this.toSimpleName(_name);

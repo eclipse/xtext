@@ -40,8 +40,8 @@ public class AbstractRefactoringTestLanguageIdeaModule extends org.eclipse.xtext
 		return org.eclipse.xtext.idea.common.types.idea.facet.RefactoringTestLanguageFacetType.TYPEID;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends com.intellij.openapi.fileTypes.SyntaxHighlighter> bindSyntaxHighlighter() {
-		return org.eclipse.xtext.idea.common.types.idea.highlighting.RefactoringTestLanguageSyntaxHighlighter.class;
+	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return org.eclipse.xtext.idea.common.types.idea.highlighting.RefactoringTestLanguageHighlightingConfiguration.class;
 	}
 	
 	

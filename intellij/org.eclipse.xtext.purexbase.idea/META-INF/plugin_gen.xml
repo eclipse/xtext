@@ -48,5 +48,6 @@
       							factoryClass="org.eclipse.xtext.purexbase.idea.PureXbaseExtensionFactory"
       							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
 		<facetType implementation="org.eclipse.xtext.purexbase.idea.facet.PureXbaseFacetType"/>
+		<colorSettingsPage implementation="org.eclipse.xtext.purexbase.idea.highlighting.PureXbaseColorSettingsPage"/>
 	</extensions>
 </idea-plugin>

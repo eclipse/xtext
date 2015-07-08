@@ -1,10 +1,10 @@
 package org.eclipse.xtend.core.idea.highlighting;
 
-import org.eclipse.xtend.core.idea.highlighting.XtendDefaultColorSettingsPage;
+import org.eclipse.xtend.core.idea.highlighting.XtendBaseColorSettingsPage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
-public class XtendColorSettingsPage extends XtendDefaultColorSettingsPage {
+public class XtendColorSettingsPage extends XtendBaseColorSettingsPage {
   @Override
   public String getDemoText() {
     StringConcatenation _builder = new StringConcatenation();

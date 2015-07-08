@@ -5,10 +5,10 @@ import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
 
 import com.intellij.openapi.options.colors.AttributesDescriptor;
 
-public class XtextDefaultColorSettingsPage extends AbstractColorSettingsPage {
+public class XtextBaseColorSettingsPage extends AbstractColorSettingsPage {
 	private AttributesDescriptor[] descriptors;
 
-	public XtextDefaultColorSettingsPage() {
+	public XtextBaseColorSettingsPage() {
 		XtextLanguage.INSTANCE.injectMembers(this);
 	}
 
@@ -16,10 +16,10 @@ public class XtextDefaultColorSettingsPage extends AbstractColorSettingsPage {
 	public AttributesDescriptor[] getAttributeDescriptors() {
 		if (descriptors == null) {
 			this.descriptors = new AttributesDescriptor[] {
-					createDescriptor("Keywords", XtextSyntaxHighlighter.KEYWORD),
-					createDescriptor("Numbers", XtextSyntaxHighlighter.NUMBER),
-					createDescriptor("Comments", XtextSyntaxHighlighter.COMMENT),
-					createDescriptor("Strings", XtextSyntaxHighlighter.STRING) };
+					createDescriptor("Keywords", XtextHighlightingConfiguration.KEYWORD),
+					createDescriptor("Numbers", XtextHighlightingConfiguration.NUMBER),
+					createDescriptor("Comments", XtextHighlightingConfiguration.COMMENT),
+					createDescriptor("Strings", XtextHighlightingConfiguration.STRING) };
 		}
 		return this.descriptors;
 	}

@@ -10,7 +10,6 @@ package org.eclipse.xtext.idea.highlighting
 import com.google.inject.Inject
 import com.google.inject.Provider
 import com.intellij.lexer.Lexer
-import com.intellij.openapi.editor.colors.TextAttributesKey
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase
 import com.intellij.psi.tree.IElementType
 import org.eclipse.xtext.ide.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper
@@ -19,16 +18,13 @@ import org.eclipse.xtext.idea.parser.TokenTypeProvider
 /**
  * @author kosyakov - Initial contribution and API
  */
-abstract class AbstractSyntaxHighlighter extends SyntaxHighlighterBase {
+class DefaultSyntaxHighlighter extends SyntaxHighlighterBase {
 
-	@Inject
-	Provider<Lexer> lexerProvider
+	@Inject Provider<Lexer> lexerProvider
+	@Inject IHighlightingConfiguration highlightingConfiguration
 
-	@Inject
-	extension TokenTypeProvider tokenTypeProvider
-
-	@Inject
-	extension AbstractAntlrTokenToAttributeIdMapper tokenToAttributeIdMapper
+	@Inject extension TokenTypeProvider tokenTypeProvider
+	@Inject extension AbstractAntlrTokenToAttributeIdMapper tokenToAttributeIdMapper
 
 	override getHighlightingLexer() {
 		lexerProvider.get
@@ -36,8 +32,7 @@ abstract class AbstractSyntaxHighlighter extends SyntaxHighlighterBase {
 
 	override getTokenHighlights(IElementType tokenType) {
 		val attribute = tokenType.antlrType.id
-		return pack(createOrGetTextAttributesKey(attribute))
+		return pack(highlightingConfiguration.getTextAttributesKey(attribute))
 	}
 
-	abstract def TextAttributesKey createOrGetTextAttributesKey(String attribute)
 }

@@ -1,4 +1,4 @@
 package org.eclipse.xtext.idea.highlighting;
 
-public class XtextColorSettingsPage extends XtextDefaultColorSettingsPage {
+public class XtextColorSettingsPage extends XtextBaseColorSettingsPage {
 }
