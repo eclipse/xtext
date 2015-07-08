@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.idea;
 
+import org.eclipse.xtend.core.idea.editorActions.XtendAutoEditBlockProvider;
+import org.eclipse.xtend.core.idea.editorActions.XtendTokenSetProvider;
 import org.eclipse.xtend.core.idea.macro.IdeaFileSystemSupport;
 import org.eclipse.xtend.core.idea.macro.IdeaProcessorProvider;
 import org.eclipse.xtend.core.idea.presentation.XtendItemPresentationProvider;
@@ -25,6 +27,8 @@ import org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
+import org.eclipse.xtext.idea.editorActions.AutoEditBlockProvider;
+import org.eclipse.xtext.idea.editorActions.TokenSetProvider;
 import org.eclipse.xtext.idea.presentation.ItemPresentationProvider;
 import org.eclipse.xtext.idea.structureview.XtextFileAwareStructureViewBuilder;
 import org.eclipse.xtext.linking.ILinker;
@@ -91,6 +95,16 @@ public class XtendIdeaModule extends AbstractXtendIdeaModule {
 	@Override
 	public void configureGlobalModificationTracker(Binder binder) {
 		binder.bind(Key.class).annotatedWith(Names.named(BaseXtextFile.GLOBAL_MODIFICATION_COUNT)).toInstance(PsiModificationTracker.JAVA_STRUCTURE_MODIFICATION_COUNT);
+	}
+	
+	@SingletonBinding
+	public Class<? extends TokenSetProvider> bindTokenSetProvider() {
+		return XtendTokenSetProvider.class;
+	}
+	
+	@SingletonBinding
+	public Class<? extends AutoEditBlockProvider> bindAutoEditBlockProvider() {
+		return XtendAutoEditBlockProvider.class;
 	}
 
 }

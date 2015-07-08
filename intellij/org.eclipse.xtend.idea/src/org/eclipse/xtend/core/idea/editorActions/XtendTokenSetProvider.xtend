@@ -11,32 +11,30 @@ import com.google.inject.Inject
 import com.intellij.openapi.editor.ex.EditorEx
 import com.intellij.psi.tree.IElementType
 import com.intellij.psi.tree.TokenSet
-import org.eclipse.xtext.idea.editorActions.AutoEditString
-import org.eclipse.xtext.idea.editorActions.DefaultAutoEditHandler
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.idea.editorActions.DefaultTokenSetProvider
 import org.eclipse.xtext.idea.parser.TokenTypeProvider
 
 import static org.eclipse.xtend.core.idea.parser.antlr.internal.PsiInternalXtendParser.*
-import org.eclipse.xtext.idea.editorActions.AutoEditMultiLineBlock
+import com.google.inject.Singleton
 
 /**
  * @author kosyakov - Initial contribution and API
  */
-class XtendAutoEditHandler extends DefaultAutoEditHandler {
+@Singleton
+class XtendTokenSetProvider extends DefaultTokenSetProvider {
 
-	TokenSet slCommentTokens
+	val TokenSet slCommentTokens
 
-	TokenSet richStringLiteralTokens
-
-	override protected getQuotes() {
-		#[
-			new AutoEditRichString(richStringLiteralTokens),
-			new AutoEditString('"'),
-			new AutoEditString("'")
-		]
-	}
+	@Accessors
+	val TokenSet richStringLiteralTokens
 
 	@Inject
-	def void setTokenTypeProvider(TokenTypeProvider tokenTypeProvider) {
+	new(TokenTypeProvider tokenTypeProvider) {
+		slCommentTokens = TokenSet.create(
+			tokenTypeProvider.getIElementType(RULE_SL_COMMENT)
+		)
+
 		richStringLiteralTokens = TokenSet.create(
 			tokenTypeProvider.getIElementType(RULE_RICH_TEXT),
 			tokenTypeProvider.getIElementType(RULE_RICH_TEXT_START),
@@ -45,25 +43,6 @@ class XtendAutoEditHandler extends DefaultAutoEditHandler {
 			tokenTypeProvider.getIElementType(RULE_COMMENT_RICH_TEXT_END),
 			tokenTypeProvider.getIElementType(RULE_COMMENT_RICH_TEXT_INBETWEEN)
 		)
-
-		// TODO: should be done by default implementation
-		slCommentTokens = TokenSet.create(
-			tokenTypeProvider.getIElementType(RULE_SL_COMMENT)
-		)
-	}
-
-	override protected getBlocks(TokenSet tokenSet) {
-		if (tokenSet == richStringLiteralTokens) {
-			return #[
-				new AutoEditMultiLineBlockInRichString('{', '}'),
-				new AutoEditMultiLineBlock('«', '»') => [
-					shouldDeleteClosing = true
-					shouldInsertClosingTerminalBeforeDigit = true
-					shouldInsertClosingTerminalBeforeSpecialCharacters = true
-				]
-			]
-		}
-		super.getBlocks(tokenSet)
 	}
 
 	override getTokenSet(IElementType tokenType) {
@@ -73,8 +52,8 @@ class XtendAutoEditHandler extends DefaultAutoEditHandler {
 		super.getTokenSet(tokenType)
 	}
 
-	// TODO: remove it
-	override protected getSingleLineCommentTokens() {
+	// TODO: delegate to TokenTypeProvider and move up to DefaultTokenSetProvider
+	override getSingleLineCommentTokens() {
 		slCommentTokens
 	}
 
