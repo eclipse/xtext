@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.ide.highlighting;
+package org.eclipse.xtend.ide.common.highlighting;
 
 import java.util.Iterator;
 import java.util.List;
@@ -15,8 +15,6 @@ import java.util.Set;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.jface.text.IRegion;
-import org.eclipse.jface.text.Region;
 import org.eclipse.xtend.core.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtend.core.richstring.DefaultIndentationHandler;
 import org.eclipse.xtend.core.richstring.RichStringProcessor;
@@ -55,11 +53,12 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.ide.highlighting.XbaseHighlightingCalculator;
-import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration;
+import org.eclipse.xtext.xbase.ide.highlighting.XbaseHighlightingStyles;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
@@ -69,6 +68,7 @@ import com.google.inject.Provider;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Holger Schill
+ * @since 2.9
  */
 public class XtendHighlightingCalculator extends XbaseHighlightingCalculator implements XtendHighlightingStyles {
 
@@ -193,14 +193,14 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator imp
 				ICompositeNode compositeNode = NodeModelUtils.getNode(target);
 				for(ILeafNode leaf: compositeNode.getLeafNodes()) {
 					if (leaf.getGrammarElement() == xtendGrammarAccess.getMemberAccess().getNewKeyword_2_2_2()) {
-						highlightNode(acceptor, leaf, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
+						highlightNode(acceptor, leaf, XbaseHighlightingStyles.DEPRECATED_MEMBERS);
 						highlightNode(acceptor, leaf, HighlightingStyles.KEYWORD_ID);
 						return;
 					}
 				}
 			} else {
 				EStructuralFeature nameFeature = target.eClass().getEStructuralFeature("name");
-				highlightFeature(acceptor, target, nameFeature, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
+				highlightFeature(acceptor, target, nameFeature, XbaseHighlightingStyles.DEPRECATED_MEMBERS);
 			}
 		}
 	}
@@ -241,9 +241,9 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator imp
 			if(nodes.size() > 0){
 				INode node = nodes.get(0);
 				if(field.isStatic())
-					highlightNode(acceptor, node, XbaseHighlightingConfiguration.STATIC_FIELD);
+					highlightNode(acceptor, node, XbaseHighlightingStyles.STATIC_FIELD);
 				else
-					highlightNode(acceptor, node, XbaseHighlightingConfiguration.FIELD);
+					highlightNode(acceptor, node, XbaseHighlightingStyles.FIELD);
 			}
 		}
 	}
@@ -253,7 +253,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator imp
 		private int currentOffset = -1;
 		private RichStringLiteral recent = null;
 		private final IHighlightedPositionAcceptor acceptor;
-		private Queue<IRegion> pendingRegions = Lists.newLinkedList();
+		private Queue<ITextRegion> pendingRegions = Lists.newLinkedList();
 
 		public RichStringHighlighter(IHighlightedPositionAcceptor acceptor) {
 			this.acceptor = acceptor;
@@ -288,7 +288,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator imp
 						}
 						int expectedOffset = recentNode.getTotalEndOffset() - closingQuoteLength;
 						if (expectedOffset != currentOffset) {
-							pendingRegions.add(new Region(currentOffset, expectedOffset - currentOffset));
+							pendingRegions.add(new TextRegion(currentOffset, expectedOffset - currentOffset));
 						}
 					}
 				}
@@ -356,7 +356,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator imp
 			if (text.length() > 0) {
 				int length = text.length();
 				while (!pendingRegions.isEmpty()) {
-					IRegion pending = pendingRegions.poll();
+					ITextRegion pending = pendingRegions.poll();
 					length -= pending.getLength();
 					acceptor.addPosition(pending.getOffset(), pending.getLength(),
 							INSIGNIFICANT_TEMPLATE_TEXT);

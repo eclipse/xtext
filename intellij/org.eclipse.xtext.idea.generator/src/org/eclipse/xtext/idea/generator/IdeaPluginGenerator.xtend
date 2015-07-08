@@ -140,6 +140,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		ctx.writeFile(outlet_src_gen, grammar.elementTypeProviderName.toJavaPath, grammar.compileElementTypeProvider)
 		ctx.writeFile(outlet_src_gen, grammar.parserDefinitionName.toJavaPath, grammar.compileParserDefinition)
 		ctx.writeFile(outlet_src_gen, grammar.syntaxHighlighterFactoryName.toJavaPath, grammar.compileSyntaxHighlighterFactory)
+		ctx.writeFile(outlet_src_gen, grammar.semanticHighlightVisitorName.toJavaPath, grammar.compileSemanticHighlightVisitor)
 		ctx.writeFile(outlet_src_gen, grammar.abstractIdeaModuleName.toJavaPath, grammar.compileGuiceModuleIdeaGenerated(bindings))
 		ctx.writeFile(outlet_src_gen, grammar.extensionFactoryName.toJavaPath, grammar.compileExtensionFactory)
 		ctx.writeFile(outlet_src_gen, grammar.codeBlockModificationListenerName.toJavaPath, grammar.compileCodeBlockModificationListener)
@@ -151,7 +152,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		ctx.writeFile(outlet_src, grammar.facetConfiguration.toJavaPath, grammar.compileFacetConfiguration)
 		ctx.writeFile(outlet_src_gen, grammar.highlightingConfiguration.toJavaPath, grammar.compileHighlightingConfiguration)
 		ctx.writeFile(outlet_src_gen, grammar.baseColorSettingsPage.toJavaPath, grammar.compileBaseColorSettingsPage)
-		ctx.writeFile(outlet_src, grammar.colorSettingsPage.toJavaPath, grammar.compileColorSettingsPage)
+		ctx.writeFile(outlet_src, grammar.colorSettingsPage.toXtendPath, grammar.compileColorSettingsPage)
 		
 		var output = new OutputImpl();
 		output.addOutlet(PLUGIN, false, ideaProjectPath);
@@ -445,6 +446,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		      	«grammar.compileExtension('lang.psiStructureViewFactory', 'com.intellij.lang.PsiStructureViewFactory')»
 				<facetType implementation="«grammar.facetTypeName»"/>
 				<colorSettingsPage implementation="«grammar.colorSettingsPage»"/>
+				<highlightVisitor implementation="«grammar.semanticHighlightVisitorName»"/>
 			</extensions>
 		</idea-plugin>
 	'''
@@ -790,6 +792,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		
 		import com.intellij.openapi.fileTypes.SingleLazyInstanceSyntaxHighlighterFactory;
 		import com.intellij.openapi.fileTypes.SyntaxHighlighter;
+		import «grammar.languageName»;
 		
 		public class «grammar.syntaxHighlighterFactoryName.toSimpleName» extends SingleLazyInstanceSyntaxHighlighterFactory {
 			
@@ -799,6 +802,19 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		        return «grammar.languageName.toSimpleName».INSTANCE.getInstance(SyntaxHighlighter.class);
 		    }
 		
+		}
+	'''
+	
+	def compileSemanticHighlightVisitor(Grammar grammar) '''
+		package «grammar.semanticHighlightVisitorName.toPackageName»;
+		
+		import org.eclipse.xtext.idea.highlighting.SemanticHighlightVisitor;
+		import «grammar.languageName»;
+		
+		public class «grammar.semanticHighlightVisitorName.toSimpleName» extends SemanticHighlightVisitor {
+			public «grammar.semanticHighlightVisitorName.toSimpleName»() {
+				«grammar.languageName.toSimpleName».INSTANCE.injectMembers(this);
+			}
 		}
 	'''
 	
@@ -1057,9 +1073,9 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	
 	def CharSequence compileColorSettingsPage(Grammar grammar)
 	'''
-	package «grammar.colorSettingsPage.toPackageName»;
+	package «grammar.colorSettingsPage.toPackageName»
 	
-	public class «grammar.colorSettingsPage.toSimpleName» extends «grammar.baseColorSettingsPage.toSimpleName» {
+	class «grammar.colorSettingsPage.toSimpleName» extends «grammar.baseColorSettingsPage.toSimpleName» {
 	}'''
 	
 }

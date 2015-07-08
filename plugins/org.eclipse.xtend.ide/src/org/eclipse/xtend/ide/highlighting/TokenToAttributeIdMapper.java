@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.highlighting;
 
+import org.eclipse.xtend.ide.common.highlighting.XtendHighlightingStyles;
 import org.eclipse.xtend.ide.editor.model.XtendDocumentTokenSource;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper;

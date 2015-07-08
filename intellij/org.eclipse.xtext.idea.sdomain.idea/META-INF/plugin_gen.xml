@@ -33,7 +33,7 @@
 		<lang.namesValidator language="org.eclipse.xtext.idea.sdomain.SDomain"
 								factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"
 								implementationClass="com.intellij.lang.refactoring.NamesValidator"/>
-      	<lang.syntaxHighlighterFactory key="org.eclipse.xtext.idea.sdomain.SDomain" implementationClass="org.eclipse.xtext.idea.sdomain.idea.lang.SDomainSyntaxHighlighterFactory" />
+      	<lang.syntaxHighlighterFactory key="org.eclipse.xtext.idea.sdomain.SDomain" implementationClass="org.eclipse.xtext.idea.sdomain.idea.highlighting.SDomainSyntaxHighlighterFactory" />
 		<lang.braceMatcher language="org.eclipse.xtext.idea.sdomain.SDomain"
 								factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"
 								implementationClass="com.intellij.lang.PairedBraceMatcher"/>
@@ -49,5 +49,6 @@
       							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
 		<facetType implementation="org.eclipse.xtext.idea.sdomain.idea.facet.SDomainFacetType"/>
 		<colorSettingsPage implementation="org.eclipse.xtext.idea.sdomain.idea.highlighting.SDomainColorSettingsPage"/>
+		<highlightVisitor implementation="org.eclipse.xtext.idea.sdomain.idea.highlighting.SDomainSemanticHighlightVisitor"/>
 	</extensions>
 </idea-plugin>

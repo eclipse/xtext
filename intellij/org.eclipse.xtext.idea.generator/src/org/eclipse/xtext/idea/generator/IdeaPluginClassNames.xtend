@@ -97,7 +97,11 @@ class IdeaPluginClassNames {
 	}
 	
 	def String getSyntaxHighlighterFactoryName(Grammar it) {
-		basePackageName+'.lang.'+it.name.toSimpleName+'SyntaxHighlighterFactory'
+		basePackageName+'.highlighting.'+it.name.toSimpleName+'SyntaxHighlighterFactory'
+	}
+	
+	def String getSemanticHighlightVisitorName(Grammar it) {
+		basePackageName+'.highlighting.'+it.name.toSimpleName+'SemanticHighlightVisitor'
 	}
 	
 	def String getSuperParserDefinitionName(Grammar it) {

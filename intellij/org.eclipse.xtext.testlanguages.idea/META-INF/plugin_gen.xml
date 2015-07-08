@@ -31,7 +31,7 @@
 		<lang.namesValidator language="org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguage"
 								factoryClass="org.eclipse.xtext.testlanguages.backtracking.idea.ExBeeLangTestLanguageExtensionFactory"
 								implementationClass="com.intellij.lang.refactoring.NamesValidator"/>
-      	<lang.syntaxHighlighterFactory key="org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguage" implementationClass="org.eclipse.xtext.testlanguages.backtracking.idea.lang.ExBeeLangTestLanguageSyntaxHighlighterFactory" />
+      	<lang.syntaxHighlighterFactory key="org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguage" implementationClass="org.eclipse.xtext.testlanguages.backtracking.idea.highlighting.ExBeeLangTestLanguageSyntaxHighlighterFactory" />
 		<lang.braceMatcher language="org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguage"
 								factoryClass="org.eclipse.xtext.testlanguages.backtracking.idea.ExBeeLangTestLanguageExtensionFactory"
 								implementationClass="com.intellij.lang.PairedBraceMatcher"/>
@@ -47,5 +47,6 @@
       							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
 		<facetType implementation="org.eclipse.xtext.testlanguages.backtracking.idea.facet.ExBeeLangTestLanguageFacetType"/>
 		<colorSettingsPage implementation="org.eclipse.xtext.testlanguages.backtracking.idea.highlighting.ExBeeLangTestLanguageColorSettingsPage"/>
+		<highlightVisitor implementation="org.eclipse.xtext.testlanguages.backtracking.idea.highlighting.ExBeeLangTestLanguageSemanticHighlightVisitor"/>
 	</extensions>
 </idea-plugin>

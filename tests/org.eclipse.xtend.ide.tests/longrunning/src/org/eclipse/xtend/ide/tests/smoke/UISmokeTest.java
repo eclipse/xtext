@@ -15,7 +15,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.tests.smoke.AbstractSmokeTest;
-import org.eclipse.xtend.ide.highlighting.XtendHighlightingCalculator;
+import org.eclipse.xtend.ide.common.highlighting.XtendHighlightingCalculator;
 import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;

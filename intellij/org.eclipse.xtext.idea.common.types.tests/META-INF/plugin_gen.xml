@@ -33,7 +33,7 @@
 		<lang.namesValidator language="org.eclipse.xtext.idea.common.types.RefactoringTestLanguage"
 								factoryClass="org.eclipse.xtext.idea.common.types.idea.RefactoringTestLanguageExtensionFactory"
 								implementationClass="com.intellij.lang.refactoring.NamesValidator"/>
-      	<lang.syntaxHighlighterFactory key="org.eclipse.xtext.idea.common.types.RefactoringTestLanguage" implementationClass="org.eclipse.xtext.idea.common.types.idea.lang.RefactoringTestLanguageSyntaxHighlighterFactory" />
+      	<lang.syntaxHighlighterFactory key="org.eclipse.xtext.idea.common.types.RefactoringTestLanguage" implementationClass="org.eclipse.xtext.idea.common.types.idea.highlighting.RefactoringTestLanguageSyntaxHighlighterFactory" />
 		<lang.braceMatcher language="org.eclipse.xtext.idea.common.types.RefactoringTestLanguage"
 								factoryClass="org.eclipse.xtext.idea.common.types.idea.RefactoringTestLanguageExtensionFactory"
 								implementationClass="com.intellij.lang.PairedBraceMatcher"/>
@@ -49,5 +49,6 @@
       							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
 		<facetType implementation="org.eclipse.xtext.idea.common.types.idea.facet.RefactoringTestLanguageFacetType"/>
 		<colorSettingsPage implementation="org.eclipse.xtext.idea.common.types.idea.highlighting.RefactoringTestLanguageColorSettingsPage"/>
+		<highlightVisitor implementation="org.eclipse.xtext.idea.common.types.idea.highlighting.RefactoringTestLanguageSemanticHighlightVisitor"/>
 	</extensions>
 </idea-plugin>
