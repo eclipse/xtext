@@ -257,8 +257,13 @@ public class GeneratorFacetForm {
     if ((this.rootPanel == null)) {
       JComponent _createComponent = this.createComponent();
       this.rootPanel = _createComponent;
+      this.postCreateComponent();
     }
     return this.rootPanel;
+  }
+  
+  public void postCreateComponent() {
+    this.deleteGenerated.setVisible(false);
   }
   
   public Module getModule() {

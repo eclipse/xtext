@@ -85,6 +85,13 @@ class XbaseFacetForm extends GeneratorFacetForm {
 		row [indent hideLocalSyntheticVariables = checkBox("Hide synthetic local variables in the debugger")]
 	}
 
+
+	override postCreateComponent() {
+		super.postCreateComponent()
+		installDslAsPrimarySource.visible = false
+		hideLocalSyntheticVariables.visible = false
+	}
+	
 	override setData(GeneratorConfigurationState data) {
 		super.setData(data)
 		if (data instanceof XbaseGeneratorConfigurationState) {

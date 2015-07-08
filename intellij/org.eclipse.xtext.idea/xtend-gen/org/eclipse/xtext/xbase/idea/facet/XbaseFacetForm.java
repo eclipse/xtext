@@ -209,6 +209,13 @@ public class XbaseFacetForm extends GeneratorFacetForm {
   }
   
   @Override
+  public void postCreateComponent() {
+    super.postCreateComponent();
+    this.installDslAsPrimarySource.setVisible(false);
+    this.hideLocalSyntheticVariables.setVisible(false);
+  }
+  
+  @Override
   public void setData(final GeneratorConfigurationState data) {
     super.setData(data);
     if ((data instanceof XbaseGeneratorConfigurationState)) {

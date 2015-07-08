@@ -92,8 +92,13 @@ class GeneratorFacetForm {
 	def JComponent getRootComponent() {
 		if (rootPanel === null) {
 			this.rootPanel = createComponent()
+			postCreateComponent()
 		}
 		return rootPanel
+	}
+	
+	def postCreateComponent() {
+		deleteGenerated.visible = false
 	}
 
 	def Module getModule() {
