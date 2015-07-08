@@ -39,6 +39,10 @@ public class AbstractQualifiedNameTestLanguageIdeaModule extends org.eclipse.xte
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.valueconverter.idea.facet.QualifiedNameTestLanguageFacetType.TYPEID;
 	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return org.eclipse.xtext.valueconverter.idea.highlighting.QualifiedNameTestLanguageHighlightingConfiguration.class;
+	}
 	
 	
 }

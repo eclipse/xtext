@@ -1,0 +1,4 @@
+package org.eclipse.xtext.grammarinheritance.idea.highlighting;
+
+public class BaseInheritanceTestLanguageColorSettingsPage extends BaseInheritanceTestLanguageBaseColorSettingsPage {
+}

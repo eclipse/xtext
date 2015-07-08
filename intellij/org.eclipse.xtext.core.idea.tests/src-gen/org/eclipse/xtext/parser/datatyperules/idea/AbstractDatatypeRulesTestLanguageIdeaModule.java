@@ -39,6 +39,10 @@ public class AbstractDatatypeRulesTestLanguageIdeaModule extends org.eclipse.xte
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.parser.datatyperules.idea.facet.DatatypeRulesTestLanguageFacetType.TYPEID;
 	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return org.eclipse.xtext.parser.datatyperules.idea.highlighting.DatatypeRulesTestLanguageHighlightingConfiguration.class;
+	}
 	
 	
 }

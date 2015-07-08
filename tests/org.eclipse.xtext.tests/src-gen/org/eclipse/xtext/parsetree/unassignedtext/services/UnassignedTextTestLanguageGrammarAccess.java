@@ -322,7 +322,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		return getCaseInsensitiveKeywordRuleAccess().getRule();
 	}
 
-	//terminal CaseInsensitiveKeyword:
+	/// * SuppressWarnings[InvalidTerminalruleName] * / terminal CaseInsensitiveKeyword:
 	//	("k" | "K") ("e" | "E") ("y" | "Y") ("w" | "W") ("o" | "O") ("r" | "R") ("d" | "D");
 	public TerminalRule getCaseInsensitiveKeywordRule() {
 		return tCaseInsensitiveKeyword;
@@ -338,7 +338,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		return getPluralRuleAccess().getRule();
 	}
 
-	//terminal Plural:
+	/// * SuppressWarnings[InvalidTerminalruleName] * / terminal Plural:
 	//	"item" | "items";
 	public TerminalRule getPluralRule() {
 		return tPlural;
@@ -354,13 +354,13 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		return getMultiRuleAccess().getRule();
 	}
 
-	//terminal Multi:
+	/// * SuppressWarnings[InvalidTerminalruleName] * / terminal Multi:
 	//	"a" "b"? "c"+ "d"* ("e" | "f") (("g" | "h") | "i"+) Multi2 "0".."9" "0".."9"+;
 	public TerminalRule getMultiRule() {
 		return tMulti;
 	} 
 
-	//terminal Multi2:
+	/// * SuppressWarnings[InvalidTerminalruleName] * / terminal Multi2:
 	//	"j";
 	public TerminalRule getMulti2Rule() {
 		return tMulti2;

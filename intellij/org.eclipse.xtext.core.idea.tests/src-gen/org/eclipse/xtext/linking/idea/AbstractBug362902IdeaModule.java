@@ -39,6 +39,10 @@ public class AbstractBug362902IdeaModule extends org.eclipse.xtext.idea.DefaultI
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.linking.idea.facet.Bug362902FacetType.TYPEID;
 	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return org.eclipse.xtext.linking.idea.highlighting.Bug362902HighlightingConfiguration.class;
+	}
 	
 	
 }

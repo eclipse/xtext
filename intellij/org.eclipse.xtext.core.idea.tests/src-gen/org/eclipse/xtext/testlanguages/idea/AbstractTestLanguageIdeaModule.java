@@ -39,6 +39,10 @@ public class AbstractTestLanguageIdeaModule extends org.eclipse.xtext.idea.Defau
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.testlanguages.idea.facet.TestLanguageFacetType.TYPEID;
 	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return org.eclipse.xtext.testlanguages.idea.highlighting.TestLanguageHighlightingConfiguration.class;
+	}
 	
 	
 }

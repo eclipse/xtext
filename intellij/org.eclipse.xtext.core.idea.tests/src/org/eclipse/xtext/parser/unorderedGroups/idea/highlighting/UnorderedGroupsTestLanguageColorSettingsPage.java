@@ -1,0 +1,4 @@
+package org.eclipse.xtext.parser.unorderedGroups.idea.highlighting;
+
+public class UnorderedGroupsTestLanguageColorSettingsPage extends UnorderedGroupsTestLanguageBaseColorSettingsPage {
+}

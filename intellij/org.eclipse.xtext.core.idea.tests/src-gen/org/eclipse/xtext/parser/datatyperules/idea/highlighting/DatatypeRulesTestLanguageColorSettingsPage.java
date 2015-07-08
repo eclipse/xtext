@@ -1,0 +1,4 @@
+package org.eclipse.xtext.parser.datatyperules.idea.highlighting;
+
+public class DatatypeRulesTestLanguageColorSettingsPage extends DatatypeRulesTestLanguageBaseColorSettingsPage {
+}

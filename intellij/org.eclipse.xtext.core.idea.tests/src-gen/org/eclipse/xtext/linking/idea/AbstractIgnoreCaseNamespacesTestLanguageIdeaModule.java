@@ -39,6 +39,10 @@ public class AbstractIgnoreCaseNamespacesTestLanguageIdeaModule extends org.ecli
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.linking.idea.facet.IgnoreCaseNamespacesTestLanguageFacetType.TYPEID;
 	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return org.eclipse.xtext.linking.idea.highlighting.IgnoreCaseNamespacesTestLanguageHighlightingConfiguration.class;
+	}
 	
 	
 }

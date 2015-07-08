@@ -39,6 +39,10 @@ public class AbstractEncodingTestLanguageIdeaModule extends org.eclipse.xtext.id
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.parser.encoding.idea.facet.EncodingTestLanguageFacetType.TYPEID;
 	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return org.eclipse.xtext.parser.encoding.idea.highlighting.EncodingTestLanguageHighlightingConfiguration.class;
+	}
 	
 	
 }

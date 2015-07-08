@@ -39,6 +39,10 @@ public class AbstractBug317840TestLanguageIdeaModule extends org.eclipse.xtext.i
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.parser.terminalrules.idea.facet.Bug317840TestLanguageFacetType.TYPEID;
 	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return org.eclipse.xtext.parser.terminalrules.idea.highlighting.Bug317840TestLanguageHighlightingConfiguration.class;
+	}
 	
 	
 }

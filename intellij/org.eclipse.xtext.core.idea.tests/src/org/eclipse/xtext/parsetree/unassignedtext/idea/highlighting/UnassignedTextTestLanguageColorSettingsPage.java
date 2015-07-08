@@ -1,0 +1,4 @@
+package org.eclipse.xtext.parsetree.unassignedtext.idea.highlighting;
+
+public class UnassignedTextTestLanguageColorSettingsPage extends UnassignedTextTestLanguageBaseColorSettingsPage {
+}

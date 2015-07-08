@@ -1,0 +1,4 @@
+package org.eclipse.xtext.parsetree.reconstr.idea.highlighting;
+
+public class PartialSerializationTestLanguageColorSettingsPage extends PartialSerializationTestLanguageBaseColorSettingsPage {
+}

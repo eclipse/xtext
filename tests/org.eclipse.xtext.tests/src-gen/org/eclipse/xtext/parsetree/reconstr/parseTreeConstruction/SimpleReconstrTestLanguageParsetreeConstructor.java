@@ -4308,7 +4308,7 @@ protected class LoopBug285452_NameAssignment_2 extends AssignmentToken  {
 
 /************ begin Rule DuplicateBug284491 ****************
  *
- * / * SuppressWarnings[potentialOverride] * / DuplicateBug284491:
+ * / * SuppressWarnings[noInstantiation, potentialOverride] * / DuplicateBug284491:
  * 	"#13" (static?="static" | final?="final" | transient?="transient")*;
  *
  **/

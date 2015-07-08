@@ -1,0 +1,4 @@
+package org.eclipse.xtext.testlanguages.indent.idea.highlighting;
+
+public class IndentationAwareTestLanguageColorSettingsPage extends IndentationAwareTestLanguageBaseColorSettingsPage {
+}

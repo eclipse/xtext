@@ -39,6 +39,10 @@ public class AbstractUnicodeTestLanguageIdeaModule extends org.eclipse.xtext.ide
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.parser.terminalrules.idea.facet.UnicodeTestLanguageFacetType.TYPEID;
 	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return org.eclipse.xtext.parser.terminalrules.idea.highlighting.UnicodeTestLanguageHighlightingConfiguration.class;
+	}
 	
 	
 }
