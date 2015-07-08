@@ -28,8 +28,7 @@ import org.eclipse.xtext.GeneratedMetamodel
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.XtextStandaloneSetup
 import org.eclipse.xtext.util.MergeableManifest
-import org.eclipse.xtext.xtext.generator.model.CodeConfig
-import org.eclipse.xtext.xtext.generator.model.IXtextProjectConfig
+import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 
@@ -39,20 +38,16 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference
  * 
  * <p><b>NOTE: This is a reimplementation of org.eclipse.xtext.generator.Generator</b></p>
  */
+@Log
 class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGeneratorComponent {
 
 	@Accessors
 	DefaultGeneratorModule configuration
 	
 	@Accessors
-	String activator
-	
-	@Accessors
 	val List<LanguageConfig2> languageConfigs = newArrayList
 	
 	Injector injector
-	
-	@Inject extension XtextGeneratorNaming
 	
 	@Inject IXtextProjectConfig projectConfig
 	
@@ -91,6 +86,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGe
 	
 	protected def Injector createInjector() {
 		if (injector === null) {
+			LOG.info('Initializing Xtext generator')
 			if (configuration === null)
 				configuration = new DefaultGeneratorModule
 			injector = Guice.createInjector(configuration)
@@ -108,19 +104,18 @@ class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGe
 		injector.getInstance(CodeConfig) => [ codeConfig |
 			codeConfig.initialize(injector)
 		]
-		injector.getInstance(XtextGeneratorNaming) => [ naming |
-			naming.eclipsePluginActivator = activator
-		]
 	}
 	
 	protected override invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, Issues issues) {
 		createInjector()
 		for (language : languageConfigs) {
+			LOG.info('Generating ' + language.grammar.name)
 			language.generate(language)
 			language.generateRuntimeSetup()
 			language.generateModules()
 			language.generateExecutableExtensionFactory()
 		}
+		LOG.info('Generating common infrastructure')
 		generatePluginXmls()
 		generateManifests()
 		generateActivator()
@@ -166,7 +161,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGe
 			}
 			var TypeReference activator
 			if (manifest === projectConfig.eclipsePluginManifest) {
-				activator = languageConfigs.head?.grammar.eclipsePluginActivator
+				activator = languageConfigs.head?.naming?.eclipsePluginActivator
 			}
 			val file = new File(manifest.path)
 			if (file.exists) {
@@ -207,7 +202,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGe
 	}
 	
 	protected def generateActivator() {
-		if (projectConfig.eclipsePluginSrcGen !== null)
+		if (projectConfig.eclipsePluginSrcGen !== null && !languageConfigs.empty)
 			templates.createEclipsePluginActivator(languageConfigs).writeTo(projectConfig.eclipsePluginSrcGen)
 	}
 	

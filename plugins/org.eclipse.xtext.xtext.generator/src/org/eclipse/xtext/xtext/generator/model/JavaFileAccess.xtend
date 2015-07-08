@@ -15,6 +15,7 @@ import org.eclipse.emf.codegen.util.CodeGenUtil
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenation
 import org.eclipse.xtend2.lib.StringConcatenationClient
+import org.eclipse.xtext.xtext.generator.CodeConfig
 
 class JavaFileAccess extends TextFileAccess {
 	

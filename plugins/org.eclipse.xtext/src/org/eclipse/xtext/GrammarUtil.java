@@ -13,7 +13,6 @@ import static org.eclipse.emf.ecore.util.EcoreUtil.*;
 import static org.eclipse.xtext.EcoreUtil2.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -65,17 +64,22 @@ public class GrammarUtil {
 	}
 
 	public static String getName(Grammar g) {
-		if (Strings.isEmpty(g.getName()))
+		String fullName = g.getName();
+		if (Strings.isEmpty(fullName))
 			return null;
-		String[] splitted = g.getName().split("\\.");
-		return splitted[splitted.length - 1];
+		int nameIndex = fullName.lastIndexOf('.');
+		return fullName.substring(nameIndex + 1);
 	}
 
 	public static String getNamespace(Grammar g) {
-		if (Strings.isEmpty(g.getName()))
+		String fullName = g.getName();
+		if (Strings.isEmpty(fullName))
 			return null;
-		String[] splitted = g.getName().split("\\.");
-		return Strings.concat(".", Arrays.asList(splitted), 1);
+		int nameIndex = fullName.lastIndexOf('.');
+		if (nameIndex < 0)
+			return "";
+		else
+			return fullName.substring(0, nameIndex);
 	}
 
 	public static Grammar getGrammar(EObject grammarElement) {

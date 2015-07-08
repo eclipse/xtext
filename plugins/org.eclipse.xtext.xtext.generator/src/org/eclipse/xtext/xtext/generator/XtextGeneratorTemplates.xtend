@@ -31,7 +31,6 @@ import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.impl.BinaryGrammarResourceFactoryImpl
 import org.eclipse.xtext.service.SingletonBinding
 import org.eclipse.xtext.util.Modules2
-import org.eclipse.xtext.xtext.generator.model.CodeConfig
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess
@@ -40,12 +39,11 @@ import org.eclipse.xtext.xtext.generator.model.SuppressWarningsAnnotation
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 
+import static extension org.eclipse.xtext.xtext.generator.XtextGeneratorNaming.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 
 @Singleton
 class XtextGeneratorTemplates {
-	
-	@Inject extension XtextGeneratorNaming
 	
 	@Inject CodeConfig codeConfig
 	
@@ -69,8 +67,8 @@ class XtextGeneratorTemplates {
 	}
 	
 	def JavaFileAccess createRuntimeSetup(LanguageConfig2 langConfig) {
-		val g = langConfig.grammar
-		val javaFile = new JavaFileAccess(g.runtimeSetup, codeConfig)
+		val it = langConfig.naming
+		val javaFile = new JavaFileAccess(runtimeSetup, codeConfig)
 		javaFile.encodingProvider = encodingProvider
 		
 		javaFile.typeComment = '''
@@ -79,10 +77,10 @@ class XtextGeneratorTemplates {
 			 */
 		 '''
 		 javaFile.javaContent = '''
-			 public class «g.runtimeSetup.simpleName» extends «g.runtimeGenSetup»{
+			 public class «runtimeSetup.simpleName» extends «runtimeGenSetup»{
 			 
 			 	public static void doSetup() {
-			 		new «g.runtimeSetup.simpleName»().createInjectorAndDoEMFRegistration();
+			 		new «runtimeSetup.simpleName»().createInjectorAndDoEMFRegistration();
 			 	}
 			 
 			 }
@@ -91,8 +89,8 @@ class XtextGeneratorTemplates {
 	}
 	
 	def JavaFileAccess createRuntimeGenSetup(LanguageConfig2 langConfig) {
-		val g = langConfig.grammar
-		val javaFile = new JavaFileAccess(g.runtimeGenSetup, codeConfig)
+		val it = langConfig.naming
+		val javaFile = new JavaFileAccess(runtimeGenSetup, codeConfig)
 		javaFile.encodingProvider = encodingProvider
 		for (type : langConfig.runtimeGenSetup.imports) {
 			javaFile.importType(type)
@@ -100,7 +98,7 @@ class XtextGeneratorTemplates {
 		
 		javaFile.annotations += new SuppressWarningsAnnotation
 		javaFile.javaContent = '''
-			public class «g.runtimeGenSetup.simpleName» implements «ISetup», «ISetupExtension» {
+			public class «runtimeGenSetup.simpleName» implements «ISetup», «ISetupExtension» {
 			
 				@Override
 				public «List»<String> getFileExtensions() {
@@ -109,10 +107,10 @@ class XtextGeneratorTemplates {
 			
 				@Override
 				public «Injector» createInjectorAndDoEMFRegistration() {
-					«FOR usedGrammar : g.usedGrammars»
-						«usedGrammar.runtimeSetup».doSetup();
+					«FOR usedGrammar : langConfig.grammar.usedGrammars»
+						«usedGrammar.naming.runtimeSetup».doSetup();
 					«ENDFOR»
-					«IF g.usedGrammars.isEmpty»
+					«IF langConfig.grammar.usedGrammars.isEmpty»
 					
 						// register default ePackages
 						if (!«'org.eclipse.emf.ecore.resource.Resource'.typeRef».Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("ecore"))
@@ -134,7 +132,7 @@ class XtextGeneratorTemplates {
 				}
 			
 				public «Injector» createInjector() {
-					return «Guice».createInjector(new «g.runtimeModule»());
+					return «Guice».createInjector(new «runtimeModule»());
 				}
 			
 				public void register(«Injector» injector) {
@@ -190,8 +188,8 @@ class XtextGeneratorTemplates {
 	'''
 	
 	def JavaFileAccess createRuntimeModule(LanguageConfig2 langConfig) {
-		val g = langConfig.grammar
-		val javaFile = new JavaFileAccess(g.runtimeModule, codeConfig)
+		val it = langConfig.naming
+		val javaFile = new JavaFileAccess(runtimeModule, codeConfig)
 		javaFile.encodingProvider = encodingProvider
 		javaFile.typeComment = '''
 			/**
@@ -199,7 +197,7 @@ class XtextGeneratorTemplates {
 			 */
 		'''
 		javaFile.javaContent = '''
-			public class «g.runtimeModule.simpleName» extends «g.runtimeGenModule» {
+			public class «runtimeModule.simpleName» extends «runtimeGenModule» {
 			
 			}
 		'''
@@ -207,33 +205,33 @@ class XtextGeneratorTemplates {
 	}
 	
 	def JavaFileAccess createRuntimeGenModule(LanguageConfig2 langConfig) {
-		val g = langConfig.grammar
+		val it = langConfig.naming
 		val superClass =
 			if (langConfig.runtimeGenModule.superClassName !== null)
 				new TypeReference(langConfig.runtimeGenModule.superClassName)
-			else g.runtimeDefaultModule
-		val javaFile = new JavaFileAccess(g.runtimeGenModule, codeConfig)
+			else runtimeDefaultModule
+		val javaFile = new JavaFileAccess(runtimeGenModule, codeConfig)
 		javaFile.encodingProvider = encodingProvider
 		
 		javaFile.typeComment = '''
 			/**
-			 * Manual modifications go to {@link «g.runtimeModule.simpleName»}.
+			 * Manual modifications go to {@link «runtimeModule.simpleName»}.
 			 */
 		'''
 		javaFile.annotations += new SuppressWarningsAnnotation
 		javaFile.javaContent = '''
-			public abstract class «g.runtimeGenModule.simpleName» extends «superClass» {
+			public abstract class «runtimeGenModule.simpleName» extends «superClass» {
 			
 				protected «Properties» properties = null;
 			
 				@Override
 				public void configure(«Binder» binder) {
-					properties = tryBindProperties(binder, "«g.name.replaceAll("\\.","/")».properties");
+					properties = tryBindProperties(binder, "«langConfig.grammar.name.replaceAll("\\.","/")».properties");
 					super.configure(binder);
 				}
 				
 				public void configureLanguageName(«Binder» binder) {
-					binder.bind(String.class).annotatedWith(«Names».named(«Constants».LANGUAGE_NAME)).toInstance("«g.name»");
+					binder.bind(String.class).annotatedWith(«Names».named(«Constants».LANGUAGE_NAME)).toInstance("«langConfig.grammar.name»");
 				}
 				
 				public void configureFileExtensions(«Binder» binder) {
@@ -252,8 +250,8 @@ class XtextGeneratorTemplates {
 	}
 	
 	def JavaFileAccess createEclipsePluginModule(LanguageConfig2 langConfig) {
-		val g = langConfig.grammar
-		val javaFile = new JavaFileAccess(g.eclipsePluginModule, codeConfig)
+		val it = langConfig.naming
+		val javaFile = new JavaFileAccess(eclipsePluginModule, codeConfig)
 		javaFile.encodingProvider = encodingProvider
 		javaFile.typeComment = '''
 			/**
@@ -261,8 +259,8 @@ class XtextGeneratorTemplates {
 			 */
 		'''
 		javaFile.javaContent = '''
-			public class «g.eclipsePluginModule.simpleName» extends «g.eclipsePluginGenModule» {
-				public «g.eclipsePluginModule.simpleName»(«'org.eclipse.ui.plugin.AbstractUIPlugin'.typeRef» plugin) {
+			public class «eclipsePluginModule.simpleName» extends «eclipsePluginGenModule» {
+				public «eclipsePluginModule.simpleName»(«'org.eclipse.ui.plugin.AbstractUIPlugin'.typeRef» plugin) {
 					super(plugin);
 				}
 			}
@@ -271,24 +269,24 @@ class XtextGeneratorTemplates {
 	}
 	
 	def JavaFileAccess createEclipsePluginGenModule(LanguageConfig2 langConfig) {
-		val g = langConfig.grammar
+		val it = langConfig.naming
 		val superClass =
 			if (langConfig.eclipsePluginGenModule.superClassName !== null)
 				new TypeReference(langConfig.eclipsePluginGenModule.superClassName)
-			else g.eclipsePluginDefaultModule
-		val javaFile = new JavaFileAccess(g.eclipsePluginGenModule, codeConfig)
+			else eclipsePluginDefaultModule
+		val javaFile = new JavaFileAccess(eclipsePluginGenModule, codeConfig)
 		javaFile.encodingProvider = encodingProvider
 		
 		javaFile.typeComment = '''
 			/**
-			 * Manual modifications go to {@link «g.eclipsePluginModule.simpleName»}.
+			 * Manual modifications go to {@link «eclipsePluginModule.simpleName»}.
 			 */
 		'''
 		javaFile.annotations += new SuppressWarningsAnnotation
 		javaFile.javaContent = '''
-			public abstract class «g.eclipsePluginGenModule.simpleName» extends «superClass» {
+			public abstract class «eclipsePluginGenModule.simpleName» extends «superClass» {
 			
-				public «g.eclipsePluginGenModule.simpleName»(«'org.eclipse.ui.plugin.AbstractUIPlugin'.typeRef» plugin) {
+				public «eclipsePluginGenModule.simpleName»(«'org.eclipse.ui.plugin.AbstractUIPlugin'.typeRef» plugin) {
 					super(plugin);
 				}
 				
@@ -333,8 +331,8 @@ class XtextGeneratorTemplates {
 	}
 	
 	def JavaFileAccess createEclipsePluginExecutableExtensionFactory(LanguageConfig2 langConfig) {
-		val g = langConfig.grammar
-		val javaFile = new JavaFileAccess(g.eclipsePluginExecutableExtensionFactory, codeConfig)
+		val it = langConfig.naming
+		val javaFile = new JavaFileAccess(eclipsePluginExecutableExtensionFactory, codeConfig)
 		javaFile.encodingProvider = encodingProvider
 		
 		javaFile.typeComment = '''
@@ -344,16 +342,16 @@ class XtextGeneratorTemplates {
 			 */
 		'''
 		javaFile.javaContent = '''
-			public class «g.eclipsePluginExecutableExtensionFactory.simpleName» extends «'org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory'.typeRef» {
+			public class «eclipsePluginExecutableExtensionFactory.simpleName» extends «'org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory'.typeRef» {
 			
 				@Override
 				protected «'org.osgi.framework.Bundle'.typeRef» getBundle() {
-					return «g.eclipsePluginActivator».getInstance().getBundle();
+					return «eclipsePluginActivator».getInstance().getBundle();
 				}
 				
 				@Override
 				protected «Injector» getInjector() {
-					return «g.eclipsePluginActivator».getInstance().getInjector(«g.eclipsePluginActivator».«g.name.toUpperCase.replaceAll('\\.', '_')»);
+					return «eclipsePluginActivator».getInstance().getInjector(«eclipsePluginActivator».«langConfig.grammar.name.toUpperCase.replaceAll('\\.', '_')»);
 				}
 				
 			}
@@ -363,8 +361,7 @@ class XtextGeneratorTemplates {
 	}
 	
 	def JavaFileAccess createEclipsePluginActivator(List<LanguageConfig2> langConfigs) {
-		val gs = langConfigs.map[grammar].toList
-		val activator = gs.head.eclipsePluginActivator
+		val activator = langConfigs.head.naming.eclipsePluginActivator
 		val javaFile = new JavaFileAccess(activator, codeConfig)
 		javaFile.encodingProvider = encodingProvider
 		
@@ -377,8 +374,8 @@ class XtextGeneratorTemplates {
 		javaFile.javaContent = '''
 			public class «activator.simpleName» extends «'org.eclipse.ui.plugin.AbstractUIPlugin'» {
 			
-				«FOR grammar : gs»
-					public static final String «grammar.name.toUpperCase.replaceAll('\\.', '_')» = "«grammar.name»";
+				«FOR lang : langConfigs»
+					public static final String «lang.grammar.name.toUpperCase.replaceAll('\\.', '_')» = "«lang.grammar.name»";
 				«ENDFOR»
 				
 				private static final «Logger» logger = «Logger».getLogger(«activator.simpleName».class);
@@ -429,18 +426,18 @@ class XtextGeneratorTemplates {
 				}
 			
 				protected Module getRuntimeModule(String grammar) {
-					«FOR grammar : gs»
-						if («grammar.name.toUpperCase.replaceAll('\\.', '_')».equals(grammar)) {
-							return new «grammar.runtimeModule»();
+					«FOR lang : langConfigs»
+						if («lang.grammar.name.toUpperCase.replaceAll('\\.', '_')».equals(grammar)) {
+							return new «lang.naming.runtimeModule»();
 						}
 					«ENDFOR»
 					throw new IllegalArgumentException(grammar);
 				}
 			
 				protected «Module» getUiModule(String grammar) {
-					«FOR grammar : gs»
-						if («grammar.name.toUpperCase.replaceAll('\\.', '_')».equals(grammar)) {
-							return new «grammar.eclipsePluginModule»(this);
+					«FOR lang : langConfigs»
+						if («lang.grammar.name.toUpperCase.replaceAll('\\.', '_')».equals(grammar)) {
+							return new «lang.naming.eclipsePluginModule»(this);
 						}
 					«ENDFOR»
 					throw new IllegalArgumentException(grammar);

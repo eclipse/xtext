@@ -38,7 +38,6 @@ import org.eclipse.xtext.resource.containers.IAllContainersState
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
-import org.eclipse.xtext.xtext.generator.model.IXtextProjectConfig
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 
@@ -55,6 +54,12 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 {
 	
 	@Accessors(PUBLIC_GETTER)
 	List<String> fileExtensions
+	
+	@Accessors(PUBLIC_SETTER)
+	ResourceSet forcedResourceSet
+	
+	@Accessors
+	XtextGeneratorNaming naming
 	
 	@Accessors
 	val List<String> loadedResources = newArrayList
@@ -97,7 +102,7 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 {
 	override initialize(Injector injector) {
 		super.initialize(injector)
 		
-		val rs = resourceSetProvider.get()
+		val rs = forcedResourceSet ?: resourceSetProvider.get()
 		for (String loadedResource : loadedResources) {
 			val loadedResourceUri = URI.createURI(loadedResource)
 			switch (loadedResourceUri.fileExtension) {
@@ -170,6 +175,11 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 {
 		val grammar = resource.getContents().get(0) as Grammar
 		validateGrammar(grammar)
 		this.grammar = grammar
+		
+		if (naming === null) {
+			naming = new XtextGeneratorNaming
+		}
+		naming.grammar = grammar
 	}
 	
 	private def void installIndex(ResourceSet resourceSet) {
