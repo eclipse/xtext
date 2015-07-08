@@ -41,14 +41,18 @@ class JavaFileAccess extends TextFileAccess {
 	new(TypeReference typeRef, CodeConfig codeConfig) {
 		this.packageName = typeRef.package
 		if (typeRef.name != packageName + '.' + typeRef.simpleName)
-			throw new IllegalArgumentException('Nested types cannot be serialized.')
-		this.path = packageName.replace('.', '/') + '/' + typeRef.simpleName + '.java'
+			throw new IllegalArgumentException('Nested type cannot be serialized: ' + typeRef)
+		this.path = typeRef.path
 		this.codeConfig = codeConfig
 	}
 
 	def String importType(TypeReference typeRef) {
 		var name = typeRef.simpleName
-		if (!CodeGenUtil.isJavaDefaultType(name) && this.packageName != typeRef.package) {
+		var packageName = typeRef.package
+		val isJavaDefaultType = CodeGenUtil.isJavaDefaultType(name)
+		if (isJavaDefaultType && packageName != 'java.lang') {
+			name = typeRef.name
+		} else if (!isJavaDefaultType && this.packageName != packageName) {
 			val imported = imports.get(name)
 			if (imported === null)
 				imports.put(name, typeRef)

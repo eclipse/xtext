@@ -75,6 +75,15 @@ class TypeReference {
 		return ''
 	}
 	
+	def String getPath() {
+		val packageName = getPackage
+		var className = name.substring(packageName.length + 1)
+		val outerClassEnd = className.indexOf('.')
+		if (outerClassEnd >= 0)
+			className = className.substring(0, outerClassEnd)
+		return packageName.replace('.', '/') + '/' + className + '.java'
+	}
+	
 	private def matches(char c1, char c2) {
 		c1 == c2
 	}

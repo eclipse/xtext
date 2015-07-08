@@ -65,7 +65,7 @@ class GuiceModuleAccess {
 	val Set<Binding> bindings = newLinkedHashSet
 	
 	@Accessors
-	String superClassName
+	TypeReference superClass
 	
 	def void add(Binding newBinding) {
 		if (bindings.contains(newBinding)) {

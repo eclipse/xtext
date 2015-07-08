@@ -122,17 +122,19 @@ class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGe
 	}
 	
 	protected def generateRuntimeSetup(LanguageConfig2 language) {
-		templates.createRuntimeSetup(language).writeTo(projectConfig.runtimeSrc)
 		templates.createRuntimeGenSetup(language).writeTo(projectConfig.runtimeSrcGen)
+		if (!projectConfig.runtimeSrc.isFile(language.naming.runtimeSetup.path))
+			templates.createRuntimeSetup(language).writeTo(projectConfig.runtimeSrc)
 	}
 	
 	protected def generateModules(LanguageConfig2 language) {
-		templates.createRuntimeModule(language).writeTo(projectConfig.runtimeSrc)
 		templates.createRuntimeGenModule(language).writeTo(projectConfig.runtimeSrcGen)
-		if (projectConfig.eclipsePluginSrc !== null)
-			templates.createEclipsePluginModule(language).writeTo(projectConfig.eclipsePluginSrc)
+		if (!projectConfig.runtimeSrc.isFile(language.naming.runtimeModule.path))
+			templates.createRuntimeModule(language).writeTo(projectConfig.runtimeSrc)
 		if (projectConfig.eclipsePluginSrcGen !== null)
 			templates.createEclipsePluginGenModule(language).writeTo(projectConfig.eclipsePluginSrcGen)
+		if (projectConfig.eclipsePluginSrc !== null && !projectConfig.eclipsePluginSrc.isFile(language.naming.eclipsePluginModule.path))
+			templates.createEclipsePluginModule(language).writeTo(projectConfig.eclipsePluginSrc)
 	}
 	
 	protected def generateExecutableExtensionFactory(LanguageConfig2 language) {
