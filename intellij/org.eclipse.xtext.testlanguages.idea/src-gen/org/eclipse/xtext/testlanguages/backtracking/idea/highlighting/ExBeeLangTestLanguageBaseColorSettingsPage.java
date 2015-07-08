@@ -1,11 +1,18 @@
 package org.eclipse.xtext.testlanguages.backtracking.idea.highlighting;
 
+import com.intellij.openapi.options.colors.AttributesDescriptor;
+import com.google.common.collect.Iterables;	
+import com.google.inject.Inject;
+
 import org.eclipse.xtext.testlanguages.backtracking.idea.lang.ExBeeLangTestLanguageLanguage;
 import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
+import org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration;
 
-import com.intellij.openapi.options.colors.AttributesDescriptor;
 
 public class ExBeeLangTestLanguageBaseColorSettingsPage extends AbstractColorSettingsPage {
+	
+	@Inject IHighlightingConfiguration highlightingConfiguration;
+	
 	private AttributesDescriptor[] descriptors;
 
 	public ExBeeLangTestLanguageBaseColorSettingsPage() {
@@ -15,11 +22,7 @@ public class ExBeeLangTestLanguageBaseColorSettingsPage extends AbstractColorSet
 	@Override
 	public AttributesDescriptor[] getAttributeDescriptors() {
 		if (descriptors == null) {
-			this.descriptors = new AttributesDescriptor[] {
-					createDescriptor("Keywords", ExBeeLangTestLanguageHighlightingConfiguration.KEYWORD),
-					createDescriptor("Numbers", ExBeeLangTestLanguageHighlightingConfiguration.NUMBER),
-					createDescriptor("Comments", ExBeeLangTestLanguageHighlightingConfiguration.COMMENT),
-					createDescriptor("Strings", ExBeeLangTestLanguageHighlightingConfiguration.STRING) };
+			Iterables.toArray(highlightingConfiguration.getAttributeDescriptors(), AttributesDescriptor.class);
 		}
 		return this.descriptors;
 	}

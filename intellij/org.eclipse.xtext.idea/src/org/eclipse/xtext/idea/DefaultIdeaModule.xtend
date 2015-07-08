@@ -26,6 +26,7 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultAntlrTokenToAttributeI
 import org.eclipse.xtext.idea.build.IdeaOutputConfigurationProvider
 import org.eclipse.xtext.idea.common.types.StubTypeProviderFactory
 import org.eclipse.xtext.idea.filesystem.IdeaWorkspaceConfigProvider
+import org.eclipse.xtext.idea.highlighting.DefaultHighlightingConfiguration
 import org.eclipse.xtext.idea.highlighting.DefaultPairedBraceMatcher
 import org.eclipse.xtext.idea.highlighting.DefaultSyntaxHighlighter
 import org.eclipse.xtext.idea.parser.AntlrDelegatingIdeaLexer
@@ -47,6 +48,7 @@ import org.eclipse.xtext.service.AbstractGenericModule
 import org.eclipse.xtext.service.LanguageSpecific
 import org.eclipse.xtext.service.SingletonBinding
 import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
+import org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -72,6 +74,10 @@ class DefaultIdeaModule extends AbstractGenericModule {
 	@SingletonBinding
 	def Class<? extends AbstractAntlrTokenToAttributeIdMapper> bindAbstractAntlrTokenToAttributeIdMapper() {
 		DefaultAntlrTokenToAttributeIdMapper
+	}
+	
+	def Class <? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		DefaultHighlightingConfiguration
 	}
 	
 	def void configureHighlightingTokenDefProvider(Binder binder) {

@@ -1,11 +1,18 @@
 package org.eclipse.xtext.idea.sdomain.idea.highlighting;
 
+import com.intellij.openapi.options.colors.AttributesDescriptor;
+import com.google.common.collect.Iterables;	
+import com.google.inject.Inject;
+
 import org.eclipse.xtext.idea.sdomain.idea.lang.SDomainLanguage;
 import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
+import org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration;
 
-import com.intellij.openapi.options.colors.AttributesDescriptor;
 
 public class SDomainBaseColorSettingsPage extends AbstractColorSettingsPage {
+	
+	@Inject IHighlightingConfiguration highlightingConfiguration;
+	
 	private AttributesDescriptor[] descriptors;
 
 	public SDomainBaseColorSettingsPage() {
@@ -15,11 +22,7 @@ public class SDomainBaseColorSettingsPage extends AbstractColorSettingsPage {
 	@Override
 	public AttributesDescriptor[] getAttributeDescriptors() {
 		if (descriptors == null) {
-			this.descriptors = new AttributesDescriptor[] {
-					createDescriptor("Keywords", SDomainHighlightingConfiguration.KEYWORD),
-					createDescriptor("Numbers", SDomainHighlightingConfiguration.NUMBER),
-					createDescriptor("Comments", SDomainHighlightingConfiguration.COMMENT),
-					createDescriptor("Strings", SDomainHighlightingConfiguration.STRING) };
+			Iterables.toArray(highlightingConfiguration.getAttributeDescriptors(), AttributesDescriptor.class);
 		}
 		return this.descriptors;
 	}

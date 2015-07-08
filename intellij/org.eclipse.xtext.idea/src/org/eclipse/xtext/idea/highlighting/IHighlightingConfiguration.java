@@ -10,6 +10,7 @@ package org.eclipse.xtext.idea.highlighting;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
 
 import com.intellij.openapi.editor.colors.TextAttributesKey;
+import com.intellij.openapi.options.colors.AttributesDescriptor;
 
 /**
  * @author dhubner - Initial contribution and API
@@ -17,12 +18,16 @@ import com.intellij.openapi.editor.colors.TextAttributesKey;
 public interface IHighlightingConfiguration {
 
 	/**
-	 * 
-	 * @param style
+	 * @param styleSimpleName
 	 *            xtext highlighting style identifier, default attributes are in {@link HighlightingStyles}
 	 * @return {@link TextAttributesKey} for the given style key.
 	 * 
 	 * @see HighlightingStyles
 	 */
-	TextAttributesKey getTextAttributesKey(String style);
+	TextAttributesKey getTextAttributesKey(String styleSimpleName);
+	
+	/**
+	 * @return all available highlight styles as attribute descriptors. 
+	 */
+	Iterable<AttributesDescriptor> getAttributeDescriptors();
 }

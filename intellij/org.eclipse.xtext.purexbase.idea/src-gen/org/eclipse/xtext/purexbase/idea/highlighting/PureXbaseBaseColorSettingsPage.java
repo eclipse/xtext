@@ -1,11 +1,18 @@
 package org.eclipse.xtext.purexbase.idea.highlighting;
 
+import com.intellij.openapi.options.colors.AttributesDescriptor;
+import com.google.common.collect.Iterables;	
+import com.google.inject.Inject;
+
 import org.eclipse.xtext.purexbase.idea.lang.PureXbaseLanguage;
 import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
+import org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration;
 
-import com.intellij.openapi.options.colors.AttributesDescriptor;
 
 public class PureXbaseBaseColorSettingsPage extends AbstractColorSettingsPage {
+	
+	@Inject IHighlightingConfiguration highlightingConfiguration;
+	
 	private AttributesDescriptor[] descriptors;
 
 	public PureXbaseBaseColorSettingsPage() {
@@ -15,11 +22,7 @@ public class PureXbaseBaseColorSettingsPage extends AbstractColorSettingsPage {
 	@Override
 	public AttributesDescriptor[] getAttributeDescriptors() {
 		if (descriptors == null) {
-			this.descriptors = new AttributesDescriptor[] {
-					createDescriptor("Keywords", PureXbaseHighlightingConfiguration.KEYWORD),
-					createDescriptor("Numbers", PureXbaseHighlightingConfiguration.NUMBER),
-					createDescriptor("Comments", PureXbaseHighlightingConfiguration.COMMENT),
-					createDescriptor("Strings", PureXbaseHighlightingConfiguration.STRING) };
+			Iterables.toArray(highlightingConfiguration.getAttributeDescriptors(), AttributesDescriptor.class);
 		}
 		return this.descriptors;
 	}

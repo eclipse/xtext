@@ -33,7 +33,7 @@
 		<lang.namesValidator language="org.eclipse.xtext.purexbase.PureXbase"
 								factoryClass="org.eclipse.xtext.purexbase.idea.PureXbaseExtensionFactory"
 								implementationClass="com.intellij.lang.refactoring.NamesValidator"/>
-      	<lang.syntaxHighlighterFactory key="org.eclipse.xtext.purexbase.PureXbase" implementationClass="org.eclipse.xtext.purexbase.idea.lang.PureXbaseSyntaxHighlighterFactory" />
+      	<lang.syntaxHighlighterFactory key="org.eclipse.xtext.purexbase.PureXbase" implementationClass="org.eclipse.xtext.purexbase.idea.highlighting.PureXbaseSyntaxHighlighterFactory" />
 		<lang.braceMatcher language="org.eclipse.xtext.purexbase.PureXbase"
 								factoryClass="org.eclipse.xtext.purexbase.idea.PureXbaseExtensionFactory"
 								implementationClass="com.intellij.lang.PairedBraceMatcher"/>
@@ -49,5 +49,6 @@
       							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
 		<facetType implementation="org.eclipse.xtext.purexbase.idea.facet.PureXbaseFacetType"/>
 		<colorSettingsPage implementation="org.eclipse.xtext.purexbase.idea.highlighting.PureXbaseColorSettingsPage"/>
+		<highlightVisitor implementation="org.eclipse.xtext.purexbase.idea.highlighting.PureXbaseSemanticHighlightVisitor"/>
 	</extensions>
 </idea-plugin>

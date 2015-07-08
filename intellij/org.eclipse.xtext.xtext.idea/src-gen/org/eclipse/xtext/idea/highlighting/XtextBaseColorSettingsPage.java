@@ -1,29 +1,29 @@
 package org.eclipse.xtext.idea.highlighting;
 
 import org.eclipse.xtext.idea.lang.XtextLanguage;
-import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
 
+import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
 import com.intellij.openapi.options.colors.AttributesDescriptor;
 
 public class XtextBaseColorSettingsPage extends AbstractColorSettingsPage {
+	
+	@Inject IHighlightingConfiguration highlightingConfiguration;
+	
 	private AttributesDescriptor[] descriptors;
 
 	public XtextBaseColorSettingsPage() {
 		XtextLanguage.INSTANCE.injectMembers(this);
 	}
-
+	
 	@Override
 	public AttributesDescriptor[] getAttributeDescriptors() {
 		if (descriptors == null) {
-			this.descriptors = new AttributesDescriptor[] {
-					createDescriptor("Keywords", XtextHighlightingConfiguration.KEYWORD),
-					createDescriptor("Numbers", XtextHighlightingConfiguration.NUMBER),
-					createDescriptor("Comments", XtextHighlightingConfiguration.COMMENT),
-					createDescriptor("Strings", XtextHighlightingConfiguration.STRING) };
+			Iterables.toArray(highlightingConfiguration.getAttributeDescriptors(), AttributesDescriptor.class);
 		}
 		return this.descriptors;
 	}
-
+	
 	@Override
 	public String getDisplayName() {
 		return XtextLanguage.INSTANCE.getDisplayName();

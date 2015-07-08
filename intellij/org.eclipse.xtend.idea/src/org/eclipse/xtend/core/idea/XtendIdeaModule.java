@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.idea;
 
 import org.eclipse.xtend.core.idea.editorActions.XtendAutoEditBlockProvider;
 import org.eclipse.xtend.core.idea.editorActions.XtendTokenSetProvider;
+import org.eclipse.xtend.core.idea.highlighting.XtendHighlightingConfiguration;
 import org.eclipse.xtend.core.idea.macro.IdeaFileSystemSupport;
 import org.eclipse.xtend.core.idea.macro.IdeaProcessorProvider;
 import org.eclipse.xtend.core.idea.presentation.XtendItemPresentationProvider;
@@ -30,6 +31,7 @@ import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 import org.eclipse.xtext.idea.editorActions.AutoEditBlockProvider;
 import org.eclipse.xtext.idea.editorActions.TokenSetProvider;
+import org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.idea.presentation.ItemPresentationProvider;
 import org.eclipse.xtext.idea.structureview.XtextFileAwareStructureViewBuilder;
@@ -111,5 +113,10 @@ public class XtendIdeaModule extends AbstractXtendIdeaModule {
 
 	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
 		return XtendHighlightingCalculator.class;
+	}
+	
+	@Override
+	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return XtendHighlightingConfiguration.class;
 	}
 }
