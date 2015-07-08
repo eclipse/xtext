@@ -12,6 +12,7 @@ import java.util.Map;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.Token;
+import org.eclipse.xtend.ide.common.highlighting.XtendHighlightingStyles;
 import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.ui.editor.model.ILexerTokenRegion;

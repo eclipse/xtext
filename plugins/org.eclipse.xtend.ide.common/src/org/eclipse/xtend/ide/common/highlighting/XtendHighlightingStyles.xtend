@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.ide.highlighting
+package org.eclipse.xtend.ide.common.highlighting
 
 import org.eclipse.xtext.xbase.ide.highlighting.XbaseHighlightingStyles
 
