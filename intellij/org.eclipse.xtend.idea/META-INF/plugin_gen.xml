@@ -46,5 +46,6 @@
       							factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
       							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
 		<facetType implementation="org.eclipse.xtend.core.idea.facet.XtendFacetType"/>
+		<colorSettingsPage implementation="org.eclipse.xtend.core.idea.highlighting.XtendColorSettingsPage"/>
 	</extensions>
 </idea-plugin>
