@@ -43,11 +43,13 @@ public class EclipseProjectPropertiesEncodingProvider extends IEncodingProvider.
 			return result;
 		
 		// Read the project properties
-		try {
-			result = getFromProperties(uri);
-			if (result != null)
-				return result;
-		} catch (IOException e) {
+		if (uri != null) {
+			try {
+				result = getFromProperties(uri);
+				if (result != null)
+					return result;
+			} catch (IOException e) {
+			}
 		}
 		
 		// Fall back to the standard encoding
