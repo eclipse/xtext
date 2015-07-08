@@ -18,11 +18,11 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xtext.generator.CodeConfig;
+import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.WizardConfig;
 import org.eclipse.xtext.xtext.generator.XtextGenerator;
-import org.eclipse.xtext.xtext.generator.model.CodeConfig;
-import org.eclipse.xtext.xtext.generator.model.IXtextProjectConfig;
-import org.eclipse.xtext.xtext.generator.model.WizardConfig;
-import org.eclipse.xtext.xtext.generator.model.XtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 
 @SuppressWarnings("all")
 public class DefaultGeneratorModule extends AbstractGenericModule {

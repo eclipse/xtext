@@ -5,13 +5,14 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xtext.generator.model
+package org.eclipse.xtext.xtext.generator
 
 import com.google.inject.Injector
 import org.eclipse.emf.mwe.core.issues.Issues
 import org.eclipse.emf.mwe2.runtime.Mandatory
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.xtext.generator.XtextGenerator
+import org.eclipse.xtext.xtext.generator.model.ManifestAccess
+import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess
 
 @Accessors
 class WizardConfig extends XtextProjectConfig {

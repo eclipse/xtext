@@ -5,10 +5,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xtext.generator.model;
+package org.eclipse.xtext.xtext.generator;
 
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
+import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
+import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 
 /**
  * Inject an instance of this interface in order to generate code in a generator fragment.

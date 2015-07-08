@@ -49,19 +49,18 @@ import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.IGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.LanguageConfig2;
 import org.eclipse.xtext.xtext.generator.XtextGenerator;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
-import org.eclipse.xtext.xtext.generator.model.CodeConfig;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
-import org.eclipse.xtext.xtext.generator.model.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess;
@@ -77,10 +76,6 @@ public class FragmentAdapter implements IGeneratorFragment2 {
   
   @Inject
   private CodeConfig codeConfig;
-  
-  @Inject
-  @Extension
-  private XtextGeneratorNaming _xtextGeneratorNaming;
   
   @Inject
   private IEncodingProvider encodingProvider;
@@ -442,27 +437,14 @@ public class FragmentAdapter implements IGeneratorFragment2 {
         }
         String _lastSegment_2 = FragmentAdapter.this.getLastSegment(_pluginPath_2);
         it.setProjectNameUi(_lastSegment_2);
-        boolean _and = false;
-        String _projectNameIde = it.getProjectNameIde();
-        boolean _tripleEquals = (_projectNameIde == null);
-        if (!_tripleEquals) {
-          _and = false;
-        } else {
-          String _projectNameUi = it.getProjectNameUi();
-          boolean _tripleNotEquals = (_projectNameUi != null);
-          _and = _tripleNotEquals;
-        }
-        if (_and) {
-          String _projectNameUi_1 = it.getProjectNameUi();
-          it.setIdeBasePackage(_projectNameUi_1);
-        } else {
-          String _projectNameIde_1 = it.getProjectNameIde();
-          it.setIdeBasePackage(_projectNameIde_1);
-        }
-        String _projectNameUi_2 = it.getProjectNameUi();
-        it.setUiBasePackage(_projectNameUi_2);
-        Grammar _grammar = config2.getGrammar();
-        TypeReference _eclipsePluginActivator = FragmentAdapter.this._xtextGeneratorNaming.getEclipsePluginActivator(_grammar);
+        XtextGeneratorNaming _naming = config2.getNaming();
+        String _genericIdeBasePackage = _naming.getGenericIdeBasePackage();
+        it.setIdeBasePackage(_genericIdeBasePackage);
+        XtextGeneratorNaming _naming_1 = config2.getNaming();
+        String _eclipsePluginBasePackage = _naming_1.getEclipsePluginBasePackage();
+        it.setUiBasePackage(_eclipsePluginBasePackage);
+        XtextGeneratorNaming _naming_2 = config2.getNaming();
+        TypeReference _eclipsePluginActivator = _naming_2.getEclipsePluginActivator();
         String _name = _eclipsePluginActivator.getName();
         it.setActivatorName(_name);
         ManifestAccess _runtimeTestManifest = FragmentAdapter.this.projectConfig.getRuntimeTestManifest();
@@ -471,18 +453,20 @@ public class FragmentAdapter implements IGeneratorFragment2 {
           _pluginPath_3=FragmentAdapter.this.getPluginPath(_runtimeTestManifest);
         }
         it.setPathTestProject(_pluginPath_3);
+        String _lineDelimiter = FragmentAdapter.this.codeConfig.getLineDelimiter();
+        it.setLineDelimiter(_lineDelimiter);
         String _fileHeader = FragmentAdapter.this.codeConfig.getFileHeader();
         it.setFileHeader(_fileHeader);
         String _classAnnotationsAsString = FragmentAdapter.this.codeConfig.getClassAnnotationsAsString();
         it.setClassAnnotations(_classAnnotationsAsString);
         String _annotationImportsAsString = FragmentAdapter.this.codeConfig.getAnnotationImportsAsString();
         it.setAnnotationImports(_annotationImportsAsString);
-        String _projectNameUi_3 = it.getProjectNameUi();
-        boolean _tripleNotEquals_1 = (_projectNameUi_3 != null);
-        it.setHasUI(_tripleNotEquals_1);
-        String _projectNameIde_2 = it.getProjectNameIde();
-        boolean _tripleNotEquals_2 = (_projectNameIde_2 != null);
-        it.setHasIde(_tripleNotEquals_2);
+        String _projectNameUi = it.getProjectNameUi();
+        boolean _tripleNotEquals = (_projectNameUi != null);
+        it.setHasUI(_tripleNotEquals);
+        String _projectNameIde = it.getProjectNameIde();
+        boolean _tripleNotEquals_1 = (_projectNameIde != null);
+        it.setHasIde(_tripleNotEquals_1);
       }
     };
     final Naming result = ObjectExtensions.<Naming>operator_doubleArrow(_naming, _function);
@@ -664,9 +648,13 @@ public class FragmentAdapter implements IGeneratorFragment2 {
   }
   
   private String getLastSegment(final String path) {
-    int _lastIndexOf = path.lastIndexOf("/");
-    int _plus = (_lastIndexOf + 1);
-    return path.substring(_plus);
+    String _substring = null;
+    if (path!=null) {
+      int _lastIndexOf = path.lastIndexOf("/");
+      int _plus = (_lastIndexOf + 1);
+      _substring=path.substring(_plus);
+    }
+    return _substring;
   }
   
   private StringBuilder decreaseIndentation(final String text, final int level) {

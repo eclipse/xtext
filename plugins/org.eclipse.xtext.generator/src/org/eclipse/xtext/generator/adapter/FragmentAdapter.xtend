@@ -36,13 +36,12 @@ import org.eclipse.xtext.generator.Naming
 import org.eclipse.xtext.generator.NamingAware
 import org.eclipse.xtext.generator.NewlineNormalizer
 import org.eclipse.xtext.parser.IEncodingProvider
+import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.IGeneratorFragment2
+import org.eclipse.xtext.xtext.generator.IXtextProjectConfig
 import org.eclipse.xtext.xtext.generator.LanguageConfig2
 import org.eclipse.xtext.xtext.generator.XtextGenerator
-import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
-import org.eclipse.xtext.xtext.generator.model.CodeConfig
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
-import org.eclipse.xtext.xtext.generator.model.IXtextProjectConfig
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 
@@ -54,8 +53,6 @@ class FragmentAdapter implements IGeneratorFragment2 {
 	@Inject IXtextProjectConfig projectConfig
 	
 	@Inject CodeConfig codeConfig
-	
-	@Inject extension XtextGeneratorNaming
 	
 	@Inject IEncodingProvider encodingProvider
 	
@@ -240,13 +237,11 @@ class FragmentAdapter implements IGeneratorFragment2 {
 			projectNameRt = projectConfig.runtimeManifest?.pluginPath.lastSegment
 			projectNameIde = projectConfig.genericIdeManifest?.pluginPath.lastSegment
 			projectNameUi = projectConfig.eclipsePluginManifest?.pluginPath.lastSegment
-			if (projectNameIde === null && projectNameUi !== null)
-				ideBasePackage = projectNameUi
-			else
-				ideBasePackage = projectNameIde
-			uiBasePackage = projectNameUi
-			activatorName = config2.grammar.eclipsePluginActivator.name
+			ideBasePackage = config2.naming.genericIdeBasePackage
+			uiBasePackage = config2.naming.eclipsePluginBasePackage
+			activatorName = config2.naming.eclipsePluginActivator.name
 			pathTestProject = projectConfig.runtimeTestManifest?.pluginPath
+			lineDelimiter = codeConfig.lineDelimiter
 			fileHeader = codeConfig.fileHeader
 			classAnnotations = codeConfig.classAnnotationsAsString
 			annotationImports = codeConfig.annotationImportsAsString
@@ -333,7 +328,7 @@ class FragmentAdapter implements IGeneratorFragment2 {
 	}
 	
 	private def getLastSegment(String path) {
-		path.substring(path.lastIndexOf('/') + 1)
+		path?.substring(path.lastIndexOf('/') + 1)
 	}
 	
 	private def decreaseIndentation(String text, int level) {

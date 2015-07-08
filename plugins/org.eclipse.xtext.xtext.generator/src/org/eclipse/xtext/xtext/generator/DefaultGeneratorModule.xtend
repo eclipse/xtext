@@ -14,10 +14,6 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.service.AbstractGenericModule
-import org.eclipse.xtext.xtext.generator.model.CodeConfig
-import org.eclipse.xtext.xtext.generator.model.IXtextProjectConfig
-import org.eclipse.xtext.xtext.generator.model.WizardConfig
-import org.eclipse.xtext.xtext.generator.model.XtextProjectConfig
 
 class DefaultGeneratorModule extends AbstractGenericModule {
 	

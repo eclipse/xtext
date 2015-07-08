@@ -17,8 +17,8 @@ import java.io.File
  */
 class ProjectConfigGenerator {
 	
-	static val INTERFACE_NAME = 'org.eclipse.xtext.xtext.generator.model.IXtextProjectConfig'
-	static val IMPL_NAME = 'org.eclipse.xtext.xtext.generator.model.XtextProjectConfig'
+	static val INTERFACE_NAME = 'org.eclipse.xtext.xtext.generator.IXtextProjectConfig'
+	static val IMPL_NAME = 'org.eclipse.xtext.xtext.generator.XtextProjectConfig'
 	
 	static val PROJECTS = #[
 		'runtime', 'runtimeTest', 'genericIde', 'genericIdeTest', 'eclipsePlugin', 'eclipsePluginTest',
@@ -56,6 +56,8 @@ class ProjectConfigGenerator {
 		
 		import org.eclipse.xtext.generator.IFileSystemAccess2;
 		import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
+		import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
+		import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 		
 		/**
 		 * Inject an instance of this interface in order to generate code in a generator fragment.
@@ -94,6 +96,9 @@ class ProjectConfigGenerator {
 		import org.eclipse.xtext.generator.IFileSystemAccess2;
 		import org.eclipse.xtext.util.Strings;
 		import org.eclipse.xtext.xtext.generator.XtextGenerator;
+		import org.eclipse.xtext.xtext.generator.model.FileSystemAccess;
+		import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
+		import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 		
 		/**
 		 * Use this class to configure output paths in the XtextGenerator.

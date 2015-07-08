@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtext.generator
 
 import com.google.inject.Singleton
+import java.util.Map
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.xtext.generator.model.TypeReference
@@ -17,58 +18,106 @@ import static org.eclipse.xtext.GrammarUtil.*
 @Singleton
 class XtextGeneratorNaming {
 	
+	static val Map<String, XtextGeneratorNaming> registry = newHashMap
+	
+	static def XtextGeneratorNaming naming(Grammar g) {
+		synchronized (registry) {
+			if (registry.containsKey(g.name))
+				return registry.get(g.name)
+		}
+		val naming = new XtextGeneratorNaming
+		naming.setGrammar(g)
+		return naming
+	}
+	
+	Grammar grammar
+	
 	@Accessors(PUBLIC_SETTER)
 	String eclipsePluginActivator
 	
-	def getRuntimeBasePackage(Grammar grammar) {
-		getNamespace(grammar)
+	@Accessors(PUBLIC_SETTER)
+	String runtimeBasePackage
+	
+	@Accessors(PUBLIC_SETTER)
+	String eclipsePluginBasePackage
+	
+	@Accessors(PUBLIC_SETTER)
+	String genericIdeBasePackage
+	
+	protected def void setGrammar(Grammar grammar) {
+		this.grammar = grammar
+		synchronized (registry) {
+			registry.put(grammar.name, this)
+		}
 	}
 	
-	def getRuntimeModule(Grammar grammar) {
-		new TypeReference(grammar.runtimeBasePackage, getName(grammar) + 'RuntimeModule')
+	def getRuntimeBasePackage() {
+		if (runtimeBasePackage === null)
+			runtimeBasePackage = getNamespace(grammar)
+		return runtimeBasePackage
 	}
 	
-	def getRuntimeGenModule(Grammar grammar) {
-		new TypeReference(grammar.runtimeBasePackage, 'Abstract' + getName(grammar) + 'RuntimeModule')
+	def getRuntimeModule() {
+		new TypeReference(getRuntimeBasePackage, getName(grammar) + 'RuntimeModule')
 	}
 	
-	def getRuntimeDefaultModule(Grammar grammar) {
+	def getRuntimeGenModule() {
+		new TypeReference(getRuntimeBasePackage, 'Abstract' + getName(grammar) + 'RuntimeModule')
+	}
+	
+	def getRuntimeDefaultModule() {
 		new TypeReference('org.eclipse.xtext.service.DefaultRuntimeModule')
 	}
 	
-	def getRuntimeSetup(Grammar grammar) {
-		new TypeReference(grammar.runtimeBasePackage, getName(grammar) + 'StandaloneSetup')
+	def getRuntimeSetup() {
+		new TypeReference(getRuntimeBasePackage, getName(grammar) + 'StandaloneSetup')
 	}
 	
-	def getRuntimeGenSetup(Grammar grammar) {
-		new TypeReference(grammar.runtimeBasePackage, getName(grammar) + 'StandaloneSetupGenerated')
+	def getRuntimeGenSetup() {
+		new TypeReference(getRuntimeBasePackage, getName(grammar) + 'StandaloneSetupGenerated')
 	}
 	
-	def getEclipsePluginBasePackage(Grammar grammar) {
-		getNamespace(grammar) + '.ui'
+	def getEclipsePluginBasePackage() {
+		if (eclipsePluginBasePackage === null)
+			eclipsePluginBasePackage = getNamespace(grammar) + '.ui'
+		return eclipsePluginBasePackage
 	}
 	
-	def getEclipsePluginModule(Grammar grammar) {
-		new TypeReference(grammar.eclipsePluginBasePackage, getName(grammar) + 'UiModule')
+	def getEclipsePluginModule() {
+		new TypeReference(getEclipsePluginBasePackage, getName(grammar) + 'UiModule')
 	}
 	
-	def getEclipsePluginGenModule(Grammar grammar) {
-		new TypeReference(grammar.eclipsePluginBasePackage, 'Abstract' + getName(grammar) + 'UiModule')
+	def getEclipsePluginGenModule() {
+		new TypeReference(getEclipsePluginBasePackage, 'Abstract' + getName(grammar) + 'UiModule')
 	}
 	
-	def getEclipsePluginDefaultModule(Grammar grammar) {
+	def getEclipsePluginDefaultModule() {
 		new TypeReference('org.eclipse.xtext.ui.DefaultUiModule')
 	}
 	
-	def getEclipsePluginExecutableExtensionFactory(Grammar grammar) {
-		new TypeReference(grammar.eclipsePluginBasePackage, getName(grammar) + 'ExecutableExtensionFactory')
+	def getEclipsePluginExecutableExtensionFactory() {
+		new TypeReference(getEclipsePluginBasePackage, getName(grammar) + 'ExecutableExtensionFactory')
 	}
 	
-	def getEclipsePluginActivator(Grammar grammar) {
+	def getEclipsePluginActivator() {
 		if (eclipsePluginActivator === null) {
-			eclipsePluginActivator = grammar.eclipsePluginBasePackage + '.internal.' + getName(grammar) + 'Activator'
+			eclipsePluginActivator = getEclipsePluginBasePackage + '.internal.' + getName(grammar) + 'Activator'
 		}
 		return new TypeReference(eclipsePluginActivator)
+	}
+	
+	def getGenericIdeBasePackage() {
+		if (genericIdeBasePackage === null)
+			genericIdeBasePackage = getNamespace(grammar) + '.ide'
+		return genericIdeBasePackage
+	}
+	
+	def getGenericIdeModule() {
+		new TypeReference(getGenericIdeBasePackage, getName(grammar) + 'IdeModule')
+	}
+	
+	def getGenericIdeGenModule() {
+		new TypeReference(getGenericIdeBasePackage, 'Abstract' + getName(grammar) + 'IdeModule')
 	}
 	
 }

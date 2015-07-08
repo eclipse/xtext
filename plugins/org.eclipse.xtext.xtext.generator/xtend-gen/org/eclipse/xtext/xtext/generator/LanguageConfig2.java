@@ -57,8 +57,9 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.CompositeGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
-import org.eclipse.xtext.xtext.generator.model.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
@@ -74,6 +75,12 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
   
   @Accessors(AccessorType.PUBLIC_GETTER)
   private List<String> fileExtensions;
+  
+  @Accessors(AccessorType.PUBLIC_SETTER)
+  private ResourceSet forcedResourceSet;
+  
+  @Accessors
+  private XtextGeneratorNaming naming;
   
   @Accessors
   private final List<String> loadedResources = CollectionLiterals.<String>newArrayList();
@@ -129,7 +136,14 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
   @Override
   public void initialize(final Injector injector) {
     super.initialize(injector);
-    final ResourceSet rs = this.resourceSetProvider.get();
+    ResourceSet _elvis = null;
+    if (this.forcedResourceSet != null) {
+      _elvis = this.forcedResourceSet;
+    } else {
+      ResourceSet _get = this.resourceSetProvider.get();
+      _elvis = _get;
+    }
+    final ResourceSet rs = _elvis;
     for (final String loadedResource : this.loadedResources) {
       {
         final URI loadedResourceUri = URI.createURI(loadedResource);
@@ -276,10 +290,15 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
       throw new IllegalStateException(_plus);
     }
     EList<EObject> _contents_1 = resource.getContents();
-    EObject _get = _contents_1.get(0);
-    final Grammar grammar = ((Grammar) _get);
+    EObject _get_1 = _contents_1.get(0);
+    final Grammar grammar = ((Grammar) _get_1);
     this.validateGrammar(grammar);
     this.grammar = grammar;
+    if ((this.naming == null)) {
+      XtextGeneratorNaming _xtextGeneratorNaming = new XtextGeneratorNaming();
+      this.naming = _xtextGeneratorNaming;
+    }
+    this.naming.setGrammar(grammar);
   }
   
   private void installIndex(final ResourceSet resourceSet) {
@@ -442,6 +461,19 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
   @Pure
   public Grammar getGrammar() {
     return this.grammar;
+  }
+  
+  public void setForcedResourceSet(final ResourceSet forcedResourceSet) {
+    this.forcedResourceSet = forcedResourceSet;
+  }
+  
+  @Pure
+  public XtextGeneratorNaming getNaming() {
+    return this.naming;
+  }
+  
+  public void setNaming(final XtextGeneratorNaming naming) {
+    this.naming = naming;
   }
   
   @Pure

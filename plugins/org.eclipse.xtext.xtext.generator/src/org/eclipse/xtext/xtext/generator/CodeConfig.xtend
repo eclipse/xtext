@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xtext.generator.model
+package org.eclipse.xtext.xtext.generator
 
 import com.google.inject.Injector
 import java.io.IOException
@@ -18,7 +18,7 @@ import java.util.jar.Manifest
 import org.eclipse.emf.common.EMFPlugin
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.util.Strings
-import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent
+import org.eclipse.xtext.xtext.generator.model.IClassAnnotation
 
 /**
  * Configuration object for generated code.

@@ -25,9 +25,9 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
  */
 @SuppressWarnings("all")
 public class ProjectConfigGenerator {
-  private final static String INTERFACE_NAME = "org.eclipse.xtext.xtext.generator.model.IXtextProjectConfig";
+  private final static String INTERFACE_NAME = "org.eclipse.xtext.xtext.generator.IXtextProjectConfig";
   
-  private final static String IMPL_NAME = "org.eclipse.xtext.xtext.generator.model.XtextProjectConfig";
+  private final static String IMPL_NAME = "org.eclipse.xtext.xtext.generator.XtextProjectConfig";
   
   private final static List<String> PROJECTS = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("runtime", "runtimeTest", "genericIde", "genericIdeTest", "eclipsePlugin", "eclipsePluginTest", "ideaPlugin", "ideaPluginTest", "web", "webTest"));
   
@@ -105,6 +105,10 @@ public class ProjectConfigGenerator {
     _builder.append("import org.eclipse.xtext.generator.IFileSystemAccess2;");
     _builder.newLine();
     _builder.append("import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtext.xtext.generator.model.ManifestAccess;");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;");
     _builder.newLine();
     _builder.newLine();
     _builder.append("/**");
@@ -218,6 +222,12 @@ public class ProjectConfigGenerator {
     _builder.append("import org.eclipse.xtext.util.Strings;");
     _builder.newLine();
     _builder.append("import org.eclipse.xtext.xtext.generator.XtextGenerator;");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtext.xtext.generator.model.FileSystemAccess;");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtext.xtext.generator.model.ManifestAccess;");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;");
     _builder.newLine();
     _builder.newLine();
     _builder.append("/**");

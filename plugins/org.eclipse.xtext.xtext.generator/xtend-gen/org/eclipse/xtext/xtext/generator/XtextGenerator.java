@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.jar.Attributes;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.mwe.core.WorkflowContext;
@@ -36,21 +37,21 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.util.MergeableManifest;
+import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.DefaultGeneratorModule;
 import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
+import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.LanguageConfig2;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorTemplates;
-import org.eclipse.xtext.xtext.generator.model.CodeConfig;
-import org.eclipse.xtext.xtext.generator.model.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
@@ -63,22 +64,16 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference;
  * 
  * <p><b>NOTE: This is a reimplementation of org.eclipse.xtext.generator.Generator</b></p>
  */
+@Log
 @SuppressWarnings("all")
 public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGeneratorComponent {
   @Accessors
   private DefaultGeneratorModule configuration;
   
   @Accessors
-  private String activator;
-  
-  @Accessors
   private final List<LanguageConfig2> languageConfigs = CollectionLiterals.<LanguageConfig2>newArrayList();
   
   private Injector injector;
-  
-  @Inject
-  @Extension
-  private XtextGeneratorNaming _xtextGeneratorNaming;
   
   @Inject
   private IXtextProjectConfig projectConfig;
@@ -137,6 +132,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuice
   
   protected Injector createInjector() {
     if ((this.injector == null)) {
+      XtextGenerator.LOG.info("Initializing Xtext generator");
       if ((this.configuration == null)) {
         DefaultGeneratorModule _defaultGeneratorModule = new DefaultGeneratorModule();
         this.configuration = _defaultGeneratorModule;
@@ -163,14 +159,6 @@ public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuice
       }
     };
     ObjectExtensions.<CodeConfig>operator_doubleArrow(_instance, _function);
-    XtextGeneratorNaming _instance_1 = injector.<XtextGeneratorNaming>getInstance(XtextGeneratorNaming.class);
-    final Procedure1<XtextGeneratorNaming> _function_1 = new Procedure1<XtextGeneratorNaming>() {
-      @Override
-      public void apply(final XtextGeneratorNaming naming) {
-        naming.setEclipsePluginActivator(XtextGenerator.this.activator);
-      }
-    };
-    ObjectExtensions.<XtextGeneratorNaming>operator_doubleArrow(_instance_1, _function_1);
   }
   
   @Override
@@ -178,12 +166,17 @@ public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuice
     this.createInjector();
     for (final LanguageConfig2 language : this.languageConfigs) {
       {
+        Grammar _grammar = language.getGrammar();
+        String _name = _grammar.getName();
+        String _plus = ("Generating " + _name);
+        XtextGenerator.LOG.info(_plus);
         language.generate(language);
         this.generateRuntimeSetup(language);
         this.generateModules(language);
         this.generateExecutableExtensionFactory(language);
       }
     }
+    XtextGenerator.LOG.info("Generating common infrastructure");
     this.generatePluginXmls();
     this.generateManifests();
     this.generateActivator();
@@ -284,11 +277,14 @@ public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuice
           boolean _tripleEquals_1 = (manifest == _eclipsePluginManifest);
           if (_tripleEquals_1) {
             LanguageConfig2 _head = IterableExtensions.<LanguageConfig2>head(XtextGenerator.this.languageConfigs);
-            Grammar _grammar = null;
+            XtextGeneratorNaming _naming = null;
             if (_head!=null) {
-              _grammar=_head.getGrammar();
+              _naming=_head.getNaming();
             }
-            TypeReference _eclipsePluginActivator = XtextGenerator.this._xtextGeneratorNaming.getEclipsePluginActivator(_grammar);
+            TypeReference _eclipsePluginActivator = null;
+            if (_naming!=null) {
+              _eclipsePluginActivator=_naming.getEclipsePluginActivator();
+            }
             activator = _eclipsePluginActivator;
           }
           String _path_1 = manifest.getPath();
@@ -367,9 +363,17 @@ public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuice
   }
   
   protected void generateActivator() {
+    boolean _and = false;
     IFileSystemAccess2 _eclipsePluginSrcGen = this.projectConfig.getEclipsePluginSrcGen();
     boolean _tripleNotEquals = (_eclipsePluginSrcGen != null);
-    if (_tripleNotEquals) {
+    if (!_tripleNotEquals) {
+      _and = false;
+    } else {
+      boolean _isEmpty = this.languageConfigs.isEmpty();
+      boolean _not = (!_isEmpty);
+      _and = _not;
+    }
+    if (_and) {
       JavaFileAccess _createEclipsePluginActivator = this.templates.createEclipsePluginActivator(this.languageConfigs);
       IFileSystemAccess2 _eclipsePluginSrcGen_1 = this.projectConfig.getEclipsePluginSrcGen();
       _createEclipsePluginActivator.writeTo(_eclipsePluginSrcGen_1);
@@ -425,6 +429,8 @@ public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuice
     IterableExtensions.<PluginXmlAccess>forEach(_sortBy, _function_1);
   }
   
+  private final static Logger LOG = Logger.getLogger(XtextGenerator.class);
+  
   @Pure
   public DefaultGeneratorModule getConfiguration() {
     return this.configuration;
@@ -432,15 +438,6 @@ public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuice
   
   public void setConfiguration(final DefaultGeneratorModule configuration) {
     this.configuration = configuration;
-  }
-  
-  @Pure
-  public String getActivator() {
-    return this.activator;
-  }
-  
-  public void setActivator(final String activator) {
-    this.activator = activator;
   }
   
   @Pure

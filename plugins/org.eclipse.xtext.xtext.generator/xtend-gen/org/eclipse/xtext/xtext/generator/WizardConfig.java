@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.xtext.generator.model;
+package org.eclipse.xtext.xtext.generator;
 
 import com.google.inject.Injector;
 import org.eclipse.emf.mwe.core.issues.Issues;
@@ -17,9 +17,9 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.XtextGenerator;
+import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
-import org.eclipse.xtext.xtext.generator.model.XtextProjectConfig;
 
 @Accessors
 @SuppressWarnings("all")
