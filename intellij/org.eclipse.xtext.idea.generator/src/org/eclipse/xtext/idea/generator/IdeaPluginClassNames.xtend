@@ -171,4 +171,16 @@ class IdeaPluginClassNames {
 	def String getFacetTypeName(Grammar it) {
 		basePackageName+'.facet.'+it.name.toSimpleName+'FacetType'
 	}
+	
+	def String highlightingConfiguration(Grammar it) {
+		basePackageName+'.highlighting.'+it.name.toSimpleName+'HighlightingConfiguration'
+	}
+	
+	def String baseColorSettingsPage(Grammar it) {
+		highlightingConfiguration.toPackageName+'.'+it.name.toSimpleName+'BaseColorSettingsPage'
+	}
+	
+	def String colorSettingsPage(Grammar it) {
+		baseColorSettingsPage.toPackageName+'.'+it.name.toSimpleName+'ColorSettingsPage'
+	}
 }

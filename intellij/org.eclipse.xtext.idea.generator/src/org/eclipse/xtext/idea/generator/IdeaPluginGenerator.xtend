@@ -113,6 +113,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		bindFactory.addTypeToTypeSingleton('org.eclipse.xtext.idea.lang.IElementTypeProvider', grammar.elementTypeProviderName)
 		bindFactory.addTypeToType('org.eclipse.xtext.idea.facet.AbstractFacetConfiguration', grammar.facetConfiguration)
 		bindFactory.addTypeToInstance('com.intellij.facet.FacetTypeId', grammar.facetTypeName+'.TYPEID')
+		bindFactory.addTypeToType('org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration', grammar.highlightingConfiguration)
 		
 		if (grammar.doesUseXbase) {
 			bindFactory.addTypeToType('org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider', 'org.eclipse.xtext.idea.common.types.StubBasedTypeScopeProvider')
@@ -148,6 +149,9 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		ctx.writeFile(outlet_src_gen, grammar.pomDeclarationSearcherName.toJavaPath, grammar.compilePomDeclarationSearcher)
 		ctx.writeFile(outlet_src_gen, grammar.facetTypeName.toJavaPath, grammar.compileFacetType)
 		ctx.writeFile(outlet_src, grammar.facetConfiguration.toJavaPath, grammar.compileFacetConfiguration)
+		ctx.writeFile(outlet_src_gen, grammar.highlightingConfiguration.toJavaPath, grammar.compileHighlightingConfiguration)
+		ctx.writeFile(outlet_src_gen, grammar.baseColorSettingsPage.toJavaPath, grammar.compileBaseColorSettingsPage)
+		ctx.writeFile(outlet_src, grammar.colorSettingsPage.toJavaPath, grammar.compileColorSettingsPage)
 		
 		var output = new OutputImpl();
 		output.addOutlet(PLUGIN, false, ideaProjectPath);
@@ -159,6 +163,8 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			output.writeFile(META_INF_PLUGIN_GEN, "plugin_gen.xml", grammar.compilePluginGenXml)
 		}
 	}
+	
+
 
 	
 	def CharSequence compileGuiceModuleIdeaGenerated(Grammar grammar, Set<Binding> bindings) '''
@@ -438,6 +444,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 
 		      	«grammar.compileExtension('lang.psiStructureViewFactory', 'com.intellij.lang.PsiStructureViewFactory')»
 				<facetType implementation="«grammar.facetTypeName»"/>
+				<colorSettingsPage implementation="«grammar.colorSettingsPage»"/>
 			</extensions>
 		</idea-plugin>
 	'''
@@ -749,7 +756,8 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		
 			@Override
 		    public int getAntlrType(IElementType iElementType) {
-		        return ((IndexedElementType)iElementType).getLocalIndex();
+		        return (iElementType instanceof IndexedElementType) ? ((IndexedElementType) iElementType).getLocalIndex()
+		        				: org.antlr.runtime.Token.INVALID_TOKEN_TYPE;
 		    }
 		    
 		    @Override
@@ -970,5 +978,88 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	
 	}
 	'''
+	
+	def CharSequence compileHighlightingConfiguration(Grammar grammar) '''
+	«val colorsClass = if(grammar.doesUseXbase) 
+						'com.intellij.ide.highlighter.JavaHighlightingColors'
+				else  'com.intellij.openapi.editor.DefaultLanguageHighlighterColors'»
+	package «grammar.highlightingConfiguration.toPackageName»;
+	
+	import «colorsClass»;
+	import com.intellij.openapi.editor.HighlighterColors;
+	import com.intellij.openapi.editor.colors.TextAttributesKey;
+	import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
+	import org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration;
+	import «grammar.languageName»;
+	
+	public class «grammar.highlightingConfiguration.toSimpleName» implements IHighlightingConfiguration {
+		public final static TextAttributesKey NUMBER = TextAttributesKey.createTextAttributesKey(
+				(«grammar.languageName.toSimpleName».INSTANCE.getID() + HighlightingStyles.NUMBER_ID), «colorsClass.toSimpleName».NUMBER);
+	
+		public final static TextAttributesKey KEYWORD = TextAttributesKey.createTextAttributesKey(
+				(«grammar.languageName.toSimpleName».INSTANCE.getID() + HighlightingStyles.KEYWORD_ID),
+				«colorsClass.toSimpleName».KEYWORD);
+	
+		public final static TextAttributesKey COMMENT = TextAttributesKey.createTextAttributesKey(
+				(«grammar.languageName.toSimpleName».INSTANCE.getID() + HighlightingStyles.COMMENT_ID),
+				«colorsClass.toSimpleName».LINE_COMMENT);
+	
+		public final static TextAttributesKey STRING = TextAttributesKey.createTextAttributesKey(
+				(«grammar.languageName.toSimpleName».INSTANCE.getID() + HighlightingStyles.STRING_ID), «colorsClass.toSimpleName».STRING);
+	
+		@Override
+		public TextAttributesKey getTextAttributesKey(final String attribute) {
+			if (HighlightingStyles.KEYWORD_ID.equals(attribute)) {
+				return KEYWORD;
+			} else if (HighlightingStyles.STRING_ID.equals(attribute)) {
+				return STRING;
+			} else if (HighlightingStyles.COMMENT_ID.equals(attribute)) {
+				return COMMENT;
+			} else if (HighlightingStyles.NUMBER_ID.equals(attribute)) {
+				return NUMBER;
+			}
+			return HighlighterColors.TEXT;
+		}
+	}'''
+	
+	def CharSequence compileBaseColorSettingsPage(Grammar grammar) '''
+	package «grammar.baseColorSettingsPage.toPackageName»;
+	
+	import «grammar.languageName»;
+	import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
+	
+	import com.intellij.openapi.options.colors.AttributesDescriptor;
+	
+	public class «grammar.baseColorSettingsPage.toSimpleName» extends AbstractColorSettingsPage {
+		private AttributesDescriptor[] descriptors;
+	
+		public «grammar.baseColorSettingsPage.toSimpleName»() {
+			«grammar.languageName.toSimpleName».INSTANCE.injectMembers(this);
+		}
+	
+		@Override
+		public AttributesDescriptor[] getAttributeDescriptors() {
+			if (descriptors == null) {
+				this.descriptors = new AttributesDescriptor[] {
+						createDescriptor("Keywords", «grammar.highlightingConfiguration.toSimpleName».KEYWORD),
+						createDescriptor("Numbers", «grammar.highlightingConfiguration.toSimpleName».NUMBER),
+						createDescriptor("Comments", «grammar.highlightingConfiguration.toSimpleName».COMMENT),
+						createDescriptor("Strings", «grammar.highlightingConfiguration.toSimpleName».STRING) };
+			}
+			return this.descriptors;
+		}
+	
+		@Override
+		public String getDisplayName() {
+			return «grammar.languageName.toSimpleName».INSTANCE.getDisplayName();
+		}
+	}'''
+	
+	def CharSequence compileColorSettingsPage(Grammar grammar)
+	'''
+	package «grammar.colorSettingsPage.toPackageName»;
+	
+	public class «grammar.colorSettingsPage.toSimpleName» extends «grammar.baseColorSettingsPage.toSimpleName» {
+	}'''
 	
 }
