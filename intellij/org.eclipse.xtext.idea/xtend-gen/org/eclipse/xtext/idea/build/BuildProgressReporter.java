@@ -7,8 +7,11 @@
  */
 package org.eclipse.xtext.idea.build;
 
+import com.google.common.base.Objects;
 import com.intellij.compiler.CompilerMessageImpl;
 import com.intellij.compiler.ProblemsView;
+import com.intellij.openapi.application.Application;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.compiler.CompilerMessage;
 import com.intellij.openapi.compiler.CompilerMessageCategory;
 import com.intellij.openapi.fileEditor.OpenFileDescriptor;
@@ -43,8 +46,15 @@ public class BuildProgressReporter implements BuildRequest.IPostValidationCallba
   }
   
   public void clearProgress() {
-    boolean _isDisposed = this.project.isDisposed();
-    if (_isDisposed) {
+    boolean _or = false;
+    boolean _isUnitTestMode = this.isUnitTestMode();
+    if (_isUnitTestMode) {
+      _or = true;
+    } else {
+      boolean _isDisposed = this.project.isDisposed();
+      _or = _isDisposed;
+    }
+    if (_or) {
       return;
     }
     ProblemsView _problemsView = this.getProblemsView();
@@ -68,13 +78,37 @@ public class BuildProgressReporter implements BuildRequest.IPostValidationCallba
   }
   
   protected void reportIssue(final URI validated, final Issue issue) {
-    boolean _isDisposed = this.project.isDisposed();
-    if (_isDisposed) {
+    boolean _or = false;
+    boolean _isUnitTestMode = this.isUnitTestMode();
+    if (_isUnitTestMode) {
+      _or = true;
+    } else {
+      boolean _isDisposed = this.project.isDisposed();
+      _or = _isDisposed;
+    }
+    if (_or) {
       return;
     }
     final CompilerMessage compilerMessage = this.getCompilerMessage(validated, issue);
     ProblemsView _problemsView = this.getProblemsView();
     _problemsView.addMessage(compilerMessage, this.sessionId);
+  }
+  
+  protected boolean isUnitTestMode() {
+    boolean _xblockexpression = false;
+    {
+      final Application application = ApplicationManager.getApplication();
+      boolean _or = false;
+      boolean _equals = Objects.equal(application, null);
+      if (_equals) {
+        _or = true;
+      } else {
+        boolean _isUnitTestMode = application.isUnitTestMode();
+        _or = _isUnitTestMode;
+      }
+      _xblockexpression = _or;
+    }
+    return _xblockexpression;
   }
   
   protected CompilerMessage getCompilerMessage(final URI validated, final Issue issue) {
