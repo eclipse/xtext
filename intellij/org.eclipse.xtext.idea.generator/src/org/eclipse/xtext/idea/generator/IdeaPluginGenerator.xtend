@@ -997,31 +997,14 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	def CharSequence compileBaseColorSettingsPage(Grammar grammar) '''
 	package «grammar.baseColorSettingsPage.toPackageName»;
 	
-	import com.intellij.openapi.options.colors.AttributesDescriptor;
-	import com.google.common.collect.Iterables;	
-	import com.google.inject.Inject;
-	
 	import «grammar.languageName»;
 	import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
-	import org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration;
 	
 	
 	public class «grammar.baseColorSettingsPage.toSimpleName» extends AbstractColorSettingsPage {
 		
-		@Inject IHighlightingConfiguration highlightingConfiguration;
-		
-		private AttributesDescriptor[] descriptors;
-	
 		public «grammar.baseColorSettingsPage.toSimpleName»() {
 			«grammar.languageName.toSimpleName».INSTANCE.injectMembers(this);
-		}
-	
-		@Override
-		public AttributesDescriptor[] getAttributeDescriptors() {
-			if (descriptors == null) {
-				Iterables.toArray(highlightingConfiguration.getAttributeDescriptors(), AttributesDescriptor.class);
-			}
-			return this.descriptors;
 		}
 	
 		@Override
