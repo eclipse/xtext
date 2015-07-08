@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EValidator
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.emf.mwe2.runtime.Mandatory
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.Grammar
@@ -46,12 +47,13 @@ import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 @Log
 class LanguageConfig2 extends CompositeGeneratorFragment2 {
 	
-	@Accessors
+	@Accessors(PUBLIC_GETTER)
 	String uri
 	
 	@Accessors(PUBLIC_GETTER)
 	Grammar grammar
 	
+	@Accessors(PUBLIC_GETTER)
 	List<String> fileExtensions
 	
 	@Accessors
@@ -69,6 +71,11 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 {
 	@Inject Provider<ResourceSet> resourceSetProvider
 	
 	@Inject IXtextProjectConfig projectConfig
+	
+	@Mandatory
+	def void setUri(String uri) {
+		this.uri = uri
+	}
 	
 	def void setFileExtensions(String fileExtensions) {
 		this.fileExtensions = fileExtensions.trim.split("\\s*,\\s*").toList
@@ -89,6 +96,7 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 {
 	
 	override initialize(Injector injector) {
 		super.initialize(injector)
+		
 		val rs = resourceSetProvider.get()
 		for (String loadedResource : loadedResources) {
 			val loadedResourceUri = URI.createURI(loadedResource)

@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtext.generator.model
 
 import com.google.inject.Injector
 import org.eclipse.emf.mwe.core.issues.Issues
+import org.eclipse.emf.mwe2.runtime.Mandatory
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.xtext.generator.XtextGenerator
 
@@ -28,6 +29,11 @@ class WizardConfig extends XtextProjectConfig {
 	boolean testingSupport = false
 	
 	boolean mavenLayout = false
+	
+	@Mandatory
+	def void setRuntimeBase(String runtimeBase) {
+		this.runtimeBase = runtimeBase
+	}
 	
 	override checkConfiguration(XtextGenerator generator, Issues issues) {
 		super.checkConfiguration(generator, issues)
