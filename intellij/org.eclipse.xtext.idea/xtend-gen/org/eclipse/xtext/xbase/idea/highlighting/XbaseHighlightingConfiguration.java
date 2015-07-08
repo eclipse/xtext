@@ -12,6 +12,7 @@ import com.intellij.openapi.editor.HighlighterColors;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
 import org.eclipse.xtext.idea.highlighting.DefaultHighlightingConfiguration;
+import org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration;
 import org.eclipse.xtext.xbase.ide.highlighting.XbaseHighlightingStyles;
 
 /**
@@ -20,7 +21,7 @@ import org.eclipse.xtext.xbase.ide.highlighting.XbaseHighlightingStyles;
 @SuppressWarnings("all")
 public class XbaseHighlightingConfiguration extends DefaultHighlightingConfiguration {
   @Override
-  protected void configure(final DefaultHighlightingConfiguration.IHighlightingStyleAcceptor it) {
+  public void configure(final IHighlightingConfiguration.IHighlightingStyleAcceptor it) {
     it.addStyle(HighlightingStyles.KEYWORD_ID, "Keyword", JavaHighlightingColors.KEYWORD);
     it.addStyle(HighlightingStyles.PUNCTUATION_ID, "Punctuation", JavaHighlightingColors.DOT);
     it.addStyle(HighlightingStyles.COMMENT_ID, "Comment", JavaHighlightingColors.LINE_COMMENT);

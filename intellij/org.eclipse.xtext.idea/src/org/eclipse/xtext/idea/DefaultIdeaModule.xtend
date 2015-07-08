@@ -76,7 +76,7 @@ class DefaultIdeaModule extends AbstractGenericModule {
 		DefaultAntlrTokenToAttributeIdMapper
 	}
 	
-	def Class <? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
+	def Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
 		DefaultHighlightingConfiguration
 	}
 	

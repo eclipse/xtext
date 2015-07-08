@@ -32,7 +32,7 @@ class SemanticHighlightVisitor implements HighlightVisitor {
  
  	@Inject ISemanticHighlightingCalculator highlightCalculator
  	
- 	@Inject extension IHighlightingConfiguration 
+ 	@Inject extension TextAttributeProvider 
  	
 	@Inject Provider<SemanticHighlightVisitor> cloneProvider
 

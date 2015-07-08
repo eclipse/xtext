@@ -23,7 +23,7 @@ import com.intellij.psi.PsiFile;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
-import org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration;
+import org.eclipse.xtext.idea.highlighting.TextAttributeProvider;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -46,7 +46,7 @@ public class SemanticHighlightVisitor implements HighlightVisitor {
   
   @Inject
   @Extension
-  private IHighlightingConfiguration _iHighlightingConfiguration;
+  private TextAttributeProvider _textAttributeProvider;
   
   @Inject
   private Provider<SemanticHighlightVisitor> cloneProvider;
@@ -108,7 +108,7 @@ public class SemanticHighlightVisitor implements HighlightVisitor {
   }
   
   public HighlightInfoType getHighlightInfoType(final String xtextStyle) {
-    TextAttributesKey _textAttributesKey = this._iHighlightingConfiguration.getTextAttributesKey(xtextStyle);
+    TextAttributesKey _textAttributesKey = this._textAttributeProvider.getTextAttributesKey(xtextStyle);
     return new HighlightInfoType.HighlightInfoTypeImpl(HighlightSeverity.INFORMATION, _textAttributesKey);
   }
   

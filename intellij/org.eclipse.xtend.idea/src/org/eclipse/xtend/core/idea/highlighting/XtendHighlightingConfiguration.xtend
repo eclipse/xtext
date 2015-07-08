@@ -19,7 +19,7 @@ import static org.eclipse.xtend.ide.common.highlighting.XtendHighlightingStyles.
  */
 class XtendHighlightingConfiguration extends XbaseHighlightingConfiguration {
 	
-	override protected configure(IHighlightingStyleAcceptor it) {
+	override configure(IHighlightingStyleAcceptor it) {
 		super.configure(it)
 		val templateText = addStyle(RICH_TEXT_ID, "Template text", EditorColors.INJECTED_LANGUAGE_FRAGMENT)
 		addStyle(RICH_TEXT_DELIMITER_ID, "Template delimiter", DefaultLanguageHighlighterColors.PARENTHESES)

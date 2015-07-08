@@ -21,7 +21,7 @@ import org.eclipse.xtext.idea.parser.TokenTypeProvider
 class DefaultSyntaxHighlighter extends SyntaxHighlighterBase {
 
 	@Inject Provider<Lexer> lexerProvider
-	@Inject IHighlightingConfiguration highlightingConfiguration
+	@Inject TextAttributeProvider textAttributeProvider
 
 	@Inject extension TokenTypeProvider tokenTypeProvider
 	@Inject extension AbstractAntlrTokenToAttributeIdMapper tokenToAttributeIdMapper
@@ -32,7 +32,6 @@ class DefaultSyntaxHighlighter extends SyntaxHighlighterBase {
 
 	override getTokenHighlights(IElementType tokenType) {
 		val attribute = tokenType.antlrType.id
-		return pack(highlightingConfiguration.getTextAttributesKey(attribute))
+		return pack(textAttributeProvider.getTextAttributesKey(attribute))
 	}
-
 }

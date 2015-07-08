@@ -20,7 +20,7 @@ import static org.eclipse.xtext.xbase.ide.highlighting.XbaseHighlightingStyles.*
  */
 class XbaseHighlightingConfiguration extends DefaultHighlightingConfiguration {
 	
-	override protected configure(IHighlightingStyleAcceptor it) {
+	override configure(IHighlightingStyleAcceptor it) {
 		addStyle(KEYWORD_ID, "Keyword", JavaHighlightingColors.KEYWORD) 
 		addStyle(PUNCTUATION_ID, "Punctuation", JavaHighlightingColors.DOT)
 		addStyle(COMMENT_ID, "Comment", JavaHighlightingColors.LINE_COMMENT)

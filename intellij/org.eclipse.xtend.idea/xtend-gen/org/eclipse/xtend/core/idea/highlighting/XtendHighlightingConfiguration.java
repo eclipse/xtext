@@ -12,7 +12,7 @@ import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.EditorColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import org.eclipse.xtend.ide.common.highlighting.XtendHighlightingStyles;
-import org.eclipse.xtext.idea.highlighting.DefaultHighlightingConfiguration;
+import org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration;
 import org.eclipse.xtext.xbase.idea.highlighting.XbaseHighlightingConfiguration;
 
 /**
@@ -21,7 +21,7 @@ import org.eclipse.xtext.xbase.idea.highlighting.XbaseHighlightingConfiguration;
 @SuppressWarnings("all")
 public class XtendHighlightingConfiguration extends XbaseHighlightingConfiguration {
   @Override
-  protected void configure(final DefaultHighlightingConfiguration.IHighlightingStyleAcceptor it) {
+  public void configure(final IHighlightingConfiguration.IHighlightingStyleAcceptor it) {
     super.configure(it);
     final TextAttributesKey templateText = it.addStyle(XtendHighlightingStyles.RICH_TEXT_ID, "Template text", EditorColors.INJECTED_LANGUAGE_FRAGMENT);
     it.addStyle(XtendHighlightingStyles.RICH_TEXT_DELIMITER_ID, "Template delimiter", DefaultLanguageHighlighterColors.PARENTHESES);

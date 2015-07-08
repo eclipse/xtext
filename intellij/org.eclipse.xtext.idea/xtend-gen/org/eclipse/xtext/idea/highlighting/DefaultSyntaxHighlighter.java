@@ -14,7 +14,7 @@ import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
-import org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration;
+import org.eclipse.xtext.idea.highlighting.TextAttributeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.xbase.lib.Extension;
 
@@ -27,7 +27,7 @@ public class DefaultSyntaxHighlighter extends SyntaxHighlighterBase {
   private Provider<Lexer> lexerProvider;
   
   @Inject
-  private IHighlightingConfiguration highlightingConfiguration;
+  private TextAttributeProvider textAttributeProvider;
   
   @Inject
   @Extension
@@ -46,7 +46,7 @@ public class DefaultSyntaxHighlighter extends SyntaxHighlighterBase {
   public TextAttributesKey[] getTokenHighlights(final IElementType tokenType) {
     int _antlrType = this.tokenTypeProvider.getAntlrType(tokenType);
     final String attribute = this.tokenToAttributeIdMapper.getId(_antlrType);
-    TextAttributesKey _textAttributesKey = this.highlightingConfiguration.getTextAttributesKey(attribute);
+    TextAttributesKey _textAttributesKey = this.textAttributeProvider.getTextAttributesKey(attribute);
     return SyntaxHighlighterBase.pack(_textAttributesKey);
   }
 }
