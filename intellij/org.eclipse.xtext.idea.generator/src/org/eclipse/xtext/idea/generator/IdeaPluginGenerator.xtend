@@ -985,7 +985,6 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 				else  'com.intellij.openapi.editor.DefaultLanguageHighlighterColors'»
 	package «grammar.syntaxHighlighter.toPackageName»;
 	
-	import com.google.common.base.Objects;
 	import «colorsClass»;
 	import com.intellij.openapi.editor.HighlighterColors;
 	import com.intellij.openapi.editor.colors.TextAttributesKey;
@@ -1010,36 +1009,16 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	
 		@Override
 		public TextAttributesKey createOrGetTextAttributesKey(final String attribute) {
-			TextAttributesKey _switchResult = null;
-			boolean _matched = false;
-			if (!_matched) {
-				if (Objects.equal(attribute, HighlightingStyles.NUMBER_ID)) {
-					_matched = true;
-					_switchResult = NUMBER;
-				}
+			if (HighlightingStyles.KEYWORD_ID.equals(attribute)) {
+				return KEYWORD;
+			} else if (HighlightingStyles.STRING_ID.equals(attribute)) {
+				return STRING;
+			} else if (HighlightingStyles.COMMENT_ID.equals(attribute)) {
+				return COMMENT;
+			} else if (HighlightingStyles.NUMBER_ID.equals(attribute)) {
+				return NUMBER;
 			}
-			if (!_matched) {
-				if (Objects.equal(attribute, HighlightingStyles.KEYWORD_ID)) {
-					_matched = true;
-					_switchResult = KEYWORD;
-				}
-			}
-			if (!_matched) {
-				if (Objects.equal(attribute, HighlightingStyles.STRING_ID)) {
-					_matched = true;
-					_switchResult = STRING;
-				}
-			}
-			if (!_matched) {
-				if (Objects.equal(attribute, HighlightingStyles.COMMENT_ID)) {
-					_matched = true;
-					_switchResult = COMMENT;
-				}
-			}
-			if (!_matched) {
-				_switchResult = HighlighterColors.TEXT;
-			}
-			return _switchResult;
+			return HighlighterColors.TEXT;
 		}
 	}'''
 	
