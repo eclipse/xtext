@@ -10,11 +10,9 @@ package org.eclipse.xtext.generator.adapter
 import com.google.common.collect.Maps
 import com.google.inject.Inject
 import com.google.inject.Injector
-import com.google.inject.Provider
 import java.io.File
 import java.util.List
 import java.util.Map
-import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.mwe.core.issues.Issues
 import org.eclipse.xpand2.XpandExecutionContext
 import org.eclipse.xpand2.XpandExecutionContextImpl
@@ -55,8 +53,6 @@ class FragmentAdapter implements IGeneratorFragment2 {
 	@Inject CodeConfig codeConfig
 	
 	@Inject IEncodingProvider encodingProvider
-	
-	@Inject Provider<ResourceSet> resourceSetProvider
 	
 	@Accessors
 	IGeneratorFragment fragment
@@ -127,8 +123,8 @@ class FragmentAdapter implements IGeneratorFragment2 {
 			config2.runtimeGenModule.addAll(bindings.map[translateBinding])
 		if (fragment instanceof IGeneratorFragmentExtension4) {
 			val superClass = fragment.getDefaultRuntimeModuleClassName(config1.grammar)
-			if (superClass !== null && config2.runtimeGenModule.superClassName === null)
-				config2.runtimeGenModule.superClassName = superClass
+			if (superClass !== null)
+				config2.runtimeGenModule.superClass = new TypeReference(superClass)
 		}
 	}
 	
@@ -138,8 +134,8 @@ class FragmentAdapter implements IGeneratorFragment2 {
 			config2.eclipsePluginGenModule.addAll(bindings.map[translateBinding])
 		if (fragment instanceof IGeneratorFragmentExtension4) {
 			val superClass = fragment.getDefaultUiModuleClassName(config1.grammar)
-			if (superClass !== null && config2.eclipsePluginGenModule.superClassName === null)
-				config2.eclipsePluginGenModule.superClassName = superClass
+			if (superClass !== null)
+				config2.eclipsePluginGenModule.superClass = new TypeReference(superClass)
 		}
 	}
 	
@@ -151,82 +147,92 @@ class FragmentAdapter implements IGeneratorFragment2 {
 	}
 	
 	private def void generatePluginXmlRt(LanguageConfig config1, XpandExecutionContext ctx) {
-		ctx.output.openFile(null, StringConcatOutputImpl.STRING_OUTLET)
-		try {
-			if (fragment instanceof IGeneratorFragmentExtension2) {
-				fragment.addToPluginXmlRt(config1, ctx)
-			} else {
-				fragment.addToPluginXmlRt(config1.grammar, ctx)
+		if (projectConfig.runtimePluginXml !== null) {
+			ctx.output.openFile(null, StringConcatOutputImpl.STRING_OUTLET)
+			try {
+				if (fragment instanceof IGeneratorFragmentExtension2) {
+					fragment.addToPluginXmlRt(config1, ctx)
+				} else {
+					fragment.addToPluginXmlRt(config1.grammar, ctx)
+				}
+				val result = (ctx.output as StringConcatOutputImpl).stringOutlet
+				projectConfig.runtimePluginXml.entries += result.toString.decreaseIndentation(1)
+			} finally {
+				ctx.output.closeFile()
 			}
-			val result = (ctx.output as StringConcatOutputImpl).stringOutlet
-			projectConfig.runtimePluginXml.entries += result.toString.decreaseIndentation(1)
-		} finally {
-			ctx.output.closeFile()
 		}
 	}
 	
 	private def void generatePluginXmlUi(LanguageConfig config1, XpandExecutionContext ctx) {
-		ctx.output.openFile(null, StringConcatOutputImpl.STRING_OUTLET)
-		try {
-			if (fragment instanceof IGeneratorFragmentExtension2) {
-				fragment.addToPluginXmlUi(config1, ctx)
-			} else {
-				fragment.addToPluginXmlUi(config1.grammar, ctx)
+		if (projectConfig.eclipsePluginPluginXml !== null) {
+			ctx.output.openFile(null, StringConcatOutputImpl.STRING_OUTLET)
+			try {
+				if (fragment instanceof IGeneratorFragmentExtension2) {
+					fragment.addToPluginXmlUi(config1, ctx)
+				} else {
+					fragment.addToPluginXmlUi(config1.grammar, ctx)
+				}
+				val result = (ctx.output as StringConcatOutputImpl).stringOutlet
+				projectConfig.eclipsePluginPluginXml.entries += result.toString.decreaseIndentation(1)
+			} finally {
+				ctx.output.closeFile()
 			}
-			val result = (ctx.output as StringConcatOutputImpl).stringOutlet
-			projectConfig.eclipsePluginPluginXml.entries += result.toString.decreaseIndentation(1)
-		} finally {
-			ctx.output.closeFile()
 		}
 	}
 	
 	private def void generateManifestRt(LanguageConfig config1, XpandExecutionContext ctx) {
-		val exported = fragment.getExportedPackagesRt(config1.grammar)
-		if (exported !== null)
-			projectConfig.runtimeManifest.exportedPackages.addAll(exported)
-		val required = fragment.getRequiredBundlesRt(config1.grammar)
-		if (required !== null)
-			projectConfig.runtimeManifest.requiredBundles.addAll(required)
-		val imported = fragment.getImportedPackagesRt(config1.grammar)
-		if (imported !== null)
-			projectConfig.runtimeManifest.importedPackages.addAll(imported)
+		if (projectConfig.runtimeManifest !== null) {
+			val exported = fragment.getExportedPackagesRt(config1.grammar)
+			if (exported !== null)
+				projectConfig.runtimeManifest.exportedPackages.addAll(exported)
+			val required = fragment.getRequiredBundlesRt(config1.grammar)
+			if (required !== null)
+				projectConfig.runtimeManifest.requiredBundles.addAll(required)
+			val imported = fragment.getImportedPackagesRt(config1.grammar)
+			if (imported !== null)
+				projectConfig.runtimeManifest.importedPackages.addAll(imported)
+		}
 	}
 	
 	private def void generateManifestUi(LanguageConfig config1, XpandExecutionContext ctx) {
-		val exported = fragment.getExportedPackagesUi(config1.grammar)
-		if (exported !== null)
-			projectConfig.eclipsePluginManifest.exportedPackages.addAll(exported)
-		val required = fragment.getRequiredBundlesUi(config1.grammar)
-		if (required !== null)
-			projectConfig.eclipsePluginManifest.requiredBundles.addAll(required)
-		val imported = fragment.getImportedPackagesUi(config1.grammar)
-		if (imported !== null)
-			projectConfig.eclipsePluginManifest.importedPackages.addAll(imported)
+		if (projectConfig.eclipsePluginManifest !== null) {
+			val exported = fragment.getExportedPackagesUi(config1.grammar)
+			if (exported !== null)
+				projectConfig.eclipsePluginManifest.exportedPackages.addAll(exported)
+			val required = fragment.getRequiredBundlesUi(config1.grammar)
+			if (required !== null)
+				projectConfig.eclipsePluginManifest.requiredBundles.addAll(required)
+			val imported = fragment.getImportedPackagesUi(config1.grammar)
+			if (imported !== null)
+				projectConfig.eclipsePluginManifest.importedPackages.addAll(imported)
+		}
 	}
 	
 	private def void generateManifestIde(LanguageConfig config1, XpandExecutionContext ctx) {
-		if (fragment instanceof IGeneratorFragmentExtension3) {
-			val exported = fragment.getExportedPackagesIde(config1.grammar)
+		if (fragment instanceof IGeneratorFragmentExtension3 && projectConfig.genericIdeManifest !== null) {
+			val fr = fragment as IGeneratorFragmentExtension3
+			val exported = fr.getExportedPackagesIde(config1.grammar)
 			if (exported !== null)
 				projectConfig.genericIdeManifest.exportedPackages.addAll(exported)
-			val required = fragment.getRequiredBundlesIde(config1.grammar)
+			val required = fr.getRequiredBundlesIde(config1.grammar)
 			if (required !== null)
 				projectConfig.genericIdeManifest.requiredBundles.addAll(required)
-			val imported = fragment.getImportedPackagesIde(config1.grammar)
+			val imported = fr.getImportedPackagesIde(config1.grammar)
 			if (imported !== null)
 				projectConfig.genericIdeManifest.importedPackages.addAll(imported)
 		}
 	}
 	
 	private def void generateManifestTests(LanguageConfig config1, XpandExecutionContext ctx) {
-		if (fragment instanceof IGeneratorFragmentExtension) {
-			val exported = fragment.getExportedPackagesTests(config1.grammar)
+		if (fragment instanceof IGeneratorFragmentExtension && projectConfig.runtimeTestManifest !== null) {
+			val fr = fragment as IGeneratorFragmentExtension
+			val exported = fr.getExportedPackagesTests(config1.grammar)
 			if (exported !== null)
 				projectConfig.runtimeTestManifest.exportedPackages.addAll(exported)
-			val required = fragment.getRequiredBundlesTests(config1.grammar)
+			val required = fr.getRequiredBundlesTests(config1.grammar)
 			if (required !== null)
 				projectConfig.runtimeTestManifest.requiredBundles.addAll(required)
-			val imported = fragment.getImportedPackagesTests(config1.grammar)
+			val imported = fr.getImportedPackagesTests(config1.grammar)
 			if (imported !== null)
 				projectConfig.runtimeTestManifest.importedPackages.addAll(imported)
 		}
@@ -247,6 +253,7 @@ class FragmentAdapter implements IGeneratorFragment2 {
 			annotationImports = codeConfig.annotationImportsAsString
 			hasUI = projectNameUi !== null
 			hasIde = projectNameIde !== null
+			grammarId = config2.grammar.name
 		]
 		if (fragment instanceof NamingAware)
 			fragment.registerNaming(result)
@@ -258,7 +265,7 @@ class FragmentAdapter implements IGeneratorFragment2 {
 		for (resource : config2.loadedResources) {
 			config.addLoadedResource(resource)
 		}
-		config.forcedResourceSet = resourceSetProvider.get
+		config.forcedResourceSet = config2.resourceSet
 		config.fileExtensions = config2.fileExtensions.join(',')
 		config.uri = config2.uri
 		config.registerNaming(naming)

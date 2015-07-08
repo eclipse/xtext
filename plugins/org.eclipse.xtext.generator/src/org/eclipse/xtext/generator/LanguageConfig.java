@@ -253,13 +253,15 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 	}
 	
 	private void installIndex(ResourceSet resourceSet) {
-		// Fill index
-		ResourceDescriptionsData index = new ResourceDescriptionsData(Collections.<IResourceDescription>emptyList());
-		List<Resource> resources = Lists.newArrayList(resourceSet.getResources());
-		for (Resource resource : resources) {
-			index(resource, resource.getURI(), index);
+		if (ResourceDescriptionsData.ResourceSetAdapter.findResourceDescriptionsData(resourceSet) == null) {
+			// Fill index
+			ResourceDescriptionsData index = new ResourceDescriptionsData(Collections.<IResourceDescription>emptyList());
+			List<Resource> resources = Lists.newArrayList(resourceSet.getResources());
+			for (Resource resource : resources) {
+				index(resource, resource.getURI(), index);
+			}
+			ResourceDescriptionsData.ResourceSetAdapter.installResourceDescriptionsData(resourceSet, index);
 		}
-		ResourceDescriptionsData.ResourceSetAdapter.installResourceDescriptionsData(resourceSet, index);
 	}
 
 	private void index(Resource resource, URI uri, ResourceDescriptionsData index) {
