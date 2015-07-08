@@ -35,6 +35,14 @@ abstract class AbstractColorSettingsPage implements ColorSettingsPage, Inspectio
 		'''
 			// change this text in the ColorSettingsPage
 			// of your language. See getDemoText() method
+			
+			abcdefghijklmnopqrstuvwxyz 0123456789 (){}[]
+			ABCDEFGHIJKLMNOPQRSTUVWXYZ +-*/= .,;:!? #&$%@|^
+			
+			Styles:
+			  result = "text, text, text";
+			  i = 5
+			  return i;
 		'''
 	}
 

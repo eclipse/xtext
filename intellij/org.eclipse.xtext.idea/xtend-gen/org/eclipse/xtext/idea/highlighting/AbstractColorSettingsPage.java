@@ -41,6 +41,23 @@ public abstract class AbstractColorSettingsPage implements ColorSettingsPage, In
     _builder.newLine();
     _builder.append("// of your language. See getDemoText() method");
     _builder.newLine();
+    _builder.newLine();
+    _builder.append("abcdefghijklmnopqrstuvwxyz 0123456789 (){}[]");
+    _builder.newLine();
+    _builder.append("ABCDEFGHIJKLMNOPQRSTUVWXYZ +-*/= .,;:!? #&$%@|^");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("Styles:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("result = \"text, text, text\";");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("i = 5");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("return i;");
+    _builder.newLine();
     return _builder.toString();
   }
   

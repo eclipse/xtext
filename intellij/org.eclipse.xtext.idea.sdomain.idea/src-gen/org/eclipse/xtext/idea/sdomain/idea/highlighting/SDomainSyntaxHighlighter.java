@@ -1,6 +1,5 @@
 package org.eclipse.xtext.idea.sdomain.idea.highlighting;
 
-import com.google.common.base.Objects;
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.HighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
@@ -25,35 +24,15 @@ public class SDomainSyntaxHighlighter extends AbstractSyntaxHighlighter {
 
 	@Override
 	public TextAttributesKey createOrGetTextAttributesKey(final String attribute) {
-		TextAttributesKey _switchResult = null;
-		boolean _matched = false;
-		if (!_matched) {
-			if (Objects.equal(attribute, HighlightingStyles.NUMBER_ID)) {
-				_matched = true;
-				_switchResult = NUMBER;
-			}
+		if (HighlightingStyles.KEYWORD_ID.equals(attribute)) {
+			return KEYWORD;
+		} else if (HighlightingStyles.STRING_ID.equals(attribute)) {
+			return STRING;
+		} else if (HighlightingStyles.COMMENT_ID.equals(attribute)) {
+			return COMMENT;
+		} else if (HighlightingStyles.NUMBER_ID.equals(attribute)) {
+			return NUMBER;
 		}
-		if (!_matched) {
-			if (Objects.equal(attribute, HighlightingStyles.KEYWORD_ID)) {
-				_matched = true;
-				_switchResult = KEYWORD;
-			}
-		}
-		if (!_matched) {
-			if (Objects.equal(attribute, HighlightingStyles.STRING_ID)) {
-				_matched = true;
-				_switchResult = STRING;
-			}
-		}
-		if (!_matched) {
-			if (Objects.equal(attribute, HighlightingStyles.COMMENT_ID)) {
-				_matched = true;
-				_switchResult = COMMENT;
-			}
-		}
-		if (!_matched) {
-			_switchResult = HighlighterColors.TEXT;
-		}
-		return _switchResult;
+		return HighlighterColors.TEXT;
 	}
 }
