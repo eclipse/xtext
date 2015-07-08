@@ -20,13 +20,16 @@ import static extension com.intellij.openapi.editor.EditorModificationUtil.*
  */
 class AutoEditString extends AbstractAutoEditBlock {
 
-	new(String quote) {
-		this(quote, quote)
+	val TokenSet stringLiteralTokens
+	
+	new(String quote, TokenSet stringLiteralTokens) {
+		this(quote, quote, stringLiteralTokens)
 	}
 
-	new(String openingTerminal, String closingTerminal) {
+	new(String openingTerminal, String closingTerminal, TokenSet stringLiteralTokens) {
 		super(openingTerminal, closingTerminal)
 		shouldDeleteClosing = true
+		this.stringLiteralTokens = stringLiteralTokens
 	}
 
 	override open(char c, extension AutoEditContext context) {

@@ -8,60 +8,32 @@
 package org.eclipse.xtext.idea.editorActions
 
 import com.google.inject.Inject
+import com.google.inject.Singleton
 import com.intellij.openapi.actionSystem.DataContext
 import com.intellij.openapi.editor.actionSystem.EditorActionHandler
 import com.intellij.openapi.editor.ex.EditorEx
 import com.intellij.openapi.fileTypes.FileType
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.Ref
-import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiFile
-import com.intellij.psi.tree.IElementType
-import com.intellij.psi.tree.TokenSet
 import com.intellij.util.text.CharArrayUtil
-import org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider
-import org.eclipse.xtext.idea.parser.TokenTypeProvider
 
 import static extension com.intellij.openapi.editor.EditorModificationUtil.*
 
 /**
  * @author kosyakov - Initial contribution and API
  */
-class DefaultAutoEditHandler extends IdeaAutoEditHandler implements TokenSetProvider {
+@Singleton
+class DefaultAutoEditHandler extends IdeaAutoEditHandler {
 
 	@Inject
-	TokenTypeProvider tokenTypeProvider
+	extension TokenSetProvider tokenSetProvider
 
 	@Inject
-	IBracePairProvider bracePairProvider
-
-	// TODO: should be configurable
-	protected def Iterable<AbstractAutoEditBlock> getQuotes() {
-		#[
-			new AutoEditString('"'),
-			new AutoEditString("'")
-		]
-	}
+	extension AutoEditBlockProvider blockProvider
 
 	protected def getBlocks(EditorEx editor) {
 		editor.getTokenSet(editor.caretModel.offset).blocks
-	}
-
-	// TODO: should be configurable
-	protected def Iterable<AbstractIndentableAutoEditBlock> getBlocks(TokenSet tokenSet) {
-		val multiLineCommentBlock = new AutoEditMultiLineBlock('/*', ' * ', ' */')
-		switch tokenSet {
-			case singleLineCommentTokens:
-				emptyList
-			case commentTokens:
-				#[
-					multiLineCommentBlock
-				]
-			default:
-				bracePairProvider.pairs.map [
-					new AutoEditMultiLineBlock(leftBrace, null, rightBrace, structural)
-				] + #[multiLineCommentBlock]
-		}
 	}
 
 	override beforeEnterTyped(
@@ -72,7 +44,7 @@ class DefaultAutoEditHandler extends IdeaAutoEditHandler implements TokenSetProv
 		DataContext dataContext,
 		EditorActionHandler originalHandler
 	) {
-		handleIndentation(new AutoEditContext(editor, this))
+		handleIndentation(new AutoEditContext(editor, tokenSetProvider))
 	}
 
 	// TODO: replace with skipping whitespace tokens
@@ -127,7 +99,7 @@ class DefaultAutoEditHandler extends IdeaAutoEditHandler implements TokenSetProv
 	}
 
 	override beforeCharTyped(char c, Project project, EditorEx editor, PsiFile file, FileType fileType) {
-		val context = new AutoEditContext(editor, this)
+		val context = new AutoEditContext(editor, tokenSetProvider)
 		for (result : editor.blocks.map[closeBlock(c, context)]) {
 			if (result == Result.DEFAULT || result == Result.STOP)
 				return result
@@ -148,7 +120,7 @@ class DefaultAutoEditHandler extends IdeaAutoEditHandler implements TokenSetProv
 	}
 
 	override charDeleted(char c, PsiFile file, EditorEx editor) {
-		val context = new AutoEditContext(editor, this)
+		val context = new AutoEditContext(editor, tokenSetProvider)
 
 		if (editor.blocks.exists[delete(c, context)])
 			return true
@@ -190,71 +162,6 @@ class DefaultAutoEditHandler extends IdeaAutoEditHandler implements TokenSetProv
 
 		val text = startText + c + endText
 		text.lastIndexOf(terminal) != -1
-	}
-
-	override def TokenSet getTokenSet(EditorEx editor, int offset) {
-		editor.getTokenType(offset).tokenSet
-	}
-
-	override def getTokenSet(IElementType tokenType) {
-		if (stringLiteralTokens.contains(tokenType))
-			return stringLiteralTokens
-		if (singleLineCommentTokens.contains(tokenType))
-			return singleLineCommentTokens
-		if (commentTokens.contains(tokenType))
-			return commentTokens
-		return null
-	}
-
-	override isStartOfLine(EditorEx editor, int offset) {
-		editor.getTokenSet(offset).isStartOfLine(editor, offset)
-	}
-
-	override isStartOfLine(TokenSet tokenSet, EditorEx editor, int offset) {
-		editor.getBeginningOfLine(offset).trim.empty
-	}
-
-	override isEndOfLine(EditorEx editor, int offset) {
-		editor.getTokenSet(offset).isEndOfLine(editor, offset)
-	}
-
-	override isEndOfLine(TokenSet tokenSet, EditorEx editor, int offset) {
-		editor.getEndOfLine(offset).trim.empty
-	}
-
-	def getBeginningOfLine(EditorEx editor, int offset) {
-		val document = editor.document
-		val lineNumber = editor.document.getLineNumber(offset)
-		val lineStartOffset = editor.document.getLineStartOffset(lineNumber)
-		document.getText(new TextRange(lineStartOffset, offset))
-	}
-
-	def getEndOfLine(EditorEx editor, int offset) {
-		val document = editor.document
-		val lineNumber = editor.document.getLineNumber(offset)
-		val lineEndOffset = editor.document.getLineEndOffset(lineNumber)
-		document.getText(new TextRange(offset, lineEndOffset))
-	}
-
-	protected def getTokenType(EditorEx editor, int offset) {
-		if(offset < 0 || offset > editor.document.textLength) return null
-
-		val iterator = editor.highlighter.createIterator(offset)
-		if(iterator.atEnd) return null
-
-		iterator.tokenType
-	}
-
-	protected def getCommentTokens() {
-		tokenTypeProvider.commentTokens
-	}
-
-	protected def getSingleLineCommentTokens() {
-		TokenSet.EMPTY
-	}
-
-	override getStringLiteralTokens() {
-		tokenTypeProvider.stringLiteralTokens
 	}
 
 }

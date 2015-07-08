@@ -24,13 +24,16 @@ import org.eclipse.xtext.xbase.lib.Extension;
  */
 @SuppressWarnings("all")
 public class AutoEditString extends AbstractAutoEditBlock {
-  public AutoEditString(final String quote) {
-    this(quote, quote);
+  private final TokenSet stringLiteralTokens;
+  
+  public AutoEditString(final String quote, final TokenSet stringLiteralTokens) {
+    this(quote, quote, stringLiteralTokens);
   }
   
-  public AutoEditString(final String openingTerminal, final String closingTerminal) {
+  public AutoEditString(final String openingTerminal, final String closingTerminal, final TokenSet stringLiteralTokens) {
     super(openingTerminal, closingTerminal);
     this.setShouldDeleteClosing(true);
+    this.stringLiteralTokens = stringLiteralTokens;
   }
   
   @Override
@@ -230,7 +233,6 @@ public class AutoEditString extends AbstractAutoEditBlock {
   }
   
   protected boolean isStringLiteral(final TokenSet tokenSet, @Extension final AutoEditContext context) {
-    TokenSet _stringLiteralTokens = context.getStringLiteralTokens();
-    return Objects.equal(tokenSet, _stringLiteralTokens);
+    return Objects.equal(tokenSet, this.stringLiteralTokens);
   }
 }

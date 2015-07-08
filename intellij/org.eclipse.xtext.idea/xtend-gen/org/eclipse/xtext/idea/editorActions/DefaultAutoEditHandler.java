@@ -8,39 +8,28 @@
 package org.eclipse.xtext.idea.editorActions;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.EditorModificationUtil;
 import com.intellij.openapi.editor.actionSystem.EditorActionHandler;
 import com.intellij.openapi.editor.ex.DocumentEx;
 import com.intellij.openapi.editor.ex.EditorEx;
-import com.intellij.openapi.editor.highlighter.EditorHighlighter;
-import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Ref;
-import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.util.text.CharArrayUtil;
-import java.util.Collections;
-import java.util.Set;
-import org.eclipse.xtext.ide.editor.bracketmatching.BracePair;
-import org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider;
 import org.eclipse.xtext.idea.editorActions.AbstractAutoEditBlock;
 import org.eclipse.xtext.idea.editorActions.AbstractIndentableAutoEditBlock;
+import org.eclipse.xtext.idea.editorActions.AutoEditBlockProvider;
 import org.eclipse.xtext.idea.editorActions.AutoEditBlockRegion;
 import org.eclipse.xtext.idea.editorActions.AutoEditContext;
-import org.eclipse.xtext.idea.editorActions.AutoEditMultiLineBlock;
-import org.eclipse.xtext.idea.editorActions.AutoEditString;
 import org.eclipse.xtext.idea.editorActions.IdeaAutoEditHandler;
 import org.eclipse.xtext.idea.editorActions.TokenSetProvider;
-import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.util.TextRegion;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
@@ -49,69 +38,27 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 /**
  * @author kosyakov - Initial contribution and API
  */
+@Singleton
 @SuppressWarnings("all")
-public class DefaultAutoEditHandler extends IdeaAutoEditHandler implements TokenSetProvider {
+public class DefaultAutoEditHandler extends IdeaAutoEditHandler {
   @Inject
-  private TokenTypeProvider tokenTypeProvider;
+  @Extension
+  private TokenSetProvider tokenSetProvider;
   
   @Inject
-  private IBracePairProvider bracePairProvider;
-  
-  protected Iterable<AbstractAutoEditBlock> getQuotes() {
-    AutoEditString _autoEditString = new AutoEditString("\"");
-    AutoEditString _autoEditString_1 = new AutoEditString("\'");
-    return Collections.<AbstractAutoEditBlock>unmodifiableList(CollectionLiterals.<AbstractAutoEditBlock>newArrayList(_autoEditString, _autoEditString_1));
-  }
+  @Extension
+  private AutoEditBlockProvider blockProvider;
   
   protected Iterable<AbstractIndentableAutoEditBlock> getBlocks(final EditorEx editor) {
     CaretModel _caretModel = editor.getCaretModel();
     int _offset = _caretModel.getOffset();
-    TokenSet _tokenSet = this.getTokenSet(editor, _offset);
-    return this.getBlocks(_tokenSet);
-  }
-  
-  protected Iterable<AbstractIndentableAutoEditBlock> getBlocks(final TokenSet tokenSet) {
-    Iterable<AbstractIndentableAutoEditBlock> _xblockexpression = null;
-    {
-      final AutoEditMultiLineBlock multiLineCommentBlock = new AutoEditMultiLineBlock("/*", " * ", " */");
-      Iterable<AbstractIndentableAutoEditBlock> _switchResult = null;
-      boolean _matched = false;
-      if (!_matched) {
-        TokenSet _singleLineCommentTokens = this.getSingleLineCommentTokens();
-        if (Objects.equal(tokenSet, _singleLineCommentTokens)) {
-          _matched=true;
-          _switchResult = CollectionLiterals.<AbstractIndentableAutoEditBlock>emptyList();
-        }
-      }
-      if (!_matched) {
-        TokenSet _commentTokens = this.getCommentTokens();
-        if (Objects.equal(tokenSet, _commentTokens)) {
-          _matched=true;
-          _switchResult = Collections.<AbstractIndentableAutoEditBlock>unmodifiableList(CollectionLiterals.<AbstractIndentableAutoEditBlock>newArrayList(multiLineCommentBlock));
-        }
-      }
-      if (!_matched) {
-        Set<BracePair> _pairs = this.bracePairProvider.getPairs();
-        final Function1<BracePair, AutoEditMultiLineBlock> _function = new Function1<BracePair, AutoEditMultiLineBlock>() {
-          @Override
-          public AutoEditMultiLineBlock apply(final BracePair it) {
-            String _leftBrace = it.getLeftBrace();
-            String _rightBrace = it.getRightBrace();
-            boolean _isStructural = it.isStructural();
-            return new AutoEditMultiLineBlock(_leftBrace, null, _rightBrace, _isStructural);
-          }
-        };
-        Iterable<AutoEditMultiLineBlock> _map = IterableExtensions.<BracePair, AutoEditMultiLineBlock>map(_pairs, _function);
-        _switchResult = Iterables.<AbstractIndentableAutoEditBlock>concat(_map, Collections.<AutoEditMultiLineBlock>unmodifiableList(CollectionLiterals.<AutoEditMultiLineBlock>newArrayList(multiLineCommentBlock)));
-      }
-      _xblockexpression = _switchResult;
-    }
-    return _xblockexpression;
+    TokenSet _tokenSet = this.tokenSetProvider.getTokenSet(editor, _offset);
+    return this.blockProvider.getBlocks(_tokenSet);
   }
   
   @Override
   public IdeaAutoEditHandler.Result beforeEnterTyped(final PsiFile file, final EditorEx editor, final Ref<Integer> caretOffset, final Ref<Integer> caretAdvance, final DataContext dataContext, final EditorActionHandler originalHandler) {
-    AutoEditContext _autoEditContext = new AutoEditContext(editor, this);
+    AutoEditContext _autoEditContext = new AutoEditContext(editor, this.tokenSetProvider);
     return this.handleIndentation(_autoEditContext);
   }
   
@@ -161,7 +108,7 @@ public class DefaultAutoEditHandler extends IdeaAutoEditHandler implements Token
   protected boolean shouldIndent(@Extension final AutoEditContext context) {
     int _caretOffset = context.getCaretOffset();
     TokenSet _tokenSet = context.getTokenSet(_caretOffset);
-    TokenSet _stringLiteralTokens = this.getStringLiteralTokens();
+    TokenSet _stringLiteralTokens = this.tokenSetProvider.getStringLiteralTokens();
     return (!Objects.equal(_tokenSet, _stringLiteralTokens));
   }
   
@@ -208,7 +155,7 @@ public class DefaultAutoEditHandler extends IdeaAutoEditHandler implements Token
   
   @Override
   public IdeaAutoEditHandler.Result beforeCharTyped(final char c, final Project project, final EditorEx editor, final PsiFile file, final FileType fileType) {
-    final AutoEditContext context = new AutoEditContext(editor, this);
+    final AutoEditContext context = new AutoEditContext(editor, this.tokenSetProvider);
     Iterable<AbstractIndentableAutoEditBlock> _blocks = this.getBlocks(editor);
     final Function1<AbstractIndentableAutoEditBlock, IdeaAutoEditHandler.Result> _function = new Function1<AbstractIndentableAutoEditBlock, IdeaAutoEditHandler.Result>() {
       @Override
@@ -230,7 +177,7 @@ public class DefaultAutoEditHandler extends IdeaAutoEditHandler implements Token
         return result;
       }
     }
-    Iterable<AbstractAutoEditBlock> _quotes = this.getQuotes();
+    Iterable<AbstractAutoEditBlock> _quotes = this.blockProvider.getQuotes();
     final Function1<AbstractAutoEditBlock, IdeaAutoEditHandler.Result> _function_1 = new Function1<AbstractAutoEditBlock, IdeaAutoEditHandler.Result>() {
       @Override
       public IdeaAutoEditHandler.Result apply(final AbstractAutoEditBlock it) {
@@ -272,7 +219,7 @@ public class DefaultAutoEditHandler extends IdeaAutoEditHandler implements Token
         return result_2;
       }
     }
-    Iterable<AbstractAutoEditBlock> _quotes_1 = this.getQuotes();
+    Iterable<AbstractAutoEditBlock> _quotes_1 = this.blockProvider.getQuotes();
     final Function1<AbstractAutoEditBlock, IdeaAutoEditHandler.Result> _function_3 = new Function1<AbstractAutoEditBlock, IdeaAutoEditHandler.Result>() {
       @Override
       public IdeaAutoEditHandler.Result apply(final AbstractAutoEditBlock it) {
@@ -298,7 +245,7 @@ public class DefaultAutoEditHandler extends IdeaAutoEditHandler implements Token
   
   @Override
   public boolean charDeleted(final char c, final PsiFile file, final EditorEx editor) {
-    final AutoEditContext context = new AutoEditContext(editor, this);
+    final AutoEditContext context = new AutoEditContext(editor, this.tokenSetProvider);
     Iterable<AbstractIndentableAutoEditBlock> _blocks = this.getBlocks(editor);
     final Function1<AbstractIndentableAutoEditBlock, Boolean> _function = new Function1<AbstractIndentableAutoEditBlock, Boolean>() {
       @Override
@@ -310,7 +257,7 @@ public class DefaultAutoEditHandler extends IdeaAutoEditHandler implements Token
     if (_exists) {
       return true;
     }
-    Iterable<AbstractAutoEditBlock> _quotes = this.getQuotes();
+    Iterable<AbstractAutoEditBlock> _quotes = this.blockProvider.getQuotes();
     final Function1<AbstractAutoEditBlock, Boolean> _function_1 = new Function1<AbstractAutoEditBlock, Boolean>() {
       @Override
       public Boolean apply(final AbstractAutoEditBlock it) {
@@ -386,124 +333,5 @@ public class DefaultAutoEditHandler extends IdeaAutoEditHandler implements Token
       _xblockexpression = (_lastIndexOf != (-1));
     }
     return _xblockexpression;
-  }
-  
-  @Override
-  public TokenSet getTokenSet(final EditorEx editor, final int offset) {
-    IElementType _tokenType = this.getTokenType(editor, offset);
-    return this.getTokenSet(_tokenType);
-  }
-  
-  @Override
-  public TokenSet getTokenSet(final IElementType tokenType) {
-    TokenSet _stringLiteralTokens = this.getStringLiteralTokens();
-    boolean _contains = _stringLiteralTokens.contains(tokenType);
-    if (_contains) {
-      return this.getStringLiteralTokens();
-    }
-    TokenSet _singleLineCommentTokens = this.getSingleLineCommentTokens();
-    boolean _contains_1 = _singleLineCommentTokens.contains(tokenType);
-    if (_contains_1) {
-      return this.getSingleLineCommentTokens();
-    }
-    TokenSet _commentTokens = this.getCommentTokens();
-    boolean _contains_2 = _commentTokens.contains(tokenType);
-    if (_contains_2) {
-      return this.getCommentTokens();
-    }
-    return null;
-  }
-  
-  @Override
-  public boolean isStartOfLine(final EditorEx editor, final int offset) {
-    TokenSet _tokenSet = this.getTokenSet(editor, offset);
-    return this.isStartOfLine(_tokenSet, editor, offset);
-  }
-  
-  @Override
-  public boolean isStartOfLine(final TokenSet tokenSet, final EditorEx editor, final int offset) {
-    String _beginningOfLine = this.getBeginningOfLine(editor, offset);
-    String _trim = _beginningOfLine.trim();
-    return _trim.isEmpty();
-  }
-  
-  @Override
-  public boolean isEndOfLine(final EditorEx editor, final int offset) {
-    TokenSet _tokenSet = this.getTokenSet(editor, offset);
-    return this.isEndOfLine(_tokenSet, editor, offset);
-  }
-  
-  @Override
-  public boolean isEndOfLine(final TokenSet tokenSet, final EditorEx editor, final int offset) {
-    String _endOfLine = this.getEndOfLine(editor, offset);
-    String _trim = _endOfLine.trim();
-    return _trim.isEmpty();
-  }
-  
-  public String getBeginningOfLine(final EditorEx editor, final int offset) {
-    String _xblockexpression = null;
-    {
-      final DocumentEx document = editor.getDocument();
-      DocumentEx _document = editor.getDocument();
-      final int lineNumber = _document.getLineNumber(offset);
-      DocumentEx _document_1 = editor.getDocument();
-      final int lineStartOffset = _document_1.getLineStartOffset(lineNumber);
-      TextRange _textRange = new TextRange(lineStartOffset, offset);
-      _xblockexpression = document.getText(_textRange);
-    }
-    return _xblockexpression;
-  }
-  
-  public String getEndOfLine(final EditorEx editor, final int offset) {
-    String _xblockexpression = null;
-    {
-      final DocumentEx document = editor.getDocument();
-      DocumentEx _document = editor.getDocument();
-      final int lineNumber = _document.getLineNumber(offset);
-      DocumentEx _document_1 = editor.getDocument();
-      final int lineEndOffset = _document_1.getLineEndOffset(lineNumber);
-      TextRange _textRange = new TextRange(offset, lineEndOffset);
-      _xblockexpression = document.getText(_textRange);
-    }
-    return _xblockexpression;
-  }
-  
-  protected IElementType getTokenType(final EditorEx editor, final int offset) {
-    IElementType _xblockexpression = null;
-    {
-      boolean _or = false;
-      if ((offset < 0)) {
-        _or = true;
-      } else {
-        DocumentEx _document = editor.getDocument();
-        int _textLength = _document.getTextLength();
-        boolean _greaterThan = (offset > _textLength);
-        _or = _greaterThan;
-      }
-      if (_or) {
-        return null;
-      }
-      EditorHighlighter _highlighter = editor.getHighlighter();
-      final HighlighterIterator iterator = _highlighter.createIterator(offset);
-      boolean _atEnd = iterator.atEnd();
-      if (_atEnd) {
-        return null;
-      }
-      _xblockexpression = iterator.getTokenType();
-    }
-    return _xblockexpression;
-  }
-  
-  protected TokenSet getCommentTokens() {
-    return this.tokenTypeProvider.getCommentTokens();
-  }
-  
-  protected TokenSet getSingleLineCommentTokens() {
-    return TokenSet.EMPTY;
-  }
-  
-  @Override
-  public TokenSet getStringLiteralTokens() {
-    return this.tokenTypeProvider.getStringLiteralTokens();
   }
 }

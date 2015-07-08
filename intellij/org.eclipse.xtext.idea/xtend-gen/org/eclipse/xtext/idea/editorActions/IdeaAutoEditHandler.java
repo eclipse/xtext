@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.idea.editorActions;
 
+import com.google.inject.ImplementedBy;
 import com.intellij.codeInsight.editorActions.BackspaceHandlerDelegate;
 import com.intellij.codeInsight.editorActions.TypedHandlerDelegate;
 import com.intellij.codeInsight.editorActions.enter.EnterHandlerDelegate;
@@ -17,6 +18,7 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Ref;
 import com.intellij.psi.PsiFile;
+import org.eclipse.xtext.idea.editorActions.DefaultAutoEditHandler;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -25,6 +27,7 @@ import com.intellij.psi.PsiFile;
  * @see BackspaceHandlerDelegate
  * @see EnterHandlerDelegate
  */
+@ImplementedBy(DefaultAutoEditHandler.class)
 @SuppressWarnings("all")
 public abstract class IdeaAutoEditHandler {
   public enum Result {

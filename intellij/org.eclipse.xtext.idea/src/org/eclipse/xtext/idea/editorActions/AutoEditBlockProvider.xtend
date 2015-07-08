@@ -5,26 +5,19 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.core.idea.editorActions
+package org.eclipse.xtext.idea.editorActions
 
+import com.google.inject.ImplementedBy
 import com.intellij.psi.tree.TokenSet
-import org.eclipse.xtext.idea.editorActions.AutoEditContext
-import org.eclipse.xtext.idea.editorActions.AutoEditString
 
 /**
  * @author kosyakov - Initial contribution and API
  */
-class AutoEditRichString extends AutoEditString {
+@ImplementedBy(DefaultAutoEditBlockProvider)
+interface AutoEditBlockProvider {
 
-	val TokenSet richStringLiteralTokens
+	def Iterable<AbstractAutoEditBlock> getQuotes()
 
-	new(TokenSet richStringLiteralTokens) {
-		super("'''")
-		this.richStringLiteralTokens = richStringLiteralTokens
-	}
-
-	override protected isStringLiteral(TokenSet tokenSet, extension AutoEditContext context) {
-		tokenSet == richStringLiteralTokens
-	}
+	def Iterable<AbstractIndentableAutoEditBlock> getBlocks(TokenSet tokenSet)
 
 }

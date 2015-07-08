@@ -7,20 +7,21 @@
  */
 package org.eclipse.xtext.idea.editorActions;
 
+import com.google.inject.ImplementedBy;
 import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import org.eclipse.xtext.idea.editorActions.DefaultTokenSetProvider;
 
 /**
  * @author kosyakov - Initial contribution and API
  */
+@ImplementedBy(DefaultTokenSetProvider.class)
 @SuppressWarnings("all")
 public interface TokenSetProvider {
   public abstract TokenSet getTokenSet(final EditorEx editor, final int offset);
   
   public abstract TokenSet getTokenSet(final IElementType tokenType);
-  
-  public abstract TokenSet getStringLiteralTokens();
   
   public abstract boolean isStartOfLine(final EditorEx editor, final int offset);
   
@@ -29,4 +30,10 @@ public interface TokenSetProvider {
   public abstract boolean isEndOfLine(final EditorEx editor, final int offset);
   
   public abstract boolean isEndOfLine(final TokenSet tokenSet, final EditorEx editor, final int offset);
+  
+  public abstract TokenSet getCommentTokens();
+  
+  public abstract TokenSet getSingleLineCommentTokens();
+  
+  public abstract TokenSet getStringLiteralTokens();
 }

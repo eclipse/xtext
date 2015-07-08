@@ -70,10 +70,6 @@ class AutoEditContext {
 		tokenSetProivder.isEndOfLine(editor, offset)
 	}
 
-	def getStringLiteralTokens() {
-		tokenSetProivder.stringLiteralTokens
-	}
-
 	def type(char c) {
 		editor.insertStringAtCaret(String.valueOf(c), true, true)
 	}

@@ -84,10 +84,6 @@ public class AutoEditContext {
     return this.tokenSetProivder.isEndOfLine(this.editor, offset);
   }
   
-  public TokenSet getStringLiteralTokens() {
-    return this.tokenSetProivder.getStringLiteralTokens();
-  }
-  
   public int type(final char c) {
     String _valueOf = String.valueOf(c);
     return EditorModificationUtil.insertStringAtCaret(this.editor, _valueOf, true, true);
