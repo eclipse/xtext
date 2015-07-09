@@ -62,7 +62,7 @@ public class GenModelAccess {
 			if (feature.getName().equals(genFeat.getEcoreFeature().getName())) {
 				return genFeat;
 			}
-		throw new RuntimeException("No GenClassifier named '" + feature.getName() + "' found in GenClass '" + genCls
+		throw new RuntimeException("No GenFeature named '" + feature.getName() + "' found in GenClass '" + genCls
 				+ "' from GenModel" + genCls.eResource().getURI());
 	}
 
