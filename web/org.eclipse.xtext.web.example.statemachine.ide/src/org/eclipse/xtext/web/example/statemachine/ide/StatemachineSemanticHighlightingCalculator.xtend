@@ -2,9 +2,8 @@ package org.eclipse.xtext.web.example.statemachine.ide
 
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EStructuralFeature
+import org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator
 import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor
-import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator
-import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.web.example.statemachine.statemachine.Command
 import org.eclipse.xtext.web.example.statemachine.statemachine.Event
 import org.eclipse.xtext.web.example.statemachine.statemachine.Signal
@@ -13,19 +12,19 @@ import static org.eclipse.xtext.web.example.statemachine.statemachine.Statemachi
 
 import static extension org.eclipse.xtext.nodemodel.util.NodeModelUtils.*
 
-class StatemachineSemanticHighlightingCalculator implements ISemanticHighlightingCalculator {
+class StatemachineSemanticHighlightingCalculator extends DefaultSemanticHighlightingCalculator {
 	
-	override provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		resource?.allContents?.forEach [ 
-			switch it {
+	override protected highlightElement(EObject it, IHighlightedPositionAcceptor acceptor) {
+		switch it {
 				Signal:
 					highlightSignal(it, SIGNAL__NAME, acceptor)
 				Command:
 					highlightSignal(signal, COMMAND__SIGNAL, acceptor)
 				Event:
 					highlightSignal(signal, EVENT__SIGNAL, acceptor)
+				default: return true
 			}
-		]
+		return false
 	}
 	
 	protected def highlightSignal(EObject owner, Signal signal, EStructuralFeature feature, IHighlightedPositionAcceptor acceptor) {
