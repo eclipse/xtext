@@ -16,6 +16,7 @@ import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.jdt.core.ICompilationUnit
 import org.eclipse.jdt.core.IJavaProject
+import org.eclipse.jdt.core.JavaCore
 import org.eclipse.jdt.core.dom.ASTNode
 import org.eclipse.jdt.core.dom.ASTParser
 import org.eclipse.jdt.core.dom.Block
@@ -44,9 +45,19 @@ class JavaConverter implements IJavaCodeConverter {
 		parser.resolveBindings = true
 		parser.bindingsRecovery = true
 		parser.source = cu
+		parser.tweakOptions(cu.javaProject)
 		val root = parser.createAST(null)
 		return executeAstFlattener(cu.source, Collections.singleton(root))
 
+	}
+
+	def tweakOptions(ASTParser parser, IJavaProject project) {
+		if (project != null) {
+			val options = project.getOptions(true);
+			options.remove(JavaCore.COMPILER_TASK_TAGS);
+			options.put(JavaCore.COMPILER_DOC_COMMENT_SUPPORT, JavaCore.ENABLED)
+			parser.compilerOptions = options;
+		}
 	}
 
 	/**
@@ -85,6 +96,7 @@ class JavaConverter implements IJavaCodeConverter {
 		}
 		return executeAstFlattener(javaSrc, Collections.singleton(root))
 	}
+
 	/**
 	 * @param javaSrc Java class source code as String
 	 */
@@ -109,7 +121,8 @@ class JavaConverter implements IJavaCodeConverter {
 		parser.resolveBindings = true
 		parser.bindingsRecovery = true
 		if (proj != null) {
-			parser.project = proj;
+			parser.project = proj
+			parser.tweakOptions(proj)
 		} else {
 			val sysClassLoader = ClassLoader.getSystemClassLoader();
 			val cpEntries = (sysClassLoader as URLClassLoader).getURLs().map[file]
