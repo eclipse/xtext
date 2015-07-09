@@ -130,11 +130,11 @@ class XtextGeneratorTemplates {
 					register(injector);
 					return injector;
 				}
-			
+				
 				public «Injector» createInjector() {
 					return «Guice».createInjector(new «runtimeModule»());
 				}
-			
+				
 				public void register(«Injector» injector) {
 					«FOR reg : langConfig.runtimeGenSetup.registrations»
 						«reg»
@@ -147,21 +147,19 @@ class XtextGeneratorTemplates {
 	}
 	
 	private def getBindMethodName(GuiceModuleAccess.Binding it) {
-		(if (!value.provider && value.statements.isEmpty)
-			'bind'
-		else if (value.statements.isEmpty)
-			'provide'
-		else 'configure')
-			+ key.type.simpleMethodName
-			+ if (value.expression !== null && !value.provider) 'ToInstance' else ''
+		'''«IF !value.provider && value.statements.isEmpty
+			»bind«
+		ELSEIF value.statements.isEmpty
+			»provide«
+		ELSE
+			»configure«
+		ENDIF
+		»«key.name ?: key.type.simpleMethodName
+		»«IF value.expression !== null && !value.provider»ToInstance«ENDIF»'''
 	}
 	
-	private def getSimpleMethodName(TypeReference type) {
-		type.name.replaceAll('<', '\\.').replaceAll('>', '\\.').split('\\.').filter[matches('[A-Z].*')].join('$')
-	}
-	
-	private def endsWith(CharSequence sequence, char c) {
-		sequence.length > 0 && sequence.charAt(sequence.length - 1) == c
+	private def String getSimpleMethodName(TypeReference type) {
+		type.simpleNames.join('$') + type.typeArguments.join('$', '$', '', [simpleMethodName])
 	}
 	
 	private def StringConcatenationClient createBindingMethod(GuiceModuleAccess.Binding it) '''
@@ -181,7 +179,7 @@ class XtextGeneratorTemplates {
 			// contributed by «contributedBy»
 			public void «bindMethodName»(«Binder» binder) {
 				«FOR statement : value.statements»
-					«statement»«IF !statement.endsWith(';')»;«ENDIF»
+					«statement»
 				«ENDFOR»
 			}
 		«ENDIF»

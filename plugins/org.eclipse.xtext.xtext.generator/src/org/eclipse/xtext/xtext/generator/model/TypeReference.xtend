@@ -11,6 +11,7 @@ import java.util.Collections
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.EqualsHashCode
+import java.util.regex.Pattern
 
 @Accessors
 @EqualsHashCode
@@ -24,68 +25,100 @@ class TypeReference {
 		new TypeReference(clazz, arguments.map[new TypeReference(it)])
 	}
 	
-	val String name
+	static val PACKAGE_MATCHER = Pattern.compile('[a-z][a-zA-Z0-9_]*(\\.[a-z][a-zA-Z0-9_]*)*')
+	static val CLASS_MATCHER = Pattern.compile('[A-Z][a-zA-Z0-9_]*(\\.[A-Z][a-zA-Z0-9_]*)*')
 	
-	val List<TypeReference> arguments
+	val String packageName
 	
-	new(String name) {
-		this.name = name
-		this.arguments = Collections.emptyList
+	val List<String> simpleNames
+	
+	val List<TypeReference> typeArguments
+	
+	new(String qualifiedName) {
+		this(qualifiedName, null as List<TypeReference>)
 	}
 
-	new(String name, List<TypeReference> arguments) {
-		this.name = name
-		this.arguments = Collections.unmodifiableList(arguments)
+	new(String qualifiedName, List<TypeReference> arguments) {
+		this(getPackageName(qualifiedName), getClassName(qualifiedName), arguments)
 	}
 	
 	new(String packageName, String className) {
-		this.name = packageName + '.' + className
-		this.arguments = Collections.emptyList
+		this(packageName, className, null)
+	}
+	
+	new(String packageName, String className, List<TypeReference> arguments) {
+		if (packageName === null || !PACKAGE_MATCHER.matcher(packageName).matches)
+			throw new IllegalArgumentException('Invalid package name: ' + packageName)
+		if (className === null || !CLASS_MATCHER.matcher(className).matches)
+			throw new IllegalArgumentException('Invalid class name: ' + className)
+		this.packageName = packageName
+		this.simpleNames = className.split('\\.')
+		this.typeArguments = arguments ?: Collections.emptyList
 	}
 	
 	new(Class<?> clazz) {
-		this.name = clazz.name.replace('$', '.')
-		this.arguments = Collections.emptyList
+		this(clazz, null)
 	}
 	
 	new(Class<?> clazz, List<TypeReference> arguments) {
-		this.name = clazz.name.replace('$', '.')
-		this.arguments = Collections.unmodifiableList(arguments)
+		if (clazz.primitive)
+			throw new IllegalArgumentException('Type is primitive: ' + clazz.name)
+		if (clazz.anonymousClass)
+			throw new IllegalArgumentException('Class is anonymous: ' + clazz.name)
+		if (clazz.localClass)
+			throw new IllegalArgumentException('Class is local: ' + clazz.name)
+		this.packageName = clazz.package.name
+		this.simpleNames = newArrayList
+		this.typeArguments = arguments ?: Collections.emptyList
+		var c = clazz
+		do {
+			simpleNames.add(0, c.simpleName)
+			c = c.declaringClass
+		} while (c !== null)
 	}
 	
-	override toString() {
-		name + arguments.join('<', ', ', '>', [toString])
-	}
-	
-	def String getSimpleName() {
-		val simpleNameIndex = name.lastIndexOf('.')
-		return name.substring(simpleNameIndex + 1)
-	}
-	
-	def String getPackage() {
-		var packageEnd = name.length
-		for (var i = name.length - 1; i >= 0; i--) {
-			if (name.charAt(i).matches('.')) {
-				if (Character.isLowerCase(name.charAt(i + 1)))
-					return name.substring(0, packageEnd)
+	private static def getPackageName(String qualifiedName) {
+		var packageEnd = qualifiedName.length
+		for (var i = qualifiedName.length - 1; i >= 0; i--) {
+			if (qualifiedName.charAt(i).matches('.')) {
+				if (Character.isLowerCase(qualifiedName.charAt(i + 1)))
+					return qualifiedName.substring(0, packageEnd)
 				else
 					packageEnd = i
 			}
 		}
-		return ''
+	}
+	
+	private static def getClassName(String qualifiedName) {
+		var classStart = qualifiedName.length
+		for (var i = qualifiedName.length - 1; i >= 0; i--) {
+			if (qualifiedName.charAt(i).matches('.')) {
+				if (Character.isLowerCase(qualifiedName.charAt(i + 1)))
+					return qualifiedName.substring(classStart)
+				else
+					classStart = i + 1
+			}
+		}
+	}
+	
+	private static def matches(char c1, char c2) {
+		c1 == c2
+	}
+	
+	override toString() {
+		name + typeArguments.join('<', ', ', '>', [toString])
+	}
+	
+	def String getName() {
+		packageName + '.' + simpleNames.join('.')
+	}
+	
+	def String getSimpleName() {
+		simpleNames.last
 	}
 	
 	def String getPath() {
-		val packageName = getPackage
-		var className = name.substring(packageName.length + 1)
-		val outerClassEnd = className.indexOf('.')
-		if (outerClassEnd >= 0)
-			className = className.substring(0, outerClassEnd)
-		return packageName.replace('.', '/') + '/' + className + '.java'
-	}
-	
-	private def matches(char c1, char c2) {
-		c1 == c2
+		return packageName.replace('.', '/') + '/' + simpleNames.head + '.java'
 	}
 	
 }

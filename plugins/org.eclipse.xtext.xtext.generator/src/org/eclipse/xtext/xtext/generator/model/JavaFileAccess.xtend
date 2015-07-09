@@ -19,9 +19,9 @@ import org.eclipse.xtext.xtext.generator.CodeConfig
 
 class JavaFileAccess extends TextFileAccess {
 	
-	val Map<String, TypeReference> imports = newHashMap
+	val Map<String, String> imports = newHashMap
 	
-	val String packageName
+	val TypeReference javaType
 	
 	val CodeConfig codeConfig
 	
@@ -39,27 +39,42 @@ class JavaFileAccess extends TextFileAccess {
 	}
 	
 	new(TypeReference typeRef, CodeConfig codeConfig) {
-		this.packageName = typeRef.package
-		if (typeRef.name != packageName + '.' + typeRef.simpleName)
+		if (typeRef.simpleNames.length > 1)
 			throw new IllegalArgumentException('Nested type cannot be serialized: ' + typeRef)
-		this.path = typeRef.path
+		this.javaType = typeRef
 		this.codeConfig = codeConfig
+		setPath(typeRef.path)
 	}
 
 	def String importType(TypeReference typeRef) {
-		var name = typeRef.simpleName
-		var packageName = typeRef.package
-		val isJavaDefaultType = CodeGenUtil.isJavaDefaultType(name)
-		if (isJavaDefaultType && packageName != 'java.lang') {
-			name = typeRef.name
-		} else if (!isJavaDefaultType && this.packageName != packageName) {
-			val imported = imports.get(name)
-			if (imported === null)
-				imports.put(name, typeRef)
-			else if (imported.name != typeRef.name)
-				name = typeRef.name
+		val simpleNames = typeRef.simpleNames
+		var String usableName
+		if (typeRef.packageName == 'java.lang' || typeRef.packageName == javaType.packageName) {
+			usableName = simpleNames.join('.')
+		} else {
+			var found = false
+			for (var i = simpleNames.length - 1; i >= 0 && !found; i--) {
+				val simpleName = simpleNames.get(i)
+				if (usableName === null)
+					usableName = simpleName
+				else
+					usableName = simpleName + '.' + usableName
+				if (!CodeGenUtil.isJavaDefaultType(simpleName)
+						&& !(i == simpleNames.length - 1 && i > 0 && simpleName.length <= 8)) {
+					val importable = typeRef.packageName + '.' + simpleNames.subList(0, i + 1).join('.')
+					val imported = imports.get(usableName)
+					if (imported === null) {
+						imports.put(usableName, importable)
+						found = true
+					} else if (imported == importable) {
+						found = true
+					}
+				}
+			}
+			if (!found)
+				usableName = typeRef.name
 		}
-		return name + typeRef.arguments.join('<', ', ', '>', [importType])
+		return usableName + typeRef.typeArguments.join('<', ', ', '>', [importType])
 	}
 	
 	def void setJavaContent(StringConcatenationClient javaContent) {
@@ -71,11 +86,11 @@ class JavaFileAccess extends TextFileAccess {
 	override generate() {
 		val classAnnotations = annotations + codeConfig.classAnnotations.filter[appliesTo(this)]
 		classAnnotations.forEach[importType(annotationImport)]
-		val sortedImports = Lists.newArrayList(imports.values.map[name])
+		val sortedImports = Lists.newArrayList(imports.values)
 		Collections.sort(sortedImports)
 		return '''
 			«codeConfig.fileHeader»
-			package «packageName»;
+			package «javaType.packageName»;
 			
 			«FOR importName : sortedImports»
 				import «importName»;
