@@ -22,6 +22,18 @@ import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent
 
 class FileSystemAccess implements IFileSystemAccess2, IGuiceAwareGeneratorComponent {
 	
+	static class Extensions {
+		
+		def boolean containsJavaFile(IFileSystemAccess2 fsa, TypeReference typeRef) {
+			fsa.isFile(typeRef.path + '.java')
+		}
+		
+		def boolean containsXtendFile(IFileSystemAccess2 fsa, TypeReference typeRef) {
+			fsa.isFile(typeRef.path + '.xtend')
+		}
+		
+	}
+	
 	@Inject IEncodingProvider encodingProvider
 	
 	val URI baseUri

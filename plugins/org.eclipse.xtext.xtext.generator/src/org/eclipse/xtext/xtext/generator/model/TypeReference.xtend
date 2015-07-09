@@ -118,7 +118,7 @@ class TypeReference {
 	}
 	
 	def String getPath() {
-		return packageName.replace('.', '/') + '/' + simpleNames.head + '.java'
+		return packageName.replace('.', '/') + '/' + simpleNames.head
 	}
 	
 }

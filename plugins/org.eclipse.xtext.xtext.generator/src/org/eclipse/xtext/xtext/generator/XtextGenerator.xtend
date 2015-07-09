@@ -29,6 +29,7 @@ import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.XtextStandaloneSetup
 import org.eclipse.xtext.util.MergeableManifest
 import org.eclipse.xtext.util.internal.Log
+import org.eclipse.xtext.xtext.generator.model.FileSystemAccess
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 
@@ -52,6 +53,8 @@ class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGe
 	@Inject IXtextProjectConfig projectConfig
 	
 	@Inject XtextGeneratorTemplates templates
+	
+	@Inject extension FileSystemAccess.Extensions
 	
 	new() {
 		new XtextStandaloneSetup().createInjectorAndDoEMFRegistration()
@@ -123,17 +126,17 @@ class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGe
 	
 	protected def generateRuntimeSetup(LanguageConfig2 language) {
 		templates.createRuntimeGenSetup(language).writeTo(projectConfig.runtimeSrcGen)
-		if (!projectConfig.runtimeSrc.isFile(language.naming.runtimeSetup.path))
+		if (!projectConfig.runtimeSrc.containsJavaFile(language.naming.runtimeSetup))
 			templates.createRuntimeSetup(language).writeTo(projectConfig.runtimeSrc)
 	}
 	
 	protected def generateModules(LanguageConfig2 language) {
 		templates.createRuntimeGenModule(language).writeTo(projectConfig.runtimeSrcGen)
-		if (!projectConfig.runtimeSrc.isFile(language.naming.runtimeModule.path))
+		if (!projectConfig.runtimeSrc.containsJavaFile(language.naming.runtimeModule))
 			templates.createRuntimeModule(language).writeTo(projectConfig.runtimeSrc)
 		if (projectConfig.eclipsePluginSrcGen !== null)
 			templates.createEclipsePluginGenModule(language).writeTo(projectConfig.eclipsePluginSrcGen)
-		if (projectConfig.eclipsePluginSrc !== null && !projectConfig.eclipsePluginSrc.isFile(language.naming.eclipsePluginModule.path))
+		if (projectConfig.eclipsePluginSrc !== null && !projectConfig.eclipsePluginSrc.containsJavaFile(language.naming.eclipsePluginModule))
 			templates.createEclipsePluginModule(language).writeTo(projectConfig.eclipsePluginSrc)
 	}
 	
