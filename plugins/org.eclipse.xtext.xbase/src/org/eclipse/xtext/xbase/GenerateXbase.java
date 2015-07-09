@@ -4,8 +4,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.mwe.utils.DirectoryCleaner;
 import org.eclipse.emf.mwe.utils.StandaloneSetup;
 import org.eclipse.emf.mwe2.ecore.EcoreGenerator;
-import org.eclipse.xtext.generator.Generator;
-import org.eclipse.xtext.generator.LanguageConfig;
+import org.eclipse.xtext.generator.adapter.FragmentAdapter;
 import org.eclipse.xtext.generator.builder.BuilderIntegrationFragment;
 import org.eclipse.xtext.generator.formatting2.Formatter2Fragment;
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment;
@@ -18,12 +17,18 @@ import org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment;
 import org.eclipse.xtext.generator.serializer.SerializerFragment;
 import org.eclipse.xtext.generator.types.TypesGeneratorFragment;
 import org.eclipse.xtext.generator.validation.JavaValidatorFragment;
-import org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment;
 import org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment;
 import org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment;
 import org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment;
+import org.eclipse.xtext.xtext.generator.CodeConfig;
+import org.eclipse.xtext.xtext.generator.DefaultGeneratorModule;
+import org.eclipse.xtext.xtext.generator.LanguageConfig2;
+import org.eclipse.xtext.xtext.generator.XtextGenerator;
+import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
+import org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -41,6 +46,13 @@ final class GenerateXbase {
 		final boolean backtrack = false;
 		final boolean memoize = false;
 		final String lineDelimiter = "\n";
+		final String fileHeader = "/*******************************************************************************\n" +
+			" * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.\n" +
+			" * All rights reserved. This program and the accompanying materials\n" +
+			" * are made available under the terms of the Eclipse Public License v1.0\n" +
+			" * which accompanies this distribution, and is available at\n" +
+			" * http://www.eclipse.org/legal/epl-v10.html\n" +
+			" *******************************************************************************/";
 		
 		final String ideaProjectName = projectName + ".idea";
 		final String ideaProjectPath = "../../intellij/" + ideaProjectName;
@@ -80,110 +92,124 @@ final class GenerateXbase {
 		antlrOptions.setBacktrack(backtrack);
 		antlrOptions.setMemoize(memoize);
 		
-		final Generator generator = new Generator() {{
-			setPathRtProject(runtimeProject);
-			setPathUiProject(uiProject);
-			setProjectNameRt(projectName);
-			setProjectNameUi(projectName + ".ui");
-			setLineDelimiter(lineDelimiter);
+		final XtextGenerator generator = new XtextGenerator() {{
+			setConfiguration(new DefaultGeneratorModule() {{
+				setProject(new XtextProjectConfig() {{
+					setRuntimeSrc(runtimeProject + "/src");
+					setRuntimeSrcGen(runtimeProject + "/src-gen");
+					ManifestAccess runtimeManifest = new ManifestAccess();
+					runtimeManifest.setPath(runtimeProject + "/META-INF/MANIFEST.MF");
+					setRuntimeManifest(runtimeManifest);
+					setEclipsePluginSrc(uiProject + "/src");
+					setEclipsePluginSrcGen(uiProject + "/src-gen");
+					ManifestAccess uiManifest = new ManifestAccess();
+					uiManifest.setPath(uiProject + "/META-INF/MANIFEST.MF");
+					setEclipsePluginManifest(uiManifest);
+				}});
+				setCode(new CodeConfig() {{
+					setEncoding("ISO-8859-1");
+					setLineDelimiter(lineDelimiter);
+					setFileHeader(fileHeader);
+				}});
+			}});
 
-			addLanguage(new LanguageConfig() {{
+			addLanguage(new LanguageConfig2() {{
 				String fileExtensions = "___xtype";
 				
-				setForcedResourceSet(xtypeResourceSet);
+				setResourceSet(xtypeResourceSet);
 				setUri("classpath:/org/eclipse/xtext/xbase/Xtype.xtext");
 				setFileExtensions(fileExtensions);
-				addFragment(new GrammarAccessFragment());
-				addFragment(new SerializerFragment());
-				addFragment(new Formatter2Fragment());
-				addFragment(new JavaBasedContentAssistFragment());
+				addFragment(new FragmentAdapter(new GrammarAccessFragment()));
+				addFragment(new FragmentAdapter(new SerializerFragment()));
+				addFragment(new FragmentAdapter(new Formatter2Fragment()));
+				addFragment(new FragmentAdapter(new JavaBasedContentAssistFragment()));
 				XtextAntlrGeneratorFragment antlr = new XtextAntlrGeneratorFragment();
 				antlr.setOptions(antlrOptions);
-				addFragment(antlr);
+				addFragment(new FragmentAdapter(antlr));
 			}});
-			addLanguage(new LanguageConfig() {{
+			addLanguage(new LanguageConfig2() {{
 				String fileExtensions = "___xbase";
 				
-				setForcedResourceSet(xbaseResourceSet);
+				setResourceSet(xbaseResourceSet);
 				setUri("classpath:/org/eclipse/xtext/xbase/Xbase.xtext");
 				setFileExtensions(fileExtensions);
-				addFragment(new GrammarAccessFragment());
-				addFragment(new SerializerFragment());
+				addFragment(new FragmentAdapter(new GrammarAccessFragment()));
+				addFragment(new FragmentAdapter(new SerializerFragment()));
 				ResourceFactoryFragment resourceFactory = new ResourceFactoryFragment();
 				resourceFactory.setFileExtensions(fileExtensions);
-				addFragment(resourceFactory);
+				addFragment(new FragmentAdapter(resourceFactory));
 				XtextAntlrGeneratorFragment antlr = new XtextAntlrGeneratorFragment();
 				antlr.setOptions(antlrOptions);
 				antlr.addAntlrParam("-Xconversiontimeout");
 				antlr.addAntlrParam("10000");
-				addFragment(antlr);
+				addFragment(new FragmentAdapter(antlr));
 				DebugAntlrGeneratorFragment antlrDebug = new DebugAntlrGeneratorFragment();
 				antlrDebug.setOptions(antlrOptions);
-				addFragment(antlrDebug);
+				addFragment(new FragmentAdapter(antlrDebug));
 				JavaValidatorFragment validator = new JavaValidatorFragment();
 				validator.setInheritImplementation(false);
-				addFragment(validator);
-				addFragment(new ImportNamespacesScopingFragment());
-				addFragment(new TypesGeneratorFragment());
-				XbaseGeneratorFragment xbase = new XbaseGeneratorFragment();
+				addFragment(new FragmentAdapter(validator));
+				addFragment(new FragmentAdapter(new ImportNamespacesScopingFragment()));
+				addFragment(new FragmentAdapter(new TypesGeneratorFragment()));
+				XbaseGeneratorFragment2 xbase = new XbaseGeneratorFragment2();
 				xbase.setGenerateXtendInferrer(false);
 				xbase.setUseInferredJvmModel(false);
 				xbase.setJdtTypeHierarchy(false);
 				addFragment(xbase);
-				addFragment(new BuilderIntegrationFragment());
-				addFragment(new Formatter2Fragment());
-				addFragment(new QuickfixProviderFragment());
+				addFragment(new FragmentAdapter(new BuilderIntegrationFragment()));
+				addFragment(new FragmentAdapter(new Formatter2Fragment()));
+				addFragment(new FragmentAdapter(new QuickfixProviderFragment()));
 				LabelProviderFragment label = new LabelProviderFragment();
 				label.setGenerateStub(false);
-				addFragment(label);
-				addFragment(new OutlineTreeProviderFragment());
-				addFragment(new JavaBasedContentAssistFragment());
+				addFragment(new FragmentAdapter(label));
+				addFragment(new FragmentAdapter(new OutlineTreeProviderFragment()));
+				addFragment(new FragmentAdapter(new JavaBasedContentAssistFragment()));
 				XtextAntlrUiGeneratorFragment antlrUI = new XtextAntlrUiGeneratorFragment();
 				antlrUI.setOptions(antlrOptions);
 				antlrUI.addAntlrParam("-Xconversiontimeout");
 				antlrUI.addAntlrParam("10000");
-				addFragment(antlrUI);
+				addFragment(new FragmentAdapter(antlrUI));
 			}});
-			addLanguage(new LanguageConfig() {{
+			addLanguage(new LanguageConfig2() {{
 				String fileExtensions = "___xbasewithannotations";
 				
-				setForcedResourceSet(xannotationsResourceSet);
+				setResourceSet(xannotationsResourceSet);
 				setUri("classpath:/org/eclipse/xtext/xbase/annotations/XbaseWithAnnotations.xtext");
 				setFileExtensions(fileExtensions);
-				addFragment(new GrammarAccessFragment());
-				addFragment(new SerializerFragment());
+				addFragment(new FragmentAdapter(new GrammarAccessFragment()));
+				addFragment(new FragmentAdapter(new SerializerFragment()));
 				ResourceFactoryFragment resourceFactory = new ResourceFactoryFragment();
 				resourceFactory.setFileExtensions(fileExtensions);
-				addFragment(resourceFactory);
+				addFragment(new FragmentAdapter(resourceFactory));
 				XtextAntlrGeneratorFragment antlr = new XtextAntlrGeneratorFragment();
 				antlr.setOptions(antlrOptions);
 				antlr.addAntlrParam("-Xconversiontimeout");
 				antlr.addAntlrParam("10000");
-				addFragment(antlr);
+				addFragment(new FragmentAdapter(antlr));
 				DebugAntlrGeneratorFragment antlrDebug = new DebugAntlrGeneratorFragment();
 				antlrDebug.setOptions(antlrOptions);
-				addFragment(antlrDebug);
-				addFragment(new JavaValidatorFragment());
-				addFragment(new ImportNamespacesScopingFragment());
-				addFragment(new TypesGeneratorFragment());
-				XbaseGeneratorFragment xbase = new XbaseGeneratorFragment();
+				addFragment(new FragmentAdapter(antlrDebug));
+				addFragment(new FragmentAdapter(new JavaValidatorFragment()));
+				addFragment(new FragmentAdapter(new ImportNamespacesScopingFragment()));
+				addFragment(new FragmentAdapter(new TypesGeneratorFragment()));
+				XbaseGeneratorFragment2 xbase = new XbaseGeneratorFragment2();
 				xbase.setGenerateXtendInferrer(false);
 				xbase.setUseInferredJvmModel(false);
 				xbase.setJdtTypeHierarchy(false);
 				addFragment(xbase);
-				addFragment(new BuilderIntegrationFragment());
-				addFragment(new Formatter2Fragment());
-				addFragment(new QuickfixProviderFragment());
+				addFragment(new FragmentAdapter(new BuilderIntegrationFragment()));
+				addFragment(new FragmentAdapter(new Formatter2Fragment()));
+				addFragment(new FragmentAdapter(new QuickfixProviderFragment()));
 				LabelProviderFragment label = new LabelProviderFragment();
 				label.setGenerateXtendStub(true);
-				addFragment(label);
-				addFragment(new OutlineTreeProviderFragment());
-				addFragment(new JavaBasedContentAssistFragment());
+				addFragment(new FragmentAdapter(label));
+				addFragment(new FragmentAdapter(new OutlineTreeProviderFragment()));
+				addFragment(new FragmentAdapter(new JavaBasedContentAssistFragment()));
 				XtextAntlrUiGeneratorFragment antlrUI = new XtextAntlrUiGeneratorFragment();
 				antlrUI.setOptions(antlrOptions);
 				antlrUI.addAntlrParam("-Xconversiontimeout");
 				antlrUI.addAntlrParam("10000");
-				addFragment(antlrUI);
+				addFragment(new FragmentAdapter(antlrUI));
 			}});
 		}};
 		

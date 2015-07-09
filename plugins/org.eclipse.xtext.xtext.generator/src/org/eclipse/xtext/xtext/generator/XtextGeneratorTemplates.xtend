@@ -111,7 +111,6 @@ class XtextGeneratorTemplates {
 						«usedGrammar.naming.runtimeSetup».doSetup();
 					«ENDFOR»
 					«IF langConfig.grammar.usedGrammars.isEmpty»
-					
 						// register default ePackages
 						if (!«'org.eclipse.emf.ecore.resource.Resource'.typeRef».Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("ecore"))
 							«'org.eclipse.emf.ecore.resource.Resource'.typeRef».Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
@@ -154,7 +153,7 @@ class XtextGeneratorTemplates {
 		ELSE
 			»configure«
 		ENDIF
-		»«key.name ?: key.type.simpleMethodName
+		»«key.name?.replace('.', '$') ?: key.type.simpleMethodName
 		»«IF value.expression !== null && !value.provider»ToInstance«ENDIF»'''
 	}
 	
@@ -207,6 +206,7 @@ class XtextGeneratorTemplates {
 		val superClass = langConfig.runtimeGenModule.superClass ?: runtimeDefaultModule
 		val javaFile = new JavaFileAccess(runtimeGenModule, codeConfig)
 		javaFile.encodingProvider = encodingProvider
+		javaFile.importNestedTypeThreshold = JavaFileAccess.DONT_IMPORT_NESTED_TYPES
 		
 		javaFile.typeComment = '''
 			/**
@@ -268,6 +268,7 @@ class XtextGeneratorTemplates {
 		val superClass = langConfig.eclipsePluginGenModule.superClass ?: eclipsePluginDefaultModule
 		val javaFile = new JavaFileAccess(eclipsePluginGenModule, codeConfig)
 		javaFile.encodingProvider = encodingProvider
+		javaFile.importNestedTypeThreshold = JavaFileAccess.DONT_IMPORT_NESTED_TYPES
 		
 		javaFile.typeComment = '''
 			/**
@@ -322,9 +323,8 @@ class XtextGeneratorTemplates {
 		return file
 	}
 	
-	def JavaFileAccess createEclipsePluginExecutableExtensionFactory(LanguageConfig2 langConfig) {
-		val it = langConfig.naming
-		val javaFile = new JavaFileAccess(eclipsePluginExecutableExtensionFactory, codeConfig)
+	def JavaFileAccess createEclipsePluginExecutableExtensionFactory(LanguageConfig2 langConfig, LanguageConfig2 activatorLanguage) {
+		val javaFile = new JavaFileAccess(langConfig.naming.eclipsePluginExecutableExtensionFactory, codeConfig)
 		javaFile.encodingProvider = encodingProvider
 		
 		javaFile.typeComment = '''
@@ -334,16 +334,16 @@ class XtextGeneratorTemplates {
 			 */
 		'''
 		javaFile.javaContent = '''
-			public class «eclipsePluginExecutableExtensionFactory.simpleName» extends «'org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory'.typeRef» {
+			public class «langConfig.naming.eclipsePluginExecutableExtensionFactory.simpleName» extends «'org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory'.typeRef» {
 			
 				@Override
 				protected «'org.osgi.framework.Bundle'.typeRef» getBundle() {
-					return «eclipsePluginActivator».getInstance().getBundle();
+					return «activatorLanguage.naming.eclipsePluginActivator».getInstance().getBundle();
 				}
 				
 				@Override
 				protected «Injector» getInjector() {
-					return «eclipsePluginActivator».getInstance().getInjector(«eclipsePluginActivator».«langConfig.grammar.name.toUpperCase.replaceAll('\\.', '_')»);
+					return «activatorLanguage.naming.eclipsePluginActivator».getInstance().getInjector(«activatorLanguage.naming.eclipsePluginActivator».«langConfig.grammar.name.toUpperCase.replaceAll('\\.', '_')»);
 				}
 				
 			}

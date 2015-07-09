@@ -19,6 +19,8 @@ import org.eclipse.xtext.xtext.generator.CodeConfig
 
 class JavaFileAccess extends TextFileAccess {
 	
+	public static val DONT_IMPORT_NESTED_TYPES = Integer.MAX_VALUE
+	
 	val Map<String, String> imports = newHashMap
 	
 	val TypeReference javaType
@@ -27,6 +29,9 @@ class JavaFileAccess extends TextFileAccess {
 	
 	@Accessors
 	CharSequence typeComment
+	
+	@Accessors
+	int importNestedTypeThreshold = 8
 	
 	@Accessors
 	boolean markedAsGenerated
@@ -64,7 +69,7 @@ class JavaFileAccess extends TextFileAccess {
 				else
 					usableName = simpleName + '.' + usableName
 				if (!CodeGenUtil.isJavaDefaultType(simpleName)
-						&& !(i == simpleNames.length - 1 && i > 0 && simpleName.length <= 8)) {
+						&& !(i > 0 && simpleName.length <= importNestedTypeThreshold)) {
 					val importable = typeRef.packageName + '.' + simpleNames.subList(0, i + 1).join('.')
 					val imported = imports.get(usableName)
 					if (imported === null) {

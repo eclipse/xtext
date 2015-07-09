@@ -59,6 +59,8 @@ public class JavaFileAccess extends TextFileAccess {
     }
   }
   
+  public final static int DONT_IMPORT_NESTED_TYPES = Integer.MAX_VALUE;
+  
   private final Map<String, String> imports = CollectionLiterals.<String, String>newHashMap();
   
   private final TypeReference javaType;
@@ -67,6 +69,9 @@ public class JavaFileAccess extends TextFileAccess {
   
   @Accessors
   private CharSequence typeComment;
+  
+  @Accessors
+  private int importNestedTypeThreshold = 8;
   
   @Accessors
   private boolean markedAsGenerated;
@@ -132,20 +137,11 @@ public class JavaFileAccess extends TextFileAccess {
             _and = false;
           } else {
             boolean _and_1 = false;
-            boolean _and_2 = false;
-            int _length = ((Object[])Conversions.unwrapArray(simpleNames, Object.class)).length;
-            int _minus = (_length - 1);
-            boolean _equals_2 = (i == _minus);
-            if (!_equals_2) {
-              _and_2 = false;
-            } else {
-              _and_2 = (i > 0);
-            }
-            if (!_and_2) {
+            if (!(i > 0)) {
               _and_1 = false;
             } else {
-              int _length_1 = simpleName.length();
-              boolean _lessEqualsThan = (_length_1 <= 8);
+              int _length = simpleName.length();
+              boolean _lessEqualsThan = (_length <= this.importNestedTypeThreshold);
               _and_1 = _lessEqualsThan;
             }
             boolean _not_1 = (!_and_1);
@@ -162,8 +158,8 @@ public class JavaFileAccess extends TextFileAccess {
               this.imports.put(usableName, importable);
               found = true;
             } else {
-              boolean _equals_3 = Objects.equal(imported, importable);
-              if (_equals_3) {
+              boolean _equals_2 = Objects.equal(imported, importable);
+              if (_equals_2) {
                 found = true;
               }
             }
@@ -269,6 +265,15 @@ public class JavaFileAccess extends TextFileAccess {
   
   public void setTypeComment(final CharSequence typeComment) {
     this.typeComment = typeComment;
+  }
+  
+  @Pure
+  public int getImportNestedTypeThreshold() {
+    return this.importNestedTypeThreshold;
+  }
+  
+  public void setImportNestedTypeThreshold(final int importNestedTypeThreshold) {
+    this.importNestedTypeThreshold = importNestedTypeThreshold;
   }
   
   @Pure
