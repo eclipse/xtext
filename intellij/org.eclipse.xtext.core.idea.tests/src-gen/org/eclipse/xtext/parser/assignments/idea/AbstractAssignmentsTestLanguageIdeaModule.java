@@ -39,10 +39,6 @@ public class AbstractAssignmentsTestLanguageIdeaModule extends org.eclipse.xtext
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.parser.assignments.idea.facet.AssignmentsTestLanguageFacetType.TYPEID;
 	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
-		return org.eclipse.xtext.parser.assignments.idea.highlighting.AssignmentsTestLanguageHighlightingConfiguration.class;
-	}
 	
 	
 }

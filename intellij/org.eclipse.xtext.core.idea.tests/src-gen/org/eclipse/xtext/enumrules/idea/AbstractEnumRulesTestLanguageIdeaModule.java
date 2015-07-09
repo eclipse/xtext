@@ -39,10 +39,6 @@ public class AbstractEnumRulesTestLanguageIdeaModule extends org.eclipse.xtext.i
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.enumrules.idea.facet.EnumRulesTestLanguageFacetType.TYPEID;
 	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
-		return org.eclipse.xtext.enumrules.idea.highlighting.EnumRulesTestLanguageHighlightingConfiguration.class;
-	}
 	
 	
 }

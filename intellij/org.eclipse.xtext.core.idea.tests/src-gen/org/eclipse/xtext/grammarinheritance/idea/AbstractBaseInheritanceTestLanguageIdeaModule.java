@@ -39,10 +39,6 @@ public class AbstractBaseInheritanceTestLanguageIdeaModule extends org.eclipse.x
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.grammarinheritance.idea.facet.BaseInheritanceTestLanguageFacetType.TYPEID;
 	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
-		return org.eclipse.xtext.grammarinheritance.idea.highlighting.BaseInheritanceTestLanguageHighlightingConfiguration.class;
-	}
 	
 	
 }

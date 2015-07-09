@@ -39,10 +39,6 @@ public class AbstractXtextTerminalsTestLanguageIdeaModule extends org.eclipse.xt
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.parser.terminalrules.idea.facet.XtextTerminalsTestLanguageFacetType.TYPEID;
 	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
-		return org.eclipse.xtext.parser.terminalrules.idea.highlighting.XtextTerminalsTestLanguageHighlightingConfiguration.class;
-	}
 	
 	
 }

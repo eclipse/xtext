@@ -39,10 +39,6 @@ public class AbstractFowlerDslTestLanguageIdeaModule extends org.eclipse.xtext.i
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.testlanguages.idea.facet.FowlerDslTestLanguageFacetType.TYPEID;
 	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
-		return org.eclipse.xtext.testlanguages.idea.highlighting.FowlerDslTestLanguageHighlightingConfiguration.class;
-	}
 	
 	
 }

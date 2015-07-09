@@ -39,10 +39,6 @@ public class AbstractSimpleExpressionsTestLanguageIdeaModule extends org.eclipse
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.testlanguages.idea.facet.SimpleExpressionsTestLanguageFacetType.TYPEID;
 	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
-		return org.eclipse.xtext.testlanguages.idea.highlighting.SimpleExpressionsTestLanguageHighlightingConfiguration.class;
-	}
 	
 	
 }

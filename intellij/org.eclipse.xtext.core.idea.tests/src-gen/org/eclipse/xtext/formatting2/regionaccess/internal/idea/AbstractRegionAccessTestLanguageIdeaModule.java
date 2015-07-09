@@ -39,10 +39,6 @@ public class AbstractRegionAccessTestLanguageIdeaModule extends org.eclipse.xtex
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.formatting2.regionaccess.internal.idea.facet.RegionAccessTestLanguageFacetType.TYPEID;
 	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
-		return org.eclipse.xtext.formatting2.regionaccess.internal.idea.highlighting.RegionAccessTestLanguageHighlightingConfiguration.class;
-	}
 	
 	
 }

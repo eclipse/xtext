@@ -39,10 +39,6 @@ public class AbstractXtextGrammarTestLanguageIdeaModule extends org.eclipse.xtex
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.idea.facet.XtextGrammarTestLanguageFacetType.TYPEID;
 	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
-		return org.eclipse.xtext.idea.highlighting.XtextGrammarTestLanguageHighlightingConfiguration.class;
-	}
 	
 	
 }
