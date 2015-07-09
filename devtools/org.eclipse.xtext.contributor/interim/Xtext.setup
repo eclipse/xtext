@@ -748,11 +748,17 @@
       <setupTask
           xsi:type="setup.targlets:TargletTask">
         <targlet
-            name="JUnit 3">
+            name="JUnit 3"
+            activeRepositoryList="OrbitLunaSR2">
           <requirement
               name="org.junit"
               versionRange="[3.8.0,4.0.0)"
               filter=""/>
+          <repositoryList
+              name="OrbitLunaSR2">
+            <repository
+                url="http://download.eclipse.org/tools/orbit/downloads/drops/R20150124073747/repository/"/>
+          </repositoryList>
         </targlet>
       </setupTask>
     </stream>
