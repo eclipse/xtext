@@ -49,6 +49,10 @@ Workflow {
 		directory = "${runtimeProject}/src-gen"
 	}
 	
+	component = DirectoryCleaner {
+		directory = "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen"
+	}
+
 	component = org.eclipse.emf.mwe2.ecore.EcoreGenerator {
 		genModel = "platform:/resource/org.eclipse.xtext.tests/src/org/eclipse/xtext/generator/ecore/GenModelAccessTest.genmodel"
 		srcPath = "foo"
