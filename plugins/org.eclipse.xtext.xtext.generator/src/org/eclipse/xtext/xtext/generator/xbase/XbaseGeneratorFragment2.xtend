@@ -85,7 +85,7 @@ class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
 		addEclipsePluginGuiceBindings(language)
 		if (projectConfig.eclipsePluginPluginXml !== null)
 			addEclipsePluginExtensions(language)
-		if (!projectConfig.runtimeSrc.containsXtendFile(language.jvmModelInferrer))
+		if (generateXtendInferrer && !projectConfig.runtimeSrc.containsXtendFile(language.jvmModelInferrer))
 			doGenerateXtendInferrer(language)
 		
 		if (projectConfig.runtimeManifest !== null) {
@@ -202,7 +202,7 @@ class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
 						'org.eclipse.xtext.xbase.ui.imports.InteractiveUnresolvedTypeResolver'.typeRef)
 				.addTypeToType('org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider'.typeRef,
 						'org.eclipse.xtext.xbase.ui.contentassist.ImportingTypesProposalProvider'.typeRef)
-				.addTypeToType(' org.eclipse.xtext.ui.editor.templates.XtextTemplateContextType'.typeRef,
+				.addTypeToType('org.eclipse.xtext.ui.editor.templates.XtextTemplateContextType'.typeRef,
 						'org.eclipse.xtext.xbase.ui.templates.XbaseTemplateContextType'.typeRef)
 		} else {
 			bindingFactory
