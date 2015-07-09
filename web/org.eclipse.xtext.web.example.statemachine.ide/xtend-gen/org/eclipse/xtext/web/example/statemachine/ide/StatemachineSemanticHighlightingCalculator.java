@@ -1,60 +1,49 @@
 package org.eclipse.xtext.web.example.statemachine.ide;
 
 import java.util.List;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
-import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.web.example.statemachine.statemachine.Command;
 import org.eclipse.xtext.web.example.statemachine.statemachine.Event;
 import org.eclipse.xtext.web.example.statemachine.statemachine.Signal;
 import org.eclipse.xtext.web.example.statemachine.statemachine.StatemachinePackage;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
-public class StatemachineSemanticHighlightingCalculator implements ISemanticHighlightingCalculator {
+public class StatemachineSemanticHighlightingCalculator extends DefaultSemanticHighlightingCalculator {
   @Override
-  public void provideHighlightingFor(final XtextResource resource, final IHighlightedPositionAcceptor acceptor) {
-    TreeIterator<EObject> _allContents = null;
-    if (resource!=null) {
-      _allContents=resource.getAllContents();
+  protected boolean highlightElement(final EObject it, final IHighlightedPositionAcceptor acceptor) {
+    boolean _matched = false;
+    if (!_matched) {
+      if (it instanceof Signal) {
+        _matched=true;
+        this.highlightSignal(it, ((Signal)it), StatemachinePackage.Literals.SIGNAL__NAME, acceptor);
+      }
     }
-    if (_allContents!=null) {
-      final Procedure1<EObject> _function = new Procedure1<EObject>() {
-        @Override
-        public void apply(final EObject it) {
-          boolean _matched = false;
-          if (!_matched) {
-            if (it instanceof Signal) {
-              _matched=true;
-              StatemachineSemanticHighlightingCalculator.this.highlightSignal(it, ((Signal)it), StatemachinePackage.Literals.SIGNAL__NAME, acceptor);
-            }
-          }
-          if (!_matched) {
-            if (it instanceof Command) {
-              _matched=true;
-              Signal _signal = ((Command)it).getSignal();
-              StatemachineSemanticHighlightingCalculator.this.highlightSignal(it, _signal, StatemachinePackage.Literals.COMMAND__SIGNAL, acceptor);
-            }
-          }
-          if (!_matched) {
-            if (it instanceof Event) {
-              _matched=true;
-              Signal _signal = ((Event)it).getSignal();
-              StatemachineSemanticHighlightingCalculator.this.highlightSignal(it, _signal, StatemachinePackage.Literals.EVENT__SIGNAL, acceptor);
-            }
-          }
-        }
-      };
-      IteratorExtensions.<EObject>forEach(_allContents, _function);
+    if (!_matched) {
+      if (it instanceof Command) {
+        _matched=true;
+        Signal _signal = ((Command)it).getSignal();
+        this.highlightSignal(it, _signal, StatemachinePackage.Literals.COMMAND__SIGNAL, acceptor);
+      }
     }
+    if (!_matched) {
+      if (it instanceof Event) {
+        _matched=true;
+        Signal _signal = ((Event)it).getSignal();
+        this.highlightSignal(it, _signal, StatemachinePackage.Literals.EVENT__SIGNAL, acceptor);
+      }
+    }
+    if (!_matched) {
+      return true;
+    }
+    return false;
   }
   
   protected void highlightSignal(final EObject owner, final Signal signal, final EStructuralFeature feature, final IHighlightedPositionAcceptor acceptor) {
