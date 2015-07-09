@@ -1,0 +1,4 @@
+package org.eclipse.xtext.lexer.idea.highlighting
+
+class BacktrackingLexerTestLanguageColorSettingsPage extends BacktrackingLexerTestLanguageBaseColorSettingsPage {
+}

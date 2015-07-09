@@ -1,4 +1,0 @@
-package org.eclipse.xtext.formatting2.regionaccess.internal.idea.highlighting;
-
-public class RegionAccessTestLanguageColorSettingsPage extends RegionAccessTestLanguageBaseColorSettingsPage {
-}

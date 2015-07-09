@@ -1,4 +1,0 @@
-package org.eclipse.xtext.parser.unorderedGroups.idea.highlighting;
-
-public class ExBacktrackingBug325745TestLanguageColorSettingsPage extends ExBacktrackingBug325745TestLanguageBaseColorSettingsPage {
-}

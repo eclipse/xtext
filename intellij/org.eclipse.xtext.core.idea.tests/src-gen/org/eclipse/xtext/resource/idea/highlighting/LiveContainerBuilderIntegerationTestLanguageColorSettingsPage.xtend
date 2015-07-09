@@ -1,0 +1,4 @@
+package org.eclipse.xtext.resource.idea.highlighting
+
+class LiveContainerBuilderIntegerationTestLanguageColorSettingsPage extends LiveContainerBuilderIntegerationTestLanguageBaseColorSettingsPage {
+}

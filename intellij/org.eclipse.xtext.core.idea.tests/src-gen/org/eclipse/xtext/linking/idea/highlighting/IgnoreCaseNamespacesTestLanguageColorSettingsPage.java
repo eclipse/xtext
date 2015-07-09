@@ -1,4 +1,0 @@
-package org.eclipse.xtext.linking.idea.highlighting;
-
-public class IgnoreCaseNamespacesTestLanguageColorSettingsPage extends IgnoreCaseNamespacesTestLanguageBaseColorSettingsPage {
-}

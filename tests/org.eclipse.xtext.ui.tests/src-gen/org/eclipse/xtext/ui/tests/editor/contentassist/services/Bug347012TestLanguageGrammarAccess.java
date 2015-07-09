@@ -718,25 +718,25 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return tNUMBER;
 	} 
 
-	//terminal fragment digit:
+	/// * SuppressWarnings[InvalidTerminalRuleName] * / terminal fragment digit:
 	//	"0".."9";
 	public TerminalRule getDigitRule() {
 		return tDigit;
 	} 
 
-	//terminal fragment hex:
+	/// * SuppressWarnings[InvalidTerminalRuleName] * / terminal fragment hex:
 	//	digit | "A".."F" | "a".."f";
 	public TerminalRule getHexRule() {
 		return tHex;
 	} 
 
-	//terminal fragment escape:
+	/// * SuppressWarnings[InvalidTerminalRuleName] * / terminal fragment escape:
 	//	"b" | "t" | "n" | "f" | "v" | "r" | "\"" | "\'" | "\\" | "u" hex hex hex hex;
 	public TerminalRule getEscapeRule() {
 		return tEscape;
 	} 
 
-	//terminal fragment idPlainChar:
+	/// * SuppressWarnings[InvalidTerminalRuleName] * / terminal fragment idPlainChar:
 	//	"$" | "A".."Z" | "_" | "a".."z";
 	public TerminalRule getIdPlainCharRule() {
 		return tIdPlainChar;

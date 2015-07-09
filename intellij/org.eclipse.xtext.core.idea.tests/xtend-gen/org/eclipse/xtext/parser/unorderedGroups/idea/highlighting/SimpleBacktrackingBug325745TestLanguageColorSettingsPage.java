@@ -1,0 +1,7 @@
+package org.eclipse.xtext.parser.unorderedGroups.idea.highlighting;
+
+import org.eclipse.xtext.parser.unorderedGroups.idea.highlighting.SimpleBacktrackingBug325745TestLanguageBaseColorSettingsPage;
+
+@SuppressWarnings("all")
+public class SimpleBacktrackingBug325745TestLanguageColorSettingsPage extends SimpleBacktrackingBug325745TestLanguageBaseColorSettingsPage {
+}
