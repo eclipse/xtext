@@ -39,10 +39,6 @@ public class AbstractSubTestLanguageIdeaModule extends org.eclipse.xtext.idea.De
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.generator.ecore.idea.facet.SubTestLanguageFacetType.TYPEID;
 	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
-		return org.eclipse.xtext.generator.ecore.idea.highlighting.SubTestLanguageHighlightingConfiguration.class;
-	}
 	
 	
 }

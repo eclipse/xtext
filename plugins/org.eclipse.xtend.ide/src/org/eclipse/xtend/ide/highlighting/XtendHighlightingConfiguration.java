@@ -8,6 +8,7 @@
 package org.eclipse.xtend.ide.highlighting;
 
 import org.eclipse.swt.graphics.RGB;
+import org.eclipse.xtend.ide.common.highlighting.XtendHighlightingStyles;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfigurationAcceptor;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration;

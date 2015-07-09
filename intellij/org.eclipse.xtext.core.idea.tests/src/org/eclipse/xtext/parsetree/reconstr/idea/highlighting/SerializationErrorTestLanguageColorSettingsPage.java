@@ -1,4 +1,0 @@
-package org.eclipse.xtext.parsetree.reconstr.idea.highlighting;
-
-public class SerializationErrorTestLanguageColorSettingsPage extends SerializationErrorTestLanguageBaseColorSettingsPage {
-}

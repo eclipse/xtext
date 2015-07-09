@@ -1,0 +1,4 @@
+package org.eclipse.xtext.testlanguages.backtracking.idea.highlighting
+
+class SimpleBeeLangTestLanguageColorSettingsPage extends SimpleBeeLangTestLanguageBaseColorSettingsPage {
+}

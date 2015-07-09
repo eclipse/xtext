@@ -40,10 +40,6 @@ public class AbstractEntitiesIdeaModule extends org.eclipse.xtext.idea.DefaultId
 		return org.eclipse.xtext.idea.example.entities.idea.facet.EntitiesFacetType.TYPEID;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
-		return org.eclipse.xtext.idea.example.entities.idea.highlighting.EntitiesHighlightingConfiguration.class;
-	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
 	public Class<? extends org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider> bindAbstractTypeScopeProvider() {
 		return org.eclipse.xtext.idea.common.types.StubBasedTypeScopeProvider.class;
 	}
@@ -54,6 +50,10 @@ public class AbstractEntitiesIdeaModule extends org.eclipse.xtext.idea.DefaultId
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
 	public void configureLanguageSpecificPsiModelAssociations(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.xtext.psi.IPsiModelAssociations.class).annotatedWith(org.eclipse.xtext.service.LanguageSpecific.class).to(org.eclipse.xtext.idea.common.types.DerivedMemberAwarePsiModelAssociations.class);
+	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return org.eclipse.xtext.xbase.idea.highlighting.XbaseHighlightingConfiguration.class;
 	}
 	
 	

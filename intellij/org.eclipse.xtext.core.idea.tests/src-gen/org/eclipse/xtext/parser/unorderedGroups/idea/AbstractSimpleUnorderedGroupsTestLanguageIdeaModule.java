@@ -39,10 +39,6 @@ public class AbstractSimpleUnorderedGroupsTestLanguageIdeaModule extends org.ecl
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.parser.unorderedGroups.idea.facet.SimpleUnorderedGroupsTestLanguageFacetType.TYPEID;
 	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
-		return org.eclipse.xtext.parser.unorderedGroups.idea.highlighting.SimpleUnorderedGroupsTestLanguageHighlightingConfiguration.class;
-	}
 	
 	
 }

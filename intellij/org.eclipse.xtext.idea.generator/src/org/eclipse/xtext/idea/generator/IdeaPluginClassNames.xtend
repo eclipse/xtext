@@ -97,7 +97,11 @@ class IdeaPluginClassNames {
 	}
 	
 	def String getSyntaxHighlighterFactoryName(Grammar it) {
-		basePackageName+'.lang.'+it.name.toSimpleName+'SyntaxHighlighterFactory'
+		basePackageName+'.highlighting.'+it.name.toSimpleName+'SyntaxHighlighterFactory'
+	}
+	
+	def String getSemanticHighlightVisitorName(Grammar it) {
+		basePackageName+'.highlighting.'+it.name.toSimpleName+'SemanticHighlightVisitor'
 	}
 	
 	def String getSuperParserDefinitionName(Grammar it) {
@@ -172,12 +176,8 @@ class IdeaPluginClassNames {
 		basePackageName+'.facet.'+it.name.toSimpleName+'FacetType'
 	}
 	
-	def String highlightingConfiguration(Grammar it) {
-		basePackageName+'.highlighting.'+it.name.toSimpleName+'HighlightingConfiguration'
-	}
-	
 	def String baseColorSettingsPage(Grammar it) {
-		highlightingConfiguration.toPackageName+'.'+it.name.toSimpleName+'BaseColorSettingsPage'
+		basePackageName+'.highlighting.'+it.name.toSimpleName+'BaseColorSettingsPage'
 	}
 	
 	def String colorSettingsPage(Grammar it) {

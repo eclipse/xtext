@@ -39,10 +39,6 @@ public class AbstractAbstractIgnoreCaseLinkingTestLanguageIdeaModule extends org
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.linking.idea.facet.AbstractIgnoreCaseLinkingTestLanguageFacetType.TYPEID;
 	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
-		return org.eclipse.xtext.linking.idea.highlighting.AbstractIgnoreCaseLinkingTestLanguageHighlightingConfiguration.class;
-	}
 	
 	
 }

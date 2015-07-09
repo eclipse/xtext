@@ -16,10 +16,13 @@ import com.intellij.openapi.options.colors.ColorDescriptor;
 import com.intellij.openapi.options.colors.ColorSettingsPage;
 import com.intellij.psi.codeStyle.DisplayPriority;
 import com.intellij.psi.codeStyle.DisplayPrioritySortable;
+import java.util.Collection;
 import java.util.Map;
 import javax.swing.Icon;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.Icons;
+import org.eclipse.xtext.idea.highlighting.TextAttributeProvider;
+import org.eclipse.xtext.xbase.lib.Conversions;
 
 /**
  * @author dhubner - Initial contribution and API
@@ -28,6 +31,23 @@ import org.eclipse.xtext.idea.Icons;
 public abstract class AbstractColorSettingsPage implements ColorSettingsPage, InspectionColorSettingsPage, DisplayPrioritySortable {
   @Inject
   private SyntaxHighlighter highlighter;
+  
+  @Inject
+  private TextAttributeProvider textAttributeProvider;
+  
+  private AttributesDescriptor[] descriptors;
+  
+  @Override
+  public AttributesDescriptor[] getAttributeDescriptors() {
+    AttributesDescriptor[] _elvis = null;
+    if (this.descriptors != null) {
+      _elvis = this.descriptors;
+    } else {
+      Collection<AttributesDescriptor> _attributesDescriptors = this.textAttributeProvider.getAttributesDescriptors();
+      _elvis = (this.descriptors = ((AttributesDescriptor[])Conversions.unwrapArray(_attributesDescriptors, AttributesDescriptor.class)));
+    }
+    return _elvis;
+  }
   
   @Override
   public SyntaxHighlighter getHighlighter() {
@@ -60,9 +80,6 @@ public abstract class AbstractColorSettingsPage implements ColorSettingsPage, In
     _builder.newLine();
     return _builder.toString();
   }
-  
-  @Override
-  public abstract AttributesDescriptor[] getAttributeDescriptors();
   
   @Override
   public abstract String getDisplayName();

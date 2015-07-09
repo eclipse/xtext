@@ -39,10 +39,6 @@ public class AbstractHiddenTerminalsTestLanguageIdeaModule extends org.eclipse.x
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.parser.terminalrules.idea.facet.HiddenTerminalsTestLanguageFacetType.TYPEID;
 	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
-		return org.eclipse.xtext.parser.terminalrules.idea.highlighting.HiddenTerminalsTestLanguageHighlightingConfiguration.class;
-	}
 	
 	
 }

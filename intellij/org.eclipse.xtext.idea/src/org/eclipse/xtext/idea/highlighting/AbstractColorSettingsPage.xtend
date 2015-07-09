@@ -27,6 +27,14 @@ abstract class AbstractColorSettingsPage implements ColorSettingsPage, Inspectio
 
 	@Inject SyntaxHighlighter highlighter
 
+	@Inject TextAttributeProvider textAttributeProvider
+	 
+	private AttributesDescriptor[] descriptors;
+
+	override getAttributeDescriptors() {
+		descriptors ?: (descriptors = textAttributeProvider.attributesDescriptors)
+	}
+	
 	override getHighlighter() {
 		highlighter
 	}
@@ -45,8 +53,6 @@ abstract class AbstractColorSettingsPage implements ColorSettingsPage, Inspectio
 			  return i;
 		'''
 	}
-
-	abstract override AttributesDescriptor[] getAttributeDescriptors()
 
 	abstract override String getDisplayName()
 

@@ -180,11 +180,20 @@ public class IdeaPluginClassNames {
   
   public String getSyntaxHighlighterFactoryName(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
-    String _plus = (_basePackageName + ".lang.");
+    String _plus = (_basePackageName + ".highlighting.");
     String _name = it.getName();
     String _simpleName = this.toSimpleName(_name);
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "SyntaxHighlighterFactory");
+  }
+  
+  public String getSemanticHighlightVisitorName(final Grammar it) {
+    String _basePackageName = this.getBasePackageName(it);
+    String _plus = (_basePackageName + ".highlighting.");
+    String _name = it.getName();
+    String _simpleName = this.toSimpleName(_name);
+    String _plus_1 = (_plus + _simpleName);
+    return (_plus_1 + "SemanticHighlightVisitor");
   }
   
   public String getSuperParserDefinitionName(final Grammar it) {
@@ -347,19 +356,9 @@ public class IdeaPluginClassNames {
     return (_plus_1 + "FacetType");
   }
   
-  public String highlightingConfiguration(final Grammar it) {
+  public String baseColorSettingsPage(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".highlighting.");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
-    String _plus_1 = (_plus + _simpleName);
-    return (_plus_1 + "HighlightingConfiguration");
-  }
-  
-  public String baseColorSettingsPage(final Grammar it) {
-    String _highlightingConfiguration = this.highlightingConfiguration(it);
-    String _packageName = this.toPackageName(_highlightingConfiguration);
-    String _plus = (_packageName + ".");
     String _name = it.getName();
     String _simpleName = this.toSimpleName(_name);
     String _plus_1 = (_plus + _simpleName);

@@ -33,7 +33,7 @@
 		<lang.namesValidator language="org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage"
 								factoryClass="org.eclipse.xtext.testlanguages.indent.idea.IndentationAwareTestLanguageExtensionFactory"
 								implementationClass="com.intellij.lang.refactoring.NamesValidator"/>
-      	<lang.syntaxHighlighterFactory key="org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage" implementationClass="org.eclipse.xtext.testlanguages.indent.idea.lang.IndentationAwareTestLanguageSyntaxHighlighterFactory" />
+      	<lang.syntaxHighlighterFactory key="org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage" implementationClass="org.eclipse.xtext.testlanguages.indent.idea.highlighting.IndentationAwareTestLanguageSyntaxHighlighterFactory" />
 		<lang.braceMatcher language="org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage"
 								factoryClass="org.eclipse.xtext.testlanguages.indent.idea.IndentationAwareTestLanguageExtensionFactory"
 								implementationClass="com.intellij.lang.PairedBraceMatcher"/>
@@ -49,5 +49,6 @@
       							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
 		<facetType implementation="org.eclipse.xtext.testlanguages.indent.idea.facet.IndentationAwareTestLanguageFacetType"/>
 		<colorSettingsPage implementation="org.eclipse.xtext.testlanguages.indent.idea.highlighting.IndentationAwareTestLanguageColorSettingsPage"/>
+		<highlightVisitor implementation="org.eclipse.xtext.testlanguages.indent.idea.highlighting.IndentationAwareTestLanguageSemanticHighlightVisitor"/>
 	</extensions>
 </idea-plugin>

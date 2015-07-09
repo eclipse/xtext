@@ -39,10 +39,6 @@ public class AbstractLazyLinkingTestLanguageIdeaModule extends org.eclipse.xtext
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.linking.lazy.idea.facet.LazyLinkingTestLanguageFacetType.TYPEID;
 	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
-		return org.eclipse.xtext.linking.lazy.idea.highlighting.LazyLinkingTestLanguageHighlightingConfiguration.class;
-	}
 	
 	
 }
