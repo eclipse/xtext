@@ -9,21 +9,25 @@ package org.eclipse.xtext.generator.trace;
 
 import java.util.regex.Pattern;
 
+import com.google.common.base.CharMatcher;
+
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class TraceFileNameProvider {
 
+	private static final CharMatcher SEPARATOR_MATCHER = CharMatcher.anyOf("/\\");
+
 	public static final String TRACE_FILE_EXTENSION = "._trace";
 	
-	private static final Pattern TRACE_FILE_NAME_PATTERN = Pattern.compile(".*/?\\..+\\._trace$");
+	private static final Pattern TRACE_FILE_NAME_PATTERN = Pattern.compile(".*\\..+\\._trace$");
 	
 	public boolean isTraceFileName(String traceFileName) {
 		return TRACE_FILE_NAME_PATTERN.matcher(traceFileName).matches();
 	}
 
 	public String getTraceFromJava(String javaFileName) {
-		int i = javaFileName.lastIndexOf('/');
+		int i = SEPARATOR_MATCHER.lastIndexIn(javaFileName);
 		if (i < 0)
 			return "." + javaFileName + TRACE_FILE_EXTENSION;
 		else
@@ -31,7 +35,7 @@ public class TraceFileNameProvider {
 	}
 
 	public String getJavaFromTrace(String traceFileName) {
-		int i = traceFileName.lastIndexOf('/');
+		int i = SEPARATOR_MATCHER.lastIndexIn(traceFileName);
 		if (i < 0)
 			return traceFileName.substring(1, traceFileName.length() - TRACE_FILE_EXTENSION.length());
 		else
