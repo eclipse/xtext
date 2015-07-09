@@ -12,6 +12,7 @@ import java.util.List
 import java.util.Set
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.util.internal.Log
 
 @Log
@@ -19,19 +20,23 @@ class GuiceModuleAccess {
 	
 	@Data
 	static class BindKey {
+		String name
 		TypeReference type
 		boolean singleton
 		boolean eagerSingleton
 		
 		override equals(Object other) {
 			if (other instanceof BindKey)
-				this.type == other.type
+				this.name == other.name && this.type == other.type
 			else
 				false
 		}
 		
 		override hashCode() {
-			type.hashCode
+			var h = 0
+			if (name !== null) h += name.hashCode
+			if (type !== null) h += type.hashCode
+			return h
 		}
 	}
 	
@@ -40,7 +45,7 @@ class GuiceModuleAccess {
 		Object expression
 		TypeReference type
 		boolean provider
-		List<CharSequence> statements
+		List<Object> statements
 	}
 	
 	@Data
@@ -134,15 +139,19 @@ class GuiceModuleAccess {
 		}
 		
 		private def key(TypeReference type) {
-			return new BindKey(type, false, false)
+			return new BindKey(null, type, false, false)
+		}
+		
+		private def key(String name) {
+			return new BindKey(name, null, false, false)
 		}
 		
 		private def eagerSingleton(TypeReference type) {
-			return new BindKey(type, true, true)
+			return new BindKey(null, type, true, true)
 		}
 		
 		private def singleton(TypeReference type) {
-			return new BindKey(type, true, false)
+			return new BindKey(null, type, true, false)
 		}
 		
 		private def value(TypeReference type) {
@@ -161,82 +170,97 @@ class GuiceModuleAccess {
 			return new BindValue(expr, null, true, Collections.emptyList)
 		}
 	
-		private def statements(String[] statements) {
+		private def statements(Object[] statements) {
 			return new BindValue(null, null, false, statements)
 		}
 	
-		def BindingFactory addTypeToInstance(TypeReference s1, Object s2) {
-			add(key(s1), expr(s2))
-			return this
-		}
-		
-		def BindingFactory addTypeToProviderInstance(TypeReference s1, Object s2) {
-			add(key(s1), providerExpr(s2))
-			return this
-		}
-		
-		def BindingFactory addConfiguredBinding(TypeReference key, String... statements) {
-			add(key(key), statements(statements))
+		def BindingFactory addTypeToInstance(TypeReference type, String expression) {
+			add(key(type), expr(expression))
 			return this
 		}
 	
-		def BindingFactory addTypeToType(TypeReference s1, TypeReference s2){
-			add(key(s1), value(s2))
+		def BindingFactory addTypeToInstance(TypeReference type, StringConcatenationClient expression) {
+			add(key(type), expr(expression))
 			return this
 		}
 		
-		def BindingFactory addTypeToTypeSingleton(TypeReference s1, TypeReference s2){
-			add(singleton(s1), value(s2))
+		def BindingFactory addTypeToProviderInstance(TypeReference type, String expression) {
+			add(key(type), providerExpr(expression))
 			return this
 		}
 		
-		def BindingFactory addTypeToTypeEagerSingleton(TypeReference s1, TypeReference s2){
-			add(eagerSingleton(s1), value(s2))
+		def BindingFactory addTypeToProviderInstance(TypeReference type, StringConcatenationClient expression) {
+			add(key(type), providerExpr(expression))
 			return this
 		}
 		
-		def BindingFactory addTypeToProvider(TypeReference s1, TypeReference s2){
-			add(key(s1), provider(s2))
+		def BindingFactory addConfiguredBinding(String name, String... statements) {
+			add(key(name), statements(statements))
 			return this
 		}
 		
-		def BindingFactory addTypeToProviderSingleton(TypeReference s1, TypeReference s2){
-			add(singleton(s1), provider(s2))
+		def BindingFactory addConfiguredBinding(String name, StringConcatenationClient... statements) {
+			add(key(name), statements(statements))
+			return this
+		}
+	
+		def BindingFactory addTypeToType(TypeReference keyType, TypeReference valueType){
+			add(key(keyType), value(valueType))
 			return this
 		}
 		
-		def BindingFactory addTypeToProviderEagerSingleton(TypeReference s1, TypeReference s2){
-			add(eagerSingleton(s1), provider(s2))
+		def BindingFactory addTypeToTypeSingleton(TypeReference keyType, TypeReference valueType){
+			add(singleton(keyType), value(valueType))
 			return this
 		}
 		
-		def BindingFactory addfinalTypeToType(TypeReference s1, TypeReference s2){
-			add(key(s1), value(s2), true)
+		def BindingFactory addTypeToTypeEagerSingleton(TypeReference keyType, TypeReference valueType){
+			add(eagerSingleton(keyType), value(valueType))
 			return this
 		}
 		
-		def BindingFactory addfinalTypeToTypeSingleton(TypeReference s1, TypeReference s2){
-			add(singleton(s1), value(s2), true)
+		def BindingFactory addTypeToProvider(TypeReference keyType, TypeReference valueType){
+			add(key(keyType), provider(valueType))
 			return this
 		}
 		
-		def BindingFactory addfinalTypeToTypeEagerSingleton(TypeReference s1, TypeReference s2){
-			add(eagerSingleton(s1), value(s2), true)
+		def BindingFactory addTypeToProviderSingleton(TypeReference keyType, TypeReference valueType){
+			add(singleton(keyType), provider(valueType))
 			return this
 		}
 		
-		def BindingFactory addfinalTypeToProvider(TypeReference s1, TypeReference s2){
-			add(key(s1), provider(s2), true)
+		def BindingFactory addTypeToProviderEagerSingleton(TypeReference keyType, TypeReference valueType){
+			add(eagerSingleton(keyType), provider(valueType))
 			return this
 		}
 		
-		def BindingFactory addfinalTypeToProviderSingleton(TypeReference s1, TypeReference s2){
-			add(singleton(s1), provider(s2), true)
+		def BindingFactory addfinalTypeToType(TypeReference keyType, TypeReference valueType){
+			add(key(keyType), value(valueType), true)
 			return this
 		}
 		
-		def BindingFactory addfinalTypeToProviderEagerSingleton(TypeReference s1, TypeReference s2){
-			add(eagerSingleton(s1), provider(s2), true)
+		def BindingFactory addfinalTypeToTypeSingleton(TypeReference keyType, TypeReference valueType){
+			add(singleton(keyType), value(valueType), true)
+			return this
+		}
+		
+		def BindingFactory addfinalTypeToTypeEagerSingleton(TypeReference keyType, TypeReference valueType){
+			add(eagerSingleton(keyType), value(valueType), true)
+			return this
+		}
+		
+		def BindingFactory addfinalTypeToProvider(TypeReference keyType, TypeReference valueType){
+			add(key(keyType), provider(valueType), true)
+			return this
+		}
+		
+		def BindingFactory addfinalTypeToProviderSingleton(TypeReference keyType, TypeReference valueType){
+			add(singleton(keyType), provider(valueType), true)
+			return this
+		}
+		
+		def BindingFactory addfinalTypeToProviderEagerSingleton(TypeReference keyType, TypeReference valueType){
+			add(eagerSingleton(keyType), provider(valueType), true)
 			return this
 		}
 	

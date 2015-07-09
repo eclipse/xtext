@@ -43,6 +43,8 @@ import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 
+import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
+
 /**
  * @since 2.9
  */
@@ -140,9 +142,15 @@ class FragmentAdapter implements IGeneratorFragment2 {
 	}
 	
 	private def translateBinding(Binding it) {
-		val newKey = new GuiceModuleAccess.BindKey(new TypeReference(key.type), key.singleton, key.eagerSingleton)
-		val newValue = new GuiceModuleAccess.BindValue(value.expression, new TypeReference(value.typeName),
-				value.provider, value.statements)
+		val newKey =
+			if (value.statements === null || value.statements.empty)
+				new GuiceModuleAccess.BindKey(null, key.type?.typeRef, key.singleton, key.eagerSingleton)
+			else {
+				val nameIndex = key.type.lastIndexOf('.')
+				new GuiceModuleAccess.BindKey(key.type.substring(nameIndex + 1), null, key.singleton, key.eagerSingleton)
+			}
+		val newValue = new GuiceModuleAccess.BindValue(value.expression, value.typeName?.typeRef,
+				value.provider, value.statements.map[s | if (s.endsWith(';')) s else s + ';'])
 		new GuiceModuleAccess.Binding(newKey, newValue, final, contributedBy)
 	}
 	

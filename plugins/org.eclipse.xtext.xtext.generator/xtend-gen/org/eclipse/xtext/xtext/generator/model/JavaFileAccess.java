@@ -20,6 +20,7 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -58,9 +59,9 @@ public class JavaFileAccess extends TextFileAccess {
     }
   }
   
-  private final Map<String, TypeReference> imports = CollectionLiterals.<String, TypeReference>newHashMap();
+  private final Map<String, String> imports = CollectionLiterals.<String, String>newHashMap();
   
-  private final String packageName;
+  private final TypeReference javaType;
   
   private final CodeConfig codeConfig;
   
@@ -78,66 +79,104 @@ public class JavaFileAccess extends TextFileAccess {
   }
   
   public JavaFileAccess(final TypeReference typeRef, final CodeConfig codeConfig) {
-    String _package = typeRef.getPackage();
-    this.packageName = _package;
-    String _name = typeRef.getName();
-    String _simpleName = typeRef.getSimpleName();
-    String _plus = ((this.packageName + ".") + _simpleName);
-    boolean _notEquals = (!Objects.equal(_name, _plus));
-    if (_notEquals) {
+    List<String> _simpleNames = typeRef.getSimpleNames();
+    int _length = ((Object[])Conversions.unwrapArray(_simpleNames, Object.class)).length;
+    boolean _greaterThan = (_length > 1);
+    if (_greaterThan) {
       throw new IllegalArgumentException(("Nested type cannot be serialized: " + typeRef));
     }
+    this.javaType = typeRef;
+    this.codeConfig = codeConfig;
     String _path = typeRef.getPath();
     this.setPath(_path);
-    this.codeConfig = codeConfig;
   }
   
   public String importType(final TypeReference typeRef) {
-    String name = typeRef.getSimpleName();
-    String packageName = typeRef.getPackage();
-    final boolean isJavaDefaultType = CodeGenUtil.isJavaDefaultType(name);
-    boolean _and = false;
-    if (!isJavaDefaultType) {
-      _and = false;
+    final List<String> simpleNames = typeRef.getSimpleNames();
+    String usableName = null;
+    boolean _or = false;
+    String _packageName = typeRef.getPackageName();
+    boolean _equals = Objects.equal(_packageName, "java.lang");
+    if (_equals) {
+      _or = true;
     } else {
-      boolean _notEquals = (!Objects.equal(packageName, "java.lang"));
-      _and = _notEquals;
+      String _packageName_1 = typeRef.getPackageName();
+      String _packageName_2 = this.javaType.getPackageName();
+      boolean _equals_1 = Objects.equal(_packageName_1, _packageName_2);
+      _or = _equals_1;
     }
-    if (_and) {
-      String _name = typeRef.getName();
-      name = _name;
+    if (_or) {
+      String _join = IterableExtensions.join(simpleNames, ".");
+      usableName = _join;
     } else {
-      boolean _and_1 = false;
-      if (!(!isJavaDefaultType)) {
-        _and_1 = false;
-      } else {
-        boolean _notEquals_1 = (!Objects.equal(this.packageName, packageName));
-        _and_1 = _notEquals_1;
-      }
-      if (_and_1) {
-        final TypeReference imported = this.imports.get(name);
-        if ((imported == null)) {
-          this.imports.put(name, typeRef);
-        } else {
-          String _name_1 = imported.getName();
-          String _name_2 = typeRef.getName();
-          boolean _notEquals_2 = (!Objects.equal(_name_1, _name_2));
-          if (_notEquals_2) {
-            String _name_3 = typeRef.getName();
-            name = _name_3;
+      boolean found = false;
+      for (int i = (((Object[])Conversions.unwrapArray(simpleNames, Object.class)).length - 1); ((i >= 0) && (!found)); i--) {
+        {
+          final String simpleName = simpleNames.get(i);
+          if ((usableName == null)) {
+            usableName = simpleName;
+          } else {
+            usableName = ((simpleName + ".") + usableName);
+          }
+          boolean _and = false;
+          boolean _isJavaDefaultType = CodeGenUtil.isJavaDefaultType(simpleName);
+          boolean _not = (!_isJavaDefaultType);
+          if (!_not) {
+            _and = false;
+          } else {
+            boolean _and_1 = false;
+            boolean _and_2 = false;
+            int _length = ((Object[])Conversions.unwrapArray(simpleNames, Object.class)).length;
+            int _minus = (_length - 1);
+            boolean _equals_2 = (i == _minus);
+            if (!_equals_2) {
+              _and_2 = false;
+            } else {
+              _and_2 = (i > 0);
+            }
+            if (!_and_2) {
+              _and_1 = false;
+            } else {
+              int _length_1 = simpleName.length();
+              boolean _lessEqualsThan = (_length_1 <= 8);
+              _and_1 = _lessEqualsThan;
+            }
+            boolean _not_1 = (!_and_1);
+            _and = _not_1;
+          }
+          if (_and) {
+            String _packageName_3 = typeRef.getPackageName();
+            String _plus = (_packageName_3 + ".");
+            List<String> _subList = simpleNames.subList(0, (i + 1));
+            String _join_1 = IterableExtensions.join(_subList, ".");
+            final String importable = (_plus + _join_1);
+            final String imported = this.imports.get(usableName);
+            if ((imported == null)) {
+              this.imports.put(usableName, importable);
+              found = true;
+            } else {
+              boolean _equals_3 = Objects.equal(imported, importable);
+              if (_equals_3) {
+                found = true;
+              }
+            }
           }
         }
       }
+      if ((!found)) {
+        String _name = typeRef.getName();
+        usableName = _name;
+      }
     }
-    List<TypeReference> _arguments = typeRef.getArguments();
+    List<TypeReference> _typeArguments = typeRef.getTypeArguments();
     final Function1<TypeReference, CharSequence> _function = new Function1<TypeReference, CharSequence>() {
       @Override
       public CharSequence apply(final TypeReference it) {
         return JavaFileAccess.this.importType(it);
       }
     };
-    String _join = IterableExtensions.<TypeReference>join(_arguments, "<", ", ", ">", _function);
-    return (name + _join);
+    String _join_1 = IterableExtensions.<TypeReference>join(_typeArguments, "<", ", ", ">", _function);
+    return (usableName + _join_1);
   }
   
   public void setJavaContent(final StringConcatenationClient javaContent) {
@@ -165,22 +204,16 @@ public class JavaFileAccess extends TextFileAccess {
       }
     };
     IterableExtensions.<IClassAnnotation>forEach(classAnnotations, _function_1);
-    Collection<TypeReference> _values = this.imports.values();
-    final Function1<TypeReference, String> _function_2 = new Function1<TypeReference, String>() {
-      @Override
-      public String apply(final TypeReference it) {
-        return it.getName();
-      }
-    };
-    Iterable<String> _map = IterableExtensions.<TypeReference, String>map(_values, _function_2);
-    final ArrayList<String> sortedImports = Lists.<String>newArrayList(_map);
+    Collection<String> _values = this.imports.values();
+    final ArrayList<String> sortedImports = Lists.<String>newArrayList(_values);
     Collections.<String>sort(sortedImports);
     StringConcatenation _builder = new StringConcatenation();
     String _fileHeader = this.codeConfig.getFileHeader();
     _builder.append(_fileHeader, "");
     _builder.newLineIfNotEmpty();
     _builder.append("package ");
-    _builder.append(this.packageName, "");
+    String _packageName = this.javaType.getPackageName();
+    _builder.append(_packageName, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();

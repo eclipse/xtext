@@ -15,6 +15,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.Data;
+import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -27,6 +28,8 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference;
 public class GuiceModuleAccess {
   @Data
   public static class BindKey {
+    private final String name;
+    
     private final TypeReference type;
     
     private final boolean singleton;
@@ -37,7 +40,15 @@ public class GuiceModuleAccess {
     public boolean equals(final Object other) {
       boolean _xifexpression = false;
       if ((other instanceof GuiceModuleAccess.BindKey)) {
-        _xifexpression = Objects.equal(this.type, ((GuiceModuleAccess.BindKey)other).type);
+        boolean _and = false;
+        boolean _equals = Objects.equal(this.name, ((GuiceModuleAccess.BindKey)other).name);
+        if (!_equals) {
+          _and = false;
+        } else {
+          boolean _equals_1 = Objects.equal(this.type, ((GuiceModuleAccess.BindKey)other).type);
+          _and = _equals_1;
+        }
+        _xifexpression = _and;
       } else {
         _xifexpression = false;
       }
@@ -46,11 +57,23 @@ public class GuiceModuleAccess {
     
     @Override
     public int hashCode() {
-      return this.type.hashCode();
+      int h = 0;
+      if ((this.name != null)) {
+        int _h = h;
+        int _hashCode = this.name.hashCode();
+        h = (_h + _hashCode);
+      }
+      if ((this.type != null)) {
+        int _h_1 = h;
+        int _hashCode_1 = this.type.hashCode();
+        h = (_h_1 + _hashCode_1);
+      }
+      return h;
     }
     
-    public BindKey(final TypeReference type, final boolean singleton, final boolean eagerSingleton) {
+    public BindKey(final String name, final TypeReference type, final boolean singleton, final boolean eagerSingleton) {
       super();
+      this.name = name;
       this.type = type;
       this.singleton = singleton;
       this.eagerSingleton = eagerSingleton;
@@ -60,10 +83,16 @@ public class GuiceModuleAccess {
     @Pure
     public String toString() {
       ToStringBuilder b = new ToStringBuilder(this);
+      b.add("name", this.name);
       b.add("type", this.type);
       b.add("singleton", this.singleton);
       b.add("eagerSingleton", this.eagerSingleton);
       return b.toString();
+    }
+    
+    @Pure
+    public String getName() {
+      return this.name;
     }
     
     @Pure
@@ -90,9 +119,9 @@ public class GuiceModuleAccess {
     
     private final boolean provider;
     
-    private final List<CharSequence> statements;
+    private final List<Object> statements;
     
-    public BindValue(final Object expression, final TypeReference type, final boolean provider, final List<CharSequence> statements) {
+    public BindValue(final Object expression, final TypeReference type, final boolean provider, final List<Object> statements) {
       super();
       this.expression = expression;
       this.type = type;
@@ -169,7 +198,7 @@ public class GuiceModuleAccess {
     }
     
     @Pure
-    public List<CharSequence> getStatements() {
+    public List<Object> getStatements() {
       return this.statements;
     }
   }
@@ -276,142 +305,167 @@ public class GuiceModuleAccess {
     }
     
     private GuiceModuleAccess.BindKey key(final TypeReference type) {
-      return new GuiceModuleAccess.BindKey(type, false, false);
+      return new GuiceModuleAccess.BindKey(null, type, false, false);
+    }
+    
+    private GuiceModuleAccess.BindKey key(final String name) {
+      return new GuiceModuleAccess.BindKey(name, null, false, false);
     }
     
     private GuiceModuleAccess.BindKey eagerSingleton(final TypeReference type) {
-      return new GuiceModuleAccess.BindKey(type, true, true);
+      return new GuiceModuleAccess.BindKey(null, type, true, true);
     }
     
     private GuiceModuleAccess.BindKey singleton(final TypeReference type) {
-      return new GuiceModuleAccess.BindKey(type, true, false);
+      return new GuiceModuleAccess.BindKey(null, type, true, false);
     }
     
     private GuiceModuleAccess.BindValue value(final TypeReference type) {
-      List<CharSequence> _emptyList = Collections.<CharSequence>emptyList();
+      List<Object> _emptyList = Collections.<Object>emptyList();
       return new GuiceModuleAccess.BindValue(null, type, false, _emptyList);
     }
     
     private GuiceModuleAccess.BindValue expr(final Object expr) {
-      List<CharSequence> _emptyList = Collections.<CharSequence>emptyList();
+      List<Object> _emptyList = Collections.<Object>emptyList();
       return new GuiceModuleAccess.BindValue(expr, null, false, _emptyList);
     }
     
     private GuiceModuleAccess.BindValue provider(final TypeReference type) {
-      List<CharSequence> _emptyList = Collections.<CharSequence>emptyList();
+      List<Object> _emptyList = Collections.<Object>emptyList();
       return new GuiceModuleAccess.BindValue(null, type, true, _emptyList);
     }
     
     private GuiceModuleAccess.BindValue providerExpr(final Object expr) {
-      List<CharSequence> _emptyList = Collections.<CharSequence>emptyList();
+      List<Object> _emptyList = Collections.<Object>emptyList();
       return new GuiceModuleAccess.BindValue(expr, null, true, _emptyList);
     }
     
-    private GuiceModuleAccess.BindValue statements(final String[] statements) {
-      return new GuiceModuleAccess.BindValue(null, null, false, (List<CharSequence>)Conversions.doWrapArray(statements));
+    private GuiceModuleAccess.BindValue statements(final Object[] statements) {
+      return new GuiceModuleAccess.BindValue(null, null, false, (List<Object>)Conversions.doWrapArray(statements));
     }
     
-    public GuiceModuleAccess.BindingFactory addTypeToInstance(final TypeReference s1, final Object s2) {
-      GuiceModuleAccess.BindKey _key = this.key(s1);
-      GuiceModuleAccess.BindValue _expr = this.expr(s2);
+    public GuiceModuleAccess.BindingFactory addTypeToInstance(final TypeReference type, final String expression) {
+      GuiceModuleAccess.BindKey _key = this.key(type);
+      GuiceModuleAccess.BindValue _expr = this.expr(expression);
       this.add(_key, _expr);
       return this;
     }
     
-    public GuiceModuleAccess.BindingFactory addTypeToProviderInstance(final TypeReference s1, final Object s2) {
-      GuiceModuleAccess.BindKey _key = this.key(s1);
-      GuiceModuleAccess.BindValue _providerExpr = this.providerExpr(s2);
+    public GuiceModuleAccess.BindingFactory addTypeToInstance(final TypeReference type, final StringConcatenationClient expression) {
+      GuiceModuleAccess.BindKey _key = this.key(type);
+      GuiceModuleAccess.BindValue _expr = this.expr(expression);
+      this.add(_key, _expr);
+      return this;
+    }
+    
+    public GuiceModuleAccess.BindingFactory addTypeToProviderInstance(final TypeReference type, final String expression) {
+      GuiceModuleAccess.BindKey _key = this.key(type);
+      GuiceModuleAccess.BindValue _providerExpr = this.providerExpr(expression);
       this.add(_key, _providerExpr);
       return this;
     }
     
-    public GuiceModuleAccess.BindingFactory addConfiguredBinding(final TypeReference key, final String... statements) {
-      GuiceModuleAccess.BindKey _key = this.key(key);
+    public GuiceModuleAccess.BindingFactory addTypeToProviderInstance(final TypeReference type, final StringConcatenationClient expression) {
+      GuiceModuleAccess.BindKey _key = this.key(type);
+      GuiceModuleAccess.BindValue _providerExpr = this.providerExpr(expression);
+      this.add(_key, _providerExpr);
+      return this;
+    }
+    
+    public GuiceModuleAccess.BindingFactory addConfiguredBinding(final String name, final String... statements) {
+      GuiceModuleAccess.BindKey _key = this.key(name);
       GuiceModuleAccess.BindValue _statements = this.statements(statements);
       this.add(_key, _statements);
       return this;
     }
     
-    public GuiceModuleAccess.BindingFactory addTypeToType(final TypeReference s1, final TypeReference s2) {
-      GuiceModuleAccess.BindKey _key = this.key(s1);
-      GuiceModuleAccess.BindValue _value = this.value(s2);
+    public GuiceModuleAccess.BindingFactory addConfiguredBinding(final String name, final StringConcatenationClient... statements) {
+      GuiceModuleAccess.BindKey _key = this.key(name);
+      GuiceModuleAccess.BindValue _statements = this.statements(statements);
+      this.add(_key, _statements);
+      return this;
+    }
+    
+    public GuiceModuleAccess.BindingFactory addTypeToType(final TypeReference keyType, final TypeReference valueType) {
+      GuiceModuleAccess.BindKey _key = this.key(keyType);
+      GuiceModuleAccess.BindValue _value = this.value(valueType);
       this.add(_key, _value);
       return this;
     }
     
-    public GuiceModuleAccess.BindingFactory addTypeToTypeSingleton(final TypeReference s1, final TypeReference s2) {
-      GuiceModuleAccess.BindKey _singleton = this.singleton(s1);
-      GuiceModuleAccess.BindValue _value = this.value(s2);
+    public GuiceModuleAccess.BindingFactory addTypeToTypeSingleton(final TypeReference keyType, final TypeReference valueType) {
+      GuiceModuleAccess.BindKey _singleton = this.singleton(keyType);
+      GuiceModuleAccess.BindValue _value = this.value(valueType);
       this.add(_singleton, _value);
       return this;
     }
     
-    public GuiceModuleAccess.BindingFactory addTypeToTypeEagerSingleton(final TypeReference s1, final TypeReference s2) {
-      GuiceModuleAccess.BindKey _eagerSingleton = this.eagerSingleton(s1);
-      GuiceModuleAccess.BindValue _value = this.value(s2);
+    public GuiceModuleAccess.BindingFactory addTypeToTypeEagerSingleton(final TypeReference keyType, final TypeReference valueType) {
+      GuiceModuleAccess.BindKey _eagerSingleton = this.eagerSingleton(keyType);
+      GuiceModuleAccess.BindValue _value = this.value(valueType);
       this.add(_eagerSingleton, _value);
       return this;
     }
     
-    public GuiceModuleAccess.BindingFactory addTypeToProvider(final TypeReference s1, final TypeReference s2) {
-      GuiceModuleAccess.BindKey _key = this.key(s1);
-      GuiceModuleAccess.BindValue _provider = this.provider(s2);
+    public GuiceModuleAccess.BindingFactory addTypeToProvider(final TypeReference keyType, final TypeReference valueType) {
+      GuiceModuleAccess.BindKey _key = this.key(keyType);
+      GuiceModuleAccess.BindValue _provider = this.provider(valueType);
       this.add(_key, _provider);
       return this;
     }
     
-    public GuiceModuleAccess.BindingFactory addTypeToProviderSingleton(final TypeReference s1, final TypeReference s2) {
-      GuiceModuleAccess.BindKey _singleton = this.singleton(s1);
-      GuiceModuleAccess.BindValue _provider = this.provider(s2);
+    public GuiceModuleAccess.BindingFactory addTypeToProviderSingleton(final TypeReference keyType, final TypeReference valueType) {
+      GuiceModuleAccess.BindKey _singleton = this.singleton(keyType);
+      GuiceModuleAccess.BindValue _provider = this.provider(valueType);
       this.add(_singleton, _provider);
       return this;
     }
     
-    public GuiceModuleAccess.BindingFactory addTypeToProviderEagerSingleton(final TypeReference s1, final TypeReference s2) {
-      GuiceModuleAccess.BindKey _eagerSingleton = this.eagerSingleton(s1);
-      GuiceModuleAccess.BindValue _provider = this.provider(s2);
+    public GuiceModuleAccess.BindingFactory addTypeToProviderEagerSingleton(final TypeReference keyType, final TypeReference valueType) {
+      GuiceModuleAccess.BindKey _eagerSingleton = this.eagerSingleton(keyType);
+      GuiceModuleAccess.BindValue _provider = this.provider(valueType);
       this.add(_eagerSingleton, _provider);
       return this;
     }
     
-    public GuiceModuleAccess.BindingFactory addfinalTypeToType(final TypeReference s1, final TypeReference s2) {
-      GuiceModuleAccess.BindKey _key = this.key(s1);
-      GuiceModuleAccess.BindValue _value = this.value(s2);
+    public GuiceModuleAccess.BindingFactory addfinalTypeToType(final TypeReference keyType, final TypeReference valueType) {
+      GuiceModuleAccess.BindKey _key = this.key(keyType);
+      GuiceModuleAccess.BindValue _value = this.value(valueType);
       this.add(_key, _value, true);
       return this;
     }
     
-    public GuiceModuleAccess.BindingFactory addfinalTypeToTypeSingleton(final TypeReference s1, final TypeReference s2) {
-      GuiceModuleAccess.BindKey _singleton = this.singleton(s1);
-      GuiceModuleAccess.BindValue _value = this.value(s2);
+    public GuiceModuleAccess.BindingFactory addfinalTypeToTypeSingleton(final TypeReference keyType, final TypeReference valueType) {
+      GuiceModuleAccess.BindKey _singleton = this.singleton(keyType);
+      GuiceModuleAccess.BindValue _value = this.value(valueType);
       this.add(_singleton, _value, true);
       return this;
     }
     
-    public GuiceModuleAccess.BindingFactory addfinalTypeToTypeEagerSingleton(final TypeReference s1, final TypeReference s2) {
-      GuiceModuleAccess.BindKey _eagerSingleton = this.eagerSingleton(s1);
-      GuiceModuleAccess.BindValue _value = this.value(s2);
+    public GuiceModuleAccess.BindingFactory addfinalTypeToTypeEagerSingleton(final TypeReference keyType, final TypeReference valueType) {
+      GuiceModuleAccess.BindKey _eagerSingleton = this.eagerSingleton(keyType);
+      GuiceModuleAccess.BindValue _value = this.value(valueType);
       this.add(_eagerSingleton, _value, true);
       return this;
     }
     
-    public GuiceModuleAccess.BindingFactory addfinalTypeToProvider(final TypeReference s1, final TypeReference s2) {
-      GuiceModuleAccess.BindKey _key = this.key(s1);
-      GuiceModuleAccess.BindValue _provider = this.provider(s2);
+    public GuiceModuleAccess.BindingFactory addfinalTypeToProvider(final TypeReference keyType, final TypeReference valueType) {
+      GuiceModuleAccess.BindKey _key = this.key(keyType);
+      GuiceModuleAccess.BindValue _provider = this.provider(valueType);
       this.add(_key, _provider, true);
       return this;
     }
     
-    public GuiceModuleAccess.BindingFactory addfinalTypeToProviderSingleton(final TypeReference s1, final TypeReference s2) {
-      GuiceModuleAccess.BindKey _singleton = this.singleton(s1);
-      GuiceModuleAccess.BindValue _provider = this.provider(s2);
+    public GuiceModuleAccess.BindingFactory addfinalTypeToProviderSingleton(final TypeReference keyType, final TypeReference valueType) {
+      GuiceModuleAccess.BindKey _singleton = this.singleton(keyType);
+      GuiceModuleAccess.BindValue _provider = this.provider(valueType);
       this.add(_singleton, _provider, true);
       return this;
     }
     
-    public GuiceModuleAccess.BindingFactory addfinalTypeToProviderEagerSingleton(final TypeReference s1, final TypeReference s2) {
-      GuiceModuleAccess.BindKey _eagerSingleton = this.eagerSingleton(s1);
-      GuiceModuleAccess.BindValue _provider = this.provider(s2);
+    public GuiceModuleAccess.BindingFactory addfinalTypeToProviderEagerSingleton(final TypeReference keyType, final TypeReference valueType) {
+      GuiceModuleAccess.BindKey _eagerSingleton = this.eagerSingleton(keyType);
+      GuiceModuleAccess.BindValue _provider = this.provider(valueType);
       this.add(_eagerSingleton, _provider, true);
       return this;
     }

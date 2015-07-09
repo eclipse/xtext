@@ -50,6 +50,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -220,24 +221,76 @@ public class FragmentAdapter implements IGeneratorFragment2 {
   private GuiceModuleAccess.Binding translateBinding(final Binding it) {
     GuiceModuleAccess.Binding _xblockexpression = null;
     {
-      BindKey _key = it.getKey();
-      String _type = _key.getType();
-      TypeReference _typeReference = new TypeReference(_type);
-      BindKey _key_1 = it.getKey();
-      boolean _isSingleton = _key_1.isSingleton();
-      BindKey _key_2 = it.getKey();
-      boolean _isEagerSingleton = _key_2.isEagerSingleton();
-      final GuiceModuleAccess.BindKey newKey = new GuiceModuleAccess.BindKey(_typeReference, _isSingleton, _isEagerSingleton);
+      GuiceModuleAccess.BindKey _xifexpression = null;
+      boolean _or = false;
       BindValue _value = it.getValue();
-      String _expression = _value.getExpression();
-      BindValue _value_1 = it.getValue();
-      String _typeName = _value_1.getTypeName();
-      TypeReference _typeReference_1 = new TypeReference(_typeName);
+      String[] _statements = _value.getStatements();
+      boolean _tripleEquals = (_statements == null);
+      if (_tripleEquals) {
+        _or = true;
+      } else {
+        BindValue _value_1 = it.getValue();
+        String[] _statements_1 = _value_1.getStatements();
+        boolean _isEmpty = ((List<String>)Conversions.doWrapArray(_statements_1)).isEmpty();
+        _or = _isEmpty;
+      }
+      if (_or) {
+        BindKey _key = it.getKey();
+        String _type = _key.getType();
+        TypeReference _typeRef = null;
+        if (_type!=null) {
+          _typeRef=TypeReference.typeRef(_type);
+        }
+        BindKey _key_1 = it.getKey();
+        boolean _isSingleton = _key_1.isSingleton();
+        BindKey _key_2 = it.getKey();
+        boolean _isEagerSingleton = _key_2.isEagerSingleton();
+        _xifexpression = new GuiceModuleAccess.BindKey(null, _typeRef, _isSingleton, _isEagerSingleton);
+      } else {
+        GuiceModuleAccess.BindKey _xblockexpression_1 = null;
+        {
+          BindKey _key_3 = it.getKey();
+          String _type_1 = _key_3.getType();
+          final int nameIndex = _type_1.lastIndexOf(".");
+          BindKey _key_4 = it.getKey();
+          String _type_2 = _key_4.getType();
+          String _substring = _type_2.substring((nameIndex + 1));
+          BindKey _key_5 = it.getKey();
+          boolean _isSingleton_1 = _key_5.isSingleton();
+          BindKey _key_6 = it.getKey();
+          boolean _isEagerSingleton_1 = _key_6.isEagerSingleton();
+          _xblockexpression_1 = new GuiceModuleAccess.BindKey(_substring, null, _isSingleton_1, _isEagerSingleton_1);
+        }
+        _xifexpression = _xblockexpression_1;
+      }
+      final GuiceModuleAccess.BindKey newKey = _xifexpression;
       BindValue _value_2 = it.getValue();
-      boolean _isProvider = _value_2.isProvider();
+      String _expression = _value_2.getExpression();
       BindValue _value_3 = it.getValue();
-      String[] _statements = _value_3.getStatements();
-      final GuiceModuleAccess.BindValue newValue = new GuiceModuleAccess.BindValue(_expression, _typeReference_1, _isProvider, (List<CharSequence>)Conversions.doWrapArray(_statements));
+      String _typeName = _value_3.getTypeName();
+      TypeReference _typeRef_1 = null;
+      if (_typeName!=null) {
+        _typeRef_1=TypeReference.typeRef(_typeName);
+      }
+      BindValue _value_4 = it.getValue();
+      boolean _isProvider = _value_4.isProvider();
+      BindValue _value_5 = it.getValue();
+      String[] _statements_2 = _value_5.getStatements();
+      final Function1<String, Object> _function = new Function1<String, Object>() {
+        @Override
+        public Object apply(final String s) {
+          String _xifexpression = null;
+          boolean _endsWith = s.endsWith(";");
+          if (_endsWith) {
+            _xifexpression = s;
+          } else {
+            _xifexpression = (s + ";");
+          }
+          return _xifexpression;
+        }
+      };
+      List<Object> _map = ListExtensions.<String, Object>map(((List<String>)Conversions.doWrapArray(_statements_2)), _function);
+      final GuiceModuleAccess.BindValue newValue = new GuiceModuleAccess.BindValue(_expression, _typeRef_1, _isProvider, _map);
       boolean _isFinal = it.isFinal();
       String _contributedBy = it.getContributedBy();
       _xblockexpression = new GuiceModuleAccess.Binding(newKey, newValue, _isFinal, _contributedBy);

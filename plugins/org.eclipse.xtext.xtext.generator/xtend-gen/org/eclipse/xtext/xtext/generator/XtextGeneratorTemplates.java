@@ -36,7 +36,6 @@ import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.impl.BinaryGrammarResourceFactoryImpl;
 import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.util.Modules2;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -323,6 +322,7 @@ public class XtextGeneratorTemplates {
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
+        _builder.append("\t");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("public ");
@@ -340,6 +340,7 @@ public class XtextGeneratorTemplates {
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
+        _builder.append("\t");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("public void register(");
@@ -367,88 +368,78 @@ public class XtextGeneratorTemplates {
     return javaFile;
   }
   
-  private String getBindMethodName(final GuiceModuleAccess.Binding it) {
-    String _xifexpression = null;
-    boolean _and = false;
-    GuiceModuleAccess.BindValue _value = it.getValue();
-    boolean _isProvider = _value.isProvider();
-    boolean _not = (!_isProvider);
-    if (!_not) {
-      _and = false;
-    } else {
-      GuiceModuleAccess.BindValue _value_1 = it.getValue();
-      List<CharSequence> _statements = _value_1.getStatements();
-      boolean _isEmpty = _statements.isEmpty();
-      _and = _isEmpty;
-    }
-    if (_and) {
-      _xifexpression = "bind";
-    } else {
-      String _xifexpression_1 = null;
-      GuiceModuleAccess.BindValue _value_2 = it.getValue();
-      List<CharSequence> _statements_1 = _value_2.getStatements();
-      boolean _isEmpty_1 = _statements_1.isEmpty();
-      if (_isEmpty_1) {
-        _xifexpression_1 = "provide";
+  private CharSequence getBindMethodName(final GuiceModuleAccess.Binding it) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      boolean _and = false;
+      GuiceModuleAccess.BindValue _value = it.getValue();
+      boolean _isProvider = _value.isProvider();
+      boolean _not = (!_isProvider);
+      if (!_not) {
+        _and = false;
       } else {
-        _xifexpression_1 = "configure";
+        GuiceModuleAccess.BindValue _value_1 = it.getValue();
+        List<Object> _statements = _value_1.getStatements();
+        boolean _isEmpty = _statements.isEmpty();
+        _and = _isEmpty;
       }
-      _xifexpression = _xifexpression_1;
+      if (_and) {
+        _builder.append("bind");
+      } else {
+        GuiceModuleAccess.BindValue _value_2 = it.getValue();
+        List<Object> _statements_1 = _value_2.getStatements();
+        boolean _isEmpty_1 = _statements_1.isEmpty();
+        if (_isEmpty_1) {
+          _builder.append("provide");
+        } else {
+          _builder.append("configure");
+        }
+      }
     }
+    String _elvis = null;
     GuiceModuleAccess.BindKey _key = it.getKey();
-    TypeReference _type = _key.getType();
-    String _simpleMethodName = this.getSimpleMethodName(_type);
-    String _plus = (_xifexpression + _simpleMethodName);
-    String _xifexpression_2 = null;
-    boolean _and_1 = false;
-    GuiceModuleAccess.BindValue _value_3 = it.getValue();
-    Object _expression = _value_3.getExpression();
-    boolean _tripleNotEquals = (_expression != null);
-    if (!_tripleNotEquals) {
-      _and_1 = false;
+    String _name = _key.getName();
+    if (_name != null) {
+      _elvis = _name;
     } else {
-      GuiceModuleAccess.BindValue _value_4 = it.getValue();
-      boolean _isProvider_1 = _value_4.isProvider();
-      boolean _not_1 = (!_isProvider_1);
-      _and_1 = _not_1;
+      GuiceModuleAccess.BindKey _key_1 = it.getKey();
+      TypeReference _type = _key_1.getType();
+      String _simpleMethodName = this.getSimpleMethodName(_type);
+      _elvis = _simpleMethodName;
     }
-    if (_and_1) {
-      _xifexpression_2 = "ToInstance";
-    } else {
-      _xifexpression_2 = "";
+    _builder.append(_elvis, "");
+    {
+      boolean _and_1 = false;
+      GuiceModuleAccess.BindValue _value_3 = it.getValue();
+      Object _expression = _value_3.getExpression();
+      boolean _tripleNotEquals = (_expression != null);
+      if (!_tripleNotEquals) {
+        _and_1 = false;
+      } else {
+        GuiceModuleAccess.BindValue _value_4 = it.getValue();
+        boolean _isProvider_1 = _value_4.isProvider();
+        boolean _not_1 = (!_isProvider_1);
+        _and_1 = _not_1;
+      }
+      if (_and_1) {
+        _builder.append("ToInstance");
+      }
     }
-    return (_plus + _xifexpression_2);
+    return _builder;
   }
   
   private String getSimpleMethodName(final TypeReference type) {
-    String _name = type.getName();
-    String _replaceAll = _name.replaceAll("<", "\\.");
-    String _replaceAll_1 = _replaceAll.replaceAll(">", "\\.");
-    String[] _split = _replaceAll_1.split("\\.");
-    final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
+    List<String> _simpleNames = type.getSimpleNames();
+    String _join = IterableExtensions.join(_simpleNames, "$");
+    List<TypeReference> _typeArguments = type.getTypeArguments();
+    final Function1<TypeReference, CharSequence> _function = new Function1<TypeReference, CharSequence>() {
       @Override
-      public Boolean apply(final String it) {
-        return Boolean.valueOf(it.matches("[A-Z].*"));
+      public CharSequence apply(final TypeReference it) {
+        return XtextGeneratorTemplates.this.getSimpleMethodName(it);
       }
     };
-    Iterable<String> _filter = IterableExtensions.<String>filter(((Iterable<String>)Conversions.doWrapArray(_split)), _function);
-    return IterableExtensions.join(_filter, "$");
-  }
-  
-  private boolean endsWith(final CharSequence sequence, final char c) {
-    boolean _and = false;
-    int _length = sequence.length();
-    boolean _greaterThan = (_length > 0);
-    if (!_greaterThan) {
-      _and = false;
-    } else {
-      int _length_1 = sequence.length();
-      int _minus = (_length_1 - 1);
-      char _charAt = sequence.charAt(_minus);
-      boolean _equals = (_charAt == c);
-      _and = _equals;
-    }
-    return _and;
+    String _join_1 = IterableExtensions.<TypeReference>join(_typeArguments, "$", "$", "", _function);
+    return (_join + _join_1);
   }
   
   private StringConcatenationClient createBindingMethod(final GuiceModuleAccess.Binding it) {
@@ -464,7 +455,7 @@ public class XtextGeneratorTemplates {
             _and = false;
           } else {
             GuiceModuleAccess.BindValue _value_1 = it.getValue();
-            List<CharSequence> _statements = _value_1.getStatements();
+            List<Object> _statements = _value_1.getStatements();
             boolean _isEmpty = _statements.isEmpty();
             _and = _isEmpty;
           }
@@ -507,7 +498,7 @@ public class XtextGeneratorTemplates {
               }
             }
             _builder.append(" ");
-            String _bindMethodName = XtextGeneratorTemplates.this.getBindMethodName(it);
+            CharSequence _bindMethodName = XtextGeneratorTemplates.this.getBindMethodName(it);
             _builder.append(_bindMethodName, "");
             _builder.append("() {");
             _builder.newLineIfNotEmpty();
@@ -534,7 +525,7 @@ public class XtextGeneratorTemplates {
             _builder.newLine();
           } else {
             GuiceModuleAccess.BindValue _value_6 = it.getValue();
-            List<CharSequence> _statements_1 = _value_6.getStatements();
+            List<Object> _statements_1 = _value_6.getStatements();
             boolean _isEmpty_1 = _statements_1.isEmpty();
             if (_isEmpty_1) {
               _builder.append("// contributed by ");
@@ -580,7 +571,7 @@ public class XtextGeneratorTemplates {
                 }
               }
               _builder.append(" ");
-              String _bindMethodName_1 = XtextGeneratorTemplates.this.getBindMethodName(it);
+              CharSequence _bindMethodName_1 = XtextGeneratorTemplates.this.getBindMethodName(it);
               _builder.append(_bindMethodName_1, "");
               _builder.append("() {");
               _builder.newLineIfNotEmpty();
@@ -611,7 +602,7 @@ public class XtextGeneratorTemplates {
               _builder.append(_contributedBy_2, "");
               _builder.newLineIfNotEmpty();
               _builder.append("public void ");
-              String _bindMethodName_2 = XtextGeneratorTemplates.this.getBindMethodName(it);
+              CharSequence _bindMethodName_2 = XtextGeneratorTemplates.this.getBindMethodName(it);
               _builder.append(_bindMethodName_2, "");
               _builder.append("(");
               _builder.append(Binder.class, "");
@@ -619,17 +610,10 @@ public class XtextGeneratorTemplates {
               _builder.newLineIfNotEmpty();
               {
                 GuiceModuleAccess.BindValue _value_11 = it.getValue();
-                List<CharSequence> _statements_2 = _value_11.getStatements();
-                for(final CharSequence statement : _statements_2) {
+                List<Object> _statements_2 = _value_11.getStatements();
+                for(final Object statement : _statements_2) {
                   _builder.append("\t");
                   _builder.append(statement, "\t");
-                  {
-                    boolean _endsWith = XtextGeneratorTemplates.this.endsWith(statement, ';');
-                    boolean _not_1 = (!_endsWith);
-                    if (_not_1) {
-                      _builder.append(";");
-                    }
-                  }
                   _builder.newLineIfNotEmpty();
                 }
               }
