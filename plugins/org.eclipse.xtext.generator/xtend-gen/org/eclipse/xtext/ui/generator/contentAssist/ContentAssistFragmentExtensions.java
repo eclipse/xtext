@@ -29,7 +29,8 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
  * Created for https://bugs.eclipse.org/bugs/show_bug.cgi?id=471434
  * 
  * @author Lorenzo Bettini - Initial contribution and API
- * @since 2.9
+ * @since 2.8
+ * @noreference This class is not intended to be referenced by clients.
  */
 @SuppressWarnings("all")
 public class ContentAssistFragmentExtensions {

@@ -29,6 +29,7 @@ import org.eclipse.xtext.xbase.XAssignment
 import org.eclipse.xtext.xbase.XBasicForLoopExpression
 import org.eclipse.xtext.xbase.XBinaryOperation
 import org.eclipse.xtext.xbase.XBlockExpression
+import org.eclipse.xtext.xbase.XCastedExpression
 import org.eclipse.xtext.xbase.XClosure
 import org.eclipse.xtext.xbase.XCollectionLiteral
 import org.eclipse.xtext.xbase.XConstructorCall
@@ -39,6 +40,7 @@ import org.eclipse.xtext.xbase.XForLoopExpression
 import org.eclipse.xtext.xbase.XIfExpression
 import org.eclipse.xtext.xbase.XInstanceOfExpression
 import org.eclipse.xtext.xbase.XMemberFeatureCall
+import org.eclipse.xtext.xbase.XPostfixOperation
 import org.eclipse.xtext.xbase.XReturnExpression
 import org.eclipse.xtext.xbase.XSwitchExpression
 import org.eclipse.xtext.xbase.XSynchronizedExpression
@@ -51,8 +53,6 @@ import org.eclipse.xtext.xbase.services.XbaseGrammarAccess
 
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
 import static org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys.*
-import org.eclipse.xtext.xbase.XCastedExpression
-import org.eclipse.xtext.xbase.XPostfixOperation
 
 /**
  * @author Moritz Eysholdt - Initial implementation and API
