@@ -40,6 +40,7 @@ import org.eclipse.xtext.util.MergeableManifest;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -52,6 +53,7 @@ import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.LanguageConfig2;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorTemplates;
+import org.eclipse.xtext.xtext.generator.model.FileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
@@ -80,6 +82,10 @@ public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuice
   
   @Inject
   private XtextGeneratorTemplates templates;
+  
+  @Inject
+  @Extension
+  private FileSystemAccess.Extensions _extensions;
   
   public XtextGenerator() {
     XtextStandaloneSetup _xtextStandaloneSetup = new XtextStandaloneSetup();
@@ -189,9 +195,8 @@ public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuice
     IFileSystemAccess2 _runtimeSrc = this.projectConfig.getRuntimeSrc();
     XtextGeneratorNaming _naming = language.getNaming();
     TypeReference _runtimeSetup = _naming.getRuntimeSetup();
-    String _path = _runtimeSetup.getPath();
-    boolean _isFile = _runtimeSrc.isFile(_path);
-    boolean _not = (!_isFile);
+    boolean _containsJavaFile = this._extensions.containsJavaFile(_runtimeSrc, _runtimeSetup);
+    boolean _not = (!_containsJavaFile);
     if (_not) {
       JavaFileAccess _createRuntimeSetup = this.templates.createRuntimeSetup(language);
       IFileSystemAccess2 _runtimeSrc_1 = this.projectConfig.getRuntimeSrc();
@@ -206,9 +211,8 @@ public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuice
     IFileSystemAccess2 _runtimeSrc = this.projectConfig.getRuntimeSrc();
     XtextGeneratorNaming _naming = language.getNaming();
     TypeReference _runtimeModule = _naming.getRuntimeModule();
-    String _path = _runtimeModule.getPath();
-    boolean _isFile = _runtimeSrc.isFile(_path);
-    boolean _not = (!_isFile);
+    boolean _containsJavaFile = this._extensions.containsJavaFile(_runtimeSrc, _runtimeModule);
+    boolean _not = (!_containsJavaFile);
     if (_not) {
       JavaFileAccess _createRuntimeModule = this.templates.createRuntimeModule(language);
       IFileSystemAccess2 _runtimeSrc_1 = this.projectConfig.getRuntimeSrc();
@@ -230,9 +234,8 @@ public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuice
       IFileSystemAccess2 _eclipsePluginSrc_1 = this.projectConfig.getEclipsePluginSrc();
       XtextGeneratorNaming _naming_1 = language.getNaming();
       TypeReference _eclipsePluginModule = _naming_1.getEclipsePluginModule();
-      String _path_1 = _eclipsePluginModule.getPath();
-      boolean _isFile_1 = _eclipsePluginSrc_1.isFile(_path_1);
-      boolean _not_1 = (!_isFile_1);
+      boolean _containsJavaFile_1 = this._extensions.containsJavaFile(_eclipsePluginSrc_1, _eclipsePluginModule);
+      boolean _not_1 = (!_containsJavaFile_1);
       _and = _not_1;
     }
     if (_and) {

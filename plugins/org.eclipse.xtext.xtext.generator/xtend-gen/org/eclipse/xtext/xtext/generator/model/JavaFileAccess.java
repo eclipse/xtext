@@ -88,7 +88,14 @@ public class JavaFileAccess extends TextFileAccess {
     this.javaType = typeRef;
     this.codeConfig = codeConfig;
     String _path = typeRef.getPath();
-    this.setPath(_path);
+    String _plus = (_path + ".");
+    String _fileExtension = this.getFileExtension();
+    String _plus_1 = (_plus + _fileExtension);
+    this.setPath(_plus_1);
+  }
+  
+  protected String getFileExtension() {
+    return "java";
   }
   
   public String importType(final TypeReference typeRef) {
@@ -185,6 +192,10 @@ public class JavaFileAccess extends TextFileAccess {
     this.setContent(javaStringConcat);
   }
   
+  protected boolean appendSemicolons() {
+    return true;
+  }
+  
   @Override
   public CharSequence generate() {
     List<IClassAnnotation> _classAnnotations = this.codeConfig.getClassAnnotations();
@@ -214,14 +225,24 @@ public class JavaFileAccess extends TextFileAccess {
     _builder.append("package ");
     String _packageName = this.javaType.getPackageName();
     _builder.append(_packageName, "");
-    _builder.append(";");
+    {
+      boolean _appendSemicolons = this.appendSemicolons();
+      if (_appendSemicolons) {
+        _builder.append(";");
+      }
+    }
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     {
       for(final String importName : sortedImports) {
         _builder.append("import ");
         _builder.append(importName, "");
-        _builder.append(";");
+        {
+          boolean _appendSemicolons_1 = this.appendSemicolons();
+          if (_appendSemicolons_1) {
+            _builder.append(";");
+          }
+        }
         _builder.newLineIfNotEmpty();
       }
     }

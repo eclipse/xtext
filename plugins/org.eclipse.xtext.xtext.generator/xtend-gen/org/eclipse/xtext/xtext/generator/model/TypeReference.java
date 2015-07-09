@@ -220,8 +220,7 @@ public class TypeReference {
     String _replace = this.packageName.replace(".", "/");
     String _plus = (_replace + "/");
     String _head = IterableExtensions.<String>head(this.simpleNames);
-    String _plus_1 = (_plus + _head);
-    return (_plus_1 + ".java");
+    return (_plus + _head);
   }
   
   @Pure

@@ -23,9 +23,24 @@ import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.util.RuntimeIOException;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
+import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
 @SuppressWarnings("all")
 public class FileSystemAccess implements IFileSystemAccess2, IGuiceAwareGeneratorComponent {
+  public static class Extensions {
+    public boolean containsJavaFile(final IFileSystemAccess2 fsa, final TypeReference typeRef) {
+      String _path = typeRef.getPath();
+      String _plus = (_path + ".java");
+      return fsa.isFile(_plus);
+    }
+    
+    public boolean containsXtendFile(final IFileSystemAccess2 fsa, final TypeReference typeRef) {
+      String _path = typeRef.getPath();
+      String _plus = (_path + ".xtend");
+      return fsa.isFile(_plus);
+    }
+  }
+  
   @Inject
   private IEncodingProvider encodingProvider;
   

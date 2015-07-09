@@ -63,6 +63,7 @@ import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
+import org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2;
 
 @Log
 @SuppressWarnings("all")
@@ -408,11 +409,11 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
   
   @Override
   public void generate(final LanguageConfig2 language) {
-    this.addImplicitContributions();
+    this.addImplicitContributions(language);
     super.generate(language);
   }
   
-  protected void addImplicitContributions() {
+  protected void addImplicitContributions(final LanguageConfig2 language) {
     ManifestAccess _runtimeManifest = this.projectConfig.getRuntimeManifest();
     boolean _tripleNotEquals = (_runtimeManifest != null);
     if (_tripleNotEquals) {
@@ -442,9 +443,21 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
     };
     final StringConcatenationClient expression = _client;
     GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
-    TypeReference _typeReference = new TypeReference(IAllContainersState.class);
-    GuiceModuleAccess.BindingFactory _addTypeToProviderInstance = _bindingFactory.addTypeToProviderInstance(_typeReference, expression);
-    _addTypeToProviderInstance.contributeTo(this.eclipsePluginGenModule);
+    TypeReference _typeRef = TypeReference.typeRef(IAllContainersState.class);
+    final GuiceModuleAccess.BindingFactory bindingFactory = _bindingFactory.addTypeToProviderInstance(_typeRef, expression);
+    boolean _inheritsXbase = XbaseGeneratorFragment2.inheritsXbase(language.grammar);
+    if (_inheritsXbase) {
+      TypeReference _typeRef_1 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.XtextEditor");
+      TypeReference _typeRef_2 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.editor.XbaseEditor");
+      GuiceModuleAccess.BindingFactory _addTypeToType = bindingFactory.addTypeToType(_typeRef_1, _typeRef_2);
+      TypeReference _typeRef_3 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.model.XtextDocumentProvider");
+      TypeReference _typeRef_4 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.editor.XbaseDocumentProvider");
+      GuiceModuleAccess.BindingFactory _addTypeToType_1 = _addTypeToType.addTypeToType(_typeRef_3, _typeRef_4);
+      TypeReference _typeRef_5 = TypeReference.typeRef("org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler");
+      TypeReference _typeRef_6 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.generator.trace.XbaseOpenGeneratedFileHandler");
+      _addTypeToType_1.addTypeToType(_typeRef_5, _typeRef_6);
+    }
+    bindingFactory.contributeTo(this.eclipsePluginGenModule);
   }
   
   private final static Logger LOG = Logger.getLogger(LanguageConfig2.class);

@@ -270,6 +270,20 @@ public class GrammarUtil {
 		collectAllUsedGrammars(grammars, grammar);
 		return grammars;
 	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public static boolean inherits(Grammar grammar, String languageID) {
+		if (grammar.getName().equals(languageID))
+			return true;
+		for (Grammar grammar2 : grammar.getUsedGrammars()) {
+			if (inherits(grammar2, languageID)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	private static void collectAllUsedGrammars(List<Grammar> grammars, Grammar grammar) {
 		grammars.addAll(grammar.getUsedGrammars());

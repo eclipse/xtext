@@ -39,7 +39,7 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess
-import org.eclipse.xtext.xtext.generator.model.TypeReference
+import org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
 
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 
@@ -83,7 +83,7 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 {
 	}
 	
 	def void setFileExtensions(String fileExtensions) {
-		this.fileExtensions = fileExtensions.trim.split("\\s*,\\s*").toList
+		this.fileExtensions = fileExtensions.trim.split('\\s*,\\s*').toList
 	}
 	
 	def List<String> getFileExtensions() {
@@ -254,11 +254,11 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 {
 	}
 	
 	override generate(LanguageConfig2 language) {
-		addImplicitContributions()
+		addImplicitContributions(language)
 		super.generate(language)
 	}
 	
-	protected def void addImplicitContributions() {
+	protected def void addImplicitContributions(LanguageConfig2 language) {
 		if (projectConfig.runtimeManifest !== null) {
 			projectConfig.runtimeManifest.requiredBundles.addAll(#[
 				'org.eclipse.xtext', 'org.eclipse.xtext.util'
@@ -270,10 +270,19 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 {
 				'org.eclipse.xtext.ui', 'org.eclipse.xtext.ui.shared', 'org.eclipse.ui.editors', 'org.eclipse.ui'
 			])
 		}
+		
 		val StringConcatenationClient expression = '''«'org.eclipse.xtext.ui.shared.Access'.typeRef».getJavaProjectsState()'''
-		new GuiceModuleAccess.BindingFactory()
-			.addTypeToProviderInstance(new TypeReference(IAllContainersState), expression)
-			.contributeTo(eclipsePluginGenModule)
+		val bindingFactory = new GuiceModuleAccess.BindingFactory()
+			.addTypeToProviderInstance(IAllContainersState.typeRef, expression)
+		if (XbaseGeneratorFragment2.inheritsXbase(language.grammar)) {
+			bindingFactory.addTypeToType('org.eclipse.xtext.ui.editor.XtextEditor'.typeRef,
+					'org.eclipse.xtext.xbase.ui.editor.XbaseEditor'.typeRef)
+				.addTypeToType('org.eclipse.xtext.ui.editor.model.XtextDocumentProvider'.typeRef,
+					'org.eclipse.xtext.xbase.ui.editor.XbaseDocumentProvider'.typeRef)
+				.addTypeToType('org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler'.typeRef,
+					'org.eclipse.xtext.xbase.ui.generator.trace.XbaseOpenGeneratedFileHandler'.typeRef)
+		}
+		bindingFactory.contributeTo(eclipsePluginGenModule)
 	}
 	
 }

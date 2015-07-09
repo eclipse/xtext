@@ -43,7 +43,11 @@ class JavaFileAccess extends TextFileAccess {
 			throw new IllegalArgumentException('Nested type cannot be serialized: ' + typeRef)
 		this.javaType = typeRef
 		this.codeConfig = codeConfig
-		setPath(typeRef.path)
+		setPath(typeRef.path + '.' + fileExtension)
+	}
+	
+	protected def String getFileExtension() {
+		'java'
 	}
 
 	def String importType(TypeReference typeRef) {
@@ -83,6 +87,10 @@ class JavaFileAccess extends TextFileAccess {
 		setContent(javaStringConcat)
 	}
 	
+	protected def boolean appendSemicolons() {
+		true
+	}
+	
 	override generate() {
 		val classAnnotations = annotations + codeConfig.classAnnotations.filter[appliesTo(this)]
 		classAnnotations.forEach[importType(annotationImport)]
@@ -90,10 +98,10 @@ class JavaFileAccess extends TextFileAccess {
 		Collections.sort(sortedImports)
 		return '''
 			«codeConfig.fileHeader»
-			package «javaType.packageName»;
+			package «javaType.packageName»«IF appendSemicolons»;«ENDIF»
 			
 			«FOR importName : sortedImports»
-				import «importName»;
+				import «importName»«IF appendSemicolons»;«ENDIF»
 			«ENDFOR»
 			
 			«typeComment»
