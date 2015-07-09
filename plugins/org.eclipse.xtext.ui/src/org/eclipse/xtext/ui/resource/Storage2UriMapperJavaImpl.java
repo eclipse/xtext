@@ -45,6 +45,7 @@ import org.eclipse.jdt.internal.core.JavaProject;
 import org.eclipse.xtext.ui.util.IJdtHelper;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Sets;
@@ -446,6 +447,11 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 			}
 			if (data.associatedRoots.size() == 0) {
 				toBeRemoved.add(data);
+			} else {
+				// get rid of cached storages that still point to roots / projects that are no longer available
+				IPackageFragmentRoot someRoot = IterableExtensions.head(data.associatedRoots.values());
+				PackageFragmentRootData newlyCollected = initializeData(someRoot);
+				data.uri2Storage = newlyCollected.uri2Storage;
 			}
 		}
 		if(!toBeRemoved.isEmpty()) {
