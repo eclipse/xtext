@@ -55,8 +55,8 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
     public static final int T__58=58;
     public static final int T__16=16;
     public static final int T__51=51;
-    public static final int T__52=52;
     public static final int T__15=15;
+    public static final int T__52=52;
     public static final int T__53=53;
     public static final int T__18=18;
     public static final int T__54=54;
@@ -19208,11 +19208,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         state.failed=false;
         return success;
     }
-    public final boolean synpred5_InternalContentAssistFragmentTestLang() {
+    public final boolean synpred13_InternalContentAssistFragmentTestLang() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred5_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+            synpred13_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -19222,11 +19222,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         state.failed=false;
         return success;
     }
-    public final boolean synpred13_InternalContentAssistFragmentTestLang() {
+    public final boolean synpred5_InternalContentAssistFragmentTestLang() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred13_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+            synpred5_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }

@@ -743,6 +743,7 @@ public class XtendBatchCompiler {
 	};
 	
 	private static final Function<File, URL> TO_URL= new Function<File, URL>() {
+		@SuppressWarnings("deprecation")
 		@Override
 		public URL apply(File from) {
 			try {
