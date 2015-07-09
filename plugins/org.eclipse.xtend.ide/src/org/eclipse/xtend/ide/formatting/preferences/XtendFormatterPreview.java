@@ -95,6 +95,7 @@ public class XtendFormatterPreview implements Observer {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public void doUpdate(final Map<String, String> map) {
 		checkEditorHandleIsSet();
 		final MapBasedPreferenceValues values = new MapBasedPreferenceValues(map);
