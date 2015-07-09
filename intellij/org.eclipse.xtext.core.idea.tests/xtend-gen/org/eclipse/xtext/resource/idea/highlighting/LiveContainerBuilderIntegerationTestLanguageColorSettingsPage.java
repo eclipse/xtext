@@ -1,0 +1,7 @@
+package org.eclipse.xtext.resource.idea.highlighting;
+
+import org.eclipse.xtext.resource.idea.highlighting.LiveContainerBuilderIntegerationTestLanguageBaseColorSettingsPage;
+
+@SuppressWarnings("all")
+public class LiveContainerBuilderIntegerationTestLanguageColorSettingsPage extends LiveContainerBuilderIntegerationTestLanguageBaseColorSettingsPage {
+}

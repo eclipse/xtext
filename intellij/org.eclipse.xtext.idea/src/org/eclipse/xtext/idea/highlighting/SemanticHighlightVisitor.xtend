@@ -8,20 +8,17 @@
 package org.eclipse.xtext.idea.highlighting
 
 import com.google.inject.Inject
+import com.google.inject.Provider
 import com.google.inject.name.Named
 import com.intellij.codeInsight.daemon.impl.HighlightInfo
-import com.intellij.codeInsight.daemon.impl.HighlightInfoType
-import com.intellij.codeInsight.daemon.impl.HighlightInfoType.HighlightInfoTypeImpl
 import com.intellij.codeInsight.daemon.impl.HighlightVisitor
 import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder
-import com.intellij.lang.annotation.HighlightSeverity
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import org.eclipse.xtext.Constants
 import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator
 import org.eclipse.xtext.psi.impl.BaseXtextFile
-import com.google.inject.Provider
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -32,7 +29,7 @@ class SemanticHighlightVisitor implements HighlightVisitor {
  
  	@Inject ISemanticHighlightingCalculator highlightCalculator
  	
- 	@Inject extension TextAttributeProvider 
+ 	@Inject extension IdeaHighlightingAttributesProvider 
  	
 	@Inject Provider<SemanticHighlightVisitor> cloneProvider
 
@@ -69,10 +66,6 @@ class SemanticHighlightVisitor implements HighlightVisitor {
 	override visit(PsiElement element) {
 		if (element instanceof BaseXtextFile) 
 			highlightCalculator.provideHighlightingFor(element.resource, acceptor)
-	}
-	
-	def HighlightInfoType getHighlightInfoType(String xtextStyle) {
-		new HighlightInfoTypeImpl(HighlightSeverity.INFORMATION, xtextStyle.textAttributesKey)
 	}
 	
 	override clone() {

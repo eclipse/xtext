@@ -4,17 +4,26 @@
 package org.eclipse.xtext.ui.tests.editor.outline;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.ISetup;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.ISetupExtension;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+
+import java.util.List;
+import java.util.Arrays;
 
 /**
  * Generated from StandaloneSetup.xpt!
  */
 @SuppressWarnings("all")
-public class OutlineTestLanguageStandaloneSetupGenerated implements ISetup {
+public class OutlineTestLanguageStandaloneSetupGenerated implements ISetup, ISetupExtension {
+
+	@Override
+	public List<String> getFileExtensions() {
+		return Arrays.asList("outlinetestlanguage");
+	}
 
 	@Override
 	public Injector createInjectorAndDoEMFRegistration() {

@@ -1,4 +1,0 @@
-package org.eclipse.xtext.lexer.idea.highlighting;
-
-public class IgnoreCaseLexerTestLanguageColorSettingsPage extends IgnoreCaseLexerTestLanguageBaseColorSettingsPage {
-}

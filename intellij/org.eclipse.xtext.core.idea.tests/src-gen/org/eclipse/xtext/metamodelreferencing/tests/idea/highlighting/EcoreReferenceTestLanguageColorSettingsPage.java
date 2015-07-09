@@ -1,4 +1,0 @@
-package org.eclipse.xtext.metamodelreferencing.tests.idea.highlighting;
-
-public class EcoreReferenceTestLanguageColorSettingsPage extends EcoreReferenceTestLanguageBaseColorSettingsPage {
-}

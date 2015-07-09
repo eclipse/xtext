@@ -1,0 +1,4 @@
+package org.eclipse.xtext.linking.idea.highlighting
+
+class IgnoreCaseImportsTestLanguageColorSettingsPage extends IgnoreCaseImportsTestLanguageBaseColorSettingsPage {
+}

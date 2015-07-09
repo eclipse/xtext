@@ -1,0 +1,4 @@
+package org.eclipse.xtext.parser.terminalrules.idea.highlighting
+
+class HiddenTerminalsTestLanguageColorSettingsPage extends HiddenTerminalsTestLanguageBaseColorSettingsPage {
+}

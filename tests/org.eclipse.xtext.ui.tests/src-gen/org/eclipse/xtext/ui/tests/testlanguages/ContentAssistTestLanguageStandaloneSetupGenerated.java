@@ -4,17 +4,26 @@
 package org.eclipse.xtext.ui.tests.testlanguages;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.ISetup;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.ISetupExtension;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+
+import java.util.List;
+import java.util.Arrays;
 
 /**
  * Generated from StandaloneSetup.xpt!
  */
 @SuppressWarnings("all")
-public class ContentAssistTestLanguageStandaloneSetupGenerated implements ISetup {
+public class ContentAssistTestLanguageStandaloneSetupGenerated implements ISetup, ISetupExtension {
+
+	@Override
+	public List<String> getFileExtensions() {
+		return Arrays.asList("contentassisttestlanguage");
+	}
 
 	@Override
 	public Injector createInjectorAndDoEMFRegistration() {

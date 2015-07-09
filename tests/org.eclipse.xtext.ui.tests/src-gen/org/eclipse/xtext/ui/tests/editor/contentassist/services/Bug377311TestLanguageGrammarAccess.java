@@ -132,7 +132,7 @@ public class Bug377311TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return tWS;
 	} 
 
-	//terminal NewLine:
+	/// * SuppressWarnings[InvalidTerminalRuleName] * / terminal NewLine:
 	//	"\r"? "\n";
 	public TerminalRule getNewLineRule() {
 		return tNewLine;

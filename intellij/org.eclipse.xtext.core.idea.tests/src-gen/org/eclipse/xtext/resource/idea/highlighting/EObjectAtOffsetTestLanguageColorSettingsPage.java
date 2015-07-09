@@ -1,4 +1,0 @@
-package org.eclipse.xtext.resource.idea.highlighting;
-
-public class EObjectAtOffsetTestLanguageColorSettingsPage extends EObjectAtOffsetTestLanguageBaseColorSettingsPage {
-}

@@ -1,0 +1,4 @@
+package org.eclipse.xtext.testlanguages.idea.highlighting
+
+class ReferenceGrammarTestLanguageColorSettingsPage extends ReferenceGrammarTestLanguageBaseColorSettingsPage {
+}

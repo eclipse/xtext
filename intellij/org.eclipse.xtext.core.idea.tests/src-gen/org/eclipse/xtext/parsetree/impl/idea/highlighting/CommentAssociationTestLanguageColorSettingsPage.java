@@ -1,4 +1,0 @@
-package org.eclipse.xtext.parsetree.impl.idea.highlighting;
-
-public class CommentAssociationTestLanguageColorSettingsPage extends CommentAssociationTestLanguageBaseColorSettingsPage {
-}

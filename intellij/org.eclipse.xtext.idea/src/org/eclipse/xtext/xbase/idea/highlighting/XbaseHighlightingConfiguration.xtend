@@ -14,6 +14,7 @@ import org.eclipse.xtext.idea.highlighting.DefaultHighlightingConfiguration
 
 import static org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles.*
 import static org.eclipse.xtext.xbase.ide.highlighting.XbaseHighlightingStyles.*
+import com.intellij.openapi.editor.DefaultLanguageHighlighterColors
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -31,6 +32,7 @@ class XbaseHighlightingConfiguration extends DefaultHighlightingConfiguration {
 		addStyle(TASK_ID, "Todo", CodeInsightColors.TODO_DEFAULT_ATTRIBUTES)
 		addStyle(STATIC_METHOD_INVOCATION, "Static method", CodeInsightColors.STATIC_METHOD_ATTRIBUTES)
 		addStyle(STATIC_FIELD, "Static field", CodeInsightColors.STATIC_FIELD_ATTRIBUTES)
+		addStyle(FIELD, "Field", DefaultLanguageHighlighterColors.INSTANCE_FIELD)
 		addStyle(ANNOTATION, "Annotation", CodeInsightColors.LOCAL_VARIABLE_ATTRIBUTES)
 		addStyle(EXTENSION_METHOD_INVOCATION, "Extension method", CodeInsightColors.LOCAL_VARIABLE_ATTRIBUTES)
 		addStyle(DEPRECATED_MEMBERS, "Deprecated members", CodeInsightColors.DEPRECATED_ATTRIBUTES)

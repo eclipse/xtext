@@ -1,0 +1,4 @@
+package org.eclipse.xtext.serializer.idea.highlighting
+
+class AssignmentFinderTestLanguageColorSettingsPage extends AssignmentFinderTestLanguageBaseColorSettingsPage {
+}
