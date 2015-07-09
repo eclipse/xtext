@@ -21,7 +21,7 @@ import org.eclipse.xtext.idea.parser.TokenTypeProvider
 class DefaultSyntaxHighlighter extends SyntaxHighlighterBase {
 
 	@Inject Provider<Lexer> lexerProvider
-	@Inject TextAttributeProvider textAttributeProvider
+	@Inject IdeaHighlightingAttributesProvider textAttributeProvider
 
 	@Inject extension TokenTypeProvider tokenTypeProvider
 	@Inject extension AbstractAntlrTokenToAttributeIdMapper tokenToAttributeIdMapper

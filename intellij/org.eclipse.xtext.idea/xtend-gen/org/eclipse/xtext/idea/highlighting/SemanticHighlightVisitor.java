@@ -16,14 +16,12 @@ import com.intellij.codeInsight.daemon.impl.HighlightInfoType;
 import com.intellij.codeInsight.daemon.impl.HighlightVisitor;
 import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder;
 import com.intellij.lang.Language;
-import com.intellij.lang.annotation.HighlightSeverity;
-import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
-import org.eclipse.xtext.idea.highlighting.TextAttributeProvider;
+import org.eclipse.xtext.idea.highlighting.IdeaHighlightingAttributesProvider;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -46,7 +44,7 @@ public class SemanticHighlightVisitor implements HighlightVisitor {
   
   @Inject
   @Extension
-  private TextAttributeProvider _textAttributeProvider;
+  private IdeaHighlightingAttributesProvider _textAttributeProvider;
   
   @Inject
   private Provider<SemanticHighlightVisitor> cloneProvider;
@@ -61,7 +59,7 @@ public class SemanticHighlightVisitor implements HighlightVisitor {
         final Procedure1<String> _function = new Procedure1<String>() {
           @Override
           public void apply(final String it) {
-            HighlightInfoType _highlightInfoType = SemanticHighlightVisitor.this.getHighlightInfoType(it);
+            HighlightInfoType _highlightInfoType = SemanticHighlightVisitor.this._textAttributeProvider.getHighlightInfoType(it);
             HighlightInfo.Builder _newHighlightInfo = HighlightInfo.newHighlightInfo(_highlightInfoType);
             HighlightInfo.Builder _range = _newHighlightInfo.range(offset, (offset + length));
             final HighlightInfo info = _range.create();
@@ -105,11 +103,6 @@ public class SemanticHighlightVisitor implements HighlightVisitor {
       XtextResource _resource = ((BaseXtextFile)element).getResource();
       this.highlightCalculator.provideHighlightingFor(_resource, this.acceptor);
     }
-  }
-  
-  public HighlightInfoType getHighlightInfoType(final String xtextStyle) {
-    TextAttributesKey _textAttributesKey = this._textAttributeProvider.getTextAttributesKey(xtextStyle);
-    return new HighlightInfoType.HighlightInfoTypeImpl(HighlightSeverity.INFORMATION, _textAttributesKey);
   }
   
   @Override

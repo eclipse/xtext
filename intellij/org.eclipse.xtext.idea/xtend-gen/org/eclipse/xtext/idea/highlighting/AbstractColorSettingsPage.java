@@ -16,12 +16,11 @@ import com.intellij.openapi.options.colors.ColorDescriptor;
 import com.intellij.openapi.options.colors.ColorSettingsPage;
 import com.intellij.psi.codeStyle.DisplayPriority;
 import com.intellij.psi.codeStyle.DisplayPrioritySortable;
-import java.util.Collection;
 import java.util.Map;
 import javax.swing.Icon;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.Icons;
-import org.eclipse.xtext.idea.highlighting.TextAttributeProvider;
+import org.eclipse.xtext.idea.highlighting.IdeaHighlightingAttributesProvider;
 import org.eclipse.xtext.xbase.lib.Conversions;
 
 /**
@@ -33,7 +32,7 @@ public abstract class AbstractColorSettingsPage implements ColorSettingsPage, In
   private SyntaxHighlighter highlighter;
   
   @Inject
-  private TextAttributeProvider textAttributeProvider;
+  private IdeaHighlightingAttributesProvider textAttributeProvider;
   
   private AttributesDescriptor[] descriptors;
   
@@ -43,7 +42,7 @@ public abstract class AbstractColorSettingsPage implements ColorSettingsPage, In
     if (this.descriptors != null) {
       _elvis = this.descriptors;
     } else {
-      Collection<AttributesDescriptor> _attributesDescriptors = this.textAttributeProvider.getAttributesDescriptors();
+      Iterable<AttributesDescriptor> _attributesDescriptors = this.textAttributeProvider.getAttributesDescriptors();
       _elvis = (this.descriptors = ((AttributesDescriptor[])Conversions.unwrapArray(_attributesDescriptors, AttributesDescriptor.class)));
     }
     return _elvis;

@@ -27,7 +27,7 @@ abstract class AbstractColorSettingsPage implements ColorSettingsPage, Inspectio
 
 	@Inject SyntaxHighlighter highlighter
 
-	@Inject TextAttributeProvider textAttributeProvider
+	@Inject IdeaHighlightingAttributesProvider textAttributeProvider
 	 
 	private AttributesDescriptor[] descriptors;
 
