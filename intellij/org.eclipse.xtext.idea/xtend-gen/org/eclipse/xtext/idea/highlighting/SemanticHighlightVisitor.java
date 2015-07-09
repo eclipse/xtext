@@ -44,7 +44,7 @@ public class SemanticHighlightVisitor implements HighlightVisitor {
   
   @Inject
   @Extension
-  private IdeaHighlightingAttributesProvider _textAttributeProvider;
+  private IdeaHighlightingAttributesProvider _ideaHighlightingAttributesProvider;
   
   @Inject
   private Provider<SemanticHighlightVisitor> cloneProvider;
@@ -59,7 +59,7 @@ public class SemanticHighlightVisitor implements HighlightVisitor {
         final Procedure1<String> _function = new Procedure1<String>() {
           @Override
           public void apply(final String it) {
-            HighlightInfoType _highlightInfoType = SemanticHighlightVisitor.this._textAttributeProvider.getHighlightInfoType(it);
+            HighlightInfoType _highlightInfoType = SemanticHighlightVisitor.this._ideaHighlightingAttributesProvider.getHighlightInfoType(it);
             HighlightInfo.Builder _newHighlightInfo = HighlightInfo.newHighlightInfo(_highlightInfoType);
             HighlightInfo.Builder _range = _newHighlightInfo.range(offset, (offset + length));
             final HighlightInfo info = _range.create();

@@ -11,7 +11,6 @@ import com.google.inject.Inject
 import com.intellij.application.options.colors.InspectionColorSettingsPage
 import com.intellij.openapi.editor.colors.TextAttributesKey
 import com.intellij.openapi.fileTypes.SyntaxHighlighter
-import com.intellij.openapi.options.colors.AttributesDescriptor
 import com.intellij.openapi.options.colors.ColorDescriptor
 import com.intellij.openapi.options.colors.ColorSettingsPage
 import com.intellij.psi.codeStyle.DisplayPriority
@@ -22,6 +21,7 @@ import org.eclipse.xtext.idea.Icons
 
 /** 
  * @author dhubner - Initial contribution and API
+ * @author Jan Koehnlein
  */
 abstract class AbstractColorSettingsPage implements ColorSettingsPage, InspectionColorSettingsPage, DisplayPrioritySortable {
 
@@ -29,10 +29,8 @@ abstract class AbstractColorSettingsPage implements ColorSettingsPage, Inspectio
 
 	@Inject IdeaHighlightingAttributesProvider textAttributeProvider
 	 
-	private AttributesDescriptor[] descriptors;
-
 	override getAttributeDescriptors() {
-		descriptors ?: (descriptors = textAttributeProvider.attributesDescriptors)
+		textAttributeProvider.attributesDescriptors
 	}
 	
 	override getHighlighter() {
@@ -55,10 +53,6 @@ abstract class AbstractColorSettingsPage implements ColorSettingsPage, Inspectio
 	}
 
 	abstract override String getDisplayName()
-
-	def AttributesDescriptor createDescriptor(String displayName, TextAttributesKey textAttr) {
-		return new AttributesDescriptor(displayName, textAttr)
-	}
 
 	override ColorDescriptor[] getColorDescriptors() {
 		return ColorDescriptor.EMPTY_ARRAY
