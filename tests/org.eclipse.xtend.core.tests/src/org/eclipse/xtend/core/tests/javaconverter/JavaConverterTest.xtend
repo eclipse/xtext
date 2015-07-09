@@ -29,6 +29,7 @@ import org.junit.Before
 import org.junit.Test
 
 import static org.eclipse.xtext.common.types.JvmVisibility.*
+import com.google.common.base.Splitter
 
 class JavaConverterTest extends AbstractXtendTestCase {
 	@Inject Provider<JavaConverter> javaConverterProvider
@@ -403,7 +404,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		assertNotNull(xtendClazz)
 	}
 
-	@Test def void testCommentsCase() throws Exception {
+	@Test def void testCommentsCase_01() throws Exception {
 		var xtendCode = toXtendCode(
 			'''
 		/**
@@ -421,7 +422,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 			/**/
 			void doStuff2() {
 				/* some comments */
-				return;
+				return; // rt SL comment
 			}
 		}''')
 		val expected = '''
@@ -441,18 +442,73 @@ class JavaConverterTest extends AbstractXtendTestCase {
 			/**/
 			def package void doStuff2() {
 				/* some comments */
-				return;
+				return;// rt SL comment
+				
 			}
 			
 		}'''
 		assertEquals(expected, xtendCode)
 	}
+	
+	@Test def void testCommentsCase_02() throws Exception {
+		var xtendCode = toXtendCode(
+			'''
+		public class TestComment {
+			String field = "d"; // last SL comment
+		}''')
+		val expected = '''
+		class TestComment {
+			package String field="d"
+			// last SL comment
+			
+		}'''
+		assertEquals(expected, xtendCode)
+	}
 
-	@Test def void testJavadocCase() throws Exception {
+	@Test def void testJavadocCase_01() throws Exception {
 
 		var String xtendCode = j2x.bodyDeclarationToXtend("/**@param p Param p*/public abstract void foo();", null,
 			null).xtendCode
 		assertTrue('''Javadoc Parameter well formed: «xtendCode»''', xtendCode.contains("@param p Param p"))
+	}
+
+	@Test def void testJavadocCase_02() throws Exception {
+
+		var String xtendCode = '''
+			/**
+			 * Copyright (c) 2015 - javadocteststring
+			 **/
+			package foo.javadoc;
+				
+			import java.util.Arrays;
+				
+			/**
+			 * Simple value
+			 * @author Dennis Huebner - Initial contribution and API
+			 */
+			public class TestJavadoc {
+			}
+		'''.toXtendCode
+		dump(xtendCode)
+		assertTrue('''Classfile Doc not copied''', xtendCode.contains("javadocteststring"))
+		assertEquals('''Classfile Doc copied once''', 2, Splitter.on("javadocteststring").split(xtendCode).size)
+		assertTrue('''Type Javadoc not copied''', xtendCode.contains("@author"))
+		assertEquals('''Type Javadoc not copied once''', 2, Splitter.on("@author").split(xtendCode).size)
+	}
+
+	@Test def void testJavadocCase_03() throws Exception {
+
+		var String xtendCode = j2x.bodyDeclarationToXtend("public abstract void foo() { /** orphaned javadoc */ };", null, null).
+			xtendCode
+		assertEquals('''Javadoc Parameter well formed: «xtendCode»''', 
+		'''
+		def abstract void foo() {
+			/** 
+			 * orphaned javadoc 
+			 */
+			
+		}
+		'''.toString, xtendCode)
 	}
 
 	@Test def void testCastCase() throws Exception {
@@ -798,14 +854,14 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		var XtendClass clazz = toValidXtendClass(
 			'''
 		public class Clazz { 
-			public static main(String[] args) {
-				int[] ints = new int[]{1,2,3,4,5};
-				int in = 2;
-				System.out.println("3="+(ints[in]++));
-				System.out.println("4="+(ints[in]--));
-				System.out.println("1="+(--ints[in]));
-				System.out.println("5="+(++ints[in]));
-			}
+			public static void main(String[] args) {
+					int[] ints = new int[]{1,2,40,44,5,6,7};
+					int in = 3;
+					System.out.println("44="+(ints[in]++));
+					System.out.println("45="+(ints[in]--));
+					System.out.println("43="+(--ints[in]));
+					System.out.println("44="+(++ints[in]));
+				}
 		}''')
 		assertNotNull(clazz)
 	}
@@ -815,7 +871,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		var XtendClass clazz = toValidXtendClass(
 			'''
 		public class Clazz { 
-			public static main(String[] args) {
+			public static void main(String[] args) {
 				int[] ints = new int[]{1,2,3,4,5};
 				int in = 2;
 				System.out.println("3="+(ints[in++]++));
@@ -825,6 +881,26 @@ class JavaConverterTest extends AbstractXtendTestCase {
 			}
 		}''')
 		assertNotNull(clazz)
+	}
+	
+	@Test def void testPostfixArrayAccess() throws Exception {
+		val javaCode = '''
+			private int ar[] = new int[1];
+			public void arPostReturn() {
+				System.out.println(ar[0]++);
+			}
+			public void arPostNoReturn() {
+				ar[0]++;
+			}
+		'''
+		assertEquals('''
+		int[] ar=newIntArrayOfSize(1)
+		def void arPostReturn() {
+			System.out.println({ var _postIndx_ar=0 var  _postVal_ar={val _rdIndx_ar=_postIndx_ar ar.get(_rdIndx_ar)}{ val _wrVal_ar=ar val _wrIndx_ar=_postIndx_ar _wrVal_ar.set(_wrIndx_ar,_postVal_ar + 1)}_postVal_ar }) 
+		}
+		def void arPostNoReturn() {
+			{ var _postIndx_ar=0 var  _postVal_ar={val _rdIndx_ar=_postIndx_ar ar.get(_rdIndx_ar)}{ val _wrVal_ar=ar val _wrIndx_ar=_postIndx_ar _wrVal_ar.set(_wrIndx_ar,_postVal_ar + 1)} } 
+		}'''.toString, toXtendClassBodyDeclr(javaCode))
 	}
 
 	@Test def void testRichStringCase() throws Exception {
@@ -1458,8 +1534,8 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 		return file(xtendCode, true)
 	}
 
-	def private String toXtendCode(String javaCode) throws Exception {
-		return j2x.toXtend("Temp", javaCode).getXtendCode()
+	def private String toXtendCode(CharSequence javaCode) throws Exception {
+		return j2x.toXtend("Temp", javaCode.toString).getXtendCode()
 	}
 
 	def XtendField field(XtendTypeDeclaration typeDecl, int i) {

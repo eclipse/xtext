@@ -129,6 +129,7 @@ public class JavaCodeAnalyzer {
     final ASTParser parser = ASTParser.newParser(_asJLS);
     final Hashtable options = JavaCore.getOptions();
     JavaCore.setComplianceOptions(compilerCompliance, options);
+    options.put(JavaCore.COMPILER_DOC_COMMENT_SUPPORT, JavaCore.ENABLED);
     parser.setCompilerOptions(options);
     return parser;
   }

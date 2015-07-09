@@ -15,10 +15,12 @@ import java.net.URLClassLoader;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.Block;
@@ -91,12 +93,24 @@ public class JavaConverter implements IJavaCodeConverter {
       parser.setResolveBindings(true);
       parser.setBindingsRecovery(true);
       parser.setSource(cu);
+      IJavaProject _javaProject = cu.getJavaProject();
+      this.tweakOptions(parser, _javaProject);
       final ASTNode root = parser.createAST(null);
       String _source = cu.getSource();
       Set<ASTNode> _singleton = Collections.<ASTNode>singleton(root);
       return this.executeAstFlattener(_source, _singleton);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public void tweakOptions(final ASTParser parser, final IJavaProject project) {
+    boolean _notEquals = (!Objects.equal(project, null));
+    if (_notEquals) {
+      final Map options = project.getOptions(true);
+      options.remove(JavaCore.COMPILER_TASK_TAGS);
+      options.put(JavaCore.COMPILER_DOC_COMMENT_SUPPORT, JavaCore.ENABLED);
+      parser.setCompilerOptions(options);
     }
   }
   
@@ -171,6 +185,7 @@ public class JavaConverter implements IJavaCodeConverter {
     boolean _notEquals = (!Objects.equal(proj, null));
     if (_notEquals) {
       parser.setProject(proj);
+      this.tweakOptions(parser, proj);
     } else {
       final ClassLoader sysClassLoader = ClassLoader.getSystemClassLoader();
       URL[] _uRLs = ((URLClassLoader) sysClassLoader).getURLs();
