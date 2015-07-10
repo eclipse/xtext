@@ -5,7 +5,6 @@ import org.eclipse.emf.mwe.utils.DirectoryCleaner;
 import org.eclipse.emf.mwe.utils.StandaloneSetup;
 import org.eclipse.emf.mwe2.ecore.EcoreGenerator;
 import org.eclipse.xtext.generator.adapter.FragmentAdapter;
-import org.eclipse.xtext.generator.builder.BuilderIntegrationFragment;
 import org.eclipse.xtext.generator.formatting2.Formatter2Fragment;
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment;
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions;
@@ -27,6 +26,7 @@ import org.eclipse.xtext.xtext.generator.DefaultGeneratorModule;
 import org.eclipse.xtext.xtext.generator.LanguageConfig2;
 import org.eclipse.xtext.xtext.generator.XtextGenerator;
 import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2;
 
@@ -47,7 +47,7 @@ final class GenerateXbase {
 		final boolean memoize = false;
 		final String lineDelimiter = "\n";
 		final String fileHeader = "/*******************************************************************************\n" +
-			" * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.\n" +
+			" * Copyright (c) 2010-${year} itemis AG (http://www.itemis.eu) and others.\n" +
 			" * All rights reserved. This program and the accompanying materials\n" +
 			" * are made available under the terms of the Eclipse Public License v1.0\n" +
 			" * which accompanies this distribution, and is available at\n" +
@@ -156,7 +156,7 @@ final class GenerateXbase {
 				xbase.setUseInferredJvmModel(false);
 				xbase.setJdtTypeHierarchy(false);
 				addFragment(xbase);
-				addFragment(new FragmentAdapter(new BuilderIntegrationFragment()));
+				addFragment(new BuilderIntegrationFragment2());
 				addFragment(new FragmentAdapter(new Formatter2Fragment()));
 				addFragment(new FragmentAdapter(new QuickfixProviderFragment()));
 				LabelProviderFragment label = new LabelProviderFragment();
@@ -197,7 +197,7 @@ final class GenerateXbase {
 				xbase.setUseInferredJvmModel(false);
 				xbase.setJdtTypeHierarchy(false);
 				addFragment(xbase);
-				addFragment(new FragmentAdapter(new BuilderIntegrationFragment()));
+				addFragment(new BuilderIntegrationFragment2());
 				addFragment(new FragmentAdapter(new Formatter2Fragment()));
 				addFragment(new FragmentAdapter(new QuickfixProviderFragment()));
 				LabelProviderFragment label = new LabelProviderFragment();
