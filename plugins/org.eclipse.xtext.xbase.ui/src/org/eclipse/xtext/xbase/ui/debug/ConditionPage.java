@@ -43,7 +43,7 @@ public class ConditionPage extends JavaBreakpointPage {
 	
 	@Override
 	protected void doStore() throws CoreException {
-		if (editor.isDirty()) {
+		if (editor != null && editor.isDirty()) {
 			editor.doSave();
 		}
 	}
@@ -56,7 +56,7 @@ public class ConditionPage extends JavaBreakpointPage {
 			Object sourceUri = marker.getAttribute(StratumBreakpointAdapterFactory.ORG_ECLIPSE_XTEXT_XBASE_SOURCE_URI);
 			if (sourceUri != null) {
 				setTitle("Condition");
-				editor = new JavaBreakpointConditionEditor();
+				final JavaBreakpointConditionEditor editor = new JavaBreakpointConditionEditor();
 				editor.createControl(parent);
 				editor.addPropertyListener(new IPropertyListener() {
 					@Override
@@ -73,13 +73,15 @@ public class ConditionPage extends JavaBreakpointPage {
 						}
 					}
 				});
-				URI uri = URI.createURI((String) marker.getAttribute(StratumBreakpointAdapterFactory.ORG_ECLIPSE_XTEXT_XBASE_SOURCE_URI));
+				URI uri = URI.createURI(String.valueOf(sourceUri));
 				JavaBreakPointProvider breakPointProvider = registry.getResourceServiceProvider(uri).get(JavaBreakPointProvider.class);
 				editor.setInput(breakPointProvider.getBreakpointWithJavaLocation((IJavaStratumLineBreakpoint) breakpoint));
+				// set this editor only if it was correctly initialized
+				this.editor = editor;
 			}
 		} catch (CoreException e) {
 			setErrorMessage(e.getMessage());
-		}
+		} 
 	}
 	
 }
