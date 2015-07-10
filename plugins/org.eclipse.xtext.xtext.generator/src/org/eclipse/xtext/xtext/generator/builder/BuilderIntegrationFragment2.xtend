@@ -44,14 +44,14 @@ class BuilderIntegrationFragment2 extends AbstractGeneratorFragment2 {
 			'''binder.bind(«IResourceDescriptions».class).to(«ResourceSetBasedResourceDescriptions».class);'''
 		val StringConcatenationClient statement2 =
 			'''binder.bind(«IResourceDescriptions».class).annotatedWith(«Names».named(«ResourceDescriptionsProvider».PERSISTED_DESCRIPTIONS)).to(«ResourceSetBasedResourceDescriptions».class);'''
-		val bindingFactory = new GuiceModuleAccess.BindingFactory()
+		new GuiceModuleAccess.BindingFactory()
 			.addTypeToType(IContainer.Manager.typeRef,
 					StateBasedContainerManager.typeRef)
 			.addTypeToType(IAllContainersState.Provider.typeRef,
 					ResourceSetBasedAllContainersStateProvider.typeRef)
 			.addConfiguredBinding(IResourceDescriptions.simpleName, statement1)
 			.addConfiguredBinding(IResourceDescriptions.simpleName + 'Persisted', statement2)
-		bindingFactory.contributeTo(language.runtimeGenModule)
+			.contributeTo(language.runtimeGenModule)
 	}
 
 	protected def addEclipsePluginGuiceBindings(LanguageConfig2 language) {
@@ -59,7 +59,7 @@ class BuilderIntegrationFragment2 extends AbstractGeneratorFragment2 {
 			'''binder.bind(«IResourceDescriptions».class).annotatedWith(«Names».named(«ResourceDescriptionsProvider».NAMED_BUILDER_SCOPE)).to(«'org.eclipse.xtext.builder.clustering.CurrentDescriptions.ResourceSetAware'.typeRef».class);'''
 		val StringConcatenationClient statement2 =
 			'''binder.bind(«IResourceDescriptions».class).annotatedWith(«Names».named(«ResourceDescriptionsProvider».PERSISTED_DESCRIPTIONS)).to(«'org.eclipse.xtext.builder.builderState.IBuilderState'.typeRef».class);'''
-		val bindingFactory = new GuiceModuleAccess.BindingFactory()
+		new GuiceModuleAccess.BindingFactory()
 			.addConfiguredBinding(IResourceDescriptions.simpleName + 'BuilderScope', statement1)
 			.addTypeToType('org.eclipse.xtext.ui.editor.IXtextEditorCallback'.typeRef,
 					'org.eclipse.xtext.builder.nature.NatureAddingEditorCallback'.typeRef)
@@ -68,7 +68,7 @@ class BuilderIntegrationFragment2 extends AbstractGeneratorFragment2 {
 			.addConfiguredBinding(IResourceDescriptions.simpleName + 'Persisted', statement2)
 			.addTypeToType('org.eclipse.xtext.ui.editor.DocumentBasedDirtyResource'.typeRef,
 					'org.eclipse.xtext.builder.impl.PersistentDataAwareDirtyResource'.typeRef)
-		bindingFactory.contributeTo(language.eclipsePluginGenModule)
+			.contributeTo(language.eclipsePluginGenModule)
 	}
 	
 }

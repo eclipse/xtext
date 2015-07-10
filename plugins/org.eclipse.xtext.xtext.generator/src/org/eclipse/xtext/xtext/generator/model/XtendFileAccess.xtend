@@ -7,16 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.model
 
+import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.xtext.generator.CodeConfig
 
 class XtendFileAccess extends JavaFileAccess {
 	
-	new(String qualifiedName, CodeConfig codeConfig) {
-		super(qualifiedName, codeConfig)
-	}
-	
-	new(TypeReference typeRef, CodeConfig codeConfig) {
-		super(typeRef, codeConfig)
+	protected new(TypeReference typeRef, CodeConfig codeConfig, IEncodingProvider encodingProvider) {
+		super(typeRef, codeConfig, encodingProvider)
 	}
 	
 	override protected getFileExtension() {

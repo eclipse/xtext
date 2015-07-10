@@ -9,9 +9,12 @@ package org.eclipse.xtext.xtext.generator.model
 
 import java.util.Collections
 import java.util.List
+import java.util.regex.Pattern
+import org.eclipse.emf.ecore.EClass
+import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.EqualsHashCode
-import java.util.regex.Pattern
+import org.eclipse.xtext.xtext.generator.GenModelUtil
 
 @Accessors
 @EqualsHashCode
@@ -23,6 +26,10 @@ class TypeReference {
 	
 	static def TypeReference typeRef(Class<?> clazz, Class<?>... arguments) {
 		new TypeReference(clazz, arguments.map[new TypeReference(it)])
+	}
+	
+	static def TypeReference typeRef(EClass clazz, ResourceSet resourceSet, EClass... arguments) {
+		new TypeReference(clazz, resourceSet, arguments.map[new TypeReference(it, resourceSet)])
 	}
 	
 	static val PACKAGE_MATCHER = Pattern.compile('[a-z][a-zA-Z0-9_]*(\\.[a-z][a-zA-Z0-9_]*)*')
@@ -75,6 +82,14 @@ class TypeReference {
 			simpleNames.add(0, c.simpleName)
 			c = c.declaringClass
 		} while (c !== null)
+	}
+	
+	new(EClass clazz, ResourceSet resourceSet) {
+		this(clazz, resourceSet, null)
+	}
+	
+	new(EClass clazz, ResourceSet resourceSet, List<TypeReference> arguments) {
+		this(GenModelUtil.getGenClass(clazz, resourceSet).qualifiedInterfaceName, arguments)
 	}
 	
 	private static def getPackageName(String qualifiedName) {
