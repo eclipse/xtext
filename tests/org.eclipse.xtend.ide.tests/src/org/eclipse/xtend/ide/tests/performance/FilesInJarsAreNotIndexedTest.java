@@ -47,7 +47,7 @@ public class FilesInJarsAreNotIndexedTest extends AbstractXtendUITestCase {
 		IJavaProject javaProject = JavaCore.create(project);
 		addSourceFolder(javaProject, "src");
 		IFile file = workbenchTestHelper.createFile("src/my/XtendClass.xtend", "package my class XtendClass { } ");
-		waitForAutoBuild();
+		waitForBuild();
 		IResourceDescriptions descriptions = descriptionsProvider.get();
 		assertEquals(URI.createPlatformResourceURI(file.getFullPath().toString(), true), descriptions.getAllResourceDescriptions().iterator().next().getURI());
 	}
@@ -69,7 +69,7 @@ public class FilesInJarsAreNotIndexedTest extends AbstractXtendUITestCase {
 				"  }\n" +
 				" } ");
 		addJarToClasspath(javaProject, copyAndGetXtendExampleJar(javaProject));
-		waitForAutoBuild();
+		waitForBuild();
 		IMarker[] markers = file.findMarkers(IMarker.PROBLEM, true, -1);
 		if (markers.length>0) {
 			fail("No markers expected but got: "+markers[0].getAttribute(IMarker.MESSAGE));

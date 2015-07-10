@@ -65,10 +65,10 @@ public class XtendLibClasspathAdderTest extends AbstractXtendUITestCase {
 		IFile file = project.getFile("src/Foo.xtend");
 		file.create(new StringInputStream("import org.eclipse.xtend.lib.annotations.Accessors class Foo { @Accessors int bar }"),
 				true, null);
-		IResourcesSetupUtil.waitForAutoBuild();
+		IResourcesSetupUtil.waitForBuild();
 		markerAssert.assertErrorMarker(file, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		adder.addLibsToClasspath(javaProject, null);
-		IResourcesSetupUtil.waitForAutoBuild();
+		IResourcesSetupUtil.waitForBuild();
 		markerAssert.assertNoErrorMarker(file);
 	}
 
@@ -86,10 +86,10 @@ public class XtendLibClasspathAdderTest extends AbstractXtendUITestCase {
 		IFile file = project.getFile("src/Foo.xtend");
 		file.create(new StringInputStream("import org.eclipse.xtend.lib.annotations.Accessors class Foo { @Accessors int bar }"),
 				true, null);
-		IResourcesSetupUtil.waitForAutoBuild();
+		IResourcesSetupUtil.waitForBuild();
 		markerAssert.assertErrorMarker(file, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		adder.addLibsToClasspath(javaProject, null);
-		IResourcesSetupUtil.waitForAutoBuild();
+		IResourcesSetupUtil.waitForBuild();
 		markerAssert.assertNoErrorMarker(file);
 	}
 
@@ -108,10 +108,10 @@ public class XtendLibClasspathAdderTest extends AbstractXtendUITestCase {
 		IFile file = project.getFile("src/Foo.xtend");
 		file.create(new StringInputStream("import org.eclipse.xtend.lib.annotations.Accessors class Foo { @Accessors int bar }"),
 				true, null);
-		IResourcesSetupUtil.waitForAutoBuild();
+		IResourcesSetupUtil.waitForBuild();
 		markerAssert.assertErrorMarker(file, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		adder.addLibsToClasspath(javaProject, null);
-		IResourcesSetupUtil.waitForAutoBuild();
+		IResourcesSetupUtil.waitForBuild();
 		markerAssert.assertNoErrorMarker(file);
 	}
 

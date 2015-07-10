@@ -142,7 +142,7 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
       _builder_1.append("}");
       _builder_1.newLine();
       final IFile type2 = this.workbenchTestHelper.createFile("otherpack/Annotation.xtend", _builder_1.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertHasErrors(type1, "same project");
       IProject _project = type2.getProject();
       final IFile file = _project.getFile("xtend-gen/mypackage/ShouldNotExist.java");
@@ -160,7 +160,7 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
       _builder_2.newLine();
       StringInputStream _stringInputStream = new StringInputStream(_builder_2.toString());
       type1.setContents(_stringInputStream, true, true, null);
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       boolean _exists_1 = file.exists();
       Assert.assertFalse(_exists_1);
       this.assertHasErrors(type1, "same project");
@@ -253,7 +253,7 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
       _builder_1.append("}");
       _builder_1.newLine();
       final IFile type1 = IResourcesSetupUtil.createFile(_path_1, _builder_1.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertNoErrorsInWorkspace();
       IProject _project_1 = type1.getProject();
       final IFile file = _project_1.getFile("xtend-gen/mypackage/ShouldExist.java");
@@ -271,7 +271,7 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
       _builder_2.newLine();
       StringInputStream _stringInputStream = new StringInputStream(_builder_2.toString());
       type1.setContents(_stringInputStream, true, true, null);
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       boolean _exists_1 = file.exists();
       Assert.assertTrue(_exists_1);
       this.assertNoErrorsInWorkspace();
@@ -366,7 +366,7 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
       _builder_2.append("}");
       _builder_2.newLine();
       this.workbenchTestHelper.createFile("otherpack/Processor.java", _builder_2.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertHasErrors(type1, "same project");
       IProject _project = type2.getProject();
       final IFile file = _project.getFile("xtend-gen/mypackage/ShouldNotExist.java");
@@ -384,7 +384,7 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
       _builder_3.newLine();
       StringInputStream _stringInputStream = new StringInputStream(_builder_3.toString());
       type1.setContents(_stringInputStream, true, true, null);
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       boolean _exists_1 = file.exists();
       Assert.assertFalse(_exists_1);
       this.assertHasErrors(type1, "same project");
@@ -431,7 +431,7 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
       _builder_1.append("}");
       _builder_1.newLine();
       final IFile type2 = this.workbenchTestHelper.createFile("otherpack/Client.xtend", _builder_1.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertNoErrorsInWorkspace();
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("package otherpack;");
@@ -460,7 +460,7 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
       _builder_2.newLine();
       StringInputStream _stringInputStream = new StringInputStream(_builder_2.toString());
       type2.setContents(_stringInputStream, true, true, null);
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertNoErrorsInWorkspace();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -487,7 +487,7 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
       _builder.append("}");
       _builder.newLine();
       this.workbenchTestHelper.createFile("mypack/Client.xtend", _builder.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertNoErrorsInWorkspace();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

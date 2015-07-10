@@ -119,7 +119,7 @@ public class JdtBasedProcessorProviderTest {
       _builder_1.newLine();
       this.newSource(libProject, "mylib/Lib.xtend", _builder_1.toString());
       this.addExportedPackage(libProject, "mylib");
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IProject _createPluginProject_2 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
         "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject", "libProject");
       final IJavaProject userProject = JavaCore.create(_createPluginProject_2);
@@ -213,7 +213,7 @@ public class JdtBasedProcessorProviderTest {
       _builder_1.newLine();
       this.newSource(macroProject, "annotation/MyAA.xtend", _builder_1.toString());
       this.addExportedPackage(macroProject, "annotation");
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IProject _createPluginProject_2 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
         "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject");
       final IJavaProject userProject = JavaCore.create(_createPluginProject_2);
@@ -330,7 +330,7 @@ public class JdtBasedProcessorProviderTest {
       _builder_1.append("}");
       _builder_1.newLine();
       this.newSource(macroProject, "annotation/MyAA.xtend", _builder_1.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       final IJavaProject userProject = this.xtendProject("userProject", macroProject);
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("package client");
@@ -410,7 +410,7 @@ public class JdtBasedProcessorProviderTest {
       _builder.append("}");
       _builder.newLine();
       this.newSource(macroProject, "annotation/MyAA.xtend", _builder.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       final IJavaProject userProject = this.xtendProject("userProject", macroProject);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package client;");

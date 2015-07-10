@@ -48,7 +48,7 @@ class DirtyEditorFilteringContentAssistTests extends AbstractXtendUITestCase{
 			class Client extends MyDirtyType|{
 			}
 		'''
-		waitForAutoBuild
+		waitForBuild
 		val clientEditor = openEditor("foo/Client.xtend",clientModel)
 		fooEditor.document.set('''
 			package foo
@@ -74,7 +74,7 @@ class DirtyEditorFilteringContentAssistTests extends AbstractXtendUITestCase{
 				}
 			}
 		'''
-		waitForAutoBuild
+		waitForBuild
 		val clientEditor = openEditor("foo/Client.xtend",clientModel)
 		fooEditor.document.set('''
 			package foo

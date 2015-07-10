@@ -54,7 +54,7 @@ class Bug456868Test extends AbstractXtendUITestCase {
 			}
 		''')
 		
-		waitForAutoBuild()
+		waitForBuild()
 		assertNoErrorsInWorkspace
 		val generatedJava = file("my project/xtend-gen/MyClass.java")
 		assertTrue(generatedJava.exists)

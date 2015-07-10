@@ -89,7 +89,7 @@ class LiveShadowedAllContainerStateTest {
 		addNature(project, XtextProjectHelper.NATURE_ID)
 		val fileName = "MyProject/myfile." + primaryFileExtension
 		createFile(fileName, "stuff foo")
-		waitForAutoBuild()
+		waitForBuild()
 		val rs = liveScopeResourceSetProvider.get(project)
 		val expected = '''
 			container MyProject isEmpty=false {
@@ -104,7 +104,7 @@ class LiveShadowedAllContainerStateTest {
 		addNature(project, XtextProjectHelper.NATURE_ID)
 		val fileName = "MyProject/myfile." + primaryFileExtension
 		createFile(fileName, "stuff foo")
-		waitForAutoBuild()
+		waitForBuild()
 		val rs = liveScopeResourceSetProvider.get(project)
 		assertNotNull(rs.getResource(createPlatformResourceURI(fileName, true), true))
 		val expected = '''
@@ -120,7 +120,7 @@ class LiveShadowedAllContainerStateTest {
 		addNature(project, XtextProjectHelper.NATURE_ID)
 		val fileName = "MyProject/myfile1." + primaryFileExtension
 		createFile(fileName, "stuff foo")
-		waitForAutoBuild()
+		waitForBuild()
 		val rs = liveScopeResourceSetProvider.get(project)
 		val resource = rs.createResource(createPlatformResourceURI("MyProject/myfile2." + primaryFileExtension, true))
 		resource.load(new StringInputStream("stuff bar"), emptyMap)

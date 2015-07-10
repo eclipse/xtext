@@ -136,7 +136,7 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 				"org.eclipse.xtend.core.tests",
 				"org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"))
 		sourceFile = userProject.newSource(clientFile.key, clientFile.value.toString)
-		waitForAutoBuild()
+		waitForBuild()
 		
 		val resourceSet = resourceSetProvider.get(userProject.project)
 		val resource = resourceSet.getResource(URI.createPlatformResourceURI(sourceFile.fullPath.toString, true), true)

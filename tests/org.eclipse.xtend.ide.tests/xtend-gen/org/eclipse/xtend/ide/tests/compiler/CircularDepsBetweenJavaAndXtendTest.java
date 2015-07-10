@@ -98,7 +98,7 @@ public class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase
       _builder_3.append("}");
       _builder_3.newLine();
       this.workbenchTestHelper.createFile("XtendClient.xtend", _builder_3.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertNoErrorsInWorkspace();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -138,7 +138,7 @@ public class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase
       _builder_2.append("}");
       _builder_2.newLine();
       this.workbenchTestHelper.createFile("XtendClass.xtend", _builder_2.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertNoErrorsInWorkspace();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -169,7 +169,7 @@ public class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase
       _builder_1.append("}");
       _builder_1.newLine();
       this.workbenchTestHelper.createFile("XtendClass.xtend", _builder_1.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertNoErrorsInWorkspace();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -231,7 +231,7 @@ public class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase
       _builder_2.append("}");
       _builder_2.newLine();
       final IFile file3 = this.workbenchTestHelper.createFile("test/FooUser.xtend", _builder_2.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IMarker[] _findMarkers = file1.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
       int _length = _findMarkers.length;
       Assert.assertEquals(0, _length);

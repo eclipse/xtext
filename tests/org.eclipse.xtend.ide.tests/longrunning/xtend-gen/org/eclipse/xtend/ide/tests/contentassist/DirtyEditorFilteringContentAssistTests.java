@@ -80,7 +80,7 @@ public class DirtyEditorFilteringContentAssistTests extends AbstractXtendUITestC
       _builder_1.append("}");
       _builder_1.newLine();
       final String clientModel = _builder_1.toString();
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       final XtextEditor clientEditor = this._workbenchTestHelper.openEditor("foo/Client.xtend", clientModel);
       IXtextDocument _document = fooEditor.getDocument();
       StringConcatenation _builder_2 = new StringConcatenation();
@@ -143,7 +143,7 @@ public class DirtyEditorFilteringContentAssistTests extends AbstractXtendUITestC
       _builder_1.append("}");
       _builder_1.newLine();
       final String clientModel = _builder_1.toString();
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       final XtextEditor clientEditor = this._workbenchTestHelper.openEditor("foo/Client.xtend", clientModel);
       IXtextDocument _document = fooEditor.getDocument();
       StringConcatenation _builder_2 = new StringConcatenation();

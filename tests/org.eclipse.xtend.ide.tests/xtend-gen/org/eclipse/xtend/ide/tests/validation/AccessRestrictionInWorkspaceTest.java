@@ -234,7 +234,7 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
     JavaCore.create(_createPluginProject_1);
     IProject _createPluginProject_2 = WorkbenchTestHelper.createPluginProject("thirdProject", "secondProject");
     JavaCore.create(_createPluginProject_2);
-    IResourcesSetupUtil.waitForAutoBuild();
+    IResourcesSetupUtil.waitForBuild();
   }
   
   @After

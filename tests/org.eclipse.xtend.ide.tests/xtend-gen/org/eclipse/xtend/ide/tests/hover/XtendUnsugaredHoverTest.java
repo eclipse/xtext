@@ -97,7 +97,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     String _string_1 = _builder_1.toString();
     this.testHelper.createFile("testpackage/ExtensionJava.java", _string_1);
-    IResourcesSetupUtil.waitForAutoBuild();
+    IResourcesSetupUtil.waitForBuild();
   }
   
   @After
@@ -136,7 +136,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     String _string = _builder.toString();
     final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    IResourcesSetupUtil.waitForAutoBuild();
+    IResourcesSetupUtil.waitForBuild();
     EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
     Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
     XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
@@ -178,7 +178,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     String _string = _builder.toString();
     final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    IResourcesSetupUtil.waitForAutoBuild();
+    IResourcesSetupUtil.waitForBuild();
     EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
     Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
     XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
@@ -223,7 +223,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     String _string = _builder.toString();
     final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    IResourcesSetupUtil.waitForAutoBuild();
+    IResourcesSetupUtil.waitForBuild();
     EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
     Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
     XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
@@ -265,7 +265,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     String _string = _builder.toString();
     final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    IResourcesSetupUtil.waitForAutoBuild();
+    IResourcesSetupUtil.waitForBuild();
     EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
     Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
     XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
@@ -309,7 +309,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     String _string = _builder.toString();
     final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    IResourcesSetupUtil.waitForAutoBuild();
+    IResourcesSetupUtil.waitForBuild();
     EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
     Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
     XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
@@ -353,7 +353,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     String _string = _builder.toString();
     final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    IResourcesSetupUtil.waitForAutoBuild();
+    IResourcesSetupUtil.waitForBuild();
     EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
     Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
     XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
@@ -403,7 +403,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     String _string = _builder.toString();
     final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    IResourcesSetupUtil.waitForAutoBuild();
+    IResourcesSetupUtil.waitForBuild();
     EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
     Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
     XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
@@ -456,7 +456,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     String _string = _builder.toString();
     final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    IResourcesSetupUtil.waitForAutoBuild();
+    IResourcesSetupUtil.waitForBuild();
     EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
     Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
     XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
@@ -500,7 +500,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     String _string = _builder.toString();
     final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    IResourcesSetupUtil.waitForAutoBuild();
+    IResourcesSetupUtil.waitForBuild();
     EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
     Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
     XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
@@ -547,7 +547,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     String _string = _builder.toString();
     final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    IResourcesSetupUtil.waitForAutoBuild();
+    IResourcesSetupUtil.waitForBuild();
     EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
     Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
     XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
@@ -591,7 +591,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     String _string = _builder.toString();
     final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    IResourcesSetupUtil.waitForAutoBuild();
+    IResourcesSetupUtil.waitForBuild();
     EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
     Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
     XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
@@ -633,7 +633,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     String _string = _builder.toString();
     final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    IResourcesSetupUtil.waitForAutoBuild();
+    IResourcesSetupUtil.waitForBuild();
     EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
     Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
     XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
@@ -675,7 +675,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     String _string = _builder.toString();
     final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    IResourcesSetupUtil.waitForAutoBuild();
+    IResourcesSetupUtil.waitForBuild();
     EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
     Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
     XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
@@ -711,7 +711,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     String _string = _builder.toString();
     final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    IResourcesSetupUtil.waitForAutoBuild();
+    IResourcesSetupUtil.waitForBuild();
     EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
     Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
     XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
@@ -753,7 +753,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     String _string = _builder.toString();
     final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    IResourcesSetupUtil.waitForAutoBuild();
+    IResourcesSetupUtil.waitForBuild();
     EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
     Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
     XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
@@ -801,7 +801,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     String _string = _builder.toString();
     final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    IResourcesSetupUtil.waitForAutoBuild();
+    IResourcesSetupUtil.waitForBuild();
     EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
     Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
     XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
@@ -850,7 +850,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     String _string = _builder.toString();
     final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    IResourcesSetupUtil.waitForAutoBuild();
+    IResourcesSetupUtil.waitForBuild();
     EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
     Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
     XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
@@ -890,7 +890,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     String _string = _builder.toString();
     final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    IResourcesSetupUtil.waitForAutoBuild();
+    IResourcesSetupUtil.waitForBuild();
     EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
     Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
     XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
@@ -932,7 +932,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     String _string = _builder.toString();
     final XtendFile xtendFile = this.testHelper.xtendFile(XtendUnsugaredHoverTest.FILEPATH, _string);
-    IResourcesSetupUtil.waitForAutoBuild();
+    IResourcesSetupUtil.waitForBuild();
     EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
     Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
     XtendClass _head = IterableExtensions.<XtendClass>head(_filter);

@@ -121,7 +121,7 @@ public class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile fooFile = this.testHelper.xtendFile("Foo", _builder.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       EList<XtendTypeDeclaration> _xtendTypes = fooFile.getXtendTypes();
       XtendTypeDeclaration _get = _xtendTypes.get(0);
       final XtendClass fooClass = ((XtendClass) _get);

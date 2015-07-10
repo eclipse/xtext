@@ -25,9 +25,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaElement;
@@ -36,6 +34,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.xtext.common.types.tests.AbstractActivator;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.PluginUtil;
 import org.eclipse.xtext.ui.util.JREContainerProvider;
@@ -97,7 +96,7 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 			createFile(fileToCopy.substring(0, fileToCopy.length() - ".txt".length()), srcFolder, contentAsString);
 		}
 		createFile("ClassWithDefaultPackage.java", sourceFolder, "public class ClassWithDefaultPackage {}");
-		waitForAutoBuild();
+		IResourcesSetupUtil.waitForBuild();
 	}
 
 	protected static void createFolderRecursively(IFolder folder) throws CoreException {
@@ -197,25 +196,8 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 	}
 	
 	protected static void refreshExternalArchives(IJavaProject p) throws JavaModelException {
-		waitForAutoBuild(); // ensure that the auto-build job doesn't interfere with external jar refreshing
+		IResourcesSetupUtil.waitForBuild();
 		getJavaModel().refreshExternalArchives(new IJavaElement[] {p}, null);
-	}
-	
-	/**
-	 * Wait for autobuild notification to occur
-	 */
-	public static void waitForAutoBuild() {
-		boolean wasInterrupted = false;
-		do {
-			try {
-				Job.getJobManager().join(ResourcesPlugin.FAMILY_AUTO_BUILD, null);
-				wasInterrupted = false;
-			} catch (OperationCanceledException e) {
-				e.printStackTrace();
-			} catch (InterruptedException e) {
-				wasInterrupted = true;
-			}
-		} while (wasInterrupted);
 	}
 	
 	/**
@@ -227,21 +209,6 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 	
 	public static void refresh(final IJavaProject javaProject) throws CoreException {
 		javaProject.getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
-		waitForManualRefresh();
-	}
-	
-	public static void waitForManualRefresh() {
-		boolean wasInterrupted = false;
-		do {
-			try {
-				Job.getJobManager().join(ResourcesPlugin.FAMILY_MANUAL_REFRESH, null);
-				wasInterrupted = false;
-			} catch (OperationCanceledException e) {
-				e.printStackTrace();
-			} catch (InterruptedException e) {
-				wasInterrupted = true;
-			}
-		} while (wasInterrupted);
 	}
 	
 	private static void createManifest(final String projectName, final IProject project) throws CoreException {

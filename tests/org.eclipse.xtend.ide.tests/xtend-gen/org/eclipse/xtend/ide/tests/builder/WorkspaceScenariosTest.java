@@ -215,7 +215,7 @@ public class WorkspaceScenariosTest {
       _builder_1.append("}");
       _builder_1.newLine();
       IResourcesSetupUtil.createFile("my.project/src/mypack/ClassB.xtend", _builder_1.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
       IProject _project = fileA.getProject();
       final IFile javaB = _project.getFile("xtend-gen/mypack/ClassB.java");
@@ -250,7 +250,7 @@ public class WorkspaceScenariosTest {
       _builder_2.newLine();
       StringInputStream _stringInputStream = new StringInputStream(_builder_2.toString());
       fileA.setContents(_stringInputStream, true, true, null);
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
       InputStream _contents_1 = javaB.getContents();
       byte[] _byteArray_1 = ByteStreams.toByteArray(_contents_1);
@@ -316,7 +316,7 @@ public class WorkspaceScenariosTest {
       _builder_1.append("}");
       _builder_1.newLine();
       IResourcesSetupUtil.createFile("my.project/src/pack/MyClass.xtend", _builder_1.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       return project;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -337,7 +337,7 @@ public class WorkspaceScenariosTest {
           String _value = sourceFile.getValue();
           IResourcesSetupUtil.createFile(_plus, _value);
         }
-        IResourcesSetupUtil.waitForAutoBuild();
+        IResourcesSetupUtil.waitForBuild();
         final HashMap<String, InputStream> listOfContents = CollectionLiterals.<String, InputStream>newHashMap();
         final IResourceVisitor _function = new IResourceVisitor() {
           @Override

@@ -469,7 +469,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 	}
 	
 	def checkDispatchOperations(IFile targetFile, String... signatures) {
-		waitForAutoBuild
+		waitForBuild
 		val dispatchOperations = dispatchRenameSupport.getAllDispatchOperations(targetFile.firstMethod).map[signature]
 		for(signature: signatures) {
 			assertTrue(signature + " not found. Only got " + dispatchOperations.join('\n'), dispatchOperations.contains(signature))

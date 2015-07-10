@@ -63,7 +63,7 @@ class MoreActiveAnnotationsTest {
 			}
 		''')
 		macroProject.addExportedPackage("annotation")
-		waitForAutoBuild
+		waitForBuild
 				
 		val userProject = JavaCore.create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
@@ -75,7 +75,7 @@ class MoreActiveAnnotationsTest {
 				UserCodeItem item
 			}
 		''')
-		waitForAutoBuild
+		waitForBuild
 		assertNoErrorsInWorkspace
 	}
 	
@@ -112,7 +112,7 @@ class MoreActiveAnnotationsTest {
 			}
 		''')
 		macroProject.addExportedPackage("annotation")
-		waitForAutoBuild
+		waitForBuild
 				
 		val userProject = JavaCore.create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
@@ -127,7 +127,7 @@ class MoreActiveAnnotationsTest {
 				UserCodeFooBar item
 			}
 		''')
-		waitForAutoBuild
+		waitForBuild
 		assertNoErrorsInWorkspace
 	}
 	
@@ -165,7 +165,7 @@ class MoreActiveAnnotationsTest {
 			}
 		''')
 		macroProject.addExportedPackage("annotation")
-		waitForAutoBuild
+		waitForBuild
 				
 		val userProject = JavaCore.create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
@@ -191,7 +191,7 @@ class MoreActiveAnnotationsTest {
 				MixedObjectVAL1 field
 			}
 		''')
-		waitForAutoBuild
+		waitForBuild
 		assertNoErrorsInWorkspace
 	}
 	
@@ -240,7 +240,7 @@ class MoreActiveAnnotationsTest {
 			}
 		''')
 		macroProject.addExportedPackage("annotation")
-		waitForAutoBuild
+		waitForBuild
 				
 		val userProject = JavaCore.create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
@@ -257,7 +257,7 @@ class MoreActiveAnnotationsTest {
 				ProcessedStringVAL2VAL1 field
 			}
 		''')
-		waitForAutoBuild
+		waitForBuild
 		assertNoErrorsInWorkspace
 	}
 	
@@ -313,7 +313,7 @@ class MoreActiveAnnotationsTest {
 			}
 		''')
 		macroProject.addExportedPackage("annotation")
-		waitForAutoBuild()
+		waitForBuild()
 				
 		val userProject = JavaCore.create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
