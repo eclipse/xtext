@@ -110,7 +110,7 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	 * @since 2.8
 	 */
 	protected void checkGrammar(Grammar grammar) {
-		if (hasProductionRules(grammar))
+		if (!hasProductionRules(grammar))
 			throw new IllegalArgumentException(
 					"You may not generate an ANTLR parser for a grammar without production rules.");
 	}
@@ -120,7 +120,7 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	 */
 	protected boolean hasProductionRules(Grammar grammar) {
 		AbstractRule firstRule = grammar.getRules().get(0);
-		return !(firstRule instanceof ParserRule) || GrammarUtil.isDatatypeRule((ParserRule) firstRule);
+		return firstRule instanceof ParserRule && !GrammarUtil.isDatatypeRule((ParserRule) firstRule);
 	}
 
 	/**
