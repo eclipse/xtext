@@ -19,7 +19,8 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xtend.lib;visibility:=reexport,
  org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional,
- org.eclipse.xtext.idea.generator;bundle-version="1.0.0";resolution:=optional
+ org.eclipse.xtext.xtext.generator;resolution:=optional,
+ org.eclipse.xtext.idea.generator;resolution:=optional
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext.xbase,
  org.eclipse.xtext.xbase.annotations;x-friends:="org.eclipse.xtext.xbase.tests",
