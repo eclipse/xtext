@@ -13,6 +13,7 @@ import com.google.inject.Singleton;
 import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import org.eclipse.xtend.core.idea.highlighting.XtendHighlightingLexer;
 import org.eclipse.xtend.core.idea.parser.antlr.internal.PsiInternalXtendParser;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.idea.editorActions.DefaultTokenSetProvider;
@@ -41,7 +42,8 @@ public class XtendTokenSetProvider extends DefaultTokenSetProvider {
     IElementType _iElementType_4 = tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_RICH_TEXT_INBETWEEN);
     IElementType _iElementType_5 = tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_COMMENT_RICH_TEXT_END);
     IElementType _iElementType_6 = tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_COMMENT_RICH_TEXT_INBETWEEN);
-    TokenSet _create_1 = TokenSet.create(_iElementType_1, _iElementType_2, _iElementType_3, _iElementType_4, _iElementType_5, _iElementType_6);
+    TokenSet _create_1 = TokenSet.create(_iElementType_1, _iElementType_2, _iElementType_3, _iElementType_4, _iElementType_5, _iElementType_6, 
+      XtendHighlightingLexer.GUILLEMET_ELEMENT_TYPE);
     this.richStringLiteralTokens = _create_1;
   }
   

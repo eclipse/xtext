@@ -12,6 +12,8 @@ import com.google.inject.binder.AnnotatedBindingBuilder;
 import com.google.inject.binder.LinkedBindingBuilder;
 import com.google.inject.name.Named;
 import com.google.inject.name.Names;
+import com.intellij.formatting.FormattingModelBuilder;
+import com.intellij.lang.Commenter;
 import com.intellij.lang.PairedBraceMatcher;
 import com.intellij.lang.PsiStructureViewFactory;
 import com.intellij.lang.refactoring.NamesValidator;
@@ -29,6 +31,8 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultAntlrTokenToAttributeI
 import org.eclipse.xtext.idea.build.IdeaOutputConfigurationProvider;
 import org.eclipse.xtext.idea.common.types.StubTypeProviderFactory;
 import org.eclipse.xtext.idea.filesystem.IdeaWorkspaceConfigProvider;
+import org.eclipse.xtext.idea.formatting.DefaultCommenter;
+import org.eclipse.xtext.idea.formatting.DefaultFormattingModelBuilder;
 import org.eclipse.xtext.idea.highlighting.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.idea.highlighting.DefaultPairedBraceMatcher;
 import org.eclipse.xtext.idea.highlighting.DefaultSyntaxHighlighter;
@@ -142,5 +146,15 @@ public class DefaultIdeaModule extends AbstractGenericModule {
   
   public Class<? extends IResourceDescriptionsProvider> bindIResourceDescriptionsProvider() {
     return IdeaResourceDescriptionsProvider.class;
+  }
+  
+  @SingletonBinding
+  public Class<? extends FormattingModelBuilder> bindFormattingModelBuilder() {
+    return DefaultFormattingModelBuilder.class;
+  }
+  
+  @SingletonBinding
+  public Class<? extends Commenter> bindCommenter() {
+    return DefaultCommenter.class;
   }
 }

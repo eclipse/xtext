@@ -18,7 +18,7 @@ class XtendBracePairProvider extends DefaultBracePairProvider {
 		super(#{
 			new BracePair("(", ")", false),
 			new BracePair("{", "}", true),
-			new BracePair("[", "]", false),
+			new BracePair("[", "]", true),
 			new BracePair("«", "»", false)
 		})
 	}

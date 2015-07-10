@@ -364,25 +364,25 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends LightToolingTes
   public void testCurlyBracesBlock_6() {
     this.configureByText("{| }");
     this.myFixture.type("\n");
-    this.assertState("{\n\t|\n}");
+    this.assertState("{\n|}");
   }
   
   public void testCurlyBracesBlock_7() {
     this.configureByText("{ |foo }");
     this.myFixture.type("\n");
-    this.assertState("{ \n\t|foo\n}");
+    this.assertState("{ \n\t|foo }");
   }
   
   public void testCurlyBracesBlock_8() {
     this.configureByText("{ foo| }");
     this.myFixture.type("\n");
-    this.assertState("{ foo\n\t|\n}");
+    this.assertState("{ foo\n|}");
   }
   
   public void testCurlyBracesBlock_9() {
     this.configureByText("\'{\' foo| }");
     this.myFixture.type("\n");
-    this.assertState("\'{\' foo\n| }");
+    this.assertState("\'{\' foo\n|}");
   }
   
   public void testCurlyBracesBlock_10() {
@@ -400,13 +400,13 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends LightToolingTes
   public void testCurlyBracesBlock_12() {
     this.configureByText("{foo|}");
     this.myFixture.type("\n");
-    this.assertState("{foo\n\t|\n}");
+    this.assertState("{foo\n|}");
   }
   
   public void testCurlyBracesBlock_13() {
     this.configureByText("{foo|bar}");
     this.myFixture.type("\n");
-    this.assertState("{foo\n\t|bar\n}");
+    this.assertState("{foo\n|bar}");
   }
   
   public void testCurlyBracesBlock_14() {
@@ -430,23 +430,21 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends LightToolingTes
   public void testCurlyBracesBlock_17() {
     this.configureByText("{\n|");
     this.myFixture.type("\n");
-    this.assertState("{\n\n|\n}");
+    this.assertState("{\n\n\t|");
   }
   
   public void testCurlyBracesBlock_18() {
     this.configureByText("{{foo}|{bar}}");
     this.myFixture.type("\n");
-    this.assertState("{{foo}\n\t|{bar}\n}");
+    this.assertState("{{foo}\n|{bar}}");
   }
   
   public void testCurlyBracesBlock_19() {
     this.configureByText("{{|");
     this.myFixture.type("\n");
-    this.assertState("{{\n\t|\n}");
+    this.assertState("{{\n\t|\n}}");
     this.myFixture.type("\n");
-    this.assertState("{{\n\t\n\t|\n\t}\n}");
-    this.myFixture.type("\n");
-    this.assertState("{{\n\t\n\t\n\t|\n\t}\n}");
+    this.assertState("{{\n\t\n\t|\n}}");
   }
   
   public void testCurlyBracesWithSelection_1() {
@@ -496,13 +494,20 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends LightToolingTes
     this.assertState("{{{|o}}");
   }
   
-  public void testMLComments_01() {
+  /**
+   * @see <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=472623">Ignored because of 472623</a>
+   */
+  public void ignore_testMLComments_01() {
     this.configureByText("|");
     this.myFixture.type("/");
     this.myFixture.type("*");
-    this.assertState("/*| */");
+    this.assertState("/*|");
     this.myFixture.type("\n");
-    this.assertState("/*\n * |\n */");
+    this.assertState("/*\n|\n */");
+  }
+  
+  public void testMLComments_01() {
+    this.configureByText("/*\n * |\n */");
     this.myFixture.type("\n");
     this.assertState("/*\n * \n * |\n */");
     this.myFixture.type("foo bar");
@@ -510,13 +515,20 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends LightToolingTes
     this.assertState("/*\n * \n * foo bar\n * |\n */");
   }
   
-  public void testMLComments_02() {
+  /**
+   * <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=472623">Ignored because of 472623</a>
+   */
+  public void ignore_testMLComments_02() {
     this.configureByText("   |");
     this.myFixture.type("/");
     this.myFixture.type("*");
-    this.assertState("   /*| */");
+    this.assertState("   /*|");
     this.myFixture.type("\n");
-    this.assertState("   /*\n    * |\n    */");
+    this.assertState("   /*\n   |\n    */");
+  }
+  
+  public void testMLComments_02() {
+    this.configureByText("   /*\n    * |\n    */");
     this.myFixture.type("\n");
     this.assertState("   /*\n    * \n    * |\n    */");
     this.myFixture.type("foo bar");
@@ -527,7 +539,7 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends LightToolingTes
   public void testMLComments_03() {
     this.configureByText("/*\n *| */");
     this.myFixture.type("\n");
-    this.assertState("/*\n *\n * | */");
+    this.assertState("/*\n *\n  * | */");
   }
   
   public void testMLComments_04() {
@@ -551,55 +563,55 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends LightToolingTes
   public void testMLComments_08() {
     this.configureByText("  /* foo | */");
     this.myFixture.type("\n");
-    this.assertState("  /* foo \n   * |\n   */");
+    this.assertState("  /* foo \n   * | */");
   }
   
   public void testMLComments_09() {
     this.configureByText("/* foo |*/");
     this.myFixture.type("\n");
-    this.assertState("/* foo \n * |*/");
+    this.assertState("/* foo \n* |*/");
   }
   
   public void testMLComments_10() {
     this.configureByText("   /* foo |*/");
     this.myFixture.type("\n");
-    this.assertState("   /* foo \n    * |*/");
+    this.assertState("   /* foo \n   * |*/");
   }
   
   public void testMLComments_11() {
     this.configureByText("/* */\n * |");
     this.myFixture.type("\n");
-    this.assertState("/* */\n * \n |");
+    this.assertState("/* */\n * \n|");
   }
   
   public void testMLComments_12() {
     this.configureByText("foo /*| */");
     this.myFixture.type("\n");
-    this.assertState("foo /*\n * |\n */");
+    this.assertState("foo /*\n |*/");
   }
   
   public void testMLComments_13() {
     this.configureByText("/* foo| */");
     this.myFixture.type("\n");
-    this.assertState("/* foo\n * |\n */");
+    this.assertState("/* foo\n * | */");
   }
   
   public void testMLComments_14() {
     this.configureByText("/* foo|*/");
     this.myFixture.type("\n");
-    this.assertState("/* foo\n * |*/");
+    this.assertState("/* foo\n* |*/");
   }
   
   public void testMLComments_15() {
     this.configureByText("  /* foo| */");
     this.myFixture.type("\n");
-    this.assertState("  /* foo\n   * |\n   */");
+    this.assertState("  /* foo\n   * | */");
   }
   
   public void testMLComments_16() {
     this.configureByText("  /* foo|*/");
     this.myFixture.type("\n");
-    this.assertState("  /* foo\n   * |*/");
+    this.assertState("  /* foo\n  * |*/");
   }
   
   public void testMLComments_17() {
@@ -611,13 +623,13 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends LightToolingTes
   public void testBug453205_01() {
     this.configureByText((("/*|\n" + "* comment\n") + "*/"));
     this.myFixture.type("\n");
-    this.assertState(((("/*\n" + " * |\n") + "* comment\n") + "*/"));
+    this.assertState(((("/*\n" + "|\n") + "* comment\n") + "*/"));
   }
   
   public void testBug453205_02() {
     this.configureByText((("/**********|\n" + " * \"Fancy\"\n") + "**********/"));
     this.myFixture.type("\n");
-    this.assertState(((("/**********\n" + " * |\n") + " * \"Fancy\"\n") + "**********/"));
+    this.assertState(((("/**********\n" + "|\n") + " * \"Fancy\"\n") + "**********/"));
   }
   
   public void testBug341093_01() {
@@ -677,19 +689,19 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends LightToolingTes
   public void testBug335634_07() {
     this.configureByText(" // /\n|");
     this.myFixture.type("{");
-    this.assertState(" // /\n{|}");
+    this.assertState(" // /\n {|}");
   }
   
   public void testSingleLineComment_01() {
     this.configureByText("  // test|test");
     this.myFixture.type("\n");
-    this.assertState("  // test\n  |test");
+    this.assertState("  // test\n  // |test");
   }
   
   public void testSingleLineComment_02() {
     this.configureByText("  // test|test\n");
     this.myFixture.type("\n");
-    this.assertState("  // test\n  |test\n");
+    this.assertState("  // test\n  // |test\n");
   }
   
   public void testSingleLineComment_03() {
@@ -713,13 +725,13 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends LightToolingTes
   public void testBug338423_02() {
     this.configureByText("[{}|]");
     this.myFixture.type("\n");
-    this.assertState("[{}\n\t|\n]");
+    this.assertState("[{}\n|]");
   }
   
   public void testBug358555() {
     this.configureByText("/* | /**/");
     this.myFixture.type("\n");
-    this.assertState("/* \n * | /**/");
+    this.assertState("/* \n |/**/\n  */");
   }
   
   protected void selectText(final int relativeToCurrentOffset, final int length) {

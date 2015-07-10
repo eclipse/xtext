@@ -13,6 +13,8 @@ import com.intellij.lang.BracePair;
 import com.intellij.lang.PairedBraceMatcher;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +40,8 @@ public class DefaultPairedBraceMatcher implements PairedBraceMatcher {
   
   private final BracePair[] pairs;
   
+  private final TokenSet allowedTypes;
+  
   private final Map<String, IElementType> tokenTypes;
   
   @Inject
@@ -46,6 +50,34 @@ public class DefaultPairedBraceMatcher implements PairedBraceMatcher {
     this.tokenTypes = _createTokenTypes;
     Iterable<BracePair> _createPairs = this.createPairs(bracePairProvider, grammarAccess);
     this.pairs = ((BracePair[])Conversions.unwrapArray(_createPairs, BracePair.class));
+    TokenSet _createAllowedTypes = this.createAllowedTypes(tokenTypeProvider, grammarAccess);
+    this.allowedTypes = _createAllowedTypes;
+  }
+  
+  protected TokenSet createAllowedTypes(final TokenTypeProvider tokenTypeProvider, final IGrammarAccess grammarAccess) {
+    TokenSet _commentTokens = tokenTypeProvider.getCommentTokens();
+    TokenSet _whitespaceTokens = tokenTypeProvider.getWhitespaceTokens();
+    final Function1<BracePair, List<IElementType>> _function = new Function1<BracePair, List<IElementType>>() {
+      @Override
+      public List<IElementType> apply(final BracePair it) {
+        IElementType _leftBraceType = it.getLeftBraceType();
+        IElementType _rightBraceType = it.getRightBraceType();
+        return Collections.<IElementType>unmodifiableList(CollectionLiterals.<IElementType>newArrayList(_leftBraceType, _rightBraceType));
+      }
+    };
+    List<List<IElementType>> _map = ListExtensions.<BracePair, List<IElementType>>map(((List<BracePair>)Conversions.doWrapArray(this.pairs)), _function);
+    Iterable<IElementType> _flatten = Iterables.<IElementType>concat(_map);
+    TokenSet _create = TokenSet.create(((IElementType[])Conversions.unwrapArray(_flatten, IElementType.class)));
+    List<Keyword> _findKeywords = grammarAccess.findKeywords(";", ",");
+    final Function1<Keyword, IElementType> _function_1 = new Function1<Keyword, IElementType>() {
+      @Override
+      public IElementType apply(final Keyword it) {
+        return DefaultPairedBraceMatcher.this.getTokenType(it);
+      }
+    };
+    List<IElementType> _map_1 = ListExtensions.<Keyword, IElementType>map(_findKeywords, _function_1);
+    TokenSet _create_1 = TokenSet.create(((IElementType[])Conversions.unwrapArray(_map_1, IElementType.class)));
+    return TokenSet.orSet(_commentTokens, _whitespaceTokens, _create, _create_1);
   }
   
   protected HashMap<String, IElementType> createTokenTypes(final ITokenDefProvider tokenDefProvider, final TokenTypeProvider tokenTypeProvider) {
@@ -131,6 +163,6 @@ public class DefaultPairedBraceMatcher implements PairedBraceMatcher {
   
   @Override
   public boolean isPairedBracesAllowedBeforeType(final IElementType lbraceType, final IElementType contextType) {
-    return true;
+    return this.allowedTypes.contains(contextType);
   }
 }

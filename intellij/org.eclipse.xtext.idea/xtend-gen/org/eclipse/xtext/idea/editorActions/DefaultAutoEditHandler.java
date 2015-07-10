@@ -58,15 +58,21 @@ public class DefaultAutoEditHandler extends IdeaAutoEditHandler {
   
   @Override
   public IdeaAutoEditHandler.Result beforeEnterTyped(final PsiFile file, final EditorEx editor, final Ref<Integer> caretOffset, final Ref<Integer> caretAdvance, final DataContext dataContext, final EditorActionHandler originalHandler) {
-    AutoEditContext _autoEditContext = new AutoEditContext(editor, this.tokenSetProvider);
-    return this.handleIndentation(_autoEditContext);
+    final AutoEditContext context = new AutoEditContext(editor, this.tokenSetProvider);
+    final AutoEditBlockRegion region = this.findBlockRegion(context);
+    boolean _equals = Objects.equal(region, null);
+    if (_equals) {
+      return IdeaAutoEditHandler.Result.CONTINUE;
+    }
+    return this.handleIndentation(region, context);
   }
   
   protected final static String WHITESPACE_CHARACTERS = " \t";
   
-  protected IdeaAutoEditHandler.Result handleIndentation(@Extension final AutoEditContext context) {
+  protected IdeaAutoEditHandler.Result handleIndentation(final AutoEditBlockRegion region, @Extension final AutoEditContext context) {
     final String previousLineIndentation = this.getPreviousLineIndentaiton(context);
-    final String blockIndentaion = this.indentBlock(previousLineIndentation, context);
+    AbstractIndentableAutoEditBlock _block = region.getBlock();
+    final String blockIndentaion = _block.indent(region, previousLineIndentation, context);
     final String string = context.newLine((previousLineIndentation + blockIndentaion));
     final int cursorShift = string.length();
     EditorEx _editor = context.getEditor();
@@ -110,16 +116,6 @@ public class DefaultAutoEditHandler extends IdeaAutoEditHandler {
     TokenSet _tokenSet = context.getTokenSet(_caretOffset);
     TokenSet _stringLiteralTokens = this.tokenSetProvider.getStringLiteralTokens();
     return (!Objects.equal(_tokenSet, _stringLiteralTokens));
-  }
-  
-  protected String indentBlock(final String previousLineIndentation, @Extension final AutoEditContext context) {
-    final AutoEditBlockRegion region = this.findBlockRegion(context);
-    boolean _notEquals = (!Objects.equal(region, null));
-    if (_notEquals) {
-      AbstractIndentableAutoEditBlock _block = region.getBlock();
-      return _block.indent(region, previousLineIndentation, context);
-    }
-    return "";
   }
   
   protected AutoEditBlockRegion findBlockRegion(@Extension final AutoEditContext context) {

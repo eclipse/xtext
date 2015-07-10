@@ -25,11 +25,14 @@ import com.intellij.openapi.roots.ContentEntry
 import com.intellij.openapi.roots.LanguageLevelModuleExtension
 import com.intellij.openapi.roots.ModifiableRootModel
 import com.intellij.pom.java.LanguageLevel
+import com.intellij.psi.codeStyle.CodeStyleSettingsManager
+import com.intellij.psi.tree.IElementType
 import com.intellij.testFramework.LightProjectDescriptor
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase
 import com.intellij.util.Consumer
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.ide.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper
+import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles
 import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent
 import org.eclipse.xtext.idea.lang.IXtextLanguage
 import org.eclipse.xtext.idea.parser.TokenTypeProvider
@@ -41,11 +44,6 @@ import static org.eclipse.xtext.idea.tests.LightToolingTest.*
 
 import static extension com.intellij.testFramework.PlatformTestUtil.*
 import static extension com.intellij.util.ui.tree.TreeUtil.*
-import com.intellij.psi.tree.IElementType
-import com.intellij.testFramework.fixtures.CodeInsightFixtureTestCase
-import com.intellij.testFramework.fixtures.CodeInsightTestFixture
-import org.eclipse.xtext.xbase.ide.highlighting.XbaseHighlightingStyles
-import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles
 
 class LightToolingTest extends LightCodeInsightFixtureTestCase {
 
@@ -64,6 +62,7 @@ class LightToolingTest extends LightCodeInsightFixtureTestCase {
 		super.setUp
 		xtextLanguage.injectMembers(this)
 		CodeInsightSettings.instance.AUTOCOMPLETE_ON_CODE_COMPLETION = false
+		codeStyleSettings.indentOptions.USE_TAB_CHARACTER = true
 	}
 	
 	override protected tearDown() throws Exception {
@@ -189,6 +188,10 @@ class LightToolingTest extends LightCodeInsightFixtureTestCase {
 	
 	protected def void testStructureView(Consumer<StructureViewComponent> consumer) {
 		myFixture.testStructureView(consumer)
+	}
+
+	protected def getCodeStyleSettings() {
+		CodeStyleSettingsManager.getSettings(project)
 	}
 
 }

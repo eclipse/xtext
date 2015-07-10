@@ -14,6 +14,8 @@
 		<typedHandler implementation="org.eclipse.xtext.idea.editorActions.XtextAutoEditTypedHandler" order="first"/>
 		<backspaceHandlerDelegate implementation="org.eclipse.xtext.idea.editorActions.XtextAutoEditBackspaceHandler" order="first"/>
 		<enterHandlerDelegate implementation="org.eclipse.xtext.idea.editorActions.XtextAutoEditEnterHandler" order="first"/>
+		
+		<enterHandlerDelegate implementation="org.eclipse.xtext.idea.editorActions.XtextEnterBetweenBracesHandler" order="first"/>
    	</extensions>
 
 	<project-components>

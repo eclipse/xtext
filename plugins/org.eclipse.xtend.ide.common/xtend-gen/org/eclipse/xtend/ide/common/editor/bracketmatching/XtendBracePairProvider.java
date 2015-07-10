@@ -19,6 +19,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 public class XtendBracePairProvider extends DefaultBracePairProvider {
   public XtendBracePairProvider() {
     super(
-      Collections.<BracePair>unmodifiableSet(CollectionLiterals.<BracePair>newHashSet(new BracePair("(", ")", false), new BracePair("{", "}", true), new BracePair("[", "]", false), new BracePair("«", "»", false))));
+      Collections.<BracePair>unmodifiableSet(CollectionLiterals.<BracePair>newHashSet(new BracePair("(", ")", false), new BracePair("{", "}", true), new BracePair("[", "]", true), new BracePair("«", "»", false))));
   }
 }

@@ -22,9 +22,9 @@ class DefaultBracePairProvider implements IBracePairProvider {
 
 	new() {
 		this(#{
-			new BracePair("(", ")", false),
+			new BracePair("(", ")", true),
 			new BracePair("{", "}", true),
-			new BracePair("[", "]", false)
+			new BracePair("[", "]", true)
 		})
 	}
 
