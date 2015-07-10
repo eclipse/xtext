@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.idea.highlighting;
 import com.intellij.ide.highlighter.JavaHighlightingColors;
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.EditorColors;
-import com.intellij.openapi.editor.colors.TextAttributesKey;
 import org.eclipse.xtend.ide.common.highlighting.XtendHighlightingStyles;
 import org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration;
 import org.eclipse.xtext.xbase.idea.highlighting.XbaseHighlightingConfiguration;
@@ -23,11 +22,11 @@ public class XtendHighlightingConfiguration extends XbaseHighlightingConfigurati
   @Override
   public void configure(final IHighlightingConfiguration.IHighlightingStyleAcceptor it) {
     super.configure(it);
-    final TextAttributesKey templateText = it.addStyle(XtendHighlightingStyles.RICH_TEXT_ID, "Template text", EditorColors.INJECTED_LANGUAGE_FRAGMENT);
-    it.addStyle(XtendHighlightingStyles.RICH_TEXT_DELIMITER_ID, "Template delimiter", DefaultLanguageHighlighterColors.PARENTHESES);
-    final TextAttributesKey insignificantTemplateText = it.addStyle(XtendHighlightingStyles.INSIGNIFICANT_TEMPLATE_TEXT, "Insignificant Template text", DefaultLanguageHighlighterColors.MARKUP_TAG);
-    it.addStyle(XtendHighlightingStyles.POTENTIAL_LINE_BREAK, "Potential Line Break (if line is not empty)", insignificantTemplateText);
-    it.addStyle(XtendHighlightingStyles.TEMPLATE_LINE_BREAK, "Template Line Break", templateText);
+    it.addStyle(XtendHighlightingStyles.RICH_TEXT_ID, "Template text", EditorColors.INJECTED_LANGUAGE_FRAGMENT);
+    it.addStyle(XtendHighlightingStyles.RICH_TEXT_DELIMITER_ID, "Template guillemets", DefaultLanguageHighlighterColors.PARENTHESES);
+    it.addStyle(XtendHighlightingStyles.INSIGNIFICANT_TEMPLATE_TEXT, "Insignificant template text", DefaultLanguageHighlighterColors.TEMPLATE_LANGUAGE_COLOR);
+    it.addStyle(XtendHighlightingStyles.POTENTIAL_LINE_BREAK, "Potential Line Break (if line is not empty)", DefaultLanguageHighlighterColors.TEMPLATE_LANGUAGE_COLOR);
+    it.addStyle(XtendHighlightingStyles.TEMPLATE_LINE_BREAK, "Template Line Break", DefaultLanguageHighlighterColors.TEMPLATE_LANGUAGE_COLOR);
     it.addStyle(XtendHighlightingStyles.ACTIVE_ANNOTATION, "Active Annotation", JavaHighlightingColors.VALID_STRING_ESCAPE);
   }
 }

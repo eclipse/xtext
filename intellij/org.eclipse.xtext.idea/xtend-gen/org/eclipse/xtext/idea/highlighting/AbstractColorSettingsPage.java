@@ -87,7 +87,7 @@ public abstract class AbstractColorSettingsPage implements ColorSettingsPage, In
   
   @Override
   public Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap() {
-    return null;
+    return this.textAttributeProvider.getXtextStyle2TextAttributes();
   }
   
   @Override

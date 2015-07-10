@@ -39,11 +39,14 @@ class SemanticHighlightVisitor implements HighlightVisitor {
 		acceptor = [
 			offset, length, styles |
 			styles.forEach [
-				val info = HighlightInfo
-					.newHighlightInfo(highlightInfoType)
-					.range(offset, offset + length)
-					.create
-				holder.add(info)			
+				if(length > 0) {
+					val info = HighlightInfo
+						.newHighlightInfo(highlightInfoType)
+						.range(offset, offset + length)
+						.description(it)
+						.create
+					holder.add(info)			
+				}
 			]
 		]
 	    try {

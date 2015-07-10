@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.tests
 
+import com.google.inject.Inject
 import com.intellij.codeInsight.CodeInsightSettings
 import com.intellij.facet.FacetManager
 import com.intellij.facet.FacetType
@@ -28,8 +29,10 @@ import com.intellij.testFramework.LightProjectDescriptor
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase
 import com.intellij.util.Consumer
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.ide.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper
 import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent
 import org.eclipse.xtext.idea.lang.IXtextLanguage
+import org.eclipse.xtext.idea.parser.TokenTypeProvider
 import org.eclipse.xtext.junit4.internal.LineDelimiters
 import org.eclipse.xtext.psi.impl.BaseXtextFile
 
@@ -38,9 +41,17 @@ import static org.eclipse.xtext.idea.tests.LightToolingTest.*
 
 import static extension com.intellij.testFramework.PlatformTestUtil.*
 import static extension com.intellij.util.ui.tree.TreeUtil.*
+import com.intellij.psi.tree.IElementType
+import com.intellij.testFramework.fixtures.CodeInsightFixtureTestCase
+import com.intellij.testFramework.fixtures.CodeInsightTestFixture
+import org.eclipse.xtext.xbase.ide.highlighting.XbaseHighlightingStyles
+import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles
 
 class LightToolingTest extends LightCodeInsightFixtureTestCase {
 
+	@Inject extension TokenTypeProvider tokenTypeProvider
+	@Inject extension AbstractAntlrTokenToAttributeIdMapper tokenToAttributeIdMapper
+	
 	@Accessors
 	val LanguageFileType fileType
 	
@@ -138,18 +149,24 @@ class LightToolingTest extends LightCodeInsightFixtureTestCase {
 		val compactHighlights = new StringBuilder
 		while(!highlights.atEnd) {
 			val start = highlights.start
-			val textAttributes = highlights.textAttributes
+			val tokenType = highlights.tokenType
 			var end = highlights.end
-			while (!highlights.atEnd && highlights.textAttributes == textAttributes) {
+			while (!highlights.atEnd && highlights.tokenType == tokenType) {
 				end = highlights.end
 				highlights.advance
 			}
-			compactHighlights.append('''«start»-«end»:«textAttributes»''')
-			compactHighlights.append("\n")
+			if(tokenType.xtextStyle != HighlightingStyles.DEFAULT_ID) {
+				compactHighlights.append('''«start»-«end»:«tokenType.xtextStyle»''')
+				compactHighlights.append("\n")
+			}
 		}
 		compactHighlights.toString
 	}
-
+	
+	protected def getXtextStyle(IElementType tokenType) {
+		tokenType.antlrType.id
+	}
+	
 	protected def getXtextFile() {
 		myFixture.file as BaseXtextFile
 	}

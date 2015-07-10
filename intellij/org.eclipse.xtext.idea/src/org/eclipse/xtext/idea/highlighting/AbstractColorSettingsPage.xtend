@@ -64,7 +64,7 @@ abstract class AbstractColorSettingsPage implements ColorSettingsPage, Inspectio
 	}
 
 	override Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap() {
-		return null
+		textAttributeProvider.xtextStyle2TextAttributes
 	}
 
 	override DisplayPriority getPriority() {

@@ -100,6 +100,15 @@ public class AntlrDelegatingIdeaLexer extends LexerBase {
     return this.endOffset;
   }
   
+  public CommonToken getCurrentToken() {
+    CommonToken _xblockexpression = null;
+    {
+      this.locateToken();
+      _xblockexpression = this.token;
+    }
+    return _xblockexpression;
+  }
+  
   public void locateToken() {
     boolean _equals = Objects.equal(this.token, null);
     if (_equals) {

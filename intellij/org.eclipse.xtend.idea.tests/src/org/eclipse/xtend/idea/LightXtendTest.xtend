@@ -14,6 +14,9 @@ import org.eclipse.xtend.core.idea.lang.XtendFileType
 import org.eclipse.xtext.idea.tests.LightToolingTest
 
 import static extension org.eclipse.xtext.idea.tests.LibraryUtil.*
+import com.intellij.psi.tree.IElementType
+import org.eclipse.xtend.core.idea.highlighting.XtendHighlightingLexer
+import org.eclipse.xtend.ide.common.highlighting.XtendHighlightingStyles
 
 abstract class LightXtendTest extends LightToolingTest {
 
@@ -25,4 +28,10 @@ abstract class LightXtendTest extends LightToolingTest {
 		model.addXtendLibrary
 	}
 
+	override protected getXtextStyle(IElementType tokenType) {
+		if(tokenType == XtendHighlightingLexer.GUILLEMET_ELEMENT_TYPE)
+			XtendHighlightingStyles.RICH_TEXT_DELIMITER_ID
+		else 
+			super.getXtextStyle(tokenType)
+	}
 }
