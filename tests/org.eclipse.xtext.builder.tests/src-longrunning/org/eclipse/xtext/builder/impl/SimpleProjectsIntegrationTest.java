@@ -46,7 +46,7 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 	@Test public void testValidSimpleModel() throws Exception {
 		createSimpleProjectWithXtextNature("foo");
 		IFile file = createFile("foo/foo"+F_EXT, "object Foo ");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(0, countMarkers(file));
 	}
 
@@ -59,7 +59,7 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 	@Test public void testSimpleModelWithSyntaxError() throws Exception {
 		createSimpleProjectWithXtextNature("foo");
 		IFile file = createFile("foo/foo"+F_EXT, "objekt Foo ");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(1, countMarkers(file));
 	}
 
@@ -67,7 +67,7 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		createSimpleProjectWithXtextNature("foo");
 		IFile file1 = createFile("foo/foo"+F_EXT, "object Foo ");
 		IFile file2 = createFile("foo/bar"+F_EXT, "object Bar references Foo");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(file1), 0, countMarkers(file1));
 		assertEquals(printMarkers(file2), 0, countMarkers(file2));
 		assertTrue(indexContainsElement(file1.getFullPath().toString(),"Foo"));
@@ -79,10 +79,10 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		IProject project = createSimpleProjectWithXtextNature("foo");
 		createFile("foo/foo"+F_EXT, "object Foo ");
 		createFile("foo/bar"+F_EXT, "object Bar references Foo");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(2, countResourcesInIndex());
 		removeNature(project.getProject(), XtextProjectHelper.NATURE_ID);
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(0, countResourcesInIndex());
 	}
 	
@@ -103,7 +103,7 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		createSimpleProjectWithXtextNature("foo");
 		createFile("foo/foo"+F_EXT, "object Foo ");
 		IFile file = createFile("foo/bar"+F_EXT, "object Bar references Fuu");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(1, countMarkers(file));
 	}
 	
@@ -114,7 +114,7 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 	@Test public void testTwoFilesInTwoReferencedProjectsRemoveNature() throws Exception {
 		createTwoFilesInTwoReferencedProjects();
 		removeNature(foo_project.getProject(), XtextProjectHelper.NATURE_ID);
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(1, countMarkers(bar_file));
 	}
 	
@@ -124,15 +124,15 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		bar_project = createSimpleProjectWithXtextNature("bar");
 		foo_file = createFile("foo/foo"+F_EXT, "object Foo ");
 		bar_file = createFile("bar/bar"+F_EXT, "object Bar references Foo");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(foo_file), 0, countMarkers(foo_file));
 		assertEquals(printMarkers(bar_file), 1, countMarkers(bar_file));
 		setReference(bar_project, foo_project);
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(foo_file), 0, countMarkers(foo_file));
 		assertEquals(printMarkers(bar_file), 1, countMarkers(bar_file));
 		addNature(foo_project.getProject(), XtextProjectHelper.NATURE_ID);
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(foo_file), 0, countMarkers(foo_file));
 		assertEquals(printMarkers(bar_file), 0, countMarkers(bar_file));
 	}
@@ -142,9 +142,9 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		bar_project = createSimpleProjectWithXtextNature("bar");
 		foo_file = createFile("foo/foo"+F_EXT, "object Foo ");
 		bar_file = createFile("bar/bar"+F_EXT, "object Bar references Foo");
-		waitForAutoBuild();
+		waitForBuild();
 		setReference(bar_project, foo_project);
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(0, countMarkers(foo_file));
 		assertEquals(0, countMarkers(bar_file));
 	}
@@ -152,9 +152,9 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 	@Test public void testTwoFilesInTwoInversedReferencedProjects() throws Exception {
 		createTwoFilesInTwoReferencedProjects();
 		removeReference(bar_project, foo_project);
-		waitForAutoBuild();
+		waitForBuild();
 		setReference(foo_project, bar_project);
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(0, countMarkers(foo_file));
 		assertEquals(1, countMarkers(bar_file));
 	}
@@ -163,7 +163,7 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		createTwoFilesInTwoReferencedProjects();
 		removeReference(bar_project, foo_project);
 
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(0, countMarkers(foo_file));
 		assertEquals(1, countMarkers(bar_file));
 	}
@@ -172,12 +172,12 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		createTwoFilesInTwoReferencedProjects();
 		
 		removeReference(bar_project, foo_project);
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(0, countMarkers(foo_file));
 		assertEquals(1, countMarkers(bar_file));
 		
 		setReference(bar_project, foo_project);
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(0, countMarkers(foo_file));
 		assertEquals(0, countMarkers(bar_file));
 	}
@@ -186,10 +186,10 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		createTwoFilesInTwoReferencedProjects();
 		// close project
 		foo_project.getProject().close(monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(1, countMarkers(bar_file));
 		foo_project.getProject().open(monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(bar_file), 0, countMarkers(bar_file));
 	}
 
@@ -198,12 +198,12 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		
 		// change referenced file
 		foo_file.setContents(new StringInputStream("object Baz "),true,true,monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(1, countMarkers(bar_file));
 		
 		//change back to valid state
 		foo_file.setContents(new StringInputStream("object Foo "),true,true,monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(0, countMarkers(bar_file));
 	}
 	
@@ -212,12 +212,12 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		
 		// delete referenced file
 		foo_file.delete(true, new NullProgressMonitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(1, countMarkers(bar_file));
 		
 		// create new
 		foo_file = createFile("foo/foo"+F_EXT, "object Foo ");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(0, countMarkers(foo_file));
 		assertEquals(0, countMarkers(bar_file));
 	}
@@ -230,31 +230,31 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		file.create(new StringInputStream("object Foo"), true, monitor());
 		IFile fileB = folder.getFile("Boo" + F_EXT);
 		fileB.create(new StringInputStream("object Bar references Foo"), true, monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertTrue(indexContainsElement(file.getFullPath().toString(),"Foo"));
 		assertTrue(indexContainsElement(fileB.getFullPath().toString(),"Bar"));
 		assertEquals(2, countResourcesInIndex());
 		
 		getBuilderState().addListener(this);
 		file.setContents(new StringInputStream("object Foo"), true,true, monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(1,getEvents().get(0).getDeltas().size());
 		assertNumberOfMarkers(fileB, 0);
 		assertEquals(1,getIncomingReferences(URI.createPlatformResourceURI("foo/subFolder/Foo"+F_EXT,true)).size());
 		
 		file.setContents(new StringInputStream("object Fop"), true,true, monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(2,getEvents().get(1).getDeltas().size());
 		assertNumberOfMarkers(fileB, 1);
 		assertEquals(0,getIncomingReferences(URI.createPlatformResourceURI("foo/subFolder/Foo"+F_EXT,true)).size());
 		
 		file.setContents(new StringInputStream("object Foo"), true,true, monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(2,getEvents().get(2).getDeltas().size());
 		assertNumberOfMarkers(fileB, 0);
 		
 		file.setContents(new StringInputStream("object Foo"), true,true, monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(1,getEvents().get(3).getDeltas().size());
 		assertNumberOfMarkers(fileB, 0);
 	}
@@ -265,13 +265,13 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		IFolder folder = createSubFolder(project, "subFolder");
 		IFile file = folder.getFile("Foo" + F_EXT);
 		file.create(new StringInputStream("object Foo"), true, monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertTrue(indexContainsElement(file.getFullPath().toString(),"Foo"));
 		assertEquals(1, countResourcesInIndex());
 		
 		getBuilderState().addListener(this);
 		file.delete(true, monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(1,getEvents().get(0).getDeltas().size());
 		assertNull(getEvents().get(0).getDeltas().get(0).getNew());
 		assertEquals(0, countResourcesInIndex());
@@ -283,13 +283,13 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		IFolder folder = createSubFolder(project, "subFolder");
 		IFile file = folder.getFile("Foo" + F_EXT);
 		file.create(new StringInputStream("object Foo"), true, monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertTrue(indexContainsElement(file.getFullPath().toString(),"Foo"));
 		assertEquals(1, countResourcesInIndex());
 		
 		getBuilderState().addListener(this);
 		project.getProject().build(IncrementalProjectBuilder.CLEAN_BUILD, monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		// clean build should first remove the IResourceDescriptor and then add it again  
 		assertEquals(2, getEvents().size());
 		assertEquals(1, getEvents().get(0).getDeltas().size());
@@ -303,7 +303,7 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 	@Test public void testProjectNameWithSpace() throws Exception {
 		createSimpleProjectWithXtextNature("foo bar");
 		IFile file = createFile("foo bar/foo"+F_EXT, "objekt Foo ");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(1, countMarkers(file));
 	}
 	
@@ -323,7 +323,7 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		addToClasspath(baz, JavaCore.newProjectEntry(bar.getPath(), false));
 		addSourceFolder(baz, "src");
 		IFile bazFile = createFile("baz/src/Baz"+F_EXT, "object Baz references Foo");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(0,countMarkers(bazFile));
 		assertEquals(2, countResourcesInIndex());
 		Iterator<IReferenceDescription> references = getContainedReferences(URI.createPlatformResourceURI(bazFile.getFullPath().toString(),true)).iterator();
@@ -347,13 +347,13 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		addToClasspath(baz, JavaCore.newProjectEntry(bar.getPath(), false));
 		addSourceFolder(baz, "src");
 		IFile bazFile = createFile("baz/src/Baz"+F_EXT, "object Baz references Foo");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(1,countMarkers(bazFile));
 		IFile file = foo.getProject().getFile("foo.jar");
 		file.create(jarInputStream(new TextFile("foo/Foo"+F_EXT, "object Foo")), true, monitor());
 		IClasspathEntry newLibraryEntry = JavaCore.newLibraryEntry(file.getFullPath(), null, null,true);
 		addToClasspath(foo, newLibraryEntry);
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(0,countMarkers(bazFile));
 	}
 	
@@ -373,10 +373,10 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		addToClasspath(baz, JavaCore.newProjectEntry(bar.getPath(), false));
 		addSourceFolder(baz, "src");
 		IFile bazFile = createFile("baz/src/Baz"+F_EXT, "object Baz references Foo");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(0,countMarkers(bazFile));
 		deleteClasspathEntry(foo, newLibraryEntry.getPath());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(1, countMarkers(bazFile));
 		assertEquals(1, countResourcesInIndex());
 		Iterator<IReferenceDescription> references = getContainedReferences(URI.createPlatformResourceURI(bazFile.getFullPath().toString(),true)).iterator();
@@ -400,11 +400,11 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		addToClasspath(baz, JavaCore.newProjectEntry(bar.getPath(), false));
 		addSourceFolder(baz, "src");
 		IFile bazFile = createFile("baz/src/Baz"+F_EXT, "object Baz references Foo");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(0,countMarkers(bazFile));
 		assertEquals(2, countResourcesInIndex());
 		deleteClasspathEntry(foo, newLibraryEntry.getPath());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(0,countMarkers(bazFile));
 		assertEquals(2, countResourcesInIndex());
 	}
@@ -414,13 +414,13 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		IProject project = createSimpleProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		createProject("bar");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(0, countResourcesInIndex());
 		createFile("bar/bar"+F_EXT, "objekt Foo ");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(0, countResourcesInIndex());
 		createFile("foo/bar"+F_EXT, "objekt Foo ");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(1, countResourcesInIndex());
 
 		getBuilderState().addListener(this);
@@ -443,7 +443,7 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		IFile file = someProject.getFile("foo.jar");
 		file.create(jarInputStream(new TextFile("foo/Bar"+F_EXT, "object Foo")), true, monitor());
 		addJarToClasspath(project, file);
-		waitForAutoBuild();
+		waitForBuild();
 //		JavaCore.addElementChangedListener(new IElementChangedListener() {
 //			
 //			public void elementChanged(ElementChangedEvent event) {

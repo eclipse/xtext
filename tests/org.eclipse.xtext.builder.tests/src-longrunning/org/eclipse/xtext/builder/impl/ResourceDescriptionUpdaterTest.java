@@ -82,13 +82,13 @@ public class ResourceDescriptionUpdaterTest extends AbstractParticipatingBuilder
 	private void addFile(IFolder folder, String fileName, String content) throws CoreException {
 		IFile file = folder.getFile(fileName + F_EXT);
 		file.create(new StringInputStream(content), true, monitor());
-		waitForAutoBuild();
+		waitForBuild();
 	}
 
 	private void changeFile(IFolder folder, String fileName, String content) throws CoreException {
 		IFile file = folder.getFile(fileName + F_EXT);
 		file.setContents(new StringInputStream(content), IResource.FORCE, monitor());
-		waitForAutoBuild();
+		waitForBuild();
 	}
 
 	private IFolder createProject(String projectName) throws CoreException, JavaModelException {

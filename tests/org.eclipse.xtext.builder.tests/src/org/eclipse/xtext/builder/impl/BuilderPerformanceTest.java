@@ -250,16 +250,16 @@ public class BuilderPerformanceTest extends AbstractBuilderTest {
 	private void toggleNature(IJavaProject javaProject1) {
 		long before = System.currentTimeMillis();
 		new ToggleXtextNatureAction().toggleNature(javaProject1.getProject());
-		waitForAutoBuild();
+		waitForBuild();
 		System.out.println("Toggle Nature - Took " + (System.currentTimeMillis() - before) +"ms");
 	}
 	
 	private String cleanBuildTakes() throws Exception {
-		waitForAutoBuild();
+		waitForBuild();
 		long before = System.currentTimeMillis();
 		cleanBuild();
 		fullBuild();
-		waitForAutoBuild();
+		waitForBuild();
 		long after = System.currentTimeMillis();
 		return "Took " + (after -before) + "ms";
 	}
