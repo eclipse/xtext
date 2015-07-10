@@ -10,16 +10,18 @@ package org.eclipse.xtext.preferences;
 import java.util.LinkedHashMap;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.LanguageInfo;
 
 import com.google.common.collect.Maps;
 import com.google.inject.ImplementedBy;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Moritz Eysholdt
  */
-@ImplementedBy(IPreferenceValuesProvider.SimplePreferenceValuesProvider.class)
+@ImplementedBy(IPreferenceValuesProvider.DefaultPreferenceValuesProvider.class)
 public interface IPreferenceValuesProvider {
 
 	IPreferenceValues getPreferenceValues(Resource context);
@@ -29,6 +31,26 @@ public interface IPreferenceValuesProvider {
 		public IPreferenceValues getPreferenceValues(Resource context) {
 			return new MapBasedPreferenceValues(new LinkedHashMap<String, String>());
 		}
+	}
+	
+	public static class DefaultPreferenceValuesProvider implements IPreferenceValuesProvider {
+		@Inject private LanguageInfo language;
+
+		@Override
+		public IPreferenceValues getPreferenceValues(Resource context) {
+			PreferenceValuesByLanguage valuesByLanguage = PreferenceValuesByLanguage.findInEmfObject(context.getResourceSet());
+			if (valuesByLanguage == null)
+				return empty();
+			IPreferenceValues values = valuesByLanguage.get(language.getLanguageName());
+			if (values == null) 
+				return empty();
+			return values;
+		}
+		
+		private IPreferenceValues empty() {
+			return new MapBasedPreferenceValues(Maps.<String, String> newLinkedHashMap());
+		}
+		
 	}
 
 	@Singleton
