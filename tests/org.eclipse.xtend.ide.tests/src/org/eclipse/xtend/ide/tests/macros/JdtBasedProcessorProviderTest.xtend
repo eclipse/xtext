@@ -77,7 +77,7 @@ class JdtBasedProcessorProviderTest {
 			}
 		''')
 		libProject.addExportedPackage("mylib")
-		waitForAutoBuild()
+		waitForBuild()
 				
 		val userProject = JavaCore.create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
@@ -133,7 +133,7 @@ class JdtBasedProcessorProviderTest {
 			}
 		''')
 		macroProject.addExportedPackage("annotation")
-		waitForAutoBuild()
+		waitForBuild()
 				
 		val userProject = JavaCore.create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
@@ -198,7 +198,7 @@ class JdtBasedProcessorProviderTest {
 				}
 			}
 		''')
-		waitForAutoBuild()
+		waitForBuild()
 				
 		val userProject = xtendProject("userProject", macroProject)
 		userProject.newSource("client/A.xtend", '''
@@ -243,7 +243,7 @@ class JdtBasedProcessorProviderTest {
 				}
 			}
 		''')
-		waitForAutoBuild()
+		waitForBuild()
 				
 		val userProject = xtendProject("userProject", macroProject)
 		userProject.newSource("client/B.java", '''

@@ -133,7 +133,7 @@ public class WorkbenchTestHelper extends Assert {
 				}
 			}
 		}.run(null);
-		IResourcesSetupUtil.waitForAutoBuild();
+		IResourcesSetupUtil.waitForBuild();
 	}
 
 	public Set<IFile> getFiles() {

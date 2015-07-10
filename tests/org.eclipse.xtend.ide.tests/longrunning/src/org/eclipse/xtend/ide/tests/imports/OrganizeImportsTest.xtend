@@ -585,7 +585,7 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 				public static class Inner {}
 			}
 			''')
-		waitForAutoBuild
+		waitForBuild
 		'''		
 			package p
 

@@ -128,7 +128,7 @@ abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCase {
 	}
 
 	def reset() {
-		waitForAutoBuild
+		waitForBuild
 		queuedBuildData.reset
 	}
 
@@ -139,7 +139,7 @@ abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCase {
 	}
 
 	def tryConfirmDeltas() {
-		waitForAutoBuild
+		waitForBuild
 		!queuedBuildData.needRebuild(project)
 	}
 

@@ -248,7 +248,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
       String _string_1 = _value_1.toString();
       IFile _newSource = this.newSource(this.userProject, _key_3, _string_1);
       this.sourceFile = _newSource;
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IProject _project = this.userProject.getProject();
       final ResourceSet resourceSet = this.resourceSetProvider.get(_project);
       IPath _fullPath = this.sourceFile.getFullPath();

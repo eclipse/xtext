@@ -50,7 +50,7 @@ class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
 				}
 			}
 		''');
-		IResourcesSetupUtil::waitForAutoBuild
+		IResourcesSetupUtil::waitForBuild
 		val fooClass = fooFile.xtendTypes.get(0) as XtendClass
 		val fooMethod1 = fooClass.members.get(1)
 		val dependentElementURIs = dependentElementsCalculator.getDependentElementURIs(fooMethod1, new NullProgressMonitor)

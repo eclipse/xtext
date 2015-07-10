@@ -55,7 +55,7 @@ public class LineSeparatorConversionTest extends AbstractXtendUITestCase {
 		ScopedPreferenceStore projectPreferenceStore = new ScopedPreferenceStore(new ProjectScope(project), Platform.PI_RUNTIME);
 		projectPreferenceStore.setValue(Platform.PREF_LINE_SEPARATOR, separator);
 		workbenchTestHelper.createFile("Foo.xtend", "class Foo {}");
-		waitForAutoBuild();
+		waitForBuild();
 		IFile compiledFile = project.getFile("xtend-gen/Foo.java");
 		workbenchTestHelper.getFiles().add(compiledFile);
 		String contents = workbenchTestHelper.getContents(compiledFile);

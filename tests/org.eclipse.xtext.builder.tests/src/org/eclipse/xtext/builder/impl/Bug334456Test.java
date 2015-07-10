@@ -32,7 +32,7 @@ public class Bug334456Test extends AbstractBuilderTest {
 
 	@Test public void testNoCopiedResourceDescription() throws Exception {
 		createPluginProject("foo");
-		waitForAutoBuild();
+		waitForBuild();
 		IResourceDescriptions descriptions = BuilderUtil.getBuilderState();
 		assertFalse(Iterables.isEmpty(descriptions.getAllResourceDescriptions()));
 		for(IResourceDescription description: descriptions.getAllResourceDescriptions()) {
@@ -44,21 +44,21 @@ public class Bug334456Test extends AbstractBuilderTest {
 	
 	@Test public void testSameResourceCountForTwoProjects() throws Exception {
 		IProject fooProject = createPluginProject("foo");
-		waitForAutoBuild();
+		waitForBuild();
 		IResourceDescriptions descriptions = BuilderUtil.getBuilderState();
 		int firstSize = Iterables.size(descriptions.getAllResourceDescriptions());
 		IProject barProject = createPluginProject("bar");
-		waitForAutoBuild();
+		waitForBuild();
 		descriptions = BuilderUtil.getBuilderState();
 		int secondSize = Iterables.size(descriptions.getAllResourceDescriptions());
 		assertEquals(firstSize, secondSize);
 		barProject.close(null);
-		waitForAutoBuild();
+		waitForBuild();
 		descriptions = BuilderUtil.getBuilderState();
 		int thirdSize = Iterables.size(descriptions.getAllResourceDescriptions());
 		assertEquals(firstSize, thirdSize);
 		fooProject.close(null);
-		waitForAutoBuild();
+		waitForBuild();
 		descriptions = BuilderUtil.getBuilderState();
 		int forthSize = Iterables.size(descriptions.getAllResourceDescriptions());
 		// no remaining references to archives - fewer entries in index

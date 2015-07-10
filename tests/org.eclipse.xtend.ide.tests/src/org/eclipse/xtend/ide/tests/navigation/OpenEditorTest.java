@@ -67,7 +67,7 @@ public class OpenEditorTest extends AbstractXtendUITestCase {
 		super.setUp();
 		workbenchTestHelper.createFile("outlinetest/Bar.java", "package outlinetest; public class Bar { public int bar; }");
 		workbenchTestHelper.createFile("outlinetest/Foo.xtend", "package outlinetest class Foo extends Bar { public int foo }");
-		IResourcesSetupUtil.waitForAutoBuild();
+		IResourcesSetupUtil.waitForBuild();
 		javaProject = JavaCore.create(workbenchTestHelper.getProject());
 	}
 

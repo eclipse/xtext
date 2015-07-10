@@ -82,7 +82,7 @@ public class LinkedEditingRefactoringIntegrationTest extends AbstractLinkedEditi
 		
 		String model = "ref test." + TEST_CLASS;
 		IFile file = createFile(TEST_PROJECT + "/ref.referringtestlanguage", model);
-		waitForAutoBuild();
+		waitForBuild();
 		final XtextEditor editor = openEditor(file);
 		final TextSelection selection = new TextSelection(model.indexOf(TEST_CLASS), TEST_CLASS.length());
 		editor.getSelectionProvider().setSelection(selection);
@@ -101,7 +101,7 @@ public class LinkedEditingRefactoringIntegrationTest extends AbstractLinkedEditi
 		pressKeys(editor, "NewTestClass\n");
 		waitForReconciler(editor);
 		waitForDisplay();
-		waitForAutoBuild();
+		waitForBuild();
 		ecoreResource.load(null);
 		assertEquals("NewTestClass", ((EPackage)ecoreResource.getContents().get(0)).getEClassifiers().get(0).getName());
 	}

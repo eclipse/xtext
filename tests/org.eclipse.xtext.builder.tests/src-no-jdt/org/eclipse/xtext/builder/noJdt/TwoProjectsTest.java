@@ -69,7 +69,7 @@ public class TwoProjectsTest extends AbstractBuilderTest {
 	@Test public void testTwoFilesInTwoReferencedProjectsRemoveNature() throws Exception {
 		createTwoFilesInTwoReferencedProjects();
 		removeNature(first, XtextProjectHelper.NATURE_ID);
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(1, countMarkers(secondFile));
 	}
 
@@ -77,15 +77,15 @@ public class TwoProjectsTest extends AbstractBuilderTest {
 		removeNature(first, XtextProjectHelper.NATURE_ID);
 		firstFile = createFile("first/first" + F_EXT, "Hello First!");
 		secondFile = createFile("second/second" + F_EXT, "Hello Second ( from First )!");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(firstFile), 0, countMarkers(firstFile));
 		assertEquals(printMarkers(secondFile), 1, countMarkers(secondFile));
 		addProjectReference(second, first);
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(firstFile), 0, countMarkers(firstFile));
 		assertEquals(printMarkers(secondFile), 1, countMarkers(secondFile));
 		addNature(first.getProject(), XtextProjectHelper.NATURE_ID);
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(firstFile), 0, countMarkers(firstFile));
 		assertEquals(printMarkers(secondFile), 0, countMarkers(secondFile));
 	}
@@ -93,9 +93,9 @@ public class TwoProjectsTest extends AbstractBuilderTest {
 	protected void createTwoFilesInTwoReferencedProjects() throws Exception {
 		firstFile = createFile("first/first" + F_EXT, "Hello First!");
 		secondFile = createFile("second/second" + F_EXT, "Hello Second ( from First )!");
-		waitForAutoBuild();
+		waitForBuild();
 		addProjectReference(second, first);
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(0, countMarkers(firstFile));
 		assertEquals(0, countMarkers(secondFile));
 	}
@@ -103,9 +103,9 @@ public class TwoProjectsTest extends AbstractBuilderTest {
 	@Test public void testTwoFilesInTwoInversedReferencedProjects() throws Exception {
 		createTwoFilesInTwoReferencedProjects();
 		removeProjectReference(second);
-		waitForAutoBuild();
+		waitForBuild();
 		addProjectReference(first, second);
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(0, countMarkers(firstFile));
 		assertEquals(1, countMarkers(secondFile));
 	}
@@ -114,7 +114,7 @@ public class TwoProjectsTest extends AbstractBuilderTest {
 		createTwoFilesInTwoReferencedProjects();
 		removeProjectReference(second);
 
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(0, countMarkers(firstFile));
 		assertEquals(1, countMarkers(secondFile));
 	}
@@ -122,11 +122,11 @@ public class TwoProjectsTest extends AbstractBuilderTest {
 	@Test public void testChangeReferenceOfProjects() throws Exception {
 		createTwoFilesInTwoReferencedProjects();
 		removeProjectReference(second);
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(0, countMarkers(firstFile));
 		assertEquals(1, countMarkers(secondFile));
 		addProjectReference(second, first);
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(0, countMarkers(firstFile));
 		assertEquals(0, countMarkers(secondFile));
 	}
@@ -135,10 +135,10 @@ public class TwoProjectsTest extends AbstractBuilderTest {
 		createTwoFilesInTwoReferencedProjects();
 		// close project
 		first.getProject().close(monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(1, countMarkers(secondFile));
 		first.getProject().open(monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(secondFile), 0, countMarkers(secondFile));
 	}
 
@@ -147,12 +147,12 @@ public class TwoProjectsTest extends AbstractBuilderTest {
 
 		// change referenced file
 		firstFile.setContents(new StringInputStream("Hello Third!"), true, true, monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(1, countMarkers(secondFile));
 
 		//change back to valid state
 		firstFile.setContents(new StringInputStream("Hello First!"), true, true, monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(0, countMarkers(secondFile));
 	}
 
@@ -161,12 +161,12 @@ public class TwoProjectsTest extends AbstractBuilderTest {
 
 		// delete referenced file
 		firstFile.delete(true, new NullProgressMonitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(1, countMarkers(secondFile));
 
 		// create new
 		firstFile = createFile("first/first" + F_EXT, "Hello First!");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(0, countMarkers(firstFile));
 		assertEquals(0, countMarkers(secondFile));
 	}
@@ -378,7 +378,7 @@ public class TwoProjectsTest extends AbstractBuilderTest {
 
 	@Test public void testOpenAndCloseReferencedProjectsTogether_01() throws Exception {
 		createTwoFilesInTwoReferencedProjects();
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(secondFile), 0, countMarkers(secondFile));
 		assertEquals(printMarkers(firstFile), 0, countMarkers(firstFile));
 		new WorkspaceModifyOperation() {
@@ -389,7 +389,7 @@ public class TwoProjectsTest extends AbstractBuilderTest {
 				second.getProject().close(monitor);
 			}
 		}.run(monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		new WorkspaceModifyOperation() {
 			@Override
 			protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException,
@@ -398,22 +398,22 @@ public class TwoProjectsTest extends AbstractBuilderTest {
 				second.getProject().open(monitor);
 			}
 		}.run(monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(secondFile), 0, countMarkers(secondFile));
 		assertEquals(printMarkers(firstFile), 0, countMarkers(firstFile));
 	}
 
 	@Test public void testOpenAndCloseReferencedProjectsTogether_02() throws Exception {
 		createTwoFilesInTwoReferencedProjects();
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(secondFile), 0, countMarkers(secondFile));
 		assertEquals(printMarkers(firstFile), 0, countMarkers(firstFile));
 		first.getProject().close(monitor());
 		second.getProject().close(monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		first.getProject().open(monitor());
 		second.getProject().open(monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(secondFile), 0, countMarkers(secondFile));
 		assertEquals(printMarkers(firstFile), 0, countMarkers(firstFile));
 	}

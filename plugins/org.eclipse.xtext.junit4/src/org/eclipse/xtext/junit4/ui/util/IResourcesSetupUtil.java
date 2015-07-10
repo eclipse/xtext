@@ -32,6 +32,7 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Assert;
 
 import com.google.common.io.ByteStreams;
@@ -283,40 +284,28 @@ public class IResourcesSetupUtil {
 	}
 
 	public static void fullBuild() throws CoreException {
-		ResourcesPlugin.getWorkspace().build(
-				IncrementalProjectBuilder.FULL_BUILD, monitor());
-		boolean wasInterrupted = false;
-		do {
-			try {
-				Job.getJobManager().join(ResourcesPlugin.FAMILY_MANUAL_BUILD,
-						null);
-				wasInterrupted = false;
-			} catch (OperationCanceledException e) {
-				e.printStackTrace();
-			} catch (InterruptedException e) {
-				wasInterrupted = true;
-			}
-		} while (wasInterrupted);
+		ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.FULL_BUILD, monitor());
 	}
 	
 	public static void cleanBuild() throws CoreException {
-		ResourcesPlugin.getWorkspace().build(
-				IncrementalProjectBuilder.CLEAN_BUILD, monitor());
-		boolean wasInterrupted = false;
-		do {
-			try {
-				Job.getJobManager().join(ResourcesPlugin.FAMILY_MANUAL_BUILD,
-						null);
-				wasInterrupted = false;
-			} catch (OperationCanceledException e) {
-				e.printStackTrace();
-			} catch (InterruptedException e) {
-				wasInterrupted = true;
-			}
-		} while (wasInterrupted);
+		ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.CLEAN_BUILD, monitor());
+		fullBuild();
 	}
 
+	/**
+	 * @deprecated clients should use {@link #waitForBuild()} since it is much faster. Clients that really depend
+	 * on the delay before the build can use {@link #reallyWaitForAutoBuild()}.
+	 */
+	@Deprecated
 	public static void waitForAutoBuild() {
+		reallyWaitForAutoBuild();
+	}
+	
+	/**
+	 * A test that really should test the mechanism including the delay
+	 * after the resource change event, could wait for the auto build.
+	 */
+	public static void reallyWaitForAutoBuild() {
 		boolean wasInterrupted = false;
 		do {
 			try {
@@ -331,6 +320,10 @@ public class IResourcesSetupUtil {
 		} while (wasInterrupted);
 	}
 	
+	public static void waitForBuild() {
+		waitForBuild(null);
+	}
+	
 	public static void waitForBuild(IProgressMonitor monitor) {
 		try {
 			ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.INCREMENTAL_BUILD, monitor);
@@ -340,10 +333,24 @@ public class IResourcesSetupUtil {
 	}
 
 	public static void cleanWorkspace() throws CoreException {
-		IProject[] visibleProjects = root().getProjects();
-		deleteProjects(visibleProjects);
-		IProject[] hiddenProjects = root().getProjects(IContainer.INCLUDE_HIDDEN);
-		deleteProjects(hiddenProjects);
+		try {
+			new WorkspaceModifyOperation() {
+	
+				@Override
+				protected void execute(IProgressMonitor monitor)
+						throws CoreException, InvocationTargetException,
+						InterruptedException {
+					IProject[] visibleProjects = root().getProjects();
+					deleteProjects(visibleProjects);
+					IProject[] hiddenProjects = root().getProjects(IContainer.INCLUDE_HIDDEN);
+					deleteProjects(hiddenProjects);
+				}
+			}.run(monitor());
+		} catch(InvocationTargetException e) {
+			Exceptions.sneakyThrow(e.getCause());
+		} catch(Exception e) {
+			throw new RuntimeException();
+		}
 	}
 
 	protected static void deleteProjects(IProject[] projects) throws CoreException {

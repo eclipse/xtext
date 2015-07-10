@@ -49,7 +49,7 @@ public class BuildCancellationTest extends AbstractParticipatingBuilderTest {
 		IFolder folder = project.getProject().getFolder("src");
 		IFile file = folder.getFile("Foo" + F_EXT);
 		file.create(new StringInputStream("object Foo"), true, monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		reset();
 		cancel(false);
 		try {
@@ -63,7 +63,7 @@ public class BuildCancellationTest extends AbstractParticipatingBuilderTest {
 		reset();
 		ResourcesPlugin.getWorkspace().build(
 				IncrementalProjectBuilder.AUTO_BUILD, monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(1, getInvocationCount());
 		assertSame(BuildType.FULL, getContext().getBuildType());
 		reset();
@@ -76,7 +76,7 @@ public class BuildCancellationTest extends AbstractParticipatingBuilderTest {
 	public void testInterruptionTriggersIncrementalBuild() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
-		waitForAutoBuild();
+		waitForBuild();
 		cancel(true);
 		IFolder folder = project.getProject().getFolder("src");
 		try {
@@ -91,7 +91,7 @@ public class BuildCancellationTest extends AbstractParticipatingBuilderTest {
 		reset();
 		ResourcesPlugin.getWorkspace().build(
 				IncrementalProjectBuilder.AUTO_BUILD, monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(1, getInvocationCount());
 		if (isCoreResources_3_7_orLater()) {
 			assertSame(BuildType.INCREMENTAL, getContext().getBuildType());

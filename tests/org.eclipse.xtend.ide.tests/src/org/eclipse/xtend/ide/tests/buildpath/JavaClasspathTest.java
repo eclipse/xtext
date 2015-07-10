@@ -50,11 +50,11 @@ public class JavaClasspathTest extends AbstractXtendUITestCase {
 		assertNotNull("JRE Lib classpath entry not found.", jrePath);
 
 		JavaProjectSetupUtil.deleteClasspathEntry(javaProject, jrePath.getPath()); // remove JRE Lib
-		IResourcesSetupUtil.waitForAutoBuild();
+		IResourcesSetupUtil.waitForBuild();
 		markerAssert.assertErrorMarker(file, IssueCodes.JDK_NOT_ON_CLASSPATH);
 
 		JavaProjectSetupUtil.addToClasspath(javaProject, jrePath); // add JRE back
-		IResourcesSetupUtil.waitForAutoBuild();
+		IResourcesSetupUtil.waitForBuild();
 		markerAssert.assertNoErrorMarker(file);
 	}
 
@@ -73,12 +73,12 @@ public class JavaClasspathTest extends AbstractXtendUITestCase {
 			file.create(new StringInputStream(TEST_CLAZZ),
 					true, null);
 		IResourcesSetupUtil.cleanBuild();
-		IResourcesSetupUtil.waitForAutoBuild();
+		IResourcesSetupUtil.waitForBuild();
 		markerAssert.assertErrorMarker(file, IssueCodes.JDK_NOT_ON_CLASSPATH);
 
 		list.delete(true, null);
 		IResourcesSetupUtil.cleanBuild();
-		IResourcesSetupUtil.waitForAutoBuild();
+		IResourcesSetupUtil.waitForBuild();
 		markerAssert.assertNoErrorMarker(file);
 	}
 }

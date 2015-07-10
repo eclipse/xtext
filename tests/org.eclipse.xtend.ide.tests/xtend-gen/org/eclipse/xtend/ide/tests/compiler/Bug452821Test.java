@@ -67,7 +67,7 @@ public class Bug452821Test extends AbstractXtendUITestCase {
       _builder.append("}");
       _builder.newLine();
       final IFile file = this.workbenchTestHelper.createFile("AnonymousClassTest.xtend", _builder.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertNoErrors(file);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
