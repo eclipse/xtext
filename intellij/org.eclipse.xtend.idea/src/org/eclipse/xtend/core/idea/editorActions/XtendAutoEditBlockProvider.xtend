@@ -42,7 +42,7 @@ class XtendAutoEditBlockProvider extends DefaultAutoEditBlockProvider {
 				]
 			]
 		}
-		super.getBlocks(tokenSet)
+		return super.getBlocks(tokenSet)
 	}
 
 }

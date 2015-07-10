@@ -38,9 +38,9 @@ class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 	}
 
 	def void testIndentationEdit_1() {
-		configureByText("  '|'")
+		configureByText("   '|'")
 		myFixture.type('\n')
-		assertState("  '\n|'")
+		assertState("   '\n   |'")
 	}
 
 	def void testIndentationEdit_2() {
@@ -104,13 +104,13 @@ class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 	def void testCurlyBracesBlockInRichString_8() {
 		configureByText("'''{ foo| }'''")
 		myFixture.type('\n')
-		assertState("'''{ foo\n| }'''")
+		assertState("'''{ foo\n |}'''")
 	}
 
 	def void testCurlyBracesBlockInRichString_9() {
 		configureByText("'''\"{\" foo| }'''")
 		myFixture.type('\n')
-		assertState("'''\"{\" foo\n| }'''")
+		assertState("'''\"{\" foo\n |}'''")
 	}
 
 	def void testCurlyBracesBlockInRichString_10() {

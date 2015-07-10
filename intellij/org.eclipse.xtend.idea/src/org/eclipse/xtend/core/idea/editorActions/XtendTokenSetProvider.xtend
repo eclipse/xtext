@@ -8,15 +8,16 @@
 package org.eclipse.xtend.core.idea.editorActions
 
 import com.google.inject.Inject
+import com.google.inject.Singleton
 import com.intellij.openapi.editor.ex.EditorEx
 import com.intellij.psi.tree.IElementType
 import com.intellij.psi.tree.TokenSet
+import org.eclipse.xtend.core.idea.highlighting.XtendHighlightingLexer
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.idea.editorActions.DefaultTokenSetProvider
 import org.eclipse.xtext.idea.parser.TokenTypeProvider
 
 import static org.eclipse.xtend.core.idea.parser.antlr.internal.PsiInternalXtendParser.*
-import com.google.inject.Singleton
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -41,7 +42,8 @@ class XtendTokenSetProvider extends DefaultTokenSetProvider {
 			tokenTypeProvider.getIElementType(RULE_RICH_TEXT_END),
 			tokenTypeProvider.getIElementType(RULE_RICH_TEXT_INBETWEEN),
 			tokenTypeProvider.getIElementType(RULE_COMMENT_RICH_TEXT_END),
-			tokenTypeProvider.getIElementType(RULE_COMMENT_RICH_TEXT_INBETWEEN)
+			tokenTypeProvider.getIElementType(RULE_COMMENT_RICH_TEXT_INBETWEEN),
+			XtendHighlightingLexer.GUILLEMET_ELEMENT_TYPE
 		)
 	}
 
