@@ -56,7 +56,7 @@ class ResourceStorageTest extends AbstractXtendUITestCase {
 			}
 		''')
 		
-		IResourcesSetupUtil.waitForAutoBuild
+		IResourcesSetupUtil.waitForBuild
 		
 		val uri = uriMapper.getUri(file)
 		val uri2 = uriMapper.getUri(file2)
@@ -83,7 +83,7 @@ class ResourceStorageTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		IResourcesSetupUtil.waitForAutoBuild
+		IResourcesSetupUtil.waitForBuild
 
 		val uri = uriMapper.getUri(file)
 		
@@ -97,7 +97,7 @@ class ResourceStorageTest extends AbstractXtendUITestCase {
 		]
 		
 		file.delete(true, new NullProgressMonitor)
-		IResourcesSetupUtil.waitForAutoBuild
+		IResourcesSetupUtil.waitForBuild
 		
 		doWorkInJob[
 			assertFalse(resource.resourceStorageFacade.shouldLoadFromStorage(resource))
@@ -138,7 +138,7 @@ class ResourceStorageTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		IResourcesSetupUtil.waitForAutoBuild
+		IResourcesSetupUtil.waitForBuild
 		val storageAwareTrace = new TestableStorageAwareTrace()
 		injector.injectMembers(storageAwareTrace)
 		storageAwareTrace.localStorage = file

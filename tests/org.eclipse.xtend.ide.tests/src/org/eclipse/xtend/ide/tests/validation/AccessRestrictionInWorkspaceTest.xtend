@@ -130,7 +130,7 @@ class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
 		
 		JavaCore::create(createPluginProject("secondProject", "firstProject;visibility:=reexport"))
 		JavaCore::create(createPluginProject("thirdProject", "secondProject"))
-		waitForAutoBuild
+		waitForBuild
 	}
 	
 	@After override tearDown() throws Exception {

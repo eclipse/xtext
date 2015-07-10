@@ -164,7 +164,7 @@ public class JvmOutlineTests extends AbstractOutlineTests {
 		final IProject clientProj = WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME
 				+ "-client", Iterables.toArray(deps, String.class));
 
-		IResourcesSetupUtil.waitForAutoBuild();
+		IResourcesSetupUtil.waitForBuild();
 
 		XtendFile xtendFile = getWorkbenchTestHelper().xtendFile(clientProj, "clienttest/TestAAClient.xtend",
 				"package clienttest @aatest.TestAAnnotation class AAOutlineTest { override void myPublicMethod() {}}");

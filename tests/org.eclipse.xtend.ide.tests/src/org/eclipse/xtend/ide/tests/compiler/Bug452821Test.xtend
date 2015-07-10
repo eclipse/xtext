@@ -45,7 +45,7 @@ class Bug452821Test extends AbstractXtendUITestCase {
 			  }
 			}
 		''')
-		waitForAutoBuild()
+		waitForBuild()
 		file.assertNoErrors
 	}
 	

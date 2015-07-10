@@ -60,7 +60,7 @@ class Bug457681Test {
 			}
 		''')
 		macroProject.addExportedPackage("annotation")
-		waitForAutoBuild()
+		waitForBuild()
 				
 		val userProject = JavaCore.create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
@@ -116,7 +116,7 @@ class Bug457681Test {
 			}
 		''')
 		macroProject.addExportedPackage("annotation")
-		waitForAutoBuild()
+		waitForBuild()
 				
 		val userProject = JavaCore.create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
