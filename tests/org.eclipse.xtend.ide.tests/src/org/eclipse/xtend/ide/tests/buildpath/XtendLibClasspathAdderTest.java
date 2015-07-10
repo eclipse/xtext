@@ -16,6 +16,7 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
+import org.eclipse.xtext.junit4.Flaky;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
@@ -33,6 +34,7 @@ import com.google.inject.Inject;
 public class XtendLibClasspathAdderTest extends AbstractXtendUITestCase {
 	@Inject
 	private XtendLibClasspathAdder adder;
+
 	@Inject
 	private MarkerAssertions markerAssert;
 
@@ -65,13 +67,14 @@ public class XtendLibClasspathAdderTest extends AbstractXtendUITestCase {
 		IFile file = project.getFile("src/Foo.xtend");
 		file.create(new StringInputStream("import org.eclipse.xtend.lib.annotations.Accessors class Foo { @Accessors int bar }"),
 				true, null);
-		IResourcesSetupUtil.waitForBuild();
+		waitForAutoBuild();
 		markerAssert.assertErrorMarker(file, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		adder.addLibsToClasspath(javaProject, null);
-		IResourcesSetupUtil.waitForBuild();
+		waitForAutoBuild();
 		markerAssert.assertNoErrorMarker(file);
 	}
 
+	@Flaky
 	@Test
 	public void testAddToPlugin() throws Exception {
 		pluginProjectFactory.setProjectName("test");
@@ -86,10 +89,10 @@ public class XtendLibClasspathAdderTest extends AbstractXtendUITestCase {
 		IFile file = project.getFile("src/Foo.xtend");
 		file.create(new StringInputStream("import org.eclipse.xtend.lib.annotations.Accessors class Foo { @Accessors int bar }"),
 				true, null);
-		IResourcesSetupUtil.waitForBuild();
+		waitForAutoBuild();
 		markerAssert.assertErrorMarker(file, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		adder.addLibsToClasspath(javaProject, null);
-		IResourcesSetupUtil.waitForBuild();
+		waitForAutoBuild();
 		markerAssert.assertNoErrorMarker(file);
 	}
 
@@ -108,11 +111,21 @@ public class XtendLibClasspathAdderTest extends AbstractXtendUITestCase {
 		IFile file = project.getFile("src/Foo.xtend");
 		file.create(new StringInputStream("import org.eclipse.xtend.lib.annotations.Accessors class Foo { @Accessors int bar }"),
 				true, null);
-		IResourcesSetupUtil.waitForBuild();
+		waitForAutoBuild();
 		markerAssert.assertErrorMarker(file, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		adder.addLibsToClasspath(javaProject, null);
-		IResourcesSetupUtil.waitForBuild();
+		waitForAutoBuild();
 		markerAssert.assertNoErrorMarker(file);
 	}
+
+	/**
+	 * Behavior relies on scheduled jobs which are not really builds but still belong to the
+	 * {@link org.eclipse.core.resources.ResourcesPlugin#FAMILY_AUTO_BUILD} thus we wait for that one here.
+	 */
+	protected void waitForAutoBuild() {
+		IResourcesSetupUtil.reallyWaitForAutoBuild();
+	}
+	
+
 
 }
