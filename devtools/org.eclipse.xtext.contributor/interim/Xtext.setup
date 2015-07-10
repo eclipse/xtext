@@ -303,7 +303,7 @@
           name="org.eclipse.emf.mwe2.language.sdk.feature.group"/>
       <requirement
           name="org.junit"
-          versionRange="4.11.0"/>
+          versionRange="[4.11.0,4.12.0)"/>
       <requirement
           name="org.eclipse.jdt.java8patch.feature.group"
           optional="true"/>
