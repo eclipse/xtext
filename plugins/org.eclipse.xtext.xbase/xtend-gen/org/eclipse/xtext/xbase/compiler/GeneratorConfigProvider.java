@@ -34,7 +34,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @SuppressWarnings("all")
 public class GeneratorConfigProvider implements IGeneratorConfigProvider {
   @EmfAdaptable
-  protected static class GeneratorConfigAdapter {
+  public static class GeneratorConfigAdapter {
     public static class GeneratorConfigAdapterAdapter extends AdapterImpl {
       private GeneratorConfigProvider.GeneratorConfigAdapter element;
       
