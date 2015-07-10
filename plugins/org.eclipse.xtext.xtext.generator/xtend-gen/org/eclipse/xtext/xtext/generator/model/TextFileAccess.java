@@ -19,14 +19,17 @@ import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class TextFileAccess {
+  private final IEncodingProvider encodingProvider;
+  
   @Accessors
   private String path;
   
   @Accessors
   private CharSequence content;
   
-  @Accessors
-  private IEncodingProvider encodingProvider;
+  protected TextFileAccess(final IEncodingProvider encodingProvider) {
+    this.encodingProvider = encodingProvider;
+  }
   
   public CharSequence generate() {
     return this.content;
@@ -73,14 +76,5 @@ public class TextFileAccess {
   
   public void setContent(final CharSequence content) {
     this.content = content;
-  }
-  
-  @Pure
-  public IEncodingProvider getEncodingProvider() {
-    return this.encodingProvider;
-  }
-  
-  public void setEncodingProvider(final IEncodingProvider encodingProvider) {
-    this.encodingProvider = encodingProvider;
   }
 }

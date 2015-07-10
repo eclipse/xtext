@@ -16,9 +16,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
+import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -51,7 +55,14 @@ public class JavaFileAccess extends TextFileAccess {
           TypeReference _typeReference = new TypeReference(((Class<?>)object));
           _xifexpression_1 = this.access.importType(_typeReference);
         } else {
-          _xifexpression_1 = object.toString();
+          String _xifexpression_2 = null;
+          if ((object instanceof EClass)) {
+            TypeReference _typeReference_1 = new TypeReference(((EClass)object), this.access.resourceSet);
+            _xifexpression_2 = this.access.importType(_typeReference_1);
+          } else {
+            _xifexpression_2 = object.toString();
+          }
+          _xifexpression_1 = _xifexpression_2;
         }
         _xifexpression = _xifexpression_1;
       }
@@ -79,11 +90,11 @@ public class JavaFileAccess extends TextFileAccess {
   @Accessors
   private final List<IClassAnnotation> annotations = CollectionLiterals.<IClassAnnotation>newArrayList();
   
-  public JavaFileAccess(final String qualifiedName, final CodeConfig codeConfig) {
-    this(new TypeReference(qualifiedName), codeConfig);
-  }
+  @Accessors(AccessorType.PROTECTED_SETTER)
+  private ResourceSet resourceSet;
   
-  public JavaFileAccess(final TypeReference typeRef, final CodeConfig codeConfig) {
+  protected JavaFileAccess(final TypeReference typeRef, final CodeConfig codeConfig, final IEncodingProvider encodingProvider) {
+    super(encodingProvider);
     List<String> _simpleNames = typeRef.getSimpleNames();
     int _length = ((Object[])Conversions.unwrapArray(_simpleNames, Object.class)).length;
     boolean _greaterThan = (_length > 1);
@@ -288,5 +299,9 @@ public class JavaFileAccess extends TextFileAccess {
   @Pure
   public List<IClassAnnotation> getAnnotations() {
     return this.annotations;
+  }
+  
+  protected void setResourceSet(final ResourceSet resourceSet) {
+    this.resourceSet = resourceSet;
   }
 }

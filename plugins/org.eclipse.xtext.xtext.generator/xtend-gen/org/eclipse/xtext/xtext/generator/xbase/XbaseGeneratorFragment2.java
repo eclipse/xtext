@@ -27,7 +27,6 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
-import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
@@ -39,11 +38,11 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.UsedRulesFinder;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
-import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.GenModelUtil;
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.LanguageConfig2;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
+import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.FileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
@@ -100,10 +99,7 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
   private IXtextProjectConfig projectConfig;
   
   @Inject
-  private CodeConfig codeConfig;
-  
-  @Inject
-  private IEncodingProvider encodingProvider;
+  private FileAccessFactory fileAccessFactory;
   
   @Inject
   @Extension
@@ -371,8 +367,7 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
   
   protected void doGenerateXtendInferrer(final LanguageConfig2 language) {
     TypeReference _jvmModelInferrer = this.getJvmModelInferrer(language);
-    final XtendFileAccess xtendFile = new XtendFileAccess(_jvmModelInferrer, this.codeConfig);
-    xtendFile.setEncodingProvider(this.encodingProvider);
+    final XtendFileAccess xtendFile = this.fileAccessFactory.createXtendFile(_jvmModelInferrer);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -1236,12 +1231,8 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
     this.projectConfig = projectConfig;
   }
   
-  public void setCodeConfig(final CodeConfig codeConfig) {
-    this.codeConfig = codeConfig;
-  }
-  
-  public void setEncodingProvider(final IEncodingProvider encodingProvider) {
-    this.encodingProvider = encodingProvider;
+  public void setFileAccessFactory(final FileAccessFactory fileAccessFactory) {
+    this.fileAccessFactory = fileAccessFactory;
   }
   
   public void set_extensions(final FileSystemAccess.Extensions _extensions) {

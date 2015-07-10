@@ -7,18 +7,15 @@
  */
 package org.eclipse.xtext.xtext.generator.model;
 
+import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
 @SuppressWarnings("all")
 public class XtendFileAccess extends JavaFileAccess {
-  public XtendFileAccess(final String qualifiedName, final CodeConfig codeConfig) {
-    super(qualifiedName, codeConfig);
-  }
-  
-  public XtendFileAccess(final TypeReference typeRef, final CodeConfig codeConfig) {
-    super(typeRef, codeConfig);
+  protected XtendFileAccess(final TypeReference typeRef, final CodeConfig codeConfig, final IEncodingProvider encodingProvider) {
+    super(typeRef, codeConfig, encodingProvider);
   }
   
   @Override

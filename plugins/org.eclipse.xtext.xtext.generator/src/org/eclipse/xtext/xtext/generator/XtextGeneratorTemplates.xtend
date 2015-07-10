@@ -27,10 +27,10 @@ import org.eclipse.xtext.Constants
 import org.eclipse.xtext.ISetup
 import org.eclipse.xtext.ISetupExtension
 import org.eclipse.xtext.XtextPackage
-import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.impl.BinaryGrammarResourceFactoryImpl
 import org.eclipse.xtext.service.SingletonBinding
 import org.eclipse.xtext.util.Modules2
+import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess
@@ -45,13 +45,10 @@ import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 @Singleton
 class XtextGeneratorTemplates {
 	
-	@Inject CodeConfig codeConfig
-	
-	@Inject IEncodingProvider encodingProvider
+	@Inject FileAccessFactory fileAccessFactory
 	
 	def TextFileAccess createPluginXml(PluginXmlAccess pluginXml) {
-		val file = new TextFileAccess
-		file.encodingProvider = encodingProvider
+		val file = fileAccessFactory.createTextFile()
 		file.path = pluginXml.path
 		file.content = '''
 			<?xml version="1.0" encoding="UTF-8"?>
@@ -68,8 +65,7 @@ class XtextGeneratorTemplates {
 	
 	def JavaFileAccess createRuntimeSetup(LanguageConfig2 langConfig) {
 		val it = langConfig.naming
-		val javaFile = new JavaFileAccess(runtimeSetup, codeConfig)
-		javaFile.encodingProvider = encodingProvider
+		val javaFile = fileAccessFactory.createJavaFile(runtimeSetup)
 		
 		javaFile.typeComment = '''
 			/**
@@ -90,8 +86,7 @@ class XtextGeneratorTemplates {
 	
 	def JavaFileAccess createRuntimeGenSetup(LanguageConfig2 langConfig) {
 		val it = langConfig.naming
-		val javaFile = new JavaFileAccess(runtimeGenSetup, codeConfig)
-		javaFile.encodingProvider = encodingProvider
+		val javaFile = fileAccessFactory.createJavaFile(runtimeGenSetup)
 		for (type : langConfig.runtimeGenSetup.imports) {
 			javaFile.importType(type)
 		}
@@ -186,8 +181,7 @@ class XtextGeneratorTemplates {
 	
 	def JavaFileAccess createRuntimeModule(LanguageConfig2 langConfig) {
 		val it = langConfig.naming
-		val javaFile = new JavaFileAccess(runtimeModule, codeConfig)
-		javaFile.encodingProvider = encodingProvider
+		val javaFile = fileAccessFactory.createJavaFile(runtimeModule)
 		javaFile.typeComment = '''
 			/**
 			 * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -204,8 +198,7 @@ class XtextGeneratorTemplates {
 	def JavaFileAccess createRuntimeGenModule(LanguageConfig2 langConfig) {
 		val it = langConfig.naming
 		val superClass = langConfig.runtimeGenModule.superClass ?: runtimeDefaultModule
-		val javaFile = new JavaFileAccess(runtimeGenModule, codeConfig)
-		javaFile.encodingProvider = encodingProvider
+		val javaFile = fileAccessFactory.createJavaFile(runtimeGenModule)
 		javaFile.importNestedTypeThreshold = JavaFileAccess.DONT_IMPORT_NESTED_TYPES
 		
 		javaFile.typeComment = '''
@@ -246,8 +239,7 @@ class XtextGeneratorTemplates {
 	
 	def JavaFileAccess createEclipsePluginModule(LanguageConfig2 langConfig) {
 		val it = langConfig.naming
-		val javaFile = new JavaFileAccess(eclipsePluginModule, codeConfig)
-		javaFile.encodingProvider = encodingProvider
+		val javaFile = fileAccessFactory.createJavaFile(eclipsePluginModule)
 		javaFile.typeComment = '''
 			/**
 			 * Use this class to register components to be used within the Eclipse IDE.
@@ -266,8 +258,7 @@ class XtextGeneratorTemplates {
 	def JavaFileAccess createEclipsePluginGenModule(LanguageConfig2 langConfig) {
 		val it = langConfig.naming
 		val superClass = langConfig.eclipsePluginGenModule.superClass ?: eclipsePluginDefaultModule
-		val javaFile = new JavaFileAccess(eclipsePluginGenModule, codeConfig)
-		javaFile.encodingProvider = encodingProvider
+		val javaFile = fileAccessFactory.createJavaFile(eclipsePluginGenModule)
 		javaFile.importNestedTypeThreshold = JavaFileAccess.DONT_IMPORT_NESTED_TYPES
 		
 		javaFile.typeComment = '''
@@ -294,8 +285,7 @@ class XtextGeneratorTemplates {
 	}
 	
 	def TextFileAccess createManifest(ManifestAccess manifest, TypeReference activator) {
-		val file = new TextFileAccess
-		file.encodingProvider = encodingProvider
+		val file = fileAccessFactory.createTextFile()
 		file.path = manifest.path
 		file.content = '''
 			Manifest-Version: 1.0
@@ -324,8 +314,7 @@ class XtextGeneratorTemplates {
 	}
 	
 	def JavaFileAccess createEclipsePluginExecutableExtensionFactory(LanguageConfig2 langConfig, LanguageConfig2 activatorLanguage) {
-		val javaFile = new JavaFileAccess(langConfig.naming.eclipsePluginExecutableExtensionFactory, codeConfig)
-		javaFile.encodingProvider = encodingProvider
+		val javaFile = fileAccessFactory.createJavaFile(langConfig.naming.eclipsePluginExecutableExtensionFactory)
 		
 		javaFile.typeComment = '''
 			/**
@@ -354,8 +343,7 @@ class XtextGeneratorTemplates {
 	
 	def JavaFileAccess createEclipsePluginActivator(List<LanguageConfig2> langConfigs) {
 		val activator = langConfigs.head.naming.eclipsePluginActivator
-		val javaFile = new JavaFileAccess(activator, codeConfig)
-		javaFile.encodingProvider = encodingProvider
+		val javaFile = fileAccessFactory.createJavaFile(activator)
 		
 		javaFile.typeComment = '''
 			/**

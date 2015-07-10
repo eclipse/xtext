@@ -16,7 +16,6 @@ import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.GrammarUtil
 import org.eclipse.xtext.naming.IQualifiedNameProvider
-import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.ILocationInFileProvider
 import org.eclipse.xtext.scoping.IGlobalScopeProvider
 import org.eclipse.xtext.scoping.IScopeProvider
@@ -24,13 +23,12 @@ import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider
 import org.eclipse.xtext.validation.IResourceValidator
 import org.eclipse.xtext.xtext.UsedRulesFinder
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
-import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig
 import org.eclipse.xtext.xtext.generator.LanguageConfig2
+import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.FileSystemAccess
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
-import org.eclipse.xtext.xtext.generator.model.XtendFileAccess
 
 import static extension org.eclipse.xtext.xtext.generator.GenModelUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
@@ -60,9 +58,7 @@ class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
 	
 	@Inject IXtextProjectConfig projectConfig
 	
-	@Inject CodeConfig codeConfig
-	
-	@Inject IEncodingProvider encodingProvider
+	@Inject FileAccessFactory fileAccessFactory
 	
 	@Inject extension FileSystemAccess.Extensions
 	
@@ -218,8 +214,7 @@ class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
 	}
 	
 	protected def doGenerateXtendInferrer(LanguageConfig2 language) {
-		val xtendFile = new XtendFileAccess(language.jvmModelInferrer, codeConfig)
-		xtendFile.encodingProvider = encodingProvider
+		val xtendFile = fileAccessFactory.createXtendFile(language.jvmModelInferrer)
 		
 		xtendFile.typeComment = '''
 			/**

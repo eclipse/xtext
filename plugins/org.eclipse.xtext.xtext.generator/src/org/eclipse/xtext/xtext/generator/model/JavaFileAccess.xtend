@@ -12,9 +12,12 @@ import java.util.Collections
 import java.util.List
 import java.util.Map
 import org.eclipse.emf.codegen.util.CodeGenUtil
+import org.eclipse.emf.ecore.EClass
+import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenation
 import org.eclipse.xtend2.lib.StringConcatenationClient
+import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.xtext.generator.CodeConfig
 
 class JavaFileAccess extends TextFileAccess {
@@ -39,11 +42,11 @@ class JavaFileAccess extends TextFileAccess {
 	@Accessors
 	val List<IClassAnnotation> annotations = newArrayList
 	
-	new(String qualifiedName, CodeConfig codeConfig) {
-		this(new TypeReference(qualifiedName), codeConfig)
-	}
+	@Accessors(PROTECTED_SETTER)
+	ResourceSet resourceSet
 	
-	new(TypeReference typeRef, CodeConfig codeConfig) {
+	protected new(TypeReference typeRef, CodeConfig codeConfig, IEncodingProvider encodingProvider) {
+		super(encodingProvider)
 		if (typeRef.simpleNames.length > 1)
 			throw new IllegalArgumentException('Nested type cannot be serialized: ' + typeRef)
 		this.javaType = typeRef
@@ -131,6 +134,8 @@ class JavaFileAccess extends TextFileAccess {
 				access.importType(object)
 			else if (object instanceof Class<?>)
 				access.importType(new TypeReference(object))
+			else if (object instanceof EClass)
+				access.importType(new TypeReference(object, access.resourceSet))
 			else
 				object.toString
 		}

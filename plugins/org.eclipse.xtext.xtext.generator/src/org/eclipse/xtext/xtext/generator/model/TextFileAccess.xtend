@@ -18,14 +18,17 @@ import org.eclipse.xtext.parser.IEncodingProvider
 
 class TextFileAccess {
 	
+	val IEncodingProvider encodingProvider
+	
 	@Accessors
 	String path
 	
 	@Accessors
 	CharSequence content
 	
-	@Accessors
-	IEncodingProvider encodingProvider
+	protected new(IEncodingProvider encodingProvider) {
+		this.encodingProvider = encodingProvider
+	}
 	
 	def CharSequence generate() {
 		return content

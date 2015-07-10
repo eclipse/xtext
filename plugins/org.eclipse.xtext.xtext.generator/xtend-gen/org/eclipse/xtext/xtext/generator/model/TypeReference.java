@@ -12,6 +12,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.EqualsHashCode;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -20,6 +22,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xtext.generator.GenModelUtil;
 
 @Accessors
 @EqualsHashCode
@@ -45,6 +48,17 @@ public class TypeReference {
     };
     List<TypeReference> _map = ListExtensions.<Class<?>, TypeReference>map(((List<Class<?>>)Conversions.doWrapArray(arguments)), _function);
     return new TypeReference(clazz, _map);
+  }
+  
+  public static TypeReference typeRef(final EClass clazz, final ResourceSet resourceSet, final EClass... arguments) {
+    final Function1<EClass, TypeReference> _function = new Function1<EClass, TypeReference>() {
+      @Override
+      public TypeReference apply(final EClass it) {
+        return new TypeReference(it, resourceSet);
+      }
+    };
+    List<TypeReference> _map = ListExtensions.<EClass, TypeReference>map(((List<EClass>)Conversions.doWrapArray(arguments)), _function);
+    return new TypeReference(clazz, resourceSet, _map);
   }
   
   private final static Pattern PACKAGE_MATCHER = Pattern.compile("[a-z][a-zA-Z0-9_]*(\\.[a-z][a-zA-Z0-9_]*)*");
@@ -152,6 +166,14 @@ public class TypeReference {
         c = _declaringClass;
       }
     } while((c != null));
+  }
+  
+  public TypeReference(final EClass clazz, final ResourceSet resourceSet) {
+    this(clazz, resourceSet, null);
+  }
+  
+  public TypeReference(final EClass clazz, final ResourceSet resourceSet, final List<TypeReference> arguments) {
+    this(GenModelUtil.getGenClass(clazz, resourceSet).getQualifiedInterfaceName(), arguments);
   }
   
   private static String getPackageName(final String qualifiedName) {
