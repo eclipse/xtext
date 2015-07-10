@@ -80,7 +80,7 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
             return null;
           }
         };
-        AbstractClosureTypeTest2.this.collector.<Object>checkSucceeds(_function);
+        AbstractClosureTypeTest2.this.collector.checkSucceeds(_function);
         final Callable<Object> _function_1 = new Callable<Object>() {
           @Override
           public Object call() throws Exception {
@@ -93,7 +93,7 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
             return null;
           }
         };
-        AbstractClosureTypeTest2.this.collector.<Object>checkSucceeds(_function_1);
+        AbstractClosureTypeTest2.this.collector.checkSucceeds(_function_1);
         result.add(closureType);
       }
     };
@@ -112,7 +112,7 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
             return null;
           }
         };
-        AbstractClosureTypeTest2.this.collector.<Object>checkSucceeds(_function);
+        AbstractClosureTypeTest2.this.collector.checkSucceeds(_function);
         final Callable<Object> _function_1 = new Callable<Object>() {
           @Override
           public Object call() throws Exception {
@@ -122,7 +122,7 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
             return null;
           }
         };
-        AbstractClosureTypeTest2.this.collector.<Object>checkSucceeds(_function_1);
+        AbstractClosureTypeTest2.this.collector.checkSucceeds(_function_1);
       }
     };
     IterableExtensions.<Object>forEach(references, _function);

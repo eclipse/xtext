@@ -72,7 +72,7 @@ public class BatchClosureTypeTest extends AbstractClosureTypeTest {
             return null;
           }
         };
-        BatchClosureTypeTest.this.collector.<Object>checkSucceeds(_function);
+        BatchClosureTypeTest.this.collector.checkSucceeds(_function);
         final Callable<Object> _function_1 = new Callable<Object>() {
           @Override
           public Object call() throws Exception {
@@ -85,7 +85,7 @@ public class BatchClosureTypeTest extends AbstractClosureTypeTest {
             return null;
           }
         };
-        BatchClosureTypeTest.this.collector.<Object>checkSucceeds(_function_1);
+        BatchClosureTypeTest.this.collector.checkSucceeds(_function_1);
         result.add(closureType);
       }
     };
@@ -105,7 +105,7 @@ public class BatchClosureTypeTest extends AbstractClosureTypeTest {
             return null;
           }
         };
-        BatchClosureTypeTest.this.collector.<Object>checkSucceeds(_function);
+        BatchClosureTypeTest.this.collector.checkSucceeds(_function);
         final Callable<Object> _function_1 = new Callable<Object>() {
           @Override
           public Object call() throws Exception {
@@ -115,7 +115,7 @@ public class BatchClosureTypeTest extends AbstractClosureTypeTest {
             return null;
           }
         };
-        BatchClosureTypeTest.this.collector.<Object>checkSucceeds(_function_1);
+        BatchClosureTypeTest.this.collector.checkSucceeds(_function_1);
       }
     };
     IterableExtensions.<Object>forEach(references, _function);
