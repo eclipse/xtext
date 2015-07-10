@@ -398,7 +398,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 			output.addOutlet(createOutlet(false, getEncoding(), PLUGIN_IDE, false, getPathIdeProject()));
 			output.addOutlet(createOutlet(false, getEncoding(), SRC_IDE, false, getPathIdeProject() + getSrcPath()));
 			output.addOutlet(createOutlet(false, getEncoding(), SRC_GEN_IDE, true, getPathIdeProject() + getSrcGenPath()));
-		} else if (getPathUiProject() != null){
+		} else if (getPathUiProject() != null) {
 			output.addOutlet(createOutlet(false, getEncoding(), PLUGIN_IDE, false, getPathUiProject()));
 			output.addOutlet(createOutlet(false, getEncoding(), SRC_IDE, false, getPathUiProject() + getSrcPath()));
 			output.addOutlet(createOutlet(false, getEncoding(), SRC_GEN_IDE, true, getPathUiProject() + getSrcGenPath()));

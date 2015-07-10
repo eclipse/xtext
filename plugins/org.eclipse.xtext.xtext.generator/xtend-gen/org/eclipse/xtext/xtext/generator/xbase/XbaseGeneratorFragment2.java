@@ -147,11 +147,17 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
     if (_tripleNotEquals) {
       this.addEclipsePluginExtensions(language);
     }
-    IFileSystemAccess2 _runtimeSrc = this.projectConfig.getRuntimeSrc();
-    TypeReference _jvmModelInferrer = this.getJvmModelInferrer(language);
-    boolean _containsXtendFile = this._extensions.containsXtendFile(_runtimeSrc, _jvmModelInferrer);
-    boolean _not_1 = (!_containsXtendFile);
-    if (_not_1) {
+    boolean _and = false;
+    if (!this.generateXtendInferrer) {
+      _and = false;
+    } else {
+      IFileSystemAccess2 _runtimeSrc = this.projectConfig.getRuntimeSrc();
+      TypeReference _jvmModelInferrer = this.getJvmModelInferrer(language);
+      boolean _containsXtendFile = this._extensions.containsXtendFile(_runtimeSrc, _jvmModelInferrer);
+      boolean _not_1 = (!_containsXtendFile);
+      _and = _not_1;
+    }
+    if (_and) {
       this.doGenerateXtendInferrer(language);
     }
     ManifestAccess _runtimeManifest = this.projectConfig.getRuntimeManifest();
@@ -340,7 +346,7 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
       TypeReference _typeRef_28 = TypeReference.typeRef("org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider");
       TypeReference _typeRef_29 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.contentassist.ImportingTypesProposalProvider");
       GuiceModuleAccess.BindingFactory _addTypeToType_12 = _addTypeToType_11.addTypeToType(_typeRef_28, _typeRef_29);
-      TypeReference _typeRef_30 = TypeReference.typeRef(" org.eclipse.xtext.ui.editor.templates.XtextTemplateContextType");
+      TypeReference _typeRef_30 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.templates.XtextTemplateContextType");
       TypeReference _typeRef_31 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.templates.XbaseTemplateContextType");
       _addTypeToType_12.addTypeToType(_typeRef_30, _typeRef_31);
     } else {

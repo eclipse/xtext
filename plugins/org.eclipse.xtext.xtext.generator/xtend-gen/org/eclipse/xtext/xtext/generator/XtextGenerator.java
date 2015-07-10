@@ -249,7 +249,8 @@ public class XtextGenerator extends AbstractWorkflowComponent2 implements IGuice
     IFileSystemAccess2 _eclipsePluginSrcGen = this.projectConfig.getEclipsePluginSrcGen();
     boolean _tripleNotEquals = (_eclipsePluginSrcGen != null);
     if (_tripleNotEquals) {
-      JavaFileAccess _createEclipsePluginExecutableExtensionFactory = this.templates.createEclipsePluginExecutableExtensionFactory(language);
+      LanguageConfig2 _head = IterableExtensions.<LanguageConfig2>head(this.languageConfigs);
+      JavaFileAccess _createEclipsePluginExecutableExtensionFactory = this.templates.createEclipsePluginExecutableExtensionFactory(language, _head);
       IFileSystemAccess2 _eclipsePluginSrcGen_1 = this.projectConfig.getEclipsePluginSrcGen();
       _createEclipsePluginExecutableExtensionFactory.writeTo(_eclipsePluginSrcGen_1);
     }

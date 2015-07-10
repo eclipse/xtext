@@ -1,6 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 module org.eclipse.xtend.core.GenerateXtend
 
 import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.xtext.generator.*
 import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 import org.eclipse.xtext.generator.parser.antlr.*
@@ -21,6 +29,14 @@ var memoize = false
 
 var ideaProjectName = "org.eclipse.xtend.idea"
 var ideaProjectPath = "../../intellij/${ideaProjectName}"
+
+var fileHeader = "/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/"
 
 Workflow {
 	bean = StandaloneSetup {
@@ -76,83 +92,147 @@ Workflow {
 	
 	component = parser.JFlexLoader : jFlexMain {}
 
-	component = Generator auto-inject {
-		pathRtProject = projectPath
-		pathUiProject = uiProjectPath
-		pathIdeProject = ideProjectPath
-		projectNameRt = projectName
-		projectNameUi = uiProjectName
-		projectNameIde = ideProjectName
-		encoding = "ISO-8859-1"
-		naming = {
-			uiBasePackage = "org.eclipse.xtend.ide"
-			grammarId = "org.eclipse.xtend.core.Xtend"
-			lineDelimiter = lineDelimiter
+	component = XtextGenerator auto-inject {
+		configuration = {
+			project = {
+				runtimeSrc = "${projectPath}/src"
+				runtimeSrcGen = "${projectPath}/src-gen"
+				runtimeManifest = {
+					path = "${projectPath}/META-INF/MANIFEST.MF"
+				}
+				eclipsePluginSrc = "${uiProjectPath}/src"
+				eclipsePluginSrcGen = "${uiProjectPath}/src-gen"
+				eclipsePluginManifest = {
+					path = "${uiProjectPath}/META-INF/MANIFEST.MF"
+				}
+				genericIdeSrc = "${ideProjectPath}/src"
+				genericIdeSrcGen = "${ideProjectPath}/src-gen"
+				genericIdeManifest = {
+					path = "${ideProjectPath}/META-INF/MANIFEST.MF"
+				}
+			}
+			code = {
+				encoding = "ISO-8859-1"
+				lineDelimiter = lineDelimiter
+				fileHeader = fileHeader
+			}
 		}
 		language = {
-			forcedResourceSet = resourceSet
+			resourceSet = resourceSet
 			uri = grammarURI
 			fileExtensions = file.extensions
-			fragment = grammarAccess.GrammarAccessFragment auto-inject {}
-			fragment = serializer.SerializerFragment {
-				// generateDebugData = true
+			naming = {
+				eclipsePluginBasePackage = uiProjectName
+				genericIdeBasePackage = ideProjectName
 			}
-			fragment = resourceFactory.ResourceFactoryFragment {
-				fileExtensions = file.extensions
+			
+			fragment = adapter.FragmentAdapter {
+				fragment = grammarAccess.GrammarAccessFragment auto-inject {}
 			}
-			fragment = parser.ParserGenerator auto-inject {
-				options = auto-inject {}
-			}
-			fragment = DebugAntlrGeneratorFragment auto-inject {
-				options = auto-inject {}
-			}
-			fragment = validation.JavaValidatorFragment {}
-			fragment = formatting2.Formatter2Fragment {}
-			fragment = generator.GeneratorFragment {}
-			fragment = scoping.ImportNamespacesScopingFragment {}
-			fragment = builder.BuilderIntegrationFragment {}
-			fragment = quickfix.QuickfixProviderFragment {}
-			fragment = labeling.LabelProviderFragment {
-				generateStub = false
-			}
-			fragment = outline.OutlineTreeProviderFragment {}
-			fragment = outline.QuickOutlineFragment {}
-			fragment = compare.CompareFragment {
-				fileExtensions = file.extensions
-			}
-			fragment = contentAssist.JavaBasedContentAssistFragment {}
-			fragment = parser.ContentAssistParserGenerator auto-inject {
-				removeBacktrackingGuards = true
-				lookaheadThreshold = '5'
-				options = auto-inject {
-					classSplitting = true
+			fragment = adapter.FragmentAdapter {
+				fragment = serializer.SerializerFragment {
+					// generateDebugData = true
 				}
-				partialParsing = true
 			}
-			fragment = refactoring.RefactorElementNameFragment {
-				useJdtRefactoring = true
+			fragment = adapter.FragmentAdapter {
+				fragment = resourceFactory.ResourceFactoryFragment {
+					fileExtensions = file.extensions
+				}
 			}
-			fragment = types.TypesGeneratorFragment {}
-			fragment = xbase.XbaseGeneratorFragment {
+			fragment = adapter.FragmentAdapter {
+				fragment = parser.ParserGenerator auto-inject {
+					options = auto-inject {}
+				}
+			}
+			fragment = adapter.FragmentAdapter {
+				fragment = DebugAntlrGeneratorFragment auto-inject {
+					options = auto-inject {}
+				}
+			}
+			fragment = adapter.FragmentAdapter {
+				fragment = validation.JavaValidatorFragment {}
+			}
+			fragment = adapter.FragmentAdapter {
+				fragment = formatting2.Formatter2Fragment {}
+			}
+			fragment = adapter.FragmentAdapter {
+				fragment = generator.GeneratorFragment {}
+			}
+			fragment = adapter.FragmentAdapter {
+				fragment = scoping.ImportNamespacesScopingFragment {}
+			}
+			fragment = adapter.FragmentAdapter {
+				fragment = builder.BuilderIntegrationFragment {}
+			}
+			fragment = adapter.FragmentAdapter {
+				fragment = quickfix.QuickfixProviderFragment {}
+			}
+			fragment = adapter.FragmentAdapter {
+				fragment = labeling.LabelProviderFragment {
+					generateStub = false
+				}
+			}
+			fragment = adapter.FragmentAdapter {
+				fragment = outline.OutlineTreeProviderFragment {}
+			}
+			fragment = adapter.FragmentAdapter {
+				fragment = outline.QuickOutlineFragment {}
+			}
+			fragment = adapter.FragmentAdapter {
+				fragment = compare.CompareFragment {
+					fileExtensions = file.extensions
+				}
+			}
+			fragment = adapter.FragmentAdapter {
+				fragment = contentAssist.JavaBasedContentAssistFragment {}
+			}
+			fragment = adapter.FragmentAdapter {
+				fragment = parser.ContentAssistParserGenerator auto-inject {
+					removeBacktrackingGuards = true
+					lookaheadThreshold = '5'
+					options = auto-inject {
+						classSplitting = true
+					}
+					partialParsing = true
+				}
+			}
+			fragment = adapter.FragmentAdapter {
+				fragment = refactoring.RefactorElementNameFragment {
+					useJdtRefactoring = true
+				}
+			}
+			fragment = adapter.FragmentAdapter {
+				fragment = types.TypesGeneratorFragment {}
+			}
+			fragment = xbase.XbaseGeneratorFragment2 {
 				generateXtendInferrer = false
 			}
-			fragment = templates.CodetemplatesGeneratorFragment {
-				suppressRestriction = false
+			fragment = adapter.FragmentAdapter {
+				fragment = templates.CodetemplatesGeneratorFragment {
+					suppressRestriction = false
+				}
 			}
-			fragment = parser.JFlexGeneratorFragment auto-inject {
-				patternPath = "/org/eclipse/xtend/core/parser/antlr/internal/patterns.incl"
-				additionalRulePath = "/org/eclipse/xtend/core/parser/antlr/internal/rules.incl"
+			fragment = adapter.FragmentAdapter {
+				fragment = parser.JFlexGeneratorFragment auto-inject {
+					patternPath = "/org/eclipse/xtend/core/parser/antlr/internal/patterns.incl"
+					additionalRulePath = "/org/eclipse/xtend/core/parser/antlr/internal/rules.incl"
+				}
 			}
-			fragment = parser.JFlexGeneratorFragment auto-inject {
-				ui = true
-				patternPath = "/org/eclipse/xtend/core/parser/antlr/internal/patterns.incl"
-				additionalRulePath = "/org/eclipse/xtend/core/parser/antlr/internal/rules.incl"
+			fragment = adapter.FragmentAdapter {
+				fragment = parser.JFlexGeneratorFragment auto-inject {
+					ui = true
+					patternPath = "/org/eclipse/xtend/core/parser/antlr/internal/patterns.incl"
+					additionalRulePath = "/org/eclipse/xtend/core/parser/antlr/internal/rules.incl"
+				}
 			}
-	        fragment = parser.XtendAntlrIDEAGeneratorFragment auto-inject {
+	        fragment = adapter.FragmentAdapter {
+				fragment = parser.XtendAntlrIDEAGeneratorFragment auto-inject {}
 			}
-    		fragment = org.eclipse.xtext.idea.generator.IdeaPluginGenerator auto-inject {
-    			runtimeProjectName = projectName
-    			runtimeProjectPath = projectPath
+    		fragment = adapter.FragmentAdapter {
+				fragment = org.eclipse.xtext.idea.generator.IdeaPluginGenerator auto-inject {
+	    			runtimeProjectName = projectName
+	    			runtimeProjectPath = projectPath
+		        }
 	        }
 		}
 	}

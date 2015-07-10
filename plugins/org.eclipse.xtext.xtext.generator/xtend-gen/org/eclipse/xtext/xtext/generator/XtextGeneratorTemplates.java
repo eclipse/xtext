@@ -223,87 +223,80 @@ public class XtextGeneratorTemplates {
           boolean _isEmpty = _usedGrammars_1.isEmpty();
           if (_isEmpty) {
             _builder.append("\t\t");
-            _builder.newLine();
-            _builder.append("\t\t");
-            _builder.append("\t");
             _builder.append("// register default ePackages");
             _builder.newLine();
             _builder.append("\t\t");
-            _builder.append("\t");
             _builder.append("if (!");
             TypeReference _typeRef = TypeReference.typeRef("org.eclipse.emf.ecore.resource.Resource");
-            _builder.append(_typeRef, "\t\t\t");
+            _builder.append(_typeRef, "\t\t");
             _builder.append(".Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey(\"ecore\"))");
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
-            _builder.append("\t\t");
+            _builder.append("\t");
             TypeReference _typeRef_1 = TypeReference.typeRef("org.eclipse.emf.ecore.resource.Resource");
-            _builder.append(_typeRef_1, "\t\t\t\t");
+            _builder.append(_typeRef_1, "\t\t\t");
             _builder.append(".Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(");
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
-            _builder.append("\t\t\t");
+            _builder.append("\t\t");
             _builder.append("\"ecore\", new ");
             TypeReference _typeRef_2 = TypeReference.typeRef("org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl");
-            _builder.append(_typeRef_2, "\t\t\t\t\t");
+            _builder.append(_typeRef_2, "\t\t\t\t");
             _builder.append("());");
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
-            _builder.append("\t");
             _builder.append("if (!");
             TypeReference _typeRef_3 = TypeReference.typeRef("org.eclipse.emf.ecore.resource.Resource");
-            _builder.append(_typeRef_3, "\t\t\t");
+            _builder.append(_typeRef_3, "\t\t");
             _builder.append(".Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey(\"xmi\"))");
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
-            _builder.append("\t\t");
+            _builder.append("\t");
             TypeReference _typeRef_4 = TypeReference.typeRef("org.eclipse.emf.ecore.resource.Resource");
-            _builder.append(_typeRef_4, "\t\t\t\t");
+            _builder.append(_typeRef_4, "\t\t\t");
             _builder.append(".Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(");
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
-            _builder.append("\t\t\t");
+            _builder.append("\t\t");
             _builder.append("\"xmi\", new ");
             TypeReference _typeRef_5 = TypeReference.typeRef("org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl");
-            _builder.append(_typeRef_5, "\t\t\t\t\t");
+            _builder.append(_typeRef_5, "\t\t\t\t");
             _builder.append("());");
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
-            _builder.append("\t");
             _builder.append("if (!");
             TypeReference _typeRef_6 = TypeReference.typeRef("org.eclipse.emf.ecore.resource.Resource");
-            _builder.append(_typeRef_6, "\t\t\t");
+            _builder.append(_typeRef_6, "\t\t");
             _builder.append(".Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey(\"xtextbin\"))");
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
-            _builder.append("\t\t");
+            _builder.append("\t");
             TypeReference _typeRef_7 = TypeReference.typeRef("org.eclipse.emf.ecore.resource.Resource");
-            _builder.append(_typeRef_7, "\t\t\t\t");
+            _builder.append(_typeRef_7, "\t\t\t");
             _builder.append(".Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(");
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
-            _builder.append("\t\t\t");
+            _builder.append("\t\t");
             _builder.append("\"xtextbin\", new ");
-            _builder.append(BinaryGrammarResourceFactoryImpl.class, "\t\t\t\t\t");
+            _builder.append(BinaryGrammarResourceFactoryImpl.class, "\t\t\t\t");
             _builder.append("());");
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
-            _builder.append("\t");
             _builder.append("if (!");
             TypeReference _typeRef_8 = TypeReference.typeRef("org.eclipse.emf.ecore.EPackage");
-            _builder.append(_typeRef_8, "\t\t\t");
+            _builder.append(_typeRef_8, "\t\t");
             _builder.append(".Registry.INSTANCE.containsKey(");
-            _builder.append(XtextPackage.class, "\t\t\t");
+            _builder.append(XtextPackage.class, "\t\t");
             _builder.append(".eNS_URI))");
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
-            _builder.append("\t\t");
+            _builder.append("\t");
             TypeReference _typeRef_9 = TypeReference.typeRef("org.eclipse.emf.ecore.EPackage");
-            _builder.append(_typeRef_9, "\t\t\t\t");
+            _builder.append(_typeRef_9, "\t\t\t");
             _builder.append(".Registry.INSTANCE.put(");
-            _builder.append(XtextPackage.class, "\t\t\t\t");
+            _builder.append(XtextPackage.class, "\t\t\t");
             _builder.append(".eNS_URI, ");
-            _builder.append(XtextPackage.class, "\t\t\t\t");
+            _builder.append(XtextPackage.class, "\t\t\t");
             _builder.append(".eINSTANCE);");
             _builder.newLineIfNotEmpty();
           }
@@ -399,8 +392,12 @@ public class XtextGeneratorTemplates {
     String _elvis = null;
     GuiceModuleAccess.BindKey _key = it.getKey();
     String _name = _key.getName();
-    if (_name != null) {
-      _elvis = _name;
+    String _replace = null;
+    if (_name!=null) {
+      _replace=_name.replace(".", "$");
+    }
+    if (_replace != null) {
+      _elvis = _replace;
     } else {
       GuiceModuleAccess.BindKey _key_1 = it.getKey();
       TypeReference _type = _key_1.getType();
@@ -678,6 +675,7 @@ public class XtextGeneratorTemplates {
     TypeReference _runtimeGenModule_1 = it.getRuntimeGenModule();
     final JavaFileAccess javaFile = new JavaFileAccess(_runtimeGenModule_1, this.codeConfig);
     javaFile.setEncodingProvider(this.encodingProvider);
+    javaFile.setImportNestedTypeThreshold(JavaFileAccess.DONT_IMPORT_NESTED_TYPES);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -869,6 +867,7 @@ public class XtextGeneratorTemplates {
     TypeReference _eclipsePluginGenModule_1 = it.getEclipsePluginGenModule();
     final JavaFileAccess javaFile = new JavaFileAccess(_eclipsePluginGenModule_1, this.codeConfig);
     javaFile.setEncodingProvider(this.encodingProvider);
+    javaFile.setImportNestedTypeThreshold(JavaFileAccess.DONT_IMPORT_NESTED_TYPES);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -1055,9 +1054,9 @@ public class XtextGeneratorTemplates {
     return file;
   }
   
-  public JavaFileAccess createEclipsePluginExecutableExtensionFactory(final LanguageConfig2 langConfig) {
-    final XtextGeneratorNaming it = langConfig.getNaming();
-    TypeReference _eclipsePluginExecutableExtensionFactory = it.getEclipsePluginExecutableExtensionFactory();
+  public JavaFileAccess createEclipsePluginExecutableExtensionFactory(final LanguageConfig2 langConfig, final LanguageConfig2 activatorLanguage) {
+    XtextGeneratorNaming _naming = langConfig.getNaming();
+    TypeReference _eclipsePluginExecutableExtensionFactory = _naming.getEclipsePluginExecutableExtensionFactory();
     final JavaFileAccess javaFile = new JavaFileAccess(_eclipsePluginExecutableExtensionFactory, this.codeConfig);
     javaFile.setEncodingProvider(this.encodingProvider);
     StringConcatenation _builder = new StringConcatenation();
@@ -1077,7 +1076,8 @@ public class XtextGeneratorTemplates {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public class ");
-        TypeReference _eclipsePluginExecutableExtensionFactory = it.getEclipsePluginExecutableExtensionFactory();
+        XtextGeneratorNaming _naming = langConfig.getNaming();
+        TypeReference _eclipsePluginExecutableExtensionFactory = _naming.getEclipsePluginExecutableExtensionFactory();
         String _simpleName = _eclipsePluginExecutableExtensionFactory.getSimpleName();
         _builder.append(_simpleName, "");
         _builder.append(" extends ");
@@ -1097,7 +1097,8 @@ public class XtextGeneratorTemplates {
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("return ");
-        TypeReference _eclipsePluginActivator = it.getEclipsePluginActivator();
+        XtextGeneratorNaming _naming_1 = activatorLanguage.getNaming();
+        TypeReference _eclipsePluginActivator = _naming_1.getEclipsePluginActivator();
         _builder.append(_eclipsePluginActivator, "\t\t");
         _builder.append(".getInstance().getBundle();");
         _builder.newLineIfNotEmpty();
@@ -1116,10 +1117,12 @@ public class XtextGeneratorTemplates {
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("return ");
-        TypeReference _eclipsePluginActivator_1 = it.getEclipsePluginActivator();
+        XtextGeneratorNaming _naming_2 = activatorLanguage.getNaming();
+        TypeReference _eclipsePluginActivator_1 = _naming_2.getEclipsePluginActivator();
         _builder.append(_eclipsePluginActivator_1, "\t\t");
         _builder.append(".getInstance().getInjector(");
-        TypeReference _eclipsePluginActivator_2 = it.getEclipsePluginActivator();
+        XtextGeneratorNaming _naming_3 = activatorLanguage.getNaming();
+        TypeReference _eclipsePluginActivator_2 = _naming_3.getEclipsePluginActivator();
         _builder.append(_eclipsePluginActivator_2, "\t\t");
         _builder.append(".");
         Grammar _grammar = langConfig.getGrammar();

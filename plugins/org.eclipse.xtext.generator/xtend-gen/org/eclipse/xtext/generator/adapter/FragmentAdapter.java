@@ -88,6 +88,13 @@ public class FragmentAdapter implements IGeneratorFragment2 {
   
   private final List<PostProcessor> postProcessors = CollectionLiterals.<PostProcessor>newArrayList();
   
+  public FragmentAdapter() {
+  }
+  
+  public FragmentAdapter(final IGeneratorFragment fragment) {
+    this.setFragment(fragment);
+  }
+  
   public void addPostProcessor(final PostProcessor postProcessor) {
     this.postProcessors.add(postProcessor);
   }
@@ -247,21 +254,14 @@ public class FragmentAdapter implements IGeneratorFragment2 {
         boolean _isEagerSingleton = _key_2.isEagerSingleton();
         _xifexpression = new GuiceModuleAccess.BindKey(null, _typeRef, _isSingleton, _isEagerSingleton);
       } else {
-        GuiceModuleAccess.BindKey _xblockexpression_1 = null;
-        {
-          BindKey _key_3 = it.getKey();
-          String _type_1 = _key_3.getType();
-          final int nameIndex = _type_1.lastIndexOf(".");
-          BindKey _key_4 = it.getKey();
-          String _type_2 = _key_4.getType();
-          String _substring = _type_2.substring((nameIndex + 1));
-          BindKey _key_5 = it.getKey();
-          boolean _isSingleton_1 = _key_5.isSingleton();
-          BindKey _key_6 = it.getKey();
-          boolean _isEagerSingleton_1 = _key_6.isEagerSingleton();
-          _xblockexpression_1 = new GuiceModuleAccess.BindKey(_substring, null, _isSingleton_1, _isEagerSingleton_1);
-        }
-        _xifexpression = _xblockexpression_1;
+        BindKey _key_3 = it.getKey();
+        String _type_1 = _key_3.getType();
+        String _className = this.getClassName(_type_1);
+        BindKey _key_4 = it.getKey();
+        boolean _isSingleton_1 = _key_4.isSingleton();
+        BindKey _key_5 = it.getKey();
+        boolean _isEagerSingleton_1 = _key_5.isEagerSingleton();
+        _xifexpression = new GuiceModuleAccess.BindKey(_className, null, _isSingleton_1, _isEagerSingleton_1);
       }
       final GuiceModuleAccess.BindKey newKey = _xifexpression;
       BindValue _value_2 = it.getValue();
@@ -296,6 +296,24 @@ public class FragmentAdapter implements IGeneratorFragment2 {
       _xblockexpression = new GuiceModuleAccess.Binding(newKey, newValue, _isFinal, _contributedBy);
     }
     return _xblockexpression;
+  }
+  
+  private String getClassName(final String qualifiedName) {
+    int classStart = qualifiedName.length();
+    for (int i = (qualifiedName.length() - 1); (i >= 0); i--) {
+      char _charAt = qualifiedName.charAt(i);
+      boolean _matches = this.matches(_charAt, '.');
+      if (_matches) {
+        char _charAt_1 = qualifiedName.charAt((i + 1));
+        boolean _isLowerCase = Character.isLowerCase(_charAt_1);
+        if (_isLowerCase) {
+          return qualifiedName.substring(classStart);
+        } else {
+          classStart = (i + 1);
+        }
+      }
+    }
+    return qualifiedName;
   }
   
   private void generatePluginXmlRt(final LanguageConfig config1, final XpandExecutionContext ctx) {
@@ -606,70 +624,178 @@ public class FragmentAdapter implements IGeneratorFragment2 {
       String _pluginPath_2 = this.getPluginPath(_eclipsePluginManifest_1);
       Outlet _createOutlet_4 = this.createOutlet(false, encoding, Generator.PLUGIN_UI, false, _pluginPath_2);
       output.addOutlet(_createOutlet_4);
+    } else {
+      ManifestAccess _runtimeManifest_4 = this.projectConfig.getRuntimeManifest();
+      boolean _tripleNotEquals_5 = (_runtimeManifest_4 != null);
+      if (_tripleNotEquals_5) {
+        ManifestAccess _runtimeManifest_5 = this.projectConfig.getRuntimeManifest();
+        String _pluginPath_3 = this.getPluginPath(_runtimeManifest_5);
+        Outlet _createOutlet_5 = this.createOutlet(false, encoding, Generator.PLUGIN_UI, false, _pluginPath_3);
+        output.addOutlet(_createOutlet_5);
+      }
     }
     IFileSystemAccess2 _eclipsePluginSrc = this.projectConfig.getEclipsePluginSrc();
-    boolean _tripleNotEquals_5 = (_eclipsePluginSrc != null);
-    if (_tripleNotEquals_5) {
+    boolean _tripleNotEquals_6 = (_eclipsePluginSrc != null);
+    if (_tripleNotEquals_6) {
       IFileSystemAccess2 _eclipsePluginSrc_1 = this.projectConfig.getEclipsePluginSrc();
       String _path_2 = this.getPath(_eclipsePluginSrc_1);
-      Outlet _createOutlet_5 = this.createOutlet(false, encoding, Generator.SRC_UI, false, _path_2);
-      output.addOutlet(_createOutlet_5);
+      Outlet _createOutlet_6 = this.createOutlet(false, encoding, Generator.SRC_UI, false, _path_2);
+      output.addOutlet(_createOutlet_6);
+    } else {
+      IFileSystemAccess2 _runtimeSrc_2 = this.projectConfig.getRuntimeSrc();
+      boolean _tripleNotEquals_7 = (_runtimeSrc_2 != null);
+      if (_tripleNotEquals_7) {
+        IFileSystemAccess2 _runtimeSrc_3 = this.projectConfig.getRuntimeSrc();
+        String _path_3 = this.getPath(_runtimeSrc_3);
+        Outlet _createOutlet_7 = this.createOutlet(false, encoding, Generator.SRC_UI, false, _path_3);
+        output.addOutlet(_createOutlet_7);
+      }
     }
     IFileSystemAccess2 _eclipsePluginSrcGen = this.projectConfig.getEclipsePluginSrcGen();
-    boolean _tripleNotEquals_6 = (_eclipsePluginSrcGen != null);
-    if (_tripleNotEquals_6) {
+    boolean _tripleNotEquals_8 = (_eclipsePluginSrcGen != null);
+    if (_tripleNotEquals_8) {
       IFileSystemAccess2 _eclipsePluginSrcGen_1 = this.projectConfig.getEclipsePluginSrcGen();
-      String _path_3 = this.getPath(_eclipsePluginSrcGen_1);
-      Outlet _createOutlet_6 = this.createOutlet(false, encoding, Generator.SRC_GEN_UI, true, _path_3);
-      output.addOutlet(_createOutlet_6);
+      String _path_4 = this.getPath(_eclipsePluginSrcGen_1);
+      Outlet _createOutlet_8 = this.createOutlet(false, encoding, Generator.SRC_GEN_UI, true, _path_4);
+      output.addOutlet(_createOutlet_8);
+    } else {
+      IFileSystemAccess2 _runtimeSrcGen_2 = this.projectConfig.getRuntimeSrcGen();
+      boolean _tripleNotEquals_9 = (_runtimeSrcGen_2 != null);
+      if (_tripleNotEquals_9) {
+        IFileSystemAccess2 _runtimeSrcGen_3 = this.projectConfig.getRuntimeSrcGen();
+        String _path_5 = this.getPath(_runtimeSrcGen_3);
+        Outlet _createOutlet_9 = this.createOutlet(false, encoding, Generator.SRC_GEN_UI, true, _path_5);
+        output.addOutlet(_createOutlet_9);
+      }
     }
     ManifestAccess _genericIdeManifest = this.projectConfig.getGenericIdeManifest();
-    boolean _tripleNotEquals_7 = (_genericIdeManifest != null);
-    if (_tripleNotEquals_7) {
+    boolean _tripleNotEquals_10 = (_genericIdeManifest != null);
+    if (_tripleNotEquals_10) {
       ManifestAccess _genericIdeManifest_1 = this.projectConfig.getGenericIdeManifest();
-      String _pluginPath_3 = this.getPluginPath(_genericIdeManifest_1);
-      Outlet _createOutlet_7 = this.createOutlet(false, encoding, Generator.PLUGIN_IDE, false, _pluginPath_3);
-      output.addOutlet(_createOutlet_7);
+      String _pluginPath_4 = this.getPluginPath(_genericIdeManifest_1);
+      Outlet _createOutlet_10 = this.createOutlet(false, encoding, Generator.PLUGIN_IDE, false, _pluginPath_4);
+      output.addOutlet(_createOutlet_10);
+    } else {
+      ManifestAccess _eclipsePluginManifest_2 = this.projectConfig.getEclipsePluginManifest();
+      boolean _tripleNotEquals_11 = (_eclipsePluginManifest_2 != null);
+      if (_tripleNotEquals_11) {
+        ManifestAccess _eclipsePluginManifest_3 = this.projectConfig.getEclipsePluginManifest();
+        String _pluginPath_5 = this.getPluginPath(_eclipsePluginManifest_3);
+        Outlet _createOutlet_11 = this.createOutlet(false, encoding, Generator.PLUGIN_IDE, false, _pluginPath_5);
+        output.addOutlet(_createOutlet_11);
+      } else {
+        ManifestAccess _runtimeManifest_6 = this.projectConfig.getRuntimeManifest();
+        boolean _tripleNotEquals_12 = (_runtimeManifest_6 != null);
+        if (_tripleNotEquals_12) {
+          ManifestAccess _runtimeManifest_7 = this.projectConfig.getRuntimeManifest();
+          String _pluginPath_6 = this.getPluginPath(_runtimeManifest_7);
+          Outlet _createOutlet_12 = this.createOutlet(false, encoding, Generator.PLUGIN_IDE, false, _pluginPath_6);
+          output.addOutlet(_createOutlet_12);
+        }
+      }
     }
     IFileSystemAccess2 _genericIdeSrc = this.projectConfig.getGenericIdeSrc();
-    boolean _tripleNotEquals_8 = (_genericIdeSrc != null);
-    if (_tripleNotEquals_8) {
+    boolean _tripleNotEquals_13 = (_genericIdeSrc != null);
+    if (_tripleNotEquals_13) {
       IFileSystemAccess2 _genericIdeSrc_1 = this.projectConfig.getGenericIdeSrc();
-      String _path_4 = this.getPath(_genericIdeSrc_1);
-      Outlet _createOutlet_8 = this.createOutlet(false, encoding, Generator.SRC_IDE, false, _path_4);
-      output.addOutlet(_createOutlet_8);
+      String _path_6 = this.getPath(_genericIdeSrc_1);
+      Outlet _createOutlet_13 = this.createOutlet(false, encoding, Generator.SRC_IDE, false, _path_6);
+      output.addOutlet(_createOutlet_13);
+    } else {
+      IFileSystemAccess2 _eclipsePluginSrc_2 = this.projectConfig.getEclipsePluginSrc();
+      boolean _tripleNotEquals_14 = (_eclipsePluginSrc_2 != null);
+      if (_tripleNotEquals_14) {
+        IFileSystemAccess2 _eclipsePluginSrc_3 = this.projectConfig.getEclipsePluginSrc();
+        String _path_7 = this.getPath(_eclipsePluginSrc_3);
+        Outlet _createOutlet_14 = this.createOutlet(false, encoding, Generator.SRC_IDE, false, _path_7);
+        output.addOutlet(_createOutlet_14);
+      } else {
+        IFileSystemAccess2 _runtimeSrc_4 = this.projectConfig.getRuntimeSrc();
+        boolean _tripleNotEquals_15 = (_runtimeSrc_4 != null);
+        if (_tripleNotEquals_15) {
+          IFileSystemAccess2 _runtimeSrc_5 = this.projectConfig.getRuntimeSrc();
+          String _path_8 = this.getPath(_runtimeSrc_5);
+          Outlet _createOutlet_15 = this.createOutlet(false, encoding, Generator.SRC_IDE, false, _path_8);
+          output.addOutlet(_createOutlet_15);
+        }
+      }
     }
     IFileSystemAccess2 _genericIdeSrcGen = this.projectConfig.getGenericIdeSrcGen();
-    boolean _tripleNotEquals_9 = (_genericIdeSrcGen != null);
-    if (_tripleNotEquals_9) {
+    boolean _tripleNotEquals_16 = (_genericIdeSrcGen != null);
+    if (_tripleNotEquals_16) {
       IFileSystemAccess2 _genericIdeSrcGen_1 = this.projectConfig.getGenericIdeSrcGen();
-      String _path_5 = this.getPath(_genericIdeSrcGen_1);
-      Outlet _createOutlet_9 = this.createOutlet(false, encoding, Generator.SRC_GEN_IDE, true, _path_5);
-      output.addOutlet(_createOutlet_9);
+      String _path_9 = this.getPath(_genericIdeSrcGen_1);
+      Outlet _createOutlet_16 = this.createOutlet(false, encoding, Generator.SRC_GEN_IDE, true, _path_9);
+      output.addOutlet(_createOutlet_16);
+    } else {
+      IFileSystemAccess2 _eclipsePluginSrcGen_2 = this.projectConfig.getEclipsePluginSrcGen();
+      boolean _tripleNotEquals_17 = (_eclipsePluginSrcGen_2 != null);
+      if (_tripleNotEquals_17) {
+        IFileSystemAccess2 _eclipsePluginSrcGen_3 = this.projectConfig.getEclipsePluginSrcGen();
+        String _path_10 = this.getPath(_eclipsePluginSrcGen_3);
+        Outlet _createOutlet_17 = this.createOutlet(false, encoding, Generator.SRC_GEN_IDE, true, _path_10);
+        output.addOutlet(_createOutlet_17);
+      } else {
+        IFileSystemAccess2 _runtimeSrcGen_4 = this.projectConfig.getRuntimeSrcGen();
+        boolean _tripleNotEquals_18 = (_runtimeSrcGen_4 != null);
+        if (_tripleNotEquals_18) {
+          IFileSystemAccess2 _runtimeSrcGen_5 = this.projectConfig.getRuntimeSrcGen();
+          String _path_11 = this.getPath(_runtimeSrcGen_5);
+          Outlet _createOutlet_18 = this.createOutlet(false, encoding, Generator.SRC_GEN_IDE, true, _path_11);
+          output.addOutlet(_createOutlet_18);
+        }
+      }
     }
     ManifestAccess _runtimeTestManifest = this.projectConfig.getRuntimeTestManifest();
-    boolean _tripleNotEquals_10 = (_runtimeTestManifest != null);
-    if (_tripleNotEquals_10) {
+    boolean _tripleNotEquals_19 = (_runtimeTestManifest != null);
+    if (_tripleNotEquals_19) {
       ManifestAccess _runtimeTestManifest_1 = this.projectConfig.getRuntimeTestManifest();
-      String _pluginPath_4 = this.getPluginPath(_runtimeTestManifest_1);
-      Outlet _createOutlet_10 = this.createOutlet(false, encoding, Generator.PLUGIN_TEST, false, _pluginPath_4);
-      output.addOutlet(_createOutlet_10);
+      String _pluginPath_7 = this.getPluginPath(_runtimeTestManifest_1);
+      Outlet _createOutlet_19 = this.createOutlet(false, encoding, Generator.PLUGIN_TEST, false, _pluginPath_7);
+      output.addOutlet(_createOutlet_19);
+    } else {
+      ManifestAccess _runtimeManifest_8 = this.projectConfig.getRuntimeManifest();
+      boolean _tripleNotEquals_20 = (_runtimeManifest_8 != null);
+      if (_tripleNotEquals_20) {
+        ManifestAccess _runtimeManifest_9 = this.projectConfig.getRuntimeManifest();
+        String _pluginPath_8 = this.getPluginPath(_runtimeManifest_9);
+        Outlet _createOutlet_20 = this.createOutlet(false, encoding, Generator.PLUGIN_TEST, false, _pluginPath_8);
+        output.addOutlet(_createOutlet_20);
+      }
     }
     IFileSystemAccess2 _runtimeTestSrc = this.projectConfig.getRuntimeTestSrc();
-    boolean _tripleNotEquals_11 = (_runtimeTestSrc != null);
-    if (_tripleNotEquals_11) {
+    boolean _tripleNotEquals_21 = (_runtimeTestSrc != null);
+    if (_tripleNotEquals_21) {
       IFileSystemAccess2 _runtimeTestSrc_1 = this.projectConfig.getRuntimeTestSrc();
-      String _path_6 = this.getPath(_runtimeTestSrc_1);
-      Outlet _createOutlet_11 = this.createOutlet(false, encoding, Generator.SRC_TEST, false, _path_6);
-      output.addOutlet(_createOutlet_11);
+      String _path_12 = this.getPath(_runtimeTestSrc_1);
+      Outlet _createOutlet_21 = this.createOutlet(false, encoding, Generator.SRC_TEST, false, _path_12);
+      output.addOutlet(_createOutlet_21);
+    } else {
+      IFileSystemAccess2 _runtimeSrc_6 = this.projectConfig.getRuntimeSrc();
+      boolean _tripleNotEquals_22 = (_runtimeSrc_6 != null);
+      if (_tripleNotEquals_22) {
+        IFileSystemAccess2 _runtimeSrc_7 = this.projectConfig.getRuntimeSrc();
+        String _path_13 = this.getPath(_runtimeSrc_7);
+        Outlet _createOutlet_22 = this.createOutlet(false, encoding, Generator.SRC_TEST, false, _path_13);
+        output.addOutlet(_createOutlet_22);
+      }
     }
     IFileSystemAccess2 _runtimeTestSrcGen = this.projectConfig.getRuntimeTestSrcGen();
-    boolean _tripleNotEquals_12 = (_runtimeTestSrcGen != null);
-    if (_tripleNotEquals_12) {
+    boolean _tripleNotEquals_23 = (_runtimeTestSrcGen != null);
+    if (_tripleNotEquals_23) {
       IFileSystemAccess2 _runtimeTestSrcGen_1 = this.projectConfig.getRuntimeTestSrcGen();
-      String _path_7 = this.getPath(_runtimeTestSrcGen_1);
-      Outlet _createOutlet_12 = this.createOutlet(false, encoding, Generator.SRC_GEN_TEST, true, _path_7);
-      output.addOutlet(_createOutlet_12);
+      String _path_14 = this.getPath(_runtimeTestSrcGen_1);
+      Outlet _createOutlet_23 = this.createOutlet(false, encoding, Generator.SRC_GEN_TEST, true, _path_14);
+      output.addOutlet(_createOutlet_23);
+    } else {
+      IFileSystemAccess2 _runtimeSrcGen_6 = this.projectConfig.getRuntimeSrcGen();
+      boolean _tripleNotEquals_24 = (_runtimeSrcGen_6 != null);
+      if (_tripleNotEquals_24) {
+        IFileSystemAccess2 _runtimeSrcGen_7 = this.projectConfig.getRuntimeSrcGen();
+        String _path_15 = this.getPath(_runtimeSrcGen_7);
+        Outlet _createOutlet_24 = this.createOutlet(false, encoding, Generator.SRC_GEN_TEST, true, _path_15);
+        output.addOutlet(_createOutlet_24);
+      }
     }
     final Map<String, Variable> globalVars = Maps.<String, Variable>newHashMap();
     Variable _variable = new Variable(Naming.GLOBAL_VAR_NAME, this.naming);
