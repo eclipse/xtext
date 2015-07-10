@@ -43,7 +43,7 @@ class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
 	def void testAddXtendLib() {
 		val project = createJavaProject('testProject')
 		val file = 'testProject/src/Foo.xtend'.createFile('class Foo {}')
-		waitForAutoBuild
+		waitForBuild
 
 		workbenchTestHelper.openEditor(file)
 		project.assertAddLibsToClasspath
@@ -53,7 +53,7 @@ class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
 	def void testAddXtendLibWithDirtyEditor() {
 		val project = createJavaProject('testProject')
 		val file = 'testProject/src/Foo.xtend'.createFile('class Foo {}')
-		waitForAutoBuild
+		waitForBuild
 
 		val editor = workbenchTestHelper.openEditor(file)
 

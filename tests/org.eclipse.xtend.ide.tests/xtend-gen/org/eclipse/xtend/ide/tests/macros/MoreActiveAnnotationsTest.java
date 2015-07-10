@@ -94,7 +94,7 @@ public class MoreActiveAnnotationsTest {
       _builder.newLine();
       this.newSource(macroProject, "annotation/DItemMini.xtend", _builder.toString());
       this.addExportedPackage(macroProject, "annotation");
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
         "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject");
       final IJavaProject userProject = JavaCore.create(_createPluginProject_1);
@@ -111,7 +111,7 @@ public class MoreActiveAnnotationsTest {
       _builder_1.append("}");
       _builder_1.newLine();
       this.newSource(userProject, "client/UserCode.xtend", _builder_1.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -181,7 +181,7 @@ public class MoreActiveAnnotationsTest {
       _builder_1.newLine();
       this.newSource(macroProject, "annotation/StaticFeatures.xtend", _builder_1.toString());
       this.addExportedPackage(macroProject, "annotation");
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
         "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject");
       final IJavaProject userProject = JavaCore.create(_createPluginProject_1);
@@ -202,7 +202,7 @@ public class MoreActiveAnnotationsTest {
       _builder_2.append("}");
       _builder_2.newLine();
       this.newSource(userProject, "client/UserCode.xtend", _builder_2.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -275,7 +275,7 @@ public class MoreActiveAnnotationsTest {
       _builder_1.newLine();
       this.newSource(macroProject, "annotation/StaticFeatures.xtend", _builder_1.toString());
       this.addExportedPackage(macroProject, "annotation");
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
         "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject");
       final IJavaProject userProject = JavaCore.create(_createPluginProject_1);
@@ -318,7 +318,7 @@ public class MoreActiveAnnotationsTest {
       _builder_2.append("}");
       _builder_2.newLine();
       this.newSource(userProject, "client/UserCode.xtend", _builder_2.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -409,7 +409,7 @@ public class MoreActiveAnnotationsTest {
       _builder_2.newLine();
       this.newSource(macroProject, "annotation/MyClass.java", _builder_2.toString());
       this.addExportedPackage(macroProject, "annotation");
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
         "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject");
       final IJavaProject userProject = JavaCore.create(_createPluginProject_1);
@@ -432,7 +432,7 @@ public class MoreActiveAnnotationsTest {
       _builder_3.append("}");
       _builder_3.newLine();
       this.newSource(userProject, "client/UserCode.xtend", _builder_3.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -570,7 +570,7 @@ public class MoreActiveAnnotationsTest {
       _builder.newLine();
       this.newSource(macroProject, "annotation/MyAA.xtend", _builder.toString());
       this.addExportedPackage(macroProject, "annotation");
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
         "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject");
       final IJavaProject userProject = JavaCore.create(_createPluginProject_1);

@@ -70,7 +70,7 @@ class JavaVersionSettingTest extends Assert {
 				def void a()
 			}
 		''')
-		waitForAutoBuild()
+		waitForBuild()
 		assertNoErrors(xtendFile)
 		val content = getJavaFileContent('xtend-gen/mypackage/B.java', xtendFile.project)
 		assertFalse("@Override annotation was generated, but it shouldn't.", content.contains('@Override'))
@@ -89,7 +89,7 @@ class JavaVersionSettingTest extends Assert {
 				def void a()
 			}
 		''')
-		waitForAutoBuild()
+		waitForBuild()
 		assertNoErrors(xtendFile)
 		val content = getJavaFileContent('xtend-gen/mypackage/B.java', xtendFile.project)
 		assertTrue("@Override annotation was not generated.", content.contains('@Override'))

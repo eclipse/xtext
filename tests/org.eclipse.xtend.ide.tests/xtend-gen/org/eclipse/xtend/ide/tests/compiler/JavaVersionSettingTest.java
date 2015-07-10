@@ -91,7 +91,7 @@ public class JavaVersionSettingTest extends Assert {
       _builder.append("}");
       _builder.newLine();
       final IFile xtendFile = this.workbenchTestHelper.createFile("mypackage/OverrideTest.xtend", _builder.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertNoErrors(xtendFile);
       IProject _project = xtendFile.getProject();
       final String content = this.getJavaFileContent("xtend-gen/mypackage/B.java", _project);
@@ -128,7 +128,7 @@ public class JavaVersionSettingTest extends Assert {
       _builder.append("}");
       _builder.newLine();
       final IFile xtendFile = this.workbenchTestHelper.createFile("mypackage/OverrideTest.xtend", _builder.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertNoErrors(xtendFile);
       IProject _project = xtendFile.getProject();
       final String content = this.getJavaFileContent("xtend-gen/mypackage/B.java", _project);

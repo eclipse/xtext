@@ -1082,7 +1082,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
       _builder.append("}");
       _builder.newLine();
       this._workbenchTestHelper.createFile("/p/Outer.java", _builder.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package p");
       _builder_1.newLine();

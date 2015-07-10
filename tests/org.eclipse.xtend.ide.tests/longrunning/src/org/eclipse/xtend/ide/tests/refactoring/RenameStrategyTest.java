@@ -66,7 +66,7 @@ public class RenameStrategyTest extends AbstractXtendUITestCase {
 	@Test public void testOverrideIndicatorAnnotationAfterFileRename() throws Exception {
 		testHelper.createFile("test/SuperClass","package test\nclass SuperClass { def foo() {}}");
 		final IFile subClassFile = testHelper.createFile("test/SubClass","package test\nclass SubClass extends SuperClass { override foo () {}}");
-		IResourcesSetupUtil.waitForAutoBuild();
+		IResourcesSetupUtil.waitForBuild();
 		XtextEditor openEditor = testHelper.openEditor(subClassFile);
 		final OverrideIndicatorAnnotation[] annotationBeforeFileRename = new OverrideIndicatorAnnotation[]{null};
 		final OverrideIndicatorAnnotation[] annotationAfterFileRename = new OverrideIndicatorAnnotation[]{null};
@@ -87,7 +87,7 @@ public class RenameStrategyTest extends AbstractXtendUITestCase {
 				subClassFile.move(subClassFile.getFullPath().removeLastSegments(1).append("Test.xtend"), true, monitor);
 			}
 		}.run(new NullProgressMonitor());
-		IResourcesSetupUtil.waitForAutoBuild();
+		IResourcesSetupUtil.waitForBuild();
 		sleepWhile(Predicates.isNull(), new Provider<Object>() {
 
 			@Override
@@ -155,7 +155,7 @@ public class RenameStrategyTest extends AbstractXtendUITestCase {
 		XtendClass fooClass = (XtendClass) testHelper.xtendFile("Foo", 
 				"class Foo { def dispatch foo(Number it) {} def dispatch foo(String it) {} }")
 				.getXtendTypes().get(0);
-		IResourcesSetupUtil.waitForAutoBuild();
+		IResourcesSetupUtil.waitForBuild();
 		XtendFunction fooMethod0 = (XtendFunction) fooClass.getMembers().get(0);
 		IRenameStrategy renameStrategy = createRenameStrategy(fooMethod0);
 		assertNotNull(renameStrategy);

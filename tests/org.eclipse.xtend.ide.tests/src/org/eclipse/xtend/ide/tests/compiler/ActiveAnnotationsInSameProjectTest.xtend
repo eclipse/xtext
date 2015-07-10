@@ -82,7 +82,7 @@ class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		waitForAutoBuild()
+		waitForBuild()
 		type1.assertHasErrors("same project")
 		val file = type2.project.getFile("xtend-gen/mypackage/ShouldNotExist.java")
 		assertFalse(file.exists)
@@ -92,7 +92,7 @@ class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase {
 				public String foo = "blabl"
 			}
 		'''),true,true, null)
-		waitForAutoBuild()
+		waitForBuild()
 		assertFalse(file.exists)
 		type1.assertHasErrors("same project")
 	}
@@ -144,7 +144,7 @@ class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase {
 			@Annotation class Client {
 			}
 		''')
-		waitForAutoBuild
+		waitForBuild
 		assertNoErrorsInWorkspace
 		val file = type1.project.getFile("xtend-gen/mypackage/ShouldExist.java")
 		assertTrue(file.exists)
@@ -154,7 +154,7 @@ class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase {
 				public String foo = "blabl"
 			}
 		'''),true,true, null)
-		waitForAutoBuild()
+		waitForBuild()
 		assertTrue(file.exists)
 		assertNoErrorsInWorkspace
 	}
@@ -203,7 +203,7 @@ class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		waitForAutoBuild()
+		waitForBuild()
 		type1.assertHasErrors("same project")
 		val file = type2.project.getFile("xtend-gen/mypackage/ShouldNotExist.java")
 		assertFalse(file.exists)
@@ -213,7 +213,7 @@ class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase {
 				public String foo = "blabl"
 			}
 		'''),true,true, null)
-		waitForAutoBuild()
+		waitForBuild()
 		assertFalse(file.exists)
 		type1.assertHasErrors("same project")
 	}
@@ -238,7 +238,7 @@ class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		waitForAutoBuild()
+		waitForBuild()
 		assertNoErrorsInWorkspace
 		type2.setContents(new StringInputStream('''
 			package otherpack;
@@ -253,7 +253,7 @@ class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase {
 				}
 			}
 		'''),true,true, null)
-		waitForAutoBuild()
+		waitForBuild()
 		assertNoErrorsInWorkspace
 	}
 
@@ -272,7 +272,7 @@ class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase {
 				@Bug414992 class Client {
 				}
 			''')
-		waitForAutoBuild()
+		waitForBuild()
 		assertNoErrorsInWorkspace
 	}
 

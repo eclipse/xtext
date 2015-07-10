@@ -67,7 +67,7 @@ public class Bug456868Test extends AbstractXtendUITestCase {
       _builder.append("}");
       _builder.newLine();
       IResourcesSetupUtil.createFile("my project/src/MyClass.xtend", _builder.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
       final IResource generatedJava = IResourcesSetupUtil.file("my project/xtend-gen/MyClass.java");
       boolean _exists = generatedJava.exists();

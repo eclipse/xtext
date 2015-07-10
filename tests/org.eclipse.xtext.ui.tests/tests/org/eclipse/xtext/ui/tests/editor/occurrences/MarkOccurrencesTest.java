@@ -113,7 +113,7 @@ public class MarkOccurrencesTest extends AbstractEditorTest {
 		String model2 = "Foo {}";
 		IFile modelFile1 = IResourcesSetupUtil.createFile("test/src/Test1.outlinetestlanguage", model1);
 		IResourcesSetupUtil.createFile("test/src/Test2.outlinetestlanguage", model2);
-		IResourcesSetupUtil.waitForAutoBuild();
+		IResourcesSetupUtil.waitForBuild();
 		XtextEditor editor = openEditor(modelFile1);
 		ISelectionProvider selectionProvider = editor.getSelectionProvider();
 		selectionProvider.setSelection(new TextSelection(model1.indexOf("Foo"), 1));

@@ -34,6 +34,7 @@ import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBasicForLoopExpression;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XCollectionLiteral;
@@ -45,6 +46,7 @@ import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XPostfixOperation;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XSynchronizedExpression;
@@ -312,6 +314,9 @@ public class DomainmodelFormatter extends XbaseFormatter {
     } else if (entity instanceof XMemberFeatureCall) {
       _format((XMemberFeatureCall)entity, document);
       return;
+    } else if (entity instanceof XPostfixOperation) {
+      _format((XPostfixOperation)entity, document);
+      return;
     } else if (entity instanceof XWhileExpression) {
       _format((XWhileExpression)entity, document);
       return;
@@ -344,6 +349,9 @@ public class DomainmodelFormatter extends XbaseFormatter {
       return;
     } else if (entity instanceof XBlockExpression) {
       _format((XBlockExpression)entity, document);
+      return;
+    } else if (entity instanceof XCastedExpression) {
+      _format((XCastedExpression)entity, document);
       return;
     } else if (entity instanceof XClosure) {
       _format((XClosure)entity, document);

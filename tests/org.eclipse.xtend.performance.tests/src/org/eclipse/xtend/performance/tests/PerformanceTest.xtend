@@ -37,7 +37,7 @@ class PerformanceTest extends AbstractXtendUITestCase {
 	@BeforeClass
 	def static void createTestProject() {
 		PerformanceTestProjectSetup::setUp
-		waitForAutoBuild();
+		waitForBuild();
 		assertNoErrorsInWorkspace();
 	}
 	
@@ -67,7 +67,7 @@ class PerformanceTest extends AbstractXtendUITestCase {
 		val project = PerformanceTestProjectSetup::testProject.project
 		val file = project.getFile("src/org/eclipse/xtext/xbase/formatting/XbaseFormatter2.xtend");
 		file.appendContents(new StringInputStream("//foo\n"), true, true, null);
-		PerformanceTestProjectSetup::waitForAutoBuild
+		PerformanceTestProjectSetup::waitForBuild
 	}
 	
 	@Test 

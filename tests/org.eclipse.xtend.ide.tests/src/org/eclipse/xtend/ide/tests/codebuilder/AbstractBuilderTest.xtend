@@ -49,7 +49,7 @@ class AbstractBuilderTest extends AbstractXtendUITestCase {
 				public class Bar {
 				}
 			''')
-			waitForAutoBuild
+			waitForBuild
 			javaClass = getTypeForName('Bar', getXtendClass).type as JvmDeclaredType
 		}
 		javaClass

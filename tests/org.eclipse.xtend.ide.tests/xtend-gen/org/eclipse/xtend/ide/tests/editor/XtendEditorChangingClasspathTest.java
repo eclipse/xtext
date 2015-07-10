@@ -55,7 +55,7 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
     try {
       final IJavaProject project = JavaProjectSetupUtil.createJavaProject("testProject");
       final IFile file = IResourcesSetupUtil.createFile("testProject/src/Foo.xtend", "class Foo {}");
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.workbenchTestHelper.openEditor(file);
       this.assertAddLibsToClasspath(project);
     } catch (Throwable _e) {
@@ -68,7 +68,7 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
     try {
       final IJavaProject project = JavaProjectSetupUtil.createJavaProject("testProject");
       final IFile file = IResourcesSetupUtil.createFile("testProject/src/Foo.xtend", "class Foo {}");
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       final XtextEditor editor = this.workbenchTestHelper.openEditor(file);
       final Procedure0 _function = new Procedure0() {
         @Override

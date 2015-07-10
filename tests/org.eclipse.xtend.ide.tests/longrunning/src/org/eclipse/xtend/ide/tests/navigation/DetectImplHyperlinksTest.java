@@ -116,7 +116,7 @@ public class DetectImplHyperlinksTest extends AbstractEditorTest {
 		IFile sourceFile = testHelper.createFile("foo/Foo", content);
 		sourceFile.getProject().setDefaultCharset(getNonDefaultEncoding(), null);
 		assertTrue(sourceFile.exists());
-		waitForAutoBuild();
+		waitForBuild();
 		XtextEditor editor = openEditor(sourceFile);
 		return editor;
 	}

@@ -30,7 +30,7 @@ public class Bug355821Test extends AbstractParticipatingBuilderTest {
 	
 	@Test public void testBuildIsInvokedOnlyOnceWhenManifestChanges() throws Exception {
 		IProject fooProject = createPluginProject("Foo");
-		waitForAutoBuild();
+		waitForBuild();
 		
 		IFile manifestFile = fooProject.getFile("META-INF/MANIFEST.MF");
 		String manifestContent = "Manifest-Version: 1.0\n";
@@ -47,7 +47,7 @@ public class Bug355821Test extends AbstractParticipatingBuilderTest {
 //		manifestContent += "Bundle-RequiredExecutionEnvironment: JavaSE-1.6\n";
 		reset();
 		manifestFile.setContents(new StringInputStream(manifestContent), true, true, monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(1, getInvocationCount());
 
 	}

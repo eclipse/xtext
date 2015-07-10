@@ -88,7 +88,7 @@ public class AbstractBuilderTest extends AbstractXtendUITestCase {
           _builder.append("}");
           _builder.newLine();
           this._workbenchTestHelper.createFile("Bar.java", _builder.toString());
-          IResourcesSetupUtil.waitForAutoBuild();
+          IResourcesSetupUtil.waitForBuild();
           JvmDeclaredType _xtendClass = this.getXtendClass();
           JvmTypeReference _typeForName = this._typeReferences.getTypeForName("Bar", _xtendClass);
           JvmType _type = _typeForName.getType();

@@ -116,7 +116,7 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       final IFile file2 = this.helper.createFile("src/mypack/OtherClass.xtend", _builder_1.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       final URI uri = this.uriMapper.getUri(file);
       final URI uri2 = this.uriMapper.getUri(file2);
       IProject _project = file.getProject();
@@ -178,7 +178,7 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
       _builder.append("}");
       _builder.newLine();
       final IFile file = this.helper.createFile("mypack/MyClass.xtend", _builder.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       final URI uri = this.uriMapper.getUri(file);
       IProject _project = file.getProject();
       final ResourceSet resourceSet = this.resourceSetProvider.get(_project);
@@ -196,7 +196,7 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
       this.doWorkInJob(_function);
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
       file.delete(true, _nullProgressMonitor);
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       final Procedure0 _function_1 = new Procedure0() {
         @Override
         public void apply() {
@@ -276,7 +276,7 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
       _builder.append("}");
       _builder.newLine();
       final IFile file = this.helper.createFile("mypack/MyClass Foo.xtend", _builder.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       final ResourceStorageTest.TestableStorageAwareTrace storageAwareTrace = new ResourceStorageTest.TestableStorageAwareTrace();
       Injector _injector = this.getInjector();
       _injector.injectMembers(storageAwareTrace);
