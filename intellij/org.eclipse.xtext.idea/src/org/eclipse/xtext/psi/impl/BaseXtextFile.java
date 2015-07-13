@@ -30,6 +30,7 @@ import org.eclipse.xtext.psi.PsiEObject;
 import org.eclipse.xtext.psi.stubs.XtextFileStub;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
+import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.OperationCanceledError;
@@ -63,6 +64,9 @@ public abstract class BaseXtextFile extends PsiFileBase {
 	
     @Inject
     protected IdeaResourceSetProvider resourceSetProvider;
+    
+    @Inject
+    protected IResourceFactory resourceFactory;
     
     @Inject
     protected Provider<PsiToEcoreTransformator> psiToEcoreTransformatorProvider;
@@ -168,7 +172,8 @@ public abstract class BaseXtextFile extends PsiFileBase {
         		throw new IllegalStateException("Couldn't find module for "+this);
         }
         ResourceSet resourceSet = resourceSetProvider.get(module);
-        XtextResource resource = (XtextResource) resourceSet.createResource(getURI());
+        XtextResource resource = (XtextResource) resourceFactory.createResource(getURI());
+        resourceSet.getResources().add(resource);
         resource.setParser(psiToEcoreTransformator);
         try {
             resource.load(new ByteArrayInputStream(new byte[0]), null);

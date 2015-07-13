@@ -1,3 +1,6 @@
+import javax.tools.ToolProvider
+import java.net.URLClassLoader
+
 configurations {
 	builder
 }
@@ -10,6 +13,7 @@ dependencies {
 	compile project(':plugins:org.eclipse.xtext.generator')
 	compile project(':plugins:org.eclipse.xtext.ecore')
 	compile project(':plugins:org.eclipse.xtext.builder.standalone')
+	compile files(((URLClassLoader)ToolProvider.getSystemToolClassLoader()).getURLs()).filter({it.name == "tools.jar"})
 
 	builder "org.ow2.asm:asm:5.0.3"
 }
@@ -17,3 +21,4 @@ dependencies {
 assembleSandbox.plugin.into('builder') {
 	from(configurations.builder - configurations.compile)
 }
+

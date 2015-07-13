@@ -43,5 +43,13 @@
     	<lang.importOptimizer language="org.eclipse.xtend.core.Xtend"
 							factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
 							implementationClass="org.eclipse.xtext.xbase.idea.imports.XImportSectionOptimizer"/>
+		<debugger.positionManagerFactory
+							implementation="org.eclipse.xtend.core.idea.debug.XtendPositionManagerFactory"/>
+		<debugger.javaDebugAware
+							implementation="org.eclipse.xtend.core.idea.debug.XtendIsJavaDebugAware"/>
+		<debugger.extraSteppingFilter
+							implementation="org.eclipse.xtend.core.idea.debug.XtendSteppingFilter"/>
+		<debugger.sourcePositionProvider
+							implementation="org.eclipse.xtend.core.idea.debug.XtendSourcePositionProvider"/>
 	</extensions>
 </idea-plugin>
