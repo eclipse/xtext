@@ -19,16 +19,21 @@ import org.eclipse.xtext.generator.AbstractFileSystemAccess2
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider
 import org.eclipse.xtext.generator.IFileSystemAccessExtension3
 import org.eclipse.xtend.lib.annotations.Accessors
+import java.io.IOException
+import org.apache.log4j.Logger
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 class ResourceStorageFacade implements IResourceStorageFacade {
 	
+	static val Logger LOG = Logger.getLogger(ResourceStorageFacade)
+	
 	@Inject IContextualOutputConfigurationProvider outputConfigurationProvider
 	@Inject Provider<AbstractFileSystemAccess2> fileSystemAccessProvider
 	
 	@Accessors boolean storeNodeModel = false
+	
 	/**
 	 * @return whether the given resource should be loaded from stored resource state
 	 */
@@ -71,7 +76,13 @@ class ResourceStorageFacade implements IResourceStorageFacade {
 		val path = computeOutputPath(resource)
 		val bout = new MyByteArrayOutputStream()
 		val outStream = createResourceStorageWritable(bout)
-		outStream.writeResource(resource)
+		try {
+			outStream.writeResource(resource)
+		} catch(IOException e) {
+			// something went wrong when writing the resource - stream's content is bogus and not written to disk
+			LOG.warn("Cannot write storage for " + resource.URI, e)
+			return;
+		}
 		fsa.generateFile(path, new ByteArrayInputStream(bout.toByteArray, 0, bout.length))
 	}
 	
@@ -117,11 +128,11 @@ class ResourceStorageFacade implements IResourceStorageFacade {
 	}
 	
 	def protected getSourceContainerURI(StorageAwareResource resource) {
-		resource.URI.trimSegments(1).appendSegment("")
+		return resource.URI.trimSegments(1).appendSegment("")
 	}
 	
 	override hasStorageFor(URI uri) {
-		new ExtensibleURIConverterImpl().exists(getBinaryStorageURI(uri), emptyMap())
+		return new ExtensibleURIConverterImpl().exists(getBinaryStorageURI(uri), emptyMap())
 	}
 	
 	protected def getBinaryStorageURI(URI sourceURI) {

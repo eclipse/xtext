@@ -33,19 +33,15 @@ import org.eclipse.xtext.parser.ParseResult
 	val InputStream in
 	val boolean storeNodeModel
 	
-	protected def void loadIntoResource(StorageAwareResource resource) {
+	protected def void loadIntoResource(StorageAwareResource resource) throws IOException {
+		if (!resource.isLoadedFromStorage) {
+			throw new IllegalStateException("Please use StorageAwareResource#load(ResourceStorageLoadable).");
+		}
+		val zin = new ZipInputStream(in)
 		try {
-			if (!resource.isLoadedFromStorage) {
-				throw new IllegalStateException("Please use StorageAwareResource#load(ResourceStorageLoadable).");
-			}
-			val zin = new ZipInputStream(in)
-			try {
-				loadEntries(resource, zin)
-			} finally {
-				zin.close
-			}
-		} catch (IOException e) {
-			LOG.error("Problem loading storage for "+resource.URI+". Error was:"+e.message, e)
+			loadEntries(resource, zin)
+		} finally {
+			zin.close
 		}
 	}
 	
@@ -53,7 +49,7 @@ import org.eclipse.xtext.parser.ParseResult
 	 * Load entries from the storage.
 	 * Overriding methods should first delegate to super before adding their own entries.
 	 */
-	protected def void loadEntries(StorageAwareResource resource, ZipInputStream zipIn) {
+	protected def void loadEntries(StorageAwareResource resource, ZipInputStream zipIn) throws IOException {
 		zipIn.nextEntry
 		readContents(resource, zipIn)
 
@@ -66,7 +62,7 @@ import org.eclipse.xtext.parser.ParseResult
 		}
 	}
 	
-	protected def void readContents(StorageAwareResource resource, InputStream inputStream) {
+	protected def void readContents(StorageAwareResource resource, InputStream inputStream) throws IOException {
 		val in = new BinaryResourceImpl.EObjectInputStream(inputStream, emptyMap) {
 			
 			override readCompressedInt() throws IOException {
@@ -86,34 +82,30 @@ import org.eclipse.xtext.parser.ParseResult
 		in.loadResource(resource)
 	}
 	
-	protected def handleLoadEObject(InternalEObject loaded, EObjectInputStream input) {
+	protected def handleLoadEObject(InternalEObject loaded, EObjectInputStream input) throws IOException {
 	}
 	
-	protected def void readResourceDescription(StorageAwareResource resource, InputStream inputStream) {
+	protected def void readResourceDescription(StorageAwareResource resource, InputStream inputStream) throws IOException {
 		val objectIn = new ObjectInputStream(inputStream)
 		val description = objectIn.readObject as SerializableResourceDescription
 		description.updateResourceURI(resource.URI)
 		resource.resourceDescription = description
 	}
 	
-	protected def void readNodeModel(StorageAwareResource resource, InputStream inputStream) {
-		try {
-			val serializableNodeModel = new SerializableNodeModel(resource)
-			// if this is a synthetic resource (i.e. tests or so, don't load the node model)
-			if (!resource.resourceSet.URIConverter.exists(resource.URI, resource.resourceSet.loadOptions)) {
-				LOG.info("Skipping loading node model for synthetic resource "+resource.URI)
-				return;
-			}
-			val stream = resource.resourceSet.URIConverter.createInputStream(resource.URI)
-			val in = new InputStreamReader(stream, resource.encoding)
-			val completeContent = CharStreams.toString(in)
-			val deserializationContext = new DeserializationConversionContext(resource, completeContent)
-			val dataIn = new DataInputStream(inputStream)
-			serializableNodeModel.readObjectData(dataIn, deserializationContext)
-			resource.parseResult = new ParseResult(resource.contents.head,serializableNodeModel.root, deserializationContext.hasErrors)
-		} catch (IOException e) {
-			LOG.error(e.message, e)
+	protected def void readNodeModel(StorageAwareResource resource, InputStream inputStream) throws IOException {
+		val serializableNodeModel = new SerializableNodeModel(resource)
+		// if this is a synthetic resource (i.e. tests or so, don't load the node model)
+		if (!resource.resourceSet.URIConverter.exists(resource.URI, resource.resourceSet.loadOptions)) {
+			LOG.info("Skipping loading node model for synthetic resource "+resource.URI)
+			return;
 		}
+		val stream = resource.resourceSet.URIConverter.createInputStream(resource.URI)
+		val in = new InputStreamReader(stream, resource.encoding)
+		val completeContent = CharStreams.toString(in)
+		val deserializationContext = new DeserializationConversionContext(resource, completeContent)
+		val dataIn = new DataInputStream(inputStream)
+		serializableNodeModel.readObjectData(dataIn, deserializationContext)
+		resource.parseResult = new ParseResult(resource.contents.head,serializableNodeModel.root, deserializationContext.hasErrors)
 	}
 	
 }
