@@ -26,13 +26,13 @@ class ValidationTest extends AbstractWebServerTest {
 	@Test def testSyntaxError() {
 		'stat foo end'.assertValidationResult('''
 			ValidationResult [
-			  entries = ArrayList (
-			    Entry [
+			  issues = ArrayList (
+			    Issue [
 			      description = "missing EOF at 'stat'"
 			      severity = "error"
 			      line = 1
-			      startOffset = 0
-			      endOffset = 4
+			      offset = 0
+			      length = 4
 			    ]
 			  )
 			]''')
@@ -41,13 +41,13 @@ class ValidationTest extends AbstractWebServerTest {
 	@Test def testCrossRefError() {
 		'state foo set x = true end'.assertValidationResult('''
 			ValidationResult [
-			  entries = ArrayList (
-			    Entry [
+			  issues = ArrayList (
+			    Issue [
 			      description = "Couldn't resolve reference to Signal 'x'."
 			      severity = "error"
 			      line = 1
-			      startOffset = 14
-			      endOffset = 15
+			      offset = 14
+			      length = 1
 			    ]
 			  )
 			]''')
@@ -56,13 +56,13 @@ class ValidationTest extends AbstractWebServerTest {
 	@Test def testCustomValidationError() {
 		'input signal x state foo set x = true end'.assertValidationResult('''
 			ValidationResult [
-			  entries = ArrayList (
-			    Entry [
+			  issues = ArrayList (
+			    Issue [
 			      description = "Only output signals are allowed for write access."
 			      severity = "error"
 			      line = 1
-			      startOffset = 29
-			      endOffset = 30
+			      offset = 29
+			      length = 1
 			    ]
 			  )
 			]''')
@@ -76,13 +76,13 @@ class ValidationTest extends AbstractWebServerTest {
 		val result = validate.service.apply() as ValidationResult
 		val String expectedResult = '''
 			ValidationResult [
-			  entries = ArrayList (
-			    Entry [
+			  issues = ArrayList (
+			    Issue [
 			      description = "missing EOF at 'stat'"
 			      severity = "error"
 			      line = 1
-			      startOffset = 0
-			      endOffset = 4
+			      offset = 0
+			      length = 4
 			    ]
 			  )
 			]'''

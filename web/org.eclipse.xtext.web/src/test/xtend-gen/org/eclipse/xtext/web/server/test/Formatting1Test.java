@@ -50,7 +50,7 @@ public class Formatting1Test extends AbstractWebServerTest {
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
     final XtextServiceDispatcher.ServiceDescriptor format = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)));
     boolean _isHasSideEffects = format.isHasSideEffects();
-    Assert.assertFalse(_isHasSideEffects);
+    Assert.assertTrue(_isHasSideEffects);
     boolean _isHasTextInput = format.isHasTextInput();
     Assert.assertFalse(_isHasTextInput);
     Function0<? extends IServiceResult> _service = format.getService();
@@ -85,7 +85,7 @@ public class Formatting1Test extends AbstractWebServerTest {
     final XtextServiceDispatcher.ServiceDescriptor format = this.getService(
       Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3)));
     boolean _isHasSideEffects = format.isHasSideEffects();
-    Assert.assertFalse(_isHasSideEffects);
+    Assert.assertTrue(_isHasSideEffects);
     boolean _isHasTextInput = format.isHasTextInput();
     Assert.assertFalse(_isHasTextInput);
     Function0<? extends IServiceResult> _service = format.getService();

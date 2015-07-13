@@ -55,18 +55,17 @@ define([
     'ace/ext/language_tools',
     'xtext/compatibility',
 	'xtext/AceEditorContext',
+	'xtext/services/XtextService',
 	'xtext/services/LoadResourceService',
-	'xtext/services/RevertResourceService',
 	'xtext/services/SaveResourceService',
 	'xtext/services/UpdateService',
 	'xtext/services/ContentAssistService',
 	'xtext/services/ValidationService',
 	'xtext/services/OccurrencesService',
-	'xtext/services/FormattingService',
-	'xtext/services/GeneratorService'
-], function(jQuery, ace, languageTools, compatibility, EditorContext, LoadResourceService,
-		RevertResourceService, SaveResourceService, UpdateService, ContentAssistService,
-		ValidationService, OccurrencesService, FormattingService, GeneratorService) {
+	'xtext/services/FormattingService'
+], function(jQuery, ace, languageTools, compatibility, EditorContext, XtextService, LoadResourceService,
+		SaveResourceService, UpdateService, ContentAssistService, ValidationService, OccurrencesService,
+		FormattingService) {
 	
 	/**
 	 * Add a problem marker to an editor session.
@@ -222,7 +221,7 @@ define([
 		if (options.resourceId) {
 			if (options.loadFromServer === undefined || options.loadFromServer) {
 				options.loadFromServer = true;
-				loadResourceService = new LoadResourceService(options.serverUrl, options.resourceId);
+				loadResourceService = new LoadResourceService(options.serverUrl, options.resourceId, false);
 				loadResourceService.loadResource(editorContext, options);
 				saveResourceService = new SaveResourceService(options.serverUrl, options.resourceId);
 				if (options.enableSaveAction && editor.commands) {
@@ -234,7 +233,7 @@ define([
 						}
 					});
 				}
-				revertResourceService = new RevertResourceService(options.serverUrl, options.resourceId);
+				revertResourceService = new LoadResourceService(options.serverUrl, options.resourceId, true);
 			}
 		} else {
 			if (options.loadFromServer === undefined)
@@ -276,11 +275,11 @@ define([
 						}
 					}
 					editorContext._annotations = [];
-				}).done(function(entries) {
-					for (var i = 0; i < entries.length; i++) {
-						var entry = entries[i];
-						var marker = _addMarker(session, entry.startOffset, entry.endOffset, entry.severity);
-						var start = session.getDocument().indexToPosition(entry.startOffset);
+				}).done(function(result) {
+					for (var i = 0; i < result.issues.length; i++) {
+						var entry = result.issues[i];
+						var marker = _addMarker(session, entry.offset, entry.offset + entry.length, entry.severity);
+						var start = session.getDocument().indexToPosition(entry.offset);
 						editorContext._annotations.push({
 							row: start.row,
 							column: start.column,
@@ -297,7 +296,7 @@ define([
 		if (!options.sendFullText) {
 			updateService = new UpdateService(options.serverUrl, options.resourceId);
 			if (saveResourceService)
-				saveResourceService.setUpdateService(updateService);
+				saveResourceService._updateService = updateService;
 			editorContext.addServerStateListener(refreshDocument);
 		}
 		var textUpdateDelay = options.textUpdateDelay;
@@ -324,9 +323,7 @@ define([
 		//---- Content Assist Service
 		
 		if (options.enableContentAssistService || options.enableContentAssistService === undefined) {
-			var contentAssistService = new ContentAssistService(options.serverUrl, options.resourceId);
-			if (updateService)
-				contentAssistService.setUpdateService(updateService);
+			var contentAssistService = new ContentAssistService(options.serverUrl, options.resourceId, updateService);
 			var completer = {
 				getCompletions: function(editor, session, pos, prefix, callback) {
 					var params = _copy(options);
@@ -356,9 +353,7 @@ define([
 		
 		var occurrencesService;
 		if (options.enableOccurrencesService || options.enableOccurrencesService === undefined) {
-			occurrencesService = new OccurrencesService(options.serverUrl, options.resourceId);
-			if (updateService)
-				occurrencesService.setUpdateService(updateService);
+			occurrencesService = new OccurrencesService(options.serverUrl, options.resourceId, updateService);
 			var selectionUpdateDelay = options.selectionUpdateDelay;
 			if (!selectionUpdateDelay)
 				selectionUpdateDelay = 550;
@@ -369,7 +364,7 @@ define([
 				editorContext._selectionChangeTimeout = setTimeout(function() {
 					var params = _copy(options);
 					params.offset = session.getDocument().positionToIndex(editor.getSelection().getCursor());
-					occurrencesService.markOccurrences(editorContext, params).always(function() {
+					occurrencesService.getOccurrences(editorContext, params).always(function() {
 						var occurrenceMarkers = editorContext._occurrenceMarkers;
 						if (occurrenceMarkers) {
 							for (var i = 0; i < occurrenceMarkers.length; i++)  {
@@ -398,9 +393,7 @@ define([
 		
 		var formattingService;
 		if (options.enableFormattingService || options.enableFormattingService === undefined) {
-			formattingService = new FormattingService(options.serverUrl, options.resourceId);
-			if (updateService)
-				formattingService.setUpdateService(updateService);
+			formattingService = new FormattingService(options.serverUrl, options.resourceId, updateService);
 			if (options.enableFormattingAction && editor.commands) {
 				editor.commands.addCommand({
 					name: 'format',
@@ -416,9 +409,8 @@ define([
 		
 		var generatorService;
 		if (options.enableGeneratorService || options.enableGeneratorService === undefined) {
-			generatorService = new GeneratorService(options.serverUrl, options.resourceId);
-			if (updateService)
-				generatorService.setUpdateService(updateService);
+			generatorService = new XtextService();
+			generatorService.initialize(options.serverUrl, options.resourceId, 'generate', updateService);
 		}
 		
 		editor.invokeXtextService = function(service, invokeOptions) {
@@ -433,7 +425,7 @@ define([
 			else if (service === 'save' && saveResourceService)
 				return saveResourceService.saveResource(editorContext, optionsCopy);
 			else if (service === 'revert' && revertResourceService)
-				return revertResourceService.revertResource(editorContext, optionsCopy);
+				return revertResourceService.loadResource(editorContext, optionsCopy);
 			else if (service === 'validate' && validationService)
 				return validationService.computeProblems(editorContext, optionsCopy);
 			else if (service === 'occurrences' && occurrencesService)
@@ -441,7 +433,7 @@ define([
 			else if (service === 'format' && formattingService)
 				return formattingService.format(editorContext, options);
 			else if (service === 'generate' && generatorService)
-				return generatorService.generate(editorContext, options);
+				return generatorService.invoke(editorContext, options);
 			else
 				throw new Error('Service \'' + service + '\' is not available.');
 		};

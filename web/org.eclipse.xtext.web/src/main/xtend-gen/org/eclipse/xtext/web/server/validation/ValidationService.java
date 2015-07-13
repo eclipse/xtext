@@ -57,17 +57,15 @@ public class ValidationService extends AbstractPreComputedService<ValidationResu
     final Procedure1<Issue> _function_1 = new Procedure1<Issue>() {
       @Override
       public void apply(final Issue issue) {
-        ArrayList<ValidationResult.Entry> _entries = result.getEntries();
+        ArrayList<ValidationResult.Issue> _issues = result.getIssues();
         String _message = issue.getMessage();
         Severity _severity = issue.getSeverity();
         String _translate = ValidationService.this.translate(_severity);
         Integer _lineNumber = issue.getLineNumber();
         Integer _offset = issue.getOffset();
-        Integer _offset_1 = issue.getOffset();
         Integer _length = issue.getLength();
-        int _plus = ((_offset_1).intValue() + (_length).intValue());
-        ValidationResult.Entry _entry = new ValidationResult.Entry(_message, _translate, _lineNumber, _offset, Integer.valueOf(_plus));
-        _entries.add(_entry);
+        ValidationResult.Issue _issue = new ValidationResult.Issue(_message, _translate, _lineNumber, _offset, _length);
+        _issues.add(_issue);
       }
     };
     IterableExtensions.<Issue>forEach(_filter, _function_1);

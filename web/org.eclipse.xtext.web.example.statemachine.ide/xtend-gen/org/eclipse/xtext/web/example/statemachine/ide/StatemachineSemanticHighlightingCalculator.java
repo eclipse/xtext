@@ -40,9 +40,6 @@ public class StatemachineSemanticHighlightingCalculator extends DefaultSemanticH
         this.highlightSignal(it, _signal, StatemachinePackage.Literals.EVENT__SIGNAL, acceptor);
       }
     }
-    if (!_matched) {
-      return true;
-    }
     return false;
   }
   

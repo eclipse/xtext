@@ -169,13 +169,13 @@ class XtextServiceDispatcher {
 				getSaveResourceService(request, sessionStore)
 			case 'update':
 				getUpdateDocumentService(request, sessionStore)
+			case 'assist':
+				getContentAssistService(request, sessionStore)
 			case 'validate':
 				getValidationService(request, sessionStore)
-			case 'content-assist':
-				getContentAssistService(request, sessionStore)
 			case 'hover':
 				getHoverService(request, sessionStore)
-			case 'highlighting':
+			case 'highlight':
 				getHighlightingService(request, sessionStore)
 			case 'occurrences':
 				getOccurrencesService(request, sessionStore)
@@ -404,6 +404,7 @@ class XtextServiceDispatcher {
 				}
 			]
 			hasTextInput = request.parameterKeys.contains('fullText')
+			hasSideEffects = true
 		]
 	}
 	

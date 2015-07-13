@@ -342,15 +342,15 @@ public class XtextServiceDispatcher {
       }
     }
     if (!_matched) {
-      if (Objects.equal(requestType, "validate")) {
+      if (Objects.equal(requestType, "assist")) {
         _matched=true;
-        _switchResult = this.getValidationService(request, sessionStore);
+        _switchResult = this.getContentAssistService(request, sessionStore);
       }
     }
     if (!_matched) {
-      if (Objects.equal(requestType, "content-assist")) {
+      if (Objects.equal(requestType, "validate")) {
         _matched=true;
-        _switchResult = this.getContentAssistService(request, sessionStore);
+        _switchResult = this.getValidationService(request, sessionStore);
       }
     }
     if (!_matched) {
@@ -360,7 +360,7 @@ public class XtextServiceDispatcher {
       }
     }
     if (!_matched) {
-      if (Objects.equal(requestType, "highlighting")) {
+      if (Objects.equal(requestType, "highlight")) {
         _matched=true;
         _switchResult = this.getHighlightingService(request, sessionStore);
       }
@@ -851,6 +851,7 @@ public class XtextServiceDispatcher {
           Set<String> _parameterKeys = request.getParameterKeys();
           boolean _contains = _parameterKeys.contains("fullText");
           it.hasTextInput = _contains;
+          it.hasSideEffects = true;
         }
       };
       _xblockexpression = ObjectExtensions.<XtextServiceDispatcher.ServiceDescriptor>operator_doubleArrow(_serviceDescriptor, _function);

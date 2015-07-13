@@ -21,7 +21,7 @@ import org.junit.Test;
 public class HighlightingTest extends AbstractWebServerTest {
   protected void assertHighlighting(final CharSequence resourceContent, final String... styleClasses) {
     final String content = resourceContent.toString();
-    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "highlighting");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "highlight");
     String _replace = content.replace("#", "");
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("fullText", _replace);
     final XtextServiceDispatcher.ServiceDescriptor highlighting = this.getService(

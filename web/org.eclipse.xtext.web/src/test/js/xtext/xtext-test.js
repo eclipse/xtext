@@ -10,16 +10,19 @@ define([
 	'jquery',
     'xtext/compatibility',
 	'xtext/MockEditorContext',
+	'xtext/services/XtextService',
 	'xtext/services/LoadResourceService',
-	'xtext/services/RevertResourceService',
 	'xtext/services/SaveResourceService',
 	'xtext/services/UpdateService',
 	'xtext/services/ContentAssistService',
+	'xtext/services/HighlightingService',
 	'xtext/services/ValidationService',
+	'xtext/services/HoverService',
+	'xtext/services/OccurrencesService',
 	'xtext/services/FormattingService'
-], function(mjQuery, compatibility, EditorContext, LoadResourceService, RevertResourceService,
-		SaveResourceService, UpdateService, ContentAssistService, ValidationService,
-		FormattingService) {
+], function(mjQuery, compatibility, EditorContext, XtextService, LoadResourceService,
+		SaveResourceService, UpdateService, ContentAssistService, HighlightingService,
+		ValidationService, HoverService, OccurrencesService, FormattingService) {
 	
 	function _copy(obj) {
 		var copy = {};
@@ -76,15 +79,16 @@ define([
 		},
 		
 		checkResult: function(checker) {
-			if (this._lastResult) {
-				if (this._lastResult.done)
-					this._lastResult.done(function(result) {
-						checker(this._editorContext, result);
+			var self = this;
+			if (self._lastResult) {
+				if (self._lastResult.done)
+					self._lastResult.done(function(result) {
+						checker(self._editorContext, result);
 					});
 				else
-					checker(this._editorContext, this._lastResult);
+					checker(self._editorContext, self._lastResult);
 			} else
-				checker(this._editorContext);
+				checker(self._editorContext);
 			return this;
 		},
 		
@@ -145,16 +149,23 @@ define([
 		if (options.resourceId) {
 			if (options.loadFromServer === undefined || options.loadFromServer) {
 				options.loadFromServer = true;
-				loadResourceService = new LoadResourceService(options.serverUrl, options.resourceId);
+				loadResourceService = new LoadResourceService(options.serverUrl, options.resourceId, false);
 				loadResourceService.loadResource(editorContext, options);
 				saveResourceService = new SaveResourceService(options.serverUrl, options.resourceId);
-				revertResourceService = new RevertResourceService(options.serverUrl, options.resourceId);
+				revertResourceService = new LoadResourceService(options.serverUrl, options.resourceId, true);
 			}
 		} else {
 			if (options.loadFromServer === undefined)
 				options.loadFromServer = false;
 			if (options.xtextLang)
 				options.resourceId = 'text.' + options.xtextLang;
+		}
+		
+		//---- Highlighting Service
+		
+		var highlightingService;
+		if (options.enableHighlightingService || options.enableHighlightingService === undefined) {
+			highlightingService = new HighlightingService(options.serverUrl, options.resourceId)
 		}
 		
 		//---- Validation Service
@@ -168,6 +179,8 @@ define([
 		
 		function refreshDocument() {
 			editorContext.clearClientServiceState();
+			if (highlightingService)
+				highlightingService.computeHighlighting(editorContext, options);
 			if (validationService)
 				validationService.computeProblems(editorContext, options);
 		}
@@ -175,7 +188,7 @@ define([
 		if (!options.sendFullText) {
 			updateService = new UpdateService(options.serverUrl, options.resourceId);
 			if (saveResourceService)
-				saveResourceService.setUpdateService(updateService);
+				saveResourceService._updateService = updateService;
 			editorContext.addServerStateListener(refreshDocument);
 		}
 		editorContext.addModelChangeListener(function(event) {
@@ -189,18 +202,36 @@ define([
 		
 		var contentAssistService;
 		if (options.enableContentAssistService || options.enableContentAssistService === undefined) {
-			contentAssistService = new ContentAssistService(options.serverUrl, options.resourceId);
-			if (updateService)
-				contentAssistService.setUpdateService(updateService);
+			contentAssistService = new ContentAssistService(options.serverUrl, options.resourceId, updateService);
+		}
+		
+		//---- Hover Service
+		
+		var hoverService;
+		if (options.enableHoverService || options.enableHoverService === undefined) {
+			hoverService = new HoverService(options.serverUrl, options.resourceId, updateService);
+		}
+		
+		//---- Occurrences Service
+		
+		var occurrencesService;
+		if (options.enableOccurrencesService || options.enableOccurrencesService === undefined) {
+			occurrencesService = new OccurrencesService(options.serverUrl, options.resourceId, updateService);
 		}
 		
 		//---- Formatting Service
 		
 		var formattingService;
 		if (options.enableFormattingService || options.enableFormattingService === undefined) {
-			formattingService = new FormattingService(options.serverUrl, options.resourceId);
-			if (updateService)
-				formattingService.setUpdateService(updateService);
+			formattingService = new FormattingService(options.serverUrl, options.resourceId, updateService);
+		}
+		
+		//---- Generator Service
+		
+		var generatorService;
+		if (options.enableGeneratorService || options.enableGeneratorService === undefined) {
+			generatorService = new XtextService();
+			generatorService.initialize(options.serverUrl, options.resourceId, 'generate', updateService);
 		}
 		
 		editorContext.invokeXtextService = function(service, invokeOptions) {
@@ -215,17 +246,25 @@ define([
 			else if (service === 'save' && saveResourceService)
 				return saveResourceService.saveResource(editorContext, optionsCopy);
 			else if (service === 'revert' && revertResourceService)
-				return revertResourceService.revertResource(editorContext, optionsCopy);
+				return revertResourceService.loadResource(editorContext, optionsCopy);
 			else if (service === 'update' && updateService)
 				return updateService.update(editorContext, optionsCopy);
+			else if (service === 'highlight' && highlightingService)
+				return highlightingService.computeHighlighting(editorContext, optionsCopy);
 			else if (service === 'validate' && validationService)
 				return validationService.computeProblems(editorContext, optionsCopy);
-			else if (service === 'content-assist' && contentAssistService) {
+			else if (service === 'assist' && contentAssistService) {
 				optionsCopy.offset = editorContext.getCaretOffset();
 				optionsCopy.selection = editorContext.getSelection();
 				return contentAssistService.computeContentAssist(editorContext, optionsCopy);
-			} else if (service === 'format' && formattingService)
+			} else if (service === 'hover' && hoverService)
+				return hoverService.computeHoverInfo(editorContext, options);
+			else if (service === 'occurrences' && occurrencesService)
+				return occurrencesService.getOccurrences(editorContext, optionsCopy);
+			else if (service === 'format' && formattingService)
 				return formattingService.format(editorContext, options);
+			else if (service === 'generate' && generatorService)
+				return generatorService.invoke(editorContext, options);
 			else
 				throw new Error('Service \'' + service + '\' is not available.');
 		};

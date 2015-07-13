@@ -20,16 +20,16 @@ import org.eclipse.xtext.web.server.IServiceResult
 @ToString(skipNulls = true)
 class ValidationResult implements IServiceResult {
 	
-	val entries = new ArrayList<Entry>
+	val issues = new ArrayList<Issue>
 	
 	@Data
 	@ToString(skipNulls = true)
-	static class Entry {
+	static class Issue {
 		String description
 		String severity 
 		Integer line
-		Integer startOffset
-		Integer endOffset
+		Integer offset
+		Integer length
 	}
 	
 }

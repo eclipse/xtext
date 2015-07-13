@@ -6,47 +6,37 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 
-define(['xtext/services/AbstractXtextService', 'jquery'], function(AbstractXtextService, jQuery) {
+define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery) {
 	
 	/**
 	 * Service class for loading resources. The resulting text is passed to the editor context.
 	 */
-	function LoadResourceService(serverUrl, resourceId) {
-		this.initialize(serverUrl, resourceId, 'load');
+	function LoadResourceService(serverUrl, resourceId, revert) {
+		this.initialize(serverUrl, resourceId, revert ? 'revert' : 'load');
 	};
 
-	LoadResourceService.prototype = new AbstractXtextService();
-
-	LoadResourceService.prototype.loadResource = function(editorContext, params, deferred) {
-		if (deferred === undefined) {
-			deferred = jQuery.Deferred();
-		}
-		var serverData = {
-			contentType: params.contentType
+	LoadResourceService.prototype = new XtextService();
+	LoadResourceService.prototype.loadResource = LoadResourceService.prototype.invoke;
+	
+	LoadResourceService.prototype._initServerData = function(serverData, editorContext, params) {
+		return {
+			suppressContent: true,
+			httpMethod: this._requestType == 'revert' ? 'POST' : 'GET'
 		};
-		
-		var self = this;
-		this.sendRequest(editorContext, {
-			type: 'GET',
-			data: serverData,
-			
-			success: function(result) {
-				editorContext.setText(result.fullText);
-				editorContext.clearUndoStack();
-				editorContext.markClean(!result.dirty);
-				var listeners = editorContext.updateServerState(result.fullText, result.stateId);
-				for (var i = 0; i < listeners.length; i++) {
-					listeners[i]();
-				}
-				deferred.resolve(result);
-			},
-			
-			error: function(xhr, textStatus, errorThrown) {
-				deferred.reject(errorThrown);
-			}
-		});
-		return deferred.promise();
 	};
 	
+	LoadResourceService.prototype._getSuccessCallback = function(editorContext, params, deferred) {
+		return function(result) {
+			editorContext.setText(result.fullText);
+			editorContext.clearUndoStack();
+			editorContext.markClean(!result.dirty);
+			var listeners = editorContext.updateServerState(result.fullText, result.stateId);
+			for (var i = 0; i < listeners.length; i++) {
+				listeners[i]();
+			}
+			deferred.resolve(result);
+		}
+	}
+
 	return LoadResourceService;
 });

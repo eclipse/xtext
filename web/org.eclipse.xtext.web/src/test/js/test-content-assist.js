@@ -17,15 +17,15 @@ requirejs.config({
 	}
 });
 
-suite('Content-assist', function() {
+suite('Content Assist', function() {
 	
 	test('should return the proposals sent by the server', function(done) {
 		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
 			xtext.testEditor({doneCallback: done})
 				.setCaretOffset(0)
-				.invokeService('content-assist')
+				.invokeService('assist')
 				.checkRequest(function(url, settings) {
-					assert.equal('test://xtext-service/content-assist', url);
+					assert.equal('test://xtext-service/assist', url);
 					assert.equal('GET', settings.type);
 					assert.equal(0, settings.data.caretOffset);
 				})
@@ -42,9 +42,9 @@ suite('Content-assist', function() {
 			xtext.testEditor({sendFullText: true, doneCallback: done})
 				.setText('foo')
 				.setCaretOffset(3)
-				.invokeService('content-assist')
+				.invokeService('assist')
 				.checkRequest(function(url, settings) {
-					assert.equal('test://xtext-service/content-assist', url);
+					assert.equal('test://xtext-service/assist', url);
 					assert.equal('POST', settings.type);
 					assert.equal('foo', settings.data.fullText);
 					assert.equal(3, settings.data.caretOffset);
@@ -58,9 +58,9 @@ suite('Content-assist', function() {
 			xtext.testEditor({doneCallback: done})
 				.setText('foo')
 				.setCaretOffset(3)
-				.invokeService('content-assist')
+				.invokeService('assist')
 				.checkRequest(function(url, settings) {
-					assert.equal('test://xtext-service/content-assist', url);
+					assert.equal('test://xtext-service/assist', url);
 					assert.equal('POST', settings.type);
 					assert.equal('foo', settings.data.deltaText);
 					assert.equal(3, settings.data.caretOffset);
@@ -81,7 +81,7 @@ suite('Content-assist', function() {
 					});
 					editorContext.setText('foo');
 				})
-				.invokeService('content-assist')
+				.invokeService('assist')
 				.respond({stateId: '1', entries: []});
 		});
 	});
@@ -90,14 +90,14 @@ suite('Content-assist', function() {
 		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
 			xtext.testEditor({doneCallback: done})
 				.setText('foo')
-				.invokeService('content-assist')
+				.invokeService('assist')
 				.checkRequest(function(url, settings) {
-					assert.equal('test://xtext-service/content-assist', url);
+					assert.equal('test://xtext-service/assist', url);
 					assert.equal('foo', settings.data.deltaText);
 				})
 				.respond({conflict: 'invalidStateId'})
 				.checkRequest(function(url, settings) {
-					assert.equal('test://xtext-service/content-assist', url);
+					assert.equal('test://xtext-service/assist', url);
 					assert.equal('foo', settings.data.fullText);
 				})
 				.respond({entries: [{proposal: 'bar'}]})
@@ -112,9 +112,9 @@ suite('Content-assist', function() {
 		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
 			xtext.testEditor({doneCallback: done})
 				.setText('foo')
-				.invokeService('content-assist')
+				.invokeService('assist')
 				.checkRequest(function(url, settings) {
-					assert.equal('test://xtext-service/content-assist', url);
+					assert.equal('test://xtext-service/assist', url);
 				})
 				.httpError('Resource not found', {status: 404})
 				.checkRequest(function(url, settings) {
@@ -123,7 +123,7 @@ suite('Content-assist', function() {
 				})
 				.respond({stateId: '1'})
 				.checkRequest(function(url, settings) {
-					assert.equal('test://xtext-service/content-assist', url);
+					assert.equal('test://xtext-service/assist', url);
 					assert.equal('1', settings.data.requiredStateId);
 				})
 				.respond({entries: [{proposal: 'bar'}]})
@@ -141,10 +141,10 @@ suite('Content-assist', function() {
 				.checkRequest(function(url, settings) {
 					assert.equal('test://xtext-service/update', url);
 				})
-				.invokeService('content-assist')
+				.invokeService('assist')
 				.respond({stateId: '1'})
 				.checkRequest(function(url, settings) {
-					assert.equal('test://xtext-service/content-assist', url);
+					assert.equal('test://xtext-service/assist', url);
 					assert.equal('1', settings.data.requiredStateId);
 				})
 				.respond({entries: [{proposal: 'bar'}]})

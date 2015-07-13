@@ -24,24 +24,24 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 public class ValidationResult implements IServiceResult {
   @Data
   @ToString(skipNulls = true)
-  public static class Entry {
+  public static class Issue {
     private final String description;
     
     private final String severity;
     
     private final Integer line;
     
-    private final Integer startOffset;
+    private final Integer offset;
     
-    private final Integer endOffset;
+    private final Integer length;
     
-    public Entry(final String description, final String severity, final Integer line, final Integer startOffset, final Integer endOffset) {
+    public Issue(final String description, final String severity, final Integer line, final Integer offset, final Integer length) {
       super();
       this.description = description;
       this.severity = severity;
       this.line = line;
-      this.startOffset = startOffset;
-      this.endOffset = endOffset;
+      this.offset = offset;
+      this.length = length;
     }
     
     @Override
@@ -52,8 +52,8 @@ public class ValidationResult implements IServiceResult {
       result = prime * result + ((this.description== null) ? 0 : this.description.hashCode());
       result = prime * result + ((this.severity== null) ? 0 : this.severity.hashCode());
       result = prime * result + ((this.line== null) ? 0 : this.line.hashCode());
-      result = prime * result + ((this.startOffset== null) ? 0 : this.startOffset.hashCode());
-      result = prime * result + ((this.endOffset== null) ? 0 : this.endOffset.hashCode());
+      result = prime * result + ((this.offset== null) ? 0 : this.offset.hashCode());
+      result = prime * result + ((this.length== null) ? 0 : this.length.hashCode());
       return result;
     }
     
@@ -66,7 +66,7 @@ public class ValidationResult implements IServiceResult {
         return false;
       if (getClass() != obj.getClass())
         return false;
-      ValidationResult.Entry other = (ValidationResult.Entry) obj;
+      ValidationResult.Issue other = (ValidationResult.Issue) obj;
       if (this.description == null) {
         if (other.description != null)
           return false;
@@ -82,15 +82,15 @@ public class ValidationResult implements IServiceResult {
           return false;
       } else if (!this.line.equals(other.line))
         return false;
-      if (this.startOffset == null) {
-        if (other.startOffset != null)
+      if (this.offset == null) {
+        if (other.offset != null)
           return false;
-      } else if (!this.startOffset.equals(other.startOffset))
+      } else if (!this.offset.equals(other.offset))
         return false;
-      if (this.endOffset == null) {
-        if (other.endOffset != null)
+      if (this.length == null) {
+        if (other.length != null)
           return false;
-      } else if (!this.endOffset.equals(other.endOffset))
+      } else if (!this.length.equals(other.length))
         return false;
       return true;
     }
@@ -103,8 +103,8 @@ public class ValidationResult implements IServiceResult {
       b.add("description", this.description);
       b.add("severity", this.severity);
       b.add("line", this.line);
-      b.add("startOffset", this.startOffset);
-      b.add("endOffset", this.endOffset);
+      b.add("offset", this.offset);
+      b.add("length", this.length);
       return b.toString();
     }
     
@@ -124,21 +124,21 @@ public class ValidationResult implements IServiceResult {
     }
     
     @Pure
-    public Integer getStartOffset() {
-      return this.startOffset;
+    public Integer getOffset() {
+      return this.offset;
     }
     
     @Pure
-    public Integer getEndOffset() {
-      return this.endOffset;
+    public Integer getLength() {
+      return this.length;
     }
   }
   
-  private final ArrayList<ValidationResult.Entry> entries = new ArrayList<ValidationResult.Entry>();
+  private final ArrayList<ValidationResult.Issue> issues = new ArrayList<ValidationResult.Issue>();
   
   @Pure
-  public ArrayList<ValidationResult.Entry> getEntries() {
-    return this.entries;
+  public ArrayList<ValidationResult.Issue> getIssues() {
+    return this.issues;
   }
   
   @Override
@@ -146,7 +146,7 @@ public class ValidationResult implements IServiceResult {
   public String toString() {
     ToStringBuilder b = new ToStringBuilder(this);
     b.skipNulls();
-    b.add("entries", this.entries);
+    b.add("issues", this.issues);
     return b.toString();
   }
 }

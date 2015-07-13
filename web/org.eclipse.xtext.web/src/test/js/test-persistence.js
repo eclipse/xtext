@@ -99,6 +99,7 @@ suite('Persistence', function() {
 				.markClean(false)
 				.invokeService('save')
 				.checkRequest(function(url, settings) {
+					assert.equal('test://xtext-service/save?resource=test.mydsl', url);
 					assert.equal('POST', settings.type);
 				})
 				.respond({stateId: '1'})
@@ -127,6 +128,9 @@ suite('Persistence', function() {
 			xtext.testEditor({resourceId: 'test.mydsl', sendFullText: true, doneCallback: done})
 				.setText('foo')
 				.invokeService('save')
+				.checkRequest(function(url, settings) {
+					assert.equal('test://xtext-service/save?resource=test.mydsl', url);
+				})
 				.respond({conflict: 'invalidStateId'})
 				.checkRequest(function(url, settings) {
 					assert.equal('test://xtext-service/save?resource=test.mydsl', url);
