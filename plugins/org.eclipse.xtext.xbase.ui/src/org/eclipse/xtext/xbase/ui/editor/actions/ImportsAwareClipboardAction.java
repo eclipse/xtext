@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.ui.editor.actions;
 
 import static com.google.common.collect.Lists.*;
+import static org.eclipse.xtext.ui.editor.model.TerminalsTokenTypeToPartitionMapper.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -21,11 +22,14 @@ import java.util.Set;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.IDocumentExtension3;
 import org.eclipse.jface.text.IRewriteTarget;
 import org.eclipse.jface.text.ITextOperationTarget;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.text.ITextViewerExtension5;
+import org.eclipse.jface.text.TextUtilities;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.custom.BusyIndicator;
@@ -43,10 +47,6 @@ import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.texteditor.IAbstractTextEditorHelpContextIds;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.TextEditorAction;
-import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.nodemodel.ILeafNode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -54,10 +54,8 @@ import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.util.ClipboardUtil;
 import org.eclipse.xtext.ui.util.ClipboardUtil.JavaImportData;
 import org.eclipse.xtext.util.ITextRegion;
-import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.util.Triple;
-import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.ui.imports.ImportsUtil;
@@ -89,9 +87,6 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 	private final int operationCode;
 	private ITextOperationTarget textOperationTarget;
 	private @Inject ImportsUtil importsUtil;
-
-	@Inject
-	private EObjectAtOffsetHelper helper;
 
 	/**
 	 * Creates the action.
@@ -185,8 +180,7 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 				});
 		JavaImportData javaImportsContent = ClipboardUtil.getJavaImportsContent();
 		String textFromClipboard = ClipboardUtil.getTextFromClipboard();
-		boolean addImports = shouldAddImports();
-		System.out.println(addImports);
+		boolean addImports = shouldAddImports(EditorUtils.getXtextEditor(getTextEditor()));
 		if (xbaseClipboardData != null && !sameTarget(xbaseClipboardData)) {
 			doPasteXbaseCode(xbaseClipboardData, addImports);
 		} else if (javaImportsContent != null) {
@@ -198,37 +192,30 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 
 	/**
 	 * Should not add imports when pasting into a {@link XStringLiteral} or Comments (except of JavaDoc)
+	 * 
+	 * @param xtextEditor
 	 */
-	private boolean shouldAddImports() {
-		XtextEditor xtextEditor = EditorUtils.getXtextEditor(getTextEditor());
-		int caretOffset = caretPosition(xtextEditor);
-		Pair<ILeafNode, EObject> stateAtOffset = currentModelStateAtOffset(xtextEditor, caretOffset);
-		ILeafNode targetLeaf = stateAtOffset.getFirst();
-		if (targetLeaf == null) {
-			return true;
+	private boolean shouldAddImports(XtextEditor xtextEditor) {
+		int caretOffset = caretOffset(xtextEditor);
+		String typeRight = IDocument.DEFAULT_CONTENT_TYPE;
+		String typeLeft = IDocument.DEFAULT_CONTENT_TYPE;
+		try {
+			typeRight = TextUtilities.getContentType(xtextEditor.getDocument(),
+					IDocumentExtension3.DEFAULT_PARTITIONING, caretOffset, false);
+			typeLeft = TextUtilities.getContentType(xtextEditor.getDocument(), IDocumentExtension3.DEFAULT_PARTITIONING,
+					caretOffset > 0 ? caretOffset - 1 : caretOffset, false);
+		} catch (BadLocationException exception) {
+			// Should not happen
 		}
-		System.out.println(targetLeaf);
-		if (targetLeaf.isHidden() && targetLeaf.getGrammarElement() instanceof AbstractRule) {
-			String name = ((AbstractRule) targetLeaf.getGrammarElement()).getName();
-			if ("ML_COMMENT".equals(name) || "SL_COMMENT".equals(name)) {
-				//TODO true for Javadoc case only
+		if (COMMENT_PARTITION.equals(typeRight) || STRING_LITERAL_PARTITION.equals(typeRight)
+				|| SL_COMMENT_PARTITION.equals(typeRight)) {
+			if (typeLeft.equals(typeRight))
 				return false;
-			}
-		}
-
-		EObject targetElement = stateAtOffset.getSecond();
-		System.out.println(targetElement);
-		if (targetElement instanceof XStringLiteral) {
-			if (NodeModelUtils.getNode(targetElement).getTextRegion().contains(caretOffset)) {
-				//TODO look if the caret is exactly in the node:
-				// e.g: |"text" and "text"| should return true, but "|test" and "test|" false
-				return false;
-			}
 		}
 		return true;
 	}
 
-	private int caretPosition(final XtextEditor xtextEditor) {
+	private int caretOffset(final XtextEditor xtextEditor) {
 		ISourceViewer sourceViewer = xtextEditor.getInternalSourceViewer();
 		int caretOffset = sourceViewer.getTextWidget().getCaretOffset();
 		if (sourceViewer instanceof ITextViewerExtension5) {
@@ -236,18 +223,6 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 			caretOffset = extension.widgetOffset2ModelOffset(caretOffset);
 		}
 		return caretOffset;
-	}
-
-	private Pair<ILeafNode, EObject> currentModelStateAtOffset(XtextEditor xtextEditor, final int caretOffset) {
-		return xtextEditor.getDocument().priorityReadOnly(new IUnitOfWork<Pair<ILeafNode, EObject>, XtextResource>() {
-			@Override
-			public Pair<ILeafNode, EObject> exec(XtextResource state) throws Exception {
-				return Tuples.create(
-						NodeModelUtils.findLeafNodeAtOffset(state.getParseResult().getRootNode(), caretOffset),
-						helper.resolveContainedElementAt(state, caretOffset));
-			}
-
-		});
 	}
 
 	private void doPasteXbaseCode(XbaseClipboardData xbaseClipboardData, boolean withImports) {
