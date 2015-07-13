@@ -25,6 +25,7 @@ import org.eclipse.xtext.resource.persistence.PortableURIs;
 import org.eclipse.xtext.resource.persistence.ResourceStorageLoadable;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
@@ -76,28 +77,43 @@ public class StorageAwareResource extends LazyLinkingResource {
         String _plus_1 = (_plus + " from storage.");
         StorageAwareResource.LOG.debug(_plus_1);
       }
-      final ResourceStorageLoadable in = this.resourceStorageFacade.getOrCreateResourceStorageLoadable(this);
-      this.loadFromStorage(in);
-    } else {
-      super.load(options);
+      try {
+        final ResourceStorageLoadable in = this.resourceStorageFacade.getOrCreateResourceStorageLoadable(this);
+        this.loadFromStorage(in);
+        return;
+      } catch (final Throwable _t) {
+        if (_t instanceof IOException) {
+          final IOException e = (IOException)_t;
+          this.contents.clear();
+          this.eAdapters.clear();
+          this.unload();
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
     }
+    super.load(options);
   }
   
   public void loadFromStorage(final ResourceStorageLoadable storageInputStream) {
-    boolean _equals = Objects.equal(storageInputStream, null);
-    if (_equals) {
-      throw new NullPointerException("storageInputStream");
-    }
-    final Stopwatches.StoppedTask task = Stopwatches.forTask("Loading from storage");
-    task.start();
-    this.isLoading = true;
-    this.isLoadedFromStorage = true;
     try {
-      storageInputStream.loadIntoResource(this);
-      this.isLoaded = true;
-    } finally {
-      this.isLoading = false;
-      task.stop();
+      boolean _equals = Objects.equal(storageInputStream, null);
+      if (_equals) {
+        throw new NullPointerException("storageInputStream");
+      }
+      final Stopwatches.StoppedTask task = Stopwatches.forTask("Loading from storage");
+      task.start();
+      this.isLoading = true;
+      this.isLoadedFromStorage = true;
+      try {
+        storageInputStream.loadIntoResource(this);
+        this.isLoaded = true;
+      } finally {
+        this.isLoading = false;
+        task.stop();
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   

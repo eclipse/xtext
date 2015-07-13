@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.resource
 
 import com.google.common.collect.Sets
+import java.io.IOException
 import java.io.ObjectInputStream
 import java.util.Map
 import java.util.Set
@@ -24,14 +25,14 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
 
 @FinalFieldsConstructor class BatchLinkableResourceStorageLoadable extends ResourceStorageLoadable {
 	
-	override protected loadEntries(StorageAwareResource resource, ZipInputStream zipIn) {
+	override protected loadEntries(StorageAwareResource resource, ZipInputStream zipIn) throws IOException {
 		super.loadEntries(resource, zipIn)
 		if (resource instanceof BatchLinkableResource) {
 			readAssociationsAdapter(resource, zipIn)
 		}
 	}
 	
-	override protected handleLoadEObject(InternalEObject loaded, EObjectInputStream input) {
+	override protected handleLoadEObject(InternalEObject loaded, EObjectInputStream input) throws IOException {
 		super.handleLoadEObject(loaded, input)
 		// load documentation adapters
 		if (input.readBoolean) {
@@ -48,7 +49,7 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
 		}
 	}
 	
-	protected def void readAssociationsAdapter(BatchLinkableResource resource, ZipInputStream stream) {
+	protected def void readAssociationsAdapter(BatchLinkableResource resource, ZipInputStream stream) throws IOException {
 		val existing = resource.eAdapters.filter(JvmModelAssociator.Adapter).head
 		val adapter = existing
 			?: (new JvmModelAssociator.Adapter()=> [

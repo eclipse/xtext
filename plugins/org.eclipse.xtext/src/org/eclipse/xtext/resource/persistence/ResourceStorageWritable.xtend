@@ -7,47 +7,38 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.persistence
 
+import java.io.BufferedOutputStream
 import java.io.DataOutputStream
 import java.io.IOException
 import java.io.ObjectOutputStream
 import java.io.OutputStream
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
-import org.apache.log4j.Logger
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.InternalEObject
 import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl
+import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl.EObjectOutputStream
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.nodemodel.impl.SerializableNodeModel
 import org.eclipse.xtext.nodemodel.serialization.SerializationConversionContext
-import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl.EObjectOutputStream
-import java.io.BufferedOutputStream
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 @FinalFieldsConstructor class ResourceStorageWritable {
 	
-	static val LOG = Logger.getLogger(ResourceStorageWritable)
-	
 	val OutputStream out
 	val boolean storeNodeModel
 	
-	def void writeResource(StorageAwareResource resource) {
+	def void writeResource(StorageAwareResource resource) throws IOException {
 		if (resource.isLoadedFromStorage) {
 			throw new IllegalStateException("cannot write resources loaded from storage. URI was "+resource.URI)
 		}
 		val zipOut = new ZipOutputStream(out)
 		try {
 			writeEntries(resource, zipOut)
-		} catch (IOException e) {
-			LOG.error(e.message, e)
 		} finally {
-			try {
-				zipOut.close
-			} catch(IOException e) {
-				LOG.error(e.message, e)	
-			}
+			zipOut.close
 		}
 	}
 	
@@ -55,7 +46,7 @@ import java.io.BufferedOutputStream
 	 * Write entries into the storage.
 	 * Overriding methods should first delegate to super before adding their own entries.
 	 */
-	protected def void writeEntries(StorageAwareResource resource, ZipOutputStream zipOut) {
+	protected def void writeEntries(StorageAwareResource resource, ZipOutputStream zipOut) throws IOException {
 		val bufferedOutput = new BufferedOutputStream(zipOut)
 		zipOut.putNextEntry(new ZipEntry("emf-contents"))
 		try {
@@ -85,7 +76,7 @@ import java.io.BufferedOutputStream
 	}
 	
 	
-	protected def void writeContents(StorageAwareResource storageAwareResource, OutputStream outputStream) {
+	protected def void writeContents(StorageAwareResource storageAwareResource, OutputStream outputStream) throws IOException {
 		val out = new BinaryResourceImpl.EObjectOutputStream(outputStream, emptyMap) {
 			
 			override writeURI(URI uri, String fragment) throws IOException {
@@ -109,15 +100,15 @@ import java.io.BufferedOutputStream
 		}
 	}
 	
-	protected def beforeSaveEObject(InternalEObject object, EObjectOutputStream writable_1) {
+	protected def beforeSaveEObject(InternalEObject object, EObjectOutputStream writable) throws IOException {
 		// do nothing
 	}
 	
-	protected def void handleSaveEObject(InternalEObject object, BinaryResourceImpl.EObjectOutputStream out) {
+	protected def void handleSaveEObject(InternalEObject object, BinaryResourceImpl.EObjectOutputStream out) throws IOException {
 		// do nothing
 	}
 	
-	protected def void writeResourceDescription(StorageAwareResource resource, OutputStream outputStream) {
+	protected def void writeResourceDescription(StorageAwareResource resource, OutputStream outputStream) throws IOException {
 		val description = resource.resourceServiceProvider.resourceDescriptionManager.getResourceDescription(resource);
 		val serializableDescription = SerializableResourceDescription.createCopy(description)
 		convertExternalURIsToPortableURIs(serializableDescription, resource) 
@@ -137,7 +128,7 @@ import java.io.BufferedOutputStream
 		}
 	}
 	
-	protected def writeNodeModel(StorageAwareResource resource, OutputStream outputStream) {
+	protected def writeNodeModel(StorageAwareResource resource, OutputStream outputStream) throws IOException {
 		val out = new DataOutputStream(outputStream);
 		val serializableNodeModel = new SerializableNodeModel(resource)
 		val conversionContext = new SerializationConversionContext(resource)

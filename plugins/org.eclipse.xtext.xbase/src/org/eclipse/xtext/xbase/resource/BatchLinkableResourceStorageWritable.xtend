@@ -25,6 +25,8 @@ import org.eclipse.xtext.xbase.compiler.DocumentationAdapter
 import org.eclipse.xtext.xbase.jvmmodel.JvmIdentifiableMetaData
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
 import org.eclipse.xtext.xtype.XComputedTypeReference
+import org.eclipse.xtext.common.types.JvmType
+import java.io.IOException
 
 /**
  * @author Sven Efftinge 
@@ -33,7 +35,7 @@ import org.eclipse.xtext.xtype.XComputedTypeReference
 	
 	private final static Logger LOG = Logger.getLogger(BatchLinkableResourceStorageWritable)
 	
-	override protected writeEntries(StorageAwareResource resource, ZipOutputStream zipOut) {
+	override protected writeEntries(StorageAwareResource resource, ZipOutputStream zipOut) throws IOException {
 		super.writeEntries(resource, zipOut)
 		if (resource instanceof BatchLinkableResource) {
 			zipOut.putNextEntry(new ZipEntry("associations"))
@@ -47,15 +49,15 @@ import org.eclipse.xtext.xtype.XComputedTypeReference
 		}
 	}
 	
-	override protected beforeSaveEObject(InternalEObject object, EObjectOutputStream writable_1) {
-		super.beforeSaveEObject(object, writable_1)
+	override protected beforeSaveEObject(InternalEObject object, EObjectOutputStream writable) throws IOException {
+		super.beforeSaveEObject(object, writable)
 		// make sure lazy type references are computed
 		if (object instanceof XComputedTypeReference) {
 			object.type
 		}
 	}
 	
-	override protected handleSaveEObject(InternalEObject object, BinaryResourceImpl.EObjectOutputStream out) {
+	override protected handleSaveEObject(InternalEObject object, BinaryResourceImpl.EObjectOutputStream out) throws IOException {
 		super.handleSaveEObject(object, out)
 		
 		var DocumentationAdapter documentationAdapter = null;
@@ -85,8 +87,14 @@ import org.eclipse.xtext.xtype.XComputedTypeReference
 		}
 	}
 	
-	protected def void writeAssociationsAdapter(BatchLinkableResource resource, OutputStream zipOut) {
-		val adapter = resource.eAdapters.filter(JvmModelAssociator.Adapter).head
+	protected def void writeAssociationsAdapter(BatchLinkableResource resource, OutputStream zipOut) throws IOException {
+		var adapter = resource.eAdapters.filter(JvmModelAssociator.Adapter).head;
+		if (adapter === null) {
+			if (resource.contents.tail.exists[ it instanceof JvmType ]) {
+				throw new IOException('Missing JvmModelAssociator.Adapter but resource contains inferred types: ' + resource.URI)
+			}
+			adapter = new JvmModelAssociator.Adapter()
+		}
 		val objOut = new ObjectOutputStream(zipOut);
 		try {
 			// logicalMap
