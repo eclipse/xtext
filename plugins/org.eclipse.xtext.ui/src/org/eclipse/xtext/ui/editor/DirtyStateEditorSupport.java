@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.editor;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -67,7 +69,9 @@ import com.google.inject.Provider;
  */
 public class DirtyStateEditorSupport implements IResourceDescription.Event.Listener, VerifyListener {
 	
-	private static ISchedulingRule SCHEDULING_RULE = SchedulingRuleFactory.INSTANCE.newSequence();
+	private static final Logger LOG = Logger.getLogger(DirtyStateEditorSupport.class);
+	
+	private static final ISchedulingRule SCHEDULING_RULE = SchedulingRuleFactory.INSTANCE.newSequence();
 	
 	/**
 	 * @author Sebastian Zarnekow - Initial contribution and API
@@ -520,25 +524,30 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 					if (haveEObjectDescriptionsChanged(newDescription, resourceDescriptionManager)) {
 						dirtyResource.copyState(newDescription);
 						if (resoureStorageFacade != null && (resource instanceof StorageAwareResource)) {
-							StorageAwareResource storageAwareResource = (StorageAwareResource) resource;
-							class MyByteArrayOutputStream extends ByteArrayOutputStream {
-								@Override
-								public synchronized byte[] toByteArray() {
-									return buf;
+							try {
+								StorageAwareResource storageAwareResource = (StorageAwareResource) resource;
+								class MyByteArrayOutputStream extends ByteArrayOutputStream {
+									@Override
+									public synchronized byte[] toByteArray() {
+										return buf;
+									}
+									public int length() { 
+										return count;
+									}
 								}
-								public int length() { 
-									return count;
-								}
+								final MyByteArrayOutputStream bout = new MyByteArrayOutputStream();
+								ResourceStorageWritable resourceOutputStream = resoureStorageFacade.createResourceStorageWritable(bout);
+								resourceOutputStream.writeResource(storageAwareResource);
+								dirtyResource.setResourceStorageLoadableProvider(new Provider<ResourceStorageLoadable>() {
+									@Override
+									public ResourceStorageLoadable get() {
+										return resoureStorageFacade.createResourceStorageLoadable(new ByteArrayInputStream(bout.toByteArray(), 0 , bout.length()));
+									}
+								});
+							} catch(IOException e) {
+								// something went wrong when writing the resource - stream's content is bogus and not attached to the dirty resource info
+								LOG.warn("Cannot persist storage for " + resource.getURI(), e);
 							}
-							final MyByteArrayOutputStream bout = new MyByteArrayOutputStream();
-							ResourceStorageWritable resourceOutputStream = resoureStorageFacade.createResourceStorageWritable(bout);
-							resourceOutputStream.writeResource(storageAwareResource);
-							dirtyResource.setResourceStorageLoadableProvider(new Provider<ResourceStorageLoadable>() {
-								@Override
-								public ResourceStorageLoadable get() {
-									return resoureStorageFacade.createResourceStorageLoadable(new ByteArrayInputStream(bout.toByteArray(), 0 , bout.length()));
-								}
-							});
 						}
 						dirtyStateManager.announceDirtyStateChanged(clientAwareResource);
 					}
