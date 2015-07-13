@@ -48,11 +48,12 @@ public abstract class MethodBasedModule implements Module {
 		Type key = getKeyType();
 		if (isClassBinding()) {
 			Class<?> value = (Class<?>) invokeMethod();
-			if (LOGGER.isTraceEnabled())
-				LOGGER.trace("Adding binding from " + key + " to " + value.getName()
-						+ ". Declaring Method was '" + getMethod().toGenericString() + "' in Module "
-						+ this.getClass().getName());
 			if (value != null && !Void.class.equals(value)) {
+				if (LOGGER.isTraceEnabled()) {
+					LOGGER.trace("Adding binding from " + key + " to " + value.getName()
+							+ ". Declaring Method was '" + getMethod().toGenericString() + "' in Module "
+							+ this.getClass().getName());
+				}
 				LinkedBindingBuilder<Object> bind = binder.bind((Key<Object>)Key.get(key));
 				if (!key.equals(value)) {
 					bindToClass(bind, value);
