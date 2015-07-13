@@ -151,7 +151,7 @@ public abstract class AbstractXtendUiModule extends DefaultXbaseWithAnnotationsU
 		binder.bind(org.eclipse.xtext.parser.antlr.ITokenDefProvider.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING)).to(org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class);
 	}
 	
-	// contributed by org.eclipse.xtext.generator.formatting2.Formatter2Fragment
+	// contributed by org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2
 	public Class<? extends IContentFormatterFactory> bindIContentFormatterFactory() {
 		return ContentFormatterFactory.class;
 	}

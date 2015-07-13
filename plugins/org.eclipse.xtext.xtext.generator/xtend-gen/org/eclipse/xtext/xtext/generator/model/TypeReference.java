@@ -22,7 +22,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xtext.generator.GenModelUtil;
+import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
 
 @Accessors
 @EqualsHashCode
@@ -173,7 +173,7 @@ public class TypeReference {
   }
   
   public TypeReference(final EClass clazz, final ResourceSet resourceSet, final List<TypeReference> arguments) {
-    this(GenModelUtil.getGenClass(clazz, resourceSet).getQualifiedInterfaceName(), arguments);
+    this(GenModelUtil2.getGenClass(clazz, resourceSet).getQualifiedInterfaceName(), arguments);
   }
   
   private static String getPackageName(final String qualifiedName) {

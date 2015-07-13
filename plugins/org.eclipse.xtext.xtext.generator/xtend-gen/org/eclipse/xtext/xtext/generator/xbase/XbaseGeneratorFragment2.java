@@ -38,7 +38,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.UsedRulesFinder;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
-import org.eclipse.xtext.xtext.generator.GenModelUtil;
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.LanguageConfig2;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
@@ -49,16 +48,18 @@ import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
+import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
+import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
 
 @Accessors(AccessorType.PUBLIC_SETTER)
 @SuppressWarnings("all")
 public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
   public static boolean inheritsXbase(final Grammar grammar) {
-    return GrammarUtil.inherits(grammar, "org.eclipse.xtext.xbase.Xbase");
+    return GrammarUtil2.inherits(grammar, "org.eclipse.xtext.xbase.Xbase");
   }
   
   public static boolean inheritsXbaseWithAnnotations(final Grammar grammar) {
-    return GrammarUtil.inherits(grammar, "org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations");
+    return GrammarUtil2.inherits(grammar, "org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations");
   }
   
   public static boolean usesXImportSection(final Grammar grammar) {
@@ -395,7 +396,7 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
     Grammar _grammar_1 = language.getGrammar();
     Resource _eResource = _grammar_1.eResource();
     ResourceSet _resourceSet = _eResource.getResourceSet();
-    String _javaTypeName = GenModelUtil.getJavaTypeName(_classifier, _resourceSet);
+    String _javaTypeName = GenModelUtil2.getJavaTypeName(_classifier, _resourceSet);
     final TypeReference firstRuleType = TypeReference.typeRef(_javaTypeName);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override

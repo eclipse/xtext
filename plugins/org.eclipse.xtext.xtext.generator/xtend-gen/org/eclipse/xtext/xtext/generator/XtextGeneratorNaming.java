@@ -98,6 +98,15 @@ public class XtextGeneratorNaming {
     return new TypeReference(_runtimeBasePackage, _plus);
   }
   
+  public TypeReference getGrammarAccess() {
+    String _runtimeBasePackage = this.getRuntimeBasePackage();
+    String _plus = (_runtimeBasePackage + ".services.");
+    String _name = GrammarUtil.getName(this.grammar);
+    String _plus_1 = (_plus + _name);
+    String _plus_2 = (_plus_1 + "GrammarAccess");
+    return new TypeReference(_plus_2);
+  }
+  
   public String getEclipsePluginBasePackage() {
     if ((this.eclipsePluginBasePackage == null)) {
       String _namespace = GrammarUtil.getNamespace(this.grammar);

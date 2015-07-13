@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.EqualsHashCode
-import org.eclipse.xtext.xtext.generator.GenModelUtil
+import org.eclipse.xtext.xtext.generator.util.GenModelUtil2
 
 @Accessors
 @EqualsHashCode
@@ -89,7 +89,7 @@ class TypeReference {
 	}
 	
 	new(EClass clazz, ResourceSet resourceSet, List<TypeReference> arguments) {
-		this(GenModelUtil.getGenClass(clazz, resourceSet).qualifiedInterfaceName, arguments)
+		this(GenModelUtil2.getGenClass(clazz, resourceSet).qualifiedInterfaceName, arguments)
 	}
 	
 	private static def getPackageName(String qualifiedName) {

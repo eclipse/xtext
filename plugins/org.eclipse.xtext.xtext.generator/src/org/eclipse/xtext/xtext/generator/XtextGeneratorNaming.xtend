@@ -77,6 +77,10 @@ class XtextGeneratorNaming {
 		new TypeReference(getRuntimeBasePackage, getName(grammar) + 'StandaloneSetupGenerated')
 	}
 	
+	def getGrammarAccess() {
+		new TypeReference(getRuntimeBasePackage + '.services.' + getName(grammar) + 'GrammarAccess')
+	}
+	
 	def getEclipsePluginBasePackage() {
 		if (eclipsePluginBasePackage === null)
 			eclipsePluginBasePackage = getNamespace(grammar) + '.ui'

@@ -10,16 +10,16 @@ package org.eclipse.xtext.xtext.generator.xbase;
 import com.google.inject.Inject;
 import java.util.Set;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.LanguageConfig2;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
+import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
 
 @SuppressWarnings("all")
 public class XtypeGeneratorFragment2 extends AbstractGeneratorFragment2 {
   public static boolean inheritsXtype(final Grammar grammar) {
-    return GrammarUtil.inherits(grammar, "org.eclipse.xtext.xbase.Xtype");
+    return GrammarUtil2.inherits(grammar, "org.eclipse.xtext.xbase.Xtype");
   }
   
   @Inject

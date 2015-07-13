@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.xtext.generator;
+package org.eclipse.xtext.xtext.generator.util;
 
 import com.google.common.base.Objects;
 import java.util.Map;
@@ -32,15 +32,15 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
-public class GenModelUtil {
+public class GenModelUtil2 {
   public static GenClass getGenClass(final EClass cls, final ResourceSet resourceSet) {
-    GenClassifier _genClassifier = GenModelUtil.getGenClassifier(cls, resourceSet);
+    GenClassifier _genClassifier = GenModelUtil2.getGenClassifier(cls, resourceSet);
     return ((GenClass) _genClassifier);
   }
   
   public static GenClassifier getGenClassifier(final EClassifier cls, final ResourceSet resourceSet) {
     EPackage _ePackage = cls.getEPackage();
-    final GenPackage genPackage = GenModelUtil.getGenPackage(_ePackage, resourceSet);
+    final GenPackage genPackage = GenModelUtil2.getGenPackage(_ePackage, resourceSet);
     EList<GenClassifier> _genClassifiers = genPackage.getGenClassifiers();
     for (final GenClassifier genCls : _genClassifiers) {
       String _name = cls.getName();
@@ -63,18 +63,18 @@ public class GenModelUtil {
   }
   
   public static GenDataType getGenDataType(final EDataType dt, final ResourceSet resourceSet) {
-    GenClassifier _genClassifier = GenModelUtil.getGenClassifier(dt, resourceSet);
+    GenClassifier _genClassifier = GenModelUtil2.getGenClassifier(dt, resourceSet);
     return ((GenDataType) _genClassifier);
   }
   
   public static GenEnum getGenEnum(final EEnum en, final ResourceSet resourceSet) {
-    GenClassifier _genClassifier = GenModelUtil.getGenClassifier(en, resourceSet);
+    GenClassifier _genClassifier = GenModelUtil2.getGenClassifier(en, resourceSet);
     return ((GenEnum) _genClassifier);
   }
   
   public static GenFeature getGenFeature(final EStructuralFeature feature, final ResourceSet resourceSet) {
     EClass _eContainingClass = feature.getEContainingClass();
-    GenClassifier _genClassifier = GenModelUtil.getGenClassifier(_eContainingClass, resourceSet);
+    GenClassifier _genClassifier = GenModelUtil2.getGenClassifier(_eContainingClass, resourceSet);
     final GenClass genCls = ((GenClass) _genClassifier);
     EList<GenFeature> _genFeatures = genCls.getGenFeatures();
     for (final GenFeature genFeat : _genFeatures) {
@@ -100,8 +100,8 @@ public class GenModelUtil {
   }
   
   public static String getGenIntLiteral(final EClass clazz, final EStructuralFeature feature, final ResourceSet resourceSet) {
-    final GenFeature genFeature = GenModelUtil.getGenFeature(feature, resourceSet);
-    final GenClass genClass = GenModelUtil.getGenClass(clazz, resourceSet);
+    final GenFeature genFeature = GenModelUtil2.getGenFeature(feature, resourceSet);
+    final GenClass genClass = GenModelUtil2.getGenClass(clazz, resourceSet);
     GenPackage _genPackage = genClass.getGenPackage();
     String _packageInterfaceName = _genPackage.getPackageInterfaceName();
     String _plus = (_packageInterfaceName + ".");
@@ -110,7 +110,7 @@ public class GenModelUtil {
   }
   
   public static String getGenIntLiteral(final EClassifier classifier, final ResourceSet resourceSet) {
-    final GenClassifier genClassifier = GenModelUtil.getGenClassifier(classifier, resourceSet);
+    final GenClassifier genClassifier = GenModelUtil2.getGenClassifier(classifier, resourceSet);
     GenPackage _genPackage = genClassifier.getGenPackage();
     String _packageInterfaceName = _genPackage.getPackageInterfaceName();
     String _plus = (_packageInterfaceName + ".");
@@ -133,7 +133,7 @@ public class GenModelUtil {
       String _string = _uRI_1.toString();
       location = _string;
     }
-    final Resource genModelResource = GenModelUtil.getGenModelResource(location, nsURI, resourceSet);
+    final Resource genModelResource = GenModelUtil2.getGenModelResource(location, nsURI, resourceSet);
     if ((genModelResource != null)) {
       EList<EObject> _contents = genModelResource.getContents();
       for (final EObject model : _contents) {
@@ -239,7 +239,7 @@ public class GenModelUtil {
   }
   
   public static String getGenTypeLiteral(final EClassifier classifier, final ResourceSet resourceSet) {
-    final GenClassifier genClassifier = GenModelUtil.getGenClassifier(classifier, resourceSet);
+    final GenClassifier genClassifier = GenModelUtil2.getGenClassifier(classifier, resourceSet);
     GenPackage _genPackage = genClassifier.getGenPackage();
     String pkg = _genPackage.getPackageInterfaceName();
     GenPackage _genPackage_1 = genClassifier.getGenPackage();
@@ -255,13 +255,13 @@ public class GenModelUtil {
   }
   
   public static String getGenTypeLiteral(final EPackage pkg, final ResourceSet resourceSet) {
-    GenPackage _genPackage = GenModelUtil.getGenPackage(pkg, resourceSet);
+    GenPackage _genPackage = GenModelUtil2.getGenPackage(pkg, resourceSet);
     String _packageInterfaceName = _genPackage.getPackageInterfaceName();
     return (_packageInterfaceName + ".eINSTANCE");
   }
   
   public static String getGenTypeLiteral(final EStructuralFeature feature, final ResourceSet resourceSet) {
-    final GenFeature genFeature = GenModelUtil.getGenFeature(feature, resourceSet);
+    final GenFeature genFeature = GenModelUtil2.getGenFeature(feature, resourceSet);
     GenPackage _genPackage = genFeature.getGenPackage();
     final String pkg = _genPackage.getPackageInterfaceName();
     GenPackage _genPackage_1 = genFeature.getGenPackage();
@@ -278,7 +278,7 @@ public class GenModelUtil {
   }
   
   public static String getJavaTypeName(final EClassifier classifier, final ResourceSet resourceSet) {
-    final GenClassifier genClassifier = GenModelUtil.getGenClassifier(classifier, resourceSet);
+    final GenClassifier genClassifier = GenModelUtil2.getGenClassifier(classifier, resourceSet);
     if ((genClassifier instanceof GenClass)) {
       return ((GenClass)genClassifier).getQualifiedInterfaceName();
     } else {

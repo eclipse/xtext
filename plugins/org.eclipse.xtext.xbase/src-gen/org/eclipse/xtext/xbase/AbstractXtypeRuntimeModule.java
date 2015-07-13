@@ -13,6 +13,8 @@ import com.google.inject.name.Names;
 import java.util.Properties;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.formatting2.FormatterPreferenceValuesProvider;
+import org.eclipse.xtext.formatting2.FormatterPreferences;
 import org.eclipse.xtext.formatting2.IFormatter2;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ITokenToStringConverter;
@@ -21,6 +23,7 @@ import org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter;
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.Lexer;
+import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.serializer.impl.Serializer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
@@ -82,14 +85,14 @@ public abstract class AbstractXtypeRuntimeModule extends DefaultRuntimeModule {
 		return Serializer.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.formatting2.Formatter2Fragment
+	// contributed by org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2
 	public Class<? extends IFormatter2> bindIFormatter2() {
 		return XtypeFormatter.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.formatting2.Formatter2Fragment
+	// contributed by org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2
 	public void configureFormatterPreferences(Binder binder) {
-		binder.bind(org.eclipse.xtext.preferences.IPreferenceValuesProvider.class).annotatedWith(org.eclipse.xtext.formatting2.FormatterPreferences.class).to(org.eclipse.xtext.formatting2.FormatterPreferenceValuesProvider.class);
+		binder.bind(IPreferenceValuesProvider.class).annotatedWith(FormatterPreferences.class).to(FormatterPreferenceValuesProvider.class);
 	}
 	
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment

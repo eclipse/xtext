@@ -14,6 +14,8 @@ import java.util.Properties;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.common.types.xtext.TypesAwareDefaultGlobalScopeProvider;
+import org.eclipse.xtext.formatting2.FormatterPreferenceValuesProvider;
+import org.eclipse.xtext.formatting2.FormatterPreferences;
 import org.eclipse.xtext.formatting2.IFormatter2;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.parser.IParser;
@@ -23,6 +25,7 @@ import org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter;
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.Lexer;
+import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -177,14 +180,14 @@ public abstract class AbstractXbaseRuntimeModule extends DefaultXbaseRuntimeModu
 		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.PERSISTED_DESCRIPTIONS)).to(ResourceSetBasedResourceDescriptions.class);
 	}
 	
-	// contributed by org.eclipse.xtext.generator.formatting2.Formatter2Fragment
+	// contributed by org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2
 	public Class<? extends IFormatter2> bindIFormatter2() {
 		return XbaseFormatter.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.formatting2.Formatter2Fragment
+	// contributed by org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2
 	public void configureFormatterPreferences(Binder binder) {
-		binder.bind(org.eclipse.xtext.preferences.IPreferenceValuesProvider.class).annotatedWith(org.eclipse.xtext.formatting2.FormatterPreferences.class).to(org.eclipse.xtext.formatting2.FormatterPreferenceValuesProvider.class);
+		binder.bind(IPreferenceValuesProvider.class).annotatedWith(FormatterPreferences.class).to(FormatterPreferenceValuesProvider.class);
 	}
 	
 }

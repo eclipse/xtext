@@ -35,7 +35,7 @@ public abstract class AbstractXtypeUiModule extends DefaultUiModule {
 		return Access.getJavaProjectsState();
 	}
 	
-	// contributed by org.eclipse.xtext.generator.formatting2.Formatter2Fragment
+	// contributed by org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2
 	public Class<? extends IContentFormatterFactory> bindIContentFormatterFactory() {
 		return ContentFormatterFactory.class;
 	}

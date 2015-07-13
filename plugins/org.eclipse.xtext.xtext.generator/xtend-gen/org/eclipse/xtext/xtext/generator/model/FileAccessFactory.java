@@ -10,10 +10,9 @@ package org.eclipse.xtext.xtext.generator.model;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtend.lib.annotations.AccessorType;
-import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
+import org.eclipse.xtext.xtext.generator.LanguageConfig2;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
@@ -30,40 +29,35 @@ public class FileAccessFactory {
   @Inject
   private Provider<ResourceSet> resourceSetProvider;
   
-  @Accessors(AccessorType.PUBLIC_SETTER)
-  private ResourceSet resourceSet;
-  
   public TextFileAccess createTextFile() {
     return new TextFileAccess(this.encodingProvider);
   }
   
   public JavaFileAccess createJavaFile(final TypeReference typeRef) {
     final JavaFileAccess file = new JavaFileAccess(typeRef, this.codeConfig, this.encodingProvider);
-    ResourceSet _elvis = null;
-    if (this.resourceSet != null) {
-      _elvis = this.resourceSet;
-    } else {
-      ResourceSet _get = this.resourceSetProvider.get();
-      _elvis = _get;
-    }
-    file.setResourceSet(_elvis);
+    ResourceSet _get = this.resourceSetProvider.get();
+    file.setResourceSet(_get);
     return file;
   }
   
   public XtendFileAccess createXtendFile(final TypeReference typeRef) {
     final XtendFileAccess file = new XtendFileAccess(typeRef, this.codeConfig, this.encodingProvider);
-    ResourceSet _elvis = null;
-    if (this.resourceSet != null) {
-      _elvis = this.resourceSet;
-    } else {
-      ResourceSet _get = this.resourceSetProvider.get();
-      _elvis = _get;
-    }
-    file.setResourceSet(_elvis);
+    ResourceSet _get = this.resourceSetProvider.get();
+    file.setResourceSet(_get);
     return file;
   }
   
-  public void setResourceSet(final ResourceSet resourceSet) {
-    this.resourceSet = resourceSet;
+  public FileAccessFactory with(final LanguageConfig2 language) {
+    final FileAccessFactory result = new FileAccessFactory();
+    result.codeConfig = this.codeConfig;
+    result.encodingProvider = this.encodingProvider;
+    final Provider<ResourceSet> _function = new Provider<ResourceSet>() {
+      @Override
+      public ResourceSet get() {
+        return language.getResourceSet();
+      }
+    };
+    result.resourceSetProvider = _function;
+    return result;
   }
 }
