@@ -24,10 +24,12 @@ public class SourceRelativeFileSystemAccess extends JDTAwareEclipseResourceFileS
 	@Override
 	protected boolean ensureOutputConfigurationDirectoryExists(OutputConfiguration outputConfig) {
 		try {
-			super.ensureOutputConfigurationDirectoryExists(outputConfig);
-			IContainer container = getContainer(outputConfig);
-			addToSourceFolders(container);
-			return true;
+			if (super.ensureOutputConfigurationDirectoryExists(outputConfig)) {
+				IContainer container = getContainer(outputConfig);
+				addToSourceFolders(container);
+				return true;
+			}
+			return false;
 		} catch (CoreException e) {
 			throw new RuntimeIOException(e);
 		}

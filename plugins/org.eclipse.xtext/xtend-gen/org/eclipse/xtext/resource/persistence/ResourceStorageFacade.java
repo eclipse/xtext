@@ -194,9 +194,16 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
     final AbstractFileSystemAccess2 fsa = this.getFileSystemAccess(resource);
     final String outputRelativePath = this.computeOutputPath(resource);
     final URI uri = fsa.getURI(outputRelativePath);
-    ResourceSet _resourceSet_2 = resource.getResourceSet();
-    URIConverter _uRIConverter_1 = _resourceSet_2.getURIConverter();
-    return _uRIConverter_1.exists(uri, null);
+    boolean _and_1 = false;
+    if (!(uri != null)) {
+      _and_1 = false;
+    } else {
+      ResourceSet _resourceSet_2 = resource.getResourceSet();
+      URIConverter _uRIConverter_1 = _resourceSet_2.getURIConverter();
+      boolean _exists_1 = _uRIConverter_1.exists(uri, null);
+      _and_1 = _exists_1;
+    }
+    return _and_1;
   }
   
   protected AbstractFileSystemAccess2 getFileSystemAccess(final StorageAwareResource resource) {

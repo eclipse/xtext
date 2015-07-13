@@ -19,6 +19,7 @@ import org.eclipse.xtend.lib.macro.file.FileLocations;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
@@ -31,26 +32,42 @@ public class FileLocationsImpl implements FileLocations {
   private Provider<WorkspaceConfig> projectInformationProvider;
   
   protected ProjectConfig getProjectConfig(final Path path) {
+    final ProjectConfig projectConfig = this.getProjectConfigOrNull(path);
+    boolean _equals = Objects.equal(projectConfig, null);
+    if (_equals) {
+      List<String> _segments = path.getSegments();
+      String _head = IterableExtensions.<String>head(_segments);
+      String _plus = ("The project \'" + _head);
+      String _plus_1 = (_plus + "\' has not been configured.");
+      throw new IllegalArgumentException(_plus_1);
+    }
+    return projectConfig;
+  }
+  
+  protected ProjectConfig getProjectConfigOrNull(final Path path) {
     List<String> _segments = path.getSegments();
     final String string = _segments.get(0);
     WorkspaceConfig _get = this.projectInformationProvider.get();
     final ProjectConfig projectConfig = _get.getProject(string);
-    boolean _equals = Objects.equal(projectConfig, null);
-    if (_equals) {
-      throw new IllegalArgumentException((("The project \'" + string) + "\' has not been configured."));
-    }
     return projectConfig;
   }
   
   @Override
   public Path getSourceFolder(final Path path) {
-    final ProjectConfig config = this.getProjectConfig(path);
-    return config.getContainingSourceFolder(path);
+    final ProjectConfig config = this.getProjectConfigOrNull(path);
+    Path _containingSourceFolder = null;
+    if (config!=null) {
+      _containingSourceFolder=config.getContainingSourceFolder(path);
+    }
+    return _containingSourceFolder;
   }
   
   @Override
   public Path getTargetFolder(final Path path) {
-    final ProjectConfig config = this.getProjectConfig(path);
+    final ProjectConfig config = this.getProjectConfigOrNull(path);
+    if ((config == null)) {
+      return null;
+    }
     Map<Path, Path> _sourceFolderMappings = config.getSourceFolderMappings();
     Set<Path> _keySet = _sourceFolderMappings.keySet();
     for (final Path src : _keySet) {
