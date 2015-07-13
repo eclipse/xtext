@@ -125,7 +125,5 @@ public class XtendLibClasspathAdderTest extends AbstractXtendUITestCase {
 	protected void waitForAutoBuild() {
 		IResourcesSetupUtil.reallyWaitForAutoBuild();
 	}
-	
-
 
 }
