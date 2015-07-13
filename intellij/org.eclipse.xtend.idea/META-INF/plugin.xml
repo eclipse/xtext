@@ -49,5 +49,7 @@
 							implementation="org.eclipse.xtend.core.idea.debug.XtendIsJavaDebugAware"/>
 		<debugger.extraSteppingFilter
 							implementation="org.eclipse.xtend.core.idea.debug.XtendSteppingFilter"/>
+		<debugger.sourcePositionProvider
+							implementation="org.eclipse.xtend.core.idea.debug.XtendSourcePositionProvider"/>
 	</extensions>
 </idea-plugin>
