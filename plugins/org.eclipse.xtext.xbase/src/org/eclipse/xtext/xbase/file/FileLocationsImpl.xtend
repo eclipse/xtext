@@ -21,21 +21,28 @@ class FileLocationsImpl implements FileLocations {
 	@Inject @Accessors Provider<WorkspaceConfig> projectInformationProvider
 	
 	protected def ProjectConfig getProjectConfig(Path path) {
-		val string = path.getSegments().get(0)
-		val projectConfig = projectInformationProvider.get.getProject(string)
+		val projectConfig = path.getProjectConfigOrNull
 		if (projectConfig == null) {
-			throw new IllegalArgumentException("The project '"+string+"' has not been configured.")
+			throw new IllegalArgumentException("The project '"+path.segments.head+"' has not been configured.")
 		}
 		return projectConfig
 	}
 	
+	protected def ProjectConfig getProjectConfigOrNull(Path path) {
+		val string = path.segments.get(0)
+		val projectConfig = projectInformationProvider.get.getProject(string)
+		return projectConfig
+	}
+	
 	override Path getSourceFolder(Path path) {
-		val config = getProjectConfig(path)
-		return config.getContainingSourceFolder(path)
+		val config = getProjectConfigOrNull(path)
+		return config?.getContainingSourceFolder(path)
 	}
 
 	override Path getTargetFolder(Path path) {
-		val config = getProjectConfig(path)
+		val config = getProjectConfigOrNull(path)
+		if (config === null)
+			return null
 		for (Path src : config.sourceFolderMappings.keySet()) {
 			if (path.startsWith(src)) {
 				return config.sourceFolderMappings.get(src)
