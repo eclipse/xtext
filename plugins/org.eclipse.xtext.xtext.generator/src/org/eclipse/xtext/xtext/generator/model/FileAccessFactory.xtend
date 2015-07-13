@@ -10,9 +10,9 @@ package org.eclipse.xtext.xtext.generator.model
 import com.google.inject.Inject
 import com.google.inject.Provider
 import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.xtext.generator.CodeConfig
+import org.eclipse.xtext.xtext.generator.LanguageConfig2
 
 class FileAccessFactory {
 	
@@ -22,23 +22,28 @@ class FileAccessFactory {
 	
 	@Inject Provider<ResourceSet> resourceSetProvider
 	
-	@Accessors(PUBLIC_SETTER)
-	ResourceSet resourceSet
-	
 	def TextFileAccess createTextFile() {
 		new TextFileAccess(encodingProvider)
 	}
 	
 	def JavaFileAccess createJavaFile(TypeReference typeRef) {
 		val file = new JavaFileAccess(typeRef, codeConfig, encodingProvider)
-		file.resourceSet = resourceSet ?: resourceSetProvider.get
+		file.resourceSet = resourceSetProvider.get
 		return file
 	}
 	
 	def XtendFileAccess createXtendFile(TypeReference typeRef) {
 		val file = new XtendFileAccess(typeRef, codeConfig, encodingProvider)
-		file.resourceSet = resourceSet ?: resourceSetProvider.get
+		file.resourceSet = resourceSetProvider.get
 		return file
+	}
+	
+	def FileAccessFactory with(LanguageConfig2 language) {
+		val result = new FileAccessFactory
+		result.codeConfig = this.codeConfig
+		result.encodingProvider = this.encodingProvider
+		result.resourceSetProvider = [language.resourceSet]
+		return result
 	}
 	
 }

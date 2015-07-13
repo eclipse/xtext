@@ -30,18 +30,19 @@ import org.eclipse.xtext.xtext.generator.model.FileSystemAccess
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 
-import static extension org.eclipse.xtext.xtext.generator.GenModelUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
+import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
+import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
 
 @Accessors(PUBLIC_SETTER)
 class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
 
 	static def boolean inheritsXbase(Grammar grammar) {
-		GrammarUtil.inherits(grammar, 'org.eclipse.xtext.xbase.Xbase')
+		grammar.inherits('org.eclipse.xtext.xbase.Xbase')
 	}
 
 	static def boolean inheritsXbaseWithAnnotations(Grammar grammar) {
-		GrammarUtil.inherits(grammar, 'org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations')
+		grammar.inherits('org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations')
 	}
 	
 	static def boolean usesXImportSection(Grammar grammar) {
