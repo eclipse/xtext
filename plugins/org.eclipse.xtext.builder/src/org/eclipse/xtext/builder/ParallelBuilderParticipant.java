@@ -9,12 +9,17 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.notify.impl.BasicNotifierImpl.EObservableAdapterList;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2.IFileCallback;
@@ -34,6 +39,26 @@ import com.google.common.util.concurrent.ThreadFactoryBuilder;
  * @since 2.7
  */
 public class ParallelBuilderParticipant extends BuilderParticipant {
+	
+	private static final class Tripwire implements EObservableAdapterList.Listener {
+
+		private static final Logger log = Logger.getLogger(Tripwire.class);
+		
+		@Override
+		public void added(Notifier notifier, Adapter adapter) {
+			String message = "Added adapter to resource set during code generation: " + adapter;
+			IllegalStateException exception = new IllegalStateException(message);
+			log.error(message, exception);
+		}
+
+		@Override
+		public void removed(Notifier notifier, Adapter adapter) {
+			String message = "Removed adapter to resource set during code generation: " + adapter;
+			IllegalStateException exception = new IllegalStateException(message);
+			log.error(message, exception);
+		}
+		
+	}
 	
 	private static final int QUEUE_CAPACITY = 50;
 	
@@ -59,7 +84,11 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 			IProgressMonitor progressMonitor) throws CoreException {
 		BlockingQueue<FileSystemAccessRequest> requestQueue = newBlockingQueue(QUEUE_CAPACITY);
 		FileSystemAccessQueue fileSystemAccessQueue = new FileSystemAccessQueue(requestQueue, progressMonitor);
-		context.getResourceSet().eAdapters().add(fileSystemAccessQueue);
+		Tripwire tripwire = new Tripwire();
+		EList<Adapter> adapters = context.getResourceSet().eAdapters();
+		EObservableAdapterList observableAdapters = (EObservableAdapterList) adapters;
+		adapters.add(fileSystemAccessQueue);
+		observableAdapters.addListener(tripwire);
 		try {
 			SubMonitor subMonitor = SubMonitor.convert(progressMonitor, 1);
 			subMonitor.subTask("Compiling...");
@@ -118,7 +147,8 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 				}
 			}
 		} finally {
-			context.getResourceSet().eAdapters().remove(fileSystemAccessQueue);
+			observableAdapters.removeListener(tripwire);
+			adapters.remove(fileSystemAccessQueue);
 		}
 	}
 
