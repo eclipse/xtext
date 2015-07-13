@@ -38,6 +38,9 @@ public interface IPreferenceValuesProvider {
 
 		@Override
 		public IPreferenceValues getPreferenceValues(Resource context) {
+			if (context == null) {
+				return empty();
+			}
 			PreferenceValuesByLanguage valuesByLanguage = PreferenceValuesByLanguage.findInEmfObject(context.getResourceSet());
 			if (valuesByLanguage == null)
 				return empty();
