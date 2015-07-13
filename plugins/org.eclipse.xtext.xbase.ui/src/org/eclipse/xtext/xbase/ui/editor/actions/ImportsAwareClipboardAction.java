@@ -208,7 +208,7 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 			// Should not happen
 		}
 		if (COMMENT_PARTITION.equals(typeRight) || STRING_LITERAL_PARTITION.equals(typeRight)
-				|| SL_COMMENT_PARTITION.equals(typeRight)) {
+				|| SL_COMMENT_PARTITION.equals(typeRight) || "__rich_string".equals(typeRight)) {
 			if (typeLeft.equals(typeRight))
 				return false;
 		}
