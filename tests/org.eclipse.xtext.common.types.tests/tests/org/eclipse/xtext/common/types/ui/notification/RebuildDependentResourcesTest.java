@@ -49,7 +49,7 @@ public class RebuildDependentResourcesTest extends Assert {
 	@After
 	public void tearDown() throws Exception {
 		root().getProject("RebuildDependentResourcesTest").delete(true, null);
-		waitForBuild();
+		reallyWaitForAutoBuild();
 		assertEquals(0, countResourcesInIndex());
 	}
 	

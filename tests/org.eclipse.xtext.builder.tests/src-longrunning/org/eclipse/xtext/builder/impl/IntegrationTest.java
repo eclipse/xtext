@@ -33,6 +33,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.builder.tests.builderTestLanguage.BuilderTestLanguagePackage;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.TextFile;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.ui.XtextProjectHelper;
@@ -611,5 +612,9 @@ public class IntegrationTest extends AbstractBuilderTest {
 			resourceAttributes.setReadOnly(false);
 			file.setResourceAttributes(resourceAttributes);
 		}
+	}
+	
+	protected void waitForBuild() {
+		IResourcesSetupUtil.reallyWaitForAutoBuild();
 	}
 }

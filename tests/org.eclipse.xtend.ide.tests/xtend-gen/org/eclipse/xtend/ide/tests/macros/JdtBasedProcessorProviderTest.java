@@ -21,7 +21,6 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
@@ -135,8 +134,7 @@ public class JdtBasedProcessorProviderTest {
       _builder_2.newLine();
       this.newSource(userProject, "client/A.xtend", _builder_2.toString());
       IResourcesSetupUtil.cleanBuild();
-      NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      IResourcesSetupUtil.waitForBuild(_nullProgressMonitor);
+      IResourcesSetupUtil.waitForBuild();
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
       IResource _file = IResourcesSetupUtil.file("userProject/xtend-gen/client/SomeClass.java");
       InputStream _contents = ((IFile) _file).getContents();
@@ -229,8 +227,7 @@ public class JdtBasedProcessorProviderTest {
       _builder_2.newLine();
       this.newSource(userProject, "client/A.xtend", _builder_2.toString());
       IResourcesSetupUtil.cleanBuild();
-      NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      IResourcesSetupUtil.waitForBuild(_nullProgressMonitor);
+      IResourcesSetupUtil.waitForBuild();
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
       IResource _file = IResourcesSetupUtil.file("userProject/xtend-gen/client/SomeClass.java");
       InputStream _contents = ((IFile) _file).getContents();
@@ -344,8 +341,7 @@ public class JdtBasedProcessorProviderTest {
       _builder_2.newLine();
       this.newSource(userProject, "client/A.xtend", _builder_2.toString());
       IResourcesSetupUtil.cleanBuild();
-      NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      IResourcesSetupUtil.waitForBuild(_nullProgressMonitor);
+      IResourcesSetupUtil.waitForBuild();
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
       IResource _file = IResourcesSetupUtil.file("userProject/xtend-gen/client/SomeClass.java");
       InputStream _contents = ((IFile) _file).getContents();
@@ -430,8 +426,7 @@ public class JdtBasedProcessorProviderTest {
       _builder_2.newLine();
       this.newSource(userProject, "client/A.xtend", _builder_2.toString());
       IResourcesSetupUtil.cleanBuild();
-      NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      IResourcesSetupUtil.waitForBuild(_nullProgressMonitor);
+      IResourcesSetupUtil.waitForBuild();
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
       IResource _file = IResourcesSetupUtil.file("userProject/xtend-gen/client/SomeClass.java");
       InputStream _contents = ((IFile) _file).getContents();
