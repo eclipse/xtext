@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 
-define(['xtext/services/AbstractXtextService', 'jquery'], function(AbstractXtextService, jQuery) {
+define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery) {
 	
 	/**
 	 * Service class for updating the server-side representation of a resource.
@@ -15,12 +15,13 @@ define(['xtext/services/AbstractXtextService', 'jquery'], function(AbstractXtext
 	 * stateless alternative, where the full text content is sent with each service request.
 	 */
 	function UpdateService(serverUrl, resourceId) {
-		this.initialize(serverUrl, resourceId, 'update');
-		this.setUpdateService(this);
+		this.initialize(serverUrl, resourceId, 'update', this);
 		this._completionCallbacks = [];
 	};
 	
-	UpdateService.prototype = new AbstractXtextService();
+	UpdateService.prototype = new XtextService();
+	// Don't use the generic invoke function
+	delete UpdateService.prototype.invoke;
 
 	/**
 	 * Compute a delta between two versions of a text. If a difference is found, the result
@@ -106,6 +107,7 @@ define(['xtext/services/AbstractXtextService', 'jquery'], function(AbstractXtext
 		self.sendRequest(editorContext, {
 			type: 'PUT',
 			data: serverData,
+			
 			success: function(result) {
 				if (result.conflict) {
 					// The server has lost its session state and the resource is loaded from the server
@@ -124,6 +126,7 @@ define(['xtext/services/AbstractXtextService', 'jquery'], function(AbstractXtext
 				}
 				deferred.resolve(result);
 			},
+			
 			error: function(xhr, textStatus, errorThrown) {
 				if (xhr.status == 404 && !params.loadFromServer && knownServerState.text !== undefined) {
 					// The server has lost its session state and the resource is not loaded from the server
@@ -135,6 +138,7 @@ define(['xtext/services/AbstractXtextService', 'jquery'], function(AbstractXtext
 				}
 				deferred.reject(errorThrown);
 			},
+			
 			complete: self.onComplete.bind(self)
 		});
 		return deferred.promise();

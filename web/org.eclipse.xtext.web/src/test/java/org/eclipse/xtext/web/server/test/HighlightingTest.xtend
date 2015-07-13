@@ -8,7 +8,7 @@ class HighlightingTest extends AbstractWebServerTest {
 	def protected assertHighlighting(CharSequence resourceContent, String... styleClasses) {
 		val content = resourceContent.toString
 		val highlighting = getService(#{
-			'requestType' -> 'highlighting',
+			'requestType' -> 'highlight',
 			'fullText' -> content.replace('#', '')
 		})
 		assertTrue(highlighting.hasTextInput)

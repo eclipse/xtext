@@ -22,7 +22,6 @@ class StatemachineSemanticHighlightingCalculator extends DefaultSemanticHighligh
 					highlightSignal(signal, COMMAND__SIGNAL, acceptor)
 				Event:
 					highlightSignal(signal, EVENT__SIGNAL, acceptor)
-				default: return true
 			}
 		return false
 	}

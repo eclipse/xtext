@@ -135,8 +135,8 @@ define([
     'orion/editor/annotations',
     'xtext/compatibility',
 	'xtext/OrionEditorContext',
+	'xtext/services/XtextService',
 	'xtext/services/LoadResourceService',
-	'xtext/services/RevertResourceService',
 	'xtext/services/SaveResourceService',
 	'xtext/services/UpdateService',
 	'xtext/services/ContentAssistService',
@@ -144,12 +144,10 @@ define([
 	'xtext/services/HighlightingService',
 	'xtext/services/HoverService',
 	'xtext/services/OccurrencesService',
-	'xtext/services/FormattingService',
-	'xtext/services/GeneratorService'
+	'xtext/services/FormattingService'
 ], function(jQuery, orionEdit, Deferred, mKeyBinding, mTextStyler, mAnnotations, compatibility, EditorContext,
-		LoadResourceService, RevertResourceService, SaveResourceService, UpdateService,
-		ContentAssistService, ValidationService, HighlightingService, HoverService, OccurrencesService,
-		FormattingService, GeneratorService) {
+		XtextService, LoadResourceService, SaveResourceService, UpdateService, ContentAssistService,
+		ValidationService, HighlightingService, HoverService, OccurrencesService, FormattingService) {
 	
 	/**
 	 * Translate an HTML attribute name to a JS option name.
@@ -270,6 +268,28 @@ define([
 		return newType;
 	}
 	
+	/**
+	 * Apply the hightlighting service result.
+	 */
+	function _appyHighlighting(result, editor, editorContext) {
+		var annotations = [];
+		for(var i = 0; i < result.regions.length; ++i) {
+			var region = result.regions[i];
+			region.styleClasses.forEach(function(styleClass) {
+				annotations.push({
+					description: '',
+					start: region.offset,
+					end: region.offset + region.length,
+					styleClass: styleClass
+				})
+			});
+			editor.showAnnotations(annotations, editorContext._highlightAnnotationTypes, null, 
+				function(annotation) {
+					return _getHighlightAnnotationType(annotation.styleClass, editorContext);
+				});
+		}
+	}
+	
 	var exports = {};
 	
 	/**
@@ -374,7 +394,7 @@ define([
 		if (options.resourceId) {
 			if (options.loadFromServer === undefined || options.loadFromServer) {
 				options.loadFromServer = true;
-				loadResourceService = new LoadResourceService(options.serverUrl, options.resourceId);
+				loadResourceService = new LoadResourceService(options.serverUrl, options.resourceId, false);
 				loadResourceService.loadResource(editorContext, options);
 				saveResourceService = new SaveResourceService(options.serverUrl, options.resourceId);
 				if (options.enableSaveAction) {
@@ -384,7 +404,7 @@ define([
 						return true;
 					}, {name: 'Save'});
 				}
-				revertResourceService = new RevertResourceService(options.serverUrl, options.resourceId);
+				revertResourceService = new LoadResourceService(options.serverUrl, options.resourceId, true);
 			}
 		} else {
 			if (options.loadFromServer === undefined)
@@ -408,6 +428,13 @@ define([
 			});
 		}
 		
+		//---- Highlighting Service
+		
+		var highlightingService;
+		if(options.enableHighlightingService || options.enableHighlightingService === undefined) {
+			highlightingService = new HighlightingService(options.serverUrl, options.resourceId)
+		}
+		
 		//---- Validation Service
 		
 		var validationService;
@@ -415,44 +442,22 @@ define([
 			validationService = new ValidationService(options.serverUrl, options.resourceId);
 		}
 		
-		
-		//---- Highlighting Service
-		var highlightingService;
-		if(options.enableHighlightingService || options.enableHighlightingService === undefined) {
-			highlightingService = new HighlightingService(options.serverUrl, options.resourceId)
-		}
-		
 		//---- Update Service
 		
 		function refreshDocument() {
 			editorContext.clearClientServiceState();
 			if (highlightingService) {
-				highlightingService.computeHighlighting(editorContext, options).done(function(regions) {
-					var annotations = [];
-					for(var i = 0; i < regions.length; ++i) {
-						var region = regions[i];
-						region.styleClasses.forEach(function(styleClass) {
-							annotations.push({
-								description: '',
-								start: region.offset,
-								end: region.offset + region.length,
-								styleClass: styleClass
-							})
-						});
-						editor.showAnnotations(annotations, editorContext._highlightAnnotationTypes, null, 
-							function(annotation) {
-								return _getHighlightAnnotationType(annotation.styleClass, editorContext);
-							});
-					}
+				highlightingService.computeHighlighting(editorContext, options).done(function(result) {
+					_appyHighlighting(result, editor, editorContext);
 				});
 			}
 			if (validationService) {
-				validationService.computeProblems(editorContext, options).done(function(entries) {
-					editor.showProblems(entries.map(function(entry) {
+				validationService.computeProblems(editorContext, options).done(function(result) {
+					editor.showProblems(result.issues.map(function(entry) {
 						return {
 							description: entry.description,
-							start: entry.startOffset,
-							end: entry.endOffset,
+							start: entry.offset,
+							end: entry.offset + entry.length,
 							severity: entry.severity
 						};
 					}));
@@ -463,7 +468,7 @@ define([
 		if (!options.sendFullText) {
 			updateService = new UpdateService(options.serverUrl, options.resourceId);
 			if (saveResourceService)
-				saveResourceService.setUpdateService(updateService);
+				saveResourceService._updateService = updateService;
 			editorContext.addServerStateListener(refreshDocument);
 		}
 		var textUpdateDelay = options.textUpdateDelay;
@@ -490,9 +495,7 @@ define([
 		var contentAssist = editor.getContentAssist();
 		if (contentAssist && (options.enableContentAssistService || options.enableContentAssistService === undefined)) {
 			contentAssist.setEditorContextProvider(editorContextProvider);
-			var contentAssistService = new ContentAssistService(options.serverUrl, options.resourceId);
-			if (updateService)
-				contentAssistService.setUpdateService(updateService);
+			var contentAssistService = new ContentAssistService(options.serverUrl, options.resourceId, updateService);
 			contentAssist.setProviders([{
 				id: 'xtext.service',
 				provider: {
@@ -526,12 +529,14 @@ define([
 		//---- Hover Service
 		
 		if (_internals.hoverDelegate && (options.enableHoverService || options.enableHoverService === undefined)) {
-			var hoverService = new HoverService(options.serverUrl, options.resourceId);
-			if (updateService)
-				hoverService.setUpdateService(updateService);
-			_internals.hoverDelegate.computeHoverInfo = function(context) {
+			var hoverService = new HoverService(options.serverUrl, options.resourceId, updateService);
+			_internals.hoverDelegate.computeHoverInfo = function(params) {
 				var deferred = new Deferred();
-				hoverService.computeHoverInfo(editorContext, context).done(function(entry) {
+				for (var p in options) {
+					if (options.hasOwnProperty(p))
+						params[p] = options[p];
+				}
+				hoverService.computeHoverInfo(editorContext, params).done(function(entry) {
 					deferred.resolve({ 
 						content: entry.content,
 						title: entry.title,
@@ -549,9 +554,7 @@ define([
 		
 		var occurrencesService;
 		if (options.enableOccurrencesService || options.enableOccurrencesService === undefined) {
-			occurrencesService = new OccurrencesService(options.serverUrl, options.resourceId);
-			if (updateService)
-				occurrencesService.setUpdateService(updateService);
+			occurrencesService = new OccurrencesService(options.serverUrl, options.resourceId, updateService);
 			var selectionUpdateDelay = options.selectionUpdateDelay;
 			if (!selectionUpdateDelay)
 				selectionUpdateDelay = 550;
@@ -562,7 +565,7 @@ define([
 				editorContext._selectionChangeTimeout = setTimeout(function() {
 					var params = _copy(options);
 					params.offset = textView.getCaretOffset();
-					occurrencesService.markOccurrences(editorContext, params).done(function(occurrencesResult) {
+					occurrencesService.getOccurrences(editorContext, params).done(function(occurrencesResult) {
 						var readAnnotations = occurrencesResult.readRegions.map(function(region) {
 							return {
 								start: region.offset,
@@ -589,9 +592,7 @@ define([
 		
 		var formattingService;
 		if (options.enableFormattingService || options.enableFormattingService === undefined) {
-			formattingService = new FormattingService(options.serverUrl, options.resourceId);
-			if (updateService)
-				formattingService.setUpdateService(updateService);
+			formattingService = new FormattingService(options.serverUrl, options.resourceId, updateService);
 			if (options.enableFormattingAction) {
 				textView.setKeyBinding(new mKeyBinding.KeyStroke('f', true, true), 'formatXtextDocument');
 				textView.setAction('formatXtextDocument', function() {
@@ -605,9 +606,8 @@ define([
 		
 		var generatorService;
 		if (options.enableGeneratorService || options.enableGeneratorService === undefined) {
-			generatorService = new GeneratorService(options.serverUrl, options.resourceId);
-			if (updateService)
-				generatorService.setUpdateService(updateService);
+			generatorService = new XtextService();
+			generatorService.initialize(options.serverUrl, options.resourceId, 'generate', updateService);
 		}
 		
 		editor.invokeXtextService = function(service, invokeOptions) {
@@ -622,15 +622,15 @@ define([
 			else if (service === 'save' && saveResourceService)
 				return saveResourceService.saveResource(editorContext, optionsCopy);
 			else if (service === 'revert' && revertResourceService)
-				return revertResourceService.revertResource(editorContext, optionsCopy);
+				return revertResourceService.loadResource(editorContext, optionsCopy);
 			else if (service === 'validate' && validationService)
 				return validationService.computeProblems(editorContext, optionsCopy);
 			else if (service === 'occurrences' && occurrencesService)
-				return occurrencesService.markOccurrences(editorContext, optionsCopy);
+				return occurrencesService.getOccurrences(editorContext, optionsCopy);
 			else if (service === 'format' && formattingService)
 				return formattingService.format(editorContext, options);
 			else if (service === 'generate' && generatorService)
-				return generatorService.generate(editorContext, options);
+				return generatorService.invoke(editorContext, options);
 			else
 				throw new Error('Service \'' + service + '\' is not available.');
 		}

@@ -17,21 +17,19 @@ requirejs.config({
 	}
 });
 
-suite('Formatting', function() {
+suite('Generator', function() {
 	
-	test('should return the formatted document', function(done) {
+	test('should return the generated document', function(done) {
 		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
 			xtext.testEditor({doneCallback: done})
-				.setText('f  o  o')
-				.invokeService('format')
+				.invokeService('generate')
 				.checkRequest(function(url, settings) {
-					assert.equal('test://xtext-service/format', url);
-					assert.equal('POST', settings.type);
+					assert.equal('test://xtext-service/generate', url);
+					assert.equal('GET', settings.type);
 				})
-				.respond({stateId: '1', formattedText: 'f o o'})
+				.respond('Foo')
 				.checkResult(function(editorContext, result) {
-					assert.equal('1', result.stateId);
-					assert.equal('f o o', result.formattedText);
+					assert.equal('Foo', result);
 				})
 				.done();
 		});
@@ -40,36 +38,14 @@ suite('Formatting', function() {
 	test('should send the full text when requested', function(done) {
 		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
 			xtext.testEditor({sendFullText: true, doneCallback: done})
-				.setText('f  o  o')
-				.invokeService('format')
+				.setText('foo')
+				.invokeService('generate')
 				.checkRequest(function(url, settings) {
-					assert.equal('test://xtext-service/format', url);
+					assert.equal('test://xtext-service/generate', url);
 					assert.equal('POST', settings.type);
-					assert.equal('f  o  o', settings.data.fullText);
+					assert.equal('foo', settings.data.fullText);
 				})
 				.done();
-		});
-	});
-	
-	test('should update the known server state', function(done) {
-		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
-			xtext.testEditor()
-				.setup(function(editorContext) {
-					editorContext.addServerStateListener(function() {
-						assert.equal('f o o', editorContext.getText());
-						var knownServerState = editorContext.getServerState();
-						assert.equal('f o o', knownServerState.text);
-						assert.equal('1', knownServerState.stateId);
-						done();
-					});
-				})
-				.setText('f  o  o')
-				.invokeService('format')
-				.checkRequest(function(url, settings) {
-					assert.equal('test://xtext-service/format', url);
-					assert.equal('0', settings.data.requiredStateId);
-				})
-				.respond({stateId: '1', formattedText: 'f o o'})
 		});
 	});
 	
@@ -80,15 +56,15 @@ suite('Formatting', function() {
 				.checkRequest(function(url, settings) {
 					assert.equal('test://xtext-service/update', url);
 				})
-				.invokeService('format')
+				.invokeService('generate')
 				.respond({stateId: '1'})
 				.checkRequest(function(url, settings) {
-					assert.equal('test://xtext-service/format', url);
+					assert.equal('test://xtext-service/generate', url);
 					assert.equal('1', settings.data.requiredStateId);
 				})
-				.respond({stateId: '1', formattedText: 'f o o'})
+				.respond('Foo')
 				.checkResult(function(editorContext, result) {
-					assert.equal('f o o', result.formattedText);
+					assert.equal('Foo', result);
 				})
 				.done();
 		});
@@ -97,14 +73,18 @@ suite('Formatting', function() {
 	test('should try again when a conflict occurs with full text', function(done) {
 		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
 			xtext.testEditor({sendFullText: true, doneCallback: done})
-				.setText('f  o  o')
-				.invokeService('format')
+				.setText('foo')
+				.invokeService('generate')
 				.checkRequest(function(url, settings) {
-					assert.equal('test://xtext-service/format', url);
+					assert.equal('test://xtext-service/generate', url);
 				})
 				.respond({conflict: 'invalidStateId'})
 				.checkRequest(function(url, settings) {
-					assert.equal('test://xtext-service/format', url);
+					assert.equal('test://xtext-service/generate', url);
+				})
+				.respond('Foo')
+				.checkResult(function(editorContext, result) {
+					assert.equal('Foo', result);
 				})
 				.done();
 		});
@@ -113,19 +93,19 @@ suite('Formatting', function() {
 	test('should try again when a conflict occurs with update', function(done) {
 		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
 			xtext.testEditor({doneCallback: done})
-				.setText('f  o  o')
-				.invokeService('format')
+				.setText('foo')
+				.invokeService('generate')
 				.checkRequest(function(url, settings) {
-					assert.equal('test://xtext-service/format', url);
+					assert.equal('test://xtext-service/generate', url);
 				})
 				.respond({conflict: 'invalidStateId'})
 				.checkRequest(function(url, settings) {
 					assert.equal('test://xtext-service/update', url);
-					assert.equal('f  o  o', settings.data.fullText);
+					assert.equal('foo', settings.data.fullText);
 				})
 				.respond({stateId: '1'})
 				.checkRequest(function(url, settings) {
-					assert.equal('test://xtext-service/format', url);
+					assert.equal('test://xtext-service/generate', url);
 					assert.equal('1', settings.data.requiredStateId);
 				})
 				.done();

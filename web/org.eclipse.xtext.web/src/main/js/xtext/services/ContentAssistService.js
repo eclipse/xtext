@@ -6,18 +6,20 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 
-define(['xtext/services/AbstractXtextService', 'jquery'], function(AbstractXtextService, jQuery) {
+define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery) {
 
 	/**
 	 * Service class for content assist proposals. The proposals are returned as promise of
 	 * a Deferred object.
 	 */
-	function ContentAssistService(serverUrl, resourceId) {
-		this.initialize(serverUrl, resourceId, 'content-assist');
+	function ContentAssistService(serverUrl, resourceId, updateService) {
+		this.initialize(serverUrl, resourceId, 'assist', updateService);
 	}
 
-	ContentAssistService.prototype = new AbstractXtextService();
-		
+	ContentAssistService.prototype = new XtextService();
+	// Don't use the generic invoke function
+	delete ContentAssistService.prototype.invoke;
+	
 	ContentAssistService.prototype.computeContentAssist = function(editorContext, params, deferred) {
 		if (deferred === undefined) {
 			deferred = jQuery.Deferred();
@@ -70,7 +72,7 @@ define(['xtext/services/AbstractXtextService', 'jquery'], function(AbstractXtext
 			success: function(result) {
 				if (result.conflict) {
 					// The server has lost its session state and the resource is loaded from the server
-					if (self.increaseRecursionCount(editorContext)) {
+					if (self._increaseRecursionCount(editorContext)) {
 						params.sendFullText = true;
 						self.computeContentAssist(editorContext, params, deferred);
 					}
@@ -93,7 +95,7 @@ define(['xtext/services/AbstractXtextService', 'jquery'], function(AbstractXtext
 					delete editorContext.getClientServiceState().update;
 					if (xhr.status == 404 && !params.loadFromServer && knownServerState.text !== undefined) {
 						// The server has lost its session state and the resource is not loaded from the server
-						delete editorContext.getClientServiceState()['content-assist'];
+						delete editorContext.getClientServiceState().assist;
 						delete knownServerState.text;
 						delete knownServerState.stateId;
 						self._updateService.addCompletionCallback(function() {

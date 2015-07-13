@@ -17,21 +17,20 @@ requirejs.config({
 	}
 });
 
-suite('Validation', function() {
+suite('Hover', function() {
 	
-	test('should return the issues sent by the server', function(done) {
+	test('should return the hover information sent by the server', function(done) {
 		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
 			xtext.testEditor({doneCallback: done})
 				.setText('foo')
-				.invokeService('validate')
+				.invokeService('hover')
 				.checkRequest(function(url, settings) {
-					assert.equal('test://xtext-service/validate', url);
+					assert.equal('test://xtext-service/hover', url);
 					assert.equal('GET', settings.type);
 				})
-				.respond({issues: [{severity: 'error', startOffset: 3}]})
+				.respond({content: 'bar'})
 				.checkResult(function(editorContext, result) {
-					assert.equal('error', result.issues[0].severity);
-					assert.equal(3, result.issues[0].startOffset);
+					assert.equal('bar', result.content);
 				})
 				.done();
 		});
@@ -41,9 +40,9 @@ suite('Validation', function() {
 		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
 			xtext.testEditor({sendFullText: true, doneCallback: done})
 				.setText('foo')
-				.invokeService('validate')
+				.invokeService('hover')
 				.checkRequest(function(url, settings) {
-					assert.equal('test://xtext-service/validate', url);
+					assert.equal('test://xtext-service/hover', url);
 					assert.equal('POST', settings.type);
 					assert.equal('foo', settings.data.fullText);
 				})
@@ -51,16 +50,22 @@ suite('Validation', function() {
 		});
 	});
 	
-	test('should try again when a conflict occurs', function(done) {
+	test('should wait until pending update completes', function(done) {
 		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
 			xtext.testEditor({doneCallback: done})
-				.setText('foo')
-				.invokeService('validate')
-				.respond({conflict: 'invalidStateId'})
-				.respond({issues: [{severity: 'error', startOffset: 3}]})
+				.triggerModelChange('foo')
+				.checkRequest(function(url, settings) {
+					assert.equal('test://xtext-service/update', url);
+				})
+				.invokeService('hover')
+				.respond({stateId: '1'})
+				.checkRequest(function(url, settings) {
+					assert.equal('test://xtext-service/hover', url);
+					assert.equal('1', settings.data.requiredStateId);
+				})
+				.respond({content: 'bar'})
 				.checkResult(function(editorContext, result) {
-					assert.equal('error', result.issues[0].severity);
-					assert.equal(3, result.issues[0].startOffset);
+					assert.equal('bar', result.content);
 				})
 				.done();
 		});

@@ -17,21 +17,21 @@ requirejs.config({
 	}
 });
 
-suite('Validation', function() {
+suite('Highlighting', function() {
 	
-	test('should return the issues sent by the server', function(done) {
+	test('should return the highlighting regions sent by the server', function(done) {
 		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
 			xtext.testEditor({doneCallback: done})
 				.setText('foo')
-				.invokeService('validate')
+				.invokeService('highlight')
 				.checkRequest(function(url, settings) {
-					assert.equal('test://xtext-service/validate', url);
+					assert.equal('test://xtext-service/highlight', url);
 					assert.equal('GET', settings.type);
 				})
-				.respond({issues: [{severity: 'error', startOffset: 3}]})
+				.respond({regions: [{offset: 0, length: 3, styleClasses: ['bar']}]})
 				.checkResult(function(editorContext, result) {
-					assert.equal('error', result.issues[0].severity);
-					assert.equal(3, result.issues[0].startOffset);
+					assert.equal('bar', result.regions[0].styleClasses[0]);
+					assert.equal(3, result.regions[0].length);
 				})
 				.done();
 		});
@@ -41,9 +41,9 @@ suite('Validation', function() {
 		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
 			xtext.testEditor({sendFullText: true, doneCallback: done})
 				.setText('foo')
-				.invokeService('validate')
+				.invokeService('highlight')
 				.checkRequest(function(url, settings) {
-					assert.equal('test://xtext-service/validate', url);
+					assert.equal('test://xtext-service/highlight', url);
 					assert.equal('POST', settings.type);
 					assert.equal('foo', settings.data.fullText);
 				})
@@ -55,12 +55,12 @@ suite('Validation', function() {
 		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
 			xtext.testEditor({doneCallback: done})
 				.setText('foo')
-				.invokeService('validate')
+				.invokeService('highlight')
 				.respond({conflict: 'invalidStateId'})
-				.respond({issues: [{severity: 'error', startOffset: 3}]})
+				.respond({regions: [{offset: 0, length: 3, styleClasses: ['bar']}]})
 				.checkResult(function(editorContext, result) {
-					assert.equal('error', result.issues[0].severity);
-					assert.equal(3, result.issues[0].startOffset);
+					assert.equal('bar', result.regions[0].styleClasses[0]);
+					assert.equal(3, result.regions[0].length);
 				})
 				.done();
 		});

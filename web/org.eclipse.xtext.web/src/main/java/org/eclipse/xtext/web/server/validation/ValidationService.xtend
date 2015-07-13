@@ -35,8 +35,8 @@ class ValidationService extends AbstractPreComputedService<ValidationResult> {
 		val issues = resourceValidator.validate(resource, CheckMode.ALL, cancelIndicator)
 		val result = new ValidationResult
 		issues.filter[severity != Severity.IGNORE].forEach[ issue |
-			result.entries += new ValidationResult.Entry(issue.message, issue.severity.translate,
-				issue.lineNumber, issue.offset, issue.offset + issue.length)
+			result.issues += new ValidationResult.Issue(issue.message, issue.severity.translate,
+				issue.lineNumber, issue.offset, issue.length)
 		]
 		return result
 	}

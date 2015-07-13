@@ -60,7 +60,7 @@ suite('Update', function() {
 	
 	test('should send the full text when the server state is unknown', function(done) {
 		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
-			xtext.testEditor({enableValidationService: false})
+			xtext.testEditor({enableHighlightingService: false, enableValidationService: false})
 				.setup(function(editorContext) {
 					var knownServerState = editorContext.getServerState();
 					editorContext.addServerStateListener(function() {
@@ -83,7 +83,7 @@ suite('Update', function() {
 	
 	test('should compute a delta from the previous known server state', function(done) {
 		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
-			xtext.testEditor({enableValidationService: false, doneCallback: done})
+			xtext.testEditor({enableHighlightingService: false, enableValidationService: false, doneCallback: done})
 				.triggerModelChange('Foobar')
 				.checkRequest(function(url, settings) {
 					assert.equal('0', settings.data.requiredStateId);
@@ -107,7 +107,7 @@ suite('Update', function() {
 	
 	test('should try again when a conflict occurs', function(done) {
 		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
-			xtext.testEditor({enableValidationService: false})
+			xtext.testEditor({enableHighlightingService: false, enableValidationService: false})
 				.setup(function(editorContext) {
 					editorContext.addServerStateListener(function() {
 						var knownServerState = editorContext.getServerState();
@@ -128,7 +128,7 @@ suite('Update', function() {
 	
 	test('should try again when resource is not found', function(done) {
 		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
-			xtext.testEditor({enableValidationService: false})
+			xtext.testEditor({enableHighlightingService: false, enableValidationService: false})
 				.setup(function(editorContext) {
 					editorContext.addServerStateListener(function() {
 						var knownServerState = editorContext.getServerState();

@@ -15,21 +15,21 @@ define(function() {
 	function Deferred() {
 		var deferred = {
 			promise: function() {
-				var result = {
+				var pr = {
 					done: function(callback) {
 						if (deferred.result)
 							callback(deferred.result);
 						deferred.resolve = callback;
-						return result;
+						return pr;
 					},
 					fail: function(callback) {
 						if (deferred.error)
 							callback(deferred.error);
 						deferred.reject = callback;
-						return result;
+						return pr;
 					}
 				};
-				return result;
+				return pr;
 			},
 			resolve: function(result) {
 				deferred.result = result;
