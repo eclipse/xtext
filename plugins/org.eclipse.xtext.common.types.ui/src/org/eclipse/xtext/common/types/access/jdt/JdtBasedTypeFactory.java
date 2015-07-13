@@ -75,6 +75,7 @@ import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
@@ -1209,7 +1210,15 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 		return result;
 	}
 
-	protected JvmTypeReference createTypeReference(/* @NonNull */ ITypeBinding typeBinding) {
+	/**
+	 * Returns a type reference for the given type binding. If the binding is null, an {@link JvmUnknownTypeReference unknown}
+	 * type reference is returned.
+	 */
+	// @NonNull 
+	protected JvmTypeReference createTypeReference(/* @Nullable */ ITypeBinding typeBinding) {
+		if (typeBinding == null) {
+			return TypesFactory.eINSTANCE.createJvmUnknownTypeReference();
+		}
 		if (typeBinding.isArray()) {
 			ITypeBinding componentType = typeBinding.getComponentType();
 			JvmTypeReference componentTypeReference = createTypeReference(componentType);
