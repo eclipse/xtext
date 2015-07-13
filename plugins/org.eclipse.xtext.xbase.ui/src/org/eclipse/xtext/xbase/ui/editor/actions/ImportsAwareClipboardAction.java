@@ -25,6 +25,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.IRewriteTarget;
 import org.eclipse.jface.text.ITextOperationTarget;
 import org.eclipse.jface.text.ITextSelection;
+import org.eclipse.jface.text.ITextViewerExtension5;
+import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.custom.BusyIndicator;
 import org.eclipse.swt.dnd.ByteArrayTransfer;
@@ -41,6 +43,9 @@ import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.texteditor.IAbstractTextEditorHelpContextIds;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.TextEditorAction;
+import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -49,10 +54,12 @@ import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.util.ClipboardUtil;
 import org.eclipse.xtext.ui.util.ClipboardUtil.JavaImportData;
 import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.util.Triple;
+import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.eclipse.xtext.xbase.conversion.IJavaCodeConverter;
+import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.ui.imports.ImportsUtil;
 import org.eclipse.xtext.xbase.ui.internal.XtypeActivator;
 
@@ -82,10 +89,6 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 	private final int operationCode;
 	private ITextOperationTarget textOperationTarget;
 	private @Inject ImportsUtil importsUtil;
-	/**
-	 * Some Xbase Languages like Xtend have a possibility to convert Java code.
-	 */
-	private @Inject(optional = true) IJavaCodeConverter javaCodeConverter;
 
 	@Inject
 	private EObjectAtOffsetHelper helper;
@@ -103,7 +106,8 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 	 * @param operationCode
 	 *            the operation code
 	 */
-	public ImportsAwareClipboardAction(ResourceBundle bundle, String prefix, ITextEditor editor, final int operationCode) {
+	public ImportsAwareClipboardAction(ResourceBundle bundle, String prefix, ITextEditor editor,
+			final int operationCode) {
 		super(bundle, prefix, editor);
 		this.operationCode = operationCode;
 
@@ -181,47 +185,85 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 				});
 		JavaImportData javaImportsContent = ClipboardUtil.getJavaImportsContent();
 		String textFromClipboard = ClipboardUtil.getTextFromClipboard();
+		boolean addImports = shouldAddImports();
+		System.out.println(addImports);
 		if (xbaseClipboardData != null && !sameTarget(xbaseClipboardData)) {
-			doPasteXbaseCode(xbaseClipboardData);
-		} else if (javaImportsContent != null && canPasteJava(textFromClipboard, getJavaCodeConverter())) {
-			doPasteJavaCode(textFromClipboard, javaImportsContent, getJavaCodeConverter());
+			doPasteXbaseCode(xbaseClipboardData, addImports);
+		} else if (javaImportsContent != null) {
+			doPasteJavaCode(textFromClipboard, javaImportsContent, addImports);
 		} else {
 			textOperationTarget.doOperation(operationCode);
 		}
 	}
 
-	private boolean canPasteJava(String javaToConvert, IJavaCodeConverter javaCodeConverter) {
-		if (javaCodeConverter == null) {
+	/**
+	 * Should not add imports when pasting into a {@link XStringLiteral} or Comments (except of JavaDoc)
+	 */
+	private boolean shouldAddImports() {
+		XtextEditor xtextEditor = EditorUtils.getXtextEditor(getTextEditor());
+		int caretOffset = caretPosition(xtextEditor);
+		Pair<ILeafNode, EObject> stateAtOffset = currentModelStateAtOffset(xtextEditor, caretOffset);
+		ILeafNode targetLeaf = stateAtOffset.getFirst();
+		if (targetLeaf == null) {
 			return true;
 		}
-		XtextEditor xtextEditor = EditorUtils.getXtextEditor(getTextEditor());
-		EObject targetElement = xtextEditor.getDocument().priorityReadOnly(new IUnitOfWork<EObject, XtextResource>() {
-
-			@Override
-			public EObject exec(XtextResource state) throws Exception {
-				EObject elementAtOffset = helper.resolveContainedElementAt(state, 10);
-				return elementAtOffset;
+		System.out.println(targetLeaf);
+		if (targetLeaf.isHidden() && targetLeaf.getGrammarElement() instanceof AbstractRule) {
+			String name = ((AbstractRule) targetLeaf.getGrammarElement()).getName();
+			if ("ML_COMMENT".equals(name) || "SL_COMMENT".equals(name)) {
+				//TODO true for Javadoc case only
+				return false;
 			}
-		});
+		}
 
-		return javaCodeConverter.isCompatibleTargetObject(javaToConvert, targetElement);
+		EObject targetElement = stateAtOffset.getSecond();
+		System.out.println(targetElement);
+		if (targetElement instanceof XStringLiteral) {
+			if (NodeModelUtils.getNode(targetElement).getTextRegion().contains(caretOffset)) {
+				//TODO look if the caret is exactly in the node:
+				// e.g: |"text" and "text"| should return true, but "|test" and "test|" false
+				return false;
+			}
+		}
+		return true;
 	}
 
-	private void doPasteXbaseCode(XbaseClipboardData xbaseClipboardData) {
+	private int caretPosition(final XtextEditor xtextEditor) {
+		ISourceViewer sourceViewer = xtextEditor.getInternalSourceViewer();
+		int caretOffset = sourceViewer.getTextWidget().getCaretOffset();
+		if (sourceViewer instanceof ITextViewerExtension5) {
+			ITextViewerExtension5 extension = (ITextViewerExtension5) sourceViewer;
+			caretOffset = extension.widgetOffset2ModelOffset(caretOffset);
+		}
+		return caretOffset;
+	}
+
+	private Pair<ILeafNode, EObject> currentModelStateAtOffset(XtextEditor xtextEditor, final int caretOffset) {
+		return xtextEditor.getDocument().priorityReadOnly(new IUnitOfWork<Pair<ILeafNode, EObject>, XtextResource>() {
+			@Override
+			public Pair<ILeafNode, EObject> exec(XtextResource state) throws Exception {
+				return Tuples.create(
+						NodeModelUtils.findLeafNodeAtOffset(state.getParseResult().getRootNode(), caretOffset),
+						helper.resolveContainedElementAt(state, caretOffset));
+			}
+
+		});
+	}
+
+	private void doPasteXbaseCode(XbaseClipboardData xbaseClipboardData, boolean withImports) {
 		IRewriteTarget target = (IRewriteTarget) getTextEditor().getAdapter(IRewriteTarget.class);
 		if (target != null) {
 			target.beginCompoundChange();
 		}
 		try {
 			textOperationTarget.doOperation(operationCode);
-			importsUtil.addImports(xbaseClipboardData.getImports(), xbaseClipboardData.getStaticImports(),
-					xbaseClipboardData.getExtensionImports(), getXtextDocument());
+			if (withImports) {
+				importsUtil.addImports(xbaseClipboardData.getImports(), xbaseClipboardData.getStaticImports(),
+						xbaseClipboardData.getExtensionImports(), getXtextDocument());
+			}
 		} catch (Exception e) {
-			XtypeActivator
-					.getInstance()
-					.getLog()
-					.log(new Status(IStatus.ERROR, XtypeActivator.getInstance().getBundle().getSymbolicName(),
-							"Unexpected internal error: ", e));
+			XtypeActivator.getInstance().getLog().log(new Status(IStatus.ERROR,
+					XtypeActivator.getInstance().getBundle().getSymbolicName(), "Unexpected internal error: ", e));
 		} finally {
 			if (target != null) {
 				target.endCompoundChange();
@@ -229,22 +271,20 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 		}
 	}
 
-	private void doPasteJavaCode(String textFromClipboard, JavaImportData javaImportsContent,
-			IJavaCodeConverter iJavaCodeConverter) {
+	private void doPasteJavaCode(String textFromClipboard, JavaImportData javaImportsContent, boolean withImports) {
 		IRewriteTarget target = (IRewriteTarget) getTextEditor().getAdapter(IRewriteTarget.class);
 		if (target != null) {
 			target.beginCompoundChange();
 		}
 		try {
 			textOperationTarget.doOperation(operationCode);
-			importsUtil.addImports(javaImportsContent.getImports(), javaImportsContent.getStaticImports(),
-					new String[] {}, getXtextDocument());
+			if (withImports) {
+				importsUtil.addImports(javaImportsContent.getImports(), javaImportsContent.getStaticImports(),
+						new String[] {}, getXtextDocument());
+			}
 		} catch (Exception e) {
-			XtypeActivator
-					.getInstance()
-					.getLog()
-					.log(new Status(IStatus.ERROR, XtypeActivator.getInstance().getBundle().getSymbolicName(),
-							"Unexpected internal error: ", e));
+			XtypeActivator.getInstance().getLog().log(new Status(IStatus.ERROR,
+					XtypeActivator.getInstance().getBundle().getSymbolicName(), "Unexpected internal error: ", e));
 		} finally {
 			if (target != null) {
 				target.endCompoundChange();
@@ -274,10 +314,10 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 						ITextRegion region = new TextRegion(textSelection.getOffset(), textSelection.getLength() - 1);
 						Triple<Set<String>, Set<String>, Set<String>> imports = importsUtil.collectImports(state,
 								region);
-						XbaseClipboardData clipboardData = new XbaseClipboardData(sourceIdentifier, Iterables.toArray(
-								imports.getFirst(), String.class),
-								Iterables.toArray(imports.getSecond(), String.class), Iterables.toArray(
-										imports.getThird(), String.class));
+						XbaseClipboardData clipboardData = new XbaseClipboardData(sourceIdentifier,
+								Iterables.toArray(imports.getFirst(), String.class),
+								Iterables.toArray(imports.getSecond(), String.class),
+								Iterables.toArray(imports.getThird(), String.class));
 						return clipboardData;
 					}
 				});
@@ -358,10 +398,6 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 	public void setEditor(ITextEditor editor) {
 		super.setEditor(editor);
 		this.textOperationTarget = null;
-	}
-
-	protected IJavaCodeConverter getJavaCodeConverter() {
-		return javaCodeConverter;
 	}
 
 	public static final class XbaseClipboardData {
