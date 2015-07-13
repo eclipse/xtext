@@ -27,6 +27,7 @@ import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.builder.tests.builderTestLanguage.BuilderTestLanguagePackage;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.util.StringInputStream;
@@ -451,5 +452,9 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 //			}
 //		});
 		someProject.delete(true, monitor());
+	}
+	
+	protected void waitForBuild() {
+		IResourcesSetupUtil.reallyWaitForAutoBuild();
 	}
 }

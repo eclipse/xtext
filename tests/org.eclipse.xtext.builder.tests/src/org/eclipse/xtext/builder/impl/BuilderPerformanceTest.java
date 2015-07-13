@@ -23,6 +23,7 @@ import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.builder.nature.ToggleXtextNatureAction;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.internal.Stopwatches;
@@ -277,6 +278,10 @@ public class BuilderPerformanceTest extends AbstractBuilderTest {
 		projectFactory.addRequiredBundles(Arrays.asList(bundleDependencies));
 		IProject result = projectFactory.createProject(new NullProgressMonitor(), null);
 		return result;
+	}
+	
+	protected void waitForBuild() {
+		IResourcesSetupUtil.reallyWaitForAutoBuild();
 	}
 	
 }
