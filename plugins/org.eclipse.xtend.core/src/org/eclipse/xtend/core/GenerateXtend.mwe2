@@ -152,9 +152,7 @@ Workflow {
 			fragment = adapter.FragmentAdapter {
 				fragment = validation.JavaValidatorFragment {}
 			}
-			fragment = adapter.FragmentAdapter {
-				fragment = formatting2.Formatter2Fragment {}
-			}
+			fragment = formatting.Formatter2Fragment2 {}
 			fragment = adapter.FragmentAdapter {
 				fragment = generator.GeneratorFragment {}
 			}
