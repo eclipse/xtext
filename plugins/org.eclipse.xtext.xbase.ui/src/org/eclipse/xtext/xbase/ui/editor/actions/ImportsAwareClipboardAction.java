@@ -180,7 +180,8 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 				});
 		JavaImportData javaImportsContent = ClipboardUtil.getJavaImportsContent();
 		String textFromClipboard = ClipboardUtil.getTextFromClipboard();
-		boolean addImports = shouldAddImports(EditorUtils.getXtextEditor(getTextEditor()));
+		XtextEditor xtextEditor = EditorUtils.getXtextEditor(getTextEditor());
+		boolean addImports = shouldAddImports(xtextEditor.getDocument(), caretOffset(xtextEditor));
 		if (xbaseClipboardData != null && !sameTarget(xbaseClipboardData)) {
 			doPasteXbaseCode(xbaseClipboardData, addImports);
 		} else if (javaImportsContent != null) {
@@ -193,16 +194,21 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 	/**
 	 * Should not add imports when pasting into a {@link XStringLiteral} or Comments (except of JavaDoc)
 	 * 
-	 * @param xtextEditor
+	 * @param document
+	 *            - {@link IDocument} to work with
+	 * @param caretOffset
+	 *            - current caret offset
 	 */
-	private boolean shouldAddImports(XtextEditor xtextEditor) {
-		int caretOffset = caretOffset(xtextEditor);
+	protected boolean shouldAddImports(IDocument document, int caretOffset) {
+		if (caretOffset == 0) {
+			return true;
+		}
 		String typeRight = IDocument.DEFAULT_CONTENT_TYPE;
 		String typeLeft = IDocument.DEFAULT_CONTENT_TYPE;
 		try {
-			typeRight = TextUtilities.getContentType(xtextEditor.getDocument(),
-					IDocumentExtension3.DEFAULT_PARTITIONING, caretOffset, false);
-			typeLeft = TextUtilities.getContentType(xtextEditor.getDocument(), IDocumentExtension3.DEFAULT_PARTITIONING,
+			typeRight = TextUtilities.getContentType(document, IDocumentExtension3.DEFAULT_PARTITIONING, caretOffset,
+					false);
+			typeLeft = TextUtilities.getContentType(document, IDocumentExtension3.DEFAULT_PARTITIONING,
 					caretOffset > 0 ? caretOffset - 1 : caretOffset, false);
 		} catch (BadLocationException exception) {
 			// Should not happen
