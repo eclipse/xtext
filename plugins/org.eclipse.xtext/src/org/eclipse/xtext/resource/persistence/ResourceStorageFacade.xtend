@@ -99,7 +99,7 @@ class ResourceStorageFacade implements IResourceStorageFacade {
 		val fsa = getFileSystemAccess(resource);
 		val outputRelativePath = computeOutputPath(resource)
 		val uri = fsa.getURI(outputRelativePath)
-		return resource.resourceSet.URIConverter.exists(uri, null)
+		return uri !== null && resource.resourceSet.URIConverter.exists(uri, null)
 	}
 	
 	protected def getFileSystemAccess(StorageAwareResource resource) {
