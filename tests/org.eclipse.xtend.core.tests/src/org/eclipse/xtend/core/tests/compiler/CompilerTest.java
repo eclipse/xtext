@@ -70,6 +70,14 @@ import com.google.inject.Injector;
  */
 public class CompilerTest extends AbstractXtendTestCase {
 	
+	@Test public void testBug472142() throws Exception {
+		String code = 
+				" def boolean m(Object obj) {\n" + 
+				"   return obj?.toString() instanceof String && obj!==null && obj.getClass()!==null;\n" + 
+				" }";
+		invokeAndExpect2(Boolean.FALSE,code,"m", new Object[] { null });
+	}
+	
 	@Test public void testGenericVoidFunction() throws Exception {
 		String code = 
 				" def String getString(String myString) {\n" + 
