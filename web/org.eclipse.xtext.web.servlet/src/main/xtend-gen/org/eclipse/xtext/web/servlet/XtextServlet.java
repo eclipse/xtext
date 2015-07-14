@@ -218,8 +218,8 @@ public class XtextServlet extends HttpServlet {
       Function0<? extends IServiceResult> _service = service.getService();
       final IServiceResult result = _service.apply();
       if ((result instanceof GeneratorResult)) {
-        List<GeneratorResult.GeneratedDocument> _entries = ((GeneratorResult)result).getEntries();
-        final GeneratorResult.GeneratedDocument document = IterableExtensions.<GeneratorResult.GeneratedDocument>head(_entries);
+        List<GeneratorResult.GeneratedDocument> _documents = ((GeneratorResult)result).getDocuments();
+        final GeneratorResult.GeneratedDocument document = IterableExtensions.<GeneratorResult.GeneratedDocument>head(_documents);
         boolean _and = false;
         if (!(document != null)) {
           _and = false;

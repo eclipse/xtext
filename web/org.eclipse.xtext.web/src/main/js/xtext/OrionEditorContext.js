@@ -15,7 +15,6 @@ define(function() {
 		this._editor = editor;
 		this._serverState = {};
 		this._serverStateListeners = [];
-		this._clientServiceState = {};
 		this._highlightAnnotationTypes = [];
 	};
 
@@ -37,14 +36,6 @@ define(function() {
 		
 		addServerStateListener: function(listener) {
 			this._serverStateListeners.push(listener);
-		},
-		
-		getClientServiceState: function() {
-			return this._clientServiceState;
-		},
-		
-		clearClientServiceState: function() {
-			this._clientServiceState = {};
 		},
 		
 		getCaretOffset: function() {
@@ -88,8 +79,26 @@ define(function() {
 			this._editor.getTextView().setSelection(selection.start, selection.end);
 		},
 		
-		setText: function(text, start, end) {
-			this._editor.setText(text, start, end);
+		setText: function(text, start, end, preserveCaret) {
+			if (preserveCaret) {
+				var textView = this._editor.getTextView();
+				var caretOffset = textView.getCaretOffset();
+				var model = textView.getModel();
+				var line = model.getLineAtOffset(caretOffset)
+				var lineStart = model.getLineStart(line);
+				var offsetInLine = caretOffset - lineStart;
+				model.setText(text, start, end);
+				lineStart = model.getLineStart(line);
+				var lineEnd = model.getLineEnd(line);
+				if (lineStart < 0 || lineEnd < 0)
+					textView.setCaretOffset(model.getText().length);
+				else if (lineStart + offsetInLine > lineEnd)
+					textView.setCaretOffset(lineEnd);
+				else
+					textView.setCaretOffset(lineStart + offsetInLine);
+			} else {
+				this._editor.setText(text, start, end);
+			}
 		}
 		
 	};

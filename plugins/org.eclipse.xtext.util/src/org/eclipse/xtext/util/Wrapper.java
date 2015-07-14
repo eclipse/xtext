@@ -38,6 +38,13 @@ public class Wrapper<T> {
 		this.value = value;
 	}
 	
+	/**
+	 * @since 2.9
+	 */
+	public boolean isEmpty() {
+		return value == null;
+	}
+	
 	@Override
 	public String toString() {
 		return "Wrapper of ("+value+")";

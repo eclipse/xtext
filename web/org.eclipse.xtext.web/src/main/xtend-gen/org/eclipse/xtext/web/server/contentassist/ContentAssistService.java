@@ -10,7 +10,6 @@ package org.eclipse.xtext.web.server.contentassist;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -128,8 +127,7 @@ public class ContentAssistService {
    * Invoke the proposal provider and put the results into a {@link ContentAssistResult} object.
    */
   protected ContentAssistResult createProposals(final List<ContentAssistContext> contexts, final String stateId, final int proposalsLimit) {
-    final ContentAssistResult result = new ContentAssistResult();
-    result.setStateId(stateId);
+    final ContentAssistResult result = new ContentAssistResult(stateId);
     boolean _isEmpty = contexts.isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
@@ -148,7 +146,7 @@ public class ContentAssistService {
         }
       };
       this.proposalProvider.createProposals(contexts, acceptor);
-      ArrayList<ContentAssistEntry> _entries = result.getEntries();
+      List<ContentAssistEntry> _entries = result.getEntries();
       final Comparator<Pair<Integer, ContentAssistEntry>> _function = new Comparator<Pair<Integer, ContentAssistEntry>>() {
         @Override
         public int compare(final Pair<Integer, ContentAssistEntry> p1, final Pair<Integer, ContentAssistEntry> p2) {

@@ -34,16 +34,29 @@ class StatemachineGenerator implements IGenerator {
 			<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 			<meta http-equiv="Content-Language" content="en-us">
 			<title>State Machine Overview</title>
+			<link rel="stylesheet" type="text/css" href="/style.css" />
+			<style>
+				.signal {
+					color: #383;
+					font-weight: bold;
+				}
+				.state {
+					color: #338;
+					font-weight: bold;
+				}
+			</style>
 		</head>
 		<body>
-			<h1>Signals</h1>
+		<div class="text-container">
+			<h2>Signals</h2>
 			«FOR signal : statemachine.signals»
-				<i>«signal.name»</i> («IF signal instanceof InputSignal»input«ELSE»output«ENDIF»)</br>
+				<span class="signal">«signal.name»</span> («IF signal instanceof InputSignal»input«ELSE»output«ENDIF»)</br>
 			«ENDFOR»
-			<h1>States</h1>
+			<h2>States</h2>
 			«FOR state : statemachine.states»
-				<i>«state.name»</i> &ndash; transitions: «IF state.transitions.empty»NONE«ELSE»«FOR transition : state.transitions SEPARATOR ', '»«transition.state.name»«ENDFOR»«ENDIF»</br>
+				<span class="state">«state.name»</span> &ndash; transitions: «IF state.transitions.empty»NONE«ELSE»«FOR transition : state.transitions SEPARATOR ', '»«transition.state.name»«ENDFOR»«ENDIF»</br>
 			«ENDFOR»
+		</div>
 		</body>
 		</html>
 	'''

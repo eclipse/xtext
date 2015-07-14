@@ -31,8 +31,7 @@ class HoverService {
 	@Inject extension INameLabelProvider
 
 	/**
-	 * Compute a hover result at the given offset in the document. If no information is
-	 * available, {@code null} is returned.
+	 * Compute a hover result at the given offset in the document.
 	 */
 	def HoverResult getHover(XtextWebDocumentAccess document, int offset) {
 		document.readOnly [ it, cancelIndicator |
@@ -41,10 +40,9 @@ class HoverService {
 			if (nameLabel != null) {
 				val titleHtml = element.imageDescription.addIconDivs(nameLabel).surroundWithDiv('hover')
 				val bodyHtml = (element.documentation ?: '').surroundWithDiv('hover')
-				val result = new HoverResult(stateId, titleHtml, bodyHtml)
-				result
+				return new HoverResult(stateId, titleHtml, bodyHtml)
 			} else {
-				null
+				return new HoverResult(stateId)
 			}
 		]
 	}
@@ -65,4 +63,5 @@ class HoverService {
 			«html»
 		</div>
 	'''
+	
 }

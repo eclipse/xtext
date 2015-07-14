@@ -8,7 +8,6 @@
 package org.eclipse.xtext.web.server.generator;
 
 import java.util.List;
-import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtend.lib.annotations.ToString;
 import org.eclipse.xtext.web.server.IServiceResult;
@@ -22,7 +21,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
  * it in a result object. This allows to conveniently view generator results by pointing a
  * web browser to the generator service URL.
  */
-@Accessors
+@Data
 @ToString(skipNulls = true)
 @SuppressWarnings("all")
 public class GeneratorResult implements IServiceResult {
@@ -106,11 +105,33 @@ public class GeneratorResult implements IServiceResult {
     }
   }
   
-  private final List<GeneratorResult.GeneratedDocument> entries = CollectionLiterals.<GeneratorResult.GeneratedDocument>newArrayList();
+  private final List<GeneratorResult.GeneratedDocument> documents = CollectionLiterals.<GeneratorResult.GeneratedDocument>newArrayList();
   
+  @Override
   @Pure
-  public List<GeneratorResult.GeneratedDocument> getEntries() {
-    return this.entries;
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((this.documents== null) ? 0 : this.documents.hashCode());
+    return result;
+  }
+  
+  @Override
+  @Pure
+  public boolean equals(final Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    GeneratorResult other = (GeneratorResult) obj;
+    if (this.documents == null) {
+      if (other.documents != null)
+        return false;
+    } else if (!this.documents.equals(other.documents))
+      return false;
+    return true;
   }
   
   @Override
@@ -118,7 +139,12 @@ public class GeneratorResult implements IServiceResult {
   public String toString() {
     ToStringBuilder b = new ToStringBuilder(this);
     b.skipNulls();
-    b.add("entries", this.entries);
+    b.add("documents", this.documents);
     return b.toString();
+  }
+  
+  @Pure
+  public List<GeneratorResult.GeneratedDocument> getDocuments() {
+    return this.documents;
   }
 }

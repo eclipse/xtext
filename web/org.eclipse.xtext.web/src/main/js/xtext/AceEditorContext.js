@@ -15,7 +15,6 @@ define([], function() {
 		this._editor = editor;
 		this._serverState = {};
 		this._serverStateListeners = [];
-		this._clientServiceState = {};
 		this._clean = true;
 		this._dirtyStateListeners = [];
 		this._annotations = [];
@@ -40,14 +39,6 @@ define([], function() {
 		
 		addServerStateListener: function(listener) {
 			this._serverStateListeners.push(listener);
-		},
-		
-		getClientServiceState: function() {
-			return this._clientServiceState;
-		},
-		
-		clearClientServiceState: function() {
-			this._clientServiceState = {};
 		},
 		
 		getCaretOffset: function() {
@@ -117,7 +108,7 @@ define([], function() {
 			}
 		},
 		
-		setText: function(text, start, end) {
+		setText: function(text, start, end, preserveCaret) {
 			var session = this._editor.getSession();
 			var document = session.getDocument();
 			if (!start)
@@ -126,8 +117,13 @@ define([], function() {
 				end = document.getValue().length;
 			var startPos = document.indexToPosition(start);
 			var endPos = document.indexToPosition(end);
+			var cursorPos = this._editor.getCursorPosition();
 			var mRange = require('ace/range');
-			return session.replace(new mRange.Range(startPos.row, startPos.column, endPos.row, endPos.column), text);
+			session.replace(new mRange.Range(startPos.row, startPos.column, endPos.row, endPos.column), text);
+			if (preserveCaret) {
+				this._editor.moveCursorToPosition(cursorPos);
+				this._editor.clearSelection();
+			}
 		}
 		
 	};

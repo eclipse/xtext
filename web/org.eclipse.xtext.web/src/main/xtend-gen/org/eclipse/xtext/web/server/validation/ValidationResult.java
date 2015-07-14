@@ -7,19 +7,18 @@
  */
 package org.eclipse.xtext.web.server.validation;
 
-import java.util.ArrayList;
-import org.eclipse.xtend.lib.annotations.Accessors;
+import java.util.List;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtend.lib.annotations.ToString;
 import org.eclipse.xtext.web.server.IServiceResult;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 /**
  * Result object returned by the validation service.
  */
-@Accessors
-@ToString(skipNulls = true)
+@Data
 @SuppressWarnings("all")
 public class ValidationResult implements IServiceResult {
   @Data
@@ -134,19 +133,45 @@ public class ValidationResult implements IServiceResult {
     }
   }
   
-  private final ArrayList<ValidationResult.Issue> issues = new ArrayList<ValidationResult.Issue>();
+  private final List<ValidationResult.Issue> issues = CollectionLiterals.<ValidationResult.Issue>newArrayList();
   
+  @Override
   @Pure
-  public ArrayList<ValidationResult.Issue> getIssues() {
-    return this.issues;
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((this.issues== null) ? 0 : this.issues.hashCode());
+    return result;
+  }
+  
+  @Override
+  @Pure
+  public boolean equals(final Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    ValidationResult other = (ValidationResult) obj;
+    if (this.issues == null) {
+      if (other.issues != null)
+        return false;
+    } else if (!this.issues.equals(other.issues))
+      return false;
+    return true;
   }
   
   @Override
   @Pure
   public String toString() {
     ToStringBuilder b = new ToStringBuilder(this);
-    b.skipNulls();
     b.add("issues", this.issues);
     return b.toString();
+  }
+  
+  @Pure
+  public List<ValidationResult.Issue> getIssues() {
+    return this.issues;
   }
 }

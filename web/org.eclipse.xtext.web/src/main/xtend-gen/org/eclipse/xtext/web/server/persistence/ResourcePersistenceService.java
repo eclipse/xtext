@@ -65,12 +65,9 @@ public class ResourcePersistenceService {
         @Override
         public ResourceContentResult exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
           String _text = it.getText();
-          final ResourceContentResult result = new ResourceContentResult(_text);
-          boolean _isDirty = it.isDirty();
-          result.setDirty(_isDirty);
           String _stateId = it.getStateId();
-          result.setStateId(_stateId);
-          return result;
+          boolean _isDirty = it.isDirty();
+          return new ResourceContentResult(_text, _stateId, _isDirty);
         }
       };
       _xblockexpression = _create.<ResourceContentResult>readOnly(_function_1);
@@ -84,13 +81,11 @@ public class ResourcePersistenceService {
   public ResourceContentResult revert(final String resourceId, final IServerResourceHandler resourceHandler, final ISessionStore sessionStore) throws InvalidRequestException {
     try {
       final XtextWebDocument document = resourceHandler.get(resourceId);
-      String _text = document.getText();
-      final ResourceContentResult result = new ResourceContentResult(_text);
-      String _stateId = document.getStateId();
-      result.setStateId(_stateId);
       Pair<Class<XtextWebDocument>, String> _mappedTo = Pair.<Class<XtextWebDocument>, String>of(XtextWebDocument.class, resourceId);
       sessionStore.put(_mappedTo, document);
-      return result;
+      String _text = document.getText();
+      String _stateId = document.getStateId();
+      return new ResourceContentResult(_text, _stateId, false);
     } catch (final Throwable _t) {
       if (_t instanceof IOException) {
         final IOException ioe = (IOException)_t;

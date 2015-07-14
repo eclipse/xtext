@@ -24,7 +24,7 @@ import org.junit.Test;
 public class Formatting2Test extends AbstractWebServerTest {
   @Test
   public void testFormatFile() {
-    final File file = this.createFile("output signal x state foo set x = true end");
+    final File file = this.createFile("/* bla */ output signal x state foo set x = true end");
     Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "format");
     String _name = file.getName();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
@@ -43,7 +43,7 @@ public class Formatting2Test extends AbstractWebServerTest {
     _builder.append("stateId = \"-7fffffff\"");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("formattedText = \"\\noutput signal x\\nstate foo\\n\tset x = true\\nend\"");
+    _builder.append("formattedText = \"/* bla */\\noutput signal x\\nstate foo\\n\tset x = true\\nend\"");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("replaceRegion = null");
@@ -56,10 +56,10 @@ public class Formatting2Test extends AbstractWebServerTest {
   
   @Test
   public void testFormatSelection() {
-    final File file = this.createFile("output signal x state foo set x = true end");
+    final File file = this.createFile("/* bla */ output signal x state foo set x = true end");
     Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "format");
-    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("selectionStart", "16");
-    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("selectionEnd", "42");
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("selectionStart", "26");
+    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("selectionEnd", "52");
     String _name = file.getName();
     Pair<String, String> _mappedTo_3 = Pair.<String, String>of("resource", _name);
     final XtextServiceDispatcher.ServiceDescriptor format = this.getService(
@@ -81,7 +81,7 @@ public class Formatting2Test extends AbstractWebServerTest {
     _builder.append("formattedText = \"state foo\\n\tset x = true\\nend\"");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("replaceRegion = [16:26]");
+    _builder.append("replaceRegion = [26:26]");
     _builder.newLine();
     _builder.append("]");
     final String expectedResult = _builder.toString();

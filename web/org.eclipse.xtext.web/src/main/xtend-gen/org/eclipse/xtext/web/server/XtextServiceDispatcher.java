@@ -41,7 +41,7 @@ import org.eclipse.xtext.web.server.generator.GeneratorService;
 import org.eclipse.xtext.web.server.hover.HoverService;
 import org.eclipse.xtext.web.server.model.DocumentStateResult;
 import org.eclipse.xtext.web.server.model.IWebResourceSetProvider;
-import org.eclipse.xtext.web.server.model.PreComputedServiceRegistry;
+import org.eclipse.xtext.web.server.model.PrecomputedServiceRegistry;
 import org.eclipse.xtext.web.server.model.UpdateDocumentService;
 import org.eclipse.xtext.web.server.model.XtextWebDocument;
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess;
@@ -222,13 +222,9 @@ public class XtextServiceDispatcher {
   private XtextWebDocumentAccess.Factory documentAccessFactory;
   
   @Inject
-  public boolean registerPreComputedServices(final PreComputedServiceRegistry registry) {
-    boolean _xblockexpression = false;
-    {
-      registry.addPreComputedService(this.highlightingService);
-      _xblockexpression = registry.addPreComputedService(this.validationService);
-    }
-    return _xblockexpression;
+  protected void registerPreComputedServices(final PrecomputedServiceRegistry registry) {
+    registry.addPrecomputedService(this.highlightingService);
+    registry.addPrecomputedService(this.validationService);
   }
   
   /**
@@ -485,7 +481,7 @@ public class XtextServiceDispatcher {
       document = _fullTextDocument;
     }
     String _parameter = request.getParameter("requiredStateId");
-    final XtextWebDocumentAccess documentAccess = this.documentAccessFactory.create(document, _parameter, initializedFromFullText);
+    final XtextWebDocumentAccess documentAccess = this.documentAccessFactory.create(document, _parameter, false);
     XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
     final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
       @Override
@@ -872,7 +868,7 @@ public class XtextServiceDispatcher {
             public IServiceResult apply() {
               IServiceResult _xtrycatchfinallyexpression = null;
               try {
-                _xtrycatchfinallyexpression = XtextServiceDispatcher.this.generatorService.generate(document);
+                _xtrycatchfinallyexpression = XtextServiceDispatcher.this.generatorService.getResult(document);
               } catch (final Throwable _t) {
                 if (_t instanceof Throwable) {
                   final Throwable throwable = (Throwable)_t;
@@ -939,7 +935,7 @@ public class XtextServiceDispatcher {
         _elvis = resourceId;
       } else {
         String _primaryFileExtension = this.fileExtensionProvider.getPrimaryFileExtension();
-        String _plus = ("fullText." + _primaryFileExtension);
+        String _plus = ("fulltext." + _primaryFileExtension);
         _elvis = _plus;
       }
       final URI uri = URI.createURI(_elvis);

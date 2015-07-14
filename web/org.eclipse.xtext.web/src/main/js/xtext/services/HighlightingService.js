@@ -19,11 +19,11 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 	HighlightingService.prototype.computeHighlighting = HighlightingService.prototype.invoke;
 	
 	HighlightingService.prototype._checkPreconditions = function(editorContext, params) {
-		return editorContext.getClientServiceState().highlighting === undefined;
+		return this._state === undefined;
 	}
 
 	HighlightingService.prototype._onConflict = function(editorContext, cause) {
-		delete editorContext.getClientServiceState().highlighting;
+		this.setState(undefined);
 		return {
 			suppressForcedUpdate: true
 		};

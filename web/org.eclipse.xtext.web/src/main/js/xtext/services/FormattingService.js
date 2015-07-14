@@ -32,9 +32,9 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 	FormattingService.prototype._processResult = function(result, editorContext) {
 		if (result.replaceRegion)
 			editorContext.setText(result.formattedText, result.replaceRegion.offset,
-					result.replaceRegion.offset + result.replaceRegion.length);
+					result.replaceRegion.offset + result.replaceRegion.length, true);
 		else
-			editorContext.setText(result.formattedText);
+			editorContext.setText(result.formattedText, undefined, undefined, true);
 		var listeners = editorContext.updateServerState(editorContext.getText(), result.stateId);
 		for (var i = 0; i < listeners.length; i++) {
 			listeners[i]();

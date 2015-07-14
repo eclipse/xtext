@@ -18,7 +18,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.web.server.IServiceResult;
-import org.eclipse.xtext.web.server.model.AbstractPreComputedService;
+import org.eclipse.xtext.web.server.model.AbstractPrecomputedService;
 import org.eclipse.xtext.web.server.model.DocumentSynchronizer;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -53,9 +53,9 @@ public class XtextWebDocument implements IXtextWebDocument {
     this.cachedServiceResults.clear();
   }
   
-  protected <T extends IServiceResult> T getCachedServiceResult(final AbstractPreComputedService<T> service, final CancelIndicator cancelIndicator, final boolean logCacheMiss) {
+  protected <T extends IServiceResult> T getCachedServiceResult(final AbstractPrecomputedService<T> service, final CancelIndicator cancelIndicator, final boolean logCacheMiss) {
     T _elvis = null;
-    Class<? extends AbstractPreComputedService> _class = service.getClass();
+    Class<? extends AbstractPrecomputedService> _class = service.getClass();
     IServiceResult _get = this.cachedServiceResults.get(_class);
     if (((T) _get) != null) {
       _elvis = ((T) _get);
@@ -63,13 +63,13 @@ public class XtextWebDocument implements IXtextWebDocument {
       T _xblockexpression = null;
       {
         if (logCacheMiss) {
-          Class<? extends AbstractPreComputedService> _class_1 = service.getClass();
+          Class<? extends AbstractPrecomputedService> _class_1 = service.getClass();
           String _simpleName = _class_1.getSimpleName();
           String _plus = ("Cache miss for " + _simpleName);
           XtextWebDocument.LOG.trace(_plus);
         }
         final T result = service.compute(this, cancelIndicator);
-        Class<? extends AbstractPreComputedService> _class_2 = service.getClass();
+        Class<? extends AbstractPrecomputedService> _class_2 = service.getClass();
         this.cachedServiceResults.put(_class_2, result);
         _xblockexpression = result;
       }

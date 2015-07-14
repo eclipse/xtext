@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server.contentassist
 
-import java.util.ArrayList
-import org.eclipse.xtend.lib.annotations.Accessors
+import java.util.List
+import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend.lib.annotations.ToString
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry
 import org.eclipse.xtext.web.server.IServiceResult
@@ -16,12 +16,12 @@ import org.eclipse.xtext.web.server.IServiceResult
 /**
  * Result object returned by the content assist service.
  */
-@Accessors
+@Data
 @ToString(skipNulls = true)
 class ContentAssistResult implements IServiceResult {
 	
 	String stateId
 	
-	val entries = new ArrayList<ContentAssistEntry>
+	val List<ContentAssistEntry> entries = newArrayList
 	
 }

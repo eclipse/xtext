@@ -10,7 +10,6 @@ package org.eclipse.xtext.web.server.validation;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
@@ -18,7 +17,7 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
-import org.eclipse.xtext.web.server.model.AbstractPreComputedService;
+import org.eclipse.xtext.web.server.model.AbstractPrecomputedService;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 import org.eclipse.xtext.web.server.model.UpdateDocumentService;
 import org.eclipse.xtext.web.server.validation.ValidationResult;
@@ -31,7 +30,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  */
 @Singleton
 @SuppressWarnings("all")
-public class ValidationService extends AbstractPreComputedService<ValidationResult> {
+public class ValidationService extends AbstractPrecomputedService<ValidationResult> {
   @Inject
   private IResourceValidator resourceValidator;
   
@@ -57,7 +56,7 @@ public class ValidationService extends AbstractPreComputedService<ValidationResu
     final Procedure1<Issue> _function_1 = new Procedure1<Issue>() {
       @Override
       public void apply(final Issue issue) {
-        ArrayList<ValidationResult.Issue> _issues = result.getIssues();
+        List<ValidationResult.Issue> _issues = result.getIssues();
         String _message = issue.getMessage();
         Severity _severity = issue.getSeverity();
         String _translate = ValidationService.this.translate(_severity);

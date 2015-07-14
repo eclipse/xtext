@@ -34,8 +34,15 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class GeneratorTest extends AbstractWebServerTest {
   public static class Generator implements IGenerator {
+    private int invocationCount = 0;
+    
+    public Generator() {
+      GeneratorTest.generatorInstance = this;
+    }
+    
     @Override
     public void doGenerate(final Resource input, final IFileSystemAccess fsa) {
+      this.invocationCount++;
       EList<EObject> _contents = input.getContents();
       Iterable<Statemachine> _filter = Iterables.<Statemachine>filter(_contents, Statemachine.class);
       final Statemachine statemachine = IterableExtensions.<Statemachine>head(_filter);
@@ -57,6 +64,8 @@ public class GeneratorTest extends AbstractWebServerTest {
       fsa.generateFile("test.txt", _builder);
     }
   }
+  
+  private static GeneratorTest.Generator generatorInstance;
   
   @Override
   protected Module getRuntimeModule() {
@@ -86,7 +95,7 @@ public class GeneratorTest extends AbstractWebServerTest {
     _builder.append("GeneratorResult [");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("entries = ArrayList (");
+    _builder.append("documents = ArrayList (");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("GeneratedDocument [");
@@ -110,5 +119,23 @@ public class GeneratorTest extends AbstractWebServerTest {
     final String expectedResult = _builder.toString();
     String _string = result.toString();
     Assert.assertEquals(expectedResult, _string);
+  }
+  
+  @Test
+  public void testInvokedOnce() {
+    if ((GeneratorTest.generatorInstance != null)) {
+      GeneratorTest.generatorInstance.invocationCount = 0;
+    }
+    final File file = this.createFile("state foo end state bar end");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "generate");
+    String _name = file.getName();
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
+    final XtextServiceDispatcher.ServiceDescriptor generate = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)));
+    Function0<? extends IServiceResult> _service = generate.getService();
+    _service.apply();
+    Assert.assertEquals(1, GeneratorTest.generatorInstance.invocationCount);
+    Function0<? extends IServiceResult> _service_1 = generate.getService();
+    _service_1.apply();
+    Assert.assertEquals(1, GeneratorTest.generatorInstance.invocationCount);
   }
 }

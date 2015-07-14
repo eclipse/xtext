@@ -60,53 +60,42 @@ public class HoverService {
   private INameLabelProvider _iNameLabelProvider;
   
   /**
-   * Compute a hover result at the given offset in the document. If no information is
-   * available, {@code null} is returned.
+   * Compute a hover result at the given offset in the document.
    */
   public HoverResult getHover(final XtextWebDocumentAccess document, final int offset) {
     final CancelableUnitOfWork<HoverResult, IXtextWebDocument> _function = new CancelableUnitOfWork<HoverResult, IXtextWebDocument>() {
       @Override
       public HoverResult exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
-        HoverResult _xblockexpression = null;
-        {
-          XtextResource _resource = it.getResource();
-          final EObject element = HoverService.this._elementAtOffsetUtil.getElementAt(_resource, offset);
-          String _nameLabel = null;
-          if (element!=null) {
-            _nameLabel=HoverService.this._iNameLabelProvider.getNameLabel(element);
-          }
-          String _surroundWithDiv = null;
-          if (_nameLabel!=null) {
-            _surroundWithDiv=HoverService.this.surroundWithDiv(_nameLabel, "element-name");
-          }
-          final String nameLabel = _surroundWithDiv;
-          HoverResult _xifexpression = null;
-          boolean _notEquals = (!Objects.equal(nameLabel, null));
-          if (_notEquals) {
-            HoverResult _xblockexpression_1 = null;
-            {
-              IImageDescription _imageDescription = HoverService.this._iImageDescriptionProvider.getImageDescription(element);
-              String _addIconDivs = HoverService.this.addIconDivs(_imageDescription, nameLabel);
-              final String titleHtml = HoverService.this.surroundWithDiv(_addIconDivs, "hover");
-              String _elvis = null;
-              String _documentation = HoverService.this._iEObjectDocumentationProvider.getDocumentation(element);
-              if (_documentation != null) {
-                _elvis = _documentation;
-              } else {
-                _elvis = "";
-              }
-              final String bodyHtml = HoverService.this.surroundWithDiv(_elvis, "hover");
-              String _stateId = it.getStateId();
-              final HoverResult result = new HoverResult(_stateId, titleHtml, bodyHtml);
-              _xblockexpression_1 = result;
-            }
-            _xifexpression = _xblockexpression_1;
-          } else {
-            _xifexpression = null;
-          }
-          _xblockexpression = _xifexpression;
+        XtextResource _resource = it.getResource();
+        final EObject element = HoverService.this._elementAtOffsetUtil.getElementAt(_resource, offset);
+        String _nameLabel = null;
+        if (element!=null) {
+          _nameLabel=HoverService.this._iNameLabelProvider.getNameLabel(element);
         }
-        return _xblockexpression;
+        String _surroundWithDiv = null;
+        if (_nameLabel!=null) {
+          _surroundWithDiv=HoverService.this.surroundWithDiv(_nameLabel, "element-name");
+        }
+        final String nameLabel = _surroundWithDiv;
+        boolean _notEquals = (!Objects.equal(nameLabel, null));
+        if (_notEquals) {
+          IImageDescription _imageDescription = HoverService.this._iImageDescriptionProvider.getImageDescription(element);
+          String _addIconDivs = HoverService.this.addIconDivs(_imageDescription, nameLabel);
+          final String titleHtml = HoverService.this.surroundWithDiv(_addIconDivs, "hover");
+          String _elvis = null;
+          String _documentation = HoverService.this._iEObjectDocumentationProvider.getDocumentation(element);
+          if (_documentation != null) {
+            _elvis = _documentation;
+          } else {
+            _elvis = "";
+          }
+          final String bodyHtml = HoverService.this.surroundWithDiv(_elvis, "hover");
+          String _stateId = it.getStateId();
+          return new HoverResult(_stateId, titleHtml, bodyHtml);
+        } else {
+          String _stateId_1 = it.getStateId();
+          return new HoverResult(_stateId_1);
+        }
       }
     };
     return document.<HoverResult>readOnly(_function);

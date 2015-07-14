@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.web.server.test
 
 import org.eclipse.xtext.web.server.hover.HoverResult
@@ -28,7 +35,7 @@ class HoverTest extends AbstractWebServerTest {
 	
 	@Test 
 	def void testNoHoverOnEmptyFile() {
-		'#'.hover.assertNull
+		'#'.hover.content.assertNull
 	}
 	
 	@Test
@@ -83,7 +90,7 @@ class HoverTest extends AbstractWebServerTest {
 			 */
 			#state foo
 		''' .hover
-			.assertNull
+			.content.assertNull
 	}
 	
 	@Test
@@ -128,6 +135,6 @@ class HoverTest extends AbstractWebServerTest {
 			state State1
 				set z = fal#se
 			end
-		'''.hover.assertNull
+		'''.hover.content.assertNull
 	}
 }

@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtext.web.server.util;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -10,18 +17,6 @@ public class CancelIndicatorProgressMonitor implements IProgressMonitor {
   private final CancelIndicator delegate;
   
   private boolean isCanceled;
-  
-  @Override
-  public void beginTask(final String name, final int totalWork) {
-  }
-  
-  @Override
-  public void done() {
-  }
-  
-  @Override
-  public void internalWorked(final double work) {
-  }
   
   @Override
   public boolean isCanceled() {
@@ -41,6 +36,10 @@ public class CancelIndicatorProgressMonitor implements IProgressMonitor {
   }
   
   @Override
+  public void beginTask(final String name, final int totalWork) {
+  }
+  
+  @Override
   public void setTaskName(final String name) {
   }
   
@@ -49,7 +48,15 @@ public class CancelIndicatorProgressMonitor implements IProgressMonitor {
   }
   
   @Override
+  public void internalWorked(final double work) {
+  }
+  
+  @Override
   public void worked(final int work) {
+  }
+  
+  @Override
+  public void done() {
   }
   
   public CancelIndicatorProgressMonitor(final CancelIndicator delegate) {

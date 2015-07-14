@@ -50,32 +50,40 @@ public class StatemachineWebContentProposalProvider extends IdeContentProposalPr
       TerminalRule _bOOLEANRule = this._statemachineGrammarAccess.getBOOLEANRule();
       if (Objects.equal(_rule, _bOOLEANRule)) {
         _matched=true;
-        ContentAssistEntry _contentAssistEntry = new ContentAssistEntry();
-        final Procedure1<ContentAssistEntry> _function = new Procedure1<ContentAssistEntry>() {
-          @Override
-          public void apply(final ContentAssistEntry it) {
-            String _prefix = context.getPrefix();
-            it.setPrefix(_prefix);
-            it.setProposal("true");
-          }
-        };
-        final ContentAssistEntry trueEntry = ObjectExtensions.<ContentAssistEntry>operator_doubleArrow(_contentAssistEntry, _function);
-        IdeContentProposalPriorities _proposalPriorities = this.getProposalPriorities();
-        int _defaultPriority = _proposalPriorities.getDefaultPriority(trueEntry);
-        acceptor.accept(trueEntry, _defaultPriority);
-        ContentAssistEntry _contentAssistEntry_1 = new ContentAssistEntry();
-        final Procedure1<ContentAssistEntry> _function_1 = new Procedure1<ContentAssistEntry>() {
-          @Override
-          public void apply(final ContentAssistEntry it) {
-            String _prefix = context.getPrefix();
-            it.setPrefix(_prefix);
-            it.setProposal("false");
-          }
-        };
-        final ContentAssistEntry falseEntry = ObjectExtensions.<ContentAssistEntry>operator_doubleArrow(_contentAssistEntry_1, _function_1);
-        IdeContentProposalPriorities _proposalPriorities_1 = this.getProposalPriorities();
-        int _defaultPriority_1 = _proposalPriorities_1.getDefaultPriority(falseEntry);
-        acceptor.accept(falseEntry, _defaultPriority_1);
+        String _prefix = context.getPrefix();
+        boolean _startsWith = "true".startsWith(_prefix);
+        if (_startsWith) {
+          ContentAssistEntry _contentAssistEntry = new ContentAssistEntry();
+          final Procedure1<ContentAssistEntry> _function = new Procedure1<ContentAssistEntry>() {
+            @Override
+            public void apply(final ContentAssistEntry it) {
+              String _prefix = context.getPrefix();
+              it.setPrefix(_prefix);
+              it.setProposal("true");
+            }
+          };
+          final ContentAssistEntry trueEntry = ObjectExtensions.<ContentAssistEntry>operator_doubleArrow(_contentAssistEntry, _function);
+          IdeContentProposalPriorities _proposalPriorities = this.getProposalPriorities();
+          int _defaultPriority = _proposalPriorities.getDefaultPriority(trueEntry);
+          acceptor.accept(trueEntry, _defaultPriority);
+        }
+        String _prefix_1 = context.getPrefix();
+        boolean _startsWith_1 = "false".startsWith(_prefix_1);
+        if (_startsWith_1) {
+          ContentAssistEntry _contentAssistEntry_1 = new ContentAssistEntry();
+          final Procedure1<ContentAssistEntry> _function_1 = new Procedure1<ContentAssistEntry>() {
+            @Override
+            public void apply(final ContentAssistEntry it) {
+              String _prefix = context.getPrefix();
+              it.setPrefix(_prefix);
+              it.setProposal("false");
+            }
+          };
+          final ContentAssistEntry falseEntry = ObjectExtensions.<ContentAssistEntry>operator_doubleArrow(_contentAssistEntry_1, _function_1);
+          IdeContentProposalPriorities _proposalPriorities_1 = this.getProposalPriorities();
+          int _defaultPriority_1 = _proposalPriorities_1.getDefaultPriority(falseEntry);
+          acceptor.accept(falseEntry, _defaultPriority_1);
+        }
       }
     }
     if (!_matched) {

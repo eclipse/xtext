@@ -8,11 +8,8 @@
 package org.eclipse.xtext.web.server.model;
 
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
-import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -31,24 +28,8 @@ class DocumentSynchronizer implements CancelIndicator {
   
   private final AtomicInteger waitingPriorityJobs = new AtomicInteger();
   
-  @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject
   private OperationCanceledManager operationCanceledManager;
-  
-  /**
-   * Executor service for runnables that are run when the lock is already acquired
-   */
-  @Accessors(AccessorType.PUBLIC_GETTER)
-  @Inject
-  @Named("withDocumentLock")
-  private ExecutorService executorService;
-  
-  /**
-   * A second executor service for runnables that aquire the document lock themselves
-   */
-  @Accessors(AccessorType.PUBLIC_GETTER)
-  @Inject
-  private ExecutorService executorService2;
   
   @Accessors
   private volatile boolean canceled;
@@ -89,21 +70,6 @@ class DocumentSynchronizer implements CancelIndicator {
       throw new IllegalStateException("Cannot release a lock without acquiring it first.");
     }
     this.semaphore.release();
-  }
-  
-  @Pure
-  public OperationCanceledManager getOperationCanceledManager() {
-    return this.operationCanceledManager;
-  }
-  
-  @Pure
-  public ExecutorService getExecutorService() {
-    return this.executorService;
-  }
-  
-  @Pure
-  public ExecutorService getExecutorService2() {
-    return this.executorService2;
   }
   
   @Pure

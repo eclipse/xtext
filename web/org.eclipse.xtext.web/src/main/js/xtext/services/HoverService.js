@@ -31,16 +31,17 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 			delay = 500;
 		var showTime = new Date().getTime() + delay;
 		return function(result) {
-			if (result && !result.conflict) {
+			if (!result.content || result.conflict) {
+				deferred.reject();
+			} else {
 				var remainingTimeout = Math.max(0, showTime - new Date().getTime());
 				setTimeout(function() {
-					if (result.stateId !== undefined && result.stateId != editorContext.getServerState().stateId) 
+					if (!params.sendFullText && result.stateId !== undefined
+							&& result.stateId != editorContext.getServerState().stateId) 
 						deferred.reject();
 					else
 						deferred.resolve(result);
 				}, remainingTimeout);
-			} else {
-				deferred.reject();
 			}
 		};
 	};

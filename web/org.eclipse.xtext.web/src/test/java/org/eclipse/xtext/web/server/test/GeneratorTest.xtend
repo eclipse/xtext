@@ -18,8 +18,18 @@ import org.junit.Test
 
 class GeneratorTest extends AbstractWebServerTest {
 	
+	static Generator generatorInstance
+	
 	static class Generator implements IGenerator {
+		
+		int invocationCount = 0
+		
+		new() {
+			generatorInstance = this
+		}
+		
 		override doGenerate(Resource input, IFileSystemAccess fsa) {
+			invocationCount++
 			val statemachine = input.contents.filter(Statemachine).head
 			fsa.generateFile('test.txt', '''
 				«FOR state : statemachine.states SEPARATOR ','»«state.name»«ENDFOR»
@@ -43,7 +53,7 @@ class GeneratorTest extends AbstractWebServerTest {
 		val result = generate.service.apply() as GeneratorResult
 		val String expectedResult = '''
 			GeneratorResult [
-			  entries = ArrayList (
+			  documents = ArrayList (
 			    GeneratedDocument [
 			      name = "test.txt"
 			      contentType = "text/plain"
@@ -52,6 +62,17 @@ class GeneratorTest extends AbstractWebServerTest {
 			  )
 			]'''
 		assertEquals(expectedResult, result.toString)
+	}
+	
+	@Test def testInvokedOnce() {
+		if (generatorInstance !== null)
+			generatorInstance.invocationCount = 0
+		val file = createFile('state foo end state bar end')
+		val generate = getService(#{'requestType' -> 'generate', 'resource' -> file.name})
+		generate.service.apply()
+		assertEquals(1, generatorInstance.invocationCount)
+		generate.service.apply()
+		assertEquals(1, generatorInstance.invocationCount)
 	}
 	
 }

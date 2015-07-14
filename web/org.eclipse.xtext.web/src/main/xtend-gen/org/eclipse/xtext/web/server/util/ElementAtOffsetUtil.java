@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtext.web.server.util;
 
 import com.google.common.base.Objects;
@@ -25,7 +32,7 @@ public class ElementAtOffsetUtil {
     if (_notEquals) {
       return crossLinkedEObject;
     } else {
-      EObject containedEObject = this._eObjectAtOffsetHelper.resolveElementAt(resource, offset);
+      EObject containedEObject = this._eObjectAtOffsetHelper.resolveContainedElementAt(resource, offset);
       boolean _notEquals_1 = (!Objects.equal(containedEObject, null));
       if (_notEquals_1) {
         final ITextRegion nameRegion = this._iLocationInFileProvider.getSignificantTextRegion(containedEObject);

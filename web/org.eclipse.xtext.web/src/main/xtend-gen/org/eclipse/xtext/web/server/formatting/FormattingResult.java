@@ -8,11 +8,14 @@
 package org.eclipse.xtext.web.server.formatting;
 
 import org.eclipse.xtend.lib.annotations.Data;
-import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
+/**
+ * Result object returned by the formatting service.
+ */
 @Data
 @SuppressWarnings("all")
 public class FormattingResult implements IServiceResult {
@@ -20,9 +23,9 @@ public class FormattingResult implements IServiceResult {
   
   private final String formattedText;
   
-  private final ITextRegion replaceRegion;
+  private final TextRegion replaceRegion;
   
-  public FormattingResult(final String stateId, final String formattedText, final ITextRegion replaceRegion) {
+  public FormattingResult(final String stateId, final String formattedText, final TextRegion replaceRegion) {
     super();
     this.stateId = stateId;
     this.formattedText = formattedText;
@@ -89,7 +92,7 @@ public class FormattingResult implements IServiceResult {
   }
   
   @Pure
-  public ITextRegion getReplaceRegion() {
+  public TextRegion getReplaceRegion() {
     return this.replaceRegion;
   }
 }

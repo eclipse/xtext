@@ -445,13 +445,14 @@ define([
 		//---- Update Service
 		
 		function refreshDocument() {
-			editorContext.clearClientServiceState();
 			if (highlightingService) {
+				highlightingService.setState(undefined);
 				highlightingService.computeHighlighting(editorContext, options).done(function(result) {
 					_appyHighlighting(result, editor, editorContext);
 				});
 			}
 			if (validationService) {
+				validationService.setState(undefined);
 				validationService.computeProblems(editorContext, options).done(function(result) {
 					editor.showProblems(result.issues.map(function(entry) {
 						return {

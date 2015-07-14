@@ -28,6 +28,10 @@ define(['jquery'], function(jQuery) {
 			this._updateService = updateService;
 		},
 		
+		setState: function(state) {
+			this._state = state;
+		},
+		
 		/**
 		 * Invoke the service with default service behavior.
 		 */
@@ -54,7 +58,8 @@ define(['jquery'], function(jQuery) {
 					serverData.fullText = editorContext.getText();
 					httpMethod = 'POST';
 				} else {
-					if (editorContext.getClientServiceState().update == 'started') {
+					var knownServerState = editorContext.getServerState();
+					if (knownServerState.updateInProgress) {
 						if (self._updateService) {
 							self._updateService.addCompletionCallback(function() {
 								self.invoke(editorContext, params, deferred);
@@ -64,7 +69,6 @@ define(['jquery'], function(jQuery) {
 						}
 						return deferred.promise();
 					}
-					var knownServerState = editorContext.getServerState();
 					if (knownServerState.stateId !== undefined) {
 						serverData.requiredStateId = knownServerState.stateId;
 					}
@@ -94,6 +98,7 @@ define(['jquery'], function(jQuery) {
 							} else {
 								self.invoke(editorContext, params, deferred);
 							}
+							return true;
 						}
 						deferred.reject();
 						return false;
@@ -125,7 +130,7 @@ define(['jquery'], function(jQuery) {
 		 */
 		sendRequest: function(editorContext, settings) {
 			var self = this;
-			editorContext.getClientServiceState()[self._requestType] = 'started';
+			self.setState('started');
 			
 			var success = settings.success;
 			settings.success = function(result) {
@@ -134,7 +139,7 @@ define(['jquery'], function(jQuery) {
 					accepted = success(result);
 				}
 				if (accepted || accepted === undefined) {
-					editorContext.getClientServiceState()[self._requestType] = 'finished';
+					self.setState('finished');
 					if (editorContext.getEditor) {
 						var successListeners = editorContext.getEditor().xtextServiceSuccessListeners;
 						if (successListeners) {
@@ -156,7 +161,7 @@ define(['jquery'], function(jQuery) {
 					resolved = error(xhr, textStatus, errorThrown);
 				}
 				if (!resolved) {
-					delete editorContext.getClientServiceState()[self._requestType];
+					self.setState(undefined);
 					self._reportError(editorContext, textStatus, errorThrown);
 				}
 			};

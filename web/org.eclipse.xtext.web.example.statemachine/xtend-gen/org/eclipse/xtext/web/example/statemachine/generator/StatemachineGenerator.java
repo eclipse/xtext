@@ -56,21 +56,56 @@ public class StatemachineGenerator implements IGenerator {
     _builder.append("\t");
     _builder.append("<title>State Machine Overview</title>");
     _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"/style.css\" />");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<style>");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append(".signal {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("color: #383;");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("font-weight: bold;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append(".state {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("color: #338;");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("font-weight: bold;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("</style>");
+    _builder.newLine();
     _builder.append("</head>");
     _builder.newLine();
     _builder.append("<body>");
     _builder.newLine();
+    _builder.append("<div class=\"text-container\">");
+    _builder.newLine();
     _builder.append("\t");
-    _builder.append("<h1>Signals</h1>");
+    _builder.append("<h2>Signals</h2>");
     _builder.newLine();
     {
       EList<Signal> _signals = statemachine.getSignals();
       for(final Signal signal : _signals) {
         _builder.append("\t");
-        _builder.append("<i>");
+        _builder.append("<span class=\"signal\">");
         String _name = signal.getName();
         _builder.append(_name, "\t");
-        _builder.append("</i> (");
+        _builder.append("</span> (");
         {
           if ((signal instanceof InputSignal)) {
             _builder.append("input");
@@ -83,16 +118,16 @@ public class StatemachineGenerator implements IGenerator {
       }
     }
     _builder.append("\t");
-    _builder.append("<h1>States</h1>");
+    _builder.append("<h2>States</h2>");
     _builder.newLine();
     {
       EList<State> _states = statemachine.getStates();
       for(final State state : _states) {
         _builder.append("\t");
-        _builder.append("<i>");
+        _builder.append("<span class=\"state\">");
         String _name_1 = state.getName();
         _builder.append(_name_1, "\t");
-        _builder.append("</i> &ndash; transitions: ");
+        _builder.append("</span> &ndash; transitions: ");
         {
           EList<Transition> _transitions = state.getTransitions();
           boolean _isEmpty = _transitions.isEmpty();
@@ -119,6 +154,8 @@ public class StatemachineGenerator implements IGenerator {
         _builder.newLineIfNotEmpty();
       }
     }
+    _builder.append("</div>");
+    _builder.newLine();
     _builder.append("</body>");
     _builder.newLine();
     _builder.append("</html>");

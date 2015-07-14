@@ -26,8 +26,8 @@ import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess;
 public class UpdateDocumentService {
   /**
    * Update the state identifier and return it. A background process is started where the given text
-   * is assigned to the document and {@link #processUpdatedDocument(IXtextWebDocument, CancelIndicator)}
-   * is executed.
+   * is assigned to the document and the services registered in {@link PrecomputedServiceRegistry}
+   * are invoked.
    */
   public DocumentStateResult updateFullText(final XtextWebDocumentAccess document, final String fullText) throws InvalidRequestException {
     final CancelableUnitOfWork<DocumentStateResult, IXtextWebDocument> _function = new CancelableUnitOfWork<DocumentStateResult, IXtextWebDocument>() {
@@ -51,8 +51,8 @@ public class UpdateDocumentService {
   
   /**
    * Update the state identifier and return it. A background process is started where the given text change
-   * is applied to the document and {@link #processUpdatedDocument(IXtextWebDocument, CancelIndicator)}
-   * is executed.
+   * is applied to the document and the services registered in {@link PrecomputedServiceRegistry}
+   * are invoked.
    */
   public DocumentStateResult updateDeltaText(final XtextWebDocumentAccess document, final String deltaText, final int offset, final int replaceLength) throws InvalidRequestException {
     final CancelableUnitOfWork<DocumentStateResult, IXtextWebDocument> _function = new CancelableUnitOfWork<DocumentStateResult, IXtextWebDocument>() {
@@ -75,8 +75,8 @@ public class UpdateDocumentService {
   }
   
   /**
-   * Schedule {@link #processUpdatedDocument(IXtextWebDocument, CancelIndicator)} as background
-   * work and return the current state identifier.
+   * Return the current state identifier. If the services registered in {@link PrecomputedServiceRegistry}
+   * are not cached yet, they are invoked in a background process.
    */
   public DocumentStateResult getStateId(final XtextWebDocumentAccess document) throws InvalidRequestException {
     final CancelableUnitOfWork<DocumentStateResult, IXtextWebDocument> _function = new CancelableUnitOfWork<DocumentStateResult, IXtextWebDocument>() {

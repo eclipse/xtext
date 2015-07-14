@@ -1,28 +1,37 @@
+/**
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtext.web.server.occurrences;
 
-import com.google.common.collect.Iterables;
-import java.util.ArrayList;
+import java.util.List;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtend.lib.annotations.ToString;
-import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.web.server.IServiceResult;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
+/**
+ * Result object returned by the occurrences service.
+ */
 @Data
 @ToString(skipNulls = true)
 @SuppressWarnings("all")
 public class OccurrencesResult implements IServiceResult {
   private final String stateId;
   
-  private final ArrayList<ITextRegion> writeRegions = new ArrayList<ITextRegion>();
+  private final List<TextRegion> writeRegions = CollectionLiterals.<TextRegion>newArrayList();
   
-  private final ArrayList<ITextRegion> readRegions = new ArrayList<ITextRegion>();
+  private final List<TextRegion> readRegions = CollectionLiterals.<TextRegion>newArrayList();
   
-  public OccurrencesResult(final String stateId, final Iterable<ITextRegion> readRegions, final Iterable<ITextRegion> writeRegions) {
+  public OccurrencesResult(final String stateId) {
+    super();
     this.stateId = stateId;
-    Iterables.<ITextRegion>addAll(this.readRegions, readRegions);
-    Iterables.<ITextRegion>addAll(this.writeRegions, writeRegions);
   }
   
   @Override
@@ -81,12 +90,12 @@ public class OccurrencesResult implements IServiceResult {
   }
   
   @Pure
-  public ArrayList<ITextRegion> getWriteRegions() {
+  public List<TextRegion> getWriteRegions() {
     return this.writeRegions;
   }
   
   @Pure
-  public ArrayList<ITextRegion> getReadRegions() {
+  public List<TextRegion> getReadRegions() {
     return this.readRegions;
   }
 }

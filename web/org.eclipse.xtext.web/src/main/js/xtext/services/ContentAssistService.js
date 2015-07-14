@@ -46,15 +46,14 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 		} else {
 			serverData.requiredStateId = knownServerState.stateId;
 			if (this._updateService) {
-				if (knownServerState.text === undefined
-						|| editorContext.getClientServiceState().update == 'started') {
+				if (knownServerState.text === undefined || knownServerState.updateInProgress) {
 					var self = this;
 					this._updateService.addCompletionCallback(function() {
 						self.computeContentAssist(editorContext, params, deferred);
 					});
 					return deferred.promise();
 				}
-				editorContext.getClientServiceState().update = 'started';
+				knownServerState.updateInProgress = true;
 				onComplete = this._updateService.onComplete.bind(this._updateService);
 				currentText = editorContext.getText();
 				this._updateService.computeDelta(knownServerState.text, currentText, serverData);
@@ -73,44 +72,61 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 				if (result.conflict) {
 					// The server has lost its session state and the resource is loaded from the server
 					if (self._increaseRecursionCount(editorContext)) {
-						params.sendFullText = true;
-						self.computeContentAssist(editorContext, params, deferred);
+						if (onComplete) {
+							delete knownServerState.updateInProgress;
+							delete knownServerState.text;
+							delete knownServerState.stateId;
+							self._updateService.addCompletionCallback(function() {
+								self.computeContentAssist(editorContext, params, deferred);
+							});
+							self._updateService.update(editorContext, params);
+						} else {
+							var paramsCopy = {};
+							for (var p in params) {
+								if (params.hasOwnProperty(p))
+									paramsCopy[p] = params[p];
+							}
+							paramsCopy.sendFullText = true;
+							self.computeContentAssist(editorContext, paramsCopy, deferred);
+						}
+						return true;
 					}
+					deferred.reject(result.conflict);
 					return false;
 				}
-				if (onComplete) {
-					if (result.stateId !== undefined && result.stateId != editorContext.getServerState().stateId) {
-						var listeners = editorContext.updateServerState(currentText, result.stateId);
-						for (var i = 0; i < listeners.length; i++) {
-							self._updateService.addCompletionCallback(listeners[i]);
-						}
+				if (onComplete && result.stateId !== undefined && result.stateId != editorContext.getServerState().stateId) {
+					var listeners = editorContext.updateServerState(currentText, result.stateId);
+					for (var i = 0; i < listeners.length; i++) {
+						self._updateService.addCompletionCallback(listeners[i]);
 					}
-					editorContext.getClientServiceState().update = 'finished';
 				}
 				deferred.resolve(result.entries);
 			},
 			
 			error: function(xhr, textStatus, errorThrown) {
-				if (onComplete) {
-					delete editorContext.getClientServiceState().update;
-					if (xhr.status == 404 && !params.loadFromServer && knownServerState.text !== undefined) {
-						// The server has lost its session state and the resource is not loaded from the server
-						delete editorContext.getClientServiceState().assist;
-						delete knownServerState.text;
-						delete knownServerState.stateId;
-						self._updateService.addCompletionCallback(function() {
-							self.computeContentAssist(editorContext, params, deferred);
-						});
-						self._updateService.update(editorContext, params);
-						return true;
-					}
+				if (onComplete && xhr.status == 404 && !params.loadFromServer && knownServerState.text !== undefined) {
+					// The server has lost its session state and the resource is not loaded from the server
+					delete knownServerState.updateInProgress;
+					delete knownServerState.text;
+					delete knownServerState.stateId;
+					self._updateService.addCompletionCallback(function() {
+						self.computeContentAssist(editorContext, params, deferred);
+					});
+					self._updateService.update(editorContext, params);
+					return true;
 				}
 				deferred.reject(errorThrown);
 			},
 			
 			complete: onComplete
 		});
-		return deferred.promise();
+		var result = deferred.promise();
+		if (onComplete) {
+			result.always(function() {
+				knownServerState.updateInProgress = false;
+			});
+		}
+		return result;
 	};
 	
 	return ContentAssistService;

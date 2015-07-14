@@ -26,8 +26,13 @@ public class HoverResult implements IServiceResult {
   
   private final String content;
   
+  public HoverResult(final String stateId) {
+    this.stateId = stateId;
+    this.title = null;
+    this.content = null;
+  }
+  
   public HoverResult(final String stateId, final String title, final String content) {
-    super();
     this.stateId = stateId;
     this.title = title;
     this.content = content;

@@ -26,6 +26,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
+import org.eclipse.xtext.util.Wrapper;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.formatting.FormattingResult;
@@ -51,44 +52,62 @@ public class FormattingService {
   @Inject
   private TextRegionAccessBuilder regionBuilder;
   
+  /**
+   * Format the given document. This operation modifies the document content and returns the
+   */
   public FormattingResult format(final XtextWebDocumentAccess document, final ITextRegion selection) throws InvalidRequestException {
     FormattingResult _xblockexpression = null;
     {
-      final String[] textWrapper = new String[1];
+      final Wrapper<String> textWrapper = new Wrapper<String>();
+      final Wrapper<TextRegion> regionWrapper = new Wrapper<TextRegion>();
       final CancelableUnitOfWork<FormattingResult, IXtextWebDocument> _function = new CancelableUnitOfWork<FormattingResult, IXtextWebDocument>() {
         @Override
         public FormattingResult exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
-          String formattedText = null;
           if ((FormattingService.this.formatter2Provider != null)) {
             XtextResource _resource = it.getResource();
             String _format2 = FormattingService.this.format2(_resource, selection);
-            formattedText = _format2;
+            textWrapper.set(_format2);
+            if ((selection != null)) {
+              int _offset = selection.getOffset();
+              int _length = selection.getLength();
+              TextRegion _textRegion = new TextRegion(_offset, _length);
+              regionWrapper.set(_textRegion);
+            }
           } else {
             if ((FormattingService.this.formatter1 != null)) {
               XtextResource _resource_1 = it.getResource();
-              String _format1 = FormattingService.this.format1(_resource_1, selection);
-              formattedText = _format1;
+              final INodeModelFormatter.IFormattedRegion formattedRegion = FormattingService.this.format1(_resource_1, selection);
+              String _formattedText = formattedRegion.getFormattedText();
+              textWrapper.set(_formattedText);
+              int _offset_1 = formattedRegion.getOffset();
+              int _length_1 = formattedRegion.getLength();
+              TextRegion _textRegion_1 = new TextRegion(_offset_1, _length_1);
+              regionWrapper.set(_textRegion_1);
             } else {
               throw new IllegalStateException("No formatter is available in the language configuration.");
             }
           }
           it.setDirty(true);
           it.createNewStateId();
-          textWrapper[0] = formattedText;
           String _stateId = it.getStateId();
-          return new FormattingResult(_stateId, formattedText, selection);
+          String _get = textWrapper.get();
+          TextRegion _get_1 = regionWrapper.get();
+          return new FormattingResult(_stateId, _get, _get_1);
         }
       };
       final CancelableUnitOfWork<Object, IXtextWebDocument> _function_1 = new CancelableUnitOfWork<Object, IXtextWebDocument>() {
         @Override
         public Object exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
-          if ((selection == null)) {
-            String _get = textWrapper[0];
+          boolean _isEmpty = regionWrapper.isEmpty();
+          if (_isEmpty) {
+            String _get = textWrapper.get();
             it.setText(_get);
           } else {
-            String _get_1 = textWrapper[0];
-            int _offset = selection.getOffset();
-            int _length = selection.getLength();
+            String _get_1 = textWrapper.get();
+            TextRegion _get_2 = regionWrapper.get();
+            int _offset = _get_2.getOffset();
+            TextRegion _get_3 = regionWrapper.get();
+            int _length = _get_3.getLength();
             it.updateText(_get_1, _offset, _length);
           }
           return null;
@@ -99,7 +118,7 @@ public class FormattingService {
     return _xblockexpression;
   }
   
-  protected String format1(final XtextResource resource, final ITextRegion selection) {
+  protected INodeModelFormatter.IFormattedRegion format1(final XtextResource resource, final ITextRegion selection) {
     final IParseResult parseResult = resource.getParseResult();
     if ((parseResult == null)) {
       return null;
@@ -114,8 +133,7 @@ public class FormattingService {
     }
     int _offset_1 = region.getOffset();
     int _length_1 = region.getLength();
-    final INodeModelFormatter.IFormattedRegion formattedRegion = this.formatter1.format(rootNode, _offset_1, _length_1);
-    return formattedRegion.getFormattedText();
+    return this.formatter1.format(rootNode, _offset_1, _length_1);
   }
   
   protected String format2(final XtextResource resource, final ITextRegion selection) {

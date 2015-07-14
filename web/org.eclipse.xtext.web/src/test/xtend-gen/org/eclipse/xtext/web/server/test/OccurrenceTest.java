@@ -1,7 +1,16 @@
+/**
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtext.web.server.test;
 
 import java.util.Collections;
+import java.util.List;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.web.server.occurrences.OccurrencesResult;
@@ -46,8 +55,13 @@ public class OccurrenceTest extends AbstractWebServerTest {
   
   @Test
   public void testNoOccurrenceOnEmptyFile() {
-    OccurrencesResult _occurrences = this.getOccurrences("#");
-    Assert.assertNull(_occurrences);
+    final OccurrencesResult result = this.getOccurrences("#");
+    List<TextRegion> _readRegions = result.getReadRegions();
+    boolean _isEmpty = _readRegions.isEmpty();
+    Assert.assertTrue(_isEmpty);
+    List<TextRegion> _writeRegions = result.getWriteRegions();
+    boolean _isEmpty_1 = _writeRegions.isEmpty();
+    Assert.assertTrue(_isEmpty_1);
   }
   
   @Test
@@ -55,8 +69,13 @@ public class OccurrenceTest extends AbstractWebServerTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("#state foo");
     _builder.newLine();
-    OccurrencesResult _occurrences = this.getOccurrences(_builder);
-    Assert.assertNull(_occurrences);
+    final OccurrencesResult result = this.getOccurrences(_builder);
+    List<TextRegion> _readRegions = result.getReadRegions();
+    boolean _isEmpty = _readRegions.isEmpty();
+    Assert.assertTrue(_isEmpty);
+    List<TextRegion> _writeRegions = result.getWriteRegions();
+    boolean _isEmpty_1 = _writeRegions.isEmpty();
+    Assert.assertTrue(_isEmpty_1);
   }
   
   @Test
@@ -175,6 +194,36 @@ public class OccurrenceTest extends AbstractWebServerTest {
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append(")");
+    _builder_1.newLine();
+    _builder_1.append("]");
+    _builder_1.newLine();
+    this.assertOccurrences(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testSyntaxError() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("state foo");
+    _builder.newLine();
+    _builder.append("end");
+    _builder.newLine();
+    _builder.append("asdf#");
+    _builder.newLine();
+    _builder.append("state bar ");
+    _builder.newLine();
+    _builder.append("end");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("OccurrencesResult [");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("stateId = \"-80000000\"");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("writeRegions = ArrayList ()");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("readRegions = ArrayList ()");
     _builder_1.newLine();
     _builder_1.append("]");
     _builder_1.newLine();

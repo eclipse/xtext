@@ -18,6 +18,7 @@ import org.eclipse.xtext.formatting2.regionaccess.internal.TextSegment
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.ITextRegion
 import org.eclipse.xtext.util.TextRegion
+import org.eclipse.xtext.util.Wrapper
 import org.eclipse.xtext.web.server.InvalidRequestException
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess
 
@@ -35,26 +36,33 @@ class FormattingService {
 	
 	@Inject TextRegionAccessBuilder regionBuilder
 	
+	/**
+	 * Format the given document. This operation modifies the document content and returns the 
+	 */
 	def FormattingResult format(XtextWebDocumentAccess document, ITextRegion selection) throws InvalidRequestException {
-		val textWrapper = ArrayLiterals.<String>newArrayOfSize(1)
+		val textWrapper = new Wrapper<String>
+		val regionWrapper = new Wrapper<TextRegion>
+		
 		document.modify([ it, cancelIndicator |
-			var String formattedText
-			if (formatter2Provider !== null)
-				formattedText = format2(resource, selection)
-			else if (formatter1 !== null)
-				formattedText = format1(resource, selection)
-			else
+			if (formatter2Provider !== null) {
+				textWrapper.set = format2(resource, selection)
+				if (selection !== null)
+					regionWrapper.set = new TextRegion(selection.offset, selection.length)
+			} else if (formatter1 !== null) {
+				val formattedRegion = format1(resource, selection)
+				textWrapper.set = formattedRegion.formattedText
+				regionWrapper.set = new TextRegion(formattedRegion.offset, formattedRegion.length)
+			} else
 				throw new IllegalStateException('No formatter is available in the language configuration.')
 			
 			dirty = true
 			createNewStateId()
-			textWrapper.set(0, formattedText)
-			return new FormattingResult(stateId, formattedText, selection)
+			return new FormattingResult(stateId, textWrapper.get, regionWrapper.get)
 		], [ it, cancelIndicator |
-			if (selection === null)
-				setText(textWrapper.get(0))
+			if (regionWrapper.empty)
+				setText(textWrapper.get)
 			else
-				updateText(textWrapper.get(0), selection.offset, selection.length)
+				updateText(textWrapper.get, regionWrapper.get.offset, regionWrapper.get.length)
 			return null
 		])
 	}
@@ -68,8 +76,7 @@ class FormattingService {
 		if (region === null) {
 			region = new TextRegion(rootNode.offset, rootNode.length)
 		}
-		val formattedRegion = formatter1.format(rootNode, region.offset, region.length)
-		return formattedRegion.formattedText
+		return formatter1.format(rootNode, region.offset, region.length)
 	}
 	
 	protected def format2(XtextResource resource, ITextRegion selection) {

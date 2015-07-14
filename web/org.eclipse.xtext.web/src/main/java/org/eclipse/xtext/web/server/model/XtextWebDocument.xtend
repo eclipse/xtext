@@ -41,9 +41,10 @@ import org.eclipse.xtext.web.server.IServiceResult
 		cachedServiceResults.clear
 	}
 	
-	protected def <T extends IServiceResult> T getCachedServiceResult(AbstractPreComputedService<T> service, CancelIndicator cancelIndicator, boolean logCacheMiss) {
+	protected def <T extends IServiceResult> T getCachedServiceResult(AbstractPrecomputedService<T> service,
+			CancelIndicator cancelIndicator, boolean logCacheMiss) {
 		cachedServiceResults.get(service.class) as T ?: {
-			if(logCacheMiss)
+			if (logCacheMiss)
 				LOG.trace("Cache miss for " + service.class.simpleName)
 			val result = service.compute(this, cancelIndicator)
 			cachedServiceResults.put(service.class, result)
@@ -59,10 +60,10 @@ import org.eclipse.xtext.web.server.IServiceResult
 	}
 	
 	def setInput(XtextResource resource, String resourceId) {
-		clearCachedServiceResults
+		clearCachedServiceResults()
 		this.resource = resource
 		this.resourceId = resourceId
-		refreshText
+		refreshText()
 	}
 	
 	protected def refreshText() {
@@ -74,15 +75,15 @@ import org.eclipse.xtext.web.server.IServiceResult
 	}
 		
 	override setText(String text) {
-		clearCachedServiceResults
+		clearCachedServiceResults()
 		resource.reparse(text)
-		refreshText
+		refreshText()
 	}
 	
 	override updateText(String text, int offset, int replaceLength) {
-		clearCachedServiceResults
+		clearCachedServiceResults()
 		resource.update(offset, replaceLength, text)
-		refreshText
+		refreshText()
 	}
 	
 	override createNewStateId() {

@@ -30,7 +30,6 @@ define(function() {
 		};
 		this._serverStateListeners = [];
 		this._modelChangeListeners = [];
-		this._clientServiceState = {};
 	};
 
 	MockEditorContext.prototype = {
@@ -59,14 +58,6 @@ define(function() {
 		
 		getModelChangeListeners: function() {
 			return this._modelChangeListeners;
-		},
-		
-		getClientServiceState: function() {
-			return this._clientServiceState;
-		},
-		
-		clearClientServiceState: function() {
-			this._clientServiceState = {};
 		},
 		
 		getCaretOffset: function() {

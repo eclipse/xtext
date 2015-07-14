@@ -40,10 +40,7 @@ class ResourcePersistenceService {
 			}
 		])
 		documentAccessFactory.create(document, false).readOnly[ it, cancelIndicator |
-			val result = new ResourceContentResult(text)
-			result.dirty = dirty
-			result.stateId = stateId
-			return result
+			new ResourceContentResult(text, stateId, dirty)
 		]
 	}
 	
@@ -54,10 +51,8 @@ class ResourcePersistenceService {
 			throws InvalidRequestException {
 		try {
 			val document = resourceHandler.get(resourceId)
-			val result = new ResourceContentResult(document.text)
-			result.stateId = document.stateId
 			sessionStore.put(XtextWebDocument -> resourceId, document)
-			return result
+			return new ResourceContentResult(document.text, document.stateId, false)
 		} catch (IOException ioe) {
 			throw new ResourceNotFoundException('The requested resource was not found.', ioe)
 		}

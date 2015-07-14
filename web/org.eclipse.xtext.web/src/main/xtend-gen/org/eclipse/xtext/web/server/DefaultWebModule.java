@@ -27,7 +27,7 @@ public class DefaultWebModule extends AbstractGenericModule {
     return DefaultContentTypeProvider.class;
   }
   
-  public void configureExecutorService2(final Binder binder) {
+  public void configureExecutorServiceWithDocumentLock(final Binder binder) {
     AnnotatedBindingBuilder<ExecutorService> _bind = binder.<ExecutorService>bind(ExecutorService.class);
     Named _named = Names.named("withDocumentLock");
     LinkedBindingBuilder<ExecutorService> _annotatedWith = _bind.annotatedWith(_named);

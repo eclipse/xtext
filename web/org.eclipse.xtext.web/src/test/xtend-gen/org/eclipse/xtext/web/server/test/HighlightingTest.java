@@ -1,12 +1,18 @@
+/**
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtext.web.server.test;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.web.server.hover.HoverResult;
-import org.eclipse.xtext.web.server.syntaxcoloring.HighlightRegion;
 import org.eclipse.xtext.web.server.syntaxcoloring.HighlightingResult;
 import org.eclipse.xtext.web.server.test.AbstractWebServerTest;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -32,7 +38,7 @@ public class HighlightingTest extends AbstractWebServerTest {
     IServiceResult _apply = _service.apply();
     final HighlightingResult result = ((HighlightingResult) _apply);
     int _length = styleClasses.length;
-    ArrayList<HighlightRegion> _regions = result.getRegions();
+    List<HighlightingResult.Region> _regions = result.getRegions();
     int _size = _regions.size();
     Assert.assertEquals(_length, _size);
     int offset = 0;
@@ -45,8 +51,8 @@ public class HighlightingTest extends AbstractWebServerTest {
         offset = (_offset + _length_1);
         String _get_1 = snippets[((2 * i) + 1)];
         final int length = _get_1.length();
-        ArrayList<HighlightRegion> _regions_1 = result.getRegions();
-        final HighlightRegion region = _regions_1.get(i);
+        List<HighlightingResult.Region> _regions_1 = result.getRegions();
+        final HighlightingResult.Region region = _regions_1.get(i);
         Object _get_2 = styleClasses[i];
         String[] _styleClasses = region.getStyleClasses();
         Object _head = IterableExtensions.<Object>head(((Iterable<Object>)Conversions.doWrapArray(_styleClasses)));

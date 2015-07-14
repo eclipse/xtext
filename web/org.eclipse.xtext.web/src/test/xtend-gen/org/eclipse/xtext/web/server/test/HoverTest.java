@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtext.web.server.test;
 
 import java.util.Collections;
@@ -58,7 +65,8 @@ public class HoverTest extends AbstractWebServerTest {
   @Test
   public void testNoHoverOnEmptyFile() {
     HoverResult _hover = this.getHover("#");
-    Assert.assertNull(_hover);
+    String _content = _hover.getContent();
+    Assert.assertNull(_content);
   }
   
   @Test
@@ -156,7 +164,8 @@ public class HoverTest extends AbstractWebServerTest {
     _builder.append("#state foo");
     _builder.newLine();
     HoverResult _hover = this.getHover(_builder);
-    Assert.assertNull(_hover);
+    String _content = _hover.getContent();
+    Assert.assertNull(_content);
   }
   
   @Test
@@ -237,6 +246,7 @@ public class HoverTest extends AbstractWebServerTest {
     _builder.append("end");
     _builder.newLine();
     HoverResult _hover = this.getHover(_builder);
-    Assert.assertNull(_hover);
+    String _content = _hover.getContent();
+    Assert.assertNull(_content);
   }
 }

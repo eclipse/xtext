@@ -264,8 +264,8 @@ define([
 		//---- Update Service
 		
 		function refreshDocument() {
-			editorContext.clearClientServiceState();
 			if (validationService) {
+				validationService.setState(undefined);
 				validationService.computeProblems(editorContext, options).always(function() {
 					var annotations = editorContext._annotations;
 					if (annotations) {

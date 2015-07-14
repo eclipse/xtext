@@ -178,11 +178,14 @@ define([
 		//---- Update Service
 		
 		function refreshDocument() {
-			editorContext.clearClientServiceState();
-			if (highlightingService)
+			if (highlightingService) {
+				highlightingService.setState(undefined);
 				highlightingService.computeHighlighting(editorContext, options);
-			if (validationService)
+			}
+			if (validationService) {
+				validationService.setState(undefined);
 				validationService.computeProblems(editorContext, options);
+			}
 		}
 		var updateService;
 		if (!options.sendFullText) {
