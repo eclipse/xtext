@@ -15,6 +15,9 @@ import com.google.inject.Provider;
 import com.intellij.ProjectTopics;
 import com.intellij.compiler.ModuleCompilerUtil;
 import com.intellij.facet.Facet;
+import com.intellij.facet.FacetType;
+import com.intellij.facet.ProjectWideFacetAdapter;
+import com.intellij.facet.ProjectWideFacetListenersRegistry;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
@@ -29,7 +32,10 @@ import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.progress.ProcessCanceledException;
+import com.intellij.openapi.project.ModuleAdapter;
+import com.intellij.openapi.project.ModuleListener;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.ContentEntry;
 import com.intellij.openapi.roots.ModuleRootAdapter;
 import com.intellij.openapi.roots.ModuleRootEvent;
 import com.intellij.openapi.roots.ModuleRootListener;
@@ -49,6 +55,7 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.impl.PsiModificationTrackerImpl;
 import com.intellij.psi.util.PsiModificationTracker;
 import com.intellij.util.Alarm;
+import com.intellij.util.Function;
 import com.intellij.util.graph.Graph;
 import com.intellij.util.messages.MessageBus;
 import com.intellij.util.messages.MessageBusConnection;
@@ -72,6 +79,7 @@ import org.eclipse.xtext.common.types.descriptions.TypeResourceDescription;
 import org.eclipse.xtext.idea.build.BuildEvent;
 import org.eclipse.xtext.idea.build.BuildProgressReporter;
 import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
+import org.eclipse.xtext.idea.facet.AbstractFacetType;
 import org.eclipse.xtext.idea.facet.FacetProvider;
 import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider;
 import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
@@ -90,6 +98,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -123,10 +132,9 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   private IQualifiedNameConverter qualifiedNameConverter;
   
   @Inject
-  private ChunkedResourceDescriptions chunkedResourceDescriptions;
+  private Provider<ChunkedResourceDescriptions> chunkedResourceDescriptionsProvider;
   
-  @Inject
-  private FacetProvider facetProvider;
+  private ChunkedResourceDescriptions chunkedResourceDescriptions;
   
   private Map<Module, Source2GeneratedMapping> module2GeneratedMapping = CollectionLiterals.<Module, Source2GeneratedMapping>newHashMap();
   
@@ -173,6 +181,8 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     XtextAutoBuilderComponent.TEST_MODE = _isUnitTestMode;
     Injector _injector = IdeaSharedInjectorProvider.getInjector();
     _injector.injectMembers(this);
+    ChunkedResourceDescriptions _get = this.chunkedResourceDescriptionsProvider.get();
+    this.chunkedResourceDescriptions = _get;
     this.project = project;
     Alarm _alarm = new Alarm(Alarm.ThreadToUse.OWN_THREAD, this);
     this.alarm = _alarm;
@@ -236,8 +246,73 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
         XtextAutoBuilderComponent.this.doCleanBuild();
       }
     });
+    connection.<ModuleListener>subscribe(ProjectTopics.MODULES, new ModuleAdapter() {
+      @Override
+      public void moduleAdded(final Project project, final Module module) {
+        XtextAutoBuilderComponent.this.doCleanBuild(module);
+      }
+      
+      @Override
+      public void moduleRemoved(final Project project, final Module module) {
+        String _name = module.getName();
+        XtextAutoBuilderComponent.this.chunkedResourceDescriptions.removeContainer(_name);
+        XtextAutoBuilderComponent.this.module2GeneratedMapping.remove(module);
+      }
+      
+      @Override
+      public void modulesRenamed(final Project project, final List<Module> modules, final Function<Module, String> oldNameProvider) {
+        for (final Module module : modules) {
+          {
+            String _fun = oldNameProvider.fun(module);
+            XtextAutoBuilderComponent.this.chunkedResourceDescriptions.removeContainer(_fun);
+            XtextAutoBuilderComponent.this.module2GeneratedMapping.remove(module);
+            XtextAutoBuilderComponent.this.doCleanBuild(module);
+          }
+        }
+      }
+    });
+    ProjectWideFacetListenersRegistry _instance_2 = ProjectWideFacetListenersRegistry.getInstance(project);
+    _instance_2.registerListener(new ProjectWideFacetAdapter<Facet>() {
+      @Override
+      public void facetAdded(final Facet facet) {
+        boolean _isXtextFacet = XtextAutoBuilderComponent.this.isXtextFacet(facet);
+        boolean _not = (!_isXtextFacet);
+        if (_not) {
+          return;
+        }
+        Module _module = facet.getModule();
+        XtextAutoBuilderComponent.this.doCleanBuild(_module);
+      }
+      
+      @Override
+      public void facetRemoved(final Facet facet) {
+        boolean _isXtextFacet = XtextAutoBuilderComponent.this.isXtextFacet(facet);
+        boolean _not = (!_isXtextFacet);
+        if (_not) {
+          return;
+        }
+        Module _module = facet.getModule();
+        XtextAutoBuilderComponent.this.doCleanBuild(_module);
+      }
+      
+      @Override
+      public void facetConfigurationChanged(final Facet facet) {
+        boolean _isXtextFacet = XtextAutoBuilderComponent.this.isXtextFacet(facet);
+        boolean _not = (!_isXtextFacet);
+        if (_not) {
+          return;
+        }
+        Module _module = facet.getModule();
+        XtextAutoBuilderComponent.this.doCleanBuild(_module);
+      }
+    }, this);
     Alarm _alarm_1 = new Alarm(Alarm.ThreadToUse.OWN_THREAD, project);
     this.alarm = _alarm_1;
+  }
+  
+  protected boolean isXtextFacet(final Facet<?> facet) {
+    final FacetType facetType = facet.getType();
+    return (facetType instanceof AbstractFacetType<?>);
   }
   
   @Override
@@ -245,7 +320,8 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     this.disposed = true;
     this.alarm.cancelAllRequests();
     this.queue.clear();
-    this.chunkedResourceDescriptions = null;
+    ChunkedResourceDescriptions _get = this.chunkedResourceDescriptionsProvider.get();
+    this.chunkedResourceDescriptions = _get;
   }
   
   protected Project getProject() {
@@ -331,9 +407,71 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   }
   
   protected void doCleanBuild() {
+    ChunkedResourceDescriptions _get = this.chunkedResourceDescriptionsProvider.get();
+    this.chunkedResourceDescriptions = _get;
+    Collection<Source2GeneratedMapping> _values = this.module2GeneratedMapping.values();
+    final Function1<Source2GeneratedMapping, Iterable<URI>> _function = new Function1<Source2GeneratedMapping, Iterable<URI>>() {
+      @Override
+      public Iterable<URI> apply(final Source2GeneratedMapping it) {
+        return it.getAllGenerated();
+      }
+    };
+    Iterable<Iterable<URI>> _map = IterableExtensions.<Source2GeneratedMapping, Iterable<URI>>map(_values, _function);
+    Iterable<URI> _flatten = Iterables.<URI>concat(_map);
+    this.safeDeleteUris(_flatten);
     this.module2GeneratedMapping.clear();
     this.queueAllResources();
     this.doRunBuild();
+  }
+  
+  protected void doCleanBuild(final Module module) {
+    String _name = module.getName();
+    this.chunkedResourceDescriptions.removeContainer(_name);
+    final Source2GeneratedMapping before = this.module2GeneratedMapping.remove(module);
+    boolean _notEquals = (!Objects.equal(before, null));
+    if (_notEquals) {
+      Iterable<URI> _allGenerated = before.getAllGenerated();
+      this.safeDeleteUris(_allGenerated);
+    }
+    this.queueAllResources(module);
+    this.doRunBuild();
+  }
+  
+  protected void safeDeleteUris(final Iterable<URI> uris) {
+    final Application app = ApplicationManager.getApplication();
+    final Runnable _function = new Runnable() {
+      @Override
+      public void run() {
+        try {
+          try {
+            XtextAutoBuilderComponent.this.ignoreIncomingEvents = true;
+            for (final URI uri : uris) {
+              VirtualFile _virtualFile = VirtualFileURIUtil.getVirtualFile(uri);
+              if (_virtualFile!=null) {
+                _virtualFile.delete(null);
+              }
+            }
+          } finally {
+            XtextAutoBuilderComponent.this.ignoreIncomingEvents = false;
+          }
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
+        }
+      }
+    };
+    final Runnable runnable = _function;
+    boolean _isDispatchThread = app.isDispatchThread();
+    if (_isDispatchThread) {
+      app.runWriteAction(runnable);
+    } else {
+      final Runnable _function_1 = new Runnable() {
+        @Override
+        public void run() {
+          app.runWriteAction(runnable);
+        }
+      };
+      app.invokeLater(_function_1);
+    }
   }
   
   protected void doRunBuild() {
@@ -388,6 +526,45 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
       _or = _not_1;
     }
     return _or;
+  }
+  
+  protected void queueAllResources(final Module module) {
+    ModuleRootManager _instance = ModuleRootManager.getInstance(module);
+    final ContentEntry[] entries = _instance.getContentEntries();
+    final Function1<ContentEntry, Set<VirtualFile>> _function = new Function1<ContentEntry, Set<VirtualFile>>() {
+      @Override
+      public Set<VirtualFile> apply(final ContentEntry it) {
+        VirtualFile[] _sourceFolderFiles = it.getSourceFolderFiles();
+        return IterableExtensions.<VirtualFile>toSet(((Iterable<VirtualFile>)Conversions.doWrapArray(_sourceFolderFiles)));
+      }
+    };
+    List<Set<VirtualFile>> _map = ListExtensions.<ContentEntry, Set<VirtualFile>>map(((List<ContentEntry>)Conversions.doWrapArray(entries)), _function);
+    Iterable<VirtualFile> _flatten = Iterables.<VirtualFile>concat(_map);
+    for (final VirtualFile root : _flatten) {
+      final Procedure1<VirtualFile> _function_1 = new Procedure1<VirtualFile>() {
+        @Override
+        public void apply(final VirtualFile file) {
+          try {
+            boolean _and = false;
+            boolean _isDirectory = file.isDirectory();
+            boolean _not = (!_isDirectory);
+            if (!_not) {
+              _and = false;
+            } else {
+              boolean _exists = file.exists();
+              _and = _exists;
+            }
+            if (_and) {
+              BuildEvent _buildEvent = new BuildEvent(file, BuildEvent.Type.ADDED);
+              XtextAutoBuilderComponent.this.queue.put(_buildEvent);
+            }
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      this.visitFileTree(root, _function_1);
+    }
   }
   
   protected void queueAllResources() {
@@ -789,6 +966,10 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   @Override
   public String getComponentName() {
     return "Xtext Compiler Component";
+  }
+  
+  public ChunkedResourceDescriptions getIndexState() {
+    return this.chunkedResourceDescriptions;
   }
   
   private final static Logger LOG = Logger.getLogger(XtextAutoBuilderComponent.class);

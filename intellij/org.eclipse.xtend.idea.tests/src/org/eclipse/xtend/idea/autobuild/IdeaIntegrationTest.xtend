@@ -8,15 +8,20 @@
 package org.eclipse.xtend.idea.autobuild
 
 import com.google.common.io.CharStreams
-import com.intellij.openapi.application.Application
+import com.intellij.facet.Facet
+import com.intellij.facet.FacetManager
 import com.intellij.openapi.application.ApplicationManager
 import java.io.InputStreamReader
 import org.eclipse.emf.common.util.URI
+import org.eclipse.xtend.core.idea.facet.XtendFacetType
+import org.eclipse.xtend.core.idea.lang.XtendLanguage
 import org.eclipse.xtend.idea.LightXtendTest
 import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
 import org.junit.ComparisonFailure
+
+import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 
 /**
  */
@@ -36,6 +41,37 @@ class IdeaIntegrationTest extends LightXtendTest {
 		// should be regenerated immediately
 		val regenerated = myFixture.findFileInTempDir('xtend-gen/otherPackage/Foo.java')
 		assertTrue(regenerated.exists)
+	}
+	
+	def void testRemoveAndAddFacet() {
+		val source = myFixture.addFileToProject('otherPackage/Foo.xtend', '''
+			package otherPackage
+			class Foo {
+			}
+		''')
+		var file = myFixture.findFileInTempDir('xtend-gen/otherPackage/Foo.java')
+		assertTrue(file.exists)
+		ApplicationManager.application.runWriteAction [|
+			val mnr = FacetManager.getInstance(myModule)
+			val model = mnr.createModifiableModel
+			val facet = mnr.allFacets.findFirst[Facet<?> it | it.typeId == XtendFacetType.TYPEID]
+			model.removeFacet(facet)
+			model.commit
+			return;
+		]
+		val autoBuilder = project.getComponent(XtextAutoBuilderComponent)
+		assertTrue(autoBuilder.getGeneratedSources(source.virtualFile.URI).empty)
+		assertTrue(autoBuilder.indexState.allResourceDescriptions.empty)
+		file = myFixture.findFileInTempDir('xtend-gen/otherPackage/Foo.java')
+		assertNull(file)
+		
+		// add facet again
+		addFacetToModule(myModule, XtendLanguage.INSTANCE.ID)
+		
+		assertEquals(source.virtualFile.URI, autoBuilder.indexState.allResourceDescriptions.head.URI)
+		assertTrue(autoBuilder.getGeneratedSources(source.virtualFile.URI).exists[toString.endsWith("xtend-gen/otherPackage/Foo.java")])
+		file = myFixture.findFileInTempDir('xtend-gen/otherPackage/Foo.java')
+		assertTrue(file.exists)
 	}
 	
 	def void testJavaDeletionTriggersError() {

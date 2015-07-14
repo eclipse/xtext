@@ -11,6 +11,9 @@ import com.google.inject.Inject
 import com.google.inject.Provider
 import com.intellij.ProjectTopics
 import com.intellij.compiler.ModuleCompilerUtil
+import com.intellij.facet.Facet
+import com.intellij.facet.ProjectWideFacetAdapter
+import com.intellij.facet.ProjectWideFacetListenersRegistry
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.application.ModalityState
@@ -22,6 +25,7 @@ import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.module.ModuleManager
 import com.intellij.openapi.progress.ProcessCanceledException
+import com.intellij.openapi.project.ModuleAdapter
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.roots.ModuleRootAdapter
 import com.intellij.openapi.roots.ModuleRootEvent
@@ -37,8 +41,8 @@ import com.intellij.psi.PsiJavaFile
 import com.intellij.psi.PsiManager
 import com.intellij.psi.impl.PsiModificationTrackerImpl
 import com.intellij.util.Alarm
+import com.intellij.util.Function
 import com.intellij.util.graph.Graph
-import com.intellij.util.messages.MessageBusConnection
 import java.util.ArrayList
 import java.util.HashSet
 import java.util.List
@@ -53,6 +57,7 @@ import org.eclipse.xtext.build.IncrementalBuilder
 import org.eclipse.xtext.build.IndexState
 import org.eclipse.xtext.build.Source2GeneratedMapping
 import org.eclipse.xtext.common.types.descriptions.TypeResourceDescription.ChangedDelta
+import org.eclipse.xtext.idea.facet.AbstractFacetType
 import org.eclipse.xtext.idea.facet.FacetProvider
 import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider
 import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider.VirtualFileBasedUriHandler
@@ -69,7 +74,6 @@ import static org.eclipse.xtext.idea.build.BuildEvent.Type.*
 import static org.eclipse.xtext.idea.build.XtextAutoBuilderComponent.*
 
 import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
-import com.google.common.collect.Iterables
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -94,9 +98,9 @@ import com.google.common.collect.Iterables
 	
 	@Inject IQualifiedNameConverter qualifiedNameConverter
 	
-	@Inject ChunkedResourceDescriptions chunkedResourceDescriptions
+	@Inject Provider<ChunkedResourceDescriptions> chunkedResourceDescriptionsProvider
 	
-	@Inject FacetProvider facetProvider
+	ChunkedResourceDescriptions chunkedResourceDescriptions
 	
 	Map<Module, Source2GeneratedMapping> module2GeneratedMapping = newHashMap()
 	
@@ -112,6 +116,7 @@ import com.google.common.collect.Iterables
 		super(project)
 		TEST_MODE = ApplicationManager.application.isUnitTestMode
 		IdeaSharedInjectorProvider.injector.injectMembers(this)
+		this.chunkedResourceDescriptions = chunkedResourceDescriptionsProvider.get
 		this.project = project
 		alarm = new Alarm(Alarm.ThreadToUse.OWN_THREAD, this)
 		disposed = false
@@ -150,7 +155,8 @@ import com.google.common.collect.Iterables
 			}
 		}, project)
 		
-		val MessageBusConnection connection = project.getMessageBus().connect(project);
+		
+		val connection = project.getMessageBus().connect(project);
          connection.subscribe(ProjectTopics.PROJECT_ROOTS, new ModuleRootAdapter() {
 										
 			override rootsChanged(ModuleRootEvent event) {
@@ -158,15 +164,63 @@ import com.google.common.collect.Iterables
 			}
          	
          });
+         
+         connection.subscribe(ProjectTopics.MODULES, new ModuleAdapter() {
+			
+			override moduleAdded(Project project, Module module) {
+				doCleanBuild(module)
+			}
+			
+			override moduleRemoved(Project project, Module module) {
+				chunkedResourceDescriptions.removeContainer(module.name)
+				module2GeneratedMapping.remove(module)
+			}
+			
+			override modulesRenamed(Project project, List<Module> modules, Function<Module, String> oldNameProvider) {
+				for (module : modules) {
+					chunkedResourceDescriptions.removeContainer(oldNameProvider.fun(module))
+					module2GeneratedMapping.remove(module)
+					doCleanBuild(module)
+				}
+			}
+			
+		})
+		
+		ProjectWideFacetListenersRegistry.getInstance(project).registerListener(new ProjectWideFacetAdapter<Facet>() {
+			
+			override facetAdded(Facet facet) {
+				if (!isXtextFacet(facet)) 
+					return;
+				doCleanBuild(facet.module)
+			}
+			
+			override facetRemoved(Facet facet) {
+				if (!isXtextFacet(facet)) 
+					return;
+				doCleanBuild(facet.module)
+			}
+			
+			override facetConfigurationChanged(Facet facet) {
+				if (!isXtextFacet(facet)) 
+					return;
+				doCleanBuild(facet.module)
+			}
+			
+		}, this)
 		
 		alarm = new Alarm(Alarm.ThreadToUse.OWN_THREAD, project)
+	}
+	
+	protected def boolean isXtextFacet(Facet<?> facet) {
+		val facetType = facet.type
+		return facetType instanceof AbstractFacetType<?>
 	}
 	
 	override dispose() {
 		disposed = true
 		alarm.cancelAllRequests
 		queue.clear
-		chunkedResourceDescriptions = null
+		chunkedResourceDescriptions = chunkedResourceDescriptionsProvider.get
 	}
 	
 	protected def getProject() {
@@ -212,9 +266,40 @@ import com.google.common.collect.Iterables
 	}
 	
 	protected def doCleanBuild() {
+		chunkedResourceDescriptions = chunkedResourceDescriptionsProvider.get
+		safeDeleteUris(module2GeneratedMapping.values.map[allGenerated].flatten)
 		module2GeneratedMapping.clear
 		queueAllResources
 		doRunBuild
+	}
+	
+	protected def doCleanBuild(Module module) {
+		chunkedResourceDescriptions.removeContainer(module.name)
+		val before = module2GeneratedMapping.remove(module)
+		if (before != null) {
+			safeDeleteUris(before.allGenerated)
+		}
+		queueAllResources(module)
+		doRunBuild
+	}
+	
+	protected def void safeDeleteUris(Iterable<URI> uris) {
+		val app = ApplicationManager.application
+		val Runnable runnable = [
+			try {
+				ignoreIncomingEvents = true
+				for (uri : uris) {
+					uri.virtualFile?.delete(null)
+				}
+			} finally {
+				ignoreIncomingEvents = false
+			}
+		]
+		if (app.isDispatchThread) {
+			app.runWriteAction(runnable)
+		} else {
+			app.invokeLater[app.runWriteAction(runnable)]
+		}
 	}
 	
 	protected def doRunBuild() {
@@ -239,6 +324,17 @@ import com.google.common.collect.Iterables
 	
 	protected def boolean isLoaded() {
 		return !chunkedResourceDescriptions.isEmpty || !queue.isEmpty
+	}
+	
+	protected def queueAllResources(Module module) {
+		val entries = ModuleRootManager.getInstance(module).contentEntries
+		for (root :  entries.map[sourceFolderFiles.toSet].flatten) {
+			root.visitFileTree[ file |
+				if (!file.isDirectory && file.exists) {
+					queue.put(new BuildEvent(file, BuildEvent.Type.ADDED))
+				}
+			]
+		}
 	}
 	
 	protected def queueAllResources() {
@@ -447,4 +543,7 @@ import com.google.common.collect.Iterables
 		return "Xtext Compiler Component"
 	}
 	
+	def ChunkedResourceDescriptions getIndexState() {
+		return chunkedResourceDescriptions
+	}
 }

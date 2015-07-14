@@ -113,6 +113,10 @@ public class ChunkedResourceDescriptions extends AbstractCompoundSelectable impl
     return this.chunk2resourceDescriptions.put(name, descriptions);
   }
   
+  public ResourceDescriptionsData removeContainer(final String name) {
+    return this.chunk2resourceDescriptions.remove(name);
+  }
+  
   @Override
   protected Iterable<? extends ISelectable> getSelectables() {
     return this.chunk2resourceDescriptions.values();
