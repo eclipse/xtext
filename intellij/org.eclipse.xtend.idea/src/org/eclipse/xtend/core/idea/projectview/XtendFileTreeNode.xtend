@@ -7,23 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.idea.projectview
 
-import com.google.inject.Inject
 import com.intellij.ide.projectView.ViewSettings
-import com.intellij.ide.projectView.impl.nodes.ClassTreeNode
 import com.intellij.ide.projectView.impl.nodes.PsiFileNode
-import com.intellij.ide.util.treeView.AbstractTreeNode
 import com.intellij.openapi.project.Project
 import org.eclipse.xtend.core.idea.lang.XtendLanguage
 import org.eclipse.xtend.core.idea.lang.psi.impl.XtendFileImpl
-import org.eclipse.xtext.idea.common.types.JvmPsiClasses
 
 /**
  * @author kosyakov - Initial contribution and API
  */
 class XtendFileTreeNode extends PsiFileNode {
-
-	@Inject
-	extension JvmPsiClasses
 
 	new(Project project, XtendFileImpl value, ViewSettings viewSettings) {
 		super(project, value, viewSettings)
@@ -35,10 +28,7 @@ class XtendFileTreeNode extends PsiFileNode {
 	}
 
 	override getChildrenImpl() {
-		val viewSettings = settings
-		xtendFile.psiClasses.map [ psiClass |
-			new ClassTreeNode(project, psiClass, viewSettings)
-		].filter(AbstractTreeNode).toList
+		#[]
 	}
 
 }
