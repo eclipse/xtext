@@ -59,11 +59,14 @@ public class SemanticHighlightVisitor implements HighlightVisitor {
         final Procedure1<String> _function = new Procedure1<String>() {
           @Override
           public void apply(final String it) {
-            HighlightInfoType _highlightInfoType = SemanticHighlightVisitor.this._ideaHighlightingAttributesProvider.getHighlightInfoType(it);
-            HighlightInfo.Builder _newHighlightInfo = HighlightInfo.newHighlightInfo(_highlightInfoType);
-            HighlightInfo.Builder _range = _newHighlightInfo.range(offset, (offset + length));
-            final HighlightInfo info = _range.create();
-            holder.add(info);
+            if ((length > 0)) {
+              HighlightInfoType _highlightInfoType = SemanticHighlightVisitor.this._ideaHighlightingAttributesProvider.getHighlightInfoType(it);
+              HighlightInfo.Builder _newHighlightInfo = HighlightInfo.newHighlightInfo(_highlightInfoType);
+              HighlightInfo.Builder _range = _newHighlightInfo.range(offset, (offset + length));
+              HighlightInfo.Builder _description = _range.description(it);
+              final HighlightInfo info = _description.create();
+              holder.add(info);
+            }
           }
         };
         IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(styles)), _function);

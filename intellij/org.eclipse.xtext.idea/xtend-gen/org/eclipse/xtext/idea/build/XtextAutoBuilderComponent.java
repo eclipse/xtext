@@ -88,6 +88,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -128,6 +129,42 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   private FacetProvider facetProvider;
   
   private Map<Module, Source2GeneratedMapping> module2GeneratedMapping = CollectionLiterals.<Module, Source2GeneratedMapping>newHashMap();
+  
+  public Iterable<URI> getGeneratedSources(final URI source) {
+    Collection<Source2GeneratedMapping> _values = this.module2GeneratedMapping.values();
+    final Function1<Source2GeneratedMapping, Iterable<URI>> _function = new Function1<Source2GeneratedMapping, Iterable<URI>>() {
+      @Override
+      public Iterable<URI> apply(final Source2GeneratedMapping it) {
+        return it.getGenerated(source);
+      }
+    };
+    Iterable<Iterable<URI>> _map = IterableExtensions.<Source2GeneratedMapping, Iterable<URI>>map(_values, _function);
+    final Function2<Iterable<URI>, Iterable<URI>, Iterable<URI>> _function_1 = new Function2<Iterable<URI>, Iterable<URI>, Iterable<URI>>() {
+      @Override
+      public Iterable<URI> apply(final Iterable<URI> $0, final Iterable<URI> $1) {
+        return Iterables.<URI>concat($0, $1);
+      }
+    };
+    return IterableExtensions.<Iterable<URI>>reduce(_map, _function_1);
+  }
+  
+  public Iterable<URI> getSource4GeneratedSource(final URI generated) {
+    Collection<Source2GeneratedMapping> _values = this.module2GeneratedMapping.values();
+    final Function1<Source2GeneratedMapping, Iterable<URI>> _function = new Function1<Source2GeneratedMapping, Iterable<URI>>() {
+      @Override
+      public Iterable<URI> apply(final Source2GeneratedMapping it) {
+        return it.getSource(generated);
+      }
+    };
+    Iterable<Iterable<URI>> _map = IterableExtensions.<Source2GeneratedMapping, Iterable<URI>>map(_values, _function);
+    final Function2<Iterable<URI>, Iterable<URI>, Iterable<URI>> _function_1 = new Function2<Iterable<URI>, Iterable<URI>, Iterable<URI>>() {
+      @Override
+      public Iterable<URI> apply(final Iterable<URI> $0, final Iterable<URI> $1) {
+        return Iterables.<URI>concat($0, $1);
+      }
+    };
+    return IterableExtensions.<Iterable<URI>>reduce(_map, _function_1);
+  }
   
   public XtextAutoBuilderComponent(final Project project) {
     super(project);

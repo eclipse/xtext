@@ -74,6 +74,11 @@ class AntlrDelegatingIdeaLexer extends LexerBase {
 	override int getBufferEnd() {
 		endOffset
 	}
+	
+	def getCurrentToken() {
+		locateToken()
+		token
+	}
 
 	def void locateToken() {
 		if (token == null) {

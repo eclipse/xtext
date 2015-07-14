@@ -69,6 +69,7 @@ import static org.eclipse.xtext.idea.build.BuildEvent.Type.*
 import static org.eclipse.xtext.idea.build.XtextAutoBuilderComponent.*
 
 import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
+import com.google.common.collect.Iterables
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -97,7 +98,15 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	
 	@Inject FacetProvider facetProvider
 	
-	Map<Module, Source2GeneratedMapping> module2GeneratedMapping = newHashMap() 
+	Map<Module, Source2GeneratedMapping> module2GeneratedMapping = newHashMap()
+	
+	def Iterable<URI> getGeneratedSources(URI source) {
+		return module2GeneratedMapping.values.map[getGenerated(source)].reduce[$0 + $1]
+	}
+	
+	def Iterable<URI> getSource4GeneratedSource(URI generated) {
+		return module2GeneratedMapping.values.map[getSource(generated)].reduce[$0 + $1]
+	}
 	
 	new(Project project) {
 		super(project)
