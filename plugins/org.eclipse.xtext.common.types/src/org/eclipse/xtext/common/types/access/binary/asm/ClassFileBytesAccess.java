@@ -30,6 +30,8 @@ public class ClassFileBytesAccess {
 	 * A map of binary class names to the struct of information.
 	 */
 	private final Map<String, byte[]> cache;
+	
+	private final byte[] notAvailable = new byte[0];
 
 	public ClassFileBytesAccess() {
 		this.cache = createCache();
@@ -48,10 +50,10 @@ public class ClassFileBytesAccess {
 		Map<String, byte[]> cache = getCache();
 		byte[] result = cache.get(className);
 		if (result != null) {
-			return result;
+			return result != notAvailable ? result : null;
 		}
 		result = clazz.getBytes();
-		cache.put(className, result);
+		cache.put(className, result != null ? result : notAvailable);
 		return result;
 	}
 	

@@ -53,7 +53,7 @@ public class CreateJar implements IWorkflowComponent {
 			try {
 				String packagePathInJar = packagePath + "/";
 				for(File classFile: binDirectory.listFiles()) {
-					if (classFile.isFile() && classFile.getName().endsWith(".class")) {
+					if (classFile.isFile() && classFile.getName().endsWith(".class") && !classFile.getName().endsWith("$RemoveMe.class")) {
 						addToJar(packagePathInJar, classFile, outputStream);
 					}
 				}

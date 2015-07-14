@@ -60,11 +60,15 @@ public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
 	}
 
 	protected ClasspathTypeProvider createTypeProvider() {
-		return new ClasspathTypeProvider(getClass().getClassLoader(), resourceSet, indexedJvmTypeAccess);
+		return new ClasspathTypeProvider(getClass().getClassLoader(), resourceSet, indexedJvmTypeAccess, null);
 	}
 
 	protected ResourceSet getResourceSet() {
 		return resourceSet;
+	}
+	
+	protected IndexedJvmTypeAccess getIndexedJvmTypeAccess() {
+		return indexedJvmTypeAccess;
 	}
 
 	@After
