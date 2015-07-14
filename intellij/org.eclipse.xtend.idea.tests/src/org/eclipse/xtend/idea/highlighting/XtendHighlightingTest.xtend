@@ -9,35 +9,142 @@ package org.eclipse.xtend.idea.highlighting
 
 import org.eclipse.xtend.idea.LightXtendTest
 
+import static org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles.*
+
 class XtendHighlightingTest extends LightXtendTest {
+	
+	static val Q3 = "'''"
+	static val GL = '«'
+	static val GR = '»'
+	
 	def testKeyWord() {
-		configureByText('''public''')
+		configureByText('public')
 		assertHighlights(
 			'''
-				0-6:[java.awt.Color[r=0,g=0,b=128],null,1,BOXED,null,null]
+				0-6:«KEYWORD_ID»
 			'''
 		)
 	}
 	
 	def testStringLiteral() {
-		configureByText('''"Foo"''')
+		configureByText('"Foo"')
 		assertHighlights('''
-			0-5:[java.awt.Color[r=0,g=128,b=0],null,1,BOXED,null,null]
+			0-5:«STRING_ID»
 		''')
 	}
 	
 	def testNumberLiteral() {
-		configureByText("5")
+		configureByText('5')
 		assertHighlights('''
-			0-1:[java.awt.Color[r=0,g=0,b=255],null,0,BOXED,null,null]
+			0-1:«NUMBER_ID»
 		''')
 		
 	}
 	
-	def testComment() {
+	def testSlComment() {
 		configureByText("//comment")
 		assertHighlights('''
-			0-9:[java.awt.Color[r=128,g=128,b=128],null,2,BOXED,null,null]
+			0-9:«COMMENT_ID»
+		''')
+	}
+	
+	def testMlComment() {
+		configureByText('''
+			/* 
+			 * comment
+			 */''')
+		assertHighlights('''
+			0-18:«COMMENT_ID»
+		''')
+	}
+
+	def testRichString_0() {
+		configureByText('''
+			class Foo {
+				def foo() «Q3»
+					this is a template
+				«Q3»
+			}
+		''')
+		assertHighlights('''
+			0-5:keyword
+			10-11:punctuation
+			13-16:keyword
+			20-21:punctuation
+			21-22:punctuation
+			23-52:xtend.richText
+			53-54:punctuation
+		''')
+	}
+	
+	def testRichString_1() {
+		configureByText('''
+			class Foo {
+				def foo() «Q3»
+					this is a «GL»'foo'«GR» template
+				«Q3»
+			}
+		''')
+		assertHighlights('''
+			0-5:keyword
+			10-11:punctuation
+			13-16:keyword
+			20-21:punctuation
+			21-22:punctuation
+			23-39:xtend.richText
+			39-40:xtend.richText.delimiter
+			40-45:string
+			45-46:xtend.richText.delimiter
+			46-60:xtend.richText
+			61-62:punctuation
+		''')
+	}
+	
+	def testRichString_2() {
+		configureByText('''
+			class Foo {
+				def foo() «Q3»
+					this is a «GL»'foo'«GR» template
+					this is a «GL»'bar'«GR» template
+				«Q3»
+			}
+		''')
+		assertHighlights('''
+			0-5:keyword
+			10-11:punctuation
+			13-16:keyword
+			20-21:punctuation
+			21-22:punctuation
+			23-39:xtend.richText
+			39-40:xtend.richText.delimiter
+			40-45:string
+			45-46:xtend.richText.delimiter
+			46-68:xtend.richText
+			68-69:xtend.richText.delimiter
+			69-74:string
+			74-75:xtend.richText.delimiter
+			75-89:xtend.richText
+			90-91:punctuation
+		''')
+	}
+	
+	def testRichString_3() {
+		configureByText('''
+			class Foo {
+				def foo() «Q3»
+					this is a template«GL»«GL»«GL» comment
+				«Q3»
+			}
+		''')
+		assertHighlights('''
+			0-5:keyword
+			10-11:punctuation
+			13-16:keyword
+			20-21:punctuation
+			21-22:punctuation
+			23-47:xtend.richText
+			47-50:xtend.richText.delimiter
+			64-65:punctuation
 		''')
 	}
 }

@@ -8,6 +8,7 @@
 package org.eclipse.xtext.idea.tests;
 
 import com.google.common.base.Objects;
+import com.google.inject.Inject;
 import com.intellij.codeInsight.CodeInsightSettings;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.facet.Facet;
@@ -26,7 +27,6 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.editor.highlighter.EditorHighlighter;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
-import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleType;
@@ -40,6 +40,7 @@ import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.pom.java.LanguageLevel;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.testFramework.LightProjectDescriptor;
 import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
@@ -50,11 +51,15 @@ import javax.swing.JTree;
 import junit.framework.TestCase;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
 import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
+import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.junit4.internal.LineDelimiters;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -63,6 +68,14 @@ import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class LightToolingTest extends LightCodeInsightFixtureTestCase {
+  @Inject
+  @Extension
+  private TokenTypeProvider tokenTypeProvider;
+  
+  @Inject
+  @Extension
+  private AbstractAntlrTokenToAttributeIdMapper tokenToAttributeIdMapper;
+  
   @Accessors
   private final LanguageFileType fileType;
   
@@ -208,28 +221,38 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
       while ((!highlights.atEnd())) {
         {
           final int start = highlights.getStart();
-          final TextAttributes textAttributes = highlights.getTextAttributes();
+          final IElementType tokenType = highlights.getTokenType();
           int end = highlights.getEnd();
-          while (((!highlights.atEnd()) && Objects.equal(highlights.getTextAttributes(), textAttributes))) {
+          while (((!highlights.atEnd()) && Objects.equal(highlights.getTokenType(), tokenType))) {
             {
               int _end = highlights.getEnd();
               end = _end;
               highlights.advance();
             }
           }
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append(start, "");
-          _builder.append("-");
-          _builder.append(end, "");
-          _builder.append(":");
-          _builder.append(textAttributes, "");
-          compactHighlights.append(_builder);
-          compactHighlights.append("\n");
+          String _xtextStyle = this.getXtextStyle(tokenType);
+          boolean _notEquals = (!Objects.equal(_xtextStyle, HighlightingStyles.DEFAULT_ID));
+          if (_notEquals) {
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append(start, "");
+            _builder.append("-");
+            _builder.append(end, "");
+            _builder.append(":");
+            String _xtextStyle_1 = this.getXtextStyle(tokenType);
+            _builder.append(_xtextStyle_1, "");
+            compactHighlights.append(_builder);
+            compactHighlights.append("\n");
+          }
         }
       }
       _xblockexpression = compactHighlights.toString();
     }
     return _xblockexpression;
+  }
+  
+  protected String getXtextStyle(final IElementType tokenType) {
+    int _antlrType = this.tokenTypeProvider.getAntlrType(tokenType);
+    return this.tokenToAttributeIdMapper.getId(_antlrType);
   }
   
   protected BaseXtextFile getXtextFile() {

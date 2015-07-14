@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.idea;
 import org.eclipse.xtend.core.idea.editorActions.XtendAutoEditBlockProvider;
 import org.eclipse.xtend.core.idea.editorActions.XtendTokenSetProvider;
 import org.eclipse.xtend.core.idea.highlighting.XtendHighlightingConfiguration;
+import org.eclipse.xtend.core.idea.highlighting.XtendSyntaxHighlighter;
 import org.eclipse.xtend.core.idea.macro.IdeaFileSystemSupport;
 import org.eclipse.xtend.core.idea.macro.IdeaProcessorProvider;
 import org.eclipse.xtend.core.idea.presentation.XtendItemPresentationProvider;
@@ -23,16 +24,18 @@ import org.eclipse.xtend.ide.common.contentassist.antlr.FlexerBasedContentAssist
 import org.eclipse.xtend.ide.common.contentassist.antlr.FlexerBasedContentAssistParser;
 import org.eclipse.xtend.ide.common.contentassist.antlr.internal.InternalXtendLexer;
 import org.eclipse.xtend.ide.common.editor.bracketmatching.XtendBracePairProvider;
+import org.eclipse.xtend.ide.common.highlighting.XtendAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtend.ide.common.highlighting.XtendHighlightingCalculator;
 import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.idea.editorActions.AutoEditBlockProvider;
 import org.eclipse.xtext.idea.editorActions.TokenSetProvider;
 import org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration;
-import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.idea.presentation.ItemPresentationProvider;
 import org.eclipse.xtext.idea.structureview.XtextFileAwareStructureViewBuilder;
 import org.eclipse.xtext.linking.ILinker;
@@ -42,6 +45,7 @@ import org.eclipse.xtext.service.SingletonBinding;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
+import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.util.Key;
 import com.intellij.psi.util.PsiModificationTracker;
 
@@ -111,6 +115,12 @@ public class XtendIdeaModule extends AbstractXtendIdeaModule {
 		return XtendAutoEditBlockProvider.class;
 	}
 
+	@Override
+	@SingletonBinding
+	public Class<? extends SyntaxHighlighter> bindSyntaxHighlighter() {
+		return XtendSyntaxHighlighter.class;
+	}
+
 	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
 		return XtendHighlightingCalculator.class;
 	}
@@ -118,5 +128,10 @@ public class XtendIdeaModule extends AbstractXtendIdeaModule {
 	@Override
 	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
 		return XtendHighlightingConfiguration.class;
+	}
+	
+	@Override
+	public Class<? extends AbstractAntlrTokenToAttributeIdMapper> bindAbstractAntlrTokenToAttributeIdMapper() {
+		return XtendAntlrTokenToAttributeIdMapper.class;
 	}
 }

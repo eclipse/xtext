@@ -8,7 +8,8 @@ Bundle-SymbolicName: org.eclipse.xtend.ide.common
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtend.core,
  org.eclipse.xtext.ide;visibility:=reexport,
- org.eclipse.xtext.xbase.ide
+ org.eclipse.xtext.xbase.ide,
+ org.antlr.runtime
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtend.ide.common.contentassist.antlr;x-friends:="org.eclipse.xtend.ide",
  org.eclipse.xtend.ide.common.contentassist.antlr.internal;x-friends:="org.eclipse.xtend.ide",
