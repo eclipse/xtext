@@ -39,7 +39,7 @@ public class JarClasspathTypeProviderTest extends ClasspathTypeProviderTest {
 			public void run() {
 				String typeName = Bug470767.class.getName();
 				JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
-				assertTrue(Iterables.isEmpty(type.getAllNestedTypes()));
+				assertEquals(1, Iterables.size(type.getAllNestedTypes()));
 			}
 			
 		}).assertNoLogEntries();
