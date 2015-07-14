@@ -454,4 +454,12 @@ class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwner {
 	@Test def void testMergeMultiType_04() {
 		merge('AbstractStringBuilder'->OUT->INVARIANT, 'java.io.Serializable'->OUT->INVARIANT, 'String'->OUT->INVARIANT).to('Object', INVARIANT)
 	}
+	
+	@Test def void testBug470766_01() {
+		merge('void'->OUT->INVARIANT, 'Integer'->OUT->INVARIANT, 'Long'->OUT->INVARIANT).to('Number & Comparable<?>', INVARIANT)
+	}
+	
+	@Test def void testBug470766_02() {
+		merge('String'->OUT->INVARIANT, 'void'->OUT->INVARIANT).to('String', INVARIANT)
+	}
 }

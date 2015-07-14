@@ -14,8 +14,10 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
 /**
+ * The result of a merge operation where different type bound type arguments are incorporated into
+ * a result.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc
  */
 @Data
 @SuppressWarnings("all")
