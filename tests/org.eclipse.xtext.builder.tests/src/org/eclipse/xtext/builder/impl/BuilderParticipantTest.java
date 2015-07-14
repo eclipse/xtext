@@ -37,6 +37,7 @@ import org.eclipse.xtext.builder.tests.DelegatingBuilderParticipant;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.OutputConfigurationProvider;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
@@ -105,7 +106,7 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 		markers = project.getProject().findMarkers(MarkerTypes.ANY_VALIDATION, true, IResource.DEPTH_INFINITE);
 		assertEquals(0, markers.length);
 	}
-
+	
 	@Test
 	public void testGenerateIntoProjectOutputDirectory() throws Exception {
 		IJavaProject project = createJavaProject("testGenerateIntoProjectOutputDirectory");
@@ -373,5 +374,9 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 	protected String getOutputForSourceFolderKey(String sourceFolder) {
 		return BuilderPreferenceAccess.getOutputForSourceFolderKey(new OutputConfiguration(
 				IFileSystemAccess.DEFAULT_OUTPUT), sourceFolder);
+	}
+	
+	protected void waitForBuild() {
+		IResourcesSetupUtil.reallyWaitForAutoBuild();
 	}
 }

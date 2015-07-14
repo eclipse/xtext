@@ -30,7 +30,7 @@ public class Bug355821Test extends AbstractParticipatingBuilderTest {
 	
 	@Test public void testBuildIsInvokedOnlyOnceWhenManifestChanges() throws Exception {
 		IProject fooProject = createPluginProject("Foo");
-		waitForBuild();
+		reallyWaitForAutoBuild();
 		
 		IFile manifestFile = fooProject.getFile("META-INF/MANIFEST.MF");
 		String manifestContent = "Manifest-Version: 1.0\n";
@@ -49,9 +49,7 @@ public class Bug355821Test extends AbstractParticipatingBuilderTest {
 		manifestFile.setContents(new StringInputStream(manifestContent), true, true, monitor());
 		waitForBuild();
 		assertEquals(1, getInvocationCount());
-
 	}
-	
 	
 	@Override
 	public void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
