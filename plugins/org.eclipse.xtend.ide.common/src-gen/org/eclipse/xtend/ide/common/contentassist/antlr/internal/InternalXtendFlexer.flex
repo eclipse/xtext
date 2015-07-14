@@ -48,8 +48,7 @@ ID="^"? ( [:jletter:] | {UNICODE_ESCAPE} ) ( [:jletterdigit:] | {UNICODE_ESCAPE}
 UNICODE_ESCAPE=\\ "u" ( {HEX_DIGIT} ( {HEX_DIGIT} ( {HEX_DIGIT} {HEX_DIGIT}? )? )? )?
 HEX_DIGIT = [0-9A-Fa-f]
 
-ML_COMMENT="/*" ~"*/"
-COMMENT_ERROR_PATTERN="/*" [^*]* ("*"+ [^/*] [^*]*)* "*"?
+ML_COMMENT=("/*" ( [^"*"]* ("*"+ [^"*""/"] )? )* ("*" | "*"+"/")? ) | "/*"
 SL_COMMENT="/""/"[^\r\n]*(\r?\n)?
 
 DIGIT = [0-9]
@@ -188,7 +187,6 @@ RICH_TEXT_FINISH="'"("'"("'")?)?
 
 
 <YYINITIAL> {DECIMAL_ERROR_PATTERN} { return 0; /* antlr <invalid> */ }
-<YYINITIAL> {COMMENT_ERROR_PATTERN} { return 0; /* antlr <invalid> */ }
 
 
 

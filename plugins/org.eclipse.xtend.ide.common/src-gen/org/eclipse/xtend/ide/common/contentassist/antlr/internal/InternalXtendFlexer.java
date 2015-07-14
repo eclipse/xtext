@@ -159,16 +159,16 @@ class InternalXtendFlexer implements org.eclipse.xtend.core.parser.InternalFlexe
     "\1\0\1\11\1\0\1\11\1\12\1\53\1\0\1\54"+
     "\1\55\1\56\1\57\1\60\1\61\1\62\1\63\1\64"+
     "\1\65\1\66\1\67\1\70\6\3\1\71\1\3\1\72"+
-    "\26\3\1\73\1\41\1\37\2\41\1\40\1\0\1\41"+
-    "\6\3\1\74\3\3\1\75\1\52\1\76\1\12\1\77"+
-    "\1\0\1\100\1\101\1\102\1\103\1\3\1\104\15\3"+
-    "\1\105\10\3\1\106\6\3\1\107\1\110\2\3\2\0"+
-    "\1\111\1\0\1\112\1\113\11\3\1\0\1\76\1\114"+
-    "\1\12\1\77\1\115\1\3\1\116\13\3\1\117\5\3"+
+    "\26\3\1\73\1\74\1\37\2\74\1\40\1\0\1\41"+
+    "\6\3\1\75\3\3\1\76\1\52\1\77\1\12\1\100"+
+    "\1\0\1\101\1\102\1\103\1\104\1\3\1\105\15\3"+
+    "\1\106\10\3\1\107\6\3\1\110\1\111\2\3\2\0"+
+    "\1\41\1\0\1\112\1\113\11\3\1\0\1\77\1\114"+
+    "\1\12\1\100\1\115\1\3\1\116\13\3\1\117\5\3"+
     "\1\120\2\3\1\121\17\3\1\122\1\123\1\0\1\52"+
-    "\1\76\1\77\1\124\2\3\1\125\4\3\1\126\5\3"+
+    "\1\77\1\100\1\124\2\3\1\125\4\3\1\126\5\3"+
     "\1\127\2\3\1\130\1\131\10\3\1\132\5\3\1\133"+
-    "\3\3\1\76\1\77\1\134\1\135\1\136\3\3\1\137"+
+    "\3\3\1\77\1\100\1\134\1\135\1\136\3\3\1\137"+
     "\2\3\1\140\1\3\1\141\1\142\1\143\1\144\1\145"+
     "\1\3\1\146\4\3\1\147\4\3\1\150\1\3\1\151"+
     "\7\3\1\152\1\153\6\3\1\154\1\3\1\155\1\3"+
@@ -1156,7 +1156,7 @@ class InternalXtendFlexer implements org.eclipse.xtend.core.parser.InternalFlexe
           { return KW_NumberSign;
           }
         case 127: break;
-        case 66: 
+        case 67: 
           { return KW_FullStopFullStopFullStop;
           }
         case 128: break;
@@ -1168,11 +1168,11 @@ class InternalXtendFlexer implements org.eclipse.xtend.core.parser.InternalFlexe
           { return KW_Package;
           }
         case 130: break;
-        case 62: 
+        case 63: 
           { return RULE_RICH_TEXT;
           }
         case 131: break;
-        case 61: 
+        case 62: 
           { return KW_For;
           }
         case 132: break;
@@ -1184,7 +1184,7 @@ class InternalXtendFlexer implements org.eclipse.xtend.core.parser.InternalFlexe
           { return KW_Solidus;
           }
         case 134: break;
-        case 33: 
+        case 60: 
           { return 0; /* antlr <invalid> */
           }
         case 135: break;
@@ -1220,7 +1220,7 @@ class InternalXtendFlexer implements org.eclipse.xtend.core.parser.InternalFlexe
           { return KW_Else;
           }
         case 143: break;
-        case 69: 
+        case 70: 
           { return KW_Try;
           }
         case 144: break;
@@ -1236,7 +1236,7 @@ class InternalXtendFlexer implements org.eclipse.xtend.core.parser.InternalFlexe
           { return KW_FullStop;
           }
         case 147: break;
-        case 65: 
+        case 66: 
           { return KW_EqualsSignEqualsSignEqualsSign;
           }
         case 148: break;
@@ -1256,7 +1256,7 @@ class InternalXtendFlexer implements org.eclipse.xtend.core.parser.InternalFlexe
           { return RULE_RICH_TEXT_START;
           }
         case 152: break;
-        case 68: 
+        case 69: 
           { return KW_FOR;
           }
         case 153: break;
@@ -1268,7 +1268,7 @@ class InternalXtendFlexer implements org.eclipse.xtend.core.parser.InternalFlexe
           { return KW_Case;
           }
         case 155: break;
-        case 60: 
+        case 61: 
           { return KW_Def;
           }
         case 156: break;
@@ -1312,7 +1312,7 @@ class InternalXtendFlexer implements org.eclipse.xtend.core.parser.InternalFlexe
           { return KW_Public;
           }
         case 166: break;
-        case 67: 
+        case 68: 
           { return KW_FullStopFullStopLessThanSign;
           }
         case 167: break;
@@ -1332,7 +1332,7 @@ class InternalXtendFlexer implements org.eclipse.xtend.core.parser.InternalFlexe
           { return KW_Native;
           }
         case 171: break;
-        case 64: 
+        case 65: 
           { return KW_ExclamationMarkEqualsSignEqualsSign;
           }
         case 172: break;
@@ -1524,7 +1524,7 @@ class InternalXtendFlexer implements org.eclipse.xtend.core.parser.InternalFlexe
           { return KW_Import;
           }
         case 219: break;
-        case 70: 
+        case 71: 
           { return KW_New;
           }
         case 220: break;
@@ -1572,7 +1572,7 @@ class InternalXtendFlexer implements org.eclipse.xtend.core.parser.InternalFlexe
           { return KW_HyphenMinusEqualsSign;
           }
         case 231: break;
-        case 63: 
+        case 64: 
           { return RULE_COMMENT_RICH_TEXT_END;
           }
         case 232: break;
@@ -1584,7 +1584,7 @@ class InternalXtendFlexer implements org.eclipse.xtend.core.parser.InternalFlexe
           { return KW_QuestionMark;
           }
         case 234: break;
-        case 71: 
+        case 72: 
           { return KW_Val;
           }
         case 235: break;
@@ -1609,11 +1609,11 @@ class InternalXtendFlexer implements org.eclipse.xtend.core.parser.InternalFlexe
           }
         case 240: break;
         case 73: 
-          { return RULE_ML_COMMENT;
+          { return KW_Var;
           }
         case 241: break;
-        case 72: 
-          { return KW_Var;
+        case 33: 
+          { return RULE_ML_COMMENT;
           }
         case 242: break;
         default: 
