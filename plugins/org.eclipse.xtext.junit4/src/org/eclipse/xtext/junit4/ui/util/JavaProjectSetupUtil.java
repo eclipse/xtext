@@ -270,7 +270,7 @@ public class JavaProjectSetupUtil {
 		System.arraycopy(classPath, 0, newClassPath, 1, classPath.length);
 		newClassPath[0] = newClassPathEntry;
 		javaProject.setRawClasspath(newClassPath, null);
-		waitForBuild();
+		reallyWaitForAutoBuild();
 	}
 
 	public static IFolder createSubFolder(IProject project, String folderName) throws CoreException {
