@@ -19,19 +19,28 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 public class RichStringPartionIndentationStrategy extends DefaultIndentLineAutoEditStrategy {
   @Override
   public void customizeDocumentCommand(final IDocument d, final DocumentCommand c) {
+    boolean _and = false;
     int _length = c.text.length();
     boolean _greaterThan = (_length > 1);
-    if (_greaterThan) {
+    if (!_greaterThan) {
+      _and = false;
+    } else {
+      String[] _legalLineDelimiters = d.getLegalLineDelimiters();
+      boolean _contains = ((List<String>)Conversions.doWrapArray(_legalLineDelimiters)).contains(c.text);
+      boolean _not = (!_contains);
+      _and = _not;
+    }
+    if (_and) {
       try {
         String lineIndentation = this.getLineIndentation(d, c.offset);
-        String[] _legalLineDelimiters = d.getLegalLineDelimiters();
+        String[] _legalLineDelimiters_1 = d.getLegalLineDelimiters();
         final Function1<String, Integer> _function = new Function1<String, Integer>() {
           @Override
           public Integer apply(final String s) {
             return Integer.valueOf(s.length());
           }
         };
-        List<String> _sortBy = IterableExtensions.<String, Integer>sortBy(((Iterable<String>)Conversions.doWrapArray(_legalLineDelimiters)), _function);
+        List<String> _sortBy = IterableExtensions.<String, Integer>sortBy(((Iterable<String>)Conversions.doWrapArray(_legalLineDelimiters_1)), _function);
         List<String> legalLineDelimiters = ListExtensions.<String>reverseView(_sortBy);
         String _get = legalLineDelimiters.get(0);
         String _quote = Pattern.quote(_get);
