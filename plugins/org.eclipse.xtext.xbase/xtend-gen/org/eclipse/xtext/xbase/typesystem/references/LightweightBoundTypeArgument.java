@@ -16,8 +16,10 @@ import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
 /**
+ * Encapsulates the information that is collected as a type hint to later resolve an
+ * unbound type reference.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc
  */
 @Data
 @SuppressWarnings("all")
