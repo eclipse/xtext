@@ -14,6 +14,7 @@ import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import java.io.ByteArrayInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
@@ -175,8 +176,17 @@ public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
   }
   
   public Reader getContentsAsText(final SourceRelativeURI uri, final Module project) throws IOException {
-    VirtualFileInProject _findVirtualFileInProject = this.findVirtualFileInProject(uri, project);
-    final VirtualFile file = _findVirtualFileInProject.getFile();
+    VirtualFileInProject fileInProject = this.findVirtualFileInProject(uri, project);
+    if ((fileInProject == null)) {
+      String _name = project.getName();
+      String _plus = ("\'" + _name);
+      String _plus_1 = (_plus + "\' (");
+      String _moduleFilePath = project.getModuleFilePath();
+      String _plus_2 = (_plus_1 + _moduleFilePath);
+      final String module = (_plus_2 + ")");
+      throw new FileNotFoundException(((("File \'" + uri) + "\' not found in module ") + module));
+    }
+    final VirtualFile file = fileInProject.getFile();
     String _loadText = VfsUtil.loadText(file);
     return new StringReader(_loadText);
   }

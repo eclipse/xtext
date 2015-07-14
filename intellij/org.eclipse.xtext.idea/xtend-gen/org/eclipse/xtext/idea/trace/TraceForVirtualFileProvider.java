@@ -143,10 +143,11 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
       return CollectionLiterals.<PsiElement>emptyList();
     }
     final TextRange range = element.getTextRange();
-    int _startOffset = range.getStartOffset();
-    int _length = range.getLength();
-    TextRegion _textRegion = new TextRegion(_startOffset, _length);
-    final Iterable<? extends ILocationInVirtualFile> targetLocations = trace.getAllAssociatedLocations(_textRegion);
+    final int offset = element.getTextOffset();
+    int _endOffset = range.getEndOffset();
+    int _minus = (_endOffset - offset);
+    final TextRegion region = new TextRegion(offset, _minus);
+    final Iterable<? extends ILocationInVirtualFile> targetLocations = trace.getAllAssociatedLocations(region);
     final PsiManager mngr = element.getManager();
     final Function1<ILocationInVirtualFile, Boolean> _function = new Function1<ILocationInVirtualFile, Boolean>() {
       @Override
@@ -162,8 +163,11 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
       public PsiElement apply(final ILocationInVirtualFile it) {
         PsiElement _xblockexpression = null;
         {
-          VirtualFileInProject _platformResource = it.getPlatformResource();
-          final VirtualFile targetFile = _platformResource.getFile();
+          final VirtualFileInProject platformResource = it.getPlatformResource();
+          if ((platformResource == null)) {
+            return null;
+          }
+          final VirtualFile targetFile = platformResource.getFile();
           final ITextRegionWithLineInformation textRegion = it.getTextRegion();
           PsiFile _findFile = mngr.findFile(targetFile);
           int _offset = textRegion.getOffset();
