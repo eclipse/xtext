@@ -9,6 +9,12 @@ package org.eclipse.xtend.core.idea.config;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import com.intellij.facet.Facet;
+import com.intellij.facet.FacetConfiguration;
+import com.intellij.facet.FacetManager;
+import com.intellij.facet.FacetType;
+import com.intellij.facet.FacetTypeId;
+import com.intellij.facet.FacetTypeRegistry;
 import com.intellij.framework.addSupport.FrameworkSupportInModuleConfigurable;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ContentEntry;
@@ -19,17 +25,21 @@ import com.intellij.openapi.roots.libraries.Library;
 import com.intellij.openapi.roots.libraries.LibraryTable;
 import com.intellij.openapi.roots.libraries.LibraryTablesRegistrar;
 import com.intellij.openapi.roots.ui.configuration.libraries.CustomLibraryDescription;
-import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.openapi.vfs.LocalFileSystem;
-import com.intellij.openapi.vfs.VfsUtilCore;
-import java.io.File;
+import com.intellij.openapi.vfs.VirtualFile;
 import java.util.List;
 import javax.inject.Provider;
 import javax.swing.JComponent;
 import org.eclipse.xtend.core.idea.config.XtendLibraryDescription;
+import org.eclipse.xtend.core.idea.facet.XtendFacetConfiguration;
+import org.eclipse.xtend.core.idea.lang.XtendLanguage;
+import org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigurationState;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.jetbrains.jps.model.java.JavaSourceRootProperties;
+import org.jetbrains.jps.model.java.JavaSourceRootType;
+import org.jetbrains.jps.model.java.JpsJavaExtensionService;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -41,53 +51,116 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
   
   @Override
   public void addSupport(final Module module, final ModifiableRootModel rootModel, final ModifiableModelsProvider modifiableModelsProvider) {
-    String _moduleFilePath = module.getModuleFilePath();
-    File _file = new File(_moduleFilePath);
-    File _parentFile = _file.getParentFile();
-    final File output = new File(_parentFile, "xtend-gen");
-    String _path = output.getPath();
-    String _systemIndependentName = FileUtil.toSystemIndependentName(_path);
-    final String url = VfsUtilCore.pathToUrl(_systemIndependentName);
     ContentEntry[] _contentEntries = rootModel.getContentEntries();
-    final Function1<ContentEntry, Boolean> _function = new Function1<ContentEntry, Boolean>() {
+    final ContentEntry entry = IterableExtensions.<ContentEntry>head(((Iterable<ContentEntry>)Conversions.doWrapArray(_contentEntries)));
+    SourceFolder[] _sourceFolders = entry.getSourceFolders();
+    final Function1<SourceFolder, Boolean> _function = new Function1<SourceFolder, Boolean>() {
       @Override
-      public Boolean apply(final ContentEntry it) {
-        SourceFolder[] _sourceFolders = it.getSourceFolders();
-        boolean _isEmpty = ((List<SourceFolder>)Conversions.doWrapArray(_sourceFolders)).isEmpty();
-        return Boolean.valueOf((!_isEmpty));
+      public Boolean apply(final SourceFolder it) {
+        boolean _isTestSource = it.isTestSource();
+        return Boolean.valueOf((!_isTestSource));
       }
     };
-    ContentEntry _findFirst = IterableExtensions.<ContentEntry>findFirst(((Iterable<ContentEntry>)Conversions.doWrapArray(_contentEntries)), _function);
-    _findFirst.addSourceFolder(url, false);
-    boolean _and = false;
-    boolean _exists = output.exists();
-    boolean _not = (!_exists);
-    if (!_not) {
-      _and = false;
+    Iterable<SourceFolder> _filter = IterableExtensions.<SourceFolder>filter(((Iterable<SourceFolder>)Conversions.doWrapArray(_sourceFolders)), _function);
+    final SourceFolder mainSrc = IterableExtensions.<SourceFolder>head(_filter);
+    VirtualFile xtendGenMain = null;
+    boolean _notEquals = (!Objects.equal(mainSrc, null));
+    if (_notEquals) {
+      VirtualFile _file = mainSrc.getFile();
+      VirtualFile _parent = _file.getParent();
+      VirtualFile _orCreateDir = this.getOrCreateDir(_parent, "xtend-gen");
+      xtendGenMain = _orCreateDir;
+      JpsJavaExtensionService _instance = JpsJavaExtensionService.getInstance();
+      final JavaSourceRootProperties properties = _instance.createSourceRootProperties("", true);
+      entry.<JavaSourceRootProperties>addSourceFolder(xtendGenMain, JavaSourceRootType.SOURCE, properties);
+    }
+    SourceFolder[] _sourceFolders_1 = entry.getSourceFolders();
+    final Function1<SourceFolder, Boolean> _function_1 = new Function1<SourceFolder, Boolean>() {
+      @Override
+      public Boolean apply(final SourceFolder it) {
+        return Boolean.valueOf(it.isTestSource());
+      }
+    };
+    Iterable<SourceFolder> _filter_1 = IterableExtensions.<SourceFolder>filter(((Iterable<SourceFolder>)Conversions.doWrapArray(_sourceFolders_1)), _function_1);
+    final SourceFolder testSrc = IterableExtensions.<SourceFolder>head(_filter_1);
+    VirtualFile xtendGenTest = null;
+    boolean _notEquals_1 = (!Objects.equal(testSrc, null));
+    if (_notEquals_1) {
+      VirtualFile _file_1 = testSrc.getFile();
+      VirtualFile _parent_1 = _file_1.getParent();
+      VirtualFile _orCreateDir_1 = this.getOrCreateDir(_parent_1, "xtend-gen");
+      xtendGenTest = _orCreateDir_1;
+      JpsJavaExtensionService _instance_1 = JpsJavaExtensionService.getInstance();
+      final JavaSourceRootProperties properties_1 = _instance_1.createSourceRootProperties("", true);
+      entry.<JavaSourceRootProperties>addSourceFolder(xtendGenTest, JavaSourceRootType.TEST_SOURCE, properties_1);
+    }
+    FacetTypeRegistry _instance_2 = FacetTypeRegistry.getInstance();
+    String _iD = XtendLanguage.INSTANCE.getID();
+    final FacetType facetType = _instance_2.findFacetType(_iD);
+    final FacetManager mnr = FacetManager.getInstance(module);
+    Facet _elvis = null;
+    FacetTypeId _id = facetType.getId();
+    String _defaultFacetName = facetType.getDefaultFacetName();
+    Facet _findFacet = mnr.<Facet>findFacet(_id, _defaultFacetName);
+    if (_findFacet != null) {
+      _elvis = _findFacet;
     } else {
-      boolean _mkdirs = output.mkdirs();
-      _and = _mkdirs;
+      FacetManager _instance_3 = FacetManager.getInstance(module);
+      String _defaultFacetName_1 = facetType.getDefaultFacetName();
+      Facet _addFacet = _instance_3.<Facet, FacetConfiguration>addFacet(facetType, _defaultFacetName_1, null);
+      _elvis = _addFacet;
     }
-    if (_and) {
-      LocalFileSystem _instance = LocalFileSystem.getInstance();
-      _instance.refreshAndFindFileByIoFile(output);
+    Facet facet = _elvis;
+    FacetConfiguration _configuration = facet.getConfiguration();
+    final XtendFacetConfiguration conf = ((XtendFacetConfiguration) _configuration);
+    final XbaseGeneratorConfigurationState state = conf.getState();
+    boolean _notEquals_2 = (!Objects.equal(xtendGenMain, null));
+    if (_notEquals_2) {
+      String _canonicalPath = xtendGenMain.getCanonicalPath();
+      state.setOutputDirectory(_canonicalPath);
     }
-    LibraryTablesRegistrar _instance_1 = LibraryTablesRegistrar.getInstance();
-    final LibraryTable libraryTable = _instance_1.getLibraryTable();
+    boolean _notEquals_3 = (!Objects.equal(xtendGenTest, null));
+    if (_notEquals_3) {
+      String _canonicalPath_1 = xtendGenTest.getCanonicalPath();
+      state.setTestOutputDirectory(_canonicalPath_1);
+    }
+    LibraryTablesRegistrar _instance_4 = LibraryTablesRegistrar.getInstance();
+    final LibraryTable libraryTable = _instance_4.getLibraryTable();
     Library library = libraryTable.getLibraryByName(XtendLibraryDescription.XTEND_LIBRARY_NAME);
-    boolean _and_1 = false;
-    boolean _notEquals = (!Objects.equal(library, null));
-    if (!_notEquals) {
-      _and_1 = false;
+    boolean _and = false;
+    boolean _notEquals_4 = (!Objects.equal(library, null));
+    if (!_notEquals_4) {
+      _and = false;
     } else {
       LibraryTable _moduleLibraryTable = rootModel.getModuleLibraryTable();
       Library[] _libraries = _moduleLibraryTable.getLibraries();
       boolean _contains = ((List<Library>)Conversions.doWrapArray(_libraries)).contains(library);
-      boolean _not_1 = (!_contains);
-      _and_1 = _not_1;
+      boolean _not = (!_contains);
+      _and = _not;
     }
-    if (_and_1) {
+    if (_and) {
       rootModel.addLibraryEntry(library);
+    }
+  }
+  
+  private VirtualFile getOrCreateDir(final VirtualFile parent, final String name) {
+    try {
+      VirtualFile[] _children = parent.getChildren();
+      final Function1<VirtualFile, Boolean> _function = new Function1<VirtualFile, Boolean>() {
+        @Override
+        public Boolean apply(final VirtualFile it) {
+          String _name = it.getName();
+          return Boolean.valueOf(Objects.equal(_name, name));
+        }
+      };
+      final VirtualFile existing = IterableExtensions.<VirtualFile>findFirst(((Iterable<VirtualFile>)Conversions.doWrapArray(_children)), _function);
+      boolean _notEquals = (!Objects.equal(existing, null));
+      if (_notEquals) {
+        return existing;
+      }
+      return parent.createChildDirectory(null, name);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   

@@ -265,6 +265,10 @@ import com.google.common.collect.Iterables
 		if (disposed) {
 			return
 		}
+		if (!project.isInitialized) {
+			LOG.info("Project not yet initialized, wait some more")
+			alarm.addRequest([build], 500)
+		}
 		val allEvents = newArrayList
 		queue.drainTo(allEvents)
 		internalBuild(allEvents)
