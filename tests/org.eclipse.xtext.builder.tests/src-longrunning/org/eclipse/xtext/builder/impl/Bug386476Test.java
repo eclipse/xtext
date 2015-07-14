@@ -65,7 +65,7 @@ public class Bug386476Test extends AbstractParticipatingBuilderTest {
 		project.close(monitor());
 		waitForBuild();
 		project.open(monitor());
-		waitForBuild();
+		reallyWaitForAutoBuild();
 	}
 
 	private IFile createSomeBuilderRelatedFile(IProject project) throws CoreException {
