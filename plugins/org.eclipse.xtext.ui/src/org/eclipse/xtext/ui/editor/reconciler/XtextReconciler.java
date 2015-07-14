@@ -78,9 +78,6 @@ public class XtextReconciler extends Job implements IReconciler {
 	private IReconcilingStrategy strategy;
 	private boolean initalProcessDone;
 	
-	@Inject
-	private XtextReconcilerDebugger debugger;
-	
 	@Inject 
 	private OperationCanceledManager canceledManager;
 	
@@ -443,11 +440,6 @@ public class XtextReconciler extends Job implements IReconciler {
 					xtextDocumentReconcileStrategy.setEditor(editor);
 				}
 				strategy.reconcile(replaceRegionToBeProcessed);
-				if (log.isDebugEnabled()) { 
-					debugger.assertModelInSyncWithDocument(replaceRegionToBeProcessed.getDocumentEvents().get(0).getDocument(), 
-							state, replaceRegionToBeProcessed);
-					debugger.assertResouceParsedCorrectly(state, replaceRegionToBeProcessed);
-				}
 			} finally {
 				if (strategy instanceof IReconcilingStrategyExtension) {
 					((IReconcilingStrategyExtension) strategy).setProgressMonitor(null);
