@@ -16,6 +16,7 @@ import org.eclipse.jface.text.hyperlink.IHyperlink
 import org.eclipse.jface.text.hyperlink.MultipleHyperlinkPresenter
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions
+import org.apache.log4j.Logger
 
 /**
  * The MultipleHyperLinkPresenter only shows the hyper link text when more then one hyper link exists.
@@ -31,6 +32,8 @@ import org.eclipse.xtext.xbase.lib.util.ReflectExtensions
  */
 @FinalFieldsConstructor
 class SingleHoverShowingHyperlinkPresenter implements InvocationHandler {
+
+	private static final Logger log = Logger.getLogger(SingleHoverShowingHyperlinkPresenter)
 	
 	extension ReflectExtensions reflect = new ReflectExtensions
 	
@@ -44,21 +47,41 @@ class SingleHoverShowingHyperlinkPresenter implements InvocationHandler {
 	
 	override invoke(Object proxy, Method method, Object[] args) throws Throwable {
 		if (method.name.startsWith('showHyperlinks') && args.length >= 1 && args.get(0) instanceof IHyperlink[]) {
-			val result = method.invoke(delegate, args)
-			val activeHyperlinks = args.get(0) as IHyperlink[]
-			if (activeHyperlinks.length == 1) {
-				val singleHyperlink = activeHyperlinks.get(0)
-				if (SHOW_ALWAYS == singleHyperlink.typeLabel) {
-					val int start= singleHyperlink.getHyperlinkRegion().getOffset();
-					val int end= start + singleHyperlink.getHyperlinkRegion().getLength();
-					delegate.set('fSubjectRegion', new Region(start, end - start))
-					delegate.set('fCursorOffset' , JFaceTextUtil.getOffsetForCursorLocation(delegate.get('fTextViewer')))
-					(delegate.get('fManager') as AbstractInformationControlManager).showInformation
+			val nullsafe = makeNullsafe(args.get(0) as IHyperlink[])
+			if (nullsafe.length > 0) {
+				args.set(0, nullsafe)
+				val result = method.invoke(delegate, args)
+				val activeHyperlinks = nullsafe
+				if (activeHyperlinks.length == 1) {
+					val singleHyperlink = activeHyperlinks.get(0)
+					if (SHOW_ALWAYS == singleHyperlink.typeLabel) {
+						val int start= singleHyperlink.getHyperlinkRegion().getOffset();
+						val int end= start + singleHyperlink.getHyperlinkRegion().getLength();
+						delegate.set('fSubjectRegion', new Region(start, end - start))
+						delegate.set('fCursorOffset' , JFaceTextUtil.getOffsetForCursorLocation(delegate.get('fTextViewer')))
+						(delegate.get('fManager') as AbstractInformationControlManager).showInformation
+					}
 				}
+				return result	
 			}
-			return result
+			return null // showHyperlinks returns void 
 		}
 		return method.invoke(delegate, args)
+	}
+	
+	protected def IHyperlink[] makeNullsafe(IHyperlink[] arr) {
+		if (arr.exists[it === null || it.hyperlinkRegion === null]) {
+			val list = newArrayList
+			arr.forEach[
+				if (it !== null && it.hyperlinkRegion !== null) {
+					list.add(it)
+				} else {
+					log.warn('Filtered invalid hyperlink: '+ it.getClass.name)
+				}
+			]
+			return list.toArray(newArrayOfSize(list.size))
+		}
+		return arr
 	}
 	
 }

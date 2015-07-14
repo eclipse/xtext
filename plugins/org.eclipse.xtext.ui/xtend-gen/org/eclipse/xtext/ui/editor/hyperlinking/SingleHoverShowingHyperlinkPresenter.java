@@ -10,6 +10,8 @@ package org.eclipse.xtext.ui.editor.hyperlinking;
 import com.google.common.base.Objects;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import org.apache.log4j.Logger;
 import org.eclipse.jface.text.AbstractInformationControlManager;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextViewer;
@@ -18,7 +20,12 @@ import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.jface.text.hyperlink.MultipleHyperlinkPresenter;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 
 /**
@@ -36,6 +43,8 @@ import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class SingleHoverShowingHyperlinkPresenter implements InvocationHandler {
+  private final static Logger log = Logger.getLogger(SingleHoverShowingHyperlinkPresenter.class);
+  
   @Extension
   private ReflectExtensions reflect = new ReflectExtensions();
   
@@ -67,33 +76,87 @@ public class SingleHoverShowingHyperlinkPresenter implements InvocationHandler {
       _and = (_get instanceof IHyperlink[]);
     }
     if (_and) {
-      final Object result = method.invoke(this.delegate, args);
       Object _get_1 = args[0];
-      final IHyperlink[] activeHyperlinks = ((IHyperlink[]) _get_1);
-      int _length_1 = activeHyperlinks.length;
-      boolean _equals = (_length_1 == 1);
-      if (_equals) {
-        final IHyperlink singleHyperlink = activeHyperlinks[0];
-        String _typeLabel = singleHyperlink.getTypeLabel();
-        boolean _equals_1 = Objects.equal(SingleHoverShowingHyperlinkPresenter.SHOW_ALWAYS, _typeLabel);
-        if (_equals_1) {
-          IRegion _hyperlinkRegion = singleHyperlink.getHyperlinkRegion();
-          final int start = _hyperlinkRegion.getOffset();
-          IRegion _hyperlinkRegion_1 = singleHyperlink.getHyperlinkRegion();
-          int _length_2 = _hyperlinkRegion_1.getLength();
-          final int end = (start + _length_2);
-          Region _region = new Region(start, (end - start));
-          this.reflect.set(this.delegate, "fSubjectRegion", _region);
-          ITextViewer _get_2 = this.reflect.<ITextViewer>get(this.delegate, "fTextViewer");
-          int _offsetForCursorLocation = JFaceTextUtil.getOffsetForCursorLocation(_get_2);
-          this.reflect.set(this.delegate, "fCursorOffset", Integer.valueOf(_offsetForCursorLocation));
-          Object _get_3 = this.reflect.<Object>get(this.delegate, "fManager");
-          ((AbstractInformationControlManager) _get_3).showInformation();
+      final IHyperlink[] nullsafe = this.makeNullsafe(((IHyperlink[]) _get_1));
+      int _length_1 = nullsafe.length;
+      boolean _greaterThan = (_length_1 > 0);
+      if (_greaterThan) {
+        args[0] = nullsafe;
+        final Object result = method.invoke(this.delegate, args);
+        final IHyperlink[] activeHyperlinks = nullsafe;
+        int _length_2 = activeHyperlinks.length;
+        boolean _equals = (_length_2 == 1);
+        if (_equals) {
+          final IHyperlink singleHyperlink = activeHyperlinks[0];
+          String _typeLabel = singleHyperlink.getTypeLabel();
+          boolean _equals_1 = Objects.equal(SingleHoverShowingHyperlinkPresenter.SHOW_ALWAYS, _typeLabel);
+          if (_equals_1) {
+            IRegion _hyperlinkRegion = singleHyperlink.getHyperlinkRegion();
+            final int start = _hyperlinkRegion.getOffset();
+            IRegion _hyperlinkRegion_1 = singleHyperlink.getHyperlinkRegion();
+            int _length_3 = _hyperlinkRegion_1.getLength();
+            final int end = (start + _length_3);
+            Region _region = new Region(start, (end - start));
+            this.reflect.set(this.delegate, "fSubjectRegion", _region);
+            ITextViewer _get_2 = this.reflect.<ITextViewer>get(this.delegate, "fTextViewer");
+            int _offsetForCursorLocation = JFaceTextUtil.getOffsetForCursorLocation(_get_2);
+            this.reflect.set(this.delegate, "fCursorOffset", Integer.valueOf(_offsetForCursorLocation));
+            Object _get_3 = this.reflect.<Object>get(this.delegate, "fManager");
+            ((AbstractInformationControlManager) _get_3).showInformation();
+          }
         }
+        return result;
       }
-      return result;
+      return null;
     }
     return method.invoke(this.delegate, args);
+  }
+  
+  protected IHyperlink[] makeNullsafe(final IHyperlink[] arr) {
+    final Function1<IHyperlink, Boolean> _function = new Function1<IHyperlink, Boolean>() {
+      @Override
+      public Boolean apply(final IHyperlink it) {
+        boolean _or = false;
+        if ((it == null)) {
+          _or = true;
+        } else {
+          IRegion _hyperlinkRegion = it.getHyperlinkRegion();
+          boolean _tripleEquals = (_hyperlinkRegion == null);
+          _or = _tripleEquals;
+        }
+        return Boolean.valueOf(_or);
+      }
+    };
+    boolean _exists = IterableExtensions.<IHyperlink>exists(((Iterable<IHyperlink>)Conversions.doWrapArray(arr)), _function);
+    if (_exists) {
+      final ArrayList<IHyperlink> list = CollectionLiterals.<IHyperlink>newArrayList();
+      final Procedure1<IHyperlink> _function_1 = new Procedure1<IHyperlink>() {
+        @Override
+        public void apply(final IHyperlink it) {
+          boolean _and = false;
+          if (!(it != null)) {
+            _and = false;
+          } else {
+            IRegion _hyperlinkRegion = it.getHyperlinkRegion();
+            boolean _tripleNotEquals = (_hyperlinkRegion != null);
+            _and = _tripleNotEquals;
+          }
+          if (_and) {
+            list.add(it);
+          } else {
+            Class<? extends IHyperlink> _class = it.getClass();
+            String _name = _class.getName();
+            String _plus = ("Filtered invalid hyperlink: " + _name);
+            SingleHoverShowingHyperlinkPresenter.log.warn(_plus);
+          }
+        }
+      };
+      IterableExtensions.<IHyperlink>forEach(((Iterable<IHyperlink>)Conversions.doWrapArray(arr)), _function_1);
+      int _size = list.size();
+      IHyperlink[] _newArrayOfSize = new IHyperlink[_size];
+      return list.<IHyperlink>toArray(_newArrayOfSize);
+    }
+    return arr;
   }
   
   public SingleHoverShowingHyperlinkPresenter(final MultipleHyperlinkPresenter delegate) {
