@@ -72,7 +72,10 @@ public class BinaryClass {
 		InputStream stream = null;
 		try {
 			stream = classLoader.getResourceAsStream(toClassFile(name));
-			return getInputStreamAsByteArray(stream, -1);
+			if (stream != null) {
+				return getInputStreamAsByteArray(stream, -1);
+			}
+			return null;
 		} catch (IOException e) {
 			throw new IllegalStateException("Cannot read bytes for " + e);
 		} finally {

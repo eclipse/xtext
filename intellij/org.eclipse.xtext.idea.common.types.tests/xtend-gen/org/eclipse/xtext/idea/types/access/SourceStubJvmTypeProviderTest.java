@@ -233,6 +233,10 @@ public class SourceStubJvmTypeProviderTest extends PsiTestCase {
     delegate.testBug456328_02();
   }
   
+  public void testBug470767() {
+    delegate.testBug470767();
+  }
+  
   public void testByteAnnotationValue_01() throws Exception {
     delegate.testByteAnnotationValue_01();
   }
