@@ -88,7 +88,7 @@ class Bug457681Test {
 		''')
 		
 		cleanBuild
-		waitForBuild(new NullProgressMonitor)
+		waitForBuild()
 		assertNoErrorsInWorkspace
 	}
 	
@@ -143,7 +143,7 @@ class Bug457681Test {
 		''')
 		
 		cleanBuild
-		waitForBuild(new NullProgressMonitor)
+		waitForBuild
 		assertNoErrorsInWorkspace
 	}
 	
