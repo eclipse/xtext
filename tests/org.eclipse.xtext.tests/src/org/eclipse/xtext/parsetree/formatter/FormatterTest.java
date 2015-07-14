@@ -3,10 +3,15 @@ package org.eclipse.xtext.parsetree.formatter;
 import java.io.IOException;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.formatting.INodeModelFormatter.IFormattedRegion;
+import org.eclipse.xtext.formatting.INodeModelStreamer;
 import org.eclipse.xtext.formatting.impl.AbstractTokenStream;
+import org.eclipse.xtext.formatting.impl.DefaultNodeModelFormatter;
+import org.eclipse.xtext.formatting.impl.NodeModelStreamer;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -380,6 +385,32 @@ public class FormatterTest extends AbstractXtextTests {
 		final String expected = "test wrappingdt f\nb kw1";
 		assertFormattedPTC(expected, model);
 		assertFormattedNM(expected, model, 0, model.length());
+		assertEqualTokenStreams(model);
+		assertPreserved(model);
+	}
+
+	private static class AccessibleFormatter extends DefaultNodeModelFormatter {
+		void setNodeModelStreamer(INodeModelStreamer streamer) {
+			nodeModelStreamer = streamer;
+		}
+	}
+	
+	private static class BrokenStreamer extends NodeModelStreamer {
+		@Override
+		protected String getFormattedDatatypeValue(ICompositeNode node, AbstractRule rule, String text)
+				throws ValueConverterException {
+			throw new ValueConverterException("", null, null);
+		}
+	}
+	
+	@Test public void testBug471212() throws Exception {
+		String model = "test wrappingdt f\nb kw1";
+		ICompositeNode node = NodeModelUtils.getNode(getModel(model)).getRootNode();
+		AccessibleFormatter formatter = get(AccessibleFormatter.class);
+		formatter.setNodeModelStreamer(get(BrokenStreamer.class));
+		IFormattedRegion region = formatter.format(node, 0, model.length());
+		String actual = region.getFormattedText();
+		assertEquals(model, actual);
 		assertEqualTokenStreams(model);
 		assertPreserved(model);
 	}
