@@ -36,7 +36,7 @@ import org.junit.Assert
 		}
 
 		def assertLogEntry(String... messageParts) {
-			assertNumberOfLogEntries(1, #[])
+			assertNumberOfLogEntries(1, messageParts)
 		}
 
 		def assertLogEntry(Level level, String... messageParts) {
