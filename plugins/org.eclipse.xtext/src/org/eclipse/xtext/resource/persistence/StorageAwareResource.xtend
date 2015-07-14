@@ -38,11 +38,18 @@ class StorageAwareResource extends LazyLinkingResource {
 			if (LOG.isDebugEnabled) {
 				LOG.debug("Loading "+URI+" from storage.")
 			}
-			val in = resourceStorageFacade.getOrCreateResourceStorageLoadable(this);
-			loadFromStorage(in)
-		} else {
-			super.load(options)
+			try {
+				val in = resourceStorageFacade.getOrCreateResourceStorageLoadable(this);
+				loadFromStorage(in)
+				return;
+			} catch(IOException e) {
+				// revert the resource into a clean state
+				contents.clear
+				eAdapters.clear
+				unload
+			}
 		}
+		super.load(options)
 	}
 	
 	def void loadFromStorage(ResourceStorageLoadable storageInputStream) {

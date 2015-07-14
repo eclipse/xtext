@@ -45,31 +45,17 @@ public class ResourceStorageLoadable {
   
   private final boolean storeNodeModel;
   
-  protected void loadIntoResource(final StorageAwareResource resource) {
+  protected void loadIntoResource(final StorageAwareResource resource) throws IOException {
+    boolean _isLoadedFromStorage = resource.isLoadedFromStorage();
+    boolean _not = (!_isLoadedFromStorage);
+    if (_not) {
+      throw new IllegalStateException("Please use StorageAwareResource#load(ResourceStorageLoadable).");
+    }
+    final ZipInputStream zin = new ZipInputStream(this.in);
     try {
-      boolean _isLoadedFromStorage = resource.isLoadedFromStorage();
-      boolean _not = (!_isLoadedFromStorage);
-      if (_not) {
-        throw new IllegalStateException("Please use StorageAwareResource#load(ResourceStorageLoadable).");
-      }
-      final ZipInputStream zin = new ZipInputStream(this.in);
-      try {
-        this.loadEntries(resource, zin);
-      } finally {
-        zin.close();
-      }
-    } catch (final Throwable _t) {
-      if (_t instanceof IOException) {
-        final IOException e = (IOException)_t;
-        URI _uRI = resource.getURI();
-        String _plus = ("Problem loading storage for " + _uRI);
-        String _plus_1 = (_plus + ". Error was:");
-        String _message = e.getMessage();
-        String _plus_2 = (_plus_1 + _message);
-        ResourceStorageLoadable.LOG.error(_plus_2, e);
-      } else {
-        throw Exceptions.sneakyThrow(_t);
-      }
+      this.loadEntries(resource, zin);
+    } finally {
+      zin.close();
     }
   }
   
@@ -77,53 +63,45 @@ public class ResourceStorageLoadable {
    * Load entries from the storage.
    * Overriding methods should first delegate to super before adding their own entries.
    */
-  protected void loadEntries(final StorageAwareResource resource, final ZipInputStream zipIn) {
-    try {
+  protected void loadEntries(final StorageAwareResource resource, final ZipInputStream zipIn) throws IOException {
+    zipIn.getNextEntry();
+    this.readContents(resource, zipIn);
+    zipIn.getNextEntry();
+    this.readResourceDescription(resource, zipIn);
+    if (this.storeNodeModel) {
       zipIn.getNextEntry();
-      this.readContents(resource, zipIn);
-      zipIn.getNextEntry();
-      this.readResourceDescription(resource, zipIn);
-      if (this.storeNodeModel) {
-        zipIn.getNextEntry();
-        this.readNodeModel(resource, zipIn);
+      this.readNodeModel(resource, zipIn);
+    }
+  }
+  
+  protected void readContents(final StorageAwareResource resource, final InputStream inputStream) throws IOException {
+    Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
+    final BinaryResourceImpl.EObjectInputStream in = new BinaryResourceImpl.EObjectInputStream(inputStream, _emptyMap) {
+      @Override
+      public int readCompressedInt() throws IOException {
+        int _xblockexpression = (int) 0;
+        {
+          this.resourceSet = null;
+          _xblockexpression = super.readCompressedInt();
+        }
+        return _xblockexpression;
       }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+      
+      @Override
+      public InternalEObject loadEObject() throws IOException {
+        final InternalEObject result = super.loadEObject();
+        ResourceStorageLoadable.this.handleLoadEObject(result, this);
+        return result;
+      }
+    };
+    in.loadResource(resource);
   }
   
-  protected void readContents(final StorageAwareResource resource, final InputStream inputStream) {
-    try {
-      Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
-      final BinaryResourceImpl.EObjectInputStream in = new BinaryResourceImpl.EObjectInputStream(inputStream, _emptyMap) {
-        @Override
-        public int readCompressedInt() throws IOException {
-          int _xblockexpression = (int) 0;
-          {
-            this.resourceSet = null;
-            _xblockexpression = super.readCompressedInt();
-          }
-          return _xblockexpression;
-        }
-        
-        @Override
-        public InternalEObject loadEObject() throws IOException {
-          final InternalEObject result = super.loadEObject();
-          ResourceStorageLoadable.this.handleLoadEObject(result, this);
-          return result;
-        }
-      };
-      in.loadResource(resource);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
-  protected Object handleLoadEObject(final InternalEObject loaded, final BinaryResourceImpl.EObjectInputStream input) {
+  protected Object handleLoadEObject(final InternalEObject loaded, final BinaryResourceImpl.EObjectInputStream input) throws IOException {
     return null;
   }
   
-  protected void readResourceDescription(final StorageAwareResource resource, final InputStream inputStream) {
+  protected void readResourceDescription(final StorageAwareResource resource, final InputStream inputStream) throws IOException {
     try {
       final ObjectInputStream objectIn = new ObjectInputStream(inputStream);
       Object _readObject = objectIn.readObject();
@@ -136,46 +114,36 @@ public class ResourceStorageLoadable {
     }
   }
   
-  protected void readNodeModel(final StorageAwareResource resource, final InputStream inputStream) {
-    try {
-      final SerializableNodeModel serializableNodeModel = new SerializableNodeModel(resource);
-      ResourceSet _resourceSet = resource.getResourceSet();
-      URIConverter _uRIConverter = _resourceSet.getURIConverter();
-      URI _uRI = resource.getURI();
-      ResourceSet _resourceSet_1 = resource.getResourceSet();
-      Map<Object, Object> _loadOptions = _resourceSet_1.getLoadOptions();
-      boolean _exists = _uRIConverter.exists(_uRI, _loadOptions);
-      boolean _not = (!_exists);
-      if (_not) {
-        URI _uRI_1 = resource.getURI();
-        String _plus = ("Skipping loading node model for synthetic resource " + _uRI_1);
-        ResourceStorageLoadable.LOG.info(_plus);
-        return;
-      }
-      ResourceSet _resourceSet_2 = resource.getResourceSet();
-      URIConverter _uRIConverter_1 = _resourceSet_2.getURIConverter();
-      URI _uRI_2 = resource.getURI();
-      final InputStream stream = _uRIConverter_1.createInputStream(_uRI_2);
-      String _encoding = resource.getEncoding();
-      final InputStreamReader in = new InputStreamReader(stream, _encoding);
-      final String completeContent = CharStreams.toString(in);
-      final DeserializationConversionContext deserializationContext = new DeserializationConversionContext(resource, completeContent);
-      final DataInputStream dataIn = new DataInputStream(inputStream);
-      serializableNodeModel.readObjectData(dataIn, deserializationContext);
-      EList<EObject> _contents = resource.getContents();
-      EObject _head = IterableExtensions.<EObject>head(_contents);
-      boolean _hasErrors = deserializationContext.hasErrors();
-      ParseResult _parseResult = new ParseResult(_head, serializableNodeModel.root, _hasErrors);
-      resource.setParseResult(_parseResult);
-    } catch (final Throwable _t) {
-      if (_t instanceof IOException) {
-        final IOException e = (IOException)_t;
-        String _message = e.getMessage();
-        ResourceStorageLoadable.LOG.error(_message, e);
-      } else {
-        throw Exceptions.sneakyThrow(_t);
-      }
+  protected void readNodeModel(final StorageAwareResource resource, final InputStream inputStream) throws IOException {
+    final SerializableNodeModel serializableNodeModel = new SerializableNodeModel(resource);
+    ResourceSet _resourceSet = resource.getResourceSet();
+    URIConverter _uRIConverter = _resourceSet.getURIConverter();
+    URI _uRI = resource.getURI();
+    ResourceSet _resourceSet_1 = resource.getResourceSet();
+    Map<Object, Object> _loadOptions = _resourceSet_1.getLoadOptions();
+    boolean _exists = _uRIConverter.exists(_uRI, _loadOptions);
+    boolean _not = (!_exists);
+    if (_not) {
+      URI _uRI_1 = resource.getURI();
+      String _plus = ("Skipping loading node model for synthetic resource " + _uRI_1);
+      ResourceStorageLoadable.LOG.info(_plus);
+      return;
     }
+    ResourceSet _resourceSet_2 = resource.getResourceSet();
+    URIConverter _uRIConverter_1 = _resourceSet_2.getURIConverter();
+    URI _uRI_2 = resource.getURI();
+    final InputStream stream = _uRIConverter_1.createInputStream(_uRI_2);
+    String _encoding = resource.getEncoding();
+    final InputStreamReader in = new InputStreamReader(stream, _encoding);
+    final String completeContent = CharStreams.toString(in);
+    final DeserializationConversionContext deserializationContext = new DeserializationConversionContext(resource, completeContent);
+    final DataInputStream dataIn = new DataInputStream(inputStream);
+    serializableNodeModel.readObjectData(dataIn, deserializationContext);
+    EList<EObject> _contents = resource.getContents();
+    EObject _head = IterableExtensions.<EObject>head(_contents);
+    boolean _hasErrors = deserializationContext.hasErrors();
+    ParseResult _parseResult = new ParseResult(_head, serializableNodeModel.root, _hasErrors);
+    resource.setParseResult(_parseResult);
   }
   
   public ResourceStorageLoadable(final InputStream in, final boolean storeNodeModel) {

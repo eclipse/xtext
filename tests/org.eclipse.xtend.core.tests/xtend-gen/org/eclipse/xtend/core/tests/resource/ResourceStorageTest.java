@@ -11,6 +11,8 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -41,9 +43,13 @@ import org.eclipse.xtext.resource.persistence.ResourceStorageLoadable;
 import org.eclipse.xtext.resource.persistence.ResourceStorageWritable;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
+import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
+import org.eclipse.xtext.xbase.resource.BatchLinkableResourceStorageWritable;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -204,6 +210,30 @@ public class ResourceStorageTest extends AbstractXtendTestCase {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  @Test(expected = IOException.class)
+  public void testFailedWrite() throws Exception {
+    final XtendFile file = this.file("class C{}");
+    ByteArrayOutputStream _byteArrayOutputStream = new ByteArrayOutputStream();
+    Resource _eResource = file.eResource();
+    new BatchLinkableResourceStorageWritable(_byteArrayOutputStream, false) {
+      @Override
+      protected void writeAssociationsAdapter(final BatchLinkableResource resource, final OutputStream zipOut) throws IOException {
+        EList<Adapter> _eAdapters = resource.eAdapters();
+        final Function1<Adapter, Boolean> _function = new Function1<Adapter, Boolean>() {
+          @Override
+          public Boolean apply(final Adapter it) {
+            return Boolean.valueOf((it instanceof JvmModelAssociator.Adapter));
+          }
+        };
+        final Adapter removeMe = IterableExtensions.<Adapter>findFirst(_eAdapters, _function);
+        EList<Adapter> _eAdapters_1 = resource.eAdapters();
+        boolean _remove = _eAdapters_1.remove(removeMe);
+        Assert.assertTrue(_remove);
+        super.writeAssociationsAdapter(resource, zipOut);
+      }
+    }.writeResource(((StorageAwareResource) _eResource));
   }
   
   @Test
