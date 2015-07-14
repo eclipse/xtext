@@ -508,7 +508,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 					}
 					dispatchCaseResults.add(dispatchCaseResolvedTypes.getActualType(dispatchCase));
 				}
-				
+				List<ResolvedTypes> mergeUs = Lists.newArrayList();
 				for (JvmOperation dispatchCase : dispatchCasesWithInferredReturnType) {
 					ResolvedTypes dispatchCaseResolvedTypes = dispatchCase == operation ? childResolvedTypes : preparedResolvedTypes.get(dispatchCase);
 					if (dispatchCaseResolvedTypes == null) {
@@ -524,6 +524,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 							throw new IllegalStateException("No resolved type found. Type was: " + dispatchCase.getIdentifier());
 						}
 					} else {
+						mergeUs.add(dispatchCaseResolvedTypes);
 						preparedResolvedTypes.put(dispatchCase, null);
 						OperationBodyComputationState state = new DispatchOperationBodyComputationState(
 								dispatchCaseResolvedTypes,
@@ -565,7 +566,6 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 						}
 						computeAnnotationTypes(dispatchCaseResolvedTypes, featureScopeSession, dispatchCase);
 						computeLocalTypes(preparedResolvedTypes, dispatchCaseResolvedTypes, featureScopeSession, dispatchCase);
-						mergeChildTypes(dispatchCaseResolvedTypes);
 					}
 				}
 				LightweightTypeReference commonDispatchType = normalizeDispatchReturnType(
@@ -576,6 +576,10 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 						childResolvedTypes);
 				if (commonDispatchType != null) {
 					resolveDispatchCaseTypes(dispatcher, dispatchCasesWithInferredReturnType, commonDispatchType, featureScopeSession);
+				}
+				// deferred merge since #normalizeDispatchReturnType may add more hints to the different dispatch cases
+				for(ResolvedTypes mergeMe: mergeUs) {
+					mergeChildTypes(mergeMe);
 				}
 			} finally {
 				unmarkComputing(dispatcher.getReturnType());
