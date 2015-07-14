@@ -210,7 +210,7 @@ public abstract class AbstractDebuggerTestCase extends IdeaTestCase {
     return breakpointManager.addLineBreakpoint(document, line);
   }
   
-  private final static int timeout = 10000000;
+  private final static int timeout = 10000;
   
   private VirtualFile srcFolder;
   
@@ -253,6 +253,9 @@ public abstract class AbstractDebuggerTestCase extends IdeaTestCase {
   
   private SuspendContextImpl waitForContextChange(final Runnable command) {
     try {
+      ProcessHandler _processHandler = this.myDebugProcess.getProcessHandler();
+      boolean _isProcessTerminated = _processHandler.isProcessTerminated();
+      TestCase.assertFalse(_isProcessTerminated);
       int i = 0;
       final SuspendManager suspendManager = this.myDebugProcess.getSuspendManager();
       DebuggerSession _session = this.myDebugProcess.getSession();
@@ -274,9 +277,9 @@ public abstract class AbstractDebuggerTestCase extends IdeaTestCase {
       if (_equals) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("too long process, terminated=");
-        ProcessHandler _processHandler = this.myDebugProcess.getProcessHandler();
-        boolean _isProcessTerminated = _processHandler.isProcessTerminated();
-        _builder.append(_isProcessTerminated, "");
+        ProcessHandler _processHandler_1 = this.myDebugProcess.getProcessHandler();
+        boolean _isProcessTerminated_1 = _processHandler_1.isProcessTerminated();
+        _builder.append(_isProcessTerminated_1, "");
         TestCase.fail(_builder.toString());
       }
       return suspendManager.getPausedContext();

@@ -128,7 +128,7 @@ abstract class AbstractDebuggerTestCase extends IdeaTestCase {
 		return breakpointManager.addLineBreakpoint(document, line)
 	}
 
-	static val timeout = 10_000_000
+	static val timeout = 10_000
 	
 	VirtualFile srcFolder
 
@@ -156,6 +156,7 @@ abstract class AbstractDebuggerTestCase extends IdeaTestCase {
 	}
 	
 	private def waitForContextChange(Runnable command) {
+		assertFalse(myDebugProcess.processHandler.isProcessTerminated)
 		var i = 0
 		val suspendManager = myDebugProcess.suspendManager
 		val oldSourcePosition = myDebugProcess.session.contextManager.context.sourcePosition
