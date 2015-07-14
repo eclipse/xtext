@@ -9,7 +9,7 @@ import org.eclipse.jface.text.IDocumentExtension4
 
 class RichStringPartionIndentationStrategy extends DefaultIndentLineAutoEditStrategy {
 	override void customizeDocumentCommand(IDocument d, DocumentCommand c) {
-		if (c.text.length() > 1) {
+		if (c.text.length() > 1 && !d.legalLineDelimiters.contains(c.text)) {
 			try {
 				var lineIndentation = getLineIndentation(d, c.offset)
 				var legalLineDelimiters = d.getLegalLineDelimiters().sortBy[ s | s.length].reverseView

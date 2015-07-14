@@ -19,13 +19,13 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.swt.SWT;
+import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.eclipse.xtext.junit4.ui.AbstractCStyleLanguageAutoEditTest;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
-import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.junit.Test;
 
 import com.google.inject.Injector;
@@ -429,6 +429,13 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 				"				bar\n" +
 				"			foo|'''" + 
 				"", editor);
+	}
+	
+	@Test
+	public void testWindowsLineDelimiter() throws Exception {
+		XtextEditor editor = openEditor("'''|'''");
+		pasteText(editor, "\r\n");
+		assertState("'''" + "\r\n" + "|'''", editor);
 	}
 	
 	@Test public void testBug342030_01() throws Exception {
