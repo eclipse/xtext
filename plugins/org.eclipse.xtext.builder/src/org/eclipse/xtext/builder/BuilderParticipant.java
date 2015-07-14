@@ -522,6 +522,9 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			try {
 				registerCurrentSourceFolder(context, delta, fileSystemAccess);
 				generator.doGenerate(resource, fileSystemAccess);
+			} catch (OperationCanceledException e) {
+				// don't look into the cause for OCE
+				throw e;
 			} catch (RuntimeException e) {
 				if (e.getCause() instanceof CoreException) {
 					throw (CoreException) e.getCause();
