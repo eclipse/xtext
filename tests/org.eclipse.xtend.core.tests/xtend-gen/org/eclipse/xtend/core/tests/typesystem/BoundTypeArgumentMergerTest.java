@@ -1118,4 +1118,26 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
     LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3, _mappedTo_5);
     this.to(_merge, "Object", VarianceInfo.INVARIANT);
   }
+  
+  @Test
+  public void testBug470766_01() {
+    Pair<String, VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("void", VarianceInfo.OUT);
+    Triple<String, VarianceInfo, VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
+    Pair<String, VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("Integer", VarianceInfo.OUT);
+    Triple<String, VarianceInfo, VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
+    Pair<String, VarianceInfo> _mappedTo_4 = Pair.<String, VarianceInfo>of("Long", VarianceInfo.OUT);
+    Triple<String, VarianceInfo, VarianceInfo> _mappedTo_5 = this.operator_mappedTo(_mappedTo_4, VarianceInfo.INVARIANT);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3, _mappedTo_5);
+    this.to(_merge, "Number & Comparable<?>", VarianceInfo.INVARIANT);
+  }
+  
+  @Test
+  public void testBug470766_02() {
+    Pair<String, VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
+    Triple<String, VarianceInfo, VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
+    Pair<String, VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("void", VarianceInfo.OUT);
+    Triple<String, VarianceInfo, VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    this.to(_merge, "String", VarianceInfo.INVARIANT);
+  }
 }
