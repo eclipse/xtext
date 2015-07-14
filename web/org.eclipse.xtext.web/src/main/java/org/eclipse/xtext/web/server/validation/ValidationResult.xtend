@@ -7,8 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server.validation
 
-import java.util.ArrayList
-import org.eclipse.xtend.lib.annotations.Accessors
+import java.util.List
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend.lib.annotations.ToString
 import org.eclipse.xtext.web.server.IServiceResult
@@ -16,11 +15,10 @@ import org.eclipse.xtext.web.server.IServiceResult
 /**
  * Result object returned by the validation service.
  */
-@Accessors
-@ToString(skipNulls = true)
+@Data
 class ValidationResult implements IServiceResult {
 	
-	val issues = new ArrayList<Issue>
+	val List<Issue> issues = newArrayList
 	
 	@Data
 	@ToString(skipNulls = true)

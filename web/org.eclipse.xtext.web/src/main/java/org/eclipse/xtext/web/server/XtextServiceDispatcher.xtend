@@ -38,7 +38,7 @@ import org.eclipse.xtext.web.server.persistence.IServerResourceHandler
 import org.eclipse.xtext.web.server.persistence.ResourcePersistenceService
 import org.eclipse.xtext.web.server.syntaxcoloring.HighlightingService
 import org.eclipse.xtext.web.server.validation.ValidationService
-import org.eclipse.xtext.web.server.model.PreComputedServiceRegistry
+import org.eclipse.xtext.web.server.model.PrecomputedServiceRegistry
 
 /**
  * The entry class for Xtext service invocations. Use {@link #getService(IRequestData, ISessionStore)}
@@ -114,9 +114,9 @@ class XtextServiceDispatcher {
 	@Inject XtextWebDocumentAccess.Factory documentAccessFactory
 	
 	@Inject
-	def registerPreComputedServices(PreComputedServiceRegistry registry) {
-		registry.addPreComputedService(highlightingService)
-		registry.addPreComputedService(validationService)
+	protected def void registerPreComputedServices(PrecomputedServiceRegistry registry) {
+		registry.addPrecomputedService(highlightingService)
+		registry.addPrecomputedService(validationService)
 	}
 	
 	/**
@@ -238,7 +238,7 @@ class XtextServiceDispatcher {
 			// If the resource does not exist, create a dummy resource for the given full text
 			document = getFullTextDocument(fullText, resourceId, sessionStore)
 		}
-		val documentAccess = documentAccessFactory.create(document, request.getParameter('requiredStateId'), initializedFromFullText)
+		val documentAccess = documentAccessFactory.create(document, request.getParameter('requiredStateId'), false)
 		val result = new ServiceDescriptor => [
 			hasSideEffects = true
 			hasTextInput = true
@@ -414,7 +414,7 @@ class XtextServiceDispatcher {
 		new ServiceDescriptor => [
 			service = [
 				try {
-					generatorService.generate(document)
+					generatorService.getResult(document)
 				} catch (Throwable throwable) {
 					handleError(throwable)
 				}
@@ -450,7 +450,7 @@ class XtextServiceDispatcher {
 	 */
 	protected def getFullTextDocument(String fullText, String resourceId, ISessionStore sessionStore) {
 		val resourceSet = resourceSetProvider.get(resourceId)
-		val uri = URI.createURI(resourceId ?: 'fullText.' + fileExtensionProvider.primaryFileExtension)
+		val uri = URI.createURI(resourceId ?: 'fulltext.' + fileExtensionProvider.primaryFileExtension)
 		val resource = resourceFactory.createResource(uri) as XtextResource
 		resourceSet.resources.add(resource)
 		resource.load(new StringInputStream(fullText), null)

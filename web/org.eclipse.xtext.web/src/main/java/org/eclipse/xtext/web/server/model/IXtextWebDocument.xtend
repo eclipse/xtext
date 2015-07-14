@@ -31,4 +31,5 @@ interface IXtextWebDocument {
 	def void updateText(String text, int offset, int replaceLength)
 	
 	def void setDirty(boolean dirty)
+	
 }

@@ -21,8 +21,8 @@ class UpdateDocumentService {
 	
 	/**
 	 * Update the state identifier and return it. A background process is started where the given text
-	 * is assigned to the document and {@link #processUpdatedDocument(IXtextWebDocument, CancelIndicator)}
-	 * is executed.
+	 * is assigned to the document and the services registered in {@link PrecomputedServiceRegistry}
+	 * are invoked.
 	 */
 	def DocumentStateResult updateFullText(XtextWebDocumentAccess document, String fullText)
 			throws InvalidRequestException {
@@ -38,8 +38,8 @@ class UpdateDocumentService {
 	
 	/**
 	 * Update the state identifier and return it. A background process is started where the given text change
-	 * is applied to the document and {@link #processUpdatedDocument(IXtextWebDocument, CancelIndicator)}
-	 * is executed.
+	 * is applied to the document and the services registered in {@link PrecomputedServiceRegistry}
+	 * are invoked.
 	 */
 	def DocumentStateResult updateDeltaText(XtextWebDocumentAccess document, String deltaText, int offset, int replaceLength)
 			throws InvalidRequestException {
@@ -54,13 +54,14 @@ class UpdateDocumentService {
 	}
 	
 	/**
-	 * Schedule {@link #processUpdatedDocument(IXtextWebDocument, CancelIndicator)} as background
-	 * work and return the current state identifier.
+	 * Return the current state identifier. If the services registered in {@link PrecomputedServiceRegistry}
+	 * are not cached yet, they are invoked in a background process.
 	 */
 	def DocumentStateResult getStateId(XtextWebDocumentAccess document)
 			throws InvalidRequestException {
 		document.modify [ it, cancelIndicator |
 			return new DocumentStateResult(stateId)
 		]
-	}	
+	}
+	
 }

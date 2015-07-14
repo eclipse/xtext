@@ -27,11 +27,11 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 	
 	OccurrencesService.prototype._getSuccessCallback = function(editorContext, params, deferred) {
 		return function(result) {
-			if (result && !result.conflict 
-					&& (result.stateId === undefined || result.stateId == editorContext.getServerState().stateId)) 
-				deferred.resolve(result);
-			else 
+			if (result.conflict || !params.sendFullText && result.stateId !== undefined
+					&& result.stateId != editorContext.getServerState().stateId) 
 				deferred.reject();
+			else 
+				deferred.resolve(result);
 		}
 	}
 

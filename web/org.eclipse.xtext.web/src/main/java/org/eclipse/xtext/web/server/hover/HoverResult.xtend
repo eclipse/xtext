@@ -19,6 +19,21 @@ import org.eclipse.xtext.web.server.IServiceResult
 class HoverResult implements IServiceResult {
 	
 	String stateId
+	
 	String title
+	
 	String content
+	
+	new(String stateId) {
+		this.stateId = stateId
+		this.title = null
+		this.content = null
+	}
+	
+	new(String stateId, String title, String content) {
+		this.stateId = stateId
+		this.title = title
+		this.content = content
+	}
+	
 }

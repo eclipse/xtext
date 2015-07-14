@@ -1,9 +1,17 @@
+/*******************************************************************************
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.web.server.test
 
 import org.eclipse.xtext.web.server.occurrences.OccurrencesResult
 import org.junit.Test
 
 class OccurrenceTest extends AbstractWebServerTest {
+	
 	def protected getOccurrences(CharSequence resourceContent) {
 		val content = resourceContent.toString
 		val offset = content.indexOf('#')
@@ -22,15 +30,18 @@ class OccurrenceTest extends AbstractWebServerTest {
 	
 	@Test 
 	def void testNoOccurrenceOnEmptyFile() {
-		'#'.occurrences.assertNull
+		val result = '#'.occurrences
+		assertTrue(result.readRegions.empty)
+		assertTrue(result.writeRegions.empty)
 	}
 	
 	@Test 
 	def void testNoOccurrencesOnKeyword() {
-		'''
+		val result = '''
 			#state foo
 		''' .occurrences
-			.assertNull
+		assertTrue(result.readRegions.empty)
+		assertTrue(result.writeRegions.empty)
 	}
 	
 	@Test 
@@ -88,6 +99,23 @@ class OccurrenceTest extends AbstractWebServerTest {
 			    TextRegionWithLineInformation [33:3][lineNumber=2, endLineNumber=2],
 			    TextRegionWithLineInformation [50:3][lineNumber=3, endLineNumber=3]
 			  )
+			]
+		''')
+	}
+
+	@Test 
+	def void testSyntaxError() {
+		'''
+			state foo
+			end
+			asdf#
+			state bar 
+			end
+		''' .assertOccurrences('''
+			OccurrencesResult [
+			  stateId = "-80000000"
+			  writeRegions = ArrayList ()
+			  readRegions = ArrayList ()
 			]
 		''')
 	}

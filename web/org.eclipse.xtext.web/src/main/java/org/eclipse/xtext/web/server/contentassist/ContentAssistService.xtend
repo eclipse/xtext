@@ -76,8 +76,7 @@ class ContentAssistService {
 	 * Invoke the proposal provider and put the results into a {@link ContentAssistResult} object.
 	 */
 	protected def createProposals(List<ContentAssistContext> contexts, String stateId, int proposalsLimit) {
-		val result = new ContentAssistResult
-		result.stateId = stateId
+		val result = new ContentAssistResult(stateId)
 		if (!contexts.empty) {
 			val proposals = new HashSet<Pair<Integer, ContentAssistEntry>>
 			val acceptor = new IIdeContentProposalAcceptor {

@@ -24,7 +24,17 @@
 	background-repeat: no-repeat;
 }
 
+.hover {
+	font-family: sans-serif;
+}
+
 .hover .element-name {
 	padding-left: 16px;
 	font-weight: bold;
+}
+
+.textviewTooltip {
+	color: #444;
+	background-color: #ecebec;
+	border: 1px solid #aaa;
 }

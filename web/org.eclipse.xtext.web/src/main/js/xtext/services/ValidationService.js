@@ -19,11 +19,11 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 	ValidationService.prototype.computeProblems = ValidationService.prototype.invoke;
 	
 	ValidationService.prototype._checkPreconditions = function(editorContext, params) {
-		return editorContext.getClientServiceState().validation === undefined;
+		return this._state === undefined;
 	}
 
 	ValidationService.prototype._onConflict = function(editorContext, cause) {
-		delete editorContext.getClientServiceState().validation;
+		this.setState(undefined);
 		return {
 			suppressForcedUpdate: true
 		};

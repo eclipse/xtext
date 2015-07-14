@@ -8,9 +8,12 @@
 package org.eclipse.xtext.web.server.formatting
 
 import org.eclipse.xtend.lib.annotations.Data
-import org.eclipse.xtext.util.ITextRegion
+import org.eclipse.xtext.util.TextRegion
 import org.eclipse.xtext.web.server.IServiceResult
 
+/**
+ * Result object returned by the formatting service.
+ */
 @Data
 class FormattingResult implements IServiceResult {
 	
@@ -18,6 +21,6 @@ class FormattingResult implements IServiceResult {
 	
 	String formattedText
 	
-	ITextRegion replaceRegion
+	TextRegion replaceRegion
 	
 }

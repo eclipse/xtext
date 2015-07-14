@@ -80,7 +80,8 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 		if (deferred === undefined) {
 			deferred = jQuery.Deferred();
 		}
-		if (editorContext.getClientServiceState().update == 'started') {
+		var knownServerState = editorContext.getServerState();
+		if (knownServerState.updateInProgress) {
 			var self = this;
 			this.addCompletionCallback(function() { self.update(editorContext, params, deferred) });
 			return deferred.promise();
@@ -90,19 +91,19 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 			contentType: params.contentType
 		};
 		var currentText = editorContext.getText();
-		var knownServerState = editorContext.getServerState();
 		if (params.sendFullText || knownServerState.text === undefined) {
 			serverData.fullText = currentText;
 		} else {
 			this.computeDelta(knownServerState.text, currentText, serverData);
 			if (serverData.deltaText === undefined) {
-				this.onComplete();
 				deferred.resolve(knownServerState);
+				this.onComplete();
 				return deferred.promise();
 			}
 			serverData.requiredStateId = knownServerState.stateId;
 		}
 
+		knownServerState.updateInProgress = true;
 		var self = this;
 		self.sendRequest(editorContext, {
 			type: 'PUT',
@@ -112,6 +113,7 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 				if (result.conflict) {
 					// The server has lost its session state and the resource is loaded from the server
 					if (knownServerState.text !== undefined) {
+						delete knownServerState.updateInProgress;
 						delete knownServerState.text;
 						delete knownServerState.stateId;
 						self.update(editorContext, params, deferred);
@@ -130,7 +132,7 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 			error: function(xhr, textStatus, errorThrown) {
 				if (xhr.status == 404 && !params.loadFromServer && knownServerState.text !== undefined) {
 					// The server has lost its session state and the resource is not loaded from the server
-					delete editorContext.getClientServiceState().update;
+					delete knownServerState.updateInProgress;
 					delete knownServerState.text;
 					delete knownServerState.stateId;
 					self.update(editorContext, params, deferred);
@@ -141,7 +143,9 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 			
 			complete: self.onComplete.bind(self)
 		});
-		return deferred.promise();
+		return deferred.promise().always(function() {
+			knownServerState.updateInProgress = false;
+		});
 	};
 	
 	return UpdateService;

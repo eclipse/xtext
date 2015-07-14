@@ -7,17 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server.persistence
 
-import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-import org.eclipse.xtend.lib.annotations.ToString
+import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.web.server.IServiceResult
 
 /**
  * Result object returned by load and revert services.
  */
-@Accessors
-@FinalFieldsConstructor
-@ToString
+@Data
 class ResourceContentResult implements IServiceResult {
 	
 	val String fullText

@@ -13,7 +13,7 @@ import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.IResourceValidator
-import org.eclipse.xtext.web.server.model.AbstractPreComputedService
+import org.eclipse.xtext.web.server.model.AbstractPrecomputedService
 import org.eclipse.xtext.web.server.model.IXtextWebDocument
 import org.eclipse.xtext.web.server.model.UpdateDocumentService
 
@@ -21,7 +21,7 @@ import org.eclipse.xtext.web.server.model.UpdateDocumentService
  * Service class for model validation.
  */
 @Singleton
-class ValidationService extends AbstractPreComputedService<ValidationResult> {
+class ValidationService extends AbstractPrecomputedService<ValidationResult> {
 	
 	@Inject IResourceValidator resourceValidator
 

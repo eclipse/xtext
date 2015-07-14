@@ -124,7 +124,7 @@ class XtextServlet extends HttpServlet {
 		val result = service.service.apply()
 		
 		if (result instanceof GeneratorResult) {
-			val document = result.entries.head
+			val document = result.documents.head
 			if (document !== null && !document.contentType.nullOrEmpty) {
 				response.setStatus(HttpServletResponse.SC_OK)
 				response.setContentType(document.contentType)

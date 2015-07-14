@@ -24,7 +24,7 @@ class DefaultWebModule extends AbstractGenericModule {
 		DefaultContentTypeProvider
 	}
 	
-	def configureExecutorService2(Binder binder) {
+	def configureExecutorServiceWithDocumentLock(Binder binder) {
 		binder.bind(ExecutorService).annotatedWith(Names.named("withDocumentLock")).toInstance(Executors.newCachedThreadPool)
 	}
 	

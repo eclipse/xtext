@@ -7,11 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server.model;
 
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.RejectedExecutionException;
 
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.web.server.IServiceResult;
@@ -20,6 +22,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.name.Named;
 
 /**
  * Accessor class for documents. Use {@link #readOnly(CancelableUnitOfWork)} to
@@ -38,7 +41,22 @@ public class XtextWebDocumentAccess {
 	private final ModifyAccess modifyAccess = new ModifyAccess();
 
 	@Inject
-	private PreComputedServiceRegistry preComputedServiceRegistry;
+	private PrecomputedServiceRegistry preComputedServiceRegistry;
+	
+    /**
+     * Executor service for runnables that are run when the lock is already acquired 
+     */
+    @Inject @Named("withDocumentLock")
+    private ExecutorService executorService1;
+    
+    /**
+     * A second executor service for runnables that aquire the document lock themselves 
+     */
+    @Inject
+    private ExecutorService executorService2;
+    
+    @Inject
+    private OperationCanceledManager operationCanceledManager;
 
 	private XtextWebDocument document;
 
@@ -143,7 +161,7 @@ public class XtextWebDocumentAccess {
 					asynchronousWork.setCancelIndicator(synchronizer);
 				final IXtextWebDocument asyncAccess = documentAccess;
 				try {
-					synchronizer.getExecutorService().submit(new Runnable() {
+					executorService1.submit(new Runnable() {
 						@Override
 						public void run() {
 							try {
@@ -153,11 +171,10 @@ public class XtextWebDocumentAccess {
 							} catch (VirtualMachineError error) {
 								throw error;
 							} catch (Throwable throwable) {
-								if (!synchronizer.getOperationCanceledManager()
-										.isOperationCanceledException(throwable)) {
-									LOG.error("Error during asynchronous service processing.", throwable);
-								} else {
+								if (operationCanceledManager.isOperationCanceledException(throwable)) {
 									LOG.trace("Canceling background process.");
+								} else {
+									LOG.error("Error during asynchronous service processing.", throwable);
 								}
 							} finally {
 								synchronizer.releaseLock();
@@ -169,10 +186,10 @@ public class XtextWebDocumentAccess {
 					LOG.error("Failed to start background work.", ree);
 				}
 				if (!synchronizer.isCanceled() && !Thread.currentThread().isInterrupted()) {
-					synchronizer.getExecutorService2().submit(new Runnable() {
+					executorService2.submit(new Runnable() {
 						@Override
 						public void run() {
-							startPreComputation();
+							performPrecomputation();
 						}
 					});
 				}
@@ -180,15 +197,19 @@ public class XtextWebDocumentAccess {
 		}
 	}
 
-	protected void startPreComputation() {
-		for(AbstractPreComputedService<?> service: preComputedServiceRegistry.getPreComputedServices()) 
+	protected void performPrecomputation() {
+		for (AbstractPrecomputedService<?> service: preComputedServiceRegistry.getPrecomputedServices()) {
 			getCachedResult(service, false);
+		}
 	}
 
-	protected <T extends IServiceResult> T getCachedResult(final AbstractPreComputedService<T> service, final boolean logCacheMiss) {
+	protected <T extends IServiceResult> T getCachedResult(final AbstractPrecomputedService<T> service, final boolean logCacheMiss) {
 		return readOnly(new CancelableUnitOfWork<T, IXtextWebDocument>() {
 			public T exec(IXtextWebDocument d, CancelIndicator cancelIndicator) throws Exception {
-				return document.getCachedServiceResult(service, cancelIndicator, logCacheMiss);
+				if (document.getResourceId() != null)
+					return document.getCachedServiceResult(service, cancelIndicator, logCacheMiss);
+				else
+					return service.compute(document, cancelIndicator);
 			};
 		});
 	}

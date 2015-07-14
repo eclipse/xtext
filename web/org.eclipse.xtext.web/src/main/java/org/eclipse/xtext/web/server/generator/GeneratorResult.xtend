@@ -8,7 +8,6 @@
 package org.eclipse.xtext.web.server.generator
 
 import java.util.List
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend.lib.annotations.ToString
 import org.eclipse.xtext.web.server.IServiceResult
@@ -19,11 +18,11 @@ import org.eclipse.xtext.web.server.IServiceResult
  * it in a result object. This allows to conveniently view generator results by pointing a
  * web browser to the generator service URL.
  */
-@Accessors
+@Data
 @ToString(skipNulls = true)
 class GeneratorResult implements IServiceResult {
 	
-	val List<GeneratedDocument> entries = newArrayList
+	val List<GeneratedDocument> documents = newArrayList
 	
 	@Data
 	static class GeneratedDocument {

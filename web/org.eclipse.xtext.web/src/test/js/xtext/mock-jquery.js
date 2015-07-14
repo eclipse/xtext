@@ -17,25 +17,39 @@ define(function() {
 			promise: function() {
 				var pr = {
 					done: function(callback) {
-						if (deferred.result)
-							callback(deferred.result);
-						deferred.resolve = callback;
+						if (deferred._result)
+							callback(deferred._result);
+						deferred._done = callback;
 						return pr;
 					},
 					fail: function(callback) {
-						if (deferred.error)
+						if (deferred._error)
 							callback(deferred.error);
-						deferred.reject = callback;
+						deferred._fail = callback;
+						return pr;
+					},
+					always: function(callback) {
+						if (deferred._result || deferred._error)
+							callback();
+						deferred._always = callback;
 						return pr;
 					}
 				};
 				return pr;
 			},
 			resolve: function(result) {
-				deferred.result = result;
+				deferred._result = result;
+				if (deferred._done)
+					deferred._done(result);
+				if (deferred._always)
+					deferred._always();
 			},
 			reject: function(error) {
-				deferred.error = error;
+				deferred._error = error;
+				if (deferred._fail)
+					deferred._fail(error);
+				if (deferred._always)
+					deferred._always();
 			}
 		};
 		return deferred;

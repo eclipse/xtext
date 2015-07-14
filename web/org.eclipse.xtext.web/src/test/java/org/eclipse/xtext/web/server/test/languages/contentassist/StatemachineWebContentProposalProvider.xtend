@@ -27,16 +27,20 @@ class StatemachineWebContentProposalProvider extends IdeContentProposalProvider 
 		switch (ruleCall.rule) {
 			
 			case BOOLEANRule: {
-				val trueEntry = new ContentAssistEntry => [
-					prefix = context.prefix
-					proposal = 'true'
-				]
-				acceptor.accept(trueEntry, proposalPriorities.getDefaultPriority(trueEntry))
-				val falseEntry = new ContentAssistEntry => [
-					prefix = context.prefix
-					proposal = 'false'
-				]
-				acceptor.accept(falseEntry, proposalPriorities.getDefaultPriority(falseEntry))
+				if ('true'.startsWith(context.prefix)) {
+					val trueEntry = new ContentAssistEntry => [
+						prefix = context.prefix
+						proposal = 'true'
+					]
+					acceptor.accept(trueEntry, proposalPriorities.getDefaultPriority(trueEntry))
+				}
+				if ('false'.startsWith(context.prefix)) {
+					val falseEntry = new ContentAssistEntry => [
+						prefix = context.prefix
+						proposal = 'false'
+					]
+					acceptor.accept(falseEntry, proposalPriorities.getDefaultPriority(falseEntry))
+				}
 			}
 			
 			default:

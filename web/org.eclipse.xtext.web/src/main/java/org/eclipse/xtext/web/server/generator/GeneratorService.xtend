@@ -10,32 +10,34 @@ package org.eclipse.xtext.web.server.generator
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.xtext.generator.IGenerator
-import org.eclipse.xtext.web.server.InvalidRequestException
-import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess
+import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtext.web.server.model.AbstractPrecomputedService
+import org.eclipse.xtext.web.server.model.IXtextWebDocument
 
 /**
  * Service class for code generation. The resulting documents are sent back to the client;
- * if exactly one document is generated, the result is unwrapped, i.e. the response body
+ * if exactly one document is generated, the result should be unwrapped, i.e. the response body
  * is the generated document.
+ * 
+ * <p>Results of this service are cached in the session state. However, the service is <em>not</em>
+ * invoked automatically after a document change (in contrast to e.g. validation), but only after
+ * an explicit request.</p>
  */
 @Singleton
-class GeneratorService {
+class GeneratorService extends AbstractPrecomputedService<GeneratorResult> {
 	
 	@Inject IGenerator generator
 	
 	@Inject IContentTypeProvider contentTypeProvider
 	
 	/**
-	 * 
+	 * Generate artifacts for the given document.
 	 */
-	def GeneratorResult generate(XtextWebDocumentAccess document) throws InvalidRequestException {
-		val fileSystemAccess = document.readOnly[ it, cancelIndicator |
-			val fileSystemAccess = new ResponseFileSystemAccess
-			generator.doGenerate(resource, fileSystemAccess)
-			return fileSystemAccess
-		]
+	override compute(IXtextWebDocument it, CancelIndicator cancelIndicator) {
+		val fileSystemAccess = new ResponseFileSystemAccess
+		generator.doGenerate(resource, fileSystemAccess)
 		val result = new GeneratorResult
-		result.entries.addAll(fileSystemAccess.files.map[
+		result.documents.addAll(fileSystemAccess.files.map[
 			val contentType = contentTypeProvider.getContentType(name)
 			new GeneratorResult.GeneratedDocument(name, contentType, content.toString)
 		])
