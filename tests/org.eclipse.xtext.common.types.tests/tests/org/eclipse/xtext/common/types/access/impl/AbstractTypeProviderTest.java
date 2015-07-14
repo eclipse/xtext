@@ -43,6 +43,7 @@ import org.eclipse.xtext.common.types.JvmDoubleAnnotationValue;
 import org.eclipse.xtext.common.types.JvmEnumAnnotationValue;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFloatAnnotationValue;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -81,6 +82,7 @@ import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuperSu
 import org.eclipse.xtext.common.types.testSetups.Bug427098;
 import org.eclipse.xtext.common.types.testSetups.Bug428340;
 import org.eclipse.xtext.common.types.testSetups.Bug456328;
+import org.eclipse.xtext.common.types.testSetups.Bug470767;
 import org.eclipse.xtext.common.types.testSetups.ClassContainingEnum;
 import org.eclipse.xtext.common.types.testSetups.ClassWithVarArgs;
 import org.eclipse.xtext.common.types.testSetups.DeprecatedMembers;
@@ -3369,5 +3371,21 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		String typeName = Bug456328.class.getName() + "PackageVisible";
 		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
 		assertNotNull(type);
+	}
+	
+	@Test
+	public void testBug470767() {
+		String typeName = Bug470767.class.getName();
+		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
+		assertNotNull(type);
+		diagnose(type);
+		diagnose(type);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
+		Iterable<JvmFeature> methods = type.findAllFeaturesByName("paramIsAnnotated");
+		JvmOperation method = (JvmOperation) Iterables.getOnlyElement(methods);
+		JvmTypeReference paramType = method.getParameters().get(0).getParameterType();
+		assertEquals("int", paramType.getSimpleName());
 	}
 }

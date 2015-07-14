@@ -35,7 +35,7 @@ public class ClasspathTypeProviderPerformanceTest extends AbstractTypeProviderPe
 
 	@Before
 	public void setUp() throws Exception {
-		typeProvider = new ClasspathTypeProvider(getClass().getClassLoader(), resourceSet, indexedJvmTypeAccess);
+		typeProvider = new ClasspathTypeProvider(getClass().getClassLoader(), resourceSet, indexedJvmTypeAccess, null);
 	}
 	
 	@After
