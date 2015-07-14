@@ -434,6 +434,18 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     if (this.disposed) {
       return;
     }
+    boolean _isInitialized = this.project.isInitialized();
+    boolean _not = (!_isInitialized);
+    if (_not) {
+      XtextAutoBuilderComponent.LOG.info("Project not yet initialized, wait some more");
+      final Runnable _function = new Runnable() {
+        @Override
+        public void run() {
+          XtextAutoBuilderComponent.this.build();
+        }
+      };
+      this.alarm.addRequest(_function, 500);
+    }
     final ArrayList<BuildEvent> allEvents = CollectionLiterals.<BuildEvent>newArrayList();
     this.queue.drainTo(allEvents);
     this.internalBuild(allEvents);
