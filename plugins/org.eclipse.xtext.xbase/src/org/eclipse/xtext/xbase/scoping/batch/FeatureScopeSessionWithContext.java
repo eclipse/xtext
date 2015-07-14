@@ -62,7 +62,7 @@ public class FeatureScopeSessionWithContext extends AbstractNestedFeatureScopeSe
 			}
 			JvmType contextType = visibilityHelper.getRawContextType();
 			if (contextType instanceof JvmDeclaredType) {
-				String packageName = ((JvmDeclaredType) contextType).getPackageName();
+				String packageName = visibilityHelper.getPackageName();
 				JvmDeclaredType declaringType = member.getDeclaringType();
 				String memberPackageName = declaringType.getPackageName();
 				if (Strings.equal(packageName, memberPackageName)) {
