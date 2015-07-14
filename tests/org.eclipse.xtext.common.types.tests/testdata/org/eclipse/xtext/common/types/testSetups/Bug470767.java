@@ -17,7 +17,7 @@ public class Bug470767 {
 	
 	@Retention(RetentionPolicy.SOURCE)
     private @interface RemoveMe {}
-	
+	protected @interface KeepMe {}
 	public void paramIsAnnotated(@RemoveMe int gravity) {}
 
 }
