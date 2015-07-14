@@ -8,4 +8,12 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/xbase/ui/hover/XbaseInformationControl.java" type="org.eclipse.xtext.xbase.ui.hover.XbaseInformationControl">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="IXtextBrowserInformationControl"/>
+                <message_argument value="XbaseInformationControl"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>
