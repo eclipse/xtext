@@ -72,6 +72,10 @@ import org.eclipse.xtext.util.internal.EmfAdaptable
 		return chunk2resourceDescriptions.put(name, descriptions)
 	}
 	
+	def ResourceDescriptionsData removeContainer(String name) {
+		return chunk2resourceDescriptions.remove(name)
+	}
+	
 	override protected getSelectables() {
 		return chunk2resourceDescriptions.values
 	}
