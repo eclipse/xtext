@@ -79,6 +79,10 @@ public class Source2GeneratedMapping {
     return this.generated2source.get(generated);
   }
   
+  public Iterable<URI> getAllGenerated() {
+    return this.generated2source.keySet();
+  }
+  
   public Source2GeneratedMapping(final Multimap<URI, URI> source2generated, final Multimap<URI, URI> generated2source) {
     super();
     this.source2generated = source2generated;

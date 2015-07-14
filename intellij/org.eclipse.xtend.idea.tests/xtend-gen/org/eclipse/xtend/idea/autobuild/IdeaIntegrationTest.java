@@ -7,7 +7,12 @@
  */
 package org.eclipse.xtend.idea.autobuild;
 
+import com.google.common.base.Objects;
 import com.google.common.io.CharStreams;
+import com.intellij.facet.Facet;
+import com.intellij.facet.FacetManager;
+import com.intellij.facet.FacetTypeId;
+import com.intellij.facet.ModifiableFacetModel;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
@@ -18,13 +23,20 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import junit.framework.TestCase;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtend.core.idea.facet.XtendFacetType;
+import org.eclipse.xtend.core.idea.lang.XtendLanguage;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent;
+import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
+import org.eclipse.xtext.idea.tests.LightToolingTest;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.ComparisonFailure;
 
 @SuppressWarnings("all")
@@ -56,6 +68,80 @@ public class IdeaIntegrationTest extends LightXtendTest {
     final VirtualFile regenerated = this.myFixture.findFileInTempDir("xtend-gen/otherPackage/Foo.java");
     boolean _exists_1 = regenerated.exists();
     TestCase.assertTrue(_exists_1);
+  }
+  
+  public void testRemoveAndAddFacet() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package otherPackage");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final PsiFile source = this.myFixture.addFileToProject("otherPackage/Foo.xtend", _builder.toString());
+    VirtualFile file = this.myFixture.findFileInTempDir("xtend-gen/otherPackage/Foo.java");
+    boolean _exists = file.exists();
+    TestCase.assertTrue(_exists);
+    Application _application = ApplicationManager.getApplication();
+    final Runnable _function = new Runnable() {
+      @Override
+      public void run() {
+        final FacetManager mnr = FacetManager.getInstance(IdeaIntegrationTest.this.myModule);
+        final ModifiableFacetModel model = mnr.createModifiableModel();
+        Facet[] _allFacets = mnr.getAllFacets();
+        final Function1<Facet<?>, Boolean> _function = new Function1<Facet<?>, Boolean>() {
+          @Override
+          public Boolean apply(final Facet<?> it) {
+            FacetTypeId _typeId = it.getTypeId();
+            return Boolean.valueOf(Objects.equal(_typeId, XtendFacetType.TYPEID));
+          }
+        };
+        final Facet<?> facet = IterableExtensions.<Facet<?>>findFirst(((Iterable<Facet<?>>)Conversions.doWrapArray(_allFacets)), _function);
+        model.removeFacet(facet);
+        model.commit();
+        return;
+      }
+    };
+    _application.runWriteAction(_function);
+    Project _project = this.getProject();
+    final XtextAutoBuilderComponent autoBuilder = _project.<XtextAutoBuilderComponent>getComponent(XtextAutoBuilderComponent.class);
+    VirtualFile _virtualFile = source.getVirtualFile();
+    URI _uRI = VirtualFileURIUtil.getURI(_virtualFile);
+    Iterable<URI> _generatedSources = autoBuilder.getGeneratedSources(_uRI);
+    boolean _isEmpty = IterableExtensions.isEmpty(_generatedSources);
+    TestCase.assertTrue(_isEmpty);
+    ChunkedResourceDescriptions _indexState = autoBuilder.getIndexState();
+    Iterable<IResourceDescription> _allResourceDescriptions = _indexState.getAllResourceDescriptions();
+    boolean _isEmpty_1 = IterableExtensions.isEmpty(_allResourceDescriptions);
+    TestCase.assertTrue(_isEmpty_1);
+    VirtualFile _findFileInTempDir = this.myFixture.findFileInTempDir("xtend-gen/otherPackage/Foo.java");
+    file = _findFileInTempDir;
+    TestCase.assertNull(file);
+    String _iD = XtendLanguage.INSTANCE.getID();
+    LightToolingTest.addFacetToModule(this.myModule, _iD);
+    VirtualFile _virtualFile_1 = source.getVirtualFile();
+    URI _uRI_1 = VirtualFileURIUtil.getURI(_virtualFile_1);
+    ChunkedResourceDescriptions _indexState_1 = autoBuilder.getIndexState();
+    Iterable<IResourceDescription> _allResourceDescriptions_1 = _indexState_1.getAllResourceDescriptions();
+    IResourceDescription _head = IterableExtensions.<IResourceDescription>head(_allResourceDescriptions_1);
+    URI _uRI_2 = _head.getURI();
+    TestCase.assertEquals(_uRI_1, _uRI_2);
+    VirtualFile _virtualFile_2 = source.getVirtualFile();
+    URI _uRI_3 = VirtualFileURIUtil.getURI(_virtualFile_2);
+    Iterable<URI> _generatedSources_1 = autoBuilder.getGeneratedSources(_uRI_3);
+    final Function1<URI, Boolean> _function_1 = new Function1<URI, Boolean>() {
+      @Override
+      public Boolean apply(final URI it) {
+        String _string = it.toString();
+        return Boolean.valueOf(_string.endsWith("xtend-gen/otherPackage/Foo.java"));
+      }
+    };
+    boolean _exists_1 = IterableExtensions.<URI>exists(_generatedSources_1, _function_1);
+    TestCase.assertTrue(_exists_1);
+    VirtualFile _findFileInTempDir_1 = this.myFixture.findFileInTempDir("xtend-gen/otherPackage/Foo.java");
+    file = _findFileInTempDir_1;
+    boolean _exists_2 = file.exists();
+    TestCase.assertTrue(_exists_2);
   }
   
   public void testJavaDeletionTriggersError() {

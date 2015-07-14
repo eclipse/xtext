@@ -62,4 +62,8 @@ import java.util.Set
 		generated2source.get(generated)
 	}
 	
+	def Iterable<URI> getAllGenerated() {
+		generated2source.keySet
+	}
+	
 }
