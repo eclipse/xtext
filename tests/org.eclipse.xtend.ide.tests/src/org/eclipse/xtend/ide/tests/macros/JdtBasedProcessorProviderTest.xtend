@@ -7,27 +7,27 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.macros
 
+import com.google.common.io.CharStreams
 import java.io.BufferedInputStream
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
+import java.io.InputStreamReader
 import java.util.jar.Manifest
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IFolder
-import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.jdt.core.JavaCore
+import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder
+import org.eclipse.xtext.ui.XtextProjectHelper
 import org.eclipse.xtext.util.StringInputStream
 import org.junit.After
+import org.junit.Assert
 import org.junit.Test
 
 import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
-import static extension org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
-import com.google.common.io.CharStreams
-import java.io.InputStreamReader
-import org.junit.Assert
-import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder
-import org.eclipse.xtext.ui.XtextProjectHelper
+
+import static extension org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -91,7 +91,7 @@ class JdtBasedProcessorProviderTest {
 		''')
 		
 		cleanBuild
-		waitForBuild(new NullProgressMonitor)
+		waitForBuild()
 		assertNoErrorsInWorkspace();
 		
 		val javaCode = CharStreams.toString(new InputStreamReader((file("userProject/xtend-gen/client/SomeClass.java") as IFile).contents))
@@ -147,7 +147,7 @@ class JdtBasedProcessorProviderTest {
 		''')
 		
 		cleanBuild
-		waitForBuild(new NullProgressMonitor)
+		waitForBuild()
 		assertNoErrorsInWorkspace();
 		
 		val javaCode = CharStreams.toString(new InputStreamReader((file("userProject/xtend-gen/client/SomeClass.java") as IFile).contents))
@@ -210,7 +210,7 @@ class JdtBasedProcessorProviderTest {
 		''')
 		
 		cleanBuild
-		waitForBuild(new NullProgressMonitor)
+		waitForBuild()
 		assertNoErrorsInWorkspace();
 		
 		val javaCode = CharStreams.toString(new InputStreamReader((file("userProject/xtend-gen/client/SomeClass.java") as IFile).contents))
@@ -259,7 +259,7 @@ class JdtBasedProcessorProviderTest {
 		''')
 		
 		cleanBuild
-		waitForBuild(new NullProgressMonitor)
+		waitForBuild()
 		assertNoErrorsInWorkspace();
 		
 		val javaCode = CharStreams.toString(new InputStreamReader((file("userProject/xtend-gen/client/SomeClass.java") as IFile).contents))

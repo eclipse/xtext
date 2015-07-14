@@ -17,7 +17,6 @@ import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
@@ -132,8 +131,7 @@ public class Bug457681Test {
       _builder_2.newLine();
       this.newSource(userProject, "client/sub/B.xtend", _builder_2.toString());
       IResourcesSetupUtil.cleanBuild();
-      NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      IResourcesSetupUtil.waitForBuild(_nullProgressMonitor);
+      IResourcesSetupUtil.waitForBuild();
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -225,8 +223,7 @@ public class Bug457681Test {
       _builder_2.newLine();
       this.newSource(userProject, "client/sub/B.xtend", _builder_2.toString());
       IResourcesSetupUtil.cleanBuild();
-      NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      IResourcesSetupUtil.waitForBuild(_nullProgressMonitor);
+      IResourcesSetupUtil.waitForBuild();
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

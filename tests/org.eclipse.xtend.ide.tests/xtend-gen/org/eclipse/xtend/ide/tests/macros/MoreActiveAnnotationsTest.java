@@ -20,7 +20,6 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
@@ -600,8 +599,7 @@ public class MoreActiveAnnotationsTest {
       _builder_2.newLine();
       this.newSource(userProject, "client/sub/B.xtend", _builder_2.toString());
       IResourcesSetupUtil.cleanBuild();
-      NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      IResourcesSetupUtil.waitForBuild(_nullProgressMonitor);
+      IResourcesSetupUtil.waitForBuild();
       IProject _project = userProject.getProject();
       IResource _findMember = _project.findMember("xtend-gen/client/sub/B.java");
       final IFile file = ((IFile) _findMember);

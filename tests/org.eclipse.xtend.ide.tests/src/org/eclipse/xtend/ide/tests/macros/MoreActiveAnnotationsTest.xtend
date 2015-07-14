@@ -7,9 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.macros
 
+import com.google.common.io.CharStreams
 import java.io.BufferedInputStream
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
+import java.io.InputStreamReader
 import java.util.jar.Manifest
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IFolder
@@ -18,15 +20,13 @@ import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtext.junit4.internal.StopwatchRule
 import org.eclipse.xtext.util.StringInputStream
 import org.junit.After
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 
 import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
-import org.eclipse.core.runtime.NullProgressMonitor
-import com.google.common.io.CharStreams
-import java.io.InputStreamReader
-import org.junit.Ignore
+import static org.junit.Assert.*
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -336,7 +336,7 @@ class MoreActiveAnnotationsTest {
 		''')
 		
 		cleanBuild
-		waitForBuild(new NullProgressMonitor)
+		waitForBuild()
 		val file = userProject.project.findMember("xtend-gen/client/sub/B.java") as IFile
 		val contents = CharStreams.toString(new InputStreamReader(file.contents))
 		assertEquals('''

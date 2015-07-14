@@ -103,4 +103,5 @@ public class XtendBuilderParticipantTest extends AbstractXtendUITestCase {
 		assertFalse(generatedFile.exists());
 		assertFalse(traceFile.exists());
 	}
+	
 }

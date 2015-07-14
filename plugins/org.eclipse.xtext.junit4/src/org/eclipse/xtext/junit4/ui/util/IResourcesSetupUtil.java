@@ -289,7 +289,6 @@ public class IResourcesSetupUtil {
 	
 	public static void cleanBuild() throws CoreException {
 		ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.CLEAN_BUILD, monitor());
-		fullBuild();
 	}
 
 	/**
