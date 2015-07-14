@@ -63,7 +63,7 @@ public class Bug386476Test extends AbstractParticipatingBuilderTest {
 
 	private void stimulateBuildSchedulerTrigger(IProject project) throws CoreException {
 		project.close(monitor());
-		waitForBuild();
+		reallyWaitForAutoBuild();
 		project.open(monitor());
 		reallyWaitForAutoBuild();
 	}
