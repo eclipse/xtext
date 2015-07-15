@@ -41,7 +41,7 @@ import org.eclipse.xtext.web.server.IServiceResult
 		cachedServiceResults.clear
 	}
 	
-	protected def <T extends IServiceResult> T getCachedServiceResult(AbstractPrecomputedService<T> service,
+	def <T extends IServiceResult> T getCachedServiceResult(AbstractPrecomputedService<T> service,
 			CancelIndicator cancelIndicator, boolean logCacheMiss) {
 		cachedServiceResults.get(service.class) as T ?: {
 			if (logCacheMiss)
