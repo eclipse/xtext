@@ -97,8 +97,13 @@ suite('Content Assist', function() {
 				})
 				.respond({conflict: 'invalidStateId'})
 				.checkRequest(function(url, settings) {
-					assert.equal('test://xtext-service/assist', url);
+					assert.equal('test://xtext-service/update', url);
 					assert.equal('foo', settings.data.fullText);
+				})
+				.respond({stateId: '1'})
+				.checkRequest(function(url, settings) {
+					assert.equal('test://xtext-service/assist', url);
+					assert.equal('1', settings.data.requiredStateId);
 				})
 				.respond({entries: [{proposal: 'bar'}]})
 				.checkResult(function(editorContext, proposals) {

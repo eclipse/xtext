@@ -176,7 +176,10 @@ function Tooltip (view) {
 		 * @function
 		 * @public
 		*/
-		hide: function() {
+		hide: function(clearLock) {
+			if (clearLock) {
+				this._locked = undefined;
+			}
 			if (!this.isVisible()){
 				return;
 			}

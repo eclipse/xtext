@@ -11,12 +11,13 @@
 		require.config({
 			paths: {
 				"jquery": "webjars/jquery/2.1.4/jquery.min",
-				"ace": "webjars/ace/1.1.9/src",
 				"ace/ext/language_tools": "webjars/ace/1.1.9/src/ext-language_tools"
 			}
 		});
-		require(["xtext/xtext-ace"], function(xtext) {
-			xtext.createEditor();
+		require(["webjars/ace/1.1.9/src/ace"], function() {
+			require(["xtext/xtext-ace"], function(xtext) {
+				xtext.createEditor();
+			});
 		});
 	</script>
 </head>
