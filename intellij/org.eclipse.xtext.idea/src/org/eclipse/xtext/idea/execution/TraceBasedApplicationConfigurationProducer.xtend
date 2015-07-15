@@ -1,4 +1,4 @@
-package org.eclipse.xtext.xbase.idea.execution
+package org.eclipse.xtext.idea.execution
 
 import com.google.inject.Inject
 import com.intellij.codeInsight.TestFrameworks
@@ -20,7 +20,7 @@ import static extension com.intellij.execution.application.ApplicationConfigurat
 import static extension com.intellij.psi.util.PsiMethodUtil.*
 import static extension com.intellij.psi.util.PsiTreeUtil.*
 
-class JvmTypesApplicationConfigurationProducer extends JavaRunConfigurationProducerBase<ApplicationConfiguration> {
+class TraceBasedApplicationConfigurationProducer extends JavaRunConfigurationProducerBase<ApplicationConfiguration> {
 	@Inject TraceUtils traceUtils
 
 	IXtextLanguage xtextLanguage
@@ -37,8 +37,9 @@ class JvmTypesApplicationConfigurationProducer extends JavaRunConfigurationProdu
 
 	override protected boolean setupConfigurationFromContext(ApplicationConfiguration conf,
 		ConfigurationContext context, Ref<PsiElement> sourceElement) {
-		if (!sourceElement.^null) {
-			val javaElement = traceUtils.getBestJavaElementMatch(sourceElement.get).head
+		val selectedPsiElement = context.location?.psiElement
+		if (selectedPsiElement != null) {
+			val javaElement = traceUtils.getBestJavaElementMatch(selectedPsiElement).head
 			if (javaElement != null) {
 				return javaElement.setupConfiguration(conf, context, sourceElement)
 			}

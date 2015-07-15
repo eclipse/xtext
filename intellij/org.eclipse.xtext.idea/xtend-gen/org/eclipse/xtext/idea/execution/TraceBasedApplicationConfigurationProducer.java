@@ -1,9 +1,10 @@
-package org.eclipse.xtext.xbase.idea.execution;
+package org.eclipse.xtext.idea.execution;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.codeInsight.TestFrameworks;
 import com.intellij.execution.JavaExecutionUtil;
+import com.intellij.execution.Location;
 import com.intellij.execution.RunManager;
 import com.intellij.execution.RunnerAndConfigurationSettings;
 import com.intellij.execution.actions.ConfigurationContext;
@@ -27,13 +28,13 @@ import org.eclipse.xtext.idea.trace.TraceUtils;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
-public class JvmTypesApplicationConfigurationProducer extends JavaRunConfigurationProducerBase<ApplicationConfiguration> {
+public class TraceBasedApplicationConfigurationProducer extends JavaRunConfigurationProducerBase<ApplicationConfiguration> {
   @Inject
   private TraceUtils traceUtils;
   
   private IXtextLanguage xtextLanguage;
   
-  public JvmTypesApplicationConfigurationProducer(final IXtextLanguage xtextLanguage) {
+  public TraceBasedApplicationConfigurationProducer(final IXtextLanguage xtextLanguage) {
     super(ApplicationConfigurationType.getInstance());
     xtextLanguage.injectMembers(this);
     this.xtextLanguage = xtextLanguage;
@@ -51,14 +52,18 @@ public class JvmTypesApplicationConfigurationProducer extends JavaRunConfigurati
   
   @Override
   protected boolean setupConfigurationFromContext(final ApplicationConfiguration conf, final ConfigurationContext context, final Ref<PsiElement> sourceElement) {
-    boolean _isNull = sourceElement.isNull();
-    boolean _not = (!_isNull);
-    if (_not) {
-      PsiElement _get = sourceElement.get();
-      Iterable<PsiElement> _bestJavaElementMatch = this.traceUtils.getBestJavaElementMatch(_get);
+    Location _location = context.getLocation();
+    PsiElement _psiElement = null;
+    if (_location!=null) {
+      _psiElement=_location.getPsiElement();
+    }
+    final PsiElement selectedPsiElement = _psiElement;
+    boolean _notEquals = (!Objects.equal(selectedPsiElement, null));
+    if (_notEquals) {
+      Iterable<PsiElement> _bestJavaElementMatch = this.traceUtils.getBestJavaElementMatch(selectedPsiElement);
       final PsiElement javaElement = IterableExtensions.<PsiElement>head(_bestJavaElementMatch);
-      boolean _notEquals = (!Objects.equal(javaElement, null));
-      if (_notEquals) {
+      boolean _notEquals_1 = (!Objects.equal(javaElement, null));
+      if (_notEquals_1) {
         return this.setupConfiguration(javaElement, conf, context, sourceElement);
       }
     }

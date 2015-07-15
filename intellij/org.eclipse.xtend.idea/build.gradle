@@ -3,6 +3,7 @@ dependencies {
 	compile project(":plugins:org.eclipse.xtext.xbase.ide")
 	compile project(":plugins:org.eclipse.xtend.ide.common")
 	compile project(":plugins:org.eclipse.xtend.lib")
+	ideaProvided fileTree("${ideaDevelopment.ideaHome}/plugins/junit/lib/").include("*.jar")
 }
 
 ideaDevelopment {

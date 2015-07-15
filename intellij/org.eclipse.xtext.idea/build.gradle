@@ -11,6 +11,7 @@ dependencies {
 	compile project(':plugins:org.eclipse.xtext.ecore')
 	compile project(':plugins:org.eclipse.xtext.builder.standalone')
 	builder "org.ow2.asm:asm:5.0.3"
+	ideaProvided fileTree("${ideaDevelopment.ideaHome}/plugins/junit/lib/").include("*.jar")
 }
 
 assembleSandbox.plugin.into('builder') {
