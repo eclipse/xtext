@@ -96,7 +96,7 @@ public class JDTAwareEclipseResourceFileSystemAccess2 extends EclipseResourceFil
 			}
 		}
 		// should not happen, but to be sure
-		if (newClassPath[i] == null) {
+		if (i == newClassPath.length - 1 && newClassPath[i] == null) {
 			LOG.warn("Cannot find classpath entry '" + prototype + "'");
 			newClassPath[i] = newEntry;
 		}
