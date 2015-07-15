@@ -30,7 +30,7 @@ public class Bug355821Test extends AbstractParticipatingBuilderTest {
 	
 	@Test public void testBuildIsInvokedOnlyOnceWhenManifestChanges() throws Exception {
 		IProject fooProject = createPluginProject("Foo");
-		reallyWaitForAutoBuild();
+		waitForBuild();
 		
 		IFile manifestFile = fooProject.getFile("META-INF/MANIFEST.MF");
 		String manifestContent = "Manifest-Version: 1.0\n";
@@ -69,5 +69,9 @@ public class Bug355821Test extends AbstractParticipatingBuilderTest {
 		projectFactory.addRequiredBundles(Collections.singletonList("org.eclipse.xtext"));
 		IProject result = projectFactory.createProject(new NullProgressMonitor(), null);
 		return result;
+	}
+	
+	protected void waitForBuild() {
+		reallyWaitForAutoBuild();
 	}
 }
