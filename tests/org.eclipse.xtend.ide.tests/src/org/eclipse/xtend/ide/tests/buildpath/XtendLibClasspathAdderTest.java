@@ -75,7 +75,6 @@ public class XtendLibClasspathAdderTest extends AbstractXtendUITestCase {
 		markerAssert.assertNoErrorMarker(file);
 	}
 
-	@Flaky
 	@Test
 	public void testAddToPlugin() throws Exception {
 		pluginProjectFactory.setProjectName("test");
