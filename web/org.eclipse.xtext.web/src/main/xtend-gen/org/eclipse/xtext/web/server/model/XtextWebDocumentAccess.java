@@ -33,7 +33,8 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 
 /**
  * Accessor class for documents. Use {@link #readOnly(CancelableUnitOfWork)} to
- * read the content and properties of the document, and{@link #modify(CancelableUnitOfWork, CancelableUnitOfWork)} to modify them.
+ * read the content and properties of the document, and
+ * {@link #modify(CancelableUnitOfWork, CancelableUnitOfWork)} to modify them.
  * If this accessor has been created with a required state identifier, it will
  * check the actual state identifier of the document before granting access, and
  * throw an exception if it does not match.
@@ -202,112 +203,127 @@ public class XtextWebDocumentAccess {
         _xifexpression = new XtextWebDocumentAccess.ReadAccess(this.document);
       }
       final IXtextWebDocument documentAccess = _xifexpression;
+      boolean currentThreadOwnsLock = true;
+      T result = null;
       try {
         synchronizer.acquireLock(priority);
         this.checkStateId();
         synchronousWork.setCancelIndicator(synchronizer);
-        return synchronousWork.exec(documentAccess);
-      } finally {
-        boolean _or = false;
-        boolean _or_1 = false;
-        if (((this.skipAsyncWork || (!priority)) || (documentAccess == null))) {
-          _or_1 = true;
+        T _exec = synchronousWork.exec(documentAccess);
+        result = _exec;
+        String _stateId = this.document.getStateId();
+        this.requiredStateId = _stateId;
+        boolean _and = false;
+        boolean _and_1 = false;
+        if (!(((!this.skipAsyncWork) && priority) && (documentAccess != null))) {
+          _and_1 = false;
         } else {
           boolean _isCanceled = synchronizer.isCanceled();
-          _or_1 = _isCanceled;
+          boolean _not = (!_isCanceled);
+          _and_1 = _not;
         }
-        if (_or_1) {
-          _or = true;
+        if (!_and_1) {
+          _and = false;
         } else {
           Thread _currentThread = Thread.currentThread();
           boolean _isInterrupted = _currentThread.isInterrupted();
-          _or = _isInterrupted;
+          boolean _not_1 = (!_isInterrupted);
+          _and = _not_1;
         }
-        if (_or) {
-          synchronizer.releaseLock();
-        } else {
-          String _stateId = this.document.getStateId();
-          this.requiredStateId = _stateId;
-          if ((asynchronousWork != null)) {
-            asynchronousWork.setCancelIndicator(synchronizer);
-          }
-          final IXtextWebDocument asyncAccess = documentAccess;
-          try {
-            final Runnable _function = new Runnable() {
-              @Override
-              public void run() {
+        if (_and) {
+          final Runnable _function = new Runnable() {
+            @Override
+            public void run() {
+              try {
                 try {
-                  try {
-                    if ((asynchronousWork != null)) {
-                      asynchronousWork.exec(asyncAccess);
-                    }
-                    XtextResource _resource = asyncAccess.getResource();
-                    EcoreUtil2.resolveLazyCrossReferences(_resource, synchronizer);
-                  } catch (final Throwable _t) {
-                    if (_t instanceof VirtualMachineError) {
-                      final VirtualMachineError error = (VirtualMachineError)_t;
-                      throw error;
-                    } else if (_t instanceof Throwable) {
-                      final Throwable throwable = (Throwable)_t;
-                      boolean _isOperationCanceledException = XtextWebDocumentAccess.this.operationCanceledManager.isOperationCanceledException(throwable);
-                      if (_isOperationCanceledException) {
-                        XtextWebDocumentAccess.LOG.trace("Canceling background process.");
-                      } else {
-                        XtextWebDocumentAccess.LOG.error("Error during asynchronous service processing.", throwable);
-                      }
-                    } else {
-                      throw Exceptions.sneakyThrow(_t);
-                    }
-                  } finally {
-                    synchronizer.releaseLock();
+                  if ((asynchronousWork != null)) {
+                    asynchronousWork.setCancelIndicator(synchronizer);
+                    asynchronousWork.exec(documentAccess);
                   }
-                  return;
-                } catch (Throwable _e) {
-                  throw Exceptions.sneakyThrow(_e);
+                  XtextResource _resource = documentAccess.getResource();
+                  EcoreUtil2.resolveLazyCrossReferences(_resource, synchronizer);
+                } catch (final Throwable _t) {
+                  if (_t instanceof VirtualMachineError) {
+                    final VirtualMachineError error = (VirtualMachineError)_t;
+                    throw error;
+                  } else if (_t instanceof Throwable) {
+                    final Throwable throwable = (Throwable)_t;
+                    boolean _isOperationCanceledException = XtextWebDocumentAccess.this.operationCanceledManager.isOperationCanceledException(throwable);
+                    if (_isOperationCanceledException) {
+                      XtextWebDocumentAccess.LOG.trace("Canceling background work.");
+                    } else {
+                      XtextWebDocumentAccess.LOG.error("Error during background work.", throwable);
+                    }
+                  } else {
+                    throw Exceptions.sneakyThrow(_t);
+                  }
+                } finally {
+                  synchronizer.releaseLock();
                 }
+              } catch (Throwable _e) {
+                throw Exceptions.sneakyThrow(_e);
               }
-            };
-            this.executorService1.submit(_function);
-          } catch (final Throwable _t) {
-            if (_t instanceof RejectedExecutionException) {
-              final RejectedExecutionException ree = (RejectedExecutionException)_t;
-              synchronizer.releaseLock();
-              XtextWebDocumentAccess.LOG.error("Failed to start background work.", ree);
-            } else {
-              throw Exceptions.sneakyThrow(_t);
             }
-          }
-          boolean _and = false;
-          boolean _isCanceled_1 = synchronizer.isCanceled();
-          boolean _not = (!_isCanceled_1);
-          if (!_not) {
-            _and = false;
-          } else {
-            Thread _currentThread_1 = Thread.currentThread();
-            boolean _isInterrupted_1 = _currentThread_1.isInterrupted();
-            boolean _not_1 = (!_isInterrupted_1);
-            _and = _not_1;
-          }
-          if (_and) {
-            final Runnable _function_1 = new Runnable() {
-              @Override
-              public void run() {
-                XtextWebDocumentAccess.this.performPrecomputation();
+          };
+          this.executorService1.submit(_function);
+          currentThreadOwnsLock = false;
+          final Runnable _function_1 = new Runnable() {
+            @Override
+            public void run() {
+              try {
+                try {
+                  XtextWebDocumentAccess.this.performPrecomputation(synchronizer);
+                } catch (final Throwable _t) {
+                  if (_t instanceof VirtualMachineError) {
+                    final VirtualMachineError error = (VirtualMachineError)_t;
+                    throw error;
+                  } else if (_t instanceof InvalidRequestException.InvalidDocumentStateException) {
+                    final InvalidRequestException.InvalidDocumentStateException idse = (InvalidRequestException.InvalidDocumentStateException)_t;
+                    return;
+                  } else if (_t instanceof Throwable) {
+                    final Throwable throwable = (Throwable)_t;
+                    boolean _isOperationCanceledException = XtextWebDocumentAccess.this.operationCanceledManager.isOperationCanceledException(throwable);
+                    if (_isOperationCanceledException) {
+                      XtextWebDocumentAccess.LOG.trace("Canceling precomputation.");
+                    } else {
+                      XtextWebDocumentAccess.LOG.error("Error during precomputation.", throwable);
+                    }
+                  } else {
+                    throw Exceptions.sneakyThrow(_t);
+                  }
+                }
+              } catch (Throwable _e) {
+                throw Exceptions.sneakyThrow(_e);
               }
-            };
-            this.executorService2.submit(_function_1);
-          }
+            }
+          };
+          this.executorService2.submit(_function_1);
+        }
+      } catch (final Throwable _t) {
+        if (_t instanceof RejectedExecutionException) {
+          final RejectedExecutionException ree = (RejectedExecutionException)_t;
+          XtextWebDocumentAccess.LOG.error("Failed to start background work.", ree);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      } finally {
+        if (currentThreadOwnsLock) {
+          synchronizer.releaseLock();
         }
       }
+      return result;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  protected void performPrecomputation() {
+  protected void performPrecomputation(final CancelIndicator cancelIndicator) {
     Iterable<AbstractPrecomputedService<? extends IServiceResult>> _precomputedServices = this.preComputedServiceRegistry.getPrecomputedServices();
     for (final AbstractPrecomputedService<? extends IServiceResult> service : _precomputedServices) {
-      this.getCachedResult(service, false);
+      {
+        this.operationCanceledManager.checkCanceled(cancelIndicator);
+        this.getCachedResult(service, false);
+      }
     }
   }
   

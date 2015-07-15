@@ -117,9 +117,9 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 						delete knownServerState.text;
 						delete knownServerState.stateId;
 						self.update(editorContext, params, deferred);
-						return true;
+					} else {
+						deferred.reject(result.conflict);
 					}
-					deferred.reject(result.conflict);
 					return false;
 				}
 				var listeners = editorContext.updateServerState(currentText, result.stateId);

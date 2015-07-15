@@ -1,29 +1,31 @@
-/** 
+/*******************************************************************************
  * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- */
+ *******************************************************************************/
 package org.eclipse.xtext.web.server.model
 
 import com.google.inject.Inject
 import com.google.inject.Provider
 import com.google.inject.name.Named
 import java.util.concurrent.ExecutorService
-import java.util.concurrent.RejectedExecutionException
 import org.eclipse.xtend.lib.annotations.Delegate
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.service.OperationCanceledManager
+import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.web.server.IServiceResult
 import org.eclipse.xtext.web.server.InvalidRequestException.InvalidDocumentStateException
+import java.util.concurrent.RejectedExecutionException
 
 /** 
  * Accessor class for documents. Use {@link #readOnly(CancelableUnitOfWork)} to
- * read the content and properties of the document, and{@link #modify(CancelableUnitOfWork, CancelableUnitOfWork)} to modify them.
+ * read the content and properties of the document, and
+ * {@link #modify(CancelableUnitOfWork, CancelableUnitOfWork)} to modify them.
  * If this accessor has been created with a required state identifier, it will
  * check the actual state identifier of the document before granting access, and
  * throw an exception if it does not match.
@@ -34,7 +36,7 @@ import org.eclipse.xtext.web.server.InvalidRequestException.InvalidDocumentState
 	/** 
 	 * Executor service for runnables that are run when the lock is already acquired 
 	 */
-	@Inject @Named("withDocumentLock") ExecutorService executorService1
+	@Inject @Named('withDocumentLock') ExecutorService executorService1
 	/** 
 	 * A second executor service for runnables that aquire the document lock themselves 
 	 */
@@ -73,7 +75,7 @@ import org.eclipse.xtext.web.server.InvalidRequestException.InvalidDocumentState
 
 	protected def void checkStateId() throws InvalidDocumentStateException {
 		if (requiredStateId !== null && requiredStateId != document.stateId) {
-			throw new InvalidDocumentStateException("The given state id does not match the current state.")
+			throw new InvalidDocumentStateException('The given state id does not match the current state.')
 		}
 	}
 
@@ -102,7 +104,8 @@ import org.eclipse.xtext.web.server.InvalidRequestException.InvalidDocumentState
 	 * work that should be applied to the document, but is not relevant for the
 	 * current service request.
 	 */
-	def <T> T modify(CancelableUnitOfWork<T, IXtextWebDocument> work, CancelableUnitOfWork<?, IXtextWebDocument> asynchronousWork) {
+	def <T> T modify(CancelableUnitOfWork<T, IXtextWebDocument> work,
+			CancelableUnitOfWork<?, IXtextWebDocument> asynchronousWork) {
 		return doAccess(work, true, true, asynchronousWork)
 	}
 
@@ -115,64 +118,82 @@ import org.eclipse.xtext.web.server.InvalidRequestException.InvalidDocumentState
 		return doAccess(work, true, true, null)
 	}
 
-	protected def <T> T doAccess(CancelableUnitOfWork<T, IXtextWebDocument> synchronousWork, boolean priority, boolean modify,
-		CancelableUnitOfWork<?, IXtextWebDocument> asynchronousWork) {
+	protected def <T> T doAccess(CancelableUnitOfWork<T, IXtextWebDocument> synchronousWork, boolean priority,
+			boolean modify, CancelableUnitOfWork<?, IXtextWebDocument> asynchronousWork) {
 		val synchronizer = document.synchronizer
 		val documentAccess = if (modify) document else new ReadAccess(document)
+		var currentThreadOwnsLock = true
+		var T result
 		try {
+			// Acquire the lock and execute the main unit of work
 			synchronizer.acquireLock(priority)
 			checkStateId()
 			synchronousWork.cancelIndicator = synchronizer
-			return synchronousWork.exec(documentAccess)
-		} finally {
-			if (skipAsyncWork || !priority || documentAccess === null || synchronizer.isCanceled() || Thread.currentThread().isInterrupted()) {
-				synchronizer.releaseLock()
-			} else {
-				requiredStateId = document.stateId
-				if (asynchronousWork !== null) 
-					asynchronousWork.cancelIndicator = synchronizer
-				val asyncAccess = documentAccess
-				try {
-					executorService1.submit [
-						try {
-							if (asynchronousWork !== null) 
-								asynchronousWork.exec(asyncAccess)
-							EcoreUtil2.resolveLazyCrossReferences(asyncAccess.resource, synchronizer)
-						} catch (VirtualMachineError error) {
-							throw error
-						} catch (Throwable throwable) {
-							if (operationCanceledManager.isOperationCanceledException(throwable)) {
-								LOG.trace("Canceling background process.")
-							} else {
-								LOG.error("Error during asynchronous service processing.", throwable)
-							}
-						} finally {
-							synchronizer.releaseLock()
+			result = synchronousWork.exec(documentAccess)
+			requiredStateId = document.stateId
+			
+			if (!skipAsyncWork && priority && documentAccess !== null && !synchronizer.canceled
+					&& !Thread.currentThread.interrupted) {
+				
+				// Start a thread for background work and pass the lock to this new thread
+				executorService1.submit [
+					try {
+						if (asynchronousWork !== null) {
+							asynchronousWork.cancelIndicator = synchronizer
+							asynchronousWork.exec(documentAccess)
 						}
-						return;
-					]
-				} catch (RejectedExecutionException ree) {
-					synchronizer.releaseLock()
-					LOG.error("Failed to start background work.", ree)
-				}
-				if (!synchronizer.isCanceled && !Thread.currentThread.isInterrupted) {
-					executorService2.submit [
-						performPrecomputation()
-					]
-				}
-
+						EcoreUtil2.resolveLazyCrossReferences(documentAccess.resource, synchronizer)
+					} catch (VirtualMachineError error) {
+						throw error
+					} catch (Throwable throwable) {
+						if (operationCanceledManager.isOperationCanceledException(throwable)) {
+							LOG.trace('Canceling background work.')
+						} else {
+							LOG.error('Error during background work.', throwable)
+						}
+					} finally {
+						synchronizer.releaseLock()
+					}
+				]
+				currentThreadOwnsLock = false
+				
+				// Start another thread for precomputation
+				executorService2.submit [
+					try {
+						performPrecomputation(synchronizer)
+					} catch (VirtualMachineError error) {
+						throw error
+					} catch (InvalidDocumentStateException idse) {
+						// The document has changed since we executed our synchronous work - stop precomputation
+						return
+					} catch (Throwable throwable) {
+						if (operationCanceledManager.isOperationCanceledException(throwable)) {
+							LOG.trace('Canceling precomputation.')
+						} else {
+							LOG.error('Error during precomputation.', throwable)
+						}
+					}
+				]
+				
 			}
+		} catch (RejectedExecutionException ree) {
+			LOG.error('Failed to start background work.', ree)
+		} finally {
+			if (currentThreadOwnsLock)
+				synchronizer.releaseLock()
 		}
+		return result
 	}
 
-	protected def void performPrecomputation() {
+	protected def void performPrecomputation(CancelIndicator cancelIndicator) {
 		for (service : preComputedServiceRegistry.getPrecomputedServices()) {
+			operationCanceledManager.checkCanceled(cancelIndicator)
 			getCachedResult(service, false)
 		}
 	}
 
 	protected def <T extends IServiceResult> T getCachedResult(AbstractPrecomputedService<T> service, boolean logCacheMiss) {
-		return readOnly [d, cancelIndicator|
+		return readOnly [d, cancelIndicator |
 			if (document.resourceId !== null) 
 				return document.getCachedServiceResult(service, cancelIndicator, logCacheMiss) 
 			else 
@@ -185,15 +206,15 @@ import org.eclipse.xtext.web.server.InvalidRequestException.InvalidDocumentState
 		@Delegate val XtextWebDocument document
 
 		override void setText(String text) {
-			throw new UnsupportedOperationException("Cannot modify the document with read-only access.")
+			throw new UnsupportedOperationException('Cannot modify the document with read-only access.')
 		}
 
 		override void updateText(String text, int offset, int replaceLength) {
-			throw new UnsupportedOperationException("Cannot modify the document with read-only access.")
+			throw new UnsupportedOperationException('Cannot modify the document with read-only access.')
 		}
 
 		override void createNewStateId() {
-			throw new UnsupportedOperationException("Cannot modify the document with read-only access.")
+			throw new UnsupportedOperationException('Cannot modify the document with read-only access.')
 		}
 	}
 

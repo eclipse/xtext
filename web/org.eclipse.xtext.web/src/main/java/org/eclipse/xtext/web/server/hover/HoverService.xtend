@@ -16,6 +16,7 @@ import org.eclipse.xtext.ide.labels.IImageDescription
 import org.eclipse.xtext.ide.labels.IImageDescriptionProvider
 import org.eclipse.xtext.ide.labels.INameLabelProvider
 import org.eclipse.xtext.ide.labels.SimpleImageDescription
+import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess
 import org.eclipse.xtext.web.server.util.ElementAtOffsetUtil
 
@@ -29,6 +30,7 @@ class HoverService {
 	@Inject extension IEObjectDocumentationProvider
 	@Inject extension IImageDescriptionProvider
 	@Inject extension INameLabelProvider
+	@Inject extension OperationCanceledManager
 
 	/**
 	 * Compute a hover result at the given offset in the document.
@@ -38,7 +40,9 @@ class HoverService {
 			val element = resource.getElementAt(offset)
 			val nameLabel = element?.nameLabel?.surroundWithDiv('element-name')
 			if (nameLabel != null) {
+				cancelIndicator.checkCanceled
 				val titleHtml = element.imageDescription.addIconDivs(nameLabel).surroundWithDiv('hover')
+				cancelIndicator.checkCanceled
 				val bodyHtml = (element.documentation ?: '').surroundWithDiv('hover')
 				return new HoverResult(stateId, titleHtml, bodyHtml)
 			} else {
