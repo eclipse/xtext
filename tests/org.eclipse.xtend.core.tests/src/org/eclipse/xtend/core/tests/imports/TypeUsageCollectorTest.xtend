@@ -12,6 +12,7 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.xbase.imports.TypeUsageCollector
 import org.junit.Test
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.emf.ecore.resource.Resource
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -23,9 +24,18 @@ class TypeUsageCollectorTest extends AbstractXtendTestCase {
 	
 	private def void hasUnresolvedType(CharSequence xtendFile, String... typeNames) {
 		val resource = file(xtendFile.toString).eResource
+		resource.hasUnresolvedType(typeNames)
+	}
+	
+	private def void hasUnresolvedType(Resource resource, String... typeNames) {
 		val typeUsages = typeUsageCollector.collectTypeUsages(resource as XtextResource)
 		val usedNames = typeUsages.unresolvedTypeUsages.map[it.usedTypeName].toSet
 		assertEquals(typeNames.toSet, usedNames)
+	}
+	
+	private def void hasUnresolvedTypesWithErrors(CharSequence xtendFile, String... typeNames) {
+		val resource = fileWithErrors(xtendFile.toString).eResource
+		resource.hasUnresolvedType(typeNames)
 	}
 	
 	private def void hasUnresolvedTypeSuffix(CharSequence xtendFile, String... suffix) {
@@ -185,6 +195,17 @@ class TypeUsageCollectorTest extends AbstractXtendTestCase {
 				val entry = new Map$Entry
 			}
 		'''.hasUnresolvedTypeSuffix('$Entry')
+	}
+	
+	@Test
+	def void testBug470235() {
+		'''
+			class C {
+				Object o = new () { // missing type is intentional
+					List list = null
+				} 
+			}
+		'''.hasUnresolvedTypesWithErrors('List') // assert no empty name was recorded
 	}
 	
 }
