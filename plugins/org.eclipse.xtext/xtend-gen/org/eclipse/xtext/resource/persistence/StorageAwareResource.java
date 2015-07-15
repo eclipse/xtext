@@ -95,25 +95,21 @@ public class StorageAwareResource extends LazyLinkingResource {
     super.load(options);
   }
   
-  public void loadFromStorage(final ResourceStorageLoadable storageInputStream) {
+  public void loadFromStorage(final ResourceStorageLoadable storageInputStream) throws IOException {
+    boolean _equals = Objects.equal(storageInputStream, null);
+    if (_equals) {
+      throw new NullPointerException("storageInputStream");
+    }
+    final Stopwatches.StoppedTask task = Stopwatches.forTask("Loading from storage");
+    task.start();
+    this.isLoading = true;
+    this.isLoadedFromStorage = true;
     try {
-      boolean _equals = Objects.equal(storageInputStream, null);
-      if (_equals) {
-        throw new NullPointerException("storageInputStream");
-      }
-      final Stopwatches.StoppedTask task = Stopwatches.forTask("Loading from storage");
-      task.start();
-      this.isLoading = true;
-      this.isLoadedFromStorage = true;
-      try {
-        storageInputStream.loadIntoResource(this);
-        this.isLoaded = true;
-      } finally {
-        this.isLoading = false;
-        task.stop();
-      }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+      storageInputStream.loadIntoResource(this);
+      this.isLoaded = true;
+    } finally {
+      this.isLoading = false;
+      task.stop();
     }
   }
   
