@@ -79,10 +79,10 @@ define(function() {
 			this._editor.getTextView().setSelection(selection.start, selection.end);
 		},
 		
-		setText: function(text, start, end, preserveCaret) {
-			if (preserveCaret) {
-				var textView = this._editor.getTextView();
-				var caretOffset = textView.getCaretOffset();
+		setText: function(text, start, end) {
+			var textView = this._editor.getTextView();
+			var caretOffset = textView.getCaretOffset();
+			if (caretOffset > 0) {
 				var model = textView.getModel();
 				var line = model.getLineAtOffset(caretOffset)
 				var lineStart = model.getLineStart(line);

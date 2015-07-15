@@ -71,4 +71,30 @@ suite('Occurrences', function() {
 		});
 	});
 	
+	test('should try again when resource is not found', function(done) {
+		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
+			xtext.testEditor({doneCallback: done})
+				.setText('foo')
+				.invokeService('occurrences')
+				.checkRequest(function(url, settings) {
+					assert.equal('test://xtext-service/occurrences', url);
+				})
+				.httpError('Resource not found', {status: 404})
+				.checkRequest(function(url, settings) {
+					assert.equal('test://xtext-service/update', url);
+					assert.equal('foo', settings.data.fullText);
+				})
+				.respond({stateId: '1'})
+				.checkRequest(function(url, settings) {
+					assert.equal('test://xtext-service/occurrences', url);
+					assert.equal('1', settings.data.requiredStateId);
+				})
+				.respond({readRegions: [{offset: 0, length: 3}]})
+				.checkResult(function(editorContext, result) {
+					assert.equal(3, result.readRegions[0].length);
+				})
+				.done();
+		});
+	});
+	
 });

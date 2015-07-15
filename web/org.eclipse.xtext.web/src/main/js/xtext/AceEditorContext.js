@@ -108,7 +108,7 @@ define([], function() {
 			}
 		},
 		
-		setText: function(text, start, end, preserveCaret) {
+		setText: function(text, start, end) {
 			var session = this._editor.getSession();
 			var document = session.getDocument();
 			if (!start)
@@ -120,10 +120,8 @@ define([], function() {
 			var cursorPos = this._editor.getCursorPosition();
 			var mRange = require('ace/range');
 			session.replace(new mRange.Range(startPos.row, startPos.column, endPos.row, endPos.column), text);
-			if (preserveCaret) {
-				this._editor.moveCursorToPosition(cursorPos);
-				this._editor.clearSelection();
-			}
+			this._editor.moveCursorToPosition(cursorPos);
+			this._editor.clearSelection();
 		}
 		
 	};
