@@ -226,22 +226,22 @@ import static extension org.eclipse.xtext.resource.persistence.SerializationExte
  */
 package class SerializationExtensions {
 	
-	def static <T extends ENamedElement> T readEcoreElement(ObjectInput in) {
+	def static <T extends ENamedElement> T readEcoreElement(ObjectInput in) throws IOException {
 		val uri = in.readURI
 		val ePackage = EPackage.Registry.INSTANCE.getEPackage(uri.trimFragment.toString)
 		return ePackage.eResource.getEObject(uri.fragment) as T
 	}
 	
-	def static void writeEcoreElement(ObjectOutput out, ENamedElement namedElement) {
+	def static void writeEcoreElement(ObjectOutput out, ENamedElement namedElement) throws IOException {
 		val uri = EcoreUtil.getURI(namedElement)
 		out.writeURI(uri)
 	}
 	
-	def static <T> T readCastedObject(ObjectInput  in) {
+	def static <T> T readCastedObject(ObjectInput  in) throws IOException {
 		in.readObject as T
 	}
 	
-	def static URI readURI(ObjectInput in) {
+	def static URI readURI(ObjectInput in) throws IOException {
 		val stringRep = in.readUTF
 		if (stringRep == "NULL") {
 			return null
@@ -249,7 +249,7 @@ package class SerializationExtensions {
 		return URI::createURI(stringRep)
 	}
 	
-	def static void writeURI(ObjectOutput out, URI uri) {
+	def static void writeURI(ObjectOutput out, URI uri) throws IOException {
 		if (uri == null) {
 			out.writeUTF("NULL")
 		} else {
@@ -257,11 +257,11 @@ package class SerializationExtensions {
 		}
 	}
 	
-	def static QualifiedName readQualifiedName(ObjectInput in) {
+	def static QualifiedName readQualifiedName(ObjectInput in) throws IOException {
 		return QualifiedName.create(in.readObject as ArrayList<String>)
 	}
 	
-	def static void writeQualifiedName(ObjectOutput out, QualifiedName name) {
+	def static void writeQualifiedName(ObjectOutput out, QualifiedName name) throws IOException {
 		out.writeObject(new ArrayList(name.segments))
 	}
 }

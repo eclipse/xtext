@@ -52,7 +52,7 @@ class StorageAwareResource extends LazyLinkingResource {
 		super.load(options)
 	}
 	
-	def void loadFromStorage(ResourceStorageLoadable storageInputStream) {
+	def void loadFromStorage(ResourceStorageLoadable storageInputStream) throws IOException {
 		if (storageInputStream == null) {
 			throw new NullPointerException('storageInputStream')
 		}
