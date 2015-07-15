@@ -2,7 +2,12 @@ package org.eclipse.xtend.ide.tests.imports;
 
 import com.google.inject.Inject;
 import java.util.List;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
@@ -10,6 +15,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ReplaceRegion;
+import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.imports.ImportOrganizer;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -64,6 +70,98 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  protected void assertIsOrganizedWithErrorsTo(final CharSequence model, final CharSequence expected) {
+    try {
+      String _string = expected.toString();
+      boolean _contains = _string.contains("$");
+      Assert.assertFalse(_contains);
+      String _string_1 = model.toString();
+      final XtendFile xtendFile = this.xtendFileWithError(_string_1);
+      Resource _eResource = xtendFile.eResource();
+      final List<ReplaceRegion> changes = this.importOrganizer.getOrganizedImportChanges(((XtextResource) _eResource));
+      final StringBuilder builder = new StringBuilder(model);
+      final Function1<ReplaceRegion, Integer> _function = new Function1<ReplaceRegion, Integer>() {
+        @Override
+        public Integer apply(final ReplaceRegion it) {
+          return Integer.valueOf(it.getOffset());
+        }
+      };
+      List<ReplaceRegion> _sortBy = IterableExtensions.<ReplaceRegion, Integer>sortBy(changes, _function);
+      List<ReplaceRegion> _reverse = ListExtensions.<ReplaceRegion>reverse(_sortBy);
+      for (final ReplaceRegion it : _reverse) {
+        int _offset = it.getOffset();
+        int _offset_1 = it.getOffset();
+        int _length = it.getLength();
+        int _plus = (_offset_1 + _length);
+        String _text = it.getText();
+        builder.replace(_offset, _plus, _text);
+      }
+      String _string_2 = expected.toString();
+      String _string_3 = builder.toString();
+      Assert.assertEquals(_string_2, _string_3);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected XtendFile xtendFileWithError(final String content) throws Exception {
+    IFile file = this._workbenchTestHelper.createFile("HasErrors", content);
+    ResourceSet _resourceSet = this._workbenchTestHelper.getResourceSet();
+    URI _uri = this._workbenchTestHelper.uri(file);
+    Resource resource = _resourceSet.createResource(_uri);
+    StringInputStream _stringInputStream = new StringInputStream(content);
+    resource.load(_stringInputStream, null);
+    EList<Resource.Diagnostic> _errors = resource.getErrors();
+    String _string = _errors.toString();
+    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
+    int _size = _errors_1.size();
+    boolean _greaterThan = (_size > 0);
+    Assert.assertTrue(_string, _greaterThan);
+    EList<EObject> _contents = resource.getContents();
+    EObject _get = _contents.get(0);
+    XtendFile xtendFile = ((XtendFile) _get);
+    return xtendFile;
+  }
+  
+  @Test
+  public void testBug470235() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtend.lib.annotations.Data");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class O {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Object o = new () {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("BigDecimal list = null");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("} ");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.math.BigDecimal");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class O {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("Object o = new () {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("BigDecimal list = null");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("} ");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedWithErrorsTo(_builder, _builder_1);
   }
   
   @Test

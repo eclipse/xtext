@@ -39,18 +39,33 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
       String _string = xtendFile.toString();
       XtendFile _file = this.file(_string);
       final Resource resource = _file.eResource();
-      final TypeUsages typeUsages = this.typeUsageCollector.collectTypeUsages(((XtextResource) resource));
-      List<TypeUsage> _unresolvedTypeUsages = typeUsages.getUnresolvedTypeUsages();
-      final Function1<TypeUsage, String> _function = new Function1<TypeUsage, String>() {
-        @Override
-        public String apply(final TypeUsage it) {
-          return it.getUsedTypeName();
-        }
-      };
-      List<String> _map = ListExtensions.<TypeUsage, String>map(_unresolvedTypeUsages, _function);
-      final Set<String> usedNames = IterableExtensions.<String>toSet(_map);
-      Set<String> _set = IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(typeNames)));
-      Assert.assertEquals(_set, usedNames);
+      this.hasUnresolvedType(resource, typeNames);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  private void hasUnresolvedType(final Resource resource, final String... typeNames) {
+    final TypeUsages typeUsages = this.typeUsageCollector.collectTypeUsages(((XtextResource) resource));
+    List<TypeUsage> _unresolvedTypeUsages = typeUsages.getUnresolvedTypeUsages();
+    final Function1<TypeUsage, String> _function = new Function1<TypeUsage, String>() {
+      @Override
+      public String apply(final TypeUsage it) {
+        return it.getUsedTypeName();
+      }
+    };
+    List<String> _map = ListExtensions.<TypeUsage, String>map(_unresolvedTypeUsages, _function);
+    final Set<String> usedNames = IterableExtensions.<String>toSet(_map);
+    Set<String> _set = IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(typeNames)));
+    Assert.assertEquals(_set, usedNames);
+  }
+  
+  private void hasUnresolvedTypesWithErrors(final CharSequence xtendFile, final String... typeNames) {
+    try {
+      String _string = xtendFile.toString();
+      XtendFile _fileWithErrors = this.fileWithErrors(_string);
+      final Resource resource = _fileWithErrors.eResource();
+      this.hasUnresolvedType(resource, typeNames);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -284,5 +299,24 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     this.hasUnresolvedTypeSuffix(_builder, "$Entry");
+  }
+  
+  @Test
+  public void testBug470235() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Object o = new () { // missing type is intentional");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("List list = null");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("} ");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.hasUnresolvedTypesWithErrors(_builder, "List");
   }
 }

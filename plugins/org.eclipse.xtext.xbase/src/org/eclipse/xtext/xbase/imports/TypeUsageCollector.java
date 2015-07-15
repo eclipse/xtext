@@ -483,31 +483,33 @@ public class TypeUsageCollector {
 
 	protected void acceptPreferredType(EObject owner, EReference referenceToTypeOrMember) {
 		ITextRegion refRegion = locationInFileProvider.getFullTextRegion(owner, referenceToTypeOrMember, 0);
-		IParseResult parseResult = resource.getParseResult();
-		if(parseResult != null) {
-			String completeText = parseResult.getRootNode().getText();
-			String refText = completeText.substring(refRegion.getOffset(), refRegion.getOffset() + refRegion.getLength());
-			PreferredType preferredType = findPreferredType(owner, referenceToTypeOrMember, refText);
-			if (preferredType != null) {
-				if (preferredType.referencedType != null) {
-					acceptType(preferredType.referencedType, preferredType.usedType, refRegion);
-				} else {
-					String suffix = refText.substring(preferredType.unresolvedTypeName.length());
-					if (owner instanceof XFeatureCall) {
-						XFeatureCall featureCall = (XFeatureCall) owner; 
-						if (typeLiteralHelper.isPotentialTypeLiteral(featureCall, null)) {
-							XAbstractFeatureCall root = typeLiteralHelper.getRootTypeLiteral(featureCall);
-							if (root != null) {
-								ITextRegion region = locationInFileProvider.getSignificantTextRegion(root);
-								if (region.getOffset() == refRegion.getOffset()) {
-									suffix = completeText.substring(region.getOffset(), region.getOffset() + region.getLength());
-									suffix = suffix.substring(preferredType.unresolvedTypeName.length());
-									refRegion = region;
+		if (refRegion.getLength() > 0) {
+			IParseResult parseResult = resource.getParseResult();
+			if(parseResult != null) {
+				String completeText = parseResult.getRootNode().getText();
+				String refText = completeText.substring(refRegion.getOffset(), refRegion.getOffset() + refRegion.getLength());
+				PreferredType preferredType = findPreferredType(owner, referenceToTypeOrMember, refText);
+				if (preferredType != null) {
+					if (preferredType.referencedType != null) {
+						acceptType(preferredType.referencedType, preferredType.usedType, refRegion);
+					} else {
+						String suffix = refText.substring(preferredType.unresolvedTypeName.length());
+						if (owner instanceof XFeatureCall) {
+							XFeatureCall featureCall = (XFeatureCall) owner; 
+							if (typeLiteralHelper.isPotentialTypeLiteral(featureCall, null)) {
+								XAbstractFeatureCall root = typeLiteralHelper.getRootTypeLiteral(featureCall);
+								if (root != null) {
+									ITextRegion region = locationInFileProvider.getSignificantTextRegion(root);
+									if (region.getOffset() == refRegion.getOffset()) {
+										suffix = completeText.substring(region.getOffset(), region.getOffset() + region.getLength());
+										suffix = suffix.substring(preferredType.unresolvedTypeName.length());
+										refRegion = region;
+									}
 								}
 							}
 						}
+						acceptUnresolvedType(preferredType.unresolvedTypeName, suffix, refRegion);
 					}
-					acceptUnresolvedType(preferredType.unresolvedTypeName, suffix, refRegion);
 				}
 			}
 		}
