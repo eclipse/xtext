@@ -19,6 +19,7 @@ import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
 import org.eclipse.xtext.generator.OutputConfiguration;
@@ -40,10 +41,10 @@ public class EclipseProjectConfig extends ProjectConfig {
   
   @Override
   public Path getContainingSourceFolder(final Path path) {
-    try {
-      Map<Path, Path> _sourceFolderMappings = super.getSourceFolderMappings();
-      boolean _isEmpty = _sourceFolderMappings.isEmpty();
-      if (_isEmpty) {
+    Map<Path, Path> _sourceFolderMappings = super.getSourceFolderMappings();
+    boolean _isEmpty = _sourceFolderMappings.isEmpty();
+    if (_isEmpty) {
+      try {
         IJavaProject _create = JavaCore.create(this.project);
         IClasspathEntry[] _rawClasspath = _create.getRawClasspath();
         for (final IClasspathEntry cp : _rawClasspath) {
@@ -59,11 +60,20 @@ public class EclipseProjectConfig extends ProjectConfig {
             }
           }
         }
+      } catch (final Throwable _t) {
+        if (_t instanceof JavaModelException) {
+          final JavaModelException e = (JavaModelException)_t;
+          boolean _isDoesNotExist = e.isDoesNotExist();
+          if (_isDoesNotExist) {
+            return null;
+          }
+          throw new RuntimeException(e);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
       }
-      return super.getContainingSourceFolder(path);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
     }
+    return super.getContainingSourceFolder(path);
   }
   
   @Override

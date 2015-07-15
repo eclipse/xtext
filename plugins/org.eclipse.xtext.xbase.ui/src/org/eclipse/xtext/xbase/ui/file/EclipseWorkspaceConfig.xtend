@@ -16,6 +16,7 @@ import org.eclipse.core.resources.IWorkspaceRoot
 import org.eclipse.jdt.core.IClasspathEntry
 import org.eclipse.jdt.core.IPackageFragmentRoot
 import org.eclipse.jdt.core.JavaCore
+import org.eclipse.jdt.core.JavaModelException
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend.lib.macro.file.Path
@@ -75,13 +76,20 @@ class EclipseProjectConfig extends ProjectConfig {
 	
 	override getContainingSourceFolder(Path path) {
 		if (super.sourceFolderMappings.empty) {
-			for(cp: JavaCore.create(project).rawClasspath) {
-				if (cp.entryKind == IClasspathEntry.CPE_SOURCE) {
-					val cpPath = new Path(cp.path.toString)
-					if (path.startsWith(cpPath)) {
-						return cpPath
-					}
-				} 
+			try {
+				for(cp: JavaCore.create(project).rawClasspath) {
+					if (cp.entryKind == IClasspathEntry.CPE_SOURCE) {
+						val cpPath = new Path(cp.path.toString)
+						if (path.startsWith(cpPath)) {
+							return cpPath
+						}
+					} 
+				}	
+			} catch(JavaModelException e) {
+				if (e.isDoesNotExist) {
+					return null
+				}
+				throw new RuntimeException(e) 
 			}
 		}
 		return super.getContainingSourceFolder(path)

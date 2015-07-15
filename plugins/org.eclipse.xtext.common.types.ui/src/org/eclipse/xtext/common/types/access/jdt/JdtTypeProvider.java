@@ -495,6 +495,8 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	private void collectSourcePackageFragmentRoots(JavaProject javaProject, HashSet<String> rootIDs, IClasspathEntry referringEntry, ObjectVector result) throws JavaModelException {
 		if (referringEntry == null){
 			rootIDs.add(javaProject.rootID());
+		} else if (rootIDs.contains(javaProject.rootID())) {
+			return;
 		}
 		IWorkspaceRoot workspaceRoot = javaProject.getProject().getWorkspace().getRoot();
 		for(IClasspathEntry entry: javaProject.getResolvedClasspath()) {
