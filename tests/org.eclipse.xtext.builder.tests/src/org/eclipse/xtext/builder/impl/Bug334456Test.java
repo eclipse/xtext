@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
-
 import java.util.Collections;
 
 import org.eclipse.core.resources.IProject;
@@ -16,6 +14,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.builder.clustering.CopiedResourceDescription;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.ui.XtextProjectHelper;
@@ -81,5 +80,8 @@ public class Bug334456Test extends AbstractBuilderTest {
 		return result;
 	}
 
+	protected void waitForBuild() {
+		IResourcesSetupUtil.reallyWaitForAutoBuild();
+	}
 
 }

@@ -47,6 +47,7 @@ public class XtendLibClasspathAdderTest extends AbstractXtendUITestCase {
 	@Override
 	public void tearDown() throws Exception {
 		IResourcesSetupUtil.cleanWorkspace();
+		waitForAutoBuild();
 	}
 
 	@Override

@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.xbase" version="2">
     <resource path="META-INF/MANIFEST.MF">
+        <filter comment="More API tooling wrestling" id="923795461">
+            <message_arguments>
+                <message_argument value="2.8.4"/>
+                <message_argument value="2.7.0"/>
+            </message_arguments>
+        </filter>
         <filter comment="version will be generated during buckminster build" id="927989779">
             <message_arguments>
                 <message_argument value="2.8.4"/>
