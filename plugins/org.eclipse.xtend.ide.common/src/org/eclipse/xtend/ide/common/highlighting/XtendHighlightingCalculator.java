@@ -52,6 +52,7 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.XExpression;
@@ -111,13 +112,14 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator imp
 	}
 
 	@Override
-	protected void doProvideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
+	protected void doProvideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor,
+			CancelIndicator cancelIndicator) {
 		XtendFile file = (XtendFile) resource.getContents().get(0);
 		for (XtendTypeDeclaration xtendType : file.getXtendTypes()) {
 			highlightAnnotations(acceptor, xtendType);
 			highlightMembers(xtendType, acceptor);
 		}
-		super.doProvideHighlightingFor(resource, acceptor);
+		super.doProvideHighlightingFor(resource, acceptor, cancelIndicator);
 	}
 
 	protected void highlightMembers(XtendTypeDeclaration xtendType, IHighlightedPositionAcceptor acceptor) {

@@ -18,6 +18,7 @@ import org.eclipse.xtext.junit4.internal.LineDelimiters;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Assert;
@@ -72,7 +73,7 @@ public class TaskHighlightingTest extends AbstractXtextTests implements IHighlig
       this.expect(2, 4, DefaultHighlightingConfiguration.TASK_ID);
       this.expect(17, 5, DefaultHighlightingConfiguration.TASK_ID);
       DefaultSemanticHighlightingCalculator _highlighter = this.getHighlighter();
-      _highlighter.provideHighlightingFor(resource, this);
+      _highlighter.provideHighlightingFor(resource, this, CancelIndicator.NullImpl);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

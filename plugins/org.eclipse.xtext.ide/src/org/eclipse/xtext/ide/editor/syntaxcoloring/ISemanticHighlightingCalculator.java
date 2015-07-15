@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ide.editor.syntaxcoloring;
 
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.CancelIndicator;
 
 import com.google.inject.ImplementedBy;
 
@@ -24,7 +25,9 @@ public interface ISemanticHighlightingCalculator {
 	/**
 	 * @param resource the resource that will be highlighted. May be <code>null</code> in some rare cases.
 	 * @param acceptor used to announce the mapping from text-range to the style's id. The acceptor will never be <code>null</code>.
+	 * @param cancelIndicator used to determine whether we should stop searching for highlighting positions
+	 * 		(use {@code OperationCanceledManager} to check)
 	 */
-	void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor);
+	void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor, CancelIndicator cancelIndicator);
 	
 }

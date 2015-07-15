@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.editor.syntaxcoloring;
 
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.CancelIndicator;
 
 import com.google.inject.ImplementedBy;
 
@@ -41,7 +42,7 @@ public interface ISemanticHighlightingCalculator {
 		
 		@Override
 		public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-			delegate.provideHighlightingFor(resource, acceptor);
+			delegate.provideHighlightingFor(resource, acceptor, CancelIndicator.NullImpl);
 		}
 		
 	}

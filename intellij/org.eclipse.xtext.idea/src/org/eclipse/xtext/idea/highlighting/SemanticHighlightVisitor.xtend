@@ -19,6 +19,7 @@ import org.eclipse.xtext.Constants
 import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator
 import org.eclipse.xtext.psi.impl.BaseXtextFile
+import org.eclipse.xtext.util.CancelIndicator
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -68,7 +69,7 @@ class SemanticHighlightVisitor implements HighlightVisitor {
 	
 	override visit(PsiElement element) {
 		if (element instanceof BaseXtextFile) 
-			highlightCalculator.provideHighlightingFor(element.resource, acceptor)
+			highlightCalculator.provideHighlightingFor(element.resource, acceptor, CancelIndicator.NullImpl)
 	}
 	
 	override clone() {
