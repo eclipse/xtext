@@ -7,20 +7,17 @@
  */
 package org.eclipse.xtext.idea.execution;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
-import com.intellij.execution.JavaExecutionUtil;
 import com.intellij.execution.Location;
 import com.intellij.execution.PsiLocation;
 import com.intellij.execution.actions.ConfigurationContext;
-import com.intellij.execution.configurations.JavaRunConfigurationModule;
+import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.execution.junit.JUnitConfiguration;
-import com.intellij.execution.junit.JUnitUtil;
 import com.intellij.execution.junit.TestClassConfigurationProducer;
-import com.intellij.execution.junit2.PsiMemberParameterizedLocation;
-import com.intellij.openapi.module.Module;
+import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.openapi.actionSystem.DataContextWrapper;
+import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.util.Ref;
-import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.idea.trace.TraceUtils;
@@ -51,35 +48,9 @@ public class TraceBasedJUnitClassConfigurationProducer extends TestClassConfigur
       PsiElement _psiElement = originalLocation.getPsiElement();
       Iterable<PsiElement> _bestJavaElementMatch = this.traceUtils.getBestJavaElementMatch(_psiElement);
       final PsiElement javaElement = IterableExtensions.<PsiElement>head(_bestJavaElementMatch);
-      boolean _notEquals = (!Objects.equal(javaElement, null));
-      if (_notEquals) {
-        if ((originalLocation instanceof PsiMemberParameterizedLocation)) {
-          final String paramSetName = ((PsiMemberParameterizedLocation)originalLocation).getParamSetName();
-          if ((paramSetName != null)) {
-            configuration.setProgramParameters(paramSetName);
-          }
-        }
-        final Location<PsiElement> javaContextLocation = PsiLocation.<PsiElement>fromPsiElement(javaElement);
-        final Location<?> javaClassLocation = JavaExecutionUtil.stepIntoSingleClass(javaContextLocation);
-        if ((javaClassLocation == null)) {
-          return false;
-        }
-        PsiClass testClass = JUnitUtil.getTestClass(javaClassLocation);
-        if ((testClass == null)) {
-          return false;
-        }
-        sourceElement.set(testClass);
-        this.setupConfigurationModule(context, configuration);
-        JavaRunConfigurationModule _configurationModule = configuration.getConfigurationModule();
-        final Module originalModule = _configurationModule.getModule();
-        configuration.beClassConfiguration(testClass);
-        configuration.restoreOriginalModule(originalModule);
-        final String forkMode = configuration.getForkMode();
-        boolean _equals = JUnitConfiguration.FORK_KLASS.equals(forkMode);
-        if (_equals) {
-          configuration.setForkMode(JUnitConfiguration.FORK_NONE);
-        }
-        return true;
+      if ((javaElement != null)) {
+        ConfigurationContext _prepareContext = this.prepareContext(context, javaElement);
+        return super.setupConfigurationFromContext(configuration, _prepareContext, sourceElement);
       }
     }
     return false;
@@ -87,6 +58,39 @@ public class TraceBasedJUnitClassConfigurationProducer extends TestClassConfigur
   
   @Override
   public boolean isConfigurationFromContext(final JUnitConfiguration junitConf, final ConfigurationContext context) {
-    return super.isConfigurationFromContext(junitConf, context);
+    Location _location = context.getLocation();
+    PsiElement _psiElement = _location.getPsiElement();
+    Iterable<PsiElement> _bestJavaElementMatch = this.traceUtils.getBestJavaElementMatch(_psiElement);
+    final PsiElement javaElement = IterableExtensions.<PsiElement>head(_bestJavaElementMatch);
+    if ((javaElement == null)) {
+      return false;
+    }
+    ConfigurationContext _prepareContext = this.prepareContext(context, javaElement);
+    return super.isConfigurationFromContext(junitConf, _prepareContext);
+  }
+  
+  public ConfigurationContext prepareContext(final ConfigurationContext context, final PsiElement psiElement) {
+    DataContext _dataContext = context.getDataContext();
+    final ConfigurationContext ctx = ConfigurationContext.getFromContext(new DataContextWrapper(_dataContext) {
+      @Override
+      public Object getData(final String dataId) {
+        boolean _is = RunConfiguration.DATA_KEY.is(dataId);
+        if (_is) {
+          return context.getOriginalConfiguration(null);
+        } else {
+          boolean _is_1 = LangDataKeys.MODULE.is(dataId);
+          if (_is_1) {
+            return context.getModule();
+          } else {
+            boolean _is_2 = Location.DATA_KEY.is(dataId);
+            if (_is_2) {
+              return PsiLocation.<PsiElement>fromPsiElement(psiElement);
+            }
+          }
+        }
+        return super.getData(dataId);
+      }
+    });
+    return ctx;
   }
 }

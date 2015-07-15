@@ -3,7 +3,7 @@
 	<name>Xtext IDEA Core</name>
 	<description>Xtext IDEA Core.</description>
 	<version>2.9.0-SNAPSHOT</version>
-	<vendor url="https://eclipse.org/Xtext/" icon="icons/dsl-package_16.png">Eclipse Modeling Project</vendor>
+	<vendor url="https://eclipse.org/Xtext/" logo="/icons/dsl-package_16.png">Eclipse Modeling Project</vendor>
 	
 	<idea-version since-build="131"/>
 	<depends>JUnit</depends>

@@ -8,17 +8,15 @@
 package org.eclipse.xtext.idea.execution
 
 import com.google.inject.Inject
-import com.intellij.execution.JavaExecutionUtil
 import com.intellij.execution.Location
 import com.intellij.execution.PsiLocation
 import com.intellij.execution.actions.ConfigurationContext
+import com.intellij.execution.configurations.RunConfiguration
 import com.intellij.execution.junit.JUnitConfiguration
-import com.intellij.execution.junit.JUnitUtil
 import com.intellij.execution.junit.TestClassConfigurationProducer
-import com.intellij.execution.junit2.PsiMemberParameterizedLocation
-import com.intellij.openapi.module.Module
+import com.intellij.openapi.actionSystem.DataContextWrapper
+import com.intellij.openapi.actionSystem.LangDataKeys
 import com.intellij.openapi.util.Ref
-import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiElement
 import org.eclipse.xtext.idea.lang.IXtextLanguage
 import org.eclipse.xtext.idea.trace.TraceUtils
@@ -43,37 +41,37 @@ class TraceBasedJUnitClassConfigurationProducer extends TestClassConfigurationPr
 		if (context.location !== null) {
 			val originalLocation = context.location
 			val javaElement = traceUtils.getBestJavaElementMatch(originalLocation.psiElement).head
-			if (javaElement != null) {
-				if (originalLocation instanceof PsiMemberParameterizedLocation) {
-					val paramSetName = originalLocation.getParamSetName()
-					if (paramSetName !== null) {
-						configuration.setProgramParameters(paramSetName)
-					}
-				}
-				val javaContextLocation = PsiLocation.fromPsiElement(javaElement)
-				val Location<?> javaClassLocation = JavaExecutionUtil.stepIntoSingleClass(javaContextLocation)
-				if(javaClassLocation === null) return false
-
-				var PsiClass testClass = JUnitUtil.getTestClass(javaClassLocation)
-				if(testClass === null) return false
-				
-				sourceElement.set(testClass)
-				setupConfigurationModule(context, configuration)
-				val Module originalModule = configuration.getConfigurationModule().getModule()
-				configuration.beClassConfiguration(testClass)
-				configuration.restoreOriginalModule(originalModule)
-				val String forkMode = configuration.getForkMode()
-				if (JUnitConfiguration.FORK_KLASS.equals(forkMode)) {
-					configuration.setForkMode(JUnitConfiguration.FORK_NONE)
-				}
-				return true
+			if (javaElement !== null) {
+				return super.setupConfigurationFromContext(configuration, prepareContext(context, javaElement),
+					sourceElement)
 			}
 		}
 		return false
 	}
 
 	override isConfigurationFromContext(JUnitConfiguration junitConf, ConfigurationContext context) {
-		super.isConfigurationFromContext(junitConf, context)
+		val javaElement = traceUtils.getBestJavaElementMatch(context.location.psiElement).head
+		if (javaElement === null) {
+			return false
+		}
+		return super.isConfigurationFromContext(junitConf, prepareContext(context, javaElement))
 	}
 
+	def ConfigurationContext prepareContext(ConfigurationContext context, PsiElement psiElement) {
+		val ctx = ConfigurationContext.getFromContext(new DataContextWrapper(context.dataContext) {
+
+			override getData(String dataId) {
+				if (RunConfiguration.DATA_KEY.is(dataId)) {
+					return context.getOriginalConfiguration(null)
+				} else if (LangDataKeys.MODULE.is(dataId)) {
+					return context.module
+				} else if (Location.DATA_KEY.is(dataId)) {
+					return PsiLocation.fromPsiElement(psiElement)
+				}
+				return super.getData(dataId)
+			}
+
+		})
+		return ctx
+	}
 }
