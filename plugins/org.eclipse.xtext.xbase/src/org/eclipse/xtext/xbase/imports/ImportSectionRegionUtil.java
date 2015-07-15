@@ -31,7 +31,8 @@ public class ImportSectionRegionUtil {
 
 	public ITextRegion computeRegion(XtextResource resource) {
 		XImportSection xImportSection = config.getImportSection(resource);
-		if (xImportSection != null) {
+		// try to obtain the region from the text if it is not a synthetic region.
+		if (xImportSection != null && xImportSection.eResource() != null) {
 			INode node = NodeModelUtils.findActualNodeFor(xImportSection);
 			if(node == null) 
 				LOG.error("Cannot detect node for original import section");
