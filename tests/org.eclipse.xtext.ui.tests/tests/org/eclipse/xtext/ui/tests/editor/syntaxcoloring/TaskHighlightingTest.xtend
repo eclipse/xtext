@@ -14,6 +14,7 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor
 import org.eclipse.xtext.junit4.AbstractXtextTests
 import org.eclipse.xtext.junit4.internal.LineDelimiters
 import org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguageStandaloneSetup
+import org.eclipse.xtext.util.CancelIndicator
 import org.junit.Before
 import org.junit.Test
 
@@ -50,7 +51,7 @@ class TaskHighlightingTest extends AbstractXtextTests implements IHighlightedPos
 		'''))
 		expect(2, 4, TASK_ID)
 		expect(17, 5, TASK_ID)
-		getHighlighter().provideHighlightingFor(resource, this)
+		getHighlighter().provideHighlightingFor(resource, this, CancelIndicator.NullImpl)
 	}
 	
 	protected def getHighlighter() {

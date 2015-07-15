@@ -18,6 +18,7 @@ import org.eclipse.xtext.ui.codetemplates.ui.highlighting.TemplatesHighlightingC
 import org.eclipse.xtext.ui.codetemplates.ui.preferences.TemplateResourceProvider;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.TextRegion;
 import org.junit.After;
@@ -123,7 +124,7 @@ public class HighlightingTest implements IHighlightedPositionAcceptor {
 		try {
 			XtextResource resource = resourceProvider.createResource();
 			resource.load(new StringInputStream(model), null);
-			highlighter.provideHighlightingFor(resource, this);
+			highlighter.provideHighlightingFor(resource, this, CancelIndicator.NullImpl);
 			Assert.assertTrue(expectedRegions.toString(), expectedRegions.isEmpty());
 		} catch(Exception e) {
 			throw new RuntimeException(e);
