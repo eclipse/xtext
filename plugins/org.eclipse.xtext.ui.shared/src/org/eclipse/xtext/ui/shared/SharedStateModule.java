@@ -17,7 +17,9 @@ import org.eclipse.xtext.builder.clustering.CurrentDescriptions;
 import org.eclipse.xtext.builder.impl.QueuedBuildData;
 import org.eclipse.xtext.builder.trace.StorageAwareTrace;
 import org.eclipse.xtext.builder.trace.TraceForStorageProvider;
+import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.xtext.ui.JdtAwareProjectByResourceProvider;
+import org.eclipse.xtext.common.types.xtext.ui.JdtIndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.xtext.ui.ProjectAwareResourceDescriptionsProvider;
 import org.eclipse.xtext.generator.IDerivedResourceMarkers;
 import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
@@ -170,6 +172,7 @@ public class SharedStateModule extends AbstractGenericModule {
 		@Override
 		protected void configure() {
 			bind(ResourceDescriptionsProvider.class).to(ProjectAwareResourceDescriptionsProvider.class).in(Scopes.SINGLETON);
+			bind(IndexedJvmTypeAccess.class).to(JdtIndexedJvmTypeAccess.class);
 		}
 		
 	}
