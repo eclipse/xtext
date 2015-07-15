@@ -61,7 +61,8 @@ define(function() {
 			request.settings.success(response.result);
 		else
 			request.settings.error(xhr, 'error', response.errorThrown);
-		request.settings.complete(xhr, response.success ? 'success' : 'error');
+		if (isFunction(request.settings.complete))
+			request.settings.complete(xhr, response.success ? 'success' : 'error');
 	}
 	
 	var requests;

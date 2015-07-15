@@ -98,9 +98,9 @@ define(['jquery'], function(jQuery) {
 							} else {
 								self.invoke(editorContext, params, deferred);
 							}
-							return true;
+						} else {
+							deferred.reject();
 						}
-						deferred.reject();
 						return false;
 					}
 					if (jQuery.isFunction(self._processResult)) {
@@ -115,7 +115,7 @@ define(['jquery'], function(jQuery) {
 			}
 			
 			var onError = function(xhr, textStatus, errorThrown) {
-				if (xhr.status == 404 && !params.loadFromServer) {
+				if (xhr.status == 404 && !params.loadFromServer && self._increaseRecursionCount(editorContext)) {
 					var onConflictResult;
 					if (jQuery.isFunction(self._onConflict)) {
 						onConflictResult = self._onConflict(editorContext, errorThrown);
@@ -141,7 +141,9 @@ define(['jquery'], function(jQuery) {
 				success: onSuccess,
 				error: onError
 			});
-			return deferred.promise();
+			return deferred.promise().always(function() {
+				self._recursionCount = undefined;
+			});
 		},
 
 		/**
@@ -185,14 +187,6 @@ define(['jquery'], function(jQuery) {
 				}
 			};
 			
-			var complete = settings.complete;
-			settings.complete = function(xhr, textStatus) {
-				if (jQuery.isFunction(complete)) {
-					complete(xhr, textStatus);
-				}
-				self._recursionCount = undefined;
-			};
-
 			if (self._resourceId && settings.data)
 				settings.data.resource = self._resourceId;
 			settings.async = true;
@@ -208,10 +202,9 @@ define(['jquery'], function(jQuery) {
 				this._recursionCount = 1;
 			else
 				this._recursionCount++;
-			
+
 			if (this._recursionCount >= 10) {
 				this._reportError(editorContext, 'warning', 'Xtext service request failed after 10 attempts.', {});
-				this._recursionCount = undefined;
 				return false;
 			}
 			return true;

@@ -17,6 +17,7 @@ import org.eclipse.xtext.validation.ResourceValidatorImpl
 import org.eclipse.xtext.web.example.statemachine.StatemachineRuntimeModule
 import org.eclipse.xtext.web.server.ServiceConflictResult
 import org.eclipse.xtext.web.server.model.DocumentStateResult
+import org.eclipse.xtext.web.server.model.XtextWebDocument
 import org.eclipse.xtext.web.server.persistence.ResourceContentResult
 import org.eclipse.xtext.web.server.test.UpdateDocumentTest.TestResourceValidator
 import org.junit.Assert
@@ -173,6 +174,38 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 		assertEquals((result as ServiceConflictResult).conflict, 'invalidStateId')
 	}
 	
+	@Test def testNoBackgroundWorkWhenConflict() {
+		resourceValidator.reset(0)
+		val file = createFile('input signal x state foo end')
+		val sessionStore = new HashMapSessionStore
+		var update = getService(#{
+				'requestType' -> 'update',
+				'resource' -> file.name,
+				'deltaText' -> 'bar',
+				'deltaOffset' -> '21',
+				'deltaReplaceLength' -> '3'
+			}, sessionStore)
+		assertTrue(update.hasSideEffects)
+		assertTrue(update.hasTextInput)
+		val updateResult = update.service.apply() as DocumentStateResult
+		
+		update = getService(#{
+				'requestType' -> 'update',
+				'resource' -> file.name,
+				'deltaText' -> ' set x = true',
+				'deltaOffset' -> '24',
+				'deltaReplaceLength' -> '0',
+				'requiredStateId' -> updateResult.stateId
+			}, sessionStore)
+		val XtextWebDocument document = sessionStore.get(XtextWebDocument -> file.name)
+		document.resource.modificationStamp = 1234
+		val result = update.service.apply()
+		assertThat(result, instanceOf(ServiceConflictResult))
+		val load = getService(#{'requestType' -> 'load', 'resource' -> file.name}, sessionStore)
+		val loadResult = load.service.apply() as ResourceContentResult
+		assertEquals('input signal x state bar end', loadResult.fullText)
+	}
+	
 	@Test def testCancelBackgroundWork1() {
 		resourceValidator.reset(300)
 		val file = createFile('input signal x state foo end')
@@ -295,7 +328,7 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 		assertEquals('input signal x state bar set x =  end', loadResult.fullText)
 	}
 	
-	@Test def testNoPreComputationInStatelessMode() {
+	@Test def testNoPrecomputationInStatelessMode() {
 		resourceValidator.reset(0)
 		val file = createFile('')
 		val sessionStore = new HashMapSessionStore

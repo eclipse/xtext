@@ -161,6 +161,24 @@ suite('Persistence', function() {
 		});
 	});
 	
+	test('[save] should stop after 10 times', function(done) {
+		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
+			var tester = xtext.testEditor({resourceId: 'test.mydsl', sendFullText: true, doneCallback: done})
+				.setText('foo')
+				.invokeService('save');
+			for (var i = 0; i < 10; i++) {
+				tester.checkRequest(function(url, settings) {
+						assert.equal('test://xtext-service/save?resource=test.mydsl', url);
+					})
+					.respond({conflict: 'invalidStateId'});
+			}
+			tester.checkError(function(requestType, severity, message, requestData) {
+					assert.equal('save', requestType);
+					assert.equal('warning', severity);
+				}).done();
+		});
+	});
+	
 	test('[save] should wait until pending update completes', function(done) {
 		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
 			xtext.testEditor({resourceId: 'test.mydsl', doneCallback: done})
