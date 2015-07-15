@@ -108,25 +108,44 @@ public class IndexedJvmTypeAccess {
 			Iterable<IEObjectDescription> candidates = descriptions.getExportedObjects(TypesPackage.Literals.JVM_TYPE, qualifiedName, false);
 			Iterator<IEObjectDescription> iterator = candidates.iterator();
 			if (iterator.hasNext()) {
-				IEObjectDescription description = iterator.next();
-				EObject typeProxy = description.getEObjectOrProxy();
-				if (typeProxy.eIsProxy()) {
-					typeProxy = EcoreUtil.resolve(typeProxy, resourceSet);
-				}
-				if (!typeProxy.eIsProxy() && typeProxy instanceof JvmType) {
-					if (fragment != null) {
-						EObject result = resolveJavaObject((JvmType) typeProxy, fragment);
-						if (result != null)
-							return result;
-					} else
-						return typeProxy;
-				}
+				return findAccessibleType(fragment, resourceSet, iterator);
 			}
 			if (throwShadowedException && descriptions instanceof IShadowedResourceDescriptions) {
 				if (((IShadowedResourceDescriptions) descriptions).isShadowed(TypesPackage.Literals.JVM_TYPE, qualifiedName, false)) {
 					throw new ShadowedTypeException("The type '"+qualifiedName+"' is locally shadowed.");
 				}
 			}
+		}
+		return null;
+	}
+
+	/**
+	 * Returns the first type that was found in the index. May be overridden to honor visibility semantics.
+	 * The given iterator is never empty.
+	 * @since 2.8
+	 */
+	protected EObject findAccessibleType(String fragment, ResourceSet resourceSet, Iterator<IEObjectDescription> fromIndex) {
+		IEObjectDescription description = fromIndex.next();
+		return getAccessibleType(description, fragment, resourceSet);
+	}
+
+	/**
+	 * Read and resolve the EObject from the given description and navigate to its children according
+	 * to the given fragment.
+	 * @since 2.8
+	 */
+	protected EObject getAccessibleType(IEObjectDescription description, String fragment, ResourceSet resourceSet) {
+		EObject typeProxy = description.getEObjectOrProxy();
+		if (typeProxy.eIsProxy()) {
+			typeProxy = EcoreUtil.resolve(typeProxy, resourceSet);
+		}
+		if (!typeProxy.eIsProxy() && typeProxy instanceof JvmType) {
+			if (fragment != null) {
+				EObject result = resolveJavaObject((JvmType) typeProxy, fragment);
+				if (result != null)
+					return result;
+			} else
+				return typeProxy;
 		}
 		return null;
 	}
