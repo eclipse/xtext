@@ -108,5 +108,9 @@ public class ContextualVisibilityHelper implements IVisibilityHelper {
 	protected Set<String> computeSuperTypeNames() {
 		return new RawSuperTypes().collectNames(rawContextType);
 	}
+
+	public String getPackageName() {
+		return packageName;
+	}
 	
 }
