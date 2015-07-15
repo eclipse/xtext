@@ -13,22 +13,15 @@ import com.intellij.openapi.util.Ref
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiMethod
-import org.eclipse.xtext.idea.common.types.JvmPsiClasses
 import org.eclipse.xtext.idea.lang.IXtextLanguage
-import org.eclipse.xtext.psi.impl.BaseXtextFile
-import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiJvmModelAssociations
+import org.eclipse.xtext.idea.trace.TraceUtils
 
 import static extension com.intellij.execution.application.ApplicationConfigurationType.*
 import static extension com.intellij.psi.util.PsiMethodUtil.*
 import static extension com.intellij.psi.util.PsiTreeUtil.*
 
 class JvmTypesApplicationConfigurationProducer extends JavaRunConfigurationProducerBase<ApplicationConfiguration> {
-
-	@Inject
-	extension JvmPsiClasses
-
-	@Inject
-	extension IPsiJvmModelAssociations
+	@Inject TraceUtils traceUtils
 
 	IXtextLanguage xtextLanguage
 
@@ -38,32 +31,29 @@ class JvmTypesApplicationConfigurationProducer extends JavaRunConfigurationProdu
 		this.xtextLanguage = xtextLanguage
 	}
 
-	override protected boolean setupConfigurationFromContext(
-		ApplicationConfiguration configuration,
-		ConfigurationContext context,
-		Ref<PsiElement> sourceElement
-	) {
-		context.location.psiElement.elements.exists [
-			setupConfiguration(configuration, context, sourceElement)
-		]
+	override boolean isConfigurationFromContext(ApplicationConfiguration appConf, ConfigurationContext context) {
+		return context.psiLocation?.isConfiguration(appConf, context)
 	}
 
-	protected def setupConfiguration(
-		PsiElement it,
-		ApplicationConfiguration configuration,
-		ConfigurationContext context,
-		Ref<PsiElement> sourceElement
-	) {
+	override protected boolean setupConfigurationFromContext(ApplicationConfiguration conf,
+		ConfigurationContext context, Ref<PsiElement> sourceElement) {
+		if (!sourceElement.^null) {
+			val javaElement = traceUtils.getBestJavaElementMatch(sourceElement.get).head
+			if (javaElement != null) {
+				return javaElement.setupConfiguration(conf, context, sourceElement)
+			}
+		}
+		return false
+	}
+
+	protected def setupConfiguration(PsiElement it, ApplicationConfiguration configuration,
+		ConfigurationContext context, Ref<PsiElement> sourceElement) {
 		setupConfigurationWithMethod(configuration, context, sourceElement) ||
 			setupConfigurationWithClass(configuration, context, sourceElement)
 	}
 
-	protected def boolean setupConfigurationWithClass(
-		PsiElement element,
-		ApplicationConfiguration configuration,
-		ConfigurationContext context,
-		Ref<PsiElement> sourceElement
-	) {
+	protected def boolean setupConfigurationWithClass(PsiElement element, ApplicationConfiguration configuration,
+		ConfigurationContext context, Ref<PsiElement> sourceElement) {
 		val mainClass = element.mainClass
 		if (mainClass == null) {
 			return false
@@ -73,12 +63,8 @@ class JvmTypesApplicationConfigurationProducer extends JavaRunConfigurationProdu
 		return true
 	}
 
-	protected def boolean setupConfigurationWithMethod(
-		PsiElement element,
-		ApplicationConfiguration configuration,
-		ConfigurationContext context,
-		Ref<PsiElement> sourceElement
-	) {
+	protected def boolean setupConfigurationWithMethod(PsiElement element, ApplicationConfiguration configuration,
+		ConfigurationContext context, Ref<PsiElement> sourceElement) {
 		val mainMethod = element.findMainMethod
 		if (mainMethod == null) {
 			return false
@@ -92,11 +78,8 @@ class JvmTypesApplicationConfigurationProducer extends JavaRunConfigurationProdu
 		mainMethod.parent.setupConfigurationWithMethod(configuration, context, sourceElement)
 	}
 
-	protected def void setupConfiguration(
-		ApplicationConfiguration configuration,
-		PsiClass aClass,
-		ConfigurationContext context
-	) {
+	protected def void setupConfiguration(ApplicationConfiguration configuration, PsiClass aClass,
+		ConfigurationContext context) {
 		configuration.MAIN_CLASS_NAME = JavaExecutionUtil.getRuntimeQualifiedName(aClass)
 		configuration.setGeneratedName()
 		setupConfigurationModule(context, configuration)
@@ -113,20 +96,8 @@ class JvmTypesApplicationConfigurationProducer extends JavaRunConfigurationProdu
 		method.parent.findMainMethod
 	}
 
-	override boolean isConfigurationFromContext(
-		ApplicationConfiguration appConfiguration,
-		ConfigurationContext context
-	) {
-		context.psiLocation.elements.exists [
-			isConfiguration(appConfiguration, context)
-		]
-	}
-
-	protected def isConfiguration(
-		PsiElement element,
-		ApplicationConfiguration appConfiguration,
-		ConfigurationContext context
-	) {
+	protected def isConfiguration(PsiElement element, ApplicationConfiguration appConfiguration,
+		ConfigurationContext context) {
 		val mainClass = element.mainClass
 		if (mainClass == null) {
 			return false
@@ -151,19 +122,4 @@ class JvmTypesApplicationConfigurationProducer extends JavaRunConfigurationProdu
 		}
 		return false
 	}
-
-	protected def Iterable<? extends PsiElement> getElements(PsiElement element) {
-		if (element == null) {
-			return emptyList
-		}
-		if (element instanceof BaseXtextFile) {
-			return element.psiClasses
-		}
-		val jvmElements = element.jvmElements
-		if (!jvmElements.empty) {
-			return jvmElements
-		}
-		return element.parent.elements
-	}
-
 }

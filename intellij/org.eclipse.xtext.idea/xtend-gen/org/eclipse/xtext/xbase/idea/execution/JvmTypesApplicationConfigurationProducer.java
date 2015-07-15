@@ -4,7 +4,6 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.codeInsight.TestFrameworks;
 import com.intellij.execution.JavaExecutionUtil;
-import com.intellij.execution.Location;
 import com.intellij.execution.RunManager;
 import com.intellij.execution.RunnerAndConfigurationSettings;
 import com.intellij.execution.actions.ConfigurationContext;
@@ -23,25 +22,14 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.util.PsiMethodUtil;
 import com.intellij.psi.util.PsiTreeUtil;
-import java.util.Set;
-import org.eclipse.xtext.idea.common.types.JvmPsiClasses;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
-import org.eclipse.xtext.psi.impl.BaseXtextFile;
-import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiJvmModelAssociations;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.idea.trace.TraceUtils;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class JvmTypesApplicationConfigurationProducer extends JavaRunConfigurationProducerBase<ApplicationConfiguration> {
   @Inject
-  @Extension
-  private JvmPsiClasses _jvmPsiClasses;
-  
-  @Inject
-  @Extension
-  private IPsiJvmModelAssociations _iPsiJvmModelAssociations;
+  private TraceUtils traceUtils;
   
   private IXtextLanguage xtextLanguage;
   
@@ -52,17 +40,29 @@ public class JvmTypesApplicationConfigurationProducer extends JavaRunConfigurati
   }
   
   @Override
-  protected boolean setupConfigurationFromContext(final ApplicationConfiguration configuration, final ConfigurationContext context, final Ref<PsiElement> sourceElement) {
-    Location _location = context.getLocation();
-    PsiElement _psiElement = _location.getPsiElement();
-    Iterable<? extends PsiElement> _elements = this.getElements(_psiElement);
-    final Function1<PsiElement, Boolean> _function = new Function1<PsiElement, Boolean>() {
-      @Override
-      public Boolean apply(final PsiElement it) {
-        return Boolean.valueOf(JvmTypesApplicationConfigurationProducer.this.setupConfiguration(it, configuration, context, sourceElement));
+  public boolean isConfigurationFromContext(final ApplicationConfiguration appConf, final ConfigurationContext context) {
+    PsiElement _psiLocation = context.getPsiLocation();
+    boolean _isConfiguration = false;
+    if (_psiLocation!=null) {
+      _isConfiguration=this.isConfiguration(_psiLocation, appConf, context);
+    }
+    return _isConfiguration;
+  }
+  
+  @Override
+  protected boolean setupConfigurationFromContext(final ApplicationConfiguration conf, final ConfigurationContext context, final Ref<PsiElement> sourceElement) {
+    boolean _isNull = sourceElement.isNull();
+    boolean _not = (!_isNull);
+    if (_not) {
+      PsiElement _get = sourceElement.get();
+      Iterable<PsiElement> _bestJavaElementMatch = this.traceUtils.getBestJavaElementMatch(_get);
+      final PsiElement javaElement = IterableExtensions.<PsiElement>head(_bestJavaElementMatch);
+      boolean _notEquals = (!Objects.equal(javaElement, null));
+      if (_notEquals) {
+        return this.setupConfiguration(javaElement, conf, context, sourceElement);
       }
-    };
-    return IterableExtensions.exists(_elements, _function);
+    }
+    return false;
   }
   
   protected boolean setupConfiguration(final PsiElement it, final ApplicationConfiguration configuration, final ConfigurationContext context, final Ref<PsiElement> sourceElement) {
@@ -134,19 +134,6 @@ public class JvmTypesApplicationConfigurationProducer extends JavaRunConfigurati
     return _xblockexpression;
   }
   
-  @Override
-  public boolean isConfigurationFromContext(final ApplicationConfiguration appConfiguration, final ConfigurationContext context) {
-    PsiElement _psiLocation = context.getPsiLocation();
-    Iterable<? extends PsiElement> _elements = this.getElements(_psiLocation);
-    final Function1<PsiElement, Boolean> _function = new Function1<PsiElement, Boolean>() {
-      @Override
-      public Boolean apply(final PsiElement it) {
-        return Boolean.valueOf(JvmTypesApplicationConfigurationProducer.this.isConfiguration(it, appConfiguration, context));
-      }
-    };
-    return IterableExtensions.exists(_elements, _function);
-  }
-  
   protected boolean isConfiguration(final PsiElement element, final ApplicationConfiguration appConfiguration, final ConfigurationContext context) {
     final PsiClass mainClass = ApplicationConfigurationType.getMainClass(element);
     boolean _equals = Objects.equal(mainClass, null);
@@ -192,23 +179,5 @@ public class JvmTypesApplicationConfigurationProducer extends JavaRunConfigurati
       }
     }
     return false;
-  }
-  
-  protected Iterable<? extends PsiElement> getElements(final PsiElement element) {
-    boolean _equals = Objects.equal(element, null);
-    if (_equals) {
-      return CollectionLiterals.<PsiElement>emptyList();
-    }
-    if ((element instanceof BaseXtextFile)) {
-      return this._jvmPsiClasses.getPsiClasses(((BaseXtextFile)element));
-    }
-    final Set<PsiElement> jvmElements = this._iPsiJvmModelAssociations.getJvmElements(element);
-    boolean _isEmpty = jvmElements.isEmpty();
-    boolean _not = (!_isEmpty);
-    if (_not) {
-      return jvmElements;
-    }
-    PsiElement _parent = element.getParent();
-    return this.getElements(_parent);
   }
 }
