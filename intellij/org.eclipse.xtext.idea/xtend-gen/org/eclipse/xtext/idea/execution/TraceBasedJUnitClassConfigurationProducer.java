@@ -13,11 +13,14 @@ import com.intellij.execution.PsiLocation;
 import com.intellij.execution.actions.ConfigurationContext;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.execution.junit.JUnitConfiguration;
+import com.intellij.execution.junit.JUnitUtil;
 import com.intellij.execution.junit.TestClassConfigurationProducer;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.DataContextWrapper;
 import com.intellij.openapi.actionSystem.LangDataKeys;
+import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.Ref;
+import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.idea.trace.TraceUtils;
@@ -28,6 +31,8 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
  */
 @SuppressWarnings("all")
 public class TraceBasedJUnitClassConfigurationProducer extends TestClassConfigurationProducer {
+  private final static Key<PsiClass> TRACE_BASED_PSI_KEY = Key.<PsiClass>create("TRACE_BASED_PSI_KEY");
+  
   @Inject
   private TraceUtils traceUtils;
   
@@ -49,8 +54,12 @@ public class TraceBasedJUnitClassConfigurationProducer extends TestClassConfigur
       Iterable<PsiElement> _bestJavaElementMatch = this.traceUtils.getBestJavaElementMatch(_psiElement);
       final PsiElement javaElement = IterableExtensions.<PsiElement>head(_bestJavaElementMatch);
       if ((javaElement != null)) {
-        ConfigurationContext _prepareContext = this.prepareContext(context, javaElement);
-        return super.setupConfigurationFromContext(configuration, _prepareContext, sourceElement);
+        final PsiClass testClass = JUnitUtil.getTestClass(javaElement);
+        if ((testClass != null)) {
+          configuration.<PsiClass>putUserData(TraceBasedJUnitClassConfigurationProducer.TRACE_BASED_PSI_KEY, testClass);
+          ConfigurationContext _prepareContext = this.prepareContext(context, testClass);
+          return super.setupConfigurationFromContext(configuration, _prepareContext, sourceElement);
+        }
       }
     }
     return false;
@@ -58,14 +67,22 @@ public class TraceBasedJUnitClassConfigurationProducer extends TestClassConfigur
   
   @Override
   public boolean isConfigurationFromContext(final JUnitConfiguration junitConf, final ConfigurationContext context) {
-    Location _location = context.getLocation();
-    PsiElement _psiElement = _location.getPsiElement();
-    Iterable<PsiElement> _bestJavaElementMatch = this.traceUtils.getBestJavaElementMatch(_psiElement);
-    final PsiElement javaElement = IterableExtensions.<PsiElement>head(_bestJavaElementMatch);
-    if ((javaElement == null)) {
+    PsiClass testClass = null;
+    final PsiClass storedXtextLeafTarget = junitConf.<PsiClass>getUserData(TraceBasedJUnitClassConfigurationProducer.TRACE_BASED_PSI_KEY);
+    if ((storedXtextLeafTarget != null)) {
+      testClass = storedXtextLeafTarget;
+    } else {
+      Location _location = context.getLocation();
+      PsiElement _psiElement = _location.getPsiElement();
+      Iterable<PsiElement> _bestJavaElementMatch = this.traceUtils.getBestJavaElementMatch(_psiElement);
+      PsiElement _head = IterableExtensions.<PsiElement>head(_bestJavaElementMatch);
+      PsiClass _testClass = JUnitUtil.getTestClass(_head);
+      testClass = _testClass;
+    }
+    if ((testClass == null)) {
       return false;
     }
-    ConfigurationContext _prepareContext = this.prepareContext(context, javaElement);
+    ConfigurationContext _prepareContext = this.prepareContext(context, testClass);
     return super.isConfigurationFromContext(junitConf, _prepareContext);
   }
   

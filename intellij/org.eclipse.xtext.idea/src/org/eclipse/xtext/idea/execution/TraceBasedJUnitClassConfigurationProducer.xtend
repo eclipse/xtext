@@ -13,10 +13,13 @@ import com.intellij.execution.PsiLocation
 import com.intellij.execution.actions.ConfigurationContext
 import com.intellij.execution.configurations.RunConfiguration
 import com.intellij.execution.junit.JUnitConfiguration
+import com.intellij.execution.junit.JUnitUtil
 import com.intellij.execution.junit.TestClassConfigurationProducer
 import com.intellij.openapi.actionSystem.DataContextWrapper
 import com.intellij.openapi.actionSystem.LangDataKeys
+import com.intellij.openapi.util.Key
 import com.intellij.openapi.util.Ref
+import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiElement
 import org.eclipse.xtext.idea.lang.IXtextLanguage
 import org.eclipse.xtext.idea.trace.TraceUtils
@@ -25,8 +28,8 @@ import org.eclipse.xtext.idea.trace.TraceUtils
  * @author dhuebner - Initial contribution and API
  */
 class TraceBasedJUnitClassConfigurationProducer extends TestClassConfigurationProducer {
+	static final Key<PsiClass> TRACE_BASED_PSI_KEY = Key.create("TRACE_BASED_PSI_KEY")
 	@Inject TraceUtils traceUtils
-
 	IXtextLanguage xtextLanguage
 
 	new(IXtextLanguage xtextLanguage) {
@@ -42,19 +45,29 @@ class TraceBasedJUnitClassConfigurationProducer extends TestClassConfigurationPr
 			val originalLocation = context.location
 			val javaElement = traceUtils.getBestJavaElementMatch(originalLocation.psiElement).head
 			if (javaElement !== null) {
-				return super.setupConfigurationFromContext(configuration, prepareContext(context, javaElement),
-					sourceElement)
+				val testClass = JUnitUtil.getTestClass(javaElement)
+				if (testClass !== null) {
+					configuration.putUserData(TRACE_BASED_PSI_KEY, testClass)
+					return super.setupConfigurationFromContext(configuration, prepareContext(context, testClass),
+						sourceElement)
+				}
 			}
 		}
 		return false
 	}
 
 	override isConfigurationFromContext(JUnitConfiguration junitConf, ConfigurationContext context) {
-		val javaElement = traceUtils.getBestJavaElementMatch(context.location.psiElement).head
-		if (javaElement === null) {
+		var PsiClass testClass = null
+		val storedXtextLeafTarget = junitConf.getUserData(TRACE_BASED_PSI_KEY)
+		if (storedXtextLeafTarget !== null) {
+			testClass = storedXtextLeafTarget
+		} else {
+			testClass = JUnitUtil.getTestClass(traceUtils.getBestJavaElementMatch(context.location.psiElement).head)
+		}
+		if (testClass === null) {
 			return false
 		}
-		return super.isConfigurationFromContext(junitConf, prepareContext(context, javaElement))
+		return super.isConfigurationFromContext(junitConf, prepareContext(context, testClass))
 	}
 
 	def ConfigurationContext prepareContext(ConfigurationContext context, PsiElement psiElement) {
