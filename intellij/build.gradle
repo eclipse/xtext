@@ -29,6 +29,10 @@ configure(subprojects - eclipsePluginProjects) {
 	apply from: "$rootDir/gradle/eclipse-settings.gradle"
 	project.apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
 
+	dependencies {
+		ideaProvided files(((URLClassLoader)javax.tools.ToolProvider.getSystemToolClassLoader()).getURLs()).filter({it.name == "tools.jar"})
+	}
+
 	if (!isBuildServer) {
 		// Disable the java task if not on the build server
 		// This allows to reuse the artifacts from /bin that
