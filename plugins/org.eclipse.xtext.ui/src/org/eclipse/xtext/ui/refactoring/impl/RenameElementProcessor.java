@@ -112,13 +112,17 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 			this.renameElementContext = renameElementContext;
 			this.targetElementURI = renameElementContext.getTargetElementURI();
 			resourceSet = getResourceSet(renameElementContext);
-			targetElement = resourceSet.getEObject(targetElementURI, true);
-			if (targetElement == null) {
-				status.add(FATAL, "Rename target element {0} can not be resolved", targetElementURI);
-			} else {
-				this.renameStrategy = createRenameElementStrategy(targetElement, renameElementContext);
-				if (this.renameStrategy == null)
-					return false;
+			// we may fail to obtain a resourceSet - in that case, it a fatal problem was logged already
+			// so we just stop the initialization process
+			if (resourceSet != null) {
+				targetElement = resourceSet.getEObject(targetElementURI, true);
+				if (targetElement == null) {
+					status.add(FATAL, "Rename target element {0} can not be resolved", targetElementURI);
+				} else {
+					this.renameStrategy = createRenameElementStrategy(targetElement, renameElementContext);
+					if (this.renameStrategy == null)
+						return false;
+				}
 			}
 		} catch (NoSuchStrategyException e) {
 			status.add(FATAL, e.getMessage());
