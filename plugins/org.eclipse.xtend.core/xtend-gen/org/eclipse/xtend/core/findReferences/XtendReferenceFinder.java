@@ -65,6 +65,9 @@ public class XtendReferenceFinder extends ReferenceFinder {
   
   @Override
   public void findReferencesInDescription(final TargetURIs targetURIs, final IResourceDescription resourceDescription, final IReferenceFinder.IResourceAccess resourceAccess, final IReferenceFinder.Acceptor acceptor, final IProgressMonitor monitor) {
+    if ((resourceAccess == null)) {
+      return;
+    }
     Declarators.DeclaratorsData _declaratorData = this.declarators.getDeclaratorData(targetURIs, resourceAccess);
     final Set<QualifiedName> names = _declaratorData.getDeclaratorNames();
     boolean _isCanceled = monitor.isCanceled();
