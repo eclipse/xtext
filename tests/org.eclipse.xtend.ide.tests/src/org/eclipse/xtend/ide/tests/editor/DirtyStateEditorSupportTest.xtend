@@ -122,7 +122,7 @@ class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
 		consumer.assertHasNoErrors
 	}
 	
-	static val VALIDATION_TIMEOUT = 10000L
+	static val VALIDATION_TIMEOUT = 2000L
 	
 	private def assertHasErrors(XtextEditor editor) {
 		editor.assertHasErrors(null)
