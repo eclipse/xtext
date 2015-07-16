@@ -63,11 +63,11 @@ class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
 	
 	@Inject extension FileSystemAccess.Extensions
 	
-	def TypeReference getJvmModelInferrer(LanguageConfig2 langConfig) {
+	protected def TypeReference getJvmModelInferrer(LanguageConfig2 langConfig) {
 		new TypeReference(langConfig.naming.runtimeBasePackage + '.jvmmodel.' + GrammarUtil.getName(langConfig.grammar) + 'JvmModelInferrer')
 	}
 	
-	def TypeReference getImportScopeProvider(LanguageConfig2 langConfig) {
+	protected def TypeReference getImportScopeProvider(LanguageConfig2 langConfig) {
 		if (langConfig.grammar.usesXImportSection)
 			'org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider'.typeRef
 		else
@@ -78,10 +78,10 @@ class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
 		if (!language.grammar.inheritsXbase)
 			return;
 		
-		addRuntimeGuiceBindings(language)
-		addEclipsePluginGuiceBindings(language)
+		contributeRuntimeGuiceBindings(language)
+		contributeEclipsePluginGuiceBindings(language)
 		if (projectConfig.eclipsePluginPluginXml !== null)
-			addEclipsePluginExtensions(language)
+			contributeEclipsePluginExtensions(language)
 		if (generateXtendInferrer && !projectConfig.runtimeSrc.containsXtendFile(language.jvmModelInferrer))
 			doGenerateXtendInferrer(language)
 		
@@ -100,7 +100,7 @@ class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
 		}
 	}
 	
-	protected def addRuntimeGuiceBindings(LanguageConfig2 language) {
+	protected def contributeRuntimeGuiceBindings(LanguageConfig2 language) {
 		val bindingFactory = new GuiceModuleAccess.BindingFactory()
 				// overrides binding from org.eclipse.xtext.generator.exporting.QualifiedNamesFragment
 				.addTypeToType(IQualifiedNameProvider.typeRef,
@@ -144,7 +144,7 @@ class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
 			language.runtimeGenModule.superClass = 'org.eclipse.xtext.xbase.DefaultXbaseRuntimeModule'.typeRef
 	}
 	
-	protected def addEclipsePluginGuiceBindings(LanguageConfig2 language) {
+	protected def contributeEclipsePluginGuiceBindings(LanguageConfig2 language) {
 		val bindingFactory = new GuiceModuleAccess.BindingFactory()
 		if (useInferredJvmModel) {
 			val StringConcatenationClient statement = '''
@@ -278,7 +278,7 @@ class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
 		xtendFile.writeTo(projectConfig.runtimeSrc)
 	}
 	
-	protected def addEclipsePluginExtensions(LanguageConfig2 language) {
+	protected def contributeEclipsePluginExtensions(LanguageConfig2 language) {
 		val name = language.grammar.name
 		if (jdtTypeHierarchy) {
 			projectConfig.eclipsePluginPluginXml.entries += '''

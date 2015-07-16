@@ -73,7 +73,7 @@ class XtextGeneratorTemplates {
 			 */
 		 '''
 		 javaFile.javaContent = '''
-			 public class «runtimeSetup.simpleName» extends «runtimeGenSetup»{
+			 public class «runtimeSetup.simpleName» extends «runtimeGenSetup» {
 			 
 			 	public static void doSetup() {
 			 		new «runtimeSetup.simpleName»().createInjectorAndDoEMFRegistration();

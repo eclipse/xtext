@@ -12,6 +12,7 @@ import com.google.inject.Provider;
 import com.google.inject.name.Names;
 import org.eclipse.compare.IViewerCreator;
 import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.builder.clustering.CurrentDescriptions;
 import org.eclipse.xtext.builder.impl.PersistentDataAwareDirtyResource;
 import org.eclipse.xtext.builder.nature.NatureAddingEditorCallback;
+import org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess;
 import org.eclipse.xtext.common.types.ui.navigation.GlobalDerivedMemberAwareURIEditorOpener;
 import org.eclipse.xtext.common.types.ui.navigation.IDerivedMemberAwareEditorOpener;
 import org.eclipse.xtext.common.types.ui.query.IJavaSearchParticipation;
@@ -73,6 +75,7 @@ import org.eclipse.xtext.ui.editor.occurrences.IOccurrenceComputer;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.IOutlineTreeStructureProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeElementOpener;
+import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
 import org.eclipse.xtext.ui.editor.templates.XtextTemplateContextType;
 import org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage;
@@ -156,19 +159,19 @@ public abstract class AbstractXtendUiModule extends DefaultXbaseWithAnnotationsU
 		return ContentFormatterFactory.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.generator.GeneratorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.generator.GeneratorFragment2
 	public Class<? extends IXtextBuilderParticipant> bindIXtextBuilderParticipant() {
 		return BuilderParticipant.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.generator.GeneratorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.generator.GeneratorFragment2
 	public IWorkspaceRoot bindIWorkspaceRootToInstance() {
-		return org.eclipse.core.resources.ResourcesPlugin.getWorkspace().getRoot();
+		return ResourcesPlugin.getWorkspace().getRoot();
 	}
 	
-	// contributed by org.eclipse.xtext.generator.generator.GeneratorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.generator.GeneratorFragment2
 	public void configureBuilderPreferenceStoreInitializer(Binder binder) {
-		binder.bind(org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer.class).annotatedWith(com.google.inject.name.Names.named("builderPreferenceInitializer")).to(org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.Initializer.class);
+		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("builderPreferenceInitializer")).to(BuilderPreferenceAccess.Initializer.class);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2

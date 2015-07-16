@@ -46,7 +46,7 @@ class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
 	
 	@Inject extension FileSystemAccess.Extensions
 	
-	def TypeReference getFormatter2Stub(Grammar grammar) {
+	protected def TypeReference getFormatter2Stub(Grammar grammar) {
 		new TypeReference(grammar.naming.runtimeBasePackage + '.formatting2.' + GrammarUtil.getName(grammar) + 'Formatter')
 	}
 	

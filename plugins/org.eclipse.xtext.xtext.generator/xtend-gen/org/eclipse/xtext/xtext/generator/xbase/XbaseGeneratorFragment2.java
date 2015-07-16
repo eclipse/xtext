@@ -106,7 +106,7 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
   @Extension
   private FileSystemAccess.Extensions _extensions;
   
-  public TypeReference getJvmModelInferrer(final LanguageConfig2 langConfig) {
+  protected TypeReference getJvmModelInferrer(final LanguageConfig2 langConfig) {
     XtextGeneratorNaming _naming = langConfig.getNaming();
     String _runtimeBasePackage = _naming.getRuntimeBasePackage();
     String _plus = (_runtimeBasePackage + ".jvmmodel.");
@@ -117,7 +117,7 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
     return new TypeReference(_plus_2);
   }
   
-  public TypeReference getImportScopeProvider(final LanguageConfig2 langConfig) {
+  protected TypeReference getImportScopeProvider(final LanguageConfig2 langConfig) {
     TypeReference _xifexpression = null;
     Grammar _grammar = langConfig.getGrammar();
     boolean _usesXImportSection = XbaseGeneratorFragment2.usesXImportSection(_grammar);
@@ -137,12 +137,12 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
     if (_not) {
       return;
     }
-    this.addRuntimeGuiceBindings(language);
-    this.addEclipsePluginGuiceBindings(language);
+    this.contributeRuntimeGuiceBindings(language);
+    this.contributeEclipsePluginGuiceBindings(language);
     PluginXmlAccess _eclipsePluginPluginXml = this.projectConfig.getEclipsePluginPluginXml();
     boolean _tripleNotEquals = (_eclipsePluginPluginXml != null);
     if (_tripleNotEquals) {
-      this.addEclipsePluginExtensions(language);
+      this.contributeEclipsePluginExtensions(language);
     }
     boolean _and = false;
     if (!this.generateXtendInferrer) {
@@ -182,7 +182,7 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
     }
   }
   
-  protected void addRuntimeGuiceBindings(final LanguageConfig2 language) {
+  protected void contributeRuntimeGuiceBindings(final LanguageConfig2 language) {
     GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
     TypeReference _typeRef = TypeReference.typeRef(IQualifiedNameProvider.class);
     TypeReference _typeRef_1 = TypeReference.typeRef("org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider");
@@ -255,7 +255,7 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
     }
   }
   
-  protected void addEclipsePluginGuiceBindings(final LanguageConfig2 language) {
+  protected void contributeEclipsePluginGuiceBindings(final LanguageConfig2 language) {
     final GuiceModuleAccess.BindingFactory bindingFactory = new GuiceModuleAccess.BindingFactory();
     if (this.useInferredJvmModel) {
       StringConcatenationClient _client = new StringConcatenationClient() {
@@ -555,7 +555,7 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
     xtendFile.writeTo(_runtimeSrc);
   }
   
-  protected boolean addEclipsePluginExtensions(final LanguageConfig2 language) {
+  protected boolean contributeEclipsePluginExtensions(final LanguageConfig2 language) {
     boolean _xblockexpression = false;
     {
       Grammar _grammar = language.getGrammar();

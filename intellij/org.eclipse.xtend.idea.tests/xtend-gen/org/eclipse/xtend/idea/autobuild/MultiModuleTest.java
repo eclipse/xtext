@@ -8,6 +8,7 @@
 package org.eclipse.xtend.idea.autobuild;
 
 import com.google.common.io.CharStreams;
+import com.google.inject.Provider;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootModificationUtil;
@@ -118,46 +119,64 @@ public class MultiModuleTest extends PsiTestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       final PsiFile referenced = this.createFile(moduleA, "MyClass.xtend", _builder_1.toString());
-      VirtualFile _virtualFile = referencing.getVirtualFile();
+      final Provider<VirtualFile> _function = new Provider<VirtualFile>() {
+        @Override
+        public VirtualFile get() {
+          VirtualFile _virtualFile = referencing.getVirtualFile();
+          VirtualFile _parent = _virtualFile.getParent();
+          VirtualFile _findChild = _parent.findChild("xtend-gen");
+          return _findChild.findChild("OtherClass.java");
+        }
+      };
+      final Provider<VirtualFile> generatedReferencing = _function;
+      final Provider<VirtualFile> _function_1 = new Provider<VirtualFile>() {
+        @Override
+        public VirtualFile get() {
+          VirtualFile _virtualFile = referenced.getVirtualFile();
+          VirtualFile _parent = _virtualFile.getParent();
+          VirtualFile _findChild = _parent.findChild("xtend-gen");
+          return _findChild.findChild("MyClass.java");
+        }
+      };
+      final Provider<VirtualFile> generatedReferenced = _function_1;
+      VirtualFile _get = generatedReferencing.get();
+      TestCase.assertNotNull(_get);
+      VirtualFile _get_1 = generatedReferenced.get();
+      TestCase.assertNotNull(_get_1);
+      VirtualFile _virtualFile = referenced.getVirtualFile();
       VirtualFile _parent = _virtualFile.getParent();
       VirtualFile _findChild = _parent.findChild("xtend-gen");
-      final VirtualFile generatedReferencing = _findChild.findChild("OtherClass.java");
-      VirtualFile _virtualFile_1 = referenced.getVirtualFile();
-      VirtualFile _parent_1 = _virtualFile_1.getParent();
-      VirtualFile _findChild_1 = _parent_1.findChild("xtend-gen");
-      final VirtualFile generatedReferenced = _findChild_1.findChild("MyClass.java");
-      TestCase.assertNotNull(generatedReferencing);
-      TestCase.assertNotNull(generatedReferenced);
-      VirtualFile _virtualFile_2 = referenced.getVirtualFile();
-      VirtualFile _parent_2 = _virtualFile_2.getParent();
-      VirtualFile _findChild_2 = _parent_2.findChild("xtend-gen");
-      VirtualFile _findChild_3 = _findChild_2.findChild("OtherClass.java");
-      TestCase.assertNull(_findChild_3);
+      VirtualFile _findChild_1 = _findChild.findChild("OtherClass.java");
+      TestCase.assertNull(_findChild_1);
+      VirtualFile _get_2 = generatedReferencing.get();
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("public class OtherClass /* implements MyClass  */{");
       _builder_2.newLine();
       _builder_2.append("}");
       _builder_2.newLine();
-      this.assertFileContains(generatedReferencing, _builder_2.toString());
+      this.assertFileContains(_get_2, _builder_2.toString());
+      VirtualFile _get_3 = generatedReferenced.get();
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("public class MyClass {");
       _builder_3.newLine();
       _builder_3.append("}");
       _builder_3.newLine();
-      this.assertFileContains(generatedReferenced, _builder_3.toString());
+      this.assertFileContains(_get_3, _builder_3.toString());
       ModuleRootModificationUtil.addDependency(moduleB, moduleA);
+      VirtualFile _get_4 = generatedReferencing.get();
       StringConcatenation _builder_4 = new StringConcatenation();
       _builder_4.append("public class OtherClass extends MyClass {");
       _builder_4.newLine();
       _builder_4.append("}");
       _builder_4.newLine();
-      this.assertFileContains(generatedReferencing, _builder_4.toString());
+      this.assertFileContains(_get_4, _builder_4.toString());
+      VirtualFile _get_5 = generatedReferenced.get();
       StringConcatenation _builder_5 = new StringConcatenation();
       _builder_5.append("public class MyClass {");
       _builder_5.newLine();
       _builder_5.append("}");
       _builder_5.newLine();
-      this.assertFileContains(generatedReferenced, _builder_5.toString());
+      this.assertFileContains(_get_5, _builder_5.toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
