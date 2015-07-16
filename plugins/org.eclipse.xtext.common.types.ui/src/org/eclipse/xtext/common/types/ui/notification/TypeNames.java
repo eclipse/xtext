@@ -12,6 +12,8 @@ import static com.google.common.collect.Maps.*;
 import java.util.Collection;
 import java.util.Map;
 
+import org.eclipse.jdt.core.IJavaProject;
+
 /**
  * Represents FQNs of types and their corresponding topLevelType's FQN
  * As a delimiter for the FQN the . should be used
@@ -21,7 +23,12 @@ import java.util.Map;
  */
 public class TypeNames {
 	
-	Map<String,String> delegate = newHashMap();
+	private Map<String,String> delegate = newHashMap();
+	private IJavaProject projectContext;
+	
+	public TypeNames(IJavaProject projectContext) {
+		this.projectContext = projectContext;
+	}
 	
 	/**
 	 * Remove a typeName including it's corresponding topLevelTypeName
@@ -62,5 +69,12 @@ public class TypeNames {
 	 */
 	public void addAll(TypeNames typeNames){
 		delegate.putAll(typeNames.delegate);
+	}
+	
+	/**
+	 * Returns the context that was used to determine the type names
+	 */
+	public IJavaProject getProjectContext() {
+		return projectContext;
 	}
 }
