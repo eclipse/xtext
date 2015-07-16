@@ -108,7 +108,10 @@ public class IndexedJvmTypeAccess {
 			Iterable<IEObjectDescription> candidates = descriptions.getExportedObjects(TypesPackage.Literals.JVM_TYPE, qualifiedName, false);
 			Iterator<IEObjectDescription> iterator = candidates.iterator();
 			if (iterator.hasNext()) {
-				return findAccessibleType(fragment, resourceSet, iterator);
+				EObject result = findAccessibleType(fragment, resourceSet, iterator);
+				if (result != null) {
+					return result;
+				}
 			}
 			if (throwShadowedException && descriptions instanceof IShadowedResourceDescriptions) {
 				if (((IShadowedResourceDescriptions) descriptions).isShadowed(TypesPackage.Literals.JVM_TYPE, qualifiedName, false)) {
