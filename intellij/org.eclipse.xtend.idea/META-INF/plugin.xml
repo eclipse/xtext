@@ -5,9 +5,10 @@
       This plugin enables smart editing of Xtend files.
 	</description>
 	<version>2.9.0-SNAPSHOT</version>
-	<vendor>Eclipse Modeling Project</vendor>
+	<vendor url="http://www.eclipse.org/xtend/">Eclipse Modeling Project</vendor>
 
 	<idea-version since-build="131"/>
+	<depends>JUnit</depends>
 	<depends>org.eclipse.xtext.idea</depends>
 
 	<xi:include href="plugin_gen.xml" xpointer="xpointer(/idea-plugin/*)"/>
@@ -33,6 +34,8 @@
 		<createFromTemplateHandler implementation="org.eclipse.xtend.core.idea.actions.XtendCreateFromTemplateHandler"/>
 
     	<runConfigurationProducer implementation="org.eclipse.xtend.core.idea.execution.XtendApplicationConfigurationProducer"/>
+    	<runConfigurationProducer implementation="org.eclipse.xtend.core.idea.execution.XtendJunitClassConfigurationProducer"/>
+    	<runConfigurationProducer implementation="org.eclipse.xtend.core.idea.execution.XtendJunitMethodConfigurationProducer"/>
 
     	<framework.type implementation="org.eclipse.xtend.core.idea.config.XtendFrameworkType" />
     	<library.presentationProvider implementation="org.eclipse.xtend.core.idea.config.XtendLibraryPresentationProvider" />

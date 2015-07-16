@@ -4,8 +4,8 @@
 	<description>
       This plugin enables smart editing of Xtext files.
 	</description>
-	<version>1.0.0</version>
-	<vendor>My Company</vendor>
+	<version>2.9.0-SNAPSHOT</version>
+	<vendor url="https://eclipse.org/Xtext/">Eclipse Modeling Project</vendor>
 
 	<idea-version since-build="131"/>
 	<depends>org.eclipse.xtext.idea</depends>

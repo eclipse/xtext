@@ -34,6 +34,7 @@ class XbaseGeneratorConfigurationState extends GeneratorConfigurationState {
 		super(defOutput)
 		generateSuppressWarnings = true
 		hideLocalSyntheticVariables = true
+		deleteGenerated = true
 	}
 
 }

@@ -39,6 +39,7 @@ public class XbaseGeneratorConfigurationState extends GeneratorConfigurationStat
     super(defOutput);
     this.generateSuppressWarnings = true;
     this.hideLocalSyntheticVariables = true;
+    this.setDeleteGenerated(true);
   }
   
   @Pure

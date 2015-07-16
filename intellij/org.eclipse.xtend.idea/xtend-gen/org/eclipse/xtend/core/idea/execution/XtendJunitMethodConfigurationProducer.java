@@ -8,14 +8,14 @@
 package org.eclipse.xtend.core.idea.execution;
 
 import org.eclipse.xtend.core.idea.lang.XtendLanguage;
-import org.eclipse.xtext.idea.execution.TraceBasedApplicationConfigurationProducer;
+import org.eclipse.xtext.idea.execution.TraceBasedJUnitClassConfigurationProducer;
 
 /**
- * @author kosyakov - Initial contribution and API
+ * @author dhuebner - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class XtendApplicationConfigurationProducer extends TraceBasedApplicationConfigurationProducer {
-  public XtendApplicationConfigurationProducer() {
+public class XtendJunitMethodConfigurationProducer extends TraceBasedJUnitClassConfigurationProducer {
+  public XtendJunitMethodConfigurationProducer() {
     super(XtendLanguage.INSTANCE);
   }
 }
