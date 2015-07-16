@@ -1838,10 +1838,10 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			return false;
 		}
 		if (expr instanceof XCastedExpression) {
-			return isVariableDeclarationRequired(((XCastedExpression) expr).getTarget(), b);
+			return false;
 		}
 		if (expr instanceof XInstanceOfExpression) {
-			return isVariableDeclarationRequired(((XInstanceOfExpression) expr).getExpression(), b);
+			return false;
 		}
 		if (expr instanceof XMemberFeatureCall && isVariableDeclarationRequired((XMemberFeatureCall) expr, b))
 			return true;
