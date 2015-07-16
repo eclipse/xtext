@@ -13,7 +13,6 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -21,6 +20,7 @@ import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.tasks.ITaskFinder;
 import org.eclipse.xtext.tasks.Task;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ITextRegion;
 
 import com.google.inject.Inject;
@@ -33,15 +33,16 @@ public class DefaultSemanticHighlightingCalculator implements ISemanticHighlight
 
 	@Inject
 	private ITaskFinder taskFinder;
-
+	
 	@Override
-	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
+	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor,
+			CancelIndicator cancelIndicator) {
 		if (resource == null)
 			return;
 		IParseResult parseResult = resource.getParseResult();
 		if (parseResult == null || parseResult.getRootASTElement() == null)
 			return;
-		doProvideHighlightingFor(resource, acceptor);
+		doProvideHighlightingFor(resource, acceptor, cancelIndicator);
 	}
 
 	/**
@@ -51,8 +52,8 @@ public class DefaultSemanticHighlightingCalculator implements ISemanticHighlight
 	 * </p>
 	 * <p>
 	 * By default this will visit the elements in the resource recursively and call
-	 * {@link #highlightElement(EObject, IHighlightedPositionAcceptor)} for each of them. As the last step, tasks will
-	 * be highlighted.
+	 * {@link #highlightElement(EObject, IHighlightedPositionAcceptor, CancelIndicator)} for each of them. As the
+	 * last step, tasks will be highlighted.
 	 * </p>
 	 * <p>
 	 * Clients can override this method if the default recursive approach does not fit their use case
@@ -63,33 +64,37 @@ public class DefaultSemanticHighlightingCalculator implements ISemanticHighlight
 	 * @param acceptor
 	 *            the acceptor. Is never <code>null</code>.
 	 */
-	protected void doProvideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		searchAndHighlightElements(resource, acceptor);
+	protected void doProvideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor,
+			CancelIndicator cancelIndicator) {
+		searchAndHighlightElements(resource, acceptor, cancelIndicator);
 		highlightTasks(resource, acceptor);
 	}
 
-	protected void searchAndHighlightElements(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
+	protected void searchAndHighlightElements(XtextResource resource, IHighlightedPositionAcceptor acceptor,
+			CancelIndicator cancelIndicator) {
 		IParseResult parseResult = resource.getParseResult();
 		if (parseResult == null)
 			throw new IllegalStateException("resource#parseResult may not be null");
 		EObject element = parseResult.getRootASTElement();
-		highlightElementRecursively(element, acceptor);
+		highlightElementRecursively(element, acceptor, cancelIndicator);
 	}
 
-	protected void highlightElementRecursively(EObject element, IHighlightedPositionAcceptor acceptor) {
+	protected void highlightElementRecursively(EObject element, IHighlightedPositionAcceptor acceptor,
+			CancelIndicator cancelIndicator) {
 		TreeIterator<EObject> iterator = EcoreUtil2.eAll(element);
 		while (iterator.hasNext()) {
 			EObject object = iterator.next();
-			if (highlightElement(object, acceptor)) {
+			if (highlightElement(object, acceptor, cancelIndicator)) {
 				iterator.prune();
 			}
 		}
 	}
 
 	/**
-	 * @return true to skip the children of this element false otherwise
+	 * @return true to skip the children of this element, false otherwise
 	 */
-	protected boolean highlightElement(EObject object, IHighlightedPositionAcceptor acceptor) {
+	protected boolean highlightElement(EObject object, IHighlightedPositionAcceptor acceptor,
+			CancelIndicator cancelIndicator) {
 		return false;
 	}
 

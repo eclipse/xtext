@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.LightweightPosition.IntToStringArray;
 
 import com.google.common.collect.Lists;
@@ -57,9 +58,9 @@ public class MergingHighlightedPositionAcceptor implements IHighlightedPositionA
 	}
 
 	@Override
-	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
+	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor, CancelIndicator cancelIndicator) {
 		initialize();
-		delegate.provideHighlightingFor(resource, this);
+		delegate.provideHighlightingFor(resource, this, cancelIndicator);
 		mergePositions();
 		for(LightweightPosition pos: getPositions())
 			acceptor.addPosition(pos.getOffset(), pos.getLength(), pos.getIds());
