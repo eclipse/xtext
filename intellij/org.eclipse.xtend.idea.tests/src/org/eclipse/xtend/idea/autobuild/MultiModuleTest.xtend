@@ -13,9 +13,14 @@ import com.intellij.openapi.roots.ModuleRootModificationUtil
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.testFramework.PsiTestCase
 import java.io.InputStreamReader
-import org.eclipse.xtend.core.idea.lang.XtendLanguage
+import org.jetbrains.annotations.NonNls
+import com.intellij.facet.FacetManager
+import org.eclipse.xtend.core.idea.facet.XtendFacetType
+import com.intellij.facet.FacetTypeRegistry
+import com.intellij.facet.Facet
 import org.eclipse.xtext.idea.tests.LightToolingTest
-import org.junit.Ignore
+import org.eclipse.xtend.core.idea.lang.XtendLanguage
+import com.google.inject.Provider
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -53,7 +58,6 @@ class MultiModuleTest extends PsiTestCase {
 		''')
 	}
 	
-	@Ignore
 	def void testTwoModulesWithoutDependency() {
 		val moduleA = createModule('moduleA')
 		val moduleB = createModule('moduleB')
@@ -68,30 +72,30 @@ class MultiModuleTest extends PsiTestCase {
 			class MyClass {
 			}
 		''')
-		val generatedReferencing = referencing.virtualFile.parent.findChild('xtend-gen').findChild('OtherClass.java')
-		val generatedReferenced = referenced.virtualFile.parent.findChild('xtend-gen').findChild('MyClass.java')
-		assertNotNull(generatedReferencing)
-		assertNotNull(generatedReferenced)
+		val Provider<VirtualFile> generatedReferencing = [referencing.virtualFile.parent.findChild('xtend-gen').findChild('OtherClass.java')]
+		val Provider<VirtualFile> generatedReferenced = [referenced.virtualFile.parent.findChild('xtend-gen').findChild('MyClass.java')]
+		assertNotNull(generatedReferencing.get)
+		assertNotNull(generatedReferenced.get)
 		assertNull(referenced.virtualFile.parent.findChild('xtend-gen').findChild('OtherClass.java'))
 		
-		assertFileContains(generatedReferencing,'''
+		assertFileContains(generatedReferencing.get,'''
 			public class OtherClass /* implements MyClass  */{
 			}
 		''')
 			
-		assertFileContains(generatedReferenced,'''
+		assertFileContains(generatedReferenced.get,'''
 			public class MyClass {
 			}
 		''')
 		
 		ModuleRootModificationUtil.addDependency(moduleB, moduleA)
 		
-		assertFileContains(generatedReferencing,'''
+		assertFileContains(generatedReferencing.get,'''
 			public class OtherClass extends MyClass {
 			}
 		''')
 			
-		assertFileContains(generatedReferenced,'''
+		assertFileContains(generatedReferenced.get,'''
 			public class MyClass {
 			}
 		''')
