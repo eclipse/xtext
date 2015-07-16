@@ -156,12 +156,13 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator imp
 	}
 	
 	@Override
-	protected boolean highlightElement(EObject object, IHighlightedPositionAcceptor acceptor) {
+	protected boolean highlightElement(EObject object, IHighlightedPositionAcceptor acceptor, CancelIndicator cancelIndicator) {
 		if (object instanceof AnonymousClass) {
+			operationCanceledManager.checkCanceled(cancelIndicator);
 			highlightMembers((XtendTypeDeclaration) object, acceptor);
 			return false;
 		}
-		return super.highlightElement(object, acceptor);
+		return super.highlightElement(object, acceptor, cancelIndicator);
 	}
 
 	protected void highlightAnnotations(IHighlightedPositionAcceptor acceptor, XtendAnnotationTarget target) {
