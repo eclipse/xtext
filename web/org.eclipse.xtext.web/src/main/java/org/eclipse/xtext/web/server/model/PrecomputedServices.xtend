@@ -9,7 +9,6 @@ package org.eclipse.xtext.web.server.model
 
 import com.google.inject.Singleton
 import java.util.Set
-import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.web.server.IServiceResult
 
 /**
@@ -24,12 +23,12 @@ import org.eclipse.xtext.web.server.IServiceResult
 @Singleton
 class PrecomputedServiceRegistry {
 	
-	val Set<AbstractPrecomputedService<? extends IServiceResult>> precomputedServices = newHashSet
+	val Set<AbstractCachedService<? extends IServiceResult>> precomputedServices = newHashSet
 	
 	/**
 	 * Register a service to be precomputed after each document change.
 	 */
-	def addPrecomputedService(AbstractPrecomputedService<? extends IServiceResult> service) {
+	def addPrecomputedService(AbstractCachedService<? extends IServiceResult> service) {
 		synchronized (precomputedServices) {
 			precomputedServices += service
 		}
@@ -38,7 +37,7 @@ class PrecomputedServiceRegistry {
 	/**
 	 * Remove a service from the registry.
 	 */
-	def removePrecomputedService(AbstractPrecomputedService<? extends IServiceResult> service) {
+	def removePrecomputedService(AbstractCachedService<? extends IServiceResult> service) {
 		synchronized (precomputedServices) {
 			precomputedServices -= service
 		}
@@ -47,29 +46,8 @@ class PrecomputedServiceRegistry {
 	/**
 	 * Return the registered services. These services should be invoked whenever the document is changed.
 	 */
-	def Iterable<AbstractPrecomputedService<? extends IServiceResult>> getPrecomputedServices() {
+	def Iterable<AbstractCachedService<? extends IServiceResult>> getPrecomputedServices() {
 		precomputedServices
 	}
-}
-
-/**
- * Superclass for services that support caching their results in the document. Such a service is
- * not necessarily precomputed automatically after a document change; this happens only if the
- * service is registered in the {@link PrecomputedServiceRegistry}.
- */
-abstract class AbstractPrecomputedService<T extends IServiceResult> {
-	
-	/**
-	 * If a cached result is available, that instance is returned. Otherwise a new result
-	 * is obtained with {@link #compute(IXtextWebDocument, CancelIndicator)}.
-	 */
-	def T getResult(XtextWebDocumentAccess it) {
-		getCachedResult(this, true)
-	}
-
-	/**
-	 * Perform the actual computations to obtain a result.
-	 */
-	def T compute(IXtextWebDocument it, CancelIndicator cancelIndicator)
 	
 }
