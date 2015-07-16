@@ -36,6 +36,7 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -72,6 +73,9 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 	
 	@Inject
 	protected AnnotationLookup annotationLookup;
+	
+	@Inject
+	protected OperationCanceledManager operationCanceledManager;
 	
 	private Map<String, String> highlightedIdentifiers;
 	
@@ -112,32 +116,35 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 	}
 
 	@Override
-	protected boolean highlightElement(EObject object, IHighlightedPositionAcceptor acceptor) {
+	protected boolean highlightElement(EObject object, IHighlightedPositionAcceptor acceptor, CancelIndicator cancelIndicator) {
 		if (object instanceof XAbstractFeatureCall) {
 			if (((XAbstractFeatureCall) object).isPackageFragment()) {
 				return true;
 			}
+			operationCanceledManager.checkCanceled(cancelIndicator);
 			computeFeatureCallHighlighting((XAbstractFeatureCall) object, acceptor);
-		}
-		// Handle XAnnotation in a special way because we want the @ highlighted too
-		if (object instanceof XNumberLiteral) {
+		} else if (object instanceof XNumberLiteral) {
 			highlightNumberLiterals((XNumberLiteral) object, acceptor);
-		} if (object instanceof XAnnotation) {
+		} else if (object instanceof XAnnotation) {
+			// Handle XAnnotation in a special way because we want the @ highlighted too
 			highlightAnnotation((XAnnotation) object, acceptor);
 		} else {
-			computeReferencedJvmTypeHighlighting(acceptor, object);
+			computeReferencedJvmTypeHighlighting(acceptor, object, cancelIndicator);
 		}
 		return false;
 	}
 
-	protected void computeReferencedJvmTypeHighlighting(IHighlightedPositionAcceptor acceptor, EObject referencer) {
+	protected void computeReferencedJvmTypeHighlighting(IHighlightedPositionAcceptor acceptor, EObject referencer,
+			CancelIndicator cancelIndicator) {
 		for (EReference reference : referencer.eClass().getEAllReferences()) {
 			EClass referencedType = reference.getEReferenceType();
 			if (EcoreUtil2.isAssignableFrom(TypesPackage.Literals.JVM_TYPE, referencedType)) {
 				List<EObject> referencedObjects = EcoreUtil2.getAllReferencedObjects(referencer, reference);
+				if (referencedObjects.size() > 0)
+					operationCanceledManager.checkCanceled(cancelIndicator);
 				for (EObject referencedObject : referencedObjects) {
 					EObject resolvedReferencedObject = EcoreUtil.resolve(referencedObject, referencer);
-					if(resolvedReferencedObject != null && !resolvedReferencedObject.eIsProxy()){
+					if (resolvedReferencedObject != null && !resolvedReferencedObject.eIsProxy()) {
 						highlightReferenceJvmType(acceptor, referencer, reference, resolvedReferencedObject);
 					}
 				}
@@ -153,7 +160,7 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 	protected void highlightReferenceJvmType(IHighlightedPositionAcceptor acceptor, EObject referencer,
 			EReference reference, EObject resolvedReferencedObject, String highlightingConfiguration) {
 		highlightDeprecation(acceptor, referencer, reference, resolvedReferencedObject);
-		if (resolvedReferencedObject instanceof JvmAnnotationType){
+		if (resolvedReferencedObject instanceof JvmAnnotationType) {
 			highlightFeature(acceptor, referencer, reference, highlightingConfiguration);
 		}
 	}
