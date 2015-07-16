@@ -18,7 +18,6 @@ import org.eclipse.xtext.web.server.model.AbstractPrecomputedService;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 import org.eclipse.xtext.web.server.model.UpdateDocumentService;
 import org.eclipse.xtext.web.server.syntaxcoloring.HighlightingResult;
-import org.eclipse.xtext.xbase.lib.Extension;
 
 /**
  * Service class for semantic highlighting. The syntactic highlighting is assumed
@@ -29,8 +28,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 @SuppressWarnings("all")
 public class HighlightingService extends AbstractPrecomputedService<HighlightingResult> {
   @Inject
-  @Extension
-  private ISemanticHighlightingCalculator _iSemanticHighlightingCalculator;
+  private ISemanticHighlightingCalculator highlightingCalculator;
   
   /**
    * Return the highlighting result for the given document. The actual highlighting may have
@@ -44,7 +42,7 @@ public class HighlightingService extends AbstractPrecomputedService<Highlighting
     List<HighlightingResult.Region> _regions = result.getRegions();
     final IHighlightedPositionAcceptor acceptor = this.createHighlightedPositionAcceptor(_regions);
     XtextResource _resource = it.getResource();
-    this._iSemanticHighlightingCalculator.provideHighlightingFor(_resource, acceptor);
+    this.highlightingCalculator.provideHighlightingFor(_resource, acceptor, cancelIndicator);
     return result;
   }
   

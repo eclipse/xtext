@@ -18,6 +18,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
@@ -44,7 +45,8 @@ public class XbaseHighlightingCalculator extends org.eclipse.xtext.xbase.ide.hig
 	 * @since 2.9
 	 */
 	@Override
-	public void provideHighlightingFor(XtextResource resource, org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor) {
+	public void provideHighlightingFor(XtextResource resource,
+			org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor, CancelIndicator cancelIndicator) {
 		provideHighlightingFor(resource, cast(acceptor));
 	}
 	
@@ -53,14 +55,15 @@ public class XbaseHighlightingCalculator extends org.eclipse.xtext.xbase.ide.hig
 	 */
 	@Override
 	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		super.provideHighlightingFor(resource, upcast(acceptor));
+		super.provideHighlightingFor(resource, upcast(acceptor), CancelIndicator.NullImpl);
 	}
 	
 	/**
 	 * @since 2.9
 	 */
 	@Override
-	protected void doProvideHighlightingFor(XtextResource resource, org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor) {
+	protected void doProvideHighlightingFor(XtextResource resource,
+			org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor, CancelIndicator cancelIndicator) {
 		doProvideHighlightingFor(resource, cast(acceptor));
 	}
 
@@ -68,7 +71,8 @@ public class XbaseHighlightingCalculator extends org.eclipse.xtext.xbase.ide.hig
 	 * @since 2.9
 	 */
 	@Override
-	protected void searchAndHighlightElements(XtextResource resource, org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor) {
+	protected void searchAndHighlightElements(XtextResource resource,
+			org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor, CancelIndicator cancelIndicator) {
 		searchAndHighlightElements(resource, cast(acceptor));
 	}
 
@@ -76,7 +80,8 @@ public class XbaseHighlightingCalculator extends org.eclipse.xtext.xbase.ide.hig
 	 * @since 2.9
 	 */
 	@Override
-	protected void highlightElementRecursively(EObject element, org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor) {
+	protected void highlightElementRecursively(EObject element,
+			org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor, CancelIndicator cancelIndicator) {
 		highlightElementRecursively(element, cast(acceptor));
 	}
 
@@ -84,7 +89,8 @@ public class XbaseHighlightingCalculator extends org.eclipse.xtext.xbase.ide.hig
 	 * @since 2.9
 	 */
 	@Override
-	protected boolean highlightElement(EObject object, org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor) {
+	protected boolean highlightElement(EObject object, org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor,
+			CancelIndicator cancelIndicator) {
 		return highlightElement(object, cast(acceptor));
 	}
 
@@ -126,7 +132,7 @@ public class XbaseHighlightingCalculator extends org.eclipse.xtext.xbase.ide.hig
 	 */
 	@Deprecated
 	protected void doProvideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		super.doProvideHighlightingFor(resource, upcast(acceptor));
+		super.doProvideHighlightingFor(resource, upcast(acceptor), CancelIndicator.NullImpl);
 	}
 
 	/**
@@ -134,7 +140,7 @@ public class XbaseHighlightingCalculator extends org.eclipse.xtext.xbase.ide.hig
 	 */
 	@Deprecated
 	protected void searchAndHighlightElements(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		super.searchAndHighlightElements(resource, upcast(acceptor));
+		super.searchAndHighlightElements(resource, upcast(acceptor), CancelIndicator.NullImpl);
 	}
 
 	/**
@@ -142,7 +148,7 @@ public class XbaseHighlightingCalculator extends org.eclipse.xtext.xbase.ide.hig
 	 */
 	@Deprecated
 	protected void highlightElementRecursively(EObject element, IHighlightedPositionAcceptor acceptor) {
-		super.highlightElementRecursively(element, upcast(acceptor));
+		super.highlightElementRecursively(element, upcast(acceptor), CancelIndicator.NullImpl);
 	}
 
 	/**
@@ -150,7 +156,7 @@ public class XbaseHighlightingCalculator extends org.eclipse.xtext.xbase.ide.hig
 	 */
 	@Deprecated
 	protected boolean highlightElement(EObject object, IHighlightedPositionAcceptor acceptor) {
-		return super.highlightElement(object, upcast(acceptor));
+		return super.highlightElement(object, upcast(acceptor), CancelIndicator.NullImpl);
 	}
 
 	/**
@@ -198,7 +204,8 @@ public class XbaseHighlightingCalculator extends org.eclipse.xtext.xbase.ide.hig
 	
 	@Override
 	protected void computeReferencedJvmTypeHighlighting(
-			org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor, EObject referencer) {
+			org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor, EObject referencer,
+			CancelIndicator cancelIndicator) {
 		computeReferencedJvmTypeHighlighting(cast(acceptor), referencer);
 	}
 
@@ -272,7 +279,7 @@ public class XbaseHighlightingCalculator extends org.eclipse.xtext.xbase.ide.hig
 	@Deprecated
 	protected void computeReferencedJvmTypeHighlighting(
 			IHighlightedPositionAcceptor acceptor, EObject referencer) {
-		super.computeReferencedJvmTypeHighlighting(upcast(acceptor), referencer);
+		super.computeReferencedJvmTypeHighlighting(upcast(acceptor), referencer, CancelIndicator.NullImpl);
 	}
 
 	/**

@@ -29,11 +29,14 @@ import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.service.OperationCanceledManager;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.xtext.UsedRulesFinder;
 
 import com.google.common.collect.Sets;
+import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -42,12 +45,17 @@ public class SemanticHighlightingCalculator extends  DefaultSemanticHighlighting
 
 	public static final Set<String> SPECIAL_ATTRIBUTES = newHashSet("name", "importedNamespace", "importURI");
 	
+	@Inject
+	private OperationCanceledManager operationCanceledManager;
+	
 	@Override
-	protected void doProvideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		super.doProvideHighlightingFor(resource, acceptor);
+	protected void doProvideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor,
+			CancelIndicator cancelIndicator) {
+		super.doProvideHighlightingFor(resource, acceptor, cancelIndicator);
 		Iterator<EObject> iter = EcoreUtil.getAllContents(resource, true);
 		Set<AbstractRule> calledRules = Sets.newHashSet();
 		while(iter.hasNext()) {
+			operationCanceledManager.checkCanceled(cancelIndicator);
 			EObject current = iter.next();
 			if (current instanceof Grammar) {
 				Grammar grammar = (Grammar) current;

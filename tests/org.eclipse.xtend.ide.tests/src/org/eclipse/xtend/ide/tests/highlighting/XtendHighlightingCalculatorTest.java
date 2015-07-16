@@ -23,6 +23,7 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration;
 import org.junit.After;
@@ -662,7 +663,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 	protected void highlight(String functionBody) {
 		try {
 			XtendClass model = member(functionBody);
-			calculator.provideHighlightingFor((XtextResource) model.eResource(), this);
+			calculator.provideHighlightingFor((XtextResource) model.eResource(), this, CancelIndicator.NullImpl);
 			assertTrue(expectedRegions.toString(), expectedRegions.isEmpty());
 		} catch(Exception e) {
 			throw new RuntimeException(e);
@@ -672,7 +673,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 	protected void highlightActiveAnnotation(String functionBody) {
 		try {
 			XtendTypeDeclaration model = secondMember(functionBody);
-			calculator.provideHighlightingFor((XtextResource) model.eResource(), this);
+			calculator.provideHighlightingFor((XtextResource) model.eResource(), this, CancelIndicator.NullImpl);
 			assertTrue(expectedRegions.toString(), expectedRegions.isEmpty());
 		} catch(Exception e) {
 			throw new RuntimeException(e);

@@ -18,6 +18,7 @@ import org.eclipse.xtext.ui.XtextUiModule;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.xtext.ui.Activator;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
@@ -57,7 +58,7 @@ public class SemanticHighlightingTest extends AbstractXtextTests implements IHig
 			public void addPosition(int offset, int length, String... id) {
 				// ignore
 			}
-		});
+		}, CancelIndicator.NullImpl);
 	}
 	
 	@Test public void testHighlightGrammar() {
@@ -93,7 +94,7 @@ public class SemanticHighlightingTest extends AbstractXtextTests implements IHig
 		try {
 			XtextResource resource = getResourceFromString(grammar);
 			ISemanticHighlightingCalculator calculator = get(ISemanticHighlightingCalculator.class);
-			calculator.provideHighlightingFor(resource, this);
+			calculator.provideHighlightingFor(resource, this, CancelIndicator.NullImpl);
 			assertTrue(expectedRegions.toString(), expectedRegions.isEmpty());
 		} catch(Exception e) {
 			throw new RuntimeException(e);

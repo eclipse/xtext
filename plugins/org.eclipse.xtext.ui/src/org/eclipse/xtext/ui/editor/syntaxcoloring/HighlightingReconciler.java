@@ -138,9 +138,21 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 	 * @param resource
 	 *            XtextResource
 	 */
-	private void reconcilePositions(XtextResource resource) {
-		MergingHighlightedPositionAcceptor acceptor = new MergingHighlightedPositionAcceptor(getEffectiveCalculator());
-		acceptor.provideHighlightingFor(resource, this);
+	private void reconcilePositions(XtextResource resource, CancelIndicator cancelIndicator) {
+		// A default binding was registered from ISemanticHighlightingCalculator to DefaultHighlightingCalculator
+		// thus clienst may have bound DefaultHighlightingCalculator to their custom impl
+		// use the custom impl if available, otherwise go for the new impl
+		if (oldCalculator != null && !DefaultSemanticHighlightingCalculator.class.equals(oldCalculator.getClass())) {
+			MergingHighlightedPositionAcceptor acceptor = new MergingHighlightedPositionAcceptor(oldCalculator);
+			acceptor.provideHighlightingFor(resource, this);
+		} else if (newCalculator != null) {
+			org.eclipse.xtext.ide.editor.syntaxcoloring.MergingHighlightedPositionAcceptor acceptor =
+					new org.eclipse.xtext.ide.editor.syntaxcoloring.MergingHighlightedPositionAcceptor(newCalculator);
+			acceptor.provideHighlightingFor(resource, this, cancelIndicator);
+		} else {
+			throw new IllegalStateException("No semantic highlighting calculator bound.");
+		}
+		
 		List<AttributedPosition> oldPositions = removedPositions;
 		List<AttributedPosition> newPositions = new ArrayList<AttributedPosition>(removedPositionCount);
 		for (int i = 0, n = oldPositions.size(); i < n; i++) {
@@ -149,19 +161,6 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 				newPositions.add(current);
 		}
 		removedPositions = newPositions;
-	}
-	
-	private ISemanticHighlightingCalculator getEffectiveCalculator() {
-		// A default binding was registered from ISemanticHighlightingCalculator to DefaultHighlightingCalculator
-		// thus clienst may have bound DefaultHighlightingCalculator to their custom impl
-		// use the custom impl if available, otherwise go for the new impl
-		if (oldCalculator != null && !DefaultSemanticHighlightingCalculator.class.equals(oldCalculator.getClass())) {
-			return oldCalculator;
-		}
-		if (newCalculator != null) {
-			return new ISemanticHighlightingCalculator.NewToOldDelegate(newCalculator);
-		}
-		throw new IllegalStateException("No calculator bound");
 	}
 	
 	/**
@@ -395,7 +394,7 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 			if (highlightingPresenter.isCanceled())		
 				return;
 			checkCanceled(cancelIndicator);
-			reconcilePositions(resource);
+			reconcilePositions(resource, cancelIndicator);
 
 			if (highlightingPresenter.isCanceled())		
 				return;

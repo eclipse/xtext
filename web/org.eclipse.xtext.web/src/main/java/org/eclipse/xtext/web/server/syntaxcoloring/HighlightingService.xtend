@@ -25,7 +25,7 @@ import org.eclipse.xtext.web.server.model.UpdateDocumentService
 @Singleton
 class HighlightingService extends AbstractPrecomputedService<HighlightingResult> {
 	
-	@Inject extension ISemanticHighlightingCalculator
+	@Inject ISemanticHighlightingCalculator highlightingCalculator
 	
 	/**
 	 * Return the highlighting result for the given document. The actual highlighting may have
@@ -36,7 +36,7 @@ class HighlightingService extends AbstractPrecomputedService<HighlightingResult>
 	override compute(IXtextWebDocument it, CancelIndicator cancelIndicator) {
 		val result = new HighlightingResult
 		val IHighlightedPositionAcceptor acceptor = createHighlightedPositionAcceptor(result.regions)
-		resource.provideHighlightingFor(acceptor)
+		highlightingCalculator.provideHighlightingFor(resource, acceptor, cancelIndicator)
 		return result
 	}
 	

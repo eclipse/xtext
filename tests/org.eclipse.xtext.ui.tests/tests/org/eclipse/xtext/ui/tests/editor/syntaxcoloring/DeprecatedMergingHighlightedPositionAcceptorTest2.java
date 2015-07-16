@@ -14,6 +14,7 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculat
 import org.eclipse.xtext.ide.editor.syntaxcoloring.LightweightPosition;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.MergingHighlightedPositionAcceptor;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.junit.Test;
 
 /**
@@ -28,8 +29,12 @@ public class DeprecatedMergingHighlightedPositionAcceptorTest2 extends MergingHi
 	}
 
 	@Override
-	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
+	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor, CancelIndicator cancelIndicator) {
 		acceptor.addPosition(2, 4, "1", "2");
+	}
+	
+	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
+		provideHighlightingFor(resource, acceptor, CancelIndicator.NullImpl);
 	}
 	
 	@Test public void testAddPositionViaCalculate() {

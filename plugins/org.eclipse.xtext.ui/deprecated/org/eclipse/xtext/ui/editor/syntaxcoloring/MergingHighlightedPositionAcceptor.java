@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.xtext.ide.editor.syntaxcoloring.LightweightPosition;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.CancelIndicator;
 
 /**
  * Accepts a bunch of positions and creates a list
@@ -35,7 +36,7 @@ public class MergingHighlightedPositionAcceptor extends org.eclipse.xtext.ide.ed
 		
 		@Override
 		public void provideHighlightingFor(XtextResource resource,
-				org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor) {
+				org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor, CancelIndicator cancelIndicator) {
 			delegate.provideHighlightingFor(resource, cast(acceptor));
 		}
 		
@@ -64,7 +65,8 @@ public class MergingHighlightedPositionAcceptor extends org.eclipse.xtext.ide.ed
 	 * @since 2.9
 	 */
 	@Override
-	public void provideHighlightingFor(XtextResource resource, org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor) {
+	public void provideHighlightingFor(XtextResource resource,
+			org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor, CancelIndicator cancelIndicator) {
 		provideHighlightingFor(resource, cast(acceptor));
 	}
 	
@@ -73,7 +75,7 @@ public class MergingHighlightedPositionAcceptor extends org.eclipse.xtext.ide.ed
 	 */
 	@Override
 	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		super.provideHighlightingFor(resource, IHighlightedPositionAcceptor.DeprecationHelper.upcast(acceptor));
+		super.provideHighlightingFor(resource, IHighlightedPositionAcceptor.DeprecationHelper.upcast(acceptor), CancelIndicator.NullImpl);
 	}
 	
 	private IHighlightedPositionAcceptor cast(org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor) {
