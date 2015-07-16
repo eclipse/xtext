@@ -89,9 +89,9 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 							paramsCopy.sendFullText = true;
 							self.computeContentAssist(editorContext, paramsCopy, deferred);
 						}
-						return true;
+					} else {
+						deferred.reject(result.conflict);
 					}
-					deferred.reject(result.conflict);
 					return false;
 				}
 				if (onComplete && result.stateId !== undefined && result.stateId != editorContext.getServerState().stateId) {

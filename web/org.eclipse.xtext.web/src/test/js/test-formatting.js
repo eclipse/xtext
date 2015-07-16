@@ -132,4 +132,22 @@ suite('Formatting', function() {
 		});
 	});
 	
+	test('should stop after 10 times', function(done) {
+		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
+			var tester = xtext.testEditor({sendFullText: true, doneCallback: done})
+				.setText('f  o  o')
+				.invokeService('format');
+			for (var i = 0; i < 10; i++) {
+				tester.checkRequest(function(url, settings) {
+						assert.equal('test://xtext-service/format', url);
+					})
+					.respond({conflict: 'invalidStateId'});
+			}
+			tester.checkError(function(requestType, severity, message, requestData) {
+					assert.equal('format', requestType);
+					assert.equal('warning', severity);
+				}).done();
+		});
+	});
+	
 });

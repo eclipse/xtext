@@ -71,4 +71,30 @@ suite('Hover', function() {
 		});
 	});
 	
+	test('should try again when resource is not found', function(done) {
+		requirejs(['assert', 'xtext/xtext-test'], function(assert, xtext) {
+			xtext.testEditor({doneCallback: done})
+				.setText('foo')
+				.invokeService('hover')
+				.checkRequest(function(url, settings) {
+					assert.equal('test://xtext-service/hover', url);
+				})
+				.httpError('Resource not found', {status: 404})
+				.checkRequest(function(url, settings) {
+					assert.equal('test://xtext-service/update', url);
+					assert.equal('foo', settings.data.fullText);
+				})
+				.respond({stateId: '1'})
+				.checkRequest(function(url, settings) {
+					assert.equal('test://xtext-service/hover', url);
+					assert.equal('1', settings.data.requiredStateId);
+				})
+				.respond({content: 'bar'})
+				.checkResult(function(editorContext, result) {
+					assert.equal('bar', result.content);
+				})
+				.done();
+		});
+	});
+	
 });

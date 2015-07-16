@@ -240,7 +240,7 @@ define([
 			};
 			_internals.hoverDelegate = hover;
 			options.hoverFactory = {
-				createHover: function() {
+				createHover: function(editor) {
 					return hover;
 				}
 			};
@@ -636,11 +636,11 @@ define([
 				throw new Error('Service \'' + service + '\' is not available.');
 		}
 		editor.xtextServiceSuccessListeners = [];
-		editor.xtextServiceErrorListeners = [function(requestType, xhr, textStatus, errorThrown) {
+		editor.xtextServiceErrorListeners = [function(requestType, severity, message, requestData) {
 			if (options.showErrorDialogs)
-				window.alert('Xtext service \'' + requestType + '\' failed: ' + errorThrown);
+				window.alert('Xtext service \'' + requestType + '\' failed: ' + message);
 			else
-				console.log('Xtext service \'' + requestType + '\' failed: ' + errorThrown);
+				console.log('Xtext service \'' + requestType + '\' failed: ' + message);
 		}];
 	}
 	

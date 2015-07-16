@@ -53,7 +53,7 @@ public class XtextWebDocument implements IXtextWebDocument {
     this.cachedServiceResults.clear();
   }
   
-  protected <T extends IServiceResult> T getCachedServiceResult(final AbstractPrecomputedService<T> service, final CancelIndicator cancelIndicator, final boolean logCacheMiss) {
+  public <T extends IServiceResult> T getCachedServiceResult(final AbstractPrecomputedService<T> service, final CancelIndicator cancelIndicator, final boolean logCacheMiss) {
     T _elvis = null;
     Class<? extends AbstractPrecomputedService> _class = service.getClass();
     IServiceResult _get = this.cachedServiceResults.get(_class);

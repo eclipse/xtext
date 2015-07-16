@@ -23,6 +23,7 @@ import org.eclipse.xtext.ide.labels.IImageDescriptionProvider;
 import org.eclipse.xtext.ide.labels.INameLabelProvider;
 import org.eclipse.xtext.ide.labels.SimpleImageDescription;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.web.server.hover.HoverResult;
@@ -59,6 +60,10 @@ public class HoverService {
   @Extension
   private INameLabelProvider _iNameLabelProvider;
   
+  @Inject
+  @Extension
+  private OperationCanceledManager _operationCanceledManager;
+  
   /**
    * Compute a hover result at the given offset in the document.
    */
@@ -79,9 +84,11 @@ public class HoverService {
         final String nameLabel = _surroundWithDiv;
         boolean _notEquals = (!Objects.equal(nameLabel, null));
         if (_notEquals) {
+          HoverService.this._operationCanceledManager.checkCanceled(cancelIndicator);
           IImageDescription _imageDescription = HoverService.this._iImageDescriptionProvider.getImageDescription(element);
           String _addIconDivs = HoverService.this.addIconDivs(_imageDescription, nameLabel);
           final String titleHtml = HoverService.this.surroundWithDiv(_addIconDivs, "hover");
+          HoverService.this._operationCanceledManager.checkCanceled(cancelIndicator);
           String _elvis = null;
           String _documentation = HoverService.this._iEObjectDocumentationProvider.getDocumentation(element);
           if (_documentation != null) {

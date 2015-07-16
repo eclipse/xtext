@@ -8,6 +8,7 @@
 
 define([
 	'jquery',
+	'assert',
     'xtext/compatibility',
 	'xtext/MockEditorContext',
 	'xtext/services/XtextService',
@@ -20,7 +21,7 @@ define([
 	'xtext/services/HoverService',
 	'xtext/services/OccurrencesService',
 	'xtext/services/FormattingService'
-], function(mjQuery, compatibility, EditorContext, XtextService, LoadResourceService,
+], function(mjQuery, assert, compatibility, EditorContext, XtextService, LoadResourceService,
 		SaveResourceService, UpdateService, ContentAssistService, HighlightingService,
 		ValidationService, HoverService, OccurrencesService, FormattingService) {
 	
@@ -36,7 +37,6 @@ define([
 	function Tester(editorContext, doneCallback) {
 		this._editorContext = editorContext;
 		this._doneCallback = doneCallback;
-		mjQuery.reset();
 	}
 	
 	Tester.prototype = {
@@ -94,9 +94,22 @@ define([
 		
 		checkRequest: function(checker) {
 			var request = mjQuery.getNextRequest();
-			if (request) {
-				checker(request.url, request.settings);
-			}
+			assert(request);
+			checker(request.url, request.settings);
+			return this;
+		},
+		
+		checkSuccess: function(checker) {
+			var lastSuccess = this._lastSuccess;
+			assert(lastSuccess);
+			checker(lastSuccess.requestType, lastSuccess.result);
+			return this;
+		},
+		
+		checkError: function(checker) {
+			var lastError = this._lastError;
+			assert(lastError);
+			checker(lastError.requestType, lastError.severity, lastError.message, lastError.requestData);
 			return this;
 		},
 		
@@ -122,7 +135,23 @@ define([
 		if (!options)
 			options = {};
 		var editorContext = exports.createEditor(options);
-		return new Tester(editorContext, options.doneCallback);
+		var tester = new Tester(editorContext, options.doneCallback);
+		editorContext.xtextServiceSuccessListeners.push(function(requestType, result) {
+			tester._lastSuccess = {
+				requestType: requestType,
+				result: result
+			};
+		});
+		editorContext.xtextServiceErrorListeners.push(function(requestType, severity, message, requestData) {
+			tester._lastError = {
+				requestType: requestType,
+				severity: severity,
+				message: message,
+				requestData: requestData
+			};
+		});
+		mjQuery.reset();
+		return tester;
 	}
 	
 	exports.createEditor = function(options) {

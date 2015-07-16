@@ -87,7 +87,7 @@ define(['jquery'], function(jQuery) {
 								onConflictResult = self._onConflict(editorContext, result.conflict);
 							}
 							if (!(onConflictResult && onConflictResult.suppressForcedUpdate) && !params.sendFullText
-									&& result.conflict == 'invalidStateId') {
+									&& result.conflict == 'invalidStateId' && self._updateService) {
 								self._updateService.addCompletionCallback(function() {
 									self.invoke(editorContext, params, deferred);
 								});
@@ -98,9 +98,9 @@ define(['jquery'], function(jQuery) {
 							} else {
 								self.invoke(editorContext, params, deferred);
 							}
-							return true;
+						} else {
+							deferred.reject();
 						}
-						deferred.reject();
 						return false;
 					}
 					if (jQuery.isFunction(self._processResult)) {
@@ -114,15 +114,36 @@ define(['jquery'], function(jQuery) {
 				};
 			}
 			
+			var onError = function(xhr, textStatus, errorThrown) {
+				if (xhr.status == 404 && !params.loadFromServer && self._increaseRecursionCount(editorContext)) {
+					var onConflictResult;
+					if (jQuery.isFunction(self._onConflict)) {
+						onConflictResult = self._onConflict(editorContext, errorThrown);
+					}
+					var knownServerState = editorContext.getServerState();
+					if (!(onConflictResult && onConflictResult.suppressForcedUpdate)
+							&& knownServerState.text !== undefined && self._updateService) {
+						self._updateService.addCompletionCallback(function() {
+							self.invoke(editorContext, params, deferred);
+						});
+						delete knownServerState.stateId;
+						delete knownServerState.text;
+						self._updateService.update(editorContext, params);
+						return true;
+					}
+				}
+				deferred.reject(errorThrown);
+			}
+			
 			self.sendRequest(editorContext, {
 				type: httpMethod,
 				data: serverData,
 				success: onSuccess,
-				error: function(xhr, textStatus, errorThrown) {
-					deferred.reject(errorThrown);
-				}
+				error: onError
 			});
-			return deferred.promise();
+			return deferred.promise().always(function() {
+				self._recursionCount = undefined;
+			});
 		},
 
 		/**
@@ -132,11 +153,11 @@ define(['jquery'], function(jQuery) {
 			var self = this;
 			self.setState('started');
 			
-			var success = settings.success;
+			var onSuccess = settings.success;
 			settings.success = function(result) {
 				var accepted = true;
-				if (jQuery.isFunction(success)) {
-					accepted = success(result);
+				if (jQuery.isFunction(onSuccess)) {
+					accepted = onSuccess(result);
 				}
 				if (accepted || accepted === undefined) {
 					self.setState('finished');
@@ -154,26 +175,18 @@ define(['jquery'], function(jQuery) {
 				}
 			};
 			
-			var error = settings.error;
+			var onError = settings.error;
 			settings.error = function(xhr, textStatus, errorThrown) {
 				var resolved = false;
-				if (jQuery.isFunction(error)) {
-					resolved = error(xhr, textStatus, errorThrown);
+				if (jQuery.isFunction(onError)) {
+					resolved = onError(xhr, textStatus, errorThrown);
 				}
 				if (!resolved) {
 					self.setState(undefined);
-					self._reportError(editorContext, textStatus, errorThrown);
+					self._reportError(editorContext, textStatus, errorThrown, xhr);
 				}
 			};
 			
-			var complete = settings.complete;
-			settings.complete = function(xhr, textStatus) {
-				if (jQuery.isFunction(complete)) {
-					complete(xhr, textStatus);
-				}
-				self._recursionCount = undefined;
-			};
-
 			if (self._resourceId && settings.data)
 				settings.data.resource = self._resourceId;
 			settings.async = true;
@@ -189,10 +202,9 @@ define(['jquery'], function(jQuery) {
 				this._recursionCount = 1;
 			else
 				this._recursionCount++;
-			
+
 			if (this._recursionCount >= 10) {
-				this._reportError(editorContext, 'warning', 'Xtext service request failed after 10 attempts.');
-				this._recursionCount = undefined;
+				this._reportError(editorContext, 'warning', 'Xtext service request failed after 10 attempts.', {});
 				return false;
 			}
 			return true;
@@ -201,14 +213,14 @@ define(['jquery'], function(jQuery) {
 		/**
 		 * Report an error to the listeners.
 		 */
-		_reportError: function(editorContext, severity, message) {
+		_reportError: function(editorContext, severity, message, requestData) {
 			if (editorContext.getEditor) {
 				var errorListeners = editorContext.getEditor().xtextServiceErrorListeners;
 				if (errorListeners) {
 					for (var i = 0; i < errorListeners.length; i++) {
 						var listener = errorListeners[i];
 						if (jQuery.isFunction(listener)) {
-							listener(this._requestType, {}, severity, message);
+							listener(this._requestType, severity, message, requestData);
 						}
 					}
 				}
