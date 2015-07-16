@@ -2,6 +2,7 @@ package org.eclipse.xtext.common.types.ui.notification;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Level;
@@ -12,6 +13,7 @@ import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IField;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaElementDelta;
+import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IType;
@@ -25,6 +27,8 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
+import org.eclipse.xtext.ui.containers.JavaProjectsState;
+import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -37,6 +41,9 @@ import com.google.inject.Inject;
  * haveEObjectDescriptionsChanged} is queried.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @noinstantiate This class is not intended to be instantiated by clients.
+ * @noextend This class is not intended to be subclassed by clients.
+ * @noreference This class is not intended to be referenced by clients.
  */
 public class DeltaConverter {
 
@@ -104,7 +111,11 @@ public class DeltaConverter {
 	 * safe to use the default qualified name converter since it uses the '.' as separator.
 	 */
 	private final IQualifiedNameConverter nameConverter;
-
+	
+	@Inject
+	private ISharedStateContributionRegistry javaProjectsStateAccess;
+	private JavaProjectsState cachedState;
+	
 	/**
 	 * @since 2.5
 	 */
@@ -291,10 +302,10 @@ public class DeltaConverter {
 	}
 
 	/**
-	 * @since 2.5
+	 * @since 2.8
 	 */
-	protected void convertRemovedType(String typeName, List<IResourceDescription.Delta> result) {
-		if (!isDerived(typeName)) {
+	protected void convertRemovedType(String typeName, IJavaProject project, List<IResourceDescription.Delta> result) {
+		if (!isDerived(typeName, project)) {
 			result.add(createContentChangeDelta(createTypeResourceDescription(typeName), null));
 		}
 	}
@@ -302,8 +313,8 @@ public class DeltaConverter {
 	/**
 	 * @since 2.8
 	 */
-	protected void convertRemovedType(URI toplevelUri, String typeName, List<IResourceDescription.Delta> result) {
-		if (!isDerived(typeName)) {
+	protected void convertRemovedType(URI toplevelUri, String typeName, IJavaProject context, List<IResourceDescription.Delta> result) {
+		if (!isDerived(typeName, context)) {
 			result.add(createContentChangeDelta(createTypeResourceDescription(toplevelUri, typeName), null));
 		}
 	}
@@ -348,17 +359,40 @@ public class DeltaConverter {
 	 * @since 2.4
 	 */
 	protected boolean isDerived(IType type) {
-		return isDerived(type.getFullyQualifiedName());
+		return isDerived(type.getFullyQualifiedName(), type.getJavaProject());
 	}
 
 	/**
-	 * @since 2.5
+	 * @since 2.8
 	 */
-	protected boolean isDerived(String typeName) {
+	protected boolean isDerived(String typeName, IJavaProject project) {
 		QualifiedName qualifiedName = nameConverter.toQualifiedName(typeName);
 		Iterable<IEObjectDescription> iterable = resourceDescriptions.getExportedObjects(
 				TypesPackage.Literals.JVM_TYPE, qualifiedName, false);
-		return iterable.iterator().hasNext();
+		Iterator<IEObjectDescription> iterator = iterable.iterator();
+		if (iterator.hasNext()) {
+			if (project != null) {
+				JavaProjectsState javaProjectsState = getJavaProjectsState();
+				List<String> visibleContainers = javaProjectsState.getVisibleContainerHandles(project.getHandleIdentifier());
+				while(iterator.hasNext()) {
+					IEObjectDescription description = iterator.next();
+					URI resourceURI = description.getEObjectURI().trimFragment();
+					String handle = javaProjectsState.getContainerHandle(resourceURI);
+					if (visibleContainers.contains(handle)) {
+						return true;
+					}
+				}
+				return false;
+			}
+			return true;
+		}
+		return false;
+	}
+	
+	private JavaProjectsState getJavaProjectsState() {
+		if (cachedState != null)
+			return cachedState;
+		return cachedState = javaProjectsStateAccess.getSingleContributedInstance(JavaProjectsState.class);
 	}
 
 	/**
@@ -477,14 +511,14 @@ public class DeltaConverter {
 
 
 	/**
-	 * @since 2.5
+	 * @since 2.8
 	 * @deprecated
 	 * @see #convertRemovedTypes(TypeNames, List)
 	 */
 	@Deprecated
-	protected void convertRemovedTypes(Collection<String> typeNames, List<IResourceDescription.Delta> result) {
+	protected void convertRemovedTypes(Collection<String> typeNames, IJavaProject project, List<IResourceDescription.Delta> result) {
 		for (String typeName : typeNames) {
-			convertRemovedType(typeName, result);
+			convertRemovedType(typeName, project, result);
 		}
 	}
 	
@@ -494,7 +528,7 @@ public class DeltaConverter {
 	protected void convertRemovedTypes(TypeNames typeNames, List<IResourceDescription.Delta> result) {
 		for (String typeName : typeNames.getTypeNames()) {
 			URI toplevelUri = uriHelper.createResourceURIForFQN(typeNames.getTopLevelTypeName(typeName));
-			convertRemovedType(toplevelUri, typeName, result);
+			convertRemovedType(toplevelUri, typeName, typeNames.getProjectContext(), result);
 		}
 	}
 	
