@@ -24,7 +24,7 @@ import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.web.server.InvalidRequestException;
-import org.eclipse.xtext.web.server.model.AbstractPrecomputedService;
+import org.eclipse.xtext.web.server.model.AbstractCachedService;
 import org.eclipse.xtext.web.server.model.DocumentSynchronizer;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 import org.eclipse.xtext.web.server.model.PrecomputedServiceRegistry;
@@ -318,16 +318,16 @@ public class XtextWebDocumentAccess {
   }
   
   protected void performPrecomputation(final CancelIndicator cancelIndicator) {
-    Iterable<AbstractPrecomputedService<? extends IServiceResult>> _precomputedServices = this.preComputedServiceRegistry.getPrecomputedServices();
-    for (final AbstractPrecomputedService<? extends IServiceResult> service : _precomputedServices) {
+    Iterable<AbstractCachedService<? extends IServiceResult>> _precomputedServices = this.preComputedServiceRegistry.getPrecomputedServices();
+    for (final AbstractCachedService<? extends IServiceResult> service : _precomputedServices) {
       {
         this.operationCanceledManager.checkCanceled(cancelIndicator);
-        this.getCachedResult(service, false);
+        this.getCachedServiceResult(service, false);
       }
     }
   }
   
-  protected <T extends IServiceResult> T getCachedResult(final AbstractPrecomputedService<T> service, final boolean logCacheMiss) {
+  protected <T extends IServiceResult> T getCachedServiceResult(final AbstractCachedService<T> service, final boolean logCacheMiss) {
     final CancelableUnitOfWork<T, IXtextWebDocument> _function = new CancelableUnitOfWork<T, IXtextWebDocument>() {
       @Override
       public T exec(final IXtextWebDocument d, final CancelIndicator cancelIndicator) throws Exception {

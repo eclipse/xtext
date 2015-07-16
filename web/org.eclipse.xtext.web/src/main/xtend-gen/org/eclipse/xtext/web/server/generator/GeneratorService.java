@@ -16,7 +16,7 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.web.server.generator.GeneratorResult;
 import org.eclipse.xtext.web.server.generator.IContentTypeProvider;
 import org.eclipse.xtext.web.server.generator.ResponseFileSystemAccess;
-import org.eclipse.xtext.web.server.model.AbstractPrecomputedService;
+import org.eclipse.xtext.web.server.model.AbstractCachedService;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -32,7 +32,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
  */
 @Singleton
 @SuppressWarnings("all")
-public class GeneratorService extends AbstractPrecomputedService<GeneratorResult> {
+public class GeneratorService extends AbstractCachedService<GeneratorResult> {
   @Inject
   private IGenerator generator;
   

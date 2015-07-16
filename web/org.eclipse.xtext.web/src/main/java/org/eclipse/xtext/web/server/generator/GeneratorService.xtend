@@ -11,7 +11,7 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.xtext.util.CancelIndicator
-import org.eclipse.xtext.web.server.model.AbstractPrecomputedService
+import org.eclipse.xtext.web.server.model.AbstractCachedService
 import org.eclipse.xtext.web.server.model.IXtextWebDocument
 
 /**
@@ -24,7 +24,7 @@ import org.eclipse.xtext.web.server.model.IXtextWebDocument
  * an explicit request.</p>
  */
 @Singleton
-class GeneratorService extends AbstractPrecomputedService<GeneratorResult> {
+class GeneratorService extends AbstractCachedService<GeneratorResult> {
 	
 	@Inject IGenerator generator
 	

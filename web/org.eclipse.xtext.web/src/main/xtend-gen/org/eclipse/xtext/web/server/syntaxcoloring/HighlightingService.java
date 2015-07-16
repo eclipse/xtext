@@ -14,7 +14,7 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.web.server.model.AbstractPrecomputedService;
+import org.eclipse.xtext.web.server.model.AbstractCachedService;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 import org.eclipse.xtext.web.server.model.UpdateDocumentService;
 import org.eclipse.xtext.web.server.syntaxcoloring.HighlightingResult;
@@ -26,7 +26,7 @@ import org.eclipse.xtext.web.server.syntaxcoloring.HighlightingResult;
  */
 @Singleton
 @SuppressWarnings("all")
-public class HighlightingService extends AbstractPrecomputedService<HighlightingResult> {
+public class HighlightingService extends AbstractCachedService<HighlightingResult> {
   @Inject
   private ISemanticHighlightingCalculator highlightingCalculator;
   

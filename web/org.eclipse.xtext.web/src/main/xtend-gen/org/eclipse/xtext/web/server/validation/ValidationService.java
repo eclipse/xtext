@@ -17,7 +17,7 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
-import org.eclipse.xtext.web.server.model.AbstractPrecomputedService;
+import org.eclipse.xtext.web.server.model.AbstractCachedService;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 import org.eclipse.xtext.web.server.model.UpdateDocumentService;
 import org.eclipse.xtext.web.server.validation.ValidationResult;
@@ -30,7 +30,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  */
 @Singleton
 @SuppressWarnings("all")
-public class ValidationService extends AbstractPrecomputedService<ValidationResult> {
+public class ValidationService extends AbstractCachedService<ValidationResult> {
   @Inject
   private IResourceValidator resourceValidator;
   
