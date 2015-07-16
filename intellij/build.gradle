@@ -30,6 +30,7 @@ configure(subprojects - eclipsePluginProjects) {
 	project.apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
 
 	dependencies {
+		ideaProvided fileTree("${ideaDevelopment.ideaHome}/plugins/junit/lib/").include("*.jar")
 		ideaProvided files(((URLClassLoader)javax.tools.ToolProvider.getSystemToolClassLoader()).getURLs()).filter({it.name == "tools.jar"})
 	}
 
