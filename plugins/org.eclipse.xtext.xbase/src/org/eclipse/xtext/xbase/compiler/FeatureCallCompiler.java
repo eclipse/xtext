@@ -50,9 +50,11 @@ import org.eclipse.xtext.util.TextRegionWithLineInformation;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
+import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -383,6 +385,12 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 					return true;
 				for (XExpression argument : featureCall.getActualArguments()) {
 					if (isVariableDeclarationRequired(argument, b)) {
+						return true;
+					}
+					if (argument instanceof XInstanceOfExpression && isVariableDeclarationRequired(((XInstanceOfExpression) argument).getExpression(), b)) {
+						return true;
+					}
+					if (argument instanceof XCastedExpression && isVariableDeclarationRequired(((XCastedExpression) argument).getTarget(), b)) {
 						return true;
 					}
 				}
