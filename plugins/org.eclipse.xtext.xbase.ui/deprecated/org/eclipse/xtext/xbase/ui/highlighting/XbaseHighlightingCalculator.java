@@ -89,7 +89,8 @@ public class XbaseHighlightingCalculator extends org.eclipse.xtext.xbase.ide.hig
 	 * @since 2.9
 	 */
 	@Override
-	protected boolean highlightElement(EObject object, org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor) {
+	protected boolean highlightElement(EObject object, org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor,
+			CancelIndicator cancelIndicator) {
 		return highlightElement(object, cast(acceptor));
 	}
 
@@ -155,7 +156,7 @@ public class XbaseHighlightingCalculator extends org.eclipse.xtext.xbase.ide.hig
 	 */
 	@Deprecated
 	protected boolean highlightElement(EObject object, IHighlightedPositionAcceptor acceptor) {
-		return super.highlightElement(object, upcast(acceptor));
+		return super.highlightElement(object, upcast(acceptor), CancelIndicator.NullImpl);
 	}
 
 	/**
@@ -203,7 +204,8 @@ public class XbaseHighlightingCalculator extends org.eclipse.xtext.xbase.ide.hig
 	
 	@Override
 	protected void computeReferencedJvmTypeHighlighting(
-			org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor, EObject referencer) {
+			org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor, EObject referencer,
+			CancelIndicator cancelIndicator) {
 		computeReferencedJvmTypeHighlighting(cast(acceptor), referencer);
 	}
 
@@ -277,7 +279,7 @@ public class XbaseHighlightingCalculator extends org.eclipse.xtext.xbase.ide.hig
 	@Deprecated
 	protected void computeReferencedJvmTypeHighlighting(
 			IHighlightedPositionAcceptor acceptor, EObject referencer) {
-		super.computeReferencedJvmTypeHighlighting(upcast(acceptor), referencer);
+		super.computeReferencedJvmTypeHighlighting(upcast(acceptor), referencer, CancelIndicator.NullImpl);
 	}
 
 	/**

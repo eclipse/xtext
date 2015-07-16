@@ -69,7 +69,8 @@ public class DefaultSemanticHighlightingCalculator extends org.eclipse.xtext.ide
 	 * @since 2.9
 	 */
 	@Override
-	protected boolean highlightElement(EObject object, org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor) {
+	protected boolean highlightElement(EObject object, org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor acceptor,
+			CancelIndicator cancelIndicator) {
 		return highlightElement(object, cast(acceptor));
 	}
 
@@ -135,7 +136,7 @@ public class DefaultSemanticHighlightingCalculator extends org.eclipse.xtext.ide
 	 */
 	@Deprecated
 	protected boolean highlightElement(EObject object, IHighlightedPositionAcceptor acceptor) {
-		return super.highlightElement(object, upcast(acceptor));
+		return super.highlightElement(object, upcast(acceptor), CancelIndicator.NullImpl);
 	}
 
 	/**
