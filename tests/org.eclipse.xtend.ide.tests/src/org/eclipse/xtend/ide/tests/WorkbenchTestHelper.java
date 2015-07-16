@@ -403,8 +403,9 @@ public class WorkbenchTestHelper extends Assert {
 		new Thread("Display alarm") {
 			@Override public void run() {
 				try {
-					Thread.sleep(25);
-					display.wake();
+					Thread.sleep(timeout);
+					if (!display.isDisposed())
+						display.wake();
 				} catch (InterruptedException e) { }
 			}
 		}.start();
