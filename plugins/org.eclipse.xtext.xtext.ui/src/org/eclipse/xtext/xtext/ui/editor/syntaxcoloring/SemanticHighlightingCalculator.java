@@ -55,7 +55,6 @@ public class SemanticHighlightingCalculator extends  DefaultSemanticHighlighting
 		Iterator<EObject> iter = EcoreUtil.getAllContents(resource, true);
 		Set<AbstractRule> calledRules = Sets.newHashSet();
 		while(iter.hasNext()) {
-			operationCanceledManager.checkCanceled(cancelIndicator);
 			EObject current = iter.next();
 			if (current instanceof Grammar) {
 				Grammar grammar = (Grammar) current;
@@ -64,6 +63,7 @@ public class SemanticHighlightingCalculator extends  DefaultSemanticHighlighting
 					usedRulesFinder.compute(grammar);
 				}
 			} else if (current instanceof AbstractRule) {
+				operationCanceledManager.checkCanceled(cancelIndicator);
 				INode node = getFirstFeatureNode(current, XtextPackage.Literals.ABSTRACT_RULE__NAME);
 				highlightNode(acceptor, node, SemanticHighlightingConfiguration.RULE_DECLARATION_ID);
 				if (current instanceof ParserRule && GrammarUtil.isDatatypeRule((ParserRule) current)) {
