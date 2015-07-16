@@ -62,7 +62,7 @@ public class IdeaProjectContributor extends DefaultProjectFactoryContributor {
     _builder.append("pluginRepositories {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("url \'https://hudson.eclipse.org/xtext/job/xtext-intellij/lastSuccessfulBuild/artifact/git-repo/intellij/build/ideaRepository/updatePlugins.xml\'");
+    _builder.append("url \'http://download.eclipse.org/modeling/tmf/xtext/idea/2.9.0.beta3/updatePlugins.xml\'");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -92,15 +92,6 @@ public class IdeaProjectContributor extends DefaultProjectFactoryContributor {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("jcenter()");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("maven {");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("url \"https://oss.sonatype.org/content/repositories/snapshots/\"");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("}");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");

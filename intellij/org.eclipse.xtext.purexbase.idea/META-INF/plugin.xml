@@ -4,7 +4,7 @@
 	<description>
       This plugin enables smart editing of PureXbase files.
 	</description>
-	<version>1.0.0</version>
+	<version>2.9.0-beta3</version>
 	<vendor>My Company</vendor>
 
 	<idea-version since-build="131"/>

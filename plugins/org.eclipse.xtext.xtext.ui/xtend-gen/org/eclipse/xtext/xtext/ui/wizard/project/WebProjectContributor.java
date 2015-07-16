@@ -462,15 +462,6 @@ public class WebProjectContributor extends DefaultProjectFactoryContributor {
       _builder.append("\t\t");
       _builder.append("jcenter()");
       _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("maven {");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("url \"https://oss.sonatype.org/content/repositories/snapshots/\"");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("}");
-      _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();

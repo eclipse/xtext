@@ -153,7 +153,7 @@ class XtextProjectInfo implements IProjectInfo {
 	}
 
 	def String getXtextVersion() {
-		'2.9.0-SNAPSHOT'
+		'2.9.0-beta3'
 	}
 
 }
