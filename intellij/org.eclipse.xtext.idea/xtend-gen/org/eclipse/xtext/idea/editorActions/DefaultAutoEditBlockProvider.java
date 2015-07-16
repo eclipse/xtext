@@ -7,33 +7,22 @@
  */
 package org.eclipse.xtext.idea.editorActions;
 
-import com.google.common.base.Objects;
-import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.intellij.psi.tree.TokenSet;
 import java.util.Collections;
-import java.util.Set;
-import org.eclipse.xtext.ide.editor.bracketmatching.BracePair;
-import org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider;
 import org.eclipse.xtext.idea.editorActions.AbstractAutoEditBlock;
 import org.eclipse.xtext.idea.editorActions.AbstractIndentableAutoEditBlock;
 import org.eclipse.xtext.idea.editorActions.AutoEditBlockProvider;
-import org.eclipse.xtext.idea.editorActions.AutoEditMultiLineBlock;
 import org.eclipse.xtext.idea.editorActions.AutoEditString;
 import org.eclipse.xtext.idea.editorActions.TokenSetProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
  * @author kosyakov - Initial contribution and API
  */
 @SuppressWarnings("all")
 public class DefaultAutoEditBlockProvider implements AutoEditBlockProvider {
-  @Inject
-  private IBracePairProvider bracePairProvider;
-  
   @Inject
   @Extension
   private TokenSetProvider tokenSetProvider;
@@ -49,41 +38,6 @@ public class DefaultAutoEditBlockProvider implements AutoEditBlockProvider {
   
   @Override
   public Iterable<AbstractIndentableAutoEditBlock> getBlocks(final TokenSet tokenSet) {
-    Iterable<AbstractIndentableAutoEditBlock> _xblockexpression = null;
-    {
-      final AutoEditMultiLineBlock multiLineCommentBlock = new AutoEditMultiLineBlock("/*", " * ", " */");
-      Iterable<AbstractIndentableAutoEditBlock> _switchResult = null;
-      boolean _matched = false;
-      if (!_matched) {
-        TokenSet _singleLineCommentTokens = this.tokenSetProvider.getSingleLineCommentTokens();
-        if (Objects.equal(tokenSet, _singleLineCommentTokens)) {
-          _matched=true;
-          _switchResult = CollectionLiterals.<AbstractIndentableAutoEditBlock>emptyList();
-        }
-      }
-      if (!_matched) {
-        TokenSet _commentTokens = this.tokenSetProvider.getCommentTokens();
-        if (Objects.equal(tokenSet, _commentTokens)) {
-          _matched=true;
-          _switchResult = Collections.<AbstractIndentableAutoEditBlock>unmodifiableList(CollectionLiterals.<AbstractIndentableAutoEditBlock>newArrayList(multiLineCommentBlock));
-        }
-      }
-      if (!_matched) {
-        Set<BracePair> _pairs = this.bracePairProvider.getPairs();
-        final Function1<BracePair, AutoEditMultiLineBlock> _function = new Function1<BracePair, AutoEditMultiLineBlock>() {
-          @Override
-          public AutoEditMultiLineBlock apply(final BracePair it) {
-            String _leftBrace = it.getLeftBrace();
-            String _rightBrace = it.getRightBrace();
-            boolean _isStructural = it.isStructural();
-            return new AutoEditMultiLineBlock(_leftBrace, null, _rightBrace, _isStructural);
-          }
-        };
-        Iterable<AutoEditMultiLineBlock> _map = IterableExtensions.<BracePair, AutoEditMultiLineBlock>map(_pairs, _function);
-        _switchResult = Iterables.<AbstractIndentableAutoEditBlock>concat(_map, Collections.<AutoEditMultiLineBlock>unmodifiableList(CollectionLiterals.<AutoEditMultiLineBlock>newArrayList(multiLineCommentBlock)));
-      }
-      _xblockexpression = _switchResult;
-    }
-    return _xblockexpression;
+    return CollectionLiterals.<AbstractIndentableAutoEditBlock>emptyList();
   }
 }

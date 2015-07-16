@@ -47,26 +47,22 @@ public class XtendAutoEditBlockProvider extends DefaultAutoEditBlockProvider {
   
   @Override
   public Iterable<AbstractIndentableAutoEditBlock> getBlocks(final TokenSet tokenSet) {
-    Iterable<AbstractIndentableAutoEditBlock> _xblockexpression = null;
-    {
-      TokenSet _richStringLiteralTokens = this.tokenSetProvider.getRichStringLiteralTokens();
-      boolean _equals = Objects.equal(tokenSet, _richStringLiteralTokens);
-      if (_equals) {
-        AutoEditMultiLineBlockInRichString _autoEditMultiLineBlockInRichString = new AutoEditMultiLineBlockInRichString("{", "}");
-        AutoEditMultiLineBlock _autoEditMultiLineBlock = new AutoEditMultiLineBlock("«", "»");
-        final Procedure1<AutoEditMultiLineBlock> _function = new Procedure1<AutoEditMultiLineBlock>() {
-          @Override
-          public void apply(final AutoEditMultiLineBlock it) {
-            it.setShouldDeleteClosing(true);
-            it.setShouldInsertClosingTerminalBeforeDigit(true);
-            it.setShouldInsertClosingTerminalBeforeSpecialCharacters(true);
-          }
-        };
-        AutoEditMultiLineBlock _doubleArrow = ObjectExtensions.<AutoEditMultiLineBlock>operator_doubleArrow(_autoEditMultiLineBlock, _function);
-        return Collections.<AbstractIndentableAutoEditBlock>unmodifiableList(CollectionLiterals.<AbstractIndentableAutoEditBlock>newArrayList(_autoEditMultiLineBlockInRichString, _doubleArrow));
-      }
-      _xblockexpression = super.getBlocks(tokenSet);
+    TokenSet _richStringLiteralTokens = this.tokenSetProvider.getRichStringLiteralTokens();
+    boolean _equals = Objects.equal(tokenSet, _richStringLiteralTokens);
+    if (_equals) {
+      AutoEditMultiLineBlockInRichString _autoEditMultiLineBlockInRichString = new AutoEditMultiLineBlockInRichString("{", "}");
+      AutoEditMultiLineBlock _autoEditMultiLineBlock = new AutoEditMultiLineBlock("«", "»");
+      final Procedure1<AutoEditMultiLineBlock> _function = new Procedure1<AutoEditMultiLineBlock>() {
+        @Override
+        public void apply(final AutoEditMultiLineBlock it) {
+          it.setShouldDeleteClosing(true);
+          it.setShouldInsertClosingTerminalBeforeDigit(true);
+          it.setShouldInsertClosingTerminalBeforeSpecialCharacters(true);
+        }
+      };
+      AutoEditMultiLineBlock _doubleArrow = ObjectExtensions.<AutoEditMultiLineBlock>operator_doubleArrow(_autoEditMultiLineBlock, _function);
+      return Collections.<AbstractIndentableAutoEditBlock>unmodifiableList(CollectionLiterals.<AbstractIndentableAutoEditBlock>newArrayList(_autoEditMultiLineBlockInRichString, _doubleArrow));
     }
-    return _xblockexpression;
+    return super.getBlocks(tokenSet);
   }
 }

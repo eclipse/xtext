@@ -27,7 +27,7 @@ public class DefaultBracePairProvider implements IBracePairProvider {
   
   public DefaultBracePairProvider() {
     this(
-      Collections.<BracePair>unmodifiableSet(CollectionLiterals.<BracePair>newHashSet(new BracePair("(", ")", false), new BracePair("{", "}", true), new BracePair("[", "]", false))));
+      Collections.<BracePair>unmodifiableSet(CollectionLiterals.<BracePair>newHashSet(new BracePair("(", ")", true), new BracePair("{", "}", true), new BracePair("[", "]", true))));
   }
   
   public DefaultBracePairProvider(final Set<BracePair> pairs) {

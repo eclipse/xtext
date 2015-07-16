@@ -23,5 +23,131 @@ class AutoEditInClassBodyTest extends AutoEditTest {
 	override protected assertState(String editorState) {
 		super.assertState(PREFIX + editorState + SUFFIX)
 	}
+	
+	override testCurlyBracesBlock_1() {
+		configureByText('|')
+		myFixture.type('{')
+		assertState('\t{|}')
+		myFixture.type('\n')
+		assertState('\t{\n\t\t|\n\t}')
+		myFixture.type('\n')
+		assertState('\t{\n\t\t\n\t\t|\n\t}')
+	}
+	
+	override testIndentationEdit_2() {
+		configureByText("  |")
+		myFixture.type('\n')
+		assertState("  \n	|")
+	}
+	
+	override testBug341093_01() {
+		configureByText("/**/\n" + "//test|")
+
+		myFixture.type('\n')
+		assertState("/**/\n" + "//test\n" + "	|")
+	}
+	
+	override testBug341093_02() {
+		configureByText("/*\n" + " **/\n" + "//test|")
+
+		myFixture.type('\n')
+		assertState("/*\n" + " **/\n" + "//test\n" + "	|")
+	}
+	
+	override testMLComments_07() {
+		configureByText("/* */|")
+
+		myFixture.type('\n')
+		assertState("/* */\n\t|")
+	}
+	
+	override testMLComments_11() {
+		configureByText("/* */\n * |")
+
+		myFixture.type('\n')
+		assertState("/* */\n * \n\t|")
+	}
+	
+	override testSingleLineComment_03() {
+		configureByText("  // test|")
+
+		myFixture.type('\n')
+		assertState("  // test\n\t|")
+	}
+	
+	override testSingleLineComment_04() {
+		configureByText("  // test|\n")
+
+		myFixture.type('\n')
+		assertState("  // test\n\t|\n")
+	}
+	
+	override testCurlyBracesBlock_10() {
+		configureByText('/*{*/ foo|')
+		myFixture.type('\n')
+		assertState('/*{*/ foo\n\t|')
+	}
+	
+	override testCurlyBracesBlock_17() {
+		configureByText('{\n|')
+		myFixture.type('\n')
+		assertState('{\n\n\t|')
+	}
+	
+	override testParenthesis_1() {
+		configureByText("|")
+		myFixture.type('(')
+		assertState("\t(|)")
+		myFixture.type('(')
+		assertState("\t((|))")
+		myFixture.type(BS)
+		assertState("\t(|)")
+		myFixture.type(BS)
+		assertState("\t|")
+	}
+	
+	override testParenthesis_2() {
+		configureByText("|")
+		myFixture.type('(')
+		assertState("\t(|)")
+		myFixture.type(')')
+		assertState("\t()|")
+		myFixture.type(BS)
+		assertState("\t(|")
+		myFixture.type(BS)
+		assertState("\t|")
+	}
+	
+	override testParenthesis_3() {
+		configureByText("|")
+		myFixture.type('(')
+		assertState("\t(|)")
+		myFixture.type(BS)
+		assertState("\t|")
+	}
+	
+	override testParenthesis_4() {
+		configureByText("|foobar")
+		myFixture.type('(')
+		assertState("\t(|foobar")
+	}
+	
+	override testParenthesis_5() {
+		configureByText("|")
+		myFixture.type(')')
+		assertState("\t)|")
+		myFixture.type(')')
+		assertState("\t))|")
+		myFixture.type(BS)
+		assertState("\t)|")
+		myFixture.type(BS)
+		assertState("\t|")
+	}
+	
+	override testParenthesis_9() {
+		configureByText("|'')")
+		myFixture.type('(')
+		assertState("\t(|'')")
+	}
 
 }

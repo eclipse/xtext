@@ -44,15 +44,20 @@ class DefaultAutoEditHandler extends IdeaAutoEditHandler {
 		DataContext dataContext,
 		EditorActionHandler originalHandler
 	) {
-		handleIndentation(new AutoEditContext(editor, tokenSetProvider))
+		val context = new AutoEditContext(editor, tokenSetProvider)
+		val region = findBlockRegion(context)
+		if (region == null)
+			return Result.CONTINUE
+
+		return handleIndentation(region, context)
 	}
 
 	// TODO: replace with skipping whitespace tokens
 	protected static val WHITESPACE_CHARACTERS = ' \t'
 
-	protected def handleIndentation(extension AutoEditContext context) {
+	protected def handleIndentation(AutoEditBlockRegion region, extension AutoEditContext context) {
 		val previousLineIndentation = context.previousLineIndentaiton
-		val blockIndentaion = indentBlock(previousLineIndentation, context)
+		val blockIndentaion = region.block.indent(region, previousLineIndentation, context)
 		val string = (previousLineIndentation + blockIndentaion).newLine
 		val cursorShift = string.length
 
@@ -83,13 +88,6 @@ class DefaultAutoEditHandler extends IdeaAutoEditHandler {
 
 	protected def shouldIndent(extension AutoEditContext context) {
 		caretOffset.tokenSet != stringLiteralTokens
-	}
-
-	protected def indentBlock(String previousLineIndentation, extension AutoEditContext context) {
-		val region = findBlockRegion(context)
-		if (region != null)
-			return region.block.indent(region, previousLineIndentation, context)
-		return ''
 	}
 
 	protected def findBlockRegion(extension AutoEditContext context) {

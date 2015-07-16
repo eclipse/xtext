@@ -40,6 +40,9 @@ import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.pom.java.LanguageLevel;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.codeStyle.CodeStyleSettings;
+import com.intellij.psi.codeStyle.CodeStyleSettingsManager;
+import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.testFramework.LightProjectDescriptor;
 import com.intellij.testFramework.PlatformTestUtil;
@@ -91,6 +94,9 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
     _xtextLanguage.injectMembers(this);
     CodeInsightSettings _instance = CodeInsightSettings.getInstance();
     _instance.AUTOCOMPLETE_ON_CODE_COMPLETION = false;
+    CodeStyleSettings _codeStyleSettings = this.getCodeStyleSettings();
+    CommonCodeStyleSettings.IndentOptions _indentOptions = _codeStyleSettings.getIndentOptions();
+    _indentOptions.USE_TAB_CHARACTER = true;
   }
   
   @Override
@@ -284,6 +290,11 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
   
   protected void testStructureView(final Consumer<StructureViewComponent> consumer) {
     this.myFixture.testStructureView(consumer);
+  }
+  
+  protected CodeStyleSettings getCodeStyleSettings() {
+    Project _project = this.getProject();
+    return CodeStyleSettingsManager.getSettings(_project);
   }
   
   @Pure

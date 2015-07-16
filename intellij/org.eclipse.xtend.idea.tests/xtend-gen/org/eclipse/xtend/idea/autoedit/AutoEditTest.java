@@ -39,9 +39,9 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
   }
   
   public void testIndentationEdit_1() {
-    this.configureByText("  \'|\'");
+    this.configureByText("   \'|\'");
     this.myFixture.type("\n");
-    this.assertState("  \'\n|\'");
+    this.assertState("   \'\n   |\'");
   }
   
   public void testIndentationEdit_2() {
@@ -105,13 +105,13 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
   public void testCurlyBracesBlockInRichString_8() {
     this.configureByText("\'\'\'{ foo| }\'\'\'");
     this.myFixture.type("\n");
-    this.assertState("\'\'\'{ foo\n| }\'\'\'");
+    this.assertState("\'\'\'{ foo\n |}\'\'\'");
   }
   
   public void testCurlyBracesBlockInRichString_9() {
     this.configureByText("\'\'\'\"{\" foo| }\'\'\'");
     this.myFixture.type("\n");
-    this.assertState("\'\'\'\"{\" foo\n| }\'\'\'");
+    this.assertState("\'\'\'\"{\" foo\n |}\'\'\'");
   }
   
   public void testCurlyBracesBlockInRichString_10() {

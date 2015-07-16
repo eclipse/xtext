@@ -9,6 +9,8 @@ package org.eclipse.xtext.idea
 
 import com.google.inject.Binder
 import com.google.inject.name.Names
+import com.intellij.formatting.FormattingModelBuilder
+import com.intellij.lang.Commenter
 import com.intellij.lang.PairedBraceMatcher
 import com.intellij.lang.PsiStructureViewFactory
 import com.intellij.lang.refactoring.NamesValidator
@@ -27,6 +29,8 @@ import org.eclipse.xtext.idea.build.IdeaOutputConfigurationProvider
 import org.eclipse.xtext.idea.common.types.StubTypeProviderFactory
 import org.eclipse.xtext.idea.filesystem.IdeaWorkspaceConfigProvider
 import org.eclipse.xtext.idea.highlighting.DefaultHighlightingConfiguration
+import org.eclipse.xtext.idea.formatting.DefaultCommenter
+import org.eclipse.xtext.idea.formatting.DefaultFormattingModelBuilder
 import org.eclipse.xtext.idea.highlighting.DefaultPairedBraceMatcher
 import org.eclipse.xtext.idea.highlighting.DefaultSyntaxHighlighter
 import org.eclipse.xtext.idea.parser.AntlrDelegatingIdeaLexer
@@ -132,4 +136,15 @@ class DefaultIdeaModule extends AbstractGenericModule {
 	def Class<? extends IResourceDescriptionsProvider> bindIResourceDescriptionsProvider() {
 		IdeaResourceDescriptionsProvider
 	}
+	
+	@SingletonBinding
+	def Class<? extends FormattingModelBuilder> bindFormattingModelBuilder() {
+		DefaultFormattingModelBuilder
+	}
+
+	@SingletonBinding
+	def Class<? extends Commenter> bindCommenter() {
+		DefaultCommenter
+	}
+
 }

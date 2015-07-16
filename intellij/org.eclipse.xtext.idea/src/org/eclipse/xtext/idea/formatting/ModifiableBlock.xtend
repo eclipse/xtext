@@ -5,28 +5,14 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.idea.editorActions
+package org.eclipse.xtext.idea.formatting
 
-import com.google.inject.Inject
-import com.intellij.psi.tree.TokenSet
+import com.intellij.formatting.Block
+import com.intellij.formatting.Indent
 
 /**
  * @author kosyakov - Initial contribution and API
  */
-class DefaultAutoEditBlockProvider implements AutoEditBlockProvider {
-
-	@Inject
-	extension TokenSetProvider tokenSetProvider
-
-	override getQuotes() {
-		#[
-			new AutoEditString('"', stringLiteralTokens),
-			new AutoEditString("'", stringLiteralTokens)
-		]
-	}
-
-	override getBlocks(TokenSet tokenSet) {
-		emptyList
-	}
-
+interface ModifiableBlock extends Block {
+	def void setIndent(Indent indent)
 }

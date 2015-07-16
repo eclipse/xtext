@@ -12,6 +12,7 @@ import com.intellij.lang.BracePair
 import com.intellij.lang.PairedBraceMatcher
 import com.intellij.psi.PsiFile
 import com.intellij.psi.tree.IElementType
+import com.intellij.psi.tree.TokenSet
 import java.util.Map
 import org.eclipse.xtext.IGrammarAccess
 import org.eclipse.xtext.Keyword
@@ -27,15 +28,32 @@ class DefaultPairedBraceMatcher implements PairedBraceMatcher {
 	static val char KEYWORD_START_CHARACTER = "'"
 
 	val BracePair[] pairs
-	
-	val Map<String, IElementType> tokenTypes 
-	
+
+	val TokenSet allowedTypes
+
+	val Map<String, IElementType> tokenTypes
+
 	@Inject
-	new(ITokenDefProvider tokenDefProvider, TokenTypeProvider tokenTypeProvider, IBracePairProvider bracePairProvider, IGrammarAccess grammarAccess) {
+	new(
+		ITokenDefProvider tokenDefProvider,
+		TokenTypeProvider tokenTypeProvider,
+		IBracePairProvider bracePairProvider,
+		IGrammarAccess grammarAccess
+	) {
 		tokenTypes = createTokenTypes(tokenDefProvider, tokenTypeProvider)
 		pairs = createPairs(bracePairProvider, grammarAccess)
+		allowedTypes = createAllowedTypes(tokenTypeProvider, grammarAccess)
 	}
-	
+
+	protected def createAllowedTypes(TokenTypeProvider tokenTypeProvider, IGrammarAccess grammarAccess) {
+		TokenSet.orSet(
+			tokenTypeProvider.commentTokens,
+			tokenTypeProvider.whitespaceTokens,
+			TokenSet.create(pairs.map[#[leftBraceType, rightBraceType]].flatten),
+			TokenSet.create(grammarAccess.findKeywords(';', ',').map[tokenType])
+		)
+	}
+
 	protected def createTokenTypes(ITokenDefProvider tokenDefProvider, TokenTypeProvider tokenTypeProvider) {
 		val tokenTypes = newHashMap
 		val tokenDefMap = tokenDefProvider.tokenDefMap
@@ -48,14 +66,19 @@ class DefaultPairedBraceMatcher implements PairedBraceMatcher {
 		}
 		tokenTypes
 	}
-	
+
 	protected def createPairs(IBracePairProvider bracePairProvider, IGrammarAccess grammarAccess) {
 		bracePairProvider.pairs.map [
 			findPairs(leftBrace, rightBrace, structural, grammarAccess)
 		].flatten
 	}
 
-	protected def findPairs(String leftBraceKeyword, String rightBraceKeyword, boolean structural, IGrammarAccess grammarAccess) {
+	protected def findPairs(
+		String leftBraceKeyword,
+		String rightBraceKeyword,
+		boolean structural,
+		IGrammarAccess grammarAccess
+	) {
 		grammarAccess.findKeywordPairs(leftBraceKeyword, rightBraceKeyword).map[createPair(first, second, structural)]
 	}
 
@@ -82,7 +105,7 @@ class DefaultPairedBraceMatcher implements PairedBraceMatcher {
 	}
 
 	override isPairedBracesAllowedBeforeType(IElementType lbraceType, IElementType contextType) {
-		true
+		allowedTypes.contains(contextType)
 	}
 
 }
