@@ -32,7 +32,7 @@ class IdeaProjectContributor extends DefaultProjectFactoryContributor {
 			ideaDevelopment {
 				ideaVersion = '141.814.3'
 				pluginRepositories {
-					url 'http://download.eclipse.org/modeling/tmf/xtext/idea/2.9.0.beta3/updatePlugins.xml'
+					url 'https://hudson.eclipse.org/xtext/job/xtext-intellij/lastSuccessfulBuild/artifact/git-repo/intellij/build/ideaRepository/updatePlugins.xml'
 				}
 				pluginDependencies {
 					id 'org.eclipse.xtext.idea' version '«projectInfo.xtextVersion»'
@@ -44,6 +44,9 @@ class IdeaProjectContributor extends DefaultProjectFactoryContributor {
 			allprojects {
 				repositories { 
 					jcenter()
+					maven {
+						url "https://oss.sonatype.org/content/repositories/snapshots/"
+					}
 				}
 				apply plugin: 'java'
 				sourceSets.main.java.srcDirs = ['src', 'src-gen', 'xtend-gen']
