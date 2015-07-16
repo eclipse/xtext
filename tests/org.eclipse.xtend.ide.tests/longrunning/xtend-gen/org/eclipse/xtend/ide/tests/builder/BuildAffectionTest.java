@@ -15,9 +15,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceDescription;
-import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
@@ -56,11 +54,15 @@ public class BuildAffectionTest {
   
   private IProject clientProject;
   
+  private static boolean wasAutoBuilding;
+  
   @BeforeClass
   public static void setUpProject() throws Exception {
     IResourcesSetupUtil.cleanWorkspace();
     final IWorkspace workspace = ResourcesPlugin.getWorkspace();
     final IWorkspaceDescription description = workspace.getDescription();
+    boolean _isAutoBuilding = description.isAutoBuilding();
+    BuildAffectionTest.wasAutoBuilding = _isAutoBuilding;
     description.setAutoBuilding(false);
     workspace.setDescription(description);
     WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME);
@@ -69,6 +71,10 @@ public class BuildAffectionTest {
   @AfterClass
   public static void tearDownProject() throws Exception {
     IResourcesSetupUtil.cleanWorkspace();
+    final IWorkspace workspace = ResourcesPlugin.getWorkspace();
+    final IWorkspaceDescription description = workspace.getDescription();
+    description.setAutoBuilding(BuildAffectionTest.wasAutoBuilding);
+    workspace.setDescription(description);
   }
   
   @Before
@@ -1017,13 +1023,7 @@ public class BuildAffectionTest {
   }
   
   private void autoBuild() {
-    try {
-      IWorkspace _workspace = ResourcesPlugin.getWorkspace();
-      NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      _workspace.build(IncrementalProjectBuilder.AUTO_BUILD, _nullProgressMonitor);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    IResourcesSetupUtil.waitForBuild();
   }
   
   private void changeContent(final IFile file, final CharSequence sequence) {
