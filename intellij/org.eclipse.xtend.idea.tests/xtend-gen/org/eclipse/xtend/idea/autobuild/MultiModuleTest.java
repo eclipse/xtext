@@ -23,7 +23,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.tests.LightToolingTest;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
-import org.junit.Ignore;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -99,7 +98,6 @@ public class MultiModuleTest extends PsiTestCase {
     }
   }
   
-  @Ignore
   public void testTwoModulesWithoutDependency() {
     try {
       final Module moduleA = this.createModule("moduleA");
