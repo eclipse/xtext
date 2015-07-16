@@ -38,14 +38,23 @@ public class JdtIndexedJvmTypeAccess extends IndexedJvmTypeAccess {
 			Iterator<IEObjectDescription> fromIndex) {
 		// we know that the iterator is not empty thus we can directly obtain the handles et al without additional guards
 		IJavaProject javaProject = javaProjectProvider.getJavaProject(resourceSet);
-		List<String> visibleContainerHandles = javaProjectsState.getVisibleContainerHandles(javaProject.getHandleIdentifier());
-		while(fromIndex.hasNext()) {
+		List<String> allVisibleContainerHandles = javaProjectsState.getVisibleContainerHandles(javaProject.getHandleIdentifier());
+		List<String> visibleContainerHandles = allVisibleContainerHandles;
+		IEObjectDescription bestDescription = null;
+		while(fromIndex.hasNext() && !visibleContainerHandles.isEmpty()) {
+			// find the description that is the best match, e.g. the one that is in the container closest to the first
 			IEObjectDescription description = fromIndex.next();
 			URI trimFragment = description.getEObjectURI().trimFragment();
 			String handle = javaProjectsState.getContainerHandle(trimFragment);
-			if (visibleContainerHandles.contains(handle)) {
-				return getAccessibleType(description, fragment, resourceSet);
+			int idx = visibleContainerHandles.indexOf(handle);
+			if (idx >= 0) {
+				bestDescription = description;
+				// reduce the search scope - only check containers that are better than the current
+				visibleContainerHandles = allVisibleContainerHandles.subList(0, idx);
 			}
+		}
+		if (bestDescription != null) {
+			return getAccessibleType(bestDescription, fragment, resourceSet);
 		}
 		return null;
 	}

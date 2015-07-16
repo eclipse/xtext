@@ -91,11 +91,19 @@ public class JavaProjectsStateHelper extends AbstractProjectsStateHelper {
 	
 	protected List<String> getPackageFragmentRootHandles(IJavaProject project) {
 		List<String> result = Lists.newArrayList();
+		List<String> binaryAndNonLocalFragments = Lists.newArrayList();
 		try {
 			IPackageFragmentRoot[] roots = project.getAllPackageFragmentRoots();
+			result = Lists.newArrayListWithCapacity(roots.length);
 			for (IPackageFragmentRoot root : roots) {
 				if (root != null && !JavaRuntime.newDefaultJREContainerPath().isPrefixOf(root.getRawClasspathEntry().getPath())) {
-					result.add(root.getHandleIdentifier());
+					if (root.getKind() == IPackageFragmentRoot.K_SOURCE && project.equals(root.getJavaProject())) {
+						// treat local sources with higher priority
+						// see Java behavior in SameClassNamesTest
+						result.add(root.getHandleIdentifier());	
+					} else {
+						binaryAndNonLocalFragments.add(root.getHandleIdentifier());
+					}
 				}
 			}
 		} catch (JavaModelException e) {
@@ -103,6 +111,7 @@ public class JavaProjectsStateHelper extends AbstractProjectsStateHelper {
 				log.error("Cannot find rootHandles in project " + project.getProject().getName(), e);
 			}
 		}
+		result.addAll(binaryAndNonLocalFragments);
 		return result;
 	}
 	
