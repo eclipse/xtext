@@ -35,6 +35,7 @@
 
     	<runConfigurationProducer implementation="org.eclipse.xtend.core.idea.execution.XtendApplicationConfigurationProducer"/>
     	<runConfigurationProducer implementation="org.eclipse.xtend.core.idea.execution.XtendJunitClassConfigurationProducer"/>
+    	<runConfigurationProducer implementation="org.eclipse.xtend.core.idea.execution.XtendJunitMethodConfigurationProducer"/>
 
     	<framework.type implementation="org.eclipse.xtend.core.idea.config.XtendFrameworkType" />
     	<library.presentationProvider implementation="org.eclipse.xtend.core.idea.config.XtendLibraryPresentationProvider" />

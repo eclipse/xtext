@@ -10,7 +10,7 @@ package org.eclipse.xtext.idea.execution
 import com.google.inject.Inject
 import com.intellij.execution.actions.ConfigurationContext
 import com.intellij.execution.junit.JUnitConfiguration
-import com.intellij.execution.junit.TestClassConfigurationProducer
+import com.intellij.execution.junit.TestMethodConfigurationProducer
 import com.intellij.openapi.util.Ref
 import com.intellij.psi.PsiElement
 import org.eclipse.xtext.idea.lang.IXtextLanguage
@@ -18,7 +18,7 @@ import org.eclipse.xtext.idea.lang.IXtextLanguage
 /**
  * @author dhuebner - Initial contribution and API
  */
-class TraceBasedJUnitClassConfigurationProducer extends TestClassConfigurationProducer {
+class TraceBasedJUnitMethodeConfigurationProducer extends TestMethodConfigurationProducer {
 	@Inject extension ConfigurationProducerExtensions
 
 	new(IXtextLanguage xtextLanguage) {
