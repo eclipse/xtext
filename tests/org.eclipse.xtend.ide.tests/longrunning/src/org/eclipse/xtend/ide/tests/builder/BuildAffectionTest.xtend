@@ -9,9 +9,9 @@ package org.eclipse.xtend.ide.tests.builder
 
 import com.google.inject.Inject
 import org.eclipse.core.resources.IFile
+import org.eclipse.core.resources.IProject
 import org.eclipse.core.resources.IResource
 import org.eclipse.core.resources.ResourcesPlugin
-import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.core.runtime.Path
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtend.ide.internal.XtendActivator
@@ -19,6 +19,7 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.builder.debug.IBuildLogger
 import org.eclipse.xtext.builder.debug.XtextBuildConsole
 import org.eclipse.xtext.builder.impl.QueuedBuildData
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil
 import org.eclipse.xtext.util.StringInputStream
 import org.junit.After
@@ -27,10 +28,8 @@ import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.Test
 
-import static org.eclipse.core.resources.IncrementalProjectBuilder.*
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static org.junit.Assert.*
-import org.eclipse.core.resources.IProject
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -44,6 +43,8 @@ class BuildAffectionTest {
 	@Inject QueuedBuildData queuedBuildData
 	
 	IProject clientProject
+	
+	static boolean wasAutoBuilding
 	 
 	@BeforeClass 
 	def static void setUpProject() throws Exception {
@@ -51,6 +52,7 @@ class BuildAffectionTest {
 		// disable auto build
 		val workspace = ResourcesPlugin.workspace
 		val description = workspace.description
+		wasAutoBuilding = description.autoBuilding
 		description.autoBuilding = false
 		workspace.description = description
 		WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME);
@@ -59,6 +61,10 @@ class BuildAffectionTest {
 	@AfterClass
 	def static void tearDownProject() throws Exception {
 		cleanWorkspace
+		val workspace = ResourcesPlugin.workspace
+		val description = workspace.description
+		description.autoBuilding = wasAutoBuilding
+		workspace.description = description
 	}
 	
 	@Before
@@ -622,7 +628,7 @@ class BuildAffectionTest {
 	}
 	
 	private def autoBuild() {
-		ResourcesPlugin.workspace.build(AUTO_BUILD, new NullProgressMonitor)
+		IResourcesSetupUtil.waitForBuild
 	}
 	
 	private def changeContent(IFile file, CharSequence sequence) {
@@ -634,6 +640,5 @@ class BuildAffectionTest {
 		JavaProjectSetupUtil.addProjectReference(JavaCore.create(clientProject), JavaCore.create(project))
 		createFile(new Path('test.client/src/' + name + '.xtend'), content.toString)
 	}
-	
 	
 }

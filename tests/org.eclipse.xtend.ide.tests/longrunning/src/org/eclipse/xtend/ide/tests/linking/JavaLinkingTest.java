@@ -32,7 +32,6 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-
 public class JavaLinkingTest extends AbstractXtendUITestCase {
 
 	@Inject
