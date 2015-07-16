@@ -61,7 +61,7 @@ public class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
   @Extension
   private FileSystemAccess.Extensions _extensions;
   
-  public TypeReference getFormatter2Stub(final Grammar grammar) {
+  protected TypeReference getFormatter2Stub(final Grammar grammar) {
     XtextGeneratorNaming _naming = XtextGeneratorNaming.naming(grammar);
     String _runtimeBasePackage = _naming.getRuntimeBasePackage();
     String _plus = (_runtimeBasePackage + ".formatting2.");

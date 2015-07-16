@@ -107,7 +107,7 @@ public class XtextGeneratorTemplates {
         _builder.append(" extends ");
         TypeReference _runtimeGenSetup = it.getRuntimeGenSetup();
         _builder.append(_runtimeGenSetup, "");
-        _builder.append("{");
+        _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
         _builder.append("\t");
