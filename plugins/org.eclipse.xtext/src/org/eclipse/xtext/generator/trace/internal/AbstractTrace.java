@@ -15,10 +15,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
+import org.eclipse.xtext.generator.trace.AbstractTraceRegionToString;
 import org.eclipse.xtext.generator.trace.AbstractURIWrapper;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
@@ -33,6 +33,7 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.workspace.IProjectConfig;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 import com.google.common.base.Function;
@@ -41,6 +42,7 @@ import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
+import com.google.common.io.CharStreams;
 import com.google.inject.Inject;
 
 /**
@@ -535,6 +537,43 @@ public abstract class AbstractTrace implements ITrace {
 			return serviceProvider.get(type);
 		}
 		return null;
+	}
+	
+	@Override
+	public String toString() {
+		return new AbstractTraceRegionToString() {
+
+			@Override
+			protected AbstractTraceRegion getTrace() {
+				return rootTraceRegion;
+			}
+
+			@Override
+			protected String getRemoteText(SourceRelativeURI uri) {
+				try {
+					return CharStreams.toString(getContentsAsText(uri, getLocalProjectConfig()));
+				} catch (IOException e) {
+					Exceptions.sneakyThrow(e);
+				}
+				return "";
+			}
+
+			@Override
+			protected String getLocalText() {
+				try {
+					return CharStreams.toString(getLocalContentsAsText(getLocalProjectConfig()));
+				} catch (IOException e) {
+					Exceptions.sneakyThrow(e);
+				}
+				return "";
+
+			}
+
+			@Override
+			protected String getLocalTitle() {
+				return getLocalURI().getURI().lastSegment();
+			}
+		}.toString();
 	}
 
 }
