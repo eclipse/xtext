@@ -7,8 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.editorActions
 
+import com.google.inject.Inject
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.formatting.IIndentationInformation
 import org.eclipse.xtext.util.TextRegion
 
 /**
@@ -37,11 +39,13 @@ abstract class AbstractIndentableAutoEditBlock extends AbstractAutoEditBlock {
 		this.indentationTerminal = indentationTerminal
 		this.nested = nested
 	}
+	
+	@Inject
+	IIndentationInformation indentationInformation
 
 	protected def getIndentationTerminal() {
 		if (indentationTerminal == null)
-			// TODO: should be configurable
-			return '\t'
+			return indentationInformation.indentString
 		return indentationTerminal
 	}
 

@@ -8,7 +8,9 @@
 package org.eclipse.xtext.idea.editorActions;
 
 import com.google.common.base.Objects;
+import com.google.inject.Inject;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.idea.editorActions.AbstractAutoEditBlock;
 import org.eclipse.xtext.idea.editorActions.AutoEditBlockRegion;
 import org.eclipse.xtext.idea.editorActions.AutoEditContext;
@@ -43,10 +45,13 @@ public abstract class AbstractIndentableAutoEditBlock extends AbstractAutoEditBl
     this.nested = nested;
   }
   
+  @Inject
+  private IIndentationInformation indentationInformation;
+  
   protected String getIndentationTerminal() {
     boolean _equals = Objects.equal(this.indentationTerminal, null);
     if (_equals) {
-      return "\t";
+      return this.indentationInformation.getIndentString();
     }
     return this.indentationTerminal;
   }
@@ -58,5 +63,14 @@ public abstract class AbstractIndentableAutoEditBlock extends AbstractAutoEditBl
   @Pure
   public boolean isNested() {
     return this.nested;
+  }
+  
+  @Pure
+  public IIndentationInformation getIndentationInformation() {
+    return this.indentationInformation;
+  }
+  
+  public void setIndentationInformation(final IIndentationInformation indentationInformation) {
+    this.indentationInformation = indentationInformation;
   }
 }
