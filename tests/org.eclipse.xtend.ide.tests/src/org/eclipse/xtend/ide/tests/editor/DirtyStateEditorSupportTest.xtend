@@ -8,22 +8,25 @@
 package org.eclipse.xtend.ide.tests.editor
 
 import com.google.inject.Inject
+import org.apache.log4j.Level
+import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.jface.text.source.Annotation
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
+import org.eclipse.xtext.junit4.logging.LoggingTester
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil
 import org.eclipse.xtext.ui.editor.XtextEditor
+import org.eclipse.xtext.ui.editor.model.XtextDocument
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil
+import org.eclipse.xtext.validation.CheckMode
+import org.eclipse.xtext.validation.IResourceValidator
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import org.eclipse.xtext.validation.IResourceValidator
-import org.eclipse.xtext.validation.CheckMode
 
-import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.createPluginProject
 import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.TESTPROJECT_NAME
-import org.eclipse.xtext.junit4.logging.LoggingTester
-import org.apache.log4j.Level
-import org.eclipse.xtext.ui.editor.model.XtextDocument
+import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.createPluginProject
+import org.eclipse.xtext.diagnostics.Severity
 
 /**
  * @author Holger Schill - Initial contribution and API
@@ -34,8 +37,9 @@ class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
 	@Inject IResourceValidator validator
 
 	@Before def void start() {
-		createPluginProject(TESTPROJECT_NAME, "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.lib")
+		createPluginProject(TESTPROJECT_NAME)
 		closeWelcomePage
+		IResourcesSetupUtil.reallyWaitForAutoBuild
 	}
 
 	@After def void close() {
@@ -44,6 +48,7 @@ class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
 	
 	@Test
 	def testBug464483() {
+		IResourcesSetupUtil.assertNoErrorsInWorkspace
 		val model = '''
 			class A {
 				new() {}
@@ -56,21 +61,41 @@ class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
 			
 			class C {}
 		''')
-		c1Editor.waitForDirtyStateUpdater
-		c2Editor.waitForDirtyStateUpdater
+		// editors are not dirty thus we need to wait for a build
+		IResourcesSetupUtil.waitForBuild
+		c1Editor.waitForReconciler.waitForDirtyStateUpdater
+		c2Editor.waitForReconciler.waitForDirtyStateUpdater
 		// resolve both
-		c1Editor.document.readOnly [ validator.validate(it, CheckMode.ALL, null) ]
-		c2Editor.document.readOnly [ validator.validate(it, CheckMode.ALL, null) ]
+		c1Editor.document.readOnly [ assertNoErrors ]
+		c2Editor.document.readOnly [ assertNoErrors ]
 		c1Editor.assertHasNoErrors
 		c2Editor.assertHasNoErrors
 		// now modify
 		val staticOffset = model.indexOf('static')
 		LoggingTester.captureLogging(Level.ERROR, XtextDocument) [
 			c1Editor.document.replace(staticOffset, 0, "// ")
+			c1Editor.waitForReconciler
 			c2Editor.waitForDirtyStateUpdater
-			c2Editor.document.readOnly [ validator.validate(it, CheckMode.ALL, null) ]
+			c2Editor.document.readOnly [ assertHasErrors('A.B cannot be resolved to a type.') ]
 			c2Editor.assertHasErrors('A.B cannot be resolved to a type.')
 		].assertNoLogEntries
+	}
+	
+	private def Object assertNoErrors(Resource res) {
+		val issues = validator.validate(res, CheckMode.ALL, null)
+		assertTrue(issues.toString, issues.filter[severity == Severity.ERROR].isEmpty)
+		return null
+	}
+	
+	private def waitForReconciler(XtextEditor editor) {
+		editor.document.readOnly [ null ]
+		return editor
+	}
+	
+	private def Object assertHasErrors(Resource res, String message) {
+		val issues = validator.validate(res, CheckMode.ALL, null)
+		assertTrue(issues.toString, issues.map[getMessage].contains(message))
+		return null
 	}
 	
 	@Test
@@ -101,6 +126,8 @@ class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
+		editor.waitForReconciler
+		consumer.waitForReconciler
 		consumer.document.replace(0,1,"p")
 		consumer.waitForDirtyStateUpdater
 		consumer.assertHasNoErrors
