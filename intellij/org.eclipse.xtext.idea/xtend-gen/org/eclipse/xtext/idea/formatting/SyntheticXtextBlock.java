@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.idea.formatting;
 
+import com.google.common.base.Objects;
 import com.intellij.formatting.Alignment;
 import com.intellij.formatting.Block;
 import com.intellij.formatting.ChildAttributes;
@@ -19,6 +20,7 @@ import java.util.List;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.idea.formatting.ModifiableBlock;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
@@ -36,6 +38,9 @@ public class SyntheticXtextBlock implements ModifiableBlock {
   @Accessors
   private final List<Block> children = CollectionLiterals.<Block>newArrayList();
   
+  @Accessors
+  private Function2<? super List<Block>, ? super Integer, ? extends ChildAttributes> childAttributesProvider;
+  
   @Override
   public boolean isLeaf() {
     return false;
@@ -48,8 +53,13 @@ public class SyntheticXtextBlock implements ModifiableBlock {
   
   @Override
   public ChildAttributes getChildAttributes(final int newChildIndex) {
-    Indent _normalIndent = Indent.getNormalIndent();
-    return new ChildAttributes(_normalIndent, null);
+    boolean _equals = Objects.equal(this.childAttributesProvider, null);
+    if (_equals) {
+      Indent _noneIndent = Indent.getNoneIndent();
+      return new ChildAttributes(_noneIndent, null);
+    }
+    List<Block> _subBlocks = this.getSubBlocks();
+    return this.childAttributesProvider.apply(_subBlocks, Integer.valueOf(newChildIndex));
   }
   
   @Override
@@ -118,5 +128,14 @@ public class SyntheticXtextBlock implements ModifiableBlock {
   @Pure
   public List<Block> getChildren() {
     return this.children;
+  }
+  
+  @Pure
+  public Function2<? super List<Block>, ? super Integer, ? extends ChildAttributes> getChildAttributesProvider() {
+    return this.childAttributesProvider;
+  }
+  
+  public void setChildAttributesProvider(final Function2<? super List<Block>, ? super Integer, ? extends ChildAttributes> childAttributesProvider) {
+    this.childAttributesProvider = childAttributesProvider;
   }
 }

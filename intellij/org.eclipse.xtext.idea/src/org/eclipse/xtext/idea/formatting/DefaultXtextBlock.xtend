@@ -24,7 +24,6 @@ import com.intellij.psi.formatter.common.AbstractBlock
 import java.util.LinkedList
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.ide.editor.bracketmatching.BracePair
 import org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider
 
 import static extension com.intellij.psi.formatter.FormatterUtil.*
@@ -93,8 +92,8 @@ class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock {
 		for (var i = stack.size - 1; i > openingBlockIndex; i--) {
 			children.addFirst(stack.removeLast)
 		}
-					
-		if(!children.empty)
+
+		if (!children.empty)
 			stack.addLast(children.createGroup(Indent.normalIndent))
 	}
 
@@ -104,6 +103,7 @@ class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock {
 		groupBlock.spacingBuilder = spacingBuilder
 		groupBlock.children += children
 		groupBlock.indent = indent
+		groupBlock.childAttributesProvider = [$0.getChildAttributes($1)]
 		groupBlock
 	}
 
@@ -143,17 +143,20 @@ class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock {
 	}
 
 	override getChildAttributes(int newChildIndex) {
-		val children = subBlocks
+		subBlocks.getChildAttributes(newChildIndex)
+	}
+
+	protected def getChildAttributes(List<Block> children, int newChildIndex) {
 		if (children.empty)
 			return new ChildAttributes(Indent.noneIndent, null)
 
 		val indent = if (newChildIndex >= children.size) {
 				val block = children.get(children.size - 1)
-				if (block instanceof SyntheticXtextBlock || block.opening || block.between)
+				if (block instanceof SyntheticXtextBlock || block.opening)
 					Indent.normalIndent
 			} else {
 				val block = children.get(newChildIndex)
-				if (block instanceof SyntheticXtextBlock || block.closing || block.between)
+				if (block instanceof SyntheticXtextBlock || block.closing)
 					Indent.normalIndent
 			}
 
@@ -172,30 +175,12 @@ class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock {
 		if(block instanceof ASTBlock) block.node.closing
 	}
 
-	protected def isBetween(Block block) {
-		if(block instanceof ASTBlock) block.node.between
-	}
-
 	protected def isOpening(ASTNode node) {
 		if (node == null)
 			return false
 
 		val text = node.text
 		bracePairProvider.pairs.exists[text == leftBrace]
-	}
-
-	protected def isBetween(ASTNode node) {
-		if (node == null || node.opening || node.closing)
-			return false
-
-		bracePairProvider.pairs.exists[bracePair|node.isBetween(bracePair)]
-	}
-
-	protected def isBetween(ASTNode node, BracePair bracePair) {
-		val foundNode = node.treePrev.findNode([treePrev]) [
-			text == bracePair.leftBrace || text == bracePair.rightBrace
-		]
-		foundNode != null && foundNode.text == bracePair.leftBrace
 	}
 
 	protected def isClosing(ASTNode node) {
