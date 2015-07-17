@@ -126,9 +126,7 @@ Workflow {
 				genericIdeBasePackage = ideProjectName
 			}
 			
-			fragment = adapter.FragmentAdapter {
-				fragment = grammarAccess.GrammarAccessFragment auto-inject {}
-			}
+			fragment = grammarAccess.GrammarAccessFragment2 auto-inject {}
 			fragment = adapter.FragmentAdapter {
 				fragment = serializer.SerializerFragment {
 					// generateDebugData = true
