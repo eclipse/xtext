@@ -8,6 +8,7 @@
 package org.eclipse.xtext.web.example.statemachine.generator;
 
 import com.google.common.collect.Iterables;
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -19,6 +20,7 @@ import org.eclipse.xtext.web.example.statemachine.statemachine.Signal;
 import org.eclipse.xtext.web.example.statemachine.statemachine.State;
 import org.eclipse.xtext.web.example.statemachine.statemachine.Statemachine;
 import org.eclipse.xtext.web.example.statemachine.statemachine.Transition;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
@@ -100,7 +102,14 @@ public class StatemachineGenerator implements IGenerator {
     _builder.newLine();
     {
       EList<Signal> _signals = statemachine.getSignals();
-      for(final Signal signal : _signals) {
+      final Function1<Signal, String> _function = new Function1<Signal, String>() {
+        @Override
+        public String apply(final Signal it) {
+          return it.getName();
+        }
+      };
+      List<Signal> _sortBy = IterableExtensions.<Signal, String>sortBy(_signals, _function);
+      for(final Signal signal : _sortBy) {
         _builder.append("\t");
         _builder.append("<span class=\"signal\">");
         String _name = signal.getName();
@@ -122,7 +131,14 @@ public class StatemachineGenerator implements IGenerator {
     _builder.newLine();
     {
       EList<State> _states = statemachine.getStates();
-      for(final State state : _states) {
+      final Function1<State, String> _function_1 = new Function1<State, String>() {
+        @Override
+        public String apply(final State it) {
+          return it.getName();
+        }
+      };
+      List<State> _sortBy_1 = IterableExtensions.<State, String>sortBy(_states, _function_1);
+      for(final State state : _sortBy_1) {
         _builder.append("\t");
         _builder.append("<span class=\"state\">");
         String _name_1 = state.getName();

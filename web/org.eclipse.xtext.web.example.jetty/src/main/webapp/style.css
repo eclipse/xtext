@@ -1,4 +1,5 @@
 html {
+	width: 100%;
 	height: 100%;
 }
 
@@ -7,6 +8,13 @@ body {
 	height: 100%;
 	overflow: hidden;
 	font: 16px Helvetica,sans-serif;
+}
+
+iframe {
+	width: 100%;
+	height: 100%;
+	border: 1px solid #aaa;
+	background-color: #f0f0f0;
 }
 
 a {
@@ -88,11 +96,21 @@ h3 {
 	margin: 20px;
 }
 
+#generator-result {
+	display: block;
+	position: absolute;
+    top: 20px;
+    bottom: 50px;
+    left: 680px;
+	right: 20px;
+}
+
 #dirty-indicator {
 	display: inline;
 	color: #e8e8e8;
 	padding: 1px 8px 1px 8px;
 	border: 1px solid #ccc;
+	margin-left: 10px;
 }
 
 #dirty-indicator.dirty {
