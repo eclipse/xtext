@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import org.apache.log4j.Level;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.ui.IEditorInput;
@@ -21,7 +22,9 @@ import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.junit4.logging.LoggingTester;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -63,8 +66,9 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
   @Before
   public void start() {
     try {
-      WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME, "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.lib");
+      WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME);
       this._workbenchTestHelper.closeWelcomePage();
+      IResourcesSetupUtil.reallyWaitForAutoBuild();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -82,6 +86,7 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
   @Test
   public void testBug464483() {
     try {
+      IResourcesSetupUtil.assertNoErrorsInWorkspace();
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("class A {");
       _builder.newLine();
@@ -102,24 +107,27 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
       _builder_1.append("class C {}");
       _builder_1.newLine();
       final XtextEditor c2Editor = this._workbenchTestHelper.openEditor("C2.xtend", _builder_1.toString());
-      this._syncUtil.waitForDirtyStateUpdater(c1Editor);
-      this._syncUtil.waitForDirtyStateUpdater(c2Editor);
+      IResourcesSetupUtil.waitForBuild();
+      XtextEditor _waitForReconciler = this.waitForReconciler(c1Editor);
+      this._syncUtil.waitForDirtyStateUpdater(_waitForReconciler);
+      XtextEditor _waitForReconciler_1 = this.waitForReconciler(c2Editor);
+      this._syncUtil.waitForDirtyStateUpdater(_waitForReconciler_1);
       IXtextDocument _document = c1Editor.getDocument();
-      final IUnitOfWork<List<Issue>, XtextResource> _function = new IUnitOfWork<List<Issue>, XtextResource>() {
+      final IUnitOfWork<Object, XtextResource> _function = new IUnitOfWork<Object, XtextResource>() {
         @Override
-        public List<Issue> exec(final XtextResource it) throws Exception {
-          return DirtyStateEditorSupportTest.this.validator.validate(it, CheckMode.ALL, null);
+        public Object exec(final XtextResource it) throws Exception {
+          return DirtyStateEditorSupportTest.this.assertNoErrors(it);
         }
       };
-      _document.<List<Issue>>readOnly(_function);
+      _document.<Object>readOnly(_function);
       IXtextDocument _document_1 = c2Editor.getDocument();
-      final IUnitOfWork<List<Issue>, XtextResource> _function_1 = new IUnitOfWork<List<Issue>, XtextResource>() {
+      final IUnitOfWork<Object, XtextResource> _function_1 = new IUnitOfWork<Object, XtextResource>() {
         @Override
-        public List<Issue> exec(final XtextResource it) throws Exception {
-          return DirtyStateEditorSupportTest.this.validator.validate(it, CheckMode.ALL, null);
+        public Object exec(final XtextResource it) throws Exception {
+          return DirtyStateEditorSupportTest.this.assertNoErrors(it);
         }
       };
-      _document_1.<List<Issue>>readOnly(_function_1);
+      _document_1.<Object>readOnly(_function_1);
       this.assertHasNoErrors(c1Editor);
       this.assertHasNoErrors(c2Editor);
       final int staticOffset = model.indexOf("static");
@@ -129,15 +137,16 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
           try {
             IXtextDocument _document = c1Editor.getDocument();
             _document.replace(staticOffset, 0, "// ");
+            DirtyStateEditorSupportTest.this.waitForReconciler(c1Editor);
             DirtyStateEditorSupportTest.this._syncUtil.waitForDirtyStateUpdater(c2Editor);
             IXtextDocument _document_1 = c2Editor.getDocument();
-            final IUnitOfWork<List<Issue>, XtextResource> _function = new IUnitOfWork<List<Issue>, XtextResource>() {
+            final IUnitOfWork<Object, XtextResource> _function = new IUnitOfWork<Object, XtextResource>() {
               @Override
-              public List<Issue> exec(final XtextResource it) throws Exception {
-                return DirtyStateEditorSupportTest.this.validator.validate(it, CheckMode.ALL, null);
+              public Object exec(final XtextResource it) throws Exception {
+                return DirtyStateEditorSupportTest.this.assertHasErrors(it, "A.B cannot be resolved to a type.");
               }
             };
-            _document_1.<List<Issue>>readOnly(_function);
+            _document_1.<Object>readOnly(_function);
             DirtyStateEditorSupportTest.this.assertHasErrors(c2Editor, "A.B cannot be resolved to a type.");
           } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
@@ -149,6 +158,49 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  private Object assertNoErrors(final Resource res) {
+    final List<Issue> issues = this.validator.validate(res, CheckMode.ALL, null);
+    String _string = issues.toString();
+    final Function1<Issue, Boolean> _function = new Function1<Issue, Boolean>() {
+      @Override
+      public Boolean apply(final Issue it) {
+        Severity _severity = it.getSeverity();
+        return Boolean.valueOf(Objects.equal(_severity, Severity.ERROR));
+      }
+    };
+    Iterable<Issue> _filter = IterableExtensions.<Issue>filter(issues, _function);
+    boolean _isEmpty = IterableExtensions.isEmpty(_filter);
+    Assert.assertTrue(_string, _isEmpty);
+    return null;
+  }
+  
+  private XtextEditor waitForReconciler(final XtextEditor editor) {
+    IXtextDocument _document = editor.getDocument();
+    final IUnitOfWork<Object, XtextResource> _function = new IUnitOfWork<Object, XtextResource>() {
+      @Override
+      public Object exec(final XtextResource it) throws Exception {
+        return null;
+      }
+    };
+    _document.<Object>readOnly(_function);
+    return editor;
+  }
+  
+  private Object assertHasErrors(final Resource res, final String message) {
+    final List<Issue> issues = this.validator.validate(res, CheckMode.ALL, null);
+    String _string = issues.toString();
+    final Function1<Issue, String> _function = new Function1<Issue, String>() {
+      @Override
+      public String apply(final Issue it) {
+        return it.getMessage();
+      }
+    };
+    List<String> _map = ListExtensions.<Issue, String>map(issues, _function);
+    boolean _contains = _map.contains(message);
+    Assert.assertTrue(_string, _contains);
+    return null;
   }
   
   @Test
@@ -215,6 +267,8 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       final XtextEditor consumer = this._workbenchTestHelper.openEditor("foo/bar.xtend", _builder_1.toString());
+      this.waitForReconciler(editor);
+      this.waitForReconciler(consumer);
       IXtextDocument _document = consumer.getDocument();
       _document.replace(0, 1, "p");
       this._syncUtil.waitForDirtyStateUpdater(consumer);

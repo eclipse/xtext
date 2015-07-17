@@ -484,7 +484,7 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 		scheduleUpdateEditorJob(event);
 	}
 
-	private UpdateEditorStateJob updateEditorStateJob;
+	private volatile UpdateEditorStateJob updateEditorStateJob;
 	
 	public void scheduleUpdateEditorJob(final IResourceDescription.Event event) {
 		UpdateEditorStateJob job = updateEditorStateJob;
