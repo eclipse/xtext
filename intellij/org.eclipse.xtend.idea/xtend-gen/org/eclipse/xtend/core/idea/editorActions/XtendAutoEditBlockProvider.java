@@ -7,19 +7,14 @@
  */
 package org.eclipse.xtend.core.idea.editorActions;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.intellij.psi.tree.TokenSet;
-import java.util.Collections;
 import org.eclipse.xtend.core.idea.editorActions.AutoEditMultiLineBlockInRichString;
 import org.eclipse.xtend.core.idea.editorActions.XtendTokenSetProvider;
-import org.eclipse.xtext.idea.editorActions.AbstractAutoEditBlock;
-import org.eclipse.xtext.idea.editorActions.AbstractIndentableAutoEditBlock;
+import org.eclipse.xtext.idea.editorActions.AbstractAutoEditBlockProvider;
 import org.eclipse.xtext.idea.editorActions.AutoEditMultiLineBlock;
 import org.eclipse.xtext.idea.editorActions.AutoEditString;
-import org.eclipse.xtext.idea.editorActions.DefaultAutoEditBlockProvider;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -29,40 +24,32 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  */
 @Singleton
 @SuppressWarnings("all")
-public class XtendAutoEditBlockProvider extends DefaultAutoEditBlockProvider {
+public class XtendAutoEditBlockProvider extends AbstractAutoEditBlockProvider {
   @Inject
-  @Extension
-  private XtendTokenSetProvider tokenSetProvider;
-  
-  @Override
-  public Iterable<AbstractAutoEditBlock> getQuotes() {
-    TokenSet _richStringLiteralTokens = this.tokenSetProvider.getRichStringLiteralTokens();
+  public void setTokenSetProvider(@Extension final XtendTokenSetProvider tokenSetProvider) {
+    TokenSet _richStringLiteralTokens = tokenSetProvider.getRichStringLiteralTokens();
     AutoEditString _autoEditString = new AutoEditString("\'\'\'", _richStringLiteralTokens);
-    TokenSet _stringLiteralTokens = this.tokenSetProvider.getStringLiteralTokens();
+    this.registerQuote(_autoEditString);
+    TokenSet _stringLiteralTokens = tokenSetProvider.getStringLiteralTokens();
     AutoEditString _autoEditString_1 = new AutoEditString("\"", _stringLiteralTokens);
-    TokenSet _stringLiteralTokens_1 = this.tokenSetProvider.getStringLiteralTokens();
+    this.registerQuote(_autoEditString_1);
+    TokenSet _stringLiteralTokens_1 = tokenSetProvider.getStringLiteralTokens();
     AutoEditString _autoEditString_2 = new AutoEditString("\'", _stringLiteralTokens_1);
-    return Collections.<AbstractAutoEditBlock>unmodifiableList(CollectionLiterals.<AbstractAutoEditBlock>newArrayList(_autoEditString, _autoEditString_1, _autoEditString_2));
-  }
-  
-  @Override
-  public Iterable<AbstractIndentableAutoEditBlock> getBlocks(final TokenSet tokenSet) {
-    TokenSet _richStringLiteralTokens = this.tokenSetProvider.getRichStringLiteralTokens();
-    boolean _equals = Objects.equal(tokenSet, _richStringLiteralTokens);
-    if (_equals) {
-      AutoEditMultiLineBlockInRichString _autoEditMultiLineBlockInRichString = new AutoEditMultiLineBlockInRichString("{", "}");
-      AutoEditMultiLineBlock _autoEditMultiLineBlock = new AutoEditMultiLineBlock("«", "»");
-      final Procedure1<AutoEditMultiLineBlock> _function = new Procedure1<AutoEditMultiLineBlock>() {
-        @Override
-        public void apply(final AutoEditMultiLineBlock it) {
-          it.setShouldDeleteClosing(true);
-          it.setShouldInsertClosingTerminalBeforeDigit(true);
-          it.setShouldInsertClosingTerminalBeforeSpecialCharacters(true);
-        }
-      };
-      AutoEditMultiLineBlock _doubleArrow = ObjectExtensions.<AutoEditMultiLineBlock>operator_doubleArrow(_autoEditMultiLineBlock, _function);
-      return Collections.<AbstractIndentableAutoEditBlock>unmodifiableList(CollectionLiterals.<AbstractIndentableAutoEditBlock>newArrayList(_autoEditMultiLineBlockInRichString, _doubleArrow));
-    }
-    return super.getBlocks(tokenSet);
+    this.registerQuote(_autoEditString_2);
+    TokenSet _richStringLiteralTokens_1 = tokenSetProvider.getRichStringLiteralTokens();
+    AutoEditMultiLineBlockInRichString _autoEditMultiLineBlockInRichString = new AutoEditMultiLineBlockInRichString("{", "}");
+    this.registerBlock(_richStringLiteralTokens_1, _autoEditMultiLineBlockInRichString);
+    TokenSet _richStringLiteralTokens_2 = tokenSetProvider.getRichStringLiteralTokens();
+    AutoEditMultiLineBlock _autoEditMultiLineBlock = new AutoEditMultiLineBlock("«", "»");
+    final Procedure1<AutoEditMultiLineBlock> _function = new Procedure1<AutoEditMultiLineBlock>() {
+      @Override
+      public void apply(final AutoEditMultiLineBlock it) {
+        it.setShouldDeleteClosing(true);
+        it.setShouldInsertClosingTerminalBeforeDigit(true);
+        it.setShouldInsertClosingTerminalBeforeSpecialCharacters(true);
+      }
+    };
+    AutoEditMultiLineBlock _doubleArrow = ObjectExtensions.<AutoEditMultiLineBlock>operator_doubleArrow(_autoEditMultiLineBlock, _function);
+    this.registerBlock(_richStringLiteralTokens_2, _doubleArrow);
   }
 }

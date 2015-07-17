@@ -22,6 +22,7 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.util.Key;
 import com.intellij.psi.util.PsiModificationTracker;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
 import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.bracketmatching.DefaultBracePairProvider;
@@ -31,6 +32,7 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultAntlrTokenToAttributeI
 import org.eclipse.xtext.idea.build.IdeaOutputConfigurationProvider;
 import org.eclipse.xtext.idea.common.types.StubTypeProviderFactory;
 import org.eclipse.xtext.idea.filesystem.IdeaWorkspaceConfigProvider;
+import org.eclipse.xtext.idea.formatting.CodeStyleSettingsIndentationInformation;
 import org.eclipse.xtext.idea.formatting.DefaultCommenter;
 import org.eclipse.xtext.idea.formatting.DefaultFormattingModelBuilder;
 import org.eclipse.xtext.idea.highlighting.DefaultHighlightingConfiguration;
@@ -156,5 +158,10 @@ public class DefaultIdeaModule extends AbstractGenericModule {
   @SingletonBinding
   public Class<? extends Commenter> bindCommenter() {
     return DefaultCommenter.class;
+  }
+  
+  @SingletonBinding
+  public Class<? extends IIndentationInformation> bindIIndentationInformation() {
+    return CodeStyleSettingsIndentationInformation.class;
   }
 }

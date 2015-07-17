@@ -8,25 +8,18 @@
 package org.eclipse.xtext.idea.editorActions
 
 import com.google.inject.Inject
-import com.intellij.psi.tree.TokenSet
+import com.google.inject.Singleton
 
 /**
  * @author kosyakov - Initial contribution and API
  */
-class DefaultAutoEditBlockProvider implements AutoEditBlockProvider {
+@Singleton
+class DefaultAutoEditBlockProvider extends AbstractAutoEditBlockProvider {
 
 	@Inject
-	extension TokenSetProvider tokenSetProvider
-
-	override getQuotes() {
-		#[
-			new AutoEditString('"', stringLiteralTokens),
-			new AutoEditString("'", stringLiteralTokens)
-		]
-	}
-
-	override getBlocks(TokenSet tokenSet) {
-		emptyList
+	def void setTokenSetProvider(extension TokenSetProvider tokenSetProvider) {
+		registerQuote(new AutoEditString('"', stringLiteralTokens))
+		registerQuote(new AutoEditString("'", stringLiteralTokens))
 	}
 
 }
