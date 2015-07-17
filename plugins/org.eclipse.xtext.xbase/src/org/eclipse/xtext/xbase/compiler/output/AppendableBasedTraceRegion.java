@@ -10,9 +10,12 @@ package org.eclipse.xtext.xbase.compiler.output;
 import java.util.List;
 
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
+import org.eclipse.xtext.generator.trace.AbstractTraceRegionToString;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.LocationData;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
+import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Lists;
@@ -21,6 +24,9 @@ import com.google.common.collect.Lists;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class AppendableBasedTraceRegion extends AbstractTraceRegion {
+	
+	private final String generatedText;
+	private final String sourceText;
 	private final List<ILocationData> locations;
 	private int offset;
 	private int length;
@@ -66,7 +72,16 @@ public class AppendableBasedTraceRegion extends AbstractTraceRegion {
 		this.length = length;
 		this.endLineNumber = line;
 		if (parent == null) {
-			compressTrace(delegate.getContent());
+			this.generatedText = delegate.getContent();
+			compressTrace(this.generatedText);
+			IParseResult result = ((XtextResource) delegate.getState().getResource()).getParseResult();
+			if (result != null)
+				this.sourceText = result.getRootNode().getText();
+			else
+				this.sourceText = null;
+		} else {
+			this.generatedText = null;
+			this.sourceText = null;
 		}
 	}
 
@@ -170,6 +185,33 @@ public class AppendableBasedTraceRegion extends AbstractTraceRegion {
 	@Override
 	public List<ILocationData> getAssociatedLocations() {
 		return locations;
+	}
+	
+	@Override
+	public AppendableBasedTraceRegion getRoot() {
+		return (AppendableBasedTraceRegion) super.getRoot();
+	}
+
+	@Override
+	public String toString() {
+		return new AbstractTraceRegionToString() {
+
+			@Override
+			protected String getRemoteText(SourceRelativeURI uri) {
+				return AppendableBasedTraceRegion.this.getRoot().sourceText;
+			}
+
+			@Override
+			protected String getLocalText() {
+				return AppendableBasedTraceRegion.this.getRoot().generatedText;
+			}
+
+			@Override
+			protected AbstractTraceRegion getTrace() {
+				return AppendableBasedTraceRegion.this;
+			}
+
+		}.toString();
 	}
 	
 }
