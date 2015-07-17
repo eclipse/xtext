@@ -109,7 +109,7 @@
 		<dependency>
 			<groupId>org.antlr</groupId>
 			<artifactId>antlr-runtime</artifactId>
-			<version>[3.2]</version>
+			<version>[3.2,3.3)</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>stringtemplate</artifactId>
