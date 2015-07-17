@@ -9,40 +9,27 @@ package org.eclipse.xtend.core.idea.editorActions
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import com.intellij.psi.tree.TokenSet
+import org.eclipse.xtext.idea.editorActions.AbstractAutoEditBlockProvider
 import org.eclipse.xtext.idea.editorActions.AutoEditMultiLineBlock
 import org.eclipse.xtext.idea.editorActions.AutoEditString
-import org.eclipse.xtext.idea.editorActions.DefaultAutoEditBlockProvider
 
 /**
  * @author kosyakov - Initial contribution and API
  */
 @Singleton
-class XtendAutoEditBlockProvider extends DefaultAutoEditBlockProvider {
+class XtendAutoEditBlockProvider extends AbstractAutoEditBlockProvider {
 
 	@Inject
-	extension XtendTokenSetProvider tokenSetProvider
-
-	override getQuotes() {
-		#[
-			new AutoEditString("'''", richStringLiteralTokens),
-			new AutoEditString('"', stringLiteralTokens),
-			new AutoEditString("'", stringLiteralTokens)
-		]
-	}
-
-	override getBlocks(TokenSet tokenSet) {
-		if (tokenSet == richStringLiteralTokens) {
-			return #[
-				new AutoEditMultiLineBlockInRichString('{', '}'),
-				new AutoEditMultiLineBlock('«', '»') => [
-					shouldDeleteClosing = true
-					shouldInsertClosingTerminalBeforeDigit = true
-					shouldInsertClosingTerminalBeforeSpecialCharacters = true
-				]
-			]
-		}
-		return super.getBlocks(tokenSet)
+	def void setTokenSetProvider(extension XtendTokenSetProvider tokenSetProvider) {
+		registerQuote(new AutoEditString("'''", richStringLiteralTokens))
+		registerQuote(new AutoEditString('"', stringLiteralTokens))
+		registerQuote(new AutoEditString("'", stringLiteralTokens))
+		registerBlock(richStringLiteralTokens, new AutoEditMultiLineBlockInRichString('{', '}'))
+		registerBlock(richStringLiteralTokens, new AutoEditMultiLineBlock('«', '»') => [
+			shouldDeleteClosing = true
+			shouldInsertClosingTerminalBeforeDigit = true
+			shouldInsertClosingTerminalBeforeSpecialCharacters = true
+		])
 	}
 
 }
