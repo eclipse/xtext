@@ -10,7 +10,7 @@ package org.eclipse.xtext.idea
 import com.google.inject.Binder
 import com.google.inject.name.Names
 import com.intellij.formatting.FormattingModelBuilder
-import com.intellij.lang.Commenter
+import com.intellij.lang.CodeDocumentationAwareCommenter
 import com.intellij.lang.PairedBraceMatcher
 import com.intellij.lang.PsiStructureViewFactory
 import com.intellij.lang.refactoring.NamesValidator
@@ -145,7 +145,7 @@ class DefaultIdeaModule extends AbstractGenericModule {
 	}
 
 	@SingletonBinding
-	def Class<? extends Commenter> bindCommenter() {
+	def Class<? extends CodeDocumentationAwareCommenter> bindCodeDocumentationAwareCommenter() {
 		DefaultCommenter
 	}
 

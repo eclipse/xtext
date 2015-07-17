@@ -8,6 +8,7 @@
 package org.eclipse.xtext.idea.editorActions
 
 import com.google.inject.Inject
+import com.intellij.lang.CodeDocumentationAwareCommenter
 import com.intellij.openapi.editor.ex.EditorEx
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.tree.IElementType
@@ -23,6 +24,17 @@ class DefaultTokenSetProvider implements TokenSetProvider {
 
 	@Inject
 	TokenTypeProvider tokenTypeProvider
+
+	TokenSet slCommentTokens
+
+	@Inject
+	def void setCommenter(CodeDocumentationAwareCommenter commenter) {
+		val lineCommentTokenType = commenter.lineCommentTokenType
+		slCommentTokens = if (lineCommentTokenType == null)
+			TokenSet.EMPTY
+		else
+			TokenSet.create(lineCommentTokenType)
+	}
 
 	override getTokenSet(EditorEx editor, int offset) {
 		editor.getTokenType(offset).tokenSet
@@ -52,7 +64,7 @@ class DefaultTokenSetProvider implements TokenSetProvider {
 	}
 
 	override def getSingleLineCommentTokens() {
-		TokenSet.EMPTY
+		slCommentTokens
 	}
 
 	override def getStringLiteralTokens() {

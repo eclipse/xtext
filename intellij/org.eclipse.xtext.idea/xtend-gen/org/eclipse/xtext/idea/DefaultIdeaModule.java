@@ -13,7 +13,7 @@ import com.google.inject.binder.LinkedBindingBuilder;
 import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import com.intellij.formatting.FormattingModelBuilder;
-import com.intellij.lang.Commenter;
+import com.intellij.lang.CodeDocumentationAwareCommenter;
 import com.intellij.lang.PairedBraceMatcher;
 import com.intellij.lang.PsiStructureViewFactory;
 import com.intellij.lang.refactoring.NamesValidator;
@@ -156,7 +156,7 @@ public class DefaultIdeaModule extends AbstractGenericModule {
   }
   
   @SingletonBinding
-  public Class<? extends Commenter> bindCommenter() {
+  public Class<? extends CodeDocumentationAwareCommenter> bindCodeDocumentationAwareCommenter() {
     return DefaultCommenter.class;
   }
   
