@@ -71,7 +71,6 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 		}
 		bindFactory.addTypeToType(IGrammarAccess.class.getName(), GrammarAccessUtil.getGrammarAccessFQName(grammar, getNaming()));
 		return bindFactory.getBindings();
-			
 	}
 
 	@Override

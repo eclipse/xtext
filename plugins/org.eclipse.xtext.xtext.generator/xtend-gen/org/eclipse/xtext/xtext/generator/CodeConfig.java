@@ -26,8 +26,8 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
-import org.eclipse.xtext.xtext.generator.model.IClassAnnotation;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
+import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation;
 
 /**
  * Configuration object for generated code.

@@ -20,7 +20,7 @@ class GrammarAccess {
 	@Inject Naming naming
 	
 	/**
-	 * Returns the invokation of the element accessor method as full qualified Java statement.
+	 * Returns the invocation of the element accessor method as full qualified Java statement.
 	 * Example: return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().ele1AssignmentStates()
 	 * @param ele the element
 	 * @return The java statement
@@ -30,8 +30,8 @@ class GrammarAccess {
 	}
 
 	/**
-	 * Converts an arbitary string to a valid Java identifier
-	 * The string is being split up along the the caracters that are not valid as java 
+	 * Converts an arbitary string to a valid Java identifier.
+	 * The string is split up along the the characters that are not valid as Java 
 	 * identifier. The first character of each segments is made upper case which 
 	 * leads to a camel-case style.
 	 * @param text the string
@@ -119,7 +119,7 @@ class GrammarAccess {
 	}
 		
 	/**
-	 * Returns the invokation of the rule accessor method as Java statement.
+	 * Returns the invocation of the rule accessor method as Java statement.
 	 * @param rule the rule
 	 * @return The java statement
 	 */	
@@ -128,7 +128,7 @@ class GrammarAccess {
 	}
 	
 	/**
-	 * Returns the invokation of the rule's content accessor method as Java statement.
+	 * Returns the invocation of the rule's content accessor method as Java statement.
 	 * @param rule the rule
 	 * @return The java statement
 	 */	
@@ -137,7 +137,7 @@ class GrammarAccess {
 	}
 		
 	/**
-	 * Returns the invokation of the element accessor method as Java statement.
+	 * Returns the invocation of the element accessor method as Java statement.
 	 * The called method is implemented by the rule's facade.
 	 * Example: ele1AssignmentStates()
 	 * @param ele the element
@@ -148,7 +148,7 @@ class GrammarAccess {
 	}
 		
 	/**
-	 * Returns the invokation of the element accessor method for a GrammarAccess 
+	 * Returns the invocation of the element accessor method for a GrammarAccess 
 	 * as Java statement.
 	 * Example: prStatemachine().ele1AssignmentStates()
 	 * @param ele the element
@@ -159,7 +159,7 @@ class GrammarAccess {
 	}
 	
 	/**
-	 * Returns the invokation of an element or rule accessor, including the .getType() call.
+	 * Returns the invocation of an element or rule accessor, including the .getType() call.
 	 * Example1: getFooRule().getType()
 	 * Example2: getBarRule().getFooAction().getType()
 	 */
@@ -171,7 +171,7 @@ class GrammarAccess {
 		};
 	}
 	/**
-	 * Returns the invokation of an element or rule accessor.
+	 * Returns the invocation of an element or rule accessor.
 	 * Example1: getFooRule()
 	 * Example2: getBarRule().getFooAction()
 	 */

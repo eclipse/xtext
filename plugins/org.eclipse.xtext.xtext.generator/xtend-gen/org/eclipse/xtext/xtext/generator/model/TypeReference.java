@@ -7,12 +7,15 @@
  */
 package org.eclipse.xtext.xtext.generator.model;
 
+import com.google.common.base.Objects;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.EqualsHashCode;
@@ -173,7 +176,7 @@ public class TypeReference {
   }
   
   public TypeReference(final EClass clazz, final ResourceSet resourceSet, final List<TypeReference> arguments) {
-    this(GenModelUtil2.getGenClass(clazz, resourceSet).getQualifiedInterfaceName(), arguments);
+    this(TypeReference.getQualifiedName(clazz, resourceSet), arguments);
   }
   
   private static String getPackageName(final String qualifiedName) {
@@ -210,6 +213,21 @@ public class TypeReference {
       }
     }
     return null;
+  }
+  
+  private static String getQualifiedName(final EClass clazz, final ResourceSet resourceSet) {
+    String _xifexpression = null;
+    EPackage _ePackage = clazz.getEPackage();
+    String _nsURI = _ePackage.getNsURI();
+    boolean _equals = Objects.equal(_nsURI, "http://www.eclipse.org/2008/Xtext");
+    if (_equals) {
+      String _name = clazz.getName();
+      _xifexpression = ("org.eclipse.xtext." + _name);
+    } else {
+      GenClass _genClass = GenModelUtil2.getGenClass(clazz, resourceSet);
+      _xifexpression = _genClass.getQualifiedInterfaceName();
+    }
+    return _xifexpression;
   }
   
   private static boolean matches(final char c1, final char c2) {

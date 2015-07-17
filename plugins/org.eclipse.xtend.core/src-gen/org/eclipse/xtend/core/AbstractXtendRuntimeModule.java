@@ -86,12 +86,12 @@ public abstract class AbstractXtendRuntimeModule extends DefaultXbaseWithAnnotat
 			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("xtend");
 	}
 	
-	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
+	// contributed by org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2
 	public ClassLoader bindClassLoaderToInstance() {
 		return getClass().getClassLoader();
 	}
 	
-	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
+	// contributed by org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2
 	public Class<? extends IGrammarAccess> bindIGrammarAccess() {
 		return XtendGrammarAccess.class;
 	}

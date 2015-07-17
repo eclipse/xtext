@@ -5,7 +5,6 @@ import org.eclipse.emf.mwe.utils.DirectoryCleaner;
 import org.eclipse.emf.mwe.utils.StandaloneSetup;
 import org.eclipse.emf.mwe2.ecore.EcoreGenerator;
 import org.eclipse.xtext.generator.adapter.FragmentAdapter;
-import org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment;
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions;
 import org.eclipse.xtext.generator.parser.antlr.DebugAntlrGeneratorFragment;
 import org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment;
@@ -27,6 +26,7 @@ import org.eclipse.xtext.xtext.generator.XtextGenerator;
 import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2;
 import org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2;
+import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2;
 
@@ -119,7 +119,7 @@ final class GenerateXbase {
 				setResourceSet(xtypeResourceSet);
 				setUri("classpath:/org/eclipse/xtext/xbase/Xtype.xtext");
 				setFileExtensions(fileExtensions);
-				addFragment(new FragmentAdapter(new GrammarAccessFragment()));
+				addFragment(new GrammarAccessFragment2());
 				addFragment(new FragmentAdapter(new SerializerFragment()));
 				addFragment(new Formatter2Fragment2());
 				addFragment(new FragmentAdapter(new JavaBasedContentAssistFragment()));
@@ -133,7 +133,7 @@ final class GenerateXbase {
 				setResourceSet(xbaseResourceSet);
 				setUri("classpath:/org/eclipse/xtext/xbase/Xbase.xtext");
 				setFileExtensions(fileExtensions);
-				addFragment(new FragmentAdapter(new GrammarAccessFragment()));
+				addFragment(new GrammarAccessFragment2());
 				addFragment(new FragmentAdapter(new SerializerFragment()));
 				ResourceFactoryFragment resourceFactory = new ResourceFactoryFragment();
 				resourceFactory.setFileExtensions(fileExtensions);
@@ -176,7 +176,7 @@ final class GenerateXbase {
 				setResourceSet(xannotationsResourceSet);
 				setUri("classpath:/org/eclipse/xtext/xbase/annotations/XbaseWithAnnotations.xtext");
 				setFileExtensions(fileExtensions);
-				addFragment(new FragmentAdapter(new GrammarAccessFragment()));
+				addFragment(new GrammarAccessFragment2());
 				addFragment(new FragmentAdapter(new SerializerFragment()));
 				ResourceFactoryFragment resourceFactory = new ResourceFactoryFragment();
 				resourceFactory.setFileExtensions(fileExtensions);

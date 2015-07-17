@@ -162,9 +162,6 @@ public class GeneratorFragment2 extends AbstractGeneratorFragment2 {
     Grammar _grammar = language.getGrammar();
     boolean _isGenerateStub = this.isGenerateStub(_grammar);
     if (_isGenerateStub) {
-      ManifestAccess _runtimeManifest = this.projectConfig.getRuntimeManifest();
-      Set<String> _requiredBundles = _runtimeManifest.getRequiredBundles();
-      _requiredBundles.add("org.eclipse.xtext.xbase.lib");
       GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
       TypeReference _typeRef = TypeReference.typeRef(IGenerator.class);
       Grammar _grammar_1 = language.getGrammar();
@@ -172,6 +169,13 @@ public class GeneratorFragment2 extends AbstractGeneratorFragment2 {
       GuiceModuleAccess.BindingFactory _addTypeToType = _bindingFactory.addTypeToType(_typeRef, _generatorStub);
       GuiceModuleAccess _runtimeGenModule = language.getRuntimeGenModule();
       _addTypeToType.contributeTo(_runtimeGenModule);
+      ManifestAccess _runtimeManifest = this.projectConfig.getRuntimeManifest();
+      boolean _tripleNotEquals = (_runtimeManifest != null);
+      if (_tripleNotEquals) {
+        ManifestAccess _runtimeManifest_1 = this.projectConfig.getRuntimeManifest();
+        Set<String> _requiredBundles = _runtimeManifest_1.getRequiredBundles();
+        _requiredBundles.add("org.eclipse.xtext.xbase.lib");
+      }
       IFileSystemAccess2 _runtimeSrc = this.projectConfig.getRuntimeSrc();
       Grammar _grammar_2 = language.getGrammar();
       TypeReference _generatorStub_1 = this.getGeneratorStub(_grammar_2);
@@ -192,8 +196,8 @@ public class GeneratorFragment2 extends AbstractGeneratorFragment2 {
       _or = _isGenerateJavaMain;
     }
     if (_or) {
-      ManifestAccess _runtimeManifest_1 = this.projectConfig.getRuntimeManifest();
-      Set<String> _exportedPackages = _runtimeManifest_1.getExportedPackages();
+      ManifestAccess _runtimeManifest_2 = this.projectConfig.getRuntimeManifest();
+      Set<String> _exportedPackages = _runtimeManifest_2.getExportedPackages();
       Grammar _grammar_5 = language.getGrammar();
       TypeReference _generatorStub_2 = this.getGeneratorStub(_grammar_5);
       String _packageName = _generatorStub_2.getPackageName();
@@ -249,17 +253,17 @@ public class GeneratorFragment2 extends AbstractGeneratorFragment2 {
     if (_and_2) {
       this.doGenerateMweFile(language);
     }
+    this.contributeEclipsePluginGuiceBindings(language);
     ManifestAccess _eclipsePluginManifest = this.projectConfig.getEclipsePluginManifest();
-    boolean _tripleNotEquals = (_eclipsePluginManifest != null);
-    if (_tripleNotEquals) {
+    boolean _tripleNotEquals_1 = (_eclipsePluginManifest != null);
+    if (_tripleNotEquals_1) {
       ManifestAccess _eclipsePluginManifest_1 = this.projectConfig.getEclipsePluginManifest();
       Set<String> _requiredBundles_1 = _eclipsePluginManifest_1.getRequiredBundles();
       _requiredBundles_1.add("org.eclipse.xtext.builder");
     }
-    this.contributeEclipsePluginGuiceBindings(language);
     PluginXmlAccess _eclipsePluginPluginXml = this.projectConfig.getEclipsePluginPluginXml();
-    boolean _tripleNotEquals_1 = (_eclipsePluginPluginXml != null);
-    if (_tripleNotEquals_1) {
+    boolean _tripleNotEquals_2 = (_eclipsePluginPluginXml != null);
+    if (_tripleNotEquals_2) {
       this.contributeEclipsePluginExtensions(language);
     }
   }

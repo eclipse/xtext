@@ -5,16 +5,16 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.xtext.generator.model;
+package org.eclipse.xtext.xtext.generator.model.annotations;
 
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xtext.generator.model.IClassAnnotation;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
+import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation;
 
 /**
  * A class annotation configuration for the <code>@SuppressWarnings</code> annotation.
@@ -57,7 +57,7 @@ public class SuppressWarningsAnnotation implements IClassAnnotation {
   
   @Override
   public TypeReference getAnnotationImport() {
-    return new TypeReference("java.lang.SuppressWarnings");
+    return new TypeReference(SuppressWarnings.class);
   }
   
   @Pure

@@ -60,12 +60,12 @@ public abstract class AbstractXtypeRuntimeModule extends DefaultRuntimeModule {
 			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("___xtype");
 	}
 	
-	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
+	// contributed by org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2
 	public ClassLoader bindClassLoaderToInstance() {
 		return getClass().getClassLoader();
 	}
 	
-	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
+	// contributed by org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2
 	public Class<? extends IGrammarAccess> bindIGrammarAccess() {
 		return XtypeGrammarAccess.class;
 	}

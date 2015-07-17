@@ -42,14 +42,14 @@ import org.eclipse.xtext.xtext.generator.LanguageConfig2;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
-import org.eclipse.xtext.xtext.generator.model.IClassAnnotation;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess;
-import org.eclipse.xtext.xtext.generator.model.SuppressWarningsAnnotation;
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
+import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation;
+import org.eclipse.xtext.xtext.generator.model.annotations.SuppressWarningsAnnotation;
 
 @Singleton
 @SuppressWarnings("all")

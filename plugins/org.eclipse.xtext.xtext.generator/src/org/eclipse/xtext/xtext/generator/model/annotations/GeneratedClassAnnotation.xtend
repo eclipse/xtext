@@ -5,13 +5,15 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xtext.generator.model
+package org.eclipse.xtext.xtext.generator.model.annotations
 
 import java.text.SimpleDateFormat
 import java.util.Date
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.xtext.generator.XtextGenerator
+import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
+import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 /** 
  * A class annotation configuration for the <code>@Generated</code> annotation.
