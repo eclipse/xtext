@@ -26,25 +26,20 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Singleton
 @SuppressWarnings("all")
 public class XtendTokenSetProvider extends DefaultTokenSetProvider {
-  private final TokenSet slCommentTokens;
-  
   @Accessors
   private final TokenSet richStringLiteralTokens;
   
   @Inject
   public XtendTokenSetProvider(final TokenTypeProvider tokenTypeProvider) {
-    IElementType _iElementType = tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_SL_COMMENT);
-    TokenSet _create = TokenSet.create(_iElementType);
-    this.slCommentTokens = _create;
-    IElementType _iElementType_1 = tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_RICH_TEXT);
-    IElementType _iElementType_2 = tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_RICH_TEXT_START);
-    IElementType _iElementType_3 = tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_RICH_TEXT_END);
-    IElementType _iElementType_4 = tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_RICH_TEXT_INBETWEEN);
-    IElementType _iElementType_5 = tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_COMMENT_RICH_TEXT_END);
-    IElementType _iElementType_6 = tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_COMMENT_RICH_TEXT_INBETWEEN);
-    TokenSet _create_1 = TokenSet.create(_iElementType_1, _iElementType_2, _iElementType_3, _iElementType_4, _iElementType_5, _iElementType_6, 
+    IElementType _iElementType = tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_RICH_TEXT);
+    IElementType _iElementType_1 = tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_RICH_TEXT_START);
+    IElementType _iElementType_2 = tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_RICH_TEXT_END);
+    IElementType _iElementType_3 = tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_RICH_TEXT_INBETWEEN);
+    IElementType _iElementType_4 = tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_COMMENT_RICH_TEXT_END);
+    IElementType _iElementType_5 = tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_COMMENT_RICH_TEXT_INBETWEEN);
+    TokenSet _create = TokenSet.create(_iElementType, _iElementType_1, _iElementType_2, _iElementType_3, _iElementType_4, _iElementType_5, 
       XtendHighlightingLexer.GUILLEMET_ELEMENT_TYPE);
-    this.richStringLiteralTokens = _create_1;
+    this.richStringLiteralTokens = _create;
   }
   
   @Override
@@ -58,11 +53,6 @@ public class XtendTokenSetProvider extends DefaultTokenSetProvider {
       _xblockexpression = super.getTokenSet(tokenType);
     }
     return _xblockexpression;
-  }
-  
-  @Override
-  public TokenSet getSingleLineCommentTokens() {
-    return this.slCommentTokens;
   }
   
   @Override

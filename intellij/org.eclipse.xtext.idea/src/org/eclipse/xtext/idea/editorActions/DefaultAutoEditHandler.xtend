@@ -9,6 +9,7 @@ package org.eclipse.xtext.idea.editorActions
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
+import com.intellij.codeInsight.CodeInsightSettings
 import com.intellij.openapi.actionSystem.DataContext
 import com.intellij.openapi.editor.actionSystem.EditorActionHandler
 import com.intellij.openapi.editor.ex.EditorEx
@@ -57,7 +58,7 @@ class DefaultAutoEditHandler extends IdeaAutoEditHandler {
 
 	protected def handleIndentation(AutoEditBlockRegion region, extension AutoEditContext context) {
 		val previousLineIndentation = context.previousLineIndentaiton
-		val blockIndentaion = region.block.indent(region, previousLineIndentation, context)
+		val blockIndentaion = region.indentBlock(previousLineIndentation, context)
 		val string = (previousLineIndentation + blockIndentaion).newLine
 		val cursorShift = string.length
 
@@ -65,6 +66,22 @@ class DefaultAutoEditHandler extends IdeaAutoEditHandler {
 		editor.moveCaretRelatively(cursorShift)
 
 		return Result.STOP
+	}
+
+	protected def indentBlock(AutoEditBlockRegion region, String previousLineIndentation, AutoEditContext context) {
+		if (region.shouldIndentBlock(previousLineIndentation, context))
+			return region.block.indent(region, previousLineIndentation, context)
+
+		return ''
+	}
+
+	protected def shouldIndentBlock(
+		AutoEditBlockRegion region,
+		String previousLineIndentation,
+		AutoEditContext context
+	) {
+		return (CodeInsightSettings.instance.INSERT_BRACE_ON_ENTER && region.block.closingTerminal == '}') ||
+			CodeInsightSettings.instance.AUTOINSERT_PAIR_BRACKET
 	}
 
 	protected def getPreviousLineIndentaiton(extension AutoEditContext context) {
@@ -98,21 +115,29 @@ class DefaultAutoEditHandler extends IdeaAutoEditHandler {
 
 	override beforeCharTyped(char c, Project project, EditorEx editor, PsiFile file, FileType fileType) {
 		val context = new AutoEditContext(editor, tokenSetProvider)
-		for (result : editor.blocks.map[closeBlock(c, context)]) {
-			if (result == Result.DEFAULT || result == Result.STOP)
-				return result
+		if (CodeInsightSettings.instance.AUTOINSERT_PAIR_BRACKET) {
+			for (result : editor.blocks.map[closeBlock(c, context)]) {
+				if (result == Result.DEFAULT || result == Result.STOP)
+					return result
+			}
 		}
-		for (result : quotes.map[closeBlock(c, context)]) {
-			if (result == Result.DEFAULT || result == Result.STOP)
-				return result
+		if (CodeInsightSettings.instance.AUTOINSERT_PAIR_QUOTE) {
+			for (result : quotes.map[closeBlock(c, context)]) {
+				if (result == Result.DEFAULT || result == Result.STOP)
+					return result
+			}
 		}
-		for (result : editor.blocks.map[openBlock(c, context)]) {
-			if (result == Result.DEFAULT || result == Result.STOP)
-				return result
+		if (CodeInsightSettings.instance.AUTOINSERT_PAIR_BRACKET) {
+			for (result : editor.blocks.map[openBlock(c, context)]) {
+				if (result == Result.DEFAULT || result == Result.STOP)
+					return result
+			}
 		}
-		for (result : quotes.map[openBlock(c, context)]) {
-			if (result == Result.DEFAULT || result == Result.STOP)
-				return result
+		if (CodeInsightSettings.instance.AUTOINSERT_PAIR_QUOTE) {
+			for (result : quotes.map[openBlock(c, context)]) {
+				if (result == Result.DEFAULT || result == Result.STOP)
+					return result
+			}
 		}
 		return super.beforeCharTyped(c, project, editor, file, fileType)
 	}
@@ -120,10 +145,10 @@ class DefaultAutoEditHandler extends IdeaAutoEditHandler {
 	override charDeleted(char c, PsiFile file, EditorEx editor) {
 		val context = new AutoEditContext(editor, tokenSetProvider)
 
-		if (editor.blocks.exists[delete(c, context)])
+		if (CodeInsightSettings.instance.AUTOINSERT_PAIR_BRACKET && editor.blocks.exists[delete(c, context)])
 			return true
 
-		if (quotes.exists[delete(c, context)])
+		if (CodeInsightSettings.instance.AUTOINSERT_PAIR_QUOTE && quotes.exists[delete(c, context)])
 			return true
 
 		return super.charDeleted(c, file, editor)

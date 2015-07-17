@@ -7,7 +7,9 @@
  */
 package org.eclipse.xtext.idea.editorActions;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import com.intellij.lang.CodeDocumentationAwareCommenter;
 import com.intellij.openapi.editor.ex.DocumentEx;
 import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.openapi.editor.highlighter.EditorHighlighter;
@@ -27,6 +29,21 @@ import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 public class DefaultTokenSetProvider implements TokenSetProvider {
   @Inject
   private TokenTypeProvider tokenTypeProvider;
+  
+  private TokenSet slCommentTokens;
+  
+  @Inject
+  public void setCommenter(final CodeDocumentationAwareCommenter commenter) {
+    final IElementType lineCommentTokenType = commenter.getLineCommentTokenType();
+    TokenSet _xifexpression = null;
+    boolean _equals = Objects.equal(lineCommentTokenType, null);
+    if (_equals) {
+      _xifexpression = TokenSet.EMPTY;
+    } else {
+      _xifexpression = TokenSet.create(lineCommentTokenType);
+    }
+    this.slCommentTokens = _xifexpression;
+  }
   
   @Override
   public TokenSet getTokenSet(final EditorEx editor, final int offset) {
@@ -87,7 +104,7 @@ public class DefaultTokenSetProvider implements TokenSetProvider {
   
   @Override
   public TokenSet getSingleLineCommentTokens() {
-    return TokenSet.EMPTY;
+    return this.slCommentTokens;
   }
   
   @Override

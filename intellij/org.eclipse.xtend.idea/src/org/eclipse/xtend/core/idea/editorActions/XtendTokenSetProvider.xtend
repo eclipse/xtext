@@ -25,17 +25,11 @@ import static org.eclipse.xtend.core.idea.parser.antlr.internal.PsiInternalXtend
 @Singleton
 class XtendTokenSetProvider extends DefaultTokenSetProvider {
 
-	val TokenSet slCommentTokens
-
 	@Accessors
 	val TokenSet richStringLiteralTokens
 
 	@Inject
 	new(TokenTypeProvider tokenTypeProvider) {
-		slCommentTokens = TokenSet.create(
-			tokenTypeProvider.getIElementType(RULE_SL_COMMENT)
-		)
-
 		richStringLiteralTokens = TokenSet.create(
 			tokenTypeProvider.getIElementType(RULE_RICH_TEXT),
 			tokenTypeProvider.getIElementType(RULE_RICH_TEXT_START),
@@ -52,11 +46,6 @@ class XtendTokenSetProvider extends DefaultTokenSetProvider {
 			return richStringLiteralTokens
 		}
 		super.getTokenSet(tokenType)
-	}
-
-	// TODO: delegate to TokenTypeProvider and move up to DefaultTokenSetProvider
-	override getSingleLineCommentTokens() {
-		slCommentTokens
 	}
 
 	override isStartOfLine(TokenSet tokenSet, EditorEx editor, int offset) {
