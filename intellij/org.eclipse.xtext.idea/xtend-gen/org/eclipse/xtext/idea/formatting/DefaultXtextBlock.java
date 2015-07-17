@@ -38,6 +38,7 @@ import org.eclipse.xtext.idea.formatting.SyntheticXtextBlock;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -181,6 +182,13 @@ public class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock 
       List<Block> _children = groupBlock.getChildren();
       Iterables.<Block>addAll(_children, children);
       groupBlock.setIndent(indent);
+      final Function2<List<Block>, Integer, ChildAttributes> _function = new Function2<List<Block>, Integer, ChildAttributes>() {
+        @Override
+        public ChildAttributes apply(final List<Block> $0, final Integer $1) {
+          return DefaultXtextBlock.this.getChildAttributes($0, ($1).intValue());
+        }
+      };
+      groupBlock.setChildAttributesProvider(_function);
       _xblockexpression = groupBlock;
     }
     return _xblockexpression;
@@ -305,7 +313,11 @@ public class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock 
   
   @Override
   public ChildAttributes getChildAttributes(final int newChildIndex) {
-    final List<Block> children = this.getSubBlocks();
+    List<Block> _subBlocks = this.getSubBlocks();
+    return this.getChildAttributes(_subBlocks, newChildIndex);
+  }
+  
+  protected ChildAttributes getChildAttributes(final List<Block> children, final int newChildIndex) {
     boolean _isEmpty = children.isEmpty();
     if (_isEmpty) {
       Indent _noneIndent = Indent.getNoneIndent();
@@ -322,18 +334,11 @@ public class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock 
         final Block block = children.get(_minus);
         Indent _xifexpression_1 = null;
         boolean _or = false;
-        boolean _or_1 = false;
         if ((block instanceof SyntheticXtextBlock)) {
-          _or_1 = true;
-        } else {
-          boolean _isOpening = this.isOpening(block);
-          _or_1 = _isOpening;
-        }
-        if (_or_1) {
           _or = true;
         } else {
-          boolean _isBetween = this.isBetween(block);
-          _or = _isBetween;
+          boolean _isOpening = this.isOpening(block);
+          _or = _isOpening;
         }
         if (_or) {
           _xifexpression_1 = Indent.getNormalIndent();
@@ -347,18 +352,11 @@ public class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock 
         final Block block = children.get(newChildIndex);
         Indent _xifexpression_1 = null;
         boolean _or = false;
-        boolean _or_1 = false;
         if ((block instanceof SyntheticXtextBlock)) {
-          _or_1 = true;
-        } else {
-          boolean _isClosing = this.isClosing(block);
-          _or_1 = _isClosing;
-        }
-        if (_or_1) {
           _or = true;
         } else {
-          boolean _isBetween = this.isBetween(block);
-          _or = _isBetween;
+          boolean _isClosing = this.isClosing(block);
+          _or = _isClosing;
         }
         if (_or) {
           _xifexpression_1 = Indent.getNormalIndent();
@@ -404,15 +402,6 @@ public class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock 
     return _xifexpression;
   }
   
-  protected boolean isBetween(final Block block) {
-    boolean _xifexpression = false;
-    if ((block instanceof ASTBlock)) {
-      ASTNode _node = ((ASTBlock)block).getNode();
-      _xifexpression = this.isBetween(_node);
-    }
-    return _xifexpression;
-  }
-  
   protected boolean isOpening(final ASTNode node) {
     boolean _xblockexpression = false;
     {
@@ -430,83 +419,6 @@ public class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock 
         }
       };
       _xblockexpression = IterableExtensions.<BracePair>exists(_pairs, _function);
-    }
-    return _xblockexpression;
-  }
-  
-  protected boolean isBetween(final ASTNode node) {
-    boolean _xblockexpression = false;
-    {
-      boolean _or = false;
-      boolean _or_1 = false;
-      boolean _equals = Objects.equal(node, null);
-      if (_equals) {
-        _or_1 = true;
-      } else {
-        boolean _isOpening = this.isOpening(node);
-        _or_1 = _isOpening;
-      }
-      if (_or_1) {
-        _or = true;
-      } else {
-        boolean _isClosing = this.isClosing(node);
-        _or = _isClosing;
-      }
-      if (_or) {
-        return false;
-      }
-      Set<BracePair> _pairs = this.bracePairProvider.getPairs();
-      final Function1<BracePair, Boolean> _function = new Function1<BracePair, Boolean>() {
-        @Override
-        public Boolean apply(final BracePair bracePair) {
-          return Boolean.valueOf(DefaultXtextBlock.this.isBetween(node, bracePair));
-        }
-      };
-      _xblockexpression = IterableExtensions.<BracePair>exists(_pairs, _function);
-    }
-    return _xblockexpression;
-  }
-  
-  protected boolean isBetween(final ASTNode node, final BracePair bracePair) {
-    boolean _xblockexpression = false;
-    {
-      ASTNode _treePrev = node.getTreePrev();
-      final Function1<ASTNode, ASTNode> _function = new Function1<ASTNode, ASTNode>() {
-        @Override
-        public ASTNode apply(final ASTNode it) {
-          return it.getTreePrev();
-        }
-      };
-      final Function1<ASTNode, Boolean> _function_1 = new Function1<ASTNode, Boolean>() {
-        @Override
-        public Boolean apply(final ASTNode it) {
-          boolean _or = false;
-          String _text = it.getText();
-          String _leftBrace = bracePair.getLeftBrace();
-          boolean _equals = Objects.equal(_text, _leftBrace);
-          if (_equals) {
-            _or = true;
-          } else {
-            String _text_1 = it.getText();
-            String _rightBrace = bracePair.getRightBrace();
-            boolean _equals_1 = Objects.equal(_text_1, _rightBrace);
-            _or = _equals_1;
-          }
-          return Boolean.valueOf(_or);
-        }
-      };
-      final ASTNode foundNode = this.findNode(_treePrev, _function, _function_1);
-      boolean _and = false;
-      boolean _notEquals = (!Objects.equal(foundNode, null));
-      if (!_notEquals) {
-        _and = false;
-      } else {
-        String _text = foundNode.getText();
-        String _leftBrace = bracePair.getLeftBrace();
-        boolean _equals = Objects.equal(_text, _leftBrace);
-        _and = _equals;
-      }
-      _xblockexpression = _and;
     }
     return _xblockexpression;
   }

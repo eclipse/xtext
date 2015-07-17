@@ -24,6 +24,8 @@ class SyntheticXtextBlock implements ModifiableBlock {
 	@Accessors SpacingBuilder spacingBuilder
 
 	@Accessors val List<Block> children = newArrayList
+	
+	@Accessors var (List<Block>, int)=>ChildAttributes childAttributesProvider
 
 	override isLeaf() {
 		false
@@ -34,7 +36,10 @@ class SyntheticXtextBlock implements ModifiableBlock {
 	}
 
 	override getChildAttributes(int newChildIndex) {
-		return new ChildAttributes(Indent.normalIndent, null)
+		if (childAttributesProvider == null)
+			return new ChildAttributes(Indent.noneIndent, null)
+			
+		return childAttributesProvider.apply(subBlocks, newChildIndex)
 	}
 
 	override getSpacing(Block child1, Block child2) {

@@ -7,118 +7,201 @@
  *******************************************************************************/
 package org.eclipse.xtend.idea.autoedit
 
-import com.intellij.openapi.util.TextRange
-import org.eclipse.xtend.idea.LightXtendTest
-import org.eclipse.xtext.junit4.internal.LineDelimiters
+import com.intellij.openapi.module.Module
+import com.intellij.openapi.roots.ContentEntry
+import com.intellij.openapi.roots.ModifiableRootModel
+import org.eclipse.xtend.core.idea.lang.XtendFileType
+import org.eclipse.xtext.idea.tests.AbstractAutoEditTest
 
-class XtendAutoEditTest extends LightXtendTest {
-	private static val CARET = "<caret>"
-	
+import static extension org.eclipse.xtext.idea.tests.LibraryUtil.*
+
+class XtendAutoEditTest extends AbstractAutoEditTest {
+
+	new() {
+		super(XtendFileType.INSTANCE)
+	}
+
+	override protected configureModule(Module module, ModifiableRootModel model, ContentEntry contentEntry) {
+		model.addXtendLibrary
+	}
+
 	def void testClassBraces() {
-		configureByText('''class Foo {«CARET»''')
+		configureByText('''class Foo {|''')
 		newLine
-		assertEditor('''
+		assertState('''
 		class Foo {
-			«CARET»
+			|
 		}''')
 	}
-	
+
 	def void testMethodParentheses() {
 		configureByText('''
 			class Foo {
-				def bar«CARET»
+				def bar|
 			}
 		''')
 		myFixture.type("(")
-		assertEditor('''
+		assertState('''
 			class Foo {
-				def bar(«CARET»)
+				def bar(|)
 			}
 		''')
 	}
-	
+
 	def void testMethodBraces() {
 		configureByText('''
 			class Foo {
-				def bar() {«CARET»
+				def bar() {|
 			}
 		''')
 		newLine
-		assertEditor('''
+		assertState('''
 			class Foo {
 				def bar() {
-					«CARET»
+					|
 				}
 			}
 		''')
 	}
-	
+
 	def void testFeatureCallParentheses() {
 		configureByText('''
 			class Foo {
 				def bar() {
-					toString«CARET»
+					toString|
 				}
 			}
 		''')
 		myFixture.type("(")
-		assertEditor('''
+		assertState('''
 			class Foo {
 				def bar() {
-					toString(«CARET»)
+					toString(|)
 				}
 			}
 		''')
 	}
-	
+
 	def void testArrayBrackets() {
 		configureByText('''
 			class Foo {
-				def bar(int«CARET»)
+				def bar(int|)
 			}
 		''')
 		myFixture.type("[")
-		assertEditor('''
+		assertState('''
 			class Foo {
-				def bar(int[«CARET»])
+				def bar(int[|])
 			}
 		''')
 	}
-	
+
 	def void testGuillemets() {
-		//Does not work, TypedHandler:214 looks suspicious
-//		configureByText("
-//			class Foo {
-//				def bar() {
-//					'''<caret>'''
-//				}
-//			}
-//		")
-//		type("«")
-//		assertEditor("
-//			class Foo {
-//				def bar() {
-//					'''«<caret>»'''
-//				}
-//			}
-//		")
-	}
-	
-	private def newLine() {
-		myFixture.type('\n')
+		configureByText("
+			class Foo {
+				def bar() {
+					'''|'''
+				}
+			}
+		")
+		myFixture.type("«")
+		assertState("
+			class Foo {
+				def bar() {
+					'''«|»'''
+				}
+			}
+		")
 	}
 
-	private def assertEditor(String editorState) {
-		val expectedState = LineDelimiters.toUnix(editorState.replace(CARET, "|"))
-
-		val actualState = {
-			val caretOffset = myFixture.editor.caretModel.primaryCaret.offset
-			val document = myFixture.editor.document
-			val beforeCaret = myFixture.editor.document.getText(new TextRange(0, caretOffset))
-			val afterCaret = myFixture.editor.document.getText(new TextRange(caretOffset, document.textLength))
-			beforeCaret + '|' + afterCaret
-		}
-
-		assertEquals(expectedState, actualState)
+	def void testEnterBetweenMethods_01() {
+		configureByText('''
+			class Foo {
+				def foo() {
+				}|
+				def bar() {
+				}
+			}
+		''')
+		newLine
+		assertState('''
+			class Foo {
+				def foo() {
+				}
+				|
+				def bar() {
+				}
+			}
+		''')
 	}
+
+	def void testEnterBetweenMethods_02() {
+		configureByText('''
+			class Foo {
+				def foo() {
+				}
+				|
+				def bar() {
+				}
+			}
+		''')
+		newLine
+		assertState('''
+			class Foo {
+				def foo() {
+				}
+				
+				|
+				def bar() {
+				}
+			}
+		''')
+	}
+
+	def void testEnterBetweenMethods_03() {
+		configureByText('''
+			class Foo {
+				def foo() {
+				}
+				//lalala|
+				def bar() {
+				}
+			}
+		''')
+		newLine
+		assertState('''
+			class Foo {
+				def foo() {
+				}
+				//lalala
+				|
+				def bar() {
+				}
+			}
+		''')
+	}
+
+	def void testEnterBetweenMethods_04() {
+		configureByText('''
+			class Foo {
+				def foo() {
+				}
+				|//lalala
+				def bar() {
+				}
+			}
+		''')
+		newLine
+		assertState('''
+			class Foo {
+				def foo() {
+				}
+				
+				|//lalala
+				def bar() {
+				}
+			}
+		''')
+	}
+
 }
