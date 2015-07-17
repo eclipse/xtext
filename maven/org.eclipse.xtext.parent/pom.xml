@@ -10,7 +10,7 @@
 	<name>Xtext Parent/Container</name>
 	<groupId>org.eclipse.xtext</groupId>
 	<artifactId>org.eclipse.xtext.parent</artifactId>
-	<packaging>pom</packaging><
+	<packaging>pom</packaging>
 	<version>2.9.0-SNAPSHOT</version>
 
 	<modules>
