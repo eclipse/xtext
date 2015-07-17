@@ -18,7 +18,7 @@ import java.util.jar.Manifest
 import org.eclipse.emf.common.EMFPlugin
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.util.Strings
-import org.eclipse.xtext.xtext.generator.model.IClassAnnotation
+import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation
 
 /**
  * Configuration object for generated code.

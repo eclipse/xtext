@@ -19,6 +19,7 @@ import org.eclipse.xtend2.lib.StringConcatenation
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.xtext.generator.CodeConfig
+import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation
 
 class JavaFileAccess extends TextFileAccess {
 	

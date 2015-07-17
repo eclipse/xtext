@@ -89,7 +89,7 @@ class TypeReference {
 	}
 	
 	new(EClass clazz, ResourceSet resourceSet, List<TypeReference> arguments) {
-		this(GenModelUtil2.getGenClass(clazz, resourceSet).qualifiedInterfaceName, arguments)
+		this(getQualifiedName(clazz, resourceSet), arguments)
 	}
 	
 	private static def getPackageName(String qualifiedName) {
@@ -114,6 +114,13 @@ class TypeReference {
 					classStart = i + 1
 			}
 		}
+	}
+	
+	private static def getQualifiedName(EClass clazz, ResourceSet resourceSet) {
+		if (clazz.EPackage.nsURI == 'http://www.eclipse.org/2008/Xtext')
+			'org.eclipse.xtext.' + clazz.name
+		else
+			GenModelUtil2.getGenClass(clazz, resourceSet).qualifiedInterfaceName
 	}
 	
 	private static def matches(char c1, char c2) {

@@ -35,9 +35,9 @@ import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess
-import org.eclipse.xtext.xtext.generator.model.SuppressWarningsAnnotation
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
+import org.eclipse.xtext.xtext.generator.model.annotations.SuppressWarningsAnnotation
 
 import static extension org.eclipse.xtext.xtext.generator.XtextGeneratorNaming.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*

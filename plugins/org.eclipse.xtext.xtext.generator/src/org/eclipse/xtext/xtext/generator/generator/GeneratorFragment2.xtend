@@ -97,10 +97,11 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 	
 	override generate(LanguageConfig2 language) {
 		if (language.grammar.isGenerateStub) {
-			projectConfig.runtimeManifest.requiredBundles += 'org.eclipse.xtext.xbase.lib'
 			new GuiceModuleAccess.BindingFactory()
 				.addTypeToType(IGenerator.typeRef, language.grammar.generatorStub)
 				.contributeTo(language.runtimeGenModule)
+			if (projectConfig.runtimeManifest !== null)
+				projectConfig.runtimeManifest.requiredBundles += 'org.eclipse.xtext.xbase.lib'
 			if (!projectConfig.runtimeSrc.containsXtendFile(language.grammar.generatorStub))
 				doGenerateStubFile(language)
 		}
@@ -115,10 +116,9 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 		if (language.grammar.isGenerateMwe && !projectConfig.runtimeSrc.isFile(language.grammar.generatorStub.path + 'MWE.mwe2'))
 			doGenerateMweFile(language)
 		
-		if (projectConfig.eclipsePluginManifest !== null) {
-			projectConfig.eclipsePluginManifest.requiredBundles += 'org.eclipse.xtext.builder'
-		}
 		contributeEclipsePluginGuiceBindings(language)
+		if (projectConfig.eclipsePluginManifest !== null)
+			projectConfig.eclipsePluginManifest.requiredBundles += 'org.eclipse.xtext.builder'
 		if (projectConfig.eclipsePluginPluginXml !== null)
 			contributeEclipsePluginExtensions(language)
 	}
