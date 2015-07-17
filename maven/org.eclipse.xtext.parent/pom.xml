@@ -10,7 +10,7 @@
 	<name>Xtext Parent/Container</name>
 	<groupId>org.eclipse.xtext</groupId>
 	<artifactId>org.eclipse.xtext.parent</artifactId>
-	<packaging>pom</packaging>
+	<packaging>pom</packaging><
 	<version>2.9.0-SNAPSHOT</version>
 
 	<modules>
@@ -50,7 +50,7 @@
 		<equinox-common-version>3.6.200-v20130402-1505</equinox-common-version>
 		<jdt-core-version>3.10.0.v20140604-1726</jdt-core-version>
 		<icu4j.version>52.1</icu4j.version>
-		<antlr.version>[3.2, 3.2]</antlr.version>
+		<antlr.version>[3.2, 3.3)</antlr.version>
 		<antlr-generator-version>[2.1.1, 3.0)</antlr-generator-version>
 		<junit-version>4.8.1</junit-version>
 
