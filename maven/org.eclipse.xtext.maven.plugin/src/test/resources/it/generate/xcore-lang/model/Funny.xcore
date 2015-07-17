@@ -19,3 +19,8 @@ class MyClass2 {
 		MyClass3.log
 	}
 }
+
+enum MyEnum {
+  MyFirstLiteral = -7,
+  MySecondLiteral = 137
+}
