@@ -125,7 +125,8 @@ public abstract class AbstractLexerBasedConverter<T> extends AbstractValueConver
 		if (rule instanceof TerminalRule) {
 			this.rule = rule;
 		} else {
-			throw new IllegalArgumentException("Only terminal rules are supported by lexer based converters but got: " + String.valueOf(rule));
+			throw new IllegalArgumentException("Only terminal rules are supported by lexer based converters but got " + 
+				String.valueOf(rule.getName()) + " which is an instance of " + rule.eClass().getName());
 		}
 	}
 	
