@@ -361,13 +361,14 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		if (disposed) {
 			return
 		}
-		if (!project.isInitialized) {
+		if (!TEST_MODE && !project.isInitialized) {
 			LOG.info("Project not yet initialized, wait some more")
 			alarm.addRequest([build], 500)
+		} else {
+			val allEvents = newArrayList
+			queue.drainTo(allEvents)
+			internalBuild(allEvents)
 		}
-		val allEvents = newArrayList
-		queue.drainTo(allEvents)
-		internalBuild(allEvents)
 	}
 	
 	protected def void internalBuild(List<BuildEvent> allEvents) {
