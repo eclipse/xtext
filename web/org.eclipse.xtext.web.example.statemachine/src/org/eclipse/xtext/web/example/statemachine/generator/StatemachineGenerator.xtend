@@ -49,11 +49,11 @@ class StatemachineGenerator implements IGenerator {
 		<body>
 		<div class="text-container">
 			<h2>Signals</h2>
-			«FOR signal : statemachine.signals»
+			«FOR signal : statemachine.signals.sortBy[name]»
 				<span class="signal">«signal.name»</span> («IF signal instanceof InputSignal»input«ELSE»output«ENDIF»)</br>
 			«ENDFOR»
 			<h2>States</h2>
-			«FOR state : statemachine.states»
+			«FOR state : statemachine.states.sortBy[name]»
 				<span class="state">«state.name»</span> &ndash; transitions: «IF state.transitions.empty»NONE«ELSE»«FOR transition : state.transitions SEPARATOR ', '»«transition.state.name»«ENDFOR»«ENDIF»</br>
 			«ENDFOR»
 		</div>
