@@ -275,9 +275,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	}
 
 	private TypeResource createResource(URI resourceURI, IType type) {
-		TypeResource resource = new TypeResource(resourceURI);
-		resource.setTypeResourceServices(services);
-		resource.setIndexedJvmTypeAccess(getIndexedJvmTypeAccess());
+		TypeResource resource = doCreateResource(resourceURI);
 		getResourceSet().getResources().add(resource);
 		if (type.exists()) {
 			IMirror mirror = createMirror(type);
