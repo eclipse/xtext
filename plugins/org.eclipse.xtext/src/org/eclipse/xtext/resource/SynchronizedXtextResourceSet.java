@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.AbstractEList;
@@ -36,6 +37,20 @@ public class SynchronizedXtextResourceSet extends XtextResourceSet implements IS
 	@Override
 	public EList<Resource> getResources() {
 		return super.getResources();
+	}
+	
+	@Override
+	protected void registerURI(Resource resource) {
+		synchronized (lock) {
+			super.registerURI(resource);
+		}
+	}
+	
+	@Override
+	void updateURI(Resource resource, URI old, Map<URI, Resource> uriResourceMap) {
+		synchronized (lock) {
+			super.updateURI(resource, old, uriResourceMap);
+		}
 	}
 	
 	/**
