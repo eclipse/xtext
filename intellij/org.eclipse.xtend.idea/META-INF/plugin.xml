@@ -61,6 +61,6 @@
 							implementationClass="com.intellij.formatting.FormattingModelBuilder"/>
 		<lang.commenter language="org.eclipse.xtend.core.Xtend"
 							factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
-							implementationClass="com.intellij.lang.Commenter"/>
+							implementationClass="com.intellij.lang.CodeDocumentationAwareCommenter"/>
 	</extensions>
 </idea-plugin>

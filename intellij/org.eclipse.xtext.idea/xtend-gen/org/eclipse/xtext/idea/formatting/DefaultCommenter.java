@@ -9,6 +9,7 @@ package org.eclipse.xtext.idea.formatting;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 import com.intellij.lang.CodeDocumentationAwareCommenter;
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.tree.IElementType;
@@ -25,16 +26,40 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
  */
 @SuppressWarnings("all")
 public class DefaultCommenter implements CodeDocumentationAwareCommenter {
+  public final static String LINE_COMMENT_PREFIX = "org.eclipse.xtext.idea.formatting.DefaultCommenter.lineCommentPrefix";
+  
+  public final static String BLOCK_COMMENT_PREFIX = "org.eclipse.xtext.idea.formatting.DefaultCommenter.blockCommentPrefix";
+  
+  public final static String BLOCK_COMMENT_SUFFIX = "org.eclipse.xtext.idea.formatting.DefaultCommenter.blockCommentPrefix";
+  
+  public final static String BLOCK_COMMENT_LINE_PREFIX = "org.eclipse.xtext.idea.formatting.DefaultCommenter.blockCommentLinePrefix";
+  
   private IElementType mlCommentTokenType;
   
   private IElementType slCommentTokenType;
   
+  @Inject(optional = true)
+  @Named(DefaultCommenter.LINE_COMMENT_PREFIX)
+  private String lineCommentPrefix = "//";
+  
+  @Inject(optional = true)
+  @Named(DefaultCommenter.BLOCK_COMMENT_PREFIX)
+  private String blockCommentPrefix = "/*";
+  
+  @Inject(optional = true)
+  @Named(DefaultCommenter.BLOCK_COMMENT_SUFFIX)
+  private String blockCommentSuffix = "*/";
+  
+  @Inject(optional = true)
+  @Named(DefaultCommenter.BLOCK_COMMENT_LINE_PREFIX)
+  private String documentationCommentLinePrefix = "*";
+  
   @Inject
   public void setTokenTypes(final TokenTypeProvider tokenTypeProvider, final ITokenDefProvider tokenDefProvider) {
-    IElementType _tokenType = this.getTokenType("RULE_ML_COMMENT", tokenTypeProvider, tokenDefProvider);
-    this.mlCommentTokenType = _tokenType;
-    IElementType _tokenType_1 = this.getTokenType("RULE_SL_COMMENT", tokenTypeProvider, tokenDefProvider);
-    this.slCommentTokenType = _tokenType_1;
+    IElementType _tokenType = this.getTokenType("RULE_SL_COMMENT", tokenTypeProvider, tokenDefProvider);
+    this.slCommentTokenType = _tokenType;
+    IElementType _tokenType_1 = this.getTokenType("RULE_ML_COMMENT", tokenTypeProvider, tokenDefProvider);
+    this.mlCommentTokenType = _tokenType_1;
   }
   
   protected IElementType getTokenType(final String tokenName, @Extension final TokenTypeProvider tokenTypeProvider, @Extension final ITokenDefProvider tokenDefProvider) {
@@ -63,17 +88,29 @@ public class DefaultCommenter implements CodeDocumentationAwareCommenter {
   
   @Override
   public String getLineCommentPrefix() {
-    return "//";
+    boolean _notEquals = (!Objects.equal(this.slCommentTokenType, null));
+    if (_notEquals) {
+      return this.lineCommentPrefix;
+    }
+    return null;
   }
   
   @Override
   public String getBlockCommentPrefix() {
-    return "/*";
+    boolean _notEquals = (!Objects.equal(this.mlCommentTokenType, null));
+    if (_notEquals) {
+      return this.blockCommentPrefix;
+    }
+    return null;
   }
   
   @Override
   public String getBlockCommentSuffix() {
-    return "*/";
+    boolean _notEquals = (!Objects.equal(this.mlCommentTokenType, null));
+    if (_notEquals) {
+      return this.blockCommentSuffix;
+    }
+    return null;
   }
   
   @Override
@@ -93,7 +130,11 @@ public class DefaultCommenter implements CodeDocumentationAwareCommenter {
   
   @Override
   public String getDocumentationCommentLinePrefix() {
-    return "*";
+    boolean _notEquals = (!Objects.equal(this.mlCommentTokenType, null));
+    if (_notEquals) {
+      return this.documentationCommentLinePrefix;
+    }
+    return null;
   }
   
   @Override
