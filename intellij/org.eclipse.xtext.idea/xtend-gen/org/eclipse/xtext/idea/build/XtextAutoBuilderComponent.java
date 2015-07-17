@@ -622,10 +622,11 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
         }
       };
       this.alarm.addRequest(_function, 500);
+    } else {
+      final ArrayList<BuildEvent> allEvents = CollectionLiterals.<BuildEvent>newArrayList();
+      this.queue.drainTo(allEvents);
+      this.internalBuild(allEvents);
     }
-    final ArrayList<BuildEvent> allEvents = CollectionLiterals.<BuildEvent>newArrayList();
-    this.queue.drainTo(allEvents);
-    this.internalBuild(allEvents);
   }
   
   protected void internalBuild(final List<BuildEvent> allEvents) {
