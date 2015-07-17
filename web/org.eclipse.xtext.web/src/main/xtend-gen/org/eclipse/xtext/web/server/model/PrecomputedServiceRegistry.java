@@ -10,7 +10,7 @@ package org.eclipse.xtext.web.server.model;
 import com.google.inject.Singleton;
 import java.util.Set;
 import org.eclipse.xtext.web.server.IServiceResult;
-import org.eclipse.xtext.web.server.model.AbstractPrecomputedService;
+import org.eclipse.xtext.web.server.model.AbstractCachedService;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 
 /**
@@ -25,12 +25,12 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 @Singleton
 @SuppressWarnings("all")
 public class PrecomputedServiceRegistry {
-  private final Set<AbstractPrecomputedService<? extends IServiceResult>> precomputedServices = CollectionLiterals.<AbstractPrecomputedService<? extends IServiceResult>>newHashSet();
+  private final Set<AbstractCachedService<? extends IServiceResult>> precomputedServices = CollectionLiterals.<AbstractCachedService<? extends IServiceResult>>newHashSet();
   
   /**
    * Register a service to be precomputed after each document change.
    */
-  public boolean addPrecomputedService(final AbstractPrecomputedService<? extends IServiceResult> service) {
+  public boolean addPrecomputedService(final AbstractCachedService<? extends IServiceResult> service) {
     boolean _xsynchronizedexpression = false;
     synchronized (this.precomputedServices) {
       _xsynchronizedexpression = this.precomputedServices.add(service);
@@ -41,7 +41,7 @@ public class PrecomputedServiceRegistry {
   /**
    * Remove a service from the registry.
    */
-  public boolean removePrecomputedService(final AbstractPrecomputedService<? extends IServiceResult> service) {
+  public boolean removePrecomputedService(final AbstractCachedService<? extends IServiceResult> service) {
     boolean _xsynchronizedexpression = false;
     synchronized (this.precomputedServices) {
       _xsynchronizedexpression = this.precomputedServices.remove(service);
@@ -52,7 +52,7 @@ public class PrecomputedServiceRegistry {
   /**
    * Return the registered services. These services should be invoked whenever the document is changed.
    */
-  public Iterable<AbstractPrecomputedService<? extends IServiceResult>> getPrecomputedServices() {
+  public Iterable<AbstractCachedService<? extends IServiceResult>> getPrecomputedServices() {
     return this.precomputedServices;
   }
 }

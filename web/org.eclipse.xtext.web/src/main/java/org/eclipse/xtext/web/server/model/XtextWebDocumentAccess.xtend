@@ -188,11 +188,11 @@ import java.util.concurrent.RejectedExecutionException
 	protected def void performPrecomputation(CancelIndicator cancelIndicator) {
 		for (service : preComputedServiceRegistry.getPrecomputedServices()) {
 			operationCanceledManager.checkCanceled(cancelIndicator)
-			getCachedResult(service, false)
+			getCachedServiceResult(service, false)
 		}
 	}
 
-	protected def <T extends IServiceResult> T getCachedResult(AbstractPrecomputedService<T> service, boolean logCacheMiss) {
+	protected def <T extends IServiceResult> T getCachedServiceResult(AbstractCachedService<T> service, boolean logCacheMiss) {
 		return readOnly [d, cancelIndicator |
 			if (document.resourceId !== null) 
 				return document.getCachedServiceResult(service, cancelIndicator, logCacheMiss) 

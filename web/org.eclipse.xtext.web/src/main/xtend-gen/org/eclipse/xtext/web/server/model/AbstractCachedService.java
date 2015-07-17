@@ -18,13 +18,13 @@ import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess;
  * service is registered in the {@link PrecomputedServiceRegistry}.
  */
 @SuppressWarnings("all")
-public abstract class AbstractPrecomputedService<T extends IServiceResult> {
+public abstract class AbstractCachedService<T extends IServiceResult> {
   /**
    * If a cached result is available, that instance is returned. Otherwise a new result
    * is obtained with {@link #compute(IXtextWebDocument, CancelIndicator)}.
    */
   public T getResult(final XtextWebDocumentAccess it) {
-    return it.<T>getCachedResult(this, true);
+    return it.<T>getCachedServiceResult(this, true);
   }
   
   /**
