@@ -175,11 +175,15 @@ public class TraceBasedPositionManagerFactory extends PositionManagerFactory {
     public SourcePosition getSourcePosition(final Location location) throws NoDataException {
       int _lineNumber = location.lineNumber();
       final int line = (_lineNumber - 1);
-      PsiFile _psiFile = this._debugProcessExtensions.getPsiFile(this.process, location);
-      SourcePosition _createFromLine = SourcePosition.createFromLine(_psiFile, line);
-      final AbstractTraceRegion trace = this._debugProcessExtensions.getTraceForJava(_createFromLine);
-      boolean _equals = Objects.equal(trace, null);
+      final PsiFile psiFile = this._debugProcessExtensions.getPsiFile(this.process, location);
+      boolean _equals = Objects.equal(psiFile, null);
       if (_equals) {
+        throw NoDataException.INSTANCE;
+      }
+      SourcePosition _createFromLine = SourcePosition.createFromLine(psiFile, line);
+      final AbstractTraceRegion trace = this._debugProcessExtensions.getTraceForJava(_createFromLine);
+      boolean _equals_1 = Objects.equal(trace, null);
+      if (_equals_1) {
         throw NoDataException.INSTANCE;
       }
       final URI sourceURI = this._debugProcessExtensions.findOriginalDeclaration(this.process, location);
@@ -208,8 +212,8 @@ public class TraceBasedPositionManagerFactory extends PositionManagerFactory {
             } else {
               int _lineNumber_1 = mergedAssociatedLocation.getLineNumber();
               int _endLineNumber = mergedAssociatedLocation.getEndLineNumber();
-              boolean _equals_1 = (_lineNumber_1 == _endLineNumber);
-              _and = _equals_1;
+              boolean _equals_2 = (_lineNumber_1 == _endLineNumber);
+              _and = _equals_2;
             }
             if (_and) {
               final PsiFile psi = this._debugProcessExtensions.getPsiFile(this.process, sourceURI);

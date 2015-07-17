@@ -81,6 +81,10 @@ class DebugProcessExtensions {
 	}
 		
 	def URI findOriginalDeclaration(DebugProcess process, Location location) {
-		process.project.getComponent(XtextAutoBuilderComponent).getSource4GeneratedSource(process.getPsiFile(location).virtualFile.getURI).head
+		val psiFile = process.getPsiFile(location)
+		if (psiFile == null)
+			return null
+		else 
+			return process.project.getComponent(XtextAutoBuilderComponent).getSource4GeneratedSource(psiFile.virtualFile.getURI).head
 	}
 }

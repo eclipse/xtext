@@ -57,7 +57,7 @@ class BuildProgressReporter implements BuildRequest.IPostValidationCallback {
 
 	override afterValidate(URI validated, Iterable<Issue> issues) {
 		markAsAffected(validated)
-		for (issue : issues) {
+		for (issue : issues.filterNull) {
 			reportIssue(validated, issue)
 		}
 		return true

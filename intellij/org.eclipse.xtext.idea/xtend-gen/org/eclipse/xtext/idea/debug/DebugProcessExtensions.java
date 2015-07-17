@@ -161,12 +161,17 @@ public class DebugProcessExtensions {
   }
   
   public URI findOriginalDeclaration(final DebugProcess process, final Location location) {
-    Project _project = process.getProject();
-    XtextAutoBuilderComponent _component = _project.<XtextAutoBuilderComponent>getComponent(XtextAutoBuilderComponent.class);
-    PsiFile _psiFile = this.getPsiFile(process, location);
-    VirtualFile _virtualFile = _psiFile.getVirtualFile();
-    URI _uRI = VirtualFileURIUtil.getURI(_virtualFile);
-    Iterable<URI> _source4GeneratedSource = _component.getSource4GeneratedSource(_uRI);
-    return IterableExtensions.<URI>head(_source4GeneratedSource);
+    final PsiFile psiFile = this.getPsiFile(process, location);
+    boolean _equals = Objects.equal(psiFile, null);
+    if (_equals) {
+      return null;
+    } else {
+      Project _project = process.getProject();
+      XtextAutoBuilderComponent _component = _project.<XtextAutoBuilderComponent>getComponent(XtextAutoBuilderComponent.class);
+      VirtualFile _virtualFile = psiFile.getVirtualFile();
+      URI _uRI = VirtualFileURIUtil.getURI(_virtualFile);
+      Iterable<URI> _source4GeneratedSource = _component.getSource4GeneratedSource(_uRI);
+      return IterableExtensions.<URI>head(_source4GeneratedSource);
+    }
   }
 }

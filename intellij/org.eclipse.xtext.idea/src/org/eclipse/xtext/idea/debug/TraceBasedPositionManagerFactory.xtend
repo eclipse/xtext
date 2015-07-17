@@ -95,7 +95,11 @@ class TraceBasedPositionManagerFactory extends PositionManagerFactory {
 		
 		override getSourcePosition(Location location) throws NoDataException {
 			val line = location.lineNumber -1
-			val trace = SourcePosition.createFromLine(process.getPsiFile(location), line).traceForJava
+			val psiFile = process.getPsiFile(location)
+			if (psiFile == null) {
+				throw NoDataException.INSTANCE
+			}
+			val trace = SourcePosition.createFromLine(psiFile, line).traceForJava
 			if (trace == null) {
 				throw NoDataException.INSTANCE
 			}
