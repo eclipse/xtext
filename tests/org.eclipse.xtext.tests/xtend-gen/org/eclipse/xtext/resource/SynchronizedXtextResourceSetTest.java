@@ -137,7 +137,8 @@ public class SynchronizedXtextResourceSetTest extends AbstractXtextResourceSetTe
       List<String> _list = IterableExtensions.<String>toList(_map_1);
       List<String> _sort = IterableExtensions.<String>sort(_list);
       String _join = IterableExtensions.join(_sort, "\n");
-      Set<URI> _keySet_1 = resourceSet.normalizationMap.keySet();
+      Map<URI, URI> _normalizationMap = resourceSet.getNormalizationMap();
+      Set<URI> _keySet_1 = _normalizationMap.keySet();
       final Function1<URI, String> _function_4 = new Function1<URI, String>() {
         @Override
         public String apply(final URI it) {
