@@ -38,6 +38,7 @@ import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.ConstraintVisitingInfo;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
+import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByUnboundSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
@@ -209,7 +210,11 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 				if (type.getDeclarator() == operation) {
 					return reference.copyInto(getOwner());
 				}
-				return super.getUnmappedSubstitute(reference, type, visiting);
+				LightweightTypeReference result = createUnboundTypeReference(type);
+				if (result == null) {
+					result = new TypeParameterByConstraintSubstitutor(getTypeParameterMapping(), getOwner()).substitute(type);
+				}
+				return result;
 			}
 			
 			@Override
