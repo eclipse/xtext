@@ -351,7 +351,7 @@ class SynchronizedXtextResourceSetTest extends AbstractXtextResourceSetTest {
 		assertEquals(50000, resourceSet.resources.size)
 		assertEquals(resourceSet.resources.toSet.size, resourceSet.URIResourceMap.values.toSet.size)
 		assertEquals(resourceSet.resources.map[ #[getURI, resourceSet.URIConverter.normalize(URI) ] ].flatten.toSet, resourceSet.URIResourceMap.keySet)
-		assertEquals(resourceSet.resources.map[ getURI.toString ].toList.sort.join('\n'), resourceSet.normalizationMap.keySet.map[toString].toList.sort.join('\n'))
+		assertEquals(resourceSet.resources.map[ getURI.toString ].toList.sort.join('\n'), resourceSet.getNormalizationMap.keySet.map[toString].toList.sort.join('\n'))
 	}
 	
 }
