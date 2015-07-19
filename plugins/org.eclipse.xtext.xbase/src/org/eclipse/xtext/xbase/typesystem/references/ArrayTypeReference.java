@@ -80,7 +80,7 @@ public class ArrayTypeReference extends LightweightTypeReference {
 		if (componentType instanceof JvmComponentType) {
 			return Preconditions.checkNotNull(((JvmComponentType) componentType).getArrayType());
 		}
-		if (component.isUnknown()) {
+		if (component.isUnknown() || componentType.eIsProxy()) {
 			return null;
 		}
 		throw new IllegalStateException("component type seems to be invalid: " + componentType + " / " + component);
