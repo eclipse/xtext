@@ -16,7 +16,6 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
-import org.eclipse.xtext.junit4.Flaky;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
@@ -47,7 +46,6 @@ public class XtendLibClasspathAdderTest extends AbstractXtendUITestCase {
 	@Override
 	public void tearDown() throws Exception {
 		IResourcesSetupUtil.cleanWorkspace();
-		waitForAutoBuild();
 	}
 
 	@Override
