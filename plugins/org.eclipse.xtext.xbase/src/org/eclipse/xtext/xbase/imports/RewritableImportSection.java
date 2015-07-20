@@ -188,7 +188,7 @@ public class RewritableImportSection {
 		return true;
 	}
 
-	protected boolean needsImport(JvmDeclaredType type) {
+	public boolean needsImport(JvmDeclaredType type) {
 		if (type.getDeclaringType() != null)
 			return true;
 		String packageName = type.getPackageName();
