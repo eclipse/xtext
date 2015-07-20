@@ -261,4 +261,135 @@ class XtendCompletionTest extends LightXtendTest {
 		val lookupElementStrings = myFixture.lookupElementStrings
 		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("ArrayList"))
 	}
+	
+	def void testOverrideCompletion_01() {
+		'''
+		   class Foo {
+		     overr<caret>
+		   }
+		'''.toString.complete
+		val lookupElementStrings = myFixture.lookupElementStrings
+		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("override equals(Object)"))
+		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("override hashCode()"))
+		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("override toString()"))
+		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("override clone()"))
+		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("override finalize()"))
+	}
+	
+	def void testOverrideCompletion_02() {
+		'''
+		   class Foo {
+		   	override toString() {
+		   		'foo'
+		   	}
+		    overr<caret>
+		   }
+		'''.toString.complete
+		val lookupElementStrings = myFixture.lookupElementStrings
+		assertFalse(lookupElementStrings.toString, lookupElementStrings.contains("override toString()"))
+	}
+	
+	def void testOverrideCompletion_03() {
+		'''
+		   class Foo {
+		   	def void equals() {
+		   		'foo'
+		   	}
+		    overr<caret>
+		   }
+		'''.toString.complete
+		val lookupElementStrings = myFixture.lookupElementStrings
+		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("override equals(Object)"))
+	}
+	
+	def void testOverrideCompletion_04() {
+		'''
+			class MyClass {
+				
+				toString<caret>
+			}
+		'''.toString.complete
+		myFixture.type('\n')
+		assertEquals('''
+			class MyClass {
+			
+				override toString() {
+					throw new UnsupportedOperationException()
+				}
+			
+			}
+		'''.toString, myFixture.editor.document.text.toString)
+		assertEquals("throw new UnsupportedOperationException()",myFixture.editor.selectionModel.selectedText)
+	}
+	
+	def void testOverrideCompletion_05() {
+		'''
+			class MyClass extends MySuperClass<String> {
+				
+				doStuff<caret>
+			}
+			
+			class MySuperClass<T> {
+				def <X> T doStuff(java.util.List<T> myArg, X x) throws java.io.IOException {
+					return null
+				}
+			}
+		'''.toString.complete
+		myFixture.type('\n')
+		assertEquals('''
+			import java.util.List
+			import java.io.IOException
+			
+			class MyClass extends MySuperClass<String> {
+			
+				override <X> doStuff(List<String> myArg, X x) throws IOException {
+					throw new UnsupportedOperationException()
+				}
+			
+			}
+
+			class MySuperClass<T> {
+				def <X> T doStuff(java.util.List<T> myArg, X x) throws java.io.IOException {
+					return null
+				}
+			}
+		'''.toString, myFixture.editor.document.text.toString)
+		assertEquals("throw new UnsupportedOperationException()",myFixture.editor.selectionModel.selectedText)
+	}
+	
+	def void testOverrideCompletion_06() {
+		'''
+			class MyClass extends MySuperClass<String> {
+				
+				ne<caret>
+			}
+			
+			class MySuperClass<T> {
+				new (java.util.List<T> myArg) throws java.io.IOException {
+				}
+			}
+		'''.toString.complete
+		myFixture.type('\n')
+		assertEquals('''
+			import java.util.List
+			import java.io.IOException
+			
+			class MyClass extends MySuperClass<String> {
+			
+				new (List<String> myArg) throws IOException {
+					super(myArg)
+				}
+			
+			}
+			
+			class MySuperClass<T> {
+				new (java.util.List<T> myArg) throws java.io.IOException {
+				}
+			}
+		'''.toString, myFixture.editor.document.text.toString)
+		
+		val offset = myFixture.editor.document.text.indexOf("super(myArg)") + "super(myArg)".length
+		
+		assertEquals(offset,myFixture.editor.caretModel.currentCaret.offset)
+	}
 }
