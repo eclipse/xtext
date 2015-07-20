@@ -112,7 +112,7 @@ public class ResolvingCrossReferenceDuringIndexing extends AbstractXtendUITestCa
       _builder.append("}");
       _builder.newLine();
       IResourcesSetupUtil.createFile(_path, _builder.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertNoErrorsInWorkspace();
       WorkbenchTestHelper.createPluginProject("client.project", "com.google.inject", "org.eclipse.xtend.lib", 
         "org.eclipse.xtext.xbase.lib", "annotation.project");
@@ -133,7 +133,7 @@ public class ResolvingCrossReferenceDuringIndexing extends AbstractXtendUITestCa
       _builder_1.append("}");
       _builder_1.newLine();
       IResourcesSetupUtil.createFile(_path_1, _builder_1.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertNoErrorsInWorkspace();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -222,7 +222,7 @@ public class ResolvingCrossReferenceDuringIndexing extends AbstractXtendUITestCa
       _builder.append("}");
       _builder.newLine();
       IResourcesSetupUtil.createFile(_path, _builder.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertNoErrorsInWorkspace();
       WorkbenchTestHelper.createPluginProject("client.project", "com.google.inject", "org.eclipse.xtend.lib", 
         "org.eclipse.xtext.xbase.lib", "annotation.project");
@@ -243,7 +243,7 @@ public class ResolvingCrossReferenceDuringIndexing extends AbstractXtendUITestCa
       _builder_1.append("}");
       _builder_1.newLine();
       IResourcesSetupUtil.createFile(_path_1, _builder_1.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertNoErrorsInWorkspace();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -418,7 +418,7 @@ public class ResolvingCrossReferenceDuringIndexing extends AbstractXtendUITestCa
       _builder.append("}");
       _builder.newLine();
       IResourcesSetupUtil.createFile(_path, _builder.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertNoErrorsInWorkspace();
       WorkbenchTestHelper.createPluginProject("client.project", "com.google.inject", "org.eclipse.xtend.lib", 
         "org.eclipse.xtext.xbase.lib", "annotation.project");
@@ -444,7 +444,7 @@ public class ResolvingCrossReferenceDuringIndexing extends AbstractXtendUITestCa
       _builder_1.append("}");
       _builder_1.newLine();
       IResourcesSetupUtil.createFile(_path_1, _builder_1.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertNoErrorsInWorkspace();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

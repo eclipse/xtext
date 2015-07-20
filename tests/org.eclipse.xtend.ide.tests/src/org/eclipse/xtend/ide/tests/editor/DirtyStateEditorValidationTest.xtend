@@ -22,13 +22,14 @@ import org.junit.After
 import org.junit.Test
 
 import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
 	
-	static val VALIDATION_TIMEOUT = 10000L
+	static val VALIDATION_TIMEOUT = 2000L
 	
 	@Inject extension WorkbenchTestHelper helper
 	
@@ -95,10 +96,10 @@ class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		waitForBuild(null)
+		IResourcesSetupUtil.reallyWaitForAutoBuild
 		val markers = file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE)
 		if (markers.length > 0) {
-			fail(markers.map[getAttribute(IMarker.MESSAGE)].join(','))
+			fail(markers.map[getAttribute(IMarker.MESSAGE)].join('\n'))
 		}
 		
 		val editor = openEditor(declaration)

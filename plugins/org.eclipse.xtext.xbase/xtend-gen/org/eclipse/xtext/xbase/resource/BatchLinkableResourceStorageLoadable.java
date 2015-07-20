@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.resource;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.util.HashSet;
@@ -38,7 +39,7 @@ import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 @SuppressWarnings("all")
 public class BatchLinkableResourceStorageLoadable extends ResourceStorageLoadable {
   @Override
-  protected void loadEntries(final StorageAwareResource resource, final ZipInputStream zipIn) {
+  protected void loadEntries(final StorageAwareResource resource, final ZipInputStream zipIn) throws IOException {
     super.loadEntries(resource, zipIn);
     if ((resource instanceof BatchLinkableResource)) {
       this.readAssociationsAdapter(((BatchLinkableResource)resource), zipIn);
@@ -46,53 +47,49 @@ public class BatchLinkableResourceStorageLoadable extends ResourceStorageLoadabl
   }
   
   @Override
-  protected Object handleLoadEObject(final InternalEObject loaded, final BinaryResourceImpl.EObjectInputStream input) {
-    try {
-      boolean _xblockexpression = false;
-      {
-        super.handleLoadEObject(loaded, input);
-        boolean _readBoolean = input.readBoolean();
-        if (_readBoolean) {
-          final String doc = input.readString();
-          EList<Adapter> _eAdapters = loaded.eAdapters();
-          DocumentationAdapter _documentationAdapter = new DocumentationAdapter();
-          final Procedure1<DocumentationAdapter> _function = new Procedure1<DocumentationAdapter>() {
-            @Override
-            public void apply(final DocumentationAdapter it) {
-              it.setDocumentation(doc);
-            }
-          };
-          DocumentationAdapter _doubleArrow = ObjectExtensions.<DocumentationAdapter>operator_doubleArrow(_documentationAdapter, _function);
-          _eAdapters.add(_doubleArrow);
-        }
-        boolean _xifexpression = false;
-        boolean _readBoolean_1 = input.readBoolean();
-        if (_readBoolean_1) {
-          EList<Adapter> _eAdapters_1 = loaded.eAdapters();
-          JvmIdentifiableMetaData _jvmIdentifiableMetaData = new JvmIdentifiableMetaData();
-          final Procedure1<JvmIdentifiableMetaData> _function_1 = new Procedure1<JvmIdentifiableMetaData>() {
-            @Override
-            public void apply(final JvmIdentifiableMetaData it) {
-              try {
-                boolean _readBoolean = input.readBoolean();
-                it.setSynthetic(_readBoolean);
-              } catch (Throwable _e) {
-                throw Exceptions.sneakyThrow(_e);
-              }
-            }
-          };
-          JvmIdentifiableMetaData _doubleArrow_1 = ObjectExtensions.<JvmIdentifiableMetaData>operator_doubleArrow(_jvmIdentifiableMetaData, _function_1);
-          _xifexpression = _eAdapters_1.add(_doubleArrow_1);
-        }
-        _xblockexpression = _xifexpression;
+  protected Object handleLoadEObject(final InternalEObject loaded, final BinaryResourceImpl.EObjectInputStream input) throws IOException {
+    boolean _xblockexpression = false;
+    {
+      super.handleLoadEObject(loaded, input);
+      boolean _readBoolean = input.readBoolean();
+      if (_readBoolean) {
+        final String doc = input.readString();
+        EList<Adapter> _eAdapters = loaded.eAdapters();
+        DocumentationAdapter _documentationAdapter = new DocumentationAdapter();
+        final Procedure1<DocumentationAdapter> _function = new Procedure1<DocumentationAdapter>() {
+          @Override
+          public void apply(final DocumentationAdapter it) {
+            it.setDocumentation(doc);
+          }
+        };
+        DocumentationAdapter _doubleArrow = ObjectExtensions.<DocumentationAdapter>operator_doubleArrow(_documentationAdapter, _function);
+        _eAdapters.add(_doubleArrow);
       }
-      return Boolean.valueOf(_xblockexpression);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+      boolean _xifexpression = false;
+      boolean _readBoolean_1 = input.readBoolean();
+      if (_readBoolean_1) {
+        EList<Adapter> _eAdapters_1 = loaded.eAdapters();
+        JvmIdentifiableMetaData _jvmIdentifiableMetaData = new JvmIdentifiableMetaData();
+        final Procedure1<JvmIdentifiableMetaData> _function_1 = new Procedure1<JvmIdentifiableMetaData>() {
+          @Override
+          public void apply(final JvmIdentifiableMetaData it) {
+            try {
+              boolean _readBoolean = input.readBoolean();
+              it.setSynthetic(_readBoolean);
+            } catch (Throwable _e) {
+              throw Exceptions.sneakyThrow(_e);
+            }
+          }
+        };
+        JvmIdentifiableMetaData _doubleArrow_1 = ObjectExtensions.<JvmIdentifiableMetaData>operator_doubleArrow(_jvmIdentifiableMetaData, _function_1);
+        _xifexpression = _eAdapters_1.add(_doubleArrow_1);
+      }
+      _xblockexpression = _xifexpression;
     }
+    return Boolean.valueOf(_xblockexpression);
   }
   
-  protected void readAssociationsAdapter(final BatchLinkableResource resource, final ZipInputStream stream) {
+  protected void readAssociationsAdapter(final BatchLinkableResource resource, final ZipInputStream stream) throws IOException {
     try {
       EList<Adapter> _eAdapters = resource.eAdapters();
       Iterable<JvmModelAssociator.Adapter> _filter = Iterables.<JvmModelAssociator.Adapter>filter(_eAdapters, JvmModelAssociator.Adapter.class);

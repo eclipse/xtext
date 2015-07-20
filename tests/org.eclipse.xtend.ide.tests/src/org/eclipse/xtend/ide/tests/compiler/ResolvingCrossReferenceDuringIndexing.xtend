@@ -66,7 +66,7 @@ class ResolvingCrossReferenceDuringIndexing extends AbstractXtendUITestCase {
 				
 				}
 			''')
-		waitForAutoBuild
+		waitForBuild
 		assertNoErrorsInWorkspace
 
 		WorkbenchTestHelper.createPluginProject("client.project", "com.google.inject", "org.eclipse.xtend.lib",
@@ -83,7 +83,7 @@ class ResolvingCrossReferenceDuringIndexing extends AbstractXtendUITestCase {
 				class MyClient extends ArrayList<Object> {
 				}
 			''')
-		waitForAutoBuild
+		waitForBuild
 		assertNoErrorsInWorkspace
 	}
 	
@@ -129,7 +129,7 @@ class ResolvingCrossReferenceDuringIndexing extends AbstractXtendUITestCase {
 				
 				}
 			''')
-		waitForAutoBuild
+		waitForBuild
 		assertNoErrorsInWorkspace
 
 		WorkbenchTestHelper.createPluginProject("client.project", "com.google.inject", "org.eclipse.xtend.lib",
@@ -146,7 +146,7 @@ class ResolvingCrossReferenceDuringIndexing extends AbstractXtendUITestCase {
 				class MyClient {
 				}
 			''')
-		waitForAutoBuild
+		waitForBuild
 		assertNoErrorsInWorkspace
 	}
 
@@ -243,7 +243,7 @@ class ResolvingCrossReferenceDuringIndexing extends AbstractXtendUITestCase {
 				
 				}
 			''')
-		waitForAutoBuild
+		waitForBuild
 		assertNoErrorsInWorkspace
 
 		WorkbenchTestHelper.createPluginProject("client.project", "com.google.inject", "org.eclipse.xtend.lib",
@@ -262,7 +262,7 @@ class ResolvingCrossReferenceDuringIndexing extends AbstractXtendUITestCase {
 				
 				}
 			''')
-		waitForAutoBuild
+		waitForBuild
 		assertNoErrorsInWorkspace
 	}
 

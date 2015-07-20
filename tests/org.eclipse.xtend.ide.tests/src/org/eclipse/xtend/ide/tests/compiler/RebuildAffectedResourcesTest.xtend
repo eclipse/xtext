@@ -53,13 +53,13 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 				Type1 myRef
 			}
 		''')
-		waitForAutoBuild()
+		waitForBuild()
 		assertNoErrorsInWorkspace
 		type1.setContents(new StringInputStream('''
 			class Type3 {
 			}
 		'''),true,true, null)
-		waitForAutoBuild()
+		waitForBuild()
 		type2.assertHasErrors("Type1")
 	}
 	
@@ -73,13 +73,13 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 				Type1 myRef
 			}
 		''')
-		waitForAutoBuild
+		waitForBuild
 		type2.assertHasErrors("Type1")
 		type1.setContents(new StringInputStream('''
 			class Type1 {
 			}
 		'''),true,true, null)
-		waitForAutoBuild()
+		waitForBuild()
 		assertNoErrorsInWorkspace
 	}
 	
@@ -100,14 +100,14 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		waitForAutoBuild()
+		waitForBuild()
 		type2.assertHasErrors("bar")
 		type3.setContents(new StringInputStream('''
 			class Type3 {
 				def void bar() {}
 			}
 		'''),true,true, null)
-		waitForAutoBuild()
+		waitForBuild()
 		assertNoErrorsInWorkspace
 	}
 	
@@ -127,14 +127,14 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		waitForAutoBuild()
+		waitForBuild()
 		type2.assertHasErrors("bar")
 		type3.setContents(new StringInputStream('''
 			class Type3 {
 				def void bar() {}
 			}
 		'''),true,true, null)
-		waitForAutoBuild()
+		waitForBuild()
 		assertNoErrorsInWorkspace
 		
 		type3.setContents(new StringInputStream('''
@@ -142,7 +142,7 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 				def void baz() {}
 			}
 		'''),true,true, null)
-		waitForAutoBuild()
+		waitForBuild()
 		type2.assertHasErrors("bar")
 	}
 	
@@ -157,20 +157,20 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 			class B extends A {
 			}
 		''')
-		waitForAutoBuild()
+		waitForBuild()
 		assertNoErrorsInWorkspace
 		typeA.setContents(new StringInputStream('''
 			abst ract class A {
 			}
 		'''),true,true, null)
-		waitForAutoBuild()
+		waitForBuild()
 		typeA.assertHasErrors('abst')
 		typeB.assertHasErrors('A')
 		
 		typeA.setContents(new StringInputStream('''
 			abstract class A {}
 		'''),true,true, null)
-		waitForAutoBuild()
+		waitForBuild()
 		assertNoErrorsInWorkspace
 	}
 	
@@ -209,7 +209,7 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		waitForAutoBuild
+		waitForBuild
 		clientClass.assertHasErrors("- cannot be resolved")
 		
 		processorClass.setContents(new StringInputStream('''
@@ -224,7 +224,7 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 				}
 			}
 		'''),true,true, null)
-		waitForAutoBuild
+		waitForBuild
 		assertNoErrorsInWorkspace
 		WorkbenchTestHelper.deleteProject(clientProject.project)
 	}
@@ -276,14 +276,14 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		waitForAutoBuild
+		waitForBuild
 		fooClass.assertHasErrors("C is undefined")
 		
 		constants.setContents(new StringInputStream('''
 			A
 			B
 			C'''),true,true, null)
-		waitForAutoBuild
+		waitForBuild
 		assertNoErrorsInWorkspace
 		WorkbenchTestHelper.deleteProject(clientProject.project)
 	}
@@ -327,7 +327,7 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		waitForAutoBuild
+		waitForBuild
 		fooClass.assertHasErrors("bar is undefined")
 		
 		macroProject.createFile('src/anno/A.xtend', '''
@@ -336,7 +336,7 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 				def bar() {}
 			}
 		''')
-		waitForAutoBuild
+		waitForBuild
 		assertNoErrorsInWorkspace
 		WorkbenchTestHelper.deleteProject(clientProject.project)
 	}

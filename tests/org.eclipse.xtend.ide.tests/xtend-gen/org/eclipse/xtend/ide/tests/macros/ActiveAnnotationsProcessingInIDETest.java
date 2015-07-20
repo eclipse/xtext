@@ -269,7 +269,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
       String _string_1 = _value_1.toString();
       IFile _newSource_1 = this.newSource(ActiveAnnotationsProcessingInIDETest.userProject, _key_3, _string_1);
       this.clientFile = _newSource_1;
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IProject _project_1 = ActiveAnnotationsProcessingInIDETest.userProject.getProject();
       final ResourceSet resourceSet = this.resourceSetProvider.get(_project_1);
       IPath _fullPath = this.clientFile.getFullPath();

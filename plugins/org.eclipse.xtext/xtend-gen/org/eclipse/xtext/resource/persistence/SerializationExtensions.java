@@ -8,6 +8,7 @@
 package org.eclipse.xtext.resource.persistence;
 
 import com.google.common.base.Objects;
+import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
  */
 @SuppressWarnings("all")
 class SerializationExtensions {
-  public static <T extends ENamedElement> T readEcoreElement(final ObjectInput in) {
+  public static <T extends ENamedElement> T readEcoreElement(final ObjectInput in) throws IOException {
     final URI uri = SerializationExtensions.readURI(in);
     URI _trimFragment = uri.trimFragment();
     String _string = _trimFragment.toString();
@@ -37,12 +38,12 @@ class SerializationExtensions {
     return ((T) _eObject);
   }
   
-  public static void writeEcoreElement(final ObjectOutput out, final ENamedElement namedElement) {
+  public static void writeEcoreElement(final ObjectOutput out, final ENamedElement namedElement) throws IOException {
     final URI uri = EcoreUtil.getURI(namedElement);
     SerializationExtensions.writeURI(out, uri);
   }
   
-  public static <T extends Object> T readCastedObject(final ObjectInput in) {
+  public static <T extends Object> T readCastedObject(final ObjectInput in) throws IOException {
     try {
       Object _readObject = in.readObject();
       return ((T) _readObject);
@@ -51,34 +52,26 @@ class SerializationExtensions {
     }
   }
   
-  public static URI readURI(final ObjectInput in) {
-    try {
-      final String stringRep = in.readUTF();
-      boolean _equals = Objects.equal(stringRep, "NULL");
-      if (_equals) {
-        return null;
-      }
-      return URI.createURI(stringRep);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+  public static URI readURI(final ObjectInput in) throws IOException {
+    final String stringRep = in.readUTF();
+    boolean _equals = Objects.equal(stringRep, "NULL");
+    if (_equals) {
+      return null;
+    }
+    return URI.createURI(stringRep);
+  }
+  
+  public static void writeURI(final ObjectOutput out, final URI uri) throws IOException {
+    boolean _equals = Objects.equal(uri, null);
+    if (_equals) {
+      out.writeUTF("NULL");
+    } else {
+      String _string = uri.toString();
+      out.writeUTF(_string);
     }
   }
   
-  public static void writeURI(final ObjectOutput out, final URI uri) {
-    try {
-      boolean _equals = Objects.equal(uri, null);
-      if (_equals) {
-        out.writeUTF("NULL");
-      } else {
-        String _string = uri.toString();
-        out.writeUTF(_string);
-      }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
-  public static QualifiedName readQualifiedName(final ObjectInput in) {
+  public static QualifiedName readQualifiedName(final ObjectInput in) throws IOException {
     try {
       Object _readObject = in.readObject();
       return QualifiedName.create(((ArrayList<String>) _readObject));
@@ -87,13 +80,9 @@ class SerializationExtensions {
     }
   }
   
-  public static void writeQualifiedName(final ObjectOutput out, final QualifiedName name) {
-    try {
-      List<String> _segments = name.getSegments();
-      ArrayList<String> _arrayList = new ArrayList<String>(_segments);
-      out.writeObject(_arrayList);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  public static void writeQualifiedName(final ObjectOutput out, final QualifiedName name) throws IOException {
+    List<String> _segments = name.getSegments();
+    ArrayList<String> _arrayList = new ArrayList<String>(_segments);
+    out.writeObject(_arrayList);
   }
 }

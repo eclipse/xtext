@@ -64,6 +64,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XCasePart/case"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XCasePart/then"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XCasePart/typeGuard"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XCasePart/fallThrough"/>
     </genClasses>
     <genClasses ecoreClass="Xbase.ecore#//XBlockExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XBlockExpression/expressions"/>
@@ -114,6 +115,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XConstructorCall/typeArguments"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XConstructorCall/invalidFeatureIssueCode"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XConstructorCall/validFeature"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XConstructorCall/explicitConstructorCall"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XConstructorCall/anonymousClassConstructorCall"/>
     </genClasses>
     <genClasses ecoreClass="Xbase.ecore#//XBooleanLiteral">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XBooleanLiteral/isTrue"/>
@@ -134,7 +137,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XClosure/declaredFormalParameters"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XClosure/expression"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XClosure/explicitSyntax"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XClosure/implicitParameter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XClosure/implicitFormalParameters"/>
       <genOperations ecoreOperation="Xbase.ecore#//XClosure/getFormalParameters"/>
     </genClasses>
     <genClasses ecoreClass="Xbase.ecore#//XCastedExpression">

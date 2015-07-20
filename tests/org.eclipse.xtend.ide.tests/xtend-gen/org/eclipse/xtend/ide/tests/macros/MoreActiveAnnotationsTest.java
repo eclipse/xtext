@@ -12,7 +12,6 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
@@ -85,7 +84,7 @@ public class MoreActiveAnnotationsTest {
       this.newSource(macroProject, "annotation/DItemMini.xtend", _builder.toString());
       IProject _project = macroProject.getProject();
       WorkbenchTestHelper.addExportedPackages(_project, "annotation");
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
         "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject");
       final IJavaProject userProject = JavaCore.create(_createPluginProject_1);
@@ -102,7 +101,7 @@ public class MoreActiveAnnotationsTest {
       _builder_1.append("}");
       _builder_1.newLine();
       this.newSource(userProject, "client/UserCode.xtend", _builder_1.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -173,7 +172,7 @@ public class MoreActiveAnnotationsTest {
       this.newSource(macroProject, "annotation/StaticFeatures.xtend", _builder_1.toString());
       IProject _project = macroProject.getProject();
       WorkbenchTestHelper.addExportedPackages(_project, "annotation");
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
         "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject");
       final IJavaProject userProject = JavaCore.create(_createPluginProject_1);
@@ -194,7 +193,7 @@ public class MoreActiveAnnotationsTest {
       _builder_2.append("}");
       _builder_2.newLine();
       this.newSource(userProject, "client/UserCode.xtend", _builder_2.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -268,7 +267,7 @@ public class MoreActiveAnnotationsTest {
       this.newSource(macroProject, "annotation/StaticFeatures.xtend", _builder_1.toString());
       IProject _project = macroProject.getProject();
       WorkbenchTestHelper.addExportedPackages(_project, "annotation");
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
         "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject");
       final IJavaProject userProject = JavaCore.create(_createPluginProject_1);
@@ -311,7 +310,7 @@ public class MoreActiveAnnotationsTest {
       _builder_2.append("}");
       _builder_2.newLine();
       this.newSource(userProject, "client/UserCode.xtend", _builder_2.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -403,7 +402,7 @@ public class MoreActiveAnnotationsTest {
       this.newSource(macroProject, "annotation/MyClass.java", _builder_2.toString());
       IProject _project = macroProject.getProject();
       WorkbenchTestHelper.addExportedPackages(_project, "annotation");
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
         "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject");
       final IJavaProject userProject = JavaCore.create(_createPluginProject_1);
@@ -426,7 +425,7 @@ public class MoreActiveAnnotationsTest {
       _builder_3.append("}");
       _builder_3.newLine();
       this.newSource(userProject, "client/UserCode.xtend", _builder_3.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -565,7 +564,7 @@ public class MoreActiveAnnotationsTest {
       this.newSource(macroProject, "annotation/MyAA.xtend", _builder.toString());
       IProject _project = macroProject.getProject();
       WorkbenchTestHelper.addExportedPackages(_project, "annotation");
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
         "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject");
       final IJavaProject userProject = JavaCore.create(_createPluginProject_1);
@@ -595,8 +594,7 @@ public class MoreActiveAnnotationsTest {
       _builder_2.newLine();
       this.newSource(userProject, "client/sub/B.xtend", _builder_2.toString());
       IResourcesSetupUtil.cleanBuild();
-      NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      IResourcesSetupUtil.waitForBuild(_nullProgressMonitor);
+      IResourcesSetupUtil.waitForBuild();
       IProject _project_1 = userProject.getProject();
       IResource _findMember = _project_1.findMember("xtend-gen/client/sub/B.java");
       final IFile file = ((IFile) _findMember);

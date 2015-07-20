@@ -49,7 +49,7 @@ public class LoggingTester {
     }
     
     public void assertLogEntry(final String... messageParts) {
-      this.assertNumberOfLogEntries(1, new String[] {});
+      this.assertNumberOfLogEntries(1, messageParts);
     }
     
     public void assertLogEntry(final Level level, final String... messageParts) {

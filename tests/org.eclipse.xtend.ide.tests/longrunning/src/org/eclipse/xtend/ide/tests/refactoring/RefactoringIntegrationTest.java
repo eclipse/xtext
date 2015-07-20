@@ -114,7 +114,7 @@ public class RefactoringIntegrationTest extends AbstractXtendUITestCase {
 
 	protected void performRenameTest(IFile file, String originalContents, String oldName, String newName, IFile newFile)
 			throws Exception {
-		IResourcesSetupUtil.waitForAutoBuild();
+		IResourcesSetupUtil.waitForBuild();
 		ResourceSet resourceSet = resourceSetProvider.get(file.getProject());
 		XtextResource resource = (XtextResource) resourceSet.getResource(
 				testHelper.uri(file), true);

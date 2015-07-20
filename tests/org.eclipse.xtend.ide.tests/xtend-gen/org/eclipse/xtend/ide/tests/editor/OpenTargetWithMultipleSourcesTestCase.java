@@ -101,7 +101,7 @@ public class OpenTargetWithMultipleSourcesTestCase extends AbstractXtendUITestCa
     _builder_1.append("}");
     _builder_1.newLine();
     IResourcesSetupUtil.createFile(_path_1, _builder_1.toString());
-    IResourcesSetupUtil.waitForAutoBuild();
+    IResourcesSetupUtil.waitForBuild();
   }
   
   @After

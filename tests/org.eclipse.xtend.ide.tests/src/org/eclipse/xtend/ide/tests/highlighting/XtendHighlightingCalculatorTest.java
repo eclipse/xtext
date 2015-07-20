@@ -65,7 +65,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		imports = Sets.newHashSet();
 		injects = Sets.newHashSet();
 		classDefString = DEFAULT_CLASS_DEF;
-		waitForAutoBuild();
+		waitForBuild();
 	}
 	
 	@After

@@ -9,7 +9,6 @@ package org.eclipse.xtend.ide.tests.macros
 
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IFolder
-import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder
@@ -72,7 +71,7 @@ class JdtBasedProcessorProviderTest {
 			}
 		''')
 		libProject.project.addExportedPackages("mylib")
-		waitForAutoBuild()
+		waitForBuild()
 				
 		val userProject = JavaCore.create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
@@ -86,7 +85,7 @@ class JdtBasedProcessorProviderTest {
 		''')
 		
 		cleanBuild
-		waitForBuild(new NullProgressMonitor)
+		waitForBuild()
 		assertNoErrorsInWorkspace();
 		
 		val javaCode = (file("userProject/xtend-gen/client/SomeClass.java") as IFile).contentsAsString
@@ -128,7 +127,7 @@ class JdtBasedProcessorProviderTest {
 			}
 		''')
 		macroProject.project.addExportedPackages("annotation")
-		waitForAutoBuild()
+		waitForBuild()
 				
 		val userProject = JavaCore.create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
@@ -142,7 +141,7 @@ class JdtBasedProcessorProviderTest {
 		''')
 		
 		cleanBuild
-		waitForBuild(new NullProgressMonitor)
+		waitForBuild()
 		assertNoErrorsInWorkspace();
 		
 		val javaCode = (file("userProject/xtend-gen/client/SomeClass.java") as IFile).contentsAsString
@@ -193,7 +192,7 @@ class JdtBasedProcessorProviderTest {
 				}
 			}
 		''')
-		waitForAutoBuild()
+		waitForBuild()
 				
 		val userProject = xtendProject("userProject", macroProject)
 		userProject.newSource("client/A.xtend", '''
@@ -205,7 +204,7 @@ class JdtBasedProcessorProviderTest {
 		''')
 		
 		cleanBuild
-		waitForBuild(new NullProgressMonitor)
+		waitForBuild()
 		assertNoErrorsInWorkspace();
 		
 		val javaCode = (file("userProject/xtend-gen/client/SomeClass.java") as IFile).contentsAsString
@@ -238,7 +237,7 @@ class JdtBasedProcessorProviderTest {
 				}
 			}
 		''')
-		waitForAutoBuild()
+		waitForBuild()
 				
 		val userProject = xtendProject("userProject", macroProject)
 		userProject.newSource("client/B.java", '''
@@ -254,7 +253,7 @@ class JdtBasedProcessorProviderTest {
 		''')
 		
 		cleanBuild
-		waitForBuild(new NullProgressMonitor)
+		waitForBuild()
 		assertNoErrorsInWorkspace();
 		
 		val javaCode = (file("userProject/xtend-gen/client/SomeClass.java") as IFile).contentsAsString

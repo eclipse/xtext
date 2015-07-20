@@ -8,6 +8,10 @@ import org.eclipse.xtext.xbase.imports.ImportOrganizer
 import org.junit.Test
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import org.eclipse.xtext.util.StringInputStream
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.core.resources.IFile
+import org.eclipse.xtend.core.xtend.XtendFile
 
 class OrganizeImportsTest extends AbstractXtendUITestCase {
 	
@@ -28,6 +32,46 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 		for(it: changes.sortBy[offset].reverse)
 			builder.replace(offset, offset + length, text)
 		assertEquals(expected.toString, builder.toString)
+	}
+	
+	def protected assertIsOrganizedWithErrorsTo(CharSequence model, CharSequence expected) {
+		assertFalse (expected.toString.contains("$"))
+		val xtendFile = xtendFileWithError(model.toString)
+		
+		val changes = importOrganizer.getOrganizedImportChanges(xtendFile.eResource as XtextResource)
+		val builder = new StringBuilder(model)
+		for(it: changes.sortBy[offset].reverse)
+			builder.replace(offset, offset + length, text)
+		assertEquals(expected.toString, builder.toString)
+	}
+	
+	def protected XtendFile xtendFileWithError(String content) throws Exception {
+		var IFile file = createFile("HasErrors", content) 
+		var Resource resource = getResourceSet().createResource(uri(file)) 
+		resource.load(new StringInputStream(content), null)
+		assertTrue(resource.getErrors().toString(), resource.getErrors().size() > 0)
+		var XtendFile xtendFile = resource.getContents().get(0) as XtendFile 
+		return xtendFile 
+	}
+	
+	@Test def testBug470235() {
+		'''
+			import org.eclipse.xtend.lib.annotations.Data
+			
+			class O {
+				Object o = new () {
+					BigDecimal list = null
+				} 
+			}
+		'''.assertIsOrganizedWithErrorsTo('''
+			import java.math.BigDecimal
+			
+			class O {
+				Object o = new () {
+					BigDecimal list = null
+				} 
+			}
+		''')
 	}
 	
 	@Test def testUnresolvedArrayType() {
@@ -585,7 +629,7 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 				public static class Inner {}
 			}
 			''')
-		waitForAutoBuild
+		waitForBuild
 		'''		
 			package p
 

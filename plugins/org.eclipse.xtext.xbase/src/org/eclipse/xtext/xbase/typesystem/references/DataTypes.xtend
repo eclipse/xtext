@@ -16,8 +16,10 @@ import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo
 import org.eclipse.xtend.lib.annotations.Data
 
 /**
+ * Small utility data structure to carry around in the type reference visitors.
+ * May help to guard against infinite recursion and to collect type parameter data.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc
  */
 @Data
 class LightweightTraversalData {
@@ -26,8 +28,10 @@ class LightweightTraversalData {
 }
 
 /**
+ * Encapsulates the information that is collected as a type hint to later resolve an
+ * unbound type reference.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc
  */
 @Data
 class LightweightBoundTypeArgument {
@@ -43,8 +47,10 @@ class LightweightBoundTypeArgument {
 }
 
 /**
+ * The result of a merge operation where different type bound type arguments are incorporated into
+ * a result.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc
  */
 @Data
 class LightweightMergedBoundTypeArgument {

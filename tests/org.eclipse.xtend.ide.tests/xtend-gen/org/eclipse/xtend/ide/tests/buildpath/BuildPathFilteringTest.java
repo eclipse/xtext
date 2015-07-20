@@ -50,7 +50,7 @@ public class BuildPathFilteringTest extends AbstractXtendUITestCase {
       };
       ObjectExtensions.<IProject>operator_doubleArrow(_createPluginProject, _function);
       IResourcesSetupUtil.createFile("testProject/filtered-src/Foo.xtend", "class Foo {}");
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IResource _file = IResourcesSetupUtil.file("testProject/xtend-gen/Foo.java");
       Assert.assertNotNull(_file);
     } catch (Throwable _e) {
@@ -75,7 +75,7 @@ public class BuildPathFilteringTest extends AbstractXtendUITestCase {
       };
       ObjectExtensions.<IProject>operator_doubleArrow(_createPluginProject, _function);
       IResourcesSetupUtil.createFile("testProject/filtered-src/Foo.xtend", "class Foo {}");
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IResource _file = IResourcesSetupUtil.file("testProject/xtend-gen/Foo.java");
       Assert.assertNull(_file);
     } catch (Throwable _e) {
@@ -107,7 +107,7 @@ public class BuildPathFilteringTest extends AbstractXtendUITestCase {
       IResourcesSetupUtil.createFile("testProject/filtered-src/Foo.xtend", "class Foo {}");
       IResourcesSetupUtil.createFile("testProject/filtered-src/Bar.xtend", "class Bar {}");
       IResourcesSetupUtil.createFile("testProject/filtered-src/foo/Foo.xtend", "package foo class Foo {}");
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IResource _file = IResourcesSetupUtil.file("testProject/xtend-gen/Foo.java");
       Assert.assertNotNull(_file);
       IResource _file_1 = IResourcesSetupUtil.file("testProject/xtend-gen/Bar.java");
@@ -138,7 +138,7 @@ public class BuildPathFilteringTest extends AbstractXtendUITestCase {
       IResourcesSetupUtil.createFile("testProject/filtered-src/Foo.xtend", "class Foo {}");
       IResourcesSetupUtil.createFile("testProject/filtered-src/Bar.xtend", "class Bar {}");
       IResourcesSetupUtil.createFile("testProject/filtered-src/foo/Foo.xtend", "package foo class Foo {}");
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IResource _file = IResourcesSetupUtil.file("testProject/xtend-gen/Foo.java");
       Assert.assertNull(_file);
       IResource _file_1 = IResourcesSetupUtil.file("testProject/xtend-gen/Bar.java");

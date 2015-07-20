@@ -78,6 +78,7 @@ class JavaCodeAnalyzer {
 		val parser = ASTParser.newParser(asJLS(compilerCompliance))
 		val options = JavaCore.getOptions()
 		JavaCore.setComplianceOptions(compilerCompliance, options)
+		options.put(JavaCore.COMPILER_DOC_COMMENT_SUPPORT, JavaCore.ENABLED)
 		parser.compilerOptions = options
 		return parser
 	}

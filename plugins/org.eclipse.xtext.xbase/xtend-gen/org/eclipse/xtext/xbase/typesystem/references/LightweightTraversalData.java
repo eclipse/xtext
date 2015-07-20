@@ -18,8 +18,10 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 
 /**
+ * Small utility data structure to carry around in the type reference visitors.
+ * May help to guard against infinite recursion and to collect type parameter data.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc
  */
 @Data
 @SuppressWarnings("all")

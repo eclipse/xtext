@@ -175,6 +175,9 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	 */
 	protected boolean ensureOutputConfigurationDirectoryExists(OutputConfiguration outputConfig) {
 		IContainer container = getContainer(outputConfig);
+		if (container == null) {
+			return false;
+		}
 		if (!container.exists()) {
 			if (outputConfig.isCreateOutputDirectory()) {
 				try {
@@ -200,45 +203,47 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 			return;
 
 		IFile file = getFile(fileName, outputName);
-		IFile traceFile = getTraceFile(file);
-		try {
-			String encoding = getEncoding(file);
-			CharSequence postProcessedContent = postProcess(fileName, outputName, contents, encoding);
-			String contentsAsString = postProcessedContent.toString();
-			if (file.exists()) {
-				if (outputConfig.isOverrideExistingResources()) {
-					StringInputStream newContent = getInputStream(contentsAsString, encoding);
-					if (hasContentsChanged(file, newContent)) {
-						// reset to offset zero allows to reuse internal byte[]
-						// no need to convert the string twice
-						newContent.reset();
-						file.setContents(newContent, true, outputConfig.isKeepLocalHistory(), monitor);
-					} else {
-						file.touch(getMonitor());
+		if (file != null) {
+			IFile traceFile = getTraceFile(file);
+			try {
+				String encoding = getEncoding(file);
+				CharSequence postProcessedContent = postProcess(fileName, outputName, contents, encoding);
+				String contentsAsString = postProcessedContent.toString();
+				if (file.exists()) {
+					if (outputConfig.isOverrideExistingResources()) {
+						StringInputStream newContent = getInputStream(contentsAsString, encoding);
+						if (hasContentsChanged(file, newContent)) {
+							// reset to offset zero allows to reuse internal byte[]
+							// no need to convert the string twice
+							newContent.reset();
+							file.setContents(newContent, true, outputConfig.isKeepLocalHistory(), monitor);
+						} else {
+							file.touch(getMonitor());
+						}
+						if (file.isDerived() != outputConfig.isSetDerivedProperty()) {
+							setDerived(file, outputConfig.isSetDerivedProperty());
+						}
+						if (traceFile != null)
+							updateTraceInformation(traceFile, postProcessedContent, outputConfig.isSetDerivedProperty());
+						if (callBack != null)
+							callBack.afterFileUpdate(file);
 					}
-					if (file.isDerived() != outputConfig.isSetDerivedProperty()) {
-						setDerived(file, outputConfig.isSetDerivedProperty());
+				} else {
+					ensureParentExists(file);
+					file.create(getInputStream(contentsAsString, encoding), true, monitor);
+					if (outputConfig.isSetDerivedProperty()) {
+						setDerived(file, true);
 					}
 					if (traceFile != null)
 						updateTraceInformation(traceFile, postProcessedContent, outputConfig.isSetDerivedProperty());
 					if (callBack != null)
-						callBack.afterFileUpdate(file);
+						callBack.afterFileCreation(file);
 				}
-			} else {
-				ensureParentExists(file);
-				file.create(getInputStream(contentsAsString, encoding), true, monitor);
-				if (outputConfig.isSetDerivedProperty()) {
-					setDerived(file, true);
-				}
-				if (traceFile != null)
-					updateTraceInformation(traceFile, postProcessedContent, outputConfig.isSetDerivedProperty());
-				if (callBack != null)
-					callBack.afterFileCreation(file);
+			} catch (CoreException e) {
+				throw new RuntimeIOException(e);
+			} catch (IOException e) {
+				throw new RuntimeIOException(e);
 			}
-		} catch (CoreException e) {
-			throw new RuntimeIOException(e);
-		} catch (IOException e) {
-			throw new RuntimeIOException(e);
 		}
 	}
 
@@ -362,7 +367,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 		} else {
 			path = outputConfig.getOutputDirectory(getCurrentSource());
 		}
-		if (".".equals(path) || "./".equals(path) || "".equals(path)) {
+		if (".".equals(path) || "./".equals(path) || "".equals(path) || project == null) {
 			return project;
 		}
 		return project.getFolder(new Path(path));
@@ -553,6 +558,9 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	 * @since 2.5
 	 */
 	public void deleteFile(IFile file, String outputName, IProgressMonitor monitor) throws CoreException {
+		if (file == null) {
+			return;
+		}
 		OutputConfiguration outputConfig = getOutputConfig(outputName);
 		IFileCallback callBack = getCallBack();
 		if ((callBack == null || callBack.beforeFileDeletion(file)) && file.exists() && !isTraceFile(file)) {
@@ -574,9 +582,12 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	protected IFile getFile(String fileName, String outputName, IProgressMonitor progressMonitor) {
 		OutputConfiguration configuration = getOutputConfig(outputName);
 		IContainer container = getContainer(configuration);
-		IFile result = container.getFile(new Path(fileName));
-		syncIfNecessary(result, progressMonitor);
-		return result;
+		if (container != null) {
+			IFile result = container.getFile(new Path(fileName));
+			syncIfNecessary(result, progressMonitor);
+			return result;
+		}
+		return null;
 	}
 	
 	/**
@@ -602,8 +613,11 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	public URI getURI(String path, String outputName, IProgressMonitor progressMonitor) {
 		OutputConfiguration configuration = getOutputConfig(outputName);
 		IContainer container = getContainer(configuration);
-		IPath childPath = container.getFullPath().append(path).makeAbsolute();
-		return URI.createPlatformResourceURI(childPath.toString(), true);
+		if (container != null) {
+			IPath childPath = container.getFullPath().append(path).makeAbsolute();
+			return URI.createPlatformResourceURI(childPath.toString(), true);
+		}
+		return null;
 	}
 	
 	/**

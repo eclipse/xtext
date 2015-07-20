@@ -23,6 +23,7 @@ import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.builder.nature.ToggleXtextNatureAction;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.internal.Stopwatches;
@@ -250,16 +251,16 @@ public class BuilderPerformanceTest extends AbstractBuilderTest {
 	private void toggleNature(IJavaProject javaProject1) {
 		long before = System.currentTimeMillis();
 		new ToggleXtextNatureAction().toggleNature(javaProject1.getProject());
-		waitForAutoBuild();
+		waitForBuild();
 		System.out.println("Toggle Nature - Took " + (System.currentTimeMillis() - before) +"ms");
 	}
 	
 	private String cleanBuildTakes() throws Exception {
-		waitForAutoBuild();
+		waitForBuild();
 		long before = System.currentTimeMillis();
 		cleanBuild();
 		fullBuild();
-		waitForAutoBuild();
+		waitForBuild();
 		long after = System.currentTimeMillis();
 		return "Took " + (after -before) + "ms";
 	}
@@ -277,6 +278,10 @@ public class BuilderPerformanceTest extends AbstractBuilderTest {
 		projectFactory.addRequiredBundles(Arrays.asList(bundleDependencies));
 		IProject result = projectFactory.createProject(new NullProgressMonitor(), null);
 		return result;
+	}
+	
+	protected void waitForBuild() {
+		IResourcesSetupUtil.reallyWaitForAutoBuild();
 	}
 	
 }

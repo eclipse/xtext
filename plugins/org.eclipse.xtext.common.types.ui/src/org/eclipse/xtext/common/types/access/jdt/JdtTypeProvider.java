@@ -275,9 +275,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	}
 
 	private TypeResource createResource(URI resourceURI, IType type) {
-		TypeResource resource = new TypeResource(resourceURI);
-		resource.setTypeResourceServices(services);
-		resource.setIndexedJvmTypeAccess(getIndexedJvmTypeAccess());
+		TypeResource resource = doCreateResource(resourceURI);
 		getResourceSet().getResources().add(resource);
 		if (type.exists()) {
 			IMirror mirror = createMirror(type);
@@ -495,6 +493,8 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	private void collectSourcePackageFragmentRoots(JavaProject javaProject, HashSet<String> rootIDs, IClasspathEntry referringEntry, ObjectVector result) throws JavaModelException {
 		if (referringEntry == null){
 			rootIDs.add(javaProject.rootID());
+		} else if (rootIDs.contains(javaProject.rootID())) {
+			return;
 		}
 		IWorkspaceRoot workspaceRoot = javaProject.getProject().getWorkspace().getRoot();
 		for(IClasspathEntry entry: javaProject.getResolvedClasspath()) {

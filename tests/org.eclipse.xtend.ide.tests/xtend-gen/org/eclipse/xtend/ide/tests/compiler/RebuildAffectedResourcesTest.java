@@ -81,7 +81,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       final IFile type2 = this.workbenchTestHelper.createFile("Type2.xtend", _builder_1.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertNoErrorsInWorkspace();
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("class Type3 {");
@@ -90,7 +90,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       _builder_2.newLine();
       StringInputStream _stringInputStream = new StringInputStream(_builder_2.toString());
       type1.setContents(_stringInputStream, true, true, null);
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertHasErrors(type2, "Type1");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -115,7 +115,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       final IFile type2 = this.workbenchTestHelper.createFile("Type2.xtend", _builder_1.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertHasErrors(type2, "Type1");
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("class Type1 {");
@@ -124,7 +124,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       _builder_2.newLine();
       StringInputStream _stringInputStream = new StringInputStream(_builder_2.toString());
       type1.setContents(_stringInputStream, true, true, null);
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertNoErrorsInWorkspace();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -164,7 +164,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       _builder_2.append("}");
       _builder_2.newLine();
       final IFile type2 = this.workbenchTestHelper.createFile("Type2.xtend", _builder_2.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertHasErrors(type2, "bar");
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("class Type3 {");
@@ -176,7 +176,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       _builder_3.newLine();
       StringInputStream _stringInputStream = new StringInputStream(_builder_3.toString());
       type3.setContents(_stringInputStream, true, true, null);
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertNoErrorsInWorkspace();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -213,7 +213,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       _builder_2.append("}");
       _builder_2.newLine();
       final IFile type2 = this.workbenchTestHelper.createFile("Type2.xtend", _builder_2.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertHasErrors(type2, "bar");
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("class Type3 {");
@@ -225,7 +225,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       _builder_3.newLine();
       StringInputStream _stringInputStream = new StringInputStream(_builder_3.toString());
       type3.setContents(_stringInputStream, true, true, null);
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertNoErrorsInWorkspace();
       StringConcatenation _builder_4 = new StringConcatenation();
       _builder_4.append("class Type3 {");
@@ -237,7 +237,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       _builder_4.newLine();
       StringInputStream _stringInputStream_1 = new StringInputStream(_builder_4.toString());
       type3.setContents(_stringInputStream_1, true, true, null);
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertHasErrors(type2, "bar");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -260,7 +260,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       final IFile typeB = this.workbenchTestHelper.createFile("B.xtend", _builder_1.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertNoErrorsInWorkspace();
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("abst ract class A {");
@@ -269,7 +269,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       _builder_2.newLine();
       StringInputStream _stringInputStream = new StringInputStream(_builder_2.toString());
       typeA.setContents(_stringInputStream, true, true, null);
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertHasErrors(typeA, "abst");
       this.assertHasErrors(typeB, "A");
       StringConcatenation _builder_3 = new StringConcatenation();
@@ -277,7 +277,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       _builder_3.newLine();
       StringInputStream _stringInputStream_1 = new StringInputStream(_builder_3.toString());
       typeA.setContents(_stringInputStream_1, true, true, null);
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertNoErrorsInWorkspace();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -349,7 +349,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       _builder_2.append("}");
       _builder_2.newLine();
       final IFile clientClass = this.createFile(clientProject, "src/Foo.xtend", _builder_2.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertHasErrors(clientClass, "- cannot be resolved");
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("package anno");
@@ -376,7 +376,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       _builder_3.newLine();
       StringInputStream _stringInputStream = new StringInputStream(_builder_3.toString());
       processorClass.setContents(_stringInputStream, true, true, null);
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertNoErrorsInWorkspace();
       IProject _project_1 = clientProject.getProject();
       WorkbenchTestHelper.deleteProject(_project_1);
@@ -485,7 +485,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       _builder_2.append("}");
       _builder_2.newLine();
       final IFile fooClass = this.createFile(clientProject, "src/Foo.xtend", _builder_2.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertHasErrors(fooClass, "C is undefined");
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("A");
@@ -495,7 +495,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       _builder_3.append("C");
       StringInputStream _stringInputStream = new StringInputStream(_builder_3.toString());
       constants.setContents(_stringInputStream, true, true, null);
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertNoErrorsInWorkspace();
       IProject _project_1 = clientProject.getProject();
       WorkbenchTestHelper.deleteProject(_project_1);
@@ -581,7 +581,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       _builder_2.append("}");
       _builder_2.newLine();
       final IFile fooClass = this.createFile(clientProject, "src/Foo.xtend", _builder_2.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertHasErrors(fooClass, "bar is undefined");
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("package anno");
@@ -594,7 +594,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       _builder_3.append("}");
       _builder_3.newLine();
       this.createFile(macroProject, "src/anno/A.xtend", _builder_3.toString());
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       this.assertNoErrorsInWorkspace();
       IProject _project_1 = clientProject.getProject();
       WorkbenchTestHelper.deleteProject(_project_1);

@@ -645,36 +645,48 @@ public class JavaASTFlattener extends ASTVisitor {
     if ((_root instanceof CompilationUnit)) {
       ASTNode _root_1 = it.getRoot();
       final CompilationUnit cu = ((CompilationUnit) _root_1);
-      List _commentList = cu.getCommentList();
-      final Function1<Comment, Boolean> _function = new Function1<Comment, Boolean>() {
-        @Override
-        public Boolean apply(final Comment c) {
-          boolean _and = false;
-          boolean _isDocComment = c.isDocComment();
-          boolean _not = (!_isDocComment);
-          if (!_not) {
-            _and = false;
-          } else {
-            boolean _notAssigned = JavaASTFlattener.this.notAssigned(c);
-            _and = _notAssigned;
-          }
-          return Boolean.valueOf(_and);
-        }
-      };
-      Iterable<Comment> _filter_1 = IterableExtensions.<Comment>filter(_commentList, _function);
-      final Procedure1<Comment> _function_1 = new Procedure1<Comment>() {
+      Iterable<Comment> _unAssignedComments = this.unAssignedComments(cu);
+      final Procedure1<Comment> _function = new Procedure1<Comment>() {
         @Override
         public void apply(final Comment it) {
           it.accept(JavaASTFlattener.this);
           JavaASTFlattener.this.assignedComments.add(it);
         }
       };
-      IterableExtensions.<Comment>forEach(_filter_1, _function_1);
+      IterableExtensions.<Comment>forEach(_unAssignedComments, _function);
     }
     this.decreaseIndent();
     this.appendLineWrapToBuffer();
     this.appendToBuffer("}");
     return false;
+  }
+  
+  private Iterable<Comment> unAssignedComments(final CompilationUnit cu) {
+    List _commentList = cu.getCommentList();
+    final Function1<Comment, Boolean> _function = new Function1<Comment, Boolean>() {
+      @Override
+      public Boolean apply(final Comment c) {
+        boolean _and = false;
+        boolean _and_1 = false;
+        boolean _isDocComment = c.isDocComment();
+        if (!_isDocComment) {
+          _and_1 = false;
+        } else {
+          ASTNode _parent = c.getParent();
+          boolean _notEquals = (!Objects.equal(_parent, null));
+          _and_1 = _notEquals;
+        }
+        boolean _not = (!_and_1);
+        if (!_not) {
+          _and = false;
+        } else {
+          boolean _notAssigned = JavaASTFlattener.this.notAssigned(c);
+          _and = _notAssigned;
+        }
+        return Boolean.valueOf(_and);
+      }
+    };
+    return IterableExtensions.<Comment>filter(_commentList, _function);
   }
   
   @Override
@@ -1298,24 +1310,8 @@ public class JavaASTFlattener extends ASTVisitor {
     if ((_root instanceof CompilationUnit)) {
       ASTNode _root_1 = node.getRoot();
       final CompilationUnit cu = ((CompilationUnit) _root_1);
-      List _commentList = cu.getCommentList();
+      Iterable<Comment> _unAssignedComments = this.unAssignedComments(cu);
       final Function1<Comment, Boolean> _function = new Function1<Comment, Boolean>() {
-        @Override
-        public Boolean apply(final Comment c) {
-          boolean _and = false;
-          boolean _isDocComment = c.isDocComment();
-          boolean _not = (!_isDocComment);
-          if (!_not) {
-            _and = false;
-          } else {
-            boolean _notAssigned = JavaASTFlattener.this.notAssigned(c);
-            _and = _notAssigned;
-          }
-          return Boolean.valueOf(_and);
-        }
-      };
-      Iterable<Comment> _filter = IterableExtensions.<Comment>filter(_commentList, _function);
-      final Function1<Comment, Boolean> _function_1 = new Function1<Comment, Boolean>() {
         @Override
         public Boolean apply(final Comment it) {
           int _startPosition = it.getStartPosition();
@@ -1325,15 +1321,15 @@ public class JavaASTFlattener extends ASTVisitor {
           return Boolean.valueOf((_startPosition < _plus));
         }
       };
-      Iterable<Comment> _filter_1 = IterableExtensions.<Comment>filter(_filter, _function_1);
-      final Procedure1<Comment> _function_2 = new Procedure1<Comment>() {
+      Iterable<Comment> _filter = IterableExtensions.<Comment>filter(_unAssignedComments, _function);
+      final Procedure1<Comment> _function_1 = new Procedure1<Comment>() {
         @Override
         public void apply(final Comment it) {
           it.accept(JavaASTFlattener.this);
           JavaASTFlattener.this.assignedComments.add(it);
         }
       };
-      IterableExtensions.<Comment>forEach(_filter_1, _function_2);
+      IterableExtensions.<Comment>forEach(_filter, _function_1);
     }
     this.decreaseIndent();
     this.appendLineWrapToBuffer();
@@ -2906,24 +2902,8 @@ public class JavaASTFlattener extends ASTVisitor {
     if ((_root instanceof CompilationUnit)) {
       ASTNode _root_1 = node.getRoot();
       final CompilationUnit cu = ((CompilationUnit) _root_1);
-      List _commentList = cu.getCommentList();
+      Iterable<Comment> _unAssignedComments = this.unAssignedComments(cu);
       final Function1<Comment, Boolean> _function = new Function1<Comment, Boolean>() {
-        @Override
-        public Boolean apply(final Comment c) {
-          boolean _and = false;
-          boolean _isDocComment = c.isDocComment();
-          boolean _not = (!_isDocComment);
-          if (!_not) {
-            _and = false;
-          } else {
-            boolean _notAssigned = JavaASTFlattener.this.notAssigned(c);
-            _and = _notAssigned;
-          }
-          return Boolean.valueOf(_and);
-        }
-      };
-      Iterable<Comment> _filter = IterableExtensions.<Comment>filter(_commentList, _function);
-      final Function1<Comment, Boolean> _function_1 = new Function1<Comment, Boolean>() {
         @Override
         public Boolean apply(final Comment it) {
           int _startPosition = it.getStartPosition();
@@ -2931,15 +2911,15 @@ public class JavaASTFlattener extends ASTVisitor {
           return Boolean.valueOf((_startPosition < _startPosition_1));
         }
       };
-      Iterable<Comment> _filter_1 = IterableExtensions.<Comment>filter(_filter, _function_1);
-      final Procedure1<Comment> _function_2 = new Procedure1<Comment>() {
+      Iterable<Comment> _filter = IterableExtensions.<Comment>filter(_unAssignedComments, _function);
+      final Procedure1<Comment> _function_1 = new Procedure1<Comment>() {
         @Override
         public void apply(final Comment it) {
           it.accept(JavaASTFlattener.this);
           JavaASTFlattener.this.assignedComments.add(it);
         }
       };
-      IterableExtensions.<Comment>forEach(_filter_1, _function_2);
+      IterableExtensions.<Comment>forEach(_filter, _function_1);
     }
   }
   

@@ -90,7 +90,7 @@ public class ShowHierarchyTest extends AbstractEditorTest {
 		IFile sourceFile = testHelper.createFile("foo/Foo", string.replace("|", ""));
 		sourceFile.getProject().setDefaultCharset(getNonDefaultEncoding(), null);
 		assertTrue(sourceFile.exists());
-		waitForAutoBuild();
+		waitForBuild();
 		XtextEditor editor = openEditor(sourceFile);
 		editor.getInternalSourceViewer().setSelectedRange(cursor, 0);
 		editor.getInternalSourceViewer().getTextWidget().setFocus();

@@ -132,7 +132,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       IFile _createFile_1 = this._workbenchTestHelper.createFile("JavaRef.java", _string);
       boolean _exists_1 = _createFile_1.exists();
       Assert.assertTrue(_exists_1);
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IProject _project = this._workbenchTestHelper.getProject();
       IResource _findMember = _project.findMember("/src/Xtend.xtend");
       Assert.assertNotNull("Couldn\'t find \'src/Xtend.xtend\'.", _findMember);
@@ -238,7 +238,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       _builder.newLine();
       String _string = _builder.toString();
       this._workbenchTestHelper.createFile("JavaRef.java", _string);
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IProject _project = this._workbenchTestHelper.getProject();
       IJavaProject _create = JavaCore.create(_project);
       final IType type = _create.findType("Xtend");
@@ -339,7 +339,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       _builder.newLine();
       String _string = _builder.toString();
       this._workbenchTestHelper.createFile("JavaRef.java", _string);
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IProject _project = this._workbenchTestHelper.getProject();
       IJavaProject _create = JavaCore.create(_project);
       final IType type = _create.findType("Xtend");
@@ -465,7 +465,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       _builder.newLine();
       String _string = _builder.toString();
       this._workbenchTestHelper.createFile("JavaRef.java", _string);
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IProject _project = this._workbenchTestHelper.getProject();
       IJavaProject _create = JavaCore.create(_project);
       final IType type = _create.findType("Xtend");
@@ -629,7 +629,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       _builder_1.newLine();
       String _string_1 = _builder_1.toString();
       this._workbenchTestHelper.createFile("JavaRef.java", _string_1);
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IProject _project = this._workbenchTestHelper.getProject();
       IJavaProject _create = JavaCore.create(_project);
       final IType type = _create.findType("Xtend");
@@ -744,7 +744,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       _builder_1.newLine();
       String _string_1 = _builder_1.toString();
       this._workbenchTestHelper.createFile("Java.java", _string_1);
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IProject _project = this._workbenchTestHelper.getProject();
       IJavaProject _create = JavaCore.create(_project);
       final IType javaType = _create.findType("Java");
@@ -822,7 +822,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       XtendFile _xtendFile = this._workbenchTestHelper.xtendFile("Xtend.xtend", _string);
       EList<XtendTypeDeclaration> _xtendTypes = _xtendFile.getXtendTypes();
       final XtendTypeDeclaration clazz = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       Iterable<IJavaElement> _javaElements = this._jvmModelFindReferenceHandler.getJavaElements(clazz);
       final Procedure1<Iterable<IJavaElement>> _function = new Procedure1<Iterable<IJavaElement>>() {
         @Override
@@ -874,7 +874,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
       EList<XtendMember> _members = _head.getMembers();
       final XtendMember method = IterableExtensions.<XtendMember>head(_members);
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       Iterable<IJavaElement> _javaElements = this._jvmModelFindReferenceHandler.getJavaElements(method);
       final Procedure1<Iterable<IJavaElement>> _function = new Procedure1<Iterable<IJavaElement>>() {
         @Override
@@ -923,7 +923,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
       EList<XtendMember> _members = _head.getMembers();
       final XtendMember field = IterableExtensions.<XtendMember>head(_members);
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       Iterable<IJavaElement> _javaElements = this._jvmModelFindReferenceHandler.getJavaElements(field);
       final Procedure1<Iterable<IJavaElement>> _function = new Procedure1<Iterable<IJavaElement>>() {
         @Override
@@ -972,7 +972,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
       EList<XtendMember> _members = _head.getMembers();
       final XtendMember field = IterableExtensions.<XtendMember>head(_members);
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       Iterable<IJavaElement> _javaElements = this._jvmModelFindReferenceHandler.getJavaElements(field);
       final Procedure1<Iterable<IJavaElement>> _function = new Procedure1<Iterable<IJavaElement>>() {
         @Override
@@ -1063,7 +1063,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
       EList<XtendMember> _members = _head.getMembers();
       final XtendMember method = IterableExtensions.<XtendMember>head(_members);
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       Iterable<IJavaElement> _javaElements = this._jvmModelFindReferenceHandler.getJavaElements(method);
       final Procedure1<Iterable<IJavaElement>> _function = new Procedure1<Iterable<IJavaElement>>() {
         @Override
@@ -1188,7 +1188,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       EList<XtendTypeDeclaration> _xtendTypes = _xtendFile.getXtendTypes();
       Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
       final XtendClass cls = IterableExtensions.<XtendClass>head(_filter);
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       Iterable<IJavaElement> _javaElements = this._jvmModelFindReferenceHandler.getJavaElements(cls);
       final Procedure1<Iterable<IJavaElement>> _function = new Procedure1<Iterable<IJavaElement>>() {
         @Override

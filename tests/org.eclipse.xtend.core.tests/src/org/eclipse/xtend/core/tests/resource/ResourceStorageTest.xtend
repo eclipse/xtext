@@ -21,6 +21,11 @@ import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter
 import org.junit.Test
 import org.eclipse.xtext.common.types.JvmField
+import java.io.IOException
+import org.eclipse.xtext.xbase.resource.BatchLinkableResource
+import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
+import org.eclipse.xtext.xbase.resource.BatchLinkableResourceStorageWritable
+import java.io.OutputStream
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -94,6 +99,17 @@ class ResourceStorageTest extends AbstractXtendTestCase {
 		}
 		
 		assertFalse(originalNodes.hasNext)
+	}
+	
+	@Test(expected=IOException) def void testFailedWrite() throws Exception {
+		val file = file('class C{}')
+		new BatchLinkableResourceStorageWritable(new ByteArrayOutputStream, false) {
+			override protected writeAssociationsAdapter(BatchLinkableResource resource, OutputStream zipOut) throws IOException {
+				val removeMe = resource.eAdapters.findFirst[it instanceof JvmModelAssociator.Adapter]
+				assertTrue(resource.eAdapters.remove(removeMe))
+				super.writeAssociationsAdapter(resource, zipOut)
+			}
+		}.writeResource(file.eResource as StorageAwareResource)	
 	}
 	
 	@Test def void testConstantValueIsPersisted() {

@@ -32,7 +32,6 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-
 public class JavaLinkingTest extends AbstractXtendUITestCase {
 
 	@Inject
@@ -57,7 +56,7 @@ public class JavaLinkingTest extends AbstractXtendUITestCase {
 		IFile javaFile = testHelper.createFileImpl(
 				WorkbenchTestHelper.TESTPROJECT_NAME + "/src/test/JavaClass.java", 
 				"package test;\npublic class JavaClass extends XtendClass {}");
-		waitForAutoBuild();
+		waitForBuild();
 
 		assertNumberOfMarkers(xtendFile, 0);
 		assertNumberOfMarkers(javaFile, 0);
@@ -83,7 +82,7 @@ public class JavaLinkingTest extends AbstractXtendUITestCase {
 		IFile javaFile = testHelper.createFileImpl(
 				WorkbenchTestHelper.TESTPROJECT_NAME + "/src/test/JavaClass.java", 
 				"package test;\npublic class JavaClass extends java.util.ArrayList<XtendClass[]> {}");
-		waitForAutoBuild();
+		waitForBuild();
 
 		assertNumberOfMarkers(xtendFile, 0);
 		assertNumberOfMarkers(javaFile, 0);
@@ -110,7 +109,7 @@ public class JavaLinkingTest extends AbstractXtendUITestCase {
 		IFile xtendFile = testHelper.createFile(
 				"test/XtendClass", 
 				"package test\nclass XtendClass {}");
-		waitForAutoBuild();
+		waitForBuild();
 
 		assertNumberOfMarkers(xtendFile, 0);
 		
@@ -127,7 +126,7 @@ public class JavaLinkingTest extends AbstractXtendUITestCase {
 		IFile xtendFile = testHelper.createFile(
 				"test/XtendClass", 
 				"package test\nclass XtendClass {}");
-		waitForAutoBuild();
+		waitForBuild();
 
 		assertNumberOfMarkers(xtendFile, 0);
 		

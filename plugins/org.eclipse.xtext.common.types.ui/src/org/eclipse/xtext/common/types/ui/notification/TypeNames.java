@@ -12,16 +12,29 @@ import static com.google.common.collect.Maps.*;
 import java.util.Collection;
 import java.util.Map;
 
+import org.eclipse.jdt.core.IJavaProject;
+
 /**
  * Represents FQNs of types and their corresponding topLevelType's FQN
  * As a delimiter for the FQN the . should be used
  * As a delimiter for nested classes the $ should be used
  * @author Holger Schill - Initial contribution and API
  * @since 2.8
+ * @noreference This class is not intended to be referenced by clients.
+ * @noinstantiate This class is not intended to be instantiated by clients.
+ * @noextend This class is not intended to be subclassed by clients.
  */
 public class TypeNames {
 	
-	Map<String,String> delegate = newHashMap();
+	private Map<String,String> delegate = newHashMap();
+	private IJavaProject projectContext;
+	
+	/**
+	 * @since 2.9
+	 */
+	public TypeNames(IJavaProject projectContext) {
+		this.projectContext = projectContext;
+	}
 	
 	/**
 	 * Remove a typeName including it's corresponding topLevelTypeName
@@ -62,5 +75,13 @@ public class TypeNames {
 	 */
 	public void addAll(TypeNames typeNames){
 		delegate.putAll(typeNames.delegate);
+	}
+	
+	/**
+	 * Returns the context that was used to determine the type names
+	 * @since 2.9
+	 */
+	public IJavaProject getProjectContext() {
+		return projectContext;
 	}
 }

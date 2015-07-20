@@ -811,6 +811,14 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 				}
 			}
 			compoundResult.addComponent(owner.newArrayTypeReference(addAsArrayComponentAndIterable));
+		} else if (iterableOrArray == null) { // no JRE on the CP
+			if (addAsArrayComponentAndIterable != null) {
+				iterableOrArray = owner.newArrayTypeReference(addAsArrayComponentAndIterable);
+				compoundResult.addComponent(iterableOrArray);
+			} else {
+				compoundResult.addComponent(parameterType);
+				return parameterType;
+			}
 		}
 		return iterableOrArray;
 	}

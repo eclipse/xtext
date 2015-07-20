@@ -494,7 +494,9 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			}
 			mergeData.allNoImplicitReturn = mergeData.allNoImplicitReturn && (flags & ConformanceFlags.NO_IMPLICIT_RETURN) != 0; 
 			mergeData.allThrownException = mergeData.allThrownException && (flags & ConformanceFlags.THROWN_EXCEPTION) != 0;
-			mergeData.mergedFlags |= flags;
+			if (!reference.isUnknown()) {
+				mergeData.mergedFlags |= flags;
+			}
 			if (mergeData.expectation == null) {
 				mergeData.expectation = value.getExpectation();
 			} else if (mergeData.expectation.getExpectedType() == null) {
@@ -503,6 +505,9 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 					mergeData.expectation = knownExpectation;
 				}
 			}
+		}
+		if (mergeData.mergedFlags == ConformanceFlags.MERGED) {
+			mergeData.mergedFlags |= ConformanceFlags.CHECKED_SUCCESS;
 		}
 		if (!mergeData.allNoImplicitReturn) {
 			mergeData.mergedFlags &= ~ConformanceFlags.NO_IMPLICIT_RETURN;

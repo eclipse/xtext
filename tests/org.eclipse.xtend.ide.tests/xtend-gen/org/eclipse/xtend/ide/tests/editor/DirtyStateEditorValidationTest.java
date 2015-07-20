@@ -25,6 +25,7 @@ import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -51,7 +52,7 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
-  private final static long VALIDATION_TIMEOUT = 10000L;
+  private final static long VALIDATION_TIMEOUT = 2000L;
   
   @Inject
   @Extension
@@ -175,7 +176,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       final IFile file = this.helper.createFileImpl("projectB/src/otherpack/OtherClass.xtend", _builder_1.toString());
-      this._syncUtil.waitForBuild(null);
+      IResourcesSetupUtil.reallyWaitForAutoBuild();
       final IMarker[] markers = file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
       int _length = markers.length;
       boolean _greaterThan = (_length > 0);
@@ -191,7 +192,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
           }
         };
         List<Object> _map = ListExtensions.<IMarker, Object>map(((List<IMarker>)Conversions.doWrapArray(markers)), _function);
-        String _join = IterableExtensions.join(_map, ",");
+        String _join = IterableExtensions.join(_map, "\n");
         Assert.fail(_join);
       }
       final XtextEditor editor = this.helper.openEditor(declaration);

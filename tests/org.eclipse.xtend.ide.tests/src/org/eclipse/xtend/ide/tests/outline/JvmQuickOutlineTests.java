@@ -33,7 +33,7 @@ public class JvmQuickOutlineTests extends QuickOutlineTests {
 		setShowInherited(false);
 		getWorkbenchTestHelper().createFile("test/Super.java",
 				"package test; " + "public class Super {" + "  protected int foo;" + "  private String bar;" + "}");
-		waitForAutoBuild();
+		waitForBuild();
 		String model = "package test " + "class Foo extends Super {Number baz}"
 				+ " class Foo2 extends Super {Number baz} ";
 		AssertBuilder assertBuilder = newAssertBuilder(model).numChildren(3);
@@ -119,7 +119,7 @@ public class JvmQuickOutlineTests extends QuickOutlineTests {
 				"test/Super.java",
 				"package test; " + "public class Super {" + "  protected int foo(String x) { return 1; }"
 						+ "  private String bar() { return null; }" + "}");
-		waitForAutoBuild();
+		waitForBuild();
 		String model = "package test " + "class Foo extends Super {"
 				+ "  def Number baz() { null }  override toString(){super.toString()}" + "}";
 		AssertBuilder assertBuilder = newAssertBuilder(model).numChildren(2);
@@ -154,7 +154,7 @@ public class JvmQuickOutlineTests extends QuickOutlineTests {
 		setShowInherited(false);
 		getWorkbenchTestHelper().createFile("test/Super.java",
 				"package test; " + "public class Super {" + "  protected void _foo(String x) { }" + "}");
-		waitForAutoBuild();
+		waitForBuild();
 		String model = "package test " + "class Foo extends Super {" + "  def dispatch void foo(Number x) { }" + "}";
 		AssertBuilder assertBuilder = newAssertBuilder(model).numChildren(2);
 		AssertBuilder sub = assertBuilder.child(1, "Foo").numChildren(2);

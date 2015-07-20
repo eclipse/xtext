@@ -163,7 +163,7 @@ public class LiveShadowedAllContainerStateTest {
       String _primaryFileExtension = this._fileExtensionProvider.getPrimaryFileExtension();
       final String fileName = ("MyProject/myfile." + _primaryFileExtension);
       IResourcesSetupUtil.createFile(fileName, "stuff foo");
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       final ResourceSet rs = this.liveScopeResourceSetProvider.get(project);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("container MyProject isEmpty=false {");
@@ -189,7 +189,7 @@ public class LiveShadowedAllContainerStateTest {
       String _primaryFileExtension = this._fileExtensionProvider.getPrimaryFileExtension();
       final String fileName = ("MyProject/myfile." + _primaryFileExtension);
       IResourcesSetupUtil.createFile(fileName, "stuff foo");
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       final ResourceSet rs = this.liveScopeResourceSetProvider.get(project);
       URI _createPlatformResourceURI = URI.createPlatformResourceURI(fileName, true);
       Resource _resource = rs.getResource(_createPlatformResourceURI, true);
@@ -218,7 +218,7 @@ public class LiveShadowedAllContainerStateTest {
       String _primaryFileExtension = this._fileExtensionProvider.getPrimaryFileExtension();
       final String fileName = ("MyProject/myfile1." + _primaryFileExtension);
       IResourcesSetupUtil.createFile(fileName, "stuff foo");
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       final ResourceSet rs = this.liveScopeResourceSetProvider.get(project);
       String _primaryFileExtension_1 = this._fileExtensionProvider.getPrimaryFileExtension();
       String _plus = ("MyProject/myfile2." + _primaryFileExtension_1);

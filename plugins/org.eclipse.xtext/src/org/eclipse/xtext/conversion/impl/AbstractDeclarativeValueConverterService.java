@@ -132,8 +132,10 @@ public abstract class AbstractDeclarativeValueConverterService extends AbstractV
 						log.trace("Tried to register value converter for rule '" + ruleName
 								+ "' which is not available in the grammar.");
 
-				} catch(IllegalStateException e) {
+				} catch (IllegalStateException e) {
 					throw e;
+				} catch (IllegalArgumentException e) {
+					log.warn(e.getMessage(), e);
 				} catch (Exception e) {
 					log.error(e.getMessage(), e);
 				}

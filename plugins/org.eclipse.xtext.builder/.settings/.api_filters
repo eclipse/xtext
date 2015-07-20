@@ -57,4 +57,12 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="xtend-gen/org/eclipse/xtext/builder/impl/javasupport/BuilderDeltaConverter.java" type="org.eclipse.xtext.builder.impl.javasupport.BuilderDeltaConverter">
+        <filter id="571473929">
+            <message_arguments>
+                <message_argument value="DeltaConverter"/>
+                <message_argument value="BuilderDeltaConverter"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>

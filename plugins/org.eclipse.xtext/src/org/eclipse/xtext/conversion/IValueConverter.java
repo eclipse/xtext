@@ -62,8 +62,10 @@ public interface IValueConverter<Type> {
 	 * that is converted, may implement this interface. The framework will
 	 * set the rule according to the annotation of the method that provides
 	 * the value converter.
+	 * 
+	 * @throw IllegalArgumentException if the rule doesn't match the expectation of the value converter
 	 */
 	interface RuleSpecific {
-		void setRule(AbstractRule rule);
+		void setRule(AbstractRule rule) throws IllegalArgumentException;
 	}
 }

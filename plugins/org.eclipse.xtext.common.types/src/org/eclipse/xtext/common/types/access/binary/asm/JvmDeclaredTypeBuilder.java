@@ -63,6 +63,9 @@ public class JvmDeclaredTypeBuilder extends ClassVisitor implements Opcodes {
 
     public JvmDeclaredType buildType() {
     	byte[] bytes = bytesAccess.getBytes(binaryClass);
+    	if (bytes == null) {
+    		return null;
+    	}
 		ClassReader reader = new ClassReader(bytes);
 		reader.accept(this, 
 			  ClassReader.SKIP_DEBUG 
@@ -226,11 +229,13 @@ public class JvmDeclaredTypeBuilder extends ClassVisitor implements Opcodes {
     				typeParameters,
     				proxies);
     		JvmDeclaredType nestedType = builder.buildType();
-    		if (isStatic) {
-    			nestedType.setStatic(isStatic);
+    		if (nestedType != null) {
+	    		if (isStatic) {
+	    			nestedType.setStatic(isStatic);
+	    		}
+	    		proxies.setVisibility(access, nestedType);
+	    		result.getMembers().add(nestedType);
     		}
-    		proxies.setVisibility(access, nestedType);
-    		result.getMembers().add(nestedType);
     	}
     }
     

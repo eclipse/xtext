@@ -14,10 +14,12 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Map;
 import java.util.Set;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -56,6 +58,8 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
       return this.count;
     }
   }
+  
+  private final static Logger LOG = Logger.getLogger(ResourceStorageFacade.class);
   
   @Inject
   private IContextualOutputConfigurationProvider outputConfigurationProvider;
@@ -143,7 +147,19 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
     final String path = this.computeOutputPath(resource);
     final ResourceStorageFacade.MyByteArrayOutputStream bout = new ResourceStorageFacade.MyByteArrayOutputStream();
     final ResourceStorageWritable outStream = this.createResourceStorageWritable(bout);
-    outStream.writeResource(resource);
+    try {
+      outStream.writeResource(resource);
+    } catch (final Throwable _t) {
+      if (_t instanceof IOException) {
+        final IOException e = (IOException)_t;
+        URI _uRI = resource.getURI();
+        String _plus = ("Cannot write storage for " + _uRI);
+        ResourceStorageFacade.LOG.warn(_plus, e);
+        return;
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
     byte[] _byteArray = bout.toByteArray();
     int _length = bout.length();
     ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_byteArray, 0, _length);
@@ -199,9 +215,16 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
     final AbstractFileSystemAccess2 fsa = this.getFileSystemAccess(resource);
     final String outputRelativePath = this.computeOutputPath(resource);
     final URI uri = fsa.getURI(outputRelativePath);
-    ResourceSet _resourceSet_2 = resource.getResourceSet();
-    URIConverter _uRIConverter_1 = _resourceSet_2.getURIConverter();
-    return _uRIConverter_1.exists(uri, null);
+    boolean _and_1 = false;
+    if (!(uri != null)) {
+      _and_1 = false;
+    } else {
+      ResourceSet _resourceSet_2 = resource.getResourceSet();
+      URIConverter _uRIConverter_1 = _resourceSet_2.getURIConverter();
+      boolean _exists_1 = _uRIConverter_1.exists(uri, null);
+      _and_1 = _exists_1;
+    }
+    return _and_1;
   }
   
   protected AbstractFileSystemAccess2 getFileSystemAccess(final StorageAwareResource resource) {
