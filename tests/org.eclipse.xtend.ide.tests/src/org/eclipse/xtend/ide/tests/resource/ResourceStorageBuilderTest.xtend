@@ -14,7 +14,6 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
-import org.eclipse.xtext.builder.trace.StorageAwareTrace
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil
 import org.eclipse.xtext.resource.persistence.SourceLevelURIsAdapter
 import org.eclipse.xtext.resource.persistence.StorageAwareResource
@@ -27,6 +26,7 @@ import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.Status
 import org.eclipse.xtext.ui.editor.SchedulingRuleFactory
 import com.google.common.base.Throwables
+import org.eclipse.xtext.ui.generator.trace.StorageAwareTrace
 
 /**
  * @author Sven Efftinge - Initial contribution and API

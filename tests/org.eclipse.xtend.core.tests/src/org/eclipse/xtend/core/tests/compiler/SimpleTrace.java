@@ -1,13 +1,12 @@
 package org.eclipse.xtend.core.tests.compiler;
 
+import java.io.IOException;
 import java.io.InputStream;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IStorage;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.builder.trace.AbstractTrace;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
+import org.eclipse.xtext.generator.trace.internal.AbstractTrace;
+import org.eclipse.xtext.workspace.IProjectConfig;
 
 public class SimpleTrace extends AbstractTrace {
 
@@ -24,7 +23,7 @@ public class SimpleTrace extends AbstractTrace {
 
 	@Override
 	/* @NonNull */
-	public IProject getLocalProject() {
+	public IProjectConfig getLocalProjectConfig() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -33,14 +32,10 @@ public class SimpleTrace extends AbstractTrace {
 		return null;
 	}
 
-	@Override
-	protected IStorage findStorage(URI uri, IProject project) {
-		return null;
-	}
 
 	@Override
-	protected InputStream getContents(URI uri, IProject project) throws CoreException {
-		return null;
+	protected InputStream getContents(URI uri, IProjectConfig project) throws IOException {
+		throw new UnsupportedOperationException();
 	}
 
 }

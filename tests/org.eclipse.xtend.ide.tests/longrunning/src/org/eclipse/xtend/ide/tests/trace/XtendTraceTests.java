@@ -15,11 +15,12 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
-import org.eclipse.xtext.builder.trace.TraceMarkers;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
-import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.junit4.Flaky;
+import org.eclipse.xtext.ui.generator.trace.IEclipseTrace;
+import org.eclipse.xtext.ui.generator.trace.ITraceForStorageProvider;
+import org.eclipse.xtext.ui.generator.trace.TraceMarkers;
 import org.eclipse.xtext.util.TextRegion;
 import org.junit.Rule;
 import org.junit.Test;
@@ -56,12 +57,12 @@ public class XtendTraceTests extends AbstractXtendUITestCase {
 	public void testTraceFound() throws Exception {
 		IFile file = testHelper.createFile("test/Test", "package test\nclass Test {}");
 		waitForBuild();
-		ITrace traceToTarget = traceInformation.getTraceToTarget(file);
+		IEclipseTrace traceToTarget = traceInformation.getTraceToTarget(file);
 		assertNotNull(traceToTarget);
-		Iterable<ILocationInResource> locations = traceToTarget.getAllAssociatedLocations(new TextRegion(20, 0));
+		Iterable<? extends ILocationInResource> locations = traceToTarget.getAllAssociatedLocations(new TextRegion(20, 0));
 		assertTrue( locations.iterator().hasNext());
 		IFile generatedFile = testHelper.getProject().getFile("/xtend-gen/test/Test.java");
-		Iterable<ILocationInResource> locationsByURI = traceToTarget.getAllAssociatedLocations(new TextRegion(20, 0), generatedFile);
+		Iterable<? extends ILocationInResource> locationsByURI = traceToTarget.getAllAssociatedLocations(new TextRegion(20, 0), generatedFile);
 		assertTrue(locationsByURI.iterator().hasNext());
 	}
 	

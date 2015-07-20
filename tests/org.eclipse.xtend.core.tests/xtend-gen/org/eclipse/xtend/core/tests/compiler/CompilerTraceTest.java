@@ -1588,7 +1588,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
       int _length = xtendGroup1.length();
       int _length_1 = xtendGroup2.length();
       TextRegion _textRegion = new TextRegion(_length, _length_1);
-      final Iterable<ILocationInResource> locations = trace.getAllAssociatedLocations(_textRegion);
+      final Iterable<? extends ILocationInResource> locations = trace.getAllAssociatedLocations(_textRegion);
       int _length_2 = javaGroup1.length();
       int _length_3 = javaGroup2.length();
       final TextRegion expectedRegion = new TextRegion(_length_2, _length_3);

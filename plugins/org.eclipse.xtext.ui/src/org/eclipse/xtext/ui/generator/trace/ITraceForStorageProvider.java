@@ -5,9 +5,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.generator.trace;
+package org.eclipse.xtext.ui.generator.trace;
 
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.generator.trace.ITraceForURIProvider;
+import org.eclipse.xtext.workspace.IProjectConfig;
 
 /**
  * Provides read access to the available trace information for generated resources or input resources.
@@ -15,9 +18,9 @@ import org.eclipse.core.resources.IStorage;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @noimplement This interface is not intended to be implemented by clients.
  * @noextend This interface is not intended to be extended by clients.
- * @since 2.3
+ * @since 2.9
  */
-public interface ITraceForStorageProvider { // ITraceForStorageProvider // ITraceFor
+public interface ITraceForStorageProvider extends ITraceForURIProvider {
 	
 	/**
 	 * Returns the trace information to the sources that were used as input for the given derived resource.
@@ -25,7 +28,7 @@ public interface ITraceForStorageProvider { // ITraceForStorageProvider // ITrac
 	 * @param derivedResource the resource whose source trace is requested. May not be <code>null</code>.
 	 * @return the trace to the source or <code>null</code>.
 	 */
-	/* @Nullable */ ITrace getTraceToSource(IStorage derivedResource);
+	/* @Nullable */ IEclipseTrace getTraceToSource(IStorage derivedResource);
 	
 	/**
 	 * Returns the trace information to the targets that were generated from the given source.
@@ -33,20 +36,39 @@ public interface ITraceForStorageProvider { // ITraceForStorageProvider // ITrac
 	 * @param sourceResource the resource whose target trace is requested. May not be <code>null</code>.
 	 * @return the trace to the generation targets or <code>null</code>.
 	 */
-	/* @Nullable */ ITrace getTraceToTarget(IStorage sourceResource);
+	/* @Nullable */ IEclipseTrace getTraceToTarget(IStorage sourceResource);
 
-	class Null implements ITraceForStorageProvider {
+	class Null extends NoTraces implements ITraceForStorageProvider {
 
-		/* @Nullable */ 
 		@Override
-		public ITrace getTraceToSource(IStorage derivedResource) {
+		public IEclipseTrace getTraceToSource(IStorage derivedResource) {
 			return null;
 		}
 
-		/* @Nullable */ 
 		@Override
-		public ITrace getTraceToTarget(IStorage sourceResource) {
+		public IEclipseTrace getTraceToTarget(IStorage sourceResource) {
 			return null;
+		}
+
+		@Override
+		public IEclipseTrace getTraceToSource(URI absoluteDerivedResource) {
+			return (IEclipseTrace) super.getTraceToSource(absoluteDerivedResource);
+		}
+
+		@Override
+		public IEclipseTrace getTraceToSource(URI srcRelativeDerivedResource, IProjectConfig project) {
+			// TODO Auto-generated method stub
+			return (IEclipseTrace) super.getTraceToSource(srcRelativeDerivedResource, project);
+		}
+
+		@Override
+		public IEclipseTrace getTraceToTarget(URI absoluteSourceResource) {
+			return (IEclipseTrace) super.getTraceToTarget(absoluteSourceResource);
+		}
+
+		@Override
+		public IEclipseTrace getTraceToTarget(URI srcRelativeSourceResource, IProjectConfig project) {
+			return (IEclipseTrace) super.getTraceToTarget(srcRelativeSourceResource, project);
 		}
 		
 	}

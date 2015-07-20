@@ -16,6 +16,14 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.IDerivedResourceMarkers">
+        <filter comment="remove dep to core.resources" id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.IDerivedResourceMarkers"/>
+                <message_argument value="org.eclipse.xtext_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src-gen/org/eclipse/xtext/XtextStandaloneSetupGenerated.java" type="org.eclipse.xtext.XtextStandaloneSetupGenerated">
         <filter id="1143996420">
             <message_arguments>
