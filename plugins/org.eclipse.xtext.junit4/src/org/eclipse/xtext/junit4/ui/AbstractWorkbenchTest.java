@@ -31,14 +31,14 @@ public abstract class AbstractWorkbenchTest extends Assert {
 		closeWelcomePage();
 		closeEditors();
 		cleanWorkspace();
-		waitForAutoBuild();
+		waitForBuild();
 	}
 	
 	@After
 	public void tearDown() throws Exception {
 		closeEditors();
 		cleanWorkspace();
-		waitForAutoBuild();
+		waitForBuild();
 	}
 	
 	protected void closeEditors() {

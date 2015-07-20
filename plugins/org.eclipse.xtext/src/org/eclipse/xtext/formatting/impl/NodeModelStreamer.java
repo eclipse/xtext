@@ -16,6 +16,7 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.formatting.INodeModelStreamer;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -123,12 +124,14 @@ public class NodeModelStreamer implements INodeModelStreamer {
 			}
 		}
 
-		// remove tailing hidden leafs
-		for (int i = result.size() - 1; i >= 0; i--)
-			if (tokenUtil.isWhitespaceNode(result.get(i)))
+		// remove trailing hidden leafs
+		for (int i = result.size() - 1; i >= 0; i--) {
+			if (tokenUtil.isWhitespaceNode(result.get(i))) {
 				result.remove(i);
-			else
+			} else {
 				break;
+			}
+		}
 		return result;
 	}
 
@@ -142,9 +145,25 @@ public class NodeModelStreamer implements INodeModelStreamer {
 
 	protected void writeSemantic(ITokenStream out, ICompositeNode node) throws IOException {
 		AbstractRule rule = tokenUtil.getTokenRule(node);
-		Object val = valueConverter.toValue(tokenUtil.serializeNode(node), rule.getName(), node);
-		String text = valueConverter.toString(val, rule.getName());
+		String text = tokenUtil.serializeNode(node);
+		try {
+			// there and back again - the value converter is used to obtain a canonical representation of the value
+			text = getFormattedDatatypeValue(node, rule, text);
+		} catch(ValueConverterException e) {
+			// which may fail - fall back to plain text value
+		}
 		out.writeSemantic(node.getGrammarElement(), text);
+	}
+
+	/**
+	 * Create a canonical represenation of the data type value. Defaults to the value converter.
+	 * 
+	 * @since 2.9
+	 */
+	protected String getFormattedDatatypeValue(ICompositeNode node, AbstractRule rule, String text) throws ValueConverterException {
+		Object value = valueConverter.toValue(text, rule.getName(), node);
+		text = valueConverter.toString(value, rule.getName());
+		return text;
 	}
 
 	protected void writeSemantic(ITokenStream out, ILeafNode node) throws IOException {
