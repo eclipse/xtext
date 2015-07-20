@@ -84,6 +84,16 @@ public abstract class AbstractXtendTestCase extends Assert {
 		XtendFile file = (XtendFile) resource.getContents().get(0);
 		return file;
 	}
+	
+	protected XtendFile fileWithErrors(String string) throws Exception {
+		XtextResourceSet set = getResourceSet();
+		String fileName = getFileName(string);
+		Resource resource = set.createResource(URI.createURI(fileName + ".xtend"));
+		resource.load(new StringInputStream(string), null);
+		assertTrue(resource.getErrors().toString(), resource.getErrors().size() > 0);
+		XtendFile file = (XtendFile) resource.getContents().get(0);
+		return file;
+	}
 
 	protected XtextResourceSet getResourceSet() {
 		XtextResourceSet set = resourceSetProvider.get();

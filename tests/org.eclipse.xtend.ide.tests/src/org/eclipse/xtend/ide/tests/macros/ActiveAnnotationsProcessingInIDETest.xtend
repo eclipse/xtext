@@ -151,7 +151,7 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 		}
 		
 		clientFile = userProject.newSource(clientContent.key, clientContent.value.toString)
-		waitForAutoBuild()
+		waitForBuild()
 		
 		val resourceSet = resourceSetProvider.get(userProject.project)
 		val resource = resourceSet.getResource(URI.createPlatformResourceURI(clientFile.fullPath.toString, true), true)

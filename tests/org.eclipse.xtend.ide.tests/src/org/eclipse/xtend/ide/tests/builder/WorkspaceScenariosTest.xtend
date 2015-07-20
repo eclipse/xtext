@@ -101,7 +101,7 @@ class WorkspaceScenariosTest {
 				}
 			}
 		''')
-		waitForAutoBuild
+		waitForBuild
 		assertNoErrorsInWorkspace
 		val javaB = fileA.project.getFile("xtend-gen/mypack/ClassB.java")
 		// check that a.anotherMethod is an extension call
@@ -120,7 +120,7 @@ class WorkspaceScenariosTest {
 				def void anotherMethod() {}
 			}
 		'''), true, true, null)
-		waitForAutoBuild
+		waitForBuild
 		assertNoErrorsInWorkspace
 		// check that a.anotherMethod is no longer an extension call
 		assertTrue(javaB.contentsAsString.contains("a.anotherMethod();"))
@@ -158,7 +158,7 @@ class WorkspaceScenariosTest {
 			}
 		''')
 		
-		waitForAutoBuild
+		waitForBuild
 		return project
 	}
 	
@@ -177,7 +177,7 @@ class WorkspaceScenariosTest {
 			for (sourceFile : sourceFiles) {
 				('my.temporary.data.project/src/'+sourceFile.key).createFile(sourceFile.value)
 			}
-			waitForAutoBuild
+			waitForBuild
 			
 			
 			val IResourceVisitor visitor = [

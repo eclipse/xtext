@@ -54,7 +54,7 @@ class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		waitForAutoBuild()
+		waitForBuild()
 		assertNoErrorsInWorkspace
 	}
 	
@@ -75,7 +75,7 @@ class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		waitForAutoBuild()
+		waitForBuild()
 		assertNoErrorsInWorkspace
 	}
 	
@@ -91,7 +91,7 @@ class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		waitForAutoBuild()
+		waitForBuild()
 		assertNoErrorsInWorkspace
 	}
 	
@@ -124,7 +124,7 @@ class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		waitForAutoBuild
+		waitForBuild
 		assertEquals(0, file1.findMarkers(IMarker::PROBLEM, true, IResource::DEPTH_INFINITE).length)
 		assertEquals(0, file2.findMarkers(IMarker::PROBLEM, true, IResource::DEPTH_INFINITE).length)
 		assertEquals(0, file3.findMarkers(IMarker::PROBLEM, true, IResource::DEPTH_INFINITE).length)

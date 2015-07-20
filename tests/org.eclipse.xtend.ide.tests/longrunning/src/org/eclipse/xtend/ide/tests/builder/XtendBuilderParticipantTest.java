@@ -45,7 +45,7 @@ public class XtendBuilderParticipantTest extends AbstractXtendUITestCase {
 	public void testBuild() throws Exception {
 		IFile sourceFile = testHelper.createFile("test/Test", "package test\nclass Test {}");
 		assertTrue(sourceFile.exists());
-		waitForAutoBuild();
+		waitForBuild();
 
 		IFile targetFile = testHelper.getProject().getFile("/xtend-gen/test/Test.java");
 		assertTrue(targetFile.exists());
@@ -63,7 +63,7 @@ public class XtendBuilderParticipantTest extends AbstractXtendUITestCase {
 		assertTrue(traceFiles.contains(traceFile.getFullPath()));
 
 		sourceFile.delete(true, null);
-		waitForAutoBuild();
+		waitForBuild();
 		cleanBuild();
 		assertTrue(targetFile.getParent().exists());
 		assertFalse(targetFile.exists());
@@ -85,7 +85,7 @@ public class XtendBuilderParticipantTest extends AbstractXtendUITestCase {
 		String fullFileName = project.getName() + path;
 		IFile sourceFile = testHelper.createFileImpl(fullFileName, "class Foo {}");
 		assertTrue(sourceFile.exists());
-		waitForAutoBuild();
+		waitForBuild();
 
 		IFile generatedFile = project.getFile("foo/bar/xtend-gen/Foo.java");
 		assertTrue(generatedFile.exists());
@@ -99,8 +99,9 @@ public class XtendBuilderParticipantTest extends AbstractXtendUITestCase {
 
 
 		sourceFile.delete(false, new NullProgressMonitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertFalse(generatedFile.exists());
 		assertFalse(traceFile.exists());
 	}
+	
 }

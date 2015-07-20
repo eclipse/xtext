@@ -33,7 +33,7 @@ class BuildPathFilteringTest extends AbstractXtendUITestCase {
 			create.addSourceFolder('filtered-src', null, null)
 		]
 		'testProject/filtered-src/Foo.xtend'.createFile('class Foo {}')
-		waitForAutoBuild
+		waitForBuild
 		assertNotNull('testProject/xtend-gen/Foo.java'.file)
 	}
 	
@@ -43,7 +43,7 @@ class BuildPathFilteringTest extends AbstractXtendUITestCase {
 			create.addSourceFolder('filtered-src', null, #["**.xtend"])
 		]
 		'testProject/filtered-src/Foo.xtend'.createFile('class Foo {}')
-		waitForAutoBuild
+		waitForBuild
 		assertNull('testProject/xtend-gen/Foo.java'.file)
 	}
 	
@@ -60,7 +60,7 @@ class BuildPathFilteringTest extends AbstractXtendUITestCase {
 		'testProject/filtered-src/Foo.xtend'.createFile('class Foo {}')
 		'testProject/filtered-src/Bar.xtend'.createFile('class Bar {}')
 		'testProject/filtered-src/foo/Foo.xtend'.createFile('package foo class Foo {}')
-		waitForAutoBuild
+		waitForBuild
 		assertNotNull('testProject/xtend-gen/Foo.java'.file)
 		assertNotNull('testProject/xtend-gen/Bar.java'.file)
 		assertNotNull('testProject/xtend-gen/foo/Foo.java'.file)
@@ -74,7 +74,7 @@ class BuildPathFilteringTest extends AbstractXtendUITestCase {
 		'testProject/filtered-src/Foo.xtend'.createFile('class Foo {}')
 		'testProject/filtered-src/Bar.xtend'.createFile('class Bar {}')
 		'testProject/filtered-src/foo/Foo.xtend'.createFile('package foo class Foo {}')
-		waitForAutoBuild
+		waitForBuild
 		assertNull('testProject/xtend-gen/Foo.java'.file)
 		assertNotNull('testProject/xtend-gen/Bar.java'.file)
 		assertNull('testProject/xtend-gen/foo/Foo.java'.file)

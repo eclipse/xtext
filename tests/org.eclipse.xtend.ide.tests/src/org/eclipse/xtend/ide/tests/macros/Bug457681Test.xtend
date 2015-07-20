@@ -9,7 +9,6 @@ package org.eclipse.xtend.ide.tests.macros
 
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IFolder
-import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtext.junit4.internal.StopwatchRule
@@ -18,8 +17,9 @@ import org.junit.After
 import org.junit.Rule
 import org.junit.Test
 
-import static extension org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+
+import static extension org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -56,7 +56,7 @@ class Bug457681Test {
 			}
 		''')
 		macroProject.project.addExportedPackages("annotation")
-		waitForAutoBuild()
+		waitForBuild()
 				
 		val userProject = JavaCore.create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
@@ -84,7 +84,7 @@ class Bug457681Test {
 		''')
 		
 		cleanBuild
-		waitForBuild(new NullProgressMonitor)
+		waitForBuild()
 		assertNoErrorsInWorkspace
 	}
 	
@@ -112,7 +112,7 @@ class Bug457681Test {
 			}
 		''')
 		macroProject.project.addExportedPackages("annotation")
-		waitForAutoBuild()
+		waitForBuild()
 				
 		val userProject = JavaCore.create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
@@ -139,7 +139,7 @@ class Bug457681Test {
 		''')
 		
 		cleanBuild
-		waitForBuild(new NullProgressMonitor)
+		waitForBuild
 		assertNoErrorsInWorkspace
 	}
 	

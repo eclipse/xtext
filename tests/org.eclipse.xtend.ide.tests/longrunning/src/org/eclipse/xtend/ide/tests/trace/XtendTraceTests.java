@@ -47,7 +47,7 @@ public class XtendTraceTests extends AbstractXtendUITestCase {
 	@Test
 	public void testMarkerForTraceIsInstalled() throws Exception {
 		IFile file = testHelper.createFile("test/Test", "package test\nclass Test {}");
-		waitForAutoBuild();
+		waitForBuild();
 		List<IPath> traces = traceMarkers.findTraceFiles(file);
 		assertEquals(1, traces.size());
 	}
@@ -55,7 +55,7 @@ public class XtendTraceTests extends AbstractXtendUITestCase {
 	@Test
 	public void testTraceFound() throws Exception {
 		IFile file = testHelper.createFile("test/Test", "package test\nclass Test {}");
-		waitForAutoBuild();
+		waitForBuild();
 		ITrace traceToTarget = traceInformation.getTraceToTarget(file);
 		assertNotNull(traceToTarget);
 		Iterable<ILocationInResource> locations = traceToTarget.getAllAssociatedLocations(new TextRegion(20, 0));
@@ -78,7 +78,7 @@ public class XtendTraceTests extends AbstractXtendUITestCase {
 				+ "class Bar extends Foo {\n"
 				+ "	def dispatch foo(String it) {print(it)}\n"
 				+ "}");
-		waitForAutoBuild();
+		waitForBuild();
 		ITrace trace = traceInformation.getTraceToTarget(sourceFile);
 		assertNotNull(trace);
 		trace.getBestAssociatedLocation(new TextRegion(65, 0));

@@ -139,7 +139,7 @@ public class WorkbenchTestHelper extends Assert {
 				}
 			}
 		}.run(null);
-		IResourcesSetupUtil.waitForAutoBuild();
+		IResourcesSetupUtil.waitForBuild();
 	}
 
 	public Set<IFile> getFiles() {
@@ -441,7 +441,8 @@ public class WorkbenchTestHelper extends Assert {
 			@Override public void run() {
 				try {
 					Thread.sleep(timeout);
-					display.wake();
+					if (!display.isDisposed())
+						display.wake();
 				} catch (InterruptedException e) { }
 			}
 		}.start();

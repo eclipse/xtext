@@ -26,9 +26,7 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaModel;
@@ -36,6 +34,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.xtext.builder.nature.ToggleXtextNatureAction;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.util.Strings;
 
@@ -71,7 +70,7 @@ public class PerformanceTestProjectSetup {
 			String fileName = filePath.lastSegment();
 			createFile(fileName.substring(0, fileName.length() - ".txt".length()), packageFolder, contentAsString);
 		}
-		waitForAutoBuild();
+		waitForBuild();
 	}
 
 	protected static void createFolderRecursively(IFolder folder) throws CoreException {
@@ -170,25 +169,15 @@ public class PerformanceTestProjectSetup {
 	}
 	
 	protected static void refreshExternalArchives(IJavaProject p) throws JavaModelException {
-		waitForAutoBuild(); // ensure that the auto-build job doesn't interfere with external jar refreshing
+		IResourcesSetupUtil.waitForBuild(); // ensure that the auto-build job doesn't interfere with external jar refreshing
 		getJavaModel().refreshExternalArchives(new IJavaElement[] {p}, null);
 	}
 	
 	/**
 	 * Wait for autobuild notification to occur
 	 */
-	public static void waitForAutoBuild() {
-		boolean wasInterrupted = false;
-		do {
-			try {
-				Job.getJobManager().join(ResourcesPlugin.FAMILY_AUTO_BUILD, null);
-				wasInterrupted = false;
-			} catch (OperationCanceledException e) {
-				e.printStackTrace();
-			} catch (InterruptedException e) {
-				wasInterrupted = true;
-			}
-		} while (wasInterrupted);
+	public static void waitForBuild() {
+		IResourcesSetupUtil.waitForBuild();
 	}
 	
 	/**
@@ -200,22 +189,22 @@ public class PerformanceTestProjectSetup {
 	
 	public static void refresh(final IJavaProject javaProject) throws CoreException {
 		javaProject.getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
-		waitForManualRefresh();
+//		waitForManualRefresh();
 	}
 	
-	public static void waitForManualRefresh() {
-		boolean wasInterrupted = false;
-		do {
-			try {
-				Job.getJobManager().join(ResourcesPlugin.FAMILY_MANUAL_REFRESH, null);
-				wasInterrupted = false;
-			} catch (OperationCanceledException e) {
-				e.printStackTrace();
-			} catch (InterruptedException e) {
-				wasInterrupted = true;
-			}
-		} while (wasInterrupted);
-	}
+//	public static void waitForManualRefresh() {
+//		boolean wasInterrupted = false;
+//		do {
+//			try {
+//				Job.getJobManager().join(ResourcesPlugin.FAMILY_MANUAL_REFRESH, null);
+//				wasInterrupted = false;
+//			} catch (OperationCanceledException e) {
+//				e.printStackTrace();
+//			} catch (InterruptedException e) {
+//				wasInterrupted = true;
+//			}
+//		} while (wasInterrupted);
+//	}
 	
 	private static void createManifest(final String projectName, final IProject project) throws CoreException {
 		final StringBuilder mainContent = new StringBuilder("Manifest-Version: 1.0\n");

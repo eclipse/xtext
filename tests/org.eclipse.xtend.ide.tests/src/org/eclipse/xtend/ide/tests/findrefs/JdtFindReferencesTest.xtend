@@ -64,7 +64,7 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 				}
 			}
 		'''.toString).exists)
-		waitForAutoBuild;
+		waitForBuild;
 		assertNotNull("Couldn't find 'src/Xtend.xtend'.", project.findMember("/src/Xtend.xtend"))
 		assertNotNull("Couldn't find 'src/JavaRef.java'.", project.findMember("/src/JavaRef.java"))
 		val member = project.findMember("/xtend-gen/Xtend.java")
@@ -98,7 +98,7 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 				}
 			}
 		'''.toString)
-		waitForAutoBuild
+		waitForBuild
 		val IType type = JavaCore::create(project).findType("Xtend")
 		val method = type.getMethod("foo", newArrayList)
 		findReferences(method) => [
@@ -128,7 +128,7 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 				}
 			}
 		'''.toString)
-		waitForAutoBuild
+		waitForBuild
 		val IType type = JavaCore::create(project).findType("Xtend")
 		val field = type.getField("foo")
 		findReferences(field) => [
@@ -158,7 +158,7 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 				}
 			}
 		'''.toString)
-		waitForAutoBuild
+		waitForBuild
 		val IType type = JavaCore::create(project).findType("Xtend")
 		val field = type.getField("_foo")
 		val getter = type.getMethod("getFoo", newArrayList())
@@ -198,7 +198,7 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 				}
 			}
 		'''.toString)
-		waitForAutoBuild
+		waitForBuild
 		val IType type = JavaCore::create(project).findType("Xtend")
 		val dispatcher = type.getMethod("foo", newArrayList("QSerializable;"))
 		assertTrue(dispatcher.exists)
@@ -230,7 +230,7 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 			public class Java {
 			}
 		'''.toString)
-		waitForAutoBuild
+		waitForBuild
 		val IType javaType = JavaCore::create(project).findType("Java")
 				findReferences(javaType) => [
 			assertEquals(3, size)
@@ -245,7 +245,7 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 			class Xtend {
 			}
 		'''.toString).xtendTypes.head
-		waitForAutoBuild
+		waitForBuild
 		getJavaElements(clazz) => [
 			assertEquals(1, size)
 			assertTrue(exists[it instanceof IType && (it as IType).elementName == 'Xtend'])
@@ -259,7 +259,7 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 				}
 			}
 		'''.toString).xtendTypes.filter(typeof(XtendClass)).head.members.head
-		waitForAutoBuild
+		waitForBuild
 		getJavaElements(method) => [
 			assertEquals(1, size)
 			assertTrue(exists[it instanceof IMethod && (it as IMethod).elementName == 'foo'])
@@ -272,7 +272,7 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 				int foo
 			}
 		'''.toString).xtendTypes.filter(typeof(XtendClass)).head.members.head
-		waitForAutoBuild
+		waitForBuild
 		getJavaElements(field) => [
 			assertEquals(1, size)
 			assertTrue(exists[it instanceof IField && (it as IField).elementName == 'foo'])
@@ -285,7 +285,7 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 				@Property int foo
 			}
 		'''.toString).xtendTypes.filter(typeof(XtendClass)).head.members.head
-		waitForAutoBuild
+		waitForBuild
 		
 		getJavaElements(field) => [
 			assertEquals(3, size)
@@ -305,7 +305,7 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 				}
 			}
 		'''.toString).xtendTypes.filter(typeof(XtendClass)).head.members.head
-		waitForAutoBuild
+		waitForBuild
 		getJavaElements(method) => [
 			assertEquals(2, size)
 			assertTrue(exists[it instanceof IMethod && (it as IMethod).elementName == '_foo'])
@@ -338,7 +338,7 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 	
 	@Test def void testBug387230() {
 		val cls = xtendFile("Xtend.xtend", "@Data class Xtend { String field }").xtendTypes.filter(typeof(XtendClass)).head
-		waitForAutoBuild
+		waitForBuild
 		getJavaElements(cls) => [
 			assertEquals(2, size)
 			assertTrue(exists[it instanceof IType && (it as IType).elementName == 'Xtend'])

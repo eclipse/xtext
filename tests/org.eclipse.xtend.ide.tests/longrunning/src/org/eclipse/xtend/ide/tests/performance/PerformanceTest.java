@@ -326,7 +326,7 @@ public class PerformanceTest extends AbstractXtendUITestCase {
 				}
 			}
 		}.run(null);
-		waitForAutoBuild();
+		waitForBuild();
 		assertNoErrorsInWorkspace();
 		final long reference2 = measureReferenceTime();
 		final long min = min(
