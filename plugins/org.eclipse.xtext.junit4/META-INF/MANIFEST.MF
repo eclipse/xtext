@@ -20,7 +20,6 @@ Export-Package: org.eclipse.xtext.junit4,
 Import-Package: org.junit;version="4.5.0",
  org.junit.internal;version="4.10.0",
  org.junit.internal.builders;version="4.10.0",
- org.junit.rules;version="4.7.0";resolution:=optional,
  org.junit.runner;version="4.5.0",
  org.junit.runner.manipulation;version="4.5.0",
  org.junit.runner.notification;version="4.5.0",
@@ -36,5 +35,5 @@ Require-Bundle: org.eclipse.xtext,
  org.apache.log4j;bundle-version="1.2.15";resolution:=optional,
  org.eclipse.xtext.xbase.lib;resolution:=optional,
  org.eclipse.xtend.lib;resolution:=optional,
- org.eclipse.emf.codegen.ecore;resolution:=optional
+ org.eclipse.emf.codegen.ecore;bundle-version="2.10.2";resolution:=optional
 
