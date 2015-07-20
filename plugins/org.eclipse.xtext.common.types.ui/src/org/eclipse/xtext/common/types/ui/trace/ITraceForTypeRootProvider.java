@@ -1,8 +1,8 @@
-package org.eclipse.xtext.builder.trace;
+package org.eclipse.xtext.common.types.ui.trace;
 
 import org.eclipse.jdt.core.ITypeRoot;
-import org.eclipse.xtext.generator.trace.ITrace;
-import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
+import org.eclipse.xtext.ui.generator.trace.IEclipseTrace;
+import org.eclipse.xtext.ui.generator.trace.ITraceForStorageProvider;
 
 import com.google.inject.ImplementedBy;
 
@@ -14,6 +14,6 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(TraceForTypeRootProvider.class)
 public interface ITraceForTypeRootProvider {
 	
-	/* @Nullable */ ITrace getTraceToSource(ITypeRoot derivedResource);
+	/* @Nullable */ IEclipseTrace getTraceToSource(ITypeRoot derivedResource);
 	
 }

@@ -38,6 +38,16 @@
                 <message_argument value="highlightElementRecursively(EObject, IHighlightedPositionAcceptor, CancelIndicator)"/>
             </message_arguments>
         </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.IDerivedResourceMarkers">
+        <filter id="305422471">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.IDerivedResourceMarkers"/>
+                <message_argument value="org.eclipse.xtext.ui_2.8.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="deprecated/org/eclipse/xtext/ui/editor/syntaxcoloring/DefaultSemanticHighlightingCalculator.java" type="org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator">
         <filter id="643846161">
             <message_arguments>
                 <message_argument value="IHighlightedPositionAcceptor"/>

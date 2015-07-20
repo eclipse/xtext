@@ -5,8 +5,9 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.trace;
+package org.eclipse.xtext.ui.generator.trace;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 import org.eclipse.core.resources.IFile;
@@ -15,6 +16,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
 import org.eclipse.xtext.util.Pair;
 
@@ -26,7 +28,7 @@ import com.google.inject.Inject;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class StorageAwareTrace extends AbstractTrace {
+public class StorageAwareTrace extends AbstractEclipseTrace {
 
 	private IStorage localStorage;
 
@@ -39,6 +41,7 @@ public class StorageAwareTrace extends AbstractTrace {
 		contributions = registry.getContributedInstances(IStorageAwareTraceContribution.class);
 	}
 
+	@Override
 	public IStorage getLocalStorage() {
 		return localStorage;
 	}
@@ -108,11 +111,20 @@ public class StorageAwareTrace extends AbstractTrace {
 	}
 
 	@Override
-	protected InputStream getContents(URI uri, IProject project) throws CoreException {
-		IStorage storage = findStorage(uri, project);
-		if (storage == null)
-			return null;
-		return storage.getContents();
+	protected InputStream getContents(URI uri, IProject project) throws IOException {
+		try {
+			IStorage storage = findStorage(uri, project);
+			if (storage == null)
+				return null;
+			return storage.getContents();
+		} catch(CoreException e) {
+			throw new WrappedCoreException(e);
+		}
 	}
 
+	@Override
+	protected void setTraceRegionProvider(ITraceRegionProvider traceRegionProvider) {
+		super.setTraceRegionProvider(traceRegionProvider);
+	}
+	
 }

@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.trace;
+package org.eclipse.xtext.ui.generator.trace;
 
 import static com.google.common.collect.Lists.*;
 
@@ -26,7 +26,6 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ITrace;
-import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
@@ -36,6 +35,7 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.workspace.EclipseProjectConfig;
 import org.eclipse.xtext.ui.workspace.EclipseWorkspaceConfigProvider;
+import org.eclipse.xtext.workspace.IProjectConfig;
 
 import com.google.common.io.Closeables;
 import com.google.inject.Inject;
@@ -156,12 +156,37 @@ public class TraceForStorageProvider implements ITraceForStorageProvider {
 			throw new TraceNotFoundException();
 		}
 	}
+	
+	@Override
+	public ITrace getTraceToSource(URI absoluteDerivedResource) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public ITrace getTraceToSource(URI srcRelativeDerivedResource, IProjectConfig project) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public ITrace getTraceToTarget(URI absoluteSourceResource) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public ITrace getTraceToTarget(URI srcRelativeSourceResource, IProjectConfig project) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	/* @Nullable */
 	@Override
-	public ITrace getTraceToSource(final IStorage derivedResource) {
+	public IEclipseTrace getTraceToSource(final IStorage derivedResource) {
 		StorageAwareTrace result = traceToSourceProvider.get();
 		result.setLocalStorage(derivedResource);
+		result.setTraceToSource(true);
 		result.setTraceRegionProvider(new ITraceRegionProvider() {
 			
 			@Override
@@ -181,13 +206,14 @@ public class TraceForStorageProvider implements ITraceForStorageProvider {
 
 	/* @Nullable */
 	@Override
-	public ITrace getTraceToTarget(final IStorage sourceResource) {
+	public IEclipseTrace getTraceToTarget(final IStorage sourceResource) {
 		if (sourceResource instanceof IFile) {
 			try {
 				final IFile sourceFile = (IFile) sourceResource;
 				final List<IPath> traceFiles = traceMarkers.findTraceFiles(sourceFile);
 				if (!traceFiles.isEmpty()) {
 					StorageAwareTrace result = traceToSourceProvider.get();
+					result.setTraceToSource(false);
 					result.setLocalStorage(sourceResource);
 					final URI sourceFileURI = storage2UriMapper.getUri(sourceResource);
 					IProject containingProject = sourceFile.getProject();

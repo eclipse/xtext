@@ -15,11 +15,11 @@ import com.google.inject.Inject;
 public class OpenGeneratedFileHandler extends OpenOppositeFileHandler {
 
 	@Inject
-	private TraceOrMakerBasedOpenerContributor traceOrMakerBasedOpenerContributor;
+	private TraceOrMarkerBasedOpenerContributor traceOrMarkerBasedOpenerContributor;
 
 	@Override
 	protected void collectOpeners(IEditorPart editor, IAcceptor<FileOpener> acceptor) {
-		traceOrMakerBasedOpenerContributor.collectGeneratedFileOpeners(editor, acceptor);
+		traceOrMarkerBasedOpenerContributor.collectGeneratedFileOpeners(editor, acceptor);
 	}
 
 }

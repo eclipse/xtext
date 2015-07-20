@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.trace;
+package org.eclipse.xtext.ui.generator.trace;
 
 import static com.google.common.collect.Lists.*;
 
@@ -17,6 +17,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */

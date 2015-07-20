@@ -28,16 +28,17 @@ import org.eclipse.jdt.core.compiler.BuildContext;
 import org.eclipse.jdt.core.compiler.CompilationParticipant;
 import org.eclipse.jdt.internal.core.Region;
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
-import org.eclipse.xtext.builder.trace.AbstractTrace;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ITrace;
-import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.generator.trace.ITraceToBytecodeInstaller;
 import org.eclipse.xtext.generator.trace.TraceAsPrimarySourceInstaller;
 import org.eclipse.xtext.generator.trace.TraceAsSmapInstaller;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.XtextProjectHelper;
+import org.eclipse.xtext.ui.generator.trace.AbstractEclipseTrace;
+import org.eclipse.xtext.ui.generator.trace.IEclipseTrace;
+import org.eclipse.xtext.ui.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.ui.util.ResourceUtil;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
@@ -117,7 +118,7 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 					IFile generatedJavaFile = ctx.getFile();
 
 					// This may fail if there is no trace file.
-					ITrace traceToSource = traceInformation.getTraceToSource(generatedJavaFile);
+					IEclipseTrace traceToSource = traceInformation.getTraceToSource(generatedJavaFile);
 					if (traceToSource == null) {
 						continue;
 					}
@@ -188,9 +189,9 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 	}
 
 	protected AbstractTraceRegion findRootTraceRegion(ITrace traceToSource) {
-		if (!(traceToSource instanceof AbstractTrace))
+		if (!(traceToSource instanceof AbstractEclipseTrace))
 			return null;
-		return ((AbstractTrace) traceToSource).getRootTraceRegion();
+		return ((AbstractEclipseTrace) traceToSource).getRootTraceRegion();
 	}
 
 	@Override

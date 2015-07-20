@@ -30,7 +30,7 @@ import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 import org.eclipse.ui.texteditor.TextEditorAction;
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
-import org.eclipse.xtext.builder.trace.ITraceForTypeRootProvider;
+import org.eclipse.xtext.common.types.ui.trace.ITraceForTypeRootProvider;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;

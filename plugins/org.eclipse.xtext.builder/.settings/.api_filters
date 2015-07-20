@@ -17,6 +17,37 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/builder/BuilderParticipant.java" type="org.eclipse.xtext.builder.BuilderParticipant">
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.builder.BuilderParticipant"/>
+                <message_argument value="getDerivedResourceMarkers()"/>
+            </message_arguments>
+        </filter>
+        <filter id="643842064">
+            <message_arguments>
+                <message_argument value="IDerivedResourceMarkers"/>
+                <message_argument value="BuilderParticipant"/>
+                <message_argument value="getDerivedResourceMarkers()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/builder/DerivedResourceMarkers.java" type="org.eclipse.xtext.builder.DerivedResourceMarkers">
+        <filter id="576725006">
+            <message_arguments>
+                <message_argument value="IDerivedResourceMarkers"/>
+                <message_argument value="DerivedResourceMarkers"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/builder/EclipseResourceFileSystemAccess2.java" type="org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2">
+        <filter comment="Trace refactoring" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2"/>
+                <message_argument value="getTraceMarkers()"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/builder/ParallelBuilderParticipant.java" type="org.eclipse.xtext.builder.ParallelBuilderParticipant">
         <filter id="338792546">
             <message_arguments>

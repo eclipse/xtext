@@ -15,7 +15,7 @@ import com.google.inject.Inject;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class TraceOrMakerBasedOpenerContributor extends OppositeFileOpenerContributor {
+public class TraceOrMarkerBasedOpenerContributor extends OppositeFileOpenerContributor {
 
 	@Inject
 	private DerivedResourceMarkerBasedOpenerContributor derivedResourceMarkerBasedOpenerCollector;

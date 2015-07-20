@@ -26,8 +26,8 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
-import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.ui.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
