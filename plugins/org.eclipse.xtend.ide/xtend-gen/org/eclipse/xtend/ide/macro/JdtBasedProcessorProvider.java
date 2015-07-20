@@ -15,6 +15,7 @@ import java.net.URLClassLoader;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
@@ -29,16 +30,19 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.resource.ResourceSetContext;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
+@Log
 @SuppressWarnings("all")
 public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
   @Override
@@ -129,17 +133,40 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
    */
   protected URLClassLoader createClassLoaderForJavaProject(final IJavaProject projectToUse) {
     final LinkedHashSet<URL> urls = CollectionLiterals.<URL>newLinkedHashSet();
-    HashSet<IJavaProject> _newHashSet = CollectionLiterals.<IJavaProject>newHashSet();
-    this.collectClasspathURLs(projectToUse, urls, false, _newHashSet);
+    try {
+      HashSet<IJavaProject> _newHashSet = CollectionLiterals.<IJavaProject>newHashSet();
+      this.collectClasspathURLs(projectToUse, urls, false, _newHashSet);
+    } catch (final Throwable _t) {
+      if (_t instanceof JavaModelException) {
+        final JavaModelException e = (JavaModelException)_t;
+        boolean _isDoesNotExist = e.isDoesNotExist();
+        boolean _not = (!_isDoesNotExist);
+        if (_not) {
+          String _message = e.getMessage();
+          JdtBasedProcessorProvider.LOG.error(_message, e);
+        }
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
     ClassLoader _parentClassLoader = this.getParentClassLoader();
     return new URLClassLoader(((URL[])Conversions.unwrapArray(urls, URL.class)), _parentClassLoader);
   }
   
-  protected void collectClasspathURLs(final IJavaProject projectToUse, final LinkedHashSet<URL> result, final boolean includeOutputFolder, final Set<IJavaProject> visited) {
+  protected void collectClasspathURLs(final IJavaProject projectToUse, final LinkedHashSet<URL> result, final boolean includeOutputFolder, final Set<IJavaProject> visited) throws JavaModelException {
     try {
-      boolean _add = visited.add(projectToUse);
-      boolean _not = (!_add);
+      boolean _or = false;
+      IProject _project = projectToUse.getProject();
+      boolean _isAccessible = _project.isAccessible();
+      boolean _not = (!_isAccessible);
       if (_not) {
+        _or = true;
+      } else {
+        boolean _add = visited.add(projectToUse);
+        boolean _not_1 = (!_add);
+        _or = _not_1;
+      }
+      if (_or) {
         return;
       }
       if (includeOutputFolder) {
@@ -175,8 +202,8 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
               IPath path_2 = entry.getPath();
               IWorkspaceRoot _workspaceRoot = this.getWorkspaceRoot(projectToUse);
               final IResource project = _workspaceRoot.findMember(path_2);
-              IProject _project = project.getProject();
-              final IJavaProject referencedProject = JavaCore.create(_project);
+              IProject _project_1 = project.getProject();
+              final IJavaProject referencedProject = JavaCore.create(_project_1);
               this.collectClasspathURLs(referencedProject, result, true, visited);
               break;
             case IClasspathEntry.CPE_LIBRARY:
@@ -226,4 +253,6 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
     IWorkspace _workspace = _project.getWorkspace();
     return _workspace.getRoot();
   }
+  
+  private final static Logger LOG = Logger.getLogger(JdtBasedProcessorProvider.class);
 }
