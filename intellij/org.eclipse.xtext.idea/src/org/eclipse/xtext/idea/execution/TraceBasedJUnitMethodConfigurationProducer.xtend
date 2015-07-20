@@ -18,7 +18,7 @@ import org.eclipse.xtext.idea.lang.IXtextLanguage
 /**
  * @author dhuebner - Initial contribution and API
  */
-class TraceBasedJUnitMethodeConfigurationProducer extends TestMethodConfigurationProducer {
+class TraceBasedJUnitMethodConfigurationProducer extends TestMethodConfigurationProducer {
 	@Inject extension ConfigurationProducerExtensions
 
 	new(IXtextLanguage xtextLanguage) {

@@ -16,8 +16,8 @@ import com.intellij.openapi.actionSystem.DataContextWrapper
 import com.intellij.openapi.actionSystem.LangDataKeys
 import com.intellij.psi.PsiElement
 import org.eclipse.xtext.idea.trace.TraceUtils
-import org.jetbrains.annotations.Nullable
 import org.jetbrains.annotations.NotNull
+import org.jetbrains.annotations.Nullable
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -44,10 +44,12 @@ class ConfigurationProducerExtensions {
 	@Nullable
 	def PsiElement tracedJavaElement(@NotNull ConfigurationContext context) {
 		if (context.location?.psiElement !== null) {
-			val javaElement = traceUtils.getBestJavaElementMatch(context.location.psiElement).head
-			if (javaElement !== null) {
-				return javaElement
+			val psiElement = context.location?.psiElement
+			var javaElement = traceUtils.getBestJavaElementMatch(psiElement).head
+			if (javaElement === null) {
+				javaElement = traceUtils.getJavaFiles(psiElement).head
 			}
+			return javaElement
 		}
 		return null
 	}

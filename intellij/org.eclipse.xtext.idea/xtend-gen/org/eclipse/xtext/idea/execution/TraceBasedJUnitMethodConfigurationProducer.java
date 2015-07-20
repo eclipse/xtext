@@ -21,12 +21,12 @@ import org.eclipse.xtext.xbase.lib.Extension;
  * @author dhuebner - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class TraceBasedJUnitMethodeConfigurationProducer extends TestMethodConfigurationProducer {
+public class TraceBasedJUnitMethodConfigurationProducer extends TestMethodConfigurationProducer {
   @Inject
   @Extension
   private ConfigurationProducerExtensions _configurationProducerExtensions;
   
-  public TraceBasedJUnitMethodeConfigurationProducer(final IXtextLanguage xtextLanguage) {
+  public TraceBasedJUnitMethodConfigurationProducer(final IXtextLanguage xtextLanguage) {
     super();
     xtextLanguage.injectMembers(this);
   }
