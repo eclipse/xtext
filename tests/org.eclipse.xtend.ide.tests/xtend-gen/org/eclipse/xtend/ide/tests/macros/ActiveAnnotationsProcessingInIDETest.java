@@ -238,6 +238,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
     this.macroFile.delete(true, null);
     IProject _project = ActiveAnnotationsProcessingInIDETest.macroProject.getProject();
     WorkbenchTestHelper.removeExportedPackages(_project, this.exportedPackage);
+    IResourcesSetupUtil.waitForBuild();
   }
   
   private IFile macroFile;
@@ -263,6 +264,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
         this.exportedPackage = _replace;
         IProject _project = ActiveAnnotationsProcessingInIDETest.macroProject.getProject();
         WorkbenchTestHelper.addExportedPackages(_project, this.exportedPackage);
+        IResourcesSetupUtil.reallyWaitForAutoBuild();
       }
       String _key_3 = clientContent.getKey();
       String _value_1 = clientContent.getValue();
