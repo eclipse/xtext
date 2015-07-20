@@ -26,7 +26,6 @@ import com.intellij.openapi.editor.ScrollType;
 import com.intellij.openapi.editor.ScrollingModel;
 import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Condition;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.patterns.PlatformPatterns;
 import com.intellij.patterns.PsiElementPattern;
@@ -34,7 +33,6 @@ import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CodeStyleManager;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +41,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.idea.completion.AbstractXtendCompletionContributor;
 import org.eclipse.xtend.core.idea.lang.XtendLanguage;
-import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendPackage;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -53,13 +51,12 @@ import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.idea.document.DocumentUtils;
 import org.eclipse.xtext.idea.lang.AbstractXtextLanguage;
-import org.eclipse.xtext.psi.IPsiModelAssociations;
+import org.eclipse.xtext.psi.XtextPsiExtensions;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.xbase.ide.contentassist.OverrideProposalUtil;
 import org.eclipse.xtext.xbase.imports.RewritableImportSection;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
@@ -67,7 +64,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedExecutable;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
@@ -77,7 +73,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 public class XtendCompletionContributor extends AbstractXtendCompletionContributor {
   @Inject
   @Extension
-  private IPsiModelAssociations _iPsiModelAssociations;
+  private XtextPsiExtensions _xtextPsiExtensions;
   
   @Inject
   private IJvmModelAssociations jvmModelAssociations;
@@ -87,6 +83,10 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
   
   @Inject
   private RewritableImportSection.Factory importSectionfactory;
+  
+  @Inject
+  @Extension
+  private DocumentUtils documentUtils;
   
   public XtendCompletionContributor() {
     this(XtendLanguage.INSTANCE);
@@ -103,17 +103,13 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
     final CompletionProvider<CompletionParameters> _function = new CompletionProvider<CompletionParameters>() {
       @Override
       protected void addCompletions(final CompletionParameters $0, final ProcessingContext $1, final CompletionResultSet $2) {
-        PsiElement _position = $0.getPosition();
-        final Condition<PsiElement> _function = new Condition<PsiElement>() {
-          @Override
-          public boolean value(final PsiElement it) {
-            EObject _eObject = XtendCompletionContributor.this._iPsiModelAssociations.getEObject(it);
-            return (!Objects.equal(_eObject, null));
-          }
-        };
-        final PsiElement psiElement = PsiTreeUtil.findFirstParent(_position, false, _function);
-        EObject _eObject = XtendCompletionContributor.this._iPsiModelAssociations.getEObject(psiElement);
-        final XtendClass clazz = EcoreUtil2.<XtendClass>getContainerOfType(_eObject, XtendClass.class);
+        final PsiElement psiElement = $0.getPosition();
+        EObject _findEObject = XtendCompletionContributor.this._xtextPsiExtensions.findEObject(psiElement);
+        XtendTypeDeclaration _containerOfType = null;
+        if (_findEObject!=null) {
+          _containerOfType=EcoreUtil2.<XtendTypeDeclaration>getContainerOfType(_findEObject, XtendTypeDeclaration.class);
+        }
+        final XtendTypeDeclaration clazz = _containerOfType;
         boolean _equals = Objects.equal(clazz, null);
         if (_equals) {
           return;
@@ -124,7 +120,7 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
           final List<IResolvedExecutable> candidates = XtendCompletionContributor.this.overrideProposalUtil.getImplementationCandidates(((JvmDeclaredType)jvmType), _isAnonymous);
           for (final IResolvedExecutable candidate : candidates) {
             if ((candidate instanceof IResolvedOperation)) {
-              final InsertHandler<LookupElement> _function_1 = new InsertHandler<LookupElement>() {
+              final InsertHandler<LookupElement> _function = new InsertHandler<LookupElement>() {
                 @Override
                 public void handleInsert(final InsertionContext context, final LookupElement item) {
                   Document _document = context.getDocument();
@@ -132,6 +128,8 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
                   int _tailOffset = context.getTailOffset();
                   _document.deleteString(_startOffset, _tailOffset);
                   context.commitDocument();
+                  Resource _eResource = clazz.eResource();
+                  final RewritableImportSection importSection = XtendCompletionContributor.this.importSectionfactory.parse(((XtextResource) _eResource));
                   StringConcatenation _builder = new StringConcatenation();
                   _builder.append("override ");
                   List<JvmTypeParameter> _typeParameters = ((IResolvedOperation)candidate).getTypeParameters();
@@ -147,8 +145,8 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
                   String _simpleName = _declaration.getSimpleName();
                   _builder.append(_simpleName, "");
                   _builder.append("(");
-                  ArrayList<String> _parameters = XtendCompletionContributor.this.getParameters(candidate);
-                  String _join_1 = IterableExtensions.join(_parameters, ", ");
+                  ArrayList<String> _parameterText = XtendCompletionContributor.this.getParameterText(candidate, importSection);
+                  String _join_1 = IterableExtensions.join(_parameterText, ", ");
                   _builder.append(_join_1, "");
                   _builder.append(") ");
                   JvmOperation _declaration_1 = ((IResolvedOperation)candidate).getDeclaration();
@@ -156,7 +154,7 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
                   final Function1<JvmTypeReference, CharSequence> _function_1 = new Function1<JvmTypeReference, CharSequence>() {
                     @Override
                     public CharSequence apply(final JvmTypeReference it) {
-                      return it.getSimpleName();
+                      return XtendCompletionContributor.this.documentUtils.toImportableString(it, importSection);
                     }
                   };
                   String _join_2 = IterableExtensions.<JvmTypeReference>join(_exceptions, "throws ", ", ", " ", _function_1);
@@ -171,15 +169,15 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
                   _builder.append("}");
                   _builder.newLine();
                   XtendCompletionContributor.this.insertAndAdjust(context, _builder.toString());
-                  Resource _eResource = clazz.eResource();
-                  XtendCompletionContributor.this.updateImportSection(context, _eResource, candidate);
+                  Document _document_1 = context.getDocument();
+                  XtendCompletionContributor.this.documentUtils.updateImportSection(_document_1, importSection);
                 }
               };
-              LookupElementBuilder _createOverrideMethodElement = XtendCompletionContributor.this.createOverrideMethodElement(((IResolvedOperation)candidate), _function_1);
+              LookupElementBuilder _createOverrideMethodElement = XtendCompletionContributor.this.createOverrideMethodElement(((IResolvedOperation)candidate), _function);
               $2.addElement(_createOverrideMethodElement);
             } else {
               if ((candidate instanceof IResolvedConstructor)) {
-                final InsertHandler<LookupElement> _function_2 = new InsertHandler<LookupElement>() {
+                final InsertHandler<LookupElement> _function_1 = new InsertHandler<LookupElement>() {
                   @Override
                   public void handleInsert(final InsertionContext context, final LookupElement item) {
                     Document _document = context.getDocument();
@@ -187,10 +185,12 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
                     int _tailOffset = context.getTailOffset();
                     _document.deleteString(_startOffset, _tailOffset);
                     context.commitDocument();
+                    Resource _eResource = clazz.eResource();
+                    final RewritableImportSection importSection = XtendCompletionContributor.this.importSectionfactory.parse(((XtextResource) _eResource));
                     StringConcatenation _builder = new StringConcatenation();
                     _builder.append("new (");
-                    ArrayList<String> _parameters = XtendCompletionContributor.this.getParameters(candidate);
-                    String _join = IterableExtensions.join(_parameters, ", ");
+                    ArrayList<String> _parameterText = XtendCompletionContributor.this.getParameterText(candidate, importSection);
+                    String _join = IterableExtensions.join(_parameterText, ", ");
                     _builder.append(_join, "");
                     _builder.append(") ");
                     JvmConstructor _declaration = ((IResolvedConstructor)candidate).getDeclaration();
@@ -198,7 +198,7 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
                     final Function1<JvmTypeReference, CharSequence> _function = new Function1<JvmTypeReference, CharSequence>() {
                       @Override
                       public CharSequence apply(final JvmTypeReference it) {
-                        return it.getSimpleName();
+                        return XtendCompletionContributor.this.documentUtils.toImportableString(it, importSection);
                       }
                     };
                     String _join_1 = IterableExtensions.<JvmTypeReference>join(_exceptions, "throws ", ", ", " ", _function);
@@ -208,14 +208,14 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
                     _builder.append("\t");
                     _builder.append("super(");
                     JvmConstructor _declaration_1 = ((IResolvedConstructor)candidate).getDeclaration();
-                    EList<JvmFormalParameter> _parameters_1 = _declaration_1.getParameters();
+                    EList<JvmFormalParameter> _parameters = _declaration_1.getParameters();
                     final Function1<JvmFormalParameter, CharSequence> _function_1 = new Function1<JvmFormalParameter, CharSequence>() {
                       @Override
                       public CharSequence apply(final JvmFormalParameter it) {
                         return it.getName();
                       }
                     };
-                    String _join_2 = IterableExtensions.<JvmFormalParameter>join(_parameters_1, ", ", _function_1);
+                    String _join_2 = IterableExtensions.<JvmFormalParameter>join(_parameters, ", ", _function_1);
                     _builder.append(_join_2, "\t");
                     _builder.append(")");
                     _builder.append(XtendCompletionContributor.SELECTION_MARKER, "\t");
@@ -223,11 +223,11 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
                     _builder.append("}");
                     _builder.newLine();
                     XtendCompletionContributor.this.insertAndAdjust(context, _builder.toString());
-                    Resource _eResource = clazz.eResource();
-                    XtendCompletionContributor.this.updateImportSection(context, _eResource, candidate);
+                    Document _document_1 = context.getDocument();
+                    XtendCompletionContributor.this.documentUtils.updateImportSection(_document_1, importSection);
                   }
                 };
-                LookupElementBuilder _createOverrideConstructorElement = XtendCompletionContributor.this.createOverrideConstructorElement(((IResolvedConstructor)candidate), _function_2);
+                LookupElementBuilder _createOverrideConstructorElement = XtendCompletionContributor.this.createOverrideConstructorElement(((IResolvedConstructor)candidate), _function_1);
                 $2.addElement(_createOverrideConstructorElement);
               }
             }
@@ -310,68 +310,23 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
     }
   }
   
-  protected ArrayList<String> getParameters(final IResolvedExecutable executable) {
+  protected ArrayList<String> getParameterText(final IResolvedExecutable executable, final RewritableImportSection importSection) {
     final ArrayList<String> result = CollectionLiterals.<String>newArrayList();
     for (int i = 0; (i < executable.getDeclaration().getParameters().size()); i++) {
       StringConcatenation _builder = new StringConcatenation();
       List<LightweightTypeReference> _resolvedParameterTypes = executable.getResolvedParameterTypes();
       LightweightTypeReference _get = _resolvedParameterTypes.get(i);
-      String _simpleName = _get.getSimpleName();
-      _builder.append(_simpleName, "");
+      String _importableString = this.documentUtils.toImportableString(_get, importSection);
+      _builder.append(_importableString, "");
       _builder.append(" ");
       JvmExecutable _declaration = executable.getDeclaration();
       EList<JvmFormalParameter> _parameters = _declaration.getParameters();
       JvmFormalParameter _get_1 = _parameters.get(i);
-      String _simpleName_1 = _get_1.getSimpleName();
-      _builder.append(_simpleName_1, "");
+      String _simpleName = _get_1.getSimpleName();
+      _builder.append(_simpleName, "");
       result.add(_builder.toString());
     }
     return result;
-  }
-  
-  protected void updateImportSection(final InsertionContext context, final Resource resource, final IResolvedExecutable executable) {
-    final RewritableImportSection importSection = this.importSectionfactory.parse(((XtextResource) resource));
-    List<LightweightTypeReference> _resolvedParameterTypes = executable.getResolvedParameterTypes();
-    final Procedure1<LightweightTypeReference> _function = new Procedure1<LightweightTypeReference>() {
-      @Override
-      public void apply(final LightweightTypeReference it) {
-        XtendCompletionContributor.this.addImports(it, importSection);
-      }
-    };
-    IterableExtensions.<LightweightTypeReference>forEach(_resolvedParameterTypes, _function);
-    List<LightweightTypeReference> _resolvedExceptions = executable.getResolvedExceptions();
-    final Procedure1<LightweightTypeReference> _function_1 = new Procedure1<LightweightTypeReference>() {
-      @Override
-      public void apply(final LightweightTypeReference it) {
-        XtendCompletionContributor.this.addImports(it, importSection);
-      }
-    };
-    IterableExtensions.<LightweightTypeReference>forEach(_resolvedExceptions, _function_1);
-    context.commitDocument();
-    List<ReplaceRegion> _rewrite = importSection.rewrite();
-    for (final ReplaceRegion reg : _rewrite) {
-      Document _document = context.getDocument();
-      int _offset = reg.getOffset();
-      int _endOffset = reg.getEndOffset();
-      String _text = reg.getText();
-      _document.replaceString(_offset, _endOffset, _text);
-    }
-  }
-  
-  protected void addImports(final LightweightTypeReference ref, final RewritableImportSection importSection) {
-    JvmType _type = ref.getType();
-    final JvmType type = _type;
-    boolean _matched = false;
-    if (!_matched) {
-      if (type instanceof JvmGenericType) {
-        _matched=true;
-        importSection.addImport(((JvmDeclaredType)type));
-        List<LightweightTypeReference> _typeArguments = ref.getTypeArguments();
-        for (final LightweightTypeReference paramType : _typeArguments) {
-          this.addImports(paramType, importSection);
-        }
-      }
-    }
   }
   
   protected LookupElementBuilder createOverrideMethodElement(final IResolvedOperation prototype, final InsertHandler<LookupElement> insertHandler) {

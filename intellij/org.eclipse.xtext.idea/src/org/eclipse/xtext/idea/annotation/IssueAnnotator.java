@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.idea.intentions.IdeaIntentionsProvider;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.idea.util.CancelProgressIndicator;
 import org.eclipse.xtext.psi.PsiEObject;
@@ -20,6 +21,7 @@ import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 
 import com.intellij.lang.Language;
+import com.intellij.lang.annotation.Annotation;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
 import com.intellij.lang.annotation.HighlightSeverity;
@@ -48,6 +50,7 @@ public class IssueAnnotator implements Annotator {
 		}
 		IXtextLanguage xtextLanguage = (IXtextLanguage) language;
 		IResourceValidator resourceValidator = xtextLanguage.getInstance(IResourceValidator.class);
+		IdeaIntentionsProvider intentionsProvider = xtextLanguage.getInstance(IdeaIntentionsProvider.class);
 		try {
 			for (Issue issue : getIssues(resource, resourceValidator)) {
 				if (issue.isSyntaxError()) {
@@ -63,7 +66,8 @@ public class IssueAnnotator implements Annotator {
 					startOffset = issue.getOffset();
 					endOffset = startOffset + issue.getLength();
 				}
-				holder.createAnnotation(highlightSeverity, new TextRange(startOffset, endOffset), issue.getMessage());
+				Annotation annotation = holder.createAnnotation(highlightSeverity, new TextRange(startOffset, endOffset), issue.getMessage());
+				intentionsProvider.registerFixes(annotation, issue);
 			}
 		} catch (OperationCanceledError e) {
 			throw e.getWrapped();
