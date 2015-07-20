@@ -25,6 +25,7 @@ import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.idea.build.AffectedScope;
 import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -71,7 +72,8 @@ public class BuildProgressReporter implements BuildRequest.IPostValidationCallba
   @Override
   public boolean afterValidate(final URI validated, final Iterable<Issue> issues) {
     this.markAsAffected(validated);
-    for (final Issue issue : issues) {
+    Iterable<Issue> _filterNull = IterableExtensions.<Issue>filterNull(issues);
+    for (final Issue issue : _filterNull) {
       this.reportIssue(validated, issue);
     }
     return true;
