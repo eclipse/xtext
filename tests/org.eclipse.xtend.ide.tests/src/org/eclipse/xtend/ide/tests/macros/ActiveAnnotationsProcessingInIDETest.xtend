@@ -134,6 +134,7 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 		clientFile.delete(true, null)
 		macroFile.delete(true, null)
 		macroProject.project.removeExportedPackages(exportedPackage)
+		waitForBuild
 	}
 	
 	IFile macroFile
@@ -148,6 +149,7 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 		if (lidx != -1) {
 			exportedPackage = macroContent.key.substring(0, lidx).replace('/', '.')
 			macroProject.project.addExportedPackages(exportedPackage)
+			reallyWaitForAutoBuild()
 		}
 		
 		clientFile = userProject.newSource(clientContent.key, clientContent.value.toString)
