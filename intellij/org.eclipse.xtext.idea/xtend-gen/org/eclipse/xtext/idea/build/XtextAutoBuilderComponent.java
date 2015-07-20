@@ -611,9 +611,15 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     if (this.disposed) {
       return;
     }
-    boolean _isInitialized = this.project.isInitialized();
-    boolean _not = (!_isInitialized);
-    if (_not) {
+    boolean _and = false;
+    if (!(!XtextAutoBuilderComponent.TEST_MODE)) {
+      _and = false;
+    } else {
+      boolean _isInitialized = this.project.isInitialized();
+      boolean _not = (!_isInitialized);
+      _and = _not;
+    }
+    if (_and) {
       XtextAutoBuilderComponent.LOG.info("Project not yet initialized, wait some more");
       final Runnable _function = new Runnable() {
         @Override
@@ -622,10 +628,11 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
         }
       };
       this.alarm.addRequest(_function, 500);
+    } else {
+      final ArrayList<BuildEvent> allEvents = CollectionLiterals.<BuildEvent>newArrayList();
+      this.queue.drainTo(allEvents);
+      this.internalBuild(allEvents);
     }
-    final ArrayList<BuildEvent> allEvents = CollectionLiterals.<BuildEvent>newArrayList();
-    this.queue.drainTo(allEvents);
-    this.internalBuild(allEvents);
   }
   
   protected void internalBuild(final List<BuildEvent> allEvents) {
