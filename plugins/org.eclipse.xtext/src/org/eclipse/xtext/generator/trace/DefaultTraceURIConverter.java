@@ -18,6 +18,12 @@ import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
 
 import com.google.inject.Inject;
 
+/**
+ * Default implementation of the {@link ITraceURIConverter} that is based on the
+ * workspace data (see {@link IWorkspaceConfigProvider}).
+ * 
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
 public class DefaultTraceURIConverter implements ITraceURIConverter {
 	
 	@Inject(optional = true) 
