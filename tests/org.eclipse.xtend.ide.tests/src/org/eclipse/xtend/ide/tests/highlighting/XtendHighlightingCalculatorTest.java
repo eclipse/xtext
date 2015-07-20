@@ -658,6 +658,15 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		notExpectAbsolute(model.indexOf("+="), 1, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
 		highlight(model);
 	}
+	
+	@Test
+	public void testBug466702() throws Exception {
+		String model = "{ var i = 1 i++ } ";
+
+		notExpectAbsolute(model.indexOf("++"), 2, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+		expectAbsolute(model.indexOf("1"), 1, HighlightingStyles.NUMBER_ID);
+		highlight(model);
+	}
 
 	protected void highlight(String functionBody) {
 		try {
