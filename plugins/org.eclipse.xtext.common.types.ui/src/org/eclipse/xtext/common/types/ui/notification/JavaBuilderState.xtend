@@ -21,6 +21,7 @@ import org.eclipse.jdt.internal.core.builder.StringSet
 import org.eclipse.xtext.naming.QualifiedName
 
 import static org.eclipse.jdt.internal.core.JavaModelManager.*
+import org.eclipse.jdt.core.IJavaProject
 
 /**
  * @since 2.5
@@ -110,7 +111,7 @@ class JavaBuilderState {
 	 * </p>
 	 */
 	def dispatch TypeNames getQualifiedTypeNames(IPackageFragment it) {
-		val qualifiedTypeNames = new TypeNames
+		val qualifiedTypeNames = new TypeNames(javaProject)
 		val references = getReferences
 		if (references == null) {
 			return qualifiedTypeNames
@@ -130,7 +131,7 @@ class JavaBuilderState {
 						val typePackageName = qualifiedPath.removeLastSegments(1).toString.replace('/', '.')
 						if (packageName.equals(typePackageName)) {
 							val simpleTypeName = qualifiedPath.lastSegment.toString
-							qualifiedTypeNames.addAll(typeLocator.getQualifiedTypeNames(packageName, simpleTypeName))
+							qualifiedTypeNames.addAll(typeLocator.getQualifiedTypeNames(packageName, simpleTypeName, javaProject))
 						}
 					}
 				}
@@ -144,7 +145,7 @@ class JavaBuilderState {
 	 * </p>
 	 */
 	def dispatch TypeNames getQualifiedTypeNames(ICompilationUnit it) {
-		typeLocator.getQualifiedTypeNames(packageName, simplePrimaryTypeName)
+		typeLocator.getQualifiedTypeNames(packageName, simplePrimaryTypeName, javaProject)
 	}
 
 	private def IPackageFragmentRoot getPackageFragmentRoot(IJavaElement it) {
@@ -154,12 +155,12 @@ class JavaBuilderState {
 		}
 	}
 
-	private def TypeNames getQualifiedTypeNames(String typeLocator, String packageName, String simpleName) {
-		val qualifiedTypeNames = new TypeNames
+	private def TypeNames getQualifiedTypeNames(String typeLocator, String packageName, String simpleName, IJavaProject project) {
+		val qualifiedTypeNames = new TypeNames(project)
 		val primaryTypeFqn = getQualifedTypeName(packageName, simpleName)
 		val typeNames = state?.getDefinedTypeNamesFor(typeLocator)
 		if (typeNames == null) {
-			return new TypeNames => [addTypeName(primaryTypeFqn, primaryTypeFqn)]
+			return new TypeNames(project) => [addTypeName(primaryTypeFqn, primaryTypeFqn)]
 		}
 		
 		typeNames.forEach [

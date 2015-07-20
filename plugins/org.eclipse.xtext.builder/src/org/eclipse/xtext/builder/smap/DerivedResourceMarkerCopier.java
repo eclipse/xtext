@@ -193,7 +193,7 @@ public class DerivedResourceMarkerCopier {
 	private IFile findIFile(ILocationInResource locationInResource, IWorkspace workspace) {
 		IStorage storage = locationInResource.getStorage();
 		if (storage == null) {
-			LOG.warn("Failed to find Storage. Please make sure there are no outdated generated files.");
+			LOG.warn("Failed to find Storage. Please make sure there are no outdated generated files. URI: " + locationInResource.getAbsoluteResourceURI());
 			return null;
 		}
 		return workspace.getRoot().getFile(storage.getFullPath());

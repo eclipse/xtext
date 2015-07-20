@@ -31,7 +31,7 @@ public class Bug386476Test extends AbstractParticipatingBuilderTest {
 		super.setUp();
 		javaProject = createJavaProject("BuilderDisabled");
 		addNature(javaProject.getProject(), XtextProjectHelper.NATURE_ID);
-		waitForAutoBuild();
+		waitForBuild();
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class Bug386476Test extends AbstractParticipatingBuilderTest {
 	public void testBuildIsNotInvokedWhenBuilderIsDisabled() throws Exception {
 		IProject project = javaProject.getProject();
 		IFile file = createSomeBuilderRelatedFile(project);
-		waitForAutoBuild();
+		waitForBuild();
 		startLogging();
 
 		// With Xtext Builder activated builder is invoked
@@ -63,16 +63,16 @@ public class Bug386476Test extends AbstractParticipatingBuilderTest {
 
 	private void stimulateBuildSchedulerTrigger(IProject project) throws CoreException {
 		project.close(monitor());
-		waitForAutoBuild();
+		reallyWaitForAutoBuild();
 		project.open(monitor());
-		waitForAutoBuild();
+		reallyWaitForAutoBuild();
 	}
 
 	private IFile createSomeBuilderRelatedFile(IProject project) throws CoreException {
 		IFolder folder = project.getProject().getFolder("src");
 		IFile file = folder.getFile("Foo" + F_EXT);
 		file.create(new StringInputStream("object Foo"), true, monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		return file;
 	}
 

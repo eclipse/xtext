@@ -112,7 +112,7 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 		XtextEditor editor = openEditor(testFile0);
 		doRename();
 		testFile0.refreshLocal(-1, null);
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(initialModel0.replaceAll("B", "C"), editor.getDocument().get());
 		assertEquals(initialModel1.replaceAll("B", "C"), readFile(testFile1));
 		undoRename();
@@ -197,15 +197,15 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 		for (int i = 0; i < 41; ++i) {
 			createFile(TEST_PROJECT + "/ref" + i + ".refactoringtestlanguage", "foo" + i + " {ref B}");
 		}
-		waitForAutoBuild();
+		waitForBuild();
 		doRename();
-		waitForAutoBuild();
+		waitForBuild();
 		int i = 0;
 		for (IFile file : referringFiles) {
 			assertEquals("foo" + i++ + " {ref C}", readFile(file));
 		}
 		undoRename();
-		waitForAutoBuild();
+		waitForBuild();
 		i = 0;
 		for (IFile file : referringFiles) {
 			assertEquals("foo" + i++ + " {ref B}", readFile(file));
@@ -213,7 +213,7 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 	}
 
 	protected void doRename() throws Exception {
-		IResourcesSetupUtil.waitForAutoBuild();
+		IResourcesSetupUtil.waitForBuild();
 		final Change change = createChange(uriB, "C");
 		new WorkspaceModifyOperation() {
 			@Override
@@ -225,7 +225,7 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 	}
 
 	protected void undoRename() throws Exception {
-		IResourcesSetupUtil.waitForAutoBuild();
+		IResourcesSetupUtil.waitForBuild();
 		new WorkspaceModifyOperation() {
 			@Override
 			protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException,

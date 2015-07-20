@@ -49,121 +49,121 @@ public class RebuildDependentResourcesTest extends Assert {
 	@After
 	public void tearDown() throws Exception {
 		root().getProject("RebuildDependentResourcesTest").delete(true, null);
-		waitForAutoBuild();
+		reallyWaitForAutoBuild();
 		assertEquals(0, countResourcesInIndex());
 	}
 	
 	@Test public void testValidJavaReference() throws Exception {
 		IFile file = createFile("src/foo"+extension, "default ExistingClass");
 		createFile("src/ExistingClass.java", "class ExistingClass {}");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(file), 0, countMarkers(file));
 	}
 	
 	@Test public void testMissingJavaReference() throws Exception {
 		IFile file = createFile("src/foo"+extension, "default MissingClass");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(file), 2, countMarkers(file));
 	}
 
 	@Test public void testFixedJavaReference_01() throws Exception {
 		IFile file = createFile("src/foo"+extension, "default WillBeCreated");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(file), 2, countMarkers(file));
 		createFile("src/WillBeCreated.java", "class WillBeCreated {}");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(file), 0, countMarkers(file));
 	}
 	
 	@Test public void testFixedJavaReference_02() throws Exception {
 		IFile file = createFile("src/foo"+extension, "default WillBeCreated");
 		IFile javaFile = createFile("src/WillBeCreated.java", "class WillBeCreate {}");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(file), 2, countMarkers(file));
 		javaFile.setContents(new StringInputStream("class WillBeCreated {}"),true,true,monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(file), 0, countMarkers(file));
 	}
 	
 	@Test public void testFixedJavaReference_03() throws Exception {
 		IFile file = createFile("src/foo"+extension, "default pack.WillBeDeleted");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(file), 2, countMarkers(file));
 		createFile("src/pack/WillBeDeleted.java", "package pack; class WillBeDeleted {}");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(file), 0, countMarkers(file));
 	}
 	
 	@Test public void testFixedJavaReference_04() throws Exception {
 		IFile file = createFile("src/foo"+extension, "default pack.SomeFile$Nested");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(file), 2, countMarkers(file));
 		IFile javaFile = createFile("src/pack/SomeFile.java", "package pack; class SomeFile {}");
 		assertEquals(printMarkers(file), 2, countMarkers(file));
 		javaFile.setContents(new StringInputStream("package pack; class SomeFile { class Nested {} }"), true, true,	monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(file), 0, countMarkers(file));
 	}
 	
 	@Test public void testBrokenJavaReference_01() throws Exception {
 		IFile file = createFile("src/foo"+extension, "default WillBeDeleted");
 		IFile javaFile = createFile("src/WillBeDeleted.java", "class WillBeDeleted {}");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(file), 0, countMarkers(file));
 		javaFile.delete(true, monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(file), 2, countMarkers(file));
 	}
 	
 	@Test public void testBrokenJavaReference_02() throws Exception {
 		IFile file = createFile("src/foo"+extension, "default pack.WillBeDeleted");
 		IFile javaFile = createFile("src/pack/WillBeDeleted.java", "package pack; class WillBeDeleted {}");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(file), 0, countMarkers(file));
 		javaFile.getParent().delete(true, monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(file), 2, countMarkers(file));
 	}
 	
 	public void testBrokenJavaReference_03() throws Exception {
 		IFile file = createFile("src/foo"+extension, "default WillBeDeleted");
 		IFile javaFile = createFile("src/WillBeDeleted.java", "class WillBeDeleted {}");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(file), 0, countMarkers(file));
 		javaFile.setContents(new StringInputStream(""), true, true,	monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(file), 2, countMarkers(file));
 	}
 	
 	public void testBrokenJavaReference_04() throws Exception {
 		IFile file = createFile("src/foo"+extension, "default pack.WillBeDeleted");
 		IFile javaFile = createFile("src/pack/WillBeDeleted.java", "package pack; class WillBeDeleted {}");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(file), 0, countMarkers(file));
 		javaFile.setContents(new StringInputStream(""), true, true,	monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(file), 2, countMarkers(file));
 	}
 	
 	public void testBrokenJavaReference_05() throws Exception {
 		IFile genFile = createFile("src/foo"+extension, "generate WillBeDeleted");
-		waitForAutoBuild();
+		waitForBuild();
 		IFile file = createFile("src/bar"+extension, "default WillBeDeleted");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(file), 0, countMarkers(file));
 		genFile.setContents(new StringInputStream(""), true, true,	monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(file), 2, countMarkers(file));
 	}
 	
 	public void testBrokenJavaReference_06() throws Exception {
 		IFile genFile = createFile("src/foo"+extension, "generate pack.WillBeDeleted");
-		waitForAutoBuild();
+		waitForBuild();
 		IFile file = createFile("src/bar"+extension, "default pack.WillBeDeleted");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(file), 0, countMarkers(file));
 		genFile.setContents(new StringInputStream(""), true, true,	monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(file), 2, countMarkers(file));
 	}
 	

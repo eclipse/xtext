@@ -59,7 +59,7 @@ public abstract class AbstractBuilderTest extends Assert implements IResourceDes
 	@After
 	public void tearDown() throws Exception {
 		cleanWorkspace();
-		waitForAutoBuild();
+		waitForBuild();
 		events.clear();
 		getBuilderState().removeListener(this);
 		assertEquals(0, countResourcesInIndex());

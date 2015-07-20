@@ -26,11 +26,15 @@ import com.google.common.base.Joiner;
 import com.google.inject.Inject;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * Utility to check if the document's content matches the state of the resource.
+ * 
+ * @author Jan Koehnlein - Initial contribution and API
  * @since 2.4
  * @noextend
  * @noreference
+ * @deprecated The debugger reads from the document but does that not on the display thread so it is prone to errors.
  */
+@Deprecated
 public class XtextReconcilerDebugger {
 	
 	private static final Logger LOG = Logger.getLogger(XtextReconcilerDebugger.class);

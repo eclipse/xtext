@@ -38,20 +38,20 @@ public class SingleProjectTest extends AbstractBuilderTest {
 	
 	@Test public void testValidSimpleModel() throws Exception {
 		IFile file = createFile("sample/file" + F_EXT, "Hello World (from World)!");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(0, countMarkers(file));
 	}
 
 	@Test public void testSimpleModelWithSyntaxError() throws Exception {
 		IFile file = createFile("sample/sample" + F_EXT, "Hello World");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(1, countMarkers(file));
 	}
 
 	@Test public void testTwoFilesInSameProject() throws Exception {
 		IFile file1 = createFile("sample/a" + F_EXT, "Hello A!");
 		IFile file2 = createFile("sample/b" + F_EXT, "Hello B (from A)!");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(printMarkers(file1), 0, countMarkers(file1));
 		assertEquals(printMarkers(file2), 0, countMarkers(file2));
 		assertTrue(indexContainsElement(file1.getFullPath().toString(), "A"));
@@ -62,17 +62,17 @@ public class SingleProjectTest extends AbstractBuilderTest {
 	@Test public void testTwoFilesInSameProjectRemoveNature() throws Exception {
 		createFile("sample/a" + F_EXT, "Hello A!");
 		createFile("sample/b" + F_EXT, "Hello B (from A)!");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(2, countResourcesInIndex());
 		removeNature(project, XtextProjectHelper.NATURE_ID);
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(0, countResourcesInIndex());
 	}
 
 	@Test public void testTwoFilesInSameProjectWithLinkingError() throws Exception {
 		createFile("sample/a" + F_EXT, "Hello A!");
 		IFile file = createFile("sample/a" + F_EXT, "Hello B (from C)!");
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(1, countMarkers(file));
 	}
 
@@ -82,7 +82,7 @@ public class SingleProjectTest extends AbstractBuilderTest {
 		resourceAttributes.setReadOnly(true);
 		file.setResourceAttributes(resourceAttributes);
 		try {
-			waitForAutoBuild();
+			waitForBuild();
 			assertTrue(file.isReadOnly());
 			assertEquals(1, countMarkers(file));
 		} finally {

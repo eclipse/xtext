@@ -597,16 +597,25 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 
 	@Override
 	protected void handlePreferenceStoreChanged(PropertyChangeEvent event) {
-		super.handlePreferenceStoreChanged(event);
-		if (getSourceViewer() == null)
+		ISourceViewer sourceViewer = getSourceViewer();
+		if (sourceViewer == null || sourceViewer.getTextWidget() == null)
 			return;
+		super.handlePreferenceStoreChanged(event);
+		
 	
 		boolean tokenStyleChanged = event.getProperty().contains(".syntaxColorer.tokenStyles");
 		if (tokenStyleChanged) {
 			textAttributeProvider.propertyChange(event);
-			initializeViewerColors(getSourceViewer());
-			getSourceViewer().invalidateTextPresentation();
+			initializeViewerColors(sourceViewer);
+			sourceViewer.invalidateTextPresentation();
 		}
+	}
+	
+	@Override
+	protected void initializeViewerColors(ISourceViewer viewer) {
+		if (viewer == null || viewer.getTextWidget() == null)
+			return;
+		super.initializeViewerColors(viewer);
 	}
 
 	@Override

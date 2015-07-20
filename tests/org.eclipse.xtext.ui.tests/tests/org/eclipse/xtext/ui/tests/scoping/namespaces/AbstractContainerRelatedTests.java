@@ -47,7 +47,7 @@ public abstract class AbstractContainerRelatedTests extends Assert implements IR
 	@Before
 	public void setUp() throws Exception {
 		cleanWorkspace();
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(0, root().getProjects().length);
 		project1 = createProject("someProject1");
 		project2 = createProject("someProject2");
@@ -65,7 +65,7 @@ public abstract class AbstractContainerRelatedTests extends Assert implements IR
 	@After
 	public void tearDown() throws Exception {
 		cleanWorkspace();
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(0, root().getProjects().length);
 	}
 	
