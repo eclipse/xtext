@@ -44,6 +44,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XNumberLiteral;
+import org.eclipse.xtext.xbase.XPostfixOperation;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
@@ -181,7 +182,7 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 				if (jvmOperation.isStatic())
 					highlightFeatureCall(featureCall, acceptor, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
 			}
-			if(!(featureCall instanceof XBinaryOperation || featureCall instanceof XUnaryOperation)) {
+			if(!(featureCall instanceof XBinaryOperation || featureCall instanceof XUnaryOperation || featureCall instanceof XPostfixOperation)) {
 				if(featureCall.isExtension()){
 					highlightFeatureCall(featureCall, acceptor, 
 							XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
@@ -189,9 +190,9 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 					// Extensions without implicit first argument
 					XExpression implicitReceiver = featureCall.getImplicitReceiver();
 					if(implicitReceiver != null && implicitReceiver instanceof XAbstractFeatureCall){
-							if(isExtension(((XAbstractFeatureCall) implicitReceiver).getFeature()))
-								highlightFeatureCall(featureCall, acceptor, 
-										XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+						if(isExtension(((XAbstractFeatureCall) implicitReceiver).getFeature()))
+							highlightFeatureCall(featureCall, acceptor, 
+									XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
 					}
 				}	
 			}
