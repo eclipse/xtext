@@ -21,21 +21,21 @@
             <message_arguments>
                 <message_argument value="IHighlightedPositionAcceptor"/>
                 <message_argument value="DefaultSemanticHighlightingCalculator"/>
-                <message_argument value="doProvideHighlightingFor(XtextResource, IHighlightedPositionAcceptor)"/>
+                <message_argument value="doProvideHighlightingFor(XtextResource, IHighlightedPositionAcceptor, CancelIndicator)"/>
             </message_arguments>
         </filter>
         <filter id="643846161">
             <message_arguments>
                 <message_argument value="IHighlightedPositionAcceptor"/>
                 <message_argument value="DefaultSemanticHighlightingCalculator"/>
-                <message_argument value="highlightElement(EObject, IHighlightedPositionAcceptor)"/>
+                <message_argument value="highlightElement(EObject, IHighlightedPositionAcceptor, CancelIndicator)"/>
             </message_arguments>
         </filter>
         <filter id="643846161">
             <message_arguments>
                 <message_argument value="IHighlightedPositionAcceptor"/>
                 <message_argument value="DefaultSemanticHighlightingCalculator"/>
-                <message_argument value="highlightElementRecursively(EObject, IHighlightedPositionAcceptor)"/>
+                <message_argument value="highlightElementRecursively(EObject, IHighlightedPositionAcceptor, CancelIndicator)"/>
             </message_arguments>
         </filter>
         <filter id="643846161">
@@ -63,14 +63,14 @@
             <message_arguments>
                 <message_argument value="IHighlightedPositionAcceptor"/>
                 <message_argument value="DefaultSemanticHighlightingCalculator"/>
-                <message_argument value="provideHighlightingFor(XtextResource, IHighlightedPositionAcceptor)"/>
+                <message_argument value="provideHighlightingFor(XtextResource, IHighlightedPositionAcceptor, CancelIndicator)"/>
             </message_arguments>
         </filter>
         <filter id="643846161">
             <message_arguments>
                 <message_argument value="IHighlightedPositionAcceptor"/>
                 <message_argument value="DefaultSemanticHighlightingCalculator"/>
-                <message_argument value="searchAndHighlightElements(XtextResource, IHighlightedPositionAcceptor)"/>
+                <message_argument value="searchAndHighlightElements(XtextResource, IHighlightedPositionAcceptor, CancelIndicator)"/>
             </message_arguments>
         </filter>
     </resource>
@@ -184,7 +184,7 @@
             <message_arguments>
                 <message_argument value="IHighlightedPositionAcceptor"/>
                 <message_argument value="MergingHighlightedPositionAcceptor"/>
-                <message_argument value="provideHighlightingFor(XtextResource, IHighlightedPositionAcceptor)"/>
+                <message_argument value="provideHighlightingFor(XtextResource, IHighlightedPositionAcceptor, CancelIndicator)"/>
             </message_arguments>
         </filter>
         <filter id="643846161">
