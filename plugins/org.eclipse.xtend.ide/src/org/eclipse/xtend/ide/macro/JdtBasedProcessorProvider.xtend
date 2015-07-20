@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.jdt.core.IClasspathEntry
 import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.jdt.core.JavaCore
+import org.eclipse.jdt.core.JavaModelException
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.macro.TransformationContext
@@ -125,13 +126,18 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 	 */
 	protected def createClassLoaderForJavaProject(IJavaProject projectToUse) {
 		val urls = newLinkedHashSet()
-		collectClasspathURLs(projectToUse, urls, false, newHashSet)
+		try {
+			collectClasspathURLs(projectToUse, urls, false, newHashSet)
+		} catch(JavaModelException e) {
+			if (!e.isDoesNotExist)
+				LOG.error(e.message, e)
+		}
 		return new URLClassLoader(urls, getParentClassLoader())
 	}
 
 	protected def void collectClasspathURLs(IJavaProject projectToUse, LinkedHashSet<URL> result,
-		boolean includeOutputFolder, Set<IJavaProject> visited) {
-		if (!visited.add(projectToUse)) {
+		boolean includeOutputFolder, Set<IJavaProject> visited) throws JavaModelException {
+		if (!projectToUse.project.isAccessible || !visited.add(projectToUse)) {
 			return;
 		}
 		if (includeOutputFolder) {
