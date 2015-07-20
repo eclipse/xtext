@@ -415,16 +415,19 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	 * @since 2.4
 	 */
 	private void updateCache(IJavaProject project) {
+		Set<PackageFragmentRootData> datas = newHashSet();
 		try {
-			Set<PackageFragmentRootData> datas = newHashSet();
-			for(IPackageFragmentRoot root: project.getPackageFragmentRoots()) {
-				boolean isCachable = root.isArchive() || root.isExternal();
-				if(isCachable) 
-					datas.add(getCachedData(root));
+			if (project.exists() && project.getProject().isAccessible()) {
+				for(IPackageFragmentRoot root: project.getPackageFragmentRoots()) {
+					boolean isCachable = root.isArchive() || root.isExternal();
+					if(isCachable) 
+						datas.add(getCachedData(root));
+				}
 			}
-			clearCache(project, datas);
 		} catch (JavaModelException e) {
 			log.error("Error getting package fragments roots of " + project.getElementName(), e);
+		} finally {
+			clearCache(project, datas);
 		}
 	}
 	
