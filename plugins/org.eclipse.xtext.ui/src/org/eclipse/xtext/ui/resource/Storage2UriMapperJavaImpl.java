@@ -417,7 +417,8 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 				}
 			}
 		} catch (JavaModelException e) {
-			log.error("Error getting package fragments roots of " + project.getElementName(), e);
+			if (!e.isDoesNotExist())
+				log.error("Error getting package fragments roots of " + project.getElementName(), e);
 		} finally {
 			clearCache(project, datas);
 		}
