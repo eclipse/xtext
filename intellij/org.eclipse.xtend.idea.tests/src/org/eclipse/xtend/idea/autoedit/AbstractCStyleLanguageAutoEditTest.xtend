@@ -394,14 +394,13 @@ abstract class AbstractCStyleLanguageAutoEditTest extends AbstractAutoEditTest {
 	def void testCurlyBracesBlock_13() {
 		configureByText('{foo|bar}')
 		myFixture.type('\n')
-		// TODO: assertState('{foo\n\t|bar}')
-		assertState('{foo\n|bar}')
+		assertState('{foo\n\t|bar}')
 	}
 
 	def void testCurlyBracesBlock_14() {
 		configureByText('{\nfoo|bar}')
 		myFixture.type('\n')
-		// TODO: assertState('{foo\n\t|bar}')		
+		// TODO assertState('{\nfoo\n\t|bar}')
 		assertState('{\nfoo\n|bar}')
 	}
 
@@ -426,7 +425,7 @@ abstract class AbstractCStyleLanguageAutoEditTest extends AbstractAutoEditTest {
 	def void testCurlyBracesBlock_18() {
 		configureByText('{{foo}|{bar}}')
 		myFixture.type('\n')
-		assertState('{{foo}\n|{bar}}')
+		assertState('{{foo}\n\t|{bar}}')
 	}
 
 	def void testCurlyBracesBlock_19() {

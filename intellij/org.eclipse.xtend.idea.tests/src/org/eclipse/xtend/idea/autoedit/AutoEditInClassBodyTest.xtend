@@ -82,16 +82,18 @@ class AutoEditInClassBodyTest extends AutoEditTest {
 		assertState("  // test\n\t|\n")
 	}
 	
-	override testCurlyBracesBlock_10() {
-		configureByText('/*{*/ foo|')
-		myFixture.type('\n')
-		assertState('/*{*/ foo\n\t|')
-	}
-	
 	override testCurlyBracesBlock_17() {
 		configureByText('{\n|')
 		myFixture.type('\n')
 		assertState('{\n\n\t|')
+	}
+	
+	override testCurlyBracesBlock_19() {
+		configureByText('{{|')
+		myFixture.type('\n')
+		assertState('{{\n\t|\n}}')
+		myFixture.type('\n')
+		assertState('{{\n\t\n\t|\n}}')
 	}
 	
 	override testParenthesis_1() {
