@@ -13,7 +13,7 @@ import org.eclipse.xtext.idea.execution.TraceBasedJUnitClassConfigurationProduce
 /**
  * @author dhuebner - Initial contribution and API
  */
-class XtendJunitMethodConfigurationProducer extends TraceBasedJUnitClassConfigurationProducer {
+class XtendJunitClassConfigurationProducer extends TraceBasedJUnitClassConfigurationProducer {
 
 	new() {
 		super(XtendLanguage.INSTANCE)

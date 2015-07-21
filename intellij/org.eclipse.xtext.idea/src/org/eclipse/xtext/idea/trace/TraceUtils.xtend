@@ -7,10 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.trace
 
-import com.google.common.collect.Lists
 import com.google.inject.Inject
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiManager
 import com.intellij.psi.util.PsiUtilCore
 import org.eclipse.xtext.generator.trace.TraceFileNameProvider
@@ -31,47 +31,51 @@ class TraceUtils {
 	@Inject TraceRegionSerializer traceRegionSerializer
 	@Inject TraceFileNameProvider traceFileNameProvider
 
-	def Iterable<PsiElement> getBestJavaElementMatch(@NotNull PsiElement xtextElement) {
-		val xtextFile = xtextFile(xtextElement)
-		val javaElements = Lists.newArrayList
-		if (xtextFile != null) {
-			val builder = xtextElement.project.getComponent(XtextAutoBuilderComponent)
-			val generated = builder.getGeneratedSources(xtextFile.virtualFile.getURI)
-			if (generated != null) {
-				for (uri : generated.filter[fileExtension == 'java']) {
-					val lastSegmentOfTrace = traceFileNameProvider.getTraceFromJava(uri.lastSegment)
-					val traceFile = uri.trimSegments(1).appendSegment(lastSegmentOfTrace).virtualFile
-					if (traceFile != null && traceFile.exists) {
-						val javaPsiFile = PsiManager.getInstance(xtextElement.project).findFile(uri.virtualFile)
-						if (xtextElement instanceof BaseXtextFile) {
-							javaElements.add(javaPsiFile)
-						} else {
-							val traces = traceRegionSerializer.readTraceRegionFrom(traceFile.inputStream)
-							val sourceRegion = xtextElement.textRange.toTextRegion
-							val matches = traces.leafIterator.filter[mergedAssociatedLocation.contains(sourceRegion)]
-							if (!matches.empty) {
-								val bestTrace = matches.min([ t1, t2 |
-									t1.mergedAssociatedLocation.length.compareTo(t2.mergedAssociatedLocation.length)
-								])
-								javaElements.add(PsiUtilCore.getElementAtOffset(javaPsiFile, bestTrace.myOffset))
-							}
-						}
-					}
+	def Iterable<? extends PsiElement> getBestJavaElementMatch(@NotNull PsiElement xtextElement) {
+		if (xtextElement instanceof BaseXtextFile) {
+			return getJavaFiles(xtextElement)
+		}
+		val javaElements = newArrayList
+		for (javaFile : getJavaFiles(xtextElement)) {
+			val uri = javaFile.virtualFile.URI
+			val lastSegmentOfTrace = traceFileNameProvider.getTraceFromJava(uri.lastSegment)
+			val traceFile = uri.trimSegments(1).appendSegment(lastSegmentOfTrace).virtualFile
+			if (traceFile != null && traceFile.exists) {
+				val traces = traceRegionSerializer.readTraceRegionFrom(traceFile.inputStream)
+				val sourceRegion = xtextElement.textRange.toTextRegion
+				val matches = traces.treeIterator.filter[mergedAssociatedLocation.contains(sourceRegion)]
+				if (!matches.empty) {
+					val bestTrace = matches.min([ t1, t2 |
+						t1.mergedAssociatedLocation.length.compareTo(t2.mergedAssociatedLocation.length)
+					])
+					javaElements.add(PsiUtilCore.getElementAtOffset(javaFile, bestTrace.myOffset))
 				}
 			}
+			return javaElements
 		}
-		return javaElements
+		return emptySet
+	}
+
+	def Iterable<PsiFile> getJavaFiles(@NotNull PsiElement xtextElement) {
+		val xtextFile = xtextElement.getParentOfType(BaseXtextFile, false)
+		if (xtextFile == null) {
+			return emptySet
+		}
+		val builder = xtextFile.project.getComponent(XtextAutoBuilderComponent)
+		val generated = builder.getGeneratedSources(xtextFile.virtualFile.getURI)
+		if (generated != null) {
+			val javaFiles = newArrayList
+			for (uri : generated.filter[fileExtension == 'java']) {
+				val javaPsiFile = PsiManager.getInstance(xtextFile.project).findFile(uri.virtualFile)
+				javaFiles.add(javaPsiFile)
+			}
+			return javaFiles
+		}
+		return emptySet
 	}
 
 	def ITextRegion toTextRegion(TextRange range) {
 		return new TextRegion(range.startOffset, range.length)
-	}
-
-	def protected BaseXtextFile xtextFile(PsiElement element) {
-		if (element instanceof BaseXtextFile) {
-			return element
-		}
-		return element.getParentOfType(BaseXtextFile)
 	}
 
 }

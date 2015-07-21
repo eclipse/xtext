@@ -16,6 +16,7 @@ import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.DataContextWrapper;
 import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import org.eclipse.xtext.idea.trace.TraceUtils;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.jetbrains.annotations.NotNull;
@@ -64,12 +65,19 @@ public class ConfigurationProducerExtensions {
     boolean _tripleNotEquals = (_psiElement != null);
     if (_tripleNotEquals) {
       Location _location_1 = context.getLocation();
-      PsiElement _psiElement_1 = _location_1.getPsiElement();
-      Iterable<PsiElement> _bestJavaElementMatch = this.traceUtils.getBestJavaElementMatch(_psiElement_1);
-      final PsiElement javaElement = IterableExtensions.<PsiElement>head(_bestJavaElementMatch);
-      if ((javaElement != null)) {
-        return javaElement;
+      PsiElement _psiElement_1 = null;
+      if (_location_1!=null) {
+        _psiElement_1=_location_1.getPsiElement();
       }
+      final PsiElement psiElement = _psiElement_1;
+      Iterable<? extends PsiElement> _bestJavaElementMatch = this.traceUtils.getBestJavaElementMatch(psiElement);
+      PsiElement javaElement = IterableExtensions.head(_bestJavaElementMatch);
+      if ((javaElement == null)) {
+        Iterable<PsiFile> _javaFiles = this.traceUtils.getJavaFiles(psiElement);
+        PsiFile _head = IterableExtensions.<PsiFile>head(_javaFiles);
+        javaElement = _head;
+      }
+      return javaElement;
     }
     return null;
   }
