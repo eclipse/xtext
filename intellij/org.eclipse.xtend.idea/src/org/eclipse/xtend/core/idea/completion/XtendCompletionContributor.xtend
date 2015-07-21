@@ -18,13 +18,13 @@ import com.intellij.openapi.editor.ScrollType
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiDocumentManager
 import com.intellij.psi.codeStyle.CodeStyleManager
-import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.core.idea.lang.XtendLanguage
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendPackage
 import org.eclipse.xtext.common.types.JvmGenericType
+import org.eclipse.xtext.idea.document.DocumentUtils
 import org.eclipse.xtext.idea.lang.AbstractXtextLanguage
-import org.eclipse.xtext.psi.IPsiModelAssociations
+import org.eclipse.xtext.psi.XtextPsiExtensions
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.xbase.ide.contentassist.OverrideProposalUtil
 import org.eclipse.xtext.xbase.imports.RewritableImportSection
@@ -32,19 +32,19 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.typesystem.^override.IResolvedConstructor
 import org.eclipse.xtext.xbase.typesystem.^override.IResolvedExecutable
 import org.eclipse.xtext.xbase.typesystem.^override.IResolvedOperation
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 
 import static com.intellij.patterns.PlatformPatterns.*
 
-import static extension com.intellij.psi.util.PsiTreeUtil.*
 import static extension org.eclipse.xtext.EcoreUtil2.*
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 
 class XtendCompletionContributor extends AbstractXtendCompletionContributor {
 
-	@Inject extension IPsiModelAssociations
+	@Inject extension XtextPsiExtensions
 	@Inject IJvmModelAssociations jvmModelAssociations
 	@Inject OverrideProposalUtil overrideProposalUtil
 	@Inject RewritableImportSection.Factory importSectionfactory
+	@Inject extension DocumentUtils documentUtils
 
 	new() {
 		this(XtendLanguage.INSTANCE)
@@ -60,8 +60,8 @@ class XtendCompletionContributor extends AbstractXtendCompletionContributor {
 			CompletionType.BASIC,
 			psiElement.withEReference(XtendPackage.Literals.XTEND_TYPE_DECLARATION__MEMBERS)
 		) [
-			val psiElement = $0.position.findFirstParent(false)[EObject != null]
-			val clazz = psiElement.EObject.getContainerOfType(XtendClass)
+			val psiElement = $0.position
+			val clazz = psiElement.findEObject?.getContainerOfType(XtendTypeDeclaration)
 			if (clazz == null) {
 				return
 			}
@@ -75,12 +75,13 @@ class XtendCompletionContributor extends AbstractXtendCompletionContributor {
 							context.getDocument().deleteString(context.getStartOffset(), context.getTailOffset());
 	    					context.commitDocument();
 	    					// insert method
+	    					val importSection = importSectionfactory.parse(clazz.eResource as XtextResource)
 	    					context.insertAndAdjust('''
-	    						override «candidate.typeParameters.join('<',',','> ')[name]»«candidate.declaration.simpleName»(«candidate.parameters.join(', ')») «candidate.declaration.exceptions.join('throws ',', ',' ', [simpleName])»{
+	    						override «candidate.typeParameters.join('<',',','> ')[name]»«candidate.declaration.simpleName»(«candidate.getParameterText(importSection).join(', ')») «candidate.declaration.exceptions.join('throws ',', ',' ', [toImportableString(importSection)])»{
 	    							«START_SELECTION_MARKER»throw new UnsupportedOperationException()«END_SELECTION_MARKER»
 	    						}
 	    					''')
-	    					context.updateImportSection(clazz.eResource, candidate)
+	    					context.document.updateImportSection(importSection)
 						])
 					} else if (candidate instanceof IResolvedConstructor) {
 						$2.addElement(createOverrideConstructorElement(candidate) [InsertionContext context, LookupElement item|
@@ -88,13 +89,14 @@ class XtendCompletionContributor extends AbstractXtendCompletionContributor {
 							context.getDocument().deleteString(context.getStartOffset(), context.getTailOffset());
 	    					context.commitDocument();
 	    					//  insert constructor
+	    					val importSection = importSectionfactory.parse(clazz.eResource as XtextResource)
 	    					context.insertAndAdjust('''
-	    						new («candidate.parameters.join(', ')») «candidate.declaration.exceptions.join('throws ',', ',' ', [simpleName])»{
+	    						new («candidate.getParameterText(importSection).join(', ')») «candidate.declaration.exceptions.join('throws ',', ',' ', [toImportableString(importSection)])»{
 	    							super(«candidate.declaration.parameters.join(', ')[name]»)«SELECTION_MARKER»
 	    						}
 	    					''')
 	    					// insert imports
-	    					context.updateImportSection(clazz.eResource, candidate)
+	    					context.document.updateImportSection(importSection)
 						])
 					}
 				}
@@ -130,35 +132,14 @@ class XtendCompletionContributor extends AbstractXtendCompletionContributor {
 		}
 	}
 	
-	protected def getParameters(IResolvedExecutable executable) {
+	protected def getParameterText(IResolvedExecutable executable, RewritableImportSection importSection) {
 		val result = newArrayList
 		for (var i =0; i < executable.declaration.parameters.size; i++) {
-			result += '''«executable.resolvedParameterTypes.get(i).simpleName» «executable.declaration.parameters.get(i).simpleName»'''
+			result += '''«executable.resolvedParameterTypes.get(i).toImportableString(importSection)» «executable.declaration.parameters.get(i).simpleName»'''
 		}
 		return result
 	}
 	
-	protected def updateImportSection(InsertionContext context, Resource resource, IResolvedExecutable executable) {
-		val importSection = importSectionfactory.parse(resource as XtextResource)
-		executable.resolvedParameterTypes.forEach[addImports(importSection)]
-		executable.resolvedExceptions.forEach[addImports(importSection)]
-		context.commitDocument();
-		for (reg : importSection.rewrite) {
-			context.document.replaceString(reg.offset, reg.endOffset, reg.text)
-		}
-	}
-	
-	protected def void addImports(LightweightTypeReference ref, RewritableImportSection importSection) {
-		switch type : ref.type {
-			JvmGenericType : {
-				importSection.addImport(type)
-				for (paramType : ref.typeArguments) {
-					addImports(paramType, importSection)
-				}
-			}
-		}
-	}
-
 	protected def LookupElementBuilder createOverrideMethodElement(IResolvedOperation prototype, InsertHandler<LookupElement> insertHandler) {
 		var methodName = prototype.declaration.simpleName
 		var signature = '''override «methodName»(«prototype.resolvedParameterTypes.join(',')[humanReadableName]»)'''

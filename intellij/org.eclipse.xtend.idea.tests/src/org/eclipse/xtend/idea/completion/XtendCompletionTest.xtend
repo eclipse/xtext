@@ -392,4 +392,48 @@ class XtendCompletionTest extends LightXtendTest {
 		
 		assertEquals(offset,myFixture.editor.caretModel.currentCaret.offset)
 	}
+	
+	def void testOverrideCompletion_07() {
+		'''
+			class Foo {
+				def void myMethods() {
+					val runnable = new MySuperClass<String>() {
+						doStuff<caret>
+					}
+					runnable.run()
+				}
+			}
+			
+			class MySuperClass<T> {
+				def <X> T doStuff(java.util.List<T> myArg, X x) throws java.io.IOException {
+					return null
+				}
+			}
+		'''.toString.complete
+		myFixture.type('\n')
+		assertEquals('''
+			import java.util.List
+			import java.io.IOException
+			
+			class Foo {
+				def void myMethods() {
+					val runnable = new MySuperClass<String>() {
+						override <X> doStuff(List<String> myArg, X x) throws IOException {
+							throw new UnsupportedOperationException()
+						}
+			
+					}
+					runnable.run()
+				}
+			}
+			
+			class MySuperClass<T> {
+				def <X> T doStuff(java.util.List<T> myArg, X x) throws java.io.IOException {
+					return null
+				}
+			}
+		'''.toString, myFixture.editor.document.text.toString)
+		
+		assertEquals("throw new UnsupportedOperationException()",myFixture.editor.selectionModel.selectedText)
+	}
 }
