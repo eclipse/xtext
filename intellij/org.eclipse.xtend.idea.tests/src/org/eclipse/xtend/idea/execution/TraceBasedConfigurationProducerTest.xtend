@@ -33,13 +33,13 @@ import com.intellij.testFramework.MapDataContext
 import com.intellij.testIntegration.JavaTestFramework
 import com.intellij.testIntegration.TestFramework
 import com.intellij.util.containers.ContainerUtilRt
-import com.sun.istack.internal.NotNull
 import java.util.Collections
 import org.eclipse.xtend.core.idea.execution.XtendApplicationConfigurationProducer
 import org.eclipse.xtend.core.idea.execution.XtendJunitClassConfigurationProducer
 import org.eclipse.xtend.core.idea.execution.XtendJunitMethodConfigurationProducer
 import org.eclipse.xtend.idea.XtendIdeaTestCase
 import org.eclipse.xtext.psi.impl.BaseXtextFile
+import org.jetbrains.annotations.NotNull
 
 /**
  * @author dhuebner - Initial contribution and API
