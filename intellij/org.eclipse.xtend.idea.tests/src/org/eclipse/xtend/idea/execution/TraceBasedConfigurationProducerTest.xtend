@@ -20,6 +20,7 @@ import com.intellij.execution.configurations.RunProfileState
 import com.intellij.execution.configurations.RuntimeConfigurationError
 import com.intellij.execution.configurations.RuntimeConfigurationException
 import com.intellij.execution.executors.DefaultRunExecutor
+import com.intellij.execution.junit.JUnitConfiguration
 import com.intellij.execution.runners.ExecutionEnvironmentBuilder
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.actionSystem.LangDataKeys
@@ -36,6 +37,7 @@ import com.sun.istack.internal.NotNull
 import java.util.Collections
 import org.eclipse.xtend.core.idea.execution.XtendApplicationConfigurationProducer
 import org.eclipse.xtend.core.idea.execution.XtendJunitClassConfigurationProducer
+import org.eclipse.xtend.core.idea.execution.XtendJunitMethodConfigurationProducer
 import org.eclipse.xtend.idea.XtendIdeaTestCase
 import org.eclipse.xtext.psi.impl.BaseXtextFile
 
@@ -109,7 +111,7 @@ class TraceBasedConfigurationProducerTest extends XtendIdeaTestCase {
 		checkCanRun(confFromContext.configuration)
 	}
 
-	def void testApplicationConfiguration_3() {
+	def void testApplicationConfigurationNoSelection() {
 		val file = addFile("XtendMainClass.xtend" -> '''
 			class XtendMainClass {
 				def static void main(String[] args) {
@@ -121,7 +123,7 @@ class TraceBasedConfigurationProducerTest extends XtendIdeaTestCase {
 		checkCanRun(conf)
 	}
 
-	def void testJunitConfiguration_1() {
+	def void testJunitConfigurationNoSelection() {
 		addJunit4Lib(module)
 		val file = addFile("XtendJunitClass.xtend" -> '''
 			import org.junit.Assert
@@ -139,8 +141,74 @@ class TraceBasedConfigurationProducerTest extends XtendIdeaTestCase {
 			}
 		''')
 		val xtendFile = psiManager.findFile(file)
-		val conf = createConfiguration(xtendFile, XtendJunitClassConfigurationProducer)
+		val conf = createConfiguration(xtendFile, XtendJunitClassConfigurationProducer) as JUnitConfiguration
+		assertEquals("XtendJunitClass", conf.getPersistentData().MAIN_CLASS_NAME)
+		assertEquals("class", conf.getPersistentData().TEST_OBJECT)
 		checkCanRun(conf)
+	}
+
+	def void testJunitConfigurationMethod_1() {
+		addJunit4Lib(module)
+		var code = '''
+			import org.junit.Assert
+			import org.junit.Test
+			
+			class XtendJunitClass extends Assert{
+				@Test
+				def void test|Method() {
+					assertTrue(true)
+				}
+				@Test
+				def void testMethod2() {
+					assertTrue(true)
+				}
+			}
+		'''
+		val cursorIdx = code.indexOf('|')
+		code = code.replace('|', '')
+		val file = addFile("XtendJunitClass.xtend" -> code)
+		val xtendFile = psiManager.findFile(file)
+		assertTrue(xtendFile instanceof BaseXtextFile)
+
+		val sourceElement = xtendFile.viewProvider.findElementAt(cursorIdx)
+		val configuration = createConfiguration(sourceElement,
+			XtendJunitMethodConfigurationProducer) as JUnitConfiguration
+		assertEquals("XtendJunitClass", configuration.getPersistentData().MAIN_CLASS_NAME)
+		assertEquals("method", configuration.getPersistentData().TEST_OBJECT)
+		assertEquals("testMethod", configuration.getPersistentData().METHOD_NAME)
+		checkCanRun(configuration)
+	}
+
+	def void testJunitConfigurationMethod_2() {
+		addJunit4Lib(module)
+		var code = '''
+			import org.junit.Assert
+			import org.junit.Test
+			
+			class XtendJunitClass extends Assert{
+				@Test
+				def void testMethod() {
+					assertTrue(true)
+				}
+				@Test
+				def void testM|ethod2() {
+					assertTrue(true)
+				}
+			}
+		'''
+		val cursorIdx = code.indexOf('|')
+		code = code.replace('|', '')
+		val file = addFile("XtendMainClass.xtend" -> code)
+		val xtendFile = psiManager.findFile(file)
+		assertTrue(xtendFile instanceof BaseXtextFile)
+
+		val sourceElement = xtendFile.viewProvider.findElementAt(cursorIdx)
+		val configuration = createConfiguration(sourceElement,
+			XtendJunitMethodConfigurationProducer) as JUnitConfiguration
+		assertEquals("XtendJunitClass", configuration.getPersistentData().MAIN_CLASS_NAME)
+		assertEquals("method", configuration.getPersistentData().TEST_OBJECT)
+		assertEquals("testMethod2", configuration.getPersistentData().METHOD_NAME)
+		checkCanRun(configuration)
 	}
 
 	def protected addJunit4Lib(Module module) {

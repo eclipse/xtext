@@ -23,6 +23,7 @@ import com.intellij.execution.configurations.RunProfileState;
 import com.intellij.execution.configurations.RuntimeConfigurationError;
 import com.intellij.execution.configurations.RuntimeConfigurationException;
 import com.intellij.execution.executors.DefaultRunExecutor;
+import com.intellij.execution.junit.JUnitConfiguration;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.runners.ExecutionEnvironmentBuilder;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
@@ -49,6 +50,7 @@ import java.util.Set;
 import junit.framework.TestCase;
 import org.eclipse.xtend.core.idea.execution.XtendApplicationConfigurationProducer;
 import org.eclipse.xtend.core.idea.execution.XtendJunitClassConfigurationProducer;
+import org.eclipse.xtend.core.idea.execution.XtendJunitMethodConfigurationProducer;
 import org.eclipse.xtend.idea.XtendIdeaTestCase;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
@@ -184,7 +186,7 @@ public class TraceBasedConfigurationProducerTest extends XtendIdeaTestCase {
     }
   }
   
-  public void testApplicationConfiguration_3() {
+  public void testApplicationConfigurationNoSelection() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("class XtendMainClass {");
@@ -208,7 +210,7 @@ public class TraceBasedConfigurationProducerTest extends XtendIdeaTestCase {
     }
   }
   
-  public void testJunitConfiguration_1() {
+  public void testJunitConfigurationNoSelection() {
     try {
       Module _module = this.getModule();
       this.addJunit4Lib(_module);
@@ -250,8 +252,141 @@ public class TraceBasedConfigurationProducerTest extends XtendIdeaTestCase {
       final VirtualFile file = this.addFile(_mappedTo);
       PsiManager _psiManager = this.getPsiManager();
       final PsiFile xtendFile = _psiManager.findFile(file);
-      final RunConfiguration conf = this.createConfiguration(xtendFile, XtendJunitClassConfigurationProducer.class);
+      RunConfiguration _createConfiguration = this.createConfiguration(xtendFile, XtendJunitClassConfigurationProducer.class);
+      final JUnitConfiguration conf = ((JUnitConfiguration) _createConfiguration);
+      JUnitConfiguration.Data _persistentData = conf.getPersistentData();
+      TestCase.assertEquals("XtendJunitClass", _persistentData.MAIN_CLASS_NAME);
+      JUnitConfiguration.Data _persistentData_1 = conf.getPersistentData();
+      TestCase.assertEquals("class", _persistentData_1.TEST_OBJECT);
       TraceBasedConfigurationProducerTest.checkCanRun(conf);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public void testJunitConfigurationMethod_1() {
+    try {
+      Module _module = this.getModule();
+      this.addJunit4Lib(_module);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.junit.Assert");
+      _builder.newLine();
+      _builder.append("import org.junit.Test");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class XtendJunitClass extends Assert{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Test");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void test|Method() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("assertTrue(true)");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Test");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void testMethod2() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("assertTrue(true)");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      String code = _builder.toString();
+      final int cursorIdx = code.indexOf("|");
+      String _replace = code.replace("|", "");
+      code = _replace;
+      Pair<String, String> _mappedTo = Pair.<String, String>of("XtendJunitClass.xtend", code);
+      final VirtualFile file = this.addFile(_mappedTo);
+      PsiManager _psiManager = this.getPsiManager();
+      final PsiFile xtendFile = _psiManager.findFile(file);
+      TestCase.assertTrue((xtendFile instanceof BaseXtextFile));
+      FileViewProvider _viewProvider = xtendFile.getViewProvider();
+      final PsiElement sourceElement = _viewProvider.findElementAt(cursorIdx);
+      RunConfiguration _createConfiguration = this.createConfiguration(sourceElement, 
+        XtendJunitMethodConfigurationProducer.class);
+      final JUnitConfiguration configuration = ((JUnitConfiguration) _createConfiguration);
+      JUnitConfiguration.Data _persistentData = configuration.getPersistentData();
+      TestCase.assertEquals("XtendJunitClass", _persistentData.MAIN_CLASS_NAME);
+      JUnitConfiguration.Data _persistentData_1 = configuration.getPersistentData();
+      TestCase.assertEquals("method", _persistentData_1.TEST_OBJECT);
+      JUnitConfiguration.Data _persistentData_2 = configuration.getPersistentData();
+      TestCase.assertEquals("testMethod", _persistentData_2.METHOD_NAME);
+      TraceBasedConfigurationProducerTest.checkCanRun(configuration);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public void testJunitConfigurationMethod_2() {
+    try {
+      Module _module = this.getModule();
+      this.addJunit4Lib(_module);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.junit.Assert");
+      _builder.newLine();
+      _builder.append("import org.junit.Test");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class XtendJunitClass extends Assert{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Test");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void testMethod() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("assertTrue(true)");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Test");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void testM|ethod2() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("assertTrue(true)");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      String code = _builder.toString();
+      final int cursorIdx = code.indexOf("|");
+      String _replace = code.replace("|", "");
+      code = _replace;
+      Pair<String, String> _mappedTo = Pair.<String, String>of("XtendMainClass.xtend", code);
+      final VirtualFile file = this.addFile(_mappedTo);
+      PsiManager _psiManager = this.getPsiManager();
+      final PsiFile xtendFile = _psiManager.findFile(file);
+      TestCase.assertTrue((xtendFile instanceof BaseXtextFile));
+      FileViewProvider _viewProvider = xtendFile.getViewProvider();
+      final PsiElement sourceElement = _viewProvider.findElementAt(cursorIdx);
+      RunConfiguration _createConfiguration = this.createConfiguration(sourceElement, 
+        XtendJunitMethodConfigurationProducer.class);
+      final JUnitConfiguration configuration = ((JUnitConfiguration) _createConfiguration);
+      JUnitConfiguration.Data _persistentData = configuration.getPersistentData();
+      TestCase.assertEquals("XtendJunitClass", _persistentData.MAIN_CLASS_NAME);
+      JUnitConfiguration.Data _persistentData_1 = configuration.getPersistentData();
+      TestCase.assertEquals("method", _persistentData_1.TEST_OBJECT);
+      JUnitConfiguration.Data _persistentData_2 = configuration.getPersistentData();
+      TestCase.assertEquals("testMethod2", _persistentData_2.METHOD_NAME);
+      TraceBasedConfigurationProducerTest.checkCanRun(configuration);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
