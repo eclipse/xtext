@@ -64,12 +64,12 @@ public abstract class CustomTypeParameterSubstitutor extends TypeParameterSubsti
 						LightweightTypeReference result = boundTypeArgument.getTypeReference().accept(this, visiting);
 						if (boundTypeArgument.getVariance() == VarianceInfo.OUT) {
 							WildcardTypeReference wildcard = getOwner().newWildcardTypeReference();
-							wildcard.addUpperBound(result);
+							wildcard.addUpperBound(result.getInvariantBoundSubstitute());
 							result = wildcard;
 						} else if (boundTypeArgument.getVariance() == VarianceInfo.IN) {
 							WildcardTypeReference wildcard = getOwner().newWildcardTypeReference();
 							wildcard.addUpperBound(getObjectReference());
-							wildcard.setLowerBound(result);
+							wildcard.setLowerBound(result.getInvariantBoundSubstitute());
 							result = wildcard;
 						}
 						return result;

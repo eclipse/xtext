@@ -58,7 +58,7 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 		IFile fooFile = IResourcesSetupUtil.createFile(TEST_PROJECT + "/foo.refactoringtestlanguage", "foo");
 		IFile barFile = IResourcesSetupUtil
 				.createFile(TEST_PROJECT + "/bar.refactoringtestlanguage", "bar { ref foo }");
-		waitForAutoBuild();
+		waitForBuild();
 		fooEditor = openEditor(fooFile);
 		barEditor = openEditor(barFile);
 		assertTrue(refactoringPreferences.useInlineRefactoring());

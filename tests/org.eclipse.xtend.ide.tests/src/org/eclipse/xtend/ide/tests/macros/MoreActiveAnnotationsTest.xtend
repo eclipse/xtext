@@ -9,7 +9,6 @@ package org.eclipse.xtend.ide.tests.macros
 
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IFolder
-import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtext.junit4.internal.StopwatchRule
@@ -59,7 +58,7 @@ class MoreActiveAnnotationsTest {
 			}
 		''')
 		macroProject.project.addExportedPackages("annotation")
-		waitForAutoBuild
+		waitForBuild
 				
 		val userProject = JavaCore.create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
@@ -71,7 +70,7 @@ class MoreActiveAnnotationsTest {
 				UserCodeItem item
 			}
 		''')
-		waitForAutoBuild
+		waitForBuild
 		assertNoErrorsInWorkspace
 	}
 	
@@ -108,7 +107,7 @@ class MoreActiveAnnotationsTest {
 			}
 		''')
 		macroProject.project.addExportedPackages("annotation")
-		waitForAutoBuild
+		waitForBuild
 				
 		val userProject = JavaCore.create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
@@ -123,7 +122,7 @@ class MoreActiveAnnotationsTest {
 				UserCodeFooBar item
 			}
 		''')
-		waitForAutoBuild
+		waitForBuild
 		assertNoErrorsInWorkspace
 	}
 	
@@ -161,7 +160,7 @@ class MoreActiveAnnotationsTest {
 			}
 		''')
 		macroProject.project.addExportedPackages("annotation")
-		waitForAutoBuild
+		waitForBuild
 				
 		val userProject = JavaCore.create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
@@ -187,7 +186,7 @@ class MoreActiveAnnotationsTest {
 				MixedObjectVAL1 field
 			}
 		''')
-		waitForAutoBuild
+		waitForBuild
 		assertNoErrorsInWorkspace
 	}
 	
@@ -236,7 +235,7 @@ class MoreActiveAnnotationsTest {
 			}
 		''')
 		macroProject.project.addExportedPackages("annotation")
-		waitForAutoBuild
+		waitForBuild
 				
 		val userProject = JavaCore.create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
@@ -253,7 +252,7 @@ class MoreActiveAnnotationsTest {
 				ProcessedStringVAL2VAL1 field
 			}
 		''')
-		waitForAutoBuild
+		waitForBuild
 		assertNoErrorsInWorkspace
 	}
 	
@@ -309,7 +308,7 @@ class MoreActiveAnnotationsTest {
 			}
 		''')
 		macroProject.project.addExportedPackages("annotation")
-		waitForAutoBuild()
+		waitForBuild()
 				
 		val userProject = JavaCore.create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
@@ -332,7 +331,7 @@ class MoreActiveAnnotationsTest {
 		''')
 		
 		cleanBuild
-		waitForBuild(new NullProgressMonitor)
+		waitForBuild()
 		val file = userProject.project.findMember("xtend-gen/client/sub/B.java") as IFile
 		val contents = file.contentsAsString
 		assertEquals('''

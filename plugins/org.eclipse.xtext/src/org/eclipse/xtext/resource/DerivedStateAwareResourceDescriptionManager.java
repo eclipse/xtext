@@ -38,35 +38,40 @@ public class DerivedStateAwareResourceDescriptionManager extends StorageAwareRes
 	@Override
 	protected IResourceDescription internalGetResourceDescription(final Resource resource,
 			IDefaultResourceDescriptionStrategy strategy) {
-		DerivedStateAwareResource res = (DerivedStateAwareResource) resource;
-		if (!res.isLoaded()) {
-			try {
-				res.load(res.getResourceSet().getLoadOptions());
-			} catch (IOException e) {
-				throw new RuntimeIOException(e);
-			}
-		}
-		boolean isInitialized = res.fullyInitialized || res.isInitializing;
-		try {
-			if (!isInitialized) {
-				res.eSetDeliver(false);
-				res.installDerivedState(true);
-			}
-			IResourceDescription description = createResourceDescription(resource, strategy);
-			if (!isInitialized) {
-				// eager initialize
-				for (IEObjectDescription desc : description.getExportedObjects()) {
-					desc.getEObjectURI();
+		if (resource instanceof DerivedStateAwareResource) {
+			DerivedStateAwareResource res = (DerivedStateAwareResource) resource;
+			if (!res.isLoaded()) {
+				try {
+					res.load(res.getResourceSet().getLoadOptions());
+				} catch (IOException e) {
+					throw new RuntimeIOException(e);
 				}
 			}
-			return description;
-		} finally {
-			if (!isInitialized) {
-				if (log.isDebugEnabled())
-					log.debug("Discarding inferred state for "+resource.getURI());
-				res.discardDerivedState();
-				res.eSetDeliver(true);
+			boolean isInitialized = res.fullyInitialized || res.isInitializing;
+			try {
+				if (!isInitialized) {
+					res.eSetDeliver(false);
+					res.installDerivedState(true);
+				}
+				IResourceDescription description = createResourceDescription(resource, strategy);
+				if (!isInitialized) {
+					// eager initialize
+					for (IEObjectDescription desc : description.getExportedObjects()) {
+						desc.getEObjectURI();
+					}
+				}
+				return description;
+			} finally {
+				if (!isInitialized) {
+					if (log.isDebugEnabled())
+						log.debug("Discarding inferred state for "+resource.getURI());
+					res.discardDerivedState();
+					res.eSetDeliver(true);
+				}
 			}
+		} else {
+			log.error("Invalid configuration. DerivedStateAwareResourceDescriptionManager was registered, but resource was a " + resource.getClass().getName());
+			return super.internalGetResourceDescription(resource, strategy);
 		}
 	}
 	

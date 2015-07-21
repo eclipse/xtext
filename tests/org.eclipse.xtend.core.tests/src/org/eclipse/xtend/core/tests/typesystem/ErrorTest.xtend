@@ -2116,6 +2116,24 @@ class ErrorTest extends AbstractXtendTestCase {
 		''')
 	}
 	
+	@Test
+	def void testErrorModel_145() throws Exception {
+		'''
+			import com.google.common.base.Function
+			abstract class C<A> {
+				def A get();
+				def <B> C<B> map(Function<A, B> f) {
+					val thiz = this
+					return [
+						val A a = thiz.get
+						val B b = f.applya)
+						return b
+					]
+				}
+			}
+		'''.processWithoutException
+	}
+	
 	def processWithoutException(CharSequence input) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))
 		resource.load(new StringInputStream(input.toString), null)

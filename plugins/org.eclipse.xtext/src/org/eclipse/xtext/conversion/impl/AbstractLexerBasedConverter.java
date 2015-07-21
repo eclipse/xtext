@@ -13,6 +13,7 @@ import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
@@ -121,7 +122,12 @@ public abstract class AbstractLexerBasedConverter<T> extends AbstractValueConver
 	
 	@Override
 	public void setRule(AbstractRule rule) {
-		this.rule = rule;
+		if (rule instanceof TerminalRule) {
+			this.rule = rule;
+		} else {
+			throw new IllegalArgumentException("Only terminal rules are supported by lexer based converters but got " + 
+				String.valueOf(rule.getName()) + " which is an instance of " + rule.eClass().getName());
+		}
 	}
 	
 	public void setLexerProvider(Provider<Lexer> lexerProvider) {

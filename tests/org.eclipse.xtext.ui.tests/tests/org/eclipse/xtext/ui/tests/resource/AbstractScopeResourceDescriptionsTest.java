@@ -121,7 +121,7 @@ public abstract class AbstractScopeResourceDescriptionsTest {
 		String model = "stuff A refs B";
 		createFile(pathName, model);
 		createFile(pathName2, "stuff B");
-		waitForAutoBuild();
+		waitForBuild();
 
 		final URI resourceURI = URI.createPlatformResourceURI(pathName, true);
 		Resource resource = resourceSet.getResource(resourceURI, true);

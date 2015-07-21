@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.resource
 
 import java.io.IOException
@@ -10,6 +17,9 @@ import org.junit.Test
 
 import static org.junit.Assert.*
 
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ */
 abstract class AbstractResourceSetTest {
 	
 	def protected ResourceSetImpl createEmptyResourceSet()
@@ -308,6 +318,40 @@ class SynchronizedXtextResourceSetTest extends AbstractXtextResourceSetTest {
 	
 	override protected createEmptyResourceSet() {
 		new SynchronizedXtextResourceSet
+	}
+	
+	@Test
+	def void testSynchronization() {
+		val resourceSet = createEmptyResourceSet as SynchronizedXtextResourceSet
+		val Resource.Factory nullFactory = [ uri | 
+			val result = new NullResource
+			result.URI = uri
+			result
+		]
+		resourceSet.resourceFactoryRegistry.extensionToFactoryMap.put('xmi', nullFactory)
+		val threads = newArrayList()
+		(1..10).forEach [ i |
+			threads.add(new Thread [
+				val resources = newArrayList
+				for(var int j = 0; j < 5000; j++) {
+					val resource = resourceSet.createResource(URI.createURI(i + " " + j + ".xmi"))
+					assertNotNull(resource)
+					resources += resource
+					resource.URI = URI.createURI(resource.getURI + 'b')
+				}	
+			])
+		]
+		for (Thread thread : threads) {
+			thread.start();
+		}
+
+		for (Thread thread : threads) {
+			thread.join();
+		}
+		assertEquals(50000, resourceSet.resources.size)
+		assertEquals(resourceSet.resources.toSet.size, resourceSet.URIResourceMap.values.toSet.size)
+		assertEquals(resourceSet.resources.map[ #[getURI, resourceSet.URIConverter.normalize(URI) ] ].flatten.toSet, resourceSet.URIResourceMap.keySet)
+		assertEquals(resourceSet.resources.map[ getURI.toString ].toList.sort.join('\n'), resourceSet.getNormalizationMap.keySet.map[toString].toList.sort.join('\n'))
 	}
 	
 }

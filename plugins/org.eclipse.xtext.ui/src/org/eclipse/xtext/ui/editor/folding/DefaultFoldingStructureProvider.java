@@ -25,6 +25,7 @@ import org.eclipse.jface.text.source.projection.ProjectionViewer;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.IXtextModelListener;
 
 import com.google.common.base.Predicate;
@@ -102,13 +103,19 @@ public class DefaultFoldingStructureProvider implements IFoldingStructureProvide
 		handleProjectionDisabled();
 		if (isInstalled()) {
 			initialize();
-			editor.getDocument().addModelListener(this);
+			IXtextDocument document = editor.getDocument();
+			if (document != null) {
+				document.addModelListener(this);
+			}
 		}
 	}
 
 	protected void handleProjectionDisabled() {
-		if (editor.getDocument() != null) {
-			editor.getDocument().removeModelListener(this);
+		if (editor != null) {
+			IXtextDocument document = editor.getDocument();
+			if (document != null) {
+				document.removeModelListener(this);
+			}
 		}
 	}
 

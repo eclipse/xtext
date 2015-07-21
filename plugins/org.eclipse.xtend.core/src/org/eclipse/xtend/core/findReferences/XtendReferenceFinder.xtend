@@ -44,6 +44,10 @@ class XtendReferenceFinder extends ReferenceFinder {
 	Declarators declarators
 	
 	override findReferencesInDescription(TargetURIs targetURIs, IResourceDescription resourceDescription, IResourceAccess resourceAccess, Acceptor acceptor, IProgressMonitor monitor) {
+		if (resourceAccess === null) {
+			// Xtend doesn't use indexed reference descriptions thus cannot return anything without resource access
+			return;
+		}
 		val names = declarators.getDeclaratorData(targetURIs, resourceAccess).declaratorNames
 		if (monitor.canceled)
 			throw new OperationCanceledException

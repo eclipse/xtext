@@ -29,6 +29,7 @@ import org.junit.Before
 import org.junit.Test
 
 import static org.eclipse.xtext.common.types.JvmVisibility.*
+import com.google.common.base.Splitter
 
 class JavaConverterTest extends AbstractXtendTestCase {
 	@Inject Provider<JavaConverter> javaConverterProvider
@@ -473,25 +474,41 @@ class JavaConverterTest extends AbstractXtendTestCase {
 	
 	@Test def void testJavadocCase_02() throws Exception {
 
-		var String xtendCode = 
-		'''
-		/**
-		 * Copyright (c) 2015 - javadocteststring
-		 **/
-		package foo.javadoc;
-			
-		import java.util.Arrays;
-			
-		/**
-		 * Simple value
-		 * @author Dennis Huebner - Initial contribution and API
-		 */
-		public class TestJavadoc {
-		}
+		var String xtendCode = '''
+			/**
+			 * Copyright (c) 2015 - javadocteststring
+			 **/
+			package foo.javadoc;
+				
+			import java.util.Arrays;
+				
+			/**
+			 * Simple value
+			 * @author Dennis Huebner - Initial contribution and API
+			 */
+			public class TestJavadoc {
+			}
 		'''.toXtendCode
 		dump(xtendCode)
 		assertTrue('''Classfile Doc not copied''', xtendCode.contains("javadocteststring"))
+		assertEquals('''Classfile Doc copied once''', 2, Splitter.on("javadocteststring").split(xtendCode).size)
 		assertTrue('''Type Javadoc not copied''', xtendCode.contains("@author"))
+		assertEquals('''Type Javadoc not copied once''', 2, Splitter.on("@author").split(xtendCode).size)
+	}
+
+	@Test def void testJavadocCase_03() throws Exception {
+
+		var String xtendCode = j2x.bodyDeclarationToXtend("public abstract void foo() { /** orphaned javadoc */ };", null, null).
+			xtendCode
+		assertEquals('''Javadoc Parameter well formed: «xtendCode»''', 
+		'''
+		def abstract void foo() {
+			/** 
+			 * orphaned javadoc 
+			 */
+			
+		}
+		'''.toString, xtendCode)
 	}
 
 	@Test def void testCastCase() throws Exception {

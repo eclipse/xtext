@@ -19,6 +19,7 @@ import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.util.StringInputStream;
@@ -69,13 +70,13 @@ public class XtextBuilderParticipantTest extends AbstractParticipatingBuilderTes
 		IFolder folder = project.getProject().getFolder("src");
 		IFile file = folder.getFile("Foo" + F_EXT);
 		file.create(new StringInputStream("object Foo"), true, monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertTrue(0 < getInvocationCount());
 		validateContexts();
 		reset();
 		
 		file.delete(true, monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(1, getInvocationCount());
 		assertSame(BuildType.INCREMENTAL, getContext().getBuildType());
 		validateContexts();
@@ -83,7 +84,7 @@ public class XtextBuilderParticipantTest extends AbstractParticipatingBuilderTes
 		
 		project.getProject().build(IncrementalProjectBuilder.CLEAN_BUILD, monitor());
 		assertSame(BuildType.CLEAN, getContext().getBuildType());
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(1, getInvocationCount());
 		assertSame(BuildType.CLEAN, getContext().getBuildType());
 		validateContexts();
@@ -105,10 +106,10 @@ public class XtextBuilderParticipantTest extends AbstractParticipatingBuilderTes
 		createTwoReferencedProjects();
 		IFile firstFile = createFile("first/src/first"+F_EXT, "object First ");
 		createFile("second/src/second"+F_EXT, "object Second references First");
-		waitForAutoBuild();
+		waitForBuild();
 		startLogging();
 		firstFile.setContents(new StringInputStream("object Modified "), true, true, monitor());
-		waitForAutoBuild();
+		waitForBuild();
 		validateContexts();
 		assertEquals(2, getInvocationCount());
 	}
@@ -123,6 +124,10 @@ public class XtextBuilderParticipantTest extends AbstractParticipatingBuilderTes
 		IJavaProject project = createJavaProject(string);
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		return project;
+	}
+	
+	protected void waitForBuild() {
+		IResourcesSetupUtil.reallyWaitForAutoBuild();
 	}
 	
 }

@@ -164,4 +164,67 @@ class CompilerBugProtectedVisibilityTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	
+	@Test def test472662_01() {
+		'''
+			class B {
+				C c = new C()
+				
+				protected def doX(Runnable r) {
+					doX [
+						c.protectedMethod
+					]
+				}
+			}
+			class C {
+				protected def void protectedMethod() {
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class B {
+			  private C c = new C();
+			  
+			  protected Object doX(final Runnable r) {
+			    final Runnable _function = new Runnable() {
+			      public void run() {
+			        B.this.c.protectedMethod();
+			      }
+			    };
+			    return this.doX(_function);
+			  }
+			}
+		''')
+	}
+	
+	@Test def test472662_02() {
+		'''
+			class B {
+				C c = new C()
+				protected def doX(Runnable r) {
+					doX (new Runnable() {
+						override run() {
+							c.protectedMethod
+						}
+					})
+				}
+			}
+			class C {
+				protected def void protectedMethod() {
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class B {
+			  private C c = new C();
+			  
+			  protected Object doX(final Runnable r) {
+			    return this.doX(new Runnable() {
+			      public void run() {
+			        B.this.c.protectedMethod();
+			      }
+			    });
+			  }
+			}
+		''')
+	}
 }

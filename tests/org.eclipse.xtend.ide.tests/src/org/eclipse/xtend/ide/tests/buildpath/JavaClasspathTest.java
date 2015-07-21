@@ -48,7 +48,6 @@ public class JavaClasspathTest extends AbstractXtendUITestCase {
 			@Override
 			public void run() {
 				LogCapture capturedLogging = LoggingTester.captureLogging(Level.ERROR, JdtTypeMirror.class, new Runnable() {
-
 					@Override
 					public void run() {
 						try {
@@ -64,11 +63,11 @@ public class JavaClasspathTest extends AbstractXtendUITestCase {
 							assertNotNull("JRE Lib classpath entry not found.", jrePath);
 			
 							JavaProjectSetupUtil.deleteClasspathEntry(javaProject, jrePath.getPath()); // remove JRE Lib
-							IResourcesSetupUtil.waitForAutoBuild();
+							IResourcesSetupUtil.waitForBuild();
 							markerAssert.assertErrorMarker(file, IssueCodes.JDK_NOT_ON_CLASSPATH);
 			
 							JavaProjectSetupUtil.addToClasspath(javaProject, jrePath); // add JRE back
-							IResourcesSetupUtil.waitForAutoBuild();
+							IResourcesSetupUtil.waitForBuild();
 							markerAssert.assertNoErrorMarker(file);
 						} catch(Exception e) {
 							throw new RuntimeException(e);
@@ -96,12 +95,12 @@ public class JavaClasspathTest extends AbstractXtendUITestCase {
 			file.create(new StringInputStream(TEST_CLAZZ),
 					true, null);
 		IResourcesSetupUtil.cleanBuild();
-		IResourcesSetupUtil.waitForAutoBuild();
+		IResourcesSetupUtil.waitForBuild();
 		markerAssert.assertErrorMarker(file, IssueCodes.JDK_NOT_ON_CLASSPATH);
 
 		list.delete(true, null);
 		IResourcesSetupUtil.cleanBuild();
-		IResourcesSetupUtil.waitForAutoBuild();
+		IResourcesSetupUtil.waitForBuild();
 		markerAssert.assertNoErrorMarker(file);
 	}
 }

@@ -66,7 +66,7 @@ public abstract class AbstractXtendUITestCase extends Assert {
 		Assume.assumeTrue("No compatible VM was found for: " + javaVersion.getLabel(),
 				execEnv.getCompatibleVMs().length > 0);
 		WorkbenchTestHelper.makeCompliantFor(javaProject, javaVersion);
-		IResourcesSetupUtil.waitForAutoBuild();
+		IResourcesSetupUtil.reallyWaitForAutoBuild();
 	}
 
 }

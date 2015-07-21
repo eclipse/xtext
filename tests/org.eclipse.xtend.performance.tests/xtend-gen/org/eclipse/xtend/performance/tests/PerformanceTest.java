@@ -45,7 +45,7 @@ public class PerformanceTest extends AbstractXtendUITestCase {
   public static void createTestProject() {
     try {
       PerformanceTestProjectSetup.setUp();
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       PerformanceTest.assertNoErrorsInWorkspace();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -83,7 +83,7 @@ public class PerformanceTest extends AbstractXtendUITestCase {
     final IFile file = project.getFile("src/org/eclipse/xtext/xbase/formatting/XbaseFormatter2.xtend");
     StringInputStream _stringInputStream = new StringInputStream("//foo\n");
     file.appendContents(_stringInputStream, true, true, null);
-    PerformanceTestProjectSetup.waitForAutoBuild();
+    PerformanceTestProjectSetup.waitForBuild();
   }
   
   @Test

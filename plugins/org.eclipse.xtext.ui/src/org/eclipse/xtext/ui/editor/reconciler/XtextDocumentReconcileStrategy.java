@@ -18,6 +18,7 @@ import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategyExtension;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.ui.editor.DirtyStateEditorSupport;
@@ -180,7 +181,12 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 		} catch(OperationCanceledException e) {
 			throw e;
 		} catch(RuntimeException e) {
-			log.error("Error post-processing resource", e);
+			String message = "Error post-processing resource with content";
+			IParseResult parseResult = resource.getParseResult();
+			if (parseResult != null && parseResult.getRootNode() != null) {
+				message = message + ":\n" + parseResult.getRootNode().getText();
+			}
+			log.error(message, e);
 			resource.getCache().clear(resource);
 		}
 	}

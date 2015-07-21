@@ -83,6 +83,7 @@ public class XtextGeneratorIT {
 		verifier.addCliOption("-U");
 		verifier.assertFilePresent(verifier.getBasedir() + "/src-gen/org/eclipse/xcoretest/MyClass2.java");
 		verifier.assertFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/org/eclipse/xcoretest/MyClass2.class");
+		verifier.assertFileMatches(verifier.getBasedir() + "/src-gen/org/eclipse/xcoretest/MyEnum.java", "(?s).*MY_FIRST_LITERAL = -7.*MY_SECOND_LITERAL = 137.*");
 	}
 	
 	@Test

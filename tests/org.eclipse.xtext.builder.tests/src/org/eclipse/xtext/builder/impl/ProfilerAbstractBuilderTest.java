@@ -49,7 +49,7 @@ public abstract class ProfilerAbstractBuilderTest extends Assert implements IRes
 	@After
 	public void tearDown() throws Exception {
 		cleanWorkspace();
-		waitForAutoBuild();
+		waitForBuild();
 		events.clear();
 		getBuilderState().removeListener(this);
 	}
@@ -68,13 +68,13 @@ public abstract class ProfilerAbstractBuilderTest extends Assert implements IRes
 		contents+="}";
 		file.create(new StringInputStream(contents), true, monitor());
 		logAndReset("Creating files", timer);
-		waitForAutoBuild();
+		waitForBuild();
 		for (int i =0;i<5;i++) {
 			IFile f = folder.getFile("Referencing_"+i+F_EXT);
 			logAndReset("Creating library file", timer);
 			f.create(new StringInputStream("object Bar"+i+" references x.Foo1"), true, null);
 			logAndReset("Auto build", timer);
-			waitForAutoBuild();
+			waitForBuild();
 		}
 	}
 	
@@ -94,7 +94,7 @@ public abstract class ProfilerAbstractBuilderTest extends Assert implements IRes
 			file.create(new StringInputStream(contents), true, monitor());
 		}
 		logAndReset("Creating files", timer);
-		waitForAutoBuild();
+		waitForBuild();
 		logAndReset("Auto build", timer);
 	}
 	
@@ -116,7 +116,7 @@ public abstract class ProfilerAbstractBuilderTest extends Assert implements IRes
 			file.create(new StringInputStream(contents), true, monitor());
 		}
 		logAndReset("Creating files", timer);
-		waitForAutoBuild();
+		waitForBuild();
 		logAndReset("Auto build", timer);
 		IMarker[] iMarkers = folder.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE);
 		for (IMarker iMarker : iMarkers) {
@@ -141,7 +141,7 @@ public abstract class ProfilerAbstractBuilderTest extends Assert implements IRes
 			file.create(new StringInputStream(contents), true, monitor());
 		}
 		logAndReset("Creating files", timer);
-		waitForAutoBuild();
+		waitForBuild();
 		logAndReset("Auto build", timer);
 		IMarker[] iMarkers = folder.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE);
 		assertEquals(NUM_FILES-1,iMarkers.length);
@@ -163,7 +163,7 @@ public abstract class ProfilerAbstractBuilderTest extends Assert implements IRes
 			file.create(new StringInputStream(contents), true, monitor());
 		}
 		logAndReset("Creating files", timer);
-		waitForAutoBuild();
+		waitForBuild();
 		logAndReset("Auto build", timer);
 		IMarker[] iMarkers = folder.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE);
 		assertEquals(NUM_FILES-1,iMarkers.length);
@@ -185,7 +185,7 @@ public abstract class ProfilerAbstractBuilderTest extends Assert implements IRes
 			file.create(new StringInputStream(contents), true, monitor());
 		}
 		logAndReset("Creating files", timer);
-		waitForAutoBuild();
+		waitForBuild();
 		logAndReset("Auto build", timer);
 		for (int x = 0; x < 20; x++) {
 			for (int i = 0; i < NUM_FILES; i++) {
@@ -194,7 +194,7 @@ public abstract class ProfilerAbstractBuilderTest extends Assert implements IRes
 				if (i == NUM_FILES)
 					contents = "object Foo" + i;
 				file.setContents(new StringInputStream(contents), true, true, monitor());
-				waitForAutoBuild();
+				waitForBuild();
 			}
 			logAndReset("updating all " + NUM_FILES + " files", timer);
 		}

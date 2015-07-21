@@ -37,5 +37,5 @@ Require-Bundle: org.eclipse.xtext,
  org.apache.log4j;bundle-version="1.2.15";resolution:=optional,
  org.eclipse.xtext.xbase.lib;resolution:=optional,
  org.eclipse.xtend.lib;resolution:=optional,
- org.eclipse.xtext.builder.standalone
-
+ org.eclipse.xtext.builder.standalone,
+ org.eclipse.emf.codegen.ecore;bundle-version="2.10.2";resolution:=optional

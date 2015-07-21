@@ -90,16 +90,20 @@ public class XtextResourceSet extends ResourceSetImpl {
 			final Map<URI, Resource> map = getURIResourceMap();
 			if (map != null && notification.getFeatureID(Resource.class) == Resource.RESOURCE__URI && notification.getNotifier() instanceof Resource) {
 				URI oldOne = (URI) notification.getOldValue();
-				map.remove(oldOne);
-				URI oldNormalized = normalizationMap.remove(oldOne);
-				if (oldOne != null && !oldOne.equals(oldNormalized)) {
-					map.remove(oldNormalized);
-				}
 				Resource resource = (Resource) notification.getNotifier();
-				registerURI(resource);
+				updateURI(resource, oldOne, map);
 			}
 			super.notifyChanged(notification);
 		}
+	}
+	
+	void updateURI(Resource resource, URI old, final Map<URI, Resource> uriResourceMap) {
+		uriResourceMap.remove(old);
+		URI oldNormalized = normalizationMap.remove(old);
+		if (old != null && !old.equals(oldNormalized)) {
+			uriResourceMap.remove(oldNormalized);
+		}
+		registerURI(resource);
 	}
 
 	private UriChangeListener uriChangeListener = new UriChangeListener();

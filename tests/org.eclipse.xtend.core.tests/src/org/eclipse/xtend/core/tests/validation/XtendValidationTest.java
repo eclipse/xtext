@@ -950,7 +950,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				+ "class Foo extends Bar {}"
 				+ "class Bar extends Baz {}"
 				+ "class Baz extends Foo {}").getXtendTypes().iterator();
-		waitForAutoBuild();
+		waitForBuild();
 		helper.assertError(types.next(), XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
 		helper.assertError(types.next(), XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
 		helper.assertError(types.next(), XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
@@ -1269,7 +1269,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		Iterator<XtendFile> iter = files(false, 
 				 "package test class Bar extends XXX { def dispatch foo(Boolean bar) {} def static dispatch foo(Double bar) {} }"
 				,"package test class XXX { def static dispatch foo(String bar) {} def static dispatch foo(Float bar) {}}").iterator();
-		waitForAutoBuild();
+		waitForBuild();
 		helper.assertError(iter.next(), XTEND_FUNCTION, DISPATCH_FUNCTIONS_STATIC_EXPECTED, "must", "be", "static");
 	}
 	
@@ -1277,7 +1277,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		Iterator<XtendFile> iter = files(false, 
 				"package test class Bar extends XXX { def dispatch foo(Boolean bar) {} def static dispatch foo(Double bar) {} }"
 				,"package test class XXX { def dispatch foo(String bar) {} def dispatch foo(Float bar) {}}").iterator();
-		waitForAutoBuild();
+		waitForBuild();
 		helper.assertError(iter.next(), XTEND_FUNCTION, DISPATCH_FUNCTIONS_NON_STATIC_EXPECTED, "must", "not", "be", "static");
 	}
 	

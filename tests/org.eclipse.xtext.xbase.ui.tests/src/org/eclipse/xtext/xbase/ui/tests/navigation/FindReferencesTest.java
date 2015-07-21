@@ -46,7 +46,7 @@ public class FindReferencesTest extends AbstractXbaseUITestCase {
 		super.setUp();
 		project = createPluginProject("find.references.test");
 		createFile("find.references.test/src/com/acme/OtherwiseUnused.java", "package com.acme; class OtherwiseUnused { public static void m() {} }");
-		waitForAutoBuild();
+		waitForBuild();
 	}
 	
 	@Override
@@ -71,7 +71,7 @@ public class FindReferencesTest extends AbstractXbaseUITestCase {
 
 	@Test public void testFindReferencesTypeLiteral() throws Exception {
 		createFile("find.references.test/src/Test." + fileExtension, "com.acme.OtherwiseUnused::m()");
-		waitForAutoBuild();
+		waitForBuild();
 		
 		XtextResourceSet set = get(XtextResourceSet.class);
 		set.setClasspathURIContext(JavaCore.create(project));
@@ -88,7 +88,7 @@ public class FindReferencesTest extends AbstractXbaseUITestCase {
 	
 	@Test public void testFindReferencesTypeLiteralTwice() throws Exception {
 		createFile("find.references.test/src/Test." + fileExtension, "com.acme.OtherwiseUnused != com.acme.OtherwiseUnused");
-		waitForAutoBuild();
+		waitForBuild();
 		
 		XtextResourceSet set = get(XtextResourceSet.class);
 		set.setClasspathURIContext(JavaCore.create(project));

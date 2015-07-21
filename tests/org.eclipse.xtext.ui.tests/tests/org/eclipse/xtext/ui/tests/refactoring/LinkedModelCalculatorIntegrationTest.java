@@ -74,7 +74,7 @@ public class LinkedModelCalculatorIntegrationTest extends AbstractEditorTest {
 		String initialModel2 = "E { ref A } F { ref E ref A}";
 		IFile file1 = createFile(pathToFile1, initialModel1);
 		createFile(pathToFile2, initialModel2);
-		waitForAutoBuild();
+		waitForBuild();
 		XtextEditor editor = openEditor(file1);
 		EObject a = editor.getDocument().readOnly(new IUnitOfWork<EObject, XtextResource>() {
 			@Override
@@ -101,7 +101,7 @@ public class LinkedModelCalculatorIntegrationTest extends AbstractEditorTest {
 		createFile(pathToFile1, initialModel1);
 		String initialModel2 = "E { ref A } F { ref E ref A}";
 		IFile file2 = createFile(pathToFile2, initialModel2);
-		waitForAutoBuild();
+		waitForBuild();
 		XtextEditor editor = openEditor(file2);
 		EObject a = editor.getDocument().readOnly(new IUnitOfWork<EObject, XtextResource>() {
 

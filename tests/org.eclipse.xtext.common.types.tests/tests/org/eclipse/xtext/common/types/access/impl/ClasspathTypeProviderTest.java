@@ -66,6 +66,10 @@ public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
 	protected ResourceSet getResourceSet() {
 		return resourceSet;
 	}
+	
+	protected IndexedJvmTypeAccess getIndexedJvmTypeAccess() {
+		return indexedJvmTypeAccess;
+	}
 
 	@After
 	public void tearDown() throws Exception {

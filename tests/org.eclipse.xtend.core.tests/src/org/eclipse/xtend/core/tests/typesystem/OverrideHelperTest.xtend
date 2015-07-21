@@ -9,14 +9,11 @@ package org.eclipse.xtend.core.tests.typesystem
 
 import com.google.inject.Inject
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
+import org.eclipse.xtend.core.xtend.XtendFunction
+import org.eclipse.xtext.common.types.JvmOperation
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.typesystem.^override.OverrideHelper
 import org.junit.Test
-import org.eclipse.xtend.core.xtend.XtendFunction
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
-import org.eclipse.xtext.common.types.JvmOperation
-import org.eclipse.emf.common.util.URI
-import org.eclipse.xtext.util.StringInputStream
-import org.eclipse.xtend.core.xtend.XtendFile
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -94,13 +91,6 @@ class OverrideHelperTest extends AbstractXtendTestCase {
 		
 		val operation = xtendFile.xtendTypes.head.members.filter(XtendFunction).head.getPrimaryJvmElement as JvmOperation
 		assertNotNull(operation.findOverriddenOperation)
-	}
-	
-	protected def fileWithErrors(String content) {
-		val fileName = content.fileName
-		val resource = resourceSet.createResource(URI.createURI(fileName + ".xtend"))
-		resource.load(new StringInputStream(content), null)
-		resource.contents.head as XtendFile
 	}
 	
 }

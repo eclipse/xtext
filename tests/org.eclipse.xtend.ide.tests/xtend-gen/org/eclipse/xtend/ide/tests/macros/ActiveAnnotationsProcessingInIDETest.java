@@ -238,6 +238,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
     this.macroFile.delete(true, null);
     IProject _project = ActiveAnnotationsProcessingInIDETest.macroProject.getProject();
     WorkbenchTestHelper.removeExportedPackages(_project, this.exportedPackage);
+    IResourcesSetupUtil.waitForBuild();
   }
   
   private IFile macroFile;
@@ -263,13 +264,14 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
         this.exportedPackage = _replace;
         IProject _project = ActiveAnnotationsProcessingInIDETest.macroProject.getProject();
         WorkbenchTestHelper.addExportedPackages(_project, this.exportedPackage);
+        IResourcesSetupUtil.reallyWaitForAutoBuild();
       }
       String _key_3 = clientContent.getKey();
       String _value_1 = clientContent.getValue();
       String _string_1 = _value_1.toString();
       IFile _newSource_1 = this.newSource(ActiveAnnotationsProcessingInIDETest.userProject, _key_3, _string_1);
       this.clientFile = _newSource_1;
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IProject _project_1 = ActiveAnnotationsProcessingInIDETest.userProject.getProject();
       final ResourceSet resourceSet = this.resourceSetProvider.get(_project_1);
       IPath _fullPath = this.clientFile.getFullPath();

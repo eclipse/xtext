@@ -173,7 +173,8 @@ public class JavaBuilderState {
   protected TypeNames _getQualifiedTypeNames(final IPackageFragment it) {
     TypeNames _xblockexpression = null;
     {
-      final TypeNames qualifiedTypeNames = new TypeNames();
+      IJavaProject _javaProject = it.getJavaProject();
+      final TypeNames qualifiedTypeNames = new TypeNames(_javaProject);
       final SimpleLookupTable references = this.getReferences();
       boolean _equals = Objects.equal(references, null);
       if (_equals) {
@@ -196,8 +197,8 @@ public class JavaBuilderState {
         if (!_matched) {
           if (typeLocator instanceof String) {
             _matched=true;
-            IJavaProject _javaProject = it.getJavaProject();
-            IProject _project = _javaProject.getProject();
+            IJavaProject _javaProject_1 = it.getJavaProject();
+            IProject _project = _javaProject_1.getProject();
             IFile _file = _project.getFile(((String)typeLocator));
             final IPath typeLocatorPath = _file.getProjectRelativePath();
             boolean _isPrefixOf = packagePath.isPrefixOf(typeLocatorPath);
@@ -211,7 +212,8 @@ public class JavaBuilderState {
               if (_equals_2) {
                 String _lastSegment = qualifiedPath.lastSegment();
                 final String simpleTypeName = _lastSegment.toString();
-                TypeNames _qualifiedTypeNames = this.getQualifiedTypeNames(((String)typeLocator), packageName, simpleTypeName);
+                IJavaProject _javaProject_2 = it.getJavaProject();
+                TypeNames _qualifiedTypeNames = this.getQualifiedTypeNames(((String)typeLocator), packageName, simpleTypeName, _javaProject_2);
                 qualifiedTypeNames.addAll(_qualifiedTypeNames);
               }
             }
@@ -232,7 +234,8 @@ public class JavaBuilderState {
     String _typeLocator = this.getTypeLocator(it);
     String _packageName = this.getPackageName(it);
     String _simplePrimaryTypeName = this.getSimplePrimaryTypeName(it);
-    return this.getQualifiedTypeNames(_typeLocator, _packageName, _simplePrimaryTypeName);
+    IJavaProject _javaProject = it.getJavaProject();
+    return this.getQualifiedTypeNames(_typeLocator, _packageName, _simplePrimaryTypeName, _javaProject);
   }
   
   private IPackageFragmentRoot getPackageFragmentRoot(final IJavaElement it) {
@@ -252,10 +255,10 @@ public class JavaBuilderState {
     return _switchResult;
   }
   
-  private TypeNames getQualifiedTypeNames(final String typeLocator, final String packageName, final String simpleName) {
+  private TypeNames getQualifiedTypeNames(final String typeLocator, final String packageName, final String simpleName, final IJavaProject project) {
     TypeNames _xblockexpression = null;
     {
-      final TypeNames qualifiedTypeNames = new TypeNames();
+      final TypeNames qualifiedTypeNames = new TypeNames(project);
       final String primaryTypeFqn = this.getQualifedTypeName(packageName, simpleName);
       char[][] _definedTypeNamesFor = null;
       if (this.state!=null) {
@@ -264,7 +267,7 @@ public class JavaBuilderState {
       final char[][] typeNames = _definedTypeNamesFor;
       boolean _equals = Objects.equal(typeNames, null);
       if (_equals) {
-        TypeNames _typeNames = new TypeNames();
+        TypeNames _typeNames = new TypeNames(project);
         final Procedure1<TypeNames> _function = new Procedure1<TypeNames>() {
           @Override
           public void apply(final TypeNames it) {

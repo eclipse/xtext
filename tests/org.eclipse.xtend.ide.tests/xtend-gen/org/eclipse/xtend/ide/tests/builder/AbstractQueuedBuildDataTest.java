@@ -236,7 +236,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
   }
   
   public void reset() {
-    IResourcesSetupUtil.waitForAutoBuild();
+    IResourcesSetupUtil.waitForBuild();
     this.queuedBuildData.reset();
   }
   
@@ -253,7 +253,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
   public boolean tryConfirmDeltas() {
     boolean _xblockexpression = false;
     {
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IProject _project = this.testHelper.getProject();
       boolean _needRebuild = this.queuedBuildData.needRebuild(_project);
       _xblockexpression = (!_needRebuild);

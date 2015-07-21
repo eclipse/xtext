@@ -11,7 +11,6 @@ import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
@@ -86,7 +85,7 @@ public class Bug457681Test {
       this.newSource(macroProject, "annotation/MyAA.xtend", _builder.toString());
       IProject _project = macroProject.getProject();
       WorkbenchTestHelper.addExportedPackages(_project, "annotation");
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
         "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject");
       final IJavaProject userProject = JavaCore.create(_createPluginProject_1);
@@ -125,8 +124,7 @@ public class Bug457681Test {
       _builder_2.newLine();
       this.newSource(userProject, "client/sub/B.xtend", _builder_2.toString());
       IResourcesSetupUtil.cleanBuild();
-      NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      IResourcesSetupUtil.waitForBuild(_nullProgressMonitor);
+      IResourcesSetupUtil.waitForBuild();
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -182,7 +180,7 @@ public class Bug457681Test {
       this.newSource(macroProject, "annotation/MyAA.xtend", _builder.toString());
       IProject _project = macroProject.getProject();
       WorkbenchTestHelper.addExportedPackages(_project, "annotation");
-      IResourcesSetupUtil.waitForAutoBuild();
+      IResourcesSetupUtil.waitForBuild();
       IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
         "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject");
       final IJavaProject userProject = JavaCore.create(_createPluginProject_1);
@@ -219,8 +217,7 @@ public class Bug457681Test {
       _builder_2.newLine();
       this.newSource(userProject, "client/sub/B.xtend", _builder_2.toString());
       IResourcesSetupUtil.cleanBuild();
-      NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      IResourcesSetupUtil.waitForBuild(_nullProgressMonitor);
+      IResourcesSetupUtil.waitForBuild();
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

@@ -88,8 +88,7 @@ public class BoundTypeArgumentMerger {
 			type = invariantTypes.get(0);
 			variance = VarianceInfo.INVARIANT.mergeDeclaredWithActuals(invariantVariances);
 			if (variance == null && invariantVariances.contains(VarianceInfo.IN) && invariantTypes.size() > 1) {
-				TypeConformanceComputer conformanceComputer = owner.getServices().getTypeConformanceComputer();
-				type = conformanceComputer.getCommonSuperType(invariantTypes, owner);
+				type = getCommonSuperTypes(invariantTypes, owner);
 			} else if (!invariantTypesFromOut.isEmpty()) {
 				LightweightTypeReference fromOut = invariantTypesFromOut.get(0);
 				if (fromOut.isAssignableFrom(type)) {
@@ -105,10 +104,7 @@ public class BoundTypeArgumentMerger {
 				variance = VarianceInfo.IN.mergeInvariance(variance, inVariance);
 			}
 		} else if (!outTypes.isEmpty()) {
-			TypeConformanceComputer conformanceComputer = owner.getServices().getTypeConformanceComputer();
-			type = conformanceComputer.getCommonSuperType(outTypes, owner);
-			if (type == null)
-				throw new IllegalStateException("common super type may not be null");
+			type = getCommonSuperTypes(outTypes, owner);
 			variance = VarianceInfo.OUT.mergeDeclaredWithActuals(outVariances);
 			if (!inVariances.isEmpty()) {
 				LightweightTypeReference inType = getMostSpecialType(inTypes);
@@ -134,6 +130,30 @@ public class BoundTypeArgumentMerger {
 			variance = VarianceInfo.IN.mergeDeclaredWithActuals(inVariances);
 		}
 		return new LightweightMergedBoundTypeArgument(type, variance);
+	}
+
+	private LightweightTypeReference getCommonSuperTypes(List<LightweightTypeReference> types, ITypeReferenceOwner owner) {
+		// use the given type list as-is
+		TypeConformanceComputer conformanceComputer = owner.getServices().getTypeConformanceComputer();
+		LightweightTypeReference type = conformanceComputer.getCommonSuperType(types, owner);
+		if (type == null) {
+			// failed - remove void if any
+			List<LightweightTypeReference> filteredOutTypes = Lists.newArrayListWithCapacity(types.size());
+			for(LightweightTypeReference outType: types) {
+				if (!outType.isPrimitiveVoid()) {
+					filteredOutTypes.add(outType);
+				}
+			}
+			// and try again to compute the common super types
+			if (!filteredOutTypes.isEmpty() && filteredOutTypes.size() != types.size()) {
+				type = conformanceComputer.getCommonSuperType(filteredOutTypes, owner);
+			}
+			// still no success - use the first non-void type in the list or void if all are void
+			if (type == null) {
+				type = filteredOutTypes.isEmpty() ? types.get(0) : filteredOutTypes.get(0);
+			}
+		}
+		return type;
 	}
 
 	private boolean isTransitiveHintFromReslved(LightweightBoundTypeArgument boundTypeArgument, Object origin, BoundTypeArgumentSource source) {

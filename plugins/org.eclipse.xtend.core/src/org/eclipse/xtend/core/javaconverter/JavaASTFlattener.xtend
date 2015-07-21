@@ -403,7 +403,7 @@ class JavaASTFlattener extends ASTVisitor {
 		}
 		if (it.root instanceof CompilationUnit) {
 			val cu = it.root as CompilationUnit
-			cu.commentList.filter[Comment c|!c.docComment && c.notAssigned].forEach [
+			cu.unAssignedComments.forEach [
 				accept(this)
 				assignedComments.add(it)
 			]
@@ -412,6 +412,10 @@ class JavaASTFlattener extends ASTVisitor {
 		appendLineWrapToBuffer
 		appendToBuffer("}")
 		return false
+	}
+
+	def private Iterable<Comment> unAssignedComments(CompilationUnit cu) {
+		cu.commentList.filter[Comment c|!(c.docComment && c.parent != null) && c.notAssigned]
 	}
 
 	override visit(Javadoc it) {
@@ -460,8 +464,7 @@ class JavaASTFlattener extends ASTVisitor {
 					append = false
 				}
 			case Modifier.FINAL:
-				if (parent instanceof VariableDeclarationExpression ||
-					parent instanceof  VariableDeclarationStatement) {
+				if (parent instanceof VariableDeclarationExpression || parent instanceof VariableDeclarationStatement) {
 					append = false
 				}
 			default:
@@ -758,7 +761,7 @@ class JavaASTFlattener extends ASTVisitor {
 		node.statements.visitAll
 		if (node.root instanceof CompilationUnit) {
 			val cu = node.root as CompilationUnit
-			cu.commentList.filter[Comment c|!c.docComment && c.notAssigned].filter [
+			cu.unAssignedComments.filter [
 				startPosition < node.startPosition + node.length
 			].forEach [
 				accept(this)
@@ -942,7 +945,7 @@ class JavaASTFlattener extends ASTVisitor {
 	def boolean isBooleanInvolved(InfixExpression it) {
 		return leftOperand.isBooleanType || rightOperand.isBooleanType
 	}
-	
+
 	def boolean isBooleanType(Expression expression) {
 		if (expression instanceof BooleanLiteral) {
 			return true
@@ -1693,7 +1696,7 @@ class JavaASTFlattener extends ASTVisitor {
 
 			val surround = (isLastCase && statements.empty) ||
 				(!statements.empty && !(statements.get(0) instanceof Block))
-				
+
 			if (surround) {
 				appendToBuffer("{")
 				increaseIndent
@@ -1736,11 +1739,12 @@ class JavaASTFlattener extends ASTVisitor {
 		}
 		if (node.root instanceof CompilationUnit) {
 			val cu = node.root as CompilationUnit
-			cu.commentList.filter[Comment c|!c.docComment && c.notAssigned].filter[startPosition < node.startPosition].
-				forEach [
-					accept(this)
-					assignedComments.add(it)
-				]
+			cu.unAssignedComments.filter [
+				startPosition < node.startPosition
+			].forEach [
+				accept(this)
+				assignedComments.add(it)
+			]
 		}
 	}
 

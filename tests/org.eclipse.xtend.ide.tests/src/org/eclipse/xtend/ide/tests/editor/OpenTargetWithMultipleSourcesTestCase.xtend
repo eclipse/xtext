@@ -64,7 +64,7 @@ class OpenTargetWithMultipleSourcesTestCase extends AbstractXtendUITestCase {
 				
 				}
 			''')
-		waitForAutoBuild
+		waitForBuild
 	}
 
 	@After override tearDown() throws Exception {

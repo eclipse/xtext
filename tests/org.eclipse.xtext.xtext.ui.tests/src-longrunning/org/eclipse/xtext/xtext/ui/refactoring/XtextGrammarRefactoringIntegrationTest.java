@@ -147,12 +147,12 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 
 	@Test
 	public void testRefactorXtextGrammarWithoutGeneratedClassifier() throws Exception {
-		waitForAutoBuild();
+		waitForBuild();
 		final XtextEditor editor = openEditor(grammarFile);
 		doRefactoring(editor);
 		waitForReconciler(editor);
 		waitForDisplay();
-		waitForAutoBuild();
+		waitForBuild();
 		checkConsistenceOfGrammar(editor);
 	}
 
@@ -165,10 +165,10 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 		String greetingClassFragment = EcoreUtil.getURI(greetingClass).fragment();
 		String greetingRefFragment = EcoreUtil.getURI(greetingRef).fragment();
 		ecoreResource.unload();
-		waitForAutoBuild();
+		waitForBuild();
 		final XtextEditor editor = openEditor(grammarFile);
 		doRefactoring(editor);
-		waitForAutoBuild();
+		waitForBuild();
 		checkConsistenceOfGrammar(editor);
 		ecoreResource.load(null);
 		assertEquals(REFACTOREDCLASSIFIERNAME, SimpleAttributeResolver.NAME_RESOLVER.apply(ecoreResource
@@ -210,7 +210,7 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 		waitForDisplay();
 		XtextEditor editor = openEditor(grammarFile);
 		doRefactoring(editor);
-		waitForAutoBuild();
+		waitForBuild();
 		checkConsistenceOfGrammar(editor);
 		ecoreModelResource.load(null);
 		String renamedGreetingClassFragment = greetingClassFragment.replaceFirst(CLASSIFIERNAME, REFACTOREDCLASSIFIERNAME);
@@ -274,7 +274,7 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 	}
 
 	private void checkConsistenceOfGrammar(XtextEditor editor) {
-		waitForAutoBuild();
+		waitForBuild();
 		assertEquals(REFACTOREDCLASSIFIERNAME, editor.getDocument().readOnly(new IUnitOfWork<String, XtextResource>() {
 			@Override
 			public String exec(XtextResource state) throws Exception {

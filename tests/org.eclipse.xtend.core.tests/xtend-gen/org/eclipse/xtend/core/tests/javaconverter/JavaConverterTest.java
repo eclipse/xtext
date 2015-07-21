@@ -1,5 +1,6 @@
 package org.eclipse.xtend.core.tests.javaconverter;
 
+import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -884,9 +885,48 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     boolean _contains = xtendCode.contains("javadocteststring");
     Assert.assertTrue(_builder_1.toString(), _contains);
     StringConcatenation _builder_2 = new StringConcatenation();
-    _builder_2.append("Type Javadoc not copied");
+    _builder_2.append("Classfile Doc copied once");
+    Splitter _on = Splitter.on("javadocteststring");
+    Iterable<String> _split = _on.split(xtendCode);
+    int _size = IterableExtensions.size(_split);
+    Assert.assertEquals(_builder_2.toString(), 2, _size);
+    StringConcatenation _builder_3 = new StringConcatenation();
+    _builder_3.append("Type Javadoc not copied");
     boolean _contains_1 = xtendCode.contains("@author");
-    Assert.assertTrue(_builder_2.toString(), _contains_1);
+    Assert.assertTrue(_builder_3.toString(), _contains_1);
+    StringConcatenation _builder_4 = new StringConcatenation();
+    _builder_4.append("Type Javadoc not copied once");
+    Splitter _on_1 = Splitter.on("@author");
+    Iterable<String> _split_1 = _on_1.split(xtendCode);
+    int _size_1 = IterableExtensions.size(_split_1);
+    Assert.assertEquals(_builder_4.toString(), 2, _size_1);
+  }
+  
+  @Test
+  public void testJavadocCase_03() throws Exception {
+    JavaConverter.ConversionResult _bodyDeclarationToXtend = this.j2x.bodyDeclarationToXtend("public abstract void foo() { /** orphaned javadoc */ };", null, null);
+    String xtendCode = _bodyDeclarationToXtend.getXtendCode();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Javadoc Parameter well formed: ");
+    _builder.append(xtendCode, "");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("def abstract void foo() {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("/** ");
+    _builder_1.newLine();
+    _builder_1.append("\t ");
+    _builder_1.append("* orphaned javadoc ");
+    _builder_1.newLine();
+    _builder_1.append("\t ");
+    _builder_1.append("*/");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    String _string = _builder_1.toString();
+    Assert.assertEquals(_builder.toString(), _string, xtendCode);
   }
   
   @Test
