@@ -43,6 +43,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XNumberLiteral;
+import org.eclipse.xtext.xbase.XPostfixOperation;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
@@ -188,7 +189,7 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 				if (jvmOperation.isStatic())
 					highlightFeatureCall(featureCall, acceptor, STATIC_METHOD_INVOCATION);
 			}
-			if(!(featureCall instanceof XBinaryOperation || featureCall instanceof XUnaryOperation)) {
+			if(!(featureCall instanceof XBinaryOperation || featureCall instanceof XUnaryOperation || featureCall instanceof XPostfixOperation)) {
 				if(featureCall.isExtension()){
 					highlightFeatureCall(featureCall, acceptor, 
 							EXTENSION_METHOD_INVOCATION);
