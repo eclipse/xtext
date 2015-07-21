@@ -7,23 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.formatting
 
+import com.google.inject.ImplementedBy
 import com.intellij.formatting.Block
-import com.intellij.formatting.Indent
-import com.intellij.formatting.SpacingBuilder
+import com.intellij.formatting.ChildAttributes
 
 /**
  * @author kosyakov - Initial contribution and API
  */
-interface ModifiableBlock extends Block {
-	def void setIndent(Indent indent)
-	
-	def void setIncomplete(Boolean incomplete)
-
-	def SpacingBuilder getSpacingBuilder()
-
-	def void setSpacingBuilder(SpacingBuilder spacingBuilder)
-
-	def Block getParentBlock()
-
-	def void setParentBlock(Block parentBlock)
+@ImplementedBy(DefaultChildAttributesProvider)
+interface ChildAttributesProvider {
+	def ChildAttributes getChildAttributes(Block block, int newChildIndex)
 }

@@ -9,6 +9,7 @@ package org.eclipse.xtext.idea.formatting;
 
 import com.intellij.formatting.Block;
 import com.intellij.formatting.Indent;
+import com.intellij.formatting.SpacingBuilder;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -16,4 +17,14 @@ import com.intellij.formatting.Indent;
 @SuppressWarnings("all")
 public interface ModifiableBlock extends Block {
   public abstract void setIndent(final Indent indent);
+  
+  public abstract void setIncomplete(final Boolean incomplete);
+  
+  public abstract SpacingBuilder getSpacingBuilder();
+  
+  public abstract void setSpacingBuilder(final SpacingBuilder spacingBuilder);
+  
+  public abstract Block getParentBlock();
+  
+  public abstract void setParentBlock(final Block parentBlock);
 }

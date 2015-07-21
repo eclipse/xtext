@@ -16,10 +16,15 @@ import com.intellij.facet.FacetConfiguration;
 import com.intellij.facet.FacetManager;
 import com.intellij.facet.FacetType;
 import com.intellij.facet.FacetTypeRegistry;
+import com.intellij.formatting.Block;
+import com.intellij.formatting.FormattingModel;
+import com.intellij.formatting.FormattingModelBuilder;
+import com.intellij.formatting.FormattingModelDumper;
 import com.intellij.ide.highlighter.HighlighterFactory;
 import com.intellij.ide.structureView.newStructureView.StructureViewComponent;
 import com.intellij.ide.util.treeView.AbstractTreeStructure;
 import com.intellij.lang.Language;
+import com.intellij.lang.LanguageFormatting;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Document;
@@ -295,6 +300,22 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
   protected CodeStyleSettings getCodeStyleSettings() {
     Project _project = this.getProject();
     return CodeStyleSettingsManager.getSettings(_project);
+  }
+  
+  protected String dumpFormattingModel() {
+    String _xblockexpression = null;
+    {
+      PsiFile _file = this.getFile();
+      final FormattingModelBuilder formattingModelBuilder = LanguageFormatting.INSTANCE.forContext(_file);
+      PsiFile _file_1 = this.getFile();
+      CodeStyleSettings _codeStyleSettings = this.getCodeStyleSettings();
+      FormattingModel _createModel = formattingModelBuilder.createModel(_file_1, _codeStyleSettings);
+      final Block block = _createModel.getRootBlock();
+      final StringBuilder builder = new StringBuilder();
+      FormattingModelDumper.dumpFormattingModel(block, 0, builder);
+      _xblockexpression = builder.toString();
+    }
+    return _xblockexpression;
   }
   
   @Pure

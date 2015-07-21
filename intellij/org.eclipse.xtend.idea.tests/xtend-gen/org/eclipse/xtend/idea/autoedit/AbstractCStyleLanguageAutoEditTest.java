@@ -394,7 +394,7 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends AbstractAutoEdi
   public void testCurlyBracesBlock_13() {
     this.configureByText("{foo|bar}");
     this.myFixture.type("\n");
-    this.assertState("{foo\n|bar}");
+    this.assertState("{foo\n\t|bar}");
   }
   
   public void testCurlyBracesBlock_14() {
@@ -424,7 +424,7 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends AbstractAutoEdi
   public void testCurlyBracesBlock_18() {
     this.configureByText("{{foo}|{bar}}");
     this.myFixture.type("\n");
-    this.assertState("{{foo}\n|{bar}}");
+    this.assertState("{{foo}\n\t|{bar}}");
   }
   
   public void testCurlyBracesBlock_19() {
