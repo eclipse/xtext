@@ -11,6 +11,7 @@ import org.eclipse.xtend.core.idea.editorActions.XtendAutoEditBlockProvider;
 import org.eclipse.xtend.core.idea.editorActions.XtendTokenSetProvider;
 import org.eclipse.xtend.core.idea.highlighting.XtendHighlightingConfiguration;
 import org.eclipse.xtend.core.idea.highlighting.XtendSyntaxHighlighter;
+import org.eclipse.xtend.core.idea.intentions.XtendIntentionsProvider;
 import org.eclipse.xtend.core.idea.macro.IdeaFileSystemSupport;
 import org.eclipse.xtend.core.idea.macro.IdeaProcessorProvider;
 import org.eclipse.xtend.core.idea.presentation.XtendItemPresentationProvider;
@@ -36,6 +37,7 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculat
 import org.eclipse.xtext.idea.editorActions.AutoEditBlockProvider;
 import org.eclipse.xtext.idea.editorActions.TokenSetProvider;
 import org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration;
+import org.eclipse.xtext.idea.intentions.IdeaIntentionsProvider;
 import org.eclipse.xtext.idea.presentation.ItemPresentationProvider;
 import org.eclipse.xtext.idea.structureview.XtextFileAwareStructureViewBuilder;
 import org.eclipse.xtext.linking.ILinker;
@@ -133,5 +135,9 @@ public class XtendIdeaModule extends AbstractXtendIdeaModule {
 	@Override
 	public Class<? extends AbstractAntlrTokenToAttributeIdMapper> bindAbstractAntlrTokenToAttributeIdMapper() {
 		return XtendAntlrTokenToAttributeIdMapper.class;
+	}
+	
+	public Class<? extends IdeaIntentionsProvider> bindIdeaQuickFixProvider() {
+		return XtendIntentionsProvider.class;
 	}
 }
