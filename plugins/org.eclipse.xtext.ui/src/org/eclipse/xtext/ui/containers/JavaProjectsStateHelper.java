@@ -158,9 +158,31 @@ public class JavaProjectsStateHelper extends AbstractProjectsStateHelper {
 			if (storage instanceof IJarEntryResource) {
 				IPackageFragmentRoot fragmentRoot = ((IJarEntryResource) storage).getPackageFragmentRoot();
 				if (fragmentRoot != null) {
-					IJavaProject javaProject = fragmentRoot.getJavaProject();
-					if (isAccessibleXtextProject(javaProject.getProject()))
-						return fragmentRoot;
+					// IPackageFragmentRoot has some unexpected caching - it may return a different project
+					// thus we use the one that was used to record the IPackageFragmentRoot
+					IProject actualProject = storage2Project.getSecond();
+					IJavaProject javaProject = JavaCore.create(actualProject);
+					if (!javaProject.exists()) {
+						javaProject = fragmentRoot.getJavaProject();
+					}
+					if (isAccessibleXtextProject(javaProject.getProject())) {
+						// if both projects are the same - fine
+						if (javaProject.equals(fragmentRoot.getJavaProject()))
+							return fragmentRoot;
+						// otherwise re-obtain the fragment root from the real project
+						if (fragmentRoot.isExternal()) {
+							IPackageFragmentRoot actualRoot = javaProject.getPackageFragmentRoot(fragmentRoot.getPath().toString());
+							if (actualProject.exists()) {
+								return actualRoot;
+							}
+						} else {
+							IPackageFragmentRoot actualRoot = javaProject.getPackageFragmentRoot(fragmentRoot.getResource());
+							if (actualRoot.exists()) {
+								return actualRoot;
+							}
+						}
+						result = fragmentRoot;
+					}
 					if (result == null)
 						result = fragmentRoot;
 				}
