@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.idea.quickfix
+package org.eclipse.xtext.idea.intentions
 
 import com.intellij.codeInsight.intention.IntentionAction
 import com.intellij.openapi.project.Project
