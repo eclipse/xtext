@@ -9,6 +9,9 @@ package org.eclipse.xtext.generator.trace
 
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.xtext.workspace.ISourceFolder
+import org.eclipse.xtext.workspace.IProjectConfig
+import org.eclipse.xtext.workspace.IWorkspaceConfig
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -28,11 +31,20 @@ abstract class AbstractURIWrapper {
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 class SourceRelativeURI extends AbstractURIWrapper {
+	def static fromAbsolute(URI uri) {
+		if (uri.isRelative) {
+			throw new IllegalArgumentException(uri.toString)
+		}
+		return new SourceRelativeURI(uri.path.substring(1))
+	} 
 	new(URI sourceRelativeURI) {
 		super(sourceRelativeURI)
 		if (!sourceRelativeURI.isRelative) {
 			throw new IllegalArgumentException(String.valueOf(sourceRelativeURI))
 		}
+	}
+	new(String relativeURI) {
+		this(URI::createURI(relativeURI));
 	}
 	
 	override equals(Object obj) {
@@ -52,6 +64,23 @@ class AbsoluteURI extends AbstractURIWrapper {
 		if (absoluteURI.isRelative) {
 			throw new IllegalArgumentException(String.valueOf(absoluteURI))
 		}
+	}
+	new(String absoluteURI) {
+		this(URI::createURI(absoluteURI));
+	}
+	
+	def deresolve(ISourceFolder sourceFolder) {
+		return new SourceRelativeURI(URI.deresolve(sourceFolder.getPath()));
+	}
+	
+	def deresolve(IProjectConfig projectConfig) {
+		val sourceFolder = projectConfig.findSourceFolderContaining(URI);
+		return sourceFolder?.deresolve
+	}
+	
+	def deresolve(IWorkspaceConfig workspaceConfig) {
+		val project = workspaceConfig.findProjectContaining(URI);
+		return project?.deresolve
 	}
 	
 	override equals(Object obj) {

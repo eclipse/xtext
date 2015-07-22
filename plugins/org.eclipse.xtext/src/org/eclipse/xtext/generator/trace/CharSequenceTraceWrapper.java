@@ -7,14 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.trace;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.workspace.IProjectConfig;
-import org.eclipse.xtext.workspace.ISourceFolder;
 import org.eclipse.xtext.workspace.IWorkspaceConfig;
 import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
 
@@ -33,12 +30,10 @@ public class CharSequenceTraceWrapper {
 	
 	public CharSequence wrapWithTraceData(CharSequence sequence, EObject origin) {
 		ITextRegionWithLineInformation location = (ITextRegionWithLineInformation) locationInFileProvider.getSignificantTextRegion(origin);
-		URI absoluteURI = origin.eResource().getURI();
+		AbsoluteURI absoluteURI = new AbsoluteURI(origin.eResource().getURI());
 		IWorkspaceConfig workspaceConfig = workspaceConfigProvider.getWorkspaceConfig(EcoreUtil2.getResourceSet(origin));
-		IProjectConfig project = workspaceConfig.findProjectContaining(absoluteURI);
-		ISourceFolder sourceFolderContaining = project.findSourceFolderContaining(absoluteURI);
-		URI relativeURI = absoluteURI.deresolve(sourceFolderContaining.getPath());
-		return wrapWithTraceData(sequence, new SourceRelativeURI(relativeURI), location.getOffset(), location.getLength(), location.getLineNumber(), location.getEndLineNumber());
+		SourceRelativeURI sourceRelativeURI = absoluteURI.deresolve(workspaceConfig);
+		return wrapWithTraceData(sequence, sourceRelativeURI, location.getOffset(), location.getLength(), location.getLineNumber(), location.getEndLineNumber());
 	}
 	
 	public CharSequence wrapWithTraceData(CharSequence sequence, SourceRelativeURI originResourceURI, int originOffset, int originLength, int originLineNumber, int originEndLineNumber) {

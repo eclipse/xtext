@@ -14,7 +14,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
@@ -32,7 +31,6 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.workspace.IProjectConfig;
-import org.eclipse.xtext.workspace.ISourceFolder;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -369,9 +367,7 @@ public abstract class AbstractTrace implements ITrace {
 	
 	@Override
 	public SourceRelativeURI getSrcRelativeLocalURI() {
-		URI absolute = getLocalURI().getURI();
-		ISourceFolder sourceFolder = getLocalProjectConfig().findSourceFolderContaining(absolute);
-		return new SourceRelativeURI(absolute.deresolve(sourceFolder.getPath()));
+		return getLocalURI().deresolve(getLocalProjectConfig());
 	}
 
 	@Override

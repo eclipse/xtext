@@ -19,6 +19,17 @@ import org.eclipse.xtext.generator.trace.AbstractURIWrapper;
  */
 @SuppressWarnings("all")
 public class SourceRelativeURI extends AbstractURIWrapper {
+  public static SourceRelativeURI fromAbsolute(final URI uri) {
+    boolean _isRelative = uri.isRelative();
+    if (_isRelative) {
+      String _string = uri.toString();
+      throw new IllegalArgumentException(_string);
+    }
+    String _path = uri.path();
+    String _substring = _path.substring(1);
+    return new SourceRelativeURI(_substring);
+  }
+  
   public SourceRelativeURI(final URI sourceRelativeURI) {
     super(sourceRelativeURI);
     boolean _isRelative = sourceRelativeURI.isRelative();
@@ -27,6 +38,10 @@ public class SourceRelativeURI extends AbstractURIWrapper {
       String _valueOf = String.valueOf(sourceRelativeURI);
       throw new IllegalArgumentException(_valueOf);
     }
+  }
+  
+  public SourceRelativeURI(final String relativeURI) {
+    this(URI.createURI(relativeURI));
   }
   
   @Override

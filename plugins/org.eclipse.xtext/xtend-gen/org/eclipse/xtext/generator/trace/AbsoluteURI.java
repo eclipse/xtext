@@ -11,6 +11,9 @@ import com.google.common.base.Objects;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.trace.AbstractURIWrapper;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
+import org.eclipse.xtext.workspace.IProjectConfig;
+import org.eclipse.xtext.workspace.ISourceFolder;
+import org.eclipse.xtext.workspace.IWorkspaceConfig;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -24,6 +27,37 @@ public class AbsoluteURI extends AbstractURIWrapper {
       String _valueOf = String.valueOf(absoluteURI);
       throw new IllegalArgumentException(_valueOf);
     }
+  }
+  
+  public AbsoluteURI(final String absoluteURI) {
+    this(URI.createURI(absoluteURI));
+  }
+  
+  public SourceRelativeURI deresolve(final ISourceFolder sourceFolder) {
+    URI _uRI = this.getURI();
+    URI _path = sourceFolder.getPath();
+    URI _deresolve = _uRI.deresolve(_path);
+    return new SourceRelativeURI(_deresolve);
+  }
+  
+  public SourceRelativeURI deresolve(final IProjectConfig projectConfig) {
+    URI _uRI = this.getURI();
+    final ISourceFolder sourceFolder = projectConfig.findSourceFolderContaining(_uRI);
+    SourceRelativeURI _deresolve = null;
+    if (sourceFolder!=null) {
+      _deresolve=this.deresolve(sourceFolder);
+    }
+    return _deresolve;
+  }
+  
+  public SourceRelativeURI deresolve(final IWorkspaceConfig workspaceConfig) {
+    URI _uRI = this.getURI();
+    final IProjectConfig project = workspaceConfig.findProjectContaining(_uRI);
+    SourceRelativeURI _deresolve = null;
+    if (project!=null) {
+      _deresolve=this.deresolve(project);
+    }
+    return _deresolve;
   }
   
   @Override
