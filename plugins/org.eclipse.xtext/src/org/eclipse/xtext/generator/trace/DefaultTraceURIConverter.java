@@ -12,7 +12,6 @@ import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.workspace.IProjectConfig;
-import org.eclipse.xtext.workspace.ISourceFolder;
 import org.eclipse.xtext.workspace.IWorkspaceConfig;
 import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
 
@@ -31,12 +30,11 @@ public class DefaultTraceURIConverter implements ITraceURIConverter {
 
 	@Override
 	public SourceRelativeURI getURIForTrace(IProjectConfig projectConfig, AbsoluteURI absoluteURI) {
-		URI uri = absoluteURI.getURI();
-		ISourceFolder sourceFolder = projectConfig.findSourceFolderContaining(uri);
-		if (sourceFolder != null) {
-			return new SourceRelativeURI(uri.deresolve(sourceFolder.getPath()));
+		SourceRelativeURI result = absoluteURI.deresolve(projectConfig);
+		if (result == null) {
+			return getURIForTrace(absoluteURI.getURI());
 		}
-		return getUriForTrace(uri);
+		return result;
 	}
 
 	@Override
@@ -48,15 +46,15 @@ public class DefaultTraceURIConverter implements ITraceURIConverter {
 				return getURIForTrace(projectConfig, new AbsoluteURI(resource.getURI()));
 			}
 		}
-		return getUriForTrace(resource.getURI());
+		return getURIForTrace(resource.getURI());
 	}
 
-	private SourceRelativeURI getUriForTrace(URI qualifiedURI) {
+	private SourceRelativeURI getURIForTrace(URI qualifiedURI) {
 		if (qualifiedURI.isPlatform()) {
-			// create a URI that is relative to the contained projects.
+			// create a URI that is relative to the containing project or bundle
 			List<String> segments = qualifiedURI.segmentsList().subList(2, qualifiedURI.segmentCount());
 			return new SourceRelativeURI(URI.createHierarchicalURI(segments.toArray(new String[segments.size()]), null, null));
 		}
-		return new SourceRelativeURI(URI.createURI(qualifiedURI.path()));
+		return SourceRelativeURI.fromAbsolute(qualifiedURI);
 	}
 }
