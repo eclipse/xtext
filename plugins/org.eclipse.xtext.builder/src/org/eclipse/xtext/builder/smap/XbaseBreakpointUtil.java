@@ -12,7 +12,6 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJarEntryResource;
@@ -92,9 +91,9 @@ public class XbaseBreakpointUtil {
 					Object parent = jarEntryResource.getParent();
 					if (parent instanceof IPackageFragment) {
 						String path = ((IPackageFragment) parent).getElementName().replace('.', '/');
-						return new SourceRelativeURI(URI.createURI(path + "/" + storage.getName()));
+						return new SourceRelativeURI(path + "/" + storage.getName());
 					} else if (parent instanceof IPackageFragmentRoot) {
-						return new SourceRelativeURI(URI.createURI(storage.getName()));
+						return new SourceRelativeURI(storage.getName());
 					}
 				}
 			} catch (CoreException e) {
