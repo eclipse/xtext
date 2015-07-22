@@ -91,7 +91,7 @@ class OverrideProposalUtil {
 		if (type.getType() !== declaringType && isVisible(executable, visibilityHelper)) {
 			var JvmExecutable rawExecutable = executable.getDeclaration()
 			if (rawExecutable instanceof JvmOperation) {
-				var JvmOperation operation = rawExecutable as JvmOperation
+				var JvmOperation operation = rawExecutable
 				if (operation.isFinal() || operation.isStatic())
 					return false
 				else if (type.getType() instanceof JvmGenericType && (type.getType() as JvmGenericType).isInterface())
