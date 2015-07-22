@@ -33,6 +33,16 @@ class Bug440069Test extends AbstractXtendContentAssistBugTest {
 			.assertProposalAtCursor('xyzManager')
 	}
 	
+	@Test def void test_AfterDef() throws Exception {
+		newBuilder.append('''
+			class MyTest {
+				def <|> test() {
+				}
+			}
+		''')
+			.assertProposalAtCursor('String')
+	}
+	
 	@Test def void test_02() throws Exception {
 		newBuilder.append('''
 			import static extension MyExtension.*
