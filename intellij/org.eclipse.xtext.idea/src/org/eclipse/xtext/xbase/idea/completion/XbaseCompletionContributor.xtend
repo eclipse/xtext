@@ -28,8 +28,6 @@ import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.xbase.imports.RewritableImportSection
 import org.eclipse.xtext.xtype.XtypePackage
 
-import static com.intellij.patterns.PlatformPatterns.*
-
 class XbaseCompletionContributor extends XtypeCompletionContributor {
 	
 	@Inject ImportAddingInsertHandler importAddingInsertHandler 
@@ -70,7 +68,7 @@ class XbaseCompletionContributor extends XtypeCompletionContributor {
 	}
 
 	protected def void completeJavaTypes(EReference reference, boolean addImport, (JavaPsiClassReferenceElement)=>boolean filter) {
-		extend(CompletionType.BASIC, psiElement.withEReference(reference)) [
+		extend(CompletionType.BASIC, reference) [
 			completeJavaTypes($0, $2, addImport, filter)
 		]
 	}

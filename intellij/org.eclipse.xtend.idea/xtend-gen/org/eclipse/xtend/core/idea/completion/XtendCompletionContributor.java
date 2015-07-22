@@ -27,8 +27,6 @@ import com.intellij.openapi.editor.ScrollingModel;
 import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.patterns.PlatformPatterns;
-import com.intellij.patterns.PsiElementPattern;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -98,8 +96,6 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
   }
   
   protected void completeAbstractSuperMethods() {
-    PsiElementPattern.Capture<PsiElement> _psiElement = PlatformPatterns.psiElement();
-    PsiElementPattern.Capture<PsiElement> _withEReference = this._patternExtensions.withEReference(_psiElement, XtendPackage.Literals.XTEND_TYPE_DECLARATION__MEMBERS);
     final CompletionProvider<CompletionParameters> _function = new CompletionProvider<CompletionParameters>() {
       @Override
       protected void addCompletions(final CompletionParameters $0, final ProcessingContext $1, final CompletionResultSet $2) {
@@ -236,7 +232,8 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
       }
     };
     this.extend(
-      CompletionType.BASIC, _withEReference, _function);
+      CompletionType.BASIC, 
+      XtendPackage.Literals.XTEND_TYPE_DECLARATION__MEMBERS, _function);
   }
   
   private final static String START_SELECTION_MARKER = "<START_SELECTION>";

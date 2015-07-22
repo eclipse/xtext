@@ -16,8 +16,6 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
 import org.eclipse.xtext.xbase.idea.completion.XbaseCompletionContributor
 
-import static com.intellij.patterns.PlatformPatterns.*
-
 import static extension com.intellij.psi.util.PsiTreeUtil.*
 import static extension org.eclipse.xtext.EcoreUtil2.*
 
@@ -41,7 +39,7 @@ class XbaseWithAnnotationsCompletionContributor extends XbaseCompletionContribut
 	protected def completeXAnnotation_Value() {
 		extend(
 			CompletionType.BASIC,
-			psiElement.withEReference(XAnnotationsPackage.Literals.XANNOTATION__VALUE)
+			XAnnotationsPackage.Literals.XANNOTATION__VALUE
 		) [
 			val psiElement = $0.position.findFirstParent(false)[EObject != null]
 			val annotation = psiElement.EObject.getContainerOfType(XAnnotation)
