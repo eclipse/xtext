@@ -9,7 +9,7 @@ package org.eclipse.xtext.ui.generator.trace;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
-import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.generator.trace.internal.LocationInResource;
 
 /**
@@ -18,7 +18,7 @@ import org.eclipse.xtext.generator.trace.internal.LocationInResource;
  */
 public class LocationInEclipseResource extends LocationInResource implements ILocationInEclipseResource {
 
-	public LocationInEclipseResource(int offset, int length, int lineNumber, int endLineNumber, URI srcRelativeResourceURI, AbstractEclipseTrace trace) {
+	public LocationInEclipseResource(int offset, int length, int lineNumber, int endLineNumber, SourceRelativeURI srcRelativeResourceURI, AbstractEclipseTrace trace) {
 		super(offset, length, lineNumber, endLineNumber, srcRelativeResourceURI, trace);
 	}
 	

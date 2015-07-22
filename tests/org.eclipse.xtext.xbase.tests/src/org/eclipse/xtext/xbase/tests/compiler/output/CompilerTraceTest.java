@@ -13,10 +13,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.generator.trace.ITraceURIConverter;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.generator.trace.internal.AbstractTrace;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.util.TextRegion;
@@ -59,13 +61,13 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 		
 		@Override
 		/* @NonNull */
-		public URI getLocalURI() {
+		public AbsoluteURI getLocalURI() {
 			throw new UnsupportedOperationException();
 		}
 
 		@Override
 		/* @NonNull */
-		protected InputStream getContents(/* @NonNull */ URI uri, /* @NonNull */ IProjectConfig project) throws IOException {
+		protected InputStream getContents(/* @NonNull */ SourceRelativeURI uri, /* @NonNull */ IProjectConfig project) throws IOException {
 			throw new UnsupportedOperationException();
 		}
 		

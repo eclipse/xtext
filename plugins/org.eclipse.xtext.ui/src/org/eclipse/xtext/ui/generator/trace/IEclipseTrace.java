@@ -9,7 +9,7 @@ package org.eclipse.xtext.ui.generator.trace;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
-import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.util.ITextRegion;
@@ -82,16 +82,16 @@ public interface IEclipseTrace extends ITrace {
 	Iterable<? extends IEclipseTrace> getAllInverseTraces();
 
 	@Override
-	IEclipseTrace getInverseTrace(URI uri);
+	IEclipseTrace getInverseTrace(AbsoluteURI uri);
 
 	@Override
-	ILocationInEclipseResource getBestAssociatedLocation(ITextRegion localRegion, URI uri);
+	ILocationInEclipseResource getBestAssociatedLocation(ITextRegion localRegion, AbsoluteURI uri);
 
 	@Override
-	Iterable<? extends ILocationInEclipseResource> getAllAssociatedLocations(ITextRegion localRegion, URI uri);
+	Iterable<? extends ILocationInEclipseResource> getAllAssociatedLocations(ITextRegion localRegion, AbsoluteURI uri);
 
 	@Override
-	Iterable<? extends ILocationInEclipseResource> getAllAssociatedLocations(URI uri);
+	Iterable<? extends ILocationInEclipseResource> getAllAssociatedLocations(AbsoluteURI uri);
 
 
 }

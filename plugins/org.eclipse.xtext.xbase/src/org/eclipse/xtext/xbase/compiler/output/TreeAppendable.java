@@ -16,15 +16,16 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.generator.trace.LocationData;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.ILocationInFileProviderExtension;
 import org.eclipse.xtext.util.IAcceptor;
@@ -135,17 +136,17 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		this.state = state;
 		this.traceURIConverter = new ITraceURIConverter() {
 			
-			private Map<Resource, URI> uriForTraceCache = newHashMap();
+			private Map<Resource, SourceRelativeURI> uriForTraceCache = newHashMap();
 			
 			@Override
-			public URI getURIForTrace(IProjectConfig config, URI uri) {
+			public SourceRelativeURI getURIForTrace(IProjectConfig config, AbsoluteURI uri) {
 				return converter.getURIForTrace(config, uri);
 			}
 
 			@Override
-			public URI getURIForTrace(Resource resource) {
+			public SourceRelativeURI getURIForTrace(Resource resource) {
 				if (!uriForTraceCache.containsKey(resource)) {
-					URI uriForTrace = converter.getURIForTrace(resource);
+					SourceRelativeURI uriForTrace = converter.getURIForTrace(resource);
 					uriForTraceCache.put(resource, uriForTrace);
 				}
 				return uriForTraceCache.get(resource);
@@ -312,7 +313,7 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 	
 	protected static ILocationData createLocationData(ITraceURIConverter converter, EObject object, ITextRegionWithLineInformation textRegion) {
 		Resource resource = object.eResource();
-		URI uriForTrace = null;
+		SourceRelativeURI uriForTrace = null;
 		if (converter != null) {
 			uriForTrace = converter.getURIForTrace(resource);
 		}

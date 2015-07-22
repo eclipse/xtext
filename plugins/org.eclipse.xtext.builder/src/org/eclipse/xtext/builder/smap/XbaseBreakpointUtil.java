@@ -25,6 +25,7 @@ import org.eclipse.ui.IStorageEditorInput;
 import org.eclipse.xtext.common.types.ui.trace.ITraceForTypeRootProvider;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 
 import com.google.inject.Inject;
 
@@ -74,7 +75,7 @@ public class XbaseBreakpointUtil {
 	}
 
 	// this URI is only used for breakpoints on JARed files
-	public URI getBreakpointURI(IEditorInput input) {
+	public SourceRelativeURI getBreakpointURI(IEditorInput input) {
 		Object adapter = input.getAdapter(IResource.class);
 		if (adapter != null)
 			return null;
@@ -91,9 +92,9 @@ public class XbaseBreakpointUtil {
 					Object parent = jarEntryResource.getParent();
 					if (parent instanceof IPackageFragment) {
 						String path = ((IPackageFragment) parent).getElementName().replace('.', '/');
-						return URI.createURI(path + "/" + storage.getName());
+						return new SourceRelativeURI(URI.createURI(path + "/" + storage.getName()));
 					} else if (parent instanceof IPackageFragmentRoot) {
-						return URI.createURI(storage.getName());
+						return new SourceRelativeURI(URI.createURI(storage.getName()));
 					}
 				}
 			} catch (CoreException e) {

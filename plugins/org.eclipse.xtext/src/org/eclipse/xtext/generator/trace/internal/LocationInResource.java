@@ -1,6 +1,6 @@
 package org.eclipse.xtext.generator.trace.internal;
 
-import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -8,13 +8,13 @@ import org.eclipse.emf.common.util.URI;
  */
 public class LocationInResource extends AbstractLocationInResource {
 
-	private final URI srcRelativeResourceURI;
+	private final SourceRelativeURI srcRelativeResourceURI;
 	private final int offset;
 	private final int length;
 	private final int lineNumber;
 	private final int endLineNumber;
 
-	public LocationInResource(int offset, int length, int lineNumber, int endLineNumber, URI srcRelativeResourceURI, AbstractTrace trace) {
+	public LocationInResource(int offset, int length, int lineNumber, int endLineNumber, SourceRelativeURI srcRelativeResourceURI, AbstractTrace trace) {
 		super(trace);
 		this.offset = offset;
 		this.length = length;
@@ -25,7 +25,7 @@ public class LocationInResource extends AbstractLocationInResource {
 	
 	@Override
 	/* @Nullable */
-	public URI getSrcRelativeResourceURI() {
+	public SourceRelativeURI getSrcRelativeResourceURI() {
 		return srcRelativeResourceURI;
 	}
 

@@ -27,6 +27,9 @@ import org.eclipse.core.runtime.Status
 import org.eclipse.xtext.ui.editor.SchedulingRuleFactory
 import com.google.common.base.Throwables
 import org.eclipse.xtext.ui.generator.trace.StorageAwareTrace
+import org.eclipse.xtext.generator.trace.AbsoluteURI
+import org.eclipse.xtext.workspace.IProjectConfig
+import org.eclipse.xtext.generator.trace.SourceRelativeURI
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -142,9 +145,9 @@ class ResourceStorageTest extends AbstractXtendUITestCase {
 		val storageAwareTrace = new TestableStorageAwareTrace()
 		injector.injectMembers(storageAwareTrace)
 		storageAwareTrace.localStorage = file
-		var result = storageAwareTrace.resolvePath(URI.createURI('mypack/MyClass%20Foo.xtend'))
+		var result = storageAwareTrace.resolvePath(new SourceRelativeURI(URI.createURI('mypack/MyClass%20Foo.xtend')))
 		assertEquals("platform:/resource/test.project/src/mypack/MyClass%20Foo.xtend",result.toString)
-		result = storageAwareTrace.resolvePath(project, URI.createURI('src/mypack/MyClass%20Foo.xtend'))
+		result = storageAwareTrace.resolvePath(project, new SourceRelativeURI(URI.createURI('src/mypack/MyClass%20Foo.xtend')))
 		assertEquals("platform:/resource/test.project/src/mypack/MyClass%20Foo.xtend",result.toString)
 	}
 
@@ -155,11 +158,11 @@ class ResourceStorageTest extends AbstractXtendUITestCase {
 			super.setLocalStorage(derivedResource)
 		}
 
-		override public resolvePath(IProject project, URI path) {
+		override public resolvePath(IProject project, SourceRelativeURI path) {
 			super.resolvePath(project, path)
 		}
 
-		override public resolvePath(URI path) {
+		override public resolvePath(SourceRelativeURI path) {
 			super.resolvePath(path)
 		}
 

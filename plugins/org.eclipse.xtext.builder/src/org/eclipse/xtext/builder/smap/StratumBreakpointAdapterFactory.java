@@ -41,6 +41,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.debug.IStratumBreakpointSupport;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -105,7 +106,7 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 			final XtextEditor xtextEditor = (XtextEditor) part;
 			final IEditorInput editorInput = xtextEditor.getEditorInput();
 			final IResource breakpointResource = breakpointUtil.getBreakpointResource(editorInput);
-			final URI breakpointUri = breakpointUtil.getBreakpointURI(editorInput);
+			final SourceRelativeURI breakpointUri = breakpointUtil.getBreakpointURI(editorInput);
 			final int offset = ((TextSelection) selection).getOffset();
 			final int line = xtextEditor.getDocument().getLineOfOffset(offset) + 1;
 			
@@ -193,7 +194,7 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 		}
 	}
 
-	protected IJavaStratumLineBreakpoint findExistingBreakpoint(IResource res, URI uri, final int line)
+	protected IJavaStratumLineBreakpoint findExistingBreakpoint(IResource res, SourceRelativeURI uri, final int line)
 			throws CoreException {
 		IBreakpointManager manager = DebugPlugin.getDefault().getBreakpointManager();
 		IBreakpoint[] breakpoints = manager.getBreakpoints();
@@ -208,11 +209,11 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 				}
 			}
 		} else {
-			String uriStirng = uri.toString();
+			String uriString = uri.toString();
 			for (IBreakpoint breakpoint : breakpoints) {
 				IMarker marker = breakpoint.getMarker();
 				if (breakpoint instanceof IJavaStratumLineBreakpoint && marker.getResource().equals(res)
-						&& uriStirng.equals(marker.getAttribute(JarFileMarkerAnnotationModel.MARKER_URI))) {
+						&& uriString.equals(marker.getAttribute(JarFileMarkerAnnotationModel.MARKER_URI))) {
 					final IJavaStratumLineBreakpoint stratumBreakpoint = (IJavaStratumLineBreakpoint) breakpoint;
 					if (stratumBreakpoint.getLineNumber() == line) {
 						return stratumBreakpoint;

@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.xtext.builder.trace.DebugLocationData;
 import org.eclipse.xtext.builder.trace.DebugTraceRegion;
 import org.eclipse.xtext.builder.trace.TraceFactory;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer.Callback;
 
@@ -31,13 +32,13 @@ public class TraceResourceFactory extends ResourceFactoryImpl {
 	protected class Strategy implements TraceRegionSerializer.Strategy<DebugTraceRegion, DebugLocationData> {
 
 		@Override
-		public DebugLocationData createLocation(int offset, int length, int lineNumber, int endLineNumber, URI path) {
+		public DebugLocationData createLocation(int offset, int length, int lineNumber, int endLineNumber, SourceRelativeURI path) {
 			DebugLocationData result = TraceFactory.eINSTANCE.createDebugLocationData();
 			result.setOffset(offset);
 			result.setLength(length);
 			result.setLineNumber(lineNumber);
 			result.setEndLineNumber(endLineNumber);
-			result.setPath(path);
+			result.setPath(path.getURI());
 			return result;
 		}
 
@@ -64,7 +65,7 @@ public class TraceResourceFactory extends ResourceFactoryImpl {
 		@Override
 		public void writeLocation(DebugLocationData location, Callback<DebugTraceRegion, DebugLocationData> callback)
 				throws IOException {
-			callback.doWriteLocation(location.getOffset(), location.getLength(), location.getLineNumber(), location.getEndLineNumber(), location.getPath());
+			callback.doWriteLocation(location.getOffset(), location.getLength(), location.getLineNumber(), location.getEndLineNumber(), new SourceRelativeURI(location.getPath()));
 		}
 	}
 

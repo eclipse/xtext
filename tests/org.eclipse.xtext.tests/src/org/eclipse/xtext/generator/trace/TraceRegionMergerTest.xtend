@@ -358,11 +358,11 @@ class TraceRegionMergerTest {
 	static class TraceBuilder {
 		
 		val TestBuilder testBuilder
-		val URI uri
+		val SourceRelativeURI uri
 		val AbstractTraceRegion root
 
 		new(TestBuilder testBuilder, String uri) {
-			this(testBuilder, URI.createURI(uri), null)
+			this(testBuilder, new SourceRelativeURI(URI.createURI(uri)), null)
 		}
 
 		def AbstractTraceRegion region(int offset, int length, int startLine, int endLine) {

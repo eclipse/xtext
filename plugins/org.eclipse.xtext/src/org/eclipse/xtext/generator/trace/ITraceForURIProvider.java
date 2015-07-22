@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.trace;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.workspace.IProjectConfig;
 
 /**
@@ -26,7 +25,7 @@ public interface ITraceForURIProvider {
 	 * @param absoluteDerivedResource the resource whose source trace is requested. May not be <code>null</code>.
 	 * @return the trace to the source or <code>null</code>.
 	 */
-	/* @Nullable */ ITrace getTraceToSource(URI absoluteDerivedResource);
+	/* @Nullable */ ITrace getTraceToSource(AbsoluteURI absoluteDerivedResource);
 	
 	/**
 	 * Returns the trace information to the sources that were used as input for the given derived resource.
@@ -34,7 +33,7 @@ public interface ITraceForURIProvider {
 	 * @param srcRelativeDerivedResource the resource whose source trace is requested. May not be <code>null</code>.
 	 * @return the trace to the source or <code>null</code>.
 	 */
-	/* @Nullable */ ITrace getTraceToSource(URI srcRelativeDerivedResource, IProjectConfig project);
+	/* @Nullable */ ITrace getTraceToSource(SourceRelativeURI srcRelativeDerivedResource, IProjectConfig project);
 	
 	/**
 	 * Returns the trace information to the targets that were generated from the given source.
@@ -42,7 +41,7 @@ public interface ITraceForURIProvider {
 	 * @param absoluteSourceResource the resource whose target trace is requested. May not be <code>null</code>.
 	 * @return the trace to the generation targets or <code>null</code>.
 	 */
-	/* @Nullable */ ITrace getTraceToTarget(URI absoluteSourceResource);
+	/* @Nullable */ ITrace getTraceToTarget(AbsoluteURI absoluteSourceResource);
 	
 	/**
 	 * Returns the trace information to the targets that were generated from the given source.
@@ -50,27 +49,27 @@ public interface ITraceForURIProvider {
 	 * @param srcRelativeSourceResource the resource whose target trace is requested. May not be <code>null</code>.
 	 * @return the trace to the generation targets or <code>null</code>.
 	 */
-	/* @Nullable */ ITrace getTraceToTarget(URI srcRelativeSourceResource, IProjectConfig project);
+	/* @Nullable */ ITrace getTraceToTarget(SourceRelativeURI srcRelativeSourceResource, IProjectConfig project);
 
 	class NoTraces implements ITraceForURIProvider {
 
 		@Override
-		public ITrace getTraceToSource(URI absoluteDerivedResource) {
+		public ITrace getTraceToSource(AbsoluteURI absoluteDerivedResource) {
 			return null;
 		}
 
 		@Override
-		public ITrace getTraceToSource(URI srcRelativeDerivedResource, IProjectConfig project) {
+		public ITrace getTraceToSource(SourceRelativeURI srcRelativeDerivedResource, IProjectConfig project) {
 			return null;
 		}
 
 		@Override
-		public ITrace getTraceToTarget(URI absoluteSourceResource) {
+		public ITrace getTraceToTarget(AbsoluteURI absoluteSourceResource) {
 			return null;
 		}
 
 		@Override
-		public ITrace getTraceToTarget(URI srcRelativeSourceResource, IProjectConfig project) {
+		public ITrace getTraceToTarget(SourceRelativeURI srcRelativeSourceResource, IProjectConfig project) {
 			return null;
 		}
 		

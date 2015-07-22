@@ -31,7 +31,7 @@ public class TraceRegionSerializer {
 	 * @noimplement This interface is not intended to be implemented by clients.
 	 */
 	public interface Strategy<Region, Location> {
-		Location createLocation(int offset, int length, int lineNumber, int endLineNumber, URI path);
+		Location createLocation(int offset, int length, int lineNumber, int endLineNumber, SourceRelativeURI path);
 		Region createRegion(int offset, int length, int lineNumber, int endLineNumber, List<Location> associations, Region parent);
 		void writeRegion(Region region, Callback<Region, Location> callback) throws IOException;
 		void writeLocation(Location location, Callback<Region, Location> callback) throws IOException;
@@ -39,7 +39,7 @@ public class TraceRegionSerializer {
 	
 	public interface Callback<Region, Location> {
 		void doWriteRegion(int offset, int length, int lineNumber, int endLineNumber, List<Location> locations, List<Region> children) throws IOException;
-		void doWriteLocation(int offset, int length, int lineNumber, int endLineNumber, URI path) throws IOException;
+		void doWriteLocation(int offset, int length, int lineNumber, int endLineNumber, SourceRelativeURI path) throws IOException;
 	}
 	
 	/**
@@ -49,7 +49,7 @@ public class TraceRegionSerializer {
 	protected static class IdentityStrategy implements Strategy<AbstractTraceRegion, ILocationData> {
 
 		@Override
-		public ILocationData createLocation(int offset, int length, int lineNumber, int endLineNumber, URI path) {
+		public ILocationData createLocation(int offset, int length, int lineNumber, int endLineNumber, SourceRelativeURI path) {
 			return new LocationData(offset, length, lineNumber, endLineNumber, path);
 		}
 
@@ -111,14 +111,14 @@ public class TraceRegionSerializer {
 				}
 
 				@Override
-				public void doWriteLocation(int offset, int length, int lineNumber, int endLineNumber, URI path) throws IOException {
+				public void doWriteLocation(int offset, int length, int lineNumber, int endLineNumber, SourceRelativeURI path) throws IOException {
 					dataStream.writeInt(offset);
 					dataStream.writeInt(length);
 					dataStream.writeInt(lineNumber);
 					dataStream.writeInt(endLineNumber);
 					if (path != null) {
 						dataStream.writeBoolean(true);
-						dataStream.writeUTF(path.toString());
+						dataStream.writeUTF(path.getURI().toString());
 					} else {
 						dataStream.writeBoolean(false);
 					}
@@ -157,9 +157,10 @@ public class TraceRegionSerializer {
 			int locationLength = dataStream.readInt();
 			int locationLineNumber = dataStream.readInt();
 			int locationEndLineNumber = dataStream.readInt();
-			URI path = null;
-			if (dataStream.readBoolean())
-				path = URI.createURI(dataStream.readUTF());
+			SourceRelativeURI path = null;
+			if (dataStream.readBoolean()) {
+				path = new SourceRelativeURI(URI.createURI(dataStream.readUTF()));
+			}
 			if(version == VERSION_3) {
 				if (dataStream.readBoolean()) // true, if a project is specified
 					dataStream.readUTF(); // read the project name

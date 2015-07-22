@@ -24,7 +24,7 @@ public class TraceRegionSerializerTest {
 		InputStream in = getClass().getResourceAsStream("version3.trace");
 		AbstractTraceRegion traceRegion = serializer.readTraceRegionFrom(in);
 		in.close();
-		Assert.assertEquals("HelloWorld.xtend", traceRegion.getMergedAssociatedLocation().getPath().lastSegment());
+		Assert.assertEquals("HelloWorld.xtend", traceRegion.getMergedAssociatedLocation().getPath().getURI().lastSegment());
 		Assert.assertEquals(298, traceRegion.getMyLength());
 		Assert.assertEquals(1, traceRegion.getNestedRegions().size());
 		Assert.assertEquals(2, traceRegion.getNestedRegions().get(0).getNestedRegions().size());

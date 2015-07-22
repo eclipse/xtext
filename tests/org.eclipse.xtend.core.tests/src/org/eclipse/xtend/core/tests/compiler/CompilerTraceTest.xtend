@@ -16,6 +16,8 @@ import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import org.junit.Ignore
 import org.junit.Test
 import org.eclipse.xtext.generator.IFilePostProcessor
+import org.eclipse.xtext.generator.trace.SourceRelativeURI
+import org.eclipse.emf.common.util.URI
 
 /**
  * @author Sebastian Zarnekow
@@ -786,7 +788,10 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 		val javaGroup3 = javaMatcher.group(3);
 		val actualJavaExpectation = javaGroup1 + javaGroup2 + javaGroup3;
 		assertEquals(actualJavaExpectation, compiledCode.toString);
-		val trace = new SimpleTrace((compiledCode as ITraceRegionProvider).traceRegion.invertFor(file.eResource.URI, file.eResource.URI).merge)
+		val trace = new SimpleTrace((compiledCode as ITraceRegionProvider).traceRegion.invertFor(
+			new SourceRelativeURI(URI.createURI(file.eResource.URI.path)),
+			new SourceRelativeURI(URI.createURI(file.eResource.URI.path))
+		).merge)
 		val locations = trace.getAllAssociatedLocations(new TextRegion(xtendGroup1.length(), xtendGroup2.length()));
 		val expectedRegion = new TextRegion(javaGroup1.length(), javaGroup2.length())
 		assertFalse(locations.empty)

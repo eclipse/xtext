@@ -14,6 +14,8 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.generator.trace.AbsoluteURI;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.generator.trace.internal.AbstractTrace;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.workspace.EclipseProjectConfig;
@@ -47,41 +49,41 @@ public abstract class AbstractEclipseTrace extends AbstractTrace implements IEcl
 		return storage2uriMapper;
 	}
 	
-	protected URI getURIForStorage(IStorage storage) {
+	protected AbsoluteURI getURIForStorage(IStorage storage) {
 		final URI uri = storage2uriMapper.getUri(storage);
 		if (uri != null) {
-			return uri;
+			return new AbsoluteURI(uri);
 		}
-		return URI.createPlatformResourceURI(storage.getFullPath().toString(), true);
+		return new AbsoluteURI(URI.createPlatformResourceURI(storage.getFullPath().toString(), true));
 	}
 	
-	protected abstract IStorage findStorage(URI srcRelativeLocation, IProject project);
+	protected abstract IStorage findStorage(SourceRelativeURI srcRelativeLocation, IProject project);
 	
 	@Override
-	protected InputStream getContents(URI uri, IProjectConfig projectConfig) throws IOException {
+	protected InputStream getContents(SourceRelativeURI uri, IProjectConfig projectConfig) throws IOException {
 		return getContents(uri, ((EclipseProjectConfig) projectConfig).getProject());
 	}
 	
-	protected abstract InputStream getContents(URI uri, IProject project) throws IOException;
+	protected abstract InputStream getContents(SourceRelativeURI uri, IProject project) throws IOException;
 	
 
 	/* @Nullable */
 	@Override
 	public ILocationInEclipseResource getBestAssociatedLocation(ITextRegion region, IStorage associatedStorage) {
-		URI uri = getURIForStorage(associatedStorage);
+		AbsoluteURI uri = getURIForStorage(associatedStorage);
 		return getBestAssociatedLocation(region, uri);
 	}
 
 	@Override
 	public Iterable<? extends ILocationInEclipseResource> getAllAssociatedLocations(ITextRegion localRegion,
 			IStorage associatedStorage) {
-		URI uri = getURIForStorage(associatedStorage);
+		AbsoluteURI uri = getURIForStorage(associatedStorage);
 		return getAllAssociatedLocations(localRegion, uri);
 	}
 
 	@Override
 	public Iterable<? extends ILocationInEclipseResource> getAllAssociatedLocations(IStorage associatedStorage) {
-		URI uri = getURIForStorage(associatedStorage);
+		AbsoluteURI uri = getURIForStorage(associatedStorage);
 		return getAllAssociatedLocations(uri);
 	}
 
@@ -91,7 +93,7 @@ public abstract class AbstractEclipseTrace extends AbstractTrace implements IEcl
 	}
 
 	@Override
-	protected ILocationInEclipseResource createLocationInResource(ITextRegionWithLineInformation region, URI srcRelativePath) {
+	protected ILocationInEclipseResource createLocationInResource(ITextRegionWithLineInformation region, SourceRelativeURI srcRelativePath) {
 		return new LocationInEclipseResource(region.getOffset(), region.getLength(), region.getLineNumber(), region.getEndLineNumber(), srcRelativePath, this);
 	}
 
@@ -102,19 +104,19 @@ public abstract class AbstractEclipseTrace extends AbstractTrace implements IEcl
 	}
 
 	@Override
-	public ILocationInEclipseResource getBestAssociatedLocation(ITextRegion localRegion, URI uri) {
+	public ILocationInEclipseResource getBestAssociatedLocation(ITextRegion localRegion, AbsoluteURI uri) {
 		return (ILocationInEclipseResource) super.getBestAssociatedLocation(localRegion, uri);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Iterable<? extends ILocationInEclipseResource> getAllAssociatedLocations(ITextRegion localRegion, URI uri) {
+	public Iterable<? extends ILocationInEclipseResource> getAllAssociatedLocations(ITextRegion localRegion, AbsoluteURI uri) {
 		return (Iterable<? extends ILocationInEclipseResource>) super.getAllAssociatedLocations(localRegion, uri);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Iterable<? extends ILocationInEclipseResource> getAllAssociatedLocations(URI uri) {
+	public Iterable<? extends ILocationInEclipseResource> getAllAssociatedLocations(AbsoluteURI uri) {
 		return (Iterable<? extends ILocationInEclipseResource>) super.getAllAssociatedLocations(uri);
 	}
 
@@ -136,7 +138,7 @@ public abstract class AbstractEclipseTrace extends AbstractTrace implements IEcl
 	}
 
 	@Override
-	public IEclipseTrace getInverseTrace(URI uri) {
+	public IEclipseTrace getInverseTrace(AbsoluteURI uri) {
 		return (IEclipseTrace) super.getInverseTrace(uri);
 	}
 	

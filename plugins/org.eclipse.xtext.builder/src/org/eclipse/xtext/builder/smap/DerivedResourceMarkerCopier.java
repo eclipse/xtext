@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.jdt.core.IJavaModelMarker;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.generator.trace.IEclipseTrace;
@@ -140,8 +141,8 @@ public class DerivedResourceMarkerCopier {
 
 	}
 
-	private String determinateMarkerTypeByURI(URI resourceUri) {
-		IResourceServiceProvider serviceProvider = serviceProviderRegistry.getResourceServiceProvider(resourceUri);
+	private String determinateMarkerTypeByURI(SourceRelativeURI resourceURI) {
+		IResourceServiceProvider serviceProvider = serviceProviderRegistry.getResourceServiceProvider(resourceURI.getURI());
 		if (serviceProvider == null)
 			return null;
 		MarkerTypeProvider typeProvider = serviceProvider.get(MarkerTypeProvider.class);

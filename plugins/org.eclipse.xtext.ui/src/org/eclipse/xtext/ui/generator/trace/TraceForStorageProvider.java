@@ -24,10 +24,11 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
-import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.generator.trace.ITraceURIConverter;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
 import org.eclipse.xtext.generator.trace.TraceNotFoundException;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
@@ -157,27 +158,25 @@ public class TraceForStorageProvider implements ITraceForStorageProvider {
 		}
 	}
 	
+	
+
 	@Override
-	public ITrace getTraceToSource(URI absoluteDerivedResource) {
-		// TODO Auto-generated method stub
+	public IEclipseTrace getTraceToSource(AbsoluteURI absoluteDerivedResource) {
 		return null;
 	}
-	
+
 	@Override
-	public ITrace getTraceToSource(URI srcRelativeDerivedResource, IProjectConfig project) {
-		// TODO Auto-generated method stub
+	public IEclipseTrace getTraceToSource(SourceRelativeURI srcRelativeDerivedResource, IProjectConfig project) {
 		return null;
 	}
-	
+
 	@Override
-	public ITrace getTraceToTarget(URI absoluteSourceResource) {
-		// TODO Auto-generated method stub
+	public IEclipseTrace getTraceToTarget(AbsoluteURI absoluteSourceResource) {
 		return null;
 	}
-	
+
 	@Override
-	public ITrace getTraceToTarget(URI srcRelativeSourceResource, IProjectConfig project) {
-		// TODO Auto-generated method stub
+	public IEclipseTrace getTraceToTarget(SourceRelativeURI srcRelativeSourceResource, IProjectConfig project) {
 		return null;
 	}
 
@@ -215,9 +214,9 @@ public class TraceForStorageProvider implements ITraceForStorageProvider {
 					StorageAwareTrace result = traceToSourceProvider.get();
 					result.setTraceToSource(false);
 					result.setLocalStorage(sourceResource);
-					final URI sourceFileURI = storage2UriMapper.getUri(sourceResource);
+					final AbsoluteURI sourceFileURI = new AbsoluteURI(storage2UriMapper.getUri(sourceResource));
 					IProject containingProject = sourceFile.getProject();
-					IResourceServiceProvider serviceProvider = serviceRegistry.getResourceServiceProvider(sourceFileURI);
+					IResourceServiceProvider serviceProvider = serviceRegistry.getResourceServiceProvider(sourceFileURI.getURI());
 					EclipseWorkspaceConfigProvider configProvider = serviceProvider.get(EclipseWorkspaceConfigProvider.class);
 					final EclipseProjectConfig projectConfig = configProvider == null ? null : configProvider.getProjectConfig(containingProject);
 					final ITraceURIConverter traceURIConverter = serviceProvider.get(ITraceURIConverter.class);
@@ -233,10 +232,10 @@ public class TraceForStorageProvider implements ITraceForStorageProvider {
 										throw new TraceNotFoundException();
 									AbstractTraceRegion traceRegion = cachedTraces.getTraceRegion(traceFile);
 									IPath generatedFilePath = generatedFileForTraceFile.getFullPath();
-									URI generatedFileURI = URI.createPlatformResourceURI(generatedFilePath.toString(), true);
+									AbsoluteURI generatedFileURI = new AbsoluteURI(URI.createPlatformResourceURI(generatedFilePath.toString(), true));
 									if (projectConfig != null) {
-										URI sourceUriForTrace = traceURIConverter.getURIForTrace(projectConfig, sourceFileURI);
-										URI generatedUriForTrace = traceURIConverter.getURIForTrace(projectConfig, generatedFileURI);
+										SourceRelativeURI sourceUriForTrace = traceURIConverter.getURIForTrace(projectConfig, sourceFileURI);
+										SourceRelativeURI generatedUriForTrace = traceURIConverter.getURIForTrace(projectConfig, generatedFileURI);
 										if(sourceUriForTrace != null && generatedUriForTrace != null)
 											result.addAll(traceRegion.invertFor(sourceUriForTrace, generatedUriForTrace));
 									}

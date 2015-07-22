@@ -21,6 +21,8 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.internal.compiler.util.Util;
 import org.eclipse.jdt.internal.core.JavaModelManager;
+import org.eclipse.xtext.generator.trace.AbsoluteURI;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -35,21 +37,21 @@ public class ZipFileAwareTrace extends AbstractTraceWithoutStorage {
 	}
 	
 	@Override
-	protected URI resolvePath(URI path) {
+	protected AbsoluteURI resolvePath(SourceRelativeURI path) {
 		IResource member = getWorkspace().getRoot().findMember(zipFilePath);
 		if (member != null)
-			return URI.createURI("archive:platform:/resource" + member.getFullPath().toString() + "!/" + path);
-		return URI.createURI("archive:file:" + zipFilePath.toString() + "!/" + path);
+			return new AbsoluteURI(URI.createURI("archive:platform:/resource" + member.getFullPath().toString() + "!/" + path));
+		return new AbsoluteURI(URI.createURI("archive:file:" + zipFilePath.toString() + "!/" + path));
 	}
 
 	@Override
-	public InputStream getContents(URI uri, IProject project) {
+	public InputStream getContents(SourceRelativeURI uri, IProject project) {
 		// inspired by org.eclipse.jdt.internal.core.JarEntryFile.getContents()
 		JavaModelManager modelManager = JavaModelManager.getJavaModelManager();
 		ZipFile zipFile = null;
 		try {
 			zipFile = modelManager.getZipFile(zipFilePath);
-			ZipEntry zipEntry = zipFile.getEntry(uri.toString());
+			ZipEntry zipEntry = zipFile.getEntry(uri.getURI().toString());
 			if (zipEntry != null) {
 				byte[] contents = Util.getZipEntryByteContent(zipEntry, zipFile);
 				return new ByteArrayInputStream(contents);

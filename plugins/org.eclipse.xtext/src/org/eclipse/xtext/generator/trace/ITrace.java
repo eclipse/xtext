@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.trace;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.workspace.IProjectConfig;
@@ -57,39 +56,58 @@ public interface ITrace {
 	Iterable<? extends ILocationInResource> getAllAssociatedLocations();
 	
 	/**
-	 * Returns all available inverse trace information.
-	 * @return the inverse trace information. Never <code>null</code>.
-	 */
-	Iterable<? extends ITrace> getAllInverseTraces();
-
-	/**
-	 * Returns the source project. Never <code>null</code>.
-	 * @return the source project. Never <code>null</code>.
+	 * Returns the local project. Never <code>null</code>.
+	 * @return the local project. Never <code>null</code>.
 	 */
 	IProjectConfig getLocalProjectConfig();
 	
 	/**
-	 * Returns the URI of the source resource. Never <code>null</code>.
-	 * @return the URI of the source resource. Never <code>null</code>.
+	 * Returns the absolute URI of the local resource. Never <code>null</code>.
+	 * @return the absolute URI of the local resource. Never <code>null</code>.
 	 */
-	URI getLocalURI();
+	AbsoluteURI getLocalURI();
 	
 	/**
-	 * Returns the language that is associated with the source resource. Never <code>null</code>.
-	 * @return the language that is associated with the source resource. Never <code>null</code>.
+	 * Returns the relative URI of the local resource. Never <code>null</code>.
+	 * 
+	 * In other words: returns the URI as it would be relative to the class path
+	 * after the resource was packaged. If the resource resides in a source folder
+	 * of a java project, it'll return the URI relative to the source folder itself.
+	 * Otherwise relative to the project root.
+	 * 
+	 * @return the relative URI of the local resource. Never <code>null</code>.
 	 */
-	/* @Nullable */ LanguageInfo getLanguage();
+	SourceRelativeURI getSrcRelativeLocalURI();
 	
 	/**
-	 * Returns the source trace for the given storage or <code>null</code> if none.
-	 * @param uri the expected target resource. May not be <code>null</code>.
-	 * @return the source trace for the given storage or <code>null</code> if none.
+	 * Returns the language that is associated with the local resource. May be <code>null</code>.
+	 * @return the language that is associated with the local resource. May be <code>null</code>.
 	 */
-	/* @Nullable */ ITrace getInverseTrace(URI uri);
+	/* @Nullable */ LanguageInfo getLocalLanguage();
+	
+	/**
+	 * Returns all available inverse trace information.
+	 * @return the inverse trace information. Never <code>null</code>.
+	 */
+	Iterable<? extends ITrace> getAllInverseTraces();
+	
+	/**
+	 * Returns the inverse trace for the given associated resource or <code>null</code> if none.
+	 * @param absoluteURI the expected associated, absolute URI. May not be <code>null</code>.
+	 * @return the inverse trace for the given location or <code>null</code> if none.
+	 */
+	/* @Nullable */ ITrace getInverseTrace(AbsoluteURI absoluteURI);
+	
+	/**
+	 * Returns the inverse trace for the given associated resource or <code>null</code> if none.
+	 * @param srcRelativeURI the expected associated, absolute URI. May not be <code>null</code>.
+	 * @return the inverse trace for the given location or <code>null</code> if none.
+	 */
+	/* @Nullable */ ITrace getInverseTrace(SourceRelativeURI srcRelativeURI, IProjectConfig projectConfig);
 	
 	/**
 	 * Returns the best {@link ILocationInResource location} that matches the given
-	 * {@code sourceRegion} in the {@code targetResource}.
+	 * {@code localRegion} in the {@code absoluteTargetResource}.
 	 * If the region does not match a single location in the target, the following strategy applies:
 	 * <ul>
 	 * <li>
@@ -97,30 +115,30 @@ public interface ITrace {
 	 *      is returned. 
 	 * </li>
 	 * </ul> 
-	 * If no location data is available or the {@code sourceRegion} does not yield
-	 * a location in {@code targetResource}, returns <code>null</code>.
+	 * If no location data is available or the {@code localRegion} does not yield
+	 * a location in {@code absoluteTargetResource}, returns <code>null</code>.
 	 * @param localRegion the region in the current resource. May not be <code>null</code>.
-	 * @param uri the expected target resource. May not be <code>null</code>.
+	 * @param absoluteTargetResource the expected target resource. May not be <code>null</code>.
 	 * @return the best associated location or <code>null</code> if none.
 	 */
-	/* @Nullable */ ILocationInResource getBestAssociatedLocation(ITextRegion localRegion, URI uri);
+	/* @Nullable */ ILocationInResource getBestAssociatedLocation(ITextRegion localRegion, AbsoluteURI absoluteTargetResource);
 	
 	/**
-	 * Returns all individual {@link ILocationInResource locations} that match the given {@code sourceRegion}
-	 * for the expected {@code targetResource}.
+	 * Returns all individual {@link ILocationInResource locations} that match the given {@code localRegion}
+	 * for the expected {@code absoluteTargetResource}.
 	 * @param localRegion the region in the current resource. May not be <code>null</code>.
-	 * @param uri the expected target resource. May not be <code>null</code>.
+	 * @param absoluteTargetResource the expected target resource. May not be <code>null</code>.
 	 * @return all associated locations. Never <code>null</code>. 
 	 */
-	Iterable<? extends ILocationInResource> getAllAssociatedLocations(ITextRegion localRegion, URI uri);
+	Iterable<? extends ILocationInResource> getAllAssociatedLocations(ITextRegion localRegion, AbsoluteURI absoluteTargetResource);
 	
 	/**
 	 * Returns all known {@link ILocationInResource locations} that were produced from the associated resource
-	 * in the given {@code targetResource}.
-	 * @param uri the expected target resource. May not be <code>null</code>.
+	 * in the given {@code absoluteTargetResource}.
+	 * @param absoluteTargetResource the expected target resource. May not be <code>null</code>.
 	 * @return all locations. Never <code>null</code>. 
 	 */
-	Iterable<? extends ILocationInResource> getAllAssociatedLocations(URI uri);
+	Iterable<? extends ILocationInResource> getAllAssociatedLocations(AbsoluteURI absoluteTargetResource);
 	
 	/**
 	 * Returns true of the trace is not empty and can provide any locations.

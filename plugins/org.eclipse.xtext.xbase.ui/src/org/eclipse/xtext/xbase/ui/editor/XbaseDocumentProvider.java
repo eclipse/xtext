@@ -14,7 +14,6 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.internal.ui.javaeditor.IClassFileEditorInput;
 import org.eclipse.jface.text.IDocument;
@@ -23,6 +22,7 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.builder.smap.XbaseBreakpointUtil;
 import org.eclipse.xtext.common.types.ui.trace.ITraceForTypeRootProvider;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.ui.editor.model.JarFileMarkerAnnotationModel;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
@@ -113,7 +113,7 @@ public class XbaseDocumentProvider extends XtextDocumentProvider {
 	protected IAnnotationModel createAnnotationModel(Object element) throws CoreException {
 		if (element instanceof IEditorInput) {
 			IEditorInput editorInput = (IEditorInput) element;
-			URI breakpointURI = breakpointUtil.getBreakpointURI(editorInput);
+			SourceRelativeURI breakpointURI = breakpointUtil.getBreakpointURI(editorInput);
 			if (breakpointURI != null) { // we only get a URI here if the EditorInput points into a JAR
 				IResource breakpointResource = breakpointUtil.getBreakpointResource(editorInput);
 				return new JarFileMarkerAnnotationModel(breakpointResource, breakpointURI);

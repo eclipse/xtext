@@ -16,19 +16,23 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.LanguageInfo;
+import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
+import org.eclipse.xtext.generator.trace.AbstractURIWrapper;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.generator.trace.ITraceForURIProvider;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.generator.trace.ITraceURIConverter;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.generator.trace.TraceNotFoundException;
 import org.eclipse.xtext.generator.trace.TraceRegion;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.workspace.IProjectConfig;
+import org.eclipse.xtext.workspace.ISourceFolder;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -45,10 +49,10 @@ public abstract class AbstractTrace implements ITrace {
 
 	protected class TraceRegionsByURI implements Iterable<AbstractTraceRegion> {
 		private final Iterable<? extends AbstractTraceRegion> allTraceRegions;
-		private final URI uri;
+		private final AbsoluteURI uri;
 		private final IProjectConfig projectConfig;
 
-		public TraceRegionsByURI(Iterable<? extends AbstractTraceRegion> allTraceRegions, URI uri, IProjectConfig projectConfig) {
+		public TraceRegionsByURI(Iterable<? extends AbstractTraceRegion> allTraceRegions, AbsoluteURI uri, IProjectConfig projectConfig) {
 			this.allTraceRegions = allTraceRegions;
 			this.uri = uri;
 			this.projectConfig = projectConfig;
@@ -83,6 +87,9 @@ public abstract class AbstractTrace implements ITrace {
 	
 	@Inject
 	private ITraceForURIProvider traceProvider;
+	
+	@Inject
+	private ITraceURIConverter traceURIConverter;
 	
 	private AbstractTraceRegion rootTraceRegion;
 	
@@ -162,8 +169,8 @@ public abstract class AbstractTrace implements ITrace {
 		if (right == null || left.equals(right)) {
 			return getMergedLocationInResource(left);
 		} else {
-			URI leftToPath = left.getAssociatedPath();
-			URI rightToPath = right.getAssociatedPath();
+			SourceRelativeURI leftToPath = left.getAssociatedPath();
+			SourceRelativeURI rightToPath = right.getAssociatedPath();
 			if (leftToPath != null && leftToPath.equals(rightToPath) || leftToPath == rightToPath) {
 				ITextRegionWithLineInformation leftRegion = left.getMyRegion();
 				ITextRegionWithLineInformation rightRegion = right.getMyRegion();
@@ -189,7 +196,7 @@ public abstract class AbstractTrace implements ITrace {
 								return getMergedLocationInResource(leftChild);
 							}
 						}
-						URI path = leftToPath;
+						SourceRelativeURI path = leftToPath;
 						if (path == null) {
 							path = leftChild.getAssociatedPath();
 						}
@@ -205,7 +212,7 @@ public abstract class AbstractTrace implements ITrace {
 		return null;
 	}
 
-	protected ILocationInResource createLocationInResource(ITextRegionWithLineInformation region, URI srcRelativePath) {
+	protected ILocationInResource createLocationInResource(ITextRegionWithLineInformation region, SourceRelativeURI srcRelativePath) {
 		return new LocationInResource(region.getOffset(), region.getLength(), region.getLineNumber(), region.getEndLineNumber(), srcRelativePath, this);
 	}
 
@@ -224,7 +231,7 @@ public abstract class AbstractTrace implements ITrace {
 	 */
 	/* @Nullable */
 	protected ILocationInResource createLocationInResourceFor(ILocationData location, AbstractTraceRegion traceRegion) {
-		URI path = location.getPath();
+		SourceRelativeURI path = location.getPath();
 		if (path == null)
 			path = traceRegion.getAssociatedPath();
 		if (path == null)
@@ -232,8 +239,8 @@ public abstract class AbstractTrace implements ITrace {
 		return createLocationInResource(location, path);
 	}
 	
-	protected URI resolvePath(URI path) {
-		return path;
+	protected AbsoluteURI resolvePath(SourceRelativeURI path) {
+		return new AbsoluteURI(path.getURI().resolve(getLocalProjectConfig().getPath()));
 	}
 	
 	/* @Nullable */
@@ -311,7 +318,7 @@ public abstract class AbstractTrace implements ITrace {
 	}
 	
 	@Override
-	public ILocationInResource getBestAssociatedLocation(ITextRegion localRegion, URI uri) {
+	public ILocationInResource getBestAssociatedLocation(ITextRegion localRegion, AbsoluteURI uri) {
 		IProjectConfig projectConfig = getLocalProjectConfig();
 		AbstractTraceRegion left = findTraceRegionAtLeftOffset(localRegion.getOffset());
 		left = findParentByURI(left, uri, projectConfig);
@@ -320,17 +327,17 @@ public abstract class AbstractTrace implements ITrace {
 		return mergeRegions(left, right);
 	}
 	
-	protected boolean isAssociatedWith(AbstractTraceRegion region, URI uri, IProjectConfig project) {
+	protected boolean isAssociatedWith(AbstractTraceRegion region, AbsoluteURI uri, IProjectConfig project) {
 		ITraceURIConverter traceURIConverter = getService(uri, ITraceURIConverter.class);
 		if (traceURIConverter == null) {
 			traceURIConverter = getService(getLocalURI(), ITraceURIConverter.class);
 		}
-		URI convertedUri = traceURIConverter.getURIForTrace(project, uri);
+		SourceRelativeURI convertedUri = traceURIConverter.getURIForTrace(project, uri);
 		return convertedUri.equals(region.getAssociatedPath());
 	}
 	
 	/* @Nullable */
-	protected AbstractTraceRegion findParentByURI(/* @Nullable */ AbstractTraceRegion region, URI uri, IProjectConfig project) {
+	protected AbstractTraceRegion findParentByURI(/* @Nullable */ AbstractTraceRegion region, AbsoluteURI uri, IProjectConfig project) {
 		while(region != null && !isAssociatedWith(region, uri, project)) {
 			region = region.getParent();
 		}
@@ -338,14 +345,14 @@ public abstract class AbstractTrace implements ITrace {
 	}
 	
 	@Override
-	public Iterable<? extends ILocationInResource> getAllAssociatedLocations(ITextRegion localRegion, URI uri) {
+	public Iterable<? extends ILocationInResource> getAllAssociatedLocations(ITextRegion localRegion, AbsoluteURI uri) {
 		final Iterable<AbstractTraceRegion> allTraceRegions = getAllTraceRegions(localRegion);
 		Iterable<AbstractTraceRegion> filteredByURI = new TraceRegionsByURI(allTraceRegions, uri, getLocalProjectConfig());
 		return toLocations(filteredByURI);
 	}
 	
 	@Override
-	public Iterable<? extends ILocationInResource> getAllAssociatedLocations(URI uri) {
+	public Iterable<? extends ILocationInResource> getAllAssociatedLocations(AbsoluteURI uri) {
 		final Iterable<AbstractTraceRegion> allTraceRegions = getAllTraceRegions();
 		Iterable<AbstractTraceRegion> filteredByURI = new TraceRegionsByURI(allTraceRegions, uri, getLocalProjectConfig());
 		return toLocations(filteredByURI);
@@ -353,12 +360,19 @@ public abstract class AbstractTrace implements ITrace {
 	
 	/* @Nullable */
 	@Override
-	public LanguageInfo getLanguage() {
+	public LanguageInfo getLocalLanguage() {
 		return findLanguage(getLocalURI());
 	}
 	
 	@Override
-	public abstract URI getLocalURI();
+	public abstract AbsoluteURI getLocalURI();
+	
+	@Override
+	public SourceRelativeURI getSrcRelativeLocalURI() {
+		URI absolute = getLocalURI().getURI();
+		ISourceFolder sourceFolder = getLocalProjectConfig().findSourceFolderContaining(absolute);
+		return new SourceRelativeURI(absolute.deresolve(sourceFolder.getPath()));
+	}
 
 	@Override
 	public abstract IProjectConfig getLocalProjectConfig();
@@ -471,23 +485,25 @@ public abstract class AbstractTrace implements ITrace {
 		};
 	}
 	
-	protected static class TraceAccess implements Function<URI, ITrace> {
+	protected static class TraceAccess implements Function<SourceRelativeURI, ITrace> {
 
-		private boolean traceToSource;
-		private ITraceForURIProvider traceProvider;
+		private final boolean traceToSource;
+		private final ITraceForURIProvider traceProvider;
+		private final IProjectConfig project;
 
-		public TraceAccess(boolean traceToSource, ITraceForURIProvider traceProvider) {
+		public TraceAccess(boolean traceToSource, IProjectConfig project, ITraceForURIProvider traceProvider) {
 			this.traceToSource = traceToSource;
+			this.project = project;
 			this.traceProvider = traceProvider;
 
 		}
 
 		@Override
-		public ITrace apply(URI absoluteURI) {
+		public ITrace apply(SourceRelativeURI relativeURI) {
 			if (traceToSource) {
-				return traceProvider.getTraceToSource(absoluteURI);
+				return traceProvider.getTraceToSource(relativeURI, project);
 			} else {
-				return traceProvider.getTraceToTarget(absoluteURI);
+				return traceProvider.getTraceToTarget(relativeURI, project);
 			}
 		}
 
@@ -495,17 +511,23 @@ public abstract class AbstractTrace implements ITrace {
 	
 	@Override
 	public Iterable<? extends ITrace> getAllInverseTraces() {
-		Map<URI, List<AbstractTraceRegion>> inverted = getRootTraceRegion().invertAll(getLocalURI());
-		return Iterables.transform(inverted.keySet(), new TraceAccess(isTraceToTarget(), traceProvider));
+		Map<SourceRelativeURI, List<AbstractTraceRegion>> inverted = getRootTraceRegion().invertAll(getSrcRelativeLocalURI());
+		return Iterables.transform(inverted.keySet(), new TraceAccess(isTraceToTarget(), getLocalProjectConfig(), traceProvider));
 	}
 	
 	@Override
-	public ITrace getInverseTrace(URI uri) {
-		List<AbstractTraceRegion> result = getRootTraceRegion().invertFor(uri, getLocalURI());
+	public ITrace getInverseTrace(AbsoluteURI uri) {
+		SourceRelativeURI uriForTrace = traceURIConverter.getURIForTrace(getLocalProjectConfig(), uri);
+		return getInverseTrace(uriForTrace, getLocalProjectConfig());
+	}
+	
+	@Override
+	public ITrace getInverseTrace(SourceRelativeURI srcRelativeURI, IProjectConfig projectConfig) {
+		List<AbstractTraceRegion> result = getRootTraceRegion().invertFor(srcRelativeURI, getSrcRelativeLocalURI());
 		if (result.isEmpty()) {
 			return null;
 		}
-		return new TraceAccess(isTraceToTarget(), traceProvider).apply(uri);
+		return new TraceAccess(isTraceToTarget(), projectConfig, traceProvider).apply(srcRelativeURI);
 	}
 
 //	/* @Nullable */
@@ -526,7 +548,7 @@ public abstract class AbstractTrace implements ITrace {
 
 //	protected abstract IStorage findStorage(URI uri, IProject project);
 	
-	protected abstract InputStream getContents(URI uri, IProjectConfig projectConfig) throws IOException;
+	protected abstract InputStream getContents(SourceRelativeURI uri, IProjectConfig projectConfig) throws IOException;
 	
 //	protected IProject findProject(String projectName) {
 //		IProject result = workspace.getRoot().getProject(projectName);
@@ -538,15 +560,15 @@ public abstract class AbstractTrace implements ITrace {
 //	}
 	
 	/* @Nullable */
-	protected LanguageInfo findLanguage(/* @Nullable */ URI uri) {
+	protected LanguageInfo findLanguage(/* @Nullable */ AbstractURIWrapper uri) {
 		return getService(uri, LanguageInfo.class);
 	}
 	
 	/* @Nullable */
-	protected <T> T getService(/* @Nullable */ URI uri, Class<T> type) {
+	protected <T> T getService(/* @Nullable */ AbstractURIWrapper uri, Class<T> type) {
 		if (uri == null)
 			return null;
-		IResourceServiceProvider serviceProvider = resourceServiceRegistry.getResourceServiceProvider(uri);
+		IResourceServiceProvider serviceProvider = resourceServiceRegistry.getResourceServiceProvider(uri.getURI());
 		if (serviceProvider != null) {
 			return serviceProvider.get(type);
 		}

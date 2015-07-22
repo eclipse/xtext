@@ -15,6 +15,7 @@ import java.io.InputStream;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.trace.CharSequenceTraceWrapper;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.eclipse.xtext.parser.IEncodingProvider;
@@ -136,7 +137,7 @@ public class JavaIoFileSystemAccessTest extends Assert {
 					new TraceFileNameProvider(), new TraceRegionSerializer());
 
 			File tmpDir = configureFileSystemAccess(fileSystemAccess);
-			URI uri = URI.createURI("platform:/resource/foo/bar");
+			SourceRelativeURI uri = new SourceRelativeURI(URI.createURI("foo/bar"));
 			CharSequenceTraceWrapper wrapper = new CharSequenceTraceWrapper();
 			fileSystemAccess.generateFile("tmp/X", wrapper.wrapWithTraceData("XX", uri, 0, 10, 0, 1));
 

@@ -18,6 +18,7 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.generator.trace.TraceRegion;
 import org.eclipse.xtext.generator.trace.TraceRegionMerger;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -74,12 +75,12 @@ public class TraceRegionMergerTest {
   public static class TraceBuilder {
     private final TraceRegionMergerTest.TestBuilder testBuilder;
     
-    private final URI uri;
+    private final SourceRelativeURI uri;
     
     private final AbstractTraceRegion root;
     
     public TraceBuilder(final TraceRegionMergerTest.TestBuilder testBuilder, final String uri) {
-      this(testBuilder, URI.createURI(uri), null);
+      this(testBuilder, new SourceRelativeURI(URI.createURI(uri)), null);
     }
     
     public AbstractTraceRegion region(final int offset, final int length, final int startLine, final int endLine) {
@@ -100,7 +101,7 @@ public class TraceRegionMergerTest {
       return _xblockexpression;
     }
     
-    public TraceBuilder(final TraceRegionMergerTest.TestBuilder testBuilder, final URI uri, final AbstractTraceRegion root) {
+    public TraceBuilder(final TraceRegionMergerTest.TestBuilder testBuilder, final SourceRelativeURI uri, final AbstractTraceRegion root) {
       super();
       this.testBuilder = testBuilder;
       this.uri = uri;
@@ -143,14 +144,14 @@ public class TraceRegionMergerTest {
         int _myEndLineNumber = head.getMyEndLineNumber();
         Assert.assertEquals(_string_3, endLine, _myEndLineNumber);
         List<ILocationData> _associatedLocations = head.getAssociatedLocations();
-        final Function1<ILocationData, URI> _function = new Function1<ILocationData, URI>() {
+        final Function1<ILocationData, SourceRelativeURI> _function = new Function1<ILocationData, SourceRelativeURI>() {
           @Override
-          public URI apply(final ILocationData it) {
+          public SourceRelativeURI apply(final ILocationData it) {
             return it.getPath();
           }
         };
-        List<URI> _map = ListExtensions.<ILocationData, URI>map(_associatedLocations, _function);
-        final Set<URI> associatedLocations = IterableExtensions.<URI>toSet(_map);
+        List<SourceRelativeURI> _map = ListExtensions.<ILocationData, SourceRelativeURI>map(_associatedLocations, _function);
+        final Set<SourceRelativeURI> associatedLocations = IterableExtensions.<SourceRelativeURI>toSet(_map);
         String _string_4 = head.toString();
         int _length = ((Object[])Conversions.unwrapArray(uris, Object.class)).length;
         int _length_1 = ((Object[])Conversions.unwrapArray(associatedLocations, Object.class)).length;
