@@ -420,8 +420,10 @@ public class ConstantConditionsInterpreter {
           }
           if (_and) {
             _matched=true;
+            Object _rawValue_2 = arg.getRawValue();
+            boolean _not = (!(((Boolean) _rawValue_2)).booleanValue());
             boolean _isCompileTimeConstant_1 = arg.isCompileTimeConstant();
-            _switchResult = new EvaluationResult(Boolean.valueOf((!(((Boolean) arg.getRawValue())).booleanValue())), _isCompileTimeConstant_1);
+            _switchResult = new EvaluationResult(Boolean.valueOf(_not), _isCompileTimeConstant_1);
           }
         }
         if (!_matched) {
@@ -430,8 +432,8 @@ public class ConstantConditionsInterpreter {
           if (!_equals_1) {
             _and_1 = false;
           } else {
-            Object _rawValue_2 = arg.getRawValue();
-            _and_1 = (_rawValue_2 instanceof Number);
+            Object _rawValue_3 = arg.getRawValue();
+            _and_1 = (_rawValue_3 instanceof Number);
           }
           if (_and_1) {
             _matched=true;

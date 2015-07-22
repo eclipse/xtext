@@ -281,7 +281,9 @@ public class JvmModelGenerator implements IGenerator {
       if (!_not) {
         _and = false;
       } else {
-        _and = (!(it.eContainer() instanceof JvmType));
+        EObject _eContainer = it.eContainer();
+        boolean _not_1 = (!(_eContainer instanceof JvmType));
+        _and = _not_1;
       }
       if (_and) {
         _xifexpression = appendable.newLine();
@@ -435,7 +437,8 @@ public class JvmModelGenerator implements IGenerator {
       _newLine.append("}");
       ITreeAppendable _xifexpression = null;
       EObject _eContainer = it.eContainer();
-      if ((!(_eContainer instanceof JvmType))) {
+      boolean _not = (!(_eContainer instanceof JvmType));
+      if (_not) {
         _xifexpression = appendable.newLine();
       }
       _xblockexpression = _xifexpression;
@@ -484,7 +487,8 @@ public class JvmModelGenerator implements IGenerator {
       _newLine.append("}");
       ITreeAppendable _xifexpression = null;
       EObject _eContainer = it.eContainer();
-      if ((!(_eContainer instanceof JvmType))) {
+      boolean _not = (!(_eContainer instanceof JvmType));
+      if (_not) {
         _xifexpression = appendable.newLine();
       }
       _xblockexpression = _xifexpression;
@@ -1196,7 +1200,8 @@ public class JvmModelGenerator implements IGenerator {
     tracedAppendable.append("final ");
     if (vararg) {
       JvmTypeReference _parameterType = it.getParameterType();
-      if ((!(_parameterType instanceof JvmGenericArrayTypeReference))) {
+      boolean _not = (!(_parameterType instanceof JvmGenericArrayTypeReference));
+      if (_not) {
         tracedAppendable.append("/* Internal Error: Parameter was vararg but not an array type. */");
       } else {
         JvmTypeReference _parameterType_1 = it.getParameterType();

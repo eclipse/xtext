@@ -128,7 +128,7 @@ public class OverrideProposalUtil {
     if (_and) {
       JvmExecutable rawExecutable = executable.getDeclaration();
       if ((rawExecutable instanceof JvmOperation)) {
-        JvmOperation operation = ((JvmOperation) rawExecutable);
+        JvmOperation operation = ((JvmOperation)rawExecutable);
         boolean _or = false;
         boolean _isFinal = operation.isFinal();
         if (_isFinal) {

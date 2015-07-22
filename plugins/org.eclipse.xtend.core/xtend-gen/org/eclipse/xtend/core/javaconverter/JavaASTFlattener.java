@@ -734,7 +734,16 @@ public class JavaASTFlattener extends ASTVisitor {
     if (!_and_1) {
       _and = false;
     } else {
-      _and = (!((it.getParent() instanceof SimpleType) || (it.getParent() instanceof ImportDeclaration)));
+      boolean _or = false;
+      ASTNode _parent = it.getParent();
+      if ((_parent instanceof SimpleType)) {
+        _or = true;
+      } else {
+        ASTNode _parent_1 = it.getParent();
+        _or = (_parent_1 instanceof ImportDeclaration);
+      }
+      boolean _not = (!_or);
+      _and = _not;
     }
     if (_and) {
       this.appendToBuffer("::");
@@ -1176,11 +1185,19 @@ public class JavaASTFlattener extends ASTVisitor {
   @Override
   public boolean visit(final SingleVariableDeclaration it) {
     boolean _or = false;
-    if (((it.getParent() instanceof MethodDeclaration) || (it.getParent() instanceof CatchClause))) {
+    boolean _or_1 = false;
+    ASTNode _parent = it.getParent();
+    if ((_parent instanceof MethodDeclaration)) {
+      _or_1 = true;
+    } else {
+      ASTNode _parent_1 = it.getParent();
+      _or_1 = (_parent_1 instanceof CatchClause);
+    }
+    if (_or_1) {
       _or = true;
     } else {
-      ASTNode _parent = it.getParent();
-      _or = (_parent instanceof EnhancedForStatement);
+      ASTNode _parent_2 = it.getParent();
+      _or = (_parent_2 instanceof EnhancedForStatement);
     }
     if (_or) {
       List _modifiers = it.modifiers();
@@ -1735,7 +1752,8 @@ public class JavaASTFlattener extends ASTVisitor {
       this.appendSpaceToBuffer();
     } else {
       ASTNode _parent = node.getParent();
-      if ((!(_parent instanceof SwitchStatement))) {
+      boolean _not = (!(_parent instanceof SwitchStatement));
+      if (_not) {
         this.appendToBuffer(";");
       }
     }
@@ -2837,7 +2855,9 @@ public class JavaASTFlattener extends ASTVisitor {
           if (!_not) {
             _and_2 = false;
           } else {
-            _and_2 = (!(statements.get(0) instanceof Block));
+            Statement _get = statements.get(0);
+            boolean _not_1 = (!(_get instanceof Block));
+            _and_2 = _not_1;
           }
           _or = _and_2;
         }

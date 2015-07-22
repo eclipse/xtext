@@ -562,21 +562,28 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
     boolean _lessEqualsThan = (endOffset <= _offset_2);
     if (_lessEqualsThan) {
       boolean _or = false;
-      if (((model instanceof XFeatureCall) && (model.eContainer() instanceof XClosure))) {
+      boolean _and = false;
+      if (!(model instanceof XFeatureCall)) {
+        _and = false;
+      } else {
+        EObject _eContainer = model.eContainer();
+        _and = (_eContainer instanceof XClosure);
+      }
+      if (_and) {
         _or = true;
       } else {
-        boolean _and = false;
+        boolean _and_1 = false;
         int _offset_3 = context.getOffset();
         boolean _equals = (endOffset == _offset_3);
         if (!_equals) {
-          _and = false;
+          _and_1 = false;
         } else {
           String _prefix = context.getPrefix();
           int _length = _prefix.length();
           boolean _equals_1 = (_length == 0);
-          _and = _equals_1;
+          _and_1 = _equals_1;
         }
-        _or = _and;
+        _or = _and_1;
       }
       if (_or) {
         return;

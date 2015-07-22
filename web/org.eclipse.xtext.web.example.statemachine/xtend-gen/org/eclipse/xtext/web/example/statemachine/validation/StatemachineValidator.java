@@ -40,7 +40,9 @@ public class StatemachineValidator extends AbstractStatemachineValidator {
     if (!_and_1) {
       _and = false;
     } else {
-      _and = (!(event.getSignal() instanceof InputSignal));
+      Signal _signal_2 = event.getSignal();
+      boolean _not_1 = (!(_signal_2 instanceof InputSignal));
+      _and = _not_1;
     }
     if (_and) {
       this.error("Only input signals are allowed for read access.", event, StatemachinePackage.Literals.EVENT__SIGNAL);
@@ -64,7 +66,9 @@ public class StatemachineValidator extends AbstractStatemachineValidator {
     if (!_and_1) {
       _and = false;
     } else {
-      _and = (!(command.getSignal() instanceof OutputSignal));
+      Signal _signal_2 = command.getSignal();
+      boolean _not_1 = (!(_signal_2 instanceof OutputSignal));
+      _and = _not_1;
     }
     if (_and) {
       this.error("Only output signals are allowed for write access.", command, StatemachinePackage.Literals.COMMAND__SIGNAL);
