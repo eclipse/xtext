@@ -587,7 +587,14 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
     if ((expectedRawType instanceof JvmEnumerationType)) {
       _or = true;
     } else {
-      _or = ((expectedRawType instanceof JvmArrayType) && (((JvmArrayType) expectedRawType).getComponentType() instanceof JvmEnumerationType));
+      boolean _and = false;
+      if (!(expectedRawType instanceof JvmArrayType)) {
+        _and = false;
+      } else {
+        JvmComponentType _componentType = ((JvmArrayType) expectedRawType).getComponentType();
+        _and = (_componentType instanceof JvmEnumerationType);
+      }
+      _or = _and;
     }
     if (_or) {
       EObject container = it.eContainer();

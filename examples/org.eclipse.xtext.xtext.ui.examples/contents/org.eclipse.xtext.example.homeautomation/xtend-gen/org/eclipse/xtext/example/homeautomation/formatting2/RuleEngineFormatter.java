@@ -341,7 +341,8 @@ public class RuleEngineFormatter extends XbaseFormatter {
           document.append(_prepend_1, _function_10);
         } else {
           XExpression _then = c.getThen();
-          if ((!(_then instanceof XBlockExpression))) {
+          boolean _not = (!(_then instanceof XBlockExpression));
+          if (_not) {
             XExpression _then_1 = c.getThen();
             final Procedure1<IHiddenRegionFormatter> _function_11 = new Procedure1<IHiddenRegionFormatter>() {
               @Override
@@ -402,7 +403,8 @@ public class RuleEngineFormatter extends XbaseFormatter {
       };
       document.append(_regionForKeyword_1, _function_4);
       XExpression _default_1 = expr.getDefault();
-      if ((!(_default_1 instanceof XBlockExpression))) {
+      boolean _not = (!(_default_1 instanceof XBlockExpression));
+      if (_not) {
         XExpression _default_2 = expr.getDefault();
         final Procedure1<IHiddenRegionFormatter> _function_5 = new Procedure1<IHiddenRegionFormatter>() {
           @Override
@@ -581,7 +583,8 @@ public class RuleEngineFormatter extends XbaseFormatter {
     XExpression _if_1 = expr.getIf();
     this.format(_if_1, document);
     XExpression _then = expr.getThen();
-    if ((!(_then instanceof XBlockExpression))) {
+    boolean _not = (!(_then instanceof XBlockExpression));
+    if (_not) {
       XExpression _then_1 = expr.getThen();
       final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
         @Override
@@ -620,7 +623,8 @@ public class RuleEngineFormatter extends XbaseFormatter {
     boolean _notEquals_1 = (!Objects.equal(_else_1, null));
     if (_notEquals_1) {
       XExpression _else_2 = expr.getElse();
-      if ((!(_else_2 instanceof XBlockExpression))) {
+      boolean _not_1 = (!(_else_2 instanceof XBlockExpression));
+      if (_not_1) {
         XExpression _else_3 = expr.getElse();
         final Procedure1<IHiddenRegionFormatter> _function_5 = new Procedure1<IHiddenRegionFormatter>() {
           @Override
@@ -665,7 +669,8 @@ public class RuleEngineFormatter extends XbaseFormatter {
     XExpression _predicate_1 = expr.getPredicate();
     this.format(_predicate_1, format);
     XExpression _body = expr.getBody();
-    if ((!(_body instanceof XBlockExpression))) {
+    boolean _not = (!(_body instanceof XBlockExpression));
+    if (_not) {
       XExpression _body_1 = expr.getBody();
       final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
         @Override
@@ -708,7 +713,8 @@ public class RuleEngineFormatter extends XbaseFormatter {
     XExpression _predicate_1 = expr.getPredicate();
     this.format(_predicate_1, format);
     XExpression _body = expr.getBody();
-    if ((!(_body instanceof XBlockExpression))) {
+    boolean _not = (!(_body instanceof XBlockExpression));
+    if (_not) {
       XExpression _body_1 = expr.getBody();
       final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
         @Override
@@ -774,7 +780,8 @@ public class RuleEngineFormatter extends XbaseFormatter {
     XExpression _forExpression_1 = expr.getForExpression();
     this.format(_forExpression_1, format);
     XExpression _eachExpression = expr.getEachExpression();
-    if ((!(_eachExpression instanceof XBlockExpression))) {
+    boolean _not = (!(_eachExpression instanceof XBlockExpression));
+    if (_not) {
       XExpression _eachExpression_1 = expr.getEachExpression();
       final Procedure1<IHiddenRegionFormatter> _function_5 = new Procedure1<IHiddenRegionFormatter>() {
         @Override
@@ -901,7 +908,8 @@ public class RuleEngineFormatter extends XbaseFormatter {
     };
     IterableExtensions.<XExpression>forEach(_updateExpressions_1, _function_8);
     XExpression _eachExpression = expr.getEachExpression();
-    if ((!(_eachExpression instanceof XBlockExpression))) {
+    boolean _not = (!(_eachExpression instanceof XBlockExpression));
+    if (_not) {
       XExpression _eachExpression_1 = expr.getEachExpression();
       final Procedure1<IHiddenRegionFormatter> _function_9 = new Procedure1<IHiddenRegionFormatter>() {
         @Override
@@ -936,7 +944,8 @@ public class RuleEngineFormatter extends XbaseFormatter {
     XExpression _param_1 = expr.getParam();
     this.format(_param_1, format);
     XExpression _expression = expr.getExpression();
-    if ((!(_expression instanceof XBlockExpression))) {
+    boolean _not = (!(_expression instanceof XBlockExpression));
+    if (_not) {
       XExpression _expression_1 = expr.getExpression();
       final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
         @Override
@@ -961,7 +970,8 @@ public class RuleEngineFormatter extends XbaseFormatter {
   @Override
   protected void _format(final XTryCatchFinallyExpression expr, @Extension final IFormattableDocument format) {
     XExpression _expression = expr.getExpression();
-    if ((!(_expression instanceof XBlockExpression))) {
+    boolean _not = (!(_expression instanceof XBlockExpression));
+    if (_not) {
       XExpression _expression_1 = expr.getExpression();
       final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
         @Override
@@ -985,7 +995,8 @@ public class RuleEngineFormatter extends XbaseFormatter {
     for (final XCatchClause cc : _catchClauses) {
       {
         XExpression _expression_3 = cc.getExpression();
-        if ((!(_expression_3 instanceof XBlockExpression))) {
+        boolean _not_1 = (!(_expression_3 instanceof XBlockExpression));
+        if (_not_1) {
           XExpression _expression_4 = cc.getExpression();
           final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
             @Override
@@ -1034,7 +1045,8 @@ public class RuleEngineFormatter extends XbaseFormatter {
     boolean _notEquals = (!Objects.equal(_finallyExpression, null));
     if (_notEquals) {
       XExpression _finallyExpression_1 = expr.getFinallyExpression();
-      if ((!(_finallyExpression_1 instanceof XBlockExpression))) {
+      boolean _not_1 = (!(_finallyExpression_1 instanceof XBlockExpression));
+      if (_not_1) {
         XExpression _finallyExpression_2 = expr.getFinallyExpression();
         final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
           @Override
