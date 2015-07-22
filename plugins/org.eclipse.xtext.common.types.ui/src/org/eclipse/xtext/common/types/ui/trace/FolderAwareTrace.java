@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -46,11 +46,11 @@ public class FolderAwareTrace extends AbstractTraceWithoutStorage {
 	}
 
 	@Override
-	public InputStream getContents(URI uri, IProject project) throws IOException {
+	public InputStream getContents(SourceRelativeURI uri, IProject project) throws IOException {
 		File container = new File(folder);
 		if (!container.exists())
 			return null;
-		File file = findFile(container, uri.toString());
+		File file = findFile(container, uri.getURI().toString());
 		if (file == null)
 			return null;
 		return new FileInputStream(file);

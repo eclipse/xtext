@@ -8,8 +8,9 @@
 package org.eclipse.xtext.ui.generator.trace;
 
 import org.eclipse.core.resources.IStorage;
-import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.ITraceForURIProvider;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.workspace.IProjectConfig;
 
 /**
@@ -51,23 +52,23 @@ public interface ITraceForStorageProvider extends ITraceForURIProvider {
 		}
 
 		@Override
-		public IEclipseTrace getTraceToSource(URI absoluteDerivedResource) {
+		public IEclipseTrace getTraceToSource(AbsoluteURI absoluteDerivedResource) {
 			return (IEclipseTrace) super.getTraceToSource(absoluteDerivedResource);
 		}
 
 		@Override
-		public IEclipseTrace getTraceToSource(URI srcRelativeDerivedResource, IProjectConfig project) {
+		public IEclipseTrace getTraceToSource(SourceRelativeURI srcRelativeDerivedResource, IProjectConfig project) {
 			// TODO Auto-generated method stub
 			return (IEclipseTrace) super.getTraceToSource(srcRelativeDerivedResource, project);
 		}
 
 		@Override
-		public IEclipseTrace getTraceToTarget(URI absoluteSourceResource) {
+		public IEclipseTrace getTraceToTarget(AbsoluteURI absoluteSourceResource) {
 			return (IEclipseTrace) super.getTraceToTarget(absoluteSourceResource);
 		}
 
 		@Override
-		public IEclipseTrace getTraceToTarget(URI srcRelativeSourceResource, IProjectConfig project) {
+		public IEclipseTrace getTraceToTarget(SourceRelativeURI srcRelativeSourceResource, IProjectConfig project) {
 			return (IEclipseTrace) super.getTraceToTarget(srcRelativeSourceResource, project);
 		}
 		

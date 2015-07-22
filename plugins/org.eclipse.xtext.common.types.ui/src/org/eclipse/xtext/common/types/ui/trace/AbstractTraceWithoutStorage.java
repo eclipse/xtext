@@ -12,8 +12,9 @@ import java.io.InputStream;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
-import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.ui.generator.trace.AbstractEclipseTrace;
 
 /**
@@ -22,7 +23,7 @@ import org.eclipse.xtext.ui.generator.trace.AbstractEclipseTrace;
 public abstract class AbstractTraceWithoutStorage extends AbstractEclipseTrace {
 	
 	private IProject project;
-	private URI uri;
+	private AbsoluteURI uri;
 
 	@Override
 	public IProject getLocalProject() {
@@ -30,7 +31,7 @@ public abstract class AbstractTraceWithoutStorage extends AbstractEclipseTrace {
 	}
 
 	@Override
-	public URI getLocalURI() {
+	public AbsoluteURI getLocalURI() {
 		return uri;
 	}
 	
@@ -43,18 +44,18 @@ public abstract class AbstractTraceWithoutStorage extends AbstractEclipseTrace {
 		this.project = project;
 	}
 
-	protected void setUri(URI uri) {
+	protected void setLocalURI(AbsoluteURI uri) {
 		this.uri = uri;
 	}
 
 	@Override
-	protected IStorage findStorage(URI uri, IProject project) {
+	protected IStorage findStorage(SourceRelativeURI uri, IProject project) {
 		// there are no storages inside a plain folder
 		return null;
 	}
 	
 	@Override
-	protected abstract InputStream getContents(URI uri, IProject project) throws IOException;
+	protected abstract InputStream getContents(SourceRelativeURI uri, IProject project) throws IOException;
 
 	@Override
 	protected void setTraceRegionProvider(ITraceRegionProvider traceRegionProvider) {

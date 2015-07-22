@@ -86,7 +86,7 @@ public class LinkToOriginDetector extends AbstractHyperlinkDetector {
 							ILocationInResource sourceInformation = IterableExtensions.head(traceToSource.getAllAssociatedLocations());
 							if(sourceInformation != null) {
 								try {
-									URI resourceURI = sourceInformation.getAbsoluteResourceURI();
+									URI resourceURI = sourceInformation.getAbsoluteResourceURI().getURI();
 									if (resourceURI != null) {
 										IResourceServiceProvider serviceProvider = serviceProviderRegistry.getResourceServiceProvider(resourceURI);
 										if (serviceProvider == null)

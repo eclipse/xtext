@@ -163,7 +163,7 @@ public class OriginalEditorSelector implements IEditorAssociationOverride {
 			if (sourceInformationIterator.hasNext()) {
 				ILocationInEclipseResource sourceInformation = sourceInformationIterator.next();
 				if (traceToSource.getLocalURI() == null || sourceInformation.getStorage() != null) {
-					URI uri = sourceInformation.getAbsoluteResourceURI();
+					URI uri = sourceInformation.getAbsoluteResourceURI().getURI();
 					return getXtextEditor(uri);
 				}
 			}

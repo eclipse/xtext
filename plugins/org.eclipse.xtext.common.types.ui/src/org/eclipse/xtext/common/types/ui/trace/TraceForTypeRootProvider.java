@@ -27,6 +27,7 @@ import org.eclipse.jdt.internal.core.BinaryType;
 import org.eclipse.jdt.internal.core.JarPackageFragmentRoot;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.eclipse.xtext.ui.generator.trace.IEclipseTrace;
@@ -65,8 +66,8 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 	
 	private Pair<ITypeRoot, IEclipseTrace> lruCache = null;
 
-	protected String getPathInFragmentRoot(final ITypeRoot derivedResource) {
-		return derivedResource.getParent().getElementName().replace('.', '/') + "/";
+	protected SourceRelativeURI getPathInFragmentRoot(final ITypeRoot derivedResource, String traceSimpleFileName) {
+		return new SourceRelativeURI(URI.createURI(derivedResource.getParent().getElementName().replace('.', '/') + "/" + traceSimpleFileName));
 	}
 
 	protected String getTraceSimpleFileName(final ITypeRoot derivedResource) {
@@ -171,8 +172,7 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 				String traceSimpleFileName = getTraceSimpleFileName(classFile);
 				if (traceSimpleFileName == null)
 					return null;
-				String pathInFragmentRoot = getPathInFragmentRoot(classFile);
-				URI traceURI = URI.createURI(pathInFragmentRoot + traceSimpleFileName);
+				SourceRelativeURI traceURI = getPathInFragmentRoot(classFile, traceSimpleFileName);
 				try {
 					InputStream contents = trace.getContents(traceURI, trace.getLocalProject());
 					if (contents != null)

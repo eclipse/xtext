@@ -16,7 +16,9 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
 import org.eclipse.xtext.util.Pair;
 
@@ -47,7 +49,7 @@ public class StorageAwareTrace extends AbstractEclipseTrace {
 	}
 
 	@Override
-	public URI getLocalURI() {
+	public AbsoluteURI getLocalURI() {
 		IStorage localStorage = getLocalStorage();
 		return getURIForStorage(localStorage);
 	}
@@ -56,20 +58,18 @@ public class StorageAwareTrace extends AbstractEclipseTrace {
 	public IProject getLocalProject() {
 		return findProject(projectName);
 	}
-
+	
 	/**
 	 * Resolve the given path in the context of the known {@link #getLocalStorage() local storage}.
 	 * 
 	 * Try to resolve it by querying the {@link IStorageAwareTraceContribution contributions}.
 	 * 
-	 * @see IStorageAwareTraceContribution#tryResolvePath(IStorage, URI)
+	 * @see IStorageAwareTraceContribution#tryResolvePath(IStorage, SourceRelativeURI)
 	 */
 	@Override
-	protected URI resolvePath(URI path) {
-		if (!path.isRelative())
-			return path;
+	protected AbsoluteURI resolvePath(SourceRelativeURI path) {
 		for (int i = 0, size = contributions.size(); i < size; i++) {
-			URI result = contributions.get(i).tryResolvePath(localStorage, path);
+			AbsoluteURI result = contributions.get(i).tryResolvePath(localStorage, path);
 			if (result != null) {
 				return result;
 			}
@@ -77,18 +77,21 @@ public class StorageAwareTrace extends AbstractEclipseTrace {
 		if (localStorage instanceof IFile) {
 			IProject project = ((IFile) localStorage).getProject();
 			if (project != null) {
-				return resolvePath(project, path);
+				AbsoluteURI result = resolvePath(project, path);
+				if (result != null) {
+					return result;
+				}
 			}
 		}
-		return path;
+		return super.resolvePath(path);
 	}
 
-	protected URI resolvePath(IProject project, URI path) {
-		String decodedPath = URI.decode(path.toString());
+	protected AbsoluteURI resolvePath(IProject project, SourceRelativeURI path) {
+		String decodedPath = URI.decode(path.getURI().toString());
 		IResource candidate = project.findMember(decodedPath);
 		if (candidate != null && candidate.exists())
-			return URI.createPlatformResourceURI(project.getFullPath() + "/" + decodedPath, true);
-		return path;
+			return new AbsoluteURI(URI.createPlatformResourceURI(project.getFullPath() + "/" + decodedPath, true));
+		return null;
 	}
 
 	protected void setLocalStorage(IStorage derivedResource) {
@@ -99,9 +102,9 @@ public class StorageAwareTrace extends AbstractEclipseTrace {
 	}
 
 	@Override
-	protected IStorage findStorage(URI uri, IProject project) {
-		URI resolvePath = resolvePath(uri);
-		Iterable<Pair<IStorage, IProject>> allStorages = getStorage2uriMapper().getStorages(resolvePath);
+	protected IStorage findStorage(SourceRelativeURI uri, IProject project) {
+		AbsoluteURI resolvePath = resolvePath(uri);
+		Iterable<Pair<IStorage, IProject>> allStorages = getStorage2uriMapper().getStorages(resolvePath.getURI());
 		for (Pair<IStorage, IProject> storage : allStorages) {
 			if (project.equals(storage.getSecond())) {
 				return storage.getFirst();
@@ -111,7 +114,7 @@ public class StorageAwareTrace extends AbstractEclipseTrace {
 	}
 
 	@Override
-	protected InputStream getContents(URI uri, IProject project) throws IOException {
+	protected InputStream getContents(SourceRelativeURI uri, IProject project) throws IOException {
 		try {
 			IStorage storage = findStorage(uri, project);
 			if (storage == null)

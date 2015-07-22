@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.generator.trace.AbsoluteURI;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.generator.trace.TraceRegion;
 import org.eclipse.xtext.generator.trace.internal.AbstractTrace;
 import org.eclipse.xtext.workspace.IProjectConfig;
@@ -42,13 +44,13 @@ public class BaseTraceTest {
 			
 			@Override
 			/* @NonNull */
-			public URI getLocalURI() {
+			public AbsoluteURI getLocalURI() {
 				throw new UnsupportedOperationException();
 			}
 
 			@Override
 			/* @NonNull */
-			protected InputStream getContents(/* @NonNull */ URI uri, /* @NonNull */ IProjectConfig project) throws IOException {
+			protected InputStream getContents(/* @NonNull */ SourceRelativeURI uri, /* @NonNull */ IProjectConfig project) throws IOException {
 				throw new UnsupportedOperationException();
 			}
 		};
