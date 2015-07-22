@@ -3,8 +3,9 @@ package org.eclipse.xtend.core.tests.compiler;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.generator.trace.internal.AbstractTrace;
 import org.eclipse.xtext.workspace.IProjectConfig;
 
@@ -28,13 +29,13 @@ public class SimpleTrace extends AbstractTrace {
 	}
 
 	@Override
-	public URI getLocalURI() {
+	public AbsoluteURI getLocalURI() {
 		return null;
 	}
 
 
 	@Override
-	protected InputStream getContents(URI uri, IProjectConfig project) throws IOException {
+	protected InputStream getContents(SourceRelativeURI uri, IProjectConfig project) throws IOException {
 		throw new UnsupportedOperationException();
 	}
 
