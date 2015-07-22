@@ -30,32 +30,33 @@ public class DefaultTraceURIConverter implements ITraceURIConverter {
 	private IWorkspaceConfigProvider configProvider;
 
 	@Override
-	public URI getURIForTrace(IProjectConfig projectConfig, URI qualifiedUri) {
-		ISourceFolder sourceFolder = projectConfig.findSourceFolderContaining(qualifiedUri);
+	public SourceRelativeURI getURIForTrace(IProjectConfig projectConfig, AbsoluteURI absoluteURI) {
+		URI uri = absoluteURI.getURI();
+		ISourceFolder sourceFolder = projectConfig.findSourceFolderContaining(uri);
 		if (sourceFolder != null) {
-			return qualifiedUri.deresolve(sourceFolder.getPath());
+			return new SourceRelativeURI(uri.deresolve(sourceFolder.getPath()));
 		}
-		return getUriForTrace(qualifiedUri);
+		return getUriForTrace(uri);
 	}
 
 	@Override
-	public URI getURIForTrace(Resource resource) {
+	public SourceRelativeURI getURIForTrace(Resource resource) {
 		if (configProvider != null) {
 			IWorkspaceConfig workspaceConfig = configProvider.getWorkspaceConfig(resource.getResourceSet());
 			IProjectConfig projectConfig = workspaceConfig.findProjectContaining(resource.getURI());
 			if (projectConfig != null) {
-				return getURIForTrace(projectConfig, resource.getURI());
+				return getURIForTrace(projectConfig, new AbsoluteURI(resource.getURI()));
 			}
 		}
 		return getUriForTrace(resource.getURI());
 	}
 
-	private URI getUriForTrace(URI qualifiedUri) {
-		if (qualifiedUri.isPlatform()) {
+	private SourceRelativeURI getUriForTrace(URI qualifiedURI) {
+		if (qualifiedURI.isPlatform()) {
 			// create a URI that is relative to the contained projects.
-			List<String> segments = qualifiedUri.segmentsList().subList(2, qualifiedUri.segmentCount());
-			return URI.createHierarchicalURI(segments.toArray(new String[segments.size()]), null, null);
+			List<String> segments = qualifiedURI.segmentsList().subList(2, qualifiedURI.segmentCount());
+			return new SourceRelativeURI(URI.createHierarchicalURI(segments.toArray(new String[segments.size()]), null, null));
 		}
-		return qualifiedUri.trimFragment().trimQuery();
+		return new SourceRelativeURI(URI.createURI(qualifiedURI.path()));
 	}
 }

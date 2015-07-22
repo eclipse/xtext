@@ -9,7 +9,6 @@ package org.eclipse.xtext.generator.trace;
 
 import java.util.List;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.util.TextRegionWithLineInformation;
 
 import com.google.common.collect.Lists;
@@ -23,7 +22,7 @@ public class TraceRegion extends AbstractStatefulTraceRegion {
 
 	public TraceRegion(int myOffset, int myLength, int myLineNumber, int myEndLineNumber, 
 			int associatedOffset, int associatedLength, int associatedLineNumber, int associatedEndLineNumber, 
-			/* @Nullable */ AbstractTraceRegion parent, /* @Nullable */ URI associatedPath) {
+			/* @Nullable */ AbstractTraceRegion parent, /* @Nullable */ SourceRelativeURI associatedPath) {
 		this(myOffset, myLength, myLineNumber, myEndLineNumber, 
 				new LocationData(associatedOffset, associatedLength, associatedLineNumber, associatedEndLineNumber, associatedPath), parent);
 	}

@@ -7,12 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.trace;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.workspace.IProjectConfig;
 
 import com.google.inject.ImplementedBy;
-
 
 /**
  * This class converts URIs between their absolute forms and a relative form, which
@@ -26,8 +24,8 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(DefaultTraceURIConverter.class)
 public interface ITraceURIConverter {
 	
-	URI getURIForTrace(IProjectConfig projectConfig, URI qualifiedUri);
+	SourceRelativeURI getURIForTrace(IProjectConfig projectConfig, AbsoluteURI absoluteURI);
 	
-	URI getURIForTrace(Resource resource);
+	SourceRelativeURI getURIForTrace(Resource resource);
 
 }

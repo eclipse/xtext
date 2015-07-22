@@ -23,44 +23,52 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class TraceRegionTest extends Assert {
 
+	private SourceRelativeURI newURI() {
+		return newURI("uri");
+	}
+	
+	private SourceRelativeURI newURI(String path) {
+		return new SourceRelativeURI(URI.createURI(path));
+	}
+	
 	@Test
 	public void testConstructor() {
-		TraceRegion region = new TraceRegion(0, 1, 0, 0, 2, 3, 0, 0, null, URI.createURI("uri"));
+		TraceRegion region = new TraceRegion(0, 1, 0, 0, 2, 3, 0, 0, null, newURI());
 		assertEquals(0, region.getMyOffset());
 		assertEquals(1, region.getMyLength());
 		assertEquals(2, region.getMergedAssociatedLocation().getOffset());
 		assertEquals(3, region.getMergedAssociatedLocation().getLength());
-		assertEquals(URI.createURI("uri"), region.getAssociatedPath());
+		assertEquals(newURI(), region.getAssociatedPath());
 		assertNull(region.getParent());
 		assertTrue(region.getNestedRegions().isEmpty());
 	}
-	
+
 	@Test
 	public void testConstructorWithParent() {
-		TraceRegion parent = new TraceRegion(0, 1, 0, 0, 2, 3, 0, 0, null, URI.createURI("uri"));
+		TraceRegion parent = new TraceRegion(0, 1, 0, 0, 2, 3, 0, 0, null, newURI());
 		TraceRegion region = new TraceRegion(0, 1, 0, 0, 2, 3, 0, 0, parent, null);
-		assertEquals(URI.createURI("uri"), region.getAssociatedPath());
+		assertEquals(newURI(), region.getAssociatedPath());
 		assertEquals(parent, region.getParent());
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructorInvalidArgs_01() {
-		new TraceRegion(-1, 0, 0, 0, 0, 0, 0, 0, null, URI.createURI("uri"));
+		new TraceRegion(-1, 0, 0, 0, 0, 0, 0, 0, null, newURI());
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructorInvalidArgs_02() {
-		new TraceRegion(0, -1, 0, 0, 0, 0, 0, 0, null, URI.createURI("uri"));
+		new TraceRegion(0, -1, 0, 0, 0, 0, 0, 0, null, newURI());
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructorInvalidArgs_03() {
-		new TraceRegion(0, 0, -1, 0, 0, 0, 0, 0, null, URI.createURI("uri"));
+		new TraceRegion(0, 0, -1, 0, 0, 0, 0, 0, null, newURI());
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructorInvalidArgs_04() {
-		new TraceRegion(0, 0, 0, -1, 0, 0, 0, 0, null, URI.createURI("uri"));
+		new TraceRegion(0, 0, 0, -1, 0, 0, 0, 0, null, newURI());
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -82,14 +90,14 @@ public class TraceRegionTest extends Assert {
 	
 	@Test
 	public void testLeafIterator_NoChildren() {
-		TraceRegion region = new TraceRegion(0, 1, 1, 2, 2, 3, 0, 0, null, URI.createURI("uri"));
+		TraceRegion region = new TraceRegion(0, 1, 1, 2, 2, 3, 0, 0, null, newURI());
 		Iterator<AbstractTraceRegion> iter = region.leafIterator();
 		assertEquals(Collections.singleton(region).iterator(), iter);
 	}
 	
 	@Test
 	public void testLeafIterator_OneChild() {
-		TraceRegion parent = new TraceRegion(0, 1, 1, 2, 2, 3, 0, 0, null, URI.createURI("uri"));
+		TraceRegion parent = new TraceRegion(0, 1, 1, 2, 2, 3, 0, 0, null, newURI());
 		TraceRegion region = new TraceRegion(0, 1, 1, 2, 2, 3, 0, 0, parent, null);
 		Iterator<AbstractTraceRegion> iter = parent.leafIterator();
 		assertEquals(Collections.singleton(region).iterator(), iter);
@@ -97,7 +105,7 @@ public class TraceRegionTest extends Assert {
 	
 	@Test
 	public void testLeafIterator_GrandChild() {
-		TraceRegion root = new TraceRegion(0, 1, 1, 2, 2, 3, 0, 0, null, URI.createURI("uri"));
+		TraceRegion root = new TraceRegion(0, 1, 1, 2, 2, 3, 0, 0, null, newURI());
 		TraceRegion parent = new TraceRegion(0, 1, 1, 2, 2, 3, 0, 0, root, null);
 		TraceRegion region = new TraceRegion(0, 1, 1, 2, 2, 3, 0, 0, parent, null);
 		Iterator<AbstractTraceRegion> iter = root.leafIterator();
@@ -106,7 +114,7 @@ public class TraceRegionTest extends Assert {
 	
 	@Test
 	public void testLeafIterator_TwoChildren_NoGaps() {
-		TraceRegion parent = new TraceRegion(0, 2, 0, 2, 2, 3, 0, 0, null, URI.createURI("uri"));
+		TraceRegion parent = new TraceRegion(0, 2, 0, 2, 2, 3, 0, 0, null, newURI());
 		TraceRegion first = new TraceRegion(0, 1, 0, 1, 2, 3, 0, 0, parent, null);
 		TraceRegion second = new TraceRegion(1, 1, 1, 2, 3, 4, 0, 0, parent, null);
 		Iterator<AbstractTraceRegion> iter = parent.leafIterator();
@@ -115,7 +123,7 @@ public class TraceRegionTest extends Assert {
 	
 	@Test
 	public void testLeafIterator_OneChild_LeftGap() {
-		final TraceRegion parent = new TraceRegion(0, 2, 0, 2, 2, 3, 0, 0, null, URI.createURI("uri"));
+		final TraceRegion parent = new TraceRegion(0, 2, 0, 2, 2, 3, 0, 0, null, newURI());
 		AbstractTraceRegion first = new AbstractStatefulTraceRegion(new TextRegionWithLineInformation(0, 1, 0, 1), new LocationData(2, 3, 0, 0, null), parent) {};
 		TraceRegion second = new TraceRegion(1, 1, 1, 2, 3, 4, 0, 0, parent, null);
 		Iterator<AbstractTraceRegion> iter = parent.leafIterator();
@@ -124,7 +132,7 @@ public class TraceRegionTest extends Assert {
 	
 	@Test
 	public void testLeafIterator_OneChild_RightGap() {
-		final TraceRegion parent = new TraceRegion(0, 2, 0, 2, 2, 3, 0, 0, null, URI.createURI("uri"));
+		final TraceRegion parent = new TraceRegion(0, 2, 0, 2, 2, 3, 0, 0, null, newURI());
 		AbstractTraceRegion first = new TraceRegion(0, 1, 0, 1, 3, 4, 0, 0, parent, null);
 		AbstractTraceRegion second = new AbstractStatefulTraceRegion(new TextRegionWithLineInformation(1, 1, 1, 2), new LocationData(2, 3, 0, 0, null), parent) {};
 		Iterator<AbstractTraceRegion> iter = parent.leafIterator();
@@ -133,7 +141,7 @@ public class TraceRegionTest extends Assert {
 	
 	@Test
 	public void testLeafIterator_OneGrandChild_LeftGap() {
-		final TraceRegion root = new TraceRegion(0, 2, 0, 2, 2, 3, 0, 0, null, URI.createURI("uri"));
+		final TraceRegion root = new TraceRegion(0, 2, 0, 2, 2, 3, 0, 0, null, newURI());
 		AbstractTraceRegion first = new AbstractStatefulTraceRegion(new TextRegionWithLineInformation(0, 1, 0, 1), new LocationData(2, 3, 0, 0, null), root) {};
 		TraceRegion parent = new TraceRegion(1, 1, 1, 2, 3, 4, 0, 0, root, null);
 		TraceRegion second = new TraceRegion(1, 1, 1, 2, 3, 4, 0, 0, parent, null);
@@ -143,7 +151,7 @@ public class TraceRegionTest extends Assert {
 	
 	@Test
 	public void testLeafIterator_OneGrandChild_RightGap() {
-		final TraceRegion root = new TraceRegion(0, 2, 0, 2, 2, 3, 0, 0, null, URI.createURI("uri"));
+		final TraceRegion root = new TraceRegion(0, 2, 0, 2, 2, 3, 0, 0, null, newURI());
 		TraceRegion parent = new TraceRegion(0, 1, 0, 1, 3, 4, 0, 0, root, null);
 		TraceRegion first = new TraceRegion(0, 1, 0, 1, 3, 4, 0, 0, parent, null);
 		AbstractTraceRegion second = new AbstractStatefulTraceRegion(new TextRegionWithLineInformation(1, 1, 1, 2), new LocationData(2, 3, 0, 0, null), root) {};
@@ -153,7 +161,7 @@ public class TraceRegionTest extends Assert {
 	
 	@Test
 	public void testLeafIterator_TwoGrandChildren_NoGaps_01() {
-		TraceRegion root = new TraceRegion(0, 2, 0, 2, 2, 3, 0, 0, null, URI.createURI("uri"));
+		TraceRegion root = new TraceRegion(0, 2, 0, 2, 2, 3, 0, 0, null, newURI());
 		TraceRegion parent = new TraceRegion(0, 2, 0, 2, 2, 3, 0, 0, root, null);
 		TraceRegion first = new TraceRegion(0, 1, 0, 1, 2, 3, 0, 0, parent, null);
 		TraceRegion second = new TraceRegion(1, 1, 1, 2, 3, 4, 0, 0, parent, null);
@@ -163,7 +171,7 @@ public class TraceRegionTest extends Assert {
 	
 	@Test
 	public void testLeafIterator_TwoGrandChildren_NoGaps_02() {
-		TraceRegion root = new TraceRegion(0, 2, 0, 2, 2, 3, 0, 0, null, URI.createURI("uri"));
+		TraceRegion root = new TraceRegion(0, 2, 0, 2, 2, 3, 0, 0, null, newURI());
 		TraceRegion firstParent = new TraceRegion(0, 1, 0, 1, 2, 3, 0, 0, root, null);
 		TraceRegion first = new TraceRegion(0, 1, 0, 1, 2, 3, 0, 0, firstParent, null);
 		TraceRegion secondParent = new TraceRegion(1, 1, 1, 2, 3, 4, 0, 0, root, null);
@@ -174,7 +182,7 @@ public class TraceRegionTest extends Assert {
 	
 	@Test
 	public void testLeafIterator_TwoChildren_WithGaps() {
-		final TraceRegion parent = new TraceRegion(0, 3, 0, 3, 2, 3, 0, 0, null, URI.createURI("uri"));
+		final TraceRegion parent = new TraceRegion(0, 3, 0, 3, 2, 3, 0, 0, null, newURI());
 		TraceRegion first = new TraceRegion(0, 1, 0, 1, 2, 3, 0, 0, parent, null);
 		AbstractTraceRegion second = new AbstractStatefulTraceRegion(new TextRegionWithLineInformation(1, 1, 1, 2), new LocationData(2, 3, 0, 0, null), parent) {};
 		AbstractTraceRegion third = new TraceRegion(2, 1, 2, 3, 3, 4, 0, 0, parent, null);
@@ -184,19 +192,19 @@ public class TraceRegionTest extends Assert {
 
 	@Test
 	public void testAnnotate_01() {
-		TraceRegion region = new TraceRegion(0, 1, 0, 0, 2, 3, 0, 0, null, URI.createURI("uri"));
+		TraceRegion region = new TraceRegion(0, 1, 0, 0, 2, 3, 0, 0, null, newURI());
 		assertEquals("<2:3[a]", region.getAnnotatedString("a"));
 	}
 	
 	@Test
 	public void testAnnotate_02() {
-		TraceRegion region = new TraceRegion(1, 1, 0, 0, 2, 3, 0, 0, null, URI.createURI("uri"));
+		TraceRegion region = new TraceRegion(1, 1, 0, 0, 2, 3, 0, 0, null, newURI());
 		assertEquals("a<2:3[b]c", region.getAnnotatedString("abc"));
 	}
 	
 	@Test
 	public void testAnnotate_03() {
-		TraceRegion parent = new TraceRegion(0, 4, 0, 0, 1, 2, 0, 0, null, URI.createURI("uri"));
+		TraceRegion parent = new TraceRegion(0, 4, 0, 0, 1, 2, 0, 0, null, newURI());
 		new TraceRegion(0, 1, 0, 0, 3, 4, 0, 0, parent, null);
 		new TraceRegion(2, 1, 0, 0, 5, 6, 0, 0, parent, null);
 		new TraceRegion(3, 1, 0, 0, 7, 8, 0, 0, parent, null);
@@ -205,7 +213,7 @@ public class TraceRegionTest extends Assert {
 	
 	@Test
 	public void testAnnotate_04() {
-		TraceRegion root = new TraceRegion(0, 4, 0, 0, 1, 2, 0, 0, null, URI.createURI("uri"));
+		TraceRegion root = new TraceRegion(0, 4, 0, 0, 1, 2, 0, 0, null, newURI());
 		TraceRegion parent = new TraceRegion(1, 2, 0, 0, 3, 4, 0, 0, root, null);
 		new TraceRegion(2, 1, 0, 0, 5, 6, 0, 0, parent, null);
 		assertEquals("<1:2[a<3:4[b<5:6[c]]d]e", root.getAnnotatedString("abcde"));
@@ -213,9 +221,9 @@ public class TraceRegionTest extends Assert {
 	
 	@Test
 	public void testInvertFor_01() {
-		URI path = URI.createURI("a");
+		SourceRelativeURI path = newURI("a");
 		TraceRegion root = new TraceRegion(1, 2, 3, 4, 5, 6, 7, 8, null, path);
-		List<AbstractTraceRegion> invertedList = root.invertFor(path, URI.createURI("b"));
+		List<AbstractTraceRegion> invertedList = root.invertFor(path, newURI("b"));
 		assertEquals(1, invertedList.size());
 		AbstractTraceRegion inverted = invertedList.get(0);
 		assertEquals(5, inverted.getMyOffset());
@@ -231,11 +239,11 @@ public class TraceRegionTest extends Assert {
 	
 	@Test
 	public void testInvertFor_02() {
-		URI path = URI.createURI("a");
+		SourceRelativeURI path = newURI("a");
 		TraceRegion root = new TraceRegion(0, 2, 0, 2, 4, 2, 4, 6, null, path);
 		TraceRegion first = new TraceRegion(0, 1, 0, 1, 4, 1, 4, 5, root, null);
 		TraceRegion second = new TraceRegion(1, 1, 1, 2, 5, 1, 5, 6, root, null);
-		List<AbstractTraceRegion> invertedList = root.invertFor(path, URI.createURI("b"));
+		List<AbstractTraceRegion> invertedList = root.invertFor(path, newURI("b"));
 		assertEquals(1, invertedList.size());
 		AbstractTraceRegion inverted = invertedList.get(0);
 		assertEquals(2, inverted.getNestedRegions().size());
@@ -276,11 +284,11 @@ public class TraceRegionTest extends Assert {
 	
 	@Test
 	public void testInvertFor_03() {
-		URI path = URI.createURI("a");
+		SourceRelativeURI path = newURI("a");
 		TraceRegion root = new TraceRegion(0, 2, 0, 2, 4, 3, 4, 6, null, path);
 		TraceRegion first = new TraceRegion(0, 1, 0, 1, 4, 1, 4, 5, root, null);
 		TraceRegion second = new TraceRegion(1, 1, 1, 2, 6, 1, 5, 6, root, null);
-		List<AbstractTraceRegion> invertedList = root.invertFor(path, URI.createURI("b"));
+		List<AbstractTraceRegion> invertedList = root.invertFor(path, newURI("b"));
 		assertEquals(1, invertedList.size());
 		AbstractTraceRegion inverted = invertedList.get(0);
 		assertEquals(2, inverted.getNestedRegions().size());
@@ -321,11 +329,11 @@ public class TraceRegionTest extends Assert {
 	
 	@Test
 	public void testInvertFor_04() {
-		URI path = URI.createURI("a");
+		SourceRelativeURI path = newURI("a");
 		TraceRegion root = new TraceRegion(0, 2, 0, 2, 4, 3, 4, 6, null, path);
 		TraceRegion first = new TraceRegion(0, 1, 0, 1, 4, 2, 4, 5, root, null);
 		TraceRegion second = new TraceRegion(1, 1, 1, 2, 5, 2, 5, 6, root, null);
-		List<AbstractTraceRegion> invertedList = root.invertFor(path, URI.createURI("b"));
+		List<AbstractTraceRegion> invertedList = root.invertFor(path, newURI("b"));
 		assertEquals(1, invertedList.size());
 		AbstractTraceRegion inverted = invertedList.get(0);
 		assertEquals(2, inverted.getNestedRegions().size());
@@ -378,11 +386,11 @@ public class TraceRegionTest extends Assert {
 	
 	@Test
 	public void testInvertFor_05() {
-		URI path = URI.createURI("a");
+		SourceRelativeURI path = newURI("a");
 		TraceRegion parent = new TraceRegion(0, 3, 0, 3, 4, 3, 4, 6, null, path);
 		TraceRegion first = new TraceRegion(0, 1, 0, 1, 4, 2, 4, 5, parent, null);
 		TraceRegion second = new TraceRegion(2, 1, 2, 3, 4, 2, 4, 5, parent, null);
-		List<AbstractTraceRegion> invertedList = parent.invertFor(path, URI.createURI("b"));
+		List<AbstractTraceRegion> invertedList = parent.invertFor(path, newURI("b"));
 		assertEquals(1, invertedList.size());
 		AbstractTraceRegion inverted = invertedList.get(0);
 		assertEquals(1, inverted.getNestedRegions().size());

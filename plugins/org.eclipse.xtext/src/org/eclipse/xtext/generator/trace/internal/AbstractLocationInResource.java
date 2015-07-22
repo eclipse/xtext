@@ -3,9 +3,10 @@ package org.eclipse.xtext.generator.trace.internal;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.LanguageInfo;
+import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.TextRegionWithLineInformation;
 import org.eclipse.xtext.workspace.IProjectConfig;
@@ -16,14 +17,14 @@ import org.eclipse.xtext.workspace.IProjectConfig;
  */
 public abstract class AbstractLocationInResource implements ILocationInResource {
 	private final AbstractTrace trace;
-	private URI absoluteURI;
+	private AbsoluteURI absoluteURI;
 
 	protected AbstractLocationInResource(AbstractTrace trace) {
 		this.trace = trace;
 	}
 
 	@Override
-	public abstract URI getSrcRelativeResourceURI();
+	public abstract SourceRelativeURI getSrcRelativeResourceURI();
 	protected abstract int getOffset();
 	protected abstract int getLength();
 	protected abstract int getLineNumber();
@@ -36,7 +37,7 @@ public abstract class AbstractLocationInResource implements ILocationInResource 
 	}
 	
 	@Override
-	public URI getAbsoluteResourceURI() {
+	public AbsoluteURI getAbsoluteResourceURI() {
 		if (absoluteURI == null) {
 			absoluteURI = trace.resolvePath(getSrcRelativeResourceURI());
 		}

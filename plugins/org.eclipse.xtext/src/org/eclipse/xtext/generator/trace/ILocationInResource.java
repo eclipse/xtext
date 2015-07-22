@@ -10,7 +10,6 @@ package org.eclipse.xtext.generator.trace;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.workspace.IProjectConfig;
@@ -34,13 +33,13 @@ public interface ILocationInResource {
 	 * @return the EMF resource URI for this location. May be <code>null</code> if the 
 	 * resource is not an EMF resource.
 	 */
-	/* @Nullable */ URI getAbsoluteResourceURI();
+	/* @Nullable */ AbsoluteURI getAbsoluteResourceURI();
 	
 	/**
 	 * Returns the URI of this resource relative to the classpath if applicable. Otherwise
 	 * the URI relative to the project root.
 	 */
-	/* @Nullable */ URI getSrcRelativeResourceURI();
+	/* @Nullable */ SourceRelativeURI getSrcRelativeResourceURI();
 	
 //	/**
 //	 * @return the more specific {@link org.eclipse.emf.ecore.EObject object} {@link URI}
