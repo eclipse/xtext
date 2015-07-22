@@ -9,10 +9,10 @@ package org.eclipse.xtext.xbase.compiler.output;
 
 import java.util.List;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.LocationData;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Lists;
@@ -41,7 +41,7 @@ public class AppendableBasedTraceRegion extends AbstractTraceRegion {
 		this.useForDebugging = delegate.isUseForDebugging();
 		boolean useLocationsFromDelegate = true;
 		if (parent != null) {
-			URI parentPath = parent.getAssociatedPath();
+			SourceRelativeURI parentPath = parent.getAssociatedPath();
 			if (parentPath != null) {
 				boolean matches = true;
 				for(ILocationData locationData: delegate.getLocationData()) {
