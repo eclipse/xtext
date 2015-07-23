@@ -309,6 +309,29 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="xtend-gen/org/eclipse/xtext/generator/trace/AbsoluteURI.java" type="org.eclipse.xtext.generator.trace.AbsoluteURI">
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="IProjectConfig"/>
+                <message_argument value="AbsoluteURI"/>
+                <message_argument value="deresolve(IProjectConfig)"/>
+            </message_arguments>
+        </filter>
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="ISourceFolder"/>
+                <message_argument value="AbsoluteURI"/>
+                <message_argument value="deresolve(ISourceFolder)"/>
+            </message_arguments>
+        </filter>
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="IWorkspaceConfig"/>
+                <message_argument value="AbsoluteURI"/>
+                <message_argument value="deresolve(IWorkspaceConfig)"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="xtend-gen/org/eclipse/xtext/resource/OutdatedStateManager.java" type="org.eclipse.xtext.resource.OutdatedStateManager">
         <filter id="338792546">
             <message_arguments>
