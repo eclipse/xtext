@@ -92,7 +92,7 @@ public class TreeAppendableTest extends Assert implements ILocationInFileProvide
 		assertNotNull(traceRegion);
 		assertEquals(47, traceRegion.getMergedAssociatedLocation().getOffset());
 		assertEquals(11, traceRegion.getMergedAssociatedLocation().getLength());
-		assertEquals(resource.getURI(), traceRegion.getAssociatedPath());
+		assertEquals(resource.getURI(), traceRegion.getAssociatedSrcRelativePath());
 		assertTrue(traceRegion.getNestedRegions().isEmpty());
 	}
 	
