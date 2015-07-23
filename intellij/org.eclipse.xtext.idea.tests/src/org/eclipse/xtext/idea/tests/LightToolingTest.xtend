@@ -12,8 +12,10 @@ import com.intellij.codeInsight.CodeInsightSettings
 import com.intellij.facet.FacetManager
 import com.intellij.facet.FacetType
 import com.intellij.facet.FacetTypeRegistry
+import com.intellij.formatting.FormattingModelDumper
 import com.intellij.ide.highlighter.HighlighterFactory
 import com.intellij.ide.structureView.newStructureView.StructureViewComponent
+import com.intellij.lang.LanguageFormatting
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.editor.highlighter.HighlighterIterator
 import com.intellij.openapi.fileTypes.LanguageFileType
@@ -192,6 +194,14 @@ class LightToolingTest extends LightCodeInsightFixtureTestCase {
 
 	protected def getCodeStyleSettings() {
 		CodeStyleSettingsManager.getSettings(project)
+	}
+
+	protected def dumpFormattingModel() {
+		val formattingModelBuilder = LanguageFormatting.INSTANCE.forContext(file)
+		val block = formattingModelBuilder.createModel(file, codeStyleSettings).rootBlock
+		val builder = new StringBuilder
+		FormattingModelDumper.dumpFormattingModel(block, 0, builder)
+		builder.toString
 	}
 
 }

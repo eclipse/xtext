@@ -27,21 +27,7 @@ class AutoEditInMethodBodyTest extends AutoEditTest {
 	override testIndentationEdit_2() {
 		configureByText("  |")
 		myFixture.type('\n')
-		assertState("  \n	|")
-	}
-
-	override testBug341093_01() {
-		configureByText("/**/\n" + "//test|")
-
-		myFixture.type('\n')
-		assertState("/**/\n" + "//test\n" + "\t|")
-	}
-
-	override testBug341093_02() {
-		configureByText("/*\n" + " **/\n" + "//test|")
-
-		myFixture.type('\n')
-		assertState("/*\n" + " **/\n" + "//test\n" + "\t|")
+		assertState("  \n\t\t|")
 	}
 
 	override testCurlyBracesBlock_1() {
@@ -49,15 +35,39 @@ class AutoEditInMethodBodyTest extends AutoEditTest {
 		myFixture.type('{')
 		assertState('\t\t{|}')
 		myFixture.type('\n')
-		assertState('\t\t{\n\t|\n}')
+		assertState('\t\t{\n\t\t|\n}')
 		myFixture.type('\n')
-		assertState('\t\t{\n\t\n\t|\n}')
+		assertState('\t\t{\n\t\t\n\t\t|\n}')
+	}
+	
+	override testCurlyBracesBlock_2() {
+		configureByText('{|\n}')
+		myFixture.type('\n')
+		assertState("{\n\t\t|\n}")
 	}
 
 	override testCurlyBracesBlock_4() {
 		configureByText('foo {|')
 		myFixture.type('\n')
 		assertState("foo {\n\t\t|\n\t}")
+	}
+	
+	override testCurlyBracesBlock_5() {
+		configureByText('{|}')
+		myFixture.type('\n')
+		assertState("{\n\t\t|\n}")
+	}
+	
+	override testCurlyBracesBlock_11() {
+		configureByText('{|}')
+		myFixture.type('\n')
+		assertState('{\n\t\t|\n}')
+	}
+	
+	override testCurlyBracesBlock_17() {
+		configureByText('{\n|')
+		myFixture.type('\n')
+		assertState('{\n\n\t\t|')
 	}
 
 	override testMLComments_07() {
@@ -78,20 +88,40 @@ class AutoEditInMethodBodyTest extends AutoEditTest {
 		configureByText("  // test|")
 
 		myFixture.type('\n')
-		assertState("  // test\n\t|")
+		assertState("  // test\n|")
 	}
 
 	override testSingleLineComment_04() {
 		configureByText("  // test|\n")
 
 		myFixture.type('\n')
-		assertState("  // test\n\t|\n")
+		assertState("  // test\n|\n")
 	}
 
 	override testCurlyBracesBlock_10() {
 		configureByText('/*{*/ foo|')
 		myFixture.type('\n')
 		assertState('/*{*/ foo\n\t|')
+	}
+	
+	override testCurlyBracesBlock_14() {
+		configureByText('{\nfoo|bar}')
+		myFixture.type('\n')
+		assertState('{\nfoo\n\t|bar}')
+	}
+	
+	override testCurlyBracesBlock_18() {
+		configureByText('{{foo}|{bar}}')
+		myFixture.type('\n')
+		assertState('{{foo}\n|{bar}}')
+	}
+	
+	override testCurlyBracesBlock_19() {
+		configureByText('{{|')
+		myFixture.type('\n')
+		assertState('{{\n\t\t|\n}}')
+		myFixture.type('\n')
+		assertState('{{\n\t\t\n\t\t|\n}}')
 	}
 
 	override testParenthesis_1() {
@@ -149,17 +179,12 @@ class AutoEditInMethodBodyTest extends AutoEditTest {
 		myFixture.type('(')
 		assertState("\t(|'')")
 	}
+	
+	override testBug338423_01() {
+		configureByText("[{|}]")
 
-	override testCurlyBracesBlock_13() {
-		configureByText('{foo|bar}')
 		myFixture.type('\n')
-		assertState('{foo\n\t|bar}')
-	}
-
-	override testCurlyBracesBlock_14() {
-		configureByText('{\nfoo|bar}')
-		myFixture.type('\n')
-		assertState('{\nfoo\n\t|bar}')
+		assertState("[{\n\t\t|\n}]")
 	}
 
 }

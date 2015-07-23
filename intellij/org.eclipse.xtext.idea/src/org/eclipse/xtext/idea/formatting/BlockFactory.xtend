@@ -7,23 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.formatting
 
+import com.google.inject.ImplementedBy
 import com.intellij.formatting.Block
-import com.intellij.formatting.Indent
-import com.intellij.formatting.SpacingBuilder
+import com.intellij.lang.ASTNode
+import com.intellij.psi.PsiElement
+import com.intellij.psi.codeStyle.CodeStyleSettings
 
 /**
  * @author kosyakov - Initial contribution and API
  */
-interface ModifiableBlock extends Block {
-	def void setIndent(Indent indent)
+@ImplementedBy(DefaultBlockFactory)
+interface BlockFactory {
 	
-	def void setIncomplete(Boolean incomplete)
+	def Block createRootBlock(PsiElement element, CodeStyleSettings settings)
+	
+	def Block createBlock(ASTNode node, Block parentBlock)
 
-	def SpacingBuilder getSpacingBuilder()
-
-	def void setSpacingBuilder(SpacingBuilder spacingBuilder)
-
-	def Block getParentBlock()
-
-	def void setParentBlock(Block parentBlock)
 }

@@ -67,7 +67,8 @@ public abstract class AbstractAutoEditTest extends LightToolingTest {
       _xblockexpression = ((beforeCaret + "|") + afterCaret);
     }
     final String actualState = _xblockexpression;
-    TestCase.assertEquals(expectedState, actualState);
+    String _dumpFormattingModel = this.dumpFormattingModel();
+    TestCase.assertEquals(_dumpFormattingModel, expectedState, actualState);
   }
   
   protected void newLine() {

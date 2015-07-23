@@ -7,7 +7,7 @@
  */
 package org.eclipse.xtext.idea.formatting;
 
-import com.google.common.base.Objects;
+import com.google.inject.Inject;
 import com.intellij.formatting.Alignment;
 import com.intellij.formatting.Block;
 import com.intellij.formatting.ChildAttributes;
@@ -18,9 +18,9 @@ import com.intellij.formatting.Wrap;
 import com.intellij.openapi.util.TextRange;
 import java.util.List;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.idea.formatting.ChildAttributesProvider;
 import org.eclipse.xtext.idea.formatting.ModifiableBlock;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
@@ -30,6 +30,12 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @SuppressWarnings("all")
 public class SyntheticXtextBlock implements ModifiableBlock {
   @Accessors
+  private Block parentBlock;
+  
+  @Accessors
+  private Boolean incomplete = Boolean.valueOf(false);
+  
+  @Accessors
   private Indent indent = Indent.getNoneIndent();
   
   @Accessors
@@ -38,8 +44,13 @@ public class SyntheticXtextBlock implements ModifiableBlock {
   @Accessors
   private final List<Block> children = CollectionLiterals.<Block>newArrayList();
   
-  @Accessors
-  private Function2<? super List<Block>, ? super Integer, ? extends ChildAttributes> childAttributesProvider;
+  @Inject
+  private ChildAttributesProvider childAttributesProvider;
+  
+  @Override
+  public boolean isIncomplete() {
+    return (this.incomplete).booleanValue();
+  }
   
   @Override
   public boolean isLeaf() {
@@ -53,18 +64,16 @@ public class SyntheticXtextBlock implements ModifiableBlock {
   
   @Override
   public ChildAttributes getChildAttributes(final int newChildIndex) {
-    boolean _equals = Objects.equal(this.childAttributesProvider, null);
-    if (_equals) {
-      Indent _noneIndent = Indent.getNoneIndent();
-      return new ChildAttributes(_noneIndent, null);
-    }
-    List<Block> _subBlocks = this.getSubBlocks();
-    return this.childAttributesProvider.apply(_subBlocks, Integer.valueOf(newChildIndex));
+    return this.childAttributesProvider.getChildAttributes(this, newChildIndex);
   }
   
   @Override
   public Spacing getSpacing(final Block child1, final Block child2) {
-    return this.spacingBuilder.getSpacing(this, child1, child2);
+    Spacing _spacing = null;
+    if (this.spacingBuilder!=null) {
+      _spacing=this.spacingBuilder.getSpacing(this, child1, child2);
+    }
+    return _spacing;
   }
   
   @Override
@@ -75,12 +84,6 @@ public class SyntheticXtextBlock implements ModifiableBlock {
   @Override
   public Wrap getWrap() {
     return null;
-  }
-  
-  @Override
-  public boolean isIncomplete() {
-    Block _last = IterableExtensions.<Block>last(this.children);
-    return _last.isIncomplete();
   }
   
   @Override
@@ -108,6 +111,24 @@ public class SyntheticXtextBlock implements ModifiableBlock {
   }
   
   @Pure
+  public Block getParentBlock() {
+    return this.parentBlock;
+  }
+  
+  public void setParentBlock(final Block parentBlock) {
+    this.parentBlock = parentBlock;
+  }
+  
+  @Pure
+  public Boolean getIncomplete() {
+    return this.incomplete;
+  }
+  
+  public void setIncomplete(final Boolean incomplete) {
+    this.incomplete = incomplete;
+  }
+  
+  @Pure
   public Indent getIndent() {
     return this.indent;
   }
@@ -128,14 +149,5 @@ public class SyntheticXtextBlock implements ModifiableBlock {
   @Pure
   public List<Block> getChildren() {
     return this.children;
-  }
-  
-  @Pure
-  public Function2<? super List<Block>, ? super Integer, ? extends ChildAttributes> getChildAttributesProvider() {
-    return this.childAttributesProvider;
-  }
-  
-  public void setChildAttributesProvider(final Function2<? super List<Block>, ? super Integer, ? extends ChildAttributes> childAttributesProvider) {
-    this.childAttributesProvider = childAttributesProvider;
   }
 }

@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.formatting
 
+import com.google.inject.Inject
 import com.intellij.formatting.Block
-import com.intellij.formatting.ChildAttributes
 import com.intellij.formatting.Indent
 import com.intellij.formatting.SpacingBuilder
 import com.intellij.openapi.util.TextRange
@@ -20,12 +20,19 @@ import org.eclipse.xtend.lib.annotations.Accessors
  */
 class SyntheticXtextBlock implements ModifiableBlock {
 
+	@Accessors Block parentBlock
+	@Accessors Boolean incomplete = false
 	@Accessors Indent indent = Indent.noneIndent
 	@Accessors SpacingBuilder spacingBuilder
 
 	@Accessors val List<Block> children = newArrayList
-	
-	@Accessors var (List<Block>, int)=>ChildAttributes childAttributesProvider
+
+	@Inject
+	ChildAttributesProvider childAttributesProvider
+
+	override isIncomplete() {
+		incomplete
+	}
 
 	override isLeaf() {
 		false
@@ -36,14 +43,11 @@ class SyntheticXtextBlock implements ModifiableBlock {
 	}
 
 	override getChildAttributes(int newChildIndex) {
-		if (childAttributesProvider == null)
-			return new ChildAttributes(Indent.noneIndent, null)
-			
-		return childAttributesProvider.apply(subBlocks, newChildIndex)
+		childAttributesProvider.getChildAttributes(this, newChildIndex)
 	}
 
 	override getSpacing(Block child1, Block child2) {
-		spacingBuilder.getSpacing(this, child1, child2)
+		spacingBuilder?.getSpacing(this, child1, child2)
 	}
 
 	override getSubBlocks() {
@@ -54,16 +58,12 @@ class SyntheticXtextBlock implements ModifiableBlock {
 		null
 	}
 
-	override isIncomplete() {
-		children.last.incomplete
-	}
-
 	override getTextRange() {
 		val startOffset = children.head.textRange.startOffset
 		val endOffset = children.last.textRange.endOffset
 		new TextRange(startOffset, endOffset)
 	}
-	
+
 	override toString() {
 		children.toString + ' ' + textRange.toString
 	}

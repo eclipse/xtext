@@ -34,21 +34,7 @@ public class AutoEditInMethodBodyTest extends AutoEditTest {
   public void testIndentationEdit_2() {
     this.configureByText("  |");
     this.myFixture.type("\n");
-    this.assertState("  \n\t|");
-  }
-  
-  @Override
-  public void testBug341093_01() {
-    this.configureByText(("/**/\n" + "//test|"));
-    this.myFixture.type("\n");
-    this.assertState((("/**/\n" + "//test\n") + "\t|"));
-  }
-  
-  @Override
-  public void testBug341093_02() {
-    this.configureByText((("/*\n" + " **/\n") + "//test|"));
-    this.myFixture.type("\n");
-    this.assertState(((("/*\n" + " **/\n") + "//test\n") + "\t|"));
+    this.assertState("  \n\t\t|");
   }
   
   @Override
@@ -57,9 +43,16 @@ public class AutoEditInMethodBodyTest extends AutoEditTest {
     this.myFixture.type("{");
     this.assertState("\t\t{|}");
     this.myFixture.type("\n");
-    this.assertState("\t\t{\n\t|\n}");
+    this.assertState("\t\t{\n\t\t|\n}");
     this.myFixture.type("\n");
-    this.assertState("\t\t{\n\t\n\t|\n}");
+    this.assertState("\t\t{\n\t\t\n\t\t|\n}");
+  }
+  
+  @Override
+  public void testCurlyBracesBlock_2() {
+    this.configureByText("{|\n}");
+    this.myFixture.type("\n");
+    this.assertState("{\n\t\t|\n}");
   }
   
   @Override
@@ -67,6 +60,27 @@ public class AutoEditInMethodBodyTest extends AutoEditTest {
     this.configureByText("foo {|");
     this.myFixture.type("\n");
     this.assertState("foo {\n\t\t|\n\t}");
+  }
+  
+  @Override
+  public void testCurlyBracesBlock_5() {
+    this.configureByText("{|}");
+    this.myFixture.type("\n");
+    this.assertState("{\n\t\t|\n}");
+  }
+  
+  @Override
+  public void testCurlyBracesBlock_11() {
+    this.configureByText("{|}");
+    this.myFixture.type("\n");
+    this.assertState("{\n\t\t|\n}");
+  }
+  
+  @Override
+  public void testCurlyBracesBlock_17() {
+    this.configureByText("{\n|");
+    this.myFixture.type("\n");
+    this.assertState("{\n\n\t\t|");
   }
   
   @Override
@@ -87,14 +101,14 @@ public class AutoEditInMethodBodyTest extends AutoEditTest {
   public void testSingleLineComment_03() {
     this.configureByText("  // test|");
     this.myFixture.type("\n");
-    this.assertState("  // test\n\t|");
+    this.assertState("  // test\n|");
   }
   
   @Override
   public void testSingleLineComment_04() {
     this.configureByText("  // test|\n");
     this.myFixture.type("\n");
-    this.assertState("  // test\n\t|\n");
+    this.assertState("  // test\n|\n");
   }
   
   @Override
@@ -102,6 +116,29 @@ public class AutoEditInMethodBodyTest extends AutoEditTest {
     this.configureByText("/*{*/ foo|");
     this.myFixture.type("\n");
     this.assertState("/*{*/ foo\n\t|");
+  }
+  
+  @Override
+  public void testCurlyBracesBlock_14() {
+    this.configureByText("{\nfoo|bar}");
+    this.myFixture.type("\n");
+    this.assertState("{\nfoo\n\t|bar}");
+  }
+  
+  @Override
+  public void testCurlyBracesBlock_18() {
+    this.configureByText("{{foo}|{bar}}");
+    this.myFixture.type("\n");
+    this.assertState("{{foo}\n|{bar}}");
+  }
+  
+  @Override
+  public void testCurlyBracesBlock_19() {
+    this.configureByText("{{|");
+    this.myFixture.type("\n");
+    this.assertState("{{\n\t\t|\n}}");
+    this.myFixture.type("\n");
+    this.assertState("{{\n\t\t\n\t\t|\n}}");
   }
   
   @Override
@@ -167,16 +204,9 @@ public class AutoEditInMethodBodyTest extends AutoEditTest {
   }
   
   @Override
-  public void testCurlyBracesBlock_13() {
-    this.configureByText("{foo|bar}");
+  public void testBug338423_01() {
+    this.configureByText("[{|}]");
     this.myFixture.type("\n");
-    this.assertState("{foo\n\t|bar}");
-  }
-  
-  @Override
-  public void testCurlyBracesBlock_14() {
-    this.configureByText("{\nfoo|bar}");
-    this.myFixture.type("\n");
-    this.assertState("{\nfoo\n\t|bar}");
+    this.assertState("[{\n\t\t|\n}]");
   }
 }

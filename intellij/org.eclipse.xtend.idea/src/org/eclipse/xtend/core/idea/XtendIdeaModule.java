@@ -9,6 +9,8 @@ package org.eclipse.xtend.core.idea;
 
 import org.eclipse.xtend.core.idea.editorActions.XtendAutoEditBlockProvider;
 import org.eclipse.xtend.core.idea.editorActions.XtendTokenSetProvider;
+import org.eclipse.xtend.core.idea.formatting.XtendBlockFactory;
+import org.eclipse.xtend.core.idea.formatting.XtendChildAttributesProvider;
 import org.eclipse.xtend.core.idea.highlighting.XtendHighlightingConfiguration;
 import org.eclipse.xtend.core.idea.highlighting.XtendSyntaxHighlighter;
 import org.eclipse.xtend.core.idea.intentions.XtendIntentionsProvider;
@@ -36,6 +38,8 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.AbstractAntlrTokenToAttribute
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.idea.editorActions.AutoEditBlockProvider;
 import org.eclipse.xtext.idea.editorActions.TokenSetProvider;
+import org.eclipse.xtext.idea.formatting.BlockFactory;
+import org.eclipse.xtext.idea.formatting.ChildAttributesProvider;
 import org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration;
 import org.eclipse.xtext.idea.intentions.IdeaIntentionsProvider;
 import org.eclipse.xtext.idea.presentation.ItemPresentationProvider;
@@ -140,4 +144,13 @@ public class XtendIdeaModule extends AbstractXtendIdeaModule {
 	public Class<? extends IdeaIntentionsProvider> bindIdeaQuickFixProvider() {
 		return XtendIntentionsProvider.class;
 	}
+
+	public Class<? extends BlockFactory> bindBlockFactory() {
+		return XtendBlockFactory.class;
+	}
+	
+	public Class<? extends ChildAttributesProvider> bindChildAttributesProvider() {
+		return XtendChildAttributesProvider.class;
+	}
+
 }

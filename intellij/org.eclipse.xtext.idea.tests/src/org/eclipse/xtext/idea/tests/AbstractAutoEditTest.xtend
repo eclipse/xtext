@@ -8,7 +8,7 @@ import java.awt.datatransfer.StringSelection
 import org.eclipse.xtext.junit4.internal.LineDelimiters
 
 abstract class AbstractAutoEditTest extends LightToolingTest {
-	
+
 	new(LanguageFileType fileType) {
 		super(fileType)
 	}
@@ -41,15 +41,15 @@ abstract class AbstractAutoEditTest extends LightToolingTest {
 			beforeCaret + '|' + afterCaret
 		}
 
-		assertEquals(expectedState, actualState)
+		assertEquals(dumpFormattingModel, expectedState, actualState)
 	}
-	
+
 	protected def newLine() {
 		myFixture.type('\n')
 	}
-	
+
 	protected def backspace() {
 		myFixture.type('\b')
 	}
-	
+
 }
