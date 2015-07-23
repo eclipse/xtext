@@ -15,8 +15,6 @@ import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.codeInsight.completion.JavaPsiClassReferenceElement;
 import com.intellij.openapi.util.Condition;
-import com.intellij.patterns.PlatformPatterns;
-import com.intellij.patterns.PsiElementPattern;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -61,8 +59,6 @@ public class XbaseWithAnnotationsCompletionContributor extends XbaseCompletionCo
   }
   
   protected void completeXAnnotation_Value() {
-    PsiElementPattern.Capture<PsiElement> _psiElement = PlatformPatterns.psiElement();
-    PsiElementPattern.Capture<PsiElement> _withEReference = this._patternExtensions.withEReference(_psiElement, XAnnotationsPackage.Literals.XANNOTATION__VALUE);
     final CompletionProvider<CompletionParameters> _function = new CompletionProvider<CompletionParameters>() {
       @Override
       protected void addCompletions(final CompletionParameters $0, final ProcessingContext $1, final CompletionResultSet $2) {
@@ -126,6 +122,7 @@ public class XbaseWithAnnotationsCompletionContributor extends XbaseCompletionCo
       }
     };
     this.extend(
-      CompletionType.BASIC, _withEReference, _function);
+      CompletionType.BASIC, 
+      XAnnotationsPackage.Literals.XANNOTATION__VALUE, _function);
   }
 }

@@ -57,6 +57,24 @@ public class Bug440069Test extends AbstractXtendContentAssistBugTest {
   }
   
   @Test
+  public void test_AfterDef() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class MyTest {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <|> test() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
+    _append.assertProposalAtCursor("String");
+  }
+  
+  @Test
   public void test_02() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
     StringConcatenation _builder = new StringConcatenation();

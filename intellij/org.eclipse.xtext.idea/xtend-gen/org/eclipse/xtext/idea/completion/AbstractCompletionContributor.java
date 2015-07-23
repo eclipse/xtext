@@ -8,41 +8,60 @@
 package org.eclipse.xtext.idea.completion;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.intellij.codeInsight.completion.CompletionContext;
 import com.intellij.codeInsight.completion.CompletionContributor;
 import com.intellij.codeInsight.completion.CompletionInitializationContext;
 import com.intellij.codeInsight.completion.CompletionParameters;
+import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResult;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.completion.CompletionService;
 import com.intellij.codeInsight.completion.CompletionSorter;
+import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.codeInsight.completion.LegacyCompletionContributor;
 import com.intellij.codeInsight.completion.OffsetMap;
 import com.intellij.codeInsight.completion.PrefixMatcher;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementWeigher;
+import com.intellij.lang.ASTNode;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.util.Computable;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.Consumer;
+import com.intellij.util.ProcessingContext;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ide.editor.contentassist.IFollowElementAcceptor;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElementComputer;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.idea.completion.CompletionExtensions;
-import org.eclipse.xtext.idea.completion.PatternExtensions;
 import org.eclipse.xtext.idea.lang.AbstractXtextLanguage;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.TextRegion;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -125,16 +144,49 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   
   @Inject
   @Extension
-  protected PatternExtensions _patternExtensions;
+  protected CompletionExtensions _completionExtensions;
   
   @Inject
-  @Extension
-  protected CompletionExtensions _completionExtensions;
+  protected IGrammarAccess grammarAccess;
+  
+  @Inject
+  private IContentAssistParser contentAssistParser;
+  
+  @Inject
+  private FollowElementComputer followElementComputer;
   
   private ExecutorService pool = Executors.newFixedThreadPool(3);
   
+  private Map<CompletionType, Multimap<AbstractElement, CompletionProvider<CompletionParameters>>> myContributors = CollectionLiterals.<CompletionType, Multimap<AbstractElement, CompletionProvider<CompletionParameters>>>newHashMap();
+  
   public AbstractCompletionContributor(final AbstractXtextLanguage lang) {
     lang.injectMembers(this);
+  }
+  
+  protected void extend(final CompletionType type, final EStructuralFeature feature, final CompletionProvider<CompletionParameters> contrib) {
+    Grammar _grammar = this.grammarAccess.getGrammar();
+    final IFollowElementAcceptor _function = new IFollowElementAcceptor() {
+      @Override
+      public void accept(final AbstractElement it) {
+        AbstractCompletionContributor.this.extend(type, it, contrib);
+      }
+    };
+    this.followElementComputer.collectAbstractElements(_grammar, feature, _function);
+  }
+  
+  protected boolean extend(final CompletionType type, final AbstractElement followElement, final CompletionProvider<CompletionParameters> contrib) {
+    boolean _xblockexpression = false;
+    {
+      boolean _containsKey = this.myContributors.containsKey(type);
+      boolean _not = (!_containsKey);
+      if (_not) {
+        ArrayListMultimap<AbstractElement, CompletionProvider<CompletionParameters>> _create = ArrayListMultimap.<AbstractElement, CompletionProvider<CompletionParameters>>create();
+        this.myContributors.put(type, _create);
+      }
+      final Multimap<AbstractElement, CompletionProvider<CompletionParameters>> map = this.myContributors.get(type);
+      _xblockexpression = map.put(followElement, contrib);
+    }
+    return _xblockexpression;
   }
   
   @Override
@@ -161,8 +213,63 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
     }, this);
     this.createMatcherBasedProposals(parameters, filteredResult);
     this.createReferenceBasedProposals(parameters, filteredResult);
+    this.createFollowElementBasedProposals(parameters, filteredResult);
     this.createParserBasedProposals(parameters, filteredResult);
     result.stopHere();
+  }
+  
+  protected void createFollowElementBasedProposals(final CompletionParameters parameters, final CompletionResultSet result) {
+    boolean _or = false;
+    boolean _isEmpty = this.myContributors.isEmpty();
+    if (_isEmpty) {
+      _or = true;
+    } else {
+      CompletionType _completionType = parameters.getCompletionType();
+      boolean _containsKey = this.myContributors.containsKey(_completionType);
+      boolean _not = (!_containsKey);
+      _or = _not;
+    }
+    if (_or) {
+      return;
+    }
+    final Set<AbstractElement> followElements = this.computeFollowElements(parameters);
+    CompletionType _completionType_1 = parameters.getCompletionType();
+    final Multimap<AbstractElement, CompletionProvider<CompletionParameters>> element2provider = this.myContributors.get(_completionType_1);
+    final HashSet<CompletionProvider<CompletionParameters>> calledProviders = CollectionLiterals.<CompletionProvider<CompletionParameters>>newHashSet();
+    Set<AbstractElement> _keySet = element2provider.keySet();
+    for (final AbstractElement followElement : _keySet) {
+      {
+        final ProcessingContext context = new ProcessingContext();
+        boolean _contains = followElements.contains(followElement);
+        if (_contains) {
+          final Collection<CompletionProvider<CompletionParameters>> providers = element2provider.get(followElement);
+          for (final CompletionProvider<CompletionParameters> provider : providers) {
+            boolean _add = calledProviders.add(provider);
+            if (_add) {
+              provider.addCompletionVariants(parameters, context, result);
+              boolean _isStopped = result.isStopped();
+              if (_isStopped) {
+                return;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  protected Set<AbstractElement> computeFollowElements(final CompletionParameters parameters) {
+    Editor _editor = parameters.getEditor();
+    Document _document = _editor.getDocument();
+    String _text = _document.getText();
+    PsiElement _position = parameters.getPosition();
+    ASTNode _node = _position.getNode();
+    int _startOffset = _node.getStartOffset();
+    String _substring = _text.substring(0, _startOffset);
+    final Collection<FollowElement> followElements = this.contentAssistParser.getFollowElements(_substring, false);
+    final HashSet<AbstractElement> allElements = CollectionLiterals.<AbstractElement>newHashSet();
+    this.followElementComputer.computeFollowElements(followElements, allElements);
+    return allElements;
   }
   
   protected CompletionSorter getCompletionSorter(final CompletionParameters parameters, final CompletionResultSet result) {

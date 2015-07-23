@@ -39,6 +39,13 @@ public class FollowElementCalculator extends XtextSwitch<Boolean> {
 	
 	private Collection<RuleCall> visitedRuleCalls = Sets.newHashSet();
 	
+	/**
+	 * @since 2.9
+	 */
+	public void setAcceptor(IFollowElementAcceptor acceptor) {
+		this.acceptor = acceptor;
+	}
+	
 	public void doSwitch(UnorderedGroup group, List<AbstractElement> handledAlternatives) {
 		this.group = group;
 		this.handledAlternatives = handledAlternatives;

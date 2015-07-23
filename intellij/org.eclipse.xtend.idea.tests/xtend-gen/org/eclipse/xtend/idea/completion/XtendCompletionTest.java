@@ -823,4 +823,106 @@ public class XtendCompletionTest extends LightXtendTest {
     String _selectedText = _selectionModel.getSelectedText();
     TestCase.assertEquals("throw new UnsupportedOperationException()", _selectedText);
   }
+  
+  public void testOverrideCompletion_08() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("\'foo\'");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("overr<caret>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    String _string = _builder.toString();
+    this.complete(_string);
+    final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
+    String _string_1 = lookupElementStrings.toString();
+    boolean _contains = lookupElementStrings.contains("override toString()");
+    TestCase.assertFalse(_string_1, _contains);
+  }
+  
+  public void testOverrideCompletion_09() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("\'foo\'");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("overr<caret>");
+    _builder.newLine();
+    String _string = _builder.toString();
+    this.complete(_string);
+    final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
+    String _string_1 = lookupElementStrings.toString();
+    boolean _contains = lookupElementStrings.contains("override toString()");
+    TestCase.assertFalse(_string_1, _contains);
+  }
+  
+  public void testOverrideCompletion_10() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(overr<caret>) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("\'foo\'");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.newLine();
+    String _string = _builder.toString();
+    this.complete(_string);
+    final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
+    String _string_1 = lookupElementStrings.toString();
+    boolean _contains = lookupElementStrings.contains("override toString()");
+    TestCase.assertFalse(_string_1, _contains);
+  }
+  
+  public void testOverrideCompletion_11() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def overr<caret> foo(overr<caret>) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("\'foo\'");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.newLine();
+    String _string = _builder.toString();
+    this.complete(_string);
+    final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
+    String _string_1 = lookupElementStrings.toString();
+    boolean _contains = lookupElementStrings.contains("override toString()");
+    TestCase.assertFalse(_string_1, _contains);
+  }
 }

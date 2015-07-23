@@ -436,4 +436,58 @@ class XtendCompletionTest extends LightXtendTest {
 		
 		assertEquals("throw new UnsupportedOperationException()",myFixture.editor.selectionModel.selectedText)
 	}
+	
+	def void testOverrideCompletion_08() {
+		'''
+		   class Foo {
+		   	def foo() {
+		   		'foo'
+		    overr<caret>
+		   	}
+		   }
+		'''.toString.complete
+		val lookupElementStrings = myFixture.lookupElementStrings
+		assertFalse(lookupElementStrings.toString, lookupElementStrings.contains("override toString()"))
+	}
+	
+	def void testOverrideCompletion_09() {
+		'''
+		   class Foo {
+		   	def foo() {
+		   		'foo'
+		   	}
+		   }
+		    overr<caret>
+		'''.toString.complete
+		val lookupElementStrings = myFixture.lookupElementStrings
+		assertFalse(lookupElementStrings.toString, lookupElementStrings.contains("override toString()"))
+	}
+	
+	def void testOverrideCompletion_10() {
+		'''
+		   class Foo {
+		   	def foo(overr<caret>) {
+		   		'foo'
+		   	}
+		   }
+		    
+		'''.toString.complete
+		val lookupElementStrings = myFixture.lookupElementStrings
+		assertFalse(lookupElementStrings.toString, lookupElementStrings.contains("override toString()"))
+	}
+	
+	
+	def void testOverrideCompletion_11() {
+		'''
+		   class Foo {
+		   	def overr<caret> foo(overr<caret>) {
+		   		'foo'
+		   	}
+		   }
+		    
+		'''.toString.complete
+		val lookupElementStrings = myFixture.lookupElementStrings
+		assertFalse(lookupElementStrings.toString, lookupElementStrings.contains("override toString()"))
+	}
+	
 }

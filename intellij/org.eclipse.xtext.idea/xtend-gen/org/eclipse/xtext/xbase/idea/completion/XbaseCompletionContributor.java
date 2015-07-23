@@ -21,10 +21,7 @@ import com.intellij.codeInsight.completion.JavaPsiClassReferenceElement;
 import com.intellij.codeInsight.completion.PrefixMatcher;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.openapi.editor.Document;
-import com.intellij.patterns.PlatformPatterns;
-import com.intellij.patterns.PsiElementPattern;
 import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiModifier;
 import com.intellij.util.Consumer;
@@ -160,15 +157,13 @@ public class XbaseCompletionContributor extends XtypeCompletionContributor {
   }
   
   protected void completeJavaTypes(final EReference reference, final boolean addImport, final Function1<? super JavaPsiClassReferenceElement, ? extends Boolean> filter) {
-    PsiElementPattern.Capture<PsiElement> _psiElement = PlatformPatterns.psiElement();
-    PsiElementPattern.Capture<PsiElement> _withEReference = this._patternExtensions.withEReference(_psiElement, reference);
     final CompletionProvider<CompletionParameters> _function = new CompletionProvider<CompletionParameters>() {
       @Override
       protected void addCompletions(final CompletionParameters $0, final ProcessingContext $1, final CompletionResultSet $2) {
         XbaseCompletionContributor.this.completeJavaTypes($0, $2, addImport, filter);
       }
     };
-    this.extend(CompletionType.BASIC, _withEReference, _function);
+    this.extend(CompletionType.BASIC, reference, _function);
   }
   
   protected void completeJavaTypes(final CompletionParameters completionParameters, final CompletionResultSet completionResultSet, final boolean addImport, final Function1<? super JavaPsiClassReferenceElement, ? extends Boolean> filter) {

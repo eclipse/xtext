@@ -19,8 +19,8 @@ import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiDocumentManager
 import com.intellij.psi.codeStyle.CodeStyleManager
 import org.eclipse.xtend.core.idea.lang.XtendLanguage
-import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendPackage
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.idea.document.DocumentUtils
 import org.eclipse.xtext.idea.lang.AbstractXtextLanguage
@@ -33,10 +33,7 @@ import org.eclipse.xtext.xbase.typesystem.^override.IResolvedConstructor
 import org.eclipse.xtext.xbase.typesystem.^override.IResolvedExecutable
 import org.eclipse.xtext.xbase.typesystem.^override.IResolvedOperation
 
-import static com.intellij.patterns.PlatformPatterns.*
-
 import static extension org.eclipse.xtext.EcoreUtil2.*
-import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 
 class XtendCompletionContributor extends AbstractXtendCompletionContributor {
 
@@ -58,7 +55,7 @@ class XtendCompletionContributor extends AbstractXtendCompletionContributor {
 	protected def completeAbstractSuperMethods() {
 		extend(
 			CompletionType.BASIC,
-			psiElement.withEReference(XtendPackage.Literals.XTEND_TYPE_DECLARATION__MEMBERS)
+			XtendPackage.Literals.XTEND_TYPE_DECLARATION__MEMBERS
 		) [
 			val psiElement = $0.position
 			val clazz = psiElement.findEObject?.getContainerOfType(XtendTypeDeclaration)
