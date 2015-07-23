@@ -92,7 +92,7 @@ public class TreeAppendableTest extends Assert implements ILocationInFileProvide
 		assertNotNull(traceRegion);
 		assertEquals(47, traceRegion.getMergedAssociatedLocation().getOffset());
 		assertEquals(11, traceRegion.getMergedAssociatedLocation().getLength());
-		assertEquals(resource.getURI(), traceRegion.getAssociatedSrcRelativePath());
+		assertEquals(getURIForTrace(resource), traceRegion.getAssociatedSrcRelativePath());
 		assertTrue(traceRegion.getNestedRegions().isEmpty());
 	}
 	
@@ -294,7 +294,7 @@ public class TreeAppendableTest extends Assert implements ILocationInFileProvide
 	
 	@Override
 	public SourceRelativeURI getURIForTrace(Resource resource) {
-		return new SourceRelativeURI(URI.createURI(resource.getURI().path()));
+		return SourceRelativeURI.fromAbsolute(resource.getURI());
 	}
 
 	@Override
