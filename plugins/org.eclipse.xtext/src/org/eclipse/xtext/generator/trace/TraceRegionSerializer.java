@@ -9,8 +9,11 @@ package org.eclipse.xtext.generator.trace;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.DataInput;
 import java.io.DataInputStream;
+import java.io.DataOutput;
 import java.io.DataOutputStream;
+import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -103,16 +106,16 @@ public class TraceRegionSerializer {
 			strategy.writeRegion(region, new Callback<Region, Location>() {
 				@Override
 				public void doWriteRegion(int offset, int length, int lineNumber, int endLineNumber, boolean isUseForDebugging, List<Location> locations, List<Region> children) throws IOException {
-					dataStream.writeInt(offset);
-					dataStream.writeInt(length);
-					dataStream.writeInt(lineNumber);
-					dataStream.writeInt(endLineNumber);
+					writeCompressedInt(dataStream, offset);
+					writeCompressedInt(dataStream, length);
+					writeCompressedInt(dataStream, lineNumber);
+					writeCompressedInt(dataStream, endLineNumber);
 					dataStream.writeBoolean(isUseForDebugging);
-					dataStream.writeInt(locations.size());
+					writeCompressedInt(dataStream, locations.size());
 					for(Location loc: locations) {
 						strategy.writeLocation(loc, this);
 					}
-					dataStream.writeInt(children.size());
+					writeCompressedInt(dataStream, children.size());
 					for(Region child: children) {
 						strategy.writeRegion(child, this);
 					}
@@ -120,10 +123,10 @@ public class TraceRegionSerializer {
 
 				@Override
 				public void doWriteLocation(int offset, int length, int lineNumber, int endLineNumber, SourceRelativeURI path) throws IOException {
-					dataStream.writeInt(offset);
-					dataStream.writeInt(length);
-					dataStream.writeInt(lineNumber);
-					dataStream.writeInt(endLineNumber);
+					writeCompressedInt(dataStream, offset);
+					writeCompressedInt(dataStream, length);
+					writeCompressedInt(dataStream, lineNumber);
+					writeCompressedInt(dataStream, endLineNumber);
 					if (path != null) {
 						dataStream.writeBoolean(true);
 						dataStream.writeUTF(path.getURI().toString());
@@ -137,22 +140,154 @@ public class TraceRegionSerializer {
 		}
 	}
 	
+	private void writeCompressedInt(DataOutput output, int value) throws IOException {
+		// see EObjectOutputStream.writeCompressedInt
+		++value;
+		if (value < 0) {
+			throw new IOException("All values are expected to be positive, but got: " + String.valueOf(value - 1));
+		} else if (value <= 0x3F) {
+			output.writeByte(value);
+		} else if (value <= 0x3FFF) {
+			output.writeByte(value >> 8 | 0x40);
+			output.writeByte(value & 0xFF);
+		} else if (value <= 0x3FFFFF) {
+			output.writeByte(value >> 16 | 0x80);
+			output.writeByte(value >> 8 & 0xFF);
+			output.writeByte(value & 0xFF);
+		} else if (value <= 0x3FFFFFFF) {
+			output.writeByte(value >> 24 | 0xC0);
+			output.writeByte(value >> 16 & 0xFF);
+			output.writeByte(value >> 8 & 0xFF);
+			output.writeByte(value & 0xFF);
+		} else {
+			throw new IOException("Invalid value: " + String.valueOf(value - 1));
+		}
+	}
+	
 	public AbstractTraceRegion readTraceRegionFrom(InputStream contents) throws IOException {
 		return doReadFrom(contents, new IdentityStrategy());
+	}
+	
+	protected static class CompressedIntDataInput extends FilterInputStream implements DataInput {
+
+		private DataInput delegate;
+		
+		public <Delegate extends InputStream & DataInput> CompressedIntDataInput(Delegate delegate) {
+			super(delegate);
+			this.delegate = delegate;
+		}
+		
+		@Override
+		public boolean readBoolean() throws IOException {
+			return delegate.readBoolean();
+		}
+
+		@Override
+		public byte readByte() throws IOException {
+			return delegate.readByte();
+		}
+
+		@Override
+		public char readChar() throws IOException {
+			return delegate.readChar();
+		}
+
+		@Override
+		public double readDouble() throws IOException {
+			return delegate.readDouble();
+		}
+
+		@Override
+		public float readFloat() throws IOException {
+			return delegate.readFloat();
+		}
+
+		@Override
+		public void readFully(byte[] b) throws IOException {
+			delegate.readFully(b);
+		}
+
+		@Override
+		public void readFully(byte[] b, int off, int len) throws IOException {
+			delegate.readFully(b, off, len);
+		}
+
+		@Override
+		public int readInt() throws IOException {
+			// see EObjectInputStream.readCompressedInt
+			int initialByte = readByte();
+			int code = (initialByte >> 6) & 0x3;
+			switch (code) {
+				case 0: {
+					return initialByte - 1;
+				}
+				case 1: {
+					return (initialByte << 8 & 0x3F00 | readByte() & 0xFF) - 1;
+				}
+				case 2: {
+					return ((initialByte << 16) & 0x3F0000 | (readByte() << 8) & 0xFF00 | readByte() & 0xFF) - 1;
+				}
+				default: {
+					return ((initialByte << 24) & 0x3F000000 | (readByte() << 16) & 0xFF0000
+							| (readByte() << 8) & 0xFF00 | readByte() & 0xFF) - 1;
+				}
+			}
+		}
+
+		@Override
+		public String readLine() throws IOException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public long readLong() throws IOException {
+			return delegate.readLong();
+		}
+
+		@Override
+		public short readShort() throws IOException {
+			return delegate.readShort();
+		}
+
+		@Override
+		public String readUTF() throws IOException {
+			return delegate.readUTF();
+		}
+
+		@Override
+		public int readUnsignedByte() throws IOException {
+			return delegate.readUnsignedByte();
+		}
+
+		@Override
+		public int readUnsignedShort() throws IOException {
+			return delegate.readUnsignedShort();
+		}
+
+		@Override
+		public int skipBytes(int n) throws IOException {
+			return delegate.skipBytes(n);
+		}
+		
 	}
 
 	public <Region, Location> Region doReadFrom(InputStream contents, Strategy<Region, Location> reader) throws IOException {
 		DataInputStream dataStream = new DataInputStream(new BufferedInputStream(contents));
 		int version = dataStream.readInt();
-		if (version != VERSION_3 && version != VERSION_4)
+		if (version != VERSION_3 && version != VERSION_4 && version != VERSION_5)
 			return null;
 		boolean isNull = !dataStream.readBoolean();
 		if (isNull)
 			return null;
-		return doReadFrom(dataStream, reader, null, version);
+		if (version >= VERSION_5) {
+			return doReadFrom(new CompressedIntDataInput(dataStream), reader, null, version);
+		} else {
+			return doReadFrom(dataStream, reader, null, version);
+		}
 	}
 
-	public <Location, Region> Region doReadFrom(DataInputStream dataStream, Strategy<Region, Location> reader, Region parent, int version)
+	public <Location, Region> Region doReadFrom(DataInput dataStream, Strategy<Region, Location> reader, Region parent, int version)
 			throws IOException {
 		int offset = dataStream.readInt();
 		int length = dataStream.readInt();
@@ -166,10 +301,27 @@ public class TraceRegionSerializer {
 			int locationLength = dataStream.readInt();
 			int locationLineNumber = dataStream.readInt();
 			int locationEndLineNumber = dataStream.readInt();
-			SourceRelativeURI path = null;
+			final SourceRelativeURI path;
 			if (dataStream.readBoolean()) {
-				String uri = dataStream.readUTF();
-				path = new SourceRelativeURI(URI.createURI(uri));
+				if (version < VERSION_5) {
+					URI uri = URI.createURI(dataStream.readUTF());
+					if (version == VERSION_3 && !uri.isRelative()) {
+						if (uri.isPlatform()) {
+							String platformString = uri.toPlatformString(false);
+							path = new SourceRelativeURI(platformString.substring(platformString.indexOf('/') + 1));
+						} else if (uri.isFile()) {
+							path = new SourceRelativeURI(uri.lastSegment());
+						} else {
+							path = SourceRelativeURI.fromAbsolute(uri);
+						}
+					} else {
+						path = new SourceRelativeURI(uri);
+					}
+				} else {
+					path = new SourceRelativeURI(dataStream.readUTF());
+				}
+			} else {
+				path = null;
 			}
 			if(version == VERSION_3) {
 				if (dataStream.readBoolean()) // true, if a project is specified
