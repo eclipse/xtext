@@ -428,7 +428,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 			while (iterator.hasNext()) {
 				AbstractTraceRegion region = iterator.next();
 				for (ILocationData location : region.getAssociatedLocations()) {
-					SourceRelativeURI path = location.getPath();
+					SourceRelativeURI path = location.getSrcRelativePath();
 					if (path != null) {
 						sourceTraces.put(path, tracePath);
 					}

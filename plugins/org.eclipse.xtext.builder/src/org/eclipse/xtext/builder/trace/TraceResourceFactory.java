@@ -43,13 +43,14 @@ public class TraceResourceFactory extends ResourceFactoryImpl {
 		}
 
 		@Override
-		public DebugTraceRegion createRegion(int offset, int length, int lineNumber, int endLineNumber, List<DebugLocationData> associations,
+		public DebugTraceRegion createRegion(int offset, int length, int lineNumber, int endLineNumber, boolean isUseForDebugging, List<DebugLocationData> associations,
 				DebugTraceRegion parent) {
 			DebugTraceRegion result = TraceFactory.eINSTANCE.createDebugTraceRegion();
 			result.setMyOffset(offset);
 			result.setMyLength(length);
 			result.setMyLineNumber(lineNumber);
 			result.setMyEndLineNumber(endLineNumber);
+			result.setUseForDebugging(isUseForDebugging);
 			result.getAssociations().addAll(associations);
 			if (parent != null)
 				parent.getNestedRegions().add(result);
@@ -59,7 +60,7 @@ public class TraceResourceFactory extends ResourceFactoryImpl {
 		@Override
 		public void writeRegion(DebugTraceRegion region, Callback<DebugTraceRegion, DebugLocationData> callback)
 				throws IOException {
-			callback.doWriteRegion(region.getMyOffset(), region.getMyLength(), region.getMyLineNumber(), region.getMyEndLineNumber(), region.getAssociations(), region.getNestedRegions());
+			callback.doWriteRegion(region.getMyOffset(), region.getMyLength(), region.getMyLineNumber(), region.getMyEndLineNumber(), region.isUseForDebugging(), region.getAssociations(), region.getNestedRegions());
 		}
 
 		@Override

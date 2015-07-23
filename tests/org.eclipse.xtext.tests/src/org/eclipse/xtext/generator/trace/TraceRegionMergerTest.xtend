@@ -370,7 +370,7 @@ class TraceRegionMergerTest {
 		}
 		
 		def AbstractTraceRegion region(int offset, int length, int startLine, int endLine, (TraceBuilder)=>void init) {
-			val root = new TraceRegion(offset, length, startLine, endLine, 0,0,0,0, root, uri)
+			val root = new TraceRegion(offset, length, startLine, endLine, true, 0,0,0,0, root, uri)
 			if (init != null) {
 				val child = new TraceBuilder(testBuilder, uri, root)
 				init.apply(child)
@@ -403,10 +403,10 @@ class TraceRegionMergerTest {
 			assertEquals(head.toString, length, head.myLength)
 			assertEquals(head.toString, startLine, head.myLineNumber)
 			assertEquals(head.toString, endLine, head.myEndLineNumber)
-			val associatedLocations = head.associatedLocations.map[path].toSet
+			val associatedLocations = head.associatedLocations.map[srcRelativePath].toSet
 			assertEquals(head.toString, uris.length, associatedLocations.length)
 			for(uri: uris) {
-				assertTrue('Missing ' + uri, associatedLocations.contains(URI.createURI(uri)))
+				assertTrue('Missing ' + uri, associatedLocations.contains(new SourceRelativeURI(URI.createURI(uri))))
 			}
 			if(init == null) {
 				assertTrue(head.nestedRegions.empty)
