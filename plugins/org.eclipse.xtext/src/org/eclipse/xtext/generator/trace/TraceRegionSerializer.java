@@ -32,13 +32,13 @@ public class TraceRegionSerializer {
 	 */
 	public interface Strategy<Region, Location> {
 		Location createLocation(int offset, int length, int lineNumber, int endLineNumber, SourceRelativeURI path);
-		Region createRegion(int offset, int length, int lineNumber, int endLineNumber, List<Location> associations, Region parent);
+		Region createRegion(int offset, int length, int lineNumber, int endLineNumber, boolean useForDebugging, List<Location> associations, Region parent);
 		void writeRegion(Region region, Callback<Region, Location> callback) throws IOException;
 		void writeLocation(Location location, Callback<Region, Location> callback) throws IOException;
 	}
 	
 	public interface Callback<Region, Location> {
-		void doWriteRegion(int offset, int length, int lineNumber, int endLineNumber, List<Location> locations, List<Region> children) throws IOException;
+		void doWriteRegion(int offset, int length, int lineNumber, int endLineNumber, boolean useForDebugging, List<Location> locations, List<Region> children) throws IOException;
 		void doWriteLocation(int offset, int length, int lineNumber, int endLineNumber, SourceRelativeURI path) throws IOException;
 	}
 	
@@ -54,19 +54,19 @@ public class TraceRegionSerializer {
 		}
 
 		@Override
-		public AbstractTraceRegion createRegion(int offset, int length, int lineNumber, int endLineNumber, List<ILocationData> associations,
+		public AbstractTraceRegion createRegion(int offset, int length, int lineNumber, int endLineNumber, boolean useForDebugging, List<ILocationData> associations,
 				AbstractTraceRegion parent) {
-			return new TraceRegion(offset, length, lineNumber, endLineNumber, associations, parent);
+			return new TraceRegion(offset, length, lineNumber, endLineNumber, useForDebugging, associations, parent);
 		}
 
 		@Override
 		public void writeRegion(AbstractTraceRegion region, Callback<AbstractTraceRegion, ILocationData> callback) throws IOException {
-			callback.doWriteRegion(region.getMyOffset(), region.getMyLength(), region.getMyLineNumber(), region.getMyEndLineNumber(), region.getAssociatedLocations(), region.getNestedRegions());
+			callback.doWriteRegion(region.getMyOffset(), region.getMyLength(), region.getMyLineNumber(), region.getMyEndLineNumber(), region.isUseForDebugging(), region.getAssociatedLocations(), region.getNestedRegions());
 		}
 
 		@Override
 		public void writeLocation(ILocationData location, Callback<AbstractTraceRegion, ILocationData> callback) throws IOException {
-			callback.doWriteLocation(location.getOffset(), location.getLength(), location.getLineNumber(), location.getEndLineNumber(), location.getPath());
+			callback.doWriteLocation(location.getOffset(), location.getLength(), location.getLineNumber(), location.getEndLineNumber(), location.getSrcRelativePath());
 		}
 		
 	}
@@ -80,6 +80,13 @@ public class TraceRegionSerializer {
 	 */
 	private static final int VERSION_4 = 4;
 	
+	/**
+	 * changes compared to version 4:
+	 * 
+	 * - in version 5, ILocationData has no project name.
+	 */
+	private static final int VERSION_5 = 5;
+	
 	public void writeTraceRegionTo(AbstractTraceRegion region, OutputStream stream) throws IOException {
 		if (region != null && region.getParent() != null)
 			throw new IllegalArgumentException("region must be the root");
@@ -89,17 +96,18 @@ public class TraceRegionSerializer {
 	public <Region, Location> void doWriteTo(final Strategy<Region, Location> strategy, Region region, OutputStream stream) throws IOException {
 		final DataOutputStream dataStream = new DataOutputStream(new BufferedOutputStream(stream));
 		try {
-			dataStream.writeInt(VERSION_4);
+			dataStream.writeInt(VERSION_5);
 			dataStream.writeBoolean(region != null);
 			if (region == null)
 				return;
 			strategy.writeRegion(region, new Callback<Region, Location>() {
 				@Override
-				public void doWriteRegion(int offset, int length, int lineNumber, int endLineNumber, List<Location> locations, List<Region> children) throws IOException {
+				public void doWriteRegion(int offset, int length, int lineNumber, int endLineNumber, boolean isUseForDebugging, List<Location> locations, List<Region> children) throws IOException {
 					dataStream.writeInt(offset);
 					dataStream.writeInt(length);
 					dataStream.writeInt(lineNumber);
 					dataStream.writeInt(endLineNumber);
+					dataStream.writeBoolean(isUseForDebugging);
 					dataStream.writeInt(locations.size());
 					for(Location loc: locations) {
 						strategy.writeLocation(loc, this);
@@ -150,6 +158,7 @@ public class TraceRegionSerializer {
 		int length = dataStream.readInt();
 		int lineNumber = dataStream.readInt();
 		int endLineNumber = dataStream.readInt();
+		boolean useForDebugging = version < VERSION_5 || dataStream.readBoolean();
 		int locationSize = dataStream.readInt();
 		List<Location> allLocations = Lists.newArrayListWithCapacity(locationSize);
 		while(locationSize != 0) {
@@ -159,16 +168,17 @@ public class TraceRegionSerializer {
 			int locationEndLineNumber = dataStream.readInt();
 			SourceRelativeURI path = null;
 			if (dataStream.readBoolean()) {
-				path = new SourceRelativeURI(URI.createURI(dataStream.readUTF()));
+				String uri = dataStream.readUTF();
+				path = new SourceRelativeURI(URI.createURI(uri));
 			}
 			if(version == VERSION_3) {
 				if (dataStream.readBoolean()) // true, if a project is specified
-					dataStream.readUTF(); // read the project name
+					dataStream.readUTF(); // read and skip the project name
 			}
 			allLocations.add(reader.createLocation(locationOffset, locationLength, locationLineNumber, locationEndLineNumber, path));
 			locationSize--;
 		}
-		Region result = reader.createRegion(offset, length, lineNumber, endLineNumber, allLocations, parent);
+		Region result = reader.createRegion(offset, length, lineNumber, endLineNumber, useForDebugging, allLocations, parent);
 		int childrenSize = dataStream.readInt();
 		while(childrenSize != 0) {
 			doReadFrom(dataStream, reader, result, version);

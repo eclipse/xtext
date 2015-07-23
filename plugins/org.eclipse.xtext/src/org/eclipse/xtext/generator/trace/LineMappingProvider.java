@@ -102,7 +102,7 @@ public class LineMappingProvider {
 		if (targetRegion.isUseForDebugging()) {
 			ILocationData location = targetRegion.getMergedAssociatedLocation();
 			if (location != null) {
-				final SourceRelativeURI path = targetRegion.getAssociatedPath();
+				final SourceRelativeURI path = targetRegion.getAssociatedSrcRelativePath();
 				if (path != null) {
 					int myLineNumber = targetRegion.getMyLineNumber();
 					int myEndLineNumber = targetRegion.getMyEndLineNumber();

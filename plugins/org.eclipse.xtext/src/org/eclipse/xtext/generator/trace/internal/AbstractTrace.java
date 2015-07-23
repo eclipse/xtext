@@ -31,6 +31,7 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.workspace.IProjectConfig;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -167,9 +168,9 @@ public abstract class AbstractTrace implements ITrace {
 		if (right == null || left.equals(right)) {
 			return getMergedLocationInResource(left);
 		} else {
-			SourceRelativeURI leftToPath = left.getAssociatedPath();
-			SourceRelativeURI rightToPath = right.getAssociatedPath();
-			if (leftToPath != null && leftToPath.equals(rightToPath) || leftToPath == rightToPath) {
+			SourceRelativeURI leftToPath = left.getAssociatedSrcRelativePath();
+			SourceRelativeURI rightToPath = right.getAssociatedSrcRelativePath();
+			if (ObjectExtensions.operator_equals(leftToPath, rightToPath)) {
 				ITextRegionWithLineInformation leftRegion = left.getMyRegion();
 				ITextRegionWithLineInformation rightRegion = right.getMyRegion();
 				if (leftRegion.contains(rightRegion)) {
@@ -196,7 +197,7 @@ public abstract class AbstractTrace implements ITrace {
 						}
 						SourceRelativeURI path = leftToPath;
 						if (path == null) {
-							path = leftChild.getAssociatedPath();
+							path = leftChild.getAssociatedSrcRelativePath();
 						}
 						ITextRegionWithLineInformation merged = parent.getMergedAssociatedLocation();
 						if (merged != null) {
@@ -229,9 +230,9 @@ public abstract class AbstractTrace implements ITrace {
 	 */
 	/* @Nullable */
 	protected ILocationInResource createLocationInResourceFor(ILocationData location, AbstractTraceRegion traceRegion) {
-		SourceRelativeURI path = location.getPath();
+		SourceRelativeURI path = location.getSrcRelativePath();
 		if (path == null)
-			path = traceRegion.getAssociatedPath();
+			path = traceRegion.getAssociatedSrcRelativePath();
 		if (path == null)
 			return null;
 		return createLocationInResource(location, path);
@@ -331,7 +332,7 @@ public abstract class AbstractTrace implements ITrace {
 			traceURIConverter = getService(getLocalURI(), ITraceURIConverter.class);
 		}
 		SourceRelativeURI convertedUri = traceURIConverter.getURIForTrace(project, uri);
-		return convertedUri.equals(region.getAssociatedPath());
+		return convertedUri.equals(region.getAssociatedSrcRelativePath());
 	}
 	
 	/* @Nullable */

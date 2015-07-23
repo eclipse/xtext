@@ -28,7 +28,7 @@ public class LocationData extends TextRegionWithLineInformation implements ILoca
 
 	/* @Nullable */
 	@Override
-	public SourceRelativeURI getPath() {
+	public SourceRelativeURI getSrcRelativePath() {
 		return path;
 	}
 

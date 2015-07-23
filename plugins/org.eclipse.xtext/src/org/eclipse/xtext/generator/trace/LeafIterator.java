@@ -44,6 +44,7 @@ public class LeafIterator extends AbstractIterator<AbstractTraceRegion> {
 					AbstractTraceRegion result = new TemporaryTraceRegion(
 							expectedOffset, current.getMyOffset() + current.getMyLength() - expectedOffset,
 							expectedLine, current.getMyEndLineNumber(),
+							current.isUseForDebugging(),
 							current.getAssociatedLocations(), current);
 					expectedOffset = current.getMyOffset() + current.getMyLength();
 					expectedLine = current.getMyEndLineNumber();
@@ -67,6 +68,7 @@ public class LeafIterator extends AbstractIterator<AbstractTraceRegion> {
 					AbstractTraceRegion result = new TemporaryTraceRegion(
 							expectedOffset, next.getMyOffset() - expectedOffset,
 							expectedLine, next.getMyLineNumber(),
+							current.isUseForDebugging(),
 							current.getAssociatedLocations(), parent);
 					traversalIndizes.add(idx);
 					expectedOffset = next.getMyOffset();
@@ -85,6 +87,7 @@ public class LeafIterator extends AbstractIterator<AbstractTraceRegion> {
 				AbstractTraceRegion result = new TemporaryTraceRegion(
 						current.getMyOffset(), next.getMyOffset() - current.getMyOffset(),
 						current.getMyLineNumber(), next.getMyLineNumber(),
+						current.isUseForDebugging(),
 						current.getAssociatedLocations(), current);
 				traversalIndizes.add(-1);
 				expectedOffset = next.getMyOffset();

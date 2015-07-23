@@ -136,12 +136,12 @@ public abstract class AbstractTraceRegion {
 		Iterator<AbstractTraceRegion> treeIterator = treeIterator();
 		while (treeIterator.hasNext()) {
 			AbstractTraceRegion next = treeIterator.next();
-			SourceRelativeURI associatedPath = next.getAssociatedPath();
+			SourceRelativeURI associatedPath = next.getAssociatedSrcRelativePath();
 			List<Pair<ILocationData, AbstractTraceRegion>> matchingLocations = getCollectingList(associatedPath,
 					expectedAssociatedPath, result);
 			for (ILocationData locationData : next.getAssociatedLocations()) {
 				if (associatedPath == null) {
-					matchingLocations = getCollectingList(locationData.getPath(), expectedAssociatedPath, result);
+					matchingLocations = getCollectingList(locationData.getSrcRelativePath(), expectedAssociatedPath, result);
 				}
 				if (matchingLocations != null) {
 					matchingLocations.add(Tuples.create(locationData, next));
@@ -246,7 +246,7 @@ public abstract class AbstractTraceRegion {
 				int nextOffset = nextLocation.getOffset();
 				if (nextOffset + nextLocation.getLength() <= currentEndOffset) {
 					current = new TraceRegion(nextOffset, nextLocation.getLength(), nextLocation.getLineNumber(),
-							nextLocation.getEndLineNumber(), createLocationData(nextRegion, myPath), current);
+							nextLocation.getEndLineNumber(), true, createLocationData(nextRegion, myPath), current);
 					currentEndOffset = nextLocation.getOffset() + nextLocation.getLength();
 				} else {
 					int nextLength = currentEndOffset - nextOffset;
@@ -254,7 +254,7 @@ public abstract class AbstractTraceRegion {
 					int splittedLength = nextLocation.getLength() - nextLength;
 					int splittedBeginLine = nextEndLine;
 					ILocationData splitted = new LocationData(currentEndOffset, splittedLength, splittedBeginLine,
-							nextLocation.getEndLineNumber(), nextLocation.getPath());
+							nextLocation.getEndLineNumber(), nextLocation.getSrcRelativePath());
 					for (int j = i + 1; j < locations.size() && splitted != null; j++) {
 						ILocationData shiftMe = locations.get(j).getFirst();
 						if (splitted.getOffset() == shiftMe.getOffset()) {
@@ -271,13 +271,13 @@ public abstract class AbstractTraceRegion {
 						locations.add(Tuples.create(splitted, nextRegion));
 					}
 					current = new TraceRegion(nextOffset, nextLength, nextLocation.getLineNumber(), splittedBeginLine,
-							createLocationData(nextRegion, myPath), current);
+							true, createLocationData(nextRegion, myPath), current);
 					currentEndOffset = nextOffset + nextLength;
 				}
 			} else {
 				current = new TraceRegion(nextLocation.getOffset(), nextLocation.getLength(),
 						nextLocation.getLineNumber(), nextLocation.getEndLineNumber(),
-						createLocationData(nextRegion, myPath), null);
+						true, createLocationData(nextRegion, myPath), null);
 				currentEndOffset = nextLocation.getOffset() + nextLocation.getLength();
 				result.add(current);
 			}
@@ -338,17 +338,17 @@ public abstract class AbstractTraceRegion {
 		ITextRegionWithLineInformation region = ITextRegionWithLineInformation.EMPTY_REGION;
 		for (ILocationData data : allData) {
 			if (path != null) {
-				if (!path.equals(data.getPath())) {
+				if (!path.equals(data.getSrcRelativePath())) {
 					return null;
 				}
 			} else {
-				if (data.getPath() == null) {
+				if (data.getSrcRelativePath() == null) {
 					if (!allNull)
 						throw new IllegalStateException(
 								"Iff multiple associated locations are present, the path has to be set");
 				} else {
 					allNull = false;
-					path = data.getPath();
+					path = data.getSrcRelativePath();
 				}
 			}
 			region = region.merge(new TextRegionWithLineInformation(data.getOffset(), data.getLength(),
@@ -359,10 +359,10 @@ public abstract class AbstractTraceRegion {
 	}
 
 	/* @Nullable */
-	public SourceRelativeURI getAssociatedPath() {
+	public SourceRelativeURI getAssociatedSrcRelativePath() {
 		ILocationData data = getMergedAssociatedLocation();
 		if (data != null) {
-			SourceRelativeURI result = data.getPath();
+			SourceRelativeURI result = data.getSrcRelativePath();
 			if (result != null) {
 				return result;
 			}
@@ -371,13 +371,13 @@ public abstract class AbstractTraceRegion {
 			return null;
 		boolean uriSeen = false;
 		for (ILocationData associated : getAssociatedLocations())
-			if (associated.getPath() != null) {
+			if (associated.getSrcRelativePath() != null) {
 				if (!uriSeen)
 					uriSeen = true;
 				else
 					return null;
 			}
-		return parent.getAssociatedPath();
+		return parent.getAssociatedSrcRelativePath();
 	}
 
 	/* @Nullable */
@@ -419,9 +419,7 @@ public abstract class AbstractTraceRegion {
 		return nextOffset;
 	}
 
-	public boolean isUseForDebugging() {
-		return true;
-	}
+	public abstract boolean isUseForDebugging();
 
 	/**
 	 * Returns the hash code value for this region. The hash code of a trace region <code>r</code> is defined to be:

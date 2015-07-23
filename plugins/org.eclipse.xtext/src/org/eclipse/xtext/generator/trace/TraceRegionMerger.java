@@ -43,6 +43,7 @@ public class TraceRegionMerger {
 				lastLeaf.getMyOffset() + lastLeaf.getMyLength() - firstLeaf.getMyOffset(), 
 				firstLeaf.getMyLineNumber(), 
 				lastLeaf.getMyEndLineNumber(), 
+				true,
 				Collections.<ILocationData>emptyList(), null);
 		for(AbstractTraceRegion leafRegion: leafRegions) 
 			leafRegion.setParent(mergedRoot);
@@ -92,7 +93,7 @@ public class TraceRegionMerger {
 					if (newRegions == null)
 						newRegions = Lists.newArrayListWithExpectedSize(4);
 					newRegions.add(new TraceRegion(prevEnd, next.getMyOffset() - prevEnd, 
-							prev.getMyEndLineNumber(), next.getMyLineNumber(), locations, null));
+							prev.getMyEndLineNumber(), next.getMyLineNumber(), true, locations, null));
 				}
 			}
 			if (next.getMyOffset() + next.getMyLength() <= exclusiveEndOffset) {
@@ -107,7 +108,8 @@ public class TraceRegionMerger {
 						next.getMyOffset() + next.getMyLength(), 
 						oldLength - next.getMyLength(), 
 						inclusiveEndLine, 
-						oldEndLine, 
+						oldEndLine,
+						true,
 						next.getAssociatedLocations(), 
 						null));
 				next = replaceMerged(i, next, locations);
@@ -140,7 +142,8 @@ public class TraceRegionMerger {
 			if (prevEnd < expectedEndOffset) {
 				AbstractTraceRegion fillRegion = new TraceRegion(
 						prevEnd, expectedEndOffset - prevEnd, 
-						pending.getMyEndLineNumber(), expectedEndLine, 
+						pending.getMyEndLineNumber(), expectedEndLine,
+						true,
 						locations, null);
 				if (result == null)
 					result = Collections.singletonList(fillRegion);
@@ -166,7 +169,8 @@ public class TraceRegionMerger {
 	private AbstractTraceRegion replaceTruncated(int index, AbstractTraceRegion region, int newLength, int newEndLine) {
 		AbstractTraceRegion truncated = new TraceRegion(
 				region.getMyOffset(), newLength, 
-				region.getMyLineNumber(), newEndLine, 
+				region.getMyLineNumber(), newEndLine,
+				true,
 				region.getAssociatedLocations(), null);
 		leafRegions.set(index, truncated);
 		return truncated;
@@ -177,7 +181,8 @@ public class TraceRegionMerger {
 		mergedLocations.addAll(locationData);
 		AbstractTraceRegion merged = new TraceRegion(
 				region.getMyOffset(), region.getMyLength(),
-				region.getMyLineNumber(), region.getMyEndLineNumber(), 
+				region.getMyLineNumber(), region.getMyEndLineNumber(),
+				true,
 				mergedLocations, null);
 		leafRegions.set(index, merged);
 		return merged;
@@ -186,7 +191,8 @@ public class TraceRegionMerger {
 	private AbstractTraceRegion clone(AbstractTraceRegion region) {
 		AbstractTraceRegion merged = new TraceRegion(
 				region.getMyOffset(), region.getMyLength(),
-				region.getMyLineNumber(), region.getMyEndLineNumber(), 
+				region.getMyLineNumber(), region.getMyEndLineNumber(),
+				true,
 				region.getAssociatedLocations(), null);
 		return merged;
 	}
