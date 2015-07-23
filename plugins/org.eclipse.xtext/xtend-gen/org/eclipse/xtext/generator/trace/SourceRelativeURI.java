@@ -31,9 +31,17 @@ public class SourceRelativeURI extends AbstractURIWrapper {
   
   public SourceRelativeURI(final URI sourceRelativeURI) {
     super(sourceRelativeURI);
+    boolean _or = false;
     boolean _isRelative = sourceRelativeURI.isRelative();
     boolean _not = (!_isRelative);
     if (_not) {
+      _or = true;
+    } else {
+      String _path = sourceRelativeURI.path();
+      boolean _startsWith = _path.startsWith("/");
+      _or = _startsWith;
+    }
+    if (_or) {
       String _valueOf = String.valueOf(sourceRelativeURI);
       throw new IllegalArgumentException(_valueOf);
     }

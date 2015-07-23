@@ -39,7 +39,7 @@ class SourceRelativeURI extends AbstractURIWrapper {
 	} 
 	new(URI sourceRelativeURI) {
 		super(sourceRelativeURI)
-		if (!sourceRelativeURI.isRelative) {
+		if (!sourceRelativeURI.isRelative || sourceRelativeURI.path.startsWith('/')) {
 			throw new IllegalArgumentException(String.valueOf(sourceRelativeURI))
 		}
 	}

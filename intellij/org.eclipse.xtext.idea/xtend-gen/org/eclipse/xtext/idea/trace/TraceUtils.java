@@ -40,7 +40,7 @@ import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * @author dhuebner - Initial contribution and API
+ * @author Dennis Huebner - Initial contribution and API
  */
 @SuppressWarnings("all")
 public class TraceUtils {
