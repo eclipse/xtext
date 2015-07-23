@@ -46,7 +46,12 @@ public class DefaultTraceURIConverter implements ITraceURIConverter {
 				return getURIForTrace(projectConfig, new AbsoluteURI(resource.getURI()));
 			}
 		}
-		return getURIForTrace(resource.getURI());
+		// tests and in-memory resources often use relative uris, e.g. __synthetic.mydsl
+		URI uri = resource.getURI();
+		if (uri.isRelative()) {
+			return new SourceRelativeURI(uri);
+		}
+		return getURIForTrace(uri);
 	}
 
 	private SourceRelativeURI getURIForTrace(URI qualifiedURI) {
