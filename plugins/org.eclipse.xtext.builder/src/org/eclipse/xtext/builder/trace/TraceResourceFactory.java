@@ -38,7 +38,7 @@ public class TraceResourceFactory extends ResourceFactoryImpl {
 			result.setLength(length);
 			result.setLineNumber(lineNumber);
 			result.setEndLineNumber(endLineNumber);
-			result.setPath(path.getURI());
+			result.setPath(path != null ? path.getURI() : null);
 			return result;
 		}
 
@@ -66,7 +66,7 @@ public class TraceResourceFactory extends ResourceFactoryImpl {
 		@Override
 		public void writeLocation(DebugLocationData location, Callback<DebugTraceRegion, DebugLocationData> callback)
 				throws IOException {
-			callback.doWriteLocation(location.getOffset(), location.getLength(), location.getLineNumber(), location.getEndLineNumber(), new SourceRelativeURI(location.getPath()));
+			callback.doWriteLocation(location.getOffset(), location.getLength(), location.getLineNumber(), location.getEndLineNumber(), location.getPath() != null ? new SourceRelativeURI(location.getPath()) : null);
 		}
 	}
 
