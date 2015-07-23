@@ -139,13 +139,22 @@ public interface TracePackage extends EPackage {
 	int DEBUG_TRACE_REGION__ASSOCIATIONS = 7;
 
 	/**
+	 * The feature id for the '<em><b>Use For Debugging</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEBUG_TRACE_REGION__USE_FOR_DEBUGGING = 8;
+
+	/**
 	 * The number of structural features of the '<em>Debug Trace Region</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEBUG_TRACE_REGION_FEATURE_COUNT = 8;
+	int DEBUG_TRACE_REGION_FEATURE_COUNT = 9;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.builder.trace.impl.DebugLocationDataImpl <em>Debug Location Data</em>}' class.
@@ -282,6 +291,17 @@ public interface TracePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDebugTraceRegion_Associations();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#isUseForDebugging <em>Use For Debugging</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Use For Debugging</em>'.
+	 * @see org.eclipse.xtext.builder.trace.DebugTraceRegion#isUseForDebugging()
+	 * @see #getDebugTraceRegion()
+	 * @generated
+	 */
+	EAttribute getDebugTraceRegion_UseForDebugging();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.builder.trace.DebugLocationData <em>Debug Location Data</em>}'.
@@ -491,6 +511,14 @@ public interface TracePackage extends EPackage {
 		 * @generated
 		 */
 		EReference DEBUG_TRACE_REGION__ASSOCIATIONS = eINSTANCE.getDebugTraceRegion_Associations();
+
+		/**
+		 * The meta object literal for the '<em><b>Use For Debugging</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DEBUG_TRACE_REGION__USE_FOR_DEBUGGING = eINSTANCE.getDebugTraceRegion_UseForDebugging();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.builder.trace.impl.DebugLocationDataImpl <em>Debug Location Data</em>}' class.

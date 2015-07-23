@@ -89,7 +89,7 @@ public class CharSequenceTraceWrapper {
 		@Override
 		public AbstractTraceRegion getTraceRegion() {
 			ILocationData locationData = new LocationData(originOffset, originLength, originLineNumber, originEndLineNumber, originURI);
-			AbstractTraceRegion result = new TraceRegion(0, delegate.length(), 0, Strings.countLineBreaks(delegate), locationData, null);
+			AbstractTraceRegion result = new TraceRegion(0, delegate.length(), 0, Strings.countLineBreaks(delegate), true, locationData, null);
 			return result;
 		}
 

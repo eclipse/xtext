@@ -67,12 +67,22 @@ public class AbsoluteURI extends AbstractURIWrapper {
       _and = false;
     } else {
       Class<?> _class = obj.getClass();
-      boolean _equals = Objects.equal(_class, SourceRelativeURI.class);
-      _and = _equals;
+      boolean _notEquals = (!Objects.equal(_class, AbsoluteURI.class));
+      _and = _notEquals;
     }
     if (_and) {
       String _valueOf = String.valueOf(obj);
-      throw new IllegalArgumentException(_valueOf);
+      String _plus = (_valueOf + " instanceof ");
+      Class<?> _class_1 = null;
+      if (obj!=null) {
+        _class_1=obj.getClass();
+      }
+      String _name = null;
+      if (_class_1!=null) {
+        _name=_class_1.getName();
+      }
+      String _plus_1 = (_plus + _name);
+      throw new IllegalArgumentException(_plus_1);
     }
     return super.equals(obj);
   }

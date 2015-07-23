@@ -90,7 +90,7 @@ public class TraceRegionMergerTest {
     public AbstractTraceRegion region(final int offset, final int length, final int startLine, final int endLine, final Procedure1<? super TraceRegionMergerTest.TraceBuilder> init) {
       TraceRegion _xblockexpression = null;
       {
-        final TraceRegion root = new TraceRegion(offset, length, startLine, endLine, 0, 0, 0, 0, this.root, this.uri);
+        final TraceRegion root = new TraceRegion(offset, length, startLine, endLine, true, 0, 0, 0, 0, this.root, this.uri);
         boolean _notEquals = (!Objects.equal(init, null));
         if (_notEquals) {
           final TraceRegionMergerTest.TraceBuilder child = new TraceRegionMergerTest.TraceBuilder(this.testBuilder, this.uri, root);
@@ -147,7 +147,7 @@ public class TraceRegionMergerTest {
         final Function1<ILocationData, SourceRelativeURI> _function = new Function1<ILocationData, SourceRelativeURI>() {
           @Override
           public SourceRelativeURI apply(final ILocationData it) {
-            return it.getPath();
+            return it.getSrcRelativePath();
           }
         };
         List<SourceRelativeURI> _map = ListExtensions.<ILocationData, SourceRelativeURI>map(_associatedLocations, _function);
@@ -158,7 +158,8 @@ public class TraceRegionMergerTest {
         Assert.assertEquals(_string_4, _length, _length_1);
         for (final String uri : uris) {
           URI _createURI = URI.createURI(uri);
-          boolean _contains = associatedLocations.contains(_createURI);
+          SourceRelativeURI _sourceRelativeURI = new SourceRelativeURI(_createURI);
+          boolean _contains = associatedLocations.contains(_sourceRelativeURI);
           Assert.assertTrue(("Missing " + uri), _contains);
         }
         boolean _equals = Objects.equal(init, null);

@@ -15,7 +15,6 @@ import org.eclipse.xtext.builder.trace.TracePackage;
  * An implementation of the model object '<em><b>Debug Location Data</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

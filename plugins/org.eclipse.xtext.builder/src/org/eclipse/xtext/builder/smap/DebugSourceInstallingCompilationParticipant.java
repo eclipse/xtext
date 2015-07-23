@@ -126,7 +126,7 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 					if (rootTraceRegion == null)
 						continue;
 
-					SourceRelativeURI dslSourceFile = rootTraceRegion.getAssociatedPath();
+					SourceRelativeURI dslSourceFile = rootTraceRegion.getAssociatedSrcRelativePath();
 
 					// OutputConfigurations are only available for folders targeted by Xtext's code generation.
 					OutputConfiguration outputConfiguration = findOutputConfiguration(dslSourceFile, generatedJavaFile);

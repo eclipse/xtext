@@ -143,6 +143,15 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getDebugTraceRegion_UseForDebugging() {
+		return (EAttribute)debugTraceRegionEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getDebugLocationData() {
 		return debugLocationDataEClass;
 	}
@@ -301,6 +310,7 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 		createEReference(debugTraceRegionEClass, DEBUG_TRACE_REGION__NESTED_REGIONS);
 		createEAttribute(debugTraceRegionEClass, DEBUG_TRACE_REGION__MY_END_OFFSET);
 		createEReference(debugTraceRegionEClass, DEBUG_TRACE_REGION__ASSOCIATIONS);
+		createEAttribute(debugTraceRegionEClass, DEBUG_TRACE_REGION__USE_FOR_DEBUGGING);
 
 		debugLocationDataEClass = createEClass(DEBUG_LOCATION_DATA);
 		createEAttribute(debugLocationDataEClass, DEBUG_LOCATION_DATA__LABEL);
@@ -354,6 +364,7 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 		initEReference(getDebugTraceRegion_NestedRegions(), this.getDebugTraceRegion(), null, "nestedRegions", null, 0, -1, DebugTraceRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDebugTraceRegion_MyEndOffset(), ecorePackage.getEInt(), "myEndOffset", null, 0, 1, DebugTraceRegion.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getDebugTraceRegion_Associations(), this.getDebugLocationData(), null, "associations", null, 0, -1, DebugTraceRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDebugTraceRegion_UseForDebugging(), ecorePackage.getEBoolean(), "useForDebugging", null, 0, 1, DebugTraceRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(debugLocationDataEClass, DebugLocationData.class, "DebugLocationData", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDebugLocationData_Label(), ecorePackage.getEString(), "label", null, 0, 1, DebugLocationData.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, IS_DERIVED, IS_ORDERED);

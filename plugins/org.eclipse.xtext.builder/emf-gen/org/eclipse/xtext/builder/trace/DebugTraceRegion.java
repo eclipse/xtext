@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getNestedRegions <em>Nested Regions</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getMyEndOffset <em>My End Offset</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getAssociations <em>Associations</em>}</li>
+ *   <li>{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#isUseForDebugging <em>Use For Debugging</em>}</li>
  * </ul>
  *
  * @see org.eclipse.xtext.builder.trace.TracePackage#getDebugTraceRegion()
@@ -75,6 +76,32 @@ public interface DebugTraceRegion extends EObject {
 	 * @generated
 	 */
 	EList<DebugLocationData> getAssociations();
+
+	/**
+	 * Returns the value of the '<em><b>Use For Debugging</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Use For Debugging</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Use For Debugging</em>' attribute.
+	 * @see #setUseForDebugging(boolean)
+	 * @see org.eclipse.xtext.builder.trace.TracePackage#getDebugTraceRegion_UseForDebugging()
+	 * @model
+	 * @generated
+	 */
+	boolean isUseForDebugging();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#isUseForDebugging <em>Use For Debugging</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Use For Debugging</em>' attribute.
+	 * @see #isUseForDebugging()
+	 * @generated
+	 */
+	void setUseForDebugging(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Label</b></em>' attribute.

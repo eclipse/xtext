@@ -130,11 +130,11 @@ public class TraceAsPrimarySourceInstaller implements ITraceToBytecodeInstaller 
 	public byte[] installTrace(byte[] javaClassBytecode) throws IOException {
 		if (trace == null)
 			return null;
-		ClassReader reader = new ClassReader(javaClassBytecode);
-		ClassWriter writer = new ClassWriter(0);
-		SourceRelativeURI associatedPath = trace.getAssociatedPath();
+		SourceRelativeURI associatedPath = trace.getAssociatedSrcRelativePath();
 		if (associatedPath == null)
 			return null;
+		ClassReader reader = new ClassReader(javaClassBytecode);
+		ClassWriter writer = new ClassWriter(0);
 		String sourceFileName = associatedPath.getURI().lastSegment();
 		int[] target2source = getTargetToSourceLineMapping(trace);
 		XtextClassAdapter adapter = new XtextClassAdapter(writer, sourceFileName, target2source, hideSyntheticVariables);

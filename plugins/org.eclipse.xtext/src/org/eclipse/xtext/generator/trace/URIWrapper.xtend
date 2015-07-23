@@ -48,8 +48,8 @@ class SourceRelativeURI extends AbstractURIWrapper {
 	}
 	
 	override equals(Object obj) {
-		if (obj !== null && obj.getClass == AbsoluteURI) {
-			throw new IllegalArgumentException(String.valueOf(obj))
+		if (obj !== null && obj.getClass != SourceRelativeURI) {
+			throw new IllegalArgumentException(String.valueOf(obj) + " instanceof " + obj?.class?.name)
 		}
 		return super.equals(obj)
 	}
@@ -84,8 +84,8 @@ class AbsoluteURI extends AbstractURIWrapper {
 	}
 	
 	override equals(Object obj) {
-		if (obj !== null && obj.getClass == SourceRelativeURI) {
-			throw new IllegalArgumentException(String.valueOf(obj))
+		if (obj !== null && obj.getClass != AbsoluteURI) {
+			throw new IllegalArgumentException(String.valueOf(obj) + " instanceof " + obj?.class?.name)
 		}
 		return super.equals(obj)
 	}
