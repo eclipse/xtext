@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.xtext.ui.JdtAwareProjectByResourceProvider;
 import org.eclipse.xtext.common.types.xtext.ui.JdtIndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.xtext.ui.ProjectAwareResourceDescriptionsProvider;
+import org.eclipse.xtext.generator.trace.ITraceForURIProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.LiveShadowedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
@@ -88,6 +89,13 @@ public class SharedStateModule extends AbstractGenericModule {
 	 */
 	public Class<? extends IDerivedResourceMarkers> bindDerivedResourceMarkers() {
 		return DerivedResourceMarkers.class;
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public Class<? extends ITraceForURIProvider> bindPlatformNeutralTraceInformation() {
+		return ITraceForStorageProvider.class;
 	}
 	
 	/**
