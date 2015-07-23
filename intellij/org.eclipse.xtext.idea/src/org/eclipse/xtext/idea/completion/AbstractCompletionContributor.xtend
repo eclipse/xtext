@@ -34,13 +34,9 @@ import java.util.concurrent.Executors
 import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.AbstractElement
-import org.eclipse.xtext.EcoreUtil2
-import org.eclipse.xtext.Grammar
-import org.eclipse.xtext.GrammarUtil
 import org.eclipse.xtext.IGrammarAccess
 import org.eclipse.xtext.Keyword
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext
-import org.eclipse.xtext.ide.editor.contentassist.IFollowElementAcceptor
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory
 import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElementComputer
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser
@@ -65,25 +61,9 @@ abstract class AbstractCompletionContributor extends CompletionContributor {
 	}
 	
 	protected def extend(CompletionType type, EStructuralFeature feature, CompletionProvider<CompletionParameters> contrib) {
-		collectElements(grammarAccess.grammar, feature) [
+		followElementComputer.collectAbstractElements(grammarAccess.grammar, feature) [
 			extend(type, it, contrib)
 		]
-	}
-	
-	private def void collectElements(Grammar grammar, EStructuralFeature feature, IFollowElementAcceptor followElementAcceptor) {
-		for (superGrammar : grammar.usedGrammars) {
-			collectElements(superGrammar, feature, followElementAcceptor)
-		}
-		val declarator = feature.getEContainingClass
-		for (rule : GrammarUtil.allParserRules(grammar)) {
-			for (assignment : GrammarUtil.containedAssignments(rule).filter[it.feature == feature.name]) {
-				val classifier = GrammarUtil.findCurrentType(assignment)
-				val compType = EcoreUtil2.getCompatibleType(declarator, classifier)
-				if (compType == declarator) {
-					followElementAcceptor.accept(assignment)
-				}
-			}
-		}
 	}
 	
 	protected def extend(CompletionType type, AbstractElement followElement, CompletionProvider<CompletionParameters> contrib) {

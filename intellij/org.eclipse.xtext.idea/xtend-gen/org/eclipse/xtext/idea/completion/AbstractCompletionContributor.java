@@ -40,24 +40,16 @@ import com.intellij.util.Consumer;
 import com.intellij.util.ProcessingContext;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ide.editor.contentassist.IFollowElementAcceptor;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory;
@@ -72,7 +64,6 @@ import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -180,38 +171,7 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
         AbstractCompletionContributor.this.extend(type, it, contrib);
       }
     };
-    this.collectElements(_grammar, feature, _function);
-  }
-  
-  private void collectElements(final Grammar grammar, final EStructuralFeature feature, final IFollowElementAcceptor followElementAcceptor) {
-    EList<Grammar> _usedGrammars = grammar.getUsedGrammars();
-    for (final Grammar superGrammar : _usedGrammars) {
-      this.collectElements(superGrammar, feature, followElementAcceptor);
-    }
-    final EClass declarator = feature.getEContainingClass();
-    List<ParserRule> _allParserRules = GrammarUtil.allParserRules(grammar);
-    for (final ParserRule rule : _allParserRules) {
-      List<Assignment> _containedAssignments = GrammarUtil.containedAssignments(rule);
-      final Function1<Assignment, Boolean> _function = new Function1<Assignment, Boolean>() {
-        @Override
-        public Boolean apply(final Assignment it) {
-          String _feature = it.getFeature();
-          String _name = feature.getName();
-          return Boolean.valueOf(Objects.equal(_feature, _name));
-        }
-      };
-      Iterable<Assignment> _filter = IterableExtensions.<Assignment>filter(_containedAssignments, _function);
-      for (final Assignment assignment : _filter) {
-        {
-          final EClassifier classifier = GrammarUtil.findCurrentType(assignment);
-          final EClassifier compType = EcoreUtil2.getCompatibleType(declarator, classifier);
-          boolean _equals = Objects.equal(compType, declarator);
-          if (_equals) {
-            followElementAcceptor.accept(assignment);
-          }
-        }
-      }
-    }
+    this.followElementComputer.collectAbstractElements(_grammar, feature, _function);
   }
   
   protected boolean extend(final CompletionType type, final AbstractElement followElement, final CompletionProvider<CompletionParameters> contrib) {

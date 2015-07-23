@@ -11,11 +11,15 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.ParserRule;
@@ -36,19 +40,46 @@ public class FollowElementComputer {
 	
 	@Inject IContentAssistParser parser;
 	
-	public void computeFollowElements(Collection<FollowElement> followElements, final Collection<AbstractElement> result) {
+	public void collectAbstractElements(Grammar grammar, EStructuralFeature feature, IFollowElementAcceptor followElementAcceptor) {
+		for (Grammar superGrammar : grammar.getUsedGrammars()) {
+			collectAbstractElements(superGrammar, feature, followElementAcceptor);
+		}
+		EClass declarator = feature.getEContainingClass();
+		for (ParserRule rule : GrammarUtil.allParserRules(grammar)) {
+			for (Assignment assignment : GrammarUtil.containedAssignments(rule)) {
+				if (assignment.getFeature().equals(feature.getName())) {
+					EClassifier classifier = GrammarUtil.findCurrentType(assignment);
+					EClassifier compType = EcoreUtil2.getCompatibleType(declarator, classifier);
+					if (compType == declarator) {
+						followElementAcceptor.accept(assignment);
+					}
+				}
+			}
+		}
+	}
+	
+	public void computeFollowElements(Collection<FollowElement> followElements, final IFollowElementAcceptor followElementAcceptor) {
 		FollowElementCalculator calculator = new FollowElementCalculator();
 		calculator.acceptor = new IFollowElementAcceptor(){
 			@Override
 			public void accept(AbstractElement element) {
 				ParserRule rule = GrammarUtil.containingParserRule(element);
 				if (rule == null || !GrammarUtil.isDatatypeRule(rule))
-					result.add(element);
+					followElementAcceptor.accept(element);
 			}
 		};
 		for(FollowElement element: followElements) {
 			computeFollowElements(calculator, element);
 		}
+	}
+	
+	public void computeFollowElements(Collection<FollowElement> followElements, final Collection<AbstractElement> result) {
+		computeFollowElements(followElements, new IFollowElementAcceptor(){
+			@Override
+			public void accept(AbstractElement element) {
+				result.add(element);
+			}
+		});
 	}
 
 	protected void computeFollowElements(FollowElementCalculator calculator, FollowElement element) {
