@@ -38,6 +38,18 @@ public interface ITraceForStorageProvider extends ITraceForURIProvider {
 	 * @return the trace to the generation targets or <code>null</code>.
 	 */
 	/* @Nullable */ IEclipseTrace getTraceToTarget(IStorage sourceResource);
+	
+	@Override
+	IEclipseTrace getTraceToSource(AbsoluteURI absoluteDerivedResource);
+	
+	@Override
+	IEclipseTrace getTraceToSource(SourceRelativeURI srcRelativeDerivedResource, IProjectConfig project);
+	
+	@Override
+	IEclipseTrace getTraceToTarget(AbsoluteURI absoluteSourceResource);
+	
+	@Override
+	IEclipseTrace getTraceToTarget(SourceRelativeURI srcRelativeSourceResource, IProjectConfig project);
 
 	class Null extends NoTraces implements ITraceForStorageProvider {
 
