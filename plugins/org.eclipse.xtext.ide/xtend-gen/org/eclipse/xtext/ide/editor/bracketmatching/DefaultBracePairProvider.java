@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.ide.editor.bracketmatching;
 
+import com.google.inject.Singleton;
 import java.util.Collections;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -19,6 +20,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 /**
  * @author kosyakov - Initial contribution and API
  */
+@Singleton
 @Accessors
 @FinalFieldsConstructor
 @SuppressWarnings("all")

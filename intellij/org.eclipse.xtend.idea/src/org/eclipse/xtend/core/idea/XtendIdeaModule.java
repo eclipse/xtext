@@ -147,10 +147,12 @@ public class XtendIdeaModule extends AbstractXtendIdeaModule {
 		return XtendIntentionsProvider.class;
 	}
 
+	@Override
 	public Class<? extends BlockFactory> bindBlockFactory() {
 		return XtendBlockFactory.class;
 	}
 	
+	@Override
 	public Class<? extends ChildAttributesProvider> bindChildAttributesProvider() {
 		return XtendChildAttributesProvider.class;
 	}

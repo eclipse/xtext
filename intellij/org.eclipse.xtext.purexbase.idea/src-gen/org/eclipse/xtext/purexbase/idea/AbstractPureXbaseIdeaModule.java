@@ -63,6 +63,10 @@ public class AbstractPureXbaseIdeaModule extends org.eclipse.xtext.idea.DefaultI
 	public Class<? extends org.eclipse.xtext.idea.formatting.ChildAttributesProvider> bindChildAttributesProvider() {
 		return org.eclipse.xtext.xbase.idea.formatting.XbaseChildAttributesProvider.class;
 	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider> bindIBracePairProvider() {
+		return org.eclipse.xtext.xbase.idea.bracketmatching.XbaseBracePairProvider.class;
+	}
 	
 	
 }

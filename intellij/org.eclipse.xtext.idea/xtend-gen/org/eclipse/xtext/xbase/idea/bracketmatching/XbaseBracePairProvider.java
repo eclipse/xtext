@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.ide.editor.bracketmatching;
+package org.eclipse.xtext.xbase.idea.bracketmatching;
 
 import com.google.inject.Singleton;
 import java.util.Collections;
@@ -18,9 +18,9 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
  */
 @Singleton
 @SuppressWarnings("all")
-public class XtextBracePairProvider extends DefaultBracePairProvider {
-  public XtextBracePairProvider() {
+public class XbaseBracePairProvider extends DefaultBracePairProvider {
+  public XbaseBracePairProvider() {
     super(
-      Collections.<BracePair>unmodifiableSet(CollectionLiterals.<BracePair>newHashSet(new BracePair(":", ";", true), new BracePair("(", ")", false), new BracePair("{", "}", true), new BracePair("[", "]", false))));
+      Collections.<BracePair>unmodifiableSet(CollectionLiterals.<BracePair>newHashSet(new BracePair("(", ")", false), new BracePair("{", "}", true), new BracePair("[", "]", true))));
   }
 }

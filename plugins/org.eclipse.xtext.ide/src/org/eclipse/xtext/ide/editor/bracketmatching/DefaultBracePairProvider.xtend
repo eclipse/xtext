@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.editor.bracketmatching
 
+import com.google.inject.Singleton
 import java.util.Set
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
@@ -14,6 +15,7 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 /**
  * @author kosyakov - Initial contribution and API
  */
+@Singleton
 @Accessors
 @FinalFieldsConstructor
 class DefaultBracePairProvider implements IBracePairProvider {

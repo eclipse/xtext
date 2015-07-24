@@ -12,9 +12,12 @@ import com.intellij.openapi.roots.ContentEntry
 import com.intellij.openapi.roots.ModifiableRootModel
 import org.eclipse.xtext.idea.tests.LibraryUtil
 import org.eclipse.xtext.purexbase.idea.lang.PureXbaseFileType
-import org.eclipse.xtext.xbase.idea.formatting.AbstractXbaseAutoEditTest
+import org.eclipse.xtext.xbase.idea.formatting.AbstractXbaseAdjustLineIndentTest
 
-class XbaseAutoEditTest extends AbstractXbaseAutoEditTest {
+/**
+ * @author kosyakov - Initial contribution and API
+ */
+class XbaseAdjustLineIndentTest extends AbstractXbaseAdjustLineIndentTest {
 
 	new() {
 		super(PureXbaseFileType.INSTANCE)
@@ -23,5 +26,4 @@ class XbaseAutoEditTest extends AbstractXbaseAutoEditTest {
 	override protected configureModule(Module module, ModifiableRootModel model, ContentEntry contentEntry) {
 		LibraryUtil.addXbaseLibrary(model)
 	}
-
 }
