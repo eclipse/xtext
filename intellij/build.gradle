@@ -55,7 +55,12 @@ configure(subprojects - eclipsePluginProjects) {
 configure(ideaPluginProjects + ideaTestProjects) {
 	configurations.compile {
 		//TODO this should be excluded by the plugin by default
-		exclude module:'org.eclipse.jdt.core'
+		exclude group: 'org.eclipse.equinox', module: 'common'
+
+		if( project.name != 'org.eclipse.xtend.idea') {
+			exclude module:'org.eclipse.jdt.core'
+		}
+		
 		//TODO this should be excluded higher in the dependency chain
 		exclude module:'cglib'
 	}

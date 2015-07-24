@@ -23,7 +23,6 @@ import org.eclipse.jdt.core.dom.Block
 import org.eclipse.jdt.core.dom.Statement
 import org.eclipse.xtend.lib.annotations.AccessorType
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.ui.util.ClipboardUtil.JavaImportData
 import org.eclipse.xtext.xbase.conversion.IJavaCodeConverter
 
 import static extension org.eclipse.xtend.lib.annotations.AccessorType.*
@@ -77,9 +76,8 @@ class JavaConverter implements IJavaCodeConverter {
 	 * @param project JavaProject where the java source code comes from. If project is <code>null</code>, the parser will be<br>
 	 * 			 configured with the system class loader to resolve bindings.
 	 */
-	def ConversionResult bodyDeclarationToXtend(String javaSrc, JavaImportData additionalImports,
-		IJavaProject project) {
-		internalToXtend(null, javaSrc, additionalImports, project)
+	def ConversionResult bodyDeclarationToXtend(String javaSrc, String[] imports, IJavaProject project) {
+		internalToXtend(null, javaSrc, imports, project)
 	}
 
 	/**
@@ -114,8 +112,7 @@ class JavaConverter implements IJavaCodeConverter {
 	 * @param javaSrc Java source code as String
 	 * @param proj JavaProject where the java source code comes from
 	 */
-	def private ConversionResult internalToXtend(String unitName, String javaSrc, JavaImportData additionalImports,
-		IJavaProject proj) {
+	def private ConversionResult internalToXtend(String unitName, String javaSrc, String[] imports, IJavaProject proj) {
 		val parser = javaAnalyzer.createDefaultJavaParser
 		parser.statementsRecovery = true
 		parser.resolveBindings = true
@@ -124,13 +121,11 @@ class JavaConverter implements IJavaCodeConverter {
 			parser.project = proj
 			parser.tweakOptions(proj)
 		} else {
-			val sysClassLoader = ClassLoader.getSystemClassLoader();
-			val cpEntries = (sysClassLoader as URLClassLoader).getURLs().map[file]
-			parser.setEnvironment(cpEntries, null, null, true)
+			provideCustomEnvironment(parser)
 		}
 		val javaSrcBuilder = new StringBuilder()
-		if (additionalImports != null) {
-			additionalImports.getImports().forEach[javaSrcBuilder.append("import " + it + ";")]
+		if (imports != null) {
+			imports.forEach[javaSrcBuilder.append("import " + it + ";")]
 		}
 		if (unitName == null) {
 			parser.unitName = "MISSING"
@@ -144,6 +139,16 @@ class JavaConverter implements IJavaCodeConverter {
 		parser.source = preparedJavaSrc.toCharArray
 		val result = parser.createAST(null)
 		return executeAstFlattener(preparedJavaSrc, Collections.singleton(result))
+	}
+
+	/**
+	 * Will be called when the environment can not be derived from a container like e.g. IJavaProject
+	 * {@link ASTParser#setEnvironment(String[], String[], String[], boolean)}
+	 */
+	protected def provideCustomEnvironment(ASTParser parser) {
+		val sysClassLoader = ClassLoader.getSystemClassLoader();
+		val cpEntries = (sysClassLoader as URLClassLoader).getURLs().map[file]
+		parser.setEnvironment(cpEntries, null, null, true)
 	}
 
 	/**

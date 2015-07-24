@@ -17,6 +17,10 @@
 	     <action id="Xtend.NewType" class="org.eclipse.xtend.core.idea.actions.NewXtendFileAction">
 	        <add-to-group group-id="NewGroup1" anchor="after" relative-to-action="NewClass"/>
 	     </action>
+	     <action id="Xtend.ConvertToXtend" class="org.eclipse.xtend.core.idea.actions.ConvertJavaCodeAction"
+	     		text="Convert to Xtend" description="Convert Java file to Xtend">
+	        <add-to-group group-id="RefactoringMenu"/>
+	     </action>
      </actions>
      
     <extensions defaultExtensionNs="org.eclipse.xtext.idea">
