@@ -249,13 +249,13 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 						new Function<ILocationInEclipseResource, IStorage>() {
 							@Override
 							public IStorage apply(ILocationInEclipseResource input) {
-								return input.getStorage();
+								return input.getPlatformResource();
 							}
 						}), Predicates.notNull());
 				addAll(derivedSources, transform);
 				ILocationInEclipseResource bestAssociatedLocation = trace.getBestAssociatedLocation(localRegion);
 				if (bestAssociatedLocation != null) {
-					selectedSource = bestAssociatedLocation.getStorage();
+					selectedSource = bestAssociatedLocation.getPlatformResource();
 				} else if (!derivedSources.isEmpty()) {
 					selectedSource = derivedSources.iterator().next();
 				}
