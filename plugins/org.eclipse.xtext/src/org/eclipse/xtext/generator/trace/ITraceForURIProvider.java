@@ -51,27 +51,4 @@ public interface ITraceForURIProvider {
 	 */
 	/* @Nullable */ ITrace getTraceToTarget(SourceRelativeURI srcRelativeSourceResource, IProjectConfig project);
 
-	class NoTraces implements ITraceForURIProvider {
-
-		@Override
-		public ITrace getTraceToSource(AbsoluteURI absoluteDerivedResource) {
-			return null;
-		}
-
-		@Override
-		public ITrace getTraceToSource(SourceRelativeURI srcRelativeDerivedResource, IProjectConfig project) {
-			return null;
-		}
-
-		@Override
-		public ITrace getTraceToTarget(AbsoluteURI absoluteSourceResource) {
-			return null;
-		}
-
-		@Override
-		public ITrace getTraceToTarget(SourceRelativeURI srcRelativeSourceResource, IProjectConfig project) {
-			return null;
-		}
-		
-	}
 }

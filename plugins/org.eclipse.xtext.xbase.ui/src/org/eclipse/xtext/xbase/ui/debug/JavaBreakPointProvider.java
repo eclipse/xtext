@@ -91,7 +91,7 @@ public class JavaBreakPointProvider {
 		ILocationInEclipseResource javaLocation = getJavaLocation(breakpoint);
 		if (javaLocation == null)
 			return null;
-		IStorage javaResource = javaLocation.getStorage();
+		IStorage javaResource = javaLocation.getPlatformResource();
 		if (!(javaResource instanceof IFile))
 			return null;
 		ICompilationUnit compilationUnit = (ICompilationUnit) JavaCore.create((IFile) javaResource);
@@ -103,7 +103,7 @@ public class JavaBreakPointProvider {
 		ILocationInEclipseResource javaLocation = getJavaLocation(breakpoint);
 		if (javaLocation == null)
 			return -1;
-		IStorage storage = javaLocation.getStorage();
+		IStorage storage = javaLocation.getPlatformResource();
 		if (storage == null) {
 			ITextRegionWithLineInformation textRegion = javaLocation.getTextRegion();
 			if (textRegion == null)

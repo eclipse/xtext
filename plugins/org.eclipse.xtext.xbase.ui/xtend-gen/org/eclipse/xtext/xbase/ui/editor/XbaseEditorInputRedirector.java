@@ -191,7 +191,7 @@ public class XbaseEditorInputRedirector {
       if (_equals_1) {
         return input;
       }
-      final IStorage originalStorage = sourceInformation.getStorage();
+      final IStorage originalStorage = sourceInformation.getPlatformResource();
       boolean _notEquals_1 = (!Objects.equal(originalStorage, null));
       if (_notEquals_1) {
         return EditorUtils.createEditorInput(originalStorage);
