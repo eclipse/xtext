@@ -122,6 +122,8 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 					'annotatedWith(org.eclipse.xtext.service.LanguageSpecific.class).' + 
 					'to(org.eclipse.xtext.idea.common.types.DerivedMemberAwarePsiModelAssociations.class)')
 			bindFactory.addTypeToType('org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration', 'org.eclipse.xtext.xbase.idea.highlighting.XbaseHighlightingConfiguration')
+			bindFactory.addTypeToType('org.eclipse.xtext.idea.formatting.BlockFactory', 'org.eclipse.xtext.xbase.idea.formatting.XbaseBlockFactory')
+			bindFactory.addTypeToType('org.eclipse.xtext.idea.formatting.ChildAttributesProvider', 'org.eclipse.xtext.xbase.idea.formatting.XbaseChildAttributesProvider')
 		}
 		val bindings = bindFactory.bindings
 
@@ -446,6 +448,9 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 				<facetType implementation="«grammar.facetTypeName»"/>
 				<colorSettingsPage implementation="«grammar.colorSettingsPage»"/>
 				<highlightVisitor implementation="«grammar.semanticHighlightVisitorName»"/>
+
+				«grammar.compileExtension('lang.formatter', 'com.intellij.formatting.FormattingModelBuilder')»
+				«grammar.compileExtension('lang.commenter', 'com.intellij.lang.CodeDocumentationAwareCommenter')»
 			</extensions>
 		</idea-plugin>
 	'''

@@ -55,6 +55,14 @@ public class AbstractEntitiesIdeaModule extends org.eclipse.xtext.idea.DefaultId
 	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
 		return org.eclipse.xtext.xbase.idea.highlighting.XbaseHighlightingConfiguration.class;
 	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.formatting.BlockFactory> bindBlockFactory() {
+		return org.eclipse.xtext.xbase.idea.formatting.XbaseBlockFactory.class;
+	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.formatting.ChildAttributesProvider> bindChildAttributesProvider() {
+		return org.eclipse.xtext.xbase.idea.formatting.XbaseChildAttributesProvider.class;
+	}
 	
 	
 }

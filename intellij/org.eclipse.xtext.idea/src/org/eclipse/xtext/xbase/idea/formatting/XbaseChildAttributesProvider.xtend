@@ -12,10 +12,12 @@ import com.intellij.formatting.Indent
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.idea.formatting.DefaultChildAttributesProvider
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess
+import com.google.inject.Singleton
 
 /**
  * @author kosyakov - Initial contribution and API
  */
+@Singleton
 class XbaseChildAttributesProvider extends DefaultChildAttributesProvider {
 
 	@Inject

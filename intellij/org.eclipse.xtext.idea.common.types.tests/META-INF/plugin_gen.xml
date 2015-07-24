@@ -50,5 +50,12 @@
 		<facetType implementation="org.eclipse.xtext.idea.common.types.idea.facet.RefactoringTestLanguageFacetType"/>
 		<colorSettingsPage implementation="org.eclipse.xtext.idea.common.types.idea.highlighting.RefactoringTestLanguageColorSettingsPage"/>
 		<highlightVisitor implementation="org.eclipse.xtext.idea.common.types.idea.highlighting.RefactoringTestLanguageSemanticHighlightVisitor"/>
+
+		<lang.formatter language="org.eclipse.xtext.idea.common.types.RefactoringTestLanguage"
+								factoryClass="org.eclipse.xtext.idea.common.types.idea.RefactoringTestLanguageExtensionFactory"
+								implementationClass="com.intellij.formatting.FormattingModelBuilder"/>
+		<lang.commenter language="org.eclipse.xtext.idea.common.types.RefactoringTestLanguage"
+								factoryClass="org.eclipse.xtext.idea.common.types.idea.RefactoringTestLanguageExtensionFactory"
+								implementationClass="com.intellij.lang.CodeDocumentationAwareCommenter"/>
 	</extensions>
 </idea-plugin>

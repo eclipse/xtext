@@ -181,6 +181,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
           "annotatedWith(org.eclipse.xtext.service.LanguageSpecific.class).") + 
           "to(org.eclipse.xtext.idea.common.types.DerivedMemberAwarePsiModelAssociations.class)"));
       bindFactory.addTypeToType("org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration", "org.eclipse.xtext.xbase.idea.highlighting.XbaseHighlightingConfiguration");
+      bindFactory.addTypeToType("org.eclipse.xtext.idea.formatting.BlockFactory", "org.eclipse.xtext.xbase.idea.formatting.XbaseBlockFactory");
+      bindFactory.addTypeToType("org.eclipse.xtext.idea.formatting.ChildAttributesProvider", "org.eclipse.xtext.xbase.idea.formatting.XbaseChildAttributesProvider");
     }
     final Set<Binding> bindings = bindFactory.getBindings();
     String _standaloneSetupIdea = this._ideaPluginClassNames.getStandaloneSetupIdea(grammar);
@@ -1284,6 +1286,15 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     String _semanticHighlightVisitorName = this._ideaPluginClassNames.getSemanticHighlightVisitorName(grammar);
     _builder.append(_semanticHighlightVisitorName, "\t\t");
     _builder.append("\"/>");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("\t\t");
+    CharSequence _compileExtension_8 = this.compileExtension(grammar, "lang.formatter", "com.intellij.formatting.FormattingModelBuilder");
+    _builder.append(_compileExtension_8, "\t\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    CharSequence _compileExtension_9 = this.compileExtension(grammar, "lang.commenter", "com.intellij.lang.CodeDocumentationAwareCommenter");
+    _builder.append(_compileExtension_9, "\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("</extensions>");
