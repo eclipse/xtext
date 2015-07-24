@@ -7,9 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.editor.bracketmatching
 
+import com.google.inject.Singleton
+
 /**
  * @author kosyakov - Initial contribution and API
  */
+@Singleton
 class XtextBracePairProvider extends DefaultBracePairProvider {
 	new() {
 		super(#{
