@@ -60,8 +60,8 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 		}
 
 		String clipboardText = ClipboardUtil.getTextFromClipboard();
-		JavaImportData javaImports = ClipboardUtil.getJavaImportsContent();
 		if (!Strings.isEmpty(clipboardText)) {
+			JavaImportData javaImports = ClipboardUtil.getJavaImportsContent();
 			doPasteJavaCode(activeXtextEditor, clipboardText, javaImports);
 		}
 		return null;
@@ -138,7 +138,8 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 				conversionResult = javaConverter.statementToXtend(javaCode);
 			}
 		} else {
-			conversionResult = javaConverter.bodyDeclarationToXtend(javaCode, javaImports, project);
+			conversionResult = javaConverter.bodyDeclarationToXtend(javaCode,
+					javaImports != null ? javaImports.getImports() : null, project);
 		}
 		final String xtendCode = conversionResult.getXtendCode();
 		return xtendCode;

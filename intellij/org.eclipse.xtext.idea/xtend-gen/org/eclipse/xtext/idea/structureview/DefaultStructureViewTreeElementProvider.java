@@ -98,8 +98,7 @@ public class DefaultStructureViewTreeElementProvider implements IStructureViewTr
     final Function1<EObject, StructureViewTreeElement> _function = new Function1<EObject, StructureViewTreeElement>() {
       @Override
       public StructureViewTreeElement apply(final EObject child) {
-        BaseXtextFile _xtextFile = it.getXtextFile();
-        return DefaultStructureViewTreeElementProvider.this.createEObjectTreeElement(child, _xtextFile);
+        return DefaultStructureViewTreeElementProvider.this.createEObjectTreeElement(child, it.xtextFile);
       }
     };
     List<StructureViewTreeElement> _map = ListExtensions.<EObject, StructureViewTreeElement>map(_eContents, _function);
@@ -118,8 +117,7 @@ public class DefaultStructureViewTreeElementProvider implements IStructureViewTr
         final Function1<EObject, StructureViewTreeElement> _function = new Function1<EObject, StructureViewTreeElement>() {
           @Override
           public StructureViewTreeElement apply(final EObject value) {
-            BaseXtextFile _xtextFile = it.getXtextFile();
-            return DefaultStructureViewTreeElementProvider.this.createEObjectTreeElement(value, _xtextFile);
+            return DefaultStructureViewTreeElementProvider.this.createEObjectTreeElement(value, it.xtextFile);
           }
         };
         Iterable<StructureViewTreeElement> _map = IterableExtensions.<EObject, StructureViewTreeElement>map(_filter, _function);
@@ -161,7 +159,7 @@ public class DefaultStructureViewTreeElementProvider implements IStructureViewTr
         @Override
         public void apply(final EObjectTreeElement objectTreeElement) {
           objectTreeElement.setObject(modelElement);
-          objectTreeElement.setXtextFile(xtextFile);
+          objectTreeElement.xtextFile = xtextFile;
           objectTreeElement.setLeaf(leaf);
           objectTreeElement.setItemPresentation(itemPresentation);
           objectTreeElement.setStructureViewTreeElementProvider(DefaultStructureViewTreeElementProvider.this);
@@ -179,7 +177,7 @@ public class DefaultStructureViewTreeElementProvider implements IStructureViewTr
       public void apply(final EStructuralFeatureTreeElement structuralFeatureTreeElement) {
         structuralFeatureTreeElement.setOwner(modelElement);
         structuralFeatureTreeElement.setFeature(feature);
-        structuralFeatureTreeElement.setXtextFile(xtextFile);
+        structuralFeatureTreeElement.xtextFile = xtextFile;
         structuralFeatureTreeElement.setLeaf(leaf);
         structuralFeatureTreeElement.setItemPresentation(itemPresentation);
         structuralFeatureTreeElement.setStructureViewTreeElementProvider(DefaultStructureViewTreeElementProvider.this);

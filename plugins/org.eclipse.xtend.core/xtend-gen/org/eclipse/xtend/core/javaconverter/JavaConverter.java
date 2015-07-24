@@ -30,7 +30,6 @@ import org.eclipse.xtend.core.javaconverter.JavaCodeAnalyzer;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.ui.util.ClipboardUtil;
 import org.eclipse.xtext.xbase.conversion.IJavaCodeConverter;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -137,8 +136,8 @@ public class JavaConverter implements IJavaCodeConverter {
    * @param project JavaProject where the java source code comes from. If project is <code>null</code>, the parser will be<br>
    * 			 configured with the system class loader to resolve bindings.
    */
-  public JavaConverter.ConversionResult bodyDeclarationToXtend(final String javaSrc, final ClipboardUtil.JavaImportData additionalImports, final IJavaProject project) {
-    return this.internalToXtend(null, javaSrc, additionalImports, project);
+  public JavaConverter.ConversionResult bodyDeclarationToXtend(final String javaSrc, final String[] imports, final IJavaProject project) {
+    return this.internalToXtend(null, javaSrc, imports, project);
   }
   
   /**
@@ -177,7 +176,7 @@ public class JavaConverter implements IJavaCodeConverter {
    * @param javaSrc Java source code as String
    * @param proj JavaProject where the java source code comes from
    */
-  private JavaConverter.ConversionResult internalToXtend(final String unitName, final String javaSrc, final ClipboardUtil.JavaImportData additionalImports, final IJavaProject proj) {
+  private JavaConverter.ConversionResult internalToXtend(final String unitName, final String javaSrc, final String[] imports, final IJavaProject proj) {
     final ASTParser parser = this.javaAnalyzer.createDefaultJavaParser();
     parser.setStatementsRecovery(true);
     parser.setResolveBindings(true);
@@ -199,16 +198,15 @@ public class JavaConverter implements IJavaCodeConverter {
       parser.setEnvironment(((String[])Conversions.unwrapArray(cpEntries, String.class)), null, null, true);
     }
     final StringBuilder javaSrcBuilder = new StringBuilder();
-    boolean _notEquals_1 = (!Objects.equal(additionalImports, null));
+    boolean _notEquals_1 = (!Objects.equal(imports, null));
     if (_notEquals_1) {
-      String[] _imports = additionalImports.getImports();
       final Procedure1<String> _function_1 = new Procedure1<String>() {
         @Override
         public void apply(final String it) {
           javaSrcBuilder.append((("import " + it) + ";"));
         }
       };
-      IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(_imports)), _function_1);
+      IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(imports)), _function_1);
     }
     boolean _equals = Objects.equal(unitName, null);
     if (_equals) {
