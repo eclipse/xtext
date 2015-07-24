@@ -7,21 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.trace
 
+import com.intellij.openapi.module.Module
 import com.intellij.openapi.vfs.VirtualFile
-import org.eclipse.xtext.generator.trace.internal.IPlatformSpecificTraceProvider
-import org.eclipse.xtext.generator.trace.internal.NoTraces
+import org.eclipse.xtext.generator.trace.internal.IPlatformSpecificLocation
 
 /**
- * Provides read access to the available trace information for generated resources or input resources.
- * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * @noimplement This interface is not intended to be implemented by clients.
- * @noextend This interface is not intended to be extended by clients.
  * @since 2.9
  */
-interface ITraceForVirtualFileProvider extends IPlatformSpecificTraceProvider<VirtualFile, IIdeaTrace> {
-	
-	class Null extends NoTraces<VirtualFile, IIdeaTrace> implements ITraceForVirtualFileProvider {
-	}
-	
+interface ILocationInVirtualFile extends IPlatformSpecificLocation<VirtualFile, Module> {
 }

@@ -57,6 +57,9 @@ public abstract class AbstractTraceWithoutStorage extends AbstractEclipseTrace {
 	@Override
 	protected abstract InputStream getContents(SourceRelativeURI uri, IProject project) throws IOException;
 
+	/*
+	 * Overridden to allow access from same package
+	 */
 	@Override
 	protected void setTraceRegionProvider(ITraceRegionProvider traceRegionProvider) {
 		super.setTraceRegionProvider(traceRegionProvider);
