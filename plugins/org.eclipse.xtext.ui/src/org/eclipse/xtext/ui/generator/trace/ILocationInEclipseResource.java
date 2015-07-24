@@ -9,23 +9,20 @@ package org.eclipse.xtext.ui.generator.trace;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
-import org.eclipse.xtext.generator.trace.ILocationInResource;
+import org.eclipse.xtext.generator.trace.internal.IPlatformSpecificLocation;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.9
  */
-public interface ILocationInEclipseResource extends ILocationInResource {
+public interface ILocationInEclipseResource extends IPlatformSpecificLocation<IStorage, IProject> {
 
 	/**
 	 * @return the storage handle for this location. This can be <code>null</code> if the trace comes from a JAR's
 	 *         source attachment zip file.
+	 * @deprecated use {@link #getPlatformResource()} instead.
 	 */
-	/* @Nullable */ IStorage getStorage();
-	
-	/**
-	 * @return the project for this location. Never <code>null</code>.
-	 */
-	/* @NonNull */ IProject getProject();
+	@Deprecated
+	IStorage getStorage();
 	
 }

@@ -99,7 +99,7 @@ public class JavaEditorInputMatcher implements IEditorMatchingStrategy {
 		if (!iterator.hasNext()) {
 			return false;
 		}
-		IStorage storage = iterator.next().getStorage();
+		IStorage storage = iterator.next().getPlatformResource();
 		return currentResource.equals(storage);
 	}
 

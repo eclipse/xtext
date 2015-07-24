@@ -51,7 +51,7 @@ public class TraceBasedOpenerContributor extends OppositeFileOpenerContributor {
 			locations = trace.getAllAssociatedLocations();
 		Map<IStorage, ITextRegion> result = Maps.newHashMap();
 		for (ILocationInEclipseResource location : locations) {
-			IStorage storage = location.getStorage();
+			IStorage storage = location.getPlatformResource();
 			if (storage != null) {
 				ITextRegion old = result.put(storage, location.getTextRegion());
 				if (old != null) {
