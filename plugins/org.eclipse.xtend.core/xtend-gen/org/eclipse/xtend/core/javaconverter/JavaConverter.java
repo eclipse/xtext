@@ -186,27 +186,18 @@ public class JavaConverter implements IJavaCodeConverter {
       parser.setProject(proj);
       this.tweakOptions(parser, proj);
     } else {
-      final ClassLoader sysClassLoader = ClassLoader.getSystemClassLoader();
-      URL[] _uRLs = ((URLClassLoader) sysClassLoader).getURLs();
-      final Function1<URL, String> _function = new Function1<URL, String>() {
-        @Override
-        public String apply(final URL it) {
-          return it.getFile();
-        }
-      };
-      final List<String> cpEntries = ListExtensions.<URL, String>map(((List<URL>)Conversions.doWrapArray(_uRLs)), _function);
-      parser.setEnvironment(((String[])Conversions.unwrapArray(cpEntries, String.class)), null, null, true);
+      this.provideCustomEnvironment(parser);
     }
     final StringBuilder javaSrcBuilder = new StringBuilder();
     boolean _notEquals_1 = (!Objects.equal(imports, null));
     if (_notEquals_1) {
-      final Procedure1<String> _function_1 = new Procedure1<String>() {
+      final Procedure1<String> _function = new Procedure1<String>() {
         @Override
         public void apply(final String it) {
           javaSrcBuilder.append((("import " + it) + ";"));
         }
       };
-      IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(imports)), _function_1);
+      IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(imports)), _function);
     }
     boolean _equals = Objects.equal(unitName, null);
     if (_equals) {
@@ -227,6 +218,23 @@ public class JavaConverter implements IJavaCodeConverter {
     final ASTNode result = parser.createAST(null);
     Set<ASTNode> _singleton = Collections.<ASTNode>singleton(result);
     return this.executeAstFlattener(preparedJavaSrc, _singleton);
+  }
+  
+  /**
+   * Will be called when the environment can not be derived from a container like e.g. IJavaProject
+   * {@link ASTParser#setEnvironment(String[], String[], String[], boolean)}
+   */
+  protected void provideCustomEnvironment(final ASTParser parser) {
+    final ClassLoader sysClassLoader = ClassLoader.getSystemClassLoader();
+    URL[] _uRLs = ((URLClassLoader) sysClassLoader).getURLs();
+    final Function1<URL, String> _function = new Function1<URL, String>() {
+      @Override
+      public String apply(final URL it) {
+        return it.getFile();
+      }
+    };
+    final List<String> cpEntries = ListExtensions.<URL, String>map(((List<URL>)Conversions.doWrapArray(_uRLs)), _function);
+    parser.setEnvironment(((String[])Conversions.unwrapArray(cpEntries, String.class)), null, null, true);
   }
   
   /**

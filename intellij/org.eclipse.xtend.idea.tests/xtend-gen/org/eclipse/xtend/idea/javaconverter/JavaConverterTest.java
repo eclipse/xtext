@@ -15,7 +15,6 @@ import org.eclipse.xtend.core.javaconverter.JavaConverter;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -27,7 +26,6 @@ public class JavaConverterTest extends LightXtendTest {
   private JavaConverter converter;
   
   @Test
-  @Ignore("Fails on server for unknown reasons")
   public void testSimpleCase() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package javaconverter;");
