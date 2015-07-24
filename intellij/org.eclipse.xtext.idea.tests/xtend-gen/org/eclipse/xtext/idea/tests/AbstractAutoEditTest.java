@@ -21,6 +21,14 @@ public abstract class AbstractAutoEditTest extends LightToolingTest {
     super(fileType);
   }
   
+  protected void assertAutoIndentOnNewLine(final CharSequence model, final CharSequence expectedModel) {
+    String _string = model.toString();
+    this.configureByText(_string);
+    this.newLine();
+    String _string_1 = expectedModel.toString();
+    this.assertState(_string_1);
+  }
+  
   protected void selectText(final int relativeToCurrentOffset, final int length) {
     Editor _editor = this.myFixture.getEditor();
     CaretModel _caretModel = _editor.getCaretModel();
