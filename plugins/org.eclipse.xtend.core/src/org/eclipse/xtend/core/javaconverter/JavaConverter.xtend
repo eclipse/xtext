@@ -121,9 +121,7 @@ class JavaConverter implements IJavaCodeConverter {
 			parser.project = proj
 			parser.tweakOptions(proj)
 		} else {
-			val sysClassLoader = ClassLoader.getSystemClassLoader();
-			val cpEntries = (sysClassLoader as URLClassLoader).getURLs().map[file]
-			parser.setEnvironment(cpEntries, null, null, true)
+			provideCustomEnvironment(parser)
 		}
 		val javaSrcBuilder = new StringBuilder()
 		if (imports != null) {
@@ -141,6 +139,16 @@ class JavaConverter implements IJavaCodeConverter {
 		parser.source = preparedJavaSrc.toCharArray
 		val result = parser.createAST(null)
 		return executeAstFlattener(preparedJavaSrc, Collections.singleton(result))
+	}
+
+	/**
+	 * Will be called when the environment can not be derived from a container like e.g. IJavaProject
+	 * {@link ASTParser#setEnvironment(String[], String[], String[], boolean)}
+	 */
+	protected def provideCustomEnvironment(ASTParser parser) {
+		val sysClassLoader = ClassLoader.getSystemClassLoader();
+		val cpEntries = (sysClassLoader as URLClassLoader).getURLs().map[file]
+		parser.setEnvironment(cpEntries, null, null, true)
 	}
 
 	/**

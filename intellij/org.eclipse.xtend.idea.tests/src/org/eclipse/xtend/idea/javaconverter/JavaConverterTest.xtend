@@ -10,7 +10,6 @@ package org.eclipse.xtend.idea.javaconverter
 import com.google.inject.Inject
 import org.eclipse.xtend.core.javaconverter.JavaConverter
 import org.eclipse.xtend.idea.LightXtendTest
-import org.junit.Ignore
 import org.junit.Test
 
 /**
@@ -20,7 +19,6 @@ class JavaConverterTest extends LightXtendTest {
 	@Inject JavaConverter converter
 
 	@Test
-	@Ignore("Fails on server for unknown reasons")
 	def void testSimpleCase() {
 		val javaCalzz = myFixture.addFileToProject('javaconverter/JavaConverterTest.java', '''
 			package javaconverter;
