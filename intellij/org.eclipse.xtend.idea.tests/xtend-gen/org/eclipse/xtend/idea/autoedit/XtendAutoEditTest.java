@@ -26,6 +26,216 @@ public class XtendAutoEditTest extends AbstractXbaseAutoEditTest {
     LibraryUtil.addXtendLibrary(model);
   }
   
+  public void testRichStringComment_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("ллл", "\t\t");
+    _builder.append(" lalala|");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("\'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo() \'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("ллл", "\t\t");
+    _builder_1.append(" lalala");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t\t");
+    _builder_1.append("|");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAutoIndentOnNewLine(_builder, _builder_1);
+  }
+  
+  public void testRichStringComment_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("ллл", "\t\t");
+    _builder.append(" lalala|");
+    _builder.newLineIfNotEmpty();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo() \'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("ллл", "\t\t");
+    _builder_1.append(" lalala");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t\t");
+    _builder_1.append("|");
+    _builder_1.newLine();
+    this.assertAutoIndentOnNewLine(_builder, _builder_1);
+  }
+  
+  public void testRichStringComment_03() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("л", "\t");
+    _builder.append(" lalala|");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("\'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo() \'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("л", "\t");
+    _builder_1.append(" lalala");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.append("|");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAutoIndentOnNewLine(_builder, _builder_1);
+  }
+  
+  public void testRichStringComment_04() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("л", "\t");
+    _builder.append(" lalala|");
+    _builder.newLineIfNotEmpty();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo() \'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("л", "\t");
+    _builder_1.append(" lalala");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.append("|");
+    _builder_1.newLine();
+    this.assertAutoIndentOnNewLine(_builder, _builder_1);
+  }
+  
+  public void testRichStringComment_05() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("лл", "\t");
+    _builder.append(" lalala|");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("\'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo() \'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("лл", "\t");
+    _builder_1.append(" lalala");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.append("|");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAutoIndentOnNewLine(_builder, _builder_1);
+  }
+  
+  public void testRichStringComment_06() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("лл", "\t");
+    _builder.append(" lalala|");
+    _builder.newLineIfNotEmpty();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo() \'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("лл", "\t");
+    _builder_1.append(" lalala");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.append("|");
+    _builder_1.newLine();
+    this.assertAutoIndentOnNewLine(_builder, _builder_1);
+  }
+  
   public void testClassBraces() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {|");
