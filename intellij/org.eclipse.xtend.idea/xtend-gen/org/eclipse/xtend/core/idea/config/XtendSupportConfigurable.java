@@ -57,8 +57,17 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
     final Function1<SourceFolder, Boolean> _function = new Function1<SourceFolder, Boolean>() {
       @Override
       public Boolean apply(final SourceFolder it) {
+        boolean _and = false;
         boolean _isTestSource = it.isTestSource();
-        return Boolean.valueOf((!_isTestSource));
+        boolean _not = (!_isTestSource);
+        if (!_not) {
+          _and = false;
+        } else {
+          VirtualFile _file = it.getFile();
+          boolean _exists = _file.exists();
+          _and = _exists;
+        }
+        return Boolean.valueOf(_and);
       }
     };
     Iterable<SourceFolder> _filter = IterableExtensions.<SourceFolder>filter(((Iterable<SourceFolder>)Conversions.doWrapArray(_sourceFolders)), _function);
@@ -78,7 +87,16 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
     final Function1<SourceFolder, Boolean> _function_1 = new Function1<SourceFolder, Boolean>() {
       @Override
       public Boolean apply(final SourceFolder it) {
-        return Boolean.valueOf(it.isTestSource());
+        boolean _and = false;
+        boolean _isTestSource = it.isTestSource();
+        if (!_isTestSource) {
+          _and = false;
+        } else {
+          VirtualFile _file = it.getFile();
+          boolean _exists = _file.exists();
+          _and = _exists;
+        }
+        return Boolean.valueOf(_and);
       }
     };
     Iterable<SourceFolder> _filter_1 = IterableExtensions.<SourceFolder>filter(((Iterable<SourceFolder>)Conversions.doWrapArray(_sourceFolders_1)), _function_1);
