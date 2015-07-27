@@ -16,11 +16,14 @@ import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.CommandProcessor;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.module.Module;
 import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.ProjectFileIndex;
+import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
@@ -152,28 +155,28 @@ public class ConvertJavaCodeHandler implements RefactoringActionHandler {
   
   @Override
   public void invoke(final Project project, final PsiElement[] elements, final DataContext dataContext) {
-    HashSet<PsiFile> _newHashSet = CollectionLiterals.<PsiFile>newHashSet();
-    Collection<PsiFile> _collectJavaFiles = this.collectJavaFiles(elements, _newHashSet);
+    HashSet<PsiJavaFile> _newHashSet = CollectionLiterals.<PsiJavaFile>newHashSet();
+    Collection<PsiJavaFile> _collectJavaFiles = this.collectJavaFiles(elements, _newHashSet);
     Project _data = CommonDataKeys.PROJECT.getData(dataContext);
     this.runJavaConverter(_collectJavaFiles, _data);
   }
   
-  public Collection<PsiFile> collectJavaFiles(final PsiElement[] elements, final Set<PsiFile> collector) {
+  public Collection<PsiJavaFile> collectJavaFiles(final PsiElement[] elements, final Set<PsiJavaFile> collector) {
     final Procedure1<PsiElement> _function = new Procedure1<PsiElement>() {
       @Override
       public void apply(final PsiElement it) {
         if ((it instanceof PsiJavaFile)) {
-          collector.add(((PsiFile)it));
+          collector.add(((PsiJavaFile)it));
         } else {
           if ((it instanceof PsiDirectory)) {
             PsiElement[] _children = ((PsiDirectory)it).getChildren();
-            Collection<PsiFile> _collectJavaFiles = ConvertJavaCodeHandler.this.collectJavaFiles(_children, collector);
+            Collection<PsiJavaFile> _collectJavaFiles = ConvertJavaCodeHandler.this.collectJavaFiles(_children, collector);
             collector.addAll(_collectJavaFiles);
           } else {
             PsiFile _containingFile = it.getContainingFile();
             if ((_containingFile instanceof PsiJavaFile)) {
               PsiFile _containingFile_1 = it.getContainingFile();
-              collector.add(_containingFile_1);
+              collector.add(((PsiJavaFile) _containingFile_1));
             }
           }
         }
@@ -183,7 +186,7 @@ public class ConvertJavaCodeHandler implements RefactoringActionHandler {
     return collector;
   }
   
-  public void runJavaConverter(final Collection<PsiFile> files, final Project project) {
+  public void runJavaConverter(final Collection<PsiJavaFile> files, final Project project) {
     abstract class __ConvertJavaCodeHandler_1 extends Task.Backgroundable {
       final __ConvertJavaCodeHandler_1 _this__ConvertJavaCodeHandler_1 = this;
       
@@ -201,9 +204,9 @@ public class ConvertJavaCodeHandler implements RefactoringActionHandler {
       }
       @Override
       public void run(final ProgressIndicator indicator) {
-        final Procedure1<PsiFile> _function = new Procedure1<PsiFile>() {
+        final Procedure1<PsiJavaFile> _function = new Procedure1<PsiJavaFile>() {
           @Override
-          public void apply(final PsiFile javaFile) {
+          public void apply(final PsiJavaFile javaFile) {
             boolean _isCanceled = indicator.isCanceled();
             if (_isCanceled) {
               return;
@@ -224,9 +227,14 @@ public class ConvertJavaCodeHandler implements RefactoringActionHandler {
                   return _function.apply(null);
                 }
             }));
+            Project _project = _this__ConvertJavaCodeHandler_1.getProject();
+            ProjectRootManager _instance = ProjectRootManager.getInstance(_project);
+            ProjectFileIndex _fileIndex = _instance.getFileIndex();
             VirtualFile _virtualFile = javaFile.getVirtualFile();
-            String _nameWithoutExtension = _virtualFile.getNameWithoutExtension();
-            JavaConverter.ConversionResult _xtend = jc.toXtend(_nameWithoutExtension, javaSrc);
+            final Module context = _fileIndex.getModuleForFile(_virtualFile);
+            VirtualFile _virtualFile_1 = javaFile.getVirtualFile();
+            String _nameWithoutExtension = _virtualFile_1.getNameWithoutExtension();
+            JavaConverter.ConversionResult _xtend = jc.toXtend(_nameWithoutExtension, javaSrc, context);
             coversionResult.put(javaFile, _xtend);
             _this__ConvertJavaCodeHandler_1.done++;
             int _size = files.size();
@@ -234,7 +242,7 @@ public class ConvertJavaCodeHandler implements RefactoringActionHandler {
             indicator.setFraction(_divide);
           }
         };
-        IterableExtensions.<PsiFile>forEach(files, _function);
+        IterableExtensions.<PsiJavaFile>forEach(files, _function);
       }
       
       @Override
