@@ -401,24 +401,31 @@ class PsiNamedEObjectTest extends LightCodeInsightFixtureTestCase {
 	}
 
 	protected def testNotPsiNamedEObject(String text, String textAfterCaret) {
-		assertNull(text.findPsiNamedEObject(textAfterCaret))
+		myFixture.configureByText('aaa.sdomain', text)
+
+		val offset = text.indexOf(textAfterCaret)
+		val element = offset.findPsiNamedEObject  
+		assertNull(element)
 	}
 
-	protected def testPsiNamedEObject(String text, String textAfterCaret, String name, String newName) {
-		text.findPsiNamedEObject(textAfterCaret).testPsiNamedEObject(text, name, newName)
-	}
-
-	protected def testPsiNamedEObject(PsiNamedEObject element, String text, String name, String newName) {
+	protected def void testPsiNamedEObject(String text, String textAfterCaret, String name, String newName) {
+		myFixture.configureByText('aaa.sdomain', text)
+		
+		val offset = myFixture.editor.document.text.indexOf(textAfterCaret) 
+		val element = offset.findPsiNamedEObject
 		assertNotNull(element)
 
-		val nameOffset = text.indexOf(name)
+		val nameOffset = myFixture.editor.document.text.indexOf(name)
 		element.assertPsiNamedEObject(name, nameOffset)
 
 		myFixture.renameElement(element, newName)
-		element.assertPsiNamedEObject(newName, nameOffset)
+		
+		val newNameOffset = myFixture.editor.document.text.indexOf(newName)
+		newNameOffset.findPsiNamedEObject.assertPsiNamedEObject(newName, newNameOffset)
 	}
 
 	protected def assertPsiNamedEObject(PsiNamedEObject element, String name, int nameOffset) {
+		assertNotNull(element)
 		assertEquals(nameOffset, element.textOffset)
 		assertEquals(name, element.name)
 		element.nameIdentifier.assertPsiEObjectIdentifier(element, name, nameOffset)
@@ -437,14 +444,8 @@ class PsiNamedEObjectTest extends LightCodeInsightFixtureTestCase {
 		assertEquals(name.length, identifier.textLength)
 	}
 
-	protected def findPsiNamedEObject(String text, String textAfterCaret) {
-		val caretOffset = text.indexOf(textAfterCaret)
-		text.findPsiNamedEObject(caretOffset)
-	}
-
-	protected def findPsiNamedEObject(String text, int caretOffset) {
-		myFixture.configureByText('aaa.sdomain', text)
-		val targetElement = TargetElementUtilBase.instance.findTargetElement(myFixture.editor, ELEMENT_NAME_ACCEPTED, caretOffset)
+	protected def findPsiNamedEObject(int offset) {
+		val targetElement = TargetElementUtilBase.instance.findTargetElement(myFixture.editor, ELEMENT_NAME_ACCEPTED, offset)
 		if (targetElement instanceof PsiNamedEObject) {
 			targetElement
 		}
