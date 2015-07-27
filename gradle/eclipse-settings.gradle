@@ -22,5 +22,6 @@ eclipse {
 
     eclipseJdt.enabled = false
     cleanEclipseJdt.enabled = false
+    eclipseClasspath.dependsOn(cleanEclipseClasspath)
   }
 }
