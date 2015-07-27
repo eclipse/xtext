@@ -43,7 +43,7 @@ class ASTParserFactory {
 
 	/**
 	 * @param compilerCompliance compliance level when differs from the {@link #defaultCompliancelevel()}
-	 * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject)
+	 * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject or Module or null)
 	 */
 	def ASTParser createJavaParser(String compilerCompliance, Object context) {
 		val parser = createDefaultJavaParser(compilerCompliance)
@@ -52,14 +52,10 @@ class ASTParserFactory {
 	}
 
 	/**
-	 * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject)
+	 * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject or Module or null)
 	 */
 	def ASTParser createJavaParser(Object classPathContext) {
 		createJavaParser(defaultCompliancelevel, classPathContext)
-	}
-
-	def ASTParser createJavaParser() {
-		createJavaParser(defaultCompliancelevel, null)
 	}
 
 	/**
