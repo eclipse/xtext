@@ -1,6 +1,6 @@
 buildscript {
 	dependencies {
-		classpath "org.xtext:xtext-idea-gradle-plugin:0.3.18"
+		classpath "org.xtext:xtext-idea-gradle-plugin:0.3.21"
 	}
 }
 
@@ -17,6 +17,9 @@ allprojects {
 
 	ideaDevelopment {
 		ideaVersion = "141.814.3"
+		pluginDependencies {
+			id 'junit'
+		}
 	}
 }
 
@@ -27,10 +30,9 @@ configure(eclipsePluginProjects) {
 configure(subprojects - eclipsePluginProjects) {
 	apply plugin: 'org.xtext.idea-component'
 	apply from: "$rootDir/gradle/eclipse-settings.gradle"
-	project.apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
+	apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
 
 	dependencies {
-		ideaProvided fileTree("${ideaDevelopment.ideaHome}/plugins/junit/lib/").include("*.jar")
 		ideaProvided files(((URLClassLoader)javax.tools.ToolProvider.getSystemToolClassLoader()).getURLs()).filter({it.name == "tools.jar"})
 	}
 
@@ -60,7 +62,7 @@ configure(ideaPluginProjects + ideaTestProjects) {
 		if( project.name != 'org.eclipse.xtend.idea') {
 			exclude module:'org.eclipse.jdt.core'
 		}
-		
+
 		//TODO this should be excluded higher in the dependency chain
 		exclude module:'cglib'
 	}
