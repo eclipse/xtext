@@ -24,6 +24,102 @@ class XtendAutoEditTest extends AbstractXbaseAutoEditTest {
 	override protected configureModule(Module module, ModifiableRootModel model, ContentEntry contentEntry) {
 		model.addXtendLibrary
 	}
+	
+	def void testRichStringComment_01() {
+		'''
+		class Foo {
+			def foo() '«»''
+				«'«««'» lalala|
+			'«»''
+		}
+		'''.assertAutoIndentOnNewLine(
+		'''
+		class Foo {
+			def foo() '«»''
+				«'«««'» lalala
+				|
+			'«»''
+		}
+		''')
+	}
+	
+	def void testRichStringComment_02() {
+		'''
+		class Foo {
+			def foo() '«»''
+				«'«««'» lalala|
+		'''.assertAutoIndentOnNewLine(
+		'''
+		class Foo {
+			def foo() '«»''
+				«'«««'» lalala
+				|
+		''')
+	}
+	
+	def void testRichStringComment_03() {
+		'''
+		class Foo {
+			def foo() '«»''
+			«'«'» lalala|
+			'«»''
+		}
+		'''.assertAutoIndentOnNewLine(
+		'''
+		class Foo {
+			def foo() '«»''
+			«'«'» lalala
+			|
+			'«»''
+		}
+		''')
+	}
+	
+	def void testRichStringComment_04() {
+		'''
+		class Foo {
+			def foo() '«»''
+			«'«'» lalala|
+		'''.assertAutoIndentOnNewLine(
+		'''
+		class Foo {
+			def foo() '«»''
+			«'«'» lalala
+			|
+		''')
+	}
+	
+	def void testRichStringComment_05() {
+		'''
+		class Foo {
+			def foo() '«»''
+			«'««'» lalala|
+			'«»''
+		}
+		'''.assertAutoIndentOnNewLine(
+		'''
+		class Foo {
+			def foo() '«»''
+			«'««'» lalala
+			|
+			'«»''
+		}
+		''')
+	}
+	
+	def void testRichStringComment_06() {
+		'''
+		class Foo {
+			def foo() '«»''
+			«'««'» lalala|
+		'''.assertAutoIndentOnNewLine(
+		'''
+		class Foo {
+			def foo() '«»''
+			«'««'» lalala
+			|
+		''')
+	}
 
 	def void testClassBraces() {
 		configureByText('''class Foo {|''')

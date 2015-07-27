@@ -35,8 +35,6 @@ class XtendTokenSetProvider extends DefaultTokenSetProvider {
 			tokenTypeProvider.getIElementType(RULE_RICH_TEXT_START),
 			tokenTypeProvider.getIElementType(RULE_RICH_TEXT_END),
 			tokenTypeProvider.getIElementType(RULE_RICH_TEXT_INBETWEEN),
-			tokenTypeProvider.getIElementType(RULE_COMMENT_RICH_TEXT_END),
-			tokenTypeProvider.getIElementType(RULE_COMMENT_RICH_TEXT_INBETWEEN),
 			XtendHighlightingLexer.GUILLEMET_ELEMENT_TYPE
 		)
 	}
