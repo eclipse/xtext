@@ -8,6 +8,7 @@ import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
+import org.eclipse.xtend.core.javaconverter.ASTParserFactory;
 import org.eclipse.xtend.core.linking.Linker;
 import org.eclipse.xtend.core.macro.AbstractFileSystemSupport;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
@@ -58,6 +59,7 @@ import org.eclipse.xtend.ide.hover.XtendHoverProvider;
 import org.eclipse.xtend.ide.hover.XtendHoverSignatureProvider;
 import org.eclipse.xtend.ide.hyperlinking.HyperLinkingLabelProvider;
 import org.eclipse.xtend.ide.hyperlinking.XtendHyperlinkHelper;
+import org.eclipse.xtend.ide.javaconverter.EclipseASTParserFactory;
 import org.eclipse.xtend.ide.labeling.XtendLabelProvider;
 import org.eclipse.xtend.ide.macro.EclipseFileSystemSupportImpl;
 import org.eclipse.xtend.ide.macro.JdtBasedProcessorProvider;
@@ -570,5 +572,9 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	@Override
 	public Class<? extends XtextTemplateContextType> bindXtextTemplateContextType() {
 		return XtendTemplateContextType.class;
+	}
+	
+	public Class<? extends ASTParserFactory> bindASTParserFactory() {
+		return EclipseASTParserFactory.class;
 	}
 }
