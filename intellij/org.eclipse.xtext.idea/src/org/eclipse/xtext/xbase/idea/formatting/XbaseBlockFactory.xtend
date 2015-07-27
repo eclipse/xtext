@@ -15,10 +15,12 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.idea.formatting.DefaultBlockFactory
 import org.eclipse.xtext.idea.lang.IElementTypeProvider
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess
+import com.google.inject.Singleton
 
 /**
  * @author kosyakov - Initial contribution and API
  */
+@Singleton
 class XbaseBlockFactory extends DefaultBlockFactory {
 
 	@Inject

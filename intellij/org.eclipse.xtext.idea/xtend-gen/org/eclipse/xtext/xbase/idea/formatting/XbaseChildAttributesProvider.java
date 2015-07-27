@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.idea.formatting;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.intellij.formatting.Indent;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Keyword;
@@ -19,6 +20,7 @@ import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 /**
  * @author kosyakov - Initial contribution and API
  */
+@Singleton
 @SuppressWarnings("all")
 public class XbaseChildAttributesProvider extends DefaultChildAttributesProvider {
   @Inject

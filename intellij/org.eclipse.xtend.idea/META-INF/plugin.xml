@@ -60,12 +60,6 @@
 		<debugger.sourcePositionProvider
 							implementation="org.eclipse.xtend.core.idea.debug.XtendSourcePositionProvider"/>
 							
-		<lang.formatter language="org.eclipse.xtend.core.Xtend"
-							factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
-							implementationClass="com.intellij.formatting.FormattingModelBuilder"/>
-		<lang.commenter language="org.eclipse.xtend.core.Xtend"
-							factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
-							implementationClass="com.intellij.lang.CodeDocumentationAwareCommenter"/>
 		<liveTemplateContext implementation="org.eclipse.xtend.core.idea.completion.XtendCodeContextType$Generic"/>
 		<liveTemplateContext implementation="org.eclipse.xtend.core.idea.completion.XtendCodeContextType$Member"/>
 		<liveTemplateContext implementation="org.eclipse.xtend.core.idea.completion.XtendCodeContextType$Statement"/>

@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.idea.formatting;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.intellij.formatting.SpacingBuilder;
 import com.intellij.lang.Language;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
@@ -32,6 +33,7 @@ import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 /**
  * @author kosyakov - Initial contribution and API
  */
+@Singleton
 @SuppressWarnings("all")
 public class XbaseBlockFactory extends DefaultBlockFactory {
   @Inject

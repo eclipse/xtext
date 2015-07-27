@@ -13,6 +13,15 @@ abstract class AbstractAutoEditTest extends LightToolingTest {
 		super(fileType)
 	}
 
+	protected def void assertAutoIndentOnNewLine(
+		CharSequence model,
+		CharSequence expectedModel
+	) {
+		configureByText(model.toString)
+		newLine
+		assertState(expectedModel.toString)
+	}
+
 	protected def selectText(int relativeToCurrentOffset, int length) {
 		val offset = myFixture.editor.caretModel.offset
 		val startOffset = offset + relativeToCurrentOffset

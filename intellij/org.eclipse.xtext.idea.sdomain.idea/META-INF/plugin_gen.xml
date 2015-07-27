@@ -50,5 +50,12 @@
 		<facetType implementation="org.eclipse.xtext.idea.sdomain.idea.facet.SDomainFacetType"/>
 		<colorSettingsPage implementation="org.eclipse.xtext.idea.sdomain.idea.highlighting.SDomainColorSettingsPage"/>
 		<highlightVisitor implementation="org.eclipse.xtext.idea.sdomain.idea.highlighting.SDomainSemanticHighlightVisitor"/>
+
+		<lang.formatter language="org.eclipse.xtext.idea.sdomain.SDomain"
+								factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"
+								implementationClass="com.intellij.formatting.FormattingModelBuilder"/>
+		<lang.commenter language="org.eclipse.xtext.idea.sdomain.SDomain"
+								factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"
+								implementationClass="com.intellij.lang.CodeDocumentationAwareCommenter"/>
 	</extensions>
 </idea-plugin>

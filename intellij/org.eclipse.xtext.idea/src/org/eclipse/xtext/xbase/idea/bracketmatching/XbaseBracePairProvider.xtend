@@ -5,21 +5,22 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ide.editor.bracketmatching
+package org.eclipse.xtext.xbase.idea.bracketmatching
 
+import org.eclipse.xtext.ide.editor.bracketmatching.BracePair
+import org.eclipse.xtext.ide.editor.bracketmatching.DefaultBracePairProvider
 import com.google.inject.Singleton
 
 /**
  * @author kosyakov - Initial contribution and API
  */
 @Singleton
-class XtextBracePairProvider extends DefaultBracePairProvider {
+class XbaseBracePairProvider extends DefaultBracePairProvider {
 	new() {
 		super(#{
-			new BracePair(":", ";", true),
 			new BracePair("(", ")", false),
 			new BracePair("{", "}", true),
-			new BracePair("[", "]", false)
+			new BracePair("[", "]", true)
 		})
 	}
 }
