@@ -1516,7 +1516,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 	}
 
 	def protected toXtendStatement(CharSequence string) {
-		val xtendCode = j2x.statementToXtend(string.toString).getXtendCode().trim()
+		val xtendCode = j2x.statementToXtend(string.toString,null ).getXtendCode().trim()
 		dump(xtendCode)
 		return xtendCode
 	}

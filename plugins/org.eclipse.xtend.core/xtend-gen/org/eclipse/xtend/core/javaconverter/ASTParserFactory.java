@@ -65,7 +65,7 @@ public class ASTParserFactory {
   
   /**
    * @param compilerCompliance compliance level when differs from the {@link #defaultCompliancelevel()}
-   * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject)
+   * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject or Module or null)
    */
   public ASTParser createJavaParser(final String compilerCompliance, final Object context) {
     final ASTParser parser = this.createDefaultJavaParser(compilerCompliance);
@@ -74,16 +74,11 @@ public class ASTParserFactory {
   }
   
   /**
-   * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject)
+   * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject or Module or null)
    */
   public ASTParser createJavaParser(final Object classPathContext) {
     String _defaultCompliancelevel = this.defaultCompliancelevel();
     return this.createJavaParser(_defaultCompliancelevel, classPathContext);
-  }
-  
-  public ASTParser createJavaParser() {
-    String _defaultCompliancelevel = this.defaultCompliancelevel();
-    return this.createJavaParser(_defaultCompliancelevel, null);
   }
   
   /**

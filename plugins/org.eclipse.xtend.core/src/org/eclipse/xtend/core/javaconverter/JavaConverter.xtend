@@ -49,7 +49,7 @@ class JavaConverter {
 	def ConversionResult toXtend(String unitName, String javaSrc) {
 		if (unitName == null)
 			throw new IllegalArgumentException()
-		internalToXtend(unitName, javaSrc, null, astParserFactory.createJavaParser)
+		internalToXtend(unitName, javaSrc, null, astParserFactory.createJavaParser(null))
 	}
 
 	/**
@@ -78,9 +78,10 @@ class JavaConverter {
 
 	/**
 	 * @param javaSrc Java class source code as String
+	 * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject in eclipse Module in idea)
 	 */
-	def ConversionResult statementToXtend(String javaSrc) {
-		val parser = astParserFactory.createJavaParser
+	def ConversionResult statementToXtend(String javaSrc, Object classPathContext) {
+		val parser = astParserFactory.createJavaParser(classPathContext)
 		parser.source = javaSrc.toCharArray
 		parser.kind = ASTParser.K_STATEMENTS
 		val root = parser.createAST(null)
@@ -93,9 +94,10 @@ class JavaConverter {
 
 	/**
 	 * @param javaSrc Java class source code as String
+	 * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject in eclipse Module in idea)
 	 */
-	def ConversionResult expressionToXtend(String javaSrc) {
-		val parser = astParserFactory.createJavaParser
+	def ConversionResult expressionToXtend(String javaSrc, Object classPathContext) {
+		val parser = astParserFactory.createJavaParser(classPathContext)
 		parser.source = javaSrc.toCharArray
 		parser.kind = ASTParser.K_EXPRESSION
 		val root = parser.createAST(null)

@@ -102,7 +102,7 @@ public class JavaConverter {
       if (_equals) {
         throw new IllegalArgumentException();
       }
-      ASTParser _createJavaParser = this.astParserFactory.createJavaParser();
+      ASTParser _createJavaParser = this.astParserFactory.createJavaParser(null);
       _xblockexpression = this.internalToXtend(unitName, javaSrc, null, _createJavaParser);
     }
     return _xblockexpression;
@@ -142,9 +142,10 @@ public class JavaConverter {
   
   /**
    * @param javaSrc Java class source code as String
+   * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject in eclipse Module in idea)
    */
-  public JavaConverter.ConversionResult statementToXtend(final String javaSrc) {
-    final ASTParser parser = this.astParserFactory.createJavaParser();
+  public JavaConverter.ConversionResult statementToXtend(final String javaSrc, final Object classPathContext) {
+    final ASTParser parser = this.astParserFactory.createJavaParser(classPathContext);
     char[] _charArray = javaSrc.toCharArray();
     parser.setSource(_charArray);
     parser.setKind(ASTParser.K_STATEMENTS);
@@ -159,9 +160,10 @@ public class JavaConverter {
   
   /**
    * @param javaSrc Java class source code as String
+   * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject in eclipse Module in idea)
    */
-  public JavaConverter.ConversionResult expressionToXtend(final String javaSrc) {
-    final ASTParser parser = this.astParserFactory.createJavaParser();
+  public JavaConverter.ConversionResult expressionToXtend(final String javaSrc, final Object classPathContext) {
+    final ASTParser parser = this.astParserFactory.createJavaParser(classPathContext);
     char[] _charArray = javaSrc.toCharArray();
     parser.setSource(_charArray);
     parser.setKind(ASTParser.K_EXPRESSION);
