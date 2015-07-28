@@ -1,0 +1,17 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<version>0.1.0-SNAPSHOT</version>
+	<groupId>org.xpect</groupId>
+	<artifactId>org.xpect.target.eclipse_4_4_0-xtext_2_7_3</artifactId>
+	<packaging>eclipse-target-definition</packaging>
+	<parent>
+		<groupId>org.xpect</groupId>
+		<artifactId>org.xpect.parent</artifactId>
+		<version>0.1.0-SNAPSHOT</version>
+		<relativePath>../../maven-plugin-parent</relativePath>
+	</parent>
+</project>
+
+
+

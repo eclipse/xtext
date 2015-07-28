@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?><target name="Xpect Target Definition (Eclipse 3.8 - Juno)" sequenceNumber="30">
+<locations>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.xtext.sdk.feature.group" version="2.7.3.v201411190455"/>
+<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.jdt.junit.runners.feature.feature.group" version="0.1.0.201308221506"/>
+<repository location="http://meysholdt.github.io/eclipse_jdt_junit_runners/updatesite/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="de.itemis.statefullexer.feature.group" version="1.0.0.201311181130"/>
+<repository location="http://meysholdt.github.io/xtext_stateful_lexer/updatesite/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.xtext.example.arithmetics.sdk.feature.group" version="2.7.3.201507052129"/>
+<unit id="org.eclipse.xtext.example.domainmodel.sdk.feature.group" version="2.7.3.201507052129"/>
+<repository location="http://meysholdt.github.io/xtext_examples/repositories/generated-with-xtext_2_7_3/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.gef.sdk.feature.group" version="3.9.100.201405261516"/>
+<repository location="http://download.eclipse.org/releases/luna"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.sdk.ide" version="4.4.0.I20140606-1215"/>
+<repository location="http://download.eclipse.org/eclipse/updates/4.4"/>
+</location>
+</locations>
+<environment>
+<nl>en_EN</nl>
+</environment>
+<launcherArgs>
+<vmArgs>-Xms128m -Xmx768m -Xss4m -XX:MaxPermSize=256m</vmArgs>
+<programArgs>--launcher.XXMaxPermSize 256m</programArgs>
+</launcherArgs>
+</target>
