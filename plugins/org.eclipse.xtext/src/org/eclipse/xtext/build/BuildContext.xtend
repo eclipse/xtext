@@ -14,6 +14,7 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy
+import org.eclipse.xtext.util.CancelIndicator
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -25,6 +26,7 @@ class BuildContext {
 	@Accessors val XtextResourceSet resourceSet
 	@Accessors val IndexState oldState
 	@Accessors val IResourceClusteringPolicy clusteringPolicy
+	@Accessors val CancelIndicator cancelIndicator
 	
 	ClusteringStorageAwareResourceLoader loader
 	

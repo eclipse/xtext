@@ -8,9 +8,12 @@
 package org.eclipse.xtext.idea.common.types;
 
 import com.google.common.base.Objects;
+import com.intellij.openapi.application.Application;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.progress.ProgressIndicatorProvider;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Computable;
 import com.intellij.psi.JavaPsiFacade;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.impl.compiled.SignatureParsing;
@@ -28,6 +31,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.impl.AbstractJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.AbstractRuntimeJvmTypeProvider;
+import org.eclipse.xtext.common.types.access.impl.IClassMirror;
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
@@ -198,54 +202,68 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
   }
   
   protected JvmType findType(final Resource resource, final String fragment, final boolean traverseNestedTypes) {
-    EObject _eObject = resource.getEObject(fragment);
-    final JvmType result = ((JvmType) _eObject);
-    boolean _or = false;
-    boolean _notEquals = (!Objects.equal(result, null));
-    if (_notEquals) {
-      _or = true;
-    } else {
-      _or = (!traverseNestedTypes);
-    }
-    if (_or) {
-      return result;
-    }
-    EList<EObject> _contents = resource.getContents();
-    final EObject rootType = IterableExtensions.<EObject>head(_contents);
-    if ((rootType instanceof JvmDeclaredType)) {
-      URI _uRI = resource.getURI();
-      final String rootTypeName = _uRI.segment(1);
-      int _length = rootTypeName.length();
-      int _plus = (_length + 1);
-      final String nestedTypeName = fragment.substring(_plus);
-      final List<String> segments = Strings.split(nestedTypeName, "$");
-      return this.findNestedType(((JvmDeclaredType)rootType), segments, 0);
-    }
-    return null;
+    Application _application = ApplicationManager.getApplication();
+    final Computable<JvmType> _function = new Computable<JvmType>() {
+      @Override
+      public JvmType compute() {
+        EObject _eObject = resource.getEObject(fragment);
+        final JvmType result = ((JvmType) _eObject);
+        boolean _or = false;
+        boolean _notEquals = (!Objects.equal(result, null));
+        if (_notEquals) {
+          _or = true;
+        } else {
+          _or = (!traverseNestedTypes);
+        }
+        if (_or) {
+          return result;
+        }
+        EList<EObject> _contents = resource.getContents();
+        final EObject rootType = IterableExtensions.<EObject>head(_contents);
+        if ((rootType instanceof JvmDeclaredType)) {
+          URI _uRI = resource.getURI();
+          final String rootTypeName = _uRI.segment(1);
+          int _length = rootTypeName.length();
+          int _plus = (_length + 1);
+          final String nestedTypeName = fragment.substring(_plus);
+          final List<String> segments = Strings.split(nestedTypeName, "$");
+          return StubJvmTypeProvider.this.findNestedType(((JvmDeclaredType)rootType), segments, 0);
+        }
+        return null;
+      }
+    };
+    return _application.<JvmType>runReadAction(_function);
   }
   
   @Override
   protected IMirror createMirrorForFQN(final String name) {
-    PsiClassMirror _xblockexpression = null;
-    {
-      Project _project = this.module.getProject();
-      JavaPsiFacade _javaPsiFacade = IdeaProjectExtensions.getJavaPsiFacade(_project);
-      final PsiClass psiClass = IdeaProjectExtensions.findClassWithAlternativeResolvedEnabled(_javaPsiFacade, name, this.searchScope);
-      boolean _or = false;
-      boolean _equals = Objects.equal(psiClass, null);
-      if (_equals) {
-        _or = true;
-      } else {
-        PsiClass _containingClass = psiClass.getContainingClass();
-        boolean _notEquals = (!Objects.equal(_containingClass, null));
-        _or = _notEquals;
+    Application _application = ApplicationManager.getApplication();
+    final Computable<IClassMirror> _function = new Computable<IClassMirror>() {
+      @Override
+      public IClassMirror compute() {
+        PsiClassMirror _xblockexpression = null;
+        {
+          Project _project = StubJvmTypeProvider.this.module.getProject();
+          JavaPsiFacade _javaPsiFacade = IdeaProjectExtensions.getJavaPsiFacade(_project);
+          final PsiClass psiClass = IdeaProjectExtensions.findClassWithAlternativeResolvedEnabled(_javaPsiFacade, name, StubJvmTypeProvider.this.searchScope);
+          boolean _or = false;
+          boolean _equals = Objects.equal(psiClass, null);
+          if (_equals) {
+            _or = true;
+          } else {
+            PsiClass _containingClass = psiClass.getContainingClass();
+            boolean _notEquals = (!Objects.equal(_containingClass, null));
+            _or = _notEquals;
+          }
+          if (_or) {
+            return null;
+          }
+          _xblockexpression = new PsiClassMirror(psiClass, StubJvmTypeProvider.this.psiClassFactory);
+        }
+        return _xblockexpression;
       }
-      if (_or) {
-        return null;
-      }
-      _xblockexpression = new PsiClassMirror(psiClass, this.psiClassFactory);
-    }
-    return _xblockexpression;
+    };
+    return _application.<IClassMirror>runReadAction(_function);
   }
   
   protected GlobalSearchScope getSearchScope() {

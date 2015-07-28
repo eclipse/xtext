@@ -32,6 +32,7 @@ import org.eclipse.xtext.resource.impl.AbstractResourceDescription
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.util.internal.Log
+import org.eclipse.xtext.service.OperationCanceledManager
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -40,6 +41,7 @@ import org.eclipse.xtext.util.internal.Log
 @Log class Indexer {
 
 	@Inject CompilerPhases compilerPhases
+	@Inject extension OperationCanceledManager
 
 	@Data static class IndexResult {
 		List<Delta> resourceDeltas
@@ -87,6 +89,7 @@ import org.eclipse.xtext.util.internal.Log
 		extension BuildContext context) {
 		val deltas = <Delta>newArrayList()
 		request.deletedFiles.filter[context.getResourceServiceProvider(it) != null].forEach [
+			context.cancelIndicator.checkCanceled
 			val IResourceDescription oldDescription = oldIndex?.getResourceDescription(it)
 			if (oldDescription != null) {
 				val delta = new DefaultResourceDescriptionDelta(oldDescription, null)
@@ -110,6 +113,7 @@ import org.eclipse.xtext.util.internal.Log
 
 	def protected Delta addToIndex(Resource resource, boolean isPreIndexing, ResourceDescriptionsData oldIndex,
 		BuildContext context) {
+		context.cancelIndicator.checkCanceled
 		val uri = resource.getURI
 		val serviceProvider = context.getResourceServiceProvider(uri)
 		val manager = serviceProvider.resourceDescriptionManager

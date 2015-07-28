@@ -12,10 +12,11 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
-import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.fileEditor.FileDocumentManager;
+import com.intellij.openapi.application.Application;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.vfs.VirtualFile;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -23,7 +24,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -74,64 +74,71 @@ public class IdeaResourceSetProvider {
     }
     
     public void flushToDisk() {
-      try {
-        boolean _isDebugEnabled = IdeaResourceSetProvider.LOG.isDebugEnabled();
-        if (_isDebugEnabled) {
-          Set<URI> _keySet = this.writtenContents.keySet();
-          String _join = IterableExtensions.join(_keySet, ", ");
-          String _plus = ("writing : " + _join);
-          IdeaResourceSetProvider.LOG.debug(_plus);
-          String _join_1 = IterableExtensions.join(this.deleted, ", ");
-          String _plus_1 = ("deleting: " + _join_1);
-          IdeaResourceSetProvider.LOG.debug(_plus_1);
-        }
-        final Map<URI, byte[]> localWritten = this.writtenContents;
-        HashMap<URI, byte[]> _newHashMap = CollectionLiterals.<URI, byte[]>newHashMap();
-        this.writtenContents = _newHashMap;
-        final Set<URI> localDeleted = this.deleted;
-        HashSet<URI> _newHashSet = CollectionLiterals.<URI>newHashSet();
-        this.deleted = _newHashSet;
-        boolean _and = false;
-        boolean _isEmpty = localDeleted.isEmpty();
-        if (!_isEmpty) {
-          _and = false;
-        } else {
-          boolean _isEmpty_1 = localWritten.isEmpty();
-          _and = _isEmpty_1;
-        }
-        if (_and) {
-          return;
-        }
-        final long timeStamp = System.currentTimeMillis();
-        Set<URI> _keySet_1 = localWritten.keySet();
-        for (final URI uri : _keySet_1) {
-          {
-            VirtualFile file = VirtualFileURIUtil.getOrCreateVirtualFile(uri);
-            byte[] _get = localWritten.get(uri);
-            Object _requestor = this.getRequestor();
-            file.setBinaryContent(_get, (-1), timeStamp, _requestor);
-          }
-        }
-        for (final URI uri_1 : localDeleted) {
-          {
-            final VirtualFile file = VirtualFileURIUtil.getVirtualFile(uri_1);
-            boolean _and_1 = false;
-            boolean _notEquals = (!Objects.equal(file, null));
-            if (!_notEquals) {
-              _and_1 = false;
-            } else {
-              boolean _exists = file.exists();
-              _and_1 = _exists;
-            }
-            if (_and_1) {
-              Object _requestor = this.getRequestor();
-              file.delete(_requestor);
-            }
-          }
-        }
-      } catch (Throwable _e) {
-        throw Exceptions.sneakyThrow(_e);
+      boolean _isDebugEnabled = IdeaResourceSetProvider.LOG.isDebugEnabled();
+      if (_isDebugEnabled) {
+        Set<URI> _keySet = this.writtenContents.keySet();
+        String _join = IterableExtensions.join(_keySet, ", ");
+        String _plus = ("writing : " + _join);
+        IdeaResourceSetProvider.LOG.debug(_plus);
+        String _join_1 = IterableExtensions.join(this.deleted, ", ");
+        String _plus_1 = ("deleting: " + _join_1);
+        IdeaResourceSetProvider.LOG.debug(_plus_1);
       }
+      final Map<URI, byte[]> localWritten = this.writtenContents;
+      HashMap<URI, byte[]> _newHashMap = CollectionLiterals.<URI, byte[]>newHashMap();
+      this.writtenContents = _newHashMap;
+      final Set<URI> localDeleted = this.deleted;
+      HashSet<URI> _newHashSet = CollectionLiterals.<URI>newHashSet();
+      this.deleted = _newHashSet;
+      boolean _and = false;
+      boolean _isEmpty = localDeleted.isEmpty();
+      if (!_isEmpty) {
+        _and = false;
+      } else {
+        boolean _isEmpty_1 = localWritten.isEmpty();
+        _and = _isEmpty_1;
+      }
+      if (_and) {
+        return;
+      }
+      Application _application = ApplicationManager.getApplication();
+      final Runnable _function = new Runnable() {
+        @Override
+        public void run() {
+          try {
+            final long timeStamp = System.currentTimeMillis();
+            Set<URI> _keySet = localWritten.keySet();
+            for (final URI uri : _keySet) {
+              {
+                VirtualFile file = VirtualFileURIUtil.getOrCreateVirtualFile(uri);
+                byte[] _get = localWritten.get(uri);
+                Object _requestor = VirtualFileBasedUriHandler.this.getRequestor();
+                file.setBinaryContent(_get, (-1), timeStamp, _requestor);
+              }
+            }
+            for (final URI uri_1 : localDeleted) {
+              {
+                final VirtualFile file = VirtualFileURIUtil.getVirtualFile(uri_1);
+                boolean _and = false;
+                boolean _notEquals = (!Objects.equal(file, null));
+                if (!_notEquals) {
+                  _and = false;
+                } else {
+                  boolean _exists = file.exists();
+                  _and = _exists;
+                }
+                if (_and) {
+                  Object _requestor = VirtualFileBasedUriHandler.this.getRequestor();
+                  file.delete(_requestor);
+                }
+              }
+            }
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      _application.runWriteAction(_function);
     }
     
     @Override
@@ -143,7 +150,7 @@ public class IdeaResourceSetProvider {
     public InputStream createInputStream(final URI uri, final Map<?, ?> options) throws IOException {
       boolean _contains = this.deleted.contains(uri);
       if (_contains) {
-        throw new IllegalStateException((("resource " + uri) + " is deleted."));
+        throw new IOException((("resource " + uri) + " is deleted."));
       }
       boolean _containsKey = this.writtenContents.containsKey(uri);
       if (_containsKey) {
@@ -155,16 +162,19 @@ public class IdeaResourceSetProvider {
       if (_equals) {
         throw new FileNotFoundException(("Couldn\'t find virtual file for " + uri));
       }
-      FileDocumentManager _instance = FileDocumentManager.getInstance();
-      final Document doc = _instance.getCachedDocument(virtualFile);
-      boolean _notEquals = (!Objects.equal(doc, null));
-      if (_notEquals) {
-        String _text = doc.getText();
-        Charset _charset = virtualFile.getCharset();
-        byte[] _bytes = _text.getBytes(_charset);
-        return new ByteArrayInputStream(_bytes);
-      }
-      return virtualFile.getInputStream();
+      Application _application = ApplicationManager.getApplication();
+      final Computable<InputStream> _function = new Computable<InputStream>() {
+        @Override
+        public InputStream compute() {
+          try {
+            byte[] _contentsToByteArray = virtualFile.contentsToByteArray();
+            return new ByteArrayInputStream(_contentsToByteArray);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      return _application.<InputStream>runReadAction(_function);
     }
     
     @Override

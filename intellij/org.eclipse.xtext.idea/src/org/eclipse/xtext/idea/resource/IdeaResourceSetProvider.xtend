@@ -10,11 +10,13 @@ package org.eclipse.xtext.idea.resource
 import com.google.inject.Inject
 import com.google.inject.Provider
 import com.google.inject.Singleton
-import com.intellij.openapi.fileEditor.FileDocumentManager
+import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.module.Module
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
+import java.io.FileNotFoundException
 import java.io.IOException
+import java.io.InputStream
 import java.util.Map
 import java.util.Set
 import org.eclipse.emf.common.notify.Notifier
@@ -29,7 +31,6 @@ import org.eclipse.xtext.util.internal.Log
 
 import static org.eclipse.xtext.idea.resource.IdeaResourceSetProvider.*
 import static org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
-import java.io.FileNotFoundException
 
 @Singleton @Log
 class IdeaResourceSetProvider {
@@ -82,16 +83,18 @@ class IdeaResourceSetProvider {
 			if (localDeleted.empty && localWritten.empty) {
 				return;
 			}
-			val timeStamp = System.currentTimeMillis
-			for (uri : localWritten.keySet) {
-				var file = getOrCreateVirtualFile(uri)
-				file.setBinaryContent(localWritten.get(uri), -1, timeStamp, requestor)
-			}
-			for (uri : localDeleted) {
-				val file = getVirtualFile(uri)
-				if (file != null && file.exists)
-					file.delete(requestor)
-			}
+			ApplicationManager.application.runWriteAction[
+				val timeStamp = System.currentTimeMillis
+				for (uri : localWritten.keySet) {
+					var file = getOrCreateVirtualFile(uri)
+					file.setBinaryContent(localWritten.get(uri), -1, timeStamp, requestor)
+				}
+				for (uri : localDeleted) {
+					val file = getVirtualFile(uri)
+					if (file != null && file.exists)
+						file.delete(requestor)
+				}
+			]
 		}
 		
 		override contentDescription(URI uri, Map<?,?> options) throws IOException {
@@ -100,7 +103,7 @@ class IdeaResourceSetProvider {
 		
 		override createInputStream(URI uri, Map<?, ?> options) throws IOException {
 			if (deleted.contains(uri)) {
-				throw new IllegalStateException("resource "+uri+" is deleted.")
+				throw new IOException("resource "+uri+" is deleted.")
 			}
 			if (writtenContents.containsKey(uri)) {
 				return new ByteArrayInputStream(writtenContents.get(uri))
@@ -109,11 +112,10 @@ class IdeaResourceSetProvider {
 			if (virtualFile == null) {
 				throw new FileNotFoundException("Couldn't find virtual file for "+uri)
 			}
-			val doc = FileDocumentManager.getInstance().getCachedDocument(virtualFile)
-			if (doc != null) {
-				return new ByteArrayInputStream(doc.text.getBytes(virtualFile.charset))
-			}
-			return virtualFile.inputStream
+			
+			return ApplicationManager.application.<InputStream>runReadAction[
+				return new ByteArrayInputStream(virtualFile.contentsToByteArray)
+			]
 		}
 		
 		override createOutputStream(URI uri, Map<?, ?> options) throws IOException {

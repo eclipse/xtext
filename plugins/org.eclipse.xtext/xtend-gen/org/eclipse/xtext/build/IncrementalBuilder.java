@@ -48,6 +48,7 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
 import org.eclipse.xtext.resource.persistence.SerializableResourceDescription;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.validation.CheckMode;
@@ -152,6 +153,10 @@ public class IncrementalBuilder {
     @Inject
     private Indexer indexer;
     
+    @Inject
+    @Extension
+    private OperationCanceledManager _operationCanceledManager;
+    
     public IncrementalBuilder.Result launch() {
       IndexState _state = this.request.getState();
       final Source2GeneratedMapping newSource2GeneratedMapping = _state.getFileMappings();
@@ -184,6 +189,8 @@ public class IncrementalBuilder {
       };
       IterableExtensions.<URI>forEach(_deletedFiles, _function);
       final Indexer.IndexResult result = this.indexer.computeAndIndexAffected(this.request, this.context);
+      CancelIndicator _cancelIndicator = this.request.getCancelIndicator();
+      this._operationCanceledManager.checkCanceled(_cancelIndicator);
       final ArrayList<IResourceDescription.Delta> resolvedDeltas = CollectionLiterals.<IResourceDescription.Delta>newArrayList();
       List<IResourceDescription.Delta> _resourceDeltas = result.getResourceDeltas();
       final Function1<IResourceDescription.Delta, Boolean> _function_1 = new Function1<IResourceDescription.Delta, Boolean>() {
@@ -214,8 +221,12 @@ public class IncrementalBuilder {
       final Function1<Resource, IResourceDescription.Delta> _function_4 = new Function1<Resource, IResourceDescription.Delta>() {
         @Override
         public IResourceDescription.Delta apply(final Resource resource) {
+          CancelIndicator _cancelIndicator = InternalStatefulIncrementalBuilder.this.request.getCancelIndicator();
+          InternalStatefulIncrementalBuilder.this._operationCanceledManager.checkCanceled(_cancelIndicator);
           resource.getContents();
           EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl);
+          CancelIndicator _cancelIndicator_1 = InternalStatefulIncrementalBuilder.this.request.getCancelIndicator();
+          InternalStatefulIncrementalBuilder.this._operationCanceledManager.checkCanceled(_cancelIndicator_1);
           URI _uRI = resource.getURI();
           final IResourceServiceProvider serviceProvider = InternalStatefulIncrementalBuilder.this.context.getResourceServiceProvider(_uRI);
           final IResourceDescription.Manager manager = serviceProvider.getResourceDescriptionManager();
@@ -224,6 +235,8 @@ public class IncrementalBuilder {
           ResourceDescriptionsData _newIndex = result.getNewIndex();
           URI _uRI_1 = resource.getURI();
           _newIndex.addDescription(_uRI_1, copiedDescription);
+          CancelIndicator _cancelIndicator_2 = InternalStatefulIncrementalBuilder.this.request.getCancelIndicator();
+          InternalStatefulIncrementalBuilder.this._operationCanceledManager.checkCanceled(_cancelIndicator_2);
           boolean _and = false;
           boolean _validate = InternalStatefulIncrementalBuilder.this.validate(resource);
           if (!_validate) {
@@ -234,6 +247,8 @@ public class IncrementalBuilder {
             _and = _shouldGenerate;
           }
           if (_and) {
+            CancelIndicator _cancelIndicator_3 = InternalStatefulIncrementalBuilder.this.request.getCancelIndicator();
+            InternalStatefulIncrementalBuilder.this._operationCanceledManager.checkCanceled(_cancelIndicator_3);
             InternalStatefulIncrementalBuilder.this.generate(resource, InternalStatefulIncrementalBuilder.this.request, newSource2GeneratedMapping);
           }
           IndexState _oldState = InternalStatefulIncrementalBuilder.this.context.getOldState();
@@ -424,25 +439,44 @@ public class IncrementalBuilder {
   @Inject
   private Provider<IncrementalBuilder.InternalStatefulIncrementalBuilder> provider;
   
+  @Inject
+  @Extension
+  private OperationCanceledManager _operationCanceledManager;
+  
   public IncrementalBuilder.Result build(final BuildRequest request, final Function1<? super URI, ? extends IResourceServiceProvider> languages) {
     DisabledClusteringPolicy _disabledClusteringPolicy = new DisabledClusteringPolicy();
     return this.build(request, languages, _disabledClusteringPolicy);
   }
   
   public IncrementalBuilder.Result build(final BuildRequest request, final Function1<? super URI, ? extends IResourceServiceProvider> languages, final IResourceClusteringPolicy clusteringPolicy) {
-    final XtextResourceSet resourceSet = request.getResourceSet();
-    IndexState _state = request.getState();
-    ResourceDescriptionsData _resourceDescriptions = _state.getResourceDescriptions();
-    ResourceDescriptionsData _copy = _resourceDescriptions.copy();
-    IndexState _state_1 = request.getState();
-    Source2GeneratedMapping _fileMappings = _state_1.getFileMappings();
-    Source2GeneratedMapping _copy_1 = _fileMappings.copy();
-    final IndexState oldState = new IndexState(_copy, _copy_1);
-    final BuildContext context = new BuildContext(languages, resourceSet, oldState, clusteringPolicy);
-    final IncrementalBuilder.InternalStatefulIncrementalBuilder builder = this.provider.get();
-    builder.context = context;
-    builder.request = request;
-    return builder.launch();
+    try {
+      final XtextResourceSet resourceSet = request.getResourceSet();
+      IndexState _state = request.getState();
+      ResourceDescriptionsData _resourceDescriptions = _state.getResourceDescriptions();
+      ResourceDescriptionsData _copy = _resourceDescriptions.copy();
+      IndexState _state_1 = request.getState();
+      Source2GeneratedMapping _fileMappings = _state_1.getFileMappings();
+      Source2GeneratedMapping _copy_1 = _fileMappings.copy();
+      final IndexState oldState = new IndexState(_copy, _copy_1);
+      CancelIndicator _cancelIndicator = request.getCancelIndicator();
+      final BuildContext context = new BuildContext(languages, resourceSet, oldState, clusteringPolicy, _cancelIndicator);
+      final IncrementalBuilder.InternalStatefulIncrementalBuilder builder = this.provider.get();
+      builder.context = context;
+      builder.request = request;
+      try {
+        return builder.launch();
+      } catch (final Throwable _t) {
+        if (_t instanceof Throwable) {
+          final Throwable t = (Throwable)_t;
+          this._operationCanceledManager.propagateIfCancelException(t);
+          throw t;
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   private final static Logger LOG = Logger.getLogger(IncrementalBuilder.class);

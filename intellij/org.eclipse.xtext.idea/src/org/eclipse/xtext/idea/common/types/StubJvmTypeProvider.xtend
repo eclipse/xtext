@@ -29,6 +29,8 @@ import org.eclipse.xtext.service.OperationCanceledError
 import org.eclipse.xtext.util.Strings
 
 import static extension org.eclipse.xtext.idea.extensions.IdeaProjectExtensions.*
+import com.intellij.openapi.application.ApplicationManager
+import org.eclipse.xtext.common.types.access.impl.IClassMirror
 
 class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 
@@ -113,26 +115,30 @@ class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 	}
 
 	protected def findType(Resource resource, String fragment, boolean traverseNestedTypes) {
-		val result = resource.getEObject(fragment) as JvmType
-		if (result != null || !traverseNestedTypes) {
-			return result
-		}
-		val rootType = resource.contents.head
-		if (rootType instanceof JvmDeclaredType) {
-			val rootTypeName = resource.getURI.segment(1)
-			val nestedTypeName = fragment.substring(rootTypeName.length + 1)
-			val segments = Strings.split(nestedTypeName, '$')
-			return findNestedType(rootType, segments, 0)
-		}
-		return null
+		ApplicationManager.application.<JvmType>runReadAction[
+			val result = resource.getEObject(fragment) as JvmType
+			if (result != null || !traverseNestedTypes) {
+				return result
+			}
+			val rootType = resource.contents.head
+			if (rootType instanceof JvmDeclaredType) {
+				val rootTypeName = resource.getURI.segment(1)
+				val nestedTypeName = fragment.substring(rootTypeName.length + 1)
+				val segments = Strings.split(nestedTypeName, '$')
+				return findNestedType(rootType, segments, 0)
+			}
+			return null
+		]
 	}
 
 	protected override createMirrorForFQN(String name) {
-		val psiClass = module.project.javaPsiFacade.findClassWithAlternativeResolvedEnabled(name, searchScope)
-		if (psiClass == null || psiClass.containingClass != null) {
-			return null
-		}
-		new PsiClassMirror(psiClass, psiClassFactory)
+		ApplicationManager.application.<IClassMirror>runReadAction[
+			val psiClass = module.project.javaPsiFacade.findClassWithAlternativeResolvedEnabled(name, searchScope)
+			if (psiClass == null || psiClass.containingClass != null) {
+				return null
+			}
+			new PsiClassMirror(psiClass, psiClassFactory)
+		]
 	}
 
 	protected def getSearchScope() {

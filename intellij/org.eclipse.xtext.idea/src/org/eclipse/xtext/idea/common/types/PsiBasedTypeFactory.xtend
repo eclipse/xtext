@@ -77,6 +77,7 @@ import org.eclipse.xtext.psi.IPsiModelAssociator
 import org.eclipse.xtext.util.internal.Stopwatches
 
 import static extension org.eclipse.xtext.idea.extensions.IdeaProjectExtensions.*
+import com.intellij.openapi.application.ApplicationManager
 
 class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
 
@@ -98,14 +99,16 @@ class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements ITypeFa
 		try {
 			createTypeTask.start
 			psiClass.project.withAlternativeResolvedEnabled [
-				val buffer = new StringBuilder(100)
-				val packageName = psiClass.packageName
-				if (packageName != null) {
-					buffer.append(packageName).append('.')
-				}
-				val type = psiClass.createType(buffer)
-				type.packageName = packageName
-				type
+				ApplicationManager.application.<JvmDeclaredType>runReadAction[
+					val buffer = new StringBuilder(100)
+					val packageName = psiClass.packageName
+					if (packageName != null) {
+						buffer.append(packageName).append('.')
+					}
+					val type = psiClass.createType(buffer)
+					type.packageName = packageName
+					type
+				]
 			]
 		} finally {
 			createTypeTask.stop

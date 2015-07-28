@@ -48,7 +48,6 @@ import java.util.HashSet
 import java.util.List
 import java.util.Map
 import java.util.Set
-import java.util.concurrent.BlockingQueue
 import java.util.concurrent.LinkedBlockingQueue
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.ResourceSet
@@ -68,6 +67,7 @@ import org.eclipse.xtext.resource.IResourceDescription.Delta
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
+import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Log
 
 import static org.eclipse.xtext.idea.build.BuildEvent.Type.*
@@ -82,7 +82,8 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	
 	volatile boolean disposed
 	
-	BlockingQueue<BuildEvent> queue = new LinkedBlockingQueue<BuildEvent>()
+	val queue = new LinkedBlockingQueue<BuildEvent>()
+	val cancelIndicators = new LinkedBlockingQueue<MutableCancelIndicator>()
 
 	Alarm alarm 
 
@@ -207,8 +208,6 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 			}
 			
 		}, this)
-		
-		alarm = new Alarm(Alarm.ThreadToUse.OWN_THREAD, project)
 	}
 	
 	protected def boolean isXtextFacet(Facet<?> facet) {
@@ -308,6 +307,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 			build
 		} else {
 			alarm.cancelAllRequests
+			cancelIndicators.forEach[canceled = true]
 			alarm.addRequest([build], 200)
 		}
 	}
@@ -372,7 +372,11 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	}
 	
 	protected def void internalBuild(List<BuildEvent> allEvents) {
+		val unProcessedEvents = newArrayList
+		unProcessedEvents += allEvents
 		val app = ApplicationManager.application
+		val cancelIndicator = new MutableCancelIndicator
+		cancelIndicators.add(cancelIndicator)
 		val moduleManager = ModuleManager.getInstance(getProject)
 		val buildProgressReporter = buildProgressReporterProvider.get 
 		buildProgressReporter.project = project
@@ -405,36 +409,34 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 						externalDeltas += deltas
 						baseDir = contentRoots.head.URI
 						// outputs = ??
-						state = new IndexState(newIndex, fileMappings.copy)
-	
+						state = new IndexState(newIndex, fileMappings.copy)	
 						afterValidate = buildProgressReporter
 						afterDeleteFile = [
 							buildProgressReporter.markAsAffected(it)
 						]
+						it.cancelIndicator = cancelIndicator
 					]
-					val result = app.<IncrementalBuilder.Result>runReadAction [
-						builderProvider.get().build(request, getServiceProviderProvider(module))
-					]
+					val result = builderProvider.get().build(request, getServiceProviderProvider(module))
 					app.invokeAndWait([
-						app.runWriteAction [
-							try {
-								ignoreIncomingEvents = true
-								val handler = VirtualFileBasedUriHandler.find(request.resourceSet)
-								handler.flushToDisk
-							} finally {
-								ignoreIncomingEvents = false
-							}
-						]
+						try {
+							ignoreIncomingEvents = true
+							val handler = VirtualFileBasedUriHandler.find(request.resourceSet)
+							handler.flushToDisk
+						} finally {
+							ignoreIncomingEvents = false
+						}
 					], ModalityState.any)
 					chunkedResourceDescriptions.setContainer(module.name, result.indexState.resourceDescriptions)
 					module2GeneratedMapping.put(module, result.indexState.fileMappings)
 					deltas.addAll(result.affectedResources)
+					unProcessedEvents -= events
 				}
 			}
 		} catch(ProcessCanceledException exc) {
-			queue.addAll(allEvents)
+			queue.addAll(unProcessedEvents)
 		} finally {
 			buildProgressReporter.clearProgress
+			cancelIndicators.remove(cancelIndicator)
 		}
 	}
 	
@@ -550,5 +552,17 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	
 	def ChunkedResourceDescriptions getIndexState() {
 		return chunkedResourceDescriptions
+	}
+	
+	static class MutableCancelIndicator implements CancelIndicator {
+		volatile boolean canceled
+		override isCanceled() {
+			canceled
+		}
+		
+		def setCanceled(boolean canceled) {
+			this.canceled = canceled
+		}
+		
 	}
 }
