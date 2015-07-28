@@ -27,8 +27,7 @@ import org.eclipse.xtext.psi.IPsiModelAssociator
 import org.eclipse.xtext.resource.ISynchronizable
 import org.eclipse.xtext.service.OperationCanceledError
 import org.eclipse.xtext.util.Strings
-
-import static extension org.eclipse.xtext.idea.extensions.IdeaProjectExtensions.*
+import com.intellij.psi.JavaPsiFacade
 
 class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 
@@ -139,7 +138,7 @@ class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 	}
 
 	protected override createMirrorForFQN(String name) {
-		val psiClass = module.project.javaPsiFacade.findClassWithAlternativeResolvedEnabled(name, searchScope)
+		val psiClass = JavaPsiFacade.getInstance(module.project).findClass(name, searchScope)
 		if (psiClass == null || psiClass.containingClass != null) {
 			return null
 		}
