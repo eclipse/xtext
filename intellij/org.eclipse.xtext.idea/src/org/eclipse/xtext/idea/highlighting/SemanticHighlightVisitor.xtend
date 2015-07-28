@@ -8,7 +8,6 @@
 package org.eclipse.xtext.idea.highlighting
 
 import com.google.inject.Inject
-import com.google.inject.Provider
 import com.google.inject.name.Named
 import com.intellij.codeInsight.daemon.impl.HighlightInfo
 import com.intellij.codeInsight.daemon.impl.HighlightVisitor
@@ -24,7 +23,7 @@ import org.eclipse.xtext.util.CancelIndicator
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-class SemanticHighlightVisitor implements HighlightVisitor {
+abstract class SemanticHighlightVisitor implements HighlightVisitor {
 	
 	@Inject @Named(Constants.LANGUAGE_NAME) String languageId
  
@@ -32,8 +31,6 @@ class SemanticHighlightVisitor implements HighlightVisitor {
  	
  	@Inject extension IdeaHighlightingAttributesProvider 
  	
-	@Inject Provider<SemanticHighlightVisitor> cloneProvider
-
 	IHighlightedPositionAcceptor acceptor
  	
 	override analyze(PsiFile file, boolean updateWholeFile, HighlightInfoHolder holder, Runnable action) {
@@ -73,8 +70,9 @@ class SemanticHighlightVisitor implements HighlightVisitor {
 	}
 	
 	override clone() {
-		cloneProvider.get => [
+		getClass.newInstance => [
 			it.acceptor = this.acceptor
 		]
 	}
+	
 }
