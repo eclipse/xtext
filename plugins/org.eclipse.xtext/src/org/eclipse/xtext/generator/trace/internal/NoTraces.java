@@ -10,6 +10,7 @@ package org.eclipse.xtext.generator.trace.internal;
 import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.workspace.IProjectConfig;
+import org.eclipse.xtext.workspace.IWorkspaceConfig;
 
 /**
  * Abstract null implementation for platform specific enhancements to the trace API.
@@ -29,7 +30,7 @@ public class NoTraces<PlatformResource, Trace extends IPlatformSpecificTrace<Pla
 	}
 
 	@Override
-	public Trace getTraceToSource(AbsoluteURI absoluteDerivedResource) {
+	public Trace getTraceToSource(AbsoluteURI absoluteDerivedResource, IWorkspaceConfig context) {
 		return null;
 	}
 
@@ -39,7 +40,7 @@ public class NoTraces<PlatformResource, Trace extends IPlatformSpecificTrace<Pla
 	}
 
 	@Override
-	public Trace getTraceToTarget(AbsoluteURI absoluteSourceResource) {
+	public Trace getTraceToTarget(AbsoluteURI absoluteSourceResource, IWorkspaceConfig context) {
 		return null;
 	}
 
