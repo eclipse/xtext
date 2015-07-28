@@ -26,6 +26,7 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IMirror;
+import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.AbstractJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.AbstractRuntimeJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
@@ -163,8 +164,7 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
   }
   
   public JvmType findType(final URI resourceURI, final String fragment, final boolean traverseNestedTypes) {
-    JvmType _xblockexpression = null;
-    {
+    try {
       final IndexedJvmTypeAccess indexedJvmTypeAccess = this.getIndexedJvmTypeAccess();
       if ((indexedJvmTypeAccess != null)) {
         final URI proxyURI = resourceURI.appendFragment(fragment);
@@ -175,15 +175,25 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
         }
       }
       ProgressIndicatorProvider.checkCanceled();
-      JvmType _xtrycatchfinallyexpression = null;
       try {
-        JvmType _xblockexpression_1 = null;
-        {
-          ResourceSet _resourceSet_1 = this.getResourceSet();
-          final Resource resource = _resourceSet_1.getResource(resourceURI, true);
-          _xblockexpression_1 = this.findType(resource, fragment, traverseNestedTypes);
+        ResourceSet _resourceSet_1 = this.getResourceSet();
+        final Resource existing = _resourceSet_1.getResource(resourceURI, false);
+        boolean _notEquals = (!Objects.equal(existing, null));
+        if (_notEquals) {
+          return this.findType(existing, fragment, traverseNestedTypes);
         }
-        _xtrycatchfinallyexpression = _xblockexpression_1;
+        final IMirror mirror = this.createMirror(resourceURI);
+        boolean _equals = Objects.equal(mirror, null);
+        if (_equals) {
+          return null;
+        }
+        final TypeResource resource = this.doCreateResource(resourceURI);
+        resource.setMirror(mirror);
+        ResourceSet _resourceSet_2 = this.getResourceSet();
+        EList<Resource> _resources = _resourceSet_2.getResources();
+        _resources.add(resource);
+        resource.load(null);
+        return this.findType(resource, fragment, traverseNestedTypes);
       } catch (final Throwable _t) {
         if (_t instanceof OperationCanceledError) {
           final OperationCanceledError e = (OperationCanceledError)_t;
@@ -192,9 +202,9 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
           throw Exceptions.sneakyThrow(_t);
         }
       }
-      _xblockexpression = _xtrycatchfinallyexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
-    return _xblockexpression;
   }
   
   protected JvmType findType(final Resource resource, final String fragment, final boolean traverseNestedTypes) {
