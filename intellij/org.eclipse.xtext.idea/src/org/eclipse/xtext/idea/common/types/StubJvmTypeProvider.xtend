@@ -105,8 +105,19 @@ class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 		}
 		ProgressIndicatorProvider.checkCanceled
 		try {
-			val resource = resourceSet.getResource(resourceURI, true)
-			resource.findType(fragment, traverseNestedTypes)
+			val existing = resourceSet.getResource(resourceURI, false)
+			if (existing != null) {
+				return existing.findType(fragment, traverseNestedTypes)
+			}
+			val mirror = createMirror(resourceURI)
+			if (mirror == null) {
+				return null
+			}
+			val resource = doCreateResource(resourceURI)
+			resource.mirror = mirror
+			resourceSet.getResources().add(resource)
+			resource.load(null)
+			return resource.findType(fragment, traverseNestedTypes)
 		} catch (OperationCanceledError e) {
 			throw e.wrapped
 		}
