@@ -264,6 +264,6 @@ public class LazyURIEncoder {
 	}
 
 	public boolean isCrossLinkFragment(Resource res, String s) {
-		return s.startsWith(XTEXT_LINK);
+		return s != null && s.startsWith(XTEXT_LINK);
 	}
 }
