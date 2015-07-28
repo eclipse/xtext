@@ -35,7 +35,6 @@ import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
 import org.eclipse.xtext.idea.common.types.PsiBasedTypeFactory;
 import org.eclipse.xtext.idea.common.types.PsiClassMirror;
 import org.eclipse.xtext.idea.common.types.StubURIHelper;
-import org.eclipse.xtext.idea.extensions.IdeaProjectExtensions;
 import org.eclipse.xtext.psi.IPsiModelAssociator;
 import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.service.OperationCanceledError;
@@ -239,8 +238,8 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
     PsiClassMirror _xblockexpression = null;
     {
       Project _project = this.module.getProject();
-      JavaPsiFacade _javaPsiFacade = IdeaProjectExtensions.getJavaPsiFacade(_project);
-      final PsiClass psiClass = IdeaProjectExtensions.findClassWithAlternativeResolvedEnabled(_javaPsiFacade, name, this.searchScope);
+      JavaPsiFacade _instance = JavaPsiFacade.getInstance(_project);
+      final PsiClass psiClass = _instance.findClass(name, this.searchScope);
       boolean _or = false;
       boolean _equals = Objects.equal(psiClass, null);
       if (_equals) {
