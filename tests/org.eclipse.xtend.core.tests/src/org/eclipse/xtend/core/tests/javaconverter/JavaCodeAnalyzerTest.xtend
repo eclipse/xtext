@@ -7,25 +7,26 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.javaconverter
 
+import com.google.inject.Inject
 import org.eclipse.jdt.core.dom.ASTNode
 import org.eclipse.jdt.core.dom.ASTParser
 import org.eclipse.xtend.core.javaconverter.JavaCodeAnalyzer
-import org.junit.Before
+import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
+import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.XtextRunner
 import org.junit.Test
+import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
 
 /**
  * @author dhuebner - Initial contribution and API
  */
+@RunWith(XtextRunner)
+@InjectWith(RuntimeInjectorProvider)
 class JavaCodeAnalyzerTest {
 
-	JavaCodeAnalyzer analyzer
-
-	@Before
-	def void setUp() {
-		analyzer = new JavaCodeAnalyzer
-	}
+	@Inject JavaCodeAnalyzer analyzer
 
 	@Test
 	def void testSimpleClass() {

@@ -47,7 +47,7 @@ public class JavaConverterTest extends LightXtendTest {
     VirtualFile _virtualFile = javaCalzz.getVirtualFile();
     String _nameWithoutExtension = _virtualFile.getNameWithoutExtension();
     String _text = javaCalzz.getText();
-    final JavaConverter.ConversionResult result = this.converter.toXtend(_nameWithoutExtension, _text);
+    final JavaConverter.ConversionResult result = this.converter.toXtend(_nameWithoutExtension, _text, this.myModule);
     TestCase.assertNotNull(result);
     Iterable<String> _problems = result.getProblems();
     boolean _isEmpty = IterableExtensions.isEmpty(_problems);

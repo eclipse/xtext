@@ -2875,7 +2875,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   
   protected String toXtendStatement(final CharSequence string) {
     String _string = string.toString();
-    JavaConverter.ConversionResult _statementToXtend = this.j2x.statementToXtend(_string);
+    JavaConverter.ConversionResult _statementToXtend = this.j2x.statementToXtend(_string, null);
     String _xtendCode = _statementToXtend.getXtendCode();
     final String xtendCode = _xtendCode.trim();
     this.dump(xtendCode);
