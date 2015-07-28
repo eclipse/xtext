@@ -9,6 +9,7 @@ package org.eclipse.xtext.idea.trace;
 
 import com.google.common.base.Objects;
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import java.io.ByteArrayInputStream;
@@ -25,6 +26,7 @@ import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
 import org.eclipse.xtext.idea.trace.IIdeaTrace;
 import org.eclipse.xtext.idea.trace.ILocationInVirtualFile;
 import org.eclipse.xtext.idea.trace.LocationInVirtualFile;
+import org.eclipse.xtext.idea.trace.VirtualFileInProject;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.workspace.IProjectConfig;
@@ -34,7 +36,7 @@ import org.eclipse.xtext.workspace.IProjectConfig;
  */
 @SuppressWarnings("all")
 public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
-  private VirtualFile localVirtualFile;
+  private VirtualFileInProject localVirtualFile;
   
   private Module module;
   
@@ -49,8 +51,12 @@ public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
   }
   
   @Override
-  public VirtualFile getLocalStorage() {
+  public VirtualFileInProject getLocalStorage() {
     return this.localVirtualFile;
+  }
+  
+  protected void setLocalStorage(final VirtualFileInProject localVirtualFile) {
+    this.localVirtualFile = localVirtualFile;
   }
   
   protected AbsoluteURI getURIForVirtualFile(final VirtualFile virtualFile) {
@@ -58,7 +64,12 @@ public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
     return new AbsoluteURI(_uRI);
   }
   
-  public VirtualFile findVirtualFile(final SourceRelativeURI srcRelativeLocation, final Module module) {
+  protected AbsoluteURI getURIForVirtualFile(final VirtualFileInProject virtualFile) {
+    VirtualFile _file = virtualFile.getFile();
+    return this.getURIForVirtualFile(_file);
+  }
+  
+  public VirtualFileInProject findVirtualFileInProject(final SourceRelativeURI srcRelativeLocation, final Module module) {
     final ModuleRootManager mngr = ModuleRootManager.getInstance(module);
     final VirtualFile[] sourceRoots = mngr.getSourceRoots(true);
     URI _uRI = srcRelativeLocation.getURI();
@@ -68,7 +79,8 @@ public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
         final VirtualFile result = sourceRoot.findFileByRelativePath(path);
         boolean _notEquals = (!Objects.equal(result, null));
         if (_notEquals) {
-          return result;
+          Project _project = module.getProject();
+          return new VirtualFileInProject(result, _project);
         }
       }
     }
@@ -82,25 +94,26 @@ public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
   }
   
   public InputStream getContents(final SourceRelativeURI uri, final Module project) throws IOException {
-    final VirtualFile file = this.findVirtualFile(uri, project);
-    byte[] _contentsToByteArray = file.contentsToByteArray();
+    final VirtualFileInProject file = this.findVirtualFileInProject(uri, project);
+    VirtualFile _file = file.getFile();
+    byte[] _contentsToByteArray = _file.contentsToByteArray();
     return new ByteArrayInputStream(_contentsToByteArray);
   }
   
   @Override
-  public ILocationInVirtualFile getBestAssociatedLocation(final ITextRegion region, final VirtualFile associatedVirtualFile) {
+  public ILocationInVirtualFile getBestAssociatedLocation(final ITextRegion region, final VirtualFileInProject associatedVirtualFile) {
     final AbsoluteURI uri = this.getURIForVirtualFile(associatedVirtualFile);
     return this.getBestAssociatedLocation(region, uri);
   }
   
   @Override
-  public Iterable<? extends ILocationInVirtualFile> getAllAssociatedLocations(final ITextRegion localRegion, final VirtualFile associatedVirtualFile) {
+  public Iterable<? extends ILocationInVirtualFile> getAllAssociatedLocations(final ITextRegion localRegion, final VirtualFileInProject associatedVirtualFile) {
     final AbsoluteURI uri = this.getURIForVirtualFile(associatedVirtualFile);
     return this.getAllAssociatedLocations(localRegion, uri);
   }
   
   @Override
-  public Iterable<? extends ILocationInVirtualFile> getAllAssociatedLocations(final VirtualFile associatedVirtualFile) {
+  public Iterable<? extends ILocationInVirtualFile> getAllAssociatedLocations(final VirtualFileInProject associatedVirtualFile) {
     final AbsoluteURI uri = this.getURIForVirtualFile(associatedVirtualFile);
     return this.getAllAssociatedLocations(uri);
   }

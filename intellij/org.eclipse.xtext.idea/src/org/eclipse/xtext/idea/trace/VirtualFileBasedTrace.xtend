@@ -28,7 +28,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
  */
 class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
 	
-	VirtualFile localVirtualFile
+	VirtualFileInProject localVirtualFile
 	Module module
 	
 	override getLocalURI() {
@@ -43,18 +43,25 @@ class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
 		return localVirtualFile
 	}
 	
+	def protected void setLocalStorage(VirtualFileInProject localVirtualFile) {
+		this.localVirtualFile = localVirtualFile
+	}
+	
 	def protected AbsoluteURI getURIForVirtualFile(VirtualFile virtualFile) {
 		return new AbsoluteURI(virtualFile.URI)
 	}
+	def protected AbsoluteURI getURIForVirtualFile(VirtualFileInProject virtualFile) {
+		return virtualFile.file.URIForVirtualFile
+	}
 	
-	def VirtualFile findVirtualFile(SourceRelativeURI srcRelativeLocation, Module module) {
+	def VirtualFileInProject findVirtualFileInProject(SourceRelativeURI srcRelativeLocation, Module module) {
 		val mngr = ModuleRootManager.getInstance(module)
 		val sourceRoots = mngr.getSourceRoots(true)
 		val path = srcRelativeLocation.URI.path
 		for(sourceRoot: sourceRoots) {
 			val result = sourceRoot.findFileByRelativePath(path)
 			if (result != null) {
-				return result
+				return new VirtualFileInProject(result, module.project)
 			}
 		}
 		return null
@@ -65,22 +72,22 @@ class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
 	}
 	
 	def InputStream getContents(SourceRelativeURI uri, Module project) throws IOException {
-		val file = findVirtualFile(uri, project)
-		return new ByteArrayInputStream(file.contentsToByteArray)
+		val file = findVirtualFileInProject(uri, project)
+		return new ByteArrayInputStream(file.file.contentsToByteArray)
 	}
 	
-	override ILocationInVirtualFile getBestAssociatedLocation(ITextRegion region, VirtualFile associatedVirtualFile) {
+	override ILocationInVirtualFile getBestAssociatedLocation(ITextRegion region, VirtualFileInProject associatedVirtualFile) {
 		val uri = getURIForVirtualFile(associatedVirtualFile);
 		return getBestAssociatedLocation(region, uri);
 	}
 
 	override Iterable<? extends ILocationInVirtualFile> getAllAssociatedLocations(ITextRegion localRegion,
-			VirtualFile associatedVirtualFile) {
+			VirtualFileInProject associatedVirtualFile) {
 		val uri = getURIForVirtualFile(associatedVirtualFile);
 		return getAllAssociatedLocations(localRegion, uri);
 	}
 
-	override Iterable<? extends ILocationInVirtualFile> getAllAssociatedLocations(VirtualFile associatedVirtualFile) {
+	override Iterable<? extends ILocationInVirtualFile> getAllAssociatedLocations(VirtualFileInProject associatedVirtualFile) {
 		val uri = getURIForVirtualFile(associatedVirtualFile);
 		return getAllAssociatedLocations(uri);
 	}

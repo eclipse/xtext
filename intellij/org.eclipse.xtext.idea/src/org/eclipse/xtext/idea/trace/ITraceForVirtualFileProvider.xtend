@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.trace
 
-import com.intellij.openapi.vfs.VirtualFile
 import org.eclipse.xtext.generator.trace.internal.IPlatformSpecificTraceProvider
 import org.eclipse.xtext.generator.trace.internal.NoTraces
 
@@ -19,9 +18,9 @@ import org.eclipse.xtext.generator.trace.internal.NoTraces
  * @noextend This interface is not intended to be extended by clients.
  * @since 2.9
  */
-interface ITraceForVirtualFileProvider extends IPlatformSpecificTraceProvider<VirtualFile, IIdeaTrace> {
+interface ITraceForVirtualFileProvider extends IPlatformSpecificTraceProvider<VirtualFileInProject, IIdeaTrace> {
 	
-	class Null extends NoTraces<VirtualFile, IIdeaTrace> implements ITraceForVirtualFileProvider {
+	class Null extends NoTraces<VirtualFileInProject, IIdeaTrace> implements ITraceForVirtualFileProvider {
 	}
 	
 }

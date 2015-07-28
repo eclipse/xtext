@@ -11,6 +11,7 @@ import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.ITraceForURIProvider;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.workspace.IProjectConfig;
+import org.eclipse.xtext.workspace.IWorkspaceConfig;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -37,13 +38,13 @@ public interface IPlatformSpecificTraceProvider<
 	Trace getTraceToTarget(PlatformResource sourceResource);
 	
 	@Override
-	Trace getTraceToSource(AbsoluteURI absoluteDerivedResource);
+	Trace getTraceToSource(AbsoluteURI absoluteDerivedResource, IWorkspaceConfig context);
 	
 	@Override
 	Trace getTraceToSource(SourceRelativeURI srcRelativeDerivedResource, IProjectConfig project);
 	
 	@Override
-	Trace getTraceToTarget(AbsoluteURI absoluteSourceResource);
+	Trace getTraceToTarget(AbsoluteURI absoluteSourceResource, IWorkspaceConfig context);
 	
 	@Override
 	Trace getTraceToTarget(SourceRelativeURI srcRelativeSourceResource, IProjectConfig project);

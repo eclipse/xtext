@@ -28,6 +28,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
  * @author Dennis Huebner - Initial contribution and API
  */
 class TraceUtils {
+	// TODO use IIdeaTrace instead
 	@Inject TraceRegionSerializer traceRegionSerializer
 	@Inject TraceFileNameProvider traceFileNameProvider
 

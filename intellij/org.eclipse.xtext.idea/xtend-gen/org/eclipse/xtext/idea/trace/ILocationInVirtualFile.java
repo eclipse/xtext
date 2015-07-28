@@ -8,13 +8,13 @@
 package org.eclipse.xtext.idea.trace;
 
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VirtualFile;
 import org.eclipse.xtext.generator.trace.internal.IPlatformSpecificLocation;
+import org.eclipse.xtext.idea.trace.VirtualFileInProject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.9
  */
 @SuppressWarnings("all")
-public interface ILocationInVirtualFile extends IPlatformSpecificLocation<VirtualFile, Module> {
+public interface ILocationInVirtualFile extends IPlatformSpecificLocation<VirtualFileInProject, Module> {
 }

@@ -30,6 +30,7 @@ import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.ISourceFolder;
+import org.eclipse.xtext.workspace.IWorkspaceConfig;
 
 import com.google.common.io.Closeables;
 import com.google.inject.Inject;
@@ -146,7 +147,16 @@ public abstract class AbstractTraceForURIProvider<SomeFile, Trace extends Abstra
 	/**
 	 * Obtain the file represenation from the given URI.
 	 */
-	protected abstract SomeFile asFile(AbsoluteURI absoluteURI);
+	protected SomeFile asFile(AbsoluteURI absoluteURI, IWorkspaceConfig context) {
+		IProjectConfig project = context.findProjectContaining(absoluteURI.getURI());
+		return asFile(absoluteURI, project);
+	}
+	
+	/**
+	 * Obtain the file represenation from the given URI.
+	 */
+	protected abstract SomeFile asFile(AbsoluteURI absoluteURI, IProjectConfig project);
+	
 	/**
 	 * Returns the absolute location from the given file representation.
 	 */
@@ -158,13 +168,13 @@ public abstract class AbstractTraceForURIProvider<SomeFile, Trace extends Abstra
 		for(ISourceFolder folder: sourceFolders) {
 			URI srcFolderPath = folder.getPath();
 			URI absoluteURI = srcFolderPath.appendSegments(pathSegments);
-			SomeFile result = asFile(new AbsoluteURI(absoluteURI));
+			SomeFile result = asFile(new AbsoluteURI(absoluteURI), project);
 			if (result != null) {
 				return result;
 			}
 		}
 		URI fromRoot = project.getPath().appendSegments(pathSegments);
-		return asFile(new AbsoluteURI(fromRoot));
+		return asFile(new AbsoluteURI(fromRoot), project);
 	}
 	
 	/**
@@ -181,8 +191,8 @@ public abstract class AbstractTraceForURIProvider<SomeFile, Trace extends Abstra
 	protected abstract IProjectConfig getProjectConfig(SomeFile sourceFile);
 
 	@Override
-	public Trace getTraceToSource(AbsoluteURI absoluteDerivedResource) {
-		final SomeFile generatedFile = asFile(absoluteDerivedResource);
+	public Trace getTraceToSource(AbsoluteURI absoluteDerivedResource, IWorkspaceConfig context) {
+		final SomeFile generatedFile = asFile(absoluteDerivedResource, context);
 		return getTraceToSource(generatedFile);
 	}
 	
@@ -210,8 +220,8 @@ public abstract class AbstractTraceForURIProvider<SomeFile, Trace extends Abstra
 	}
 
 	@Override
-	public Trace getTraceToTarget(final AbsoluteURI absoluteSourceResource) {
-		final SomeFile sourceFile = asFile(absoluteSourceResource);
+	public Trace getTraceToTarget(final AbsoluteURI absoluteSourceResource, IWorkspaceConfig context) {
+		final SomeFile sourceFile = asFile(absoluteSourceResource, context);
 		return getTraceToTarget(sourceFile, absoluteSourceResource, getProjectConfig(sourceFile));
 	}
 

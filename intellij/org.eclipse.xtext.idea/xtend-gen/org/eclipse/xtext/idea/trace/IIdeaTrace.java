@@ -8,9 +8,9 @@
 package org.eclipse.xtext.idea.trace;
 
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.VirtualFile;
 import org.eclipse.xtext.generator.trace.internal.IPlatformSpecificTrace;
 import org.eclipse.xtext.idea.trace.ILocationInVirtualFile;
+import org.eclipse.xtext.idea.trace.VirtualFileInProject;
 
 /**
  * IDEA specific extension to the trace information.
@@ -19,5 +19,5 @@ import org.eclipse.xtext.idea.trace.ILocationInVirtualFile;
  * @since 2.9
  */
 @SuppressWarnings("all")
-public interface IIdeaTrace extends IPlatformSpecificTrace<VirtualFile, Module, ILocationInVirtualFile, IIdeaTrace> {
+public interface IIdeaTrace extends IPlatformSpecificTrace<VirtualFileInProject, Module, ILocationInVirtualFile, IIdeaTrace> {
 }

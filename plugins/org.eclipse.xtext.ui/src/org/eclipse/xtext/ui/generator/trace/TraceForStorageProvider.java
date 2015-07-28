@@ -84,7 +84,7 @@ public class TraceForStorageProvider extends AbstractTraceForURIProvider<IFile, 
 	}
 	
 	@Override
-	protected IFile asFile(AbsoluteURI absoluteURI) {
+	protected IFile asFile(AbsoluteURI absoluteURI, IProjectConfig project) {
 		URI uri = absoluteURI.getURI();
 		if (uri.isPlatformResource()) {
 			IFile result = workspace.getRoot().getFile(new Path(uri.toPlatformString(true)));

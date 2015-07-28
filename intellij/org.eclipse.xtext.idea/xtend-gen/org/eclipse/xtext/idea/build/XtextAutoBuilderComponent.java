@@ -96,7 +96,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -147,13 +146,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
       }
     };
     Iterable<Iterable<URI>> _map = IterableExtensions.<Source2GeneratedMapping, Iterable<URI>>map(_values, _function);
-    final Function2<Iterable<URI>, Iterable<URI>, Iterable<URI>> _function_1 = new Function2<Iterable<URI>, Iterable<URI>, Iterable<URI>>() {
-      @Override
-      public Iterable<URI> apply(final Iterable<URI> $0, final Iterable<URI> $1) {
-        return Iterables.<URI>concat($0, $1);
-      }
-    };
-    return IterableExtensions.<Iterable<URI>>reduce(_map, _function_1);
+    return Iterables.<URI>concat(_map);
   }
   
   public Iterable<URI> getSource4GeneratedSource(final URI generated) {
@@ -165,13 +158,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
       }
     };
     Iterable<Iterable<URI>> _map = IterableExtensions.<Source2GeneratedMapping, Iterable<URI>>map(_values, _function);
-    final Function2<Iterable<URI>, Iterable<URI>, Iterable<URI>> _function_1 = new Function2<Iterable<URI>, Iterable<URI>, Iterable<URI>>() {
-      @Override
-      public Iterable<URI> apply(final Iterable<URI> $0, final Iterable<URI> $1) {
-        return Iterables.<URI>concat($0, $1);
-      }
-    };
-    return IterableExtensions.<Iterable<URI>>reduce(_map, _function_1);
+    return Iterables.<URI>concat(_map);
   }
   
   public XtextAutoBuilderComponent(final Project project) {

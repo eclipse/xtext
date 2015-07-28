@@ -105,11 +105,11 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	Map<Module, Source2GeneratedMapping> module2GeneratedMapping = newHashMap()
 	
 	def Iterable<URI> getGeneratedSources(URI source) {
-		return module2GeneratedMapping.values.map[getGenerated(source)].reduce[$0 + $1]
+		return module2GeneratedMapping.values.map[getGenerated(source)].flatten
 	}
 	
 	def Iterable<URI> getSource4GeneratedSource(URI generated) {
-		return module2GeneratedMapping.values.map[getSource(generated)].reduce[$0 + $1]
+		return module2GeneratedMapping.values.map[getSource(generated)].flatten
 	}
 	
 	new(Project project) {

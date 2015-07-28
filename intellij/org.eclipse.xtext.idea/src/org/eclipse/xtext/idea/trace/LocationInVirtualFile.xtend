@@ -7,10 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.trace
 
-import org.eclipse.xtext.generator.trace.internal.LocationInResource
-import org.eclipse.xtext.generator.trace.SourceRelativeURI
-import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.module.Module
+import org.eclipse.xtext.generator.trace.SourceRelativeURI
+import org.eclipse.xtext.generator.trace.internal.LocationInResource
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -25,8 +24,8 @@ class LocationInVirtualFile extends LocationInResource implements ILocationInVir
 		return super.getTrace() as VirtualFileBasedTrace
 	}
 	
-	override VirtualFile getPlatformResource() {
-		return getTrace().findVirtualFile(getSrcRelativeResourceURI(), getProject());
+	override VirtualFileInProject getPlatformResource() {
+		return getTrace().findVirtualFileInProject(getSrcRelativeResourceURI(), getProject());
 	}
 
 	override Module getProject() {

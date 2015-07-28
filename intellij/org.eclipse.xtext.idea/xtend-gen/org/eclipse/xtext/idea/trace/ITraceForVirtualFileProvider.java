@@ -7,10 +7,10 @@
  */
 package org.eclipse.xtext.idea.trace;
 
-import com.intellij.openapi.vfs.VirtualFile;
 import org.eclipse.xtext.generator.trace.internal.IPlatformSpecificTraceProvider;
 import org.eclipse.xtext.generator.trace.internal.NoTraces;
 import org.eclipse.xtext.idea.trace.IIdeaTrace;
+import org.eclipse.xtext.idea.trace.VirtualFileInProject;
 
 /**
  * Provides read access to the available trace information for generated resources or input resources.
@@ -21,7 +21,7 @@ import org.eclipse.xtext.idea.trace.IIdeaTrace;
  * @since 2.9
  */
 @SuppressWarnings("all")
-public interface ITraceForVirtualFileProvider extends IPlatformSpecificTraceProvider<VirtualFile, IIdeaTrace> {
-  public static class Null extends NoTraces<VirtualFile, IIdeaTrace> implements ITraceForVirtualFileProvider {
+public interface ITraceForVirtualFileProvider extends IPlatformSpecificTraceProvider<VirtualFileInProject, IIdeaTrace> {
+  public static class Null extends NoTraces<VirtualFileInProject, IIdeaTrace> implements ITraceForVirtualFileProvider {
   }
 }
