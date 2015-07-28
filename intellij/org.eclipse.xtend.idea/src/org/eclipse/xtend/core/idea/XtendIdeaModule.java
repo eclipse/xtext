@@ -14,13 +14,13 @@ import org.eclipse.xtend.core.idea.formatting.XtendChildAttributesProvider;
 import org.eclipse.xtend.core.idea.highlighting.XtendHighlightingConfiguration;
 import org.eclipse.xtend.core.idea.highlighting.XtendSyntaxHighlighter;
 import org.eclipse.xtend.core.idea.intentions.XtendIntentionsProvider;
-import org.eclipse.xtend.core.idea.javaconverter.IdeaJavaConverter;
+import org.eclipse.xtend.core.idea.javaconverter.IdeaASTParserFactory;
 import org.eclipse.xtend.core.idea.macro.IdeaFileSystemSupport;
 import org.eclipse.xtend.core.idea.macro.IdeaProcessorProvider;
 import org.eclipse.xtend.core.idea.presentation.XtendItemPresentationProvider;
 import org.eclipse.xtend.core.idea.structureview.XtendStructureViewBuilder;
 import org.eclipse.xtend.core.idea.validation.XtendIdeaValidator;
-import org.eclipse.xtend.core.javaconverter.JavaConverter;
+import org.eclipse.xtend.core.javaconverter.ASTParserFactory;
 import org.eclipse.xtend.core.linking.Linker;
 import org.eclipse.xtend.core.macro.AbstractFileSystemSupport;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
@@ -156,8 +156,8 @@ public class XtendIdeaModule extends AbstractXtendIdeaModule {
 	public Class<? extends ChildAttributesProvider> bindChildAttributesProvider() {
 		return XtendChildAttributesProvider.class;
 	}
-	public Class<? extends JavaConverter> bindJavaConverter() {
-		return IdeaJavaConverter.class;
+	
+	public Class<? extends ASTParserFactory> bindASTParserFactory() {
+		return IdeaASTParserFactory.class;
 	}
-
 }

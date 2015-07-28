@@ -30,7 +30,7 @@ class JavaConverterTest extends LightXtendTest {
 			
 			}
 		''')
-		val result = converter.toXtend(javaCalzz.virtualFile.nameWithoutExtension, javaCalzz.text)
+		val result = converter.toXtend(javaCalzz.virtualFile.nameWithoutExtension, javaCalzz.text, myModule)
 		assertNotNull(result)
 		assertTrue(result.problems.empty)
 	}
