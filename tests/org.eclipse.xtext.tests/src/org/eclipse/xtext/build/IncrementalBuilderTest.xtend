@@ -18,6 +18,11 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
+import org.eclipse.xtext.build.BuildRequest.IPostValidationCallback
+import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.emf.common.util.URI
+import org.eclipse.xtext.validation.Issue
+import org.eclipse.core.runtime.OperationCanceledException
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -48,6 +53,44 @@ class IncrementalBuilderTest extends AbstractIncrementalBuilderTest {
 		assertEquals(2, generated.size)
 		assertTrue(generated.values.containsSuffix('src-gen/B.txt'))
 		assertTrue(generated.values.containsSuffix('src-gen/A.txt'))
+	}
+	
+	@Test(expected = OperationCanceledException)
+	def void testCancellation() {
+		val cancelOnFirstModel = new CancelOnFirstModel
+		val buildRequest = newBuildRequest [
+			dirtyFiles = #[
+				'src/MyFile.indextestlanguage' - '''
+					foo {
+						entity A { foo.B myReference }
+					}
+				''',
+				'src/MyFile2.indextestlanguage' - '''
+					foo {
+						entity B {}
+					}
+				'''
+			]
+			cancelIndicator = cancelOnFirstModel
+			afterValidate = cancelOnFirstModel
+		]
+		build(buildRequest)
+	}
+	
+	private static class CancelOnFirstModel implements IPostValidationCallback, CancelIndicator {
+		
+		boolean canceled
+	
+		override afterValidate(URI validated, Iterable<Issue> issues) {
+			if (canceled)
+				fail("Builder didn't cancel")
+			canceled = true
+		}
+		
+		override isCanceled() {
+			canceled
+		}
+		
 	}
 	
 	@Test def void testDelete_01() {
