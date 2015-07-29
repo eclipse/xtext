@@ -20,24 +20,16 @@ import java.util.Map;
 
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
-import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
-
-import com.google.common.collect.ImmutableMap;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class XpectTokenDefProvider implements ITokenDefProvider, IAntlrTokenFileProvider {
+public class XpectTokenDefProvider extends AntlrTokenDefProvider implements IAntlrTokenFileProvider {
 
-	private ImmutableMap<Integer, String> map;
-
+	@Override
 	public Map<Integer, String> getTokenDefMap() {
-		if (map == null) {
-			AntlrTokenDefProvider provider = new AntlrTokenDefProvider();
-			provider.setAntlrTokenFileProvider(this);
-			map = ImmutableMap.copyOf(provider.getTokenDefMap());
-		}
-		return map;
+		this.setAntlrTokenFileProvider(this);
+		return super.getTokenDefMap();
 	}
 
 	public InputStream getAntlrTokenFile() {
@@ -45,6 +37,11 @@ public class XpectTokenDefProvider implements ITokenDefProvider, IAntlrTokenFile
 		String resourcePath = "org/xpect/lexer/XpectHI.tokens";
 		InputStream result = classLoader.getResourceAsStream(resourcePath);
 		return result;
+	}
+
+	@Override
+	protected boolean isKeywordToken(String antlrTokenDef) {
+		return true;
 	}
 
 }
