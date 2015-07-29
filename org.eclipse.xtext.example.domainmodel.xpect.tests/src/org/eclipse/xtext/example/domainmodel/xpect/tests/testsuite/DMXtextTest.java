@@ -5,6 +5,6 @@ import org.xpect.runner.XpectRunner;
 import org.xpect.xtext.lib.tests.XtextTests;
 
 @RunWith(XpectRunner.class)
-public class DMXtextTests extends XtextTests {
+public class DMXtextTest extends XtextTests {
 
 }

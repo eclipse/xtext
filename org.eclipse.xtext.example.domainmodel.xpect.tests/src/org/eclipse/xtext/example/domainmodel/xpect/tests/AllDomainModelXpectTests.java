@@ -7,7 +7,7 @@ import org.eclipse.xtext.example.domainmodel.xpect.tests.modify.DeleteUtilTest;
 import org.eclipse.xtext.example.domainmodel.xpect.tests.parser.ParserTest;
 import org.eclipse.xtext.example.domainmodel.xpect.tests.resourcedescription.DMResourceDescriptionTest;
 import org.eclipse.xtext.example.domainmodel.xpect.tests.scoping.DMScopingTest;
-import org.eclipse.xtext.example.domainmodel.xpect.tests.testsuite.DMXtextTests;
+import org.eclipse.xtext.example.domainmodel.xpect.tests.testsuite.DMXtextTest;
 import org.eclipse.xtext.example.domainmodel.xpect.tests.validation.DMValidationTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -21,7 +21,7 @@ import org.junit.runners.Suite.SuiteClasses;
 		DMResourceDescriptionTest.class,//
 		DMGeneratorTest.class,//
 		DMScopingTest.class,//
-		DMXtextTests.class,//
+		DMXtextTest.class,//
 		DMValidationTest.class //
 })
 @RunWith(Suite.class)
