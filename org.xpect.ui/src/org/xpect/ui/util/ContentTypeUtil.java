@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.xpect.XpectConstants;
@@ -19,6 +20,8 @@ import org.xpect.XpectConstants;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class ContentTypeUtil {
+
+	private static Logger LOG = Logger.getLogger(ContentTypeUtil.class);
 
 	private static final String XPECT_SETUP = "XPECT_SETUP";
 
@@ -49,9 +52,11 @@ public class ContentTypeUtil {
 			}
 			return XpectContentType.TEXT;
 		} catch (CoreException e) {
-			throw new RuntimeException(e);
+			LOG.error(e.getMessage(), e);
+			return XpectContentType.BINARY;
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+			LOG.error(e.getMessage(), e);
+			return XpectContentType.BINARY;
 		} finally {
 			if (contents != null)
 				try {
