@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="Xpect Target Definition (Eclipse 3.8 - Juno)" sequenceNumber="29">
+<?pde version="3.8"?><target name="Xpect Target Definition (Eclipse 3.8 - Juno)" sequenceNumber="31">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.xtext.sdk.feature.group" version="2.6.0.v201405210727"/>
-<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases"/>
+<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/head/R201405210727/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.jdt.junit.runners.feature.feature.group" version="0.1.0.201308221506"/>
@@ -20,11 +20,11 @@
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.gef.sdk.feature.group" version="3.9.100.201405261516"/>
-<repository location="http://download.eclipse.org/releases/luna"/>
+<repository location="http://download.eclipse.org/releases/luna/201406250900"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.sdk.ide" version="4.4.0.I20140606-1215"/>
-<repository location="http://download.eclipse.org/eclipse/updates/4.4"/>
+<repository location="http://download.eclipse.org/eclipse/updates/4.4/R-4.4-201406061215"/>
 </location>
 </locations>
 <environment>
