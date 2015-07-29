@@ -20,4 +20,8 @@ class IdeaSharedInjectorProvider {
 	synchronized static def Injector getInjector() {
 		injector ?: (injector = Guice.createInjector(new IdeaSharedModule))
 	}
+	
+	def static void injectMembers(Object o) {
+		getInjector.injectMembers(o)
+	}
 }

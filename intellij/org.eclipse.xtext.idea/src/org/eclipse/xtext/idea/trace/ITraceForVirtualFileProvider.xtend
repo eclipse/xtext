@@ -9,6 +9,8 @@ package org.eclipse.xtext.idea.trace
 
 import org.eclipse.xtext.generator.trace.internal.IPlatformSpecificTraceProvider
 import org.eclipse.xtext.generator.trace.internal.NoTraces
+import java.util.List
+import com.intellij.psi.PsiElement
 
 /**
  * Provides read access to the available trace information for generated resources or input resources.
@@ -21,6 +23,25 @@ import org.eclipse.xtext.generator.trace.internal.NoTraces
 interface ITraceForVirtualFileProvider extends IPlatformSpecificTraceProvider<VirtualFileInProject, IIdeaTrace> {
 	
 	class Null extends NoTraces<VirtualFileInProject, IIdeaTrace> implements ITraceForVirtualFileProvider {
+		
+		override getOriginalElements(PsiElement element) {
+			return emptyList
+		}
+		
+		override getGeneratedElements(PsiElement element) {
+			return emptyList
+		}
+		
+		override isGenerated(VirtualFileInProject file) {
+			false
+		}
+		
 	}
+	
+	def boolean isGenerated(VirtualFileInProject file)
+	
+	def List<? extends PsiElement> getOriginalElements(PsiElement element)
+	
+	def List<? extends PsiElement> getGeneratedElements(PsiElement element)
 	
 }

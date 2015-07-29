@@ -7,19 +7,19 @@
  */
 package org.eclipse.xtext.idea.findusages;
 
+import com.google.inject.Inject;
 import com.intellij.find.findUsages.FindUsagesHandler;
 import com.intellij.find.findUsages.FindUsagesHandlerFactory;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.extensions.Extensions;
+import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.project.IndexNotReadyException;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiMethod;
 import java.util.List;
 import org.eclipse.xtext.idea.findusages.GeneratedSourceAwareFindUsagesHandler;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.idea.shared.IdeaSharedInjectorProvider;
+import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -35,6 +35,13 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerFactory {
   private final static Logger LOG = Logger.getInstance("#com.intellij.find.findParameterUsages.FindUsagesManager");
   
+  @Inject
+  private ITraceForVirtualFileProvider traceProvider;
+  
+  public GeneratedSourceAwareUsagesHandlerFactory() {
+    IdeaSharedInjectorProvider.injectMembers(this);
+  }
+  
   @Override
   public boolean canFindUsages(final PsiElement element) {
     boolean _or = false;
@@ -44,7 +51,7 @@ public class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerF
     if (_tripleNotEquals) {
       _or_1 = true;
     } else {
-      List<PsiElement> _generatedElements = this.getGeneratedElements(element);
+      List<? extends PsiElement> _generatedElements = this.getGeneratedElements(element);
       final Function1<PsiElement, Boolean> _function = new Function1<PsiElement, Boolean>() {
         @Override
         public Boolean apply(final PsiElement it) {
@@ -52,13 +59,13 @@ public class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerF
           return Boolean.valueOf((_delegateFindFactory != null));
         }
       };
-      boolean _exists = IterableExtensions.<PsiElement>exists(_generatedElements, _function);
+      boolean _exists = IterableExtensions.exists(_generatedElements, _function);
       _or_1 = _exists;
     }
     if (_or_1) {
       _or = true;
     } else {
-      List<PsiElement> _originalElements = this.getOriginalElements(element);
+      List<? extends PsiElement> _originalElements = this.getOriginalElements(element);
       final Function1<PsiElement, Boolean> _function_1 = new Function1<PsiElement, Boolean>() {
         @Override
         public Boolean apply(final PsiElement it) {
@@ -66,37 +73,18 @@ public class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerF
           return Boolean.valueOf((_delegateFindFactory != null));
         }
       };
-      boolean _exists_1 = IterableExtensions.<PsiElement>exists(_originalElements, _function_1);
+      boolean _exists_1 = IterableExtensions.exists(_originalElements, _function_1);
       _or = _exists_1;
     }
     return _or;
   }
   
-  protected List<PsiElement> getOriginalElements(final PsiElement element) {
-    if ((element instanceof PsiMethod)) {
-      PsiClass _containingClass = ((PsiMethod)element).getContainingClass();
-      String _name = ((PsiMethod)element).getName();
-      String _plus = (_name + "gen");
-      return (List<PsiElement>)Conversions.doWrapArray(_containingClass.findMethodsByName(_plus, false));
-    }
-    return CollectionLiterals.<PsiElement>emptyList();
+  protected List<? extends PsiElement> getOriginalElements(final PsiElement element) {
+    return this.traceProvider.getOriginalElements(element);
   }
   
-  protected List<PsiElement> getGeneratedElements(final PsiElement element) {
-    if ((element instanceof PsiMethod)) {
-      String _name = ((PsiMethod)element).getName();
-      boolean _endsWith = _name.endsWith("gen");
-      if (_endsWith) {
-        PsiClass _containingClass = ((PsiMethod)element).getContainingClass();
-        String _name_1 = ((PsiMethod)element).getName();
-        String _name_2 = ((PsiMethod)element).getName();
-        int _length = _name_2.length();
-        int _minus = (_length - 3);
-        String _substring = _name_1.substring(0, _minus);
-        return (List<PsiElement>)Conversions.doWrapArray(_containingClass.findMethodsByName(_substring, false));
-      }
-    }
-    return CollectionLiterals.<PsiElement>emptyList();
+  protected List<? extends PsiElement> getGeneratedElements(final PsiElement element) {
+    return this.traceProvider.getGeneratedElements(element);
   }
   
   protected FindUsagesHandlerFactory delegateFindFactory(final PsiElement element) {
@@ -113,9 +101,12 @@ public class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerF
           if (_t instanceof IndexNotReadyException) {
             final IndexNotReadyException e = (IndexNotReadyException)_t;
             throw e;
+          } else if (_t instanceof ProcessCanceledException) {
+            final ProcessCanceledException e_1 = (ProcessCanceledException)_t;
+            throw e_1;
           } else if (_t instanceof Exception) {
-            final Exception e_1 = (Exception)_t;
-            GeneratedSourceAwareUsagesHandlerFactory.LOG.error(e_1);
+            final Exception e_2 = (Exception)_t;
+            GeneratedSourceAwareUsagesHandlerFactory.LOG.error(e_2);
           } else {
             throw Exceptions.sneakyThrow(_t);
           }
@@ -130,7 +121,7 @@ public class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerF
     FindUsagesHandlerFactory _delegateFindFactory = this.delegateFindFactory(element);
     final FindUsagesHandler primaryDelegate = _delegateFindFactory.createFindUsagesHandler(element, forHighlightUsages);
     if (forHighlightUsages) {
-      final List<PsiElement> generatedElements = this.getGeneratedElements(element);
+      final List<? extends PsiElement> generatedElements = this.getGeneratedElements(element);
       FindUsagesHandler _xifexpression = null;
       boolean _isEmpty = generatedElements.isEmpty();
       if (_isEmpty) {
@@ -147,10 +138,10 @@ public class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerF
       }
       return _xifexpression;
     }
-    final List<PsiElement> originalElements = this.getOriginalElements(element);
+    final List<? extends PsiElement> originalElements = this.getOriginalElements(element);
     boolean _isEmpty_1 = originalElements.isEmpty();
     if (_isEmpty_1) {
-      final List<PsiElement> generatedElements_1 = this.getGeneratedElements(element);
+      final List<? extends PsiElement> generatedElements_1 = this.getGeneratedElements(element);
       FindUsagesHandler _xifexpression_1 = null;
       boolean _isEmpty_2 = generatedElements_1.isEmpty();
       if (_isEmpty_2) {
@@ -178,7 +169,7 @@ public class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerF
     }
   }
   
-  public void addDelegates(final GeneratedSourceAwareFindUsagesHandler result, final List<PsiElement> elements, final boolean forHighlightUsages) {
+  public void addDelegates(final GeneratedSourceAwareFindUsagesHandler result, final List<? extends PsiElement> elements, final boolean forHighlightUsages) {
     final Procedure1<PsiElement> _function = new Procedure1<PsiElement>() {
       @Override
       public void apply(final PsiElement it) {
@@ -191,6 +182,6 @@ public class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerF
         }
       }
     };
-    IterableExtensions.<PsiElement>forEach(elements, _function);
+    IterableExtensions.forEach(elements, _function);
   }
 }

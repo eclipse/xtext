@@ -7,14 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.findusages
 
+import com.google.inject.Inject
 import com.intellij.find.findUsages.FindUsagesHandler
 import com.intellij.find.findUsages.FindUsagesHandlerFactory
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.extensions.Extensions
+import com.intellij.openapi.progress.ProcessCanceledException
 import com.intellij.openapi.project.IndexNotReadyException
 import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiMethod
 import java.util.List
+import org.eclipse.xtext.idea.shared.IdeaSharedInjectorProvider
+import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -25,6 +28,12 @@ class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerFactory 
 	
 	private static final Logger LOG = Logger.getInstance("#com.intellij.find.findParameterUsages.FindUsagesManager");
 	
+	@Inject ITraceForVirtualFileProvider traceProvider
+	
+	new() {
+		IdeaSharedInjectorProvider.injectMembers(this)
+	}
+	
 	override canFindUsages(PsiElement element) {
 		return delegateFindFactory(element) !== null || 
 			element.generatedElements.exists [
@@ -34,22 +43,12 @@ class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerFactory 
 			]
 	}
 	
-	protected def List<PsiElement> getOriginalElements(PsiElement element) {
-		// TODO delegate to GenerateSource.. extension point
-		if (element instanceof PsiMethod) {
-			return element.containingClass.findMethodsByName(element.name + "gen", false)
-		}
-		return emptyList
+	protected def List<? extends PsiElement> getOriginalElements(PsiElement element) {
+		return traceProvider.getOriginalElements(element)
 	}
 	
-	protected def List<PsiElement> getGeneratedElements(PsiElement element) {
-		// TODO delegate to GenerateSource.. extension point
-		if (element instanceof PsiMethod) {
-			if (element.name.endsWith("gen")) {
-				return element.containingClass.findMethodsByName(element.name.substring(0, element.name.length - 3), false)
-			}
-		}
-		return emptyList
+	protected def List<? extends PsiElement> getGeneratedElements(PsiElement element) {
+		return traceProvider.getGeneratedElements(element)
 	}
 	
 	protected def delegateFindFactory(PsiElement element) {
@@ -61,6 +60,8 @@ class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerFactory 
 						return delegate;
 					}
 				} catch (IndexNotReadyException e) {
+					throw e;
+				} catch (ProcessCanceledException e) {
 					throw e;
 				} catch (Exception e) {
 					LOG.error(e);
@@ -101,7 +102,7 @@ class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerFactory 
 		}
 	}
 	
-	def addDelegates(GeneratedSourceAwareFindUsagesHandler result, List<PsiElement> elements, boolean forHighlightUsages) {
+	def addDelegates(GeneratedSourceAwareFindUsagesHandler result, List<? extends PsiElement> elements, boolean forHighlightUsages) {
 		elements.forEach [
 			val delegateFactory = delegateFindFactory
 			if (delegateFactory !== null) {

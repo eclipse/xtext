@@ -7,10 +7,13 @@
  */
 package org.eclipse.xtext.idea.trace;
 
+import com.intellij.psi.PsiElement;
+import java.util.List;
 import org.eclipse.xtext.generator.trace.internal.IPlatformSpecificTraceProvider;
 import org.eclipse.xtext.generator.trace.internal.NoTraces;
 import org.eclipse.xtext.idea.trace.IIdeaTrace;
 import org.eclipse.xtext.idea.trace.VirtualFileInProject;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 
 /**
  * Provides read access to the available trace information for generated resources or input resources.
@@ -23,5 +26,25 @@ import org.eclipse.xtext.idea.trace.VirtualFileInProject;
 @SuppressWarnings("all")
 public interface ITraceForVirtualFileProvider extends IPlatformSpecificTraceProvider<VirtualFileInProject, IIdeaTrace> {
   public static class Null extends NoTraces<VirtualFileInProject, IIdeaTrace> implements ITraceForVirtualFileProvider {
+    @Override
+    public List<? extends PsiElement> getOriginalElements(final PsiElement element) {
+      return CollectionLiterals.<PsiElement>emptyList();
+    }
+    
+    @Override
+    public List<? extends PsiElement> getGeneratedElements(final PsiElement element) {
+      return CollectionLiterals.<PsiElement>emptyList();
+    }
+    
+    @Override
+    public boolean isGenerated(final VirtualFileInProject file) {
+      return false;
+    }
   }
+  
+  public abstract boolean isGenerated(final VirtualFileInProject file);
+  
+  public abstract List<? extends PsiElement> getOriginalElements(final PsiElement element);
+  
+  public abstract List<? extends PsiElement> getGeneratedElements(final PsiElement element);
 }

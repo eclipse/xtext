@@ -18,6 +18,7 @@
 		<enterHandlerDelegate implementation="org.eclipse.xtext.idea.editorActions.XtextEnterBetweenBracesHandler" order="first"/>
 		<findUsagesHandlerFactory implementation="org.eclipse.xtext.idea.findusages.GeneratedSourceAwareUsagesHandlerFactory"
 			id="generatedSources" order="first"/>
+		<generatedSourcesFilter	implementation="org.eclipse.xtext.idea.trace.TraceBasedGeneratedSourcesFilter"/>
    	</extensions>
 
 	<project-components>

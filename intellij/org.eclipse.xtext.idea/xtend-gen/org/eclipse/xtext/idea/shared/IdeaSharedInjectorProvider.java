@@ -29,4 +29,9 @@ public class IdeaSharedInjectorProvider {
     }
     return _elvis;
   }
+  
+  public static void injectMembers(final Object o) {
+    Injector _injector = IdeaSharedInjectorProvider.getInjector();
+    _injector.injectMembers(o);
+  }
 }

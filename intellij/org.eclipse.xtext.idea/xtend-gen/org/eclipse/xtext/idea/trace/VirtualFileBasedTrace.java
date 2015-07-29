@@ -8,7 +8,6 @@
 package org.eclipse.xtext.idea.trace;
 
 import com.google.common.base.Objects;
-import com.google.inject.Inject;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
@@ -43,10 +42,9 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
  */
 @SuppressWarnings("all")
 public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
-  @Inject
-  private IdeaOutputConfigurationProvider outputConfigurationProvider;
-  
   private VirtualFileInProject localVirtualFile;
+  
+  private IdeaOutputConfigurationProvider outputConfigurationProvider;
   
   private Module module;
   
@@ -71,6 +69,10 @@ public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
   
   protected void setModule(final Module module) {
     this.module = module;
+  }
+  
+  protected void setOutputConfigurationProvider(final IdeaOutputConfigurationProvider outputConfigurationProvider) {
+    this.outputConfigurationProvider = outputConfigurationProvider;
   }
   
   protected AbsoluteURI getURIForVirtualFile(final VirtualFile virtualFile) {

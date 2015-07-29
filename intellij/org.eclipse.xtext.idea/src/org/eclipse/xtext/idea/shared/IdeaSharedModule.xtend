@@ -13,6 +13,9 @@ import org.eclipse.xtext.psi.IPsiModelAssociator
 import org.eclipse.xtext.psi.PsiModelAssociations
 import org.eclipse.xtext.service.AbstractGenericModule
 import org.eclipse.xtext.resource.IResourceServiceProvider
+import org.eclipse.xtext.idea.trace.TraceForVirtualFileProvider
+import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider
+import org.eclipse.xtext.generator.trace.ITraceForURIProvider
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -29,5 +32,13 @@ class IdeaSharedModule extends AbstractGenericModule {
 
 	def Class<? extends IPsiModelAssociator> bindIPsiModelAssociator() {
 		PsiModelAssociations
+	}
+	
+	def Class<? extends ITraceForVirtualFileProvider> bindTraceInformation() {
+		return TraceForVirtualFileProvider;
+	}
+	
+	def Class<? extends ITraceForURIProvider> bindPlatformNeutralTraceInformation() {
+		ITraceForVirtualFileProvider
 	}
 }

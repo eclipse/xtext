@@ -16,24 +16,22 @@ import java.io.InputStream
 import org.eclipse.xtext.generator.trace.AbsoluteURI
 import org.eclipse.xtext.generator.trace.SourceRelativeURI
 import org.eclipse.xtext.generator.trace.internal.AbstractTrace
+import org.eclipse.xtext.idea.build.IdeaOutputConfigurationProvider
 import org.eclipse.xtext.idea.filesystem.IdeaModuleConfig
+import org.eclipse.xtext.idea.resource.VirtualFileURIUtil
 import org.eclipse.xtext.util.ITextRegion
 import org.eclipse.xtext.util.ITextRegionWithLineInformation
 import org.eclipse.xtext.workspace.IProjectConfig
 
 import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
-import org.eclipse.xtext.idea.resource.VirtualFileURIUtil
-import org.eclipse.xtext.idea.build.IdeaOutputConfigurationProvider
-import com.google.inject.Inject
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
 	
-	@Inject IdeaOutputConfigurationProvider outputConfigurationProvider
-	
 	VirtualFileInProject localVirtualFile
+	IdeaOutputConfigurationProvider outputConfigurationProvider
 	Module module
 	
 	override getLocalURI() {
@@ -55,6 +53,10 @@ class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
 	def protected void setModule(Module module) {
 		this.module = module
 	}
+
+	def protected void setOutputConfigurationProvider(IdeaOutputConfigurationProvider outputConfigurationProvider) {
+		this.outputConfigurationProvider = outputConfigurationProvider
+	}	
 	
 	def protected AbsoluteURI getURIForVirtualFile(VirtualFile virtualFile) {
 		return new AbsoluteURI(virtualFile.URI)
