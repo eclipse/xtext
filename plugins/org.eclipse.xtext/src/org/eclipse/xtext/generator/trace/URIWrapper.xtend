@@ -69,8 +69,12 @@ class AbsoluteURI extends AbstractURIWrapper {
 		this(URI::createURI(absoluteURI));
 	}
 	
+	def deresolve(URI sourceFolderURI) {
+		return new SourceRelativeURI(URI.deresolve(sourceFolderURI));
+	}
+	
 	def deresolve(ISourceFolder sourceFolder) {
-		return new SourceRelativeURI(URI.deresolve(sourceFolder.getPath()));
+		return deresolve(sourceFolder.getPath());
 	}
 	
 	def deresolve(IProjectConfig projectConfig) {
