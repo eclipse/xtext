@@ -15,4 +15,6 @@ public interface ModelChecker {
   public abstract XtextResource checkResource(final String code, final boolean validate);
   
   public abstract <T extends EObject> T checkModel(final String code, final boolean validate);
+  
+  public abstract <T extends EObject> T checkModel(final String path, final String code, final boolean validate);
 }

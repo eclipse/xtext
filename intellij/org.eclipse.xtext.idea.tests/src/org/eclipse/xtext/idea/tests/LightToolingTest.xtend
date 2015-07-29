@@ -125,6 +125,11 @@ class LightToolingTest extends LightCodeInsightFixtureTestCase {
 	protected def configureByText(String code) {
 		myFixture.configureByText(fileType, LineDelimiters.toUnix(code))
 	}
+	
+	protected def configureByText(String path, String code) {
+		val psiFile = myFixture.addFileToProject(path +"." +fileType.defaultExtension, LineDelimiters.toUnix(code))
+		myFixture.configureFromExistingVirtualFile(psiFile.virtualFile)
+	}
 
 	protected def complete(String text) {
 		configureByText(text)

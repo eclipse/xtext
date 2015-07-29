@@ -15,5 +15,6 @@ interface ModelChecker {
 	def XtextResource checkResource(String code, boolean validate)
 	
 	def <T extends EObject> T checkModel(String code, boolean validate)
+	def <T extends EObject> T checkModel(String path, String code, boolean validate)
 	
 }

@@ -78,11 +78,12 @@ public class JavaConverter {
   
   public JavaConverter.ConversionResult toXtend(final ICompilationUnit cu) {
     try {
-      final ASTParser parser = this.astParserFactory.createJavaParser(cu);
-      final ASTNode root = parser.createAST(null);
+      final ASTParserFactory.ASTParserWrapper parser = this.astParserFactory.createJavaParser(cu);
+      final ASTNode root = parser.createAST();
       String _source = cu.getSource();
       Set<ASTNode> _singleton = Collections.<ASTNode>singleton(root);
-      return this.executeAstFlattener(_source, _singleton);
+      String _targetLevel = parser.getTargetLevel();
+      return this.executeAstFlattener(_source, _singleton, _targetLevel);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -102,7 +103,7 @@ public class JavaConverter {
       if (_equals) {
         throw new IllegalArgumentException();
       }
-      ASTParser _createJavaParser = this.astParserFactory.createJavaParser(null);
+      ASTParserFactory.ASTParserWrapper _createJavaParser = this.astParserFactory.createJavaParser(null);
       _xblockexpression = this.internalToXtend(unitName, javaSrc, null, _createJavaParser);
     }
     return _xblockexpression;
@@ -122,7 +123,7 @@ public class JavaConverter {
       if (_equals) {
         throw new IllegalArgumentException();
       }
-      ASTParser _createJavaParser = this.astParserFactory.createJavaParser(classPathContext);
+      ASTParserFactory.ASTParserWrapper _createJavaParser = this.astParserFactory.createJavaParser(classPathContext);
       _xblockexpression = this.internalToXtend(unitName, javaSrc, null, _createJavaParser);
     }
     return _xblockexpression;
@@ -136,7 +137,7 @@ public class JavaConverter {
    * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject in eclipse Module in idea)
    */
   public JavaConverter.ConversionResult bodyDeclarationToXtend(final String javaSrc, final String[] imports, final Object classPathContext) {
-    ASTParser _createJavaParser = this.astParserFactory.createJavaParser(classPathContext);
+    ASTParserFactory.ASTParserWrapper _createJavaParser = this.astParserFactory.createJavaParser(classPathContext);
     return this.internalToXtend(null, javaSrc, imports, _createJavaParser);
   }
   
@@ -145,17 +146,19 @@ public class JavaConverter {
    * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject in eclipse Module in idea)
    */
   public JavaConverter.ConversionResult statementToXtend(final String javaSrc, final Object classPathContext) {
-    final ASTParser parser = this.astParserFactory.createJavaParser(classPathContext);
+    final ASTParserFactory.ASTParserWrapper parser = this.astParserFactory.createJavaParser(classPathContext);
     char[] _charArray = javaSrc.toCharArray();
     parser.setSource(_charArray);
     parser.setKind(ASTParser.K_STATEMENTS);
-    final ASTNode root = parser.createAST(null);
+    final ASTNode root = parser.createAST();
     if ((root instanceof Block)) {
       List<Statement> statements = ((Block)root).statements();
-      return this.executeAstFlattener(javaSrc, statements);
+      String _targetLevel = parser.getTargetLevel();
+      return this.executeAstFlattener(javaSrc, statements, _targetLevel);
     }
     Set<ASTNode> _singleton = Collections.<ASTNode>singleton(root);
-    return this.executeAstFlattener(javaSrc, _singleton);
+    String _targetLevel_1 = parser.getTargetLevel();
+    return this.executeAstFlattener(javaSrc, _singleton, _targetLevel_1);
   }
   
   /**
@@ -163,25 +166,24 @@ public class JavaConverter {
    * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject in eclipse Module in idea)
    */
   public JavaConverter.ConversionResult expressionToXtend(final String javaSrc, final Object classPathContext) {
-    final ASTParser parser = this.astParserFactory.createJavaParser(classPathContext);
+    final ASTParserFactory.ASTParserWrapper parser = this.astParserFactory.createJavaParser(classPathContext);
     char[] _charArray = javaSrc.toCharArray();
     parser.setSource(_charArray);
     parser.setKind(ASTParser.K_EXPRESSION);
-    final ASTNode root = parser.createAST(null);
+    final ASTNode root = parser.createAST();
     Set<ASTNode> _singleton = Collections.<ASTNode>singleton(root);
-    return this.executeAstFlattener(javaSrc, _singleton);
+    String _targetLevel = parser.getTargetLevel();
+    return this.executeAstFlattener(javaSrc, _singleton, _targetLevel);
   }
   
   /**
    * @param unitName some CU name e.g. Clazz. If unitName is null, a body declaration content is considered.<br>
    * 			See org.eclipse.jdt.core.dom.ASTParser.setUnitName(String)
    * @param javaSrc Java source code as String
-   * @param proj JavaProject where the java source code comes from
+   * @param imports Additional imports to add
+   * @param parser ASTParser to use
    */
-  private JavaConverter.ConversionResult internalToXtend(final String unitName, final String javaSrc, final String[] imports, final ASTParser parser) {
-    parser.setStatementsRecovery(true);
-    parser.setResolveBindings(true);
-    parser.setBindingsRecovery(true);
+  private JavaConverter.ConversionResult internalToXtend(final String unitName, final String javaSrc, final String[] imports, final ASTParserFactory.ASTParserWrapper parser) {
     final StringBuilder javaSrcBuilder = new StringBuilder();
     boolean _notEquals = (!Objects.equal(imports, null));
     if (_notEquals) {
@@ -209,16 +211,18 @@ public class JavaConverter {
     final String preparedJavaSrc = javaSrcBuilder.toString();
     char[] _charArray = preparedJavaSrc.toCharArray();
     parser.setSource(_charArray);
-    final ASTNode result = parser.createAST(null);
+    final ASTNode result = parser.createAST();
     Set<ASTNode> _singleton = Collections.<ASTNode>singleton(result);
-    return this.executeAstFlattener(preparedJavaSrc, _singleton);
+    String _targetLevel = parser.getTargetLevel();
+    return this.executeAstFlattener(preparedJavaSrc, _singleton, _targetLevel);
   }
   
   /**
    * @param  preparedJavaSource used to collect javadoc and comments
    */
-  private JavaConverter.ConversionResult executeAstFlattener(final String preparedJavaSource, final Collection<? extends ASTNode> parseResult) {
+  private JavaConverter.ConversionResult executeAstFlattener(final String preparedJavaSource, final Collection<? extends ASTNode> parseResult, final String targetLevel) {
     final JavaASTFlattener astFlattener = this.astFlattenerProvider.get();
+    astFlattener.setTargetlevel(targetLevel);
     astFlattener.useFallBackStrategy(this.fallbackConversionStartegy);
     astFlattener.setJavaSources(preparedJavaSource);
     for (final ASTNode node : parseResult) {

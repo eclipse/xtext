@@ -20,6 +20,8 @@ import org.eclipse.jdt.core.dom.Annotation;
 import org.eclipse.jdt.core.dom.AnonymousClassDeclaration;
 import org.eclipse.jdt.core.dom.Assignment;
 import org.eclipse.jdt.core.dom.Block;
+import org.eclipse.jdt.core.dom.ChildListPropertyDescriptor;
+import org.eclipse.jdt.core.dom.ChildPropertyDescriptor;
 import org.eclipse.jdt.core.dom.ClassInstanceCreation;
 import org.eclipse.jdt.core.dom.Expression;
 import org.eclipse.jdt.core.dom.FieldAccess;
@@ -642,6 +644,46 @@ public class ASTFlattenerUtils {
   protected String _toSimpleName(final QualifiedName name) {
     SimpleName _name = name.getName();
     return _name.getIdentifier();
+  }
+  
+  public List<ASTNode> genericChildListProperty(final ASTNode node, final String propertyName) {
+    List _structuralPropertiesForType = node.structuralPropertiesForType();
+    Iterable<ChildListPropertyDescriptor> _filter = Iterables.<ChildListPropertyDescriptor>filter(_structuralPropertiesForType, ChildListPropertyDescriptor.class);
+    final Function1<ChildListPropertyDescriptor, Boolean> _function = new Function1<ChildListPropertyDescriptor, Boolean>() {
+      @Override
+      public Boolean apply(final ChildListPropertyDescriptor it) {
+        String _id = it.getId();
+        return Boolean.valueOf(Objects.equal(propertyName, _id));
+      }
+    };
+    Iterable<ChildListPropertyDescriptor> _filter_1 = IterableExtensions.<ChildListPropertyDescriptor>filter(_filter, _function);
+    final ChildListPropertyDescriptor property = IterableExtensions.<ChildListPropertyDescriptor>head(_filter_1);
+    boolean _notEquals = (!Objects.equal(property, null));
+    if (_notEquals) {
+      Object _structuralProperty = node.getStructuralProperty(property);
+      return ((List<ASTNode>) _structuralProperty);
+    }
+    return null;
+  }
+  
+  public ASTNode genericChildProperty(final ASTNode node, final String propertyName) {
+    List _structuralPropertiesForType = node.structuralPropertiesForType();
+    Iterable<ChildPropertyDescriptor> _filter = Iterables.<ChildPropertyDescriptor>filter(_structuralPropertiesForType, ChildPropertyDescriptor.class);
+    final Function1<ChildPropertyDescriptor, Boolean> _function = new Function1<ChildPropertyDescriptor, Boolean>() {
+      @Override
+      public Boolean apply(final ChildPropertyDescriptor it) {
+        String _id = it.getId();
+        return Boolean.valueOf(Objects.equal(propertyName, _id));
+      }
+    };
+    Iterable<ChildPropertyDescriptor> _filter_1 = IterableExtensions.<ChildPropertyDescriptor>filter(_filter, _function);
+    final ChildPropertyDescriptor property = IterableExtensions.<ChildPropertyDescriptor>head(_filter_1);
+    boolean _notEquals = (!Objects.equal(property, null));
+    if (_notEquals) {
+      Object _structuralProperty = node.getStructuralProperty(property);
+      return ((ASTNode) _structuralProperty);
+    }
+    return null;
   }
   
   public String toSimpleName(final Name name) {

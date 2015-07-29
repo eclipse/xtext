@@ -33,8 +33,8 @@ import com.google.common.base.Splitter
 
 class JavaConverterTest extends AbstractXtendTestCase {
 	@Inject Provider<JavaConverter> javaConverterProvider
-	JavaConverter j2x
-	static boolean DUMP = false;
+	protected JavaConverter j2x
+	static protected boolean DUMP = false;
 
 	@Before def void setUp() {
 		j2x = javaConverterProvider.get()
@@ -44,7 +44,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 
 		var String javaCode = "package pack; import java.lang.Object; public class JavaToConvert<T,U> {}"
 
-		var XtendFile xtendFile = toValidXtendFile("JavaToConvert", javaCode)
+		var XtendFile xtendFile = toValidXtendFile("pack/JavaToConvert", javaCode)
 		assertEquals("pack", xtendFile.getPackage())
 		assertEquals("java.lang.Object", xtendFile.getImportSection().getImportDeclarations().get(0).getImportedName())
 		var XtendTypeDeclaration typeDeclaration = xtendFile.getXtendTypes().get(0)
@@ -92,7 +92,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		checkVisibility(xtendClazz)
 		xtendClazz = toValidXtendClass(
 			'''
-		public class JavaToConvert {
+		public class JavaToConvert2 {
 			private static String priv;
 			public static String pub;
 			protected static String prot;
@@ -552,7 +552,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 	@Test def void testStaticImportCase() throws Exception {
 
 		var XtendClass xtendClazz = toValidXtendClass(
-			"package foo; import static java.awt.AWTEvent.*; public class Test { long o= ACTION_EVENT_MASK;}")
+			"import static java.awt.AWTEvent.*; public class Test { long o= ACTION_EVENT_MASK;}")
 
 		var XtendField xtendMember = xtendClazz.getMembers().get(0) as XtendField
 		assertEquals("o", xtendMember.getName())
@@ -583,10 +583,11 @@ class JavaConverterTest extends AbstractXtendTestCase {
 
 	@Test def void testStaticAccessCase2() throws Exception {
 		var XtendClass xtendClazz = toValidXtendClass(
-			'''
-		import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-		import org.eclipse.emf.ecore.impl.MinimalEObjectImpl.Container;
-		public class Test extends MinimalEObjectImpl.Container{}''')
+		'''
+		import java.util.Map;
+		import java.util.Map.Entry;
+		public abstract class Test implements Map.Entry<String,String>{}
+		''')
 		assertNotNull(xtendClazz)
 	}
 
@@ -1522,10 +1523,8 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 	}
 
 	def protected XtendFile toValidXtendFile(String unitName, String javaCode) throws Exception {
-
-		var ConversionResult conversionResult = j2x.toXtend(unitName, javaCode)
-
-		var String xtendCode = conversionResult.getXtendCode()
+		var conversionResult = j2x.toXtend(unitName, javaCode)
+		var xtendCode = conversionResult.getXtendCode()
 		assertFalse(xtendCode.empty)
 		dump(xtendCode)
 		for (String problem : conversionResult.getProblems()) {

@@ -62,12 +62,7 @@ public class JavaCodeAnalyzer {
   private ASTParserFactory parserFactory;
   
   public JavaCodeAnalyzer.JavaParseResult<? extends ASTNode> determinateJavaType(final String javaCode) {
-    String _defaultCompliancelevel = this.parserFactory.defaultCompliancelevel();
-    return this.determinateJavaType(javaCode, _defaultCompliancelevel);
-  }
-  
-  public JavaCodeAnalyzer.JavaParseResult<? extends ASTNode> determinateJavaType(final String javaCode, final String compilerCompliance) {
-    ASTParser parser = this.parserFactory.createDefaultJavaParser(compilerCompliance);
+    ASTParser parser = this.parserFactory.createDefaultJavaParser(this.parserFactory.minParserApiLevel);
     char[] _charArray = javaCode.toCharArray();
     parser.setSource(_charArray);
     parser.setStatementsRecovery(true);
