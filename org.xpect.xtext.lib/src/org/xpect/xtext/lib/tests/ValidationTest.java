@@ -27,6 +27,7 @@ import org.xpect.text.IRegion;
 import org.xpect.util.IssueVisualizer;
 import org.xpect.xtext.lib.setup.XtextStandaloneSetup;
 import org.xpect.xtext.lib.setup.XtextWorkspaceSetup;
+import org.xpect.xtext.lib.tests.ValidationTestModuleSetup.ConsumedIssues;
 import org.xpect.xtext.lib.tests.ValidationTestModuleSetup.IssuesByLine;
 import org.xpect.xtext.lib.tests.ValidationTestModuleSetup.IssuesByLineProvider;
 import org.xpect.xtext.lib.util.IssueFormatter;
@@ -48,6 +49,7 @@ public class ValidationTest {
 	}
 
 	@Xpect
+	@ConsumedIssues(Severity.ERROR)
 	public void errors(ILinesExpectation expectation, @IssuesByLine Multimap<IRegion, Issue> line2issue, @NextLine IRegion line, ValidationTestConfig cfg) {
 		List<String> issues = getActualIssues(line2issue, line, cfg, Severity.ERROR);
 		expectation.assertEquals(issues);
@@ -63,18 +65,21 @@ public class ValidationTest {
 	}
 
 	@Xpect
+	@ConsumedIssues(Severity.INFO)
 	public void infos(ILinesExpectation expectation, @IssuesByLine Multimap<IRegion, Issue> line2issue, @NextLine IRegion line, ValidationTestConfig cfg) {
 		List<String> issues = getActualIssues(line2issue, line, cfg, Severity.INFO);
 		expectation.assertEquals(issues);
 	}
 
 	@Xpect
+	@ConsumedIssues({ Severity.INFO, Severity.ERROR, Severity.WARNING })
 	public void issues(ILinesExpectation expectation, @IssuesByLine Multimap<IRegion, Issue> line2issue, @NextLine IRegion line, ValidationTestConfig cfg) {
 		List<String> issues = getActualIssues(line2issue, line, cfg, null);
 		expectation.assertEquals(issues);
 	}
 
 	@Xpect
+	@ConsumedIssues({ Severity.INFO, Severity.ERROR, Severity.WARNING })
 	public void noIssues(@IssuesByLine Multimap<IRegion, Issue> line2issue, @NextLine IRegion line) {
 		Collection<Issue> issues = line2issue.get(line);
 		if (!issues.isEmpty()) {
@@ -85,6 +90,7 @@ public class ValidationTest {
 	}
 
 	@Xpect
+	@ConsumedIssues({ Severity.INFO, Severity.ERROR, Severity.WARNING })
 	public void warnings(ILinesExpectation expectation, @IssuesByLine Multimap<IRegion, Issue> line2issue, @NextLine IRegion line, ValidationTestConfig cfg) {
 		List<String> issues = getActualIssues(line2issue, line, cfg, Severity.WARNING);
 		expectation.assertEquals(issues);

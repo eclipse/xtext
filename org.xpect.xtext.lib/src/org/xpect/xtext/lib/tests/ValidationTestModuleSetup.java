@@ -4,16 +4,19 @@ import static com.google.common.collect.Iterables.filter;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
+import org.xpect.XjmXpectMethod;
 import org.xpect.XpectFile;
 import org.xpect.XpectImport;
 import org.xpect.XpectInvocation;
@@ -28,6 +31,7 @@ import org.xpect.text.IRegion;
 import org.xpect.text.Region;
 import org.xpect.ui.services.XtResourceValidator;
 import org.xpect.ui.util.XpectFileAccess;
+import org.xpect.util.JvmAnnotationUtil;
 import org.xpect.xtext.lib.setup.ThisResource;
 import org.xpect.xtext.lib.setup.XtextValidatingSetup;
 import org.xpect.xtext.lib.tests.ValidationTestModuleSetup.IssuesByLineProvider;
@@ -48,6 +52,12 @@ import com.google.inject.Key;
 @XpectGuiceModule
 @XpectImport(IssuesByLineProvider.class)
 public class ValidationTestModuleSetup extends AbstractDelegatingModule {
+	@XpectStateAnnotation
+	@Retention(RetentionPolicy.RUNTIME)
+	public @interface ConsumedIssues {
+		Severity[]value();
+	}
+
 	@XpectStateAnnotation
 	@Retention(RetentionPolicy.RUNTIME)
 	public @interface IssuesByLine {
@@ -80,17 +90,20 @@ public class ValidationTestModuleSetup extends AbstractDelegatingModule {
 
 	public static class TestingResourceValidator extends XtResourceValidator {
 
-		protected Severity getExpectedSeverity(XpectInvocation inv) {
-			if (inv == null || inv.eIsProxy() || inv.getMethod() == null || inv.getMethod().eIsProxy())
+		protected Set<Severity> getExpectedSeverity(XpectInvocation inv) {
+			if (inv == null || inv.eIsProxy())
 				return null;
-			String methodName = inv.getMethod().getName();
-			if (methodName.startsWith("error"))
-				return Severity.ERROR;
-			if (methodName.startsWith("warning"))
-				return Severity.WARNING;
-			if (methodName.startsWith("info"))
-				return Severity.INFO;
-			return null;
+			XjmXpectMethod method = inv.getMethod();
+			if (method == null || method.eIsProxy())
+				return null;
+			JvmOperation operation = method.getJvmMethod();
+			if (operation == null || operation.eIsProxy())
+				return null;
+			ConsumedIssues annotation = JvmAnnotationUtil.getJavaAnnotation(operation, ConsumedIssues.class);
+			if (annotation == null)
+				return null;
+			EnumSet<Severity> result = EnumSet.copyOf(Lists.newArrayList(annotation.value()));
+			return result;
 		}
 
 		@Override
@@ -108,13 +121,15 @@ public class ValidationTestModuleSetup extends AbstractDelegatingModule {
 					ValidationTestConfig config = new ValidationTestConfig(xpectFile.<ValidationTestConfig> createSetupInitializer());
 					Set<Issue> issues = Sets.newLinkedHashSet(issuesFromDelegate);
 					Set<Issue> matched = Sets.newHashSet();
-					for (XpectInvocation inv : xpectFile.getInvocations())
-						if (!inv.isIgnore()) {
+					for (XpectInvocation inv : xpectFile.getInvocations()) {
+						Set<Severity> severities = getExpectedSeverity(inv);
+						if (severities != null) {
 							IRegion region = new NextLineProvider(xresource, inv).getNextLine();
-							List<Issue> selected = Lists.newArrayList(filter(issues, new IssueOverlapsRangePredicate(region, getExpectedSeverity(inv))));
+							List<Issue> selected = Lists.newArrayList(filter(issues, new IssueOverlapsRangePredicate(region, severities)));
 							result.putAll(region, selected);
 							matched.addAll(selected);
 						}
+					}
 					issues.removeAll(matched);
 					result.putAll(UNMATCHED, filter(issues, config.getIgnoreFilter()));
 				}

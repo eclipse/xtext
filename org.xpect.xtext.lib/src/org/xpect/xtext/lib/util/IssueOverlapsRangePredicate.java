@@ -7,26 +7,31 @@
  *******************************************************************************/
 package org.xpect.xtext.lib.util;
 
+import java.util.Set;
+
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.Issue;
 import org.xpect.text.IRegion;
 
+import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class IssueOverlapsRangePredicate implements Predicate<Issue> {
-	private final Severity severity;
+	private final Set<Severity> severities;
 	private final IRegion region;
 
-	public IssueOverlapsRangePredicate(IRegion region, Severity severity) {
+	public IssueOverlapsRangePredicate(IRegion region, Set<Severity> severity) {
+		Preconditions.checkNotNull(region);
+		Preconditions.checkNotNull(severity);
 		this.region = region;
-		this.severity = severity;
+		this.severities = severity;
 	}
 
 	public boolean apply(Issue issue) {
-		if (severity != null && severity != issue.getSeverity())
+		if (!severities.contains(issue.getSeverity()))
 			return false;
 		Integer offset = issue.getOffset();
 		Integer length = issue.getLength();
@@ -41,13 +46,13 @@ public class IssueOverlapsRangePredicate implements Predicate<Issue> {
 		return region;
 	}
 
-	public Severity getSeverity() {
-		return severity;
+	public Set<Severity> getSeverity() {
+		return severities;
 	}
 
 	@Override
 	public String toString() {
-		return "Severity:" + severity + " Region:" + region;
+		return "Severities:" + severities + " Region:" + region;
 	}
 
 }
