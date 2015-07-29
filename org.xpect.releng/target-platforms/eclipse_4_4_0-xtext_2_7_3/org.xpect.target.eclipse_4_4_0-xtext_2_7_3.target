@@ -2,6 +2,10 @@
 <?pde version="3.8"?><target name="Xpect Target Definition (Eclipse 3.8 - Juno)" sequenceNumber="32">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="de.itemis.xtext.antlr.sdk.feature.group" version="2.1.1.v201405091103"/>
+<repository location="http://download.itemis.com/updates/releases/2.1.1/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.xtext.sdk.feature.group" version="2.7.3.v201411190455"/>
 <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/maintenance/R201411190455/"/>
 </location>
