@@ -8,6 +8,7 @@
 package org.eclipse.xtext.idea.trace;
 
 import com.google.common.base.Objects;
+import com.google.inject.Inject;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
@@ -15,12 +16,15 @@ import com.intellij.openapi.vfs.VirtualFile;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Set;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.generator.trace.internal.AbstractTrace;
+import org.eclipse.xtext.idea.build.IdeaOutputConfigurationProvider;
 import org.eclipse.xtext.idea.filesystem.IdeaModuleConfig;
 import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
 import org.eclipse.xtext.idea.trace.IIdeaTrace;
@@ -30,12 +34,18 @@ import org.eclipse.xtext.idea.trace.VirtualFileInProject;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.workspace.IProjectConfig;
+import org.eclipse.xtext.workspace.ISourceFolder;
+import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @SuppressWarnings("all")
 public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
+  @Inject
+  private IdeaOutputConfigurationProvider outputConfigurationProvider;
+  
   private VirtualFileInProject localVirtualFile;
   
   private Module module;
@@ -57,6 +67,10 @@ public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
   
   protected void setLocalStorage(final VirtualFileInProject localVirtualFile) {
     this.localVirtualFile = localVirtualFile;
+  }
+  
+  protected void setModule(final Module module) {
+    this.module = module;
   }
   
   protected AbsoluteURI getURIForVirtualFile(final VirtualFile virtualFile) {
@@ -85,6 +99,37 @@ public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
       }
     }
     return null;
+  }
+  
+  @Override
+  public AbsoluteURI resolvePath(final SourceRelativeURI path) {
+    boolean _isTraceToTarget = this.isTraceToTarget();
+    if (_isTraceToTarget) {
+      final Set<OutputConfiguration> outputConfigurations = this.outputConfigurationProvider.getOutputConfigurations(this.module);
+      IdeaModuleConfig _localProjectConfig = this.getLocalProjectConfig();
+      final Set<? extends ISourceFolder> sourceFolders = _localProjectConfig.getSourceFolders();
+      ModuleRootManager _instance = ModuleRootManager.getInstance(this.module);
+      VirtualFile[] _contentRoots = _instance.getContentRoots();
+      final VirtualFile contentRoot = IterableExtensions.<VirtualFile>head(((Iterable<VirtualFile>)Conversions.doWrapArray(_contentRoots)));
+      for (final ISourceFolder sourceFolder : sourceFolders) {
+        {
+          OutputConfiguration _head = IterableExtensions.<OutputConfiguration>head(outputConfigurations);
+          String _name = sourceFolder.getName();
+          String _outputDirectory = _head.getOutputDirectory(_name);
+          final VirtualFile outputFolder = contentRoot.findFileByRelativePath(_outputDirectory);
+          if ((outputFolder != null)) {
+            URI _uRI = path.getURI();
+            String _string = _uRI.toString();
+            final VirtualFile file = outputFolder.findFileByRelativePath(_string);
+            if ((file != null)) {
+              URI _uRI_1 = VirtualFileURIUtil.getURI(file);
+              return new AbsoluteURI(_uRI_1);
+            }
+          }
+        }
+      }
+    }
+    return super.resolvePath(path);
   }
   
   @Override

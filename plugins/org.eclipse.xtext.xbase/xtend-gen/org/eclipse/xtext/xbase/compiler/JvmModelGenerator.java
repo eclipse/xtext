@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.compiler;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -16,9 +17,11 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -69,8 +72,10 @@ import org.eclipse.xtext.documentation.IFileHeaderProvider;
 import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
+import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.generator.trace.LocationData;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.INode;
@@ -83,6 +88,7 @@ import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
@@ -1973,7 +1979,43 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   public TreeAppendable createAppendable(final EObject context, final ImportManager importManager, final GeneratorConfig config) {
-    final TreeAppendable appendable = new TreeAppendable(importManager, this.converter, this.locationProvider, this.jvmModelAssociations, context, "  ", "\n");
+    abstract class __JvmModelGenerator_1 implements ITraceURIConverter {
+      Map<URI, SourceRelativeURI> uriForTraceCache;
+    }
+    
+    final __JvmModelGenerator_1 cachingConverter = new __JvmModelGenerator_1() {
+      {
+        uriForTraceCache = Maps.<URI, SourceRelativeURI>newHashMap();
+      }
+      @Override
+      public SourceRelativeURI getURIForTrace(final IProjectConfig config, final AbsoluteURI uri) {
+        URI _uRI = uri.getURI();
+        boolean _containsKey = this.uriForTraceCache.containsKey(_uRI);
+        boolean _not = (!_containsKey);
+        if (_not) {
+          final SourceRelativeURI result = JvmModelGenerator.this.converter.getURIForTrace(config, uri);
+          URI _uRI_1 = uri.getURI();
+          this.uriForTraceCache.put(_uRI_1, result);
+        }
+        URI _uRI_2 = uri.getURI();
+        return this.uriForTraceCache.get(_uRI_2);
+      }
+      
+      @Override
+      public SourceRelativeURI getURIForTrace(final Resource resource) {
+        URI _uRI = resource.getURI();
+        boolean _containsKey = this.uriForTraceCache.containsKey(_uRI);
+        boolean _not = (!_containsKey);
+        if (_not) {
+          final SourceRelativeURI result = JvmModelGenerator.this.converter.getURIForTrace(resource);
+          URI _uRI_1 = resource.getURI();
+          this.uriForTraceCache.put(_uRI_1, result);
+        }
+        URI _uRI_2 = resource.getURI();
+        return this.uriForTraceCache.get(_uRI_2);
+      }
+    };
+    final TreeAppendable appendable = new TreeAppendable(importManager, cachingConverter, this.locationProvider, this.jvmModelAssociations, context, "  ", "\n");
     SharedAppendableState _state = appendable.getState();
     _state.setGeneratorConfig(config);
     return appendable;

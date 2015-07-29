@@ -22,11 +22,16 @@ import org.eclipse.xtext.util.ITextRegionWithLineInformation
 import org.eclipse.xtext.workspace.IProjectConfig
 
 import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
+import org.eclipse.xtext.idea.resource.VirtualFileURIUtil
+import org.eclipse.xtext.idea.build.IdeaOutputConfigurationProvider
+import com.google.inject.Inject
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
+	
+	@Inject IdeaOutputConfigurationProvider outputConfigurationProvider
 	
 	VirtualFileInProject localVirtualFile
 	Module module
@@ -44,7 +49,11 @@ class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
 	}
 	
 	def protected void setLocalStorage(VirtualFileInProject localVirtualFile) {
-		this.localVirtualFile = localVirtualFile
+		this.localVirtualFile = localVirtualFile;
+	}
+	
+	def protected void setModule(Module module) {
+		this.module = module
 	}
 	
 	def protected AbsoluteURI getURIForVirtualFile(VirtualFile virtualFile) {
@@ -65,6 +74,24 @@ class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
 			}
 		}
 		return null
+	}
+	
+	override AbsoluteURI resolvePath(SourceRelativeURI path) {
+		if (isTraceToTarget) {
+			val outputConfigurations = outputConfigurationProvider.getOutputConfigurations(module)
+			val sourceFolders = localProjectConfig.sourceFolders
+			val contentRoot = ModuleRootManager.getInstance(module).contentRoots.head
+			for(sourceFolder: sourceFolders) {
+				val outputFolder = contentRoot.findFileByRelativePath(outputConfigurations.head.getOutputDirectory(sourceFolder.name))
+				if (outputFolder !== null) {
+					val file = outputFolder.findFileByRelativePath(path.URI.toString)
+					if (file !== null) {
+						return new AbsoluteURI(VirtualFileURIUtil.getURI(file))
+					}
+				}
+			}
+		}
+		return super.resolvePath(path)
 	}
 	
 	override InputStream getContents(SourceRelativeURI uri, IProjectConfig projectConfig) throws IOException {

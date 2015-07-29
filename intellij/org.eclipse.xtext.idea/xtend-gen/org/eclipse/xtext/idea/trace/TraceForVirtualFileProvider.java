@@ -11,17 +11,23 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
+import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.trace.AbsoluteURI;
+import org.eclipse.xtext.generator.trace.ITraceURIConverter;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
 import org.eclipse.xtext.generator.trace.internal.AbstractTraceForURIProvider;
+import org.eclipse.xtext.idea.build.IdeaOutputConfigurationProvider;
 import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent;
 import org.eclipse.xtext.idea.filesystem.IdeaModuleConfig;
 import org.eclipse.xtext.idea.filesystem.IdeaWorkspaceConfig;
@@ -31,6 +37,8 @@ import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider;
 import org.eclipse.xtext.idea.trace.VirtualFileBasedTrace;
 import org.eclipse.xtext.idea.trace.VirtualFileInProject;
 import org.eclipse.xtext.workspace.IProjectConfig;
+import org.eclipse.xtext.workspace.ISourceFolder;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -76,6 +84,9 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
   @Inject
   private Provider<VirtualFileBasedTrace> traceProvider;
   
+  @Inject
+  private IdeaOutputConfigurationProvider outputConfigurationProvider;
+  
   @Override
   protected VirtualFileInProject asFile(final AbsoluteURI absoluteURI, final IProjectConfig project) {
     VirtualFileManager _instance = VirtualFileManager.getInstance();
@@ -94,18 +105,56 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
     VirtualFile _file = sourceFile.getFile();
     URI _uRI = VirtualFileURIUtil.getURI(_file);
     final Iterable<URI> generatedSources = builder.getGeneratedSources(_uRI);
-    final Function1<URI, AbstractTraceForURIProvider.PersistedTrace> _function = new Function1<URI, AbstractTraceForURIProvider.PersistedTrace>() {
+    final VirtualFileManager mngr = VirtualFileManager.getInstance();
+    final Function1<URI, VirtualFile> _function = new Function1<URI, VirtualFile>() {
       @Override
-      public AbstractTraceForURIProvider.PersistedTrace apply(final URI it) {
-        VirtualFileManager _instance = VirtualFileManager.getInstance();
+      public VirtualFile apply(final URI it) {
         String _string = it.toString();
-        final VirtualFile file = _instance.findFileByUrl(_string);
-        VirtualFileInProject _virtualFileInProject = new VirtualFileInProject(file, ideaProject);
-        return TraceForVirtualFileProvider.this.findPersistedTrace(_virtualFileInProject);
+        return mngr.findFileByUrl(_string);
       }
     };
-    Iterable<AbstractTraceForURIProvider.PersistedTrace> _map = IterableExtensions.<URI, AbstractTraceForURIProvider.PersistedTrace>map(generatedSources, _function);
-    return IterableExtensions.<AbstractTraceForURIProvider.PersistedTrace>toList(_map);
+    final Iterable<VirtualFile> generatedFiles = IterableExtensions.<URI, VirtualFile>map(generatedSources, _function);
+    final Function1<VirtualFile, Boolean> _function_1 = new Function1<VirtualFile, Boolean>() {
+      @Override
+      public Boolean apply(final VirtualFile it) {
+        return Boolean.valueOf(TraceForVirtualFileProvider.this.isTraceFile(it));
+      }
+    };
+    final Iterable<VirtualFile> generatedTraces = IterableExtensions.<VirtualFile>filter(generatedFiles, _function_1);
+    final Function1<VirtualFile, AbstractTraceForURIProvider.PersistedTrace> _function_2 = new Function1<VirtualFile, AbstractTraceForURIProvider.PersistedTrace>() {
+      @Override
+      public AbstractTraceForURIProvider.PersistedTrace apply(final VirtualFile it) {
+        TraceForVirtualFileProvider.VirtualFilePersistedTrace _virtualFilePersistedTrace = new TraceForVirtualFileProvider.VirtualFilePersistedTrace(it, TraceForVirtualFileProvider.this);
+        return ((AbstractTraceForURIProvider.PersistedTrace) _virtualFilePersistedTrace);
+      }
+    };
+    Iterable<AbstractTraceForURIProvider.PersistedTrace> _map = IterableExtensions.<VirtualFile, AbstractTraceForURIProvider.PersistedTrace>map(generatedTraces, _function_2);
+    final List<AbstractTraceForURIProvider.PersistedTrace> result = IterableExtensions.<AbstractTraceForURIProvider.PersistedTrace>toList(_map);
+    return result;
+  }
+  
+  @Override
+  public SourceRelativeURI getGeneratedUriForTrace(final IProjectConfig projectConfig, final AbsoluteURI absoluteSourceResource, final AbsoluteURI generatedFileURI, final ITraceURIConverter traceURIConverter) {
+    final Module module = ((IdeaModuleConfig) projectConfig).getModule();
+    final Set<OutputConfiguration> outputConfigurations = this.outputConfigurationProvider.getOutputConfigurations(module);
+    URI _uRI = absoluteSourceResource.getURI();
+    final ISourceFolder sourceFolder = projectConfig.findSourceFolderContaining(_uRI);
+    OutputConfiguration _head = IterableExtensions.<OutputConfiguration>head(outputConfigurations);
+    String _name = sourceFolder.getName();
+    final String outputFolder = _head.getOutputDirectory(_name);
+    ModuleRootManager _instance = ModuleRootManager.getInstance(module);
+    VirtualFile[] _contentRoots = _instance.getContentRoots();
+    final VirtualFile contentRoot = IterableExtensions.<VirtualFile>head(((Iterable<VirtualFile>)Conversions.doWrapArray(_contentRoots)));
+    VirtualFile _findFileByRelativePath = contentRoot.findFileByRelativePath(outputFolder);
+    final URI sourceFolderURI = VirtualFileURIUtil.getURI(_findFileByRelativePath);
+    final SourceRelativeURI result = generatedFileURI.deresolve(sourceFolderURI);
+    return result;
+  }
+  
+  private boolean isTraceFile(final VirtualFile file) {
+    TraceFileNameProvider _traceFileNameProvider = this.getTraceFileNameProvider();
+    String _name = file.getName();
+    return _traceFileNameProvider.isTraceFileName(_name);
   }
   
   @Override
@@ -146,6 +195,9 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
   protected VirtualFileBasedTrace newAbstractTrace(final VirtualFileInProject file) {
     final VirtualFileBasedTrace result = this.traceProvider.get();
     result.setLocalStorage(file);
+    IProjectConfig _projectConfig = this.getProjectConfig(file);
+    Module _module = ((IdeaModuleConfig) _projectConfig).getModule();
+    result.setModule(_module);
     return result;
   }
   

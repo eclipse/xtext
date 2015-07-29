@@ -21,6 +21,7 @@ import com.intellij.psi.util.PsiModificationTracker
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider
 import org.eclipse.xtext.formatting.IIndentationInformation
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider
+import org.eclipse.xtext.generator.trace.ITraceForURIProvider
 import org.eclipse.xtext.ide.LexerIdeBindings
 import org.eclipse.xtext.ide.editor.bracketmatching.DefaultBracePairProvider
 import org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider
@@ -41,6 +42,7 @@ import org.eclipse.xtext.idea.refactoring.NullNamesValidator
 import org.eclipse.xtext.idea.resource.IdeaEncodingProvider
 import org.eclipse.xtext.idea.resource.IdeaResourceDescriptionsProvider
 import org.eclipse.xtext.idea.structureview.DefaultPsiStructureViewFactory
+import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider
@@ -154,4 +156,7 @@ class DefaultIdeaModule extends AbstractGenericModule {
 		CodeStyleSettingsIndentationInformation
 	}
 
+	def Class<? extends ITraceForURIProvider> bindPlatformNeutralTraceInformation() {
+		ITraceForVirtualFileProvider
+	}
 }

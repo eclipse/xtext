@@ -33,11 +33,15 @@ public class AbsoluteURI extends AbstractURIWrapper {
     this(URI.createURI(absoluteURI));
   }
   
-  public SourceRelativeURI deresolve(final ISourceFolder sourceFolder) {
+  public SourceRelativeURI deresolve(final URI sourceFolderURI) {
     URI _uRI = this.getURI();
-    URI _path = sourceFolder.getPath();
-    URI _deresolve = _uRI.deresolve(_path);
+    URI _deresolve = _uRI.deresolve(sourceFolderURI);
     return new SourceRelativeURI(_deresolve);
+  }
+  
+  public SourceRelativeURI deresolve(final ISourceFolder sourceFolder) {
+    URI _path = sourceFolder.getPath();
+    return this.deresolve(_path);
   }
   
   public SourceRelativeURI deresolve(final IProjectConfig projectConfig) {

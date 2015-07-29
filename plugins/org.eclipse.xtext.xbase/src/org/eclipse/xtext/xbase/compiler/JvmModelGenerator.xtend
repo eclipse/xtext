@@ -81,6 +81,12 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import static org.eclipse.xtext.common.types.TypesPackage.Literals.*
 import static org.eclipse.xtext.xbase.compiler.JavaVersion.*
 import org.eclipse.xtext.common.types.JvmFeature
+import org.eclipse.xtext.workspace.IProjectConfig
+import org.eclipse.xtext.generator.trace.AbsoluteURI
+import java.util.Map
+import org.eclipse.xtext.generator.trace.SourceRelativeURI
+import static com.google.common.collect.Maps.newHashMap
+import org.eclipse.emf.common.util.URI
 
 /**
  * A generator implementation that processes the 
@@ -944,7 +950,28 @@ class JvmModelGenerator implements IGenerator {
 	}
 		
 	def TreeAppendable createAppendable(EObject context, ImportManager importManager, GeneratorConfig config) {
-		val appendable = new TreeAppendable(importManager, converter, locationProvider, jvmModelAssociations, context, "  ", "\n")
+		val cachingConverter = new ITraceURIConverter() {
+			
+			private Map<URI, SourceRelativeURI> uriForTraceCache = newHashMap();
+			
+			override SourceRelativeURI getURIForTrace(IProjectConfig config, AbsoluteURI uri) {
+				if (!uriForTraceCache.containsKey(uri.getURI)) {
+					val result = converter.getURIForTrace(config, uri);
+					uriForTraceCache.put(uri.getURI, result);
+				}
+				return uriForTraceCache.get(uri.getURI);
+			}
+
+			override SourceRelativeURI getURIForTrace(Resource resource) {
+				if (!uriForTraceCache.containsKey(resource.getURI)) {
+					val result = converter.getURIForTrace(resource);
+					uriForTraceCache.put(resource.getURI, result);
+				}
+				return uriForTraceCache.get(resource.getURI);
+			}
+			
+		}
+		val appendable = new TreeAppendable(importManager, cachingConverter, locationProvider, jvmModelAssociations, context, "  ", "\n")
 		appendable.state.generatorConfig = config
 		return appendable
 	}

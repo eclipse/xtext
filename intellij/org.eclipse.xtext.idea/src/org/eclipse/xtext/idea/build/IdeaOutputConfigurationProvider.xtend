@@ -33,27 +33,32 @@ class IdeaOutputConfigurationProvider implements IContextualOutputConfigurationP
 	override Set<OutputConfiguration> getOutputConfigurations(Resource context) {
 		val module = (context.resourceSet as XtextResourceSet).classpathURIContext
 		if (module instanceof Module) {
-			val facet = facetProvider.getFacet(module)
-			if (facet != null) {
-				val generatorConf = facet.configuration.state
-				val defOut = new OutputConfiguration(IFileSystemAccess.DEFAULT_OUTPUT)
-				defOut.outputDirectory = generatorConf.outputDirectory
-				defOut.createOutputDirectory = generatorConf.createDirectory
-				defOut.canClearOutputDirectory = generatorConf.deleteGenerated
-				defOut.overrideExistingResources = generatorConf.overwriteExisting
-				defOut.useOutputPerSourceFolder = true
-				val allSrcFolders = RootModelExtensions.getExistingSourceFolders(module)
-				for (srcFolder : allSrcFolders) {
-					val mapping = new SourceMapping(VfsUtil.getPath(srcFolder.contentEntry.file, srcFolder.file, '/'))
-					if (srcFolder.testSource) {
-						mapping.outputDirectory = generatorConf.testOutputDirectory
-					} else {
-						mapping.outputDirectory = generatorConf.outputDirectory
-					}
-					defOut.sourceMappings.add(mapping)
+			return module.outputConfigurations
+		}
+		return defaultOutput.outputConfigurations
+	}
+	
+	def Set<OutputConfiguration> getOutputConfigurations(Module module) {
+		val facet = facetProvider.getFacet(module)
+		if (facet != null) {
+			val generatorConf = facet.configuration.state
+			val defOut = new OutputConfiguration(IFileSystemAccess.DEFAULT_OUTPUT)
+			defOut.outputDirectory = generatorConf.outputDirectory
+			defOut.createOutputDirectory = generatorConf.createDirectory
+			defOut.canClearOutputDirectory = generatorConf.deleteGenerated
+			defOut.overrideExistingResources = generatorConf.overwriteExisting
+			defOut.useOutputPerSourceFolder = true
+			val allSrcFolders = RootModelExtensions.getExistingSourceFolders(module)
+			for (srcFolder : allSrcFolders) {
+				val mapping = new SourceMapping(VfsUtil.getPath(srcFolder.contentEntry.file, srcFolder.file, '/'))
+				if (srcFolder.testSource) {
+					mapping.outputDirectory = generatorConf.testOutputDirectory
+				} else {
+					mapping.outputDirectory = generatorConf.outputDirectory
 				}
-				return Sets.newHashSet(defOut)
+				defOut.sourceMappings.add(mapping)
 			}
+			return Sets.newHashSet(defOut)
 		}
 		return defaultOutput.outputConfigurations
 	}

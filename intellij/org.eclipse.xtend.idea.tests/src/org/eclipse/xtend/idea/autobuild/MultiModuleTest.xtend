@@ -1,4 +1,5 @@
 /*******************************************************************************
+
  * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -8,19 +9,14 @@
 package org.eclipse.xtend.idea.autobuild
 
 import com.google.common.io.CharStreams
+import com.google.inject.Provider
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.roots.ModuleRootModificationUtil
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.testFramework.PsiTestCase
 import java.io.InputStreamReader
-import org.jetbrains.annotations.NonNls
-import com.intellij.facet.FacetManager
-import org.eclipse.xtend.core.idea.facet.XtendFacetType
-import com.intellij.facet.FacetTypeRegistry
-import com.intellij.facet.Facet
-import org.eclipse.xtext.idea.tests.LightToolingTest
 import org.eclipse.xtend.core.idea.lang.XtendLanguage
-import com.google.inject.Provider
+import org.eclipse.xtext.idea.tests.LightToolingTest
 
 /**
  * @author Sven Efftinge - Initial contribution and API
