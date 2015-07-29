@@ -196,6 +196,11 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
   }
   
   @Override
+  public <T extends EObject> T checkModel(final String path, final String code, final boolean validate) {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  }
+  
+  @Override
   protected boolean includeRanges() {
     return true;
   }
