@@ -16,7 +16,7 @@ allprojects {
 	apply plugin: 'org.xtext.idea-dev'
 
 	ideaDevelopment {
-		ideaVersion = "141.814.3"
+		ideaVersion = "142.3371.3"
 		pluginDependencies {
 			id 'junit'
 		}
