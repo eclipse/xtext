@@ -17,6 +17,7 @@ import org.eclipse.jdt.core.dom.ASTNode
 import org.eclipse.jdt.core.dom.ASTParser
 import org.eclipse.jdt.core.dom.Block
 import org.eclipse.jdt.core.dom.Statement
+import org.eclipse.xtend.core.javaconverter.ASTParserFactory.ASTParserWrapper
 import org.eclipse.xtend.lib.annotations.AccessorType
 import org.eclipse.xtend.lib.annotations.Accessors
 
@@ -35,8 +36,8 @@ class JavaConverter {
 
 	def ConversionResult toXtend(ICompilationUnit cu) {
 		val parser = astParserFactory.createJavaParser(cu)
-		val root = parser.createAST(null)
-		return executeAstFlattener(cu.source, Collections.singleton(root))
+		val root = parser.createAST()
+		return executeAstFlattener(cu.source, Collections.singleton(root), parser.targetLevel)
 	}
 
 	/**
@@ -84,12 +85,12 @@ class JavaConverter {
 		val parser = astParserFactory.createJavaParser(classPathContext)
 		parser.source = javaSrc.toCharArray
 		parser.kind = ASTParser.K_STATEMENTS
-		val root = parser.createAST(null)
+		val root = parser.createAST()
 		if (root instanceof Block) {
 			var List<Statement> statements = root.statements()
-			return executeAstFlattener(javaSrc, statements)
+			return executeAstFlattener(javaSrc, statements, parser.targetLevel)
 		}
-		return executeAstFlattener(javaSrc, Collections.singleton(root))
+		return executeAstFlattener(javaSrc, Collections.singleton(root), parser.targetLevel)
 	}
 
 	/**
@@ -100,20 +101,19 @@ class JavaConverter {
 		val parser = astParserFactory.createJavaParser(classPathContext)
 		parser.source = javaSrc.toCharArray
 		parser.kind = ASTParser.K_EXPRESSION
-		val root = parser.createAST(null)
-		return executeAstFlattener(javaSrc, Collections.singleton(root))
+		val root = parser.createAST()
+		return executeAstFlattener(javaSrc, Collections.singleton(root), parser.targetLevel)
 	}
 
 	/**
 	 * @param unitName some CU name e.g. Clazz. If unitName is null, a body declaration content is considered.<br>
 	 * 			See org.eclipse.jdt.core.dom.ASTParser.setUnitName(String)
 	 * @param javaSrc Java source code as String
-	 * @param proj JavaProject where the java source code comes from
+	 * @param imports Additional imports to add
+	 * @param parser ASTParser to use
 	 */
-	def private ConversionResult internalToXtend(String unitName, String javaSrc, String[] imports, ASTParser parser) {
-		parser.statementsRecovery = true
-		parser.resolveBindings = true
-		parser.bindingsRecovery = true
+	def private ConversionResult internalToXtend(String unitName, String javaSrc, String[] imports,
+		ASTParserWrapper parser) {
 		val javaSrcBuilder = new StringBuilder()
 		if (imports != null) {
 			imports.forEach[javaSrcBuilder.append("import " + it + ";")]
@@ -128,15 +128,17 @@ class JavaConverter {
 		parser.kind = ASTParser.K_COMPILATION_UNIT
 		val preparedJavaSrc = javaSrcBuilder.toString
 		parser.source = preparedJavaSrc.toCharArray
-		val result = parser.createAST(null)
-		return executeAstFlattener(preparedJavaSrc, Collections.singleton(result))
+		val result = parser.createAST()
+		return executeAstFlattener(preparedJavaSrc, Collections.singleton(result), parser.targetLevel)
 	}
 
 	/**
 	 * @param  preparedJavaSource used to collect javadoc and comments
 	 */
-	private def executeAstFlattener(String preparedJavaSource, Collection<? extends ASTNode> parseResult) {
+	private def executeAstFlattener(String preparedJavaSource, Collection<? extends ASTNode> parseResult,
+		String targetLevel) {
 		val astFlattener = astFlattenerProvider.get
+		astFlattener.targetlevel = targetLevel
 		astFlattener.useFallBackStrategy = fallbackConversionStartegy
 		astFlattener.setJavaSources(preparedJavaSource)
 		for (ASTNode node : parseResult) {
