@@ -1,4 +1,4 @@
-/* XPECT_SETUP org.eclipse.xtext.example.domainmodel.xpect.tests.testsuite.DMXtextTests END_SETUP */
+/* XPECT_SETUP org.eclipse.xtext.example.domainmodel.xpect.tests.testsuite.DMXtextTest END_SETUP */
 
 package pkg1 {
 	entity MyEntity1 {

@@ -39,7 +39,6 @@ public class XpectTokenDefProvider extends AntlrTokenDefProvider implements IAnt
 		return result;
 	}
 
-	@Override
 	protected boolean isKeywordToken(String antlrTokenDef) {
 		return true;
 	}
