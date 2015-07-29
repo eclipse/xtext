@@ -20,7 +20,6 @@ import com.intellij.execution.configurations.RunProfileState
 import com.intellij.execution.configurations.RuntimeConfigurationError
 import com.intellij.execution.configurations.RuntimeConfigurationException
 import com.intellij.execution.executors.DefaultRunExecutor
-import com.intellij.execution.junit.JUnitConfiguration
 import com.intellij.execution.runners.ExecutionEnvironmentBuilder
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.actionSystem.LangDataKeys
@@ -66,8 +65,7 @@ class TraceBasedConfigurationProducerTest extends XtendIdeaTestCase {
 		assertTrue(xtendFile instanceof BaseXtextFile)
 
 		val sourceElement = xtendFile.viewProvider.findElementAt(cursorIdx)
-		val configuration = createConfiguration(sourceElement,
-			XtendApplicationConfigurationProducer) as ApplicationConfiguration
+		val configuration = createConfiguration(sourceElement, XtendApplicationConfigurationProducer) 
 
 		assertEquals(Collections.singleton(module), ContainerUtilRt.newHashSet(configuration.getModules()))
 		assertTrue(PsiMethodUtil.hasMainMethod(configuration.mainClass))
@@ -77,7 +75,7 @@ class TraceBasedConfigurationProducerTest extends XtendIdeaTestCase {
 		checkCanRun(configuration)
 		val sameConfiguration = createConfiguration(sourceElement, XtendApplicationConfigurationProducer)
 
-		val producer = RunConfigurationProducer.getInstance(XtendApplicationConfigurationProducer)
+		val RunConfigurationProducer<ApplicationConfiguration> producer = RunConfigurationProducer.getInstance(XtendApplicationConfigurationProducer)
 		assertTrue(producer.isConfigurationFromContext(sameConfiguration, createContext(sourceElement)))
 	}
 
@@ -141,7 +139,7 @@ class TraceBasedConfigurationProducerTest extends XtendIdeaTestCase {
 			}
 		''')
 		val xtendFile = psiManager.findFile(file)
-		val conf = createConfiguration(xtendFile, XtendJunitClassConfigurationProducer) as JUnitConfiguration
+		val conf = createConfiguration(xtendFile, XtendJunitClassConfigurationProducer)
 		assertEquals("XtendJunitClass", conf.getPersistentData().MAIN_CLASS_NAME)
 		assertEquals("class", conf.getPersistentData().TEST_OBJECT)
 		checkCanRun(conf)
@@ -171,8 +169,7 @@ class TraceBasedConfigurationProducerTest extends XtendIdeaTestCase {
 		assertTrue(xtendFile instanceof BaseXtextFile)
 
 		val sourceElement = xtendFile.viewProvider.findElementAt(cursorIdx)
-		val configuration = createConfiguration(sourceElement,
-			XtendJunitMethodConfigurationProducer) as JUnitConfiguration
+		val configuration = createConfiguration(sourceElement, XtendJunitMethodConfigurationProducer)
 		assertEquals("XtendJunitClass", configuration.getPersistentData().MAIN_CLASS_NAME)
 		assertEquals("method", configuration.getPersistentData().TEST_OBJECT)
 		assertEquals("testMethod", configuration.getPersistentData().METHOD_NAME)
@@ -203,8 +200,7 @@ class TraceBasedConfigurationProducerTest extends XtendIdeaTestCase {
 		assertTrue(xtendFile instanceof BaseXtextFile)
 
 		val sourceElement = xtendFile.viewProvider.findElementAt(cursorIdx)
-		val configuration = createConfiguration(sourceElement,
-			XtendJunitMethodConfigurationProducer) as JUnitConfiguration
+		val configuration = createConfiguration(sourceElement, XtendJunitMethodConfigurationProducer)
 		assertEquals("XtendJunitClass", configuration.getPersistentData().MAIN_CLASS_NAME)
 		assertEquals("method", configuration.getPersistentData().TEST_OBJECT)
 		assertEquals("testMethod2", configuration.getPersistentData().METHOD_NAME)
@@ -221,13 +217,13 @@ class TraceBasedConfigurationProducerTest extends XtendIdeaTestCase {
 		}
 	}
 
-	def protected createConfiguration(PsiElement psiElement, Class<? extends RunConfigurationProducer<?>> clazz) {
+	def protected <T extends RunConfiguration> T createConfiguration(PsiElement psiElement, Class<? extends RunConfigurationProducer<T>> clazz) {
 		val context = createContext(psiElement);
 		val producer = RunConfigurationProducer.getInstance(clazz)
 		assertNotNull(producer)
 		val fromContext = producer.createConfigurationFromContext(context);
 		assertNotNull(fromContext);
-		return fromContext.getConfiguration()
+		return fromContext.getConfiguration() as T
 	}
 
 	def private ConfigurationContext createContext(@NotNull PsiElement psiClass) {
