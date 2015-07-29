@@ -361,6 +361,12 @@
             extensions="xpect">
     </provider>
   </extension>
+  <extension point="org.eclipse.team.core.fileTypes">
+    <fileTypes
+            extension="xpect"
+            type="text">
+    </fileTypes>
+  </extension>
   <extension
         point="org.eclipse.jdt.junit.runners.junitRunnerUI">
      <junitRunnerUIHandler

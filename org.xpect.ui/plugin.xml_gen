@@ -361,5 +361,11 @@
             extensions="xpect">
     </provider>
   </extension>
+  <extension point="org.eclipse.team.core.fileTypes">
+    <fileTypes
+            extension="xpect"
+            type="text">
+    </fileTypes>
+  </extension>
 
 </plugin>
