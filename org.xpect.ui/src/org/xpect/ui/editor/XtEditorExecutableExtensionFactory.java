@@ -20,10 +20,12 @@ import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.eclipse.xtext.ui.shared.Access;
 import org.osgi.framework.Bundle;
 import org.xpect.XpectJavaModel;
+import org.xpect.registry.ILanguageInfo;
 import org.xpect.ui.XpectPluginActivator;
 import org.xpect.ui.util.XpectUtil;
 import org.xpect.util.IXtInjectorProvider;
 import org.xpect.util.ReflectionUtil;
+import org.xpect.util.URIDelegationHandler;
 
 import com.google.inject.Injector;
 
@@ -42,6 +44,10 @@ public class XtEditorExecutableExtensionFactory extends AbstractGuiceAwareExecut
 		IFile file = getFileOfCurrentlyOpeningEditor();
 		if (file == null)
 			throw new RuntimeException("Could not determine which editor is currently being opened.");
+		String ext = new URIDelegationHandler().getOriginalFileExtension(file.getName());
+		ILanguageInfo info = ILanguageInfo.Registry.INSTANCE.getLanguageByFileExtension(ext);
+		if (info == null)
+			throw new RuntimeException("There is no Xtext-language installed for file extension '" + ext + "'.");
 		XpectJavaModel javaModel = XpectUtil.loadJavaModel(file);
 		URI uri = Access.getIStorage2UriMapper().get().getUri(file);
 		if (uri == null)
