@@ -134,24 +134,7 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 			Set<ILocationData> sourceLocations, 
 			boolean useForDebugging) {
 		this.state = state;
-		this.traceURIConverter = new ITraceURIConverter() {
-			
-			private Map<Resource, SourceRelativeURI> uriForTraceCache = newHashMap();
-			
-			@Override
-			public SourceRelativeURI getURIForTrace(IProjectConfig config, AbsoluteURI uri) {
-				return converter.getURIForTrace(config, uri);
-			}
-
-			@Override
-			public SourceRelativeURI getURIForTrace(Resource resource) {
-				if (!uriForTraceCache.containsKey(resource)) {
-					SourceRelativeURI uriForTrace = converter.getURIForTrace(resource);
-					uriForTraceCache.put(resource, uriForTrace);
-				}
-				return uriForTraceCache.get(resource);
-			}
-		};
+		this.traceURIConverter = converter;
 		this.locationProvider = locationProvider;
 		this.jvmModelAssociations = jvmModelAssociations;
 		this.children = Lists.newArrayList();
