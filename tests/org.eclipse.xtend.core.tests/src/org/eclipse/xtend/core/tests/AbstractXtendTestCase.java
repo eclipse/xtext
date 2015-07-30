@@ -127,12 +127,14 @@ public abstract class AbstractXtendTestCase extends Assert {
 	protected String getFileName(String string) {
 		Matcher packMatcher = Pattern.compile("package (\\S+)").matcher(string);
 		Matcher classMatcher = Pattern.compile("class (\\w+)").matcher(string);
-		String pathName = "";
-		if (packMatcher.find()) {
-			pathName = packMatcher.group(1).replace('.', '/') + "/";
+		if (classMatcher.find()) {
+			String className = classMatcher.group(1);
+			String pathName = "";
+			if (packMatcher.find() && packMatcher.end(0) < classMatcher.start(0)) {
+				pathName = packMatcher.group(1).replace('.', '/') + "/";
+			}
+			return pathName + className;
 		}
-		if (classMatcher.find())
-			return pathName + classMatcher.group(1);
 		return "Sample";
 	}
 	
