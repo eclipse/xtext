@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.tests.compiler.output;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Reader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -69,6 +70,16 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 		/* @NonNull */
 		protected InputStream getContents(/* @NonNull */ SourceRelativeURI uri, /* @NonNull */ IProjectConfig project) throws IOException {
 			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		protected Reader getContentsAsText(SourceRelativeURI uri, IProjectConfig projectConfig) throws IOException {
+			return null;
+		}
+
+		@Override
+		protected Reader getLocalContentsAsText(IProjectConfig projectConfig) throws IOException {
+			return null;
 		}
 		
 	}
