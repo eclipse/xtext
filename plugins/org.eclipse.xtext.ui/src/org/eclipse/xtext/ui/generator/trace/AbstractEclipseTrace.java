@@ -9,10 +9,15 @@ package org.eclipse.xtext.ui.generator.trace;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.Charset;
 
+import org.eclipse.core.resources.IEncodedStorage;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
@@ -58,14 +63,29 @@ public abstract class AbstractEclipseTrace extends AbstractTrace implements IEcl
 	}
 	
 	protected abstract IStorage findStorage(SourceRelativeURI srcRelativeLocation, IProject project);
-	
+
 	@Override
 	protected InputStream getContents(SourceRelativeURI uri, IProjectConfig projectConfig) throws IOException {
 		return getContents(uri, ((EclipseProjectConfig) projectConfig).getProject());
 	}
-	
+
 	protected abstract InputStream getContents(SourceRelativeURI uri, IProject project) throws IOException;
-	
+
+	@Override
+	protected Reader getContentsAsText(SourceRelativeURI uri, IProjectConfig projectConfig) throws IOException {
+		return getContentsAsText(uri, ((EclipseProjectConfig) projectConfig).getProject());
+	}
+
+	protected abstract Reader getContentsAsText(SourceRelativeURI uri, IProject projectConfig) throws IOException;
+
+	@Override
+	protected Reader getLocalContentsAsText(IProjectConfig projectConfig) throws IOException {
+		return getLocalContentsAsText(((EclipseProjectConfig) projectConfig).getProject());
+	}
+
+	protected abstract Reader getLocalContentsAsText(IProject project) throws IOException;
+
+	/* @Nullable */
 	@Override
 	public ILocationInEclipseResource getBestAssociatedLocation(ITextRegion region, IStorage associatedStorage) {
 		AbsoluteURI uri = getURIForStorage(associatedStorage);

@@ -15,6 +15,9 @@ import com.intellij.openapi.vfs.VirtualFile;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.Charset;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.OutputConfiguration;
@@ -145,6 +148,34 @@ public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
     VirtualFile _file = file.getFile();
     byte[] _contentsToByteArray = _file.contentsToByteArray();
     return new ByteArrayInputStream(_contentsToByteArray);
+  }
+  
+  @Override
+  public Reader getContentsAsText(final SourceRelativeURI uri, final IProjectConfig projectConfig) throws IOException {
+    Module _module = ((IdeaModuleConfig) projectConfig).getModule();
+    return this.getContentsAsText(uri, _module);
+  }
+  
+  public Reader getContentsAsText(final SourceRelativeURI uri, final Module project) throws IOException {
+    VirtualFileInProject _findVirtualFileInProject = this.findVirtualFileInProject(uri, project);
+    final VirtualFile file = _findVirtualFileInProject.getFile();
+    byte[] _contentsToByteArray = file.contentsToByteArray();
+    ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_contentsToByteArray);
+    Charset _charset = file.getCharset();
+    return new InputStreamReader(_byteArrayInputStream, _charset);
+  }
+  
+  @Override
+  protected Reader getLocalContentsAsText(final IProjectConfig projectConfig) throws IOException {
+    InputStreamReader _xblockexpression = null;
+    {
+      final VirtualFile file = this.localVirtualFile.getFile();
+      byte[] _contentsToByteArray = file.contentsToByteArray();
+      ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_contentsToByteArray);
+      Charset _charset = file.getCharset();
+      _xblockexpression = new InputStreamReader(_byteArrayInputStream, _charset);
+    }
+    return _xblockexpression;
   }
   
   @Override

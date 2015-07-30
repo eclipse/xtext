@@ -10,6 +10,8 @@ package org.eclipse.xtext.common.types.ui.trace;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -23,6 +25,8 @@ import org.eclipse.jdt.internal.compiler.util.Util;
 import org.eclipse.jdt.internal.core.JavaModelManager;
 import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
+
+import com.google.common.base.Charsets;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -68,4 +72,12 @@ public class ZipFileAwareTrace extends AbstractTraceWithoutStorage {
 		return null;
 	}
 	
+	@Override
+	protected Reader getContentsAsText(SourceRelativeURI uri, IProject project) {
+		InputStream contents = getContents(uri, project);
+		if (contents != null)
+			return new InputStreamReader(contents, Charsets.UTF_8);
+		return null;
+	}
+
 }

@@ -24,6 +24,8 @@ import org.eclipse.xtext.util.ITextRegionWithLineInformation
 import org.eclipse.xtext.workspace.IProjectConfig
 
 import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
+import java.io.Reader
+import java.io.InputStreamReader
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -100,9 +102,24 @@ class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
 		return getContents(uri, (projectConfig as IdeaModuleConfig).module);
 	}
 	
+	
 	def InputStream getContents(SourceRelativeURI uri, Module project) throws IOException {
 		val file = findVirtualFileInProject(uri, project)
 		return new ByteArrayInputStream(file.file.contentsToByteArray)
+	}
+	
+	override getContentsAsText(SourceRelativeURI uri, IProjectConfig projectConfig) throws IOException {
+		return getContentsAsText(uri, (projectConfig as IdeaModuleConfig).module);
+	}
+	
+	def Reader getContentsAsText(SourceRelativeURI uri, Module project) throws IOException {
+		val file = findVirtualFileInProject(uri, project).file
+		return new InputStreamReader(new ByteArrayInputStream(file.contentsToByteArray), file.charset)
+	}
+	
+	override protected getLocalContentsAsText(IProjectConfig projectConfig) throws IOException {
+		val file = localVirtualFile.file
+		new InputStreamReader(new ByteArrayInputStream(file.contentsToByteArray), file.charset)
 	}
 	
 	override ILocationInVirtualFile getBestAssociatedLocation(ITextRegion region, VirtualFileInProject associatedVirtualFile) {
@@ -160,5 +177,4 @@ class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
 	override IIdeaTrace getInverseTrace(AbsoluteURI uri) {
 		return super.getInverseTrace(uri) as IIdeaTrace
 	}
-	
 }
