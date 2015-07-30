@@ -169,7 +169,7 @@ public class DebuggerTest extends AbstractDebuggerTestCase {
   
   public void testTemplateExpression_for() {
     try {
-      Pair<String, String> _mappedTo = Pair.<String, String>of("MyClass.xtend", "\r\n\t\t\t\tclass MyClass {\r\n\t\t\t\t\tdef static void main(String[] args) {\r\n\t\t\t\t\t\tprintln(foo)\r\n\t\t\t\t\t}\r\n\r\n\t\t\t\t\tdef static foo() \'\'\'\r\n\t\t\t\t\t\t«FOR x : 1..3»\r\n\t\t\t\t\t\t\tHello «x»,\r\n\t\t\t\t\t\t\tThis is a second Line\r\n\t\t\t\t\t\t«ENDFOR»\r\n\t\t\t\t\t\'\'\'//END\r\n\t\t\t\t}\r\n\t\t");
+      Pair<String, String> _mappedTo = Pair.<String, String>of("MyClass.xtend", "\n\t\t\t\tclass MyClass {\n\t\t\t\t\tdef static void main(String[] args) {\n\t\t\t\t\t\tprintln(foo)\n\t\t\t\t\t}\n\n\t\t\t\t\tdef static foo() \'\'\'\n\t\t\t\t\t\t«FOR x : 1..3»\n\t\t\t\t\t\t\tHello «x»,\n\t\t\t\t\t\t\tThis is a second Line\n\t\t\t\t\t\t«ENDFOR»\n\t\t\t\t\t\'\'\'//END\n\t\t\t\t}\n\t\t");
       final VirtualFile file = this.addFile(_mappedTo);
       this.compile();
       this.addLineBreakpoint(file, 3);
@@ -184,7 +184,7 @@ public class DebuggerTest extends AbstractDebuggerTestCase {
   
   public void testTemplateExpression_if() {
     try {
-      Pair<String, String> _mappedTo = Pair.<String, String>of("MyClass.xtend", "\r\n\t\t\t\tclass MyClass {\r\n\t\t\t\t\tdef static void main(String[] args) {\r\n\t\t\t\t\t\tprintln(foo(\'xyz\'))\r\n\t\t\t\t\t}\r\n\t\t\t\t\r\n\t\t\t\t\tdef static foo(String text) \'\'\'\r\n\t\t\t\t\t\t«IF text.length>2»\r\n\t\t\t\t\t\t\tif «foo(\'xy\')»,\r\n\t\t\t\t\t\t«ELSEIF text.length==2»\r\n\t\t\t\t\t\t\telseif «foo(\'x\')»,\r\n\t\t\t\t\t\t«ELSE»\r\n\t\t\t\t\t\t\telse «text»\r\n\t\t\t\t\t\t«ENDIF»\r\n\t\t\t\t\t\'\'\'//END\r\n\t\t\t\t}\r\n\t\t");
+      Pair<String, String> _mappedTo = Pair.<String, String>of("MyClass.xtend", "\n\t\t\t\tclass MyClass {\n\t\t\t\t\tdef static void main(String[] args) {\n\t\t\t\t\t\tprintln(foo(\'xyz\'))\n\t\t\t\t\t}\n\t\t\t\t\n\t\t\t\t\tdef static foo(String text) \'\'\'\n\t\t\t\t\t\t«IF text.length>2»\n\t\t\t\t\t\t\tif «foo(\'xy\')»,\n\t\t\t\t\t\t«ELSEIF text.length==2»\n\t\t\t\t\t\t\telseif «foo(\'x\')»,\n\t\t\t\t\t\t«ELSE»\n\t\t\t\t\t\t\telse «text»\n\t\t\t\t\t\t«ENDIF»\n\t\t\t\t\t\'\'\'//END\n\t\t\t\t}\n\t\t");
       final VirtualFile file = this.addFile(_mappedTo);
       this.compile();
       this.addLineBreakpoint(file, 3);

@@ -358,9 +358,9 @@ public class XtendAutoEditTest extends AbstractXbaseAutoEditTest {
   }
   
   public void testGuillemets() {
-    this.configureByText("\r\n\t\t\tclass Foo {\r\n\t\t\t\tdef bar() {\r\n\t\t\t\t\t\'\'\'|\'\'\'\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t");
+    this.configureByText("\n\t\t\tclass Foo {\n\t\t\t\tdef bar() {\n\t\t\t\t\t\'\'\'|\'\'\'\n\t\t\t\t}\n\t\t\t}\n\t\t");
     this.myFixture.type("«");
-    this.assertState("\r\n\t\t\tclass Foo {\r\n\t\t\t\tdef bar() {\r\n\t\t\t\t\t\'\'\'«|»\'\'\'\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t");
+    this.assertState("\n\t\t\tclass Foo {\n\t\t\t\tdef bar() {\n\t\t\t\t\t\'\'\'«|»\'\'\'\n\t\t\t\t}\n\t\t\t}\n\t\t");
   }
   
   public void testEnterBetweenMethods_01() {
