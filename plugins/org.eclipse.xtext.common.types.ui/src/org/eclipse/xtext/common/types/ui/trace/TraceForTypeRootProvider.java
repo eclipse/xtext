@@ -9,6 +9,7 @@ package org.eclipse.xtext.common.types.ui.trace;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
@@ -17,6 +18,7 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IClassFile;
+import org.eclipse.jdt.core.IClasspathAttribute;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
@@ -35,6 +37,7 @@ import org.eclipse.xtext.ui.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 
+import com.google.common.base.Charsets;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -48,6 +51,9 @@ import com.google.inject.Singleton;
 public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 
 	private static final Logger log = Logger.getLogger(TraceForTypeRootProvider.class);
+	
+	// duplicate of org.eclipse.jdt.core.IClasspathAttribute.SOURCE_ATTACHMENT_ENCODING (introduced in JDT 2.8) to be compatible with older versions of JDT
+	private static final String SOURCE_ATTACHMENT_ENCODING = "source_encoding";
 
 	@Inject
 	private TraceRegionSerializer traceRegionSerializer;
@@ -66,11 +72,13 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 	
 	private Pair<ITypeRoot, IEclipseTrace> lruCache = null;
 
-	protected SourceRelativeURI getPathInFragmentRoot(final ITypeRoot derivedResource, String traceSimpleFileName) {
-		return new SourceRelativeURI(URI.createURI(derivedResource.getParent().getElementName().replace('.', '/') + "/" + traceSimpleFileName));
+	protected SourceRelativeURI getPathInFragmentRoot(final ITypeRoot derivedResource, String simpleFileName) {
+		if(simpleFileName == null)
+			return null;
+		return new SourceRelativeURI(URI.createURI(derivedResource.getParent().getElementName().replace('.', '/') + "/" + simpleFileName));
 	}
 
-	protected String getTraceSimpleFileName(final ITypeRoot derivedResource) {
+	protected String getJavaSimpleFileName(final ITypeRoot derivedResource) {
 		IType type = derivedResource.findPrimaryType();
 		if (type == null)
 			return null;
@@ -80,7 +88,7 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 
 		// the primary source in the .class file is .java (JSR-45 aka SMAP scenario)
 		if (sourceName.endsWith(".java")) {
-			return traceFileNameProvider.getTraceFromJava(sourceName);
+			return sourceName;
 		}
 
 		// xtend-as-primary-source-scenario.
@@ -89,7 +97,7 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 			int index = name.indexOf("$");
 			if (index > 0)
 				name = name.substring(0, index);
-			return traceFileNameProvider.getTraceFromJava(name + ".java");
+			return name + ".java";
 		}
 		return null;
 	}
@@ -112,6 +120,28 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 			current = current.getParent();
 		}
 		return null;
+	}
+	
+	protected Charset getSourceEncoding(final ITypeRoot derivedJavaType) {
+		IJavaElement current = derivedJavaType.getParent();
+		while (current != null) {
+			if (current instanceof IPackageFragmentRoot) {
+				IPackageFragmentRoot fragmentRoot = (IPackageFragmentRoot) current;
+				try {
+					// see org.eclipse.jdt.internal.core.ClasspathEntry.getSourceAttachmentEncoding()
+					IClasspathAttribute[] attributes = fragmentRoot.getResolvedClasspathEntry().getExtraAttributes();
+					for (int i = 0, length = attributes.length; i < length; i++) {
+						IClasspathAttribute attribute = attributes[i];
+						if (SOURCE_ATTACHMENT_ENCODING.equals(attribute.getName()))
+							return Charset.forName(attribute.getValue());
+					}
+				} catch (JavaModelException e) {
+				}
+				return Charsets.UTF_8;
+			}
+			current = current.getParent();
+		}
+		return Charsets.UTF_8;
 	}
 
 	protected boolean isZipFile(IPath path) {
@@ -156,6 +186,9 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 		if (sourcePath == null)
 			return null;
 		IProject project = classFile.getJavaProject().getProject();
+		final String javaSimpleFileName = getJavaSimpleFileName(classFile);
+		SourceRelativeURI localURI = getPathInFragmentRoot(classFile, javaSimpleFileName);
+		
 		class TraceRegionProvider implements ITraceRegionProvider {
 			
 			private AbstractTraceWithoutStorage trace;
@@ -166,9 +199,9 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 			
 			@Override
 			public AbstractTraceRegion getTraceRegion() {
-				String traceSimpleFileName = getTraceSimpleFileName(classFile);
-				if (traceSimpleFileName == null)
+				if (javaSimpleFileName == null)
 					return null;
+				String traceSimpleFileName = traceFileNameProvider.getTraceFromJava(javaSimpleFileName);
 				SourceRelativeURI traceURI = getPathInFragmentRoot(classFile, traceSimpleFileName);
 				try {
 					InputStream contents = trace.getContents(traceURI, trace.getLocalProject());
@@ -189,12 +222,14 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 			ZipFileAwareTrace zipFileAwareTrace = zipFileAwareTraceProvider.get();
 			zipFileAwareTrace.setProject(project);
 			zipFileAwareTrace.setZipFilePath(sourcePath);
+			zipFileAwareTrace.setLocalURI(localURI);
 			zipFileAwareTrace.setTraceRegionProvider(new TraceRegionProvider(zipFileAwareTrace));
 			return zipFileAwareTrace;
 		} else {
 			FolderAwareTrace folderAwareTrace = folderAwareTraceProvider.get();
 			folderAwareTrace.setProject(project);
 			folderAwareTrace.setRootFolder(sourcePath.toString());
+			folderAwareTrace.setLocalURI(localURI);
 			folderAwareTrace.setTraceRegionProvider(new TraceRegionProvider(folderAwareTrace));
 			return folderAwareTrace;
 		}

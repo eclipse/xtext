@@ -9,6 +9,7 @@ package org.eclipse.xtext.builder.trace;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Reader;
 
 import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
@@ -50,6 +51,16 @@ public class BaseTraceTest {
 			@Override
 			/* @NonNull */
 			protected InputStream getContents(/* @NonNull */ SourceRelativeURI uri, /* @NonNull */ IProjectConfig project) throws IOException {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			protected Reader getContentsAsText(SourceRelativeURI uri, IProjectConfig project) throws IOException {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			protected Reader getLocalContentsAsText(IProjectConfig projectConfig) throws IOException {
 				throw new UnsupportedOperationException();
 			}
 		};
