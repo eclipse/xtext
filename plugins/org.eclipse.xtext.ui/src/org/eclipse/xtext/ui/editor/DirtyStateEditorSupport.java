@@ -502,6 +502,14 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 		if(updateEditorStateJob != null)
 			updateEditorStateJob.join();
 	}
+	
+	/**
+	 * @since 2.9
+	 * @noreference This method is not intended to be referenced by clients. Just for testing
+	 */
+	public UpdateEditorStateJob getUpdateEditorStateJob() {
+		return updateEditorStateJob;
+	}
 
 	protected UpdateEditorStateJob createUpdateEditorJob() {
 		// default is sequential execution to ensure a minimum number of

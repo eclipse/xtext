@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.refactoring.ui;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IWorkspace;
@@ -17,7 +18,9 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
@@ -46,7 +49,7 @@ public class SyncUtil {
 
 	@Inject(optional = true)
 	private IWorkspace workspace;
-
+	
 	public void totalSync(final boolean saveAll, boolean useProgressDialog) throws InvocationTargetException,
 			InterruptedException {
 		totalSync(saveAll, useProgressDialog, true);
@@ -146,6 +149,37 @@ public class SyncUtil {
 		}
 	}
 	
+	public void expectDirtyStateUpdate(XtextEditor editor, Runnable runnable) {
+		final Job dirtyStateEditorJob = editor.getDirtyStateEditorSupport().getUpdateEditorStateJob();
+		final AtomicBoolean done = new AtomicBoolean(false);
+		JobChangeAdapter listener = new JobChangeAdapter() {
+			@Override
+			public void done(IJobChangeEvent event) {
+				if (event.getJob() == dirtyStateEditorJob) {
+					done.set(true);
+				}
+			}
+		};
+		try {
+			Job.getJobManager().addJobChangeListener(listener);
+			runnable.run();
+			long before = System.currentTimeMillis();
+			while (!done.get() && System.currentTimeMillis() < before + 5000) {
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+				}
+			}
+		} finally {
+			Job.getJobManager().removeJobChangeListener(listener);
+		}
+	}
+	
+	/**
+	 * This method will return immediately when the job hasn't been scheduled yet.
+	 * @deprecated use {@link #expectDirtyStateUpdate(XtextEditor, Runnable)} instead.
+	 */
+	@Deprecated()
 	public void waitForDirtyStateUpdater(XtextEditor editor) {
 		DirtyStateEditorSupport dirtyStateEditorSupport = editor.getDirtyStateEditorSupport();
 		try {
