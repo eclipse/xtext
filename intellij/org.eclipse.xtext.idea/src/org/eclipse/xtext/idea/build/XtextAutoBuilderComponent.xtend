@@ -106,11 +106,11 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	Map<Module, Source2GeneratedMapping> module2GeneratedMapping = newHashMap()
 	
 	def Iterable<URI> getGeneratedSources(URI source) {
-		return module2GeneratedMapping.values.map[getGenerated(source)].flatten
+		return module2GeneratedMapping.values.map[getGenerated(source)].flatten.toList
 	}
 	
 	def Iterable<URI> getSource4GeneratedSource(URI generated) {
-		return module2GeneratedMapping.values.map[getSource(generated)].flatten
+		return module2GeneratedMapping.values.map[getSource(generated)].flatten.toList
 	}
 	
 	new(Project project) {
@@ -266,7 +266,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	
 	protected def doCleanBuild() {
 		chunkedResourceDescriptions = chunkedResourceDescriptionsProvider.get
-		safeDeleteUris(module2GeneratedMapping.values.map[allGenerated].flatten)
+		safeDeleteUris(module2GeneratedMapping.values.map[allGenerated].flatten.toList)
 		module2GeneratedMapping.clear
 		queueAllResources
 		doRunBuild
@@ -282,22 +282,28 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		doRunBuild
 	}
 	
-	protected def void safeDeleteUris(Iterable<URI> uris) {
-		val app = ApplicationManager.application
-		val Runnable runnable = [
-			try {
-				ignoreIncomingEvents = true
-				for (uri : uris) {
-					uri.virtualFile?.delete(null)
-				}
-			} finally {
-				ignoreIncomingEvents = false
+	protected def void safeDeleteUris(List<URI> uris) {
+		if (!uris.isEmpty) {
+			val app = ApplicationManager.application
+			val Runnable runnable = [
+					for (uri : uris) {
+						val file = uri.virtualFile
+						if (file!== null && file.exists) {
+							fileDeleted(file)
+							try {
+								ignoreIncomingEvents = true
+								file.delete(XtextAutoBuilderComponent.this)	
+							} finally {
+								ignoreIncomingEvents = false
+							}
+						}
+					}
+			]
+			if (app.isDispatchThread) {
+				app.runWriteAction(runnable)
+			} else {
+				app.invokeLater[app.runWriteAction(runnable)]
 			}
-		]
-		if (app.isDispatchThread) {
-			app.runWriteAction(runnable)
-		} else {
-			app.invokeLater[app.runWriteAction(runnable)]
 		}
 	}
 	

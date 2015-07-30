@@ -13,6 +13,8 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import java.util.HashSet
 import java.util.Set
+import com.google.common.collect.Lists
+import java.util.List
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -54,16 +56,16 @@ import java.util.Set
 		]
 	}
 	
-	def Iterable<URI> getGenerated(URI source) {
-		source2generated.get(source)
+	def List<URI> getGenerated(URI source) {
+		return Lists.newArrayList(source2generated.get(source))
 	}
 
-	def Iterable<URI> getSource(URI generated) {
-		generated2source.get(generated)
+	def List<URI> getSource(URI generated) {
+		return Lists.newArrayList(generated2source.get(generated))
 	}
 	
-	def Iterable<URI> getAllGenerated() {
-		generated2source.keySet
+	def List<URI> getAllGenerated() {
+		return Lists.newArrayList(generated2source.keySet)
 	}
 	
 }

@@ -54,9 +54,9 @@ class VirtualFileURIUtil {
 		}
 		val parent = getOrCreateFile(uri.trimSegments(1), true)
 		if (isDirectory) {
-			return parent.createChildDirectory(null, uri.lastSegment)
+			return parent.createChildDirectory(uri, uri.lastSegment)
 		} else {
-			return parent.createChildData(null, uri.lastSegment)
+			return parent.createChildData(uri, uri.lastSegment)
 		}
 	}
 		

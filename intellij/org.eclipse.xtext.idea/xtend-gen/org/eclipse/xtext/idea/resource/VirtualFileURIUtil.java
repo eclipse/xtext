@@ -68,10 +68,10 @@ public class VirtualFileURIUtil {
       final VirtualFile parent = VirtualFileURIUtil.getOrCreateFile(_trimSegments, true);
       if (isDirectory) {
         String _lastSegment = uri.lastSegment();
-        return parent.createChildDirectory(null, _lastSegment);
+        return parent.createChildDirectory(uri, _lastSegment);
       } else {
         String _lastSegment_1 = uri.lastSegment();
-        return parent.createChildData(null, _lastSegment_1);
+        return parent.createChildData(uri, _lastSegment_1);
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
