@@ -161,19 +161,23 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
   }
   
   private Object assertNoErrors(final Resource res) {
-    final List<Issue> issues = this.validator.validate(res, CheckMode.ALL, null);
-    String _string = issues.toString();
-    final Function1<Issue, Boolean> _function = new Function1<Issue, Boolean>() {
-      @Override
-      public Boolean apply(final Issue it) {
-        Severity _severity = it.getSeverity();
-        return Boolean.valueOf(Objects.equal(_severity, Severity.ERROR));
-      }
-    };
-    Iterable<Issue> _filter = IterableExtensions.<Issue>filter(issues, _function);
-    boolean _isEmpty = IterableExtensions.isEmpty(_filter);
-    Assert.assertTrue(_string, _isEmpty);
-    return null;
+    try {
+      final List<Issue> issues = this.validator.validate(res, CheckMode.ALL, null);
+      String _string = issues.toString();
+      final Function1<Issue, Boolean> _function = new Function1<Issue, Boolean>() {
+        @Override
+        public Boolean apply(final Issue it) {
+          Severity _severity = it.getSeverity();
+          return Boolean.valueOf(Objects.equal(_severity, Severity.ERROR));
+        }
+      };
+      Iterable<Issue> _filter = IterableExtensions.<Issue>filter(issues, _function);
+      boolean _isEmpty = IterableExtensions.isEmpty(_filter);
+      Assert.assertTrue(_string, _isEmpty);
+      return null;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   private XtextEditor waitForReconciler(final XtextEditor editor) {
@@ -189,18 +193,22 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
   }
   
   private Object assertHasErrors(final Resource res, final String message) {
-    final List<Issue> issues = this.validator.validate(res, CheckMode.ALL, null);
-    String _string = issues.toString();
-    final Function1<Issue, String> _function = new Function1<Issue, String>() {
-      @Override
-      public String apply(final Issue it) {
-        return it.getMessage();
-      }
-    };
-    List<String> _map = ListExtensions.<Issue, String>map(issues, _function);
-    boolean _contains = _map.contains(message);
-    Assert.assertTrue(_string, _contains);
-    return null;
+    try {
+      final List<Issue> issues = this.validator.validate(res, CheckMode.ALL, null);
+      String _string = issues.toString();
+      final Function1<Issue, String> _function = new Function1<Issue, String>() {
+        @Override
+        public String apply(final Issue it) {
+          return it.getMessage();
+        }
+      };
+      List<String> _map = ListExtensions.<Issue, String>map(issues, _function);
+      boolean _contains = _map.contains(message);
+      Assert.assertTrue(_string, _contains);
+      return null;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
@@ -233,6 +241,8 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
       _builder.newLine();
       final String model = _builder.toString();
       final XtextEditor editor = this._workbenchTestHelper.openEditor("foo/foo.xtend", model);
+      this.waitForReconciler(editor);
+      this._syncUtil.waitForBuild(null);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package foo");
       _builder_1.newLine();
@@ -267,11 +277,8 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       final XtextEditor consumer = this._workbenchTestHelper.openEditor("foo/bar.xtend", _builder_1.toString());
-      this.waitForReconciler(editor);
       this.waitForReconciler(consumer);
-      IXtextDocument _document = consumer.getDocument();
-      _document.replace(0, 1, "p");
-      this._syncUtil.waitForDirtyStateUpdater(consumer);
+      this._syncUtil.waitForBuild(null);
       this.assertHasNoErrors(consumer);
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("package foo");
@@ -290,17 +297,35 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
       _builder_2.append("}");
       _builder_2.newLine();
       final String replaceModel = _builder_2.toString();
-      IXtextDocument _document_1 = editor.getDocument();
-      int _length = model.length();
-      _document_1.replace(0, _length, replaceModel);
-      this._workbenchTestHelper.saveEditor(editor, false);
-      this._syncUtil.waitForDirtyStateUpdater(consumer);
+      final Runnable _function = new Runnable() {
+        @Override
+        public void run() {
+          try {
+            IXtextDocument _document = editor.getDocument();
+            int _length = model.length();
+            _document.replace(0, _length, replaceModel);
+            DirtyStateEditorSupportTest.this.waitForReconciler(editor);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      this._syncUtil.expectDirtyStateUpdate(consumer, _function);
       this.assertHasErrors(consumer);
-      IXtextDocument _document_2 = editor.getDocument();
-      int _length_1 = replaceModel.length();
-      _document_2.replace(0, _length_1, model);
-      this._workbenchTestHelper.saveEditor(editor, false);
-      this._syncUtil.waitForDirtyStateUpdater(consumer);
+      final Runnable _function_1 = new Runnable() {
+        @Override
+        public void run() {
+          try {
+            IXtextDocument _document = editor.getDocument();
+            int _length = replaceModel.length();
+            _document.replace(0, _length, model);
+            DirtyStateEditorSupportTest.this.waitForReconciler(editor);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      this._syncUtil.expectDirtyStateUpdate(consumer, _function_1);
       this.assertHasNoErrors(consumer);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
