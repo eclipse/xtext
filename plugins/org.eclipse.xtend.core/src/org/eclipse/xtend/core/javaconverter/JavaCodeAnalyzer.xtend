@@ -7,10 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.javaconverter
 
+import com.google.inject.Inject
 import java.util.Collections
 import java.util.List
-import org.eclipse.jdt.core.JavaCore
-import org.eclipse.jdt.core.dom.AST
 import org.eclipse.jdt.core.dom.ASTNode
 import org.eclipse.jdt.core.dom.ASTParser
 import org.eclipse.jdt.core.dom.Block
@@ -25,15 +24,10 @@ import org.eclipse.xtend.lib.annotations.Accessors
  * @author dhuebner - Initial contribution and API
  */
 class JavaCodeAnalyzer {
-
-	String complianceLevel = "1.6"
+	@Inject ASTParserFactory parserFactory
 
 	def JavaParseResult<? extends ASTNode> determinateJavaType(String javaCode) {
-		return determinateJavaType(javaCode, complianceLevel)
-	}
-
-	def JavaParseResult<? extends ASTNode> determinateJavaType(String javaCode, String compilerCompliance) {
-		var ASTParser parser = createDefaultJavaParser(compilerCompliance)
+		var ASTParser parser = parserFactory.createDefaultJavaParser(parserFactory.minParserApiLevel)
 
 		parser.setSource(javaCode.toCharArray())
 		parser.setStatementsRecovery(true)
@@ -68,27 +62,6 @@ class JavaCodeAnalyzer {
 			return new JavaParseResult<Expression>(javaCode, ASTParser.K_EXPRESSION, Collections.singletonList(root))
 		}
 		return null
-	}
-
-	def createDefaultJavaParser() {
-		return createDefaultJavaParser(complianceLevel)
-	}
-
-	def createDefaultJavaParser(String compilerCompliance) {
-		val parser = ASTParser.newParser(asJLS(compilerCompliance))
-		val options = JavaCore.getOptions()
-		JavaCore.setComplianceOptions(compilerCompliance, options)
-		options.put(JavaCore.COMPILER_DOC_COMMENT_SUPPORT, JavaCore.ENABLED)
-		parser.compilerOptions = options
-		return parser
-	}
-	
-	def static int asJLS(String compilerCompliance) {
-		switch(compilerCompliance) {
-			case "1.7" : 4
-			case "1.8" : 8
-			default: AST.JLS3
-		}
 	}
 
 	@Accessors(PUBLIC_GETTER)

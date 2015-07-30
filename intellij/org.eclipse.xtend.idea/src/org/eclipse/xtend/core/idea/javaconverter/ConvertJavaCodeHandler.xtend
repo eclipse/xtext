@@ -20,6 +20,7 @@ import com.intellij.openapi.progress.ProgressIndicator
 import com.intellij.openapi.progress.ProgressManager
 import com.intellij.openapi.progress.Task
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.roots.ProjectRootManager
 import com.intellij.openapi.util.Computable
 import com.intellij.psi.PsiDirectory
 import com.intellij.psi.PsiElement
@@ -56,20 +57,20 @@ class ConvertJavaCodeHandler implements RefactoringActionHandler {
 		runJavaConverter(elements.collectJavaFiles(newHashSet()), CommonDataKeys.PROJECT.getData(dataContext))
 	}
 
-	def Collection<PsiFile> collectJavaFiles(PsiElement[] elements, Set<PsiFile> collector) {
+	def Collection<PsiJavaFile> collectJavaFiles(PsiElement[] elements, Set<PsiJavaFile> collector) {
 		elements.forEach [
 			if (it instanceof PsiJavaFile) {
 				collector.add(it)
 			} else if (it instanceof PsiDirectory) {
 				collector.addAll(it.children.collectJavaFiles(collector))
 			} else if (it.containingFile instanceof PsiJavaFile) {
-				collector.add(it.containingFile)
+				collector.add(it.containingFile as PsiJavaFile)
 			}
 		]
 		return collector
 	}
 
-	def runJavaConverter(Collection<PsiFile> files, Project project) {
+	def runJavaConverter(Collection<PsiJavaFile> files, Project project) {
 		val Map<PsiFile, ConversionResult> coversionResult = newHashMap
 		var Task.Backgroundable task = new Task.Backgroundable(project, "Conversion...", true) {
 			var done = 0
@@ -83,7 +84,10 @@ class ConvertJavaCodeHandler implements RefactoringActionHandler {
 					indicator.text = "Converting " + javaFile.name
 					val jc = jcProvider.get()
 					val javaSrc = ApplicationManager.application.runReadAction([javaFile.text] as Computable<String>)
-					coversionResult.put(javaFile, jc.toXtend(javaFile.virtualFile.nameWithoutExtension, javaSrc))
+					val context = ProjectRootManager.getInstance(project).getFileIndex().getModuleForFile(
+						javaFile.virtualFile)
+					coversionResult.put(javaFile,
+						jc.toXtend(javaFile.virtualFile.nameWithoutExtension, javaSrc, context))
 					done++
 					indicator.fraction = done as double / files.size
 				]
