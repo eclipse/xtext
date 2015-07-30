@@ -87,4 +87,64 @@ class CompilerBug473781Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
+	@Test def test_04() {
+		'''
+			class C {
+				def void foo(Throwable t) {
+					throw t
+				}
+				def void someMethod() {
+					foo(new Throwable)
+				}
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Exceptions;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public void foo(final Throwable t) {
+			    try {
+			      throw t;
+			    } catch (Throwable _e) {
+			      throw Exceptions.sneakyThrow(_e);
+			    }
+			  }
+			  
+			  public void someMethod() {
+			    Throwable _throwable = new Throwable();
+			    this.foo(_throwable);
+			  }
+			}
+		''')
+	}
+	
+	@Test def test_05() {
+		'''
+			class C {
+				def void foo(Throwable t) {
+					if (t instanceof Error) {
+						throw t
+					}
+				}
+				def void someMethod() {
+					foo(new Throwable)
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  public void foo(final Throwable t) {
+			    if ((t instanceof Error)) {
+			      throw ((Error)t);
+			    }
+			  }
+			  
+			  public void someMethod() {
+			    Throwable _throwable = new Throwable();
+			    this.foo(_throwable);
+			  }
+			}
+		''')
+	}
+	
 }
