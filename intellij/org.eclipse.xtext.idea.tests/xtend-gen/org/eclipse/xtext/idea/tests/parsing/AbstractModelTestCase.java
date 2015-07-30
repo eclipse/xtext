@@ -15,7 +15,6 @@ import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.vfs.VirtualFile;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import javax.inject.Provider;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -24,7 +23,6 @@ import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.idea.lang.BaseXtextASTFactory;
 import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider;
-import org.eclipse.xtext.idea.resource.PsiToEcoreTransformator;
 import org.eclipse.xtext.idea.tests.LibraryUtil;
 import org.eclipse.xtext.idea.tests.LightToolingTest;
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
@@ -54,10 +52,6 @@ public class AbstractModelTestCase extends LightToolingTest implements ModelChec
   
   @Inject
   @Accessors(AccessorType.PROTECTED_GETTER)
-  private Provider<PsiToEcoreTransformator> psiToEcoreTransformatorProvider;
-  
-  @Inject
-  @Accessors(AccessorType.PROTECTED_GETTER)
   @Extension
   private XtextResourceAsserts xtextResourceAsserts;
   
@@ -74,7 +68,7 @@ public class AbstractModelTestCase extends LightToolingTest implements ModelChec
   public XtextResource checkResource(final String code, final boolean validate) {
     XtextResource _xblockexpression = null;
     {
-      this.checkModel(code);
+      this.createFile(null, code);
       if (validate) {
         XtextResource _actualResource = this.getActualResource();
         this.validationHelper.assertNoErrors(_actualResource);
@@ -86,9 +80,14 @@ public class AbstractModelTestCase extends LightToolingTest implements ModelChec
   
   @Override
   public <T extends EObject> T checkModel(final String code, final boolean validate) {
+    return this.<T>checkModel(null, code, validate);
+  }
+  
+  @Override
+  public <T extends EObject> T checkModel(final String path, final String code, final boolean validate) {
     T _xblockexpression = null;
     {
-      this.checkModel(code);
+      this.createFile(path, code);
       XtextResource _actualResource = this.getActualResource();
       EList<EObject> _contents = _actualResource.getContents();
       EObject _head = IterableExtensions.<EObject>head(_contents);
@@ -101,8 +100,12 @@ public class AbstractModelTestCase extends LightToolingTest implements ModelChec
     return _xblockexpression;
   }
   
-  protected void checkModel(final String code) {
-    this.configureByText(code);
+  protected void createFile(final String path, final String code) {
+    if ((path == null)) {
+      this.configureByText(code);
+    } else {
+      this.configureByText(path, code);
+    }
     final XtextResource actualResource = this.getActualResource();
     final XtextResource expectedResource = this.createExpectedResource();
     this.xtextResourceAsserts.assertResource(expectedResource, actualResource);
@@ -152,11 +155,6 @@ public class AbstractModelTestCase extends LightToolingTest implements ModelChec
   @Pure
   protected IdeaResourceSetProvider getResourceSetProvider() {
     return this.resourceSetProvider;
-  }
-  
-  @Pure
-  protected Provider<PsiToEcoreTransformator> getPsiToEcoreTransformatorProvider() {
-    return this.psiToEcoreTransformatorProvider;
   }
   
   @Pure

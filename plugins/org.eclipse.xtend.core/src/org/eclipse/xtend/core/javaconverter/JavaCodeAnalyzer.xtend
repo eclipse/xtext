@@ -27,11 +27,7 @@ class JavaCodeAnalyzer {
 	@Inject ASTParserFactory parserFactory
 
 	def JavaParseResult<? extends ASTNode> determinateJavaType(String javaCode) {
-		return determinateJavaType(javaCode, parserFactory.defaultCompliancelevel)
-	}
-
-	def JavaParseResult<? extends ASTNode> determinateJavaType(String javaCode, String compilerCompliance) {
-		var ASTParser parser = parserFactory.createDefaultJavaParser(compilerCompliance)
+		var ASTParser parser = parserFactory.createDefaultJavaParser(parserFactory.minParserApiLevel)
 
 		parser.setSource(javaCode.toCharArray())
 		parser.setStatementsRecovery(true)

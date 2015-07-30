@@ -186,6 +186,15 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
     return this.myFixture.configureByText(this.fileType, _unix);
   }
   
+  protected void configureByText(final String path, final String code) {
+    String _defaultExtension = this.fileType.getDefaultExtension();
+    String _plus = ((path + ".") + _defaultExtension);
+    String _unix = LineDelimiters.toUnix(code);
+    final PsiFile psiFile = this.myFixture.addFileToProject(_plus, _unix);
+    VirtualFile _virtualFile = psiFile.getVirtualFile();
+    this.myFixture.configureFromExistingVirtualFile(_virtualFile);
+  }
+  
   protected LookupElement[] complete(final String text) {
     LookupElement[] _xblockexpression = null;
     {

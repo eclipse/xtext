@@ -46,9 +46,9 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   @Inject
   private Provider<JavaConverter> javaConverterProvider;
   
-  private JavaConverter j2x;
+  protected JavaConverter j2x;
   
-  private static boolean DUMP = false;
+  protected static boolean DUMP = false;
   
   @Before
   public void setUp() {
@@ -59,7 +59,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   @Test
   public void testSimpleCalssDeclarationCase() throws Exception {
     String javaCode = "package pack; import java.lang.Object; public class JavaToConvert<T,U> {}";
-    XtendFile xtendFile = this.toValidXtendFile("JavaToConvert", javaCode);
+    XtendFile xtendFile = this.toValidXtendFile("pack/JavaToConvert", javaCode);
     String _package = xtendFile.getPackage();
     Assert.assertEquals("pack", _package);
     XImportSection _importSection = xtendFile.getImportSection();
@@ -141,7 +141,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     XtendClass xtendClazz = this.toValidXtendClass(_builder.toString());
     this.checkVisibility(xtendClazz);
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("public class JavaToConvert {");
+    _builder_1.append("public class JavaToConvert2 {");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("private static String priv;");
@@ -1002,7 +1002,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   @Test
   public void testStaticImportCase() throws Exception {
     XtendClass xtendClazz = this.toValidXtendClass(
-      "package foo; import static java.awt.AWTEvent.*; public class Test { long o= ACTION_EVENT_MASK;}");
+      "import static java.awt.AWTEvent.*; public class Test { long o= ACTION_EVENT_MASK;}");
     EList<XtendMember> _members = xtendClazz.getMembers();
     XtendMember _get = _members.get(0);
     XtendField xtendMember = ((XtendField) _get);
@@ -1064,11 +1064,12 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   @Test
   public void testStaticAccessCase2() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;");
+    _builder.append("import java.util.Map;");
     _builder.newLine();
-    _builder.append("import org.eclipse.emf.ecore.impl.MinimalEObjectImpl.Container;");
+    _builder.append("import java.util.Map.Entry;");
     _builder.newLine();
-    _builder.append("public class Test extends MinimalEObjectImpl.Container{}");
+    _builder.append("public abstract class Test implements Map.Entry<String,String>{}");
+    _builder.newLine();
     XtendClass xtendClazz = this.toValidXtendClass(_builder.toString());
     Assert.assertNotNull(xtendClazz);
   }

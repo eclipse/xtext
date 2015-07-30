@@ -14,71 +14,164 @@ import java.net.URLClassLoader;
 import java.util.Hashtable;
 import java.util.List;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.core.dom.AST;
+import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTParser;
+import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 /**
  * @author dhuebner - Initial contribution and API
  */
 @SuppressWarnings("all")
 public class ASTParserFactory {
-  private String complianceLevel = "1.6";
+  @Data
+  public static class ASTParserWrapper {
+    private final String targetLevel;
+    
+    private final ASTParser parser;
+    
+    public ASTNode createAST() {
+      return this.parser.createAST(null);
+    }
+    
+    public void setKind(final int i) {
+      this.parser.setKind(i);
+    }
+    
+    public void setSource(final char[] cs) {
+      this.parser.setSource(cs);
+    }
+    
+    public void setUnitName(final String string) {
+      this.parser.setUnitName(string);
+    }
+    
+    public ASTParserWrapper(final String targetLevel, final ASTParser parser) {
+      super();
+      this.targetLevel = targetLevel;
+      this.parser = parser;
+    }
+    
+    @Override
+    @Pure
+    public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + ((this.targetLevel== null) ? 0 : this.targetLevel.hashCode());
+      result = prime * result + ((this.parser== null) ? 0 : this.parser.hashCode());
+      return result;
+    }
+    
+    @Override
+    @Pure
+    public boolean equals(final Object obj) {
+      if (this == obj)
+        return true;
+      if (obj == null)
+        return false;
+      if (getClass() != obj.getClass())
+        return false;
+      ASTParserFactory.ASTParserWrapper other = (ASTParserFactory.ASTParserWrapper) obj;
+      if (this.targetLevel == null) {
+        if (other.targetLevel != null)
+          return false;
+      } else if (!this.targetLevel.equals(other.targetLevel))
+        return false;
+      if (this.parser == null) {
+        if (other.parser != null)
+          return false;
+      } else if (!this.parser.equals(other.parser))
+        return false;
+      return true;
+    }
+    
+    @Override
+    @Pure
+    public String toString() {
+      ToStringBuilder b = new ToStringBuilder(this);
+      b.add("targetLevel", this.targetLevel);
+      b.add("parser", this.parser);
+      return b.toString();
+    }
+    
+    @Pure
+    public String getTargetLevel() {
+      return this.targetLevel;
+    }
+    
+    @Pure
+    public ASTParser getParser() {
+      return this.parser;
+    }
+  }
   
-  protected ASTParser createDefaultJavaParser(final String compilerCompliance) {
-    int _asJLS = ASTParserFactory.asJLS(compilerCompliance);
-    final ASTParser parser = ASTParser.newParser(_asJLS);
+  protected final String minParserApiLevel = "1.6";
+  
+  protected final ASTParser createDefaultJavaParser(final String javaVersion) {
+    ASTParser parser = null;
     final Hashtable options = JavaCore.getOptions();
-    JavaCore.setComplianceOptions(compilerCompliance, options);
+    try {
+      int _asJLS = ASTParserFactory.asJLS(javaVersion);
+      ASTParser _newParser = ASTParser.newParser(_asJLS);
+      parser = _newParser;
+      JavaCore.setComplianceOptions(javaVersion, options);
+    } catch (final Throwable _t) {
+      if (_t instanceof IllegalArgumentException) {
+        final IllegalArgumentException e = (IllegalArgumentException)_t;
+        int _asJLS_1 = ASTParserFactory.asJLS(this.minParserApiLevel);
+        ASTParser _newParser_1 = ASTParser.newParser(_asJLS_1);
+        parser = _newParser_1;
+        JavaCore.setComplianceOptions(this.minParserApiLevel, options);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
     options.put(JavaCore.COMPILER_DOC_COMMENT_SUPPORT, JavaCore.ENABLED);
     parser.setCompilerOptions(options);
+    parser.setStatementsRecovery(true);
+    parser.setResolveBindings(true);
+    parser.setBindingsRecovery(true);
     return parser;
   }
   
-  public static int asJLS(final String compilerCompliance) {
+  public static int asJLS(final String javaVersion) {
     int _switchResult = (int) 0;
     boolean _matched = false;
     if (!_matched) {
-      if (Objects.equal(compilerCompliance, "1.7")) {
+      if (Objects.equal(javaVersion, "1.7")) {
         _matched=true;
         _switchResult = 4;
       }
     }
     if (!_matched) {
-      if (Objects.equal(compilerCompliance, "1.8")) {
+      if (Objects.equal(javaVersion, "1.8")) {
         _matched=true;
         _switchResult = 8;
       }
     }
     if (!_matched) {
-      _switchResult = AST.JLS3;
+      _switchResult = 3;
     }
     return _switchResult;
   }
   
-  public String defaultCompliancelevel() {
-    return this.complianceLevel;
-  }
-  
   /**
-   * @param compilerCompliance compliance level when differs from the {@link #defaultCompliancelevel()}
    * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject or Module or null)
    */
-  public ASTParser createJavaParser(final String compilerCompliance, final Object context) {
-    final ASTParser parser = this.createDefaultJavaParser(compilerCompliance);
+  public ASTParserFactory.ASTParserWrapper createJavaParser(final Object context) {
+    String targetJavaVersion = System.getProperty("java.specification.version");
+    if ((targetJavaVersion == null)) {
+      targetJavaVersion = this.minParserApiLevel;
+    }
+    final ASTParser parser = this.createDefaultJavaParser(targetJavaVersion);
     this.provideCustomEnvironment(parser);
-    return parser;
-  }
-  
-  /**
-   * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject or Module or null)
-   */
-  public ASTParser createJavaParser(final Object classPathContext) {
-    String _defaultCompliancelevel = this.defaultCompliancelevel();
-    return this.createJavaParser(_defaultCompliancelevel, classPathContext);
+    return new ASTParserFactory.ASTParserWrapper(targetJavaVersion, parser);
   }
   
   /**
