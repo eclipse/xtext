@@ -18,7 +18,9 @@ import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.containers.JavaProjectsState;
+import org.eclipse.xtext.ui.containers.WorkspaceProjectsState;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
@@ -33,12 +35,17 @@ public class JdtIndexedJvmTypeAccess extends IndexedJvmTypeAccess {
 	@Inject
 	private JavaProjectsState javaProjectsState;
 	
+	@Inject
+	private WorkspaceProjectsState plainProjectsState;
+	
 	@Override
 	protected EObject findAccessibleType(String fragment, ResourceSet resourceSet,
 			Iterator<IEObjectDescription> fromIndex) {
 		// we know that the iterator is not empty thus we can directly obtain the handles et al without additional guards
 		IJavaProject javaProject = javaProjectProvider.getJavaProject(resourceSet);
-		List<String> allVisibleContainerHandles = javaProjectsState.getVisibleContainerHandles(javaProject.getHandleIdentifier());
+		List<String> allVisibleContainerHandles = Lists.newArrayList(javaProjectsState.getVisibleContainerHandles(javaProject.getHandleIdentifier()));
+		// some models are not in source folders thus we also use the WorkspaceProjectsState (e.g. relevant for Xcore)
+		allVisibleContainerHandles.addAll(plainProjectsState.getVisibleContainerHandles(javaProject.getElementName()));
 		List<String> visibleContainerHandles = allVisibleContainerHandles;
 		IEObjectDescription bestDescription = null;
 		while(fromIndex.hasNext() && !visibleContainerHandles.isEmpty()) {
