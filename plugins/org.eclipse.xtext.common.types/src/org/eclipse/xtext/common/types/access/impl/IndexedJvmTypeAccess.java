@@ -13,7 +13,6 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -22,7 +21,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
@@ -35,6 +33,7 @@ import org.eclipse.xtext.resource.IShadowedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.util.Strings;
 
+import com.google.common.base.Splitter;
 import com.google.inject.Inject;
 
 /**
@@ -181,32 +180,26 @@ public class IndexedJvmTypeAccess {
 			if (rootType.getIdentifier().equals(fragment)) {
 				return rootType;
 			}
-			if (rootType.getIdentifier().length() >= fragment.length()) {
+			if (!fragment.startsWith(rootType.getIdentifier())) {
 				return null;
 			}
-			int paren = fragment.indexOf('(');
-			if (paren == -1)
-				paren = fragment.length();
-			int dollar = fragment.lastIndexOf('$', paren);
-			int dot = fragment.lastIndexOf('.', paren);
-			final int max = Math.max(dollar, dot);
-			if (max == -1) {
-				if (logger.isDebugEnabled())
-					logger.debug("Couldn't resolve java object for root type "+rootType.getQualifiedName()+" and fragment '"+fragment + "'");
-				return null;
-			}
-			String subFragment = fragment.substring(0, max);
-			EObject container = resolveJavaObject(rootType, subFragment);
-			if (container instanceof JvmDeclaredType) {
-				EList<JvmMember> members = ((JvmDeclaredType) container).getMembers();
-				for(JvmMember member: members) {
-					if (member instanceof JvmType) {
-						String name = member.getIdentifier();
-						if (name.equals(fragment))
-							return member;
+			int rootNameLength = rootType.getIdentifier().length();
+			char sep = fragment.charAt(rootNameLength);
+			Iterator<String> iter = Splitter.on(sep).split(fragment.substring(rootNameLength+1)).iterator();
+			JvmDeclaredType current = (JvmDeclaredType) rootType;
+			while (iter.hasNext()) {
+				String segment = iter.next();
+				Iterator<JvmDeclaredType> members = current.findAllNestedTypesByName(segment).iterator();
+				if (members.hasNext()) {
+					current = members.next();
+				} else {
+					if (logger.isInfoEnabled()) {
+						logger.info("Couldn't resolve nested type for "+rootType.getIdentifier()+" and fragment "+fragment);
 					}
+					return null;
 				}
 			}
+			return current;
 		}
 		return null;	
 	}
