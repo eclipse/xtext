@@ -7,12 +7,9 @@
  */
 package org.eclipse.xtend.core.javaconverter;
 
-import com.google.common.base.Objects;
+import com.google.inject.Inject;
 import java.util.Collections;
-import java.util.Hashtable;
 import java.util.List;
-import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.Block;
@@ -21,6 +18,7 @@ import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.Expression;
 import org.eclipse.jdt.core.dom.Statement;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
+import org.eclipse.xtend.core.javaconverter.ASTParserFactory;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -60,14 +58,11 @@ public class JavaCodeAnalyzer {
     }
   }
   
-  private String complianceLevel = "1.6";
+  @Inject
+  private ASTParserFactory parserFactory;
   
   public JavaCodeAnalyzer.JavaParseResult<? extends ASTNode> determinateJavaType(final String javaCode) {
-    return this.determinateJavaType(javaCode, this.complianceLevel);
-  }
-  
-  public JavaCodeAnalyzer.JavaParseResult<? extends ASTNode> determinateJavaType(final String javaCode, final String compilerCompliance) {
-    ASTParser parser = this.createDefaultJavaParser(compilerCompliance);
+    ASTParser parser = this.parserFactory.createDefaultJavaParser(this.parserFactory.minParserApiLevel);
     char[] _charArray = javaCode.toCharArray();
     parser.setSource(_charArray);
     parser.setStatementsRecovery(true);
@@ -118,40 +113,5 @@ public class JavaCodeAnalyzer {
       return new JavaCodeAnalyzer.JavaParseResult<Expression>(javaCode, ASTParser.K_EXPRESSION, _singletonList_1);
     }
     return null;
-  }
-  
-  public ASTParser createDefaultJavaParser() {
-    return this.createDefaultJavaParser(this.complianceLevel);
-  }
-  
-  public ASTParser createDefaultJavaParser(final String compilerCompliance) {
-    int _asJLS = JavaCodeAnalyzer.asJLS(compilerCompliance);
-    final ASTParser parser = ASTParser.newParser(_asJLS);
-    final Hashtable options = JavaCore.getOptions();
-    JavaCore.setComplianceOptions(compilerCompliance, options);
-    options.put(JavaCore.COMPILER_DOC_COMMENT_SUPPORT, JavaCore.ENABLED);
-    parser.setCompilerOptions(options);
-    return parser;
-  }
-  
-  public static int asJLS(final String compilerCompliance) {
-    int _switchResult = (int) 0;
-    boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(compilerCompliance, "1.7")) {
-        _matched=true;
-        _switchResult = 4;
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(compilerCompliance, "1.8")) {
-        _matched=true;
-        _switchResult = 8;
-      }
-    }
-    if (!_matched) {
-      _switchResult = AST.JLS3;
-    }
-    return _switchResult;
   }
 }

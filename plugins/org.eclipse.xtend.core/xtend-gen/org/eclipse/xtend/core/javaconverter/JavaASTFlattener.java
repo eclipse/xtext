@@ -112,6 +112,7 @@ import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
 import org.eclipse.jdt.core.dom.WhileStatement;
 import org.eclipse.jdt.core.dom.WildcardType;
 import org.eclipse.xtend.core.javaconverter.ASTFlattenerUtils;
+import org.eclipse.xtend.core.javaconverter.ASTParserFactory;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -154,6 +155,8 @@ public class JavaASTFlattener extends ASTVisitor {
   
   private boolean fallBackStrategy = false;
   
+  private String targetApiLevel;
+  
   /**
    * Creates a new AST printer.
    */
@@ -189,6 +192,11 @@ public class JavaASTFlattener extends ASTVisitor {
   private boolean notAssigned(final Comment comment) {
     boolean _contains = this.assignedComments.contains(comment);
     return (!_contains);
+  }
+  
+  public boolean java8orHigher() {
+    int _asJLS = ASTParserFactory.asJLS(this.targetApiLevel);
+    return (_asJLS >= 8);
   }
   
   public void appendModifiers(final ASTNode node, final Iterable<IExtendedModifier> ext) {
@@ -1162,13 +1170,17 @@ public class JavaASTFlattener extends ASTVisitor {
     this.appendToBuffer(")");
     int _extraDimensions = it.getExtraDimensions();
     this.appendExtraDimensions(_extraDimensions);
-    List _thrownExceptions = it.thrownExceptions();
-    boolean _isEmpty_1 = _thrownExceptions.isEmpty();
-    boolean _not_3 = (!_isEmpty_1);
+    boolean _java8orHigher = this.java8orHigher();
+    boolean _not_3 = (!_java8orHigher);
     if (_not_3) {
-      this.appendToBuffer(" throws ");
-      List _thrownExceptions_1 = it.thrownExceptions();
-      this.visitAllSeparatedByComma(_thrownExceptions_1);
+      List _thrownExceptions = it.thrownExceptions();
+      boolean _isEmpty_1 = _thrownExceptions.isEmpty();
+      boolean _not_4 = (!_isEmpty_1);
+      if (_not_4) {
+        this.appendToBuffer(" throws ");
+        List _thrownExceptions_1 = it.thrownExceptions();
+        this.visitAllSeparatedByComma(_thrownExceptions_1);
+      }
     }
     this.appendSpaceToBuffer();
     Block _body = it.getBody();
@@ -2172,14 +2184,27 @@ public class JavaASTFlattener extends ASTVisitor {
   @Override
   public boolean visit(final TryStatement node) {
     this.appendToBuffer("try ");
+    final List<ASTNode> resources = this._aSTFlattenerUtils.genericChildListProperty(node, "resources");
+    boolean _isNullOrEmpty = IterableExtensions.isNullOrEmpty(resources);
+    boolean _not = (!_isNullOrEmpty);
+    if (_not) {
+      this.appendToBuffer("(");
+      for (final ASTNode child : resources) {
+        child.accept(this);
+      }
+      this.appendToBuffer(")");
+      this.addProblem(node, "Try with resource is not yet supported.");
+    }
     Block _body = node.getBody();
     _body.accept(this);
-    for (Iterator<CatchClause> _it = node.catchClauses().iterator(); _it.hasNext();) {
-      {
-        CatchClause cc = _it.next();
-        cc.accept(this);
+    List _catchClauses = node.catchClauses();
+    final Procedure1<Object> _function = new Procedure1<Object>() {
+      @Override
+      public void apply(final Object it) {
+        ((ASTNode) it).accept(JavaASTFlattener.this);
       }
-    }
+    };
+    IterableExtensions.<Object>forEach(_catchClauses, _function);
     Block _finally = node.getFinally();
     boolean _notEquals = (!Objects.equal(_finally, null));
     if (_notEquals) {
@@ -2507,9 +2532,34 @@ public class JavaASTFlattener extends ASTVisitor {
   
   @Override
   public boolean visit(final ArrayType node) {
-    Type _componentType = node.getComponentType();
-    _componentType.accept(this);
-    this.appendToBuffer("[]");
+    boolean _java8orHigher = this.java8orHigher();
+    boolean _not = (!_java8orHigher);
+    if (_not) {
+      Type _componentType = node.getComponentType();
+      _componentType.accept(this);
+      this.appendToBuffer("[]");
+    } else {
+      ASTNode _genericChildProperty = this._aSTFlattenerUtils.genericChildProperty(node, "elementType");
+      if (_genericChildProperty!=null) {
+        _genericChildProperty.accept(this);
+      }
+      List<ASTNode> dimensions = this._aSTFlattenerUtils.genericChildListProperty(node, "dimensions");
+      boolean _isNullOrEmpty = IterableExtensions.isNullOrEmpty(dimensions);
+      boolean _not_1 = (!_isNullOrEmpty);
+      if (_not_1) {
+        final Procedure1<ASTNode> _function = new Procedure1<ASTNode>() {
+          @Override
+          public void apply(final ASTNode dim) {
+            List<ASTNode> _genericChildListProperty = JavaASTFlattener.this._aSTFlattenerUtils.genericChildListProperty(dim, "annotations");
+            if (_genericChildListProperty!=null) {
+              JavaASTFlattener.this.visitAll(_genericChildListProperty);
+            }
+            JavaASTFlattener.this.appendToBuffer("[]");
+          }
+        };
+        IterableExtensions.<ASTNode>forEach(dimensions, _function);
+      }
+    }
     return false;
   }
   
@@ -2533,7 +2583,7 @@ public class JavaASTFlattener extends ASTVisitor {
   @Override
   public boolean visit(final BreakStatement node) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("/* FIXME Unsupported BreakStatement: ");
+    _builder.append("/* FIXME Unsupported BreakStatement */ break");
     this.appendToBuffer(_builder.toString());
     this.addProblem(node, "Break statement is not supported");
     SimpleName _label = node.getLabel();
@@ -2543,18 +2593,43 @@ public class JavaASTFlattener extends ASTVisitor {
       SimpleName _label_1 = node.getLabel();
       _label_1.accept(this);
     }
-    this.appendToBuffer("*/");
     return false;
   }
   
   @Override
   public boolean visit(final CatchClause node) {
-    this.appendToBuffer(" catch (");
     SingleVariableDeclaration _exception = node.getException();
-    _exception.accept(this);
-    this.appendToBuffer(") ");
-    Block _body = node.getBody();
-    _body.accept(this);
+    Type _type = _exception.getType();
+    int _nodeType = _type.getNodeType();
+    boolean _tripleEquals = (_nodeType == 84);
+    if (_tripleEquals) {
+      SingleVariableDeclaration _exception_1 = node.getException();
+      Type _type_1 = _exception_1.getType();
+      List<ASTNode> _genericChildListProperty = this._aSTFlattenerUtils.genericChildListProperty(_type_1, "types");
+      if (_genericChildListProperty!=null) {
+        final Procedure2<ASTNode, Integer> _function = new Procedure2<ASTNode, Integer>() {
+          @Override
+          public void apply(final ASTNode child, final Integer index) {
+            JavaASTFlattener.this.appendToBuffer(" catch (");
+            child.accept(JavaASTFlattener.this);
+            JavaASTFlattener.this.appendSpaceToBuffer();
+            SingleVariableDeclaration _exception = node.getException();
+            _exception.getName();
+            JavaASTFlattener.this.appendToBuffer(") ");
+            Block _body = node.getBody();
+            _body.accept(JavaASTFlattener.this);
+          }
+        };
+        IterableExtensions.<ASTNode>forEach(_genericChildListProperty, _function);
+      }
+    } else {
+      this.appendToBuffer(" catch (");
+      SingleVariableDeclaration _exception_2 = node.getException();
+      _exception_2.accept(this);
+      this.appendToBuffer(") ");
+      Block _body = node.getBody();
+      _body.accept(this);
+    }
     return false;
   }
   
@@ -2576,7 +2651,7 @@ public class JavaASTFlattener extends ASTVisitor {
   
   @Override
   public boolean visit(final ContinueStatement node) {
-    this.appendToBuffer("/* FIXME Unsupported continue statement: ");
+    this.appendToBuffer("/* FIXME Unsupported continue statement */ continue");
     this.addProblem(node, "Continue statement is not supported");
     SimpleName _label = node.getLabel();
     boolean _notEquals = (!Objects.equal(_label, null));
@@ -2586,7 +2661,6 @@ public class JavaASTFlattener extends ASTVisitor {
       _label_1.accept(this);
     }
     this.appendToBuffer(";");
-    this.appendToBuffer("*/");
     this.appendLineWrapToBuffer();
     return false;
   }
@@ -2943,6 +3017,35 @@ public class JavaASTFlattener extends ASTVisitor {
     }
   }
   
+  @Override
+  public boolean preVisit2(final ASTNode node) {
+    int _nodeType = node.getNodeType();
+    boolean _tripleEquals = (_nodeType == 86);
+    if (_tripleEquals) {
+      this.preVisit(node);
+      this.handleLambdaExpression(node);
+      return false;
+    }
+    return super.preVisit2(node);
+  }
+  
+  public boolean handleLambdaExpression(final ASTNode node) {
+    this.appendToBuffer("[");
+    final List<ASTNode> params = this._aSTFlattenerUtils.genericChildListProperty(node, "parameters");
+    boolean _isNullOrEmpty = IterableExtensions.isNullOrEmpty(params);
+    boolean _not = (!_isNullOrEmpty);
+    if (_not) {
+      this.visitAllSeparatedByComma(params);
+      this.appendToBuffer(" | ");
+    }
+    ASTNode _genericChildProperty = this._aSTFlattenerUtils.genericChildProperty(node, "body");
+    if (_genericChildProperty!=null) {
+      _genericChildProperty.accept(this);
+    }
+    this.appendToBuffer("]");
+    return false;
+  }
+  
   public String setJavaSources(final String javaSources) {
     return this.javaSources = javaSources;
   }
@@ -2953,5 +3056,9 @@ public class JavaASTFlattener extends ASTVisitor {
    */
   public boolean useFallBackStrategy(final boolean fallBackStrategy) {
     return this.fallBackStrategy = fallBackStrategy;
+  }
+  
+  public String setTargetlevel(final String targetApiLevel) {
+    return this.targetApiLevel = targetApiLevel;
   }
 }

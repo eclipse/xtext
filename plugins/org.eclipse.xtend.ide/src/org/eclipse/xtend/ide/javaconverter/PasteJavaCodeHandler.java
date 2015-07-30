@@ -133,9 +133,9 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 		ConversionResult conversionResult;
 		if (forceStatement || parseResult.getType() < ASTParser.K_CLASS_BODY_DECLARATIONS) {
 			if (parseResult.getType() == ASTParser.K_EXPRESSION) {
-				conversionResult = javaConverter.expressionToXtend(javaCode);
+				conversionResult = javaConverter.expressionToXtend(javaCode, project);
 			} else {
-				conversionResult = javaConverter.statementToXtend(javaCode);
+				conversionResult = javaConverter.statementToXtend(javaCode, project);
 			}
 		} else {
 			conversionResult = javaConverter.bodyDeclarationToXtend(javaCode,

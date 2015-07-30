@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.macros
 
+import org.eclipse.core.resources.IContainer
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IFolder
 import org.eclipse.jdt.core.IJavaProject
@@ -358,13 +359,44 @@ class MoreActiveAnnotationsTest {
 		assertNoErrorsInWorkspace
 	}
 	
+	@Test def void testBug473689() {
+		val someUnrelatedProject = JavaCore.create(createPluginProject("unrelatedProject"))
+		someUnrelatedProject.newSource("org/eclipse/xtend/lib/annotations/Accessors.xtend",'''
+			package org.eclipse.xtend.lib.annotations
+			
+			annotation Accessors {}
+		''')
+		waitForBuild
+		val macroProject = JavaCore.create(createPluginProject("macroProject"))
+		macroProject.newSource("mysource/Foo.xtend", '''
+			package mysource
+			
+			import org.eclipse.xtend.lib.annotations.Accessors
+			
+			class Foo {
+				@Accessors String name
+				
+				def void someMethod(Foo foo) {
+					foo.setName(foo.getName)
+				}
+			}
+		''')
+		waitForBuild
+				
+		assertNoErrorsInWorkspace
+	}
+	
 	private def IFile newSource(IJavaProject it, String fileName, String contents) {
 		val result = it.project.getFile("src/" + fileName)
-		var parent = result.parent
-		while (!parent.exists) {
-			(parent as IFolder).create(true, false, null)
-		}
+		result.parent.createFolder
 		result.create(new StringInputStream(contents), true, null)
 		return result
+	}
+	
+	private def void createFolder(IContainer container) {
+		if (!container.exists) {
+			createFolder(container.parent)
+			(container as IFolder).create(true, false, null)
+		}
 	}
 }

@@ -131,6 +131,8 @@ class JavaASTFlattener extends ASTVisitor {
 	int indentation = 0
 	boolean fallBackStrategy = false
 
+	String targetApiLevel
+
 	/**
 	 * Creates a new AST printer.
 	 */
@@ -164,6 +166,10 @@ class JavaASTFlattener extends ASTVisitor {
 
 	private def boolean notAssigned(Comment comment) {
 		!assignedComments.contains(comment)
+	}
+
+	def java8orHigher() {
+		ASTParserFactory.asJLS(targetApiLevel) >= 8
 	}
 
 	def appendModifiers(ASTNode node, Iterable<IExtendedModifier> ext) {
@@ -671,9 +677,11 @@ class JavaASTFlattener extends ASTVisitor {
 		parameters.visitAllSeparatedByComma
 		appendToBuffer(")")
 		appendExtraDimensions(getExtraDimensions())
-		if (!thrownExceptions.isEmpty()) {
-			appendToBuffer(" throws ")
-			thrownExceptions.visitAllSeparatedByComma
+		if (!java8orHigher()) {
+			if (!thrownExceptions.isEmpty()) {
+				appendToBuffer(" throws ")
+				thrownExceptions.visitAllSeparatedByComma
+			}
 		}
 		appendSpaceToBuffer
 		if (getBody() != null) {
@@ -1246,26 +1254,19 @@ class JavaASTFlattener extends ASTVisitor {
 
 	override boolean visit(TryStatement node) {
 		appendToBuffer("try ")
-
-		// TryStatementnode.resources() not supported in Juno
-		// if (node.getAST().apiLevel() > AST.JLS3) {
-		// if (node.resources().isEmpty()) {
-		// appendToBuffer("(")
-		// for (var Iterator<VariableDeclarationExpression> _it = node.resources().iterator(); _it.hasNext();) {
-		// var VariableDeclarationExpression _var = _it.next()
-		// _var.accept(this)
-		// if (_it.hasNext()) {
-		// appendToBuffer(",")
-		// }
-		// }
-		// appendToBuffer(") ")
-		// }
-		// }
-		node.getBody().accept(this)
-		for (var Iterator<CatchClause> _it = node.catchClauses().iterator(); _it.hasNext();) {
-			var CatchClause cc = _it.next()
-			cc.accept(this)
+		val resources = node.genericChildListProperty("resources")
+		// Java7 try with resource
+		if (!resources.nullOrEmpty) {
+			appendToBuffer("(")
+			for (child : resources) {
+				child.accept(this)
+			}
+			appendToBuffer(")")
+			node.addProblem("Try with resource is not yet supported.")
 		}
+		node.getBody().accept(this)
+		node.catchClauses.forEach[(it as ASTNode).accept(this)]
+
 		if (node.getFinally() != null) {
 			appendToBuffer(" finally ")
 			node.getFinally().accept(this)
@@ -1319,17 +1320,6 @@ class JavaASTFlattener extends ASTVisitor {
 		return false
 	}
 
-	// UnionType is Not available in Juno
-	// override boolean visit(UnionType node) {
-	// for (var Iterator<Type> _it = node.types().iterator(); _it.hasNext();) {
-	// var Type t = _it.next()
-	// t.accept(this)
-	// if (_it.hasNext()) {
-	// appendToBuffer("|")
-	// }
-	// }
-	// return false
-	// }
 	override boolean visit(CharacterLiteral node) {
 		appendToBuffer('''Character.valueOf(«node.getEscapedValue()»).charValue''')
 		return false
@@ -1472,8 +1462,20 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(ArrayType node) {
-		node.getComponentType().accept(this)
-		appendToBuffer("[]")
+		if (!java8orHigher) {
+			node.getComponentType().accept(this)
+			appendToBuffer("[]")
+		} else {
+			//Java8 and higher
+			node.genericChildProperty("elementType")?.accept(this)
+			var dimensions = node.genericChildListProperty("dimensions")
+			if (!dimensions.nullOrEmpty) {
+				dimensions.forEach[dim|
+					dim.genericChildListProperty("annotations")?.visitAll
+					appendToBuffer("[]")
+				]
+			}
+		}
 		return false
 	}
 
@@ -1490,21 +1492,32 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(BreakStatement node) {
-		appendToBuffer('''/* FIXME Unsupported BreakStatement: ''')
+		appendToBuffer('''/* FIXME Unsupported BreakStatement */ break''')
 		node.addProblem("Break statement is not supported")
 		if (node.getLabel() != null) {
 			appendSpaceToBuffer
 			node.getLabel().accept(this)
 		}
-		appendToBuffer("*/")
 		return false
 	}
 
 	@Override override boolean visit(CatchClause node) {
-		appendToBuffer(" catch (")
-		node.getException().accept(this)
-		appendToBuffer(") ")
-		node.getBody().accept(this)
+		if (node.exception.type.nodeType === 84) {
+			// Java7 multi catch
+			node.exception.type.genericChildListProperty("types")?.forEach [ child, index |
+				appendToBuffer(" catch (")
+				child.accept(this)
+				appendSpaceToBuffer
+				node.exception.name
+				appendToBuffer(") ")
+				node.body.accept(this)
+			]
+		} else {
+			appendToBuffer(" catch (")
+			node.getException().accept(this)
+			appendToBuffer(") ")
+			node.getBody().accept(this)
+		}
 		return false
 	}
 
@@ -1519,14 +1532,13 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(ContinueStatement node) {
-		appendToBuffer("/* FIXME Unsupported continue statement: ")
+		appendToBuffer("/* FIXME Unsupported continue statement */ continue")
 		node.addProblem("Continue statement is not supported")
 		if (node.getLabel() != null) {
 			appendSpaceToBuffer
 			node.getLabel().accept(this)
 		}
 		appendToBuffer(";")
-		appendToBuffer("*/")
 		appendLineWrapToBuffer
 		return false
 	}
@@ -1748,6 +1760,28 @@ class JavaASTFlattener extends ASTVisitor {
 		}
 	}
 
+	override preVisit2(ASTNode node) {
+		if (node.nodeType === 86) {
+			// Java8 Lambda
+			preVisit(node)
+			handleLambdaExpression(node)
+			return false
+		}
+		return super.preVisit2(node)
+	}
+
+	def handleLambdaExpression(ASTNode node) {
+		appendToBuffer('[')
+		val params = node.genericChildListProperty("parameters")
+		if (!params.nullOrEmpty) {
+			params.visitAllSeparatedByComma
+			appendToBuffer(" | ")
+		}
+		node.genericChildProperty("body")?.accept(this)
+		appendToBuffer(']')
+		return false
+	}
+
 	def setJavaSources(String javaSources) {
 		this.javaSources = javaSources
 	}
@@ -1759,4 +1793,9 @@ class JavaASTFlattener extends ASTVisitor {
 	def useFallBackStrategy(boolean fallBackStrategy) {
 		this.fallBackStrategy = fallBackStrategy
 	}
+
+	def setTargetlevel(String targetApiLevel) {
+		this.targetApiLevel = targetApiLevel
+	}
+
 }

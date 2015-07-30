@@ -29,6 +29,7 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IMirror;
+import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.AbstractJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.AbstractRuntimeJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.IClassMirror;
@@ -38,7 +39,6 @@ import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
 import org.eclipse.xtext.idea.common.types.PsiBasedTypeFactory;
 import org.eclipse.xtext.idea.common.types.PsiClassMirror;
 import org.eclipse.xtext.idea.common.types.StubURIHelper;
-import org.eclipse.xtext.idea.extensions.IdeaProjectExtensions;
 import org.eclipse.xtext.psi.IPsiModelAssociator;
 import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.service.OperationCanceledError;
@@ -167,8 +167,7 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
   }
   
   public JvmType findType(final URI resourceURI, final String fragment, final boolean traverseNestedTypes) {
-    JvmType _xblockexpression = null;
-    {
+    try {
       final IndexedJvmTypeAccess indexedJvmTypeAccess = this.getIndexedJvmTypeAccess();
       if ((indexedJvmTypeAccess != null)) {
         final URI proxyURI = resourceURI.appendFragment(fragment);
@@ -179,15 +178,25 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
         }
       }
       ProgressIndicatorProvider.checkCanceled();
-      JvmType _xtrycatchfinallyexpression = null;
       try {
-        JvmType _xblockexpression_1 = null;
-        {
-          ResourceSet _resourceSet_1 = this.getResourceSet();
-          final Resource resource = _resourceSet_1.getResource(resourceURI, true);
-          _xblockexpression_1 = this.findType(resource, fragment, traverseNestedTypes);
+        ResourceSet _resourceSet_1 = this.getResourceSet();
+        final Resource existing = _resourceSet_1.getResource(resourceURI, false);
+        boolean _notEquals = (!Objects.equal(existing, null));
+        if (_notEquals) {
+          return this.findType(existing, fragment, traverseNestedTypes);
         }
-        _xtrycatchfinallyexpression = _xblockexpression_1;
+        final IMirror mirror = this.createMirror(resourceURI);
+        boolean _equals = Objects.equal(mirror, null);
+        if (_equals) {
+          return null;
+        }
+        final TypeResource resource = this.doCreateResource(resourceURI);
+        resource.setMirror(mirror);
+        ResourceSet _resourceSet_2 = this.getResourceSet();
+        EList<Resource> _resources = _resourceSet_2.getResources();
+        _resources.add(resource);
+        resource.load(null);
+        return this.findType(resource, fragment, traverseNestedTypes);
       } catch (final Throwable _t) {
         if (_t instanceof OperationCanceledError) {
           final OperationCanceledError e = (OperationCanceledError)_t;
@@ -196,9 +205,9 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
           throw Exceptions.sneakyThrow(_t);
         }
       }
-      _xblockexpression = _xtrycatchfinallyexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
-    return _xblockexpression;
   }
   
   protected JvmType findType(final Resource resource, final String fragment, final boolean traverseNestedTypes) {
@@ -244,8 +253,8 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
         PsiClassMirror _xblockexpression = null;
         {
           Project _project = StubJvmTypeProvider.this.module.getProject();
-          JavaPsiFacade _javaPsiFacade = IdeaProjectExtensions.getJavaPsiFacade(_project);
-          final PsiClass psiClass = IdeaProjectExtensions.findClassWithAlternativeResolvedEnabled(_javaPsiFacade, name, StubJvmTypeProvider.this.searchScope);
+          JavaPsiFacade _instance = JavaPsiFacade.getInstance(_project);
+          final PsiClass psiClass = _instance.findClass(name, StubJvmTypeProvider.this.searchScope);
           boolean _or = false;
           boolean _equals = Objects.equal(psiClass, null);
           if (_equals) {

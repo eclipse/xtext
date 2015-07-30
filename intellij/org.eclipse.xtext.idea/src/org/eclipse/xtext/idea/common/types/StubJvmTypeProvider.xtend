@@ -27,10 +27,9 @@ import org.eclipse.xtext.psi.IPsiModelAssociator
 import org.eclipse.xtext.resource.ISynchronizable
 import org.eclipse.xtext.service.OperationCanceledError
 import org.eclipse.xtext.util.Strings
-
-import static extension org.eclipse.xtext.idea.extensions.IdeaProjectExtensions.*
 import com.intellij.openapi.application.ApplicationManager
 import org.eclipse.xtext.common.types.access.impl.IClassMirror
+import com.intellij.psi.JavaPsiFacade
 
 class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 
@@ -107,8 +106,19 @@ class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 		}
 		ProgressIndicatorProvider.checkCanceled
 		try {
-			val resource = resourceSet.getResource(resourceURI, true)
-			resource.findType(fragment, traverseNestedTypes)
+			val existing = resourceSet.getResource(resourceURI, false)
+			if (existing != null) {
+				return existing.findType(fragment, traverseNestedTypes)
+			}
+			val mirror = createMirror(resourceURI)
+			if (mirror == null) {
+				return null
+			}
+			val resource = doCreateResource(resourceURI)
+			resource.mirror = mirror
+			resourceSet.getResources().add(resource)
+			resource.load(null)
+			return resource.findType(fragment, traverseNestedTypes)
 		} catch (OperationCanceledError e) {
 			throw e.wrapped
 		}
@@ -133,7 +143,7 @@ class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 
 	protected override createMirrorForFQN(String name) {
 		ApplicationManager.application.<IClassMirror>runReadAction[
-			val psiClass = module.project.javaPsiFacade.findClassWithAlternativeResolvedEnabled(name, searchScope)
+			val psiClass = JavaPsiFacade.getInstance(module.project).findClass(name, searchScope)
 			if (psiClass == null || psiClass.containingClass != null) {
 				return null
 			}

@@ -87,6 +87,7 @@ configure(ideaTestProjects) {
 	test {
 		minHeapSize = "1024m"
 		systemProperty 'idea.system.path', "${project.buildDir}/idea-test-system"
+		systemProperty 'idea.config.path', "${project.buildDir}/idea-test-config"
 		jvmArgs '-XX:MaxPermSize=256m'
 		exclude {it.name.endsWith('Delegate.class')}
 	}

@@ -7,27 +7,28 @@
  */
 package org.eclipse.xtend.core.tests.javaconverter;
 
+import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.xtend.core.javaconverter.JavaCodeAnalyzer;
+import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.junit4.InjectWith;
+import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * @author dhuebner - Initial contribution and API
  */
+@RunWith(XtextRunner.class)
+@InjectWith(RuntimeInjectorProvider.class)
 @SuppressWarnings("all")
 public class JavaCodeAnalyzerTest {
+  @Inject
   private JavaCodeAnalyzer analyzer;
-  
-  @Before
-  public void setUp() {
-    JavaCodeAnalyzer _javaCodeAnalyzer = new JavaCodeAnalyzer();
-    this.analyzer = _javaCodeAnalyzer;
-  }
   
   @Test
   public void testSimpleClass() {

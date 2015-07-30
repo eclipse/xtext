@@ -14,13 +14,11 @@ import com.intellij.openapi.roots.ContentEntry
 import com.intellij.openapi.roots.ModifiableRootModel
 import java.io.ByteArrayInputStream
 import java.io.IOException
-import javax.inject.Provider
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.idea.lang.BaseXtextASTFactory
 import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider
-import org.eclipse.xtext.idea.resource.PsiToEcoreTransformator
 import org.eclipse.xtext.idea.tests.LightToolingTest
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.resource.XtextResource
@@ -43,10 +41,6 @@ class AbstractModelTestCase extends LightToolingTest implements ModelChecker {
 
 	@Inject
 	@Accessors(PROTECTED_GETTER)
-	Provider<PsiToEcoreTransformator> psiToEcoreTransformatorProvider
-
-	@Inject
-	@Accessors(PROTECTED_GETTER)
 	extension XtextResourceAsserts xtextResourceAsserts
 
 	new(LanguageFileType fileType) {
@@ -56,9 +50,9 @@ class AbstractModelTestCase extends LightToolingTest implements ModelChecker {
 	override protected configureModule(Module module, ModifiableRootModel model, ContentEntry contentEntry) {
 		model.addXbaseLibrary
 	}
-	
+
 	override checkResource(String code, boolean validate) {
-		checkModel(code)
+		createFile(null, code)
 		if (validate) {
 			validationHelper.assertNoErrors(actualResource)
 		}
@@ -66,7 +60,11 @@ class AbstractModelTestCase extends LightToolingTest implements ModelChecker {
 	}
 
 	override <T extends EObject> checkModel(String code, boolean validate) {
-		checkModel(code)
+		checkModel(null, code, validate)
+	}
+
+	override <T extends EObject> checkModel(String path, String code, boolean validate) {
+		createFile(path, code)
 		val model = actualResource.contents.head as T
 		if (validate) {
 			validationHelper.assertNoErrors(model)
@@ -74,9 +72,12 @@ class AbstractModelTestCase extends LightToolingTest implements ModelChecker {
 		model
 	}
 
-	protected def void checkModel(String code) {
-		configureByText(code)
-
+	protected def void createFile(String path, String code) {
+		if (path === null) {
+			configureByText(code)
+		} else {
+			configureByText(path, code)
+		}
 		val actualResource = actualResource
 		val expectedResource = createExpectedResource
 		assertResource(expectedResource, actualResource)
@@ -96,4 +97,5 @@ class AbstractModelTestCase extends LightToolingTest implements ModelChecker {
 		}
 		return resource
 	}
+
 }

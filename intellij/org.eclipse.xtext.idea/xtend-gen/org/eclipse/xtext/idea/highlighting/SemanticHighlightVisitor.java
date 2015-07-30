@@ -9,7 +9,6 @@ package org.eclipse.xtext.idea.highlighting;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.inject.name.Named;
 import com.intellij.codeInsight.daemon.impl.HighlightInfo;
 import com.intellij.codeInsight.daemon.impl.HighlightInfoType;
@@ -26,6 +25,7 @@ import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -35,7 +35,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class SemanticHighlightVisitor implements HighlightVisitor {
+public abstract class SemanticHighlightVisitor implements HighlightVisitor {
   @Inject
   @Named(Constants.LANGUAGE_NAME)
   private String languageId;
@@ -46,9 +46,6 @@ public class SemanticHighlightVisitor implements HighlightVisitor {
   @Inject
   @Extension
   private IdeaHighlightingAttributesProvider _ideaHighlightingAttributesProvider;
-  
-  @Inject
-  private Provider<SemanticHighlightVisitor> cloneProvider;
   
   private IHighlightedPositionAcceptor acceptor;
   
@@ -111,13 +108,18 @@ public class SemanticHighlightVisitor implements HighlightVisitor {
   
   @Override
   public HighlightVisitor clone() {
-    SemanticHighlightVisitor _get = this.cloneProvider.get();
-    final Procedure1<SemanticHighlightVisitor> _function = new Procedure1<SemanticHighlightVisitor>() {
-      @Override
-      public void apply(final SemanticHighlightVisitor it) {
-        it.acceptor = SemanticHighlightVisitor.this.acceptor;
-      }
-    };
-    return ObjectExtensions.<SemanticHighlightVisitor>operator_doubleArrow(_get, _function);
+    try {
+      Class<? extends SemanticHighlightVisitor> _class = this.getClass();
+      SemanticHighlightVisitor _newInstance = _class.newInstance();
+      final Procedure1<SemanticHighlightVisitor> _function = new Procedure1<SemanticHighlightVisitor>() {
+        @Override
+        public void apply(final SemanticHighlightVisitor it) {
+          it.acceptor = SemanticHighlightVisitor.this.acceptor;
+        }
+      };
+      return ObjectExtensions.<SemanticHighlightVisitor>operator_doubleArrow(_newInstance, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
 }
