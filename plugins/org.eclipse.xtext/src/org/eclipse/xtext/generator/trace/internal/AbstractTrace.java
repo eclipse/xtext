@@ -9,11 +9,13 @@ package org.eclipse.xtext.generator.trace.internal;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Reader;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
@@ -516,6 +518,10 @@ public abstract class AbstractTrace implements ITrace {
 	}
 	
 	protected abstract InputStream getContents(SourceRelativeURI uri, IProjectConfig projectConfig) throws IOException;
+	
+	protected abstract Reader getContentsAsText(SourceRelativeURI uri, IProjectConfig projectConfig) throws IOException;
+	
+	protected abstract Reader getLocalContentsAsText(IProjectConfig projectConfig) throws IOException;
 	
 	protected LanguageInfo findLanguage(AbstractURIWrapper uri) {
 		return getService(uri, LanguageInfo.class);
