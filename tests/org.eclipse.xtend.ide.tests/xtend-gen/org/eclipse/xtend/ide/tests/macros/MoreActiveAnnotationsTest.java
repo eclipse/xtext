@@ -650,17 +650,77 @@ public class MoreActiveAnnotationsTest {
     }
   }
   
+  @Test
+  public void testBug473689() {
+    try {
+      IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("unrelatedProject");
+      final IJavaProject someUnrelatedProject = JavaCore.create(_createPluginProject);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package org.eclipse.xtend.lib.annotations");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("annotation Accessors {}");
+      _builder.newLine();
+      this.newSource(someUnrelatedProject, "org/eclipse/xtend/lib/annotations/Accessors.xtend", _builder.toString());
+      IResourcesSetupUtil.waitForBuild();
+      IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("macroProject");
+      final IJavaProject macroProject = JavaCore.create(_createPluginProject_1);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package mysource");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("import org.eclipse.xtend.lib.annotations.Accessors");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("class Foo {");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("@Accessors String name");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("def void someMethod(Foo foo) {");
+      _builder_1.newLine();
+      _builder_1.append("\t\t");
+      _builder_1.append("foo.setName(foo.getName)");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.newSource(macroProject, "mysource/Foo.xtend", _builder_1.toString());
+      IResourcesSetupUtil.waitForBuild();
+      IResourcesSetupUtil.assertNoErrorsInWorkspace();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   private IFile newSource(final IJavaProject it, final String fileName, final String contents) {
     try {
       IProject _project = it.getProject();
       final IFile result = _project.getFile(("src/" + fileName));
-      IContainer parent = result.getParent();
-      while ((!parent.exists())) {
-        ((IFolder) parent).create(true, false, null);
-      }
+      IContainer _parent = result.getParent();
+      this.createFolder(_parent);
       StringInputStream _stringInputStream = new StringInputStream(contents);
       result.create(_stringInputStream, true, null);
       return result;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  private void createFolder(final IContainer container) {
+    try {
+      boolean _exists = container.exists();
+      boolean _not = (!_exists);
+      if (_not) {
+        IContainer _parent = container.getParent();
+        this.createFolder(_parent);
+        ((IFolder) container).create(true, false, null);
+      }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

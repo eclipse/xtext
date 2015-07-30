@@ -105,14 +105,12 @@ import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
 import org.eclipse.xtext.common.types.impl.JvmTypeConstraintImplCustom;
 import org.eclipse.xtext.idea.common.types.StubURIHelper;
 import org.eclipse.xtext.idea.common.types.UnresolvedPsiClassType;
-import org.eclipse.xtext.idea.extensions.IdeaProjectExtensions;
 import org.eclipse.xtext.psi.IPsiModelAssociator;
 import org.eclipse.xtext.psi.PsiElementProvider;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -141,38 +139,21 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
   
   @Override
   public JvmDeclaredType createType(final PsiClass psiClass) {
-    JvmDeclaredType _xtrycatchfinallyexpression = null;
     try {
-      JvmDeclaredType _xblockexpression = null;
-      {
-        this.createTypeTask.start();
-        Project _project = psiClass.getProject();
-        final Function0<JvmDeclaredType> _function = new Function0<JvmDeclaredType>() {
-          @Override
-          public JvmDeclaredType apply() {
-            JvmDeclaredType _xblockexpression = null;
-            {
-              final StringBuilder buffer = new StringBuilder(100);
-              final String packageName = PsiBasedTypeFactory.this.getPackageName(psiClass);
-              boolean _notEquals = (!Objects.equal(packageName, null));
-              if (_notEquals) {
-                StringBuilder _append = buffer.append(packageName);
-                _append.append(".");
-              }
-              final JvmDeclaredType type = PsiBasedTypeFactory.this.createType(psiClass, buffer);
-              type.setPackageName(packageName);
-              _xblockexpression = type;
-            }
-            return _xblockexpression;
-          }
-        };
-        _xblockexpression = IdeaProjectExtensions.<JvmDeclaredType>withAlternativeResolvedEnabled(_project, _function);
+      this.createTypeTask.start();
+      final StringBuilder buffer = new StringBuilder(100);
+      final String packageName = this.getPackageName(psiClass);
+      boolean _notEquals = (!Objects.equal(packageName, null));
+      if (_notEquals) {
+        StringBuilder _append = buffer.append(packageName);
+        _append.append(".");
       }
-      _xtrycatchfinallyexpression = _xblockexpression;
+      final JvmDeclaredType type = this.createType(psiClass, buffer);
+      type.setPackageName(packageName);
+      return type;
     } finally {
       this.createTypeTask.stop();
     }
-    return _xtrycatchfinallyexpression;
   }
   
   protected JvmDeclaredType createType(final PsiClass psiClass, final StringBuilder fqn) {

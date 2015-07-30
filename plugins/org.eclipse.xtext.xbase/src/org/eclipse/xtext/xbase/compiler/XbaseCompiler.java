@@ -530,7 +530,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	protected void _toJavaStatement(XThrowExpression expr, ITreeAppendable b, boolean isReferenced) {
 		internalToJavaStatement(expr.getExpression(), b, true);
 		b.newLine().append("throw ");
-		internalToJavaExpression(expr.getExpression(), b);
+		internalToConvertedExpression(expr.getExpression(), b, null);
 		b.append(";");
 	}
 
