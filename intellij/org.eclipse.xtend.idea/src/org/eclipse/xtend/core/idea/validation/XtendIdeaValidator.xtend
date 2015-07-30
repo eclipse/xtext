@@ -31,6 +31,7 @@ import org.eclipse.xtext.xtype.XtypePackage
 import static org.eclipse.xtend.core.validation.IssueCodes.ACTIVE_ANNOTAION_IN_SAME_CONTAINER
 
 import static extension org.eclipse.xtext.util.Strings.*
+import com.intellij.openapi.application.ApplicationManager
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -65,10 +66,12 @@ class XtendIdeaValidator extends AbstractDeclarativeValidator {
 		}
 	}
 	
-	protected def isSameModule(XAnnotation annotation, JvmType annotationType) {
-		val module = annotation.module
-		val psiFacade = JavaPsiFacade.getInstance(module.project)
-		return psiFacade.findClass(annotationType.qualifiedName, module.moduleScope) != null
+	protected def boolean isSameModule(XAnnotation annotation, JvmType annotationType) {
+		ApplicationManager.application.<Boolean>runReadAction[
+			val module = annotation.module
+			val psiFacade = JavaPsiFacade.getInstance(module.project)
+			return psiFacade.findClass(annotationType.qualifiedName, module.moduleScope) != null
+		]
 	}
 	
 	protected def getModule(EObject object) {
@@ -98,10 +101,12 @@ class XtendIdeaValidator extends AbstractDeclarativeValidator {
 	}
 
 	protected def String getExpectedPackageName(XtendFile xtendFile) {
-		val file = VirtualFileURIUtil.getVirtualFile(xtendFile.eResource.URI)
-		val psiDirectory = PsiManager.getInstance(xtendFile.module.project).findDirectory(file.parent)
-		val javaDirectoryService = JavaDirectoryService.instance
-		return javaDirectoryService.getPackage(psiDirectory).qualifiedName
+		ApplicationManager.application.<String>runReadAction[
+			val file = VirtualFileURIUtil.getVirtualFile(xtendFile.eResource.URI)
+			val psiDirectory = PsiManager.getInstance(xtendFile.module.project).findDirectory(file.parent)
+			val javaDirectoryService = JavaDirectoryService.instance
+			return javaDirectoryService.getPackage(psiDirectory).qualifiedName
+		]
 	}
 
 }
