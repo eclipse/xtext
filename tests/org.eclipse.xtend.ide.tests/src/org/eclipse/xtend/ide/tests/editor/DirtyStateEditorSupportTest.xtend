@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.jface.text.source.Annotation
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
+import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.junit4.logging.LoggingTester
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil
 import org.eclipse.xtext.ui.editor.XtextEditor
@@ -26,7 +27,6 @@ import org.junit.Test
 
 import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.TESTPROJECT_NAME
 import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.createPluginProject
-import org.eclipse.xtext.diagnostics.Severity
 
 /**
  * @author Holger Schill - Initial contribution and API
@@ -112,6 +112,9 @@ class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
 			} 
 		'''
 		val editor = openEditor("foo/foo.xtend",model)
+		editor.waitForReconciler
+		waitForBuild(null)
+		
 		val consumer = openEditor("foo/bar.xtend",'''
 			package foo
 			import foo.NoDebuggingCase
@@ -126,11 +129,11 @@ class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		editor.waitForReconciler
 		consumer.waitForReconciler
-		consumer.document.replace(0,1,"p")
-		consumer.waitForDirtyStateUpdater
+		waitForBuild(null)
 		consumer.assertHasNoErrors
+		
+		
 		val replaceModel = '''
 			package foo
 			class NoDebuggingCase {
@@ -139,13 +142,16 @@ class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
 				} 
 			}
 		'''
-		editor.document.replace(0,model.length,replaceModel)
-		editor.saveEditor(false)
-		consumer.waitForDirtyStateUpdater
+		consumer.expectDirtyStateUpdate [
+			editor.document.replace(0, model.length, replaceModel)
+			editor.waitForReconciler
+		]
 		consumer.assertHasErrors
-		editor.document.replace(0, replaceModel.length,model)
-		editor.saveEditor(false)
-		consumer.waitForDirtyStateUpdater
+		
+		consumer.expectDirtyStateUpdate [
+			editor.document.replace(0, replaceModel.length, model)
+			editor.waitForReconciler
+		]
 		consumer.assertHasNoErrors
 	}
 	
