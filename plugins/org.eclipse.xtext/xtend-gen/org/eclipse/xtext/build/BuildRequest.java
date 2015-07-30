@@ -17,6 +17,7 @@ import org.eclipse.xtext.build.IndexState;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.UriUtil;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.validation.Issue;
@@ -120,6 +121,8 @@ public class BuildRequest {
   
   private XtextResourceSet resourceSet;
   
+  private CancelIndicator cancelIndicator = CancelIndicator.NullImpl;
+  
   public void setBaseDir(final URI baseDir) {
     this.baseDir = baseDir;
   }
@@ -212,5 +215,14 @@ public class BuildRequest {
   
   public void setResourceSet(final XtextResourceSet resourceSet) {
     this.resourceSet = resourceSet;
+  }
+  
+  @Pure
+  public CancelIndicator getCancelIndicator() {
+    return this.cancelIndicator;
+  }
+  
+  public void setCancelIndicator(final CancelIndicator cancelIndicator) {
+    this.cancelIndicator = cancelIndicator;
   }
 }

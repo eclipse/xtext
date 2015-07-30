@@ -33,6 +33,7 @@ import org.eclipse.xtext.generator.trace.TraceRegionSerializer
 import org.eclipse.xtext.generator.IFilePostProcessor
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.parser.IEncodingProvider
+import org.eclipse.xtext.service.OperationCanceledManager
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -51,6 +52,7 @@ import org.eclipse.xtext.parser.IEncodingProvider
 		@Accessors(PROTECTED_SETTER) BuildRequest request
 	
 		@Inject Indexer indexer
+		@Inject extension OperationCanceledManager
 		
 		def Result launch() {
 			val newSource2GeneratedMapping = request.state.fileMappings
@@ -64,7 +66,7 @@ import org.eclipse.xtext.parser.IEncodingProvider
 				]
 			]
 			val result = indexer.computeAndIndexAffected(request, context)
-			
+			request.cancelIndicator.checkCanceled
 			val resolvedDeltas = newArrayList
 			// add deleted deltas
 			resolvedDeltas += result.resourceDeltas.filter[getNew == null]
@@ -72,14 +74,18 @@ import org.eclipse.xtext.parser.IEncodingProvider
 			resolvedDeltas += result.resourceDeltas.filter[getNew != null].map[uri]
 				.executeClustered [
 					Resource resource |
+					request.cancelIndicator.checkCanceled
 					resource.contents // fully initialize
 					EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl)
+					request.cancelIndicator.checkCanceled
 					val serviceProvider = context.getResourceServiceProvider(resource.getURI)
 					val manager = serviceProvider.resourceDescriptionManager
 					val description = manager.getResourceDescription(resource);
                     val copiedDescription = SerializableResourceDescription.createCopy(description);
                     result.newIndex.addDescription(resource.getURI, copiedDescription)
+                    request.cancelIndicator.checkCanceled
 					if (resource.validate && serviceProvider.get(IShouldGenerate).shouldGenerate(resource, CancelIndicator.NullImpl)) {
+						request.cancelIndicator.checkCanceled
 						resource.generate(request, newSource2GeneratedMapping)
 					}
 					val old = oldState.resourceDescriptions.getResourceDescription(resource.getURI)
@@ -162,6 +168,7 @@ import org.eclipse.xtext.parser.IEncodingProvider
 	}
 
 	@Inject Provider<IncrementalBuilder.InternalStatefulIncrementalBuilder> provider
+	@Inject extension OperationCanceledManager
 
 	def Result build(BuildRequest request, (URI)=>IResourceServiceProvider languages) {
 		build(request, languages, new DisabledClusteringPolicy())
@@ -173,10 +180,16 @@ import org.eclipse.xtext.parser.IEncodingProvider
 		val context = new BuildContext(languages
 									, resourceSet
 									, oldState
-									, clusteringPolicy)
+									, clusteringPolicy,
+									request.cancelIndicator)
 		val builder = provider.get
 		builder.context = context
 		builder.request = request
-		return builder.launch
+		try {
+			return builder.launch
+		} catch(Throwable t) {
+			t.propagateIfCancelException
+			throw t
+		}
 	}
 }

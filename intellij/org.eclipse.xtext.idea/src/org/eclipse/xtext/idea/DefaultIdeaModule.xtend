@@ -55,6 +55,8 @@ import org.eclipse.xtext.service.AbstractGenericModule
 import org.eclipse.xtext.service.LanguageSpecific
 import org.eclipse.xtext.service.SingletonBinding
 import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
+import org.eclipse.xtext.service.OperationCanceledManager
+import org.eclipse.xtext.idea.service.IdeaOperationCanceledManager
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -152,6 +154,10 @@ class DefaultIdeaModule extends AbstractGenericModule {
 	@SingletonBinding
 	def Class<? extends IIndentationInformation> bindIIndentationInformation() {
 		CodeStyleSettingsIndentationInformation
+	}
+	
+	def Class<? extends OperationCanceledManager> bindOperationCanceledManager() {
+		IdeaOperationCanceledManager
 	}
 
 }

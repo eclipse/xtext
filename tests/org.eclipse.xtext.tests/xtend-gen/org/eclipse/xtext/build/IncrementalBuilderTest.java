@@ -11,6 +11,7 @@ import com.google.inject.Inject;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicBoolean;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.build.BuildRequest;
@@ -20,6 +21,7 @@ import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.build.AbstractIncrementalBuilderTest;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -35,6 +37,27 @@ import org.junit.runner.RunWith;
 @InjectWith(IndexTestLanguageInjectorProvider.class)
 @SuppressWarnings("all")
 public class IncrementalBuilderTest extends AbstractIncrementalBuilderTest {
+  private static class CancelOnFirstModel implements BuildRequest.IPostValidationCallback, CancelIndicator {
+    private boolean canceled;
+    
+    @Override
+    public boolean afterValidate(final URI validated, final Iterable<Issue> issues) {
+      boolean _xblockexpression = false;
+      {
+        if (this.canceled) {
+          Assert.fail("Builder didn\'t cancel");
+        }
+        _xblockexpression = this.canceled = true;
+      }
+      return _xblockexpression;
+    }
+    
+    @Override
+    public boolean isCanceled() {
+      return this.canceled;
+    }
+  }
+  
   @Inject
   private IResourceServiceProvider.Registry resourceServiceProviderFactory;
   
@@ -77,6 +100,41 @@ public class IncrementalBuilderTest extends AbstractIncrementalBuilderTest {
     Collection<URI> _values_1 = this.generated.values();
     boolean _containsSuffix_1 = this.containsSuffix(_values_1, "src-gen/A.txt");
     Assert.assertTrue(_containsSuffix_1);
+  }
+  
+  @Test(expected = OperationCanceledException.class)
+  public void testCancellation() {
+    final IncrementalBuilderTest.CancelOnFirstModel cancelOnFirstModel = new IncrementalBuilderTest.CancelOnFirstModel();
+    final Procedure1<BuildRequest> _function = new Procedure1<BuildRequest>() {
+      @Override
+      public void apply(final BuildRequest it) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("foo {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("entity A { foo.B myReference }");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+        URI _minus = IncrementalBuilderTest.this.operator_minus(
+          "src/MyFile.indextestlanguage", _builder.toString());
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("foo {");
+        _builder_1.newLine();
+        _builder_1.append("\t");
+        _builder_1.append("entity B {}");
+        _builder_1.newLine();
+        _builder_1.append("}");
+        _builder_1.newLine();
+        URI _minus_1 = IncrementalBuilderTest.this.operator_minus(
+          "src/MyFile2.indextestlanguage", _builder_1.toString());
+        it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus, _minus_1)));
+        it.setCancelIndicator(cancelOnFirstModel);
+        it.setAfterValidate(cancelOnFirstModel);
+      }
+    };
+    final BuildRequest buildRequest = this.newBuildRequest(_function);
+    this.build(buildRequest);
   }
   
   @Test

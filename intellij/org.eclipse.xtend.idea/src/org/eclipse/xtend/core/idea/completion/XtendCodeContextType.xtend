@@ -51,6 +51,8 @@ abstract class XtendCodeContextType extends TemplateContextType {
 	
 	def boolean internalIsInContext(PsiFile file, int offset) {
 		val element = file.findElementAt(offset)
+		if (element?.node === null)
+			return false
 		val elements = contentAssistParser.getFollowElements(file.text.substring(0, element.node.startOffset), false)
 		val hasFollowElement = new AtomicBoolean(false)
 		followElementComputer.computeFollowElements(elements) [

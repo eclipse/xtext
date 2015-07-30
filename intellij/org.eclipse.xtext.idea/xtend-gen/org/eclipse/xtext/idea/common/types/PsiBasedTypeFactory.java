@@ -9,8 +9,11 @@ package org.eclipse.xtext.idea.common.types;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import com.intellij.openapi.application.Application;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.progress.ProgressIndicatorProvider;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Computable;
 import com.intellij.psi.JavaPsiFacade;
 import com.intellij.psi.JavaTokenType;
 import com.intellij.psi.PsiAnnotation;
@@ -139,21 +142,38 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
   
   @Override
   public JvmDeclaredType createType(final PsiClass psiClass) {
+    JvmDeclaredType _xtrycatchfinallyexpression = null;
     try {
-      this.createTypeTask.start();
-      final StringBuilder buffer = new StringBuilder(100);
-      final String packageName = this.getPackageName(psiClass);
-      boolean _notEquals = (!Objects.equal(packageName, null));
-      if (_notEquals) {
-        StringBuilder _append = buffer.append(packageName);
-        _append.append(".");
+      JvmDeclaredType _xblockexpression = null;
+      {
+        this.createTypeTask.start();
+        Application _application = ApplicationManager.getApplication();
+        final Computable<JvmDeclaredType> _function = new Computable<JvmDeclaredType>() {
+          @Override
+          public JvmDeclaredType compute() {
+            JvmDeclaredType _xblockexpression = null;
+            {
+              final StringBuilder buffer = new StringBuilder(100);
+              final String packageName = PsiBasedTypeFactory.this.getPackageName(psiClass);
+              boolean _notEquals = (!Objects.equal(packageName, null));
+              if (_notEquals) {
+                StringBuilder _append = buffer.append(packageName);
+                _append.append(".");
+              }
+              final JvmDeclaredType type = PsiBasedTypeFactory.this.createType(psiClass, buffer);
+              type.setPackageName(packageName);
+              _xblockexpression = type;
+            }
+            return _xblockexpression;
+          }
+        };
+        _xblockexpression = _application.<JvmDeclaredType>runReadAction(_function);
       }
-      final JvmDeclaredType type = this.createType(psiClass, buffer);
-      type.setPackageName(packageName);
-      return type;
+      _xtrycatchfinallyexpression = _xblockexpression;
     } finally {
       this.createTypeTask.stop();
     }
+    return _xtrycatchfinallyexpression;
   }
   
   protected JvmDeclaredType createType(final PsiClass psiClass, final StringBuilder fqn) {

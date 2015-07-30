@@ -9,10 +9,12 @@ package org.eclipse.xtext.idea.shared;
 
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.idea.common.types.StubTypeProviderFactory;
+import org.eclipse.xtext.idea.service.IdeaOperationCanceledManager;
 import org.eclipse.xtext.psi.IPsiModelAssociator;
 import org.eclipse.xtext.psi.PsiModelAssociations;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.service.AbstractGenericModule;
+import org.eclipse.xtext.service.OperationCanceledManager;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -29,5 +31,9 @@ public class IdeaSharedModule extends AbstractGenericModule {
   
   public Class<? extends IPsiModelAssociator> bindIPsiModelAssociator() {
     return PsiModelAssociations.class;
+  }
+  
+  public Class<? extends OperationCanceledManager> bindOperationCanceledManager() {
+    return IdeaOperationCanceledManager.class;
   }
 }
