@@ -78,7 +78,7 @@ class Java8ConverterTest extends JavaConverterTest {
 		'''.toXtendClassBodyDeclr)
 	}
 
-	@Test def void testDefaultMethode() throws Exception {
+	@Test def void testDefaultMethod() throws Exception {
 		DUMP = true
 		val clazz = toValidXtendInterface('''
 		public interface XtendInterfaze {

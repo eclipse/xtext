@@ -109,7 +109,6 @@ import org.eclipse.jdt.core.dom.WhileStatement
 import org.eclipse.jdt.core.dom.WildcardType
 import org.eclipse.xtend2.lib.StringConcatenation
 import org.eclipse.xtext.conversion.IValueConverterService
-import org.eclipse.jdt.core.dom.Dimension
 
 /**
  * @author Dennis Huebner - Initial contribution and API

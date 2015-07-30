@@ -168,7 +168,7 @@ public class Java8ConverterTest extends JavaConverterTest {
   }
   
   @Test
-  public void testDefaultMethode() throws Exception {
+  public void testDefaultMethod() throws Exception {
     JavaConverterTest.DUMP = true;
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public interface XtendInterfaze {");
