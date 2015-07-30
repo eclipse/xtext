@@ -10,52 +10,54 @@ package org.eclipse.xtend.core.javaconverter
 import java.io.File
 import java.net.URLClassLoader
 import org.eclipse.jdt.core.JavaCore
-import org.eclipse.jdt.core.dom.AST
 import org.eclipse.jdt.core.dom.ASTParser
+import org.eclipse.xtend.lib.annotations.Data
 
 /** 
  * @author dhuebner - Initial contribution and API
  */
 class ASTParserFactory {
 
-	String complianceLevel = "1.6"
+	protected final String minParserApiLevel = "1.6"
 
-	def protected createDefaultJavaParser(String compilerCompliance) {
-		val parser = ASTParser.newParser(asJLS(compilerCompliance))
+	def final protected createDefaultJavaParser(String javaVersion) {
+		var ASTParser parser
 		val options = JavaCore.getOptions()
-		JavaCore.setComplianceOptions(compilerCompliance, options)
+		try {
+			parser = ASTParser.newParser(asJLS(javaVersion))
+			JavaCore.setComplianceOptions(javaVersion, options)
+		} catch (IllegalArgumentException e) {
+			parser = ASTParser.newParser(asJLS(minParserApiLevel))
+			JavaCore.setComplianceOptions(minParserApiLevel, options)
+		}
+
 		options.put(JavaCore.COMPILER_DOC_COMMENT_SUPPORT, JavaCore.ENABLED)
 		parser.compilerOptions = options
+		parser.statementsRecovery = true
+		parser.resolveBindings = true
+		parser.bindingsRecovery = true
 		return parser
 	}
 
-	def static int asJLS(String compilerCompliance) {
-		switch (compilerCompliance) {
+	def static int asJLS(String javaVersion) {
+		switch (javaVersion) {
 			case "1.7": 4
 			case "1.8": 8
-			default: AST.JLS3
+			default: 3
 		}
 	}
 
-	def defaultCompliancelevel() {
-		return complianceLevel
-	}
-
 	/**
-	 * @param compilerCompliance compliance level when differs from the {@link #defaultCompliancelevel()}
 	 * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject or Module or null)
 	 */
-	def ASTParser createJavaParser(String compilerCompliance, Object context) {
-		val parser = createDefaultJavaParser(compilerCompliance)
+	def ASTParserWrapper createJavaParser(Object context) {
+		var targetJavaVersion = System.getProperty("java.specification.version");
+		if (targetJavaVersion === null) {
+			targetJavaVersion = minParserApiLevel
+		}
+		val parser = createDefaultJavaParser(targetJavaVersion)
 		provideCustomEnvironment(parser)
-		return parser
-	}
-
-	/**
-	 * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject or Module or null)
-	 */
-	def ASTParser createJavaParser(Object classPathContext) {
-		createJavaParser(defaultCompliancelevel, classPathContext)
+		return new ASTParserWrapper(targetJavaVersion, parser)
 	}
 
 	/**
@@ -69,4 +71,26 @@ class ASTParserFactory {
 		parser.setEnvironment(cpEntries, null, null, true)
 	}
 
+	@Data
+	static class ASTParserWrapper {
+		String targetLevel
+		ASTParser parser
+
+		def createAST() {
+			parser.createAST(null)
+		}
+
+		def setKind(int i) {
+			parser.kind = i
+		}
+
+		def setSource(char[] cs) {
+			parser.source = cs
+		}
+
+		def setUnitName(String string) {
+			parser.unitName = string
+		}
+
+	}
 }

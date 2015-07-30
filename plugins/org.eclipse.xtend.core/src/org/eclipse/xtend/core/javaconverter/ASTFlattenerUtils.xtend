@@ -7,12 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.javaconverter
 
+import java.util.List
 import org.eclipse.jdt.core.dom.ASTNode
 import org.eclipse.jdt.core.dom.ASTVisitor
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration
 import org.eclipse.jdt.core.dom.Annotation
 import org.eclipse.jdt.core.dom.Assignment
 import org.eclipse.jdt.core.dom.Block
+import org.eclipse.jdt.core.dom.ChildListPropertyDescriptor
+import org.eclipse.jdt.core.dom.ChildPropertyDescriptor
 import org.eclipse.jdt.core.dom.ClassInstanceCreation
 import org.eclipse.jdt.core.dom.Expression
 import org.eclipse.jdt.core.dom.FieldAccess
@@ -40,6 +43,7 @@ import org.eclipse.jdt.core.dom.TypeDeclarationStatement
 import org.eclipse.jdt.core.dom.VariableDeclarationExpression
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement
+import org.eclipse.swt.internal.cocoa.id
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -188,8 +192,7 @@ class ASTFlattenerUtils {
 			val typeDeclr = parentFieldDecl.findParentOfType(TypeDeclaration)
 
 			// Do not convert static final fields
-			if (typeDeclr.isInterface ||
-				parentFieldDecl.modifiers().isFinal && parentFieldDecl.modifiers().isStatic)
+			if (typeDeclr.isInterface || parentFieldDecl.modifiers().isFinal && parentFieldDecl.modifiers().isStatic)
 				return false
 		}
 		val nodes = node.collectCompatibleNodes()
@@ -313,7 +316,7 @@ class ASTFlattenerUtils {
 	def Boolean isAssignedInBody(Block scope, SimpleName nameToLookFor) {
 		return !scope.findAssigmentsInBlock(
 		[
-			if (leftHandSide  instanceof SimpleName) {
+			if (leftHandSide instanceof SimpleName) {
 				return nameToLookFor.identifier.equals((leftHandSide as SimpleName).identifier)
 			}
 			return false
@@ -328,4 +331,20 @@ class ASTFlattenerUtils {
 		name.name.identifier
 	}
 
+	def genericChildListProperty(ASTNode node, String propertyName) {
+		val property = node.structuralPropertiesForType.filter(ChildListPropertyDescriptor).filter[propertyName == id].
+			head
+		if (property != null) {
+			return node.getStructuralProperty(property) as List<ASTNode>
+		}
+		return null
+	}
+
+	def genericChildProperty(ASTNode node, String propertyName) {
+		val property = node.structuralPropertiesForType.filter(ChildPropertyDescriptor).filter[propertyName == id].head
+		if (property != null) {
+			return node.getStructuralProperty(property) as ASTNode
+		}
+		return null
+	}
 }
