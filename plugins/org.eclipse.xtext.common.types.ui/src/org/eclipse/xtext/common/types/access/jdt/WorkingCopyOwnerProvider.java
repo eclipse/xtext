@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaProject;
@@ -54,7 +55,9 @@ public class WorkingCopyOwnerProvider implements IWorkingCopyOwnerProvider {
 				Iterator<IEObjectDescription> exportedObjects = descriptions.getExportedObjects(TypesPackage.Literals.JVM_DECLARED_TYPE, qn, false).iterator();
 				while (exportedObjects.hasNext()) {
 					IEObjectDescription candidate = exportedObjects.next();
-					return getSource(typeName, packageName, candidate, resourceSet);
+					URI uri = candidate.getEObjectURI();
+					if (uri.isPlatformResource() && URI.decode(uri.segment(1)).equals(javaProject.getElementName()))
+						return getSource(typeName, packageName, candidate, resourceSet);
 				}
 				return super.findSource(typeName, packageName);
 			}
