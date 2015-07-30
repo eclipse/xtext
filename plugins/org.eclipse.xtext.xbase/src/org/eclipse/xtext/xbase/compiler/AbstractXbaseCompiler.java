@@ -350,7 +350,7 @@ public abstract class AbstractXbaseCompiler {
 	
 	protected boolean hasUnhandledException(List<LightweightTypeReference> thrownExceptions, Collection<JvmTypeReference> declaredExceptions) {
 		for(LightweightTypeReference thrownException: thrownExceptions) {
-			if (!thrownException.isSubtypeOf(RuntimeException.class)) {
+			if (!thrownException.isSubtypeOf(RuntimeException.class) && !thrownException.isSubtypeOf(Error.class)) {
 				if (isUnhandledException(thrownException, declaredExceptions)) {
 					return true;
 				}
