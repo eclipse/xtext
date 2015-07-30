@@ -106,7 +106,8 @@ public class HiddenLeafAccess {
           if (comment) {
             List<LeafInfo> _leafs = result.getLeafs();
             LeafInfo _last = IterableExtensions.<LeafInfo>last(_leafs);
-            if ((!(_last instanceof WhitespaceInfo))) {
+            boolean _not_1 = (!(_last instanceof WhitespaceInfo));
+            if (_not_1) {
               List<LeafInfo> _leafs_1 = result.getLeafs();
               int _offset = node.getOffset();
               WhitespaceInfo _whitespaceInfo = new WhitespaceInfo(result, null, 0, _offset);
@@ -128,7 +129,8 @@ public class HiddenLeafAccess {
       }
       List<LeafInfo> _leafs = result.getLeafs();
       LeafInfo _last = IterableExtensions.<LeafInfo>last(_leafs);
-      if ((!(_last instanceof WhitespaceInfo))) {
+      boolean _not = (!(_last instanceof WhitespaceInfo));
+      if (_not) {
         List<LeafInfo> _leafs_1 = result.getLeafs();
         int _xifexpression = (int) 0;
         List<LeafInfo> _leafs_2 = result.getLeafs();

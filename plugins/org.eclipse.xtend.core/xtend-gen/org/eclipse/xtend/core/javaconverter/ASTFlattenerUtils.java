@@ -177,7 +177,15 @@ public class ASTFlattenerUtils {
     if (!_not) {
       _and_1 = false;
     } else {
-      _and_1 = ((it.getParent() instanceof TypeDeclaration) || (it.getParent() instanceof Block));
+      boolean _or = false;
+      ASTNode _parent = it.getParent();
+      if ((_parent instanceof TypeDeclaration)) {
+        _or = true;
+      } else {
+        ASTNode _parent_1 = it.getParent();
+        _or = (_parent_1 instanceof Block);
+      }
+      _and_1 = _or;
     }
     if (!_and_1) {
       _and = false;
@@ -287,7 +295,16 @@ public class ASTFlattenerUtils {
     if ((_parent instanceof FieldAccess)) {
       _or = true;
     } else {
-      _or = ((it.getParent() instanceof VariableDeclarationFragment) && (it.getParent().getParent() instanceof FieldDeclaration));
+      boolean _and = false;
+      ASTNode _parent_1 = it.getParent();
+      if (!(_parent_1 instanceof VariableDeclarationFragment)) {
+        _and = false;
+      } else {
+        ASTNode _parent_2 = it.getParent();
+        ASTNode _parent_3 = _parent_2.getParent();
+        _and = (_parent_3 instanceof FieldDeclaration);
+      }
+      _or = _and;
     }
     return _or;
   }
@@ -345,7 +362,16 @@ public class ASTFlattenerUtils {
     if (!_notEquals) {
       _and = false;
     } else {
-      _and = ((!(node.getParent() instanceof Statement)) || (node.getParent() instanceof ReturnStatement));
+      boolean _or = false;
+      ASTNode _parent_1 = node.getParent();
+      boolean _not = (!(_parent_1 instanceof Statement));
+      if (_not) {
+        _or = true;
+      } else {
+        ASTNode _parent_2 = node.getParent();
+        _or = (_parent_2 instanceof ReturnStatement);
+      }
+      _and = _or;
     }
     return _and;
   }
