@@ -44,6 +44,7 @@ import org.eclipse.xtext.idea.parser.AntlrDelegatingIdeaLexer;
 import org.eclipse.xtext.idea.refactoring.NullNamesValidator;
 import org.eclipse.xtext.idea.resource.IdeaEncodingProvider;
 import org.eclipse.xtext.idea.resource.IdeaResourceDescriptionsProvider;
+import org.eclipse.xtext.idea.service.IdeaOperationCanceledManager;
 import org.eclipse.xtext.idea.structureview.DefaultPsiStructureViewFactory;
 import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider;
 import org.eclipse.xtext.parser.IEncodingProvider;
@@ -58,6 +59,7 @@ import org.eclipse.xtext.resource.IResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.containers.ProjectDescriptionBasedContainerManager;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.service.LanguageSpecific;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
 
@@ -165,6 +167,10 @@ public class DefaultIdeaModule extends AbstractGenericModule {
   @SingletonBinding
   public Class<? extends IIndentationInformation> bindIIndentationInformation() {
     return CodeStyleSettingsIndentationInformation.class;
+  }
+  
+  public Class<? extends OperationCanceledManager> bindOperationCanceledManager() {
+    return IdeaOperationCanceledManager.class;
   }
   
   public Class<? extends ITraceForURIProvider> bindPlatformNeutralTraceInformation() {

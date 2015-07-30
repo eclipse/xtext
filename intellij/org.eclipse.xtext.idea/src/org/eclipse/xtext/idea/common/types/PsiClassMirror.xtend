@@ -12,6 +12,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.access.TypeResource
 import org.eclipse.xtext.common.types.access.impl.AbstractClassMirror
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory
+import com.intellij.openapi.application.ApplicationManager
 
 class PsiClassMirror extends AbstractClassMirror {
 	
@@ -25,7 +26,9 @@ class PsiClassMirror extends AbstractClassMirror {
 	}
 	
 	override protected getTypeName() {
-		psiClass.qualifiedName
+		ApplicationManager.application.<String>runReadAction[
+			psiClass.qualifiedName
+		]
 	}
 	
 	override initialize(TypeResource typeResource) {

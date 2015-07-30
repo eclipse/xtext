@@ -16,6 +16,7 @@ import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.util.UriUtil
+import org.eclipse.xtext.util.CancelIndicator
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -50,6 +51,7 @@ class BuildRequest {
 	boolean indexOnly = false
 	
 	XtextResourceSet resourceSet
+	CancelIndicator cancelIndicator = CancelIndicator.NullImpl
 	
 	interface IPostValidationCallback {
 		

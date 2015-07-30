@@ -17,6 +17,7 @@ import org.eclipse.xtext.build.IndexState;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -38,6 +39,9 @@ public class BuildContext {
   
   @Accessors
   private final IResourceClusteringPolicy clusteringPolicy;
+  
+  @Accessors
+  private final CancelIndicator cancelIndicator;
   
   private ClusteringStorageAwareResourceLoader loader;
   
@@ -63,12 +67,13 @@ public class BuildContext {
     return resourceServiceProvider;
   }
   
-  public BuildContext(final Function1<? super URI, ? extends IResourceServiceProvider> resourceServiceProviderProvider, final XtextResourceSet resourceSet, final IndexState oldState, final IResourceClusteringPolicy clusteringPolicy) {
+  public BuildContext(final Function1<? super URI, ? extends IResourceServiceProvider> resourceServiceProviderProvider, final XtextResourceSet resourceSet, final IndexState oldState, final IResourceClusteringPolicy clusteringPolicy, final CancelIndicator cancelIndicator) {
     super();
     this.resourceServiceProviderProvider = resourceServiceProviderProvider;
     this.resourceSet = resourceSet;
     this.oldState = oldState;
     this.clusteringPolicy = clusteringPolicy;
+    this.cancelIndicator = cancelIndicator;
   }
   
   @Pure
@@ -84,5 +89,10 @@ public class BuildContext {
   @Pure
   public IResourceClusteringPolicy getClusteringPolicy() {
     return this.clusteringPolicy;
+  }
+  
+  @Pure
+  public CancelIndicator getCancelIndicator() {
+    return this.cancelIndicator;
   }
 }

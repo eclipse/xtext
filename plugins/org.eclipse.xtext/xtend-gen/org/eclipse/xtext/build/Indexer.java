@@ -44,6 +44,8 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
+import org.eclipse.xtext.service.OperationCanceledManager;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -208,6 +210,10 @@ public class Indexer {
   @Inject
   private CompilerPhases compilerPhases;
   
+  @Inject
+  @Extension
+  private OperationCanceledManager _operationCanceledManager;
+  
   public Indexer.IndexResult computeAndIndexAffected(final BuildRequest request, @Extension final BuildContext context) {
     IndexState _oldState = context.getOldState();
     final ResourceDescriptionsData previousIndex = _oldState.getResourceDescriptions();
@@ -305,6 +311,8 @@ public class Indexer {
     final Procedure1<URI> _function_1 = new Procedure1<URI>() {
       @Override
       public void apply(final URI it) {
+        CancelIndicator _cancelIndicator = context.getCancelIndicator();
+        Indexer.this._operationCanceledManager.checkCanceled(_cancelIndicator);
         IResourceDescription _resourceDescription = null;
         if (oldIndex!=null) {
           _resourceDescription=oldIndex.getResourceDescription(it);
@@ -340,6 +348,8 @@ public class Indexer {
   }
   
   protected IResourceDescription.Delta addToIndex(final Resource resource, final boolean isPreIndexing, final ResourceDescriptionsData oldIndex, final BuildContext context) {
+    CancelIndicator _cancelIndicator = context.getCancelIndicator();
+    this._operationCanceledManager.checkCanceled(_cancelIndicator);
     final URI uri = resource.getURI();
     final IResourceServiceProvider serviceProvider = context.getResourceServiceProvider(uri);
     final IResourceDescription.Manager manager = serviceProvider.getResourceDescriptionManager();

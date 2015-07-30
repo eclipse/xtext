@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.idea.completion;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.codeInsight.template.EverywhereContextType;
 import com.intellij.codeInsight.template.TemplateContextType;
@@ -113,13 +112,17 @@ public abstract class XtendCodeContextType extends TemplateContextType {
   
   public boolean internalIsInContext(final PsiFile file, final int offset) {
     final PsiElement element = file.findElementAt(offset);
-    boolean _equals = Objects.equal(element, null);
-    if (_equals) {
+    ASTNode _node = null;
+    if (element!=null) {
+      _node=element.getNode();
+    }
+    boolean _tripleEquals = (_node == null);
+    if (_tripleEquals) {
       return false;
     }
     String _text = file.getText();
-    ASTNode _node = element.getNode();
-    int _startOffset = _node.getStartOffset();
+    ASTNode _node_1 = element.getNode();
+    int _startOffset = _node_1.getStartOffset();
     String _substring = _text.substring(0, _startOffset);
     final Collection<FollowElement> elements = this.contentAssistParser.getFollowElements(_substring, false);
     final AtomicBoolean hasFollowElement = new AtomicBoolean(false);

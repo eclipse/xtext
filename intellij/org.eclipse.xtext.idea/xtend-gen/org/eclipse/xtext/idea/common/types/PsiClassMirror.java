@@ -7,6 +7,9 @@
  */
 package org.eclipse.xtext.idea.common.types;
 
+import com.intellij.openapi.application.Application;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.util.Computable;
 import com.intellij.psi.PsiClass;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -28,7 +31,14 @@ public class PsiClassMirror extends AbstractClassMirror {
   
   @Override
   protected String getTypeName() {
-    return this.psiClass.getQualifiedName();
+    Application _application = ApplicationManager.getApplication();
+    final Computable<String> _function = new Computable<String>() {
+      @Override
+      public String compute() {
+        return PsiClassMirror.this.psiClass.getQualifiedName();
+      }
+    };
+    return _application.<String>runReadAction(_function);
   }
   
   @Override

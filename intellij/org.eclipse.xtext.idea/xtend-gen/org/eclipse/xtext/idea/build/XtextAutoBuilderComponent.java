@@ -66,7 +66,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
@@ -91,6 +90,7 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -107,9 +107,24 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @Log
 @SuppressWarnings("all")
 public class XtextAutoBuilderComponent extends AbstractProjectComponent implements Disposable {
+  public static class MutableCancelIndicator implements CancelIndicator {
+    private volatile boolean canceled;
+    
+    @Override
+    public boolean isCanceled() {
+      return this.canceled;
+    }
+    
+    public boolean setCanceled(final boolean canceled) {
+      return this.canceled = canceled;
+    }
+  }
+  
   private volatile boolean disposed;
   
-  private BlockingQueue<BuildEvent> queue = new LinkedBlockingQueue<BuildEvent>();
+  private final LinkedBlockingQueue<BuildEvent> queue = new LinkedBlockingQueue<BuildEvent>();
+  
+  private final LinkedBlockingQueue<XtextAutoBuilderComponent.MutableCancelIndicator> cancelIndicators = new LinkedBlockingQueue<XtextAutoBuilderComponent.MutableCancelIndicator>();
   
   private Alarm alarm;
   
@@ -293,8 +308,6 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
         XtextAutoBuilderComponent.this.doCleanBuild(_module);
       }
     }, this);
-    Alarm _alarm_1 = new Alarm(Alarm.ThreadToUse.OWN_THREAD, project);
-    this.alarm = _alarm_1;
   }
   
   protected boolean isXtextFacet(final Facet<?> facet) {
@@ -470,13 +483,20 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
       this.build();
     } else {
       this.alarm.cancelAllRequests();
-      final Runnable _function = new Runnable() {
+      final Procedure1<XtextAutoBuilderComponent.MutableCancelIndicator> _function = new Procedure1<XtextAutoBuilderComponent.MutableCancelIndicator>() {
+        @Override
+        public void apply(final XtextAutoBuilderComponent.MutableCancelIndicator it) {
+          it.canceled = true;
+        }
+      };
+      IterableExtensions.<XtextAutoBuilderComponent.MutableCancelIndicator>forEach(this.cancelIndicators, _function);
+      final Runnable _function_1 = new Runnable() {
         @Override
         public void run() {
           XtextAutoBuilderComponent.this.build();
         }
       };
-      this.alarm.addRequest(_function, 200);
+      this.alarm.addRequest(_function_1, 200);
     }
   }
   
@@ -623,7 +643,11 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   }
   
   protected void internalBuild(final List<BuildEvent> allEvents) {
+    final ArrayList<BuildEvent> unProcessedEvents = CollectionLiterals.<BuildEvent>newArrayList();
+    Iterables.<BuildEvent>addAll(unProcessedEvents, allEvents);
     final Application app = ApplicationManager.getApplication();
+    final XtextAutoBuilderComponent.MutableCancelIndicator cancelIndicator = new XtextAutoBuilderComponent.MutableCancelIndicator();
+    this.cancelIndicators.add(cancelIndicator);
     Project _project = this.getProject();
     final ModuleManager moduleManager = ModuleManager.getInstance(_project);
     final BuildProgressReporter buildProgressReporter = this.buildProgressReporterProvider.get();
@@ -725,39 +749,28 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
                   }
                 };
                 it.setAfterDeleteFile(_function);
+                it.setCancelIndicator(cancelIndicator);
               }
             };
             final BuildRequest request = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_2);
-            final Computable<IncrementalBuilder.Result> _function_3 = new Computable<IncrementalBuilder.Result>() {
-              @Override
-              public IncrementalBuilder.Result compute() {
-                IncrementalBuilder _get = XtextAutoBuilderComponent.this.builderProvider.get();
-                Function1<URI, IResourceServiceProvider> _serviceProviderProvider = XtextAutoBuilderComponent.this.getServiceProviderProvider(module);
-                return _get.build(request, _serviceProviderProvider);
-              }
-            };
-            final IncrementalBuilder.Result result = app.<IncrementalBuilder.Result>runReadAction(_function_3);
-            final Runnable _function_4 = new Runnable() {
+            IncrementalBuilder _get_1 = this.builderProvider.get();
+            Function1<URI, IResourceServiceProvider> _serviceProviderProvider = this.getServiceProviderProvider(module);
+            final IncrementalBuilder.Result result = _get_1.build(request, _serviceProviderProvider);
+            final Runnable _function_3 = new Runnable() {
               @Override
               public void run() {
-                final Runnable _function = new Runnable() {
-                  @Override
-                  public void run() {
-                    try {
-                      XtextAutoBuilderComponent.this.ignoreIncomingEvents = true;
-                      XtextResourceSet _resourceSet = request.getResourceSet();
-                      final IdeaResourceSetProvider.VirtualFileBasedUriHandler handler = IdeaResourceSetProvider.VirtualFileBasedUriHandler.find(_resourceSet);
-                      handler.flushToDisk();
-                    } finally {
-                      XtextAutoBuilderComponent.this.ignoreIncomingEvents = false;
-                    }
-                  }
-                };
-                app.runWriteAction(_function);
+                try {
+                  XtextAutoBuilderComponent.this.ignoreIncomingEvents = true;
+                  XtextResourceSet _resourceSet = request.getResourceSet();
+                  final IdeaResourceSetProvider.VirtualFileBasedUriHandler handler = IdeaResourceSetProvider.VirtualFileBasedUriHandler.find(_resourceSet);
+                  handler.flushToDisk();
+                } finally {
+                  XtextAutoBuilderComponent.this.ignoreIncomingEvents = false;
+                }
               }
             };
             ModalityState _any = ModalityState.any();
-            app.invokeAndWait(_function_4, _any);
+            app.invokeAndWait(_function_3, _any);
             String _name_2 = module.getName();
             IndexState _indexState = result.getIndexState();
             ResourceDescriptionsData _resourceDescriptions = _indexState.getResourceDescriptions();
@@ -767,18 +780,20 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
             this.module2GeneratedMapping.put(module, _fileMappings);
             List<IResourceDescription.Delta> _affectedResources = result.getAffectedResources();
             deltas.addAll(_affectedResources);
+            Iterables.removeAll(unProcessedEvents, events);
           }
         }
       }
     } catch (final Throwable _t) {
       if (_t instanceof ProcessCanceledException) {
         final ProcessCanceledException exc = (ProcessCanceledException)_t;
-        this.queue.addAll(allEvents);
+        this.queue.addAll(unProcessedEvents);
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
     } finally {
       buildProgressReporter.clearProgress();
+      this.cancelIndicators.remove(cancelIndicator);
     }
   }
   
