@@ -10,6 +10,7 @@ package org.eclipse.xtext.junit4.validation;
 import static com.google.common.collect.Iterables.*;
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
@@ -48,7 +49,14 @@ public class ValidationTestHelper {
 	}
 
 	public void assertNoError(final EObject model, final String issueCode) {
-		assertNoError(model.eResource(), issueCode);
+		assertNoError(model.eResource(), issueCode, null);
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public void assertNoError(final EObject model, final String issueCode, final String userData) {
+		assertNoError(model.eResource(), issueCode, userData);
 	}
 
 	/**
@@ -183,11 +191,21 @@ public class ValidationTestHelper {
 	 * @since 2.8
 	 */
 	public void assertNoError(final Resource resource, final String issuecode) {
+		assertNoError(resource, issuecode, null);
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public void assertNoError(final Resource resource, final String issuecode, final String userData) {
 		final List<Issue> validate = validate(resource);
 		Iterable<Issue> issues = filter(validate, new Predicate<Issue>() {
 			@Override
 			public boolean apply(Issue input) {
-				return issuecode.equals(input.getCode());
+				if (issuecode.equals(input.getCode())) {
+					return userData == null || Iterables.contains(Arrays.asList(input.getData()), userData);
+				}
+				return false;
 			}
 		});
 		if (!isEmpty(issues))
@@ -443,5 +461,5 @@ public class ValidationTestHelper {
 		}
 		return result;
 	}
-	
+
 }
