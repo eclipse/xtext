@@ -1,11 +1,11 @@
 /**
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtend.core.linking;
+package org.eclipse.xtext.xbase.annotations.validation;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
@@ -14,8 +14,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtend.core.validation.IssueCodes;
-import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -24,13 +22,13 @@ import org.eclipse.xtext.diagnostics.DiagnosticMessage;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.linking.impl.IllegalNodeException;
+import org.eclipse.xtext.linking.impl.LinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.annotations.validation.UnresolvedAnnotationTypeAwareMessageProducer;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -44,15 +42,17 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.util.FeatureCallAsTypeLiteralHelper;
 
 /**
- * @author Holger Schill - Initial contribution and API
+ * @author Dennis Huebner - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class XtendLinkingDiagnosticMessageProvider extends UnresolvedAnnotationTypeAwareMessageProducer {
+public class LinkingDiagnosticTypeAwareMessageProducer extends LinkingDiagnosticMessageProvider {
   /**
    * A user data entry that indicates a broken feature link which could also be
    * a type literal, e.g. 'String::CASE_INSENSITIVE'.
    */
   public final static String TYPE_LITERAL = "key:TypeLiteral";
+  
+  public final static String FEATURE_CALL = "key:FeatureCall";
   
   @Inject
   private FeatureCallAsTypeLiteralHelper typeLiteralHelper;
@@ -63,24 +63,19 @@ public class XtendLinkingDiagnosticMessageProvider extends UnresolvedAnnotationT
   
   @Override
   public DiagnosticMessage getUnresolvedProxyMessage(final ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext context) {
-    boolean _isPropertyOfUnresolvedAnnotation = this.isPropertyOfUnresolvedAnnotation(context);
-    if (_isPropertyOfUnresolvedAnnotation) {
-      return null;
-    }
-    String linkText = "";
+    String _xtrycatchfinallyexpression = null;
     try {
-      String _linkText = context.getLinkText();
-      linkText = _linkText;
+      _xtrycatchfinallyexpression = context.getLinkText();
     } catch (final Throwable _t) {
       if (_t instanceof IllegalNodeException) {
         final IllegalNodeException e = (IllegalNodeException)_t;
         INode _node = e.getNode();
-        String _text = _node.getText();
-        linkText = _text;
+        _xtrycatchfinallyexpression = _node.getText();
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
     }
+    String linkText = _xtrycatchfinallyexpression;
     if ((linkText == null)) {
       return null;
     }
@@ -91,16 +86,13 @@ public class XtendLinkingDiagnosticMessageProvider extends UnresolvedAnnotationT
       _builder.append(linkText, "");
       _builder.append(" cannot be resolved to a type.");
       return new DiagnosticMessage(_builder.toString(), Severity.ERROR, Diagnostic.LINKING_DIAGNOSTIC, 
-        XtendLinkingDiagnosticMessageProvider.TYPE_LITERAL);
+        LinkingDiagnosticTypeAwareMessageProducer.TYPE_LITERAL);
     }
     if ((contextObject instanceof XAbstractFeatureCall)) {
       boolean _isOperation = ((XAbstractFeatureCall)contextObject).isOperation();
       boolean _not = (!_isOperation);
       if (_not) {
-        XtendTypeDeclaration xtendType = EcoreUtil2.<XtendTypeDeclaration>getContainerOfType(contextObject, XtendTypeDeclaration.class);
-        if ((xtendType != null)) {
-          return this.handleUnresolvedFeatureCall(context, ((XAbstractFeatureCall)contextObject), linkText);
-        }
+        return this.handleUnresolvedFeatureCall(context, ((XAbstractFeatureCall)contextObject), linkText);
       }
     }
     EReference _reference = context.getReference();
@@ -140,11 +132,17 @@ public class XtendLinkingDiagnosticMessageProvider extends UnresolvedAnnotationT
         @Override
         public CharSequence apply(final LightweightTypeReference it) {
           String _xifexpression = null;
-          boolean _notEquals = (!Objects.equal(it, null));
-          if (_notEquals) {
-            _xifexpression = it.getHumanReadableName();
+          boolean _or = false;
+          if ((it == null)) {
+            _or = true;
           } else {
+            boolean _isAny = it.isAny();
+            _or = _isAny;
+          }
+          if (_or) {
             _xifexpression = "Object";
+          } else {
+            _xifexpression = it.getHumanReadableName();
           }
           return _xifexpression;
         }
@@ -203,9 +201,9 @@ public class XtendLinkingDiagnosticMessageProvider extends UnresolvedAnnotationT
       _and = _isPotentialTypeLiteral;
     }
     if (_and) {
-      return new DiagnosticMessage(msg, Severity.ERROR, IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, linkText, XtendLinkingDiagnosticMessageProvider.TYPE_LITERAL);
+      return new DiagnosticMessage(msg, Severity.ERROR, Diagnostic.LINKING_DIAGNOSTIC, linkText, LinkingDiagnosticTypeAwareMessageProducer.TYPE_LITERAL);
     }
-    return new DiagnosticMessage(msg, Severity.ERROR, IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, linkText);
+    return new DiagnosticMessage(msg, Severity.ERROR, Diagnostic.LINKING_DIAGNOSTIC, linkText, LinkingDiagnosticTypeAwareMessageProducer.FEATURE_CALL);
   }
   
   protected boolean isStaticMemberCallTarget(final EObject contextObject) {

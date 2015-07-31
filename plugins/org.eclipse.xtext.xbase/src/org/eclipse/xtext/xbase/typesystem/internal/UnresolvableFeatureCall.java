@@ -11,16 +11,11 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.diagnostics.DiagnosticMessage;
-import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -78,43 +73,6 @@ public class UnresolvableFeatureCall extends AbstractUnresolvableReferenceWithNo
 		}
 		return result;
 	}
-	
-	@Override
-	protected Resource.Diagnostic createDiagnostic(DiagnosticMessage message) {
-		String messageString = message.getMessage();
-		String issueCode = message.getIssueCode();
-		if (messageString.startsWith("Couldn't resolve reference to JvmIdentifiableElement")) {
-			if (getFeatureCall().isExplicitOperationCallOrBuilderSyntax()) {
-				List<XExpression> arguments = new FeatureLinkHelper().getSyntacticArguments(getFeatureCall());
-				String argumentTypes = "";
-				if (!arguments.isEmpty()) {
-					IResolvedTypes resolvedTypes = getResolvedTypes();
-					StringBuilder argumentTypesBuilder = new StringBuilder();
-					for(XExpression argument: arguments) {
-						if (argumentTypesBuilder.length() != 0) {
-							argumentTypesBuilder.append(", ");
-						}
-						LightweightTypeReference argumentType = resolvedTypes.getActualType(argument);
-						if (argumentType == null || argumentType.isAny()) {
-							argumentTypesBuilder.append("Object");
-						} else {
-							argumentTypesBuilder.append(argumentType.getHumanReadableName());
-						}
-					}
-					argumentTypes = argumentTypesBuilder.toString();
-				}
-				messageString = "The method " + getLinkText()  + "(" + argumentTypes + ") is undefined";
-				issueCode = org.eclipse.xtext.diagnostics.Diagnostic.LINKING_DIAGNOSTIC;
-			}
-		}
-		Diagnostic diagnostic = new XtextLinkingDiagnostic(
-				getNode(), 
-				messageString,
-				issueCode,
-				message.getIssueData());
-		return diagnostic;
-	}
-
 	
 	/* @Nullable */
 	protected XExpression getSyntacticReceiver() {

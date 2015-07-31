@@ -434,8 +434,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
-    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Create field \'bar\'", "Create local variable \'bar\'", "Create method \'bar()\'", "Create method \'getBar()\'");
+    QuickfixTestBuilder _assertFatureCallLinkingIssue = _create.assertFatureCallLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabels = _assertFatureCallLinkingIssue.assertResolutionLabels("Create field \'bar\'", "Create local variable \'bar\'", "Create method \'bar()\'", "Create method \'getBar()\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -551,8 +551,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
-    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Create method \'bar()\'");
+    QuickfixTestBuilder _assertFatureCallLinkingIssue = _create.assertFatureCallLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabels = _assertFatureCallLinkingIssue.assertResolutionLabels("Create method \'bar()\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -600,8 +600,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
-    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Create method \'bar()\'");
+    QuickfixTestBuilder _assertFatureCallLinkingIssue = _create.assertFatureCallLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabels = _assertFatureCallLinkingIssue.assertResolutionLabels("Create method \'bar()\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("abstract class Foo {");
     _builder_1.newLine();
@@ -648,8 +648,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
-    QuickfixTestBuilder _assertResolutionLabelsSubset = _assertIssueCodes.assertResolutionLabelsSubset("Create method \'bar()\' in \'Bar\'");
+    QuickfixTestBuilder _assertFatureCallLinkingIssue = _create.assertFatureCallLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabelsSubset = _assertFatureCallLinkingIssue.assertResolutionLabelsSubset("Create method \'bar()\' in \'Bar\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -864,8 +864,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
-    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Create method \'bar()\'");
+    QuickfixTestBuilder _assertFatureCallLinkingIssue = _create.assertFatureCallLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabels = _assertFatureCallLinkingIssue.assertResolutionLabels("Create method \'bar()\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -913,8 +913,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
-    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Create method \'bar()\'", "Create field \'bar\'", "Create method \'getBar()\'");
+    QuickfixTestBuilder _assertFatureCallLinkingIssue = _create.assertFatureCallLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabels = _assertFatureCallLinkingIssue.assertResolutionLabels("Create method \'bar()\'", "Create field \'bar\'", "Create method \'getBar()\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -1015,8 +1015,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
-    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Create method \'foo()\' in \'Foo\'", "Create method \'getFoo()\' in \'Foo\'", 
+    QuickfixTestBuilder _assertFatureCallLinkingIssue = _create.assertFatureCallLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabels = _assertFatureCallLinkingIssue.assertResolutionLabels("Create method \'foo()\' in \'Foo\'", "Create method \'getFoo()\' in \'Foo\'", 
       "Create extension method \'foo(Foo)\'", "Create extension method \'getFoo(Foo)\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
@@ -1170,8 +1170,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
-    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Create static method \'foo()\' in \'Foo\'", "Create static method \'getFoo()\' in \'Foo\'");
+    QuickfixTestBuilder _assertFatureCallLinkingIssue = _create.assertFatureCallLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabels = _assertFatureCallLinkingIssue.assertResolutionLabels("Create static method \'foo()\' in \'Foo\'", "Create static method \'getFoo()\' in \'Foo\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -1259,8 +1259,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
-    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Create method \'bar()\'");
+    QuickfixTestBuilder _assertFatureCallLinkingIssue = _create.assertFatureCallLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabels = _assertFatureCallLinkingIssue.assertResolutionLabels("Create method \'bar()\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -1313,8 +1313,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
-    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Create method \'foo()\' in \'Foo\'", "Create extension method \'foo(Foo)\'");
+    QuickfixTestBuilder _assertFatureCallLinkingIssue = _create.assertFatureCallLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabels = _assertFatureCallLinkingIssue.assertResolutionLabels("Create method \'foo()\' in \'Foo\'", "Create extension method \'foo(Foo)\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -1405,8 +1405,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
-    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Create static method \'foo()\' in \'Foo\'");
+    QuickfixTestBuilder _assertFatureCallLinkingIssue = _create.assertFatureCallLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabels = _assertFatureCallLinkingIssue.assertResolutionLabels("Create static method \'foo()\' in \'Foo\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -1459,8 +1459,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
-    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Create local variable \'bar\'", "Create static method \'bar()\'", "Create static method \'getBar()\'", "Create static field \'bar\'");
+    QuickfixTestBuilder _assertFatureCallLinkingIssue = _create.assertFatureCallLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabels = _assertFatureCallLinkingIssue.assertResolutionLabels("Create local variable \'bar\'", "Create static method \'bar()\'", "Create static method \'getBar()\'", "Create static field \'bar\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -1552,8 +1552,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
-    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Create static method \'bar()\'", "Create static method \'getBar()\'", "Create static field \'bar\'");
+    QuickfixTestBuilder _assertFatureCallLinkingIssue = _create.assertFatureCallLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabels = _assertFatureCallLinkingIssue.assertResolutionLabels("Create static method \'bar()\'", "Create static method \'getBar()\'", "Create static field \'bar\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -1627,8 +1627,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
-    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Create method \'bar()\'", "Create method \'getBar()\'", "Create field \'bar\'");
+    QuickfixTestBuilder _assertFatureCallLinkingIssue = _create.assertFatureCallLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabels = _assertFatureCallLinkingIssue.assertResolutionLabels("Create method \'bar()\'", "Create method \'getBar()\'", "Create field \'bar\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -4157,8 +4157,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
-    QuickfixTestBuilder _assertResolutionLabelsSubset = _assertIssueCodes.assertResolutionLabelsSubset("Import \'Collections\' (java.util)");
+    QuickfixTestBuilder _assertTypeLiteralLinkingIssue = _create.assertTypeLiteralLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabelsSubset = _assertTypeLiteralLinkingIssue.assertResolutionLabelsSubset("Import \'Collections\' (java.util)");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.util.Collections");
     _builder_1.newLine();
@@ -4196,8 +4196,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
-    QuickfixTestBuilder _assertResolutionLabelsSubset = _assertIssueCodes.assertResolutionLabelsSubset("Import \'Collections\' (java.util)");
+    QuickfixTestBuilder _assertTypeLiteralLinkingIssue = _create.assertTypeLiteralLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabelsSubset = _assertTypeLiteralLinkingIssue.assertResolutionLabelsSubset("Import \'Collections\' (java.util)");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.util.Collections");
     _builder_1.newLine();
@@ -4283,8 +4283,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
-    QuickfixTestBuilder _assertResolutionLabelsSubset = _assertIssueCodes.assertResolutionLabelsSubset("Create method \'bar(int, Object)\'");
+    QuickfixTestBuilder _assertFatureCallLinkingIssue = _create.assertFatureCallLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabelsSubset = _assertFatureCallLinkingIssue.assertResolutionLabelsSubset("Create method \'bar(int, Object)\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();

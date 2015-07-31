@@ -115,7 +115,6 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	@Inject private IBatchTypeResolver batchTypeResolver;
 	
 	private static final Set<String> LINKING_ISSUE_CODES = newHashSet(
-			IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, 
 			Diagnostic.LINKING_DIAGNOSTIC,
 			IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC,
 			org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_ARGUMENT_TYPES,
