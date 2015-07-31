@@ -18,7 +18,6 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -48,6 +47,7 @@ import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.ForwardingMap;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -68,13 +68,12 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 		public URI uriPrefix;
 		public final Object modificationStamp;
 		public final Map<String, IPackageFragmentRoot> associatedRoots;
+		public Map<URI, IStorage> uri2Storage = newLinkedHashMap();
 
 		public PackageFragmentRootData(Object modificationStamp) {
 			this.modificationStamp = modificationStamp;
-			this.associatedRoots = newHashMap();
+			this.associatedRoots = newLinkedHashMap();
 		}
-
-		public Map<URI, IStorage> uri2Storage = newLinkedHashMap();
 		
 		@Override
 		public String toString() {
@@ -82,17 +81,17 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 		}
 
 		public boolean exists() {
-			if (associatedRoots.size() == 0) {
+			if (associatedRoots.isEmpty()) {
 				return false;
 			}
-			return associatedRoots.values().iterator().next().exists();
+			return IterableExtensions.head(associatedRoots.values()).exists();
 		}
 
 		public IPath getPath() {
-			if (associatedRoots.size() == 0) {
+			if (associatedRoots.isEmpty()) {
 				return null;
 			}
-			return associatedRoots.values().iterator().next().getPath();
+			return IterableExtensions.head(associatedRoots.values()).getPath();
 		}
 
 		public void addRoot(IPackageFragmentRoot root) {
@@ -442,20 +441,35 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 			if (toBeKept.contains(data)) {
 				continue;
 			}
-			Iterator<Entry<String, IPackageFragmentRoot>> i = data.associatedRoots.entrySet().iterator();
+			Iterator<IPackageFragmentRoot> i = data.associatedRoots.values().iterator();
+			IPackageFragmentRoot someRoot = null;
+			boolean didChange = false;
 			while (i.hasNext()) {
-				Entry<String, IPackageFragmentRoot> root = i.next();
-				if (project.equals(root.getValue().getJavaProject())) {
+				IPackageFragmentRoot root = i.next();
+				if (project.equals(root.getJavaProject())) {
 					i.remove();
+					didChange = true;
+				} else if (someRoot == null) {
+					someRoot = root;
 				}
 			}
 			if (data.associatedRoots.size() == 0) {
 				toBeRemoved.add(data);
-			} else {
+			} else if (didChange) {
 				// get rid of cached storages that still point to roots / projects that are no longer available
-				IPackageFragmentRoot someRoot = IterableExtensions.head(data.associatedRoots.values());
-				PackageFragmentRootData newlyCollected = initializeData(someRoot);
-				data.uri2Storage = newlyCollected.uri2Storage;
+				// and recompute them lazily on demand
+				final IPackageFragmentRoot rootToProcess = someRoot;
+				data.uri2Storage = new ForwardingMap<URI, IStorage>() {
+					Map<URI, IStorage> delegate;
+					@Override
+					protected Map<URI, IStorage> delegate() {
+						if (delegate == null) {
+							PackageFragmentRootData newlyCollected = initializeData(rootToProcess);
+							return delegate = newlyCollected.uri2Storage; 
+						}
+						return delegate;
+					}
+				};
 			}
 		}
 		if(!toBeRemoved.isEmpty()) {

@@ -183,7 +183,7 @@ class Storage2UriMapperJavaImplTest extends Assert {
 			assertEquals(key, 2, value.associatedRoots.size)
 			val head = value.associatedRoots.keySet.head
 			assertTrue(head, head.startsWith('=testProject/') || head.startsWith('=testProject2/'))
-			val head2 = value.associatedRoots.keySet.tail.head
+			val head2 = value.associatedRoots.keySet.last
 			assertTrue(head2, head.startsWith('=testProject/') || head.startsWith('=testProject2/'))
 		]
 	}
