@@ -13,6 +13,8 @@ import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.util.ITextRegion;
 
 /**
+ * SPI for platform specific enhancements to the traces.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public interface IPlatformSpecificTrace<
@@ -91,7 +93,5 @@ public interface IPlatformSpecificTrace<
 
 	@Override
 	Iterable<? extends Location> getAllAssociatedLocations(AbsoluteURI uri);
-
-
 	
 }
