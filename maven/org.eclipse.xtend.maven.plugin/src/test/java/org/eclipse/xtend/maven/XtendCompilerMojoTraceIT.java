@@ -22,7 +22,7 @@ public class XtendCompilerMojoTraceIT {
 			FileInputStream in = new FileInputStream(file);
 			try {
 				AbstractTraceRegion region = new TraceRegionSerializer().readTraceRegionFrom(in);
-				return region.getAssociatedPath().toString();
+				return region.getAssociatedSrcRelativePath().toString();
 			} finally {
 				in.close();
 			}
