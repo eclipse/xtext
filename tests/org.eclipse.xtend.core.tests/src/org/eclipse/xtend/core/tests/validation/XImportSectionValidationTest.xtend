@@ -8,14 +8,21 @@
 package org.eclipse.xtend.core.tests.validation
 
 import com.google.inject.Inject
+import java.util.List
+import org.eclipse.emf.ecore.EClass
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
+import org.eclipse.xtend.core.xtend.XtendFile
+import org.eclipse.xtext.diagnostics.Diagnostic
+import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
+import org.eclipse.xtext.validation.Issue
+import org.eclipse.xtext.xbase.annotations.validation.LinkingDiagnosticTypeAwareMessageProducer
 import org.junit.Test
 
-import static org.eclipse.xtend.core.validation.IssueCodes.*
+import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*
 import static org.eclipse.xtext.xtype.XtypePackage.Literals.*
-import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -312,7 +319,7 @@ class XImportSectionValidationTest extends AbstractXtendTestCase {
 		'''.toString.file
 		file.assertWarning(XIMPORT_DECLARATION, IMPORT_UNUSED, "java.lang.String.valueOf")
 		file.assertWarning(XIMPORT_DECLARATION, IMPORT_UNUSED, "java.lang.Integer.valueOf")
-		file.assertError(XMEMBER_FEATURE_CALL, FEATURECALL_LINKING_DIAGNOSTIC)
+		file.assertFeatureCallError(XMEMBER_FEATURE_CALL)
 	}
 
 	@Test def void checkImportWithExtensionAccess_1() {
@@ -330,7 +337,23 @@ class XImportSectionValidationTest extends AbstractXtendTestCase {
 		'''.toString.file
 		file.assertWarning(XIMPORT_DECLARATION, IMPORT_UNUSED, "java.lang.String.valueOf")
 		file.assertWarning(XIMPORT_DECLARATION, IMPORT_UNUSED, "java.lang.Integer")
-		file.assertError(XMEMBER_FEATURE_CALL, FEATURECALL_LINKING_DIAGNOSTIC)
+		file.assertFeatureCallError(XMEMBER_FEATURE_CALL)
+	}
+	
+	def void assertFeatureCallError(XtendFile file, EClass objectType) {
+		val resource = file.eResource
+
+		val List<Issue> allIssues = validate(resource)
+		val match = allIssues.filter [
+			var EObject object = resource.getResourceSet().getEObject(getUriToProblem(), true)
+			val featureCall = data.contains(LinkingDiagnosticTypeAwareMessageProducer.FEATURE_CALL)
+			return code == Diagnostic.LINKING_DIAGNOSTIC && getSeverity() === Severity.ERROR &&
+				objectType.isInstance(object) && featureCall
+		]
+		if (match.empty) {
+			fail("No Diagnostic.LINKING_DIAGNOSTIC issue with user data FEATURE_CALL found")
+		}
+
 	}
 
 	@Test def void checkImportWithExtensionAccess_2() {
@@ -382,7 +405,7 @@ class XImportSectionValidationTest extends AbstractXtendTestCase {
 		'''.toString.file
 		file.assertWarning(XIMPORT_DECLARATION, IMPORT_UNUSED, "java.lang.String")
 		file.assertWarning(XIMPORT_DECLARATION, IMPORT_UNUSED, "java.lang.Integer")
-		file.assertError(XMEMBER_FEATURE_CALL, FEATURECALL_LINKING_DIAGNOSTIC)
+		file.assertFeatureCallError(XMEMBER_FEATURE_CALL)
 	}
 
 	@Test def void checkImportWithExtensionAccess_5() {
@@ -434,7 +457,7 @@ class XImportSectionValidationTest extends AbstractXtendTestCase {
 		'''.toString.file
 		file.assertWarning(XIMPORT_DECLARATION, IMPORT_UNUSED, "java.lang.String")
 		file.assertWarning(XIMPORT_DECLARATION, IMPORT_UNUSED, "java.lang.Integer")
-		file.assertError(XMEMBER_FEATURE_CALL, FEATURECALL_LINKING_DIAGNOSTIC)
+		file.assertFeatureCallError(XMEMBER_FEATURE_CALL)
 	}
 
 	@Test def void checkImportWithExtensionAccess_8() {
@@ -723,7 +746,7 @@ class XImportSectionValidationTest extends AbstractXtendTestCase {
 			}
 		'''.toString.file
 		file.assertWarning(XIMPORT_DECLARATION, IMPORT_UNUSED, "java.lang.String.valueOf")
-		file.assertError(XMEMBER_FEATURE_CALL, FEATURECALL_LINKING_DIAGNOSTIC)
+		file.assertFeatureCallError(XMEMBER_FEATURE_CALL)
 	}
 
 	@Test def void checkDuplicateImportWithExtensionAccess_1() {
@@ -741,7 +764,7 @@ class XImportSectionValidationTest extends AbstractXtendTestCase {
 		'''.toString.file
 		file.assertWarning(XIMPORT_DECLARATION, IMPORT_UNUSED, "java.lang.String.valueOf")
 		file.assertWarning(XIMPORT_DECLARATION, IMPORT_UNUSED, "java.lang.String")
-		file.assertError(XMEMBER_FEATURE_CALL, FEATURECALL_LINKING_DIAGNOSTIC)
+		file.assertFeatureCallError(XMEMBER_FEATURE_CALL)
 	}
 
 	@Test def void checkDuplicateImportWithExtensionAccess_2() {
@@ -791,7 +814,7 @@ class XImportSectionValidationTest extends AbstractXtendTestCase {
 			}
 		'''.toString.file
 		file.assertWarning(XIMPORT_DECLARATION, IMPORT_UNUSED, "java.lang.String")
-		file.assertError(XMEMBER_FEATURE_CALL, FEATURECALL_LINKING_DIAGNOSTIC)
+		file.assertFeatureCallError(XMEMBER_FEATURE_CALL)
 	}
 
 	@Test def void checkDuplicateImportWithExtensionAccess_5() {

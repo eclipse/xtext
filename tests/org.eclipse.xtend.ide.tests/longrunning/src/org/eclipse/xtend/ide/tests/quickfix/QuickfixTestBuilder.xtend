@@ -19,6 +19,8 @@ import org.eclipse.xtext.validation.Issue
 import static org.junit.Assert.*
 import org.eclipse.xtext.xbase.compiler.JavaVersion
 import org.eclipse.xtext.xbase.ui.builder.XbaseBuilderPreferenceAccess
+import org.eclipse.xtext.diagnostics.Diagnostic
+import org.eclipse.xtext.xbase.annotations.validation.LinkingDiagnosticTypeAwareMessageProducer
 
 class QuickfixTestBuilder {
 	
@@ -77,6 +79,22 @@ class QuickfixTestBuilder {
 
 	def assertIssueCodes(String... issueCodes) {
 		assertEqual(issueCodes, issuesAtCaret.map[code])
+		this
+	}
+	
+	def assertFatureCallLinkingIssue() {
+		assertTrue(issuesAtCaret.exists [
+			code == Diagnostic.LINKING_DIAGNOSTIC &&
+				data.contains(LinkingDiagnosticTypeAwareMessageProducer.FEATURE_CALL)
+		])
+		this
+	}
+	
+	def assertTypeLiteralLinkingIssue() {
+		assertTrue(issuesAtCaret.exists [
+			code == Diagnostic.LINKING_DIAGNOSTIC &&
+				data.contains(LinkingDiagnosticTypeAwareMessageProducer.TYPE_LITERAL)
+		])
 		this
 	}
 	
