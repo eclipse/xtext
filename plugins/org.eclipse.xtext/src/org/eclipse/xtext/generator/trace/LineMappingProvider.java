@@ -16,8 +16,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.URI;
-
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Moritz Eysholdt
@@ -30,9 +28,9 @@ public class LineMappingProvider {
 	public static class LineMapping {
 
 		public int sourceStartLine, targetStartLine, targetEndLine;
-		public URI source;
+		public SourceRelativeURI source;
 
-		public LineMapping(int sourceStartLine, int targetStartLine, int targetEndLine, URI source) {
+		public LineMapping(int sourceStartLine, int targetStartLine, int targetEndLine, SourceRelativeURI source) {
 			this.sourceStartLine = sourceStartLine;
 			this.targetStartLine = targetStartLine;
 			this.targetEndLine = targetEndLine;
@@ -104,7 +102,7 @@ public class LineMappingProvider {
 		if (targetRegion.isUseForDebugging()) {
 			ILocationData location = targetRegion.getMergedAssociatedLocation();
 			if (location != null) {
-				final URI path = targetRegion.getAssociatedPath();
+				final SourceRelativeURI path = targetRegion.getAssociatedSrcRelativePath();
 				if (path != null) {
 					int myLineNumber = targetRegion.getMyLineNumber();
 					int myEndLineNumber = targetRegion.getMyEndLineNumber();

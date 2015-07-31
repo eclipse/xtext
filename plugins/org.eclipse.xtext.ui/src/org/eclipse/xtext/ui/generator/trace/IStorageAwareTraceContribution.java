@@ -5,10 +5,11 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.trace;
+package org.eclipse.xtext.ui.generator.trace;
 
 import org.eclipse.core.resources.IStorage;
-import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.generator.trace.AbsoluteURI;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 
 import com.google.common.annotations.Beta;
 
@@ -25,6 +26,6 @@ public interface IStorageAwareTraceContribution {
 	 * Try to resolve the given path in the context of the local storage.
 	 * Return <code>null</code> if it cannot be resolved.
 	 */
-	URI tryResolvePath(IStorage localStorage, URI path);
+	AbsoluteURI tryResolvePath(IStorage localStorage, SourceRelativeURI path);
 	
 }

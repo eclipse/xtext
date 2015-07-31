@@ -18,7 +18,7 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.xtext.Constants;
-import org.eclipse.xtext.generator.IDerivedResourceMarkers;
+import org.eclipse.xtext.ui.generator.IDerivedResourceMarkers;
 import org.eclipse.xtext.util.Exceptions;
 
 import com.google.common.base.Predicate;

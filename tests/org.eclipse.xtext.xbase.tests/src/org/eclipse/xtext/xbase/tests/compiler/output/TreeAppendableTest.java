@@ -19,8 +19,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ITraceURIConverter;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
@@ -90,7 +92,7 @@ public class TreeAppendableTest extends Assert implements ILocationInFileProvide
 		assertNotNull(traceRegion);
 		assertEquals(47, traceRegion.getMergedAssociatedLocation().getOffset());
 		assertEquals(11, traceRegion.getMergedAssociatedLocation().getLength());
-		assertEquals(resource.getURI(), traceRegion.getAssociatedPath());
+		assertEquals(getURIForTrace(resource), traceRegion.getAssociatedSrcRelativePath());
 		assertTrue(traceRegion.getNestedRegions().isEmpty());
 	}
 	
@@ -286,13 +288,13 @@ public class TreeAppendableTest extends Assert implements ILocationInFileProvide
 	}
 	
 	@Override
-	public URI getURIForTrace(IProjectConfig projectConfig, URI qualifiedUri) {
-		return qualifiedUri;
+	public SourceRelativeURI getURIForTrace(IProjectConfig projectConfig, AbsoluteURI qualifiedURI) {
+		return new SourceRelativeURI(URI.createURI(qualifiedURI.getURI().path()));
 	}
 	
 	@Override
-	public URI getURIForTrace(Resource resource) {
-		return resource.getURI();
+	public SourceRelativeURI getURIForTrace(Resource resource) {
+		return SourceRelativeURI.fromAbsolute(resource.getURI());
 	}
 
 	@Override

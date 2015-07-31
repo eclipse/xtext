@@ -16,6 +16,14 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.IDerivedResourceMarkers">
+        <filter id="305422471">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.IDerivedResourceMarkers"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.8.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/xbase/compiler/JavaVersionModule.java" type="org.eclipse.xtext.xbase.compiler.JavaVersionModule">
         <filter id="643850349">
             <message_arguments>

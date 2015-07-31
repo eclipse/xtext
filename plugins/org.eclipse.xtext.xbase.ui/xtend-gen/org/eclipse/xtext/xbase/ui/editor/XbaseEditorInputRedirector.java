@@ -26,11 +26,11 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.ide.ResourceUtil;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.LanguageInfo;
-import org.eclipse.xtext.generator.trace.ILocationInResource;
-import org.eclipse.xtext.generator.trace.ITrace;
-import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
+import org.eclipse.xtext.ui.generator.trace.IEclipseTrace;
+import org.eclipse.xtext.ui.generator.trace.ILocationInEclipseResource;
+import org.eclipse.xtext.ui.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -169,17 +169,17 @@ public class XbaseEditorInputRedirector {
       if ((original != input)) {
         return original;
       }
-      final ITrace trace = this.traceInformation.getTraceToSource(resource);
+      final IEclipseTrace trace = this.traceInformation.getTraceToSource(resource);
       boolean _equals = Objects.equal(trace, null);
       if (_equals) {
         return input;
       }
-      Iterable<ILocationInResource> _allAssociatedLocations = trace.getAllAssociatedLocations();
-      final Iterator<ILocationInResource> allLocations = _allAssociatedLocations.iterator();
-      ILocationInResource sourceInformation = null;
+      Iterable<? extends ILocationInEclipseResource> _allAssociatedLocations = trace.getAllAssociatedLocations();
+      final Iterator<? extends ILocationInEclipseResource> allLocations = _allAssociatedLocations.iterator();
+      ILocationInEclipseResource sourceInformation = null;
       while ((allLocations.hasNext() && Objects.equal(sourceInformation, null))) {
         {
-          final ILocationInResource candidate = allLocations.next();
+          final ILocationInEclipseResource candidate = allLocations.next();
           LanguageInfo _language = candidate.getLanguage();
           boolean _equals_1 = this.languageInfo.equals(_language);
           if (_equals_1) {
@@ -191,7 +191,7 @@ public class XbaseEditorInputRedirector {
       if (_equals_1) {
         return input;
       }
-      final IStorage originalStorage = sourceInformation.getStorage();
+      final IStorage originalStorage = sourceInformation.getPlatformResource();
       boolean _notEquals_1 = (!Objects.equal(originalStorage, null));
       if (_notEquals_1) {
         return EditorUtils.createEditorInput(originalStorage);

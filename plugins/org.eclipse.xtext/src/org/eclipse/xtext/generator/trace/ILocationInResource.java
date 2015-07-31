@@ -7,14 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.trace;
 
+import java.io.IOException;
 import java.io.InputStream;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IStorage;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
+import org.eclipse.xtext.workspace.IProjectConfig;
 
 /**
  * Describes the location in a given file or storage. 
@@ -35,29 +33,33 @@ public interface ILocationInResource {
 	 * @return the EMF resource URI for this location. May be <code>null</code> if the 
 	 * resource is not an EMF resource.
 	 */
-	/* @Nullable */ URI getAbsoluteResourceURI();
-	
-	/* @Nullable */ URI getSrcRelativeResourceURI();
+	/* @Nullable */ AbsoluteURI getAbsoluteResourceURI();
 	
 	/**
-	 * @return the more specific {@link org.eclipse.emf.ecore.EObject object} {@link URI}
-	 * for this location. May be <code>null</code> if the resource itself is empty or if this
-	 * resource is not an EMF resource.
+	 * Returns the URI of this resource relative to the classpath if applicable. Otherwise
+	 * the URI relative to the project root.
 	 */
-	/* @Nullable */ URI getEObjectURI();
+	/* @Nullable */ SourceRelativeURI getSrcRelativeResourceURI();
+	
+//	/**
+//	 * @return the more specific {@link org.eclipse.emf.ecore.EObject object} {@link URI}
+//	 * for this location. May be <code>null</code> if the resource itself is empty or if this
+//	 * resource is not an EMF resource.
+//	 */
+//	/* @Nullable */ URI getEObjectURI();
+	
+	/* @NonNull */ InputStream getContents() throws IOException;
 	
 	/**
-	 * @return the storage handle for this location. This can be <code>null</code> if the trace comes from a JAR's
-	 *         source attachment zip file.
+	 * @return the project configuration for this location. Never <code>null</code>.
 	 */
-	/* @Nullable */ IStorage getStorage();
-
-	/* @NonNull */ InputStream getContents() throws CoreException;
+	IProjectConfig getProjectConfig();
 	
-	/**
-	 * @return the project for this location. Never <code>null</code>.
-	 */
-	/* @NonNull */ IProject getProject();
+//	/**
+//	 * Returns the encoding that should be used to read the contents of the resource that contains this
+//	 * location.
+//	 */
+//	Charset getEncoding();
 	
 	/**
 	 * @return the range in the resource. May be <code>null</code>.

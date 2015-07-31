@@ -24,10 +24,11 @@ import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.jdt.core.IJavaModelMarker;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.generator.trace.ILocationInResource;
-import org.eclipse.xtext.generator.trace.ITrace;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.MarkerTypes;
+import org.eclipse.xtext.ui.generator.trace.IEclipseTrace;
+import org.eclipse.xtext.ui.generator.trace.ILocationInEclipseResource;
 import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.TextRegion;
@@ -61,7 +62,7 @@ public class DerivedResourceMarkerCopier {
 	 * @param traceToSource
 	 *            - trace information to use. Points to the source file.
 	 */
-	public void reflectErrorMarkerInSource(IFile javaFile, ITrace traceToSource) throws CoreException {
+	public void reflectErrorMarkerInSource(IFile javaFile, IEclipseTrace traceToSource) throws CoreException {
 		IFile srcFile = findSourceFile(traceToSource, javaFile.getWorkspace());
 		if (srcFile == null || !srcFile.exists()) {
 			return;
@@ -106,7 +107,7 @@ public class DerivedResourceMarkerCopier {
 		return Integer.MAX_VALUE;
 	}
 
-	private void copyProblemMarker(IFile javaFile, ITrace traceToSource, Set<IMarker> problemsInJava, IFile srcFile)
+	private void copyProblemMarker(IFile javaFile, IEclipseTrace traceToSource, Set<IMarker> problemsInJava, IFile srcFile)
 			throws CoreException {
 		String sourceMarkerType = null;
 		for (IMarker marker : problemsInJava) {
@@ -118,7 +119,7 @@ public class DerivedResourceMarkerCopier {
 			Integer charEnd = marker.getAttribute(IMarker.CHAR_END, 0);
 			int severity = MarkerUtilities.getSeverity(marker);
 
-			ILocationInResource associatedLocation = traceToSource.getBestAssociatedLocation(new TextRegion(charStart,
+			ILocationInEclipseResource associatedLocation = traceToSource.getBestAssociatedLocation(new TextRegion(charStart,
 					charEnd - charStart));
 			if (associatedLocation != null) {
 				if (sourceMarkerType == null) {
@@ -140,8 +141,8 @@ public class DerivedResourceMarkerCopier {
 
 	}
 
-	private String determinateMarkerTypeByURI(URI resourceUri) {
-		IResourceServiceProvider serviceProvider = serviceProviderRegistry.getResourceServiceProvider(resourceUri);
+	private String determinateMarkerTypeByURI(SourceRelativeURI resourceURI) {
+		IResourceServiceProvider serviceProvider = serviceProviderRegistry.getResourceServiceProvider(resourceURI.getURI());
 		if (serviceProvider == null)
 			return null;
 		MarkerTypeProvider typeProvider = serviceProvider.get(MarkerTypeProvider.class);
@@ -181,17 +182,17 @@ public class DerivedResourceMarkerCopier {
 		}
 	}
 
-	private IFile findSourceFile(ITrace traceToSource, IWorkspace workspace) {
-		Iterator<ILocationInResource> iterator = traceToSource.getAllAssociatedLocations().iterator();
+	private IFile findSourceFile(IEclipseTrace traceToSource, IWorkspace workspace) {
+		Iterator<? extends ILocationInEclipseResource> iterator = traceToSource.getAllAssociatedLocations().iterator();
 		if (iterator.hasNext()) {
-			ILocationInResource srcLocation = iterator.next();
+			ILocationInEclipseResource srcLocation = iterator.next();
 			return findIFile(srcLocation, workspace);
 		}
 		return null;
 	}
 
-	private IFile findIFile(ILocationInResource locationInResource, IWorkspace workspace) {
-		IStorage storage = locationInResource.getStorage();
+	private IFile findIFile(ILocationInEclipseResource locationInResource, IWorkspace workspace) {
+		IStorage storage = locationInResource.getPlatformResource();
 		if (storage == null) {
 			LOG.warn("Failed to find Storage. Please make sure there are no outdated generated files. URI: " + locationInResource.getAbsoluteResourceURI());
 			return null;

@@ -7,23 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.compiler.output;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IStorage;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.builder.trace.AbstractTrace;
-import org.eclipse.xtext.builder.trace.LocationInResource;
+import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
-import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.generator.trace.ITraceURIConverter;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
+import org.eclipse.xtext.generator.trace.internal.AbstractTrace;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.util.TextRegion;
+import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
@@ -56,36 +55,19 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 		
 		@Override
 		/* @NonNull */
-		public IProject getLocalProject() {
+		public IProjectConfig getLocalProjectConfig() {
 			throw new UnsupportedOperationException();
 		}
 		
 		@Override
-		/* @Nullable */
-		protected ILocationInResource createLocationInResourceFor(/* @NonNull */ ILocationData location, /* @NonNull */ AbstractTraceRegion traceRegion) {
-			URI path = location.getPath();
-			if (path == null)
-				path = traceRegion.getAssociatedPath();
-			if(path == null)
-				return null;
-			return new LocationInResource(location.getOffset(), location.getLength(), location.getLineNumber(), location.getEndLineNumber(), path, this);
-		}
-
-		@Override
 		/* @NonNull */
-		public URI getLocalURI() {
+		public AbsoluteURI getLocalURI() {
 			throw new UnsupportedOperationException();
 		}
 
 		@Override
 		/* @NonNull */
-		protected IStorage findStorage(/* @NonNull */ URI uri, /* @NonNull */ IProject project) {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
-		/* @NonNull */
-		protected InputStream getContents(/* @NonNull */ URI uri, /* @NonNull */ IProject project) throws CoreException {
+		protected InputStream getContents(/* @NonNull */ SourceRelativeURI uri, /* @NonNull */ IProjectConfig project) throws IOException {
 			throw new UnsupportedOperationException();
 		}
 		

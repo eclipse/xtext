@@ -96,7 +96,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -155,38 +154,28 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   
   public Iterable<URI> getGeneratedSources(final URI source) {
     Collection<Source2GeneratedMapping> _values = this.module2GeneratedMapping.values();
-    final Function1<Source2GeneratedMapping, Iterable<URI>> _function = new Function1<Source2GeneratedMapping, Iterable<URI>>() {
+    final Function1<Source2GeneratedMapping, List<URI>> _function = new Function1<Source2GeneratedMapping, List<URI>>() {
       @Override
-      public Iterable<URI> apply(final Source2GeneratedMapping it) {
+      public List<URI> apply(final Source2GeneratedMapping it) {
         return it.getGenerated(source);
       }
     };
-    Iterable<Iterable<URI>> _map = IterableExtensions.<Source2GeneratedMapping, Iterable<URI>>map(_values, _function);
-    final Function2<Iterable<URI>, Iterable<URI>, Iterable<URI>> _function_1 = new Function2<Iterable<URI>, Iterable<URI>, Iterable<URI>>() {
-      @Override
-      public Iterable<URI> apply(final Iterable<URI> $0, final Iterable<URI> $1) {
-        return Iterables.<URI>concat($0, $1);
-      }
-    };
-    return IterableExtensions.<Iterable<URI>>reduce(_map, _function_1);
+    Iterable<List<URI>> _map = IterableExtensions.<Source2GeneratedMapping, List<URI>>map(_values, _function);
+    Iterable<URI> _flatten = Iterables.<URI>concat(_map);
+    return IterableExtensions.<URI>toList(_flatten);
   }
   
   public Iterable<URI> getSource4GeneratedSource(final URI generated) {
     Collection<Source2GeneratedMapping> _values = this.module2GeneratedMapping.values();
-    final Function1<Source2GeneratedMapping, Iterable<URI>> _function = new Function1<Source2GeneratedMapping, Iterable<URI>>() {
+    final Function1<Source2GeneratedMapping, List<URI>> _function = new Function1<Source2GeneratedMapping, List<URI>>() {
       @Override
-      public Iterable<URI> apply(final Source2GeneratedMapping it) {
+      public List<URI> apply(final Source2GeneratedMapping it) {
         return it.getSource(generated);
       }
     };
-    Iterable<Iterable<URI>> _map = IterableExtensions.<Source2GeneratedMapping, Iterable<URI>>map(_values, _function);
-    final Function2<Iterable<URI>, Iterable<URI>, Iterable<URI>> _function_1 = new Function2<Iterable<URI>, Iterable<URI>, Iterable<URI>>() {
-      @Override
-      public Iterable<URI> apply(final Iterable<URI> $0, final Iterable<URI> $1) {
-        return Iterables.<URI>concat($0, $1);
-      }
-    };
-    return IterableExtensions.<Iterable<URI>>reduce(_map, _function_1);
+    Iterable<List<URI>> _map = IterableExtensions.<Source2GeneratedMapping, List<URI>>map(_values, _function);
+    Iterable<URI> _flatten = Iterables.<URI>concat(_map);
+    return IterableExtensions.<URI>toList(_flatten);
   }
   
   public XtextAutoBuilderComponent(final Project project) {
@@ -420,70 +409,92 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   }
   
   protected void doCleanBuild() {
+    if (this.ignoreIncomingEvents) {
+      return;
+    }
+    this.alarm.cancelAllRequests();
     ChunkedResourceDescriptions _get = this.chunkedResourceDescriptionsProvider.get();
     this.chunkedResourceDescriptions = _get;
     Collection<Source2GeneratedMapping> _values = this.module2GeneratedMapping.values();
-    final Function1<Source2GeneratedMapping, Iterable<URI>> _function = new Function1<Source2GeneratedMapping, Iterable<URI>>() {
+    final Function1<Source2GeneratedMapping, List<URI>> _function = new Function1<Source2GeneratedMapping, List<URI>>() {
       @Override
-      public Iterable<URI> apply(final Source2GeneratedMapping it) {
+      public List<URI> apply(final Source2GeneratedMapping it) {
         return it.getAllGenerated();
       }
     };
-    Iterable<Iterable<URI>> _map = IterableExtensions.<Source2GeneratedMapping, Iterable<URI>>map(_values, _function);
+    Iterable<List<URI>> _map = IterableExtensions.<Source2GeneratedMapping, List<URI>>map(_values, _function);
     Iterable<URI> _flatten = Iterables.<URI>concat(_map);
-    this.safeDeleteUris(_flatten);
+    List<URI> _list = IterableExtensions.<URI>toList(_flatten);
+    this.safeDeleteUris(_list);
     this.module2GeneratedMapping.clear();
     this.queueAllResources();
     this.doRunBuild();
   }
   
   protected void doCleanBuild(final Module module) {
+    if (this.ignoreIncomingEvents) {
+      return;
+    }
+    this.alarm.cancelAllRequests();
     String _name = module.getName();
     this.chunkedResourceDescriptions.removeContainer(_name);
     final Source2GeneratedMapping before = this.module2GeneratedMapping.remove(module);
     boolean _notEquals = (!Objects.equal(before, null));
     if (_notEquals) {
-      Iterable<URI> _allGenerated = before.getAllGenerated();
+      List<URI> _allGenerated = before.getAllGenerated();
       this.safeDeleteUris(_allGenerated);
     }
     this.queueAllResources(module);
     this.doRunBuild();
   }
   
-  protected void safeDeleteUris(final Iterable<URI> uris) {
-    final Application app = ApplicationManager.getApplication();
-    final Runnable _function = new Runnable() {
-      @Override
-      public void run() {
-        try {
-          try {
-            XtextAutoBuilderComponent.this.ignoreIncomingEvents = true;
-            for (final URI uri : uris) {
-              VirtualFile _virtualFile = VirtualFileURIUtil.getVirtualFile(uri);
-              if (_virtualFile!=null) {
-                _virtualFile.delete(null);
-              }
-            }
-          } finally {
-            XtextAutoBuilderComponent.this.ignoreIncomingEvents = false;
-          }
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
-        }
-      }
-    };
-    final Runnable runnable = _function;
-    boolean _isDispatchThread = app.isDispatchThread();
-    if (_isDispatchThread) {
-      app.runWriteAction(runnable);
-    } else {
-      final Runnable _function_1 = new Runnable() {
+  protected void safeDeleteUris(final List<URI> uris) {
+    boolean _isEmpty = uris.isEmpty();
+    boolean _not = (!_isEmpty);
+    if (_not) {
+      final Application app = ApplicationManager.getApplication();
+      final Runnable _function = new Runnable() {
         @Override
         public void run() {
-          app.runWriteAction(runnable);
+          try {
+            try {
+              XtextAutoBuilderComponent.this.ignoreIncomingEvents = true;
+              for (final URI uri : uris) {
+                {
+                  final VirtualFile file = VirtualFileURIUtil.getVirtualFile(uri);
+                  boolean _and = false;
+                  if (!(file != null)) {
+                    _and = false;
+                  } else {
+                    boolean _exists = file.exists();
+                    _and = _exists;
+                  }
+                  if (_and) {
+                    file.delete(XtextAutoBuilderComponent.this);
+                  }
+                }
+              }
+            } finally {
+              XtextAutoBuilderComponent.this.ignoreIncomingEvents = false;
+            }
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
         }
       };
-      app.invokeLater(_function_1);
+      final Runnable runnable = _function;
+      boolean _isDispatchThread = app.isDispatchThread();
+      if (_isDispatchThread) {
+        app.runWriteAction(runnable);
+      } else {
+        final Runnable _function_1 = new Runnable() {
+          @Override
+          public void run() {
+            app.runWriteAction(runnable);
+          }
+        };
+        app.invokeLater(_function_1);
+      }
     }
   }
   
@@ -856,17 +867,17 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
           case ADDED:
             VirtualFile _file = event.getFile();
             final URI uri = VirtualFileURIUtil.getURI(_file);
-            Iterable<URI> _source = null;
+            List<URI> _source = null;
             if (fileMappings!=null) {
               _source=fileMappings.getSource(uri);
             }
-            final Iterable<URI> sourceUris = _source;
+            final List<URI> sourceUris = _source;
             boolean _and = false;
             boolean _notEquals = (!Objects.equal(sourceUris, null));
             if (!_notEquals) {
               _and = false;
             } else {
-              boolean _isEmpty = IterableExtensions.isEmpty(sourceUris);
+              boolean _isEmpty = sourceUris.isEmpty();
               boolean _not = (!_isEmpty);
               _and = _not;
             }
@@ -895,17 +906,17 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
           case DELETED:
             VirtualFile _file_2 = event.getFile();
             final URI uri_1 = VirtualFileURIUtil.getURI(_file_2);
-            Iterable<URI> _source_1 = null;
+            List<URI> _source_1 = null;
             if (fileMappings!=null) {
               _source_1=fileMappings.getSource(uri_1);
             }
-            final Iterable<URI> sourceUris_1 = _source_1;
+            final List<URI> sourceUris_1 = _source_1;
             boolean _and_1 = false;
             boolean _notEquals_1 = (!Objects.equal(sourceUris_1, null));
             if (!_notEquals_1) {
               _and_1 = false;
             } else {
-              boolean _isEmpty_1 = IterableExtensions.isEmpty(sourceUris_1);
+              boolean _isEmpty_1 = sourceUris_1.isEmpty();
               boolean _not_1 = (!_isEmpty_1);
               _and_1 = _not_1;
             }

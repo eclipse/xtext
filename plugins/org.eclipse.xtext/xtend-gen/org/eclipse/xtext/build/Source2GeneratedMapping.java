@@ -8,9 +8,11 @@
 package org.eclipse.xtext.build;
 
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
@@ -71,16 +73,19 @@ public class Source2GeneratedMapping {
     IterableExtensions.<URI>forEach(_removeAll, _function);
   }
   
-  public Iterable<URI> getGenerated(final URI source) {
-    return this.source2generated.get(source);
+  public List<URI> getGenerated(final URI source) {
+    Collection<URI> _get = this.source2generated.get(source);
+    return Lists.<URI>newArrayList(_get);
   }
   
-  public Iterable<URI> getSource(final URI generated) {
-    return this.generated2source.get(generated);
+  public List<URI> getSource(final URI generated) {
+    Collection<URI> _get = this.generated2source.get(generated);
+    return Lists.<URI>newArrayList(_get);
   }
   
-  public Iterable<URI> getAllGenerated() {
-    return this.generated2source.keySet();
+  public List<URI> getAllGenerated() {
+    Set<URI> _keySet = this.generated2source.keySet();
+    return Lists.<URI>newArrayList(_keySet);
   }
   
   public Source2GeneratedMapping(final Multimap<URI, URI> source2generated, final Multimap<URI, URI> generated2source) {

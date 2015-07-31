@@ -22,7 +22,7 @@ import org.junit.Test;
  */
 public class LineMappingNormalizationTest {
 	
-	private URI source = URI.createURI("fake://source.dsl");
+	private SourceRelativeURI source = new SourceRelativeURI(URI.createURI("source.dsl"));
 	
 	private class TestableLineMappingProvider extends LineMappingProvider {
 		@Override

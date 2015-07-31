@@ -65,11 +65,12 @@ import org.eclipse.ui.texteditor.ResourceMarkerAnnotationModel;
 import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
 import org.eclipse.xtend.ide.labeling.XtendImages;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
-import org.eclipse.xtext.generator.trace.ITrace;
-import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.ui.editor.SchedulingRuleFactory;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
+import org.eclipse.xtext.ui.generator.trace.IEclipseTrace;
+import org.eclipse.xtext.ui.generator.trace.ILocationInEclipseResource;
+import org.eclipse.xtext.ui.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.ui.views.AbstractSourceView;
 import org.eclipse.xtext.ui.views.DefaultWorkbenchPartSelection;
 import org.eclipse.xtext.ui.views.IWorkbenchPartSelection;
@@ -236,7 +237,7 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 	protected String computeInput(IWorkbenchPartSelection workbenchPartSelection) {
 		openEditorAction.setInputFile(null);
 		openEditorAction.setSelectedRegion(null);
-		ITrace trace = traceInformation.getTraceToTarget(getEditorResource(workbenchPartSelection));
+		IEclipseTrace trace = traceInformation.getTraceToTarget(getEditorResource(workbenchPartSelection));
 		if (trace != null) {
 			if (workbenchPartSelection instanceof DerivedSourceSelection) {
 				DerivedSourceSelection derivedSourceSelection = (DerivedSourceSelection) workbenchPartSelection;
@@ -245,16 +246,16 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 				derivedSources = Sets.newHashSet();
 				TextRegion localRegion = mapTextRegion(workbenchPartSelection);
 				Iterable<IStorage> transform = Iterables.filter(transform(trace.getAllAssociatedLocations(localRegion),
-						new Function<ILocationInResource, IStorage>() {
+						new Function<ILocationInEclipseResource, IStorage>() {
 							@Override
-							public IStorage apply(ILocationInResource input) {
-								return input.getStorage();
+							public IStorage apply(ILocationInEclipseResource input) {
+								return input.getPlatformResource();
 							}
 						}), Predicates.notNull());
 				addAll(derivedSources, transform);
-				ILocationInResource bestAssociatedLocation = trace.getBestAssociatedLocation(localRegion);
+				ILocationInEclipseResource bestAssociatedLocation = trace.getBestAssociatedLocation(localRegion);
 				if (bestAssociatedLocation != null) {
-					selectedSource = bestAssociatedLocation.getStorage();
+					selectedSource = bestAssociatedLocation.getPlatformResource();
 				} else if (!derivedSources.isEmpty()) {
 					selectedSource = derivedSources.iterator().next();
 				}
@@ -371,9 +372,9 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 		if (selectedSource != null) {
 			IAnnotationModel annotationModel = getSourceViewer().getAnnotationModel();
 			TextRegion localRegion = mapTextRegion(workbenchPartSelection);
-			ITrace trace = traceInformation.getTraceToTarget(getEditorResource(workbenchPartSelection));
+			IEclipseTrace trace = traceInformation.getTraceToTarget(getEditorResource(workbenchPartSelection));
 			if (trace != null) {
-				Iterable<ILocationInResource> allAssociatedLocations = trace.getAllAssociatedLocations(localRegion,
+				Iterable<? extends ILocationInEclipseResource> allAssociatedLocations = trace.getAllAssociatedLocations(localRegion,
 						selectedSource);
 				ILocationInResource firstLocationInResource = Iterables.getFirst(allAssociatedLocations, null);
 				if (firstLocationInResource != null) {

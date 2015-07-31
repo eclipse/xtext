@@ -8,8 +8,11 @@
 package org.eclipse.xtext.idea.shared;
 
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.generator.trace.ITraceForURIProvider;
 import org.eclipse.xtext.idea.common.types.StubTypeProviderFactory;
 import org.eclipse.xtext.idea.service.IdeaOperationCanceledManager;
+import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider;
+import org.eclipse.xtext.idea.trace.TraceForVirtualFileProvider;
 import org.eclipse.xtext.psi.IPsiModelAssociator;
 import org.eclipse.xtext.psi.PsiModelAssociations;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -31,6 +34,14 @@ public class IdeaSharedModule extends AbstractGenericModule {
   
   public Class<? extends IPsiModelAssociator> bindIPsiModelAssociator() {
     return PsiModelAssociations.class;
+  }
+  
+  public Class<? extends ITraceForVirtualFileProvider> bindTraceInformation() {
+    return TraceForVirtualFileProvider.class;
+  }
+  
+  public Class<? extends ITraceForURIProvider> bindPlatformNeutralTraceInformation() {
+    return ITraceForVirtualFileProvider.class;
   }
   
   public Class<? extends OperationCanceledManager> bindOperationCanceledManager() {

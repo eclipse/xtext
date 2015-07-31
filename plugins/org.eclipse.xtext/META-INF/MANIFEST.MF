@@ -34,6 +34,7 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.formatting2.regionaccess.internal;x-friends:="org.eclipse.xtend.ide",
  org.eclipse.xtext.generator,
  org.eclipse.xtext.generator.trace;x-friends:="org.eclipse.xtext.xbase.ui,org.eclipse.xtend.ide",
+ org.eclipse.xtext.generator.trace.internal;x-friends:="org.eclipse.xtext.ui,org.eclipse.xtext.xbase.ui",
  org.eclipse.xtext.grammaranalysis;x-internal:=true,
  org.eclipse.xtext.grammaranalysis.impl;x-friends:="org.eclipse.xtext.junit4",
  org.eclipse.xtext.impl,
@@ -105,7 +106,6 @@ Require-Bundle: org.eclipse.emf.ecore.xmi;bundle-version="2.10.2";visibility:=re
  org.eclipse.xtext.util;visibility:=reexport,
  org.eclipse.xtext.smap;x-installation:=greedy,
  org.eclipse.core.runtime;bundle-version="3.6.0";resolution:=optional;x-installation:=greedy,
- org.eclipse.core.resources;bundle-version="3.6.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.xtend.lib;resolution:=optional,
  org.eclipse.equinox.common;bundle-version="3.5.0"
 Import-Package: org.apache.log4j;version="1.2.15",org.osgi.framework

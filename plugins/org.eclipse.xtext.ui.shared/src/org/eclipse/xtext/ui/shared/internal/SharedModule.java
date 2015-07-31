@@ -26,10 +26,9 @@ import org.eclipse.xtext.builder.impl.ToBeBuiltComputer;
 import org.eclipse.xtext.builder.impl.XtextBuilder;
 import org.eclipse.xtext.builder.resourceloader.IResourceLoader;
 import org.eclipse.xtext.builder.resourceloader.ResourceLoaderProviders;
-import org.eclipse.xtext.builder.trace.StorageAwareTrace;
-import org.eclipse.xtext.builder.trace.TraceForStorageProvider;
-import org.eclipse.xtext.builder.trace.TraceMarkers;
-import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
+import org.eclipse.xtext.generator.trace.DefaultTraceURIConverter;
+import org.eclipse.xtext.generator.trace.ITraceForURIProvider;
+import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.eclipse.xtext.resource.CompilerPhases;
@@ -46,6 +45,10 @@ import org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchResultContentProvider
 import org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchResultLabelProvider;
 import org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchViewPage;
 import org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchViewSorter;
+import org.eclipse.xtext.ui.generator.trace.ITraceForStorageProvider;
+import org.eclipse.xtext.ui.generator.trace.StorageAwareTrace;
+import org.eclipse.xtext.ui.generator.trace.TraceForStorageProvider;
+import org.eclipse.xtext.ui.generator.trace.TraceMarkers;
 import org.eclipse.xtext.ui.label.GlobalDescriptionLabelProvider;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 import org.eclipse.xtext.ui.notification.StateChangeEventBroker;
@@ -115,7 +118,9 @@ public class SharedModule extends AbstractModule {
 			
 			@Override
 			protected void configure() {
+				bind(ITraceForURIProvider.class).to(ITraceForStorageProvider.class);
 				bind(ITraceForStorageProvider.class).to(TraceForStorageProvider.class);
+				bind(ITraceURIConverter.class).to(DefaultTraceURIConverter.class);
 				
 				bind(TraceFileNameProvider.class);
 				bind(TraceMarkers.class);
@@ -123,6 +128,8 @@ public class SharedModule extends AbstractModule {
 				bind(StorageAwareTrace.class);
 				
 				expose(TraceFileNameProvider.class);
+				expose(ITraceForURIProvider.class);
+				expose(ITraceURIConverter.class);
 				expose(ITraceForStorageProvider.class);
 				expose(StorageAwareTrace.class);
 			}

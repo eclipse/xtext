@@ -35,7 +35,6 @@ import org.eclipse.xtext.builder.DerivedResourceMarkers.GeneratorIdProvider;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2.IFileCallback;
 import org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess;
 import org.eclipse.xtext.generator.GeneratorDelegate;
-import org.eclipse.xtext.generator.IDerivedResourceMarkers;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IFileSystemAccessExtension3;
 import org.eclipse.xtext.generator.IGenerator;
@@ -50,6 +49,7 @@ import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy;
 import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.ui.MarkerTypes;
+import org.eclipse.xtext.ui.generator.IDerivedResourceMarkers;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.util.ResourceUtil;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -109,7 +109,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	}
 
 	/**
-	 * @since 2.4
+	 * @since 2.9
 	 */
 	protected IDerivedResourceMarkers getDerivedResourceMarkers() {
 		return derivedResourceMarkers;

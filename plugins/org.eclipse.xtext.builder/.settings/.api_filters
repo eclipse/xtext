@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.builder" version="2">
     <resource path="META-INF/MANIFEST.MF">
-        <filter comment="version will be generated during buckminster build" id="927989779">
+        <filter comment="Changes to trace API" id="927989779">
             <message_arguments>
                 <message_argument value="2.9.0"/>
                 <message_argument value="org.eclipse.xtext.xbase.lib"/>
@@ -17,20 +17,51 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/builder/BuilderParticipant.java" type="org.eclipse.xtext.builder.BuilderParticipant">
+        <filter comment="Changes to trace API" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.builder.BuilderParticipant"/>
+                <message_argument value="getDerivedResourceMarkers()"/>
+            </message_arguments>
+        </filter>
+        <filter id="643842064">
+            <message_arguments>
+                <message_argument value="IDerivedResourceMarkers"/>
+                <message_argument value="BuilderParticipant"/>
+                <message_argument value="getDerivedResourceMarkers()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/builder/DerivedResourceMarkers.java" type="org.eclipse.xtext.builder.DerivedResourceMarkers">
+        <filter id="576725006">
+            <message_arguments>
+                <message_argument value="IDerivedResourceMarkers"/>
+                <message_argument value="DerivedResourceMarkers"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/builder/EclipseResourceFileSystemAccess2.java" type="org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2">
+        <filter comment="Trace refactoring" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2"/>
+                <message_argument value="getTraceMarkers()"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/builder/ParallelBuilderParticipant.java" type="org.eclipse.xtext.builder.ParallelBuilderParticipant">
-        <filter id="338792546">
+        <filter comment="Changes to trace API" id="338792546">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.builder.ParallelBuilderParticipant"/>
                 <message_argument value="createRunnable(IResourceDescription.Delta, IXtextBuilderParticipant.IBuildContext, Map&lt;String,OutputConfiguration&gt;, Map&lt;OutputConfiguration,Iterable&lt;IMarker&gt;&gt;, FileSystemAccessQueue, IFileSystemAccess, IProgressMonitor)"/>
             </message_arguments>
         </filter>
-        <filter id="338792546">
+        <filter comment="Changes to trace API" id="338792546">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.builder.ParallelBuilderParticipant"/>
                 <message_argument value="getFlushAndCleanDerivedResourcesCallback(IResourceDescription.Delta, Set&lt;IFile&gt;, IXtextBuilderParticipant.IBuildContext, boolean, IFileSystemAccess, IProgressMonitor)"/>
             </message_arguments>
         </filter>
-        <filter id="338792546">
+        <filter comment="Changes to trace API" id="338792546">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.builder.ParallelBuilderParticipant"/>
                 <message_argument value="getParalleFileSystemAccess(IResourceDescription.Delta, IXtextBuilderParticipant.IBuildContext, Set&lt;IFile&gt;, FileSystemAccessQueue, IFileSystemAccess)"/>
@@ -38,13 +69,13 @@
         </filter>
     </resource>
     <resource path="xtend-gen/org/eclipse/xtext/builder/ParallelFileSystemAccess.java" type="org.eclipse.xtext.builder.ParallelFileSystemAccess">
-        <filter id="338722907">
+        <filter comment="Changes to trace API" id="338722907">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.builder.ParallelFileSystemAccess"/>
                 <message_argument value="ParallelFileSystemAccess(IFileSystemAccess, IResourceDescription.Delta, FileSystemAccessQueue, String, EclipseResourceFileSystemAccess2.IFileCallback)"/>
             </message_arguments>
         </filter>
-        <filter id="422776937">
+        <filter comment="Changes to trace API" id="422776937">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.builder.ParallelFileSystemAccess.sendAsync(Procedures.Procedure1&lt;? super T&gt;)"/>
                 <message_argument value="T"/>

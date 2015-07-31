@@ -21,6 +21,7 @@ import com.intellij.psi.util.PsiModificationTracker
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider
 import org.eclipse.xtext.formatting.IIndentationInformation
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider
+import org.eclipse.xtext.generator.trace.ITraceForURIProvider
 import org.eclipse.xtext.ide.LexerIdeBindings
 import org.eclipse.xtext.ide.editor.bracketmatching.DefaultBracePairProvider
 import org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider
@@ -41,6 +42,7 @@ import org.eclipse.xtext.idea.refactoring.NullNamesValidator
 import org.eclipse.xtext.idea.resource.IdeaEncodingProvider
 import org.eclipse.xtext.idea.resource.IdeaResourceDescriptionsProvider
 import org.eclipse.xtext.idea.structureview.DefaultPsiStructureViewFactory
+import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider
@@ -57,6 +59,7 @@ import org.eclipse.xtext.service.SingletonBinding
 import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
 import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.idea.service.IdeaOperationCanceledManager
+import org.eclipse.xtext.idea.trace.TraceForVirtualFileProvider
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -160,4 +163,11 @@ class DefaultIdeaModule extends AbstractGenericModule {
 		IdeaOperationCanceledManager
 	}
 
+	def Class<? extends ITraceForURIProvider> bindPlatformNeutralTraceInformation() {
+		ITraceForVirtualFileProvider
+	}
+	
+	def Class<? extends ITraceForVirtualFileProvider> bindTraceInformation() {
+		TraceForVirtualFileProvider
+	}
 }

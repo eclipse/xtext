@@ -7,9 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.compiler;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.trace.AbstractStatefulTraceRegion;
 import org.eclipse.xtext.generator.trace.LocationData;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 
 /**
@@ -18,7 +18,7 @@ import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 public class RootTraceRegionForTesting extends AbstractStatefulTraceRegion {
 
 	public RootTraceRegionForTesting(ITextRegionWithLineInformation myLocation, ITextRegionWithLineInformation association) {
-		super(myLocation, new LocationData(association, URI.createURI("uri")), null);
+		super(myLocation, true, new LocationData(association, new SourceRelativeURI("uri")), null);
 	}
 	
 }

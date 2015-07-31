@@ -12,7 +12,6 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJarEntryResource;
@@ -22,9 +21,10 @@ import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.internal.ui.javaeditor.IClassFileEditorInput;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IStorageEditorInput;
-import org.eclipse.xtext.builder.trace.ITraceForTypeRootProvider;
+import org.eclipse.xtext.common.types.ui.trace.ITraceForTypeRootProvider;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 
 import com.google.inject.Inject;
 
@@ -74,7 +74,7 @@ public class XbaseBreakpointUtil {
 	}
 
 	// this URI is only used for breakpoints on JARed files
-	public URI getBreakpointURI(IEditorInput input) {
+	public SourceRelativeURI getBreakpointURI(IEditorInput input) {
 		Object adapter = input.getAdapter(IResource.class);
 		if (adapter != null)
 			return null;
@@ -91,9 +91,9 @@ public class XbaseBreakpointUtil {
 					Object parent = jarEntryResource.getParent();
 					if (parent instanceof IPackageFragment) {
 						String path = ((IPackageFragment) parent).getElementName().replace('.', '/');
-						return URI.createURI(path + "/" + storage.getName());
+						return new SourceRelativeURI(path + "/" + storage.getName());
 					} else if (parent instanceof IPackageFragmentRoot) {
-						return URI.createURI(storage.getName());
+						return new SourceRelativeURI(storage.getName());
 					}
 				}
 			} catch (CoreException e) {

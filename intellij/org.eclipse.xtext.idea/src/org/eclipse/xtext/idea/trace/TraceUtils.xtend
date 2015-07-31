@@ -25,9 +25,10 @@ import static extension com.intellij.psi.util.PsiTreeUtil.*
 import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 
 /**
- * @author dhuebner - Initial contribution and API
+ * @author Dennis Huebner - Initial contribution and API
  */
 class TraceUtils {
+	// TODO use IIdeaTrace instead
 	@Inject TraceRegionSerializer traceRegionSerializer
 	@Inject TraceFileNameProvider traceFileNameProvider
 

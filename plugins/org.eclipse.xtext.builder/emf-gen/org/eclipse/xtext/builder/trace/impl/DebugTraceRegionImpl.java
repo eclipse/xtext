@@ -22,7 +22,6 @@ import org.eclipse.xtext.builder.trace.TracePackage;
  * An implementation of the model object '<em><b>Debug Trace Region</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -34,6 +33,7 @@ import org.eclipse.xtext.builder.trace.TracePackage;
  *   <li>{@link org.eclipse.xtext.builder.trace.impl.DebugTraceRegionImpl#getNestedRegions <em>Nested Regions</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.impl.DebugTraceRegionImpl#getMyEndOffset <em>My End Offset</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.impl.DebugTraceRegionImpl#getAssociations <em>Associations</em>}</li>
+ *   <li>{@link org.eclipse.xtext.builder.trace.impl.DebugTraceRegionImpl#isUseForDebugging <em>Use For Debugging</em>}</li>
  * </ul>
  *
  * @generated
@@ -160,6 +160,26 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 	protected EList<DebugLocationData> associations;
 
 	/**
+	 * The default value of the '{@link #isUseForDebugging() <em>Use For Debugging</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isUseForDebugging()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean USE_FOR_DEBUGGING_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isUseForDebugging() <em>Use For Debugging</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isUseForDebugging()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean useForDebugging = USE_FOR_DEBUGGING_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -210,6 +230,27 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 			associations = new EObjectContainmentEList<DebugLocationData>(DebugLocationData.class, this, TracePackage.DEBUG_TRACE_REGION__ASSOCIATIONS);
 		}
 		return associations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isUseForDebugging() {
+		return useForDebugging;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setUseForDebugging(boolean newUseForDebugging) {
+		boolean oldUseForDebugging = useForDebugging;
+		useForDebugging = newUseForDebugging;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TracePackage.DEBUG_TRACE_REGION__USE_FOR_DEBUGGING, oldUseForDebugging, useForDebugging));
 	}
 
 	/**
@@ -346,6 +387,8 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 				return getMyEndOffset();
 			case TracePackage.DEBUG_TRACE_REGION__ASSOCIATIONS:
 				return getAssociations();
+			case TracePackage.DEBUG_TRACE_REGION__USE_FOR_DEBUGGING:
+				return isUseForDebugging();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -379,6 +422,9 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 				getAssociations().clear();
 				getAssociations().addAll((Collection<? extends DebugLocationData>)newValue);
 				return;
+			case TracePackage.DEBUG_TRACE_REGION__USE_FOR_DEBUGGING:
+				setUseForDebugging((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -409,6 +455,9 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 			case TracePackage.DEBUG_TRACE_REGION__ASSOCIATIONS:
 				getAssociations().clear();
 				return;
+			case TracePackage.DEBUG_TRACE_REGION__USE_FOR_DEBUGGING:
+				setUseForDebugging(USE_FOR_DEBUGGING_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -437,6 +486,8 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 				return getMyEndOffset() != MY_END_OFFSET_EDEFAULT;
 			case TracePackage.DEBUG_TRACE_REGION__ASSOCIATIONS:
 				return associations != null && !associations.isEmpty();
+			case TracePackage.DEBUG_TRACE_REGION__USE_FOR_DEBUGGING:
+				return useForDebugging != USE_FOR_DEBUGGING_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -459,6 +510,8 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 		result.append(myLineNumber);
 		result.append(", myEndLineNumber: ");
 		result.append(myEndLineNumber);
+		result.append(", useForDebugging: ");
+		result.append(useForDebugging);
 		result.append(')');
 		return result.toString();
 	}

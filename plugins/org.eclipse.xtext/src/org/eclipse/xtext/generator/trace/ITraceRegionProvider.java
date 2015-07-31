@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.trace;
 
-
 /**
  * A trace region provider can be used to obtain a new {@link AbstractTraceRegion}.
  * @author Sebastian Zarnekow - Initial contribution and API

@@ -32,14 +32,15 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.builder.trace.TraceForStorageProvider;
-import org.eclipse.xtext.builder.trace.TraceMarkers;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
+import org.eclipse.xtext.ui.generator.trace.TraceForStorageProvider;
+import org.eclipse.xtext.ui.generator.trace.TraceMarkers;
 import org.eclipse.xtext.ui.resource.ProjectByResourceProvider;
 import org.eclipse.xtext.util.RuntimeIOException;
 import org.eclipse.xtext.util.StringInputStream;
@@ -93,12 +94,12 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	@Inject
 	private ProjectByResourceProvider projectProvider;
 	
-	private Multimap<URI, IPath> sourceTraces;
+	private Multimap<SourceRelativeURI, IPath> sourceTraces;
 
 	/**
 	 * @since 2.4
 	 */
-	protected Multimap<URI, IPath> getSourceTraces() {
+	protected Multimap<SourceRelativeURI, IPath> getSourceTraces() {
 		return sourceTraces;
 	}
 
@@ -427,7 +428,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 			while (iterator.hasNext()) {
 				AbstractTraceRegion region = iterator.next();
 				for (ILocationData location : region.getAssociatedLocations()) {
-					URI path = location.getPath();
+					SourceRelativeURI path = location.getSrcRelativePath();
 					if (path != null) {
 						sourceTraces.put(path, tracePath);
 					}
@@ -489,15 +490,13 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	 */
 	public void flushSourceTraces(String generatorName) throws CoreException {
 		if (sourceTraces != null) {
-			Set<URI> keys = sourceTraces.keySet();
-			for(URI uri: keys) {
-				if (uri.isPlatformResource()) {
-					Collection<IPath> paths = sourceTraces.get(uri);
-					IFile sourceFile = workspace.getRoot().getFile(new Path(uri.toPlatformString(true)));
-					if (sourceFile.exists()) {
-						IPath[] tracePathArray = paths.toArray(new IPath[paths.size()]);
-						traceMarkers.installMarker(sourceFile, generatorName, tracePathArray);
-					}
+			Set<SourceRelativeURI> keys = sourceTraces.keySet();
+			for(SourceRelativeURI uri: keys) {
+				Collection<IPath> paths = sourceTraces.get(uri);
+				IFile sourceFile = workspace.getRoot().getFile(new Path(uri.getURI().path()));
+				if (sourceFile.exists()) {
+					IPath[] tracePathArray = paths.toArray(new IPath[paths.size()]);
+					traceMarkers.installMarker(sourceFile, generatorName, tracePathArray);
 				}
 			}
 		}

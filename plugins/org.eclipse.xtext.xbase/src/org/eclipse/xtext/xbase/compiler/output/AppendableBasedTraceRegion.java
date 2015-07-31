@@ -9,10 +9,10 @@ package org.eclipse.xtext.xbase.compiler.output;
 
 import java.util.List;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.LocationData;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Lists;
@@ -41,34 +41,19 @@ public class AppendableBasedTraceRegion extends AbstractTraceRegion {
 		this.useForDebugging = delegate.isUseForDebugging();
 		boolean useLocationsFromDelegate = true;
 		if (parent != null) {
-			URI parentPath = parent.getAssociatedPath();
+			SourceRelativeURI parentPath = parent.getAssociatedSrcRelativePath();
 			if (parentPath != null) {
-				boolean matches = true;
-				for(ILocationData locationData: delegate.getLocationData()) {
-					if (!parentPath.equals(locationData.getPath())) {
-						matches = false;
-						break;
-					}
-				}
-				useLocationsFromDelegate = !matches;
+				useLocationsFromDelegate = !allLocationsMatch(delegate, parentPath);
 			}
 		}
-		if (useLocationsFromDelegate) {
-			this.locations = Lists.newArrayList(delegate.getLocationData());
-		} else {
-			this.locations = Lists.newArrayList();
-			for(ILocationData locationData: delegate.getLocationData()) {
-				this.locations.add(new LocationData(locationData.getOffset(), locationData.getLength(), locationData.getLineNumber(), locationData.getEndLineNumber(), null));
-			}
-		}
+		this.locations = copyLocationData(delegate, useLocationsFromDelegate);
 		int length = 0;
 		int line = lineNumber;
 		for (Object child : delegate.getChildren()) {
 			if (child instanceof TreeAppendable) {
 				TreeAppendable castedChild = (TreeAppendable) child;
 				if (hasVisibleChildren(castedChild)) {
-					AppendableBasedTraceRegion childRegion = new AppendableBasedTraceRegion(
-							this, castedChild, offset + length, line);
+					AppendableBasedTraceRegion childRegion = new AppendableBasedTraceRegion(this, castedChild, offset + length, line);
 					length += childRegion.getMyLength();
 					line = childRegion.getMyEndLineNumber();
 				}
@@ -83,6 +68,27 @@ public class AppendableBasedTraceRegion extends AbstractTraceRegion {
 		if (parent == null) {
 			compressTrace(delegate.getContent());
 		}
+	}
+
+	private List<ILocationData> copyLocationData(TreeAppendable delegate, boolean useOriginalLocations) {
+		if (useOriginalLocations) {
+			return Lists.newArrayList(delegate.getLocationData());
+		} else {
+			List<ILocationData> result = Lists.newArrayList();
+			for(ILocationData locationData: delegate.getLocationData()) {
+				result.add(new LocationData(locationData, null));
+			}
+			return result;
+		}
+	}
+
+	private boolean allLocationsMatch(TreeAppendable appendable, SourceRelativeURI path) {
+		for(ILocationData locationData: appendable.getLocationData()) {
+			if (!path.equals(locationData.getSrcRelativePath())) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	protected void compressTrace(String completeContent) {

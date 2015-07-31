@@ -10,6 +10,7 @@ package org.eclipse.xtext.build;
 import com.google.inject.Inject;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.util.URI;
@@ -297,8 +298,8 @@ public class IncrementalBuilderTest extends AbstractIncrementalBuilderTest {
     Assert.assertTrue(_containsSuffix_5);
     Source2GeneratedMapping _fileMappings = this.indexState.getFileMappings();
     URI _uri = this.uri("src/A.indextestlanguage");
-    Iterable<URI> _generated = _fileMappings.getGenerated(_uri);
-    int _size_4 = IterableExtensions.size(_generated);
+    List<URI> _generated = _fileMappings.getGenerated(_uri);
+    int _size_4 = _generated.size();
     Assert.assertEquals(1, _size_4);
     int _size_5 = this.deleted.size();
     Assert.assertEquals(1, _size_5);

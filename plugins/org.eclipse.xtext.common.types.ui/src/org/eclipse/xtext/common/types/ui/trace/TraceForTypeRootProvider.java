@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.trace;
+package org.eclipse.xtext.common.types.ui.trace;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,7 +14,6 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IClassFile;
@@ -27,11 +26,12 @@ import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.core.BinaryType;
 import org.eclipse.jdt.internal.core.JarPackageFragmentRoot;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
-import org.eclipse.xtext.generator.trace.ITrace;
-import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
+import org.eclipse.xtext.ui.generator.trace.IEclipseTrace;
+import org.eclipse.xtext.ui.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 
@@ -64,10 +64,10 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 	@Inject
 	private ITraceForStorageProvider traceForStorageProvider;
 	
-	private Pair<ITypeRoot, ITrace> lruCache = null;
+	private Pair<ITypeRoot, IEclipseTrace> lruCache = null;
 
-	protected String getPathInFragmentRoot(final ITypeRoot derivedResource) {
-		return derivedResource.getParent().getElementName().replace('.', '/') + "/";
+	protected SourceRelativeURI getPathInFragmentRoot(final ITypeRoot derivedResource, String traceSimpleFileName) {
+		return new SourceRelativeURI(URI.createURI(derivedResource.getParent().getElementName().replace('.', '/') + "/" + traceSimpleFileName));
 	}
 
 	protected String getTraceSimpleFileName(final ITypeRoot derivedResource) {
@@ -123,17 +123,17 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 
 	/* @Nullable */
 	@Override
-	public ITrace getTraceToSource(final ITypeRoot derivedJavaType) {
+	public IEclipseTrace getTraceToSource(final ITypeRoot derivedJavaType) {
 		if (lruCache != null && lruCache.getFirst().equals(derivedJavaType))
 			return lruCache.getSecond();
-		ITrace trace = createTraceToSource(derivedJavaType);
+		IEclipseTrace trace = createTraceToSource(derivedJavaType);
 		if (derivedJavaType.isReadOnly()) {
-			lruCache = Tuples.<ITypeRoot, ITrace> create(derivedJavaType, trace);
+			lruCache = Tuples.<ITypeRoot, IEclipseTrace> create(derivedJavaType, trace);
 		}
 		return trace;
 	}
 
-	private ITrace createTraceToSource(final ITypeRoot derivedJavaType) {
+	private IEclipseTrace createTraceToSource(final ITypeRoot derivedJavaType) {
 		if (derivedJavaType instanceof IClassFile)
 			return getTraceToSource((IClassFile) derivedJavaType);
 		if (derivedJavaType instanceof ICompilationUnit)
@@ -142,7 +142,7 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 	}
 
 	/* @Nullable */
-	public ITrace getTraceToSource(final ICompilationUnit javaFile) {
+	public IEclipseTrace getTraceToSource(final ICompilationUnit javaFile) {
 		try {
 			IResource resource = javaFile.getUnderlyingResource();
 			if (resource instanceof IStorage)
@@ -154,48 +154,52 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 	}
 
 	/* @Nullable */
-	public ITrace getTraceToSource(final IClassFile classFile) {
+	public IEclipseTrace getTraceToSource(final IClassFile classFile) {
 		IPath sourcePath = getSourcePath(classFile);
 		if (sourcePath == null)
 			return null;
 		IProject project = classFile.getJavaProject().getProject();
-		AbstractTrace trace1;
-		if (isZipFile(sourcePath)) {
-			ZipFileAwareTrace zipFileAwareTrace = zipFileAwareTraceProvider.get();
-			zipFileAwareTrace.setProject(project);
-			zipFileAwareTrace.setZipFilePath(sourcePath);
-			trace1 = zipFileAwareTrace;
-		} else {
-			FolderAwareTrace folderAwareTrace = folderAwareTraceProvider.get();
-			folderAwareTrace.setProject(project);
-			folderAwareTrace.setRootFolder(sourcePath.toString());
-			trace1 = folderAwareTrace;
-		}
-		final AbstractTrace result = trace1;
-		result.setTraceRegionProvider(new ITraceRegionProvider() {
+		class TraceRegionProvider implements ITraceRegionProvider {
+			
+			private AbstractTraceWithoutStorage trace;
+
+			TraceRegionProvider(AbstractTraceWithoutStorage trace) {
+				this.trace = trace;
+			}
+			
 			@Override
 			public AbstractTraceRegion getTraceRegion() {
 				String traceSimpleFileName = getTraceSimpleFileName(classFile);
 				if (traceSimpleFileName == null)
 					return null;
-				String pathInFragmentRoot = getPathInFragmentRoot(classFile);
-				URI traceURI = URI.createURI(pathInFragmentRoot + traceSimpleFileName);
+				SourceRelativeURI traceURI = getPathInFragmentRoot(classFile, traceSimpleFileName);
 				try {
-					InputStream contents = result.getContents(traceURI, result.getLocalProject());
+					InputStream contents = trace.getContents(traceURI, trace.getLocalProject());
 					if (contents != null)
 						try {
 							return traceRegionSerializer.readTraceRegionFrom(contents);
 						} finally {
 							contents.close();
 						}
-				} catch (CoreException e) {
-					log.error("Error finding trace region", e);
 				} catch (IOException e) {
 					log.error("Error finding trace region", e);
 				}
 				return null;
 			}
-		});
-		return result;
+		}
+
+		if (isZipFile(sourcePath)) {
+			ZipFileAwareTrace zipFileAwareTrace = zipFileAwareTraceProvider.get();
+			zipFileAwareTrace.setProject(project);
+			zipFileAwareTrace.setZipFilePath(sourcePath);
+			zipFileAwareTrace.setTraceRegionProvider(new TraceRegionProvider(zipFileAwareTrace));
+			return zipFileAwareTrace;
+		} else {
+			FolderAwareTrace folderAwareTrace = folderAwareTraceProvider.get();
+			folderAwareTrace.setProject(project);
+			folderAwareTrace.setRootFolder(sourcePath.toString());
+			folderAwareTrace.setTraceRegionProvider(new TraceRegionProvider(folderAwareTrace));
+			return folderAwareTrace;
+		}
 	}
 }

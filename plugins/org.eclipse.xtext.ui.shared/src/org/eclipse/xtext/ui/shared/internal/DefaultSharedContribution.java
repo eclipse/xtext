@@ -9,12 +9,12 @@ package org.eclipse.xtext.ui.shared.internal;
 
 import org.eclipse.xtext.builder.DerivedResourceMarkers;
 import org.eclipse.xtext.builder.impl.ProjectOpenedOrClosedListener;
-import org.eclipse.xtext.generator.IDerivedResourceMarkers;
 import org.eclipse.xtext.ui.containers.WorkspaceProjectsState;
+import org.eclipse.xtext.ui.generator.IDerivedResourceMarkers;
 import org.eclipse.xtext.ui.generator.trace.DerivedResourceMarkerBasedOpenerContributor;
 import org.eclipse.xtext.ui.generator.trace.OppositeFileOpenerContributor;
 import org.eclipse.xtext.ui.generator.trace.TraceBasedOpenerContributor;
-import org.eclipse.xtext.ui.generator.trace.TraceOrMakerBasedOpenerContributor;
+import org.eclipse.xtext.ui.generator.trace.TraceOrMarkerBasedOpenerContributor;
 import org.eclipse.xtext.ui.shared.contribution.IEagerContribution;
 
 import com.google.inject.Binder;
@@ -34,7 +34,7 @@ public class DefaultSharedContribution implements Module {
 		binder.bind(DerivedResourceMarkerBasedOpenerContributor.class);
 		binder.bind(DerivedResourceMarkers.GeneratorIdProvider.class);
 		binder.bind(IDerivedResourceMarkers.class).to(DerivedResourceMarkers.class);
-		binder.bind(OppositeFileOpenerContributor.class).to(TraceOrMakerBasedOpenerContributor.class);
+		binder.bind(OppositeFileOpenerContributor.class).to(TraceOrMarkerBasedOpenerContributor.class);
 	}
 
 }

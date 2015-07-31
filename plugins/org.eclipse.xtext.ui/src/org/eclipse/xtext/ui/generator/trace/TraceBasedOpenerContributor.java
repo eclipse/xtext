@@ -11,9 +11,6 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.xtext.generator.trace.ILocationInResource;
-import org.eclipse.xtext.generator.trace.ITrace;
-import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.ITextRegion;
 
@@ -37,8 +34,8 @@ public class TraceBasedOpenerContributor extends OppositeFileOpenerContributor {
 	public boolean collectGeneratedFileOpeners(IEditorPart editor, IAcceptor<FileOpener> acceptor) {
 		IStorage editorStorage = getStorage(editor);
 		if (editorStorage != null) {
-			ITrace trace = traceForStorageProvider.getTraceToTarget(editorStorage);
-			if (trace != null && ((ITrace.Internal) trace).getRootTraceRegion() != null) {
+			IEclipseTrace trace = traceForStorageProvider.getTraceToTarget(editorStorage);
+			if (trace != null && trace.hasTraceData()) {
 				collectOpeners(trace, getSelectedRegion(editor), acceptor);
 				return true;
 			}
@@ -46,15 +43,15 @@ public class TraceBasedOpenerContributor extends OppositeFileOpenerContributor {
 		return false;
 	}
 
-	private void collectOpeners(ITrace trace, ITextRegion region, IAcceptor<FileOpener> acceptor) {
-		Iterable<ILocationInResource> locations = null;
+	private void collectOpeners(IEclipseTrace trace, ITextRegion region, IAcceptor<FileOpener> acceptor) {
+		Iterable<? extends ILocationInEclipseResource> locations = null;
 		if (region != null)
 			locations = trace.getAllAssociatedLocations(region);
 		if (locations == null || Iterables.isEmpty(locations))
 			locations = trace.getAllAssociatedLocations();
 		Map<IStorage, ITextRegion> result = Maps.newHashMap();
-		for (ILocationInResource location : locations) {
-			IStorage storage = location.getStorage();
+		for (ILocationInEclipseResource location : locations) {
+			IStorage storage = location.getPlatformResource();
 			if (storage != null) {
 				ITextRegion old = result.put(storage, location.getTextRegion());
 				if (old != null) {
@@ -74,8 +71,8 @@ public class TraceBasedOpenerContributor extends OppositeFileOpenerContributor {
 	public boolean collectSourceFileOpeners(IEditorPart editor, IAcceptor<FileOpener> acceptor) {
 		IStorage editorStorage = getStorage(editor);
 		if (editorStorage != null) {
-			ITrace trace = traceForStorageProvider.getTraceToSource(editorStorage);
-			if (((ITrace.Internal) trace).getRootTraceRegion() != null) {
+			IEclipseTrace trace = traceForStorageProvider.getTraceToSource(editorStorage);
+			if (trace.hasTraceData()) {
 				collectOpeners(trace, getSelectedRegion(editor), acceptor);
 				return true;
 			}

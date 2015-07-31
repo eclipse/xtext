@@ -8,7 +8,7 @@
 package org.eclipse.xtext.xbase.ui.generator.trace;
 
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.xtext.builder.trace.ClassFileBasedOpenerContributor;
+import org.eclipse.xtext.common.types.ui.trace.ClassFileBasedOpenerContributor;
 import org.eclipse.xtext.ui.generator.trace.FileOpener;
 import org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler;
 import org.eclipse.xtext.util.IAcceptor;

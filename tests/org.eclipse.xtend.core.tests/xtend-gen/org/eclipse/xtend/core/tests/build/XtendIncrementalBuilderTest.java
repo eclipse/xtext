@@ -11,6 +11,7 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.eclipse.emf.common.util.URI;
@@ -421,7 +422,7 @@ public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest 
     Assert.assertTrue(_containsSuffix_7);
     Source2GeneratedMapping _fileMappings = this.indexState.getFileMappings();
     URI _uri = this.uri("src/A.xtend");
-    Iterable<URI> _generated = _fileMappings.getGenerated(_uri);
+    List<URI> _generated = _fileMappings.getGenerated(_uri);
     Set<URI> _set = IterableExtensions.<URI>toSet(_generated);
     URI _uri_1 = this.uri("xtend-gen/X.java");
     boolean _contains = _set.contains(_uri_1);

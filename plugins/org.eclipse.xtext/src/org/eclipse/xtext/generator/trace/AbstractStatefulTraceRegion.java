@@ -21,14 +21,16 @@ public abstract class AbstractStatefulTraceRegion extends AbstractTraceRegion {
 
 	private final ITextRegionWithLineInformation myRegion;
 	private final List<ILocationData> associatedLocations;
+	private final boolean useForDebugging;
 
-	protected AbstractStatefulTraceRegion(ITextRegionWithLineInformation myRegion, ILocationData associatedLocation, /* @Nullable */ AbstractTraceRegion parent) {
-		this(myRegion, Lists.newArrayList(associatedLocation), parent);
+	protected AbstractStatefulTraceRegion(ITextRegionWithLineInformation myRegion, boolean useForDebugging, ILocationData associatedLocation, /* @Nullable */ AbstractTraceRegion parent) {
+		this(myRegion, useForDebugging, Lists.newArrayList(associatedLocation), parent);
 	}
 	
-	protected AbstractStatefulTraceRegion(ITextRegionWithLineInformation myRegion, List<ILocationData> associatedLocations, /* @Nullable */ AbstractTraceRegion parent) {
+	protected AbstractStatefulTraceRegion(ITextRegionWithLineInformation myRegion, boolean useForDebugging, List<ILocationData> associatedLocations, /* @Nullable */ AbstractTraceRegion parent) {
 		super(parent);
 		this.myRegion = myRegion;
+		this.useForDebugging = useForDebugging;
 		this.associatedLocations = associatedLocations;
 		if (!isConsistentWithParent()) {
 			throw new IllegalArgumentException("Produced region is inconsistent with parent, this: " + this + ", parent: " + parent);
@@ -58,6 +60,11 @@ public abstract class AbstractStatefulTraceRegion extends AbstractTraceRegion {
 	@Override
 	public ITextRegionWithLineInformation getMyRegion() {
 		return myRegion;
+	}
+	
+	@Override
+	public boolean isUseForDebugging() {
+		return useForDebugging;
 	}
 
 	@Override

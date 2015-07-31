@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.trace;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.TextRegionWithLineInformation;
 
@@ -16,20 +15,20 @@ import org.eclipse.xtext.util.TextRegionWithLineInformation;
  */
 public class LocationData extends TextRegionWithLineInformation implements ILocationData {
 
-	private final URI path;
+	private final SourceRelativeURI path;
 	
-	public LocationData(int offset, int length, int lineNumber, int endLineNumber,  /* @Nullable */ URI path) {
+	public LocationData(int offset, int length, int lineNumber, int endLineNumber,  /* @Nullable */ SourceRelativeURI path) {
 		super(offset, length, lineNumber, endLineNumber);
 		this.path = path;
 	}
 	
-	public LocationData(/* @NonNull */ ITextRegionWithLineInformation region,  /* @Nullable */ URI path) {
+	public LocationData(/* @NonNull */ ITextRegionWithLineInformation region,  /* @Nullable */ SourceRelativeURI path) {
 		this(region.getOffset(), region.getLength(), region.getLineNumber(), region.getEndLineNumber(), path);
 	}
 
 	/* @Nullable */
 	@Override
-	public URI getPath() {
+	public SourceRelativeURI getSrcRelativePath() {
 		return path;
 	}
 

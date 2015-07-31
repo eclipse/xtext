@@ -104,9 +104,7 @@ public class TraceBasedConfigurationProducerTest extends XtendIdeaTestCase {
       TestCase.assertTrue((xtendFile instanceof BaseXtextFile));
       FileViewProvider _viewProvider = xtendFile.getViewProvider();
       final PsiElement sourceElement = _viewProvider.findElementAt(cursorIdx);
-      RunConfiguration _createConfiguration = this.createConfiguration(sourceElement, 
-        XtendApplicationConfigurationProducer.class);
-      final ApplicationConfiguration configuration = ((ApplicationConfiguration) _createConfiguration);
+      final ApplicationConfiguration configuration = this.<ApplicationConfiguration>createConfiguration(sourceElement, XtendApplicationConfigurationProducer.class);
       Module _module = this.getModule();
       Set<Module> _singleton = Collections.<Module>singleton(_module);
       Module[] _modules = configuration.getModules();
@@ -121,8 +119,8 @@ public class TraceBasedConfigurationProducerTest extends XtendIdeaTestCase {
       String _name = configuration.getName();
       TestCase.assertEquals("XtendMainClass", _name);
       TraceBasedConfigurationProducerTest.checkCanRun(configuration);
-      final RunConfiguration sameConfiguration = this.createConfiguration(sourceElement, XtendApplicationConfigurationProducer.class);
-      final RunConfigurationProducer producer = RunConfigurationProducer.getInstance(XtendApplicationConfigurationProducer.class);
+      final ApplicationConfiguration sameConfiguration = this.<ApplicationConfiguration>createConfiguration(sourceElement, XtendApplicationConfigurationProducer.class);
+      final RunConfigurationProducer<ApplicationConfiguration> producer = RunConfigurationProducer.<XtendApplicationConfigurationProducer>getInstance(XtendApplicationConfigurationProducer.class);
       ConfigurationContext _createContext = this.createContext(sourceElement);
       boolean _isConfigurationFromContext = producer.isConfigurationFromContext(sameConfiguration, _createContext);
       TestCase.assertTrue(_isConfigurationFromContext);
@@ -176,7 +174,7 @@ public class TraceBasedConfigurationProducerTest extends XtendIdeaTestCase {
       FileViewProvider _viewProvider = xtendFile.getViewProvider();
       final PsiElement sourceElement = _viewProvider.findElementAt(cursorIdx);
       final ConfigurationContext context = this.createContext(sourceElement);
-      final RunConfigurationProducer producer = RunConfigurationProducer.getInstance(XtendApplicationConfigurationProducer.class);
+      final XtendApplicationConfigurationProducer producer = RunConfigurationProducer.<XtendApplicationConfigurationProducer>getInstance(XtendApplicationConfigurationProducer.class);
       final ConfigurationFromContext confFromContext = producer.createConfigurationFromContext(context);
       TestCase.assertNotNull(confFromContext);
       RunConfiguration _configuration = confFromContext.getConfiguration();
@@ -203,7 +201,7 @@ public class TraceBasedConfigurationProducerTest extends XtendIdeaTestCase {
       final VirtualFile file = this.addFile(_mappedTo);
       PsiManager _psiManager = this.getPsiManager();
       final PsiFile xtendFile = _psiManager.findFile(file);
-      final RunConfiguration conf = this.createConfiguration(xtendFile, XtendApplicationConfigurationProducer.class);
+      final ApplicationConfiguration conf = this.<ApplicationConfiguration>createConfiguration(xtendFile, XtendApplicationConfigurationProducer.class);
       TraceBasedConfigurationProducerTest.checkCanRun(conf);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -252,8 +250,7 @@ public class TraceBasedConfigurationProducerTest extends XtendIdeaTestCase {
       final VirtualFile file = this.addFile(_mappedTo);
       PsiManager _psiManager = this.getPsiManager();
       final PsiFile xtendFile = _psiManager.findFile(file);
-      RunConfiguration _createConfiguration = this.createConfiguration(xtendFile, XtendJunitClassConfigurationProducer.class);
-      final JUnitConfiguration conf = ((JUnitConfiguration) _createConfiguration);
+      final JUnitConfiguration conf = this.<JUnitConfiguration>createConfiguration(xtendFile, XtendJunitClassConfigurationProducer.class);
       JUnitConfiguration.Data _persistentData = conf.getPersistentData();
       TestCase.assertEquals("XtendJunitClass", _persistentData.MAIN_CLASS_NAME);
       JUnitConfiguration.Data _persistentData_1 = conf.getPersistentData();
@@ -313,9 +310,7 @@ public class TraceBasedConfigurationProducerTest extends XtendIdeaTestCase {
       TestCase.assertTrue((xtendFile instanceof BaseXtextFile));
       FileViewProvider _viewProvider = xtendFile.getViewProvider();
       final PsiElement sourceElement = _viewProvider.findElementAt(cursorIdx);
-      RunConfiguration _createConfiguration = this.createConfiguration(sourceElement, 
-        XtendJunitMethodConfigurationProducer.class);
-      final JUnitConfiguration configuration = ((JUnitConfiguration) _createConfiguration);
+      final JUnitConfiguration configuration = this.<JUnitConfiguration>createConfiguration(sourceElement, XtendJunitMethodConfigurationProducer.class);
       JUnitConfiguration.Data _persistentData = configuration.getPersistentData();
       TestCase.assertEquals("XtendJunitClass", _persistentData.MAIN_CLASS_NAME);
       JUnitConfiguration.Data _persistentData_1 = configuration.getPersistentData();
@@ -377,9 +372,7 @@ public class TraceBasedConfigurationProducerTest extends XtendIdeaTestCase {
       TestCase.assertTrue((xtendFile instanceof BaseXtextFile));
       FileViewProvider _viewProvider = xtendFile.getViewProvider();
       final PsiElement sourceElement = _viewProvider.findElementAt(cursorIdx);
-      RunConfiguration _createConfiguration = this.createConfiguration(sourceElement, 
-        XtendJunitMethodConfigurationProducer.class);
-      final JUnitConfiguration configuration = ((JUnitConfiguration) _createConfiguration);
+      final JUnitConfiguration configuration = this.<JUnitConfiguration>createConfiguration(sourceElement, XtendJunitMethodConfigurationProducer.class);
       JUnitConfiguration.Data _persistentData = configuration.getPersistentData();
       TestCase.assertEquals("XtendJunitClass", _persistentData.MAIN_CLASS_NAME);
       JUnitConfiguration.Data _persistentData_1 = configuration.getPersistentData();
@@ -411,13 +404,14 @@ public class TraceBasedConfigurationProducerTest extends XtendIdeaTestCase {
     }
   }
   
-  protected RunConfiguration createConfiguration(final PsiElement psiElement, final Class<? extends RunConfigurationProducer<?>> clazz) {
+  protected <T extends RunConfiguration> T createConfiguration(final PsiElement psiElement, final Class<? extends RunConfigurationProducer<T>> clazz) {
     final ConfigurationContext context = this.createContext(psiElement);
-    final RunConfigurationProducer producer = RunConfigurationProducer.getInstance(clazz);
+    final RunConfigurationProducer<T> producer = RunConfigurationProducer.<RunConfigurationProducer<T>>getInstance(clazz);
     TestCase.assertNotNull(producer);
     final ConfigurationFromContext fromContext = producer.createConfigurationFromContext(context);
     TestCase.assertNotNull(fromContext);
-    return fromContext.getConfiguration();
+    RunConfiguration _configuration = fromContext.getConfiguration();
+    return ((T) _configuration);
   }
   
   private ConfigurationContext createContext(@NotNull final PsiElement psiClass) {

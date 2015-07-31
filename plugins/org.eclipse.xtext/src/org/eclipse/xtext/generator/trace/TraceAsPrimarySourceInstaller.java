@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.trace.LineMappingProvider.LineMapping;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -131,14 +130,14 @@ public class TraceAsPrimarySourceInstaller implements ITraceToBytecodeInstaller 
 	public byte[] installTrace(byte[] javaClassBytecode) throws IOException {
 		if (trace == null)
 			return null;
-		ClassReader reader = new ClassReader(javaClassBytecode);
-		ClassWriter writer = new ClassWriter(0);
-		URI associatedPath = trace.getAssociatedPath();
+		SourceRelativeURI associatedPath = trace.getAssociatedSrcRelativePath();
 		if (associatedPath == null)
 			return null;
-		String sourceFile = associatedPath.lastSegment();
+		ClassReader reader = new ClassReader(javaClassBytecode);
+		ClassWriter writer = new ClassWriter(0);
+		String sourceFileName = associatedPath.getURI().lastSegment();
 		int[] target2source = getTargetToSourceLineMapping(trace);
-		XtextClassAdapter adapter = new XtextClassAdapter(writer, sourceFile, target2source, hideSyntheticVariables);
+		XtextClassAdapter adapter = new XtextClassAdapter(writer, sourceFileName, target2source, hideSyntheticVariables);
 		reader.accept(adapter, 0);
 		return writer.toByteArray();
 	}

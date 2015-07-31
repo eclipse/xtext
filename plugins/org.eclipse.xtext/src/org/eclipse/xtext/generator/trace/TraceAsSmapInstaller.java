@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.generator.trace.LineMappingProvider.LineMapping;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -48,12 +47,16 @@ public class TraceAsSmapInstaller implements ITraceToBytecodeInstaller {
 		return toSmap(outputFileName, lineInfo);
 	}
 
-	protected String getStratumName(final URI path) {
-		IResourceServiceProvider provider = serviceProviderRegistry.getResourceServiceProvider(path.trimFragment());
+	protected String getStratumName(final SourceRelativeURI path) {
+		IResourceServiceProvider provider = serviceProviderRegistry.getResourceServiceProvider(path.getURI());
 		if (provider == null) {
 			// it might happen that trace data is in the workspace but the corresponding language is not installed.
 			// we use the file extension then.
-			return path.fileExtension() != null ? path.fileExtension() : "unknown";
+			String result = path.getURI().fileExtension();
+			if (result != null) {
+				return result;
+			}
+			return "unknown";
 		}
 		final LanguageInfo languageInfo = provider.get(LanguageInfo.class);
 		String name = languageInfo.getShortName();
@@ -80,7 +83,7 @@ public class TraceAsSmapInstaller implements ITraceToBytecodeInstaller {
 		for (LineMapping lm : lineInfo) {
 			String stratumName = getStratumName(lm.source);
 			if (!"Java".equals(stratumName)) {
-				final String path = lm.source.path();
+				final String path = lm.source.getURI().path();
 				if (path != null) {
 					SmapStratum stratum = strata.get(stratumName);
 					if (stratum == null) {
@@ -88,9 +91,9 @@ public class TraceAsSmapInstaller implements ITraceToBytecodeInstaller {
 						strata.put(stratumName, stratum);
 						generator.addStratum(stratum, true);
 					}
-					final String fileName = lm.source.lastSegment();
-					stratum.addFile(fileName, path);
-					stratum.addLineData(lm.sourceStartLine, fileName, 1, lm.targetStartLine + 1, lm.targetEndLine
+					final String sourceFileName = lm.source.getURI().lastSegment();
+					stratum.addFile(sourceFileName, path);
+					stratum.addLineData(lm.sourceStartLine, sourceFileName, 1, lm.targetStartLine + 1, lm.targetEndLine
 							- lm.targetStartLine + 1);
 				}
 			}

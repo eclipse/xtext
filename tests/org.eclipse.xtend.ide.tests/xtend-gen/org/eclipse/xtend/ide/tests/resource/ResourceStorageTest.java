@@ -29,7 +29,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.builder.trace.StorageAwareTrace;
+import org.eclipse.xtext.generator.trace.AbsoluteURI;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -38,6 +39,7 @@ import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
 import org.eclipse.xtext.resource.persistence.SourceLevelURIsAdapter;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.ui.editor.SchedulingRuleFactory;
+import org.eclipse.xtext.ui.generator.trace.StorageAwareTrace;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -63,12 +65,12 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
     }
     
     @Override
-    public URI resolvePath(final IProject project, final URI path) {
+    public AbsoluteURI resolvePath(final IProject project, final SourceRelativeURI path) {
       return super.resolvePath(project, path);
     }
     
     @Override
-    public URI resolvePath(final URI path) {
+    public AbsoluteURI resolvePath(final SourceRelativeURI path) {
       return super.resolvePath(path);
     }
   }
@@ -282,12 +284,14 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
       _injector.injectMembers(storageAwareTrace);
       storageAwareTrace.setLocalStorage(file);
       URI _createURI = URI.createURI("mypack/MyClass%20Foo.xtend");
-      URI result = storageAwareTrace.resolvePath(_createURI);
+      SourceRelativeURI _sourceRelativeURI = new SourceRelativeURI(_createURI);
+      AbsoluteURI result = storageAwareTrace.resolvePath(_sourceRelativeURI);
       String _string = result.toString();
       Assert.assertEquals("platform:/resource/test.project/src/mypack/MyClass%20Foo.xtend", _string);
       IProject _project = this.helper.getProject();
       URI _createURI_1 = URI.createURI("src/mypack/MyClass%20Foo.xtend");
-      URI _resolvePath = storageAwareTrace.resolvePath(_project, _createURI_1);
+      SourceRelativeURI _sourceRelativeURI_1 = new SourceRelativeURI(_createURI_1);
+      AbsoluteURI _resolvePath = storageAwareTrace.resolvePath(_project, _sourceRelativeURI_1);
       result = _resolvePath;
       String _string_1 = result.toString();
       Assert.assertEquals("platform:/resource/test.project/src/mypack/MyClass%20Foo.xtend", _string_1);
