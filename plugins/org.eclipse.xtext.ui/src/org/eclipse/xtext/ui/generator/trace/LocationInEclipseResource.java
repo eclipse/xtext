@@ -27,15 +27,6 @@ public class LocationInEclipseResource extends LocationInResource implements ILo
 		return (AbstractEclipseTrace) super.getTrace();
 	}
 	
-	/**
-	 * @deprecated use {@link #getPlatformResource()} instead.
-	 */
-	@Deprecated
-	@Override
-	public IStorage getStorage() {
-		return getPlatformResource();
-	}
-
 	@Override
 	public IStorage getPlatformResource() {
 		return getTrace().findStorage(getSrcRelativeResourceURI(), getProject());

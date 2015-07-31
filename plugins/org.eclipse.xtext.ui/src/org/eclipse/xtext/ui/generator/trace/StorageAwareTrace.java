@@ -125,6 +125,7 @@ public class StorageAwareTrace extends AbstractEclipseTrace {
 		}
 	}
 
+	/* make this accessible from the same package */
 	@Override
 	protected void setTraceRegionProvider(ITraceRegionProvider traceRegionProvider) {
 		super.setTraceRegionProvider(traceRegionProvider);
