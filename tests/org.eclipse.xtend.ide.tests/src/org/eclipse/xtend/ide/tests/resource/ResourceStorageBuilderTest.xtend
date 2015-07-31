@@ -7,29 +7,27 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.resource
 
+import com.google.common.base.Throwables
 import com.google.inject.Inject
 import org.eclipse.core.resources.IProject
 import org.eclipse.core.resources.IStorage
+import org.eclipse.core.runtime.IProgressMonitor
+import org.eclipse.core.runtime.NullProgressMonitor
+import org.eclipse.core.runtime.Status
+import org.eclipse.core.runtime.jobs.Job
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
+import org.eclipse.xtext.generator.trace.SourceRelativeURI
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil
 import org.eclipse.xtext.resource.persistence.SourceLevelURIsAdapter
 import org.eclipse.xtext.resource.persistence.StorageAwareResource
+import org.eclipse.xtext.ui.editor.SchedulingRuleFactory
+import org.eclipse.xtext.ui.generator.trace.StorageAwareTrace
 import org.eclipse.xtext.ui.resource.IResourceSetProvider
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper
 import org.junit.Test
-import org.eclipse.core.runtime.NullProgressMonitor
-import org.eclipse.core.runtime.jobs.Job
-import org.eclipse.core.runtime.IProgressMonitor
-import org.eclipse.core.runtime.Status
-import org.eclipse.xtext.ui.editor.SchedulingRuleFactory
-import com.google.common.base.Throwables
-import org.eclipse.xtext.ui.generator.trace.StorageAwareTrace
-import org.eclipse.xtext.generator.trace.AbsoluteURI
-import org.eclipse.xtext.workspace.IProjectConfig
-import org.eclipse.xtext.generator.trace.SourceRelativeURI
 
 /**
  * @author Sven Efftinge - Initial contribution and API

@@ -10,7 +10,6 @@ package org.eclipse.xtext.builder.trace;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.generator.trace.TraceRegion;
