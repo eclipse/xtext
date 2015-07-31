@@ -47,6 +47,7 @@ import org.eclipse.xtext.idea.resource.IdeaResourceDescriptionsProvider;
 import org.eclipse.xtext.idea.service.IdeaOperationCanceledManager;
 import org.eclipse.xtext.idea.structureview.DefaultPsiStructureViewFactory;
 import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider;
+import org.eclipse.xtext.idea.trace.TraceForVirtualFileProvider;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
@@ -175,5 +176,9 @@ public class DefaultIdeaModule extends AbstractGenericModule {
   
   public Class<? extends ITraceForURIProvider> bindPlatformNeutralTraceInformation() {
     return ITraceForVirtualFileProvider.class;
+  }
+  
+  public Class<? extends ITraceForURIProvider> bindTraceInformation() {
+    return TraceForVirtualFileProvider.class;
   }
 }

@@ -59,6 +59,7 @@ import org.eclipse.xtext.service.SingletonBinding
 import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
 import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.idea.service.IdeaOperationCanceledManager
+import org.eclipse.xtext.idea.trace.TraceForVirtualFileProvider
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -164,5 +165,9 @@ class DefaultIdeaModule extends AbstractGenericModule {
 
 	def Class<? extends ITraceForURIProvider> bindPlatformNeutralTraceInformation() {
 		ITraceForVirtualFileProvider
+	}
+	
+	def Class<? extends ITraceForURIProvider> bindTraceInformation() {
+		TraceForVirtualFileProvider
 	}
 }

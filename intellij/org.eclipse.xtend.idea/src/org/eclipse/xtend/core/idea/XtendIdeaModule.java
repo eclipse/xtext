@@ -163,7 +163,4 @@ public class XtendIdeaModule extends AbstractXtendIdeaModule {
 		return IdeaASTParserFactory.class;
 	}
 	
-	public Class<? extends ITraceForVirtualFileProvider> bindTraceInformation() {
-		return TraceForVirtualFileProvider.class;
-	}
 }
