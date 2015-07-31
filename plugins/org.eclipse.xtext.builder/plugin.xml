@@ -35,7 +35,7 @@
             id="org.eclipse.xtext.builder.trace.TraceEditorID"
             name="Trace file viewer"
             icon="platform:/plugin/org.eclipse.emf.edit/icons/full/obj16/ModelFile.gif"
-            class="org.eclipse.emf.ecore.presentation.EcoreEditor"
+            class="org.eclipse.xtext.builder.trace.TraceEditor"
             extensions="_trace"
             contributorClass="org.eclipse.emf.ecore.presentation.EcoreActionBarContributor$Reflective">
          <contentTypeBinding contentTypeId="org.eclipse.emf.ecore.xmi"/>
