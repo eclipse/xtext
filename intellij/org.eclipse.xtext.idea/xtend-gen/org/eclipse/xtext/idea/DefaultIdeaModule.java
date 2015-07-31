@@ -178,7 +178,7 @@ public class DefaultIdeaModule extends AbstractGenericModule {
     return ITraceForVirtualFileProvider.class;
   }
   
-  public Class<? extends ITraceForURIProvider> bindTraceInformation() {
+  public Class<? extends ITraceForVirtualFileProvider> bindTraceInformation() {
     return TraceForVirtualFileProvider.class;
   }
 }

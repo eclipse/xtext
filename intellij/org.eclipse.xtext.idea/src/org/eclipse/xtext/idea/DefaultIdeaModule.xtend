@@ -167,7 +167,7 @@ class DefaultIdeaModule extends AbstractGenericModule {
 		ITraceForVirtualFileProvider
 	}
 	
-	def Class<? extends ITraceForURIProvider> bindTraceInformation() {
+	def Class<? extends ITraceForVirtualFileProvider> bindTraceInformation() {
 		TraceForVirtualFileProvider
 	}
 }
