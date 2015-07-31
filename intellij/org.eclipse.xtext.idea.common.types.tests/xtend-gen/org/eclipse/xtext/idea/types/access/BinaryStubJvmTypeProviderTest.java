@@ -11,65 +11,16 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.JavaAwareProjectJdkTableImpl;
 import com.intellij.testFramework.PsiTestCase;
-import junit.framework.TestCase;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtext.common.types.JvmAnnotationValue;
-import org.eclipse.xtext.common.types.JvmCharAnnotationValue;
-import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmInnerTypeReference;
-import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.testSetups.AbstractMethods;
 import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuperSuper;
-import org.eclipse.xtext.common.types.testSetups.ParameterizedTypes;
-import org.eclipse.xtext.common.types.testSetups.ParameterizedTypes2;
 import org.eclipse.xtext.idea.tests.LibraryUtil;
 import org.eclipse.xtext.idea.tests.TestDecorator;
 import org.eclipse.xtext.idea.types.access.StubJvmTypeProviderTestDelegate;
-import org.junit.Assert;
 
 @TestDecorator
 @SuppressWarnings("all")
 public class BinaryStubJvmTypeProviderTest extends PsiTestCase {
   private final StubJvmTypeProviderTestDelegate delegate = new StubJvmTypeProviderTestDelegate() {
-    @Override
-    public void testCharAnnotationValue_01() throws Exception {
-      JvmAnnotationValue _annotationValue = this.getAnnotationValue("charValue");
-      final JvmCharAnnotationValue value = ((JvmCharAnnotationValue) _annotationValue);
-      EList<Character> _values = value.getValues();
-      int _size = _values.size();
-      TestCase.assertEquals(0, _size);
-    }
-    
-    @Override
-    public void testCharAnnotationValue_02() throws Exception {
-      JvmAnnotationValue _methodParameterAnnotationValue = this.getMethodParameterAnnotationValue("charValue");
-      final JvmCharAnnotationValue value = ((JvmCharAnnotationValue) _methodParameterAnnotationValue);
-      EList<Character> _values = value.getValues();
-      int _size = _values.size();
-      TestCase.assertEquals(0, _size);
-    }
-    
-    @Override
-    public void testCharAnnotationValue_03() throws Exception {
-      JvmAnnotationValue _constructorParameterAnnotationValue = this.getConstructorParameterAnnotationValue("charValue");
-      final JvmCharAnnotationValue value = ((JvmCharAnnotationValue) _constructorParameterAnnotationValue);
-      EList<Character> _values = value.getValues();
-      int _size = _values.size();
-      TestCase.assertEquals(0, _size);
-    }
-    
-    @Override
-    public void testDefaultCharArrayAnnotationValue_01() throws Exception {
-      JvmAnnotationValue _defaultAnnotationValue = this.getDefaultAnnotationValue("charArrayValue");
-      final JvmCharAnnotationValue value = ((JvmCharAnnotationValue) _defaultAnnotationValue);
-      EList<Character> _values = value.getValues();
-      int _size = _values.size();
-      TestCase.assertEquals(0, _size);
-    }
-    
     @Override
     public void testParameterNames_01() {
       this.doTestParameterName(Bug347739ThreeTypeParamsSuperSuper.class, "getToken(A)", "a");
@@ -78,34 +29,6 @@ public class BinaryStubJvmTypeProviderTest extends PsiTestCase {
     @Override
     public void testParameterNames_02() {
       this.doTestParameterName(AbstractMethods.class, "abstractMethodWithParameter(java.lang.String)", "s");
-    }
-    
-    @Override
-    public void test_ParameterizedTypes2_inner_return_02() {
-      String typeName = ParameterizedTypes2.class.getName();
-      IJvmTypeProvider _typeProvider = this.getTypeProvider();
-      JvmType _findTypeByName = _typeProvider.findTypeByName(typeName);
-      JvmGenericType type = ((JvmGenericType) _findTypeByName);
-      JvmOperation operation = this.getMethodFromType(type, ParameterizedTypes2.class, "concreteInner()");
-      JvmTypeReference returnType = operation.getReturnType();
-      String _identifier = returnType.getIdentifier();
-      Assert.assertTrue(_identifier, (returnType instanceof JvmInnerTypeReference));
-      String _simpleName = returnType.getSimpleName();
-      TestCase.assertEquals("ParameterizedTypes2<P>$Inner<String>", _simpleName);
-    }
-    
-    @Override
-    public void test_ParameterizedTypes_inner_return_02() {
-      String typeName = ParameterizedTypes.class.getName();
-      IJvmTypeProvider _typeProvider = this.getTypeProvider();
-      JvmType _findTypeByName = _typeProvider.findTypeByName(typeName);
-      JvmGenericType type = ((JvmGenericType) _findTypeByName);
-      JvmOperation operation = this.getMethodFromType(type, ParameterizedTypes.class, "concreteInner()");
-      JvmTypeReference returnType = operation.getReturnType();
-      String _identifier = returnType.getIdentifier();
-      Assert.assertTrue(_identifier, (returnType instanceof JvmInnerTypeReference));
-      String _simpleName = returnType.getSimpleName();
-      TestCase.assertEquals("ParameterizedTypes<S, T, U, V, W>$Inner<String, List<String>, List<String>>", _simpleName);
     }
   };
   
