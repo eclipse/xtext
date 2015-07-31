@@ -14,6 +14,6 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(TraceForTypeRootProvider.class)
 public interface ITraceForTypeRootProvider {
 	
-	/* @Nullable */ IEclipseTrace getTraceToSource(ITypeRoot derivedResource);
+	IEclipseTrace getTraceToSource(ITypeRoot derivedResource);
 	
 }

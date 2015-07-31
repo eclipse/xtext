@@ -66,8 +66,6 @@ public abstract class AbstractEclipseTrace extends AbstractTrace implements IEcl
 	
 	protected abstract InputStream getContents(SourceRelativeURI uri, IProject project) throws IOException;
 	
-
-	/* @Nullable */
 	@Override
 	public ILocationInEclipseResource getBestAssociatedLocation(ITextRegion region, IStorage associatedStorage) {
 		AbsoluteURI uri = getURIForStorage(associatedStorage);
