@@ -16,13 +16,18 @@ import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.project.IndexNotReadyException;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiNameIdentifierOwner;
+import com.intellij.psi.PsiNamedElement;
+import com.intellij.psi.util.PsiTreeUtil;
 import java.util.List;
+import java.util.Set;
 import org.eclipse.xtext.idea.findusages.GeneratedSourceAwareFindUsagesHandler;
 import org.eclipse.xtext.idea.shared.IdeaSharedInjectorProvider;
 import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -80,11 +85,39 @@ public class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerF
   }
   
   protected List<? extends PsiElement> getOriginalElements(final PsiElement element) {
-    return this.traceProvider.getOriginalElements(element);
+    if ((element instanceof PsiNameIdentifierOwner)) {
+      PsiElement _nameIdentifier = ((PsiNameIdentifierOwner)element).getNameIdentifier();
+      return this.getOriginalElements(_nameIdentifier);
+    }
+    List<? extends PsiElement> _originalElements = this.traceProvider.getOriginalElements(element);
+    final Function1<PsiElement, PsiNamedElement> _function = new Function1<PsiElement, PsiNamedElement>() {
+      @Override
+      public PsiNamedElement apply(final PsiElement it) {
+        return PsiTreeUtil.<PsiNamedElement>getParentOfType(it, PsiNamedElement.class);
+      }
+    };
+    List<PsiNamedElement> _map = ListExtensions.map(_originalElements, _function);
+    Set<PsiNamedElement> _set = IterableExtensions.<PsiNamedElement>toSet(_map);
+    final List<PsiNamedElement> result = IterableExtensions.<PsiNamedElement>toList(_set);
+    return result;
   }
   
   protected List<? extends PsiElement> getGeneratedElements(final PsiElement element) {
-    return this.traceProvider.getGeneratedElements(element);
+    if ((element instanceof PsiNameIdentifierOwner)) {
+      PsiElement _nameIdentifier = ((PsiNameIdentifierOwner)element).getNameIdentifier();
+      return this.getGeneratedElements(_nameIdentifier);
+    }
+    List<? extends PsiElement> _generatedElements = this.traceProvider.getGeneratedElements(element);
+    final Function1<PsiElement, PsiNamedElement> _function = new Function1<PsiElement, PsiNamedElement>() {
+      @Override
+      public PsiNamedElement apply(final PsiElement it) {
+        return PsiTreeUtil.<PsiNamedElement>getParentOfType(it, PsiNamedElement.class);
+      }
+    };
+    List<PsiNamedElement> _map = ListExtensions.map(_generatedElements, _function);
+    Set<PsiNamedElement> _set = IterableExtensions.<PsiNamedElement>toSet(_map);
+    final List<PsiNamedElement> result = IterableExtensions.<PsiNamedElement>toList(_set);
+    return result;
   }
   
   protected FindUsagesHandlerFactory delegateFindFactory(final PsiElement element) {

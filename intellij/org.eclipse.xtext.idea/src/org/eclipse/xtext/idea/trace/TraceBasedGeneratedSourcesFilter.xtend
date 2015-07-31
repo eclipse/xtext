@@ -8,7 +8,6 @@
 package org.eclipse.xtext.idea.trace
 
 import com.google.inject.Inject
-import com.intellij.ide.projectView.impl.ProjectViewPane
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.roots.GeneratedSourcesFilter
 import com.intellij.openapi.vfs.VirtualFile
@@ -33,13 +32,13 @@ class TraceBasedGeneratedSourcesFilter extends GeneratedSourcesFilter {
 	}
 	
 	override getOriginalElements(PsiElement element) {
-		// don't navigate to the original element on double click in project explorer
-		val currentStack = Thread.currentThread.stackTrace
-		if (currentStack.subList(15, 20).exists[ frame |
-			frame.className.startsWith(ProjectViewPane.name)
-		]) {
-			return emptyList
-		}
+//		// don't navigate to the original element on double click in project explorer
+//		val currentStack = Thread.currentThread.stackTrace
+//		if (currentStack.subList(15, 20).exists[ frame |
+//			frame.className.startsWith(ProjectViewPane.name)
+//		]) {
+//			return emptyList
+//		}
 		return traceProvider.getOriginalElements(element)
 	}
 	

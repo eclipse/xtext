@@ -18,6 +18,10 @@ import com.intellij.psi.PsiElement
 import java.util.List
 import org.eclipse.xtext.idea.shared.IdeaSharedInjectorProvider
 import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider
+import com.intellij.psi.PsiNameIdentifierOwner
+import com.intellij.psi.util.PsiTreeUtil
+import com.intellij.psi.util.PsiUtil
+import com.intellij.psi.PsiNamedElement
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -44,11 +48,19 @@ class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerFactory 
 	}
 	
 	protected def List<? extends PsiElement> getOriginalElements(PsiElement element) {
-		return traceProvider.getOriginalElements(element)
+		if (element instanceof PsiNameIdentifierOwner) {
+			return getOriginalElements(element.nameIdentifier)
+		}
+		val result = traceProvider.getOriginalElements(element).map[PsiTreeUtil.getParentOfType(it, PsiNamedElement)].toSet.toList
+		return result;
 	}
 	
 	protected def List<? extends PsiElement> getGeneratedElements(PsiElement element) {
-		return traceProvider.getGeneratedElements(element)
+		if (element instanceof PsiNameIdentifierOwner) {
+			return getGeneratedElements(element.nameIdentifier)
+		}
+		val result = traceProvider.getGeneratedElements(element).map[PsiTreeUtil.getParentOfType(it, PsiNamedElement)].toSet.toList
+		return result
 	}
 	
 	protected def delegateFindFactory(PsiElement element) {
