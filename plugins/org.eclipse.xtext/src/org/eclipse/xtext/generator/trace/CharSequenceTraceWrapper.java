@@ -37,9 +37,6 @@ public class CharSequenceTraceWrapper {
 	}
 	
 	public CharSequence wrapWithTraceData(CharSequence sequence, SourceRelativeURI originResourceURI, int originOffset, int originLength, int originLineNumber, int originEndLineNumber) {
-		if (!originResourceURI.getURI().isPlatformResource()) {
-			throw new IllegalArgumentException("URI has to be a platform resource uri but was: " + originResourceURI+ ". Use #wrapWithTraceData(CharSequence, URI, String, int, int) instead.");
-		}
 		return wrapWithTraceData(sequence, originResourceURI, originResourceURI.getURI().segment(1), originOffset, originLength, originLineNumber, originEndLineNumber);
 	}
 	
