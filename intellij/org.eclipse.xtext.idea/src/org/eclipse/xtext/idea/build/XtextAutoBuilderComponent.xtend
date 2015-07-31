@@ -265,6 +265,10 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	}
 	
 	protected def doCleanBuild() {
+		if (ignoreIncomingEvents) {
+			return
+		}
+		alarm.cancelAllRequests
 		chunkedResourceDescriptions = chunkedResourceDescriptionsProvider.get
 		safeDeleteUris(module2GeneratedMapping.values.map[allGenerated].flatten.toList)
 		module2GeneratedMapping.clear
@@ -273,6 +277,10 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	}
 	
 	protected def doCleanBuild(Module module) {
+		if (ignoreIncomingEvents) {
+			return
+		}
+		alarm.cancelAllRequests
 		chunkedResourceDescriptions.removeContainer(module.name)
 		val before = module2GeneratedMapping.remove(module)
 		if (before != null) {
@@ -286,17 +294,16 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		if (!uris.isEmpty) {
 			val app = ApplicationManager.application
 			val Runnable runnable = [
-					for (uri : uris) {
-						val file = uri.virtualFile
-						if (file!== null && file.exists) {
-							fileDeleted(file)
-							try {
-								ignoreIncomingEvents = true
-								file.delete(XtextAutoBuilderComponent.this)	
-							} finally {
-								ignoreIncomingEvents = false
+					try {
+						ignoreIncomingEvents = true
+						for (uri : uris) {
+							val file = uri.virtualFile
+							if (file!== null && file.exists) {
+									file.delete(XtextAutoBuilderComponent.this)	
 							}
 						}
+					} finally {
+						ignoreIncomingEvents = false
 					}
 			]
 			if (app.isDispatchThread) {

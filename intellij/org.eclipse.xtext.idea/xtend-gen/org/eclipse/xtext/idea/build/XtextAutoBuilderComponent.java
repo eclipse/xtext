@@ -409,6 +409,10 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   }
   
   protected void doCleanBuild() {
+    if (this.ignoreIncomingEvents) {
+      return;
+    }
+    this.alarm.cancelAllRequests();
     ChunkedResourceDescriptions _get = this.chunkedResourceDescriptionsProvider.get();
     this.chunkedResourceDescriptions = _get;
     Collection<Source2GeneratedMapping> _values = this.module2GeneratedMapping.values();
@@ -428,6 +432,10 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   }
   
   protected void doCleanBuild(final Module module) {
+    if (this.ignoreIncomingEvents) {
+      return;
+    }
+    this.alarm.cancelAllRequests();
     String _name = module.getName();
     this.chunkedResourceDescriptions.removeContainer(_name);
     final Source2GeneratedMapping before = this.module2GeneratedMapping.remove(module);
@@ -449,26 +457,25 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
         @Override
         public void run() {
           try {
-            for (final URI uri : uris) {
-              {
-                final VirtualFile file = VirtualFileURIUtil.getVirtualFile(uri);
-                boolean _and = false;
-                if (!(file != null)) {
-                  _and = false;
-                } else {
-                  boolean _exists = file.exists();
-                  _and = _exists;
-                }
-                if (_and) {
-                  XtextAutoBuilderComponent.this.fileDeleted(file);
-                  try {
-                    XtextAutoBuilderComponent.this.ignoreIncomingEvents = true;
+            try {
+              XtextAutoBuilderComponent.this.ignoreIncomingEvents = true;
+              for (final URI uri : uris) {
+                {
+                  final VirtualFile file = VirtualFileURIUtil.getVirtualFile(uri);
+                  boolean _and = false;
+                  if (!(file != null)) {
+                    _and = false;
+                  } else {
+                    boolean _exists = file.exists();
+                    _and = _exists;
+                  }
+                  if (_and) {
                     file.delete(XtextAutoBuilderComponent.this);
-                  } finally {
-                    XtextAutoBuilderComponent.this.ignoreIncomingEvents = false;
                   }
                 }
               }
+            } finally {
+              XtextAutoBuilderComponent.this.ignoreIncomingEvents = false;
             }
           } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
