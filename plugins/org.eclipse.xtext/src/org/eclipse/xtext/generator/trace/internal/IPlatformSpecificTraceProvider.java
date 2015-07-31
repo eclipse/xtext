@@ -14,6 +14,8 @@ import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.IWorkspaceConfig;
 
 /**
+ * SPI for platform specific enhancements to trace providers.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public interface IPlatformSpecificTraceProvider<

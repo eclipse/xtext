@@ -24,7 +24,6 @@ public class LocationInResource extends AbstractLocationInResource {
 	}
 	
 	@Override
-	/* @Nullable */
 	public SourceRelativeURI getSrcRelativeResourceURI() {
 		return srcRelativeResourceURI;
 	}

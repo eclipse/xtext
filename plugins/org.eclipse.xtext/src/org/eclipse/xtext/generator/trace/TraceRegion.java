@@ -29,7 +29,7 @@ public class TraceRegion extends AbstractStatefulTraceRegion {
 				new LocationData(associatedOffset, associatedLength, associatedLineNumber, associatedEndLineNumber, associatedPath), parent);
 	}
 	
-	public TraceRegion(int myOffset, int myLength, int myLineNumber, int myEndLineNumber, boolean useForDebugging, ILocationData locationData, /* @Nullable */ AbstractTraceRegion parent) {
+	public TraceRegion(int myOffset, int myLength, int myLineNumber, int myEndLineNumber, boolean useForDebugging, ILocationData locationData, AbstractTraceRegion parent) {
 		super(new TextRegionWithLineInformation(myOffset, myLength, myLineNumber, myEndLineNumber), useForDebugging, locationData, parent);
 		if (myOffset == myLength && myOffset == 0) {
 			throw new IllegalArgumentException();
@@ -45,7 +45,7 @@ public class TraceRegion extends AbstractStatefulTraceRegion {
  		}
 	}
 	
-	public TraceRegion(int myOffset, int myLength, int myLineNumber, int myEndLineNumber, boolean useForDebugging, List<ILocationData> allLocationData, /* @Nullable */ AbstractTraceRegion parent) {
+	public TraceRegion(int myOffset, int myLength, int myLineNumber, int myEndLineNumber, boolean useForDebugging, List<ILocationData> allLocationData, AbstractTraceRegion parent) {
 		super(new TextRegionWithLineInformation(myOffset, myLength, myLineNumber, myEndLineNumber), useForDebugging, Lists.newArrayList(allLocationData), parent);
 		if (parent == null) {
 			for(ILocationData locationData: allLocationData) {

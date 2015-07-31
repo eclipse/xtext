@@ -27,42 +27,33 @@ public interface ILocationInResource {
 	/**
 	 * @return the language that this resource belongs to. May be <code>null</code>.
 	 */
-	/* @Nullable */ LanguageInfo getLanguage();
+	LanguageInfo getLanguage();
 	
 	/**
 	 * @return the EMF resource URI for this location. May be <code>null</code> if the 
 	 * resource is not an EMF resource.
 	 */
-	/* @Nullable */ AbsoluteURI getAbsoluteResourceURI();
+	AbsoluteURI getAbsoluteResourceURI();
 	
 	/**
 	 * Returns the URI of this resource relative to the classpath if applicable. Otherwise
 	 * the URI relative to the project root.
 	 */
-	/* @Nullable */ SourceRelativeURI getSrcRelativeResourceURI();
+	SourceRelativeURI getSrcRelativeResourceURI();
 	
-//	/**
-//	 * @return the more specific {@link org.eclipse.emf.ecore.EObject object} {@link URI}
-//	 * for this location. May be <code>null</code> if the resource itself is empty or if this
-//	 * resource is not an EMF resource.
-//	 */
-//	/* @Nullable */ URI getEObjectURI();
-	
-	/* @NonNull */ InputStream getContents() throws IOException;
+	/**
+	 * Returns the contents of the resource. May be <code>null</code>.
+	 */
+	InputStream getContents() throws IOException;
 	
 	/**
 	 * @return the project configuration for this location. Never <code>null</code>.
 	 */
 	IProjectConfig getProjectConfig();
 	
-//	/**
-//	 * Returns the encoding that should be used to read the contents of the resource that contains this
-//	 * location.
-//	 */
-//	Charset getEncoding();
-	
 	/**
 	 * @return the range in the resource. May be <code>null</code>.
 	 */
-	/* @Nullable */ ITextRegionWithLineInformation getTextRegion();
+	ITextRegionWithLineInformation getTextRegion();
+	
 }

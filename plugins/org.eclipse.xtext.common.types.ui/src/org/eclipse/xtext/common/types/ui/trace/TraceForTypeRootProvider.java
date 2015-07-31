@@ -121,7 +121,6 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 		return "jar".equalsIgnoreCase(ext) || "zip".equalsIgnoreCase(ext);
 	}
 
-	/* @Nullable */
 	@Override
 	public IEclipseTrace getTraceToSource(final ITypeRoot derivedJavaType) {
 		if (lruCache != null && lruCache.getFirst().equals(derivedJavaType))
@@ -141,7 +140,6 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 		throw new IllegalStateException("Unknown type " + derivedJavaType);
 	}
 
-	/* @Nullable */
 	public IEclipseTrace getTraceToSource(final ICompilationUnit javaFile) {
 		try {
 			IResource resource = javaFile.getUnderlyingResource();
@@ -153,7 +151,6 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 		return null;
 	}
 
-	/* @Nullable */
 	public IEclipseTrace getTraceToSource(final IClassFile classFile) {
 		IPath sourcePath = getSourcePath(classFile);
 		if (sourcePath == null)

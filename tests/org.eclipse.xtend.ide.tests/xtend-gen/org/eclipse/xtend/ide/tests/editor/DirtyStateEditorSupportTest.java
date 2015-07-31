@@ -161,23 +161,19 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
   }
   
   private Object assertNoErrors(final Resource res) {
-    try {
-      final List<Issue> issues = this.validator.validate(res, CheckMode.ALL, null);
-      String _string = issues.toString();
-      final Function1<Issue, Boolean> _function = new Function1<Issue, Boolean>() {
-        @Override
-        public Boolean apply(final Issue it) {
-          Severity _severity = it.getSeverity();
-          return Boolean.valueOf(Objects.equal(_severity, Severity.ERROR));
-        }
-      };
-      Iterable<Issue> _filter = IterableExtensions.<Issue>filter(issues, _function);
-      boolean _isEmpty = IterableExtensions.isEmpty(_filter);
-      Assert.assertTrue(_string, _isEmpty);
-      return null;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    final List<Issue> issues = this.validator.validate(res, CheckMode.ALL, null);
+    String _string = issues.toString();
+    final Function1<Issue, Boolean> _function = new Function1<Issue, Boolean>() {
+      @Override
+      public Boolean apply(final Issue it) {
+        Severity _severity = it.getSeverity();
+        return Boolean.valueOf(Objects.equal(_severity, Severity.ERROR));
+      }
+    };
+    Iterable<Issue> _filter = IterableExtensions.<Issue>filter(issues, _function);
+    boolean _isEmpty = IterableExtensions.isEmpty(_filter);
+    Assert.assertTrue(_string, _isEmpty);
+    return null;
   }
   
   private XtextEditor waitForReconciler(final XtextEditor editor) {
@@ -193,22 +189,18 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
   }
   
   private Object assertHasErrors(final Resource res, final String message) {
-    try {
-      final List<Issue> issues = this.validator.validate(res, CheckMode.ALL, null);
-      String _string = issues.toString();
-      final Function1<Issue, String> _function = new Function1<Issue, String>() {
-        @Override
-        public String apply(final Issue it) {
-          return it.getMessage();
-        }
-      };
-      List<String> _map = ListExtensions.<Issue, String>map(issues, _function);
-      boolean _contains = _map.contains(message);
-      Assert.assertTrue(_string, _contains);
-      return null;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    final List<Issue> issues = this.validator.validate(res, CheckMode.ALL, null);
+    String _string = issues.toString();
+    final Function1<Issue, String> _function = new Function1<Issue, String>() {
+      @Override
+      public String apply(final Issue it) {
+        return it.getMessage();
+      }
+    };
+    List<String> _map = ListExtensions.<Issue, String>map(issues, _function);
+    boolean _contains = _map.contains(message);
+    Assert.assertTrue(_string, _contains);
+    return null;
   }
   
   @Test

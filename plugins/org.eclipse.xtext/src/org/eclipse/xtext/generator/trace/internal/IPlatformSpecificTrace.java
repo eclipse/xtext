@@ -13,6 +13,8 @@ import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.util.ITextRegion;
 
 /**
+ * SPI for platform specific enhancements to the traces.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public interface IPlatformSpecificTrace<
@@ -49,7 +51,7 @@ public interface IPlatformSpecificTrace<
 	 * @param associatedStorage the expected target resource. May not be <code>null</code>.
 	 * @return the best associated location or <code>null</code> if none.
 	 */
-	/* @Nullable */ Location getBestAssociatedLocation(ITextRegion localRegion, PlatformResource associatedStorage);
+	Location getBestAssociatedLocation(ITextRegion localRegion, PlatformResource associatedStorage);
 	
 	/**
 	 * Returns all individual {@link ILocationInResource locations} that match the given {@code sourceRegion}
@@ -91,7 +93,5 @@ public interface IPlatformSpecificTrace<
 
 	@Override
 	Iterable<? extends Location> getAllAssociatedLocations(AbsoluteURI uri);
-
-
 	
 }

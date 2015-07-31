@@ -16,6 +16,8 @@ import org.eclipse.xtext.workspace.ISourceFolder;
 import org.eclipse.xtext.workspace.IWorkspaceConfig;
 
 /**
+ * An absoute URI that allows to obtain a resource in a {@link IWorkspaceConfig workspace}.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @SuppressWarnings("all")

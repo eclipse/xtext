@@ -44,14 +44,13 @@ public abstract class AbstractLocationInResource implements ILocationInResource 
 		return absoluteURI;
 	}
 	
-	/* @Nullable */
 	@Override
 	public InputStream getContents() throws IOException {
 		return trace.getContents(getSrcRelativeResourceURI(), getProjectConfig());
 	}
 	
 	@Override
-	public /* @NonNull */ IProjectConfig getProjectConfig() {
+	public IProjectConfig getProjectConfig() {
 		return trace.getLocalProjectConfig();
 	}
 	
@@ -60,35 +59,6 @@ public abstract class AbstractLocationInResource implements ILocationInResource 
 		LanguageInfo result = trace.findLanguage(getAbsoluteResourceURI());
 		return result;
 	}
-
-//	@Override
-//	public URI getEObjectURI() {
-//		if (eObjectURI == null && !triedToComputeURI) {
-//			Resource resource = trace.getResource(getAbsoluteResourceURI(), getProjectConfig());
-//			if (resource instanceof XtextResource) {
-//				IParseResult parseResult = ((XtextResource) resource).getParseResult();
-//				if (parseResult != null) {
-//					ICompositeNode rootNode = parseResult.getRootNode();
-//					int end = getOffset() + getLength();
-//					INode node = NodeModelUtils.findLeafNodeAtOffset(rootNode, getOffset());
-//					while (node != null) {
-//						if (node.getTotalEndOffset() >= end) {
-//							EObject object = NodeModelUtils.findActualSemanticObjectFor(node);
-//							if (object != null) {
-//								URI result = EcoreUtil.getURI(object);
-//								eObjectURI = result;
-//								triedToComputeURI = true;
-//								return result;
-//							}
-//						}
-//						node = node.getParent();
-//					}
-//				}
-//			}
-//			triedToComputeURI = true;
-//		}
-//		return eObjectURI;
-//	}
 	
 	protected AbstractTrace getTrace() {
 		return trace;
