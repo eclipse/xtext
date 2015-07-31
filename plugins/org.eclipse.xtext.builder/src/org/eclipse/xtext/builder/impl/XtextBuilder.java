@@ -7,11 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.internal.jobs.InternalJob;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
@@ -22,6 +24,9 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.ProgressMonitorWrapper;
 import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.core.runtime.jobs.IJobChangeEvent;
+import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant.BuildType;
@@ -79,6 +84,38 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	public IResourceSetProvider getResourceSetProvider() {
 		return resourceSetProvider;
 	}
+	
+	/**
+	 * This is a fix for https://bugs.eclipse.org/bugs/show_bug.cgi?id=459525
+	 * 
+	 * It turns a specific job from egit into a system job, so it won't interrupt the autobuild.
+	 * 
+	 */
+	private final static JobChangeAdapter MAKE_EGIT_JOB_SYSTEM = new JobChangeAdapter() {
+		private boolean fixedTheJob = false;
+		@Override
+		public void scheduled(IJobChangeEvent event) {
+			if (fixedTheJob)
+				return;
+			Job job = event.getJob();
+			if (job == null)
+				return;
+			Class<? extends Job> jobClazz = job.getClass();
+			if (!job.isSystem() && jobClazz.getName().equals("org.eclipse.egit.core.internal.indexdiff.IndexDiffCacheEntry$5")) {
+				try {
+					Field field = InternalJob.class.getDeclaredField("flags");
+					field.setAccessible(true);
+					field.set(job, ((Integer)field.get(job)).intValue() | 0x0100 /*InternalJob.M_SYSTEM*/);
+					if (log.isInfoEnabled()) {
+						log.info("Made job '"+job+"' a system job.");
+					}
+					fixedTheJob = true;
+				} catch (Exception e) {
+					log.error(e.getMessage(), e);
+				}
+			}
+		}
+	};
 
 	@SuppressWarnings("rawtypes")
 	@Override
@@ -87,6 +124,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			forgetLastBuiltState();
 			return getProject().getReferencedProjects();
 		}
+		Job.getJobManager().addJobChangeListener(MAKE_EGIT_JOB_SYSTEM);
 		long startTime = System.currentTimeMillis();
 		StoppedTask task = Stopwatches.forTask(String.format("XtextBuilder.build[%s]", getKindAsString(kind)));
 		try {
@@ -142,6 +180,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			log.info(message);
 			buildLogger.log(message);
 			task.stop();
+			Job.getJobManager().removeJobChangeListener(MAKE_EGIT_JOB_SYSTEM);
 		}
 		return getProject().getReferencedProjects();
 	}
