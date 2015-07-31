@@ -39,8 +39,7 @@ public class TraceAsSmapInstaller implements ITraceToBytecodeInstaller {
 	
 	protected String smap;
 
-	protected /* @Nullable */
-	String generateSmap(AbstractTraceRegion rootTraceRegion, String outputFileName) {
+	protected String generateSmap(AbstractTraceRegion rootTraceRegion, String outputFileName) {
 		List<LineMapping> lineInfo = lineMappingProvider.getLineMapping(rootTraceRegion);
 		if (lineInfo == null || lineInfo.isEmpty())
 			return null;

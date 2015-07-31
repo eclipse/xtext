@@ -9,14 +9,16 @@ package org.eclipse.xtext.generator.trace;
 
 /**
  * A trace region provider can be used to obtain a new {@link AbstractTraceRegion}.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public interface ITraceRegionProvider {
 
 	/**
 	 * Returns the a trace region.
+	 * 
 	 * @throws TraceNotFoundException if no trace could be found
 	 */
-	/* @NonNull */ AbstractTraceRegion getTraceRegion() throws TraceNotFoundException;
+	AbstractTraceRegion getTraceRegion() throws TraceNotFoundException;
 	
 }

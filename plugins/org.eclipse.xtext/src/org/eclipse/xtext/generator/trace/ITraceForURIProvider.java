@@ -19,37 +19,53 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig;
  * @since 2.9
  */
 public interface ITraceForURIProvider {
-	
+
 	/**
-	 * Returns the trace information to the sources that were used as input for the given derived resource.
-	 * May return <code>null</code> if no such data is available for the given storage.
-	 * @param absoluteDerivedResource the resource whose source trace is requested. May not be <code>null</code>.
+	 * Returns the trace information to the sources that were used as input for the given derived resource. May return
+	 * <code>null</code> if no such data is available for the given storage.
+	 * 
+	 * @param absoluteDerivedResource
+	 *            the resource whose source trace is requested. May not be <code>null</code>.
+	 * @param context
+	 *            the workspace config for the workspace with the given resource. May not be <code>null</code>.
 	 * @return the trace to the source or <code>null</code>.
 	 */
-	/* @Nullable */ ITrace getTraceToSource(AbsoluteURI absoluteDerivedResource, IWorkspaceConfig context);
-	
+	ITrace getTraceToSource(AbsoluteURI absoluteDerivedResource, IWorkspaceConfig context);
+
 	/**
-	 * Returns the trace information to the sources that were used as input for the given derived resource.
-	 * May return <code>null</code> if no such data is available for the given storage.
-	 * @param srcRelativeDerivedResource the resource whose source trace is requested. May not be <code>null</code>.
+	 * Returns the trace information to the sources that were used as input for the given derived resource. May return
+	 * <code>null</code> if no such data is available for the given storage.
+	 * 
+	 * @param srcRelativeDerivedResource
+	 *            the resource whose source trace is requested. May not be <code>null</code>.
+	 * @param project
+	 *            the project that contains the derived resource. May not be <code>null</code>.
 	 * @return the trace to the source or <code>null</code>.
 	 */
-	/* @Nullable */ ITrace getTraceToSource(SourceRelativeURI srcRelativeDerivedResource, IProjectConfig project);
-	
+	ITrace getTraceToSource(SourceRelativeURI srcRelativeDerivedResource, IProjectConfig project);
+
 	/**
-	 * Returns the trace information to the targets that were generated from the given source.
-	 * May return <code>null</code> if no such data is available for the given storage.
-	 * @param absoluteSourceResource the resource whose target trace is requested. May not be <code>null</code>.
+	 * Returns the trace information to the targets that were generated from the given source. May return
+	 * <code>null</code> if no such data is available for the given storage.
+	 * 
+	 * @param absoluteSourceResource
+	 *            the resource whose target trace is requested. May not be <code>null</code>.
+	 * @param context
+	 *            the workspace config for the workspace with the given resource. May not be <code>null</code>.
 	 * @return the trace to the generation targets or <code>null</code>.
 	 */
-	/* @Nullable */ ITrace getTraceToTarget(AbsoluteURI absoluteSourceResource, IWorkspaceConfig context);
-	
+	ITrace getTraceToTarget(AbsoluteURI absoluteSourceResource, IWorkspaceConfig context);
+
 	/**
-	 * Returns the trace information to the targets that were generated from the given source.
-	 * May return <code>null</code> if no such data is available for the given storage.
-	 * @param srcRelativeSourceResource the resource whose target trace is requested. May not be <code>null</code>.
+	 * Returns the trace information to the targets that were generated from the given source. May return
+	 * <code>null</code> if no such data is available for the given storage.
+	 * 
+	 * @param srcRelativeSourceResource
+	 *            the resource whose target trace is requested. May not be <code>null</code>.
+	 * @param project
+	 *            the project that contains the resource. May not be <code>null</code>.
 	 * @return the trace to the generation targets or <code>null</code>.
 	 */
-	/* @Nullable */ ITrace getTraceToTarget(SourceRelativeURI srcRelativeSourceResource, IProjectConfig project);
+	ITrace getTraceToTarget(SourceRelativeURI srcRelativeSourceResource, IProjectConfig project);
 
 }

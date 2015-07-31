@@ -37,32 +37,39 @@ public interface ITrace {
 	 * </li>
 	 * </ul> 
 	 * If no location data is available, returns <code>null</code>.
-	 * @param localRegion the region in the current resource. May not be <code>null</code>.
+	 * 
+	 * @param localRegion
+	 *            the region in the current resource. May not be <code>null</code>.
 	 * @return the best associated location or <code>null</code> if none.
 	 */
-	/* @Nullable */ ILocationInResource getBestAssociatedLocation(ITextRegion localRegion);
+	ILocationInResource getBestAssociatedLocation(ITextRegion localRegion);
 	
 	/**
 	 * Returns all associated {@link ILocationInResource locations} that match the given {@code region}.
-	 * @param localRegion the region in the current resource. May not be <code>null</code>.
-	 * @return all associated locations. Never <code>null</code>. 
+	 * 
+	 * @param localRegion
+	 *            the region in the current resource. May not be <code>null</code>.
+	 * @return all associated locations. Never <code>null</code>.
 	 */
 	Iterable<? extends ILocationInResource> getAllAssociatedLocations(ITextRegion localRegion);
 	
 	/**
 	 * Returns all known associated {@link ILocationInResource locations}.
+	 * 
 	 * @return all associated locations. Never <code>null</code>. 
 	 */
 	Iterable<? extends ILocationInResource> getAllAssociatedLocations();
 	
 	/**
 	 * Returns the local project. Never <code>null</code>.
+	 * 
 	 * @return the local project. Never <code>null</code>.
 	 */
 	IProjectConfig getLocalProjectConfig();
 	
 	/**
 	 * Returns the absolute URI of the local resource. Never <code>null</code>.
+	 * 
 	 * @return the absolute URI of the local resource. Never <code>null</code>.
 	 */
 	AbsoluteURI getLocalURI();
@@ -80,30 +87,37 @@ public interface ITrace {
 	SourceRelativeURI getSrcRelativeLocalURI();
 	
 	/**
-	 * Returns the language that is associated with the local resource. May be <code>null</code>.
+	 * Returns the language that is associated with the local resource. May be <code>null</code>
+	 * if the artifact does not have an associated Xtext language, e.g. for html or java files.
+	 * 
 	 * @return the language that is associated with the local resource. May be <code>null</code>.
 	 */
-	/* @Nullable */ LanguageInfo getLocalLanguage();
+	LanguageInfo getLocalLanguage();
 	
 	/**
 	 * Returns all available inverse trace information.
+	 * 
 	 * @return the inverse trace information. Never <code>null</code>.
 	 */
 	Iterable<? extends ITrace> getAllInverseTraces();
 	
 	/**
 	 * Returns the inverse trace for the given associated resource or <code>null</code> if none.
-	 * @param absoluteURI the expected associated, absolute URI. May not be <code>null</code>.
+	 * 
+	 * @param absoluteURI
+	 *            the expected associated, absolute URI. May not be <code>null</code>.
 	 * @return the inverse trace for the given location or <code>null</code> if none.
 	 */
-	/* @Nullable */ ITrace getInverseTrace(AbsoluteURI absoluteURI);
+	ITrace getInverseTrace(AbsoluteURI absoluteURI);
 	
 	/**
 	 * Returns the inverse trace for the given associated resource or <code>null</code> if none.
-	 * @param srcRelativeURI the expected associated, absolute URI. May not be <code>null</code>.
+	 * 
+	 * @param srcRelativeURI
+	 *            the expected associated, absolute URI. May not be <code>null</code>.
 	 * @return the inverse trace for the given location or <code>null</code> if none.
 	 */
-	/* @Nullable */ ITrace getInverseTrace(SourceRelativeURI srcRelativeURI, IProjectConfig projectConfig);
+	ITrace getInverseTrace(SourceRelativeURI srcRelativeURI, IProjectConfig projectConfig);
 	
 	/**
 	 * Returns the best {@link ILocationInResource location} that matches the given
@@ -117,31 +131,39 @@ public interface ITrace {
 	 * </ul> 
 	 * If no location data is available or the {@code localRegion} does not yield
 	 * a location in {@code absoluteTargetResource}, returns <code>null</code>.
-	 * @param localRegion the region in the current resource. May not be <code>null</code>.
-	 * @param absoluteTargetResource the expected target resource. May not be <code>null</code>.
+	 * 
+	 * @param localRegion
+	 *            the region in the current resource. May not be <code>null</code>.
+	 * @param absoluteTargetResource
+	 *            the expected target resource. May not be <code>null</code>.
 	 * @return the best associated location or <code>null</code> if none.
 	 */
-	/* @Nullable */ ILocationInResource getBestAssociatedLocation(ITextRegion localRegion, AbsoluteURI absoluteTargetResource);
+	ILocationInResource getBestAssociatedLocation(ITextRegion localRegion, AbsoluteURI absoluteTargetResource);
 	
 	/**
 	 * Returns all individual {@link ILocationInResource locations} that match the given {@code localRegion}
 	 * for the expected {@code absoluteTargetResource}.
-	 * @param localRegion the region in the current resource. May not be <code>null</code>.
-	 * @param absoluteTargetResource the expected target resource. May not be <code>null</code>.
+	 * 
+	 * @param localRegion
+	 *            the region in the current resource. May not be <code>null</code>.
+	 * @param absoluteTargetResource
+	 *            the expected target resource. May not be <code>null</code>.
 	 * @return all associated locations. Never <code>null</code>. 
 	 */
 	Iterable<? extends ILocationInResource> getAllAssociatedLocations(ITextRegion localRegion, AbsoluteURI absoluteTargetResource);
 	
 	/**
-	 * Returns all known {@link ILocationInResource locations} that were produced from the associated resource
-	 * in the given {@code absoluteTargetResource}.
-	 * @param absoluteTargetResource the expected target resource. May not be <code>null</code>.
-	 * @return all locations. Never <code>null</code>. 
+	 * Returns all known {@link ILocationInResource locations} that were produced from the associated resource in the
+	 * given {@code absoluteTargetResource}.
+	 * 
+	 * @param absoluteTargetResource
+	 *            the expected target resource. May not be <code>null</code>.
+	 * @return all locations. Never <code>null</code>.
 	 */
 	Iterable<? extends ILocationInResource> getAllAssociatedLocations(AbsoluteURI absoluteTargetResource);
 	
 	/**
-	 * Returns true of the trace is not empty and can provide any locations.
+	 * Returns true if the trace is not empty and can provide at leat one location.
 	 */
 	boolean hasTraceData();
 	
