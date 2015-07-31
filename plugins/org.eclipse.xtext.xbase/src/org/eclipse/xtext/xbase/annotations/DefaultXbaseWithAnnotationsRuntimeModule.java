@@ -28,6 +28,7 @@ public class DefaultXbaseWithAnnotationsRuntimeModule extends DefaultXbaseRuntim
 		return XbaseWithAnnotationsBatchScopeProvider.class;
 	}
 
+	@Override
 	public Class<? extends ILinkingDiagnosticMessageProvider> bindILinkingDiagnosticMessageProvider() {
 		return UnresolvedAnnotationTypeAwareMessageProducer.class;
 	}

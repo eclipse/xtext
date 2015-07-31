@@ -15,6 +15,7 @@ import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.generator.LineSeparatorHarmonizer;
 import org.eclipse.xtext.linking.ILinker;
+import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.DerivedStateAwareResourceDescriptionManager;
@@ -31,6 +32,7 @@ import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
 import org.eclipse.xtext.validation.SeverityConverter;
 import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
 import org.eclipse.xtext.workspace.RuntimeWorkspaceConfigProvider;
+import org.eclipse.xtext.xbase.annotations.validation.LinkingDiagnosticTypeAwareMessageProducer;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.output.TraceAwarePostProcessor;
 import org.eclipse.xtext.xbase.conversion.XbaseValueConverterService;
@@ -199,4 +201,10 @@ public class DefaultXbaseRuntimeModule extends DefaultCommonTypesRuntimeModule {
 		return RuntimeWorkspaceConfigProvider.class;
 	}
 	
+	/**
+	 * @since 2.9
+	 */
+	public Class<? extends ILinkingDiagnosticMessageProvider> bindILinkingDiagnosticMessageProvider() {
+		return LinkingDiagnosticTypeAwareMessageProducer.class;
+	}
 }
