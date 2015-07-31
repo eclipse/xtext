@@ -488,7 +488,83 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.append("throw new Error(\"Unresolved compilation problems:\"");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("+ \"\\nThe method or field foo is undefined for the type Foo\");");
+    _builder_1.append("+ \"\\nThe method foo() is undefined\");");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testMethodOrFieldLinkError() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def int bar() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("foo");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public int bar() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("throw new Error(\"Unresolved compilation problems:\"");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("+ \"\\nThe method or field foo is undefined\");");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testMethodLinkReceiverError() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def int bar() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("this.foo()");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public int bar() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("throw new Error(\"Unresolved compilation problems:\"");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("+ \"\\nThe method foo() is undefined for the type Foo\");");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
