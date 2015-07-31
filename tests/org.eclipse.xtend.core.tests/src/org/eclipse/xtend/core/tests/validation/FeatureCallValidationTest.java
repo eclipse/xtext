@@ -270,7 +270,7 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 	@Test
 	public void testBug334499_03() throws Exception {
 		XtendClass clazz = clazz("class C { def void m() { foo('',5) }}");
-		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, "foo(String, int) is", "for the type C");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, "foo(String, int) is");
 	}
 	
 	@Test
@@ -282,6 +282,24 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 	public void testBug334499_05() throws Exception {
 		XtendClass clazz = clazz("class C { def void m() { this.foo(this) }}");
 		helper.assertError(clazz, XbasePackage.Literals.XMEMBER_FEATURE_CALL, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, "foo(C) is", "for the type C");
+	}
+	
+	@Test
+	public void testBug334499_06() throws Exception {
+		XtendClass clazz = clazz("class C { def m() { new C(){ override m(){ foo(1)} }}}");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, "foo(int) is");
+	}
+	
+	@Test
+	public void testBug334499_07() throws Exception {
+		XtendClass clazz = clazz("class C { def void m() { this.foo(this) }}");
+		helper.assertError(clazz, XbasePackage.Literals.XMEMBER_FEATURE_CALL, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, "foo(C) is", "for the type C");
+	}
+	
+	@Test
+	public void testBug334499_08() throws Exception {
+		XtendClass clazz = clazz("class C { def m() { new C(){ override m(){ ''.foo(1)} }}}");
+		helper.assertError(clazz, XbasePackage.Literals.XMEMBER_FEATURE_CALL, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, "foo(int) is undefined for the type String");
 	}
 	
 	@Test 
@@ -920,7 +938,7 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 	public void testInvalidPropertySugarBug403564_04() throws Exception {
 		XtendClass clazz = clazz("class C { def String getSomething() { return Something }}");
 		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, 
-				"The method or field Something is undefined for the type C");
+				"The method or field Something is undefined");
 	}
 	
 	// second case - first two letters after prefix are upper case
@@ -943,13 +961,13 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 	public void testInvalidPropertySugarBug403564_08() throws Exception {
 		XtendClass clazz = clazz("class C { def String getURI() { return uri }}");
 		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, 
-				"The method or field uri is undefined for the type C");
+				"The method or field uri is undefined");
 	}
 	@Test
 	public void testInvalidPropertySugarBug403564_09() throws Exception {
 		XtendClass clazz = clazz("class C { def String getURI() { return uRI }}");
 		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC,
-				"The method or field uRI is undefined for the type C");
+				"The method or field uRI is undefined");
 	}
 	
 	// third case - single letter property
@@ -972,12 +990,12 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 	public void testInvalidPropertySugarBug403564_13() throws Exception {
 		XtendClass clazz = clazz("class C { def void getX() { return X }}");
 		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC,
-				"The method or field X is undefined for the type C");
+				"The method or field X is undefined");
 	}
 	@Test
 	public void testInvalidPropertySugarBug403564_14() throws Exception {
 		XtendClass clazz = clazz("class C { def String getSomething() { return something.Something }}");
 		helper.assertError(clazz, XbasePackage.Literals.XMEMBER_FEATURE_CALL, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, 
-				"The method Something is undefined for the type String");
+				"The method or field Something is undefined for the type String");
 	}
 }

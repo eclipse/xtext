@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.linking;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -27,7 +26,6 @@ import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.linking.impl.IllegalNodeException;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
-import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
@@ -35,10 +33,12 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.validation.UnresolvedAnnotationTypeAwareMessageProducer;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.internal.FeatureLinkHelper;
 import org.eclipse.xtext.xbase.typesystem.internal.TypeAwareLinkingDiagnosticContext;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.util.FeatureCallAsTypeLiteralHelper;
@@ -56,6 +56,10 @@ public class XtendLinkingDiagnosticMessageProvider extends UnresolvedAnnotationT
   
   @Inject
   private FeatureCallAsTypeLiteralHelper typeLiteralHelper;
+  
+  @Inject
+  @Extension
+  private FeatureLinkHelper _featureLinkHelper;
   
   @Override
   public DiagnosticMessage getUnresolvedProxyMessage(final ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext context) {
@@ -95,8 +99,7 @@ public class XtendLinkingDiagnosticMessageProvider extends UnresolvedAnnotationT
       if (_not) {
         XtendTypeDeclaration xtendType = EcoreUtil2.<XtendTypeDeclaration>getContainerOfType(contextObject, XtendTypeDeclaration.class);
         if ((xtendType != null)) {
-          String _name = xtendType.getName();
-          return this.handleUnresolvedFeatureCall(context, ((XAbstractFeatureCall)contextObject), linkText, _name);
+          return this.handleUnresolvedFeatureCall(context, ((XAbstractFeatureCall)contextObject), linkText);
         }
       }
     }
@@ -113,39 +116,26 @@ public class XtendLinkingDiagnosticMessageProvider extends UnresolvedAnnotationT
     return new DiagnosticMessage(msg, Severity.ERROR, Diagnostic.LINKING_DIAGNOSTIC, linkText);
   }
   
-  private DiagnosticMessage handleUnresolvedFeatureCall(final ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext context, final XAbstractFeatureCall featureCall, final String linkText, final String xtendType) {
-    String recieverType = xtendType;
-    EList<XExpression> explicitArguments = featureCall.getExplicitArguments();
-    boolean _or = false;
-    int _size = explicitArguments.size();
-    boolean _tripleEquals = (_size == 0);
-    if (_tripleEquals) {
-      _or = true;
-    } else {
-      _or = (featureCall instanceof XAssignment);
-    }
-    final boolean orField = _or;
+  private DiagnosticMessage handleUnresolvedFeatureCall(final ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext context, final XAbstractFeatureCall featureCall, final String linkText) {
+    LightweightTypeReference recieverType = null;
     String args = "";
     if ((context instanceof TypeAwareLinkingDiagnosticContext)) {
       final IResolvedTypes types = ((TypeAwareLinkingDiagnosticContext)context).getResolvedTypes();
-      XExpression _actualReceiver = featureCall.getActualReceiver();
-      boolean _tripleNotEquals = (_actualReceiver != null);
+      XExpression _syntacticReceiver = this._featureLinkHelper.getSyntacticReceiver(featureCall);
+      boolean _tripleNotEquals = (_syntacticReceiver != null);
       if (_tripleNotEquals) {
-        XExpression _actualReceiver_1 = featureCall.getActualReceiver();
-        LightweightTypeReference type = types.getActualType(_actualReceiver_1);
-        if ((type != null)) {
-          String _humanReadableName = type.getHumanReadableName();
-          recieverType = _humanReadableName;
-        }
+        XExpression _syntacticReceiver_1 = this._featureLinkHelper.getSyntacticReceiver(featureCall);
+        LightweightTypeReference _actualType = types.getActualType(_syntacticReceiver_1);
+        recieverType = _actualType;
       }
-      EList<XExpression> _actualArguments = featureCall.getActualArguments();
+      List<XExpression> _syntacticArguments = this._featureLinkHelper.getSyntacticArguments(featureCall);
       final Function1<XExpression, LightweightTypeReference> _function = new Function1<XExpression, LightweightTypeReference>() {
         @Override
         public LightweightTypeReference apply(final XExpression it) {
           return types.getActualType(it);
         }
       };
-      List<LightweightTypeReference> _map = ListExtensions.<XExpression, LightweightTypeReference>map(_actualArguments, _function);
+      List<LightweightTypeReference> _map = ListExtensions.<XExpression, LightweightTypeReference>map(_syntacticArguments, _function);
       final Function1<LightweightTypeReference, CharSequence> _function_1 = new Function1<LightweightTypeReference, CharSequence>() {
         @Override
         public CharSequence apply(final LightweightTypeReference it) {
@@ -159,29 +149,36 @@ public class XtendLinkingDiagnosticMessageProvider extends UnresolvedAnnotationT
           return _xifexpression;
         }
       };
-      final String arguments = IterableExtensions.<LightweightTypeReference>join(_map, ", ", _function_1);
-      boolean _isEmpty = arguments.isEmpty();
-      boolean _not = (!_isEmpty);
-      if (_not) {
-        StringConcatenation _builder = new StringConcatenation();
+      String _join = IterableExtensions.<LightweightTypeReference>join(_map, ", ", _function_1);
+      args = _join;
+    }
+    boolean _isExplicitOperationCallOrBuilderSyntax = featureCall.isExplicitOperationCallOrBuilderSyntax();
+    final boolean orField = (!_isExplicitOperationCallOrBuilderSyntax);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("The method ");
+    {
+      if (orField) {
+        _builder.append("or field ");
+        _builder.append(linkText, "");
+      } else {
+        _builder.append(linkText, "");
         _builder.append("(");
-        _builder.append(arguments, "");
+        _builder.append(args, "");
         _builder.append(")");
-        args = _builder.toString();
       }
     }
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("The method");
-    String _xifexpression = null;
-    if (orField) {
-      _xifexpression = " or field";
+    _builder.append(" is undefined");
+    String msg = _builder.toString();
+    boolean _notEquals = (!Objects.equal(recieverType, null));
+    if (_notEquals) {
+      String _msg = msg;
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append(" ");
+      _builder_1.append("for the type ");
+      String _humanReadableName = recieverType.getHumanReadableName();
+      _builder_1.append(_humanReadableName, " ");
+      msg = (_msg + _builder_1);
     }
-    _builder_1.append(_xifexpression, "");
-    _builder_1.append(" ");
-    _builder_1.append((linkText + args), "");
-    _builder_1.append(" is undefined for the type ");
-    _builder_1.append(recieverType, "");
-    final String msg = _builder_1.toString();
     boolean _and = false;
     boolean _and_1 = false;
     boolean _and_2 = false;

@@ -17,11 +17,11 @@ import org.eclipse.xtext.common.types.TypesPackage
 import org.eclipse.xtext.diagnostics.DiagnosticMessage
 import org.eclipse.xtext.linking.impl.IllegalNodeException
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
-import org.eclipse.xtext.xbase.XAssignment
 import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.xbase.annotations.validation.UnresolvedAnnotationTypeAwareMessageProducer
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
+import org.eclipse.xtext.xbase.typesystem.internal.FeatureLinkHelper
 import org.eclipse.xtext.xbase.typesystem.internal.TypeAwareLinkingDiagnosticContext
 import org.eclipse.xtext.xbase.util.FeatureCallAsTypeLiteralHelper
 
@@ -29,6 +29,7 @@ import static org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_D
 import static org.eclipse.xtext.diagnostics.Diagnostic.LINKING_DIAGNOSTIC
 import static org.eclipse.xtext.diagnostics.Severity.ERROR
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 
 /** 
  * @author Holger Schill - Initial contribution and API
@@ -40,6 +41,7 @@ class XtendLinkingDiagnosticMessageProvider extends UnresolvedAnnotationTypeAwar
 	 */
 	public static final String TYPE_LITERAL = "key:TypeLiteral"
 	@Inject FeatureCallAsTypeLiteralHelper typeLiteralHelper
+	@Inject extension FeatureLinkHelper
 
 	override DiagnosticMessage getUnresolvedProxyMessage(ILinkingDiagnosticContext context) {
 		if(isPropertyOfUnresolvedAnnotation(context)) return null
@@ -61,7 +63,7 @@ class XtendLinkingDiagnosticMessageProvider extends UnresolvedAnnotationTypeAwar
 			if (!contextObject.isOperation()) {
 				var xtendType = EcoreUtil2.getContainerOfType(contextObject, XtendTypeDeclaration)
 				if (xtendType !== null) {
-					return handleUnresolvedFeatureCall(context, contextObject, linkText, xtendType.name)
+					return handleUnresolvedFeatureCall(context, contextObject, linkText)
 				}
 			}
 		}
@@ -71,25 +73,25 @@ class XtendLinkingDiagnosticMessageProvider extends UnresolvedAnnotationTypeAwar
 	}
 
 	def private DiagnosticMessage handleUnresolvedFeatureCall(ILinkingDiagnosticContext context,
-		XAbstractFeatureCall featureCall, String linkText, String xtendType) {
-		var recieverType = xtendType
-		var explicitArguments = featureCall.getExplicitArguments()
-		val orField = (explicitArguments.size() === 0 || featureCall instanceof XAssignment)
+		XAbstractFeatureCall featureCall, String linkText) {
+		var LightweightTypeReference recieverType = null
 		var args = ""
 		if (context instanceof TypeAwareLinkingDiagnosticContext) {
-			val types = context.getResolvedTypes()
-			if (featureCall.getActualReceiver() !== null) {
-				var type = types.getActualType(featureCall.getActualReceiver())
-				if(type !== null) recieverType = type.getHumanReadableName()
+			val types = context.resolvedTypes
+			if (featureCall.syntacticReceiver !== null) {
+				recieverType = types.getActualType(featureCall.syntacticReceiver)
 			}
-			val arguments = featureCall.getActualArguments().map[types.getActualType(it)].join(", ", [
+			args = featureCall.syntacticArguments.map[types.getActualType(it)].join(", ", [
 				if(it != null) humanReadableName else "Object"
 			])
-			if (!arguments.empty) {
-				args = '''(«arguments»)'''
-			}
 		}
-		val msg = '''The method«if(orField) " or field"» «linkText+args» is undefined for the type «recieverType»'''
+
+		val orField = !featureCall.isExplicitOperationCallOrBuilderSyntax()
+
+		var msg = '''The method «IF (orField)»or field «linkText»«ELSE»«linkText»(«args»)«ENDIF» is undefined'''
+		if (recieverType != null) {
+			msg += ''' for the type «recieverType.humanReadableName»'''
+		}
 		if (featureCall instanceof XFeatureCall && linkText.length() > 0 && Character.isUpperCase(linkText.charAt(0)) &&
 			typeLiteralHelper.isPotentialTypeLiteral(featureCall, null)) {
 			return new DiagnosticMessage(msg, ERROR, FEATURECALL_LINKING_DIAGNOSTIC, linkText, TYPE_LITERAL)
