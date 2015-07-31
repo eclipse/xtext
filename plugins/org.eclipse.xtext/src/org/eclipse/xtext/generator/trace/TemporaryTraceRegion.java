@@ -13,6 +13,7 @@ import org.eclipse.xtext.util.TextRegionWithLineInformation;
 
 /**
  * A trace region that will not be added to the child list of the given parent.
+ * It is used to create temporary leaf regions when a parent is asked for its children. 
  */
 public class TemporaryTraceRegion extends AbstractStatefulTraceRegion {
 	public TemporaryTraceRegion(int myOffset, int myLength, int myLineNumber, int myEndLineNumber, boolean useForDebugging, List<ILocationData> locations,

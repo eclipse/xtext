@@ -14,6 +14,6 @@ import org.eclipse.xtext.util.ITextRegionWithLineInformation;
  */
 public interface ILocationData extends ITextRegionWithLineInformation {
 
-	/* @Nullable */ SourceRelativeURI getSrcRelativePath();
+	SourceRelativeURI getSrcRelativePath();
 	
 }

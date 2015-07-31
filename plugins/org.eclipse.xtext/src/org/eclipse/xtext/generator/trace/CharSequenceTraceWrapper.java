@@ -43,7 +43,7 @@ public class CharSequenceTraceWrapper {
 		return wrapWithTraceData(sequence, originResourceURI, originResourceURI.getURI().segment(1), originOffset, originLength, originLineNumber, originEndLineNumber);
 	}
 	
-	public CharSequence wrapWithTraceData(CharSequence sequence, SourceRelativeURI originURI, /* @Nullable */ String originProject, int originOffset, int originLength, int originLineNumber, int originEndLineNumber) {
+	public CharSequence wrapWithTraceData(CharSequence sequence, SourceRelativeURI originURI, String originProject, int originOffset, int originLength, int originLineNumber, int originEndLineNumber) {
 		return new CharSequenceBasedTraceRegionProvider(sequence, originURI, originOffset, originLength, originLineNumber, originEndLineNumber);
 	}
 	

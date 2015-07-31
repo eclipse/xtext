@@ -339,6 +339,4 @@ public class TraceRegionSerializer {
 		return result;
 	}
 
-	
-	
 }

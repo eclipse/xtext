@@ -17,16 +17,15 @@ public class LocationData extends TextRegionWithLineInformation implements ILoca
 
 	private final SourceRelativeURI path;
 	
-	public LocationData(int offset, int length, int lineNumber, int endLineNumber,  /* @Nullable */ SourceRelativeURI path) {
+	public LocationData(int offset, int length, int lineNumber, int endLineNumber, SourceRelativeURI path) {
 		super(offset, length, lineNumber, endLineNumber);
 		this.path = path;
 	}
 	
-	public LocationData(/* @NonNull */ ITextRegionWithLineInformation region,  /* @Nullable */ SourceRelativeURI path) {
+	public LocationData(ITextRegionWithLineInformation region, SourceRelativeURI path) {
 		this(region.getOffset(), region.getLength(), region.getLineNumber(), region.getEndLineNumber(), path);
 	}
 
-	/* @Nullable */
 	@Override
 	public SourceRelativeURI getSrcRelativePath() {
 		return path;
@@ -41,7 +40,7 @@ public class LocationData extends TextRegionWithLineInformation implements ILoca
 	}
 
 	@Override
-	public boolean equals(/* @Nullable */ Object obj) {
+	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null || !super.equals(obj))
@@ -58,7 +57,6 @@ public class LocationData extends TextRegionWithLineInformation implements ILoca
 	}
 
 	@Override
-	/* @NonNull */
 	public String toString() {
 		return "LocationData [" + super.toString() + "][path=" + path + "]";
 	}

@@ -61,16 +61,15 @@ public abstract class AbstractTrace implements ITrace {
 		public Iterator<AbstractTraceRegion> iterator() {
 			Iterator<? extends AbstractTraceRegion> result = allTraceRegions.iterator();
 			Iterator<AbstractTraceRegion> languageSpecificWithDuplicates = Iterators.transform(result, new Function<AbstractTraceRegion, AbstractTraceRegion>() {
-				/* @Nullable */
 				@Override
-				public AbstractTraceRegion apply(/* @Nullable */ AbstractTraceRegion input) {
+				public AbstractTraceRegion apply(AbstractTraceRegion input) {
 					return findParentByURI(input, uri, projectConfig);
 				}
 			});
 			Iterator<AbstractTraceRegion> withoutDuplicates = Iterators.filter(languageSpecificWithDuplicates, new Predicate<AbstractTraceRegion>() {
 				private AbstractTraceRegion previous = null;
 				@Override
-				public boolean apply(/* @Nullable */ AbstractTraceRegion input) {
+				public boolean apply(AbstractTraceRegion input) {
 					if (input == null || input.equals(previous))
 						return false;
 					previous = input;
@@ -102,7 +101,6 @@ public abstract class AbstractTrace implements ITrace {
 	 * resource that this {@link ITrace} is associated with. 
 	 * @return the root trace region. May be <code>null</code> if no trace data is available.
 	 */
-	/* @Nullable */
 	public final AbstractTraceRegion getRootTraceRegion() {
 		if (rootTraceRegion == null) {
 			rootTraceRegion = doGetRootTraceRegion();
@@ -127,7 +125,6 @@ public abstract class AbstractTrace implements ITrace {
 		return !isTraceToSource;
 	}
 	
-	/* @Nullable */
 	protected AbstractTraceRegion doGetRootTraceRegion() {
 		try {
 			return traceRegionProvider.getTraceRegion();
@@ -144,7 +141,6 @@ public abstract class AbstractTrace implements ITrace {
 		return traceRegionProvider;
 	}
 
-	/* @Nullable */
 	@Override
 	public ILocationInResource getBestAssociatedLocation(ITextRegion region) {
 		AbstractTraceRegion right = findTraceRegionAtRightOffset(region.getOffset() + region.getLength());
@@ -157,8 +153,7 @@ public abstract class AbstractTrace implements ITrace {
 		return mergeRegions(left, right);
 	}
 
-	/* @Nullable */
-	protected ILocationInResource mergeRegions(/* @Nullable */ AbstractTraceRegion left, /* @Nullable */ AbstractTraceRegion right) {
+	protected ILocationInResource mergeRegions(AbstractTraceRegion left, AbstractTraceRegion right) {
 		if (left == null) {
 			if (right != null) {
 				return getMergedLocationInResource(right);
@@ -215,7 +210,6 @@ public abstract class AbstractTrace implements ITrace {
 		return new LocationInResource(region.getOffset(), region.getLength(), region.getLineNumber(), region.getEndLineNumber(), srcRelativePath, this);
 	}
 
-	/* @Nullable */
 	protected ILocationInResource getMergedLocationInResource(AbstractTraceRegion region) {
 		ILocationData locationData = region.getMergedAssociatedLocation();
 		if (locationData != null)
@@ -228,7 +222,6 @@ public abstract class AbstractTrace implements ITrace {
 	 * @param location the location
 	 * @return the location in resource, <code>null</code> detecting a path fails.
 	 */
-	/* @Nullable */
 	protected ILocationInResource createLocationInResourceFor(ILocationData location, AbstractTraceRegion traceRegion) {
 		SourceRelativeURI path = location.getSrcRelativePath();
 		if (path == null)
@@ -242,12 +235,10 @@ public abstract class AbstractTrace implements ITrace {
 		return new AbsoluteURI(path.getURI().resolve(getLocalProjectConfig().getPath()));
 	}
 	
-	/* @Nullable */
 	public AbstractTraceRegion findTraceRegionAtRightOffset(int offset) {
 		return findTraceRegionAt(offset, true);
 	}
 
-	/* @Nullable */
 	protected AbstractTraceRegion findTraceRegionAt(int offset, boolean includeRegionEnd) {
 		AbstractTraceRegion candidate = getRootTraceRegion();
 		if (candidate == null || !encloses(candidate, offset, includeRegionEnd)) {
@@ -275,7 +266,6 @@ public abstract class AbstractTrace implements ITrace {
 		return null;
 	}
 
-	/* @Nullable */
 	public AbstractTraceRegion findTraceRegionAtLeftOffset(int offset) {
 		return findTraceRegionAt(offset, false);
 	}
@@ -335,8 +325,7 @@ public abstract class AbstractTrace implements ITrace {
 		return convertedUri.equals(region.getAssociatedSrcRelativePath());
 	}
 	
-	/* @Nullable */
-	protected AbstractTraceRegion findParentByURI(/* @Nullable */ AbstractTraceRegion region, AbsoluteURI uri, IProjectConfig project) {
+	protected AbstractTraceRegion findParentByURI(AbstractTraceRegion region, AbsoluteURI uri, IProjectConfig project) {
 		while(region != null && !isAssociatedWith(region, uri, project)) {
 			region = region.getParent();
 		}
@@ -357,7 +346,6 @@ public abstract class AbstractTrace implements ITrace {
 		return toLocations(filteredByURI);
 	}
 	
-	/* @Nullable */
 	@Override
 	public LanguageInfo getLocalLanguage() {
 		return findLanguage(getLocalURI());
@@ -526,43 +514,14 @@ public abstract class AbstractTrace implements ITrace {
 		}
 		return new TraceAccess(isTraceToTarget(), projectConfig, traceProvider).apply(srcRelativeURI);
 	}
-
-//	/* @Nullable */
-//	protected Resource getResource(URI uri, IProject project) {
-//		IResourceSetProvider resourceSetProvider = getService(uri, IResourceSetProvider.class);
-//		if (resourceSetProvider != null) {
-//			ResourceSet resourceSet = resourceSetProvider.get(project);
-//			try {
-//				Resource result = resourceSet.getResource(uri, true);
-//				return result;
-//			} catch(RuntimeException e) {
-//				// expected
-//				return null;
-//			}
-//		}
-//		return null;
-//	}
-
-//	protected abstract IStorage findStorage(URI uri, IProject project);
 	
 	protected abstract InputStream getContents(SourceRelativeURI uri, IProjectConfig projectConfig) throws IOException;
 	
-//	protected IProject findProject(String projectName) {
-//		IProject result = workspace.getRoot().getProject(projectName);
-//		return result;
-//	}
-	
-//	protected IWorkspace getWorkspace() {
-//		return workspace;
-//	}
-	
-	/* @Nullable */
-	protected LanguageInfo findLanguage(/* @Nullable */ AbstractURIWrapper uri) {
+	protected LanguageInfo findLanguage(AbstractURIWrapper uri) {
 		return getService(uri, LanguageInfo.class);
 	}
 	
-	/* @Nullable */
-	protected <T> T getService(/* @Nullable */ AbstractURIWrapper uri, Class<T> type) {
+	protected <T> T getService(AbstractURIWrapper uri, Class<T> type) {
 		if (uri == null)
 			return null;
 		IResourceServiceProvider serviceProvider = resourceServiceRegistry.getResourceServiceProvider(uri.getURI());

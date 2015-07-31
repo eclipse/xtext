@@ -23,11 +23,11 @@ public abstract class AbstractStatefulTraceRegion extends AbstractTraceRegion {
 	private final List<ILocationData> associatedLocations;
 	private final boolean useForDebugging;
 
-	protected AbstractStatefulTraceRegion(ITextRegionWithLineInformation myRegion, boolean useForDebugging, ILocationData associatedLocation, /* @Nullable */ AbstractTraceRegion parent) {
+	protected AbstractStatefulTraceRegion(ITextRegionWithLineInformation myRegion, boolean useForDebugging, ILocationData associatedLocation, AbstractTraceRegion parent) {
 		this(myRegion, useForDebugging, Lists.newArrayList(associatedLocation), parent);
 	}
 	
-	protected AbstractStatefulTraceRegion(ITextRegionWithLineInformation myRegion, boolean useForDebugging, List<ILocationData> associatedLocations, /* @Nullable */ AbstractTraceRegion parent) {
+	protected AbstractStatefulTraceRegion(ITextRegionWithLineInformation myRegion, boolean useForDebugging, List<ILocationData> associatedLocations, AbstractTraceRegion parent) {
 		super(parent);
 		this.myRegion = myRegion;
 		this.useForDebugging = useForDebugging;

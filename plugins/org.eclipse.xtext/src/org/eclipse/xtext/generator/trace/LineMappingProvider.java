@@ -82,7 +82,6 @@ public class LineMappingProvider {
 
 	}
 
-	/* @Nullable */
 	public List<LineMapping> getLineMapping(AbstractTraceRegion rootTraceRegion) {
 		final Set<LineMapping> lineData = newLinkedHashSet();
 		createSmapInfo(rootTraceRegion, lineData);

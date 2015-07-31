@@ -16,13 +16,4 @@ import org.eclipse.xtext.generator.trace.internal.IPlatformSpecificLocation;
  * @since 2.9
  */
 public interface ILocationInEclipseResource extends IPlatformSpecificLocation<IStorage, IProject> {
-
-	/**
-	 * @return the storage handle for this location. This can be <code>null</code> if the trace comes from a JAR's
-	 *         source attachment zip file.
-	 * @deprecated use {@link #getPlatformResource()} instead.
-	 */
-	@Deprecated
-	IStorage getStorage();
-	
 }
