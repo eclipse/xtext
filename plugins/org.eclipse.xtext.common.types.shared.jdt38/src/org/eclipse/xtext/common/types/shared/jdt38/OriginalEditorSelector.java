@@ -25,12 +25,12 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.ide.IEditorAssociationOverride;
 import org.eclipse.ui.ide.ResourceUtil;
-import org.eclipse.xtext.builder.trace.ITraceForTypeRootProvider;
-import org.eclipse.xtext.generator.trace.ILocationInResource;
-import org.eclipse.xtext.generator.trace.ITrace;
-import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
+import org.eclipse.xtext.common.types.ui.trace.ITraceForTypeRootProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.editor.XtextEditorInfo;
+import org.eclipse.xtext.ui.generator.trace.IEclipseTrace;
+import org.eclipse.xtext.ui.generator.trace.ILocationInEclipseResource;
+import org.eclipse.xtext.ui.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.xbase.ui.editor.StacktraceBasedEditorDecider;
 import org.eclipse.xtext.xbase.ui.editor.StacktraceBasedEditorDecider.Decision;
 
@@ -124,7 +124,7 @@ public class OriginalEditorSelector implements IEditorAssociationOverride {
 					}
 				}
 			}
-			ITrace trace = traceForTypeRootProvider.getTraceToSource(type.getTypeRoot());
+			IEclipseTrace trace = traceForTypeRootProvider.getTraceToSource(type.getTypeRoot());
 			return getXtextEditor(trace);
 		}
 		return null;
@@ -150,20 +150,20 @@ public class OriginalEditorSelector implements IEditorAssociationOverride {
 		if (decision == Decision.FORCE_JAVA) {
 			return null;
 		}
-		ITrace traceToSource = traceInformation.getTraceToSource(file);
+		IEclipseTrace traceToSource = traceInformation.getTraceToSource(file);
 		return getXtextEditor(traceToSource);
 	}
 
 	/**
 	 * @param traceToSource
 	 */
-	protected IEditorDescriptor getXtextEditor(ITrace traceToSource) {
+	protected IEditorDescriptor getXtextEditor(IEclipseTrace traceToSource) {
 		if (traceToSource != null) {
-			Iterator<ILocationInResource> sourceInformationIterator = traceToSource.getAllAssociatedLocations().iterator();
+			Iterator<? extends ILocationInEclipseResource> sourceInformationIterator = traceToSource.getAllAssociatedLocations().iterator();
 			if (sourceInformationIterator.hasNext()) {
-				ILocationInResource sourceInformation = sourceInformationIterator.next();
-				if (traceToSource.getLocalURI() == null || sourceInformation.getStorage() != null) {
-					URI uri = sourceInformation.getAbsoluteResourceURI();
+				ILocationInEclipseResource sourceInformation = sourceInformationIterator.next();
+				if (traceToSource.getLocalURI() == null || sourceInformation.getPlatformResource() != null) {
+					URI uri = sourceInformation.getAbsoluteResourceURI().getURI();
 					return getXtextEditor(uri);
 				}
 			}

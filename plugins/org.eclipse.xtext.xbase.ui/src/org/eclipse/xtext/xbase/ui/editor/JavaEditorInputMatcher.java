@@ -18,10 +18,10 @@ import org.eclipse.ui.IEditorMatchingStrategy;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.ide.ResourceUtil;
-import org.eclipse.xtext.builder.trace.ITraceForTypeRootProvider;
-import org.eclipse.xtext.generator.trace.ILocationInResource;
-import org.eclipse.xtext.generator.trace.ITrace;
+import org.eclipse.xtext.common.types.ui.trace.ITraceForTypeRootProvider;
 import org.eclipse.xtext.ui.editor.XtextEditorInfo;
+import org.eclipse.xtext.ui.generator.trace.IEclipseTrace;
+import org.eclipse.xtext.ui.generator.trace.ILocationInEclipseResource;
 import org.eclipse.xtext.xbase.ui.editor.StacktraceBasedEditorDecider.Decision;
 
 import com.google.inject.Inject;
@@ -77,7 +77,7 @@ public class JavaEditorInputMatcher implements IEditorMatchingStrategy {
 			if (currentResource == null) {
 				return false;
 			}
-			ITrace traceToSource = traceInformation.getTraceToSource(newTypeRoot);
+			IEclipseTrace traceToSource = traceInformation.getTraceToSource(newTypeRoot);
 			if (traceToSource == null) {
 				return false;
 			}
@@ -94,12 +94,12 @@ public class JavaEditorInputMatcher implements IEditorMatchingStrategy {
 		return false;
 	}
 
-	protected boolean isCurrentResource(IResource currentResource, ITrace traceToSource) {
-		Iterator<ILocationInResource> iterator = traceToSource.getAllAssociatedLocations().iterator();
+	protected boolean isCurrentResource(IResource currentResource, IEclipseTrace traceToSource) {
+		Iterator<? extends ILocationInEclipseResource> iterator = traceToSource.getAllAssociatedLocations().iterator();
 		if (!iterator.hasNext()) {
 			return false;
 		}
-		IStorage storage = iterator.next().getStorage();
+		IStorage storage = iterator.next().getPlatformResource();
 		return currentResource.equals(storage);
 	}
 

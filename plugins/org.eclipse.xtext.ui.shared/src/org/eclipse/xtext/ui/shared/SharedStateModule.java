@@ -15,20 +15,21 @@ import org.eclipse.xtext.builder.DerivedResourceMarkers;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.builder.clustering.CurrentDescriptions;
 import org.eclipse.xtext.builder.impl.QueuedBuildData;
-import org.eclipse.xtext.builder.trace.StorageAwareTrace;
-import org.eclipse.xtext.builder.trace.TraceForStorageProvider;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.xtext.ui.JdtAwareProjectByResourceProvider;
 import org.eclipse.xtext.common.types.xtext.ui.JdtIndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.xtext.ui.ProjectAwareResourceDescriptionsProvider;
-import org.eclipse.xtext.generator.IDerivedResourceMarkers;
-import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
+import org.eclipse.xtext.generator.trace.ITraceForURIProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.LiveShadowedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
+import org.eclipse.xtext.ui.generator.IDerivedResourceMarkers;
+import org.eclipse.xtext.ui.generator.trace.ITraceForStorageProvider;
+import org.eclipse.xtext.ui.generator.trace.StorageAwareTrace;
+import org.eclipse.xtext.ui.generator.trace.TraceForStorageProvider;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions;
@@ -88,6 +89,13 @@ public class SharedStateModule extends AbstractGenericModule {
 	 */
 	public Class<? extends IDerivedResourceMarkers> bindDerivedResourceMarkers() {
 		return DerivedResourceMarkers.class;
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public Class<? extends ITraceForURIProvider> bindPlatformNeutralTraceInformation() {
+		return ITraceForStorageProvider.class;
 	}
 	
 	/**

@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.trace;
+package org.eclipse.xtext.common.types.ui.trace;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
@@ -19,6 +19,9 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.xtext.generator.trace.AbsoluteURI;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
+import org.eclipse.xtext.ui.generator.trace.IStorageAwareTraceContribution;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions;
 import org.eclipse.xtext.util.Pair;
 
@@ -35,7 +38,7 @@ public class JarEntryAwareTrace implements IStorageAwareTraceContribution {
 	private IStorage2UriMapperJdtExtensions uriMapperExtensions;
 	
 	@Override
-	public URI tryResolvePath(IStorage localStorage, URI path) {
+	public AbsoluteURI tryResolvePath(IStorage localStorage, SourceRelativeURI path) {
 		if (localStorage instanceof IFile) {
 			IProject project = ((IFile) localStorage).getProject();
 			if (project != null) {
@@ -50,22 +53,22 @@ public class JarEntryAwareTrace implements IStorageAwareTraceContribution {
 		return null;
 	}
 	
-	protected URI resolvePath(IJarEntryResource jarEntry, URI path) {
+	protected AbsoluteURI resolvePath(IJarEntryResource jarEntry, SourceRelativeURI path) {
 		IPackageFragmentRoot packageFragmentRoot = jarEntry.getPackageFragmentRoot();
 		try {
 			Pair<URI, URI> pair = uriMapperExtensions.getURIMapping(packageFragmentRoot);
 			if (pair != null) {
 				URI first = pair.getFirst();
 				if (first != null)
-					return URI.createURI(first + "/" + path);
+					return new AbsoluteURI(URI.createURI(first + "/" + path));
 			}
 		} catch (JavaModelException e) {
 			log.error("Error resolving path", e);
 		}
-		return path;
+		return null;
 	}
 
-	protected URI resolvePath(IJavaProject javaProject, URI path) {
+	protected AbsoluteURI resolvePath(IJavaProject javaProject, SourceRelativeURI path) {
 		try {
 			for (IPackageFragmentRoot root : javaProject.getPackageFragmentRoots())
 				if (root.getKind() == IPackageFragmentRoot.K_SOURCE) {
@@ -75,7 +78,7 @@ public class JarEntryAwareTrace implements IStorageAwareTraceContribution {
 						String decodedPath = URI.decode(path.toString());
 						IResource candidate = folder.findMember(decodedPath);
 						if (candidate != null && candidate.exists())
-							return URI.createPlatformResourceURI(resource.getFullPath() + "/" + decodedPath, true);
+							return new AbsoluteURI(URI.createPlatformResourceURI(resource.getFullPath() + "/" + decodedPath, true));
 					}
 				}
 		} catch (JavaModelException e) {

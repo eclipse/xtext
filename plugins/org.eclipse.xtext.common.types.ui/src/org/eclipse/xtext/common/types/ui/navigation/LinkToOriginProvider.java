@@ -29,7 +29,7 @@ public class LinkToOriginProvider {
 	public LinkToOrigin createLinkToOrigin(ILocationInResource source, IRegion selectedWord, IMember selectedMember, ICompilationUnit compilationUnitOfSelection, List<LinkToOrigin> alreadyCreatedLinks) {
 		LinkToOrigin hyperlink = hyperlinkProvider.get();
 		hyperlink.setHyperlinkRegion(new Region(selectedWord.getOffset(), selectedWord.getLength()));
-		hyperlink.setURI(source.getAbsoluteResourceURI());
+		hyperlink.setURI(source.getAbsoluteResourceURI().getURI());
 		hyperlink.setMember(selectedMember);
 		hyperlink.setHyperlinkText("Open Original Declaration");
 		hyperlink.setTypeLabel("Navigate to source artifact");

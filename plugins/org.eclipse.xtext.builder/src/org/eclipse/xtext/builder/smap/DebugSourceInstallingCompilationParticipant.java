@@ -19,7 +19,6 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaModelMarker;
 import org.eclipse.jdt.core.IJavaProject;
@@ -28,16 +27,18 @@ import org.eclipse.jdt.core.compiler.BuildContext;
 import org.eclipse.jdt.core.compiler.CompilationParticipant;
 import org.eclipse.jdt.internal.core.Region;
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
-import org.eclipse.xtext.builder.trace.AbstractTrace;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ITrace;
-import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.generator.trace.ITraceToBytecodeInstaller;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.generator.trace.TraceAsPrimarySourceInstaller;
 import org.eclipse.xtext.generator.trace.TraceAsSmapInstaller;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.XtextProjectHelper;
+import org.eclipse.xtext.ui.generator.trace.AbstractEclipseTrace;
+import org.eclipse.xtext.ui.generator.trace.IEclipseTrace;
+import org.eclipse.xtext.ui.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.ui.util.ResourceUtil;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
@@ -71,8 +72,8 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 	@Inject
 	private DerivedResourceMarkerCopier markerReflector;
 
-	protected OutputConfiguration findOutputConfiguration(URI dslSourceFile, IFile generatedJavaFile) {
-		IResourceServiceProvider serviceProvider = serviceProviderRegistry.getResourceServiceProvider(dslSourceFile);
+	protected OutputConfiguration findOutputConfiguration(SourceRelativeURI dslSourceFile, IFile generatedJavaFile) {
+		IResourceServiceProvider serviceProvider = serviceProviderRegistry.getResourceServiceProvider(dslSourceFile.getURI());
 		if (serviceProvider == null)
 			return null;
 		EclipseOutputConfigurationProvider cfgProvider = serviceProvider.get(EclipseOutputConfigurationProvider.class);
@@ -117,7 +118,7 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 					IFile generatedJavaFile = ctx.getFile();
 
 					// This may fail if there is no trace file.
-					ITrace traceToSource = traceInformation.getTraceToSource(generatedJavaFile);
+					IEclipseTrace traceToSource = traceInformation.getTraceToSource(generatedJavaFile);
 					if (traceToSource == null) {
 						continue;
 					}
@@ -125,7 +126,7 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 					if (rootTraceRegion == null)
 						continue;
 
-					URI dslSourceFile = rootTraceRegion.getAssociatedPath();
+					SourceRelativeURI dslSourceFile = rootTraceRegion.getAssociatedSrcRelativePath();
 
 					// OutputConfigurations are only available for folders targeted by Xtext's code generation.
 					OutputConfiguration outputConfiguration = findOutputConfiguration(dslSourceFile, generatedJavaFile);
@@ -188,9 +189,9 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 	}
 
 	protected AbstractTraceRegion findRootTraceRegion(ITrace traceToSource) {
-		if (!(traceToSource instanceof AbstractTrace))
+		if (!(traceToSource instanceof AbstractEclipseTrace))
 			return null;
-		return ((AbstractTrace) traceToSource).getRootTraceRegion();
+		return ((AbstractEclipseTrace) traceToSource).getRootTraceRegion();
 	}
 
 	@Override

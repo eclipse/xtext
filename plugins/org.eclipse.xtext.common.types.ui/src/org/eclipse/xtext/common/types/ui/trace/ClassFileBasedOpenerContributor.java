@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.trace;
+package org.eclipse.xtext.common.types.ui.trace;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jdt.core.IClassFile;
@@ -19,9 +19,9 @@ import org.eclipse.ui.ide.IDE;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.generator.trace.EditorInputBasedFileOpener;
 import org.eclipse.xtext.ui.generator.trace.FileOpener;
 import org.eclipse.xtext.ui.generator.trace.OppositeFileOpenerContributor;
-import org.eclipse.xtext.ui.generator.trace.EditorInputBasedFileOpener;
 import org.eclipse.xtext.util.IAcceptor;
 
 import com.google.inject.Inject;
@@ -52,7 +52,7 @@ public class ClassFileBasedOpenerContributor extends OppositeFileOpenerContribut
 				IClassFile classFile = ((IClassFileEditorInput) editor.getEditorInput()).getClassFile();
 				ITrace trace = traceForTypeRootProvider.getTraceToSource(classFile);
 				for (ILocationInResource location : trace.getAllAssociatedLocations()) {
-					String name = location.getAbsoluteResourceURI().trimFragment().lastSegment();
+					String name = location.getAbsoluteResourceURI().getURI().lastSegment();
 					IEditorDescriptor editorDescriptor = IDE.getEditorDescriptor(name);
 					acceptor.accept(createEditorOpener(editor.getEditorInput(), editorDescriptor.getId()));
 					return true;

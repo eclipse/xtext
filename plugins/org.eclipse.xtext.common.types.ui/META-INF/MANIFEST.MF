@@ -22,16 +22,18 @@ Require-Bundle: org.eclipse.xtext.common.types;visibility:=reexport,
  org.eclipse.xtend.lib,
  com.google.guava;bundle-version="[10.0.1,19.0.0)",
  org.eclipse.xtext.xbase.lib,
- org.eclipse.ui.ide;bundle-version="3.8.0";resolution:=optional
+ org.eclipse.ui.ide;bundle-version="3.6.0";resolution:=optional
 Import-Package: org.apache.log4j;version="1.2.15"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext.common.types.access.jdt,
  org.eclipse.xtext.common.types.ui,
+ org.eclipse.xtext.common.types.ui.editor;x-internal:=true,
  org.eclipse.xtext.common.types.ui.navigation;x-friends:="org.eclipse.xtext.xbase.ui",
  org.eclipse.xtext.common.types.ui.notification,
  org.eclipse.xtext.common.types.ui.query,
  org.eclipse.xtext.common.types.ui.refactoring;x-friends:="org.eclipse.xtext.xbase.ui,org.eclipse.xtend.ide",
  org.eclipse.xtext.common.types.ui.refactoring.participant;x-friends:="org.eclipse.xtext.xbase.ui,org.eclipse.xtend.ide",
+ org.eclipse.xtext.common.types.ui.trace;x-friends:="org.eclipse.xtext.builder,org.eclipse.xtext.xbase.ui",
  org.eclipse.xtext.common.types.util.jdt,
  org.eclipse.xtext.common.types.xtext.ui
 Bundle-Localization: plugin

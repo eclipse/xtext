@@ -25,14 +25,14 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.debug.core.IJavaLineBreakpoint;
 import org.eclipse.jdt.debug.core.IJavaStratumLineBreakpoint;
 import org.eclipse.xtext.builder.smap.StratumBreakpointAdapterFactory;
-import org.eclipse.xtext.builder.trace.AbstractTrace;
-import org.eclipse.xtext.builder.trace.ITraceForTypeRootProvider;
+import org.eclipse.xtext.common.types.ui.trace.ITraceForTypeRootProvider;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
-import org.eclipse.xtext.generator.trace.ILocationInResource;
-import org.eclipse.xtext.generator.trace.ITrace;
-import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.generator.trace.LineMappingProvider;
 import org.eclipse.xtext.generator.trace.LineMappingProvider.LineMapping;
+import org.eclipse.xtext.ui.generator.trace.AbstractEclipseTrace;
+import org.eclipse.xtext.ui.generator.trace.IEclipseTrace;
+import org.eclipse.xtext.ui.generator.trace.ILocationInEclipseResource;
+import org.eclipse.xtext.ui.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.Pair;
@@ -88,10 +88,10 @@ public class JavaBreakPointProvider {
 		IClassFile classFile = getClassFile(breakpoint);
 		if (classFile != null)
 			return classFile.getType().getHandleIdentifier();
-		ILocationInResource javaLocation = getJavaLocation(breakpoint);
+		ILocationInEclipseResource javaLocation = getJavaLocation(breakpoint);
 		if (javaLocation == null)
 			return null;
-		IStorage javaResource = javaLocation.getStorage();
+		IStorage javaResource = javaLocation.getPlatformResource();
 		if (!(javaResource instanceof IFile))
 			return null;
 		ICompilationUnit compilationUnit = (ICompilationUnit) JavaCore.create((IFile) javaResource);
@@ -100,17 +100,17 @@ public class JavaBreakPointProvider {
 	}
 
 	private int getJavaLineNumber(final IJavaStratumLineBreakpoint breakpoint) throws CoreException {
-		ILocationInResource javaLocation = getJavaLocation(breakpoint);
+		ILocationInEclipseResource javaLocation = getJavaLocation(breakpoint);
 		if (javaLocation == null)
 			return -1;
-		IStorage storage = javaLocation.getStorage();
+		IStorage storage = javaLocation.getPlatformResource();
 		if (storage == null) {
 			ITextRegionWithLineInformation textRegion = javaLocation.getTextRegion();
 			if (textRegion == null)
 				return -1;
 			return textRegion.getEndLineNumber();
 		} else {
-			AbstractTrace sourceTrace = (AbstractTrace) traceForStorageProvider.getTraceToSource(storage);
+			AbstractEclipseTrace sourceTrace = (AbstractEclipseTrace) traceForStorageProvider.getTraceToSource(storage);
 			if (sourceTrace == null)
 				return -1;
 			AbstractTraceRegion rootTraceRegion = sourceTrace.getRootTraceRegion();
@@ -126,19 +126,19 @@ public class JavaBreakPointProvider {
 		}
 	}
 
-	private ILocationInResource getJavaLocation(final IJavaStratumLineBreakpoint breakpoint) throws CoreException {
-		ITrace javaTrace = getJavaTrace(breakpoint);
+	private ILocationInEclipseResource getJavaLocation(final IJavaStratumLineBreakpoint breakpoint) throws CoreException {
+		IEclipseTrace javaTrace = getJavaTrace(breakpoint);
 		if (javaTrace == null)
 			return null;
 		TextRegion textRegion = new TextRegion(breakpoint.getCharStart(), 0);
-		ILocationInResource javaLocation = javaTrace.getBestAssociatedLocation(textRegion);
+		ILocationInEclipseResource javaLocation = javaTrace.getBestAssociatedLocation(textRegion);
 		if (javaLocation == null)
 			return null;
 		return javaLocation;
 	}
 
-	private ITrace getJavaTrace(final IJavaStratumLineBreakpoint breakpoint) throws CoreException {
-		ITrace javaTrace;
+	private IEclipseTrace getJavaTrace(final IJavaStratumLineBreakpoint breakpoint) throws CoreException {
+		IEclipseTrace result;
 		IClassFile classFile = getClassFile(breakpoint);
 		if (classFile == null) {
 			URI uri = URI.createURI((String) breakpoint.getMarker().getAttribute(
@@ -146,11 +146,11 @@ public class JavaBreakPointProvider {
 			Pair<IStorage, IProject> storage = Iterables.getFirst(storage2UriMapper.getStorages(uri), null);
 			if (storage == null)
 				return null;
-			javaTrace = traceForStorageProvider.getTraceToTarget(storage.getFirst());
+			result = traceForStorageProvider.getTraceToTarget(storage.getFirst());
 		} else {
-			javaTrace = traceForTypeRootProvider.getTraceToSource(classFile);
+			result = traceForTypeRootProvider.getTraceToSource(classFile);
 		}
-		return javaTrace;
+		return result;
 	}
 
 	private IClassFile getClassFile(IJavaStratumLineBreakpoint breakpoint) throws CoreException {

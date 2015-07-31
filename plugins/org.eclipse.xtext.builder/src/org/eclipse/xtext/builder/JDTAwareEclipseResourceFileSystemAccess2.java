@@ -17,12 +17,12 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Multimap;
@@ -117,15 +117,15 @@ public class JDTAwareEclipseResourceFileSystemAccess2 extends EclipseResourceFil
 	 */
 	@Override
 	public void flushSourceTraces(String generatorName) throws CoreException {
-		Multimap<URI, IPath> sourceTraces = getSourceTraces();
+		Multimap<SourceRelativeURI, IPath> sourceTraces = getSourceTraces();
 		if (sourceTraces != null) {
-			Set<URI> keys = sourceTraces.keySet();
+			Set<SourceRelativeURI> keys = sourceTraces.keySet();
 			String source = getCurrentSource();
 			IContainer container = Strings.isEmpty(source) ? getProject() : getProject().getFolder(source);
-			for (URI uri : keys) {
+			for (SourceRelativeURI uri : keys) {
 				if (uri != null && source != null) {
 					Collection<IPath> paths = sourceTraces.get(uri);
-					IFile sourceFile = container.getFile(new Path(uri.toFileString()));
+					IFile sourceFile = container.getFile(new Path(uri.getURI().path()));
 					if (sourceFile.exists()) {
 						IPath[] tracePathArray = paths.toArray(new IPath[paths.size()]);
 						getTraceMarkers().installMarker(sourceFile, generatorName, tracePathArray);

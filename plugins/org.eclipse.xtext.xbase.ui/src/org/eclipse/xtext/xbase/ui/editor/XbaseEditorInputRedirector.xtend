@@ -17,10 +17,10 @@ import org.eclipse.ui.IEditorInput
 import org.eclipse.ui.ide.ResourceUtil
 import org.eclipse.ui.part.FileEditorInput
 import org.eclipse.xtext.LanguageInfo
-import org.eclipse.xtext.generator.trace.ILocationInResource
-import org.eclipse.xtext.generator.trace.ITraceForStorageProvider
 import org.eclipse.xtext.resource.FileExtensionProvider
 import org.eclipse.xtext.ui.editor.utils.EditorUtils
+import org.eclipse.xtext.ui.generator.trace.ILocationInEclipseResource
+import org.eclipse.xtext.ui.generator.trace.ITraceForStorageProvider
 
 class XbaseEditorInputRedirector {
 
@@ -94,7 +94,7 @@ class XbaseEditorInputRedirector {
 			if (trace == null)
 				return input;
 			val allLocations = trace.getAllAssociatedLocations().iterator();
-			var ILocationInResource sourceInformation = null;
+			var ILocationInEclipseResource sourceInformation = null;
 			while (allLocations.hasNext() && sourceInformation == null) {
 				val candidate = allLocations.next();
 				if (languageInfo.equals(candidate.getLanguage())) {
@@ -103,7 +103,7 @@ class XbaseEditorInputRedirector {
 			}
 			if (sourceInformation == null)
 				return input;
-			val originalStorage = sourceInformation.getStorage()
+			val originalStorage = sourceInformation.platformResource
 			if (originalStorage != null) {
 				return EditorUtils.createEditorInput(originalStorage)
 			}

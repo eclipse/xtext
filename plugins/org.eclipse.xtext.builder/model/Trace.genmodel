@@ -17,6 +17,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Trace.ecore#//DebugTraceRegion/nestedRegions"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugTraceRegion/myEndOffset"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Trace.ecore#//DebugTraceRegion/associations"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugTraceRegion/useForDebugging"/>
     </genClasses>
     <genClasses ecoreClass="Trace.ecore#//DebugLocationData">
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute Trace.ecore#//DebugLocationData/label"/>

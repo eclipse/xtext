@@ -13,19 +13,22 @@ import java.io.InputStream;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.emf.common.util.URI;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.internal.ui.javaeditor.IClassFileEditorInput;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.builder.smap.XbaseBreakpointUtil;
-import org.eclipse.xtext.builder.trace.ITraceForTypeRootProvider;
-import org.eclipse.xtext.generator.trace.ILocationInResource;
-import org.eclipse.xtext.generator.trace.ITrace;
+import org.eclipse.xtext.common.types.ui.trace.ITraceForTypeRootProvider;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.ui.editor.model.JarFileMarkerAnnotationModel;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
+import org.eclipse.xtext.ui.generator.trace.IEclipseTrace;
+import org.eclipse.xtext.ui.generator.trace.ILocationInEclipseResource;
+import org.eclipse.xtext.ui.generator.trace.WrappedCoreException;
 
 import com.google.inject.Inject;
 
@@ -46,10 +49,13 @@ public class XbaseDocumentProvider extends XtextDocumentProvider {
 
 	@Inject
 	private XbaseBreakpointUtil breakpointUtil;
+	
+	@Inject
+	private AbstractUIPlugin plugin;
 
-	protected ILocationInResource getClassFileSourceStorage(IClassFile classFile) {
-		ITrace traceToSource = traceForTypeRootProvider.getTraceToSource(classFile);
-		for (ILocationInResource loc : traceToSource.getAllAssociatedLocations())
+	protected ILocationInEclipseResource getClassFileSourceStorage(IClassFile classFile) {
+		IEclipseTrace traceToSource = traceForTypeRootProvider.getTraceToSource(classFile);
+		for (ILocationInEclipseResource loc : traceToSource.getAllAssociatedLocations())
 			return loc;
 		return null;
 	}
@@ -58,7 +64,7 @@ public class XbaseDocumentProvider extends XtextDocumentProvider {
 	protected boolean setDocumentContent(IDocument document, IEditorInput input, String encoding) throws CoreException {
 		if (input instanceof IClassFileEditorInput) {
 			IClassFile classFile = ((IClassFileEditorInput) input).getClassFile();
-			ILocationInResource source = getClassFileSourceStorage(classFile);
+			ILocationInEclipseResource source = getClassFileSourceStorage(classFile);
 			if (source == null) {
 				return false;
 			}
@@ -67,6 +73,10 @@ public class XbaseDocumentProvider extends XtextDocumentProvider {
 				contents = source.getContents();
 				if (contents != null)
 					setDocumentContent(document, contents, encoding);
+			} catch(WrappedCoreException e) {
+				throw e.getCause();
+			} catch(IOException e) {
+				throw new CoreException(new Status(IStatus.ERROR, plugin.getBundle().getSymbolicName(), e.getMessage(), e));
 			} finally {
 				try {
 					if (contents != null)
@@ -103,7 +113,7 @@ public class XbaseDocumentProvider extends XtextDocumentProvider {
 	protected IAnnotationModel createAnnotationModel(Object element) throws CoreException {
 		if (element instanceof IEditorInput) {
 			IEditorInput editorInput = (IEditorInput) element;
-			URI breakpointURI = breakpointUtil.getBreakpointURI(editorInput);
+			SourceRelativeURI breakpointURI = breakpointUtil.getBreakpointURI(editorInput);
 			if (breakpointURI != null) { // we only get a URI here if the EditorInput points into a JAR
 				IResource breakpointResource = breakpointUtil.getBreakpointResource(editorInput);
 				return new JarFileMarkerAnnotationModel(breakpointResource, breakpointURI);
