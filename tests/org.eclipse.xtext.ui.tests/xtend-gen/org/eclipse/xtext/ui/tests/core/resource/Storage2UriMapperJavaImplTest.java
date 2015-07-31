@@ -447,8 +447,7 @@ public class Storage2UriMapperJavaImplTest extends Assert {
         Assert.assertTrue(head, _or);
         Storage2UriMapperJavaImpl.PackageFragmentRootData _value_2 = it.getValue();
         Set<String> _keySet_1 = _value_2.associatedRoots.keySet();
-        Iterable<String> _tail = IterableExtensions.<String>tail(_keySet_1);
-        final String head2 = IterableExtensions.<String>head(_tail);
+        final String head2 = IterableExtensions.<String>last(_keySet_1);
         boolean _or_1 = false;
         boolean _startsWith_2 = head.startsWith("=testProject/");
         if (_startsWith_2) {
