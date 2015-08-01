@@ -20,41 +20,42 @@ public class XtendInstallDebugInfoMojoIT {
 		String debugInfo = new ClassFileDebugInfoExtractor().getDebugInfo(xtendGenDir);
 
 		// please note that here we have source information for both Java and Xtend
-		StringBuilder xpt = new StringBuilder();
-		xpt.append("// test {\n");
-		xpt.append("  package test; // XtendA$1.class\n");
-		xpt.append("  class XtendA$1 {\n");
-		xpt.append("    void <init>() { // XtendA.java:16, XtendA.xtend:6\n");
-		xpt.append("      void this;\n");
-		xpt.append("    }\n");
-		xpt.append("    \n");
-		xpt.append("    void apply() { // XtendA.java:18, XtendA.xtend:6\n");
-		xpt.append("      void this;\n");
-		xpt.append("      void it;\n");
-		xpt.append("    }\n");
-		xpt.append("    \n");
-		xpt.append("  }\n");
-		xpt.append("  \n");
-		xpt.append("  package test; // XtendA.class\n");
-		xpt.append("  class XtendA {\n");
-		xpt.append("    void <init>() { // XtendA.java:13, XtendA.xtend:4\n");
-		xpt.append("      void this;\n");
-		xpt.append("      void _newArrayList;\n");
-		xpt.append("      void _function;\n");
-		xpt.append("      void _map;\n");
-		xpt.append("      void _join;\n");
-		xpt.append("    }\n");
-		xpt.append("    \n");
-		xpt.append("  }\n");
-		xpt.append("  \n");
-		xpt.append("  package test; // XtendA2.class\n");
-		xpt.append("  class XtendA2 {\n");
-		xpt.append("    void <init>() { // XtendA2.java:7, XtendA.xtend:11\n");
-		xpt.append("      void this;\n");
-		xpt.append("    }\n");
-		xpt.append("    \n");
-		xpt.append("  }\n");
-		xpt.append("}");
+		String xpt = 
+				"// test {\n" + 
+				"  package test; // XtendA$1.class\n" + 
+				"  class XtendA$1 {\n" + 
+				"    void <init>() { // XtendA.java:16\n" + 
+				"      // XtendA.java:16 -> XtendA.xtend:6\n" + 
+				"      void this;\n" + 
+				"    }\n" + 
+				"    void apply() { // XtendA.java:18\n" + 
+				"      // XtendA.java:18 -> XtendA.xtend:6\n" + 
+				"      void this;\n" + 
+				"      void it;\n" + 
+				"    }\n" + 
+				"  }\n" + 
+				"  \n" + 
+				"  package test; // XtendA.class\n" + 
+				"  class XtendA {\n" + 
+				"    void <init>() { // XtendA.java:13\n" + 
+				"      // XtendA.java:14 -> XtendA.xtend:5\n" + 
+				"      // XtendA.java:15:23 -> XtendA.xtend:6\n" + 
+				"      void this;\n" + 
+				"      void _newArrayList;\n" + 
+				"      void _function;\n" + 
+				"      void _map;\n" + 
+				"      void _join;\n" + 
+				"    }\n" + 
+				"  }\n" + 
+				"  \n" + 
+				"  package test; // XtendA2.class\n" + 
+				"  class XtendA2 {\n" + 
+				"    void <init>() { // XtendA2.java:7\n" + 
+				"      // XtendA2.java:8 -> XtendA.xtend:12\n" + 
+				"      void this;\n" + 
+				"    }\n" + 
+				"  }\n" + 
+				"}";
 		Assert.assertEquals(debugInfo, xpt.toString(), debugInfo);
 	}
 
@@ -65,38 +66,34 @@ public class XtendInstallDebugInfoMojoIT {
 		String debugInfo = new ClassFileDebugInfoExtractor().getDebugInfo(xtendGenDir);
 
 		// please note that here we have source information only for Xtend
-		StringBuilder xpt = new StringBuilder();
-		xpt.append("// test {\n");
-		xpt.append("  package test; // XtendA$1.class\n");
-		xpt.append("  class XtendA$1 {\n");
-		xpt.append("    void <init>() { // XtendA.xtend:6\n");
-		xpt.append("      void this;\n");
-		xpt.append("    }\n");
-		xpt.append("    \n");
-		xpt.append("    void apply() { // XtendA.xtend:6\n");
-		xpt.append("      void this;\n");
-		xpt.append("      void it;\n");
-		xpt.append("    }\n");
-		xpt.append("    \n");
-		xpt.append("  }\n");
-		xpt.append("  \n");
-		xpt.append("  package test; // XtendA.class\n");
-		xpt.append("  class XtendA {\n");
-		xpt.append("    void <init>() { // XtendA.xtend:4\n");
-		xpt.append("      void this;\n");
-		xpt.append("      void myvar;\n");
-		xpt.append("    }\n");
-		xpt.append("    \n");
-		xpt.append("  }\n");
-		xpt.append("  \n");
-		xpt.append("  package test; // XtendA2.class\n");
-		xpt.append("  class XtendA2 {\n");
-		xpt.append("    void <init>() { // XtendA.xtend:12\n");
-		xpt.append("      void this;\n");
-		xpt.append("    }\n");
-		xpt.append("    \n");
-		xpt.append("  }\n");
-		xpt.append("}");
+		String xpt = 
+				"// test {\n" + 
+				"  package test; // XtendA$1.class\n" + 
+				"  class XtendA$1 {\n" + 
+				"    void <init>() { // XtendA.xtend:6\n" + 
+				"      void this;\n" + 
+				"    }\n" + 
+				"    void apply() { // XtendA.xtend:6\n" + 
+				"      void this;\n" + 
+				"      void it;\n" + 
+				"    }\n" + 
+				"  }\n" + 
+				"  \n" + 
+				"  package test; // XtendA.class\n" + 
+				"  class XtendA {\n" + 
+				"    void <init>() { // XtendA.xtend:5\n" + 
+				"      void this;\n" + 
+				"      void myvar;\n" + 
+				"    }\n" + 
+				"  }\n" + 
+				"  \n" + 
+				"  package test; // XtendA2.class\n" + 
+				"  class XtendA2 {\n" + 
+				"    void <init>() { // XtendA.xtend:13\n" + 
+				"      void this;\n" + 
+				"    }\n" + 
+				"  }\n" + 
+				"}";
 		Assert.assertEquals(debugInfo, xpt.toString(), debugInfo);
 	}
 
@@ -107,41 +104,37 @@ public class XtendInstallDebugInfoMojoIT {
 		String debugInfo = new ClassFileDebugInfoExtractor().getDebugInfo(xtendGenDir);
 
 		// please note that here we have source information only for Xtend
-		StringBuilder xpt = new StringBuilder();
-		xpt.append("// test {\n");
-		xpt.append("  package test; // XtendA$1.class\n");
-		xpt.append("  class XtendA$1 {\n");
-		xpt.append("    void <init>() { // XtendA.xtend:6\n");
-		xpt.append("      void this;\n");
-		xpt.append("    }\n");
-		xpt.append("    \n");
-		xpt.append("    void apply() { // XtendA.xtend:6\n");
-		xpt.append("      void this;\n");
-		xpt.append("      void it;\n");
-		xpt.append("    }\n");
-		xpt.append("    \n");
-		xpt.append("  }\n");
-		xpt.append("  \n");
-		xpt.append("  package test; // XtendA.class\n");
-		xpt.append("  class XtendA {\n");
-		xpt.append("    void <init>() { // XtendA.xtend:4\n");
-		xpt.append("      void this;\n");
-		xpt.append("      void _newArrayList;\n");
-		xpt.append("      void _function;\n");
-		xpt.append("      void _map;\n");
-		xpt.append("      void myvar;\n");
-		xpt.append("    }\n");
-		xpt.append("    \n");
-		xpt.append("  }\n");
-		xpt.append("  \n");
-		xpt.append("  package test; // XtendA2.class\n");
-		xpt.append("  class XtendA2 {\n");
-		xpt.append("    void <init>() { // XtendA.xtend:12\n");
-		xpt.append("      void this;\n");
-		xpt.append("    }\n");
-		xpt.append("    \n");
-		xpt.append("  }\n");
-		xpt.append("}");
+		String xpt = 
+				"// test {\n" + 
+				"  package test; // XtendA$1.class\n" + 
+				"  class XtendA$1 {\n" + 
+				"    void <init>() { // XtendA.xtend:6\n" + 
+				"      void this;\n" + 
+				"    }\n" + 
+				"    void apply() { // XtendA.xtend:6\n" + 
+				"      void this;\n" + 
+				"      void it;\n" + 
+				"    }\n" + 
+				"  }\n" + 
+				"  \n" + 
+				"  package test; // XtendA.class\n" + 
+				"  class XtendA {\n" + 
+				"    void <init>() { // XtendA.xtend:5\n" + 
+				"      void this;\n" + 
+				"      void _newArrayList;\n" + 
+				"      void _function;\n" + 
+				"      void _map;\n" + 
+				"      void myvar;\n" + 
+				"    }\n" + 
+				"  }\n" + 
+				"  \n" + 
+				"  package test; // XtendA2.class\n" + 
+				"  class XtendA2 {\n" + 
+				"    void <init>() { // XtendA.xtend:13\n" + 
+				"      void this;\n" + 
+				"    }\n" + 
+				"  }\n" + 
+				"}";
 		Assert.assertEquals(debugInfo, xpt.toString(), debugInfo);
 	}
 
@@ -150,92 +143,86 @@ public class XtendInstallDebugInfoMojoIT {
 		Verifier verifier = verifyErrorFreeLog(ROOT + "/smap_multisource");
 		String info1 = new ClassFileDebugInfoExtractor().getDebugInfo(verifier.getBasedir() + "/target/classes");
 
-		StringBuilder xpt1 = new StringBuilder();
-		xpt1.append("// classes {\n");
-		xpt1.append("  // test {\n");
-		xpt1.append("    package test; // JavaB.class\n");
-		xpt1.append("    class JavaB {\n");
-		xpt1.append("      void <init>() { // JavaB.java:13\n");
-		xpt1.append("        void this;\n");
-		xpt1.append("      }\n");
-		xpt1.append("      \n");
-		xpt1.append("      void foo() { // JavaB.java:15\n");
-		xpt1.append("        void this;\n");
-		xpt1.append("        void test;\n");
-		xpt1.append("      }\n");
-		xpt1.append("      \n");
-		xpt1.append("    }\n");
-		xpt1.append("    \n");
-		xpt1.append("    package test; // XtendA.class\n");
-		xpt1.append("    class XtendA {\n");
-		xpt1.append("      void <init>() { // XtendA.java:7, XtendA.xtend:3\n");
-		xpt1.append("        void this;\n");
-		xpt1.append("      }\n");
-		xpt1.append("      \n");
-		xpt1.append("      void test2() { // XtendA.java:9, XtendA.xtend:6\n");
-		xpt1.append("        void this;\n");
-		xpt1.append("        void s;\n");
-		xpt1.append("        void _foo;\n");
-		xpt1.append("      }\n");
-		xpt1.append("      \n");
-		xpt1.append("      void newJavaB() { // XtendA.java:14, XtendA.xtend:10\n");
-		xpt1.append("        void this;\n");
-		xpt1.append("      }\n");
-		xpt1.append("      \n");
-		xpt1.append("    }\n");
-		xpt1.append("    \n");
-		xpt1.append("    package test; // XtendC.class\n");
-		xpt1.append("    class XtendC {\n");
-		xpt1.append("      void <init>() { // XtendC.java:7, XtendC.xtend:3\n");
-		xpt1.append("        void this;\n");
-		xpt1.append("      }\n");
-		xpt1.append("      \n");
-		xpt1.append("      void test() { // XtendC.java:9, XtendC.xtend:5\n");
-		xpt1.append("        void this;\n");
-		xpt1.append("        void s;\n");
-		xpt1.append("      }\n");
-		xpt1.append("      \n");
-		xpt1.append("    }\n");
-		xpt1.append("  }\n");
-		xpt1.append("}");
+		String xpt1 = 
+				"// classes {\n" + 
+				"  // test {\n" + 
+				"    package test; // JavaB.class\n" + 
+				"    class JavaB {\n" + 
+				"      void <init>() { // JavaB.java:13\n" + 
+				"        void this;\n" + 
+				"      }\n" + 
+				"      void foo() { // JavaB.java:15\n" + 
+				"        void this;\n" + 
+				"        void test;\n" + 
+				"      }\n" + 
+				"    }\n" + 
+				"    \n" + 
+				"    package test; // XtendA.class\n" + 
+				"    class XtendA {\n" + 
+				"      void <init>() { // XtendA.java:7\n" + 
+				"        void this;\n" + 
+				"      }\n" + 
+				"      void test2() { // XtendA.java:9\n" + 
+				"        // XtendA.java:9:10 -> XtendA.xtend:6\n" + 
+				"        void this;\n" + 
+				"        void s;\n" + 
+				"        void _foo;\n" + 
+				"      }\n" + 
+				"      void newJavaB() { // XtendA.java:14\n" + 
+				"        // XtendA.java:14 -> XtendA.xtend:10\n" + 
+				"        void this;\n" + 
+				"      }\n" + 
+				"    }\n" + 
+				"    \n" + 
+				"    package test; // XtendC.class\n" + 
+				"    class XtendC {\n" + 
+				"      void <init>() { // XtendC.java:7\n" + 
+				"        void this;\n" + 
+				"      }\n" + 
+				"      void test() { // XtendC.java:9\n" + 
+				"        // XtendC.java:9 -> XtendC.xtend:5\n" + 
+				"        void this;\n" + 
+				"        void s;\n" + 
+				"      }\n" + 
+				"    }\n" + 
+				"  }\n" + 
+				"}";
 		Assert.assertEquals(xpt1.toString(), info1);
 
 		String info2 = new ClassFileDebugInfoExtractor().getDebugInfo(verifier.getBasedir() + "/target/test-classes");
 
-		StringBuilder xpt2 = new StringBuilder();
-		xpt2.append("// test-classes {\n");
-		xpt2.append("  // foo {\n");
-		xpt2.append("    package foo; // FooClass.class\n");
-		xpt2.append("    class FooClass {\n");
-		xpt2.append("      void <init>() { // FooClass.java:6, FooClass.xtend:5\n");
-		xpt2.append("        void this;\n");
-		xpt2.append("      }\n");
-		xpt2.append("      \n");
-		xpt2.append("      void count() { // FooClass.java:8, FooClass.xtend:8\n");
-		xpt2.append("        void this;\n");
-		xpt2.append("      }\n");
-		xpt2.append("      \n");
-		xpt2.append("      void newJavaB() { // FooClass.java:12, FooClass.xtend:12\n");
-		xpt2.append("        void this;\n");
-		xpt2.append("      }\n");
-		xpt2.append("      \n");
-		xpt2.append("    }\n");
-		xpt2.append("    \n");
-		xpt2.append("    package foo; // FooTest.class\n");
-		xpt2.append("    class FooTest {\n");
-		xpt2.append("      void <init>() { // FooTest.java:8, FooTest.xtend:7\n");
-		xpt2.append("        void this;\n");
-		xpt2.append("      }\n");
-		xpt2.append("      \n");
-		xpt2.append("      void assertTrue() { // FooTest.java:11, FooTest.xtend:11\n");
-		xpt2.append("        void this;\n");
-		xpt2.append("        void _fooClass;\n");
-		xpt2.append("        void _count;\n");
-		xpt2.append("      }\n");
-		xpt2.append("      \n");
-		xpt2.append("    }\n");
-		xpt2.append("  }\n");
-		xpt2.append("}");
+		String xpt2 = 
+				"// test-classes {\n" + 
+				"  // foo {\n" + 
+				"    package foo; // FooClass.class\n" + 
+				"    class FooClass {\n" + 
+				"      void <init>() { // FooClass.java:6\n" + 
+				"        void this;\n" + 
+				"      }\n" + 
+				"      void count() { // FooClass.java:8\n" + 
+				"        // FooClass.java:8 -> FooClass.xtend:8\n" + 
+				"        void this;\n" + 
+				"      }\n" + 
+				"      void newJavaB() { // FooClass.java:12\n" + 
+				"        // FooClass.java:12 -> FooClass.xtend:12\n" + 
+				"        void this;\n" + 
+				"      }\n" + 
+				"    }\n" + 
+				"    \n" + 
+				"    package foo; // FooTest.class\n" + 
+				"    class FooTest {\n" + 
+				"      void <init>() { // FooTest.java:8\n" + 
+				"        void this;\n" + 
+				"      }\n" + 
+				"      void assertTrue() { // FooTest.java:11\n" + 
+				"        // FooTest.java:11:13 -> FooTest.xtend:11\n" + 
+				"        void this;\n" + 
+				"        void _fooClass;\n" + 
+				"        void _count;\n" + 
+				"      }\n" + 
+				"    }\n" + 
+				"  }\n" + 
+				"}";
 		Assert.assertEquals(xpt2.toString(), info2);
 	}
 
