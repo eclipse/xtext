@@ -26,7 +26,6 @@ public class ClassFileDebugInfoExtractor {
 		private static Pattern LINE = Pattern.compile("(\\d+):(\\d+)(,(\\d+))?");
 
 		public SmapInfo(String smap) {
-			System.out.println(smap);
 			if (Strings.isEmpty(smap))
 				return;
 			String[] lines = smap.split("\n");
@@ -110,6 +109,7 @@ public class ClassFileDebugInfoExtractor {
 		private List<String> localVariables = Lists.newArrayList();
 		private String name;
 		private int startline = -1;
+		private int endLine = -1;
 		private ClassVisitor cls;
 
 		public MethodVisitor(ClassVisitor cls, String name) {
@@ -124,14 +124,40 @@ public class ClassFileDebugInfoExtractor {
 			for (String v : localVariables)
 				vars.add("void " + v + ";");
 			List<String> lines = Lists.newArrayList();
+			if (cls.smap.isValid()) {
+				Map<Integer, int[]> sourceToLines = Maps.newLinkedHashMap();
+				for(int line = startline; line <= endLine; line++) {
+					Integer sourceLine = cls.smap.target2source.get(line);
+					if (sourceLine != null) {
+						int[] interval = sourceToLines.get(sourceLine);
+						if (interval == null) {
+							interval = new int[] {line, line};
+							sourceToLines.put(sourceLine, interval);
+						} else {
+							interval[1] = line;
+						}
+					}
+				}
+				for(Map.Entry<Integer, int[]> entry: sourceToLines.entrySet()) {
+					int[] interval = entry.getValue();
+					String lineToAdd = cls.source + ":" + interval[0];
+					if (interval[0] != interval[1]) {
+						lineToAdd += ":" + interval[1];
+					}
+					lineToAdd += " -> " + cls.smap.fileName + ":" + entry.getKey();
+					lines.add(lineToAdd);	
+				}
+			}
+			StringBuilder buf = new StringBuilder();
+			buf.append("void " + name + "() {");
 			if (!Strings.isEmpty(cls.source))
-				lines.add(cls.source + ":" + startline);
-			if (cls.smap.isValid())
-				lines.add(cls.smap.fileName + ":" + cls.smap.target2source.get(startline));
-			StringBuffer buf = new StringBuffer();
-			buf.append("void " + name + "() { // " + Joiner.on(", ").join(lines) + "\n");
-			buf.append("  " + Joiner.on("\n  ").join(vars) + "\n");
-			buf.append("}\n");
+				buf.append(" // ").append(cls.source).append(":").append(startline);
+			if (!lines.isEmpty()) {
+				buf.append("\n  // ");
+				Joiner.on("\n  // ").appendTo(buf, lines);
+			}
+			buf.append("\n  " + Joiner.on("\n  ").join(vars) + "\n");
+			buf.append("}");
 			return buf.toString();
 		}
 
@@ -139,11 +165,13 @@ public class ClassFileDebugInfoExtractor {
 		public void visitLineNumber(int arg0, Label arg1) {
 			if (startline < 0)
 				startline = arg0;
+			endLine = arg0;
 		}
 
 		@Override
 		public void visitLocalVariable(String arg0, String arg1, String arg2, Label arg3, Label arg4, int arg5) {
-			localVariables.add(arg0);
+			if (arg0.indexOf("$") < 0)
+				localVariables.add(arg0);
 		}
 	}
 
@@ -176,5 +204,11 @@ public class ClassFileDebugInfoExtractor {
 
 	public String getDebugInfo(String classFile) {
 		return getDebugInfo(new File(classFile));
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(args[0]);
+		String debugInfo = new ClassFileDebugInfoExtractor().getDebugInfo(args[0]);
+		System.out.println(debugInfo);
 	}
 }
