@@ -254,7 +254,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertFatureCallLinkingIssue
 		.assertResolutionLabels("Create field 'bar'", "Create local variable 'bar'", "Create method 'bar()'", "Create method 'getBar()'")
 		.assertModelAfterQuickfix("Create field 'bar'", '''
 			class Foo {
@@ -309,7 +309,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertFatureCallLinkingIssue
 		.assertResolutionLabels("Create method 'bar()'")
 		.assertModelAfterQuickfix("Create method 'bar()'", '''
 			class Foo {
@@ -334,7 +334,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertFatureCallLinkingIssue
 		.assertResolutionLabels("Create method 'bar()'")
 		.assertModelAfterQuickfix("Create method 'bar()'", '''
 			abstract class Foo {
@@ -360,7 +360,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			interface Bar {
 			}
 		''')
-		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertFatureCallLinkingIssue
 		.assertResolutionLabelsSubset("Create method 'bar()' in 'Bar'")
 		.assertModelAfterQuickfix("Create method 'bar()' in 'Bar'", '''
 			class Foo {
@@ -466,7 +466,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertFatureCallLinkingIssue
 		.assertResolutionLabels("Create method 'bar()'")
 		.assertModelAfterQuickfix("Create method 'bar()'", '''
 			class Foo {
@@ -491,7 +491,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertFatureCallLinkingIssue
 		.assertResolutionLabels("Create method 'bar()'", "Create field 'bar'", "Create method 'getBar()'")
 		.assertModelAfterQuickfix("Create method 'bar()'", '''
 			class Foo {
@@ -540,7 +540,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertFatureCallLinkingIssue
 		.assertResolutionLabels("Create method 'foo()' in 'Foo'", "Create method 'getFoo()' in 'Foo'", 
 				"Create extension method 'foo(Foo)'", "Create extension method 'getFoo(Foo)'")
 		.assertModelAfterQuickfix("Create method 'foo()' in 'Foo'", '''
@@ -614,7 +614,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertFatureCallLinkingIssue
 		.assertResolutionLabels("Create static method 'foo()' in 'Foo'", "Create static method 'getFoo()' in 'Foo'")
 		.assertModelAfterQuickfix("Create static method 'foo()' in 'Foo'", '''
 			class Foo {
@@ -657,7 +657,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertFatureCallLinkingIssue
 		.assertResolutionLabels("Create method 'bar()'")
 		.assertModelAfterQuickfix("Create method 'bar()'", '''
 			class Foo {
@@ -685,7 +685,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertFatureCallLinkingIssue
 		.assertResolutionLabels("Create method 'foo()' in 'Foo'", "Create extension method 'foo(Foo)'")
 		.assertModelAfterQuickfix("Create method 'foo()' in 'Foo'", '''
 			class Foo {
@@ -731,7 +731,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertFatureCallLinkingIssue
 		.assertResolutionLabels("Create static method 'foo()' in 'Foo'")
 		.assertModelAfterQuickfix('''
 			class Foo {
@@ -759,7 +759,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertFatureCallLinkingIssue
 		.assertResolutionLabels("Create local variable 'bar'", "Create static method 'bar()'", "Create static method 'getBar()'", "Create static field 'bar'")
 		.assertModelAfterQuickfix("Create static method 'getBar()'", '''
 			class Foo {
@@ -804,7 +804,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				static Object foo = bar|
 			}
 		''')
-		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertFatureCallLinkingIssue
 		.assertResolutionLabels("Create static method 'bar()'", "Create static method 'getBar()'", "Create static field 'bar'")
 		.assertModelAfterQuickfix("Create static method 'getBar()'", '''
 			class Foo {
@@ -843,7 +843,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				Object foo = bar|
 			}
 		''')
-		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertFatureCallLinkingIssue
 		.assertResolutionLabels("Create method 'bar()'", "Create method 'getBar()'", "Create field 'bar'")
 		.assertModelAfterQuickfix("Create method 'getBar()'", '''
 			class Foo {
@@ -2267,7 +2267,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertTypeLiteralLinkingIssue
 		.assertResolutionLabelsSubset("Import 'Collections' (java.util)")
 		.assertModelAfterQuickfix('''
 			import java.util.Collections
@@ -2289,7 +2289,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertTypeLiteralLinkingIssue
 		.assertResolutionLabelsSubset("Import 'Collections' (java.util)")
 		.assertModelAfterQuickfix('''
 			import java.util.Collections
@@ -2347,7 +2347,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertFatureCallLinkingIssue
 		.assertResolutionLabelsSubset("Create method 'bar(int, Object)'")
 		.assertModelAfterQuickfix('''
 			class Foo {

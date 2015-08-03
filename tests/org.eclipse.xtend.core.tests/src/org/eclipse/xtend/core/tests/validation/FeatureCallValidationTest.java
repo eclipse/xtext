@@ -19,6 +19,7 @@ import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.annotations.validation.LinkingDiagnosticTypeAwareMessageProducer;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.junit.Ignore;
@@ -37,13 +38,13 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 	@Test
 	public void testBrokenModel_01() throws Exception {
 		XtendClass clazz = clazz("class C { def m(DoesNotExist d) { d.unknown.unknown }}");
-		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+		helper.assertNoError(clazz, Diagnostic.LINKING_DIAGNOSTIC,LinkingDiagnosticTypeAwareMessageProducer.FEATURE_CALL);
 	}
 	
 	@Test
 	public void testBrokenModel_02() throws Exception {
 		XtendClass clazz = clazz("class C { def m(DoesNotExist it) { unknown.unknown }}");
-		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, Diagnostic.LINKING_DIAGNOSTIC, "unknown is");
 	}
 	
 	@Test
@@ -57,7 +58,7 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 		XtendClass clazz = clazz("class C { def void m() { DoesNotExist::unknown }}");
 		helper.assertNoError(clazz, IssueCodes.INCOMPATIBLE_TYPES);
 		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, Diagnostic.LINKING_DIAGNOSTIC, "DoesNotExist cannot be resolved to a type.");
-		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+		helper.assertNoError(clazz, Diagnostic.LINKING_DIAGNOSTIC,LinkingDiagnosticTypeAwareMessageProducer.FEATURE_CALL);
 	}
 	
 	@Test
@@ -65,14 +66,14 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 		XtendClass clazz = clazz("class C { @DoesNotExist(unknown='zonk') def void m() {}}");
 		helper.assertNoError(clazz, IssueCodes.INCOMPATIBLE_TYPES);
 		helper.assertError(clazz, XAnnotationsPackage.Literals.XANNOTATION, Diagnostic.LINKING_DIAGNOSTIC, "DoesNotExist cannot be resolved to an annotation type.");
-		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+		helper.assertNoError(clazz, Diagnostic.LINKING_DIAGNOSTIC,LinkingDiagnosticTypeAwareMessageProducer.FEATURE_CALL);
 	}
 	
 	@Test
 	public void testBrokenModel_06() throws Exception {
 		XtendClass clazz = clazz("class C { UnknownType fieldName def void m() { fieldName.unknownOperation }}");
 		helper.assertNoError(clazz, IssueCodes.INCOMPATIBLE_TYPES);
-		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+		helper.assertNoError(clazz, Diagnostic.LINKING_DIAGNOSTIC,LinkingDiagnosticTypeAwareMessageProducer.FEATURE_CALL);
 		helper.assertError(clazz, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, Diagnostic.LINKING_DIAGNOSTIC, "UnknownType cannot be resolved to a type.");
 	}
 	
@@ -87,7 +88,7 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 	public void testBrokenModel_08() throws Exception {
 		XtendClass clazz = clazz("class C { def UnknownType m1() {} def void m2() { m1.unknownOperation }}");
 		helper.assertNoError(clazz, IssueCodes.INCOMPATIBLE_TYPES);
-		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+		helper.assertNoError(clazz, Diagnostic.LINKING_DIAGNOSTIC,LinkingDiagnosticTypeAwareMessageProducer.FEATURE_CALL);
 		helper.assertError(clazz, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, Diagnostic.LINKING_DIAGNOSTIC, "UnknownType cannot be resolved to a type.");
 	}
 	
@@ -95,7 +96,7 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 	public void testBrokenModel_09() throws Exception {
 		XtendClass clazz = clazz("class C { def void m2() { <UnknownType>newArrayList.head.unknownOperation }}");
 		helper.assertNoError(clazz, IssueCodes.INCOMPATIBLE_TYPES);
-		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+		helper.assertNoError(clazz, Diagnostic.LINKING_DIAGNOSTIC,LinkingDiagnosticTypeAwareMessageProducer.FEATURE_CALL);
 		helper.assertError(clazz, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, Diagnostic.LINKING_DIAGNOSTIC, "UnknownType cannot be resolved to a type.");
 	}
 	
@@ -103,7 +104,7 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 	public void testBrokenModel_10() throws Exception {
 		XtendClass clazz = clazz("class C { def void m2() { #[ null as UnknownType ].head.unknownOperation }}");
 		helper.assertNoError(clazz, IssueCodes.INCOMPATIBLE_TYPES);
-		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+		helper.assertNoError(clazz, Diagnostic.LINKING_DIAGNOSTIC,LinkingDiagnosticTypeAwareMessageProducer.FEATURE_CALL);
 		helper.assertError(clazz, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, Diagnostic.LINKING_DIAGNOSTIC, "UnknownType cannot be resolved to a type.");
 	}
 	
@@ -111,7 +112,7 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 	public void testBrokenModel_11() throws Exception {
 		XtendClass clazz = clazz("class C { def UnknownType m1() {} def void m2() { newArrayList(m1, m1).map[ it.unknownOperation ] }}");
 		helper.assertNoError(clazz, IssueCodes.INCOMPATIBLE_TYPES);
-		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+		helper.assertNoError(clazz, Diagnostic.LINKING_DIAGNOSTIC,LinkingDiagnosticTypeAwareMessageProducer.FEATURE_CALL);
 		helper.assertError(clazz, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, Diagnostic.LINKING_DIAGNOSTIC, "UnknownType cannot be resolved to a type.");
 	}
 	
@@ -119,7 +120,7 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 	public void testBrokenModel_12() throws Exception {
 		XtendClass clazz = clazz("class C { def void m() { <UnknownType>newArrayList().map[ it.unknownOperation ] }}");
 		helper.assertNoError(clazz, IssueCodes.INCOMPATIBLE_TYPES);
-		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+		helper.assertNoError(clazz, Diagnostic.LINKING_DIAGNOSTIC,LinkingDiagnosticTypeAwareMessageProducer.FEATURE_CALL);
 		helper.assertError(clazz, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, Diagnostic.LINKING_DIAGNOSTIC, "UnknownType cannot be resolved to a type.");
 	}
 	
@@ -128,7 +129,7 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 	public void testBrokenModel_13() throws Exception {
 		XtendClass clazz = clazz("class C { def UnknownType m1() {} def void m2() { newArrayList(m1, m1).map[ unknownOperation.doesNotExist ] }}");
 		helper.assertNoError(clazz, IssueCodes.INCOMPATIBLE_TYPES);
-		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, "unknownOperation");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, Diagnostic.LINKING_DIAGNOSTIC, "unknownOperation is");
 		helper.assertError(clazz, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, Diagnostic.LINKING_DIAGNOSTIC, "UnknownType cannot be resolved to a type.");
 	}
 	
@@ -137,7 +138,7 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 	public void testBrokenModel_14() throws Exception {
 		XtendClass clazz = clazz("class C { def void m() { <UnknownType>newArrayList().map[ unknownOperation.doesNotExist ] }}");
 		helper.assertNoError(clazz, IssueCodes.INCOMPATIBLE_TYPES);
-		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, "unknownOperation");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, Diagnostic.LINKING_DIAGNOSTIC, "unknownOperation is");
 		helper.assertError(clazz, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, Diagnostic.LINKING_DIAGNOSTIC, "UnknownType cannot be resolved to a type.");
 	}
 	
@@ -253,6 +254,53 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 		assertEquals(content.indexOf("add"), issue.getOffset().intValue());
 		assertEquals(3, issue.getLength().intValue());
 		assertEquals(1, issue.getLineNumber().intValue());
+	}
+	
+	@Test
+	public void testBug334499_01() throws Exception {
+		XtendClass clazz = clazz("class C { def void m() { 'str'.foo('str') }}");
+		helper.assertError(clazz, XbasePackage.Literals.XMEMBER_FEATURE_CALL, Diagnostic.LINKING_DIAGNOSTIC, "foo(String) is", "for the type String");
+	}
+	
+	@Test
+	public void testBug334499_02() throws Exception {
+		XtendClass clazz = clazz("class C { def void m() { this.foo('str',5) }}");
+		helper.assertError(clazz, XbasePackage.Literals.XMEMBER_FEATURE_CALL, Diagnostic.LINKING_DIAGNOSTIC, "foo(String, int) is", "for the type C");
+	}
+	
+	@Test
+	public void testBug334499_03() throws Exception {
+		XtendClass clazz = clazz("class C { def void m() { foo('',5) }}");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL,Diagnostic.LINKING_DIAGNOSTIC, "foo(String, int) is");
+	}
+	
+	@Test
+	public void testBug334499_04() throws Exception {
+		XtendClass clazz = clazz("class C { def void m() { val a = #['str'] a.map[it.foo(5)] }}");
+		helper.assertError(clazz, XbasePackage.Literals.XMEMBER_FEATURE_CALL, Diagnostic.LINKING_DIAGNOSTIC, "foo(int) is", "for the type String");
+	}
+	@Test
+	public void testBug334499_05() throws Exception {
+		XtendClass clazz = clazz("class C { def void m() { this.foo(this) }}");
+		helper.assertError(clazz, XbasePackage.Literals.XMEMBER_FEATURE_CALL, Diagnostic.LINKING_DIAGNOSTIC, "foo(C) is", "for the type C");
+	}
+	
+	@Test
+	public void testBug334499_06() throws Exception {
+		XtendClass clazz = clazz("class C { def m() { new C(){ override m(){ foo(1)} }}}");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, Diagnostic.LINKING_DIAGNOSTIC, "foo(int) is");
+	}
+	
+	@Test
+	public void testBug334499_07() throws Exception {
+		XtendClass clazz = clazz("class C { def void m() { this.foo(this) }}");
+		helper.assertError(clazz, XbasePackage.Literals.XMEMBER_FEATURE_CALL, Diagnostic.LINKING_DIAGNOSTIC, "foo(C) is", "for the type C");
+	}
+	
+	@Test
+	public void testBug334499_08() throws Exception {
+		XtendClass clazz = clazz("class C { def m() { new C(){ override m(){ ''.foo(1)} }}}");
+		helper.assertError(clazz, XbasePackage.Literals.XMEMBER_FEATURE_CALL, Diagnostic.LINKING_DIAGNOSTIC, "foo(int) is undefined for the type String");
 	}
 	
 	@Test 
@@ -875,74 +923,80 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 	@Test
 	public void testInvalidPropertySugarBug403564_01() throws Exception {
 		XtendClass clazz = clazz("class C { def String getSomething() { return something }}");
-		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+		helper.assertNoError(clazz, Diagnostic.LINKING_DIAGNOSTIC,LinkingDiagnosticTypeAwareMessageProducer.FEATURE_CALL);
 	}
 	@Test
 	public void testInvalidPropertySugarBug403564_02() throws Exception {
 		XtendClass clazz = clazz("class C { def String isSomething() { return something }}");
-		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+		helper.assertNoError(clazz, Diagnostic.LINKING_DIAGNOSTIC,LinkingDiagnosticTypeAwareMessageProducer.FEATURE_CALL);
 	}
 	@Test
 	public void testInvalidPropertySugarBug403564_03() throws Exception {
 		XtendClass clazz = clazz("class C { def void setSomething(String s) { something = '' }}");
-		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+		helper.assertNoError(clazz, Diagnostic.LINKING_DIAGNOSTIC,LinkingDiagnosticTypeAwareMessageProducer.FEATURE_CALL);
 	}
 	@Test
 	public void testInvalidPropertySugarBug403564_04() throws Exception {
 		XtendClass clazz = clazz("class C { def String getSomething() { return Something }}");
-		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, 
-				"The method or field Something is undefined for the type C");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, Diagnostic.LINKING_DIAGNOSTIC, 
+				"The method or field Something is undefined");
 	}
 	
 	// second case - first two letters after prefix are upper case
 	@Test
 	public void testInvalidPropertySugarBug403564_05() throws Exception {
 		XtendClass clazz = clazz("class C { def String getURI() { return URI }}");
-		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+		helper.assertNoError(clazz, Diagnostic.LINKING_DIAGNOSTIC,LinkingDiagnosticTypeAwareMessageProducer.FEATURE_CALL);
 	}
 	@Test
 	public void testInvalidPropertySugarBug403564_06() throws Exception {
 		XtendClass clazz = clazz("class C { def boolean isURI() { return URI }}");
-		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+		helper.assertNoError(clazz, Diagnostic.LINKING_DIAGNOSTIC,LinkingDiagnosticTypeAwareMessageProducer.FEATURE_CALL);
 	}
 	@Test
 	public void testInvalidPropertySugarBug403564_07() throws Exception {
 		XtendClass clazz = clazz("class C { def void setURI(String s) { URI = '' }}");
-		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+		helper.assertNoError(clazz, Diagnostic.LINKING_DIAGNOSTIC,LinkingDiagnosticTypeAwareMessageProducer.FEATURE_CALL);
 	}
 	@Test
 	public void testInvalidPropertySugarBug403564_08() throws Exception {
 		XtendClass clazz = clazz("class C { def String getURI() { return uri }}");
-		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, 
-				"The method or field uri is undefined for the type C");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, Diagnostic.LINKING_DIAGNOSTIC, 
+				"The method or field uri is undefined");
 	}
 	@Test
 	public void testInvalidPropertySugarBug403564_09() throws Exception {
 		XtendClass clazz = clazz("class C { def String getURI() { return uRI }}");
-		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC,
-				"The method or field uRI is undefined for the type C");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, Diagnostic.LINKING_DIAGNOSTIC,
+				"The method or field uRI is undefined");
 	}
 	
 	// third case - single letter property
 	@Test
 	public void testInvalidPropertySugarBug403564_10() throws Exception {
 		XtendClass clazz = clazz("class C { def String getX() { return x }}");
-		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+		helper.assertNoError(clazz, Diagnostic.LINKING_DIAGNOSTIC,LinkingDiagnosticTypeAwareMessageProducer.FEATURE_CALL);
 	}
 	@Test
 	public void testInvalidPropertySugarBug403564_11() throws Exception {
 		XtendClass clazz = clazz("class C { def boolean isX() { return x }}");
-		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+		helper.assertNoError(clazz, Diagnostic.LINKING_DIAGNOSTIC,LinkingDiagnosticTypeAwareMessageProducer.FEATURE_CALL);
 	}
 	@Test
 	public void testInvalidPropertySugarBug403564_12() throws Exception {
 		XtendClass clazz = clazz("class C { def void setX(String s) { x = '' }}");
-		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+		helper.assertNoError(clazz, Diagnostic.LINKING_DIAGNOSTIC,LinkingDiagnosticTypeAwareMessageProducer.FEATURE_CALL);
 	}
 	@Test
 	public void testInvalidPropertySugarBug403564_13() throws Exception {
 		XtendClass clazz = clazz("class C { def void getX() { return X }}");
-		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC,
-				"The method or field X is undefined for the type C");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, Diagnostic.LINKING_DIAGNOSTIC,
+				"The method or field X is undefined");
+	}
+	@Test
+	public void testInvalidPropertySugarBug403564_14() throws Exception {
+		XtendClass clazz = clazz("class C { def String getSomething() { return something.Something }}");
+		helper.assertError(clazz, XbasePackage.Literals.XMEMBER_FEATURE_CALL, Diagnostic.LINKING_DIAGNOSTIC, 
+				"The method or field Something is undefined for the type String");
 	}
 }

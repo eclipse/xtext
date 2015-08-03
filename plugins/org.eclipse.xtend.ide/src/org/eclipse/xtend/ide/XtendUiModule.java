@@ -71,7 +71,6 @@ import org.eclipse.xtend.ide.outline.XtendOutlinePage;
 import org.eclipse.xtend.ide.outline.XtendOutlineWithEditorLinker;
 import org.eclipse.xtend.ide.outline.XtendQuickOutlineFilterAndSorter;
 import org.eclipse.xtend.ide.preferences.XtendPreferenceStoreAccess;
-import org.eclipse.xtend.ide.quickfix.TypeLiteralAwareJavaTypeQuickfixes;
 import org.eclipse.xtend.ide.refactoring.XtendDependentElementsCalculator;
 import org.eclipse.xtend.ide.refactoring.XtendExpressionUtil;
 import org.eclipse.xtend.ide.refactoring.XtendJdtRenameParticipantProcessor;
@@ -159,7 +158,6 @@ import org.eclipse.xtext.xbase.ui.editor.actions.IClipboardActionFactory;
 import org.eclipse.xtext.xbase.ui.editor.actions.ImportsAwareClipboardAction;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JdtRenameRefactoringParticipantProcessor;
-import org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixes;
 import org.eclipse.xtext.xbase.ui.refactoring.ExpressionUtil;
 import org.eclipse.xtext.xbase.ui.validation.XbaseIssueSeveritiesProvider;
 
@@ -448,10 +446,6 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 
 	public Class<? extends IReferenceFinder> bindIReferenceFinder() {
 		return DelegatingReferenceFinder.class;
-	}
-
-	public Class<? extends JavaTypeQuickfixes> bindJavaTypeQuickfixes() {
-		return TypeLiteralAwareJavaTypeQuickfixes.class;
 	}
 
 	public Class<? extends ICompletionProposalComparator> bindICompletionProposalComparator() {
