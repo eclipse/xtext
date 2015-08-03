@@ -9,11 +9,11 @@ package org.eclipse.xtext.common.types.ui.trace;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Reader;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.xtext.generator.trace.AbsoluteURI;
-import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.ui.generator.trace.AbstractEclipseTrace;
 
@@ -21,20 +21,19 @@ import org.eclipse.xtext.ui.generator.trace.AbstractEclipseTrace;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class AbstractTraceWithoutStorage extends AbstractEclipseTrace {
-	
+
 	private IProject project;
-	private AbsoluteURI uri;
+	private SourceRelativeURI localURI;
 
 	@Override
 	public IProject getLocalProject() {
 		return project;
 	}
 
-	@Override
-	public AbsoluteURI getLocalURI() {
-		return uri;
+	protected SourceRelativeURI getLocalSourceRelativeURI() {
+		return localURI;
 	}
-	
+
 	@Override
 	public IStorage getLocalStorage() {
 		return null;
@@ -44,8 +43,8 @@ public abstract class AbstractTraceWithoutStorage extends AbstractEclipseTrace {
 		this.project = project;
 	}
 
-	protected void setLocalURI(AbsoluteURI uri) {
-		this.uri = uri;
+	protected void setLocalURI(SourceRelativeURI uri) {
+		this.localURI = uri;
 	}
 
 	@Override
@@ -53,16 +52,21 @@ public abstract class AbstractTraceWithoutStorage extends AbstractEclipseTrace {
 		// there are no storages inside a plain folder
 		return null;
 	}
-	
+
 	@Override
-	protected abstract InputStream getContents(SourceRelativeURI uri, IProject project) throws IOException;
+	protected Reader getLocalContentsAsText(IProject project) throws IOException {
+		return getContentsAsText(localURI, project);
+	}
 
 	/*
 	 * Overridden to allow access from same package
 	 */
 	@Override
-	protected void setTraceRegionProvider(ITraceRegionProvider traceRegionProvider) {
-		super.setTraceRegionProvider(traceRegionProvider);
+	protected abstract InputStream getContents(SourceRelativeURI uri, IProject project) throws IOException;
+
+	@Override
+	public AbsoluteURI getLocalURI() {
+		return resolvePath(getLocalSourceRelativeURI());
 	}
 
 }

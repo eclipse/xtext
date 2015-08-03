@@ -9,7 +9,11 @@ package org.eclipse.xtext.ui.generator.trace;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.Charset;
 
+import org.eclipse.core.resources.IEncodedStorage;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -17,7 +21,6 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.trace.AbsoluteURI;
-import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
 import org.eclipse.xtext.util.Pair;
@@ -94,7 +97,7 @@ public class StorageAwareTrace extends AbstractEclipseTrace {
 		return null;
 	}
 
-	protected void setLocalStorage(IStorage derivedResource) {
+	public void setLocalStorage(IStorage derivedResource) {
 		this.localStorage = derivedResource;
 		if (derivedResource instanceof IResource) {
 			this.projectName = ((IResource) derivedResource).getProject().getName();
@@ -124,11 +127,29 @@ public class StorageAwareTrace extends AbstractEclipseTrace {
 			throw new WrappedCoreException(e);
 		}
 	}
-
-	/* make this accessible from the same package */
-	@Override
-	protected void setTraceRegionProvider(ITraceRegionProvider traceRegionProvider) {
-		super.setTraceRegionProvider(traceRegionProvider);
-	}
 	
+	@Override
+	protected Reader getContentsAsText(SourceRelativeURI uri, IProject project) throws IOException {
+		IStorage storage = findStorage(uri, project);
+		return getContentsAsText(storage);
+	}
+
+	@Override
+	protected Reader getLocalContentsAsText(IProject project) throws IOException {
+		return getContentsAsText(localStorage);
+	}
+
+	protected Reader getContentsAsText(IStorage storage) throws WrappedCoreException {
+		if (storage instanceof IEncodedStorage) {
+			try {
+				IEncodedStorage enc = (IEncodedStorage) storage;
+				Charset charset = Charset.forName(enc.getCharset());
+				InputStream contents = storage.getContents();
+				return new InputStreamReader(contents, charset);
+			} catch (CoreException e) {
+				throw new WrappedCoreException(e);
+			}
+		}
+		return null;
+	}
 }

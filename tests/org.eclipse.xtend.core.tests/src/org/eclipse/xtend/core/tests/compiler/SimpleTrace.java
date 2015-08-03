@@ -2,6 +2,7 @@ package org.eclipse.xtend.core.tests.compiler;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Reader;
 
 import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
@@ -37,6 +38,16 @@ public class SimpleTrace extends AbstractTrace {
 	@Override
 	protected InputStream getContents(SourceRelativeURI uri, IProjectConfig project) throws IOException {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	protected Reader getContentsAsText(SourceRelativeURI uri, IProjectConfig project)  {
+		return null;
+	}
+
+	@Override
+	protected Reader getLocalContentsAsText(IProjectConfig projectConfig) throws IOException {
+		return null;
 	}
 
 }
