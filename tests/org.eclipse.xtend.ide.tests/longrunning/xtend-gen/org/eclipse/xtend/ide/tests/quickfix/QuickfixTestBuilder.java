@@ -112,12 +112,8 @@ public class QuickfixTestBuilder {
         final IUnitOfWork<List<Issue>, XtextResource> _function = new IUnitOfWork<List<Issue>, XtextResource>() {
           @Override
           public List<Issue> exec(final XtextResource it) throws Exception {
-            try {
-              List<Issue> _validate = QuickfixTestBuilder.this._iResourceValidator.validate(it, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl);
-              return QuickfixTestBuilder.this.issues = _validate;
-            } catch (Throwable _e) {
-              throw Exceptions.sneakyThrow(_e);
-            }
+            List<Issue> _validate = QuickfixTestBuilder.this._iResourceValidator.validate(it, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl);
+            return QuickfixTestBuilder.this.issues = _validate;
           }
         };
         document.<List<Issue>>readOnly(_function);

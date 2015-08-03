@@ -14,7 +14,6 @@ import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.ui.tests.quickfix.AbstractXbaseQuickfixTest;
 import org.eclipse.xtext.xbase.ui.tests.quickfix.TestIssueModificationContext;
@@ -36,34 +35,30 @@ public class Bug390595Test extends AbstractXbaseQuickfixTest {
   
   @Test
   public void testNoExceptionDuringResolutionCreation() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("{");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("val n = newHashSet ( )");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("val m = newHashSet ( )");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("if ( n < m ) { }");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("}");
-      _builder.newLine();
-      final String code = _builder.toString();
-      StringInputStream _stringInputStream = new StringInputStream(code);
-      final XtextResource resource = this.getResourceFor(_stringInputStream);
-      XtextDocument _document = this.getDocument(resource, code);
-      this.modificationContext.setDocument(_document);
-      List<Issue> _validate = this.resourceValidator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
-      final Issue issue = IterableExtensions.<Issue>head(_validate);
-      List<IssueResolution> _resolutionsForLinkingIssue = this.quickfixProvider.getResolutionsForLinkingIssue(issue);
-      IterableExtensions.<IssueResolution>head(_resolutionsForLinkingIssue);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("val n = newHashSet ( )");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("val m = newHashSet ( )");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("if ( n < m ) { }");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    final String code = _builder.toString();
+    StringInputStream _stringInputStream = new StringInputStream(code);
+    final XtextResource resource = this.getResourceFor(_stringInputStream);
+    XtextDocument _document = this.getDocument(resource, code);
+    this.modificationContext.setDocument(_document);
+    List<Issue> _validate = this.resourceValidator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
+    final Issue issue = IterableExtensions.<Issue>head(_validate);
+    List<IssueResolution> _resolutionsForLinkingIssue = this.quickfixProvider.getResolutionsForLinkingIssue(issue);
+    IterableExtensions.<IssueResolution>head(_resolutionsForLinkingIssue);
   }
   
   public XtextDocument getDocument(final XtextResource xtextResource, final String code) {

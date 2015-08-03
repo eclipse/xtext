@@ -20,7 +20,6 @@ import org.eclipse.xtext.idea.shared.IdeaSharedInjectorProvider
 import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider
 import com.intellij.psi.PsiNameIdentifierOwner
 import com.intellij.psi.util.PsiTreeUtil
-import com.intellij.psi.util.PsiUtil
 import com.intellij.psi.PsiNamedElement
 
 /**

@@ -1998,42 +1998,38 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   public void handleProcessingError(final Iterable<? extends EObject> sourceElements, final Resource resource, final Throwable t) {
-    try {
-      if ((t instanceof VirtualMachineError)) {
-        throw t;
-      }
-      boolean _equals = Objects.equal(this.lastPhase, ActiveAnnotationContexts.AnnotationCallback.GENERATION);
-      if (_equals) {
-        Throwables.propagateIfPossible(t);
-        String _messageWithoutStackTrace = this.getMessageWithoutStackTrace(t);
-        throw new RuntimeException(_messageWithoutStackTrace, t);
-      }
-      final String msg = this.getMessageWithStackTrace(t);
-      final EList<Resource.Diagnostic> errors = resource.getErrors();
-      for (final EObject target : sourceElements) {
-        boolean _matched = false;
-        if (!_matched) {
-          if (target instanceof XtendAnnotationTarget) {
-            _matched=true;
-            final EList<XAnnotation> annotations = ((XtendAnnotationTarget)target).getAnnotations();
-            EObject _xifexpression = null;
-            boolean _isEmpty = annotations.isEmpty();
-            if (_isEmpty) {
-              _xifexpression = target;
-            } else {
-              _xifexpression = IterableExtensions.<XAnnotation>head(annotations);
-            }
-            EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.PROCESSING_ERROR, msg, _xifexpression, null, (-1), null);
-            errors.add(_eObjectDiagnosticImpl);
+    if ((t instanceof VirtualMachineError)) {
+      throw ((VirtualMachineError)t);
+    }
+    boolean _equals = Objects.equal(this.lastPhase, ActiveAnnotationContexts.AnnotationCallback.GENERATION);
+    if (_equals) {
+      Throwables.propagateIfPossible(t);
+      String _messageWithoutStackTrace = this.getMessageWithoutStackTrace(t);
+      throw new RuntimeException(_messageWithoutStackTrace, t);
+    }
+    final String msg = this.getMessageWithStackTrace(t);
+    final EList<Resource.Diagnostic> errors = resource.getErrors();
+    for (final EObject target : sourceElements) {
+      boolean _matched = false;
+      if (!_matched) {
+        if (target instanceof XtendAnnotationTarget) {
+          _matched=true;
+          final EList<XAnnotation> annotations = ((XtendAnnotationTarget)target).getAnnotations();
+          EObject _xifexpression = null;
+          boolean _isEmpty = annotations.isEmpty();
+          if (_isEmpty) {
+            _xifexpression = target;
+          } else {
+            _xifexpression = IterableExtensions.<XAnnotation>head(annotations);
           }
-        }
-        if (!_matched) {
-          EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.PROCESSING_ERROR, msg, target, null, (-1), null);
+          EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.PROCESSING_ERROR, msg, _xifexpression, null, (-1), null);
           errors.add(_eObjectDiagnosticImpl);
         }
       }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+      if (!_matched) {
+        EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.PROCESSING_ERROR, msg, target, null, (-1), null);
+        errors.add(_eObjectDiagnosticImpl);
+      }
     }
   }
   
