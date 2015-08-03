@@ -21,10 +21,8 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.trace.AbsoluteURI;
-import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
-import org.eclipse.xtext.ui.workspace.EclipseProjectConfig;
 import org.eclipse.xtext.util.Pair;
 
 import com.google.common.collect.ImmutableList;
@@ -99,7 +97,7 @@ public class StorageAwareTrace extends AbstractEclipseTrace {
 		return null;
 	}
 
-	protected void setLocalStorage(IStorage derivedResource) {
+	public void setLocalStorage(IStorage derivedResource) {
 		this.localStorage = derivedResource;
 		if (derivedResource instanceof IResource) {
 			this.projectName = ((IResource) derivedResource).getProject().getName();
@@ -154,12 +152,4 @@ public class StorageAwareTrace extends AbstractEclipseTrace {
 		}
 		return null;
 	}
-
-	/* make this accessible from the same package */
-	@Override
-	protected void setTraceRegionProvider(ITraceRegionProvider traceRegionProvider) {
-		super.setTraceRegionProvider(traceRegionProvider);
-	}
-
-	
 }
