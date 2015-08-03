@@ -43,10 +43,10 @@ public class Bug464136Test extends AbstractActiveAnnotationTest {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("Error during annotation processing:");
         _builder.newLine();
-        _builder.append("java.lang.LinkageError: Just a test :-)");
+        _builder.append("java.lang.LinkageError: Just a test :-/");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("at org.eclipse.xtend.core.tests.macro.Bug464136Processor$1.apply(Bug464136Processor.java:25)");
+        _builder.append("at org.eclipse.xtend.core.tests.macro.Bug464136Processor$1.apply(Bug464136Processor.java:23)");
         _builder.newLine();
         String _string_1 = _builder.toString();
         Problem _head = IterableExtensions.head(problems);

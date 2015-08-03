@@ -20,7 +20,7 @@ public class Bug464136Processor extends AbstractClassProcessor {
     final Procedure0 _function = new Procedure0() {
       @Override
       public void apply() {
-        throw new LinkageError("Just a test :-)");
+        throw new LinkageError("Just a test :-/");
       }
     };
     context.validateLater(_function);
