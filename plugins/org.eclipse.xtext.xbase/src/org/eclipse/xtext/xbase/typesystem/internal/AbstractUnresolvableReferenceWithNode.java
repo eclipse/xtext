@@ -40,7 +40,10 @@ public abstract class AbstractUnresolvableReferenceWithNode extends AbstractUnre
 		Resource resource = getExpression().eResource();
 		if (resource instanceof LazyLinkingResource) {
 			LazyLinkingResource lazyLinkingResource = (LazyLinkingResource) resource;
-			DiagnosticMessage message = lazyLinkingResource.getDiagnosticMessageProvider().getUnresolvedProxyMessage(this);
+			
+			TypeAwareLinkingDiagnosticContext context = new TypeAwareLinkingDiagnosticContext(this, resolvedTypes);
+			DiagnosticMessage message = lazyLinkingResource.getDiagnosticMessageProvider()
+					.getUnresolvedProxyMessage(context);
 			if (message != null) {
 				List<Resource.Diagnostic> diagnostics = getDiagnosticList(lazyLinkingResource, message);
 				Diagnostic diagnostic = createDiagnostic(message);

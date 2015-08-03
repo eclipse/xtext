@@ -294,7 +294,45 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 			public class Foo {
 			  public int bar() {
 			    throw new Error("Unresolved compilation problems:"
-			      + "\nThe method or field foo is undefined for the type Foo");
+			      + "\nThe method foo() is undefined");
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testMethodOrFieldLinkError() {
+		'''
+			class Foo {
+				def int bar() {
+					foo
+				}
+			}
+		'''.assertCompilesTo( '''
+			@SuppressWarnings("all")
+			public class Foo {
+			  public int bar() {
+			    throw new Error("Unresolved compilation problems:"
+			      + "\nThe method or field foo is undefined");
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testMethodLinkReceiverError() {
+		'''
+			class Foo {
+				def int bar() {
+					this.foo()
+				}
+			}
+		'''.assertCompilesTo( '''
+			@SuppressWarnings("all")
+			public class Foo {
+			  public int bar() {
+			    throw new Error("Unresolved compilation problems:"
+			      + "\nThe method foo() is undefined for the type Foo");
 			  }
 			}
 		''')

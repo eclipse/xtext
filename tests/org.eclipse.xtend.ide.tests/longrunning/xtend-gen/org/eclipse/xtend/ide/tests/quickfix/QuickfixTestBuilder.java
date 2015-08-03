@@ -14,6 +14,7 @@ import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -26,6 +27,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.annotations.validation.LinkingDiagnosticTypeAwareMessageProducer;
 import org.eclipse.xtext.xbase.compiler.JavaVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -110,8 +112,12 @@ public class QuickfixTestBuilder {
         final IUnitOfWork<List<Issue>, XtextResource> _function = new IUnitOfWork<List<Issue>, XtextResource>() {
           @Override
           public List<Issue> exec(final XtextResource it) throws Exception {
-            List<Issue> _validate = QuickfixTestBuilder.this._iResourceValidator.validate(it, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl);
-            return QuickfixTestBuilder.this.issues = _validate;
+            try {
+              List<Issue> _validate = QuickfixTestBuilder.this._iResourceValidator.validate(it, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl);
+              return QuickfixTestBuilder.this.issues = _validate;
+            } catch (Throwable _e) {
+              throw Exceptions.sneakyThrow(_e);
+            }
           }
         };
         document.<List<Issue>>readOnly(_function);
@@ -147,6 +153,60 @@ public class QuickfixTestBuilder {
       };
       Iterable<String> _map = IterableExtensions.<Issue, String>map(_issuesAtCaret, _function);
       this.assertEqual(((List<String>)Conversions.doWrapArray(issueCodes)), _map);
+      _xblockexpression = this;
+    }
+    return _xblockexpression;
+  }
+  
+  public QuickfixTestBuilder assertFatureCallLinkingIssue() {
+    QuickfixTestBuilder _xblockexpression = null;
+    {
+      Iterable<Issue> _issuesAtCaret = this.getIssuesAtCaret();
+      final Function1<Issue, Boolean> _function = new Function1<Issue, Boolean>() {
+        @Override
+        public Boolean apply(final Issue it) {
+          boolean _and = false;
+          String _code = it.getCode();
+          boolean _equals = Objects.equal(_code, Diagnostic.LINKING_DIAGNOSTIC);
+          if (!_equals) {
+            _and = false;
+          } else {
+            String[] _data = it.getData();
+            boolean _contains = ((List<String>)Conversions.doWrapArray(_data)).contains(LinkingDiagnosticTypeAwareMessageProducer.FEATURE_CALL);
+            _and = _contains;
+          }
+          return Boolean.valueOf(_and);
+        }
+      };
+      boolean _exists = IterableExtensions.<Issue>exists(_issuesAtCaret, _function);
+      Assert.assertTrue(_exists);
+      _xblockexpression = this;
+    }
+    return _xblockexpression;
+  }
+  
+  public QuickfixTestBuilder assertTypeLiteralLinkingIssue() {
+    QuickfixTestBuilder _xblockexpression = null;
+    {
+      Iterable<Issue> _issuesAtCaret = this.getIssuesAtCaret();
+      final Function1<Issue, Boolean> _function = new Function1<Issue, Boolean>() {
+        @Override
+        public Boolean apply(final Issue it) {
+          boolean _and = false;
+          String _code = it.getCode();
+          boolean _equals = Objects.equal(_code, Diagnostic.LINKING_DIAGNOSTIC);
+          if (!_equals) {
+            _and = false;
+          } else {
+            String[] _data = it.getData();
+            boolean _contains = ((List<String>)Conversions.doWrapArray(_data)).contains(LinkingDiagnosticTypeAwareMessageProducer.TYPE_LITERAL);
+            _and = _contains;
+          }
+          return Boolean.valueOf(_and);
+        }
+      };
+      boolean _exists = IterableExtensions.<Issue>exists(_issuesAtCaret, _function);
+      Assert.assertTrue(_exists);
       _xblockexpression = this;
     }
     return _xblockexpression;
