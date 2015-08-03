@@ -380,6 +380,12 @@ public abstract class AbstractTraceRegion {
 	public AbstractTraceRegion getParent() {
 		return parent;
 	}
+	
+	public AbstractTraceRegion getRoot() {
+		if (parent != null)
+			return parent.getRoot();
+		return this;
+	}
 
 	public String getAnnotatedString(String input) {
 		StringBuilder result = new StringBuilder(input.length() * 3);
