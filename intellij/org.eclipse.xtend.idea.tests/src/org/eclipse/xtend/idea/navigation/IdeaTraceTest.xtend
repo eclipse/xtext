@@ -15,15 +15,16 @@ import java.io.ByteArrayInputStream
 import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider
 import org.eclipse.xtext.idea.trace.VirtualFileInProject
 import org.eclipse.xtext.util.TextRegion
+import org.junit.Ignore
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 class IdeaTraceTest extends LightXtendTest {
-	
+
 	@Inject TraceRegionSerializer bareTraceReader
 	@Inject ITraceForVirtualFileProvider traceProvider
-	
+
 	def void testTraceFileContents() {
 		myFixture.addFileToProject('com/acme/MyClass.xtend', '''
 			package com.acme
@@ -42,11 +43,11 @@ class IdeaTraceTest extends LightXtendTest {
 		'''.toString, compiledContent)
 		val traceFile = myFixture.findFileInTempDir('xtend-gen/com/acme/.MyClass.java._trace')
 		assertTrue(file.exists)
-		val trace = bareTraceReader.readTraceRegionFrom(new ByteArrayInputStream(traceFile.contentsToByteArray))	
+		val trace = bareTraceReader.readTraceRegionFrom(new ByteArrayInputStream(traceFile.contentsToByteArray))
 		val associatedPath = trace.associatedSrcRelativePath
 		assertEquals('com/acme/MyClass.xtend', associatedPath.toString)
 	}
-	
+
 	def void testTraceToTarget() {
 		val psiFile = myFixture.addFileToProject('com/acme/MyClass.xtend', '''
 			package com.acme
@@ -65,6 +66,17 @@ class IdeaTraceTest extends LightXtendTest {
 		assertEquals('temp:///src/xtend-gen/com/acme/MyClass.java', associatedLocation.absoluteResourceURI.toString)
 	}
 	
+	@Ignore
+	def void _testTraceToTargetForPsiFile() {
+		val psiFile = myFixture.addFileToProject('com/acme/MyClass.xtend', '''
+			package com.acme
+			class MyClass {
+			}
+		''')
+		val psiFileTrace = traceProvider.getGeneratedElements(psiFile)
+		assertNotEmpty(psiFileTrace)
+	}
+
 	def void testTraceToSource() {
 		myFixture.addFileToProject('com/acme/MyClass.xtend', '''
 			package com.acme
@@ -77,5 +89,5 @@ class IdeaTraceTest extends LightXtendTest {
 		val associatedLocation = traceToSource.getBestAssociatedLocation(new TextRegion(8, 4))
 		assertNotNull(associatedLocation)
 	}
-	
+
 }
