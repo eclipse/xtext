@@ -14,7 +14,6 @@ import java.io.Reader;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.xtext.generator.trace.AbsoluteURI;
-import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.ui.generator.trace.AbstractEclipseTrace;
 
@@ -64,11 +63,6 @@ public abstract class AbstractTraceWithoutStorage extends AbstractEclipseTrace {
 	 */
 	@Override
 	protected abstract InputStream getContents(SourceRelativeURI uri, IProject project) throws IOException;
-
-	@Override
-	protected void setTraceRegionProvider(ITraceRegionProvider traceRegionProvider) {
-		super.setTraceRegionProvider(traceRegionProvider);
-	}
 
 	@Override
 	public AbsoluteURI getLocalURI() {

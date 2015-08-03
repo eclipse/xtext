@@ -137,7 +137,7 @@ public abstract class AbstractTrace implements ITrace {
 		}
 	}
 
-	protected void setTraceRegionProvider(ITraceRegionProvider traceRegionProvider) {
+	public void setTraceRegionProvider(ITraceRegionProvider traceRegionProvider) {
 		this.traceRegionProvider = traceRegionProvider;
 	}
 
@@ -545,7 +545,7 @@ public abstract class AbstractTrace implements ITrace {
 
 			@Override
 			protected AbstractTraceRegion getTrace() {
-				return rootTraceRegion;
+				return getRootTraceRegion();
 			}
 
 			@Override
