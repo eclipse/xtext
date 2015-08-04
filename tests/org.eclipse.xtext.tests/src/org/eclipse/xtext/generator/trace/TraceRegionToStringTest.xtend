@@ -79,6 +79,29 @@ class TraceRegionToStringTest {
 			1:       }
 		'''
 	}
+	
+	@Test def void twoBounding() {
+		val tester = new TraceRegionToStringTester
+		tester.localText = '''
+			foobar
+		'''
+		tester.remote1 = '''
+			bazbuz
+		'''
+		tester.trace = new Region(0, 6, #[new Location(0, 6, tester.uri1)]) => [
+			addChild(0, 3, #[new Location(0, 3)])
+			addChild(3, 3, #[new Location(3, 3)])
+		]
+		tester === '''
+			------- local1 ------- | ------ remote1 -------
+			[1,2[foo]2][3[bar]3,1] | [1,2[baz]2][3[buz]3,1]
+			-----------------------------------------------
+			1: D 0-6 Region -> Location[0,6,remote1] {
+			2: D 0-3   Region -> Location[0,3]
+			3: D 3-3   Region -> Location[3,3]
+			1:       }
+		'''
+	}
 
 	@Test def void twoFrame1() {
 		val tester = new TraceRegionToStringTester
