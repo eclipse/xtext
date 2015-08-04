@@ -23,8 +23,8 @@ class Bug464136Test extends AbstractActiveAnnotationTest {
 			assertEquals(problems.map[message].toString, 1, problems.size)
 			assertEquals('''
 				Error during annotation processing:
-				java.lang.LinkageError: Just a test :-)
-					at org.eclipse.xtend.core.tests.macro.Bug464136Processor$1.apply(Bug464136Processor.java:25)
+				java.lang.LinkageError: Just a test :-/
+					at org.eclipse.xtend.core.tests.macro.Bug464136Processor$1.apply(Bug464136Processor.java:23)
 			'''.toString, problems.head.message)
 		]
 	}
@@ -38,7 +38,7 @@ class Bug464136Processor extends AbstractClassProcessor {
 	
 	override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
 		validateLater [
-			throw new LinkageError("Just a test :-)")
+			throw new LinkageError("Just a test :-/")
 		]
 	}
 		
