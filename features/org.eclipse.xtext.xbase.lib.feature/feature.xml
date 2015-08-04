@@ -2,10 +2,10 @@
 <feature
       id="org.eclipse.xtext.xbase.lib"
       label="%featureName"
-     version="2.9.0.qualifier"
+      version="2.9.0.qualifier"
       provider-name="%providerName"
-            license-feature="org.eclipse.xtext.license"
-      license-feature-version="2.6.0.qualifier">>
+      license-feature="org.eclipse.xtext.license"
+      license-feature-version="2.6.0.qualifier">
 
    <description>
       %description
@@ -19,7 +19,7 @@ are made available under the terms of the Eclipse Public License
 v1.0 which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html Description here.
    </copyright>
- 
+
    <plugin
          id="org.eclipse.xtext.xbase.lib"
          download-size="0"
