@@ -150,16 +150,12 @@ public class InMemoryJavaCompiler {
     
     @Override
     protected Class<?> findClass(final String name) throws ClassNotFoundException {
-      try {
-        byte[] bytes = this.classMap.get(name);
-        if ((bytes == null)) {
-          return super.findClass(name);
-        } else {
-          int _length = bytes.length;
-          return this.defineClass(name, bytes, 0, _length);
-        }
-      } catch (Throwable _e) {
-        throw Exceptions.sneakyThrow(_e);
+      byte[] bytes = this.classMap.get(name);
+      if ((bytes == null)) {
+        return super.findClass(name);
+      } else {
+        int _length = bytes.length;
+        return this.defineClass(name, bytes, 0, _length);
       }
     }
     

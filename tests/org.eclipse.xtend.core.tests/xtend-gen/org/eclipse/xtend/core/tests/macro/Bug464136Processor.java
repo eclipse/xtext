@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.tests.macro;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
 
@@ -21,11 +20,7 @@ public class Bug464136Processor extends AbstractClassProcessor {
     final Procedure0 _function = new Procedure0() {
       @Override
       public void apply() {
-        try {
-          throw new LinkageError("Just a test :-)");
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
-        }
+        throw new LinkageError("Just a test :-/");
       }
     };
     context.validateLater(_function);

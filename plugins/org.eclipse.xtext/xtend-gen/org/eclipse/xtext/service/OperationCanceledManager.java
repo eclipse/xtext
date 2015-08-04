@@ -12,7 +12,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 
 /**
  * A facade for managing and working with cancellation exceptions of different platforms.
@@ -64,16 +63,12 @@ public class OperationCanceledManager {
    * Rethrows OperationCanceledErrors and wraps platform specific OperationCanceledExceptions. Does nothing for any other type of Throwable.
    */
   public void propagateAsErrorIfCancelException(final Throwable t) {
-    try {
-      if ((t instanceof OperationCanceledError)) {
-        throw t;
-      }
-      final RuntimeException opCanceledException = this.getPlatformOperationCanceledException(t);
-      if ((opCanceledException != null)) {
-        throw new OperationCanceledError(opCanceledException);
-      }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+    if ((t instanceof OperationCanceledError)) {
+      throw ((OperationCanceledError)t);
+    }
+    final RuntimeException opCanceledException = this.getPlatformOperationCanceledException(t);
+    if ((opCanceledException != null)) {
+      throw new OperationCanceledError(opCanceledException);
     }
   }
   
@@ -100,12 +95,8 @@ public class OperationCanceledManager {
   }
   
   public void throwOperationCanceledException() {
-    try {
-      RuntimeException _platformSpecificOperationCanceledException = this.getPlatformSpecificOperationCanceledException();
-      throw this.asWrappingOperationCanceledException(_platformSpecificOperationCanceledException);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    RuntimeException _platformSpecificOperationCanceledException = this.getPlatformSpecificOperationCanceledException();
+    throw this.asWrappingOperationCanceledException(_platformSpecificOperationCanceledException);
   }
   
   protected RuntimeException getPlatformSpecificOperationCanceledException() {

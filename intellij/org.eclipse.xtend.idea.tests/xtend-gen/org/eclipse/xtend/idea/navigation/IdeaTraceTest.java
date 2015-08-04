@@ -11,8 +11,11 @@ import com.google.inject.Inject;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.testFramework.UsefulTestCase;
 import java.io.ByteArrayInputStream;
+import java.util.List;
 import junit.framework.TestCase;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -26,6 +29,7 @@ import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider;
 import org.eclipse.xtext.idea.trace.VirtualFileInProject;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.junit.Ignore;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -103,6 +107,20 @@ public class IdeaTraceTest extends LightXtendTest {
     AbsoluteURI _absoluteResourceURI = associatedLocation.getAbsoluteResourceURI();
     String _string_1 = _absoluteResourceURI.toString();
     TestCase.assertEquals("temp:///src/xtend-gen/com/acme/MyClass.java", _string_1);
+  }
+  
+  @Ignore
+  public void _testTraceToTargetForPsiFile() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package com.acme");
+    _builder.newLine();
+    _builder.append("class MyClass {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final PsiFile psiFile = this.myFixture.addFileToProject("com/acme/MyClass.xtend", _builder.toString());
+    final List<? extends PsiElement> psiFileTrace = this.traceProvider.getGeneratedElements(psiFile);
+    UsefulTestCase.assertNotEmpty(psiFileTrace);
   }
   
   public void testTraceToSource() {

@@ -64,76 +64,72 @@ public class Oven extends Assert {
   
   public void fireproof(final String input) throws Exception {
     try {
-      try {
-        final EObject file = this._parseHelper.parse(input);
-        final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(file);
-        Assert.assertNotNull(resolvedTypes);
-        boolean _notEquals = (!Objects.equal(file, null));
-        if (_notEquals) {
-          TreeIterator<EObject> _eAllContents = file.eAllContents();
-          Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_eAllContents);
-          for (final EObject content : _iterable) {
-            boolean _matched = false;
-            if (!_matched) {
-              if (content instanceof XAbstractFeatureCall) {
-                _matched=true;
-                this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
-                XExpression _implicitReceiver = ((XAbstractFeatureCall)content).getImplicitReceiver();
-                boolean _notEquals_1 = (!Objects.equal(_implicitReceiver, null));
-                if (_notEquals_1) {
-                  XExpression _implicitReceiver_1 = ((XAbstractFeatureCall)content).getImplicitReceiver();
-                  this.assertExpressionTypeIsResolved(_implicitReceiver_1, resolvedTypes);
-                }
-                XExpression _implicitFirstArgument = ((XAbstractFeatureCall)content).getImplicitFirstArgument();
-                boolean _notEquals_2 = (!Objects.equal(_implicitFirstArgument, null));
-                if (_notEquals_2) {
-                  XExpression _implicitFirstArgument_1 = ((XAbstractFeatureCall)content).getImplicitFirstArgument();
-                  this.assertExpressionTypeIsResolved(_implicitFirstArgument_1, resolvedTypes);
-                }
+      final EObject file = this._parseHelper.parse(input);
+      final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(file);
+      Assert.assertNotNull(resolvedTypes);
+      boolean _notEquals = (!Objects.equal(file, null));
+      if (_notEquals) {
+        TreeIterator<EObject> _eAllContents = file.eAllContents();
+        Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_eAllContents);
+        for (final EObject content : _iterable) {
+          boolean _matched = false;
+          if (!_matched) {
+            if (content instanceof XAbstractFeatureCall) {
+              _matched=true;
+              this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
+              XExpression _implicitReceiver = ((XAbstractFeatureCall)content).getImplicitReceiver();
+              boolean _notEquals_1 = (!Objects.equal(_implicitReceiver, null));
+              if (_notEquals_1) {
+                XExpression _implicitReceiver_1 = ((XAbstractFeatureCall)content).getImplicitReceiver();
+                this.assertExpressionTypeIsResolved(_implicitReceiver_1, resolvedTypes);
               }
-            }
-            if (!_matched) {
-              if (content instanceof XClosure) {
-                _matched=true;
-                this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
-                EList<JvmFormalParameter> _implicitFormalParameters = ((XClosure)content).getImplicitFormalParameters();
-                final Procedure1<JvmFormalParameter> _function = new Procedure1<JvmFormalParameter>() {
-                  @Override
-                  public void apply(final JvmFormalParameter it) {
-                    Oven.this.assertIdentifiableTypeIsResolved(it, resolvedTypes);
-                  }
-                };
-                IterableExtensions.<JvmFormalParameter>forEach(_implicitFormalParameters, _function);
-              }
-            }
-            if (!_matched) {
-              if (content instanceof XExpression) {
-                _matched=true;
-                this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
-              }
-            }
-            if (!_matched) {
-              if (content instanceof JvmIdentifiableElement) {
-                _matched=true;
-                this.assertIdentifiableTypeIsResolved(((JvmIdentifiableElement)content), resolvedTypes);
+              XExpression _implicitFirstArgument = ((XAbstractFeatureCall)content).getImplicitFirstArgument();
+              boolean _notEquals_2 = (!Objects.equal(_implicitFirstArgument, null));
+              if (_notEquals_2) {
+                XExpression _implicitFirstArgument_1 = ((XAbstractFeatureCall)content).getImplicitFirstArgument();
+                this.assertExpressionTypeIsResolved(_implicitFirstArgument_1, resolvedTypes);
               }
             }
           }
-        }
-      } catch (final Throwable _t) {
-        if (_t instanceof Throwable) {
-          final Throwable e = (Throwable)_t;
-          String _message = e.getMessage();
-          final ComparisonFailure error = new ComparisonFailure(_message, input, "");
-          StackTraceElement[] _stackTrace = e.getStackTrace();
-          error.setStackTrace(_stackTrace);
-          throw error;
-        } else {
-          throw Exceptions.sneakyThrow(_t);
+          if (!_matched) {
+            if (content instanceof XClosure) {
+              _matched=true;
+              this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
+              EList<JvmFormalParameter> _implicitFormalParameters = ((XClosure)content).getImplicitFormalParameters();
+              final Procedure1<JvmFormalParameter> _function = new Procedure1<JvmFormalParameter>() {
+                @Override
+                public void apply(final JvmFormalParameter it) {
+                  Oven.this.assertIdentifiableTypeIsResolved(it, resolvedTypes);
+                }
+              };
+              IterableExtensions.<JvmFormalParameter>forEach(_implicitFormalParameters, _function);
+            }
+          }
+          if (!_matched) {
+            if (content instanceof XExpression) {
+              _matched=true;
+              this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
+            }
+          }
+          if (!_matched) {
+            if (content instanceof JvmIdentifiableElement) {
+              _matched=true;
+              this.assertIdentifiableTypeIsResolved(((JvmIdentifiableElement)content), resolvedTypes);
+            }
+          }
         }
       }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+    } catch (final Throwable _t) {
+      if (_t instanceof Throwable) {
+        final Throwable e = (Throwable)_t;
+        String _message = e.getMessage();
+        final ComparisonFailure error = new ComparisonFailure(_message, input, "");
+        StackTraceElement[] _stackTrace = e.getStackTrace();
+        error.setStackTrace(_stackTrace);
+        throw error;
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
   }
   

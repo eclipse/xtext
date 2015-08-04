@@ -15,15 +15,22 @@ import com.intellij.execution.configurations.RunConfiguration
 import com.intellij.openapi.actionSystem.DataContextWrapper
 import com.intellij.openapi.actionSystem.LangDataKeys
 import com.intellij.psi.PsiElement
-import org.eclipse.xtext.idea.trace.TraceUtils
+import com.intellij.psi.PsiFile
+import com.intellij.psi.PsiManager
+import org.eclipse.xtext.idea.trace.IIdeaTrace
+import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider
+import org.eclipse.xtext.idea.trace.VirtualFileInProject
+import org.eclipse.xtext.psi.impl.BaseXtextFile
 import org.jetbrains.annotations.NotNull
 import org.jetbrains.annotations.Nullable
+
+import static extension com.intellij.psi.util.PsiTreeUtil.*
 
 /**
  * @author dhuebner - Initial contribution and API
  */
 class ConfigurationProducerExtensions {
-	@Inject TraceUtils traceUtils
+	@Inject ITraceForVirtualFileProvider traceProvider
 
 	def ConfigurationContext prepareContextFor(ConfigurationContext context, PsiElement psiElement) {
 		val ctx = ConfigurationContext.getFromContext(new DataContextWrapper(context.dataContext) {
@@ -45,13 +52,30 @@ class ConfigurationProducerExtensions {
 	def PsiElement tracedJavaElement(@NotNull ConfigurationContext context) {
 		if (context.location?.psiElement !== null) {
 			val psiElement = context.location?.psiElement
-			var javaElement = traceUtils.getBestJavaElementMatch(psiElement).head
+			var javaElement = traceProvider.getGeneratedElements(psiElement).head
 			if (javaElement === null) {
-				javaElement = traceUtils.getJavaFiles(psiElement).head
+				javaElement = psiElement.javaFiles.head
 			}
 			return javaElement
 		}
 		return null
 	}
 
+	def private Iterable<PsiFile> getJavaFiles(@NotNull PsiElement xtextElement) {
+		val xtextFile = xtextElement.getParentOfType(BaseXtextFile, false)
+		if (xtextFile == null) {
+			return emptySet
+		}
+		val IIdeaTrace trace = traceProvider.getTraceToTarget(
+			new VirtualFileInProject(xtextFile.virtualFile, xtextFile.project))
+		if (trace !== null) {
+			val javaFiles = newArrayList
+			for (uri : trace.allAssociatedLocations) {
+				val javaPsiFile = PsiManager.getInstance(xtextFile.project).findFile(uri.platformResource.file)
+				javaFiles.add(javaPsiFile)
+			}
+			return javaFiles
+		}
+		return emptySet
+	}
 }

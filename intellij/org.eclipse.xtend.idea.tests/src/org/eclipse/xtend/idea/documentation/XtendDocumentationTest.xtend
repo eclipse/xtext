@@ -11,16 +11,13 @@ import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiReference
 import org.eclipse.xtend.idea.LightXtendTest
-import org.junit.Ignore
 
 import static extension com.intellij.codeInsight.documentation.DocumentationManager.*
 
 /**
- * FIXME: remove ignore when https://youtrack.jetbrains.com/issue/IDEA-138971 is fixed
  * 
  * @author kosyakov - Initial contribution and API
  */
-@Ignore
 class XtendDocumentationTest extends LightXtendTest {
 
 	protected override invokeTestRunnable(Runnable runnable) {

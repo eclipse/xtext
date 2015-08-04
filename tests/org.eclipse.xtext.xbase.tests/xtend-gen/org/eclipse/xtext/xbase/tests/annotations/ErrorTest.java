@@ -18,7 +18,6 @@ import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.tests.annotations.AbstractXbaseWithAnnotationsTest;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
@@ -53,15 +52,11 @@ public class ErrorTest extends AbstractXbaseWithAnnotationsTest {
   }
   
   public XAnnotation processWithoutException(final CharSequence input) throws Exception {
-    try {
-      String _string = input.toString();
-      final Resource resource = this.newResource(_string);
-      this.resourceValidator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
-      EList<EObject> _contents = resource.getContents();
-      EObject _head = IterableExtensions.<EObject>head(_contents);
-      return ((XAnnotation) _head);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    String _string = input.toString();
+    final Resource resource = this.newResource(_string);
+    this.resourceValidator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
+    EList<EObject> _contents = resource.getContents();
+    EObject _head = IterableExtensions.<EObject>head(_contents);
+    return ((XAnnotation) _head);
   }
 }

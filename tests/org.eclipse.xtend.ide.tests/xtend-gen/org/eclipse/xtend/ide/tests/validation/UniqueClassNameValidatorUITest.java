@@ -58,8 +58,8 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       final IFile secondFile = IResourcesSetupUtil.createFile("first.p384008/src/acme/B.xtend", _builder_1.toString());
-      Map<String, String> _emptyMap = CollectionLiterals.<String, String>emptyMap();
-      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, _emptyMap, null);
+      Map<String, String> _emptyStringMap = UniqueClassNameValidatorUITest.emptyStringMap();
+      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, _emptyStringMap, null);
       final IMarker[] firstFileMarkers = firstFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
       String _printMarker = IResourcesSetupUtil.printMarker(firstFileMarkers);
       int _length = firstFileMarkers.length;
@@ -98,8 +98,8 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       final IFile secondFile = IResourcesSetupUtil.createFile("second.p384008/src/acme/B.xtend", _builder_1.toString());
-      Map<String, String> _emptyMap = CollectionLiterals.<String, String>emptyMap();
-      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, _emptyMap, null);
+      Map<String, String> _emptyStringMap = UniqueClassNameValidatorUITest.emptyStringMap();
+      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, _emptyStringMap, null);
       final IMarker[] firstFileMarkers = firstFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
       String _printMarker = IResourcesSetupUtil.printMarker(firstFileMarkers);
       int _length = firstFileMarkers.length;
@@ -132,10 +132,10 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       final IFile secondFile = IResourcesSetupUtil.createFile("first.p384008/src/acme/B.xtend", _builder_1.toString());
-      Map<String, String> _emptyMap = CollectionLiterals.<String, String>emptyMap();
-      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, _emptyMap, null);
-      Map<String, String> _emptyMap_1 = CollectionLiterals.<String, String>emptyMap();
-      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, JavaCore.BUILDER_ID, _emptyMap_1, null);
+      Map<String, String> _emptyStringMap = UniqueClassNameValidatorUITest.emptyStringMap();
+      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, _emptyStringMap, null);
+      Map<String, String> _emptyStringMap_1 = UniqueClassNameValidatorUITest.emptyStringMap();
+      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, JavaCore.BUILDER_ID, _emptyStringMap_1, null);
       final IMarker[] secondFileMarkers = secondFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
       String _printMarker = IResourcesSetupUtil.printMarker(secondFileMarkers);
       int _length = secondFileMarkers.length;
@@ -167,10 +167,10 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       final IFile secondFile = IResourcesSetupUtil.createFile("second.p384008/src/acme/B.xtend", _builder_1.toString());
-      Map<String, String> _emptyMap = CollectionLiterals.<String, String>emptyMap();
-      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, _emptyMap, null);
-      Map<String, String> _emptyMap_1 = CollectionLiterals.<String, String>emptyMap();
-      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, JavaCore.BUILDER_ID, _emptyMap_1, null);
+      Map<String, String> _emptyStringMap = UniqueClassNameValidatorUITest.emptyStringMap();
+      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, _emptyStringMap, null);
+      Map<String, String> _emptyStringMap_1 = UniqueClassNameValidatorUITest.emptyStringMap();
+      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, JavaCore.BUILDER_ID, _emptyStringMap_1, null);
       final IMarker[] secondFileMarkers = secondFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
       String _printMarker = IResourcesSetupUtil.printMarker(secondFileMarkers);
       int _length = secondFileMarkers.length;
@@ -192,8 +192,8 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
       _builder.append("}");
       _builder.newLine();
       final IFile firstFile = IResourcesSetupUtil.createFile("first.p384008/src/acme/B.xtend", _builder.toString());
-      Map<String, String> _emptyMap = CollectionLiterals.<String, String>emptyMap();
-      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, _emptyMap, null);
+      Map<String, String> _emptyStringMap = UniqueClassNameValidatorUITest.emptyStringMap();
+      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, _emptyStringMap, null);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package acme;");
       _builder_1.newLine();
@@ -202,16 +202,16 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       final IFile javaFile = IResourcesSetupUtil.createFile("first.p384008/src/acme/A.java", _builder_1.toString());
-      Map<String, String> _emptyMap_1 = CollectionLiterals.<String, String>emptyMap();
-      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, JavaCore.BUILDER_ID, _emptyMap_1, null);
-      Map<String, String> _emptyMap_2 = CollectionLiterals.<String, String>emptyMap();
-      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, _emptyMap_2, null);
+      Map<String, String> _emptyStringMap_1 = UniqueClassNameValidatorUITest.emptyStringMap();
+      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, JavaCore.BUILDER_ID, _emptyStringMap_1, null);
+      Map<String, String> _emptyStringMap_2 = UniqueClassNameValidatorUITest.emptyStringMap();
+      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, _emptyStringMap_2, null);
       StringInputStream _stringInputStream = new StringInputStream("package acme; class A{}");
       javaFile.setContents(_stringInputStream, false, false, null);
-      Map<String, String> _emptyMap_3 = CollectionLiterals.<String, String>emptyMap();
-      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, JavaCore.BUILDER_ID, _emptyMap_3, null);
-      Map<String, String> _emptyMap_4 = CollectionLiterals.<String, String>emptyMap();
-      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, _emptyMap_4, null);
+      Map<String, String> _emptyStringMap_3 = UniqueClassNameValidatorUITest.emptyStringMap();
+      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, JavaCore.BUILDER_ID, _emptyStringMap_3, null);
+      Map<String, String> _emptyStringMap_4 = UniqueClassNameValidatorUITest.emptyStringMap();
+      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, _emptyStringMap_4, null);
       final IMarker[] markers = firstFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
       String _printMarker = IResourcesSetupUtil.printMarker(markers);
       int _length = markers.length;
@@ -222,6 +222,10 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  private static Map<String, String> emptyStringMap() {
+    return CollectionLiterals.<String, String>emptyMap();
   }
   
   @Before

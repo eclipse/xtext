@@ -35,51 +35,47 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   @Override
   public CharSequence getContents(final Path path) {
     try {
+      InputStream _contentsAsStream = this.getContentsAsStream(path);
+      String _charset = this.getCharset(path);
+      final InputStreamReader reader = new InputStreamReader(_contentsAsStream, _charset);
+      IOException threw = null;
       try {
-        InputStream _contentsAsStream = this.getContentsAsStream(path);
-        String _charset = this.getCharset(path);
-        final InputStreamReader reader = new InputStreamReader(_contentsAsStream, _charset);
-        IOException threw = null;
-        try {
-          return CharStreams.toString(reader);
-        } catch (final Throwable _t) {
-          if (_t instanceof IOException) {
-            final IOException e = (IOException)_t;
-            threw = e;
-          } else {
-            throw Exceptions.sneakyThrow(_t);
-          }
-        } finally {
-          try {
-            reader.close();
-          } catch (final Throwable _t_1) {
-            if (_t_1 instanceof IOException) {
-              final IOException e_1 = (IOException)_t_1;
-              boolean _equals = Objects.equal(threw, null);
-              if (_equals) {
-                threw = e_1;
-              }
-            } else {
-              throw Exceptions.sneakyThrow(_t_1);
-            }
-          }
-        }
-        boolean _equals_1 = Objects.equal(threw, null);
-        if (_equals_1) {
-          throw new AssertionError("threw cannot be null here");
-        }
-        throw threw;
-      } catch (final Throwable _t_2) {
-        if (_t_2 instanceof IOException) {
-          final IOException exc = (IOException)_t_2;
-          String _message = exc.getMessage();
-          throw new IllegalArgumentException(_message, exc);
+        return CharStreams.toString(reader);
+      } catch (final Throwable _t) {
+        if (_t instanceof IOException) {
+          final IOException e = (IOException)_t;
+          threw = e;
         } else {
-          throw Exceptions.sneakyThrow(_t_2);
+          throw Exceptions.sneakyThrow(_t);
+        }
+      } finally {
+        try {
+          reader.close();
+        } catch (final Throwable _t_1) {
+          if (_t_1 instanceof IOException) {
+            final IOException e_1 = (IOException)_t_1;
+            boolean _equals = Objects.equal(threw, null);
+            if (_equals) {
+              threw = e_1;
+            }
+          } else {
+            throw Exceptions.sneakyThrow(_t_1);
+          }
         }
       }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+      boolean _equals_1 = Objects.equal(threw, null);
+      if (_equals_1) {
+        throw new AssertionError("threw cannot be null here");
+      }
+      throw threw;
+    } catch (final Throwable _t_2) {
+      if (_t_2 instanceof IOException) {
+        final IOException exc = (IOException)_t_2;
+        String _message = exc.getMessage();
+        throw new IllegalArgumentException(_message, exc);
+      } else {
+        throw Exceptions.sneakyThrow(_t_2);
+      }
     }
   }
   

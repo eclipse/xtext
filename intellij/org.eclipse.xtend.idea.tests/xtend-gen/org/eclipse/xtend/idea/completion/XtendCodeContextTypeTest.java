@@ -19,7 +19,6 @@ import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -223,25 +222,21 @@ public class XtendCodeContextTypeTest extends LightXtendTest {
   }
   
   protected TemplateContextType findTemplateContext(final Class<? extends TemplateContextType> clazz) {
-    try {
-      TemplateContextType[] _allContextTypes = TemplateManagerImpl.getAllContextTypes();
-      final Function1<TemplateContextType, Boolean> _function = new Function1<TemplateContextType, Boolean>() {
-        @Override
-        public Boolean apply(final TemplateContextType it) {
-          return Boolean.valueOf(clazz.isInstance(it));
-        }
-      };
-      final TemplateContextType result = IterableExtensions.<TemplateContextType>findFirst(((Iterable<TemplateContextType>)Conversions.doWrapArray(_allContextTypes)), _function);
-      boolean _equals = Objects.equal(result, null);
-      if (_equals) {
-        String _name = clazz.getName();
-        String _plus = ("The context type " + _name);
-        String _plus_1 = (_plus + " wasn\'t registered.");
-        throw new AssertionError(_plus_1);
+    TemplateContextType[] _allContextTypes = TemplateManagerImpl.getAllContextTypes();
+    final Function1<TemplateContextType, Boolean> _function = new Function1<TemplateContextType, Boolean>() {
+      @Override
+      public Boolean apply(final TemplateContextType it) {
+        return Boolean.valueOf(clazz.isInstance(it));
       }
-      return result;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+    };
+    final TemplateContextType result = IterableExtensions.<TemplateContextType>findFirst(((Iterable<TemplateContextType>)Conversions.doWrapArray(_allContextTypes)), _function);
+    boolean _equals = Objects.equal(result, null);
+    if (_equals) {
+      String _name = clazz.getName();
+      String _plus = ("The context type " + _name);
+      String _plus_1 = (_plus + " wasn\'t registered.");
+      throw new AssertionError(_plus_1);
     }
+    return result;
   }
 }

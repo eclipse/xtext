@@ -92,13 +92,13 @@ public abstract class AbstractPsiAntlrParser extends Parser {
             if (targetException instanceof RecognitionException) {
               _matched=true;
               this.psiInput.appendAllTokens();
-              throw targetException;
+              throw ((RecognitionException)targetException);
             }
           }
           if (!_matched) {
             if (targetException instanceof ProcessCanceledException) {
               _matched=true;
-              throw targetException;
+              throw ((ProcessCanceledException)targetException);
             }
           }
           throw ite;

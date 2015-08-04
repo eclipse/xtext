@@ -19,14 +19,10 @@ import junit.framework.TestCase;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.junit.Ignore;
 
 /**
- * FIXME: remove ignore when https://youtrack.jetbrains.com/issue/IDEA-138971 is fixed
- * 
  * @author kosyakov - Initial contribution and API
  */
-@Ignore
 @SuppressWarnings("all")
 public class XtendDocumentationTest extends LightXtendTest {
   @Override
