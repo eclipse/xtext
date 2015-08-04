@@ -146,7 +146,8 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 						InputStream contents = javaClassFile.getContents();
 						try {
 							byte[] byteCode = installer.installTrace(ByteStreams.toByteArray(contents));
-							javaClassFile.setContents(new ByteArrayInputStream(byteCode), 0, null);
+							if (byteCode != null)
+								javaClassFile.setContents(new ByteArrayInputStream(byteCode), 0, null);
 						} finally {
 							contents.close();
 						}
