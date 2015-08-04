@@ -52,7 +52,7 @@
 				<cs:property key="targets" value="package.ius" />
 			</cs:actorProperties>
 			<cs:properties>
-				<cs:property key="content.ius" value="org.eclipse.xtext.sdk.feature.group" />
+				<cs:property key="content.ius" value="org.eclipse.xtext.sdk.feature.group,org.eclipse.xtend.sdk.feature.group" />
 				<cs:property key="target.platform.ius"
 					value="javax.inject,org.antlr.runtime,org.antlr.runtime.source,org.apache.log4j,org.apache.log4j.source,com.google.guava,com.google.inject,com.google.guava.source,com.google.inject.source" />
 				<cs:property key="package.name" value="tmf-xtext-SDK" />
@@ -118,7 +118,7 @@
 				<cs:property key="targets" value="package.ius" />
 			</cs:actorProperties>
 			<cs:properties>
-				<cs:property key="content.ius" value="org.eclipse.xtend.gwt.feature.group" />
+				<cs:property key="content.ius" value="org.eclipse.xtend.gwt.feature.group,org.eclipse.xtext.gwt.feature.group,org.eclipse.xtext.xbase.lib,org.eclipse.xtext.xbase.lib.source" />
 				<cs:property key="package.name" value="tmf-xtext-gwt" />
 			</cs:properties>
 			<cs:prerequisites>

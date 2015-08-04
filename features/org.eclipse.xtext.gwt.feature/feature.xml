@@ -2,8 +2,9 @@
 <feature
       id="org.eclipse.xtext.gwt"
       label="%featureName"
-     version="2.9.0.qualifier"
+      version="2.9.0.qualifier"
       provider-name="%providerName"
+      plugin="org.eclipse.xtext.xbase.lib.gwt"
       license-feature="org.eclipse.xtext.license"
       license-feature-version="2.6.0.qualifier">
 
@@ -20,18 +21,11 @@ v1.0 which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html Description here.
    </copyright>
 
-   <plugin
-         id="org.eclipse.xtext.xbase.lib"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-   <plugin
-         id="org.eclipse.xtext.xbase.lib.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+   <requires>
+      <import plugin="org.eclipse.xtext.xbase.lib" version="2.9.0" match="equivalent"/>
+      <import plugin="org.eclipse.xtext.xbase.lib.source" version="2.9.0" match="equivalent"/>
+   </requires>
+
    <plugin
          id="org.eclipse.xtext.xbase.lib.gwt"
          download-size="0"
