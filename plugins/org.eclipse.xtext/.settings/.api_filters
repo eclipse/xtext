@@ -24,20 +24,6 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="src-gen/org/eclipse/xtext/XtextStandaloneSetupGenerated.java" type="org.eclipse.xtext.XtextStandaloneSetupGenerated">
-        <filter id="1143996420">
-            <message_arguments>
-                <message_argument value="getFileExtensions()"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/common/TerminalsStandaloneSetupGenerated.java" type="org.eclipse.xtext.common.TerminalsStandaloneSetupGenerated">
-        <filter id="1143996420">
-            <message_arguments>
-                <message_argument value="getFileExtensions()"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="src-gen/org/eclipse/xtext/parser/antlr/XtextParser.java" type="org.eclipse.xtext.parser.antlr.XtextParser">
         <filter id="643842064">
             <message_arguments>

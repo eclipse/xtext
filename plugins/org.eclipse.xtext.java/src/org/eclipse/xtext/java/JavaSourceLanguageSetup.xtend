@@ -4,19 +4,14 @@ import com.google.inject.Guice
 import com.google.inject.Injector
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.ISetup
-import org.eclipse.xtext.ISetupExtension
 import org.eclipse.xtext.resource.IResourceServiceProvider
 
-class JavaSourceLanguageSetup implements ISetup, ISetupExtension {
+class JavaSourceLanguageSetup implements ISetup {
 	
 	override createInjectorAndDoEMFRegistration() {
 		val injector = createInjector();
 		register(injector, 'java');
 		return injector;
-	}
-	
-	override getFileExtensions() {
-		#['java']
 	}
 	
 	def Injector createInjector() {
