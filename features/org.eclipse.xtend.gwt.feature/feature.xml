@@ -4,7 +4,7 @@
       label="%featureName"
       version="2.9.0.qualifier"
       provider-name="%providerName"
-      plugin="org.eclipse.xtend.ide"
+      plugin="org.eclipse.xtend.lib.gwt"
       license-feature="org.eclipse.xtext.license"
       license-feature-version="2.6.0.qualifier">
 
@@ -21,24 +21,15 @@ v1.0 which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html Description here.
    </copyright>
 
-
    <includes
          id="org.eclipse.xtext.gwt"
          version="0.0.0"/>
 
-   <plugin
-         id="org.eclipse.xtend.lib"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.xtend.lib.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+   <requires>
+      <import plugin="org.eclipse.xtend.lib" version="2.9.0" match="equivalent"/>
+      <import plugin="org.eclipse.xtend.lib.macro.source" version="2.9.0" match="equivalent"/>
+      <import plugin="org.eclipse.xtend.lib.source" version="2.9.0" match="equivalent"/>
+   </requires>
 
    <plugin
          id="org.eclipse.xtend.lib.gwt"

@@ -45,7 +45,6 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          id="org.eclipse.xtend.gwt"
          version="0.0.0"/>
 
-  
    <plugin
          id="com.google.guava"
          download-size="0"
@@ -73,7 +72,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
- 
+
    <plugin
          id="com.google.inject.source"
          download-size="0"
@@ -87,7 +86,6 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
- 
 
    <plugin
          id="javax.inject.source"
@@ -95,7 +93,6 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-
 
    <plugin
          id="com.google.guava.source"
