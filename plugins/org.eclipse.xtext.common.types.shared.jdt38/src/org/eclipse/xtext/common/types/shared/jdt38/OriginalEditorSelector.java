@@ -26,6 +26,7 @@ import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.ide.IEditorAssociationOverride;
 import org.eclipse.ui.ide.ResourceUtil;
 import org.eclipse.xtext.common.types.ui.trace.ITraceForTypeRootProvider;
+import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.editor.XtextEditorInfo;
 import org.eclipse.xtext.ui.generator.trace.IEclipseTrace;
@@ -162,8 +163,9 @@ public class OriginalEditorSelector implements IEditorAssociationOverride {
 			Iterator<? extends ILocationInEclipseResource> sourceInformationIterator = traceToSource.getAllAssociatedLocations().iterator();
 			if (sourceInformationIterator.hasNext()) {
 				ILocationInEclipseResource sourceInformation = sourceInformationIterator.next();
-				if (traceToSource.getLocalURI() == null || sourceInformation.getPlatformResource() != null) {
-					URI uri = sourceInformation.getAbsoluteResourceURI().getURI();
+				AbsoluteURI absoluteURI = sourceInformation.getAbsoluteResourceURI();
+				if (absoluteURI != null) {
+					URI uri = absoluteURI.getURI();
 					return getXtextEditor(uri);
 				}
 			}
