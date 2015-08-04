@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
+Bundle-Localization: plugin
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtend.doc;singleton:=true
 Bundle-Version: 2.9.0.qualifier
-Bundle-Localization: plugin
 Bundle-Vendor: %providerName
+Require-Bundle: org.eclipse.help;bundle-version="3.5.0"
 Eclipse-LazyStart: true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.help;bundle-version="3.4.0"
