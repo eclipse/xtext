@@ -9,10 +9,13 @@ package org.eclipse.xtext.idea.trace
 
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.roots.ModuleRootManager
+import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.openapi.vfs.VirtualFile
 import java.io.ByteArrayInputStream
 import java.io.IOException
 import java.io.InputStream
+import java.io.Reader
+import java.io.StringReader
 import org.eclipse.xtext.generator.trace.AbsoluteURI
 import org.eclipse.xtext.generator.trace.SourceRelativeURI
 import org.eclipse.xtext.generator.trace.internal.AbstractTrace
@@ -24,8 +27,6 @@ import org.eclipse.xtext.util.ITextRegionWithLineInformation
 import org.eclipse.xtext.workspace.IProjectConfig
 
 import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
-import java.io.Reader
-import java.io.InputStreamReader
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -114,12 +115,12 @@ class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
 	
 	def Reader getContentsAsText(SourceRelativeURI uri, Module project) throws IOException {
 		val file = findVirtualFileInProject(uri, project).file
-		return new InputStreamReader(new ByteArrayInputStream(file.contentsToByteArray), file.charset)
+		return new StringReader(VfsUtil.loadText(file))
 	}
 	
 	override protected getLocalContentsAsText(IProjectConfig projectConfig) throws IOException {
 		val file = localVirtualFile.file
-		new InputStreamReader(new ByteArrayInputStream(file.contentsToByteArray), file.charset)
+		return new StringReader(VfsUtil.loadText(file))
 	}
 	
 	override ILocationInVirtualFile getBestAssociatedLocation(ITextRegion region, VirtualFileInProject associatedVirtualFile) {
