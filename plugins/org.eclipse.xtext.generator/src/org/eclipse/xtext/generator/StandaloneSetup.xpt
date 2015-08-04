@@ -38,7 +38,6 @@ package «setupImpl().toJavaPackage()»;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.ISetupExtension;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -50,12 +49,7 @@ import java.util.Arrays;
  * Generated from StandaloneSetup.xpt!
  */
 @SuppressWarnings("all")
-«classAnnotations()»public class «setupImpl().toSimpleName()» implements ISetup, ISetupExtension {
-
-	@Override
-	public List<String> getFileExtensions() {
-		return Arrays.asList(«FOREACH fileExtensions AS fileExtension SEPARATOR ","»"«fileExtension»"«ENDFOREACH»);
-	}
+«classAnnotations()»public class «setupImpl().toSimpleName()» implements ISetup {
 
 	@Override
 	public Injector createInjectorAndDoEMFRegistration() {
