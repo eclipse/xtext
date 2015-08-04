@@ -10,6 +10,7 @@ package org.eclipse.xtext.common.types.ui.trace;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
+import java.nio.charset.Charset;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
@@ -24,6 +25,7 @@ public abstract class AbstractTraceWithoutStorage extends AbstractEclipseTrace {
 
 	private IProject project;
 	private SourceRelativeURI localURI;
+	private Charset encoding;
 
 	@Override
 	public IProject getLocalProject() {
@@ -32,6 +34,14 @@ public abstract class AbstractTraceWithoutStorage extends AbstractEclipseTrace {
 
 	protected SourceRelativeURI getLocalSourceRelativeURI() {
 		return localURI;
+	}
+	
+	protected void setEncoding(Charset encoding) {
+		this.encoding = encoding;
+	}
+
+	protected Charset getEncoding() {
+		return encoding;
 	}
 
 	@Override

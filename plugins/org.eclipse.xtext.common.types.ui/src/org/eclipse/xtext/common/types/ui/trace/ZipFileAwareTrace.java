@@ -26,8 +26,6 @@ import org.eclipse.jdt.internal.core.JavaModelManager;
 import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 
-import com.google.common.base.Charsets;
-
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
@@ -39,12 +37,14 @@ public class ZipFileAwareTrace extends AbstractTraceWithoutStorage {
 	protected void setZipFilePath(IPath zipFilePath) {
 		this.zipFilePath = zipFilePath;
 	}
-	
+
 	@Override
 	protected AbsoluteURI resolvePath(SourceRelativeURI path) {
 		IResource member = getWorkspace().getRoot().findMember(zipFilePath);
-		if (member != null)
-			return new AbsoluteURI(URI.createURI("archive:platform:/resource" + member.getFullPath().toString() + "!/" + path));
+		if (member != null) {
+			String uri = "archive:platform:/resource" + member.getFullPath().toString() + "!/" + path;
+			return new AbsoluteURI(URI.createURI(uri));
+		}
 		return new AbsoluteURI(URI.createURI("archive:file:" + zipFilePath.toString() + "!/" + path));
 	}
 
@@ -71,12 +71,12 @@ public class ZipFileAwareTrace extends AbstractTraceWithoutStorage {
 		}
 		return null;
 	}
-	
+
 	@Override
 	protected Reader getContentsAsText(SourceRelativeURI uri, IProject project) {
 		InputStream contents = getContents(uri, project);
 		if (contents != null)
-			return new InputStreamReader(contents, Charsets.UTF_8);
+			return new InputStreamReader(contents, getEncoding());
 		return null;
 	}
 
