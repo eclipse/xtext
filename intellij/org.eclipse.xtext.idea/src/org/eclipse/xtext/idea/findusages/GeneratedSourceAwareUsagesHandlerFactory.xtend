@@ -50,7 +50,7 @@ class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerFactory 
 		if (element instanceof PsiNameIdentifierOwner) {
 			return getOriginalElements(element.nameIdentifier)
 		}
-		val result = traceProvider.getOriginalElements(element).map[PsiTreeUtil.getParentOfType(it, PsiNamedElement)].toSet.toList
+		val result = traceProvider.getOriginalElements(element).map[PsiTreeUtil.getParentOfType(it, PsiNamedElement)].filterNull.toSet.toList
 		return result;
 	}
 	
@@ -58,7 +58,8 @@ class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerFactory 
 		if (element instanceof PsiNameIdentifierOwner) {
 			return getGeneratedElements(element.nameIdentifier)
 		}
-		val result = traceProvider.getGeneratedElements(element).map[PsiTreeUtil.getParentOfType(it, PsiNamedElement)].toSet.toList
+		//TODO why getParentOfType here?
+		val result = traceProvider.getGeneratedElements(element).map[PsiTreeUtil.getParentOfType(it, PsiNamedElement)].filterNull.toSet.toList
 		return result
 	}
 	

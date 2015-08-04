@@ -63,8 +63,12 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 	@Inject Provider<VirtualFileBasedTrace> traceProvider
 	
 	override getGeneratedElements(PsiElement element) {
+		val containgFile = element.containingFile
+		if (containgFile === null) {
+			return emptyList
+		}
 		val vFile = tryHardToFindVirtualFile(element.containingFile)
-		if (vFile == null) {
+		if (vFile === null) {
 			return emptyList
 		}
 		val fileInProject = new VirtualFileInProject(vFile, element.project)

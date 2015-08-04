@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.trace;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.intellij.openapi.module.Module;
@@ -105,10 +104,13 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
   
   @Override
   public List<? extends PsiElement> getGeneratedElements(final PsiElement element) {
+    final PsiFile containgFile = element.getContainingFile();
+    if ((containgFile == null)) {
+      return CollectionLiterals.<PsiElement>emptyList();
+    }
     PsiFile _containingFile = element.getContainingFile();
     final VirtualFile vFile = this.tryHardToFindVirtualFile(_containingFile);
-    boolean _equals = Objects.equal(vFile, null);
-    if (_equals) {
+    if ((vFile == null)) {
       return CollectionLiterals.<PsiElement>emptyList();
     }
     Project _project = element.getProject();

@@ -97,7 +97,8 @@ public class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerF
       }
     };
     List<PsiNamedElement> _map = ListExtensions.map(_originalElements, _function);
-    Set<PsiNamedElement> _set = IterableExtensions.<PsiNamedElement>toSet(_map);
+    Iterable<PsiNamedElement> _filterNull = IterableExtensions.<PsiNamedElement>filterNull(_map);
+    Set<PsiNamedElement> _set = IterableExtensions.<PsiNamedElement>toSet(_filterNull);
     final List<PsiNamedElement> result = IterableExtensions.<PsiNamedElement>toList(_set);
     return result;
   }
@@ -115,7 +116,8 @@ public class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerF
       }
     };
     List<PsiNamedElement> _map = ListExtensions.map(_generatedElements, _function);
-    Set<PsiNamedElement> _set = IterableExtensions.<PsiNamedElement>toSet(_map);
+    Iterable<PsiNamedElement> _filterNull = IterableExtensions.<PsiNamedElement>filterNull(_map);
+    Set<PsiNamedElement> _set = IterableExtensions.<PsiNamedElement>toSet(_filterNull);
     final List<PsiNamedElement> result = IterableExtensions.<PsiNamedElement>toList(_set);
     return result;
   }
