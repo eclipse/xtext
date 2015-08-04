@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.nio.charset.Charset;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
@@ -24,16 +23,11 @@ import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 public class FolderAwareTrace extends AbstractTraceWithoutStorage {
 
 	private String folder;
-	private Charset encoding;
 
 	public void setRootFolder(String folder) {
 		if (!folder.endsWith("/"))
 			folder = folder + "/";
 		this.folder = folder;
-	}
-
-	public void setEncoding(Charset encoding) {
-		this.encoding = encoding;
 	}
 
 	protected File findFile(File container, String candiadate) {
@@ -67,12 +61,6 @@ public class FolderAwareTrace extends AbstractTraceWithoutStorage {
 	@Override
 	protected Reader getContentsAsText(SourceRelativeURI uri, IProject project) throws IOException {
 		InputStream contents = getContents(uri, project);
-		return new InputStreamReader(contents, encoding);
+		return new InputStreamReader(contents, getEncoding());
 	}
-
-	@Override
-	protected Reader getLocalContentsAsText(IProject project) throws IOException {
-		return null;
-	}
-
 }
