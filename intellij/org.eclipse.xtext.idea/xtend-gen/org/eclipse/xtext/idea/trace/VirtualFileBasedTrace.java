@@ -11,13 +11,13 @@ import com.google.common.base.Objects;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Reader;
-import java.nio.charset.Charset;
+import java.io.StringReader;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.OutputConfiguration;
@@ -159,23 +159,15 @@ public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
   public Reader getContentsAsText(final SourceRelativeURI uri, final Module project) throws IOException {
     VirtualFileInProject _findVirtualFileInProject = this.findVirtualFileInProject(uri, project);
     final VirtualFile file = _findVirtualFileInProject.getFile();
-    byte[] _contentsToByteArray = file.contentsToByteArray();
-    ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_contentsToByteArray);
-    Charset _charset = file.getCharset();
-    return new InputStreamReader(_byteArrayInputStream, _charset);
+    String _loadText = VfsUtil.loadText(file);
+    return new StringReader(_loadText);
   }
   
   @Override
   protected Reader getLocalContentsAsText(final IProjectConfig projectConfig) throws IOException {
-    InputStreamReader _xblockexpression = null;
-    {
-      final VirtualFile file = this.localVirtualFile.getFile();
-      byte[] _contentsToByteArray = file.contentsToByteArray();
-      ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_contentsToByteArray);
-      Charset _charset = file.getCharset();
-      _xblockexpression = new InputStreamReader(_byteArrayInputStream, _charset);
-    }
-    return _xblockexpression;
+    final VirtualFile file = this.localVirtualFile.getFile();
+    String _loadText = VfsUtil.loadText(file);
+    return new StringReader(_loadText);
   }
   
   @Override
