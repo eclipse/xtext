@@ -11,7 +11,9 @@ import com.google.common.base.Objects;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.progress.ProgressIndicatorProvider;
+import com.intellij.openapi.project.IndexNotReadyException;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Computable;
 import com.intellij.psi.JavaPsiFacade;
@@ -250,26 +252,38 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
     final Computable<IClassMirror> _function = new Computable<IClassMirror>() {
       @Override
       public IClassMirror compute() {
-        PsiClassMirror _xblockexpression = null;
-        {
-          Project _project = StubJvmTypeProvider.this.module.getProject();
-          JavaPsiFacade _instance = JavaPsiFacade.getInstance(_project);
-          final PsiClass psiClass = _instance.findClass(name, StubJvmTypeProvider.this.searchScope);
-          boolean _or = false;
-          boolean _equals = Objects.equal(psiClass, null);
-          if (_equals) {
-            _or = true;
+        PsiClassMirror _xtrycatchfinallyexpression = null;
+        try {
+          PsiClassMirror _xblockexpression = null;
+          {
+            Project _project = StubJvmTypeProvider.this.module.getProject();
+            JavaPsiFacade _instance = JavaPsiFacade.getInstance(_project);
+            final PsiClass psiClass = _instance.findClass(name, StubJvmTypeProvider.this.searchScope);
+            boolean _or = false;
+            boolean _equals = Objects.equal(psiClass, null);
+            if (_equals) {
+              _or = true;
+            } else {
+              PsiClass _containingClass = psiClass.getContainingClass();
+              boolean _notEquals = (!Objects.equal(_containingClass, null));
+              _or = _notEquals;
+            }
+            if (_or) {
+              return null;
+            }
+            _xblockexpression = new PsiClassMirror(psiClass, StubJvmTypeProvider.this.psiClassFactory);
+          }
+          _xtrycatchfinallyexpression = _xblockexpression;
+        } catch (final Throwable _t) {
+          if (_t instanceof IndexNotReadyException) {
+            final IndexNotReadyException e = (IndexNotReadyException)_t;
+            ProcessCanceledException _processCanceledException = new ProcessCanceledException();
+            throw new OperationCanceledError(_processCanceledException);
           } else {
-            PsiClass _containingClass = psiClass.getContainingClass();
-            boolean _notEquals = (!Objects.equal(_containingClass, null));
-            _or = _notEquals;
+            throw Exceptions.sneakyThrow(_t);
           }
-          if (_or) {
-            return null;
-          }
-          _xblockexpression = new PsiClassMirror(psiClass, StubJvmTypeProvider.this.psiClassFactory);
         }
-        return _xblockexpression;
+        return _xtrycatchfinallyexpression;
       }
     };
     return _application.<IClassMirror>runReadAction(_function);

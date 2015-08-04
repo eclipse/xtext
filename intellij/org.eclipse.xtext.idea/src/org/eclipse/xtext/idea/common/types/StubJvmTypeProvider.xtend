@@ -30,6 +30,8 @@ import org.eclipse.xtext.util.Strings
 import com.intellij.openapi.application.ApplicationManager
 import org.eclipse.xtext.common.types.access.impl.IClassMirror
 import com.intellij.psi.JavaPsiFacade
+import com.intellij.openapi.project.IndexNotReadyException
+import com.intellij.openapi.progress.ProcessCanceledException
 
 class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 
@@ -143,11 +145,15 @@ class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 
 	protected override createMirrorForFQN(String name) {
 		ApplicationManager.application.<IClassMirror>runReadAction[
-			val psiClass = JavaPsiFacade.getInstance(module.project).findClass(name, searchScope)
-			if (psiClass == null || psiClass.containingClass != null) {
-				return null
+			try {
+				val psiClass = JavaPsiFacade.getInstance(module.project).findClass(name, searchScope)
+				if (psiClass == null || psiClass.containingClass != null) {
+					return null
+				}
+				new PsiClassMirror(psiClass, psiClassFactory)
+			} catch (IndexNotReadyException e) {
+				throw new OperationCanceledError(new ProcessCanceledException)
 			}
-			new PsiClassMirror(psiClass, psiClassFactory)
 		]
 	}
 

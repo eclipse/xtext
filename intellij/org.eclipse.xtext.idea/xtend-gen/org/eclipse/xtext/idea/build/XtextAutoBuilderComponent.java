@@ -31,7 +31,7 @@ import com.intellij.openapi.editor.event.EditorEventMulticaster;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
-import com.intellij.openapi.progress.ProcessCanceledException;
+import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.ModuleAdapter;
 import com.intellij.openapi.project.ModuleListener;
 import com.intellij.openapi.project.Project;
@@ -90,6 +90,7 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -147,6 +148,9 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   
   @Inject
   private Provider<ChunkedResourceDescriptions> chunkedResourceDescriptionsProvider;
+  
+  @Inject
+  private OperationCanceledManager operationCanceledManager;
   
   private ChunkedResourceDescriptions chunkedResourceDescriptions;
   
@@ -642,15 +646,8 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     if (this.disposed) {
       return;
     }
-    boolean _and = false;
-    if (!(!XtextAutoBuilderComponent.TEST_MODE)) {
-      _and = false;
-    } else {
-      boolean _isInitialized = this.project.isInitialized();
-      boolean _not = (!_isInitialized);
-      _and = _not;
-    }
-    if (_and) {
+    boolean _isReadyToBeBuilt = this.isReadyToBeBuilt();
+    if (_isReadyToBeBuilt) {
       XtextAutoBuilderComponent.LOG.info("Project not yet initialized, wait some more");
       final Runnable _function = new Runnable() {
         @Override
@@ -664,6 +661,27 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
       this.queue.drainTo(allEvents);
       this.internalBuild(allEvents);
     }
+  }
+  
+  private boolean isReadyToBeBuilt() {
+    boolean _and = false;
+    boolean _and_1 = false;
+    if (!(!XtextAutoBuilderComponent.TEST_MODE)) {
+      _and_1 = false;
+    } else {
+      boolean _isInitialized = this.project.isInitialized();
+      boolean _not = (!_isInitialized);
+      _and_1 = _not;
+    }
+    if (!_and_1) {
+      _and = false;
+    } else {
+      DumbService _instance = DumbService.getInstance(this.project);
+      boolean _isDumb = _instance.isDumb();
+      boolean _not_1 = (!_isDumb);
+      _and = _not_1;
+    }
+    return _and;
   }
   
   protected void internalBuild(final List<BuildEvent> allEvents) {
@@ -809,9 +827,18 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
         }
       }
     } catch (final Throwable _t) {
-      if (_t instanceof ProcessCanceledException) {
-        final ProcessCanceledException exc = (ProcessCanceledException)_t;
-        this.queue.addAll(unProcessedEvents);
+      if (_t instanceof Throwable) {
+        final Throwable exc = (Throwable)_t;
+        boolean _isOperationCanceledException = this.operationCanceledManager.isOperationCanceledException(exc);
+        if (_isOperationCanceledException) {
+          boolean _isInfoEnabled = XtextAutoBuilderComponent.LOG.isInfoEnabled();
+          if (_isInfoEnabled) {
+            XtextAutoBuilderComponent.LOG.info("Build canceled.");
+          }
+          this.queue.addAll(unProcessedEvents);
+        } else {
+          XtextAutoBuilderComponent.LOG.error("Error during auto build.", exc);
+        }
       } else {
         throw Exceptions.sneakyThrow(_t);
       }

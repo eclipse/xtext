@@ -24,7 +24,7 @@ import com.intellij.openapi.editor.event.DocumentEvent
 import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.module.ModuleManager
-import com.intellij.openapi.progress.ProcessCanceledException
+import com.intellij.openapi.project.DumbService
 import com.intellij.openapi.project.ModuleAdapter
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.roots.ModuleRootAdapter
@@ -67,6 +67,7 @@ import org.eclipse.xtext.resource.IResourceDescription.Delta
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
+import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Log
 
@@ -100,6 +101,8 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	@Inject IQualifiedNameConverter qualifiedNameConverter
 	
 	@Inject Provider<ChunkedResourceDescriptions> chunkedResourceDescriptionsProvider
+	
+	@Inject OperationCanceledManager operationCanceledManager
 	
 	ChunkedResourceDescriptions chunkedResourceDescriptions
 	
@@ -374,7 +377,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		if (disposed) {
 			return
 		}
-		if (!TEST_MODE && !project.isInitialized) {
+		if (isReadyToBeBuilt) {
 			LOG.info("Project not yet initialized, wait some more")
 			alarm.addRequest([build], 500)
 		} else {
@@ -382,6 +385,10 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 			queue.drainTo(allEvents)
 			internalBuild(allEvents)
 		}
+	}
+	
+	private def boolean isReadyToBeBuilt() {
+		return !TEST_MODE && !project.isInitialized && !DumbService.getInstance(project).isDumb
 	}
 	
 	protected def void internalBuild(List<BuildEvent> allEvents) {
@@ -445,8 +452,14 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 					unProcessedEvents -= events
 				}
 			}
-		} catch(ProcessCanceledException exc) {
-			queue.addAll(unProcessedEvents)
+		} catch(Throwable exc) {
+			if (operationCanceledManager.isOperationCanceledException(exc)) {
+				if (LOG.isInfoEnabled)
+					LOG.info("Build canceled.")
+				queue.addAll(unProcessedEvents)
+			} else {
+				LOG.error("Error during auto build.", exc)
+			}
 		} finally {
 			buildProgressReporter.clearProgress
 			cancelIndicators.remove(cancelIndicator)
