@@ -20,26 +20,16 @@ v1.0 which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html Description here.
    </copyright>
 
+   <includes
+         id="org.eclipse.xtext.xbase"
+         version="0.0.0"/>
+
    <requires>
       <import plugin="com.google.guava" version="10.0.1" match="greaterOrEqual"/>
       <import plugin="com.google.inject" version="3.0.0" match="greaterOrEqual"/>
       <import plugin="org.objectweb.asm" version="5.0.1" match="compatible"/>
       <import plugin="javax.inject" version="1.0.0" match="greaterOrEqual"/>
    </requires>
-
-   <plugin
-         id="org.eclipse.xtext.xbase.lib"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.xtext.xbase.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
 
    <plugin
          id="org.eclipse.xtext"
@@ -170,14 +160,14 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.xtext.xbase"
+         id="org.eclipse.xtend.lib"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.xtend.lib"
+         id="org.eclipse.xtext.ide"
          download-size="0"
          install-size="0"
          version="0.0.0"
