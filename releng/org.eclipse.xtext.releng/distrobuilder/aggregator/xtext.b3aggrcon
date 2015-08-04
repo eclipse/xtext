@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aggregator:Contribution xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2011/aggregator/1.1.0" label="Xtext and Friends">
-  <repositories location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones/">
+  <repositories location="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.8.1/">
     <features name="org.eclipse.emf.mwe.sdk.feature.group"/>
     <features name="org.eclipse.emf.mwe2.runtime.sdk.feature.group"/>
     <features name="org.eclipse.emf.mwe2.language.sdk.feature.group"/>
   </repositories>
-  <repositories location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/head/R201503090534/">
+  <repositories location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.8.4/">
     <features name="org.eclipse.xtext.sdk.feature.group" versionRange="2.8.0"/>
     <features name="org.eclipse.xtend.sdk.feature.group" versionRange="2.8.0"/>
     <features name="org.eclipse.xtend.gwt.feature.group" versionRange="2.8.0"/>

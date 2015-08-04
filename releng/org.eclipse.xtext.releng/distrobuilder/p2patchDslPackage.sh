@@ -83,9 +83,9 @@ function compress()
 {
 if [[ "$1" == *"$ZIPSUFFIX" ]]
 then
-zip -q -r "$1" "eclipse"
+zip -q -r "$1" "$2"
 else
-tar czf "$1" "eclipse"
+tar czf "$1" "$2"
 fi
 }
 
@@ -172,8 +172,16 @@ echo "uncompress $file to $DIR_TMP"
 uncompress "$file" "$DIR_TMP/"
 
 echo "Starting p2 director..."
+ECLIPSE_ROOT="eclipse"
+ECLIPSE_INSTALL_LOCATION="eclipse"
+if [[ "$file" == *"macosx-cocoa"* ]] # Other root for mars macosx
+then
+ECLIPSE_ROOT="Eclipse.app"
+ECLIPSE_INSTALL_LOCATION="Eclipse.app/Contents/Eclipse"
+fi
+
 $DIR_SOURCE_ECLIPSE/eclipse -nosplash -application org.eclipse.equinox.p2.director -consoleLog -repository $repository_urls \
--installIU $INSTALL_IUS -destination $DIR_TMP/eclipse -profile epp.package.dsl \
+-installIU $INSTALL_IUS -destination $DIR_TMP/$ECLIPSE_INSTALL_LOCATION -profile epp.package.dsl \
 -profileProperties org.eclipse.update.install.features=true
 if [[ $? == 0 ]]
 then
@@ -189,7 +197,7 @@ renamed=`echo $file` # was `echo $file | sed $SEDEXPRESSION`
 cd $DIR_TMP
 # we are in $DIR_TMP now
 echo "compressing in $renamed"
-compress $renamed
+compress $renamed $ECLIPSE_ROOT
 echo "moving $renamed in $DIR_OUTPUT"
 mv $renamed $DIR_OUTPUT
 echo "cleaning up tmp folder..."
