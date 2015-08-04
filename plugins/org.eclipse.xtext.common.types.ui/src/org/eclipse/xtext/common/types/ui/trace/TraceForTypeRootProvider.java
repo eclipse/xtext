@@ -15,6 +15,8 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IClassFile;
@@ -123,25 +125,31 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 	}
 	
 	protected Charset getSourceEncoding(final ITypeRoot derivedJavaType) {
-		IJavaElement current = derivedJavaType.getParent();
-		while (current != null) {
-			if (current instanceof IPackageFragmentRoot) {
-				IPackageFragmentRoot fragmentRoot = (IPackageFragmentRoot) current;
-				try {
-					// see org.eclipse.jdt.internal.core.ClasspathEntry.getSourceAttachmentEncoding()
-					IClasspathAttribute[] attributes = fragmentRoot.getResolvedClasspathEntry().getExtraAttributes();
-					for (int i = 0, length = attributes.length; i < length; i++) {
-						IClasspathAttribute attribute = attributes[i];
-						if (SOURCE_ATTACHMENT_ENCODING.equals(attribute.getName()))
-							return Charset.forName(attribute.getValue());
+		// this should be symmetric to org.eclipse.jdt.internal.core.SourceMapper.findSource(String) 
+		try {
+			IJavaElement current = derivedJavaType.getParent();
+			while (current != null) {
+				if (current instanceof IPackageFragmentRoot) {
+					IPackageFragmentRoot root = (IPackageFragmentRoot) current;
+					try {
+						// see org.eclipse.jdt.internal.core.ClasspathEntry.getSourceAttachmentEncoding()
+						IClasspathAttribute[] attributes = root.getResolvedClasspathEntry().getExtraAttributes();
+						for (int i = 0, length = attributes.length; i < length; i++) {
+							IClasspathAttribute attribute = attributes[i];
+							if (SOURCE_ATTACHMENT_ENCODING.equals(attribute.getName()))
+								return Charset.forName(attribute.getValue());
+						}
+					} catch (JavaModelException e) {
 					}
-				} catch (JavaModelException e) {
+					return Charset.forName(ResourcesPlugin.getWorkspace().getRoot().getDefaultCharset());
 				}
-				return Charsets.UTF_8;
+				current = current.getParent();
 			}
-			current = current.getParent();
+			return Charset.forName(ResourcesPlugin.getWorkspace().getRoot().getDefaultCharset());
+		} catch (CoreException e) {
+			log.error("Error determining encoding for source file for " + derivedJavaType.getElementName(), e);
+			return Charsets.UTF_8;
 		}
-		return Charsets.UTF_8;
 	}
 
 	protected boolean isZipFile(IPath path) {
@@ -223,6 +231,7 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 			zipFileAwareTrace.setProject(project);
 			zipFileAwareTrace.setZipFilePath(sourcePath);
 			zipFileAwareTrace.setLocalURI(localURI);
+			zipFileAwareTrace.setEncoding(getSourceEncoding(classFile));
 			zipFileAwareTrace.setTraceRegionProvider(new TraceRegionProvider(zipFileAwareTrace));
 			return zipFileAwareTrace;
 		} else {
@@ -230,6 +239,7 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 			folderAwareTrace.setProject(project);
 			folderAwareTrace.setRootFolder(sourcePath.toString());
 			folderAwareTrace.setLocalURI(localURI);
+			folderAwareTrace.setEncoding(getSourceEncoding(classFile));
 			folderAwareTrace.setTraceRegionProvider(new TraceRegionProvider(folderAwareTrace));
 			return folderAwareTrace;
 		}
