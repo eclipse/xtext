@@ -407,7 +407,7 @@ public abstract class AbstractTraceRegionToString {
       _xifexpression_1 = (("]" + closes) + "]");
     }
     final String s2 = _xifexpression_1;
-    return (s1 + s2);
+    return (s2 + s1);
   }
   
   protected List<String> render(final AbstractTraceRegionToString.File file, final int width) {
