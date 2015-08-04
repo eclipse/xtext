@@ -50,5 +50,12 @@
 		<facetType implementation="org.eclipse.xtext.testlanguages.indent.idea.facet.IndentationAwareTestLanguageFacetType"/>
 		<colorSettingsPage implementation="org.eclipse.xtext.testlanguages.indent.idea.highlighting.IndentationAwareTestLanguageColorSettingsPage"/>
 		<highlightVisitor implementation="org.eclipse.xtext.testlanguages.indent.idea.highlighting.IndentationAwareTestLanguageSemanticHighlightVisitor"/>
+
+		<lang.formatter language="org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage"
+								factoryClass="org.eclipse.xtext.testlanguages.indent.idea.IndentationAwareTestLanguageExtensionFactory"
+								implementationClass="com.intellij.formatting.FormattingModelBuilder"/>
+		<lang.commenter language="org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage"
+								factoryClass="org.eclipse.xtext.testlanguages.indent.idea.IndentationAwareTestLanguageExtensionFactory"
+								implementationClass="com.intellij.lang.CodeDocumentationAwareCommenter"/>
 	</extensions>
 </idea-plugin>

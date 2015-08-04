@@ -6,7 +6,6 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -116,9 +115,6 @@ public class Bug288734TestLanguagePackageImpl extends EPackageImpl implements Bu
     Bug288734TestLanguagePackageImpl theBug288734TestLanguagePackage = (Bug288734TestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug288734TestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug288734TestLanguagePackageImpl());
 
     isInited = true;
-
-    // Initialize simple dependencies
-    EcorePackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theBug288734TestLanguagePackage.createPackageContents();
@@ -306,9 +302,6 @@ public class Bug288734TestLanguagePackageImpl extends EPackageImpl implements Bu
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
-    // Obtain other dependent packages
-    EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
-
     // Create type parameters
 
     // Set bounds for type parameters
@@ -324,7 +317,7 @@ public class Bug288734TestLanguagePackageImpl extends EPackageImpl implements Bu
 
     initEClass(tConstantEClass, TConstant.class, "TConstant", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getTConstant_Annotations(), this.getTAnnotation(), null, "annotations", null, 0, -1, TConstant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getTConstant_Name(), theEcorePackage.getEString(), "name", null, 0, 1, TConstant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTConstant_Name(), ecorePackage.getEString(), "name", null, 0, 1, TConstant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(tStringConstantEClass, TStringConstant.class, "TStringConstant", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -333,7 +326,7 @@ public class Bug288734TestLanguagePackageImpl extends EPackageImpl implements Bu
     initEClass(tBooleanConstantEClass, TBooleanConstant.class, "TBooleanConstant", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(tAnnotationEClass, TAnnotation.class, "TAnnotation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getTAnnotation_Description(), theEcorePackage.getEString(), "description", null, 0, 1, TAnnotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTAnnotation_Description(), ecorePackage.getEString(), "description", null, 0, 1, TAnnotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

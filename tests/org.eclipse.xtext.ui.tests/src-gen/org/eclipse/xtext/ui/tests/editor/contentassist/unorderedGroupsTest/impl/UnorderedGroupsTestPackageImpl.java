@@ -6,7 +6,6 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -148,9 +147,6 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
     UnorderedGroupsTestPackageImpl theUnorderedGroupsTestPackage = (UnorderedGroupsTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof UnorderedGroupsTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new UnorderedGroupsTestPackageImpl());
 
     isInited = true;
-
-    // Initialize simple dependencies
-    EcorePackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theUnorderedGroupsTestPackage.createPackageContents();
@@ -804,9 +800,6 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
-    // Obtain other dependent packages
-    EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
-
     // Create type parameters
 
     // Set bounds for type parameters
@@ -825,54 +818,54 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
     initEReference(getModel_Model(), this.getBug304681Model(), null, "model", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(simpleModelEClass, SimpleModel.class, "SimpleModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getSimpleModel_Visibility(), theEcorePackage.getEString(), "visibility", null, 0, 1, SimpleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getSimpleModel_Static(), theEcorePackage.getEBoolean(), "static", null, 0, 1, SimpleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getSimpleModel_Synchronized(), theEcorePackage.getEBoolean(), "synchronized", null, 0, 1, SimpleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getSimpleModel_Abstract(), theEcorePackage.getEBoolean(), "abstract", null, 0, 1, SimpleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getSimpleModel_Final(), theEcorePackage.getEBoolean(), "final", null, 0, 1, SimpleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getSimpleModel_Name(), theEcorePackage.getEString(), "name", null, 0, 1, SimpleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getSimpleModel_Visibility(), ecorePackage.getEString(), "visibility", null, 0, 1, SimpleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getSimpleModel_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, SimpleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getSimpleModel_Synchronized(), ecorePackage.getEBoolean(), "synchronized", null, 0, 1, SimpleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getSimpleModel_Abstract(), ecorePackage.getEBoolean(), "abstract", null, 0, 1, SimpleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getSimpleModel_Final(), ecorePackage.getEBoolean(), "final", null, 0, 1, SimpleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getSimpleModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, SimpleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(mandatoryModelEClass, MandatoryModel.class, "MandatoryModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getMandatoryModel_Visibility(), theEcorePackage.getEString(), "visibility", null, 0, 1, MandatoryModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getMandatoryModel_Static(), theEcorePackage.getEBoolean(), "static", null, 0, 1, MandatoryModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getMandatoryModel_Synchronized(), theEcorePackage.getEBoolean(), "synchronized", null, 0, 1, MandatoryModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getMandatoryModel_Abstract(), theEcorePackage.getEBoolean(), "abstract", null, 0, 1, MandatoryModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getMandatoryModel_Final(), theEcorePackage.getEBoolean(), "final", null, 0, 1, MandatoryModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getMandatoryModel_Name(), theEcorePackage.getEString(), "name", null, 0, 1, MandatoryModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getMandatoryModel_Visibility(), ecorePackage.getEString(), "visibility", null, 0, 1, MandatoryModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getMandatoryModel_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, MandatoryModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getMandatoryModel_Synchronized(), ecorePackage.getEBoolean(), "synchronized", null, 0, 1, MandatoryModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getMandatoryModel_Abstract(), ecorePackage.getEBoolean(), "abstract", null, 0, 1, MandatoryModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getMandatoryModel_Final(), ecorePackage.getEBoolean(), "final", null, 0, 1, MandatoryModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getMandatoryModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, MandatoryModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(loopedModelEClass, LoopedModel.class, "LoopedModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getLoopedModel_Visibility(), theEcorePackage.getEString(), "visibility", null, 0, -1, LoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getLoopedModel_Static(), theEcorePackage.getEString(), "static", null, 0, -1, LoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getLoopedModel_Synchronized(), theEcorePackage.getEString(), "synchronized", null, 0, -1, LoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getLoopedModel_Abstract(), theEcorePackage.getEString(), "abstract", null, 0, -1, LoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getLoopedModel_Final(), theEcorePackage.getEString(), "final", null, 0, -1, LoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getLoopedModel_Name(), theEcorePackage.getEString(), "name", null, 0, 1, LoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLoopedModel_Visibility(), ecorePackage.getEString(), "visibility", null, 0, -1, LoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLoopedModel_Static(), ecorePackage.getEString(), "static", null, 0, -1, LoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLoopedModel_Synchronized(), ecorePackage.getEString(), "synchronized", null, 0, -1, LoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLoopedModel_Abstract(), ecorePackage.getEString(), "abstract", null, 0, -1, LoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLoopedModel_Final(), ecorePackage.getEString(), "final", null, 0, -1, LoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLoopedModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, LoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(groupLoopedModelEClass, GroupLoopedModel.class, "GroupLoopedModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getGroupLoopedModel_Visibility(), theEcorePackage.getEString(), "visibility", null, 0, -1, GroupLoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getGroupLoopedModel_Static(), theEcorePackage.getEString(), "static", null, 0, -1, GroupLoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getGroupLoopedModel_Synchronized(), theEcorePackage.getEString(), "synchronized", null, 0, -1, GroupLoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getGroupLoopedModel_Abstract(), theEcorePackage.getEString(), "abstract", null, 0, -1, GroupLoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getGroupLoopedModel_Final(), theEcorePackage.getEString(), "final", null, 0, -1, GroupLoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getGroupLoopedModel_Name(), theEcorePackage.getEString(), "name", null, 0, 1, GroupLoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getGroupLoopedModel_Visibility(), ecorePackage.getEString(), "visibility", null, 0, -1, GroupLoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getGroupLoopedModel_Static(), ecorePackage.getEString(), "static", null, 0, -1, GroupLoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getGroupLoopedModel_Synchronized(), ecorePackage.getEString(), "synchronized", null, 0, -1, GroupLoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getGroupLoopedModel_Abstract(), ecorePackage.getEString(), "abstract", null, 0, -1, GroupLoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getGroupLoopedModel_Final(), ecorePackage.getEString(), "final", null, 0, -1, GroupLoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getGroupLoopedModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, GroupLoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(loopedAlternativeModelEClass, LoopedAlternativeModel.class, "LoopedAlternativeModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getLoopedAlternativeModel_Visibility(), theEcorePackage.getEString(), "visibility", null, 0, -1, LoopedAlternativeModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getLoopedAlternativeModel_Static(), theEcorePackage.getEString(), "static", null, 0, -1, LoopedAlternativeModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getLoopedAlternativeModel_Synchronized(), theEcorePackage.getEString(), "synchronized", null, 0, -1, LoopedAlternativeModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getLoopedAlternativeModel_Abstract(), theEcorePackage.getEString(), "abstract", null, 0, -1, LoopedAlternativeModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getLoopedAlternativeModel_Final(), theEcorePackage.getEString(), "final", null, 0, -1, LoopedAlternativeModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getLoopedAlternativeModel_Name(), theEcorePackage.getEString(), "name", null, 0, 1, LoopedAlternativeModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLoopedAlternativeModel_Visibility(), ecorePackage.getEString(), "visibility", null, 0, -1, LoopedAlternativeModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLoopedAlternativeModel_Static(), ecorePackage.getEString(), "static", null, 0, -1, LoopedAlternativeModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLoopedAlternativeModel_Synchronized(), ecorePackage.getEString(), "synchronized", null, 0, -1, LoopedAlternativeModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLoopedAlternativeModel_Abstract(), ecorePackage.getEString(), "abstract", null, 0, -1, LoopedAlternativeModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLoopedAlternativeModel_Final(), ecorePackage.getEString(), "final", null, 0, -1, LoopedAlternativeModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLoopedAlternativeModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, LoopedAlternativeModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(bug304681ModelEClass, Bug304681Model.class, "Bug304681Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getBug304681Model_ShortDescription(), theEcorePackage.getEString(), "shortDescription", null, 0, 1, Bug304681Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getBug304681Model_LongDescription(), theEcorePackage.getEString(), "longDescription", null, 0, 1, Bug304681Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getBug304681Model_Uid(), theEcorePackage.getEString(), "uid", null, 0, 1, Bug304681Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getBug304681Model_Flag(), theEcorePackage.getEBoolean(), "flag", null, 0, 1, Bug304681Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getBug304681Model_ShortDescription(), ecorePackage.getEString(), "shortDescription", null, 0, 1, Bug304681Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getBug304681Model_LongDescription(), ecorePackage.getEString(), "longDescription", null, 0, 1, Bug304681Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getBug304681Model_Uid(), ecorePackage.getEString(), "uid", null, 0, 1, Bug304681Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getBug304681Model_Flag(), ecorePackage.getEBoolean(), "flag", null, 0, 1, Bug304681Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getBug304681Model_Features(), this.getBug304681Feature(), null, "features", null, 0, -1, Bug304681Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(bug304681FeatureEClass, Bug304681Feature.class, "Bug304681Feature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getBug304681Feature_Name(), theEcorePackage.getEString(), "name", null, 0, 1, Bug304681Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getBug304681Feature_Name(), ecorePackage.getEString(), "name", null, 0, 1, Bug304681Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(bug304681AttributeEClass, Bug304681Attribute.class, "Bug304681Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -6,7 +6,6 @@ package org.eclipse.xtext.ui.tests.refactoring;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.ISetupExtension;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -18,12 +17,7 @@ import java.util.Arrays;
  * Generated from StandaloneSetup.xpt!
  */
 @SuppressWarnings("all")
-public class RefactoringTestLanguageStandaloneSetupGenerated implements ISetup, ISetupExtension {
-
-	@Override
-	public List<String> getFileExtensions() {
-		return Arrays.asList("refactoringtestlanguage");
-	}
+public class RefactoringTestLanguageStandaloneSetupGenerated implements ISetup {
 
 	@Override
 	public Injector createInjectorAndDoEMFRegistration() {

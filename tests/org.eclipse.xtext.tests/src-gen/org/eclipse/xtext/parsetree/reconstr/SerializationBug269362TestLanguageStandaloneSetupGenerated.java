@@ -6,7 +6,6 @@ package org.eclipse.xtext.parsetree.reconstr;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.ISetupExtension;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -18,12 +17,7 @@ import java.util.Arrays;
  * Generated from StandaloneSetup.xpt!
  */
 @SuppressWarnings("all")
-public class SerializationBug269362TestLanguageStandaloneSetupGenerated implements ISetup, ISetupExtension {
-
-	@Override
-	public List<String> getFileExtensions() {
-		return Arrays.asList("serializationbug269362testlanguage");
-	}
+public class SerializationBug269362TestLanguageStandaloneSetupGenerated implements ISetup {
 
 	@Override
 	public Injector createInjectorAndDoEMFRegistration() {

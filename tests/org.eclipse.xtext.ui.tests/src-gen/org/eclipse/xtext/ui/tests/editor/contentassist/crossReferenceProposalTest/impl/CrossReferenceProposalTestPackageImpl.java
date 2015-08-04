@@ -6,7 +6,6 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -83,9 +82,6 @@ public class CrossReferenceProposalTestPackageImpl extends EPackageImpl implemen
     CrossReferenceProposalTestPackageImpl theCrossReferenceProposalTestPackage = (CrossReferenceProposalTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof CrossReferenceProposalTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new CrossReferenceProposalTestPackageImpl());
 
     isInited = true;
-
-    // Initialize simple dependencies
-    EcorePackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theCrossReferenceProposalTestPackage.createPackageContents();
@@ -214,9 +210,6 @@ public class CrossReferenceProposalTestPackageImpl extends EPackageImpl implemen
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
-    // Obtain other dependent packages
-    EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
-
     // Create type parameters
 
     // Set bounds for type parameters
@@ -229,7 +222,7 @@ public class CrossReferenceProposalTestPackageImpl extends EPackageImpl implemen
 
     initEClass(classEClass, org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Class.class, "Class", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getClass_SuperClass(), this.getClass_(), null, "superClass", null, 0, 1, org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getClass_Name(), theEcorePackage.getEString(), "name", null, 0, 1, org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getClass_Name(), ecorePackage.getEString(), "name", null, 0, 1, org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

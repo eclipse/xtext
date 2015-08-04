@@ -6,7 +6,6 @@ package org.eclipse.xtext.parser.terminalrules;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.ISetupExtension;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -18,12 +17,7 @@ import java.util.Arrays;
  * Generated from StandaloneSetup.xpt!
  */
 @SuppressWarnings("all")
-public class XtextTerminalsTestLanguageStandaloneSetupGenerated implements ISetup, ISetupExtension {
-
-	@Override
-	public List<String> getFileExtensions() {
-		return Arrays.asList("xtextterminalstestlanguage");
-	}
+public class XtextTerminalsTestLanguageStandaloneSetupGenerated implements ISetup {
 
 	@Override
 	public Injector createInjectorAndDoEMFRegistration() {

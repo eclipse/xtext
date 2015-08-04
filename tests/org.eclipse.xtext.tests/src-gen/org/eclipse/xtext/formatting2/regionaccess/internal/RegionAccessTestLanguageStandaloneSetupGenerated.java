@@ -6,7 +6,6 @@ package org.eclipse.xtext.formatting2.regionaccess.internal;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.ISetupExtension;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -18,12 +17,7 @@ import java.util.Arrays;
  * Generated from StandaloneSetup.xpt!
  */
 @SuppressWarnings("all")
-public class RegionAccessTestLanguageStandaloneSetupGenerated implements ISetup, ISetupExtension {
-
-	@Override
-	public List<String> getFileExtensions() {
-		return Arrays.asList("regionaccesstestlanguage");
-	}
+public class RegionAccessTestLanguageStandaloneSetupGenerated implements ISetup {
 
 	@Override
 	public Injector createInjectorAndDoEMFRegistration() {

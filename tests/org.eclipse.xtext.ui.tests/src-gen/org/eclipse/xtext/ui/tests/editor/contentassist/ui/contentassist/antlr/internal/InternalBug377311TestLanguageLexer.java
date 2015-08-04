@@ -13,8 +13,8 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalBug377311TestLanguageLexer extends Lexer {
     public static final int RULE_ID=7;
-    public static final int RULE_STRING=4;
     public static final int RULE_NEWLINE=6;
+    public static final int RULE_STRING=4;
     public static final int T__12=12;
     public static final int RULE_ANY_OTHER=11;
     public static final int RULE_INT=8;
