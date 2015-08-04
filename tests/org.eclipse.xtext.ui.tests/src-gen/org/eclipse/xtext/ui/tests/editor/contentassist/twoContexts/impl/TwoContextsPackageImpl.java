@@ -6,7 +6,6 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -84,9 +83,6 @@ public class TwoContextsPackageImpl extends EPackageImpl implements TwoContextsP
     TwoContextsPackageImpl theTwoContextsPackage = (TwoContextsPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TwoContextsPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TwoContextsPackageImpl());
 
     isInited = true;
-
-    // Initialize simple dependencies
-    EcorePackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theTwoContextsPackage.createPackageContents();
@@ -215,9 +211,6 @@ public class TwoContextsPackageImpl extends EPackageImpl implements TwoContextsP
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
-    // Obtain other dependent packages
-    EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
-
     // Create type parameters
 
     // Set bounds for type parameters
@@ -229,7 +222,7 @@ public class TwoContextsPackageImpl extends EPackageImpl implements TwoContextsP
     initEReference(getMainModel_Elements(), this.getAnElement(), null, "elements", null, 0, -1, MainModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(anElementEClass, AnElement.class, "AnElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getAnElement_Name(), theEcorePackage.getEString(), "name", null, 0, 1, AnElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAnElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, AnElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAnElement_Referred(), this.getAnElement(), null, "referred", null, 0, 1, AnElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource

@@ -6,7 +6,6 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -84,9 +83,6 @@ public class Bug381381TestLanguagePackageImpl extends EPackageImpl implements Bu
     Bug381381TestLanguagePackageImpl theBug381381TestLanguagePackage = (Bug381381TestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug381381TestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug381381TestLanguagePackageImpl());
 
     isInited = true;
-
-    // Initialize simple dependencies
-    EcorePackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theBug381381TestLanguagePackage.createPackageContents();
@@ -226,9 +222,6 @@ public class Bug381381TestLanguagePackageImpl extends EPackageImpl implements Bu
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
-    // Obtain other dependent packages
-    EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
-
     // Create type parameters
 
     // Set bounds for type parameters
@@ -240,9 +233,9 @@ public class Bug381381TestLanguagePackageImpl extends EPackageImpl implements Bu
     initEReference(getModel_Stmt(), this.getCopyFieldNameToVariableStmt(), null, "stmt", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(copyFieldNameToVariableStmtEClass, CopyFieldNameToVariableStmt.class, "CopyFieldNameToVariableStmt", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getCopyFieldNameToVariableStmt_Line(), theEcorePackage.getEInt(), "line", null, 0, 1, CopyFieldNameToVariableStmt.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getCopyFieldNameToVariableStmt_Column(), theEcorePackage.getEInt(), "column", null, 0, 1, CopyFieldNameToVariableStmt.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getCopyFieldNameToVariableStmt_Name(), theEcorePackage.getEString(), "name", null, 0, 1, CopyFieldNameToVariableStmt.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getCopyFieldNameToVariableStmt_Line(), ecorePackage.getEInt(), "line", null, 0, 1, CopyFieldNameToVariableStmt.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getCopyFieldNameToVariableStmt_Column(), ecorePackage.getEInt(), "column", null, 0, 1, CopyFieldNameToVariableStmt.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getCopyFieldNameToVariableStmt_Name(), ecorePackage.getEString(), "name", null, 0, 1, CopyFieldNameToVariableStmt.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

@@ -31,7 +31,7 @@
 		<lang.namesValidator language="org.eclipse.xtext.Xtext"
 								factoryClass="org.eclipse.xtext.idea.XtextExtensionFactory"
 								implementationClass="com.intellij.lang.refactoring.NamesValidator"/>
-      	<lang.syntaxHighlighterFactory key="org.eclipse.xtext.Xtext" implementationClass="org.eclipse.xtext.idea.lang.XtextSyntaxHighlighterFactory" />
+      	<lang.syntaxHighlighterFactory key="org.eclipse.xtext.Xtext" implementationClass="org.eclipse.xtext.idea.highlighting.XtextSyntaxHighlighterFactory" />
 		<lang.braceMatcher language="org.eclipse.xtext.Xtext"
 								factoryClass="org.eclipse.xtext.idea.XtextExtensionFactory"
 								implementationClass="com.intellij.lang.PairedBraceMatcher"/>
@@ -47,5 +47,13 @@
       							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
 		<facetType implementation="org.eclipse.xtext.idea.facet.XtextFacetType"/>
 		<colorSettingsPage implementation="org.eclipse.xtext.idea.highlighting.XtextColorSettingsPage"/>
+		<highlightVisitor implementation="org.eclipse.xtext.idea.highlighting.XtextSemanticHighlightVisitor"/>
+
+		<lang.formatter language="org.eclipse.xtext.Xtext"
+								factoryClass="org.eclipse.xtext.idea.XtextExtensionFactory"
+								implementationClass="com.intellij.formatting.FormattingModelBuilder"/>
+		<lang.commenter language="org.eclipse.xtext.Xtext"
+								factoryClass="org.eclipse.xtext.idea.XtextExtensionFactory"
+								implementationClass="com.intellij.lang.CodeDocumentationAwareCommenter"/>
 	</extensions>
 </idea-plugin>

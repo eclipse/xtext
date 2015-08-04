@@ -24,8 +24,8 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalAntlrPa
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_WS", "RULE_NEWLINE", "RULE_ID", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_ANY_OTHER", "'child'"
     };
     public static final int RULE_ID=7;
-    public static final int RULE_STRING=4;
     public static final int RULE_NEWLINE=6;
+    public static final int RULE_STRING=4;
     public static final int T__12=12;
     public static final int RULE_ANY_OTHER=11;
     public static final int RULE_INT=8;

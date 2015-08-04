@@ -2,28 +2,19 @@ package org.eclipse.xtext.java;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.ISetupExtension;
 import org.eclipse.xtext.java.JavaSourceLanguageRuntimeModule;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 
 @SuppressWarnings("all")
-public class JavaSourceLanguageSetup implements ISetup, ISetupExtension {
+public class JavaSourceLanguageSetup implements ISetup {
   @Override
   public Injector createInjectorAndDoEMFRegistration() {
     final Injector injector = this.createInjector();
     this.register(injector, "java");
     return injector;
-  }
-  
-  @Override
-  public List<String> getFileExtensions() {
-    return Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("java"));
   }
   
   public Injector createInjector() {

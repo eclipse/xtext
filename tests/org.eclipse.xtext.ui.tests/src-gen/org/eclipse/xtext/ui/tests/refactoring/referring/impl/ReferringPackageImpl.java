@@ -5,7 +5,6 @@ package org.eclipse.xtext.ui.tests.refactoring.referring.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -83,9 +82,6 @@ public class ReferringPackageImpl extends EPackageImpl implements ReferringPacka
     ReferringPackageImpl theReferringPackage = (ReferringPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ReferringPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ReferringPackageImpl());
 
     isInited = true;
-
-    // Initialize simple dependencies
-    EcorePackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theReferringPackage.createPackageContents();
@@ -203,9 +199,6 @@ public class ReferringPackageImpl extends EPackageImpl implements ReferringPacka
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
-    // Obtain other dependent packages
-    EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
-
     // Create type parameters
 
     // Set bounds for type parameters
@@ -217,7 +210,7 @@ public class ReferringPackageImpl extends EPackageImpl implements ReferringPacka
     initEReference(getMain_Referenced(), this.getReference(), null, "referenced", null, 0, -1, Main.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(referenceEClass, Reference.class, "Reference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getReference_Referenced(), theEcorePackage.getEObject(), null, "referenced", null, 0, 1, Reference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getReference_Referenced(), ecorePackage.getEObject(), null, "referenced", null, 0, 1, Reference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

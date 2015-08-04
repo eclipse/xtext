@@ -6,7 +6,6 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -124,9 +123,6 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
     ContentAssistContextTestPackageImpl theContentAssistContextTestPackage = (ContentAssistContextTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ContentAssistContextTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ContentAssistContextTestPackageImpl());
 
     isInited = true;
-
-    // Initialize simple dependencies
-    EcorePackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theContentAssistContextTestPackage.createPackageContents();
@@ -392,9 +388,6 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
-    // Obtain other dependent packages
-    EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
-
     // Create type parameters
 
     // Set bounds for type parameters
@@ -415,16 +408,16 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
     initEReference(getSecondLevelB_ThirdLevelB2(), this.getThirdLevelB2(), null, "thirdLevelB2", null, 0, -1, SecondLevelB.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(thirdLevelA1EClass, ThirdLevelA1.class, "ThirdLevelA1", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getThirdLevelA1_Name(), theEcorePackage.getEString(), "name", null, 0, 1, ThirdLevelA1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getThirdLevelA1_Name(), ecorePackage.getEString(), "name", null, 0, 1, ThirdLevelA1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(thirdLevelA2EClass, ThirdLevelA2.class, "ThirdLevelA2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getThirdLevelA2_Name(), theEcorePackage.getEString(), "name", null, 0, 1, ThirdLevelA2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getThirdLevelA2_Name(), ecorePackage.getEString(), "name", null, 0, 1, ThirdLevelA2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(thirdLevelB1EClass, ThirdLevelB1.class, "ThirdLevelB1", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getThirdLevelB1_Name(), theEcorePackage.getEString(), "name", null, 0, 1, ThirdLevelB1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getThirdLevelB1_Name(), ecorePackage.getEString(), "name", null, 0, 1, ThirdLevelB1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(thirdLevelB2EClass, ThirdLevelB2.class, "ThirdLevelB2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getThirdLevelB2_Name(), theEcorePackage.getEString(), "name", null, 0, 1, ThirdLevelB2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getThirdLevelB2_Name(), ecorePackage.getEString(), "name", null, 0, 1, ThirdLevelB2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

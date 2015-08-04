@@ -17,7 +17,6 @@ import com.google.inject.Module;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.google.inject.name.Names;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +29,6 @@ import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.ISetupExtension;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.resource.impl.BinaryGrammarResourceFactoryImpl;
 import org.eclipse.xtext.service.SingletonBinding;
@@ -153,42 +151,8 @@ public class XtextGeneratorTemplates {
         _builder.append(_simpleName, "");
         _builder.append(" implements ");
         _builder.append(ISetup.class, "");
-        _builder.append(", ");
-        _builder.append(ISetupExtension.class, "");
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("@Override");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("public ");
-        _builder.append(List.class, "\t");
-        _builder.append("<String> getFileExtensions() {");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        _builder.append("return ");
-        _builder.append(Arrays.class, "\t\t");
-        _builder.append(".asList(");
-        {
-          List<String> _fileExtensions = langConfig.getFileExtensions();
-          boolean _hasElements = false;
-          for(final String fileExtension : _fileExtensions) {
-            if (!_hasElements) {
-              _hasElements = true;
-            } else {
-              _builder.appendImmediate(",", "\t\t");
-            }
-            _builder.append("\"");
-            _builder.append(fileExtension, "\t\t");
-            _builder.append("\"");
-          }
-        }
-        _builder.append(");");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
         _builder.newLine();
         _builder.append("\t");
         _builder.append("@Override");

@@ -39,5 +39,6 @@ public class AbstractXtextIdeaModule extends org.eclipse.xtext.idea.DefaultIdeaM
 	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
 		return org.eclipse.xtext.idea.facet.XtextFacetType.TYPEID;
 	}
-
+	
+	
 }

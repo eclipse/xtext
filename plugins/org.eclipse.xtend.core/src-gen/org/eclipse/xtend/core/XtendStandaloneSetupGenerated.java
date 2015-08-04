@@ -9,21 +9,13 @@ package org.eclipse.xtend.core;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import java.util.Arrays;
-import java.util.List;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.ISetupExtension;
 import org.eclipse.xtext.xbase.annotations.XbaseWithAnnotationsStandaloneSetup;
 
 @SuppressWarnings("all")
-public class XtendStandaloneSetupGenerated implements ISetup, ISetupExtension {
-
-	@Override
-	public List<String> getFileExtensions() {
-		return Arrays.asList("xtend");
-	}
+public class XtendStandaloneSetupGenerated implements ISetup {
 
 	@Override
 	public Injector createInjectorAndDoEMFRegistration() {

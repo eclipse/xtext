@@ -16,7 +16,6 @@ import com.google.inject.Module
 import com.google.inject.Provider
 import com.google.inject.Singleton
 import com.google.inject.name.Names
-import java.util.Arrays
 import java.util.Collections
 import java.util.List
 import java.util.Map
@@ -25,7 +24,6 @@ import org.apache.log4j.Logger
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.Constants
 import org.eclipse.xtext.ISetup
-import org.eclipse.xtext.ISetupExtension
 import org.eclipse.xtext.XtextPackage
 import org.eclipse.xtext.resource.impl.BinaryGrammarResourceFactoryImpl
 import org.eclipse.xtext.service.SingletonBinding
@@ -93,12 +91,7 @@ class XtextGeneratorTemplates {
 		
 		javaFile.annotations += new SuppressWarningsAnnotation
 		javaFile.javaContent = '''
-			public class «runtimeGenSetup.simpleName» implements «ISetup», «ISetupExtension» {
-			
-				@Override
-				public «List»<String> getFileExtensions() {
-					return «Arrays».asList(«FOR fileExtension : langConfig.fileExtensions SEPARATOR ','»"«fileExtension»"«ENDFOR»);
-				}
+			public class «runtimeGenSetup.simpleName» implements «ISetup» {
 			
 				@Override
 				public «Injector» createInjectorAndDoEMFRegistration() {

@@ -48,5 +48,12 @@
 		<facetType implementation="org.eclipse.xtext.testlanguages.backtracking.idea.facet.ExBeeLangTestLanguageFacetType"/>
 		<colorSettingsPage implementation="org.eclipse.xtext.testlanguages.backtracking.idea.highlighting.ExBeeLangTestLanguageColorSettingsPage"/>
 		<highlightVisitor implementation="org.eclipse.xtext.testlanguages.backtracking.idea.highlighting.ExBeeLangTestLanguageSemanticHighlightVisitor"/>
+
+		<lang.formatter language="org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguage"
+								factoryClass="org.eclipse.xtext.testlanguages.backtracking.idea.ExBeeLangTestLanguageExtensionFactory"
+								implementationClass="com.intellij.formatting.FormattingModelBuilder"/>
+		<lang.commenter language="org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguage"
+								factoryClass="org.eclipse.xtext.testlanguages.backtracking.idea.ExBeeLangTestLanguageExtensionFactory"
+								implementationClass="com.intellij.lang.CodeDocumentationAwareCommenter"/>
 	</extensions>
 </idea-plugin>
