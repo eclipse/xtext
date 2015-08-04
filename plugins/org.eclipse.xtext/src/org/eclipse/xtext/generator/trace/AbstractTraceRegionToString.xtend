@@ -147,7 +147,7 @@ import static extension com.google.common.collect.Multimaps.*
 		val closes = inserts.filter[!open].sortBy[-sortKey].map[render(width)].join(",")
 		val s1 = if(opens.isEmpty) "" else "[" + opens + "["
 		val s2 = if(closes.isEmpty) "" else "]" + closes + "]"
-		return s1 + s2
+		return s2 + s1
 	}
 
 	def protected List<String> render(File file, int width) {

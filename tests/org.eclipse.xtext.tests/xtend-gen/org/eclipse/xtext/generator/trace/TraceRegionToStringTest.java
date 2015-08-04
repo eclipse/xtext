@@ -130,6 +130,49 @@ public class TraceRegionToStringTest {
   }
   
   @Test
+  public void twoBounding() {
+    final TraceRegionToStringTester tester = new TraceRegionToStringTester();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("foobar");
+    _builder.newLine();
+    tester.setLocalText(_builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("bazbuz");
+    _builder_1.newLine();
+    tester.setRemote1(_builder_1.toString());
+    SourceRelativeURI _uri1 = tester.getUri1();
+    TraceRegionToStringTester.Location _location = new TraceRegionToStringTester.Location(0, 6, _uri1);
+    TraceRegionToStringTester.Region _region = new TraceRegionToStringTester.Region(0, 6, Collections.<ILocationData>unmodifiableList(CollectionLiterals.<ILocationData>newArrayList(_location)));
+    final Procedure1<TraceRegionToStringTester.Region> _function = new Procedure1<TraceRegionToStringTester.Region>() {
+      @Override
+      public void apply(final TraceRegionToStringTester.Region it) {
+        TraceRegionToStringTester.Location _location = new TraceRegionToStringTester.Location(0, 3);
+        it.addChild(0, 3, Collections.<ILocationData>unmodifiableList(CollectionLiterals.<ILocationData>newArrayList(_location)));
+        TraceRegionToStringTester.Location _location_1 = new TraceRegionToStringTester.Location(3, 3);
+        it.addChild(3, 3, Collections.<ILocationData>unmodifiableList(CollectionLiterals.<ILocationData>newArrayList(_location_1)));
+      }
+    };
+    TraceRegionToStringTester.Region _doubleArrow = ObjectExtensions.<TraceRegionToStringTester.Region>operator_doubleArrow(_region, _function);
+    tester.setTrace(_doubleArrow);
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("------- local1 ------- | ------ remote1 -------");
+    _builder_2.newLine();
+    _builder_2.append("[1,2[foo]2][3[bar]3,1] | [1,2[baz]2][3[buz]3,1]");
+    _builder_2.newLine();
+    _builder_2.append("-----------------------------------------------");
+    _builder_2.newLine();
+    _builder_2.append("1: D 0-6 Region -> Location[0,6,remote1] {");
+    _builder_2.newLine();
+    _builder_2.append("2: D 0-3   Region -> Location[0,3]");
+    _builder_2.newLine();
+    _builder_2.append("3: D 3-3   Region -> Location[3,3]");
+    _builder_2.newLine();
+    _builder_2.append("1:       }");
+    _builder_2.newLine();
+    this.operator_tripleEquals(tester, _builder_2);
+  }
+  
+  @Test
   public void twoFrame1() {
     final TraceRegionToStringTester tester = new TraceRegionToStringTester();
     StringConcatenation _builder = new StringConcatenation();
