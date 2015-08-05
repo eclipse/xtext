@@ -16,6 +16,7 @@ import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider
 import org.eclipse.xtext.idea.trace.VirtualFileInProject
 import org.eclipse.xtext.util.TextRegion
 import org.junit.Ignore
+import com.intellij.psi.util.PsiUtil
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -46,6 +47,16 @@ class IdeaTraceTest extends LightXtendTest {
 		val trace = bareTraceReader.readTraceRegionFrom(new ByteArrayInputStream(traceFile.contentsToByteArray))
 		val associatedPath = trace.associatedSrcRelativePath
 		assertEquals('com/acme/MyClass.xtend', associatedPath.toString)
+	}
+	
+	def void testNoTraceFile() {
+		val file = myFixture.addFileToProject('com/acme/MyClass.java', '''
+			package com.acme;
+			public class MyClass {
+			}
+		''')
+		val trace = traceProvider.getTraceToSource(new VirtualFileInProject(PsiUtil.getVirtualFile(file), file.project))
+		assertNull(trace)
 	}
 
 	def void testTraceToTarget() {
