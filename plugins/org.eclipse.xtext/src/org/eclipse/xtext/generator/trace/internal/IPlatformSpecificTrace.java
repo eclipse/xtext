@@ -19,16 +19,8 @@ import org.eclipse.xtext.util.ITextRegion;
  */
 public interface IPlatformSpecificTrace<
 		PlatformResource,
-		PlatformProject,
-		Location extends IPlatformSpecificLocation<PlatformResource, PlatformProject>,
-		Trace extends IPlatformSpecificTrace<PlatformResource, PlatformProject, Location, Trace>> extends ITrace {
+		Location extends IPlatformSpecificLocation<? extends PlatformResource>> extends ITrace {
 
-	/**
-	 * Returns the source project. Never <code>null</code>.
-	 * @return the source project. Never <code>null</code>.
-	 */
-	PlatformProject getLocalProject();
-	
 	/**
 	 * Returns the storage that is associated with this trace.
 	 * @return the associated storage. Never <code>null</code>.
@@ -78,12 +70,6 @@ public interface IPlatformSpecificTrace<
 
 	@Override
 	Iterable<? extends Location> getAllAssociatedLocations();
-
-	@Override
-	Iterable<? extends Trace> getAllInverseTraces();
-
-	@Override
-	Trace getInverseTrace(AbsoluteURI uri);
 
 	@Override
 	Location getBestAssociatedLocation(ITextRegion localRegion, AbsoluteURI uri);

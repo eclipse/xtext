@@ -33,6 +33,7 @@ import org.eclipse.xtext.idea.filesystem.IdeaWorkspaceConfig
 import org.eclipse.xtext.idea.resource.VirtualFileURIUtil
 import org.eclipse.xtext.util.TextRegion
 import org.eclipse.xtext.workspace.IProjectConfig
+import com.intellij.openapi.vfs.JarFileSystem
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -50,7 +51,8 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 		}
 
 		override long getTimestamp() {
-			return file.timeStamp
+			// we use modificationStamp here, as it guarantees increments between changes
+			return file.modificationStamp
 		}
 
 		override InputStream openStream() throws IOException {
@@ -130,6 +132,7 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 	}
 	
 	override protected findInverseTraceFiles(VirtualFileInProject sourceFile) {
+		//TODO we need a way to find generated files for sources in jars.
 		val ideaProject = sourceFile.project
 		val builder = ideaProject.getComponent(XtextAutoBuilderComponent)
 		val generatedSources = builder.getGeneratedSources(VirtualFileURIUtil.getURI(sourceFile.file))
@@ -152,12 +155,18 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 		val outputConfigurations = outputConfigurationProvider.getOutputConfigurations(module)
 		val sourceFolder = projectConfig.findSourceFolderContaining(absoluteSourceResource.getURI)
 		val outputFolder = outputConfigurations.head.getOutputDirectory(sourceFolder.name)
-		val outputSourceFolder = if (outputFolder.isAbsolutePath) {
-			VirtualFileManager.getInstance().findFileByUrl(VfsUtilCore.pathToUrl(outputFolder))
-		} else {
-			val contentRoot = ModuleRootManager.getInstance(module).contentRoots.head
-			contentRoot.findFileByRelativePath(outputFolder)
-		}
+		val outputSourceFolder = ApplicationManager.application.<VirtualFile>runReadAction [ 
+			if (outputFolder.isAbsolutePath) {
+				return VirtualFileManager.getInstance.findFileByUrl(VfsUtilCore.pathToUrl(outputFolder))
+			} else {
+				for (contentRoot : ModuleRootManager.getInstance(module).contentRoots) {
+					val result = contentRoot.findFileByRelativePath(outputFolder)
+					if (result != null)
+						return result
+				}
+				return null
+			}
+		]
 		if (outputSourceFolder === null || !outputSourceFolder.exists) {
 			val result = super.getGeneratedUriForTrace(projectConfig, absoluteSourceResource, generatedFileURI, traceURIConverter)
 			return result
@@ -216,7 +225,12 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 	override protected newAbstractTrace(VirtualFileInProject file) {
 		val result = traceProvider.get();
 		result.localStorage = file
-		result.module = (file.projectConfig as IdeaModuleConfig).module
+		val jarRoot = JarFileSystem.instance.getRootByEntry(file.file)
+		if (jarRoot != null) {
+			result.jarRoot = jarRoot			
+		} else {
+			result.module = (file.projectConfig as IdeaModuleConfig)?.module
+		}
 		return result;
 	}
 	

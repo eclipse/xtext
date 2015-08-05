@@ -56,7 +56,7 @@ class SourceRelativeURI extends AbstractURIWrapper {
 }
 
 /**
- * An absoute URI that allows to obtain a resource in a {@link IWorkspaceConfig workspace}.
+ * An absolute URI that allows to obtain a resource in a {@link IWorkspaceConfig workspace}.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */

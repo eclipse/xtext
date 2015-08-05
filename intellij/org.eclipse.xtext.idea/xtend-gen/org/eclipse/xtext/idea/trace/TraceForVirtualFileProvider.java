@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.idea.trace;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.intellij.openapi.application.Application;
@@ -16,6 +17,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.vfs.JarFileSystem;
 import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
@@ -54,7 +56,6 @@ import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.ISourceFolder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -78,7 +79,7 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
     
     @Override
     public long getTimestamp() {
-      return this.file.getTimeStamp();
+      return this.file.getModificationStamp();
     }
     
     @Override
@@ -268,23 +269,32 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
     OutputConfiguration _head = IterableExtensions.<OutputConfiguration>head(outputConfigurations);
     String _name = sourceFolder.getName();
     final String outputFolder = _head.getOutputDirectory(_name);
-    VirtualFile _xifexpression = null;
-    boolean _isAbsolutePath = this.isAbsolutePath(outputFolder);
-    if (_isAbsolutePath) {
-      VirtualFileManager _instance = VirtualFileManager.getInstance();
-      String _pathToUrl = VfsUtilCore.pathToUrl(outputFolder);
-      _xifexpression = _instance.findFileByUrl(_pathToUrl);
-    } else {
-      VirtualFile _xblockexpression = null;
-      {
-        ModuleRootManager _instance_1 = ModuleRootManager.getInstance(module);
-        VirtualFile[] _contentRoots = _instance_1.getContentRoots();
-        final VirtualFile contentRoot = IterableExtensions.<VirtualFile>head(((Iterable<VirtualFile>)Conversions.doWrapArray(_contentRoots)));
-        _xblockexpression = contentRoot.findFileByRelativePath(outputFolder);
+    Application _application = ApplicationManager.getApplication();
+    final Computable<VirtualFile> _function = new Computable<VirtualFile>() {
+      @Override
+      public VirtualFile compute() {
+        boolean _isAbsolutePath = TraceForVirtualFileProvider.this.isAbsolutePath(outputFolder);
+        if (_isAbsolutePath) {
+          VirtualFileManager _instance = VirtualFileManager.getInstance();
+          String _pathToUrl = VfsUtilCore.pathToUrl(outputFolder);
+          return _instance.findFileByUrl(_pathToUrl);
+        } else {
+          ModuleRootManager _instance_1 = ModuleRootManager.getInstance(module);
+          VirtualFile[] _contentRoots = _instance_1.getContentRoots();
+          for (final VirtualFile contentRoot : _contentRoots) {
+            {
+              final VirtualFile result = contentRoot.findFileByRelativePath(outputFolder);
+              boolean _notEquals = (!Objects.equal(result, null));
+              if (_notEquals) {
+                return result;
+              }
+            }
+          }
+          return null;
+        }
       }
-      _xifexpression = _xblockexpression;
-    }
-    final VirtualFile outputSourceFolder = _xifexpression;
+    };
+    final VirtualFile outputSourceFolder = _application.<VirtualFile>runReadAction(_function);
     boolean _or = false;
     if ((outputSourceFolder == null)) {
       _or = true;
@@ -372,9 +382,20 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
   protected VirtualFileBasedTrace newAbstractTrace(final VirtualFileInProject file) {
     final VirtualFileBasedTrace result = this.traceProvider.get();
     result.setLocalStorage(file);
-    IProjectConfig _projectConfig = this.getProjectConfig(file);
-    Module _module = ((IdeaModuleConfig) _projectConfig).getModule();
-    result.setModule(_module);
+    JarFileSystem _instance = JarFileSystem.getInstance();
+    VirtualFile _file = file.getFile();
+    final VirtualFile jarRoot = _instance.getRootByEntry(_file);
+    boolean _notEquals = (!Objects.equal(jarRoot, null));
+    if (_notEquals) {
+      result.setJarRoot(jarRoot);
+    } else {
+      IProjectConfig _projectConfig = this.getProjectConfig(file);
+      Module _module = null;
+      if (((IdeaModuleConfig) _projectConfig)!=null) {
+        _module=((IdeaModuleConfig) _projectConfig).getModule();
+      }
+      result.setModule(_module);
+    }
     return result;
   }
   

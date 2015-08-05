@@ -16,6 +16,7 @@ import java.io.IOException
 import java.io.InputStream
 import java.io.Reader
 import java.io.StringReader
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.generator.trace.AbsoluteURI
 import org.eclipse.xtext.generator.trace.SourceRelativeURI
 import org.eclipse.xtext.generator.trace.internal.AbstractTrace
@@ -36,12 +37,13 @@ class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
 	VirtualFileInProject localVirtualFile
 	IdeaOutputConfigurationProvider outputConfigurationProvider
 	Module module
+	@Accessors VirtualFile jarRoot
 	
 	override getLocalURI() {
 		return getURIForVirtualFile(localVirtualFile)
 	}
 	
-	override getLocalProject() {
+	def Module getLocalProject() {
 		return module
 	}
 	
@@ -64,6 +66,7 @@ class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
 	def protected AbsoluteURI getURIForVirtualFile(VirtualFile virtualFile) {
 		return new AbsoluteURI(virtualFile.URI)
 	}
+	
 	def protected AbsoluteURI getURIForVirtualFile(VirtualFileInProject virtualFile) {
 		return virtualFile.file.URIForVirtualFile
 	}
@@ -82,16 +85,21 @@ class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
 	}
 	
 	override AbsoluteURI resolvePath(SourceRelativeURI path) {
-		if (isTraceToTarget) {
+		if (jarRoot != null) {
+			val child = jarRoot.findFileByRelativePath(path.toString)
+			val uri = VirtualFileURIUtil.getURI(child)
+			return new AbsoluteURI(uri)
+		} else if (isTraceToTarget && module != null) {
 			val outputConfigurations = outputConfigurationProvider.getOutputConfigurations(module)
 			val sourceFolders = localProjectConfig.sourceFolders
-			val contentRoot = ModuleRootManager.getInstance(module).contentRoots.head
-			for(sourceFolder: sourceFolders) {
-				val outputFolder = contentRoot.findFileByRelativePath(outputConfigurations.head.getOutputDirectory(sourceFolder.name))
-				if (outputFolder !== null) {
-					val file = outputFolder.findFileByRelativePath(path.URI.toString)
-					if (file !== null) {
-						return new AbsoluteURI(VirtualFileURIUtil.getURI(file))
+			for (contentRoot : ModuleRootManager.getInstance(module).contentRoots) {
+				for(sourceFolder : sourceFolders) {
+					val outputFolder = contentRoot.findFileByRelativePath(outputConfigurations.head.getOutputDirectory(sourceFolder.name))
+					if (outputFolder !== null) {
+						val file = outputFolder.findFileByRelativePath(path.URI.toString)
+						if (file !== null) {
+							return new AbsoluteURI(VirtualFileURIUtil.getURI(file))
+						}
 					}
 				}
 			}
@@ -171,11 +179,4 @@ class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
 		return super.getAllAssociatedLocations() as Iterable<? extends ILocationInVirtualFile>
 	}
 
-	override Iterable<? extends IIdeaTrace> getAllInverseTraces() {
-		return super.getAllInverseTraces() as Iterable<? extends IIdeaTrace>
-	}
-
-	override IIdeaTrace getInverseTrace(AbsoluteURI uri) {
-		return super.getInverseTrace(uri) as IIdeaTrace
-	}
 }

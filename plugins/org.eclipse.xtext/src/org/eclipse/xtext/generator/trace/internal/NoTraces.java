@@ -17,7 +17,7 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class NoTraces<PlatformResource, Trace extends IPlatformSpecificTrace<PlatformResource,?,?,Trace>> implements IPlatformSpecificTraceProvider<PlatformResource, Trace> {
+public class NoTraces<PlatformResource, Trace extends IPlatformSpecificTrace<PlatformResource,?>> implements IPlatformSpecificTraceProvider<PlatformResource, Trace> {
 
 	@Override
 	public Trace getTraceToSource(PlatformResource derivedResource) {

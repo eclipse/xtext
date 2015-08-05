@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.generator.trace;
 
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.xtext.generator.trace.internal.IPlatformSpecificLocation;
 
@@ -15,5 +14,5 @@ import org.eclipse.xtext.generator.trace.internal.IPlatformSpecificLocation;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.9
  */
-public interface ILocationInEclipseResource extends IPlatformSpecificLocation<IStorage, IProject> {
+public interface ILocationInEclipseResource extends IPlatformSpecificLocation<IStorage> {
 }
