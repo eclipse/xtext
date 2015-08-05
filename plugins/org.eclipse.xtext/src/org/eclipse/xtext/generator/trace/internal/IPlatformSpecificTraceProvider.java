@@ -20,7 +20,7 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig;
  */
 public interface IPlatformSpecificTraceProvider<
 		PlatformResource,
-		Trace extends IPlatformSpecificTrace<PlatformResource, ?, ?, Trace>> 
+		Trace extends IPlatformSpecificTrace<PlatformResource, ?>> 
 	extends ITraceForURIProvider {
 
 	/**
