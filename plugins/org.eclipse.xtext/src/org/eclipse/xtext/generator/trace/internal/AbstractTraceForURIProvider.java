@@ -144,8 +144,9 @@ public abstract class AbstractTraceForURIProvider<SomeFile, Trace extends Abstra
 	 * Instantiate a new instance of the trace and associate the locate information with the given file.
 	 */
 	protected abstract Trace newAbstractTrace(SomeFile file);
+	
 	/**
-	 * Obtain the file represenation from the given URI.
+	 * Obtain the file representation from the given URI.
 	 */
 	protected SomeFile asFile(AbsoluteURI absoluteURI, IWorkspaceConfig context) {
 		IProjectConfig project = context.findProjectContaining(absoluteURI.getURI());
@@ -153,7 +154,7 @@ public abstract class AbstractTraceForURIProvider<SomeFile, Trace extends Abstra
 	}
 	
 	/**
-	 * Obtain the file represenation from the given URI.
+	 * Obtain the file representation from the given URI.
 	 */
 	protected abstract SomeFile asFile(AbsoluteURI absoluteURI, IProjectConfig project);
 	
@@ -203,17 +204,17 @@ public abstract class AbstractTraceForURIProvider<SomeFile, Trace extends Abstra
 	}
 	
 	public Trace getTraceToSource(final SomeFile generatedFile) {
+		final PersistedTrace persistedTrace = findPersistedTrace(generatedFile);
+		if (persistedTrace == null || !persistedTrace.exists()) {
+			return null;
+		}
 		Trace result = newAbstractTrace(generatedFile);
 		result.setTraceToSource(true);
 		result.setTraceRegionProvider(new ITraceRegionProvider() {
 			
 			@Override
 			public AbstractTraceRegion getTraceRegion() {
-				PersistedTrace persistedTrace = findPersistedTrace(generatedFile);
-				if (persistedTrace != null) {
-					return cachedTraces.getTraceRegion(persistedTrace);
-				}
-				throw new TraceNotFoundException();
+				return cachedTraces.getTraceRegion(persistedTrace);
 			}
 		});
 		return result;
