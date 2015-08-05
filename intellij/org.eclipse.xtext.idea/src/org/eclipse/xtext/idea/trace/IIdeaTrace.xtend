@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.trace
 
-import com.intellij.openapi.module.Module
 import org.eclipse.xtext.generator.trace.internal.IPlatformSpecificTrace
 
 /**
@@ -16,5 +15,5 @@ import org.eclipse.xtext.generator.trace.internal.IPlatformSpecificTrace
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.9
  */
-interface IIdeaTrace extends IPlatformSpecificTrace<VirtualFileInProject, Module, ILocationInVirtualFile, IIdeaTrace>  {
+interface IIdeaTrace extends IPlatformSpecificTrace<VirtualFileInProject, ILocationInVirtualFile>  {
 }

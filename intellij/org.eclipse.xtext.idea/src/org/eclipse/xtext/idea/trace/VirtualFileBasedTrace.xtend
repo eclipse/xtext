@@ -41,7 +41,7 @@ class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
 		return getURIForVirtualFile(localVirtualFile)
 	}
 	
-	override getLocalProject() {
+	def Module getLocalProject() {
 		return module
 	}
 	
@@ -171,11 +171,4 @@ class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
 		return super.getAllAssociatedLocations() as Iterable<? extends ILocationInVirtualFile>
 	}
 
-	override Iterable<? extends IIdeaTrace> getAllInverseTraces() {
-		return super.getAllInverseTraces() as Iterable<? extends IIdeaTrace>
-	}
-
-	override IIdeaTrace getInverseTrace(AbsoluteURI uri) {
-		return super.getInverseTrace(uri) as IIdeaTrace
-	}
 }

@@ -14,16 +14,11 @@ import org.eclipse.xtext.generator.trace.ILocationInResource;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface IPlatformSpecificLocation<PlatformResource, PlatformProject> extends ILocationInResource {
+public interface IPlatformSpecificLocation<PlatformResource> extends ILocationInResource {
 
 	/**
 	 * @return the storage handle for this location. May be <code>null</code>.
 	 */
 	PlatformResource getPlatformResource();
-	
-	/**
-	 * @return the platform specific project representation for this location. Never <code>null</code>.
-	 */
-	PlatformProject getProject();
 	
 }

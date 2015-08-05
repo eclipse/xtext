@@ -32,7 +32,6 @@ public class LocationInEclipseResource extends LocationInResource implements ILo
 		return getTrace().findStorage(getSrcRelativeResourceURI(), getProject());
 	}
 
-	@Override
 	public IProject getProject() {
 		return getTrace().getLocalProject();
 	}

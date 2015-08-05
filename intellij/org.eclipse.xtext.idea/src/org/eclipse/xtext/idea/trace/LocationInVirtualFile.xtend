@@ -28,7 +28,7 @@ class LocationInVirtualFile extends LocationInResource implements ILocationInVir
 		return getTrace().findVirtualFileInProject(getSrcRelativeResourceURI(), getProject());
 	}
 
-	override Module getProject() {
+	def Module getProject() {
 		return getTrace().getLocalProject();
 	}
 }

@@ -56,7 +56,6 @@ public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
     return this.getURIForVirtualFile(this.localVirtualFile);
   }
   
-  @Override
   public Module getLocalProject() {
     return this.module;
   }
@@ -237,17 +236,5 @@ public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
   public Iterable<? extends ILocationInVirtualFile> getAllAssociatedLocations() {
     Iterable<? extends ILocationInResource> _allAssociatedLocations = super.getAllAssociatedLocations();
     return ((Iterable<? extends ILocationInVirtualFile>) _allAssociatedLocations);
-  }
-  
-  @Override
-  public Iterable<? extends IIdeaTrace> getAllInverseTraces() {
-    Iterable<? extends ITrace> _allInverseTraces = super.getAllInverseTraces();
-    return ((Iterable<? extends IIdeaTrace>) _allInverseTraces);
-  }
-  
-  @Override
-  public IIdeaTrace getInverseTrace(final AbsoluteURI uri) {
-    ITrace _inverseTrace = super.getInverseTrace(uri);
-    return ((IIdeaTrace) _inverseTrace);
   }
 }

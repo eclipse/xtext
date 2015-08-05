@@ -95,31 +95,6 @@ public interface ITrace {
 	LanguageInfo getLocalLanguage();
 	
 	/**
-	 * Returns all available inverse trace information.
-	 * 
-	 * @return the inverse trace information. Never <code>null</code>.
-	 */
-	Iterable<? extends ITrace> getAllInverseTraces();
-	
-	/**
-	 * Returns the inverse trace for the given associated resource or <code>null</code> if none.
-	 * 
-	 * @param absoluteURI
-	 *            the expected associated, absolute URI. May not be <code>null</code>.
-	 * @return the inverse trace for the given location or <code>null</code> if none.
-	 */
-	ITrace getInverseTrace(AbsoluteURI absoluteURI);
-	
-	/**
-	 * Returns the inverse trace for the given associated resource or <code>null</code> if none.
-	 * 
-	 * @param srcRelativeURI
-	 *            the expected associated, absolute URI. May not be <code>null</code>.
-	 * @return the inverse trace for the given location or <code>null</code> if none.
-	 */
-	ITrace getInverseTrace(SourceRelativeURI srcRelativeURI, IProjectConfig projectConfig);
-	
-	/**
 	 * Returns the best {@link ILocationInResource location} that matches the given
 	 * {@code localRegion} in the {@code absoluteTargetResource}.
 	 * If the region does not match a single location in the target, the following strategy applies:

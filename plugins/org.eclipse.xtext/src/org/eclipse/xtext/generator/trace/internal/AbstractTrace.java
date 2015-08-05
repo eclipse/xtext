@@ -13,7 +13,6 @@ import java.io.Reader;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.generator.trace.AbsoluteURI;
@@ -40,7 +39,6 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.common.io.CharStreams;
 import com.google.inject.Inject;
@@ -86,12 +84,6 @@ public abstract class AbstractTrace implements ITrace {
 	
 	@Inject
 	private IResourceServiceProvider.Registry resourceServiceRegistry;
-	
-	@Inject
-	private ITraceForURIProvider traceProvider;
-	
-	@Inject
-	private ITraceURIConverter traceURIConverter;
 	
 	private AbstractTraceRegion rootTraceRegion;
 	
@@ -496,27 +488,6 @@ public abstract class AbstractTrace implements ITrace {
 			}
 		}
 
-	}
-	
-	@Override
-	public Iterable<? extends ITrace> getAllInverseTraces() {
-		Map<SourceRelativeURI, List<AbstractTraceRegion>> inverted = getRootTraceRegion().invertAll(getSrcRelativeLocalURI());
-		return Iterables.transform(inverted.keySet(), new TraceAccess(isTraceToTarget(), getLocalProjectConfig(), traceProvider));
-	}
-	
-	@Override
-	public ITrace getInverseTrace(AbsoluteURI uri) {
-		SourceRelativeURI uriForTrace = traceURIConverter.getURIForTrace(getLocalProjectConfig(), uri);
-		return getInverseTrace(uriForTrace, getLocalProjectConfig());
-	}
-	
-	@Override
-	public ITrace getInverseTrace(SourceRelativeURI srcRelativeURI, IProjectConfig projectConfig) {
-		List<AbstractTraceRegion> result = getRootTraceRegion().invertFor(srcRelativeURI, getSrcRelativeLocalURI());
-		if (result.isEmpty()) {
-			return null;
-		}
-		return new TraceAccess(isTraceToTarget(), projectConfig, traceProvider).apply(srcRelativeURI);
 	}
 	
 	protected abstract InputStream getContents(SourceRelativeURI uri, IProjectConfig projectConfig) throws IOException;
