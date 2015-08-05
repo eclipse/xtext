@@ -24,6 +24,7 @@ Workflow {
 	bean = StandaloneSetup {
 		ignoreBrokenProjectFiles = true
 		platformUri = "${runtimeProject}/../.."
+		registerGenModelFile = "platform:/resource/org.eclipse.xtext/org/eclipse/xtext/Xtext.genmodel"
 	}
 
 	component = DirectoryCleaner {
@@ -43,7 +44,6 @@ Workflow {
 			uri = "platform:/resource/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext"
 			fileExtensions = "${file.extensions}"
 			fragment = grammarAccess.GrammarAccessFragment auto-inject {}
-			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
 			fragment = parser.antlr.XtextAntlrGeneratorFragment {
 				options = {
 					classSplitting = true

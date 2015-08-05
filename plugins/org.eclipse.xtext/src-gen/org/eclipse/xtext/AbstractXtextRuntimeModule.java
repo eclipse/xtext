@@ -43,11 +43,6 @@ public abstract class AbstractXtextRuntimeModule extends org.eclipse.xtext.servi
 		return org.eclipse.xtext.services.XtextGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.parseTreeConstruction.XtextParsetreeConstructor.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.IParser> bindIParser() {
 		return org.eclipse.xtext.parser.antlr.XtextParser.class;
