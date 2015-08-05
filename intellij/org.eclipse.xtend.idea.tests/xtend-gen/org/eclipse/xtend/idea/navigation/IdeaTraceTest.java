@@ -8,14 +8,28 @@
 package org.eclipse.xtend.idea.navigation;
 
 import com.google.inject.Inject;
+import com.intellij.openapi.Disposable;
+import com.intellij.openapi.application.Application;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.ModifiableRootModel;
+import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.roots.libraries.Library;
+import com.intellij.openapi.roots.ui.configuration.projectRoot.LibrariesContainer;
+import com.intellij.openapi.roots.ui.configuration.projectRoot.LibrariesContainerFactory;
+import com.intellij.openapi.util.Disposer;
+import com.intellij.openapi.vfs.JarFileSystem;
 import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiUtil;
 import com.intellij.testFramework.UsefulTestCase;
 import java.io.ByteArrayInputStream;
+import java.net.URL;
 import java.util.List;
 import junit.framework.TestCase;
 import org.eclipse.xtend.idea.LightXtendTest;
@@ -30,6 +44,8 @@ import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider;
 import org.eclipse.xtext.idea.trace.VirtualFileInProject;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Ignore;
 
 /**
@@ -156,5 +172,84 @@ public class IdeaTraceTest extends LightXtendTest {
     TextRegion _textRegion = new TextRegion(8, 4);
     final ILocationInVirtualFile associatedLocation = traceToSource.getBestAssociatedLocation(_textRegion);
     TestCase.assertNotNull(associatedLocation);
+  }
+  
+  public void testTraceForJar_01() {
+    final VirtualFile bin = this.getVirtualFile("smap-binary.jar");
+    final VirtualFile src = this.getVirtualFile("smap-sources.jar");
+    Module _module = this.myFixture.getModule();
+    this.addLibrary(_module, bin, src);
+    JarFileSystem _instance = JarFileSystem.getInstance();
+    final VirtualFile jarRoot = _instance.getJarRootForLocalFile(src);
+    final VirtualFile generated = jarRoot.findFileByRelativePath("de/itemis/HelloXtend.java");
+    Project _project = this.getProject();
+    VirtualFileInProject _virtualFileInProject = new VirtualFileInProject(generated, _project);
+    final IIdeaTrace traceToSource = this.traceProvider.getTraceToSource(_virtualFileInProject);
+    TestCase.assertNotNull(traceToSource);
+    Iterable<? extends ILocationInVirtualFile> _allAssociatedLocations = traceToSource.getAllAssociatedLocations();
+    final Procedure1<ILocationInVirtualFile> _function = new Procedure1<ILocationInVirtualFile>() {
+      @Override
+      public void apply(final ILocationInVirtualFile it) {
+        AbsoluteURI _absoluteResourceURI = it.getAbsoluteResourceURI();
+        String _string = _absoluteResourceURI.toString();
+        boolean _endsWith = _string.endsWith("smap-sources.jar!/de/itemis/HelloXtend.xtend");
+        TestCase.assertTrue(_endsWith);
+      }
+    };
+    IterableExtensions.forEach(_allAssociatedLocations, _function);
+  }
+  
+  public void testTraceForJar_02() {
+    final VirtualFile bin = this.getVirtualFile("smap-binary.jar");
+    final VirtualFile src = this.getVirtualFile("smap-sources.jar");
+    Module _module = this.myFixture.getModule();
+    this.addLibrary(_module, bin, src);
+    JarFileSystem _instance = JarFileSystem.getInstance();
+    final VirtualFile jarRoot = _instance.getJarRootForLocalFile(src);
+    final VirtualFile generated = jarRoot.findFileByRelativePath("de/itemis/HelloXtend.xtend");
+    Project _project = this.getProject();
+    VirtualFileInProject _virtualFileInProject = new VirtualFileInProject(generated, _project);
+    final IIdeaTrace traceToTarget = this.traceProvider.getTraceToTarget(_virtualFileInProject);
+    TestCase.assertNull(traceToTarget);
+  }
+  
+  public void addLibrary(final Module module, final VirtualFile bin, final VirtualFile src) {
+    Project _project = this.getProject();
+    final LibrariesContainer container = LibrariesContainerFactory.createContainer(_project);
+    Application _application = ApplicationManager.getApplication();
+    final Runnable _function = new Runnable() {
+      @Override
+      public void run() {
+        final Library lib = container.createLibrary("my-lib", LibrariesContainer.LibraryLevel.GLOBAL, new VirtualFile[] { bin }, new VirtualFile[] { src });
+        ModuleRootManager _instance = ModuleRootManager.getInstance(module);
+        final ModifiableRootModel model = _instance.getModifiableModel();
+        model.addLibraryEntry(lib);
+        Module _module = IdeaTraceTest.this.myFixture.getModule();
+        final Disposable _function = new Disposable() {
+          @Override
+          public void dispose() {
+            model.dispose();
+          }
+        };
+        Disposer.register(_module, _function);
+        return;
+      }
+    };
+    _application.runWriteAction(_function);
+  }
+  
+  protected VirtualFile getVirtualFile(final String fileNameInPackage) {
+    Class<? extends IdeaTraceTest> _class = this.getClass();
+    Package _package = _class.getPackage();
+    String _name = _package.getName();
+    String _replace = _name.replace(".", "/");
+    String _plus = ("/" + _replace);
+    String _plus_1 = (_plus + "/");
+    final String name = (_plus_1 + fileNameInPackage);
+    Class<? extends IdeaTraceTest> _class_1 = this.getClass();
+    final URL url = _class_1.getResource(name);
+    VirtualFileManager _instance = VirtualFileManager.getInstance();
+    String _convertFromUrl = VfsUtilCore.convertFromUrl(url);
+    return _instance.findFileByUrl(_convertFromUrl);
   }
 }
