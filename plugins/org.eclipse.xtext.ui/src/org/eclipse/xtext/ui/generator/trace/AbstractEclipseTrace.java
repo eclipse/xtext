@@ -9,15 +9,11 @@ package org.eclipse.xtext.ui.generator.trace;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Reader;
-import java.nio.charset.Charset;
 
-import org.eclipse.core.resources.IEncodedStorage;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
@@ -142,22 +138,13 @@ public abstract class AbstractEclipseTrace extends AbstractTrace implements IEcl
 	public IProjectConfig getLocalProjectConfig() {
 		return new EclipseProjectConfig(getLocalProject());
 	}
+	
+	abstract public IProject getLocalProject();
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public Iterable<? extends ILocationInEclipseResource> getAllAssociatedLocations() {
 		return (Iterable<? extends ILocationInEclipseResource>) super.getAllAssociatedLocations();
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public Iterable<? extends IEclipseTrace> getAllInverseTraces() {
-		return (Iterable<? extends IEclipseTrace>) super.getAllInverseTraces();
-	}
-
-	@Override
-	public IEclipseTrace getInverseTrace(AbsoluteURI uri) {
-		return (IEclipseTrace) super.getInverseTrace(uri);
 	}
 	
 }
