@@ -647,7 +647,8 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
       return;
     }
     boolean _isReadyToBeBuilt = this.isReadyToBeBuilt();
-    if (_isReadyToBeBuilt) {
+    boolean _not = (!_isReadyToBeBuilt);
+    if (_not) {
       XtextAutoBuilderComponent.LOG.info("Project not yet initialized, wait some more");
       final Runnable _function = new Runnable() {
         @Override
@@ -664,24 +665,23 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   }
   
   private boolean isReadyToBeBuilt() {
-    boolean _and = false;
-    boolean _and_1 = false;
-    if (!(!XtextAutoBuilderComponent.TEST_MODE)) {
-      _and_1 = false;
+    boolean _or = false;
+    if (XtextAutoBuilderComponent.TEST_MODE) {
+      _or = true;
     } else {
+      boolean _and = false;
       boolean _isInitialized = this.project.isInitialized();
-      boolean _not = (!_isInitialized);
-      _and_1 = _not;
+      if (!_isInitialized) {
+        _and = false;
+      } else {
+        DumbService _instance = DumbService.getInstance(this.project);
+        boolean _isDumb = _instance.isDumb();
+        boolean _not = (!_isDumb);
+        _and = _not;
+      }
+      _or = _and;
     }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      DumbService _instance = DumbService.getInstance(this.project);
-      boolean _isDumb = _instance.isDumb();
-      boolean _not_1 = (!_isDumb);
-      _and = _not_1;
-    }
-    return _and;
+    return _or;
   }
   
   protected void internalBuild(final List<BuildEvent> allEvents) {

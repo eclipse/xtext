@@ -13,6 +13,7 @@ import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.util.PsiUtil;
 import com.intellij.testFramework.UsefulTestCase;
 import java.io.ByteArrayInputStream;
 import java.util.List;
@@ -80,6 +81,22 @@ public class IdeaTraceTest extends LightXtendTest {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  public void testNoTraceFile() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package com.acme;");
+    _builder.newLine();
+    _builder.append("public class MyClass {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final PsiFile file = this.myFixture.addFileToProject("com/acme/MyClass.java", _builder.toString());
+    VirtualFile _virtualFile = PsiUtil.getVirtualFile(file);
+    Project _project = file.getProject();
+    VirtualFileInProject _virtualFileInProject = new VirtualFileInProject(_virtualFile, _project);
+    final IIdeaTrace trace = this.traceProvider.getTraceToSource(_virtualFileInProject);
+    TestCase.assertNull(trace);
   }
   
   public void testTraceToTarget() {

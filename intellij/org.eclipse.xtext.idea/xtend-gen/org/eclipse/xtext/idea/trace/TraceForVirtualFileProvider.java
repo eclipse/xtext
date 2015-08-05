@@ -9,10 +9,14 @@ package org.eclipse.xtext.idea.trace;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.intellij.openapi.application.Application;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.psi.FileViewProvider;
@@ -21,6 +25,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.util.indexing.IndexingDataKeys;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -50,8 +55,10 @@ import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.ISourceFolder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -71,13 +78,24 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
     
     @Override
     public long getTimestamp() {
-      return this.file.getModificationStamp();
+      return this.file.getTimeStamp();
     }
     
     @Override
     public InputStream openStream() throws IOException {
-      byte[] _contentsToByteArray = this.file.contentsToByteArray();
-      return new ByteArrayInputStream(_contentsToByteArray);
+      Application _application = ApplicationManager.getApplication();
+      final Computable<InputStream> _function = new Computable<InputStream>() {
+        @Override
+        public InputStream compute() {
+          try {
+            byte[] _contentsToByteArray = VirtualFilePersistedTrace.this.file.contentsToByteArray();
+            return new ByteArrayInputStream(_contentsToByteArray);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      return _application.<InputStream>runReadAction(_function);
     }
     
     @Override
@@ -250,17 +268,47 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
     OutputConfiguration _head = IterableExtensions.<OutputConfiguration>head(outputConfigurations);
     String _name = sourceFolder.getName();
     final String outputFolder = _head.getOutputDirectory(_name);
-    ModuleRootManager _instance = ModuleRootManager.getInstance(module);
-    VirtualFile[] _contentRoots = _instance.getContentRoots();
-    final VirtualFile contentRoot = IterableExtensions.<VirtualFile>head(((Iterable<VirtualFile>)Conversions.doWrapArray(_contentRoots)));
-    final VirtualFile outputSourceFolder = contentRoot.findFileByRelativePath(outputFolder);
+    VirtualFile _xifexpression = null;
+    boolean _isAbsolutePath = this.isAbsolutePath(outputFolder);
+    if (_isAbsolutePath) {
+      VirtualFileManager _instance = VirtualFileManager.getInstance();
+      String _pathToUrl = VfsUtilCore.pathToUrl(outputFolder);
+      _xifexpression = _instance.findFileByUrl(_pathToUrl);
+    } else {
+      VirtualFile _xblockexpression = null;
+      {
+        ModuleRootManager _instance_1 = ModuleRootManager.getInstance(module);
+        VirtualFile[] _contentRoots = _instance_1.getContentRoots();
+        final VirtualFile contentRoot = IterableExtensions.<VirtualFile>head(((Iterable<VirtualFile>)Conversions.doWrapArray(_contentRoots)));
+        _xblockexpression = contentRoot.findFileByRelativePath(outputFolder);
+      }
+      _xifexpression = _xblockexpression;
+    }
+    final VirtualFile outputSourceFolder = _xifexpression;
+    boolean _or = false;
     if ((outputSourceFolder == null)) {
+      _or = true;
+    } else {
+      boolean _exists = outputSourceFolder.exists();
+      boolean _not = (!_exists);
+      _or = _not;
+    }
+    if (_or) {
       final SourceRelativeURI result = super.getGeneratedUriForTrace(projectConfig, absoluteSourceResource, generatedFileURI, traceURIConverter);
       return result;
     }
     final URI sourceFolderURI = VirtualFileURIUtil.getURI(outputSourceFolder);
     final SourceRelativeURI result_1 = generatedFileURI.deresolve(sourceFolderURI);
     return result_1;
+  }
+  
+  private boolean isAbsolutePath(final String path) {
+    boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(path);
+    if (_isNullOrEmpty) {
+      return false;
+    }
+    final char start = path.charAt(0);
+    return (start == File.pathSeparatorChar);
   }
   
   private boolean isTraceFile(final VirtualFile file) {
@@ -279,8 +327,8 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
   @Override
   protected AbstractTraceForURIProvider.PersistedTrace findPersistedTrace(final VirtualFileInProject generatedFile) {
     final VirtualFile virtualFile = generatedFile.getFile();
-    VirtualFile _traceFile = this.getTraceFile(virtualFile);
-    return new TraceForVirtualFileProvider.VirtualFilePersistedTrace(_traceFile, this);
+    final VirtualFile traceFile = this.getTraceFile(virtualFile);
+    return new TraceForVirtualFileProvider.VirtualFilePersistedTrace(traceFile, this);
   }
   
   @Override

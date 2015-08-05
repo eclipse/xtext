@@ -93,7 +93,7 @@ public class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerF
     final Function1<PsiElement, PsiNamedElement> _function = new Function1<PsiElement, PsiNamedElement>() {
       @Override
       public PsiNamedElement apply(final PsiElement it) {
-        return PsiTreeUtil.<PsiNamedElement>getParentOfType(it, PsiNamedElement.class);
+        return PsiTreeUtil.<PsiNamedElement>getParentOfType(it, PsiNamedElement.class, false);
       }
     };
     List<PsiNamedElement> _map = ListExtensions.map(_originalElements, _function);
@@ -112,7 +112,7 @@ public class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerF
     final Function1<PsiElement, PsiNamedElement> _function = new Function1<PsiElement, PsiNamedElement>() {
       @Override
       public PsiNamedElement apply(final PsiElement it) {
-        return PsiTreeUtil.<PsiNamedElement>getParentOfType(it, PsiNamedElement.class);
+        return PsiTreeUtil.<PsiNamedElement>getParentOfType(it, PsiNamedElement.class, false);
       }
     };
     List<PsiNamedElement> _map = ListExtensions.map(_generatedElements, _function);

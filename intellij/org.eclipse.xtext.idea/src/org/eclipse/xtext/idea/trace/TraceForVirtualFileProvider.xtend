@@ -9,13 +9,16 @@ package org.eclipse.xtext.idea.trace
 
 import com.google.inject.Inject
 import com.google.inject.Provider
+import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.roots.ModuleRootManager
+import com.intellij.openapi.vfs.VfsUtilCore
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.vfs.VirtualFileManager
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.util.indexing.IndexingDataKeys
 import java.io.ByteArrayInputStream
+import java.io.File
 import java.io.IOException
 import java.io.InputStream
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
@@ -47,11 +50,13 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 		}
 
 		override long getTimestamp() {
-			return file.modificationStamp
+			return file.timeStamp
 		}
 
 		override InputStream openStream() throws IOException {
-			return new ByteArrayInputStream(file.contentsToByteArray)
+			ApplicationManager.application.<InputStream>runReadAction [
+				return new ByteArrayInputStream(file.contentsToByteArray)
+			]
 		}
 
 		override boolean exists() {
@@ -147,15 +152,26 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 		val outputConfigurations = outputConfigurationProvider.getOutputConfigurations(module)
 		val sourceFolder = projectConfig.findSourceFolderContaining(absoluteSourceResource.getURI)
 		val outputFolder = outputConfigurations.head.getOutputDirectory(sourceFolder.name)
-		val contentRoot = ModuleRootManager.getInstance(module).contentRoots.head
-		val outputSourceFolder = contentRoot.findFileByRelativePath(outputFolder)
-		if (outputSourceFolder === null) {
+		val outputSourceFolder = if (outputFolder.isAbsolutePath) {
+			VirtualFileManager.getInstance().findFileByUrl(VfsUtilCore.pathToUrl(outputFolder))
+		} else {
+			val contentRoot = ModuleRootManager.getInstance(module).contentRoots.head
+			contentRoot.findFileByRelativePath(outputFolder)
+		}
+		if (outputSourceFolder === null || !outputSourceFolder.exists) {
 			val result = super.getGeneratedUriForTrace(projectConfig, absoluteSourceResource, generatedFileURI, traceURIConverter)
 			return result
 		}
 		val sourceFolderURI = VirtualFileURIUtil.getURI(outputSourceFolder)
 		val result = generatedFileURI.deresolve(sourceFolderURI)
 		return result
+	}
+	
+	def private boolean isAbsolutePath(String path) {
+		if (path.isNullOrEmpty)
+			return false
+		val char start = path.charAt(0);
+		return start === File.pathSeparatorChar
 	}
 	
 	def private boolean isTraceFile(VirtualFile file) {
@@ -168,7 +184,8 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 	
 	override protected findPersistedTrace(VirtualFileInProject generatedFile) {
 		val virtualFile = generatedFile.file
-		return new VirtualFilePersistedTrace(virtualFile.getTraceFile, this)
+		val traceFile = virtualFile.getTraceFile
+		return new VirtualFilePersistedTrace(traceFile, this)
 	}
 	
 	override protected getAbsoluteLocation(VirtualFileInProject file) {

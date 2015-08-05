@@ -377,7 +377,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		if (disposed) {
 			return
 		}
-		if (isReadyToBeBuilt) {
+		if (!isReadyToBeBuilt) {
 			LOG.info("Project not yet initialized, wait some more")
 			alarm.addRequest([build], 500)
 		} else {
@@ -388,7 +388,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	}
 	
 	private def boolean isReadyToBeBuilt() {
-		return !TEST_MODE && !project.isInitialized && !DumbService.getInstance(project).isDumb
+		return TEST_MODE || (project.isInitialized && !DumbService.getInstance(project).isDumb)
 	}
 	
 	protected def void internalBuild(List<BuildEvent> allEvents) {
