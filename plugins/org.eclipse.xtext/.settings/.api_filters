@@ -64,6 +64,14 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/XtextRuntimeModule.java" type="org.eclipse.xtext.XtextRuntimeModule">
+        <filter comment="removed xtext.xtext QualifiedNameProvider" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextRuntimeModule"/>
+                <message_argument value="bindIQualifiedNameConverter()"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/formatting/impl/MatcherNFAProvider.java" type="org.eclipse.xtext.formatting.impl.MatcherNFAProvider">
         <filter id="576720909">
             <message_arguments>

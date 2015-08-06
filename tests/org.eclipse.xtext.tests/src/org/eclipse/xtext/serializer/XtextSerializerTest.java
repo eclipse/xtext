@@ -16,9 +16,7 @@ import org.eclipse.xtext.junit4.serializer.SerializerTester;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.junit.Test;
 
-import com.google.inject.Guice;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -29,16 +27,6 @@ public class XtextSerializerTest extends AbstractXtextTests {
 
 	private Grammar load(URI uri) {
 		XtextResourceSet rs = new XtextResourceSet();
-		//		rs.getURIConverter()
-		//				.getURIMap()
-		//				.put(rs.getURIConverter().normalize(URI.createURI("classpath:/org/eclipse/xtext/Xtext.ecore")),
-		//						URI.createURI("http://www.eclipse.org/2008/Xtext"));
-		//		URIConverter.URI_MAP.put(URI.createURI("http://www.eclipse.org/2008/Xtext"),
-		//				URI.createURI("classpath:/org/eclipse/xtext/Xtext.ecore"));
-		//		rs.getURIConverter()
-		//		.getURIMap()
-		//		.put(rs.getURIConverter().normalize(URI.createURI("classpath:/org/eclipse/xtext/Xtext.xtext")),
-		//				URI.createURI("http://www.eclipse.org/2008/Xtext"));
 		return (Grammar) rs.getResource(uri, true).getContents().get(0);
 	}
 
@@ -48,31 +36,18 @@ public class XtextSerializerTest extends AbstractXtextTests {
 		StandaloneSetup standaloneSetup = new StandaloneSetup();
 		standaloneSetup.setIgnoreBrokenProjectFiles(true);
 		standaloneSetup.setPlatformUri("../..");
-		with(new XtextStandaloneSetup() {
-			@Override
-			public Injector createInjector() {
-				return Guice.createInjector(new org.eclipse.xtext.XtextRuntimeModule() {
-					@Override
-					public Class<? extends org.eclipse.xtext.serializer.ISerializer> bindISerializer() {
-						return org.eclipse.xtext.serializer.impl.Serializer.class;
-					}
-
-				});
-			}
-
-		});
+		with(new XtextStandaloneSetup());
 		getInjector().injectMembers(this);
 	}
 
-	@Test public void testDummy() {
-	}
-
-	public void _testXtextXtextWithNM() throws Exception {
+	@Test
+	public void testXtextXtextWithNM() throws Exception {
 		Grammar grammar = load(URI.createURI("classpath:/org/eclipse/xtext/Xtext.xtext"));
 		tester.assertSerializeWithNodeModel(grammar);
 	}
 
-	public void _testXtextXtextWithoutNM() throws Exception {
+	@Test
+	public void testXtextXtextWithoutNM() throws Exception {
 		Grammar grammar = load(URI.createURI("classpath:/org/eclipse/xtext/Xtext.xtext"));
 		tester.assertSerializeWithoutNodeModel(grammar);
 	}
