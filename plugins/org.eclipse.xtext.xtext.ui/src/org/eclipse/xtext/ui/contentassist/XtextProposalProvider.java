@@ -98,7 +98,7 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 	private XtextGrammarAccess grammarAccess;
 
 	@Inject
-	private IQualifiedNameConverter.DefaultImpl grammarIdQualifiedNameConverter;
+	private ClassifierQualifiedNameConverter classifierQualifiedNameConverter;
 	
 	@Inject
 	private FQNPrefixMatcher fqnPrefixMatcher;
@@ -129,6 +129,13 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 				return delegate.isCandidateMatchingPrefix(qualifiedName.getSegment(1), qualifiedPrefix.getSegment(1));
 			}
 			return false;
+		}
+	}
+	
+	public static class ClassifierQualifiedNameConverter extends IQualifiedNameConverter.DefaultImpl {
+		@Override
+		public String getDelimiter() {
+			return "::";
 		}
 	}
 
@@ -399,7 +406,7 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 			ICompletionProposalAcceptor acceptor) {
 		Grammar grammar = GrammarUtil.getGrammar(model);
 		ContentAssistContext.Builder myContextBuilder = context.copy();
-		myContextBuilder.setMatcher(new ClassifierPrefixMatcher(context.getMatcher(), getQualifiedNameConverter()));
+		myContextBuilder.setMatcher(new ClassifierPrefixMatcher(context.getMatcher(), classifierQualifiedNameConverter));
 		if (model instanceof TypeRef) {
 			ICompositeNode node = NodeModelUtils.getNode(model);
 			if (node != null) {
@@ -440,7 +447,7 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 				&& modelOrContainerIs(model, AbstractRule.class);
 		boolean createEnumProposals = !(model instanceof AbstractElement) && modelOrContainerIs(model, EnumRule.class);
 		boolean createClassProposals = modelOrContainerIs(model, ParserRule.class, CrossReference.class, Action.class);
-		Function<IEObjectDescription, ICompletionProposal> factory = getProposalFactory(null, context);
+		Function<IEObjectDescription, ICompletionProposal> factory = new DefaultProposalCreator(context, null, classifierQualifiedNameConverter);
 		for (EClassifier classifier : declaration.getEPackage().getEClassifiers()) {
 			if (classifier instanceof EDataType && createDatatypeProposals || classifier instanceof EEnum
 					&& createEnumProposals || classifier instanceof EClass && createClassProposals) {
@@ -746,11 +753,7 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 	}
 
 	@Override
-	protected Function<IEObjectDescription, ICompletionProposal> getProposalFactory(String ruleName,
-			ContentAssistContext contentAssistContext) {
-		if (grammarAccess.getGrammarIDRule().getName().equals(ruleName)) {
-			return new DefaultProposalCreator(contentAssistContext, ruleName, grammarIdQualifiedNameConverter);
-		}
+	protected Function<IEObjectDescription, ICompletionProposal> getProposalFactory(String ruleName, ContentAssistContext contentAssistContext) {
 		return new DefaultProposalCreator(contentAssistContext, ruleName, getQualifiedNameConverter());
 	}
 
