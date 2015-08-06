@@ -19,6 +19,7 @@ import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
+import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
 import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.ui.util.JavaProjectFactory;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
@@ -43,6 +44,9 @@ public class XtendLibClasspathAdderTest extends AbstractXtendUITestCase {
 	@Inject
 	private PluginProjectFactory pluginProjectFactory;
 
+	@Inject
+	private SyncUtil syncUtil;
+	
 	@Override
 	public void tearDown() throws Exception {
 		IResourcesSetupUtil.cleanWorkspace();
@@ -66,10 +70,11 @@ public class XtendLibClasspathAdderTest extends AbstractXtendUITestCase {
 		IFile file = project.getFile("src/Foo.xtend");
 		file.create(new StringInputStream("import org.eclipse.xtend.lib.annotations.Accessors class Foo { @Accessors int bar }"),
 				true, null);
-		waitForAutoBuild();
+		syncUtil.waitForBuild(null);
 		markerAssert.assertErrorMarker(file, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		adder.addLibsToClasspath(javaProject, null);
 		waitForAutoBuild();
+		syncUtil.waitForBuild(null);
 		markerAssert.assertNoErrorMarker(file);
 	}
 
@@ -87,7 +92,7 @@ public class XtendLibClasspathAdderTest extends AbstractXtendUITestCase {
 		IFile file = project.getFile("src/Foo.xtend");
 		file.create(new StringInputStream("import org.eclipse.xtend.lib.annotations.Accessors class Foo { @Accessors int bar }"),
 				true, null);
-		waitForAutoBuild();
+		syncUtil.waitForBuild(null);
 		markerAssert.assertErrorMarker(file, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		adder.addLibsToClasspath(javaProject, null);
 		waitForAutoBuild();
@@ -109,10 +114,11 @@ public class XtendLibClasspathAdderTest extends AbstractXtendUITestCase {
 		IFile file = project.getFile("src/Foo.xtend");
 		file.create(new StringInputStream("import org.eclipse.xtend.lib.annotations.Accessors class Foo { @Accessors int bar }"),
 				true, null);
-		waitForAutoBuild();
+		syncUtil.waitForBuild(null);
 		markerAssert.assertErrorMarker(file, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		adder.addLibsToClasspath(javaProject, null);
 		waitForAutoBuild();
+		syncUtil.waitForBuild(null);
 		markerAssert.assertNoErrorMarker(file);
 	}
 
@@ -121,7 +127,11 @@ public class XtendLibClasspathAdderTest extends AbstractXtendUITestCase {
 	 * {@link org.eclipse.core.resources.ResourcesPlugin#FAMILY_AUTO_BUILD} thus we wait for that one here.
 	 */
 	protected void waitForAutoBuild() {
+		// changing classpath triggers multiple builds, the first one only sets forgetlastBuildState
+		// we need to wait for that
 		IResourcesSetupUtil.reallyWaitForAutoBuild();
+		// now lets do a build
+		syncUtil.waitForBuild(null);
 	}
 
 }
