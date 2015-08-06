@@ -23,6 +23,8 @@ import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend.lib.macro.Active
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder
 
+import static org.eclipse.xtend.core.idea.config.XtendLibraryDescription.*
+
 import static extension com.intellij.openapi.vfs.VfsUtil.*
 import static extension com.intellij.util.PathUtil.*
 
@@ -35,17 +37,21 @@ class XtendLibraryDescription extends CustomLibraryDescription {
 	public static val XTEND_LIBRARY_NAME = 'Xtend Library'
 
 	override createNewLibrary(JComponent parentComponent, VirtualFile contextDirectory) {
+		return createLibraryDescription()
+	}
+
+	def createLibraryDescription() {
 		val provider = providers.head
 		if (provider == null) {
 			return null
 		}
-		new NewLibraryConfiguration(XTEND_LIBRARY_NAME) {
+		return new NewLibraryConfiguration(XTEND_LIBRARY_NAME) {
+			val roots = libraryRoots()
 
 			override addRoots(LibraryEditor editor) {
-				editor.addRoot(Lists.urlForLibraryRoot, OrderRootType.CLASSES)
-				editor.addRoot(ToStringBuilder.urlForLibraryRoot, OrderRootType.CLASSES)
-				editor.addRoot(Active.urlForLibraryRoot, OrderRootType.CLASSES)
-				editor.addRoot(Data.urlForLibraryRoot, OrderRootType.CLASSES)
+				roots.forEach [ k, v |
+					v.forEach[editor.addRoot(it, k)]
+				]
 			}
 
 		}
@@ -55,8 +61,19 @@ class XtendLibraryDescription extends CustomLibraryDescription {
 		LIBRARY_KINDS
 	}
 
+	def libraryRoots() {
+		val roots = newHashMap()
+		roots.put(OrderRootType.CLASSES, #[
+			Lists.urlForLibraryRoot,
+			ToStringBuilder.urlForLibraryRoot,
+			Active.urlForLibraryRoot,
+			Data.urlForLibraryRoot
+		])
+		return roots
+	}
+
 	override getDefaultLevel() {
-		LibrariesContainer.LibraryLevel.GLOBAL
+		LibrariesContainer.LibraryLevel.PROJECT
 	}
 
 	protected def getUrlForLibraryRoot(Class<?> clazz) {

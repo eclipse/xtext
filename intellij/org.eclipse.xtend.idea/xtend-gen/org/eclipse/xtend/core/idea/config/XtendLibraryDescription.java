@@ -22,16 +22,23 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.PathUtil;
 import com.intellij.util.containers.ContainerUtil;
 import java.io.File;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import javax.swing.JComponent;
 import org.eclipse.xtend.core.idea.config.XtendLibraryPresentationProvider;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtend.lib.macro.Active;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.MapExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -49,29 +56,45 @@ public class XtendLibraryDescription extends CustomLibraryDescription {
   
   @Override
   public NewLibraryConfiguration createNewLibrary(final JComponent parentComponent, final VirtualFile contextDirectory) {
-    NewLibraryConfiguration _xblockexpression = null;
-    {
-      List<XtendLibraryPresentationProvider> _providers = XtendLibraryDescription.getProviders();
-      final XtendLibraryPresentationProvider provider = IterableExtensions.<XtendLibraryPresentationProvider>head(_providers);
-      boolean _equals = Objects.equal(provider, null);
-      if (_equals) {
-        return null;
+    return this.createLibraryDescription();
+  }
+  
+  public NewLibraryConfiguration createLibraryDescription() {
+    abstract class __XtendLibraryDescription_1 extends NewLibraryConfiguration {
+      __XtendLibraryDescription_1(@NotNull final String defaultLibraryName) {
+        super(defaultLibraryName);
       }
-      _xblockexpression = new NewLibraryConfiguration(XtendLibraryDescription.XTEND_LIBRARY_NAME) {
-        @Override
-        public void addRoots(final LibraryEditor editor) {
-          String _urlForLibraryRoot = XtendLibraryDescription.this.getUrlForLibraryRoot(Lists.class);
-          editor.addRoot(_urlForLibraryRoot, OrderRootType.CLASSES);
-          String _urlForLibraryRoot_1 = XtendLibraryDescription.this.getUrlForLibraryRoot(ToStringBuilder.class);
-          editor.addRoot(_urlForLibraryRoot_1, OrderRootType.CLASSES);
-          String _urlForLibraryRoot_2 = XtendLibraryDescription.this.getUrlForLibraryRoot(Active.class);
-          editor.addRoot(_urlForLibraryRoot_2, OrderRootType.CLASSES);
-          String _urlForLibraryRoot_3 = XtendLibraryDescription.this.getUrlForLibraryRoot(Data.class);
-          editor.addRoot(_urlForLibraryRoot_3, OrderRootType.CLASSES);
-        }
-      };
+      
+      HashMap<OrderRootType, List<String>> roots;
     }
-    return _xblockexpression;
+    
+    List<XtendLibraryPresentationProvider> _providers = XtendLibraryDescription.getProviders();
+    final XtendLibraryPresentationProvider provider = IterableExtensions.<XtendLibraryPresentationProvider>head(_providers);
+    boolean _equals = Objects.equal(provider, null);
+    if (_equals) {
+      return null;
+    }
+    return new __XtendLibraryDescription_1(XtendLibraryDescription.XTEND_LIBRARY_NAME) {
+      {
+        roots = XtendLibraryDescription.this.libraryRoots();
+      }
+      @Override
+      public void addRoots(final LibraryEditor editor) {
+        final Procedure2<OrderRootType, List<String>> _function = new Procedure2<OrderRootType, List<String>>() {
+          @Override
+          public void apply(final OrderRootType k, final List<String> v) {
+            final Procedure1<String> _function = new Procedure1<String>() {
+              @Override
+              public void apply(final String it) {
+                editor.addRoot(it, k);
+              }
+            };
+            IterableExtensions.<String>forEach(v, _function);
+          }
+        };
+        MapExtensions.<OrderRootType, List<String>>forEach(this.roots, _function);
+      }
+    };
   }
   
   @Override
@@ -79,9 +102,19 @@ public class XtendLibraryDescription extends CustomLibraryDescription {
     return XtendLibraryDescription.LIBRARY_KINDS;
   }
   
+  public HashMap<OrderRootType, List<String>> libraryRoots() {
+    final HashMap<OrderRootType, List<String>> roots = CollectionLiterals.<OrderRootType, List<String>>newHashMap();
+    String _urlForLibraryRoot = this.getUrlForLibraryRoot(Lists.class);
+    String _urlForLibraryRoot_1 = this.getUrlForLibraryRoot(ToStringBuilder.class);
+    String _urlForLibraryRoot_2 = this.getUrlForLibraryRoot(Active.class);
+    String _urlForLibraryRoot_3 = this.getUrlForLibraryRoot(Data.class);
+    roots.put(OrderRootType.CLASSES, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(_urlForLibraryRoot, _urlForLibraryRoot_1, _urlForLibraryRoot_2, _urlForLibraryRoot_3)));
+    return roots;
+  }
+  
   @Override
   public LibrariesContainer.LibraryLevel getDefaultLevel() {
-    return LibrariesContainer.LibraryLevel.GLOBAL;
+    return LibrariesContainer.LibraryLevel.PROJECT;
   }
   
   protected String getUrlForLibraryRoot(final Class<?> clazz) {
