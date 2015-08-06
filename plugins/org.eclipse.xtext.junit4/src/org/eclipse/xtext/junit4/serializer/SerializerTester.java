@@ -36,6 +36,7 @@ import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Assert;
 
 import com.google.common.base.Joiner;
@@ -222,7 +223,8 @@ public class SerializerTester {
 				System.out.println("Serializer debug output:");
 				System.out.println(debug.toString());
 			}
-			throw new RuntimeException(t);
+			Exceptions.sneakyThrow(t);
+			return "";
 		}
 	}
 
