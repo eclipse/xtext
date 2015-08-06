@@ -39,7 +39,6 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
-import org.eclipse.xtext.scoping.impl.GlobalResourceDescriptionProvider;
 import org.eclipse.xtext.scoping.impl.SelectableBasedScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 
@@ -54,7 +53,7 @@ import com.google.inject.Inject;
 public class XtextScopeProvider extends AbstractScopeProvider {
 	
 	@Inject
-	private GlobalResourceDescriptionProvider resourceDecriptionProvider;
+	private IResourceDescription.Manager resourceDescriptionManager;
 	
 	@Inject
 	private IGlobalScopeProvider globalScopeProvider;
@@ -156,7 +155,7 @@ public class XtextScopeProvider extends AbstractScopeProvider {
 	}
 
 	protected IScope createScope(final Grammar grammar, final EClass type, IScope parent) {
-		final IResourceDescription resourceDescription = resourceDecriptionProvider.getResourceDescription(grammar.eResource());
+		final IResourceDescription resourceDescription = resourceDescriptionManager.getResourceDescription(grammar.eResource());
 		return SelectableBasedScope.createScope(parent, resourceDescription, type, false);
 	}
 
