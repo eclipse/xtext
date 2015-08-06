@@ -14,7 +14,6 @@ import com.intellij.framework.addSupport.FrameworkSupportInModuleConfigurable
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.roots.ModifiableModelsProvider
 import com.intellij.openapi.roots.ModifiableRootModel
-import com.intellij.openapi.roots.libraries.LibraryTablesRegistrar
 import com.intellij.openapi.vfs.VirtualFile
 import javax.inject.Provider
 import org.eclipse.xtend.core.idea.facet.XtendFacetConfiguration
@@ -29,6 +28,7 @@ class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurable {
 
 	@Inject
 	Provider<XtendLibraryDescription> libraryDescriptionProvider
+	@Inject XtendLibraryManager xtendLibManager
 
 	override addSupport(
 		Module module,
@@ -50,26 +50,23 @@ class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurable {
 			val properties = JpsJavaExtensionService.getInstance().createSourceRootProperties("", true);
 			entry.addSourceFolder(xtendGenTest, JavaSourceRootType.TEST_SOURCE, properties)
 		}
-		
+
 		val facetType = FacetTypeRegistry.getInstance().findFacetType(XtendLanguage.INSTANCE.ID)
 		val mnr = FacetManager.getInstance(module)
-		var facet = mnr.findFacet(facetType.id, facetType.defaultFacetName) 
-						?: FacetManager.getInstance(module).addFacet(facetType, facetType.defaultFacetName, null)
+		var facet = mnr.findFacet(facetType.id, facetType.defaultFacetName) ?:
+			FacetManager.getInstance(module).addFacet(facetType, facetType.defaultFacetName, null)
 		val conf = facet.configuration as XtendFacetConfiguration
 		val state = conf.state
 		if (xtendGenMain != null)
 			state.outputDirectory = xtendGenMain.canonicalPath
 		if (xtendGenTest != null)
 			state.testOutputDirectory = xtendGenTest.canonicalPath
-		val libraryTable = LibraryTablesRegistrar.getInstance().getLibraryTable()
-		var library = libraryTable.getLibraryByName(XtendLibraryDescription.XTEND_LIBRARY_NAME)
-		if (library != null && !rootModel.moduleLibraryTable.libraries.contains(library)) {
-			rootModel.addLibraryEntry(library)
-		}
+
+		xtendLibManager.ensureXtendLibAvailable(rootModel, module)
 	}
-	
+
 	private def VirtualFile getOrCreateDir(VirtualFile parent, String name) {
-		val existing = parent.children.findFirst[it.name==name] 
+		val existing = parent.children.findFirst[it.name == name]
 		if (existing != null) {
 			return existing
 		}
