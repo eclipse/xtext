@@ -24,6 +24,14 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src-gen/org/eclipse/xtext/AbstractXtextRuntimeModule.java" type="org.eclipse.xtext.AbstractXtextRuntimeModule">
+        <filter comment="the parse tree constructor is no longer used" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.AbstractXtextRuntimeModule"/>
+                <message_argument value="bindIParseTreeConstructor()"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src-gen/org/eclipse/xtext/parser/antlr/XtextParser.java" type="org.eclipse.xtext.parser.antlr.XtextParser">
         <filter id="643842064">
             <message_arguments>

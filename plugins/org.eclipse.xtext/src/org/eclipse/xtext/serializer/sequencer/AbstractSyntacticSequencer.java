@@ -105,7 +105,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 	protected TokenUtil tokenUtil;
 
 	protected void accept(INode fromNode, List<ISynState> path, RuleCallStack stack) {
-		if (path.isEmpty())
+		if (path == null || path.isEmpty())
 			return;
 		EmitterNodeFinder nodes = new EmitterNodeFinder(fromNode);
 		//		RCStack bak = stack.clone();

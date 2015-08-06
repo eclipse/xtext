@@ -29,6 +29,8 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
+import org.eclipse.xtext.serializer.ISerializer;
+import org.eclipse.xtext.serializer.impl.Serializer;
 import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
 import org.eclipse.xtext.validation.IDiagnosticConverter;
 import org.eclipse.xtext.xtext.GrammarResource;
@@ -181,5 +183,13 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 	 */
 	public Class<? extends SyntaxErrorMessageProvider> bindSyntaxErrorMessageProvider() {
 		return CardinalityAwareSyntaxErrorMessageProvider.class;
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	@Override
+	public Class<? extends ISerializer> bindISerializer() {
+		return Serializer.class;
 	}
 }
