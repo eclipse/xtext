@@ -7,10 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer.diagnostic;
 
+import static org.eclipse.xtext.serializer.impl.FeatureFinderUtil.*;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.serializer.impl.FeatureFinderUtil;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -26,10 +27,15 @@ public class SerializationDiagnostic implements ISerializationDiagnostic {
 	protected EObject context;
 
 	private String id;
+	
+	private Throwable throwable;
+
+	public SerializationDiagnostic(String id, EObject semantic, AbstractElement element, String msg, Throwable exc) {
+		this(id, semantic, semantic != null ? getFeature(element, semantic.eClass()) : null, msg, exc);
+	}
 
 	public SerializationDiagnostic(String id, EObject semanticObject, AbstractElement element, String message) {
-		this(id, semanticObject, semanticObject != null ? FeatureFinderUtil.getFeature(element, semanticObject.eClass())
-				: null, message);
+		this(id, semanticObject, semanticObject != null ? getFeature(element, semanticObject.eClass()) : null, message);
 	}
 
 	public SerializationDiagnostic(String id, EObject semanticObject, EStructuralFeature feature, String message) {
@@ -38,6 +44,15 @@ public class SerializationDiagnostic implements ISerializationDiagnostic {
 		this.semanticObject = semanticObject;
 		this.message = message;
 		this.feature = feature;
+	}
+	
+	public SerializationDiagnostic(String id, EObject semanticObject, EStructuralFeature feature, String message, Throwable throwable) {
+		super();
+		this.id = id;
+		this.semanticObject = semanticObject;
+		this.throwable = throwable;
+		this.feature = feature;
+		this.message = message;
 	}
 
 	public SerializationDiagnostic(String id, EObject semanticObject, EObject context, String message) {
@@ -59,7 +74,7 @@ public class SerializationDiagnostic implements ISerializationDiagnostic {
 
 	@Override
 	public Throwable getException() {
-		return null;
+		return throwable;
 	}
 
 	@Override
@@ -80,5 +95,10 @@ public class SerializationDiagnostic implements ISerializationDiagnostic {
 	@Override
 	public String getId() {
 		return id;
+	}
+
+	@Override
+	public EStructuralFeature getEStructuralFeature() {
+		return feature;
 	}
 }
