@@ -13,7 +13,6 @@ import org.eclipse.xtext.formatting.IFormatter;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.linking.ILinkingService;
-import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.parser.DefaultEcoreElementFactory;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.parser.antlr.SyntaxErrorMessageProvider;
@@ -42,7 +41,6 @@ import org.eclipse.xtext.xtext.XtextFragmentProvider;
 import org.eclipse.xtext.xtext.XtextLinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.xtext.XtextLinkingService;
 import org.eclipse.xtext.xtext.XtextLocationInFileProvider;
-import org.eclipse.xtext.xtext.XtextQualifiedNameConverter;
 import org.eclipse.xtext.xtext.XtextReferableElementsUnloader;
 import org.eclipse.xtext.xtext.XtextResourceDescriptionStrategy;
 import org.eclipse.xtext.xtext.XtextScopeProvider;
@@ -117,10 +115,6 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 	
 	public Class<? extends IReferableElementsUnloader> bindIReferableElementsUnloader() {
 		return XtextReferableElementsUnloader.class;
-	}
-	
-	public Class<? extends IQualifiedNameConverter> bindIQualifiedNameConverter() {
-		return XtextQualifiedNameConverter.class;
 	}
 	
 	public Class<? extends IDiagnosticConverter> bindIDiagnosticConverter() {
