@@ -16,16 +16,21 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.linking.impl.LinkingHelper;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.EmfFormatter;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class TokenDiagnosticProvider implements ITokenDiagnosticProvider {
+
+	@Inject
+	private LinkingHelper linkingHelper;
 
 	protected String getFullReferenceName(EObject semanticObject, CrossReference reference) {
 		EReference ref = GrammarUtil.getReference(reference);
@@ -68,9 +73,16 @@ public class TokenDiagnosticProvider implements ITokenDiagnosticProvider {
 	}
 
 	@Override
-	public ISerializationDiagnostic getValueConversionExceptionDiagnostic(EObject semanticObject,
-			AbstractElement element, Object value, Throwable exception) {
-		return new SerializationDiagnostic(VALUE_CONVERSION_EXCEPTION, semanticObject, element, exception.getMessage());
+	public ISerializationDiagnostic getValueConversionExceptionDiagnostic(EObject semantic, AbstractElement element,
+			Object value, Throwable exception) {
+		String ruleName = linkingHelper.getRuleNameFrom(element);
+		StringBuilder msg = new StringBuilder();
+		msg.append("Error while converting value '");
+		msg.append(value);
+		msg.append("' for grammar rule '");
+		msg.append(ruleName);
+		msg.append("' to string via ValueConverter.");
+		return new SerializationDiagnostic(VALUE_CONVERSION_EXCEPTION, semantic, element, msg.toString(), exception);
 	}
 
 }
