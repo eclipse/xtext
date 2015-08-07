@@ -175,7 +175,7 @@ class XtendIntentionsProvider extends IdeaIntentionsProvider {
 
 	static class AddXtendLibToClassPathIntentionAction extends AbstractIssueIntentionAction {
 		@Inject XtendLibraryManager libraryManager
-		public static val TEXT = "Add Xtend library"
+		public static val TEXT = "Add Xtend runtime Library"
 
 		override getText() {
 			TEXT
@@ -184,7 +184,7 @@ class XtendIntentionsProvider extends IdeaIntentionsProvider {
 		override invoke(Project project, Editor editor, PsiFile file) throws IncorrectOperationException {
 			val module = ModuleUtil.findModuleForPsiElement(file)
 			val model = ModuleRootManager.getInstance(module).modifiableModel
-			libraryManager.ensureXtendLibAvailable(model, module)
+			libraryManager.ensureXtendLibAvailable(model, module, file)
 			model.commit
 		}
 
