@@ -47,6 +47,9 @@
       	<lang.psiStructureViewFactory language="org.eclipse.xtext.idea.sdomain.SDomain"
       							factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"
       							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
+      	<lang.documentationProvider language="org.eclipse.xtext.idea.sdomain.SDomain"
+      							factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"
+      							implementationClass="org.eclipse.xtext.idea.documentation.IdeaDocumentationProvider"/>
 		<facetType implementation="org.eclipse.xtext.idea.sdomain.idea.facet.SDomainFacetType"/>
 		<colorSettingsPage implementation="org.eclipse.xtext.idea.sdomain.idea.highlighting.SDomainColorSettingsPage"/>
 		<highlightVisitor implementation="org.eclipse.xtext.idea.sdomain.idea.highlighting.SDomainSemanticHighlightVisitor"/>

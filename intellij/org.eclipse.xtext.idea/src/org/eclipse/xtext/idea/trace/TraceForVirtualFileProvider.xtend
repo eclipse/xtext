@@ -87,14 +87,20 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 		if (trace === null) {
 			return emptyList
 		}
+		// element.textRange.offset does include comments; elenent.textOffset doens't.
 		val range = element.textRange
-		val targetLocations = trace.getAllAssociatedLocations(new TextRegion(range.startOffset, range.length))
+		val offset = element.textOffset
+		val region = new TextRegion(offset, range.endOffset - offset)
+		val targetLocations = trace.getAllAssociatedLocations(region)
 		val mngr = element.manager
-		val result = targetLocations.filter[textRegion.length > 0].map[ it |
-			val targetFile = it.platformResource.file
+		val result = targetLocations.filter[textRegion.length > 0].map [ it |
+			val platformResource = it.platformResource
+			if (platformResource === null)
+				return null
+			val targetFile = platformResource.file
 			val textRegion = it.textRegion
 			var result = mngr.findFile(targetFile).findElementAt(textRegion.offset)
-			while(!result.textRange.containsRange(textRegion.offset, textRegion.offset + textRegion.length)) {
+			while (!result.textRange.containsRange(textRegion.offset, textRegion.offset + textRegion.length)) {
 				result = result.parent
 			}
 			if (result.textLength == 0) {

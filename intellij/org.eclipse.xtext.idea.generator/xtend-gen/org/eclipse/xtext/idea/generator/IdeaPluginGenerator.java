@@ -1270,6 +1270,10 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     CharSequence _compileExtension_7 = this.compileExtension(grammar, "lang.psiStructureViewFactory", "com.intellij.lang.PsiStructureViewFactory");
     _builder.append(_compileExtension_7, "      \t");
     _builder.newLineIfNotEmpty();
+    _builder.append("      \t");
+    CharSequence _compileExtension_8 = this.compileExtension(grammar, "lang.documentationProvider", "org.eclipse.xtext.idea.documentation.IdeaDocumentationProvider");
+    _builder.append(_compileExtension_8, "      \t");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("<facetType implementation=\"");
     String _facetTypeName = this._ideaPluginClassNames.getFacetTypeName(grammar);
@@ -1290,12 +1294,12 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t\t");
-    CharSequence _compileExtension_8 = this.compileExtension(grammar, "lang.formatter", "com.intellij.formatting.FormattingModelBuilder");
-    _builder.append(_compileExtension_8, "\t\t");
+    CharSequence _compileExtension_9 = this.compileExtension(grammar, "lang.formatter", "com.intellij.formatting.FormattingModelBuilder");
+    _builder.append(_compileExtension_9, "\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
-    CharSequence _compileExtension_9 = this.compileExtension(grammar, "lang.commenter", "com.intellij.lang.CodeDocumentationAwareCommenter");
-    _builder.append(_compileExtension_9, "\t\t");
+    CharSequence _compileExtension_10 = this.compileExtension(grammar, "lang.commenter", "com.intellij.lang.CodeDocumentationAwareCommenter");
+    _builder.append(_compileExtension_10, "\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("</extensions>");

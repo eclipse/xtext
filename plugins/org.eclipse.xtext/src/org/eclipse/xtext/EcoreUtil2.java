@@ -55,6 +55,7 @@ import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Strings;
 
+import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.MapMaker;
 
 /**
@@ -775,5 +776,32 @@ public class EcoreUtil2 extends EcoreUtil {
 						};
 					}
 				}).iterator();
+	}
+	
+	
+	/**
+	 * Returns an Iterable that iterates over all containers of this EObject, from leaf to root. The <code>obj</code>
+	 * itself is not included.
+	 * 
+	 * @since 2.9
+	 */
+	public static Iterable<EObject> getAllContainers(final EObject obj) {
+		return new Iterable<EObject>() {
+			@Override
+			public Iterator<EObject> iterator() {
+				return new AbstractIterator<EObject>() {
+
+					private EObject current = obj;
+
+					@Override
+					protected EObject computeNext() {
+						current = current.eContainer();
+						if (current == null)
+							return endOfData();
+						return current;
+					}
+				};
+			}
+		};
 	}
 }
