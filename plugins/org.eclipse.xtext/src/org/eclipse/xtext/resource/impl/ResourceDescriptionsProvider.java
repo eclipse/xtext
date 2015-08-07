@@ -54,11 +54,11 @@ public class ResourceDescriptionsProvider implements IResourceDescriptionsProvid
 	 * */
 	public static final String PERSISTED_DESCRIPTIONS = "org.eclipse.xtext.builder.impl.PersistentDataAwareDirtyResource.PERSISTED_DESCRIPTIONS";
 
-	@Inject
+	@Inject(optional = true)
 	@Named(NAMED_BUILDER_SCOPE)
 	private Provider<IResourceDescriptions> builderScopeResourceDescriptions;
 
-	@Inject
+	@Inject(optional = true)
 	@Named(LIVE_SCOPE)
 	private Provider<IResourceDescriptions> liveScopeResourceDescriptions;
 
@@ -66,7 +66,7 @@ public class ResourceDescriptionsProvider implements IResourceDescriptionsProvid
 	@Named(PERSISTED_DESCRIPTIONS)
 	private Provider<IResourceDescriptions> persistedResourceDescriptions;
 
-	@Inject
+	@Inject(optional = true)
 	private Provider<IResourceDescriptions> resourceDescriptions;
 
 	public IResourceDescriptions getResourceDescriptions(Resource resource) {

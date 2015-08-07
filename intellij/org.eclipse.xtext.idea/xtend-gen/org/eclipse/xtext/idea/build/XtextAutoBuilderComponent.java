@@ -339,7 +339,15 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   }
   
   public void fileDeleted(final VirtualFile file) {
-    this.enqueue(file, BuildEvent.Type.DELETED);
+    boolean _isDirectory = file.isDirectory();
+    if (_isDirectory) {
+      VirtualFile[] _children = file.getChildren();
+      for (final VirtualFile child : _children) {
+        this.fileDeleted(child);
+      }
+    } else {
+      this.enqueue(file, BuildEvent.Type.DELETED);
+    }
   }
   
   public void fileAdded(final VirtualFile file) {
