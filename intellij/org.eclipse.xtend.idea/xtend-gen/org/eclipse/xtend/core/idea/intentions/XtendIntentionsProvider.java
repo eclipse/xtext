@@ -319,7 +319,7 @@ public class XtendIntentionsProvider extends IdeaIntentionsProvider {
     @Inject
     private XtendLibraryManager libraryManager;
     
-    public final static String TEXT = "Add Xtend library";
+    public final static String TEXT = "Add Xtend runtime Library";
     
     @Override
     public String getText() {
@@ -331,7 +331,7 @@ public class XtendIntentionsProvider extends IdeaIntentionsProvider {
       final Module module = ModuleUtil.findModuleForPsiElement(file);
       ModuleRootManager _instance = ModuleRootManager.getInstance(module);
       final ModifiableRootModel model = _instance.getModifiableModel();
-      this.libraryManager.ensureXtendLibAvailable(model, module);
+      this.libraryManager.ensureXtendLibAvailable(model, module, file);
       model.commit();
     }
   }
