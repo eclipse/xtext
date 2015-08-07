@@ -21,15 +21,12 @@ import com.intellij.openapi.roots.ContentEntry;
 import com.intellij.openapi.roots.ModifiableModelsProvider;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.SourceFolder;
-import com.intellij.openapi.roots.libraries.Library;
-import com.intellij.openapi.roots.libraries.LibraryTable;
-import com.intellij.openapi.roots.libraries.LibraryTablesRegistrar;
 import com.intellij.openapi.roots.ui.configuration.libraries.CustomLibraryDescription;
 import com.intellij.openapi.vfs.VirtualFile;
-import java.util.List;
 import javax.inject.Provider;
 import javax.swing.JComponent;
 import org.eclipse.xtend.core.idea.config.XtendLibraryDescription;
+import org.eclipse.xtend.core.idea.config.XtendLibraryManager;
 import org.eclipse.xtend.core.idea.facet.XtendFacetConfiguration;
 import org.eclipse.xtend.core.idea.lang.XtendLanguage;
 import org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigurationState;
@@ -48,6 +45,9 @@ import org.jetbrains.jps.model.java.JpsJavaExtensionService;
 public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurable {
   @Inject
   private Provider<XtendLibraryDescription> libraryDescriptionProvider;
+  
+  @Inject
+  private XtendLibraryManager xtendLibManager;
   
   @Override
   public void addSupport(final Module module, final ModifiableRootModel rootModel, final ModifiableModelsProvider modifiableModelsProvider) {
@@ -142,23 +142,7 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
       String _canonicalPath_1 = xtendGenTest.getCanonicalPath();
       state.setTestOutputDirectory(_canonicalPath_1);
     }
-    LibraryTablesRegistrar _instance_4 = LibraryTablesRegistrar.getInstance();
-    final LibraryTable libraryTable = _instance_4.getLibraryTable();
-    Library library = libraryTable.getLibraryByName(XtendLibraryDescription.XTEND_LIBRARY_NAME);
-    boolean _and = false;
-    boolean _notEquals_4 = (!Objects.equal(library, null));
-    if (!_notEquals_4) {
-      _and = false;
-    } else {
-      LibraryTable _moduleLibraryTable = rootModel.getModuleLibraryTable();
-      Library[] _libraries = _moduleLibraryTable.getLibraries();
-      boolean _contains = ((List<Library>)Conversions.doWrapArray(_libraries)).contains(library);
-      boolean _not = (!_contains);
-      _and = _not;
-    }
-    if (_and) {
-      rootModel.addLibraryEntry(library);
-    }
+    this.xtendLibManager.ensureXtendLibAvailable(rootModel, module);
   }
   
   private VirtualFile getOrCreateDir(final VirtualFile parent, final String name) {

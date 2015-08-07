@@ -14,7 +14,11 @@ import com.google.inject.Provider;
 import com.intellij.lang.annotation.Annotation;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.ModifiableRootModel;
+import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
@@ -26,6 +30,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend.core.idea.config.XtendLibraryManager;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendMember;
@@ -310,11 +315,35 @@ public class XtendIntentionsProvider extends IdeaIntentionsProvider {
     }
   }
   
+  public static class AddXtendLibToClassPathIntentionAction extends AbstractIssueIntentionAction {
+    @Inject
+    private XtendLibraryManager libraryManager;
+    
+    public final static String TEXT = "Add Xtend library";
+    
+    @Override
+    public String getText() {
+      return XtendIntentionsProvider.AddXtendLibToClassPathIntentionAction.TEXT;
+    }
+    
+    @Override
+    public void invoke(final Project project, final Editor editor, final PsiFile file) throws IncorrectOperationException {
+      final Module module = ModuleUtil.findModuleForPsiElement(file);
+      ModuleRootManager _instance = ModuleRootManager.getInstance(module);
+      final ModifiableRootModel model = _instance.getModifiableModel();
+      this.libraryManager.ensureXtendLibAvailable(model, module);
+      model.commit();
+    }
+  }
+  
   @Inject
   private Provider<XtendIntentionsProvider.InsertXtendMethodsIntentionAction> insertXtendMethodsIntentionActionProvider;
   
   @Inject
   private Provider<XtendIntentionsProvider.InsertSuperConstructorsIntentionAction> insertSuperConstructorsIntentionActionProvider;
+  
+  @Inject
+  private Provider<XtendIntentionsProvider.AddXtendLibToClassPathIntentionAction> addXtendLibToClassPathIntentionAction;
   
   @Override
   public void registerFixes(final Annotation anno, final Issue issue) {
@@ -351,6 +380,20 @@ public class XtendIntentionsProvider extends IdeaIntentionsProvider {
         };
         XtendIntentionsProvider.InsertXtendMethodsIntentionAction _doubleArrow_1 = ObjectExtensions.<XtendIntentionsProvider.InsertXtendMethodsIntentionAction>operator_doubleArrow(_get_1, _function_1);
         anno.registerFix(_doubleArrow_1);
+      } else {
+        String _code_3 = issue.getCode();
+        boolean _equals_3 = Objects.equal(_code_3, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
+        if (_equals_3) {
+          XtendIntentionsProvider.AddXtendLibToClassPathIntentionAction _get_2 = this.addXtendLibToClassPathIntentionAction.get();
+          final Procedure1<XtendIntentionsProvider.AddXtendLibToClassPathIntentionAction> _function_2 = new Procedure1<XtendIntentionsProvider.AddXtendLibToClassPathIntentionAction>() {
+            @Override
+            public void apply(final XtendIntentionsProvider.AddXtendLibToClassPathIntentionAction it) {
+              it.setIssue(issue);
+            }
+          };
+          XtendIntentionsProvider.AddXtendLibToClassPathIntentionAction _doubleArrow_2 = ObjectExtensions.<XtendIntentionsProvider.AddXtendLibToClassPathIntentionAction>operator_doubleArrow(_get_2, _function_2);
+          anno.registerFix(_doubleArrow_2);
+        }
       }
     }
   }
