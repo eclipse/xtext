@@ -12,6 +12,7 @@ import java.io.ByteArrayOutputStream;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.junit.Test;
 
 /**
@@ -28,6 +29,7 @@ public class GrammarSerializerTest extends AbstractXtextTests {
 	@Test public void testSerializeGrammar() throws Exception {
 		String string = readFileIntoString("org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.xtext");
 		XtextResource resource = getResourceFromString(string);
+		resource.getResourceSet().getLoadOptions().put(ResourceDescriptionsProvider.LIVE_SCOPE, Boolean.TRUE);
 		resource.save(new ByteArrayOutputStream(), null);
 	}
 
