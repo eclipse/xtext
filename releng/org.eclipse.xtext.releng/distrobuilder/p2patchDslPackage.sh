@@ -196,6 +196,16 @@ fi
 renamed=`echo $file` # was `echo $file | sed $SEDEXPRESSION`
 cd $DIR_TMP
 # we are in $DIR_TMP now
+# check signature
+if [ -f Eclipse.app/Contents/MacOS/eclipse ];
+then
+	# https://github.com/steakknife/unsign
+   ./../unsign Eclipse.app/Contents/MacOS/eclipse
+   mv Eclipse.app/Contents/MacOS/eclipse Eclipse.app/Contents/MacOS/eclipse.sig
+   mv Eclipse.app/Contents/MacOS/eclipse.unsigned Eclipse.app/Contents/MacOS/eclipse
+fi
+
+
 echo "compressing in $renamed"
 compress $renamed $ECLIPSE_ROOT
 echo "moving $renamed in $DIR_OUTPUT"
