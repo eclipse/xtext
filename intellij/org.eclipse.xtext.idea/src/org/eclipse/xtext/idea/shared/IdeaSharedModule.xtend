@@ -8,6 +8,7 @@
 package org.eclipse.xtext.idea.shared
 
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider
+import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess
 import org.eclipse.xtext.generator.trace.ITraceForURIProvider
 import org.eclipse.xtext.idea.common.types.StubTypeProviderFactory
 import org.eclipse.xtext.idea.service.IdeaOperationCanceledManager
@@ -26,7 +27,11 @@ class IdeaSharedModule extends AbstractGenericModule {
 
 	def Class<? extends IJvmTypeProvider.Factory> bindIJvmTypeProvider$Factory() {
 		StubTypeProviderFactory
-	}	
+	}
+	
+	def Class<? extends IndexedJvmTypeAccess> bindIndexedJvmTypeAccess() {
+		IndexedJvmTypeAccess
+	}
 	
 	def IResourceServiceProvider.Registry getIResourceServiceProvider$Registry() {
 		IResourceServiceProvider.Registry.INSTANCE
