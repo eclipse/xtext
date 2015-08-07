@@ -72,7 +72,7 @@ public class TraceBasedOpenerContributor extends OppositeFileOpenerContributor {
 		IStorage editorStorage = getStorage(editor);
 		if (editorStorage != null) {
 			IEclipseTrace trace = traceForStorageProvider.getTraceToSource(editorStorage);
-			if (trace.hasTraceData()) {
+			if (trace != null && trace.hasTraceData()) {
 				collectOpeners(trace, getSelectedRegion(editor), acceptor);
 				return true;
 			}
