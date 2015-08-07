@@ -14,6 +14,10 @@ import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.PsiElement
 import java.util.List
 import org.eclipse.xtext.idea.shared.IdeaSharedInjectorProvider
+import com.intellij.ide.projectView.impl.ProjectViewPane
+import com.intellij.ide.DataManager
+import com.intellij.openapi.actionSystem.PlatformDataKeys
+import com.intellij.openapi.application.ApplicationManager
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -32,13 +36,14 @@ class TraceBasedGeneratedSourcesFilter extends GeneratedSourcesFilter {
 	}
 	
 	override getOriginalElements(PsiElement element) {
-//		// don't navigate to the original element on double click in project explorer
-//		val currentStack = Thread.currentThread.stackTrace
-//		if (currentStack.subList(15, 20).exists[ frame |
-//			frame.className.startsWith(ProjectViewPane.name)
-//		]) {
-//			return emptyList
-//		}
+		// don't navigate to the original element on double click in project explorer
+		if (ApplicationManager.application.isDispatchThread) {
+			val ctx = DataManager.instance.dataContextFromFocus.result
+			val focus = ctx.getData(PlatformDataKeys.CONTEXT_COMPONENT.name)
+			if (focus != null && focus.class.name.startsWith(ProjectViewPane.name)) {
+				return emptyList
+			}
+		}
 		return traceProvider.getOriginalElements(element)
 	}
 	
