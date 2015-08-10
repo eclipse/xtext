@@ -65,6 +65,42 @@ abstract class AbstractXbaseAutoEditTest extends AbstractAutoEditTest {
 		''')
 	}
 
+	def void test_if_then_05() {
+		'''
+			var x = 0
+			if (x == 1)| {return true}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			var x = 0
+			if (x == 1)
+			|{return true}
+		''')
+	}
+
+	def void test_if_then_06() {
+		'''
+			var x = 0
+			|if (x == 1) {return true}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			var x = 0
+			
+			|if (x == 1) {return true}
+		''')
+	}
+
+	def void test_if_then_07() {
+		'''
+			var x = 0|
+			if (x == 1) {return true}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			var x = 0
+			|
+			if (x == 1) {return true}
+		''')
+	}
+
 	def void test_if_else_01() {
 		'''
 			var x = 0
@@ -127,6 +163,54 @@ abstract class AbstractXbaseAutoEditTest extends AbstractAutoEditTest {
 				return true
 			else {
 				|return false}
+		''')
+	}
+
+	def void test_if_else_05() {
+		'''
+			var x = 0
+			if (x == 1)
+				return true
+			else| {return false}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			var x = 0
+			if (x == 1)
+				return true
+			else
+			|{return false}
+		''')
+	}
+
+	def void test_if_else_06() {
+		'''
+			var x = 0
+			if (x == 1)
+				return true
+			|else {return false}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			var x = 0
+			if (x == 1)
+				return true
+			
+			|else {return false}
+		''')
+	}
+
+	def void test_if_else_07() {
+		'''
+			var x = 0
+			if (x == 1)
+				return true|
+			else {return false}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			var x = 0
+			if (x == 1)
+				return true
+			|
+			else {return false}
 		''')
 	}
 
@@ -210,6 +294,38 @@ abstract class AbstractXbaseAutoEditTest extends AbstractAutoEditTest {
 		''')
 	}
 
+	def void test_switch_default_06() {
+		'''
+			var x = 0
+			switch x {
+				|default:return true
+			}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			var x = 0
+			switch x {
+				
+				|default:return true
+			}
+		''')
+	}
+
+	def void test_switch_default_07() {
+		'''
+			var x = 0
+			switch x {|
+				default:return true
+			}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			var x = 0
+			switch x {
+				|
+				default:return true
+			}
+		''')
+	}
+
 	def void test_switch_case_01() {
 		'''
 			var x = 0
@@ -275,6 +391,54 @@ abstract class AbstractXbaseAutoEditTest extends AbstractAutoEditTest {
 		''')
 	}
 
+	def void test_switch_case_05() {
+		'''
+			var x = 0
+			switch x {
+				case| 1: {}
+			}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			var x = 0
+			switch x {
+				case
+				|1: {}
+			}
+		''')
+	}
+
+	def void test_switch_case_06() {
+		'''
+			var x = 0
+			switch x {
+				|case 1: {}
+			}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			var x = 0
+			switch x {
+				
+				|case 1: {}
+			}
+		''')
+	}
+
+	def void test_switch_case_07() {
+		'''
+			var x = 0
+			switch x {|
+				case 1: {}
+			}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			var x = 0
+			switch x {
+				|
+				case 1: {}
+			}
+		''')
+	}
+
 	def void test_for_01() {
 		'''
 			var values = <String>newArrayList
@@ -319,6 +483,54 @@ abstract class AbstractXbaseAutoEditTest extends AbstractAutoEditTest {
 		''')
 	}
 
+	def void test_for_04() {
+		'''
+			var values = <String>newArrayList
+			var result = 0
+			for| (value : values) {result += value.length}
+			result
+		'''.assertAutoIndentOnNewLine(
+		'''
+			var values = <String>newArrayList
+			var result = 0
+			for
+			|(value : values) {result += value.length}
+			result
+		''')
+	}
+
+	def void test_for_05() {
+		'''
+			var values = <String>newArrayList
+			var result = 0
+			|for (value : values) {result += value.length}
+			result
+		'''.assertAutoIndentOnNewLine(
+		'''
+			var values = <String>newArrayList
+			var result = 0
+			
+			|for (value : values) {result += value.length}
+			result
+		''')
+	}
+
+	def void test_for_06() {
+		'''
+			var values = <String>newArrayList
+			var result = 0|
+			for (value : values) {result += value.length}
+			result
+		'''.assertAutoIndentOnNewLine(
+		'''
+			var values = <String>newArrayList
+			var result = 0
+			|
+			for (value : values) {result += value.length}
+			result
+		''')
+	}
+
 	def void test_basic_for_01() {
 		'''
 			for (;;)|
@@ -349,6 +561,40 @@ abstract class AbstractXbaseAutoEditTest extends AbstractAutoEditTest {
 		''')
 	}
 
+	def void test_basic_for_04() {
+		'''
+			for (var i = 0;;)| {i++}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			for (var i = 0;;)
+			|{i++}
+		''')
+	}
+
+	def void test_basic_for_05() {
+		'''
+			println('Hello World')
+			|for (var i = 0;;) {i++}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			println('Hello World')
+			
+			|for (var i = 0;;) {i++}
+		''')
+	}
+
+	def void test_basic_for_06() {
+		'''
+			println('Hello World')|
+			for (var i = 0;;) {i++}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			println('Hello World')
+			|
+			for (var i = 0;;) {i++}
+		''')
+	}
+
 	def void test_while_01() {
 		'''
 			var i = 0
@@ -370,6 +616,30 @@ abstract class AbstractXbaseAutoEditTest extends AbstractAutoEditTest {
 			var i = 0
 			while (i < 10)
 				|i++
+		''')
+	}
+
+	def void test_while_03() {
+		'''
+			var i = 0
+			|while (i < 10)i++
+		'''.assertAutoIndentOnNewLine(
+		'''
+			var i = 0
+			
+			|while (i < 10)i++
+		''')
+	}
+
+	def void test_while_04() {
+		'''
+			var i = 0|
+			while (i < 10)i++
+		'''.assertAutoIndentOnNewLine(
+		'''
+			var i = 0
+			|
+			while (i < 10)i++
 		''')
 	}
 
@@ -415,6 +685,34 @@ abstract class AbstractXbaseAutoEditTest extends AbstractAutoEditTest {
 		''')
 	}
 
+	def void test_do_while_04() {
+		'''
+			var i = 0
+			|do {i++}
+			while (i < 10)
+		'''.assertAutoIndentOnNewLine(
+		'''
+			var i = 0
+			
+			|do {i++}
+			while (i < 10)
+		''')
+	}
+
+	def void test_do_while_05() {
+		'''
+			var i = 0|
+			do {i++}
+			while (i < 10)
+		'''.assertAutoIndentOnNewLine(
+		'''
+			var i = 0
+			|
+			do {i++}
+			while (i < 10)
+		''')
+	}
+
 	def void test_var_declaration_01() {
 		'''
 			var i = |
@@ -453,6 +751,30 @@ abstract class AbstractXbaseAutoEditTest extends AbstractAutoEditTest {
 		'''
 			var i = {
 				|1}
+		''')
+	}
+
+	def void test_var_declaration_05() {
+		'''
+			println('Hello World')
+			|var i = {1}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			println('Hello World')
+			
+			|var i = {1}
+		''')
+	}
+
+	def void test_var_declaration_06() {
+		'''
+			println('Hello World')|
+			var i = {1}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			println('Hello World')
+			|
+			var i = {1}
 		''')
 	}
 
@@ -497,6 +819,40 @@ abstract class AbstractXbaseAutoEditTest extends AbstractAutoEditTest {
 		''')
 	}
 
+	def void test_throw_05() {
+		'''
+			throw| {new java.lang.IllegalStateException}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			throw
+			|{new java.lang.IllegalStateException}
+		''')
+	}
+
+	def void test_throw_06() {
+		'''
+			println('Hello World')
+			|throw {new java.lang.IllegalStateException}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			println('Hello World')
+			
+			|throw {new java.lang.IllegalStateException}
+		''')
+	}
+
+	def void test_throw_07() {
+		'''
+			println('Hello World')|
+			throw {new java.lang.IllegalStateException}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			println('Hello World')
+			|
+			throw {new java.lang.IllegalStateException}
+		''')
+	}
+
 	def void test_return_01() {
 		'''
 			return |
@@ -538,6 +894,30 @@ abstract class AbstractXbaseAutoEditTest extends AbstractAutoEditTest {
 		''')
 	}
 
+	def void test_return_05() {
+		'''
+			println('Hello World')|
+			return
+		'''.assertAutoIndentOnNewLine(
+		'''
+			println('Hello World')
+			|
+			return
+		''')
+	}
+
+	def void test_return_06() {
+		'''
+			println('Hello World')
+			|return
+		'''.assertAutoIndentOnNewLine(
+		'''
+			println('Hello World')
+			
+			|return
+		''')
+	}
+
 	def void test_try_01() {
 		'''
 			try|
@@ -576,6 +956,40 @@ abstract class AbstractXbaseAutoEditTest extends AbstractAutoEditTest {
 		'''
 			try {
 				|return 1}
+		''')
+	}
+
+	def void test_try_05() {
+		'''
+			try| {return 1}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			try
+			|{return 1}
+		''')
+	}
+
+	def void test_try_06() {
+		'''
+			println('Hello World')
+			|try {return 1}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			println('Hello World')
+			
+			|try {return 1}
+		''')
+	}
+
+	def void test_try_07() {
+		'''
+			println('Hello World')|
+			try {return 1}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			println('Hello World')
+			|
+			try {return 1}
 		''')
 	}
 
@@ -633,6 +1047,48 @@ abstract class AbstractXbaseAutoEditTest extends AbstractAutoEditTest {
 				return 1
 			catch (Exception e) {
 				|return 2}
+		''')
+	}
+
+	def void test_catch_05() {
+		'''
+			try
+				return 1
+			catch| (Exception e) {return 2}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			try
+				return 1
+			catch
+			|(Exception e) {return 2}
+		''')
+	}
+
+	def void test_catch_06() {
+		'''
+			try
+				return 1
+			|catch (Exception e) {return 2}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			try
+				return 1
+			
+			|catch (Exception e) {return 2}
+		''')
+	}
+
+	def void test_catch_07() {
+		'''
+			try
+				return 1|
+			catch (Exception e) {return 2}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			try
+				return 1
+			|
+			catch (Exception e) {return 2}
 		''')
 	}
 
@@ -697,6 +1153,54 @@ abstract class AbstractXbaseAutoEditTest extends AbstractAutoEditTest {
 		''')
 	}
 
+	def void test_finally_05() {
+		'''
+			var i = 1
+			try
+				return 1
+			finally| {i = 1}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			var i = 1
+			try
+				return 1
+			finally
+			|{i = 1}
+		''')
+	}
+
+	def void test_finally_06() {
+		'''
+			var i = 1
+			try
+				return 1
+			|finally {i = 1}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			var i = 1
+			try
+				return 1
+			
+			|finally {i = 1}
+		''')
+	}
+
+	def void test_finally_07() {
+		'''
+			var i = 1
+			try
+				return 1|
+			finally {i = 1}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			var i = 1
+			try
+				return 1
+			|
+			finally {i = 1}
+		''')
+	}
+
 	def void test_synchronized_01() {
 		'''
 			val lock = new Object
@@ -743,6 +1247,42 @@ abstract class AbstractXbaseAutoEditTest extends AbstractAutoEditTest {
 			val lock = new Object
 			synchronized(lock) {
 				|return true}
+		''')
+	}
+
+	def void test_synchronized_05() {
+		'''
+			val lock = new Object
+			synchronized(lock)| {return true}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			val lock = new Object
+			synchronized(lock)
+			|{return true}
+		''')
+	}
+
+	def void test_synchronized_06() {
+		'''
+			val lock = new Object
+			|synchronized(lock) {return true}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			val lock = new Object
+			
+			|synchronized(lock) {return true}
+		''')
+	}
+
+	def void test_synchronized_07() {
+		'''
+			val lock = new Object|
+			synchronized(lock) {return true}
+		'''.assertAutoIndentOnNewLine(
+		'''
+			val lock = new Object
+			|
+			synchronized(lock) {return true}
 		''')
 	}
 
