@@ -15,6 +15,7 @@ import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IMember;
 import org.eclipse.jdt.core.ISourceRange;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
@@ -44,7 +45,7 @@ public class JvmOutlineNodeElementOpener extends OutlineNodeElementOpener {
 	@Override
 	protected void openEObject(EObject state) {
 		try {
-			if (state instanceof JvmIdentifiableElement) {
+			if (state instanceof JvmIdentifiableElement && state.eResource() instanceof TypeResource) {
 				IJavaElement javaElement = javaElementFinder.findElementFor((JvmIdentifiableElement) state);
 				if (javaElement instanceof IMember) {
 					IResource resource = javaElement.getResource();

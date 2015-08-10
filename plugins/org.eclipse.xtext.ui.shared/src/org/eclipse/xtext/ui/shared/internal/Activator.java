@@ -122,8 +122,10 @@ public class Activator extends Plugin {
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
 		injector = null;
-		initializer.discard();
-		initializer = null;
+		if (initializer != null) {
+			initializer.discard();
+			initializer = null;
+		}
 		super.stop(context);
 	}
 

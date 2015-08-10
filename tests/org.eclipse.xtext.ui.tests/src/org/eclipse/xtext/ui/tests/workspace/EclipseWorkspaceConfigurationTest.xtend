@@ -36,7 +36,7 @@ class EclipseWorkspaceConfigurationTest {
 		createJavaProject("projectA")
 		
 		val provider = new EclipseWorkspaceConfigProvider => [
-			workspaceRoot = wsroot
+			workspace = ResourcesPlugin.workspace
 		]
 		val project = provider.getWorkspaceConfig(null).findProjectByName("projectA")
 		assertNotNull(project)
