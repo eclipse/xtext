@@ -20,6 +20,7 @@ import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.generator.trace.internal.AbstractTrace;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.workspace.EclipseProjectConfig;
+import org.eclipse.xtext.ui.workspace.EclipseWorkspaceConfigProvider;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.workspace.IProjectConfig;
@@ -36,6 +37,9 @@ public abstract class AbstractEclipseTrace extends AbstractTrace implements IEcl
 	
 	@Inject
 	private IWorkspace workspace;
+	
+	@Inject
+	private EclipseWorkspaceConfigProvider workspaceConfigProvider;
 	
 	protected IProject findProject(String projectName) {
 		IProject result = workspace.getRoot().getProject(projectName);
@@ -136,7 +140,7 @@ public abstract class AbstractEclipseTrace extends AbstractTrace implements IEcl
 
 	@Override
 	public IProjectConfig getLocalProjectConfig() {
-		return new EclipseProjectConfig(getLocalProject());
+		return workspaceConfigProvider.getProjectConfig(getLocalProject());
 	}
 	
 	abstract public IProject getLocalProject();

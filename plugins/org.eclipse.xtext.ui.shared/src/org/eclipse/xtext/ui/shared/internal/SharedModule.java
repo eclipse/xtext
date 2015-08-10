@@ -63,6 +63,7 @@ import org.eclipse.xtext.ui.search.OpenXtextElementHandler;
 import org.eclipse.xtext.ui.shared.JdtHelper;
 import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
 import org.eclipse.xtext.ui.util.IJdtHelper;
+import org.eclipse.xtext.ui.workspace.EclipseWorkspaceConfigProvider;
 import org.osgi.framework.BundleContext;
 
 import com.google.inject.AbstractModule;
@@ -134,7 +135,7 @@ public class SharedModule extends AbstractModule {
 				expose(StorageAwareTrace.class);
 			}
 		});
-		
+		bind(EclipseWorkspaceConfigProvider.class);
 
 		bind(IWorkbench.class).toProvider(new Provider<IWorkbench>() {
 			@Override
