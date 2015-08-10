@@ -62,14 +62,11 @@ class XtendLibraryDescription extends CustomLibraryDescription {
 	}
 
 	def libraryRoots() {
-		val roots = newHashMap()
-		roots.put(OrderRootType.CLASSES, #[
-			Lists.urlForLibraryRoot,
-			ToStringBuilder.urlForLibraryRoot,
-			Active.urlForLibraryRoot,
-			Data.urlForLibraryRoot
-		])
-		return roots
+		return newHashMap(OrderRootType.CLASSES -> detectorClasses.map[urlForLibraryRoot])
+	}
+
+	def static getDetectorClasses() {
+		return #[Lists, ToStringBuilder, Active, Data]
 	}
 
 	override getDefaultLevel() {

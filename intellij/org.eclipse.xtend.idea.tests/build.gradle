@@ -1,6 +1,8 @@
 dependencies {
 	testCompile project(':tests:org.eclipse.xtend.core.tests')
 	ideaProvided fileTree("${ideaDevelopment.ideaHome}/plugins/junit/lib/").include("*.jar")
+	ideaProvided fileTree("${ideaDevelopment.ideaHome}/plugins/gradle/lib/").include("gradle*.jar")
+	ideaProvided fileTree("${ideaDevelopment.ideaHome}/plugins/Groovy/lib/").include("*roovy.jar")
 }
 
 ideaDevelopment {

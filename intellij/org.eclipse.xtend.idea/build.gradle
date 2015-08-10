@@ -13,6 +13,8 @@ dependencies {
 
 	ideaProvided fileTree("${ideaDevelopment.ideaHome}/plugins/junit/lib/").include("*.jar")
 	ideaProvided fileTree("${ideaDevelopment.ideaHome}/plugins/maven/lib/").include("maven*.jar")
+	ideaProvided fileTree("${ideaDevelopment.ideaHome}/plugins/gradle/lib/").include("gradle*.jar")
+	ideaProvided fileTree("${ideaDevelopment.ideaHome}/plugins/Groovy/lib/").include("*roovy.jar")
 }
 
 ideaDevelopment {

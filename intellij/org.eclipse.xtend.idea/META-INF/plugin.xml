@@ -10,6 +10,7 @@
 	<idea-version since-build="131"/>
 	<depends>JUnit</depends>
 	<depends>org.jetbrains.idea.maven</depends>
+	<depends>org.jetbrains.plugins.gradle</depends>
 	<depends>org.eclipse.xtext.idea</depends>
 
 	<xi:include href="plugin_gen.xml" xpointer="xpointer(/idea-plugin/*)"/>

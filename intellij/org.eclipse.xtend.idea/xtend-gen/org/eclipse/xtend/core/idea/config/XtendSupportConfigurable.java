@@ -64,7 +64,10 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
           _and = false;
         } else {
           VirtualFile _file = it.getFile();
-          boolean _exists = _file.exists();
+          boolean _exists = false;
+          if (_file!=null) {
+            _exists=_file.exists();
+          }
           _and = _exists;
         }
         return Boolean.valueOf(_and);
@@ -93,7 +96,10 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
           _and = false;
         } else {
           VirtualFile _file = it.getFile();
-          boolean _exists = _file.exists();
+          boolean _exists = false;
+          if (_file!=null) {
+            _exists=_file.exists();
+          }
           _and = _exists;
         }
         return Boolean.valueOf(_and);
