@@ -36,14 +36,14 @@ class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurable {
 		ModifiableModelsProvider modifiableModelsProvider
 	) {
 		val entry = rootModel.contentEntries.head
-		val mainSrc = entry.sourceFolders.filter[!testSource && file.exists].head
+		val mainSrc = entry.sourceFolders.filter[!testSource && file?.exists].head
 		var VirtualFile xtendGenMain = null
 		if (mainSrc != null) {
 			xtendGenMain = mainSrc.file.parent.getOrCreateDir("xtend-gen")
 			val properties = JpsJavaExtensionService.getInstance().createSourceRootProperties("", true);
 			entry.addSourceFolder(xtendGenMain, JavaSourceRootType.SOURCE, properties)
 		}
-		val testSrc = entry.sourceFolders.filter[testSource && file.exists].head
+		val testSrc = entry.sourceFolders.filter[testSource && file?.exists].head
 		var VirtualFile xtendGenTest = null
 		if (testSrc != null) {
 			xtendGenTest = testSrc.file.parent.getOrCreateDir("xtend-gen")
