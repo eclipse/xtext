@@ -164,7 +164,7 @@ public class DefaultTextEditComposerTest extends AbstractXtextTests {
 	private void assertMatches(EObject obj, TextEdit edit) {
 		assertTrue(edit instanceof ReplaceEdit);
 		INode node = NodeModelUtils.getNode(obj);
-		assertEquals(node.getOffset(), ((ReplaceEdit) edit).getOffset());
+		assertEquals(node.getTotalOffset(), ((ReplaceEdit) edit).getOffset());
 		assertEqualsIgnoringWhitespace(getSerializer().serialize(obj, SaveOptions.defaultOptions()), ((ReplaceEdit) edit).getText());
 	}
 

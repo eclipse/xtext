@@ -55,8 +55,10 @@ public class XbaseDocumentProvider extends XtextDocumentProvider {
 
 	protected ILocationInEclipseResource getClassFileSourceStorage(IClassFile classFile) {
 		IEclipseTrace traceToSource = traceForTypeRootProvider.getTraceToSource(classFile);
-		for (ILocationInEclipseResource loc : traceToSource.getAllAssociatedLocations())
-			return loc;
+		if (traceToSource != null) {
+			for (ILocationInEclipseResource loc : traceToSource.getAllAssociatedLocations())
+				return loc;
+		}
 		return null;
 	}
 

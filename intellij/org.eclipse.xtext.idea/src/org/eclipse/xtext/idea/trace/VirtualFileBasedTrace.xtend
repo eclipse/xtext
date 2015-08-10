@@ -28,6 +28,7 @@ import org.eclipse.xtext.util.ITextRegionWithLineInformation
 import org.eclipse.xtext.workspace.IProjectConfig
 
 import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
+import java.io.FileNotFoundException
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -122,7 +123,12 @@ class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
 	}
 	
 	def Reader getContentsAsText(SourceRelativeURI uri, Module project) throws IOException {
-		val file = findVirtualFileInProject(uri, project).file
+		var fileInProject = findVirtualFileInProject(uri, project)
+		if (fileInProject === null) {
+			val module = "'" + project.name + "' (" + project.moduleFilePath + ")"
+			throw new FileNotFoundException("File '" + uri + "' not found in module " + module)
+		}
+		val file = fileInProject.file
 		return new StringReader(VfsUtil.loadText(file))
 	}
 	

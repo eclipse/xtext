@@ -51,6 +51,9 @@ public class ClassFileBasedOpenerContributor extends OppositeFileOpenerContribut
 			try {
 				IClassFile classFile = ((IClassFileEditorInput) editor.getEditorInput()).getClassFile();
 				ITrace trace = traceForTypeRootProvider.getTraceToSource(classFile);
+				if (trace == null) {
+					return false;
+				}
 				for (ILocationInResource location : trace.getAllAssociatedLocations()) {
 					String name = location.getAbsoluteResourceURI().getURI().lastSegment();
 					IEditorDescriptor editorDescriptor = IDE.getEditorDescriptor(name);

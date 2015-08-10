@@ -145,9 +145,9 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 			override void fileCreated(VirtualFileEvent event) {
 				fileAdded(event.getFile())
 			}
-
-			override void fileDeleted(VirtualFileEvent event) {
-				fileDeleted(event.getFile())
+			
+			override fileDeleted(VirtualFileEvent event) {
+				fileDeleted(event.file)
 			}
 			
 			override beforeFileMovement(VirtualFileMoveEvent event) {
@@ -234,7 +234,13 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	}
 
 	def void fileDeleted(VirtualFile file) {
-		enqueue(file, DELETED)
+		if (file.isDirectory) {
+			for (child : file.children) {
+				fileDeleted(child)
+			}
+		} else {
+			enqueue(file, DELETED)
+		}
 	}
 
 	def void fileAdded(VirtualFile file) {

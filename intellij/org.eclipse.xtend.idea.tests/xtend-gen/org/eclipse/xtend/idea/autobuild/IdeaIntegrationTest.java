@@ -440,6 +440,93 @@ public class IdeaIntegrationTest extends LightXtendTest {
     this.myFixture.testHighlighting(true, true, true, _virtualFile);
   }
   
+  public void testDeleteGeneratedFolder() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package otherPackage");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val list = OtherClass.getIt(\"foo\")");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.myFixture.addFileToProject("otherPackage/Foo.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package otherPackage");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import java.util.List");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class OtherClass {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def static List<String> getIt(String x) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("return #[x]");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.myFixture.addFileToProject("otherPackage/Bar.xtend", _builder_1.toString());
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("package otherPackage;");
+    _builder_2.newLine();
+    _builder_2.newLine();
+    _builder_2.append("import java.util.List;");
+    _builder_2.newLine();
+    _builder_2.append("import otherPackage.OtherClass;");
+    _builder_2.newLine();
+    _builder_2.newLine();
+    _builder_2.append("@SuppressWarnings(\"all\")");
+    _builder_2.newLine();
+    _builder_2.append("public class Foo {");
+    _builder_2.newLine();
+    _builder_2.append("  ");
+    _builder_2.append("private final List<String> list = OtherClass.getIt(\"foo\");");
+    _builder_2.newLine();
+    _builder_2.append("}");
+    _builder_2.newLine();
+    this.assertFileContents("xtend-gen/otherPackage/Foo.java", _builder_2);
+    final VirtualFile dir = this.myFixture.findFileInTempDir("xtend-gen");
+    Application _application = ApplicationManager.getApplication();
+    final Runnable _function = new Runnable() {
+      @Override
+      public void run() {
+        try {
+          dir.delete(null);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
+        }
+      }
+    };
+    _application.runWriteAction(_function);
+    StringConcatenation _builder_3 = new StringConcatenation();
+    _builder_3.append("package otherPackage;");
+    _builder_3.newLine();
+    _builder_3.newLine();
+    _builder_3.append("import java.util.List;");
+    _builder_3.newLine();
+    _builder_3.append("import otherPackage.OtherClass;");
+    _builder_3.newLine();
+    _builder_3.newLine();
+    _builder_3.append("@SuppressWarnings(\"all\")");
+    _builder_3.newLine();
+    _builder_3.append("public class Foo {");
+    _builder_3.newLine();
+    _builder_3.append("  ");
+    _builder_3.append("private final List<String> list = OtherClass.getIt(\"foo\");");
+    _builder_3.newLine();
+    _builder_3.append("}");
+    _builder_3.newLine();
+    this.assertFileContents("xtend-gen/otherPackage/Foo.java", _builder_3);
+  }
+  
   public void testAffectedUpdated() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package otherPackage");

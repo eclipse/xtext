@@ -9,62 +9,251 @@ package org.eclipse.xtend.idea.documentation;
 
 import com.intellij.codeInsight.documentation.DocumentationManager;
 import com.intellij.lang.documentation.DocumentationProvider;
-import com.intellij.openapi.command.WriteCommandAction;
-import com.intellij.openapi.project.Project;
+import com.intellij.openapi.application.Application;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.util.io.FileUtil;
+import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
+import com.intellij.testFramework.PlatformTestCase;
+import com.intellij.testFramework.PsiTestCase;
+import com.intellij.testFramework.PsiTestUtil;
+import java.io.File;
 import junit.framework.TestCase;
-import org.eclipse.xtend.idea.LightXtendTest;
+import org.eclipse.xtend.core.idea.lang.XtendLanguage;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.idea.tests.LightToolingTest;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author kosyakov - Initial contribution and API
+ * @author moritz.eysholdt@itemis.de
  */
 @SuppressWarnings("all")
-public class XtendDocumentationTest extends LightXtendTest {
+public class XtendDocumentationTest extends PsiTestCase {
+  private VirtualFile src;
+  
+  private VirtualFile xtendgen;
+  
   @Override
-  protected void invokeTestRunnable(final Runnable runnable) {
-    Project _project = this.getProject();
-    WriteCommandAction.runWriteCommandAction(_project, runnable);
+  protected void setUp() throws Exception {
+    super.setUp();
+    Application _application = ApplicationManager.getApplication();
+    final Procedure1<Object> _function = new Procedure1<Object>() {
+      @Override
+      public void apply(final Object it) {
+        try {
+          String _testName = XtendDocumentationTest.this.getTestName(true);
+          final File myTempDirectory = FileUtil.createTempDirectory(_testName, "test", false);
+          PlatformTestCase.myFilesToDelete.add(myTempDirectory);
+          LocalFileSystem _instance = LocalFileSystem.getInstance();
+          final VirtualFile root = _instance.refreshAndFindFileByIoFile(myTempDirectory);
+          VirtualFile _createChildDirectory = root.createChildDirectory(XtendDocumentationTest.this, "src");
+          XtendDocumentationTest.this.src = _createChildDirectory;
+          VirtualFile _createChildDirectory_1 = root.createChildDirectory(XtendDocumentationTest.this, "xtend-gen");
+          XtendDocumentationTest.this.xtendgen = _createChildDirectory_1;
+          Module _createModule = XtendDocumentationTest.this.createModule("myModule");
+          XtendDocumentationTest.this.myModule = _createModule;
+          Module _module = XtendDocumentationTest.this.getModule();
+          String _iD = XtendLanguage.INSTANCE.getID();
+          LightToolingTest.addFacetToModule(_module, _iD);
+          PsiTestUtil.addContentRoot(XtendDocumentationTest.this.myModule, root);
+          PsiTestUtil.addSourceRoot(XtendDocumentationTest.this.myModule, XtendDocumentationTest.this.src);
+          PsiTestUtil.addSourceRoot(XtendDocumentationTest.this.myModule, XtendDocumentationTest.this.xtendgen);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
+        }
+      }
+    };
+    _application.runWriteAction(
+      ((Runnable) new Runnable() {
+          public void run() {
+            _function.apply(null);
+          }
+      }));
   }
   
-  public void testGenerateDocumentation() {
+  public void testJavaClass() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("package bar");
+    _builder.append("/**");
     _builder.newLine();
-    _builder.append("public class Bar {");
+    _builder.append(" ");
+    _builder.append("* mydocumentation");
     _builder.newLine();
-    _builder.append("\t");
-    _builder.append("private foo.Fo<caret>o foo;");
+    _builder.append(" ");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.append("public class Foo {");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.myFixture.configureByText("Bar.java", _builder.toString());
-    final String expectedDocumentation = this.generateDocumentation("testSrc-xtend-gen", "foo/Foo.java");
-    final String actualDocumentation = this.generateDocumentation("testSrc", "foo/Foo.xtend");
-    TestCase.assertEquals(expectedDocumentation, actualDocumentation);
+    this.createFile(this.src, "Foo.java", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Bar extends F<caret>oo {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    final PsiReference xtend = this.createReferenceByFileWithMarker(this.src, "Bar.xtend", _builder_1.toString());
+    final String expected = this.generateDocumentation(xtend);
+    boolean _contains = expected.contains("mydocumentation");
+    TestCase.assertTrue(_contains);
   }
   
-  protected String generateDocumentation(final String sourceFolder, final String sourcePath) {
+  public void testXtendClass() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("/**");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* mydocumentation");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.createFile(this.src, "Foo.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Bar extends F<caret>oo {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    final PsiReference xtend = this.createReferenceByFileWithMarker(this.src, "Bar.xtend", _builder_1.toString());
+    final String expected = this.generateDocumentation(xtend);
+    boolean _contains = expected.contains("mydocumentation");
+    TestCase.assertTrue(_contains);
+  }
+  
+  public void testXtendField() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("/**");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("* mydocumentation");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public val String myfoo = \"x\"");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.createFile(this.src, "Foo.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Bar {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("val String x = new Foo().my<caret>foo");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    final PsiReference xtend = this.createReferenceByFileWithMarker(this.src, "Bar.xtend", _builder_1.toString());
+    final String expected = this.generateDocumentation(xtend);
+    boolean _contains = expected.contains("<b>myfoo = &quot;x&quot;</b>");
+    TestCase.assertTrue(_contains);
+    boolean _contains_1 = expected.contains("mydocumentation");
+    TestCase.assertTrue(_contains_1);
+  }
+  
+  public void testXtendMethod() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("/**");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("* mydocumentation");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def myfoo() { \"x\" }");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.createFile(this.src, "Foo.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Bar {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("val String x = new Foo().my<caret>foo()");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    final PsiReference xtend = this.createReferenceByFileWithMarker(this.src, "Bar.xtend", _builder_1.toString());
+    final String expected = this.generateDocumentation(xtend);
+    boolean _contains = expected.contains("<b>myfoo</b>()");
+    TestCase.assertTrue(_contains);
+    boolean _contains_1 = expected.contains("mydocumentation");
+    TestCase.assertTrue(_contains_1);
+  }
+  
+  public void testXtendConstructor() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("/**");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("* mydocumentation");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.createFile(this.src, "Foo.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Bar {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("val String x = new F<caret>oo()");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    final PsiReference xtend = this.createReferenceByFileWithMarker(this.src, "Bar.xtend", _builder_1.toString());
+    final String expected = this.generateDocumentation(xtend);
+    boolean _contains = expected.contains("<b>Foo</b>()");
+    TestCase.assertTrue(_contains);
+    boolean _contains_1 = expected.contains("mydocumentation");
+    TestCase.assertTrue(_contains_1);
+  }
+  
+  protected PsiFile createFile(final VirtualFile dir, final String fileName, final String contents) {
     try {
-      String _xblockexpression = null;
-      {
-        final VirtualFile virtualFile = this.myFixture.copyFileToProject(((sourceFolder + "/") + sourcePath), sourcePath);
-        String _xtrycatchfinallyexpression = null;
-        try {
-          PsiFile _file = this.getFile();
-          int _caretOffset = this.myFixture.getCaretOffset();
-          PsiReference _findReferenceAt = _file.findReferenceAt(_caretOffset);
-          _xtrycatchfinallyexpression = this.generateDocumentation(_findReferenceAt);
-        } finally {
-          virtualFile.delete(this);
-        }
-        _xblockexpression = _xtrycatchfinallyexpression;
-      }
-      return _xblockexpression;
+      return this.createFile(this.myModule, dir, fileName, contents);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected PsiReference createReferenceByFileWithMarker(final VirtualFile dir, final String fileName, final String contents) {
+    try {
+      final String caret = "<caret>";
+      final int index = contents.indexOf(caret);
+      String _substring = contents.substring(0, index);
+      int _length = caret.length();
+      int _plus = (index + _length);
+      int _length_1 = contents.length();
+      String _substring_1 = contents.substring(_plus, _length_1);
+      final String document = (_substring + _substring_1);
+      final PsiFile file = this.createFile(this.myModule, dir, fileName, document);
+      return file.findReferenceAt(index);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -75,6 +264,8 @@ public class XtendDocumentationTest extends LightXtendTest {
     {
       final PsiElement originalElement = reference.getElement();
       final PsiElement element = reference.resolve();
+      TestCase.assertNotNull(originalElement);
+      TestCase.assertNotNull(element);
       _xblockexpression = this.generateDocumentation(element, originalElement);
     }
     return _xblockexpression;

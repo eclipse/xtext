@@ -7,47 +7,152 @@
  *******************************************************************************/
 package org.eclipse.xtend.idea.documentation
 
-import com.intellij.openapi.command.WriteCommandAction
+import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.util.io.FileUtil
+import com.intellij.openapi.vfs.LocalFileSystem
+import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiReference
-import org.eclipse.xtend.idea.LightXtendTest
+import com.intellij.testFramework.PsiTestCase
+import com.intellij.testFramework.PsiTestUtil
+import org.eclipse.xtend.core.idea.lang.XtendLanguage
+import org.eclipse.xtext.idea.tests.LightToolingTest
 
 import static extension com.intellij.codeInsight.documentation.DocumentationManager.*
 
 /**
  * 
  * @author kosyakov - Initial contribution and API
+ * @author moritz.eysholdt@itemis.de
  */
-class XtendDocumentationTest extends LightXtendTest {
+class XtendDocumentationTest extends PsiTestCase {
 
-	protected override invokeTestRunnable(Runnable runnable) {
-		WriteCommandAction.runWriteCommandAction(project, runnable)
+	VirtualFile src
+	VirtualFile xtendgen
+
+	override protected setUp() throws Exception {
+		super.setUp()
+		ApplicationManager.application.runWriteAction([
+			val myTempDirectory = FileUtil.createTempDirectory(getTestName(true), "test", false);
+			myFilesToDelete.add(myTempDirectory)
+			val root = LocalFileSystem.getInstance().refreshAndFindFileByIoFile(myTempDirectory)
+			src = root.createChildDirectory(this, "src")
+			xtendgen = root.createChildDirectory(this, "xtend-gen")
+			myModule = createModule("myModule")
+			LightToolingTest.addFacetToModule(module, XtendLanguage.INSTANCE.ID)
+			PsiTestUtil.addContentRoot(myModule, root);
+			PsiTestUtil.addSourceRoot(myModule, src);
+			PsiTestUtil.addSourceRoot(myModule, xtendgen);
+		] as Runnable)
 	}
 
-	def void testGenerateDocumentation() {
-		myFixture.configureByText('Bar.java', '''
-			package bar
-			public class Bar {
-				private foo.Fo<caret>o foo;
+	def void testJavaClass() {
+		createFile(src, "Foo.java", '''
+			/**
+			 * mydocumentation
+			 */
+			public class Foo {
 			}
 		''')
-		val expectedDocumentation = generateDocumentation('testSrc-xtend-gen', 'foo/Foo.java')
-		val actualDocumentation = generateDocumentation('testSrc', 'foo/Foo.xtend')
-		assertEquals(expectedDocumentation, actualDocumentation)
+		val xtend = createReferenceByFileWithMarker(src, 'Bar.xtend', '''
+			class Bar extends F<caret>oo {
+			}
+		''')
+		val expected = xtend.generateDocumentation
+		assertTrue(expected.contains("mydocumentation"))
 	}
 
-	protected def generateDocumentation(String sourceFolder, String sourcePath) {
-		val virtualFile = myFixture.copyFileToProject(sourceFolder + '/' + sourcePath, sourcePath)
-		try {
-			file.findReferenceAt(myFixture.caretOffset).generateDocumentation
-		} finally {
-			virtualFile.delete(this)
-		}
+	def void testXtendClass() {
+		createFile(src, "Foo.xtend", '''
+			/**
+			 * mydocumentation
+			 */
+			class Foo {
+			}
+		''')
+		val xtend = createReferenceByFileWithMarker(src, 'Bar.xtend', '''
+			class Bar extends F<caret>oo {
+			}
+		''')
+		val expected = xtend.generateDocumentation
+		assertTrue(expected.contains("mydocumentation"))
+	}
+
+	def void testXtendField() {
+		createFile(src, "Foo.xtend", '''
+			class Foo {
+				/**
+				 * mydocumentation
+				 */
+				public val String myfoo = "x"
+			}
+		''')
+		val xtend = createReferenceByFileWithMarker(src, 'Bar.xtend', '''
+			class Bar {
+				val String x = new Foo().my<caret>foo
+			}
+		''')
+		val expected = xtend.generateDocumentation
+		assertTrue(expected.contains("<b>myfoo = &quot;x&quot;</b>"))
+		assertTrue(expected.contains("mydocumentation"))
+	}
+
+	def void testXtendMethod() {
+		createFile(src, "Foo.xtend", '''
+			class Foo {
+				/**
+				 * mydocumentation
+				 */
+				def myfoo() { "x" }
+			}
+		''')
+		val xtend = createReferenceByFileWithMarker(src, 'Bar.xtend', '''
+			class Bar {
+				val String x = new Foo().my<caret>foo()
+			}
+		''')
+		val expected = xtend.generateDocumentation
+		assertTrue(expected.contains("<b>myfoo</b>()"))
+		assertTrue(expected.contains("mydocumentation"))
+	}
+
+	def void testXtendConstructor() {
+		createFile(src, "Foo.xtend", '''
+			class Foo {
+				/**
+				 * mydocumentation
+				 */
+				new() {}
+			}
+		''')
+		val xtend = createReferenceByFileWithMarker(src, 'Bar.xtend', '''
+			class Bar {
+				val String x = new F<caret>oo()
+			}
+		''')
+		val expected = xtend.generateDocumentation
+		assertTrue(expected.contains("<b>Foo</b>()"))
+		assertTrue(expected.contains("mydocumentation"))
+	}
+
+	protected def PsiFile createFile(VirtualFile dir, String fileName, String contents) {
+		createFile(myModule, dir, fileName, contents)
+	}
+
+	protected def PsiReference createReferenceByFileWithMarker(VirtualFile dir, String fileName, String contents) {
+		val caret = "<caret>"
+		val index = contents.indexOf(caret)
+		val document = contents.substring(0, index) + contents.substring(index + caret.length, contents.length)
+		val file = createFile(myModule, dir, fileName, document)
+		return file.findReferenceAt(index)
 	}
 
 	protected def generateDocumentation(PsiReference reference) {
 		val originalElement = reference.element
 		val element = reference.resolve
+		assertNotNull(originalElement)
+		assertNotNull(element)
 		generateDocumentation(element, originalElement)
 	}
 

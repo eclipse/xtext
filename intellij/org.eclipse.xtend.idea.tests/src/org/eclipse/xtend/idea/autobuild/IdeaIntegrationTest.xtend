@@ -245,6 +245,54 @@ class IdeaIntegrationTest extends LightXtendTest {
 		myFixture.testHighlighting(true, true, true, xtendFile.virtualFile)
 	}
 	
+	def void testDeleteGeneratedFolder() {
+		myFixture.addFileToProject('otherPackage/Foo.xtend', '''
+			package otherPackage
+			
+			class Foo {
+				val list = OtherClass.getIt("foo")
+			}
+		''')
+		myFixture.addFileToProject('otherPackage/Bar.xtend', '''
+			package otherPackage
+			
+			import java.util.List
+			
+			class OtherClass {
+				def static List<String> getIt(String x) {
+					return #[x]
+				}
+			}
+		''')
+		assertFileContents("xtend-gen/otherPackage/Foo.java",'''
+			package otherPackage;
+			
+			import java.util.List;
+			import otherPackage.OtherClass;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  private final List<String> list = OtherClass.getIt("foo");
+			}
+		''')
+		val dir = myFixture.findFileInTempDir("xtend-gen")
+		ApplicationManager.application.runWriteAction [
+			dir.delete(null)
+		]
+		// the auto builder immediately recreates the deleted content
+		assertFileContents("xtend-gen/otherPackage/Foo.java",'''
+			package otherPackage;
+			
+			import java.util.List;
+			import otherPackage.OtherClass;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  private final List<String> list = OtherClass.getIt("foo");
+			}
+		''')
+	}
+	
 	def void testAffectedUpdated() {
 		myFixture.addFileToProject('otherPackage/Foo.xtend', '''
 			package otherPackage
