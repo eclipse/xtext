@@ -32,9 +32,6 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeI
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
-import org.eclipse.xtext.ui.workspace.EclipseWorkspaceConfigProvider;
-import org.eclipse.xtext.ui.workspace.JdtWorkspaceConfigProvider;
-import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.ui.builder.EclipseGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.ui.builder.XbaseBuilderConfigurationBlock;
@@ -162,21 +159,6 @@ public class DefaultXbaseUiModule extends DefaultCommonTypesUiModule {
 
 	public Class<? extends BuilderPreferenceAccess.Initializer> bindBuilderPreferenceAccess$Initializer() {
 		return XbaseBuilderPreferenceAccess.Initializer.class;
-	}
-
-
-	/**
-	 * @since 2.9
-	 */
-	public Class<? extends IWorkspaceConfigProvider> bindWorkspaceConfigProvider() {
-		return JdtWorkspaceConfigProvider.class;
-	}
-
-	/**
-	 * @since 2.9
-	 */
-	public Class<? extends EclipseWorkspaceConfigProvider> bindEclipseWorkspaceConfigProvider() {
-		return JdtWorkspaceConfigProvider.class;
 	}
 
 	/**

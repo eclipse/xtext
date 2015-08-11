@@ -62,6 +62,7 @@ public class XtendTraceTests extends AbstractXtendUITestCase {
 		Iterable<? extends ILocationInResource> locations = traceToTarget.getAllAssociatedLocations(new TextRegion(20, 0));
 		assertTrue( locations.iterator().hasNext());
 		IFile generatedFile = testHelper.getProject().getFile("/xtend-gen/test/Test.java");
+		assertTrue(generatedFile.exists());
 		Iterable<? extends ILocationInResource> locationsByURI = traceToTarget.getAllAssociatedLocations(new TextRegion(20, 0), generatedFile);
 		assertTrue(locationsByURI.iterator().hasNext());
 	}
