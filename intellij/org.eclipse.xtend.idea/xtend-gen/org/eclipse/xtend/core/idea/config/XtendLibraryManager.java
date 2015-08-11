@@ -10,7 +10,11 @@ package org.eclipse.xtend.core.idea.config;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import com.intellij.ide.plugins.IdeaPluginDescriptor;
+import com.intellij.ide.plugins.PluginManager;
 import com.intellij.openapi.command.WriteCommandAction;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.extensions.PluginId;
 import com.intellij.openapi.externalSystem.util.ExternalSystemApiUtil;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
@@ -66,6 +70,8 @@ import org.jetbrains.plugins.groovy.lang.psi.api.statements.expressions.GrMethod
  */
 @SuppressWarnings("all")
 public class XtendLibraryManager {
+  protected final static Logger LOG = Logger.getInstance(XtendLibraryManager.class.getName());
+  
   @Inject
   private XtendLibraryDescription xtendLibDescr;
   
@@ -100,6 +106,9 @@ public class XtendLibraryManager {
   public void addGradleDependency(final Module module, final PsiFile context) {
     final PsiFile buildFile = this.locateBuildFile(module);
     if ((buildFile == null)) {
+      String _name = module.getName();
+      String _plus = ("Gradle build file not found in module " + _name);
+      XtendLibraryManager.LOG.error(_plus);
       return;
     }
     Project _project = module.getProject();
@@ -127,7 +136,10 @@ public class XtendLibraryManager {
         };
         GrCall dependenciesBlock = IterableExtensions.<GrMethodCall>findFirst(closableBlocks, _function);
         String _xifexpression = null;
-        boolean _isTestScope = XtendLibraryManager.this.isTestScope(context);
+        boolean _isTestScope = false;
+        if (context!=null) {
+          _isTestScope=XtendLibraryManager.this.isTestScope(context);
+        }
         if (_isTestScope) {
           _xifexpression = "testCompile";
         } else {
@@ -171,6 +183,14 @@ public class XtendLibraryManager {
   
   public static MavenId xtendLibMavenId() {
     if ((XtendLibraryManager.XTEND_LIB_MAVEN_ID == null)) {
+      PluginId _id = PluginId.getId("org.eclipse.xtend.idea");
+      final IdeaPluginDescriptor xtendPlugin = PluginManager.getPlugin(_id);
+      String _version = null;
+      if (xtendPlugin!=null) {
+        _version=xtendPlugin.getVersion();
+      }
+      final String version = _version;
+      XtendLibraryManager.LOG.info(("The current Xtend plugin version is " + version));
       MavenId _mavenId = new MavenId("org.eclipse.xtend", "org.eclipse.xtend.lib", "2.8.4");
       XtendLibraryManager.XTEND_LIB_MAVEN_ID = _mavenId;
     }
@@ -247,7 +267,10 @@ public class XtendLibraryManager {
       protected void run() throws Throwable {
         MavenId _xtendLibMavenId = XtendLibraryManager.xtendLibMavenId();
         MavenDomDependency dependency = MavenDomUtil.createDomDependency(model, null, _xtendLibMavenId);
-        boolean _isTestScope = XtendLibraryManager.this.isTestScope(context);
+        boolean _isTestScope = false;
+        if (context!=null) {
+          _isTestScope=XtendLibraryManager.this.isTestScope(context);
+        }
         if (_isTestScope) {
           GenericDomValue<String> _scope = dependency.getScope();
           _scope.setStringValue("test");

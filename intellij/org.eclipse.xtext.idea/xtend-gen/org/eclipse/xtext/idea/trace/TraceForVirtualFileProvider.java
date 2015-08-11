@@ -170,15 +170,30 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
           final VirtualFile targetFile = platformResource.getFile();
           final ITextRegionWithLineInformation textRegion = it.getTextRegion();
           PsiFile _findFile = mngr.findFile(targetFile);
-          int _offset = textRegion.getOffset();
-          PsiElement result = _findFile.findElementAt(_offset);
+          PsiElement _findElementAt = null;
+          if (_findFile!=null) {
+            int _offset = textRegion.getOffset();
+            _findElementAt=_findFile.findElementAt(_offset);
+          }
+          PsiElement result = _findElementAt;
+          boolean _or = false;
+          if ((result == null)) {
+            _or = true;
+          } else {
+            int _textLength = result.getTextLength();
+            boolean _equals = (_textLength == 0);
+            _or = _equals;
+          }
+          if (_or) {
+            return null;
+          }
           while ((!result.getTextRange().containsRange(textRegion.getOffset(), (textRegion.getOffset() + textRegion.getLength())))) {
             PsiElement _parent = result.getParent();
             result = _parent;
           }
-          int _textLength = result.getTextLength();
-          boolean _equals = (_textLength == 0);
-          if (_equals) {
+          int _textLength_1 = result.getTextLength();
+          boolean _equals_1 = (_textLength_1 == 0);
+          if (_equals_1) {
             return null;
           }
           _xblockexpression = result;
@@ -231,6 +246,9 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
   protected List<AbstractTraceForURIProvider.PersistedTrace> findInverseTraceFiles(final VirtualFileInProject sourceFile) {
     final Project ideaProject = sourceFile.getProject();
     final XtextAutoBuilderComponent builder = ideaProject.<XtextAutoBuilderComponent>getComponent(XtextAutoBuilderComponent.class);
+    if ((builder == null)) {
+      return CollectionLiterals.<AbstractTraceForURIProvider.PersistedTrace>newArrayList();
+    }
     VirtualFile _file = sourceFile.getFile();
     URI _uRI = VirtualFileURIUtil.getURI(_file);
     final Iterable<URI> generatedSources = builder.getGeneratedSources(_uRI);

@@ -99,7 +99,10 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 				return null
 			val targetFile = platformResource.file
 			val textRegion = it.textRegion
-			var result = mngr.findFile(targetFile).findElementAt(textRegion.offset)
+			var result = mngr.findFile(targetFile)?.findElementAt(textRegion.offset)
+			if (result === null || result.textLength == 0) {
+				return null
+			}
 			while (!result.textRange.containsRange(textRegion.offset, textRegion.offset + textRegion.length)) {
 				result = result.parent
 			}
@@ -141,6 +144,9 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 		//TODO we need a way to find generated files for sources in jars.
 		val ideaProject = sourceFile.project
 		val builder = ideaProject.getComponent(XtextAutoBuilderComponent)
+		if(builder === null) {
+			return newArrayList
+		}
 		val generatedSources = builder.getGeneratedSources(VirtualFileURIUtil.getURI(sourceFile.file))
 		val mngr = VirtualFileManager.instance
 		val generatedFiles = generatedSources.map [
