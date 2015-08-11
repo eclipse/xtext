@@ -14,13 +14,13 @@ import com.intellij.framework.addSupport.FrameworkSupportInModuleConfigurable
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.roots.ModifiableModelsProvider
 import com.intellij.openapi.roots.ModifiableRootModel
+import com.intellij.openapi.roots.SourceFolder
 import com.intellij.openapi.vfs.VirtualFile
 import javax.inject.Provider
 import org.eclipse.xtend.core.idea.facet.XtendFacetConfiguration
 import org.eclipse.xtend.core.idea.lang.XtendLanguage
 import org.jetbrains.jps.model.java.JavaSourceRootType
 import org.jetbrains.jps.model.java.JpsJavaExtensionService
-import com.intellij.openapi.roots.SourceFolder
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -51,7 +51,7 @@ class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurable {
 		}
 
 		val facetType = FacetTypeRegistry.getInstance().findFacetType(XtendLanguage.INSTANCE.ID)
-		if(facetType === null) {
+		if (facetType === null) {
 			return
 		}
 		val mnr = FacetManager.getInstance(module)
@@ -66,7 +66,7 @@ class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurable {
 
 		xtendLibManager.ensureXtendLibAvailable(rootModel, module)
 	}
-	
+
 	def VirtualFile createOrGetInParentDir(SourceFolder sibling, String folderName) {
 		val parent = sibling?.file?.parent
 		if (parent === null)
@@ -77,7 +77,6 @@ class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurable {
 		}
 		return parent.createChildDirectory(null, folderName)
 	}
-
 
 	override createComponent() {
 		null
