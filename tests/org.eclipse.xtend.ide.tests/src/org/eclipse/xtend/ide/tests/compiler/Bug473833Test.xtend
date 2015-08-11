@@ -155,6 +155,38 @@ class Bug473833Test extends AbstractXtendUITestCase {
 		file.assertNoErrors
 	}
 	
+	/**
+	 * See https://bugs.eclipse.org/bugs/show_bug.cgi?id=474238
+	 */
+	@Test def void testInheritedNestedTypes_withActiveAnnotation() {
+		workbenchTestHelper.createFile('somePackage/Outer.xtend', '''
+			package somePackage
+			
+			class Outer {
+			  static class Inner implements Foo {}
+			}
+		''')
+		val file = workbenchTestHelper.createFile('myPackage/AClassTest.xtend', '''
+			package myPackage
+			
+			import somePackage.Outer2
+			
+			class AClassTest extends Outer2.Inner {
+			}
+		''')
+		workbenchTestHelper.createFile('somePackage/Outer2.xtend', '''
+			package somePackage
+			
+			import somePackage.Outer.Inner
+			
+			@Data
+			class Outer2 extends Outer {
+			}
+		''')
+		waitForBuild()
+		file.assertNoErrors
+	}
+	
 	private def void assertNoErrors(IFile file) {
 		val findMarkers = file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE)
 		for (iMarker : findMarkers) {

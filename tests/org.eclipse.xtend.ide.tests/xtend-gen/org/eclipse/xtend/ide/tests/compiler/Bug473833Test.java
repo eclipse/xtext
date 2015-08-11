@@ -252,6 +252,57 @@ public class Bug473833Test extends AbstractXtendUITestCase {
     }
   }
   
+  /**
+   * See https://bugs.eclipse.org/bugs/show_bug.cgi?id=474238
+   */
+  @Test
+  public void testInheritedNestedTypes_withActiveAnnotation() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package somePackage");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Outer {");
+      _builder.newLine();
+      _builder.append("  ");
+      _builder.append("static class Inner implements Foo {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this.workbenchTestHelper.createFile("somePackage/Outer.xtend", _builder.toString());
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package myPackage");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("import somePackage.Outer2");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("class AClassTest extends Outer2.Inner {");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      final IFile file = this.workbenchTestHelper.createFile("myPackage/AClassTest.xtend", _builder_1.toString());
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("package somePackage");
+      _builder_2.newLine();
+      _builder_2.newLine();
+      _builder_2.append("import somePackage.Outer.Inner");
+      _builder_2.newLine();
+      _builder_2.newLine();
+      _builder_2.append("@Data");
+      _builder_2.newLine();
+      _builder_2.append("class Outer2 extends Outer {");
+      _builder_2.newLine();
+      _builder_2.append("}");
+      _builder_2.newLine();
+      this.workbenchTestHelper.createFile("somePackage/Outer2.xtend", _builder_2.toString());
+      IResourcesSetupUtil.waitForBuild();
+      this.assertNoErrors(file);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   private void assertNoErrors(final IFile file) {
     try {
       final IMarker[] findMarkers = file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
