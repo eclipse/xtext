@@ -3073,4 +3073,510 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testBug466974_01() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var i = 0");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("Math.max( i = i + 1, if (i == 1) { 1 } else { 2 })");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("int _xblockexpression = (int) 0;");
+      _builder_1.newLine();
+      _builder_1.append("{");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("int i = 0;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("int _i = i = (i + 1);");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("int _xifexpression = (int) 0;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("if ((i == 1)) {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("_xifexpression = 1;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("} else {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("_xifexpression = 2;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("_xblockexpression = Math.max(_i, _xifexpression);");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return _xblockexpression;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug466974_02() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var i = 0");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("Math.max(if (i == 1) { 1 } else { 2 }, i = i + 1)");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("int _xblockexpression = (int) 0;");
+      _builder_1.newLine();
+      _builder_1.append("{");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("int i = 0;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("int _xifexpression = (int) 0;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("if ((i == 1)) {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("_xifexpression = 1;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("} else {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("_xifexpression = 2;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("_xblockexpression = Math.max(_xifexpression, i = (i + 1));");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return _xblockexpression;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug466974_03() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var i = 0");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("Math.max({ i = i + 1 }, if (i == 1) { 1 } else { 2 })");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("int _xblockexpression = (int) 0;");
+      _builder_1.newLine();
+      _builder_1.append("{");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("int i = 0;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("int _i = i = (i + 1);");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("int _xifexpression = (int) 0;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("if ((i == 1)) {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("_xifexpression = 1;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("} else {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("_xifexpression = 2;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("_xblockexpression = Math.max(_i, _xifexpression);");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return _xblockexpression;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug466974_04() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var i = 0");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("Math.max(if (i == 1) { 1 } else { 2 }, { i = i + 1 })");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("int _xblockexpression = (int) 0;");
+      _builder_1.newLine();
+      _builder_1.append("{");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("int i = 0;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("int _xifexpression = (int) 0;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("if ((i == 1)) {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("_xifexpression = 1;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("} else {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("_xifexpression = 2;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("_xblockexpression = Math.max(_xifexpression, i = (i + 1));");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return _xblockexpression;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug466974_05() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var i = 0");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("{i = i + 1}.compareTo(if (i == 1) { 1 } else { 2 })");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("int _xblockexpression = (int) 0;");
+      _builder_1.newLine();
+      _builder_1.append("{");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("int i = 0;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("int _i = i = (i + 1);");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("int _xifexpression = (int) 0;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("if ((i == 1)) {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("_xifexpression = 1;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("} else {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("_xifexpression = 2;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("_xblockexpression = Integer.valueOf(_i).compareTo(Integer.valueOf(_xifexpression));");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return _xblockexpression;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug466974_06() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var i = 0");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("{if (i == 1) { 1 } else { 2 }}.compareTo(i = i + 1)");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("int _xblockexpression = (int) 0;");
+      _builder_1.newLine();
+      _builder_1.append("{");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("int i = 0;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("int _xifexpression = (int) 0;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("if ((i == 1)) {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("_xifexpression = 1;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("} else {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("_xifexpression = 2;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("_xblockexpression = Integer.valueOf(_xifexpression).compareTo(Integer.valueOf(i = (i + 1)));");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return _xblockexpression;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug466974_07() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var i = 0");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("{{i = i + 1}}.compareTo(if (i == 1) { 1 } else { 2 })");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("int _xblockexpression = (int) 0;");
+      _builder_1.newLine();
+      _builder_1.append("{");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("int i = 0;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("int _i = i = (i + 1);");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("int _xifexpression = (int) 0;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("if ((i == 1)) {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("_xifexpression = 1;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("} else {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("_xifexpression = 2;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("_xblockexpression = Integer.valueOf(_i).compareTo(Integer.valueOf(_xifexpression));");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return _xblockexpression;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug466974_08() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var i = 0");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("{if (i == 1) { 1 } else { 2 }}.compareTo({i = i + 1})");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("int _xblockexpression = (int) 0;");
+      _builder_1.newLine();
+      _builder_1.append("{");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("int i = 0;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("int _xifexpression = (int) 0;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("if ((i == 1)) {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("_xifexpression = 1;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("} else {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("_xifexpression = 2;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("_xblockexpression = Integer.valueOf(_xifexpression).compareTo(Integer.valueOf(i = (i + 1)));");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return _xblockexpression;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug466974_09() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var i = 0");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("Math.max(i = i + 1, 2)");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("int _xblockexpression = (int) 0;");
+      _builder_1.newLine();
+      _builder_1.append("{");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("int i = 0;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("_xblockexpression = Math.max(i = (i + 1), 2);");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return _xblockexpression;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug466974_10() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var i = 0");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("{i = i + 1}.compareTo(2)");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("int _xblockexpression = (int) 0;");
+      _builder_1.newLine();
+      _builder_1.append("{");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("int i = 0;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("_xblockexpression = Integer.valueOf(i = (i + 1)).compareTo(Integer.valueOf(2));");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return _xblockexpression;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }
