@@ -50,6 +50,7 @@ import org.eclipse.xtext.util.TextRegionWithLineInformation;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
+import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -243,6 +244,19 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			}
 		}
 	}
+	
+	protected XAbstractFeatureCall getFeatureCall(final XExpression argument) {
+		EObject expr = argument.eContainer();
+		if (expr instanceof XAbstractFeatureCall) {
+			return (XAbstractFeatureCall) expr;
+		}
+		if (expr instanceof XBlockExpression) {
+			XBlockExpression blockExpression = (XBlockExpression) expr;
+			if (blockExpression.getExpressions().size() == 1)
+				return getFeatureCall(blockExpression);
+		}
+		return null;
+	}
 
 	protected List<XExpression> getActualArguments(final XAbstractFeatureCall expr) {
 		List<XExpression> actualArguments = expr.getActualArguments();
@@ -348,6 +362,9 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	
 	@Override
 	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b) {
+		if (isVariableDeclarationRequired(getFeatureCall(expr), expr, b)) {
+			return true;
+		}
 		if (expr.eContainingFeature() == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET) {
 			if (((XMemberFeatureCall) expr.eContainer()).isNullSafe()) {
 				if (expr instanceof XFeatureCall) {
@@ -413,6 +430,34 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			return !b.hasName(feature);
 		}
 		return super.isVariableDeclarationRequired(expr, b);
+	}
+	
+	protected boolean isVariableDeclarationRequired(XAbstractFeatureCall featureCall, XExpression expression, ITreeAppendable b) {
+		if (featureCall == null) 
+			return false;
+		
+		XExpression actualReceiver = normalizeBlockExpression(getActualReceiver(featureCall));
+		List<XExpression> arguments = getActualArguments(featureCall);
+		
+		XExpression argument = normalizeBlockExpression(expression);
+		
+		int argumentIndex = -1;
+		if (actualReceiver != argument) {
+			argumentIndex = arguments.indexOf(argument);
+			if (argumentIndex == -1)
+				return false;
+		}
+		
+		if (!expressionHelper.hasSideEffects(argument))
+			return false;
+		
+		int startIndex = argumentIndex + 1;
+		int endIndex = arguments.size();
+		for (int i = startIndex; i < endIndex; i++) {
+			if (isVariableDeclarationRequired(arguments.get(i), b))
+				return true;
+		}
+		return false;
 	}
 
 	private boolean isPotentialJavaOperation(XAbstractFeatureCall featureCall) {

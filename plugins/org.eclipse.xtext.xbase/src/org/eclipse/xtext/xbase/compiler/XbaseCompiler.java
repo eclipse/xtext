@@ -1869,7 +1869,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if (container instanceof XBlockExpression) {
 			List<XExpression> siblings = ((XBlockExpression) container).getExpressions();
 			if (siblings.get(siblings.size() - 1) == expr) {
-				return false;
+				return isVariableDeclarationRequired(getFeatureCall(expr), expr, b);
 			}
 		}
 		if (container instanceof XClosure) {
