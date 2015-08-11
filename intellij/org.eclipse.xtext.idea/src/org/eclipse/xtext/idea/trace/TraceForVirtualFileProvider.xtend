@@ -166,6 +166,9 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 		val outputConfigurationProvider = getServiceProvider(absoluteSourceResource).get(IdeaOutputConfigurationProvider)
 		val outputConfigurations = outputConfigurationProvider.getOutputConfigurations(module)
 		val sourceFolder = projectConfig.findSourceFolderContaining(absoluteSourceResource.getURI)
+		if(sourceFolder === null) {
+			return null
+		}
 		val outputFolder = outputConfigurations.head.getOutputDirectory(sourceFolder.name)
 		val outputSourceFolder = ApplicationManager.application.<VirtualFile>runReadAction [ 
 			if (outputFolder.isAbsolutePath) {

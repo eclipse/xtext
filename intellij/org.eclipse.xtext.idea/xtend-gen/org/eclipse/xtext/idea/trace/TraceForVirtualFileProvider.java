@@ -288,6 +288,9 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
     final Set<OutputConfiguration> outputConfigurations = outputConfigurationProvider.getOutputConfigurations(module);
     URI _uRI = absoluteSourceResource.getURI();
     final ISourceFolder sourceFolder = projectConfig.findSourceFolderContaining(_uRI);
+    if ((sourceFolder == null)) {
+      return null;
+    }
     OutputConfiguration _head = IterableExtensions.<OutputConfiguration>head(outputConfigurations);
     String _name = sourceFolder.getName();
     final String outputFolder = _head.getOutputDirectory(_name);
