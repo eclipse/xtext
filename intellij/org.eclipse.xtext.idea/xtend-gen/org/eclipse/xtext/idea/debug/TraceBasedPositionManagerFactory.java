@@ -8,7 +8,6 @@
 package org.eclipse.xtext.idea.debug;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.intellij.debugger.NoDataException;
 import com.intellij.debugger.PositionManager;
@@ -19,14 +18,23 @@ import com.intellij.debugger.engine.PositionManagerImpl;
 import com.intellij.debugger.requests.ClassPrepareRequestor;
 import com.intellij.debugger.requests.RequestManager;
 import com.intellij.lang.Language;
+import com.intellij.openapi.application.Application;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Computable;
+import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiDocumentManager;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.util.PsiUtil;
+import com.intellij.util.DocumentUtil;
 import com.sun.jdi.AbsentInformationException;
 import com.sun.jdi.Location;
 import com.sun.jdi.ReferenceType;
 import com.sun.jdi.request.ClassPrepareRequest;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -34,15 +42,21 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.idea.debug.DebugProcessExtensions;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
+import org.eclipse.xtext.idea.trace.IIdeaTrace;
+import org.eclipse.xtext.idea.trace.ILocationInVirtualFile;
+import org.eclipse.xtext.idea.trace.TraceForVirtualFileProvider;
+import org.eclipse.xtext.idea.trace.VirtualFileInProject;
+import org.eclipse.xtext.util.ITextRegionWithLineInformation;
+import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 /**
@@ -58,6 +72,9 @@ public class TraceBasedPositionManagerFactory extends PositionManagerFactory {
     @Inject
     @Extension
     private DebugProcessExtensions _debugProcessExtensions;
+    
+    @Inject
+    private TraceForVirtualFileProvider traceForVirtualFileProvider;
     
     public TraceBasedPositionManager(final DebugProcess process, final IXtextLanguage language) {
       this.process = process;
@@ -75,37 +92,41 @@ public class TraceBasedPositionManagerFactory extends PositionManagerFactory {
       if (_notEquals) {
         throw NoDataException.INSTANCE;
       }
-      final Map<URI, AbstractTraceRegion> traces = this._debugProcessExtensions.getTracesForSource(this.process, source);
-      final int line = source.getLine();
-      final HashSet<String> names = CollectionLiterals.<String>newHashSet();
-      Set<Map.Entry<URI, AbstractTraceRegion>> _entrySet = traces.entrySet();
-      for (final Map.Entry<URI, AbstractTraceRegion> uri2trace : _entrySet) {
-        {
-          AbstractTraceRegion _value = uri2trace.getValue();
-          TreeIterator<AbstractTraceRegion> _treeIterator = _value.treeIterator();
-          final Function1<AbstractTraceRegion, Boolean> _function = new Function1<AbstractTraceRegion, Boolean>() {
-            @Override
-            public Boolean apply(final AbstractTraceRegion it) {
-              ILocationData _mergedAssociatedLocation = it.getMergedAssociatedLocation();
-              int _lineNumber = _mergedAssociatedLocation.getLineNumber();
-              return Boolean.valueOf((_lineNumber == line));
+      Application _application = ApplicationManager.getApplication();
+      final Computable<Set<String>> _function = new Computable<Set<String>>() {
+        @Override
+        public Set<String> compute() {
+          try {
+            PsiElement _elementAt = source.getElementAt();
+            VirtualFileInProject _forPsiElement = VirtualFileInProject.forPsiElement(_elementAt);
+            final IIdeaTrace trace = TraceBasedPositionManager.this.traceForVirtualFileProvider.getTraceToTarget(_forPsiElement);
+            boolean _equals = Objects.equal(trace, null);
+            if (_equals) {
+              throw NoDataException.INSTANCE;
             }
-          };
-          final AbstractTraceRegion region = IteratorExtensions.<AbstractTraceRegion>findFirst(_treeIterator, _function);
-          boolean _notEquals_1 = (!Objects.equal(region, null));
-          if (_notEquals_1) {
-            URI _key = uri2trace.getKey();
-            String _lastSegment = _key.lastSegment();
-            names.add(_lastSegment);
+            Iterable<? extends ILocationInVirtualFile> _allAssociatedLocations = trace.getAllAssociatedLocations();
+            final Function1<ILocationInVirtualFile, String> _function = new Function1<ILocationInVirtualFile, String>() {
+              @Override
+              public String apply(final ILocationInVirtualFile it) {
+                SourceRelativeURI _srcRelativeResourceURI = it.getSrcRelativeResourceURI();
+                URI _uRI = _srcRelativeResourceURI.getURI();
+                return _uRI.lastSegment();
+              }
+            };
+            Iterable<String> _map = IterableExtensions.map(_allAssociatedLocations, _function);
+            return IterableExtensions.<String>toSet(_map);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
           }
         }
-      }
+      };
+      final Set<String> names = _application.<Set<String>>runReadAction(_function);
       boolean _isEmpty = names.isEmpty();
       if (_isEmpty) {
         throw NoDataException.INSTANCE;
       }
       RequestManager _requestsManager = this.process.getRequestsManager();
-      final ClassPrepareRequestor _function = new ClassPrepareRequestor() {
+      final ClassPrepareRequestor _function_1 = new ClassPrepareRequestor() {
         @Override
         public void processClassPrepare(final DebugProcess process, final ReferenceType refType) {
           try {
@@ -123,7 +144,7 @@ public class TraceBasedPositionManagerFactory extends PositionManagerFactory {
           }
         }
       };
-      return _requestsManager.createClassPrepareRequest(_function, "*");
+      return _requestsManager.createClassPrepareRequest(_function_1, "*");
     }
     
     @Override
@@ -242,63 +263,83 @@ public class TraceBasedPositionManagerFactory extends PositionManagerFactory {
     
     @Override
     public List<Location> locationsOfLine(final ReferenceType type, final SourcePosition position) throws NoDataException {
-      try {
-        PsiFile _file = position.getFile();
-        Language _language = _file.getLanguage();
-        boolean _notEquals = (!Objects.equal(_language, this.language));
-        if (_notEquals) {
-          throw NoDataException.INSTANCE;
-        }
-        final Map<URI, AbstractTraceRegion> traces = this._debugProcessExtensions.getTracesForSource(this.process, position);
-        Set<Map.Entry<URI, AbstractTraceRegion>> _entrySet = traces.entrySet();
-        for (final Map.Entry<URI, AbstractTraceRegion> entry : _entrySet) {
-          URI _key = entry.getKey();
-          String _lastSegment = _key.lastSegment();
-          String _sourceName = type.sourceName();
-          boolean _equals = Objects.equal(_lastSegment, _sourceName);
-          if (_equals) {
-            AbstractTraceRegion _value = entry.getValue();
-            Iterator<AbstractTraceRegion> _leafIterator = _value.leafIterator();
-            final Function1<AbstractTraceRegion, Boolean> _function = new Function1<AbstractTraceRegion, Boolean>() {
+      PsiFile _file = position.getFile();
+      Language _language = _file.getLanguage();
+      boolean _notEquals = (!Objects.equal(_language, this.language));
+      if (_notEquals) {
+        throw NoDataException.INSTANCE;
+      }
+      Application _application = ApplicationManager.getApplication();
+      final Computable<List<Location>> _function = new Computable<List<Location>>() {
+        @Override
+        public List<Location> compute() {
+          try {
+            final PsiElement psi = position.getElementAt();
+            Project _project = psi.getProject();
+            PsiDocumentManager _instance = PsiDocumentManager.getInstance(_project);
+            PsiFile _containingFile = psi.getContainingFile();
+            final Document document = _instance.getDocument(_containingFile);
+            int _line = position.getLine();
+            final TextRange range = DocumentUtil.getLineTextRange(document, _line);
+            VirtualFile _virtualFile = PsiUtil.getVirtualFile(psi);
+            Project _project_1 = psi.getProject();
+            VirtualFileInProject _virtualFileInProject = new VirtualFileInProject(_virtualFile, _project_1);
+            final IIdeaTrace traceToTarget = TraceBasedPositionManager.this.traceForVirtualFileProvider.getTraceToTarget(_virtualFileInProject);
+            boolean _equals = Objects.equal(traceToTarget, null);
+            if (_equals) {
+              throw NoDataException.INSTANCE;
+            }
+            final ArrayList<Location> result = CollectionLiterals.<Location>newArrayList();
+            int _startOffset = range.getStartOffset();
+            int _length = range.getLength();
+            TextRegion _textRegion = new TextRegion(_startOffset, _length);
+            Iterable<? extends ILocationInVirtualFile> _allAssociatedLocations = traceToTarget.getAllAssociatedLocations(_textRegion);
+            final Function1<ILocationInVirtualFile, Integer> _function = new Function1<ILocationInVirtualFile, Integer>() {
               @Override
-              public Boolean apply(final AbstractTraceRegion it) {
-                List<ILocationData> _associatedLocations = it.getAssociatedLocations();
-                final Function1<ILocationData, Boolean> _function = new Function1<ILocationData, Boolean>() {
-                  @Override
-                  public Boolean apply(final ILocationData it) {
-                    int _lineNumber = it.getLineNumber();
-                    int _line = position.getLine();
-                    return Boolean.valueOf((_lineNumber == _line));
-                  }
-                };
-                return Boolean.valueOf(IterableExtensions.<ILocationData>exists(_associatedLocations, _function));
+              public Integer apply(final ILocationInVirtualFile it) {
+                ITextRegionWithLineInformation _textRegion = it.getTextRegion();
+                return Integer.valueOf(_textRegion.getLineNumber());
               }
             };
-            Iterator<AbstractTraceRegion> _filter = IteratorExtensions.<AbstractTraceRegion>filter(_leafIterator, _function);
-            final List<AbstractTraceRegion> allLocations = IteratorExtensions.<AbstractTraceRegion>toList(_filter);
-            final Function1<AbstractTraceRegion, List<Location>> _function_1 = new Function1<AbstractTraceRegion, List<Location>>() {
-              @Override
-              public List<Location> apply(final AbstractTraceRegion it) {
-                try {
-                  int _myLineNumber = it.getMyLineNumber();
-                  int _plus = (_myLineNumber + 1);
-                  return type.locationsOfLine(_plus);
-                } catch (Throwable _e) {
-                  throw Exceptions.sneakyThrow(_e);
+            List<? extends ILocationInVirtualFile> _sortBy = IterableExtensions.sortBy(_allAssociatedLocations, _function);
+            for (final ILocationInVirtualFile location : _sortBy) {
+              boolean _and = false;
+              String _sourceName = type.sourceName();
+              SourceRelativeURI _srcRelativeResourceURI = location.getSrcRelativeResourceURI();
+              URI _uRI = _srcRelativeResourceURI.getURI();
+              String _lastSegment = _uRI.lastSegment();
+              String _string = _lastSegment.toString();
+              boolean _equals_1 = Objects.equal(_sourceName, _string);
+              if (!_equals_1) {
+                _and = false;
+              } else {
+                ITextRegionWithLineInformation _textRegion_1 = location.getTextRegion();
+                int _lineNumber = _textRegion_1.getLineNumber();
+                ITextRegionWithLineInformation _textRegion_2 = location.getTextRegion();
+                int _endLineNumber = _textRegion_2.getEndLineNumber();
+                boolean _equals_2 = (_lineNumber == _endLineNumber);
+                _and = _equals_2;
+              }
+              if (_and) {
+                ITextRegionWithLineInformation _textRegion_3 = location.getTextRegion();
+                int _lineNumber_1 = _textRegion_3.getLineNumber();
+                int _plus = (_lineNumber_1 + 1);
+                final List<Location> locationsOfLine = type.locationsOfLine(_plus);
+                boolean _isEmpty = locationsOfLine.isEmpty();
+                boolean _not = (!_isEmpty);
+                if (_not) {
+                  result.addAll(locationsOfLine);
+                  return result;
                 }
               }
-            };
-            List<List<Location>> _map = ListExtensions.<AbstractTraceRegion, List<Location>>map(allLocations, _function_1);
-            Iterable<Location> _flatten = Iterables.<Location>concat(_map);
-            Set<Location> _set = IterableExtensions.<Location>toSet(_flatten);
-            final List<Location> locations = IterableExtensions.<Location>toList(_set);
-            return locations;
+            }
+            throw NoDataException.INSTANCE;
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
           }
         }
-        throw NoDataException.INSTANCE;
-      } catch (Throwable _e) {
-        throw Exceptions.sneakyThrow(_e);
-      }
+      };
+      return _application.<List<Location>>runReadAction(_function);
     }
   }
   

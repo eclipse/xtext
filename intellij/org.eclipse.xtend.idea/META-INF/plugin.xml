@@ -54,7 +54,8 @@
 							implementationClass="org.eclipse.xtext.xbase.idea.imports.XImportSectionOptimizer"/>
 
 		<debugger.positionManagerFactory
-							implementation="org.eclipse.xtend.core.idea.debug.XtendPositionManagerFactory"/>
+							implementation="org.eclipse.xtend.core.idea.debug.XtendPositionManagerFactory" 
+							order="last"/>
 		<debugger.javaDebugAware
 							implementation="org.eclipse.xtend.core.idea.debug.XtendIsJavaDebugAware"/>
 		<debugger.extraSteppingFilter

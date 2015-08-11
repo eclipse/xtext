@@ -9,6 +9,8 @@ package org.eclipse.xtext.idea.trace;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.PsiUtil;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
@@ -19,6 +21,12 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 @Data
 @SuppressWarnings("all")
 public class VirtualFileInProject {
+  public static VirtualFileInProject forPsiElement(final PsiElement element) {
+    VirtualFile _virtualFile = PsiUtil.getVirtualFile(element);
+    Project _project = element.getProject();
+    return new VirtualFileInProject(_virtualFile, _project);
+  }
+  
   private final VirtualFile file;
   
   private final Project project;

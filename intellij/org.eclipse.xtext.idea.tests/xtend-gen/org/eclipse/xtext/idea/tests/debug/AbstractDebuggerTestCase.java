@@ -56,6 +56,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.macro.Active;
@@ -135,7 +136,18 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
   protected void stepOver(final int times) {
     ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, times, true);
     for (final Integer i : _doubleDotLessThan) {
-      this.stepOver();
+      try {
+        this.stepOver();
+      } catch (final Throwable _t) {
+        if (_t instanceof AssertionFailedError) {
+          final AssertionFailedError e = (AssertionFailedError)_t;
+          String _message = e.getMessage();
+          String _plus = ((("Failed on step " + i) + " : ") + _message);
+          TestCase.fail(_plus);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
     }
   }
   
@@ -164,6 +176,16 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
       @Override
       public void run() {
         AbstractDebuggerTestCase.this.myDebuggerSession.stepOut();
+      }
+    };
+    return this.waitForContextChange(_function);
+  }
+  
+  protected SuspendContextImpl resume() {
+    final Runnable _function = new Runnable() {
+      @Override
+      public void run() {
+        AbstractDebuggerTestCase.this.myDebuggerSession.resume();
       }
     };
     return this.waitForContextChange(_function);

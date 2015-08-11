@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.idea.findusages;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.find.findUsages.FindUsagesHandler;
 import com.intellij.find.findUsages.FindUsagesHandlerFactory;
@@ -19,11 +20,14 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNameIdentifierOwner;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.util.PsiTreeUtil;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.xtext.idea.findusages.GeneratedSourceAwareFindUsagesHandler;
 import org.eclipse.xtext.idea.shared.IdeaSharedInjectorProvider;
 import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -104,21 +108,32 @@ public class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerF
   }
   
   protected List<? extends PsiElement> getGeneratedElements(final PsiElement element) {
+    if ((element == null)) {
+      return Collections.<PsiElement>emptyList();
+    }
     if ((element instanceof PsiNameIdentifierOwner)) {
       PsiElement _nameIdentifier = ((PsiNameIdentifierOwner)element).getNameIdentifier();
       return this.getGeneratedElements(_nameIdentifier);
     }
+    final ArrayList<PsiNamedElement> result = CollectionLiterals.<PsiNamedElement>newArrayList();
     List<? extends PsiElement> _generatedElements = this.traceProvider.getGeneratedElements(element);
-    final Function1<PsiElement, PsiNamedElement> _function = new Function1<PsiElement, PsiNamedElement>() {
-      @Override
-      public PsiNamedElement apply(final PsiElement it) {
-        return PsiTreeUtil.<PsiNamedElement>getParentOfType(it, PsiNamedElement.class, false);
+    for (final PsiElement generatedElement : _generatedElements) {
+      {
+        final PsiNamedElement parent = PsiTreeUtil.<PsiNamedElement>getParentOfType(generatedElement, PsiNamedElement.class, false);
+        boolean _and = false;
+        boolean _notEquals = (!Objects.equal(parent, null));
+        if (!_notEquals) {
+          _and = false;
+        } else {
+          boolean _contains = result.contains(parent);
+          boolean _not = (!_contains);
+          _and = _not;
+        }
+        if (_and) {
+          result.add(parent);
+        }
       }
-    };
-    List<PsiNamedElement> _map = ListExtensions.map(_generatedElements, _function);
-    Iterable<PsiNamedElement> _filterNull = IterableExtensions.<PsiNamedElement>filterNull(_map);
-    Set<PsiNamedElement> _set = IterableExtensions.<PsiNamedElement>toSet(_filterNull);
-    final List<PsiNamedElement> result = IterableExtensions.<PsiNamedElement>toList(_set);
+    }
     return result;
   }
   

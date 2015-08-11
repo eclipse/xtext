@@ -10,12 +10,19 @@ package org.eclipse.xtext.idea.trace
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
 import org.eclipse.xtend.lib.annotations.Data
+import com.intellij.psi.PsiElement
+import com.intellij.psi.util.PsiUtil
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @Data
 class VirtualFileInProject {
+	
+	def static VirtualFileInProject forPsiElement(PsiElement element) {
+		return new VirtualFileInProject(PsiUtil.getVirtualFile(element), element.project)
+	}
+	
 	VirtualFile file
 	Project project
 }
