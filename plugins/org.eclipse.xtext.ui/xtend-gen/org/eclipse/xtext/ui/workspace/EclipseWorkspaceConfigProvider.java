@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.ui.workspace;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import org.eclipse.core.resources.IProject;
@@ -28,6 +29,7 @@ public class EclipseWorkspaceConfigProvider implements IWorkspaceConfigProvider 
   @Inject
   private IWorkspace workspace;
   
+  @Accessors
   @Inject
   private IJdtHelper jdtHelper;
   
@@ -38,8 +40,15 @@ public class EclipseWorkspaceConfigProvider implements IWorkspaceConfigProvider 
   }
   
   public EclipseProjectConfig getProjectConfig(final IProject project) {
-    boolean _isJavaCoreAvailable = this.jdtHelper.isJavaCoreAvailable();
-    if (_isJavaCoreAvailable) {
+    boolean _and = false;
+    boolean _notEquals = (!Objects.equal(this.jdtHelper, null));
+    if (!_notEquals) {
+      _and = false;
+    } else {
+      boolean _isJavaCoreAvailable = this.jdtHelper.isJavaCoreAvailable();
+      _and = _isJavaCoreAvailable;
+    }
+    if (_and) {
       return new Provider<EclipseProjectConfig>() {
         @Override
         public EclipseProjectConfig get() {
@@ -57,5 +66,14 @@ public class EclipseWorkspaceConfigProvider implements IWorkspaceConfigProvider 
   
   public void setWorkspace(final IWorkspace workspace) {
     this.workspace = workspace;
+  }
+  
+  @Pure
+  public IJdtHelper getJdtHelper() {
+    return this.jdtHelper;
+  }
+  
+  public void setJdtHelper(final IJdtHelper jdtHelper) {
+    this.jdtHelper = jdtHelper;
   }
 }

@@ -27,14 +27,14 @@ import com.google.inject.Provider
 class EclipseWorkspaceConfigProvider implements IWorkspaceConfigProvider {
 
 	@Accessors @Inject IWorkspace workspace
-	@Inject IJdtHelper jdtHelper
+	@Accessors @Inject IJdtHelper jdtHelper
 
 	override getWorkspaceConfig(ResourceSet context) {
 		new EclipseWorkspaceConfig(this, workspace.root)
 	}
 
 	public def EclipseProjectConfig getProjectConfig(IProject project) {
-		if (jdtHelper.isJavaCoreAvailable) {
+		if (jdtHelper!=null && jdtHelper.isJavaCoreAvailable) {
 			return new Provider<EclipseProjectConfig>() {
 				override get() {
 					return new JdtProjectConfig(project)
