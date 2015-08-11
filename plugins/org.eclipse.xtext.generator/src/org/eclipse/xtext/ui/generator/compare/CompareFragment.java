@@ -15,14 +15,13 @@ import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
-import org.eclipse.xtext.generator.junit.Junit4Fragment;
 import org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment;
 
 /**
  * @author Michael Clay - Initial contribution and API
  */
 public class CompareFragment extends ResourceFactoryFragment {
-	private static final Logger log = Logger.getLogger(Junit4Fragment.class);
+	private static final Logger log = Logger.getLogger(CompareFragment.class);
 
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
