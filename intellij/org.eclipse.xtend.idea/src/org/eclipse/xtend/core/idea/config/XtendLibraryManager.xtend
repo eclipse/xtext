@@ -120,7 +120,6 @@ class XtendLibraryManager {
 		val modulePath = ExternalSystemApiUtil.getExternalProjectPath(module)
 		if (modulePath !== null) {
 			var buildScriptPath = FileUtil.findFileInProvidedPath(modulePath, GradleConstants.DEFAULT_SCRIPT_NAME)
-			// TODO check parent
 			if (!buildScriptPath.isNullOrEmpty) {
 				var VirtualFile virtualFile = LocalFileSystem.getInstance().refreshAndFindFileByPath(buildScriptPath)
 				if (virtualFile !== null) {
