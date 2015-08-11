@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.idea.config
 import com.google.inject.Inject
 import com.intellij.ide.plugins.PluginManager
 import com.intellij.openapi.command.WriteCommandAction
+import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.extensions.PluginId
 import com.intellij.openapi.externalSystem.util.ExternalSystemApiUtil
 import com.intellij.openapi.module.Module
@@ -36,7 +37,8 @@ import org.jetbrains.plugins.gradle.util.GradleConstants
 import org.jetbrains.plugins.groovy.lang.psi.GroovyPsiElementFactory
 import org.jetbrains.plugins.groovy.lang.psi.api.statements.expressions.GrCall
 import org.jetbrains.plugins.groovy.lang.psi.api.statements.expressions.GrMethodCall
-import com.intellij.openapi.diagnostic.Logger
+
+import static org.eclipse.xtend.core.idea.config.XtendLibraryManager.*
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -139,7 +141,7 @@ class XtendLibraryManager {
 
 	def void addJavaRuntimeLibrary(Module module, ModifiableRootModel rootModel) {
 		val library = createOrGetXtendJavaLibrary(rootModel, module)
-		if (library != null && !rootModel.moduleLibraryTable.libraries.contains(library)) {
+		if (library != null && rootModel.findLibraryOrderEntry(library) === null) {
 			rootModel.addLibraryEntry(library)
 		}
 	}

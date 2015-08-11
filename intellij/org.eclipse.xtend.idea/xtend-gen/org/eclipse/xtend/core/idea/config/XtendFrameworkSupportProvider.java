@@ -17,6 +17,7 @@ import com.intellij.openapi.module.JavaModuleType;
 import com.intellij.openapi.module.ModuleType;
 import org.eclipse.xtend.core.idea.config.XtendFrameworkType;
 import org.eclipse.xtend.core.idea.config.XtendSupportConfigurable;
+import org.eclipse.xtend.core.idea.lang.XtendLanguage;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -25,6 +26,10 @@ import org.eclipse.xtend.core.idea.config.XtendSupportConfigurable;
 public class XtendFrameworkSupportProvider extends FrameworkSupportInModuleProvider {
   @Inject
   private Provider<XtendSupportConfigurable> xtendSupportConfigurableProvider;
+  
+  public XtendFrameworkSupportProvider() {
+    XtendLanguage.INSTANCE.injectMembers(this);
+  }
   
   @Override
   public FrameworkTypeEx getFrameworkType() {

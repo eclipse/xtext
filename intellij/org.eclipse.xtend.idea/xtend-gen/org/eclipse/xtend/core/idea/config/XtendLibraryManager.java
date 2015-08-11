@@ -18,6 +18,7 @@ import com.intellij.openapi.extensions.PluginId;
 import com.intellij.openapi.externalSystem.util.ExternalSystemApiUtil;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.LibraryOrderEntry;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.roots.ProjectFileIndex;
@@ -237,11 +238,9 @@ public class XtendLibraryManager {
     if (!_notEquals) {
       _and = false;
     } else {
-      LibraryTable _moduleLibraryTable = rootModel.getModuleLibraryTable();
-      Library[] _libraries = _moduleLibraryTable.getLibraries();
-      boolean _contains = ((List<Library>)Conversions.doWrapArray(_libraries)).contains(library);
-      boolean _not = (!_contains);
-      _and = _not;
+      LibraryOrderEntry _findLibraryOrderEntry = rootModel.findLibraryOrderEntry(library);
+      boolean _tripleEquals = (_findLibraryOrderEntry == null);
+      _and = _tripleEquals;
     }
     if (_and) {
       rootModel.addLibraryEntry(library);
