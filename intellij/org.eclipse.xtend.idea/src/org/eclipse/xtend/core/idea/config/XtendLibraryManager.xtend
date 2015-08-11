@@ -36,11 +36,13 @@ import org.jetbrains.plugins.gradle.util.GradleConstants
 import org.jetbrains.plugins.groovy.lang.psi.GroovyPsiElementFactory
 import org.jetbrains.plugins.groovy.lang.psi.api.statements.expressions.GrCall
 import org.jetbrains.plugins.groovy.lang.psi.api.statements.expressions.GrMethodCall
+import com.intellij.openapi.diagnostic.Logger
 
 /**
  * @author dhuebner - Initial contribution and API
  */
 class XtendLibraryManager {
+	protected static final Logger LOG = Logger.getInstance(XtendLibraryManager.name)
 
 	@Inject XtendLibraryDescription xtendLibDescr
 	static MavenId XTEND_LIB_MAVEN_ID
@@ -66,7 +68,7 @@ class XtendLibraryManager {
 	def void addGradleDependency(Module module, PsiFile context) {
 		val buildFile = module.locateBuildFile
 		if (buildFile === null) {
-			// TODO report error
+			LOG.error("Gradle build file not found in module " + module.name)
 			return
 		}
 
@@ -81,7 +83,7 @@ class XtendLibraryManager {
 					return expression !== null && "dependencies".equals(expression.getText())
 				]
 
-				val scope = if(context.isTestScope) "testCompile" else "compile"
+				val scope = if(context?.isTestScope) "testCompile" else "compile"
 
 				if (dependenciesBlock === null) {
 					dependenciesBlock = factory.createStatementFromText(
@@ -106,8 +108,9 @@ class XtendLibraryManager {
 	def static xtendLibMavenId() {
 		if (XTEND_LIB_MAVEN_ID === null) {
 			// TODO use 2.8.4 because snapshot repo is not available 
-			// val xtendPlugin = PluginManager.getPlugin(PluginId.getId("org.eclipse.xtend.idea"))
-			// val version = xtendPlugin?.version
+			val xtendPlugin = PluginManager.getPlugin(PluginId.getId("org.eclipse.xtend.idea"))
+			val version = xtendPlugin?.version
+			LOG.info("The current Xtend plugin version is " + version)
 			XTEND_LIB_MAVEN_ID = new MavenId("org.eclipse.xtend", "org.eclipse.xtend.lib", "2.8.4")
 		}
 		return XTEND_LIB_MAVEN_ID
@@ -156,7 +159,7 @@ class XtendLibraryManager {
 
 			override protected run() throws Throwable {
 				var dependency = MavenDomUtil.createDomDependency(model, null, xtendLibMavenId)
-				if (isTestScope(context)) {
+				if (context?.isTestScope) {
 					dependency.getScope().setStringValue("test")
 				}
 			}
