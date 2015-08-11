@@ -16,7 +16,7 @@ import com.intellij.openapi.roots.libraries.LibraryProperties;
 public class XtendLibraryProperties extends LibraryProperties<XtendLibraryProperties> {
   @Override
   public boolean equals(final Object obj) {
-    return true;
+    return (obj instanceof XtendLibraryProperties);
   }
   
   @Override

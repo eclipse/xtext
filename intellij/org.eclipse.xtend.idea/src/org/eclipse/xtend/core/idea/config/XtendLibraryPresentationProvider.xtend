@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.idea.config
 
 import com.intellij.openapi.roots.libraries.LibraryKind
 import com.intellij.openapi.roots.libraries.LibraryPresentationProvider
+import com.intellij.openapi.roots.libraries.LibraryUtil
 import com.intellij.openapi.vfs.VirtualFile
 import java.util.List
 import org.eclipse.xtend.core.idea.icons.XtendIcons
@@ -26,7 +27,12 @@ class XtendLibraryPresentationProvider extends LibraryPresentationProvider<Xtend
 	}
 
 	override detect(List<VirtualFile> classesRoots) {
-		new XtendLibraryProperties
+		val detectorClasses = XtendLibraryDescription.detectorClasses
+		if (detectorClasses.size === classesRoots.size && detectorClasses.forall [
+			LibraryUtil.isClassAvailableInLibrary(classesRoots, it.name)
+		]) {
+			return new XtendLibraryProperties
+		}
 	}
 
 	override getIcon() {

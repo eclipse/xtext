@@ -20,6 +20,7 @@ import org.eclipse.xtend.core.idea.facet.XtendFacetConfiguration
 import org.eclipse.xtend.core.idea.lang.XtendLanguage
 import org.jetbrains.jps.model.java.JavaSourceRootType
 import org.jetbrains.jps.model.java.JpsJavaExtensionService
+import com.intellij.openapi.roots.SourceFolder
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -36,22 +37,23 @@ class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurable {
 		ModifiableModelsProvider modifiableModelsProvider
 	) {
 		val entry = rootModel.contentEntries.head
-		val mainSrc = entry.sourceFolders.filter[!testSource && file.exists].head
-		var VirtualFile xtendGenMain = null
-		if (mainSrc != null) {
-			xtendGenMain = mainSrc.file.parent.getOrCreateDir("xtend-gen")
+		val mainSrc = entry.sourceFolders.filter[!testSource && file?.exists].head
+		var VirtualFile xtendGenMain = mainSrc.createOrGetInParentDir("xtend-gen")
+		if (xtendGenMain != null) {
 			val properties = JpsJavaExtensionService.getInstance().createSourceRootProperties("", true);
 			entry.addSourceFolder(xtendGenMain, JavaSourceRootType.SOURCE, properties)
 		}
-		val testSrc = entry.sourceFolders.filter[testSource && file.exists].head
-		var VirtualFile xtendGenTest = null
-		if (testSrc != null) {
-			xtendGenTest = testSrc.file.parent.getOrCreateDir("xtend-gen")
+		val testSrc = entry.sourceFolders.filter[testSource && file?.exists].head
+		var VirtualFile xtendGenTest = testSrc.createOrGetInParentDir("xtend-gen")
+		if (xtendGenTest != null) {
 			val properties = JpsJavaExtensionService.getInstance().createSourceRootProperties("", true);
 			entry.addSourceFolder(xtendGenTest, JavaSourceRootType.TEST_SOURCE, properties)
 		}
 
 		val facetType = FacetTypeRegistry.getInstance().findFacetType(XtendLanguage.INSTANCE.ID)
+		if(facetType === null) {
+			return
+		}
 		val mnr = FacetManager.getInstance(module)
 		var facet = mnr.findFacet(facetType.id, facetType.defaultFacetName) ?:
 			FacetManager.getInstance(module).addFacet(facetType, facetType.defaultFacetName, null)
@@ -64,14 +66,18 @@ class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurable {
 
 		xtendLibManager.ensureXtendLibAvailable(rootModel, module)
 	}
-
-	private def VirtualFile getOrCreateDir(VirtualFile parent, String name) {
+	
+	def VirtualFile createOrGetInParentDir(SourceFolder sibling, String folderName) {
+		val parent = sibling?.file?.parent
+		if (parent === null)
+			return null
 		val existing = parent.children.findFirst[it.name == name]
-		if (existing != null) {
+		if (existing !== null) {
 			return existing
 		}
-		return parent.createChildDirectory(null, name)
+		return parent.createChildDirectory(null, folderName)
 	}
+
 
 	override createComponent() {
 		null

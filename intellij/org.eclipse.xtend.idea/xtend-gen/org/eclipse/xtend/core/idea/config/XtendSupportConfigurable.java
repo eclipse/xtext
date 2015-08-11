@@ -64,7 +64,10 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
           _and = false;
         } else {
           VirtualFile _file = it.getFile();
-          boolean _exists = _file.exists();
+          boolean _exists = false;
+          if (_file!=null) {
+            _exists=_file.exists();
+          }
           _and = _exists;
         }
         return Boolean.valueOf(_and);
@@ -72,13 +75,9 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
     };
     Iterable<SourceFolder> _filter = IterableExtensions.<SourceFolder>filter(((Iterable<SourceFolder>)Conversions.doWrapArray(_sourceFolders)), _function);
     final SourceFolder mainSrc = IterableExtensions.<SourceFolder>head(_filter);
-    VirtualFile xtendGenMain = null;
-    boolean _notEquals = (!Objects.equal(mainSrc, null));
+    VirtualFile xtendGenMain = this.createOrGetInParentDir(mainSrc, "xtend-gen");
+    boolean _notEquals = (!Objects.equal(xtendGenMain, null));
     if (_notEquals) {
-      VirtualFile _file = mainSrc.getFile();
-      VirtualFile _parent = _file.getParent();
-      VirtualFile _orCreateDir = this.getOrCreateDir(_parent, "xtend-gen");
-      xtendGenMain = _orCreateDir;
       JpsJavaExtensionService _instance = JpsJavaExtensionService.getInstance();
       final JavaSourceRootProperties properties = _instance.createSourceRootProperties("", true);
       entry.<JavaSourceRootProperties>addSourceFolder(xtendGenMain, JavaSourceRootType.SOURCE, properties);
@@ -93,7 +92,10 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
           _and = false;
         } else {
           VirtualFile _file = it.getFile();
-          boolean _exists = _file.exists();
+          boolean _exists = false;
+          if (_file!=null) {
+            _exists=_file.exists();
+          }
           _and = _exists;
         }
         return Boolean.valueOf(_and);
@@ -101,13 +103,9 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
     };
     Iterable<SourceFolder> _filter_1 = IterableExtensions.<SourceFolder>filter(((Iterable<SourceFolder>)Conversions.doWrapArray(_sourceFolders_1)), _function_1);
     final SourceFolder testSrc = IterableExtensions.<SourceFolder>head(_filter_1);
-    VirtualFile xtendGenTest = null;
-    boolean _notEquals_1 = (!Objects.equal(testSrc, null));
+    VirtualFile xtendGenTest = this.createOrGetInParentDir(testSrc, "xtend-gen");
+    boolean _notEquals_1 = (!Objects.equal(xtendGenTest, null));
     if (_notEquals_1) {
-      VirtualFile _file_1 = testSrc.getFile();
-      VirtualFile _parent_1 = _file_1.getParent();
-      VirtualFile _orCreateDir_1 = this.getOrCreateDir(_parent_1, "xtend-gen");
-      xtendGenTest = _orCreateDir_1;
       JpsJavaExtensionService _instance_1 = JpsJavaExtensionService.getInstance();
       final JavaSourceRootProperties properties_1 = _instance_1.createSourceRootProperties("", true);
       entry.<JavaSourceRootProperties>addSourceFolder(xtendGenTest, JavaSourceRootType.TEST_SOURCE, properties_1);
@@ -115,6 +113,9 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
     FacetTypeRegistry _instance_2 = FacetTypeRegistry.getInstance();
     String _iD = XtendLanguage.INSTANCE.getID();
     final FacetType facetType = _instance_2.findFacetType(_iD);
+    if ((facetType == null)) {
+      return;
+    }
     final FacetManager mnr = FacetManager.getInstance(module);
     Facet _elvis = null;
     FacetTypeId _id = facetType.getId();
@@ -145,22 +146,34 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
     this.xtendLibManager.ensureXtendLibAvailable(rootModel, module);
   }
   
-  private VirtualFile getOrCreateDir(final VirtualFile parent, final String name) {
+  public VirtualFile createOrGetInParentDir(final SourceFolder sibling, final String folderName) {
     try {
+      VirtualFile _file = null;
+      if (sibling!=null) {
+        _file=sibling.getFile();
+      }
+      VirtualFile _parent = null;
+      if (_file!=null) {
+        _parent=_file.getParent();
+      }
+      final VirtualFile parent = _parent;
+      if ((parent == null)) {
+        return null;
+      }
       VirtualFile[] _children = parent.getChildren();
       final Function1<VirtualFile, Boolean> _function = new Function1<VirtualFile, Boolean>() {
         @Override
         public Boolean apply(final VirtualFile it) {
           String _name = it.getName();
-          return Boolean.valueOf(Objects.equal(_name, name));
+          String _name_1 = it.getName();
+          return Boolean.valueOf(Objects.equal(_name, _name_1));
         }
       };
       final VirtualFile existing = IterableExtensions.<VirtualFile>findFirst(((Iterable<VirtualFile>)Conversions.doWrapArray(_children)), _function);
-      boolean _notEquals = (!Objects.equal(existing, null));
-      if (_notEquals) {
+      if ((existing != null)) {
         return existing;
       }
-      return parent.createChildDirectory(null, name);
+      return parent.createChildDirectory(null, folderName);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

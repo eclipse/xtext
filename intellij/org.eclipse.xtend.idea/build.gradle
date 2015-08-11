@@ -10,12 +10,15 @@ dependencies {
 	compile ('org.eclipse.osgi:org.eclipse.osgi:3.7.1') { transitive = false}
 	compile ('org.eclipse.core:org.eclipse.core.contenttype:3.4.100') { transitive = false}
 	compile ('org.eclipse.equinox:org.eclipse.equinox.preferences:3.4.1') { transitive = false}
-	
-	ideaProvided fileTree("${ideaDevelopment.ideaHome}/plugins/junit/lib/").include("*.jar")
+
 }
 
 ideaDevelopment {
 	pluginDependencies {
 		project ':intellij:org.eclipse.xtext.idea'
+		id 'junit' // id is Junit
+		id 'maven' // id is org.jetbrains.idea.maven
+		id 'gradle'// is is org.jetbrains.plugins.gradle
+		id 'Groovy'// id is org.intellij.groovy
 	}
 }

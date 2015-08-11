@@ -35,6 +35,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.MapExtensions;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
@@ -103,13 +104,20 @@ public class XtendLibraryDescription extends CustomLibraryDescription {
   }
   
   public HashMap<OrderRootType, List<String>> libraryRoots() {
-    final HashMap<OrderRootType, List<String>> roots = CollectionLiterals.<OrderRootType, List<String>>newHashMap();
-    String _urlForLibraryRoot = this.getUrlForLibraryRoot(Lists.class);
-    String _urlForLibraryRoot_1 = this.getUrlForLibraryRoot(ToStringBuilder.class);
-    String _urlForLibraryRoot_2 = this.getUrlForLibraryRoot(Active.class);
-    String _urlForLibraryRoot_3 = this.getUrlForLibraryRoot(Data.class);
-    roots.put(OrderRootType.CLASSES, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(_urlForLibraryRoot, _urlForLibraryRoot_1, _urlForLibraryRoot_2, _urlForLibraryRoot_3)));
-    return roots;
+    List<? extends Class<?>> _detectorClasses = XtendLibraryDescription.getDetectorClasses();
+    final Function1<Class<?>, String> _function = new Function1<Class<?>, String>() {
+      @Override
+      public String apply(final Class<?> it) {
+        return XtendLibraryDescription.this.getUrlForLibraryRoot(it);
+      }
+    };
+    List<String> _map = ListExtensions.map(_detectorClasses, _function);
+    Pair<OrderRootType, List<String>> _mappedTo = Pair.<OrderRootType, List<String>>of(OrderRootType.CLASSES, _map);
+    return CollectionLiterals.<OrderRootType, List<String>>newHashMap(_mappedTo);
+  }
+  
+  public static List<? extends Class<?>> getDetectorClasses() {
+    return Collections.<Class<?>>unmodifiableList(CollectionLiterals.<Class<?>>newArrayList(Lists.class, ToStringBuilder.class, Active.class, Data.class));
   }
   
   @Override
