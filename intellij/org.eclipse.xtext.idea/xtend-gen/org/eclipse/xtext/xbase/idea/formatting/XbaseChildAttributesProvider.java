@@ -28,32 +28,7 @@ public class XbaseChildAttributesProvider extends DefaultChildAttributesProvider
   private XbaseGrammarAccess _xbaseGrammarAccess;
   
   @Override
-  protected Indent getAfterIndent(final EObject grammarElement) {
-    Indent _elvis = null;
-    Indent _indent = this.getIndent(grammarElement);
-    if (_indent != null) {
-      _elvis = _indent;
-    } else {
-      Indent _beforeIndent = super.getBeforeIndent(grammarElement);
-      _elvis = _beforeIndent;
-    }
-    return _elvis;
-  }
-  
-  @Override
-  protected Indent getBeforeIndent(final EObject grammarElement) {
-    Indent _elvis = null;
-    Indent _indent = this.getIndent(grammarElement);
-    if (_indent != null) {
-      _elvis = _indent;
-    } else {
-      Indent _beforeIndent = super.getBeforeIndent(grammarElement);
-      _elvis = _beforeIndent;
-    }
-    return _elvis;
-  }
-  
-  protected Indent getIndent(final EObject grammarElement) {
+  protected Indent getIndentAfter(final EObject grammarElement) {
     boolean _equals = Objects.equal(grammarElement, null);
     if (_equals) {
       return null;

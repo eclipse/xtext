@@ -79,7 +79,7 @@ class DefaultChildAttributesProvider implements ChildAttributesProvider {
 		if (block == null)
 			return null
 		
-		val grammarElementIndent = block.grammarElement.afterIndent
+		val grammarElementIndent = block.grammarElement.indentAfter
 		if (grammarElementIndent != null)
 			return grammarElementIndent
 
@@ -92,7 +92,7 @@ class DefaultChildAttributesProvider implements ChildAttributesProvider {
 		return null
 	}
 
-	protected def Indent getAfterIndent(EObject grammarElement) {
+	protected def Indent getIndentAfter(EObject grammarElement) {
 		return null
 	}
 
@@ -100,7 +100,7 @@ class DefaultChildAttributesProvider implements ChildAttributesProvider {
 		if (block == null)
 			return null
 
-		val grammarElementIndent = block.grammarElement.beforeIndent
+		val grammarElementIndent = block.grammarElement.indentBefore
 		if (grammarElementIndent != null)
 			return grammarElementIndent
 
@@ -113,7 +113,7 @@ class DefaultChildAttributesProvider implements ChildAttributesProvider {
 		return null
 	}
 
-	protected def Indent getBeforeIndent(EObject grammarElement) {
+	protected def Indent getIndentBefore(EObject grammarElement) {
 		return null
 	}
 

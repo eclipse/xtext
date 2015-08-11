@@ -299,18 +299,28 @@ class XtendAutoEditTest extends AbstractXbaseAutoEditTest {
 			}
 		''')
 	}
+	
+	override void test_return_01() {
+		'''
+			return |
+		'''.assertAutoIndentOnNewLine(
+		'''
+			return 
+			|
+		''')
+	}
 
 	override protected assertAutoIndentOnNewLine(CharSequence model, CharSequence expectedModel) {
 		super.assertAutoIndentOnNewLine('''
 			class Foo {
 				def foo() {
-				«model»
+					«model»
 				}
 			}
 		''', '''
 			class Foo {
 				def foo() {
-				«expectedModel»
+					«expectedModel»
 				}
 			}
 		''')

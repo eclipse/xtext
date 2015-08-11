@@ -109,7 +109,7 @@ public class DefaultChildAttributesProvider implements ChildAttributesProvider {
       return null;
     }
     EObject _grammarElement = this._blockExtension.getGrammarElement(block);
-    final Indent grammarElementIndent = this.getAfterIndent(_grammarElement);
+    final Indent grammarElementIndent = this.getIndentAfter(_grammarElement);
     boolean _notEquals = (!Objects.equal(grammarElementIndent, null));
     if (_notEquals) {
       return grammarElementIndent;
@@ -125,7 +125,7 @@ public class DefaultChildAttributesProvider implements ChildAttributesProvider {
     return null;
   }
   
-  protected Indent getAfterIndent(final EObject grammarElement) {
+  protected Indent getIndentAfter(final EObject grammarElement) {
     return null;
   }
   
@@ -135,7 +135,7 @@ public class DefaultChildAttributesProvider implements ChildAttributesProvider {
       return null;
     }
     EObject _grammarElement = this._blockExtension.getGrammarElement(block);
-    final Indent grammarElementIndent = this.getBeforeIndent(_grammarElement);
+    final Indent grammarElementIndent = this.getIndentBefore(_grammarElement);
     boolean _notEquals = (!Objects.equal(grammarElementIndent, null));
     if (_notEquals) {
       return grammarElementIndent;
@@ -151,7 +151,7 @@ public class DefaultChildAttributesProvider implements ChildAttributesProvider {
     return null;
   }
   
-  protected Indent getBeforeIndent(final EObject grammarElement) {
+  protected Indent getIndentBefore(final EObject grammarElement) {
     return null;
   }
 }
