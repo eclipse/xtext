@@ -1,10 +1,14 @@
 dependencies {
 	testCompile project(':tests:org.eclipse.xtend.core.tests')
-	ideaProvided fileTree("${ideaDevelopment.ideaHome}/plugins/junit/lib/").include("*.jar")
 }
+
 
 ideaDevelopment {
 	pluginDependencies {
+		id 'junit' // id is Junit
+		id 'maven' // id is org.jetbrains.idea.maven
+		id 'gradle'// is is org.jetbrains.plugins.gradle
+		
 		project ':intellij:org.eclipse.xtext.idea'
 		project ':intellij:org.eclipse.xtend.idea'
 	}
