@@ -4876,6 +4876,82 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"}");
 	}
 	
+	@Test
+	public void testBug466974_01() throws Exception {
+		int i = 0;
+		int a = i = i + 1;
+		int b = i == 1 ? 1 : 2;
+		int result = Math.max(a, b);
+		assertEvaluatesTo(result, 
+				"{\n" +
+					"var i = 0\n" +
+					"val result = Math.max(i = i + 1, if (i == 1) { 1 } else { 2 })\n" +
+					"result" +
+				"}");
+	}
+	
+	@Test
+	public void testBug466974_02() throws Exception {
+		int i = 0;
+		Integer a = i = i + 1;
+		Integer b = i == 1 ? 1 : 2;
+		int result = a.compareTo(b);
+		assertEvaluatesTo(result, 
+				"{\n" +
+					"var i = 0\n" +
+					"val result = {i = i + 1}.compareTo(if (i == 1) { 1 } else { 2 })\n" +
+					"result" +
+				"}");
+	}
+	
+	@Test
+	public void testBug466974_03() throws Exception {
+		int i = 0;
+		Integer a = i = i + 1;
+		Integer b = i == 1 ? i = i + 1 : -1;
+		int result = Math.max(a, b);
+		assertEvaluatesTo(result, 
+				"{\n" +
+					"var i = 0\n" +
+					"val result = Math.max({i = i + 1}, if (i == 1) { i = i + 1 } else { -1 })\n" +
+					"result" +
+				"}");
+	}
+	
+	@Test
+	public void testBug466974_04() throws Exception {
+		int i = 0;
+		boolean a = (i = i + 1) == 1;
+		boolean b = false; 
+		if (i == 1) {
+			b = true;
+		}
+		boolean result = a && b;
+		assertEvaluatesTo(result, 
+				"{\n" +
+					"var i = 0\n" +
+					"val result = (i = i + 1) == 1 && if(i == 1) true else false\n" +
+					"result" +
+				"}");
+	}
+	
+	@Test
+	public void testBug466974_05() throws Exception {
+		int i = 0;
+		boolean a = (i = i + 1) != 1;
+		boolean b = false; 
+		if (i == 1) {
+			b = true;
+		} 
+		boolean result = a || b;
+		assertEvaluatesTo(result, 
+				"{\n" +
+					"var i = 0\n" +
+					"val result = (i = i + 1) != 1 || if(i == 1) true else false\n" +
+					"result" +
+				"}");
+	}
+	
 	protected void assertEvaluatesTo(Object object, String string) throws Exception {
 		Object result = invokeXbaseExpression(string);
 		assertEquals(object, result);
